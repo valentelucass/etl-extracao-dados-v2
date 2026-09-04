@@ -1,0 +1,173 @@
+{
+  "manifestVersion": 2,
+  "roadmapTask": "V2-023",
+  "localState": "COMPLETE_LOCAL",
+  "defaultState": {
+    "productivePoliciesSeeded": 0,
+    "externalAlertDeliveryEnabled": false,
+    "remoteHealthProbesEnabled": false,
+    "automaticLogDeletionEnabled": false
+  },
+  "externalActivationGate": {
+    "roadmapTask": "V2-045b",
+    "status": "EXTERNAL_HOLD",
+    "ownerRolesRequired": [
+      "data-owner",
+      "compliance-owner",
+      "dba",
+      "operations"
+    ]
+  },
+  "objects": {
+    "ctlTables": [
+      "ctl.data_quality_policy",
+      "ctl.data_quality_check_policy"
+    ],
+    "reconTables": [
+      "recon.execution_data_quality_evaluation",
+      "recon.execution_data_quality_check_result",
+      "recon.execution_metric_snapshot",
+      "recon.observability_alert"
+    ],
+    "publicProcedures": [
+      "recon.usp_evaluate_execution_data_quality",
+      "recon.usp_observe_execution_data_quality",
+      "recon.usp_record_execution_metric",
+      "recon.usp_raise_observability_alert",
+      "ctl.usp_observe_platform_health"
+    ],
+    "triggers": [
+      "ctl.trg_data_quality_policy_immutable",
+      "ctl.trg_data_quality_check_policy_immutable",
+      "ctl.trg_execution_publication_requires_data_quality"
+    ],
+    "indexes": [
+      "UX_ctl_data_quality_policy_scope_effective",
+      "IX_recon_execution_data_quality_evaluation_state",
+      "IX_ctl_execution_attempt_health_state_started",
+      "IX_ctl_execution_promotion_result_health_promoted"
+    ]
+  },
+  "dataQuality": {
+    "supportedCommonChecks": [
+      "COUNT_EQUATION",
+      "PAGE_TERMINALITY",
+      "PROMOTION_RECONCILIATION",
+      "QUARANTINE_SLA"
+    ],
+    "expectedCommonChecks": 4,
+    "massProcessingOwner": "SQL_SERVER",
+    "javaResultShape": "FIXED_O_1_SUMMARY",
+    "thresholdRule": "ABSOLUTE_AND_BASIS_POINTS",
+    "partialExecution": "FAIL_CLOSED",
+    "publicationGate": "DATABASE_TRIGGER_IN_ATOMIC_TRANSACTION",
+    "policySeededByMigration": false,
+    "candidateBinding": "PROMOTION_COUNTS_AND_TIMESTAMP_UNDER_SHARED_APPLY_LOCK",
+    "policyBinding": {
+      "scopeFingerprint": "SHA256_ENV_SOURCE_TENANT_ENTITY_MODE",
+      "policyFingerprint": "SHA256_CANONICAL_POLICY_MATERIAL",
+      "effectiveSelection": "LATEST_EFFECTIVE_ROW_MUST_BE_RATIFIED",
+      "revokedLatestBehavior": "DENY_BY_DEFAULT",
+      "structuralThresholds": "ZERO",
+      "temporalQuarantineSla": "REVALIDATED_AT_EVALUATION_HEALTH_AND_PUBLICATION"
+    }
+  },
+  "metricShape": {
+    "fields": [
+      "execution_id",
+      "metric_sequence",
+      "duration_milliseconds",
+      "pages",
+      "response_bytes",
+      "physical_rows",
+      "distinct_root_keys",
+      "duplicate_rows",
+      "valid_rows",
+      "quarantined_root_keys",
+      "unidentified_quarantine_rows",
+      "quarantined_stage_rows",
+      "candidate_rows",
+      "inserted_rows",
+      "updated_rows",
+      "reactivated_rows",
+      "noop_rows",
+      "stale_noop_rows",
+      "retry_attempts",
+      "rate_limit_responses",
+      "source_lag_milliseconds",
+      "watermark_utc",
+      "captured_at_utc"
+    ],
+    "equations": [
+      "physical_rows=distinct_root_keys+duplicate_rows+unidentified_quarantine_rows",
+      "distinct_root_keys=valid_rows+quarantined_root_keys",
+      "quarantined_stage_rows>=quarantined_root_keys+unidentified_quarantine_rows",
+      "candidate_rows=valid_rows",
+      "candidate_rows=inserted_rows+updated_rows+reactivated_rows+noop_rows",
+      "stale_noop_rows<=noop_rows",
+      "rate_limit_responses<=retry_attempts"
+    ]
+  },
+  "evidence": {
+    "businessIdentifiers": false,
+    "payload": false,
+    "pii": false,
+    "rawSqlErrorMessage": false,
+    "maximumSanitizedSamples": 32,
+    "sampleFields": [
+      "check_ordinal",
+      "check_code",
+      "check_state",
+      "reason_code",
+      "evaluated_rows",
+      "failed_rows",
+      "failure_basis_points",
+      "evaluated_at_utc"
+    ]
+  },
+  "limits": {
+    "maximumChecks": 64,
+    "commonChecks": 4,
+    "maximumMetricSnapshotsPerExecution": 4096,
+    "maximumAlertsPerCorrelation": 4096,
+    "maximumPrimaryLogEventsPerComponentProcess": 1000000,
+    "maximumTotalLogEventsPerComponentProcess": 1000001,
+    "maximumLogBytesPerComponentProcess": 268435456,
+    "maximumHealthRunningAgeSeconds": 2592000,
+    "maximumQuarantineSlaSeconds": 31536000
+  },
+  "leastPrivilege": {
+    "runtimeDirectCtlDml": false,
+    "runtimeDirectReconDml": false,
+    "runtimeEntrypoints": 5,
+    "migrationGrantPublisher": "dbo.usp_publish_v2_procedure_grant"
+  },
+  "durability": {
+    "hardDeleteByApplication": false,
+    "includedInV005Purge": false,
+    "productiveRetentionActivation": "V2-045b"
+  },
+  "verticalExtensions": {
+    "usuarios": {
+      "roadmapTask": "V2-033",
+      "migration": "V007__create_usuarios_current_history.sql",
+      "typedResult": "ctl.usuario_promotion_result",
+      "typedQuarantine": "recon.usuario_quarantine",
+      "publicationRequiresTypedPass": true,
+      "typedBlockedInvalidatesCommonPass": true,
+      "typedBlockedHealthStatus": "DOWN",
+      "conflictThreshold": 0,
+      "ownerRoles": ["data_quality_owner", "operations"],
+      "externalDeliveryEnabled": false,
+      "rollbackExercise": "027_exercise_usuarios_current_history_rollback.sql"
+    }
+  },
+  "localValidation": {
+    "structuralValidator": "021_validate_observability_data_quality.sql",
+    "rollbackExercise": "022_exercise_observability_data_quality_rollback.sql",
+    "migratorExercise": "023_exercise_observability_data_quality_migrator_rollback.sql",
+    "thresholdExercise": "024_exercise_data_quality_thresholds_rollback.sql",
+    "showplanProbe": "025_validate_observability_data_quality_showplan.sql",
+    "externalCalls": false
+  }
+}

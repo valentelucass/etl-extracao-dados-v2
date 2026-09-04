@@ -1,0 +1,30 @@
+{
+  "observedSummary": {
+    "fieldCount": 24,
+    "filterCount": 8,
+    "classification": "HISTORICAL_SANITIZED_OBSERVATION"
+  },
+  "fields": [
+    {"name": "corporation_sequence_number", "type": "integer", "label": "Minuta sintética"},
+    {"name": "type", "type": "string", "label": "Tipo sintético"},
+    {"name": "service_at", "type": "datetime", "label": "Serviço sintético"},
+    {"name": "invoices_volumes", "type": "integer", "label": "Volumes sintéticos"},
+    {"name": "taxed_weight", "type": "decimal-string", "label": "Peso sintético"},
+    {"name": "invoices_value", "type": "decimal-string", "label": "Valor de nota sintético"},
+    {"name": "total", "type": "decimal-string", "label": "Valor total sintético"},
+    {"name": "service_type", "type": "string", "label": "Serviço sintético"},
+    {"name": "fit_crn_psn_nickname", "type": "string", "label": "Filial emissora sintética"},
+    {"name": "fit_dpn_delivery_prediction_at", "type": "datetime", "label": "Previsão sintética"},
+    {"name": "fit_dyn_name", "type": "string", "label": "Destino sintético"},
+    {"name": "fit_dyn_drt_nickname", "type": "string", "label": "Filial destino sintética"},
+    {"name": "fit_fsn_name", "type": "string", "label": "Classificação sintética"},
+    {"name": "fit_fln_status", "type": "string", "label": "Status sintético"},
+    {"name": "fit_fln_cln_nickname", "type": "string", "label": "Localização atual sintética"},
+    {"name": "fit_o_n_name", "type": "string", "label": "Origem sintética"},
+    {"name": "fit_o_n_drt_nickname", "type": "string", "label": "Filial origem sintética"}
+  ],
+  "filters": [
+    {"name": "service_at", "type": "date", "label": "Data de serviço sintética"}
+  ],
+  "syntheticOnly": true
+}

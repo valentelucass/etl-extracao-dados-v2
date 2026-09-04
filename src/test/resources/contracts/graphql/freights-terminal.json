@@ -1,0 +1,26 @@
+{
+  "data": {
+    "freight": {
+      "edges": [
+        {
+          "node": {
+            "id": "synthetic-freight-a",
+            "accountingCreditId": "synthetic-credit-a",
+            "accountingCreditInstallmentId": "synthetic-installment-a",
+            "referenceNumber": "synthetic-reference-a",
+            "cte": {
+              "key": "synthetic-cte-key-a"
+            },
+            "total": 100.00,
+            "corporationSequenceNumber": "synthetic-corporation-sequence-a",
+            "pickItemId": "synthetic-pick-item-a"
+          }
+        }
+      ],
+      "pageInfo": {
+        "hasNextPage": false,
+        "endCursor": null
+      }
+    }
+  }
+}

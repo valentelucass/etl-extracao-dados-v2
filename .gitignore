@@ -1,0 +1,27 @@
+# Segredos e configuracoes locais
+.env*
+!.env.example
+config/application.local.properties
+config/application.*.local.properties
+*.pem
+*.key
+*.p12
+*.pfx
+*.jks
+
+# Build, logs e dados gerados
+target/
+logs/
+coverage/
+*.log
+*.tmp
+
+# IDE e sistema operacional
+.codex-local/
+.idea/
+.venv/
+.vscode/
+node_modules/
+*.iml
+.DS_Store
+Thumbs.db

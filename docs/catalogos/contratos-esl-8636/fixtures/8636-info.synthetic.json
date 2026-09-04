@@ -1,0 +1,17 @@
+{
+  "observedSummary": {
+    "fieldCount": 28,
+    "filterCount": 9,
+    "classification": "HISTORICAL_SANITIZED_OBSERVATION"
+  },
+  "fields": [
+    {"name": "ant_ils_sequence_code", "type": "string", "label": "Candidato de parcela sintético"},
+    {"name": "issue_date", "type": "date", "label": "Emissão sintética"},
+    {"name": "created_at", "type": "datetime", "label": "Criação sintética"}
+  ],
+  "filters": [
+    {"name": "issue_date", "type": "date", "label": "Emissão sintética"},
+    {"name": "created_at", "type": "datetime", "label": "Criação sintética"}
+  ],
+  "syntheticOnly": true
+}

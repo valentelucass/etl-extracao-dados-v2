@@ -1,0 +1,240 @@
+{
+  "manifestVersion": 4,
+  "roadmapTask": "V2-020b",
+  "schema": "ctl",
+  "semanticPartitionKey": [
+    "environment_name",
+    "source_instance",
+    "tenant_scope",
+    "entity_name",
+    "execution_mode",
+    "partition_start_utc",
+    "partition_end_exclusive_utc"
+  ],
+  "semanticTextCollation": {
+    "name": "Latin1_General_100_BIN2",
+    "comparison": "binary_case_and_accent_sensitive",
+    "scope": "all_persisted_nvarchar_columns",
+    "outerSpacePolicy": "trim_only_ASCII_U+0020_after_length_validation_and_reject_noncanonical_storage",
+    "procedureVariableComparison": "explicit_Latin1_General_100_BIN2",
+    "columns": [
+      "source_catalog.source_instance",
+      "source_catalog.source_kind",
+      "execution_cycle.plan_version",
+      "execution_partition.environment_name",
+      "execution_partition.source_instance",
+      "execution_partition.tenant_scope",
+      "execution_partition.entity_name",
+      "execution_partition.execution_mode",
+      "execution_partition.current_state",
+      "execution_attempt.window_strategy",
+      "execution_attempt.contract_version",
+      "execution_attempt.configuration_version",
+      "execution_attempt.idempotency_key",
+      "execution_attempt.current_state",
+      "execution_state_event.previous_state",
+      "execution_state_event.next_state",
+      "execution_state_event.reason_code",
+      "execution_count.count_phase",
+      "source_watermark_observation.watermark_name",
+      "incremental_publication_watermark.environment_name",
+      "incremental_publication_watermark.source_instance",
+      "incremental_publication_watermark.tenant_scope",
+      "incremental_publication_watermark.entity_name"
+    ]
+  },
+  "cycleIdentity": [
+    "cycle_id",
+    "plan_version",
+    "plan_fingerprint"
+  ],
+  "textInputProtocol": {
+    "procedureTextParameters": "NVARCHAR(MAX), including every external fingerprint before ASCII validation",
+    "lengthValidation": "DATALENGTH before LTRIM/RTRIM/LOWER",
+    "normalization": "outer spaces trimmed from labels and keys; hexadecimal hashes lowercased",
+    "silentPreBodyTruncation": "PROHIBITED",
+    "reasonCodes": "trim_ASCII_U+0020_then_require_first_[A-Z]_and_remaining_[A-Z0-9_]_with_length_2_to_64; no_case_fold"
+  },
+  "countEquations": [
+    "physical_rows = distinct_root_keys + duplicate_rows + unidentified_quarantine_rows",
+    "distinct_root_keys = valid_rows + quarantined_root_keys"
+  ],
+  "countGrain": {
+    "valid_rows": "identified_root_keys",
+    "quarantined_root_keys": "identified_quarantined_root_keys",
+    "unidentified_quarantine_rows": "physical_rows_without_source_key"
+  },
+  "countPhaseProtocol": {
+    "runtimeReservedExactPhase": "STAGING_KERNEL",
+    "comparison": "Latin1_General_100_BIN2",
+    "caseVariantsAreDistinctExternalPhases": true,
+    "internalWriter": "core.usp_prepare_staged_execution_direct_insert_in_fenced_transaction"
+  },
+  "userTables": [
+    "source_catalog",
+    "execution_cycle",
+    "execution_partition",
+    "execution_attempt",
+    "execution_state_event",
+    "execution_lease",
+    "execution_page_audit",
+    "execution_count",
+    "source_watermark_observation",
+    "partition_publication_pointer",
+    "execution_publication_event",
+    "incremental_publication_watermark"
+  ],
+  "procedures": [
+    "usp_control_plane_register_source",
+    "usp_control_plane_start_cycle",
+    "usp_control_plane_start_execution",
+    "usp_control_plane_heartbeat_lease",
+    "usp_control_plane_record_page",
+    "usp_control_plane_record_counts",
+    "usp_control_plane_transition_execution",
+    "usp_control_plane_register_incremental_frontier",
+    "usp_control_plane_publish_execution",
+    "usp_control_plane_recover_stale_executions"
+  ],
+  "runtime": {
+    "directTableDml": "DENIED",
+    "proceduresOnly": true,
+    "grantedProcedures": [
+      "usp_control_plane_register_source",
+      "usp_control_plane_start_cycle",
+      "usp_control_plane_start_execution",
+      "usp_control_plane_heartbeat_lease",
+      "usp_control_plane_record_page",
+      "usp_control_plane_record_counts",
+      "usp_control_plane_transition_execution",
+      "usp_control_plane_recover_stale_executions"
+    ],
+    "crossSchemaGrantedProcedures": [
+      "core.usp_apply_reconcile_publish_execution"
+    ],
+    "ownerOnlyProcedures": [
+      "usp_control_plane_register_incremental_frontier",
+      "usp_control_plane_publish_execution"
+    ]
+  },
+  "stateProtocol": {
+    "genericTransitionCanPromote": false,
+    "genericTransitionCanReconcile": false,
+    "promotionRequiresPersistedEvidence": true
+  },
+  "eventIdempotency": {
+    "lockOrder": "execution_attempt_then_event_or_page_or_count_then_partition_and_lease",
+    "pageIdentity": ["execution_id", "page_number", "page_attempt"],
+    "countIdentity": ["execution_id", "count_phase"],
+    "transitionIdentity": "current_state_is_next_state_and_event_at_next_transition_sequence_minus_one_matches_previous_next_reason",
+    "callerTechnicalTimestampsInIdentity": false,
+    "exactRetry": "returns_before_lease_fencing",
+    "divergentRetry": "REJECTED",
+    "newMutation": "requires_current_execution_and_active_unreleased_lease",
+    "heartbeat": "renewal_command_without_request_identity"
+  },
+  "pageAuditProtocol": {
+    "parameterCount": 10,
+    "terminalEvidenceKinds": [
+      "NONE",
+      "DATA_EXPORT_EMPTY_PAGE",
+      "GRAPHQL_PAGE_INFO"
+    ],
+    "dataExportTerminalEvidence": "EMPTY_PAGE_ONLY",
+    "graphQlTerminalEvidence": "POPULATED_PAGE_WITH_PAGE_INFO_ONLY",
+    "terminalEvidenceProvesDatasetCompleteness": false,
+    "retryComparesTerminalEvidenceKind": true,
+    "callerTimestampAuthoritative": false
+  },
+  "leaseProtocol": {
+    "mutationsRequireCurrentExecution": true,
+    "mutationsRequireActiveUnreleasedLease": true,
+    "databaseClockUsedForFencing": true,
+    "databaseClockCapturedAfterLeaseLocks": true,
+    "startCallerClockAuthoritative": false,
+    "startCallerClockMaximumSkewSeconds": 300,
+    "leaseMaximumSeconds": 86400,
+    "heartbeatCallerClockAuthoritative": false,
+    "fencedEventProcedures": [
+      "usp_control_plane_record_page",
+      "usp_control_plane_record_counts"
+    ],
+    "runtimeTechnicalTimestamps": {
+      "source_registration": "database_clock_after_catalog_key_lock",
+      "cycle_planning": "database_clock_after_cycle_key_lock",
+      "execution_start_and_lease": "database_clock",
+      "page_read": "database_clock",
+      "count_recorded": "database_clock",
+      "state_transition_terminal_and_release": "database_clock"
+    }
+  },
+  "replayProtocol": {
+    "targetExecutionMode": "REPLAY",
+    "originMustPreexist": true,
+    "selfReference": "PROHIBITED",
+    "replayChains": "PROHIBITED",
+    "originExecutionModes": ["INCREMENTAL", "BOOTSTRAP", "BACKFILL", "SWEEP"],
+    "comparedSemanticFields": [
+      "environment_name",
+      "source_instance",
+      "tenant_scope",
+      "entity_name",
+      "partition_start_utc",
+      "partition_end_exclusive_utc"
+    ],
+    "modeCompatibility": "target mode is REPLAY; origin mode must be a non-REPLAY mode listed above"
+  },
+  "atomicCounters": {
+    "attemptNumber": "execution_partition.next_attempt_number",
+    "transitionSequence": "execution_attempt.next_transition_sequence",
+    "maxPlusOneProhibited": true
+  },
+  "recoveryProtocol": {
+    "runtimeEntrypoint": "ctl.usp_control_plane_recover_stale_executions",
+    "runtimeExecute": true,
+    "callerParameters": [],
+    "callerTimestamp": false,
+    "authoritativeDatabaseClock": true,
+    "databaseClockExpression": "SYSUTCDATETIME()",
+    "resultCardinality": "single_row_single_column",
+    "resultCardinalityBound": "O(1)",
+    "resultColumn": "recovered_executions",
+    "resultType": "BIGINT"
+  },
+  "publication": {
+    "status": "ATOMIC_POSITIVE_PATH_AVAILABLE",
+    "pointer": "partition_publication_pointer",
+    "event": "execution_publication_event",
+    "incrementalWatermark": "incremental_publication_watermark",
+    "runtimeEntrypoint": "core.usp_apply_reconcile_publish_execution",
+    "runtimeExecute": true,
+    "positivePathAvailable": true,
+    "controlPlaneEntrypoint": {
+      "procedure": "ctl.usp_control_plane_publish_execution",
+      "status": "CONTAINED_FAIL_CLOSED",
+      "runtimeExecute": false,
+      "ownerOnly": true
+    },
+    "executionOwnershipForeignKeys": {
+      "pointer": {
+        "constraint": "FK_ctl_partition_publication_pointer_partition_execution",
+        "columns": ["partition_id", "published_execution_id"],
+        "references": "ctl.execution_attempt",
+        "referencedColumns": ["partition_id", "execution_id"]
+      },
+      "event": {
+        "constraint": "FK_ctl_execution_publication_event_partition_execution",
+        "columns": ["partition_id", "execution_id"],
+        "references": "ctl.execution_attempt",
+        "referencedColumns": ["partition_id", "execution_id"]
+      }
+    },
+    "requiresReconciliationEvidenceAndAtomicCoreCommit": true
+  },
+  "sensitiveStorage": {
+    "payload": "PROHIBITED",
+    "sourceIds": "PROHIBITED",
+    "urls": "PROHIBITED",
+    "credentialMaterial": "PROHIBITED"
+  }
+}

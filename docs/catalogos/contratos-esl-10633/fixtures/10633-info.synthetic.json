@@ -1,0 +1,25 @@
+{
+  "observedSummary": {
+    "fieldCount": 26,
+    "filterCount": 7,
+    "classification": "HISTORICAL_SANITIZED_OBSERVATION"
+  },
+  "fields": [
+    {"name": "sequence_code", "type": "integer", "label": "Sequência sintética"},
+    {"name": "cnr_c_s_fit_corporation_sequence_number", "type": "integer", "label": "Minuta sintética"},
+    {"name": "type", "type": "string", "label": "Tipo sintético"},
+    {"name": "started_at", "type": "datetime", "label": "Início sintético"},
+    {"name": "finished_at", "type": "datetime", "label": "Fim sintético"},
+    {"name": "status", "type": "string", "label": "Status sintético"},
+    {"name": "cnr_c_s_fit_invoices_mapping", "type": "array", "label": "Mapeamento de invoice sintético"},
+    {"name": "cnr_c_s_fit_invoices_value", "type": "string", "label": "Valor sintético"},
+    {"name": "cnr_c_s_fit_real_weight", "type": "string", "label": "Peso sintético"},
+    {"name": "cnr_c_s_fit_total_cubic_volume", "type": "string", "label": "Volume sintético"},
+    {"name": "cnr_c_s_fit_taxed_weight", "type": "string", "label": "Peso taxado sintético"},
+    {"name": "cnr_c_s_fit_dpn_performance_finished_at", "type": "datetime", "label": "Performance sintética"}
+  ],
+  "filters": [
+    {"name": "started_at", "type": "date", "label": "Data de início sintética"}
+  ],
+  "syntheticOnly": true
+}

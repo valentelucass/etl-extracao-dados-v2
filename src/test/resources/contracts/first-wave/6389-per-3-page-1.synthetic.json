@@ -1,0 +1,36 @@
+{
+  "data": [
+    {
+      "id": 920001,
+      "corporation_sequence_number": 820001,
+      "fit_p_m_pck_sequence_code": 710001,
+      "finished_at": "04/13/2026",
+      "fit_dpn_performance_finished_at": "2026-04-13T12:00:00-03:00",
+      "updated_at": "2026-04-13T12:00:00-03:00"
+    },
+    {
+      "id": 920001,
+      "corporation_sequence_number": 820001,
+      "fit_p_m_pck_sequence_code": 710002,
+      "finished_at": "04/13/2026",
+      "fit_dpn_performance_finished_at": "2026-04-13T12:00:00-03:00",
+      "updated_at": "2026-04-13T12:00:00-03:00"
+    },
+    {
+      "id": 920002,
+      "corporation_sequence_number": 820002,
+      "fit_p_m_pck_sequence_code": null,
+      "finished_at": "13/04/2026",
+      "fit_dpn_performance_finished_at": null,
+      "updated_at": "2026-04-13T15:00:01Z"
+    },
+    {
+      "id": 920003,
+      "corporation_sequence_number": 820003,
+      "fit_p_m_pck_sequence_code": 710003,
+      "finished_at": "02/04/2026",
+      "fit_dpn_performance_finished_at": "2026-04-13T12:00:02-03:00",
+      "updated_at": "2026-04-13T12:00:02-03:00"
+    }
+  ]
+}

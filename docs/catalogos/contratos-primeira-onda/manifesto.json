@@ -1,0 +1,386 @@
+{
+  "catalogVersion": "2026-09-01.v2-025a.3",
+  "classificationVocabulary": [
+    "PROVEN",
+    "TRANSITIONAL",
+    "ABSENT",
+    "BUSINESS_DECISION_PENDING"
+  ],
+  "evidenceVocabulary": [
+    "LOCAL_CODE_AND_SYNTHETIC_FIXTURES",
+    "HISTORICAL_SANITIZED_OBSERVATION",
+    "LEGACY_STATIC_EVIDENCE",
+    "NO_INDEPENDENT_COMPLETENESS_EVIDENCE"
+  ],
+  "contracts": [
+    {
+      "contractId": "dataexport-6908",
+      "sourceKind": "DATA_EXPORT",
+      "documentReference": "dataexport-coletas",
+      "contractVersion": "2026-08-31.v2-025a.1",
+      "overallClassification": "TRANSITIONAL",
+      "evidence": [
+        "LOCAL_CODE_AND_SYNTHETIC_FIXTURES",
+        "HISTORICAL_SANITIZED_OBSERVATION",
+        "NO_INDEPENDENT_COMPLETENESS_EVIDENCE"
+      ],
+      "aspects": {
+        "transport": {
+          "classification": "PROVEN",
+          "contract": "GET_WITH_QUERY_WITHOUT_FALLBACK",
+          "scope": "LOCAL_RUNTIME_AND_ROADMAP"
+        },
+        "metadata": {
+          "classification": "TRANSITIONAL",
+          "contract": "INFO_COUNT_31_HISTORICAL; METADATA_FILTER=request_date; QUERY_FILTER=picks.request_date; REMAINING_NAMES_UNRESOLVED",
+          "scope": "HISTORICAL_SANITIZED_AND_MINIMAL_SYNTHETIC"
+        },
+        "responseRoot": {
+          "classification": "TRANSITIONAL",
+          "contract": "PROMOTABLE=data-array; object-or-data-object=CHARACTERIZATION_ONLY",
+          "scope": "LOCAL_GATE_AND_HISTORICAL_SANITIZED"
+        },
+        "filters": {
+          "classification": "TRANSITIONAL",
+          "contract": "picks.request_date=REQUIRED; scopes.by_updated_at=OPTIONAL_SIBLING_AND_NEVER_WATERMARK",
+          "scope": "HISTORICAL_SANITIZED_AND_LOCAL_SERIALIZER"
+        },
+        "temporalTranslation": {
+          "classification": "BUSINESS_DECISION_PENDING",
+          "contract": "INTERNAL_START_END_EXCLUSIVE_TO_SOURCE_INCLUSIVE_BOUNDARIES_PRECISION_AND_DST_NOT_PROVEN",
+          "scope": "NO_BOUNDARY_GUARANTEE"
+        },
+        "ordering": {
+          "classification": "TRANSITIONAL",
+          "contract": "sequence_code asc; ORDER_IS_NOT_IDENTITY_OR_COMPLETENESS",
+          "scope": "HISTORICAL_WINDOWS_AND_LOCAL_REQUEST"
+        },
+        "per": {
+          "classification": "TRANSITIONAL",
+          "contract": "LIMITS_DISTINCT_SCALAR_id_PER_PAGE; PHYSICAL_ROWS_MAY_EXPAND; LOCAL_MAXIMUM_100_IS_NOT_PROVIDER_GUARANTEE",
+          "scope": "HISTORICAL_WINDOWS_AND_BOUNDED_SYNTHETIC_TRAVERSALS"
+        },
+        "rootIdentity": {
+          "classification": "TRANSITIONAL",
+          "contract": "SOURCE_KEY=id; BUSINESS_ALIAS=sequence_code; V2-009a_TYPE_TAGGED_INTEGER_AND_EXPLICIT_SCOPE_POLICY; STABILITY_AND_GLOBAL_UNIQUENESS_NOT_PROVEN",
+          "scope": "CLOSED_HISTORICAL_WINDOWS_SYNTHETIC_GATE_AND_V2-009a"
+        },
+        "childIdentity": {
+          "classification": "BUSINESS_DECISION_PENDING",
+          "contract": "EXPANDED_MANIFEST_FIELDS_PRESERVE_PRESENCE; NO_CHILD_KEY_OR_CARDINALITY_PROMOTED",
+          "scope": "V2-010_AND_V2-046a"
+        },
+        "pagination": {
+          "classification": "PROVEN",
+          "contract": "NUMERIC_SERIAL_PAGE; SHORT_PAGE_IS_NOT_TERMINAL; EMPTY_PAGE_IS_LOCAL_TERMINAL_UNVERIFIED",
+          "scope": "LOCAL_RUNTIME_AND_SYNTHETIC_TRAVERSALS"
+        },
+        "timezone": {
+          "classification": "PROVEN",
+          "contract": "America/Sao_Paulo_REQUIRED_AND_NEVER_HOST_DEFAULT",
+          "scope": "V1_V2_CLIENT_COMPATIBILITY_ONLY"
+        },
+        "limitsErrors": {
+          "classification": "PROVEN",
+          "contract": "BOUNDED_BYTES_PAGES_RECORDS_REQUESTS_RETRY_AND_TIMEOUT; ERROR_OR_CAP_FAILS_CLOSED",
+          "scope": "LOCAL_RUNTIME_TESTS; PRODUCTIVE_BUDGET_PENDING"
+        },
+        "completeness": {
+          "classification": "ABSENT",
+          "contract": "NO_VERSIONED_PROVIDER_GUARANTEE_OR_APPROVED_INDEPENDENT_ORACLE",
+          "scope": "GLOBAL_SNAPSHOT_SWEEP_AND_CUTOVER"
+        }
+      },
+      "capabilities": {
+        "shadowUpsert": "NOT_BLOCKED_BY_COMPLETENESS_CONTRACT_AND_ENTITY_GATES_REQUIRED",
+        "sweepOrDeactivation": "BLOCKED_NO_COMPLETENESS_PROOF",
+        "cutover": "BLOCKED_NO_COMPLETENESS_PROOF"
+      },
+      "ownerRole": "OPERACAO_E_PLATAFORMA",
+      "nextGates": ["V2-010", "V2-025d", "V2-009d"],
+      "fixtures": [
+        {
+          "role": "METADATA",
+          "path": "src/test/resources/contracts/6908-info.synthetic.json",
+          "sha256": "702d4e0ddc8c00e90bd017864d2450627a41fb02b19c749438f9c78a9b4e99c4"
+        },
+        {
+          "role": "PER_2_PAGE_1",
+          "path": "src/test/resources/contracts/first-wave/6908-per-2-page-1.synthetic.json",
+          "sha256": "99838e642796386c0f15583aa1a7c84f79e19f305448469fea15b78b4e2f7af9"
+        },
+        {
+          "role": "PER_2_PAGE_2",
+          "path": "src/test/resources/contracts/first-wave/6908-per-2-page-2.synthetic.json",
+          "sha256": "927cb5a64dbbbab426e9cc184ca97fa735a59b27a219c05afe3695b663a8a637"
+        },
+        {
+          "role": "PER_2_TERMINAL",
+          "path": "src/test/resources/contracts/first-wave/6908-per-2-terminal.synthetic.json",
+          "sha256": "3b459147c8170c320545247d8ba79c22d55408311adafa4ad737f02c7aa78700"
+        },
+        {
+          "role": "PER_3_PAGE_1",
+          "path": "src/test/resources/contracts/first-wave/6908-per-3-page-1.synthetic.json",
+          "sha256": "1e9d87759e29b79058a0c84f942e3e888d9da656fd7cb415eceb8646c7fa343b"
+        },
+        {
+          "role": "PER_3_TERMINAL",
+          "path": "src/test/resources/contracts/first-wave/6908-per-3-terminal.synthetic.json",
+          "sha256": "3b459147c8170c320545247d8ba79c22d55408311adafa4ad737f02c7aa78700"
+        }
+      ],
+      "fingerprints": {
+        "semantics": "01fc7bd9906cc337e0b67f75074359bc836427769dbc9ac03b74bc9006a7013b",
+        "metadata": "9ae4062b14c765529dbc78236536f4aab42c0cf6474ebea041ca783b60e2f77b",
+        "response": "e847f4c3fcf7222c431ec298e6c1596347bfc9ff11942a06361fae3686bda2b9",
+        "release": "052d84c37d9c55ae2b2b4891eb4771c68158ee7365402a1388cc68256c67cc59"
+      }
+    },
+    {
+      "contractId": "dataexport-6389",
+      "sourceKind": "DATA_EXPORT",
+      "documentReference": "dataexport-fretes",
+      "contractVersion": "2026-08-31.v2-025a.1",
+      "overallClassification": "TRANSITIONAL",
+      "evidence": [
+        "LOCAL_CODE_AND_SYNTHETIC_FIXTURES",
+        "HISTORICAL_SANITIZED_OBSERVATION",
+        "LEGACY_STATIC_EVIDENCE",
+        "NO_INDEPENDENT_COMPLETENESS_EVIDENCE"
+      ],
+      "aspects": {
+        "transport": {
+          "classification": "PROVEN",
+          "contract": "GET_WITH_QUERY_WITHOUT_FALLBACK",
+          "scope": "LOCAL_RUNTIME_AND_ROADMAP"
+        },
+        "metadata": {
+          "classification": "TRANSITIONAL",
+          "contract": "INFO_COUNT_109_HISTORICAL; id_ABSENT_FROM_OBSERVED_INFO_BUT_REQUIRED_IN_DATA; REMAINING_NAMES_UNRESOLVED",
+          "scope": "HISTORICAL_SANITIZED_AND_MINIMAL_SYNTHETIC"
+        },
+        "responseRoot": {
+          "classification": "TRANSITIONAL",
+          "contract": "PROMOTABLE=data-array; object-or-data-object=CHARACTERIZATION_ONLY",
+          "scope": "LOCAL_GATE_AND_HISTORICAL_SANITIZED"
+        },
+        "filters": {
+          "classification": "TRANSITIONAL",
+          "contract": "freights.service_at=REQUIRED; scopes.by_updated_at=OPTIONAL_SIBLING_AND_NEVER_WATERMARK",
+          "scope": "HISTORICAL_SANITIZED_AND_LOCAL_SERIALIZER"
+        },
+        "temporalTranslation": {
+          "classification": "BUSINESS_DECISION_PENDING",
+          "contract": "INTERNAL_START_END_EXCLUSIVE_TO_SOURCE_INCLUSIVE_BOUNDARIES_PRECISION_AND_DST_NOT_PROVEN; AMBIGUOUS_PERFORMANCE_DATE_MUST_BE_QUARANTINED",
+          "scope": "NO_BOUNDARY_OR_AMBIGUOUS_DATE_GUARANTEE"
+        },
+        "ordering": {
+          "classification": "TRANSITIONAL",
+          "contract": "corporation_sequence_number asc; ORDER_IS_NOT_IDENTITY_OR_COMPLETENESS",
+          "scope": "LEGACY_EXECUTABLE_ROADMAP_AND_LOCAL_REQUEST"
+        },
+        "per": {
+          "classification": "TRANSITIONAL",
+          "contract": "LIMITS_DISTINCT_SCALAR_id_PER_PAGE; PHYSICAL_ROWS_MAY_EXPAND; LOCAL_MAXIMUM_100_IS_NOT_PROVIDER_GUARANTEE",
+          "scope": "HISTORICAL_WINDOWS_AND_BOUNDED_SYNTHETIC_TRAVERSALS"
+        },
+        "rootIdentity": {
+          "classification": "TRANSITIONAL",
+          "contract": "SOURCE_KEY=id; BUSINESS_ALIAS=corporation_sequence_number_ZERO_TO_MANY_LOOKUP; V2-009a_TYPE_TAGGED_INTEGER_AND_EXPLICIT_SCOPE_POLICY; STABILITY_AND_GLOBAL_UNIQUENESS_NOT_PROVEN",
+          "scope": "CLOSED_HISTORICAL_WINDOWS_SYNTHETIC_GATE_LEGACY_SCHEMA_AND_V2-009a"
+        },
+        "childIdentity": {
+          "classification": "BUSINESS_DECISION_PENDING",
+          "contract": "fit_p_m_pck_sequence_code_IS_RELATION_CANDIDATE; NO_FK_OR_CARDINALITY_PROMOTED",
+          "scope": "V2-011_AND_V2-046b"
+        },
+        "pagination": {
+          "classification": "PROVEN",
+          "contract": "NUMERIC_SERIAL_PAGE; SHORT_PAGE_IS_NOT_TERMINAL; EMPTY_PAGE_IS_LOCAL_TERMINAL_UNVERIFIED",
+          "scope": "LOCAL_RUNTIME_AND_SYNTHETIC_TRAVERSALS"
+        },
+        "timezone": {
+          "classification": "PROVEN",
+          "contract": "America/Sao_Paulo_REQUIRED_AND_NEVER_HOST_DEFAULT",
+          "scope": "V1_V2_CLIENT_COMPATIBILITY_ONLY"
+        },
+        "limitsErrors": {
+          "classification": "PROVEN",
+          "contract": "BOUNDED_BYTES_PAGES_RECORDS_REQUESTS_RETRY_AND_TIMEOUT; ERROR_OR_CAP_FAILS_CLOSED",
+          "scope": "LOCAL_RUNTIME_TESTS; PRODUCTIVE_BUDGET_PENDING"
+        },
+        "completeness": {
+          "classification": "ABSENT",
+          "contract": "NO_VERSIONED_PROVIDER_GUARANTEE_OR_APPROVED_INDEPENDENT_ORACLE",
+          "scope": "GLOBAL_SNAPSHOT_SWEEP_AND_CUTOVER"
+        }
+      },
+      "capabilities": {
+        "shadowUpsert": "NOT_BLOCKED_BY_COMPLETENESS_CONTRACT_AND_ENTITY_GATES_REQUIRED",
+        "sweepOrDeactivation": "BLOCKED_NO_COMPLETENESS_PROOF",
+        "cutover": "BLOCKED_NO_COMPLETENESS_PROOF"
+      },
+      "ownerRole": "OPERACAO_FISCAL_E_PLATAFORMA",
+      "nextGates": ["V2-011", "V2-025d", "V2-009d"],
+      "fixtures": [
+        {
+          "role": "METADATA",
+          "path": "src/test/resources/contracts/6389-info.synthetic.json",
+          "sha256": "0a6e345e65eddfd10215a47797d1bc68f1b210138454a94681216d324cf296d1"
+        },
+        {
+          "role": "PER_2_PAGE_1",
+          "path": "src/test/resources/contracts/first-wave/6389-per-2-page-1.synthetic.json",
+          "sha256": "826361cb0036c091ddfaf533f9c45d11fe7f8a0d039d8ca86e8f1ad0f7c4834e"
+        },
+        {
+          "role": "PER_2_PAGE_2",
+          "path": "src/test/resources/contracts/first-wave/6389-per-2-page-2.synthetic.json",
+          "sha256": "4516cfc19119a4e6fc9fbd436c7cace4d7d011b08037ad4b639738842c75f0f9"
+        },
+        {
+          "role": "PER_2_TERMINAL",
+          "path": "src/test/resources/contracts/first-wave/6389-per-2-terminal.synthetic.json",
+          "sha256": "3b459147c8170c320545247d8ba79c22d55408311adafa4ad737f02c7aa78700"
+        },
+        {
+          "role": "PER_3_PAGE_1",
+          "path": "src/test/resources/contracts/first-wave/6389-per-3-page-1.synthetic.json",
+          "sha256": "3a6217ef969fba9f095883ebd42c4cf2ff6682bc8df3dc5f0267838c448638ac"
+        },
+        {
+          "role": "PER_3_TERMINAL",
+          "path": "src/test/resources/contracts/first-wave/6389-per-3-terminal.synthetic.json",
+          "sha256": "3b459147c8170c320545247d8ba79c22d55408311adafa4ad737f02c7aa78700"
+        }
+      ],
+      "fingerprints": {
+        "semantics": "c8f620b392b6b0f237e964fc91f09ed953ee6a47464f3f2575a61eafa0643ad9",
+        "metadata": "73a52a965b466f6003021cf748f7a35a057875610c65753243909487847998a4",
+        "response": "93362c311c8c9559b27f6dde964a937abd6b80c510d297f175220c1e9ba5c272",
+        "release": "23aef4e4e03488d291d3990bdba813800e3ebb8c8be18e766a788daf9741ec15"
+      }
+    },
+    {
+      "contractId": "graphql-individual",
+      "sourceKind": "GRAPHQL",
+      "documentReference": "graphql-users-snapshot",
+      "contractVersion": "2026-08-31.v2-025a.1",
+      "overallClassification": "TRANSITIONAL",
+      "evidence": [
+        "LOCAL_CODE_AND_SYNTHETIC_FIXTURES",
+        "HISTORICAL_SANITIZED_OBSERVATION",
+        "LEGACY_STATIC_EVIDENCE",
+        "NO_INDEPENDENT_COMPLETENESS_EVIDENCE"
+      ],
+      "aspects": {
+        "transport": {
+          "classification": "PROVEN",
+          "contract": "HTTP_POST_STATIC_NAMED_READ_ONLY_QUERY; MUTATION_AND_ARBITRARY_DOCUMENT_ABSENT",
+          "scope": "LOCAL_RUNTIME_AND_LEGACY_STATIC_EVIDENCE"
+        },
+        "metadata": {
+          "classification": "TRANSITIONAL",
+          "contract": "SELECTION=id,name,hasNextPage,endCursor; REMOTE_TYPES_AND_NULLABILITY_UNVERIFIED",
+          "scope": "LEGACY_STATIC_AND_LOCAL_DOCUMENT"
+        },
+        "responseRoot": {
+          "classification": "TRANSITIONAL",
+          "contract": "data.individual.edges[].node_PLUS_pageInfo",
+          "scope": "LOCAL_STRICT_PARSER_AND_HISTORICAL_SANITIZED"
+        },
+        "filters": {
+          "classification": "PROVEN",
+          "contract": "params.enabled=true",
+          "scope": "LEGACY_STATIC_AND_LOCAL_SERIALIZER"
+        },
+        "temporalTranslation": {
+          "classification": "ABSENT",
+          "contract": "NO_updatedAt_SELECTION_NO_TEMPORAL_FILTER_NO_INCREMENTAL_WATERMARK",
+          "scope": "GRAPHQL_INDIVIDUAL"
+        },
+        "ordering": {
+          "classification": "ABSENT",
+          "contract": "NO_EXPLICIT_ORDER_ARGUMENT_OR_PROVIDER_ORDER_GUARANTEE",
+          "scope": "GRAPHQL_INDIVIDUAL"
+        },
+        "per": {
+          "classification": "PROVEN",
+          "contract": "first_MAXIMUM_20; PRODUCTIVE_TOTAL_PAGE_BUDGET_PENDING",
+          "scope": "HISTORICAL_SANITIZED_OBSERVATION_AND_LOCAL_ENFORCEMENT"
+        },
+        "rootIdentity": {
+          "classification": "TRANSITIONAL",
+        "contract": "SOURCE_KEY=node.id_NORMALIZED_AS_user_id; WIRE_BASELINE=NONEMPTY_STRING_OR_INTEGER_TRANSITIONAL; V2-009a_PRESERVES_INTEGER_AND_STRING_AS_DISTINCT_TYPE_TAGGED_KEYS_WITH_EXPLICIT_SCOPE; GLOBAL_STABILITY_AND_UNIQUENESS_NOT_PROVEN",
+        "scope": "LEGACY_STATIC_LOCAL_STRICT_PARSER_SYNTHETIC_FIXTURES_AND_V2-009a_WITHOUT_REMOTE_TYPE_ORACLE"
+        },
+        "childIdentity": {
+          "classification": "ABSENT",
+          "contract": "NO_CHILD_COLLECTION_IN_APPROVED_USER_SELECTION",
+          "scope": "GRAPHQL_INDIVIDUAL"
+        },
+        "pagination": {
+          "classification": "PROVEN",
+          "contract": "CURSOR_VALID_ONLY_WITHIN_ONE_RUN; hasNextPage=true_REQUIRES_NONEMPTY_endCursor; TERMINAL_IS_LOCAL_UNVERIFIED",
+          "scope": "LOCAL_RUNTIME; CURSOR_TTL_AND_CROSS_PROCESS_RESUME_ABSENT"
+        },
+        "cursorResume": {
+          "classification": "ABSENT",
+          "contract": "NO_TTL_OR_CROSS_PROCESS_VALIDITY; RESTART_FROM_PAGE_1_IN_FRESH_STAGING",
+          "scope": "REPLAY_AND_RECOVERY"
+        },
+        "timezone": {
+          "classification": "ABSENT",
+          "contract": "NOT_APPLICABLE_WITHOUT_SOURCE_TEMPORAL_FIELD",
+          "scope": "GRAPHQL_INDIVIDUAL"
+        },
+        "limitsErrors": {
+          "classification": "PROVEN",
+          "contract": "BOUNDED_BYTES_PAGES_NODES_REQUESTS_RETRY_TIMEOUT_AND_FIXED_MEMORY_CURSOR_CYCLE_DETECTION; ERROR_OR_CAP_FAILS_CLOSED",
+          "scope": "LOCAL_RUNTIME_TESTS; PRODUCTIVE_PAGE_BUDGET_PENDING"
+        },
+        "nullableNamePolicy": {
+          "classification": "PROVEN",
+          "contract": "SHADOW_DOMAIN_PRESERVES_ABSENT_NULL_VALUE; ABSENT_DOES_NOT_OVERWRITE_KNOWN_VALUE; REMOTE_SCHEMA_NULLABILITY_AND_PUBLISHED_CONSUMER_POLICY_UNVERIFIED",
+          "scope": "LOCAL_V2-033_CURRENT_HISTORY"
+        },
+        "dataExportTemplate": {
+          "classification": "ABSENT",
+          "contract": "NO_OFFICIAL_USER_TEMPLATE; 9901_IS_PROHIBITED_BY_INFERENCE",
+          "scope": "USER_SOURCE"
+        },
+        "completeness": {
+          "classification": "ABSENT",
+          "contract": "HISTORICAL_PROBE_STOPPED_AT_CAP_WITH_hasNextPage=true; NO_REMOTE_TERMINAL_REPEATABILITY_SNAPSHOT_COUNT_OR_INDEPENDENT_ORACLE",
+          "scope": "GLOBAL_SNAPSHOT_DEACTIVATION_SWEEP_AND_CUTOVER"
+        }
+      },
+      "capabilities": {
+        "shadowUpsert": "NOT_BLOCKED_BY_COMPLETENESS_CONTRACT_AND_ENTITY_GATES_REQUIRED",
+        "sweepOrDeactivation": "BLOCKED_NO_COMPLETENESS_PROOF",
+        "cutover": "BLOCKED_NO_COMPLETENESS_PROOF"
+      },
+      "ownerRole": "SEGURANCA_E_OPERACAO",
+      "nextGates": ["V2-012a"],
+      "fixtures": [
+        {
+          "role": "FIRST_PAGE",
+          "path": "src/test/resources/contracts/graphql/users-first.json",
+          "sha256": "d36dc9bbdf20c9582b82e8e91d847650325747dc426093848fa2878844792997"
+        },
+        {
+          "role": "TERMINAL_PAGE",
+          "path": "src/test/resources/contracts/graphql/users-terminal.json",
+          "sha256": "a0c14df61e40765dc42d4e258ce80be58de80c4b315ad0e325bcd21dbd683b9a"
+        }
+      ],
+      "fingerprints": {
+        "semantics": "4184370f13646fd81b3677644dc7c90e60a5492505b2cbc5931fe600ba0ac23c",
+        "metadata": "5e78fa354c3345706c2d118b0953ca3c24f1ed36c8c3684f98962266c5210464",
+        "response": "98db2245883a1372d6b4927a2dc99b4a0a6b302ab8ff8f4429f1da2f8ee858f0",
+        "release": "a650e5e8313e6d45bff326dd8ab15920ba23da8e44e9237f538c4cbce76aca7c"
+      }
+    }
+  ]
+}

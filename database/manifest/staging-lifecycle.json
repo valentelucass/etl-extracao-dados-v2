@@ -1,0 +1,307 @@
+{
+  "manifestVersion": 3,
+  "roadmapTask": "V2-045a",
+  "localState": "COMPLETE_LOCAL",
+  "migration": "V005__create_staging_lifecycle.sql",
+  "defaultState": {
+    "retentionPoliciesSeeded": 0,
+    "automaticPurge": false,
+    "productiveTtlApproved": false,
+    "logDeletionEnabled": false
+  },
+  "externalActivationGate": {
+    "roadmapTask": "V2-045b",
+    "status": "EXTERNAL_HOLD",
+    "ownerRoles": ["data_owner", "compliance_owner", "DBA", "Operations"],
+    "requiredEvidence": [
+      "productive_retention_policy_ratification",
+      "productive_log_and_archive_ttl_ratification",
+      "cold_storage_and_worm_controls",
+      "backup_restore_drill",
+      "encryption_at_rest",
+      "rto_rpo_ratification",
+      "productive_os_acl_and_service_identity"
+    ],
+    "physicalControlsNotProven": [
+      "cold_storage",
+      "worm_or_equivalent_immutability",
+      "backup_restore",
+      "encryption_at_rest",
+      "rto_rpo",
+      "productive_ttl",
+      "log_redaction_and_os_acl"
+    ]
+  },
+  "terminalStates": {
+    "published": ["PUBLISHED"],
+    "nonPublished": ["BLOCKED", "FAILED", "CANCELLED", "DEGRADED"],
+    "noLoad": ["SKIPPED", "NOT_APPLICABLE"],
+    "neverEligible": [
+      "PLANNED",
+      "EXTRACTING",
+      "EXTRACTED",
+      "STAGED",
+      "PROMOTED",
+      "RECONCILED"
+    ],
+    "noLoadContract": "STAGING_MUST_BE_EMPTY",
+    "timestampConstraint": "CK_ctl_execution_attempt_terminal_timestamp"
+  },
+  "eligibility": {
+    "clock": "SYSUTCDATETIME_AFTER_TRANSACTION_APPLOCK",
+    "cutoff": "terminal_at_utc <= DATEADD(DAY, -ratified_retention_days, database_clock)",
+    "callerSuppliedTtlOrCutoff": false,
+    "policyRatification": "BASE_ROW_MATCHES_DISTINCT_DATA_OWNER_AND_COMPLIANCE_EVIDENCE_AND_ROLES_WITH_NO_REVOKED_EVENT",
+    "fingerprintInputEncoding": "NVARCHAR_MAX_VALIDATED_AS_LOWERCASE_ASCII_HEX_BIN2",
+    "terminalStateLedger": "BOUNDED_CONTIGUOUS_SEMANTIC_CHAIN_ORIGIN_CARDINALITY_CLOCK_AND_LAST_EVENT_MUST_MATCH_EXECUTION_ATTEMPT",
+    "activeLease": "BLOCKS_ONLY_MATCHING_EXECUTION",
+    "legalHoldLedger": "BASE_ROW_MUST_MATCH_PLACED_AND_RELEASED_EVENTS",
+    "legalHoldScopes": ["STAGING_AND_ARCHIVE", "ARCHIVE_ONLY"],
+    "alreadyArchivedExecution": "EXCLUDED_FROM_NEW_PLAN",
+    "emptyStaging": "EXCLUDED",
+    "cursor": "terminal_at_utc_then_execution_id",
+    "cursorPersistedInPlanReceipt": true,
+    "extensionArchiveBudget": "BOUNDED_CORRELATED_ITVF_BEFORE_OVERSIZED_FILTER_TOP_AND_CUMULATIVE_ADMISSION"
+  },
+  "safetyLimits": {
+    "explicitOnEveryPlan": true,
+    "kind": "LOGICAL_ADMISSION_BOUNDS_NOT_GLOBAL_PHYSICAL_IO_CAPS",
+    "maximumExecutionsCeiling": 1000,
+    "maximumExaminedExecutionsCeiling": 5000,
+    "maximumStageRowsCeiling": 1000000,
+    "maximumCandidateRowsCeiling": 1000000,
+    "maximumEvidenceRowsCeiling": 5000000,
+    "maximumContentRowsCeiling": 100000,
+    "maximumProbeRowsCeiling": 10000000,
+    "maximumLegalHoldLedgerRowsPerExecution": 4096,
+    "maximumTerminalStateEventsPerExecution": 7,
+    "maximumArchiveBytesCeiling": 1073741824,
+    "javaCollectionOfRows": "PROHIBITED"
+  },
+  "objects": {
+    "ctlTables": [
+      "staging_retention_policy",
+      "staging_retention_policy_event",
+      "staging_legal_hold",
+      "staging_legal_hold_event",
+      "staging_lifecycle_plan",
+      "staging_lifecycle_plan_item",
+      "staging_lifecycle_purge_event"
+    ],
+    "reconTables": [
+      "staging_lifecycle_archive_manifest",
+      "staging_record_archive",
+      "staging_candidate_archive",
+      "quarantine_record_archive",
+      "execution_candidate_application_archive",
+      "execution_reconciliation_result_archive",
+      "execution_state_event_archive",
+      "execution_page_audit_archive",
+      "execution_count_archive",
+      "execution_publication_event_archive",
+      "execution_promotion_result_archive",
+      "staging_restore_session",
+      "staging_restore_record",
+      "staging_restore_candidate"
+    ],
+    "publicProcedures": [
+      "ctl.usp_approve_staging_retention_policy",
+      "ctl.usp_revoke_staging_retention_policy",
+      "ctl.usp_place_staging_legal_hold",
+      "ctl.usp_release_staging_legal_hold",
+      "stg.usp_plan_staging_lifecycle",
+      "stg.usp_archive_staging_lifecycle",
+      "stg.usp_purge_staging_lifecycle",
+      "recon.usp_restore_staging_archive"
+    ],
+    "internalProcedures": [
+      "stg.usp_plan_staging_lifecycle_at",
+      "recon.usp_compute_live_staging_content_root_internal",
+      "recon.usp_compute_archive_content_root_internal",
+      "recon.usp_verify_staging_archive_internal",
+      "recon.usp_verify_staging_restore_internal"
+    ],
+    "functions": [
+      "recon.ufn_archive_row_attestation",
+      "recon.ufn_staging_lifecycle_extension_archive_budget",
+      "ctl.ufn_invalid_staging_legal_hold",
+      "ctl.ufn_invalid_execution_state_ledger"
+    ],
+    "triggers": [
+      "recon.trg_quarantine_record_staging_lineage",
+      "recon.trg_candidate_application_staging_lineage",
+      "stg.trg_execution_record_lifecycle_delete_guard",
+      "stg.trg_execution_candidate_lifecycle_delete_guard"
+    ],
+    "indexes": [
+      "IX_ctl_execution_attempt_lifecycle",
+      "IX_ctl_staging_legal_hold_execution",
+      "IX_ctl_staging_legal_hold_event_execution",
+      "IX_stg_execution_record_lifecycle",
+      "IX_recon_quarantine_record_lifecycle",
+      "UX_ctl_staging_retention_policy_active_scope",
+      "UX_ctl_staging_legal_hold_active_execution",
+      "IX_ctl_staging_lifecycle_plan_item_execution",
+      "IX_recon_staging_record_archive_execution",
+      "IX_recon_quarantine_record_archive_plan",
+      "IX_recon_candidate_application_archive_plan",
+      "IX_recon_reconciliation_result_archive_plan",
+      "IX_recon_execution_state_event_archive_plan",
+      "IX_recon_execution_page_audit_archive_plan",
+      "IX_recon_execution_count_archive_plan",
+      "IX_recon_publication_event_archive_plan",
+      "IX_recon_promotion_result_archive_plan"
+    ]
+  },
+  "archive": {
+    "kind": "TYPED_LOGICAL_ARCHIVE_IN_V2_DATABASE",
+    "liveSources": [
+      "stg.execution_record",
+      "stg.execution_candidate",
+      "recon.quarantine_record",
+      "recon.execution_candidate_application",
+      "recon.execution_reconciliation_result",
+      "ctl.execution_state_event",
+      "ctl.execution_page_audit",
+      "ctl.execution_count",
+      "ctl.execution_publication_event",
+      "ctl.execution_promotion_result"
+    ],
+    "archiveTables": [
+      "recon.staging_record_archive",
+      "recon.staging_candidate_archive",
+      "recon.quarantine_record_archive",
+      "recon.execution_candidate_application_archive",
+      "recon.execution_reconciliation_result_archive",
+      "recon.execution_state_event_archive",
+      "recon.execution_page_audit_archive",
+      "recon.execution_count_archive",
+      "recon.execution_publication_event_archive",
+      "recon.execution_promotion_result_archive"
+    ],
+    "rowVerification": "SHA256_ATTESTATION_AND_BIDIRECTIONAL_EXCEPT_AND_COUNT_BIG",
+    "rowAttestationVersion": "archive-row-json-v1",
+    "contentRootVersion": "archive-content-set-v1",
+    "manifestFingerprintVersion": "staging-archive-manifest-v3",
+    "cryptographicContentAttestation": true,
+    "durableEvidenceHardDelete": "PROHIBITED"
+  },
+  "purge": {
+    "hardDeleteAllowlist": ["stg.execution_candidate", "stg.execution_record"],
+    "order": ["stg.execution_candidate", "stg.execution_record"],
+    "archivePermitRequired": true,
+    "exactRetryReceipt": "ctl.staging_lifecycle_purge_event",
+    "reappearedStagingOnRetry": "FAIL_CLOSED",
+    "cascadeOrTruncate": "PROHIBITED"
+  },
+  "restore": {
+    "target": "RECON_READ_ONLY_PERSISTENT_MATERIALIZATION",
+    "uniqueBy": ["plan_id", "execution_id"],
+    "repopulatesActiveStaging": false,
+    "publishesOrMutatesCore": false,
+    "verification": "BIDIRECTIONAL_EXCEPT_AND_COUNT_BIG_AGAINST_VERIFIED_ARCHIVE",
+    "explicitRowLimits": true,
+    "contentReaderEntrypoints": [],
+    "contentExposure": "NOT_AUTHORIZED_WITHOUT_AUDITED_READ_RECEIPT"
+  },
+  "verticalExtensions": {
+    "usuarios": {
+      "roadmapTask": "V2-033",
+      "migration": "V007__create_usuarios_current_history.sql",
+      "liveSource": "stg.usuario_record",
+      "archiveTable": "recon.usuario_stage_archive",
+      "restoreTable": "recon.usuario_stage_restore",
+      "disposalEvidence": "recon.usuario_stage_disposal_evidence",
+      "rawNameArchived": false,
+      "archiveRepresentation": [
+        "source_key_wire_type",
+        "name_presence",
+        "attribute_hash",
+        "name_presence_hash",
+        "discarded_name_bytes",
+        "archive_row_attestation"
+      ],
+      "planningBudget": "TYPED_BYTES_INCLUDED_BY_BOUNDED_SEEK_BEFORE_OVERSIZED_FILTER_TOP_AND_CUMULATIVE_ADMISSION",
+      "contentRows": "ONE_TO_ONE_WITH_SELECTED_GENERIC_STAGE_ROWS_HAVING_TYPED_SIDECAR",
+      "integrity": "SEPARATE_TYPED_ATTESTATION_VERIFIED_BEFORE_PURGE",
+      "purgeOrder": ["stg.usuario_record", "stg.execution_record"],
+      "restoreMode": "READ_ONLY_MINIMIZED_EVIDENCE",
+      "rollbackExercise": "027_exercise_usuarios_current_history_rollback.sql",
+      "lateSidecarExercise": "029_exercise_usuarios_late_sidecar_rollback.sql"
+    }
+  },
+  "locking": {
+    "resource": "V2_STAGING_LIFECYCLE",
+    "mode": "Exclusive",
+    "owner": "Transaction",
+    "timeoutMilliseconds": 5000,
+    "sharedByPolicyHoldPlanArchivePurgeRestore": true
+  },
+  "logLifecycle": {
+    "mode": "LOCAL_MANUAL_OPT_IN",
+    "ratification": "DISTINCT_DATA_OWNER_AND_COMPLIANCE_EVIDENCE",
+    "inertPolicyHistory": "FAIL_CLOSED_BEFORE_DISABLED_OR_LEGAL_HOLD_RETURN",
+    "script": "scripts/operations/Invoke-GovernedLogLifecycle.ps1",
+    "defaultEnabled": false,
+    "policyManifestVersion": 1,
+    "policyMaximumBytes": 65536,
+    "receiptMaximumBytes": 1048576,
+    "maximumEntriesScannedCeiling": 100000,
+    "maximumFilesPerRunCeiling": 1000,
+    "maximumSingleFileBytesCeiling": 1073741824,
+    "maximumSourceBytesCeiling": 1073741824,
+    "scopeFingerprintVersion": "LENGTH_PREFIXED_PATHS_V2",
+    "sourceFence": ["NAMED_MUTEX", "PERSISTENT_FILE_LOCK", "ACTIVE_COMPLETE_MARKER"],
+    "archiveFence": ["SCOPE_NAMED_MUTEX", "SCOPE_FILE_LOCK"],
+    "protocol": [
+      "ARCHIVE_STREAM_COPY_FLUSH_HASH",
+      "DURABLE_PERMIT",
+      "SOURCE_TOMBSTONE_DELETE",
+      "DURABLE_COMPLETION",
+      "EXACT_RETRY_READBACK"
+    ],
+    "historicalResurrection": "BLOCKED_BY_MONOTONIC_EVALUATION_TIME",
+    "productiveColdStorageOrWorm": false
+  },
+  "leastPrivilege": {
+    "v2RuntimeLifecycleExecute": false,
+    "migrationGrantPublisher": "dbo.usp_publish_v2_procedure_grant",
+    "roles": {
+      "v2_retention_governor": [
+        "ctl.usp_approve_staging_retention_policy",
+        "ctl.usp_revoke_staging_retention_policy",
+        "ctl.usp_place_staging_legal_hold",
+        "ctl.usp_release_staging_legal_hold"
+      ],
+      "v2_lifecycle_reviewer": ["stg.usp_plan_staging_lifecycle"],
+      "v2_lifecycle_operator": [
+        "stg.usp_archive_staging_lifecycle",
+        "stg.usp_purge_staging_lifecycle"
+      ],
+      "v2_archive_restorer": ["recon.usp_restore_staging_archive"]
+    },
+    "directTableSelectOrDml": "DENIED",
+    "roleMembershipSeeded": false
+  },
+  "localValidation": {
+    "structuralCatalog": "ALL_21_PK_8_UQ_38_FK_17_IX_WITH_EXACT_SHAPES",
+    "showplan": {
+      "script": "scripts/validation/Test-StagingLifecycleShowplan.ps1",
+      "operationalWarningsAllowed": 0,
+      "cardinalityConversionWarningsReported": true,
+      "scaleClaim": false
+    },
+    "rollbackExercises": [
+      "013_exercise_staging_lifecycle_rollback.sql",
+      "014_exercise_staging_policy_ratification_rollback.sql",
+      "015_exercise_staging_lifecycle_migrator_rollback.sql",
+      "016_exercise_staging_legal_hold_integrity_rollback.sql",
+      "017_validate_staging_lifecycle_showplan.sql",
+      "018_exercise_staging_fingerprint_ascii_rollback.sql",
+      "019_exercise_staging_legal_hold_retry_integrity_rollback.sql",
+      "020_exercise_staging_terminal_ledger_integrity_rollback.sql",
+      "027_exercise_usuarios_current_history_rollback.sql",
+      "029_exercise_usuarios_late_sidecar_rollback.sql"
+    ]
+  }
+}

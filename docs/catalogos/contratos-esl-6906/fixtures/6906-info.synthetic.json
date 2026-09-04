@@ -1,0 +1,20 @@
+{
+  "observedSummary": {
+    "fieldCount": 37,
+    "filterCount": 6,
+    "classification": "HISTORICAL_SANITIZED_OBSERVATION"
+  },
+  "fields": [
+    {"name": "sequence_code", "type": "integer", "label": "Sequência sintética"},
+    {"name": "requested_at", "type": "datetime", "label": "Solicitação sintética"},
+    {"name": "requester_name", "type": "string", "label": "Solicitante sintético"},
+    {"name": "qoe_crn_psn_nickname", "type": "string", "label": "Filial sintética"},
+    {"name": "qoe_qes_total", "type": "decimal-string", "label": "Total sintético"},
+    {"name": "qoe_qes_fit_fhe_cte_issued_at", "type": "datetime", "label": "CT-e sintético"},
+    {"name": "qoe_qes_fit_nse_issued_at", "type": "datetime", "label": "NFS-e sintética"}
+  ],
+  "filters": [
+    {"name": "requested_at", "type": "date", "label": "Data de solicitação sintética"}
+  ],
+  "syntheticOnly": true
+}

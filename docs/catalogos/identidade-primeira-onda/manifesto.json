@@ -1,0 +1,135 @@
+{
+  "catalogVersion": "2026-09-01.v2-009a.2",
+  "identityFingerprintVersion": "first-wave-identity-v1",
+  "sourceFamily": {
+    "sourceKind": "ESL",
+    "sourceInstanceMeaning": "STABLE_NON_SECRET_LOGICAL_ESL_ACCOUNT_SHARED_BY_TRANSPORTS",
+    "transports": ["DATA_EXPORT", "GRAPHQL"]
+  },
+  "registry": {
+    "tuple": ["source_instance", "tenant_scope", "entity", "source_key"],
+    "comparison": "CASE_SENSITIVE_EXACT_BIN2",
+    "canonicalIdStrategy": "SQL_SURROGATE_BIGINT_IDENTITY",
+    "recordStateIdIsCanonicalId": false,
+    "physicalEnforcementGate": "V2-009d",
+    "physicalSchemas": {
+      "registry": "core",
+      "aliases": "ref",
+      "observations": "stg",
+      "conflicts": "recon"
+    }
+  },
+  "scope": {
+    "policy": "EXPLICIT_SOURCE_INSTANCE_AND_TENANT_REQUIRED",
+    "globalUniquenessProven": false,
+    "forbiddenTenantSentinels": ["DEFAULT", "GLOBAL", "SINGLETON"]
+  },
+  "canonicalization": {
+    "maximumStorageCharacters": 256,
+    "integerEncoding": "INTEGER:<CANONICAL_DECIMAL>",
+    "stringEncoding": "STRING:<EXACT_TEXT>",
+    "integerAndStringEquivalent": false,
+    "textNormalization": "NONE_FAIL_ON_BLANK_BOUNDARY_SPACE_CONTROL_OR_INVALID_UNICODE",
+    "processingBound": "ONE_OBSERVATION_AT_A_TIME"
+  },
+  "quarantineReasons": [
+    "AMBIGUOUS_BUSINESS_ALIAS",
+    "CARDINALITY_DIVERGENCE",
+    "INVALID_SOURCE_KEY_TYPE",
+    "INVALID_SOURCE_KEY_VALUE",
+    "MISSING_SOURCE_KEY",
+    "SCOPE_MISMATCH",
+    "SOURCE_KEY_COLLISION",
+    "SOURCE_KEY_TOO_LONG",
+    "UNPROVEN_ALIAS_CHANGE",
+    "UNPROVEN_REKEY"
+  ],
+  "actions": [
+    "KEEP_CANONICAL",
+    "NO_OP_REPLAY",
+    "QUARANTINE",
+    "REACTIVATE_EXACT_BINDING",
+    "REGISTER_NEW_CANONICAL",
+    "VERSION_ALIASES_PRESERVE_CANONICAL"
+  ],
+  "entities": [
+    {
+      "entity": "coletas",
+      "contractId": "dataexport-6908",
+      "sourceKind": "DATA_EXPORT",
+      "documentReference": "dataexport-coletas",
+      "contractVersion": "2026-08-31.v2-025a.1",
+      "sourceContractFingerprint": "052d84c37d9c55ae2b2b4891eb4771c68158ee7365402a1388cc68256c67cc59",
+      "identityFingerprint": "0ca2cd5ce2573d0bdec31d9bc141887f2d58bc79cd67d289981034a4865705e1",
+      "recordRoot": "/data",
+      "sourceKey": {
+        "path": "/id",
+        "name": "id",
+        "wireTypes": ["INTEGER"],
+        "role": "SCOPED_SOURCE_KEY_NEVER_CANONICAL_ID"
+      },
+      "businessAlias": {
+        "path": "/sequence_code",
+        "name": "sequence_code",
+        "policy": "VERSIONED_NON_TECHNICAL",
+        "cardinality": "OBSERVED_ONE_TO_ONE_NOT_GLOBAL"
+      },
+      "rootCardinality": "LOGICAL_ROOT_MAY_EXPAND_TO_REPEATED_PHYSICAL_ROWS",
+      "evidenceScope": "CLOSED_HISTORICAL_WINDOWS_AND_SYNTHETIC_FIXTURES",
+      "crossTransportEquivalence": "NOT_GLOBAL_ONLY_HISTORICAL_CLOSED_WINDOW_EVIDENCE",
+      "nextGates": ["V2-010", "V2-025d", "V2-009d"]
+    },
+    {
+      "entity": "fretes",
+      "contractId": "dataexport-6389",
+      "sourceKind": "DATA_EXPORT",
+      "documentReference": "dataexport-fretes",
+      "contractVersion": "2026-08-31.v2-025a.1",
+      "sourceContractFingerprint": "23aef4e4e03488d291d3990bdba813800e3ebb8c8be18e766a788daf9741ec15",
+      "identityFingerprint": "4e35b90cd4a58e139210d9adf9ac050acba9a46e62585996b650c6252cf44723",
+      "recordRoot": "/data",
+      "sourceKey": {
+        "path": "/id",
+        "name": "id",
+        "wireTypes": ["INTEGER"],
+        "role": "SCOPED_SOURCE_KEY_NEVER_CANONICAL_ID"
+      },
+      "businessAlias": {
+        "path": "/corporation_sequence_number",
+        "name": "corporation_sequence_number",
+        "policy": "VERSIONED_NON_TECHNICAL",
+        "cardinality": "ZERO_TO_MANY_LOOKUP_AMBIGUITY_BLOCKS_RESOLUTION"
+      },
+      "rootCardinality": "LOGICAL_ROOT_MAY_EXPAND_TO_REPEATED_PHYSICAL_ROWS",
+      "evidenceScope": "CLOSED_HISTORICAL_WINDOWS_AND_SYNTHETIC_FIXTURES",
+      "crossTransportEquivalence": "NOT_GLOBAL_ONLY_HISTORICAL_CLOSED_WINDOW_EVIDENCE",
+      "nextGates": ["V2-011", "V2-025d", "V2-009d"]
+    },
+    {
+      "entity": "usuarios",
+      "contractId": "graphql-individual",
+      "sourceKind": "GRAPHQL",
+      "documentReference": "graphql-users-snapshot",
+      "contractVersion": "2026-08-31.v2-025a.1",
+      "sourceContractFingerprint": "a650e5e8313e6d45bff326dd8ab15920ba23da8e44e9237f538c4cbce76aca7c",
+      "identityFingerprint": "8e8ad89777277f3b8bf72b4b63f65d8fa813843380f44da99f0b035bbf788528",
+      "recordRoot": "/data/individual/edges/*",
+      "sourceKey": {
+        "path": "/node/id",
+        "name": "user_id",
+        "wireTypes": ["STRING", "INTEGER"],
+        "role": "SCOPED_SOURCE_KEY_NEVER_CANONICAL_ID"
+      },
+      "businessAlias": {
+        "path": null,
+        "name": null,
+        "policy": "ABSENT",
+        "cardinality": "NOT_APPLICABLE"
+      },
+      "rootCardinality": "ONE_NODE_PER_OBSERVED_EDGE",
+      "evidenceScope": "CLOSED_HISTORICAL_WINDOWS_AND_SYNTHETIC_FIXTURES",
+      "crossTransportEquivalence": "NOT_APPLICABLE",
+      "nextGates": ["V2-012a"]
+    }
+  ]
+}

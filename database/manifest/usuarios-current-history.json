@@ -1,0 +1,117 @@
+{
+  "manifestVersion": 3,
+  "roadmapTask": "V2-033",
+  "localState": "IMPLEMENTED_IN_SHADOW",
+  "migration": "V007__create_usuarios_current_history.sql",
+  "sourceContract": {
+    "transport": "GRAPHQL_TRANSITIONAL",
+    "operation": "USERS_SNAPSHOT",
+    "root": "individual",
+    "filter": "enabled=true",
+    "fields": ["id", "name"],
+    "maximumPageSize": 20,
+    "maximumInFlightPages": 1,
+    "paginationCursor": "INTRA_RUN_ONLY",
+    "terminalEvidence": "GRAPHQL_PAGE_INFO_LOCAL_ONLY",
+    "datasetCompleteness": "NOT_PROVEN",
+    "updatedAt": "ABSENT_AND_NOT_INFERRED",
+    "legacyEndpoint9901": "NOT_INFERRED"
+  },
+  "identity": {
+    "sourceEntity": "usuarios",
+    "wireTypes": ["INTEGER", "STRING"],
+    "wireTypesRemainDistinct": true,
+    "sourceScope": [
+      "environment_name",
+      "source_instance",
+      "tenant_scope",
+      "entity_name",
+      "source_key"
+    ],
+    "canonicalKey": "BIGINT_IDENTITY",
+    "sourceKeyCoercion": "PROHIBITED",
+    "sourceKeyTrimming": "PROHIBITED"
+  },
+  "attributes": {
+    "nameMaximumCharacters": 255,
+    "namePresence": ["ABSENT", "NULL", "VALUE"],
+    "absentPreservesKnownValue": true,
+    "invalidUnicode": "REJECTED_BEFORE_JDBC",
+    "controlCharacters": "REJECTED",
+    "rawPayloadStorage": "PROHIBITED"
+  },
+  "persistence": {
+    "stage": "stg.usuario_record",
+    "current": "core.usuario",
+    "history": "core.usuario_history",
+    "quarantine": "recon.usuario_quarantine",
+    "promotionResult": "ctl.usuario_promotion_result",
+    "stageProcedure": "stg.usp_stage_usuario_record",
+    "atomicApplyProcedure": "core.usp_apply_reconcile_publish_usuarios",
+    "applicationMode": "SET_BASED",
+    "javaPerUserDml": "PROHIBITED",
+    "historyOnNoOp": false,
+    "historyChangeKinds": ["INSERTED", "UPDATED", "REACTIVATED"],
+    "absenceDeactivation": "DISABLED_UNTIL_V2_012B_AND_V2_013",
+    "shadowDimensionView": "core.v_usuario_dimension_current_v1",
+    "shadowDimensionRoadmapTask": "V2-035B-USUARIOS",
+    "consumerCompatibilityView": "DEFERRED_TO_V2_037"
+  },
+  "ordering": {
+    "sourceFreshness": "UNAVAILABLE",
+    "tuple": ["origin_or_attempt_started_at_utc", "origin_or_execution_id"],
+    "replayInheritsOriginTuple": true,
+    "equalTupleDivergentState": "BLOCKED",
+    "staleObservation": "STALE_NO_OP"
+  },
+  "concurrency": {
+    "stageRetry": "UNIQUE_KEY_PLUS_UPDLOCK_HOLDLOCK",
+    "applicationNamespace": "TWO_SESSION_EXCLUSIVE_TRANSACTION_APPLOCK",
+    "twoSessionProbeKind": "DIRECT_APPLOCK_USING_FORMULA_EXTRACTED_FROM_V004",
+    "entrypointConcurrencyEvidence": "COMPOSITIONAL_WITH_ROLLBACK_ENTRYPOINT_EXERCISE",
+    "namespaceIncludesEnvironment": true,
+    "lockReleasedByRollback": true
+  },
+  "quality": {
+    "typedCoverageRequired": true,
+    "conflictingNamesThreshold": 0,
+    "genericQuarantineThreshold": 0,
+    "typedBlockedCanNeverPublish": true,
+    "typedBlockedCanNeverReportReadyHealth": true,
+    "quarantineOwnerRole": "data_quality_owner",
+    "operationalOwnerRole": "operations"
+  },
+  "lifecycle": {
+    "productiveRetentionPolicy": "NOT_SEEDED",
+    "rawNameArchive": "PROHIBITED",
+    "typedArchive": "MINIMIZED_AND_ATTESTED",
+    "planningBudget": "BOUNDED_SEEK_BEFORE_OVERSIZED_FILTER_TOP_AND_CUMULATIVE_ADMISSION",
+    "lateSidecar": "BLOCKED_BY_ATTEMPT_ROW_FENCE_AND_PREEXISTING_GENERIC_REJECTION",
+    "typedOversized": "CLASSIFIED_BEFORE_TOP_WITHOUT_STARVING_LATER_FITTING_EXECUTION",
+    "maximalBudgetBackfill": "NOT_CLAIMED",
+    "restore": "READ_ONLY",
+    "purgeRequiresVerifiedArchive": true,
+    "automaticPurge": false,
+    "externalActivationGate": "V2-045b"
+  },
+  "runtime": {
+    "promotionPolicy": "SHADOW_UPSERT_ONLY",
+    "sweep": "PROHIBITED",
+    "cutover": "PROHIBITED",
+    "remoteCallsUsedAsEvidence": false,
+    "directTableDml": "DENIED",
+    "grantedProcedures": [
+      "stg.usp_stage_usuario_record",
+      "core.usp_apply_reconcile_publish_usuarios"
+    ]
+  },
+  "verification": {
+    "structuralValidator": "database/validation/026_validate_usuarios_current_history.sql",
+    "rollbackExercise": "database/validation/027_exercise_usuarios_current_history_rollback.sql",
+    "lateSidecarExercise": "database/validation/029_exercise_usuarios_late_sidecar_rollback.sql",
+    "showplanExercise": "database/validation/028_validate_usuarios_current_history_showplan.sql",
+    "manifestGate": "scripts/validation/Test-UsuariosCurrentHistoryManifest.ps1",
+    "concurrencyGate": "scripts/validation/Test-UsuariosCurrentHistoryConcurrency.ps1",
+    "showplanGate": "scripts/validation/Test-UsuariosCurrentHistoryShowplan.ps1"
+  }
+}

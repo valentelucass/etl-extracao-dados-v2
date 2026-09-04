@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <property name="LOG_DIRECTORY" value="${LOG_DIRECTORY:-logs}" />
+
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="ch.qos.logback.classic.encoder.JsonEncoder">
+            <withSequenceNumber>true</withSequenceNumber>
+            <withTimestamp>true</withTimestamp>
+            <withNanoseconds>false</withNanoseconds>
+            <withLevel>true</withLevel>
+            <withThreadName>false</withThreadName>
+            <withLoggerName>true</withLoggerName>
+            <withContext>false</withContext>
+            <withMarkers>false</withMarkers>
+            <withMDC>false</withMDC>
+            <withKVPList>true</withKVPList>
+            <withMessage>false</withMessage>
+            <withArguments>false</withArguments>
+            <withThrowable>false</withThrowable>
+            <withFormattedMessage>false</withFormattedMessage>
+        </encoder>
+    </appender>
+
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_DIRECTORY}/etl-dataexport-v2.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_DIRECTORY}/etl-dataexport-v2.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <!-- Zero desabilita exclusão automática. V2-045b deve fornecer política ratificada. -->
+            <maxHistory>0</maxHistory>
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.classic.encoder.JsonEncoder">
+            <withSequenceNumber>true</withSequenceNumber>
+            <withTimestamp>true</withTimestamp>
+            <withNanoseconds>false</withNanoseconds>
+            <withLevel>true</withLevel>
+            <withThreadName>false</withThreadName>
+            <withLoggerName>true</withLoggerName>
+            <withContext>false</withContext>
+            <withMarkers>false</withMarkers>
+            <withMDC>false</withMDC>
+            <withKVPList>true</withKVPList>
+            <withMessage>false</withMessage>
+            <withArguments>false</withArguments>
+            <withThrowable>false</withThrowable>
+            <withFormattedMessage>false</withFormattedMessage>
+        </encoder>
+    </appender>
+
+    <logger
+        name="br.com.esl.etl.v2.plataforma.fonte.dataexport.DataExportHttpExecutor"
+        level="INFO"
+        additivity="false">
+        <appender-ref ref="CONSOLE" />
+        <appender-ref ref="FILE" />
+    </logger>
+    <logger
+        name="br.com.esl.etl.v2.plataforma.fonte.dataexport.HttpDataExportGateway"
+        level="INFO"
+        additivity="false">
+        <appender-ref ref="CONSOLE" />
+        <appender-ref ref="FILE" />
+    </logger>
+    <root level="OFF">
+    </root>
+</configuration>

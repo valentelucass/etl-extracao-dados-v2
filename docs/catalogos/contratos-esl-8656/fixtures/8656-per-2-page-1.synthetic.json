@@ -1,0 +1,42 @@
+{
+  "data": [
+    {
+      "corporation_sequence_number": 8656001,
+      "type": "Freight::Synthetic",
+      "service_at": "2026-07-15T08:00:00-03:00",
+      "invoices_volumes": 2,
+      "taxed_weight": "100.000",
+      "invoices_value": "1000.00",
+      "total": "100.00",
+      "service_type": "synthetic-service-a",
+      "fit_crn_psn_nickname": "synthetic-origin-branch-a",
+      "fit_dpn_delivery_prediction_at": "2026-07-16T18:00:00-03:00",
+      "fit_dyn_name": "synthetic-destination-a",
+      "fit_dyn_drt_nickname": "synthetic-destination-branch-a",
+      "fit_fsn_name": "synthetic-classification-a",
+      "fit_fln_status": "finished",
+      "fit_fln_cln_nickname": "synthetic-current-branch-a",
+      "fit_o_n_name": "synthetic-origin-a",
+      "fit_o_n_drt_nickname": "synthetic-origin-branch-a"
+    },
+    {
+      "corporation_sequence_number": 8656002,
+      "type": "Freight::Synthetic",
+      "service_at": "2026-07-15T09:00:00-03:00",
+      "invoices_volumes": 3,
+      "taxed_weight": "200.000",
+      "invoices_value": "2000.00",
+      "total": "200.00",
+      "service_type": "synthetic-service-b",
+      "fit_crn_psn_nickname": "synthetic-origin-branch-b",
+      "fit_dpn_delivery_prediction_at": "2026-07-17T18:00:00-03:00",
+      "fit_dyn_name": "synthetic-destination-b",
+      "fit_dyn_drt_nickname": "synthetic-destination-branch-b",
+      "fit_fsn_name": "synthetic-classification-b",
+      "fit_fln_status": "delivering",
+      "fit_fln_cln_nickname": "synthetic-current-branch-b",
+      "fit_o_n_name": "synthetic-origin-b",
+      "fit_o_n_drt_nickname": "synthetic-origin-branch-b"
+    }
+  ]
+}

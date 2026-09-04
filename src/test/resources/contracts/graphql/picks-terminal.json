@@ -1,0 +1,19 @@
+{
+  "data": {
+    "pick": {
+      "edges": [
+        {
+          "node": {
+            "id": "synthetic-pick-b",
+            "sequenceCode": "synthetic-sequence-b",
+            "pickItems": []
+          }
+        }
+      ],
+      "pageInfo": {
+        "hasNextPage": false,
+        "endCursor": null
+      }
+    }
+  }
+}

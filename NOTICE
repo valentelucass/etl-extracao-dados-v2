@@ -1,0 +1,9 @@
+ETL Data Export V2 — third-party notice
+
+This repository is a pre-release shadow implementation. It does not currently publish a supported distribution or an executable fat JAR.
+
+The Maven Wrapper files `.mvn/wrapper/maven-wrapper.jar`, `.mvn/wrapper/maven-wrapper.properties`, `mvnw`, and `mvnw.cmd` originate from Apache Maven Wrapper 3.3.4. Those upstream files remain subject to the Apache License, Version 2.0 and their upstream notices.
+
+Build and test dependencies declared by `pom.xml`, including their transitive components, remain subject to their respective upstream licenses. This notice is not a complete dependency attribution or software bill of materials. V2-015c tracks the consolidated dependency, SBOM, and license review required before a distribution decision.
+
+The presence of third-party components does not grant a license to the repository's original material. See LICENSE for the current project-level status.

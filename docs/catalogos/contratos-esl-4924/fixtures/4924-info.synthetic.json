@@ -1,0 +1,15 @@
+{
+  "observedSummary": {
+    "fieldCount": 52,
+    "filterCount": 17,
+    "classification": "HISTORICAL_SANITIZED_OBSERVATION"
+  },
+  "fields": [
+    {"name": "id", "type": "integer", "label": "Candidato de linha sintético"}
+  ],
+  "filters": [
+    {"name": "service_at", "type": "date", "label": "Data de serviço sintética"}
+  ],
+  "syntheticOnly": true
+}
+

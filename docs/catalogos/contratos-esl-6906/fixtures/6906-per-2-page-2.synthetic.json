@@ -1,0 +1,13 @@
+{
+  "data": [
+    {
+      "sequence_code": 6906003,
+      "requested_at": "2026-07-15",
+      "requester_name": "synthetic-requester-c",
+      "qoe_crn_psn_nickname": "synthetic-branch-c",
+      "qoe_qes_total": "300.00",
+      "qoe_qes_fit_fhe_cte_issued_at": null,
+      "qoe_qes_fit_nse_issued_at": null
+    }
+  ]
+}

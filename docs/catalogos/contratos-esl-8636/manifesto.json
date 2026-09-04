@@ -1,0 +1,126 @@
+{
+  "catalogVersion": "2026-09-04.v2-025b.1",
+  "classificationVocabulary": [
+    "PROVEN",
+    "TRANSITIONAL",
+    "ABSENT",
+    "BUSINESS_DECISION_PENDING"
+  ],
+  "evidenceVocabulary": [
+    "HISTORICAL_SANITIZED_OBSERVATION",
+    "LEGACY_STATIC_EVIDENCE",
+    "SYNTHETIC_FIXTURES",
+    "NO_INDEPENDENT_COMPLETENESS_EVIDENCE"
+  ],
+  "contract": {
+    "contractId": "dataexport-8636",
+    "sourceKind": "DATA_EXPORT",
+    "documentReference": "dataexport-contas-a-pagar",
+    "contractVersion": "2026-09-04.v2-025b.1",
+    "overallClassification": "TRANSITIONAL",
+    "evidence": [
+      "HISTORICAL_SANITIZED_OBSERVATION",
+      "LEGACY_STATIC_EVIDENCE",
+      "SYNTHETIC_FIXTURES",
+      "NO_INDEPENDENT_COMPLETENESS_EVIDENCE"
+    ],
+    "aspects": {
+      "transport": {
+        "classification": "PROVEN",
+        "contract": "GET_WITH_QUERY_WITHOUT_FALLBACK; LEGACY_GET_WITH_BODY_IS_NOT_PORTED",
+        "scope": "LOCAL_POLICY_AND_LEGACY_STATIC_EVIDENCE"
+      },
+      "metadata": {
+        "classification": "TRANSITIONAL",
+        "contract": "INFO_OBSERVED_28_FIELDS_AND_9_FILTERS_WITHOUT_VERSIONED_TYPES; SELECTED_NAMES_ARE_INCOMPLETE",
+        "scope": "HISTORICAL_SANITIZED_OBSERVATION_AND_LEGACY_STATIC_EVIDENCE"
+      },
+      "responseRoot": {
+        "classification": "TRANSITIONAL",
+        "contract": "data_ARRAY_IS_THE_ONLY_PROMOTABLE_ENVELOPE; ANY_OTHER_SHAPE_REQUIRES_CHARACTERIZATION",
+        "scope": "LOCAL_CONTRACT_POLICY_AND_SYNTHETIC_SHAPE"
+      },
+      "filters": {
+        "classification": "TRANSITIONAL",
+        "contract": "accounting_debits.issue_date_AND_accounting_debits.created_at_ARE_THE_JOINT_CANDIDATE_V1_CHARACTERIZATION_FILTERS; ANY_FUTURE_COUNTER_OR_ORACLE_MUST_REPRODUCE_BOTH",
+        "scope": "LEGACY_STATIC_EVIDENCE_AND_HISTORICAL_SANITIZED_OBSERVATION"
+      },
+      "temporalTranslation": {
+        "classification": "BUSINESS_DECISION_PENDING",
+        "contract": "INTERNAL_START_END_EXCLUSIVE_TO_SOURCE_CIVIL_DATE_BOUNDARIES_INCLUSION_PRECISION_AND_DST_ARE_NOT_PROVEN_FOR_EITHER_FILTER",
+        "scope": "NO_VERSIONED_PROVIDER_TEMPORAL_GUARANTEE"
+      },
+      "ordering": {
+        "classification": "TRANSITIONAL",
+        "contract": "issue_date_DESC_FOR_LEGACY_PARITY_ONLY; ORDER_IS_NOT_IDENTITY_CURSOR_OR_COMPLETENESS",
+        "scope": "LEGACY_STATIC_EVIDENCE"
+      },
+      "per": {
+        "classification": "TRANSITIONAL",
+        "contract": "LEGACY_CONFIGURATION_PER_100; OBSERVED_PER_3_RETURNED_5_PHYSICAL_ROWS_AND_5_ant_ils_sequence_code_CANDIDATES_WITHOUT_ACCOUNTING_DEBIT_ROOT_ID; SOURCE_ENTITIES_AND_DISTINCT_ROOT_KEYS_REMAIN_UNVERIFIED",
+        "scope": "HISTORICAL_SANITIZED_OBSERVATION_AND_LEGACY_STATIC_EVIDENCE"
+      },
+      "rootIdentity": {
+        "classification": "ABSENT",
+        "contract": "NO_ACCOUNTING_DEBIT_ROOT_ID_WAS_OBSERVED; NO_ROOT_UNIQUENESS_STABILITY_OR_TENANT_SCOPE_IS_INFERRED",
+        "scope": "HISTORICAL_SANITIZED_OBSERVATION"
+      },
+      "childIdentity": {
+        "classification": "BUSINESS_DECISION_PENDING",
+        "contract": "ant_ils_sequence_code_IS_ONLY_A_PARCEL_CANDIDATE; PARCEL_IDENTITY_ROOT_RELATIONSHIP_COLLISION_RULES_AND_CARDINALITY_ARE_NOT_DECIDED",
+        "scope": "V2_009B_AND_V2_029_ONLY"
+      },
+      "pagination": {
+        "classification": "PROVEN",
+        "contract": "NUMERIC_SERIAL_PAGE_WITHOUT_CURSOR; SHORT_PAGE_IS_NOT_TERMINAL_AND_EMPTY_PAGE_IS_LOCAL_TERMINAL_UNVERIFIED",
+        "scope": "LOCAL_DATA_EXPORT_TRAVERSAL_POLICY"
+      },
+      "timezone": {
+        "classification": "TRANSITIONAL",
+        "contract": "America_Sao_Paulo_IS_REQUIRED_FOR_V2_BUSINESS_WINDOW_HANDLING_BUT_SOURCE_CIVIL_DATE_SEMANTICS_ARE_NOT_PROVEN",
+        "scope": "V2_ROADMAP_AND_NO_PROVIDER_TIMEZONE_GUARANTEE"
+      },
+      "limitsErrors": {
+        "classification": "TRANSITIONAL",
+        "contract": "LEGACY_BASELINE_PER_100_TIMEOUT_60_SECONDS_AND_CAP_500_PAGES_10000_LINES_ARE_NOT_V2_DEFAULTS; LEGACY_PER_50_25_AND_TIMEOUT_ESCALATION_ARE_NOT_PORTED",
+        "scope": "LEGACY_STATIC_EVIDENCE_AND_LOCAL_POLICY"
+      },
+      "completeness": {
+        "classification": "ABSENT",
+        "contract": "NO_VERSIONED_PROVIDER_GUARANTEE_OR_APPROVED_INDEPENDENT_ORACLE_FOR_ORDER_REPEATABILITY_SNAPSHOT_OR_COMPLETE_SET",
+        "scope": "SWEEP_DEACTIVATION_AND_CUTOVER"
+      }
+    },
+    "capabilities": {
+      "shadowUpsert": "NOT_AUTHORIZED_BY_THIS_CONTRACT_ALONE_REQUIRES_V2_009B_V2_029_AND_ENTITY_GATES",
+      "sweepOrDeactivation": "BLOCKED_NO_COMPLETENESS_PROOF",
+      "cutover": "BLOCKED_NO_COMPLETENESS_PROOF"
+    },
+    "ownerRole": "TIME_NOMINAL_NAO_INFORMADO",
+    "nextGates": [
+      "V2-009b",
+      "V2-029",
+      "V2-025d"
+    ],
+    "fixtures": [
+      {"role": "METADATA_SELECTED_SUBSET", "path": "docs/catalogos/contratos-esl-8636/fixtures/8636-info.synthetic.json", "sha256": "d67ee12540762f621794b1e5df54218d143865f06acc36a06a429e127074f39b"},
+      {"role": "PER_2_PAGE_1", "path": "docs/catalogos/contratos-esl-8636/fixtures/8636-per-2-page-1.synthetic.json", "sha256": "178fb6ae73045eb358eb78668c45fc222c7451186f338703b7c7ef83d8b1bbf4"},
+      {"role": "PER_2_PAGE_2", "path": "docs/catalogos/contratos-esl-8636/fixtures/8636-per-2-page-2.synthetic.json", "sha256": "2d768545b6046c13904379e4f184f83ad2fe8a97370e4db9320a5b7154822fa8"},
+      {"role": "PER_2_TERMINAL", "path": "docs/catalogos/contratos-esl-8636/fixtures/8636-per-2-terminal.synthetic.json", "sha256": "3b459147c8170c320545247d8ba79c22d55408311adafa4ad737f02c7aa78700"},
+      {"role": "PER_3_PAGE_1", "path": "docs/catalogos/contratos-esl-8636/fixtures/8636-per-3-page-1.synthetic.json", "sha256": "29aafa12e407009f2675220fd4f03453c55b5753bb0b745ade11d30af0a1b226"},
+      {"role": "PER_3_TERMINAL", "path": "docs/catalogos/contratos-esl-8636/fixtures/8636-per-3-terminal.synthetic.json", "sha256": "3b459147c8170c320545247d8ba79c22d55408311adafa4ad737f02c7aa78700"}
+    ],
+    "fingerprintInputs": {
+      "semantics": "dataexport-8636|GET_WITH_QUERY_WITHOUT_FALLBACK|accounting_debits.issue_date+created_at|CIVIL_DATE_RANGE|issue_date desc|NUMERIC_PAGE|America/Sao_Paulo|NO_CURSOR|ORDER_IS_NOT_IDENTITY|ROOT_ID_ABSENT|NO_COMPLETENESS_PROOF",
+      "metadata": "observedInfoFields=28|observedInfoFilters=9|selectedFields=ant_ils_sequence_code,issue_date,created_at|selectedFilters=issue_date,created_at",
+      "response": "observedProbe=5_physical_rows/5_ant_ils_sequence_code_candidates/no_accounting_debit_root_id|root_metrics_unverified|syntheticOnly",
+      "release": "2026-09-04.v2-025b.1|dataexport-8636"
+    },
+    "fingerprints": {
+      "semantics": "efad83aeef311b1225eebebd6dcf90a87292b655683e1845a0c7baf7196c28e4",
+      "metadata": "245896e163395ccbc1a4992498944a5671ddfae1fc94db05e1f613d65c9a6a39",
+      "response": "1667d8057d77624f1f37b314e9c43d64264b7687cde39c3b1f788a4935e7a3f1",
+      "release": "948902142c9d35ca76574de13cfac1064b6b06eefb62ae012ea5823022dec4c1"
+    }
+  }
+}

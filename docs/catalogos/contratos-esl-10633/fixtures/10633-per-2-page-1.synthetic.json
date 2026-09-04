@@ -1,0 +1,7 @@
+{
+  "data": [
+    {"sequence_code": 10633001, "cnr_c_s_fit_corporation_sequence_number": 20633001, "type": "CheckIn::Order::Picking", "started_at": "2026-07-15 08:00:00", "status": "pending", "cnr_c_s_fit_invoices_mapping": ["invoice-synthetic-a1"]},
+    {"sequence_code": 10633001, "cnr_c_s_fit_corporation_sequence_number": 20633001, "type": "CheckIn::Order::Picking", "started_at": "2026-07-15 08:00:00", "status": "pending", "cnr_c_s_fit_invoices_mapping": ["invoice-synthetic-a2"]},
+    {"sequence_code": 10633002, "cnr_c_s_fit_corporation_sequence_number": 20633002, "type": "CheckIn::Order::Receipt", "started_at": "2026-07-15 09:00:00", "status": "finished", "cnr_c_s_fit_invoices_mapping": ["invoice-synthetic-b1"]}
+  ]
+}

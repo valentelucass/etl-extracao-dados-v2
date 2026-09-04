@@ -1,0 +1,18 @@
+{
+  "data": {
+    "individual": {
+      "edges": [
+        {
+          "node": {
+            "id": 930001,
+            "name": "Synthetic User"
+          }
+        }
+      ],
+      "pageInfo": {
+        "hasNextPage": false,
+        "endCursor": null
+      }
+    }
+  }
+}

@@ -1,0 +1,181 @@
+{
+  "manifestVersion": 5,
+  "roadmapTask": "V2-044",
+  "lifecycleEvolutionTask": "V2-045a",
+  "schemas": ["ctl", "stg", "core", "recon"],
+  "userTables": {
+    "ctl": ["execution_promotion_result"],
+    "stg": ["execution_record", "execution_candidate"],
+    "core": ["entity_record_state"],
+    "recon": [
+      "quarantine_record",
+      "execution_candidate_application",
+      "execution_reconciliation_result"
+    ]
+  },
+  "procedures": [
+    "stg.usp_stage_record",
+    "core.usp_prepare_staged_execution",
+    "core.usp_apply_reconcile_publish_execution"
+  ],
+  "semanticTextCollation": {
+    "name": "Latin1_General_100_BIN2",
+    "comparison": "binary_case_and_accent_sensitive",
+    "scope": "all_persisted_nvarchar_columns_and_promotion_key_table_variables",
+    "outerSpacePolicy": "trim_only_ASCII_U+0020_after_length_validation_and_reject_noncanonical_storage",
+    "procedureVariableComparison": "explicit_Latin1_General_100_BIN2",
+    "columns": [
+      "stg.execution_record.source_key",
+      "stg.execution_record.row_fingerprint_version",
+      "stg.execution_record.presence_fingerprint_version",
+      "stg.execution_record.validation_disposition",
+      "stg.execution_record.quarantine_reason_code",
+      "stg.execution_candidate.source_key",
+      "stg.execution_candidate.row_fingerprint_version",
+      "stg.execution_candidate.presence_fingerprint_version",
+      "recon.quarantine_record.reason_code",
+      "recon.quarantine_record.source_key",
+      "recon.quarantine_record.row_fingerprint_version",
+      "recon.quarantine_record.presence_fingerprint_version",
+      "recon.execution_candidate_application.source_key",
+      "recon.execution_candidate_application.application_disposition",
+      "recon.execution_candidate_application.result_row_fingerprint_version",
+      "recon.execution_candidate_application.result_presence_fingerprint_version",
+      "core.entity_record_state.environment_name",
+      "core.entity_record_state.source_instance",
+      "core.entity_record_state.tenant_scope",
+      "core.entity_record_state.entity_name",
+      "core.entity_record_state.source_key",
+      "core.entity_record_state.row_fingerprint_version",
+      "core.entity_record_state.presence_fingerprint_version"
+    ]
+  },
+  "textInputProtocol": {
+    "stageProcedureTextParameters": "NVARCHAR(MAX), including hashes before ASCII validation",
+    "contractPermitTextParameters": "contract_version NVARCHAR(MAX), contract_fingerprint NVARCHAR(MAX), configuration_version NVARCHAR(MAX), configuration_fingerprint NVARCHAR(MAX)",
+    "lengthValidation": "DATALENGTH before LTRIM/RTRIM/LOWER",
+    "normalization": "outer spaces trimmed from source_key, versions, disposition and reason; hexadecimal hashes lowercased",
+    "silentPreBodyTruncation": "PROHIBITED",
+    "reasonCodes": "trim_ASCII_U+0020_then_require_first_[A-Z]_and_remaining_[A-Z0-9_]_with_length_2_to_64; no_case_fold"
+  },
+  "contractPermit": {
+    "parameterOrder": [
+      "execution_id",
+      "contract_version",
+      "contract_fingerprint",
+      "configuration_version",
+      "configuration_fingerprint"
+    ],
+    "persistedColumns": [
+      "ctl.execution_attempt.contract_version",
+      "ctl.execution_attempt.contract_fingerprint",
+      "ctl.execution_attempt.configuration_version",
+      "ctl.execution_attempt.configuration_fingerprint"
+    ],
+    "comparison": "exact_Latin1_General_100_BIN2_under_execution_attempt_UPDLOCK_HOLDLOCK",
+    "requiredBy": [
+      "core.usp_prepare_staged_execution",
+      "core.usp_apply_reconcile_publish_execution"
+    ],
+    "mismatchError": 51418,
+    "gatePosition": "before_PROMOTED_or_PUBLISHED_retry_and_before_any_persistent_mutation",
+    "rollbackExercise": "database/validation/011_exercise_contract_permit_rollback.sql",
+    "cryptographicAttestation": false
+  },
+  "runtime": {
+    "directTableDml": "DENIED",
+    "proceduresOnly": true,
+    "grantedProcedures": [
+      "stg.usp_stage_record",
+      "core.usp_prepare_staged_execution",
+      "core.usp_apply_reconcile_publish_execution"
+    ],
+    "maximumRecordsPerBatch": 10000
+  },
+  "storage": {
+    "rawPayload": "PROHIBITED",
+    "urls": "PROHIBITED",
+    "credentialMaterial": "PROHIBITED",
+    "recordRepresentation": [
+      "source_key",
+      "row_fingerprint_version",
+      "source_row_hash",
+      "presence_fingerprint_version",
+      "presence_fingerprint",
+      "source_freshness_at_utc"
+    ]
+  },
+  "deduplication": {
+    "scope": "execution_id",
+    "strategy": "ROW_NUMBER",
+    "partitionBy": ["source_key"],
+    "orderBy": [
+      "source_freshness_at_utc DESC NULLS LAST",
+      "input_batch_number DESC",
+      "input_record_ordinal DESC"
+    ],
+    "equalFreshnessDifferentFingerprint": "QUARANTINE",
+    "unknownFreshnessDifferentFingerprint": "QUARANTINE",
+    "hashOrderingAsFreshness": "PROHIBITED"
+  },
+  "countEquations": [
+    "physical_rows = distinct_root_keys + duplicate_rows + unidentified_quarantine_rows",
+    "distinct_root_keys = candidate_rows + quarantined_root_keys"
+  ],
+  "quarantineCounting": {
+    "quarantined_root_keys": "distinct identified source_key values excluded from the candidate set",
+    "unidentified_quarantine_rows": "physical quarantine rows without source_key; never inferred as roots",
+    "quarantined_stage_rows": "physical append-only quarantine artifacts, including propagated key conflicts"
+  },
+  "clockAuthority": {
+    "fencing": "database_clock_captured_after_lease_locks",
+    "staged_at_utc": "database_clock; caller parameter retained only for signature compatibility",
+    "promotion_candidate_quarantine_result_and_event": "single_database_clock_value",
+    "application_reconciliation_publication_and_lease_release": "database_clock_only_with_final_lease_revalidation"
+  },
+  "transactionProtocol": {
+    "stageBatch": "jdbc_executeBatch_transactional_and_idempotent_by_execution_batch_ordinal; exact retry returns before lease fencing; divergent retry is rejected",
+    "promotionRetry": "PROMOTED exact retry first requires a contract/configuration permit matching the locked execution, then coherent candidate_quarantine_count_result evidence, and returns before lease fencing",
+    "publicationRetry": "PUBLISHED exact retry first requires a contract/configuration permit matching the locked execution, then returns one immutable O(1) result without consulting mutable core or requiring an active lease",
+    "newMutationFencing": "new stage rows require current execution and an active unreleased database-clock lease; STAGED_to_PROMOTED and PROMOTED apply/publication require both a contract/configuration permit matching the locked execution and the same current-execution/lease fencing; exact retries return before lease fencing",
+    "internalCountPersistence": "direct INSERT of exact STAGING_KERNEL token inside the fenced promotion transaction; public count API rejects that exact BIN2 token",
+    "promotion": [
+      "match_contract_and_configuration_permit_to_locked_execution_before_retry_or_mutation",
+      "require_current_execution_and_active_database_clock_lease",
+      "deduplicate_whole_execution",
+      "quarantine_equal_or_unknown_freshness_conflicts",
+      "separate_unidentified_quarantine_rows_from_distinct_root_keys",
+      "persist_immutable_candidate_set",
+      "append_quarantine",
+      "record_canonical_counts",
+      "record_promotion_result",
+      "allocate_transition_sequence_atomically",
+      "evidence_bound_transition_STAGED_to_PROMOTED"
+    ],
+    "application": [
+      "serialize_environment_source_tenant_entity_namespace_with_transaction_owned_application_lock_then_match_contract_and_configuration_permit_to_locked_execution_before_retry_or_mutation",
+      "require_current_execution_and_active_unreleased_database_clock_lease",
+      "classify_candidate_set_set_based_as_insert_update_reactivate_noop_or_stale_noop",
+      "reject_equal_or_unknown_freshness_with_divergent_content",
+      "persist_one_immutable_application_evidence_row_per_candidate",
+      "reconcile_exclusive_counts_to_candidate_rows"
+    ],
+    "coreMutationBeforePublication": "SAME_TRANSACTION_ONLY",
+    "publication": [
+      "evidence_bound_PROMOTED_to_RECONCILED_to_PUBLISHED",
+      "partition_pointer_same_transaction",
+      "incremental_frontier_advances_only_across_contiguous_published_partitions",
+      "non_incremental_modes_never_advance_incremental_frontier",
+      "lease_release_revalidates_active_database_clock_lease_and_uses_database_clock_timestamp",
+      "quarantine_rejected_until_an_immutable_tolerance_policy_exists"
+    ],
+    "atomicEntrypoint": "core.usp_apply_reconcile_publish_execution"
+  },
+  "durableLineage": {
+    "quarantineToStaging": "live_stg_or_typed_archive_trigger",
+    "applicationToCandidate": "live_stg_or_typed_archive_trigger",
+    "legacyBlockingForeignKeys": "REMOVED_BY_V005_AFTER_TYPED_ARCHIVE_CONTRACT",
+    "hardDeleteOfReconEvidence": "PROHIBITED"
+  },
+  "identityBoundary": "opaque source_key only; canonical identity, aliases and vertical constraints remain V2-009/V2-009d"
+}

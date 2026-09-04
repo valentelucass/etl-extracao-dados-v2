@@ -1,0 +1,62 @@
+{
+  "catalog_version": "2026-09-01.v2-035b-usuarios",
+  "generator": "scripts/validation/Build-PortabilityCatalog.ps1",
+  "source_policy": "offline allowlist; no dashboards, credentials, network, database or payload values",
+  "baselines": {
+    "data_export_info_slots": 442,
+    "data_export_data_candidates": 270,
+    "v1_operational_columns": 459,
+    "v1_user_columns": 18,
+    "v1_raster_columns": 58,
+    "physical_columns_without_raster": 477,
+    "physical_columns_with_raster": 535,
+    "business_rules": 75,
+    "etl_owned_views": 19,
+    "materialized_facts": 5,
+    "distinct_constraints": 170,
+    "dedicated_index_declarations": 47,
+    "embedded_unique_indexes": 6
+  },
+  "field_counts": {
+    "DATA_EXPORT_DATA_FIELD": 270,
+    "DATA_EXPORT_FIELD": 442,
+    "GRAPHQL_SELECTION": 181,
+    "V1_FACT_COLUMN": 336,
+    "V1_OPERATIONAL_COLUMN": 459,
+    "V1_RASTER_COLUMN": 58,
+    "V1_USER_COLUMN": 18,
+    "V1_VIEW_OUTPUT": 673
+  },
+  "artifact_counts": {
+    "command_default": 1,
+    "command_flag": 37,
+    "constraint": 170,
+    "database_runner": 1,
+    "embedded_unique_index": 6,
+    "entity_source": 11,
+    "index_group": 4,
+    "migration": 58,
+    "procedure": 5,
+    "seed_responsibility": 8,
+    "sql_auxiliary": 3,
+    "table_script": 35,
+    "validation": 24,
+    "view_etl": 19,
+    "view_wrapper": 2,
+    "windows_alias": 2,
+    "windows_script": 15
+  },
+  "unresolved_policy": "owner_role + due_gate + publication_blocked=YES; zero UNCLASSIFIED; acceptor nominal/time remains external",
+  "vertical_slices": {
+    "usuarios": "IMPLEMENTED_IN_SHADOW; current/history + core dimension view; pub compatibility and absence sweep blocked",
+    "governed_references": "OFFLINE_FOUNDATION_COMPLETE; deterministic candidates inert; mutable baselines and activation external"
+  },
+  "external_inputs": [
+    "nomes técnicos dos slots /info não persistidos, a fechar somente após V2-041 na rodada autorizada V2-025d",
+    "tipos/formatos/nullability/cardinalidade completos por contrato de fonte",
+    "owners/aceitantes e manifesto dos consumidores das 19 views e cinco fatos",
+    "retenção/legal hold aprovados por data owner/compliance em V2-045",
+    "export, tokenização, fingerprint, owner e ratificação das referências produtivas mutáveis de V2-035a",
+    "decisão manter/retirar Raster em V2-034a"
+  ]
+}

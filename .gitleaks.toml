@@ -1,0 +1,20 @@
+title = "ETL Data Export V2 secret scanning policy"
+
+[extend]
+useDefault = true
+
+[[allowlists]]
+description = "Exact legacy CLI inventory that resembles a generic API key assignment"
+condition = "AND"
+targetRules = ["generic-api-key"]
+regexTarget = "match"
+paths = ['''(?:^|/)scripts/validation/Build-PortabilityCatalog\.ps1$''']
+regexes = ['''^--validar-api-banco-24h', '--validar-api-banco-24h-detalhado'$''']
+
+[[allowlists]]
+description = "Exact static Windows command inventory in the cutover catalog builder"
+condition = "AND"
+targetRules = ["generic-api-key"]
+regexTarget = "match"
+paths = ['''(?:^|/)scripts/validation/Build-CutoverTopologyCatalog\.ps1$''']
+regexes = ['''08-auditar_api\.bat','verificar''']

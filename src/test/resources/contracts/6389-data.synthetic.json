@@ -1,0 +1,22 @@
+{
+  "data": [
+    {
+      "id": 900002,
+      "corporation_sequence_number": 800001,
+      "fit_p_m_pck_sequence_code": 700001,
+      "finished_at": "04/13/2026",
+      "fit_dpn_performance_finished_at": "2026-04-13T12:00:00-03:00",
+      "updated_at": "2026-01-02T03:04:05-03:00",
+      "reference_number": ""
+    },
+    {
+      "id": 900003,
+      "corporation_sequence_number": 800002,
+      "fit_p_m_pck_sequence_code": null,
+      "finished_at": "13/04/2026",
+      "fit_dpn_performance_finished_at": null,
+      "updated_at": "2026-01-02T06:04:05Z",
+      "reference_number": null
+    }
+  ]
+}

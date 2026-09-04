@@ -1,0 +1,615 @@
+{
+  "manifestVersion": 1,
+  "contractVersion": "governed-references-v1",
+  "roadmapTask": "V2-035a",
+  "localState": "FOUNDATION_OFFLINE_COMPLETE_EXTERNAL_BASELINE_PENDING",
+  "migration": "V008__create_governed_references.sql",
+  "productiveDefaults": false,
+  "migrationCreatesRows": false,
+  "runtimeDirectReferenceAccess": "PROHIBITED",
+  "releaseSelection": "EXPLICIT_RELEASE_ID_ONLY",
+  "validityConvention": "[valid_from,valid_to_exclusive)",
+  "civilDatePolicy": {
+    "businessTimezone": "America/Sao_Paulo",
+    "technicalAuditClock": "SQL_SERVER_UTC",
+    "fixedHorizon": false,
+    "calendarSeedFunction": "ref.ufn_calendar_seed_candidate_v1",
+    "maximumRequestedDays": 3660,
+    "maximumLookbackDays": 31,
+    "candidateAddsBoundedLookbackWhenValidFromIsNotBusiness": true,
+    "lookbackRowsCountInSourceRowsAndCanonicalBytes": true,
+    "consumerVisibleInterval": "CALENDAR_DATE_IN_RELEASE_VALIDITY_ONLY",
+    "languageOrDateFirstDependency": false,
+    "holidayRulesState": "DETERMINISTIC_CANDIDATE_REQUIRES_OWNER_RATIFICATION",
+    "easterAlgorithm": "ANONYMOUS_GREGORIAN_COMPUTUS",
+    "ratificationRequiresContinuousCoverage": true,
+    "billingReferenceRule": "EXACT_LATEST_BUSINESS_DAY_IN_ACTIVE_OR_BOUNDED_LOOKBACK_CONTEXT"
+  },
+  "governance": {
+    "releaseTable": "ref.reference_release",
+    "releaseRegistrationProcedure": "ref.usp_register_reference_release",
+    "importReceiptTable": "ref.reference_import_receipt",
+    "ratificationTable": "ref.reference_release_ratification",
+    "revocationTable": "ref.reference_release_revocation",
+    "mutationPolicy": "APPEND_ONLY_NEW_RELEASE",
+    "contentSeal": "ONE_IMMUTABLE_RECEIPT_BEFORE_RATIFICATION",
+    "ratificationRequiresDistinctAuthorAndApproverRoles": true,
+    "ratificationRequiresDistinctImporterAndApproverRoles": true,
+    "ratificationChecksPhysicalRowCount": true,
+    "ratificationRequiresReceiptSealedAgainstReleaseFingerprint": true,
+    "approvalFingerprintMeaning": "SHA256_OF_APPROVAL_EVIDENCE_NOT_CONTENT_FINGERPRINT",
+    "approvalEvidenceContract": "EVIDENCE_MUST_ATTEST_EXACT_RECEIPT_CONTENT_FINGERPRINT_EXTERNAL_AUTHORITY_REQUIRED",
+    "ratificationSerializesFamilyScopeAndActivation": true,
+    "activationScopesAreIndependent": true,
+    "ratifiedValidityOverlap": "REJECTED_PER_ACTIVATION_SCOPE",
+    "activeDependencyRevocation": "REJECT_BRANCH_REVOCATION_WHILE_ATTRIBUTION_ACTIVE_IN_SAME_SCOPE",
+    "revocationDeletesContent": false,
+    "activePointerOrFallback": "ABSENT"
+  },
+  "families": [
+    {
+      "familyCode": "CALENDAR",
+      "tables": ["ref.calendario"],
+      "grain": ["reference_release_id", "calendar_date"],
+      "lookupKey": ["calendar_date"],
+      "externalBaseline": "OPERATIONAL_HOLIDAY_POLICY_AND_RATIFICATION_REQUIRED",
+      "deterministicCandidate": "ref.ufn_calendar_seed_candidate_v1"
+    },
+    {
+      "familyCode": "PICK_STATUS",
+      "tables": ["ref.status_coleta"],
+      "grain": ["reference_release_id", "raw_status", "valid_from"],
+      "lookupKey": ["raw_status", "as_of_date"],
+      "externalBaseline": "OWNER_RATIFICATION_REQUIRED",
+      "deterministicCandidate": "ref.v_status_coleta_seed_candidate_v1",
+      "normalizer": "ref.ufn_normalize_pick_status_v1",
+      "normalizationVersion": "legacy-pick-status-v1",
+      "normalizationAlgorithm": "TRIM_THEN_LOWERCASE_ASCII_THEN_HYPHEN_AND_EACH_SPACE_TO_UNDERSCORE",
+      "unknownStatus": "PRESERVE_NORMALIZED_SOURCE_IN_STAGING_AUDIT_NO_REFERENCE_MATCH_NO_TERMINAL_INFERENCE"
+    },
+    {
+      "familyCode": "BRANCH_OPERATIONS",
+      "tables": [
+        "ref.filial_operacional",
+        "ref.regiao_destino_alias",
+        "ref.filial_operacional_documento"
+      ],
+      "externalBaseline": "AUTHORIZED_EXPORT_AND_OWNER_RATIFICATION_REQUIRED",
+      "rawDocumentsStored": false
+    },
+    {
+      "familyCode": "OWNED_FLEET",
+      "tables": [
+        "ref.frota_propria_documento",
+        "ref.classificacao_frota_alias",
+        "ref.classificacao_frota_matriz",
+        "ref.classificacao_frota_excecao_token"
+      ],
+      "externalBaseline": "AUTHORIZED_EXPORT_AND_OWNER_RATIFICATION_REQUIRED",
+      "rawDocumentsStored": false,
+      "classificationPolicies": {
+        "DRIVER_OWNERSHIP": [
+          "1_DOCUMENT_TOKEN_MEMBERSHIP_RETURNS_FLEET",
+          "2_DRIVER_OWNERSHIP_OWNER_NAME_TOKEN_EXCEPTION_LOWEST_PRIORITY_NUMBER_WINS",
+          "3_NULL_OR_TRIMMED_EMPTY_DRIVER_OWNERSHIP_CONTRACT_RETURNS_THIRD_PARTY",
+          "4_EXACT_VERSIONED_DRIVER_OWNERSHIP_CONTRACT_ALIAS",
+          "5_NONEMPTY_NO_MATCH_FAIL_CLOSED"
+        ],
+        "VEHICLE_DRIVER_CONTRACT": [
+          "1_EXACT_VERSIONED_VEHICLE_CONTRACT_ALIAS",
+          "2_OWNER_NAME_TOKEN_EXCEPTION_ONLY_WHEN_REQUIRED_VEHICLE_CLASS_MATCHES",
+          "3_NULL_OR_TRIMMED_EMPTY_DRIVER_CONTRACT_MAPS_TO_UNSPECIFIED_THEN_MATRIX",
+          "4_EXACT_VERSIONED_DRIVER_CONTRACT_ALIAS_THEN_MATRIX",
+          "5_NONEMPTY_NO_MATCH_FAIL_CLOSED"
+        ]
+      },
+      "missingInputContract": {
+        "definition": "NULL_OR_TRIMMED_U0020_EMPTY_ONLY",
+        "DRIVER_OWNERSHIP": "THIRD_PARTY_AFTER_MEMBERSHIP_AND_OWNER_EXCEPTION",
+        "VEHICLE_DRIVER_CONTRACT": "UNSPECIFIED_AFTER_VEHICLE_ALIAS_AND_OWNER_EXCEPTION_THEN_MATRIX",
+        "nonEmptyUnknown": "NO_MATCH_FAIL_CLOSED"
+      },
+      "vehicleContractClasses": ["AGGREGATE", "DRIVER"],
+      "driverContractClasses": ["COMPANY", "AGGREGATE", "THIRD_PARTY", "UNSPECIFIED"],
+      "matrixCoverageContract": {
+        "supportedCartesianShape": "2_VEHICLE_CLASSES_X_4_DRIVER_CLASSES",
+        "v008CoverageEnforcement": "NOT_PUBLISHED_NO_CONTENT_IMPORTER_OR_CONSUMER",
+        "missingCell": "NO_MATCH_FAIL_CLOSED",
+        "externalGate": "OWNER_AUTHORIZED_COVERAGE_POLICY_AND_PARITY_REQUIRED_BEFORE_CONSUMPTION"
+      },
+      "policyOutputsRemainIndependent": true,
+      "substringOrRawNameHeuristicFallback": "PROHIBITED"
+    },
+    {
+      "familyCode": "BRANCH_ATTRIBUTION",
+      "tables": ["ref.atribuicao_filial"],
+      "grain": ["reference_release_id", "token_scheme_version", "payer_document_token", "valid_from"],
+      "lookupKey": ["token_scheme_version", "payer_document_token", "as_of_date"],
+      "externalBaseline": "AUTHORIZED_EXPORT_AND_OWNER_RATIFICATION_REQUIRED",
+      "rawDocumentsStored": false,
+      "dependency": "BRANCH_OPERATIONS_RELEASE_ACTIVE_IN_SAME_ACTIVATION_SCOPE"
+    },
+    {
+      "familyCode": "CUBAGE_EXCLUSION",
+      "tables": ["ref.pagador_exclusao_cubagem"],
+      "grain": ["reference_release_id", "token_scheme_version", "payer_document_token", "valid_from"],
+      "lookupKey": ["token_scheme_version", "payer_document_token", "as_of_date"],
+      "externalBaseline": "AUTHORIZED_EXPORT_AND_OWNER_RATIFICATION_REQUIRED",
+      "rawDocumentsStored": false,
+      "emptyAuthorizedBaseline": "SUPPORTED_WITH_ZERO_ROWS_AND_RECEIPT"
+    },
+    {
+      "familyCode": "LOGISTICS_REGION",
+      "tables": ["ref.regiao_logistica_cep", "ref.regiao_logistica_cidade_uf"],
+      "lookupKey": ["CEP_FIRST", "CITY_UF_SECOND", "as_of_date"],
+      "selectorModel": "SEPARATE_TABLES_XOR_BY_CONSTRUCTION",
+      "overlappingCepRanges": "REJECTED",
+      "ufDomain": "EXACT_27_BRAZILIAN_UF_CODES",
+      "externalBaseline": "AUTHORIZED_EXPORT_AND_OWNER_RATIFICATION_REQUIRED"
+    },
+    {
+      "familyCode": "QUOTE_TARIFF",
+      "tables": ["ref.tarifa_rota_uf"],
+      "grain": ["reference_release_id", "origin_uf", "destination_uf", "valid_from"],
+      "lookupKey": ["origin_uf", "destination_uf", "as_of_date"],
+      "routeDirection": "DIRECTED",
+      "amountType": "DECIMAL(19,4)",
+      "missingCombination": "NO_MATCH_FAIL_CLOSED_NEVER_ZERO",
+      "externalBaseline": "AUTHORIZED_EXPORT_AND_OWNER_RATIFICATION_REQUIRED"
+    }
+  ],
+  "documentTokenContract": {
+    "storedShape": "64_LOWERCASE_HEX",
+    "rawDocumentInDatabaseOrRepository": false,
+    "schemeVersionRequired": true,
+    "schemeVersionIsPartOfGrainAndLookup": true,
+    "comparison": "EXACT_BIN2_SCHEME_VERSION_AND_TOKEN",
+    "unknownSchemeVersion": "NO_MATCH_FAIL_CLOSED",
+    "scheme": "OWNER_APPROVED_KEYED_TOKENIZATION",
+    "secretInProcessArgumentsOrArtifacts": false
+  },
+  "canonicalKeyContract": {
+    "input": "OWNER_AUTHORED_CANONICAL_KEY_ALREADY_NORMALIZED",
+    "comparison": "EXACT_BIN2_NORMALIZATION_VERSION_AND_KEY",
+    "normalizationVersionIsPartOfGrainAndLookup": true,
+    "genericNormalizerPublishedInV008": false,
+    "unknownNormalizationVersion": "NO_MATCH_FAIL_CLOSED",
+    "futureConsumer": "REQUIRE_EXPLICIT_IMPLEMENTED_VERSION_WITHOUT_FALLBACK",
+    "externalGate": "OWNER_AUTHORIZED_ALGORITHM_VERSION_AND_PARITY_FIXTURES_REQUIRED",
+    "versionedTables": [
+      "ref.regiao_destino_alias",
+      "ref.classificacao_frota_alias",
+      "ref.regiao_logistica_cidade_uf"
+    ]
+  },
+  "importContract": {
+    "format": "RFC4180_CSV_PER_TYPED_TABLE",
+    "schemaVersionRequired": true,
+    "supportedSchemaVersions": [1],
+    "contractVersionToSchemaVersion": {"governed-references-v1": 1},
+    "releaseIdentity": ["family_code", "scope_code", "release_version"],
+    "requiredEnvelope": [
+      "schema_version",
+      "source_kind",
+      "source_artifact_ref",
+      "source_fingerprint",
+      "source_row_count",
+      "valid_from",
+      "valid_to_exclusive",
+      "reason_code",
+      "author_role"
+    ],
+    "maximumRowsPerRelease": 100000,
+    "maximumBytesPerRelease": 16777216,
+    "maximumRowsInFlight": 1000,
+    "canonicalEncoding": "UTF-8_NO_BOM",
+    "canonicalLineEnding": "LF",
+    "canonicalFileTermination": "EXACTLY_ONE_TRAILING_LF",
+    "canonicalHeader": "EXACT_FILE_COLUMNS_IN_DECLARED_ORDER",
+    "canonicalQuoting": "ALL_NON_NULL_FIELDS_QUOTED_RFC4180_DOUBLE_QUOTE_ESCAPED_BY_DOUBLE_QUOTE",
+    "canonicalHeaderQuoting": "UNQUOTED_DECLARED_PAYLOAD_COLUMN_NAMES",
+    "nullEncoding": "UNQUOTED_BACKSLASH_N",
+    "literalBackslashNEncoding": "QUOTED_BACKSLASH_N",
+    "booleanEncoding": "0_OR_1",
+    "dateEncoding": "YYYY-MM-DD",
+    "integerEncoding": "BASE10_NO_SIGN_FOR_NONNEGATIVE_NO_GROUPING_NO_LEADING_ZERO_EXCEPT_ZERO",
+    "decimalEncoding": "BASE10_DOT_EXACT_DECLARED_SCALE_NO_GROUPING",
+    "textNormalization": "NFC_REQUIRED_INPUT_NOT_TRANSFORMED",
+    "controlCharacters": "U+0000_THROUGH_U+001F_U+007F_THROUGH_U+009F_REJECTED",
+    "canonicalOrdering": "FILE_ORDINAL_THEN_DECLARED_GRAIN_UTF8_UNSIGNED_BYTE_LEXICOGRAPHIC_ASC_AFTER_SCALAR_ENCODING",
+    "packageFraming": {
+      "encoding": "UTF-8_NO_BOM",
+      "lineEnding": "LF",
+      "termination": "EXACTLY_ONE_TRAILING_LF",
+      "magicLine": "GOVERNED_REFERENCES_V1",
+      "schemaVersionLinePrefix": "schema_version=",
+      "familyCodeLinePrefix": "family_code=",
+      "tableLineFieldOrder": ["table", "rows", "bytes", "sha256"],
+      "keyValueSeparator": "=",
+      "fieldSeparator": ";",
+      "tableIdSource": "tableContracts.table",
+      "tableOrder": "fileOrdinal_ASC_WITHIN_FAMILY",
+      "includedTables": "ALL_AND_ONLY_FAMILY_TABLES_EVEN_WHEN_EMPTY"
+    },
+    "fingerprintInput": "CANONICAL_PACKAGE_INDEX_BYTES_NOT_RAW_EXPORT_NOT_ENVELOPE",
+    "fingerprintScope": "CANONICAL_TYPED_CONTENT",
+    "fingerprintAlgorithm": "SHA-256_LOWERCASE_HEX",
+    "sourceRowCountDefinition": "SUM_OF_DATA_ROWS_ACROSS_FAMILY_FILES_EXCLUDING_HEADERS",
+    "importedByteCountDefinition": "SUM_OF_CANONICAL_TABLE_BYTES_INCLUDING_HEADERS",
+    "applicableTablePolicy": "ALL_AND_ONLY_FAMILY_TABLES_PRESENT_EVEN_WHEN_EMPTY",
+    "familyFilesRequiredEvenWhenEmpty": true,
+    "unknownOrDuplicateColumns": "REJECTED",
+    "missingRequiredColumn": "REJECTED",
+    "invalidUnicodeOrControlCharacter": "REJECTED",
+    "duplicateGrain": "REJECTED",
+    "overlap": "REJECTED_BEFORE_RECEIPT",
+    "childValidityOutsideRelease": "REJECTED_EXCEPT_CALENDAR_BOUNDED_LOOKBACK_CONTEXT",
+    "transaction": "ALL_OR_NOTHING",
+    "relationalValidationAndPromotion": "SET_BASED_SQL",
+    "javaFullDatasetCollections": "PROHIBITED",
+    "retry": "REGISTER_PROCEDURE_RETURNS_REPLAY_ONLY_FOR_EXACT_ENVELOPE_OTHERWISE_CONFLICT",
+    "receipt": "FINGERPRINT_ROW_COUNT_BYTE_LIMIT_AND_PHYSICAL_ROW_COUNT_SEAL",
+    "ratificationIsSeparateFromImport": true,
+    "releaseRegistrationEntrypointPublishedInV008": true,
+    "contentImportEntrypointPublishedInV008": false,
+    "importEntrypointPublishedInV008": false,
+    "futureImporterAuthority": "EXTERNAL_INPUT_REQUIRED"
+  },
+  "tableContracts": [
+    {
+      "fileOrdinal": 1,
+      "familyCode": "CALENDAR",
+      "table": "ref.calendario",
+      "fileName": "01_calendario.csv",
+      "grain": ["calendar_date"],
+      "payloadColumns": ["calendar_date","date_key","iso_weekday","is_weekend","holiday_kind","holiday_code","holiday_label","is_business_day","billing_reference_date"],
+      "columns": [
+        {"name":"reference_release_id","type":"BIGINT","nullable":false,"source":"ENVELOPE_RELEASE_ID"},
+        {"name":"family_code","type":"NVARCHAR(32)","nullable":false,"source":"ENVELOPE_FAMILY_CODE"},
+        {"name":"calendar_date","type":"DATE","nullable":false,"source":"FILE"},
+        {"name":"date_key","type":"INT","nullable":false,"source":"FILE"},
+        {"name":"iso_weekday","type":"TINYINT","nullable":false,"source":"FILE"},
+        {"name":"is_weekend","type":"BIT","nullable":false,"source":"FILE"},
+        {"name":"holiday_kind","type":"NVARCHAR(16)","nullable":false,"source":"FILE"},
+        {"name":"holiday_code","type":"NVARCHAR(64)","nullable":true,"source":"FILE"},
+        {"name":"holiday_label","type":"NVARCHAR(128)","nullable":true,"source":"FILE"},
+        {"name":"is_business_day","type":"BIT","nullable":false,"source":"FILE"},
+        {"name":"billing_reference_date","type":"DATE","nullable":false,"source":"FILE"}
+      ]
+    },
+    {
+      "fileOrdinal": 2,
+      "familyCode": "PICK_STATUS",
+      "table": "ref.status_coleta",
+      "fileName": "02_status_coleta.csv",
+      "grain": ["raw_status", "valid_from"],
+      "payloadColumns": ["raw_status","normalization_version","canonical_status","display_label","is_terminal","valid_from","valid_to_exclusive","reason_code"],
+      "columns": [
+        {"name":"reference_release_id","type":"BIGINT","nullable":false,"source":"ENVELOPE_RELEASE_ID"},
+        {"name":"family_code","type":"NVARCHAR(32)","nullable":false,"source":"ENVELOPE_FAMILY_CODE"},
+        {"name":"raw_status","type":"NVARCHAR(50)","nullable":false,"source":"FILE"},
+        {"name":"normalization_version","type":"NVARCHAR(64)","nullable":false,"source":"FILE"},
+        {"name":"canonical_status","type":"NVARCHAR(50)","nullable":false,"source":"FILE"},
+        {"name":"display_label","type":"NVARCHAR(100)","nullable":false,"source":"FILE"},
+        {"name":"is_terminal","type":"BIT","nullable":false,"source":"FILE"},
+        {"name":"valid_from","type":"DATE","nullable":false,"source":"FILE"},
+        {"name":"valid_to_exclusive","type":"DATE","nullable":false,"source":"FILE"},
+        {"name":"reason_code","type":"NVARCHAR(64)","nullable":false,"source":"FILE"}
+      ]
+    },
+    {
+      "fileOrdinal": 3,
+      "familyCode": "BRANCH_OPERATIONS",
+      "table": "ref.filial_operacional",
+      "fileName": "03_filial_operacional.csv",
+      "grain": ["branch_code"],
+      "payloadColumns": ["branch_code","branch_label","reason_code"],
+      "columns": [
+        {"name":"reference_release_id","type":"BIGINT","nullable":false,"source":"ENVELOPE_RELEASE_ID"},
+        {"name":"family_code","type":"NVARCHAR(32)","nullable":false,"source":"ENVELOPE_FAMILY_CODE"},
+        {"name":"branch_code","type":"NVARCHAR(32)","nullable":false,"source":"FILE"},
+        {"name":"branch_label","type":"NVARCHAR(128)","nullable":false,"source":"FILE"},
+        {"name":"reason_code","type":"NVARCHAR(64)","nullable":false,"source":"FILE"}
+      ]
+    },
+    {
+      "fileOrdinal": 4,
+      "familyCode": "BRANCH_OPERATIONS",
+      "table": "ref.regiao_destino_alias",
+      "fileName": "04_regiao_destino_alias.csv",
+      "grain": ["alias_scope", "normalization_version", "normalized_alias", "valid_from"],
+      "payloadColumns": ["alias_scope","normalized_alias","normalization_version","branch_code","valid_from","valid_to_exclusive","reason_code"],
+      "columns": [
+        {"name":"reference_release_id","type":"BIGINT","nullable":false,"source":"ENVELOPE_RELEASE_ID"},
+        {"name":"family_code","type":"NVARCHAR(32)","nullable":false,"source":"ENVELOPE_FAMILY_CODE"},
+        {"name":"alias_scope","type":"NVARCHAR(32)","nullable":false,"source":"FILE"},
+        {"name":"normalized_alias","type":"NVARCHAR(128)","nullable":false,"source":"FILE"},
+        {"name":"normalization_version","type":"NVARCHAR(64)","nullable":false,"source":"FILE"},
+        {"name":"branch_code","type":"NVARCHAR(32)","nullable":false,"source":"FILE"},
+        {"name":"valid_from","type":"DATE","nullable":false,"source":"FILE"},
+        {"name":"valid_to_exclusive","type":"DATE","nullable":false,"source":"FILE"},
+        {"name":"reason_code","type":"NVARCHAR(64)","nullable":false,"source":"FILE"}
+      ]
+    },
+    {
+      "fileOrdinal": 5,
+      "familyCode": "BRANCH_OPERATIONS",
+      "table": "ref.filial_operacional_documento",
+      "fileName": "05_filial_operacional_documento.csv",
+      "grain": ["token_scheme_version", "document_token", "valid_from"],
+      "payloadColumns": ["document_token","token_scheme_version","branch_code","valid_from","valid_to_exclusive","reason_code"],
+      "columns": [
+        {"name":"reference_release_id","type":"BIGINT","nullable":false,"source":"ENVELOPE_RELEASE_ID"},
+        {"name":"family_code","type":"NVARCHAR(32)","nullable":false,"source":"ENVELOPE_FAMILY_CODE"},
+        {"name":"document_token","type":"CHAR(64)","nullable":false,"source":"FILE"},
+        {"name":"token_scheme_version","type":"NVARCHAR(64)","nullable":false,"source":"FILE"},
+        {"name":"branch_code","type":"NVARCHAR(32)","nullable":false,"source":"FILE"},
+        {"name":"valid_from","type":"DATE","nullable":false,"source":"FILE"},
+        {"name":"valid_to_exclusive","type":"DATE","nullable":false,"source":"FILE"},
+        {"name":"reason_code","type":"NVARCHAR(64)","nullable":false,"source":"FILE"}
+      ]
+    },
+    {
+      "fileOrdinal": 6,
+      "familyCode": "OWNED_FLEET",
+      "table": "ref.frota_propria_documento",
+      "fileName": "06_frota_propria_documento.csv",
+      "grain": ["classification_scope", "token_scheme_version", "document_token", "valid_from"],
+      "payloadColumns": ["classification_scope","document_token","token_scheme_version","valid_from","valid_to_exclusive","reason_code"],
+      "columns": [
+        {"name":"reference_release_id","type":"BIGINT","nullable":false,"source":"ENVELOPE_RELEASE_ID"},
+        {"name":"family_code","type":"NVARCHAR(32)","nullable":false,"source":"ENVELOPE_FAMILY_CODE"},
+        {"name":"classification_scope","type":"NVARCHAR(32)","nullable":false,"source":"FILE"},
+        {"name":"document_token","type":"CHAR(64)","nullable":false,"source":"FILE"},
+        {"name":"token_scheme_version","type":"NVARCHAR(64)","nullable":false,"source":"FILE"},
+        {"name":"valid_from","type":"DATE","nullable":false,"source":"FILE"},
+        {"name":"valid_to_exclusive","type":"DATE","nullable":false,"source":"FILE"},
+        {"name":"reason_code","type":"NVARCHAR(64)","nullable":false,"source":"FILE"}
+      ]
+    },
+    {
+      "fileOrdinal": 7,
+      "familyCode": "OWNED_FLEET",
+      "table": "ref.classificacao_frota_alias",
+      "fileName": "07_classificacao_frota_alias.csv",
+      "grain": ["classification_scope", "alias_scope", "normalization_version", "normalized_alias", "valid_from"],
+      "payloadColumns": ["classification_scope","alias_scope","normalized_alias","normalization_version","contract_class","valid_from","valid_to_exclusive","reason_code"],
+      "columns": [
+        {"name":"reference_release_id","type":"BIGINT","nullable":false,"source":"ENVELOPE_RELEASE_ID"},
+        {"name":"family_code","type":"NVARCHAR(32)","nullable":false,"source":"ENVELOPE_FAMILY_CODE"},
+        {"name":"classification_scope","type":"NVARCHAR(32)","nullable":false,"source":"FILE"},
+        {"name":"alias_scope","type":"NVARCHAR(32)","nullable":false,"source":"FILE"},
+        {"name":"normalized_alias","type":"NVARCHAR(128)","nullable":false,"source":"FILE"},
+        {"name":"normalization_version","type":"NVARCHAR(64)","nullable":false,"source":"FILE"},
+        {"name":"contract_class","type":"NVARCHAR(32)","nullable":false,"source":"FILE"},
+        {"name":"valid_from","type":"DATE","nullable":false,"source":"FILE"},
+        {"name":"valid_to_exclusive","type":"DATE","nullable":false,"source":"FILE"},
+        {"name":"reason_code","type":"NVARCHAR(64)","nullable":false,"source":"FILE"}
+      ]
+    },
+    {
+      "fileOrdinal": 8,
+      "familyCode": "OWNED_FLEET",
+      "table": "ref.classificacao_frota_matriz",
+      "fileName": "08_classificacao_frota_matriz.csv",
+      "grain": ["classification_scope", "vehicle_contract_class", "driver_contract_class", "valid_from"],
+      "payloadColumns": ["classification_scope","vehicle_contract_class","driver_contract_class","classification_code","valid_from","valid_to_exclusive","reason_code"],
+      "columns": [
+        {"name":"reference_release_id","type":"BIGINT","nullable":false,"source":"ENVELOPE_RELEASE_ID"},
+        {"name":"family_code","type":"NVARCHAR(32)","nullable":false,"source":"ENVELOPE_FAMILY_CODE"},
+        {"name":"classification_scope","type":"NVARCHAR(32)","nullable":false,"source":"FILE"},
+        {"name":"vehicle_contract_class","type":"NVARCHAR(32)","nullable":false,"source":"FILE"},
+        {"name":"driver_contract_class","type":"NVARCHAR(32)","nullable":false,"source":"FILE"},
+        {"name":"classification_code","type":"NVARCHAR(32)","nullable":false,"source":"FILE"},
+        {"name":"valid_from","type":"DATE","nullable":false,"source":"FILE"},
+        {"name":"valid_to_exclusive","type":"DATE","nullable":false,"source":"FILE"},
+        {"name":"reason_code","type":"NVARCHAR(64)","nullable":false,"source":"FILE"}
+      ]
+    },
+    {
+      "fileOrdinal": 9,
+      "familyCode": "OWNED_FLEET",
+      "table": "ref.classificacao_frota_excecao_token",
+      "fileName": "09_classificacao_frota_excecao_token.csv",
+      "grain": ["classification_scope", "exception_scope", "token_scheme_version", "subject_token", "valid_from"],
+      "payloadColumns": ["classification_scope","exception_scope","subject_token","token_scheme_version","required_vehicle_contract_class","classification_code","priority","valid_from","valid_to_exclusive","reason_code"],
+      "columns": [
+        {"name":"reference_release_id","type":"BIGINT","nullable":false,"source":"ENVELOPE_RELEASE_ID"},
+        {"name":"family_code","type":"NVARCHAR(32)","nullable":false,"source":"ENVELOPE_FAMILY_CODE"},
+        {"name":"classification_scope","type":"NVARCHAR(32)","nullable":false,"source":"FILE"},
+        {"name":"exception_scope","type":"NVARCHAR(32)","nullable":false,"source":"FILE"},
+        {"name":"subject_token","type":"CHAR(64)","nullable":false,"source":"FILE"},
+        {"name":"token_scheme_version","type":"NVARCHAR(64)","nullable":false,"source":"FILE"},
+        {"name":"required_vehicle_contract_class","type":"NVARCHAR(32)","nullable":true,"source":"FILE"},
+        {"name":"classification_code","type":"NVARCHAR(32)","nullable":false,"source":"FILE"},
+        {"name":"priority","type":"SMALLINT","nullable":false,"source":"FILE"},
+        {"name":"valid_from","type":"DATE","nullable":false,"source":"FILE"},
+        {"name":"valid_to_exclusive","type":"DATE","nullable":false,"source":"FILE"},
+        {"name":"reason_code","type":"NVARCHAR(64)","nullable":false,"source":"FILE"}
+      ]
+    },
+    {
+      "fileOrdinal": 10,
+      "familyCode": "BRANCH_ATTRIBUTION",
+      "table": "ref.atribuicao_filial",
+      "fileName": "10_atribuicao_filial.csv",
+      "grain": ["token_scheme_version", "payer_document_token", "valid_from"],
+      "payloadColumns": ["payer_document_token","token_scheme_version","branch_release_scope_code","branch_release_version","branch_code","valid_from","valid_to_exclusive","reason_code"],
+      "sourceOnlyColumns": [
+        {"name":"branch_release_scope_code","type":"NVARCHAR(128)","nullable":false},
+        {"name":"branch_release_version","type":"NVARCHAR(64)","nullable":false}
+      ],
+      "foreignKeyResolution": {
+        "familyCode": "BRANCH_OPERATIONS",
+        "scopeColumn": "branch_release_scope_code",
+        "versionColumn": "branch_release_version",
+        "resolvedColumn": "branch_reference_release_id",
+        "mustBeRatifiedInSameActivationScope": true
+      },
+      "columns": [
+        {"name":"reference_release_id","type":"BIGINT","nullable":false,"source":"ENVELOPE_RELEASE_ID"},
+        {"name":"family_code","type":"NVARCHAR(32)","nullable":false,"source":"ENVELOPE_FAMILY_CODE"},
+        {"name":"payer_document_token","type":"CHAR(64)","nullable":false,"source":"FILE"},
+        {"name":"token_scheme_version","type":"NVARCHAR(64)","nullable":false,"source":"FILE"},
+        {"name":"branch_reference_release_id","type":"BIGINT","nullable":false,"source":"RESOLVED_FOREIGN_KEY"},
+        {"name":"branch_code","type":"NVARCHAR(32)","nullable":false,"source":"FILE"},
+        {"name":"valid_from","type":"DATE","nullable":false,"source":"FILE"},
+        {"name":"valid_to_exclusive","type":"DATE","nullable":false,"source":"FILE"},
+        {"name":"reason_code","type":"NVARCHAR(64)","nullable":false,"source":"FILE"}
+      ]
+    },
+    {
+      "fileOrdinal": 11,
+      "familyCode": "CUBAGE_EXCLUSION",
+      "table": "ref.pagador_exclusao_cubagem",
+      "fileName": "11_pagador_exclusao_cubagem.csv",
+      "grain": ["token_scheme_version", "payer_document_token", "valid_from"],
+      "payloadColumns": ["payer_document_token","token_scheme_version","valid_from","valid_to_exclusive","reason_code"],
+      "columns": [
+        {"name":"reference_release_id","type":"BIGINT","nullable":false,"source":"ENVELOPE_RELEASE_ID"},
+        {"name":"family_code","type":"NVARCHAR(32)","nullable":false,"source":"ENVELOPE_FAMILY_CODE"},
+        {"name":"payer_document_token","type":"CHAR(64)","nullable":false,"source":"FILE"},
+        {"name":"token_scheme_version","type":"NVARCHAR(64)","nullable":false,"source":"FILE"},
+        {"name":"valid_from","type":"DATE","nullable":false,"source":"FILE"},
+        {"name":"valid_to_exclusive","type":"DATE","nullable":false,"source":"FILE"},
+        {"name":"reason_code","type":"NVARCHAR(64)","nullable":false,"source":"FILE"}
+      ]
+    },
+    {
+      "fileOrdinal": 12,
+      "familyCode": "LOGISTICS_REGION",
+      "table": "ref.regiao_logistica_cep",
+      "fileName": "12_regiao_logistica_cep.csv",
+      "grain": ["cep_start", "cep_end", "valid_from"],
+      "payloadColumns": ["cep_start","cep_end","region_code","priority","valid_from","valid_to_exclusive","reason_code"],
+      "columns": [
+        {"name":"reference_release_id","type":"BIGINT","nullable":false,"source":"ENVELOPE_RELEASE_ID"},
+        {"name":"family_code","type":"NVARCHAR(32)","nullable":false,"source":"ENVELOPE_FAMILY_CODE"},
+        {"name":"cep_start","type":"CHAR(8)","nullable":false,"source":"FILE"},
+        {"name":"cep_end","type":"CHAR(8)","nullable":false,"source":"FILE"},
+        {"name":"region_code","type":"NVARCHAR(64)","nullable":false,"source":"FILE"},
+        {"name":"priority","type":"SMALLINT","nullable":false,"source":"FILE"},
+        {"name":"valid_from","type":"DATE","nullable":false,"source":"FILE"},
+        {"name":"valid_to_exclusive","type":"DATE","nullable":false,"source":"FILE"},
+        {"name":"reason_code","type":"NVARCHAR(64)","nullable":false,"source":"FILE"}
+      ]
+    },
+    {
+      "fileOrdinal": 13,
+      "familyCode": "LOGISTICS_REGION",
+      "table": "ref.regiao_logistica_cidade_uf",
+      "fileName": "13_regiao_logistica_cidade_uf.csv",
+      "grain": ["uf", "city_normalization_version", "normalized_city", "valid_from"],
+      "payloadColumns": ["normalized_city","city_normalization_version","uf","region_code","priority","valid_from","valid_to_exclusive","reason_code"],
+      "columns": [
+        {"name":"reference_release_id","type":"BIGINT","nullable":false,"source":"ENVELOPE_RELEASE_ID"},
+        {"name":"family_code","type":"NVARCHAR(32)","nullable":false,"source":"ENVELOPE_FAMILY_CODE"},
+        {"name":"normalized_city","type":"NVARCHAR(128)","nullable":false,"source":"FILE"},
+        {"name":"city_normalization_version","type":"NVARCHAR(64)","nullable":false,"source":"FILE"},
+        {"name":"uf","type":"CHAR(2)","nullable":false,"source":"FILE"},
+        {"name":"region_code","type":"NVARCHAR(64)","nullable":false,"source":"FILE"},
+        {"name":"priority","type":"SMALLINT","nullable":false,"source":"FILE"},
+        {"name":"valid_from","type":"DATE","nullable":false,"source":"FILE"},
+        {"name":"valid_to_exclusive","type":"DATE","nullable":false,"source":"FILE"},
+        {"name":"reason_code","type":"NVARCHAR(64)","nullable":false,"source":"FILE"}
+      ]
+    },
+    {
+      "fileOrdinal": 14,
+      "familyCode": "QUOTE_TARIFF",
+      "table": "ref.tarifa_rota_uf",
+      "fileName": "14_tarifa_rota_uf.csv",
+      "grain": ["origin_uf", "destination_uf", "valid_from"],
+      "payloadColumns": ["origin_uf","destination_uf","coverage_state","minimum_amount","currency_code","unit_code","rounding_mode","valid_from","valid_to_exclusive","reason_code"],
+      "columns": [
+        {"name":"reference_release_id","type":"BIGINT","nullable":false,"source":"ENVELOPE_RELEASE_ID"},
+        {"name":"family_code","type":"NVARCHAR(32)","nullable":false,"source":"ENVELOPE_FAMILY_CODE"},
+        {"name":"origin_uf","type":"CHAR(2)","nullable":false,"source":"FILE"},
+        {"name":"destination_uf","type":"CHAR(2)","nullable":false,"source":"FILE"},
+        {"name":"coverage_state","type":"NVARCHAR(16)","nullable":false,"source":"FILE"},
+        {"name":"minimum_amount","type":"DECIMAL(19, 4)","nullable":true,"source":"FILE"},
+        {"name":"currency_code","type":"CHAR(3)","nullable":false,"source":"FILE"},
+        {"name":"unit_code","type":"NVARCHAR(32)","nullable":false,"source":"FILE"},
+        {"name":"rounding_mode","type":"NVARCHAR(24)","nullable":false,"source":"FILE"},
+        {"name":"valid_from","type":"DATE","nullable":false,"source":"FILE"},
+        {"name":"valid_to_exclusive","type":"DATE","nullable":false,"source":"FILE"},
+        {"name":"reason_code","type":"NVARCHAR(64)","nullable":false,"source":"FILE"}
+      ]
+    }
+  ],
+  "canonicalGoldenFixture": {
+    "schemaVersion": 1,
+    "familyCode": "CALENDAR",
+    "table": "ref.calendario",
+    "rowCount": 2,
+    "canonicalByteCount": 299,
+    "canonicalBytesBase64": "Y2FsZW5kYXJfZGF0ZSxkYXRlX2tleSxpc29fd2Vla2RheSxpc193ZWVrZW5kLGhvbGlkYXlfa2luZCxob2xpZGF5X2NvZGUsaG9saWRheV9sYWJlbCxpc19idXNpbmVzc19kYXksYmlsbGluZ19yZWZlcmVuY2VfZGF0ZQoiMjAzNi0wMS0wNyIsIjIwMzYwMTA3IiwiMSIsIjAiLCJOT05FIixcTixcTiwiMSIsIjIwMzYtMDEtMDciCiIyMDM2LTAxLTA4IiwiMjAzNjAxMDgiLCIyIiwiMCIsIk9QRVJBVElPTkFMIiwiU1lOVEhFVElDX0VWRU5UIiwiUsOzdHVsbyAiInNpbnTDqXRpY28iIiwg8J+YgCIsIjAiLCIyMDM2LTAxLTA3Igo=",
+    "expectedTableSha256": "c4653e499d4ab82e1cb971320d7d58a6a81793ee5783903c1c42ad304d5767db",
+    "expectedPackageIndexSha256": "c2521928e1e1db2049e9236975e5690d5d91b80939af6b06df6b252fbec246b2",
+    "covers": ["NULL","COMMA","DOUBLE_QUOTE","NFC_ACCENT","SUPPLEMENTARY_UNICODE","TERMINAL_LF"]
+  },
+  "packageIndexGoldenFixture": {
+    "schemaVersion": 1,
+    "familyCode": "BRANCH_OPERATIONS",
+    "tables": [
+      {
+        "table": "ref.filial_operacional",
+        "rowCount": 1,
+        "canonicalByteCount": 97,
+        "canonicalBytesBase64": "YnJhbmNoX2NvZGUsYnJhbmNoX2xhYmVsLHJlYXNvbl9jb2RlCiJCUkFOQ0hfU1lOVEhFVElDIiwiUsOzdHVsbyBzaW50w6l0aWNvIiwiU1lOVEhFVElDX0ZJWFRVUkUiCg==",
+        "expectedTableSha256": "29bcdc1b5c194425369ec883b2774b33e4ccc3ef31e2935a0efef834f282dbbb"
+      },
+      {
+        "table": "ref.regiao_destino_alias",
+        "rowCount": 0,
+        "canonicalByteCount": 105,
+        "canonicalBytesBase64": "YWxpYXNfc2NvcGUsbm9ybWFsaXplZF9hbGlhcyxub3JtYWxpemF0aW9uX3ZlcnNpb24sYnJhbmNoX2NvZGUsdmFsaWRfZnJvbSx2YWxpZF90b19leGNsdXNpdmUscmVhc29uX2NvZGUK",
+        "expectedTableSha256": "f56a1aa90b65d8435c742ca65e9ad24edde624d457b8bedaaa6bdb5816be6a78"
+      },
+      {
+        "table": "ref.filial_operacional_documento",
+        "rowCount": 0,
+        "canonicalByteCount": 90,
+        "canonicalBytesBase64": "ZG9jdW1lbnRfdG9rZW4sdG9rZW5fc2NoZW1lX3ZlcnNpb24sYnJhbmNoX2NvZGUsdmFsaWRfZnJvbSx2YWxpZF90b19leGNsdXNpdmUscmVhc29uX2NvZGUK",
+        "expectedTableSha256": "25f24914565f593b3d382af430fc303927550d47c32b225f9c8fe69657a682f0"
+      }
+    ],
+    "expectedIndexByteCount": 434,
+    "expectedIndexBytesBase64": "R09WRVJORURfUkVGRVJFTkNFU19WMQpzY2hlbWFfdmVyc2lvbj0xCmZhbWlseV9jb2RlPUJSQU5DSF9PUEVSQVRJT05TCnRhYmxlPXJlZi5maWxpYWxfb3BlcmFjaW9uYWw7cm93cz0xO2J5dGVzPTk3O3NoYTI1Nj0yOWJjZGMxYjVjMTk0NDI1MzY5ZWM4ODNiMjc3NGIzM2U0Y2NjM2VmMzFlMjkzNWEwZWZlZjgzNGYyODJkYmJiCnRhYmxlPXJlZi5yZWdpYW9fZGVzdGlub19hbGlhcztyb3dzPTA7Ynl0ZXM9MTA1O3NoYTI1Nj1mNTZhMWFhOTBiNjVkODQzNWM3NDJjYTY1ZTlhZDI0ZWRkZTYyNGQ0NTdiOGJlZGFhYTZiZGI1ODE2YmU2YTc4CnRhYmxlPXJlZi5maWxpYWxfb3BlcmFjaW9uYWxfZG9jdW1lbnRvO3Jvd3M9MDtieXRlcz05MDtzaGEyNTY9MjVmMjQ5MTQ1NjVmNTkzYjNkMzgyYWY0MzBmYzMwMzkyNzU1MGQ0N2MzMmIyMjVmOWM4ZmU2OTY1N2E2ODJmMAo=",
+    "expectedPackageIndexSha256": "86bbb8c89732f18050e503b447d2edbfd73186051ac12e29f4b3a4bb0371ba73",
+    "covers": ["MULTI_TABLE_FAMILY","FILE_ORDINAL_ORDER","EMPTY_REQUIRED_FILES","EXACT_INDEX_BYTES"]
+  },
+  "canonicalDistinctionFixture": {
+    "nullBytesUtf8Escaped": "value\\n\\N\\n",
+    "emptyStringBytesUtf8Escaped": "value\\n\"\"\\n",
+    "expectedNullSha256": "c372001f69cbc676d0ba64dd0670bfb81a9da16b769a79e8c3ccf3dffa5b169c",
+    "expectedEmptyStringSha256": "c693bd5bb17fb0a9d2a31a0d0f0438f69256513cf5b22883e5b230466741aeb0"
+  },
+  "externalGates": [
+    {
+      "gate": "MUTABLE_REFERENCE_BASELINES",
+      "ownerRole": "DATA_OWNER",
+      "condition": "AUTHORIZED_EXPORT_WITH_SANITIZED_COUNT_AND_FINGERPRINT"
+    },
+    {
+      "gate": "REFERENCE_RATIFICATION",
+      "ownerRole": "DATA_OWNER_AND_PLATFORM_OR_DBA",
+      "condition": "DISTINCT_APPROVAL_EVIDENCE_AND_PARITY"
+    },
+    {
+      "gate": "PRODUCTIVE_ACTIVATION",
+      "ownerRole": "OPERATIONS",
+      "condition": "AUTHORIZED_RELEASE_AFTER_CONSUMER_PARITY"
+    }
+  ],
+  "verification": {
+    "structuralValidator": "database/validation/030_validate_governed_references.sql",
+    "rollbackExercise": "database/validation/031_exercise_governed_references_rollback.sql",
+    "migratorExercise": "database/validation/032_exercise_governed_references_migrator_rollback.sql",
+    "negativeExercise": "database/validation/033_exercise_governed_references_negative_rollback.sql",
+    "concurrencyGate": "scripts/validation/Test-GovernedReferencesConcurrency.ps1",
+    "showplanExercise": "database/validation/034_validate_governed_references_showplan.sql",
+    "showplanGate": "scripts/validation/Test-GovernedReferencesShowplan.ps1",
+    "manifestGate": "scripts/validation/Test-GovernedReferencesManifest.ps1"
+  }
+}

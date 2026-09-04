@@ -1,0 +1,17 @@
+{
+  "observedSummary": {
+    "fieldCount": 44,
+    "filterCount": 6,
+    "classification": "HISTORICAL_SANITIZED_OBSERVATION"
+  },
+  "fields": [
+    {"name": "sequence_code", "type": "integer", "label": "Sequência de raiz sintética"},
+    {"name": "opening_at_date", "type": "date", "label": "Abertura sintética"},
+    {"name": "icm_fis_fit_corporation_sequence_number", "type": "integer", "label": "Relação de minuta sintética"},
+    {"name": "icm_fis_ioe_number", "type": "integer", "label": "Relação de invoice sintética"}
+  ],
+  "filters": [
+    {"name": "opening_at_date", "type": "date", "label": "Data de abertura sintética"}
+  ],
+  "syntheticOnly": true
+}

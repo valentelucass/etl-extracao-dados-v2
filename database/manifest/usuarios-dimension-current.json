@@ -1,0 +1,80 @@
+{
+  "manifestVersion": 1,
+  "roadmapTask": "V2-035b-USUARIOS",
+  "localState": "IMPLEMENTED_IN_SHADOW",
+  "migration": "V009__create_usuario_dimension_current_view.sql",
+  "prerequisite": {
+    "roadmapTask": "V2-033",
+    "manifest": "usuarios-current-history.json",
+    "manifestFingerprint": "d6bad37cc6ce411acdc705c42817fd86a2526f3e2e26d5e05f29dd2c781ff0b7",
+    "current": "core.usuario",
+    "history": "core.usuario_history"
+  },
+  "object": {
+    "schema": "core",
+    "name": "v_usuario_dimension_current_v1",
+    "type": "SCHEMABOUND_VIEW",
+    "columns": [
+      "usuario_id",
+      "environment_name",
+      "source_instance",
+      "tenant_scope",
+      "source_key_token",
+      "source_key_wire_type",
+      "name_presence",
+      "usuario_name",
+      "last_changed_at_utc",
+      "last_seen_at_utc"
+    ]
+  },
+  "grain": {
+    "primary": ["usuario_id"],
+    "alternate": [
+      "environment_name",
+      "source_instance",
+      "tenant_scope",
+      "source_key_token"
+    ],
+    "fixedEntity": "usuarios",
+    "maximumRowsPerCurrentUser": 1,
+    "historyCanMultiplyGrain": false
+  },
+  "projection": {
+    "activePredicate": "active = CONVERT(BIT, 1)",
+    "applicationMode": "SET_BASED_VIEW",
+    "historyJoin": "PROHIBITED",
+    "distinctAggregationWindow": "PROHIBITED",
+    "sourceKeyAlias": "SOURCE_KEY_TOKEN_NOT_LEGACY_USER_ID",
+    "nameNormalization": "NONE_PRESERVE_VALIDATED_VALUE",
+    "namePresence": ["ABSENT", "NULL", "VALUE"],
+    "timestamps": "TECHNICAL_UTC_NOT_SOURCE_FRESHNESS",
+    "exposedHashes": false,
+    "exposedExecutionIds": false,
+    "exposedActiveConstant": false
+  },
+  "security": {
+    "newPrincipals": [],
+    "newRoles": [],
+    "selectGrants": [],
+    "publicSelect": false,
+    "runtimeSelect": false,
+    "explicitPublicDeny": false,
+    "newIndexes": []
+  },
+  "consumerBoundary": {
+    "approvedConsumerContract": false,
+    "pubObject": "DEFERRED_TO_V2_037",
+    "legacyAlias": "pub.vw_dim_usuarios",
+    "legacyColumnAliases": "DEFERRED_TO_V2_037",
+    "legacyTrim": "DEFERRED_TO_V2_037",
+    "routingGrantsCutover": "PROHIBITED_IN_THIS_SLICE"
+  },
+  "verification": {
+    "structuralValidator": "database/validation/035_validate_usuarios_dimension_current.sql",
+    "rollbackExercise": "database/validation/036_exercise_usuarios_dimension_current_rollback.sql",
+    "showplanExercise": "database/validation/037_validate_usuarios_dimension_current_showplan.sql",
+    "manifestGate": "scripts/validation/Test-UsuariosDimensionCurrentManifest.ps1",
+    "showplanGate": "scripts/validation/Test-UsuariosDimensionCurrentShowplan.ps1",
+    "underlyingReplayEvidence": "database/validation/027_exercise_usuarios_current_history_rollback.sql"
+  }
+}

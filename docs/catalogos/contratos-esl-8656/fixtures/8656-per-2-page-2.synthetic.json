@@ -1,0 +1,23 @@
+{
+  "data": [
+    {
+      "corporation_sequence_number": 8656003,
+      "type": "Freight::Synthetic",
+      "service_at": "2026-07-15T10:00:00-03:00",
+      "invoices_volumes": 1,
+      "taxed_weight": "300.000",
+      "invoices_value": "3000.00",
+      "total": "300.00",
+      "service_type": "synthetic-service-c",
+      "fit_crn_psn_nickname": "synthetic-origin-branch-c",
+      "fit_dpn_delivery_prediction_at": "2026-07-18T18:00:00-03:00",
+      "fit_dyn_name": "synthetic-destination-c",
+      "fit_dyn_drt_nickname": "synthetic-destination-branch-c",
+      "fit_fsn_name": "synthetic-classification-c",
+      "fit_fln_status": "pending",
+      "fit_fln_cln_nickname": "synthetic-current-branch-c",
+      "fit_o_n_name": "synthetic-origin-c",
+      "fit_o_n_drt_nickname": "synthetic-origin-branch-c"
+    }
+  ]
+}

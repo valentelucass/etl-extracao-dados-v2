@@ -1,0 +1,21 @@
+{
+  "observedSummary": {
+    "fieldCount": 91,
+    "filterCount": 18,
+    "classification": "HISTORICAL_SANITIZED_OBSERVATION"
+  },
+  "fields": [
+    {"name": "sequence_code", "type": "integer", "label": "Identificador de sequência sintético"},
+    {"name": "pick_sequence_code", "type": "integer", "label": "Referência de pick sintética"},
+    {"name": "mft_mfs_number", "type": "integer", "label": "Referência MDF-e sintética"},
+    {"name": "status", "type": "string", "label": "Status sintético"},
+    {"name": "created_at", "type": "datetime", "label": "Criação sintética"},
+    {"name": "departured_at", "type": "datetime", "label": "Saída sintética"},
+    {"name": "closed_at", "type": "datetime", "label": "Fechamento sintético"},
+    {"name": "finished_at", "type": "datetime", "label": "Finalização sintética"}
+  ],
+  "filters": [
+    {"name": "service_date", "type": "date", "label": "Data de serviço sintética"}
+  ],
+  "syntheticOnly": true
+}

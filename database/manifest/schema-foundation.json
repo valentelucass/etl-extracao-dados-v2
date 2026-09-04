@@ -1,0 +1,153 @@
+{
+  "manifestVersion": 3,
+  "roadmapTask": "V2-019",
+  "flywayHistory": {
+    "schema": "ctl",
+    "table": "flyway_schema_history",
+    "includedInStructuralComparison": false
+  },
+  "schemas": [
+    "ctl",
+    "stg",
+    "core",
+    "ref",
+    "mart",
+    "pub",
+    "recon"
+  ],
+  "schemaOwner": {
+    "name": "v2_schema_owner",
+    "authentication": "WITHOUT_LOGIN",
+    "databaseGrants": ["CONNECT"],
+    "owns": ["ctl", "stg", "core", "ref", "mart", "pub", "recon"],
+    "dboImpersonation": "DENIED",
+    "publicImpersonation": "DENIED_FOR_DBO_AND_SCHEMA_OWNER",
+    "mutableModuleOwnerContext": "CONFINED_TO_V2_SCHEMAS"
+  },
+  "grantPublisher": {
+    "procedure": "dbo.usp_publish_v2_procedure_grant",
+    "allowlistTable": "dbo.v2_procedure_grant_allowlist",
+    "allowedTriplets": 26,
+    "effectiveOwner": "dbo",
+    "rejectsExecuteAsTargets": true,
+    "publicTablePermissionsDenied": [
+      "SELECT",
+      "INSERT",
+      "UPDATE",
+      "DELETE",
+      "ALTER",
+      "TAKE OWNERSHIP"
+    ],
+    "publicProcedurePermissionsDenied": [
+      "ALTER",
+      "TAKE OWNERSHIP"
+    ]
+  },
+  "forbiddenSchemas": [
+    "shadow"
+  ],
+  "roles": {
+    "v2_migrator": {
+      "databaseGrants": [
+        "CREATE FUNCTION",
+        "CREATE PROCEDURE",
+        "CREATE TABLE",
+        "CREATE TYPE",
+        "CREATE VIEW"
+      ],
+      "schemaGrants": {
+        "ctl": ["ALTER", "REFERENCES", "SELECT", "INSERT", "UPDATE", "DELETE"],
+        "stg": ["ALTER", "REFERENCES"],
+        "core": ["ALTER", "REFERENCES"],
+        "ref": ["ALTER", "REFERENCES"],
+        "mart": ["ALTER", "REFERENCES"],
+        "pub": ["ALTER", "REFERENCES"],
+        "recon": ["ALTER", "REFERENCES"]
+      },
+      "schemaDenies": {
+        "dbo": ["ALTER"]
+      },
+      "objectGrants": {
+        "dbo.usp_publish_v2_procedure_grant": ["EXECUTE"]
+      },
+      "objectDenies": {
+        "dbo.usp_publish_v2_procedure_grant": ["ALTER", "TAKE OWNERSHIP"]
+      },
+      "userDenies": {
+        "dbo": ["IMPERSONATE"],
+        "v2_schema_owner": ["IMPERSONATE"]
+      }
+    },
+    "v2_runtime": {
+      "databaseGrants": ["CONNECT"],
+      "databaseDenies": [
+        "ALTER ANY ROLE",
+        "ALTER ANY SCHEMA",
+        "CREATE FUNCTION",
+        "CREATE PROCEDURE",
+        "CREATE RULE",
+        "CREATE SCHEMA",
+        "CREATE SYNONYM",
+        "CREATE TABLE",
+        "CREATE TYPE",
+        "CREATE VIEW",
+        "CREATE XML SCHEMA COLLECTION"
+      ],
+      "schemaDenies": {
+        "ctl": ["ALTER"],
+        "stg": ["ALTER", "SELECT", "INSERT", "UPDATE", "DELETE"],
+        "core": ["ALTER", "SELECT", "INSERT", "UPDATE", "DELETE"],
+        "ref": ["ALTER"],
+        "mart": ["ALTER"],
+        "pub": ["ALTER"],
+        "recon": ["ALTER", "SELECT", "INSERT", "UPDATE", "DELETE"]
+      }
+    },
+    "v2_retention_governor": {
+      "databaseGrants": ["CONNECT"],
+      "databaseDenies": ["ALTER ANY ROLE", "ALTER ANY SCHEMA", "CREATE PROCEDURE", "CREATE TABLE", "CREATE VIEW"],
+      "schemaDenies": {
+        "ctl": ["ALTER", "SELECT", "INSERT", "UPDATE", "DELETE"],
+        "stg": ["ALTER", "SELECT", "INSERT", "UPDATE", "DELETE"],
+        "core": ["ALTER", "SELECT", "INSERT", "UPDATE", "DELETE"],
+        "recon": ["ALTER", "SELECT", "INSERT", "UPDATE", "DELETE"]
+      }
+    },
+    "v2_lifecycle_reviewer": {
+      "databaseGrants": ["CONNECT"],
+      "databaseDenies": ["ALTER ANY ROLE", "ALTER ANY SCHEMA", "CREATE PROCEDURE", "CREATE TABLE", "CREATE VIEW"],
+      "schemaDenies": {
+        "ctl": ["ALTER", "SELECT", "INSERT", "UPDATE", "DELETE"],
+        "stg": ["ALTER", "SELECT", "INSERT", "UPDATE", "DELETE"],
+        "core": ["ALTER", "SELECT", "INSERT", "UPDATE", "DELETE"],
+        "recon": ["ALTER", "SELECT", "INSERT", "UPDATE", "DELETE"]
+      }
+    },
+    "v2_lifecycle_operator": {
+      "databaseGrants": ["CONNECT"],
+      "databaseDenies": ["ALTER ANY ROLE", "ALTER ANY SCHEMA", "CREATE PROCEDURE", "CREATE TABLE", "CREATE VIEW"],
+      "schemaDenies": {
+        "ctl": ["ALTER", "SELECT", "INSERT", "UPDATE", "DELETE"],
+        "stg": ["ALTER", "SELECT", "INSERT", "UPDATE", "DELETE"],
+        "core": ["ALTER", "SELECT", "INSERT", "UPDATE", "DELETE"],
+        "recon": ["ALTER", "SELECT", "INSERT", "UPDATE", "DELETE"]
+      }
+    },
+    "v2_archive_restorer": {
+      "databaseGrants": ["CONNECT"],
+      "databaseDenies": ["ALTER ANY ROLE", "ALTER ANY SCHEMA", "CREATE PROCEDURE", "CREATE TABLE", "CREATE VIEW"],
+      "schemaDenies": {
+        "ctl": ["ALTER", "SELECT", "INSERT", "UPDATE", "DELETE"],
+        "stg": ["ALTER", "SELECT", "INSERT", "UPDATE", "DELETE"],
+        "core": ["ALTER", "SELECT", "INSERT", "UPDATE", "DELETE"],
+        "recon": ["ALTER", "SELECT", "INSERT", "UPDATE", "DELETE"]
+      }
+    }
+  },
+  "foundationObjects": {
+    "userTables": ["dbo.v2_procedure_grant_allowlist"],
+    "procedures": ["dbo.usp_publish_v2_procedure_grant"],
+    "views": [],
+    "functions": []
+  }
+}

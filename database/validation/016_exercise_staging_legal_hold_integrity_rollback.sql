@@ -1,0 +1,156 @@
+-- Exercício negativo, sintético e rollback-only do ledger de legal hold do V2-045a.
+
+:setvar DatabaseName "ETL_SISTEMA_V2_SHADOW"
+:On Error exit
+
+IF DB_NAME() <> N'$(DatabaseName)'
+BEGIN
+    THROW 51640, N'O exercício só aceita o banco local V2 de sombra autorizado.', 1;
+END;
+
+SET NOCOUNT ON;
+SET XACT_ABORT ON;
+BEGIN TRANSACTION;
+
+:r "..\transition\001_reset_historical_shadow_for_schema_foundation.sql"
+:r "..\baseline\001_schema_foundation_baseline.sql"
+:r "012_validate_staging_lifecycle.sql"
+GO
+
+DECLARE @now DATETIME2(3) = SYSUTCDATETIME();
+DECLARE @old_start DATETIME2(3) = DATEADD(DAY, -3, @now);
+DECLARE @old_terminal DATETIME2(3) = DATEADD(DAY, -2, @now);
+DECLARE @source NVARCHAR(128) = N'SYNTHETIC_HOLD_LEDGER_SOURCE';
+DECLARE @tenant NVARCHAR(128) = N'SYNTHETIC_HOLD_LEDGER_TENANT';
+DECLARE @entity NVARCHAR(128) = N'SYNTHETIC_HOLD_LEDGER_ENTITY';
+DECLARE @cycle UNIQUEIDENTIFIER = '00000000-0000-0000-0000-000000000550';
+DECLARE @execution UNIQUEIDENTIFIER = '00000000-0000-0000-0000-000000000551';
+DECLARE @hold UNIQUEIDENTIFIER = '00000000-0000-0000-0000-000000000552';
+DECLARE @policy UNIQUEIDENTIFIER = '00000000-0000-0000-0000-000000000553';
+DECLARE @plan UNIQUEIDENTIFIER = '00000000-0000-0000-0000-000000000554';
+DECLARE @contract_fingerprint CHAR(64) = REPLICATE('a', 64);
+DECLARE @configuration_fingerprint CHAR(64) = REPLICATE('b', 64);
+DECLARE @cycle_fingerprint CHAR(64) = REPLICATE('c', 64);
+DECLARE @policy_fingerprint CHAR(64) = REPLICATE('d', 64);
+DECLARE @owner_evidence CHAR(64) = REPLICATE('e', 64);
+DECLARE @compliance_evidence CHAR(64) = REPLICATE('f', 64);
+DECLARE @hold_evidence CHAR(64) = REPLICATE('1', 64);
+DECLARE @release_evidence CHAR(64) = REPLICATE('4', 64);
+DECLARE @row_hash CHAR(64) = REPLICATE('2', 64);
+DECLARE @presence_hash CHAR(64) = REPLICATE('3', 64);
+DECLARE @partition_start DATETIME2(3) = DATEADD(HOUR, -8, @now);
+DECLARE @partition_end DATETIME2(3) = DATEADD(HOUR, -7, @now);
+
+EXEC ctl.usp_control_plane_register_source @source, N'SYNTHETIC', @old_start;
+EXEC ctl.usp_control_plane_start_cycle @cycle, N'hold-ledger-v1',
+    @cycle_fingerprint, @old_start;
+EXEC ctl.usp_control_plane_start_execution
+    @execution, @cycle, N'LOCAL_SHADOW', @source, @tenant, @entity, N'BACKFILL',
+    @partition_start, @partition_end, N'SYNTHETIC_INTERVAL',
+    N'contract-v1', @contract_fingerprint, N'config-v1', @configuration_fingerprint,
+    N'synthetic-hold-ledger', NULL, 3600, @now;
+EXEC stg.usp_stage_record
+    @execution, 1, 1, N'hold-ledger-key', N'row-v1', @row_hash,
+    N'presence-v1', @presence_hash, @old_terminal, N'VALID', NULL, @now;
+EXEC ctl.usp_control_plane_transition_execution
+    @execution, N'EXTRACTING', N'EXTRACTED', N'EXTRACTION_OK', @now;
+EXEC ctl.usp_control_plane_transition_execution
+    @execution, N'EXTRACTED', N'STAGED', N'STAGE_OK', @now;
+EXEC ctl.usp_control_plane_transition_execution
+    @execution, N'STAGED', N'FAILED', N'SYNTHETIC_FAILURE', @now;
+
+UPDATE ctl.execution_attempt
+SET started_at_utc = @old_start, terminal_at_utc = @old_terminal
+WHERE execution_id = @execution;
+UPDATE ctl.execution_state_event
+SET transitioned_at_utc = CASE
+        WHEN transition_sequence IN (1, 2) THEN @old_start
+        ELSE @old_terminal
+    END
+WHERE execution_id = @execution;
+UPDATE stg.execution_record
+SET staged_at_utc = @old_terminal
+WHERE execution_id = @execution;
+
+EXEC ctl.usp_place_staging_legal_hold
+    @hold, @execution, N'LEGAL_REVIEW', @hold_evidence, N'compliance';
+EXEC ctl.usp_release_staging_legal_hold
+    @hold, @release_evidence, N'compliance-release';
+
+DECLARE @null_release_fingerprint_error INT = NULL;
+SET XACT_ABORT OFF;
+SAVE TRANSACTION reject_null_release_fingerprint;
+BEGIN TRY
+    UPDATE ctl.staging_legal_hold
+    SET release_authority_evidence_fingerprint = NULL
+    WHERE hold_id = @hold;
+END TRY
+BEGIN CATCH
+    SET @null_release_fingerprint_error = ERROR_NUMBER();
+END CATCH;
+IF XACT_STATE() <> 1
+BEGIN
+    IF XACT_STATE() <> 0
+        ROLLBACK TRANSACTION;
+    THROW 51643, N'Falha de constraint deixou a transação do exercício inconsistente.', 1;
+END;
+ROLLBACK TRANSACTION reject_null_release_fingerprint;
+IF @null_release_fingerprint_error IS NULL OR @null_release_fingerprint_error <> 547
+BEGIN
+    ROLLBACK TRANSACTION;
+    THROW 51644, N'Constraint aceitou fingerprint de liberação nulo em hold liberado.', 1;
+END;
+
+DECLARE @null_release_owner_error INT = NULL;
+SAVE TRANSACTION reject_null_release_owner;
+BEGIN TRY
+    UPDATE ctl.staging_legal_hold
+    SET release_owner_role = NULL
+    WHERE hold_id = @hold;
+END TRY
+BEGIN CATCH
+    SET @null_release_owner_error = ERROR_NUMBER();
+END CATCH;
+IF XACT_STATE() <> 1
+BEGIN
+    IF XACT_STATE() <> 0
+        ROLLBACK TRANSACTION;
+    THROW 51645, N'Falha de constraint deixou a transação do exercício inconsistente.', 1;
+END;
+ROLLBACK TRANSACTION reject_null_release_owner;
+IF @null_release_owner_error IS NULL OR @null_release_owner_error <> 547
+BEGIN
+    ROLLBACK TRANSACTION;
+    THROW 51646, N'Constraint aceitou owner de liberação nulo em hold liberado.', 1;
+END;
+SET XACT_ABORT ON;
+
+EXEC ctl.usp_approve_staging_retention_policy
+    @policy, N'LOCAL_SHADOW', @source, @tenant, @entity,
+    N'NON_PUBLISHED_TERMINAL', N'hold-ledger-policy-v1', @policy_fingerprint, 1,
+    @owner_evidence, N'data-owner', @compliance_evidence, N'compliance';
+
+UPDATE ctl.staging_legal_hold_event
+SET authority_evidence_fingerprint = REPLICATE('9', 64),
+    owner_role = N'tampered-release-role'
+WHERE hold_id = @hold AND event_action = N'RELEASED';
+
+DECLARE @ledger_error INT = NULL;
+BEGIN TRY
+    EXEC stg.usp_plan_staging_lifecycle
+        @plan, @policy, N'hold-ledger-policy-v1', @policy_fingerprint,
+        N'LOCAL_SHADOW', @source, @tenant, @entity, NULL, NULL,
+        1, 1, 1, 1, 1, 1, 10, 100000;
+END TRY
+BEGIN CATCH
+    SET @ledger_error = ERROR_NUMBER();
+END CATCH;
+
+IF XACT_STATE() <> 0
+    ROLLBACK TRANSACTION;
+IF @ledger_error IS NULL OR @ledger_error <> 51526
+    THROW 51641, N'Planner não falhou fechado diante de RELEASED divergente.', 1;
+IF XACT_STATE() <> 0 OR @@TRANCOUNT <> 0
+    THROW 51642, N'O rollback do ledger de legal hold não encerrou o escopo sintético.', 1;
+
+PRINT N'Ledger RELEASED de legal hold divergente bloqueado e estado revertido com sucesso.';

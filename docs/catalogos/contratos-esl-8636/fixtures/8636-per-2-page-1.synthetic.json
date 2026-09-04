@@ -1,0 +1,7 @@
+{
+  "data": [
+    {"ant_ils_sequence_code": "parcel-synthetic-001", "issue_date": "2026-07-15", "created_at": "2026-07-15 08:00:00"},
+    {"ant_ils_sequence_code": "parcel-synthetic-002", "issue_date": "2026-07-15", "created_at": "2026-07-15 08:01:00"},
+    {"ant_ils_sequence_code": "parcel-synthetic-003", "issue_date": "2026-07-15", "created_at": "2026-07-15 08:02:00"}
+  ]
+}

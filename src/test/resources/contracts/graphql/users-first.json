@@ -1,0 +1,29 @@
+{
+  "data": {
+    "individual": {
+      "edges": [
+        {
+          "node": {
+            "id": 930001,
+            "name": "Synthetic User A"
+          }
+        },
+        {
+          "node": {
+            "id": "930002",
+            "name": null
+          }
+        },
+        {
+          "node": {
+            "id": 930003
+          }
+        }
+      ],
+      "pageInfo": {
+        "hasNextPage": true,
+        "endCursor": "synthetic-users-cursor-a"
+      }
+    }
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "data": [
+    {
+      "sequence_code": 6399001,
+      "pick_sequence_code": 510001,
+      "mft_mfs_number": 810001,
+      "status": "closed",
+      "created_at": "2026-07-15 09:00:00",
+      "departured_at": "2026-07-15 10:00:00"
+    },
+    {
+      "sequence_code": 6399001,
+      "pick_sequence_code": 510002,
+      "mft_mfs_number": 810001,
+      "status": "closed",
+      "created_at": "2026-07-15 09:00:00",
+      "departured_at": "2026-07-15 10:00:00"
+    },
+    {
+      "sequence_code": 6399002,
+      "pick_sequence_code": 510003,
+      "mft_mfs_number": 810002,
+      "status": "in_transit",
+      "created_at": "2026-07-15 11:00:00",
+      "departured_at": "2026-07-15 12:00:00"
+    },
+    {
+      "sequence_code": 6399003,
+      "pick_sequence_code": 510004,
+      "mft_mfs_number": 810003,
+      "status": "pending",
+      "created_at": "2026-07-15 13:00:00",
+      "departured_at": null
+    }
+  ]
+}

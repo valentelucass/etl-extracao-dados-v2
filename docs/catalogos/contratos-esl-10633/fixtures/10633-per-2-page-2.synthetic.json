@@ -1,0 +1,6 @@
+{
+  "data": [
+    {"sequence_code": 10633003, "cnr_c_s_fit_corporation_sequence_number": 20633003, "type": "CheckIn::Order::Loading", "started_at": "2026-07-15 10:00:00", "status": "finished", "cnr_c_s_fit_invoices_mapping": ["invoice-synthetic-c1"]},
+    {"sequence_code": 10633003, "cnr_c_s_fit_corporation_sequence_number": 20633003, "type": "CheckIn::Order::Loading", "started_at": "2026-07-15 10:00:00", "status": "finished", "cnr_c_s_fit_invoices_mapping": ["invoice-synthetic-c2"]}
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "data": {
+    "fields": {
+      "cte_key": {"type": "string", "label": "CT-e sintético"},
+      "fit_ant_document": {"type": "string", "label": "Documento financeiro sintético"}
+    },
+    "filters": [
+      {"field": "invoices.closed_at", "data_type": "date"}
+    ]
+  }
+}
