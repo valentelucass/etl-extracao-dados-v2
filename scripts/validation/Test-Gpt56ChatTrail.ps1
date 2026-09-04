@@ -130,7 +130,7 @@ if ($duplicateRoutes.Count -gt 0) {
 
 $expectedRouteFamilies = [ordered]@{
     '^P\d{2}$' = 7
-    '^G\d{2}$' = 11
+    '^G\d{2}$' = 10
     '^V\d{2}$' = 16
     '^R\d{2}$' = 2
     '^D\d{2}$' = 5

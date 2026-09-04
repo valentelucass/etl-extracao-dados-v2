@@ -21,13 +21,13 @@ O Codex deve confirmar o repositório `etl-extracao-dados-v2`, reler `AGENTS.md`
 
 | Campo | Valor atual |
 | --- | --- |
-| Última sincronização | 2026-09-04 13:53:29 -03:00 |
+| Última sincronização | 2026-09-04 15:10:43 -03:00 |
 | Último bloco funcional concluído | Bloco 30 — V2-009b — identidade e grão 6906 |
 | Próximo bloco oficial | **Bloco 24 — V2-009b — identidade e grão 6399** |
 | Modelo do próximo chat | **GPT-5.6 Sol — Ultra** |
 | Fonte de verdade | **STATES.md** |
-| Checkboxes no STATES.md | **88: 28 concluídos e 60 pendentes** |
-| Fatias abertas materializadas nesta trilha | **214** |
+| Checkboxes no STATES.md | **88: 30 concluídos e 58 pendentes** |
+| Fatias abertas materializadas nesta trilha | **213** |
 | Rede no próximo bloco | **Proibida; V2-041 continua em hold** |
 
 O número de fatias da trilha é maior que o número de checkboxes do `STATES.md` porque tarefas repetíveis foram expandidas por entidade e saída. Isso não duplica trabalho: ao concluir uma fatia que ainda não tem checkbox próprio no estado, o chat deve criar o subcheckbox exato sob a tarefa-pai e marcá-lo nos dois arquivos.
@@ -87,7 +87,7 @@ Os itens abaixo permanecem abertos no `STATES.md`, mas não criam um chat adicio
 | Checkbox no STATES.md | Cobertura integral na trilha |
 | --- | --- |
 | V2-016 | V2-016a já entregue localmente; G02 fecha V2-016b e o agregado após baseline/remote autorizados. |
-| V2-017a | A matriz local já está em `READY_FOR_BASELINE_COMMIT`; G03 registra o SHA e fecha V2-017a junto de V2-017. |
+| V2-017a | G03 registrou o baseline local `c59489cc70be9c113cdf444118dd1342c0b13903` e fechou V2-017/V2-017a; V2-040 ainda confirma a matriz final. |
 | V2-015 | G04 fecha V2-015a, V2-015b já foi concluída, Z03 fecha V2-015c e G05 fecha V2-015d. |
 | V2-042 | V2-042a já foi concluída; G06 e G07 fecham V2-042b/c e então o pai. |
 | V2-045 | V2-045a já foi concluída; G09 fecha V2-045b e então o pai. |
@@ -131,6 +131,7 @@ Cada checkbox `[x]` abaixo espelha exatamente um checkbox `[x]` canônico do `ST
 - [x] STATUS=CONCLUIDO | ROTA=P04 | BLOCO=28 | TAREFA=V2-025b/4924 | ESCOPO=contrato offline Faturas por Cliente | MODELO=TERRA_XHIGH | EVIDENCIA=STATES.md
 - [x] STATUS=CONCLUIDO | ROTA=P05 | BLOCO=29 | TAREFA=V2-025b/6392 | ESCOPO=contrato offline Sinistros | MODELO=TERRA_XHIGH | EVIDENCIA=STATES.md
 - [x] STATUS=CONCLUIDO | ROTA=P06 | BLOCO=30 | TAREFA=V2-009b/6906 | ESCOPO=identidade e grão 6906 - Cotações | MODELO=TERRA_XHIGH | EVIDENCIA=STATES.md
+- [x] STATUS=CONCLUIDO | ROTA=G03 | TAREFA=V2-017a | ESCOPO=matriz de portabilidade versionada localmente | SHA=c59489cc70be9c113cdf444118dd1342c0b13903 | MODELO=TERRA_XHIGH | EVIDENCIA=STATES.md
 - [x] STATUS=CONCLUIDO | BLOCOS=1-21 | TAREFA=V2-009a | ESCOPO=identidade e grão da primeira onda | NUMERO_EXATO=NAO_RECONSTRUIDO | EVIDENCIA=STATES.md
 - [x] STATUS=CONCLUIDO | BLOCOS=1-21 | TAREFA=V2-033 | ESCOPO=Usuários e histórico em sombra | NUMERO_EXATO=NAO_RECONSTRUIDO | EVIDENCIA=STATES.md
 - [x] STATUS=CONCLUIDO | BLOCOS=1-21 | TAREFA=V2-048a | ESCOPO=desenho database-wide, unidade e fences | NUMERO_EXATO=NAO_RECONSTRUIDO | EVIDENCIA=STATES.md
@@ -151,7 +152,7 @@ Essas linhas fazem parte da trilha completa, mas não substituem ação humana n
 
 - [ ] STATUS=EXTERNAL_HOLD | ROTA=G01 | TAREFA=V2-041 | ESCOPO=rotação e invalidação de segredos expostos | MODELO=SOL_ULTRA+ACAO_HUMANA | DESBLOQUEIA=rede+V2-025d+release
 - [ ] STATUS=EXTERNAL_HOLD | ROTA=G02 | TAREFA=V2-016b | ESCOPO=remote, branch protection, CODEOWNERS e CI real | MODELO=SOL_ULTRA+ACAO_HUMANA | DEPENDE=remote+autorização
-- [ ] STATUS=EXTERNAL_HOLD | ROTA=G03 | TAREFA=V2-017 | ESCOPO=registrar SHA do baseline de portabilidade e fechar V2-017/V2-017a | MODELO=TERRA_XHIGH | DEPENDE=primeiro commit autorizado
+- [x] STATUS=CONCLUIDO | ROTA=G03 | TAREFA=V2-017 | ESCOPO=registrar SHA do baseline de portabilidade e fechar V2-017/V2-017a | SHA=c59489cc70be9c113cdf444118dd1342c0b13903 | MODELO=TERRA_XHIGH | EVIDENCIA=STATES.md
 - [ ] STATUS=EXTERNAL_HOLD | ROTA=G04 | TAREFA=V2-015a | ESCOPO=reexecutar gates no conjunto exato e registrar SHA baseline | MODELO=TERRA_XHIGH | DEPENDE=primeiro commit autorizado
 - [ ] STATUS=EXTERNAL_HOLD | ROTA=G05 | TAREFA=V2-015d | ESCOPO=política bloqueante e baseline de vulnerabilidades | MODELO=SOL_ULTRA+ACAO_HUMANA | DEPENDE=feed+política+owner
 - [ ] STATUS=EXTERNAL_HOLD | ROTA=G06 | TAREFA=V2-042b | ESCOPO=inputs externos de identidade, principals e governança | MODELO=SOL_ULTRA+ACAO_HUMANA | DEPENDE=authority+provider+principals
