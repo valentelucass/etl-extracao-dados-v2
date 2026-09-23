@@ -1,0 +1,444 @@
+{
+  "schemaVersion": "V2_012_FIXTURE_V1",
+  "fixtureMarker": "SYNTH_V2_012_COTACOES_6906",
+  "profileId": "V2_012_COTACOES_6906",
+  "baseObservation": {
+    "entity": "COTACOES",
+    "sourceKind": "DATA_EXPORT",
+    "oracleKind": "DATA_EXPORT_PROVIDER",
+    "oracleAvailability": "SYNTHETIC_IN_MEMORY_ONLY",
+    "authorizationState": "SYNTHETIC_TEST_ONLY",
+    "sourceInstance": "SYNTH_SOURCE_INSTANCE",
+    "tenantScope": "SYNTH_TENANT_SCOPE",
+    "recordRoot": "/data/*",
+    "observedPaths": [
+      "/qoe_crn_psn_nickname",
+      "/qoe_qes_fit_fhe_cte_issued_at",
+      "/qoe_qes_fit_nse_issued_at",
+      "/qoe_qes_total",
+      "/requested_at",
+      "/requester_name",
+      "/sequence_code"
+    ],
+    "observedSourceKeyPath": "/sequence_code",
+    "observedSourceKeyTypeTagged": true,
+    "sourceKeyPresence": "VALUE",
+    "sourceKeyWireTypes": ["INTEGER"],
+    "sourceKeyValueValid": true,
+    "sourceKeyCount": 3,
+    "distinctSourceKeyCount": 3,
+    "sourceKeyCollision": false,
+    "crossTypeLexemePairCount": 0,
+    "crossTypeTaggedDistinctPairCount": 0,
+    "physicalRowCount": 3,
+    "logicalRootCount": 3,
+    "childCount": 0,
+    "distinctChildCount": 0,
+    "childConflict": false,
+    "childObservations": [],
+    "physicalExpansion": false,
+    "rootCardinality": "ARRAY_ELEMENTS",
+    "fieldObservations": [
+      {"path": "/qoe_crn_psn_nickname", "wireTypes": ["STRING"], "presenceStates": ["ABSENT", "NULL", "VALUE"]},
+      {"path": "/qoe_qes_fit_fhe_cte_issued_at", "wireTypes": ["STRING"], "presenceStates": ["ABSENT", "NULL", "VALUE"]},
+      {"path": "/qoe_qes_fit_nse_issued_at", "wireTypes": ["STRING"], "presenceStates": ["ABSENT", "NULL", "VALUE"]},
+      {"path": "/qoe_qes_total", "wireTypes": ["DECIMAL", "INTEGER", "STRING"], "presenceStates": ["ABSENT", "NULL", "VALUE"]},
+      {"path": "/requested_at", "wireTypes": ["STRING"], "presenceStates": ["VALUE"]},
+      {"path": "/requester_name", "wireTypes": ["STRING"], "presenceStates": ["ABSENT", "NULL", "VALUE"]},
+      {"path": "/sequence_code", "wireTypes": ["INTEGER"], "presenceStates": ["VALUE"]}
+    ],
+    "observedRecordPaths": [
+      "/qoe_crn_psn_nickname",
+      "/qoe_qes_fit_fhe_cte_issued_at",
+      "/qoe_qes_fit_nse_issued_at",
+      "/qoe_qes_total",
+      "/requested_at",
+      "/requester_name",
+      "/sequence_code"
+    ],
+    "observedConnectionPaths": [],
+    "observedRootScalarPaths": [],
+    "filterObservations": [
+      {"path": "quotes.requested_at", "present": true, "watermark": false, "booleanValue": null}
+    ],
+    "observedRelationshipCandidatePaths": [],
+    "relationshipInferenceApplied": false,
+    "triStateTrackingEnabled": true,
+    "absenceLifecycleInferenceApplied": false,
+    "pagination": {
+      "kind": "NUMERIC_PAGE",
+      "terminalCondition": "EMPTY_PAGE_LOCAL_UNVERIFIED",
+      "pageSize": 3,
+      "pagesObserved": 2,
+      "dataPagesObserved": 1,
+      "terminalProbeRequests": 1,
+      "maximumDistinctSourceKeysOnPage": 3,
+      "shortNonTerminalPageObserved": false,
+      "shortPageObservedRowCount": 0,
+      "continuedAfterShortPage": false,
+      "terminalConditionMet": true,
+      "hasNextPageAtLimit": false,
+      "cursorRequired": false,
+      "cursorPresent": false,
+      "cursorCount": 0,
+      "distinctCursorCount": 0,
+      "cursorCycleDetected": false,
+      "observedOrderingExpression": "sequence_code asc",
+      "orderingRespected": true,
+      "exactReplayTieCount": 0,
+      "divergentTieCount": 0
+    },
+    "temporal": {
+      "timestampState": "VALID",
+      "timezoneState": "EXPLICIT_CONFIRMED",
+      "observedTranslation": "SOURCE_CIVIL_DATE_UNPROVEN",
+      "observedTimezone": "America/Sao_Paulo",
+      "observedPaths": [
+        "/qoe_qes_fit_fhe_cte_issued_at",
+        "/qoe_qes_fit_nse_issued_at",
+        "/requested_at"
+      ],
+      "validValuePaths": [
+        "/qoe_qes_fit_fhe_cte_issued_at",
+        "/qoe_qes_fit_nse_issued_at",
+        "/requested_at"
+      ],
+      "selectedFreshnessPath": "/qoe_qes_fit_nse_issued_at",
+      "precedenceApplied": true
+    },
+    "status": {
+      "path": null,
+      "mode": "NOT_APPLICABLE",
+      "appliedPolicyFingerprint": null,
+      "knownCount": 0,
+      "unknownCount": 0,
+      "referenceApplied": false,
+      "conflict": false
+    },
+    "usage": {
+      "bytes": 1536,
+      "rows": 3,
+      "pages": 2,
+      "depth": 4,
+      "paths": 7,
+      "nodes": 30
+    },
+    "evidenceClassification": "SYNTHETIC_FIXTURE"
+  },
+  "scenarios": [
+    {
+      "scenarioId": "SYNTH_ACCEPTED_BASELINE",
+      "expectedOutcome": "SYNTHETIC_STRUCTURE_ACCEPTED",
+      "expectedReasons": [],
+      "override": {}
+    },
+    {
+      "scenarioId": "SYNTH_ACCEPTED_SHORT_PAGE_CONTINUES",
+      "expectedOutcome": "SYNTHETIC_STRUCTURE_ACCEPTED",
+      "expectedReasons": [],
+      "override": {
+        "pagination": {
+          "pagesObserved": 3,
+          "dataPagesObserved": 2,
+          "maximumDistinctSourceKeysOnPage": 2,
+          "shortNonTerminalPageObserved": true,
+          "shortPageObservedRowCount": 2,
+          "continuedAfterShortPage": true
+        },
+        "usage": {"pages": 3}
+      }
+    },
+    {
+      "scenarioId": "SYNTH_SHORT_PAGE_FALSE_TERMINAL",
+      "expectedOutcome": "FAIL_CLOSED",
+      "expectedReasons": ["TERMINALITY_INCOMPLETE"],
+      "override": {
+        "pagination": {
+          "pagesObserved": 2,
+          "dataPagesObserved": 2,
+          "terminalProbeRequests": 0,
+          "shortNonTerminalPageObserved": true,
+          "shortPageObservedRowCount": 2,
+          "continuedAfterShortPage": false,
+          "terminalConditionMet": false,
+          "maximumDistinctSourceKeysOnPage": 3
+        },
+        "sourceKeyCount": 5,
+        "distinctSourceKeyCount": 5,
+        "physicalRowCount": 5,
+        "logicalRootCount": 5,
+        "usage": {"rows": 5, "pages": 2}
+      }
+    },
+    {
+      "scenarioId": "SYNTH_AUTHORIZATION_MISSING",
+      "expectedOutcome": "FAIL_CLOSED",
+      "expectedReasons": ["AUTHORIZATION_MISSING"],
+      "override": {"authorizationState": "MISSING"}
+    },
+    {
+      "scenarioId": "SYNTH_BYTE_LIMIT_EXCEEDED",
+      "expectedOutcome": "FAIL_CLOSED",
+      "expectedReasons": ["BYTE_LIMIT_EXCEEDED"],
+      "override": {"usage": {"bytes": 65537}}
+    },
+    {
+      "scenarioId": "SYNTH_CHILD_DRIFT",
+      "expectedOutcome": "FAIL_CLOSED",
+      "expectedReasons": ["OBSERVATION_COUNT_MISMATCH", "EXPANSION_SEMANTICS_DRIFT"],
+      "override": {"childCount": 1, "distinctChildCount": 1}
+    },
+    {
+      "scenarioId": "SYNTH_CARDINALITY_DRIFT",
+      "expectedOutcome": "FAIL_CLOSED",
+      "expectedReasons": ["CARDINALITY_DRIFT"],
+      "override": {"rootCardinality": "GRAPHQL_EDGE_NODES"}
+    },
+    {
+      "scenarioId": "SYNTH_EXPANSION_DRIFT",
+      "expectedOutcome": "FAIL_CLOSED",
+      "expectedReasons": ["EXPANSION_SEMANTICS_DRIFT"],
+      "override": {"physicalExpansion": true}
+    },
+    {
+      "scenarioId": "SYNTH_INVALID_TIMESTAMP",
+      "expectedOutcome": "FAIL_CLOSED",
+      "expectedReasons": ["INVALID_TIMESTAMP"],
+      "override": {"temporal": {"timestampState": "INVALID"}}
+    },
+    {
+      "scenarioId": "SYNTH_OBSERVATION_COUNT_MISMATCH",
+      "expectedOutcome": "FAIL_CLOSED",
+      "expectedReasons": ["OBSERVATION_COUNT_MISMATCH", "EXPANSION_SEMANTICS_DRIFT"],
+      "override": {"distinctSourceKeyCount": 4}
+    },
+    {
+      "scenarioId": "SYNTH_ORACLE_MISSING",
+      "expectedOutcome": "FAIL_CLOSED",
+      "expectedReasons": ["ORACLE_MISSING"],
+      "override": {"oracleAvailability": "MISSING"}
+    },
+    {
+      "scenarioId": "SYNTH_ORDER_TIE_VIOLATION",
+      "expectedOutcome": "FAIL_CLOSED",
+      "expectedReasons": ["ORDER_PARITY_VIOLATION"],
+      "override": {
+        "sourceKeyCount": 4,
+        "physicalRowCount": 4,
+        "pagination": {"divergentTieCount": 1},
+        "usage": {"rows": 4}
+      }
+    },
+    {
+      "scenarioId": "SYNTH_ORDER_TIE_REPLAY_ACCEPTED",
+      "expectedOutcome": "SYNTHETIC_STRUCTURE_ACCEPTED",
+      "expectedReasons": [],
+      "override": {
+        "sourceKeyCount": 4,
+        "physicalRowCount": 4,
+        "pagination": {"exactReplayTieCount": 1},
+        "usage": {"rows": 4}
+      }
+    },
+    {
+      "scenarioId": "SYNTH_ORDER_PARITY_VIOLATION",
+      "expectedOutcome": "FAIL_CLOSED",
+      "expectedReasons": ["ORDER_PARITY_VIOLATION"],
+      "override": {"pagination": {"orderingRespected": false}}
+    },
+    {
+      "scenarioId": "SYNTH_ORDER_EXPRESSION_DRIFT",
+      "expectedOutcome": "FAIL_CLOSED",
+      "expectedReasons": ["ORDER_PARITY_VIOLATION"],
+      "override": {
+        "pagination": {"observedOrderingExpression": "requested_at asc"}
+      }
+    },
+    {
+      "scenarioId": "SYNTH_TEMPORAL_VALUE_PRESENCE_MISMATCH",
+      "expectedOutcome": "FAIL_CLOSED",
+      "expectedReasons": ["TEMPORAL_STATE_MISMATCH"],
+      "override": {
+        "fieldObservations": {
+          "/qoe_qes_fit_nse_issued_at": {"presenceStates": ["ABSENT", "NULL"]}
+        }
+      }
+    },
+    {
+      "scenarioId": "SYNTH_TEMPORAL_VALID_WITHOUT_VALUES",
+      "expectedOutcome": "FAIL_CLOSED",
+      "expectedReasons": ["TEMPORAL_STATE_MISMATCH"],
+      "override": {
+        "temporal": {
+          "validValuePaths": [],
+          "selectedFreshnessPath": null
+        }
+      }
+    },
+    {
+      "scenarioId": "SYNTH_PATH_DRIFT",
+      "expectedOutcome": "FAIL_CLOSED",
+      "expectedReasons": ["PATH_DRIFT"],
+      "override": {
+        "observedPaths": [
+          "/qoe_crn_psn_nickname",
+          "/qoe_qes_fit_fhe_cte_issued_at",
+          "/qoe_qes_fit_nse_issued_at",
+          "/qoe_qes_total",
+          "/requested_at",
+          "/requester_name",
+          "/sequence_code",
+          "/SYNTH_DRIFT_PATH"
+        ],
+        "observedRecordPaths": [
+          "/qoe_crn_psn_nickname",
+          "/qoe_qes_fit_fhe_cte_issued_at",
+          "/qoe_qes_fit_nse_issued_at",
+          "/qoe_qes_total",
+          "/requested_at",
+          "/requester_name",
+          "/sequence_code",
+          "/SYNTH_DRIFT_PATH"
+        ]
+      }
+    },
+    {
+      "scenarioId": "SYNTH_PRESENCE_MODEL_INCOMPLETE",
+      "expectedOutcome": "FAIL_CLOSED",
+      "expectedReasons": ["PRESENCE_MODEL_INCOMPLETE"],
+      "override": {"triStateTrackingEnabled": false}
+    },
+    {
+      "scenarioId": "SYNTH_PAGE_LIMIT_EXCEEDED",
+      "expectedOutcome": "FAIL_CLOSED",
+      "expectedReasons": ["PAGE_LIMIT_EXCEEDED"],
+      "override": {
+        "pagination": {
+          "pagesObserved": 101,
+          "dataPagesObserved": 100,
+          "shortNonTerminalPageObserved": true,
+          "shortPageObservedRowCount": 1,
+          "continuedAfterShortPage": true
+        },
+        "sourceKeyCount": 100,
+        "distinctSourceKeyCount": 100,
+        "physicalRowCount": 100,
+        "logicalRootCount": 100,
+        "usage": {"rows": 100, "pages": 101}
+      }
+    },
+    {
+      "scenarioId": "SYNTH_RESERVED_TENANT_SCOPE",
+      "expectedOutcome": "FAIL_CLOSED",
+      "expectedReasons": ["RESERVED_SCOPE_VALUE"],
+      "override": {"tenantScope": "GLOBAL"}
+    },
+    {
+      "scenarioId": "SYNTH_ROOT_DRIFT",
+      "expectedOutcome": "FAIL_CLOSED",
+      "expectedReasons": ["ROOT_DRIFT"],
+      "override": {"recordRoot": "/SYNTH_ROOT"}
+    },
+    {
+      "scenarioId": "SYNTH_ROW_LIMIT_EXCEEDED",
+      "expectedOutcome": "FAIL_CLOSED",
+      "expectedReasons": ["ROW_LIMIT_EXCEEDED"],
+      "override": {
+        "sourceKeyCount": 1001,
+        "distinctSourceKeyCount": 1001,
+        "physicalRowCount": 1001,
+        "logicalRootCount": 1001,
+        "pagination": {
+          "pageSize": 100,
+          "pagesObserved": 12,
+          "dataPagesObserved": 11,
+          "maximumDistinctSourceKeysOnPage": 100,
+          "shortNonTerminalPageObserved": true,
+          "shortPageObservedRowCount": 1,
+          "continuedAfterShortPage": true
+        },
+        "usage": {"rows": 1001, "pages": 12}
+      }
+    },
+    {
+      "scenarioId": "SYNTH_SOURCE_INSTANCE_MISSING",
+      "expectedOutcome": "FAIL_CLOSED",
+      "expectedReasons": ["SOURCE_INSTANCE_MISSING"],
+      "override": {"sourceInstance": ""}
+    },
+    {
+      "scenarioId": "SYNTH_SOURCE_KEY_COLLISION",
+      "expectedOutcome": "FAIL_CLOSED",
+      "expectedReasons": ["SOURCE_KEY_COLLISION"],
+      "override": {"sourceKeyCollision": true}
+    },
+    {
+      "scenarioId": "SYNTH_SOURCE_KEY_MISSING",
+      "expectedOutcome": "FAIL_CLOSED",
+      "expectedReasons": ["SOURCE_KEY_MISSING"],
+      "override": {
+        "sourceKeyPresence": "ABSENT",
+        "sourceKeyCount": 2,
+        "distinctSourceKeyCount": 2,
+        "logicalRootCount": 2,
+        "pagination": {"maximumDistinctSourceKeysOnPage": 2},
+        "fieldObservations": {
+          "/sequence_code": {"presenceStates": ["ABSENT", "VALUE"]}
+        }
+      }
+    },
+    {
+      "scenarioId": "SYNTH_SOURCE_KEY_NULL",
+      "expectedOutcome": "FAIL_CLOSED",
+      "expectedReasons": ["SOURCE_KEY_NULL"],
+      "override": {
+        "sourceKeyPresence": "NULL",
+        "distinctSourceKeyCount": 2,
+        "logicalRootCount": 2,
+        "pagination": {"maximumDistinctSourceKeysOnPage": 2},
+        "fieldObservations": {
+          "/sequence_code": {"presenceStates": ["NULL", "VALUE"]}
+        }
+      }
+    },
+    {
+      "scenarioId": "SYNTH_SOURCE_KEY_TYPE_DRIFT",
+      "expectedOutcome": "FAIL_CLOSED",
+      "expectedReasons": ["FIELD_TYPE_MISMATCH", "SOURCE_KEY_TYPE_MISMATCH"],
+      "override": {
+        "sourceKeyWireTypes": ["STRING"],
+        "fieldObservations": {"/sequence_code": {"wireTypes": ["STRING"]}}
+      }
+    },
+    {
+      "scenarioId": "SYNTH_SOURCE_KEY_VALUE_INVALID",
+      "expectedOutcome": "FAIL_CLOSED",
+      "expectedReasons": ["SOURCE_KEY_VALUE_INVALID"],
+      "override": {"sourceKeyValueValid": false}
+    },
+    {
+      "scenarioId": "SYNTH_TENANT_SCOPE_MISSING",
+      "expectedOutcome": "FAIL_CLOSED",
+      "expectedReasons": ["TENANT_SCOPE_MISSING"],
+      "override": {"tenantScope": null}
+    },
+    {
+      "scenarioId": "SYNTH_TEMPORAL_PRECEDENCE_DRIFT",
+      "expectedOutcome": "FAIL_CLOSED",
+      "expectedReasons": ["TEMPORAL_PRECEDENCE_DRIFT"],
+      "override": {"temporal": {"selectedFreshnessPath": "/requested_at"}}
+    },
+    {
+      "scenarioId": "SYNTH_TERMINALITY_INCOMPLETE",
+      "expectedOutcome": "FAIL_CLOSED",
+      "expectedReasons": ["TERMINALITY_INCOMPLETE"],
+      "override": {"pagination": {"terminalConditionMet": false}}
+    },
+    {
+      "scenarioId": "SYNTH_TIMEZONE_UNCONFIRMED",
+      "expectedOutcome": "FAIL_CLOSED",
+      "expectedReasons": ["TIMEZONE_UNCONFIRMED"],
+      "override": {"temporal": {"timezoneState": "UNCONFIRMED"}}
+    }
+  ]
+}

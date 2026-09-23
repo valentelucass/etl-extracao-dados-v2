@@ -1,5 +1,6 @@
 package br.com.esl.etl.v2.plataforma.resiliencia;
 
+import br.com.esl.etl.v2.plataforma.controle.ExecutionMode;
 import br.com.esl.etl.v2.plataforma.controle.ExecutionState;
 import java.util.Objects;
 import java.util.Optional;
@@ -20,5 +21,19 @@ public final class CheckpointDecisionPolicy {
                 && extractionComplete
                 && reconciliationPassed
                 && unresolvedFailure.map(decision -> !decision.blocksCheckpoint()).orElse(true);
+    }
+
+    /**
+     * O watermark operacional é exclusivo do modo incremental e exige fronteira publicada contígua.
+     * Checkpoints próprios de bootstrap, backfill, replay e sweep não o movimentam.
+     */
+    public boolean canAdvanceOperationalWatermark(
+            final ExecutionMode executionMode,
+            final boolean entityCheckpointAdvanced,
+            final boolean contiguousPublishedFrontier) {
+        Objects.requireNonNull(executionMode, "O modo de execução é obrigatório.");
+        return executionMode == ExecutionMode.INCREMENTAL
+                && entityCheckpointAdvanced
+                && contiguousPublishedFrontier;
     }
 }

@@ -1,0 +1,128 @@
+{
+  "status": "PASS",
+  "newAcceptances": 0,
+  "checks": [
+    {
+      "name": "p11",
+      "status": "PASS",
+      "receipts": [
+        {
+          "path": "target/p11-publico-20260921-01/validation-p11.json",
+          "sha256": "81f3b23d6bfecf5f7a86e66114df265481277fb92c4580e341019680ce624042"
+        },
+        {
+          "path": "target/p11-publico-20260921-01/validation-p11.stdout.log",
+          "sha256": "6279343539e37810b87d5b5feba85b75db9a22a4608c1efe839e1e070aec6f29"
+        },
+        {
+          "path": "target/p11-publico-20260921-01/validation-p11.stderr.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "name": "succession",
+      "status": "PASS",
+      "receipts": [
+        {
+          "path": "target/p11-publico-20260921-01/validation-succession.json",
+          "sha256": "d37bc355639ebf43255efb6552635b131cef934a7ef48a9ef728db59b0f7acc9"
+        },
+        {
+          "path": "target/p11-publico-20260921-01/validation-succession.stdout.log",
+          "sha256": "b4c1e42fe563c1bb15641afae8aa088b5bb60d9efb94601cb292725829313e2a"
+        },
+        {
+          "path": "target/p11-publico-20260921-01/validation-succession.stderr.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "name": "preparation",
+      "status": "PASS",
+      "receipts": [
+        {
+          "path": "target/p11-publico-20260921-01/validation-preparation.json",
+          "sha256": "99b288199d144e59098a93033719db72edf8e1c0e5ee3e76c70cd28bee745539"
+        },
+        {
+          "path": "target/p11-publico-20260921-01/validation-preparation.stdout.log",
+          "sha256": "d2612bdef3cf21d99d0f8cdcd7d5207ed31029648db854bcf8da6911373904c9"
+        },
+        {
+          "path": "target/p11-publico-20260921-01/validation-preparation.stderr.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "name": "trail",
+      "status": "PASS",
+      "receipts": [
+        {
+          "path": "target/p11-publico-20260921-01/validation-trail.json",
+          "sha256": "0c04aa7555b604bfdd15302f51c53c6a768422c30aaaad24c0564828976b7af1"
+        },
+        {
+          "path": "target/p11-publico-20260921-01/validation-trail.stdout.log",
+          "sha256": "624cf8745192e08e633174136c6a19c5ec4aca77162e538068e2d18465f14e55"
+        },
+        {
+          "path": "target/p11-publico-20260921-01/validation-trail.stderr.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "name": "policy-implementation",
+      "status": "PASS",
+      "receipts": [
+        {
+          "path": "target/p11-publico-20260921-01/policy-implementation.log",
+          "sha256": "f1f24291f35bb965bb621c88ed79cd24a2b9f48676fa41ec2f0c6ca9a9385060"
+        }
+      ]
+    },
+    {
+      "name": "policy-report-02",
+      "status": "PASS",
+      "receipts": [
+        {
+          "path": "target/p11-publico-20260921-01/policy-report-02.log",
+          "sha256": "44701adb48e1676a28a18f5c9d16b2dbc79b7cd7708f9387a4e3096dcda18305"
+        }
+      ]
+    },
+    {
+      "name": "collections-02",
+      "status": "PASS",
+      "receipts": [
+        {
+          "path": "target/p11-publico-20260921-01/collections-02.log",
+          "sha256": "e180e4d1484bf67bddaeac1e41df510faff77d48a277b5babca66e0455ac78bb"
+        }
+      ]
+    },
+    {
+      "name": "ast",
+      "status": "PASS",
+      "receipts": [
+        {
+          "path": "target/p11-publico-20260921-01/ast.log",
+          "sha256": "a17ea03d80da5a8033b4c884bda13fec71005a71bf3ad383ace818238045c026"
+        }
+      ]
+    },
+    {
+      "name": "scan-catalog",
+      "status": "PASS",
+      "receipts": [
+        {
+          "path": "target/p11-publico-20260921-01/scan-catalog.log",
+          "sha256": "bef5cf7ef8b45bfd899dd7b16e2860c22d8698ddee50e89e3895bc5c1ac8c6ec"
+        }
+      ]
+    }
+  ]
+}

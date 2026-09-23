@@ -1,0 +1,32 @@
+{
+  "block": 60,
+  "sqlApplied": false,
+  "status": "PREPARED_NOT_PHYSICALLY_QUALIFIED",
+  "sqlCompiled": false,
+  "proposedMigration": {
+    "sha256": "40e7f05186bf3c69e9447117524ddd6bd0b648be32375d522a505165399128f6",
+    "path": "database/migrations/V024__bind_source_protocols_and_users_runtime.sql"
+  },
+  "baseline": {
+    "sha256": "e40713b6a0f3e58824d83ff174bcdade1fedd8ea5353414aabd3bbf3e6931c89",
+    "path": "database/baseline/001_schema_foundation_baseline.sql"
+  },
+  "historicalCatalogSha256": "ceb70df963b995b5b8f43231a856a8c3c3a67af57458eca6948bbd989bf636ae",
+  "physicalApproval": false,
+  "database": "localhost/ETL_SISTEMA_V2_SHADOW",
+  "baselineMethod": "EXACT_V023_PREFIX_PLUS_TWO_ISOLATED_ROLLBACK_SUFFIX_ROUTES",
+  "newAcceptances": 0,
+  "validation": [
+    {
+      "sha256": "c764b4218c4005e954e0f13b7b60cf8250206e1970c44a741b78c1e39b0d0512",
+      "path": "database/validation/056_validate_bloco60_runtime.sql"
+    },
+    {
+      "sha256": "f08e710e8fbfacf81b1cc58b801263ac975d946acacb522635f203dbf26e0128",
+      "path": "database/validation/057_exercise_bloco60_adversarial_read.sql"
+    }
+  ],
+  "physicalAcceptance": false,
+  "version": 1,
+  "historicalInstalledThrough": "V023"
+}

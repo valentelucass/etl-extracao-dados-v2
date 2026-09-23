@@ -1,0 +1,1097 @@
+{
+  "version": 1,
+  "evidence": "SYNTHETIC_LOCAL_ONLY",
+  "decision": "docs/catalogos/coletas-v2-010/decisao-v01.json",
+  "decisionSha256": "077c4e806c3174dd4909e94e99a72847ba6b76868fce492561f9bb307a85422c",
+  "cases": [
+    {
+      "id": "SYNTH_IDENTITY_ZERO",
+      "envelope": "{\"data\":[{\"id\":0,\"sequence_code\":700,\"updated_at\":\"2036-03-20T12:00:00Z\",\"pck_mik_mft_sequence_code\":null}]}",
+      "expected": [
+        {
+          "/quarantine": "NONE",
+          "/id/typed": "INTEGER:0",
+          "/id/type": "INTEGER",
+          "/sequence_code/typed": "700",
+          "/sequence_code/mappedPresence": "VALUE",
+          "/freshness/typed": "NULL",
+          "/freshness/raw": "NULL",
+          "/freshness/origin": "UNAVAILABLE",
+          "/status/raw": "NULL",
+          "/status/code": "NULL",
+          "/status/label": "NULL",
+          "/status/terminal": "false",
+          "/status/action": "Pendente",
+          "/status/attempts": "0"
+        }
+      ],
+      "firstWaveRefusal": "NONE",
+      "decisionRefusal": "NONE",
+      "rule": "COL-01/COL-04/COL-07/COL-11"
+    },
+    {
+      "id": "SYNTH_IDENTITY_NEGATIVE",
+      "envelope": "{\"data\":[{\"id\":-12,\"sequence_code\":0,\"updated_at\":\"2036-03-20T12:00:00Z\",\"pck_mik_mft_sequence_code\":null}]}",
+      "expected": [
+        {
+          "/quarantine": "NONE",
+          "/id/typed": "INTEGER:-12",
+          "/id/type": "INTEGER",
+          "/sequence_code/typed": "0",
+          "/sequence_code/mappedPresence": "VALUE",
+          "/freshness/typed": "NULL",
+          "/freshness/raw": "NULL",
+          "/freshness/origin": "UNAVAILABLE",
+          "/status/raw": "NULL",
+          "/status/code": "NULL",
+          "/status/label": "NULL",
+          "/status/terminal": "false",
+          "/status/action": "Pendente",
+          "/status/attempts": "0"
+        }
+      ],
+      "firstWaveRefusal": "NONE",
+      "decisionRefusal": "NONE",
+      "rule": "COL-01/COL-04/COL-07/COL-11"
+    },
+    {
+      "id": "SYNTH_ALIAS_ABSENT",
+      "envelope": "{\"data\":[{\"id\":0,\"updated_at\":\"2036-03-20T12:00:00Z\",\"pck_mik_mft_sequence_code\":null}]}",
+      "expected": [
+        {
+          "/quarantine": "NONE",
+          "/id/typed": "INTEGER:0",
+          "/id/type": "INTEGER",
+          "/sequence_code/typed": "NULL",
+          "/sequence_code/mappedPresence": "ABSENT",
+          "/freshness/typed": "NULL",
+          "/freshness/raw": "NULL",
+          "/freshness/origin": "UNAVAILABLE",
+          "/status/raw": "NULL",
+          "/status/code": "NULL",
+          "/status/label": "NULL",
+          "/status/terminal": "false",
+          "/status/action": "Pendente",
+          "/status/attempts": "0"
+        }
+      ],
+      "firstWaveRefusal": "CONTRACT",
+      "decisionRefusal": "NONE",
+      "rule": "COL-01/COL-04/COL-07/COL-11"
+    },
+    {
+      "id": "SYNTH_ALIAS_NULL",
+      "envelope": "{\"data\":[{\"id\":0,\"sequence_code\":null,\"updated_at\":\"2036-03-20T12:00:00Z\",\"pck_mik_mft_sequence_code\":null}]}",
+      "expected": [
+        {
+          "/quarantine": "NONE",
+          "/id/typed": "INTEGER:0",
+          "/id/type": "INTEGER",
+          "/sequence_code/typed": "NULL",
+          "/sequence_code/mappedPresence": "NULL",
+          "/freshness/typed": "NULL",
+          "/freshness/raw": "NULL",
+          "/freshness/origin": "UNAVAILABLE",
+          "/status/raw": "NULL",
+          "/status/code": "NULL",
+          "/status/label": "NULL",
+          "/status/terminal": "false",
+          "/status/action": "Pendente",
+          "/status/attempts": "0"
+        }
+      ],
+      "firstWaveRefusal": "CONTRACT",
+      "decisionRefusal": "NONE",
+      "rule": "COL-01/COL-04/COL-07/COL-11"
+    },
+    {
+      "id": "SYNTH_UPDATED_ABSENT",
+      "envelope": "{\"data\":[{\"id\":0,\"sequence_code\":700,\"pck_mik_mft_sequence_code\":null}]}",
+      "expected": [
+        {
+          "/quarantine": "NONE",
+          "/id/typed": "INTEGER:0",
+          "/id/type": "INTEGER",
+          "/sequence_code/typed": "700",
+          "/sequence_code/mappedPresence": "VALUE",
+          "/freshness/typed": "NULL",
+          "/freshness/raw": "NULL",
+          "/freshness/origin": "UNAVAILABLE",
+          "/status/raw": "NULL",
+          "/status/code": "NULL",
+          "/status/label": "NULL",
+          "/status/terminal": "false",
+          "/status/action": "Pendente",
+          "/status/attempts": "0"
+        }
+      ],
+      "firstWaveRefusal": "CONTRACT",
+      "decisionRefusal": "NONE",
+      "rule": "COL-01/COL-04/COL-07/COL-11"
+    },
+    {
+      "id": "SYNTH_RELATION_ABSENT",
+      "envelope": "{\"data\":[{\"id\":0,\"sequence_code\":700,\"updated_at\":\"2036-03-20T12:00:00Z\"}]}",
+      "expected": [
+        {
+          "/quarantine": "NONE",
+          "/id/typed": "INTEGER:0",
+          "/id/type": "INTEGER",
+          "/sequence_code/typed": "700",
+          "/sequence_code/mappedPresence": "VALUE",
+          "/freshness/typed": "NULL",
+          "/freshness/raw": "NULL",
+          "/freshness/origin": "UNAVAILABLE",
+          "/status/raw": "NULL",
+          "/status/code": "NULL",
+          "/status/label": "NULL",
+          "/status/terminal": "false",
+          "/status/action": "Pendente",
+          "/status/attempts": "0",
+          "/pck_mik_mft_sequence_code/candidatePresence": "ABSENT"
+        }
+      ],
+      "firstWaveRefusal": "CONTRACT",
+      "decisionRefusal": "NONE",
+      "rule": "COL-01/COL-04/COL-07/COL-11"
+    },
+    {
+      "id": "SYNTH_RELATION_ZERO",
+      "envelope": "{\"data\":[{\"id\":0,\"sequence_code\":700,\"updated_at\":\"2036-03-20T12:00:00Z\",\"pck_mik_mft_sequence_code\":null,\"pick_item_id\":0,\"fit_p_m_pck_sequence_code\":11}]}",
+      "expected": [
+        {
+          "/quarantine": "NONE",
+          "/id/typed": "INTEGER:0",
+          "/id/type": "INTEGER",
+          "/sequence_code/typed": "700",
+          "/sequence_code/mappedPresence": "VALUE",
+          "/freshness/typed": "NULL",
+          "/freshness/raw": "NULL",
+          "/freshness/origin": "UNAVAILABLE",
+          "/status/raw": "NULL",
+          "/status/code": "NULL",
+          "/status/label": "NULL",
+          "/status/terminal": "false",
+          "/status/action": "Pendente",
+          "/status/attempts": "0",
+          "/pick_item_id/candidatePresence": "VALUE",
+          "/pick_item_id/candidateValue": "0",
+          "/fit_p_m_pck_sequence_code/candidateValue": "11"
+        }
+      ],
+      "firstWaveRefusal": "CONTRACT",
+      "decisionRefusal": "NONE",
+      "rule": "COL-01/COL-04/COL-07/COL-11"
+    },
+    {
+      "id": "SYNTH_RELATION_NULL",
+      "envelope": "{\"data\":[{\"id\":0,\"sequence_code\":700,\"updated_at\":\"2036-03-20T12:00:00Z\",\"pck_mik_mft_sequence_code\":null,\"manifesto\":null,\"frete\":null}]}",
+      "expected": [
+        {
+          "/quarantine": "NONE",
+          "/id/typed": "INTEGER:0",
+          "/id/type": "INTEGER",
+          "/sequence_code/typed": "700",
+          "/sequence_code/mappedPresence": "VALUE",
+          "/freshness/typed": "NULL",
+          "/freshness/raw": "NULL",
+          "/freshness/origin": "UNAVAILABLE",
+          "/status/raw": "NULL",
+          "/status/code": "NULL",
+          "/status/label": "NULL",
+          "/status/terminal": "false",
+          "/status/action": "Pendente",
+          "/status/attempts": "0",
+          "/manifesto/candidatePresence": "NULL",
+          "/frete/candidatePresence": "NULL"
+        }
+      ],
+      "firstWaveRefusal": "CONTRACT",
+      "decisionRefusal": "NONE",
+      "rule": "COL-01/COL-04/COL-07/COL-11"
+    },
+    {
+      "id": "SYNTH_RELATION_OBJECT",
+      "envelope": "{\"data\":[{\"id\":0,\"sequence_code\":700,\"updated_at\":\"2036-03-20T12:00:00Z\",\"pck_mik_mft_sequence_code\":null,\"manifesto\":{},\"frete\":{}}]}",
+      "expected": [
+        {
+          "/quarantine": "NONE",
+          "/id/typed": "INTEGER:0",
+          "/id/type": "INTEGER",
+          "/sequence_code/typed": "700",
+          "/sequence_code/mappedPresence": "VALUE",
+          "/freshness/typed": "NULL",
+          "/freshness/raw": "NULL",
+          "/freshness/origin": "UNAVAILABLE",
+          "/status/raw": "NULL",
+          "/status/code": "NULL",
+          "/status/label": "NULL",
+          "/status/terminal": "false",
+          "/status/action": "Pendente",
+          "/status/attempts": "0",
+          "/manifesto/candidatePresence": "VALUE",
+          "/manifesto/candidateValue": "{}",
+          "/frete/candidateValue": "{}"
+        }
+      ],
+      "firstWaveRefusal": "CONTRACT",
+      "decisionRefusal": "NONE",
+      "rule": "COL-01/COL-04/COL-07/COL-11"
+    },
+    {
+      "id": "SYNTH_STATUS_PENDING",
+      "envelope": "{\"data\":[{\"id\":0,\"sequence_code\":700,\"updated_at\":\"2036-03-20T12:00:00Z\",\"pck_mik_mft_sequence_code\":null,\"status\":\"pending\"}]}",
+      "expected": [
+        {
+          "/quarantine": "NONE",
+          "/id/typed": "INTEGER:0",
+          "/id/type": "INTEGER",
+          "/sequence_code/typed": "700",
+          "/sequence_code/mappedPresence": "VALUE",
+          "/freshness/typed": "NULL",
+          "/freshness/raw": "NULL",
+          "/freshness/origin": "UNAVAILABLE",
+          "/status/raw": "pending",
+          "/status/code": "pending",
+          "/status/label": "Pendente",
+          "/status/terminal": "false",
+          "/status/action": "Pendente",
+          "/status/attempts": "0"
+        }
+      ],
+      "firstWaveRefusal": "CONTRACT",
+      "decisionRefusal": "NONE",
+      "rule": "COL-01/COL-04/COL-07/COL-11"
+    },
+    {
+      "id": "SYNTH_STATUS_TREATMENT",
+      "envelope": "{\"data\":[{\"id\":0,\"sequence_code\":700,\"updated_at\":\"2036-03-20T12:00:00Z\",\"pck_mik_mft_sequence_code\":null,\"status\":\"treatment\"}]}",
+      "expected": [
+        {
+          "/quarantine": "NONE",
+          "/id/typed": "INTEGER:0",
+          "/id/type": "INTEGER",
+          "/sequence_code/typed": "700",
+          "/sequence_code/mappedPresence": "VALUE",
+          "/freshness/typed": "NULL",
+          "/freshness/raw": "NULL",
+          "/freshness/origin": "UNAVAILABLE",
+          "/status/raw": "treatment",
+          "/status/code": "treatment",
+          "/status/label": "Em tratativa",
+          "/status/terminal": "false",
+          "/status/action": "Pendente",
+          "/status/attempts": "0"
+        }
+      ],
+      "firstWaveRefusal": "CONTRACT",
+      "decisionRefusal": "NONE",
+      "rule": "COL-01/COL-04/COL-07/COL-11"
+    },
+    {
+      "id": "SYNTH_STATUS_MANIFESTED",
+      "envelope": "{\"data\":[{\"id\":0,\"sequence_code\":700,\"updated_at\":\"2036-03-20T12:00:00Z\",\"pck_mik_mft_sequence_code\":null,\"status\":\"manifested\"}]}",
+      "expected": [
+        {
+          "/quarantine": "NONE",
+          "/id/typed": "INTEGER:0",
+          "/id/type": "INTEGER",
+          "/sequence_code/typed": "700",
+          "/sequence_code/mappedPresence": "VALUE",
+          "/freshness/typed": "NULL",
+          "/freshness/raw": "NULL",
+          "/freshness/origin": "UNAVAILABLE",
+          "/status/raw": "manifested",
+          "/status/code": "manifested",
+          "/status/label": "Manifestada",
+          "/status/terminal": "false",
+          "/status/action": "Pendente",
+          "/status/attempts": "0"
+        }
+      ],
+      "firstWaveRefusal": "CONTRACT",
+      "decisionRefusal": "NONE",
+      "rule": "COL-01/COL-04/COL-07/COL-11"
+    },
+    {
+      "id": "SYNTH_STATUS_IN_TRANSIT",
+      "envelope": "{\"data\":[{\"id\":0,\"sequence_code\":700,\"updated_at\":\"2036-03-20T12:00:00Z\",\"pck_mik_mft_sequence_code\":null,\"status\":\"in_transit\"}]}",
+      "expected": [
+        {
+          "/quarantine": "NONE",
+          "/id/typed": "INTEGER:0",
+          "/id/type": "INTEGER",
+          "/sequence_code/typed": "700",
+          "/sequence_code/mappedPresence": "VALUE",
+          "/freshness/typed": "NULL",
+          "/freshness/raw": "NULL",
+          "/freshness/origin": "UNAVAILABLE",
+          "/status/raw": "in_transit",
+          "/status/code": "in_transit",
+          "/status/label": "Em trânsito",
+          "/status/terminal": "false",
+          "/status/action": "Pendente",
+          "/status/attempts": "0"
+        }
+      ],
+      "firstWaveRefusal": "CONTRACT",
+      "decisionRefusal": "NONE",
+      "rule": "COL-01/COL-04/COL-07/COL-11"
+    },
+    {
+      "id": "SYNTH_STATUS_DRAFT",
+      "envelope": "{\"data\":[{\"id\":0,\"sequence_code\":700,\"updated_at\":\"2036-03-20T12:00:00Z\",\"pck_mik_mft_sequence_code\":null,\"status\":\"draft\"}]}",
+      "expected": [
+        {
+          "/quarantine": "NONE",
+          "/id/typed": "INTEGER:0",
+          "/id/type": "INTEGER",
+          "/sequence_code/typed": "700",
+          "/sequence_code/mappedPresence": "VALUE",
+          "/freshness/typed": "NULL",
+          "/freshness/raw": "NULL",
+          "/freshness/origin": "UNAVAILABLE",
+          "/status/raw": "draft",
+          "/status/code": "draft",
+          "/status/label": "Rascunho",
+          "/status/terminal": "false",
+          "/status/action": "Pendente",
+          "/status/attempts": "0"
+        }
+      ],
+      "firstWaveRefusal": "CONTRACT",
+      "decisionRefusal": "NONE",
+      "rule": "COL-01/COL-04/COL-07/COL-11"
+    },
+    {
+      "id": "SYNTH_STATUS_DONE",
+      "envelope": "{\"data\":[{\"id\":0,\"sequence_code\":700,\"updated_at\":\"2036-03-20T12:00:00Z\",\"pck_mik_mft_sequence_code\":null,\"status\":\"done\"}]}",
+      "expected": [
+        {
+          "/quarantine": "NONE",
+          "/id/typed": "INTEGER:0",
+          "/id/type": "INTEGER",
+          "/sequence_code/typed": "700",
+          "/sequence_code/mappedPresence": "VALUE",
+          "/freshness/typed": "NULL",
+          "/freshness/raw": "NULL",
+          "/freshness/origin": "UNAVAILABLE",
+          "/status/raw": "done",
+          "/status/code": "done",
+          "/status/label": "Coletada",
+          "/status/terminal": "true",
+          "/status/action": "Coleta Realizada",
+          "/status/attempts": "1"
+        }
+      ],
+      "firstWaveRefusal": "CONTRACT",
+      "decisionRefusal": "NONE",
+      "rule": "COL-01/COL-04/COL-07/COL-11"
+    },
+    {
+      "id": "SYNTH_STATUS_FINISHED",
+      "envelope": "{\"data\":[{\"id\":0,\"sequence_code\":700,\"updated_at\":\"2036-03-20T12:00:00Z\",\"pck_mik_mft_sequence_code\":null,\"status\":\"finished\"}]}",
+      "expected": [
+        {
+          "/quarantine": "NONE",
+          "/id/typed": "INTEGER:0",
+          "/id/type": "INTEGER",
+          "/sequence_code/typed": "700",
+          "/sequence_code/mappedPresence": "VALUE",
+          "/freshness/typed": "NULL",
+          "/freshness/raw": "NULL",
+          "/freshness/origin": "UNAVAILABLE",
+          "/status/raw": "finished",
+          "/status/code": "finished",
+          "/status/label": "Finalizada",
+          "/status/terminal": "true",
+          "/status/action": "Coleta Realizada",
+          "/status/attempts": "1"
+        }
+      ],
+      "firstWaveRefusal": "CONTRACT",
+      "decisionRefusal": "NONE",
+      "rule": "COL-01/COL-04/COL-07/COL-11"
+    },
+    {
+      "id": "SYNTH_STATUS_CANCELED",
+      "envelope": "{\"data\":[{\"id\":0,\"sequence_code\":700,\"updated_at\":\"2036-03-20T12:00:00Z\",\"pck_mik_mft_sequence_code\":null,\"status\":\"canceled\"}]}",
+      "expected": [
+        {
+          "/quarantine": "NONE",
+          "/id/typed": "INTEGER:0",
+          "/id/type": "INTEGER",
+          "/sequence_code/typed": "700",
+          "/sequence_code/mappedPresence": "VALUE",
+          "/freshness/typed": "NULL",
+          "/freshness/raw": "NULL",
+          "/freshness/origin": "UNAVAILABLE",
+          "/status/raw": "canceled",
+          "/status/code": "canceled",
+          "/status/label": "Cancelada",
+          "/status/terminal": "true",
+          "/status/action": "Coleta cancelada",
+          "/status/attempts": "1"
+        }
+      ],
+      "firstWaveRefusal": "CONTRACT",
+      "decisionRefusal": "NONE",
+      "rule": "COL-01/COL-04/COL-07/COL-11"
+    },
+    {
+      "id": "SYNTH_STATUS_CANCELLED",
+      "envelope": "{\"data\":[{\"id\":0,\"sequence_code\":700,\"updated_at\":\"2036-03-20T12:00:00Z\",\"pck_mik_mft_sequence_code\":null,\"status\":\"cancelled\"}]}",
+      "expected": [
+        {
+          "/quarantine": "NONE",
+          "/id/typed": "INTEGER:0",
+          "/id/type": "INTEGER",
+          "/sequence_code/typed": "700",
+          "/sequence_code/mappedPresence": "VALUE",
+          "/freshness/typed": "NULL",
+          "/freshness/raw": "NULL",
+          "/freshness/origin": "UNAVAILABLE",
+          "/status/raw": "cancelled",
+          "/status/code": "cancelled",
+          "/status/label": "Cancelada",
+          "/status/terminal": "true",
+          "/status/action": "Coleta cancelada",
+          "/status/attempts": "1"
+        }
+      ],
+      "firstWaveRefusal": "CONTRACT",
+      "decisionRefusal": "NONE",
+      "rule": "COL-01/COL-04/COL-07/COL-11"
+    },
+    {
+      "id": "SYNTH_STATUS_NULL",
+      "envelope": "{\"data\":[{\"id\":0,\"sequence_code\":700,\"updated_at\":\"2036-03-20T12:00:00Z\",\"pck_mik_mft_sequence_code\":null,\"status\":null}]}",
+      "expected": [
+        {
+          "/quarantine": "NONE",
+          "/id/typed": "INTEGER:0",
+          "/id/type": "INTEGER",
+          "/sequence_code/typed": "700",
+          "/sequence_code/mappedPresence": "VALUE",
+          "/freshness/typed": "NULL",
+          "/freshness/raw": "NULL",
+          "/freshness/origin": "UNAVAILABLE",
+          "/status/raw": "NULL",
+          "/status/code": "NULL",
+          "/status/label": "NULL",
+          "/status/terminal": "false",
+          "/status/action": "Pendente",
+          "/status/attempts": "0",
+          "/status/presence": "NULL",
+          "/status/mappedPresence": "NULL"
+        }
+      ],
+      "firstWaveRefusal": "CONTRACT",
+      "decisionRefusal": "NONE",
+      "rule": "COL-01/COL-04/COL-07/COL-11"
+    },
+    {
+      "id": "SYNTH_STATUS_UNKNOWN",
+      "envelope": "{\"data\":[{\"id\":0,\"sequence_code\":700,\"updated_at\":\"2036-03-20T12:00:00Z\",\"pck_mik_mft_sequence_code\":null,\"status\":\"synthetic_future\"}]}",
+      "expected": [
+        {
+          "/quarantine": "NONE",
+          "/id/typed": "INTEGER:0",
+          "/id/type": "INTEGER",
+          "/sequence_code/typed": "700",
+          "/sequence_code/mappedPresence": "VALUE",
+          "/freshness/typed": "NULL",
+          "/freshness/raw": "NULL",
+          "/freshness/origin": "UNAVAILABLE",
+          "/status/raw": "synthetic_future",
+          "/status/code": "NULL",
+          "/status/label": "NULL",
+          "/status/terminal": "false",
+          "/status/action": "Pendente",
+          "/status/attempts": "0",
+          "/status/mappedPresence": "VALUE"
+        }
+      ],
+      "firstWaveRefusal": "CONTRACT",
+      "decisionRefusal": "NONE",
+      "rule": "COL-01/COL-04/COL-07/COL-11"
+    },
+    {
+      "id": "SYNTH_CANCEL_REASON",
+      "envelope": "{\"data\":[{\"id\":0,\"sequence_code\":700,\"updated_at\":\"2036-03-20T12:00:00Z\",\"pck_mik_mft_sequence_code\":null,\"status\":\"canceled\",\"cancellation_reason\":\"synthetic reason\"}]}",
+      "expected": [
+        {
+          "/quarantine": "NONE",
+          "/id/typed": "INTEGER:0",
+          "/id/type": "INTEGER",
+          "/sequence_code/typed": "700",
+          "/sequence_code/mappedPresence": "VALUE",
+          "/freshness/typed": "NULL",
+          "/freshness/raw": "NULL",
+          "/freshness/origin": "UNAVAILABLE",
+          "/status/raw": "canceled",
+          "/status/code": "canceled",
+          "/status/label": "Cancelada",
+          "/status/terminal": "true",
+          "/status/action": "synthetic reason",
+          "/status/attempts": "1"
+        }
+      ],
+      "firstWaveRefusal": "CONTRACT",
+      "decisionRefusal": "NONE",
+      "rule": "COL-01/COL-04/COL-07/COL-11"
+    },
+    {
+      "id": "SYNTH_DONE_PRECEDENCE",
+      "envelope": "{\"data\":[{\"id\":0,\"sequence_code\":700,\"updated_at\":\"2036-03-20T12:00:00Z\",\"pck_mik_mft_sequence_code\":null,\"status\":\"done\",\"cancellation_reason\":\"synthetic reason\"}]}",
+      "expected": [
+        {
+          "/quarantine": "NONE",
+          "/id/typed": "INTEGER:0",
+          "/id/type": "INTEGER",
+          "/sequence_code/typed": "700",
+          "/sequence_code/mappedPresence": "VALUE",
+          "/freshness/typed": "NULL",
+          "/freshness/raw": "NULL",
+          "/freshness/origin": "UNAVAILABLE",
+          "/status/raw": "done",
+          "/status/code": "done",
+          "/status/label": "Coletada",
+          "/status/terminal": "true",
+          "/status/action": "Coleta Realizada",
+          "/status/attempts": "1"
+        }
+      ],
+      "firstWaveRefusal": "CONTRACT",
+      "decisionRefusal": "NONE",
+      "rule": "COL-01/COL-04/COL-07/COL-11"
+    },
+    {
+      "id": "SYNTH_INVALID_ID_22",
+      "envelope": "{\"data\":[{\"id\":null,\"sequence_code\":700,\"updated_at\":\"2036-03-20T12:00:00Z\",\"pck_mik_mft_sequence_code\":null}]}",
+      "expected": [
+        {
+          "/quarantine": "MISSING_SOURCE_KEY"
+        }
+      ],
+      "firstWaveRefusal": "PAGE_LIMIT",
+      "decisionRefusal": "PAGE_LIMIT",
+      "rule": "COL-01/COL-04/COL-07/COL-11"
+    },
+    {
+      "id": "SYNTH_INVALID_ID_23",
+      "envelope": "{\"data\":[{\"id\":\"0\",\"sequence_code\":700,\"updated_at\":\"2036-03-20T12:00:00Z\",\"pck_mik_mft_sequence_code\":null}]}",
+      "expected": [
+        {
+          "/quarantine": "INVALID_SOURCE_KEY_TYPE"
+        }
+      ],
+      "firstWaveRefusal": "CONTRACT",
+      "decisionRefusal": "CONTRACT",
+      "rule": "COL-01/COL-04/COL-07/COL-11"
+    },
+    {
+      "id": "SYNTH_INVALID_ID_24",
+      "envelope": "{\"data\":[{\"id\":1.5,\"sequence_code\":700,\"updated_at\":\"2036-03-20T12:00:00Z\",\"pck_mik_mft_sequence_code\":null}]}",
+      "expected": [
+        {
+          "/quarantine": "INVALID_SOURCE_KEY_TYPE"
+        }
+      ],
+      "firstWaveRefusal": "CONTRACT",
+      "decisionRefusal": "CONTRACT",
+      "rule": "COL-01/COL-04/COL-07/COL-11"
+    },
+    {
+      "id": "SYNTH_INVALID_ID_25",
+      "envelope": "{\"data\":[{\"id\":true,\"sequence_code\":700,\"updated_at\":\"2036-03-20T12:00:00Z\",\"pck_mik_mft_sequence_code\":null}]}",
+      "expected": [
+        {
+          "/quarantine": "INVALID_SOURCE_KEY_TYPE"
+        }
+      ],
+      "firstWaveRefusal": "CONTRACT",
+      "decisionRefusal": "CONTRACT",
+      "rule": "COL-01/COL-04/COL-07/COL-11"
+    },
+    {
+      "id": "SYNTH_INVALID_ID_26",
+      "envelope": "{\"data\":[{\"id\":{},\"sequence_code\":700,\"updated_at\":\"2036-03-20T12:00:00Z\",\"pck_mik_mft_sequence_code\":null}]}",
+      "expected": [
+        {
+          "/quarantine": "INVALID_SOURCE_KEY_TYPE"
+        }
+      ],
+      "firstWaveRefusal": "PAGE_LIMIT",
+      "decisionRefusal": "PAGE_LIMIT",
+      "rule": "COL-01/COL-04/COL-07/COL-11"
+    },
+    {
+      "id": "SYNTH_INVALID_ID_27",
+      "envelope": "{\"data\":[{\"id\":[],\"sequence_code\":700,\"updated_at\":\"2036-03-20T12:00:00Z\",\"pck_mik_mft_sequence_code\":null}]}",
+      "expected": [
+        {
+          "/quarantine": "INVALID_SOURCE_KEY_TYPE"
+        }
+      ],
+      "firstWaveRefusal": "PAGE_LIMIT",
+      "decisionRefusal": "PAGE_LIMIT",
+      "rule": "COL-01/COL-04/COL-07/COL-11"
+    },
+    {
+      "id": "SYNTH_INVALID_SEQUENCE_CODE_28",
+      "envelope": "{\"data\":[{\"id\":0,\"sequence_code\":\"700\",\"updated_at\":\"2036-03-20T12:00:00Z\",\"pck_mik_mft_sequence_code\":null}]}",
+      "expected": [
+        {
+          "/quarantine": "INVALID_SEQUENCE_CODE_TYPE"
+        }
+      ],
+      "firstWaveRefusal": "CONTRACT",
+      "decisionRefusal": "CONTRACT",
+      "rule": "COL-01/COL-04/COL-07/COL-11"
+    },
+    {
+      "id": "SYNTH_INVALID_STATUS_29",
+      "envelope": "{\"data\":[{\"id\":0,\"sequence_code\":700,\"updated_at\":\"2036-03-20T12:00:00Z\",\"pck_mik_mft_sequence_code\":null,\"status\":true}]}",
+      "expected": [
+        {
+          "/quarantine": "INVALID_STATUS_TYPE"
+        }
+      ],
+      "firstWaveRefusal": "CONTRACT",
+      "decisionRefusal": "CONTRACT",
+      "rule": "COL-01/COL-04/COL-07/COL-11"
+    },
+    {
+      "id": "SYNTH_INVALID_CANCELLATION_REASON_30",
+      "envelope": "{\"data\":[{\"id\":0,\"sequence_code\":700,\"updated_at\":\"2036-03-20T12:00:00Z\",\"pck_mik_mft_sequence_code\":null,\"cancellation_reason\":2}]}",
+      "expected": [
+        {
+          "/quarantine": "INVALID_CANCELLATION_REASON_TYPE"
+        }
+      ],
+      "firstWaveRefusal": "CONTRACT",
+      "decisionRefusal": "CONTRACT",
+      "rule": "COL-01/COL-04/COL-07/COL-11"
+    },
+    {
+      "id": "SYNTH_ID_ABSENT",
+      "envelope": "{\"data\":[{\"sequence_code\":700,\"updated_at\":\"2036-03-20T12:00:00Z\",\"pck_mik_mft_sequence_code\":null}]}",
+      "expected": [
+        {
+          "/quarantine": "MISSING_SOURCE_KEY"
+        }
+      ],
+      "firstWaveRefusal": "PAGE_LIMIT",
+      "decisionRefusal": "PAGE_LIMIT",
+      "rule": "COL-01/COL-04/COL-07/COL-11"
+    },
+    {
+      "id": "SYNTH_DATE_VALID_ISO",
+      "envelope": "{\"data\":[{\"id\":0,\"sequence_code\":700,\"updated_at\":\"2036-03-20T12:00:00Z\",\"pck_mik_mft_sequence_code\":null,\"status_updated_at\":\"2036-02-29T10:00:00Z\",\"finish_date\":\"2037-01-01\",\"service_date\":\"2038-01-01\",\"request_date\":\"2039-01-01\"}]}",
+      "expected": [
+        {
+          "/quarantine": "NONE",
+          "/id/typed": "INTEGER:0",
+          "/id/type": "INTEGER",
+          "/sequence_code/typed": "700",
+          "/sequence_code/mappedPresence": "VALUE",
+          "/freshness/typed": "2036-02-29T10:00:00Z",
+          "/freshness/raw": "2036-02-29T10:00:00Z",
+          "/freshness/origin": "STATUS_UPDATED_AT",
+          "/status/raw": "NULL",
+          "/status/code": "NULL",
+          "/status/label": "NULL",
+          "/status/terminal": "false",
+          "/status/action": "Pendente",
+          "/status/attempts": "0"
+        }
+      ],
+      "firstWaveRefusal": "CONTRACT",
+      "decisionRefusal": "NONE",
+      "rule": "COL-02"
+    },
+    {
+      "id": "SYNTH_DATE_VALID_OFFSET",
+      "envelope": "{\"data\":[{\"id\":0,\"sequence_code\":700,\"updated_at\":\"2036-03-20T12:00:00Z\",\"pck_mik_mft_sequence_code\":null,\"status_updated_at\":\"2036-02-29T10:00:00-03:00\",\"finish_date\":\"2037-01-01\",\"service_date\":\"2038-01-01\",\"request_date\":\"2039-01-01\"}]}",
+      "expected": [
+        {
+          "/quarantine": "NONE",
+          "/id/typed": "INTEGER:0",
+          "/id/type": "INTEGER",
+          "/sequence_code/typed": "700",
+          "/sequence_code/mappedPresence": "VALUE",
+          "/freshness/typed": "2036-02-29T13:00:00Z",
+          "/freshness/raw": "2036-02-29T10:00:00-03:00",
+          "/freshness/origin": "STATUS_UPDATED_AT",
+          "/status/raw": "NULL",
+          "/status/code": "NULL",
+          "/status/label": "NULL",
+          "/status/terminal": "false",
+          "/status/action": "Pendente",
+          "/status/attempts": "0"
+        }
+      ],
+      "firstWaveRefusal": "CONTRACT",
+      "decisionRefusal": "NONE",
+      "rule": "COL-02"
+    },
+    {
+      "id": "SYNTH_DATE_VALID_LOCAL_ISO",
+      "envelope": "{\"data\":[{\"id\":0,\"sequence_code\":700,\"updated_at\":\"2036-03-20T12:00:00Z\",\"pck_mik_mft_sequence_code\":null,\"status_updated_at\":\"2036-02-29T10:00:00\",\"finish_date\":\"2037-01-01\",\"service_date\":\"2038-01-01\",\"request_date\":\"2039-01-01\"}]}",
+      "expected": [
+        {
+          "/quarantine": "NONE",
+          "/id/typed": "INTEGER:0",
+          "/id/type": "INTEGER",
+          "/sequence_code/typed": "700",
+          "/sequence_code/mappedPresence": "VALUE",
+          "/freshness/typed": "2036-02-29T13:00:00Z",
+          "/freshness/raw": "2036-02-29T10:00:00",
+          "/freshness/origin": "STATUS_UPDATED_AT",
+          "/status/raw": "NULL",
+          "/status/code": "NULL",
+          "/status/label": "NULL",
+          "/status/terminal": "false",
+          "/status/action": "Pendente",
+          "/status/attempts": "0"
+        }
+      ],
+      "firstWaveRefusal": "CONTRACT",
+      "decisionRefusal": "NONE",
+      "rule": "COL-02"
+    },
+    {
+      "id": "SYNTH_DATE_VALID_LOCAL_SPACE",
+      "envelope": "{\"data\":[{\"id\":0,\"sequence_code\":700,\"updated_at\":\"2036-03-20T12:00:00Z\",\"pck_mik_mft_sequence_code\":null,\"status_updated_at\":\"2036-02-29 10:00:00\",\"finish_date\":\"2037-01-01\",\"service_date\":\"2038-01-01\",\"request_date\":\"2039-01-01\"}]}",
+      "expected": [
+        {
+          "/quarantine": "NONE",
+          "/id/typed": "INTEGER:0",
+          "/id/type": "INTEGER",
+          "/sequence_code/typed": "700",
+          "/sequence_code/mappedPresence": "VALUE",
+          "/freshness/typed": "2036-02-29T13:00:00Z",
+          "/freshness/raw": "2036-02-29 10:00:00",
+          "/freshness/origin": "STATUS_UPDATED_AT",
+          "/status/raw": "NULL",
+          "/status/code": "NULL",
+          "/status/label": "NULL",
+          "/status/terminal": "false",
+          "/status/action": "Pendente",
+          "/status/attempts": "0"
+        }
+      ],
+      "firstWaveRefusal": "CONTRACT",
+      "decisionRefusal": "NONE",
+      "rule": "COL-02"
+    },
+    {
+      "id": "SYNTH_DATE_VALID_LOCAL_BR",
+      "envelope": "{\"data\":[{\"id\":0,\"sequence_code\":700,\"updated_at\":\"2036-03-20T12:00:00Z\",\"pck_mik_mft_sequence_code\":null,\"status_updated_at\":\"29/02/2036 10:00:00\",\"finish_date\":\"2037-01-01\",\"service_date\":\"2038-01-01\",\"request_date\":\"2039-01-01\"}]}",
+      "expected": [
+        {
+          "/quarantine": "NONE",
+          "/id/typed": "INTEGER:0",
+          "/id/type": "INTEGER",
+          "/sequence_code/typed": "700",
+          "/sequence_code/mappedPresence": "VALUE",
+          "/freshness/typed": "2036-02-29T13:00:00Z",
+          "/freshness/raw": "29/02/2036 10:00:00",
+          "/freshness/origin": "STATUS_UPDATED_AT",
+          "/status/raw": "NULL",
+          "/status/code": "NULL",
+          "/status/label": "NULL",
+          "/status/terminal": "false",
+          "/status/action": "Pendente",
+          "/status/attempts": "0"
+        }
+      ],
+      "firstWaveRefusal": "CONTRACT",
+      "decisionRefusal": "NONE",
+      "rule": "COL-02"
+    },
+    {
+      "id": "SYNTH_DATE_VALID_LOCAL_BR_HOUR",
+      "envelope": "{\"data\":[{\"id\":0,\"sequence_code\":700,\"updated_at\":\"2036-03-20T12:00:00Z\",\"pck_mik_mft_sequence_code\":null,\"status_updated_at\":\"29/02/2036 9:00:00\",\"finish_date\":\"2037-01-01\",\"service_date\":\"2038-01-01\",\"request_date\":\"2039-01-01\"}]}",
+      "expected": [
+        {
+          "/quarantine": "NONE",
+          "/id/typed": "INTEGER:0",
+          "/id/type": "INTEGER",
+          "/sequence_code/typed": "700",
+          "/sequence_code/mappedPresence": "VALUE",
+          "/freshness/typed": "2036-02-29T12:00:00Z",
+          "/freshness/raw": "29/02/2036 9:00:00",
+          "/freshness/origin": "STATUS_UPDATED_AT",
+          "/status/raw": "NULL",
+          "/status/code": "NULL",
+          "/status/label": "NULL",
+          "/status/terminal": "false",
+          "/status/action": "Pendente",
+          "/status/attempts": "0"
+        }
+      ],
+      "firstWaveRefusal": "CONTRACT",
+      "decisionRefusal": "NONE",
+      "rule": "COL-02"
+    },
+    {
+      "id": "SYNTH_DATE_INVALID_SPACE",
+      "envelope": "{\"data\":[{\"id\":0,\"sequence_code\":700,\"updated_at\":\"2036-03-20T12:00:00Z\",\"pck_mik_mft_sequence_code\":null,\"status_updated_at\":\"2035-02-29 10:00:00\",\"finish_date\":\"2036-03-01\",\"service_date\":\"2037-01-01\"}]}",
+      "expected": [
+        {
+          "/quarantine": "NONE",
+          "/id/typed": "INTEGER:0",
+          "/id/type": "INTEGER",
+          "/sequence_code/typed": "700",
+          "/sequence_code/mappedPresence": "VALUE",
+          "/freshness/typed": "2036-03-01T03:00:00Z",
+          "/freshness/raw": "2035-02-29 10:00:00",
+          "/freshness/origin": "FINISH_DATE",
+          "/status/raw": "NULL",
+          "/status/code": "NULL",
+          "/status/label": "NULL",
+          "/status/terminal": "false",
+          "/status/action": "Pendente",
+          "/status/attempts": "0",
+          "/status_updated_at/preserved": "\"2035-02-29 10:00:00\""
+        }
+      ],
+      "firstWaveRefusal": "CONTRACT",
+      "decisionRefusal": "NONE",
+      "rule": "COL-02"
+    },
+    {
+      "id": "SYNTH_DATE_INVALID_BR",
+      "envelope": "{\"data\":[{\"id\":0,\"sequence_code\":700,\"updated_at\":\"2036-03-20T12:00:00Z\",\"pck_mik_mft_sequence_code\":null,\"status_updated_at\":\"29/02/2035 10:00:00\",\"finish_date\":\"2036-03-01\",\"service_date\":\"2037-01-01\"}]}",
+      "expected": [
+        {
+          "/quarantine": "NONE",
+          "/id/typed": "INTEGER:0",
+          "/id/type": "INTEGER",
+          "/sequence_code/typed": "700",
+          "/sequence_code/mappedPresence": "VALUE",
+          "/freshness/typed": "2036-03-01T03:00:00Z",
+          "/freshness/raw": "29/02/2035 10:00:00",
+          "/freshness/origin": "FINISH_DATE",
+          "/status/raw": "NULL",
+          "/status/code": "NULL",
+          "/status/label": "NULL",
+          "/status/terminal": "false",
+          "/status/action": "Pendente",
+          "/status/attempts": "0",
+          "/status_updated_at/preserved": "\"29/02/2035 10:00:00\""
+        }
+      ],
+      "firstWaveRefusal": "CONTRACT",
+      "decisionRefusal": "NONE",
+      "rule": "COL-02"
+    },
+    {
+      "id": "SYNTH_DATE_INVALID_BR_HOUR",
+      "envelope": "{\"data\":[{\"id\":0,\"sequence_code\":700,\"updated_at\":\"2036-03-20T12:00:00Z\",\"pck_mik_mft_sequence_code\":null,\"status_updated_at\":\"31/04/2036 9:00:00\",\"finish_date\":\"2036-03-01\",\"service_date\":\"2037-01-01\"}]}",
+      "expected": [
+        {
+          "/quarantine": "NONE",
+          "/id/typed": "INTEGER:0",
+          "/id/type": "INTEGER",
+          "/sequence_code/typed": "700",
+          "/sequence_code/mappedPresence": "VALUE",
+          "/freshness/typed": "2036-03-01T03:00:00Z",
+          "/freshness/raw": "31/04/2036 9:00:00",
+          "/freshness/origin": "FINISH_DATE",
+          "/status/raw": "NULL",
+          "/status/code": "NULL",
+          "/status/label": "NULL",
+          "/status/terminal": "false",
+          "/status/action": "Pendente",
+          "/status/attempts": "0",
+          "/status_updated_at/preserved": "\"31/04/2036 9:00:00\""
+        }
+      ],
+      "firstWaveRefusal": "CONTRACT",
+      "decisionRefusal": "NONE",
+      "rule": "COL-02"
+    },
+    {
+      "id": "SYNTH_DATE_INVALID_ISO",
+      "envelope": "{\"data\":[{\"id\":0,\"sequence_code\":700,\"updated_at\":\"2036-03-20T12:00:00Z\",\"pck_mik_mft_sequence_code\":null,\"status_updated_at\":\"2035-02-29T10:00:00\",\"finish_date\":\"2036-03-01\",\"service_date\":\"2037-01-01\"}]}",
+      "expected": [
+        {
+          "/quarantine": "NONE",
+          "/id/typed": "INTEGER:0",
+          "/id/type": "INTEGER",
+          "/sequence_code/typed": "700",
+          "/sequence_code/mappedPresence": "VALUE",
+          "/freshness/typed": "2036-03-01T03:00:00Z",
+          "/freshness/raw": "2035-02-29T10:00:00",
+          "/freshness/origin": "FINISH_DATE",
+          "/status/raw": "NULL",
+          "/status/code": "NULL",
+          "/status/label": "NULL",
+          "/status/terminal": "false",
+          "/status/action": "Pendente",
+          "/status/attempts": "0",
+          "/status_updated_at/preserved": "\"2035-02-29T10:00:00\""
+        }
+      ],
+      "firstWaveRefusal": "CONTRACT",
+      "decisionRefusal": "NONE",
+      "rule": "COL-02"
+    },
+    {
+      "id": "SYNTH_DATE_INVALID_GARBAGE",
+      "envelope": "{\"data\":[{\"id\":0,\"sequence_code\":700,\"updated_at\":\"2036-03-20T12:00:00Z\",\"pck_mik_mft_sequence_code\":null,\"status_updated_at\":\"synthetic-invalid\",\"finish_date\":\"2036-03-01\",\"service_date\":\"2037-01-01\"}]}",
+      "expected": [
+        {
+          "/quarantine": "NONE",
+          "/id/typed": "INTEGER:0",
+          "/id/type": "INTEGER",
+          "/sequence_code/typed": "700",
+          "/sequence_code/mappedPresence": "VALUE",
+          "/freshness/typed": "2036-03-01T03:00:00Z",
+          "/freshness/raw": "synthetic-invalid",
+          "/freshness/origin": "FINISH_DATE",
+          "/status/raw": "NULL",
+          "/status/code": "NULL",
+          "/status/label": "NULL",
+          "/status/terminal": "false",
+          "/status/action": "Pendente",
+          "/status/attempts": "0",
+          "/status_updated_at/preserved": "\"synthetic-invalid\""
+        }
+      ],
+      "firstWaveRefusal": "CONTRACT",
+      "decisionRefusal": "NONE",
+      "rule": "COL-02"
+    },
+    {
+      "id": "SYNTH_DATE_INVALID_DAY",
+      "envelope": "{\"data\":[{\"id\":0,\"sequence_code\":700,\"updated_at\":\"2036-03-20T12:00:00Z\",\"pck_mik_mft_sequence_code\":null,\"status_updated_at\":\"2036-04-31 10:00:00\",\"finish_date\":\"2036-03-01\",\"service_date\":\"2037-01-01\"}]}",
+      "expected": [
+        {
+          "/quarantine": "NONE",
+          "/id/typed": "INTEGER:0",
+          "/id/type": "INTEGER",
+          "/sequence_code/typed": "700",
+          "/sequence_code/mappedPresence": "VALUE",
+          "/freshness/typed": "2036-03-01T03:00:00Z",
+          "/freshness/raw": "2036-04-31 10:00:00",
+          "/freshness/origin": "FINISH_DATE",
+          "/status/raw": "NULL",
+          "/status/code": "NULL",
+          "/status/label": "NULL",
+          "/status/terminal": "false",
+          "/status/action": "Pendente",
+          "/status/attempts": "0",
+          "/status_updated_at/preserved": "\"2036-04-31 10:00:00\""
+        }
+      ],
+      "firstWaveRefusal": "CONTRACT",
+      "decisionRefusal": "NONE",
+      "rule": "COL-02"
+    },
+    {
+      "id": "SYNTH_FRESH_SERVICE",
+      "envelope": "{\"data\":[{\"id\":0,\"sequence_code\":700,\"updated_at\":\"2036-03-20T12:00:00Z\",\"pck_mik_mft_sequence_code\":null,\"status_updated_at\":\"invalid\",\"finish_date\":\"2035-02-29\",\"service_date\":\"2036-02-29\",\"request_date\":\"2037-01-01\"}]}",
+      "expected": [
+        {
+          "/quarantine": "NONE",
+          "/id/typed": "INTEGER:0",
+          "/id/type": "INTEGER",
+          "/sequence_code/typed": "700",
+          "/sequence_code/mappedPresence": "VALUE",
+          "/freshness/typed": "2036-02-29T03:00:00Z",
+          "/freshness/raw": "invalid",
+          "/freshness/origin": "SERVICE_DATE",
+          "/status/raw": "NULL",
+          "/status/code": "NULL",
+          "/status/label": "NULL",
+          "/status/terminal": "false",
+          "/status/action": "Pendente",
+          "/status/attempts": "0"
+        }
+      ],
+      "firstWaveRefusal": "CONTRACT",
+      "decisionRefusal": "NONE",
+      "rule": "COL-02"
+    },
+    {
+      "id": "SYNTH_FRESH_REQUEST",
+      "envelope": "{\"data\":[{\"id\":0,\"sequence_code\":700,\"updated_at\":\"2036-03-20T12:00:00Z\",\"pck_mik_mft_sequence_code\":null,\"status_updated_at\":null,\"finish_date\":null,\"service_date\":\"invalid\",\"request_date\":\"2036-03-01\"}]}",
+      "expected": [
+        {
+          "/quarantine": "NONE",
+          "/id/typed": "INTEGER:0",
+          "/id/type": "INTEGER",
+          "/sequence_code/typed": "700",
+          "/sequence_code/mappedPresence": "VALUE",
+          "/freshness/typed": "2036-03-01T03:00:00Z",
+          "/freshness/raw": "NULL",
+          "/freshness/origin": "REQUEST_DATE",
+          "/status/raw": "NULL",
+          "/status/code": "NULL",
+          "/status/label": "NULL",
+          "/status/terminal": "false",
+          "/status/action": "Pendente",
+          "/status/attempts": "0",
+          "/status_updated_at/mappedPresence": "NULL"
+        }
+      ],
+      "firstWaveRefusal": "CONTRACT",
+      "decisionRefusal": "NONE",
+      "rule": "COL-02"
+    },
+    {
+      "id": "SYNTH_FRESH_UNAVAILABLE",
+      "envelope": "{\"data\":[{\"id\":0,\"sequence_code\":700,\"updated_at\":\"2036-03-20T12:00:00Z\",\"pck_mik_mft_sequence_code\":null,\"status_updated_at\":\"invalid\",\"finish_date\":\"invalid\",\"service_date\":null,\"request_date\":\"2035-02-29\"}]}",
+      "expected": [
+        {
+          "/quarantine": "NONE",
+          "/id/typed": "INTEGER:0",
+          "/id/type": "INTEGER",
+          "/sequence_code/typed": "700",
+          "/sequence_code/mappedPresence": "VALUE",
+          "/freshness/typed": "NULL",
+          "/freshness/raw": "invalid",
+          "/freshness/origin": "UNAVAILABLE",
+          "/status/raw": "NULL",
+          "/status/code": "NULL",
+          "/status/label": "NULL",
+          "/status/terminal": "false",
+          "/status/action": "Pendente",
+          "/status/attempts": "0"
+        }
+      ],
+      "firstWaveRefusal": "CONTRACT",
+      "decisionRefusal": "NONE",
+      "rule": "COL-02"
+    },
+    {
+      "id": "SYNTH_FRESH_UPDATED_IGNORED",
+      "envelope": "{\"data\":[{\"id\":0,\"sequence_code\":700,\"updated_at\":\"2039-03-01T00:00:00Z\",\"pck_mik_mft_sequence_code\":null}]}",
+      "expected": [
+        {
+          "/quarantine": "NONE",
+          "/id/typed": "INTEGER:0",
+          "/id/type": "INTEGER",
+          "/sequence_code/typed": "700",
+          "/sequence_code/mappedPresence": "VALUE",
+          "/freshness/typed": "NULL",
+          "/freshness/raw": "NULL",
+          "/freshness/origin": "UNAVAILABLE",
+          "/status/raw": "NULL",
+          "/status/code": "NULL",
+          "/status/label": "NULL",
+          "/status/terminal": "false",
+          "/status/action": "Pendente",
+          "/status/attempts": "0"
+        }
+      ],
+      "firstWaveRefusal": "NONE",
+      "decisionRefusal": "NONE",
+      "rule": "COL-02"
+    }
+  ]
+}

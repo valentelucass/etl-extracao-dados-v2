@@ -1,0 +1,175 @@
+{
+  "catalogVersion": "2026-09-04.v2-009b.1",
+  "identityFingerprintVersion": "contas-a-pagar-identity-v1",
+  "task": "V2-009b/8636",
+  "route": "P09",
+  "decisionStatus": "BLOCKED_ROOT_IDENTITY_ABSENT_PHYSICAL_ROW_KEY_REFUTED_AND_GRAIN_UNRESOLVED",
+  "evidenceVocabulary": [
+    "HISTORICAL_SANITIZED_OBSERVATION",
+    "LEGACY_STATIC_EVIDENCE",
+    "SYNTHETIC_FIXTURES",
+    "NO_TEMPORAL_OR_TENANT_PAYLOAD_PROOF",
+    "NO_INDEPENDENT_COMPLETENESS_EVIDENCE"
+  ],
+  "quarantineReasons": [
+    "AMBIGUOUS_BUSINESS_ALIAS",
+    "CARDINALITY_DIVERGENCE",
+    "INVALID_SOURCE_KEY_TYPE",
+    "INVALID_SOURCE_KEY_VALUE",
+    "MISSING_SOURCE_KEY",
+    "SCOPE_MISMATCH",
+    "SOURCE_KEY_COLLISION",
+    "SOURCE_KEY_TOO_LONG",
+    "UNPROVEN_ALIAS_CHANGE",
+    "UNPROVEN_REKEY"
+  ],
+  "actions": [
+    "BLOCK_PROMOTION_PENDING_VERTICAL_RESOLUTION",
+    "KEEP_CANONICAL",
+    "NO_OP_REPLAY",
+    "PRESERVE_UNRESOLVED_OBSERVATION",
+    "QUARANTINE",
+    "REACTIVATE_EXACT_BINDING",
+    "REGISTER_NEW_CANONICAL",
+    "VERSION_ALIASES_PRESERVE_CANONICAL"
+  ],
+  "sourceFamily": {
+    "sourceKind": "ESL",
+    "transport": "DATA_EXPORT",
+    "sourceInstanceMeaning": "STABLE_NON_SECRET_LOGICAL_ESL_ACCOUNT"
+  },
+  "registry": {
+    "tuple": ["source_instance", "tenant_scope", "entity", "source_key"],
+    "comparison": "CASE_SENSITIVE_EXACT_BIN2",
+    "canonicalIdStrategy": "SQL_SURROGATE_BIGINT_IDENTITY",
+    "recordStateIdIsCanonicalId": false,
+    "physicalEnforcementGate": "V2-009d"
+  },
+  "scope": {
+    "policy": "EXPLICIT_SOURCE_INSTANCE_AND_TENANT_REQUIRED",
+    "globalUniquenessProven": false,
+    "tenantPayloadPath": null,
+    "tenantDerivation": "EXTERNAL_CONFIGURATION_REQUIRED_NO_BUSINESS_FIELD_DERIVATION",
+    "forbiddenTenantSentinels": ["DEFAULT", "GLOBAL", "SINGLETON"]
+  },
+  "canonicalization": {
+    "maximumStorageCharacters": 256,
+    "acceptedWireTypes": [],
+    "integerEncoding": "INTEGER:<CANONICAL_DECIMAL>",
+    "stringEncoding": "STRING:<EXACT_TEXT>",
+    "integerAndStringEquivalent": false,
+    "textNormalization": "NONE_FAIL_ON_BLANK_BOUNDARY_SPACE_CONTROL_OR_INVALID_UNICODE",
+    "processingBound": "ONE_OBSERVATION_AT_A_TIME"
+  },
+  "identity": {
+    "entity": "contas_a_pagar",
+    "contractId": "dataexport-8636",
+    "contractVersion": "2026-09-04.v2-025b.1",
+    "sourceContractReleaseFingerprint": "948902142c9d35ca76574de13cfac1064b6b06eefb62ae012ea5823022dec4c1",
+    "recordRoot": "/data/*",
+    "sourceKey": {
+      "path": null,
+      "name": null,
+      "wireTypes": [],
+      "role": "LOGICAL_ACCOUNTING_DEBIT_ROOT",
+      "decision": "ABSENT_NO_ROOT_SOURCE_KEY_BINDING_ALLOWED"
+    },
+    "canonicalKey": {
+      "strategy": "SQL_SURROGATE_BIGINT_IDENTITY",
+      "binding": "WITHHELD_ROOT_SOURCE_KEY_ABSENT",
+      "notEquivalentTo": ["ant_ils_sequence_code", "document", "legacy_primary_key", "record_state_id"]
+    },
+    "businessKeys": {
+      "accepted": [],
+      "candidates": [
+        {
+          "names": ["ant_ils_sequence_code"],
+          "paths": ["/ant_ils_sequence_code"],
+          "wireTypes": [],
+          "wireTypeDecision": "UNRESOLVED_PARTIAL_HISTORY_INTEGER_VERSUS_LEGACY_STRING_COERCION",
+          "decision": "PARCEL_SOURCE_KEY_CANDIDATE_NOT_ROOT_OR_PHYSICAL_ROW_IDENTITY"
+        }
+      ]
+    },
+    "aliases": {
+      "accepted": [],
+      "rejected": ["legacy_primary_key", "document"],
+      "rekeyPolicy": "NO_REKEY_OR_REPOINT_WITHOUT_ROOT_AND_VERSIONED_EVIDENCE"
+    },
+    "physicalGrain": {
+      "root": "SOURCE_LINE_AT_DATA_ITEM_LOGICAL_ACCOUNTING_DEBIT_ROOT_UNIDENTIFIED",
+      "observed": "ONE_SANITIZED_WINDOW_FIVE_ROWS_FIVE_PARCEL_CANDIDATES; SYNTHETIC_FIXTURE_ONLY_MIRRORS_SHAPE; PARTIAL_HISTORY_COUNTEREXAMPLE_REPEATS_CANDIDATE_WITH_DIVERGENT_ACCOUNTING_FIELD",
+      "children": [],
+      "relationPolicy": "NO_ACCOUNTING_DEBIT_PARCEL_COST_CENTER_OR_LEDGER_RELATION_INFERRED"
+    },
+    "proof": {
+      "uniqueness": "REFUTED_FOR_PHYSICAL_ROW_BY_PARTIAL_HISTORICAL_CANDIDATE_REPETITIONS_ROOT_UNAVAILABLE",
+      "temporalStability": "UNPROVEN_NO_VERSIONED_PROVIDER_GUARANTEE_OR_REPEAT_OBSERVATION",
+      "tenantScope": "UNPROVEN_IN_PAYLOAD_EXPLICIT_EXTERNAL_SCOPE_REQUIRED",
+      "cardinality": "ROOT_PARCEL_AND_ALLOCATION_CARDINALITIES_UNVERIFIED"
+    },
+    "repeatAndConflictPolicy": {
+      "sameScopedRootSourceKey": "NOT_APPLICABLE_UNTIL_ROOT_SOURCE_KEY_EXISTS",
+      "physicalVariants": "PRESERVE_ALL_OBSERVATIONS_NO_KEEP_LATEST_OR_PARCEL_COLLAPSE",
+      "divergentRoot": "BLOCK_PROMOTION_NO_ROOT_IDENTITY",
+      "aliasCollision": "BLOCK_DEPENDENT_RESOLUTION_NO_AUTOMATIC_REPOINT",
+      "alternateKeyOrRekey": "QUARANTINE_UNPROVEN_REKEY_UNTIL_VERSIONED_EVIDENCE",
+      "missingOrInvalidScopeOrKey": "QUARANTINE",
+      "reactivation": "NOT_CLASSIFIABLE_UNTIL_ROOT_IDENTITY_PROVEN"
+    },
+    "outcome": {
+      "closeSubcheckbox": false,
+      "blockers": [
+        "ACCOUNTING_DEBIT_ROOT_SOURCE_KEY_ABSENT",
+        "PARCEL_CANDIDATE_NOT_UNIQUE_PER_PHYSICAL_ROW",
+        "ROOT_PARCEL_RELATION_UNPROVEN",
+        "ROOT_PARCEL_ALLOCATION_CARDINALITY_UNPROVEN"
+      ],
+      "unblockEvidence": [
+        "VERSIONED_PROVIDER_ROOT_IDENTIFIER_AND_TYPES",
+        "REPRESENTATIVE_REPEAT_OBSERVATIONS_PROVING_ROOT_PARCEL_ALLOCATION_GRAIN_AND_CARDINALITY"
+      ]
+    },
+    "capabilities": {
+      "shadowDomainImplementation": "BLOCKED_PENDING_COMPLETE_V2_009B_8636_AND_V2_029",
+      "sweepOrDeactivation": "BLOCKED_NO_COMPLETENESS_PROOF",
+      "cutover": "BLOCKED_NO_COMPLETENESS_PROOF",
+      "externalHolds": {"V2-025d": "BLOCKED_BY_V2_041_EXTERNAL_HOLD"}
+    },
+    "nextGates": ["V2-009b/8636", "V2-029", "V2-009d", "V2-025d"],
+    "evidenceBounds": {
+      "supports": [
+        "DATA_ARRAY_SOURCE_LINES_EXIST",
+        "ANT_ILS_SEQUENCE_CODE_PARCEL_CANDIDATE_WITH_WIRE_TYPE_UNRESOLVED",
+        "PARTIAL_HISTORICAL_COUNTEREXAMPLE_TO_PHYSICAL_ROW_UNIQUENESS"
+      ],
+      "doesNotSupport": [
+        "ACCOUNTING_DEBIT_ROOT_IDENTITY",
+        "PARCEL_GLOBAL_UNIQUENESS_OR_TEMPORAL_STABILITY",
+        "PAYLOAD_TENANT_OR_GLOBAL_SENTINEL",
+        "ROOT_PARCEL_ALLOCATION_RELATION_OR_CARDINALITY",
+        "COMPLETENESS_SWEEP_OR_CUTOVER"
+      ],
+      "files": [
+        {"path": "docs/adr/0018-identidade-e-crosswalk-da-primeira-onda.md", "role": "RATIFIED_REGISTRY_FRAMEWORK", "readOnly": true},
+        {"path": "docs/catalogos/identidade-primeira-onda/manifesto.json", "role": "RATIFIED_IDENTITY_POLICY_BASELINE", "readOnly": true},
+        {"path": "docs/catalogos/identidade-cotacoes/manifesto.json", "role": "BOUNDED_SINGLE_ENTITY_PRECEDENT", "readOnly": true},
+        {"path": "docs/catalogos/contratos-esl-8636/manifesto.json", "role": "VERSIONED_OFFLINE_CONTRACT", "readOnly": true},
+        {"path": "docs/catalogos/contratos-esl-8636/fixtures/8636-per-3-page-1.synthetic.json", "role": "SYNTHETIC_SHAPE_ONLY", "readOnly": true},
+        {"path": "STATES.md", "role": "ROADMAP_RULES_CAP_01_AND_CAP_04", "readOnly": true},
+        {"path": "../etl-extracao-dados/docs/legado/pipelines-antigos/02-apis/dataexport/contasapagar.md", "role": "PARTIAL_HISTORICAL_COUNTEREXAMPLE_ONLY", "readOnly": true},
+        {"path": "../etl-extracao-dados/src/main/java/br/com/extrator/dominio/dataexport/contasapagar/ContasAPagarDTO.java", "role": "LEGACY_STATIC_STRING_COERCION_ONLY", "readOnly": true},
+        {"path": "../etl-extracao-dados/src/main/java/br/com/extrator/integracao/mapeamento/dataexport/contasapagar/ContasAPagarMapper.java", "role": "LEGACY_STATIC_FLATTENING_ONLY", "readOnly": true},
+        {"path": "../etl-extracao-dados/database/tabelas/006_criar_tabela_contas_a_pagar.sql", "role": "LEGACY_STATIC_PARCEL_PK_ONLY", "readOnly": true}
+      ]
+    },
+    "fingerprintInputs": {
+      "identity": "dataexport-8636|contas_a_pagar|ROOT_SOURCE_KEY_ABSENT|PARCEL_CANDIDATE_TYPE_UNRESOLVED|PHYSICAL_ROW_KEY_REFUTED|ROOT_PARCEL_GRAIN_CARDINALITY_UNRESOLVED|CANONICAL_BINDING_WITHHELD|EXPLICIT_SCOPE|NO_RELATION_INFERENCE",
+      "release": "2026-09-04.v2-009b.1|contas-a-pagar-identity-v1|dataexport-8636"
+    },
+    "fingerprints": {
+      "identity": "906a6392a5c8d527e911a7579bbf4477ddcd32dcbc1826ae8ec666e0a802805d",
+      "release": "5b0ed833c487da434d3b181f4d33f4ded4cc91dffaff990b0af2cc625af9203f"
+    }
+  }
+}

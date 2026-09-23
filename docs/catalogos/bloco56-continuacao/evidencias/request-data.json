@@ -1,0 +1,25 @@
+{
+  "phase": "B56_CONTINUATION_DATA_01",
+  "authorization": "Same user-adopted bounded read-only investigation as INFO_01; four successful metadata responses are prerequisite.",
+  "templates": [10633, 6392, 4924, 8636],
+  "operation": "GET_WITH_QUERY /api/analytics/reports/{template}/data",
+  "windowStart": "2026-09-04",
+  "windowEnd": "2026-09-04",
+  "page": 1,
+  "per": 2,
+  "maximumCalls": 4,
+  "maximumPhysicalRowsProfiled": 2,
+  "stop": "first HTTP/transport/schema failure, physical rows greater than per, or cap; no next page or retry",
+  "filters": {
+    "10633": ["check_in_orders.started_at"],
+    "6392": ["insurance_claims.opening_at_date"],
+    "4924": ["freights.service_at"],
+    "8636": ["accounting_debits.issue_date", "accounting_debits.created_at"]
+  },
+  "transport": "same curl stdin credential handling; serial; 10 s connect / 30 s request / 10 MiB response / no redirect",
+  "retention": "counts, technical paths, types, nullability and sampled distinct cardinalities; no values, IDs, hashes of IDs, raw bodies or URLs",
+  "recovery": "append-only reservation/outcome ledger; a lost outcome is unknown and must never be retried automatically",
+  "runtimeCampaigns": 0,
+  "sqlOperations": 0,
+  "budgetTransferred": false
+}

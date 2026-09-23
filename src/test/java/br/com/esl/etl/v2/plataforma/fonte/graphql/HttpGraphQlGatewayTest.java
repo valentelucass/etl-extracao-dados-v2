@@ -2,6 +2,7 @@ package br.com.esl.etl.v2.plataforma.fonte.graphql;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -43,6 +44,101 @@ class HttpGraphQlGatewayTest {
 
     private static final Clock CLOCK =
             Clock.fixed(Instant.parse("2026-08-31T12:00:00Z"), ZoneOffset.UTC);
+
+    @Test
+    void malformedUtf8IsRejectedWithoutCauseOrRetryAndReleasesItsPermit() throws Exception {
+        try (var server = new ServerSocket(0, 1, java.net.InetAddress.getLoopbackAddress())) {
+            server.setSoTimeout(3000);
+            final ExecutorService worker = Executors.newSingleThreadExecutor();
+            try {
+                final var reply =
+                        worker.submit(
+                                () -> {
+                                    try (var socket = server.accept()) {
+                                        readRequest(socket.getInputStream());
+                                        final var output = socket.getOutputStream();
+                                        output.write(
+                                                ("HTTP/1.1 200 OK\r\nContent-Type: application/json\r\n"
+                                                                + "Content-Length: 2\r\nConnection: close\r\n\r\n")
+                                                        .getBytes(StandardCharsets.US_ASCII));
+                                        output.write(new byte[] {(byte) 0xc3, 0x28});
+                                        output.flush();
+                                    }
+                                    return null;
+                                });
+                final var runtime = runtime(server, policy(Duration.ofSeconds(1)), 3);
+
+                final var failure =
+                        assertThrows(
+                                GraphQlResponseException.class,
+                                () ->
+                                        runtime.securedGateway()
+                                                .fetch(
+                                                        GraphQlTestSupport.request(
+                                                                GraphQlReadOperation
+                                                                        .USERS_SNAPSHOT)));
+
+                reply.get(3, TimeUnit.SECONDS);
+                assertEquals(GraphQlResponseException.Reason.INVALID_UTF8, failure.reason());
+                assertNull(failure.getCause());
+                assertEquals(0, failure.getSuppressed().length);
+                assertEquals(1, runtime.cycle().sourceRequests());
+                assertEquals(1, runtime.governor().availablePermits());
+            } finally {
+                worker.shutdownNow();
+                assertTrue(worker.awaitTermination(3, TimeUnit.SECONDS));
+            }
+        }
+    }
+
+    @Test
+    void observesLoopbackRetryAndFailureBeforeAnyCompletedPage() throws Exception {
+        try (ServerSocket server =
+                new ServerSocket(0, 1, java.net.InetAddress.getLoopbackAddress())) {
+            final var calls = new AtomicInteger();
+            final var attempts = new AtomicInteger();
+            final var policy = policy(Duration.ofSeconds(1));
+            final var runtime =
+                    runtime(
+                            server,
+                            policy,
+                            2,
+                            governor(policy),
+                            CancellationToken.none(),
+                            operation -> {
+                                assertEquals(GraphQlReadOperation.USERS_SNAPSHOT, operation);
+                                attempts.incrementAndGet();
+                            });
+            final ExecutorService executor = Executors.newSingleThreadExecutor();
+            try {
+                final var task =
+                        executor.submit(
+                                () ->
+                                        serveCountingResponses(
+                                                server,
+                                                calls,
+                                                List.of(
+                                                        jsonResponse(503, ""),
+                                                        jsonResponse(
+                                                                200,
+                                                                "{\"errors\":[{\"message\":\"synthetic\"}],\"data\":null}"))));
+                assertThrows(
+                        GraphQlResponseException.class,
+                        () ->
+                                runtime.securedGateway()
+                                        .fetch(
+                                                GraphQlTestSupport.request(
+                                                        GraphQlReadOperation.USERS_SNAPSHOT)));
+                task.get(3, TimeUnit.SECONDS);
+                assertEquals(2, calls.get());
+                assertEquals(calls.get(), attempts.get());
+                assertEquals(1, runtime.governor().availablePermits());
+            } finally {
+                executor.shutdownNow();
+                assertTrue(executor.awaitTermination(3, TimeUnit.SECONDS));
+            }
+        }
+    }
 
     @Test
     void sendsOnlyPostWithStaticDocumentTypedVariablesAndBoundContract() throws Exception {
@@ -494,6 +590,22 @@ class HttpGraphQlGatewayTest {
             final int maximumAttempts,
             final EslRequestGovernor governor,
             final CancellationToken cancellationToken) {
+        return runtime(
+                server,
+                policy,
+                maximumAttempts,
+                governor,
+                cancellationToken,
+                GraphQlHttpAttemptObserver.noop());
+    }
+
+    private static Runtime runtime(
+            final ServerSocket server,
+            final EslResiliencePolicy policy,
+            final int maximumAttempts,
+            final EslRequestGovernor governor,
+            final CancellationToken cancellationToken,
+            final GraphQlHttpAttemptObserver attempts) {
         final GraphQlSourceConfiguration source = source(server, policy, maximumAttempts);
         final GraphQlHttpGatewayFactory factory =
                 new GraphQlHttpGatewayFactory(source, key -> "synthetic-token", governor, CLOCK);
@@ -510,7 +622,8 @@ class HttpGraphQlGatewayTest {
                         GraphQlReadOperation.USERS_SNAPSHOT,
                         fixture.configuration(),
                         fixture.guard(),
-                        cancellationToken);
+                        cancellationToken,
+                        attempts);
         return new Runtime(governor, cycle, factory, secured, cancellationToken);
     }
 

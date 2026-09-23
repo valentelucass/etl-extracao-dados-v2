@@ -1,0 +1,32 @@
+[
+  {
+    "template": "MANIFESTOS",
+    "mode": "BACKFILL",
+    "version": "bloco55-manifestos-backfill-v2",
+    "fingerprint": "f7a935a8e8017a71e49c8d5347a359e37c4c99708cd4030d0961bbea02411150",
+    "scope": "7b8f6f9c3f5f851230de377156940ebf4c804c28449e3b83987795089571e241",
+    "effectiveFrom": "2026-09-08T00:00:00.124",
+    "priorVersion": "bloco55-manifestos-backfill-v1",
+    "priorFingerprint": "88127ab8dbc7e2c3c81b866362da1a13e7e8ac4af75b922628bd8abdea39c722"
+  },
+  {
+    "template": "COTACOES",
+    "mode": "BACKFILL",
+    "version": "bloco55-cotacoes-backfill-v2",
+    "fingerprint": "e7d7ca60394ba3137d308716f8e6c952df287d8180f9d61a59c0046ff2327342",
+    "scope": "5052e3801fe9bb121f3636a16894f82914a576cfd8c3982429956e728f6af887",
+    "effectiveFrom": "2026-09-08T00:00:00.124",
+    "priorVersion": "bloco55-cotacoes-backfill-v1",
+    "priorFingerprint": "efbb2d1e09ab7f3d083072809f5bd97795f5c059ea3348309936b1909a75d0aa"
+  },
+  {
+    "template": "LOCALIZACAO_CARGAS",
+    "mode": "BACKFILL",
+    "version": "bloco55-localizacao_cargas-backfill-v2",
+    "fingerprint": "b124a3d48c76bb3d1a6a6bdc64d1cfd3647f9f7cba963f9fedb1a39a29c475af",
+    "scope": "67585b27c8adc885f6faa94411e80f1a59f8f9316efa842e33d3324d65903d8d",
+    "effectiveFrom": "2026-09-08T00:00:00.124",
+    "priorVersion": "bloco55-localizacao_cargas-backfill-v1",
+    "priorFingerprint": "6cc4f9addad28a3c4526501bc0648ae8a2dc9a769590e990bb1d5af1ab5e00a4"
+  }
+]

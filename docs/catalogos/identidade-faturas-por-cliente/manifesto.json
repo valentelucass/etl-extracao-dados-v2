@@ -1,0 +1,177 @@
+{
+  "catalogVersion": "2026-09-04.v2-009b.1",
+  "identityFingerprintVersion": "faturas-por-cliente-identity-v1",
+  "task": "V2-009b/4924",
+  "route": "P10",
+  "decisionStatus": "UNRESOLVED_LOGICAL_TITLE_AND_CROSSWALKS",
+  "evidenceVocabulary": [
+    "HISTORICAL_SANITIZED_OBSERVATION",
+    "LEGACY_STATIC_EVIDENCE",
+    "SYNTHETIC_FIXTURES",
+    "NO_TEMPORAL_OR_TENANT_PAYLOAD_PROOF",
+    "NO_INDEPENDENT_COMPLETENESS_EVIDENCE"
+  ],
+  "quarantineReasons": [
+    "AMBIGUOUS_BUSINESS_ALIAS",
+    "CARDINALITY_DIVERGENCE",
+    "INVALID_SOURCE_KEY_TYPE",
+    "INVALID_SOURCE_KEY_VALUE",
+    "MISSING_SOURCE_KEY",
+    "SCOPE_MISMATCH",
+    "SOURCE_KEY_COLLISION",
+    "SOURCE_KEY_TOO_LONG",
+    "UNPROVEN_ALIAS_CHANGE",
+    "UNPROVEN_REKEY"
+  ],
+  "actions": [
+    "BLOCK_PROMOTION_PENDING_VERTICAL_RESOLUTION",
+    "KEEP_CANONICAL",
+    "NO_OP_REPLAY",
+    "PRESERVE_UNRESOLVED_OBSERVATION",
+    "QUARANTINE",
+    "REACTIVATE_EXACT_BINDING",
+    "REGISTER_NEW_CANONICAL",
+    "VERSION_ALIASES_PRESERVE_CANONICAL"
+  ],
+  "sourceFamily": {
+    "sourceKind": "ESL",
+    "transport": "DATA_EXPORT",
+    "sourceInstanceMeaning": "STABLE_NON_SECRET_LOGICAL_ESL_ACCOUNT"
+  },
+  "registry": {
+    "tuple": ["source_instance", "tenant_scope", "entity", "source_key"],
+    "comparison": "CASE_SENSITIVE_EXACT_BIN2",
+    "canonicalIdStrategy": "SQL_SURROGATE_BIGINT_IDENTITY",
+    "recordStateIdIsCanonicalId": false,
+    "physicalEnforcementGate": "V2-009d"
+  },
+  "scope": {
+    "policy": "EXPLICIT_SOURCE_INSTANCE_AND_TENANT_REQUIRED",
+    "globalUniquenessProven": false,
+    "tenantPayloadPath": null,
+    "tenantDerivation": "EXTERNAL_CONFIGURATION_REQUIRED_NO_BUSINESS_FIELD_DERIVATION",
+    "forbiddenTenantSentinels": ["DEFAULT", "GLOBAL", "SINGLETON"]
+  },
+  "canonicalization": {
+    "maximumStorageCharacters": 256,
+    "acceptedWireTypes": ["INTEGER"],
+    "integerEncoding": "INTEGER:<CANONICAL_DECIMAL>",
+    "stringEncoding": "STRING:<EXACT_TEXT>",
+    "integerAndStringEquivalent": false,
+    "textNormalization": "NONE_FAIL_ON_BLANK_BOUNDARY_SPACE_CONTROL_OR_INVALID_UNICODE",
+    "processingBound": "ONE_OBSERVATION_AT_A_TIME"
+  },
+  "identity": {
+    "entity": "faturas_por_cliente",
+    "contractId": "dataexport-4924",
+    "contractVersion": "2026-09-04.v2-025b.1",
+    "sourceContractReleaseFingerprint": "38cecfe9119012eae6e964d79931839805ad825ef527b2392c314edfd94d1098",
+    "recordRoot": "/data/*",
+    "sourceKey": {
+      "path": "/id",
+      "name": "id",
+      "wireTypes": ["INTEGER"],
+      "role": "SCOPED_SOURCE_LINE_KEY_NEVER_CANONICAL_ID",
+      "decision": "ACCEPTED_FOR_SCOPED_SOURCE_LINE_ONLY_NOT_LOGICAL_TITLE",
+      "decisionBasis": "BOUNDED_CONTRACT_AND_ONE_SANITIZED_WINDOW_NOT_PROVIDER_STABILITY_OR_LOGICAL_TITLE"
+    },
+    "canonicalKey": {
+      "strategy": "SQL_SURROGATE_BIGINT_IDENTITY",
+      "binding": "ACCEPTED_FOR_SCOPED_SOURCE_LINE_LOGICAL_TITLE_BINDING_WITHHELD",
+      "notEquivalentTo": ["id", "unique_id", "FPC-HASH", "fit_ant_document", "record_state_id"]
+    },
+    "businessKeys": {
+      "accepted": [],
+      "candidates": [
+        {"names": ["fit_ant_document"], "paths": ["/fit_ant_document"], "decision": "TITLE_CANDIDATE_NOT_LINE_KEY_OR_ALIAS"},
+        {"names": ["fit_nse_number", "nfse_number"], "paths": ["/fit_nse_number", "/nfse_number"], "decision": "FISCAL_REFERENCE_CANDIDATE_NOT_ALIAS"},
+        {"names": ["fit_fhe_cte_number", "fit_fhe_cte_key"], "paths": ["/fit_fhe_cte_number", "/fit_fhe_cte_key"], "decision": "FISCAL_REFERENCE_CANDIDATE_NOT_ALIAS"},
+        {"names": ["billingId"], "paths": [], "decision": "LEGACY_HEURISTIC_INPUT_NOT_PROVEN_SOURCE_FIELD_OR_ALIAS"}
+      ]
+    },
+    "aliases": {
+      "accepted": [],
+      "rejected": ["unique_id", "FPC-HASH", "legacy_nfse_alias", "legacy_cte_alias", "legacy_billing_alias"],
+      "rekeyPolicy": "DOCUMENT_OR_TITLE_CHANGE_NEVER_REKEYS_WITHOUT_VERSIONED_CROSSWALK_EVIDENCE"
+    },
+    "physicalGrain": {
+      "root": "SOURCE_LINE_ONLY_NOT_LOGICAL_FREIGHT_OR_TITLE",
+      "observed": "THREE_PHYSICAL_ROWS_THREE_INTEGER_ID_CANDIDATES_IN_ONE_SANITIZED_WINDOW",
+      "children": [
+        {"name": "invoices_mapping_elements", "path": "/invoices_mapping/*", "decision": "UNRESOLVED_ELEMENT_IDENTITY_SEMANTICS_AND_CARDINALITY"},
+        {"name": "invoice_order_number_elements", "path": "/fit_fte_invoices_order_number/*", "decision": "UNRESOLVED_ELEMENT_IDENTITY_SEMANTICS_AND_CARDINALITY"}
+      ],
+      "relationPolicy": "SCALAR_COOCCURRENCE_AND_ARRAY_MEMBERSHIP_DO_NOT_PROVE_LINE_TITLE_DOCUMENT_OR_FREIGHT_RELATION"
+    },
+    "proof": {
+      "uniqueness": "SOURCE_LINE_LIMITED_THREE_OF_THREE_IN_ONE_SANITIZED_WINDOW_TITLE_REFUTED_AS_LINE_KEY_BY_PARTIAL_HISTORY",
+      "temporalStability": "UNPROVEN_NO_VERSIONED_PROVIDER_GUARANTEE_OR_REPEAT_OBSERVATION",
+      "tenantScope": "UNPROVEN_IN_PAYLOAD_EXPLICIT_EXTERNAL_SCOPE_REQUIRED",
+      "cardinality": "PARTIAL_HISTORY_PROVES_MULTIPLICITY_EXISTS_NOT_ITS_UNIVERSAL_CARDINALITY"
+    },
+    "repeatAndConflictPolicy": {
+      "sameScopedRootSourceKey": "SAME_SCOPED_SOURCE_LINE_REUSES_CANONICAL_LINE_ID_LOGICAL_TITLE_BINDING_WITHHELD",
+      "physicalVariants": "EXACT_REPLAY_MAY_NO_OP_DIVERGENCE_BLOCKS_PENDING_V2_030_FRESHNESS",
+      "divergentRoot": "QUARANTINE_AND_BLOCK_LOGICAL_TITLE_PROMOTION",
+      "aliasCollision": "BLOCK_DEPENDENT_RESOLUTION_NO_AUTOMATIC_REPOINT",
+      "alternateKeyOrRekey": "QUARANTINE_UNPROVEN_REKEY_UNTIL_VERSIONED_CROSSWALK",
+      "missingOrInvalidScopeOrKey": "QUARANTINE",
+      "reactivation": "REUSE_CANONICAL_SOURCE_LINE_ONLY_LOGICAL_TITLE_BINDING_REMAINS_WITHHELD"
+    },
+    "outcome": {
+      "closeSubcheckbox": false,
+      "blockers": [
+        "LOGICAL_TITLE_IDENTITY_UNPROVEN",
+        "LINE_TITLE_DOCUMENT_FREIGHT_CROSSWALKS_UNPROVEN",
+        "FISCAL_ALIAS_AND_REKEY_PRECEDENCE_CONFLICTING",
+        "CHILD_IDENTITY_AND_CARDINALITY_UNPROVEN"
+      ],
+      "unblockEvidence": [
+        "VERSIONED_PROVIDER_STABILITY_FOR_SOURCE_LINE_ID",
+        "REPRESENTATIVE_CROSSWALK_EVIDENCE_FOR_LINE_TITLE_DOCUMENT_FREIGHT_AND_CHILDREN",
+        "OWNER_ACCEPTED_FISCAL_ALIAS_REKEY_AND_CARDINALITY_RULES"
+      ]
+    },
+    "capabilities": {
+      "shadowDomainImplementation": "BLOCKED_PENDING_COMPLETE_V2_009B_4924_AND_V2_030",
+      "sweepOrDeactivation": "BLOCKED_NO_COMPLETENESS_PROOF",
+      "cutover": "BLOCKED_NO_COMPLETENESS_PROOF",
+      "externalHolds": {"V2-025d": "BLOCKED_BY_V2_041_EXTERNAL_HOLD"}
+    },
+    "nextGates": ["V2-009b/4924", "V2-030", "V2-009d", "V2-025d"],
+    "evidenceBounds": {
+      "supports": [
+        "INTEGER_ID_ACCEPTED_FOR_SCOPED_SOURCE_LINE_ONLY",
+        "THREE_ROWS_THREE_IDS_IN_ONE_SANITIZED_WINDOW",
+        "PARTIAL_HISTORICAL_MULTIPLICITY_COUNTEREXAMPLE_FOR_TITLE_AS_LINE_KEY"
+      ],
+      "doesNotSupport": [
+        "LOGICAL_TITLE_IDENTITY_OR_STABILITY",
+        "LINE_TITLE_DOCUMENT_FREIGHT_CROSSWALKS",
+        "FISCAL_ALIAS_PRECEDENCE_OR_REKEY",
+        "CHILD_IDENTITY_RELATIONSHIP_OR_UNIVERSAL_CARDINALITY",
+        "PAYLOAD_TENANT_COMPLETENESS_SWEEP_OR_CUTOVER"
+      ],
+      "files": [
+        {"path": "docs/adr/0018-identidade-e-crosswalk-da-primeira-onda.md", "role": "RATIFIED_REGISTRY_FRAMEWORK", "readOnly": true},
+        {"path": "docs/catalogos/identidade-primeira-onda/manifesto.json", "role": "RATIFIED_IDENTITY_POLICY_BASELINE", "readOnly": true},
+        {"path": "docs/catalogos/identidade-cotacoes/manifesto.json", "role": "BOUNDED_SINGLE_ENTITY_PRECEDENT", "readOnly": true},
+        {"path": "docs/catalogos/contratos-esl-4924/manifesto.json", "role": "VERSIONED_OFFLINE_CONTRACT", "readOnly": true},
+        {"path": "docs/catalogos/contratos-esl-4924/fixtures/4924-per-3-page-1.synthetic.json", "role": "SYNTHETIC_SOURCE_LINE_SHAPE_ONLY", "readOnly": true},
+        {"path": "STATES.md", "role": "ROADMAP_RULE_FAT_01", "readOnly": true},
+        {"path": "../etl-extracao-dados/docs/legado/pipelines-antigos/02-apis/dataexport/faturaporcliente.md", "role": "PARTIAL_HISTORICAL_MULTIPLICITY_COUNTEREXAMPLE_ONLY", "readOnly": true},
+        {"path": "../etl-extracao-dados/src/main/java/br/com/extrator/dominio/dataexport/faturaporcliente/FaturaPorClienteDTO.java", "role": "LEGACY_STATIC_ID_ABSENCE_AND_ARRAY_SHAPE", "readOnly": true},
+        {"path": "../etl-extracao-dados/src/main/java/br/com/extrator/integracao/mapeamento/dataexport/faturaporcliente/FaturaPorClienteMapper.java", "role": "LEGACY_STATIC_CONFLICTING_HASH_ALIAS_HEURISTIC", "readOnly": true},
+        {"path": "../etl-extracao-dados/src/main/java/br/com/extrator/persistencia/repositorio/FaturaPorClienteRepository.java", "role": "LEGACY_STATIC_ALIAS_REPOINT_COUNTEREVIDENCE", "readOnly": true}
+      ]
+    },
+    "fingerprintInputs": {
+      "identity": "dataexport-4924|faturas_por_cliente|/id|INTEGER|SOURCE_LINE_ONLY|LOGICAL_TITLE_UNRESOLVED|NO_ALIAS_ACCEPTED|CROSSWALKS_UNPROVEN|CHILDREN_UNRESOLVED|CANONICAL_LINE_BINDING_ACCEPTED_TITLE_BINDING_WITHHELD|EXPLICIT_SCOPE|NO_RELATION_INFERENCE",
+      "release": "2026-09-04.v2-009b.1|faturas-por-cliente-identity-v1|dataexport-4924"
+    },
+    "fingerprints": {
+      "identity": "0403c2752b14d872ecbc3a4b9c7aaafc7fe3731532e15f30b8ea8f003c78d557",
+      "release": "8ed57052533575573b50410a969d7cc6c461a1d0418a8dc104d47d054d7348f9"
+    }
+  }
+}

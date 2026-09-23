@@ -24,9 +24,6 @@ class GraphQlFixtureContractTest {
     private static final String PICK_NODE_WITH_ITEM =
             "{\"id\":\"synthetic-pick-a\",\"sequenceCode\":\"synthetic-sequence-a\","
                     + "\"pickItems\":[{\"id\":\"synthetic-pick-item-a\"}]}";
-    private static final String PICK_NODE_WITHOUT_ITEM =
-            "{\"id\":\"synthetic-pick-b\",\"sequenceCode\":\"synthetic-sequence-b\","
-                    + "\"pickItems\":[]}";
     private static final String FREIGHT_NODE =
             "{\"id\":\"synthetic-freight-a\","
                     + "\"accountingCreditId\":\"synthetic-credit-a\","

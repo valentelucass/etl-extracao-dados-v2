@@ -1,0 +1,441 @@
+{
+  "version": 1,
+  "status": "COLETAS_TEMPORAL_LINK_LOCAL_VERIFIED",
+  "initialFiles": 2400,
+  "remoteCalls": 0,
+  "sqlExecuted": false,
+  "newAcceptances": 0,
+  "operationalSidecarEnabled": false,
+  "sourceTemporalEquivalenceAccepted": false,
+  "newBudget": false,
+  "ownedExistingChanges": 9,
+  "concurrentExistingChanges": 5,
+  "predecessor": {
+    "sha256": "44c330ff177a95963aa0d20b23dc9be7fef9756026eb675f378c40eca14fd79d",
+    "path": "docs/catalogos/coletas-temporal-proof/manifesto.json"
+  },
+  "changedExistingFiles": [
+    {
+      "origin": "THIS_DELIVERY_AND_PRESERVED_CONCURRENT_DOCUMENTATION",
+      "snapshot": "docs/continuidade/historico/coletas-temporal-link/STATES.md",
+      "after": "c28736418297be1dcd53567c8e6f94adf8a8c493f631d944d512f41c81a15941",
+      "insertionOffset": 1974,
+      "before": "5b924058aade77d171fe3c23c692a1011d336975c7b386290ee800088bf4c9ce",
+      "path": "STATES.md"
+    },
+    {
+      "origin": "THIS_DELIVERY_AND_PRESERVED_CONCURRENT_DOCUMENTATION",
+      "snapshot": "docs/continuidade/historico/coletas-temporal-link/docs/runbooks/trilha-de-chats-gpt-5-6.md",
+      "after": "7476796672faf069b31a708bfa23a15d96608c1b582d0541d743e8298d4b8ae3",
+      "insertionOffset": 0,
+      "before": "8c10c2096abce4140269d610f4ef7b889c20bb7dc677a9256e68385a0f640f1d",
+      "path": "docs/runbooks/trilha-de-chats-gpt-5-6.md"
+    },
+    {
+      "origin": "THIS_DELIVERY_AND_PRESERVED_CONCURRENT_DOCUMENTATION",
+      "snapshot": "docs/continuidade/historico/coletas-temporal-link/docs/continuidade/RETOMADA.md",
+      "after": "50ae64a3c1d4a238a6a3881acaae0e36c5b2059252245aa6827f4625b3852016",
+      "insertionOffset": 0,
+      "before": "0e2cddf98ba637e0cd442e0f92623169214b24332650ce3b8618d14891af5f89",
+      "path": "docs/continuidade/RETOMADA.md"
+    },
+    {
+      "origin": "THIS_DELIVERY",
+      "snapshot": "docs/continuidade/historico/coletas-temporal-link/scripts/validation/Test-ColetasTemporalProof.ps1",
+      "after": "bc3df7f238cc16b5976efedc11c230ae46e056240fb9b8317bb2baee0d7c9154",
+      "insertionOffset": 0,
+      "before": "29d5e7b3511ffb8f022fa76cf77799b67dc2019765ec5ff48dbda83af0b43d8e",
+      "path": "scripts/validation/Test-ColetasTemporalProof.ps1"
+    },
+    {
+      "origin": "THIS_DELIVERY",
+      "snapshot": "docs/continuidade/historico/coletas-temporal-link/src/main/java/br/com/esl/etl/v2/plataforma/fonte/graphql/GraphQlReadOperation.java",
+      "after": "61be8e29b87be304c1c0062978d86a0de28e8285ba9ac8692447ad70d4a8e9d6",
+      "insertionOffset": 0,
+      "before": "1c6028fc494d9aff5a57822cde0f66d5bcf62f6698f00d9bff51e1561390e50d",
+      "path": "src/main/java/br/com/esl/etl/v2/plataforma/fonte/graphql/GraphQlReadOperation.java"
+    },
+    {
+      "origin": "THIS_DELIVERY",
+      "snapshot": "docs/continuidade/historico/coletas-temporal-link/src/main/java/br/com/esl/etl/v2/plataforma/fonte/graphql/GraphQlQueryParameters.java",
+      "after": "921ab06f3c59bc0843046a5894610d1aec4a80d2bc883764d0ae24d9bcb23407",
+      "insertionOffset": 0,
+      "before": "08b71948585f7f610564723b75abbfd044968cae233e7c10fcdad6cbb299cc02",
+      "path": "src/main/java/br/com/esl/etl/v2/plataforma/fonte/graphql/GraphQlQueryParameters.java"
+    },
+    {
+      "origin": "THIS_DELIVERY",
+      "snapshot": "docs/continuidade/historico/coletas-temporal-link/src/main/java/br/com/esl/etl/v2/plataforma/fonte/graphql/GraphQlTransitionalField.java",
+      "after": "b8b00dd12a44d14c9d307d9ce58a57f9dca499b1b65670a3f08625e6e4f22c10",
+      "insertionOffset": 0,
+      "before": "bf290ad6ab4afaab8164dfa9e14d55a9c4a3536010f33103da0e601e5003cdc3",
+      "path": "src/main/java/br/com/esl/etl/v2/plataforma/fonte/graphql/GraphQlTransitionalField.java"
+    },
+    {
+      "origin": "THIS_DELIVERY",
+      "snapshot": "docs/continuidade/historico/coletas-temporal-link/src/test/java/br/com/esl/etl/v2/plataforma/fonte/graphql/GraphQlTestSupport.java",
+      "after": "9e4db3b9be31aa705757070fb5fede01a8ea5786c5cc52d7f0666659ef1c1f10",
+      "insertionOffset": 0,
+      "before": "8f0adb945d5e8d33f0c5d0b43158bf7bc5368be084540dd885c1f497a269e19e",
+      "path": "src/test/java/br/com/esl/etl/v2/plataforma/fonte/graphql/GraphQlTestSupport.java"
+    },
+    {
+      "origin": "THIS_DELIVERY",
+      "snapshot": "docs/continuidade/historico/coletas-temporal-link/src/test/java/br/com/esl/etl/v2/plataforma/fonte/graphql/GraphQlTransitionCatalogTest.java",
+      "after": "c2965b21345748f2a08e18110f1141b4bc313467695123b9b5a9298838d9f809",
+      "insertionOffset": 0,
+      "before": "0135e1d29230139a766baa8a151c6e438ab2531f5cedd349771f07a2404e9318",
+      "path": "src/test/java/br/com/esl/etl/v2/plataforma/fonte/graphql/GraphQlTransitionCatalogTest.java"
+    },
+    {
+      "origin": "CONCURRENT_CHANGE_NOT_AUTHORED_IN_THIS_DELIVERY",
+      "snapshot": "docs/continuidade/historico/coletas-temporal-link/src/test/java/br/com/esl/etl/v2/arquitetura/ArchitectureRulesTest.java",
+      "after": "1fd4d496833a4cc5fc92cff14033bf3f52aebef9ca36a5748260cce021c60c49",
+      "insertionOffset": 0,
+      "before": "81c171cfcef795abd8dfdc6c8b70cd9ea45917bcf4d454007b7cdc02d01521cb",
+      "path": "src/test/java/br/com/esl/etl/v2/arquitetura/ArchitectureRulesTest.java"
+    },
+    {
+      "origin": "CONCURRENT_CHANGE_NOT_AUTHORED_IN_THIS_DELIVERY",
+      "snapshot": "docs/continuidade/historico/coletas-temporal-link/src/test/java/br/com/esl/etl/v2/plataforma/autorizacao/RuntimeAuthorizationPolicyTest.java",
+      "after": "e958f589b3f4057dcf1067f5903f542174f333933a5cd86a7760a182aa9e5895",
+      "insertionOffset": 0,
+      "before": "908c76b81061b9300bf241650398164c738edf1f3c8eb955ff4eb6018ea9d8f7",
+      "path": "src/test/java/br/com/esl/etl/v2/plataforma/autorizacao/RuntimeAuthorizationPolicyTest.java"
+    },
+    {
+      "origin": "CONCURRENT_CHANGE_NOT_AUTHORED_IN_THIS_DELIVERY",
+      "snapshot": "docs/continuidade/historico/coletas-temporal-link/src/test/java/br/com/esl/etl/v2/plataforma/fonte/dataexport/DataExportStagingPipelineTest.java",
+      "after": "38026396e4bc247ca993effab68e5207d58cc7c7289e0e8f497fe9e4ea83c4da",
+      "insertionOffset": 0,
+      "before": "a2a44aabedf08aaa5d4bee71b52a174fb678fce731d90bc4a648447909631ae9",
+      "path": "src/test/java/br/com/esl/etl/v2/plataforma/fonte/dataexport/DataExportStagingPipelineTest.java"
+    },
+    {
+      "origin": "CONCURRENT_CHANGE_NOT_AUTHORED_IN_THIS_DELIVERY",
+      "snapshot": "docs/continuidade/historico/coletas-temporal-link/src/test/java/br/com/esl/etl/v2/plataforma/fonte/graphql/GraphQlFixtureContractTest.java",
+      "after": "71000fb3b7858f0036767e100f24fbcff00d0a9d797409707f66c80101737c90",
+      "insertionOffset": 0,
+      "before": "7f6bdcaead0543c35eb5dc1b357a6e49ce79c5163c526dcdc9c53182a269da66",
+      "path": "src/test/java/br/com/esl/etl/v2/plataforma/fonte/graphql/GraphQlFixtureContractTest.java"
+    },
+    {
+      "origin": "CONCURRENT_CHANGE_NOT_AUTHORED_IN_THIS_DELIVERY",
+      "snapshot": "docs/continuidade/historico/coletas-temporal-link/src/test/java/br/com/esl/etl/v2/plataforma/reconciliacao/sweep/FailClosedSweepPreviewKernelTest.java",
+      "after": "8f4d478c57794ae70ec7ed61e1de2c2372cfdbcb7fcd66007da798f9b316c202",
+      "insertionOffset": 0,
+      "before": "7a82e4e21a7ddd26343abb703a6e2e1c062a85caa76f5f8ac81cc90c01783d2d",
+      "path": "src/test/java/br/com/esl/etl/v2/plataforma/reconciliacao/sweep/FailClosedSweepPreviewKernelTest.java"
+    }
+  ],
+  "newFiles": [
+    {
+      "sha256": "5b924058aade77d171fe3c23c692a1011d336975c7b386290ee800088bf4c9ce",
+      "path": "docs/continuidade/historico/coletas-temporal-link/STATES.md"
+    },
+    {
+      "sha256": "8c10c2096abce4140269d610f4ef7b889c20bb7dc677a9256e68385a0f640f1d",
+      "path": "docs/continuidade/historico/coletas-temporal-link/docs/runbooks/trilha-de-chats-gpt-5-6.md"
+    },
+    {
+      "sha256": "0e2cddf98ba637e0cd442e0f92623169214b24332650ce3b8618d14891af5f89",
+      "path": "docs/continuidade/historico/coletas-temporal-link/docs/continuidade/RETOMADA.md"
+    },
+    {
+      "sha256": "29d5e7b3511ffb8f022fa76cf77799b67dc2019765ec5ff48dbda83af0b43d8e",
+      "path": "docs/continuidade/historico/coletas-temporal-link/scripts/validation/Test-ColetasTemporalProof.ps1"
+    },
+    {
+      "sha256": "1c6028fc494d9aff5a57822cde0f66d5bcf62f6698f00d9bff51e1561390e50d",
+      "path": "docs/continuidade/historico/coletas-temporal-link/src/main/java/br/com/esl/etl/v2/plataforma/fonte/graphql/GraphQlReadOperation.java"
+    },
+    {
+      "sha256": "08b71948585f7f610564723b75abbfd044968cae233e7c10fcdad6cbb299cc02",
+      "path": "docs/continuidade/historico/coletas-temporal-link/src/main/java/br/com/esl/etl/v2/plataforma/fonte/graphql/GraphQlQueryParameters.java"
+    },
+    {
+      "sha256": "bf290ad6ab4afaab8164dfa9e14d55a9c4a3536010f33103da0e601e5003cdc3",
+      "path": "docs/continuidade/historico/coletas-temporal-link/src/main/java/br/com/esl/etl/v2/plataforma/fonte/graphql/GraphQlTransitionalField.java"
+    },
+    {
+      "sha256": "8f0adb945d5e8d33f0c5d0b43158bf7bc5368be084540dd885c1f497a269e19e",
+      "path": "docs/continuidade/historico/coletas-temporal-link/src/test/java/br/com/esl/etl/v2/plataforma/fonte/graphql/GraphQlTestSupport.java"
+    },
+    {
+      "sha256": "0135e1d29230139a766baa8a151c6e438ab2531f5cedd349771f07a2404e9318",
+      "path": "docs/continuidade/historico/coletas-temporal-link/src/test/java/br/com/esl/etl/v2/plataforma/fonte/graphql/GraphQlTransitionCatalogTest.java"
+    },
+    {
+      "sha256": "81c171cfcef795abd8dfdc6c8b70cd9ea45917bcf4d454007b7cdc02d01521cb",
+      "path": "docs/continuidade/historico/coletas-temporal-link/src/test/java/br/com/esl/etl/v2/arquitetura/ArchitectureRulesTest.java"
+    },
+    {
+      "sha256": "908c76b81061b9300bf241650398164c738edf1f3c8eb955ff4eb6018ea9d8f7",
+      "path": "docs/continuidade/historico/coletas-temporal-link/src/test/java/br/com/esl/etl/v2/plataforma/autorizacao/RuntimeAuthorizationPolicyTest.java"
+    },
+    {
+      "sha256": "a2a44aabedf08aaa5d4bee71b52a174fb678fce731d90bc4a648447909631ae9",
+      "path": "docs/continuidade/historico/coletas-temporal-link/src/test/java/br/com/esl/etl/v2/plataforma/fonte/dataexport/DataExportStagingPipelineTest.java"
+    },
+    {
+      "sha256": "7f6bdcaead0543c35eb5dc1b357a6e49ce79c5163c526dcdc9c53182a269da66",
+      "path": "docs/continuidade/historico/coletas-temporal-link/src/test/java/br/com/esl/etl/v2/plataforma/fonte/graphql/GraphQlFixtureContractTest.java"
+    },
+    {
+      "sha256": "7a82e4e21a7ddd26343abb703a6e2e1c062a85caa76f5f8ac81cc90c01783d2d",
+      "path": "docs/continuidade/historico/coletas-temporal-link/src/test/java/br/com/esl/etl/v2/plataforma/reconciliacao/sweep/FailClosedSweepPreviewKernelTest.java"
+    },
+    {
+      "sha256": "e13ef5f265525f6dc2799d04f26529d97c943551dd808d7d1fdd692d5d35ee06",
+      "path": "docs/catalogos/graphql-coletas-temporal.csv"
+    },
+    {
+      "sha256": "599dd5228e7a18704aa07534dc255397fb3e618af1da02f1441fdcf514a02a3e",
+      "path": "docs/adr/0045-coletas-referencia-temporal-local-com-proveniencia.md"
+    },
+    {
+      "sha256": "7e7ac950f52906ed01c0f122433d650780f13d9996bd444b9aeaed2325c78a2b",
+      "path": "docs/continuidade/checkpoints/0064-coletas-ligacao-temporal-implementada.md"
+    },
+    {
+      "sha256": "f7170a5ffba5ad880df663e1c8925ff8acbb204eedadba128881bd22cb462648",
+      "path": "docs/continuidade/checkpoints/0065-coletas-ligacao-temporal-verificada.md"
+    },
+    {
+      "sha256": "51ad650ef4481d70096f396a66981cad24596a456c7960452ab6a98a1e6cd71e",
+      "path": "docs/continuidade/checkpoints/0066-coletas-ligacao-temporal-entrega.md"
+    },
+    {
+      "sha256": "ca27c639f8689cc8e99213b98d14cfd19bcad5d65c63ca7bfc1b9c348e6f37d3",
+      "path": "docs/catalogos/coletas-temporal-link/RELATORIO.md"
+    },
+    {
+      "sha256": "75e675368490866e47e82de174c8c49c87e379ccc35fd445f686b2ae5db0b332",
+      "path": "docs/catalogos/coletas-temporal-link/verification-summary.json"
+    },
+    {
+      "sha256": "5efe04f53eda05ef28b638a6fbe6d2a1d801e20fa547c4b1f8db952299689187",
+      "path": "scripts/validation/Test-ColetasTemporalLink.ps1"
+    },
+    {
+      "sha256": "df2a35c533fa51280d437f95b7e456da962040eec3899825678a92dea00a4d42",
+      "path": "src/main/java/br/com/esl/etl/v2/plataforma/fonte/graphql/GraphQlColetasTemporalContractCatalog.java"
+    },
+    {
+      "sha256": "ad9bc9c7d2a095ccc246704044d8c6bb9bd94b4229b736eff1ad5cada4625337",
+      "path": "src/main/java/br/com/esl/etl/v2/modulos/coletas/domain/ColetaTemporalObservation.java"
+    },
+    {
+      "sha256": "ae98a021ac2dd6b467c59f3c7470531d5f89e7b9e5bb587aa14416f6655c3766",
+      "path": "src/main/java/br/com/esl/etl/v2/modulos/coletas/domain/ColetaTemporalIdentityBinding.java"
+    },
+    {
+      "sha256": "77c8065cdb70e2be26e63953ec550bd154ebccc8707f3007d3c62df49573ac1a",
+      "path": "src/main/java/br/com/esl/etl/v2/modulos/coletas/aplicacao/ColetaGraphQlTemporalMapper.java"
+    },
+    {
+      "sha256": "0de8d2cee55248e825bb67b4467ba62ae1cebb491e85109c6cf19a63fd4a580e",
+      "path": "src/main/java/br/com/esl/etl/v2/modulos/coletas/aplicacao/LigarReferenciaTemporalColeta.java"
+    },
+    {
+      "sha256": "a89f0893be6ac2ff98d8faf612a3d62f4e2da0db51050fe22894693544725c5c",
+      "path": "src/main/java/br/com/esl/etl/v2/modulos/coletas/aplicacao/ExtrairReferenciasTemporaisColetas.java"
+    },
+    {
+      "sha256": "d61d9b0660b4152c8c023899685478beb3f4d010087bf3fd23bbd3c15a1702f9",
+      "path": "src/test/java/br/com/esl/etl/v2/modulos/coletas/aplicacao/ColetaTemporalLinkTest.java"
+    },
+    {
+      "sha256": "16a0affd69aa83c633fd73bdc72131434acf867f107dfdc3d3ef9d057bd75ae6",
+      "path": "src/test/java/br/com/esl/etl/v2/plataforma/fonte/graphql/ExtrairReferenciasTemporaisColetasTest.java"
+    },
+    {
+      "path": "docs/continuidade/checkpoints/0067-coletas-continuidade-conciliada.md",
+      "sha256": "97df9f1b2b8fce5d4f0a8383572eb8e3dbdf569223a1c8efa53919d27f2f2938",
+      "origin": "THIS_DELIVERY"
+    },
+    {
+      "path": "docs/continuidade/checkpoints/0066-avisos-java-testes.md",
+      "sha256": "ce8abdbe5312f938252f1938d997f7503861a0c5da524fd419a8bb4a641de64a",
+      "origin": "CONCURRENT_DOCUMENTARY_ADDITION"
+    }
+  ],
+  "evidence": [
+    {
+      "sha256": "a82fd05f5ec597b25e5bd4c1cfa356c0498ddfc4d5fa3f2e5e2b241a71e9a8f0",
+      "path": "target/coletas-temporal-link-20260910/inventory-before.json"
+    },
+    {
+      "sha256": "fd355ca0f8fcd64b00dbb9956b85a7314b5482f063adbdb0a0934cb1c5ce305e",
+      "path": "target/coletas-temporal-link-20260910/action-record.json"
+    },
+    {
+      "sha256": "a9ded00361a1c775448bc6ac06418ddf0b9984d8a5cbebf4324ee8af3bfab71a",
+      "path": "target/coletas-temporal-link-20260910/verify-action.json"
+    },
+    {
+      "sha256": "fd2d1d6243bc57e738f45777ec2f593fce56c04443568c0bdecfce0117b460bb",
+      "path": "target/coletas-temporal-link-20260910/Invoke-Offline.ps1"
+    },
+    {
+      "sha256": "297302d2bf2188175426d7cfac784edd9398af510d34373e556900a3d30686e1",
+      "path": "target/coletas-temporal-link-20260910/logs/baseline-proof.log"
+    },
+    {
+      "sha256": "59b1246b0cbdcaa4e9f3dca61d70d73b4c00dca1ad44eedc78884ab12873b98c",
+      "path": "target/coletas-temporal-link-20260910/logs/baseline-b63.log"
+    },
+    {
+      "sha256": "c8dd9f663f563628934f35065d61861f2e99f6651138164a5b76f546eadd0d52",
+      "path": "target/coletas-temporal-link-20260910/logs/directed-01.log"
+    },
+    {
+      "sha256": "8712c7a25dc7ae6f4ca9964e01e17aa6b4f60be61cb7a7c8d86f8a21b841aa1d",
+      "path": "target/coletas-temporal-link-20260910/directed-01-exit.json"
+    },
+    {
+      "sha256": "c17ed006806273f698e02a07961339d1e7237ce446fc099f719b746a4e5a1d7c",
+      "path": "target/coletas-temporal-link-20260910/logs/directed-02.log"
+    },
+    {
+      "sha256": "0eec8146bc554d54530544c4179768c4aebc8a1e1592f664d13700cb5a3c41e8",
+      "path": "target/coletas-temporal-link-20260910/directed-02-exit.json"
+    },
+    {
+      "sha256": "ac8b874363222b19ddf99050f10f781ceb02dffa2d5130f988b4bef6495a09d4",
+      "path": "target/coletas-temporal-link-20260910/logs/verify-01.log"
+    },
+    {
+      "sha256": "bd45324094f8ff48fccf45afc826d769ba2eb52b93f5c3eadf20f43886e532c8",
+      "path": "target/coletas-temporal-link-20260910/verify-01-exit.json"
+    },
+    {
+      "sha256": "5c4f46904848bd6a708fde1c8040f30157ecd2181eb20bf295279cb8a8b0d2b7",
+      "path": "target/coletas-temporal-link-20260910/java-verification.json"
+    },
+    {
+      "sha256": "66e346058da862d947c42231700dd1ab2dc83e3d1027aa025143cc588bf0b5a9",
+      "path": "target/coletas-temporal-link-20260910/Seal.attempt1.ps1"
+    },
+    {
+      "sha256": "a76fd6b68b86fa5fede257c219f14e7dde03d10f873ae38b3645e6e740931bb5",
+      "path": "target/coletas-temporal-link-20260910/seal-attempt1.json"
+    },
+    {
+      "sha256": "62762c41846e920693716dd38bda3f2f8364f75edab3e2a6e8e2c5129016581c",
+      "path": "target/coletas-temporal-link-20260910/Seal.ps1"
+    },
+    {
+      "sha256": "70af8e599217eef0bc6d6dfcc27152348f79a2f34a3f38c2de1ce73f706dd805",
+      "path": "target/coletas-temporal-link-20260910/logs/verify-02.log"
+    },
+    {
+      "sha256": "76e2bb0338d90a3bdf48fbfe455b1b9473783698d81efacad7ee1f46db5ce334",
+      "path": "target/coletas-temporal-link-20260910/verify-02-exit.json"
+    },
+    {
+      "sha256": "f707c17ccded4a25d348d699411b8a677f7fa5fff331cc2c5d89051d4e882147",
+      "path": "target/coletas-temporal-link-20260910/logs/scanner-final.log"
+    },
+    {
+      "sha256": "333b70cde8f922f344d8d8a20863c3e00ee0f1ecb45e2792f471b43fd0641a95",
+      "path": "target/coletas-temporal-link-20260910/delivery-attempt1.json"
+    },
+    {
+      "sha256": "475c7204b289265a11a59abdfc2b0eff6fed9642bea59698b2ab239e81108ad5",
+      "path": "target/coletas-temporal-link-20260910/java-verification-attempt1.json"
+    },
+    {
+      "sha256": "5b45309cacec4779ca875931bacce11dbcd26bc287e5ec22f793426a318ce4fb",
+      "path": "target/coletas-temporal-link-20260910/Seal.delivery1.ps1"
+    },
+    {
+      "sha256": "d23e6b2fe67468d04ddff51851ffc54fe4244003248d2a2743a0182ab09735e3",
+      "path": "target/coletas-temporal-link-20260910/cancellation-rename-check.json"
+    },
+    {
+      "sha256": "28b2af5e5ae36e49be241862db445f8d41041121438d82e6a11f3996543623d5",
+      "path": "target/coletas-temporal-link-20260910/logs/verify-03.log"
+    },
+    {
+      "sha256": "80874c8cbfb3d64cd01c87f6215ae75a20f1fe20744815b1fe492db401ea825c",
+      "path": "target/coletas-temporal-link-20260910/verify-03-exit.json"
+    },
+    {
+      "sha256": "e39d27e7ca440ba861c88540533b4d9cb330a0667537b02e70f2cea255bf5c1d",
+      "path": "target/coletas-temporal-link-20260910/concurrent-observed.json"
+    },
+    {
+      "sha256": "cdaa5363391aa74f4a151e140ba232d8e2061aa46b82829ea5bdd6afbe691846",
+      "path": "target/coletas-temporal-link-20260910/Seal.attempt2.ps1"
+    },
+    {
+      "sha256": "b337a45a92fbfff3dbd6332eed419b62b3af6026fcdcd8f1e5d1ed9101cc50d5",
+      "path": "target/coletas-temporal-link-20260910/seal-attempt2.log"
+    },
+    {
+      "sha256": "d9fc13c75f34a6d6b3091e874cab217371584713958a587f6782cbfed75ba796",
+      "path": "target/coletas-temporal-link-20260910/delivery-attempt1/STATES.md"
+    },
+    {
+      "sha256": "e1991f3e3216f8c72aca7d7cec6c15dc2166f3629d5e3910aa0364ceb6fd87ba",
+      "path": "target/coletas-temporal-link-20260910/delivery-attempt1/docs/catalogos/coletas-temporal-link/manifesto.json"
+    },
+    {
+      "sha256": "3cf78afe7e9f14b0a1cef0214cba2a557edeca5bcd03c212eb7a72364d24d726",
+      "path": "target/coletas-temporal-link-20260910/delivery-attempt1/docs/catalogos/coletas-temporal-link/RELATORIO.md"
+    },
+    {
+      "sha256": "edcf58f997bd0cc82d89b59862f678883aa0e317698efab2fb2e684e4d3fa5f4",
+      "path": "target/coletas-temporal-link-20260910/delivery-attempt1/docs/catalogos/coletas-temporal-link/verification-summary.json"
+    },
+    {
+      "sha256": "5e66d24b1328b52445eea3ee368755f19d5d64671406f53a496032c1eac9cc26",
+      "path": "target/coletas-temporal-link-20260910/delivery-attempt1/docs/continuidade/RETOMADA.md"
+    },
+    {
+      "sha256": "b0ac535319f05b1ed5c84cc989b89f56f125abe352ec195fd3f1869fb5c11990",
+      "path": "target/coletas-temporal-link-20260910/delivery-attempt1/docs/runbooks/trilha-de-chats-gpt-5-6.md"
+    },
+    {
+      "sha256": "6d47dbe2ab06918af0c9831d87c09309f89a2502446e9c8c8203e04cb7150efb",
+      "path": "target/coletas-temporal-link-20260910/delivery-attempt1/scripts/validation/Test-ColetasTemporalLink.ps1"
+    },
+    {
+      "sha256": "32a4bbfd3444cce531d4e7e3b71f6d54041d73dea92f22891de6533a6750b22d",
+      "path": "target/coletas-temporal-link-20260910/delivery-attempt1/src/test/java/br/com/esl/etl/v2/plataforma/fonte/graphql/ExtrairReferenciasTemporaisColetasTest.java"
+    },
+    {
+      "path": "target/coletas-temporal-link-20260910/concurrent-docs-before.json",
+      "sha256": "29f703a1341758be6379d2d01cceaaf7dd3038775351dd871ca968aff51fb6d0"
+    },
+    {
+      "path": "target/coletas-temporal-link-20260910/manifest-before-documentary-conciliation.json",
+      "sha256": "c174cd0390e0e3e53275f75a4ceaea91cd95333607d792582696a0e808a97d50"
+    },
+    {
+      "path": "target/coletas-temporal-link-20260910/Test-ColetasTemporalLink.before-conciliation.ps1",
+      "sha256": "166d554818a818cae8f16adc859833d6c555d2a207cc33fb210b215ced4357c5"
+    },
+    {
+      "path": "target/coletas-temporal-link-20260910/Reconcile-Continuity.ps1",
+      "sha256": "40757edb37da69c60c48cf5b2312668e035e8397190eddaef2442eea880ef8df"
+    },
+    {
+      "path": "target/coletas-temporal-link-20260910/concurrent-docs-before/STATES.md",
+      "sha256": "c90eb120c516a5242168e0a36d92e4b0ff7d60a3cfd24207f2ad534d20550591"
+    },
+    {
+      "path": "target/coletas-temporal-link-20260910/concurrent-docs-before/docs/continuidade/RETOMADA.md",
+      "sha256": "5b5941b29a9c8612d952f3bbadf726e6feb0b9e1b409f09a5c25609d5b783849"
+    },
+    {
+      "path": "target/coletas-temporal-link-20260910/concurrent-docs-before/docs/continuidade/checkpoints/0066-avisos-java-testes.md",
+      "sha256": "ce8abdbe5312f938252f1938d997f7503861a0c5da524fd419a8bb4a641de64a"
+    },
+    {
+      "path": "target/coletas-temporal-link-20260910/concurrent-docs-before/docs/runbooks/trilha-de-chats-gpt-5-6.md",
+      "sha256": "86952af585729f6136a2090d05f1f8f4d38131e49ef68836207978c9ea50434e"
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "target": "localhost/ETL_SISTEMA_V2_SHADOW",
+  "deadlineUtc": "2026-09-10T13:15:21.8816492Z",
+  "block": 60,
+  "files": [
+    {
+      "sha256": "736ca4832408dc14ef63b8dce647ea63c5c05b89c2a36115cad09a49ea6387eb",
+      "path": "scripts/validation/Invoke-Bloco60PartitionReconcile.ps1"
+    },
+    {
+      "sha256": "d98c4f25200f89a8bfe0c4ba92f3258d97f70d2066b6bacd42e817fa7f7704ce",
+      "path": "scripts/validation/Bloco60ResumedCorrectionLedger.psm1"
+    },
+    {
+      "sha256": "464cc0910d8117a883bae92aa139e72ca6f0e1ea78e75a5a770c436c40aef25a",
+      "path": "scripts/validation/Bloco60AdminProcess.cs"
+    },
+    {
+      "sha256": "a4536384965acdf7171193820cb944ff323b69e1aa8b3923a433bb0138b65eb1",
+      "path": "database/proposals/bloco60-partition-reconcile/partition.sql"
+    },
+    {
+      "sha256": "775675820dc4110e754f5b9f31affde6cd2e94a1ae367b35296455d701071918",
+      "path": "database/proposals/bloco60-partition-reconcile/partition-body.sql"
+    },
+    {
+      "sha256": "7256c38a507ec9cddfc28ebd7e6ae64a06b83c75b22166e7c0169562adf0b5a2",
+      "path": "database/proposals/bloco60-retomada-r2/master-target.sql"
+    },
+    {
+      "sha256": "542a4861895ad9b058182d41f4706fa5cb4554f1706ef0aad82dce4e8840a8c3",
+      "path": "database/proposals/bloco60-retomada-r2/profile-after.sql"
+    }
+  ],
+  "operation": "TWO_READONLY_QUERIES"
+}

@@ -1,0 +1,16 @@
+{
+  "id": "B55_ACTIVATE_02",
+  "passed": true,
+  "packageSha256": "04e0bd2df11b40cd923348c6ccb2c0a1f6250700ab29ad9deb8f6becab514b23",
+  "catalogSha256": "cbfe100d695d91da1165d31099bdfabb6b54104fba1a57befee5f67770de6c52",
+  "dataRows": 6749,
+  "referenceReleaseId": "3",
+  "grantDelta": 7,
+  "grants": 32,
+  "scopeDelta": 6,
+  "scopes": 16,
+  "dqPolicies": 3,
+  "tariffRows": 2,
+  "validUntil": "2026-10-07T22:34:30.615Z",
+  "utc": "2026-09-08T19:00:00.8152416+00:00"
+}

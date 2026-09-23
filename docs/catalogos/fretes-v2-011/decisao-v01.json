@@ -1,0 +1,269 @@
+{
+  "catalogVersion": "2026-09-06.v2-011a.1",
+  "decision": "FRETES_6389_LOCAL_DOMAIN_DECISION",
+  "decisionStatus": "COMPLETE_LOCAL_DECISION_ONLY",
+  "scope": "DECISION_ONLY_NO_IMPLEMENTATION_NO_SOURCE_IO_NO_RELATION",
+  "task": "V2-011a",
+  "route": "V08",
+  "block": 44,
+  "sourceContract": {
+    "id": "dataexport-6389",
+    "version": "2026-08-31.v2-025a.1",
+    "releaseFingerprint": "23aef4e4e03488d291d3990bdba813800e3ebb8c8be18e766a788daf9741ec15",
+    "reference": "docs/catalogos/contratos-primeira-onda/manifesto.json"
+  },
+  "identityDecision": {
+    "task": "V2-009a",
+    "catalogVersion": "2026-09-01.v2-009a.2",
+    "identityFingerprint": "4e35b90cd4a58e139210d9adf9ac050acba9a46e62585996b650c6252cf44723",
+    "reference": "docs/catalogos/identidade-primeira-onda/manifesto.json"
+  },
+  "execution": {
+    "parentTask": "V2-011",
+    "parentStatus": "OPEN_IMPLEMENTATION_PENDING",
+    "implementationOwner": "V09",
+    "baseShadowGate": "V2_046A_NOT_REQUIRED_FOR_BASE_SHADOW",
+    "relationalParityGates": "V2_046A/V2_046B_REQUIRED_ONLY_FOR_RELATIONAL/PARITY_GATES",
+    "crosswalkOwner": "V2-046b",
+    "allowedArtifacts": [
+      "DOCUMENTATION",
+      "LOCAL_VALIDATOR",
+      "SYNTHETIC_DECISION_CASES"
+    ],
+    "forbiddenArtifacts": [
+      "JAVA_PRODUCTION_CODE",
+      "MAPPER",
+      "MIGRATION",
+      "SQL",
+      "RUNTIME",
+      "RELATION",
+      "CHARACTERIZATION",
+      "BOOTSTRAP",
+      "PUBLICATION",
+      "CUTOVER"
+    ]
+  },
+  "rules": [
+    {
+      "id": "FRE-01",
+      "title": "Identidade canonica",
+      "decision": "Usar somente a chave /id tipada e escopada; corporation_sequence_number permanece alias nao tecnico versionado.",
+      "evidence": "docs/catalogos/identidade-primeira-onda/manifesto.json",
+      "implementationGate": "V09"
+    },
+    {
+      "id": "FRE-02",
+      "title": "Frescor e conflitos",
+      "decision": "Selecionar o primeiro instante presente e valido na ordem contratada; empate divergente vai para quarentena e ordem de chegada nunca desempata.",
+      "evidence": "STATES.md#regras-de-dominio-obrigatorias-por-entidade",
+      "implementationGate": "V09"
+    },
+    {
+      "id": "FRE-03",
+      "title": "Performance e terminalidade",
+      "decision": "Preservar tri-state, proveniencia e valor bruto; priorizar o campo oficial 6389, usar fallback declarado e bloquear datas ambiguas.",
+      "evidence": "docs/catalogos/contratos-primeira-onda/manifesto.json",
+      "implementationGate": "V09"
+    },
+    {
+      "id": "FRE-04",
+      "title": "Sidecars e relacoes",
+      "decision": "Persistir sidecars em staging independente e limitado; conservar Coleta-Frete apenas como candidato sem materializar relacao.",
+      "evidence": "docs/catalogos/graphql-transitorio.csv",
+      "implementationGate": "V09"
+    },
+    {
+      "id": "FRE-05",
+      "title": "Ausencia e replay",
+      "decision": "Ausencia incremental nunca prova remocao; manter prune desligado e replay identico como no-op no mesmo escopo.",
+      "evidence": "docs/catalogos/portabilidade/regras-negocio.csv",
+      "implementationGate": "V09"
+    },
+    {
+      "id": "FRE-06",
+      "title": "Financeiro conservador",
+      "decision": "Conservar bruto, tipado, presenca e proveniencia sem inferir moeda, unidade, precisao, arredondamento ou regra aritmetica.",
+      "evidence": "docs/catalogos/graphql-transitorio.csv",
+      "implementationGate": "V09"
+    },
+    {
+      "id": "FRE-07",
+      "title": "Datas ambiguas",
+      "decision": "Aceitar apenas formato temporal provado e inequivoco; datas dia-mes ambiguas sao quarantinadas sem heuristica local.",
+      "evidence": "scripts/validation/PortabilityRuleCases.psd1",
+      "implementationGate": "V09"
+    }
+  ],
+  "identity": {
+    "entity": "fretes",
+    "tuple": [
+      "source_instance",
+      "tenant_scope",
+      "entity",
+      "source_key"
+    ],
+    "sourceKey": {
+      "path": "/id",
+      "wireType": "INTEGER",
+      "role": "TYPE_TAGGED_SCOPED_SOURCE_KEY"
+    },
+    "businessAlias": {
+      "path": "/corporation_sequence_number",
+      "role": "VERSIONED_NON_TECHNICAL_ALIAS_NEVER_IDENTITY",
+      "cardinality": "ZERO_TO_MANY_LOOKUP_AMBIGUITY_BLOCKS"
+    },
+    "canonicalId": "SQL_SURROGATE_BIGINT_IDENTITY",
+    "expandedRows": "DEDUPLICATE_ROOT_BY_SCOPED_ID_SET_BASED_NO_IMPLICIT_CHILD"
+  },
+  "presence": {
+    "vocabulary": [
+      "ABSENT",
+      "NULL",
+      "VALUE"
+    ],
+    "absent": "PRESERVE_KNOWN_VALUE_AND_RECORD_ABSENT",
+    "null": "APPLY_EXPLICIT_NULL_ONLY_ON_NEWER_ACCEPTED_OBSERVATION",
+    "value": "APPLY_TYPED_VALUE_WITH_RAW_AND_PROVENANCE",
+    "protectedGroups": [
+      "CTE",
+      "FINALIZATIONS",
+      "PERFORMANCE",
+      "FINANCIAL",
+      "RELATION_CANDIDATES"
+    ]
+  },
+  "freshness": {
+    "dedupeOrder": [
+      "cte_created_at",
+      "cte_issued_at",
+      "criado_em",
+      "servico_em"
+    ],
+    "promotionOrder": [
+      "cte_created_at",
+      "cte_issued_at",
+      "criado_em",
+      "servico_em"
+    ],
+    "selection": "FIRST_PRESENT_TYPED_VALID_VALUE",
+    "presentInvalid": "PRESERVE_RAW_AND_QUARANTINE_NO_FALLBACK",
+    "updatedAt": "UNVERIFIED_NEVER_FRESHNESS_OR_WATERMARK",
+    "olderObservation": "AUDIT_AND_NO_OP_NO_REGRESSION",
+    "equalCanonical": "REPLAY_NO_OP",
+    "equalDivergent": "QUARANTINE_STABLE_REASON",
+    "forbiddenTieBreakers": [
+      "ARRIVAL",
+      "PAGE",
+      "RECORD_ORDER",
+      "HASH"
+    ]
+  },
+  "performance": {
+    "officialPath": "/fit_dpn_performance_finished_at",
+    "fallbackPath": "/finished_at",
+    "precedence": "OFFICIAL_6389_THEN_FINISHED_AT",
+    "provenance": "RAW_TYPED_PARSE_STATE_AND_SELECTED_ORIGIN_REQUIRED",
+    "ambiguousDate": "DAY_AND_MONTH_LE_12_QUARANTINE_NO_HEURISTIC",
+    "unambiguousFormats": [
+      "MM/dd/yyyy_WHEN_DAY_GT_12",
+      "dd/MM/yyyy_WHEN_DAY_GT_12"
+    ],
+    "hostTimezone": "FORBIDDEN_AMERICA_SAO_PAULO_EXPLICIT"
+  },
+  "terminality": {
+    "terminalRawStatuses": [
+      "finished",
+      "done",
+      "canceled",
+      "cancelled"
+    ],
+    "mapping": {
+      "finished": "finalizado",
+      "done": "finalizado",
+      "canceled": "cancelada",
+      "cancelled": "cancelada"
+    },
+    "persistedTerminal": "NEVER_REGRESSES_TO_OPEN",
+    "retrogradeTerminal": "TERMINAL_WINS_OPEN_WITH_AUDIT",
+    "unknownStatus": "PRESERVE_RAW_NO_INFERRED_TERMINALITY",
+    "partialPayload": "PRESENCE_RULES_APPLY_NO_SILENT_ERASURE"
+  },
+  "sidecars": {
+    "source": "GRAPHQL_TRANSITIONAL_ONLY",
+    "catalogReference": "docs/catalogos/graphql-transitorio.csv",
+    "fields": [
+      "/freight/edges/node/id",
+      "/freight/edges/node/accountingCreditId",
+      "/freight/edges/node/accountingCreditInstallmentId",
+      "/freight/edges/node/referenceNumber",
+      "/freight/edges/node/cte/key",
+      "/freight/edges/node/total",
+      "/freight/edges/node/corporationSequenceNumber",
+      "/freight/edges/node/pickItemId",
+      "/freight/pageInfo/hasNextPage",
+      "/freight/pageInfo/endCursor"
+    ],
+    "storage": "INDEPENDENT_BOUNDED_STAGING_WITH_FIELD_PROVENANCE",
+    "memoryBound": "ONE_PAGE_PLUS_BOUNDED_BATCH_NEVER_EXECUTION_WIDE_MAP",
+    "failureIsolation": "FIELD_OR_SIDECAR_BLOCKED_WITHOUT_OVERWRITING_ROOT",
+    "relationCandidate": "/freight/edges/node/pickItemId",
+    "joinPolicy": "PRESERVE_ONLY_V2_046B_OWNS_SET_BASED_CROSSWALK",
+    "publication": "FORBIDDEN_UNTIL_PARITY_AND_CONSUMER_CONTRACT"
+  },
+  "financial": {
+    "fields": [
+      "accountingCreditId",
+      "accountingCreditInstallmentId",
+      "referenceNumber",
+      "cte.key",
+      "total"
+    ],
+    "storage": "RAW_TYPED_PRESENCE_AND_PROVENANCE_ONLY",
+    "currency": "UNRESOLVED_NO_INFERENCE",
+    "unit": "UNRESOLVED_NO_INFERENCE",
+    "arithmetic": "FORBIDDEN_WITHOUT_GOVERNED_CURRENCY_UNIT_PRECISION_ROUNDING",
+    "unknownOrDivergent": "QUARANTINE_OR_BLOCK_AFFECTED_OUTPUT",
+    "publication": "BLOCKED_PENDING_PARITY_AND_NOMINAL_OWNER"
+  },
+  "incremental": {
+    "partition": "freights.service_at",
+    "timezone": "America/Sao_Paulo",
+    "internalWindow": "[start,endExclusive)",
+    "sourceBoundary": "INCLUSIVE_TRANSLATION_UNPROVEN_BLOCKS_OPERATIONAL_EXECUTION",
+    "overlap": "VERSIONED_BOUNDED_REQUIRED",
+    "supplementaryLateData": "scopes.by_updated_at",
+    "watermark": "ONLY_CONTIGUOUS_PUBLISHED_SERVICE_AT_PARTITIONS_NEVER_UPDATED_AT",
+    "replay": "SAME_SCOPED_ROOT_AND_CANONICAL_CONTENT_IS_NO_OP"
+  },
+  "absence": {
+    "incremental": "NEVER_PROVES_ABSENCE",
+    "prune": "DISABLED",
+    "enablementGate": "V2-013_AFTER_Q_FRE_03_AND_COMPLETE_SNAPSHOT_PROOF",
+    "requirements": [
+      "INDEPENDENT_COMPLETE_SNAPSHOT",
+      "TWO_ABSENCES",
+      "QUARANTINE",
+      "VOLUME_GUARDRAILS",
+      "HISTORY_GUARDRAILS",
+      "OWNER_ACCEPTANCE"
+    ],
+    "failure": "NO_ACTIVE_STATE_CHANGE"
+  },
+  "limitations": [
+    "NO_MAPPER",
+    "NO_MIGRATION",
+    "NO_SQL_OR_DATABASE",
+    "NO_RUNTIME",
+    "NO_RELATION_MATERIALIZATION",
+    "NO_CHARACTERIZATION_OR_BOOTSTRAP",
+    "NO_PUBLICATION_OR_CUTOVER",
+    "NO_NETWORK_OR_SOURCE_IO",
+    "NO_COMPLETENESS_PROOF",
+    "NO_CURRENCY_OR_FINANCIAL_RULE_INFERENCE"
+  ],
+  "fixture": {
+    "path": "fixtures/casos-v01.synthetic.json",
+    "sha256": "e3cbeaa95940ac110db106ce8ce67ba6cd42ff7f3f6c73d74ab1bdee28499a41",
+    "caseCount": 14
+  }
+}

@@ -1,0 +1,163 @@
+{
+  "manifestVersion": 1,
+  "roadmapTask": "V2-011",
+  "decisionTask": "V2-011a",
+  "route": "V09",
+  "block": 45,
+  "entity": "fretes",
+  "templateId": 6389,
+  "localState": "IMPLEMENTADA_EM_SHADOW_RELATIONS_PENDING",
+  "dependencyPolicy": {
+    "baseShadow": "V2_046A_NOT_REQUIRED_FOR_BASE_SHADOW",
+    "relationalParity": "V2_046A/V2_046B_REQUIRED_ONLY_FOR_RELATIONAL/PARITY_GATES",
+    "crosswalkOwner": "V2-046b",
+    "v2_046a": "OPEN",
+    "v2_046b": "OPEN"
+  },
+  "contract": {
+    "contractId": "dataexport-6389",
+    "version": "2026-08-31.v2-025a.1",
+    "releaseFingerprint": "23aef4e4e03488d291d3990bdba813800e3ebb8c8be18e766a788daf9741ec15",
+    "maximumPageSize": 100,
+    "datasetCompleteness": "NOT_PROVEN",
+    "contractedDataPaths": [
+      "/data/id",
+      "/data/updated_at",
+      "/data/reference_number",
+      "/data/fit_p_m_pck_sequence_code",
+      "/data/corporation_sequence_number",
+      "/data/finished_at",
+      "/data/fit_dpn_performance_finished_at"
+    ]
+  },
+  "portabilityEnforcement": {
+    "scope": "V2-017a_APPLICABLE_6389_SLICE_ONLY_AGGREGATE_REMAINS_OPEN",
+    "matrixIds": [
+      "DE-DATA-6389-001",
+      "DE-DATA-6389-002",
+      "DE-DATA-6389-003",
+      "DE-DATA-6389-004",
+      "DE-DATA-6389-005",
+      "DE-DATA-6389-006",
+      "DE-DATA-6389-007"
+    ],
+    "physicalPolicy": "RAW_TYPED_PARSE_STATE_PATH_AND_PROVENANCE_FAIL_CLOSED"
+  },
+  "identity": {
+    "catalogVersion": "2026-09-01.v2-009a.2",
+    "fingerprint": "4e35b90cd4a58e139210d9adf9ac050acba9a46e62585996b650c6252cf44723",
+    "scope": ["environment_name", "source_instance", "tenant_scope", "entity_name", "source_key"],
+    "sourceKey": "/id:INTEGER_POSITIVE_SIGNED_64_BIT",
+    "businessAlias": "/corporation_sequence_number:VERSIONED_NON_TECHNICAL_ALIAS_NEVER_IDENTITY",
+    "canonicalId": "BIGINT_IDENTITY",
+    "forbiddenScopeSentinels": ["DEFAULT", "GLOBAL", "SINGLETON"]
+  },
+  "decisionEvidence": {
+    "evidenceScope": "SYNTHETIC_V09_NOT_SOURCE_CONTRACT_EVIDENCE",
+    "fields": [
+      "cte_created_at",
+      "cte_issued_at",
+      "criado_em",
+      "servico_em",
+      "status",
+      "cte",
+      "finalizations"
+    ]
+  },
+  "presence": {
+    "states": ["ABSENT", "NULL", "VALUE"],
+    "absent": "PRESERVE_KNOWN_VALUE",
+    "invalid": "QUARANTINE_NEVER_ZERO_OR_NULL_SILENTLY",
+    "evidence": "RAW_TYPED_PARSE_STATE_PATH_AND_PROVENANCE"
+  },
+  "freshness": {
+    "singleSharedPolicy": true,
+    "precedence": ["cte_created_at", "cte_issued_at", "criado_em", "servico_em"],
+    "presentInvalid": "QUARANTINE_NO_FALLBACK",
+    "noneValid": "DO_NOT_PROMOTE",
+    "older": "AUDIT_NO_OP_NO_REGRESSION",
+    "equalIdentical": "REPLAY_NO_OP",
+    "equalDivergent": "QUARANTINE",
+    "updatedAt": "IGNORED_UNVERIFIED_NEVER_FRESHNESS"
+  },
+  "terminality": {
+    "exactRawStatuses": ["finished", "done", "canceled", "cancelled"],
+    "similarityInference": false,
+    "persistedTerminalRegression": "FORBIDDEN_WITH_AUDIT"
+  },
+  "performance": {
+    "storage": "INDEPENDENT_STAGING",
+    "official": "/fit_dpn_performance_finished_at",
+    "fallback": "/finished_at",
+    "precedence": "OFFICIAL_6389_THEN_DECLARED_FALLBACK",
+    "ambiguousDate": "QUARANTINE_NO_HEURISTIC",
+    "provenanceRequired": true
+  },
+  "sidecar": {
+    "source": "GRAPHQL_TRANSITIONAL_ONLY",
+    "maximumEdgesPerBatch": 100,
+    "approvedPaths": [
+      "/freight/edges/node/id",
+      "/freight/edges/node/accountingCreditId",
+      "/freight/edges/node/accountingCreditInstallmentId",
+      "/freight/edges/node/referenceNumber",
+      "/freight/edges/node/cte/key",
+      "/freight/edges/node/total",
+      "/freight/edges/node/corporationSequenceNumber",
+      "/freight/edges/node/pickItemId",
+      "/freight/pageInfo/hasNextPage",
+      "/freight/pageInfo/endCursor"
+    ],
+    "rootOrFreshnessAuthority": false,
+    "storage": "INDEPENDENT_BOUNDED_STAGING_WITH_PRESENCE_AND_PROVENANCE"
+  },
+  "relationshipCandidate": {
+    "paths": ["/data/fit_p_m_pck_sequence_code", "/freight/edges/node/pickItemId"],
+    "state": "APPEND_ONLY_UNRESOLVED_V2_046B",
+    "presenceAndProvenanceRequired": true,
+    "foreignKeyToColeta": false,
+    "joinOrLookupToColeta": false,
+    "crosswalkOrBackfill": false
+  },
+  "financial": {
+    "storage": "RAW_TYPED_PRESENCE_AND_PROVENANCE_ONLY",
+    "currencyUnitPrecisionRounding": "UNRESOLVED_NO_INFERENCE",
+    "arithmeticRule": "FORBIDDEN_UNLESS_GOVERNED"
+  },
+  "incremental": {
+    "partition": "freights.service_at",
+    "overlap": "VERSIONED_BOUNDED",
+    "replay": "IDEMPOTENT_BY_SCOPED_KEY_FRESHNESS_AND_CANONICAL_HASH",
+    "absence": "NEVER_ALTERS_ACTIVE_STATE",
+    "pruneOrSweep": "DISABLED"
+  },
+  "persistence": {
+    "migration": "V013__create_fretes_shadow_vertical.sql",
+    "stageProcedure": "stg.usp_stage_frete_record",
+    "performanceProcedure": "stg.usp_stage_frete_performance",
+    "sidecarProcedure": "stg.usp_stage_frete_sidecar",
+    "candidateProcedure": "core.usp_prepare_frete_candidate_set",
+    "promotionProcedure": "core.usp_apply_reconcile_publish_fretes",
+    "applicationMode": "SET_BASED_CANDIDATE_SET_WITH_AUDIT_LOCK_AND_RECOVERY",
+    "directPerRecordDml": false
+  },
+  "validation": {
+    "structural": "database/validation/044_validate_fretes_shadow_vertical.sql",
+    "rollbackExercise": "database/validation/045_exercise_fretes_shadow_vertical_rollback.sql",
+    "static": "scripts/validation/Test-FretesV2011ShadowVertical.ps1",
+    "localRunner": "scripts/validation/Invoke-FretesV2011ShadowValidation.ps1",
+    "concurrency": "scripts/validation/Test-FretesShadowConcurrency.ps1",
+    "authorizedTarget": "localhost/ETL_SISTEMA_V2_SHADOW",
+    "sqlRequiresExplicitOptIn": true,
+    "exercisePersistsData": false
+  },
+  "prohibited": [
+    "RELATION_MATERIALIZATION",
+    "COLETA_JOIN_OR_FK_OR_TOP1_LOOKUP",
+    "FINAL_CROSSWALK_OR_BACKFILL",
+    "PARITY_OR_PUBLICATION",
+    "SWEEP_OR_PRUNE_OR_DEACTIVATION",
+    "BOOTSTRAP_OR_CUTOVER",
+    "NETWORK_OR_SOURCE_IO"
+  ]
+}

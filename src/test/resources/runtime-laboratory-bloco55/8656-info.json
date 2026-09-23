@@ -1,0 +1,78 @@
+{
+  "fields": [
+    {
+      "name": "corporation_sequence_number",
+      "type": "integer"
+    },
+    {
+      "name": "type",
+      "type": "string"
+    },
+    {
+      "name": "service_at",
+      "type": "string"
+    },
+    {
+      "name": "invoices_volumes",
+      "type": "string"
+    },
+    {
+      "name": "taxed_weight",
+      "type": "string"
+    },
+    {
+      "name": "invoices_value",
+      "type": "string"
+    },
+    {
+      "name": "total",
+      "type": "string"
+    },
+    {
+      "name": "service_type",
+      "type": "string"
+    },
+    {
+      "name": "fit_crn_psn_nickname",
+      "type": "string"
+    },
+    {
+      "name": "fit_dpn_delivery_prediction_at",
+      "type": "string"
+    },
+    {
+      "name": "fit_dyn_name",
+      "type": "string"
+    },
+    {
+      "name": "fit_dyn_drt_nickname",
+      "type": "string"
+    },
+    {
+      "name": "fit_fsn_name",
+      "type": "string"
+    },
+    {
+      "name": "fit_fln_status",
+      "type": "string"
+    },
+    {
+      "name": "fit_fln_cln_nickname",
+      "type": "string"
+    },
+    {
+      "name": "fit_o_n_name",
+      "type": "string"
+    },
+    {
+      "name": "fit_o_n_drt_nickname",
+      "type": "string"
+    }
+  ],
+  "filters": [
+    {
+      "name": "freights.service_at",
+      "type": "date"
+    }
+  ]
+}

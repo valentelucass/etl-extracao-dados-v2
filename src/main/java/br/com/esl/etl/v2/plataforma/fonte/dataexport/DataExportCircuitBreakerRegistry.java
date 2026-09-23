@@ -1,6 +1,7 @@
 package br.com.esl.etl.v2.plataforma.fonte.dataexport;
 
 import java.time.Clock;
+import java.time.Duration;
 import java.time.Instant;
 import java.util.Map;
 import java.util.Objects;
@@ -62,7 +63,9 @@ final class DataExportCircuitBreakerRegistry {
             if (openedAt == null) {
                 return new Permit(generation, false);
             }
-            if (now.isBefore(openedAt.plus(cooldown)) || halfOpenProbeInFlight) {
+            if (now.isBefore(openedAt)
+                    || Duration.between(openedAt, now).compareTo(cooldown) < 0
+                    || halfOpenProbeInFlight) {
                 throw new DataExportCircuitOpenException(templateId);
             }
             halfOpenProbeInFlight = true;
@@ -88,7 +91,7 @@ final class DataExportCircuitBreakerRegistry {
                 openAndAdvanceGeneration(now);
                 return;
             }
-            consecutiveUnavailableFailures++;
+            consecutiveUnavailableFailures = Math.incrementExact(consecutiveUnavailableFailures);
             if (consecutiveUnavailableFailures >= failureThreshold) {
                 openAndAdvanceGeneration(now);
             }
@@ -109,15 +112,17 @@ final class DataExportCircuitBreakerRegistry {
         }
 
         private void openAndAdvanceGeneration(final Instant now) {
+            final long nextGeneration = Math.incrementExact(generation);
             openedAt = now;
             halfOpenProbeInFlight = false;
-            generation++;
+            generation = nextGeneration;
         }
 
         private void closeAndAdvanceGeneration() {
+            final long nextGeneration = Math.incrementExact(generation);
             openedAt = null;
             halfOpenProbeInFlight = false;
-            generation++;
+            generation = nextGeneration;
         }
     }
 }

@@ -1,0 +1,21 @@
+{
+  "version": "synthetic-analytic-collection-region-v1",
+  "provenance": "FIXTURE_SINTETICA_EXPLICITA",
+  "normalizationVersion": "trim-upper-nfc-v1",
+  "rows": [
+    {
+      "kind": "CEP",
+      "key1": "13000000",
+      "key2": "13099999",
+      "region": "REGIAO_CEP_SINTETICA",
+      "priority": 1
+    },
+    {
+      "kind": "CITY",
+      "key1": "CAMPINAS",
+      "key2": "SP",
+      "region": "REGIAO_CIDADE_SINTETICA",
+      "priority": 1
+    }
+  ]
+}

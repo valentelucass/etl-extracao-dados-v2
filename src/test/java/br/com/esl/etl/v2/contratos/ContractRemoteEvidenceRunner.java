@@ -55,7 +55,8 @@ public final class ContractRemoteEvidenceRunner {
         Objects.requireNonNull(configuration, "A configuração de contrato é obrigatória.");
         Objects.requireNonNull(execution, "A execução remota é obrigatória.");
         final List<ContractTemplateEvidence> templates = new ArrayList<>();
-        for (final DataExportTemplate template : DataExportTemplate.values()) {
+        for (final DataExportTemplate template :
+                java.util.List.of(DataExportTemplate.COLETAS, DataExportTemplate.FRETES)) {
             templates.add(collectTemplate(configuration, execution, template));
         }
         configuration
@@ -270,6 +271,7 @@ public final class ContractRemoteEvidenceRunner {
             case FRETES ->
                     ContractParityComparator.compareFretes(
                             dataExportRows, execution.fetchAllFretes(window, pageSize));
+            default -> throw new IllegalArgumentException("FIRST_WAVE_PROBE_ONLY");
         };
     }
 
@@ -435,6 +437,7 @@ public final class ContractRemoteEvidenceRunner {
         return switch (template) {
             case COLETAS -> "sequence_code";
             case FRETES -> "corporation_sequence_number";
+            default -> throw new IllegalArgumentException("FIRST_WAVE_PROBE_ONLY");
         };
     }
 }

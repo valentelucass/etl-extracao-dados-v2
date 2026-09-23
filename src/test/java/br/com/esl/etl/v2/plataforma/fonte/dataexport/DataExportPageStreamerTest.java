@@ -186,6 +186,83 @@ class DataExportPageStreamerTest {
     }
 
     @Test
+    void cancellationRequestedDuringTerminalFetchPreventsCompletion() {
+        final CapturingAudit audit = new CapturingAudit();
+        final CancellationSignal cancellation = new CancellationSignal();
+        final DataExportGateway gateway =
+                request -> {
+                    cancellation.cancel();
+                    return page();
+                };
+
+        assertThrows(
+                ResilienceCancelledException.class,
+                () ->
+                        new DataExportPageStreamer(gateway, audit, FIXED_CLOCK)
+                                .stream(
+                                        EXECUTION_CONTEXT,
+                                        request(DataExportTemplate.COLETAS, 2),
+                                        new DataExportExtractionLimits(1, 10, 2),
+                                        cancellation,
+                                        ignored -> {
+                                            throw new AssertionError(
+                                                    "Página terminal não deveria ser entregue.");
+                                        }));
+
+        assertEquals(List.of("started", "failed"), audit.events());
+        assertEquals(0, audit.failedEvents().get(0).pagesFetched());
+        assertEquals(
+                DataExportFailureCategory.CANCELLED, audit.failedEvents().get(0).failureCategory());
+    }
+
+    @Test
+    void cancellationRequestedByConsumerDominatesThePageCap() {
+        final CapturingAudit audit = new CapturingAudit();
+        final CancellationSignal cancellation = new CancellationSignal();
+
+        assertThrows(
+                ResilienceCancelledException.class,
+                () ->
+                        new DataExportPageStreamer(
+                                        new QueueGateway(List.of(page("1"))), audit, FIXED_CLOCK)
+                                .stream(
+                                        EXECUTION_CONTEXT,
+                                        request(DataExportTemplate.COLETAS, 1),
+                                        new DataExportExtractionLimits(1, 10, 1),
+                                        cancellation,
+                                        ignored -> cancellation.cancel()));
+
+        assertEquals(List.of("started", "page:1:1", "failed"), audit.events());
+        assertEquals(1, audit.failedEvents().get(0).pagesFetched());
+        assertEquals(1L, audit.failedEvents().get(0).recordsDelivered());
+        assertEquals(
+                DataExportFailureCategory.CANCELLED, audit.failedEvents().get(0).failureCategory());
+    }
+
+    @Test
+    void nullGatewayResponseFailsWithASanitizedStableMessage() {
+        final CapturingAudit audit = new CapturingAudit();
+
+        final NullPointerException exception =
+                assertThrows(
+                        NullPointerException.class,
+                        () ->
+                                new DataExportPageStreamer(request -> null, audit, FIXED_CLOCK)
+                                        .stream(
+                                                EXECUTION_CONTEXT,
+                                                request(DataExportTemplate.COLETAS, 1),
+                                                new DataExportExtractionLimits(1, 10, 1),
+                                                ignored -> {}));
+
+        assertEquals("O gateway Data Export retornou resposta nula.", exception.getMessage());
+        assertEquals(List.of("started", "failed"), audit.events());
+        assertEquals(0, audit.failedEvents().get(0).pagesFetched());
+        assertEquals(
+                DataExportFailureCategory.RUNTIME_FAILURE,
+                audit.failedEvents().get(0).failureCategory());
+    }
+
+    @Test
     void rejectsMoreDistinctEntitiesThanTheRequestedPageBeforeDeliveringIt() {
         final QueueGateway gateway = new QueueGateway(List.of(page("1", "2", "3")));
         final CapturingAudit audit = new CapturingAudit();

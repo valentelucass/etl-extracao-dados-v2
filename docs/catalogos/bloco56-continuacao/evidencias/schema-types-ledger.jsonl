@@ -1,0 +1,2 @@
+{"stage":"types","state":"RESERVED_OUTCOME_UNKNOWN","requestSha256":"0903b7127773bff8b0299c77d5d8bacdaae3e1021de55a10bf6920bb21b912e1","documentSha256":"e4aa7cc60d20b4bf1bb53d5b635020463d265b7193cc26fb0ca948270468cee5","utc":"2026-09-08T23:09:58.6083168+00:00"}
+{"stage":"types","state":"OBSERVED","httpStatus":200,"failure":null,"utc":"2026-09-08T23:10:00.2775561+00:00"}

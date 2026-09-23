@@ -1,0 +1,171 @@
+{
+  "phase": "SCHEMA_ONLY_REQUIRES_ROLLBACK_QUALIFICATION",
+  "database": "localhost/ETL_SISTEMA_V2_SHADOW",
+  "previousCatalog": "7a86e28ea68cecd8ba993bbea8df5c677e0848f27aa7b0412402165071736408",
+  "previousRows": 6723,
+  "previousGrants": 25,
+  "previousScopes": 10,
+  "previousMappings": 2,
+  "previousServiceVersion": 17,
+  "previousOperatorVersion": 1,
+  "validUntil": "2026-10-07T22:34:30.615Z",
+  "grantDelta": 0,
+  "scopeDelta": 0,
+  "seedRows": 0,
+  "migration": "V022__extend_five_vertical_runtime.sql",
+  "migrationSha256": "24bd97402526d2656a9eb30e1216325763853af73cf5806108d7f467e27e8779",
+  "historicalMigrations": [
+    {
+      "path": "database/migrations/V021__bind_durable_temporal_intent.sql",
+      "sha256": "1f9ad81b40b7dc97055de9a28038ae989185744c34fabd15ca63da07f5163e24",
+      "bytes": 16363
+    },
+    {
+      "path": "database/migrations/V020__bind_existing_runtime_occurrences.sql",
+      "sha256": "7ba03d5627016e722e077ca2c6a7eec926ea4779dccce8c6010d77927ed14df4",
+      "bytes": 17060
+    },
+    {
+      "path": "database/migrations/V019__create_scoped_runtime_observability.sql",
+      "sha256": "42b8baae9c6681b3b5d1201d7062e33c7e34562eb5c643c7c269186128888d4c",
+      "bytes": 3264
+    },
+    {
+      "path": "database/migrations/V018__enforce_durable_runtime_consumers.sql",
+      "sha256": "0e418d19fe93ea3611f6d083ffa77e8e58e764ed0f5a180eb1d3a33e6f971f49",
+      "bytes": 197810
+    },
+    {
+      "path": "database/migrations/V017__create_runtime_temporal_plan.sql",
+      "sha256": "fd3afdb898e49084b4832946b289028777a0187f516d9ba8afb5ffeeffa3e712",
+      "bytes": 10447
+    },
+    {
+      "path": "database/migrations/V016__create_windows_runtime_authority.sql",
+      "sha256": "6c81c6c05d474c5fc592b9dc429d5cab1cf3aa14b239e73adb432071d5ec9b96",
+      "bytes": 16475
+    },
+    {
+      "path": "database/migrations/V015__create_runtime_durable_recovery.sql",
+      "sha256": "91629327d944434c3cb252c02f6a13d228724a6315e0e29dd81917b1fca54227",
+      "bytes": 46124
+    },
+    {
+      "path": "database/migrations/V014__create_localizacao_cargas_shadow_vertical.sql",
+      "sha256": "8f9bbc269d2512925db41b4cfd984c03c06af2a35494346dbafc498464f26976",
+      "bytes": 78468
+    },
+    {
+      "path": "database/migrations/V013__create_fretes_shadow_vertical.sql",
+      "sha256": "20d8c088ba742dd207a35bef8003a6a9a7c3d52b0c52aba432894fbfcad4b824",
+      "bytes": 56308
+    },
+    {
+      "path": "database/migrations/V012__create_manifestos_shadow_vertical.sql",
+      "sha256": "8bf1f0a51e741814699d8204799f81edc336978d610d1851c340a260a95dfe13",
+      "bytes": 36677
+    },
+    {
+      "path": "database/migrations/V011__create_cotacoes_shadow_vertical.sql",
+      "sha256": "88a2ea1cacbad4c4291d117df2eff844c872f55ba1f44149eb2f2beb55541f5e",
+      "bytes": 34109
+    },
+    {
+      "path": "database/migrations/V010__create_coletas_shadow_vertical.sql",
+      "sha256": "73c8d4e862a36b3c1dde91379097548408d1768642e60171c93d3ed83de062d1",
+      "bytes": 37568
+    },
+    {
+      "path": "database/migrations/V009__create_usuario_dimension_current_view.sql",
+      "sha256": "d71b89ac9560783a00ea1b05d08c951ca56a001aa1399868acfe692656c8a342",
+      "bytes": 754
+    },
+    {
+      "path": "database/migrations/V008__create_governed_references.sql",
+      "sha256": "f829632988cf5ee177c0bd93a6b38d2476d359c3953e9c334369721943f6f764",
+      "bytes": 101935
+    },
+    {
+      "path": "database/migrations/V007__create_usuarios_current_history.sql",
+      "sha256": "988a4a18a5c930a70a01e6fd9caff9369cacb1bb5faab16fe2bf0f62c78ef499",
+      "bytes": 69234
+    },
+    {
+      "path": "database/migrations/V006__create_observability_data_quality.sql",
+      "sha256": "6fe537d98f258c390b86e21734c39278e0f7aa1e414e870a59f5e717e3670611",
+      "bytes": 67289
+    },
+    {
+      "path": "database/migrations/V005__create_staging_lifecycle.sql",
+      "sha256": "0e0d71d9ac7ee77341a356675bf0169de7e3cd8d57e1d492b32f70017d546923",
+      "bytes": 238351
+    },
+    {
+      "path": "database/migrations/V004__create_staging_promotion_kernel.sql",
+      "sha256": "36e575005ee00ecd4e61523924ef2ab8af6a31b30d5fe3f00790ea5e7d83f22e",
+      "bytes": 81226
+    },
+    {
+      "path": "database/migrations/V003__create_control_plane.sql",
+      "sha256": "64cf2b6969707fa9e50aa888f8201eaa1de75379bbb1575fd8f7184ba5cee137",
+      "bytes": 60935
+    },
+    {
+      "path": "database/migrations/V002__create_v2_database_roles.sql",
+      "sha256": "6e962af63a639380cd84e479c94f003dd80497fb1632c9cf29bd9983a94772b2",
+      "bytes": 12280
+    },
+    {
+      "path": "database/migrations/V001__create_v2_schema_foundation.sql",
+      "sha256": "cadbbba91382faf1afd6c282ae4213a0f313d424335250d824c83bcdd93abc9f",
+      "bytes": 1077
+    }
+  ],
+  "files": [
+    {
+      "path": "apply.sql",
+      "sha256": "63d8e5a56702a1502f90e631c08a5872f3d0d6773388df2030b583a392d07e58",
+      "bytes": 702
+    },
+    {
+      "path": "capture-outputs.sql",
+      "sha256": "9c5db2dfd46fde3818933e245becd18f76f5e27266389954c4b86ebf9a549092",
+      "bytes": 4437
+    },
+    {
+      "path": "exercise-manifesto.sql",
+      "sha256": "97a775d8fc5dc1ac5525c93391b1eded70f2aff1ad0638d8001a5fb30b3ceef9",
+      "bytes": 5355
+    },
+    {
+      "path": "manifesto-children.sql",
+      "sha256": "b5f7527997d5452d9997ce8e9985989318b1b2ab0bce3de6a14465529dc54cdb",
+      "bytes": 2771
+    },
+    {
+      "path": "manifesto-reducer.sql",
+      "sha256": "9cf15c351984df24e775808c9acb9d6282ff553e0ceccd3faa37c48f573dbae1",
+      "bytes": 11412
+    },
+    {
+      "path": "recovery-grants.sql",
+      "sha256": "769b8c4249d95db0a15561ebe253e53a4ba017f72814f90f03e58ce885a89777",
+      "bytes": 1573
+    },
+    {
+      "path": "recovery.md",
+      "sha256": "5f69b9708d1e891df5851b4e2b908f8f5f51200a9324454e4236681f452cce5b",
+      "bytes": 1265
+    },
+    {
+      "path": "schema-additions.sql",
+      "sha256": "36d6d86d8b29ba8e66b73e7ed30af932e258c0f50012f8115879c2878f39a60d",
+      "bytes": 3793
+    },
+    {
+      "path": "verify-schema.sql",
+      "sha256": "64ca9529bcbe8bd68d2eaa3e880e32e6c29c4defb7989a46606a31c4670af969",
+      "bytes": 1204
+    }
+  ]
+}

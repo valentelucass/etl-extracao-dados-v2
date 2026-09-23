@@ -1,0 +1,9 @@
+
+INSERT ctl.data_quality_policy VALUES(N'bloco55-manifestos-backfill-v1','88127ab8dbc7e2c3c81b866362da1a13e7e8ac4af75b922628bd8abdea39c722','7b8f6f9c3f5f851230de377156940ebf4c804c28449e3b83987795089571e241',4,3600,N'laboratory-owner',N'laboratory-owner',N'bloco55-preserve-v1',N'laboratory-owner',N'RATIFIED','2026-09-08T00:00:00.123',SYSUTCDATETIME());
+INSERT ctl.data_quality_check_policy SELECT N'bloco55-manifestos-backfill-v1','88127ab8dbc7e2c3c81b866362da1a13e7e8ac4af75b922628bd8abdea39c722',n,c,0,0,N'laboratory-owner' FROM (VALUES(1,N'COUNT_EQUATION'),(2,N'PAGE_TERMINALITY'),(3,N'PROMOTION_RECONCILIATION'),(4,N'QUARANTINE_SLA'))p(n,c);
+
+INSERT ctl.data_quality_policy VALUES(N'bloco55-cotacoes-backfill-v1','efbb2d1e09ab7f3d083072809f5bd97795f5c059ea3348309936b1909a75d0aa','5052e3801fe9bb121f3636a16894f82914a576cfd8c3982429956e728f6af887',4,3600,N'laboratory-owner',N'laboratory-owner',N'bloco55-preserve-v1',N'laboratory-owner',N'RATIFIED','2026-09-08T00:00:00.123',SYSUTCDATETIME());
+INSERT ctl.data_quality_check_policy SELECT N'bloco55-cotacoes-backfill-v1','efbb2d1e09ab7f3d083072809f5bd97795f5c059ea3348309936b1909a75d0aa',n,c,0,0,N'laboratory-owner' FROM (VALUES(1,N'COUNT_EQUATION'),(2,N'PAGE_TERMINALITY'),(3,N'PROMOTION_RECONCILIATION'),(4,N'QUARANTINE_SLA'))p(n,c);
+
+INSERT ctl.data_quality_policy VALUES(N'bloco55-localizacao_cargas-backfill-v1','6cc4f9addad28a3c4526501bc0648ae8a2dc9a769590e990bb1d5af1ab5e00a4','67585b27c8adc885f6faa94411e80f1a59f8f9316efa842e33d3324d65903d8d',4,3600,N'laboratory-owner',N'laboratory-owner',N'bloco55-preserve-v1',N'laboratory-owner',N'RATIFIED','2026-09-08T00:00:00.123',SYSUTCDATETIME());
+INSERT ctl.data_quality_check_policy SELECT N'bloco55-localizacao_cargas-backfill-v1','6cc4f9addad28a3c4526501bc0648ae8a2dc9a769590e990bb1d5af1ab5e00a4',n,c,0,0,N'laboratory-owner' FROM (VALUES(1,N'COUNT_EQUATION'),(2,N'PAGE_TERMINALITY'),(3,N'PROMOTION_RECONCILIATION'),(4,N'QUARANTINE_SLA'))p(n,c);

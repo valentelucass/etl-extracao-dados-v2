@@ -33,6 +33,23 @@ public final class DataExportPageEntityLimitValidator {
         Objects.requireNonNull(request, "A requisição Data Export é obrigatória.");
         Objects.requireNonNull(response, "A resposta Data Export é obrigatória.");
 
+        if (request.template().syntheticOccurrenceCapture()) {
+            int physicalRows = 0;
+            for (final JsonNode record : response.records()) {
+                if (record == null
+                        || !record.path("data").isObject()
+                        || !"FIXTURE_SINTETICA_EXPLICITA".equals(record.path("provenance").asText())
+                        || !record.path("capture_occurrence").isIntegralNumber()) {
+                    throw new IllegalStateException("EXP_SYNTHETIC_OCCURRENCE_ENVELOPE_REQUIRED");
+                }
+                physicalRows = Math.incrementExact(physicalRows);
+                if (physicalRows > request.pageSize()) {
+                    throw new IllegalStateException("EXP_PHYSICAL_PAGE_BOUND");
+                }
+            }
+            return physicalRows;
+        }
+
         final String entityField = request.template().paginationEntityField();
         final Set<JsonNode> entityValues = new HashSet<>();
         for (final JsonNode record : response.records()) {

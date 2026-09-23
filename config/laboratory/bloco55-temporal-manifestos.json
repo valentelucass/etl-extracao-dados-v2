@@ -1,0 +1,23 @@
+{
+  "version": "bloco55-manifestos-civil-v1",
+  "purpose": "SYNTHETIC_BLOCO55_BACKFILL",
+  "workload": "manifestos",
+  "dependsOn": "",
+  "invocation": "aa391d93-fe07-47a8-ad3a-dfbd8a8e0e16",
+  "firstUnpublished": "2032-02-28",
+  "observedAt": "2032-03-01T12:00:00Z",
+  "zone": "America/Sao_Paulo",
+  "mode": "BACKFILL",
+  "strategy": "INTERVAL",
+  "cadence": "CIVIL_DAY",
+  "civilBoundary": "00:00",
+  "lookbackSeconds": "0",
+  "stabilizationSeconds": "60",
+  "slaSeconds": "3600",
+  "deadlineSeconds": "1800",
+  "concurrency": "1",
+  "maximumBacklog": "2",
+  "maximumReconciliation": "8",
+  "maximumDegraded": "1",
+  "blackouts": ""
+}

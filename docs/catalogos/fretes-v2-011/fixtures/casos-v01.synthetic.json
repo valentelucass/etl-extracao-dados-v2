@@ -1,0 +1,219 @@
+{
+  "schemaVersion": "v2-011a-fretes-decision-cases-v1",
+  "evidenceKind": "SYNTHETIC_DECISION_CASES_ONLY",
+  "cases": [
+    {
+      "caseId": "FRE-01-POS",
+      "rule": "FRE-01",
+      "scenario": "Identidade tecnica inteira dentro do escopo contratado",
+      "symbolicFacts": [
+        "ID=6389001",
+        "ID_TYPE=INTEGER",
+        "SCOPE=EXPLICIT"
+      ],
+      "expected": {
+        "disposition": "ACCEPT_DECISION",
+        "reason": "SCOPED_IDENTITY_ACCEPTED",
+        "roadmapEffect": "DECISION_ONLY"
+      }
+    },
+    {
+      "caseId": "FRE-01-NEG",
+      "rule": "FRE-01",
+      "scenario": "Alias de negocio tenta substituir a chave da fonte",
+      "symbolicFacts": [
+        "ID=ABSENT",
+        "CORPORATION_SEQUENCE_NUMBER=77",
+        "ALIAS_CARDINALITY=ZERO_TO_MANY"
+      ],
+      "expected": {
+        "disposition": "BLOCK",
+        "reason": "BUSINESS_ALIAS_IS_NOT_SOURCE_KEY",
+        "roadmapEffect": "DECISION_ONLY"
+      }
+    },
+    {
+      "caseId": "FRE-02-POS",
+      "rule": "FRE-02",
+      "scenario": "Primeiro instante presente e valido vence na precedencia",
+      "symbolicFacts": [
+        "CTE_CREATED_AT=ABSENT",
+        "CTE_ISSUED_AT=VALUE",
+        "CRIADO_EM=VALUE",
+        "SELECTED=CTE_ISSUED_AT"
+      ],
+      "expected": {
+        "disposition": "ACCEPT_DECISION",
+        "reason": "FIRST_PRESENT_FRESHNESS_SELECTED",
+        "roadmapEffect": "DECISION_ONLY"
+      }
+    },
+    {
+      "caseId": "FRE-02-NEG",
+      "rule": "FRE-02",
+      "scenario": "Mesmo frescor carrega conteudo canonico divergente",
+      "symbolicFacts": [
+        "FRESHNESS=EQUAL",
+        "CANONICAL_CONTENT=DIFFERENT",
+        "ARRIVAL_ORDER=IGNORED"
+      ],
+      "expected": {
+        "disposition": "QUARANTINE",
+        "reason": "EQUAL_FRESHNESS_DIVERGENCE",
+        "roadmapEffect": "DECISION_ONLY"
+      }
+    },
+    {
+      "caseId": "FRE-03-POS",
+      "rule": "FRE-03",
+      "scenario": "Campo de performance omitido preserva o valor conhecido",
+      "symbolicFacts": [
+        "PERFORMANCE=ABSENT",
+        "KNOWN_VALUE=VALUE",
+        "RESULT=PRESERVE"
+      ],
+      "expected": {
+        "disposition": "ACCEPT_DECISION",
+        "reason": "OMISSION_PRESERVES_KNOWN_VALUE",
+        "roadmapEffect": "DECISION_ONLY"
+      }
+    },
+    {
+      "caseId": "FRE-03-NEG",
+      "rule": "FRE-03",
+      "scenario": "Data de performance admite dia e mes em duas ordens",
+      "symbolicFacts": [
+        "FIT_DPN_PERFORMANCE_FINISHED_AT=02/04/2026",
+        "DAY<=12",
+        "MONTH<=12"
+      ],
+      "expected": {
+        "disposition": "QUARANTINE",
+        "reason": "AMBIGUOUS_PERFORMANCE_DATE",
+        "roadmapEffect": "DECISION_ONLY"
+      }
+    },
+    {
+      "caseId": "FRE-04-POS",
+      "rule": "FRE-04",
+      "scenario": "Identificador de coleta fica somente como candidato relacional",
+      "symbolicFacts": [
+        "PICK_ITEM_ID=991",
+        "RELATION_STATE=CANDIDATE_ONLY",
+        "CROSSWALK=OPEN"
+      ],
+      "expected": {
+        "disposition": "ACCEPT_DECISION",
+        "reason": "RELATION_CANDIDATE_PRESERVED_ONLY",
+        "roadmapEffect": "DECISION_ONLY"
+      }
+    },
+    {
+      "caseId": "FRE-04-NEG",
+      "rule": "FRE-04",
+      "scenario": "Candidato relacional tenta criar vinculo sem crosswalk",
+      "symbolicFacts": [
+        "PICK_ITEM_ID=991",
+        "RELATION_ACTION=MATERIALIZE",
+        "V2-046B=OPEN"
+      ],
+      "expected": {
+        "disposition": "BLOCK",
+        "reason": "RELATION_INFERENCE_FORBIDDEN",
+        "roadmapEffect": "DECISION_ONLY"
+      }
+    },
+    {
+      "caseId": "FRE-05-POS",
+      "rule": "FRE-05",
+      "scenario": "Ausencia em janela incremental nao altera estado ativo",
+      "symbolicFacts": [
+        "WINDOW=INCREMENTAL",
+        "ROOT=ABSENT",
+        "ACTIVE_STATE=UNCHANGED"
+      ],
+      "expected": {
+        "disposition": "NO_OP",
+        "reason": "INCREMENTAL_ABSENCE_NO_STATE_CHANGE",
+        "roadmapEffect": "DECISION_ONLY"
+      }
+    },
+    {
+      "caseId": "FRE-05-NEG",
+      "rule": "FRE-05",
+      "scenario": "Ausencia incremental tenta ativar prune",
+      "symbolicFacts": [
+        "WINDOW=INCREMENTAL",
+        "PRUNE=REQUESTED",
+        "COMPLETE_SNAPSHOT=UNPROVEN"
+      ],
+      "expected": {
+        "disposition": "BLOCK",
+        "reason": "PRUNE_REQUIRES_SEPARATE_GATE",
+        "roadmapEffect": "DECISION_ONLY"
+      }
+    },
+    {
+      "caseId": "FRE-06-POS",
+      "rule": "FRE-06",
+      "scenario": "Financeiro conserva valor bruto tipado e proveniencia",
+      "symbolicFacts": [
+        "TOTAL=VALUE",
+        "RAW=VALUE",
+        "CURRENCY=UNRESOLVED",
+        "ARITHMETIC=OFF"
+      ],
+      "expected": {
+        "disposition": "ACCEPT_DECISION",
+        "reason": "FINANCIAL_RAW_TYPED_PRESENCE_ONLY",
+        "roadmapEffect": "DECISION_ONLY"
+      }
+    },
+    {
+      "caseId": "FRE-06-NEG",
+      "rule": "FRE-06",
+      "scenario": "Regra financeira tenta presumir moeda e somar valores",
+      "symbolicFacts": [
+        "CURRENCY=INFERRED",
+        "UNIT=UNRESOLVED",
+        "ARITHMETIC=REQUESTED"
+      ],
+      "expected": {
+        "disposition": "BLOCK",
+        "reason": "CURRENCY_OR_RULE_NOT_GOVERNED",
+        "roadmapEffect": "DECISION_ONLY"
+      }
+    },
+    {
+      "caseId": "FRE-07-POS",
+      "rule": "FRE-07",
+      "scenario": "Data inequivoca segue formato com prova local",
+      "symbolicFacts": [
+        "DATE=13/04/2026",
+        "DAY>12",
+        "FORMAT=DD/MM/YYYY"
+      ],
+      "expected": {
+        "disposition": "ACCEPT_DECISION",
+        "reason": "UNAMBIGUOUS_DATE_WITH_PROVEN_FORMAT",
+        "roadmapEffect": "DECISION_ONLY"
+      }
+    },
+    {
+      "caseId": "FRE-07-NEG",
+      "rule": "FRE-07",
+      "scenario": "Data com dia e mes baixos nao recebe heuristica",
+      "symbolicFacts": [
+        "DATE=04/05/2026",
+        "DAY<=12",
+        "MONTH<=12",
+        "HEURISTIC=FORBIDDEN"
+      ],
+      "expected": {
+        "disposition": "QUARANTINE",
+        "reason": "AMBIGUOUS_DAY_MONTH_DATE",
+        "roadmapEffect": "DECISION_ONLY"
+      }
+    }
+  ]
+}

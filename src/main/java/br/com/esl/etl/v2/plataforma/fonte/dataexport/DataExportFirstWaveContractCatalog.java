@@ -64,6 +64,7 @@ public final class DataExportFirstWaveContractCatalog {
         return switch (Objects.requireNonNull(template, "O template é obrigatório.")) {
             case COLETAS -> COLETAS;
             case FRETES -> FRETES;
+            default -> throw new IllegalArgumentException("FIRST_WAVE_CONTRACT_ONLY");
         };
     }
 

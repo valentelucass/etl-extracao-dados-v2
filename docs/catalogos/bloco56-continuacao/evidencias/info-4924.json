@@ -1,0 +1,298 @@
+{
+  "template": 4924,
+  "httpStatus": 200,
+  "curlExit": 0,
+  "bytes": 9682,
+  "elapsedMilliseconds": 897,
+  "failure": null,
+  "metadata": {
+    "fields": [
+      {
+        "name": "id",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "fit_crn_psn_nickname",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "fit_pyr_name",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "fit_pyr_document",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "fit_pyr_cor_billing_cycle",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "fit_pyr_cor_billing_due_in_days",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "corporation_sequence_number",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "fit_nse_number",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "nfse_number",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "fit_fhe_cte_number",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "fit_fhe_cte_issued_at",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "fit_ant_document",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "fit_ant_issue_date",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "fit_ant_ils_due_date",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "fit_ant_ils_original_due_date",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "fit_ant_value",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "fit_ant_interest_value",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "fit_ant_discount_value",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "fit_ant_tat_bnk_name",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "fit_ant_tat_agency_number",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "fit_ant_tat_account_number",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "fit_ant_ils_atn_transaction_date",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "fit_sdr_document",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "fit_sdr_name",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "fit_rpt_document",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "fit_rpt_name",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "fit_fhe_cte_status_result",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "fit_fhe_cte_key",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "fit_fhe_cte_status",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "type",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "emission_type",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "service_type",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "courtesy",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "payment_type",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "fit_diy_sae_name",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "total",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "invoices_mapping",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "reference_number",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "fit_fte_invoices_order_number",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "fit_fsn_name",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "fit_sps_slr_psn_name",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "fit_ant_tat_custom_instruction",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "fit_ant_tat_bro_description",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "status",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "comments",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "service_at",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "finished_at",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "fit_fte_foe_ore_description",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "fit_fte_has_delivery_receipt",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "fit_d_t_created_at",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "fit_dyn_drt_nickname",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "fit_ant_ant_name",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      }
+    ],
+    "fieldsCount": 52,
+    "fieldsNamesOmitted": 0,
+    "filters": [
+      {
+        "name": "service_at",
+        "declaredType": "date"
+      },
+      {
+        "name": "by_updated_at",
+        "declaredType": "datetime"
+      },
+      {
+        "name": "from_controller",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "payer_id",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "from_accounting_credit_status",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "due_date",
+        "declaredType": "date"
+      },
+      {
+        "name": "customer_id",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "paid",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "issue_date",
+        "declaredType": "date"
+      },
+      {
+        "name": "corporation_sequence_number",
+        "declaredType": "numeric"
+      },
+      {
+        "name": "corporation_sequence_number",
+        "declaredType": "numeric"
+      },
+      {
+        "name": "from_seller",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "status",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "type",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "emission_type",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "courtesy",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "substituted",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "with_delivery_receipt",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      }
+    ],
+    "filtersCount": 18,
+    "filtersNamesOmitted": 0
+  }
+}

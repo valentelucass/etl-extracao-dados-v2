@@ -1,0 +1,575 @@
+{
+  "version": 3,
+  "scope": "P10_P11_P12_P14_P15_P21_NATIVE_PASS_FULL_FAILED",
+  "sourceMatrix": {
+    "path": "docs/catalogos/preparacao-offline-p10-p21/matriz.json",
+    "sha256": "27fe520c4b5a6e25851d4a0eb8ba0ec69a037d8a0dd9258e29c77876d6f41fa3"
+  },
+  "construction": "39/45",
+  "acceptances": "67/115",
+  "newAcceptances": 0,
+  "productionCalls": 0,
+  "stages": [
+    {
+      "id": "P10",
+      "offlineState": "TESTADO_NA_CAMADA_OFFLINE",
+      "integralState": "BLOQUEADO_POR_INPUT",
+      "gates": [
+        "G02"
+      ],
+      "requirements": [
+        {
+          "id": "G02-PUBLICACAO",
+          "gate": "G02",
+          "ownerRole": "Owner do repositorio",
+          "nominalOwner": null,
+          "source": "STATES.md",
+          "status": "BLOQUEADO_POR_INPUT",
+          "priorRequirement": "Provider, remote/branch, conjunto exato aprovado, owners/aprovadores e autorizacao nominal de publicacao; inventario local nao e conjunto aprovado.",
+          "observedEvidence": [
+            "Consulta local atual: zero remotes; nenhum CODEOWNERS nos caminhos convencionais. Politica reserva provider, conjunto e aprovadores ao owner. Nenhum destino foi inferido."
+          ],
+          "remainingRequirement": "Provider, remote/branch, conjunto exato aprovado, owners/aprovadores e autorizacao nominal de publicacao; inventario local nao e conjunto aprovado.",
+          "origin": "STATES.md",
+          "locatedEvidence": [
+            {
+              "path": "CONTRIBUTING.md",
+              "sha256": "9f72feeb251b7def0b52bb3111f1b16e7a5349d4e0a11042f6d55fe2d8dfd8c3"
+            },
+            {
+              "path": "SECURITY.md",
+              "sha256": "b360360a5c241edfb3dfbc071f048e967eac6ef2311b0dd661a4a9cbe6605b6e"
+            }
+          ]
+        },
+        {
+          "id": "G02-CI",
+          "gate": "G02",
+          "ownerRole": "Owner do repositorio",
+          "nominalOwner": null,
+          "source": ".github/workflows/security.yml",
+          "status": "BLOQUEADO_POR_INPUT",
+          "priorRequirement": "Protecoes/checks obrigatorios e Gitleaks versionado; depois do efeito autorizado, SHA remoto, historico completo e recibos reais de CI vinculados ao mesmo SHA.",
+          "observedEvidence": [
+            "Workflows versionados e verificacoes locais existem; nao foi localizado recibo de CI de provedor vinculado ao SHA aprovado. Preparacao nao e execucao remota."
+          ],
+          "remainingRequirement": "Protecoes/checks obrigatorios e Gitleaks versionado; depois do efeito autorizado, SHA remoto, historico completo e recibos reais de CI vinculados ao mesmo SHA.",
+          "origin": ".github/workflows/security.yml",
+          "locatedEvidence": [
+            {
+              "path": ".github/workflows/ci.yml",
+              "sha256": "c53dfb8605cdef0b40599173ac61a3793e2f57311e67fe85a85df96ff96ed64a"
+            },
+            {
+              "path": ".github/workflows/security.yml",
+              "sha256": "dec59fada5f8c5ca00d343cd50936b5547a01e9212213c503649cb84ba708e3a"
+            },
+            {
+              "path": "docs/catalogos/preparacao-offline-p10-p21/validacoes.json",
+              "sha256": "91fc18202b8ee537c9d5f27e83d3b62144ad8773ebfe8968bbc45e678217d46e"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "P11",
+      "offlineState": "DEPENDENCIAS_CORRIGIDAS_AUDITORIA_PUBLICA_PASS",
+      "integralState": "ACEITE_NOMINAL_DA_BASELINE_PENDENTE",
+      "gates": [
+        "FEED"
+      ],
+      "requirements": [
+        {
+          "id": "FEED-BASELINE",
+          "gate": "FEED",
+          "ownerRole": "Responsavel de seguranca",
+          "nominalOwner": null,
+          "source": "docs/catalogos/vulnerabilidades-v2-015d/README.md",
+          "status": "BLOQUEADO_POR_INPUT",
+          "priorRequirement": "Feed/NVD autorizado, procedencia/frescor, janela e autoridade; relatorios JSON e HTML completos da revisao exata e aceite nominal da primeira baseline.",
+          "observedEvidence": [
+            "Relatório real JSON/HTML das 13 dependências, quatro achados; cache consultado em 26/08/2026, sem aceite de atualidade.",
+            "POM corrigido: Jackson 2.18.11/JDBC 12.8.2; NVD atualizado em 21/09; 13 dependências, zero achado/erro; 205 testes e parser real PASS.",
+            "Reutilizados JSON/HTML e resultado P11: NVD atualizado, 13 dependencias, zero achados/erros. Documento declara aceite nominal de Seguranca ainda ausente."
+          ],
+          "remainingRequirement": "Aceite nominal da baseline pelo responsável de segurança; não foi inferido da autorização de consulta pública.",
+          "origin": "docs/catalogos/vulnerabilidades-v2-015d/README.md",
+          "locatedEvidence": [
+            {
+              "path": "docs/catalogos/p11-publico-corrigido/RELATORIO.md",
+              "sha256": "fbb8435c7273e326cb7171cf61d841a7812fe8827c9ae7990f4bbc1c47b36a25"
+            },
+            {
+              "path": "docs/catalogos/p11-publico-corrigido/resultado.json",
+              "sha256": "c9f48273c4b950cbdb1d60ec956987670889c07ccb2c4ca99eb638ae1c03503c"
+            },
+            {
+              "path": "docs/catalogos/vulnerabilidades-v2-015d/README.md",
+              "sha256": "44dc03fe43322b45d0973a45febd8048bd4215d02cb50f52a5ec4792f74877bd"
+            }
+          ]
+        },
+        {
+          "id": "FEED-ACHADOS",
+          "gate": "FEED",
+          "ownerRole": "Responsavel de seguranca",
+          "nominalOwner": null,
+          "source": "docs/catalogos/vulnerabilidades-v2-015d/politica-v01.json",
+          "status": "CORRIGIDO_E_TESTADO_NA_CAMADA_JAVA_NVD",
+          "priorRequirement": "Classificar achados reais e corrigir ou aprovar excecoes exatas por vulnerabilidade/PURL, owner-papel, justificativa, escopo e expiracao de no maximo 90 dias; catalogo efetivo vazio nao e ausencia de vulnerabilidades.",
+          "observedEvidence": [
+            "Quatro achados identificados, sem exceção. Candidato JDBC 13.4.0 passou 122 testes em cópia e retirou um alerta; três alertas Jackson permanecem.",
+            "POM corrigido: Jackson 2.18.11/JDBC 12.8.2; NVD atualizado em 21/09; 13 dependências, zero achado/erro; 205 testes e parser real PASS."
+          ],
+          "remainingRequirement": "Nenhum achado de dependência aberto neste scan; autenticação nativa/SQL da nova combinação não executadas e não são aceitas como prova produtiva.",
+          "origin": "docs/catalogos/vulnerabilidades-v2-015d/politica-v01.json"
+        }
+      ]
+    },
+    {
+      "id": "P12",
+      "offlineState": "TESTADO_NA_CAMADA_OFFLINE",
+      "integralState": "BLOQUEADO_POR_INPUT",
+      "gates": [
+        "G05"
+      ],
+      "requirements": [
+        {
+          "id": "G05-AMBIENTE",
+          "gate": "G05",
+          "ownerRole": "DBA, Operacoes, Seguranca e Compliance",
+          "nominalOwner": null,
+          "source": "docs/catalogos/campanhas-integrais/ENTRADAS-E-EFEITOS-EXTERNOS.md",
+          "status": "BLOQUEADO_POR_INPUT",
+          "priorRequirement": "Alvo V2 dedicado isolado, principals segregados, TLS e ACL nominais, capacidade/quotas/storage, config/scheduler/alertas aprovados; sem valores de credenciais ou certificados.",
+          "observedEvidence": [
+            "Laboratorio local e provas SQL existem; alvo ONLINE confirmado nesta rodada. Nao comprovam ambiente definitivo, TLS/ACL, quotas e agenda aprovados."
+          ],
+          "remainingRequirement": "Alvo V2 dedicado isolado, principals segregados, TLS e ACL nominais, capacidade/quotas/storage, config/scheduler/alertas aprovados; sem valores de credenciais ou certificados.",
+          "origin": "docs/catalogos/campanhas-integrais/ENTRADAS-E-EFEITOS-EXTERNOS.md",
+          "locatedEvidence": [
+            {
+              "path": "docs/catalogos/campanhas-integrais/ENTRADAS-E-EFEITOS-EXTERNOS.md",
+              "sha256": "512ccfdbd037c758c9581548583ec3dfd51e8ebbc8929d41a211b4f48c502fcc"
+            },
+            {
+              "path": "SECURITY.md",
+              "sha256": "b360360a5c241edfb3dfbc071f048e967eac6ef2311b0dd661a4a9cbe6605b6e"
+            }
+          ]
+        },
+        {
+          "id": "G05-RETENCAO",
+          "gate": "G05",
+          "ownerRole": "DBA, Operacoes, Seguranca e Compliance",
+          "nominalOwner": null,
+          "source": "docs/runbooks/retencao-arquivamento-e-restore.md",
+          "status": "BLOQUEADO_POR_INPUT",
+          "priorRequirement": "Data owner e compliance ratificam policy/TTL por staging, logs e archive, autoridade de hold/release; DBA/Operacoes comprovam WORM ou imutabilidade equivalente, criptografia, capacidade e identidade de servico.",
+          "observedEvidence": [
+            "Lifecycle implementado/testado localmente; runbook declara TTL candidato nao aprovado e identidades/retenção nominal pendentes."
+          ],
+          "remainingRequirement": "Data owner e compliance ratificam policy/TTL por staging, logs e archive, autoridade de hold/release; DBA/Operacoes comprovam WORM ou imutabilidade equivalente, criptografia, capacidade e identidade de servico.",
+          "origin": "docs/runbooks/retencao-arquivamento-e-restore.md",
+          "locatedEvidence": [
+            {
+              "path": "docs/runbooks/retencao-arquivamento-e-restore.md",
+              "sha256": "0e78382707c8cde96fdc460debca3241e6a93d6029ad5d9137ac77127da004b2"
+            }
+          ]
+        },
+        {
+          "id": "G05-RECUPERACAO",
+          "gate": "G05",
+          "ownerRole": "DBA, Operacoes, Seguranca e Compliance",
+          "nominalOwner": null,
+          "source": "docs/runbooks/retencao-arquivamento-e-restore.md",
+          "status": "BLOQUEADO_POR_INPUT",
+          "priorRequirement": "Backup e restore drill materiais, RTO/RPO medidos, COMMIT/crash/rebuild/replay quando requeridos, janela/orcamento e autorizacao individual por efeito com ledger previo. Rollback sintetico nao autoriza nem prova esses efeitos.",
+          "observedEvidence": [
+            "Rollback e readback agregado sao provas locais existentes; nao ha nesta evidencia backup/restore material nem RTO/RPO medidos."
+          ],
+          "remainingRequirement": "Backup e restore drill materiais, RTO/RPO medidos, COMMIT/crash/rebuild/replay quando requeridos, janela/orcamento e autorizacao individual por efeito com ledger previo. Rollback sintetico nao autoriza nem prova esses efeitos.",
+          "origin": "docs/runbooks/retencao-arquivamento-e-restore.md",
+          "locatedEvidence": [
+            {
+              "path": "docs/runbooks/retencao-arquivamento-e-restore.md",
+              "sha256": "0e78382707c8cde96fdc460debca3241e6a93d6029ad5d9137ac77127da004b2"
+            },
+            {
+              "path": "docs/catalogos/campanhas-integrais/ENTRADAS-E-EFEITOS-EXTERNOS.md",
+              "sha256": "512ccfdbd037c758c9581548583ec3dfd51e8ebbc8929d41a211b4f48c502fcc"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "P14",
+      "offlineState": "TESTADO_NA_CAMADA_OFFLINE",
+      "integralState": "BLOQUEADO_POR_INPUT",
+      "gates": [
+        "G03",
+        "G04"
+      ],
+      "requirements": [
+        {
+          "id": "G03-10633",
+          "gate": "G03",
+          "ownerRole": "Fornecedor e owner de dados por fonte",
+          "nominalOwner": null,
+          "source": "docs/catalogos/identidade-inventario/README.md",
+          "status": "BLOQUEADO_POR_INPUT",
+          "priorRequirement": "Raiz versionada, papel Frete/minuta, shape/tipos do mapping; repeticoes representativas, escopo/tenant, estabilidade, colisoes e cardinalidade. sequence_code permanece candidato.",
+          "observedEvidence": [
+            "B56: sequence INTEGER e mapping ARRAY de STRING observados em fonte real; identidade e vínculo de filhos não comprovados.",
+            "B56 remoto: mapping ARRAY de STRING observado. Nenhuma garantia de chave filha, estabilidade ou vinculo raiz/Frete; nao pedir novamente prova do shape ja observado."
+          ],
+          "remainingRequirement": "Garantia versionada de raiz/Frete, semântica e chave dos filhos, escopo/estabilidade, colisões e cardinalidade. ARRAY de STRING já observado, sem pedir nova fixture para esse shape.",
+          "origin": "docs/catalogos/identidade-inventario/README.md",
+          "locatedEvidence": [
+            {
+              "path": "docs/catalogos/bloco56-continuacao/README.md",
+              "sha256": "5ec46dc1fd3d52793d2d8f0772a80f300b4113248cd06a354847a14272d90625"
+            },
+            {
+              "path": "docs/catalogos/contratos-esl-10633/README.md",
+              "sha256": "a690c6e02348a69ebf494e64051d4b9808ebdbbd0477ac694a1865d89b06db2d"
+            },
+            {
+              "path": "docs/catalogos/identidade-inventario/README.md",
+              "sha256": "bbfc848d21841f69d77e17b2d33322bc026f70820348a2ee392e5cef1ecad953"
+            }
+          ]
+        },
+        {
+          "id": "G03-8636",
+          "gate": "G03",
+          "ownerRole": "Fornecedor e owner de dados por fonte",
+          "nominalOwner": null,
+          "source": "docs/catalogos/identidade-contas-a-pagar/README.md",
+          "status": "BLOQUEADO_POR_INPUT",
+          "priorRequirement": "Identificador tipado da raiz accounting_debit e prova representativa raiz-parcela-rateio. ant_ils_sequence_code nao identifica raiz nem linha fisica.",
+          "observedEvidence": [
+            "B56: parcela INTEGER; /id e /accounting_debit_id ausentes na amostra; raiz e vínculo parcela/rateio não identificados.",
+            "B56 remoto e contraexemplo historico: INTEGER na parcela, raiz tecnica ausente; candidata refutada como chave de linha. Schema GraphQL nao demonstra crosswalk."
+          ],
+          "remainingRequirement": "Identificador tipado da raiz accounting_debit e prova representativa raiz-parcela-rateio. ant_ils_sequence_code nao identifica raiz nem linha fisica.",
+          "origin": "docs/catalogos/identidade-contas-a-pagar/README.md",
+          "locatedEvidence": [
+            {
+              "path": "docs/catalogos/bloco56-continuacao/README.md",
+              "sha256": "5ec46dc1fd3d52793d2d8f0772a80f300b4113248cd06a354847a14272d90625"
+            },
+            {
+              "path": "docs/catalogos/identidade-contas-a-pagar/README.md",
+              "sha256": "e6b0f1f083b3f39ac639c13bc462ed4a0c755661d6ea82759d8a5a3c109bbf0d"
+            }
+          ]
+        },
+        {
+          "id": "G03-4924",
+          "gate": "G03",
+          "ownerRole": "Fornecedor e owner de dados por fonte",
+          "nominalOwner": null,
+          "source": "docs/catalogos/identidade-faturas-por-cliente/README.md",
+          "status": "BLOQUEADO_POR_INPUT",
+          "priorRequirement": "Estabilidade do id de linha e crosswalk linha-titulo-documento-Frete; filhos tipados, identidade/cardinalidade. id fisico nao vincula titulo logico.",
+          "observedEvidence": [
+            "B56: /id INTEGER; mapping e pedidos ARRAY de STRING; título lógico e crosswalk não comprovados.",
+            "B56 remoto: ID INTEGER de linha e arrays de textos. Identidade da linha nao comprova titulo, filhos, documento ou Frete."
+          ],
+          "remainingRequirement": "Entidade e estabilidade do ID de linha; crosswalk linha/título/documento/Frete e identidade dos filhos. ARRAY de STRING já observado.",
+          "origin": "docs/catalogos/identidade-faturas-por-cliente/README.md",
+          "locatedEvidence": [
+            {
+              "path": "docs/catalogos/bloco56-continuacao/README.md",
+              "sha256": "5ec46dc1fd3d52793d2d8f0772a80f300b4113248cd06a354847a14272d90625"
+            },
+            {
+              "path": "docs/catalogos/identidade-faturas-por-cliente/README.md",
+              "sha256": "0af6a7ec95e7b76f7a1fc0c166befe5dd373f23f0a176627b88eff3890808af7"
+            }
+          ]
+        },
+        {
+          "id": "G03-6392",
+          "gate": "G03",
+          "ownerRole": "Fornecedor e owner de dados por fonte",
+          "nominalOwner": null,
+          "source": "docs/catalogos/identidade-sinistros/README.md",
+          "status": "BLOQUEADO_POR_INPUT",
+          "priorRequirement": "Garantia versionada da raiz ou observacoes repetidas com colisoes entre sequencia, minuta e ocorrencia de invoice; papeis e cardinalidade, sem simplificar hash legado por inferencia.",
+          "observedEvidence": [
+            "B56: sequence INTEGER e número de nota STRING; identidade universal não comprovada.",
+            "B56 remoto: sequence INTEGER e numero de nota STRING; identificadores tecnicos testados ausentes. Nota nao comprova raiz/ocorrencia."
+          ],
+          "remainingRequirement": "Garantia versionada da raiz ou observacoes repetidas com colisoes entre sequencia, minuta e ocorrencia de invoice; papeis e cardinalidade, sem simplificar hash legado por inferencia.",
+          "origin": "docs/catalogos/identidade-sinistros/README.md",
+          "locatedEvidence": [
+            {
+              "path": "docs/catalogos/bloco56-continuacao/README.md",
+              "sha256": "5ec46dc1fd3d52793d2d8f0772a80f300b4113248cd06a354847a14272d90625"
+            },
+            {
+              "path": "docs/catalogos/identidade-sinistros/README.md",
+              "sha256": "38eccfa07d65afa43354893061cce83b55544ccc61f516519da5b046f4ae2b14"
+            }
+          ]
+        },
+        {
+          "id": "G03-RASTER",
+          "gate": "G03",
+          "ownerRole": "Fornecedor e owner de dados por fonte",
+          "nominalOwner": null,
+          "source": "docs/catalogos/raster-contrato-local/identidade-pendente.json",
+          "status": "BLOQUEADO_POR_INPUT",
+          "priorRequirement": "Tipos/escopo/estabilidade de CodSolicitacao e identidade de parada; Ordem sob reordenacao/insercao/remocao/retorno, atomicidade/frescor e cardinalidade. Sem fallback posicional.",
+          "observedEvidence": [
+            "Contrato local preserva CodSolicitacao e Ordem como candidatos; contraexemplo de reordenacao refuta fallback por posicao. Garantia de identidade ausente."
+          ],
+          "remainingRequirement": "Tipos/escopo/estabilidade de CodSolicitacao e identidade de parada; Ordem sob reordenacao/insercao/remocao/retorno, atomicidade/frescor e cardinalidade. Sem fallback posicional.",
+          "origin": "docs/catalogos/raster-contrato-local/identidade-pendente.json",
+          "locatedEvidence": [
+            {
+              "path": "docs/catalogos/raster-contrato-local/README.md",
+              "sha256": "26fe0fb91fd684182d0287dbd6590c084f89b2475ce332a8ae81764045bc3bfd"
+            },
+            {
+              "path": "docs/catalogos/raster-contrato-local/identidade-pendente.json",
+              "sha256": "be859541e221711555f6aded72fa7223d3217738687e25a70392cac0bd416499"
+            }
+          ]
+        },
+        {
+          "id": "G04-SEMANTICA",
+          "gate": "G04",
+          "ownerRole": "Negocio e owners de referencias e consumidores",
+          "nominalOwner": null,
+          "source": "STATES.md",
+          "status": "BLOQUEADO_POR_INPUT",
+          "priorRequirement": "Owner de negocio ratifica grao, relacoes, alias/rekey, titulo/documento e precedencia fiscal/financeira aplicaveis, incluindo fonte propria de serie NFS-e. Nenhuma chave ou owner nominal e inferido.",
+          "observedEvidence": [
+            "FAT-02 registra divergencia mapper/SQL quando CT-e e NFS-e coexistem; fonte propria de serie NFS-e e precedencia nao ratificadas."
+          ],
+          "remainingRequirement": "Owner de negocio ratifica grao, relacoes, alias/rekey, titulo/documento e precedencia fiscal/financeira aplicaveis, incluindo fonte propria de serie NFS-e. Nenhuma chave ou owner nominal e inferido.",
+          "origin": "STATES.md",
+          "locatedEvidence": [
+            {
+              "path": "docs/catalogos/bloco56-continuacao/README.md",
+              "sha256": "5ec46dc1fd3d52793d2d8f0772a80f300b4113248cd06a354847a14272d90625"
+            },
+            {
+              "path": "docs/catalogos/macrobloco-analitico/manifesto-referencias.json",
+              "sha256": "fdceade134ba69229b02ed63e0cffdbfab2f6fd4ad8e79f96553b6caba701c38"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "P15",
+      "offlineState": "TESTADO_NA_CAMADA_OFFLINE",
+      "integralState": "BLOQUEADO_POR_INPUT",
+      "gates": [
+        "G04"
+      ],
+      "requirements": [
+        {
+          "id": "G04-REFERENCIAS",
+          "gate": "G04",
+          "ownerRole": "Negocio e owners de referencias e consumidores",
+          "nominalOwner": null,
+          "source": "docs/runbooks/importar-ratificar-e-revogar-referencias.md",
+          "status": "BLOQUEADO_POR_INPUT",
+          "priorRequirement": "Export/baseline autorizado por familia consumida, release/escopo, proveniencia, vigencia, grao, contagem e fingerprint; normalizacao e tokenizacao por versao aprovada, sem fornecer tokens/documentos/chaves neste chat.",
+          "observedEvidence": [
+            "Manifestos e importadores/fixtures qualificam o formato; nao sao export oficial autorizado por familia, release e vigencia."
+          ],
+          "remainingRequirement": "Export/baseline autorizado por familia consumida, release/escopo, proveniencia, vigencia, grao, contagem e fingerprint; normalizacao e tokenizacao por versao aprovada, sem fornecer tokens/documentos/chaves neste chat.",
+          "origin": "docs/runbooks/importar-ratificar-e-revogar-referencias.md",
+          "locatedEvidence": [
+            {
+              "path": "docs/runbooks/importar-ratificar-e-revogar-referencias.md",
+              "sha256": "f820770651e6f05fbf3e935eb47f76c803563908dc4260a02a61a480082d51c5"
+            },
+            {
+              "path": "docs/catalogos/macrobloco-analitico/manifesto-referencias.json",
+              "sha256": "fdceade134ba69229b02ed63e0cffdbfab2f6fd4ad8e79f96553b6caba701c38"
+            }
+          ]
+        },
+        {
+          "id": "G04-RATIFICACAO",
+          "gate": "G04",
+          "ownerRole": "Negocio e owners de referencias e consumidores",
+          "nominalOwner": null,
+          "source": "database/manifest/governed-references.json",
+          "status": "BLOQUEADO_POR_INPUT",
+          "priorRequirement": "Autor/importador/aprovador segregados, cobertura calendario/filial/frota/regiao/status/tarifas, fixtures de paridade e politicas de ausencia/conflito; importacao material requer P12/G05 e autorizacao propria.",
+          "observedEvidence": [
+            "Segregacao autor/importador/aprovador e cobertura sao exigencias testaveis. Nenhuma evidencia selecionada contem ratificacao real independente."
+          ],
+          "remainingRequirement": "Autor/importador/aprovador segregados, cobertura calendario/filial/frota/regiao/status/tarifas, fixtures de paridade e politicas de ausencia/conflito; importacao material requer P12/G05 e autorizacao propria.",
+          "origin": "database/manifest/governed-references.json",
+          "locatedEvidence": [
+            {
+              "path": "docs/runbooks/importar-ratificar-e-revogar-referencias.md",
+              "sha256": "f820770651e6f05fbf3e935eb47f76c803563908dc4260a02a61a480082d51c5"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "P21",
+      "offlineState": "TESTADO_NA_CAMADA_OFFLINE",
+      "integralState": "BLOQUEADO_POR_INPUT",
+      "gates": [
+        "G04"
+      ],
+      "requirements": [
+        {
+          "id": "G04-DIMENSOES",
+          "gate": "G04",
+          "ownerRole": "Negocio e owners de referencias e consumidores",
+          "nominalOwner": null,
+          "source": "STATES.md",
+          "status": "BLOQUEADO_POR_INPUT",
+          "priorRequirement": "Por dimensao: fonte qualificada e paridade core das fatias usadas, grao/papeis, binding explicito, vigencia, current/history, ausencia, conflitos e rekey ratificados; publicacao contratual permanece P25.",
+          "observedEvidence": [
+            "DAG, bindings sinteticos e current/history locais existentes. A evidencia declara fontes qualificadas e regras de vigencia/rekey externas pendentes."
+          ],
+          "remainingRequirement": "Por dimensao: fonte qualificada e paridade core das fatias usadas, grao/papeis, binding explicito, vigencia, current/history, ausencia, conflitos e rekey ratificados; publicacao contratual permanece P25.",
+          "origin": "STATES.md",
+          "locatedEvidence": [
+            {
+              "path": "docs/catalogos/preparacao-offline-p10-p21/RELATORIO.md",
+              "sha256": "d1a0f79401da14e5ec1bb438fc262d10a9b03de5fc558e11f0fce55e96468ecd"
+            },
+            {
+              "path": "docs/catalogos/campanhas-integrais/ENTRADAS-E-EFEITOS-EXTERNOS.md",
+              "sha256": "512ccfdbd037c758c9581548583ec3dfd51e8ebbc8929d41a211b4f48c502fcc"
+            }
+          ]
+        },
+        {
+          "id": "G04-FROTA",
+          "gate": "G04",
+          "ownerRole": "Negocio e owners de referencias e consumidores",
+          "nominalOwner": null,
+          "source": "docs/catalogos/frota-manifestos-v2-035c/README.md",
+          "status": "BLOQUEADO_POR_INPUT",
+          "priorRequirement": "Veiculos/reboques e motoristas exigem ID estavel escopado do fornecedor, semantica de placa/nome/filial, colisoes/homonimos, merge/split, papeis separados e lifecycle. Evidencia tecnica do fornecedor por G03; ratificacao de negocio por G04. V2-035c nao autoriza inferir identidade.",
+          "observedEvidence": [
+            "Decisao V02 explicitamente BLOCKED: placa/nome/filial e coocorrencia nao fornecem IDs estaveis. Papeis principal/reboques comprovados somente no grao Manifesto."
+          ],
+          "remainingRequirement": "Veiculos/reboques e motoristas exigem ID estavel escopado do fornecedor, semantica de placa/nome/filial, colisoes/homonimos, merge/split, papeis separados e lifecycle. Evidencia tecnica do fornecedor por G03; ratificacao de negocio por G04. V2-035c nao autoriza inferir identidade.",
+          "origin": "docs/catalogos/frota-manifestos-v2-035c/README.md",
+          "locatedEvidence": [
+            {
+              "path": "docs/catalogos/frota-manifestos-v2-035c/README.md",
+              "sha256": "0a50e9e3e2a7345d747c007afcd7f88517aa39a857a751c8086ee779b5928284"
+            },
+            {
+              "path": "docs/catalogos/frota-manifestos-v2-035c/decisao-v02.json",
+              "sha256": "02a259fae743b9c0fc7c873f70e2929bef04a375d0f85f60675f52f62ec4af92"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "predecessor": {
+    "path": "docs/catalogos/p11-publico-corrigido/matriz-atual.json",
+    "sha256": "15efa0f023f77aed99b45ce0f8cfef5e1590080bd347534fc748b0ef01186dd6"
+  },
+  "openExternalRequirements": 16,
+  "rounds": [
+    {
+      "id": "PREPARACAO_OFFLINE",
+      "externalNetworkCalls": 0,
+      "evidence": {
+        "path": "docs/catalogos/preparacao-offline-p10-p21/matriz.json",
+        "sha256": "27fe520c4b5a6e25851d4a0eb8ba0ec69a037d8a0dd9258e29c77876d6f41fa3"
+      },
+      "scope": "Somente a rodada de preparacao offline"
+    },
+    {
+      "id": "P11_PUBLICO_0220",
+      "externalNetworkUsed": true,
+      "externalNetworkCalls": null,
+      "countStatus": "TOTAL_NAO_INSTRUMENTADO",
+      "ledgerReceivedCalls": 7,
+      "ledgerScope": "Sete GETs controlados com recibo; nao inclui total interno do Maven/cliente NVD nem retries. Nao somar registros NVD ou checagens de socket como requisicoes HTTP.",
+      "evidence": {
+        "path": "target/p11-publico-20260921-01/network-ledger.jsonl",
+        "sha256": "84b77513d3150511f7168613852799cc20f541677d6cd39c7e33256c3b28d226"
+      },
+      "result": {
+        "path": "docs/catalogos/p11-publico-corrigido/resultado.json",
+        "sha256": "c9f48273c4b950cbdb1d60ec956987670889c07ccb2c4ca99eb638ae1c03503c"
+      }
+    },
+    {
+      "id": "P11_REGRESSAO_0221",
+      "externalNetworkCalls": 0,
+      "databaseCalls": 0,
+      "nativeAuthenticationTested": false,
+      "loopbackFixtures": true,
+      "scope": "Testes sinteticos locais; sockets efemeros de fixtures nao sao consultas a fonte nem a SQL"
+    },
+    {
+      "id": "P11_FISICO_0226",
+      "externalNetworkCalls": 4,
+      "countStatus": "FOUR_MAVEN_CENTRAL_GETS_RECEIPTED",
+      "databaseUsed": true,
+      "databaseCalls": null,
+      "databaseCountStatus": "INNER_JDBC_NOT_INSTRUMENTED",
+      "nativeAuthenticationTested": true,
+      "fullPhysicalVerify": false,
+      "fullVerifyAttempted": true,
+      "packageExecuted": false,
+      "evidence": {
+        "path": "docs/catalogos/p11-fisico/resultado.json",
+        "sha256": "6c3bfd1649afaa49e141e9a1c9beee52b8fa6cecc0ce5aee945a3472942954bf"
+      }
+    }
+  ],
+  "technicalWork": [
+    {
+      "id": "A",
+      "status": "QUALIFICADO_NO_ESCOPO_LOCAL",
+      "ownerRole": "Usuario autorizante; DBA/Operacoes para alvo local",
+      "source": "Pedido anexado, TRABALHO TECNICO RESTANTE A e AUTORIDADE E EXECUCAO",
+      "remainingRequirement": null,
+      "countsReadThisRound": true,
+      "evidence": {
+        "path": "target/p11-fisico-20260921-01/native-summary.json",
+        "sha256": "204a91350254d72082d07ecdea47ff8327e453536a3a730fa10d6fee15a32b27"
+      }
+    },
+    {
+      "id": "B",
+      "status": "NAO_QUALIFICADO_FALHA_DE_EXECUCAO",
+      "ownerRole": "Usuario autorizante para P07/P08 fisicos",
+      "source": "TRILHA_CONCLUSAO_POR_MODELO.md, criterios P07/P08; pedido anexado B",
+      "remainingRequirement": "Resolver instabilidade de execucao SQL/recursos e obter VerifyPhysical integral sem falhas em uma nova ordem finita; depois qualificar P08 com os pins atuais. Nao reutilizar aceite de teste isolado ou pacote historico.",
+      "evidence": {
+        "path": "docs/catalogos/p11-fisico/resultado.json",
+        "sha256": "6c3bfd1649afaa49e141e9a1c9beee52b8fa6cecc0ce5aee945a3472942954bf"
+      }
+    },
+    {
+      "id": "C",
+      "status": "CORRIGIDO_POR_SUCESSAO",
+      "source": "docs/catalogos/p11-publico-corrigido/matriz-atual.json",
+      "remainingRequirement": null
+    }
+  ],
+  "localEvidence": {
+    "path": "target/p11-regressao-20260921-01/unit-summary.json",
+    "sha256": "a2fb3b69e722c91e4cf7db72dd4507d549db73e5edc0f64760800df6181fe868"
+  }
+}

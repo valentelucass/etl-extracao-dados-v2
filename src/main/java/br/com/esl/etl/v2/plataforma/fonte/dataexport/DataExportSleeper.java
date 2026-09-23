@@ -9,6 +9,10 @@ public interface DataExportSleeper {
     void sleep(Duration duration) throws InterruptedException;
 
     static DataExportSleeper threadSleeper() {
-        return duration -> Thread.sleep(duration.toMillis());
+        return duration -> {
+            final long millis = duration.toMillis();
+            final int nanos = Math.toIntExact(duration.minusMillis(millis).toNanos());
+            Thread.sleep(millis, nanos);
+        };
     }
 }

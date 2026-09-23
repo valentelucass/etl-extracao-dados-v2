@@ -1,0 +1,209 @@
+{
+  "fixtureVersion": "2026-09-05.v2-035c.1",
+  "task": "V2-035c",
+  "syntheticOnly": true,
+  "containsRealData": false,
+  "representation": "SYMBOLIC_CLASSES_AND_SYNTH_TOKENS_ONLY",
+  "cases": [
+    {
+      "id": "PRESENCE_TRI_STATE",
+      "synthetic": true,
+      "dimension": "BOTH",
+      "inputClass": "SAME_PATH_OBSERVED_AS_ABSENT_NULL_AND_VALUE_IN_DISTINCT_OBSERVATIONS",
+      "symbols": ["SYNTH_VALUE_A"],
+      "expected": "PRESERVE_OBSERVATION_ONLY"
+    },
+    {
+      "id": "INVALID_UNICODE",
+      "synthetic": true,
+      "dimension": "BOTH",
+      "inputClass": "VALUE_CONTAINS_UNPAIRED_UTF16_SURROGATE",
+      "symbols": ["SYNTH_INVALID_UTF16"],
+      "expected": "QUARANTINE_OBSERVATION"
+    },
+    {
+      "id": "UTF16_OVERFLOW",
+      "synthetic": true,
+      "dimension": "BOTH",
+      "inputClass": "VALUE_EXCEEDS_DECLARED_UTF16_LIMIT",
+      "symbols": ["SYNTH_OVERSIZED_TEXT"],
+      "expected": "QUARANTINE_OBSERVATION"
+    },
+    {
+      "id": "VEHICLE_PLATE_NO_SOURCE_ID",
+      "synthetic": true,
+      "dimension": "VEICULOS",
+      "inputClass": "PLATE_TEXT_EXISTS_WITHOUT_PROVIDER_VEHICLE_IDENTIFIER",
+      "symbols": ["SYNTH_PLATE_A"],
+      "expected": "BLOCK_DIMENSIONAL_PROMOTION"
+    },
+    {
+      "id": "VEHICLE_NORMALIZATION_COLLISION",
+      "synthetic": true,
+      "dimension": "VEICULOS",
+      "inputClass": "DISTINCT_RAW_PLATE_TEXTS_COLLAPSE_UNDER_A_CANDIDATE_NORMALIZER",
+      "symbols": ["SYNTH_PLATE_RAW_A", "SYNTH_PLATE_RAW_B"],
+      "expected": "BLOCK_DIMENSIONAL_PROMOTION"
+    },
+    {
+      "id": "VEHICLE_LEXICAL_FORMAT_UNPROVEN",
+      "synthetic": true,
+      "dimension": "VEICULOS",
+      "inputClass": "TEXT_DOES_NOT_MATCH_A_LOCAL_CANDIDATE_PLATE_PATTERN",
+      "symbols": ["SYNTH_PLATE_UNCLASSIFIED"],
+      "expected": "PRESERVE_OBSERVATION_ONLY"
+    },
+    {
+      "id": "VEHICLE_PLATE_REASSIGNMENT",
+      "synthetic": true,
+      "dimension": "VEICULOS",
+      "inputClass": "SAME_PLATE_TEXT_APPEARS_WITH_DISTINCT_ENTITY_ATTRIBUTES_OVER_TIME",
+      "symbols": ["SYNTH_PLATE_A", "SYNTH_VEHICLE_ATTR_A", "SYNTH_VEHICLE_ATTR_B"],
+      "expected": "BLOCK_DIMENSIONAL_PROMOTION"
+    },
+    {
+      "id": "VEHICLE_BRANCH_CONTEXT_ONLY",
+      "synthetic": true,
+      "dimension": "VEICULOS",
+      "inputClass": "SAME_PLATE_TEXT_OCCURS_IN_MANIFESTS_WITH_DISTINCT_BRANCH_CONTEXTS",
+      "symbols": ["SYNTH_PLATE_A", "SYNTH_BRANCH_A", "SYNTH_BRANCH_B"],
+      "expected": "BLOCK_DIMENSIONAL_PROMOTION"
+    },
+    {
+      "id": "VEHICLE_MAIN_TRAILER_ROLE_COLLISION",
+      "synthetic": true,
+      "dimension": "VEICULOS",
+      "inputClass": "SAME_PLATE_TEXT_OCCURS_AS_MAIN_AND_TRAILER_IN_DISTINCT_OBSERVATIONS",
+      "symbols": ["SYNTH_PLATE_A"],
+      "expected": "KEEP_ROLES_DISTINCT"
+    },
+    {
+      "id": "VEHICLE_TRAILER_POSITION_SWAP",
+      "synthetic": true,
+      "dimension": "VEICULOS",
+      "inputClass": "TWO_TRAILER_TEXTS_SWAP_POSITION_ONE_AND_TWO",
+      "symbols": ["SYNTH_TRAILER_A", "SYNTH_TRAILER_B"],
+      "expected": "KEEP_TRAILER_POSITIONS_DISTINCT"
+    },
+    {
+      "id": "VEHICLE_ATTRIBUTES_NOT_IDENTITY",
+      "synthetic": true,
+      "dimension": "VEICULOS",
+      "inputClass": "NAME_OWNER_CAPACITY_AND_CONTRACT_TYPE_COOCCUR_WITH_PLATE_TEXT",
+      "symbols": ["SYNTH_VEHICLE_NAME", "SYNTH_OWNER", "SYNTH_CAPACITY", "SYNTH_CONTRACT_TYPE"],
+      "expected": "PRESERVE_OBSERVATION_ONLY"
+    },
+    {
+      "id": "VEHICLE_EQUAL_FRESHNESS_CONFLICT",
+      "synthetic": true,
+      "dimension": "VEICULOS",
+      "inputClass": "EQUAL_MANIFEST_FRESHNESS_HAS_DISTINCT_VEHICLE_ATTRIBUTE_VALUES",
+      "symbols": ["SYNTH_VEHICLE_ATTR_A", "SYNTH_VEHICLE_ATTR_B"],
+      "expected": "QUARANTINE_OBSERVATION"
+    },
+    {
+      "id": "VEHICLE_IDENTICAL_REPLAY",
+      "synthetic": true,
+      "dimension": "VEICULOS",
+      "inputClass": "EQUAL_MANIFEST_FRESHNESS_AND_CANONICALLY_IDENTICAL_OBSERVATION",
+      "symbols": ["SYNTH_VEHICLE_OBSERVATION_A"],
+      "expected": "REPLAY_NO_OP"
+    },
+    {
+      "id": "VEHICLE_OLDER_OBSERVATION",
+      "synthetic": true,
+      "dimension": "VEICULOS",
+      "inputClass": "OLDER_MANIFEST_OBSERVATION_ARRIVES_AFTER_NEWER_OBSERVATION",
+      "symbols": ["SYNTH_VEHICLE_OBSERVATION_OLD", "SYNTH_VEHICLE_OBSERVATION_NEW"],
+      "expected": "OLDER_OBSERVATION_NO_OP"
+    },
+    {
+      "id": "VEHICLE_ABSENCE_NO_SWEEP",
+      "synthetic": true,
+      "dimension": "VEICULOS",
+      "inputClass": "VEHICLE_TEXT_NOT_OBSERVED_IN_A_LATER_PAGE_OR_WINDOW",
+      "symbols": ["SYNTH_PLATE_A"],
+      "expected": "NO_SWEEP_NO_STATE_CHANGE"
+    },
+    {
+      "id": "DRIVER_NAME_NO_SOURCE_ID",
+      "synthetic": true,
+      "dimension": "MOTORISTAS",
+      "inputClass": "DRIVER_NAME_EXISTS_WITHOUT_PROVIDER_DRIVER_IDENTIFIER",
+      "symbols": ["SYNTH_PERSON_A"],
+      "expected": "BLOCK_DIMENSIONAL_PROMOTION"
+    },
+    {
+      "id": "DRIVER_HOMONYM",
+      "synthetic": true,
+      "dimension": "MOTORISTAS",
+      "inputClass": "TWO_DISTINCT_PEOPLE_SHARE_THE_SAME_NAME_TEXT",
+      "symbols": ["SYNTH_PERSON_A", "SYNTH_PERSON_B", "SYNTH_SHARED_NAME"],
+      "expected": "BLOCK_DIMENSIONAL_PROMOTION"
+    },
+    {
+      "id": "DRIVER_GENERIC_LABEL",
+      "synthetic": true,
+      "dimension": "MOTORISTAS",
+      "inputClass": "NAME_TEXT_MAY_BE_A_GENERIC_OPERATIONAL_LABEL",
+      "symbols": ["SYNTH_GENERIC_DRIVER_LABEL"],
+      "expected": "PRESERVE_OBSERVATION_ONLY"
+    },
+    {
+      "id": "DRIVER_UNICODE_NAME_COLLISION",
+      "synthetic": true,
+      "dimension": "MOTORISTAS",
+      "inputClass": "DISTINCT_RAW_NAMES_COLLAPSE_UNDER_CASE_OR_UNICODE_NORMALIZATION",
+      "symbols": ["SYNTH_NAME_RAW_A", "SYNTH_NAME_RAW_B"],
+      "expected": "BLOCK_DIMENSIONAL_PROMOTION"
+    },
+    {
+      "id": "DRIVER_CONTRACT_TYPE_NOT_IDENTITY",
+      "synthetic": true,
+      "dimension": "MOTORISTAS",
+      "inputClass": "SAME_NAME_TEXT_OCCURS_WITH_DISTINCT_DRIVER_CONTRACT_TYPES",
+      "symbols": ["SYNTH_SHARED_NAME", "SYNTH_CONTRACT_TYPE_A", "SYNTH_CONTRACT_TYPE_B"],
+      "expected": "PRESERVE_OBSERVATION_ONLY"
+    },
+    {
+      "id": "DRIVER_BRANCH_CONTEXT_ONLY",
+      "synthetic": true,
+      "dimension": "MOTORISTAS",
+      "inputClass": "SAME_NAME_TEXT_OCCURS_IN_MANIFESTS_WITH_DISTINCT_BRANCH_CONTEXTS",
+      "symbols": ["SYNTH_SHARED_NAME", "SYNTH_BRANCH_A", "SYNTH_BRANCH_B"],
+      "expected": "BLOCK_DIMENSIONAL_PROMOTION"
+    },
+    {
+      "id": "DRIVER_RENAME_REKEY",
+      "synthetic": true,
+      "dimension": "MOTORISTAS",
+      "inputClass": "PERSON_NAME_CHANGES_WITHOUT_A_STABLE_SOURCE_IDENTIFIER",
+      "symbols": ["SYNTH_NAME_OLD", "SYNTH_NAME_NEW"],
+      "expected": "BLOCK_DIMENSIONAL_PROMOTION"
+    },
+    {
+      "id": "DRIVER_EQUAL_FRESHNESS_CONFLICT",
+      "synthetic": true,
+      "dimension": "MOTORISTAS",
+      "inputClass": "EQUAL_MANIFEST_FRESHNESS_HAS_DISTINCT_DRIVER_ATTRIBUTE_VALUES",
+      "symbols": ["SYNTH_DRIVER_ATTR_A", "SYNTH_DRIVER_ATTR_B"],
+      "expected": "QUARANTINE_OBSERVATION"
+    },
+    {
+      "id": "DRIVER_ABSENCE_NO_SWEEP",
+      "synthetic": true,
+      "dimension": "MOTORISTAS",
+      "inputClass": "DRIVER_TEXT_NOT_OBSERVED_IN_A_LATER_PAGE_OR_WINDOW",
+      "symbols": ["SYNTH_PERSON_A"],
+      "expected": "NO_SWEEP_NO_STATE_CHANGE"
+    },
+    {
+      "id": "COOCCURRENCE_NO_RELATION",
+      "synthetic": true,
+      "dimension": "BOTH",
+      "inputClass": "VEHICLE_AND_DRIVER_TEXTS_COOCCUR_IN_ONE_MANIFEST_OBSERVATION",
+      "symbols": ["SYNTH_PLATE_A", "SYNTH_PERSON_A"],
+      "expected": "NO_RELATION_MATERIALIZATION"
+    }
+  ]
+}

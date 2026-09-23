@@ -1,0 +1,66 @@
+{
+  "version": 1,
+  "artifacts": 401,
+  "fields": 2437,
+  "rules": 75,
+  "fieldStates": {
+    "IMPLEMENTADO_INTEGRADO_VERIFICADO_LOCAL": 786,
+    "MAPEAMENTO_LOCAL_DECLARADO": 361,
+    "VINCULO_INDIVIDUAL_CONDICIONADO": 595,
+    "OPACO_PRESERVADO_BLOQUEADO": 442,
+    "TRANSITORIO_COM_SAIDA_GOVERNADA": 19,
+    "RETIRADA_PRESERVADA": 20,
+    "RASTREADO_POR_EXPRESSAO_SQL_LOCAL": 214
+  },
+  "entries": 11,
+  "dimensions": 6,
+  "facts": 5,
+  "contracts": 19,
+  "businessColumns": 673,
+  "physicalMetadata": 971,
+  "qualificationScopes": 35,
+  "sourcePins": [
+    {
+      "path": "docs/catalogos/macrobloco-analitico/matriz-colunas-final.json",
+      "sha256": "bf3721509965bbb570ec680234c4b77cc4cab6a40a98aafc380495138a847b9c"
+    },
+    {
+      "path": "docs/catalogos/macrobloco-expansao/matriz-campos.json",
+      "sha256": "7e92753b127b465c5ce3229e1135935585fe8eca217e93ba959d6f5863f217e4"
+    },
+    {
+      "path": "docs/catalogos/macrobloco-qualificacao-pacote/matriz-colunas.json",
+      "sha256": "4463639be9c84ca439e95f1209962fa968ec19e609c04b54926417ecdef07051"
+    },
+    {
+      "path": "docs/catalogos/macrobloco-analitico/manifesto-campos-tipados.json",
+      "sha256": "5d10f8d2e2e151b17bdc531793c75d2f6e4a074cb86100f04d0ba46f48a632f9"
+    },
+    {
+      "path": "docs/catalogos/macrobloco-analitico/frete-atributos.json",
+      "sha256": "30addc30e7b84cb63aee0cf18b9a884fe96a8daa6073eb46743e8a6539030d45"
+    },
+    {
+      "path": "docs/catalogos/macrobloco-analitico/coleta-campos-captura.json",
+      "sha256": "c5125aaa87385c0a4eefa35beb0127b2563f8a125d56f601b84fb00ba339cd00"
+    },
+    {
+      "path": "docs/catalogos/macrobloco-analitico/coleta-suplemento-campos.json",
+      "sha256": "dd8bf1ebabf7a35d98185e48b1c2f8fd8b6d3bde3cc5541cf71b1d628857e203"
+    },
+    {
+      "path": "docs/catalogos/macrobloco-analitico/cotacao-campos-captura.json",
+      "sha256": "7e1335203bdbb7dd5e3568cd0e91ded7c22a20e07c9858576da9577346cda007"
+    },
+    {
+      "path": "docs/catalogos/macrobloco-analitico/raster-campos.json",
+      "sha256": "b01b13d9e5ddcc1281701904412684ac8099640d178dc631df68d2704353cd35"
+    }
+  ],
+  "limitations": [
+    "35 = 11 entradas + 5 fatos + 19 contratos; as seis dimensões são dependências, não seis gates extras.",
+    "673 são colunas de saída, 971 são metadados físicos; nenhum desses totais substitui as 2437 linhas ou prova cobertura total do legado.",
+    "Oráculos e identidades sintéticos não autenticam regra/identidade de fonte; /info permanece opaco.",
+    "Retiradas e vínculos condicionados têm destino explícito de auditoria, sem conceder aceite ou aumentar contador."
+  ]
+}

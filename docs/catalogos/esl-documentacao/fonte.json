@@ -1,0 +1,44 @@
+{
+  "version": 1,
+  "status": "PROVIDER_DOCUMENTATION_REGISTERED_IDENTITIES_NOT_ACCEPTED",
+  "title": "TMS ESL CLOUD",
+  "url": "https://documenter.getpostman.com/view/20571375/2s9YXk2fj5",
+  "userProvidedAnchor": "https://documenter.getpostman.com/view/20571375/2s9YXk2fj5#1843cd33-1848-438c-875b-6262107c5e94",
+  "indicatedBy": "PROJECT_OWNER",
+  "scope": "ESL REST/Data Export/GraphQL documentation; published examples are not tenant observations",
+  "retrievedUtc": "2026-09-09T02:06:01.9825126+00:00",
+  "collectionPublishedMetadata": "2023-11-10T18:57:24.000Z",
+  "collection": {
+    "requests": 191,
+    "get": 39,
+    "post": 146,
+    "patch": 1,
+    "delete": 5,
+    "sha256": "2412415bc4387d720c95791bd61f0b8ba6e7ab64f1d482aca6903ffbfc5d23ac"
+  },
+  "graphqlDocumentation": {
+    "url": "https://demonstracao.eslcloud.com.br/graphql_docs",
+    "operationAnchors": 180,
+    "sha256": "0310f2f461836dae860bc60cf5ae964caf62a39e97427eaf6ed9b0add6e054c3",
+    "source": "Linked by the supplied ESL Postman collection"
+  },
+  "sourceApiRequestsExecuted": 0,
+  "sqlOperations": 0,
+  "newIdentityAcceptances": 0,
+  "newCanonicalAcceptances": 0,
+  "coverage": {
+    "8636": "Debit billings/installments/items documented. Export root/parcel/rateio crosswalk, stability and grain remain unproven.",
+    "4924": "Credit billings/installments/items and creditCustomerBilling query documented. Export line/title/Freight/children mapping and FAT-02 remain unproven.",
+    "10633": "CheckInOrder type documented; no accepted link from the export sequence and mapping to root/Freight/document IDs.",
+    "6392": "Occurrence endpoint exposes invoice/Freight/occurrence example fields; no accepted link to the Sinistros export grain.",
+    "6906": "Generic Data Export routes and constraints documented; representative characterization remains pending."
+  },
+  "cautions": [
+    "Collection publication metadata is not a guarantee of current version for every section.",
+    "Request examples, names and schema fields do not prove an identity crosswalk.",
+    "REST user token, Data Export token and client token are documented for distinct sections; no token interchangeability is assumed.",
+    "The collection documents a GET body example for data; observed GET_WITH_QUERY remains the project contract until a controlled compatibility check.",
+    "Two-second same-IP interval and historical extraction cooldowns are provider constraints; no IP rotation or automatic waiting/retry is introduced.",
+    "GraphQL documentation states 20 records per page for the described query; verify applicable per-query contracts, not an unqualified global substitution."
+  ]
+}

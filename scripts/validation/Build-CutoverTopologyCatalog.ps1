@@ -400,7 +400,7 @@ $logicalTableResponsibilityCount = @($responsibilities |
         Select-Object -ExpandProperty logical_responsibility -Unique).Count
 
 $manifest = [ordered]@{
-    catalog_version = '2026-09-01.v2-035b-usuarios-followup'
+    catalog_version = '2026-09-10.pos-b60-gates'
     roadmap_task = 'V2-048a'
     generator = 'scripts/validation/Build-CutoverTopologyCatalog.ps1'
     powershell_minimum_version = '7.0'

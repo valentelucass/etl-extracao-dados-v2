@@ -59,13 +59,20 @@ public final class ExtrairUsuariosGraphQl {
                             new ArrayList<>(Math.min(page.nodeCount(), PAGE_SIZE));
                     final AtomicInteger ordinal = new AtomicInteger();
                     page.forEachNode(
-                            node -> records.add(mapper.map(ordinal.incrementAndGet(), node)));
-                    stagingGateway.stage(
+                            node -> {
+                                cancellationToken.throwIfCancellationRequested();
+                                records.add(mapper.map(ordinal.incrementAndGet(), node));
+                                cancellationToken.throwIfCancellationRequested();
+                            });
+                    cancellationToken.throwIfCancellationRequested();
+                    final var batch =
                             new UsuarioStageBatch(
                                     context.executionId(),
                                     batchNumber.incrementAndGet(),
                                     records,
-                                    clock.instant()));
+                                    clock.instant());
+                    cancellationToken.throwIfCancellationRequested();
+                    stagingGateway.stage(batch);
                 });
     }
 }

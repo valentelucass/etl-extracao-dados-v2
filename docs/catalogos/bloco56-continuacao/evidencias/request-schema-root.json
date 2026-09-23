@@ -1,0 +1,16 @@
+{
+  "phase": "B56_SCHEMA_ROOT_01",
+  "authorization": "User-adopted read-only API/documentation investigation; schema metadata only",
+  "document": "docs/catalogos/bloco56-continuacao/schema-root.graphql",
+  "operation": "POST /graphql; static query with __schema only, no domain records",
+  "maximumCalls": 1,
+  "serial": true,
+  "retry": 0,
+  "redirect": 0,
+  "timeoutSeconds": 30,
+  "maximumResponseBytes": 10485760,
+  "recovery": "Record outcome; no automatic repeat; no application write rollback",
+  "runtimeCampaigns": 0,
+  "sqlOperations": 0,
+  "budgetTransferred": false
+}

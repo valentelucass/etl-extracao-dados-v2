@@ -1,0 +1,174 @@
+{
+  "schemaVersion": "V2_012_PROFILE_V1",
+  "profileId": "V2_012_MANIFESTOS_6399",
+  "fixtureResource": "/contracts/v2-012/fixtures/manifestos-6399.synthetic.json",
+  "fixtureFingerprint": "3fe3d005923b9e2efbd9f6d3623f75d0ba4e4b49bd44ec5038eb90edbb565e09",
+  "stages": ["V2_012A", "V2_012B", "V2_012C"],
+  "entity": "MANIFESTOS",
+  "sourceKind": "DATA_EXPORT",
+  "oracleKind": "DATA_EXPORT_PROVIDER",
+  "authorizationRequirement": "EXPLICIT_OWNER_AUTHORIZATION",
+  "contract": {
+    "contractId": "dataexport-6399",
+    "contractVersion": "2026-09-04.v2-025b.2",
+    "documentReference": "dataexport-manifestos",
+    "contractFingerprint": "30181093f00f47507d1910d9806a97697118ab671aeae0598d21a4a2726a7cb8",
+    "identityFingerprint": "ad2e3457a91961372dd29cb96bd6f2cb5fd6f67614d1255303787a8e2c4085c3"
+  },
+  "sourceKey": {
+    "path": "/sequence_code",
+    "wireTypes": ["INTEGER"],
+    "typeTagged": true,
+    "domain": "POSITIVE_INTEGER"
+  },
+  "businessAliases": [],
+  "childIdentities": [
+    {
+      "kind": "PICK",
+      "path": "/mft_pfs_pck_sequence_code",
+      "wireTypes": ["INTEGER"],
+      "typeTagged": true,
+      "domain": "POSITIVE_INTEGER",
+      "attributePaths": []
+    },
+    {
+      "kind": "MDFE",
+      "path": "/mft_mfs_key",
+      "wireTypes": ["STRING"],
+      "typeTagged": true,
+      "domain": "FIXED_44_DIGIT_STRING",
+      "attributePaths": ["/mft_mfs_number"]
+    }
+  ],
+  "relationshipCandidatePaths": ["/mft_pfs_pck_sequence_code"],
+  "scope": {
+    "sourceInstance": "REQUIRED_AT_EXECUTION",
+    "tenantScope": "REQUIRED_AT_EXECUTION",
+    "forbiddenValues": ["DEFAULT", "GLOBAL", "SINGLETON"]
+  },
+  "rootGrain": {
+    "recordRoot": "/data/*",
+    "acceptedRecordRoots": ["/*", "/data/*"],
+    "logicalGrain": "DISTINCT_SCOPED_SEQUENCE_CODE",
+    "cardinality": "ARRAY_ELEMENTS",
+    "expansionPolicy": "PHYSICAL_ROWS_PRESERVE_DISTINCT_CHILDREN",
+    "childPolicy": "PICK_AND_MDFE_KEYS_ARE_CHILD_LOCAL_WITHOUT_RELATION_INFERENCE",
+    "rootScalarPaths": ["/mdfe_status"]
+  },
+  "pathScopes": {
+    "recordPaths": [
+      "/closed_at",
+      "/created_at",
+      "/departured_at",
+      "/finished_at",
+      "/mdfe_status",
+      "/mft_mfs_key",
+      "/mft_mfs_number",
+      "/mft_pfs_pck_sequence_code",
+      "/sequence_code",
+      "/status"
+    ],
+    "connectionPaths": []
+  },
+  "absencePolicy": "OBSERVATION_ONLY_NO_LIFECYCLE_INFERENCE",
+  "filters": [
+    {
+      "path": "manifests.service_date",
+      "role": "REQUIRED",
+      "watermark": false,
+      "requiredBooleanValue": null
+    }
+  ],
+  "pagination": {
+    "kind": "NUMERIC_PAGE",
+    "maximumPageSize": 100,
+    "terminalCondition": "EMPTY_PAGE_LOCAL_UNVERIFIED",
+    "perSemantics": "UNPROVEN",
+    "shortPageIsTerminal": false,
+    "completenessProven": false,
+    "snapshotProven": false
+  },
+  "ordering": {
+    "expression": "sequence_code asc",
+    "role": "PARITY_ONLY_NOT_IDENTITY_OR_CURSOR"
+  },
+  "temporal": {
+    "timestampPaths": [
+      "/closed_at",
+      "/created_at",
+      "/departured_at",
+      "/finished_at"
+    ],
+    "precedence": [
+      "/finished_at",
+      "/closed_at",
+      "/departured_at",
+      "/created_at"
+    ],
+    "timezone": "America/Sao_Paulo",
+    "timezoneRequirement": "EXPLICIT_REQUIRED",
+    "translation": "SOURCE_CIVIL_DATE_UNPROVEN"
+  },
+  "status": {
+    "path": "/status",
+    "mode": "KNOWN_PRECEDENCE_UNKNOWN_PRESERVED",
+    "reference": "manifestos-v2-026-v03",
+    "policyFingerprint": "7721b88a934b2a58ff19bd7cee53f7bd57023a31528c77143915d72005cd19af",
+    "unknownValuesAllowed": true
+  },
+  "limits": {
+    "maximumBytes": 65536,
+    "maximumRows": 1000,
+    "maximumPages": 100,
+    "maximumDepth": 16,
+    "maximumPaths": 256,
+    "maximumNodes": 4096
+  },
+  "fieldContracts": [
+    {"path": "/closed_at", "wireTypes": ["STRING"], "presenceStates": ["ABSENT", "NULL", "VALUE"]},
+    {"path": "/created_at", "wireTypes": ["STRING"], "presenceStates": ["ABSENT", "NULL", "VALUE"]},
+    {"path": "/departured_at", "wireTypes": ["STRING"], "presenceStates": ["ABSENT", "NULL", "VALUE"]},
+    {"path": "/finished_at", "wireTypes": ["STRING"], "presenceStates": ["ABSENT", "NULL", "VALUE"]},
+    {"path": "/mdfe_status", "wireTypes": ["STRING"], "presenceStates": ["ABSENT", "NULL", "VALUE"]},
+    {"path": "/mft_mfs_key", "wireTypes": ["STRING"], "presenceStates": ["ABSENT", "NULL", "VALUE"]},
+    {"path": "/mft_mfs_number", "wireTypes": ["INTEGER"], "presenceStates": ["ABSENT", "NULL", "VALUE"]},
+    {"path": "/mft_pfs_pck_sequence_code", "wireTypes": ["INTEGER"], "presenceStates": ["ABSENT", "NULL", "VALUE"]},
+    {"path": "/sequence_code", "wireTypes": ["INTEGER"], "presenceStates": ["ABSENT", "NULL", "VALUE"]},
+    {"path": "/status", "wireTypes": ["STRING"], "presenceStates": ["ABSENT", "NULL", "VALUE"]}
+  ],
+  "expectedPaths": [
+    "/closed_at",
+    "/created_at",
+    "/departured_at",
+    "/finished_at",
+    "/mdfe_status",
+    "/mft_mfs_key",
+    "/mft_mfs_number",
+    "/mft_pfs_pck_sequence_code",
+    "/sequence_code",
+    "/status"
+  ],
+  "requiredChecks": [
+    "SYNTHETIC_ORACLE_AVAILABLE",
+    "SYNTHETIC_AUTHORIZATION_CONTEXT",
+    "EXPLICIT_SCOPES",
+    "ROOT_MATCH",
+    "PATH_SET_MATCH",
+    "FIELD_TYPES_MATCH",
+    "FILTERS_MATCH",
+    "RELATIONSHIPS_PRESERVED",
+    "ABSENCE_POLICY_PRESERVED",
+    "SOURCE_KEY_VALID",
+    "PRESENCE_TRI_STATE_TRACKED",
+    "TERMINAL_CONDITION_MET",
+    "LIMITS_RESPECTED",
+    "ORDERING_PARITY_VALID",
+    "TEMPORAL_EVIDENCE_VALID",
+    "STATUS_SEMANTICS_VALID",
+    "CARDINALITY_MATCH",
+    "ENTITY_RULES_MATCH",
+    "SYNTHETIC_EVIDENCE_ONLY"
+  ],
+  "profileStatus": "PREPARED_NOT_EXECUTED",
+  "gateStatus": "ORACLE_REQUIRED"
+}

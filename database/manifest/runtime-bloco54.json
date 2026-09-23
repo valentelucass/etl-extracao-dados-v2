@@ -1,0 +1,317 @@
+{
+  "version": 2,
+  "block": 54,
+  "status": "LOCAL_A_G_COMPLETE_NOMINAL_GATES_PENDING",
+  "completedUtc": "2026-09-08T16:30:19.4250878Z",
+  "database": "localhost/ETL_SISTEMA_V2_SHADOW",
+  "installedThrough": "V021",
+  "pendingMigration": "",
+  "databaseRows": 6723,
+  "catalogSha256": "7a86e28ea68cecd8ba993bbea8df5c677e0848f27aa7b0412402165071736408",
+  "tests": 1098,
+  "testFailures": 0,
+  "testErrors": 0,
+  "testSkips": 4,
+  "build": "JAVA17_OFFLINE_VERIFY_PASS",
+  "finalVerifyLog": "target/bloco54/completion-authorized-20260908/verify-Full-20260908T160406.log",
+  "bundle": "target/bloco54/reviewed-bundle-v7",
+  "artifactManifestSha256": "838d2316fa53f412131d25a3c0c9cb397805fb05cecc3693b68daa37507e95fa",
+  "jarSha256": "279e1ec76fc776c0fa3faa07b5b8902695b250664d124b34cb339bb2d54cfb5a",
+  "originalGrants": 22,
+  "currentGrants": 25,
+  "newGrantsThisContinuation": 0,
+  "originalMappings": 2,
+  "originalScopes": 8,
+  "retainedRevokedReplayScopes": 2,
+  "mappingVersion": 17,
+  "operatorMappingVersion": 1,
+  "scopeMaximumVersion": 10,
+  "changedOriginalScopeId": 1,
+  "otherOriginalScopeVersion": 1,
+  "originalUntil": "2026-10-07T22:34:30.615Z",
+  "renewed": false,
+  "newCanonicalAcceptances": 0,
+  "checkboxes": 114,
+  "done": 60,
+  "pending": 54,
+  "openRoutes": 196,
+  "b53Reservations": 112,
+  "b53LedgerSha256": "dc45f84046fa1c2a6184dc181cc9bf1b39878c5c94ed4574e22d761f0cfc3df1",
+  "priorAttempts": 95,
+  "priorPublications": 75,
+  "retainedExtracting": 8,
+  "newAttempts": 45,
+  "newPublications": 30,
+  "b54AuditedPages": 70,
+  "b54AuditedEntries": 74,
+  "reservations": 302,
+  "maximumUnits": 320,
+  "remainingUnits": 18,
+  "campaignsOpened": 30,
+  "campaignsClosed": 30,
+  "refundedUnits": 0,
+  "originalMaximumUnits": 128,
+  "additionalBatches": [
+    {
+      "path": "target/bloco54/completion-authorized-20260908/batch-01.json",
+      "sha256": "640224c11d049f3d3a977c76afe68dbbf2d7d56aec685c47e60e1319cbd48d8b"
+    },
+    {
+      "path": "target/bloco54/completion-authorized-20260908/batch-02.json",
+      "sha256": "21e720af862253dd98504b70d29d36ec7fba01d2b11cb324c5aa8e42142e3bf5"
+    }
+  ],
+  "maximumHttpRequests": 1024,
+  "httpRequests": 127,
+  "jarCasesExecuted": 136,
+  "jarCountIncludesFailedCases": true,
+  "jarCountExcludesOfflineCommands": true,
+  "authorityHarnessCasesPassed": 39,
+  "syntheticComparisonCases": 6,
+  "realComparisonInputsMissing": 8,
+  "realSourceExecuted": false,
+  "productionExecuted": false,
+  "activeUserTransactions": 0,
+  "restrictedSessions": 0,
+  "frontsCompleted": [
+    "A",
+    "B",
+    "C",
+    "D",
+    "E",
+    "F",
+    "G"
+  ],
+  "qualifications": {
+    "lostAck": "CLIENT_DISCARD_AFTER_COMMIT",
+    "temporal": "LOOPBACK_SYNTHETIC_LAB",
+    "comparison": "INDEPENDENT_SYNTHETIC_SQL_ORACLE",
+    "authority": "REAL_WINDOWS_SQL_TEST_CLASSPATH_39_PLUS_OFFICIAL_JAR_NEGATIVES",
+    "sink": "OWN_SQL_RANGE_LOCK_TIMEOUT_BEFORE_COMMIT",
+    "schema": "UPGRADE_AND_PENDING_BASELINE_TAIL_ROLLBACK_THEN_APPLY",
+    "recovery": "OWN_JAR_PROCESS_TERMINATION"
+  },
+  "historicalCheckpoint": {
+    "path": "database/manifest/runtime-bloco54-historical-sixth.json",
+    "sha256": "c43a998f73ce38cbf76121d71130570e013bb55bf727321733a9ef72f173c812"
+  },
+  "scenarioFiles": [
+    "target/bloco54/residual-runtime/results.json",
+    "target/bloco54/completion-authorized-20260908/temporal-corrected/results.json",
+    "target/bloco54/completion-authorized-20260908/V021_SCHEMA_01/results.json",
+    "target/bloco54/completion-authorized-20260908/V5_ARTIFACT_02/results.json",
+    "target/bloco54/completion-authorized-20260908/V5_AUTH_01/results.json",
+    "target/bloco54/completion-authorized-20260908/V5_RUNTIME_01/results.json",
+    "target/bloco54/completion-authorized-20260908/V5_RUNTIME_02/results.json",
+    "target/bloco54/completion-authorized-20260908/V5_RUNTIME_03/results.json",
+    "target/bloco54/completion-authorized-20260908/V6_CALENDAR_01/results.json",
+    "target/bloco54/completion-authorized-20260908/V6_FRETES_01/results.json",
+    "target/bloco54/completion-authorized-20260908/V7_AUTH_SINK_01/results.json",
+    "target/bloco54/completion-authorized-20260908/V7_INCREMENTAL_01/results.json",
+    "target/bloco54/completion-authorized-20260908/V7_LIMITS_01/results.json",
+    "target/bloco54/completion-authorized-20260908/V7_MANUAL_01/results.json",
+    "target/bloco54/completion-authorized-20260908/V7_RECOVERY_01/results.json",
+    "target/bloco54/completion-authorized-20260908/V7_SINKS_01/results.json",
+    "target/bloco54/completion-authorized-20260908/V7_SINKS_02/results.json",
+    "target/bloco54/completion-authorized-20260908/V7_SINKS_03/results.json",
+    "target/bloco54/completion-authorized-20260908/V7_SINKS_04/results.json",
+    "target/bloco54/completion-authorized-20260908/V7_SINKS_05/results.json",
+    "target/bloco54/completion-authorized-20260908/V7_SINKS_06/results.json"
+  ],
+  "proofFiles": [
+    {
+      "path": "target/bloco54/residual-runtime/results.json",
+      "sha256": "79e0c951c4959a2f5de3ad3a43022087daaa1b2f9dce9225c15cf736456871af"
+    },
+    {
+      "path": "target/bloco54/completion-authorized-20260908/temporal-corrected/results.json",
+      "sha256": "78ed1cba059eaf5f3bc95e803d6718ec8403e31637625f5ecbad661f375ff462"
+    },
+    {
+      "path": "target/bloco54/completion-authorized-20260908/V021_SCHEMA_01/results.json",
+      "sha256": "28c2df24b2369d8038e45df18ccae54d677c0531cf230db3182b247d48e7467b"
+    },
+    {
+      "path": "target/bloco54/completion-authorized-20260908/V5_ARTIFACT_02/results.json",
+      "sha256": "7df2f34b47ce4ec884941e7cd42d44d7533237360de1190d1ca53b30d5ab9d8c"
+    },
+    {
+      "path": "target/bloco54/completion-authorized-20260908/V5_AUTH_01/results.json",
+      "sha256": "7992ff6d867cb6e24b706ea53153ca84de1884fd44a8274d1a2dacdcf6aab650"
+    },
+    {
+      "path": "target/bloco54/completion-authorized-20260908/V5_RUNTIME_01/results.json",
+      "sha256": "f471bbeea4c2f41e97b49cbc47bd9b30e63b91ee378216289cf8b0145ee9f457"
+    },
+    {
+      "path": "target/bloco54/completion-authorized-20260908/V5_RUNTIME_02/results.json",
+      "sha256": "d52714d596b39ff7a005a3591384eac5783896b490e39f2936fa55bfb0ea76d1"
+    },
+    {
+      "path": "target/bloco54/completion-authorized-20260908/V5_RUNTIME_03/results.json",
+      "sha256": "0a5f00955869959cc85ba1406b35ffa8b13690cdfc5961ad6a89dc85de014bde"
+    },
+    {
+      "path": "target/bloco54/completion-authorized-20260908/V6_CALENDAR_01/results.json",
+      "sha256": "f89fa9e4f0feeeb33edbdf1740c9f7e54b113f122b4ee3fd1ff171cadfb3c39e"
+    },
+    {
+      "path": "target/bloco54/completion-authorized-20260908/V6_FRETES_01/results.json",
+      "sha256": "88265a311ce8f172756458a8267e98a258f0acdff8d5bb3fdabc1d5589a81df3"
+    },
+    {
+      "path": "target/bloco54/completion-authorized-20260908/V7_AUTH_SINK_01/results.json",
+      "sha256": "4995e71da8e4bdf1eeb08bcff3ddf28cf0b9b5d6c4bdee216e74339ad39def18"
+    },
+    {
+      "path": "target/bloco54/completion-authorized-20260908/V7_INCREMENTAL_01/results.json",
+      "sha256": "e1ab79126d24d38d87269e55384cafe7a9ac57f0a9df24c26717a2c24e7c776c"
+    },
+    {
+      "path": "target/bloco54/completion-authorized-20260908/V7_LIMITS_01/results.json",
+      "sha256": "4b074f4feb8861be8d9b7503ef37270cc76a9a88413c90e1b5f70f33bf798811"
+    },
+    {
+      "path": "target/bloco54/completion-authorized-20260908/V7_MANUAL_01/results.json",
+      "sha256": "10330a36efa47eeacefdc6bde1ae51555a2f4627b6adb56ec67ea6f0151d00ca"
+    },
+    {
+      "path": "target/bloco54/completion-authorized-20260908/V7_RECOVERY_01/results.json",
+      "sha256": "c30bcc11d6583800bc7b005ca0c7ee9d4af238f8bdf191aee61df9216c9f31ec"
+    },
+    {
+      "path": "target/bloco54/completion-authorized-20260908/V7_SINKS_01/results.json",
+      "sha256": "2b2009d429be8ab63a7febad0d3a70ce900f61023701c646fcec3e6195c97010"
+    },
+    {
+      "path": "target/bloco54/completion-authorized-20260908/V7_SINKS_02/results.json",
+      "sha256": "e2afc03a7539c9942ffe1ccb575a54841520df5e643e1af8c4edb21d67c3e517"
+    },
+    {
+      "path": "target/bloco54/completion-authorized-20260908/V7_SINKS_03/results.json",
+      "sha256": "a221292f5a33d298b7f5bf0eeda8f3dfd9544fa4594ae5019f3c1e65a439571e"
+    },
+    {
+      "path": "target/bloco54/completion-authorized-20260908/V7_SINKS_04/results.json",
+      "sha256": "e086191ebf5aef01d4ffdaf911d2d963c96938255e1e01041f6c12d0c2e7d7ef"
+    },
+    {
+      "path": "target/bloco54/completion-authorized-20260908/V7_SINKS_05/results.json",
+      "sha256": "1417d48ac4a777b987030a7f032be215a977ed8405388dc5eea0cdf27e654c74"
+    },
+    {
+      "path": "target/bloco54/completion-authorized-20260908/V7_SINKS_06/results.json",
+      "sha256": "313b4f428c22fae4d29ce52bd3351576a14a4ed4e21d32450f082c1779e1a460"
+    },
+    {
+      "path": "target/bloco54/ledger.jsonl",
+      "sha256": "64ad2f64d8dd899236926c5e9f9a50bd023b765ee232cb473b20934edcb75356"
+    },
+    {
+      "path": "target/bloco54/comparison.log",
+      "sha256": "0c56ac364343e1337c3cf8b5a24a460eeda9f511d1f9cf483d22b5b50532bd23"
+    },
+    {
+      "path": "target/bloco54/jar-entry-diff-reviewed-bundle-v7.json",
+      "sha256": "dd78e8ea4ddfa066a560d0912f0f84b41b5c796c55a3532c3c60ac33a66b1253"
+    },
+    {
+      "path": "target/bloco54/completion-authorized-20260908/batch-01.json",
+      "sha256": "640224c11d049f3d3a977c76afe68dbbf2d7d56aec685c47e60e1319cbd48d8b"
+    },
+    {
+      "path": "target/bloco54/completion-authorized-20260908/batch-02.json",
+      "sha256": "21e720af862253dd98504b70d29d36ec7fba01d2b11cb324c5aa8e42142e3bf5"
+    },
+    {
+      "path": "target/bloco54/completion-authorized-20260908/verify-Full-20260908T160406.log",
+      "sha256": "16cf1d4c677c60d76cf269a06a80ef7a397ae8e828b6af62c4a271371d077020"
+    },
+    {
+      "path": "target/bloco54/completion-authorized-20260908/V7_MANUAL_01/schema-after.log",
+      "sha256": "2ed6b1056b9a5216054351073c92c62d8751d7bb6469e7b622ad1a639c80dfc4"
+    },
+    {
+      "path": "target/bloco54/completion-authorized-20260908/V7_MANUAL_01/preservation-after.log",
+      "sha256": "4a3e31b33fb27fd299f41182d941129e5fbe02dc7ec8463fd6d0d581975ced17"
+    },
+    {
+      "path": "target/bloco54/completion-authorized-20260908/V7_MANUAL_01/profile-after.log",
+      "sha256": "a9d73c7a70f38605b217615d614e4577ae2e329bbaec5e6c1aed22e6df02160b"
+    },
+    {
+      "path": "target/bloco54/completion-authorized-20260908/V7_MANUAL_01/tested-Invoke-Bloco54Manual.ps1",
+      "sha256": "d8cea3ff2d46d1ec6f47c9a02b16a3e6523dec03b2786818f59974b0c5a07a11"
+    },
+    {
+      "path": "target/bloco54/completion-authorized-20260908/V7_MANUAL_01/tested-Invoke-Bloco54ManualCompletion.ps1",
+      "sha256": "f98a28c057c8faefc6e87adfa6581a1a17eaa6a18f0a625eb7fdb4c8082ed857"
+    },
+    {
+      "path": "target/bloco54/completion-authorized-20260908/V7_MANUAL_01/tested-Bloco54CompletionProcess.cs",
+      "sha256": "d1ff0911eeee22f49a1054f2a0990981de70800a919c9f1eadfc657165a5a8bd"
+    },
+    {
+      "path": "target/bloco54/completion-authorized-20260908/V021_SCHEMA_01/tested-manifest.json",
+      "sha256": "33fb84519827a35728c59027b0ba6a0a0d2c37dec64cba98c00a261fb16bf37d"
+    },
+    {
+      "path": "target/bloco54/completion-authorized-20260908/initial/scripts/validation/Invoke-Bloco54Manual.ps1",
+      "sha256": "3cc6748be6c64877e2662cc1a6e258e8c2f14a92acc8862cc0aecaf1a2078423"
+    }
+  ],
+  "excludedProofs": [
+    {
+      "resolution": "V7_SINKS_06_DQ_POLICY_ABSENT",
+      "ids": [
+        "V7_SINKS_03_DQ_POLICY_ABSENT",
+        "DQ_WITHOUT_APPROVED_POLICY_CANNOT_START"
+      ],
+      "path": "target/bloco54/completion-authorized-20260908/V7_SINKS_03/results.json",
+      "reason": "EXPIRED_PARTITION_LEASE_PREVENTED_ATTEMPT_NOT_DQ"
+    },
+    {
+      "resolution": "V5_ARTIFACT_02",
+      "ids": [
+        "V5_AUTH_01_JAR_HASH",
+        "V5_AUTH_01_ACL_READ_REMOVED"
+      ],
+      "path": "target/bloco54/completion-authorized-20260908/V5_AUTH_01/results.json",
+      "reason": "INVALID_JVM_ZIP_AND_INEFFECTIVE_READ_ACL_TEST"
+    },
+    {
+      "resolution": "V7_RECOVERY_01_MONTH_RUN_RESTART",
+      "ids": [
+        "V6_CALENDAR_01_PREVIOUS_MONTH_PERSIST",
+        "V6_CALENDAR_01_PREVIOUS_MONTH_RUN_1"
+      ],
+      "path": "target/bloco54/completion-authorized-20260908/V6_CALENDAR_01/results.json",
+      "reason": "SQL_JDBC_READER_INTERLEAVED_PLANS"
+    },
+    {
+      "resolution": "V7_RECOVERY_01_FRETES_PLAN_RESTART",
+      "ids": [
+        "V6_FRETES_01_PERSIST_RESTART"
+      ],
+      "path": "target/bloco54/completion-authorized-20260908/V6_FRETES_01/results.json",
+      "reason": "V020_GUARD_USED_OPERATIONAL_INSTEAD_OF_DURABLE_TEMPORAL_INTENT"
+    }
+  ],
+  "finalValidation": {
+    "integratedPrivate": "PASS",
+    "progressive": "PASS",
+    "windowsHistorical": "PASS",
+    "trail": "PASS",
+    "guardContraproofs": 6,
+    "secretScannerSelftests": 11,
+    "secretScanCandidates": 1229,
+    "secretScanFindings": 0,
+    "strictUtf8": "PASS",
+    "powershellSyntax": "PASS",
+    "appliedMigrationHashes": 21,
+    "diffCheck": "PASS",
+    "loopbackListeners": 0,
+    "originalFilesPresent": 1199,
+    "continuationChangedFiles": 67
+  }
+}

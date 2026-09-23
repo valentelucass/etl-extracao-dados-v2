@@ -1,0 +1,11 @@
+:On Error exit
+SET NOCOUNT ON; SET XACT_ABORT ON;
+IF DB_NAME()<>N'ETL_SISTEMA_V2_SHADOW' OR @@TRANCOUNT<>0 OR OBJECT_ID(N'ctl.source_protocol_binding') IS NOT NULL
+ THROW 52970,N'B60_V023_TRANSACTION_REQUIRED',1;
+BEGIN TRANSACTION;
+GO
+:r "..\..\migrations\V024__bind_source_protocols_and_users_runtime.sql"
+:r "..\..\validation\056_validate_bloco60_runtime.sql"
+IF @@TRANCOUNT<>1 OR XACT_STATE()<>1 THROW 52970,N'B60_SINGLE_COMMIT_REQUIRED',1;
+COMMIT TRANSACTION;
+SELECT N'B60_V024_COMMITTED';

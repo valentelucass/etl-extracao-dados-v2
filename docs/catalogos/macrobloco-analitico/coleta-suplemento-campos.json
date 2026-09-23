@@ -1,0 +1,128 @@
+{
+  "version": "synthetic-analytic-collection-supplement-v1",
+  "source": "../etl-extracao-dados/src/main/java/br/com/extrator/dominio/graphql/coletas/ColetaNodeDTO.java",
+  "sourceSha256": "17bc3b2e05ac6bd11f8581471842064720aeea4985a2757d5b04812ff177eb53",
+  "provenance": "Explicit lateral synthetic observation; legacy GraphQL names do not become Data Export paths or a proved crosswalk",
+  "fields": [
+    {
+      "name": "request_hour",
+      "kind": "TIME",
+      "sourcePath": "/data/requestHour",
+      "sqlType": "BIGINT",
+      "presence": "ABSENT/NULL/VALUE",
+      "storage": "stg.analytic_collection_supplement.request_hour",
+      "status": "TESTED_PHYSICAL_LOCAL",
+      "evidence": "physical-collection-supplement-01"
+    },
+    {
+      "name": "vehicle_type_id",
+      "kind": "INTEGER",
+      "sourcePath": "/data/vehicleTypeId",
+      "sqlType": "VARCHAR(40) COLLATE Latin1_General_100_BIN2",
+      "presence": "ABSENT/NULL/VALUE",
+      "storage": "stg.analytic_collection_supplement.vehicle_type_id",
+      "status": "TESTED_PHYSICAL_LOCAL",
+      "evidence": "physical-collection-supplement-01"
+    },
+    {
+      "name": "customer_name",
+      "kind": "TEXT",
+      "sourcePath": "/data/customer/name",
+      "sqlType": "NVARCHAR(1024) COLLATE Latin1_General_100_BIN2",
+      "presence": "ABSENT/NULL/VALUE",
+      "storage": "stg.analytic_collection_supplement.customer_name",
+      "status": "TESTED_PHYSICAL_LOCAL",
+      "evidence": "physical-collection-supplement-01"
+    },
+    {
+      "name": "customer_document",
+      "kind": "TEXT",
+      "sourcePath": "/data/customer/cnpj",
+      "sqlType": "NVARCHAR(1024) COLLATE Latin1_General_100_BIN2",
+      "presence": "ABSENT/NULL/VALUE",
+      "storage": "stg.analytic_collection_supplement.customer_document",
+      "status": "TESTED_PHYSICAL_LOCAL",
+      "evidence": "physical-collection-supplement-01"
+    },
+    {
+      "name": "address_line",
+      "kind": "TEXT",
+      "sourcePath": "/data/pickAddress/line1",
+      "sqlType": "NVARCHAR(1024) COLLATE Latin1_General_100_BIN2",
+      "presence": "ABSENT/NULL/VALUE",
+      "storage": "stg.analytic_collection_supplement.address_line",
+      "status": "TESTED_PHYSICAL_LOCAL",
+      "evidence": "physical-collection-supplement-01"
+    },
+    {
+      "name": "address_number",
+      "kind": "TEXT",
+      "sourcePath": "/data/pickAddress/number",
+      "sqlType": "NVARCHAR(1024) COLLATE Latin1_General_100_BIN2",
+      "presence": "ABSENT/NULL/VALUE",
+      "storage": "stg.analytic_collection_supplement.address_number",
+      "status": "TESTED_PHYSICAL_LOCAL",
+      "evidence": "physical-collection-supplement-01"
+    },
+    {
+      "name": "address_complement",
+      "kind": "TEXT",
+      "sourcePath": "/data/pickAddress/line2",
+      "sqlType": "NVARCHAR(1024) COLLATE Latin1_General_100_BIN2",
+      "presence": "ABSENT/NULL/VALUE",
+      "storage": "stg.analytic_collection_supplement.address_complement",
+      "status": "TESTED_PHYSICAL_LOCAL",
+      "evidence": "physical-collection-supplement-01"
+    },
+    {
+      "name": "branch_source_id",
+      "kind": "INTEGER",
+      "sourcePath": "/data/corporation/id",
+      "sqlType": "VARCHAR(40) COLLATE Latin1_General_100_BIN2",
+      "presence": "ABSENT/NULL/VALUE",
+      "storage": "stg.analytic_collection_supplement.branch_source_id",
+      "status": "TESTED_PHYSICAL_LOCAL",
+      "evidence": "physical-collection-supplement-01"
+    },
+    {
+      "name": "cancellation_user_id",
+      "kind": "INTEGER",
+      "sourcePath": "/data/cancellationUserId",
+      "sqlType": "VARCHAR(40) COLLATE Latin1_General_100_BIN2",
+      "presence": "ABSENT/NULL/VALUE",
+      "storage": "stg.analytic_collection_supplement.cancellation_user_id",
+      "status": "TESTED_PHYSICAL_LOCAL",
+      "evidence": "physical-collection-supplement-01"
+    },
+    {
+      "name": "destroy_reason",
+      "kind": "TEXT",
+      "sourcePath": "/data/destroyReason",
+      "sqlType": "NVARCHAR(1024) COLLATE Latin1_General_100_BIN2",
+      "presence": "ABSENT/NULL/VALUE",
+      "storage": "stg.analytic_collection_supplement.destroy_reason",
+      "status": "TESTED_PHYSICAL_LOCAL",
+      "evidence": "physical-collection-supplement-01"
+    },
+    {
+      "name": "destroy_user_id",
+      "kind": "INTEGER",
+      "sourcePath": "/data/destroyUserId",
+      "sqlType": "VARCHAR(40) COLLATE Latin1_General_100_BIN2",
+      "presence": "ABSENT/NULL/VALUE",
+      "storage": "stg.analytic_collection_supplement.destroy_user_id",
+      "status": "TESTED_PHYSICAL_LOCAL",
+      "evidence": "physical-collection-supplement-01"
+    },
+    {
+      "name": "status_updated_at",
+      "kind": "INSTANT",
+      "sourcePath": "/data/statusUpdatedAt",
+      "sqlType": "BIGINT",
+      "presence": "ABSENT/NULL/VALUE",
+      "storage": "stg.analytic_collection_supplement.status_updated_at",
+      "status": "TESTED_PHYSICAL_LOCAL",
+      "evidence": "physical-collection-supplement-01"
+    }
+  ]
+}

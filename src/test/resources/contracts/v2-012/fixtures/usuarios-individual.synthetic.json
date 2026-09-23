@@ -1,0 +1,490 @@
+{
+  "schemaVersion": "V2_012_FIXTURE_V1",
+  "fixtureMarker": "SYNTH_V2_012_USUARIOS_INDIVIDUAL",
+  "profileId": "V2_012_USUARIOS_INDIVIDUAL",
+  "baseObservation": {
+    "entity": "USUARIOS",
+    "sourceKind": "GRAPHQL",
+    "oracleKind": "GRAPHQL_PROVIDER",
+    "oracleAvailability": "SYNTHETIC_IN_MEMORY_ONLY",
+    "authorizationState": "SYNTHETIC_TEST_ONLY",
+    "sourceInstance": "SYNTH_SOURCE_INSTANCE",
+    "tenantScope": "SYNTH_TENANT_SCOPE",
+    "recordRoot": "/data/individual/edges/*",
+    "observedPaths": [
+      "/node/id",
+      "/node/name",
+      "/pageInfo/endCursor",
+      "/pageInfo/hasNextPage"
+    ],
+    "observedSourceKeyPath": "/node/id",
+    "observedSourceKeyTypeTagged": true,
+    "sourceKeyPresence": "VALUE",
+    "sourceKeyWireTypes": ["INTEGER", "STRING"],
+    "sourceKeyValueValid": true,
+    "sourceKeyCount": 25,
+    "distinctSourceKeyCount": 25,
+    "sourceKeyCollision": false,
+    "crossTypeLexemePairCount": 1,
+    "crossTypeTaggedDistinctPairCount": 1,
+    "physicalRowCount": 25,
+    "logicalRootCount": 25,
+    "childCount": 0,
+    "distinctChildCount": 0,
+    "childConflict": false,
+    "childObservations": [],
+    "physicalExpansion": false,
+    "rootCardinality": "GRAPHQL_EDGE_NODES",
+    "fieldObservations": [
+      {"path": "/node/id", "wireTypes": ["INTEGER", "STRING"], "presenceStates": ["VALUE"]},
+      {"path": "/node/name", "wireTypes": ["STRING"], "presenceStates": ["NULL", "VALUE"]},
+      {"path": "/pageInfo/endCursor", "wireTypes": ["STRING"], "presenceStates": ["NULL", "VALUE"]},
+      {"path": "/pageInfo/hasNextPage", "wireTypes": ["BOOLEAN"], "presenceStates": ["VALUE"]}
+    ],
+    "observedRecordPaths": ["/node/id", "/node/name"],
+    "observedConnectionPaths": ["/pageInfo/endCursor", "/pageInfo/hasNextPage"],
+    "observedRootScalarPaths": [],
+    "filterObservations": [
+      {"path": "individual.enabled", "present": true, "watermark": false, "booleanValue": true}
+    ],
+    "observedRelationshipCandidatePaths": [],
+    "relationshipInferenceApplied": false,
+    "triStateTrackingEnabled": true,
+    "absenceLifecycleInferenceApplied": false,
+    "pagination": {
+      "kind": "RELAY_CURSOR",
+      "terminalCondition": "PAGE_INFO_NO_NEXT_PAGE_LOCAL_UNVERIFIED",
+      "pageSize": 20,
+      "pagesObserved": 2,
+      "dataPagesObserved": 2,
+      "terminalProbeRequests": 0,
+      "maximumDistinctSourceKeysOnPage": 20,
+      "shortNonTerminalPageObserved": false,
+      "shortPageObservedRowCount": 0,
+      "continuedAfterShortPage": false,
+      "terminalConditionMet": true,
+      "hasNextPageAtLimit": false,
+      "cursorRequired": true,
+      "cursorPresent": true,
+      "cursorCount": 1,
+      "distinctCursorCount": 1,
+      "cursorCycleDetected": false,
+      "observedOrderingExpression": null,
+      "orderingRespected": true,
+      "exactReplayTieCount": 0,
+      "divergentTieCount": 0
+    },
+    "temporal": {
+      "timestampState": "NOT_APPLICABLE",
+      "timezoneState": "NOT_APPLICABLE",
+      "observedTranslation": "ABSENT_NO_TEMPORAL_FIELD",
+      "observedTimezone": null,
+      "observedPaths": [],
+      "validValuePaths": [],
+      "selectedFreshnessPath": null,
+      "precedenceApplied": false
+    },
+    "status": {
+      "path": null,
+      "mode": "NOT_APPLICABLE",
+      "appliedPolicyFingerprint": null,
+      "knownCount": 0,
+      "unknownCount": 0,
+      "referenceApplied": false,
+      "conflict": false
+    },
+    "usage": {
+      "bytes": 3072,
+      "rows": 25,
+      "pages": 2,
+      "depth": 6,
+      "paths": 4,
+      "nodes": 100
+    },
+    "evidenceClassification": "SYNTHETIC_FIXTURE"
+  },
+  "scenarios": [
+    {
+      "scenarioId": "SYNTH_ACCEPTED_BASELINE",
+      "expectedOutcome": "SYNTHETIC_STRUCTURE_ACCEPTED",
+      "expectedReasons": [],
+      "override": {}
+    },
+    {
+      "scenarioId": "SYNTH_ACCEPTED_INTEGER_ID",
+      "expectedOutcome": "SYNTHETIC_STRUCTURE_ACCEPTED",
+      "expectedReasons": [],
+      "override": {
+        "sourceKeyWireTypes": ["INTEGER"],
+        "crossTypeLexemePairCount": 0,
+        "crossTypeTaggedDistinctPairCount": 0,
+        "fieldObservations": [
+          {"path": "/node/id", "wireTypes": ["INTEGER"], "presenceStates": ["VALUE"]},
+          {"path": "/node/name", "wireTypes": ["STRING"], "presenceStates": ["NULL", "VALUE"]},
+          {"path": "/pageInfo/endCursor", "wireTypes": ["STRING"], "presenceStates": ["NULL", "VALUE"]},
+          {"path": "/pageInfo/hasNextPage", "wireTypes": ["BOOLEAN"], "presenceStates": ["VALUE"]}
+        ]
+      }
+    },
+    {
+      "scenarioId": "SYNTH_ACCEPTED_CROSS_TYPE_TAGS_DISTINCT",
+      "expectedOutcome": "SYNTHETIC_STRUCTURE_ACCEPTED",
+      "expectedReasons": [],
+      "override": {
+        "sourceKeyWireTypes": ["INTEGER", "STRING"],
+        "sourceKeyCollision": false,
+        "crossTypeLexemePairCount": 2,
+        "crossTypeTaggedDistinctPairCount": 2
+      }
+    },
+    {
+      "scenarioId": "SYNTH_AUTHORIZATION_MISSING",
+      "expectedOutcome": "FAIL_CLOSED",
+      "expectedReasons": ["AUTHORIZATION_MISSING"],
+      "override": {"authorizationState": "MISSING"}
+    },
+    {
+      "scenarioId": "SYNTH_BYTE_LIMIT_EXCEEDED",
+      "expectedOutcome": "FAIL_CLOSED",
+      "expectedReasons": ["BYTE_LIMIT_EXCEEDED"],
+      "override": {"usage": {"bytes": 65537}}
+    },
+    {
+      "scenarioId": "SYNTH_CARDINALITY_DRIFT",
+      "expectedOutcome": "FAIL_CLOSED",
+      "expectedReasons": ["CARDINALITY_DRIFT"],
+      "override": {"rootCardinality": "ARRAY_ELEMENTS"}
+    },
+    {
+      "scenarioId": "SYNTH_CURSOR_CYCLE",
+      "expectedOutcome": "FAIL_CLOSED",
+      "expectedReasons": ["TERMINALITY_INCOMPLETE", "GRAPHQL_CURSOR_REPEATED", "GRAPHQL_CURSOR_CYCLE"],
+      "override": {
+        "pagination": {
+          "pagesObserved": 3,
+          "dataPagesObserved": 3,
+          "terminalConditionMet": false,
+          "cursorCount": 2,
+          "distinctCursorCount": 1,
+          "cursorCycleDetected": true,
+          "shortNonTerminalPageObserved": true,
+          "shortPageObservedRowCount": 4,
+          "continuedAfterShortPage": true
+        },
+        "usage": {"pages": 3}
+      }
+    },
+    {
+      "scenarioId": "SYNTH_CURSOR_MISSING",
+      "expectedOutcome": "FAIL_CLOSED",
+      "expectedReasons": ["TERMINALITY_INCOMPLETE", "GRAPHQL_CURSOR_MISSING"],
+      "override": {
+        "pagination": {
+          "pagesObserved": 1,
+          "dataPagesObserved": 1,
+          "maximumDistinctSourceKeysOnPage": 20,
+          "terminalConditionMet": false,
+          "cursorPresent": false,
+          "cursorCount": 0,
+          "distinctCursorCount": 0
+        },
+        "sourceKeyCount": 20,
+        "distinctSourceKeyCount": 20,
+        "physicalRowCount": 20,
+        "logicalRootCount": 20,
+        "usage": {"rows": 20, "pages": 1}
+      }
+    },
+    {
+      "scenarioId": "SYNTH_CURSOR_REQUIREMENT_MISSING",
+      "expectedOutcome": "FAIL_CLOSED",
+      "expectedReasons": ["GRAPHQL_CURSOR_MISSING"],
+      "override": {"pagination": {"cursorRequired": false}}
+    },
+    {
+      "scenarioId": "SYNTH_CURSOR_REPEATED",
+      "expectedOutcome": "FAIL_CLOSED",
+      "expectedReasons": ["GRAPHQL_CURSOR_REPEATED"],
+      "override": {
+        "pagination": {
+          "pagesObserved": 2,
+          "dataPagesObserved": 2,
+          "cursorCount": 2,
+          "distinctCursorCount": 1
+        },
+        "usage": {"pages": 2}
+      }
+    },
+    {
+      "scenarioId": "SYNTH_CURSOR_COUNT_INCOHERENT",
+      "expectedOutcome": "FAIL_CLOSED",
+      "expectedReasons": ["OBSERVATION_COUNT_MISMATCH"],
+      "override": {
+        "pagination": {"cursorCount": 1, "distinctCursorCount": 2}
+      }
+    },
+    {
+      "scenarioId": "SYNTH_DATA_PAGES_EXCEED_ROWS",
+      "expectedOutcome": "FAIL_CLOSED",
+      "expectedReasons": ["OBSERVATION_COUNT_MISMATCH"],
+      "override": {
+        "sourceKeyCount": 1,
+        "distinctSourceKeyCount": 1,
+        "physicalRowCount": 1,
+        "logicalRootCount": 1,
+        "pagination": {"maximumDistinctSourceKeysOnPage": 1},
+        "usage": {"rows": 1}
+      }
+    },
+    {
+      "scenarioId": "SYNTH_EXPANSION_DRIFT",
+      "expectedOutcome": "FAIL_CLOSED",
+      "expectedReasons": ["EXPANSION_SEMANTICS_DRIFT"],
+      "override": {"physicalExpansion": true}
+    },
+    {
+      "scenarioId": "SYNTH_DEACTIVATION_BY_ABSENCE",
+      "expectedOutcome": "FAIL_CLOSED",
+      "expectedReasons": ["ABSENCE_POLICY_DRIFT"],
+      "override": {"absenceLifecycleInferenceApplied": true}
+    },
+    {
+      "scenarioId": "SYNTH_CHILD_COUNT_WITHOUT_OBSERVATION",
+      "expectedOutcome": "FAIL_CLOSED",
+      "expectedReasons": ["OBSERVATION_COUNT_MISMATCH"],
+      "override": {"childCount": 1, "distinctChildCount": 1}
+    },
+    {
+      "scenarioId": "SYNTH_FIELD_SCOPE_MISMATCH",
+      "expectedOutcome": "FAIL_CLOSED",
+      "expectedReasons": ["FIELD_SCOPE_MISMATCH"],
+      "override": {
+        "observedRecordPaths": ["/node/id", "/node/name", "/pageInfo/endCursor"],
+        "observedConnectionPaths": ["/pageInfo/hasNextPage"]
+      }
+    },
+    {
+      "scenarioId": "SYNTH_FILTER_REQUIRED_VALUE_DRIFT",
+      "expectedOutcome": "FAIL_CLOSED",
+      "expectedReasons": ["FILTER_CONTRACT_DRIFT"],
+      "override": {
+        "filterObservations": [
+          {"path": "individual.enabled", "present": true, "watermark": false, "booleanValue": false}
+        ]
+      }
+    },
+    {
+      "scenarioId": "SYNTH_HAS_NEXT_AT_LIMIT",
+      "expectedOutcome": "FAIL_CLOSED",
+      "expectedReasons": ["TERMINALITY_INCOMPLETE", "PAGE_LIMIT_EXCEEDED"],
+      "override": {
+        "pagination": {
+          "pagesObserved": 100,
+          "dataPagesObserved": 100,
+          "maximumDistinctSourceKeysOnPage": 1,
+          "terminalConditionMet": false,
+          "hasNextPageAtLimit": true,
+          "cursorCount": 99,
+          "distinctCursorCount": 99,
+          "shortNonTerminalPageObserved": true,
+          "shortPageObservedRowCount": 1,
+          "continuedAfterShortPage": true
+        },
+        "sourceKeyCount": 100,
+        "distinctSourceKeyCount": 100,
+        "physicalRowCount": 100,
+        "logicalRootCount": 100,
+        "usage": {"rows": 100, "pages": 100}
+      }
+    },
+    {
+      "scenarioId": "SYNTH_ORACLE_MISSING",
+      "expectedOutcome": "FAIL_CLOSED",
+      "expectedReasons": ["ORACLE_MISSING"],
+      "override": {"oracleAvailability": "MISSING"}
+    },
+    {
+      "scenarioId": "SYNTH_PAGE_SIZE_EXCEEDED",
+      "expectedOutcome": "FAIL_CLOSED",
+      "expectedReasons": ["GRAPHQL_PAGE_SIZE_EXCEEDED"],
+      "override": {
+        "pagination": {
+          "pageSize": 21,
+          "shortNonTerminalPageObserved": true,
+          "shortPageObservedRowCount": 20,
+          "continuedAfterShortPage": true
+        }
+      }
+    },
+    {
+      "scenarioId": "SYNTH_PAGE_LIMIT_EXCEEDED",
+      "expectedOutcome": "FAIL_CLOSED",
+      "expectedReasons": ["PAGE_LIMIT_EXCEEDED"],
+      "override": {
+        "pagination": {
+          "pagesObserved": 101,
+          "dataPagesObserved": 101,
+          "maximumDistinctSourceKeysOnPage": 1,
+          "cursorCount": 100,
+          "distinctCursorCount": 100,
+          "shortNonTerminalPageObserved": true,
+          "shortPageObservedRowCount": 1,
+          "continuedAfterShortPage": true
+        },
+        "sourceKeyCount": 101,
+        "distinctSourceKeyCount": 101,
+        "physicalRowCount": 101,
+        "logicalRootCount": 101,
+        "usage": {"rows": 101, "pages": 101}
+      }
+    },
+    {
+      "scenarioId": "SYNTH_PATH_DRIFT",
+      "expectedOutcome": "FAIL_CLOSED",
+      "expectedReasons": ["PATH_DRIFT"],
+      "override": {
+        "observedPaths": [
+          "/node/id",
+          "/node/name",
+          "/node/updatedAt",
+          "/pageInfo/endCursor",
+          "/pageInfo/hasNextPage"
+        ],
+        "observedRecordPaths": ["/node/id", "/node/name", "/node/updatedAt"],
+        "observedConnectionPaths": ["/pageInfo/endCursor", "/pageInfo/hasNextPage"]
+      }
+    },
+    {
+      "scenarioId": "SYNTH_PRESENCE_MODEL_INCOMPLETE",
+      "expectedOutcome": "FAIL_CLOSED",
+      "expectedReasons": ["PRESENCE_MODEL_INCOMPLETE"],
+      "override": {"triStateTrackingEnabled": false}
+    },
+    {
+      "scenarioId": "SYNTH_RESERVED_SOURCE_SCOPE",
+      "expectedOutcome": "FAIL_CLOSED",
+      "expectedReasons": ["RESERVED_SCOPE_VALUE"],
+      "override": {"sourceInstance": "SINGLETON"}
+    },
+    {
+      "scenarioId": "SYNTH_ROOT_DRIFT",
+      "expectedOutcome": "FAIL_CLOSED",
+      "expectedReasons": ["ROOT_DRIFT"],
+      "override": {"recordRoot": "/SYNTH_ROOT"}
+    },
+    {
+      "scenarioId": "SYNTH_ROW_LIMIT_EXCEEDED",
+      "expectedOutcome": "FAIL_CLOSED",
+      "expectedReasons": ["ROW_LIMIT_EXCEEDED"],
+      "override": {
+        "sourceKeyCount": 1001,
+        "distinctSourceKeyCount": 1001,
+        "physicalRowCount": 1001,
+        "logicalRootCount": 1001,
+        "pagination": {
+          "pagesObserved": 51,
+          "dataPagesObserved": 51,
+          "cursorCount": 50,
+          "distinctCursorCount": 50
+        },
+        "usage": {"rows": 1001, "pages": 51}
+      }
+    },
+    {
+      "scenarioId": "SYNTH_SOURCE_INSTANCE_MISSING",
+      "expectedOutcome": "FAIL_CLOSED",
+      "expectedReasons": ["SOURCE_INSTANCE_MISSING"],
+      "override": {"sourceInstance": null}
+    },
+    {
+      "scenarioId": "SYNTH_SOURCE_KEY_COLLISION",
+      "expectedOutcome": "FAIL_CLOSED",
+      "expectedReasons": ["SOURCE_KEY_COLLISION"],
+      "override": {"sourceKeyCollision": true}
+    },
+    {
+      "scenarioId": "SYNTH_SOURCE_KEY_CROSS_TYPE_COLLISION",
+      "expectedOutcome": "FAIL_CLOSED",
+      "expectedReasons": ["SOURCE_KEY_COLLISION"],
+      "override": {
+        "crossTypeLexemePairCount": 2,
+        "crossTypeTaggedDistinctPairCount": 1
+      }
+    },
+    {
+      "scenarioId": "SYNTH_SOURCE_KEY_MISSING",
+      "expectedOutcome": "FAIL_CLOSED",
+      "expectedReasons": ["SOURCE_KEY_MISSING"],
+      "override": {
+        "sourceKeyPresence": "ABSENT",
+        "sourceKeyCount": 24,
+        "distinctSourceKeyCount": 24,
+        "logicalRootCount": 24,
+        "fieldObservations": {
+          "/node/id": {"presenceStates": ["ABSENT", "VALUE"]}
+        }
+      }
+    },
+    {
+      "scenarioId": "SYNTH_SOURCE_KEY_NULL",
+      "expectedOutcome": "FAIL_CLOSED",
+      "expectedReasons": ["SOURCE_KEY_NULL"],
+      "override": {
+        "sourceKeyPresence": "NULL",
+        "distinctSourceKeyCount": 24,
+        "logicalRootCount": 24,
+        "fieldObservations": {
+          "/node/id": {"presenceStates": ["NULL", "VALUE"]}
+        }
+      }
+    },
+    {
+      "scenarioId": "SYNTH_SOURCE_KEY_TYPE_DRIFT",
+      "expectedOutcome": "FAIL_CLOSED",
+      "expectedReasons": ["FIELD_TYPE_MISMATCH", "SOURCE_KEY_TYPE_MISMATCH"],
+      "override": {
+        "sourceKeyWireTypes": ["BOOLEAN"],
+        "crossTypeLexemePairCount": 0,
+        "crossTypeTaggedDistinctPairCount": 0,
+        "fieldObservations": {"/node/id": {"wireTypes": ["BOOLEAN"]}}
+      }
+    },
+    {
+      "scenarioId": "SYNTH_SOURCE_KEY_VALUE_INVALID",
+      "expectedOutcome": "FAIL_CLOSED",
+      "expectedReasons": ["SOURCE_KEY_VALUE_INVALID"],
+      "override": {"sourceKeyValueValid": false}
+    },
+    {
+      "scenarioId": "SYNTH_TEMPORAL_FIELD_DRIFT",
+      "expectedOutcome": "FAIL_CLOSED",
+      "expectedReasons": ["PROFILE_BINDING_MISMATCH"],
+      "override": {"temporal": {"timestampState": "VALID"}}
+    },
+    {
+      "scenarioId": "SYNTH_TENANT_SCOPE_MISSING",
+      "expectedOutcome": "FAIL_CLOSED",
+      "expectedReasons": ["TENANT_SCOPE_MISSING"],
+      "override": {"tenantScope": ""}
+    },
+    {
+      "scenarioId": "SYNTH_SHORT_PAGE_FALSE_TERMINAL",
+      "expectedOutcome": "FAIL_CLOSED",
+      "expectedReasons": ["TERMINALITY_INCOMPLETE"],
+      "override": {
+        "pagination": {
+          "shortNonTerminalPageObserved": true,
+          "shortPageObservedRowCount": 5,
+          "continuedAfterShortPage": false,
+          "terminalConditionMet": false
+        }
+      }
+    },
+    {
+      "scenarioId": "SYNTH_TERMINALITY_INCOMPLETE",
+      "expectedOutcome": "FAIL_CLOSED",
+      "expectedReasons": ["TERMINALITY_INCOMPLETE"],
+      "override": {"pagination": {"terminalConditionMet": false}}
+    }
+  ]
+}

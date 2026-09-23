@@ -1,0 +1,544 @@
+{
+  "catalogVersion": "2026-09-05.v2-035c.1",
+  "decision": "FROTA_MANIFESTOS_DIMENSIONAL_FAIL_CLOSED",
+  "decisionStatus": "COMPLETE_LOCAL_DECISION_ONLY",
+  "task": "V2-035c",
+  "route": "D00",
+  "block": 38,
+  "scope": "DECISION_ONLY_NO_IMPLEMENTATION_NO_SOURCE_IO_NO_PUBLICATION",
+  "closedVocabularies": {
+    "dimensionStatus": [
+      "EXECUTION_READY",
+      "PARTIAL_DECISION_ONLY",
+      "BLOCKED"
+    ],
+    "presence": [
+      "ABSENT",
+      "NULL",
+      "VALUE"
+    ],
+    "dimension": [
+      "VEICULOS",
+      "MOTORISTAS"
+    ],
+    "observationRole": [
+      "MAIN_VEHICLE",
+      "TRAILER_POSITION_1",
+      "TRAILER_POSITION_2",
+      "DRIVER"
+    ],
+    "evidenceRole": [
+      "SUPPORT",
+      "COUNTEREVIDENCE",
+      "BOUNDARY"
+    ],
+    "disposition": [
+      "PRESERVE_OBSERVATION_ONLY",
+      "QUARANTINE_OBSERVATION",
+      "BLOCK_DIMENSIONAL_PROMOTION",
+      "REPLAY_NO_OP",
+      "OLDER_OBSERVATION_NO_OP",
+      "NO_SWEEP_NO_STATE_CHANGE",
+      "NO_RELATION_MATERIALIZATION",
+      "KEEP_ROLES_DISTINCT",
+      "KEEP_TRAILER_POSITIONS_DISTINCT"
+    ]
+  },
+  "dependencyBinding": {
+    "requiredTask": "V2-026",
+    "requiredTaskStatus": "IMPLEMENTADA_EM_SHADOW_ROLLBACK_ONLY",
+    "sourceContract": {
+      "id": "dataexport-6399",
+      "catalogVersion": "2026-09-04.v2-025b.2",
+      "releaseFingerprint": "30181093f00f47507d1910d9806a97697118ab671aeae0598d21a4a2726a7cb8",
+      "classification": "TRANSITIONAL"
+    },
+    "manifestIdentity": {
+      "catalogVersion": "2026-09-04.v2-009b.2",
+      "decisionStatus": "COMPLETE_LOCAL_CONSERVATIVE_FAIL_CLOSED",
+      "identityFingerprint": "ad2e3457a91961372dd29cb96bd6f2cb5fd6f67614d1255303787a8e2c4085c3"
+    },
+    "manifestDecision": {
+      "catalogVersion": "2026-09-04.v2-026a-v03.1",
+      "decisionStatus": "COMPLETE_LOCAL_DECISION_ONLY"
+    },
+    "bindingLimit": "MANIFEST_IDENTITY_AND_FRESHNESS_DO_NOT_PROVE_VEHICLE_OR_DRIVER_MASTER_IDENTITY"
+  },
+  "globalRules": {
+    "sourceEnvelope": "FLEET_FIELDS_ARE_ATTRIBUTES_OF_A_PHYSICAL_MANIFEST_OBSERVATION_NOT_MASTER_DATA_RECORDS",
+    "presence": "PRESERVE_ABSENT_NULL_VALUE_PER_PATH_AND_PHYSICAL_OBSERVATION_WITHOUT_OLDER_VALUE_BACKFILL",
+    "rawText": "PRESERVE_EXACT_RAW_UTF16_TEXT_AFTER_TYPE_LENGTH_AND_SURROGATE_VALIDATION_NEVER_SILENTLY_TRIM_TRUNCATE_CASE_FOLD_OR_REMOVE_DIACRITICS",
+    "freshness": {
+      "manifestObservationOrder": [
+        "/finished_at",
+        "/closed_at",
+        "/departured_at",
+        "/created_at"
+      ],
+      "scope": "ORDERS_MANIFEST_OBSERVATIONS_ONLY_NOT_VEHICLE_OR_DRIVER_MASTER_VALIDITY",
+      "older": "PRESERVE_AUDIT_AND_NO_OP_OBSERVATION_REDUCTION",
+      "identicalReplay": "REPLAY_NO_OP",
+      "equalFreshnessDivergence": "QUARANTINE_OBSERVATION_AND_BLOCK_DIMENSIONAL_PROMOTION",
+      "forbiddenTieBreakers": [
+        "ARRIVAL",
+        "PAGE",
+        "RECORD_ORDER",
+        "HASH",
+        "MAX"
+      ]
+    },
+    "absence": "NOT_OBSERVED_IN_PAGE_OR_WINDOW_IS_NO_STATE_CHANGE_AND_NEVER_DELETE_DEACTIVATE_OR_SWEEP",
+    "relationship": "VEHICLE_AND_DRIVER_COOCCURRENCE_IN_A_MANIFEST_NEVER_CREATES_A_CANONICAL_RELATION_JOIN_OR_FOREIGN_KEY",
+    "promotion": "NO_DIMENSIONAL_CURRENT_HISTORY_OR_PUBLISHED_ROW_MAY_BE_MATERIALIZED_FROM_THIS_DECISION"
+  },
+  "dimensions": [
+    {
+      "name": "VEICULOS",
+      "status": "BLOCKED",
+      "resultReason": "NO_STABLE_SOURCE_VEHICLE_IDENTIFIER_OR_APPROVED_BUSINESS_IDENTITY_AND_NO_PROOF_OF_BRANCH_VALIDITY_REKEY_OR_ENTITY_LIFECYCLE",
+      "keys": {
+        "sourceKey": {
+          "status": "ABSENT",
+          "accepted": [],
+          "candidates": [
+            "/data/mft_vie_license_plate"
+          ],
+          "decision": "PLATE_IS_AN_OBSERVATION_ATTRIBUTE_NOT_A_PROVIDER_VEHICLE_IDENTIFIER"
+        },
+        "canonicalKey": {
+          "status": "BLOCKED",
+          "accepted": [],
+          "decision": "NO_SURROGATE_MAY_BE_ALLOCATED_UNTIL_A_STABLE_NATURAL_BINDING_IS_APPROVED"
+        },
+        "businessKey": {
+          "status": "BLOCKED",
+          "accepted": [],
+          "candidates": [
+            "EXACT_RAW_PLATE_TEXT",
+            "CANDIDATE_NORMALIZED_PLATE_TEXT",
+            "LEGACY_PLATE_PLUS_BRANCH"
+          ],
+          "decision": "NO_CANDIDATE_HAS_PROVEN_UNIQUENESS_TEMPORAL_STABILITY_COLLISION_SAFETY_OR_REASSIGNMENT_SEMANTICS"
+        }
+      },
+      "grain": {
+        "status": "BLOCKED",
+        "targetConcept": "ONE_ROW_PER_STABLE_VEHICLE_ENTITY_WITH_EXPLICIT_SOURCE_AND_TENANT_SCOPE",
+        "observedGrain": "ONE_SET_OF_FLEET_ATTRIBUTE_SIGNALS_PER_PHYSICAL_MANIFEST_OBSERVATION",
+        "decision": "MANIFEST_OBSERVATIONS_CANNOT_BE_COLLAPSED_TO_A_VEHICLE_ENTITY_GRAIN",
+        "uniqueness": "UNPROVEN_GLOBAL_CROSS_BRANCH_AND_CROSS_TIME"
+      },
+      "branch": {
+        "sourcePath": "/data/mft_crn_psn_nickname",
+        "decision": "PRESERVE_AS_MANIFEST_CONTEXT_ONLY_NOT_VEHICLE_HOME_BRANCH_IDENTITY_SCOPE_OR_VALIDITY",
+        "absence": "PRESERVE_ABSENT_OR_NULL_WITHOUT_INFERENCE"
+      },
+      "roles": [
+        {
+          "role": "MAIN_VEHICLE",
+          "platePath": "/data/mft_vie_license_plate",
+          "capacityPath": "/data/mft_vie_weight_capacity",
+          "decision": "KEEP_AS_MAIN_ROLE_OBSERVATION_ONLY"
+        },
+        {
+          "role": "TRAILER_POSITION_1",
+          "platePath": "/data/mft_tl1_license_plate",
+          "capacityPath": "/data/mft_tl1_weight_capacity",
+          "decision": "KEEP_POSITION_AND_PROVENANCE_DISTINCT_NEVER_PROMOTE_AS_MAIN"
+        },
+        {
+          "role": "TRAILER_POSITION_2",
+          "platePath": "/data/mft_tl2_license_plate",
+          "capacityPath": "/data/mft_tl2_weight_capacity",
+          "decision": "KEEP_POSITION_AND_PROVENANCE_DISTINCT_NEVER_PROMOTE_AS_MAIN"
+        }
+      ],
+      "attributes": {
+        "paths": [
+          "/data/mft_vie_vee_name",
+          "/data/mft_vie_onr_name",
+          "/data/mft_vie_weight_capacity",
+          "/data/contract_type"
+        ],
+        "decision": "PRESERVE_AS_MANIFEST_OBSERVATION_ATTRIBUTES_NEVER_IDENTITY_BRANCH_PROOF_OR_MASTER_VALIDITY"
+      },
+      "normalizationAndValidation": {
+        "raw": "PRESERVE_EXACT",
+        "utf16Limits": {
+          "plate": 10,
+          "vehicleName": 255,
+          "ownerName": 255,
+          "contractType": 50
+        },
+        "plateNormalizer": "NOT_APPROVED",
+        "platePattern": "NOT_APPROVED",
+        "legacyTrimUpper": "COUNTEREVIDENCE_ONLY",
+        "invalidOrOverflow": "QUARANTINE_OBSERVATION_WITHOUT_TRUNCATION_OR_NULL_COERCION",
+        "blank": "PRESERVE_RAW_AND_BLOCK_DIMENSIONAL_PROMOTION"
+      },
+      "lifecycle": {
+        "manifestFreshness": "MAY_REDUCE_ONLY_THE_MANIFEST_OBSERVATION_COHORT",
+        "currentHistory": "NOT_AUTHORIZED",
+        "effectiveValidity": "UNPROVEN",
+        "rekey": "BLOCK_AND_QUARANTINE_CANDIDATE_REASSIGNMENT_WITHOUT_AUTOMATIC_MERGE_SPLIT_OR_REPOINT",
+        "replay": "IDENTICAL_MANIFEST_OBSERVATION_IS_NO_OP",
+        "conflict": "EQUAL_FRESHNESS_DIVERGENCE_IS_QUARANTINE",
+        "absence": "NO_STATE_CHANGE_NO_SWEEP"
+      },
+      "quarantineReasons": [
+        "MISSING_STABLE_VEHICLE_IDENTITY",
+        "AMBIGUOUS_PLATE_NORMALIZATION",
+        "UNPROVEN_PLATE_REASSIGNMENT_OR_REKEY",
+        "UNPROVEN_VEHICLE_BRANCH",
+        "ROLE_COLLAPSE_ATTEMPT",
+        "EQUAL_FRESHNESS_VEHICLE_CONFLICT",
+        "INVALID_UTF16_OR_OVERFLOW"
+      ],
+      "unblockEvidence": [
+        "VERSIONED_IMMUTABLE_PROVIDER_VEHICLE_ID_OR_OWNER_APPROVED_PLATE_IDENTITY_AND_REASSIGNMENT_SEMANTICS",
+        "VERSIONED_PLATE_NORMALIZATION_VALIDATION_COLLISION_AND_SENTINEL_POLICY",
+        "EXACT_SOURCE_AND_TENANT_SCOPE_WITH_BRANCH_OWNERSHIP_SEMANTICS_OR_EXPLICIT_BRANCH_EXCLUSION_FROM_IDENTITY",
+        "MAIN_AND_EACH_TRAILER_ROLE_CARDINALITY_AND_REKEY_RULES",
+        "VEHICLE_ENTITY_EFFECTIVE_TIME_CURRENT_HISTORY_CONFLICT_AND_ABSENCE_RULES_WITH_SYNTHETIC_TESTS"
+      ]
+    },
+    {
+      "name": "MOTORISTAS",
+      "status": "BLOCKED",
+      "resultReason": "ONLY_NAME_AND_CONTRACT_CONTEXT_EXIST_WITHOUT_STABLE_PERSON_IDENTIFIER_HOMONYM_POLICY_BRANCH_PROOF_REKEY_OR_ENTITY_LIFECYCLE",
+      "keys": {
+        "sourceKey": {
+          "status": "ABSENT",
+          "accepted": [],
+          "candidates": [
+            "/data/mft_mdr_iil_name"
+          ],
+          "decision": "NAME_IS_AN_OBSERVATION_ATTRIBUTE_NOT_A_PROVIDER_DRIVER_IDENTIFIER"
+        },
+        "canonicalKey": {
+          "status": "BLOCKED",
+          "accepted": [],
+          "decision": "NO_SURROGATE_MAY_BE_ALLOCATED_UNTIL_A_STABLE_NATURAL_BINDING_IS_APPROVED"
+        },
+        "businessKey": {
+          "status": "BLOCKED",
+          "accepted": [],
+          "candidates": [
+            "EXACT_RAW_NAME_TEXT",
+            "CANDIDATE_NORMALIZED_NAME_TEXT",
+            "LEGACY_NAME_PLUS_BRANCH"
+          ],
+          "decision": "NAME_NEVER_BECOMES_IDENTITY_AND_NO_CANDIDATE_DISAMBIGUATES_HOMONYMS_RENAMES_OR_GENERIC_LABELS"
+        }
+      },
+      "grain": {
+        "status": "BLOCKED",
+        "targetConcept": "ONE_ROW_PER_STABLE_DRIVER_ENTITY_WITH_EXPLICIT_SOURCE_AND_TENANT_SCOPE",
+        "observedGrain": "ONE_DRIVER_NAME_AND_CONTRACT_SIGNAL_PER_PHYSICAL_MANIFEST_OBSERVATION",
+        "decision": "MANIFEST_OBSERVATIONS_CANNOT_BE_COLLAPSED_TO_A_DRIVER_ENTITY_GRAIN",
+        "uniqueness": "UNPROVEN_FOR_NAMES_BRANCHES_AND_TIME"
+      },
+      "branch": {
+        "sourcePath": "/data/mft_crn_psn_nickname",
+        "decision": "PRESERVE_AS_MANIFEST_CONTEXT_ONLY_NOT_DRIVER_HOME_BRANCH_IDENTITY_SCOPE_OR_VALIDITY",
+        "absence": "PRESERVE_ABSENT_OR_NULL_WITHOUT_INFERENCE"
+      },
+      "roles": [
+        {
+          "role": "DRIVER",
+          "namePath": "/data/mft_mdr_iil_name",
+          "contractTypePath": "/data/mft_mdr_contract_type",
+          "decision": "KEEP_AS_DRIVER_ROLE_OBSERVATION_ONLY"
+        }
+      ],
+      "normalizationAndValidation": {
+        "raw": "PRESERVE_EXACT",
+        "utf16Limits": {
+          "driverName": 255,
+          "driverContractType": 50
+        },
+        "nameNormalizer": "NOT_APPROVED",
+        "caseFolding": "FORBIDDEN_FOR_IDENTITY",
+        "unicodeNormalization": "FORBIDDEN_FOR_IDENTITY",
+        "diacriticRemoval": "FORBIDDEN_FOR_IDENTITY",
+        "legacyTrimUpper": "COUNTEREVIDENCE_ONLY",
+        "legacyGenericSubstringExclusion": "COUNTEREVIDENCE_ONLY_NEVER_SILENTLY_DROP",
+        "invalidOrOverflow": "QUARANTINE_OBSERVATION_WITHOUT_TRUNCATION_OR_NULL_COERCION",
+        "blank": "PRESERVE_RAW_AND_BLOCK_DIMENSIONAL_PROMOTION"
+      },
+      "contractType": {
+        "sourcePath": "/data/mft_mdr_contract_type",
+        "decision": "PRESERVE_AS_MANIFEST_CONTEXT_ONLY_NEVER_IDENTITY_OR_PROOF_OF_EMPLOYMENT_VALIDITY"
+      },
+      "lifecycle": {
+        "manifestFreshness": "MAY_REDUCE_ONLY_THE_MANIFEST_OBSERVATION_COHORT",
+        "currentHistory": "NOT_AUTHORIZED",
+        "effectiveValidity": "UNPROVEN",
+        "rekey": "BLOCK_NAME_CHANGE_WITHOUT_AUTOMATIC_MERGE_SPLIT_OR_REPOINT",
+        "replay": "IDENTICAL_MANIFEST_OBSERVATION_IS_NO_OP",
+        "conflict": "EQUAL_FRESHNESS_DIVERGENCE_IS_QUARANTINE",
+        "absence": "NO_STATE_CHANGE_NO_SWEEP"
+      },
+      "quarantineReasons": [
+        "MISSING_STABLE_DRIVER_IDENTITY",
+        "HOMONYM_NOT_DISAMBIGUATED",
+        "GENERIC_DRIVER_LABEL_UNRESOLVED",
+        "UNPROVEN_DRIVER_RENAME_OR_REKEY",
+        "UNPROVEN_DRIVER_BRANCH",
+        "EQUAL_FRESHNESS_DRIVER_CONFLICT",
+        "INVALID_UTF16_OR_OVERFLOW"
+      ],
+      "unblockEvidence": [
+        "VERSIONED_IMMUTABLE_PROVIDER_DRIVER_ID_WITH_SOURCE_AND_TENANT_SCOPE",
+        "VERSIONED_HOMONYM_GENERIC_LABEL_RENAME_MERGE_SPLIT_AND_REKEY_POLICY",
+        "EXACT_BRANCH_OWNERSHIP_SEMANTICS_OR_EXPLICIT_BRANCH_EXCLUSION_FROM_IDENTITY",
+        "DRIVER_CONTRACT_TYPE_SEMANTICS_AND_NON_IDENTITY_ROLE",
+        "DRIVER_ENTITY_EFFECTIVE_TIME_CURRENT_HISTORY_CONFLICT_AND_ABSENCE_RULES_WITH_SYNTHETIC_TESTS"
+      ]
+    }
+  ],
+  "fieldInventory": [
+    {
+      "dimension": "VEICULOS",
+      "role": "MAIN_VEHICLE",
+      "sourcePath": "/data/mft_vie_license_plate",
+      "kind": "TEXT_10",
+      "decision": "PRESERVE_OBSERVATION_ONLY"
+    },
+    {
+      "dimension": "VEICULOS",
+      "role": "MAIN_VEHICLE",
+      "sourcePath": "/data/mft_vie_vee_name",
+      "kind": "TEXT_255",
+      "decision": "PRESERVE_OBSERVATION_ONLY"
+    },
+    {
+      "dimension": "VEICULOS",
+      "role": "MAIN_VEHICLE",
+      "sourcePath": "/data/mft_vie_onr_name",
+      "kind": "TEXT_255",
+      "decision": "PRESERVE_OBSERVATION_ONLY"
+    },
+    {
+      "dimension": "VEICULOS",
+      "role": "MAIN_VEHICLE",
+      "sourcePath": "/data/mft_vie_weight_capacity",
+      "kind": "DECIMAL",
+      "decision": "PRESERVE_OBSERVATION_ONLY"
+    },
+    {
+      "dimension": "VEICULOS",
+      "role": "MAIN_VEHICLE",
+      "sourcePath": "/data/contract_type",
+      "kind": "TEXT_50",
+      "decision": "PRESERVE_OBSERVATION_ONLY"
+    },
+    {
+      "dimension": "VEICULOS",
+      "role": "TRAILER_POSITION_1",
+      "sourcePath": "/data/mft_tl1_license_plate",
+      "kind": "TEXT_10",
+      "decision": "KEEP_ROLES_DISTINCT"
+    },
+    {
+      "dimension": "VEICULOS",
+      "role": "TRAILER_POSITION_1",
+      "sourcePath": "/data/mft_tl1_weight_capacity",
+      "kind": "DECIMAL",
+      "decision": "KEEP_ROLES_DISTINCT"
+    },
+    {
+      "dimension": "VEICULOS",
+      "role": "TRAILER_POSITION_2",
+      "sourcePath": "/data/mft_tl2_license_plate",
+      "kind": "TEXT_10",
+      "decision": "KEEP_TRAILER_POSITIONS_DISTINCT"
+    },
+    {
+      "dimension": "VEICULOS",
+      "role": "TRAILER_POSITION_2",
+      "sourcePath": "/data/mft_tl2_weight_capacity",
+      "kind": "DECIMAL",
+      "decision": "KEEP_TRAILER_POSITIONS_DISTINCT"
+    },
+    {
+      "dimension": "MOTORISTAS",
+      "role": "DRIVER",
+      "sourcePath": "/data/mft_mdr_iil_name",
+      "kind": "TEXT_255",
+      "decision": "PRESERVE_OBSERVATION_ONLY"
+    },
+    {
+      "dimension": "MOTORISTAS",
+      "role": "DRIVER",
+      "sourcePath": "/data/mft_mdr_contract_type",
+      "kind": "TEXT_50",
+      "decision": "PRESERVE_OBSERVATION_ONLY"
+    },
+    {
+      "dimension": "BOTH",
+      "role": "MANIFEST_CONTEXT",
+      "sourcePath": "/data/mft_crn_psn_nickname",
+      "kind": "TEXT_255",
+      "decision": "PRESERVE_OBSERVATION_ONLY"
+    }
+  ],
+  "fixtureSet": {
+    "path": "docs/catalogos/frota-manifestos-v2-035c/fixtures/casos-v01.synthetic.json",
+    "sha256": "d73a5a53f1ee151accad838dde92f0c1d89d21c745ae6e438edb402eb59d3cd4",
+    "syntheticOnly": true,
+    "containsRealData": false
+  },
+  "evidence": [
+    {
+      "path": "docs/catalogos/contratos-esl-6399/manifesto.json",
+      "sha256": "fc19e50cdfe0e91fcd192a17b65d6cc48f8f62dca13f755006d4e0fcfb8b86bd",
+      "role": "BOUNDARY",
+      "supports": "TRANSITIONAL_MANIFEST_CONTRACT_AND_FIELD_PATH_CONTEXT",
+      "doesNotSupport": "VEHICLE_OR_DRIVER_MASTER_IDENTITY"
+    },
+    {
+      "path": "docs/catalogos/identidade-manifestos/manifesto.json",
+      "sha256": "290ef5cbba142de8cf07c0a17948a8571ba7c9ac9673b0910786a960514e5a23",
+      "role": "BOUNDARY",
+      "supports": "MANIFEST_ROOT_AND_CHILD_IDENTITY_ONLY",
+      "doesNotSupport": "FLEET_DIMENSIONAL_IDENTITY"
+    },
+    {
+      "path": "docs/catalogos/manifestos-v2-026/decisao-v03.json",
+      "sha256": "7721b88a934b2a58ff19bd7cee53f7bd57023a31528c77143915d72005cd19af",
+      "role": "SUPPORT",
+      "supports": "TRI_STATE_MANIFEST_FRESHNESS_REPLAY_CONFLICT_AND_ABSENCE",
+      "doesNotSupport": "FLEET_ENTITY_VALIDITY_CURRENT_OR_HISTORY"
+    },
+    {
+      "path": "docs/adr/0024-manifestos-6399-identidade-presenca-frescor-reducers.md",
+      "sha256": "f83fef24452997a58ce9637355300281a3233fd360667c4f9bf9e7125ffe6ef1",
+      "role": "BOUNDARY",
+      "supports": "MANIFEST_GRAIN_TRI_STATE_FRESHNESS_AND_NO_RELATION_BOUNDARY",
+      "doesNotSupport": "VEHICLE_OR_DRIVER_MASTER_IDENTITY"
+    },
+    {
+      "path": "src/main/java/br/com/esl/etl/v2/modulos/manifestos/domain/ManifestoTextField.java",
+      "sha256": "c0ba778e335874578d9c96fdbd90264a49b5677faabc94b606b96d1ddfa2c5ba",
+      "role": "SUPPORT",
+      "supports": "EXACT_TEXT_PATHS_AND_UTF16_LIMITS",
+      "doesNotSupport": "BUSINESS_KEY_OR_NORMALIZATION"
+    },
+    {
+      "path": "src/main/java/br/com/esl/etl/v2/modulos/manifestos/aplicacao/ManifestoDataExportRecordMapper.java",
+      "sha256": "f99ad6764e679041b9616b72b958c3f2034e96b24e8a97d79bc215ba92611384",
+      "role": "BOUNDARY",
+      "supports": "TYPE_LENGTH_UTF16_AND_RAW_VALUE_PRESERVATION",
+      "doesNotSupport": "PLATE_OR_NAME_ENTITY_IDENTITY"
+    },
+    {
+      "path": "src/test/java/br/com/esl/etl/v2/modulos/manifestos/aplicacao/ManifestoDataExportRecordMapperTest.java",
+      "sha256": "daf536b16b8be9851f1f29d557fc671757c07de6348a15a199e3978c22766705",
+      "role": "COUNTEREVIDENCE",
+      "supports": "TEXT_ACCEPTANCE_IS_NOT_A_PLATE_LEXICON",
+      "doesNotSupport": "PLATE_VALIDITY"
+    },
+    {
+      "path": "database/migrations/V012__create_manifestos_shadow_vertical.sql",
+      "sha256": "8bf1f0a51e741814699d8204799f81edc336978d610d1851c340a260a95dfe13",
+      "role": "BOUNDARY",
+      "supports": "FLEET_SIGNALS_REMAIN_MANIFEST_ATTRIBUTES",
+      "doesNotSupport": "DIMENSION_TABLE_OR_RELATION"
+    },
+    {
+      "path": "docs/catalogos/portabilidade/matriz-campos.csv",
+      "sha256": "2b821ec9771d66205cd9ed7d7b3e9a77abbdc8aeb1481f63e5fac72a6b4075c2",
+      "role": "BOUNDARY",
+      "supports": "EXACT_PATHS_AS_ROOT_MANIFEST_SCALARS",
+      "doesNotSupport": "DIMENSIONAL_GRAIN_OR_KEY"
+    },
+    {
+      "path": "../etl-extracao-dados/database/views-dimensao/021_criar_view_dim_veiculos.sql",
+      "sha256": "1e1e4f14c09186648c0f256d161b935de3be5ec4ae526284f9c5aebff147cfd4",
+      "role": "COUNTEREVIDENCE",
+      "supports": "LEGACY_COMPATIBILITY_CANDIDATE_ONLY",
+      "doesNotSupport": "PLATE_PLUS_BRANCH_IDENTITY_OR_MAX_REDUCER"
+    },
+    {
+      "path": "../etl-extracao-dados/database/views-dimensao/022_criar_view_dim_motoristas.sql",
+      "sha256": "d0ad766b6c94cdfb7cbe582385950fd65c54b40bbe04232ab12f0e28e72b5f2d",
+      "role": "COUNTEREVIDENCE",
+      "supports": "LEGACY_COMPATIBILITY_CANDIDATE_ONLY",
+      "doesNotSupport": "NAME_PLUS_BRANCH_IDENTITY_OR_GENERIC_LABEL_DROP"
+    },
+    {
+      "path": "../etl-extracao-dados/database/tabelas/003_criar_tabela_manifestos.sql",
+      "sha256": "07a287e49c7d1a3a84bd1986ed010829cddd019eb7dac2f8d6a1a79a46e304db",
+      "role": "COUNTEREVIDENCE",
+      "supports": "LEGACY_MIXED_MANIFEST_GRAIN_HAS_FLEET_TEXTS",
+      "doesNotSupport": "SOURCE_IDS_OR_DIMENSIONAL_LIFECYCLE"
+    },
+    {
+      "path": "../etl-extracao-dados/docs/relatorio-bi-dashboards-logistica.md",
+      "sha256": "ff9860572503b239fc76fab2b14e00574268227dc5b715baa94e8d7d0d5d4fae",
+      "role": "COUNTEREVIDENCE",
+      "supports": "LEGACY_DIMENSIONAL_RISK_IS_DOCUMENTED",
+      "doesNotSupport": "SAFE_CANONICAL_KEYS"
+    },
+    {
+      "path": "../etl-extracao-dados/docs/legado/pipelines-antigos/02-apis/dataexport/manifestos.md",
+      "sha256": "0993449c8e3a87ebaffea5c5fde0c8a31b1d399d53218debdadad3e20dcf5ef9",
+      "role": "BOUNDARY",
+      "supports": "BOUNDED_VERSIONED_STATIC_MANIFEST_CORPUS",
+      "doesNotSupport": "GLOBAL_UNIQUENESS_REKEY_OR_MASTER_DATA_COMPLETENESS"
+    }
+  ],
+  "evidenceBounds": {
+    "supports": [
+      "EXACT_6399_FLEET_FIELD_PATHS",
+      "FLEET_FIELDS_AS_MANIFEST_OBSERVATION_ATTRIBUTES",
+      "ABSENT_NULL_VALUE_RAW_UTF16_AND_LENGTH_PRESERVATION",
+      "MANIFEST_OBSERVATION_FRESHNESS_REPLAY_CONFLICT_AND_NON_DESTRUCTIVE_ABSENCE",
+      "MAIN_TRAILER_ONE_TRAILER_TWO_AND_DRIVER_AS_DISTINCT_ROLES",
+      "LEGACY_PLATE_NAME_BRANCH_NORMALIZATION_AS_COUNTEREVIDENCE"
+    ],
+    "doesNotSupport": [
+      "CURRENT_PROVIDER_SCHEMA_OR_FINGERPRINT",
+      "STABLE_VEHICLE_OR_DRIVER_SOURCE_IDENTIFIER",
+      "PLATE_OR_NAME_AS_BUSINESS_IDENTITY",
+      "BRANCH_AS_HOME_OWNER_SCOPE_OR_KEY_COMPONENT",
+      "VEHICLE_OR_DRIVER_CURRENT_HISTORY_VALIDITY_OR_REKEY",
+      "VEHICLE_TRAILER_ENTITY_EQUIVALENCE",
+      "VEHICLE_TO_DRIVER_RELATIONSHIP",
+      "COMPLETENESS_SWEEP_DEACTIVATION_PUBLICATION_OR_CUTOVER"
+    ]
+  },
+  "handoff": {
+    "vehiclesExecutionReady": false,
+    "driversExecutionReady": false,
+    "terraRunbookPath": "docs/runbooks/frota-manifestos-v2-035b-execucao-terra.md",
+    "terraRunbookStatus": "MUST_NOT_EXIST",
+    "d03": "BLOCKED_BY_V2_035C_VEHICLES_IDENTITY_BRANCH_VALIDITY_AND_REKEY",
+    "d04": "BLOCKED_BY_V2_035C_DRIVERS_IDENTITY_HOMONYMS_BRANCH_VALIDITY_AND_REKEY",
+    "nextOfficialBlock": "NONE",
+    "reason": "ALL_REMAINING_ROUTES_HAVE_UNSATISFIED_DEPENDENCIES_OR_EXPLICIT_HOLDS"
+  },
+  "execution": {
+    "status": "NOT_STARTED",
+    "allowedArtifacts": [
+      "DOCUMENTATION",
+      "SYNTHETIC_FIXTURES",
+      "LOCAL_VALIDATOR"
+    ],
+    "forbiddenArtifacts": [
+      "JAVA",
+      "MIGRATION",
+      "SCHEMA",
+      "TABLE",
+      "VIEW",
+      "PROCEDURE",
+      "GRANT",
+      "RUNTIME",
+      "RELATION",
+      "FACT",
+      "PUB_CONTRACT",
+      "TERRA_IMPLEMENTATION_PROMPT"
+    ]
+  }
+}

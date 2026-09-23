@@ -1,0 +1,235 @@
+{
+  "version": 1,
+  "layer": "OFFLINE_ONLY",
+  "java": {
+    "tests": 48,
+    "classes": 10,
+    "failures": 0,
+    "errors": 0,
+    "skips": 0,
+    "jdk": 17,
+    "network": false,
+    "database": false,
+    "build": "ISOLATED",
+    "settings": "EMPTY_LOCAL",
+    "gates": [
+      "Enforcer",
+      "Spotless",
+      "Checkstyle",
+      "Compilation"
+    ]
+  },
+  "governance": {
+    "remoteCount": 0,
+    "actionPins": 7,
+    "realCi": false,
+    "approvedPublicationSet": null
+  },
+  "policy": {
+    "cases": 33,
+    "admitted": 3,
+    "refused": 30,
+    "effectiveExceptions": 0,
+    "realFeed": false
+  },
+  "raster": {
+    "aspects": 18,
+    "fields": 51,
+    "cases": 16,
+    "guards": 12
+  },
+  "historicalFailures": [
+    "P06_SUCCESSION_HASH_docs/runbooks/continuidade-agentes.md",
+    "FROTA_V01_MAPPER_PIN_DRIFT"
+  ],
+  "newAcceptances": 0,
+  "receipts": [
+    {
+      "path": "target/preparacao-offline-p10-p21-20260921-01/dependency-implementation.result.json",
+      "sha256": "f99c858e7f1bfa196bd08623a97dd36582f8cc56fc7ca1ba13223d8d2f35d787",
+      "id": "dependency-implementation",
+      "exitCode": 0,
+      "layer": "OFFLINE",
+      "log": "dependency-implementation.log"
+    },
+    {
+      "path": "target/preparacao-offline-p10-p21-20260921-01/dependency-policy.result.json",
+      "sha256": "29ad02063a6d2393bc6966817d3d0c909636213c769f4d5a77bfa8a1020b07e0",
+      "id": "dependency-policy",
+      "exitCode": 0,
+      "layer": "OFFLINE",
+      "log": "dependency-policy.log"
+    },
+    {
+      "path": "target/preparacao-offline-p10-p21-20260921-01/fleet-decision.result.json",
+      "sha256": "146b38bfc52134d2d69fe32cdb86433b86f199aa552a5132fe31864a5aa848f6",
+      "id": "fleet-decision",
+      "exitCode": 1,
+      "layer": "OFFLINE",
+      "log": "fleet-decision.log"
+    },
+    {
+      "path": "target/preparacao-offline-p10-p21-20260921-01/identity-10633.result.json",
+      "sha256": "2164dadfd446689b3153bf53a71ebbd5211563e5d8fc5d42423574a399eb6ac5",
+      "id": "identity-10633",
+      "exitCode": 0,
+      "layer": "OFFLINE",
+      "log": "identity-10633.log"
+    },
+    {
+      "path": "target/preparacao-offline-p10-p21-20260921-01/identity-4924.result.json",
+      "sha256": "dd3758d95d12d5aea58bb5047e424922af71def00bb3b559dd55f82005b633d7",
+      "id": "identity-4924",
+      "exitCode": 0,
+      "layer": "OFFLINE",
+      "log": "identity-4924.log"
+    },
+    {
+      "path": "target/preparacao-offline-p10-p21-20260921-01/identity-6392.result.json",
+      "sha256": "1b5937d45dac12a18ec40c6575c740c5d0c6999b4cd0431d8b45a06d7e03dafc",
+      "id": "identity-6392",
+      "exitCode": 0,
+      "layer": "OFFLINE",
+      "log": "identity-6392.log"
+    },
+    {
+      "path": "target/preparacao-offline-p10-p21-20260921-01/identity-8636.result.json",
+      "sha256": "03617b329460a8931c5bfc535b2e57f97b0964ab69514e19c7a69f4abac49881",
+      "id": "identity-8636",
+      "exitCode": 0,
+      "layer": "OFFLINE",
+      "log": "identity-8636.log"
+    },
+    {
+      "path": "target/preparacao-offline-p10-p21-20260921-01/java-boundaries.result.json",
+      "sha256": "c3d6b6ad7ef1e6431da1fe3d53fc0e277306c3155a4fb60a3bf5ce40d662dca6",
+      "layer": "OFFLINE_JAVA17",
+      "exitCode": 0
+    },
+    {
+      "path": "target/preparacao-offline-p10-p21-20260921-01/java.result.json",
+      "sha256": "eac7b6e9af36ea473afefdff4016ebefaa3c4968221ad15b20d0f6dc8cd5e9f3",
+      "exitCode": 0,
+      "layer": "OFFLINE_JAVA17",
+      "selection": "ManifestoDataExportRecordMapperTest,ManifestoStageValueObjectsTest,ScopedSourceIdentityTest,IdentityConflictPolicyTest,FirstWaveIdentityCatalogTest,GovernedReferencesSqlContractTest,UsuariosDimensionCurrentSqlContractTest,StagingLifecycleSqlContractTest"
+    },
+    {
+      "path": "target/preparacao-offline-p10-p21-20260921-01/log-lifecycle.result.json",
+      "sha256": "6eba8f3dec1e9b14818be2e738ada9dd061ae8c1e42c0f88aca42391bb4c069c",
+      "layer": "SYNTHETIC_TEMP_FILES",
+      "exitCode": 0
+    },
+    {
+      "path": "target/preparacao-offline-p10-p21-20260921-01/manifestos-current.result.json",
+      "sha256": "4ecf7aea602a6c38233b4a985c8269faee67aa1db559168845ab1b44d6eadf70",
+      "layer": "STATIC_CURRENT",
+      "exitCode": 0
+    },
+    {
+      "path": "target/preparacao-offline-p10-p21-20260921-01/preparation.result.json",
+      "sha256": "5becc242fe5fc354ef827731250ab40f5057d211f454e746e867eaf8f7cbd31c",
+      "id": "preparation",
+      "exitCode": 0,
+      "layer": "OFFLINE",
+      "log": "preparation.log"
+    },
+    {
+      "path": "target/preparacao-offline-p10-p21-20260921-01/progressive-contract.result.json",
+      "sha256": "debe92c0e1a430d6996593131ca1d16bb02b10c8cb4d042e9eb5192ff2008290",
+      "id": "progressive-contract",
+      "exitCode": 0,
+      "layer": "OFFLINE",
+      "log": "progressive-contract.log"
+    },
+    {
+      "path": "target/preparacao-offline-p10-p21-20260921-01/raster-contract.result.json",
+      "sha256": "0d0c1cc774e133e0b038d1d32fec770acb831a2e65e7a19fea16378bc16920f9",
+      "id": "raster-contract",
+      "exitCode": 0,
+      "layer": "OFFLINE",
+      "log": "raster-contract.log"
+    },
+    {
+      "path": "target/preparacao-offline-p10-p21-20260921-01/raster-guards.result.json",
+      "sha256": "d7ea8b31c2f8485cdfbc5812ac5f23f25389d029705cb10a523c93a9979247e5",
+      "id": "raster-guards",
+      "exitCode": 0,
+      "layer": "OFFLINE",
+      "log": "raster-guards.log"
+    },
+    {
+      "path": "target/preparacao-offline-p10-p21-20260921-01/references.result.json",
+      "sha256": "886f26cd20258cdc78fd402bc4dd5ef5eecc57f7d84bc95b63e929ab0facf113",
+      "id": "references",
+      "exitCode": 0,
+      "layer": "OFFLINE",
+      "log": "references.log"
+    },
+    {
+      "path": "target/preparacao-offline-p10-p21-20260921-01/schema.result.json",
+      "sha256": "b9ccf94a94cdf089b0199a9ff41ae261269caf15842f30d9a8d6ede7d8d7420c",
+      "id": "schema",
+      "exitCode": 0,
+      "layer": "OFFLINE",
+      "log": "schema.log"
+    },
+    {
+      "path": "target/preparacao-offline-p10-p21-20260921-01/staging-lifecycle.result.json",
+      "sha256": "dc0dbcdb7f45663e62f3025cef93021e9427866f8a19c18d76bcc03ed0e346e6",
+      "id": "staging-lifecycle",
+      "exitCode": 0,
+      "layer": "OFFLINE",
+      "log": "staging-lifecycle.log"
+    },
+    {
+      "path": "target/preparacao-offline-p10-p21-20260921-01/trail-before-close.result.json",
+      "sha256": "23ff913d2f59d9dc4ede95b7f5b0ea612569096c5ac261c2496b8af2cdfaf9eb",
+      "layer": "HISTORICAL_CHAIN",
+      "exitCode": 1
+    },
+    {
+      "path": "target/preparacao-offline-p10-p21-20260921-01/users-dimension.result.json",
+      "sha256": "88a8e382955750d166d59f3a605b4ebef054a070934f4f381128b05ad771686e",
+      "id": "users-dimension",
+      "exitCode": 0,
+      "layer": "OFFLINE",
+      "log": "users-dimension.log"
+    },
+    {
+      "path": "target/preparacao-offline-p10-p21-20260921-01/windows-runtime.result.json",
+      "sha256": "92e8b40e8ca1d1ccf050d5d12733edc6228a2dc891d7eed03857e262dbdf41ed",
+      "id": "windows-runtime",
+      "exitCode": 0,
+      "layer": "OFFLINE",
+      "log": "windows-runtime.log"
+    },
+    {
+      "path": "target/preparacao-offline-p10-p21-20260921-01/governance.json",
+      "sha256": "ee77f74bc842d7d2d5c0f1aed03556a3861591c96b134bb664a7172b66a08ca6"
+    },
+    {
+      "path": "target/preparacao-offline-p10-p21-20260921-01/fleet-drift-confirmed.json",
+      "sha256": "c19bb63c4b1182fe0d133adc43458e75b62ddb5603d0d52a3e1620f59207f81f"
+    },
+    {
+      "path": "target/preparacao-offline-p10-p21-20260921-01/java-initial-xml-summary.json",
+      "sha256": "d166b9f900172f28175b680cb2fb57e664509d692b51861e1b8de40ca259d7a7"
+    },
+    {
+      "path": "target/preparacao-offline-p10-p21-20260921-01/java.log",
+      "sha256": "722b04eda467829904ec84bb8aea75f56518ea5e3ce7a3144f76b4300b017297"
+    },
+    {
+      "path": "target/preparacao-offline-p10-p21-20260921-01/java-boundaries.log",
+      "sha256": "1b3a5fb2fe95e2a72942a3fe064b59e9f055defb1570e224a0434029657fdf7d"
+    },
+    {
+      "path": "target/preparacao-offline-p10-p21-20260921-01/fleet-decision.log",
+      "sha256": "9e5ec5540802de6c0141efaa574c92e74e7cb7f0d13dba16d2e254aba83ffedb"
+    },
+    {
+      "path": "target/preparacao-offline-p10-p21-20260921-01/trail-before-close.log",
+      "sha256": "3aa7d816f31c89ac354b373390374b3c7319ced78e27564de12af2cba61d1812"
+    }
+  ]
+}

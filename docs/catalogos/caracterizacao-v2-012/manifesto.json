@@ -1,0 +1,457 @@
+{
+  "schemaVersion": "V2_012_CHARACTERIZATION_FOUNDATION_V1",
+  "task": {
+    "route": "Q-FND-01",
+    "block": 39,
+    "taskId": "V2-012/FUNDACAO_LOCAL",
+    "slice": "FUNDACAO_OFFLINE_PROVIDER_NEUTRAL"
+  },
+  "outcome": "FOUNDATION_OFFLINE_COMPLETE_Q01_PENDING_ORACLES",
+  "foundation": {
+    "executionMode": "OFFLINE_TEST_ONLY",
+    "evidenceClassification": "SYNTHETIC_FIXTURE",
+    "providerEvidence": "NOT_EXECUTED",
+    "aggregateProviderPass": false,
+    "networkAccess": false,
+    "realPayloads": false,
+    "databaseAccess": false,
+    "runtimeExecution": false,
+    "externalConfiguration": false,
+    "outputRoot": "target/v2-012-characterization"
+  },
+  "closedVocabularies": {
+    "stages": ["V2_012A", "V2_012B", "V2_012C"],
+    "entities": ["COLETAS", "MANIFESTOS", "COTACOES", "USUARIOS"],
+    "sourceKinds": ["DATA_EXPORT", "GRAPHQL"],
+    "oracleKinds": ["DATA_EXPORT_PROVIDER", "GRAPHQL_PROVIDER"],
+    "oracleAvailability": ["SYNTHETIC_IN_MEMORY_ONLY", "MISSING"],
+    "authorizationRequirements": ["EXPLICIT_OWNER_AUTHORIZATION"],
+    "authorizationStates": ["SYNTHETIC_TEST_ONLY", "MISSING"],
+    "executionValueRequirements": ["REQUIRED_AT_EXECUTION"],
+    "presence": ["ABSENT", "NULL", "VALUE"],
+    "paginationKinds": ["NUMERIC_PAGE", "RELAY_CURSOR"],
+    "terminalConditions": [
+      "EMPTY_PAGE_LOCAL_UNVERIFIED",
+      "PAGE_INFO_NO_NEXT_PAGE_LOCAL_UNVERIFIED"
+    ],
+    "orderingRoles": ["PARITY_ONLY_NOT_IDENTITY_OR_CURSOR", "ABSENT"],
+    "temporalTranslations": [
+      "BOUNDARIES_UNPROVEN",
+      "SOURCE_CIVIL_DATE_UNPROVEN",
+      "ABSENT_NO_TEMPORAL_FIELD"
+    ],
+    "timezoneRequirements": [
+      "EXPLICIT_REQUIRED",
+      "ORACLE_CONFIRMATION_REQUIRED",
+      "NOT_APPLICABLE"
+    ],
+    "timestampStates": ["VALID", "INVALID", "NOT_APPLICABLE"],
+    "timezoneStates": ["EXPLICIT_CONFIRMED", "UNCONFIRMED", "NOT_APPLICABLE"],
+    "evidenceClassifications": ["SYNTHETIC_FIXTURE"],
+    "profileStatuses": ["PREPARED_NOT_EXECUTED"],
+    "observationStatuses": ["SYNTHETIC_STRUCTURE_ACCEPTED", "FAIL_CLOSED"],
+    "gateStatuses": ["ORACLE_REQUIRED"],
+    "scenarioOutcomes": ["SYNTHETIC_STRUCTURE_ACCEPTED", "FAIL_CLOSED"],
+    "foundationOutcomes": [
+      "FOUNDATION_OFFLINE_COMPLETE_Q01_PENDING_ORACLES",
+      "FOUNDATION_FAIL_CLOSED"
+    ],
+    "requiredChecks": [
+      "SYNTHETIC_ORACLE_AVAILABLE",
+      "SYNTHETIC_AUTHORIZATION_CONTEXT",
+      "EXPLICIT_SCOPES",
+      "ROOT_MATCH",
+      "PATH_SET_MATCH",
+      "FIELD_TYPES_MATCH",
+      "FILTERS_MATCH",
+      "RELATIONSHIPS_PRESERVED",
+      "ABSENCE_POLICY_PRESERVED",
+      "SOURCE_KEY_VALID",
+      "PRESENCE_TRI_STATE_TRACKED",
+      "TERMINAL_CONDITION_MET",
+      "LIMITS_RESPECTED",
+      "ORDERING_PARITY_VALID",
+      "TEMPORAL_EVIDENCE_VALID",
+      "STATUS_SEMANTICS_VALID",
+      "CARDINALITY_MATCH",
+      "ENTITY_RULES_MATCH",
+      "SYNTHETIC_EVIDENCE_ONLY"
+    ],
+    "failClosedReasons": [
+      "PROFILE_BINDING_MISMATCH",
+      "ORACLE_MISSING",
+      "AUTHORIZATION_MISSING",
+      "SOURCE_INSTANCE_MISSING",
+      "TENANT_SCOPE_MISSING",
+      "RESERVED_SCOPE_VALUE",
+      "NON_SYNTHETIC_SCOPE_VALUE",
+      "ROOT_DRIFT",
+      "PATH_DRIFT",
+      "FIELD_SCOPE_MISMATCH",
+      "ROOT_SCALAR_ROLE_DRIFT",
+      "FIELD_TYPE_MISMATCH",
+      "FILTER_CONTRACT_DRIFT",
+      "RELATIONSHIP_INFERENCE_DRIFT",
+      "ABSENCE_POLICY_DRIFT",
+      "SOURCE_KEY_PATH_MISMATCH",
+      "SOURCE_KEY_TAGGING_MISSING",
+      "SOURCE_KEY_MISSING",
+      "SOURCE_KEY_NULL",
+      "SOURCE_KEY_TYPE_MISMATCH",
+      "SOURCE_KEY_VALUE_INVALID",
+      "SOURCE_KEY_COLLISION",
+      "PRESENCE_MODEL_INCOMPLETE",
+      "PAGINATION_SEMANTICS_DRIFT",
+      "TERMINALITY_INCOMPLETE",
+      "BYTE_LIMIT_EXCEEDED",
+      "ROW_LIMIT_EXCEEDED",
+      "PAGE_LIMIT_EXCEEDED",
+      "PAGE_SIZE_EXCEEDED",
+      "DEPTH_LIMIT_EXCEEDED",
+      "PATH_LIMIT_EXCEEDED",
+      "NODE_LIMIT_EXCEEDED",
+      "INVALID_TIMESTAMP",
+      "TEMPORAL_STATE_MISMATCH",
+      "TIMEZONE_UNCONFIRMED",
+      "TIMEZONE_MISMATCH",
+      "TEMPORAL_PRECEDENCE_DRIFT",
+      "STATUS_SEMANTICS_DRIFT",
+      "CARDINALITY_DRIFT",
+      "OBSERVATION_COUNT_MISMATCH",
+      "LOGICAL_ENTITY_LIMIT_EXCEEDED",
+      "EXPANSION_SEMANTICS_DRIFT",
+      "CHILD_IDENTITY_CONFLICT",
+      "CHILD_KEY_PATH_MISMATCH",
+      "CHILD_KEY_TAGGING_MISSING",
+      "CHILD_ATTRIBUTE_ASYMMETRY",
+      "ORDER_PARITY_VIOLATION",
+      "GRAPHQL_PAGE_SIZE_EXCEEDED",
+      "GRAPHQL_CURSOR_MISSING",
+      "GRAPHQL_CURSOR_REPEATED",
+      "GRAPHQL_CURSOR_CYCLE",
+      "UNSUPPORTED_EVIDENCE_CLASSIFICATION"
+    ]
+  },
+  "limits": {
+    "maximumBytes": 65536,
+    "maximumRows": 1000,
+    "maximumPages": 100,
+    "maximumDepth": 16,
+    "maximumPaths": 256,
+    "maximumNodes": 4096
+  },
+  "canonicalSources": [
+    {
+      "role": "DATA_EXPORT_PAGINATION_DECISION",
+      "path": "docs/adr/0004-paginacao-defensiva-dataexport.md",
+      "sha256": "0aca9a4ea53c58c96cc661aff72ca77de17a32482b42887db916c2eeaa24cb06"
+    },
+    {
+      "role": "GRAPHQL_HARNESS_DECISION",
+      "path": "docs/adr/0005-harness-graphql-read-only-paridade.md",
+      "sha256": "1c32b7fb4a4c1704a43dde9fccd178ed68498a5c08f8910e18e4c45f42461bc5"
+    },
+    {
+      "role": "CONTRACT_DRIFT_DECISION",
+      "path": "docs/adr/0012-drift-de-contrato-antes-da-promocao.md",
+      "sha256": "41c5af670de4b1b6894a89fd2b92fd7f552ece4d1c7adf61b0728a5e89d4a68c"
+    },
+    {
+      "role": "GRAPHQL_ADAPTER_DECISION",
+      "path": "docs/adr/0016-adaptador-graphql-transitorio.md",
+      "sha256": "fc7d658f9db207fa781c00fc83f17ebb005ea96a5c12435f4159ba0c73156d0a"
+    },
+    {
+      "role": "FIRST_WAVE_CONTRACT_DECISION",
+      "path": "docs/adr/0017-contratos-primeira-onda-e-completude.md",
+      "sha256": "ddef2eb8549a8c322648748bc89db9a40b7abab71027a94f988791196a250a5b"
+    },
+    {
+      "role": "FIRST_WAVE_IDENTITY_DECISION",
+      "path": "docs/adr/0018-identidade-e-crosswalk-da-primeira-onda.md",
+      "sha256": "8f948a04a87ad4173614243e3846b42dc65769c050b3363ebd67ece696488672"
+    },
+    {
+      "role": "USERS_SHADOW_DECISION",
+      "path": "docs/adr/0019-usuarios-current-history-em-sombra.md",
+      "sha256": "8c14cebc95add8299ddbb9838836050f100d907be8801e5ea66b4bd3df72b9be"
+    },
+    {
+      "role": "COLETAS_DOMAIN_DECISION",
+      "path": "docs/adr/0023-coletas-6908-dominio-presenca-frescor-status-e-schema.md",
+      "sha256": "1841ada44ea415cb9ded94e6077ea0eb60f895cc30f8ef939d6d0039eaa800ea"
+    },
+    {
+      "role": "MANIFESTOS_DOMAIN_DECISION",
+      "path": "docs/adr/0024-manifestos-6399-identidade-presenca-frescor-reducers.md",
+      "sha256": "f83fef24452997a58ce9637355300281a3233fd360667c4f9bf9e7125ffe6ef1"
+    },
+    {
+      "role": "FLEET_BLOCKS_PRESERVATION",
+      "path": "docs/adr/0025-frota-manifestos-identidade-dimensional-fail-closed.md",
+      "sha256": "c8a7ee99bc870bbd7fc6839fa40ad83b6b7c1724ab7cd2a23895e5645012eacf"
+    },
+    {
+      "role": "FIRST_WAVE_CONTRACT_CATALOG",
+      "path": "docs/catalogos/contratos-primeira-onda/manifesto.json",
+      "sha256": "d7910ff0e3d0f78bee57aaad5178561db8bcb0d0d253448531b606bcef45950c"
+    },
+    {
+      "role": "FIRST_WAVE_IDENTITY_CATALOG",
+      "path": "docs/catalogos/identidade-primeira-onda/manifesto.json",
+      "sha256": "15348b0074af78a29867b33a6333f6d7d20e1b3ee31300162d26dc54c7c33c2b"
+    },
+    {
+      "role": "COLETAS_STATUS_DECISION",
+      "path": "docs/catalogos/coletas-v2-010/decisao-v01.json",
+      "sha256": "077c4e806c3174dd4909e94e99a72847ba6b76868fce492561f9bb307a85422c"
+    },
+    {
+      "role": "MANIFESTOS_CONTRACT_CATALOG",
+      "path": "docs/catalogos/contratos-esl-6399/manifesto.json",
+      "sha256": "fc19e50cdfe0e91fcd192a17b65d6cc48f8f62dca13f755006d4e0fcfb8b86bd"
+    },
+    {
+      "role": "MANIFESTOS_IDENTITY_CATALOG",
+      "path": "docs/catalogos/identidade-manifestos/manifesto.json",
+      "sha256": "290ef5cbba142de8cf07c0a17948a8571ba7c9ac9673b0910786a960514e5a23"
+    },
+    {
+      "role": "MANIFESTOS_STATUS_DECISION",
+      "path": "docs/catalogos/manifestos-v2-026/decisao-v03.json",
+      "sha256": "7721b88a934b2a58ff19bd7cee53f7bd57023a31528c77143915d72005cd19af"
+    },
+    {
+      "role": "COTACOES_CONTRACT_CATALOG",
+      "path": "docs/catalogos/contratos-esl-6906/manifesto.json",
+      "sha256": "ce93c3e051381dcfa570d858262817f7d8c9cd3248b505cbff60c45f61c4dff9"
+    },
+    {
+      "role": "COTACOES_IDENTITY_CATALOG",
+      "path": "docs/catalogos/identidade-cotacoes/manifesto.json",
+      "sha256": "3c41036eff9ed4ce3357d3fcb4c5119a1a82222ce34493b4c428532413e7f811"
+    },
+    {
+      "role": "COTACOES_DOMAIN_DECISION",
+      "path": "docs/catalogos/cotacoes-v2-027/decisao-v01.json",
+      "sha256": "96a425c653e00889a1a4d6e97389e549468372ed252d66727191ca4aa0ea14ef"
+    },
+    {
+      "role": "COLETAS_REVALIDATION_RUNBOOK",
+      "path": "docs/runbooks/revalidar-contrato-dataexport-coletas-fretes.md",
+      "sha256": "a47c0b9833f8c676995b4853195e4052551934a5673689cb55082c3b03f4113e"
+    },
+    {
+      "role": "USERS_SHADOW_RUNBOOK",
+      "path": "docs/runbooks/usuarios-current-history-em-sombra.md",
+      "sha256": "74a64aaa682803d3d5e22c6d80b33beb30a8f6f7608c1868fd30975788deee5b"
+    }
+  ],
+  "profiles": [
+    {
+      "entity": "COLETAS",
+      "profileId": "V2_012_COLETAS_6908",
+      "sourceKind": "DATA_EXPORT",
+      "oracleKind": "DATA_EXPORT_PROVIDER",
+      "oracleExecutionStatus": "NOT_EXECUTED",
+      "authorizationRequirement": "EXPLICIT_OWNER_AUTHORIZATION",
+      "sourceInstanceRequirement": "REQUIRED_AT_EXECUTION",
+      "tenantScopeRequirement": "REQUIRED_AT_EXECUTION",
+      "contract": {
+        "contractId": "dataexport-6908",
+        "contractVersion": "2026-08-31.v2-025a.1",
+        "documentReference": "dataexport-coletas",
+        "contractFingerprint": "052d84c37d9c55ae2b2b4891eb4771c68158ee7365402a1388cc68256c67cc59",
+        "identityFingerprint": "0ca2cd5ce2573d0bdec31d9bc141887f2d58bc79cd67d289981034a4865705e1"
+      },
+      "sourceKey": {"path": "/id", "wireTypes": ["INTEGER"], "typeTagged": true},
+      "businessAliases": ["/sequence_code"],
+      "filters": ["picks.request_date:REQUIRED", "scopes.by_updated_at:COMPLEMENTARY_NEVER_WATERMARK"],
+      "pagination": "NUMERIC_PAGE:EMPTY_PAGE_LOCAL_UNVERIFIED:MAX_100:SHORT_NOT_TERMINAL",
+      "temporalTranslation": "BOUNDARIES_UNPROVEN",
+      "profileStatus": "PREPARED_NOT_EXECUTED",
+      "gateStatus": "ORACLE_REQUIRED",
+      "profilePath": "src/test/resources/contracts/v2-012/profiles/coletas-6908.profile.json",
+      "profileSha256": "d0ffb7c54a935c3a62a9501791f6a8119c9f3ec8bc72d7171066778510e95a97",
+      "profileFingerprint": "50371854573065136e9dbe35c722c367a5afec3cecccb367fe6d41e882b33c46",
+      "fixturePath": "src/test/resources/contracts/v2-012/fixtures/coletas-6908.synthetic.json",
+      "fixtureSha256": "3faae2d7ab68da5a6431012a1d6bd1eb539752e6d003d6e1997d31b6215355b4",
+      "fixtureFingerprint": "1b2eecd3fa3b704dfbdcc9299059aa70e399e0a6f9c3ef15a5e5ea02ff8fdc15",
+      "scenarioCount": 55,
+      "acceptedScenarioCount": 3,
+      "failClosedScenarioCount": 52
+    },
+    {
+      "entity": "MANIFESTOS",
+      "profileId": "V2_012_MANIFESTOS_6399",
+      "sourceKind": "DATA_EXPORT",
+      "oracleKind": "DATA_EXPORT_PROVIDER",
+      "oracleExecutionStatus": "NOT_EXECUTED",
+      "authorizationRequirement": "EXPLICIT_OWNER_AUTHORIZATION",
+      "sourceInstanceRequirement": "REQUIRED_AT_EXECUTION",
+      "tenantScopeRequirement": "REQUIRED_AT_EXECUTION",
+      "contract": {
+        "contractId": "dataexport-6399",
+        "contractVersion": "2026-09-04.v2-025b.2",
+        "documentReference": "dataexport-manifestos",
+        "contractFingerprint": "30181093f00f47507d1910d9806a97697118ab671aeae0598d21a4a2726a7cb8",
+        "identityFingerprint": "ad2e3457a91961372dd29cb96bd6f2cb5fd6f67614d1255303787a8e2c4085c3"
+      },
+      "sourceKey": {"path": "/sequence_code", "wireTypes": ["INTEGER"], "typeTagged": true},
+      "childIdentities": ["PICK:/mft_pfs_pck_sequence_code", "MDFE:/mft_mfs_key"],
+      "attributeOnlyPaths": ["/mft_mfs_number"],
+      "rootScalarPaths": ["/mdfe_status"],
+      "filters": ["manifests.service_date:REQUIRED"],
+      "pagination": "NUMERIC_PAGE:EMPTY_PAGE_LOCAL_UNVERIFIED:MAX_100:PER_UNPROVEN:SHORT_NOT_TERMINAL",
+      "temporalTranslation": "SOURCE_CIVIL_DATE_UNPROVEN",
+      "profileStatus": "PREPARED_NOT_EXECUTED",
+      "gateStatus": "ORACLE_REQUIRED",
+      "profilePath": "src/test/resources/contracts/v2-012/profiles/manifestos-6399.profile.json",
+      "profileSha256": "2774893397b0ff7b5b881d021f9f734a092040dbfa1dc47bd0f60a21eb8a5da9",
+      "profileFingerprint": "d99bf5dbf51b9a3764671aad3a7a76833214d1cbbfe8ee4af6a977734e7c7ba2",
+      "fixturePath": "src/test/resources/contracts/v2-012/fixtures/manifestos-6399.synthetic.json",
+      "fixtureSha256": "785ad1c6041105eb8e23941e9923fb57c4eaf58859515b14e66448e45dba0231",
+      "fixtureFingerprint": "3fe3d005923b9e2efbd9f6d3623f75d0ba4e4b49bd44ec5038eb90edbb565e09",
+      "scenarioCount": 41,
+      "acceptedScenarioCount": 4,
+      "failClosedScenarioCount": 37
+    },
+    {
+      "entity": "COTACOES",
+      "profileId": "V2_012_COTACOES_6906",
+      "sourceKind": "DATA_EXPORT",
+      "oracleKind": "DATA_EXPORT_PROVIDER",
+      "oracleExecutionStatus": "NOT_EXECUTED",
+      "authorizationRequirement": "EXPLICIT_OWNER_AUTHORIZATION",
+      "sourceInstanceRequirement": "REQUIRED_AT_EXECUTION",
+      "tenantScopeRequirement": "REQUIRED_AT_EXECUTION",
+      "contract": {
+        "contractId": "dataexport-6906",
+        "contractVersion": "2026-09-04.v2-025b.1",
+        "documentReference": "dataexport-cotacoes",
+        "contractFingerprint": "4bd641aa5ebe1c069776dc7009377d43c4c1d3e26727969667cc7adc01071166",
+        "identityFingerprint": "355db9b9998d0366378c763b10738c875772d98bc649bf7b3bcceabbfbe345cb"
+      },
+      "sourceKey": {"path": "/sequence_code", "wireTypes": ["INTEGER"], "typeTagged": true},
+      "forbiddenUniversalPaths": ["/id", "/updated_at"],
+      "filters": ["quotes.requested_at:REQUIRED"],
+      "ordering": "sequence_code asc:PARITY_ONLY_NOT_IDENTITY_OR_CURSOR",
+      "pagination": "NUMERIC_PAGE:EMPTY_PAGE_LOCAL_UNVERIFIED:MAX_1000:PER_UNPROVEN:SHORT_NOT_TERMINAL",
+      "temporalTranslation": "SOURCE_CIVIL_DATE_UNPROVEN",
+      "profileStatus": "PREPARED_NOT_EXECUTED",
+      "gateStatus": "ORACLE_REQUIRED",
+      "profilePath": "src/test/resources/contracts/v2-012/profiles/cotacoes-6906.profile.json",
+      "profileSha256": "0aff236196bae11046ecb4929096555fb9c86dd133deaaa84351d78a90027e3b",
+      "profileFingerprint": "57631b76ae16673a0a0bc795a95ca6bd2050a2665e77e5a6e20413cfc45b17e7",
+      "fixturePath": "src/test/resources/contracts/v2-012/fixtures/cotacoes-6906.synthetic.json",
+      "fixtureSha256": "49a5cf0f4f3be4ac748b4b84df11a44c4028309d93e81c00aa0cef68ead61449",
+      "fixtureFingerprint": "fd6a189bde461b35d4a47cbdbe37c72d3d959edebec03d376e0ace96e33582eb",
+      "scenarioCount": 33,
+      "acceptedScenarioCount": 3,
+      "failClosedScenarioCount": 30
+    },
+    {
+      "entity": "USUARIOS",
+      "profileId": "V2_012_USUARIOS_INDIVIDUAL",
+      "sourceKind": "GRAPHQL",
+      "oracleKind": "GRAPHQL_PROVIDER",
+      "oracleExecutionStatus": "NOT_EXECUTED",
+      "authorizationRequirement": "EXPLICIT_OWNER_AUTHORIZATION",
+      "sourceInstanceRequirement": "REQUIRED_AT_EXECUTION",
+      "tenantScopeRequirement": "REQUIRED_AT_EXECUTION",
+      "contract": {
+        "contractId": "graphql-individual",
+        "contractVersion": "2026-08-31.v2-025a.1",
+        "documentReference": "graphql-users-snapshot",
+        "contractFingerprint": "a650e5e8313e6d45bff326dd8ab15920ba23da8e44e9237f538c4cbce76aca7c",
+        "identityFingerprint": "8e8ad89777277f3b8bf72b4b63f65d8fa813843380f44da99f0b035bbf788528"
+      },
+      "sourceKey": {"path": "/node/id", "wireTypes": ["INTEGER", "STRING"], "typeTagged": true},
+      "forbiddenUniversalPaths": ["/node/updatedAt"],
+      "filters": ["individual.enabled:REQUIRED_TRUE"],
+      "ordering": "ABSENT",
+      "pagination": "RELAY_CURSOR:PAGE_INFO_NO_NEXT_PAGE_LOCAL_UNVERIFIED:MAX_20:SHORT_NOT_TERMINAL",
+      "temporalTranslation": "ABSENT_NO_TEMPORAL_FIELD",
+      "absencePolicy": "NO_DEACTIVATION_BY_ABSENCE",
+      "profileStatus": "PREPARED_NOT_EXECUTED",
+      "gateStatus": "ORACLE_REQUIRED",
+      "profilePath": "src/test/resources/contracts/v2-012/profiles/usuarios-individual.profile.json",
+      "profileSha256": "171b965c011d1f482b35fdb9e4dff60a7798d90ee83b96d084183d9c542fae2e",
+      "profileFingerprint": "44e33999e8ef260d050b6ceb75985ee236de343543ee478cc34facf57f3c58e4",
+      "fixturePath": "src/test/resources/contracts/v2-012/fixtures/usuarios-individual.synthetic.json",
+      "fixtureSha256": "b0f917914e07589dbacbf5d12a7478b76feb3a930126f68fec233bc23eedbfc6",
+      "fixtureFingerprint": "c72d02b44d7affb54a0d565c53540e2425d1b6af6b7e9a9b42608631cc58e5d8",
+      "scenarioCount": 37,
+      "acceptedScenarioCount": 3,
+      "failClosedScenarioCount": 34
+    }
+  ],
+  "counterexamples": [
+    "SYNTH_ORACLE_MISSING",
+    "SYNTH_AUTHORIZATION_MISSING",
+    "SYNTH_RESERVED_SOURCE_INSTANCE_DEFAULT",
+    "SYNTH_SOURCE_KEY_FIELD_WEAKEST_PRESENCE",
+    "SYNTH_RELAY_FLAG_ON_NUMERIC_PAGE",
+    "SYNTH_SHORT_PAGE_FALSE_TERMINAL",
+    "SYNTH_TEMPORAL_TRANSLATION_DRIFT",
+    "SYNTH_STATUS_COUNT_PRESENCE_MISMATCH",
+    "SYNTH_CHILD_DISTINCT_ZERO_WITH_COUNT",
+    "SYNTH_MDFE_ATTRIBUTE_AS_IDENTITY",
+    "SYNTH_ORDER_TIE_VIOLATION",
+    "SYNTH_TEMPORAL_VALID_WITHOUT_VALUES",
+    "SYNTH_CURSOR_MISSING",
+    "SYNTH_CURSOR_REPEATED",
+    "SYNTH_CURSOR_CYCLE",
+    "SYNTH_HAS_NEXT_AT_LIMIT",
+    "SYNTH_DEACTIVATION_BY_ABSENCE"
+  ],
+  "entityQ01": [
+    {
+      "route": "Q-USR-01",
+      "entity": "USUARIOS",
+      "trailStatus": "CANDIDATO",
+      "completion": "OPEN",
+      "requiredOracle": "GRAPHQL_PROVIDER"
+    },
+    {
+      "route": "Q-COL-01",
+      "entity": "COLETAS",
+      "trailStatus": "CANDIDATO",
+      "completion": "OPEN",
+      "requiredOracle": "DATA_EXPORT_PROVIDER"
+    },
+    {
+      "route": "Q-MAN-01",
+      "entity": "MANIFESTOS",
+      "trailStatus": "EXTERNAL_HOLD",
+      "completion": "OPEN",
+      "requiredOracle": "DATA_EXPORT_PROVIDER"
+    },
+    {
+      "route": "Q-COT-01",
+      "entity": "COTACOES",
+      "trailStatus": "CANDIDATO",
+      "completion": "OPEN",
+      "requiredOracle": "DATA_EXPORT_PROVIDER"
+    }
+  ],
+  "futureGates": [
+    "EXPLICIT_OWNER_AUTHORIZATION",
+    "EXPLICIT_SOURCE_INSTANCE",
+    "EXPLICIT_TENANT_SCOPE",
+    "AUTHORIZED_ENTITY_ORACLE",
+    "SANITIZED_STRUCTURAL_EVIDENCE",
+    "INDEPENDENT_ENTITY_RESULT"
+  ],
+  "prohibitedScope": [
+    "BOOTSTRAP",
+    "R01",
+    "R02",
+    "REAL_PARITY",
+    "SWEEP",
+    "PUBLICATION",
+    "CUTOVER",
+    "E2E",
+    "FLEET_IMPLEMENTATION"
+  ]
+}

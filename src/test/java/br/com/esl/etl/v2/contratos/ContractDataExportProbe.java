@@ -106,7 +106,8 @@ public final class ContractDataExportProbe {
     }
 
     private DataExportTemplate templateFor(final int templateId) {
-        for (final DataExportTemplate template : DataExportTemplate.values()) {
+        for (final DataExportTemplate template :
+                java.util.List.of(DataExportTemplate.COLETAS, DataExportTemplate.FRETES)) {
             if (template.templateId() == templateId) {
                 return template;
             }
@@ -127,7 +128,8 @@ public final class ContractDataExportProbe {
         Objects.requireNonNull(configuration, "A configuração de contrato é obrigatória.");
         final Map<DataExportTemplate, ContractRemoteCallBudget> budgets =
                 new EnumMap<>(DataExportTemplate.class);
-        for (final DataExportTemplate template : DataExportTemplate.values()) {
+        for (final DataExportTemplate template :
+                java.util.List.of(DataExportTemplate.COLETAS, DataExportTemplate.FRETES)) {
             budgets.put(
                     template, new ContractRemoteCallBudget(configuration.maxCallsFor(template)));
         }
@@ -139,7 +141,8 @@ public final class ContractDataExportProbe {
         Objects.requireNonNull(budgets, "Os orçamentos de chamadas são obrigatórios.");
         final Map<DataExportTemplate, ContractRemoteCallBudget> result =
                 new EnumMap<>(DataExportTemplate.class);
-        for (final DataExportTemplate template : DataExportTemplate.values()) {
+        for (final DataExportTemplate template :
+                java.util.List.of(DataExportTemplate.COLETAS, DataExportTemplate.FRETES)) {
             final ContractRemoteCallBudget budget = budgets.get(template);
             if (budget == null) {
                 throw new IllegalArgumentException("Falta orçamento para o template Data Export.");

@@ -1,0 +1,170 @@
+{
+  "version": 1,
+  "block": 54,
+  "status": "PARTIAL_NOT_ACCEPTED",
+  "tests": 1065,
+  "testFailures": 0,
+  "testErrors": 0,
+  "testSkips": 4,
+  "build": "JAVA17_OFFLINE_VERIFY_PASS",
+  "database": "localhost/ETL_SISTEMA_V2_SHADOW",
+  "installedThrough": "V020",
+  "pendingMigration": "",
+  "catalogSha256": "6a4d90971e7a111d695ace72cac98983fef8a1ef6b080153b0897a8dc27af45a",
+  "databaseRows": 5328,
+  "originalGrants": 22,
+  "proposedAdditionalGrants": 3,
+  "additionalGrantsApplied": true,
+  "originalMappings": 2,
+  "originalScopes": 8,
+  "mappingVersion": 15,
+  "scopeVersion": 1,
+  "originalUntil": "2026-10-07T22:34:30.615Z",
+  "reservations": 109,
+  "campaignsOpened": 6,
+  "campaignsClosed": 6,
+  "maximumUnits": 128,
+  "b53Reservations": 112,
+  "b53LedgerSha256": "dc45f84046fa1c2a6184dc181cc9bf1b39878c5c94ed4574e22d761f0cfc3df1",
+  "priorAttempts": 95,
+  "priorPublications": 75,
+  "retainedExtracting": 8,
+  "newAttempts": 8,
+  "newPublications": 4,
+  "jarCasesExecuted": 28,
+  "httpRequests": 22,
+  "syntheticComparisonCases": 6,
+  "authorizationMatrix": "PARTIAL_39_PASS_MAPPING_AND_CONSUME_RESTART_OPS02_RECOVERED",
+  "newRevisionPhysicallyExecuted": true,
+  "physicalManifestSha256": "d382d4d39164cdb62918c21f55966e91a6c348a91a001d9de5828b8f39eeb208",
+  "preparedManifestSha256": "f2fe15f0ddaa3f8f92c07aef54e909df917eb8e3055b652b40af375f99e1a3bd",
+  "newCanonicalAcceptances": 0,
+  "checkboxes": 114,
+  "done": 60,
+  "pending": 54,
+  "openRoutes": 196,
+  "pendingV020PhysicallyQualified": true,
+  "additionalGrantsAuthorized": true,
+  "newRevisionInstalled": true,
+  "supplementalCampaignAuthorized": true,
+  "currentGrants": 25,
+  "operatorMappingVersion": 1,
+  "finalPhysicalManifestSha256": "5d2632ab3577ea803eb451ef59ea80c537023c88f7f1f0b7bca471ffc0f2b23f",
+  "finalRevisionJarCases": 16,
+  "finalManualJarCases": 1,
+  "authorityHarnessCasesPassed": 39,
+  "temporalWindows": 6,
+  "temporalDistinctOccurrences": 6,
+  "temporalDispatched": 0,
+  "mappingRecoveryVerified": true,
+  "mappingRevocationMatrixCompleted": true,
+  "replayForcePhysicallyVerified": false,
+  "driftAlertPhysicallyObserved": false,
+  "fullTemporalPhysicalMatrixCompleted": false,
+  "activeUserTransactions": 0,
+  "restrictedSessions": 0,
+  "b54AuditedPages": 10,
+  "b54AuditedEntries": 12,
+  "b54AdditionalDatabaseRows": 334,
+  "installedV020Sha256": "7ba03d5627016e722e077ca2c6a7eec926ea4779dccce8c6010d77927ed14df4",
+  "proofFiles": [
+    {
+      "path": "target/bloco54/resume-approved-supplemental/results.json",
+      "sha256": "964a3582f711c782883ceaf5173d28c7eefe40d4cfe150131d0529e320a2e977"
+    },
+    {
+      "path": "target/bloco54/authority-matrix-results.json",
+      "sha256": "7af4d3c44bc541c3f840ff17d15aa1bd64ae7c5513e47c24b578086daf73ae79"
+    },
+    {
+      "path": "target/bloco54/resume-approved-supplemental/final-preservation-v3.log",
+      "sha256": "aeff433546038306d058dc9839286ee760b3bdddc6e36692535993941f6646dd"
+    },
+    {
+      "path": "target/bloco54/resume-approved-supplemental/final-catalog.log",
+      "sha256": "b474fb221de0afb9bb2df7a67187a2f631b9fe0b8dd705c2f0289a01a001f765"
+    },
+    {
+      "path": "target/bloco54/resume-approved-supplemental/recovery-apply.log",
+      "sha256": "94a7fc3086274e2c88cdebe0d44963702e61393eec6904cca8160fc8c8f5c0e7"
+    },
+    {
+      "path": "target/bloco54/resume-approved-supplemental/recovery-verify-new-connection.log",
+      "sha256": "724efba483ffa543f259ade6bddba725394eed5f7b0f2bf211a4a9a9b6eb5162"
+    },
+    {
+      "path": "target/bloco54/resume-approved-supplemental/qualify-upgrade.sql.log",
+      "sha256": "af1e2362b705d6416c969011eb96cf55b362175eea884dc61aefe93385954994"
+    },
+    {
+      "path": "target/bloco54/resume-approved-supplemental/qualify-baseline.sql.log",
+      "sha256": "af1e2362b705d6416c969011eb96cf55b362175eea884dc61aefe93385954994"
+    },
+    {
+      "path": "target/bloco54/resume-approved-supplemental/install-pending.sql.log",
+      "sha256": "4dab96127b5dd3d0b3a8b85ab9876acbea13089503eb0e3006cdcc0a2e574e6b"
+    },
+    {
+      "path": "target/bloco54/resume-approved-supplemental/apply-approved-grants.sql.log",
+      "sha256": "3a5ab1be9b7fa440953bba8f554c25dc58a771128f918da06871d80d4560e8b7"
+    }
+  ],
+  "scopeMaximumVersion": 10,
+  "changedOriginalScopeId": 1,
+  "sixthCampaignAuthorized": true,
+  "seventhCampaignAuthorized": false,
+  "remainingUnits": 19,
+  "ops02RecoveryVerified": true,
+  "temporalExecutionImplemented": true,
+  "requiredRejectedDriftAlertImplemented": true,
+  "preparedRevisionPhysicallyExecuted": false,
+  "preparedRevisionOfflineExportWindows": 3,
+  "preparedRevisionDiagnosed": true,
+  "finalVerifyLog": "target/bloco54/resume-sixth/verify-Full-20260908T134902.log",
+  "sixthProofFiles": [
+    {
+      "path": "target/bloco54/resume-sixth/results.json",
+      "sha256": "a0bc3d5179729c6f9ddf2070676dae296cca7bf1531aab2af80f778c66a09b85"
+    },
+    {
+      "path": "target/bloco54/resume-sixth/authority-matrix-results.json",
+      "sha256": "52e770236e3adb305594c89bcde120dc1a533cc29b18fd42ba235dea6bb2738d"
+    },
+    {
+      "path": "target/bloco54/resume-sixth/recovery-apply.log",
+      "sha256": "a6bd756c4dcdc0bced4e4add79cf26073130e0aede6087afb5e78fe1e151a9e4"
+    },
+    {
+      "path": "target/bloco54/resume-sixth/recovery-new-connection.log",
+      "sha256": "724efba483ffa543f259ade6bddba725394eed5f7b0f2bf211a4a9a9b6eb5162"
+    },
+    {
+      "path": "target/bloco54/resume-sixth/final-preservation.log",
+      "sha256": "190a5367e1166073f0962aacedec5a83eb1a4de8edeb225d4af1ede21000fd32"
+    },
+    {
+      "path": "target/bloco54/resume-sixth/final-catalog.log",
+      "sha256": "b11f24871e55201ef37a74b7c0a27a807bcbe21f167a2a2ad03d7f1c2005377a"
+    },
+    {
+      "path": "target/bloco54/resume-sixth/manual-diagnose-v4.log",
+      "sha256": "261f794062b1025ebc8bd627b55690057a8e939f7db39fb05c7cbff2f91d6b42"
+    },
+    {
+      "path": "target/bloco54/resume-sixth/offline-reviewed-export.log",
+      "sha256": "49b1917474e9c97438083d33235ee33ba64847136f34fde016da05774f253008"
+    },
+    {
+      "path": "target/bloco54/resume-sixth/residual-budget-selftest.log",
+      "sha256": "6c4470124b4640f2f4bd41456ead782d4387e51e34782eb0c4554a26ec3541d3"
+    },
+    {
+      "path": "target/bloco54/resume-sixth/recovery-utc-selftest.log",
+      "sha256": "f033967fff9a7f319ebe38e8d8f9218cb006ae621c82752f957dc2b078da59d1"
+    },
+    {
+      "path": "target/bloco54/resume-sixth/verify-Full-20260908T134902.log",
+      "sha256": "819a7a8110342e7fc08e44c3268264de1fc5b43ec9d928e9011ab3f9279ebe4e"
+    }
+  ]
+}

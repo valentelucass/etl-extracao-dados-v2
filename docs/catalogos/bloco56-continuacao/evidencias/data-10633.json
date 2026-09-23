@@ -1,0 +1,380 @@
+{
+  "template": 10633,
+  "httpStatus": 200,
+  "curlExit": 0,
+  "bytes": 2558,
+  "elapsedMilliseconds": 1216,
+  "failure": null,
+  "sample": {
+    "physicalRows": 2,
+    "profiledRows": 2,
+    "physicalLimitExceeded": false,
+    "empty": false,
+    "profiles": [
+      {
+        "path": "/cnr_c_s_fit_corporation_sequence_number",
+        "observations": 2,
+        "types": {
+          "INTEGER": 2
+        },
+        "emptyArrays": 0,
+        "arrayItems": 0,
+        "unprofiledObjectKeys": 0
+      },
+      {
+        "path": "/cnr_c_s_fit_dpn_delivery_prediction_at",
+        "observations": 2,
+        "types": {
+          "STRING": 2
+        },
+        "emptyArrays": 0,
+        "arrayItems": 0,
+        "unprofiledObjectKeys": 0
+      },
+      {
+        "path": "/cnr_c_s_fit_dpn_performance_finished_at",
+        "observations": 2,
+        "types": {
+          "STRING": 2
+        },
+        "emptyArrays": 0,
+        "arrayItems": 0,
+        "unprofiledObjectKeys": 0
+      },
+      {
+        "path": "/cnr_c_s_fit_dyn_drt_nickname",
+        "observations": 2,
+        "types": {
+          "STRING": 2
+        },
+        "emptyArrays": 0,
+        "arrayItems": 0,
+        "unprofiledObjectKeys": 0
+      },
+      {
+        "path": "/cnr_c_s_fit_dyn_name",
+        "observations": 2,
+        "types": {
+          "STRING": 2
+        },
+        "emptyArrays": 0,
+        "arrayItems": 0,
+        "unprofiledObjectKeys": 0
+      },
+      {
+        "path": "/cnr_c_s_fit_fte_lce_occurrence_at",
+        "observations": 2,
+        "types": {
+          "STRING": 2
+        },
+        "emptyArrays": 0,
+        "arrayItems": 0,
+        "unprofiledObjectKeys": 0
+      },
+      {
+        "path": "/cnr_c_s_fit_fte_lce_ore_description",
+        "observations": 2,
+        "types": {
+          "STRING": 2
+        },
+        "emptyArrays": 0,
+        "arrayItems": 0,
+        "unprofiledObjectKeys": 0
+      },
+      {
+        "path": "/cnr_c_s_fit_invoices_mapping",
+        "observations": 2,
+        "types": {
+          "ARRAY": 2
+        },
+        "emptyArrays": 0,
+        "arrayItems": 3,
+        "unprofiledObjectKeys": 0
+      },
+      {
+        "path": "/cnr_c_s_fit_invoices_mapping/*",
+        "observations": 3,
+        "types": {
+          "STRING": 3
+        },
+        "emptyArrays": 0,
+        "arrayItems": 0,
+        "unprofiledObjectKeys": 0
+      },
+      {
+        "path": "/cnr_c_s_fit_invoices_value",
+        "observations": 2,
+        "types": {
+          "STRING": 2
+        },
+        "emptyArrays": 0,
+        "arrayItems": 0,
+        "unprofiledObjectKeys": 0
+      },
+      {
+        "path": "/cnr_c_s_fit_invoices_volumes",
+        "observations": 2,
+        "types": {
+          "INTEGER": 2
+        },
+        "emptyArrays": 0,
+        "arrayItems": 0,
+        "unprofiledObjectKeys": 0
+      },
+      {
+        "path": "/cnr_c_s_fit_pyr_nickname",
+        "observations": 2,
+        "types": {
+          "STRING": 2
+        },
+        "emptyArrays": 0,
+        "arrayItems": 0,
+        "unprofiledObjectKeys": 0
+      },
+      {
+        "path": "/cnr_c_s_fit_real_weight",
+        "observations": 2,
+        "types": {
+          "STRING": 2
+        },
+        "emptyArrays": 0,
+        "arrayItems": 0,
+        "unprofiledObjectKeys": 0
+      },
+      {
+        "path": "/cnr_c_s_fit_rpt_ads_cty_name",
+        "observations": 2,
+        "types": {
+          "STRING": 2
+        },
+        "emptyArrays": 0,
+        "arrayItems": 0,
+        "unprofiledObjectKeys": 0
+      },
+      {
+        "path": "/cnr_c_s_fit_rpt_nickname",
+        "observations": 2,
+        "types": {
+          "STRING": 2
+        },
+        "emptyArrays": 0,
+        "arrayItems": 0,
+        "unprofiledObjectKeys": 0
+      },
+      {
+        "path": "/cnr_c_s_fit_sdr_ads_cty_name",
+        "observations": 2,
+        "types": {
+          "STRING": 2
+        },
+        "emptyArrays": 0,
+        "arrayItems": 0,
+        "unprofiledObjectKeys": 0
+      },
+      {
+        "path": "/cnr_c_s_fit_sdr_nickname",
+        "observations": 2,
+        "types": {
+          "STRING": 2
+        },
+        "emptyArrays": 0,
+        "arrayItems": 0,
+        "unprofiledObjectKeys": 0
+      },
+      {
+        "path": "/cnr_c_s_fit_taxed_weight",
+        "observations": 2,
+        "types": {
+          "STRING": 2
+        },
+        "emptyArrays": 0,
+        "arrayItems": 0,
+        "unprofiledObjectKeys": 0
+      },
+      {
+        "path": "/cnr_c_s_fit_total_cubic_volume",
+        "observations": 2,
+        "types": {
+          "STRING": 2
+        },
+        "emptyArrays": 0,
+        "arrayItems": 0,
+        "unprofiledObjectKeys": 0
+      },
+      {
+        "path": "/cnr_c_s_read_volumes",
+        "observations": 2,
+        "types": {
+          "INTEGER": 2
+        },
+        "emptyArrays": 0,
+        "arrayItems": 0,
+        "unprofiledObjectKeys": 0
+      },
+      {
+        "path": "/cnr_cis_eoe_psn_name",
+        "observations": 2,
+        "types": {
+          "STRING": 2
+        },
+        "emptyArrays": 0,
+        "arrayItems": 0,
+        "unprofiledObjectKeys": 0
+      },
+      {
+        "path": "/cnr_crn_psn_nickname",
+        "observations": 2,
+        "types": {
+          "STRING": 2
+        },
+        "emptyArrays": 0,
+        "arrayItems": 0,
+        "unprofiledObjectKeys": 0
+      },
+      {
+        "path": "/finished_at",
+        "observations": 2,
+        "types": {
+          "STRING": 2
+        },
+        "emptyArrays": 0,
+        "arrayItems": 0,
+        "unprofiledObjectKeys": 0
+      },
+      {
+        "path": "/sequence_code",
+        "observations": 2,
+        "types": {
+          "INTEGER": 2
+        },
+        "emptyArrays": 0,
+        "arrayItems": 0,
+        "unprofiledObjectKeys": 0
+      },
+      {
+        "path": "/started_at",
+        "observations": 2,
+        "types": {
+          "STRING": 2
+        },
+        "emptyArrays": 0,
+        "arrayItems": 0,
+        "unprofiledObjectKeys": 0
+      },
+      {
+        "path": "/status",
+        "observations": 2,
+        "types": {
+          "STRING": 2
+        },
+        "emptyArrays": 0,
+        "arrayItems": 0,
+        "unprofiledObjectKeys": 0
+      },
+      {
+        "path": "/type",
+        "observations": 2,
+        "types": {
+          "STRING": 2
+        },
+        "emptyArrays": 0,
+        "arrayItems": 0,
+        "unprofiledObjectKeys": 0
+      }
+    ],
+    "candidateProfiles": [
+      {
+        "path": "/accounting_credit_id",
+        "missing": 2,
+        "nulls": 0,
+        "nonScalar": 0,
+        "sampledValues": 0,
+        "sampledDistinct": 0,
+        "sampledDuplicateValues": 0,
+        "identityProven": false
+      },
+      {
+        "path": "/accounting_debit_id",
+        "missing": 2,
+        "nulls": 0,
+        "nonScalar": 0,
+        "sampledValues": 0,
+        "sampledDistinct": 0,
+        "sampledDuplicateValues": 0,
+        "identityProven": false
+      },
+      {
+        "path": "/check_in_order_id",
+        "missing": 2,
+        "nulls": 0,
+        "nonScalar": 0,
+        "sampledValues": 0,
+        "sampledDistinct": 0,
+        "sampledDuplicateValues": 0,
+        "identityProven": false
+      },
+      {
+        "path": "/cnr_c_s_fit_corporation_sequence_number",
+        "missing": 0,
+        "nulls": 0,
+        "nonScalar": 0,
+        "sampledValues": 2,
+        "sampledDistinct": 2,
+        "sampledDuplicateValues": 0,
+        "identityProven": false
+      },
+      {
+        "path": "/freight_id",
+        "missing": 2,
+        "nulls": 0,
+        "nonScalar": 0,
+        "sampledValues": 0,
+        "sampledDistinct": 0,
+        "sampledDuplicateValues": 0,
+        "identityProven": false
+      },
+      {
+        "path": "/id",
+        "missing": 2,
+        "nulls": 0,
+        "nonScalar": 0,
+        "sampledValues": 0,
+        "sampledDistinct": 0,
+        "sampledDuplicateValues": 0,
+        "identityProven": false
+      },
+      {
+        "path": "/installment_id",
+        "missing": 2,
+        "nulls": 0,
+        "nonScalar": 0,
+        "sampledValues": 0,
+        "sampledDistinct": 0,
+        "sampledDuplicateValues": 0,
+        "identityProven": false
+      },
+      {
+        "path": "/insurance_claim_id",
+        "missing": 2,
+        "nulls": 0,
+        "nonScalar": 0,
+        "sampledValues": 0,
+        "sampledDistinct": 0,
+        "sampledDuplicateValues": 0,
+        "identityProven": false
+      },
+      {
+        "path": "/sequence_code",
+        "missing": 0,
+        "nulls": 0,
+        "nonScalar": 0,
+        "sampledValues": 2,
+        "sampledDistinct": 2,
+        "sampledDuplicateValues": 0,
+        "identityProven": false
+      }
+    ],
+    "universalUniquenessProven": false,
+    "stabilityProven": false
+  }
+}

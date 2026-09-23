@@ -1,0 +1,2134 @@
+{
+  "version": 1,
+  "scope": "P09–P33; local, real e operacional separados por fatia",
+  "status": "LOCAL_EXECUTABLE_WORK_COMPLETED_EXTERNAL_REQUIREMENTS_REMAIN",
+  "utc": "2026-09-22T03:32:53.766Z",
+  "newAcceptances": 0,
+  "construction": "39/45",
+  "historicalAcceptances": "67/115",
+  "sourceCalls": 0,
+  "databaseCalls": 0,
+  "physicalCampaignOpened": false,
+  "priorExternalRequirements": {
+    "count": 16,
+    "path": "docs/catalogos/requalificacao-pos0227/matriz-atual.json",
+    "sha256": "1167fca89fc5923ba353a86aa0cfe94e61ce6bb1e3d043190098c5cc38b2ace4",
+    "requirements": [
+      {
+        "id": "G02-PUBLICACAO",
+        "gate": "G02",
+        "ownerRole": "Owner do repositorio",
+        "nominalOwner": null,
+        "source": "STATES.md",
+        "status": "BLOQUEADO_POR_INPUT",
+        "priorRequirement": "Provider, remote/branch, conjunto exato aprovado, owners/aprovadores e autorizacao nominal de publicacao; inventario local nao e conjunto aprovado.",
+        "observedEvidence": [
+          "Consulta local atual: zero remotes; nenhum CODEOWNERS nos caminhos convencionais. Politica reserva provider, conjunto e aprovadores ao owner. Nenhum destino foi inferido."
+        ],
+        "remainingRequirement": "Provider, remote/branch, conjunto exato aprovado, owners/aprovadores e autorizacao nominal de publicacao; inventario local nao e conjunto aprovado.",
+        "origin": "STATES.md",
+        "locatedEvidence": [
+          {
+            "path": "CONTRIBUTING.md",
+            "sha256": "9f72feeb251b7def0b52bb3111f1b16e7a5349d4e0a11042f6d55fe2d8dfd8c3"
+          },
+          {
+            "path": "SECURITY.md",
+            "sha256": "b360360a5c241edfb3dfbc071f048e967eac6ef2311b0dd661a4a9cbe6605b6e"
+          }
+        ]
+      },
+      {
+        "id": "G02-CI",
+        "gate": "G02",
+        "ownerRole": "Owner do repositorio",
+        "nominalOwner": null,
+        "source": ".github/workflows/security.yml",
+        "status": "BLOQUEADO_POR_INPUT",
+        "priorRequirement": "Protecoes/checks obrigatorios e Gitleaks versionado; depois do efeito autorizado, SHA remoto, historico completo e recibos reais de CI vinculados ao mesmo SHA.",
+        "observedEvidence": [
+          "Workflows versionados e verificacoes locais existem; nao foi localizado recibo de CI de provedor vinculado ao SHA aprovado. Preparacao nao e execucao remota."
+        ],
+        "remainingRequirement": "Protecoes/checks obrigatorios e Gitleaks versionado; depois do efeito autorizado, SHA remoto, historico completo e recibos reais de CI vinculados ao mesmo SHA.",
+        "origin": ".github/workflows/security.yml",
+        "locatedEvidence": [
+          {
+            "path": ".github/workflows/ci.yml",
+            "sha256": "c53dfb8605cdef0b40599173ac61a3793e2f57311e67fe85a85df96ff96ed64a"
+          },
+          {
+            "path": ".github/workflows/security.yml",
+            "sha256": "dec59fada5f8c5ca00d343cd50936b5547a01e9212213c503649cb84ba708e3a"
+          },
+          {
+            "path": "docs/catalogos/preparacao-offline-p10-p21/validacoes.json",
+            "sha256": "91fc18202b8ee537c9d5f27e83d3b62144ad8773ebfe8968bbc45e678217d46e"
+          }
+        ]
+      },
+      {
+        "id": "FEED-BASELINE",
+        "gate": "FEED",
+        "ownerRole": "Responsavel de seguranca",
+        "nominalOwner": null,
+        "source": "docs/catalogos/vulnerabilidades-v2-015d/README.md",
+        "status": "BLOQUEADO_POR_INPUT",
+        "priorRequirement": "Feed/NVD autorizado, procedencia/frescor, janela e autoridade; relatorios JSON e HTML completos da revisao exata e aceite nominal da primeira baseline.",
+        "observedEvidence": [
+          "Relatório real JSON/HTML das 13 dependências, quatro achados; cache consultado em 26/08/2026, sem aceite de atualidade.",
+          "POM corrigido: Jackson 2.18.11/JDBC 12.8.2; NVD atualizado em 21/09; 13 dependências, zero achado/erro; 205 testes e parser real PASS.",
+          "Reutilizados JSON/HTML e resultado P11: NVD atualizado, 13 dependencias, zero achados/erros. Documento declara aceite nominal de Seguranca ainda ausente."
+        ],
+        "remainingRequirement": "Aceite nominal da baseline pelo responsável de segurança; não foi inferido da autorização de consulta pública.",
+        "origin": "docs/catalogos/vulnerabilidades-v2-015d/README.md",
+        "locatedEvidence": [
+          {
+            "path": "docs/catalogos/p11-publico-corrigido/RELATORIO.md",
+            "sha256": "fbb8435c7273e326cb7171cf61d841a7812fe8827c9ae7990f4bbc1c47b36a25"
+          },
+          {
+            "path": "docs/catalogos/p11-publico-corrigido/resultado.json",
+            "sha256": "c9f48273c4b950cbdb1d60ec956987670889c07ccb2c4ca99eb638ae1c03503c"
+          },
+          {
+            "path": "docs/catalogos/vulnerabilidades-v2-015d/README.md",
+            "sha256": "44dc03fe43322b45d0973a45febd8048bd4215d02cb50f52a5ec4792f74877bd"
+          }
+        ]
+      },
+      {
+        "id": "G05-AMBIENTE",
+        "gate": "G05",
+        "ownerRole": "DBA, Operacoes, Seguranca e Compliance",
+        "nominalOwner": null,
+        "source": "docs/catalogos/campanhas-integrais/ENTRADAS-E-EFEITOS-EXTERNOS.md",
+        "status": "BLOQUEADO_POR_INPUT",
+        "priorRequirement": "Alvo V2 dedicado isolado, principals segregados, TLS e ACL nominais, capacidade/quotas/storage, config/scheduler/alertas aprovados; sem valores de credenciais ou certificados.",
+        "observedEvidence": [
+          "Laboratorio local e provas SQL existem; alvo ONLINE confirmado nesta rodada. Nao comprovam ambiente definitivo, TLS/ACL, quotas e agenda aprovados."
+        ],
+        "remainingRequirement": "Alvo V2 dedicado isolado, principals segregados, TLS e ACL nominais, capacidade/quotas/storage, config/scheduler/alertas aprovados; sem valores de credenciais ou certificados.",
+        "origin": "docs/catalogos/campanhas-integrais/ENTRADAS-E-EFEITOS-EXTERNOS.md",
+        "locatedEvidence": [
+          {
+            "path": "docs/catalogos/campanhas-integrais/ENTRADAS-E-EFEITOS-EXTERNOS.md",
+            "sha256": "512ccfdbd037c758c9581548583ec3dfd51e8ebbc8929d41a211b4f48c502fcc"
+          },
+          {
+            "path": "SECURITY.md",
+            "sha256": "b360360a5c241edfb3dfbc071f048e967eac6ef2311b0dd661a4a9cbe6605b6e"
+          }
+        ]
+      },
+      {
+        "id": "G05-RETENCAO",
+        "gate": "G05",
+        "ownerRole": "DBA, Operacoes, Seguranca e Compliance",
+        "nominalOwner": null,
+        "source": "docs/runbooks/retencao-arquivamento-e-restore.md",
+        "status": "BLOQUEADO_POR_INPUT",
+        "priorRequirement": "Data owner e compliance ratificam policy/TTL por staging, logs e archive, autoridade de hold/release; DBA/Operacoes comprovam WORM ou imutabilidade equivalente, criptografia, capacidade e identidade de servico.",
+        "observedEvidence": [
+          "Lifecycle implementado/testado localmente; runbook declara TTL candidato nao aprovado e identidades/retenção nominal pendentes."
+        ],
+        "remainingRequirement": "Data owner e compliance ratificam policy/TTL por staging, logs e archive, autoridade de hold/release; DBA/Operacoes comprovam WORM ou imutabilidade equivalente, criptografia, capacidade e identidade de servico.",
+        "origin": "docs/runbooks/retencao-arquivamento-e-restore.md",
+        "locatedEvidence": [
+          {
+            "path": "docs/runbooks/retencao-arquivamento-e-restore.md",
+            "sha256": "0e78382707c8cde96fdc460debca3241e6a93d6029ad5d9137ac77127da004b2"
+          }
+        ]
+      },
+      {
+        "id": "G05-RECUPERACAO",
+        "gate": "G05",
+        "ownerRole": "DBA, Operacoes, Seguranca e Compliance",
+        "nominalOwner": null,
+        "source": "docs/runbooks/retencao-arquivamento-e-restore.md",
+        "status": "BLOQUEADO_POR_INPUT",
+        "priorRequirement": "Backup e restore drill materiais, RTO/RPO medidos, COMMIT/crash/rebuild/replay quando requeridos, janela/orcamento e autorizacao individual por efeito com ledger previo. Rollback sintetico nao autoriza nem prova esses efeitos.",
+        "observedEvidence": [
+          "Rollback e readback agregado sao provas locais existentes; nao ha nesta evidencia backup/restore material nem RTO/RPO medidos."
+        ],
+        "remainingRequirement": "Backup e restore drill materiais, RTO/RPO medidos, COMMIT/crash/rebuild/replay quando requeridos, janela/orcamento e autorizacao individual por efeito com ledger previo. Rollback sintetico nao autoriza nem prova esses efeitos.",
+        "origin": "docs/runbooks/retencao-arquivamento-e-restore.md",
+        "locatedEvidence": [
+          {
+            "path": "docs/runbooks/retencao-arquivamento-e-restore.md",
+            "sha256": "0e78382707c8cde96fdc460debca3241e6a93d6029ad5d9137ac77127da004b2"
+          },
+          {
+            "path": "docs/catalogos/campanhas-integrais/ENTRADAS-E-EFEITOS-EXTERNOS.md",
+            "sha256": "512ccfdbd037c758c9581548583ec3dfd51e8ebbc8929d41a211b4f48c502fcc"
+          }
+        ]
+      },
+      {
+        "id": "G03-10633",
+        "gate": "G03",
+        "ownerRole": "Fornecedor e owner de dados por fonte",
+        "nominalOwner": null,
+        "source": "docs/catalogos/identidade-inventario/README.md",
+        "status": "BLOQUEADO_POR_INPUT",
+        "priorRequirement": "Raiz versionada, papel Frete/minuta, shape/tipos do mapping; repeticoes representativas, escopo/tenant, estabilidade, colisoes e cardinalidade. sequence_code permanece candidato.",
+        "observedEvidence": [
+          "B56: sequence INTEGER e mapping ARRAY de STRING observados em fonte real; identidade e vínculo de filhos não comprovados.",
+          "B56 remoto: mapping ARRAY de STRING observado. Nenhuma garantia de chave filha, estabilidade ou vinculo raiz/Frete; nao pedir novamente prova do shape ja observado."
+        ],
+        "remainingRequirement": "Garantia versionada de raiz/Frete, semântica e chave dos filhos, escopo/estabilidade, colisões e cardinalidade. ARRAY de STRING já observado, sem pedir nova fixture para esse shape.",
+        "origin": "docs/catalogos/identidade-inventario/README.md",
+        "locatedEvidence": [
+          {
+            "path": "docs/catalogos/bloco56-continuacao/README.md",
+            "sha256": "5ec46dc1fd3d52793d2d8f0772a80f300b4113248cd06a354847a14272d90625"
+          },
+          {
+            "path": "docs/catalogos/contratos-esl-10633/README.md",
+            "sha256": "a690c6e02348a69ebf494e64051d4b9808ebdbbd0477ac694a1865d89b06db2d"
+          },
+          {
+            "path": "docs/catalogos/identidade-inventario/README.md",
+            "sha256": "bbfc848d21841f69d77e17b2d33322bc026f70820348a2ee392e5cef1ecad953"
+          }
+        ]
+      },
+      {
+        "id": "G03-8636",
+        "gate": "G03",
+        "ownerRole": "Fornecedor e owner de dados por fonte",
+        "nominalOwner": null,
+        "source": "docs/catalogos/identidade-contas-a-pagar/README.md",
+        "status": "BLOQUEADO_POR_INPUT",
+        "priorRequirement": "Identificador tipado da raiz accounting_debit e prova representativa raiz-parcela-rateio. ant_ils_sequence_code nao identifica raiz nem linha fisica.",
+        "observedEvidence": [
+          "B56: parcela INTEGER; /id e /accounting_debit_id ausentes na amostra; raiz e vínculo parcela/rateio não identificados.",
+          "B56 remoto e contraexemplo historico: INTEGER na parcela, raiz tecnica ausente; candidata refutada como chave de linha. Schema GraphQL nao demonstra crosswalk."
+        ],
+        "remainingRequirement": "Identificador tipado da raiz accounting_debit e prova representativa raiz-parcela-rateio. ant_ils_sequence_code nao identifica raiz nem linha fisica.",
+        "origin": "docs/catalogos/identidade-contas-a-pagar/README.md",
+        "locatedEvidence": [
+          {
+            "path": "docs/catalogos/bloco56-continuacao/README.md",
+            "sha256": "5ec46dc1fd3d52793d2d8f0772a80f300b4113248cd06a354847a14272d90625"
+          },
+          {
+            "path": "docs/catalogos/identidade-contas-a-pagar/README.md",
+            "sha256": "e6b0f1f083b3f39ac639c13bc462ed4a0c755661d6ea82759d8a5a3c109bbf0d"
+          }
+        ]
+      },
+      {
+        "id": "G03-4924",
+        "gate": "G03",
+        "ownerRole": "Fornecedor e owner de dados por fonte",
+        "nominalOwner": null,
+        "source": "docs/catalogos/identidade-faturas-por-cliente/README.md",
+        "status": "BLOQUEADO_POR_INPUT",
+        "priorRequirement": "Estabilidade do id de linha e crosswalk linha-titulo-documento-Frete; filhos tipados, identidade/cardinalidade. id fisico nao vincula titulo logico.",
+        "observedEvidence": [
+          "B56: /id INTEGER; mapping e pedidos ARRAY de STRING; título lógico e crosswalk não comprovados.",
+          "B56 remoto: ID INTEGER de linha e arrays de textos. Identidade da linha nao comprova titulo, filhos, documento ou Frete."
+        ],
+        "remainingRequirement": "Entidade e estabilidade do ID de linha; crosswalk linha/título/documento/Frete e identidade dos filhos. ARRAY de STRING já observado.",
+        "origin": "docs/catalogos/identidade-faturas-por-cliente/README.md",
+        "locatedEvidence": [
+          {
+            "path": "docs/catalogos/bloco56-continuacao/README.md",
+            "sha256": "5ec46dc1fd3d52793d2d8f0772a80f300b4113248cd06a354847a14272d90625"
+          },
+          {
+            "path": "docs/catalogos/identidade-faturas-por-cliente/README.md",
+            "sha256": "0af6a7ec95e7b76f7a1fc0c166befe5dd373f23f0a176627b88eff3890808af7"
+          }
+        ]
+      },
+      {
+        "id": "G03-6392",
+        "gate": "G03",
+        "ownerRole": "Fornecedor e owner de dados por fonte",
+        "nominalOwner": null,
+        "source": "docs/catalogos/identidade-sinistros/README.md",
+        "status": "BLOQUEADO_POR_INPUT",
+        "priorRequirement": "Garantia versionada da raiz ou observacoes repetidas com colisoes entre sequencia, minuta e ocorrencia de invoice; papeis e cardinalidade, sem simplificar hash legado por inferencia.",
+        "observedEvidence": [
+          "B56: sequence INTEGER e número de nota STRING; identidade universal não comprovada.",
+          "B56 remoto: sequence INTEGER e numero de nota STRING; identificadores tecnicos testados ausentes. Nota nao comprova raiz/ocorrencia."
+        ],
+        "remainingRequirement": "Garantia versionada da raiz ou observacoes repetidas com colisoes entre sequencia, minuta e ocorrencia de invoice; papeis e cardinalidade, sem simplificar hash legado por inferencia.",
+        "origin": "docs/catalogos/identidade-sinistros/README.md",
+        "locatedEvidence": [
+          {
+            "path": "docs/catalogos/bloco56-continuacao/README.md",
+            "sha256": "5ec46dc1fd3d52793d2d8f0772a80f300b4113248cd06a354847a14272d90625"
+          },
+          {
+            "path": "docs/catalogos/identidade-sinistros/README.md",
+            "sha256": "38eccfa07d65afa43354893061cce83b55544ccc61f516519da5b046f4ae2b14"
+          }
+        ]
+      },
+      {
+        "id": "G03-RASTER",
+        "gate": "G03",
+        "ownerRole": "Fornecedor e owner de dados por fonte",
+        "nominalOwner": null,
+        "source": "docs/catalogos/raster-contrato-local/identidade-pendente.json",
+        "status": "BLOQUEADO_POR_INPUT",
+        "priorRequirement": "Tipos/escopo/estabilidade de CodSolicitacao e identidade de parada; Ordem sob reordenacao/insercao/remocao/retorno, atomicidade/frescor e cardinalidade. Sem fallback posicional.",
+        "observedEvidence": [
+          "Contrato local preserva CodSolicitacao e Ordem como candidatos; contraexemplo de reordenacao refuta fallback por posicao. Garantia de identidade ausente."
+        ],
+        "remainingRequirement": "Tipos/escopo/estabilidade de CodSolicitacao e identidade de parada; Ordem sob reordenacao/insercao/remocao/retorno, atomicidade/frescor e cardinalidade. Sem fallback posicional.",
+        "origin": "docs/catalogos/raster-contrato-local/identidade-pendente.json",
+        "locatedEvidence": [
+          {
+            "path": "docs/catalogos/raster-contrato-local/README.md",
+            "sha256": "26fe0fb91fd684182d0287dbd6590c084f89b2475ce332a8ae81764045bc3bfd"
+          },
+          {
+            "path": "docs/catalogos/raster-contrato-local/identidade-pendente.json",
+            "sha256": "be859541e221711555f6aded72fa7223d3217738687e25a70392cac0bd416499"
+          }
+        ]
+      },
+      {
+        "id": "G04-SEMANTICA",
+        "gate": "G04",
+        "ownerRole": "Negocio e owners de referencias e consumidores",
+        "nominalOwner": null,
+        "source": "STATES.md",
+        "status": "BLOQUEADO_POR_INPUT",
+        "priorRequirement": "Owner de negocio ratifica grao, relacoes, alias/rekey, titulo/documento e precedencia fiscal/financeira aplicaveis, incluindo fonte propria de serie NFS-e. Nenhuma chave ou owner nominal e inferido.",
+        "observedEvidence": [
+          "FAT-02 registra divergencia mapper/SQL quando CT-e e NFS-e coexistem; fonte propria de serie NFS-e e precedencia nao ratificadas."
+        ],
+        "remainingRequirement": "Owner de negocio ratifica grao, relacoes, alias/rekey, titulo/documento e precedencia fiscal/financeira aplicaveis, incluindo fonte propria de serie NFS-e. Nenhuma chave ou owner nominal e inferido.",
+        "origin": "STATES.md",
+        "locatedEvidence": [
+          {
+            "path": "docs/catalogos/bloco56-continuacao/README.md",
+            "sha256": "5ec46dc1fd3d52793d2d8f0772a80f300b4113248cd06a354847a14272d90625"
+          },
+          {
+            "path": "docs/catalogos/macrobloco-analitico/manifesto-referencias.json",
+            "sha256": "fdceade134ba69229b02ed63e0cffdbfab2f6fd4ad8e79f96553b6caba701c38"
+          }
+        ]
+      },
+      {
+        "id": "G04-REFERENCIAS",
+        "gate": "G04",
+        "ownerRole": "Negocio e owners de referencias e consumidores",
+        "nominalOwner": null,
+        "source": "docs/runbooks/importar-ratificar-e-revogar-referencias.md",
+        "status": "BLOQUEADO_POR_INPUT",
+        "priorRequirement": "Export/baseline autorizado por familia consumida, release/escopo, proveniencia, vigencia, grao, contagem e fingerprint; normalizacao e tokenizacao por versao aprovada, sem fornecer tokens/documentos/chaves neste chat.",
+        "observedEvidence": [
+          "Manifestos e importadores/fixtures qualificam o formato; nao sao export oficial autorizado por familia, release e vigencia."
+        ],
+        "remainingRequirement": "Export/baseline autorizado por familia consumida, release/escopo, proveniencia, vigencia, grao, contagem e fingerprint; normalizacao e tokenizacao por versao aprovada, sem fornecer tokens/documentos/chaves neste chat.",
+        "origin": "docs/runbooks/importar-ratificar-e-revogar-referencias.md",
+        "locatedEvidence": [
+          {
+            "path": "docs/runbooks/importar-ratificar-e-revogar-referencias.md",
+            "sha256": "f820770651e6f05fbf3e935eb47f76c803563908dc4260a02a61a480082d51c5"
+          },
+          {
+            "path": "docs/catalogos/macrobloco-analitico/manifesto-referencias.json",
+            "sha256": "fdceade134ba69229b02ed63e0cffdbfab2f6fd4ad8e79f96553b6caba701c38"
+          }
+        ]
+      },
+      {
+        "id": "G04-RATIFICACAO",
+        "gate": "G04",
+        "ownerRole": "Negocio e owners de referencias e consumidores",
+        "nominalOwner": null,
+        "source": "database/manifest/governed-references.json",
+        "status": "BLOQUEADO_POR_INPUT",
+        "priorRequirement": "Autor/importador/aprovador segregados, cobertura calendario/filial/frota/regiao/status/tarifas, fixtures de paridade e politicas de ausencia/conflito; importacao material requer P12/G05 e autorizacao propria.",
+        "observedEvidence": [
+          "Segregacao autor/importador/aprovador e cobertura sao exigencias testaveis. Nenhuma evidencia selecionada contem ratificacao real independente."
+        ],
+        "remainingRequirement": "Autor/importador/aprovador segregados, cobertura calendario/filial/frota/regiao/status/tarifas, fixtures de paridade e politicas de ausencia/conflito; importacao material requer P12/G05 e autorizacao propria.",
+        "origin": "database/manifest/governed-references.json",
+        "locatedEvidence": [
+          {
+            "path": "docs/runbooks/importar-ratificar-e-revogar-referencias.md",
+            "sha256": "f820770651e6f05fbf3e935eb47f76c803563908dc4260a02a61a480082d51c5"
+          }
+        ]
+      },
+      {
+        "id": "G04-DIMENSOES",
+        "gate": "G04",
+        "ownerRole": "Negocio e owners de referencias e consumidores",
+        "nominalOwner": null,
+        "source": "STATES.md",
+        "status": "BLOQUEADO_POR_INPUT",
+        "priorRequirement": "Por dimensao: fonte qualificada e paridade core das fatias usadas, grao/papeis, binding explicito, vigencia, current/history, ausencia, conflitos e rekey ratificados; publicacao contratual permanece P25.",
+        "observedEvidence": [
+          "DAG, bindings sinteticos e current/history locais existentes. A evidencia declara fontes qualificadas e regras de vigencia/rekey externas pendentes."
+        ],
+        "remainingRequirement": "Por dimensao: fonte qualificada e paridade core das fatias usadas, grao/papeis, binding explicito, vigencia, current/history, ausencia, conflitos e rekey ratificados; publicacao contratual permanece P25.",
+        "origin": "STATES.md",
+        "locatedEvidence": [
+          {
+            "path": "docs/catalogos/preparacao-offline-p10-p21/RELATORIO.md",
+            "sha256": "d1a0f79401da14e5ec1bb438fc262d10a9b03de5fc558e11f0fce55e96468ecd"
+          },
+          {
+            "path": "docs/catalogos/campanhas-integrais/ENTRADAS-E-EFEITOS-EXTERNOS.md",
+            "sha256": "512ccfdbd037c758c9581548583ec3dfd51e8ebbc8929d41a211b4f48c502fcc"
+          }
+        ]
+      },
+      {
+        "id": "G04-FROTA",
+        "gate": "G04",
+        "ownerRole": "Negocio e owners de referencias e consumidores",
+        "nominalOwner": null,
+        "source": "docs/catalogos/frota-manifestos-v2-035c/README.md",
+        "status": "BLOQUEADO_POR_INPUT",
+        "priorRequirement": "Veiculos/reboques e motoristas exigem ID estavel escopado do fornecedor, semantica de placa/nome/filial, colisoes/homonimos, merge/split, papeis separados e lifecycle. Evidencia tecnica do fornecedor por G03; ratificacao de negocio por G04. V2-035c nao autoriza inferir identidade.",
+        "observedEvidence": [
+          "Decisao V02 explicitamente BLOCKED: placa/nome/filial e coocorrencia nao fornecem IDs estaveis. Papeis principal/reboques comprovados somente no grao Manifesto."
+        ],
+        "remainingRequirement": "Veiculos/reboques e motoristas exigem ID estavel escopado do fornecedor, semantica de placa/nome/filial, colisoes/homonimos, merge/split, papeis separados e lifecycle. Evidencia tecnica do fornecedor por G03; ratificacao de negocio por G04. V2-035c nao autoriza inferir identidade.",
+        "origin": "docs/catalogos/frota-manifestos-v2-035c/README.md",
+        "locatedEvidence": [
+          {
+            "path": "docs/catalogos/frota-manifestos-v2-035c/README.md",
+            "sha256": "0a50e9e3e2a7345d747c007afcd7f88517aa39a857a751c8086ee779b5928284"
+          },
+          {
+            "path": "docs/catalogos/frota-manifestos-v2-035c/decisao-v02.json",
+            "sha256": "02a259fae743b9c0fc7c873f70e2929bef04a375d0f85f60675f52f62ec4af92"
+          }
+        ]
+      }
+    ]
+  },
+  "stages": [
+    {
+      "id": "P09",
+      "criteria": [
+        "V2-041"
+      ],
+      "classification": "CONCLUIDO_LOCAL_REAPROVEITAVEL_COM_PARCELA_EXTERNA",
+      "local": {
+        "status": "TESTADO_NA_CAMADA",
+        "result": "Intake e contenção locais testados;19 contraprovas"
+      },
+      "real": {
+        "status": "BLOQUEADO_POR_INPUT",
+        "requirement": "Atestado G01 ausente;rotação/invalidação e continuidade não comprovadas"
+      },
+      "operational": {
+        "status": "NAO_AUTORIZADO_OU_NAO_ACEITO",
+        "nominalOwner": null,
+        "ownerRole": "Segurança e Operações"
+      },
+      "dependsOn": "G01",
+      "originalCriteria": "STATES.md#tarefas-pendentes",
+      "trail": "TRILHA_CONCLUSAO_POR_MODELO.md"
+    },
+    {
+      "id": "P10",
+      "criteria": [
+        "V2-016b"
+      ],
+      "classification": "CONCLUIDO_LOCAL_REAPROVEITAVEL_COM_PARCELA_EXTERNA",
+      "local": {
+        "status": "TESTADO_NA_CAMADA",
+        "result": "Baseline/workflows/scanners locais existentes"
+      },
+      "real": {
+        "status": "BLOQUEADO_POR_INPUT",
+        "requirement": "Provider,remote/branch,conjunto aprovado,proteções,owners e CI/Gitleaks reais no SHA"
+      },
+      "operational": {
+        "status": "NAO_AUTORIZADO_OU_NAO_ACEITO",
+        "nominalOwner": null,
+        "ownerRole": "Owner do repositório"
+      },
+      "dependsOn": "G02-PUBLICACAO,G02-CI",
+      "originalCriteria": "STATES.md#tarefas-pendentes",
+      "trail": "TRILHA_CONCLUSAO_POR_MODELO.md"
+    },
+    {
+      "id": "P11",
+      "criteria": [
+        "V2-015d"
+      ],
+      "classification": "CONCLUIDO_LOCAL_REAPROVEITAVEL_COM_PARCELA_EXTERNA",
+      "local": {
+        "status": "TESTADO_NA_CAMADA",
+        "result": "Scan técnico/correções e JDBC12.8.2 qualificados;provas íntegras"
+      },
+      "real": {
+        "status": "BLOQUEADO_POR_INPUT",
+        "requirement": "Aceite nominal da baseline de vulnerabilidades"
+      },
+      "operational": {
+        "status": "NAO_AUTORIZADO_OU_NAO_ACEITO",
+        "nominalOwner": null,
+        "ownerRole": "Segurança"
+      },
+      "dependsOn": "FEED-BASELINE",
+      "originalCriteria": "STATES.md#tarefas-pendentes",
+      "trail": "TRILHA_CONCLUSAO_POR_MODELO.md"
+    },
+    {
+      "id": "P12",
+      "criteria": [
+        "V2-045b",
+        "V2-039a",
+        "V2-022"
+      ],
+      "classification": "CONCLUIDO_LOCAL_REAPROVEITAVEL_COM_PARCELA_EXTERNA",
+      "local": {
+        "status": "TESTADO_NA_CAMADA",
+        "result": "Schema/runtime local e rollback provados;sem nova operação"
+      },
+      "real": {
+        "status": "BLOQUEADO_POR_INPUT",
+        "requirement": "Ambiente segregado,TLS/ACL,storage/capacidade,retenção,backup/restore/RTO/RPO e efeitos autorizados"
+      },
+      "operational": {
+        "status": "NAO_AUTORIZADO_OU_NAO_ACEITO",
+        "nominalOwner": null,
+        "ownerRole": "DBA,Operações,Segurança,Compliance"
+      },
+      "dependsOn": "G05-AMBIENTE,G05-RETENCAO,G05-RECUPERACAO",
+      "originalCriteria": "STATES.md#tarefas-pendentes",
+      "trail": "TRILHA_CONCLUSAO_POR_MODELO.md"
+    },
+    {
+      "id": "P13",
+      "criteria": [
+        "V2-025d"
+      ],
+      "classification": "CONCLUIDO_LOCAL_REAPROVEITAVEL_COM_PARCELA_EXTERNA",
+      "local": {
+        "status": "TESTADO_NA_CAMADA",
+        "result": "Nove contratos Data Export + Usuários GraphQL + Raster versionados"
+      },
+      "real": {
+        "status": "BLOQUEADO_POR_INPUT",
+        "requirement": "Por fonte:contrato autenticado válido e rodada limitada se houver necessidade;G01 permanece bloqueado;atestado ausente"
+      },
+      "operational": {
+        "status": "NAO_AUTORIZADO_OU_NAO_ACEITO",
+        "nominalOwner": null,
+        "ownerRole": "Fornecedor e owner de dados"
+      },
+      "dependsOn": "G01,G03-CONTRATOS",
+      "originalCriteria": "STATES.md#tarefas-pendentes",
+      "trail": "TRILHA_CONCLUSAO_POR_MODELO.md"
+    },
+    {
+      "id": "P14",
+      "criteria": [
+        "V2-009b",
+        "V2-009c"
+      ],
+      "classification": "CONCLUIDO_LOCAL_REAPROVEITAVEL_COM_PARCELA_EXTERNA",
+      "local": {
+        "status": "TESTADO_NA_CAMADA",
+        "result": "Identidade local e recusas existentes;delta de fornecedor não recebido"
+      },
+      "real": {
+        "status": "BLOQUEADO_POR_INPUT",
+        "requirement": "8636 raiz;4924 título/filhos;10633 componentes;6392 raiz/ocorrência;Raster parada;fiscal/financeiro"
+      },
+      "operational": {
+        "status": "NAO_AUTORIZADO_OU_NAO_ACEITO",
+        "nominalOwner": null,
+        "ownerRole": "Fornecedor e Negócio"
+      },
+      "dependsOn": "G03-8636,G03-4924,G03-10633,G03-6392,G03-RASTER,G04-SEMANTICA",
+      "originalCriteria": "STATES.md#tarefas-pendentes",
+      "trail": "TRILHA_CONCLUSAO_POR_MODELO.md"
+    },
+    {
+      "id": "P15",
+      "criteria": [
+        "V2-035a"
+      ],
+      "classification": "CONCLUIDO_LOCAL_REAPROVEITAVEL_COM_PARCELA_EXTERNA",
+      "local": {
+        "status": "TESTADO_NA_CAMADA",
+        "result": "Importadores/releases/vigência e segregação testados"
+      },
+      "real": {
+        "status": "BLOQUEADO_POR_INPUT",
+        "requirement": "Baseline/export oficial por família e ratificação independente;importação material autorizada"
+      },
+      "operational": {
+        "status": "NAO_AUTORIZADO_OU_NAO_ACEITO",
+        "nominalOwner": null,
+        "ownerRole": "Negócio e owners de referências"
+      },
+      "dependsOn": "G04-REFERENCIAS,G04-RATIFICACAO",
+      "originalCriteria": "STATES.md#tarefas-pendentes",
+      "trail": "TRILHA_CONCLUSAO_POR_MODELO.md"
+    },
+    {
+      "id": "P16",
+      "criteria": [
+        "V2-009d",
+        "V2-029",
+        "V2-030",
+        "V2-031",
+        "V2-032",
+        "V2-034b"
+      ],
+      "classification": "CONCLUIDO_LOCAL_REAPROVEITAVEL_COM_PARCELA_EXTERNA",
+      "local": {
+        "status": "TESTADO_NA_CAMADA",
+        "result": "Onze entradas/mappers/runtime/staging/promoção/DQ/replay construídos e testados"
+      },
+      "real": {
+        "status": "BLOQUEADO_POR_INPUT",
+        "requirement": "Contrato/identidade/referência efetiva aceita por entidade para confrontar novo delta"
+      },
+      "operational": {
+        "status": "NAO_AUTORIZADO_OU_NAO_ACEITO",
+        "nominalOwner": null,
+        "ownerRole": "Fornecedor e owner da entidade"
+      },
+      "dependsOn": "P12/P13/P14/P15 somente nas fatias usadas",
+      "originalCriteria": "STATES.md#tarefas-pendentes",
+      "trail": "TRILHA_CONCLUSAO_POR_MODELO.md"
+    },
+    {
+      "id": "P17",
+      "criteria": [
+        "V2-012a"
+      ],
+      "classification": "CONCLUIDO_LOCAL_REAPROVEITAVEL_COM_PARCELA_EXTERNA",
+      "local": {
+        "status": "TESTADO_NA_CAMADA",
+        "result": "Caracterização local e oráculos sintéticos independentes testados"
+      },
+      "real": {
+        "status": "BLOQUEADO_POR_INPUT",
+        "requirement": "Janela representativa,oráculo nominal independente e autorização da fonte/alvo"
+      },
+      "operational": {
+        "status": "NAO_AUTORIZADO_OU_NAO_ACEITO",
+        "nominalOwner": null,
+        "ownerRole": "Owner de dados e Negócio"
+      },
+      "dependsOn": "P16,G03-ORACULOS",
+      "originalCriteria": "STATES.md#tarefas-pendentes",
+      "trail": "TRILHA_CONCLUSAO_POR_MODELO.md"
+    },
+    {
+      "id": "P18",
+      "criteria": [
+        "V2-047"
+      ],
+      "classification": "CONCLUIDO_LOCAL_REAPROVEITAVEL_COM_PARCELA_EXTERNA",
+      "local": {
+        "status": "TESTADO_NA_CAMADA",
+        "result": "Planejador/partições/modos/watermarks separados testados"
+      },
+      "real": {
+        "status": "BLOQUEADO_POR_INPUT",
+        "requirement": "Horizonte,T0/Tcut,partições,fonte histórica,orçamento e autorização;P17 da entidade"
+      },
+      "operational": {
+        "status": "NAO_AUTORIZADO_OU_NAO_ACEITO",
+        "nominalOwner": null,
+        "ownerRole": "Owner de dados,DBA e Operações"
+      },
+      "dependsOn": "P12,P17,G03-HISTORICO",
+      "originalCriteria": "STATES.md#tarefas-pendentes",
+      "trail": "TRILHA_CONCLUSAO_POR_MODELO.md"
+    },
+    {
+      "id": "P19",
+      "criteria": [
+        "V2-046a",
+        "V2-046b"
+      ],
+      "classification": "CONCLUIDO_LOCAL_REAPROVEITAVEL_COM_PARCELA_EXTERNA",
+      "local": {
+        "status": "TESTADO_NA_CAMADA",
+        "result": "Manifesto→Coleta e Coleta→Frete:cardinalidade/órfãos/conflito/replay locais testados"
+      },
+      "real": {
+        "status": "BLOQUEADO_POR_INPUT",
+        "requirement": "Crosswalk nominal,janelas/histórico e SLA das relações consumidas"
+      },
+      "operational": {
+        "status": "NAO_AUTORIZADO_OU_NAO_ACEITO",
+        "nominalOwner": null,
+        "ownerRole": "Owners de Manifestos,Coletas e Fretes"
+      },
+      "dependsOn": "P18 quando necessário,G03-RELACOES",
+      "originalCriteria": "STATES.md#tarefas-pendentes",
+      "trail": "TRILHA_CONCLUSAO_POR_MODELO.md"
+    },
+    {
+      "id": "P20",
+      "criteria": [
+        "V2-012b"
+      ],
+      "classification": "CONCLUIDO_LOCAL_REAPROVEITAVEL_COM_PARCELA_EXTERNA",
+      "local": {
+        "status": "TESTADO_NA_CAMADA",
+        "result": "Comparadores set-based e oráculos independentes testados"
+      },
+      "real": {
+        "status": "BLOQUEADO_POR_INPUT",
+        "requirement": "Janelas reais fechadas/repetidas:conjuntos/chaves/nulos/status/datas/relações/somas/histórico"
+      },
+      "operational": {
+        "status": "NAO_AUTORIZADO_OU_NAO_ACEITO",
+        "nominalOwner": null,
+        "ownerRole": "Owner de dados e Negócio"
+      },
+      "dependsOn": "P17/P18/P19 aplicáveis,G03-PARIDADE",
+      "originalCriteria": "STATES.md#tarefas-pendentes",
+      "trail": "TRILHA_CONCLUSAO_POR_MODELO.md"
+    },
+    {
+      "id": "P21",
+      "criteria": [
+        "V2-035b"
+      ],
+      "classification": "CONCLUIDO_LOCAL_REAPROVEITAVEL_COM_PARCELA_EXTERNA",
+      "local": {
+        "status": "TESTADO_NA_CAMADA",
+        "result": "Seis dimensões,current/history e consumo local testados"
+      },
+      "real": {
+        "status": "BLOQUEADO_POR_INPUT",
+        "requirement": "Fonte aceita,grão/papéis/vigência/bindings/ausência/conflito/rekey;IDs estáveis de frota"
+      },
+      "operational": {
+        "status": "NAO_AUTORIZADO_OU_NAO_ACEITO",
+        "nominalOwner": null,
+        "ownerRole": "Fornecedor e owners de dimensões"
+      },
+      "dependsOn": "G04-DIMENSOES,G04-FROTA",
+      "originalCriteria": "STATES.md#tarefas-pendentes",
+      "trail": "TRILHA_CONCLUSAO_POR_MODELO.md"
+    },
+    {
+      "id": "P22",
+      "criteria": [
+        "V2-013"
+      ],
+      "classification": "CONCLUIDO_LOCAL_REAPROVEITAVEL_COM_PARCELA_EXTERNA",
+      "local": {
+        "status": "TESTADO_NA_CAMADA",
+        "result": "33 responsabilidades classificadas:19 BLOCKED,5 DISABLED,9 NOT_APPLICABLE;nenhuma ENABLED"
+      },
+      "real": {
+        "status": "BLOQUEADO_POR_INPUT",
+        "requirement": "Política/owner nominal,completude,raiz/filhos,confirmações,limites e reativação"
+      },
+      "operational": {
+        "status": "NAO_AUTORIZADO_OU_NAO_ACEITO",
+        "nominalOwner": null,
+        "ownerRole": "Negócio e owner de dados por responsabilidade"
+      },
+      "dependsOn": "P20,G03/G04-AUSENCIA",
+      "originalCriteria": "STATES.md#tarefas-pendentes",
+      "trail": "TRILHA_CONCLUSAO_POR_MODELO.md"
+    },
+    {
+      "id": "P23",
+      "criteria": [
+        "V2-013"
+      ],
+      "classification": "CONCLUIDO_LOCAL_REAPROVEITAVEL_COM_PARCELA_EXTERNA",
+      "local": {
+        "status": "TESTADO_NA_CAMADA",
+        "result": "Apply sintético Coletas e recusas;universo declarado permanece preview-only por contrato"
+      },
+      "real": {
+        "status": "BLOQUEADO_POR_INPUT",
+        "requirement": "P22 aceito,snapshot completo e autorização específica de apply real"
+      },
+      "operational": {
+        "status": "NAO_AUTORIZADO_OU_NAO_ACEITO",
+        "nominalOwner": null,
+        "ownerRole": "Negócio,DBA e Operações"
+      },
+      "dependsOn": "P12,P22,G05-APPLY",
+      "originalCriteria": "STATES.md#tarefas-pendentes",
+      "trail": "TRILHA_CONCLUSAO_POR_MODELO.md"
+    },
+    {
+      "id": "P24",
+      "criteria": [
+        "V2-036"
+      ],
+      "classification": "CONCLUIDO_LOCAL_REAPROVEITAVEL_COM_PARCELA_EXTERNA",
+      "local": {
+        "status": "TESTADO_NA_CAMADA",
+        "result": "Cinco fatos:grão/cardinalidade/idempotência/partições/recomposição locais testados"
+      },
+      "real": {
+        "status": "BLOQUEADO_POR_INPUT",
+        "requirement": "Paridade das entradas e regras nominais somente usadas pelo fato"
+      },
+      "operational": {
+        "status": "NAO_AUTORIZADO_OU_NAO_ACEITO",
+        "nominalOwner": null,
+        "ownerRole": "Owners dos fatos e Negócio"
+      },
+      "dependsOn": "P20;P15/P19/P21 conforme DAG",
+      "originalCriteria": "STATES.md#tarefas-pendentes",
+      "trail": "TRILHA_CONCLUSAO_POR_MODELO.md"
+    },
+    {
+      "id": "P25",
+      "criteria": [
+        "V2-037"
+      ],
+      "classification": "CONCLUIDO_LOCAL_REAPROVEITAVEL_COM_PARCELA_EXTERNA",
+      "local": {
+        "status": "TESTADO_NA_CAMADA",
+        "result": "19 contratos SQL:18 externos + SQL-10 interno;metadata/linhagem/filtros testados"
+      },
+      "real": {
+        "status": "BLOQUEADO_POR_INPUT",
+        "requirement": "Manifesto nominal por consumidor,versão/compatibilidade e owner;SQL-10 com aceite interno"
+      },
+      "operational": {
+        "status": "NAO_AUTORIZADO_OU_NAO_ACEITO",
+        "nominalOwner": null,
+        "ownerRole": "Owners consumidores e owner técnico SQL-10"
+      },
+      "dependsOn": "P16/P20/P21/P24 aplicáveis,G04-CONSUMIDORES",
+      "originalCriteria": "STATES.md#tarefas-pendentes",
+      "trail": "TRILHA_CONCLUSAO_POR_MODELO.md"
+    },
+    {
+      "id": "P26",
+      "criteria": [
+        "V2-012c"
+      ],
+      "classification": "CONCLUIDO_LOCAL_REAPROVEITAVEL_COM_PARCELA_EXTERNA",
+      "local": {
+        "status": "TESTADO_NA_CAMADA",
+        "result": "Oráculos locais set-based;A/B133comparações por cenário reaproveitados"
+      },
+      "real": {
+        "status": "BLOQUEADO_POR_INPUT",
+        "requirement": "Oráculo nominal por saída e divergências ratificadas;fiscal/somas/relações/labels/filtros"
+      },
+      "operational": {
+        "status": "NAO_AUTORIZADO_OU_NAO_ACEITO",
+        "nominalOwner": null,
+        "ownerRole": "Negócio e owners consumidores/dados"
+      },
+      "dependsOn": "P25,P20,P24 aplicável,G04-PARIDADE-ANALITICA",
+      "originalCriteria": "STATES.md#tarefas-pendentes",
+      "trail": "TRILHA_CONCLUSAO_POR_MODELO.md"
+    },
+    {
+      "id": "P27",
+      "criteria": [
+        "V2-050"
+      ],
+      "classification": "CONCLUIDO_LOCAL_REAPROVEITAVEL_COM_PARCELA_EXTERNA",
+      "local": {
+        "status": "TESTADO_NA_CAMADA",
+        "result": "Quatro famílias de escalas locais aprovadas,sem gargalo novo demonstrado"
+      },
+      "real": {
+        "status": "BLOQUEADO_POR_INPUT",
+        "requirement": "Volume/distribuição representativos,budgets/SLO,ambiente e autorização de campanha"
+      },
+      "operational": {
+        "status": "NAO_AUTORIZADO_OU_NAO_ACEITO",
+        "nominalOwner": null,
+        "ownerRole": "Data Owner,DBA e Operações"
+      },
+      "dependsOn": "P20 ou P26,G05-ESCALA",
+      "originalCriteria": "STATES.md#tarefas-pendentes",
+      "trail": "TRILHA_CONCLUSAO_POR_MODELO.md"
+    },
+    {
+      "id": "P28",
+      "criteria": [
+        "V2-038",
+        "V2-022"
+      ],
+      "classification": "CONCLUIDO_LOCAL_REAPROVEITAVEL_COM_PARCELA_EXTERNA",
+      "local": {
+        "status": "TESTADO_NA_CAMADA",
+        "result": "E2E/agenda/replay/cancelamento/concorrência/recuperação de controle locais testados"
+      },
+      "real": {
+        "status": "BLOQUEADO_POR_INPUT",
+        "requirement": "Paridades/SLO e provas autorizadas de durabilidade,COMMIT/crash/restore/recuperação"
+      },
+      "operational": {
+        "status": "NAO_AUTORIZADO_OU_NAO_ACEITO",
+        "nominalOwner": null,
+        "ownerRole": "DBA e Operações"
+      },
+      "dependsOn": "P12,P27,P20/P26;P23 apenas ausência habilitada",
+      "originalCriteria": "STATES.md#tarefas-pendentes",
+      "trail": "TRILHA_CONCLUSAO_POR_MODELO.md"
+    },
+    {
+      "id": "P29",
+      "criteria": [
+        "V2-039b",
+        "V2-015c"
+      ],
+      "classification": "CORRIGIDO_E_TESTADO_LOCAL_COM_PARCELA_EXTERNA",
+      "local": {
+        "status": "TESTADO_NA_CAMADA_OFFLINE",
+        "result": "README corrigido;2ZIPs byte-idênticos,SBOM/extração/inspect+3plans PASS;runtime0233 reaproveitado,nenhum novo smoke JDBC;PMD7.17.0 offline:2regras/652Java,zero violações/erros"
+      },
+      "real": {
+        "status": "BLOQUEADO_POR_INPUT",
+        "requirement": "RC nominal da unidade,CI/segurança/licenças/SOs/configuração e aceites na mesma revisão;política SAST integral/ruleset/limiar/baseline/exceções/aceitante por Segurança"
+      },
+      "operational": {
+        "status": "NAO_AUTORIZADO_OU_NAO_ACEITO",
+        "nominalOwner": null,
+        "ownerRole": "Release owner e Segurança"
+      },
+      "dependsOn": "G01,P10,P11,P12,P28",
+      "originalCriteria": "STATES.md#tarefas-pendentes",
+      "trail": "TRILHA_CONCLUSAO_POR_MODELO.md"
+    },
+    {
+      "id": "P30",
+      "criteria": [
+        "V2-048b",
+        "V2-014"
+      ],
+      "classification": "CONCLUIDO_LOCAL_REAPROVEITAVEL_COM_PARCELA_EXTERNA",
+      "local": {
+        "status": "TESTADO_NA_CAMADA",
+        "result": "Topologia CUTOVER-DB-01 / DATABASE_WIDE preservada;procedimentos locais existentes"
+      },
+      "real": {
+        "status": "BLOQUEADO_POR_INPUT",
+        "requirement": "Tcut,writer único,fences,rota/PNR/recuperação e cobertura nominal integral da unidade"
+      },
+      "operational": {
+        "status": "NAO_AUTORIZADO_OU_NAO_ACEITO",
+        "nominalOwner": null,
+        "ownerRole": "Donos de operação,corte e consumidores"
+      },
+      "dependsOn": "P29,P18/P20/P25/P26/P28,P22",
+      "originalCriteria": "STATES.md#tarefas-pendentes",
+      "trail": "TRILHA_CONCLUSAO_POR_MODELO.md"
+    },
+    {
+      "id": "P31",
+      "criteria": [
+        "V2-048b"
+      ],
+      "classification": "CONCLUIDO_LOCAL_REAPROVEITAVEL_COM_PARCELA_EXTERNA",
+      "local": {
+        "status": "TESTADO_NA_CAMADA",
+        "result": "Procedimentos e simulações locais existentes;nenhum ensaio material nesta rodada"
+      },
+      "real": {
+        "status": "BLOQUEADO_POR_INPUT",
+        "requirement": "G06:executores,alvo,janela/orçamento,ensaio e duas recuperações materiais/RTO/RPO"
+      },
+      "operational": {
+        "status": "NAO_AUTORIZADO_OU_NAO_ACEITO",
+        "nominalOwner": null,
+        "ownerRole": "Donos de operação e corte"
+      },
+      "dependsOn": "P30,G06",
+      "originalCriteria": "STATES.md#tarefas-pendentes",
+      "trail": "TRILHA_CONCLUSAO_POR_MODELO.md"
+    },
+    {
+      "id": "P32",
+      "criteria": [
+        "V2-014"
+      ],
+      "classification": "CONCLUIDO_LOCAL_REAPROVEITAVEL_COM_PARCELA_EXTERNA",
+      "local": {
+        "status": "TESTADO_NA_CAMADA",
+        "result": "Gates/procedimento locais;nenhum corte autorizado"
+      },
+      "real": {
+        "status": "BLOQUEADO_POR_INPUT",
+        "requirement": "G07 nominal/datado,DoD integral,ensaio,backup/rota/abort e primeira publicação aceita"
+      },
+      "operational": {
+        "status": "NAO_AUTORIZADO_OU_NAO_ACEITO",
+        "nominalOwner": null,
+        "ownerRole": "Responsável nominal pelo corte e consumidores"
+      },
+      "dependsOn": "P31,G07",
+      "originalCriteria": "STATES.md#tarefas-pendentes",
+      "trail": "TRILHA_CONCLUSAO_POR_MODELO.md"
+    },
+    {
+      "id": "P33",
+      "criteria": [
+        "V2-040"
+      ],
+      "classification": "CONCLUIDO_LOCAL_REAPROVEITAVEL_COM_PARCELA_EXTERNA",
+      "local": {
+        "status": "TESTADO_NA_CAMADA",
+        "result": "Inventário de responsabilidades e destino projetado;Raster incluído"
+      },
+      "real": {
+        "status": "BLOQUEADO_POR_INPUT",
+        "requirement": "G08,observação/retenção,cortes aceitos,destinos/owners e autorização retirada/arquivo"
+      },
+      "operational": {
+        "status": "NAO_AUTORIZADO_OU_NAO_ACEITO",
+        "nominalOwner": null,
+        "ownerRole": "Owners do legado e consumidores,Operações"
+      },
+      "dependsOn": "P32,G08",
+      "originalCriteria": "STATES.md#tarefas-pendentes",
+      "trail": "TRILHA_CONCLUSAO_POR_MODELO.md"
+    }
+  ],
+  "entities": [
+    {
+      "code": "USER",
+      "name": "Usuários",
+      "source": "GraphQL individual(enabled=true)",
+      "canonicalTasks": [
+        "V2-033",
+        "V2-035b/DIMENSAO_USUARIOS_LOCAL"
+      ],
+      "localEvidence": {
+        "state": "IMPLEMENTADA_EM_SHADOW",
+        "components": [
+          "src/main/java/br/com/esl/etl/v2/modulos/usuarios/aplicacao/ExtrairUsuariosGraphQl.java",
+          "src/main/java/br/com/esl/etl/v2/bootstrap/LocalUsuariosRuntime.java",
+          "src/main/java/br/com/esl/etl/v2/plataforma/persistencia/usuarios/JdbcSqlServerUsuarioPromotionGateway.java"
+        ],
+        "tests": [
+          "AnalyticLaboratoryUsersIT",
+          "IntegralArtifactScenarioIT",
+          "IntegralArtifactReplayIT"
+        ],
+        "behavior": "current/history, presença tri-state, snapshot sem incremental inventado; cenário B percorre 24 usuários em páginas 20+4."
+      },
+      "realRequirement": "Oráculo nominal GraphQL, correspondência escopada, completude do snapshot e paridade current/history/dimensão; histórico exige fonte própria autorizada.",
+      "dependencies": [
+        "P13 contrato GraphQL ratificado",
+        "P17 oráculo e janela autorizados",
+        "P18 somente histórico aplicável",
+        "G01 para nova fonte autenticada",
+        "G05 para efeito material"
+      ],
+      "ownerRoles": [
+        "Fornecedor e owner de dados",
+        "Segurança e Operações"
+      ],
+      "executableLocalDelta": null
+    },
+    {
+      "code": "MAN",
+      "name": "Manifestos",
+      "source": "Data Export 6399",
+      "canonicalTasks": [
+        "V2-026"
+      ],
+      "localEvidence": {
+        "state": "IMPLEMENTADA_EM_SHADOW",
+        "components": [
+          "src/main/java/br/com/esl/etl/v2/modulos/manifestos/aplicacao/ExtrairManifestosDataExport.java",
+          "src/main/java/br/com/esl/etl/v2/bootstrap/LocalRelationalRuntime.java",
+          "src/main/java/br/com/esl/etl/v2/plataforma/persistencia/manifestos/JdbcSqlServerManifestoPromotionGateway.java"
+        ],
+        "tests": [
+          "AnalyticLaboratoryManifestPreparationIT",
+          "AnalyticLaboratoryManifestGatesIT",
+          "AnalyticLaboratoryManifestCaptureIT",
+          "RelationalLaboratoryMatrixIT",
+          "IntegralArtifactScenarioIT"
+        ],
+        "behavior": "raiz, pick e MDF-e com grãos separados, presença/frescor/reducers, composição relacional explícita."
+      },
+      "realRequirement": "Crosswalk nominal raiz/pick/MDF-e, competência/frota/filial, oráculo e histórico autorizado; órfãos e paridade real.",
+      "dependencies": [
+        "P13 contrato 6399",
+        "P14 identidade local aceita no seu alcance",
+        "P15 apenas referências consumidas",
+        "P18 Manifestos antes de P19 MC"
+      ],
+      "ownerRoles": [
+        "Fornecedor e owner de dados",
+        "Operações e Negócio"
+      ],
+      "executableLocalDelta": null
+    },
+    {
+      "code": "COL",
+      "name": "Coletas",
+      "source": "Data Export 6908",
+      "canonicalTasks": [
+        "V2-010"
+      ],
+      "localEvidence": {
+        "state": "IMPLEMENTADA_EM_SHADOW",
+        "components": [
+          "src/main/java/br/com/esl/etl/v2/modulos/coletas/aplicacao/ExtrairColetasDataExport.java",
+          "src/main/java/br/com/esl/etl/v2/bootstrap/LocalRelationalRuntime.java",
+          "src/main/java/br/com/esl/etl/v2/plataforma/persistencia/coletas/JdbcSqlServerColetaPromotionGateway.java"
+        ],
+        "tests": [
+          "ColetasTemporalLocalIntegrationIT",
+          "RelationalLaboratoryMatrixIT",
+          "IntegralArtifactScenarioIT"
+        ],
+        "behavior": "presença, frescor, staging/promoção, vínculos e quatro observações de snapshot explícitas; ausência real desligada."
+      },
+      "realRequirement": "Oráculo independente e snapshot completo; COL-07/MC/temporal nominal, usuários/referências pertinentes; bootstrap e paridade datas/fuso/relações.",
+      "dependencies": [
+        "USER apenas vínculos usados",
+        "P15 referências pertinentes",
+        "P17 caracterização",
+        "P18 histórico aplicável",
+        "P19 MC quando relação consumida"
+      ],
+      "ownerRoles": [
+        "Fornecedor e owner de dados",
+        "Operações e Negócio"
+      ],
+      "executableLocalDelta": null
+    },
+    {
+      "code": "FRE",
+      "name": "Fretes",
+      "source": "Data Export 6389",
+      "canonicalTasks": [
+        "V2-011"
+      ],
+      "localEvidence": {
+        "state": "IMPLEMENTADA_EM_SHADOW_RELATIONS_PENDING_REAL",
+        "components": [
+          "src/main/java/br/com/esl/etl/v2/modulos/fretes/aplicacao/ExtrairFretesDataExport.java",
+          "src/main/java/br/com/esl/etl/v2/modulos/fretes/domain/FreteFreshnessPolicy.java",
+          "src/main/java/br/com/esl/etl/v2/plataforma/persistencia/fretes/JdbcSqlServerFretePromotionGateway.java"
+        ],
+        "tests": [
+          "RelationalLaboratoryLocalIntegrationIT",
+          "RelationalLaboratoryMatrixIT",
+          "IntegralArtifactScenarioIT",
+          "IntegralArtifactReplayIT"
+        ],
+        "behavior": "mesma release declarada nos dois caminhos, frescor único, performance e precisão temporal preservadas."
+      },
+      "realRequirement": "Crosswalk CF, aliases, semântica/referências financeira e fiscal, origem de frescor e paridade real; updated_at não ratificado.",
+      "dependencies": [
+        "COL para base",
+        "P17 caracterização",
+        "P18 histórico aplicável",
+        "P19 CF somente paridade relacional; base não espera MC"
+      ],
+      "ownerRoles": [
+        "Fornecedor e owner de dados",
+        "Fiscal e Negócio"
+      ],
+      "executableLocalDelta": null
+    },
+    {
+      "code": "COT",
+      "name": "Cotações",
+      "source": "Data Export 6906",
+      "canonicalTasks": [
+        "V2-027"
+      ],
+      "localEvidence": {
+        "state": "IMPLEMENTADA_EM_SHADOW",
+        "components": [
+          "src/main/java/br/com/esl/etl/v2/modulos/cotacoes/aplicacao/ExtrairCotacoesDataExport.java",
+          "src/main/java/br/com/esl/etl/v2/bootstrap/LocalAnalyticQuotesRuntime.java",
+          "src/main/java/br/com/esl/etl/v2/plataforma/persistencia/cotacoes/JdbcSqlServerCotacaoPromotionGateway.java"
+        ],
+        "tests": [
+          "AnalyticLaboratoryQuotesIT",
+          "IntegralArtifactScenarioIT",
+          "IntegralReferencesIT"
+        ],
+        "behavior": "captura, promoção, presença/frescor e tarifa por release/vigência explícita."
+      },
+      "realRequirement": "Oráculo do contrato e release tarifária autorizada por rota/vigência/owner, paridade cotação/conversão.",
+      "dependencies": [
+        "P13 contrato 6906",
+        "P15 tarifa usada",
+        "P17/P18/P20 próprios; independente de MC/CF"
+      ],
+      "ownerRoles": [
+        "Fornecedor e owner de dados",
+        "Owner de tarifas e Negócio"
+      ],
+      "executableLocalDelta": null
+    },
+    {
+      "code": "LOC",
+      "name": "Localização de Cargas",
+      "source": "Data Export 8656",
+      "canonicalTasks": [
+        "V2-028"
+      ],
+      "localEvidence": {
+        "state": "IMPLEMENTADA_EM_SHADOW",
+        "components": [
+          "src/main/java/br/com/esl/etl/v2/modulos/localizacaocargas/aplicacao/ExtrairLocalizacaoCargasDataExport.java",
+          "src/main/java/br/com/esl/etl/v2/modulos/localizacaocargas/domain/LocalizacaoCargaFreshnessPolicy.java",
+          "src/main/java/br/com/esl/etl/v2/plataforma/persistencia/localizacaocargas/JdbcSqlServerLocalizacaoCargaPromotionGateway.java"
+        ],
+        "tests": [
+          "AnalyticLaboratoryFreightLocationQueriesIT",
+          "ExpansionLaboratoryDependenciesIT",
+          "IntegralArtifactScenarioIT"
+        ],
+        "behavior": "identidade corporation_sequence_number, presença/frescor e vínculo com Frete declarado."
+      },
+      "realRequirement": "Origem nominal do frescor, vínculo minuta/Frete e filial destino, paridade léxica/temporal.",
+      "dependencies": [
+        "FRE",
+        "P13 contrato 8656",
+        "P17/P18/P20 próprios; sem dependência universal de CAP/FAT/INV/SIN"
+      ],
+      "ownerRoles": [
+        "Fornecedor e owner de dados",
+        "Operações"
+      ],
+      "executableLocalDelta": null
+    },
+    {
+      "code": "CAP",
+      "name": "Contas a Pagar",
+      "source": "Data Export 8636",
+      "canonicalTasks": [
+        "V2-029"
+      ],
+      "localEvidence": {
+        "state": "CONSTRUIDO_LOCALMENTE_VERIFICADO_REAL_PENDING",
+        "components": [
+          "src/main/java/br/com/esl/etl/v2/modulos/contasapagar/aplicacao/ExtrairContaPagarDataExport.java",
+          "src/main/java/br/com/esl/etl/v2/bootstrap/LocalExpansionRuntime.java",
+          "src/main/java/br/com/esl/etl/v2/plataforma/persistencia/expansao/JdbcExpansionStaging.java"
+        ],
+        "tests": [
+          "ExpansionLaboratoryLocalIntegrationIT",
+          "ExpansionLaboratoryAdversarialIT",
+          "ExpansionLaboratoryFieldCoverageIT",
+          "IntegralArtifactScenarioIT"
+        ],
+        "behavior": "28 campos, raiz/parcela/rateio explícitos, filtro issue_date+created_at, frescor e reducers sem multiplicar montante."
+      },
+      "realRequirement": "ID tipado da raiz accounting_debit e prova raiz-parcela-rateio; ant_ils_sequence_code não identifica raiz ou linha física. Referência financeira/carteira e paridade do mesmo conjunto.",
+      "dependencies": [
+        "G03-8636",
+        "G04-SEMANTICA",
+        "P15 referências usadas",
+        "P17/P18/P20 próprios; sem dependência artificial CAP→FAT/FRE"
+      ],
+      "ownerRoles": [
+        "Fornecedor e owner de dados",
+        "Financeiro"
+      ],
+      "executableLocalDelta": null
+    },
+    {
+      "code": "FAT",
+      "name": "Faturas por Cliente",
+      "source": "Data Export 4924",
+      "canonicalTasks": [
+        "V2-030"
+      ],
+      "localEvidence": {
+        "state": "CONSTRUIDO_LOCALMENTE_VERIFICADO_REAL_PENDING",
+        "components": [
+          "src/main/java/br/com/esl/etl/v2/modulos/faturasporcliente/aplicacao/ExtrairFaturaClienteDataExport.java",
+          "src/main/java/br/com/esl/etl/v2/bootstrap/LocalExpansionRuntime.java",
+          "src/main/java/br/com/esl/etl/v2/plataforma/persistencia/expansao/JdbcExpansionStaging.java"
+        ],
+        "tests": [
+          "ExpansionLaboratoryInvoicesIT",
+          "ExpansionLaboratoryEdgesIT",
+          "ExpansionLaboratoryAdversarialIT",
+          "IntegralArtifactScenarioIT"
+        ],
+        "behavior": "53 campos, título/documentos/filhos, fiscal dual e série recebida explicitamente sem fallback."
+      },
+      "realRequirement": "Entidade/estabilidade do ID da linha, título/documento/Frete e identidade dos filhos; precedência CT-e/NFS-e e fonte própria da série NFS-e.",
+      "dependencies": [
+        "FRE",
+        "G03-4924",
+        "G04-SEMANTICA",
+        "P15 referências usadas",
+        "P17/P18/P20"
+      ],
+      "ownerRoles": [
+        "Fornecedor e owner de dados",
+        "Fiscal e Financeiro"
+      ],
+      "executableLocalDelta": null
+    },
+    {
+      "code": "INV",
+      "name": "Inventário",
+      "source": "Data Export 10633",
+      "canonicalTasks": [
+        "V2-031"
+      ],
+      "localEvidence": {
+        "state": "CONSTRUIDO_LOCALMENTE_VERIFICADO_REAL_PENDING",
+        "components": [
+          "src/main/java/br/com/esl/etl/v2/modulos/inventario/aplicacao/ExtrairInventarioDataExport.java",
+          "src/main/java/br/com/esl/etl/v2/bootstrap/LocalExpansionRuntime.java",
+          "src/main/java/br/com/esl/etl/v2/plataforma/persistencia/expansao/JdbcExpansionStaging.java"
+        ],
+        "tests": [
+          "ExpansionLaboratoryEdgesIT",
+          "ExpansionLaboratoryAdversarialIT",
+          "ExpansionLaboratoryFieldCoverageIT",
+          "IntegralArtifactScenarioIT"
+        ],
+        "behavior": "26 campos, filhos físicos, comprovante cumulativo e vínculo explícito; sem identidade por posição."
+      },
+      "realRequirement": "Identidade raiz/componentes/Frete, significado dos textos, estabilidade sob reordenação/retorno e cardinalidade. ARRAY de STRING já observado em fonte real.",
+      "dependencies": [
+        "FRE",
+        "G03-10633",
+        "P17/P18/P20"
+      ],
+      "ownerRoles": [
+        "Fornecedor e owner de dados",
+        "Operações"
+      ],
+      "executableLocalDelta": null
+    },
+    {
+      "code": "SIN",
+      "name": "Sinistros",
+      "source": "Data Export 6392",
+      "canonicalTasks": [
+        "V2-032"
+      ],
+      "localEvidence": {
+        "state": "CONSTRUIDO_LOCALMENTE_VERIFICADO_REAL_PENDING",
+        "components": [
+          "src/main/java/br/com/esl/etl/v2/modulos/sinistros/aplicacao/ExtrairSinistroDataExport.java",
+          "src/main/java/br/com/esl/etl/v2/bootstrap/LocalExpansionRuntime.java",
+          "src/main/java/br/com/esl/etl/v2/plataforma/persistencia/expansao/JdbcExpansionStaging.java"
+        ],
+        "tests": [
+          "ExpansionLaboratoryFieldCoverageIT",
+          "ExpansionLaboratoryLocalIntegrationIT",
+          "ExpansionLaboratoryAdversarialIT",
+          "IntegralArtifactScenarioIT"
+        ],
+        "behavior": "44 campos, sequência/minuta/ocorrência separadas, arrays/reducers e horas brutas preservadas."
+      },
+      "realRequirement": "Identidade da raiz, papéis/cardinalidades e formato/fuso de customer_communication_time; paridade financeira/temporal.",
+      "dependencies": [
+        "FRE",
+        "G03-6392",
+        "G04-SEMANTICA",
+        "P17/P18/P20"
+      ],
+      "ownerRoles": [
+        "Fornecedor e owner de dados",
+        "Operações e Negócio"
+      ],
+      "executableLocalDelta": null
+    },
+    {
+      "code": "RAS",
+      "name": "Raster condicional",
+      "source": "Raster API própria",
+      "canonicalTasks": [
+        "V2-034a",
+        "V2-034b",
+        "V2-009c"
+      ],
+      "localEvidence": {
+        "state": "MANTER_ACEITO_CONSTRUCAO_LOCAL_VERIFICADA",
+        "components": [
+          "src/main/java/br/com/esl/etl/v2/plataforma/fonte/raster/RasterArtifact.java",
+          "src/main/java/br/com/esl/etl/v2/bootstrap/LocalRasterRuntime.java",
+          "src/main/java/br/com/esl/etl/v2/plataforma/persistencia/analitico/JdbcRasterLaboratory.java"
+        ],
+        "tests": [
+          "AnalyticLaboratoryRasterIdentityIT",
+          "AnalyticLaboratoryRasterIT",
+          "AnalyticLaboratoryRasterProofsIT",
+          "AnalyticLaboratoryRasterTransitIT",
+          "AnalyticRasterCivilTimeIT",
+          "QualificationRasterArtifactIT",
+          "QualificationRasterCancellationIT",
+          "QualificationRasterPartitionIT",
+          "IntegralArtifactScenarioIT"
+        ],
+        "behavior": "pai/paradas/ledger, completude local, limite/repartição, histórico/cancelamento e Transit Time; desabilitado por padrão."
+      },
+      "realRequirement": "Contrato/canal Raster autorizado, tipos/escopo/estabilidade de CodSolicitacao e identidade de parada; Ordem sob reordenação/inserção/remoção, completude/frescor e paridade real.",
+      "dependencies": [
+        "V2-034a MANTER já aceito",
+        "G03-RASTER",
+        "P13 autorização própria",
+        "P14 identidade",
+        "P17/P18/P20 próprios; responsabilidade mantida mesmo fora da primeira onda"
+      ],
+      "ownerRoles": [
+        "Fornecedor Raster e owner de dados",
+        "Operações"
+      ],
+      "executableLocalDelta": null
+    }
+  ],
+  "dimensions": [
+    {
+      "name": "Filiais",
+      "dependencies": [
+        "FRE",
+        "MAN",
+        "CAP",
+        "FAT",
+        "P15 referências pertinentes"
+      ],
+      "localState": "CONSTRUIDA_E_CONSUMIDA_LOCALMENTE",
+      "realRequirement": "Cadastros/bindings nominais, grão/papéis/vigência/rekey e paridade das fatias usadas.",
+      "tests": [
+        "AnalyticLaboratoryDimensionsIT",
+        "IntegralReferencesIT"
+      ]
+    },
+    {
+      "name": "Clientes",
+      "dependencies": [
+        "COL",
+        "FRE",
+        "FAT",
+        "P15 referências pertinentes"
+      ],
+      "localState": "CONSTRUIDA_E_CONSUMIDA_LOCALMENTE",
+      "realRequirement": "Cadastros/bindings nominais, grão/papéis/vigência/rekey e paridade das fatias usadas.",
+      "tests": [
+        "AnalyticLaboratoryDimensionsIT"
+      ]
+    },
+    {
+      "name": "Veículos",
+      "dependencies": [
+        "MAN",
+        "V2-035c",
+        "G03 prova técnica frota",
+        "G04 ratificação"
+      ],
+      "localState": "CONSTRUIDA_LOCALMENTE_IDENTIDADE_REAL_BLOCKED",
+      "realRequirement": "ID estável escopado do fornecedor, semântica de placa/filial/reutilização, papéis principal/reboques, lifecycle e rekey; placa não é identidade.",
+      "tests": [
+        "AnalyticLaboratoryDimensionsIT",
+        "AnalyticLaboratoryFleetReferencesIT"
+      ]
+    },
+    {
+      "name": "Motoristas",
+      "dependencies": [
+        "MAN",
+        "V2-035c",
+        "G03 prova técnica frota",
+        "G04 ratificação"
+      ],
+      "localState": "CONSTRUIDA_LOCALMENTE_IDENTIDADE_REAL_BLOCKED",
+      "realRequirement": "ID estável escopado, homônimos/genéricos/merge/split, papéis/lotação/lifecycle/rekey; nome não é identidade.",
+      "tests": [
+        "AnalyticLaboratoryDimensionsIT",
+        "AnalyticLaboratoryFleetReferencesIT"
+      ]
+    },
+    {
+      "name": "Plano de Contas",
+      "dependencies": [
+        "CAP",
+        "P15 referências financeiras"
+      ],
+      "localState": "CONSTRUIDA_E_CONSUMIDA_LOCALMENTE",
+      "realRequirement": "Fonte CAP qualificada, grão, bindings, vigência/rekey e paridade nominal.",
+      "tests": [
+        "AnalyticLaboratoryDimensionsIT"
+      ]
+    },
+    {
+      "name": "Usuários",
+      "dependencies": [
+        "USER V2-033"
+      ],
+      "localState": "DIMENSAO_CURRENT_LOCAL_ACEITA_V009",
+      "realRequirement": "Snapshot/core real qualificado e paridade nominal; contrato externo de publicação pertence a P25.",
+      "tests": [
+        "AnalyticLaboratoryUsersIT",
+        "AnalyticLaboratoryDimensionsIT",
+        "IntegralArtifactScenarioIT"
+      ]
+    }
+  ],
+  "facts": [
+    {
+      "id": "MAT-01",
+      "name": "Fretes operacional",
+      "dependencies": [
+        "P20-FRE",
+        "P20-LOC",
+        "P15-PAGADORES_DOCUMENTOS_FILIAIS"
+      ],
+      "implementation": [
+        "JdbcAnalyticMaterializations.freight",
+        "V058/V059/V094"
+      ],
+      "tests": [
+        "AnalyticLaboratoryFreightOperationalIT",
+        "AnalyticLaboratoryFreightFallbackIT",
+        "AnalyticLaboratoryFreightAttributesIT"
+      ],
+      "missing": "Grao Frete x PE/CB, minuta/ranking, origem de performance e referencias de pagadores/documentos/filiais ratificados"
+    },
+    {
+      "id": "MAT-02",
+      "name": "Coletores",
+      "dependencies": [
+        "P20-FRE",
+        "P20-MAN",
+        "P20-INV10633",
+        "P15-ALIASES_FILIAIS"
+      ],
+      "implementation": [
+        "JdbcAnalyticMaterializations.collectors",
+        "V067/V094"
+      ],
+      "tests": [
+        "AnalyticLaboratoryCollectorsIT",
+        "AnalyticLaboratoryCollectorsGatesIT"
+      ],
+      "missing": "Filial empresarial e fallback MAN/INV por dia/classificacao Geral; identidade Inventario e paridade das entradas"
+    },
+    {
+      "id": "MAT-03",
+      "name": "Faturamento",
+      "dependencies": [
+        "P20-FRE",
+        "P20-LOC",
+        "P20-FAT4924",
+        "P15-CALENDARIO_FILIAL"
+      ],
+      "implementation": [
+        "JdbcExpansionMaterializations",
+        "V047/V048"
+      ],
+      "tests": [
+        "ExpansionLaboratoryRevenueIT"
+      ],
+      "missing": "Relacao FAT/FRE, grao financeiro, calendario e atribuicao retroativa de filial nominais"
+    },
+    {
+      "id": "MAT-04",
+      "name": "Faturas",
+      "dependencies": [
+        "P20-FAT4924",
+        "G03-4924",
+        "G04-SEMANTICA"
+      ],
+      "implementation": [
+        "JdbcExpansionMaterializations",
+        "V045"
+      ],
+      "tests": [
+        "ExpansionLaboratoryInvoicesIT"
+      ],
+      "missing": "Identidade de titulo/documento, precedencia fiscal e serie NFS-e com fonte propria"
+    },
+    {
+      "id": "MAT-05",
+      "name": "Manifestos",
+      "dependencies": [
+        "P20-MAN",
+        "P20-COL",
+        "P20-FRE",
+        "P19-MC",
+        "P19-CF",
+        "P15-FROTA"
+      ],
+      "implementation": [
+        "JdbcAnalyticMaterializations.manifests",
+        "V072-V078/V094"
+      ],
+      "tests": [
+        "AnalyticLaboratoryManifestsIT",
+        "AnalyticLaboratoryManifestGatesIT",
+        "AnalyticLaboratoryFreightPathsIT"
+      ],
+      "missing": "Relacoes MC/CF reais, frota/papeis/capacidade nominal e paridade das entradas"
+    }
+  ],
+  "contracts": [
+    {
+      "id": "SQL-01",
+      "name": "vw_faturas_por_cliente_powerbi",
+      "localName": "pub.analytic_lab_sql_01",
+      "audience": "EXTERNAL",
+      "rule": "PUB-04/MAT-04",
+      "grain": "documento fiscal canônico por cliente/filial e recorte, com política explícita",
+      "businessColumns": 42,
+      "physicalColumns": 66,
+      "status": "LOCAL_CONSTRUCTION_VERIFIED_REUSED",
+      "dependencies": [
+        "P20-FAT4924",
+        "P24-MAT04",
+        "G04-SEMANTICA",
+        "G04-REFERENCIAS"
+      ],
+      "tests": [
+        "AnalyticLaboratoryFinancialQueriesIT"
+      ],
+      "sourceMatrix": "docs/catalogos/macrobloco-analitico/matriz-colunas-final.json",
+      "missing": [
+        "Approved consumer manifest with owner, version, names, ordinals, types, nullability, filters and compatibility; SQL-10 uses its own internal scope",
+        "Nominal independent oracle and parity of applicable source/fact/dimension"
+      ],
+      "ownerRole": "Negocio, donos dos consumidores e owners de dados",
+      "newAcceptance": false
+    },
+    {
+      "id": "SQL-02",
+      "name": "vw_fretes_powerbi",
+      "localName": "pub.analytic_lab_sql_02",
+      "audience": "EXTERNAL",
+      "rule": "PUB-01/MAT-01",
+      "grain": "Frete canônico preparado, indicador PE como dimensão de responsabilidade",
+      "businessColumns": 123,
+      "physicalColumns": 140,
+      "status": "LOCAL_CONSTRUCTION_VERIFIED_REUSED",
+      "dependencies": [
+        "P20-FRE",
+        "P20-LOC",
+        "P24-MAT01"
+      ],
+      "tests": [
+        "AnalyticLaboratoryFreightOperationalIT",
+        "AnalyticLaboratoryFreightFallbackIT",
+        "AnalyticLaboratoryFreightAttributesIT"
+      ],
+      "sourceMatrix": "docs/catalogos/macrobloco-analitico/matriz-colunas-final.json",
+      "missing": [
+        "Approved consumer manifest with owner, version, names, ordinals, types, nullability, filters and compatibility; SQL-10 uses its own internal scope",
+        "Nominal independent oracle and parity of applicable source/fact/dimension"
+      ],
+      "ownerRole": "Negocio, donos dos consumidores e owners de dados",
+      "newAcceptance": false
+    },
+    {
+      "id": "SQL-03",
+      "name": "vw_coletas_powerbi",
+      "localName": "pub.analytic_lab_sql_03",
+      "audience": "EXTERNAL",
+      "rule": "PUB-02/COL-11",
+      "grain": "Coleta canônica atual, ausência candidata visível e Usuários por binding",
+      "businessColumns": 41,
+      "physicalColumns": 63,
+      "status": "LOCAL_CONSTRUCTION_VERIFIED_REUSED",
+      "dependencies": [
+        "P20-COL",
+        "P20-USR",
+        "G04-ABSENCE"
+      ],
+      "tests": [
+        "AnalyticLaboratoryCollectionQueriesIT",
+        "AnalyticLaboratoryCollectionSweepIT"
+      ],
+      "sourceMatrix": "docs/catalogos/macrobloco-analitico/matriz-colunas-final.json",
+      "missing": [
+        "Approved consumer manifest with owner, version, names, ordinals, types, nullability, filters and compatibility; SQL-10 uses its own internal scope",
+        "Nominal independent oracle and parity of applicable source/fact/dimension"
+      ],
+      "ownerRole": "Negocio, donos dos consumidores e owners de dados",
+      "newAcceptance": false
+    },
+    {
+      "id": "SQL-04",
+      "name": "vw_coletas_excluidas_origem",
+      "localName": "pub.analytic_lab_sql_04",
+      "audience": "EXTERNAL",
+      "rule": "PUB-02/V2-013",
+      "grain": "Coleta canônica com ausência confirmada; não conta repetição da observação",
+      "businessColumns": 13,
+      "physicalColumns": 23,
+      "status": "LOCAL_CONSTRUCTION_VERIFIED_REUSED",
+      "dependencies": [
+        "P20-COL",
+        "P22-COL",
+        "P23-COL"
+      ],
+      "tests": [
+        "AnalyticLaboratoryCollectionSweepIT",
+        "AnalyticLaboratoryCollectionSweepIsolationIT"
+      ],
+      "sourceMatrix": "docs/catalogos/macrobloco-analitico/matriz-colunas-final.json",
+      "missing": [
+        "Approved consumer manifest with owner, version, names, ordinals, types, nullability, filters and compatibility; SQL-10 uses its own internal scope",
+        "Nominal independent oracle and parity of applicable source/fact/dimension"
+      ],
+      "ownerRole": "Negocio, donos dos consumidores e owners de dados",
+      "newAcceptance": false
+    },
+    {
+      "id": "SQL-05",
+      "name": "vw_cotacoes_powerbi",
+      "localName": "pub.analytic_lab_sql_05",
+      "audience": "EXTERNAL",
+      "rule": "PUB-03",
+      "grain": "Cotação canônica capturada com tarifa governada",
+      "businessColumns": 54,
+      "physicalColumns": 70,
+      "status": "LOCAL_CONSTRUCTION_VERIFIED_REUSED",
+      "dependencies": [
+        "P20-COT",
+        "P15-TARIFAS"
+      ],
+      "tests": [
+        "AnalyticLaboratoryQuotesIT",
+        "AnalyticLaboratoryObservationModesIT"
+      ],
+      "sourceMatrix": "docs/catalogos/macrobloco-analitico/matriz-colunas-final.json",
+      "missing": [
+        "Approved consumer manifest with owner, version, names, ordinals, types, nullability, filters and compatibility; SQL-10 uses its own internal scope",
+        "Nominal independent oracle and parity of applicable source/fact/dimension"
+      ],
+      "ownerRole": "Negocio, donos dos consumidores e owners de dados",
+      "newAcceptance": false
+    },
+    {
+      "id": "SQL-06",
+      "name": "vw_contas_a_pagar_powerbi",
+      "localName": "pub.analytic_lab_sql_06",
+      "audience": "EXTERNAL",
+      "rule": "PUB-04",
+      "grain": "componente CAP canônico, pagamento e conciliação tri-state",
+      "businessColumns": 31,
+      "physicalColumns": 51,
+      "status": "LOCAL_CONSTRUCTION_VERIFIED_REUSED",
+      "dependencies": [
+        "P20-CAP8636",
+        "G03-8636"
+      ],
+      "tests": [
+        "AnalyticLaboratoryFinancialQueriesIT"
+      ],
+      "sourceMatrix": "docs/catalogos/macrobloco-analitico/matriz-colunas-final.json",
+      "missing": [
+        "Approved consumer manifest with owner, version, names, ordinals, types, nullability, filters and compatibility; SQL-10 uses its own internal scope",
+        "Nominal independent oracle and parity of applicable source/fact/dimension"
+      ],
+      "ownerRole": "Negocio, donos dos consumidores e owners de dados",
+      "newAcceptance": false
+    },
+    {
+      "id": "SQL-07",
+      "name": "vw_localizacao_cargas_powerbi",
+      "localName": "pub.analytic_lab_sql_07",
+      "audience": "EXTERNAL",
+      "rule": "PUB-05",
+      "grain": "Localização canônica atual por binding, sem fan-out",
+      "businessColumns": 29,
+      "physicalColumns": 41,
+      "status": "LOCAL_CONSTRUCTION_VERIFIED_REUSED",
+      "dependencies": [
+        "P20-LOC",
+        "P20-FRE",
+        "G04-REFERENCIAS"
+      ],
+      "tests": [
+        "AnalyticLaboratoryFreightLocationQueriesIT"
+      ],
+      "sourceMatrix": "docs/catalogos/macrobloco-analitico/matriz-colunas-final.json",
+      "missing": [
+        "Approved consumer manifest with owner, version, names, ordinals, types, nullability, filters and compatibility; SQL-10 uses its own internal scope",
+        "Nominal independent oracle and parity of applicable source/fact/dimension"
+      ],
+      "ownerRole": "Negocio, donos dos consumidores e owners de dados",
+      "newAcceptance": false
+    },
+    {
+      "id": "SQL-08",
+      "name": "vw_manifestos_powerbi",
+      "localName": "pub.analytic_lab_sql_08",
+      "audience": "EXTERNAL",
+      "rule": "PUB-07/MAN-01..07",
+      "grain": "raiz MAN canônica atual com display tipado e fatos preparados",
+      "businessColumns": 105,
+      "physicalColumns": 134,
+      "status": "LOCAL_CONSTRUCTION_VERIFIED_REUSED",
+      "dependencies": [
+        "P20-MAN",
+        "P24-MAT05"
+      ],
+      "tests": [
+        "AnalyticLaboratoryManifestsIT",
+        "AnalyticLaboratoryManifestCaptureIT",
+        "AnalyticLaboratoryManifestGatesIT"
+      ],
+      "sourceMatrix": "docs/catalogos/macrobloco-analitico/matriz-colunas-final.json",
+      "missing": [
+        "Approved consumer manifest with owner, version, names, ordinals, types, nullability, filters and compatibility; SQL-10 uses its own internal scope",
+        "Nominal independent oracle and parity of applicable source/fact/dimension"
+      ],
+      "ownerRole": "Negocio, donos dos consumidores e owners de dados",
+      "newAcceptance": false
+    },
+    {
+      "id": "SQL-09",
+      "name": "vw_fato_manifestos_dash",
+      "localName": "pub.analytic_lab_sql_09",
+      "audience": "EXTERNAL",
+      "rule": "PUB-07/MAT-05",
+      "grain": "fato por Manifesto canônico/competência; Frete deduplicado antes da soma",
+      "businessColumns": 106,
+      "physicalColumns": 135,
+      "status": "LOCAL_CONSTRUCTION_VERIFIED_REUSED",
+      "dependencies": [
+        "P24-MAT05",
+        "P19-MC",
+        "P19-CF"
+      ],
+      "tests": [
+        "AnalyticLaboratoryManifestsIT",
+        "AnalyticLaboratoryManifestGatesIT",
+        "AnalyticLaboratoryFreightPathsIT"
+      ],
+      "sourceMatrix": "docs/catalogos/macrobloco-analitico/matriz-colunas-final.json",
+      "missing": [
+        "Approved consumer manifest with owner, version, names, ordinals, types, nullability, filters and compatibility; SQL-10 uses its own internal scope",
+        "Nominal independent oracle and parity of applicable source/fact/dimension"
+      ],
+      "ownerRole": "Negocio, donos dos consumidores e owners de dados",
+      "newAcceptance": false
+    },
+    {
+      "id": "SQL-10",
+      "name": "vw_bi_monitoramento",
+      "localName": "pub.analytic_lab_sql_10",
+      "audience": "INTERNAL",
+      "rule": "PUB-07",
+      "grain": "evento técnico de captura/carga/ciclo; instantes ausentes permanecem nulos",
+      "businessColumns": 9,
+      "physicalColumns": 15,
+      "status": "LOCAL_CONSTRUCTION_VERIFIED_REUSED",
+      "dependencies": [
+        "G04-INTERNAL-MONITORING"
+      ],
+      "tests": [
+        "AnalyticLaboratoryMonitoringIT"
+      ],
+      "sourceMatrix": "docs/catalogos/macrobloco-analitico/matriz-colunas-final.json",
+      "missing": [
+        "Approved consumer manifest with owner, version, names, ordinals, types, nullability, filters and compatibility; SQL-10 uses its own internal scope",
+        "Nominal independent oracle and parity of applicable source/fact/dimension"
+      ],
+      "ownerRole": "Negocio, donos dos consumidores e owners de dados",
+      "newAcceptance": false
+    },
+    {
+      "id": "SQL-11",
+      "name": "vw_inventario_powerbi",
+      "localName": "pub.analytic_lab_sql_11",
+      "audience": "EXTERNAL",
+      "rule": "PUB-06",
+      "grain": "raiz Inventário canônica ativa; vínculo Frete unívoco e referência vigente",
+      "businessColumns": 34,
+      "physicalColumns": 52,
+      "status": "LOCAL_CONSTRUCTION_VERIFIED_REUSED",
+      "dependencies": [
+        "P20-INV10633",
+        "P20-FRE"
+      ],
+      "tests": [
+        "AnalyticLaboratoryInventoryIncidentQueriesIT"
+      ],
+      "sourceMatrix": "docs/catalogos/macrobloco-analitico/matriz-colunas-final.json",
+      "missing": [
+        "Approved consumer manifest with owner, version, names, ordinals, types, nullability, filters and compatibility; SQL-10 uses its own internal scope",
+        "Nominal independent oracle and parity of applicable source/fact/dimension"
+      ],
+      "ownerRole": "Negocio, donos dos consumidores e owners de dados",
+      "newAcceptance": false
+    },
+    {
+      "id": "SQL-12",
+      "name": "vw_sinistros_powerbi",
+      "localName": "pub.analytic_lab_sql_12",
+      "audience": "EXTERNAL",
+      "rule": "PUB-06",
+      "grain": "raiz Sinistro canônica ativa; veículo/documentos vinculados",
+      "businessColumns": 34,
+      "physicalColumns": 51,
+      "status": "LOCAL_CONSTRUCTION_VERIFIED_REUSED",
+      "dependencies": [
+        "P20-SIN6392",
+        "P20-FRE"
+      ],
+      "tests": [
+        "AnalyticLaboratoryInventoryIncidentQueriesIT"
+      ],
+      "sourceMatrix": "docs/catalogos/macrobloco-analitico/matriz-colunas-final.json",
+      "missing": [
+        "Approved consumer manifest with owner, version, names, ordinals, types, nullability, filters and compatibility; SQL-10 uses its own internal scope",
+        "Nominal independent oracle and parity of applicable source/fact/dimension"
+      ],
+      "ownerRole": "Negocio, donos dos consumidores e owners de dados",
+      "newAcceptance": false
+    },
+    {
+      "id": "SQL-13",
+      "name": "vw_raster_sm_transit_time",
+      "localName": "pub.analytic_lab_sql_13",
+      "audience": "EXTERNAL",
+      "rule": "PUB-08/RAS-01..06",
+      "grain": "viagem e parada canônicas ativas; prioridade direta/fallback temporal",
+      "businessColumns": 37,
+      "physicalColumns": 53,
+      "status": "LOCAL_CONSTRUCTION_VERIFIED_REUSED",
+      "dependencies": [
+        "G03-RASTER",
+        "P20-RASTER"
+      ],
+      "tests": [
+        "AnalyticLaboratoryRasterTransitIT",
+        "AnalyticLaboratoryRasterProofsIT"
+      ],
+      "sourceMatrix": "docs/catalogos/macrobloco-analitico/matriz-colunas-final.json",
+      "missing": [
+        "Approved consumer manifest with owner, version, names, ordinals, types, nullability, filters and compatibility; SQL-10 uses its own internal scope",
+        "Nominal independent oracle and parity of applicable source/fact/dimension"
+      ],
+      "ownerRole": "Negocio, donos dos consumidores e owners de dados",
+      "newAcceptance": false
+    },
+    {
+      "id": "SQL-14",
+      "name": "vw_dim_filiais",
+      "localName": "pub.analytic_lab_sql_14",
+      "audience": "EXTERNAL",
+      "rule": "PUB-07/V2-035",
+      "grain": "Filial canônica usada por fonte/tenant/release/vigência",
+      "businessColumns": 2,
+      "physicalColumns": 11,
+      "status": "LOCAL_CONSTRUCTION_VERIFIED_REUSED",
+      "dependencies": [
+        "P21-FILIAIS"
+      ],
+      "tests": [
+        "AnalyticLaboratoryDimensionsIT"
+      ],
+      "sourceMatrix": "docs/catalogos/macrobloco-analitico/matriz-colunas-final.json",
+      "missing": [
+        "Approved consumer manifest with owner, version, names, ordinals, types, nullability, filters and compatibility; SQL-10 uses its own internal scope",
+        "Nominal independent oracle and parity of applicable source/fact/dimension"
+      ],
+      "ownerRole": "Negocio, donos dos consumidores e owners de dados",
+      "newAcceptance": false
+    },
+    {
+      "id": "SQL-15",
+      "name": "vw_dim_clientes",
+      "localName": "pub.analytic_lab_sql_15",
+      "audience": "EXTERNAL",
+      "rule": "PUB-07/V2-035",
+      "grain": "Cliente canônico usado por fonte/tenant/release/vigência",
+      "businessColumns": 1,
+      "physicalColumns": 11,
+      "status": "LOCAL_CONSTRUCTION_VERIFIED_REUSED",
+      "dependencies": [
+        "P21-CLIENTES"
+      ],
+      "tests": [
+        "AnalyticLaboratoryDimensionsIT"
+      ],
+      "sourceMatrix": "docs/catalogos/macrobloco-analitico/matriz-colunas-final.json",
+      "missing": [
+        "Approved consumer manifest with owner, version, names, ordinals, types, nullability, filters and compatibility; SQL-10 uses its own internal scope",
+        "Nominal independent oracle and parity of applicable source/fact/dimension"
+      ],
+      "ownerRole": "Negocio, donos dos consumidores e owners de dados",
+      "newAcceptance": false
+    },
+    {
+      "id": "SQL-16",
+      "name": "vw_dim_veiculos",
+      "localName": "pub.analytic_lab_sql_16",
+      "audience": "EXTERNAL",
+      "rule": "PUB-07/V2-035",
+      "grain": "Veículo por chave declarada; placa normalizada é atributo",
+      "businessColumns": 4,
+      "physicalColumns": 17,
+      "status": "LOCAL_CONSTRUCTION_VERIFIED_REUSED",
+      "dependencies": [
+        "P21-VEICULOS",
+        "G04-FROTA"
+      ],
+      "tests": [
+        "AnalyticLaboratoryDimensionsIT",
+        "AnalyticLaboratoryFleetReferencesIT"
+      ],
+      "sourceMatrix": "docs/catalogos/macrobloco-analitico/matriz-colunas-final.json",
+      "missing": [
+        "Approved consumer manifest with owner, version, names, ordinals, types, nullability, filters and compatibility; SQL-10 uses its own internal scope",
+        "Nominal independent oracle and parity of applicable source/fact/dimension"
+      ],
+      "ownerRole": "Negocio, donos dos consumidores e owners de dados",
+      "newAcceptance": false
+    },
+    {
+      "id": "SQL-17",
+      "name": "vw_dim_motoristas",
+      "localName": "pub.analytic_lab_sql_17",
+      "audience": "EXTERNAL",
+      "rule": "PUB-07/V2-035",
+      "grain": "Motorista por chave declarada; homônimo e filtro genérico com política explícita",
+      "businessColumns": 2,
+      "physicalColumns": 12,
+      "status": "LOCAL_CONSTRUCTION_VERIFIED_REUSED",
+      "dependencies": [
+        "P21-MOTORISTAS",
+        "G04-FROTA"
+      ],
+      "tests": [
+        "AnalyticLaboratoryDimensionsIT",
+        "AnalyticLaboratoryFleetReferencesIT"
+      ],
+      "sourceMatrix": "docs/catalogos/macrobloco-analitico/matriz-colunas-final.json",
+      "missing": [
+        "Approved consumer manifest with owner, version, names, ordinals, types, nullability, filters and compatibility; SQL-10 uses its own internal scope",
+        "Nominal independent oracle and parity of applicable source/fact/dimension"
+      ],
+      "ownerRole": "Negocio, donos dos consumidores e owners de dados",
+      "newAcceptance": false
+    },
+    {
+      "id": "SQL-18",
+      "name": "vw_dim_planocontas",
+      "localName": "pub.analytic_lab_sql_18",
+      "audience": "EXTERNAL",
+      "rule": "PUB-07/V2-035",
+      "grain": "Plano de Contas por chave e classificação governadas",
+      "businessColumns": 3,
+      "physicalColumns": 13,
+      "status": "LOCAL_CONSTRUCTION_VERIFIED_REUSED",
+      "dependencies": [
+        "P21-PLANO_CONTAS",
+        "P20-CAP8636"
+      ],
+      "tests": [
+        "AnalyticLaboratoryDimensionsIT"
+      ],
+      "sourceMatrix": "docs/catalogos/macrobloco-analitico/matriz-colunas-final.json",
+      "missing": [
+        "Approved consumer manifest with owner, version, names, ordinals, types, nullability, filters and compatibility; SQL-10 uses its own internal scope",
+        "Nominal independent oracle and parity of applicable source/fact/dimension"
+      ],
+      "ownerRole": "Negocio, donos dos consumidores e owners de dados",
+      "newAcceptance": false
+    },
+    {
+      "id": "SQL-19",
+      "name": "vw_dim_usuarios",
+      "localName": "pub.analytic_lab_sql_19",
+      "audience": "EXTERNAL",
+      "rule": "PUB-07/V2-035",
+      "grain": "Usuário ativo capturado, nome normalizado sem merge por nome",
+      "businessColumns": 3,
+      "physicalColumns": 13,
+      "status": "LOCAL_CONSTRUCTION_VERIFIED_REUSED",
+      "dependencies": [
+        "P20-USR",
+        "P21-USUARIOS"
+      ],
+      "tests": [
+        "AnalyticLaboratoryUsersIT",
+        "AnalyticLaboratoryObservationModesIT"
+      ],
+      "sourceMatrix": "docs/catalogos/macrobloco-analitico/matriz-colunas-final.json",
+      "missing": [
+        "Approved consumer manifest with owner, version, names, ordinals, types, nullability, filters and compatibility; SQL-10 uses its own internal scope",
+        "Nominal independent oracle and parity of applicable source/fact/dimension"
+      ],
+      "ownerRole": "Negocio, donos dos consumidores e owners de dados",
+      "newAcceptance": false
+    }
+  ],
+  "evidence": [
+    {
+      "path": "target/conclusao-p09-p33-20260922-01/verticais-p13-p21.json",
+      "sha256": "30a1ae64d6ec419e513f08460676b785fff2b6de4962d4ef4c12458fa85ecc63"
+    },
+    {
+      "path": "target/conclusao-p09-p33-20260922-01/analitico-p22-p27.json",
+      "sha256": "e17ed3a0ca35d3f0e35076e3d6ba9f8f29b1442b295a2987dad689ca819761c1"
+    },
+    {
+      "path": "target/conclusao-p09-p33-20260922-01/accepted-agent-evidence.json",
+      "sha256": "24e12c9b49ff8181d4574cf2c58408ee7a7cbd8446e0a888e98d5fba03b31557"
+    }
+  ],
+  "sweep": {
+    "responsibilities": 33,
+    "blocked": 19,
+    "disabled": 5,
+    "notApplicable": 9,
+    "enabled": 0,
+    "source": "docs/catalogos/sweep-v2-013/matriz-aplicabilidade-v01.csv",
+    "realApplyAuthorized": false
+  },
+  "reusedProofs": {
+    "status": "PASS",
+    "utc": "2026-09-22T03:34:58.115Z",
+    "layer": "READ_ONLY_REUSE_OF_EXECUTED_P07_PROOFS",
+    "reports": 60,
+    "tests": 363,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "newTestsExecuted": false,
+    "verticalPins": 72,
+    "agentDeliveries": [
+      {
+        "path": "target/conclusao-p09-p33-20260922-01/verticais-p13-p21.json",
+        "sha256": "30a1ae64d6ec419e513f08460676b785fff2b6de4962d4ef4c12458fa85ecc63"
+      },
+      {
+        "path": "target/conclusao-p09-p33-20260922-01/analitico-p22-p27.json",
+        "sha256": "e17ed3a0ca35d3f0e35076e3d6ba9f8f29b1442b295a2987dad689ca819761c1"
+      },
+      {
+        "path": "target/conclusao-p09-p33-20260922-01/accepted-agent-evidence.json",
+        "sha256": "24e12c9b49ff8181d4574cf2c58408ee7a7cbd8446e0a888e98d5fba03b31557"
+      }
+    ],
+    "sourceCalls": 0,
+    "databaseCalls": 0
+  },
+  "eligibleFunctionalWorkRemaining": 0,
+  "packageEvidence": {
+    "path": "target/conclusao-p09-p33-20260922-01/p29-docs-result.json",
+    "sha256": "9eaf0225176b3042f7c3e74edd1946a6757021617f2acf9cd603d272d48487ae"
+  },
+  "completedUtc": "2026-09-22T03:48:31.970Z",
+  "sastEvidence": {
+    "path": "target/conclusao-p09-p33-20260922-01/p29-pmd-security-01/result.json",
+    "sha256": "94f0405e77a8046d18629c57095ed2b278ea8037407669e4c717ae900c8f96ca"
+  }
+}

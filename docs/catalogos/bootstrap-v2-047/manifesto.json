@@ -1,0 +1,377 @@
+{
+  "schemaVersion": "V2_047_BOOTSTRAP_PLANNING_FOUNDATION_V1",
+  "task": {
+    "roadmapTask": "V2-047",
+    "route": "Q-BST-01",
+    "block": 41,
+    "slice": "FUNDACAO_PLANEJAMENTO_OFFLINE",
+    "model": "SOL_ULTRA"
+  },
+  "outcome": "FOUNDATION_OFFLINE_COMPLETE_BOOTSTRAP_EXECUTION_BLOCKED",
+  "scope": {
+    "executionMode": "OFFLINE_CATALOG_VALIDATION_ONLY",
+    "network": false,
+    "database": false,
+    "legacyDatabase": false,
+    "runtime": false,
+    "realPayload": false,
+    "credential": false,
+    "production": false,
+    "realBootstrap": false,
+    "executionReady": false
+  },
+  "closedVocabularies": {
+    "rowKinds": [
+      "SOURCE_ENTITY",
+      "ENTITY_HISTORY",
+      "DERIVED_FACT"
+    ],
+    "planningStates": [
+      "PLANNING_ELIGIBLE",
+      "PLANNING_BLOCKED_IDENTITY",
+      "CONDITIONAL_RASTER",
+      "ENTITY_HISTORY_PLANNING",
+      "DERIVED_REBUILD_DEFERRED_V2_036"
+    ],
+    "executionStates": [
+      "BLOCKED_Q01_AND_SOURCE",
+      "BLOCKED_VERTICAL_Q01_AND_SOURCE",
+      "BLOCKED_IDENTITY",
+      "BLOCKED_RASTER_DECISION",
+      "BLOCKED_INPUTS_AND_V2_036"
+    ],
+    "strategyCandidates": [
+      "GRAPHQL_FULL_SNAPSHOT_REEXTRACTION",
+      "ESL_PARTITIONED_REEXTRACTION",
+      "LEGACY_READ_ONLY_CONSISTENT_EXPORT",
+      "READ_ONLY_VERSIONED_FILE",
+      "REBUILD_FROM_QUALIFIED_CORE",
+      "NONE_UNTIL_IDENTITY",
+      "NONE_UNTIL_RASTER_DECISION",
+      "NONE"
+    ],
+    "rejectionReasons": [
+      "MODE_NOT_BOOTSTRAP",
+      "SOURCE_INSTANCE_REQUIRED",
+      "TENANT_SCOPE_REQUIRED",
+      "RESERVED_SCOPE_FORBIDDEN",
+      "T0_REQUIRED",
+      "TCUT_NOT_AFTER_T0",
+      "PARTITION_SHAPE_INVALID",
+      "DELTA_SEMANTICS_MISMATCH",
+      "INCREMENTAL_WATERMARK_FORBIDDEN",
+      "CONTRACT_FINGERPRINT_MISMATCH",
+      "IDENTITY_FINGERPRINT_MISMATCH",
+      "LEGACY_SURROGATE_AS_CANONICAL_FORBIDDEN",
+      "SILENT_REKEY_FORBIDDEN",
+      "ORPHAN_CHILD_FORBIDDEN",
+      "RELATION_V2_046_ANTICIPATED",
+      "ABSENCE_DEACTIVATION_FORBIDDEN",
+      "IMPLICIT_REFERENCE_RELEASE_FORBIDDEN",
+      "AUTOMATIC_FALLBACK_FORBIDDEN",
+      "EXECUTION_READY_WITH_OPEN_GATES",
+      "BOUNDS_REQUIRED",
+      "SENSITIVE_EVIDENCE_FORBIDDEN",
+      "DESTRUCTIVE_ROLLBACK_FORBIDDEN",
+      "DERIVED_FACT_BEFORE_INPUTS",
+      "USER_TEMPORAL_DELTA_FORBIDDEN",
+      "SOURCE_BOUNDARY_UNPROVEN",
+      "COMPLETION_WITH_GAP_FORBIDDEN",
+      "LATE_DATA_POLICY_INVALID"
+    ]
+  },
+  "canonicalSources": [
+    {
+      "sourceId": "ADR-0009",
+      "path": "docs/adr/0009-janelas-ledgers-e-publicacao-atomica.md",
+      "sha256": "262bb07b950f0fae99e8dcf8e002af6ea772b0fcadc5a2d70201eb0534af11e2"
+    },
+    {
+      "sourceId": "ADR-0015",
+      "path": "docs/adr/0015-topologia-material-e-fences-de-cutover.md",
+      "sha256": "ee300bcacadbd87dd3d856dad9eb1a531aa2cc42eff5f2b0dff47285af9ab8a3"
+    },
+    {
+      "sourceId": "CONTROL-PLANE",
+      "path": "database/manifest/control-plane.json",
+      "sha256": "2e1ae7bfc2d343e1f58dbf1061d54dc952d81c3bccf85cbc2440a536b64b2779"
+    },
+    {
+      "sourceId": "STAGING-PROMOTION-KERNEL",
+      "path": "database/manifest/staging-promotion-kernel.json",
+      "sha256": "45b82365de1bbe1eca555a9f869e2d274c0a8cce62735405b3e8fc362b59468e"
+    },
+    {
+      "sourceId": "CUTOVER-TOPOLOGY",
+      "path": "docs/catalogos/cutover/manifesto.json",
+      "sha256": "c6046b2fa4c9856d408ffc6d2b84fd8797090baece60ec282446449597b2a252"
+    },
+    {
+      "sourceId": "CHARACTERIZATION-FOUNDATION",
+      "path": "docs/catalogos/caracterizacao-v2-012/manifesto.json",
+      "sha256": "dc20b409ed726055bb6915fd6122af69704a975e570cd14867430c4a84496787"
+    },
+    {
+      "sourceId": "PORTABILITY-LEDGER",
+      "path": "docs/catalogos/portabilidade/manifesto.json",
+      "sha256": "f6dd04a69397f534429d21dd0d0da51da88af6f0c8c76ea6c9e1ea3cc72edab4"
+    },
+    {
+      "sourceId": "SCHEMA-FOUNDATION",
+      "path": "database/manifest/schema-foundation.json",
+      "sha256": "aa8d28a83a70c5bab09898efe9cd6b2b982d6b580e1634e8ddac107e62ebb7e4"
+    },
+    {
+      "sourceId": "FIRST-WAVE-CONTRACTS",
+      "path": "docs/catalogos/contratos-primeira-onda/manifesto.json",
+      "sha256": "d7910ff0e3d0f78bee57aaad5178561db8bcb0d0d253448531b606bcef45950c"
+    },
+    {
+      "sourceId": "FIRST-WAVE-IDENTITY",
+      "path": "docs/catalogos/identidade-primeira-onda/manifesto.json",
+      "sha256": "15348b0074af78a29867b33a6333f6d7d20e1b3ee31300162d26dc54c7c33c2b"
+    },
+    {
+      "sourceId": "MANIFESTOS-CONTRACT",
+      "path": "docs/catalogos/contratos-esl-6399/manifesto.json",
+      "sha256": "fc19e50cdfe0e91fcd192a17b65d6cc48f8f62dca13f755006d4e0fcfb8b86bd"
+    },
+    {
+      "sourceId": "MANIFESTOS-IDENTITY",
+      "path": "docs/catalogos/identidade-manifestos/manifesto.json",
+      "sha256": "290ef5cbba142de8cf07c0a17948a8571ba7c9ac9673b0910786a960514e5a23"
+    },
+    {
+      "sourceId": "COTACOES-CONTRACT",
+      "path": "docs/catalogos/contratos-esl-6906/manifesto.json",
+      "sha256": "ce93c3e051381dcfa570d858262817f7d8c9cd3248b505cbff60c45f61c4dff9"
+    },
+    {
+      "sourceId": "COTACOES-IDENTITY",
+      "path": "docs/catalogos/identidade-cotacoes/manifesto.json",
+      "sha256": "3c41036eff9ed4ce3357d3fcb4c5119a1a82222ce34493b4c428532413e7f811"
+    },
+    {
+      "sourceId": "LOCALIZACAO-CONTRACT",
+      "path": "docs/catalogos/contratos-esl-8656/manifesto.json",
+      "sha256": "6ed94fb98993d459ed1b9ced49da7cf93b010acd76a8e96e6fa498de62676494"
+    },
+    {
+      "sourceId": "LOCALIZACAO-IDENTITY",
+      "path": "docs/catalogos/identidade-localizacao-cargas/manifesto.json",
+      "sha256": "ade63c2c0483d94a668b194f7f8c76e63795aa188f02e93657e53ba88c8958de"
+    }
+  ],
+  "coverage": {
+    "sourceEntityRows": 11,
+    "entityHistoryRows": 1,
+    "derivedFactRows": 5,
+    "totalMatrixRows": 17,
+    "planningEligibleEntities": 6,
+    "planningBlockedOrConditionalEntities": 5
+  },
+  "planningPolicy": {
+    "internalInterval": "[start,endExclusive)",
+    "t0": "CONSISTENT_SOURCE_SNAPSHOT_BOUNDARY_UTC",
+    "tcut": "FUTURE_REHEARSAL_OR_CUTOVER_BOUNDARY_UTC",
+    "delta": "(T0,Tcut]",
+    "basePartitions": "POSITIVE_ADJACENT_NO_GAP_NO_OVERLAP",
+    "lateData": "SEPARATE_BOUNDED_REPLAY_WITH_EXPLICIT_OVERLAP",
+    "checkpointNamespace": "BOOTSTRAP",
+    "incrementalWatermarkEffect": "NONE",
+    "scopePolicy": "EXPLICIT_SOURCE_INSTANCE_AND_TENANT_NO_RESERVED_SENTINELS",
+    "identityPolicy": "TYPE_TAGGED_SOURCE_KEY_PRESERVE_REGISTRY_CANONICAL_ID",
+    "parentChildPolicy": "ATOMIC_ROOT_CHILD_NO_ORPHAN_RELATIONS_DEFERRED",
+    "reconciliationPolicy": "AGGREGATE_COUNTS_AND_DIGESTS_NO_ROW_VALUE_OR_KEY_EMISSION",
+    "rollbackPolicy": "TRANSACTIONAL_PARTITION_REPLAY_NO_HARD_DELETE_NO_DOWN_MIGRATION",
+    "restartPolicy": "MATCHING_CONTRACT_IDENTITY_CONFIGURATION_AND_STRATEGY_FINGERPRINTS",
+    "completionPolicy": "ALL_BASE_PARTITIONS_AND_DELTA_RECONCILED"
+  },
+  "entities": [
+    {
+      "entity": "usuarios",
+      "planningState": "PLANNING_ELIGIBLE",
+      "executionState": "BLOCKED_Q01_AND_SOURCE",
+      "verticalState": "IMPLEMENTED_IN_SHADOW",
+      "contractId": "graphql-individual",
+      "contractFingerprint": "a650e5e8313e6d45bff326dd8ab15920ba23da8e44e9237f538c4cbce76aca7c",
+      "identityFingerprint": "8e8ad89777277f3b8bf72b4b63f65d8fa813843380f44da99f0b035bbf788528",
+      "partitionAxis": "NONE_FULL_SNAPSHOT",
+      "primaryStrategyCandidate": "GRAPHQL_FULL_SNAPSHOT_REEXTRACTION",
+      "fallbackStrategyCandidate": "LEGACY_READ_ONLY_CONSISTENT_EXPORT",
+      "blockers": ["Q-USR-01", "AUTHORIZED_HISTORICAL_SOURCE", "COMPLETENESS_PROOF"]
+    },
+    {
+      "entity": "coletas",
+      "planningState": "PLANNING_ELIGIBLE",
+      "executionState": "BLOCKED_Q01_AND_SOURCE",
+      "verticalState": "IMPLEMENTADA_EM_SHADOW",
+      "contractId": "dataexport-6908",
+      "contractFingerprint": "052d84c37d9c55ae2b2b4891eb4771c68158ee7365402a1388cc68256c67cc59",
+      "identityFingerprint": "0ca2cd5ce2573d0bdec31d9bc141887f2d58bc79cd67d289981034a4865705e1",
+      "partitionAxis": "picks.request_date",
+      "primaryStrategyCandidate": "ESL_PARTITIONED_REEXTRACTION",
+      "fallbackStrategyCandidate": "LEGACY_READ_ONLY_CONSISTENT_EXPORT",
+      "blockers": ["Q-COL-01", "AUTHORIZED_HISTORICAL_SOURCE", "COMPLETENESS_PROOF"]
+    },
+    {
+      "entity": "fretes",
+      "planningState": "PLANNING_ELIGIBLE",
+      "executionState": "BLOCKED_VERTICAL_Q01_AND_SOURCE",
+      "verticalState": "NOT_STARTED",
+      "contractId": "dataexport-6389",
+      "contractFingerprint": "23aef4e4e03488d291d3990bdba813800e3ebb8c8be18e766a788daf9741ec15",
+      "identityFingerprint": "4e35b90cd4a58e139210d9adf9ac050acba9a46e62585996b650c6252cf44723",
+      "partitionAxis": "freights.service_at",
+      "primaryStrategyCandidate": "ESL_PARTITIONED_REEXTRACTION",
+      "fallbackStrategyCandidate": "LEGACY_READ_ONLY_CONSISTENT_EXPORT",
+      "blockers": ["V2-046a", "V2-011", "Q-FRE-01", "AUTHORIZED_HISTORICAL_SOURCE"]
+    },
+    {
+      "entity": "manifestos",
+      "planningState": "PLANNING_ELIGIBLE",
+      "executionState": "BLOCKED_Q01_AND_SOURCE",
+      "verticalState": "IMPLEMENTADA_EM_SHADOW_ROLLBACK_ONLY",
+      "contractId": "dataexport-6399",
+      "contractFingerprint": "30181093f00f47507d1910d9806a97697118ab671aeae0598d21a4a2726a7cb8",
+      "identityFingerprint": "ad2e3457a91961372dd29cb96bd6f2cb5fd6f67614d1255303787a8e2c4085c3",
+      "partitionAxis": "manifests.service_date",
+      "primaryStrategyCandidate": "ESL_PARTITIONED_REEXTRACTION",
+      "fallbackStrategyCandidate": "LEGACY_READ_ONLY_CONSISTENT_EXPORT",
+      "blockers": ["Q-MAN-01_EXTERNAL_HOLD", "AUTHORIZED_HISTORICAL_SOURCE", "COMPLETENESS_PROOF"]
+    },
+    {
+      "entity": "cotacoes",
+      "planningState": "PLANNING_ELIGIBLE",
+      "executionState": "BLOCKED_Q01_AND_SOURCE",
+      "verticalState": "IMPLEMENTADA_EM_SHADOW",
+      "contractId": "dataexport-6906",
+      "contractFingerprint": "4bd641aa5ebe1c069776dc7009377d43c4c1d3e26727969667cc7adc01071166",
+      "identityFingerprint": "355db9b9998d0366378c763b10738c875772d98bc649bf7b3bcceabbfbe345cb",
+      "partitionAxis": "quotes.requested_at",
+      "primaryStrategyCandidate": "ESL_PARTITIONED_REEXTRACTION",
+      "fallbackStrategyCandidate": "LEGACY_READ_ONLY_CONSISTENT_EXPORT",
+      "blockers": ["Q-COT-01", "AUTHORIZED_HISTORICAL_SOURCE", "EXPLICIT_QUOTE_TARIFF_RELEASE"]
+    },
+    {
+      "entity": "localizacao_cargas",
+      "planningState": "PLANNING_ELIGIBLE",
+      "executionState": "BLOCKED_VERTICAL_Q01_AND_SOURCE",
+      "verticalState": "NOT_STARTED",
+      "contractId": "dataexport-8656",
+      "contractFingerprint": "da95fc17fc3db2fae7635c5456166d72af844b1d826e84ab6c2ba8b6f1b65c24",
+      "identityFingerprint": "14af11dce5fd7696238907b72f8f6c8c77f86a4cff3045b489da5eb132c0d6f0",
+      "partitionAxis": "freights.service_at",
+      "primaryStrategyCandidate": "ESL_PARTITIONED_REEXTRACTION",
+      "fallbackStrategyCandidate": "LEGACY_READ_ONLY_CONSISTENT_EXPORT",
+      "blockers": ["V2-011", "V2-028", "Q-LOC-01", "AUTHORIZED_HISTORICAL_SOURCE"]
+    },
+    {
+      "entity": "contas_a_pagar",
+      "planningState": "PLANNING_BLOCKED_IDENTITY",
+      "executionState": "BLOCKED_IDENTITY",
+      "verticalState": "NOT_STARTED",
+      "contractId": "dataexport-8636",
+      "contractFingerprint": "948902142c9d35ca76574de13cfac1064b6b06eefb62ae012ea5823022dec4c1",
+      "identityFingerprint": "UNRESOLVED_P09",
+      "partitionAxis": "accounting_debits.issue_date+created_at",
+      "primaryStrategyCandidate": "NONE_UNTIL_IDENTITY",
+      "fallbackStrategyCandidate": "NONE",
+      "blockers": ["P09", "ROOT_IDENTITY_ABSENT", "PHYSICAL_ROW_KEY_REFUTED"]
+    },
+    {
+      "entity": "faturas_por_cliente",
+      "planningState": "PLANNING_BLOCKED_IDENTITY",
+      "executionState": "BLOCKED_IDENTITY",
+      "verticalState": "NOT_STARTED",
+      "contractId": "dataexport-4924",
+      "contractFingerprint": "38cecfe9119012eae6e964d79931839805ad825ef527b2392c314edfd94d1098",
+      "identityFingerprint": "UNRESOLVED_P10",
+      "partitionAxis": "freights.service_at",
+      "primaryStrategyCandidate": "NONE_UNTIL_IDENTITY",
+      "fallbackStrategyCandidate": "NONE",
+      "blockers": ["P10", "LOGICAL_TITLE_UNRESOLVED", "CROSSWALKS_UNRESOLVED"]
+    },
+    {
+      "entity": "inventario",
+      "planningState": "PLANNING_BLOCKED_IDENTITY",
+      "executionState": "BLOCKED_IDENTITY",
+      "verticalState": "NOT_STARTED",
+      "contractId": "dataexport-10633",
+      "contractFingerprint": "7eeb2844708df34bd1a7877faa4aa0ba2a2c9d13b623d5da093890af89726127",
+      "identityFingerprint": "UNRESOLVED_P08",
+      "partitionAxis": "check_in_orders.started_at",
+      "primaryStrategyCandidate": "NONE_UNTIL_IDENTITY",
+      "fallbackStrategyCandidate": "NONE",
+      "blockers": ["P08", "ROOT_IDENTITY_UNRESOLVED", "INVOICE_MAPPING_UNRESOLVED"]
+    },
+    {
+      "entity": "sinistros",
+      "planningState": "PLANNING_BLOCKED_IDENTITY",
+      "executionState": "BLOCKED_IDENTITY",
+      "verticalState": "NOT_STARTED",
+      "contractId": "dataexport-6392",
+      "contractFingerprint": "6f837cabc31d50fd7677c07d11bcb45a3589373ab383ab2aebbb45695a9ec147",
+      "identityFingerprint": "UNRESOLVED_P11",
+      "partitionAxis": "insurance_claims.opening_at_date",
+      "primaryStrategyCandidate": "NONE_UNTIL_IDENTITY",
+      "fallbackStrategyCandidate": "NONE",
+      "blockers": ["P11", "ROOT_SOURCE_KEY_UNRESOLVED", "COMPOSITE_GRAIN_UNRESOLVED"]
+    },
+    {
+      "entity": "raster",
+      "planningState": "CONDITIONAL_RASTER",
+      "executionState": "BLOCKED_RASTER_DECISION",
+      "verticalState": "CONDITIONAL_NOT_DECIDED",
+      "contractId": "NONE",
+      "contractFingerprint": "NONE",
+      "identityFingerprint": "NONE",
+      "partitionAxis": "NONE_UNTIL_CONTRACT",
+      "primaryStrategyCandidate": "NONE_UNTIL_RASTER_DECISION",
+      "fallbackStrategyCandidate": "NONE",
+      "blockers": ["V2-034a", "V2-025c", "V2-009c", "V2-034b"]
+    }
+  ],
+  "artifacts": {
+    "matrix": {
+      "path": "docs/catalogos/bootstrap-v2-047/matriz-bootstrap-v01.csv",
+      "sha256": "d14594e9b64af2e5046541719c98168a619211b2ad98712e4d6da274b663017c"
+    },
+    "fixture": {
+      "path": "docs/catalogos/bootstrap-v2-047/fixtures/casos-v01.synthetic.json",
+      "sha256": "0bf44e957bd2b11c142054a50efe4ddc817e8814a52507d13206212e412a9b6b"
+    }
+  },
+  "scenarioSummary": {
+    "positive": 7,
+    "negative": 27,
+    "total": 34,
+    "positiveDisposition": "PLANNING_ACCEPTED_EXECUTION_BLOCKED",
+    "negativeDisposition": "REJECTED"
+  },
+  "futureGates": [
+    "Q-*-01_CHARACTERIZATION_ACCEPTED",
+    "Q-*-02_AUTHORIZED_HISTORICAL_SOURCE",
+    "ENTITY_VERTICAL_IMPLEMENTED_IN_SHADOW",
+    "SOURCE_HORIZON_AND_CONSISTENCY_PROVEN",
+    "EXECUTION_LIMITS_AND_EVIDENCE_DESTINATION_APPROVED",
+    "V2-012B_PARITY_AFTER_BOOTSTRAP"
+  ],
+  "prohibitedScope": [
+    "NETWORK",
+    "DATABASE",
+    "LEGACY_DATABASE",
+    "REAL_SOURCE",
+    "REAL_PAYLOAD_OR_IDENTIFIER",
+    "CREDENTIAL_OR_ENV_FILE",
+    "BOOTSTRAP_EXECUTION",
+    "CHARACTERIZATION_EXECUTION",
+    "RELATION_MATERIALIZATION",
+    "SWEEP_OR_DEACTIVATION",
+    "FACT_BUILD",
+    "PUBLICATION",
+    "RELEASE",
+    "DEPLOY",
+    "CUTOVER"
+  ]
+}

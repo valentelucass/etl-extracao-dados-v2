@@ -1,0 +1,192 @@
+{
+  "version": "synthetic-analytic-collection-v1",
+  "provenance": "FIXTURE_SINTETICA_EXPLICITA",
+  "fields": [
+    {
+      "name": "id",
+      "kind": "INTEGER",
+      "wire": "INTEGER",
+      "sourcePath": "/data/id"
+    },
+    {
+      "name": "pck_crn_psn_nickname",
+      "kind": "TEXT",
+      "wire": "STRING",
+      "sourcePath": "/data/pck_crn_psn_nickname"
+    },
+    {
+      "name": "sequence_code",
+      "kind": "INTEGER",
+      "wire": "INTEGER",
+      "sourcePath": "/data/sequence_code"
+    },
+    {
+      "name": "created_at",
+      "kind": "INSTANT",
+      "wire": "STRING",
+      "sourcePath": "/data/created_at"
+    },
+    {
+      "name": "request_date",
+      "kind": "DATE",
+      "wire": "STRING",
+      "sourcePath": "/data/request_date"
+    },
+    {
+      "name": "service_date",
+      "kind": "DATE",
+      "wire": "STRING",
+      "sourcePath": "/data/service_date"
+    },
+    {
+      "name": "finish_date",
+      "kind": "DATE",
+      "wire": "STRING",
+      "sourcePath": "/data/finish_date"
+    },
+    {
+      "name": "pck_cor_nickname",
+      "kind": "TEXT",
+      "wire": "STRING",
+      "sourcePath": "/data/pck_cor_nickname"
+    },
+    {
+      "name": "invoices_volumes",
+      "kind": "INTEGER",
+      "wire": "INTEGER",
+      "sourcePath": "/data/invoices_volumes"
+    },
+    {
+      "name": "invoices_weight",
+      "kind": "DECIMAL",
+      "wire": "STRING",
+      "sourcePath": "/data/invoices_weight"
+    },
+    {
+      "name": "taxed_weight",
+      "kind": "DECIMAL",
+      "wire": "STRING",
+      "sourcePath": "/data/taxed_weight"
+    },
+    {
+      "name": "invoices_value",
+      "kind": "DECIMAL",
+      "wire": "STRING",
+      "sourcePath": "/data/invoices_value"
+    },
+    {
+      "name": "status",
+      "kind": "TEXT",
+      "wire": "STRING",
+      "sourcePath": "/data/status"
+    },
+    {
+      "name": "pck_pds_cty_name",
+      "kind": "TEXT",
+      "wire": "STRING",
+      "sourcePath": "/data/pck_pds_cty_name"
+    },
+    {
+      "name": "pck_pds_cty_sae_code",
+      "kind": "TEXT",
+      "wire": "STRING",
+      "sourcePath": "/data/pck_pds_cty_sae_code"
+    },
+    {
+      "name": "pck_pds_postal_code",
+      "kind": "TEXT",
+      "wire": "STRING",
+      "sourcePath": "/data/pck_pds_postal_code"
+    },
+    {
+      "name": "pck_pds_neighborhood",
+      "kind": "TEXT",
+      "wire": "STRING",
+      "sourcePath": "/data/pck_pds_neighborhood"
+    },
+    {
+      "name": "pck_prn_name",
+      "kind": "TEXT",
+      "wire": "STRING",
+      "sourcePath": "/data/pck_prn_name"
+    },
+    {
+      "name": "pck_prn_drt_nickname",
+      "kind": "TEXT",
+      "wire": "STRING",
+      "sourcePath": "/data/pck_prn_drt_nickname"
+    },
+    {
+      "name": "updated_at",
+      "kind": "INSTANT",
+      "wire": "STRING",
+      "sourcePath": "/data/updated_at"
+    },
+    {
+      "name": "pck_loe_ore_description",
+      "kind": "TEXT",
+      "wire": "STRING",
+      "sourcePath": "/data/pck_loe_ore_description"
+    },
+    {
+      "name": "pck_pus_ore_description",
+      "kind": "TEXT",
+      "wire": "STRING",
+      "sourcePath": "/data/pck_pus_ore_description"
+    },
+    {
+      "name": "pck_pus_ore_trigger",
+      "kind": "TEXT",
+      "wire": "STRING",
+      "sourcePath": "/data/pck_pus_ore_trigger"
+    },
+    {
+      "name": "pck_uer_name",
+      "kind": "TEXT",
+      "wire": "STRING",
+      "sourcePath": "/data/pck_uer_name"
+    },
+    {
+      "name": "pck_ctr_name",
+      "kind": "TEXT",
+      "wire": "STRING",
+      "sourcePath": "/data/pck_ctr_name"
+    },
+    {
+      "name": "cancellation_reason",
+      "kind": "TEXT",
+      "wire": "STRING",
+      "sourcePath": "/data/cancellation_reason"
+    },
+    {
+      "name": "pck_mik_attempt_number",
+      "kind": "INTEGER",
+      "wire": "INTEGER",
+      "sourcePath": "/data/pck_mik_attempt_number"
+    },
+    {
+      "name": "pck_mik_mft_crn_psn_nickname",
+      "kind": "TEXT",
+      "wire": "STRING",
+      "sourcePath": "/data/pck_mik_mft_crn_psn_nickname"
+    },
+    {
+      "name": "pck_mik_mft_sequence_code",
+      "kind": "INTEGER",
+      "wire": "INTEGER",
+      "sourcePath": "/data/pck_mik_mft_sequence_code"
+    },
+    {
+      "name": "pck_mik_mft_vie_license_plate",
+      "kind": "TEXT",
+      "wire": "STRING",
+      "sourcePath": "/data/pck_mik_mft_vie_license_plate"
+    },
+    {
+      "name": "pck_mik_mft_vie_vee_name",
+      "kind": "TEXT",
+      "wire": "STRING",
+      "sourcePath": "/data/pck_mik_mft_vie_vee_name"
+    }
+  ]
+}

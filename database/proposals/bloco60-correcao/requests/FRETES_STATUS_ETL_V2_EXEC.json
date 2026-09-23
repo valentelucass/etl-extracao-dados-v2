@@ -1,0 +1,21 @@
+{
+  "invocationId": "4f84ffe7-7bb6-4a87-8b96-c52abeba5895",
+  "executionId": "dbd9a862-b9c9-404b-93e2-8cd4338209d1",
+  "cycleId": "3750ce12-0df5-431f-8d48-afd926e84210",
+  "mode": "BACKFILL",
+  "start": "2033-06-04T03:00:00Z",
+  "endExclusive": "2033-06-05T03:00:00Z",
+  "replayOf": "",
+  "idempotencyKey": "B60_fb116c0e4cfb4afd879ee30d58b9ee09",
+  "leaseSeconds": "30",
+  "pageSize": "2",
+  "maximumPages": "4",
+  "qualityVersion": "B54_LOCAL_V2_fretes_BACKFILL",
+  "qualityFingerprint": "40a2484eee5dd7d58a7bf55909da5f26f7f53b8a48826ead9df3df399832ac44",
+  "compatibilityVersion": "bloco60-compatible-v1",
+  "template": "FRETES",
+  "maximumRows": "16",
+  "maximumDistinctRoots": "16",
+  "businessStart": "2033-06-04",
+  "businessEnd": "2033-06-04"
+}

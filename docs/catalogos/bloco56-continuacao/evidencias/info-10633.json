@@ -1,0 +1,150 @@
+{
+  "template": 10633,
+  "httpStatus": 200,
+  "curlExit": 0,
+  "bytes": 3964,
+  "elapsedMilliseconds": 700,
+  "failure": null,
+  "metadata": {
+    "fields": [
+      {
+        "name": "cnr_c_s_fit_corporation_sequence_number",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "cnr_c_s_fit_pyr_nickname",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "cnr_c_s_fit_sdr_nickname",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "cnr_c_s_fit_sdr_ads_cty_name",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "cnr_c_s_fit_rpt_nickname",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "cnr_c_s_fit_rpt_ads_cty_name",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "cnr_c_s_fit_dyn_name",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "cnr_c_s_fit_dyn_drt_nickname",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "sequence_code",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "cnr_crn_psn_nickname",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "type",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "started_at",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "finished_at",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "status",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "cnr_cis_eoe_psn_name",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "cnr_c_s_fit_invoices_mapping",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "cnr_c_s_fit_invoices_value",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "cnr_c_s_fit_real_weight",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "cnr_c_s_fit_total_cubic_volume",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "cnr_c_s_fit_taxed_weight",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "cnr_c_s_fit_invoices_volumes",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "cnr_c_s_read_volumes",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "cnr_c_s_fit_dpn_delivery_prediction_at",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "cnr_c_s_fit_dpn_performance_finished_at",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "cnr_c_s_fit_fte_lce_occurrence_at",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "cnr_c_s_fit_fte_lce_ore_description",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      }
+    ],
+    "fieldsCount": 26,
+    "fieldsNamesOmitted": 0,
+    "filters": [
+      {
+        "name": "started_at",
+        "declaredType": "date"
+      },
+      {
+        "name": "corporation_id",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "sequence_code",
+        "declaredType": "numeric"
+      },
+      {
+        "name": "check_in_type",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "updated_at",
+        "declaredType": "date"
+      },
+      {
+        "name": "from_invoice_number",
+        "declaredType": "numeric"
+      },
+      {
+        "name": "from_volume_code",
+        "declaredType": "numeric"
+      }
+    ],
+    "filtersCount": 7,
+    "filtersNamesOmitted": 0
+  }
+}

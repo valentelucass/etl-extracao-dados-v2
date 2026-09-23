@@ -1,0 +1,16 @@
+{
+  "additionalAssertions": 13,
+  "passed": true,
+  "readbackSha256": "ec0a85003e5f3f445ce32a684643d2f295fb656ce7245219fbe7b385ca826af6",
+  "reason": "V018 maps null terminal evidence on nonempty pages to NONE; collection traverses two pages. V024 DQ then rejects missing GraphQL terminal proof. Require exactly FAILED, four DQ checks with one failure, zero seal/publication/application/history.",
+  "sources": [
+    "database/migrations/V018__enforce_durable_runtime_consumers.sql:1278",
+    "database/migrations/V024__bind_source_protocols_and_users_runtime.sql:859",
+    "src/test/java/br/com/esl/etl/v2/bootstrap/RuntimeUsersPhysicalProbe.java:201"
+  ],
+  "repeatedPhysicalExecution": false,
+  "correctedHttp": 2,
+  "originalHttp": 1,
+  "case": "AUDIT_NULL",
+  "originalFailedEvidencePreserved": true
+}

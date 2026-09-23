@@ -1,0 +1,29 @@
+{
+  "schema": "local-pmd-resolved-dispositions-v1",
+  "historicalFindings": 37,
+  "currentFindings": 36,
+  "exactRemainingCatalog": "docs/continuidade/qualificacao-p07-p33/disposicoes-pmd.json",
+  "previousRaw": {
+    "path": "target/avanco-seguranca-20260922-01/static-analysis-main-02/result.json",
+    "sha256": "1ce587bd422f96bcb3cd4c751b682c69d11deb74ff99d5a7f8d4465491ffcb0c"
+  },
+  "currentRaw": {
+    "path": "target/qualificacao-p07-p33-20260922-01/static-main-01/result.json",
+    "sha256": "10a200e3c5258f490e9f5275b9d6b181361077a9f85aff2bcc778b7ce100fe3d"
+  },
+  "resolved": [
+    {
+      "id": "PMD-HIST-LocalAnalyticQuotesRuntime-capture-261",
+      "path": "src/main/java/br/com/esl/etl/v2/bootstrap/LocalAnalyticQuotesRuntime.java",
+      "historicalLine": 261,
+      "rule": "PreserveStackTrace",
+      "method": "capture",
+      "classification": "RESOLVIDO_POR_CLAREZA_DO_ALIAS_SEM_MUDANCA_DE_CAUSA",
+      "rationale": "O mesmo IllegalStateException(codigo,error) agora recebe nome captured, e essa mesma instancia e atribuida a failure[0] e lancada. A causa original continua passada ao construtor. PMD nao emite mais este alerta; nenhum filtro ou suppression foi aplicado.",
+      "sourceSha256": "7e53a629a80024d305a87d619ac5687b3412fb8db335ed510d8f3aa229d7c522",
+      "proofLimit": "PMD final executado confirma desaparecimento. Revisao de fluxo prova equivalencia de alias; nao se alega injecao de SQLException em staging.begin nem IT novo nesta disposicao. P07 permanece dependente da propria prova integral."
+    }
+  ],
+  "nominalSecurityAcceptance": false,
+  "releaseAcceptance": false
+}

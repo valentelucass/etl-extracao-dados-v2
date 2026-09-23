@@ -1,0 +1,790 @@
+{
+  "version": 1,
+  "scope": "Two bounded local sizes of the current artifact path and diagnostic heap observations during cancellation; no production plateau/SLO assertion",
+  "fullVerify": {
+    "path": "target/macrobloco-integracao-funcional-20260914-01/verify-final-02/build/target/failsafe-reports/TEST-br.com.esl.etl.v2.bootstrap.QualificationArtifactScaleIT.xml",
+    "sha256": "4b457d0af85971283aa68fd428f4df0ceb98b8f7b8fe5579b6eb6d9473e4789f"
+  },
+  "scales": [
+    {
+      "roots": 2,
+      "pages": 40,
+      "bytes": 105851,
+      "records": 67,
+      "batches": 29,
+      "largestBatch": 12,
+      "heapBefore": 177406384,
+      "heapAfter": 143090432,
+      "heapPoolPeakSum": 193929416,
+      "elapsedMillis": 19153,
+      "jdbc": 389,
+      "outputs": 19,
+      "scopes": 35
+    },
+    {
+      "roots": 8,
+      "pages": 121,
+      "bytes": 423920,
+      "records": 271,
+      "batches": 112,
+      "largestBatch": 16,
+      "heapBefore": 174023368,
+      "heapAfter": 32758840,
+      "heapPoolPeakSum": 193946312,
+      "elapsedMillis": 26816,
+      "jdbc": 684,
+      "outputs": 19,
+      "scopes": 35
+    }
+  ],
+  "packagedScales": [
+    {
+      "size": "small",
+      "receipt": {
+        "path": "target/macrobloco-integracao-funcional-20260914-01/artifact-small-final-01/control/case-artifact-small/receipt.json",
+        "sha256": "12fb745b1875edba03ed6253a0bceabf8cf42e57d0a5f34f63cd5d40eddf602c"
+      },
+      "metrics": {
+        "pages": 40,
+        "bytes": 108226,
+        "records": 67,
+        "batches": 29,
+        "largestBatch": 12,
+        "inFlight": 0,
+        "heapBefore": 295722944,
+        "heapAfter": 20509632,
+        "elapsedMillis": 23160,
+        "inputs": [
+          {
+            "input": "COL",
+            "pages": 4,
+            "bytes": 8213,
+            "records": 6,
+            "batches": 3,
+            "largestBatch": 2,
+            "largestPageBytes": 2737,
+            "inFlight": 0,
+            "retainedPageBytes": 0,
+            "elapsedMillis": 168,
+            "rowLimit": 4096,
+            "byteLimit": 67108864,
+            "pageLimit": 10000
+          },
+          {
+            "input": "FRE",
+            "pages": 7,
+            "bytes": 1494,
+            "records": 7,
+            "batches": 4,
+            "largestBatch": 2,
+            "largestPageBytes": 529,
+            "inFlight": 0,
+            "retainedPageBytes": 0,
+            "elapsedMillis": 429,
+            "rowLimit": 4096,
+            "byteLimit": 67108864,
+            "pageLimit": 10000
+          },
+          {
+            "input": "MAN",
+            "pages": 4,
+            "bytes": 18539,
+            "records": 6,
+            "batches": 3,
+            "largestBatch": 2,
+            "largestPageBytes": 6179,
+            "inFlight": 0,
+            "retainedPageBytes": 0,
+            "elapsedMillis": 822,
+            "rowLimit": 4096,
+            "byteLimit": 67108864,
+            "pageLimit": 10000
+          },
+          {
+            "input": "COT",
+            "pages": 4,
+            "bytes": 9245,
+            "records": 6,
+            "batches": 3,
+            "largestBatch": 2,
+            "largestPageBytes": 3081,
+            "inFlight": 0,
+            "retainedPageBytes": 0,
+            "elapsedMillis": 302,
+            "rowLimit": 4096,
+            "byteLimit": 67108864,
+            "pageLimit": 10000
+          },
+          {
+            "input": "LOC",
+            "pages": 3,
+            "bytes": 836,
+            "records": 4,
+            "batches": 2,
+            "largestBatch": 2,
+            "largestPageBytes": 417,
+            "inFlight": 0,
+            "retainedPageBytes": 0,
+            "elapsedMillis": 241,
+            "rowLimit": 4096,
+            "byteLimit": 67108864,
+            "pageLimit": 10000
+          },
+          {
+            "input": "CAP",
+            "pages": 4,
+            "bytes": 9250,
+            "records": 6,
+            "batches": 3,
+            "largestBatch": 2,
+            "largestPageBytes": 3083,
+            "inFlight": 0,
+            "retainedPageBytes": 0,
+            "elapsedMillis": 275,
+            "rowLimit": 4096,
+            "byteLimit": 67108864,
+            "pageLimit": 10000
+          },
+          {
+            "input": "FAT",
+            "pages": 4,
+            "bytes": 18646,
+            "records": 6,
+            "batches": 3,
+            "largestBatch": 2,
+            "largestPageBytes": 6215,
+            "inFlight": 0,
+            "retainedPageBytes": 0,
+            "elapsedMillis": 168,
+            "rowLimit": 4096,
+            "byteLimit": 67108864,
+            "pageLimit": 10000
+          },
+          {
+            "input": "INV",
+            "pages": 4,
+            "bytes": 11884,
+            "records": 6,
+            "batches": 3,
+            "largestBatch": 2,
+            "largestPageBytes": 3961,
+            "inFlight": 0,
+            "retainedPageBytes": 0,
+            "elapsedMillis": 142,
+            "rowLimit": 4096,
+            "byteLimit": 67108864,
+            "pageLimit": 10000
+          },
+          {
+            "input": "SIN",
+            "pages": 4,
+            "bytes": 16252,
+            "records": 6,
+            "batches": 3,
+            "largestBatch": 2,
+            "largestPageBytes": 5417,
+            "inFlight": 0,
+            "retainedPageBytes": 0,
+            "elapsedMillis": 168,
+            "rowLimit": 4096,
+            "byteLimit": 67108864,
+            "pageLimit": 10000
+          },
+          {
+            "input": "USER",
+            "pages": 1,
+            "bytes": 299,
+            "records": 2,
+            "batches": 1,
+            "largestBatch": 2,
+            "largestPageBytes": 299,
+            "inFlight": 0,
+            "retainedPageBytes": 0,
+            "elapsedMillis": 316,
+            "rowLimit": 4096,
+            "byteLimit": 67108864,
+            "pageLimit": 10000
+          },
+          {
+            "input": "RASTER",
+            "pages": 1,
+            "bytes": 13568,
+            "records": 12,
+            "batches": 1,
+            "largestBatch": 12,
+            "largestPageBytes": 13568,
+            "inFlight": 0,
+            "retainedPageBytes": 0,
+            "elapsedMillis": 171,
+            "rowLimit": 4096,
+            "byteLimit": 67108864,
+            "pageLimit": 10000
+          }
+        ],
+        "jdbcPrepared": 392,
+        "jdbcCreated": 0,
+        "retainedTechnicalRecords": 43
+      }
+    },
+    {
+      "size": "large",
+      "receipt": {
+        "path": "target/macrobloco-integracao-funcional-20260914-01/artifact-large-final-01/control/case-artifact-large/receipt.json",
+        "sha256": "3c5e8819cd5bd77d98e9bb95994e9a4a6205babe9593cc19efb2af2b8c86d17e"
+      },
+      "metrics": {
+        "pages": 121,
+        "bytes": 423896,
+        "records": 271,
+        "batches": 112,
+        "largestBatch": 16,
+        "inFlight": 0,
+        "heapBefore": 51322064,
+        "heapAfter": 135765536,
+        "elapsedMillis": 36190,
+        "inputs": [
+          {
+            "input": "COL",
+            "pages": 13,
+            "bytes": 32846,
+            "records": 24,
+            "batches": 12,
+            "largestBatch": 2,
+            "largestPageBytes": 2737,
+            "inFlight": 0,
+            "retainedPageBytes": 0,
+            "elapsedMillis": 393,
+            "rowLimit": 4096,
+            "byteLimit": 67108864,
+            "pageLimit": 10000
+          },
+          {
+            "input": "FRE",
+            "pages": 19,
+            "bytes": 6750,
+            "records": 31,
+            "batches": 16,
+            "largestBatch": 2,
+            "largestPageBytes": 529,
+            "inFlight": 0,
+            "retainedPageBytes": 0,
+            "elapsedMillis": 647,
+            "rowLimit": 4096,
+            "byteLimit": 67108864,
+            "pageLimit": 10000
+          },
+          {
+            "input": "MAN",
+            "pages": 13,
+            "bytes": 74150,
+            "records": 24,
+            "batches": 12,
+            "largestBatch": 2,
+            "largestPageBytes": 6179,
+            "inFlight": 0,
+            "retainedPageBytes": 0,
+            "elapsedMillis": 1802,
+            "rowLimit": 4096,
+            "byteLimit": 67108864,
+            "pageLimit": 10000
+          },
+          {
+            "input": "COT",
+            "pages": 13,
+            "bytes": 36974,
+            "records": 24,
+            "batches": 12,
+            "largestBatch": 2,
+            "largestPageBytes": 3081,
+            "inFlight": 0,
+            "retainedPageBytes": 0,
+            "elapsedMillis": 755,
+            "rowLimit": 4096,
+            "byteLimit": 67108864,
+            "pageLimit": 10000
+          },
+          {
+            "input": "LOC",
+            "pages": 9,
+            "bytes": 3338,
+            "records": 16,
+            "batches": 8,
+            "largestBatch": 2,
+            "largestPageBytes": 417,
+            "inFlight": 0,
+            "retainedPageBytes": 0,
+            "elapsedMillis": 810,
+            "rowLimit": 4096,
+            "byteLimit": 67108864,
+            "pageLimit": 10000
+          },
+          {
+            "input": "CAP",
+            "pages": 13,
+            "bytes": 36810,
+            "records": 24,
+            "batches": 12,
+            "largestBatch": 2,
+            "largestPageBytes": 3068,
+            "inFlight": 0,
+            "retainedPageBytes": 0,
+            "elapsedMillis": 753,
+            "rowLimit": 4096,
+            "byteLimit": 67108864,
+            "pageLimit": 10000
+          },
+          {
+            "input": "FAT",
+            "pages": 13,
+            "bytes": 74394,
+            "records": 24,
+            "batches": 12,
+            "largestBatch": 2,
+            "largestPageBytes": 6200,
+            "inFlight": 0,
+            "retainedPageBytes": 0,
+            "elapsedMillis": 960,
+            "rowLimit": 4096,
+            "byteLimit": 67108864,
+            "pageLimit": 10000
+          },
+          {
+            "input": "INV",
+            "pages": 13,
+            "bytes": 47346,
+            "records": 24,
+            "batches": 12,
+            "largestBatch": 2,
+            "largestPageBytes": 3946,
+            "inFlight": 0,
+            "retainedPageBytes": 0,
+            "elapsedMillis": 371,
+            "rowLimit": 4096,
+            "byteLimit": 67108864,
+            "pageLimit": 10000
+          },
+          {
+            "input": "SIN",
+            "pages": 13,
+            "bytes": 64818,
+            "records": 24,
+            "batches": 12,
+            "largestBatch": 2,
+            "largestPageBytes": 5402,
+            "inFlight": 0,
+            "retainedPageBytes": 0,
+            "elapsedMillis": 390,
+            "rowLimit": 4096,
+            "byteLimit": 67108864,
+            "pageLimit": 10000
+          },
+          {
+            "input": "USER",
+            "pages": 1,
+            "bytes": 941,
+            "records": 8,
+            "batches": 1,
+            "largestBatch": 8,
+            "largestPageBytes": 941,
+            "inFlight": 0,
+            "retainedPageBytes": 0,
+            "elapsedMillis": 160,
+            "rowLimit": 4096,
+            "byteLimit": 67108864,
+            "pageLimit": 10000
+          },
+          {
+            "input": "RASTER",
+            "pages": 1,
+            "bytes": 45529,
+            "records": 48,
+            "batches": 3,
+            "largestBatch": 16,
+            "largestPageBytes": 45529,
+            "inFlight": 0,
+            "retainedPageBytes": 0,
+            "elapsedMillis": 278,
+            "rowLimit": 4096,
+            "byteLimit": 67108864,
+            "pageLimit": 10000
+          }
+        ],
+        "jdbcPrepared": 687,
+        "jdbcCreated": 0,
+        "retainedTechnicalRecords": 109
+      }
+    }
+  ],
+  "cancellationMeasurement": {
+    "sampleCount": 38,
+    "javaCompositionChanged": false,
+    "passed": true,
+    "receipt": {
+      "path": "artifact-cancel-measured-final-02/control/case-artifact-large/receipt.json",
+      "sha256": "dc22978aaf7292b432c67f7a65a583b396813565ac92934232c69ebefb26ddc2"
+    },
+    "roots": 8,
+    "executionSamples": 27,
+    "state": "CANCELLED",
+    "barrier": "AFTER_PREPARATION",
+    "rollbackConfirmed": true,
+    "campaign": "artifact-cancel-measured-final-02",
+    "samples": [
+      {
+        "stdout": "55240:\r\n garbage-first heap   total 512000K, used 23221K [0x00000000e0000000, 0x0000000100000000)\n  region size 1024K, 23 young (23552K), 3 survivors (3072K)\n Metaspace       used 5414K, committed 5632K, reserved 1114112K\n  class space    used 502K, committed 640K, reserved 1048576K\n",
+        "totalBytes": 524288000,
+        "observedUtc": "2026-09-14T18:52:32.6274096+00:00",
+        "usedBytes": 23778304,
+        "exit": 0,
+        "stderr": "",
+        "command": "GC.heap_info"
+      },
+      {
+        "stdout": "55240:\r\n garbage-first heap   total 512000K, used 11594K [0x00000000e0000000, 0x0000000100000000)\n  region size 1024K, 10 young (10240K), 1 survivors (1024K)\n Metaspace       used 5433K, committed 5632K, reserved 1114112K\n  class space    used 502K, committed 640K, reserved 1048576K\n",
+        "totalBytes": 524288000,
+        "observedUtc": "2026-09-14T18:52:33.9593728+00:00",
+        "usedBytes": 11872256,
+        "exit": 0,
+        "stderr": "",
+        "command": "GC.heap_info"
+      },
+      {
+        "stdout": "55240:\r\n garbage-first heap   total 512000K, used 35146K [0x00000000e0000000, 0x0000000100000000)\n  region size 1024K, 33 young (33792K), 1 survivors (1024K)\n Metaspace       used 5438K, committed 5632K, reserved 1114112K\n  class space    used 502K, committed 640K, reserved 1048576K\n",
+        "totalBytes": 524288000,
+        "observedUtc": "2026-09-14T18:52:35.2340476+00:00",
+        "usedBytes": 35989504,
+        "exit": 0,
+        "stderr": "",
+        "command": "GC.heap_info"
+      },
+      {
+        "stdout": "55240:\r\n garbage-first heap   total 512000K, used 59210K [0x00000000e0000000, 0x0000000100000000)\n  region size 1024K, 56 young (57344K), 1 survivors (1024K)\n Metaspace       used 5488K, committed 5696K, reserved 1114112K\n  class space    used 502K, committed 640K, reserved 1048576K\n",
+        "totalBytes": 524288000,
+        "observedUtc": "2026-09-14T18:52:36.5406716+00:00",
+        "usedBytes": 60631040,
+        "exit": 0,
+        "stderr": "",
+        "command": "GC.heap_info"
+      },
+      {
+        "stdout": "55240:\r\n garbage-first heap   total 512000K, used 83274K [0x00000000e0000000, 0x0000000100000000)\n  region size 1024K, 80 young (81920K), 1 survivors (1024K)\n Metaspace       used 5492K, committed 5696K, reserved 1114112K\n  class space    used 502K, committed 640K, reserved 1048576K\n",
+        "totalBytes": 524288000,
+        "observedUtc": "2026-09-14T18:52:37.8784591+00:00",
+        "usedBytes": 85272576,
+        "exit": 0,
+        "stderr": "",
+        "command": "GC.heap_info"
+      },
+      {
+        "stdout": "55240:\r\n garbage-first heap   total 512000K, used 107850K [0x00000000e0000000, 0x0000000100000000)\n  region size 1024K, 104 young (106496K), 1 survivors (1024K)\n Metaspace       used 5630K, committed 5824K, reserved 1114112K\n  class space    used 517K, committed 640K, reserved 1048576K\n",
+        "totalBytes": 524288000,
+        "observedUtc": "2026-09-14T18:52:39.1801551+00:00",
+        "usedBytes": 110438400,
+        "exit": 0,
+        "stderr": "",
+        "command": "GC.heap_info"
+      },
+      {
+        "stdout": "55240:\r\n garbage-first heap   total 512000K, used 129866K [0x00000000e0000000, 0x0000000100000000)\n  region size 1024K, 125 young (128000K), 1 survivors (1024K)\n Metaspace       used 5635K, committed 5824K, reserved 1114112K\n  class space    used 517K, committed 640K, reserved 1048576K\n",
+        "totalBytes": 524288000,
+        "observedUtc": "2026-09-14T18:52:40.5118960+00:00",
+        "usedBytes": 132982784,
+        "exit": 0,
+        "stderr": "",
+        "command": "GC.heap_info"
+      },
+      {
+        "stdout": "55240:\r\n garbage-first heap   total 512000K, used 151370K [0x00000000e0000000, 0x0000000100000000)\n  region size 1024K, 146 young (149504K), 1 survivors (1024K)\n Metaspace       used 5657K, committed 5824K, reserved 1114112K\n  class space    used 517K, committed 640K, reserved 1048576K\n",
+        "totalBytes": 524288000,
+        "observedUtc": "2026-09-14T18:52:41.8248166+00:00",
+        "usedBytes": 155002880,
+        "exit": 0,
+        "stderr": "",
+        "command": "GC.heap_info"
+      },
+      {
+        "stdout": "55240:\r\n garbage-first heap   total 512000K, used 172362K [0x00000000e0000000, 0x0000000100000000)\n  region size 1024K, 167 young (171008K), 1 survivors (1024K)\n Metaspace       used 5669K, committed 5824K, reserved 1114112K\n  class space    used 517K, committed 640K, reserved 1048576K\n",
+        "totalBytes": 524288000,
+        "observedUtc": "2026-09-14T18:52:43.1869450+00:00",
+        "usedBytes": 176498688,
+        "exit": 0,
+        "stderr": "",
+        "command": "GC.heap_info"
+      },
+      {
+        "stdout": "55240:\r\n garbage-first heap   total 512000K, used 201546K [0x00000000e0000000, 0x0000000100000000)\n  region size 1024K, 195 young (199680K), 1 survivors (1024K)\n Metaspace       used 5959K, committed 6144K, reserved 1114112K\n  class space    used 545K, committed 640K, reserved 1048576K\n",
+        "totalBytes": 524288000,
+        "observedUtc": "2026-09-14T18:52:44.5093262+00:00",
+        "usedBytes": 206383104,
+        "exit": 0,
+        "stderr": "",
+        "command": "GC.heap_info"
+      },
+      {
+        "stdout": "55240:\r\n garbage-first heap   total 512000K, used 235850K [0x00000000e0000000, 0x0000000100000000)\n  region size 1024K, 229 young (234496K), 1 survivors (1024K)\n Metaspace       used 8132K, committed 8320K, reserved 1114112K\n  class space    used 777K, committed 832K, reserved 1048576K\n",
+        "totalBytes": 524288000,
+        "observedUtc": "2026-09-14T18:52:45.8226579+00:00",
+        "usedBytes": 241510400,
+        "exit": 0,
+        "stderr": "",
+        "command": "GC.heap_info"
+      },
+      {
+        "stdout": "55240:\r\n garbage-first heap   total 512000K, used 268106K [0x00000000e0000000, 0x0000000100000000)\n  region size 1024K, 260 young (266240K), 1 survivors (1024K)\n Metaspace       used 8625K, committed 8896K, reserved 1114112K\n  class space    used 816K, committed 960K, reserved 1048576K\n",
+        "totalBytes": 524288000,
+        "observedUtc": "2026-09-14T18:52:47.1385883+00:00",
+        "usedBytes": 274540544,
+        "exit": 0,
+        "stderr": "",
+        "command": "GC.heap_info"
+      },
+      {
+        "stdout": "55240:\r\n garbage-first heap   total 512000K, used 305994K [0x00000000e0000000, 0x0000000100000000)\n  region size 1024K, 297 young (304128K), 1 survivors (1024K)\n Metaspace       used 9143K, committed 9472K, reserved 1114112K\n  class space    used 853K, committed 1024K, reserved 1048576K\n",
+        "totalBytes": 524288000,
+        "observedUtc": "2026-09-14T18:52:48.4304697+00:00",
+        "usedBytes": 313337856,
+        "exit": 0,
+        "stderr": "",
+        "command": "GC.heap_info"
+      },
+      {
+        "stdout": "55240:\r\n garbage-first heap   total 512000K, used 33195K [0x00000000e0000000, 0x0000000100000000)\n  region size 1024K, 30 young (30720K), 2 survivors (2048K)\n Metaspace       used 12288K, committed 12544K, reserved 1114112K\n  class space    used 1160K, committed 1280K, reserved 1048576K\n",
+        "totalBytes": 524288000,
+        "observedUtc": "2026-09-14T18:52:49.7586068+00:00",
+        "usedBytes": 33991680,
+        "exit": 0,
+        "stderr": "",
+        "command": "GC.heap_info"
+      },
+      {
+        "stdout": "55240:\r\n garbage-first heap   total 512000K, used 71083K [0x00000000e0000000, 0x0000000100000000)\n  region size 1024K, 66 young (67584K), 2 survivors (2048K)\n Metaspace       used 17921K, committed 18240K, reserved 1114112K\n  class space    used 1763K, committed 1920K, reserved 1048576K\n",
+        "totalBytes": 524288000,
+        "observedUtc": "2026-09-14T18:52:51.0740917+00:00",
+        "usedBytes": 72788992,
+        "exit": 0,
+        "stderr": "",
+        "command": "GC.heap_info"
+      },
+      {
+        "stdout": "55240:\r\n garbage-first heap   total 512000K, used 106923K [0x00000000e0000000, 0x0000000100000000)\n  region size 1024K, 101 young (103424K), 2 survivors (2048K)\n Metaspace       used 17943K, committed 18304K, reserved 1114112K\n  class space    used 1763K, committed 1920K, reserved 1048576K\n",
+        "totalBytes": 524288000,
+        "observedUtc": "2026-09-14T18:52:52.3736798+00:00",
+        "usedBytes": 109489152,
+        "exit": 0,
+        "stderr": "",
+        "command": "GC.heap_info"
+      },
+      {
+        "stdout": "55240:\r\n garbage-first heap   total 512000K, used 144299K [0x00000000e0000000, 0x0000000100000000)\n  region size 1024K, 138 young (141312K), 2 survivors (2048K)\n Metaspace       used 17949K, committed 18304K, reserved 1114112K\n  class space    used 1763K, committed 1920K, reserved 1048576K\n",
+        "totalBytes": 524288000,
+        "observedUtc": "2026-09-14T18:52:53.6643714+00:00",
+        "usedBytes": 147762176,
+        "exit": 0,
+        "stderr": "",
+        "command": "GC.heap_info"
+      },
+      {
+        "stdout": "55240:\r\n garbage-first heap   total 512000K, used 176043K [0x00000000e0000000, 0x0000000100000000)\n  region size 1024K, 169 young (173056K), 2 survivors (2048K)\n Metaspace       used 17955K, committed 18304K, reserved 1114112K\n  class space    used 1764K, committed 1920K, reserved 1048576K\n",
+        "totalBytes": 524288000,
+        "observedUtc": "2026-09-14T18:52:54.9816978+00:00",
+        "usedBytes": 180268032,
+        "exit": 0,
+        "stderr": "",
+        "command": "GC.heap_info"
+      },
+      {
+        "stdout": "55240:\r\n garbage-first heap   total 512000K, used 207790K [0x00000000e0000000, 0x0000000100000000)\n  region size 1024K, 200 young (204800K), 2 survivors (2048K)\n Metaspace       used 17960K, committed 18304K, reserved 1114112K\n  class space    used 1764K, committed 1920K, reserved 1048576K\n",
+        "totalBytes": 524288000,
+        "observedUtc": "2026-09-14T18:52:56.2895990+00:00",
+        "usedBytes": 212776960,
+        "exit": 0,
+        "stderr": "",
+        "command": "GC.heap_info"
+      },
+      {
+        "stdout": "55240:\r\n garbage-first heap   total 512000K, used 239531K [0x00000000e0000000, 0x0000000100000000)\n  region size 1024K, 231 young (236544K), 2 survivors (2048K)\n Metaspace       used 19339K, committed 19712K, reserved 1114112K\n  class space    used 1904K, committed 2112K, reserved 1048576K\n",
+        "totalBytes": 524288000,
+        "observedUtc": "2026-09-14T18:52:57.6092441+00:00",
+        "usedBytes": 245279744,
+        "exit": 0,
+        "stderr": "",
+        "command": "GC.heap_info"
+      },
+      {
+        "stdout": "55240:\r\n garbage-first heap   total 512000K, used 254379K [0x00000000e0000000, 0x0000000100000000)\n  region size 1024K, 245 young (250880K), 2 survivors (2048K)\n Metaspace       used 19762K, committed 20096K, reserved 1114112K\n  class space    used 1925K, committed 2112K, reserved 1048576K\n",
+        "totalBytes": 524288000,
+        "observedUtc": "2026-09-14T18:52:58.9078207+00:00",
+        "usedBytes": 260484096,
+        "exit": 0,
+        "stderr": "",
+        "command": "GC.heap_info"
+      },
+      {
+        "stdout": "55240:\r\n garbage-first heap   total 512000K, used 285099K [0x00000000e0000000, 0x0000000100000000)\n  region size 1024K, 275 young (281600K), 2 survivors (2048K)\n Metaspace       used 20402K, committed 20800K, reserved 1114112K\n  class space    used 1979K, committed 2176K, reserved 1048576K\n",
+        "totalBytes": 524288000,
+        "observedUtc": "2026-09-14T18:53:00.2069057+00:00",
+        "usedBytes": 291941376,
+        "exit": 0,
+        "stderr": "",
+        "command": "GC.heap_info"
+      },
+      {
+        "stdout": "55240:\r\n garbage-first heap   total 512000K, used 308651K [0x00000000e0000000, 0x0000000100000000)\n  region size 1024K, 298 young (305152K), 2 survivors (2048K)\n Metaspace       used 20711K, committed 21056K, reserved 1114112K\n  class space    used 1997K, committed 2176K, reserved 1048576K\n",
+        "totalBytes": 524288000,
+        "observedUtc": "2026-09-14T18:53:01.4947910+00:00",
+        "usedBytes": 316058624,
+        "exit": 0,
+        "stderr": "",
+        "command": "GC.heap_info"
+      },
+      {
+        "stdout": "55240:\r\n garbage-first heap   total 512000K, used 34546K [0x00000000e0000000, 0x0000000100000000)\n  region size 1024K, 32 young (32768K), 6 survivors (6144K)\n Metaspace       used 20782K, committed 21184K, reserved 1114112K\n  class space    used 1999K, committed 2176K, reserved 1048576K\n",
+        "totalBytes": 524288000,
+        "observedUtc": "2026-09-14T18:53:02.8172045+00:00",
+        "usedBytes": 35375104,
+        "exit": 0,
+        "stderr": "",
+        "command": "GC.heap_info"
+      },
+      {
+        "stdout": "55240:\r\n garbage-first heap   total 512000K, used 37618K [0x00000000e0000000, 0x0000000100000000)\n  region size 1024K, 35 young (35840K), 6 survivors (6144K)\n Metaspace       used 20862K, committed 21312K, reserved 1114112K\n  class space    used 2007K, committed 2240K, reserved 1048576K\n",
+        "totalBytes": 524288000,
+        "observedUtc": "2026-09-14T18:53:04.1134457+00:00",
+        "usedBytes": 38520832,
+        "exit": 0,
+        "stderr": "",
+        "command": "GC.heap_info"
+      },
+      {
+        "stdout": "55240:\r\n garbage-first heap   total 34816K, used 8928K [0x00000000e0000000, 0x0000000100000000)\n  region size 1024K, 2 young (2048K), 1 survivors (1024K)\n Metaspace       used 21642K, committed 22080K, reserved 1114112K\n  class space    used 2111K, committed 2368K, reserved 1048576K\n",
+        "totalBytes": 35651584,
+        "observedUtc": "2026-09-14T18:53:05.4294472+00:00",
+        "usedBytes": 9142272,
+        "exit": 0,
+        "stderr": "",
+        "command": "GC.heap_info"
+      },
+      {
+        "stdout": "55240:\r\n garbage-first heap   total 34816K, used 10373K [0x00000000e0000000, 0x0000000100000000)\n  region size 1024K, 4 young (4096K), 1 survivors (1024K)\n Metaspace       used 21655K, committed 22144K, reserved 1114112K\n  class space    used 2113K, committed 2368K, reserved 1048576K\n",
+        "totalBytes": 35651584,
+        "observedUtc": "2026-09-14T18:53:06.7382781+00:00",
+        "usedBytes": 10621952,
+        "exit": 0,
+        "stderr": "",
+        "command": "GC.heap_info"
+      },
+      {
+        "stdout": "55240:\r\n garbage-first heap   total 34816K, used 28485K [0x00000000e0000000, 0x0000000100000000)\n  region size 1024K, 19 young (19456K), 1 survivors (1024K)\n Metaspace       used 22678K, committed 23168K, reserved 1114112K\n  class space    used 2267K, committed 2496K, reserved 1048576K\n",
+        "totalBytes": 35651584,
+        "observedUtc": "2026-09-14T18:53:08.0111385+00:00",
+        "usedBytes": 29168640,
+        "exit": 0,
+        "stderr": "",
+        "command": "GC.heap_info"
+      },
+      {
+        "stdout": "55240:\r\n garbage-first heap   total 34816K, used 23914K [0x00000000e0000000, 0x0000000100000000)\n  region size 1024K, 16 young (16384K), 1 survivors (1024K)\n Metaspace       used 23153K, committed 23680K, reserved 1114112K\n  class space    used 2323K, committed 2560K, reserved 1048576K\n",
+        "totalBytes": 35651584,
+        "observedUtc": "2026-09-14T18:53:09.3335555+00:00",
+        "usedBytes": 24487936,
+        "exit": 0,
+        "stderr": "",
+        "command": "GC.heap_info"
+      },
+      {
+        "stdout": "55240:\r\n garbage-first heap   total 34816K, used 18579K [0x00000000e0000000, 0x0000000100000000)\n  region size 1024K, 11 young (11264K), 2 survivors (2048K)\n Metaspace       used 23424K, committed 24000K, reserved 1114112K\n  class space    used 2344K, committed 2624K, reserved 1048576K\n",
+        "totalBytes": 35651584,
+        "observedUtc": "2026-09-14T18:53:10.6427395+00:00",
+        "usedBytes": 19024896,
+        "exit": 0,
+        "stderr": "",
+        "command": "GC.heap_info"
+      },
+      {
+        "stdout": "55240:\r\n garbage-first heap   total 34816K, used 19340K [0x00000000e0000000, 0x0000000100000000)\n  region size 1024K, 12 young (12288K), 2 survivors (2048K)\n Metaspace       used 23475K, committed 24000K, reserved 1114112K\n  class space    used 2350K, committed 2624K, reserved 1048576K\n",
+        "totalBytes": 35651584,
+        "observedUtc": "2026-09-14T18:53:11.9461790+00:00",
+        "usedBytes": 19804160,
+        "exit": 0,
+        "stderr": "",
+        "command": "GC.heap_info"
+      },
+      {
+        "stdout": "55240:\r\n garbage-first heap   total 34816K, used 19399K [0x00000000e0000000, 0x0000000100000000)\n  region size 1024K, 12 young (12288K), 2 survivors (2048K)\n Metaspace       used 23475K, committed 24000K, reserved 1114112K\n  class space    used 2350K, committed 2624K, reserved 1048576K\n",
+        "totalBytes": 35651584,
+        "observedUtc": "2026-09-14T18:53:13.2300222+00:00",
+        "usedBytes": 19864576,
+        "exit": 0,
+        "stderr": "",
+        "command": "GC.heap_info"
+      },
+      {
+        "stdout": "55240:\r\n garbage-first heap   total 34816K, used 19465K [0x00000000e0000000, 0x0000000100000000)\n  region size 1024K, 12 young (12288K), 2 survivors (2048K)\n Metaspace       used 23479K, committed 24064K, reserved 1114112K\n  class space    used 2350K, committed 2624K, reserved 1048576K\n",
+        "totalBytes": 35651584,
+        "observedUtc": "2026-09-14T18:53:14.5135713+00:00",
+        "usedBytes": 19932160,
+        "exit": 0,
+        "stderr": "",
+        "command": "GC.heap_info"
+      },
+      {
+        "stdout": "55240:\r\n garbage-first heap   total 34816K, used 19524K [0x00000000e0000000, 0x0000000100000000)\n  region size 1024K, 12 young (12288K), 2 survivors (2048K)\n Metaspace       used 23479K, committed 24064K, reserved 1114112K\n  class space    used 2350K, committed 2624K, reserved 1048576K\n",
+        "totalBytes": 35651584,
+        "observedUtc": "2026-09-14T18:53:15.8205437+00:00",
+        "usedBytes": 19992576,
+        "exit": 0,
+        "stderr": "",
+        "command": "GC.heap_info"
+      },
+      {
+        "stdout": "55240:\r\n garbage-first heap   total 34816K, used 19589K [0x00000000e0000000, 0x0000000100000000)\n  region size 1024K, 12 young (12288K), 2 survivors (2048K)\n Metaspace       used 23479K, committed 24064K, reserved 1114112K\n  class space    used 2350K, committed 2624K, reserved 1048576K\n",
+        "totalBytes": 35651584,
+        "observedUtc": "2026-09-14T18:53:17.1119073+00:00",
+        "usedBytes": 20059136,
+        "exit": 0,
+        "stderr": "",
+        "command": "GC.heap_info"
+      },
+      {
+        "stdout": "55240:\r\n garbage-first heap   total 34816K, used 19648K [0x00000000e0000000, 0x0000000100000000)\n  region size 1024K, 13 young (13312K), 2 survivors (2048K)\n Metaspace       used 23479K, committed 24064K, reserved 1114112K\n  class space    used 2350K, committed 2624K, reserved 1048576K\n",
+        "totalBytes": 35651584,
+        "observedUtc": "2026-09-14T18:53:18.4333415+00:00",
+        "usedBytes": 20119552,
+        "exit": 0,
+        "stderr": "",
+        "command": "GC.heap_info"
+      },
+      {
+        "stdout": "55240:\r\n garbage-first heap   total 34816K, used 19714K [0x00000000e0000000, 0x0000000100000000)\n  region size 1024K, 13 young (13312K), 2 survivors (2048K)\n Metaspace       used 23479K, committed 24064K, reserved 1114112K\n  class space    used 2350K, committed 2624K, reserved 1048576K\n",
+        "totalBytes": 35651584,
+        "observedUtc": "2026-09-14T18:53:19.7416658+00:00",
+        "usedBytes": 20187136,
+        "exit": 0,
+        "stderr": "",
+        "command": "GC.heap_info"
+      },
+      {
+        "stdout": "55240:\r\n",
+        "totalBytes": null,
+        "observedUtc": "2026-09-14T18:53:20.9912177+00:00",
+        "usedBytes": null,
+        "exit": 1,
+        "stderr": "com.sun.tools.attach.AttachNotSupportedException: Acesso negado\r\n\tat jdk.attach/sun.tools.attach.VirtualMachineImpl.<init>(VirtualMachineImpl.java:64)\r\n\tat jdk.attach/sun.tools.attach.AttachProviderImpl.attachVirtualMachine(AttachProviderImpl.java:69)\r\n\tat jdk.attach/com.sun.tools.attach.VirtualMachine.attach(VirtualMachine.java:207)\r\n\tat jdk.jcmd/sun.tools.jcmd.JCmd.executeCommandForPid(JCmd.java:113)\r\n\tat jdk.jcmd/sun.tools.jcmd.JCmd.main(JCmd.java:97)\r\n",
+        "command": "GC.heap_info"
+      }
+    ],
+    "maximumObservedUsedBytes": 316058624,
+    "campaignResult": {
+      "path": "artifact-cancel-measured-final-02/result.json",
+      "sha256": "f1d581968c3f03c7a949e148aa8e5e57e864ab0b62b99751b26a638e3a3a5b0b"
+    },
+    "archiveSha256": "355bdc43f166a2be5ecbbf71c9d2575c0def11f46c159bf7d8471745f6d20557",
+    "elapsedMilliseconds": 35952.0313,
+    "sourceWorkspace": false,
+    "scope": "JDK diagnostic heap samples of the current extracted JAR during capture/preparation/cancellation; sampled observation, no production peak/SLO claim",
+    "heapLimitBytes": 536870912
+  },
+  "heapMiB": 512,
+  "maximumFullPathCaseSeconds": 240,
+  "noLimitsIncreased": true
+}

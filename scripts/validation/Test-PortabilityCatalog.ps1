@@ -303,6 +303,112 @@ foreach ($row in $unresolvedSlots) {
     Assert-True ($row.source_path -match '^/info/__unresolved_info_field_\d{3}$') "Slot Data Export não é ordinal/opaco: $($row.matrix_id)."
     Assert-True ($row.publication_blocked -eq 'YES' -and $row.due_gate -match '^V2-041->V2-025d') "Slot Data Export não expressa a precedência V2-041→V2-025d: $($row.matrix_id)."
 }
+
+# P01/V03 fecha somente os paths e reducers locais de Manifestos. Os 91 slots /info
+# continuam opacos, e os três filhos físicos não podem transformar status/coocorrência
+# em identidade nem antecipar a relação Manifesto→Coleta.
+$manifestInfoSlots = @($fields | Where-Object { $_.entity -eq 'manifestos' -and $_.row_kind -eq 'DATA_EXPORT_FIELD' })
+Assert-True ($manifestInfoSlots.Count -eq 91 `
+        -and @($manifestInfoSlots | Where-Object {
+                $_.status -ne 'UNRESOLVED_SOURCE_PATH' `
+                    -or $_.reducer_or_fallback -ne 'UNRESOLVED_BY_FIELD' `
+                    -or $_.due_gate -notmatch '^V2-041->V2-025d'
+            }).Count -eq 0) `
+    'Os 91 slots /info de Manifestos foram resolvidos ou receberam reducer sem fingerprint autorizado.'
+
+$manifestData = @($dataCandidates | Where-Object entity -eq 'manifestos')
+Assert-True ($manifestData.Count -eq 90 `
+        -and @($manifestData | Where-Object {
+                $_.status -ne 'LOCAL_STATIC_PATH_AND_REDUCER_DECIDED_P01_V03' `
+                    -or $_.due_gate -ne 'V2-026' `
+                    -or $_.evidence -notmatch 'identidade-manifestos.+manifestos-v2-026'
+            }).Count -eq 0) `
+    'Os 90 paths /data de Manifestos não estão ancorados na decisão local P01/V03 com execução em V2-026.'
+
+$manifestDataChildren = @($manifestData | Where-Object decision -eq 'SPLIT')
+$expectedManifestDataChildIds = @('DE-DATA-6399-008','DE-DATA-6399-009','DE-DATA-6399-027')
+Assert-True ($manifestDataChildren.Count -eq 3 `
+        -and ((@($manifestDataChildren.matrix_id | Sort-Object) -join '|') -ceq ($expectedManifestDataChildIds -join '|')) `
+        -and @($manifestDataChildren | Where-Object {
+                $_.cardinality -ne 'ROOT_ZERO_TO_MANY_PHYSICAL_RECORD_ZERO_OR_ONE_FAIL_CLOSED' `
+                    -or $_.v2_target -notmatch '^stg\.manifestos\.(pick|mdfe)_child_observation\.' `
+                    -or $_.v2_target -match '(?i)relation|crosswalk'
+            }).Count -eq 0) `
+    'Manifestos /data deve possuir somente pick, MDF-e number e MDF-e key como filhos 0..N fail-closed.'
+
+$manifestV1 = @($fields | Where-Object { $_.entity -eq 'manifestos' -and $_.row_kind -eq 'V1_OPERATIONAL_COLUMN' })
+$manifestV1Children = @($manifestV1 | Where-Object decision -eq 'SPLIT')
+$expectedManifestV1ChildIds = @('V1-MANIFESTOS-009','V1-MANIFESTOS-010','V1-MANIFESTOS-029')
+Assert-True ($manifestV1Children.Count -eq 3 `
+        -and ((@($manifestV1Children.matrix_id | Sort-Object) -join '|') -ceq ($expectedManifestV1ChildIds -join '|')) `
+        -and @($manifestV1Children | Where-Object {
+                $_.cardinality -ne 'ROOT_ZERO_TO_MANY_LEGACY_PHYSICAL_ROW_ZERO_OR_ONE_FAIL_CLOSED' `
+                    -or $_.v2_target -notmatch '^core\.manifestos\.(pick|mdfe)_child_observation\.' `
+                    -or $_.v2_zone -ne 'core' `
+                    -or $_.v2_target -match '(?i)relation|crosswalk'
+            }).Count -eq 0) `
+    'A V1 de Manifestos deve mapear somente pick, MDF-e number e MDF-e key para observações filhas, nunca relações.'
+
+$manifestMdfeStatus = @($fields | Where-Object {
+        $_.entity -eq 'manifestos' `
+            -and $_.source_path -eq '/data/mdfe_status' `
+            -and $_.row_kind -in @('DATA_EXPORT_DATA_FIELD','V1_OPERATIONAL_COLUMN')
+    })
+Assert-True ($manifestMdfeStatus.Count -eq 2 `
+        -and @($manifestMdfeStatus | Where-Object {
+                $_.decision -ne 'PRESERVE' `
+                    -or $_.v2_target -notmatch '^((stg)|(core))\.manifestos\.root_observation\.mdfe_status$' `
+                    -or $_.reducer_or_fallback -ne 'ROOT_SCALAR_REPLICATED_BY_EXPANSION_TRI_STATE_UNIQUE_AT_WINNING_FRESHNESS_NOT_CHILD_SIGNAL_V03' `
+                    -or $_.transformation -notmatch 'never signal or identify an MDF-e child' `
+                    -or $_.cardinality -match 'ZERO_TO_MANY|CHILD'
+            }).Count -eq 0) `
+    'mdfe_status deve permanecer escalar tri-state da raiz, replicado pela expansão e incapaz de sinalizar filho.'
+
+$manifestMdfeKey = @($fields | Where-Object {
+        $_.entity -eq 'manifestos' `
+            -and $_.source_path -eq '/data/mft_mfs_key' `
+            -and $_.row_kind -in @('DATA_EXPORT_DATA_FIELD','V1_OPERATIONAL_COLUMN')
+    })
+$manifestMdfeNumber = @($fields | Where-Object {
+        $_.entity -eq 'manifestos' `
+            -and $_.source_path -eq '/data/mft_mfs_number' `
+            -and $_.row_kind -in @('DATA_EXPORT_DATA_FIELD','V1_OPERATIONAL_COLUMN')
+    })
+Assert-True ($manifestMdfeKey.Count -eq 2 `
+        -and @($manifestMdfeKey | Where-Object {
+                $_.reducer_or_fallback -ne 'ROOT_SCOPED_MDFE_CHILD_KEY_P01_EXACT_STRING44_V03' `
+                    -or $_.transformation -notmatch '44 ASCII digits' `
+                    -or $_.transformation -notmatch 'never combine number into identity'
+            }).Count -eq 0) `
+    'mft_mfs_key não está congelada como única componente natural MDF-e root-scoped e STRING44.'
+Assert-True ($manifestMdfeNumber.Count -eq 2 `
+        -and @($manifestMdfeNumber | Where-Object {
+                $_.reducer_or_fallback -ne 'MDFE_CHILD_ATTRIBUTE_PHYSICALLY_PAIRED_WITH_KEY_NOT_IDENTITY_V03' `
+                    -or $_.transformation -notmatch 'paired with key' `
+                    -or $_.transformation -notmatch 'never identity'
+            }).Count -eq 0) `
+    'mft_mfs_number deve ser somente atributo do par físico com a key, nunca identidade ou reducer independente.'
+
+$manifestRootDefaultReducer = 'ROOT_SCALAR_TRI_STATE_UNIQUE_AT_WINNING_FRESHNESS_V03'
+Assert-ExactCount -Rows $manifestData -Where { $_.reducer_or_fallback -eq $manifestRootDefaultReducer } -Expected 73 -Label 'reducers default da raiz nos 90 paths /data de Manifestos'
+Assert-ExactCount -Rows $manifestV1 -Where { $_.reducer_or_fallback -eq $manifestRootDefaultReducer } -Expected 75 -Label 'reducers default da raiz nas colunas V1 de Manifestos'
+Assert-True (@(($manifestData + $manifestV1) | Where-Object reducer_or_fallback -eq 'FIELD_SPECIFIC_PENDING_VERTICAL').Count -eq 0) `
+    'Manifestos ainda possui reducer FIELD_SPECIFIC_PENDING_VERTICAL após V03.'
+$manifestTechnicalOrRetired = @($manifestV1 | Where-Object { $_.decision -eq 'RETIRE' -or $_.source_path -eq 'DERIVED_BY_PIPELINE' })
+Assert-True ($manifestTechnicalOrRetired.Count -eq 7 `
+        -and @($manifestTechnicalOrRetired | Where-Object { $_.reducer_or_fallback -eq $manifestRootDefaultReducer }).Count -eq 0) `
+    'Coluna V1 técnica, metadata ou identidade legada retirada recebeu reducer de negócio da raiz.'
+
+$manifestCapacityProjections = @($manifestV1 | Where-Object source_path -eq '/data/mft_vie_weight_capacity')
+Assert-True ($manifestCapacityProjections.Count -eq 2 `
+        -and @($manifestCapacityProjections | Where-Object legacy_mapping -eq 'dbo.manifestos.vehicle_weight_capacity').Count -eq 1 `
+        -and @($manifestCapacityProjections | Where-Object {
+                $_.legacy_mapping -eq 'dbo.manifestos.capacidade_kg' `
+                    -and $_.decision -eq 'DERIVE' `
+                    -and $_.reducer_or_fallback -eq 'DERIVE_FROM_REDUCED_MFT_VIE_WEIGHT_CAPACITY_NO_INDEPENDENT_REDUCER_V03'
+            }).Count -eq 1) `
+    'As duas projeções de capacidade não derivam do mesmo sinal mft_vie_weight_capacity de forma não independente.'
+
 Assert-True (@($fields | Where-Object decision -eq 'SPLIT').Count -gt 0) 'Nenhuma relação/filho recebeu decisão SPLIT.'
 Assert-True (@($fields | Where-Object decision -eq 'ALIAS').Count -gt 0) 'Nenhuma business key recebeu decisão ALIAS.'
 Assert-True (@($fields | Where-Object decision -eq 'NORMALIZE').Count -gt 0) 'Nenhum temporal/status recebeu decisão NORMALIZE.'
@@ -353,6 +459,24 @@ Assert-True ($userRules.Count -eq 4 `
         -and @($userRules | Where-Object status -ne 'IMPLEMENTED_IN_SHADOW').Count -eq 0 `
         -and @($userRules | Where-Object publication_blocked -ne 'YES').Count -eq 0) `
     'USR-01..USR-04 não estão implementadas em sombra com publicação bloqueada.'
+$frozenManifestRules = @($rules | Where-Object rule_id -in @('MAN-01','MAN-02','MAN-04','MAN-07'))
+Assert-True ($frozenManifestRules.Count -eq 4 `
+        -and @($frozenManifestRules | Where-Object {
+                $_.status -ne 'LOCAL_DECISION_FROZEN_V03_EXECUTION_PENDING' `
+                    -or $_.acceptor -ne 'OWNER_EXPLICIT_AUTHORIZATION_2026_09_04' `
+                    -or $_.evidence -notmatch 'V03 local fail-closed'
+            }).Count -eq 0) `
+    'MAN-01/MAN-02/MAN-04/MAN-07 não estão congeladas somente como decisão local V03.'
+$manifestRule01 = @($rules | Where-Object rule_id -eq 'MAN-01')
+$manifestRule02 = @($rules | Where-Object rule_id -eq 'MAN-02')
+Assert-True ($manifestRule01.Count -eq 1 `
+        -and $manifestRule01[0].positive_example -match 'mft_pfs_pck_sequence_code.+mft_mfs_key.+mdfe_status permanece escalar da raiz' `
+        -and $manifestRule01[0].counterexample -match 'status MDF-e isolado.+não criam identidade, filho ou relação') `
+    'O caso sintético MAN-01 não distingue os dois filhos do mdfe_status de raiz.'
+Assert-True ($manifestRule02.Count -eq 1 `
+        -and $manifestRule02[0].positive_example -match 'presença tri-state' `
+        -and $manifestRule02[0].counterexample -match 'mdfe_status sem chave não decide nem cria filho') `
+    'O caso sintético MAN-02 não prova presença/reducer separado nem refuta status como sinal de filho.'
 Assert-True ($protection.Count -ge 16) 'Matriz de proteção insuficiente.'
 foreach ($row in $protection) {
     foreach ($column in $requiredProtectionColumns) {
@@ -389,12 +513,14 @@ Assert-True ([int]$manifest.baselines.physical_columns_with_raster -eq 535) 'Man
 Assert-True ([int]$manifest.baselines.distinct_constraints -eq 170) 'Manifesto divergente para constraints distintas.'
 Assert-True ([int]$manifest.baselines.dedicated_index_declarations -eq 47) 'Manifesto divergente para índices dedicados.'
 Assert-True ([int]$manifest.baselines.embedded_unique_indexes -eq 6) 'Manifesto divergente para índices UNIQUE embutidos.'
-Assert-True ($manifest.catalog_version -ceq '2026-09-01.v2-035b-usuarios' `
+Assert-True ($manifest.catalog_version -ceq '2026-09-04.v2-026a-manifestos-v03' `
         -and $manifest.vertical_slices.usuarios -match `
             '^IMPLEMENTED_IN_SHADOW; current/history \+ core dimension view' `
         -and $manifest.vertical_slices.governed_references -match `
-            '^OFFLINE_FOUNDATION_COMPLETE') `
-    'Manifesto não registra a dimensão Usuários e a fundação local V2-035a.'
+            '^OFFLINE_FOUNDATION_COMPLETE' `
+        -and $manifest.vertical_slices.manifestos_decision -match `
+            '^LOCAL_DECISION_FROZEN_V03; P01 identity and MAN-01/MAN-02/MAN-04/MAN-07 only') `
+    'Manifesto não registra P01/V03 sem perder Usuários e a fundação local V2-035a.'
 Assert-True ($fields.Count -eq 2437) "Total da matriz de campos divergente: esperado=2437, atual=$($fields.Count)."
 
 Write-Host ("PASS: catálogo V2-017 validado: {0} artefatos, {1} campos, {2} regras, {3} classes de proteção; zero UNCLASSIFIED." -f $artifacts.Count, $fields.Count, $rules.Count, $protection.Count)

@@ -1,0 +1,37 @@
+{
+  "version": 1,
+  "files": [
+    {
+      "path": "decisao.json",
+      "sha256": "d7db2eb027aa085612baaf6505817bfeded5ed67914159d8f7c45c9591ef6086"
+    },
+    {
+      "path": "contrato.json",
+      "sha256": "acd8437172e998195b230e3f2c9dada76f76d0401b2ddfa156c1ecc803503dd8"
+    },
+    {
+      "path": "campos.json",
+      "sha256": "2693482dc8b995945ea1af534f9f94ca0ae47d34ca026f04d912556ff7d0c317"
+    },
+    {
+      "path": "identidade-pendente.json",
+      "sha256": "be859541e221711555f6aded72fa7223d3217738687e25a70392cac0bd416499"
+    },
+    {
+      "path": "evidencias/legado.json",
+      "sha256": "de21cffefd6571900e79db31b5bfe667c11ed916a5c81466fb0da544f65203b3"
+    },
+    {
+      "path": "fixtures/respostas.synthetic.json",
+      "sha256": "bebe34182b3d51449d68663ab556973a83a63c3bc495124c79235c25602df475"
+    },
+    {
+      "path": "fixtures/limites.synthetic.json",
+      "sha256": "d0d02ffe0d1f60c627a1bd9e8438914efd5c33a0ec53f7ad61f65bb9f48353b4"
+    },
+    {
+      "path": "fixtures/reordenacao.synthetic.json",
+      "sha256": "4b3c50edada70b9723747912d530fc3cc8961cf13e280979004818b1bfb309d7"
+    }
+  ]
+}

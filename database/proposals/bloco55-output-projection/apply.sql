@@ -1,0 +1,13 @@
+:On Error exit
+SET NOCOUNT ON; SET XACT_ABORT ON;
+IF DB_NAME()<>N'ETL_SISTEMA_V2_SHADOW' OR @@TRANCOUNT<>0 OR EXISTS(SELECT 1 FROM sys.indexes WHERE name=N'IX_manifesto_pick_candidate_execution') THROW 52853,N'EXACT_PENDING_V023_REQUIRED',1;
+GO
+BEGIN TRANSACTION;
+GO
+:r "..\..\migrations\V023__correct_scoped_runtime_output_projection.sql"
+GO
+:r "verify-schema.sql"
+GO
+IF @@TRANCOUNT<>1 OR XACT_STATE()<>1 THROW 52853,N'EXACT_TRANSACTION_REQUIRED',1;
+COMMIT TRANSACTION;
+PRINT N'V023_SCHEMA_COMMITTED';

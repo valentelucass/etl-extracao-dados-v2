@@ -1,0 +1,139 @@
+{
+  "version": 1,
+  "status": "INTEGRACAO_FUNCIONAL_LOCAL_CONCLUIDA",
+  "passed": true,
+  "fronts": [
+    "A",
+    "B",
+    "C",
+    "D",
+    "E",
+    "F",
+    "G",
+    "H",
+    "I",
+    "J",
+    "K",
+    "L",
+    "M",
+    "N"
+  ],
+  "construction": {
+    "before": 39,
+    "after": 39,
+    "total": 45
+  },
+  "historicalAcceptances": {
+    "accepted": 67,
+    "total": 115
+  },
+  "newAcceptances": 0,
+  "remoteCalls": 0,
+  "durableDomainRows": 0,
+  "realQualificationAccepted": false,
+  "operationalPromotionAuthorized": false,
+  "proofs": {
+    "regression": {
+      "path": "target/macrobloco-integracao-funcional-20260914-01/regression-final-01/result.json",
+      "sha256": "6590e025f15bfa62226466f2a81e9da375a840003fb5c6451412dceebac8ff0d"
+    },
+    "artifact": {
+      "path": "target/macrobloco-integracao-funcional-20260914-01/artifact-final-01/result.json",
+      "sha256": "2ecdf1f6a3ec40da39143a4bf4b5e510d53c6d3b57009dc59c80a3bb4394d63c"
+    },
+    "fileConsumers": {
+      "path": "target/macrobloco-integracao-funcional-20260914-01/file-consumers-final-01/result.json",
+      "sha256": "0ba1023af0edf3d6110d098f8a586f6097730a451f40d2c970f650068841f42d"
+    },
+    "small": {
+      "path": "target/macrobloco-integracao-funcional-20260914-01/artifact-small-final-01/result.json",
+      "sha256": "db1c5360bbc1dd6c434ef0d1f6da122e75181a2ffc2c4c86b63853edebb43ed1"
+    },
+    "large": {
+      "path": "target/macrobloco-integracao-funcional-20260914-01/artifact-large-final-01/result.json",
+      "sha256": "5a6cd6370f97482212be0da3373be595eb2c16cc83a7268b2eea9174dfcce9fd"
+    },
+    "cancelCapture": {
+      "path": "target/macrobloco-integracao-funcional-20260914-01/artifact-during-capture-final-01/result.json",
+      "sha256": "826b6735b9056c7a75c56e9e414022d9d91b1ed8b65a55eb74d2953531fe5485"
+    },
+    "cancelPrepare": {
+      "path": "target/macrobloco-integracao-funcional-20260914-01/artifact-after-preparation-final-01/result.json",
+      "sha256": "d55c5c744d525e94ec2b385baa6d8e631e0d61972d7e8c3f99a806ed4595687f"
+    },
+    "cancelReceipt": {
+      "path": "target/macrobloco-integracao-funcional-20260914-01/artifact-before-receipt-final-01/result.json",
+      "sha256": "1a06e85628c7a78060187c3adf2a7d8a78cb64fc1f8a34d6864cd0c68c845fb3"
+    },
+    "inputGuards": {
+      "path": "target/macrobloco-integracao-funcional-20260914-01/artifact-input-guards-final-01/result.json",
+      "sha256": "b4b6d7f91417bbb11d9ed5d25ad30fcf5d5e10dbc5e0b4978ac4d37eecb05511"
+    },
+    "resume": {
+      "path": "target/macrobloco-integracao-funcional-20260914-01/artifact-resume-final-01/result.json",
+      "sha256": "4eb39ae9075cf566247fa01da1dce05192b126102a9fb5e093cecff912c4d086"
+    },
+    "cancellationMeasurement": {
+      "path": "target/macrobloco-integracao-funcional-20260914-01/cancel-measurements-final-02/result.json",
+      "sha256": "9d434643db02b48d3cdc1901b1bd6c76a87eaa260c3e2b9b685be936338ceb35"
+    }
+  },
+  "package": {
+    "first": "qualification-final-01",
+    "second": "qualification-final-02",
+    "archiveSha256": "355bdc43f166a2be5ecbbf71c9d2575c0def11f46c159bf7d8471745f6d20557",
+    "manifestSha256": "def63371e71d5072de57aa9bdcba7eff2f3f2f2f146ff19276db21dc31b4c5ff",
+    "revision": "d8099a1505838d7eccbe9e162163f39973457c9ae98b213550f3f2e68d106070",
+    "members": 411,
+    "zipEntries": 413,
+    "dependencies": 9,
+    "sourceCount": 2058,
+    "classResourceEntries": 1074
+  },
+  "full": {
+    "attempt": "verify-final-02",
+    "unitTests": 2042,
+    "unitSkipped": 4,
+    "integrationTests": 458,
+    "integrationClasses": 93,
+    "integrationSkipped": 0,
+    "previous423Exact": true,
+    "skipReasonsPreserved": true,
+    "coveragePassed": true,
+    "rollbackConfirmed": true
+  },
+  "execution": {
+    "localOnly": true,
+    "target": "localhost/ETL_SISTEMA_V2_SHADOW",
+    "java": 17,
+    "mavenOffline": true,
+    "heapMiB": 512,
+    "maximumLogBytes": 16777216,
+    "fullVerifyMaximumSeconds": 3600,
+    "ddl": false,
+    "domainCommit": false
+  },
+  "externalGates": [
+    "G01",
+    "G02",
+    "G03",
+    "G04",
+    "G05",
+    "G06",
+    "G07",
+    "G08"
+  ],
+  "finalChecksBoundBySeal": [
+    "static-foundation-final-01",
+    "static-runtime-final-01",
+    "static-succession-final-01",
+    "static-closure-final-01",
+    "static-functional-final-01"
+  ],
+  "diffAttempt": "diff-final-01",
+  "review": {
+    "path": "target/macrobloco-integracao-funcional-20260914-01/review-code-01/result.json",
+    "sha256": "a8b35809723f9411d32ec2de79469ebd1cee259fe05765adc947a83d7dee2fcb"
+  },
+  "closureValidity": "Only complete together with final-seal.json and successful full readback; seal is outside the manifest cycle."
+}

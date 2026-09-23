@@ -1,0 +1,1084 @@
+{
+  "version": 1,
+  "source": "STATES.md",
+  "frozenUniverse": {
+    "path": "docs/catalogos/macrobloco-expansao/construcao-unidades-congeladas.json",
+    "sha256": "7feff89560c7fef5895e05a09805ab566940d89e6a565e977d7f459f4b817166"
+  },
+  "rule": "Cobertura de unidades com mecanismo funcional local verificado no subescopo declarado; uma linha por capacidade, V2-036 substituída somente por seus cinco fatos. Documentação não é implementação. Não representa conclusão integral dos pais, esforço, código ou prazo.",
+  "classificationCorrections": [
+    {
+      "ids": [
+        "V2-016",
+        "V2-017",
+        "V2-048"
+      ],
+      "reason": "Entrega documental não conta como mecanismo funcional de ETL; aplicado simetricamente ao antes e depois, sem alterar snapshot original."
+    },
+    {
+      "ids": [
+        "V2-013"
+      ],
+      "reason": "Kernel de preview verificado não tem integração de mutação/sweep; integrated corrigido nos dois lados."
+    }
+  ],
+  "originalBeforeVerified": 29,
+  "beforeVerified": 26,
+  "afterVerified": 32,
+  "denominator": 45,
+  "newRealAcceptances": 0,
+  "historicalAcceptanceCounter": {
+    "completed": 67,
+    "total": 115,
+    "meaning": "Critérios de aceite históricos; nunca percentual da construção."
+  },
+  "units": [
+    {
+      "id": "V2-041",
+      "capability": "Rotacionar segredos expostos e fechar a superfície de vazamento.",
+      "before": {
+        "implemented": false,
+        "integrated": false,
+        "locallyVerified": false,
+        "realAcceptance": false
+      },
+      "after": {
+        "implemented": false,
+        "integrated": false,
+        "locallyVerified": false,
+        "realAcceptance": false
+      },
+      "documentaryDeliveryPresent": false,
+      "scope": "Nenhum mecanismo funcional verificado nesta unidade; requisito original preservado.",
+      "gap": "Rotação/revogação, owner Segurança e evidência sanitizada dos sistemas reais.",
+      "evidence": [
+        "STATES.md / V2-041",
+        "target/macrobloco-expansao-20260912-01/before/STATES.md"
+      ]
+    },
+    {
+      "id": "V2-016",
+      "capability": "Criar baseline versionado e governança real do repositório.",
+      "before": {
+        "implemented": false,
+        "integrated": false,
+        "locallyVerified": false,
+        "realAcceptance": false
+      },
+      "after": {
+        "implemented": false,
+        "integrated": false,
+        "locallyVerified": false,
+        "realAcceptance": false
+      },
+      "documentaryDeliveryPresent": true,
+      "scope": "Nenhum mecanismo funcional verificado nesta unidade; requisito original preservado.",
+      "gap": "Governança remota e CI no SHA publicado; baseline documental existe, não é mecanismo de ETL.",
+      "evidence": [
+        "STATES.md / V2-016",
+        "target/macrobloco-expansao-20260912-01/before/STATES.md"
+      ]
+    },
+    {
+      "id": "V2-017",
+      "capability": "Consolidar ADRs, catálogo de regras e baseline de portabilidade.",
+      "before": {
+        "implemented": false,
+        "integrated": false,
+        "locallyVerified": false,
+        "realAcceptance": false
+      },
+      "after": {
+        "implemented": false,
+        "integrated": false,
+        "locallyVerified": false,
+        "realAcceptance": false
+      },
+      "documentaryDeliveryPresent": true,
+      "scope": "Nenhum mecanismo funcional verificado nesta unidade; requisito original preservado.",
+      "gap": "Catálogo/ADRs entregues; aplicação dos mapeamentos pertence às verticais, sem contagem duplicada.",
+      "evidence": [
+        "STATES.md / V2-017",
+        "target/macrobloco-expansao-20260912-01/before/STATES.md"
+      ]
+    },
+    {
+      "id": "V2-015",
+      "capability": "Tornar qualidade e segurança gates reais.",
+      "before": {
+        "implemented": true,
+        "integrated": true,
+        "locallyVerified": true,
+        "realAcceptance": false
+      },
+      "after": {
+        "implemented": true,
+        "integrated": true,
+        "locallyVerified": true,
+        "realAcceptance": false
+      },
+      "documentaryDeliveryPresent": false,
+      "scope": "Gates executáveis locais de estilo, arquitetura, cobertura e scanner; feed/CI produtivos pendentes.",
+      "gap": "Critérios pendentes e subgates externos preservados no STATES.",
+      "evidence": [
+        "STATES.md / V2-015",
+        "target/macrobloco-expansao-20260912-01/before/STATES.md"
+      ]
+    },
+    {
+      "id": "V2-018",
+      "capability": "Implementar configuração tipada, bootstrap e composition root.",
+      "before": {
+        "implemented": true,
+        "integrated": true,
+        "locallyVerified": true,
+        "realAcceptance": false
+      },
+      "after": {
+        "implemented": true,
+        "integrated": true,
+        "locallyVerified": true,
+        "realAcceptance": false
+      },
+      "documentaryDeliveryPresent": false,
+      "scope": "Configuração tipada e composition root com validação antes de I/O.",
+      "gap": "Aplicação operacional e aceite nominal fora do aceite local histórico.",
+      "evidence": [
+        "STATES.md / V2-018",
+        "target/macrobloco-expansao-20260912-01/before/STATES.md"
+      ]
+    },
+    {
+      "id": "V2-019",
+      "capability": "Criar fundação de schema e baseline Flyway limpo.",
+      "before": {
+        "implemented": true,
+        "integrated": true,
+        "locallyVerified": true,
+        "realAcceptance": false
+      },
+      "after": {
+        "implemented": true,
+        "integrated": true,
+        "locallyVerified": true,
+        "realAcceptance": false
+      },
+      "documentaryDeliveryPresent": false,
+      "scope": "Migrations/baseline e gates locais de schema; equivalência física fresh/upgrade atual não alegada.",
+      "gap": "Aplicação operacional e aceite nominal fora do aceite local histórico.",
+      "evidence": [
+        "STATES.md / V2-019",
+        "target/macrobloco-expansao-20260912-01/before/STATES.md"
+      ]
+    },
+    {
+      "id": "V2-020",
+      "capability": "Generalizar control plane, auditoria, lock, replay e watermarks.",
+      "before": {
+        "implemented": true,
+        "integrated": true,
+        "locallyVerified": true,
+        "realAcceptance": false
+      },
+      "after": {
+        "implemented": true,
+        "integrated": true,
+        "locallyVerified": true,
+        "realAcceptance": false
+      },
+      "documentaryDeliveryPresent": false,
+      "scope": "Control plane SQL/JDBC de execução, locks, auditoria, replay e watermarks.",
+      "gap": "Aplicação operacional e aceite nominal fora do aceite local histórico.",
+      "evidence": [
+        "STATES.md / V2-020",
+        "target/macrobloco-expansao-20260912-01/before/STATES.md"
+      ]
+    },
+    {
+      "id": "V2-021",
+      "capability": "Criar kernel de staging e promoção set-based.",
+      "before": {
+        "implemented": true,
+        "integrated": true,
+        "locallyVerified": true,
+        "realAcceptance": false
+      },
+      "after": {
+        "implemented": true,
+        "integrated": true,
+        "locallyVerified": true,
+        "realAcceptance": false
+      },
+      "documentaryDeliveryPresent": false,
+      "scope": "Kernel de staging e promoção SQL set-based com batches e recibos.",
+      "gap": "Aplicação operacional e aceite nominal fora do aceite local histórico.",
+      "evidence": [
+        "STATES.md / V2-021",
+        "target/macrobloco-expansao-20260912-01/before/STATES.md"
+      ]
+    },
+    {
+      "id": "V2-042",
+      "capability": "Implementar identidade de serviço e autorização sem bypass.",
+      "before": {
+        "implemented": true,
+        "integrated": true,
+        "locallyVerified": true,
+        "realAcceptance": false
+      },
+      "after": {
+        "implemented": true,
+        "integrated": true,
+        "locallyVerified": true,
+        "realAcceptance": false
+      },
+      "documentaryDeliveryPresent": false,
+      "scope": "Boundary de autorização e adapter Windows/SQL já provados no B55; governança produtiva não herdada.",
+      "gap": "Aplicação operacional e aceite nominal fora do aceite local histórico.",
+      "evidence": [
+        "STATES.md / V2-042",
+        "target/macrobloco-expansao-20260912-01/before/STATES.md"
+      ]
+    },
+    {
+      "id": "V2-043",
+      "capability": "Implementar resiliência e política de falha compartilhadas.",
+      "before": {
+        "implemented": true,
+        "integrated": true,
+        "locallyVerified": true,
+        "realAcceptance": false
+      },
+      "after": {
+        "implemented": true,
+        "integrated": true,
+        "locallyVerified": true,
+        "realAcceptance": false
+      },
+      "documentaryDeliveryPresent": false,
+      "scope": "Governor, deadlines, cancelamento, retry e política de falha compartilhados.",
+      "gap": "Aplicação operacional e aceite nominal fora do aceite local histórico.",
+      "evidence": [
+        "STATES.md / V2-043",
+        "target/macrobloco-expansao-20260912-01/before/STATES.md"
+      ]
+    },
+    {
+      "id": "V2-044",
+      "capability": "Detectar drift de contrato da fonte antes da promoção.",
+      "before": {
+        "implemented": true,
+        "integrated": true,
+        "locallyVerified": true,
+        "realAcceptance": false
+      },
+      "after": {
+        "implemented": true,
+        "integrated": true,
+        "locallyVerified": true,
+        "realAcceptance": false
+      },
+      "documentaryDeliveryPresent": false,
+      "scope": "Profiler/gate de contrato, fingerprints e recusa de drift antes da promoção.",
+      "gap": "Aplicação operacional e aceite nominal fora do aceite local histórico.",
+      "evidence": [
+        "STATES.md / V2-044",
+        "target/macrobloco-expansao-20260912-01/before/STATES.md"
+      ]
+    },
+    {
+      "id": "V2-045",
+      "capability": "Implementar retenção, arquivamento e purge governado de staging.",
+      "before": {
+        "implemented": true,
+        "integrated": true,
+        "locallyVerified": true,
+        "realAcceptance": false
+      },
+      "after": {
+        "implemented": true,
+        "integrated": true,
+        "locallyVerified": true,
+        "realAcceptance": false
+      },
+      "documentaryDeliveryPresent": false,
+      "scope": "Lifecycle local com legal hold, dry-run, archive/restore limitado; TTL e armazenamento produtivos pendentes.",
+      "gap": "Critérios pendentes e subgates externos preservados no STATES.",
+      "evidence": [
+        "STATES.md / V2-045",
+        "target/macrobloco-expansao-20260912-01/before/STATES.md"
+      ]
+    },
+    {
+      "id": "V2-022",
+      "capability": "Criar runtime, orquestrador e comandos operacionais mínimos.",
+      "before": {
+        "implemented": true,
+        "integrated": true,
+        "locallyVerified": true,
+        "realAcceptance": false
+      },
+      "after": {
+        "implemented": true,
+        "integrated": true,
+        "locallyVerified": true,
+        "realAcceptance": false
+      },
+      "documentaryDeliveryPresent": false,
+      "scope": "Runtime serial, dispatcher, recovery e comandos locais; execução operacional depende dos gates próprios.",
+      "gap": "Critérios pendentes e subgates externos preservados no STATES.",
+      "evidence": [
+        "STATES.md / V2-022",
+        "target/macrobloco-expansao-20260912-01/before/STATES.md"
+      ]
+    },
+    {
+      "id": "V2-023",
+      "capability": "Implementar framework de observabilidade, integridade e Data Quality fail-closed.",
+      "before": {
+        "implemented": true,
+        "integrated": true,
+        "locallyVerified": true,
+        "realAcceptance": false
+      },
+      "after": {
+        "implemented": true,
+        "integrated": true,
+        "locallyVerified": true,
+        "realAcceptance": false
+      },
+      "documentaryDeliveryPresent": false,
+      "scope": "Framework de DQ, reconciliação e observabilidade com falha fechada.",
+      "gap": "Aplicação operacional e aceite nominal fora do aceite local histórico.",
+      "evidence": [
+        "STATES.md / V2-023",
+        "target/macrobloco-expansao-20260912-01/before/STATES.md"
+      ]
+    },
+    {
+      "id": "V2-024",
+      "capability": "Criar adaptador GraphQL transitório.",
+      "before": {
+        "implemented": true,
+        "integrated": true,
+        "locallyVerified": true,
+        "realAcceptance": false
+      },
+      "after": {
+        "implemented": true,
+        "integrated": true,
+        "locallyVerified": true,
+        "realAcceptance": false
+      },
+      "documentaryDeliveryPresent": false,
+      "scope": "Adapter GraphQL transitório e contratos de query; não equivale à retirada operacional.",
+      "gap": "Aplicação operacional e aceite nominal fora do aceite local histórico.",
+      "evidence": [
+        "STATES.md / V2-024",
+        "target/macrobloco-expansao-20260912-01/before/STATES.md"
+      ]
+    },
+    {
+      "id": "V2-025",
+      "capability": "Formalizar contratos das fontes restantes.",
+      "before": {
+        "implemented": true,
+        "integrated": true,
+        "locallyVerified": true,
+        "realAcceptance": false
+      },
+      "after": {
+        "implemented": true,
+        "integrated": true,
+        "locallyVerified": true,
+        "realAcceptance": false
+      },
+      "documentaryDeliveryPresent": false,
+      "scope": "Gates executáveis dos contratos locais de fontes; perfis não provam contratos reais completos.",
+      "gap": "Critérios pendentes e subgates externos preservados no STATES.",
+      "evidence": [
+        "STATES.md / V2-025",
+        "target/macrobloco-expansao-20260912-01/before/STATES.md"
+      ]
+    },
+    {
+      "id": "V2-009",
+      "capability": "Definir identidade e crosswalk de todas as entidades.",
+      "before": {
+        "implemented": true,
+        "integrated": true,
+        "locallyVerified": true,
+        "realAcceptance": false
+      },
+      "after": {
+        "implemented": true,
+        "integrated": true,
+        "locallyVerified": true,
+        "realAcceptance": false
+      },
+      "documentaryDeliveryPresent": false,
+      "scope": "Kernel de chaves escopadas/crosswalk e provas locais; identidades de todas as entidades não ratificadas.",
+      "gap": "Critérios pendentes e subgates externos preservados no STATES.",
+      "evidence": [
+        "STATES.md / V2-009",
+        "target/macrobloco-expansao-20260912-01/before/STATES.md"
+      ]
+    },
+    {
+      "id": "V2-033",
+      "capability": "Implementar Usuários e histórico.",
+      "before": {
+        "implemented": true,
+        "integrated": true,
+        "locallyVerified": true,
+        "realAcceptance": false
+      },
+      "after": {
+        "implemented": true,
+        "integrated": true,
+        "locallyVerified": true,
+        "realAcceptance": false
+      },
+      "documentaryDeliveryPresent": false,
+      "scope": "Snapshot tipado de Usuários, current/history e dimensão interna.",
+      "gap": "Aplicação operacional e aceite nominal fora do aceite local histórico.",
+      "evidence": [
+        "STATES.md / V2-033",
+        "target/macrobloco-expansao-20260912-01/before/STATES.md"
+      ]
+    },
+    {
+      "id": "V2-035",
+      "capability": "Portar referências e dimensões governadas.",
+      "before": {
+        "implemented": true,
+        "integrated": true,
+        "locallyVerified": true,
+        "realAcceptance": false
+      },
+      "after": {
+        "implemented": true,
+        "integrated": true,
+        "locallyVerified": true,
+        "realAcceptance": false
+      },
+      "documentaryDeliveryPresent": false,
+      "scope": "Fundação de referências seladas com seleção explícita; dimensões completas pendentes.",
+      "gap": "Critérios pendentes e subgates externos preservados no STATES.",
+      "evidence": [
+        "STATES.md / V2-035",
+        "target/macrobloco-expansao-20260912-01/before/STATES.md"
+      ]
+    },
+    {
+      "id": "V2-047",
+      "capability": "Definir e executar bootstrap histórico por entidade.",
+      "before": {
+        "implemented": true,
+        "integrated": true,
+        "locallyVerified": true,
+        "realAcceptance": false
+      },
+      "after": {
+        "implemented": true,
+        "integrated": true,
+        "locallyVerified": true,
+        "realAcceptance": false
+      },
+      "documentaryDeliveryPresent": false,
+      "scope": "Planejamento/bootstrap local e recomposição por partição; histórico real representativo pendente.",
+      "gap": "Critérios pendentes e subgates externos preservados no STATES.",
+      "evidence": [
+        "STATES.md / V2-047",
+        "target/macrobloco-expansao-20260912-01/before/STATES.md"
+      ]
+    },
+    {
+      "id": "V2-046",
+      "capability": "Implementar relações e backfill referencial de Coletas sem ciclo.",
+      "before": {
+        "implemented": true,
+        "integrated": true,
+        "locallyVerified": true,
+        "realAcceptance": false
+      },
+      "after": {
+        "implemented": true,
+        "integrated": true,
+        "locallyVerified": true,
+        "realAcceptance": false
+      },
+      "documentaryDeliveryPresent": false,
+      "scope": "Relações e hidratação locais com bindings explícitos; correspondência real MC/CF pendente.",
+      "gap": "Critérios pendentes e subgates externos preservados no STATES.",
+      "evidence": [
+        "STATES.md / V2-046",
+        "target/macrobloco-expansao-20260912-01/before/STATES.md"
+      ]
+    },
+    {
+      "id": "V2-010",
+      "capability": "Construir a vertical de Coletas 6908 em sombra.",
+      "before": {
+        "implemented": true,
+        "integrated": true,
+        "locallyVerified": true,
+        "realAcceptance": false
+      },
+      "after": {
+        "implemented": true,
+        "integrated": true,
+        "locallyVerified": true,
+        "realAcceptance": false
+      },
+      "documentaryDeliveryPresent": false,
+      "scope": "Vertical Coletas em sombra, precisão temporal e recomposição locais; paridade/oráculo reais pendentes.",
+      "gap": "Aplicação operacional e aceite nominal fora do aceite local histórico.",
+      "evidence": [
+        "STATES.md / V2-010",
+        "target/macrobloco-expansao-20260912-01/before/STATES.md"
+      ]
+    },
+    {
+      "id": "V2-011",
+      "capability": "Construir a vertical de Fretes 6389 em sombra.",
+      "before": {
+        "implemented": true,
+        "integrated": true,
+        "locallyVerified": true,
+        "realAcceptance": false
+      },
+      "after": {
+        "implemented": true,
+        "integrated": true,
+        "locallyVerified": true,
+        "realAcceptance": false
+      },
+      "documentaryDeliveryPresent": false,
+      "scope": "Vertical Fretes em sombra e dependência relacional local; financeiro e identidade reais mantêm gates.",
+      "gap": "Aplicação operacional e aceite nominal fora do aceite local histórico.",
+      "evidence": [
+        "STATES.md / V2-011",
+        "target/macrobloco-expansao-20260912-01/before/STATES.md"
+      ]
+    },
+    {
+      "id": "V2-012",
+      "capability": "Automatizar caracterização e paridade por entidade.",
+      "before": {
+        "implemented": true,
+        "integrated": true,
+        "locallyVerified": true,
+        "realAcceptance": false
+      },
+      "after": {
+        "implemented": true,
+        "integrated": true,
+        "locallyVerified": true,
+        "realAcceptance": false
+      },
+      "documentaryDeliveryPresent": false,
+      "scope": "Harness de caracterização com fixtures; nenhuma caracterização ou paridade de fornecedor concluída.",
+      "gap": "Critérios pendentes e subgates externos preservados no STATES.",
+      "evidence": [
+        "STATES.md / V2-012",
+        "target/macrobloco-expansao-20260912-01/before/STATES.md"
+      ]
+    },
+    {
+      "id": "V2-013",
+      "capability": "Implementar Sweep and Prune seguro por entidade.",
+      "before": {
+        "implemented": true,
+        "integrated": false,
+        "locallyVerified": true,
+        "realAcceptance": false
+      },
+      "after": {
+        "implemented": true,
+        "integrated": false,
+        "locallyVerified": true,
+        "realAcceptance": false
+      },
+      "documentaryDeliveryPresent": false,
+      "scope": "Kernel puro de preview/classificação; sem apply/sweep real habilitado nem integração de mutação.",
+      "gap": "Critérios pendentes e subgates externos preservados no STATES.",
+      "evidence": [
+        "STATES.md / V2-013",
+        "target/macrobloco-expansao-20260912-01/before/STATES.md"
+      ]
+    },
+    {
+      "id": "V2-026",
+      "capability": "Implementar ingestão canônica de Manifestos 6399.",
+      "before": {
+        "implemented": true,
+        "integrated": true,
+        "locallyVerified": true,
+        "realAcceptance": false
+      },
+      "after": {
+        "implemented": true,
+        "integrated": true,
+        "locallyVerified": true,
+        "realAcceptance": false
+      },
+      "documentaryDeliveryPresent": false,
+      "scope": "Vertical Manifestos em sombra, filhos pick/MDF-e e integração relacional sintética.",
+      "gap": "Aplicação operacional e aceite nominal fora do aceite local histórico.",
+      "evidence": [
+        "STATES.md / V2-026",
+        "target/macrobloco-expansao-20260912-01/before/STATES.md"
+      ]
+    },
+    {
+      "id": "V2-027",
+      "capability": "Implementar Cotações 6906.",
+      "before": {
+        "implemented": true,
+        "integrated": true,
+        "locallyVerified": true,
+        "realAcceptance": false
+      },
+      "after": {
+        "implemented": true,
+        "integrated": true,
+        "locallyVerified": true,
+        "realAcceptance": false
+      },
+      "documentaryDeliveryPresent": false,
+      "scope": "Vertical Cotações em sombra com referência tarifária explícita.",
+      "gap": "Aplicação operacional e aceite nominal fora do aceite local histórico.",
+      "evidence": [
+        "STATES.md / V2-027",
+        "target/macrobloco-expansao-20260912-01/before/STATES.md"
+      ]
+    },
+    {
+      "id": "V2-028",
+      "capability": "Implementar Localização de Cargas 8656.",
+      "before": {
+        "implemented": true,
+        "integrated": true,
+        "locallyVerified": true,
+        "realAcceptance": false
+      },
+      "after": {
+        "implemented": true,
+        "integrated": true,
+        "locallyVerified": true,
+        "realAcceptance": false
+      },
+      "documentaryDeliveryPresent": false,
+      "scope": "Vertical Localização em sombra e integração referencial sintética.",
+      "gap": "Aplicação operacional e aceite nominal fora do aceite local histórico.",
+      "evidence": [
+        "STATES.md / V2-028",
+        "target/macrobloco-expansao-20260912-01/before/STATES.md"
+      ]
+    },
+    {
+      "id": "V2-029",
+      "capability": "Implementar Contas a Pagar 8636.",
+      "before": {
+        "implemented": false,
+        "integrated": false,
+        "locallyVerified": false,
+        "realAcceptance": false
+      },
+      "after": {
+        "implemented": true,
+        "integrated": true,
+        "locallyVerified": true,
+        "realAcceptance": false
+      },
+      "documentaryDeliveryPresent": false,
+      "scope": "CAP: 28 campos, raiz/parcela/rateio explícitos, captura/aplicação e consulta SQL/JDBC.",
+      "gap": "Identidade real de raiz/parcela/rateio, cardinalidade, tipos pendentes e oráculo independente.",
+      "evidence": [
+        "STATES.md / V2-029",
+        "docs/catalogos/macrobloco-expansao/MATRIZ-A-N.md",
+        "target/macrobloco-expansao-20260912-01/physical-fields-02-exit.json",
+        "target/macrobloco-expansao-20260912-01/physical-recomposition-main-02-exit.json"
+      ]
+    },
+    {
+      "id": "V2-030",
+      "capability": "Implementar Faturas por Cliente 4924.",
+      "before": {
+        "implemented": false,
+        "integrated": false,
+        "locallyVerified": false,
+        "realAcceptance": false
+      },
+      "after": {
+        "implemented": true,
+        "integrated": true,
+        "locallyVerified": true,
+        "realAcceptance": false
+      },
+      "documentaryDeliveryPresent": false,
+      "scope": "Faturas por Cliente: 53 campos, título/documento, política fiscal explícita, relações e consulta.",
+      "gap": "Correspondência linha/título/documento/Frete e precedência fiscal nominal; série NFS-e sem fonte.",
+      "evidence": [
+        "STATES.md / V2-030",
+        "docs/catalogos/macrobloco-expansao/MATRIZ-A-N.md",
+        "target/macrobloco-expansao-20260912-01/physical-fields-02-exit.json",
+        "target/macrobloco-expansao-20260912-01/physical-recomposition-main-02-exit.json"
+      ]
+    },
+    {
+      "id": "V2-031",
+      "capability": "Implementar Inventário 10633.",
+      "before": {
+        "implemented": false,
+        "integrated": false,
+        "locallyVerified": false,
+        "realAcceptance": false
+      },
+      "after": {
+        "implemented": true,
+        "integrated": true,
+        "locallyVerified": true,
+        "realAcceptance": false
+      },
+      "documentaryDeliveryPresent": false,
+      "scope": "Inventário: 26 campos, filhos físicos, comprovante cumulativo, relação explícita e consulta.",
+      "gap": "Identidade real da raiz/componentes e cardinalidade/minuta; oráculo independente.",
+      "evidence": [
+        "STATES.md / V2-031",
+        "docs/catalogos/macrobloco-expansao/MATRIZ-A-N.md",
+        "target/macrobloco-expansao-20260912-01/physical-fields-02-exit.json",
+        "target/macrobloco-expansao-20260912-01/physical-recomposition-main-02-exit.json"
+      ]
+    },
+    {
+      "id": "V2-032",
+      "capability": "Implementar Sinistros 6392.",
+      "before": {
+        "implemented": false,
+        "integrated": false,
+        "locallyVerified": false,
+        "realAcceptance": false
+      },
+      "after": {
+        "implemented": true,
+        "integrated": true,
+        "locallyVerified": true,
+        "realAcceptance": false
+      },
+      "documentaryDeliveryPresent": false,
+      "scope": "Sinistros: 44 campos, sequência/minuta/ocorrência distintas, arrays, valores e consulta.",
+      "gap": "Identidade composta e papéis/cardinalidades; formato de customer_communication_time não ratificado.",
+      "evidence": [
+        "STATES.md / V2-032",
+        "docs/catalogos/macrobloco-expansao/MATRIZ-A-N.md",
+        "target/macrobloco-expansao-20260912-01/physical-fields-02-exit.json",
+        "target/macrobloco-expansao-20260912-01/physical-recomposition-main-02-exit.json"
+      ]
+    },
+    {
+      "id": "V2-034",
+      "capability": "Decidir e implementar/retirar Raster.",
+      "before": {
+        "implemented": false,
+        "integrated": false,
+        "locallyVerified": false,
+        "realAcceptance": false
+      },
+      "after": {
+        "implemented": false,
+        "integrated": false,
+        "locallyVerified": false,
+        "realAcceptance": false
+      },
+      "documentaryDeliveryPresent": false,
+      "scope": "Nenhum mecanismo funcional verificado nesta unidade; requisito original preservado.",
+      "gap": "Raster MANTER preservado; implementação/retirada operacional depende dos gates próprios.",
+      "evidence": [
+        "STATES.md / V2-034",
+        "target/macrobloco-expansao-20260912-01/before/STATES.md"
+      ]
+    },
+    {
+      "id": "V2-037",
+      "capability": "Publicar contratos SQL core e compatibilidade controlada.",
+      "before": {
+        "implemented": false,
+        "integrated": false,
+        "locallyVerified": false,
+        "realAcceptance": false
+      },
+      "after": {
+        "implemented": false,
+        "integrated": false,
+        "locallyVerified": false,
+        "realAcceptance": false
+      },
+      "documentaryDeliveryPresent": false,
+      "scope": "Nenhum mecanismo funcional verificado nesta unidade; requisito original preservado.",
+      "gap": "19 contratos consumidores e aceite de owners; seis consultas de laboratório não os publicam.",
+      "evidence": [
+        "STATES.md / V2-037",
+        "target/macrobloco-expansao-20260912-01/before/STATES.md"
+      ]
+    },
+    {
+      "id": "V2-050",
+      "capability": "Provar memória limitada e push-down SQL por vertical/saída.",
+      "before": {
+        "implemented": true,
+        "integrated": true,
+        "locallyVerified": true,
+        "realAcceptance": false
+      },
+      "after": {
+        "implemented": true,
+        "integrated": true,
+        "locallyVerified": true,
+        "realAcceptance": false
+      },
+      "documentaryDeliveryPresent": false,
+      "scope": "Fundação de medição e campanhas locais; não prova platô de heap, SLO ou todas as saídas.",
+      "gap": "Critérios pendentes e subgates externos preservados no STATES.",
+      "evidence": [
+        "STATES.md / V2-050",
+        "target/macrobloco-expansao-20260912-01/before/STATES.md"
+      ]
+    },
+    {
+      "id": "V2-038",
+      "capability": "Qualificar E2E, replay, recovery e desempenho por entidade/onda.",
+      "before": {
+        "implemented": false,
+        "integrated": false,
+        "locallyVerified": false,
+        "realAcceptance": false
+      },
+      "after": {
+        "implemented": false,
+        "integrated": false,
+        "locallyVerified": false,
+        "realAcceptance": false
+      },
+      "documentaryDeliveryPresent": false,
+      "scope": "Nenhum mecanismo funcional verificado nesta unidade; requisito original preservado.",
+      "gap": "Janela representativa, fontes/oráculos reais, desempenho/recovery e aceite da onda.",
+      "evidence": [
+        "STATES.md / V2-038",
+        "target/macrobloco-expansao-20260912-01/before/STATES.md"
+      ]
+    },
+    {
+      "id": "V2-039",
+      "capability": "Preparar pacote, segurança e operação de release.",
+      "before": {
+        "implemented": false,
+        "integrated": false,
+        "locallyVerified": false,
+        "realAcceptance": false
+      },
+      "after": {
+        "implemented": false,
+        "integrated": false,
+        "locallyVerified": false,
+        "realAcceptance": false
+      },
+      "documentaryDeliveryPresent": false,
+      "scope": "Nenhum mecanismo funcional verificado nesta unidade; requisito original preservado.",
+      "gap": "Pacote produtivo, segurança, identidade e operação de release ainda pendentes.",
+      "evidence": [
+        "STATES.md / V2-039",
+        "target/macrobloco-expansao-20260912-01/before/STATES.md"
+      ]
+    },
+    {
+      "id": "V2-048",
+      "capability": "Ratificar e ensaiar a topologia material de cutover.",
+      "before": {
+        "implemented": false,
+        "integrated": false,
+        "locallyVerified": false,
+        "realAcceptance": false
+      },
+      "after": {
+        "implemented": false,
+        "integrated": false,
+        "locallyVerified": false,
+        "realAcceptance": false
+      },
+      "documentaryDeliveryPresent": true,
+      "scope": "Nenhum mecanismo funcional verificado nesta unidade; requisito original preservado.",
+      "gap": "Desenho catalogado; ensaio material de troca, fences e recovery depende de ambiente/owners.",
+      "evidence": [
+        "STATES.md / V2-048",
+        "target/macrobloco-expansao-20260912-01/before/STATES.md"
+      ]
+    },
+    {
+      "id": "V2-014",
+      "capability": "Executar gate por unidade real de cutover.",
+      "before": {
+        "implemented": false,
+        "integrated": false,
+        "locallyVerified": false,
+        "realAcceptance": false
+      },
+      "after": {
+        "implemented": false,
+        "integrated": false,
+        "locallyVerified": false,
+        "realAcceptance": false
+      },
+      "documentaryDeliveryPresent": false,
+      "scope": "Nenhum mecanismo funcional verificado nesta unidade; requisito original preservado.",
+      "gap": "Gate real de corte, owners/aceitantes, janela, write-fence e recuperação.",
+      "evidence": [
+        "STATES.md / V2-014",
+        "target/macrobloco-expansao-20260912-01/before/STATES.md"
+      ]
+    },
+    {
+      "id": "V2-040",
+      "capability": "Fechar a matriz de paridade e desativar o legado com segurança.",
+      "before": {
+        "implemented": false,
+        "integrated": false,
+        "locallyVerified": false,
+        "realAcceptance": false
+      },
+      "after": {
+        "implemented": false,
+        "integrated": false,
+        "locallyVerified": false,
+        "realAcceptance": false
+      },
+      "documentaryDeliveryPresent": false,
+      "scope": "Nenhum mecanismo funcional verificado nesta unidade; requisito original preservado.",
+      "gap": "Paridade final assinada e desativação segura do legado, após os gates de corte.",
+      "evidence": [
+        "STATES.md / V2-040",
+        "target/macrobloco-expansao-20260912-01/before/STATES.md"
+      ]
+    },
+    {
+      "id": "MAT-01",
+      "capability": "Fato Fretes operacional",
+      "before": {
+        "implemented": false,
+        "integrated": false,
+        "locallyVerified": false,
+        "realAcceptance": false
+      },
+      "after": {
+        "implemented": false,
+        "integrated": false,
+        "locallyVerified": false,
+        "realAcceptance": false
+      },
+      "documentaryDeliveryPresent": false,
+      "scope": "Nenhum mecanismo funcional verificado nesta unidade; requisito original preservado.",
+      "gap": "Carga do fato Fretes operacional não incluída; faltam referências e paridade específicas.",
+      "evidence": [
+        "STATES.md / MAT-01",
+        "target/macrobloco-expansao-20260912-01/before/STATES.md"
+      ]
+    },
+    {
+      "id": "MAT-02",
+      "capability": "Fato Coletores",
+      "before": {
+        "implemented": false,
+        "integrated": false,
+        "locallyVerified": false,
+        "realAcceptance": false
+      },
+      "after": {
+        "implemented": false,
+        "integrated": false,
+        "locallyVerified": false,
+        "realAcceptance": false
+      },
+      "documentaryDeliveryPresent": false,
+      "scope": "Nenhum mecanismo funcional verificado nesta unidade; requisito original preservado.",
+      "gap": "Carga Coletores não incluída; falta resolver grão, filial e entradas/relações.",
+      "evidence": [
+        "STATES.md / MAT-02",
+        "target/macrobloco-expansao-20260912-01/before/STATES.md"
+      ]
+    },
+    {
+      "id": "MAT-03",
+      "capability": "Fato Faturamento",
+      "before": {
+        "implemented": false,
+        "integrated": false,
+        "locallyVerified": false,
+        "realAcceptance": false
+      },
+      "after": {
+        "implemented": true,
+        "integrated": true,
+        "locallyVerified": true,
+        "realAcceptance": false
+      },
+      "documentaryDeliveryPresent": false,
+      "scope": "Fato Faturamento por Frete sintético: carga SQL, histórico, recibo, linhagem e consulta.",
+      "gap": "Grão e política financeira reais, calendário/atribuição nominal e paridade das entradas.",
+      "evidence": [
+        "STATES.md / MAT-03",
+        "docs/catalogos/macrobloco-expansao/MATRIZ-A-N.md",
+        "target/macrobloco-expansao-20260912-01/physical-fields-02-exit.json",
+        "target/macrobloco-expansao-20260912-01/physical-recomposition-main-02-exit.json"
+      ]
+    },
+    {
+      "id": "MAT-04",
+      "capability": "Fato Faturas",
+      "before": {
+        "implemented": false,
+        "integrated": false,
+        "locallyVerified": false,
+        "realAcceptance": false
+      },
+      "after": {
+        "implemented": true,
+        "integrated": true,
+        "locallyVerified": true,
+        "realAcceptance": false
+      },
+      "documentaryDeliveryPresent": false,
+      "scope": "Fato Faturas por título sintético: carga SQL, histórico, recibo, linhagem e consulta.",
+      "gap": "Grão real do título, precedência fiscal nominal e paridade das entradas.",
+      "evidence": [
+        "STATES.md / MAT-04",
+        "docs/catalogos/macrobloco-expansao/MATRIZ-A-N.md",
+        "target/macrobloco-expansao-20260912-01/physical-fields-02-exit.json",
+        "target/macrobloco-expansao-20260912-01/physical-recomposition-main-02-exit.json"
+      ]
+    },
+    {
+      "id": "MAT-05",
+      "capability": "Fato Manifestos",
+      "before": {
+        "implemented": false,
+        "integrated": false,
+        "locallyVerified": false,
+        "realAcceptance": false
+      },
+      "after": {
+        "implemented": false,
+        "integrated": false,
+        "locallyVerified": false,
+        "realAcceptance": false
+      },
+      "documentaryDeliveryPresent": false,
+      "scope": "Nenhum mecanismo funcional verificado nesta unidade; requisito original preservado.",
+      "gap": "Carga Manifestos não incluída; faltam frota e referências/relações ratificadas.",
+      "evidence": [
+        "STATES.md / MAT-05",
+        "target/macrobloco-expansao-20260912-01/before/STATES.md"
+      ]
+    }
+  ]
+}

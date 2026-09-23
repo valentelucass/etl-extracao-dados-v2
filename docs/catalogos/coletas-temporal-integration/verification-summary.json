@@ -1,0 +1,33 @@
+{
+  "operationalPromotionAuthorized": false,
+  "passed": true,
+  "full": {
+    "tests": 1563,
+    "errors": 0,
+    "failures": 0,
+    "skipped": 4
+  },
+  "physicalFreshVsUpgradeEquivalenceProven": false,
+  "migrations": 28,
+  "integration": {
+    "coletasNew": 38,
+    "realJdbc": true,
+    "tests": 39,
+    "syntheticOnly": true,
+    "rollbackConfirmed": true,
+    "errors": 0,
+    "failures": 0,
+    "existingAudit": 1,
+    "skipped": 0
+  },
+  "realQualificationAccepted": false,
+  "remoteCalls": 0,
+  "sourceFiles": 783,
+  "concurrency": {
+    "consumptionError": 53111,
+    "qualificationError": 1222,
+    "actualStageQualificationConsumption": true,
+    "secondFlowAfterRollback": true,
+    "stageError": 53008
+  }
+}

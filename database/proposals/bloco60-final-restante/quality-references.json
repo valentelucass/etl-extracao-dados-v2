@@ -1,0 +1,18 @@
+[
+  {
+    "material": "dq-policy-v1|56:bloco60-usuarios-backfill-v4|88d26323f8226ae3fa1792ae264f3696713ba5e117939b24f0f9587566489506|4|3600|32:laboratory-owner|32:laboratory-owner|38:bloco60-preserve-v1|32:laboratory-owner|2026-09-10T00:00:00.126|1:COUNT_EQUATION:0:0:32:laboratory-owner|2:PAGE_TERMINALITY:0:0:32:laboratory-owner|3:PROMOTION_RECONCILIATION:0:0:32:laboratory-owner|4:QUARANTINE_SLA:0:0:32:laboratory-owner",
+    "mode": "BACKFILL",
+    "fingerprint": "6118519fd79a8e0d201bb4d18e8e3bab59c5d36dc45e18b980ddc43dede20312",
+    "scopeFingerprint": "88d26323f8226ae3fa1792ae264f3696713ba5e117939b24f0f9587566489506",
+    "template": "USUARIOS",
+    "version": "bloco60-usuarios-backfill-v4"
+  },
+  {
+    "material": "dq-policy-v1|52:bloco60-usuarios-replay-v4|9ab375081cab9e8f4515c10f37438f475020bb53a730bbd45693bf3cb473fdc8|4|3600|32:laboratory-owner|32:laboratory-owner|38:bloco60-preserve-v1|32:laboratory-owner|2026-09-10T00:00:00.126|1:COUNT_EQUATION:0:0:32:laboratory-owner|2:PAGE_TERMINALITY:0:0:32:laboratory-owner|3:PROMOTION_RECONCILIATION:0:0:32:laboratory-owner|4:QUARANTINE_SLA:0:0:32:laboratory-owner",
+    "mode": "REPLAY",
+    "fingerprint": "f8520639da9bdb21bd127fb6e7b18c09c7cc1bae301aa5c4d3f53e7517a18a8d",
+    "scopeFingerprint": "9ab375081cab9e8f4515c10f37438f475020bb53a730bbd45693bf3cb473fdc8",
+    "template": "USUARIOS",
+    "version": "bloco60-usuarios-replay-v4"
+  }
+]

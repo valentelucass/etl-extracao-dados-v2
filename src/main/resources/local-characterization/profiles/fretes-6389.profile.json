@@ -1,0 +1,146 @@
+{
+  "schemaVersion": "V2_012_Q_FND_02_PROFILE_V1",
+  "profileId": "V2_012_FRETES_6389",
+  "entity": "FRETES",
+  "channels": [
+    {
+      "channelId": "FRETES_DATA_EXPORT_6389",
+      "sourceProfile": "DATA_EXPORT",
+      "contract": {
+        "contractId": "dataexport-6389",
+        "contractVersion": "2026-08-31.v2-025a.1",
+        "releaseFingerprint": "23aef4e4e03488d291d3990bdba813800e3ebb8c8be18e766a788daf9741ec15",
+        "identityFingerprint": "4e35b90cd4a58e139210d9adf9ac050acba9a46e62585996b650c6252cf44723"
+      },
+      "sourceKey": {"path": "/id", "wireType": "INTEGER", "typeTagged": true},
+      "expectedPaths": [
+        "/id",
+        "/updated_at",
+        "/reference_number",
+        "/fit_p_m_pck_sequence_code",
+        "/corporation_sequence_number",
+        "/finished_at",
+        "/fit_dpn_performance_finished_at"
+      ],
+      "fieldTypes": {
+        "/id": "INTEGER",
+        "/updated_at": "UNVERIFIED_ORACLE_REQUIRED",
+        "/reference_number": "UNVERIFIED_ORACLE_REQUIRED",
+        "/fit_p_m_pck_sequence_code": "UNVERIFIED_ORACLE_REQUIRED",
+        "/corporation_sequence_number": "UNVERIFIED_ORACLE_REQUIRED",
+        "/finished_at": "UNVERIFIED_ORACLE_REQUIRED",
+        "/fit_dpn_performance_finished_at": "UNVERIFIED_ORACLE_REQUIRED"
+      },
+      "presenceByPath": {
+        "/id": ["ABSENT", "NULL", "VALUE"],
+        "/updated_at": ["ABSENT", "NULL", "VALUE"],
+        "/reference_number": ["ABSENT", "NULL", "VALUE"],
+        "/fit_p_m_pck_sequence_code": ["ABSENT", "NULL", "VALUE"],
+        "/corporation_sequence_number": ["ABSENT", "NULL", "VALUE"],
+        "/finished_at": ["ABSENT", "NULL", "VALUE"],
+        "/fit_dpn_performance_finished_at": ["ABSENT", "NULL", "VALUE"]
+      },
+      "syntheticOnly": false,
+      "observationOnly": false,
+      "publicationBlocked": true,
+      "rootOrFreshnessAuthority": true,
+      "updatedAtFreshness": false,
+      "shortPageIsTerminal": false,
+      "completenessProven": false,
+      "snapshotProven": false,
+      "filterPolicy": "FREIGHTS_SERVICE_AT_CANDIDATE_FILTER_TRANSLATION_UNPROVEN",
+      "temporalTranslation": "PROVIDER_BOUNDARY_AND_FRESHNESS_UNVERIFIED"
+    },
+    {
+      "channelId": "FRETES_GRAPHQL_SIDECAR",
+      "sourceProfile": "GRAPHQL_SIDECAR",
+      "contract": {
+        "contractId": "FREIGHTS_TRANSITIONAL_SIDECAR",
+        "contractVersion": "2026-09-06.freights-transitional-sidecar.1",
+        "releaseFingerprint": "b6a8ea2744956f1ef5a2407abd57609c8a353930952a5db49996eff5b3f0c318",
+        "identityFingerprint": "4e35b90cd4a58e139210d9adf9ac050acba9a46e62585996b650c6252cf44723"
+      },
+      "sourceKey": {"path": "", "wireType": "UNVERIFIED_ORACLE_REQUIRED", "typeTagged": false},
+      "expectedPaths": [
+        "/freight/edges/node/id",
+        "/freight/edges/node/accountingCreditId",
+        "/freight/edges/node/accountingCreditInstallmentId",
+        "/freight/edges/node/referenceNumber",
+        "/freight/edges/node/cte/key",
+        "/freight/edges/node/total",
+        "/freight/edges/node/corporationSequenceNumber",
+        "/freight/edges/node/pickItemId",
+        "/freight/pageInfo/hasNextPage",
+        "/freight/pageInfo/endCursor"
+      ],
+      "fieldTypes": {
+        "/freight/edges/node/id": "UNVERIFIED_ORACLE_REQUIRED",
+        "/freight/edges/node/accountingCreditId": "UNVERIFIED_ORACLE_REQUIRED",
+        "/freight/edges/node/accountingCreditInstallmentId": "UNVERIFIED_ORACLE_REQUIRED",
+        "/freight/edges/node/referenceNumber": "UNVERIFIED_ORACLE_REQUIRED",
+        "/freight/edges/node/cte/key": "UNVERIFIED_ORACLE_REQUIRED",
+        "/freight/edges/node/total": "UNVERIFIED_ORACLE_REQUIRED",
+        "/freight/edges/node/corporationSequenceNumber": "UNVERIFIED_ORACLE_REQUIRED",
+        "/freight/edges/node/pickItemId": "UNVERIFIED_ORACLE_REQUIRED",
+        "/freight/pageInfo/hasNextPage": "UNVERIFIED_ORACLE_REQUIRED",
+        "/freight/pageInfo/endCursor": "UNVERIFIED_ORACLE_REQUIRED"
+      },
+      "presenceByPath": {
+        "/freight/edges/node/id": ["ABSENT", "NULL", "VALUE"],
+        "/freight/edges/node/accountingCreditId": ["ABSENT", "NULL", "VALUE"],
+        "/freight/edges/node/accountingCreditInstallmentId": ["ABSENT", "NULL", "VALUE"],
+        "/freight/edges/node/referenceNumber": ["ABSENT", "NULL", "VALUE"],
+        "/freight/edges/node/cte/key": ["ABSENT", "NULL", "VALUE"],
+        "/freight/edges/node/total": ["ABSENT", "NULL", "VALUE"],
+        "/freight/edges/node/corporationSequenceNumber": ["ABSENT", "NULL", "VALUE"],
+        "/freight/edges/node/pickItemId": ["ABSENT", "NULL", "VALUE"],
+        "/freight/pageInfo/hasNextPage": ["ABSENT", "NULL", "VALUE"],
+        "/freight/pageInfo/endCursor": ["ABSENT", "NULL", "VALUE"]
+      },
+      "syntheticOnly": true,
+      "observationOnly": true,
+      "publicationBlocked": true,
+      "rootOrFreshnessAuthority": false,
+      "updatedAtFreshness": false,
+      "shortPageIsTerminal": false,
+      "completenessProven": false,
+      "snapshotProven": false,
+      "filterPolicy": "NO_ROOT_FILTER_OBSERVATION_ONLY",
+      "temporalTranslation": "NO_TEMPORAL_AUTHORITY"
+    }
+  ],
+  "explicitScopeRequired": true,
+  "relationshipEnabled": false,
+  "sweepEnabled": false,
+  "publicationEnabled": false,
+  "bootstrapEnabled": false,
+  "parityEnabled": false,
+  "statusBranchNicknameState": "NOT_APPLICABLE",
+  "freshnessPolicy": "DECISION_ONLY_CTE_CREATED_AT_CTE_ISSUED_AT_CRIADO_EM_SERVICO_EM_UPDATED_AT_FORBIDDEN",
+  "knownTerminalStatuses": ["finished", "done", "canceled", "cancelled"],
+  "decisionPolicies": {
+    "FRE-01": "ID_INTEGER_SCOPED_ONLY_CORPORATION_SEQUENCE_ALIAS_ZERO_TO_MANY",
+    "FRE-02": "FIRST_PRESENT_VALID_CTE_CREATED_CTE_ISSUED_CRIADO_SERVICO_INVALID_BLOCKS_OLDER_NOOP_EQUAL_IDENTICAL_REPLAY_EQUAL_DIVERGENT_QUARANTINE",
+    "FRE-03": "PERFORMANCE_OFFICIAL_THEN_FINISHED_FALLBACK_WITH_PROVENANCE_AMBIGUOUS_QUARANTINE",
+    "FRE-04": "SIDECAR_INDEPENDENT_BOUNDED_OBSERVATION_ONLY_RELATION_CANDIDATES_UNRESOLVED",
+    "FRE-05": "SHORT_PAGE_NOT_TERMINAL_COMPLETENESS_UNPROVEN_ABSENCE_NO_DEACTIVATION",
+    "FRE-06": "FINANCIAL_RAW_TYPED_NO_CURRENCY_UNIT_ROUNDING_OR_ARITHMETIC_INFERENCE",
+    "FRE-07": "AMBIGUOUS_TEMPORAL_QUARANTINE_NO_HEURISTIC"
+  },
+  "numericPolicies": {},
+  "absencePolicy": "INCREMENTAL_ABSENCE_NEVER_DEACTIVATES_SWEEP_DISABLED",
+  "limits": {
+    "maximumBytes": 65536,
+    "maximumRows": 1000,
+    "maximumPages": 100,
+    "maximumPaths": 256,
+    "maximumDepth": 16,
+    "maximumPageSize": 100,
+    "maximumMicrobatch": 100,
+    "maximumGraphQlEdges": 100,
+    "terminalContinuationProbePages": 1
+  },
+  "profileStatus": "PREPARED_NOT_EXECUTED",
+  "gateStatus": "ORACLE_REQUIRED",
+  "providerEvidence": "NOT_EXECUTED"
+}

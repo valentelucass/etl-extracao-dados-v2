@@ -1,0 +1,1054 @@
+{
+  "version": 1,
+  "evidence": "SYNTHETIC_LOCAL_ONLY",
+  "entity": "FRETES",
+  "decision": "docs/catalogos/fretes-v2-011/decisao-v01.json",
+  "decisionSha256": "b6a8ea2744956f1ef5a2407abd57609c8a353930952a5db49996eff5b3f0c318",
+  "cases": [
+    {
+      "id": "SYNTH_BASE_PRESENCE_EIGHTEEN",
+      "envelope": "{\"data\":[{\"id\":1,\"servico_em\":\"2036-03-20T12:00:00Z\"}]}",
+      "expected": [
+        {
+          "/quarantine": "NONE",
+          "/id/typed": "INTEGER:1",
+          "/freshness/typed": "2036-03-20T12:00:00Z",
+          "/freshness/origin": "SERVICO_EM",
+          "/freshness/proof": "SYNTHETIC_V09_NOT_SOURCE_CONTRACT_EVIDENCE",
+          "/updated_at/policy": "IGNORED_UNVERIFIED",
+          "/status/terminal": "false",
+          "/performance/typed": "NULL",
+          "/performance/origin": "NULL",
+          "/performance/parseState": "NOT_PRESENT",
+          "/performance/officialProvenance": "PERFORMANCE_6389",
+          "/performance/fallbackProvenance": "DECLARED_FALLBACK",
+          "/sidecar/presence": "ABSENT",
+          "/relation/policy": "UNRESOLVED_RELATION_CANDIDATES_V2_046B",
+          "/financial/currencyPolicy": "UNRESOLVED_NO_INFERENCE",
+          "/financial/arithmeticPolicy": "FORBIDDEN",
+          "/id/presence": "VALUE",
+          "/id/mappedPresence": "VALUE",
+          "/updated_at/presence": "ABSENT",
+          "/updated_at/mappedPresence": "ABSENT",
+          "/reference_number/presence": "ABSENT",
+          "/reference_number/mappedPresence": "ABSENT",
+          "/fit_p_m_pck_sequence_code/presence": "ABSENT",
+          "/fit_p_m_pck_sequence_code/mappedPresence": "ABSENT",
+          "/corporation_sequence_number/presence": "ABSENT",
+          "/corporation_sequence_number/mappedPresence": "ABSENT",
+          "/finished_at/presence": "ABSENT",
+          "/finished_at/mappedPresence": "ABSENT",
+          "/fit_dpn_performance_finished_at/presence": "ABSENT",
+          "/fit_dpn_performance_finished_at/mappedPresence": "ABSENT",
+          "/status/presence": "ABSENT",
+          "/status/mappedPresence": "ABSENT",
+          "/cte_created_at/presence": "ABSENT",
+          "/cte_created_at/mappedPresence": "ABSENT",
+          "/cte_issued_at/presence": "ABSENT",
+          "/cte_issued_at/mappedPresence": "ABSENT",
+          "/criado_em/presence": "ABSENT",
+          "/criado_em/mappedPresence": "ABSENT",
+          "/servico_em/presence": "VALUE",
+          "/servico_em/mappedPresence": "VALUE",
+          "/cte/presence": "ABSENT",
+          "/cte/mappedPresence": "ABSENT",
+          "/ctes/presence": "ABSENT",
+          "/ctes/mappedPresence": "ABSENT",
+          "/cte_key/presence": "ABSENT",
+          "/cte_key/mappedPresence": "ABSENT",
+          "/finalizations/presence": "ABSENT",
+          "/finalizations/mappedPresence": "ABSENT",
+          "/finalizacoes/presence": "ABSENT",
+          "/finalizacoes/mappedPresence": "ABSENT",
+          "/total/presence": "ABSENT",
+          "/total/mappedPresence": "ABSENT"
+        }
+      ]
+    },
+    {
+      "id": "SYNTH_NULL_REFERENCE_NUMBER",
+      "envelope": "{\"data\":[{\"id\":1,\"servico_em\":\"2036-03-20T12:00:00Z\",\"reference_number\":null}]}",
+      "expected": [
+        {
+          "/quarantine": "NONE",
+          "/id/typed": "INTEGER:1",
+          "/freshness/typed": "2036-03-20T12:00:00Z",
+          "/freshness/origin": "SERVICO_EM",
+          "/freshness/proof": "SYNTHETIC_V09_NOT_SOURCE_CONTRACT_EVIDENCE",
+          "/updated_at/policy": "IGNORED_UNVERIFIED",
+          "/status/terminal": "false",
+          "/performance/typed": "NULL",
+          "/performance/origin": "NULL",
+          "/performance/parseState": "NOT_PRESENT",
+          "/performance/officialProvenance": "PERFORMANCE_6389",
+          "/performance/fallbackProvenance": "DECLARED_FALLBACK",
+          "/sidecar/presence": "ABSENT",
+          "/relation/policy": "UNRESOLVED_RELATION_CANDIDATES_V2_046B",
+          "/financial/currencyPolicy": "UNRESOLVED_NO_INFERENCE",
+          "/financial/arithmeticPolicy": "FORBIDDEN",
+          "/id/presence": "VALUE",
+          "/id/mappedPresence": "VALUE",
+          "/updated_at/presence": "ABSENT",
+          "/updated_at/mappedPresence": "ABSENT",
+          "/reference_number/presence": "NULL",
+          "/reference_number/mappedPresence": "NULL",
+          "/fit_p_m_pck_sequence_code/presence": "ABSENT",
+          "/fit_p_m_pck_sequence_code/mappedPresence": "ABSENT",
+          "/corporation_sequence_number/presence": "ABSENT",
+          "/corporation_sequence_number/mappedPresence": "ABSENT",
+          "/finished_at/presence": "ABSENT",
+          "/finished_at/mappedPresence": "ABSENT",
+          "/fit_dpn_performance_finished_at/presence": "ABSENT",
+          "/fit_dpn_performance_finished_at/mappedPresence": "ABSENT",
+          "/status/presence": "ABSENT",
+          "/status/mappedPresence": "ABSENT",
+          "/cte_created_at/presence": "ABSENT",
+          "/cte_created_at/mappedPresence": "ABSENT",
+          "/cte_issued_at/presence": "ABSENT",
+          "/cte_issued_at/mappedPresence": "ABSENT",
+          "/criado_em/presence": "ABSENT",
+          "/criado_em/mappedPresence": "ABSENT",
+          "/servico_em/presence": "VALUE",
+          "/servico_em/mappedPresence": "VALUE",
+          "/cte/presence": "ABSENT",
+          "/cte/mappedPresence": "ABSENT",
+          "/ctes/presence": "ABSENT",
+          "/ctes/mappedPresence": "ABSENT",
+          "/cte_key/presence": "ABSENT",
+          "/cte_key/mappedPresence": "ABSENT",
+          "/finalizations/presence": "ABSENT",
+          "/finalizations/mappedPresence": "ABSENT",
+          "/finalizacoes/presence": "ABSENT",
+          "/finalizacoes/mappedPresence": "ABSENT",
+          "/total/presence": "ABSENT",
+          "/total/mappedPresence": "ABSENT"
+        }
+      ]
+    },
+    {
+      "id": "SYNTH_NULL_FIT_P_M_PCK_SEQUENCE_CODE",
+      "envelope": "{\"data\":[{\"id\":1,\"servico_em\":\"2036-03-20T12:00:00Z\",\"fit_p_m_pck_sequence_code\":null}]}",
+      "expected": [
+        {
+          "/quarantine": "NONE",
+          "/id/typed": "INTEGER:1",
+          "/freshness/typed": "2036-03-20T12:00:00Z",
+          "/freshness/origin": "SERVICO_EM",
+          "/freshness/proof": "SYNTHETIC_V09_NOT_SOURCE_CONTRACT_EVIDENCE",
+          "/updated_at/policy": "IGNORED_UNVERIFIED",
+          "/status/terminal": "false",
+          "/performance/typed": "NULL",
+          "/performance/origin": "NULL",
+          "/performance/parseState": "NOT_PRESENT",
+          "/performance/officialProvenance": "PERFORMANCE_6389",
+          "/performance/fallbackProvenance": "DECLARED_FALLBACK",
+          "/sidecar/presence": "ABSENT",
+          "/relation/policy": "UNRESOLVED_RELATION_CANDIDATES_V2_046B",
+          "/financial/currencyPolicy": "UNRESOLVED_NO_INFERENCE",
+          "/financial/arithmeticPolicy": "FORBIDDEN",
+          "/id/presence": "VALUE",
+          "/id/mappedPresence": "VALUE",
+          "/updated_at/presence": "ABSENT",
+          "/updated_at/mappedPresence": "ABSENT",
+          "/reference_number/presence": "ABSENT",
+          "/reference_number/mappedPresence": "ABSENT",
+          "/fit_p_m_pck_sequence_code/presence": "NULL",
+          "/fit_p_m_pck_sequence_code/mappedPresence": "NULL",
+          "/corporation_sequence_number/presence": "ABSENT",
+          "/corporation_sequence_number/mappedPresence": "ABSENT",
+          "/finished_at/presence": "ABSENT",
+          "/finished_at/mappedPresence": "ABSENT",
+          "/fit_dpn_performance_finished_at/presence": "ABSENT",
+          "/fit_dpn_performance_finished_at/mappedPresence": "ABSENT",
+          "/status/presence": "ABSENT",
+          "/status/mappedPresence": "ABSENT",
+          "/cte_created_at/presence": "ABSENT",
+          "/cte_created_at/mappedPresence": "ABSENT",
+          "/cte_issued_at/presence": "ABSENT",
+          "/cte_issued_at/mappedPresence": "ABSENT",
+          "/criado_em/presence": "ABSENT",
+          "/criado_em/mappedPresence": "ABSENT",
+          "/servico_em/presence": "VALUE",
+          "/servico_em/mappedPresence": "VALUE",
+          "/cte/presence": "ABSENT",
+          "/cte/mappedPresence": "ABSENT",
+          "/ctes/presence": "ABSENT",
+          "/ctes/mappedPresence": "ABSENT",
+          "/cte_key/presence": "ABSENT",
+          "/cte_key/mappedPresence": "ABSENT",
+          "/finalizations/presence": "ABSENT",
+          "/finalizations/mappedPresence": "ABSENT",
+          "/finalizacoes/presence": "ABSENT",
+          "/finalizacoes/mappedPresence": "ABSENT",
+          "/total/presence": "ABSENT",
+          "/total/mappedPresence": "ABSENT"
+        }
+      ]
+    },
+    {
+      "id": "SYNTH_NULL_CORPORATION_SEQUENCE_NUMBER",
+      "envelope": "{\"data\":[{\"id\":1,\"servico_em\":\"2036-03-20T12:00:00Z\",\"corporation_sequence_number\":null}]}",
+      "expected": [
+        {
+          "/quarantine": "NONE",
+          "/id/typed": "INTEGER:1",
+          "/freshness/typed": "2036-03-20T12:00:00Z",
+          "/freshness/origin": "SERVICO_EM",
+          "/freshness/proof": "SYNTHETIC_V09_NOT_SOURCE_CONTRACT_EVIDENCE",
+          "/updated_at/policy": "IGNORED_UNVERIFIED",
+          "/status/terminal": "false",
+          "/performance/typed": "NULL",
+          "/performance/origin": "NULL",
+          "/performance/parseState": "NOT_PRESENT",
+          "/performance/officialProvenance": "PERFORMANCE_6389",
+          "/performance/fallbackProvenance": "DECLARED_FALLBACK",
+          "/sidecar/presence": "ABSENT",
+          "/relation/policy": "UNRESOLVED_RELATION_CANDIDATES_V2_046B",
+          "/financial/currencyPolicy": "UNRESOLVED_NO_INFERENCE",
+          "/financial/arithmeticPolicy": "FORBIDDEN",
+          "/id/presence": "VALUE",
+          "/id/mappedPresence": "VALUE",
+          "/updated_at/presence": "ABSENT",
+          "/updated_at/mappedPresence": "ABSENT",
+          "/reference_number/presence": "ABSENT",
+          "/reference_number/mappedPresence": "ABSENT",
+          "/fit_p_m_pck_sequence_code/presence": "ABSENT",
+          "/fit_p_m_pck_sequence_code/mappedPresence": "ABSENT",
+          "/corporation_sequence_number/presence": "NULL",
+          "/corporation_sequence_number/mappedPresence": "NULL",
+          "/finished_at/presence": "ABSENT",
+          "/finished_at/mappedPresence": "ABSENT",
+          "/fit_dpn_performance_finished_at/presence": "ABSENT",
+          "/fit_dpn_performance_finished_at/mappedPresence": "ABSENT",
+          "/status/presence": "ABSENT",
+          "/status/mappedPresence": "ABSENT",
+          "/cte_created_at/presence": "ABSENT",
+          "/cte_created_at/mappedPresence": "ABSENT",
+          "/cte_issued_at/presence": "ABSENT",
+          "/cte_issued_at/mappedPresence": "ABSENT",
+          "/criado_em/presence": "ABSENT",
+          "/criado_em/mappedPresence": "ABSENT",
+          "/servico_em/presence": "VALUE",
+          "/servico_em/mappedPresence": "VALUE",
+          "/cte/presence": "ABSENT",
+          "/cte/mappedPresence": "ABSENT",
+          "/ctes/presence": "ABSENT",
+          "/ctes/mappedPresence": "ABSENT",
+          "/cte_key/presence": "ABSENT",
+          "/cte_key/mappedPresence": "ABSENT",
+          "/finalizations/presence": "ABSENT",
+          "/finalizations/mappedPresence": "ABSENT",
+          "/finalizacoes/presence": "ABSENT",
+          "/finalizacoes/mappedPresence": "ABSENT",
+          "/total/presence": "ABSENT",
+          "/total/mappedPresence": "ABSENT"
+        }
+      ]
+    },
+    {
+      "id": "SYNTH_NULL_FINISHED_AT",
+      "envelope": "{\"data\":[{\"id\":1,\"servico_em\":\"2036-03-20T12:00:00Z\",\"finished_at\":null}]}",
+      "expected": [
+        {
+          "/quarantine": "NONE",
+          "/id/typed": "INTEGER:1",
+          "/freshness/typed": "2036-03-20T12:00:00Z",
+          "/freshness/origin": "SERVICO_EM",
+          "/freshness/proof": "SYNTHETIC_V09_NOT_SOURCE_CONTRACT_EVIDENCE",
+          "/updated_at/policy": "IGNORED_UNVERIFIED",
+          "/status/terminal": "false",
+          "/performance/typed": "NULL",
+          "/performance/origin": "NULL",
+          "/performance/parseState": "NOT_PRESENT",
+          "/performance/officialProvenance": "PERFORMANCE_6389",
+          "/performance/fallbackProvenance": "DECLARED_FALLBACK",
+          "/sidecar/presence": "ABSENT",
+          "/relation/policy": "UNRESOLVED_RELATION_CANDIDATES_V2_046B",
+          "/financial/currencyPolicy": "UNRESOLVED_NO_INFERENCE",
+          "/financial/arithmeticPolicy": "FORBIDDEN",
+          "/id/presence": "VALUE",
+          "/id/mappedPresence": "VALUE",
+          "/updated_at/presence": "ABSENT",
+          "/updated_at/mappedPresence": "ABSENT",
+          "/reference_number/presence": "ABSENT",
+          "/reference_number/mappedPresence": "ABSENT",
+          "/fit_p_m_pck_sequence_code/presence": "ABSENT",
+          "/fit_p_m_pck_sequence_code/mappedPresence": "ABSENT",
+          "/corporation_sequence_number/presence": "ABSENT",
+          "/corporation_sequence_number/mappedPresence": "ABSENT",
+          "/finished_at/presence": "NULL",
+          "/finished_at/mappedPresence": "NULL",
+          "/fit_dpn_performance_finished_at/presence": "ABSENT",
+          "/fit_dpn_performance_finished_at/mappedPresence": "ABSENT",
+          "/status/presence": "ABSENT",
+          "/status/mappedPresence": "ABSENT",
+          "/cte_created_at/presence": "ABSENT",
+          "/cte_created_at/mappedPresence": "ABSENT",
+          "/cte_issued_at/presence": "ABSENT",
+          "/cte_issued_at/mappedPresence": "ABSENT",
+          "/criado_em/presence": "ABSENT",
+          "/criado_em/mappedPresence": "ABSENT",
+          "/servico_em/presence": "VALUE",
+          "/servico_em/mappedPresence": "VALUE",
+          "/cte/presence": "ABSENT",
+          "/cte/mappedPresence": "ABSENT",
+          "/ctes/presence": "ABSENT",
+          "/ctes/mappedPresence": "ABSENT",
+          "/cte_key/presence": "ABSENT",
+          "/cte_key/mappedPresence": "ABSENT",
+          "/finalizations/presence": "ABSENT",
+          "/finalizations/mappedPresence": "ABSENT",
+          "/finalizacoes/presence": "ABSENT",
+          "/finalizacoes/mappedPresence": "ABSENT",
+          "/total/presence": "ABSENT",
+          "/total/mappedPresence": "ABSENT"
+        }
+      ]
+    },
+    {
+      "id": "SYNTH_NULL_FIT_DPN_PERFORMANCE_FINISHED_AT",
+      "envelope": "{\"data\":[{\"id\":1,\"servico_em\":\"2036-03-20T12:00:00Z\",\"fit_dpn_performance_finished_at\":null}]}",
+      "expected": [
+        {
+          "/quarantine": "NONE",
+          "/id/typed": "INTEGER:1",
+          "/freshness/typed": "2036-03-20T12:00:00Z",
+          "/freshness/origin": "SERVICO_EM",
+          "/freshness/proof": "SYNTHETIC_V09_NOT_SOURCE_CONTRACT_EVIDENCE",
+          "/updated_at/policy": "IGNORED_UNVERIFIED",
+          "/status/terminal": "false",
+          "/performance/typed": "NULL",
+          "/performance/origin": "NULL",
+          "/performance/parseState": "NOT_PRESENT",
+          "/performance/officialProvenance": "PERFORMANCE_6389",
+          "/performance/fallbackProvenance": "DECLARED_FALLBACK",
+          "/sidecar/presence": "ABSENT",
+          "/relation/policy": "UNRESOLVED_RELATION_CANDIDATES_V2_046B",
+          "/financial/currencyPolicy": "UNRESOLVED_NO_INFERENCE",
+          "/financial/arithmeticPolicy": "FORBIDDEN",
+          "/id/presence": "VALUE",
+          "/id/mappedPresence": "VALUE",
+          "/updated_at/presence": "ABSENT",
+          "/updated_at/mappedPresence": "ABSENT",
+          "/reference_number/presence": "ABSENT",
+          "/reference_number/mappedPresence": "ABSENT",
+          "/fit_p_m_pck_sequence_code/presence": "ABSENT",
+          "/fit_p_m_pck_sequence_code/mappedPresence": "ABSENT",
+          "/corporation_sequence_number/presence": "ABSENT",
+          "/corporation_sequence_number/mappedPresence": "ABSENT",
+          "/finished_at/presence": "ABSENT",
+          "/finished_at/mappedPresence": "ABSENT",
+          "/fit_dpn_performance_finished_at/presence": "NULL",
+          "/fit_dpn_performance_finished_at/mappedPresence": "NULL",
+          "/status/presence": "ABSENT",
+          "/status/mappedPresence": "ABSENT",
+          "/cte_created_at/presence": "ABSENT",
+          "/cte_created_at/mappedPresence": "ABSENT",
+          "/cte_issued_at/presence": "ABSENT",
+          "/cte_issued_at/mappedPresence": "ABSENT",
+          "/criado_em/presence": "ABSENT",
+          "/criado_em/mappedPresence": "ABSENT",
+          "/servico_em/presence": "VALUE",
+          "/servico_em/mappedPresence": "VALUE",
+          "/cte/presence": "ABSENT",
+          "/cte/mappedPresence": "ABSENT",
+          "/ctes/presence": "ABSENT",
+          "/ctes/mappedPresence": "ABSENT",
+          "/cte_key/presence": "ABSENT",
+          "/cte_key/mappedPresence": "ABSENT",
+          "/finalizations/presence": "ABSENT",
+          "/finalizations/mappedPresence": "ABSENT",
+          "/finalizacoes/presence": "ABSENT",
+          "/finalizacoes/mappedPresence": "ABSENT",
+          "/total/presence": "ABSENT",
+          "/total/mappedPresence": "ABSENT"
+        }
+      ]
+    },
+    {
+      "id": "SYNTH_NULL_CTE",
+      "envelope": "{\"data\":[{\"id\":1,\"servico_em\":\"2036-03-20T12:00:00Z\",\"cte\":null}]}",
+      "expected": [
+        {
+          "/quarantine": "NONE",
+          "/id/typed": "INTEGER:1",
+          "/freshness/typed": "2036-03-20T12:00:00Z",
+          "/freshness/origin": "SERVICO_EM",
+          "/freshness/proof": "SYNTHETIC_V09_NOT_SOURCE_CONTRACT_EVIDENCE",
+          "/updated_at/policy": "IGNORED_UNVERIFIED",
+          "/status/terminal": "false",
+          "/performance/typed": "NULL",
+          "/performance/origin": "NULL",
+          "/performance/parseState": "NOT_PRESENT",
+          "/performance/officialProvenance": "PERFORMANCE_6389",
+          "/performance/fallbackProvenance": "DECLARED_FALLBACK",
+          "/sidecar/presence": "ABSENT",
+          "/relation/policy": "UNRESOLVED_RELATION_CANDIDATES_V2_046B",
+          "/financial/currencyPolicy": "UNRESOLVED_NO_INFERENCE",
+          "/financial/arithmeticPolicy": "FORBIDDEN",
+          "/id/presence": "VALUE",
+          "/id/mappedPresence": "VALUE",
+          "/updated_at/presence": "ABSENT",
+          "/updated_at/mappedPresence": "ABSENT",
+          "/reference_number/presence": "ABSENT",
+          "/reference_number/mappedPresence": "ABSENT",
+          "/fit_p_m_pck_sequence_code/presence": "ABSENT",
+          "/fit_p_m_pck_sequence_code/mappedPresence": "ABSENT",
+          "/corporation_sequence_number/presence": "ABSENT",
+          "/corporation_sequence_number/mappedPresence": "ABSENT",
+          "/finished_at/presence": "ABSENT",
+          "/finished_at/mappedPresence": "ABSENT",
+          "/fit_dpn_performance_finished_at/presence": "ABSENT",
+          "/fit_dpn_performance_finished_at/mappedPresence": "ABSENT",
+          "/status/presence": "ABSENT",
+          "/status/mappedPresence": "ABSENT",
+          "/cte_created_at/presence": "ABSENT",
+          "/cte_created_at/mappedPresence": "ABSENT",
+          "/cte_issued_at/presence": "ABSENT",
+          "/cte_issued_at/mappedPresence": "ABSENT",
+          "/criado_em/presence": "ABSENT",
+          "/criado_em/mappedPresence": "ABSENT",
+          "/servico_em/presence": "VALUE",
+          "/servico_em/mappedPresence": "VALUE",
+          "/cte/presence": "NULL",
+          "/cte/mappedPresence": "NULL",
+          "/ctes/presence": "ABSENT",
+          "/ctes/mappedPresence": "ABSENT",
+          "/cte_key/presence": "ABSENT",
+          "/cte_key/mappedPresence": "ABSENT",
+          "/finalizations/presence": "ABSENT",
+          "/finalizations/mappedPresence": "ABSENT",
+          "/finalizacoes/presence": "ABSENT",
+          "/finalizacoes/mappedPresence": "ABSENT",
+          "/total/presence": "ABSENT",
+          "/total/mappedPresence": "ABSENT"
+        }
+      ]
+    },
+    {
+      "id": "SYNTH_NULL_CTES",
+      "envelope": "{\"data\":[{\"id\":1,\"servico_em\":\"2036-03-20T12:00:00Z\",\"ctes\":null}]}",
+      "expected": [
+        {
+          "/quarantine": "NONE",
+          "/id/typed": "INTEGER:1",
+          "/freshness/typed": "2036-03-20T12:00:00Z",
+          "/freshness/origin": "SERVICO_EM",
+          "/freshness/proof": "SYNTHETIC_V09_NOT_SOURCE_CONTRACT_EVIDENCE",
+          "/updated_at/policy": "IGNORED_UNVERIFIED",
+          "/status/terminal": "false",
+          "/performance/typed": "NULL",
+          "/performance/origin": "NULL",
+          "/performance/parseState": "NOT_PRESENT",
+          "/performance/officialProvenance": "PERFORMANCE_6389",
+          "/performance/fallbackProvenance": "DECLARED_FALLBACK",
+          "/sidecar/presence": "ABSENT",
+          "/relation/policy": "UNRESOLVED_RELATION_CANDIDATES_V2_046B",
+          "/financial/currencyPolicy": "UNRESOLVED_NO_INFERENCE",
+          "/financial/arithmeticPolicy": "FORBIDDEN",
+          "/id/presence": "VALUE",
+          "/id/mappedPresence": "VALUE",
+          "/updated_at/presence": "ABSENT",
+          "/updated_at/mappedPresence": "ABSENT",
+          "/reference_number/presence": "ABSENT",
+          "/reference_number/mappedPresence": "ABSENT",
+          "/fit_p_m_pck_sequence_code/presence": "ABSENT",
+          "/fit_p_m_pck_sequence_code/mappedPresence": "ABSENT",
+          "/corporation_sequence_number/presence": "ABSENT",
+          "/corporation_sequence_number/mappedPresence": "ABSENT",
+          "/finished_at/presence": "ABSENT",
+          "/finished_at/mappedPresence": "ABSENT",
+          "/fit_dpn_performance_finished_at/presence": "ABSENT",
+          "/fit_dpn_performance_finished_at/mappedPresence": "ABSENT",
+          "/status/presence": "ABSENT",
+          "/status/mappedPresence": "ABSENT",
+          "/cte_created_at/presence": "ABSENT",
+          "/cte_created_at/mappedPresence": "ABSENT",
+          "/cte_issued_at/presence": "ABSENT",
+          "/cte_issued_at/mappedPresence": "ABSENT",
+          "/criado_em/presence": "ABSENT",
+          "/criado_em/mappedPresence": "ABSENT",
+          "/servico_em/presence": "VALUE",
+          "/servico_em/mappedPresence": "VALUE",
+          "/cte/presence": "ABSENT",
+          "/cte/mappedPresence": "ABSENT",
+          "/ctes/presence": "NULL",
+          "/ctes/mappedPresence": "NULL",
+          "/cte_key/presence": "ABSENT",
+          "/cte_key/mappedPresence": "ABSENT",
+          "/finalizations/presence": "ABSENT",
+          "/finalizations/mappedPresence": "ABSENT",
+          "/finalizacoes/presence": "ABSENT",
+          "/finalizacoes/mappedPresence": "ABSENT",
+          "/total/presence": "ABSENT",
+          "/total/mappedPresence": "ABSENT"
+        }
+      ]
+    },
+    {
+      "id": "SYNTH_NULL_CTE_KEY",
+      "envelope": "{\"data\":[{\"id\":1,\"servico_em\":\"2036-03-20T12:00:00Z\",\"cte_key\":null}]}",
+      "expected": [
+        {
+          "/quarantine": "NONE",
+          "/id/typed": "INTEGER:1",
+          "/freshness/typed": "2036-03-20T12:00:00Z",
+          "/freshness/origin": "SERVICO_EM",
+          "/freshness/proof": "SYNTHETIC_V09_NOT_SOURCE_CONTRACT_EVIDENCE",
+          "/updated_at/policy": "IGNORED_UNVERIFIED",
+          "/status/terminal": "false",
+          "/performance/typed": "NULL",
+          "/performance/origin": "NULL",
+          "/performance/parseState": "NOT_PRESENT",
+          "/performance/officialProvenance": "PERFORMANCE_6389",
+          "/performance/fallbackProvenance": "DECLARED_FALLBACK",
+          "/sidecar/presence": "ABSENT",
+          "/relation/policy": "UNRESOLVED_RELATION_CANDIDATES_V2_046B",
+          "/financial/currencyPolicy": "UNRESOLVED_NO_INFERENCE",
+          "/financial/arithmeticPolicy": "FORBIDDEN",
+          "/id/presence": "VALUE",
+          "/id/mappedPresence": "VALUE",
+          "/updated_at/presence": "ABSENT",
+          "/updated_at/mappedPresence": "ABSENT",
+          "/reference_number/presence": "ABSENT",
+          "/reference_number/mappedPresence": "ABSENT",
+          "/fit_p_m_pck_sequence_code/presence": "ABSENT",
+          "/fit_p_m_pck_sequence_code/mappedPresence": "ABSENT",
+          "/corporation_sequence_number/presence": "ABSENT",
+          "/corporation_sequence_number/mappedPresence": "ABSENT",
+          "/finished_at/presence": "ABSENT",
+          "/finished_at/mappedPresence": "ABSENT",
+          "/fit_dpn_performance_finished_at/presence": "ABSENT",
+          "/fit_dpn_performance_finished_at/mappedPresence": "ABSENT",
+          "/status/presence": "ABSENT",
+          "/status/mappedPresence": "ABSENT",
+          "/cte_created_at/presence": "ABSENT",
+          "/cte_created_at/mappedPresence": "ABSENT",
+          "/cte_issued_at/presence": "ABSENT",
+          "/cte_issued_at/mappedPresence": "ABSENT",
+          "/criado_em/presence": "ABSENT",
+          "/criado_em/mappedPresence": "ABSENT",
+          "/servico_em/presence": "VALUE",
+          "/servico_em/mappedPresence": "VALUE",
+          "/cte/presence": "ABSENT",
+          "/cte/mappedPresence": "ABSENT",
+          "/ctes/presence": "ABSENT",
+          "/ctes/mappedPresence": "ABSENT",
+          "/cte_key/presence": "NULL",
+          "/cte_key/mappedPresence": "NULL",
+          "/finalizations/presence": "ABSENT",
+          "/finalizations/mappedPresence": "ABSENT",
+          "/finalizacoes/presence": "ABSENT",
+          "/finalizacoes/mappedPresence": "ABSENT",
+          "/total/presence": "ABSENT",
+          "/total/mappedPresence": "ABSENT"
+        }
+      ]
+    },
+    {
+      "id": "SYNTH_NULL_FINALIZATIONS",
+      "envelope": "{\"data\":[{\"id\":1,\"servico_em\":\"2036-03-20T12:00:00Z\",\"finalizations\":null}]}",
+      "expected": [
+        {
+          "/quarantine": "NONE",
+          "/id/typed": "INTEGER:1",
+          "/freshness/typed": "2036-03-20T12:00:00Z",
+          "/freshness/origin": "SERVICO_EM",
+          "/freshness/proof": "SYNTHETIC_V09_NOT_SOURCE_CONTRACT_EVIDENCE",
+          "/updated_at/policy": "IGNORED_UNVERIFIED",
+          "/status/terminal": "false",
+          "/performance/typed": "NULL",
+          "/performance/origin": "NULL",
+          "/performance/parseState": "NOT_PRESENT",
+          "/performance/officialProvenance": "PERFORMANCE_6389",
+          "/performance/fallbackProvenance": "DECLARED_FALLBACK",
+          "/sidecar/presence": "ABSENT",
+          "/relation/policy": "UNRESOLVED_RELATION_CANDIDATES_V2_046B",
+          "/financial/currencyPolicy": "UNRESOLVED_NO_INFERENCE",
+          "/financial/arithmeticPolicy": "FORBIDDEN",
+          "/id/presence": "VALUE",
+          "/id/mappedPresence": "VALUE",
+          "/updated_at/presence": "ABSENT",
+          "/updated_at/mappedPresence": "ABSENT",
+          "/reference_number/presence": "ABSENT",
+          "/reference_number/mappedPresence": "ABSENT",
+          "/fit_p_m_pck_sequence_code/presence": "ABSENT",
+          "/fit_p_m_pck_sequence_code/mappedPresence": "ABSENT",
+          "/corporation_sequence_number/presence": "ABSENT",
+          "/corporation_sequence_number/mappedPresence": "ABSENT",
+          "/finished_at/presence": "ABSENT",
+          "/finished_at/mappedPresence": "ABSENT",
+          "/fit_dpn_performance_finished_at/presence": "ABSENT",
+          "/fit_dpn_performance_finished_at/mappedPresence": "ABSENT",
+          "/status/presence": "ABSENT",
+          "/status/mappedPresence": "ABSENT",
+          "/cte_created_at/presence": "ABSENT",
+          "/cte_created_at/mappedPresence": "ABSENT",
+          "/cte_issued_at/presence": "ABSENT",
+          "/cte_issued_at/mappedPresence": "ABSENT",
+          "/criado_em/presence": "ABSENT",
+          "/criado_em/mappedPresence": "ABSENT",
+          "/servico_em/presence": "VALUE",
+          "/servico_em/mappedPresence": "VALUE",
+          "/cte/presence": "ABSENT",
+          "/cte/mappedPresence": "ABSENT",
+          "/ctes/presence": "ABSENT",
+          "/ctes/mappedPresence": "ABSENT",
+          "/cte_key/presence": "ABSENT",
+          "/cte_key/mappedPresence": "ABSENT",
+          "/finalizations/presence": "NULL",
+          "/finalizations/mappedPresence": "NULL",
+          "/finalizacoes/presence": "ABSENT",
+          "/finalizacoes/mappedPresence": "ABSENT",
+          "/total/presence": "ABSENT",
+          "/total/mappedPresence": "ABSENT"
+        }
+      ]
+    },
+    {
+      "id": "SYNTH_NULL_FINALIZACOES",
+      "envelope": "{\"data\":[{\"id\":1,\"servico_em\":\"2036-03-20T12:00:00Z\",\"finalizacoes\":null}]}",
+      "expected": [
+        {
+          "/quarantine": "NONE",
+          "/id/typed": "INTEGER:1",
+          "/freshness/typed": "2036-03-20T12:00:00Z",
+          "/freshness/origin": "SERVICO_EM",
+          "/freshness/proof": "SYNTHETIC_V09_NOT_SOURCE_CONTRACT_EVIDENCE",
+          "/updated_at/policy": "IGNORED_UNVERIFIED",
+          "/status/terminal": "false",
+          "/performance/typed": "NULL",
+          "/performance/origin": "NULL",
+          "/performance/parseState": "NOT_PRESENT",
+          "/performance/officialProvenance": "PERFORMANCE_6389",
+          "/performance/fallbackProvenance": "DECLARED_FALLBACK",
+          "/sidecar/presence": "ABSENT",
+          "/relation/policy": "UNRESOLVED_RELATION_CANDIDATES_V2_046B",
+          "/financial/currencyPolicy": "UNRESOLVED_NO_INFERENCE",
+          "/financial/arithmeticPolicy": "FORBIDDEN",
+          "/id/presence": "VALUE",
+          "/id/mappedPresence": "VALUE",
+          "/updated_at/presence": "ABSENT",
+          "/updated_at/mappedPresence": "ABSENT",
+          "/reference_number/presence": "ABSENT",
+          "/reference_number/mappedPresence": "ABSENT",
+          "/fit_p_m_pck_sequence_code/presence": "ABSENT",
+          "/fit_p_m_pck_sequence_code/mappedPresence": "ABSENT",
+          "/corporation_sequence_number/presence": "ABSENT",
+          "/corporation_sequence_number/mappedPresence": "ABSENT",
+          "/finished_at/presence": "ABSENT",
+          "/finished_at/mappedPresence": "ABSENT",
+          "/fit_dpn_performance_finished_at/presence": "ABSENT",
+          "/fit_dpn_performance_finished_at/mappedPresence": "ABSENT",
+          "/status/presence": "ABSENT",
+          "/status/mappedPresence": "ABSENT",
+          "/cte_created_at/presence": "ABSENT",
+          "/cte_created_at/mappedPresence": "ABSENT",
+          "/cte_issued_at/presence": "ABSENT",
+          "/cte_issued_at/mappedPresence": "ABSENT",
+          "/criado_em/presence": "ABSENT",
+          "/criado_em/mappedPresence": "ABSENT",
+          "/servico_em/presence": "VALUE",
+          "/servico_em/mappedPresence": "VALUE",
+          "/cte/presence": "ABSENT",
+          "/cte/mappedPresence": "ABSENT",
+          "/ctes/presence": "ABSENT",
+          "/ctes/mappedPresence": "ABSENT",
+          "/cte_key/presence": "ABSENT",
+          "/cte_key/mappedPresence": "ABSENT",
+          "/finalizations/presence": "ABSENT",
+          "/finalizations/mappedPresence": "ABSENT",
+          "/finalizacoes/presence": "NULL",
+          "/finalizacoes/mappedPresence": "NULL",
+          "/total/presence": "ABSENT",
+          "/total/mappedPresence": "ABSENT"
+        }
+      ]
+    },
+    {
+      "id": "SYNTH_NULL_TOTAL",
+      "envelope": "{\"data\":[{\"id\":1,\"servico_em\":\"2036-03-20T12:00:00Z\",\"total\":null}]}",
+      "expected": [
+        {
+          "/quarantine": "NONE",
+          "/id/typed": "INTEGER:1",
+          "/freshness/typed": "2036-03-20T12:00:00Z",
+          "/freshness/origin": "SERVICO_EM",
+          "/freshness/proof": "SYNTHETIC_V09_NOT_SOURCE_CONTRACT_EVIDENCE",
+          "/updated_at/policy": "IGNORED_UNVERIFIED",
+          "/status/terminal": "false",
+          "/performance/typed": "NULL",
+          "/performance/origin": "NULL",
+          "/performance/parseState": "NOT_PRESENT",
+          "/performance/officialProvenance": "PERFORMANCE_6389",
+          "/performance/fallbackProvenance": "DECLARED_FALLBACK",
+          "/sidecar/presence": "ABSENT",
+          "/relation/policy": "UNRESOLVED_RELATION_CANDIDATES_V2_046B",
+          "/financial/currencyPolicy": "UNRESOLVED_NO_INFERENCE",
+          "/financial/arithmeticPolicy": "FORBIDDEN",
+          "/id/presence": "VALUE",
+          "/id/mappedPresence": "VALUE",
+          "/updated_at/presence": "ABSENT",
+          "/updated_at/mappedPresence": "ABSENT",
+          "/reference_number/presence": "ABSENT",
+          "/reference_number/mappedPresence": "ABSENT",
+          "/fit_p_m_pck_sequence_code/presence": "ABSENT",
+          "/fit_p_m_pck_sequence_code/mappedPresence": "ABSENT",
+          "/corporation_sequence_number/presence": "ABSENT",
+          "/corporation_sequence_number/mappedPresence": "ABSENT",
+          "/finished_at/presence": "ABSENT",
+          "/finished_at/mappedPresence": "ABSENT",
+          "/fit_dpn_performance_finished_at/presence": "ABSENT",
+          "/fit_dpn_performance_finished_at/mappedPresence": "ABSENT",
+          "/status/presence": "ABSENT",
+          "/status/mappedPresence": "ABSENT",
+          "/cte_created_at/presence": "ABSENT",
+          "/cte_created_at/mappedPresence": "ABSENT",
+          "/cte_issued_at/presence": "ABSENT",
+          "/cte_issued_at/mappedPresence": "ABSENT",
+          "/criado_em/presence": "ABSENT",
+          "/criado_em/mappedPresence": "ABSENT",
+          "/servico_em/presence": "VALUE",
+          "/servico_em/mappedPresence": "VALUE",
+          "/cte/presence": "ABSENT",
+          "/cte/mappedPresence": "ABSENT",
+          "/ctes/presence": "ABSENT",
+          "/ctes/mappedPresence": "ABSENT",
+          "/cte_key/presence": "ABSENT",
+          "/cte_key/mappedPresence": "ABSENT",
+          "/finalizations/presence": "ABSENT",
+          "/finalizations/mappedPresence": "ABSENT",
+          "/finalizacoes/presence": "ABSENT",
+          "/finalizacoes/mappedPresence": "ABSENT",
+          "/total/presence": "NULL",
+          "/total/mappedPresence": "NULL"
+        }
+      ]
+    },
+    {
+      "id": "SYNTH_SEVEN_CONTRACT_PATHS_WITH_SYNTHETIC_FRESHNESS",
+      "envelope": "{\"data\":[{\"id\":1,\"servico_em\":\"2036-03-20T12:00:00Z\",\"updated_at\":\"2099-01-01\",\"reference_number\":\"SYNTH_REF\",\"fit_p_m_pck_sequence_code\":2,\"corporation_sequence_number\":3,\"finished_at\":\"2036-03-21T12:00:00Z\",\"fit_dpn_performance_finished_at\":\"2036-03-22T12:00:00Z\"}]}",
+      "expected": [
+        {
+          "/quarantine": "NONE",
+          "/freshness/origin": "SERVICO_EM",
+          "/freshness/typed": "2036-03-20T12:00:00Z",
+          "/performance/origin": "OFFICIAL_6389",
+          "/performance/typed": "2036-03-22T12:00:00Z",
+          "/sidecar/presence": "ABSENT",
+          "/relation/policy": "UNRESOLVED_RELATION_CANDIDATES_V2_046B"
+        }
+      ]
+    },
+    {
+      "id": "SYNTH_OFFICIAL_PRECEDES_FALLBACK",
+      "envelope": "{\"data\":[{\"id\":1,\"servico_em\":\"2036-03-20T12:00:00Z\",\"fit_dpn_performance_finished_at\":\"03/21/2036\",\"finished_at\":\"22/03/2036\"}]}",
+      "expected": [
+        {
+          "/quarantine": "NONE",
+          "/performance/origin": "OFFICIAL_6389",
+          "/performance/typed": "2036-03-21T03:00:00Z",
+          "/performance/parseState": "VALID"
+        }
+      ]
+    },
+    {
+      "id": "SYNTH_PERFORMANCE_FALLBACK",
+      "envelope": "{\"data\":[{\"id\":1,\"servico_em\":\"2036-03-20T12:00:00Z\",\"fit_dpn_performance_finished_at\":null,\"finished_at\":\"21/03/2036\"}]}",
+      "expected": [
+        {
+          "/quarantine": "NONE",
+          "/performance/origin": "FINISHED_AT_FALLBACK",
+          "/performance/typed": "2036-03-21T03:00:00Z"
+        }
+      ]
+    },
+    {
+      "id": "SYNTH_AMBIGUOUS_OFFICIAL_NO_FALLBACK",
+      "envelope": "{\"data\":[{\"id\":1,\"servico_em\":\"2036-03-20T12:00:00Z\",\"fit_dpn_performance_finished_at\":\"03/04/2036\",\"finished_at\":\"21/03/2036\"}]}",
+      "expected": [
+        {
+          "/quarantine": "AMBIGUOUS_OR_INVALID_PERFORMANCE_DATE"
+        }
+      ]
+    },
+    {
+      "id": "SYNTH_INVALID_SPACE_PERFORMANCE",
+      "envelope": "{\"data\":[{\"id\":1,\"servico_em\":\"2036-03-20T12:00:00Z\",\"fit_dpn_performance_finished_at\":\"2036-02-30 12:00:00\"}]}",
+      "expected": [
+        {
+          "/quarantine": "AMBIGUOUS_OR_INVALID_PERFORMANCE_DATE"
+        }
+      ]
+    },
+    {
+      "id": "SYNTH_INVALID_PERFORMANCE_TYPE",
+      "envelope": "{\"data\":[{\"id\":1,\"servico_em\":\"2036-03-20T12:00:00Z\",\"fit_dpn_performance_finished_at\":1}]}",
+      "expected": [
+        {
+          "/quarantine": "INVALID_PERFORMANCE_TYPE"
+        }
+      ]
+    },
+    {
+      "id": "SYNTH_FRESHNESS_CTE_CREATED_AT",
+      "envelope": "{\"data\":[{\"id\":1,\"servico_em\":\"2036-03-20T12:00:00Z\",\"cte_created_at\":\"2036-03-19T12:00:00Z\"}]}",
+      "expected": [
+        {
+          "/quarantine": "NONE",
+          "/freshness/origin": "CTE_CREATED_AT",
+          "/freshness/typed": "2036-03-19T12:00:00Z"
+        }
+      ]
+    },
+    {
+      "id": "SYNTH_FRESHNESS_CTE_ISSUED_AT",
+      "envelope": "{\"data\":[{\"id\":1,\"servico_em\":\"2036-03-20T12:00:00Z\",\"cte_issued_at\":\"2036-03-19T12:00:00Z\"}]}",
+      "expected": [
+        {
+          "/quarantine": "NONE",
+          "/freshness/origin": "CTE_ISSUED_AT",
+          "/freshness/typed": "2036-03-19T12:00:00Z"
+        }
+      ]
+    },
+    {
+      "id": "SYNTH_FRESHNESS_CRIADO_EM",
+      "envelope": "{\"data\":[{\"id\":1,\"servico_em\":\"2036-03-20T12:00:00Z\",\"criado_em\":\"2036-03-19T12:00:00Z\"}]}",
+      "expected": [
+        {
+          "/quarantine": "NONE",
+          "/freshness/origin": "CRIADO_EM",
+          "/freshness/typed": "2036-03-19T12:00:00Z"
+        }
+      ]
+    },
+    {
+      "id": "SYNTH_FRESHNESS_ORDER",
+      "envelope": "{\"data\":[{\"id\":1,\"servico_em\":\"2036-03-20T12:00:00Z\",\"cte_created_at\":\"2036-03-17T12:00:00Z\",\"cte_issued_at\":\"2036-03-18T12:00:00Z\",\"criado_em\":\"2036-03-19T12:00:00Z\"}]}",
+      "expected": [
+        {
+          "/quarantine": "NONE",
+          "/freshness/origin": "CTE_CREATED_AT",
+          "/freshness/typed": "2036-03-17T12:00:00Z"
+        }
+      ]
+    },
+    {
+      "id": "SYNTH_NULL_FRESHNESS_FALLBACK",
+      "envelope": "{\"data\":[{\"id\":1,\"servico_em\":\"2036-03-20T12:00:00Z\",\"cte_created_at\":null,\"cte_issued_at\":null,\"criado_em\":\"2036-03-19T12:00:00Z\"}]}",
+      "expected": [
+        {
+          "/quarantine": "NONE",
+          "/freshness/origin": "CRIADO_EM"
+        }
+      ]
+    },
+    {
+      "id": "SYNTH_INVALID_SPACE_FRESHNESS",
+      "envelope": "{\"data\":[{\"id\":1,\"servico_em\":\"2036-03-20T12:00:00Z\",\"cte_created_at\":\"2036-02-30 12:00:00\"}]}",
+      "expected": [
+        {
+          "/quarantine": "INVALID_CTE_CREATED_AT"
+        }
+      ]
+    },
+    {
+      "id": "SYNTH_INVALID_FRESHNESS_NO_FALLBACK",
+      "envelope": "{\"data\":[{\"id\":1,\"servico_em\":\"2036-03-20T12:00:00Z\",\"cte_created_at\":\"bad\"}]}",
+      "expected": [
+        {
+          "/quarantine": "INVALID_CTE_CREATED_AT"
+        }
+      ]
+    },
+    {
+      "id": "SYNTH_UPDATED_NEVER_FRESHNESS",
+      "envelope": "{\"data\":[{\"id\":1,\"updated_at\":\"2036-03-20\"}]}",
+      "expected": [
+        {
+          "/quarantine": "MISSING_VALID_FRESHNESS"
+        }
+      ]
+    },
+    {
+      "id": "SYNTH_KEY_BIGINT_MAX",
+      "envelope": "{\"data\":[{\"id\":9223372036854775807,\"servico_em\":\"2036-03-20T12:00:00Z\"}]}",
+      "expected": [
+        {
+          "/quarantine": "NONE",
+          "/id/typed": "INTEGER:9223372036854775807"
+        }
+      ]
+    },
+    {
+      "id": "SYNTH_KEY_OVERFLOW",
+      "envelope": "{\"data\":[{\"id\":9223372036854775808,\"servico_em\":\"2036-03-20T12:00:00Z\"}]}",
+      "expected": [
+        {
+          "/quarantine": "INVALID_SOURCE_KEY_VALUE"
+        }
+      ]
+    },
+    {
+      "id": "SYNTH_KEY_ZERO",
+      "envelope": "{\"data\":[{\"id\":0,\"servico_em\":\"2036-03-20T12:00:00Z\"}]}",
+      "expected": [
+        {
+          "/quarantine": "INVALID_SOURCE_KEY_VALUE"
+        }
+      ]
+    },
+    {
+      "id": "SYNTH_KEY_TEXT",
+      "envelope": "{\"data\":[{\"id\":\"1\",\"servico_em\":\"2036-03-20T12:00:00Z\"}]}",
+      "expected": [
+        {
+          "/quarantine": "INVALID_SOURCE_KEY_TYPE"
+        }
+      ]
+    },
+    {
+      "id": "SYNTH_ALIAS_IS_NOT_ID",
+      "envelope": "{\"data\":[{\"corporation_sequence_number\":1,\"servico_em\":\"2036-03-20\"}]}",
+      "expected": [
+        {
+          "/quarantine": "MISSING_SOURCE_KEY"
+        }
+      ]
+    },
+    {
+      "id": "SYNTH_ALIAS_BAD_TYPE",
+      "envelope": "{\"data\":[{\"id\":1,\"servico_em\":\"2036-03-20T12:00:00Z\",\"corporation_sequence_number\":\"1\"}]}",
+      "expected": [
+        {
+          "/quarantine": "INVALID_BUSINESS_ALIAS"
+        }
+      ]
+    },
+    {
+      "id": "SYNTH_STATUS_FINISHED",
+      "envelope": "{\"data\":[{\"id\":1,\"servico_em\":\"2036-03-20T12:00:00Z\",\"status\":\"finished\"}]}",
+      "expected": [
+        {
+          "/quarantine": "NONE",
+          "/status/raw": "finished",
+          "/status/typed": "finished",
+          "/status/terminal": "true",
+          "/status/label": "finalizado"
+        }
+      ]
+    },
+    {
+      "id": "SYNTH_STATUS_DONE",
+      "envelope": "{\"data\":[{\"id\":1,\"servico_em\":\"2036-03-20T12:00:00Z\",\"status\":\"done\"}]}",
+      "expected": [
+        {
+          "/quarantine": "NONE",
+          "/status/raw": "done",
+          "/status/typed": "done",
+          "/status/terminal": "true",
+          "/status/label": "finalizado"
+        }
+      ]
+    },
+    {
+      "id": "SYNTH_STATUS_CANCELED",
+      "envelope": "{\"data\":[{\"id\":1,\"servico_em\":\"2036-03-20T12:00:00Z\",\"status\":\"canceled\"}]}",
+      "expected": [
+        {
+          "/quarantine": "NONE",
+          "/status/raw": "canceled",
+          "/status/typed": "canceled",
+          "/status/terminal": "true",
+          "/status/label": "cancelada"
+        }
+      ]
+    },
+    {
+      "id": "SYNTH_STATUS_CANCELLED",
+      "envelope": "{\"data\":[{\"id\":1,\"servico_em\":\"2036-03-20T12:00:00Z\",\"status\":\"cancelled\"}]}",
+      "expected": [
+        {
+          "/quarantine": "NONE",
+          "/status/raw": "cancelled",
+          "/status/typed": "cancelled",
+          "/status/terminal": "true",
+          "/status/label": "cancelada"
+        }
+      ]
+    },
+    {
+      "id": "SYNTH_UNKNOWN_STATUS",
+      "envelope": "{\"data\":[{\"id\":1,\"servico_em\":\"2036-03-20T12:00:00Z\",\"status\":\"SYNTH_UNKNOWN\"}]}",
+      "expected": [
+        {
+          "/quarantine": "NONE",
+          "/status/raw": "SYNTH_UNKNOWN",
+          "/status/typed": "NULL",
+          "/status/terminal": "false"
+        }
+      ]
+    },
+    {
+      "id": "SYNTH_STATUS_TYPE",
+      "envelope": "{\"data\":[{\"id\":1,\"servico_em\":\"2036-03-20T12:00:00Z\",\"status\":1}]}",
+      "expected": [
+        {
+          "/quarantine": "INVALID_STATUS_TYPE"
+        }
+      ]
+    },
+    {
+      "id": "SYNTH_FINANCIAL_ZERO",
+      "envelope": "{\"data\":[{\"id\":1,\"servico_em\":\"2036-03-20T12:00:00Z\",\"total\":0.00000000}]}",
+      "expected": [
+        {
+          "/quarantine": "NONE",
+          "/total/typed": "0.00000000",
+          "/financial/currencyPolicy": "UNRESOLVED_NO_INFERENCE",
+          "/financial/arithmeticPolicy": "FORBIDDEN"
+        }
+      ]
+    },
+    {
+      "id": "SYNTH_FINANCIAL_MAX",
+      "envelope": "{\"data\":[{\"id\":1,\"servico_em\":\"2036-03-20T12:00:00Z\",\"total\":99999999999999999999.12345678}]}",
+      "expected": [
+        {
+          "/quarantine": "NONE",
+          "/total/typed": "99999999999999999999.12345678",
+          "/financial/currencyPolicy": "UNRESOLVED_NO_INFERENCE",
+          "/financial/arithmeticPolicy": "FORBIDDEN"
+        }
+      ]
+    },
+    {
+      "id": "SYNTH_INVALID_FINANCIAL_SCALE",
+      "envelope": "{\"data\":[{\"id\":1,\"servico_em\":\"2036-03-20T12:00:00Z\",\"total\":1.123456789}]}",
+      "expected": [
+        {
+          "/quarantine": "INVALID_FINANCIAL_VALUE"
+        }
+      ]
+    },
+    {
+      "id": "SYNTH_INVALID_FINANCIAL_OVERFLOW",
+      "envelope": "{\"data\":[{\"id\":1,\"servico_em\":\"2036-03-20T12:00:00Z\",\"total\":100000000000000000000}]}",
+      "expected": [
+        {
+          "/quarantine": "INVALID_FINANCIAL_VALUE"
+        }
+      ]
+    },
+    {
+      "id": "SYNTH_INVALID_FINANCIAL_TYPE",
+      "envelope": "{\"data\":[{\"id\":1,\"servico_em\":\"2036-03-20T12:00:00Z\",\"total\":true}]}",
+      "expected": [
+        {
+          "/quarantine": "INVALID_FINANCIAL_VALUE"
+        }
+      ]
+    }
+  ]
+}

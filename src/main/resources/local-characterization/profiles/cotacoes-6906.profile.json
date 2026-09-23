@@ -1,0 +1,146 @@
+{
+  "schemaVersion": "V2_012_PROFILE_V1",
+  "profileId": "V2_012_COTACOES_6906",
+  "fixtureResource": "/contracts/v2-012/fixtures/cotacoes-6906.synthetic.json",
+  "fixtureFingerprint": "fd6a189bde461b35d4a47cbdbe37c72d3d959edebec03d376e0ace96e33582eb",
+  "stages": ["V2_012A", "V2_012B", "V2_012C"],
+  "entity": "COTACOES",
+  "sourceKind": "DATA_EXPORT",
+  "oracleKind": "DATA_EXPORT_PROVIDER",
+  "authorizationRequirement": "EXPLICIT_OWNER_AUTHORIZATION",
+  "contract": {
+    "contractId": "dataexport-6906",
+    "contractVersion": "2026-09-04.v2-025b.1",
+    "documentReference": "dataexport-cotacoes",
+    "contractFingerprint": "4bd641aa5ebe1c069776dc7009377d43c4c1d3e26727969667cc7adc01071166",
+    "identityFingerprint": "355db9b9998d0366378c763b10738c875772d98bc649bf7b3bcceabbfbe345cb"
+  },
+  "sourceKey": {
+    "path": "/sequence_code",
+    "wireTypes": ["INTEGER"],
+    "typeTagged": true,
+    "domain": "CANONICAL_INTEGER"
+  },
+  "businessAliases": [],
+  "childIdentities": [],
+  "relationshipCandidatePaths": [],
+  "scope": {
+    "sourceInstance": "REQUIRED_AT_EXECUTION",
+    "tenantScope": "REQUIRED_AT_EXECUTION",
+    "forbiddenValues": ["DEFAULT", "GLOBAL", "SINGLETON"]
+  },
+  "rootGrain": {
+    "recordRoot": "/data/*",
+    "acceptedRecordRoots": ["/data/*"],
+    "logicalGrain": "DISTINCT_SCOPED_SEQUENCE_CODE",
+    "cardinality": "ARRAY_ELEMENTS",
+    "expansionPolicy": "NO_CHILD_OR_EXPANSION_PROVEN",
+    "childPolicy": "NO_CHILD_IDENTITY_OBSERVED",
+    "rootScalarPaths": []
+  },
+  "pathScopes": {
+    "recordPaths": [
+      "/qoe_crn_psn_nickname",
+      "/qoe_qes_fit_fhe_cte_issued_at",
+      "/qoe_qes_fit_nse_issued_at",
+      "/qoe_qes_total",
+      "/requested_at",
+      "/requester_name",
+      "/sequence_code"
+    ],
+    "connectionPaths": []
+  },
+  "absencePolicy": "OBSERVATION_ONLY_NO_LIFECYCLE_INFERENCE",
+  "filters": [
+    {
+      "path": "quotes.requested_at",
+      "role": "REQUIRED",
+      "watermark": false,
+      "requiredBooleanValue": null
+    }
+  ],
+  "pagination": {
+    "kind": "NUMERIC_PAGE",
+    "maximumPageSize": 1000,
+    "terminalCondition": "EMPTY_PAGE_LOCAL_UNVERIFIED",
+    "perSemantics": "UNPROVEN",
+    "shortPageIsTerminal": false,
+    "completenessProven": false,
+    "snapshotProven": false
+  },
+  "ordering": {
+    "expression": "sequence_code asc",
+    "role": "PARITY_ONLY_NOT_IDENTITY_OR_CURSOR"
+  },
+  "temporal": {
+    "timestampPaths": [
+      "/qoe_qes_fit_fhe_cte_issued_at",
+      "/qoe_qes_fit_nse_issued_at",
+      "/requested_at"
+    ],
+    "precedence": [
+      "/qoe_qes_fit_nse_issued_at",
+      "/qoe_qes_fit_fhe_cte_issued_at",
+      "/requested_at"
+    ],
+    "timezone": "America/Sao_Paulo",
+    "timezoneRequirement": "EXPLICIT_REQUIRED",
+    "translation": "SOURCE_CIVIL_DATE_UNPROVEN"
+  },
+  "status": {
+    "path": null,
+    "mode": "NOT_APPLICABLE",
+    "reference": null,
+    "policyFingerprint": null,
+    "unknownValuesAllowed": false
+  },
+  "limits": {
+    "maximumBytes": 65536,
+    "maximumRows": 1000,
+    "maximumPages": 100,
+    "maximumDepth": 16,
+    "maximumPaths": 256,
+    "maximumNodes": 4096
+  },
+  "fieldContracts": [
+    {"path": "/qoe_crn_psn_nickname", "wireTypes": ["STRING"], "presenceStates": ["ABSENT", "NULL", "VALUE"]},
+    {"path": "/qoe_qes_fit_fhe_cte_issued_at", "wireTypes": ["STRING"], "presenceStates": ["ABSENT", "NULL", "VALUE"]},
+    {"path": "/qoe_qes_fit_nse_issued_at", "wireTypes": ["STRING"], "presenceStates": ["ABSENT", "NULL", "VALUE"]},
+    {"path": "/qoe_qes_total", "wireTypes": ["DECIMAL", "INTEGER", "STRING"], "presenceStates": ["ABSENT", "NULL", "VALUE"]},
+    {"path": "/requested_at", "wireTypes": ["STRING"], "presenceStates": ["VALUE"]},
+    {"path": "/requester_name", "wireTypes": ["STRING"], "presenceStates": ["ABSENT", "NULL", "VALUE"]},
+    {"path": "/sequence_code", "wireTypes": ["INTEGER"], "presenceStates": ["ABSENT", "NULL", "VALUE"]}
+  ],
+  "expectedPaths": [
+    "/qoe_crn_psn_nickname",
+    "/qoe_qes_fit_fhe_cte_issued_at",
+    "/qoe_qes_fit_nse_issued_at",
+    "/qoe_qes_total",
+    "/requested_at",
+    "/requester_name",
+    "/sequence_code"
+  ],
+  "requiredChecks": [
+    "SYNTHETIC_ORACLE_AVAILABLE",
+    "SYNTHETIC_AUTHORIZATION_CONTEXT",
+    "EXPLICIT_SCOPES",
+    "ROOT_MATCH",
+    "PATH_SET_MATCH",
+    "FIELD_TYPES_MATCH",
+    "FILTERS_MATCH",
+    "RELATIONSHIPS_PRESERVED",
+    "ABSENCE_POLICY_PRESERVED",
+    "SOURCE_KEY_VALID",
+    "PRESENCE_TRI_STATE_TRACKED",
+    "TERMINAL_CONDITION_MET",
+    "LIMITS_RESPECTED",
+    "ORDERING_PARITY_VALID",
+    "TEMPORAL_EVIDENCE_VALID",
+    "STATUS_SEMANTICS_VALID",
+    "CARDINALITY_MATCH",
+    "ENTITY_RULES_MATCH",
+    "SYNTHETIC_EVIDENCE_ONLY"
+  ],
+  "profileStatus": "PREPARED_NOT_EXECUTED",
+  "gateStatus": "ORACLE_REQUIRED"
+}

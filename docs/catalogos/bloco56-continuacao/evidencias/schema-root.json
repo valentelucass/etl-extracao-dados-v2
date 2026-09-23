@@ -1,0 +1,679 @@
+{
+  "stage": "root",
+  "httpStatus": 200,
+  "curlExit": 0,
+  "bytes": 8119,
+  "elapsedMilliseconds": 912,
+  "failure": null,
+  "schema": {
+    "data": {
+      "__schema": {
+        "queryType": {
+          "name": "Query",
+          "fields": [
+            {
+              "name": "accountingCreditsReportAnalytical",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "AccountingCreditsReportAnalytical",
+                  "ofType": null
+                }
+              }
+            },
+            {
+              "name": "accountingCreditsReportSynthetic",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "AccountingCreditsReportSynthetic",
+                  "ofType": null
+                }
+              }
+            },
+            {
+              "name": "accountingDebitsReportAnalytical",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "AccountingDebitsReportAnalytical",
+                  "ofType": null
+                }
+              }
+            },
+            {
+              "name": "accountingDebitsReportSynthetic",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "AccountingDebitsReportSynthetic",
+                  "ofType": null
+                }
+              }
+            },
+            {
+              "name": "airlinePriceTable",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "AirlinePriceTableConnection",
+                  "ofType": null
+                }
+              }
+            },
+            {
+              "name": "bankAccount",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "BankAccountConnection",
+                  "ofType": null
+                }
+              }
+            },
+            {
+              "name": "cargoClassification",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "CargoClassificationConnection",
+                  "ofType": null
+                }
+              }
+            },
+            {
+              "name": "company",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "CompanyConnection",
+                  "ofType": null
+                }
+              }
+            },
+            {
+              "name": "containerShippingProcess",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "ShippingProcessConnection",
+                  "ofType": null
+                }
+              }
+            },
+            {
+              "name": "creditCustomerBilling",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "CreditBaseConnection",
+                  "ofType": null
+                }
+              }
+            },
+            {
+              "name": "cte",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "CteConnection",
+                  "ofType": null
+                }
+              }
+            },
+            {
+              "name": "customerCreditLine",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "CustomerCreditLineConnection",
+                  "ofType": null
+                }
+              }
+            },
+            {
+              "name": "customerFreight",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "CustomerFreightBaseConnection",
+                  "ofType": null
+                }
+              }
+            },
+            {
+              "name": "customerPriceTable",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "CustomerPriceTableConnection",
+                  "ofType": null
+                }
+              }
+            },
+            {
+              "name": "deadlinePrediction",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "DeadlinePrediction",
+                  "ofType": null
+                }
+              }
+            },
+            {
+              "name": "deliveryRegion",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "DeliveryRegionConnection",
+                  "ofType": null
+                }
+              }
+            },
+            {
+              "name": "documentType",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "DocumentTypeConnection",
+                  "ofType": null
+                }
+              }
+            },
+            {
+              "name": "exchangeRate",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "ExchangeRateConnection",
+                  "ofType": null
+                }
+              }
+            },
+            {
+              "name": "freight",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "FreightBaseConnection",
+                  "ofType": null
+                }
+              }
+            },
+            {
+              "name": "freightAgileBatch",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "BatchConnection",
+                  "ofType": null
+                }
+              }
+            },
+            {
+              "name": "freightDeliveryReportAnalytical",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "FreightDeliveryReportAnalytical",
+                  "ofType": null
+                }
+              }
+            },
+            {
+              "name": "freightDeliveryReportSynthetic",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "FreightDeliveryReportSynthetic",
+                  "ofType": null
+                }
+              }
+            },
+            {
+              "name": "freightMarginsReportAnalytical",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "FreightMarginsReportAnalytical",
+                  "ofType": null
+                }
+              }
+            },
+            {
+              "name": "freightMarginsReportSynthetic",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "FreightMarginsReportSynthetic",
+                  "ofType": null
+                }
+              }
+            },
+            {
+              "name": "freightPerformanceReportAnalytical",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "FreightPerformanceReportAnalytical",
+                  "ofType": null
+                }
+              }
+            },
+            {
+              "name": "freightPerformanceReportSynthetic",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "FreightPerformanceReportSynthetic",
+                  "ofType": null
+                }
+              }
+            },
+            {
+              "name": "freightTotalsReportAnalytical",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "FreightTotalsReportAnalytical",
+                  "ofType": null
+                }
+              }
+            },
+            {
+              "name": "freightTotalsReportSynthetic",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "FreightTotalsReportSynthetic",
+                  "ofType": null
+                }
+              }
+            },
+            {
+              "name": "individual",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "IndividualConnection",
+                  "ofType": null
+                }
+              }
+            },
+            {
+              "name": "invoice",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "InvoiceBaseConnection",
+                  "ofType": null
+                }
+              }
+            },
+            {
+              "name": "logisticGroup",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "LogisticGroupConnection",
+                  "ofType": null
+                }
+              }
+            },
+            {
+              "name": "manifestAnalysisReportAnalytical",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "ManifestAnalysisReportAnalytical",
+                  "ofType": null
+                }
+              }
+            },
+            {
+              "name": "manifestAnalysisReportSynthetic",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "ManifestAnalysisReportSynthetic",
+                  "ofType": null
+                }
+              }
+            },
+            {
+              "name": "manifestRelationReportAnalytical",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "ManifestRelationReportAnalytical",
+                  "ofType": null
+                }
+              }
+            },
+            {
+              "name": "manifestRelationReportSynthetic",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "ManifestRelationReportSynthetic",
+                  "ofType": null
+                }
+              }
+            },
+            {
+              "name": "nfse",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "NfseConnection",
+                  "ofType": null
+                }
+              }
+            },
+            {
+              "name": "package",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "PackageConnection",
+                  "ofType": null
+                }
+              }
+            },
+            {
+              "name": "pick",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "PickConnection",
+                  "ofType": null
+                }
+              }
+            },
+            {
+              "name": "pickType",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "PickTypeConnection",
+                  "ofType": null
+                }
+              }
+            },
+            {
+              "name": "picksReportAnalytical",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "PickReportAnalytical",
+                  "ofType": null
+                }
+              }
+            },
+            {
+              "name": "picksReportSynthetic",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "PickReportSynthetic",
+                  "ofType": null
+                }
+              }
+            },
+            {
+              "name": "preBoarding",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "PreBoardingConnection",
+                  "ofType": null
+                }
+              }
+            },
+            {
+              "name": "priceTableRegion",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "PriceTableRegionConnection",
+                  "ofType": null
+                }
+              }
+            },
+            {
+              "name": "productClassification",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "ProductClassificationConnection",
+                  "ofType": null
+                }
+              }
+            },
+            {
+              "name": "quoteReportAnalytical",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "QuoteReportAnalytical",
+                  "ofType": null
+                }
+              }
+            },
+            {
+              "name": "quoteReportSynthetic",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "QuoteReportSynthetic",
+                  "ofType": null
+                }
+              }
+            },
+            {
+              "name": "reversePickFreightSchedule",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "FreightScheduleConnection",
+                  "ofType": null
+                }
+              }
+            },
+            {
+              "name": "schedulingService",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "SchedulingServiceConnection",
+                  "ofType": null
+                }
+              }
+            },
+            {
+              "name": "sellerCommissionsReportAnalytical",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "SellerCommissionReportAnalytical",
+                  "ofType": null
+                }
+              }
+            },
+            {
+              "name": "sellerCommissionsReportSynthetic",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "SellerCommissionReportSynthetic",
+                  "ofType": null
+                }
+              }
+            },
+            {
+              "name": "stretch",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "StretchConnection",
+                  "ofType": null
+                }
+              }
+            },
+            {
+              "name": "thirdPartyCte",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "ThirdPartyCteConnection",
+                  "ofType": null
+                }
+              }
+            },
+            {
+              "name": "tollPlaza",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "TollPlazaConnection",
+                  "ofType": null
+                }
+              }
+            },
+            {
+              "name": "transportRoute",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "TransportRouteConnection",
+                  "ofType": null
+                }
+              }
+            },
+            {
+              "name": "vehicleType",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "VehicleConnection",
+                  "ofType": null
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,705 @@
+{
+  "schemaVersion": "V2_012_FIXTURE_V1",
+  "fixtureMarker": "SYNTH_V2_012_MANIFESTOS_6399",
+  "profileId": "V2_012_MANIFESTOS_6399",
+  "baseObservation": {
+    "entity": "MANIFESTOS",
+    "sourceKind": "DATA_EXPORT",
+    "oracleKind": "DATA_EXPORT_PROVIDER",
+    "oracleAvailability": "SYNTHETIC_IN_MEMORY_ONLY",
+    "authorizationState": "SYNTHETIC_TEST_ONLY",
+    "sourceInstance": "SYNTH_SOURCE_INSTANCE",
+    "tenantScope": "SYNTH_TENANT_SCOPE",
+    "recordRoot": "/data/*",
+    "observedPaths": [
+      "/closed_at",
+      "/created_at",
+      "/departured_at",
+      "/finished_at",
+      "/mdfe_status",
+      "/mft_mfs_key",
+      "/mft_mfs_number",
+      "/mft_pfs_pck_sequence_code",
+      "/sequence_code",
+      "/status"
+    ],
+    "observedSourceKeyPath": "/sequence_code",
+    "observedSourceKeyTypeTagged": true,
+    "sourceKeyPresence": "VALUE",
+    "sourceKeyWireTypes": ["INTEGER"],
+    "sourceKeyValueValid": true,
+    "sourceKeyCount": 4,
+    "distinctSourceKeyCount": 3,
+    "sourceKeyCollision": false,
+    "crossTypeLexemePairCount": 0,
+    "crossTypeTaggedDistinctPairCount": 0,
+    "physicalRowCount": 4,
+    "logicalRootCount": 3,
+    "childCount": 3,
+    "distinctChildCount": 3,
+    "childConflict": false,
+    "childObservations": [
+      {
+            "kind": "PICK",
+            "observedKeyPath": "/mft_pfs_pck_sequence_code",
+            "observedTypeTagged": true,
+            "presenceStates": ["ABSENT", "NULL", "VALUE"],
+        "wireTypes": ["INTEGER"],
+        "attributePaths": [],
+        "attributeWithoutKeyCount": 0,
+        "keyWithoutAttributeCount": 0,
+        "valueDomainValid": true,
+        "count": 2,
+        "distinctCount": 2,
+        "collision": false
+      },
+      {
+            "kind": "MDFE",
+            "observedKeyPath": "/mft_mfs_key",
+            "observedTypeTagged": true,
+            "presenceStates": ["ABSENT", "NULL", "VALUE"],
+        "wireTypes": ["STRING"],
+        "attributePaths": ["/mft_mfs_number"],
+        "attributeWithoutKeyCount": 0,
+        "keyWithoutAttributeCount": 0,
+        "valueDomainValid": true,
+        "count": 1,
+        "distinctCount": 1,
+        "collision": false
+      }
+    ],
+    "physicalExpansion": true,
+    "rootCardinality": "ARRAY_ELEMENTS",
+    "fieldObservations": [
+      {"path": "/closed_at", "wireTypes": ["STRING"], "presenceStates": ["ABSENT", "NULL", "VALUE"]},
+      {"path": "/created_at", "wireTypes": ["STRING"], "presenceStates": ["ABSENT", "NULL", "VALUE"]},
+      {"path": "/departured_at", "wireTypes": ["STRING"], "presenceStates": ["ABSENT", "NULL", "VALUE"]},
+      {"path": "/finished_at", "wireTypes": ["STRING"], "presenceStates": ["ABSENT", "NULL", "VALUE"]},
+      {"path": "/mdfe_status", "wireTypes": ["STRING"], "presenceStates": ["ABSENT", "NULL", "VALUE"]},
+      {"path": "/mft_mfs_key", "wireTypes": ["STRING"], "presenceStates": ["ABSENT", "NULL", "VALUE"]},
+      {"path": "/mft_mfs_number", "wireTypes": ["INTEGER"], "presenceStates": ["ABSENT", "NULL", "VALUE"]},
+      {"path": "/mft_pfs_pck_sequence_code", "wireTypes": ["INTEGER"], "presenceStates": ["ABSENT", "NULL", "VALUE"]},
+      {"path": "/sequence_code", "wireTypes": ["INTEGER"], "presenceStates": ["VALUE"]},
+      {"path": "/status", "wireTypes": ["STRING"], "presenceStates": ["ABSENT", "NULL", "VALUE"]}
+    ],
+    "observedRecordPaths": [
+      "/closed_at",
+      "/created_at",
+      "/departured_at",
+      "/finished_at",
+      "/mdfe_status",
+      "/mft_mfs_key",
+      "/mft_mfs_number",
+      "/mft_pfs_pck_sequence_code",
+      "/sequence_code",
+      "/status"
+    ],
+    "observedConnectionPaths": [],
+    "observedRootScalarPaths": ["/mdfe_status"],
+    "filterObservations": [
+      {"path": "manifests.service_date", "present": true, "watermark": false, "booleanValue": null}
+    ],
+    "observedRelationshipCandidatePaths": ["/mft_pfs_pck_sequence_code"],
+    "relationshipInferenceApplied": false,
+    "triStateTrackingEnabled": true,
+    "absenceLifecycleInferenceApplied": false,
+    "pagination": {
+      "kind": "NUMERIC_PAGE",
+      "terminalCondition": "EMPTY_PAGE_LOCAL_UNVERIFIED",
+      "pageSize": 3,
+      "pagesObserved": 2,
+      "dataPagesObserved": 1,
+      "terminalProbeRequests": 1,
+      "maximumDistinctSourceKeysOnPage": 3,
+      "shortNonTerminalPageObserved": false,
+      "shortPageObservedRowCount": 0,
+      "continuedAfterShortPage": false,
+      "terminalConditionMet": true,
+      "hasNextPageAtLimit": false,
+      "cursorRequired": false,
+      "cursorPresent": false,
+      "cursorCount": 0,
+      "distinctCursorCount": 0,
+      "cursorCycleDetected": false,
+      "observedOrderingExpression": "sequence_code asc",
+      "orderingRespected": true,
+      "exactReplayTieCount": 0,
+      "divergentTieCount": 0
+    },
+    "temporal": {
+      "timestampState": "VALID",
+      "timezoneState": "EXPLICIT_CONFIRMED",
+      "observedTranslation": "SOURCE_CIVIL_DATE_UNPROVEN",
+      "observedTimezone": "America/Sao_Paulo",
+      "observedPaths": ["/closed_at", "/created_at", "/departured_at", "/finished_at"],
+      "validValuePaths": ["/closed_at", "/created_at", "/departured_at", "/finished_at"],
+      "selectedFreshnessPath": "/finished_at",
+      "precedenceApplied": true
+    },
+    "status": {
+      "path": "/status",
+      "mode": "KNOWN_PRECEDENCE_UNKNOWN_PRESERVED",
+      "appliedPolicyFingerprint": "7721b88a934b2a58ff19bd7cee53f7bd57023a31528c77143915d72005cd19af",
+      "knownCount": 1,
+      "unknownCount": 1,
+      "referenceApplied": true,
+      "conflict": false
+    },
+    "usage": {
+      "bytes": 2048,
+      "rows": 4,
+      "pages": 2,
+      "depth": 5,
+      "paths": 10,
+      "nodes": 40
+    },
+    "evidenceClassification": "SYNTHETIC_FIXTURE"
+  },
+  "scenarios": [
+    {
+      "scenarioId": "SYNTH_ACCEPTED_BASELINE",
+      "expectedOutcome": "SYNTHETIC_STRUCTURE_ACCEPTED",
+      "expectedReasons": [],
+      "override": {}
+    },
+    {
+      "scenarioId": "SYNTH_ACCEPTED_SHORT_PAGE_CONTINUES",
+      "expectedOutcome": "SYNTHETIC_STRUCTURE_ACCEPTED",
+      "expectedReasons": [],
+      "override": {
+        "pagination": {
+          "pagesObserved": 3,
+          "dataPagesObserved": 2,
+          "maximumDistinctSourceKeysOnPage": 2,
+          "shortNonTerminalPageObserved": true,
+          "shortPageObservedRowCount": 2,
+          "continuedAfterShortPage": true
+        },
+        "usage": {"pages": 3}
+      }
+    },
+    {
+      "scenarioId": "SYNTH_SHORT_PAGE_FALSE_TERMINAL",
+      "expectedOutcome": "FAIL_CLOSED",
+      "expectedReasons": ["TERMINALITY_INCOMPLETE"],
+      "override": {
+        "pagination": {
+          "pagesObserved": 2,
+          "dataPagesObserved": 2,
+          "terminalProbeRequests": 0,
+          "shortNonTerminalPageObserved": true,
+          "shortPageObservedRowCount": 2,
+          "continuedAfterShortPage": false,
+          "terminalConditionMet": false,
+          "maximumDistinctSourceKeysOnPage": 3
+        },
+        "sourceKeyCount": 5,
+        "distinctSourceKeyCount": 4,
+        "physicalRowCount": 5,
+        "logicalRootCount": 4,
+        "usage": {"rows": 5, "pages": 2}
+      }
+    },
+    {
+      "scenarioId": "SYNTH_ACCEPTED_TOP_LEVEL_ROOT",
+      "expectedOutcome": "SYNTHETIC_STRUCTURE_ACCEPTED",
+      "expectedReasons": [],
+      "override": {"recordRoot": "/*"}
+    },
+    {
+      "scenarioId": "SYNTH_ACCEPTED_CHILD_REPLAY",
+      "expectedOutcome": "SYNTHETIC_STRUCTURE_ACCEPTED",
+      "expectedReasons": [],
+      "override": {
+        "sourceKeyCount": 5,
+        "physicalRowCount": 5,
+        "childCount": 4,
+        "pagination": {
+          "pagesObserved": 3,
+          "dataPagesObserved": 2,
+          "maximumDistinctSourceKeysOnPage": 2,
+          "shortNonTerminalPageObserved": true,
+          "shortPageObservedRowCount": 2,
+          "continuedAfterShortPage": true
+        },
+        "usage": {"rows": 5, "pages": 3},
+        "childObservations": [
+          {
+            "kind": "PICK",
+            "observedKeyPath": "/mft_pfs_pck_sequence_code",
+            "observedTypeTagged": true,
+            "presenceStates": ["ABSENT", "NULL", "VALUE"],
+            "wireTypes": ["INTEGER"],
+            "attributePaths": [],
+            "attributeWithoutKeyCount": 0,
+            "keyWithoutAttributeCount": 0,
+            "valueDomainValid": true,
+            "count": 3,
+            "distinctCount": 2,
+            "collision": false
+          },
+          {
+            "kind": "MDFE",
+            "observedKeyPath": "/mft_mfs_key",
+            "observedTypeTagged": true,
+            "presenceStates": ["ABSENT", "NULL", "VALUE"],
+            "wireTypes": ["STRING"],
+            "attributePaths": ["/mft_mfs_number"],
+            "attributeWithoutKeyCount": 0,
+            "keyWithoutAttributeCount": 0,
+            "valueDomainValid": true,
+            "count": 1,
+            "distinctCount": 1,
+            "collision": false
+          }
+        ]
+      }
+    },
+    {
+      "scenarioId": "SYNTH_AUTHORIZATION_MISSING",
+      "expectedOutcome": "FAIL_CLOSED",
+      "expectedReasons": ["AUTHORIZATION_MISSING"],
+      "override": {"authorizationState": "MISSING"}
+    },
+    {
+      "scenarioId": "SYNTH_BYTE_LIMIT_EXCEEDED",
+      "expectedOutcome": "FAIL_CLOSED",
+      "expectedReasons": ["BYTE_LIMIT_EXCEEDED"],
+      "override": {"usage": {"bytes": 65537}}
+    },
+    {
+      "scenarioId": "SYNTH_CARDINALITY_DRIFT",
+      "expectedOutcome": "FAIL_CLOSED",
+      "expectedReasons": ["CARDINALITY_DRIFT"],
+      "override": {"rootCardinality": "GRAPHQL_EDGE_NODES"}
+    },
+    {
+      "scenarioId": "SYNTH_CHILD_IDENTITY_CONFLICT",
+      "expectedOutcome": "FAIL_CLOSED",
+      "expectedReasons": ["CHILD_IDENTITY_CONFLICT"],
+      "override": {"childConflict": true}
+    },
+    {
+      "scenarioId": "SYNTH_MDFE_ATTRIBUTE_AS_IDENTITY",
+      "expectedOutcome": "FAIL_CLOSED",
+      "expectedReasons": ["CHILD_IDENTITY_CONFLICT", "CHILD_KEY_PATH_MISMATCH"],
+      "override": {
+        "childObservations": {
+          "MDFE": {
+            "observedKeyPath": "/mft_mfs_number",
+            "wireTypes": ["INTEGER"]
+          }
+        }
+      }
+    },
+    {
+      "scenarioId": "SYNTH_CHILD_KEY_TAGGING_MISSING",
+      "expectedOutcome": "FAIL_CLOSED",
+      "expectedReasons": ["CHILD_KEY_TAGGING_MISSING"],
+      "override": {
+        "childObservations": {
+          "PICK": {"observedTypeTagged": false}
+        }
+      }
+    },
+    {
+      "scenarioId": "SYNTH_CHILD_VALUE_PRESENCE_WITHOUT_COUNT",
+      "expectedOutcome": "FAIL_CLOSED",
+      "expectedReasons": ["OBSERVATION_COUNT_MISMATCH"],
+      "override": {
+        "childCount": 0,
+        "distinctChildCount": 0,
+        "childObservations": {
+          "PICK": {"count": 0, "distinctCount": 0},
+          "MDFE": {"count": 0, "distinctCount": 0}
+        }
+      }
+    },
+    {
+      "scenarioId": "SYNTH_CHILD_DISTINCT_ZERO_WITH_COUNT",
+      "expectedOutcome": "FAIL_CLOSED",
+      "expectedReasons": ["OBSERVATION_COUNT_MISMATCH"],
+      "override": {
+        "distinctChildCount": 0,
+        "childObservations": {
+          "PICK": {"distinctCount": 0},
+          "MDFE": {"distinctCount": 0}
+        }
+      }
+    },
+    {
+      "scenarioId": "SYNTH_DATAEXPORT_CURSOR_INVENTED",
+      "expectedOutcome": "FAIL_CLOSED",
+      "expectedReasons": ["PAGINATION_SEMANTICS_DRIFT"],
+      "override": {
+        "pagination": {
+          "cursorRequired": true,
+          "cursorPresent": true,
+          "cursorCount": 1,
+          "distinctCursorCount": 1
+        }
+      }
+    },
+    {
+      "scenarioId": "SYNTH_CHILD_ATTRIBUTE_ASYMMETRY",
+      "expectedOutcome": "FAIL_CLOSED",
+      "expectedReasons": ["CHILD_ATTRIBUTE_ASYMMETRY"],
+      "override": {
+        "childObservations": [
+          {
+            "kind": "PICK",
+            "observedKeyPath": "/mft_pfs_pck_sequence_code",
+            "observedTypeTagged": true,
+            "presenceStates": ["ABSENT", "NULL", "VALUE"],
+            "wireTypes": ["INTEGER"],
+            "attributePaths": [],
+            "attributeWithoutKeyCount": 0,
+            "keyWithoutAttributeCount": 0,
+            "valueDomainValid": true,
+            "count": 2,
+            "distinctCount": 2,
+            "collision": false
+          },
+          {
+            "kind": "MDFE",
+            "observedKeyPath": "/mft_mfs_key",
+            "observedTypeTagged": true,
+            "presenceStates": ["ABSENT", "NULL", "VALUE"],
+            "wireTypes": ["STRING"],
+            "attributePaths": ["/mft_mfs_number"],
+            "attributeWithoutKeyCount": 1,
+            "keyWithoutAttributeCount": 0,
+            "valueDomainValid": true,
+            "count": 1,
+            "distinctCount": 1,
+            "collision": false
+          }
+        ]
+      }
+    },
+    {
+      "scenarioId": "SYNTH_CHILD_KEY_WITHOUT_ATTRIBUTE",
+      "expectedOutcome": "FAIL_CLOSED",
+      "expectedReasons": ["CHILD_ATTRIBUTE_ASYMMETRY"],
+      "override": {
+        "childObservations": [
+          {
+            "kind": "PICK",
+            "observedKeyPath": "/mft_pfs_pck_sequence_code",
+            "observedTypeTagged": true,
+            "presenceStates": ["ABSENT", "NULL", "VALUE"],
+            "wireTypes": ["INTEGER"],
+            "attributePaths": [],
+            "attributeWithoutKeyCount": 0,
+            "keyWithoutAttributeCount": 0,
+            "valueDomainValid": true,
+            "count": 2,
+            "distinctCount": 2,
+            "collision": false
+          },
+          {
+            "kind": "MDFE",
+            "observedKeyPath": "/mft_mfs_key",
+            "observedTypeTagged": true,
+            "presenceStates": ["ABSENT", "NULL", "VALUE"],
+            "wireTypes": ["STRING"],
+            "attributePaths": ["/mft_mfs_number"],
+            "attributeWithoutKeyCount": 0,
+            "keyWithoutAttributeCount": 1,
+            "valueDomainValid": true,
+            "count": 1,
+            "distinctCount": 1,
+            "collision": false
+          }
+        ]
+      }
+    },
+    {
+      "scenarioId": "SYNTH_EXPANSION_DRIFT",
+      "expectedOutcome": "FAIL_CLOSED",
+      "expectedReasons": ["EXPANSION_SEMANTICS_DRIFT"],
+      "override": {"physicalExpansion": false}
+    },
+    {
+      "scenarioId": "SYNTH_EXPANSION_FLAG_WITHOUT_ROWS",
+      "expectedOutcome": "FAIL_CLOSED",
+      "expectedReasons": ["EXPANSION_SEMANTICS_DRIFT"],
+      "override": {
+        "sourceKeyCount": 4,
+        "distinctSourceKeyCount": 4,
+        "physicalRowCount": 4,
+        "logicalRootCount": 4,
+        "physicalExpansion": true,
+        "pagination": {
+          "pagesObserved": 3,
+          "dataPagesObserved": 2,
+          "maximumDistinctSourceKeysOnPage": 2,
+          "shortNonTerminalPageObserved": true,
+          "shortPageObservedRowCount": 2,
+          "continuedAfterShortPage": true
+        },
+        "usage": {"rows": 4, "pages": 3}
+      }
+    },
+    {
+      "scenarioId": "SYNTH_MDFE_STATUS_CHILD_ROLE_DRIFT",
+      "expectedOutcome": "FAIL_CLOSED",
+      "expectedReasons": ["ROOT_SCALAR_ROLE_DRIFT"],
+      "override": {"observedRootScalarPaths": []}
+    },
+    {
+      "scenarioId": "SYNTH_STATUS_POLICY_FINGERPRINT_DRIFT",
+      "expectedOutcome": "FAIL_CLOSED",
+      "expectedReasons": ["STATUS_SEMANTICS_DRIFT"],
+      "override": {
+        "status": {"appliedPolicyFingerprint": "0000000000000000000000000000000000000000000000000000000000000000"}
+      }
+    },
+    {
+      "scenarioId": "SYNTH_INVALID_TIMESTAMP",
+      "expectedOutcome": "FAIL_CLOSED",
+      "expectedReasons": ["INVALID_TIMESTAMP"],
+      "override": {"temporal": {"timestampState": "INVALID"}}
+    },
+    {
+      "scenarioId": "SYNTH_OBSERVATION_COUNT_MISMATCH",
+      "expectedOutcome": "FAIL_CLOSED",
+      "expectedReasons": ["OBSERVATION_COUNT_MISMATCH"],
+      "override": {"distinctSourceKeyCount": 2}
+    },
+    {
+      "scenarioId": "SYNTH_MDFE_KEY_DOMAIN_INVALID",
+      "expectedOutcome": "FAIL_CLOSED",
+      "expectedReasons": ["CHILD_IDENTITY_CONFLICT"],
+      "override": {
+        "childObservations": [
+          {
+            "kind": "PICK",
+            "observedKeyPath": "/mft_pfs_pck_sequence_code",
+            "observedTypeTagged": true,
+            "presenceStates": ["ABSENT", "NULL", "VALUE"],
+            "wireTypes": ["INTEGER"],
+            "attributePaths": [],
+            "attributeWithoutKeyCount": 0,
+            "keyWithoutAttributeCount": 0,
+            "valueDomainValid": true,
+            "count": 2,
+            "distinctCount": 2,
+            "collision": false
+          },
+          {
+            "kind": "MDFE",
+            "observedKeyPath": "/mft_mfs_key",
+            "observedTypeTagged": true,
+            "presenceStates": ["ABSENT", "NULL", "VALUE"],
+            "wireTypes": ["STRING"],
+            "attributePaths": ["/mft_mfs_number"],
+            "attributeWithoutKeyCount": 0,
+            "keyWithoutAttributeCount": 0,
+            "valueDomainValid": false,
+            "count": 1,
+            "distinctCount": 1,
+            "collision": false
+          }
+        ]
+      }
+    },
+    {
+      "scenarioId": "SYNTH_ORACLE_MISSING",
+      "expectedOutcome": "FAIL_CLOSED",
+      "expectedReasons": ["ORACLE_MISSING"],
+      "override": {"oracleAvailability": "MISSING"}
+    },
+    {
+      "scenarioId": "SYNTH_ORDER_PARITY_VIOLATION",
+      "expectedOutcome": "FAIL_CLOSED",
+      "expectedReasons": ["ORDER_PARITY_VIOLATION"],
+      "override": {"pagination": {"orderingRespected": false}}
+    },
+    {
+      "scenarioId": "SYNTH_PAGE_LIMIT_EXCEEDED",
+      "expectedOutcome": "FAIL_CLOSED",
+      "expectedReasons": ["PAGE_LIMIT_EXCEEDED"],
+      "override": {
+        "pagination": {
+          "pagesObserved": 101,
+          "dataPagesObserved": 100,
+          "shortNonTerminalPageObserved": true,
+          "shortPageObservedRowCount": 1,
+          "continuedAfterShortPage": true
+        },
+        "sourceKeyCount": 101,
+        "distinctSourceKeyCount": 100,
+        "physicalRowCount": 101,
+        "logicalRootCount": 100,
+        "usage": {"rows": 101, "pages": 101}
+      }
+    },
+    {
+      "scenarioId": "SYNTH_ZERO_PAGE_SIZE",
+      "expectedOutcome": "FAIL_CLOSED",
+      "expectedReasons": ["PAGINATION_SEMANTICS_DRIFT"],
+      "override": {"pagination": {"pageSize": 0}}
+    },
+    {
+      "scenarioId": "SYNTH_PATH_DRIFT",
+      "expectedOutcome": "FAIL_CLOSED",
+      "expectedReasons": ["PATH_DRIFT"],
+      "override": {
+        "observedPaths": [
+          "/closed_at",
+          "/created_at",
+          "/departured_at",
+          "/finished_at",
+          "/mdfe_status",
+          "/mft_mfs_key",
+          "/mft_mfs_number",
+          "/mft_pfs_pck_sequence_code",
+          "/sequence_code",
+          "/status",
+          "/SYNTH_DRIFT_PATH"
+        ],
+        "observedRecordPaths": [
+          "/closed_at",
+          "/created_at",
+          "/departured_at",
+          "/finished_at",
+          "/mdfe_status",
+          "/mft_mfs_key",
+          "/mft_mfs_number",
+          "/mft_pfs_pck_sequence_code",
+          "/sequence_code",
+          "/status",
+          "/SYNTH_DRIFT_PATH"
+        ]
+      }
+    },
+    {
+      "scenarioId": "SYNTH_PRESENCE_MODEL_INCOMPLETE",
+      "expectedOutcome": "FAIL_CLOSED",
+      "expectedReasons": ["PRESENCE_MODEL_INCOMPLETE"],
+      "override": {"triStateTrackingEnabled": false}
+    },
+    {
+      "scenarioId": "SYNTH_RESERVED_SOURCE_SCOPE",
+      "expectedOutcome": "FAIL_CLOSED",
+      "expectedReasons": ["RESERVED_SCOPE_VALUE"],
+      "override": {"sourceInstance": "GLOBAL"}
+    },
+    {
+      "scenarioId": "SYNTH_ROOT_DRIFT",
+      "expectedOutcome": "FAIL_CLOSED",
+      "expectedReasons": ["ROOT_DRIFT"],
+      "override": {"recordRoot": "/SYNTH_ROOT"}
+    },
+    {
+      "scenarioId": "SYNTH_ROW_LIMIT_EXCEEDED",
+      "expectedOutcome": "FAIL_CLOSED",
+      "expectedReasons": ["ROW_LIMIT_EXCEEDED"],
+      "override": {
+        "sourceKeyCount": 1001,
+        "physicalRowCount": 1001,
+        "childCount": 1000,
+        "childObservations": [
+          {
+            "kind": "PICK",
+            "observedKeyPath": "/mft_pfs_pck_sequence_code",
+            "observedTypeTagged": true,
+            "presenceStates": ["ABSENT", "NULL", "VALUE"],
+            "wireTypes": ["INTEGER"],
+            "attributePaths": [],
+            "attributeWithoutKeyCount": 0,
+            "keyWithoutAttributeCount": 0,
+            "valueDomainValid": true,
+            "count": 999,
+            "distinctCount": 2,
+            "collision": false
+          },
+          {
+            "kind": "MDFE",
+            "observedKeyPath": "/mft_mfs_key",
+            "observedTypeTagged": true,
+            "presenceStates": ["ABSENT", "NULL", "VALUE"],
+            "wireTypes": ["STRING"],
+            "attributePaths": ["/mft_mfs_number"],
+            "attributeWithoutKeyCount": 0,
+            "keyWithoutAttributeCount": 0,
+            "valueDomainValid": true,
+            "count": 1,
+            "distinctCount": 1,
+            "collision": false
+          }
+        ],
+        "usage": {"rows": 1001}
+      }
+    },
+    {
+      "scenarioId": "SYNTH_SOURCE_INSTANCE_MISSING",
+      "expectedOutcome": "FAIL_CLOSED",
+      "expectedReasons": ["SOURCE_INSTANCE_MISSING"],
+      "override": {"sourceInstance": null}
+    },
+    {
+      "scenarioId": "SYNTH_SOURCE_KEY_COLLISION",
+      "expectedOutcome": "FAIL_CLOSED",
+      "expectedReasons": ["SOURCE_KEY_COLLISION"],
+      "override": {"sourceKeyCollision": true}
+    },
+    {
+      "scenarioId": "SYNTH_SOURCE_KEY_MISSING",
+      "expectedOutcome": "FAIL_CLOSED",
+      "expectedReasons": ["SOURCE_KEY_MISSING"],
+      "override": {
+        "sourceKeyPresence": "ABSENT",
+        "sourceKeyCount": 3,
+        "fieldObservations": {
+          "/sequence_code": {"presenceStates": ["ABSENT", "VALUE"]}
+        }
+      }
+    },
+    {
+      "scenarioId": "SYNTH_SOURCE_KEY_NULL",
+      "expectedOutcome": "FAIL_CLOSED",
+      "expectedReasons": ["SOURCE_KEY_NULL"],
+      "override": {
+        "sourceKeyPresence": "NULL",
+        "fieldObservations": {
+          "/sequence_code": {"presenceStates": ["NULL", "VALUE"]}
+        }
+      }
+    },
+    {
+      "scenarioId": "SYNTH_SOURCE_KEY_TYPE_DRIFT",
+      "expectedOutcome": "FAIL_CLOSED",
+      "expectedReasons": ["FIELD_TYPE_MISMATCH", "SOURCE_KEY_TYPE_MISMATCH"],
+      "override": {
+        "sourceKeyWireTypes": ["STRING"],
+        "fieldObservations": {"/sequence_code": {"wireTypes": ["STRING"]}}
+      }
+    },
+    {
+      "scenarioId": "SYNTH_SOURCE_KEY_VALUE_INVALID",
+      "expectedOutcome": "FAIL_CLOSED",
+      "expectedReasons": ["SOURCE_KEY_VALUE_INVALID"],
+      "override": {"sourceKeyValueValid": false}
+    },
+    {
+      "scenarioId": "SYNTH_TENANT_SCOPE_MISSING",
+      "expectedOutcome": "FAIL_CLOSED",
+      "expectedReasons": ["TENANT_SCOPE_MISSING"],
+      "override": {"tenantScope": ""}
+    },
+    {
+      "scenarioId": "SYNTH_TERMINALITY_INCOMPLETE",
+      "expectedOutcome": "FAIL_CLOSED",
+      "expectedReasons": ["TERMINALITY_INCOMPLETE"],
+      "override": {"pagination": {"terminalConditionMet": false}}
+    },
+    {
+      "scenarioId": "SYNTH_TIMEZONE_UNCONFIRMED",
+      "expectedOutcome": "FAIL_CLOSED",
+      "expectedReasons": ["TIMEZONE_UNCONFIRMED"],
+      "override": {"temporal": {"timezoneState": "UNCONFIRMED"}}
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "corporation_sequence_number": 600001,
+  "type": "Freight::Normal",
+  "service_at": "2036-04-01T03:00:00Z",
+  "invoices_volumes": "3",
+  "taxed_weight": "45.125",
+  "invoices_value": "120",
+  "total": "120",
+  "fit_fln_status": "done"
+}

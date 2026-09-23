@@ -1,0 +1,17 @@
+-- Reviewed additive schema phase. Rights and fixture activation are a separate bounded phase.
+:On Error exit
+SET NOCOUNT ON; SET XACT_ABORT ON;
+IF DB_NAME()<>N'ETL_SISTEMA_V2_SHADOW' OR CONNECTIONPROPERTY('auth_scheme') NOT IN(N'NTLM',N'KERBEROS')
+ THROW 52850,N'EXACT_LOCAL_WINDOWS_TARGET_REQUIRED',1;
+IF @@TRANCOUNT<>0 OR OBJECT_ID(N'ctl.runtime_cotacao_reference') IS NOT NULL
+ THROW 52850,N'V022_NOT_PENDING_RECONCILE_INSTALLED_STATE',1;
+GO
+BEGIN TRANSACTION;
+GO
+:r "..\..\migrations\V022__extend_five_vertical_runtime.sql"
+GO
+:r "verify-schema.sql"
+GO
+IF @@TRANCOUNT<>1 OR XACT_STATE()<>1 THROW 52850,N'EXACT_MIGRATION_TRANSACTION_REQUIRED',1;
+COMMIT TRANSACTION;
+PRINT N'V022_SCHEMA_COMMITTED';

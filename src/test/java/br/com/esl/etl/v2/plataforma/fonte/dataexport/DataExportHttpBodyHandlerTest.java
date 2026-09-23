@@ -2,6 +2,7 @@ package br.com.esl.etl.v2.plataforma.fonte.dataexport;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -18,6 +19,27 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import org.junit.jupiter.api.Test;
 
 class DataExportHttpBodyHandlerTest {
+
+    @Test
+    void overflowingNumericContentLengthIsRejectedWithoutRetainingTheHeader() {
+        final var handler = new DataExportHttpBodyHandler(1, 3);
+        final String oversizedNumber = "9223372036854775808";
+
+        final var failure =
+                assertThrows(
+                        IllegalStateException.class,
+                        () ->
+                                handler.apply(
+                                        responseInfo(
+                                                200,
+                                                Map.of(
+                                                        "Content-Length",
+                                                        List.of(oversizedNumber)))));
+
+        assertEquals("Data Export retornou Content-Length inválido.", failure.getMessage());
+        assertNull(failure.getCause());
+        assertEquals(0, failure.getSuppressed().length);
+    }
 
     @Test
     void consumesOneBoundedBatchAtATime() {
@@ -55,18 +77,88 @@ class DataExportHttpBodyHandlerTest {
     }
 
     @Test
-    void rejectsOversizedDeclaredLengthBeforeReadingAndDiscardsErrorBodies() {
+    void rejectsOversizedDeclaredLengthBeforeReading() {
         final DataExportHttpBodyHandler handler = new DataExportHttpBodyHandler(1, 3);
         assertThrows(
                 DataExportResponseLimitExceededException.class,
                 () -> handler.apply(responseInfo(200, Map.of("Content-Length", List.of("4")))));
+    }
+
+    @Test
+    void rejectsOversizedDeclaredLengthForErrorBeforeReading() {
+        final DataExportHttpBodyHandler handler = new DataExportHttpBodyHandler(1, 3);
+
+        assertThrows(
+                DataExportResponseLimitExceededException.class,
+                () -> handler.apply(responseInfo(429, Map.of("Content-Length", List.of("4")))));
+    }
+
+    @Test
+    void rejectsMalformedDeclaredLengthWithoutEchoingTheHeader() {
+        final DataExportHttpBodyHandler handler = new DataExportHttpBodyHandler(1, 3);
+
+        final IllegalStateException failure =
+                assertThrows(
+                        IllegalStateException.class,
+                        () ->
+                                handler.apply(
+                                        responseInfo(
+                                                200,
+                                                Map.of(
+                                                        "Content-Length",
+                                                        List.of("sensitive-header-value")))));
+
+        assertEquals("Data Export retornou Content-Length inválido.", failure.getMessage());
+        assertNull(failure.getCause());
+    }
+
+    @Test
+    void rejectsNonAsciiDigitsInDeclaredLength() {
+        final DataExportHttpBodyHandler handler = new DataExportHttpBodyHandler(1, 2);
+
+        final IllegalStateException failure =
+                assertThrows(
+                        IllegalStateException.class,
+                        () ->
+                                handler.apply(
+                                        responseInfo(
+                                                200, Map.of("Content-Length", List.of("\u0663")))));
+
+        assertEquals(IllegalStateException.class, failure.getClass());
+        assertEquals("Data Export retornou Content-Length inválido.", failure.getMessage());
+    }
+
+    @Test
+    void boundsAnErrorBodyWhileDiscardingItsContent() {
+        final DataExportHttpBodyHandler handler = new DataExportHttpBodyHandler(1, 3);
+        for (final int status : new int[] {204, 429, 503}) {
+            final HttpResponse.BodySubscriber<byte[]> errorSubscriber =
+                    handler.apply(responseInfo(status, Map.of()));
+            final TestSubscription subscription = new TestSubscription();
+            errorSubscriber.onSubscribe(subscription);
+
+            errorSubscriber.onNext(
+                    List.of(ByteBuffer.wrap("four".getBytes(StandardCharsets.UTF_8))));
+            errorSubscriber.onComplete();
+
+            final CompletionException failure =
+                    assertThrows(
+                            CompletionException.class,
+                            () -> errorSubscriber.getBody().toCompletableFuture().join());
+            assertTrue(failure.getCause() instanceof DataExportResponseLimitExceededException);
+            assertTrue(subscription.cancelled.get());
+        }
+    }
+
+    @Test
+    void discardsAnErrorBodyThatFitsTheLimit() {
+        final DataExportHttpBodyHandler handler = new DataExportHttpBodyHandler(1, 3);
 
         final HttpResponse.BodySubscriber<byte[]> errorSubscriber =
                 handler.apply(responseInfo(429, Map.of()));
         final TestSubscription subscription = new TestSubscription();
         errorSubscriber.onSubscribe(subscription);
-        errorSubscriber.onNext(
-                List.of(ByteBuffer.wrap("ignored".getBytes(StandardCharsets.UTF_8))));
+        errorSubscriber.onNext(List.of(ByteBuffer.wrap("err".getBytes(StandardCharsets.UTF_8))));
         errorSubscriber.onComplete();
         assertEquals(0, errorSubscriber.getBody().toCompletableFuture().join().length);
     }

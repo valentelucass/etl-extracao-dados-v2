@@ -31,6 +31,13 @@ public final class GraphQlQueryParameters {
                 null);
     }
 
+    public static GraphQlQueryParameters picksTemporalForDate(final LocalDate requestDate) {
+        return new GraphQlQueryParameters(
+                GraphQlReadOperation.PICKS_TEMPORAL_REFERENCE,
+                Objects.requireNonNull(requestDate, "A data de Coletas é obrigatória."),
+                null);
+    }
+
     public static GraphQlQueryParameters freightsForWindow(
             final LocalDate startDate, final LocalDate endDate) {
         Objects.requireNonNull(startDate, "O início da janela de Fretes é obrigatório.");
@@ -50,7 +57,8 @@ public final class GraphQlQueryParameters {
         Objects.requireNonNull(target, "O objeto de parâmetros é obrigatório.");
         switch (operation) {
             case USERS_SNAPSHOT -> target.put("enabled", true);
-            case PICKS_TRANSITIONAL_SIDECAR -> target.put("requestDate", startDate.toString());
+            case PICKS_TRANSITIONAL_SIDECAR, PICKS_TEMPORAL_REFERENCE ->
+                    target.put("requestDate", startDate.toString());
             case FREIGHTS_TRANSITIONAL_SIDECAR ->
                     target.put("serviceAt", startDate + " - " + endDate);
         }

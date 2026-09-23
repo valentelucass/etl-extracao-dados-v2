@@ -6,8 +6,10 @@
   },
   "fields": [
     {"name": "sequence_code", "type": "integer", "label": "Identificador de sequência sintético"},
-    {"name": "pick_sequence_code", "type": "integer", "label": "Referência de pick sintética"},
+    {"name": "mft_pfs_pck_sequence_code", "type": "integer", "label": "Referência de pick sintética"},
     {"name": "mft_mfs_number", "type": "integer", "label": "Referência MDF-e sintética"},
+    {"name": "mft_mfs_key", "type": "string", "label": "Chave MDF-e sintética"},
+    {"name": "mdfe_status", "type": "string", "label": "Status MDF-e sintético"},
     {"name": "status", "type": "string", "label": "Status sintético"},
     {"name": "created_at", "type": "datetime", "label": "Criação sintética"},
     {"name": "departured_at", "type": "datetime", "label": "Saída sintética"},

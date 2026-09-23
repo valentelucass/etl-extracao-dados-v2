@@ -93,7 +93,8 @@ class GraphQlTransitionCatalogTest {
             }
         }
 
-        assertEquals(19, GraphQlTransitionalField.values().length);
+        assertEquals(25, GraphQlTransitionalField.values().length);
+        assertEquals(6, counts.get(GraphQlReadOperation.PICKS_TEMPORAL_REFERENCE));
         assertEquals(4, counts.get(GraphQlReadOperation.USERS_SNAPSHOT));
         assertTrue(
                 java.util.Arrays.stream(GraphQlTransitionalField.values())
@@ -118,10 +119,19 @@ class GraphQlTransitionCatalogTest {
                                 16_000_000));
 
         assertEquals(19, ledger.size());
+        final Map<String, List<String>> temporal =
+                rowsById(
+                        readBoundedCsv(
+                                Path.of("docs/catalogos/graphql-coletas-temporal.csv"), 256_000));
+        assertEquals(6, temporal.size());
         int portabilityMatches = 0;
         for (final GraphQlTransitionalField field : GraphQlTransitionalField.values()) {
             final String matrixId = field.name().replace('_', '-');
-            final List<String> ledgerRow = ledger.get(matrixId);
+            final List<String> ledgerRow =
+                    (field.operation() == GraphQlReadOperation.PICKS_TEMPORAL_REFERENCE
+                                    ? temporal
+                                    : ledger)
+                            .get(matrixId);
             assertEquals(11, ledgerRow.size());
             assertEquals(field.operation().name(), ledgerRow.get(1));
             assertEquals(field.path(), ledgerRow.get(2));
@@ -133,6 +143,10 @@ class GraphQlTransitionCatalogTest {
             assertEquals(field.evidenceLevel().name(), ledgerRow.get(8));
             assertEquals(field.promotionPolicy().name(), ledgerRow.get(9));
             assertEquals("YES", ledgerRow.get(10));
+
+            if (field.operation() == GraphQlReadOperation.PICKS_TEMPORAL_REFERENCE) {
+                continue; // Ledger novo não reescreve as 19 linhas históricas de portabilidade.
+            }
 
             final List<String> portabilityRow = portability.get(matrixId);
             assertEquals(42, portabilityRow.size());
@@ -214,7 +228,7 @@ class GraphQlTransitionCatalogTest {
     private static String expectedTemplate(final GraphQlReadOperation operation) {
         return switch (operation) {
             case USERS_SNAPSHOT -> "QUERY_USUARIOS_SISTEMA";
-            case PICKS_TRANSITIONAL_SIDECAR -> "QUERY_COLETAS";
+            case PICKS_TRANSITIONAL_SIDECAR, PICKS_TEMPORAL_REFERENCE -> "QUERY_COLETAS";
             case FREIGHTS_TRANSITIONAL_SIDECAR -> "QUERY_FRETES";
         };
     }

@@ -1,0 +1,640 @@
+{
+  "template": 4924,
+  "httpStatus": 200,
+  "curlExit": 0,
+  "bytes": 3766,
+  "elapsedMilliseconds": 899,
+  "failure": null,
+  "sample": {
+    "physicalRows": 2,
+    "profiledRows": 2,
+    "physicalLimitExceeded": false,
+    "empty": false,
+    "profiles": [
+      {
+        "path": "/comments",
+        "observations": 2,
+        "types": {
+          "STRING": 2
+        },
+        "emptyArrays": 0,
+        "arrayItems": 0,
+        "unprofiledObjectKeys": 0
+      },
+      {
+        "path": "/corporation_sequence_number",
+        "observations": 2,
+        "types": {
+          "INTEGER": 2
+        },
+        "emptyArrays": 0,
+        "arrayItems": 0,
+        "unprofiledObjectKeys": 0
+      },
+      {
+        "path": "/courtesy",
+        "observations": 2,
+        "types": {
+          "BOOLEAN": 2
+        },
+        "emptyArrays": 0,
+        "arrayItems": 0,
+        "unprofiledObjectKeys": 0
+      },
+      {
+        "path": "/emission_type",
+        "observations": 2,
+        "types": {
+          "STRING": 2
+        },
+        "emptyArrays": 0,
+        "arrayItems": 0,
+        "unprofiledObjectKeys": 0
+      },
+      {
+        "path": "/finished_at",
+        "observations": 2,
+        "types": {
+          "NULL": 2
+        },
+        "emptyArrays": 0,
+        "arrayItems": 0,
+        "unprofiledObjectKeys": 0
+      },
+      {
+        "path": "/fit_ant_ant_name",
+        "observations": 2,
+        "types": {
+          "STRING": 2
+        },
+        "emptyArrays": 0,
+        "arrayItems": 0,
+        "unprofiledObjectKeys": 0
+      },
+      {
+        "path": "/fit_ant_discount_value",
+        "observations": 2,
+        "types": {
+          "STRING": 2
+        },
+        "emptyArrays": 0,
+        "arrayItems": 0,
+        "unprofiledObjectKeys": 0
+      },
+      {
+        "path": "/fit_ant_document",
+        "observations": 2,
+        "types": {
+          "STRING": 2
+        },
+        "emptyArrays": 0,
+        "arrayItems": 0,
+        "unprofiledObjectKeys": 0
+      },
+      {
+        "path": "/fit_ant_ils_atn_transaction_date",
+        "observations": 2,
+        "types": {
+          "NULL": 2
+        },
+        "emptyArrays": 0,
+        "arrayItems": 0,
+        "unprofiledObjectKeys": 0
+      },
+      {
+        "path": "/fit_ant_ils_due_date",
+        "observations": 2,
+        "types": {
+          "STRING": 2
+        },
+        "emptyArrays": 0,
+        "arrayItems": 0,
+        "unprofiledObjectKeys": 0
+      },
+      {
+        "path": "/fit_ant_ils_original_due_date",
+        "observations": 2,
+        "types": {
+          "STRING": 2
+        },
+        "emptyArrays": 0,
+        "arrayItems": 0,
+        "unprofiledObjectKeys": 0
+      },
+      {
+        "path": "/fit_ant_interest_value",
+        "observations": 2,
+        "types": {
+          "STRING": 2
+        },
+        "emptyArrays": 0,
+        "arrayItems": 0,
+        "unprofiledObjectKeys": 0
+      },
+      {
+        "path": "/fit_ant_issue_date",
+        "observations": 2,
+        "types": {
+          "STRING": 2
+        },
+        "emptyArrays": 0,
+        "arrayItems": 0,
+        "unprofiledObjectKeys": 0
+      },
+      {
+        "path": "/fit_ant_tat_account_number",
+        "observations": 2,
+        "types": {
+          "STRING": 2
+        },
+        "emptyArrays": 0,
+        "arrayItems": 0,
+        "unprofiledObjectKeys": 0
+      },
+      {
+        "path": "/fit_ant_tat_agency_number",
+        "observations": 2,
+        "types": {
+          "STRING": 2
+        },
+        "emptyArrays": 0,
+        "arrayItems": 0,
+        "unprofiledObjectKeys": 0
+      },
+      {
+        "path": "/fit_ant_tat_bnk_name",
+        "observations": 2,
+        "types": {
+          "STRING": 2
+        },
+        "emptyArrays": 0,
+        "arrayItems": 0,
+        "unprofiledObjectKeys": 0
+      },
+      {
+        "path": "/fit_ant_tat_bro_description",
+        "observations": 2,
+        "types": {
+          "STRING": 2
+        },
+        "emptyArrays": 0,
+        "arrayItems": 0,
+        "unprofiledObjectKeys": 0
+      },
+      {
+        "path": "/fit_ant_tat_custom_instruction",
+        "observations": 2,
+        "types": {
+          "STRING": 2
+        },
+        "emptyArrays": 0,
+        "arrayItems": 0,
+        "unprofiledObjectKeys": 0
+      },
+      {
+        "path": "/fit_ant_value",
+        "observations": 2,
+        "types": {
+          "STRING": 2
+        },
+        "emptyArrays": 0,
+        "arrayItems": 0,
+        "unprofiledObjectKeys": 0
+      },
+      {
+        "path": "/fit_crn_psn_nickname",
+        "observations": 2,
+        "types": {
+          "STRING": 2
+        },
+        "emptyArrays": 0,
+        "arrayItems": 0,
+        "unprofiledObjectKeys": 0
+      },
+      {
+        "path": "/fit_d_t_created_at",
+        "observations": 2,
+        "types": {
+          "NULL": 2
+        },
+        "emptyArrays": 0,
+        "arrayItems": 0,
+        "unprofiledObjectKeys": 0
+      },
+      {
+        "path": "/fit_diy_sae_name",
+        "observations": 2,
+        "types": {
+          "STRING": 2
+        },
+        "emptyArrays": 0,
+        "arrayItems": 0,
+        "unprofiledObjectKeys": 0
+      },
+      {
+        "path": "/fit_dyn_drt_nickname",
+        "observations": 2,
+        "types": {
+          "STRING": 2
+        },
+        "emptyArrays": 0,
+        "arrayItems": 0,
+        "unprofiledObjectKeys": 0
+      },
+      {
+        "path": "/fit_fhe_cte_issued_at",
+        "observations": 2,
+        "types": {
+          "STRING": 2
+        },
+        "emptyArrays": 0,
+        "arrayItems": 0,
+        "unprofiledObjectKeys": 0
+      },
+      {
+        "path": "/fit_fhe_cte_key",
+        "observations": 2,
+        "types": {
+          "STRING": 2
+        },
+        "emptyArrays": 0,
+        "arrayItems": 0,
+        "unprofiledObjectKeys": 0
+      },
+      {
+        "path": "/fit_fhe_cte_number",
+        "observations": 2,
+        "types": {
+          "INTEGER": 2
+        },
+        "emptyArrays": 0,
+        "arrayItems": 0,
+        "unprofiledObjectKeys": 0
+      },
+      {
+        "path": "/fit_fhe_cte_status",
+        "observations": 2,
+        "types": {
+          "STRING": 2
+        },
+        "emptyArrays": 0,
+        "arrayItems": 0,
+        "unprofiledObjectKeys": 0
+      },
+      {
+        "path": "/fit_fhe_cte_status_result",
+        "observations": 2,
+        "types": {
+          "STRING": 2
+        },
+        "emptyArrays": 0,
+        "arrayItems": 0,
+        "unprofiledObjectKeys": 0
+      },
+      {
+        "path": "/fit_fsn_name",
+        "observations": 2,
+        "types": {
+          "STRING": 2
+        },
+        "emptyArrays": 0,
+        "arrayItems": 0,
+        "unprofiledObjectKeys": 0
+      },
+      {
+        "path": "/fit_fte_foe_ore_description",
+        "observations": 2,
+        "types": {
+          "NULL": 2
+        },
+        "emptyArrays": 0,
+        "arrayItems": 0,
+        "unprofiledObjectKeys": 0
+      },
+      {
+        "path": "/fit_fte_has_delivery_receipt",
+        "observations": 2,
+        "types": {
+          "BOOLEAN": 2
+        },
+        "emptyArrays": 0,
+        "arrayItems": 0,
+        "unprofiledObjectKeys": 0
+      },
+      {
+        "path": "/fit_fte_invoices_order_number",
+        "observations": 2,
+        "types": {
+          "ARRAY": 2
+        },
+        "emptyArrays": 1,
+        "arrayItems": 2,
+        "unprofiledObjectKeys": 0
+      },
+      {
+        "path": "/fit_fte_invoices_order_number/*",
+        "observations": 2,
+        "types": {
+          "STRING": 2
+        },
+        "emptyArrays": 0,
+        "arrayItems": 0,
+        "unprofiledObjectKeys": 0
+      },
+      {
+        "path": "/fit_nse_number",
+        "observations": 2,
+        "types": {
+          "NULL": 2
+        },
+        "emptyArrays": 0,
+        "arrayItems": 0,
+        "unprofiledObjectKeys": 0
+      },
+      {
+        "path": "/fit_pyr_cor_billing_cycle",
+        "observations": 2,
+        "types": {
+          "STRING": 2
+        },
+        "emptyArrays": 0,
+        "arrayItems": 0,
+        "unprofiledObjectKeys": 0
+      },
+      {
+        "path": "/fit_pyr_cor_billing_due_in_days",
+        "observations": 2,
+        "types": {
+          "INTEGER": 2
+        },
+        "emptyArrays": 0,
+        "arrayItems": 0,
+        "unprofiledObjectKeys": 0
+      },
+      {
+        "path": "/fit_pyr_document",
+        "observations": 2,
+        "types": {
+          "STRING": 2
+        },
+        "emptyArrays": 0,
+        "arrayItems": 0,
+        "unprofiledObjectKeys": 0
+      },
+      {
+        "path": "/fit_pyr_name",
+        "observations": 2,
+        "types": {
+          "STRING": 2
+        },
+        "emptyArrays": 0,
+        "arrayItems": 0,
+        "unprofiledObjectKeys": 0
+      },
+      {
+        "path": "/fit_rpt_document",
+        "observations": 2,
+        "types": {
+          "STRING": 2
+        },
+        "emptyArrays": 0,
+        "arrayItems": 0,
+        "unprofiledObjectKeys": 0
+      },
+      {
+        "path": "/fit_rpt_name",
+        "observations": 2,
+        "types": {
+          "STRING": 2
+        },
+        "emptyArrays": 0,
+        "arrayItems": 0,
+        "unprofiledObjectKeys": 0
+      },
+      {
+        "path": "/fit_sdr_document",
+        "observations": 2,
+        "types": {
+          "STRING": 2
+        },
+        "emptyArrays": 0,
+        "arrayItems": 0,
+        "unprofiledObjectKeys": 0
+      },
+      {
+        "path": "/fit_sdr_name",
+        "observations": 2,
+        "types": {
+          "STRING": 2
+        },
+        "emptyArrays": 0,
+        "arrayItems": 0,
+        "unprofiledObjectKeys": 0
+      },
+      {
+        "path": "/fit_sps_slr_psn_name",
+        "observations": 2,
+        "types": {
+          "STRING": 2
+        },
+        "emptyArrays": 0,
+        "arrayItems": 0,
+        "unprofiledObjectKeys": 0
+      },
+      {
+        "path": "/id",
+        "observations": 2,
+        "types": {
+          "INTEGER": 2
+        },
+        "emptyArrays": 0,
+        "arrayItems": 0,
+        "unprofiledObjectKeys": 0
+      },
+      {
+        "path": "/invoices_mapping",
+        "observations": 2,
+        "types": {
+          "ARRAY": 2
+        },
+        "emptyArrays": 0,
+        "arrayItems": 4,
+        "unprofiledObjectKeys": 0
+      },
+      {
+        "path": "/invoices_mapping/*",
+        "observations": 4,
+        "types": {
+          "STRING": 4
+        },
+        "emptyArrays": 0,
+        "arrayItems": 0,
+        "unprofiledObjectKeys": 0
+      },
+      {
+        "path": "/nfse_number",
+        "observations": 2,
+        "types": {
+          "STRING": 2
+        },
+        "emptyArrays": 0,
+        "arrayItems": 0,
+        "unprofiledObjectKeys": 0
+      },
+      {
+        "path": "/payment_type",
+        "observations": 2,
+        "types": {
+          "STRING": 2
+        },
+        "emptyArrays": 0,
+        "arrayItems": 0,
+        "unprofiledObjectKeys": 0
+      },
+      {
+        "path": "/reference_number",
+        "observations": 2,
+        "types": {
+          "STRING": 2
+        },
+        "emptyArrays": 0,
+        "arrayItems": 0,
+        "unprofiledObjectKeys": 0
+      },
+      {
+        "path": "/service_at",
+        "observations": 2,
+        "types": {
+          "STRING": 2
+        },
+        "emptyArrays": 0,
+        "arrayItems": 0,
+        "unprofiledObjectKeys": 0
+      },
+      {
+        "path": "/service_type",
+        "observations": 2,
+        "types": {
+          "STRING": 2
+        },
+        "emptyArrays": 0,
+        "arrayItems": 0,
+        "unprofiledObjectKeys": 0
+      },
+      {
+        "path": "/status",
+        "observations": 2,
+        "types": {
+          "STRING": 2
+        },
+        "emptyArrays": 0,
+        "arrayItems": 0,
+        "unprofiledObjectKeys": 0
+      },
+      {
+        "path": "/total",
+        "observations": 2,
+        "types": {
+          "STRING": 2
+        },
+        "emptyArrays": 0,
+        "arrayItems": 0,
+        "unprofiledObjectKeys": 0
+      },
+      {
+        "path": "/type",
+        "observations": 2,
+        "types": {
+          "STRING": 2
+        },
+        "emptyArrays": 0,
+        "arrayItems": 0,
+        "unprofiledObjectKeys": 0
+      }
+    ],
+    "candidateProfiles": [
+      {
+        "path": "/accounting_credit_id",
+        "missing": 2,
+        "nulls": 0,
+        "nonScalar": 0,
+        "sampledValues": 0,
+        "sampledDistinct": 0,
+        "sampledDuplicateValues": 0,
+        "identityProven": false
+      },
+      {
+        "path": "/accounting_debit_id",
+        "missing": 2,
+        "nulls": 0,
+        "nonScalar": 0,
+        "sampledValues": 0,
+        "sampledDistinct": 0,
+        "sampledDuplicateValues": 0,
+        "identityProven": false
+      },
+      {
+        "path": "/check_in_order_id",
+        "missing": 2,
+        "nulls": 0,
+        "nonScalar": 0,
+        "sampledValues": 0,
+        "sampledDistinct": 0,
+        "sampledDuplicateValues": 0,
+        "identityProven": false
+      },
+      {
+        "path": "/corporation_sequence_number",
+        "missing": 0,
+        "nulls": 0,
+        "nonScalar": 0,
+        "sampledValues": 2,
+        "sampledDistinct": 2,
+        "sampledDuplicateValues": 0,
+        "identityProven": false
+      },
+      {
+        "path": "/freight_id",
+        "missing": 2,
+        "nulls": 0,
+        "nonScalar": 0,
+        "sampledValues": 0,
+        "sampledDistinct": 0,
+        "sampledDuplicateValues": 0,
+        "identityProven": false
+      },
+      {
+        "path": "/id",
+        "missing": 0,
+        "nulls": 0,
+        "nonScalar": 0,
+        "sampledValues": 2,
+        "sampledDistinct": 2,
+        "sampledDuplicateValues": 0,
+        "identityProven": false
+      },
+      {
+        "path": "/installment_id",
+        "missing": 2,
+        "nulls": 0,
+        "nonScalar": 0,
+        "sampledValues": 0,
+        "sampledDistinct": 0,
+        "sampledDuplicateValues": 0,
+        "identityProven": false
+      },
+      {
+        "path": "/insurance_claim_id",
+        "missing": 2,
+        "nulls": 0,
+        "nonScalar": 0,
+        "sampledValues": 0,
+        "sampledDistinct": 0,
+        "sampledDuplicateValues": 0,
+        "identityProven": false
+      }
+    ],
+    "universalUniquenessProven": false,
+    "stabilityProven": false
+  }
+}

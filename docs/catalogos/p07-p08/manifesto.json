@@ -1,0 +1,31 @@
+{
+  "version": "p07-p08-succession-v1",
+  "status": "FAILED_TERMINAL_P08_NOT_STARTED",
+  "predecessor": {
+    "path": "docs/catalogos/p06-revisao/manifesto.json",
+    "sha256": "a0c23aa471941dbdf249f04755377d2728d1f7d159ce3d6ab177142d2c0af7f2"
+  },
+  "p07": {
+    "attempt": "p07-pos0205-verify-01",
+    "resultSha256": "e243c9c4b49de105bc17b5d7fb980d5f1dfcffef758b53b92fe45192c523b86f",
+    "jarSha256": "50828f6201117c77ea49b9f9dc373a1a748a4cb147e5f9501a383370921d393f",
+    "exit": 1,
+    "rollbackConfirmed": true,
+    "ownedProcessesRemaining": 0,
+    "cause": "EXP_PLAN_REPLAY_ORIGINAL_REQUIRED"
+  },
+  "p08": "NOT_STARTED_BLOCKED_BY_P07",
+  "changedDocumentation": [
+    {"path":"STATES.md","sha256":"e2e75885b05d97645ce4bae4566b6d26cd14930d96dfc71bdb671d7be4187a7e"},
+    {"path":"TRILHA_CONCLUSAO_POR_MODELO.md","sha256":"63a6b5108a77d84cf65ea54b45144d74d1913f00a0d8d143988c9ac114f73487"},
+    {"path":"docs/continuidade/RETOMADA.md","sha256":"62d033634bdd4f8fec4dc469732aee2af348eb197d7fb9bc4cd03c2a685c7822"},
+    {"path":"docs/continuidade/checkpoints/0206-p07-falha-replay-p08-bloqueado.md","sha256":"0de6245dda92563a226171f0b7c8225b4ad1debee88411a956d1ad3b37b2a302"},
+    {"path":"docs/catalogos/campanhas-integrais/P07-P08-POS0205.md","sha256":"e2823e730ab7c70cfed17a783132e5b8d169202708fd06ba70c204c3b86149a3"},
+    {"path":"docs/catalogos/campanhas-integrais/matriz-a-n.json","sha256":"ca62438477e60d258ff314a639349637935d02e2a903f42d056406e1db41e5d5"}
+  ],
+  "ledger": {
+    "path":"target/macrobloco-qualificacao-pacote-20260913-01/p07-p08-pos0205-ledger-01/ledger.json",
+    "sha256":"049f47594d547229847ccca409fbd671d43c45bff885e1847e8097ed398f93e6",
+    "state":"CLOSED_AFTER_P07_FAILURE"
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "version": 1,
+  "status": "THREE_STAGES_ADOPTED_EXECUTION_NOT_STARTED",
+  "predecessor": {
+    "path": "docs/continuidade/qualificacao-p07-p33/manifesto.json",
+    "sha256": "1fd01ece9d633cf6fb9765ad776d7fe8049b8c714258a9d118d268f108e1c88b"
+  },
+  "closedReceipt": {
+    "path": "target/qualificacao-p07-p33-20260922-01/physical/closed-receipt.json",
+    "sha256": "876b6977fb37a9dad10544311a0362f3a84790b011f3a2d5bbbb1d6822f9e863"
+  },
+  "changedFiles": [
+    {
+      "path": "STATES.md",
+      "before": "7032dd23534df5a4de818159ca89282afd0a20322e5ddbaa3c0617005b281f84",
+      "after": "5bd65b8193bb07f95f1d12b6847e1b9b823b8fdb6886ee80ebf7d23ae8aa7410",
+      "snapshot": "docs/continuidade/tres-etapas/before/STATES.md"
+    },
+    {
+      "path": "TRILHA_CONCLUSAO_POR_MODELO.md",
+      "before": "db4bec800d50cc74a547c1a5b950e2a64c9ffce1b412f6b689235fffd9cc455b",
+      "after": "aa9aba694cc1ae282b516e0b71320837a4cfe0cc70a628c6c3bfd0ca638fe0e4",
+      "snapshot": "docs/continuidade/tres-etapas/before/TRILHA_CONCLUSAO_POR_MODELO.md"
+    },
+    {
+      "path": "docs/continuidade/RETOMADA.md",
+      "before": "6e2a07f8f5b410cc1dffb03ee46c2a4b153c8c8a6719a7f3723ffeb9999afe0e",
+      "after": "2554e4e7d866b0c64555d0812e4ca6fecfe0fdd639b76bbaa07e2abeb580894d",
+      "snapshot": "docs/continuidade/tres-etapas/before/docs/continuidade/RETOMADA.md"
+    },
+    {
+      "path": "scripts/validation/QualificacaoP0733Succession.psm1",
+      "before": "ebb0e0fad75e5ad4e5a78d52c3d43cdc413665b33f0eed1c516828949b815ba4",
+      "after": "f422f398e17c5bd4959903b0761930c6ad1f389b2b1f5186c1bd8e200c613e5d",
+      "snapshot": "docs/continuidade/tres-etapas/before/scripts/validation/QualificacaoP0733Succession.psm1"
+    }
+  ],
+  "newFiles": [
+    {
+      "path": "docs/continuidade/tres-etapas/GUIA_E_PROMPTS.md",
+      "sha256": "60a50825ee42342dd2940111c7abbe630994735695c42be5373b29641d5592d7"
+    },
+    {
+      "path": "docs/continuidade/checkpoints/0244-finalizacao-em-tres-etapas.md",
+      "sha256": "993548c24812d8697f0e9cdd1636e8913db869259f1e88e152374c9df5e16ca0"
+    },
+    {
+      "path": "docs/continuidade/tres-etapas/before/STATES.md",
+      "sha256": "7032dd23534df5a4de818159ca89282afd0a20322e5ddbaa3c0617005b281f84"
+    },
+    {
+      "path": "docs/continuidade/tres-etapas/before/TRILHA_CONCLUSAO_POR_MODELO.md",
+      "sha256": "db4bec800d50cc74a547c1a5b950e2a64c9ffce1b412f6b689235fffd9cc455b"
+    },
+    {
+      "path": "docs/continuidade/tres-etapas/before/docs/continuidade/RETOMADA.md",
+      "sha256": "6e2a07f8f5b410cc1dffb03ee46c2a4b153c8c8a6719a7f3723ffeb9999afe0e"
+    },
+    {
+      "path": "docs/continuidade/tres-etapas/before/scripts/validation/QualificacaoP0733Succession.psm1",
+      "sha256": "ebb0e0fad75e5ad4e5a78d52c3d43cdc413665b33f0eed1c516828949b815ba4"
+    }
+  ],
+  "checkpoint": {
+    "path": "docs/continuidade/checkpoints/0244-finalizacao-em-tres-etapas.md",
+    "sha256": "993548c24812d8697f0e9cdd1636e8913db869259f1e88e152374c9df5e16ca0"
+  },
+  "newAcceptances": 0,
+  "sourceCalls": 0,
+  "databaseCalls": 0
+}

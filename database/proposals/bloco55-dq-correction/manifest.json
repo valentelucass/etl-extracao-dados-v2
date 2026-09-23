@@ -1,0 +1,33 @@
+{
+  "state": "PREPARED_NOT_APPLIED",
+  "database": "localhost/ETL_SISTEMA_V2_SHADOW",
+  "additionalPolicyDefinitions": 3,
+  "additionalCheckRows": 12,
+  "historicalPolicyDefinitionsAfter": 6,
+  "activePolicyDefinitionsAfter": 3,
+  "grantDelta": 0,
+  "scopeDelta": 0,
+  "validityExtended": false,
+  "files": [
+    {
+      "path": "apply.sql",
+      "sha256": "ff3e7450b7a25058bd2c219c5fedcd8ebc5a18809b3341e211b0787af1ce3936"
+    },
+    {
+      "path": "quality-references.json",
+      "sha256": "262b6f73ac472c8e0a3c8a96981a2437c5eb70a4750c0db42f630156012c39ea"
+    },
+    {
+      "path": "README.md",
+      "sha256": "759d51e2bafbf7295287920f334cb4a06b92cff1a0a741915572e5dfab193357"
+    },
+    {
+      "path": "recovery.sql",
+      "sha256": "ff12c07caa9f0f41bbe3037de968815c416fdbf3006ecc3dec17c72e15c55595"
+    },
+    {
+      "path": "verify.sql",
+      "sha256": "5bd7a538391d01a8698feed93b703e5bdbf47723c5a92ef58acce0d7f6181383"
+    }
+  ]
+}

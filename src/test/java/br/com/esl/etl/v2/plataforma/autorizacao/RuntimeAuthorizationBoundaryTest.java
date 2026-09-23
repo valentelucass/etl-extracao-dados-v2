@@ -412,6 +412,56 @@ class RuntimeAuthorizationBoundaryTest {
     }
 
     @Test
+    void secondClockFailureIsSanitizedAndAuditedWithoutAuthorizing() {
+        final var clockCalls = new AtomicInteger();
+        final var auditCalls = new AtomicInteger();
+        final String sensitive = "synthetic-sensitive-second-clock";
+        final Clock clock =
+                new Clock() {
+                    @Override
+                    public java.time.ZoneId getZone() {
+                        return ZoneOffset.UTC;
+                    }
+
+                    @Override
+                    public Clock withZone(final java.time.ZoneId zone) {
+                        return this;
+                    }
+
+                    @Override
+                    public Instant instant() {
+                        if (clockCalls.incrementAndGet() == 1) {
+                            return NOW;
+                        }
+                        throw new IllegalStateException(sensitive);
+                    }
+                };
+        final var boundary =
+                new RuntimeAuthorizationBoundary(
+                        () -> identity(RuntimeRoleSet.of(RuntimeRole.RUNTIME_OBSERVER)),
+                        RuntimeAuthorizationPolicy.standard(),
+                        event -> {
+                            assertEquals(
+                                    RuntimeAuthorizationReason.TEMPORAL_VALIDATION_UNAVAILABLE,
+                                    event.reason());
+                            auditCalls.incrementAndGet();
+                        },
+                        clock);
+
+        final var failure =
+                assertThrows(
+                        RuntimeAuthorizationException.class,
+                        () -> boundary.authorize(INVOCATION_ID, RuntimeAction.STATUS));
+
+        assertEquals(RuntimeAuthorizationReason.TEMPORAL_VALIDATION_UNAVAILABLE, failure.reason());
+        assertNull(failure.getCause());
+        assertEquals(0, failure.getSuppressed().length);
+        assertFalse(failure.toString().contains(sensitive));
+        assertEquals(2, clockCalls.get());
+        assertEquals(1, auditCalls.get());
+    }
+
+    @Test
     void rejectsIncompleteCompositionAndInvocationInputs() {
         final RuntimeAuthorizationAudit audit = event -> {};
         final RuntimeIdentityVerifier verifier =

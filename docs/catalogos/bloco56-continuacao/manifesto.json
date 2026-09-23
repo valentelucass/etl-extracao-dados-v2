@@ -1,0 +1,349 @@
+{
+  "version": 1,
+  "block": 56,
+  "phase": "CONTINUATION_SOURCE_INVESTIGATION",
+  "status": "REMOTE_INVESTIGATION_COMPLETE_IDENTITIES_BLOCKED",
+  "sourceReadCalls": 11,
+  "sourceDataRows": 8,
+  "newCanonicalAcceptances": 0,
+  "newIdentityAcceptances": 0,
+  "newVerticalImplementations": 0,
+  "sqlOperations": 0,
+  "runtimeCampaigns": 0,
+  "installations": 0,
+  "unknownResults": 0,
+  "rotationProven": false,
+  "credentialsChanged": false,
+  "budgetTransferred": false,
+  "validityRenewed": false,
+  "v2041": "UNRESOLVED",
+  "eligibleVerticals": [],
+  "progress": {
+    "done": 65,
+    "total": 115,
+    "pending": 50,
+    "openRoutes": 193,
+    "now": 0
+  },
+  "predecessor": {
+    "path": "docs/catalogos/bloco56/manifesto.json",
+    "sha256": "cf0e9dceacdc2a8b82fdeffad13e2d566c4bda4e6c27df72a7305f1d6dccdcfa"
+  },
+  "initialInventory": {
+    "path": "target/bloco56-continuacao/initial-inventory.json",
+    "sha256": "32f4b24e59d21d636783e249d0a86e05c87ca9eb0d707a71ac4ab78cbb59490d"
+  },
+  "changedExistingFiles": [
+    {
+      "path": "STATES.md",
+      "before": "86cc174c07220e24a261e79f1593df20e5b3cd3cda87977725247d37e71e7e75",
+      "after": "bcb6b7867000905c10d06abdfe6707ad498b613cc58e7805fa1936da73a1a477",
+      "snapshot": "docs/continuidade/historico/bloco56-preparacao/STATES.md"
+    },
+    {
+      "path": "docs/runbooks/trilha-de-chats-gpt-5-6.md",
+      "before": "78951e8fb51e0645dca1741a99c55a867b7e9bfb758c784e1749b9ccbdfda6b9",
+      "after": "65488440adf95f47022777020183a0daeb6ab6ff8aa06e734376fd2608d1f112",
+      "snapshot": "docs/continuidade/historico/bloco56-preparacao/docs/runbooks/trilha-de-chats-gpt-5-6.md"
+    },
+    {
+      "path": "docs/continuidade/RETOMADA.md",
+      "before": "73479a3e680f5c29a88f1c163ec78377d81e7c820a33386d2b617e070bcaed38",
+      "after": "765905aa78ed132107e3b7c6fcfe30a0de24cf3dcfda00d3c1ed3f00960503d6",
+      "snapshot": "docs/continuidade/historico/bloco56-preparacao/docs/continuidade/RETOMADA.md"
+    },
+    {
+      "path": "scripts/security/Invoke-OfflineSecretScan.ps1",
+      "before": "5d1ef3123d0da95c0665b499c4912394048bf2a542795024095ea36254c6275c",
+      "after": "e8dc312c3f97d852c628947d18e24433d20ba9b1f87f742e101f3b35878b2a27",
+      "snapshot": "docs/continuidade/historico/bloco56-preparacao/scripts/security/Invoke-OfflineSecretScan.ps1"
+    },
+    {
+      "path": "scripts/validation/Test-Bloco56PreparacaoGuards.ps1",
+      "before": "fa16c44c4f485d7d8e12ce45936bc418b698c13123ddde770fd97a255fc1cf9e",
+      "after": "d8a3433bf103e23f21b452ff7faeed083e52af2eb65ee9bf4f99c13ca7373b71",
+      "snapshot": "docs/continuidade/historico/bloco56-preparacao/scripts/validation/Test-Bloco56PreparacaoGuards.ps1"
+    },
+    {
+      "path": "scripts/validation/Test-Bloco56Preparacao.ps1",
+      "before": "ac8451f52b63034943182af0188ddd63b8510c5b353864a90aa650105b207066",
+      "after": "6315dfd8aefdcba94580c3c12a68ba7581ba9f4ec489bb389b95eb524224a585",
+      "snapshot": "docs/continuidade/historico/bloco56-preparacao/scripts/validation/Test-Bloco56Preparacao.ps1"
+    },
+    {
+      "path": "scripts/validation/Test-ContinuidadeAgentes.ps1",
+      "before": "43e63817b2d8ecbd1f34089bd8c7a96de6c5c1937444bb0ce94b35d8000e9bf0",
+      "after": "e3e7bc297d3ac053e6f73f2eada7c797e343f68ecb65daed4e07288771d20378",
+      "snapshot": "docs/continuidade/historico/bloco56-preparacao/scripts/validation/Test-ContinuidadeAgentes.ps1"
+    }
+  ],
+  "newFiles": [
+    {
+      "path": "docs/continuidade/checkpoints/0008-bloco56-validacao-da-continuacao.md",
+      "sha256": "3b6c51a49128cface0145ee79f0150c9de9b3045b13cc94db87d9d8ce15513cf"
+    },
+    {
+      "path": "docs/catalogos/bloco56-continuacao/evidencias/info-4924.json",
+      "sha256": "a8a478a478f79d48dd8a2e736f6075f025ebebf89bc06a1ee7e0c477467ffff9"
+    },
+    {
+      "path": "docs/catalogos/bloco56-continuacao/evidencias/info-10633.json",
+      "sha256": "820adb1551553ceed1f73222f85bc6e827ec8586235d3a4d78eff1b394db4dec"
+    },
+    {
+      "path": "docs/catalogos/bloco56-continuacao/evidencias/data-ledger.jsonl",
+      "sha256": "0482ddb34b6b196cf3ca1e14027bdfd2b789c4a1da4f84d12d691a9aa5ea98ea"
+    },
+    {
+      "path": "docs/catalogos/bloco56-continuacao/evidencias/data-8636.json",
+      "sha256": "ad12f65fd7e043a4a25fd59b97263cacdaa8e489ce0be75a34da2747976408a0"
+    },
+    {
+      "path": "docs/catalogos/bloco56-continuacao/evidencias/data-6392.json",
+      "sha256": "5407b66cb3fa3d4e237af10dac7dedb5742a59875df445822edaaff64249f292"
+    },
+    {
+      "path": "docs/catalogos/bloco56-continuacao/evidencias/data-4924.json",
+      "sha256": "465a13f3885125b1b509c6697809cda6bb81a71bf949f73a4112570331edef99"
+    },
+    {
+      "path": "docs/catalogos/bloco56-continuacao/evidencias/data-10633.json",
+      "sha256": "7f9423d73b102e99d98b77fe3beafc52a30b9b7b03864ed065100b9477cde037"
+    },
+    {
+      "path": "scripts/probes/Invoke-Bloco56SchemaProbe.ps1",
+      "sha256": "87c079fae9bffe6e0cf556f61eefe84dbe454647c00412dbf674c2ce0f5e12a3"
+    },
+    {
+      "path": "docs/catalogos/bloco56-continuacao/evidencias/info-6392.json",
+      "sha256": "09ba8966046e41bffb12cd9296953574937e56f558f1613ccda2835286354075"
+    },
+    {
+      "path": "scripts/probes/Invoke-Bloco56IdentityMetadataProbe.ps1",
+      "sha256": "75ac22961f229b44d5b90c2b4d99bb8675b5f67803c8c3860368ca662560488f"
+    },
+    {
+      "path": "scripts/validation/Test-Bloco56SecretExtensions.ps1",
+      "sha256": "50c4535c12d62bcff49a3ac319677338726fddd8e16ee04d16fc77a6982892ba"
+    },
+    {
+      "path": "scripts/validation/Test-Bloco56ProbeGuards.ps1",
+      "sha256": "79789a9e50e652a5532b8451f9c51cf698eac7da7fab96cd3ed6408abc7239f7"
+    },
+    {
+      "path": "scripts/validation/Test-Bloco56ContinuacaoGuards.ps1",
+      "sha256": "9f72a3d04892b550cbc8fa399a5d2cfd79fc7f6c6b255ba2c301516ef89aaea4"
+    },
+    {
+      "path": "scripts/validation/Test-Bloco56Continuacao.ps1",
+      "sha256": "4528fb1cd8f25708d0232d3a3b69c05a6ca234cdd46ee23746c099bc1a0cf1d2"
+    },
+    {
+      "path": "docs/continuidade/historico/bloco56-preparacao/scripts/security/Invoke-OfflineSecretScan.ps1",
+      "sha256": "5d1ef3123d0da95c0665b499c4912394048bf2a542795024095ea36254c6275c"
+    },
+    {
+      "path": "docs/continuidade/historico/bloco56-preparacao/docs/runbooks/trilha-de-chats-gpt-5-6.md",
+      "sha256": "78951e8fb51e0645dca1741a99c55a867b7e9bfb758c784e1749b9ccbdfda6b9"
+    },
+    {
+      "path": "docs/continuidade/historico/bloco56-preparacao/docs/continuidade/RETOMADA.md",
+      "sha256": "73479a3e680f5c29a88f1c163ec78377d81e7c820a33386d2b617e070bcaed38"
+    },
+    {
+      "path": "docs/continuidade/historico/bloco56-preparacao/scripts/validation/Test-ContinuidadeAgentes.ps1",
+      "sha256": "43e63817b2d8ecbd1f34089bd8c7a96de6c5c1937444bb0ce94b35d8000e9bf0"
+    },
+    {
+      "path": "scripts/probes/Invoke-Bloco56IdentityDataProbe.ps1",
+      "sha256": "67d9885bd68e9991cba8dd79f7b83ed65fea1fde74c87047810a373fd399fcb0"
+    },
+    {
+      "path": "docs/continuidade/historico/bloco56-preparacao/scripts/validation/Test-Bloco56PreparacaoGuards.ps1",
+      "sha256": "fa16c44c4f485d7d8e12ce45936bc418b698c13123ddde770fd97a255fc1cf9e"
+    },
+    {
+      "path": "docs/catalogos/bloco56-continuacao/evidencias/info-8636.json",
+      "sha256": "76a2b0791b4ba7b86ee4576d8f2a796fbe009b2627fcd8f1baa29964b2dcb082"
+    },
+    {
+      "path": "docs/catalogos/bloco56-continuacao/evidencias/request-data.json",
+      "sha256": "37966efdc24bcd0441257a97452b1905f783f34d28dc292be3bf220d0677dee5"
+    },
+    {
+      "path": "docs/continuidade/checkpoints/0007-bloco56-schema-e-limites.md",
+      "sha256": "5d19e38d58f9f49e9738c8c2283990ad28c0abb237f9b6c1791ec76cd3a5ec99"
+    },
+    {
+      "path": "docs/continuidade/checkpoints/0006-bloco56-amostras-remotas.md",
+      "sha256": "c43f84669a7838191d87dfb2102091542698143609af53d10fb3b22a2115b19d"
+    },
+    {
+      "path": "docs/continuidade/checkpoints/0005-bloco56-metadados-remotos.md",
+      "sha256": "ddaee80d031d703e0e821a591f090979f98a7b0bf532dc1eddc682f16fd41849"
+    },
+    {
+      "path": "docs/catalogos/bloco56-continuacao/schema-types.graphql",
+      "sha256": "e4aa7cc60d20b4bf1bb53d5b635020463d265b7193cc26fb0ca948270468cee5"
+    },
+    {
+      "path": "docs/catalogos/bloco56-continuacao/schema-root.graphql",
+      "sha256": "1e3480a33088480ddb745524bd1ed26b8e72802b5d00ead3bad048f2906fc9b4"
+    },
+    {
+      "path": "docs/catalogos/bloco56-continuacao/schema-relations.graphql",
+      "sha256": "2ace0496c5f98c9dc87f19b4b62ff099b936caafe1f5eff3f131095118d8d998"
+    },
+    {
+      "path": "docs/catalogos/bloco56-continuacao/README.md",
+      "sha256": "5ec46dc1fd3d52793d2d8f0772a80f300b4113248cd06a354847a14272d90625"
+    },
+    {
+      "path": "docs/continuidade/historico/bloco56-preparacao/STATES.md",
+      "sha256": "86cc174c07220e24a261e79f1593df20e5b3cd3cda87977725247d37e71e7e75"
+    },
+    {
+      "path": "docs/catalogos/bloco56-continuacao/evidencias/info-ledger.jsonl",
+      "sha256": "df17d01727bae258fd47c40f1c639883510584163a348f1b0dbf34bab6ee862a"
+    },
+    {
+      "path": "docs/catalogos/bloco56-continuacao/evidencias/schema-types.json",
+      "sha256": "bf7c77bc85ab91282d4a42ec0e34a1d86441f377bec4e34be8439c517a3dbb67"
+    },
+    {
+      "path": "docs/catalogos/bloco56-continuacao/evidencias/schema-root.json",
+      "sha256": "53d0b282ebf548c877143ce47dd25dbc1ef10dd827890283674b304a6833b1c5"
+    },
+    {
+      "path": "docs/catalogos/bloco56-continuacao/evidencias/schema-root-ledger.jsonl",
+      "sha256": "0c5007581d5cb8d0511bd98a217fb5fc4a14d6c7bb3827a356123f72159d70dc"
+    },
+    {
+      "path": "docs/catalogos/bloco56-continuacao/evidencias/schema-relations.json",
+      "sha256": "19fa3cf16db83c7fcfb0b4a4869464844a0b0db05e11e0200ab7717b9b9120cb"
+    },
+    {
+      "path": "docs/catalogos/bloco56-continuacao/evidencias/schema-relations-ledger.jsonl",
+      "sha256": "5e0997d4fc23e354f68368a9c4726ae5aa516b95f4962dd6bc8cc0eaaa7afcc5"
+    },
+    {
+      "path": "docs/catalogos/bloco56-continuacao/evidencias/request-schema-types.json",
+      "sha256": "0903b7127773bff8b0299c77d5d8bacdaae3e1021de55a10bf6920bb21b912e1"
+    },
+    {
+      "path": "docs/catalogos/bloco56-continuacao/evidencias/request-schema-root.json",
+      "sha256": "d0985a05cee92b5e4bef222f8b68f184403ea5f40453307056fd93fa9b2549ed"
+    },
+    {
+      "path": "docs/catalogos/bloco56-continuacao/evidencias/request-schema-relations.json",
+      "sha256": "c09bd75ad48e18ea2a2cec4e33788258ebeef47f3164442a6693aedea16ac124"
+    },
+    {
+      "path": "docs/catalogos/bloco56-continuacao/evidencias/request-info.json",
+      "sha256": "1c8dfb42a0079dbfad40ae5c7ade6f73601af9c3dabe933557273e000590ea84"
+    },
+    {
+      "path": "docs/catalogos/bloco56-continuacao/evidencias/schema-types-ledger.jsonl",
+      "sha256": "afb498d6634ffd7f31a49ecca6458c5c6c4c21579c63d35b6232f68d103067c8"
+    },
+    {
+      "path": "docs/continuidade/historico/bloco56-preparacao/scripts/validation/Test-Bloco56Preparacao.ps1",
+      "sha256": "ac8451f52b63034943182af0188ddd63b8510c5b353864a90aa650105b207066"
+    }
+  ],
+  "privateEvidence": [
+    {
+      "path": "target/bloco56-continuacao/schema-types.json",
+      "sha256": "bf7c77bc85ab91282d4a42ec0e34a1d86441f377bec4e34be8439c517a3dbb67"
+    },
+    {
+      "path": "target/bloco56-continuacao/data-6392.json",
+      "sha256": "5407b66cb3fa3d4e237af10dac7dedb5742a59875df445822edaaff64249f292"
+    },
+    {
+      "path": "target/bloco56-continuacao/data-8636.json",
+      "sha256": "ad12f65fd7e043a4a25fd59b97263cacdaa8e489ce0be75a34da2747976408a0"
+    },
+    {
+      "path": "target/bloco56-continuacao/data-ledger.jsonl",
+      "sha256": "0482ddb34b6b196cf3ca1e14027bdfd2b789c4a1da4f84d12d691a9aa5ea98ea"
+    },
+    {
+      "path": "target/bloco56-continuacao/info-10633.json",
+      "sha256": "820adb1551553ceed1f73222f85bc6e827ec8586235d3a4d78eff1b394db4dec"
+    },
+    {
+      "path": "target/bloco56-continuacao/info-4924.json",
+      "sha256": "a8a478a478f79d48dd8a2e736f6075f025ebebf89bc06a1ee7e0c477467ffff9"
+    },
+    {
+      "path": "target/bloco56-continuacao/info-6392.json",
+      "sha256": "09ba8966046e41bffb12cd9296953574937e56f558f1613ccda2835286354075"
+    },
+    {
+      "path": "target/bloco56-continuacao/info-8636.json",
+      "sha256": "76a2b0791b4ba7b86ee4576d8f2a796fbe009b2627fcd8f1baa29964b2dcb082"
+    },
+    {
+      "path": "target/bloco56-continuacao/info-ledger.jsonl",
+      "sha256": "df17d01727bae258fd47c40f1c639883510584163a348f1b0dbf34bab6ee862a"
+    },
+    {
+      "path": "target/bloco56-continuacao/data-4924.json",
+      "sha256": "465a13f3885125b1b509c6697809cda6bb81a71bf949f73a4112570331edef99"
+    },
+    {
+      "path": "target/bloco56-continuacao/request-data.json",
+      "sha256": "37966efdc24bcd0441257a97452b1905f783f34d28dc292be3bf220d0677dee5"
+    },
+    {
+      "path": "target/bloco56-continuacao/request-schema-relations.json",
+      "sha256": "c09bd75ad48e18ea2a2cec4e33788258ebeef47f3164442a6693aedea16ac124"
+    },
+    {
+      "path": "target/bloco56-continuacao/request-schema-root.json",
+      "sha256": "d0985a05cee92b5e4bef222f8b68f184403ea5f40453307056fd93fa9b2549ed"
+    },
+    {
+      "path": "target/bloco56-continuacao/request-schema-types.json",
+      "sha256": "0903b7127773bff8b0299c77d5d8bacdaae3e1021de55a10bf6920bb21b912e1"
+    },
+    {
+      "path": "target/bloco56-continuacao/schema-relations-ledger.jsonl",
+      "sha256": "5e0997d4fc23e354f68368a9c4726ae5aa516b95f4962dd6bc8cc0eaaa7afcc5"
+    },
+    {
+      "path": "target/bloco56-continuacao/schema-relations.json",
+      "sha256": "19fa3cf16db83c7fcfb0b4a4869464844a0b0db05e11e0200ab7717b9b9120cb"
+    },
+    {
+      "path": "target/bloco56-continuacao/schema-root-ledger.jsonl",
+      "sha256": "0c5007581d5cb8d0511bd98a217fb5fc4a14d6c7bb3827a356123f72159d70dc"
+    },
+    {
+      "path": "target/bloco56-continuacao/schema-root.json",
+      "sha256": "53d0b282ebf548c877143ce47dd25dbc1ef10dd827890283674b304a6833b1c5"
+    },
+    {
+      "path": "target/bloco56-continuacao/schema-types-ledger.jsonl",
+      "sha256": "afb498d6634ffd7f31a49ecca6458c5c6c4c21579c63d35b6232f68d103067c8"
+    },
+    {
+      "path": "target/bloco56-continuacao/request-info.json",
+      "sha256": "1c8dfb42a0079dbfad40ae5c7ade6f73601af9c3dabe933557273e000590ea84"
+    },
+    {
+      "path": "target/bloco56-continuacao/data-10633.json",
+      "sha256": "7f9423d73b102e99d98b77fe3beafc52a30b9b7b03864ed065100b9477cde037"
+    }
+  ],
+  "limitations": [
+    "SAMPLE_ONLY_NO_UNIVERSAL_IDENTITY",
+    "REQUESTED_WINDOW_NO_INDEPENDENT_FILTER_ORACLE",
+    "NO_TEMPORAL_REKEY_OR_TENANT_PROOF",
+    "NO_APPROVED_FISCAL_PRECEDENCE",
+    "SCHEMA_TYPE_IS_NOT_DATAEXPORT_CROSSWALK"
+  ],
+  "recovery": "docs/catalogos/bloco56-continuacao/README.md",
+  "checkpoint": "docs/continuidade/checkpoints/0008-bloco56-validacao-da-continuacao.md"
+}

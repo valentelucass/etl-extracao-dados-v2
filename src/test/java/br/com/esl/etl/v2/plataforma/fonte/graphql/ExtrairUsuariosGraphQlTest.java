@@ -12,6 +12,7 @@ import br.com.esl.etl.v2.modulos.usuarios.domain.UsuarioStageBatch;
 import br.com.esl.etl.v2.plataforma.contrato.ContractDriftException;
 import br.com.esl.etl.v2.plataforma.contrato.SourceDataEffect;
 import br.com.esl.etl.v2.plataforma.resiliencia.CancellationToken;
+import br.com.esl.etl.v2.plataforma.resiliencia.ResilienceCancelledException;
 import java.time.Clock;
 import java.time.Instant;
 import java.time.ZoneOffset;
@@ -26,6 +27,58 @@ class ExtrairUsuariosGraphQlTest {
 
     private static final Clock CLOCK =
             Clock.fixed(Instant.parse("2026-09-01T16:00:00Z"), ZoneOffset.UTC);
+
+    @Test
+    void cancellationWhileStampingMappedBatchPreventsStaging() {
+        final var fixture = GraphQlTestSupport.usersFixture();
+        final var cancellation = new br.com.esl.etl.v2.plataforma.resiliencia.CancellationSignal();
+        final var stages = new AtomicInteger();
+        final var secured =
+                GraphQlContractGate.enforce(
+                        GraphQlTestSupport.bound(
+                                cancellation,
+                                request ->
+                                        GraphQlTestSupport.observed(
+                                                fixture,
+                                                GraphQlTestSupport.usersPage(
+                                                        false, null, "{\"id\":1}"))),
+                        fixture.configuration(),
+                        fixture.guard(),
+                        cancellation);
+        final Clock stageClock =
+                new Clock() {
+                    @Override
+                    public java.time.ZoneId getZone() {
+                        return CLOCK.getZone();
+                    }
+
+                    @Override
+                    public Clock withZone(final java.time.ZoneId zone) {
+                        return this;
+                    }
+
+                    @Override
+                    public Instant instant() {
+                        cancellation.cancel();
+                        return CLOCK.instant();
+                    }
+                };
+        final var useCase =
+                new ExtrairUsuariosGraphQl(
+                        new GraphQlPageStreamer(secured, GraphQlExtractionAudit.noop(), CLOCK),
+                        batch -> stages.incrementAndGet(),
+                        new UsuarioGraphQlNodeMapper(),
+                        stageClock);
+        assertThrows(
+                ResilienceCancelledException.class,
+                () ->
+                        useCase.execute(
+                                fixture.guard().executionContext(),
+                                new GraphQlExtractionLimits(2, 20),
+                                cancellation));
+        assertEquals(0, stages.get());
+        assertThrows(ContractDriftException.class, () -> fixture.guard().complete());
+    }
 
     @Test
     void restartsWithoutCursorAndStagesOneSynchronousBoundedPageAtATime() {
@@ -141,6 +194,103 @@ class ExtrairUsuariosGraphQlTest {
         assertEquals(
                 ContractDriftException.Reason.VALIDATION_ALREADY_TERMINAL,
                 assertThrows(ContractDriftException.class, fixture.guard()::complete).reason());
+    }
+
+    @Test
+    void stagingFailureOnSecondPageStopsBeforeTheThirdFetch() {
+        final GraphQlTestSupport.Fixture fixture = GraphQlTestSupport.usersFixture();
+        final CancellationToken cancellation = CancellationToken.none();
+        final Queue<GraphQlPageResponse> pages = new ArrayDeque<>();
+        pages.add(
+                GraphQlTestSupport.observed(
+                        fixture,
+                        GraphQlTestSupport.usersPage(true, "synthetic-cursor-a", "{\"id\":1}")));
+        pages.add(
+                GraphQlTestSupport.observed(
+                        fixture,
+                        GraphQlTestSupport.usersPage(true, "synthetic-cursor-b", "{\"id\":2}")));
+        final AtomicInteger fetches = new AtomicInteger();
+        final List<Integer> stagedBatches = new ArrayList<>();
+        final GraphQlGateway secured =
+                GraphQlContractGate.enforce(
+                        GraphQlTestSupport.bound(
+                                cancellation,
+                                request -> {
+                                    fetches.incrementAndGet();
+                                    return pages.remove();
+                                }),
+                        fixture.configuration(),
+                        fixture.guard(),
+                        cancellation);
+        final ExtrairUsuariosGraphQl useCase =
+                new ExtrairUsuariosGraphQl(
+                        new GraphQlPageStreamer(secured, GraphQlExtractionAudit.noop(), CLOCK),
+                        batch -> {
+                            stagedBatches.add(batch.batchNumber());
+                            if (batch.batchNumber() == 2) {
+                                throw new IllegalStateException(
+                                        "synthetic-second-page-stage-failure");
+                            }
+                        },
+                        new UsuarioGraphQlNodeMapper(),
+                        CLOCK);
+
+        final IllegalStateException failure =
+                assertThrows(
+                        IllegalStateException.class,
+                        () ->
+                                useCase.execute(
+                                        fixture.guard().executionContext(),
+                                        new GraphQlExtractionLimits(3, 3),
+                                        cancellation));
+
+        assertEquals("synthetic-second-page-stage-failure", failure.getMessage());
+        assertEquals(2, fetches.get());
+        assertEquals(List.of(1, 2), stagedBatches);
+        assertThrows(ContractDriftException.class, fixture.guard()::complete);
+    }
+
+    @Test
+    void checksCancellationAfterMappingAndBeforeStagingThePage() {
+        final GraphQlTestSupport.Fixture fixture = GraphQlTestSupport.usersFixture();
+        final AtomicInteger cancellationChecks = new AtomicInteger();
+        final CancellationToken cancellation = () -> cancellationChecks.incrementAndGet() >= 4;
+        final AtomicInteger fetches = new AtomicInteger();
+        final AtomicInteger staged = new AtomicInteger();
+        final GraphQlGateway secured =
+                GraphQlContractGate.enforce(
+                        GraphQlTestSupport.bound(
+                                cancellation,
+                                request -> {
+                                    fetches.incrementAndGet();
+                                    return GraphQlTestSupport.observed(
+                                            fixture,
+                                            GraphQlTestSupport.usersPage(
+                                                    false,
+                                                    null,
+                                                    "{\"id\":1,\"name\":\"Synthetic\"}"));
+                                }),
+                        fixture.configuration(),
+                        fixture.guard(),
+                        cancellation);
+        final ExtrairUsuariosGraphQl useCase =
+                new ExtrairUsuariosGraphQl(
+                        new GraphQlPageStreamer(secured, GraphQlExtractionAudit.noop(), CLOCK),
+                        batch -> staged.incrementAndGet(),
+                        new UsuarioGraphQlNodeMapper(),
+                        CLOCK);
+
+        assertThrows(
+                ResilienceCancelledException.class,
+                () ->
+                        useCase.execute(
+                                fixture.guard().executionContext(),
+                                new GraphQlExtractionLimits(1, 1),
+                                cancellation));
+
+        assertEquals(1, fetches.get());
+        assertEquals(0, staged.get());
+        assertThrows(ContractDriftException.class, fixture.guard()::complete);
     }
 
     @Test

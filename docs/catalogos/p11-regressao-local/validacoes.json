@@ -1,0 +1,114 @@
+{
+  "status": "PASS",
+  "validations": [
+    {
+      "label": "regression",
+      "receipt": {
+        "path": "target/p11-regressao-20260921-01/validation-regression-01.json",
+        "sha256": "cb6204339eecdc146c23ef8473c6e0b74e7e96bbadfb192d8ea411d76bec7350"
+      },
+      "stdout": {
+        "path": "target/p11-regressao-20260921-01/validation-regression-01.stdout.log",
+        "sha256": "e19239b443a34fc015828df53e15b4d78d506ee36424b833457d2534f2b3401b"
+      },
+      "stderr": {
+        "path": "target/p11-regressao-20260921-01/validation-regression-01.stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "succession",
+      "receipt": {
+        "path": "target/p11-regressao-20260921-01/validation-succession-01.json",
+        "sha256": "3e451d9f84cd116476a30a260ebd38845bbd7e8754e0289ef6a358d8a5b320e6"
+      },
+      "stdout": {
+        "path": "target/p11-regressao-20260921-01/validation-succession-01.stdout.log",
+        "sha256": "5bed39425657529fbd7e0cf193070d80991bf382ea431e3e8c2558bca5a9daaa"
+      },
+      "stderr": {
+        "path": "target/p11-regressao-20260921-01/validation-succession-01.stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "trail",
+      "receipt": {
+        "path": "target/p11-regressao-20260921-01/validation-trail-01.json",
+        "sha256": "66244d97eb641fd4a0d901005797660e446e65d742c6350c60181458b3e46465"
+      },
+      "stdout": {
+        "path": "target/p11-regressao-20260921-01/validation-trail-01.stdout.log",
+        "sha256": "624cf8745192e08e633174136c6a19c5ec4aca77162e538068e2d18465f14e55"
+      },
+      "stderr": {
+        "path": "target/p11-regressao-20260921-01/validation-trail-01.stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "scan",
+      "receipt": {
+        "path": "target/p11-regressao-20260921-01/validation-scan-01.json",
+        "sha256": "f1ae044ce902d635e5f2075e08b7672cd85a393a14ff0f62e8d3507e0dd37cbe"
+      },
+      "stdout": {
+        "path": "target/p11-regressao-20260921-01/validation-scan-01.stdout.log",
+        "sha256": "ae2e188d8cf9d5df21a79f7c7b9a2406a52f52f3d269b43b0aaeca65117fbdd4"
+      },
+      "stderr": {
+        "path": "target/p11-regressao-20260921-01/validation-scan-01.stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  ],
+  "otherEvidence": [
+    {
+      "path": "target/p11-regressao-20260921-01/ast.json",
+      "sha256": "dc4f22a084a5aad03d4feb59cba66a9c7122936e4cd440ab931994caeaab7e91"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/diff-review.json",
+      "sha256": "6416dfca8ccc10610d18c2e6b5c58b31509f74ed7e54d94dcc35dcab9706230b"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/delta.diff",
+      "sha256": "3adbb060f9d76bf15f0d65b1cfd98a9a8ca2f116a691186f87a79a7907264e1b"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/scan-validators.json",
+      "sha256": "10139396ef50fc29742dc9de867d1dfd6ed59e50dec8f9bde3cb364a514aa1b2"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/scan-validators.stdout.log",
+      "sha256": "8f4d9810ee432589b251585f049f85a54e0b37b930a7c905650a720b342a8458"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/scan-checkpoints.json",
+      "sha256": "ea90be3514fc70837bd21d5e9de0006e9fe4b0ca8821c717f8819436a579e90b"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/scan-checkpoints.stdout.log",
+      "sha256": "4df8d13a707da641ba0e530578edfedec644db8c9bbe41b95d23836be81a2e92"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/guard-probe-final.stdout.log",
+      "sha256": "d8bd08e6e71b7c4042b5e4e64dd8d81f894f03d9915817f1c8c975d3757d2eee"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/jar-static.json",
+      "sha256": "26dc3d33f15f1a52c1a108c2286e5258c74a375cf7ddabb82978df4202868529"
+    }
+  ],
+  "matrixCounterexamples": 10,
+  "successionCounterexamples": 10,
+  "earlierSuccessionCounterexamples": 25,
+  "scans": {
+    "catalog": 6,
+    "validators": 299,
+    "checkpoints": 222,
+    "findings": 0
+  },
+  "discardedScan": "scan-diff-02 returned zero candidates because target is ignored; not counted as evidence",
+  "scope": "Local documentary succession, unit regression and static JAR; no physical acceptance"
+}

@@ -19,13 +19,13 @@
     'FRE-06' = @('CT-e, conta, receita e filial com paridade e owner podem alimentar o corte', 'divergência financeira ou campo sem owner mantém publicação bloqueada')
     'FRE-07' = @('13/04/2026 e 04/13/2026 seguem formatos inequívocos contratados', '02/04/2026 sem formato provado vai à quarentena, não usa heurística')
 
-    'MAN-01' = @('sequence_code=MAN-A cria uma raiz e picks/MDF-e viram filhos com chave natural', 'hash igual ou expansão repetida não cria outra raiz nem prova identidade sozinho')
-    'MAN-02' = @('finished_at vence closed_at e reducers escolhem raiz e filhos separadamente', 'MAX genérico ou chegada posterior não perde métricas nem soma escalares expandidos')
-    'MAN-03' = @('pick_sequence_code preservado entra em crosswalk com cardinalidade medida', 'órfão não cria FK inválida nem join heurístico para Coleta/Frete')
-    'MAN-04' = @('departured_at presente define competência; ausente usa created_at com proveniência', 'data de extração não substitui departured_at/created_at como competência')
+    'MAN-01' = @('sequence_code cria uma raiz escopada; mft_pfs_pck_sequence_code e mft_mfs_key criam filhos naturais separados, enquanto mdfe_status permanece escalar da raiz', 'hash, ordem, número ou status MDF-e isolado e coocorrência não criam identidade, filho ou relação')
+    'MAN-02' = @('a coorte do primeiro instante válido finished/closed/departured/created reduz raiz, pick e MDF-e separadamente por presença tri-state', 'empate divergente, MAX genérico, chegada posterior ou mdfe_status sem chave não decide nem cria filho')
+    'MAN-03' = @('mft_pfs_pck_sequence_code é preservado como candidato com presença/proveniência para V2-046a', 'órfão não vira nulo, FK inválida nem join heurístico para Coleta/Frete')
+    'MAN-04' = @('departured_at VALUE válido define competência; ABSENT/NULL usa created_at com proveniência', 'data inválida ou de extração não aciona fallback nem substitui competência')
     'MAN-05' = @('manifesto sem placa sentinela soma cada frete/coleta uma vez e soma capacidades', 'placa ACM0000 ou relação duplicada não entra nem duplica receita')
     'MAN-06' = @('classificação resolve por referência vigente e versionada com origem auditada', 'CNPJ ou nome hardcoded no código não decide frota/classificação')
-    'MAN-07' = @('raiz com km nulo recebe km não zero de outra expansão com proveniência', 'dois valores não zero conflitantes não são somados nem resolvidos por MAX silencioso')
+    'MAN-07' = @('NULL e um único VALUE complementam a métrica na coorte, preservando zero e proveniência', 'zero e não zero ou quaisquer valores distintos não são somados nem resolvidos por MAX')
 
     'COT-01' = @('sequence_code identifica a cotação e nfse_issued_at vence cte_issued_at/requested_at', 'dedupe apenas por requested_at ou chegada posterior não pode regredir o registro')
     'COT-02' = @('UF origem/destino encontra tarifa vigente única na referência versionada', 'combinação ausente ou duas tarifas vigentes não recebe valor inventado')

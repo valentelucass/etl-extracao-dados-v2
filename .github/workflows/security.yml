@@ -89,6 +89,9 @@ jobs:
           cache: maven
       - name: Enable Maven Wrapper
         run: chmod +x mvnw
+      - name: Validate dependency vulnerability policy implementation
+        shell: pwsh
+        run: ./scripts/validation/Test-DependencyVulnerabilityPolicy.ps1 -VerifyImplementation
       - name: Require NVD API key
         env:
           NVD_API_KEY: ${{ secrets.NVD_API_KEY }}
@@ -100,12 +103,16 @@ jobs:
       - name: Generate dependency vulnerability report
         env:
           NVD_API_KEY: ${{ secrets.NVD_API_KEY }}
-        run: ./mvnw --batch-mode --no-transfer-progress -Psecurity-audit verify
+        run: ./mvnw --batch-mode --no-transfer-progress -Psecurity-audit clean verify
+      - name: Validate dependency vulnerability machine report
+        if: always()
+        shell: pwsh
+        run: ./scripts/validation/Test-DependencyVulnerabilityPolicy.ps1 -ReportPath target/dependency-check/dependency-check-report.json
       - name: Preserve dependency report
         if: always()
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: dependency-check-report
           path: target/dependency-check/
-          if-no-files-found: warn
+          if-no-files-found: error
           retention-days: 14

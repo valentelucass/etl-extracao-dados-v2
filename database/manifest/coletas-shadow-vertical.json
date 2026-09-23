@@ -1,0 +1,71 @@
+{
+  "manifestVersion": 1,
+  "roadmapTask": "V2-010",
+  "localState": "IMPLEMENTED_IN_SHADOW",
+  "migration": "V010__create_coletas_shadow_vertical.sql",
+  "sourceContract": {
+    "contractId": "dataexport-6908",
+    "transport": "GET_WITH_QUERY_WITHOUT_FALLBACK",
+    "partition": "request_date",
+    "supplementaryLateData": "scopes.by_updated_at",
+    "supplementaryLateDataWatermark": "FORBIDDEN",
+    "datasetCompleteness": "NOT_PROVEN",
+    "maximumPageSize": 100
+  },
+  "identity": {
+    "sourceEntity": "coletas",
+    "sourceKey": "INTEGER_TYPE_TAGGED_ID",
+    "businessAlias": "VERSIONED_SEQUENCE_CODE_NEVER_TECHNICAL_KEY",
+    "canonicalKey": "BIGINT_IDENTITY",
+    "scope": ["environment_name", "source_instance", "tenant_scope", "entity_name", "source_key"]
+  },
+  "attributes": {
+    "presence": ["ABSENT", "NULL", "VALUE"],
+    "rawPayload": "SHADOW_STAGING_AND_CORE_ONLY_NO_LOGGING_OR_PUBLICATION",
+    "statusCatalog": "coletas-status-v1",
+    "freshnessOrder": ["status_updated_at", "finish_date", "service_date", "request_date"],
+    "terminalWinsOverOpenDespiteRetrogradeTimestamp": true,
+    "terminalNeverRegressesToOpen": true,
+    "terminalityDecisionOwner": "TYPED_WRAPPER_COL03_GENERIC_KERNEL_MAY_REPORT_STALE",
+    "unknownStatus": "RAW_PRESERVED_WITHOUT_INFERRED_TERMINALITY"
+  },
+  "relationships": {
+    "storage": "CANDIDATE_VALUE_PRESENCE_PROVENANCE_ONLY",
+    "manifestoToColeta": "BLOCKED_UNTIL_V2_046A",
+    "coletaToFrete": "BLOCKED_UNTIL_V2_046B",
+    "inferredJoin": "FORBIDDEN"
+  },
+  "absence": {
+    "rootPresenceEvidence": "RECORDED_PER_EXECUTION",
+    "completeness": "BLOCKED_NO_COMPLETENESS_PROOF",
+    "evaluation": "NOT_EVALUATED",
+    "sweep": "PROHIBITED_UNTIL_V2_013",
+    "deactivation": "PROHIBITED_UNTIL_V2_013"
+  },
+  "persistence": {
+    "stage": "stg.coleta_record",
+    "current": "core.coleta",
+    "alias": "ref.coleta_sequence_code_alias",
+    "presenceEvidence": "recon.coleta_root_presence_observation",
+    "stageProcedure": "stg.usp_stage_coleta_record",
+    "applyProcedure": "core.usp_apply_reconcile_publish_coletas",
+    "applicationMode": "SET_BASED",
+    "javaPerRecordDml": "PROHIBITED"
+  },
+  "runtime": {
+    "promotionPolicy": "SHADOW_UPSERT_ONLY",
+    "publicationObjects": "PROHIBITED",
+    "sweep": "PROHIBITED",
+    "cutover": "PROHIBITED",
+    "remoteCallsUsedAsEvidence": false,
+    "grantedProcedures": [
+      "stg.usp_stage_coleta_record",
+      "core.usp_apply_reconcile_publish_coletas"
+    ]
+  },
+  "verification": {
+    "structuralValidator": "database/validation/038_validate_coletas_shadow_vertical.sql",
+    "rollbackExercise": "database/validation/039_exercise_coletas_shadow_vertical_rollback.sql",
+    "manifestGate": "scripts/validation/Test-ColetasV2010ShadowVertical.ps1"
+  }
+}

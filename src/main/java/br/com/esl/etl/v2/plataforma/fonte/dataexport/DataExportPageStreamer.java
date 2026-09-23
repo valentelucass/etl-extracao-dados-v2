@@ -82,6 +82,8 @@ public final class DataExportPageStreamer {
                 cancellationToken.throwIfCancellationRequested();
                 final DataExportPageRequest request = initialRequest.withPage(currentPage);
                 final DataExportPageResponse response = gateway.fetch(request);
+                cancellationToken.throwIfCancellationRequested();
+                Objects.requireNonNull(response, "O gateway Data Export retornou resposta nula.");
                 final int recordCount = response.recordCount();
                 final Instant readAt = clock.instant();
                 final DataExportReadPage readPage =
@@ -101,6 +103,7 @@ public final class DataExportPageStreamer {
                 validateRecordLimit(recordsDelivered, recordCount, limits.maxRecords());
 
                 if (recordCount == 0) {
+                    cancellationToken.throwIfCancellationRequested();
                     final DataExportExtractionResult result =
                             new DataExportExtractionResult(
                                     executionId,
@@ -110,6 +113,7 @@ public final class DataExportPageStreamer {
                                     currentPage,
                                     startedAt,
                                     clock.instant());
+                    cancellationToken.throwIfCancellationRequested();
                     executionContext.dataExportTraversalCompleted(currentPage);
                     completionAttempted = true;
                     audit.executionCompleted(result);
@@ -120,6 +124,7 @@ public final class DataExportPageStreamer {
                 cancellationToken.throwIfCancellationRequested();
                 pageConsumer.accept(readPage);
                 recordsDelivered = Math.addExact(recordsDelivered, recordCount);
+                cancellationToken.throwIfCancellationRequested();
                 currentPage = nextPage(currentPage);
             }
             throw new IllegalStateException(

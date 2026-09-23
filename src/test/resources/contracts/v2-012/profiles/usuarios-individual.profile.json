@@ -1,0 +1,124 @@
+{
+  "schemaVersion": "V2_012_PROFILE_V1",
+  "profileId": "V2_012_USUARIOS_INDIVIDUAL",
+  "fixtureResource": "/contracts/v2-012/fixtures/usuarios-individual.synthetic.json",
+  "fixtureFingerprint": "c72d02b44d7affb54a0d565c53540e2425d1b6af6b7e9a9b42608631cc58e5d8",
+  "stages": ["V2_012A", "V2_012B", "V2_012C"],
+  "entity": "USUARIOS",
+  "sourceKind": "GRAPHQL",
+  "oracleKind": "GRAPHQL_PROVIDER",
+  "authorizationRequirement": "EXPLICIT_OWNER_AUTHORIZATION",
+  "contract": {
+    "contractId": "graphql-individual",
+    "contractVersion": "2026-08-31.v2-025a.1",
+    "documentReference": "graphql-users-snapshot",
+    "contractFingerprint": "a650e5e8313e6d45bff326dd8ab15920ba23da8e44e9237f538c4cbce76aca7c",
+    "identityFingerprint": "8e8ad89777277f3b8bf72b4b63f65d8fa813843380f44da99f0b035bbf788528"
+  },
+  "sourceKey": {
+    "path": "/node/id",
+    "wireTypes": ["INTEGER", "STRING"],
+    "typeTagged": true,
+    "domain": "CANONICAL_INTEGER_OR_NON_BLANK_STRING"
+  },
+  "businessAliases": [],
+  "childIdentities": [],
+  "relationshipCandidatePaths": [],
+  "scope": {
+    "sourceInstance": "REQUIRED_AT_EXECUTION",
+    "tenantScope": "REQUIRED_AT_EXECUTION",
+    "forbiddenValues": ["DEFAULT", "GLOBAL", "SINGLETON"]
+  },
+  "rootGrain": {
+    "recordRoot": "/data/individual/edges/*",
+    "acceptedRecordRoots": ["/data/individual/edges/*"],
+    "logicalGrain": "ONE_SCOPED_NODE_PER_EDGE",
+    "cardinality": "GRAPHQL_EDGE_NODES",
+    "expansionPolicy": "ONE_NODE_PER_EDGE",
+    "childPolicy": "NO_DATA_EXPORT_OR_INCREMENTAL_INFERENCE",
+    "rootScalarPaths": []
+  },
+  "pathScopes": {
+    "recordPaths": ["/node/id", "/node/name"],
+    "connectionPaths": ["/pageInfo/endCursor", "/pageInfo/hasNextPage"]
+  },
+  "absencePolicy": "NO_DEACTIVATION_BY_ABSENCE",
+  "filters": [
+    {
+      "path": "individual.enabled",
+      "role": "REQUIRED",
+      "watermark": false,
+      "requiredBooleanValue": true
+    }
+  ],
+  "pagination": {
+    "kind": "RELAY_CURSOR",
+    "maximumPageSize": 20,
+    "terminalCondition": "PAGE_INFO_NO_NEXT_PAGE_LOCAL_UNVERIFIED",
+    "perSemantics": "MAXIMUM_FIRST_ARGUMENT",
+    "shortPageIsTerminal": false,
+    "completenessProven": false,
+    "snapshotProven": false
+  },
+  "ordering": {
+    "expression": null,
+    "role": "ABSENT"
+  },
+  "temporal": {
+    "timestampPaths": [],
+    "precedence": [],
+    "timezone": null,
+    "timezoneRequirement": "NOT_APPLICABLE",
+    "translation": "ABSENT_NO_TEMPORAL_FIELD"
+  },
+  "status": {
+    "path": null,
+    "mode": "NOT_APPLICABLE",
+    "reference": null,
+    "policyFingerprint": null,
+    "unknownValuesAllowed": false
+  },
+  "limits": {
+    "maximumBytes": 65536,
+    "maximumRows": 1000,
+    "maximumPages": 100,
+    "maximumDepth": 16,
+    "maximumPaths": 256,
+    "maximumNodes": 4096
+  },
+  "fieldContracts": [
+    {"path": "/node/id", "wireTypes": ["INTEGER", "STRING"], "presenceStates": ["ABSENT", "NULL", "VALUE"]},
+    {"path": "/node/name", "wireTypes": ["STRING"], "presenceStates": ["NULL", "VALUE"]},
+    {"path": "/pageInfo/endCursor", "wireTypes": ["STRING"], "presenceStates": ["NULL", "VALUE"]},
+    {"path": "/pageInfo/hasNextPage", "wireTypes": ["BOOLEAN"], "presenceStates": ["VALUE"]}
+  ],
+  "expectedPaths": [
+    "/node/id",
+    "/node/name",
+    "/pageInfo/endCursor",
+    "/pageInfo/hasNextPage"
+  ],
+  "requiredChecks": [
+    "SYNTHETIC_ORACLE_AVAILABLE",
+    "SYNTHETIC_AUTHORIZATION_CONTEXT",
+    "EXPLICIT_SCOPES",
+    "ROOT_MATCH",
+    "PATH_SET_MATCH",
+    "FIELD_TYPES_MATCH",
+    "FILTERS_MATCH",
+    "RELATIONSHIPS_PRESERVED",
+    "ABSENCE_POLICY_PRESERVED",
+    "SOURCE_KEY_VALID",
+    "PRESENCE_TRI_STATE_TRACKED",
+    "TERMINAL_CONDITION_MET",
+    "LIMITS_RESPECTED",
+    "ORDERING_PARITY_VALID",
+    "TEMPORAL_EVIDENCE_VALID",
+    "STATUS_SEMANTICS_VALID",
+    "CARDINALITY_MATCH",
+    "ENTITY_RULES_MATCH",
+    "SYNTHETIC_EVIDENCE_ONLY"
+  ],
+  "profileStatus": "PREPARED_NOT_EXECUTED",
+  "gateStatus": "ORACLE_REQUIRED"
+}

@@ -1,0 +1,51 @@
+{
+  "database": "localhost/ETL_SISTEMA_V2_SHADOW",
+  "previousGrants": 25,
+  "grants": 32,
+  "grantDelta": 7,
+  "previousScopes": 10,
+  "scopes": 16,
+  "scopeDelta": 6,
+  "dqPolicies": 3,
+  "tariffReleases": 1,
+  "tariffRows": 2,
+  "validUntil": "2026-10-07T22:34:30.615Z",
+  "files": [
+    {
+      "path": "apply.sql",
+      "sha256": "70e4d620e38802daf5d1139aae84b76e7273d8e84eff5f3a670dd48de948d9cf"
+    },
+    {
+      "path": "quality-references.json",
+      "sha256": "49046bd0a21a95bf431334e490c1056189702b870944a107c3fa4a30156b57ab"
+    },
+    {
+      "path": "recovery.sql",
+      "sha256": "cbf1750e316c6e51a6a7234b4c66f4db6e258d33a1822e7baf0334a7ce452275"
+    },
+    {
+      "path": "seed-quality.sql",
+      "sha256": "a956c7e4c478da1020f39b6af388fb9421af42d0a9858778206ad22413da067a"
+    },
+    {
+      "path": "seed-tariff.sql",
+      "sha256": "ac633dfa298396bfa0ba8cbffd9e4b5eeca5de27ad1c3fd1a0aef916eef12409"
+    },
+    {
+      "path": "tariff.json",
+      "sha256": "dd60cb039196dfacdbf2a056929404b48ccd5601f1cdb36bb6b24dfa3eb4e101"
+    },
+    {
+      "path": "verify-before.sql",
+      "sha256": "70d1ae89fed32bcb28fffe1087f8421e69f3552558a37b2cc2151db03a98c88b"
+    },
+    {
+      "path": "verify-profile.sql",
+      "sha256": "06f43cad1c4c1da02087c0058083f15685436615da8e1be3da4893cee10f9d6e"
+    },
+    {
+      "path": "verify-seeds.sql",
+      "sha256": "9e66dbb9b6c918fdba2afbe1479e59596e1639068b3d25253a4de0bbf016f758"
+    }
+  ]
+}

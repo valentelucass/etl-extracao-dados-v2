@@ -1,0 +1,774 @@
+{
+  "version": 1,
+  "evidence": "SYNTHETIC_LOCAL_ONLY",
+  "entity": "COTACOES",
+  "decision": "docs/catalogos/cotacoes-v2-027/decisao-v01.json",
+  "decisionSha256": "96a425c653e00889a1a4d6e97389e549468372ed252d66727191ca4aa0ea14ef",
+  "cases": [
+    {
+      "id": "SYNTH_BASE_NINE_FIELDS",
+      "envelope": "{\"data\":[{\"sequence_code\":1,\"requested_at\":\"2026-07-15\"}]}",
+      "expected": [
+        {
+          "/quarantine": "NONE",
+          "/sequence_code/typed": "INTEGER:1",
+          "/requested_at/typed": "2026-07-15T03:00:00Z",
+          "/freshness/typed": "2026-07-15T03:00:00Z",
+          "/freshness/origin": "REQUESTED_AT",
+          "/freshness/businessDate": "2026-07-15",
+          "/sequence_code/presence": "VALUE",
+          "/sequence_code/mappedPresence": "VALUE",
+          "/sequence_code/wireType": "INTEGER",
+          "/requested_at/presence": "VALUE",
+          "/requested_at/mappedPresence": "VALUE",
+          "/requested_at/wireType": "STRING",
+          "/qoe_qes_fit_nse_issued_at/presence": "ABSENT",
+          "/qoe_qes_fit_nse_issued_at/mappedPresence": "ABSENT",
+          "/qoe_qes_fit_nse_issued_at/wireType": "ABSENT",
+          "/qoe_qes_fit_fhe_cte_issued_at/presence": "ABSENT",
+          "/qoe_qes_fit_fhe_cte_issued_at/mappedPresence": "ABSENT",
+          "/qoe_qes_fit_fhe_cte_issued_at/wireType": "ABSENT",
+          "/qoe_qes_total/presence": "ABSENT",
+          "/qoe_qes_total/mappedPresence": "ABSENT",
+          "/qoe_qes_total/wireType": "ABSENT",
+          "/qoe_crn_psn_nickname/presence": "ABSENT",
+          "/qoe_crn_psn_nickname/mappedPresence": "ABSENT",
+          "/qoe_crn_psn_nickname/wireType": "ABSENT",
+          "/qoe_uer_name/presence": "ABSENT",
+          "/qoe_uer_name/mappedPresence": "ABSENT",
+          "/qoe_uer_name/wireType": "ABSENT",
+          "/qoe_qes_ony_sae_code/presence": "ABSENT",
+          "/qoe_qes_ony_sae_code/mappedPresence": "ABSENT",
+          "/qoe_qes_ony_sae_code/wireType": "ABSENT",
+          "/qoe_qes_diy_sae_code/presence": "ABSENT",
+          "/qoe_qes_diy_sae_code/mappedPresence": "ABSENT",
+          "/qoe_qes_diy_sae_code/wireType": "ABSENT",
+          "/qoe_qes_fit_nse_issued_at/typed": "NULL",
+          "/qoe_qes_fit_fhe_cte_issued_at/typed": "NULL",
+          "/qoe_qes_total/typed": "NULL",
+          "/qoe_uer_name/typed": "NULL",
+          "/qoe_qes_ony_sae_code/typed": "NULL",
+          "/qoe_qes_diy_sae_code/typed": "NULL",
+          "/qoe_crn_psn_nickname/preserved": ""
+        }
+      ]
+    },
+    {
+      "id": "SYNTH_NULL_QOE_QES_FIT_NSE_ISSUED_AT",
+      "envelope": "{\"data\":[{\"sequence_code\":1,\"requested_at\":\"2026-07-15\",\"qoe_qes_fit_nse_issued_at\":null}]}",
+      "expected": [
+        {
+          "/quarantine": "NONE",
+          "/sequence_code/typed": "INTEGER:1",
+          "/requested_at/typed": "2026-07-15T03:00:00Z",
+          "/freshness/typed": "2026-07-15T03:00:00Z",
+          "/freshness/origin": "REQUESTED_AT",
+          "/freshness/businessDate": "2026-07-15",
+          "/sequence_code/presence": "VALUE",
+          "/sequence_code/mappedPresence": "VALUE",
+          "/sequence_code/wireType": "INTEGER",
+          "/requested_at/presence": "VALUE",
+          "/requested_at/mappedPresence": "VALUE",
+          "/requested_at/wireType": "STRING",
+          "/qoe_qes_fit_nse_issued_at/presence": "NULL",
+          "/qoe_qes_fit_nse_issued_at/mappedPresence": "NULL",
+          "/qoe_qes_fit_nse_issued_at/wireType": "NULL",
+          "/qoe_qes_fit_fhe_cte_issued_at/presence": "ABSENT",
+          "/qoe_qes_fit_fhe_cte_issued_at/mappedPresence": "ABSENT",
+          "/qoe_qes_fit_fhe_cte_issued_at/wireType": "ABSENT",
+          "/qoe_qes_total/presence": "ABSENT",
+          "/qoe_qes_total/mappedPresence": "ABSENT",
+          "/qoe_qes_total/wireType": "ABSENT",
+          "/qoe_crn_psn_nickname/presence": "ABSENT",
+          "/qoe_crn_psn_nickname/mappedPresence": "ABSENT",
+          "/qoe_crn_psn_nickname/wireType": "ABSENT",
+          "/qoe_uer_name/presence": "ABSENT",
+          "/qoe_uer_name/mappedPresence": "ABSENT",
+          "/qoe_uer_name/wireType": "ABSENT",
+          "/qoe_qes_ony_sae_code/presence": "ABSENT",
+          "/qoe_qes_ony_sae_code/mappedPresence": "ABSENT",
+          "/qoe_qes_ony_sae_code/wireType": "ABSENT",
+          "/qoe_qes_diy_sae_code/presence": "ABSENT",
+          "/qoe_qes_diy_sae_code/mappedPresence": "ABSENT",
+          "/qoe_qes_diy_sae_code/wireType": "ABSENT",
+          "/qoe_qes_fit_nse_issued_at/typed": "NULL",
+          "/qoe_qes_fit_fhe_cte_issued_at/typed": "NULL",
+          "/qoe_qes_total/typed": "NULL",
+          "/qoe_uer_name/typed": "NULL",
+          "/qoe_qes_ony_sae_code/typed": "NULL",
+          "/qoe_qes_diy_sae_code/typed": "NULL",
+          "/qoe_crn_psn_nickname/preserved": ""
+        }
+      ]
+    },
+    {
+      "id": "SYNTH_NULL_QOE_QES_FIT_FHE_CTE_ISSUED_AT",
+      "envelope": "{\"data\":[{\"sequence_code\":1,\"requested_at\":\"2026-07-15\",\"qoe_qes_fit_fhe_cte_issued_at\":null}]}",
+      "expected": [
+        {
+          "/quarantine": "NONE",
+          "/sequence_code/typed": "INTEGER:1",
+          "/requested_at/typed": "2026-07-15T03:00:00Z",
+          "/freshness/typed": "2026-07-15T03:00:00Z",
+          "/freshness/origin": "REQUESTED_AT",
+          "/freshness/businessDate": "2026-07-15",
+          "/sequence_code/presence": "VALUE",
+          "/sequence_code/mappedPresence": "VALUE",
+          "/sequence_code/wireType": "INTEGER",
+          "/requested_at/presence": "VALUE",
+          "/requested_at/mappedPresence": "VALUE",
+          "/requested_at/wireType": "STRING",
+          "/qoe_qes_fit_nse_issued_at/presence": "ABSENT",
+          "/qoe_qes_fit_nse_issued_at/mappedPresence": "ABSENT",
+          "/qoe_qes_fit_nse_issued_at/wireType": "ABSENT",
+          "/qoe_qes_fit_fhe_cte_issued_at/presence": "NULL",
+          "/qoe_qes_fit_fhe_cte_issued_at/mappedPresence": "NULL",
+          "/qoe_qes_fit_fhe_cte_issued_at/wireType": "NULL",
+          "/qoe_qes_total/presence": "ABSENT",
+          "/qoe_qes_total/mappedPresence": "ABSENT",
+          "/qoe_qes_total/wireType": "ABSENT",
+          "/qoe_crn_psn_nickname/presence": "ABSENT",
+          "/qoe_crn_psn_nickname/mappedPresence": "ABSENT",
+          "/qoe_crn_psn_nickname/wireType": "ABSENT",
+          "/qoe_uer_name/presence": "ABSENT",
+          "/qoe_uer_name/mappedPresence": "ABSENT",
+          "/qoe_uer_name/wireType": "ABSENT",
+          "/qoe_qes_ony_sae_code/presence": "ABSENT",
+          "/qoe_qes_ony_sae_code/mappedPresence": "ABSENT",
+          "/qoe_qes_ony_sae_code/wireType": "ABSENT",
+          "/qoe_qes_diy_sae_code/presence": "ABSENT",
+          "/qoe_qes_diy_sae_code/mappedPresence": "ABSENT",
+          "/qoe_qes_diy_sae_code/wireType": "ABSENT",
+          "/qoe_qes_fit_nse_issued_at/typed": "NULL",
+          "/qoe_qes_fit_fhe_cte_issued_at/typed": "NULL",
+          "/qoe_qes_total/typed": "NULL",
+          "/qoe_uer_name/typed": "NULL",
+          "/qoe_qes_ony_sae_code/typed": "NULL",
+          "/qoe_qes_diy_sae_code/typed": "NULL",
+          "/qoe_crn_psn_nickname/preserved": ""
+        }
+      ]
+    },
+    {
+      "id": "SYNTH_NULL_QOE_QES_TOTAL",
+      "envelope": "{\"data\":[{\"sequence_code\":1,\"requested_at\":\"2026-07-15\",\"qoe_qes_total\":null}]}",
+      "expected": [
+        {
+          "/quarantine": "NONE",
+          "/sequence_code/typed": "INTEGER:1",
+          "/requested_at/typed": "2026-07-15T03:00:00Z",
+          "/freshness/typed": "2026-07-15T03:00:00Z",
+          "/freshness/origin": "REQUESTED_AT",
+          "/freshness/businessDate": "2026-07-15",
+          "/sequence_code/presence": "VALUE",
+          "/sequence_code/mappedPresence": "VALUE",
+          "/sequence_code/wireType": "INTEGER",
+          "/requested_at/presence": "VALUE",
+          "/requested_at/mappedPresence": "VALUE",
+          "/requested_at/wireType": "STRING",
+          "/qoe_qes_fit_nse_issued_at/presence": "ABSENT",
+          "/qoe_qes_fit_nse_issued_at/mappedPresence": "ABSENT",
+          "/qoe_qes_fit_nse_issued_at/wireType": "ABSENT",
+          "/qoe_qes_fit_fhe_cte_issued_at/presence": "ABSENT",
+          "/qoe_qes_fit_fhe_cte_issued_at/mappedPresence": "ABSENT",
+          "/qoe_qes_fit_fhe_cte_issued_at/wireType": "ABSENT",
+          "/qoe_qes_total/presence": "NULL",
+          "/qoe_qes_total/mappedPresence": "NULL",
+          "/qoe_qes_total/wireType": "NULL",
+          "/qoe_crn_psn_nickname/presence": "ABSENT",
+          "/qoe_crn_psn_nickname/mappedPresence": "ABSENT",
+          "/qoe_crn_psn_nickname/wireType": "ABSENT",
+          "/qoe_uer_name/presence": "ABSENT",
+          "/qoe_uer_name/mappedPresence": "ABSENT",
+          "/qoe_uer_name/wireType": "ABSENT",
+          "/qoe_qes_ony_sae_code/presence": "ABSENT",
+          "/qoe_qes_ony_sae_code/mappedPresence": "ABSENT",
+          "/qoe_qes_ony_sae_code/wireType": "ABSENT",
+          "/qoe_qes_diy_sae_code/presence": "ABSENT",
+          "/qoe_qes_diy_sae_code/mappedPresence": "ABSENT",
+          "/qoe_qes_diy_sae_code/wireType": "ABSENT",
+          "/qoe_qes_fit_nse_issued_at/typed": "NULL",
+          "/qoe_qes_fit_fhe_cte_issued_at/typed": "NULL",
+          "/qoe_qes_total/typed": "NULL",
+          "/qoe_uer_name/typed": "NULL",
+          "/qoe_qes_ony_sae_code/typed": "NULL",
+          "/qoe_qes_diy_sae_code/typed": "NULL",
+          "/qoe_crn_psn_nickname/preserved": ""
+        }
+      ]
+    },
+    {
+      "id": "SYNTH_NULL_QOE_CRN_PSN_NICKNAME",
+      "envelope": "{\"data\":[{\"sequence_code\":1,\"requested_at\":\"2026-07-15\",\"qoe_crn_psn_nickname\":null}]}",
+      "expected": [
+        {
+          "/quarantine": "NONE",
+          "/sequence_code/typed": "INTEGER:1",
+          "/requested_at/typed": "2026-07-15T03:00:00Z",
+          "/freshness/typed": "2026-07-15T03:00:00Z",
+          "/freshness/origin": "REQUESTED_AT",
+          "/freshness/businessDate": "2026-07-15",
+          "/sequence_code/presence": "VALUE",
+          "/sequence_code/mappedPresence": "VALUE",
+          "/sequence_code/wireType": "INTEGER",
+          "/requested_at/presence": "VALUE",
+          "/requested_at/mappedPresence": "VALUE",
+          "/requested_at/wireType": "STRING",
+          "/qoe_qes_fit_nse_issued_at/presence": "ABSENT",
+          "/qoe_qes_fit_nse_issued_at/mappedPresence": "ABSENT",
+          "/qoe_qes_fit_nse_issued_at/wireType": "ABSENT",
+          "/qoe_qes_fit_fhe_cte_issued_at/presence": "ABSENT",
+          "/qoe_qes_fit_fhe_cte_issued_at/mappedPresence": "ABSENT",
+          "/qoe_qes_fit_fhe_cte_issued_at/wireType": "ABSENT",
+          "/qoe_qes_total/presence": "ABSENT",
+          "/qoe_qes_total/mappedPresence": "ABSENT",
+          "/qoe_qes_total/wireType": "ABSENT",
+          "/qoe_crn_psn_nickname/presence": "NULL",
+          "/qoe_crn_psn_nickname/mappedPresence": "NULL",
+          "/qoe_crn_psn_nickname/wireType": "NULL",
+          "/qoe_uer_name/presence": "ABSENT",
+          "/qoe_uer_name/mappedPresence": "ABSENT",
+          "/qoe_uer_name/wireType": "ABSENT",
+          "/qoe_qes_ony_sae_code/presence": "ABSENT",
+          "/qoe_qes_ony_sae_code/mappedPresence": "ABSENT",
+          "/qoe_qes_ony_sae_code/wireType": "ABSENT",
+          "/qoe_qes_diy_sae_code/presence": "ABSENT",
+          "/qoe_qes_diy_sae_code/mappedPresence": "ABSENT",
+          "/qoe_qes_diy_sae_code/wireType": "ABSENT",
+          "/qoe_qes_fit_nse_issued_at/typed": "NULL",
+          "/qoe_qes_fit_fhe_cte_issued_at/typed": "NULL",
+          "/qoe_qes_total/typed": "NULL",
+          "/qoe_uer_name/typed": "NULL",
+          "/qoe_qes_ony_sae_code/typed": "NULL",
+          "/qoe_qes_diy_sae_code/typed": "NULL",
+          "/qoe_crn_psn_nickname/preserved": "null"
+        }
+      ]
+    },
+    {
+      "id": "SYNTH_NULL_QOE_UER_NAME",
+      "envelope": "{\"data\":[{\"sequence_code\":1,\"requested_at\":\"2026-07-15\",\"qoe_uer_name\":null}]}",
+      "expected": [
+        {
+          "/quarantine": "NONE",
+          "/sequence_code/typed": "INTEGER:1",
+          "/requested_at/typed": "2026-07-15T03:00:00Z",
+          "/freshness/typed": "2026-07-15T03:00:00Z",
+          "/freshness/origin": "REQUESTED_AT",
+          "/freshness/businessDate": "2026-07-15",
+          "/sequence_code/presence": "VALUE",
+          "/sequence_code/mappedPresence": "VALUE",
+          "/sequence_code/wireType": "INTEGER",
+          "/requested_at/presence": "VALUE",
+          "/requested_at/mappedPresence": "VALUE",
+          "/requested_at/wireType": "STRING",
+          "/qoe_qes_fit_nse_issued_at/presence": "ABSENT",
+          "/qoe_qes_fit_nse_issued_at/mappedPresence": "ABSENT",
+          "/qoe_qes_fit_nse_issued_at/wireType": "ABSENT",
+          "/qoe_qes_fit_fhe_cte_issued_at/presence": "ABSENT",
+          "/qoe_qes_fit_fhe_cte_issued_at/mappedPresence": "ABSENT",
+          "/qoe_qes_fit_fhe_cte_issued_at/wireType": "ABSENT",
+          "/qoe_qes_total/presence": "ABSENT",
+          "/qoe_qes_total/mappedPresence": "ABSENT",
+          "/qoe_qes_total/wireType": "ABSENT",
+          "/qoe_crn_psn_nickname/presence": "ABSENT",
+          "/qoe_crn_psn_nickname/mappedPresence": "ABSENT",
+          "/qoe_crn_psn_nickname/wireType": "ABSENT",
+          "/qoe_uer_name/presence": "NULL",
+          "/qoe_uer_name/mappedPresence": "NULL",
+          "/qoe_uer_name/wireType": "NULL",
+          "/qoe_qes_ony_sae_code/presence": "ABSENT",
+          "/qoe_qes_ony_sae_code/mappedPresence": "ABSENT",
+          "/qoe_qes_ony_sae_code/wireType": "ABSENT",
+          "/qoe_qes_diy_sae_code/presence": "ABSENT",
+          "/qoe_qes_diy_sae_code/mappedPresence": "ABSENT",
+          "/qoe_qes_diy_sae_code/wireType": "ABSENT",
+          "/qoe_qes_fit_nse_issued_at/typed": "NULL",
+          "/qoe_qes_fit_fhe_cte_issued_at/typed": "NULL",
+          "/qoe_qes_total/typed": "NULL",
+          "/qoe_uer_name/typed": "NULL",
+          "/qoe_qes_ony_sae_code/typed": "NULL",
+          "/qoe_qes_diy_sae_code/typed": "NULL",
+          "/qoe_crn_psn_nickname/preserved": ""
+        }
+      ]
+    },
+    {
+      "id": "SYNTH_NULL_QOE_QES_ONY_SAE_CODE",
+      "envelope": "{\"data\":[{\"sequence_code\":1,\"requested_at\":\"2026-07-15\",\"qoe_qes_ony_sae_code\":null}]}",
+      "expected": [
+        {
+          "/quarantine": "NONE",
+          "/sequence_code/typed": "INTEGER:1",
+          "/requested_at/typed": "2026-07-15T03:00:00Z",
+          "/freshness/typed": "2026-07-15T03:00:00Z",
+          "/freshness/origin": "REQUESTED_AT",
+          "/freshness/businessDate": "2026-07-15",
+          "/sequence_code/presence": "VALUE",
+          "/sequence_code/mappedPresence": "VALUE",
+          "/sequence_code/wireType": "INTEGER",
+          "/requested_at/presence": "VALUE",
+          "/requested_at/mappedPresence": "VALUE",
+          "/requested_at/wireType": "STRING",
+          "/qoe_qes_fit_nse_issued_at/presence": "ABSENT",
+          "/qoe_qes_fit_nse_issued_at/mappedPresence": "ABSENT",
+          "/qoe_qes_fit_nse_issued_at/wireType": "ABSENT",
+          "/qoe_qes_fit_fhe_cte_issued_at/presence": "ABSENT",
+          "/qoe_qes_fit_fhe_cte_issued_at/mappedPresence": "ABSENT",
+          "/qoe_qes_fit_fhe_cte_issued_at/wireType": "ABSENT",
+          "/qoe_qes_total/presence": "ABSENT",
+          "/qoe_qes_total/mappedPresence": "ABSENT",
+          "/qoe_qes_total/wireType": "ABSENT",
+          "/qoe_crn_psn_nickname/presence": "ABSENT",
+          "/qoe_crn_psn_nickname/mappedPresence": "ABSENT",
+          "/qoe_crn_psn_nickname/wireType": "ABSENT",
+          "/qoe_uer_name/presence": "ABSENT",
+          "/qoe_uer_name/mappedPresence": "ABSENT",
+          "/qoe_uer_name/wireType": "ABSENT",
+          "/qoe_qes_ony_sae_code/presence": "NULL",
+          "/qoe_qes_ony_sae_code/mappedPresence": "NULL",
+          "/qoe_qes_ony_sae_code/wireType": "NULL",
+          "/qoe_qes_diy_sae_code/presence": "ABSENT",
+          "/qoe_qes_diy_sae_code/mappedPresence": "ABSENT",
+          "/qoe_qes_diy_sae_code/wireType": "ABSENT",
+          "/qoe_qes_fit_nse_issued_at/typed": "NULL",
+          "/qoe_qes_fit_fhe_cte_issued_at/typed": "NULL",
+          "/qoe_qes_total/typed": "NULL",
+          "/qoe_uer_name/typed": "NULL",
+          "/qoe_qes_ony_sae_code/typed": "NULL",
+          "/qoe_qes_diy_sae_code/typed": "NULL",
+          "/qoe_crn_psn_nickname/preserved": ""
+        }
+      ]
+    },
+    {
+      "id": "SYNTH_NULL_QOE_QES_DIY_SAE_CODE",
+      "envelope": "{\"data\":[{\"sequence_code\":1,\"requested_at\":\"2026-07-15\",\"qoe_qes_diy_sae_code\":null}]}",
+      "expected": [
+        {
+          "/quarantine": "NONE",
+          "/sequence_code/typed": "INTEGER:1",
+          "/requested_at/typed": "2026-07-15T03:00:00Z",
+          "/freshness/typed": "2026-07-15T03:00:00Z",
+          "/freshness/origin": "REQUESTED_AT",
+          "/freshness/businessDate": "2026-07-15",
+          "/sequence_code/presence": "VALUE",
+          "/sequence_code/mappedPresence": "VALUE",
+          "/sequence_code/wireType": "INTEGER",
+          "/requested_at/presence": "VALUE",
+          "/requested_at/mappedPresence": "VALUE",
+          "/requested_at/wireType": "STRING",
+          "/qoe_qes_fit_nse_issued_at/presence": "ABSENT",
+          "/qoe_qes_fit_nse_issued_at/mappedPresence": "ABSENT",
+          "/qoe_qes_fit_nse_issued_at/wireType": "ABSENT",
+          "/qoe_qes_fit_fhe_cte_issued_at/presence": "ABSENT",
+          "/qoe_qes_fit_fhe_cte_issued_at/mappedPresence": "ABSENT",
+          "/qoe_qes_fit_fhe_cte_issued_at/wireType": "ABSENT",
+          "/qoe_qes_total/presence": "ABSENT",
+          "/qoe_qes_total/mappedPresence": "ABSENT",
+          "/qoe_qes_total/wireType": "ABSENT",
+          "/qoe_crn_psn_nickname/presence": "ABSENT",
+          "/qoe_crn_psn_nickname/mappedPresence": "ABSENT",
+          "/qoe_crn_psn_nickname/wireType": "ABSENT",
+          "/qoe_uer_name/presence": "ABSENT",
+          "/qoe_uer_name/mappedPresence": "ABSENT",
+          "/qoe_uer_name/wireType": "ABSENT",
+          "/qoe_qes_ony_sae_code/presence": "ABSENT",
+          "/qoe_qes_ony_sae_code/mappedPresence": "ABSENT",
+          "/qoe_qes_ony_sae_code/wireType": "ABSENT",
+          "/qoe_qes_diy_sae_code/presence": "NULL",
+          "/qoe_qes_diy_sae_code/mappedPresence": "NULL",
+          "/qoe_qes_diy_sae_code/wireType": "NULL",
+          "/qoe_qes_fit_nse_issued_at/typed": "NULL",
+          "/qoe_qes_fit_fhe_cte_issued_at/typed": "NULL",
+          "/qoe_qes_total/typed": "NULL",
+          "/qoe_uer_name/typed": "NULL",
+          "/qoe_qes_ony_sae_code/typed": "NULL",
+          "/qoe_qes_diy_sae_code/typed": "NULL",
+          "/qoe_crn_psn_nickname/preserved": ""
+        }
+      ]
+    },
+    {
+      "id": "SYNTH_NINE_VALUES",
+      "envelope": "{\"data\":[{\"sequence_code\":1,\"requested_at\":\"2026-07-15\",\"qoe_qes_fit_nse_issued_at\":\"2026-07-17\",\"qoe_qes_fit_fhe_cte_issued_at\":\"2026-07-16\",\"qoe_qes_total\":\"10.2500\",\"qoe_crn_psn_nickname\":\"SYNTH_FILIAL\",\"qoe_uer_name\":\"  A\\u0301rvore \\ud83d\\ude80  \",\"qoe_qes_ony_sae_code\":\" sp \",\"qoe_qes_diy_sae_code\":\"rj\"}]}",
+      "expected": [
+        {
+          "/quarantine": "NONE",
+          "/sequence_code/typed": "INTEGER:1",
+          "/requested_at/typed": "2026-07-15T03:00:00Z",
+          "/freshness/typed": "2026-07-17T03:00:00Z",
+          "/freshness/origin": "NFSE_ISSUED_AT",
+          "/freshness/businessDate": "2026-07-17",
+          "/sequence_code/presence": "VALUE",
+          "/sequence_code/mappedPresence": "VALUE",
+          "/sequence_code/wireType": "INTEGER",
+          "/requested_at/presence": "VALUE",
+          "/requested_at/mappedPresence": "VALUE",
+          "/requested_at/wireType": "STRING",
+          "/qoe_qes_fit_nse_issued_at/presence": "VALUE",
+          "/qoe_qes_fit_nse_issued_at/mappedPresence": "VALUE",
+          "/qoe_qes_fit_nse_issued_at/wireType": "STRING",
+          "/qoe_qes_fit_fhe_cte_issued_at/presence": "VALUE",
+          "/qoe_qes_fit_fhe_cte_issued_at/mappedPresence": "VALUE",
+          "/qoe_qes_fit_fhe_cte_issued_at/wireType": "STRING",
+          "/qoe_qes_total/presence": "VALUE",
+          "/qoe_qes_total/mappedPresence": "VALUE",
+          "/qoe_qes_total/wireType": "STRING",
+          "/qoe_crn_psn_nickname/presence": "VALUE",
+          "/qoe_crn_psn_nickname/mappedPresence": "VALUE",
+          "/qoe_crn_psn_nickname/wireType": "STRING",
+          "/qoe_uer_name/presence": "VALUE",
+          "/qoe_uer_name/mappedPresence": "VALUE",
+          "/qoe_uer_name/wireType": "STRING",
+          "/qoe_qes_ony_sae_code/presence": "VALUE",
+          "/qoe_qes_ony_sae_code/mappedPresence": "VALUE",
+          "/qoe_qes_ony_sae_code/wireType": "STRING",
+          "/qoe_qes_diy_sae_code/presence": "VALUE",
+          "/qoe_qes_diy_sae_code/mappedPresence": "VALUE",
+          "/qoe_qes_diy_sae_code/wireType": "STRING",
+          "/qoe_qes_fit_nse_issued_at/typed": "2026-07-17T03:00:00Z",
+          "/qoe_qes_fit_fhe_cte_issued_at/typed": "2026-07-16T03:00:00Z",
+          "/qoe_qes_total/typed": "10.2500",
+          "/qoe_uer_name/typed": "Árvore 🚀",
+          "/qoe_qes_ony_sae_code/typed": "SP",
+          "/qoe_qes_diy_sae_code/typed": "RJ",
+          "/qoe_crn_psn_nickname/preserved": "\"SYNTH_FILIAL\""
+        }
+      ]
+    },
+    {
+      "id": "SYNTH_NO_REQUESTER_ALIAS",
+      "envelope": "{\"data\":[{\"sequence_code\":1,\"requested_at\":\"2026-07-15\",\"requester_name\":\"SYNTH_OTHER\"}]}",
+      "expected": [
+        {
+          "/quarantine": "NONE",
+          "/sequence_code/typed": "INTEGER:1",
+          "/requested_at/typed": "2026-07-15T03:00:00Z",
+          "/freshness/typed": "2026-07-15T03:00:00Z",
+          "/freshness/origin": "REQUESTED_AT",
+          "/freshness/businessDate": "2026-07-15",
+          "/sequence_code/presence": "VALUE",
+          "/sequence_code/mappedPresence": "VALUE",
+          "/sequence_code/wireType": "INTEGER",
+          "/requested_at/presence": "VALUE",
+          "/requested_at/mappedPresence": "VALUE",
+          "/requested_at/wireType": "STRING",
+          "/qoe_qes_fit_nse_issued_at/presence": "ABSENT",
+          "/qoe_qes_fit_nse_issued_at/mappedPresence": "ABSENT",
+          "/qoe_qes_fit_nse_issued_at/wireType": "ABSENT",
+          "/qoe_qes_fit_fhe_cte_issued_at/presence": "ABSENT",
+          "/qoe_qes_fit_fhe_cte_issued_at/mappedPresence": "ABSENT",
+          "/qoe_qes_fit_fhe_cte_issued_at/wireType": "ABSENT",
+          "/qoe_qes_total/presence": "ABSENT",
+          "/qoe_qes_total/mappedPresence": "ABSENT",
+          "/qoe_qes_total/wireType": "ABSENT",
+          "/qoe_crn_psn_nickname/presence": "ABSENT",
+          "/qoe_crn_psn_nickname/mappedPresence": "ABSENT",
+          "/qoe_crn_psn_nickname/wireType": "ABSENT",
+          "/qoe_uer_name/presence": "ABSENT",
+          "/qoe_uer_name/mappedPresence": "ABSENT",
+          "/qoe_uer_name/wireType": "ABSENT",
+          "/qoe_qes_ony_sae_code/presence": "ABSENT",
+          "/qoe_qes_ony_sae_code/mappedPresence": "ABSENT",
+          "/qoe_qes_ony_sae_code/wireType": "ABSENT",
+          "/qoe_qes_diy_sae_code/presence": "ABSENT",
+          "/qoe_qes_diy_sae_code/mappedPresence": "ABSENT",
+          "/qoe_qes_diy_sae_code/wireType": "ABSENT",
+          "/qoe_qes_fit_nse_issued_at/typed": "NULL",
+          "/qoe_qes_fit_fhe_cte_issued_at/typed": "NULL",
+          "/qoe_qes_total/typed": "NULL",
+          "/qoe_uer_name/typed": "NULL",
+          "/qoe_qes_ony_sae_code/typed": "NULL",
+          "/qoe_qes_diy_sae_code/typed": "NULL",
+          "/qoe_crn_psn_nickname/preserved": ""
+        }
+      ]
+    },
+    {
+      "id": "SYNTH_AMOUNT_ZERO",
+      "envelope": "{\"data\":[{\"sequence_code\":1,\"requested_at\":\"2026-07-15\",\"qoe_qes_total\":0}]}",
+      "expected": [
+        {
+          "/quarantine": "NONE",
+          "/qoe_qes_total/typed": "0",
+          "/qoe_qes_total/presence": "VALUE",
+          "/qoe_qes_total/mappedPresence": "VALUE"
+        }
+      ]
+    },
+    {
+      "id": "SYNTH_AMOUNT_DECIMAL_ZERO",
+      "envelope": "{\"data\":[{\"sequence_code\":1,\"requested_at\":\"2026-07-15\",\"qoe_qes_total\":0.0000}]}",
+      "expected": [
+        {
+          "/quarantine": "NONE",
+          "/qoe_qes_total/typed": "0.0000",
+          "/qoe_qes_total/presence": "VALUE",
+          "/qoe_qes_total/mappedPresence": "VALUE"
+        }
+      ]
+    },
+    {
+      "id": "SYNTH_AMOUNT_MAX_STRING",
+      "envelope": "{\"data\":[{\"sequence_code\":1,\"requested_at\":\"2026-07-15\",\"qoe_qes_total\":\"999999999999999.9999\"}]}",
+      "expected": [
+        {
+          "/quarantine": "NONE",
+          "/qoe_qes_total/typed": "999999999999999.9999",
+          "/qoe_qes_total/presence": "VALUE",
+          "/qoe_qes_total/mappedPresence": "VALUE"
+        }
+      ]
+    },
+    {
+      "id": "SYNTH_AMOUNT_MAX_NUMBER",
+      "envelope": "{\"data\":[{\"sequence_code\":1,\"requested_at\":\"2026-07-15\",\"qoe_qes_total\":999999999999999.9999}]}",
+      "expected": [
+        {
+          "/quarantine": "NONE",
+          "/qoe_qes_total/typed": "999999999999999.9999",
+          "/qoe_qes_total/presence": "VALUE",
+          "/qoe_qes_total/mappedPresence": "VALUE"
+        }
+      ]
+    },
+    {
+      "id": "SYNTH_AMOUNT_TRAILING_SCALE",
+      "envelope": "{\"data\":[{\"sequence_code\":1,\"requested_at\":\"2026-07-15\",\"qoe_qes_total\":10.2500}]}",
+      "expected": [
+        {
+          "/quarantine": "NONE",
+          "/qoe_qes_total/typed": "10.2500",
+          "/qoe_qes_total/presence": "VALUE",
+          "/qoe_qes_total/mappedPresence": "VALUE"
+        }
+      ]
+    },
+    {
+      "id": "SYNTH_KEY_BIGINT_MAX",
+      "envelope": "{\"data\":[{\"sequence_code\":9223372036854775807,\"requested_at\":\"2026-07-15\"}]}",
+      "expected": [
+        {
+          "/quarantine": "NONE",
+          "/sequence_code/typed": "INTEGER:9223372036854775807"
+        }
+      ]
+    },
+    {
+      "id": "SYNTH_KEY_ABOVE_INT",
+      "envelope": "{\"data\":[{\"sequence_code\":2147483648,\"requested_at\":\"2026-07-15\"}]}",
+      "expected": [
+        {
+          "/quarantine": "NONE",
+          "/sequence_code/typed": "INTEGER:2147483648"
+        }
+      ]
+    },
+    {
+      "id": "SYNTH_KEY_OVERFLOW",
+      "envelope": "{\"data\":[{\"sequence_code\":9223372036854775808,\"requested_at\":\"2026-07-15\"}]}",
+      "expected": [
+        {
+          "/quarantine": "INVALID_SOURCE_KEY_VALUE"
+        }
+      ]
+    },
+    {
+      "id": "SYNTH_KEY_ZERO",
+      "envelope": "{\"data\":[{\"sequence_code\":0,\"requested_at\":\"2026-07-15\"}]}",
+      "expected": [
+        {
+          "/quarantine": "INVALID_SOURCE_KEY_VALUE"
+        }
+      ]
+    },
+    {
+      "id": "SYNTH_KEY_NEGATIVE",
+      "envelope": "{\"data\":[{\"sequence_code\":-1,\"requested_at\":\"2026-07-15\"}]}",
+      "expected": [
+        {
+          "/quarantine": "INVALID_SOURCE_KEY_VALUE"
+        }
+      ]
+    },
+    {
+      "id": "SYNTH_KEY_TEXT",
+      "envelope": "{\"data\":[{\"sequence_code\":\"1\",\"requested_at\":\"2026-07-15\"}]}",
+      "expected": [
+        {
+          "/quarantine": "INVALID_SOURCE_KEY_TYPE"
+        }
+      ]
+    },
+    {
+      "id": "SYNTH_KEY_NULL",
+      "envelope": "{\"data\":[{\"sequence_code\":null,\"requested_at\":\"2026-07-15\"}]}",
+      "expected": [
+        {
+          "/quarantine": "MISSING_SOURCE_KEY"
+        }
+      ]
+    },
+    {
+      "id": "SYNTH_KEY_ABSENT",
+      "envelope": "{\"data\":[{\"requested_at\":\"2026-07-15\"}]}",
+      "expected": [
+        {
+          "/quarantine": "MISSING_SOURCE_KEY",
+          "/sequence_code/presence": "ABSENT"
+        }
+      ]
+    },
+    {
+      "id": "SYNTH_INVALID_AMOUNT_SCALE",
+      "envelope": "{\"data\":[{\"sequence_code\":1,\"requested_at\":\"2026-07-15\",\"qoe_qes_total\":\"1.00001\"}]}",
+      "expected": [
+        {
+          "/quarantine": "INVALID_TOTAL_AMOUNT"
+        }
+      ]
+    },
+    {
+      "id": "SYNTH_INVALID_AMOUNT_DIGITS",
+      "envelope": "{\"data\":[{\"sequence_code\":1,\"requested_at\":\"2026-07-15\",\"qoe_qes_total\":\"1000000000000000\"}]}",
+      "expected": [
+        {
+          "/quarantine": "INVALID_TOTAL_AMOUNT"
+        }
+      ]
+    },
+    {
+      "id": "SYNTH_INVALID_AMOUNT_BOOLEAN",
+      "envelope": "{\"data\":[{\"sequence_code\":1,\"requested_at\":\"2026-07-15\",\"qoe_qes_total\":true}]}",
+      "expected": [
+        {
+          "/quarantine": "INVALID_TOTAL_AMOUNT"
+        }
+      ]
+    },
+    {
+      "id": "SYNTH_INVALID_AMOUNT_ARRAY",
+      "envelope": "{\"data\":[{\"sequence_code\":1,\"requested_at\":\"2026-07-15\",\"qoe_qes_total\":[]}]}",
+      "expected": [
+        {
+          "/quarantine": "INVALID_TOTAL_AMOUNT"
+        }
+      ]
+    },
+    {
+      "id": "SYNTH_INVALID_DATE_ISO_DAY",
+      "envelope": "{\"data\":[{\"sequence_code\":1,\"requested_at\":\"2026-02-30\"}]}",
+      "expected": [
+        {
+          "/quarantine": "INVALID_COTACAO_DATE"
+        }
+      ]
+    },
+    {
+      "id": "SYNTH_INVALID_DATE_SPACE_DAY",
+      "envelope": "{\"data\":[{\"sequence_code\":1,\"requested_at\":\"2026-02-30 12:00:00\"}]}",
+      "expected": [
+        {
+          "/quarantine": "INVALID_COTACAO_DATE"
+        }
+      ]
+    },
+    {
+      "id": "SYNTH_INVALID_DATE_TEXT",
+      "envelope": "{\"data\":[{\"sequence_code\":1,\"requested_at\":\"bad\"}]}",
+      "expected": [
+        {
+          "/quarantine": "INVALID_COTACAO_DATE"
+        }
+      ]
+    },
+    {
+      "id": "SYNTH_INVALID_DATE_TYPE",
+      "envelope": "{\"data\":[{\"sequence_code\":1,\"requested_at\":1}]}",
+      "expected": [
+        {
+          "/quarantine": "INVALID_COTACAO_DATE"
+        }
+      ]
+    },
+    {
+      "id": "SYNTH_CTE_FALLBACK",
+      "envelope": "{\"data\":[{\"sequence_code\":1,\"requested_at\":\"2026-07-15\",\"qoe_qes_fit_nse_issued_at\":null,\"qoe_qes_fit_fhe_cte_issued_at\":\"2026-07-14\"}]}",
+      "expected": [
+        {
+          "/quarantine": "NONE",
+          "/freshness/origin": "CTE_ISSUED_AT",
+          "/freshness/typed": "2026-07-14T03:00:00Z"
+        }
+      ]
+    },
+    {
+      "id": "SYNTH_REQUEST_ABSENT_NFSE",
+      "envelope": "{\"data\":[{\"sequence_code\":1,\"qoe_qes_fit_nse_issued_at\":\"2026-07-14\"}]}",
+      "expected": [
+        {
+          "/quarantine": "NONE",
+          "/requested_at/presence": "ABSENT",
+          "/freshness/origin": "NFSE_ISSUED_AT"
+        }
+      ]
+    },
+    {
+      "id": "SYNTH_INVALID_LOWER_DATE",
+      "envelope": "{\"data\":[{\"sequence_code\":1,\"requested_at\":\"bad\",\"qoe_qes_fit_nse_issued_at\":\"2026-07-17\"}]}",
+      "expected": [
+        {
+          "/quarantine": "INVALID_COTACAO_DATE"
+        }
+      ]
+    },
+    {
+      "id": "SYNTH_NO_FRESHNESS",
+      "envelope": "{\"data\":[{\"sequence_code\":1}]}",
+      "expected": [
+        {
+          "/quarantine": "INVALID_FRESHNESS"
+        }
+      ]
+    },
+    {
+      "id": "SYNTH_OFFSET_MIDNIGHT",
+      "envelope": "{\"data\":[{\"sequence_code\":1,\"requested_at\":\"2026-07-15T01:00:00Z\"}]}",
+      "expected": [
+        {
+          "/quarantine": "NONE",
+          "/freshness/typed": "2026-07-15T01:00:00Z",
+          "/freshness/businessDate": "2026-07-14"
+        }
+      ]
+    },
+    {
+      "id": "SYNTH_UF_UNICODE",
+      "envelope": "{\"data\":[{\"sequence_code\":1,\"requested_at\":\"2026-07-15\",\"qoe_qes_ony_sae_code\":\"ß\"}]}",
+      "expected": [
+        {
+          "/quarantine": "INVALID_COTACAO_ATTRIBUTE"
+        }
+      ]
+    },
+    {
+      "id": "SYNTH_UF_WRONG_TYPE",
+      "envelope": "{\"data\":[{\"sequence_code\":1,\"requested_at\":\"2026-07-15\",\"qoe_qes_diy_sae_code\":8}]}",
+      "expected": [
+        {
+          "/quarantine": "INVALID_COTACAO_ATTRIBUTE"
+        }
+      ]
+    },
+    {
+      "id": "SYNTH_USER_WRONG_TYPE",
+      "envelope": "{\"data\":[{\"sequence_code\":1,\"requested_at\":\"2026-07-15\",\"qoe_uer_name\":false}]}",
+      "expected": [
+        {
+          "/quarantine": "INVALID_COTACAO_ATTRIBUTE"
+        }
+      ]
+    }
+  ]
+}

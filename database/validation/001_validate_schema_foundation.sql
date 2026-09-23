@@ -308,6 +308,21 @@ VALUES
     (N'core', N'usp_apply_reconcile_publish_execution', N'v2_runtime'),
     (N'stg', N'usp_stage_usuario_record', N'v2_runtime'),
     (N'core', N'usp_apply_reconcile_publish_usuarios', N'v2_runtime'),
+    (N'stg', N'usp_stage_coleta_record', N'v2_runtime'),
+    (N'core', N'usp_apply_reconcile_publish_coletas', N'v2_runtime'),
+    (N'stg', N'usp_stage_cotacao_record', N'v2_runtime'),
+    (N'core', N'usp_apply_reconcile_publish_cotacoes', N'v2_runtime'),
+    (N'stg', N'usp_stage_manifesto_observation', N'v2_runtime'),
+    (N'stg', N'usp_stage_manifesto_reduced_candidate', N'v2_runtime'),
+    (N'core', N'usp_prepare_manifesto_candidate_set', N'v2_runtime'),
+    (N'core', N'usp_apply_reconcile_publish_manifestos', N'v2_runtime'),
+    (N'stg', N'usp_stage_frete_record', N'v2_runtime'),
+    (N'stg', N'usp_stage_frete_performance', N'v2_runtime'),
+    (N'stg', N'usp_stage_frete_sidecar', N'v2_runtime'),
+    (N'core', N'usp_prepare_frete_candidate_set', N'v2_runtime'),
+    (N'core', N'usp_apply_reconcile_publish_fretes', N'v2_runtime'),
+    (N'stg', N'usp_stage_localizacao_carga_record', N'v2_runtime'),
+    (N'core', N'usp_apply_reconcile_publish_localizacao_cargas', N'v2_runtime'),
     (N'ctl', N'usp_approve_staging_retention_policy', N'v2_retention_governor'),
     (N'ctl', N'usp_revoke_staging_retention_policy', N'v2_retention_governor'),
     (N'ctl', N'usp_place_staging_legal_hold', N'v2_retention_governor'),
@@ -331,7 +346,7 @@ WHERE OBJECT_ID(N'dbo.v2_procedure_grant_allowlist', N'U') IS NULL
            WHERE object_id = OBJECT_ID(N'dbo.v2_procedure_grant_allowlist', N'U')),
           (SELECT principal_id FROM sys.schemas WHERE name = N'dbo')
       ) <> DATABASE_PRINCIPAL_ID(N'dbo')
-   OR (SELECT COUNT_BIG(*) FROM dbo.v2_procedure_grant_allowlist) <> 26
+   OR (SELECT COUNT_BIG(*) FROM dbo.v2_procedure_grant_allowlist) <> 41
    OR (SELECT COUNT_BIG(*) FROM sys.columns
        WHERE object_id = OBJECT_ID(N'dbo.v2_procedure_grant_allowlist', N'U')) <> 3
    OR EXISTS (

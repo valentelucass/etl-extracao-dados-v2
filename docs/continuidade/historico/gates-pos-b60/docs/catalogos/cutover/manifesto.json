@@ -1,0 +1,101 @@
+{
+  "catalog_version": "2026-09-01.v2-035b-usuarios-followup",
+  "roadmap_task": "V2-048a",
+  "generator": "scripts/validation/Build-CutoverTopologyCatalog.ps1",
+  "powershell_minimum_version": "7.0",
+  "source_policy": "offline from V2-017 catalog and V2-019 manifests; no dashboards, credentials, network, database or payload values",
+  "decision_state": "LOCAL_DESIGN_COMPLETE_EXTERNAL_REHEARSAL_PENDING",
+  "topology": {
+    "strategy": "NEW_DEDICATED_V2_DATABASE",
+    "shadow_database_may_be_renamed": false,
+    "in_place_legacy_database": false,
+    "cross_database_wrappers": false,
+    "final_database_name": "EXTERNAL_INPUT_REQUIRED",
+    "routing_mechanism": "EXTERNAL_INPUT_REQUIRED",
+    "safe_cutover_granularity": "DATABASE_WIDE",
+    "granular_cutover_proven": false,
+    "cutover_unit": "CUTOVER-DB-01",
+    "technical_shadow_publication_is_point_of_no_return": false,
+    "point_of_no_return": "FIRST_ACCEPTED_AUTHORITATIVE_V2_PRODUCTION_PUBLICATION",
+    "recovery_before_point_of_no_return": "RETURN_TO_FROZEN_LEGACY_ONLY_AFTER_REHEARSED_OWNER_DECISION",
+    "recovery_after_point_of_no_return": "ROLL_FORWARD_ONLY"
+  },
+  "baselines": {
+    "schemas": [
+      "ctl",
+      "stg",
+      "core",
+      "ref",
+      "mart",
+      "pub",
+      "recon"
+    ],
+    "grant_allowlist_triplets": 26,
+    "entity_sources": 11,
+    "table_scripts": 35,
+    "logical_table_responsibilities": 34,
+    "materialized_facts": 5,
+    "etl_owned_views": 19,
+    "procedures": 5,
+    "windows_scripts": 15,
+    "windows_aliases": 2,
+    "legacy_command_entries": 38,
+    "responsibility_rows": 131,
+    "dag_nodes": 49,
+    "fence_steps": 11
+  },
+  "schema_foundation_contract": {
+    "roadmap_task": "V2-019",
+    "manifest_version": 3,
+    "manifest_sha256": "55147fc05773ee08e8581f849beb407921db9cabf7ff38c6fae5b93fe3718bb0",
+    "schema_owner": "v2_schema_owner",
+    "grant_publisher": "dbo.usp_publish_v2_procedure_grant",
+    "role_names": [
+      "v2_archive_restorer",
+      "v2_lifecycle_operator",
+      "v2_lifecycle_reviewer",
+      "v2_migrator",
+      "v2_retention_governor",
+      "v2_runtime"
+    ]
+  },
+  "usuario_dimension_contract": {
+    "roadmap_task": "V2-035b-USUARIOS",
+    "manifest_version": 1,
+    "manifest_sha256": "019a48128c214430d2049660ad6021bd50bcdd08e72612905eb1b60505f8a894",
+    "object": "core.v_usuario_dimension_current_v1",
+    "local_state": "IMPLEMENTED_IN_SHADOW",
+    "consumer_contract": "DEFERRED_TO_V2_037"
+  },
+  "responsibility_artifact_counts": {
+    "database_runner": 1,
+    "command_default": 1,
+    "command_flag": 37,
+    "entity_source": 11,
+    "procedure": 5,
+    "sql_auxiliary": 3,
+    "table_script": 35,
+    "view_etl": 19,
+    "view_wrapper": 2,
+    "windows_alias": 2,
+    "windows_script": 15
+  },
+  "invariants": [
+    "Implementation and parity may advance per entity, but production routing remains database-wide until both read routing and write-fence granularity are positively proven.",
+    "Stopping a process, a scheduler state, sp_getapplock or a V2 lease alone is not a write-fence for the legacy writer.",
+    "The authoritative legacy fence is process freeze plus verified database permission revocation or denial for the actual writer principal.",
+    "The V2 runtime writes only through allowlisted procedures and never receives DDL or direct domain DML.",
+    "A disabled V2 scheduler alone is not a write-fence: before activation, the service principal has no effective run membership or the authorization boundary denies run, and direct invocation must fail.",
+    "The 18 consumer-facing ETL-owned contracts require an external consumer manifest and route evidence; the monitoring contract remains internal by default and requires explicit V2-037 scope/grants.",
+    "A PUBLISHED event in shadow is technical evidence only and never triggers the point of no return.",
+    "After the first accepted authoritative V2 production publication, the legacy writer is never silently re-enabled."
+  ],
+  "external_inputs": [
+    "final production server/database and routing mechanism",
+    "consumer manifest, reader principals and nominal acceptance for 18 consumer-facing contracts and five facts; internal scope/grants for the monitoring contract",
+    "actual legacy writer principal, scheduler/process inventory and revocation authority",
+    "V2 runtime, migrator, bootstrap and reader service principals/memberships",
+    "cutover window, Tcut, RTO/RPO, backup/restore and replay evidence",
+    "decision and acceptance for conditional Raster responsibility"
+  ]
+}

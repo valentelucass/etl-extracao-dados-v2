@@ -1,0 +1,164 @@
+{
+  "version": 1,
+  "status": "COLETAS_TEMPORAL_SOURCE_OBSERVED_SQL_CASES_VERIFIED",
+  "remoteCalls": 5,
+  "sqlSyntheticExecuted": true,
+  "newAcceptances": 0,
+  "rotationProven": false,
+  "representativeParityAccepted": false,
+  "operationalSidecarEnabled": false,
+  "predecessor": {
+    "sha256": "d98a9d8b988061e41b4d39705fac0417f0ea1a23cdbf3f6a33251184c31ed0a3",
+    "path": "docs/continuidade/manifesto-decisao-documental.json"
+  },
+  "changedExistingFiles": [
+    {
+      "before": "476c4b617ef13f440f2f8ed2f7ce1f38012a4e352860face96a13656c1768d87",
+      "path": "STATES.md",
+      "insertionOffset": 1974,
+      "snapshot": "docs/continuidade/historico/coletas-temporal-proof/STATES.md",
+      "after": "5b924058aade77d171fe3c23c692a1011d336975c7b386290ee800088bf4c9ce"
+    },
+    {
+      "before": "90bd3020d63194fa888ce10af51b998847ca5b49e0ed6217c10e28aa6e92b830",
+      "path": "docs/runbooks/trilha-de-chats-gpt-5-6.md",
+      "insertionOffset": 0,
+      "snapshot": "docs/continuidade/historico/coletas-temporal-proof/docs/runbooks/trilha-de-chats-gpt-5-6.md",
+      "after": "8c10c2096abce4140269d610f4ef7b889c20bb7dc677a9256e68385a0f640f1d"
+    },
+    {
+      "before": "04966b2e51cc1fb0ebcd24d8913a4f68cc2644163725abfa9793f20ed08ad687",
+      "path": "docs/continuidade/RETOMADA.md",
+      "insertionOffset": 0,
+      "snapshot": "docs/continuidade/historico/coletas-temporal-proof/docs/continuidade/RETOMADA.md",
+      "after": "0e2cddf98ba637e0cd442e0f92623169214b24332650ce3b8618d14891af5f89"
+    },
+    {
+      "before": "f6889c2b3dd46fe56e802a5828f873aa07dda366d0f63040f552bc2ee2cd1e66",
+      "path": "scripts/validation/Test-Bloco63TemporalLocal.ps1",
+      "insertionOffset": 0,
+      "snapshot": "docs/continuidade/historico/coletas-temporal-proof/scripts/validation/Test-Bloco63TemporalLocal.ps1",
+      "after": "bb096980b775a48f1f179ecb7742a94e7eb6e934aabfb368093d23ef72d45027"
+    }
+  ],
+  "newFiles": [
+    {
+      "sha256": "476c4b617ef13f440f2f8ed2f7ce1f38012a4e352860face96a13656c1768d87",
+      "path": "docs/continuidade/historico/coletas-temporal-proof/STATES.md"
+    },
+    {
+      "sha256": "90bd3020d63194fa888ce10af51b998847ca5b49e0ed6217c10e28aa6e92b830",
+      "path": "docs/continuidade/historico/coletas-temporal-proof/docs/runbooks/trilha-de-chats-gpt-5-6.md"
+    },
+    {
+      "sha256": "04966b2e51cc1fb0ebcd24d8913a4f68cc2644163725abfa9793f20ed08ad687",
+      "path": "docs/continuidade/historico/coletas-temporal-proof/docs/continuidade/RETOMADA.md"
+    },
+    {
+      "sha256": "f6889c2b3dd46fe56e802a5828f873aa07dda366d0f63040f552bc2ee2cd1e66",
+      "path": "docs/continuidade/historico/coletas-temporal-proof/scripts/validation/Test-Bloco63TemporalLocal.ps1"
+    },
+    {
+      "sha256": "b67c75f14e775fa6de129471d27a1c79a7adcc2c3d570be8f0dbc7dbab1761a5",
+      "path": "docs/catalogos/coletas-temporal-proof/RELATORIO.md"
+    },
+    {
+      "sha256": "8f01ed09575bc2f53fb7e8d2c272e71c9242e56828a67da7f4610e7c997a8ec8",
+      "path": "docs/catalogos/coletas-temporal-proof/source-summary.json"
+    },
+    {
+      "sha256": "e4a8052f5162f0f90515bf152aba4b79fdcef58fcaf4670c47d4c17368630da5",
+      "path": "docs/catalogos/coletas-temporal-proof/sql-summary.json"
+    },
+    {
+      "sha256": "8076baaf0f0e07b11d0483685a1ade0741e8fa3776b223a265a7f55cd6e17d0e",
+      "path": "docs/continuidade/checkpoints/0063-coletas-prova-temporal.md"
+    },
+    {
+      "sha256": "29d5e7b3511ffb8f022fa76cf77799b67dc2019765ec5ff48dbda83af0b43d8e",
+      "path": "scripts/validation/Test-ColetasTemporalProof.ps1"
+    }
+  ],
+  "evidence": [
+    {
+      "sha256": "0a94b274faee86ca2c96e0183745439585511f9dfa2c5ea8fa3d289e14397140",
+      "path": "target/coletas-temporal-proof-20260910/authorization.txt"
+    },
+    {
+      "sha256": "a6fe34f23ff7692fc8ab025ff38b6849e775627b155ba183d3fd5b3cb607b7ee",
+      "path": "target/coletas-temporal-proof-20260910/passo-inicial.txt"
+    },
+    {
+      "sha256": "51fe6d200aced7555ff998df0bb475206fca43fa21bc6a277e858364560c27eb",
+      "path": "target/coletas-temporal-proof-20260910/inventory.json"
+    },
+    {
+      "sha256": "5d033f974615cf7052c3ebf5a9944f98f6ecf2fafcb4f6e2dedc26b193435c60",
+      "path": "target/coletas-temporal-proof-20260910/Sql-Preflight.ps1"
+    },
+    {
+      "sha256": "85fcd7eb4b65d5becc50671bcd78e1fcc89fa7f35d48c60ced84c85446e8cdab",
+      "path": "target/coletas-temporal-proof-20260910/sql-preflight.json"
+    },
+    {
+      "sha256": "e13e43b90818ff38f2dfc90ce999ab1ad82fccc74eba1cc39161f18d02304a47",
+      "path": "target/coletas-temporal-proof-20260910/Sql-Temporal.attempt1.ps1"
+    },
+    {
+      "sha256": "e244dfb93602f0dcf71a2a960b62e484af4d76fd9a98fe20ced0e0f731a7ef08",
+      "path": "target/coletas-temporal-proof-20260910/sql-temporal-attempt1.log"
+    },
+    {
+      "sha256": "3e38a053be9622325ccb1f2b439c8b2d7ed744a2ebc3dadb80d69ba98786be0b",
+      "path": "target/coletas-temporal-proof-20260910/sql-temporal-attempt1-summary.json"
+    },
+    {
+      "sha256": "b67a0c7d7b8ea2b009a1b3ef11fe1db0a28bc599e7f4e4f4d94fea13b7e34fef",
+      "path": "target/coletas-temporal-proof-20260910/Sql-Temporal.ps1"
+    },
+    {
+      "sha256": "fd052d0d12823c5b7877df098831d45b6531a8ebe7577417edcafbc31e7b40da",
+      "path": "target/coletas-temporal-proof-20260910/sql-temporal-attempt2.log"
+    },
+    {
+      "sha256": "e4a8052f5162f0f90515bf152aba4b79fdcef58fcaf4670c47d4c17368630da5",
+      "path": "target/coletas-temporal-proof-20260910/sql-temporal-summary.json"
+    },
+    {
+      "sha256": "adfac1d636c95af6ecfd873db7a81c698d2d04fe604c29ddb05b74130880d858",
+      "path": "target/coletas-temporal-proof-20260910/source-request.json"
+    },
+    {
+      "sha256": "d57ecbbf99c04fda97cfa35f65ad851add3fb3d7afa56b172ef87ac235bac12b",
+      "path": "target/coletas-temporal-proof-20260910/source-ledger.jsonl"
+    },
+    {
+      "sha256": "f8aa073983ac9c0f0e480c0074e70471d12a25e68a0b48979cc9b99b751d02c0",
+      "path": "target/coletas-temporal-proof-20260910/Source-Proof.executed.ps1"
+    },
+    {
+      "sha256": "0221ebc02cd1ee22513239eff64243aad3766d7a58edb481ee6c19d7622b2d02",
+      "path": "target/coletas-temporal-proof-20260910/Source-Proof.ps1"
+    },
+    {
+      "sha256": "a2106ee312f75ef18f158dc4572eeae7e074f65000962402d2e99414e2b9df6f",
+      "path": "target/coletas-temporal-proof-20260910/source-selftest.log"
+    },
+    {
+      "sha256": "e19fa431f079be04c452a7df82c9dca51df401bbe16a729479e9d9dce504f9d8",
+      "path": "target/coletas-temporal-proof-20260910/source-selftest-corrected.log"
+    },
+    {
+      "sha256": "93c116559c63b9795b3ef3bd689539d20632afe0b68d6488f0b5572f573c8057",
+      "path": "target/coletas-temporal-proof-20260910/source-mode-guards.json"
+    },
+    {
+      "sha256": "b9fe7a0ec5cf98acb940213e030dd6cb5e603a97789f71aa79d4cf45906a11c2",
+      "path": "target/coletas-temporal-proof-20260910/source-replay-preflight.json"
+    },
+    {
+      "sha256": "8f01ed09575bc2f53fb7e8d2c272e71c9242e56828a67da7f4610e7c997a8ec8",
+      "path": "target/coletas-temporal-proof-20260910/source-summary.json"
+    }
+  ]
+}

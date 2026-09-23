@@ -1,0 +1,6 @@
+IF (SELECT COUNT_BIG(*) FROM ctl.data_quality_policy WHERE policy_version IN(N'bloco55-manifestos-backfill-v1',N'bloco55-cotacoes-backfill-v1',N'bloco55-localizacao_cargas-backfill-v1') AND expected_checks=4 AND policy_state=N'RATIFIED')<>3 THROW 52852,N'EXACT_THREE_DQ_POLICIES',1;
+IF (SELECT COUNT_BIG(*) FROM ctl.data_quality_check_policy WHERE policy_version IN(N'bloco55-manifestos-backfill-v1',N'bloco55-cotacoes-backfill-v1',N'bloco55-localizacao_cargas-backfill-v1') AND maximum_failed_rows=0 AND maximum_failure_basis_points=0)<>12 THROW 52852,N'EXACT_TWELVE_STRICT_CHECKS',1;
+DECLARE @release BIGINT=(SELECT reference_release_id FROM ref.reference_release WHERE scope_code=N'LOCAL_SHADOW/LOCAL_V2/LOCAL_V2/cotacoes' AND release_version=N'bloco55-tariff-v1' AND source_fingerprint='dd60cb039196dfacdbf2a056929404b48ccd5601f1cdb36bb6b24dfa3eb4e101');
+IF @release IS NULL OR (SELECT COUNT_BIG(*) FROM ref.tarifa_rota_uf WHERE reference_release_id=@release)<>2 OR ctl.fn_runtime_tariff_valid(NEWID(),@release)<>1 THROW 52852,N'EXACT_SCOPED_TARIFF_REQUIRED',1;
+SELECT N'TARIFF_RELEASE_ID='+CONVERT(NVARCHAR(20),@release);
+PRINT N'B55_EXACT_SYNTHETIC_SEEDS_PASS';

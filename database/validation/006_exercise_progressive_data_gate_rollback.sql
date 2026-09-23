@@ -1,5 +1,5 @@
 -- Exercício rollback-only de V2-015b. Compara os dois caminhos autorizados sem DDL persistido:
--- baseline SQLCMD (V001-V009) e migrations aplicadas individualmente.
+-- baseline SQLCMD (V001-V014) e migrations aplicadas individualmente.
 
 :setvar DatabaseName "ETL_SISTEMA_V2_SHADOW"
 :On Error exit
@@ -26,8 +26,6 @@ BEGIN TRANSACTION;
 :r "..\migrations\V007__create_usuarios_current_history.sql"
 :r "..\migrations\V008__create_governed_references.sql"
 :r "..\migrations\V009__create_usuario_dimension_current_view.sql"
-:r "005_validate_progressive_data_gate.sql"
-GO
 :r "007_validate_staging_promotion_kernel.sql"
 GO
 :r "009_validate_atomic_publication_protocol.sql"
@@ -41,6 +39,22 @@ GO
 :r "030_validate_governed_references.sql"
 GO
 :r "035_validate_usuarios_dimension_current.sql"
+GO
+:r "..\migrations\V010__create_coletas_shadow_vertical.sql"
+:r "..\migrations\V011__create_cotacoes_shadow_vertical.sql"
+:r "..\migrations\V012__create_manifestos_shadow_vertical.sql"
+:r "..\migrations\V013__create_fretes_shadow_vertical.sql"
+:r "..\migrations\V014__create_localizacao_cargas_shadow_vertical.sql"
+:r "..\migrations\V015__create_runtime_durable_recovery.sql"
+:r "..\migrations\V016__create_windows_runtime_authority.sql"
+:r "..\migrations\V017__create_runtime_temporal_plan.sql"
+:r "005_validate_progressive_data_gate.sql"
+GO
+:r "042_validate_manifestos_shadow_vertical.sql"
+GO
+:r "044_validate_fretes_shadow_vertical.sql"
+GO
+:r "046_validate_localizacao_cargas_shadow_vertical.sql"
 GO
 
 IF XACT_STATE() <> 1 OR @@TRANCOUNT <> 1

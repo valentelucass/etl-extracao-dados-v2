@@ -66,7 +66,8 @@ public record ContractTemplateEvidence(
         if (templateId == Contract4924Configuration.TEMPLATE_ID) {
             return true;
         }
-        for (final DataExportTemplate template : DataExportTemplate.values()) {
+        for (final DataExportTemplate template :
+                java.util.List.of(DataExportTemplate.COLETAS, DataExportTemplate.FRETES)) {
             if (template.templateId() == templateId) {
                 return true;
             }

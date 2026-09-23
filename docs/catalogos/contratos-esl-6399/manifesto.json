@@ -1,5 +1,5 @@
 {
-  "catalogVersion": "2026-09-04.v2-025b.1",
+  "catalogVersion": "2026-09-04.v2-025b.2",
   "classificationVocabulary": [
     "PROVEN",
     "TRANSITIONAL",
@@ -16,7 +16,7 @@
     "contractId": "dataexport-6399",
     "sourceKind": "DATA_EXPORT",
     "documentReference": "dataexport-manifestos",
-    "contractVersion": "2026-09-04.v2-025b.1",
+    "contractVersion": "2026-09-04.v2-025b.2",
     "overallClassification": "TRANSITIONAL",
     "evidence": [
       "HISTORICAL_SANITIZED_OBSERVATION",
@@ -37,8 +37,8 @@
       },
       "responseRoot": {
         "classification": "TRANSITIONAL",
-        "contract": "data_ARRAY_IS_THE_ONLY_PROMOTABLE_ENVELOPE; ANY_OTHER_SHAPE_REQUIRES_CHARACTERIZATION",
-        "scope": "LOCAL_CONTRACT_POLICY_AND_SYNTHETIC_SHAPE"
+        "contract": "data_ARRAY_AND_HISTORICAL_TOP_LEVEL_ARRAY_NORMALIZE_TO_THE_SAME_RECORD; ANY_OTHER_OR_AMBIGUOUS_SHAPE_IS_QUARANTINED",
+        "scope": "LOCAL_CONTRACT_POLICY_SYNTHETIC_DATA_ARRAY_AND_VERSIONED_HISTORICAL_STATIC_TOP_LEVEL_ARRAY"
       },
       "filters": {
         "classification": "TRANSITIONAL",
@@ -61,14 +61,14 @@
         "scope": "HISTORICAL_SANITIZED_OBSERVATION"
       },
       "rootIdentity": {
-        "classification": "BUSINESS_DECISION_PENDING",
-        "contract": "sequence_code_IS_ONLY_AN_AGGREGATE_CANDIDATE; NO_SOURCE_ID_WAS_OBSERVED_AND_NO_UNIQUENESS_STABILITY_OR_TENANT_SCOPE_DECISION_IS_MADE",
-        "scope": "V2_009B_ONLY"
+        "classification": "TRANSITIONAL",
+        "contract": "sequence_code_IS_THE_RECORD_RELATIVE_ROOT_PATH; SCOPED_SOURCE_KEY_POLICY_LIVES_IN_V2_009B_6399_WITHOUT_PROVIDER_GLOBAL_UNIQUENESS_STABILITY_OR_PAYLOAD_TENANT_GUARANTEE",
+        "scope": "V2_009B_6399_LOCAL_BOUNDED_DECISION_ONLY"
       },
       "childIdentity": {
-        "classification": "BUSINESS_DECISION_PENDING",
-        "contract": "PICK_AND_MDFE_EXPANSIONS_ARE_OBSERVED_BUT_NATURAL_COMPONENTS_COLLISION_RULES_AND_CARDINALITY_ARE_NOT_DECIDED",
-        "scope": "V2_009B_AND_V2_026_ONLY"
+        "classification": "TRANSITIONAL",
+        "contract": "mft_pfs_pck_sequence_code_AND_mft_mfs_key_ARE_RECORD_RELATIVE_CHILD_PATHS; mft_mfs_number_AND_mft_mfs_key_ARE_A_SAME_RECORD_PHYSICAL_PAIR_IN_THE_BOUNDED_CORPUS; mdfe_status_IS_A_ROOT_SCALAR_REPLICATED_BY_EXPANSION_AND_NEVER_CREATES_A_CHILD; NATURAL_COMPONENTS_AND_ZERO_TO_MANY_POLICY_LIVE_IN_V2_009B_6399_WITH_NO_RELATION_INFERENCE",
+        "scope": "V2_009B_6399_AND_V2_026A_LOCAL_BOUNDED_DECISIONS_ONLY"
       },
       "pagination": {
         "classification": "PROVEN",
@@ -92,13 +92,15 @@
       }
     },
     "capabilities": {
-      "shadowUpsert": "NOT_AUTHORIZED_BY_THIS_CONTRACT_ALONE_REQUIRES_V2_009B_V2_026_AND_ENTITY_GATES",
+      "shadowUpsert": "NOT_AUTHORIZED_BY_THIS_CONTRACT_ALONE_REQUIRES_V2_026_EXECUTION_AND_ENTITY_GATES",
       "sweepOrDeactivation": "BLOCKED_NO_COMPLETENESS_PROOF",
-      "cutover": "BLOCKED_NO_COMPLETENESS_PROOF"
+      "cutover": "BLOCKED_NO_COMPLETENESS_PROOF",
+      "externalHolds": {
+        "V2-025d": "BLOCKED_BY_V2_041_EXTERNAL_HOLD"
+      }
     },
     "ownerRole": "OPERACAO_E_PLATAFORMA",
     "nextGates": [
-      "V2-009b",
       "V2-026",
       "V2-025d"
     ],
@@ -106,17 +108,17 @@
       {
         "role": "METADATA_SELECTED_SUBSET",
         "path": "docs/catalogos/contratos-esl-6399/fixtures/6399-info.synthetic.json",
-        "sha256": "c7d24aaf95bd7534f5d82411a46e1e698b9284ffbc251eab16799e142f8a676a"
+        "sha256": "0d34daf9500119917da5a92da95f7f5f0ae83a2f4a7a122d842836311a42c941"
       },
       {
         "role": "PER_2_PAGE_1",
         "path": "docs/catalogos/contratos-esl-6399/fixtures/6399-per-2-page-1.synthetic.json",
-        "sha256": "83b11d327a99a6bfd355f85ff8358f76e81d46250706bbd32a57aab8b152c777"
+        "sha256": "a50ecf2ee8595e236db4dcd61d64b547adc1e22a05244307272675d3838ea6f9"
       },
       {
         "role": "PER_2_PAGE_2",
         "path": "docs/catalogos/contratos-esl-6399/fixtures/6399-per-2-page-2.synthetic.json",
-        "sha256": "cf87112da12815a81a2924baef5c1949d6636bc1aa711aac9f54ed9bfac4d632"
+        "sha256": "38f21c862e36098d684318a6591f2e2a959e2bc44f4302d80c7eed39b7f8f754"
       },
       {
         "role": "PER_2_TERMINAL",
@@ -126,7 +128,7 @@
       {
         "role": "PER_3_PAGE_1",
         "path": "docs/catalogos/contratos-esl-6399/fixtures/6399-per-3-page-1.synthetic.json",
-        "sha256": "fe79ba8e56b21ef76a9be76b84078d51c477ac541552cb829ad50696d31f4fc1"
+        "sha256": "3370ae60b555880dd87183a1c772433ddc450226ed169764db60fea2874dc1f4"
       },
       {
         "role": "PER_3_TERMINAL",
@@ -136,15 +138,15 @@
     ],
     "fingerprintInputs": {
       "semantics": "dataexport-6399|GET_WITH_QUERY_WITHOUT_FALLBACK|manifests.service_date|YYYY-MM-DD - YYYY-MM-DD|sequence_code asc|NUMERIC_PAGE|America/Sao_Paulo|NO_CURSOR|ORDER_IS_NOT_IDENTITY|NO_COMPLETENESS_PROOF",
-      "metadata": "observedInfoFields=91|observedInfoFilters=18|selectedFields=sequence_code,pick_sequence_code,mft_mfs_number,status,created_at,departured_at,closed_at,finished_at|selectedFilter=service_date",
-      "response": "observedDailyProbe=4_physical_rows/3_sequence_code_candidates/no_id|pick_and_mdfe_expand|syntheticOnly",
-      "release": "2026-09-04.v2-025b.1|dataexport-6399"
+      "metadata": "observedInfoFields=91|observedInfoFilters=18|selectedFields=sequence_code,mft_pfs_pck_sequence_code,mft_mfs_number,mft_mfs_key,mdfe_status,status,created_at,departured_at,closed_at,finished_at|selectedFilter=service_date",
+      "response": "observedDailyProbe=4_physical_rows/3_sequence_code_candidates/no_id|historicalStaticCorpus=228_rows/100_roots/193_scoped_pick_keys/43_scoped_mdfe_keys/80_number_key_pairs/148_status_without_mdfe_child|recordRoots=/data/*_local_policy+/*_versioned_historical_static|pick=mft_pfs_pck_sequence_code|mdfeIdentity=key|mdfePhysicalPair=number+key|mdfe_status=root_scalar_replicated_by_expansion|syntheticOnly",
+      "release": "2026-09-04.v2-025b.2|dataexport-6399"
     },
     "fingerprints": {
       "semantics": "06bfd57b7112c7771ccca1736ef027155dc69d187c2aea26fe1af7e963982dbb",
-      "metadata": "9f41f11d6f0403958dd3f45879117fed4ad8af51ce0cc7ad6af70b9e65e9b9ee",
-      "response": "df443ba153ec59040bbdb0c84b25423746df752b51a6fbb3170b04d49468787d",
-      "release": "eae4daff96f0dfbe923efc844723d28d4daf822db9642d7bff93e3e1252429b2"
+      "metadata": "c3ac08d981e19feea45af373f75ea56f40b6c5891f198aa08085910ea95ed611",
+      "response": "dc2c0a56dcc76a0512feb1c6dffafed8fe5384ed3a3e80eea4e98e4e7b24fb1d",
+      "release": "30181093f00f47507d1910d9806a97697118ab671aeae0598d21a4a2726a7cb8"
     }
   }
 }

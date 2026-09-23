@@ -5,7 +5,7 @@ Executa uma sonda Data Export estritamente read-only para os templates 6908 e 63
 
 .DESCRIPTION
 Usa somente curl.exe, GET com query string e a ultima declaracao nao vazia de
-API_BASE_URL/API_DATAEXPORT_TOKEN no .env do projeto legado. A sonda nao grava
+API_BASE_URL/API_DATAEXPORT_TOKEN no .env do V2, com fallback legado. A sonda nao grava
 payload, cabecalho, URL, token ou dados de negocio: ela imprime ao final apenas
 um resumo sanitizado de status, contagens, tipos, nulidade, formatos, nomes
 tecnicos de campos e flags de paginacao. Nenhum valor de campo e emitido.
@@ -60,6 +60,7 @@ param(
 
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
+. (Join-Path $PSScriptRoot 'DataExportProbeGate.ps1')
 
 $MaxResponseBytes = 10MB
 $CurlTimeoutSeconds = 30
@@ -107,6 +108,10 @@ function Assert-ClosedWindow {
 function Get-LegacyEnvPath {
     try {
         $v2Root = (Resolve-Path -LiteralPath (Join-Path $PSScriptRoot '..\..')).Path
+        $local = Join-Path $v2Root '.env'
+        if (Test-Path -LiteralPath $local -PathType Leaf) {
+            return (Resolve-Path -LiteralPath $local).Path
+        }
         $workspaceRoot = Split-Path -Parent $v2Root
         $envPath = Join-Path $workspaceRoot 'etl-extracao-dados\.env'
         if (-not (Test-Path -LiteralPath $envPath -PathType Leaf)) {
@@ -1601,6 +1606,13 @@ $startDate = ConvertTo-ClosedDate -Value $WindowStart
 $endDate = ConvertTo-ClosedDate -Value $WindowEnd
 Assert-ClosedWindow -Start $startDate -End $endDate
 
+$probeGate = Enter-DataExportProbeGate
+if ($null -eq $probeGate) {
+    [ordered]@{ transport = 'GET_QUERY'; calls_attempted = 0; stopped = $true; stop_reason = 'LOCAL_CONCURRENT_PROBE' } | ConvertTo-Json -Compress
+    exit 1
+}
+$probeExitCode = 0
+try {
 $legacyEnvPath = Get-LegacyEnvPath
 $baseUrl = Get-LastNonEmptyEnvValue -EnvPath $legacyEnvPath -Name 'API_BASE_URL'
 $token = Get-LastNonEmptyEnvValue -EnvPath $legacyEnvPath -Name 'API_DATAEXPORT_TOKEN'
@@ -1652,6 +1664,8 @@ $summary = [ordered]@{
 }
 
 $summary | ConvertTo-Json -Depth 12
-if ($state['stopped']) {
-    exit 1
+$probeExitCode = if ($state['stopped']) { 1 } else { 0 }
+} finally {
+    Exit-DataExportProbeGate -Gate $probeGate
 }
+exit $probeExitCode

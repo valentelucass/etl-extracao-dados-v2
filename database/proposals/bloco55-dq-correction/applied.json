@@ -1,0 +1,15 @@
+{
+  "id": "B55_DQ_FIX_01",
+  "passed": true,
+  "authorization": "OWNER_EXPLICIT_THREE_DQ_REVISIONS_20260908",
+  "packageSha256": "c07fe2c271d9f0a94e57b752a4bacc6d5d4b99a9581cbf254652bec939e36abb",
+  "dataRowsBefore": 6946,
+  "dataRowsAfter": 6961,
+  "activePolicies": 3,
+  "revokedPolicies": 3,
+  "historicalPolicies": 6,
+  "grants": 32,
+  "scopes": 16,
+  "validUntil": "2026-10-07T22:34:30.615Z",
+  "utc": "2026-09-08T19:23:28.7589760+00:00"
+}

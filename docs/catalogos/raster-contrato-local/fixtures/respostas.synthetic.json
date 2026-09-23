@@ -1,0 +1,98 @@
+{
+  "provenance": "SYNTHETIC_ONLY_NOT_PROVIDER_EVIDENCE",
+  "cases": [
+    {
+      "id": "WRAPPED_ARRAY",
+      "response": {
+        "result": [
+          {
+            "Viagens": [
+              {
+                "CodSolicitacao": 1,
+                "ColetasEntregas": [
+                  {
+                    "Ordem": 1,
+                    "CodigoCliente": "SYNTHETIC_A"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "expectedRows": 1,
+      "expected": "TERMINAL_UNVERIFIED"
+    },
+    {
+      "id": "WRAPPED_OBJECT",
+      "response": {
+        "result": {
+          "Viagens": {
+            "CodSolicitacao": 2,
+            "ColetasEntregas": []
+          }
+        }
+      },
+      "expectedRows": 1,
+      "expected": "TERMINAL_UNVERIFIED"
+    },
+    {
+      "id": "EXPLICIT_EMPTY",
+      "response": {
+        "result": {
+          "Viagens": []
+        }
+      },
+      "expectedRows": 0,
+      "expected": "TERMINAL_UNVERIFIED"
+    },
+    {
+      "id": "MISSING_ROOT",
+      "response": {},
+      "expectedRows": null,
+      "expected": "SHAPE_BLOCKED"
+    },
+    {
+      "id": "NULL_RESULT",
+      "response": {
+        "result": null
+      },
+      "expectedRows": null,
+      "expected": "SHAPE_BLOCKED"
+    },
+    {
+      "id": "AMBIGUOUS_RESULT",
+      "response": {
+        "result": {
+          "Viagens": []
+        },
+        "Result": {
+          "Viagens": []
+        }
+      },
+      "expectedRows": null,
+      "expected": "SHAPE_BLOCKED"
+    },
+    {
+      "id": "PROVIDER_ERROR",
+      "response": {
+        "Erro": "SYNTHETIC_ERROR",
+        "result": {
+          "Viagens": []
+        }
+      },
+      "expectedRows": null,
+      "expected": "SOURCE_ERROR"
+    },
+    {
+      "id": "WRONG_TRIPS_TYPE",
+      "response": {
+        "result": {
+          "Viagens": "SYNTHETIC_WRONG_TYPE"
+        }
+      },
+      "expectedRows": null,
+      "expected": "SHAPE_BLOCKED"
+    }
+  ]
+}

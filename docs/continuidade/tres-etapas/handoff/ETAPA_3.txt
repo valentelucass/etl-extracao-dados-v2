@@ -1,0 +1,62 @@
+Execute a ETAPA 3 DE 3 — P30–P33, no alcance efetivamente autorizado.
+
+Projeto: ETL Data Export V2
+Workspace: C:\Users\suporte\Documents\projetos\etl-dash\etl-extracao-dados-v2
+
+Leia AGENTS.md, STATES.md (estado atual e critérios da fatia), ../CONTEXTO_GLOBAL.md,
+docs/continuidade/RETOMADA.md, docs/runbooks/continuidade-agentes.md,
+docs/continuidade/tres-etapas/GUIA_E_PROMPTS.md e
+docs/continuidade/tres-etapas/handoff/ENCAMINHAMENTO.md.
+Use docs/continuidade/qualificacao-p07-p33/matriz.json e as provas nela referenciadas.
+
+P09–P15 esgotaram o trabalho local elegível identificado; seus aceites externos
+continuam abertos. Não volte automaticamente à etapa 1 nem refaça seus intakes.
+P07/P08 já têm provas locais: 2.263 unitários e 492 integrações, com quatro skips
+unitários históricos. Recibo: target/qualificacao-p07-p33-20260922-01/physical/closed-receipt.json.
+Não apresente essas provas como novas. A matriz não registra delta local elegível
+pendente; procure apenas mudança concreta de código/entrada/evidência pertinente,
+não repita a auditoria inteira nem crie tarefas para preencher o chat.
+
+Execute todo trabalho independente, concreto e autorizado do escopo abaixo em
+um único macrobloco. Resolva falhas técnicas locais neste chat. Não peça “continue”
+nem novas confirmações de rotina. Use um agente, preserve alterações preexistentes
+e falhas históricas, agrupe correções e execute testes dirigidos mais a regressão
+causal. Não reduza assertions, cobertura, massas ou limites para obter PASS.
+
+G01 continua EXTERNAL_HOLD: não ler/testar credenciais ou chamar fontes para
+substituir atestado. Não inventar contrato, identidade, referência, oráculo ou
+aceite humano. SQL somente no alcance documentado localhost/ETL_SISTEMA_V2_SHADOW,
+sintético e rollback nas validações que escrevem. Antes de efeito físico, conferir
+alvo, autorização exata, recuperação e ordem finita própria; ledgers CLOSED não
+são reutilizáveis. Produção, infraestrutura remota, publicação, jobs, credenciais,
+COMMIT/crash/restore material, deploy, corte e retirada não são autorizados por
+este prompt. Use somente autorização específica já comprovada, se existir.
+
+Se houver delta, atualize STATES primeiro, trilha/validações e checkpoint conforme
+protocolo, preservando manifests históricos. Entregue diff, testes realmente
+executados, resultado por critério e dependências que permanecem. Não requalifique
+P07/P08 por Markdown. Se não houver delta nem trabalho concreto elegível, encerre
+com resposta curta referenciando ENCAMINHAMENTO.md e a fatia impedida; não crie
+nova rodada de documentos/testes e não prometa liberação da etapa seguinte.
+
+ESCOPO DA ETAPA 3
+P30: confrontar o RC aceito da etapa 2 e a cobertura P18/P20/P25/P26/P28 e P22
+da unidade CUTOVER-DB-01 / DATABASE_WIDE. Conferir Tcut, writer único, fences,
+consumidores, rota, ponto de não retorno e recuperação. Reutilizar preparo existente.
+P31: somente com P30 e G06 válidos, executar ensaio material isolado autorizado,
+carga histórica/delta e duas recuperações; medir RTO/RPO. SIMULATED_PNR não é corte.
+P32: somente com P31, DoD/gates integrais e G07 nominal/datado, executar o corte
+autorizado com backup/rota/abort e revogação do writer antigo antes do novo.
+P33: somente com P32, período real de observação/retenção e G08, executar retirada
+autorizada e reconciliar responsabilidades/destinos de comandos, dados, views,
+jobs, credenciais e consumidores. Não remover GraphQL/adapters ainda consumidos.
+
+Confira autorização, alvo, janela, executor, impacto e recuperação por efeito.
+A preparação documental não comprova ensaio, corte, passagem do período de
+observação ou retirada. Não faça operação produtiva para satisfazer a meta de
+três chats. Não peça novamente autorização já suficiente e vigente; se faltar,
+conclua a preparação concreta ainda necessária e exponha uma vez o requisito.
+
+Saída: evidência real dos efeitos executados e dos critérios aceitos; projeto
+concluído somente com os critérios originais de todos os predecessores e P30–P33
+comprovados. Caso contrário, registrar precisamente o restante, sem falso PASS.

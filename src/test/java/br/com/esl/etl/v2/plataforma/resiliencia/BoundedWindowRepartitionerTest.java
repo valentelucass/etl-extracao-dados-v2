@@ -6,6 +6,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.Duration;
 import java.time.Instant;
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 import org.junit.jupiter.api.Test;
 
 class BoundedWindowRepartitionerTest {
@@ -76,6 +80,47 @@ class BoundedWindowRepartitionerTest {
                                 .split(
                                         FailureKind.WINDOW_TOO_LARGE_HTTP_422,
                                         new RepartitionWindow(Instant.MIN, Instant.MAX)));
+    }
+
+    @Test
+    void repeatedSplitsTerminateWithExactSemiOpenCoverageForEverySupportedUnitCount() {
+        final Instant start = Instant.parse("2026-08-01T00:00:00Z");
+        final Duration unit = Duration.ofMinutes(1);
+
+        for (int unitCount = 2;
+                unitCount <= EslResiliencePolicy.MAX_REPARTITIONS + 1;
+                unitCount++) {
+            final RepartitionWindow original =
+                    new RepartitionWindow(start, start.plus(unit.multipliedBy(unitCount)));
+            final BoundedWindowRepartitioner repartitioner = repartitioner(unitCount - 1, unit);
+            final ArrayDeque<RepartitionWindow> pending = new ArrayDeque<>();
+            final List<RepartitionWindow> leaves = new ArrayList<>();
+            pending.add(original);
+
+            while (!pending.isEmpty()) {
+                final RepartitionWindow candidate = pending.removeFirst();
+                if (candidate.duration().equals(unit)) {
+                    leaves.add(candidate);
+                } else {
+                    final RepartitionSplit split =
+                            repartitioner.split(FailureKind.WINDOW_TOO_LARGE_HTTP_422, candidate);
+                    pending.add(split.first());
+                    pending.add(split.second());
+                }
+            }
+
+            leaves.sort(Comparator.comparing(RepartitionWindow::start));
+            assertEquals(unitCount, leaves.size());
+            assertEquals(unitCount - 1, repartitioner.usedRepartitions());
+            Instant cursor = original.start();
+            for (final RepartitionWindow leaf : leaves) {
+                assertEquals(cursor, leaf.start());
+                assertEquals(unit, leaf.duration());
+                assertTrue(leaf.start().isBefore(leaf.endExclusive()));
+                cursor = leaf.endExclusive();
+            }
+            assertEquals(original.endExclusive(), cursor);
+        }
     }
 
     private static BoundedWindowRepartitioner repartitioner(final int budget, final Duration unit) {

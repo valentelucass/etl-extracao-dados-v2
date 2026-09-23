@@ -1,0 +1,777 @@
+{
+  "schema": "pmd-findings-triage-v1",
+  "date": "2026-09-22",
+  "state": "TRIAGEM_CONCLUIDA_CORRECOES_AGUARDAM_PROVA_CENTRAL",
+  "diagnostic": "target/avanco-seguranca-20260922-01/pmd-diagnostic-01/result.json",
+  "scope": "40 findings originais; tarefa 39 exclui QualificationConcurrency ja em correcao. Somente fluxos diretos adjacentes de ownership/causa.",
+  "counts": {
+    "diagnostic": 40,
+    "requestedRemaining": 39,
+    "finallyBugs": 3,
+    "otherRuleFindings": 37,
+    "demonstratedDefectSites": 8,
+    "newTestCasesByThisAgent": 17
+  },
+  "limitations": [
+    "Nenhum Maven, SQL, fonte remota ou leitura de segredos executado por este agente.",
+    "Linhas referem-se ao diagnostico original; hashes atuais podem anteceder formatter/correcao final de outro agente.",
+    "Classificacao tecnica nao e suppression PMD, aprovacao de gate ou aceite humano. 37 outros alertas permanecem sem suppression.",
+    "Testes relacionados indicam pertinencia, nao cobertura exata ou nova execucao de todos os ramos extremos.",
+    "Wrappers foram revisados nos caminhos concretos indicados; nao certifica todas as falhas fatais de JVM/construcao de proxy."
+  ],
+  "findings": [
+    {
+      "path": "src/main/java/br/com/esl/etl/v2/bootstrap/LocalAnalyticQuotesRuntime.java",
+      "line": 261,
+      "rule": "PreserveStackTrace",
+      "method": "capture",
+      "classification": "FALSO_POSITIVO_CAUSA_PRESERVADA",
+      "rationale": "SQLException e passada ao construtor IllegalStateException e guardada em failure[0]; o throw usa esse alias. A causa nao e descartada.",
+      "relatedTest": "src/test/java/br/com/esl/etl/v2/bootstrap/AnalyticLaboratoryQuotesIT.java",
+      "testEvidenceLimit": "Relacionado ao consumidor; nao e injecao exata de falha de begin.",
+      "reviewBasis": "LEITURA_E_FLUXO_LOCAL; SEM_NOVA_EXECUCAO_NESTE_AGENTE",
+      "pmdSuppressed": false
+    },
+    {
+      "path": "src/main/java/br/com/esl/etl/v2/bootstrap/LocalArtifactScenario.java",
+      "line": 343,
+      "rule": "DoNotThrowExceptionInFinally",
+      "method": "previewSequence",
+      "classification": "BUG_CORRIGIDO_AGUARDA_PROVA",
+      "rationale": "catch(Exception) nao guardava Error; SQLException de rollback substituia Error. SavepointScope/TWR preserva qualquer Throwable e suprime cleanup.",
+      "relatedTest": "src/test/java/br/com/esl/etl/v2/bootstrap/SavepointScopeTest.java",
+      "testEvidenceLimit": "Cinco casos novos; execucao centralizada no root.",
+      "reviewBasis": "LEITURA_E_FLUXO_LOCAL; SEM_NOVA_EXECUCAO_NESTE_AGENTE",
+      "pmdSuppressed": false
+    },
+    {
+      "path": "src/main/java/br/com/esl/etl/v2/bootstrap/Main.java",
+      "line": 428,
+      "rule": "PreserveStackTrace",
+      "method": "configurationPath",
+      "classification": "SANITIZACAO_DE_DADOS",
+      "rationale": "InvalidPathException pode incluir caminho informado; mensagem fixa evita reter caminho via cadeia de causas.",
+      "relatedTest": "src/test/java/br/com/esl/etl/v2/bootstrap/MainTest.java",
+      "testEvidenceLimit": "Teste de caminho com NUL e marcador sensivel verifica saida sem o caminho.",
+      "reviewBasis": "LEITURA_E_FLUXO_LOCAL; SEM_NOVA_EXECUCAO_NESTE_AGENTE",
+      "pmdSuppressed": false
+    },
+    {
+      "path": "src/main/java/br/com/esl/etl/v2/bootstrap/QualificationConcurrency.java",
+      "line": 104,
+      "rule": "DoNotThrowExceptionInFinally",
+      "method": "execute",
+      "classification": "BUG_CORRIGIDO_AGUARDA_PROVA",
+      "rationale": "finally podia substituir falha principal por falha de shutdown/awaitTermination. ExecutorScope/TWR preserva causa e interrupcao.",
+      "relatedTest": "src/test/java/br/com/esl/etl/v2/bootstrap/QualificationConcurrencyTest.java",
+      "testEvidenceLimit": "Seis casos deterministas novos, sem threads ou banco.",
+      "reviewBasis": "LEITURA_E_FLUXO_LOCAL; SEM_NOVA_EXECUCAO_NESTE_AGENTE",
+      "pmdSuppressed": false
+    },
+    {
+      "path": "src/main/java/br/com/esl/etl/v2/bootstrap/QualificationTemporalMatrix.java",
+      "line": 750,
+      "rule": "DoNotThrowExceptionInFinally",
+      "method": "isolated",
+      "classification": "BUG_CORRIGIDO_AGUARDA_PROVA",
+      "rationale": "catch(Exception) nao guardava Error; SQLException de rollback substituia Error. SavepointScope/TWR remove esse mascaramento.",
+      "relatedTest": "src/test/java/br/com/esl/etl/v2/bootstrap/SavepointScopeTest.java",
+      "testEvidenceLimit": "Cinco casos novos compartilhados com o outro consumidor real.",
+      "reviewBasis": "LEITURA_E_FLUXO_LOCAL; SEM_NOVA_EXECUCAO_NESTE_AGENTE",
+      "pmdSuppressed": false
+    },
+    {
+      "path": "src/main/java/br/com/esl/etl/v2/modulos/coletas/aplicacao/LigarReferenciaTemporalColeta.java",
+      "line": 91,
+      "rule": "PreserveStackTrace",
+      "method": "dataExportRequestDate",
+      "classification": "SANITIZACAO_DE_DADOS",
+      "rationale": "JsonProcessingException pode carregar fragmentos do payload de Coletas; erro de fronteira usa texto fixo e nao retém a causa crua.",
+      "relatedTest": "src/test/java/br/com/esl/etl/v2/modulos/coletas/aplicacao/ColetaTemporalLinkTest.java",
+      "testEvidenceLimit": "Teste relacionado ao contrato temporal; nao foi localizado caso exato de JSON malformado nesse metodo.",
+      "reviewBasis": "LEITURA_E_FLUXO_LOCAL; SEM_NOVA_EXECUCAO_NESTE_AGENTE",
+      "pmdSuppressed": false
+    },
+    {
+      "path": "src/main/java/br/com/esl/etl/v2/modulos/manifestos/aplicacao/ManifestoDataExportRecordMapper.java",
+      "line": 97,
+      "rule": "PreserveStackTrace",
+      "method": "rootKey",
+      "classification": "TRADUCAO_TIPADA",
+      "rationale": "IdentityQuarantineException vira ManifestoMappingException com reason enum; preserva codigo de quarentena e nao exige cadeia tecnica no registro.",
+      "relatedTest": "src/test/java/br/com/esl/etl/v2/modulos/manifestos/aplicacao/ManifestoDataExportRecordMapperTest.java",
+      "testEvidenceLimit": "quarantinesIdentityTemporalAndChildAsymmetryFailClosed verifica motivos e ausencia de payload.",
+      "reviewBasis": "LEITURA_E_FLUXO_LOCAL; SEM_NOVA_EXECUCAO_NESTE_AGENTE",
+      "pmdSuppressed": false
+    },
+    {
+      "path": "src/main/java/br/com/esl/etl/v2/plataforma/autorizacao/LaboratorySqlBudget.java",
+      "line": 62,
+      "rule": "CloseResource",
+      "method": "open",
+      "classification": "FALSO_POSITIVO_OWNERSHIP_TRANSFERIDO",
+      "rationale": "Connection delegate pertence ao proxy retornado: close delegado em finally decrementa concorrencia uma vez (AtomicBoolean). Falha SQL/runtime de abertura decrementa a reserva. Nao fechar antes de devolver.",
+      "relatedTest": "src/test/java/br/com/esl/etl/v2/plataforma/autorizacao/LaboratorySqlBudgetTest.java",
+      "testEvidenceLimit": "failedOpensRemainConsumedButReleaseConcurrency e concurrentConnectionsAreBoundedAndDoubleCloseDoesNotReleaseTwice.",
+      "reviewBasis": "LEITURA_E_FLUXO_LOCAL; SEM_NOVA_EXECUCAO_NESTE_AGENTE",
+      "pmdSuppressed": false
+    },
+    {
+      "path": "src/main/java/br/com/esl/etl/v2/plataforma/autorizacao/RuntimeAuthorizationBoundary.java",
+      "line": 52,
+      "rule": "PreserveStackTrace",
+      "method": "authorize",
+      "classification": "SANITIZACAO_DE_DADOS",
+      "rationale": "Falha do relogio vira TEMPORAL_VALIDATION_UNAVAILABLE sem conservar detalhes tecnicos arbitrarios; autorizacao falha fechada.",
+      "relatedTest": "src/test/java/br/com/esl/etl/v2/plataforma/autorizacao/RuntimeAuthorizationBoundaryTest.java",
+      "testEvidenceLimit": "Suite da fronteira; ramo exato de primeiro clock nao foi reexecutado.",
+      "reviewBasis": "LEITURA_E_FLUXO_LOCAL; SEM_NOVA_EXECUCAO_NESTE_AGENTE",
+      "pmdSuppressed": false
+    },
+    {
+      "path": "src/main/java/br/com/esl/etl/v2/plataforma/autorizacao/RuntimeAuthorizationBoundary.java",
+      "line": 62,
+      "rule": "PreserveStackTrace",
+      "method": "authorize",
+      "classification": "SANITIZACAO_DE_DADOS",
+      "rationale": "Falha tipada de identidade e traduzida por mapIdentityReason em motivo autorizado e auditavel; nao liga causa sensivel do verificador.",
+      "relatedTest": "src/test/java/br/com/esl/etl/v2/plataforma/autorizacao/RuntimeAuthorizationBoundaryTest.java",
+      "testEvidenceLimit": "Testes conferem motivo e getCause()==null.",
+      "reviewBasis": "LEITURA_E_FLUXO_LOCAL; SEM_NOVA_EXECUCAO_NESTE_AGENTE",
+      "pmdSuppressed": false
+    },
+    {
+      "path": "src/main/java/br/com/esl/etl/v2/plataforma/autorizacao/RuntimeAuthorizationBoundary.java",
+      "line": 65,
+      "rule": "PreserveStackTrace",
+      "method": "authorize",
+      "classification": "SANITIZACAO_DE_DADOS",
+      "rationale": "Falha runtime desconhecida do verificador produz AUTHORITY_UNAVAILABLE; evita reter detalhes externos na cadeia de causas.",
+      "relatedTest": "src/test/java/br/com/esl/etl/v2/plataforma/autorizacao/RuntimeAuthorizationBoundaryTest.java",
+      "testEvidenceLimit": "Teste com synthetic-sensitive-verifier-detail exige causa nula.",
+      "reviewBasis": "LEITURA_E_FLUXO_LOCAL; SEM_NOVA_EXECUCAO_NESTE_AGENTE",
+      "pmdSuppressed": false
+    },
+    {
+      "path": "src/main/java/br/com/esl/etl/v2/plataforma/autorizacao/RuntimeAuthorizationBoundary.java",
+      "line": 86,
+      "rule": "PreserveStackTrace",
+      "method": "authorize",
+      "classification": "SANITIZACAO_DE_DADOS",
+      "rationale": "Falha do segundo clock produz TEMPORAL_VALIDATION_UNAVAILABLE sem texto arbitrario e sem liberar autorizacao.",
+      "relatedTest": "src/test/java/br/com/esl/etl/v2/plataforma/autorizacao/RuntimeAuthorizationBoundaryTest.java",
+      "testEvidenceLimit": "Suite de autorizacao temporal relacionada; nao reexecutada.",
+      "reviewBasis": "LEITURA_E_FLUXO_LOCAL; SEM_NOVA_EXECUCAO_NESTE_AGENTE",
+      "pmdSuppressed": false
+    },
+    {
+      "path": "src/main/java/br/com/esl/etl/v2/plataforma/autorizacao/RuntimeAuthorizationBoundary.java",
+      "line": 172,
+      "rule": "PreserveStackTrace",
+      "method": "recordOrDeny",
+      "classification": "SANITIZACAO_DE_DADOS",
+      "rationale": "Falha de auditoria produz AUDIT_UNAVAILABLE, incluindo caminho allow/deny; causa crua pode conter detalhe sensivel do sink.",
+      "relatedTest": "src/test/java/br/com/esl/etl/v2/plataforma/autorizacao/RuntimeAuthorizationBoundaryTest.java",
+      "testEvidenceLimit": "Teste synthetic-sensitive-audit-detail exige causas nulas para allow/deny.",
+      "reviewBasis": "LEITURA_E_FLUXO_LOCAL; SEM_NOVA_EXECUCAO_NESTE_AGENTE",
+      "pmdSuppressed": false
+    },
+    {
+      "path": "src/main/java/br/com/esl/etl/v2/plataforma/configuracao/RuntimeConfigurationFactory.java",
+      "line": 493,
+      "rule": "PreserveStackTrace",
+      "method": "parseUri",
+      "classification": "SANITIZACAO_DE_DADOS",
+      "rationale": "URI.create pode ecoar URI/credenciais; fronteira devolve mensagem fixa recebida internamente, sem causa.",
+      "relatedTest": "src/test/java/br/com/esl/etl/v2/plataforma/configuracao/RuntimeConfigurationFactoryTest.java",
+      "testEvidenceLimit": "Suite de configuracao; nao reexecutada.",
+      "reviewBasis": "LEITURA_E_FLUXO_LOCAL; SEM_NOVA_EXECUCAO_NESTE_AGENTE",
+      "pmdSuppressed": false
+    },
+    {
+      "path": "src/main/java/br/com/esl/etl/v2/plataforma/configuracao/RuntimeConfigurationFactory.java",
+      "line": 505,
+      "rule": "PreserveStackTrace",
+      "method": "parseIanaZone",
+      "classification": "SANITIZACAO_DE_DADOS",
+      "rationale": "ZoneId.of pode ecoar valor de configuracao; mensagem fixa cobre formato e exige IANA registrado.",
+      "relatedTest": "src/test/java/br/com/esl/etl/v2/plataforma/configuracao/RuntimeConfigurationFactoryTest.java",
+      "testEvidenceLimit": "Suite de configuracao temporal; nao reexecutada.",
+      "reviewBasis": "LEITURA_E_FLUXO_LOCAL; SEM_NOVA_EXECUCAO_NESTE_AGENTE",
+      "pmdSuppressed": false
+    },
+    {
+      "path": "src/main/java/br/com/esl/etl/v2/plataforma/configuracao/RuntimeConfigurationFactory.java",
+      "line": 513,
+      "rule": "PreserveStackTrace",
+      "method": "parseTransport",
+      "classification": "SANITIZACAO_DE_DADOS",
+      "rationale": "Transporte invalido vira texto fixo; nao devolve valor arbitrario da configuracao via excecao original.",
+      "relatedTest": "src/test/java/br/com/esl/etl/v2/plataforma/configuracao/RuntimeConfigurationFactoryTest.java",
+      "testEvidenceLimit": "Suite de rejeicao de configuracao; nao reexecutada.",
+      "reviewBasis": "LEITURA_E_FLUXO_LOCAL; SEM_NOVA_EXECUCAO_NESTE_AGENTE",
+      "pmdSuppressed": false
+    },
+    {
+      "path": "src/main/java/br/com/esl/etl/v2/plataforma/configuracao/RuntimeConfigurationFactory.java",
+      "line": 596,
+      "rule": "PreserveStackTrace",
+      "method": "parseLong",
+      "classification": "SANITIZACAO_DE_DADOS",
+      "rationale": "NumberFormatException inclui entrada; erro numerico fixo evita propagar o valor de configuracao.",
+      "relatedTest": "src/test/java/br/com/esl/etl/v2/plataforma/configuracao/RuntimeConfigurationFactoryTest.java",
+      "testEvidenceLimit": "Teste invalid-value verifica ausencia no toString().",
+      "reviewBasis": "LEITURA_E_FLUXO_LOCAL; SEM_NOVA_EXECUCAO_NESTE_AGENTE",
+      "pmdSuppressed": false
+    },
+    {
+      "path": "src/main/java/br/com/esl/etl/v2/plataforma/configuracao/RuntimeEnvironment.java",
+      "line": 14,
+      "rule": "PreserveStackTrace",
+      "method": "fromConfiguration",
+      "classification": "SANITIZACAO_DE_DADOS",
+      "rationale": "valueOf pode ecoar entrada; o enum fechado e mensagem fixa recusam ambiente desconhecido sem reter valor.",
+      "relatedTest": "src/test/java/br/com/esl/etl/v2/plataforma/configuracao/RuntimeConfigurationFactoryTest.java",
+      "testEvidenceLimit": "Testes relacionados de configuracao, nao reexecutados.",
+      "reviewBasis": "LEITURA_E_FLUXO_LOCAL; SEM_NOVA_EXECUCAO_NESTE_AGENTE",
+      "pmdSuppressed": false
+    },
+    {
+      "path": "src/main/java/br/com/esl/etl/v2/plataforma/configuracao/ShadowStorageTargetKind.java",
+      "line": 14,
+      "rule": "PreserveStackTrace",
+      "method": "fromConfiguration",
+      "classification": "SANITIZACAO_DE_DADOS",
+      "rationale": "Tipo de alvo desconhecido e rejeitado por mensagem fixa, sem causa que ecoa a entrada do enum.",
+      "relatedTest": "src/test/java/br/com/esl/etl/v2/plataforma/configuracao/RuntimeConfigurationFactoryTest.java",
+      "testEvidenceLimit": "Testes relacionados de alvo de sombra, nao reexecutados.",
+      "reviewBasis": "LEITURA_E_FLUXO_LOCAL; SEM_NOVA_EXECUCAO_NESTE_AGENTE",
+      "pmdSuppressed": false
+    },
+    {
+      "path": "src/main/java/br/com/esl/etl/v2/plataforma/fonte/dataexport/DataExportHttpBodyHandler.java",
+      "line": 48,
+      "rule": "PreserveStackTrace",
+      "method": "validateContentLength",
+      "classification": "SANITIZACAO_DE_DADOS",
+      "rationale": "Overflow de Long.parseLong no Content-Length vira erro fixo, sem header na causa; evita detalhes remotos.",
+      "relatedTest": "src/test/java/br/com/esl/etl/v2/plataforma/fonte/dataexport/DataExportHttpBodyHandlerTest.java",
+      "testEvidenceLimit": "rejectsMalformedDeclaredLengthWithoutEchoingTheHeader exige causa nula.",
+      "reviewBasis": "LEITURA_E_FLUXO_LOCAL; SEM_NOVA_EXECUCAO_NESTE_AGENTE",
+      "pmdSuppressed": false
+    },
+    {
+      "path": "src/main/java/br/com/esl/etl/v2/plataforma/fonte/dataexport/DataExportHttpBodyHandler.java",
+      "line": 133,
+      "rule": "PreserveStackTrace",
+      "method": "copy",
+      "classification": "TRADUCAO_TIPADA",
+      "rationale": "Overflow de contador vira DataExportResponseLimitExceededException com template/limite e Long.MAX_VALUE; classifica limite e cancela body.",
+      "relatedTest": "src/test/java/br/com/esl/etl/v2/plataforma/fonte/dataexport/DataExportHttpBodyHandlerTest.java",
+      "testEvidenceLimit": "Testes de limite de bytes e cancelamento relacionados; overflow exato nao foi reexecutado.",
+      "reviewBasis": "LEITURA_E_FLUXO_LOCAL; SEM_NOVA_EXECUCAO_NESTE_AGENTE",
+      "pmdSuppressed": false
+    },
+    {
+      "path": "src/main/java/br/com/esl/etl/v2/plataforma/fonte/dataexport/DataExportHttpExecutor.java",
+      "line": 181,
+      "rule": "PreserveStackTrace",
+      "method": "sendBounded",
+      "classification": "FALSO_POSITIVO_CAUSA_PRESERVADA_COM_BUG_ADJACENTE_CORRIGIDO",
+      "rationale": "ExecutionException e desembrulhada; IOException/runtime sao propagadas e fallback preserva cause. Bug adjacente: Error antes virava IOException e recebia retry; agora Error e propagado diretamente.",
+      "relatedTest": "src/test/java/br/com/esl/etl/v2/plataforma/fonte/dataexport/DataExportHttpExecutorTest.java",
+      "testEvidenceLimit": "Nova propagatesErrorWithoutRetryAndStillReleasesThePermit: mesma causa, 1 request e permit liberado; aguarda root.",
+      "reviewBasis": "LEITURA_E_FLUXO_LOCAL; SEM_NOVA_EXECUCAO_NESTE_AGENTE",
+      "pmdSuppressed": false
+    },
+    {
+      "path": "src/main/java/br/com/esl/etl/v2/plataforma/fonte/dataexport/DataExportHttpExecutor.java",
+      "line": 225,
+      "rule": "PreserveStackTrace",
+      "method": "decodeUtf8",
+      "classification": "SANITIZACAO_DE_DADOS",
+      "rationale": "Falha de UTF-8 vira erro fixo do template, sem cadeia potencialmente ligada a bytes remotos.",
+      "relatedTest": "src/test/java/br/com/esl/etl/v2/plataforma/fonte/dataexport/HttpDataExportGatewayTest.java",
+      "testEvidenceLimit": "rejectsMalformedUtf8WithoutReplacementOrRetainedBytes exige causa nula.",
+      "reviewBasis": "LEITURA_E_FLUXO_LOCAL; SEM_NOVA_EXECUCAO_NESTE_AGENTE",
+      "pmdSuppressed": false
+    },
+    {
+      "path": "src/main/java/br/com/esl/etl/v2/plataforma/fonte/dataexport/HttpDataExportGateway.java",
+      "line": 372,
+      "rule": "PreserveStackTrace",
+      "method": "parseResponse",
+      "classification": "SANITIZACAO_DE_DADOS",
+      "rationale": "JsonProcessingException pode reter payload; mensagem fixa com template remove causa bruta da fronteira.",
+      "relatedTest": "src/test/java/br/com/esl/etl/v2/plataforma/fonte/dataexport/HttpDataExportGatewayTest.java",
+      "testEvidenceLimit": "sanitizesMalformedJsonWithoutRetainingTheResponsePayload exige causa nula.",
+      "reviewBasis": "LEITURA_E_FLUXO_LOCAL; SEM_NOVA_EXECUCAO_NESTE_AGENTE",
+      "pmdSuppressed": false
+    },
+    {
+      "path": "src/main/java/br/com/esl/etl/v2/plataforma/fonte/dataexport/HttpDataExportTemplateInfoGateway.java",
+      "line": 143,
+      "rule": "PreserveStackTrace",
+      "method": "parseResponse",
+      "classification": "SANITIZACAO_DE_DADOS",
+      "rationale": "JSON de metadados invalido e reduzido a mensagem/template; evita payload em causa Jackson.",
+      "relatedTest": "src/test/java/br/com/esl/etl/v2/plataforma/fonte/dataexport/HttpDataExportTemplateInfoGatewayTest.java",
+      "testEvidenceLimit": "sanitizesMalformedMetadataJsonWithoutRetainingTheResponsePayload exige causa nula.",
+      "reviewBasis": "LEITURA_E_FLUXO_LOCAL; SEM_NOVA_EXECUCAO_NESTE_AGENTE",
+      "pmdSuppressed": false
+    },
+    {
+      "path": "src/main/java/br/com/esl/etl/v2/plataforma/fonte/graphql/GraphQlHttpExecutor.java",
+      "line": 185,
+      "rule": "PreserveStackTrace",
+      "method": "sendBounded",
+      "classification": "DESEMPACOTAMENTO_E_SANITIZACAO",
+      "rationale": "unwrap propaga IOException e Error; motivos runtime seguros sao preservados e runtime desconhecido vira GraphQlTransportException sem causa. Wrapper ExecutionException nao e erro primario perdido.",
+      "relatedTest": "src/test/java/br/com/esl/etl/v2/plataforma/fonte/graphql/GraphQlHttpExecutorTest.java",
+      "testEvidenceLimit": "sanitizesUnknownRuntimeFailureWithoutRetryOrCause e propagatesErrorWithoutRetryAndStillReleasesThePermit.",
+      "reviewBasis": "LEITURA_E_FLUXO_LOCAL; SEM_NOVA_EXECUCAO_NESTE_AGENTE",
+      "pmdSuppressed": false
+    },
+    {
+      "path": "src/main/java/br/com/esl/etl/v2/plataforma/fonte/graphql/GraphQlHttpExecutor.java",
+      "line": 245,
+      "rule": "PreserveStackTrace",
+      "method": "decodeUtf8",
+      "classification": "SANITIZACAO_DE_DADOS",
+      "rationale": "CharacterCodingException vira codigo INVALID_UTF8 sem bytes nem causa remota.",
+      "relatedTest": "src/test/java/br/com/esl/etl/v2/plataforma/fonte/graphql/HttpGraphQlGatewayTest.java",
+      "testEvidenceLimit": "Suite gateway relacionada; nao reexecutada.",
+      "reviewBasis": "LEITURA_E_FLUXO_LOCAL; SEM_NOVA_EXECUCAO_NESTE_AGENTE",
+      "pmdSuppressed": false
+    },
+    {
+      "path": "src/main/java/br/com/esl/etl/v2/plataforma/fonte/graphql/GraphQlPageStreamer.java",
+      "line": 182,
+      "rule": "PreserveStackTrace",
+      "method": "validatePage",
+      "classification": "TRADUCAO_TIPADA",
+      "rationale": "Overflow de soma de nos vira NODE_LIMIT e impede consumo de pagina; motivo fechado e suficiente ao contrato.",
+      "relatedTest": "src/test/java/br/com/esl/etl/v2/plataforma/fonte/graphql/GraphQlPageStreamerTest.java",
+      "testEvidenceLimit": "capsPagesAndNodesBeforeConsumerOrAnotherIo cobre limite, nao overflow exato de long.",
+      "reviewBasis": "LEITURA_E_FLUXO_LOCAL; SEM_NOVA_EXECUCAO_NESTE_AGENTE",
+      "pmdSuppressed": false
+    },
+    {
+      "path": "src/main/java/br/com/esl/etl/v2/plataforma/fonte/graphql/GraphQlRequestJsonSerializer.java",
+      "line": 33,
+      "rule": "PreserveStackTrace",
+      "method": "serialize",
+      "classification": "SANITIZACAO_DE_DADOS",
+      "rationale": "Falha Jackson de serializacao nao deve reter query/variaveis/cursor; mensagem fixa remove a causa que poderia incluir esses dados.",
+      "relatedTest": "src/test/java/br/com/esl/etl/v2/plataforma/fonte/graphql/HttpGraphQlGatewayTest.java",
+      "testEvidenceLimit": "Teste relacionado de request; nao foi localizada injecao especifica de serializador falho.",
+      "reviewBasis": "LEITURA_E_FLUXO_LOCAL; SEM_NOVA_EXECUCAO_NESTE_AGENTE",
+      "pmdSuppressed": false
+    },
+    {
+      "path": "src/main/java/br/com/esl/etl/v2/plataforma/fonte/graphql/GraphQlResponseParser.java",
+      "line": 38,
+      "rule": "PreserveStackTrace",
+      "method": "parse",
+      "classification": "SANITIZACAO_DE_DADOS",
+      "rationale": "JSON malformado/overflow vira INVALID_JSON, sem documento de origem na cadeia de causas.",
+      "relatedTest": "src/test/java/br/com/esl/etl/v2/plataforma/fonte/graphql/GraphQlResponseParserTest.java",
+      "testEvidenceLimit": "strictJsonAndRuntimePathBoundaryRejectDuplicateTrailingAndShapeDrift e rejeicao de envelopes.",
+      "reviewBasis": "LEITURA_E_FLUXO_LOCAL; SEM_NOVA_EXECUCAO_NESTE_AGENTE",
+      "pmdSuppressed": false
+    },
+    {
+      "path": "src/main/java/br/com/esl/etl/v2/plataforma/fonte/graphql/GraphQlResponseParser.java",
+      "line": 96,
+      "rule": "PreserveStackTrace",
+      "method": "parse",
+      "classification": "SANITIZACAO_DE_DADOS",
+      "rationale": "Cursor invalido vira INVALID_PAGE_INFO sem conservar valor sensivel do cursor na causa.",
+      "relatedTest": "src/test/java/br/com/esl/etl/v2/plataforma/fonte/graphql/GraphQlResponseParserTest.java",
+      "testEvidenceLimit": "rejectsInvalidEdgesNodesAndPageInfoWithoutPartialSuccess.",
+      "reviewBasis": "LEITURA_E_FLUXO_LOCAL; SEM_NOVA_EXECUCAO_NESTE_AGENTE",
+      "pmdSuppressed": false
+    },
+    {
+      "path": "src/main/java/br/com/esl/etl/v2/plataforma/identidade/ScopedSourceIdentity.java",
+      "line": 113,
+      "rule": "PreserveStackTrace",
+      "method": "checked",
+      "classification": "TRADUCAO_TIPADA",
+      "rationale": "SourceKey invalida e traduzida para IdentityQuarantineException/INVALID_SOURCE_KEY_VALUE; evita valor de chave na quarentena.",
+      "relatedTest": "src/test/java/br/com/esl/etl/v2/plataforma/identidade/ScopedSourceIdentityTest.java",
+      "testEvidenceLimit": "missingInvalidAndOversizedKeysFailClosedWithoutLeakingValues.",
+      "reviewBasis": "LEITURA_E_FLUXO_LOCAL; SEM_NOVA_EXECUCAO_NESTE_AGENTE",
+      "pmdSuppressed": false
+    },
+    {
+      "path": "src/main/java/br/com/esl/etl/v2/plataforma/persistencia/analitico/JdbcRasterBatch.java",
+      "line": 37,
+      "rule": "CloseResource",
+      "method": "JdbcRasterBatch",
+      "classification": "FALSO_POSITIVO_OWNERSHIP_TRANSFERIDO",
+      "rationale": "PreparedStatement child e transferido a stops; SQLException posterior de prepare/timeout fecha trips, child e structure adquiridos, suprimindo falhas de cleanup.",
+      "relatedTest": "src/test/java/br/com/esl/etl/v2/bootstrap/AnalyticLaboratoryRasterTransportTest.java",
+      "testEvidenceLimit": "close separado apresentou bug adjacente de mascaramento; correcao por outro agente/root; teste constructor parcial especifico nao localizado.",
+      "reviewBasis": "LEITURA_E_FLUXO_LOCAL; SEM_NOVA_EXECUCAO_NESTE_AGENTE",
+      "pmdSuppressed": false
+    },
+    {
+      "path": "src/main/java/br/com/esl/etl/v2/plataforma/persistencia/analitico/JdbcRasterBatch.java",
+      "line": 38,
+      "rule": "CloseResource",
+      "method": "JdbcRasterBatch",
+      "classification": "FALSO_POSITIVO_OWNERSHIP_TRANSFERIDO",
+      "rationale": "PreparedStatement structure e transferido a structures; catch de constructor fecha recursos adquiridos e preserva SQLException com suppressed. Consumidor LocalRasterRuntime usa TWR.",
+      "relatedTest": "src/test/java/br/com/esl/etl/v2/bootstrap/AnalyticLaboratoryRasterTransportTest.java",
+      "testEvidenceLimit": "Nao e evidencia de falha de constructor; defeito de close e registrado separadamente.",
+      "reviewBasis": "LEITURA_E_FLUXO_LOCAL; SEM_NOVA_EXECUCAO_NESTE_AGENTE",
+      "pmdSuppressed": false
+    },
+    {
+      "path": "src/main/java/br/com/esl/etl/v2/plataforma/persistencia/analitico/JdbcRasterBatch.java",
+      "line": 50,
+      "rule": "CloseResource",
+      "method": "JdbcRasterBatch",
+      "classification": "FALSO_POSITIVO_HANDLE_EMPRESTADO",
+      "rationale": "Variavel prepared do foreach e alias dos recursos ja adquiridos; cada nao nulo e explicitamente fechado com close failure suprimida no erro SQL principal.",
+      "relatedTest": "src/test/java/br/com/esl/etl/v2/bootstrap/AnalyticLaboratoryRasterTransportTest.java",
+      "testEvidenceLimit": "Teste relacionado; nenhum novo fechamento deve ser inserido so para eliminar aviso.",
+      "reviewBasis": "LEITURA_E_FLUXO_LOCAL; SEM_NOVA_EXECUCAO_NESTE_AGENTE",
+      "pmdSuppressed": false
+    },
+    {
+      "path": "src/main/java/br/com/esl/etl/v2/plataforma/persistencia/coletas/ColetaTemporalLaboratorySession.java",
+      "line": 185,
+      "rule": "CloseResource",
+      "method": "cancelActiveStatements",
+      "classification": "FALSO_POSITIVO_HANDLE_EMPRESTADO",
+      "rationale": "Iteracao de cancelamento usa Statements de terceiros rastreados; cancel nao transfere ownership e nao deve fechar trabalho ativo.",
+      "relatedTest": "src/test/java/br/com/esl/etl/v2/plataforma/persistencia/coletas/ColetaTemporalLaboratorySessionCloseTest.java",
+      "testEvidenceLimit": "Bug adjacente em control/prune corrigido root e descrito separadamente.",
+      "reviewBasis": "LEITURA_E_FLUXO_LOCAL; SEM_NOVA_EXECUCAO_NESTE_AGENTE",
+      "pmdSuppressed": false
+    },
+    {
+      "path": "src/main/java/br/com/esl/etl/v2/plataforma/persistencia/coletas/ColetaTemporalLaboratorySession.java",
+      "line": 211,
+      "rule": "CloseResource",
+      "method": "pruneClosedStatements",
+      "classification": "FALSO_POSITIVO_HANDLE_EMPRESTADO",
+      "rationale": "prune consulta isClosed e remove handles ja fechados; nao adquire recurso. Bug real adjacente era chamada de prune antes do try de ownership do novo Statement; movida para dentro.",
+      "relatedTest": "src/test/java/br/com/esl/etl/v2/plataforma/persistencia/coletas/ColetaTemporalLaboratorySessionCloseTest.java",
+      "testEvidenceLimit": "closesNewStatementWhenCheckingAnExistingStatementFails, 2 casos novos root.",
+      "reviewBasis": "LEITURA_E_FLUXO_LOCAL; SEM_NOVA_EXECUCAO_NESTE_AGENTE",
+      "pmdSuppressed": false
+    },
+    {
+      "path": "src/main/java/br/com/esl/etl/v2/plataforma/persistencia/controle/BoundedRuntimeDataSource.java",
+      "line": 84,
+      "rule": "CloseResource",
+      "method": "getConnection",
+      "classification": "FALSO_POSITIVO_OWNERSHIP_TRANSFERIDO",
+      "rationale": "Connection alias e transferido ao proxy e fechado no close; falhas de abertura limpam delegate/reserva. Dois bugs adjacentes corrigidos: Statement perdido em setQueryTimeout e permit perdido em RuntimeException do opener.",
+      "relatedTest": "src/test/java/br/com/esl/etl/v2/plataforma/persistencia/controle/RuntimeJdbcBoundariesTest.java",
+      "testEvidenceLimit": "5 casos novos: 4 combinacoes timeout/close e 1 recuperacao apos 3 recusas runtime; aguarda root.",
+      "reviewBasis": "LEITURA_E_FLUXO_LOCAL; SEM_NOVA_EXECUCAO_NESTE_AGENTE",
+      "pmdSuppressed": false
+    },
+    {
+      "path": "src/main/java/br/com/esl/etl/v2/plataforma/resiliencia/BoundedWindowRepartitioner.java",
+      "line": 48,
+      "rule": "PreserveStackTrace",
+      "method": "split",
+      "classification": "TRADUCAO_TIPADA",
+      "rationale": "Duration.dividedBy overflow vira WINDOW_OUT_OF_RANGE; recusa fail-closed tipada em vez de detalhe aritmetico generico.",
+      "relatedTest": "src/test/java/br/com/esl/etl/v2/plataforma/resiliencia/BoundedWindowRepartitionerTest.java",
+      "testEvidenceLimit": "Refusal/limites/cobertura de janelas relacionados; overflow especifico nao reexecutado.",
+      "reviewBasis": "LEITURA_E_FLUXO_LOCAL; SEM_NOVA_EXECUCAO_NESTE_AGENTE",
+      "pmdSuppressed": false
+    },
+    {
+      "path": "src/main/java/br/com/esl/etl/v2/plataforma/resiliencia/BoundedWindowRepartitioner.java",
+      "line": 61,
+      "rule": "PreserveStackTrace",
+      "method": "split",
+      "classification": "TRADUCAO_TIPADA",
+      "rationale": "Overflow ao calcular midpoint vira WINDOW_OUT_OF_RANGE, nao produz divisao incompleta. Motivo tipado e contrato da operacao.",
+      "relatedTest": "src/test/java/br/com/esl/etl/v2/plataforma/resiliencia/BoundedWindowRepartitionerTest.java",
+      "testEvidenceLimit": "Testes de divisao/recusa relacionados; nao reexecutados.",
+      "reviewBasis": "LEITURA_E_FLUXO_LOCAL; SEM_NOVA_EXECUCAO_NESTE_AGENTE",
+      "pmdSuppressed": false
+    }
+  ],
+  "defects": [
+    {
+      "id": "CC-01",
+      "path": "src/main/java/br/com/esl/etl/v2/bootstrap/QualificationConcurrency.java",
+      "method": "execute",
+      "before": "Falha no finally do executor substituia causa primaria.",
+      "after": "ExecutorScope/TWR, 6 testes.",
+      "status": "CORRIGIDO_AGUARDA_PROVA_ROOT",
+      "relatedTest": "src/test/java/br/com/esl/etl/v2/bootstrap/QualificationConcurrencyTest.java"
+    },
+    {
+      "id": "SP-01",
+      "path": "src/main/java/br/com/esl/etl/v2/bootstrap/LocalArtifactScenario.java",
+      "method": "previewSequence",
+      "before": "Error nao preenchia Exception original e rollback SQLException o substituia.",
+      "after": "SavepointScope/TWR, 5 testes compartilhados.",
+      "status": "CORRIGIDO_AGUARDA_PROVA_ROOT",
+      "relatedTest": "src/test/java/br/com/esl/etl/v2/bootstrap/SavepointScopeTest.java"
+    },
+    {
+      "id": "SP-02",
+      "path": "src/main/java/br/com/esl/etl/v2/bootstrap/QualificationTemporalMatrix.java",
+      "method": "isolated",
+      "before": "Error nao preenchia Exception original e rollback SQLException o substituia.",
+      "after": "SavepointScope/TWR, 5 testes compartilhados.",
+      "status": "CORRIGIDO_AGUARDA_PROVA_ROOT",
+      "relatedTest": "src/test/java/br/com/esl/etl/v2/bootstrap/SavepointScopeTest.java"
+    },
+    {
+      "id": "SESSION-01",
+      "path": "src/main/java/br/com/esl/etl/v2/plataforma/persistencia/coletas/ColetaTemporalLaboratorySession.java",
+      "method": "control",
+      "before": "Statement novo perdido se pruneClosedStatements/isClosed falhasse antes do try.",
+      "after": "Root moveu prune para try de limpeza; 2 testes.",
+      "status": "CORRIGIDO_AGUARDA_PROVA_ROOT",
+      "relatedTest": "src/test/java/br/com/esl/etl/v2/plataforma/persistencia/coletas/ColetaTemporalLaboratorySessionCloseTest.java"
+    },
+    {
+      "id": "DS-01",
+      "path": "src/main/java/br/com/esl/etl/v2/plataforma/persistencia/controle/BoundedRuntimeDataSource.java",
+      "method": "getConnection proxy",
+      "before": "setQueryTimeout SQL falho impedia devolver o Statement e nao o fechava.",
+      "after": "Fecha novo Statement e suprime falha de close; 4 testes Statement/CallableStatement x close normal/falho.",
+      "status": "CORRIGIDO_AGUARDA_PROVA_ROOT",
+      "relatedTest": "src/test/java/br/com/esl/etl/v2/plataforma/persistencia/controle/RuntimeJdbcBoundariesTest.java"
+    },
+    {
+      "id": "DS-02",
+      "path": "src/main/java/br/com/esl/etl/v2/plataforma/persistencia/controle/BoundedRuntimeDataSource.java",
+      "method": "getConnection opener",
+      "before": "RuntimeAuthorityConfiguration.load pode recusar por IllegalArgumentException; permit nao era devolvido no catch SQLException.",
+      "after": "Limpeza em SQLException|RuntimeException; 1 teste de 3 recusas seguido de recuperacao.",
+      "status": "CORRIGIDO_AGUARDA_PROVA_ROOT",
+      "relatedTest": "src/test/java/br/com/esl/etl/v2/plataforma/persistencia/controle/RuntimeJdbcBoundariesTest.java"
+    },
+    {
+      "id": "RASTER-01",
+      "path": "src/main/java/br/com/esl/etl/v2/plataforma/persistencia/analitico/JdbcRasterBatch.java",
+      "method": "close",
+      "before": "finally em cadeia tentava todos handles, mas falha posterior de close/captureClosed substituia causas anteriores.",
+      "after": "Correcao e prova delegadas root ao agente operacao_p28_p33.",
+      "status": "CONFIRMAR_CORRECAO_E_PROVA_COM_ROOT",
+      "relatedTest": null
+    },
+    {
+      "id": "HTTP-01",
+      "path": "src/main/java/br/com/esl/etl/v2/plataforma/fonte/dataexport/DataExportHttpExecutor.java",
+      "method": "unwrapHttpFailure",
+      "before": "Error de CompletableFuture virava IOException e recebia retry transitorio.",
+      "after": "Propaga Error direto; 1 teste mesma causa, 1 request e permit liberado.",
+      "status": "CORRIGIDO_AGUARDA_PROVA_ROOT",
+      "relatedTest": "src/test/java/br/com/esl/etl/v2/plataforma/fonte/dataexport/DataExportHttpExecutorTest.java"
+    }
+  ],
+  "openLocalDefectsNotAssigned": [],
+  "evidence": [
+    {
+      "path": "src/main/java/br/com/esl/etl/v2/bootstrap/LocalAnalyticQuotesRuntime.java",
+      "sha256": "7524eb3ce18889e99dd67351b9f143cdfaadc72f2a04a4b874307ba658326221"
+    },
+    {
+      "path": "src/main/java/br/com/esl/etl/v2/bootstrap/LocalArtifactScenario.java",
+      "sha256": "0c2a190319072f0d55039d19e5c18759d2fd421e0e0593e96cedad7a7f77ec22"
+    },
+    {
+      "path": "src/main/java/br/com/esl/etl/v2/bootstrap/Main.java",
+      "sha256": "9696a9c6c7ce71544de06657dc3ff9c7763f766a9ca78fa781a2001485363edc"
+    },
+    {
+      "path": "src/main/java/br/com/esl/etl/v2/bootstrap/QualificationConcurrency.java",
+      "sha256": "36ff97ca3a98fce851f142f0e6b3c93ec15e8ab83aa313187752894714957d46"
+    },
+    {
+      "path": "src/main/java/br/com/esl/etl/v2/bootstrap/QualificationTemporalMatrix.java",
+      "sha256": "e74fb72acf058bfdd959478fccd1607530f92eef7125c0dd968871c869e03daa"
+    },
+    {
+      "path": "src/main/java/br/com/esl/etl/v2/bootstrap/SavepointScope.java",
+      "sha256": "28e71b579dad84d137d882b226315ccf28361536dcbc5c83df44eee7978b7102"
+    },
+    {
+      "path": "src/main/java/br/com/esl/etl/v2/modulos/coletas/aplicacao/LigarReferenciaTemporalColeta.java",
+      "sha256": "0de8d2cee55248e825bb67b4467ba62ae1cebb491e85109c6cf19a63fd4a580e"
+    },
+    {
+      "path": "src/main/java/br/com/esl/etl/v2/modulos/manifestos/aplicacao/ManifestoDataExportRecordMapper.java",
+      "sha256": "f3865ac8acc9d7edcd4eacbbad5aa57ae966b929a2059242095722b12efb04d6"
+    },
+    {
+      "path": "src/main/java/br/com/esl/etl/v2/plataforma/autorizacao/LaboratorySqlBudget.java",
+      "sha256": "e2b20f1fa367878445c99b4c0de9b529e7425ff7b5e596558dfff676e2573742"
+    },
+    {
+      "path": "src/main/java/br/com/esl/etl/v2/plataforma/autorizacao/RuntimeAuthorizationBoundary.java",
+      "sha256": "bb49d253b049069e16f8fe9726074d2cf550aaba9443af3323d554f9138e02b4"
+    },
+    {
+      "path": "src/main/java/br/com/esl/etl/v2/plataforma/configuracao/RuntimeConfigurationFactory.java",
+      "sha256": "4aec96367abdbcfb47aaa5fa657fbfe4bb3aed9d437163fec8183bbf5b0a2566"
+    },
+    {
+      "path": "src/main/java/br/com/esl/etl/v2/plataforma/configuracao/RuntimeEnvironment.java",
+      "sha256": "c73e19fd3f6628a376f1cb41dd0dc9c8a460c6dff86d9180c785bd4e56b7cac6"
+    },
+    {
+      "path": "src/main/java/br/com/esl/etl/v2/plataforma/configuracao/ShadowStorageTargetKind.java",
+      "sha256": "a48ac5f9f988443c6b121dce964a167a48a2c01fa7977244fb8de6211adf3a4d"
+    },
+    {
+      "path": "src/main/java/br/com/esl/etl/v2/plataforma/fonte/dataexport/DataExportHttpBodyHandler.java",
+      "sha256": "77871fac7f9dfa5098bd7aaf7a929fbe974ab3f6d2ba4eef9ff5489a6a594b67"
+    },
+    {
+      "path": "src/main/java/br/com/esl/etl/v2/plataforma/fonte/dataexport/DataExportHttpExecutor.java",
+      "sha256": "784939971b0d5283876e54f337376975ac6b3df4a7a5d11a3aaf3c835c74bfcf"
+    },
+    {
+      "path": "src/main/java/br/com/esl/etl/v2/plataforma/fonte/dataexport/HttpDataExportGateway.java",
+      "sha256": "027e76792c1a57b3ebf02560d04cc601807139dee414a8f438bbf2b2be81ba8f"
+    },
+    {
+      "path": "src/main/java/br/com/esl/etl/v2/plataforma/fonte/dataexport/HttpDataExportTemplateInfoGateway.java",
+      "sha256": "bf2c8db267a0b2eb45c625365da4da3be14de1cfd9a9c0f4ab74c66d1311335e"
+    },
+    {
+      "path": "src/main/java/br/com/esl/etl/v2/plataforma/fonte/graphql/GraphQlHttpExecutor.java",
+      "sha256": "d4b2d9186efee753c6d108a8df8a4b744cd06bf5ef014872e74c137a20f7c195"
+    },
+    {
+      "path": "src/main/java/br/com/esl/etl/v2/plataforma/fonte/graphql/GraphQlPageStreamer.java",
+      "sha256": "c61c48ce94a27f0f3534d4513828df21fa084f68c6eaa12b7fc755f622a78484"
+    },
+    {
+      "path": "src/main/java/br/com/esl/etl/v2/plataforma/fonte/graphql/GraphQlRequestJsonSerializer.java",
+      "sha256": "060aea11b346a1e76c5a878d07c54422579422aac23a6b4f9e3613a849e225c5"
+    },
+    {
+      "path": "src/main/java/br/com/esl/etl/v2/plataforma/fonte/graphql/GraphQlResponseParser.java",
+      "sha256": "873e3089b0f05a3a01f691d8bdb52e5cea7f5451be63847571039eeb55b3f6a4"
+    },
+    {
+      "path": "src/main/java/br/com/esl/etl/v2/plataforma/identidade/ScopedSourceIdentity.java",
+      "sha256": "bfe48b97a42e5c520bfae12f3903b91528e2300060e93f44c334483aadfcd17e"
+    },
+    {
+      "path": "src/main/java/br/com/esl/etl/v2/plataforma/persistencia/analitico/JdbcRasterBatch.java",
+      "sha256": "1a268656a012c0f17fd1fa6045e19d5c224f44cbe12bd68fb051db01e2944bd4"
+    },
+    {
+      "path": "src/main/java/br/com/esl/etl/v2/plataforma/persistencia/coletas/ColetaTemporalLaboratorySession.java",
+      "sha256": "5aea2d49264fff01c799eae715345e88e76721f7755513e8500d1796a1482829"
+    },
+    {
+      "path": "src/main/java/br/com/esl/etl/v2/plataforma/persistencia/controle/BoundedRuntimeDataSource.java",
+      "sha256": "72c2779f814cb2a27dc71ddac9078a5067aa85d38fd1ce51c43f0691674c999e"
+    },
+    {
+      "path": "src/main/java/br/com/esl/etl/v2/plataforma/resiliencia/BoundedWindowRepartitioner.java",
+      "sha256": "3e8252684512874982bd71ff7893476b5d97c935d4e78982117c4f39dba22f3d"
+    },
+    {
+      "path": "src/test/java/br/com/esl/etl/v2/bootstrap/AnalyticLaboratoryQuotesIT.java",
+      "sha256": "bd17b9cdc133fda2f5ed7dcfcd3264781b58d4587df568650693c79d6e1c9e45"
+    },
+    {
+      "path": "src/test/java/br/com/esl/etl/v2/bootstrap/AnalyticLaboratoryRasterTransportTest.java",
+      "sha256": "bbec0c7e8d174e18a4e21ac23b29933a1e743890f6274a3f47b25df0ed5c46cd"
+    },
+    {
+      "path": "src/test/java/br/com/esl/etl/v2/bootstrap/MainTest.java",
+      "sha256": "d08af36a6de54add9453370335610e497b9ff60a7941c386cd8ae6df71977199"
+    },
+    {
+      "path": "src/test/java/br/com/esl/etl/v2/bootstrap/QualificationConcurrencyTest.java",
+      "sha256": "31da50347576988f8021df8fca81a54b0b65e05be61b3c08fce90279730a29cc"
+    },
+    {
+      "path": "src/test/java/br/com/esl/etl/v2/bootstrap/SavepointScopeTest.java",
+      "sha256": "4ef625804e583fc8a21108c68181abd9d4798aa151b2b97053a7425a11db2ac6"
+    },
+    {
+      "path": "src/test/java/br/com/esl/etl/v2/modulos/coletas/aplicacao/ColetaTemporalLinkTest.java",
+      "sha256": "d61d9b0660b4152c8c023899685478beb3f4d010087bf3fd23bbd3c15a1702f9"
+    },
+    {
+      "path": "src/test/java/br/com/esl/etl/v2/modulos/manifestos/aplicacao/ManifestoDataExportRecordMapperTest.java",
+      "sha256": "daf536b16b8be9851f1f29d557fc671757c07de6348a15a199e3978c22766705"
+    },
+    {
+      "path": "src/test/java/br/com/esl/etl/v2/plataforma/autorizacao/LaboratorySqlBudgetTest.java",
+      "sha256": "8611c8e6d691a30ebb90be860feef4dcfb2bf882df6f868caa1dcc9714b4865c"
+    },
+    {
+      "path": "src/test/java/br/com/esl/etl/v2/plataforma/autorizacao/RuntimeAuthorizationBoundaryTest.java",
+      "sha256": "14c10359cfbc80e02840415a9e208c04cffd97d6eff5b2910c604c883ab451ed"
+    },
+    {
+      "path": "src/test/java/br/com/esl/etl/v2/plataforma/configuracao/RuntimeConfigurationFactoryTest.java",
+      "sha256": "c703a520c0e5d1993fedcff94bfbd32b842ee85a6cd2cbcca1596247a2a44671"
+    },
+    {
+      "path": "src/test/java/br/com/esl/etl/v2/plataforma/fonte/dataexport/DataExportHttpBodyHandlerTest.java",
+      "sha256": "347aef551aae11f24063dc1ec1665b38a3f462570e1f9d42fda7e3e8a950d326"
+    },
+    {
+      "path": "src/test/java/br/com/esl/etl/v2/plataforma/fonte/dataexport/DataExportHttpExecutorTest.java",
+      "sha256": "7e1cf967e2d0ff7d5e2baf6c138114113be9c193d31ecbcfaf767fdc3c7f436c"
+    },
+    {
+      "path": "src/test/java/br/com/esl/etl/v2/plataforma/fonte/dataexport/HttpDataExportGatewayTest.java",
+      "sha256": "bf297c719434a7be5d569aac1f7093a5c68ae0b919b745e75959981b999d1553"
+    },
+    {
+      "path": "src/test/java/br/com/esl/etl/v2/plataforma/fonte/dataexport/HttpDataExportTemplateInfoGatewayTest.java",
+      "sha256": "424fc6989e3611b904757f13ce71feed9b6d1e5947f35b1aefe44de8665f66fa"
+    },
+    {
+      "path": "src/test/java/br/com/esl/etl/v2/plataforma/fonte/graphql/GraphQlHttpExecutorTest.java",
+      "sha256": "895d93ce5bd93287651515df725759708c4332f3c9367034b8931b49b8b4e7b6"
+    },
+    {
+      "path": "src/test/java/br/com/esl/etl/v2/plataforma/fonte/graphql/GraphQlPageStreamerTest.java",
+      "sha256": "a9c4e9337e5830ce5146dcd351db2a8227fa90c6c9f143fc6279b1c4788d39d8"
+    },
+    {
+      "path": "src/test/java/br/com/esl/etl/v2/plataforma/fonte/graphql/GraphQlResponseParserTest.java",
+      "sha256": "16afee556f4a449a17c82e6b6b59342c5445ae611d3bb2def3c4e35293db0fbb"
+    },
+    {
+      "path": "src/test/java/br/com/esl/etl/v2/plataforma/fonte/graphql/HttpGraphQlGatewayTest.java",
+      "sha256": "d8a83ee6001c05ab649a9731e1f3e01bd19e4803865aa47acdf6e63545717091"
+    },
+    {
+      "path": "src/test/java/br/com/esl/etl/v2/plataforma/identidade/ScopedSourceIdentityTest.java",
+      "sha256": "a8f1e3147b91a85aad197bee48cfcff7f39f8c7b6cb53c8395a0bcf33deede20"
+    },
+    {
+      "path": "src/test/java/br/com/esl/etl/v2/plataforma/persistencia/coletas/ColetaTemporalLaboratorySessionCloseTest.java",
+      "sha256": "99a64b6dcca7702047e0baa9c378ca959fb8fd5568209a6e7821753defc17f28"
+    },
+    {
+      "path": "src/test/java/br/com/esl/etl/v2/plataforma/persistencia/controle/RuntimeJdbcBoundariesTest.java",
+      "sha256": "7847f9d734af2a4daa5ec42f64f99d6d707cb628a8849b326e0aab52e1669833"
+    },
+    {
+      "path": "src/test/java/br/com/esl/etl/v2/plataforma/resiliencia/BoundedWindowRepartitionerTest.java",
+      "sha256": "771df4ecc347136b534c577df9769a0fb27c9e00127a5a1142dc246b113c6956"
+    },
+    {
+      "path": "target/avanco-seguranca-20260922-01/pmd-diagnostic-01/result.json",
+      "sha256": "8a64f8eef7d203e0446b0001973f480a299fa7b0539b145ec4f4537ec75bfdc1"
+    }
+  ]
+}

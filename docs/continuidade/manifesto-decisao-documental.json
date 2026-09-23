@@ -1,0 +1,43 @@
+{
+  "version": 1,
+  "status": "DECISOES_DOCUMENTAIS_REGISTRADAS",
+  "remoteCalls": 0,
+  "newAcceptances": 0,
+  "authorizesOperationalExecution": false,
+  "predecessor": {
+    "path": "docs/catalogos/bloco63-temporal-local/manifesto.json",
+    "sha256": "46dd40e8c80f74ca766da3c0ed62ff3e601d772ebc7e31248f3d8eea4b8a8636"
+  },
+  "changedExistingFiles": [
+    {
+      "before": "eae99d14786a0121f36728c030a8573c9e26ab7e8435912d5a748792552c62fa",
+      "snapshot": "docs/continuidade/historico/decisao-documental/STATES.md",
+      "after": "476c4b617ef13f440f2f8ed2f7ce1f38012a4e352860face96a13656c1768d87",
+      "path": "STATES.md"
+    },
+    {
+      "before": "7c3954afb450882a4766b8dc6010224fca7a74b227aff215864e24a3cb542494",
+      "snapshot": "docs/continuidade/historico/decisao-documental/docs/runbooks/trilha-de-chats-gpt-5-6.md",
+      "after": "90bd3020d63194fa888ce10af51b998847ca5b49e0ed6217c10e28aa6e92b830",
+      "path": "docs/runbooks/trilha-de-chats-gpt-5-6.md"
+    },
+    {
+      "before": "86f220272e5a11def01a4f9b78df1da3aaad2d0224af8706b922ff8bc943822b",
+      "snapshot": "docs/continuidade/historico/decisao-documental/docs/continuidade/RETOMADA.md",
+      "after": "04966b2e51cc1fb0ebcd24d8913a4f68cc2644163725abfa9793f20ed08ad687",
+      "path": "docs/continuidade/RETOMADA.md"
+    },
+    {
+      "before": "3176bdc7ba28b2e6ce6f4b5aead91cbec706f148a2800aebc6cb1c9eb0c36a8c",
+      "snapshot": "docs/continuidade/historico/decisao-documental/scripts/validation/Test-Bloco63TemporalLocal.ps1",
+      "after": "f6889c2b3dd46fe56e802a5828f873aa07dda366d0f63040f552bc2ee2cd1e66",
+      "path": "scripts/validation/Test-Bloco63TemporalLocal.ps1"
+    }
+  ],
+  "newFiles": [
+    {
+      "path": "docs/continuidade/checkpoints/0062-decisao-documental.md",
+      "sha256": "503ec299db67b7274782705e2bfa9ddd3991e55fe2399e88cf556786a6ac699d"
+    }
+  ]
+}

@@ -1,9 +1,12 @@
 package br.com.esl.etl.v2.bootstrap;
 
+import br.com.esl.etl.v2.plataforma.autorizacao.RuntimeAction;
+import br.com.esl.etl.v2.plataforma.autorizacao.RuntimeAuthorizationException;
 import br.com.esl.etl.v2.plataforma.configuracao.RuntimeConfiguration;
 import br.com.esl.etl.v2.plataforma.configuracao.RuntimeConfigurationFactory;
 import br.com.esl.etl.v2.plataforma.configuracao.RuntimePreflightReport;
 import br.com.esl.etl.v2.plataforma.configuracao.SecretInputPolicy;
+import br.com.esl.etl.v2.plataforma.resiliencia.RuntimeExitCategory;
 import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
@@ -13,6 +16,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Properties;
 import java.util.Set;
+import java.util.UUID;
 
 /** Entry point do ETL Data Export V2. */
 public final class Main {
@@ -108,6 +112,14 @@ public final class Main {
             return 2;
         }
         final String command = args.length == 0 ? "--help" : args[0];
+        if ((args.length == 5
+                        || (args.length == 7 || args.length == 9 && "--window".equals(args[7]))
+                                && "plan".equals(command)
+                                && "--request".equals(args[5]))
+                && "--temporal".equals(args[3])
+                && ("plan".equals(command) || "run".equals(command))) {
+            return runTemporal(args, standardOut, standardError, dependencies);
+        }
         return switch (command) {
             case "--help" -> {
                 if (args.length != 1 && args.length != 0) {
@@ -124,7 +136,62 @@ public final class Main {
                 yield 0;
             }
             case "config" -> runConfigValidation(args, standardOut, standardError, dependencies);
+            case "local-profile" ->
+                    LocalProfileCharacterizationMain.run(
+                                    java.util.Arrays.copyOfRange(args, 1, args.length), standardOut)
+                            .code();
+            case "local-data" ->
+                    LocalDataLaboratoryMain.run(
+                                    java.util.Arrays.copyOfRange(args, 1, args.length), standardOut)
+                            .code();
+            case "local-scenario" ->
+                    LocalArtifactScenarioMain.run(
+                                    java.util.Arrays.copyOfRange(args, 1, args.length), standardOut)
+                            .code();
+            case "local-sequence" ->
+                    LocalArtifactSequenceMain.run(
+                                    java.util.Arrays.copyOfRange(args, 1, args.length), standardOut)
+                            .code();
+            case "local-sweep" ->
+                    LocalCollectionSweepMain.run(
+                                    java.util.Arrays.copyOfRange(args, 1, args.length), standardOut)
+                            .code();
+            case "local-raster" ->
+                    LocalRasterArtifactMain.run(
+                                    java.util.Arrays.copyOfRange(args, 1, args.length), standardOut)
+                            .code();
             case "dry-run" -> runDryRun(args, standardOut, standardError, dependencies);
+            case "plan" -> runOfflinePlan(args, standardOut, standardError, dependencies);
+            case "run" ->
+                    runDeniedOperationalAction(
+                            args, standardOut, standardError, dependencies, RuntimeAction.RUN);
+            case "replay" ->
+                    runDeniedOperationalAction(
+                            args, standardOut, standardError, dependencies, RuntimeAction.REPLAY);
+            case "sweep-preview" ->
+                    runDeniedOperationalAction(
+                            args,
+                            standardOut,
+                            standardError,
+                            dependencies,
+                            RuntimeAction.SWEEP_PREVIEW);
+            case "sweep-apply" ->
+                    runDeniedOperationalAction(
+                            args,
+                            standardOut,
+                            standardError,
+                            dependencies,
+                            RuntimeAction.SWEEP_APPLY);
+            case "force-run" ->
+                    runDeniedOperationalAction(
+                            args,
+                            standardOut,
+                            standardError,
+                            dependencies,
+                            RuntimeAction.FORCE_RUN);
+            case "status" ->
+                    runDeniedOperationalAction(
+                            args, standardOut, standardError, dependencies, RuntimeAction.STATUS);
             default -> {
                 standardError.println("Comando desconhecido.");
                 printHelp(standardOut);
@@ -140,6 +207,57 @@ public final class Main {
                 SecretInputPolicy.rejectSecretCommandLineOption(argument);
             }
         }
+    }
+
+    private static int runTemporal(
+            final String[] args,
+            final PrintStream out,
+            final PrintStream err,
+            final RuntimeDependencies dependencies) {
+        try {
+            final var configuration =
+                    dependencies
+                            .configurationFactory()
+                            .load(
+                                    configurationPath(java.util.Arrays.copyOf(args, 3), 1),
+                                            dependencies.systemProperties(),
+                                    dependencies.environment(), dependencies.clock());
+            new RuntimeCompositionRoot(configuration).validateConfiguration();
+            final var operation = RuntimeTemporalOperation.read(Path.of(args[4]));
+            if ("plan".equals(args[0])) {
+                out.println(
+                        args.length >= 7
+                                ? operation.operationalRequests(
+                                        configuration,
+                                        Path.of(args[6]),
+                                        args.length == 9 ? positiveWindow(args[8]) : 0)
+                                : operation.preview());
+            } else {
+                out.println(
+                        "TEMPORAL_PERSISTED windows="
+                                + operation.persist(configuration, out::println)
+                                + " extracted=0 scheduler=0");
+            }
+            return 0;
+        } catch (
+                final br.com.esl.etl.v2.plataforma.autorizacao.DurableAuthorizationException
+                        failure) {
+            err.println("Autorização temporal recusada: " + failure.reason());
+            return 20;
+        } catch (final IllegalArgumentException failure) {
+            err.println("Pedido temporal inválido.");
+            return 2;
+        } catch (final RuntimeException failure) {
+            err.println("Persistência temporal não confirmada; consultar janelas duráveis.");
+            return 30;
+        }
+    }
+
+    private static int positiveWindow(final String value) {
+        if (!value.matches("[1-4]")) {
+            throw new IllegalArgumentException("TEMPORAL_WINDOW_INVALID");
+        }
+        return Integer.parseInt(value);
     }
 
     private static int runConfigValidation(
@@ -172,6 +290,103 @@ public final class Main {
         }
         standardOut.println("Dry-run sem efeitos: " + report.summary());
         return 0;
+    }
+
+    private static int runOfflinePlan(
+            final String[] args,
+            final PrintStream standardOut,
+            final PrintStream standardError,
+            final RuntimeDependencies dependencies) {
+        final RuntimePreflightReport report =
+                loadAndPreflight(args, 1, standardError, dependencies);
+        if (report == null) {
+            return 2;
+        }
+        standardOut.println("Planejamento offline sem efeitos: " + report.summary());
+        return 0;
+    }
+
+    private static int runDeniedOperationalAction(
+            final String[] args,
+            final PrintStream standardOut,
+            final PrintStream standardError,
+            final RuntimeDependencies dependencies,
+            final RuntimeAction action) {
+        if ((args.length == 5
+                        || args.length == 6
+                                && "--control-stdin".equals(args[5])
+                                && action != RuntimeAction.STATUS)
+                && "--request".equals(args[3])
+                && action != RuntimeAction.SWEEP_PREVIEW
+                && action != RuntimeAction.SWEEP_APPLY) {
+            return runScopedOperationalAction(
+                    args, standardOut, standardError, dependencies, action);
+        }
+        final RuntimePreflightReport report =
+                loadAndPreflight(args, 1, standardError, dependencies);
+        if (report == null) {
+            return 2;
+        }
+        try {
+            final Path configurationFile = configurationPath(args, 1);
+            final RuntimeConfiguration configuration =
+                    dependencies
+                            .configurationFactory()
+                            .load(
+                                    configurationFile,
+                                    dependencies.systemProperties(),
+                                    dependencies.environment(),
+                                    dependencies.clock());
+            new RuntimeCompositionRoot(configuration)
+                    .authorizeOperationalAction(UUID.randomUUID(), action);
+        } catch (final RuntimeAuthorizationException exception) {
+            standardError.println("Operação recusada pela política deny-all.");
+            return RuntimeExitCategory.CONFIG_AUTH.code();
+        } catch (final IllegalArgumentException | IllegalStateException exception) {
+            standardError.println("Configuração inválida.");
+            return 2;
+        }
+        standardError.println("Operação recusada pela política deny-all.");
+        return RuntimeExitCategory.CONFIG_AUTH.code();
+    }
+
+    private static int runScopedOperationalAction(
+            final String[] args,
+            final PrintStream standardOut,
+            final PrintStream standardError,
+            final RuntimeDependencies dependencies,
+            final RuntimeAction action) {
+        try {
+            final String[] configurationArguments = java.util.Arrays.copyOf(args, 3);
+            final var configuration =
+                    dependencies
+                            .configurationFactory()
+                            .load(
+                                    configurationPath(configurationArguments, 1),
+                                            dependencies.systemProperties(),
+                                    dependencies.environment(), dependencies.clock());
+            final var result =
+                    new RuntimeCompositionRoot(configuration)
+                            .executeOperationalRequest(
+                                    Path.of(args[4]),
+                                    action,
+                                    standardOut::println,
+                                    args.length == 6 ? System.in : null);
+            standardOut.println("Runtime: " + result.name());
+            return result.code();
+        } catch (
+                final br.com.esl.etl.v2.plataforma.autorizacao.DurableAuthorizationException
+                        failure) {
+            standardError.println("Autorização operacional recusada: " + failure.reason());
+            return RuntimeExitCategory.CONFIG_AUTH.code();
+        } catch (final IllegalArgumentException failure) {
+            standardError.println("Configuração ou pedido operacional inválido.");
+            return 2;
+        } catch (final RuntimeException failure) {
+            standardError.println(
+                    "Runtime não confirmou a execução; consultar a ocorrência durável.");
+            return RuntimeExitCategory.LOCK.code();
+        }
     }
 
     private static RuntimePreflightReport loadAndPreflight(
@@ -227,9 +442,42 @@ public final class Main {
         standardOut.println("  --help     Exibe esta ajuda.");
         standardOut.println("  --version  Exibe a versão.");
         standardOut.println(
+                "  local-data characterize|capture --artifact <json>  Expansão por artefato sintético local.");
+        standardOut.println(
+                "  local-profile characterize --artifact <json>  Perfis locais e mapeadores tipados.");
+        standardOut.println(
+                "  local-scenario run --input <json> --oracle <json>  Composição e comparação independente.");
+        standardOut.println(
+                "  local-sweep observe --input <json>                Coletas e preview das responsabilidades.");
+        standardOut.println(
+                "  local-raster characterize|capture --artifact <json>  Raster por artefato sintético local.");
+        standardOut.println(
+                "  Comandos locais: captura somente no shadow explicitamente habilitado, com rollback obrigatório.");
+        standardOut.println(
                 "  config validate --config <arquivo>  Valida configuração sem efeitos.");
         standardOut.println(
+                "  local-sequence run --sequence <json>  Executa sequência sintética local com rollback.");
+        standardOut.println(
                 "  dry-run --config <arquivo>           Executa somente o preflight seguro.");
+        standardOut.println(
+                "  plan --config <arquivo>              Planeja offline, sem criar conexões.");
+        standardOut.println("  plan|run --config <arquivo> --temporal <json>");
+        standardOut.println(
+                "                                      plan: preview; run: persiste janelas com recibo por janela, sem extrair.");
+        standardOut.println("  plan --config <arquivo> --temporal <json> --request <modelo-json>");
+        standardOut.println(
+                "                                      --window <1-4>: exporta uma janela com seu predecessor explícito.");
+        standardOut.println(
+                "                                      Exporta até quatro requests; execute cada janela por run --request.");
+        standardOut.println(
+                "  run|replay|sweep-preview|sweep-apply|force-run|status --config <arquivo>");
+        standardOut.println(
+                "                                      Recusado por deny-all até o subgate V2-022b.");
+        standardOut.println("  run|replay|force-run|status --config <arquivo> --request <json>");
+        standardOut.println(
+                "                                      --control-stdin em execução: envie cancel seguido de Enter para cancelar.");
+        standardOut.println(
+                "                                      Requer authority Windows/SQL administrada e consumo durável.");
         standardOut.println(
                 "As cargas de Coletas e Fretes exigem contrato e storage de sombra aprovados.");
     }

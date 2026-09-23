@@ -32,6 +32,50 @@ import org.junit.jupiter.api.Test;
 class GraphQlHttpExecutorTest {
 
     @Test
+    void countsIoFailuresAndRetriesAtTransportSubmission() {
+        final var count = new java.util.concurrent.atomic.AtomicInteger();
+        final var fixture =
+                fixture(new IOException("synthetic"), operation -> count.incrementAndGet());
+        assertThrows(GraphQlUnavailableException.class, fixture::execute);
+        assertEquals(2, count.get());
+        assertEquals(2, fixture.cycle().sourceRequests());
+    }
+
+    @Test
+    void requestConstructionFailureDoesNotClaimAnHttpAttempt() {
+        final var count = new java.util.concurrent.atomic.AtomicInteger();
+        final var fixture =
+                fixture(new IOException("synthetic"), operation -> count.incrementAndGet());
+        assertThrows(
+                IllegalArgumentException.class,
+                () ->
+                        fixture.executor()
+                                .execute(
+                                        GraphQlReadOperation.USERS_SNAPSHOT,
+                                        timeout -> {
+                                            throw new IllegalArgumentException("synthetic");
+                                        }));
+        assertEquals(0, count.get());
+        assertEquals(1, fixture.governor().availablePermits());
+    }
+
+    @Test
+    void refusingObserverDoesNotSubmitOrRetry() {
+        final var refusal = new IllegalStateException("ATTEMPT_LIMIT");
+        final var count = new java.util.concurrent.atomic.AtomicInteger();
+        final var fixture =
+                fixture(
+                        new AssertionError("Transport must not be called"),
+                        operation -> {
+                            count.incrementAndGet();
+                            throw refusal;
+                        });
+        assertSame(refusal, assertThrows(IllegalStateException.class, fixture::execute));
+        assertEquals(1, count.get());
+        assertEquals(1, fixture.governor().availablePermits());
+    }
+
+    @Test
     void sanitizesUnknownRuntimeFailureWithoutRetryOrCause() {
         final String sensitive = "synthetic-sensitive-url";
         final ExecutorFixture fixture = fixture(new IllegalStateException(sensitive));
@@ -56,6 +100,11 @@ class GraphQlHttpExecutorTest {
     }
 
     private static ExecutorFixture fixture(final Throwable failure) {
+        return fixture(failure, GraphQlHttpAttemptObserver.noop());
+    }
+
+    private static ExecutorFixture fixture(
+            final Throwable failure, final GraphQlHttpAttemptObserver attempts) {
         final EslResiliencePolicy policy =
                 new EslResiliencePolicy(
                         Duration.ZERO,
@@ -86,7 +135,8 @@ class GraphQlHttpExecutorTest {
                         properties,
                         cycle.beginWorkload(GraphQlReadOperation.USERS_SNAPSHOT.workload()),
                         Clock.systemUTC(),
-                        () -> 0.0d);
+                        () -> 0.0d,
+                        attempts);
         return new ExecutorFixture(governor, cycle, executor);
     }
 

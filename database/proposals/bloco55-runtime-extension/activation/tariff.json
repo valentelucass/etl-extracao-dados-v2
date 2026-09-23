@@ -1,0 +1,25 @@
+{
+  "provenance": "OWNER_ADOPTED_B55_SYNTHETIC_ONLY",
+  "scope": "LOCAL_SHADOW/LOCAL_V2/LOCAL_V2/cotacoes",
+  "version": "bloco55-tariff-v1",
+  "validFrom": "2018-01-01",
+  "validToExclusive": "2040-01-01",
+  "rows": [
+    {
+      "origin": "SP",
+      "destination": "RJ",
+      "minimum": "5.0000",
+      "currency": "BRL",
+      "unit": "PER_SHIPMENT",
+      "rounding": "HALF_UP"
+    },
+    {
+      "origin": "RJ",
+      "destination": "SP",
+      "minimum": "7.0000",
+      "currency": "BRL",
+      "unit": "PER_SHIPMENT",
+      "rounding": "HALF_UP"
+    }
+  ]
+}

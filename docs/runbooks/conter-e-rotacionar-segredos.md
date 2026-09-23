@@ -71,3 +71,21 @@ gitleaks git --config .gitleaks.toml --redact=100 --exit-code=1 --no-banner --lo
 - Data/hora da atualização, recarga, health check e invalidação.
 - Resultado categórico `PASS/FAIL/BLOCKED`, código sanitizado e plano de recuperação usado.
 - Comando e versão do secret scanner, escopo, SHA quando existir e quantidade de achados; relatório detalhado permanece em armazenamento restrito.
+
+## Intake local fail-closed da evidência
+
+INTAKE_STATE=CONTRACT_READY_EVIDENCE_NOT_RECEIVED
+
+MAX_LOCAL_OUTCOME=STRUCTURALLY_VALID_UNVERIFIED | INTAKE_UNLOCKS=NONE
+
+O contrato versionado em `docs/catalogos/evidencia-rotacao-v2-041/` define somente a forma sanitizada que Segurança e Operações devem produzir depois de executar a rotação, invalidação, recarga, health check e preparação de rollback. Ele não é evidência de que essas ações ocorreram.
+
+Antes de receber evidência, valide isoladamente o contrato e suas contraprovas com `pwsh -NoProfile -File .\scripts\validation\Test-V2041RotationAttestation.ps1 -ContractOnly`. O comando sem modo, assim como a combinação dos dois modos, falha fechado.
+
+O atestado sanitizado recebido deve ser mantido temporariamente apenas em `target/v2-041/sanitized-attestation.json`, caminho ignorado pelo Git, e validado com:
+
+```powershell
+.\scripts\validation\Test-V2041RotationAttestation.ps1 -ValidateEvidence
+```
+
+O gate limita-se a schema fechado com escalares tipados, cobertura declarada, eventos dentro da janela de 30 dias e em ordem, enums, contagens, escopo de scan declarado como completo e SHA igual ao `HEAD` local. Mesmo quando retorna `STRUCTURALLY_VALID_UNVERIFIED`, autenticidade, vínculo com a evidência restrita e aceite nominal dos owners continuam obrigatoriamente humanos. O resultado não altera V2-041, não autoriza rede, não cria bloco e não transfere autorização para V2-025d, release, deploy, cutover ou qualquer dependência posterior.

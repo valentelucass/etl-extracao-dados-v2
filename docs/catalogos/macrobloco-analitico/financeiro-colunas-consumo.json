@@ -1,0 +1,455 @@
+{
+  "provenance": "Legacy SQL/DTO mappings plus explicit local bindings; MAT04 fiscal decision reused",
+  "contracts": [
+    {
+      "id": "SQL-01",
+      "grain": "analytic run/reference revision/captured component; root values non-additive",
+      "columns": [
+        {
+          "ordinal": 1,
+          "name": "Hora (Solicitacao)",
+          "expression": "CONVERT(TIME(7),core.ufn_analytic_raster_time(f.[fit_fhe_cte_issued_at],f.[fit_fhe_cte_issued_at_nano],0) AT TIME ZONE zone.name)",
+          "status": "TESTED_PHYSICAL_LOCAL"
+        },
+        {
+          "ordinal": 2,
+          "name": "ID Único",
+          "expression": "CONVERT(NVARCHAR(320),CONCAT(CONVERT(NVARCHAR(36),g.run_id),N'/',CONCAT(i.root_type COLLATE Latin1_General_100_BIN2,N':',i.root_key),N'/',i.part_type COLLATE Latin1_General_100_BIN2,N':',i.part_key,N'/',i.component_type COLLATE Latin1_General_100_BIN2,N':',i.component_key))",
+          "status": "TESTED_PHYSICAL_LOCAL"
+        },
+        {
+          "ordinal": 3,
+          "name": "Filial",
+          "expression": "branch.normalized_name",
+          "status": "TESTED_PHYSICAL_LOCAL"
+        },
+        {
+          "ordinal": 4,
+          "name": "Estado",
+          "expression": "f.[fit_diy_sae_name]",
+          "status": "TESTED_PHYSICAL_LOCAL"
+        },
+        {
+          "ordinal": 5,
+          "name": "CT-e/Número",
+          "expression": "f.[fit_fhe_cte_number]",
+          "status": "TESTED_PHYSICAL_LOCAL"
+        },
+        {
+          "ordinal": 6,
+          "name": "Número do Documento",
+          "expression": "policy.official_number",
+          "status": "TESTED_PHYSICAL_LOCAL"
+        },
+        {
+          "ordinal": 7,
+          "name": "CT-e/Chave",
+          "expression": "f.[fit_fhe_cte_key]",
+          "status": "TESTED_PHYSICAL_LOCAL"
+        },
+        {
+          "ordinal": 8,
+          "name": "CT-e/Data de emissão",
+          "expression": "core.ufn_analytic_raster_time(f.[fit_fhe_cte_issued_at],f.[fit_fhe_cte_issued_at_nano],0) AT TIME ZONE zone.name",
+          "status": "TESTED_PHYSICAL_LOCAL"
+        },
+        {
+          "ordinal": 9,
+          "name": "Frete/Valor dos CT-es",
+          "expression": "f.[total]",
+          "status": "TESTED_PHYSICAL_LOCAL"
+        },
+        {
+          "ordinal": 10,
+          "name": "Terceiros/Valor CT-es",
+          "expression": "f.[third_party_ctes_value]",
+          "status": "TESTED_PHYSICAL_LOCAL"
+        },
+        {
+          "ordinal": 11,
+          "name": "CT-e/Status",
+          "expression": "COALESCE((SELECT l.label COLLATE Latin1_General_100_BIN2 FROM ref.analytic_lab_label l WHERE l.reference_release_id=selection.reference_release_id AND l.category='FAT_CTE' AND l.raw_value=f.fit_fhe_cte_status COLLATE Latin1_General_100_BIN2),f.fit_fhe_cte_status COLLATE Latin1_General_100_BIN2)",
+          "status": "TESTED_PHYSICAL_LOCAL"
+        },
+        {
+          "ordinal": 12,
+          "name": "CT-e/Resultado",
+          "expression": "f.[fit_fhe_cte_status_result]",
+          "status": "TESTED_PHYSICAL_LOCAL"
+        },
+        {
+          "ordinal": 13,
+          "name": "Tipo",
+          "expression": "policy.freight_type",
+          "status": "TESTED_PHYSICAL_LOCAL"
+        },
+        {
+          "ordinal": 14,
+          "name": "Classificação",
+          "expression": "f.[fit_fsn_name]",
+          "status": "TESTED_PHYSICAL_LOCAL"
+        },
+        {
+          "ordinal": 15,
+          "name": "Pagador do frete/Nome",
+          "expression": "f.[fit_pyr_name]",
+          "status": "TESTED_PHYSICAL_LOCAL"
+        },
+        {
+          "ordinal": 16,
+          "name": "Pagador do frete/Documento",
+          "expression": "f.[fit_pyr_document]",
+          "status": "TESTED_PHYSICAL_LOCAL"
+        },
+        {
+          "ordinal": 17,
+          "name": "Cliente/CNPJ",
+          "expression": "CASE WHEN policy.client_provenance='PAYER_DOCUMENT_14_DIGITS' THEN SUBSTRING(policy.client_key,6,14) END",
+          "status": "TESTED_PHYSICAL_LOCAL"
+        },
+        {
+          "ordinal": 18,
+          "name": "Remetente/Nome",
+          "expression": "f.[fit_rpt_name]",
+          "status": "TESTED_PHYSICAL_LOCAL"
+        },
+        {
+          "ordinal": 19,
+          "name": "Remetente/Documento",
+          "expression": "f.[fit_rpt_document]",
+          "status": "TESTED_PHYSICAL_LOCAL"
+        },
+        {
+          "ordinal": 20,
+          "name": "Destinatário/Nome",
+          "expression": "f.[fit_sdr_name]",
+          "status": "TESTED_PHYSICAL_LOCAL"
+        },
+        {
+          "ordinal": 21,
+          "name": "Destinatário/Documento",
+          "expression": "f.[fit_sdr_document]",
+          "status": "TESTED_PHYSICAL_LOCAL"
+        },
+        {
+          "ordinal": 22,
+          "name": "Vendedor/Nome",
+          "expression": "f.[fit_sps_slr_psn_name]",
+          "status": "TESTED_PHYSICAL_LOCAL"
+        },
+        {
+          "ordinal": 23,
+          "name": "NFS-e/Número",
+          "expression": "COALESCE(f.fit_nse_number,f.nfse_number) COLLATE Latin1_General_100_BIN2",
+          "status": "TESTED_PHYSICAL_LOCAL"
+        },
+        {
+          "ordinal": 24,
+          "name": "NFS-e/Série",
+          "expression": "supplement.nfse_series",
+          "status": "TESTED_PHYSICAL_LOCAL"
+        },
+        {
+          "ordinal": 25,
+          "name": "fit_nse_number",
+          "expression": "COALESCE(f.fit_nse_number,f.nfse_number) COLLATE Latin1_General_100_BIN2",
+          "status": "TESTED_PHYSICAL_LOCAL"
+        },
+        {
+          "ordinal": 26,
+          "name": "N° NFS-e",
+          "expression": "COALESCE(f.fit_nse_number,f.nfse_number) COLLATE Latin1_General_100_BIN2",
+          "status": "TESTED_PHYSICAL_LOCAL"
+        },
+        {
+          "ordinal": 27,
+          "name": "Carteira/Descrição",
+          "expression": "f.[fit_ant_tat_bro_description]",
+          "status": "TESTED_PHYSICAL_LOCAL"
+        },
+        {
+          "ordinal": 28,
+          "name": "Instrução Customizada",
+          "expression": "f.[fit_ant_tat_custom_instruction]",
+          "status": "TESTED_PHYSICAL_LOCAL"
+        },
+        {
+          "ordinal": 29,
+          "name": "Status do Processo",
+          "expression": "CONVERT(NVARCHAR(32),CASE policy.has_invoice WHEN 1 THEN N'Faturado' ELSE N'Aguardando Faturamento' END)",
+          "status": "TESTED_PHYSICAL_LOCAL"
+        },
+        {
+          "ordinal": 30,
+          "name": "Fatura/N° Documento",
+          "expression": "f.[fit_ant_document]",
+          "status": "TESTED_PHYSICAL_LOCAL"
+        },
+        {
+          "ordinal": 31,
+          "name": "Fatura/Emissão",
+          "expression": "f.[fit_ant_issue_date]",
+          "status": "TESTED_PHYSICAL_LOCAL"
+        },
+        {
+          "ordinal": 32,
+          "name": "Fatura/Valor",
+          "expression": "f.[fit_ant_value]",
+          "status": "TESTED_PHYSICAL_LOCAL"
+        },
+        {
+          "ordinal": 33,
+          "name": "Fatura/Valor Total",
+          "expression": "f.[fit_ant_value]",
+          "status": "TESTED_PHYSICAL_LOCAL"
+        },
+        {
+          "ordinal": 34,
+          "name": "Fatura/Número",
+          "expression": "f.[fit_ant_document]",
+          "status": "TESTED_PHYSICAL_LOCAL"
+        },
+        {
+          "ordinal": 35,
+          "name": "Fatura/Emissão Fatura",
+          "expression": "f.[fit_ant_issue_date]",
+          "status": "TESTED_PHYSICAL_LOCAL"
+        },
+        {
+          "ordinal": 36,
+          "name": "Parcelas/Vencimento",
+          "expression": "f.[fit_ant_ils_due_date]",
+          "status": "TESTED_PHYSICAL_LOCAL"
+        },
+        {
+          "ordinal": 37,
+          "name": "Fatura/Baixa",
+          "expression": "f.[fit_ant_ils_atn_transaction_date]",
+          "status": "TESTED_PHYSICAL_LOCAL"
+        },
+        {
+          "ordinal": 38,
+          "name": "Fatura/Data Vencimento Original",
+          "expression": "f.[fit_ant_ils_original_due_date]",
+          "status": "TESTED_PHYSICAL_LOCAL"
+        },
+        {
+          "ordinal": 39,
+          "name": "Notas Fiscais",
+          "expression": "notes.display_names",
+          "status": "TESTED_PHYSICAL_LOCAL"
+        },
+        {
+          "ordinal": 40,
+          "name": "Pedidos/Cliente",
+          "expression": "orders.display_names",
+          "status": "TESTED_PHYSICAL_LOCAL"
+        },
+        {
+          "ordinal": 41,
+          "name": "Metadata",
+          "expression": "(SELECT i.execution_id,i.occurrence,i.observation_id,i.revision,f.[comments_p] AS [comments.presence],f.[comments_w] AS [comments.wire],f.[comments_raw] AS [comments.raw],f.[corporation_sequence_number_p] AS [corporation_sequence_number.presence],f.[corporation_sequence_number_w] AS [corporation_sequence_number.wire],f.[corporation_sequence_number_raw] AS [corporation_sequence_number.raw],f.[courtesy_p] AS [courtesy.presence],f.[courtesy_w] AS [courtesy.wire],f.[courtesy_raw] AS [courtesy.raw],f.[emission_type_p] AS [emission_type.presence],f.[emission_type_w] AS [emission_type.wire],f.[emission_type_raw] AS [emission_type.raw],f.[finished_at_p] AS [finished_at.presence],f.[finished_at_w] AS [finished_at.wire],f.[finished_at_raw] AS [finished_at.raw],f.[fit_ant_ant_name_p] AS [fit_ant_ant_name.presence],f.[fit_ant_ant_name_w] AS [fit_ant_ant_name.wire],f.[fit_ant_ant_name_raw] AS [fit_ant_ant_name.raw],f.[fit_ant_discount_value_p] AS [fit_ant_discount_value.presence],f.[fit_ant_discount_value_w] AS [fit_ant_discount_value.wire],f.[fit_ant_discount_value_raw] AS [fit_ant_discount_value.raw],f.[fit_ant_document_p] AS [fit_ant_document.presence],f.[fit_ant_document_w] AS [fit_ant_document.wire],f.[fit_ant_document_raw] AS [fit_ant_document.raw],f.[fit_ant_ils_atn_transaction_date_p] AS [fit_ant_ils_atn_transaction_date.presence],f.[fit_ant_ils_atn_transaction_date_w] AS [fit_ant_ils_atn_transaction_date.wire],f.[fit_ant_ils_atn_transaction_date_raw] AS [fit_ant_ils_atn_transaction_date.raw],f.[fit_ant_ils_due_date_p] AS [fit_ant_ils_due_date.presence],f.[fit_ant_ils_due_date_w] AS [fit_ant_ils_due_date.wire],f.[fit_ant_ils_due_date_raw] AS [fit_ant_ils_due_date.raw],f.[fit_ant_ils_original_due_date_p] AS [fit_ant_ils_original_due_date.presence],f.[fit_ant_ils_original_due_date_w] AS [fit_ant_ils_original_due_date.wire],f.[fit_ant_ils_original_due_date_raw] AS [fit_ant_ils_original_due_date.raw],f.[fit_ant_interest_value_p] AS [fit_ant_interest_value.presence],f.[fit_ant_interest_value_w] AS [fit_ant_interest_value.wire],f.[fit_ant_interest_value_raw] AS [fit_ant_interest_value.raw],f.[fit_ant_issue_date_p] AS [fit_ant_issue_date.presence],f.[fit_ant_issue_date_w] AS [fit_ant_issue_date.wire],f.[fit_ant_issue_date_raw] AS [fit_ant_issue_date.raw],f.[fit_ant_tat_account_number_p] AS [fit_ant_tat_account_number.presence],f.[fit_ant_tat_account_number_w] AS [fit_ant_tat_account_number.wire],f.[fit_ant_tat_account_number_raw] AS [fit_ant_tat_account_number.raw],f.[fit_ant_tat_agency_number_p] AS [fit_ant_tat_agency_number.presence],f.[fit_ant_tat_agency_number_w] AS [fit_ant_tat_agency_number.wire],f.[fit_ant_tat_agency_number_raw] AS [fit_ant_tat_agency_number.raw],f.[fit_ant_tat_bnk_name_p] AS [fit_ant_tat_bnk_name.presence],f.[fit_ant_tat_bnk_name_w] AS [fit_ant_tat_bnk_name.wire],f.[fit_ant_tat_bnk_name_raw] AS [fit_ant_tat_bnk_name.raw],f.[fit_ant_tat_bro_description_p] AS [fit_ant_tat_bro_description.presence],f.[fit_ant_tat_bro_description_w] AS [fit_ant_tat_bro_description.wire],f.[fit_ant_tat_bro_description_raw] AS [fit_ant_tat_bro_description.raw],f.[fit_ant_tat_custom_instruction_p] AS [fit_ant_tat_custom_instruction.presence],f.[fit_ant_tat_custom_instruction_w] AS [fit_ant_tat_custom_instruction.wire],f.[fit_ant_tat_custom_instruction_raw] AS [fit_ant_tat_custom_instruction.raw],f.[fit_ant_value_p] AS [fit_ant_value.presence],f.[fit_ant_value_w] AS [fit_ant_value.wire],f.[fit_ant_value_raw] AS [fit_ant_value.raw],f.[fit_crn_psn_nickname_p] AS [fit_crn_psn_nickname.presence],f.[fit_crn_psn_nickname_w] AS [fit_crn_psn_nickname.wire],f.[fit_crn_psn_nickname_raw] AS [fit_crn_psn_nickname.raw],f.[fit_d_t_created_at_p] AS [fit_d_t_created_at.presence],f.[fit_d_t_created_at_w] AS [fit_d_t_created_at.wire],f.[fit_d_t_created_at_raw] AS [fit_d_t_created_at.raw],f.[fit_diy_sae_name_p] AS [fit_diy_sae_name.presence],f.[fit_diy_sae_name_w] AS [fit_diy_sae_name.wire],f.[fit_diy_sae_name_raw] AS [fit_diy_sae_name.raw],f.[fit_dyn_drt_nickname_p] AS [fit_dyn_drt_nickname.presence],f.[fit_dyn_drt_nickname_w] AS [fit_dyn_drt_nickname.wire],f.[fit_dyn_drt_nickname_raw] AS [fit_dyn_drt_nickname.raw],f.[fit_fhe_cte_issued_at_p] AS [fit_fhe_cte_issued_at.presence],f.[fit_fhe_cte_issued_at_w] AS [fit_fhe_cte_issued_at.wire],f.[fit_fhe_cte_issued_at_raw] AS [fit_fhe_cte_issued_at.raw],f.[fit_fhe_cte_key_p] AS [fit_fhe_cte_key.presence],f.[fit_fhe_cte_key_w] AS [fit_fhe_cte_key.wire],f.[fit_fhe_cte_key_raw] AS [fit_fhe_cte_key.raw],f.[fit_fhe_cte_number_p] AS [fit_fhe_cte_number.presence],f.[fit_fhe_cte_number_w] AS [fit_fhe_cte_number.wire],f.[fit_fhe_cte_number_raw] AS [fit_fhe_cte_number.raw],f.[fit_fhe_cte_status_p] AS [fit_fhe_cte_status.presence],f.[fit_fhe_cte_status_w] AS [fit_fhe_cte_status.wire],f.[fit_fhe_cte_status_raw] AS [fit_fhe_cte_status.raw],f.[fit_fhe_cte_status_result_p] AS [fit_fhe_cte_status_result.presence],f.[fit_fhe_cte_status_result_w] AS [fit_fhe_cte_status_result.wire],f.[fit_fhe_cte_status_result_raw] AS [fit_fhe_cte_status_result.raw],f.[fit_fsn_name_p] AS [fit_fsn_name.presence],f.[fit_fsn_name_w] AS [fit_fsn_name.wire],f.[fit_fsn_name_raw] AS [fit_fsn_name.raw],f.[fit_fte_foe_ore_description_p] AS [fit_fte_foe_ore_description.presence],f.[fit_fte_foe_ore_description_w] AS [fit_fte_foe_ore_description.wire],f.[fit_fte_foe_ore_description_raw] AS [fit_fte_foe_ore_description.raw],f.[fit_fte_has_delivery_receipt_p] AS [fit_fte_has_delivery_receipt.presence],f.[fit_fte_has_delivery_receipt_w] AS [fit_fte_has_delivery_receipt.wire],f.[fit_fte_has_delivery_receipt_raw] AS [fit_fte_has_delivery_receipt.raw],f.[fit_fte_invoices_order_number_p] AS [fit_fte_invoices_order_number.presence],f.[fit_fte_invoices_order_number_w] AS [fit_fte_invoices_order_number.wire],f.[fit_fte_invoices_order_number_raw] AS [fit_fte_invoices_order_number.raw],f.[fit_nse_number_p] AS [fit_nse_number.presence],f.[fit_nse_number_w] AS [fit_nse_number.wire],f.[fit_nse_number_raw] AS [fit_nse_number.raw],f.[fit_pyr_cor_billing_cycle_p] AS [fit_pyr_cor_billing_cycle.presence],f.[fit_pyr_cor_billing_cycle_w] AS [fit_pyr_cor_billing_cycle.wire],f.[fit_pyr_cor_billing_cycle_raw] AS [fit_pyr_cor_billing_cycle.raw],f.[fit_pyr_cor_billing_due_in_days_p] AS [fit_pyr_cor_billing_due_in_days.presence],f.[fit_pyr_cor_billing_due_in_days_w] AS [fit_pyr_cor_billing_due_in_days.wire],f.[fit_pyr_cor_billing_due_in_days_raw] AS [fit_pyr_cor_billing_due_in_days.raw],f.[fit_pyr_document_p] AS [fit_pyr_document.presence],f.[fit_pyr_document_w] AS [fit_pyr_document.wire],f.[fit_pyr_document_raw] AS [fit_pyr_document.raw],f.[fit_pyr_name_p] AS [fit_pyr_name.presence],f.[fit_pyr_name_w] AS [fit_pyr_name.wire],f.[fit_pyr_name_raw] AS [fit_pyr_name.raw],f.[fit_rpt_document_p] AS [fit_rpt_document.presence],f.[fit_rpt_document_w] AS [fit_rpt_document.wire],f.[fit_rpt_document_raw] AS [fit_rpt_document.raw],f.[fit_rpt_name_p] AS [fit_rpt_name.presence],f.[fit_rpt_name_w] AS [fit_rpt_name.wire],f.[fit_rpt_name_raw] AS [fit_rpt_name.raw],f.[fit_sdr_document_p] AS [fit_sdr_document.presence],f.[fit_sdr_document_w] AS [fit_sdr_document.wire],f.[fit_sdr_document_raw] AS [fit_sdr_document.raw],f.[fit_sdr_name_p] AS [fit_sdr_name.presence],f.[fit_sdr_name_w] AS [fit_sdr_name.wire],f.[fit_sdr_name_raw] AS [fit_sdr_name.raw],f.[fit_sps_slr_psn_name_p] AS [fit_sps_slr_psn_name.presence],f.[fit_sps_slr_psn_name_w] AS [fit_sps_slr_psn_name.wire],f.[fit_sps_slr_psn_name_raw] AS [fit_sps_slr_psn_name.raw],f.[id_p] AS [id.presence],f.[id_w] AS [id.wire],f.[id_raw] AS [id.raw],f.[invoices_mapping_p] AS [invoices_mapping.presence],f.[invoices_mapping_w] AS [invoices_mapping.wire],f.[invoices_mapping_raw] AS [invoices_mapping.raw],f.[nfse_number_p] AS [nfse_number.presence],f.[nfse_number_w] AS [nfse_number.wire],f.[nfse_number_raw] AS [nfse_number.raw],f.[payment_type_p] AS [payment_type.presence],f.[payment_type_w] AS [payment_type.wire],f.[payment_type_raw] AS [payment_type.raw],f.[reference_number_p] AS [reference_number.presence],f.[reference_number_w] AS [reference_number.wire],f.[reference_number_raw] AS [reference_number.raw],f.[service_at_p] AS [service_at.presence],f.[service_at_w] AS [service_at.wire],f.[service_at_raw] AS [service_at.raw],f.[service_type_p] AS [service_type.presence],f.[service_type_w] AS [service_type.wire],f.[service_type_raw] AS [service_type.raw],f.[status_p] AS [status.presence],f.[status_w] AS [status.wire],f.[status_raw] AS [status.raw],f.[third_party_ctes_value_p] AS [third_party_ctes_value.presence],f.[third_party_ctes_value_w] AS [third_party_ctes_value.wire],f.[third_party_ctes_value_raw] AS [third_party_ctes_value.raw],f.[total_p] AS [total.presence],f.[total_w] AS [total.wire],f.[total_raw] AS [total.raw],f.[type_p] AS [type.presence],f.[type_w] AS [type.wire],f.[type_raw] AS [type.raw] FOR JSON PATH,INCLUDE_NULL_VALUES,WITHOUT_ARRAY_WRAPPER)",
+          "status": "TESTED_PHYSICAL_LOCAL"
+        },
+        {
+          "ordinal": 42,
+          "name": "Data da Última Atualização",
+          "expression": "capture.sealed_at",
+          "status": "TESTED_PHYSICAL_LOCAL"
+        }
+      ]
+    },
+    {
+      "id": "SQL-06",
+      "grain": "analytic run/reference revision/captured component; root values non-additive",
+      "columns": [
+        {
+          "ordinal": 1,
+          "name": "Hora (Solicitacao)",
+          "expression": "CONVERT(TIME(7),core.ufn_analytic_raster_time(f.[created_at],f.[created_at_nano],0) AT TIME ZONE zone.name)",
+          "status": "TESTED_PHYSICAL_LOCAL"
+        },
+        {
+          "ordinal": 2,
+          "name": "Lançamento a Pagar/N°",
+          "expression": "f.[ant_ils_sequence_code]",
+          "status": "TESTED_PHYSICAL_LOCAL"
+        },
+        {
+          "ordinal": 3,
+          "name": "N° Documento",
+          "expression": "f.[document]",
+          "status": "TESTED_PHYSICAL_LOCAL"
+        },
+        {
+          "ordinal": 4,
+          "name": "Emissão",
+          "expression": "f.[issue_date]",
+          "status": "TESTED_PHYSICAL_LOCAL"
+        },
+        {
+          "ordinal": 5,
+          "name": "Tipo",
+          "expression": "COALESCE(policy.type_label COLLATE Latin1_General_100_BIN2,policy.type_token COLLATE Latin1_General_100_BIN2)",
+          "status": "TESTED_PHYSICAL_LOCAL"
+        },
+        {
+          "ordinal": 6,
+          "name": "Valor",
+          "expression": "f.[value]",
+          "status": "TESTED_PHYSICAL_LOCAL"
+        },
+        {
+          "ordinal": 7,
+          "name": "Juros",
+          "expression": "f.[interest_value]",
+          "status": "TESTED_PHYSICAL_LOCAL"
+        },
+        {
+          "ordinal": 8,
+          "name": "Desconto",
+          "expression": "f.[discount_value]",
+          "status": "TESTED_PHYSICAL_LOCAL"
+        },
+        {
+          "ordinal": 9,
+          "name": "Valor a pagar",
+          "expression": "f.[value_to_pay]",
+          "status": "TESTED_PHYSICAL_LOCAL"
+        },
+        {
+          "ordinal": 10,
+          "name": "Pago",
+          "expression": "CONVERT(NVARCHAR(3),CASE f.paid WHEN 1 THEN N'Sim' ELSE N'Não' END)",
+          "status": "TESTED_PHYSICAL_LOCAL"
+        },
+        {
+          "ordinal": 11,
+          "name": "Valor pago",
+          "expression": "f.[paid_value]",
+          "status": "TESTED_PHYSICAL_LOCAL"
+        },
+        {
+          "ordinal": 12,
+          "name": "Fornecedor/Nome",
+          "expression": "f.[ant_rir_name]",
+          "status": "TESTED_PHYSICAL_LOCAL"
+        },
+        {
+          "ordinal": 13,
+          "name": "Filial",
+          "expression": "branch.normalized_name",
+          "status": "TESTED_PHYSICAL_LOCAL"
+        },
+        {
+          "ordinal": 14,
+          "name": "Conta Contábil/Classificação",
+          "expression": "COALESCE(policy.classification_label COLLATE Latin1_General_100_BIN2,f.ant_ils_pas_ant_classification COLLATE Latin1_General_100_BIN2)",
+          "status": "TESTED_PHYSICAL_LOCAL"
+        },
+        {
+          "ordinal": 15,
+          "name": "Conta Contábil/Descrição",
+          "expression": "account.normalized_name",
+          "status": "TESTED_PHYSICAL_LOCAL"
+        },
+        {
+          "ordinal": 16,
+          "name": "Conta Contábil/Valor",
+          "expression": "f.[ant_ils_pas_value]",
+          "status": "TESTED_PHYSICAL_LOCAL"
+        },
+        {
+          "ordinal": 17,
+          "name": "Centro de custo/Nome",
+          "expression": "f.[ant_ces_acr_name]",
+          "status": "TESTED_PHYSICAL_LOCAL"
+        },
+        {
+          "ordinal": 18,
+          "name": "Centro de custo/Valor",
+          "expression": "f.[ant_ces_value]",
+          "status": "TESTED_PHYSICAL_LOCAL"
+        },
+        {
+          "ordinal": 19,
+          "name": "Área de Lançamento",
+          "expression": "f.[ant_aln_name]",
+          "status": "TESTED_PHYSICAL_LOCAL"
+        },
+        {
+          "ordinal": 20,
+          "name": "Mês de Competência",
+          "expression": "f.[competence_month]",
+          "status": "TESTED_PHYSICAL_LOCAL"
+        },
+        {
+          "ordinal": 21,
+          "name": "Ano de Competência",
+          "expression": "f.[competence_year]",
+          "status": "TESTED_PHYSICAL_LOCAL"
+        },
+        {
+          "ordinal": 22,
+          "name": "Data criação",
+          "expression": "core.ufn_analytic_raster_time(f.[created_at],f.[created_at_nano],0) AT TIME ZONE zone.name",
+          "status": "TESTED_PHYSICAL_LOCAL"
+        },
+        {
+          "ordinal": 23,
+          "name": "Observações",
+          "expression": "f.[ant_ils_comments]",
+          "status": "TESTED_PHYSICAL_LOCAL"
+        },
+        {
+          "ordinal": 24,
+          "name": "Descrição da despesa",
+          "expression": "f.[ant_ils_expense_description]",
+          "status": "TESTED_PHYSICAL_LOCAL"
+        },
+        {
+          "ordinal": 25,
+          "name": "Baixa/Data liquidação",
+          "expression": "f.[ant_ils_atn_liquidation_date]",
+          "status": "TESTED_PHYSICAL_LOCAL"
+        },
+        {
+          "ordinal": 26,
+          "name": "Data transação",
+          "expression": "f.[ant_ils_atn_transaction_date]",
+          "status": "TESTED_PHYSICAL_LOCAL"
+        },
+        {
+          "ordinal": 27,
+          "name": "Usuário/Nome",
+          "expression": "f.[ant_uer_name]",
+          "status": "TESTED_PHYSICAL_LOCAL"
+        },
+        {
+          "ordinal": 28,
+          "name": "Status Pagamento",
+          "expression": "policy.payment_state",
+          "status": "TESTED_PHYSICAL_LOCAL"
+        },
+        {
+          "ordinal": 29,
+          "name": "Conciliado",
+          "expression": "CONVERT(NVARCHAR(20),CASE f.ant_ils_atn_reconciled WHEN 1 THEN N'Conciliado' WHEN 0 THEN N'Não conciliado' END)",
+          "status": "TESTED_PHYSICAL_LOCAL"
+        },
+        {
+          "ordinal": 30,
+          "name": "Metadata",
+          "expression": "(SELECT i.execution_id,i.occurrence,i.observation_id,i.revision,f.[ant_aln_name_p] AS [ant_aln_name.presence],f.[ant_aln_name_w] AS [ant_aln_name.wire],f.[ant_aln_name_raw] AS [ant_aln_name.raw],f.[ant_ces_acr_name_p] AS [ant_ces_acr_name.presence],f.[ant_ces_acr_name_w] AS [ant_ces_acr_name.wire],f.[ant_ces_acr_name_raw] AS [ant_ces_acr_name.raw],f.[ant_ces_value_p] AS [ant_ces_value.presence],f.[ant_ces_value_w] AS [ant_ces_value.wire],f.[ant_ces_value_raw] AS [ant_ces_value.raw],f.[ant_crn_psn_nickname_p] AS [ant_crn_psn_nickname.presence],f.[ant_crn_psn_nickname_w] AS [ant_crn_psn_nickname.wire],f.[ant_crn_psn_nickname_raw] AS [ant_crn_psn_nickname.raw],f.[ant_ils_atn_liquidation_date_p] AS [ant_ils_atn_liquidation_date.presence],f.[ant_ils_atn_liquidation_date_w] AS [ant_ils_atn_liquidation_date.wire],f.[ant_ils_atn_liquidation_date_raw] AS [ant_ils_atn_liquidation_date.raw],f.[ant_ils_atn_reconciled_p] AS [ant_ils_atn_reconciled.presence],f.[ant_ils_atn_reconciled_w] AS [ant_ils_atn_reconciled.wire],f.[ant_ils_atn_reconciled_raw] AS [ant_ils_atn_reconciled.raw],f.[ant_ils_atn_transaction_date_p] AS [ant_ils_atn_transaction_date.presence],f.[ant_ils_atn_transaction_date_w] AS [ant_ils_atn_transaction_date.wire],f.[ant_ils_atn_transaction_date_raw] AS [ant_ils_atn_transaction_date.raw],f.[ant_ils_comments_p] AS [ant_ils_comments.presence],f.[ant_ils_comments_w] AS [ant_ils_comments.wire],f.[ant_ils_comments_raw] AS [ant_ils_comments.raw],f.[ant_ils_expense_description_p] AS [ant_ils_expense_description.presence],f.[ant_ils_expense_description_w] AS [ant_ils_expense_description.wire],f.[ant_ils_expense_description_raw] AS [ant_ils_expense_description.raw],f.[ant_ils_pas_ant_classification_p] AS [ant_ils_pas_ant_classification.presence],f.[ant_ils_pas_ant_classification_w] AS [ant_ils_pas_ant_classification.wire],f.[ant_ils_pas_ant_classification_raw] AS [ant_ils_pas_ant_classification.raw],f.[ant_ils_pas_ant_name_p] AS [ant_ils_pas_ant_name.presence],f.[ant_ils_pas_ant_name_w] AS [ant_ils_pas_ant_name.wire],f.[ant_ils_pas_ant_name_raw] AS [ant_ils_pas_ant_name.raw],f.[ant_ils_pas_value_p] AS [ant_ils_pas_value.presence],f.[ant_ils_pas_value_w] AS [ant_ils_pas_value.wire],f.[ant_ils_pas_value_raw] AS [ant_ils_pas_value.raw],f.[ant_ils_sequence_code_p] AS [ant_ils_sequence_code.presence],f.[ant_ils_sequence_code_w] AS [ant_ils_sequence_code.wire],f.[ant_ils_sequence_code_raw] AS [ant_ils_sequence_code.raw],f.[ant_rir_name_p] AS [ant_rir_name.presence],f.[ant_rir_name_w] AS [ant_rir_name.wire],f.[ant_rir_name_raw] AS [ant_rir_name.raw],f.[ant_uer_name_p] AS [ant_uer_name.presence],f.[ant_uer_name_w] AS [ant_uer_name.wire],f.[ant_uer_name_raw] AS [ant_uer_name.raw],f.[comments_p] AS [comments.presence],f.[comments_w] AS [comments.wire],f.[comments_raw] AS [comments.raw],f.[competence_month_p] AS [competence_month.presence],f.[competence_month_w] AS [competence_month.wire],f.[competence_month_raw] AS [competence_month.raw],f.[competence_year_p] AS [competence_year.presence],f.[competence_year_w] AS [competence_year.wire],f.[competence_year_raw] AS [competence_year.raw],f.[created_at_p] AS [created_at.presence],f.[created_at_w] AS [created_at.wire],f.[created_at_raw] AS [created_at.raw],f.[discount_value_p] AS [discount_value.presence],f.[discount_value_w] AS [discount_value.wire],f.[discount_value_raw] AS [discount_value.raw],f.[document_p] AS [document.presence],f.[document_w] AS [document.wire],f.[document_raw] AS [document.raw],f.[interest_value_p] AS [interest_value.presence],f.[interest_value_w] AS [interest_value.wire],f.[interest_value_raw] AS [interest_value.raw],f.[issue_date_p] AS [issue_date.presence],f.[issue_date_w] AS [issue_date.wire],f.[issue_date_raw] AS [issue_date.raw],f.[paid_p] AS [paid.presence],f.[paid_w] AS [paid.wire],f.[paid_raw] AS [paid.raw],f.[paid_value_p] AS [paid_value.presence],f.[paid_value_w] AS [paid_value.wire],f.[paid_value_raw] AS [paid_value.raw],f.[type_p] AS [type.presence],f.[type_w] AS [type.wire],f.[type_raw] AS [type.raw],f.[value_p] AS [value.presence],f.[value_w] AS [value.wire],f.[value_raw] AS [value.raw],f.[value_to_pay_p] AS [value_to_pay.presence],f.[value_to_pay_w] AS [value_to_pay.wire],f.[value_to_pay_raw] AS [value_to_pay.raw] FOR JSON PATH,INCLUDE_NULL_VALUES,WITHOUT_ARRAY_WRAPPER)",
+          "status": "TESTED_PHYSICAL_LOCAL"
+        },
+        {
+          "ordinal": 31,
+          "name": "Data de extracao",
+          "expression": "capture.sealed_at",
+          "status": "TESTED_PHYSICAL_LOCAL"
+        }
+      ]
+    }
+  ]
+}

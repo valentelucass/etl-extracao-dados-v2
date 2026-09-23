@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ruleset xmlns="http://pmd.sourceforge.net/ruleset/2.0.0" name="ETL local security and resilience">
+  <description>Ten PMD 7.17.0 rules for cryptography, resource ownership, failure preservation and concurrency. Local technical gate; nominal security and release acceptance remain separate.</description>
+  <rule ref="category/java/security.xml/HardCodedCryptoKey" />
+  <rule ref="category/java/security.xml/InsecureCryptoIv" />
+  <rule ref="category/java/errorprone.xml/CloseResource" />
+  <rule ref="category/java/bestpractices.xml/PreserveStackTrace" />
+  <rule ref="category/java/errorprone.xml/AvoidCatchingThrowable" />
+  <rule ref="category/java/errorprone.xml/DoNotThrowExceptionInFinally" />
+  <rule ref="category/java/multithreading.xml/DontCallThreadRun" />
+  <rule ref="category/java/multithreading.xml/DoubleCheckedLocking" />
+  <rule ref="category/java/multithreading.xml/NonThreadSafeSingleton" />
+  <rule ref="category/java/multithreading.xml/UnsynchronizedStaticFormatter" />
+</ruleset>

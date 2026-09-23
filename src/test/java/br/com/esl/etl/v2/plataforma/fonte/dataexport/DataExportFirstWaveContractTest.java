@@ -79,7 +79,8 @@ class DataExportFirstWaveContractTest {
         assertEquals("id", fretes.paginationEntityField());
         assertNotEquals(fretes.defaultOrderBy().get(0), fretes.paginationEntityField());
 
-        for (final DataExportTemplate template : DataExportTemplate.values()) {
+        for (final DataExportTemplate template :
+                java.util.List.of(DataExportTemplate.COLETAS, DataExportTemplate.FRETES)) {
             assertEquals(DataExportTransport.GET_WITH_QUERY, template.approvedTransport());
             assertEquals(
                     DataExportResponseForm.ENVELOPE_DATA_ARRAY, template.promotableResponseForm());
@@ -102,7 +103,8 @@ class DataExportFirstWaveContractTest {
 
     @Test
     void canonicalSyntheticFixturesProduceTheVersionedReleases() throws Exception {
-        for (final DataExportTemplate template : DataExportTemplate.values()) {
+        for (final DataExportTemplate template :
+                java.util.List.of(DataExportTemplate.COLETAS, DataExportTemplate.FRETES)) {
             final DataExportTemplateInfo info = templateInfo(template);
             final JsonNode populated =
                     read(
@@ -125,7 +127,8 @@ class DataExportFirstWaveContractTest {
     @Test
     void twoBoundedPerValuesPreserveTheSameSyntheticEntitiesAndLocalTerminalOnly()
             throws Exception {
-        for (final DataExportTemplate template : DataExportTemplate.values()) {
+        for (final DataExportTemplate template :
+                java.util.List.of(DataExportTemplate.COLETAS, DataExportTemplate.FRETES)) {
             final Set<String> perTwo = entitySet(template, 2, 2);
             final Set<String> perThree = entitySet(template, 3, 1);
 
@@ -182,7 +185,8 @@ class DataExportFirstWaveContractTest {
 
     @Test
     void contractGateRejectsUnversionedOrderAndPerBeforeCallingTheSource() throws Exception {
-        for (final DataExportTemplate template : DataExportTemplate.values()) {
+        for (final DataExportTemplate template :
+                java.util.List.of(DataExportTemplate.COLETAS, DataExportTemplate.FRETES)) {
             assertRequestRejected(
                     template, template.defaultPageSize() + 1, template.defaultOrderBy());
             assertRequestRejected(template, 2, List.of("unversioned_order asc"));

@@ -1,0 +1,45 @@
+{
+  "status": "STRUCTURE_AND_EXISTING_PROVENANCE_VALIDATED",
+  "utc": "2026-09-22T06:47:32.091Z",
+  "checks": {
+    "coverage74Rows": true,
+    "stagesP09P33": true,
+    "external31Groups": true,
+    "externalOwnerArtifactAction": true,
+    "allRowsTraceable": true,
+    "countersUnchanged": true,
+    "p30P33PreparationOnly": true,
+    "noApplyEnabled": true,
+    "historicalSnapshotPresent": true
+  },
+  "historicalAndExternalSurfaceUnchanged": true,
+  "effectsSeparated": true,
+  "source": {
+    "path": "target/qualificacao-p07-p33-20260922-01/final-draft-02/matriz.json",
+    "sha256": "a1505256a99a6144cc39096fb73fdc1785c1e7c8e985bdfaef3997768037af37"
+  },
+  "derivedResult": {
+    "path": "target/qualificacao-p07-p33-20260922-01/derived-physical-result.json",
+    "sha256": "ef6e98cce07c3b994d45603590eb6d39fe086042a3d61593985499aa48b45526"
+  },
+  "output": {
+    "path": "target/qualificacao-p07-p33-20260922-01/final-materialized/matriz.json",
+    "sha256": "1d11d6a9e85a07308b944733c4cda49ac027aa3492b3a53d16f7ce7bdbcc9018"
+  },
+  "newPhysicalTestsExecuted": 0,
+  "sqlCallsByHelper": 0,
+  "networkCallsByHelper": 0,
+  "publicFilesEdited": 0,
+  "publicationPending": false,
+  "finalReadbackReceipt": "target/qualificacao-p07-p33-20260922-01/physical/final-integrity.json",
+  "publicationStatus": "PUBLISHED_WITH_DOCUMENTARY_SUCCESSION_PASS",
+  "publicMatrix": {
+    "path": "docs/continuidade/qualificacao-p07-p33/matriz.json",
+    "sha256": "35218994250a82ffd82ff34481c557ffd4dec79aa52ffb0d0f7d9f1659279765"
+  },
+  "documentaryValidation": {
+    "path": "target/qualificacao-p07-p33-20260922-01/physical/closure-validation-result.json",
+    "sha256": "b8f0e4949b12c6a4ae8abefb5fde9d428e26395bd8cf939c03e9753e4762d026"
+  },
+  "finalReadbackPolicy": "O resultado do scanner, o readback dos bytes finais e o encerramento são autoritativos em target/qualificacao-p07-p33-20260922-01/physical/final-integrity.json e closed-receipt.json, após existirem. Esta fotografia registra somente provas já observadas; não antecipa essas execuções."
+}

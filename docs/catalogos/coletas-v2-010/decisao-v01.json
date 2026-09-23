@@ -1,0 +1,79 @@
+{
+  "catalogVersion": "2026-09-04.v2-010-v01.1",
+  "decision": "COLETAS_6908_DOMAIN_PRESENCE_FRESHNESS_STATUS_SCHEMA",
+  "scope": "DECISION_ONLY_NO_DDL_NO_SOURCE_IO_NO_PUBLICATION",
+  "sourceContract": "dataexport-6908",
+  "identity": {
+    "entity": "coletas",
+    "tuple": ["source_instance", "tenant_scope", "entity", "source_key"],
+    "sourceKey": {"path": "/id", "wireType": "INTEGER", "role": "TYPE_TAGGED_SOURCE_KEY"},
+    "businessAlias": {"path": "/sequence_code", "role": "VERSIONED_NON_TECHNICAL_ALIAS"},
+    "expandedRows": "DEDUPLICATE_LOGICAL_ROOT_SET_BASED_NO_IMPLICIT_CHILD"
+  },
+  "logicalSchema": [
+    "SCOPED_IDENTITY_AND_CANONICAL_REGISTRY",
+    "VERSIONED_BUSINESS_ALIAS",
+    "RAW_TYPED_AND_TRI_STATE_ATTRIBUTE_PRESENCE",
+    "RAW_CANONICAL_VERSIONED_STATUS_AND_TERMINALITY",
+    "RAW_TYPED_ORIGINATED_FRESHNESS",
+    "SNAPSHOT_PRESENCE_AND_ABSENCE_EVIDENCE",
+    "RELATION_CANDIDATE_VALUE_PRESENCE_PROVENANCE"
+  ],
+  "attributePresenceVocabulary": ["ABSENT", "NULL", "VALUE"],
+  "freshness": {
+    "typedPreferred": "status_updated_at_em",
+    "rawInput": "status_updated_at",
+    "fallbackOrder": ["finish_date", "service_date", "request_date"],
+    "invalidRaw": "PRESERVE_WITHOUT_REINTERPRETATION",
+    "terminalWinsOverOpenDespiteRetrogradeTimestamp": true,
+    "persistedTerminalNeverRegressesToOpen": true
+  },
+  "statusCatalog": {
+    "version": "coletas-status-v1",
+    "entries": [
+      {"source": "pending", "label": "Pendente", "terminal": false},
+      {"source": "treatment", "label": "Em tratativa", "terminal": false},
+      {"source": "manifested", "label": "Manifestada", "terminal": false},
+      {"source": "in_transit", "label": "Em trânsito", "terminal": false},
+      {"source": "draft", "label": "Rascunho", "terminal": false},
+      {"source": "finished", "label": "Finalizada", "terminal": true},
+      {"source": "done", "label": "Coletada", "terminal": true},
+      {"source": "canceled", "label": "Cancelada", "terminal": true},
+      {"source": "cancelled", "label": "Cancelada", "terminal": true}
+    ],
+    "actionPrecedence": [
+      "FINISHED_OR_DONE_TO_COLETA_REALIZADA",
+      "NON_BLANK_CANCELLATION_REASON",
+      "CANCELED_OR_CANCELLED_TO_COLETA_CANCELADA",
+      "PENDENTE"
+    ],
+    "attempts": {"terminal": 1, "open": 0},
+    "unknownCode": "PRESERVE_RAW_NO_INFERRED_TERMINALITY"
+  },
+  "rootPresence": {
+    "activation": "BLOCKED_UNTIL_V2_013_AND_INDEPENDENT_COMPLETE_SNAPSHOT",
+    "firstIndependentAbsence": "CANDIDATE_COMPATIBILITY_LABEL_EXCLUIDA",
+    "secondIndependentAbsence": "CONFIRMED_SOFT_DELETE",
+    "reappearance": "CLEAR_ALL_ABSENCE_STATE",
+    "incompleteOrUncertainSnapshot": "NO_ACTIVE_STATE_CHANGE"
+  },
+  "relationships": {
+    "candidateFields": ["manifesto", "pick_item_id", "fit_p_m_pck_sequence_code", "frete"],
+    "storage": "PRESENCE_AND_PROVENANCE_ONLY",
+    "manifestoToColeta": "BLOCKED_UNTIL_V2_046A",
+    "coletaToFrete": "BLOCKED_UNTIL_V2_046B",
+    "inferredJoin": "FORBIDDEN"
+  },
+  "incremental": {
+    "partition": "request_date",
+    "overlap": "VERSIONED_REQUIRED",
+    "supplementaryLateData": "scopes.by_updated_at",
+    "watermark": "FORBIDDEN_FOR_scopes.by_updated_at"
+  },
+  "references": {
+    "priority": ["VALID_CEP", "CITY_UF"],
+    "productiveReference": "PUBLICATION_AND_CUTOVER_BLOCKED_UNTIL_V2_035A"
+  },
+  "guardrails": "HISTORICAL_CANDIDATES_NO_V2_DEFAULT",
+  "executionOwner": "V02"
+}

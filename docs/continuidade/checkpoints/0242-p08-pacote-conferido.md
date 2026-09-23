@@ -1,0 +1,13 @@
+# Checkpoint 0242 — pacote P08 conferido
+
+UTC: 2026-09-22T06:37:19.468Z. Anterior: docs/continuidade/checkpoints/0241-p07-integral-conferido.md, SHA-256 e32c16d997bbcc6a2d2403b6bb7113622035490f752f7e34dd1bdabda8dc526a. Estado ACEITO_NO_ESCOPO técnico local P07/P08; fechamento documental EM_EXECUCAO. Objetivo P09–P33 permanece, sem promover evidência sintética a contrato, aprovação ou operação produtiva.
+
+Autoridade: physical/authority.json, vigente até 2026-09-23T04:40:21.019Z; 30920/43200 segundos reservados. Exclusivamente localhost/ETL_SISTEMA_V2_SHADOW, Windows integrado, sintéticos e rollback. Sem DDL, commit de domínio, fonte externa, produção, credencial, agendamento, publicação, deploy ou corte. Todas as reservas desta fotografia estão observadas; nenhum efeito de resultado desconhecido.
+
+P07: 2263 unitários/4 skips históricos e 492 integrações/105 classes, zero falhas/erros; build/cobertura/identidades/rollback PASS. Todas as identidades históricas e os 77 casos novos foram conferidos. P08: 19 passos observados PASS; pacotes de 7943947 bytes, 730 membros e 9 dependências, idênticos byte a byte. Smoke executou inspect/plan/run/status/resume/compare fora do workspace-fonte. Guardas: 8 de controle, 21 de admissão, 25 de envelope. A/B exercitaram sete etapas/133 comparações/231 prévias por sequência; oito variantes tiveram a recusa esperada, com rollback. Readback final conferiu alvo e agregados locais.
+
+Pacote primário: target/macrobloco-qualificacao-pacote-20260913-01/pos0236-package-primary-01/qualification.zip. Revisão de fontes: e266fd695d5c9a3bccf1516f444802cc43908ae1f05f8fccea74fa60075ac964. SHA-256 do ZIP: ebe0021f2bf6fa016284ea09179dca38cd9b087ee5bf08026dc03eeafad4ff62. Esses hashes provam integridade dos artefatos, não aprovação humana ou prontidão produtiva. Pins desta unidade em checkpoint-0242-pins.json; recibos e logs integrais nas tentativas próprias. Falhas e snapshots anteriores preservados.
+
+Segurança: 36 alertas PMD brutos mantidos e 36 disposições técnicas específicas conferidas com os XMLs completos atuais. Nenhuma supressão ou aceite nominal de SAST/release. Matriz auditada cobre 74 linhas e 31 grupos de requisitos externos; 39/45 e 67/115 preservados. O atestado G01 não foi localizado; nenhuma credencial foi testada para substituí-lo.
+
+Próximas ações: (1) compor os recibos físicos reais e publicar matriz/relatório após este estado; (2) selar manifesto com snapshots exatos e executar sucessão/cadeia/trilha sob a reserva de validação; (3) atualizar documentos com os resultados observados, reselar, executar scanner/readback final, reconciliar processos e fechar ledger. Não repetir a suíte física sem delta causal ou renovar limites por inferência.

@@ -1,0 +1,189 @@
+{
+  "catalogVersion": "2026-09-04.v2-009b.1",
+  "identityFingerprintVersion": "inventario-identity-v1",
+  "task": "V2-009b/10633",
+  "route": "P08",
+  "decisionStatus": "UNRESOLVED_ROOT_FREIGHT_AND_INVOICE_MAPPING_IDENTITY",
+  "evidenceVocabulary": [
+    "HISTORICAL_SANITIZED_OBSERVATION",
+    "LEGACY_STATIC_EVIDENCE",
+    "SYNTHETIC_FIXTURES",
+    "NO_TEMPORAL_OR_TENANT_PAYLOAD_PROOF",
+    "NO_INDEPENDENT_COMPLETENESS_EVIDENCE"
+  ],
+  "quarantineReasons": [
+    "AMBIGUOUS_BUSINESS_ALIAS",
+    "CARDINALITY_DIVERGENCE",
+    "INVALID_SOURCE_KEY_TYPE",
+    "INVALID_SOURCE_KEY_VALUE",
+    "MISSING_SOURCE_KEY",
+    "SCOPE_MISMATCH",
+    "SOURCE_KEY_COLLISION",
+    "SOURCE_KEY_TOO_LONG",
+    "UNPROVEN_ALIAS_CHANGE",
+    "UNPROVEN_REKEY"
+  ],
+  "actions": [
+    "BLOCK_PROMOTION_PENDING_VERTICAL_RESOLUTION",
+    "KEEP_CANONICAL",
+    "NO_OP_REPLAY",
+    "PRESERVE_UNRESOLVED_OBSERVATION",
+    "QUARANTINE",
+    "REACTIVATE_EXACT_BINDING",
+    "REGISTER_NEW_CANONICAL",
+    "VERSION_ALIASES_PRESERVE_CANONICAL"
+  ],
+  "sourceFamily": {
+    "sourceKind": "ESL",
+    "transport": "DATA_EXPORT",
+    "sourceInstanceMeaning": "STABLE_NON_SECRET_LOGICAL_ESL_ACCOUNT"
+  },
+  "registry": {
+    "tuple": ["source_instance", "tenant_scope", "entity", "source_key"],
+    "comparison": "CASE_SENSITIVE_EXACT_BIN2",
+    "canonicalIdStrategy": "SQL_SURROGATE_BIGINT_IDENTITY",
+    "recordStateIdIsCanonicalId": false,
+    "physicalEnforcementGate": "V2-009d"
+  },
+  "scope": {
+    "policy": "EXPLICIT_SOURCE_INSTANCE_AND_TENANT_REQUIRED",
+    "globalUniquenessProven": false,
+    "tenantPayloadPath": null,
+    "tenantDerivation": "EXTERNAL_CONFIGURATION_REQUIRED_NO_BUSINESS_FIELD_DERIVATION",
+    "forbiddenTenantSentinels": ["DEFAULT", "GLOBAL", "SINGLETON"]
+  },
+  "canonicalization": {
+    "maximumStorageCharacters": 256,
+    "acceptedWireTypes": ["INTEGER"],
+    "integerEncoding": "INTEGER:<CANONICAL_DECIMAL>",
+    "stringEncoding": "STRING:<EXACT_TEXT>",
+    "integerAndStringEquivalent": false,
+    "textNormalization": "NONE_FAIL_ON_BLANK_BOUNDARY_SPACE_CONTROL_OR_INVALID_UNICODE",
+    "processingBound": "ONE_OBSERVATION_AT_A_TIME"
+  },
+  "identity": {
+    "entity": "inventario",
+    "contractId": "dataexport-10633",
+    "contractVersion": "2026-09-04.v2-025b.1",
+    "sourceContractReleaseFingerprint": "7eeb2844708df34bd1a7877faa4aa0ba2a2c9d13b623d5da093890af89726127",
+    "recordRoot": "/data/*",
+    "sourceKey": {
+      "path": "/sequence_code",
+      "name": "sequence_code",
+      "wireTypes": ["INTEGER"],
+      "role": "ROOT_SOURCE_KEY_CANDIDATE_NEVER_CANONICAL_ID",
+      "decision": "UNRESOLVED_LOGICAL_ROOT_CANDIDATE",
+      "decisionBasis": "CONTRACT_AND_INV_01_RETAIN_CANDIDATE_STATUS_LEGACY_USES_COMPOSITE_HASH"
+    },
+    "canonicalKey": {
+      "strategy": "SQL_SURROGATE_BIGINT_IDENTITY",
+      "binding": "WITHHELD_FOR_ROOT_AND_CHILD_IDENTITY",
+      "notEquivalentTo": ["sequence_code", "identificador_unico", "mapping_hash", "record_state_id"]
+    },
+    "businessKeys": {
+      "accepted": [],
+      "candidates": [
+        {
+          "names": ["cnr_c_s_fit_corporation_sequence_number"],
+          "paths": ["/cnr_c_s_fit_corporation_sequence_number"],
+          "decision": "MINUTA_REFERENCE_CANDIDATE_NOT_ALIAS_IDENTITY_CHILD_OR_CROSSWALK"
+        }
+      ]
+    },
+    "aliases": {
+      "accepted": [],
+      "rejected": ["identificador_unico", "mapping_hash"],
+      "rekeyPolicy": "NO_REKEY_OR_REPOINT_WITHOUT_VERSIONED_EVIDENCE"
+    },
+    "physicalGrain": {
+      "root": "SOURCE_LINE_WITH_SEQUENCE_CODE_AGGREGATE_CANDIDATE_NOT_ACCEPTED",
+      "observed": "TWENTY_SEVEN_PHYSICAL_ROWS_THREE_SEQUENCE_CODE_CANDIDATES_IN_ONE_SANITIZED_WINDOW",
+      "children": [
+        {
+          "name": "freight_minuta_component",
+          "path": "/cnr_c_s_fit_corporation_sequence_number",
+          "decision": "UNRESOLVED_SCALAR_COMPONENT_NOT_APPROVED_AS_CHILD_OR_RELATION"
+        },
+        {
+          "name": "invoice_mapping_expansion",
+          "path": null,
+          "pathCandidate": "/cnr_c_s_fit_invoices_mapping/*",
+          "decision": "UNRESOLVED_SHAPE_NATURAL_COMPONENTS_COLLISION_AND_CARDINALITY"
+        }
+      ],
+      "relationPolicy": "MAPPING_OR_MINUTA_COOCCURRENCE_DOES_NOT_PROVE_INVOICE_FREIGHT_OR_MINUTA_RELATION"
+    },
+    "proof": {
+      "uniqueness": "TWENTY_SEVEN_TO_THREE_WINDOW_ONLY_INSUFFICIENT_TO_ACCEPT_LOGICAL_ROOT_UNIQUENESS",
+      "temporalStability": "UNPROVEN_NO_VERSIONED_PROVIDER_GUARANTEE_OR_REPEAT_OBSERVATION",
+      "tenantScope": "UNPROVEN_IN_PAYLOAD_EXPLICIT_EXTERNAL_SCOPE_REQUIRED",
+      "cardinality": "ONLY_TWENTY_SEVEN_TO_THREE_OBSERVED_ROOT_FREIGHT_MINUTA_AND_MAPPING_CARDINALITIES_UNPROVEN"
+    },
+    "repeatAndConflictPolicy": {
+      "sameScopedRootSourceKey": "NO_CANONICAL_REPLAY_CLASSIFICATION_UNTIL_ROOT_GRAIN_IS_PROVEN",
+      "physicalVariants": "PRESERVE_AS_OBSERVATIONS_WITHOUT_MAPPING_PARSE_COLLAPSE_OR_PROMOTION",
+      "divergentRoot": "QUARANTINE_AND_BLOCK_PROMOTION_PENDING_V2_031",
+      "aliasCollision": "BLOCK_DEPENDENT_RESOLUTION_NO_AUTOMATIC_REPOINT",
+      "alternateKeyOrRekey": "QUARANTINE_UNPROVEN_REKEY_UNTIL_VERSIONED_EVIDENCE",
+      "missingOrInvalidScopeOrKey": "QUARANTINE",
+      "reactivation": "NOT_CLASSIFIABLE_UNTIL_ROOT_IDENTITY_PROVEN"
+    },
+    "outcome": {
+      "closeSubcheckbox": false,
+      "blockers": [
+        "SEQUENCE_CODE_ROOT_UNIQUENESS_AND_STABILITY_UNPROVEN",
+        "FREIGHT_MINUTA_CHILD_ROLE_UNPROVEN",
+        "INVOICES_MAPPING_SHAPE_UNPROVEN",
+        "CHILD_NATURAL_COMPONENTS_UNPROVEN",
+        "CHILD_COLLISION_ZERO_UNPROVEN",
+        "ROOT_CHILD_CARDINALITY_UNPROVEN"
+      ],
+      "unblockEvidence": [
+        "VERSIONED_PROVIDER_ROOT_IDENTITY_OR_APPROVED_REPRESENTATIVE_REPEAT_OBSERVATIONS",
+        "VERSIONED_PROVIDER_ROLE_FOR_FREIGHT_MINUTA_COMPONENT",
+        "VERSIONED_PROVIDER_SHAPE_AND_TYPES_FOR_INVOICES_MAPPING",
+        "REPRESENTATIVE_REPEAT_OBSERVATIONS_PROVING_CHILD_NATURAL_KEYS_COLLISIONS_AND_CARDINALITY"
+      ]
+    },
+    "capabilities": {
+      "shadowDomainImplementation": "BLOCKED_PENDING_COMPLETE_V2_009B_10633_AND_V2_031",
+      "sweepOrDeactivation": "BLOCKED_NO_COMPLETENESS_PROOF",
+      "cutover": "BLOCKED_NO_COMPLETENESS_PROOF",
+      "externalHolds": {"V2-025d": "BLOCKED_BY_V2_041_EXTERNAL_HOLD"}
+    },
+    "nextGates": ["V2-009b/10633", "V2-031", "V2-009d", "V2-025d"],
+    "evidenceBounds": {
+      "supports": [
+        "SEQUENCE_CODE_INTEGER_ROOT_CANDIDATE",
+        "INVOICE_MAPPING_EXPANSION_SIGNAL",
+        "TWENTY_SEVEN_ROWS_THREE_ROOT_CANDIDATES_IN_ONE_SANITIZED_WINDOW"
+      ],
+      "doesNotSupport": [
+        "GLOBAL_UNIQUENESS_OR_TEMPORAL_STABILITY",
+        "PAYLOAD_TENANT_OR_GLOBAL_SENTINEL",
+        "MAPPING_RUNTIME_SHAPE_NATURAL_KEY_COLLISION_ZERO_OR_CARDINALITY",
+        "MINUTA_INVOICE_OR_FREIGHT_RELATIONSHIP",
+        "COMPLETENESS_SWEEP_OR_CUTOVER"
+      ],
+      "files": [
+        {"path": "docs/adr/0018-identidade-e-crosswalk-da-primeira-onda.md", "role": "RATIFIED_REGISTRY_FRAMEWORK", "readOnly": true},
+        {"path": "docs/catalogos/identidade-primeira-onda/manifesto.json", "role": "RATIFIED_IDENTITY_POLICY_BASELINE", "readOnly": true},
+        {"path": "docs/catalogos/identidade-cotacoes/manifesto.json", "role": "BOUNDED_SINGLE_ENTITY_PRECEDENT", "readOnly": true},
+        {"path": "docs/catalogos/contratos-esl-10633/manifesto.json", "role": "VERSIONED_OFFLINE_CONTRACT", "readOnly": true},
+        {"path": "docs/catalogos/contratos-esl-10633/fixtures/10633-per-3-page-1.synthetic.json", "role": "SYNTHETIC_SHAPE_ONLY", "readOnly": true},
+        {"path": "STATES.md", "role": "ROADMAP_RULE_INV_01", "readOnly": true},
+        {"path": "../etl-extracao-dados/src/main/java/br/com/extrator/dominio/dataexport/inventario/InventarioDTO.java", "role": "LEGACY_STATIC_MAPPING_TYPED_AS_OBJECT", "readOnly": true},
+        {"path": "../etl-extracao-dados/src/main/java/br/com/extrator/integracao/mapeamento/dataexport/inventario/InventarioMapper.java", "role": "LEGACY_STATIC_MUTABLE_HASH_HEURISTIC", "readOnly": true},
+        {"path": "../etl-extracao-dados/database/tabelas/020_criar_tabela_inventario.sql", "role": "LEGACY_STATIC_HASH_PK_ONLY", "readOnly": true}
+      ]
+    },
+    "fingerprintInputs": {
+      "identity": "dataexport-10633|inventario|/sequence_code|INTEGER|ROOT_CANDIDATE_UNRESOLVED|FREIGHT_MINUTA_COMPONENT_UNRESOLVED|INVOICE_MAPPING_SHAPE_UNPROVEN|CHILD_IDENTITY_UNRESOLVED|CARDINALITY_27_TO_3_ONLY|EXPLICIT_SCOPE|NO_RELATION_INFERENCE",
+      "release": "2026-09-04.v2-009b.1|inventario-identity-v1|dataexport-10633"
+    },
+    "fingerprints": {
+      "identity": "739d8e3930b9db497b9cf3e38365ade6f79666a9a6bd80b313b2fbef88479d68",
+      "release": "15b09b813bfb44ed13fb3144a80917f3f627d465840fe1894f88b64eb7f6d670"
+    }
+  }
+}

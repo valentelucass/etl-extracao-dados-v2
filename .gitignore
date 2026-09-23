@@ -3,6 +3,11 @@
 !.env.example
 config/application.local.properties
 config/application.*.local.properties
+config/application.properties
+config/contract-test.properties
+config/contract-test.local.properties
+config/runtime-windows-provisioning.json
+config/runtime-windows-provisioning.local.json
 *.pem
 *.key
 *.p12

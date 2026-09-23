@@ -1,0 +1,46 @@
+{
+  "data": {
+    "fields": {
+      "corporation_sequence_number": {
+        "type": "integer",
+        "label": "Minuta sintética"
+      },
+      "fit_p_m_pck_sequence_code": {
+        "type": "integer",
+        "label": "Vínculo sintético de coleta"
+      },
+      "finished_at": {
+        "type": "string",
+        "label": "Finalização sintética"
+      },
+      "fit_dpn_performance_finished_at": {
+        "type": "string",
+        "label": "Performance sintética"
+      },
+      "updated_at": {
+        "type": "datetime",
+        "label": "Atualização sintética"
+      },
+      "reference_number": {
+        "type": "string",
+        "label": "Referência sintética"
+      },
+      "servico_em": {
+        "type": "datetime"
+      },
+      "status": {
+        "type": "string"
+      }
+    },
+    "filters": [
+      {
+        "field": "freights.service_at",
+        "data_type": "date"
+      },
+      {
+        "field": "scopes.by_updated_at",
+        "data_type": "datetime"
+      }
+    ]
+  }
+}

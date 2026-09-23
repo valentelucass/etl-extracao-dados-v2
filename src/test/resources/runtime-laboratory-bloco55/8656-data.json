@@ -1,0 +1,16 @@
+{
+  "data": [
+    {
+      "corporation_sequence_number": 550865601,
+      "service_at": "2024-01-01",
+      "invoices_volumes": "0",
+      "fit_fln_status": "finished"
+    },
+    {
+      "corporation_sequence_number": 550865602,
+      "service_at": "2024-01-01",
+      "invoices_volumes": null,
+      "fit_fln_status": "unmapped-synthetic"
+    }
+  ]
+}

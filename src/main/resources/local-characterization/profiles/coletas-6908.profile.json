@@ -1,0 +1,188 @@
+{
+  "schemaVersion": "V2_012_PROFILE_V1",
+  "profileId": "V2_012_COLETAS_6908",
+  "fixtureResource": "/contracts/v2-012/fixtures/coletas-6908.synthetic.json",
+  "fixtureFingerprint": "1b2eecd3fa3b704dfbdcc9299059aa70e399e0a6f9c3ef15a5e5ea02ff8fdc15",
+  "stages": ["V2_012A", "V2_012B", "V2_012C"],
+  "entity": "COLETAS",
+  "sourceKind": "DATA_EXPORT",
+  "oracleKind": "DATA_EXPORT_PROVIDER",
+  "authorizationRequirement": "EXPLICIT_OWNER_AUTHORIZATION",
+  "contract": {
+    "contractId": "dataexport-6908",
+    "contractVersion": "2026-08-31.v2-025a.1",
+    "documentReference": "dataexport-coletas",
+    "contractFingerprint": "052d84c37d9c55ae2b2b4891eb4771c68158ee7365402a1388cc68256c67cc59",
+    "identityFingerprint": "0ca2cd5ce2573d0bdec31d9bc141887f2d58bc79cd67d289981034a4865705e1"
+  },
+  "sourceKey": {
+    "path": "/id",
+    "wireTypes": ["INTEGER"],
+    "typeTagged": true,
+    "domain": "CANONICAL_INTEGER"
+  },
+  "businessAliases": [
+    {
+      "path": "/sequence_code",
+      "name": "sequence_code",
+      "role": "BUSINESS_ALIAS_NEVER_SOURCE_KEY"
+    }
+  ],
+  "childIdentities": [],
+  "relationshipCandidatePaths": [
+    "/fit_p_m_pck_sequence_code",
+    "/frete",
+    "/manifesto",
+    "/pck_mik_mft_sequence_code",
+    "/pick_item_id"
+  ],
+  "scope": {
+    "sourceInstance": "REQUIRED_AT_EXECUTION",
+    "tenantScope": "REQUIRED_AT_EXECUTION",
+    "forbiddenValues": ["DEFAULT", "GLOBAL", "SINGLETON"]
+  },
+  "rootGrain": {
+    "recordRoot": "/data/*",
+    "acceptedRecordRoots": ["/data/*"],
+    "logicalGrain": "DISTINCT_SCOPED_ID",
+    "cardinality": "ARRAY_ELEMENTS",
+    "expansionPolicy": "PHYSICAL_ROWS_MAY_EXCEED_LOGICAL_ROOTS",
+    "childPolicy": "PHYSICAL_EXPANSION_NEVER_CREATES_A_NEW_LOGICAL_ROOT",
+    "rootScalarPaths": []
+  },
+  "pathScopes": {
+    "recordPaths": [
+      "/cancellation_reason",
+      "/finish_date",
+      "/fit_p_m_pck_sequence_code",
+      "/frete",
+      "/id",
+      "/manifesto",
+      "/pck_mik_mft_sequence_code",
+      "/pick_item_id",
+      "/request_date",
+      "/sequence_code",
+      "/service_date",
+      "/status",
+      "/status_updated_at",
+      "/updated_at"
+    ],
+    "connectionPaths": []
+  },
+  "absencePolicy": "OBSERVATION_ONLY_NO_LIFECYCLE_INFERENCE",
+  "filters": [
+    {
+      "path": "picks.request_date",
+      "role": "REQUIRED",
+      "watermark": false,
+      "requiredBooleanValue": null
+    },
+    {
+      "path": "scopes.by_updated_at",
+      "role": "COMPLEMENTARY",
+      "watermark": false,
+      "requiredBooleanValue": null
+    }
+  ],
+  "pagination": {
+    "kind": "NUMERIC_PAGE",
+    "maximumPageSize": 100,
+    "terminalCondition": "EMPTY_PAGE_LOCAL_UNVERIFIED",
+    "perSemantics": "DISTINCT_SOURCE_KEYS_WITH_PHYSICAL_EXPANSION",
+    "shortPageIsTerminal": false,
+    "completenessProven": false,
+    "snapshotProven": false
+  },
+  "ordering": {
+    "expression": "sequence_code asc",
+    "role": "PARITY_ONLY_NOT_IDENTITY_OR_CURSOR"
+  },
+  "temporal": {
+    "timestampPaths": [
+      "/finish_date",
+      "/request_date",
+      "/service_date",
+      "/status_updated_at",
+      "/updated_at"
+    ],
+    "precedence": [
+      "/status_updated_at",
+      "/finish_date",
+      "/service_date",
+      "/request_date"
+    ],
+    "timezone": "America/Sao_Paulo",
+    "timezoneRequirement": "EXPLICIT_REQUIRED",
+    "translation": "BOUNDARIES_UNPROVEN"
+  },
+  "status": {
+    "path": "/status",
+    "mode": "CLOSED_CATALOG",
+    "reference": "coletas-status-v1",
+    "policyFingerprint": "077c4e806c3174dd4909e94e99a72847ba6b76868fce492561f9bb307a85422c",
+    "unknownValuesAllowed": false
+  },
+  "limits": {
+    "maximumBytes": 65536,
+    "maximumRows": 1000,
+    "maximumPages": 100,
+    "maximumDepth": 16,
+    "maximumPaths": 256,
+    "maximumNodes": 4096
+  },
+  "fieldContracts": [
+    {"path": "/cancellation_reason", "wireTypes": ["STRING"], "presenceStates": ["ABSENT", "NULL", "VALUE"]},
+    {"path": "/finish_date", "wireTypes": ["STRING"], "presenceStates": ["ABSENT", "NULL", "VALUE"]},
+    {"path": "/fit_p_m_pck_sequence_code", "wireTypes": ["INTEGER"], "presenceStates": ["ABSENT", "NULL", "VALUE"]},
+    {"path": "/frete", "wireTypes": ["OBJECT"], "presenceStates": ["ABSENT", "NULL", "VALUE"]},
+    {"path": "/id", "wireTypes": ["INTEGER"], "presenceStates": ["ABSENT", "NULL", "VALUE"]},
+    {"path": "/manifesto", "wireTypes": ["OBJECT"], "presenceStates": ["ABSENT", "NULL", "VALUE"]},
+    {"path": "/pck_mik_mft_sequence_code", "wireTypes": ["INTEGER"], "presenceStates": ["NULL", "VALUE"]},
+    {"path": "/pick_item_id", "wireTypes": ["INTEGER"], "presenceStates": ["ABSENT", "NULL", "VALUE"]},
+    {"path": "/request_date", "wireTypes": ["STRING"], "presenceStates": ["ABSENT", "NULL", "VALUE"]},
+    {"path": "/sequence_code", "wireTypes": ["INTEGER"], "presenceStates": ["VALUE"]},
+    {"path": "/service_date", "wireTypes": ["STRING"], "presenceStates": ["ABSENT", "NULL", "VALUE"]},
+    {"path": "/status", "wireTypes": ["STRING"], "presenceStates": ["ABSENT", "NULL", "VALUE"]},
+    {"path": "/status_updated_at", "wireTypes": ["STRING"], "presenceStates": ["ABSENT", "NULL", "VALUE"]},
+    {"path": "/updated_at", "wireTypes": ["STRING"], "presenceStates": ["VALUE"]}
+  ],
+  "expectedPaths": [
+    "/cancellation_reason",
+    "/finish_date",
+    "/fit_p_m_pck_sequence_code",
+    "/frete",
+    "/id",
+    "/manifesto",
+    "/pck_mik_mft_sequence_code",
+    "/pick_item_id",
+    "/request_date",
+    "/sequence_code",
+    "/service_date",
+    "/status",
+    "/status_updated_at",
+    "/updated_at"
+  ],
+  "requiredChecks": [
+    "SYNTHETIC_ORACLE_AVAILABLE",
+    "SYNTHETIC_AUTHORIZATION_CONTEXT",
+    "EXPLICIT_SCOPES",
+    "ROOT_MATCH",
+    "PATH_SET_MATCH",
+    "FIELD_TYPES_MATCH",
+    "FILTERS_MATCH",
+    "RELATIONSHIPS_PRESERVED",
+    "ABSENCE_POLICY_PRESERVED",
+    "SOURCE_KEY_VALID",
+    "PRESENCE_TRI_STATE_TRACKED",
+    "TERMINAL_CONDITION_MET",
+    "LIMITS_RESPECTED",
+    "ORDERING_PARITY_VALID",
+    "TEMPORAL_EVIDENCE_VALID",
+    "STATUS_SEMANTICS_VALID",
+    "CARDINALITY_MATCH",
+    "ENTITY_RULES_MATCH",
+    "SYNTHETIC_EVIDENCE_ONLY"
+  ],
+  "profileStatus": "PREPARED_NOT_EXECUTED",
+  "gateStatus": "ORACLE_REQUIRED"
+}

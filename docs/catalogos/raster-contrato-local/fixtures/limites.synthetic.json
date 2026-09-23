@@ -1,0 +1,47 @@
+{
+  "provenance": "SYNTHETIC_ONLY_NOT_PROVIDER_EVIDENCE",
+  "cases": [
+    {
+      "id": "EMPTY",
+      "rows": 0,
+      "days": 1,
+      "expected": "TERMINAL_UNVERIFIED"
+    },
+    {
+      "id": "SHORT",
+      "rows": 499,
+      "days": 1,
+      "expected": "TERMINAL_UNVERIFIED"
+    },
+    {
+      "id": "CAP_SPLIT",
+      "rows": 500,
+      "days": 2,
+      "expected": "REPARTITION_REQUIRED_CONTRACT_BOUND"
+    },
+    {
+      "id": "CAP_MINIMUM",
+      "rows": 500,
+      "days": 1,
+      "expected": "BLOCKED_MINIMUM_WINDOW_CAP"
+    },
+    {
+      "id": "OVER_CAP_MINIMUM",
+      "rows": 501,
+      "days": 1,
+      "expected": "BLOCKED_MINIMUM_WINDOW_CAP"
+    },
+    {
+      "id": "NEGATIVE_COUNT",
+      "rows": -1,
+      "days": 1,
+      "expected": "INVALID_BOUND"
+    },
+    {
+      "id": "INVALID_WINDOW",
+      "rows": 1,
+      "days": 0,
+      "expected": "INVALID_BOUND"
+    }
+  ]
+}

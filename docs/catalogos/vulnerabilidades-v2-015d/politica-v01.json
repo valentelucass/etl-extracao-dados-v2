@@ -1,0 +1,125 @@
+{
+  "schemaVersion": "V2_015D_DEPENDENCY_VULNERABILITY_POLICY_V1",
+  "policyId": "V2-015D-LOCAL-FAIL-CLOSED-V1",
+  "policyVersion": "1.0.0",
+  "status": "LOCAL_TECHNICAL_CONTAINMENT_NOT_NOMINALLY_ACCEPTED",
+  "effectiveScope": "DEPENDENCY_AUDIT_CONFIGURATION_AND_SYNTHETIC_REPORT_HARNESS",
+  "threshold": {
+    "mechanism": "OWASP_DEPENDENCY_CHECK_FAIL_BUILD_ON_CVSS",
+    "default": 0.0,
+    "allowedValues": [
+      0.0
+    ],
+    "rejectedClasses": [
+      "ABOVE_TEN",
+      "NEGATIVE",
+      "NAN_OR_INFINITY",
+      "EMPTY",
+      "NON_NUMERIC",
+      "UNGOVERNED_OVERRIDE"
+    ],
+    "overridePolicy": "VERSIONED_POLICY_CHANGE_REQUIRED"
+  },
+  "blockingConditions": [
+    "SCANNER_ERROR",
+    "REPORT_MISSING",
+    "REPORT_MALFORMED",
+    "REPORT_FORMAT_UNEXPECTED",
+    "VULNERABILITY_SCORE_MISSING",
+    "VULNERABILITY_SEVERITY_MISSING",
+    "VULNERABILITY_SEVERITY_UNKNOWN",
+    "UNEXCEPTED_VULNERABILITY",
+    "PARTIAL_RESULT",
+    "POLICY_CONFIGURATION_DIVERGENCE",
+    "EXCEPTION_INVALID_OR_EXPIRED"
+  ],
+  "scannerContract": {
+    "failOnError": true,
+    "scannerError": "BLOCK",
+    "continueOnError": false,
+    "partialResult": "BLOCK"
+  },
+  "reportContract": {
+    "machineFormat": "JSON",
+    "humanFormat": "HTML",
+    "machineAuthoritative": true,
+    "htmlAuthoritative": false,
+    "machineReportRequired": true,
+    "artifactAbsence": "ERROR",
+    "malformed": "BLOCK",
+    "unexpectedFormat": "BLOCK",
+    "supportedReportSchemas": [
+      "1.1"
+    ],
+    "sensitiveContent": "FORBIDDEN",
+    "logOutput": "SANITIZED_REASON_CODES_AND_COUNTS_ONLY"
+  },
+  "scoreContract": {
+    "effectiveScore": "MAXIMUM_AVAILABLE_BASE_SCORE",
+    "allowedRangeInclusive": [
+      0.0,
+      10.0
+    ],
+    "knownSeverities": [
+      "NONE",
+      "LOW",
+      "MEDIUM",
+      "HIGH",
+      "CRITICAL"
+    ],
+    "missingScore": "BLOCK",
+    "missingSeverity": "BLOCK",
+    "unknownSeverity": "BLOCK",
+    "unexceptedVulnerability": "BLOCK_REGARDLESS_OF_SCORE"
+  },
+  "exceptionContract": {
+    "catalogPath": "docs/catalogos/vulnerabilidades-v2-015d/excecoes-v01.json",
+    "schemaVersion": "V2_015D_DEPENDENCY_VULNERABILITY_EXCEPTIONS_V1",
+    "initiallyEmpty": true,
+    "closedSchema": true,
+    "requiredFields": [
+      "vulnerabilityId",
+      "dependencyCoordinate",
+      "justification",
+      "ownerRole",
+      "expiresAtUtc",
+      "scope",
+      "policyFingerprint"
+    ],
+    "identityFields": [
+      "vulnerabilityId",
+      "dependencyCoordinate"
+    ],
+    "scopeValue": "ETL_DATAEXPORT_V2_DEPENDENCY_AUDIT",
+    "ownerRolePattern": "^[A-Z][A-Z0-9_]{2,55}_ROLE$",
+    "expirationFormat": "yyyy-MM-dd'T'HH:mm:ss'Z'",
+    "maximumLifetimeDays": 90,
+    "permanentException": "FORBIDDEN",
+    "wildcardOrRegex": "FORBIDDEN",
+    "adHocSuppression": "FORBIDDEN",
+    "invalidIncompleteOutOfScopeOrExpired": "BLOCK"
+  },
+  "secretContract": {
+    "credentialSource": "ENVIRONMENT_VARIABLE_ONLY",
+    "environmentVariable": "NVD_API_KEY",
+    "literalValue": "FORBIDDEN",
+    "reportAndLogContent": "FORBIDDEN"
+  },
+  "implementationBinding": {
+    "pomPath": "pom.xml",
+    "workflowPath": ".github/workflows/security.yml",
+    "thresholdProperty": "dependency.vulnerability.failBuildOnCVSS",
+    "thresholdGuardProperty": "failBuildOnCVSS",
+    "policyFingerprintProperty": "dependency.vulnerability.policy.sha256",
+    "machineReportPath": "target/dependency-check/dependency-check-report.json",
+    "validatorPath": "scripts/validation/Test-DependencyVulnerabilityPolicy.ps1",
+    "artifactMissingBehavior": "error"
+  },
+  "limitations": [
+    "NO_NETWORK_OR_NVD_FEED_EXECUTED",
+    "NO_REAL_FINDING_OR_DEPENDENCY_IDENTIFIER",
+    "NO_NOMINAL_POLICY_ACCEPTANCE",
+    "NO_REAL_CI_EXECUTION",
+    "NO_BASELINE_ACCEPTED"
+  ]
+}

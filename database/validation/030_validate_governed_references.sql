@@ -64,6 +64,16 @@ INSERT INTO @expected_objects VALUES
     (N'trg_regiao_logistica_cidade_insert_guard', N'TR'),
     (N'trg_tarifa_rota_uf_insert_guard', N'TR');
 
+-- Extensões downstream no schema ref permanecem sob validators próprios e só
+-- entram aqui por nome/tipo exatos; não ampliam o contrato físico de V008.
+DECLARE @authorized_downstream_objects TABLE (
+    object_name SYSNAME COLLATE Latin1_General_100_BIN2 NOT NULL,
+    object_type CHAR(2) COLLATE Latin1_General_100_BIN2 NOT NULL,
+    PRIMARY KEY (object_name, object_type)
+);
+INSERT INTO @authorized_downstream_objects VALUES
+    (N'coleta_sequence_code_alias', N'U');
+
 INSERT INTO @failures (category, object_name, detail)
 SELECT N'OBJECT', expected.object_name, N'Objeto obrigatório ausente ou com tipo divergente.'
 FROM @expected_objects AS expected
@@ -77,7 +87,8 @@ WHERE NOT EXISTS (
 );
 
 INSERT INTO @failures (category, object_name, detail)
-SELECT N'OBJECT', object_definition.name, N'Objeto ref fora do contrato exato de V008.'
+SELECT N'OBJECT', object_definition.name,
+       N'Objeto ref fora do contrato de V008 e das extensões downstream allowlisted.'
 FROM sys.objects AS object_definition
 WHERE object_definition.schema_id = SCHEMA_ID(N'ref')
   AND object_definition.is_ms_shipped = 0
@@ -86,6 +97,11 @@ WHERE object_definition.schema_id = SCHEMA_ID(N'ref')
       SELECT 1 FROM @expected_objects AS expected
       WHERE expected.object_name = object_definition.name COLLATE Latin1_General_100_BIN2
         AND expected.object_type = object_definition.type COLLATE Latin1_General_100_BIN2
+  )
+  AND NOT EXISTS (
+      SELECT 1 FROM @authorized_downstream_objects AS authorized
+      WHERE authorized.object_name = object_definition.name COLLATE Latin1_General_100_BIN2
+        AND authorized.object_type = object_definition.type COLLATE Latin1_General_100_BIN2
   );
 
 DECLARE @expected_indexes TABLE (

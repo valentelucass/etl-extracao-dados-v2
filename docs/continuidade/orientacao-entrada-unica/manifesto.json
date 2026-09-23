@@ -1,0 +1,67 @@
+{
+  "version": 1,
+  "status": "SINGLE_ENTRY_GUIDANCE_RECORDED",
+  "date": "2026-09-12",
+  "documentaryOnly": true,
+  "initialFiles": 2697,
+  "newAcceptances": 0,
+  "remoteCalls": 0,
+  "predecessor": {
+    "path": "docs/catalogos/macrobloco-expansao/manifesto.json",
+    "sha256": "c3318c87bf46bd63f43ec12e31b09b2ab4bee3e0a5a0b50fe319d68a22edc057"
+  },
+  "request": "colocar essa orientacao no states.md",
+  "changedExistingFiles": [
+    {
+      "path": "STATES.md",
+      "before": "6331729d2aa17e3590a2860c4ebe5f37d7af76af52b08207d4cf1aafc3e27b98",
+      "after": "32be8ded2f3054d933f2c2cc6810ab9f33f3e21e0373ebb2a4343cd4e3568e14",
+      "snapshot": "docs/continuidade/historico/orientacao-entrada-unica/STATES.md"
+    },
+    {
+      "path": "docs/continuidade/RETOMADA.md",
+      "before": "67a629da1abbae4881725378ecce0486affca0773549e87f1cf94502c0412ccd",
+      "after": "2d33c26026e9c40bbdc6eaf5e4722629ee549f4d3c668b8e03bba56bf1cb237c",
+      "snapshot": "docs/continuidade/historico/orientacao-entrada-unica/docs/continuidade/RETOMADA.md"
+    },
+    {
+      "path": "docs/runbooks/trilha-de-chats-gpt-5-6.md",
+      "before": "11f29661c58fd75776f5fff0877fc4bb4b7e1cdd810f6748c33dc59ebfbcf8a5",
+      "after": "c2bc3236a576ab68d13c60a249ec5a516fce7d61caff47fd4acd736aaa8a0a1f",
+      "snapshot": "docs/continuidade/historico/orientacao-entrada-unica/docs/runbooks/trilha-de-chats-gpt-5-6.md"
+    },
+    {
+      "path": "scripts/validation/Test-ExpansionLaboratory.ps1",
+      "before": "d0232137e8b60cea187059d5df65c1cc7fb07c368c89f799583e3f93e522529d",
+      "after": "a5510123c64514d089649e7e06deb50f7de12d30af05c0cc6201ecc734a2b8a3",
+      "snapshot": "docs/continuidade/historico/orientacao-entrada-unica/scripts/validation/Test-ExpansionLaboratory.ps1"
+    }
+  ],
+  "newFiles": [
+    {
+      "path": "docs/continuidade/checkpoints/0091-orientacao-entrada-unica.md",
+      "sha256": "75ff089835df9ef4522ef77f4a86cb01967529eacfeeb2b78b35b3a062e49789"
+    },
+    {
+      "path": "docs/continuidade/historico/orientacao-entrada-unica/docs/continuidade/RETOMADA.md",
+      "sha256": "67a629da1abbae4881725378ecce0486affca0773549e87f1cf94502c0412ccd"
+    },
+    {
+      "path": "docs/continuidade/historico/orientacao-entrada-unica/docs/runbooks/trilha-de-chats-gpt-5-6.md",
+      "sha256": "11f29661c58fd75776f5fff0877fc4bb4b7e1cdd810f6748c33dc59ebfbcf8a5"
+    },
+    {
+      "path": "docs/continuidade/historico/orientacao-entrada-unica/scripts/validation/Test-ExpansionLaboratory.ps1",
+      "sha256": "d0232137e8b60cea187059d5df65c1cc7fb07c368c89f799583e3f93e522529d"
+    },
+    {
+      "path": "docs/continuidade/historico/orientacao-entrada-unica/STATES.md",
+      "sha256": "6331729d2aa17e3590a2860c4ebe5f37d7af76af52b08207d4cf1aafc3e27b98"
+    }
+  ],
+  "checkpoint": {
+    "path": "docs/continuidade/checkpoints/0091-orientacao-entrada-unica.md",
+    "sha256": "75ff089835df9ef4522ef77f4a86cb01967529eacfeeb2b78b35b3a062e49789"
+  },
+  "evidenceDirectory": "target/orientacao-entrada-unica-20260912-01/"
+}

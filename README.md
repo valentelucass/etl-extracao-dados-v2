@@ -2,6 +2,58 @@
 
 Extrator em sombra, Data Export-first, para a migração controlada das nove verticais ESL, com GraphQL transitório para Usuários/paridade e Raster condicional. O V2 não escreve no banco produtivo nem substitui o legado sem gate formal de paridade e cutover.
 
+[Alinhamento das entidades](docs/catalogos/alinhamento-entidades/README.md): contratos de construção,
+índice dos 2.437 campos, consumidores, diferenças da V1 e roteiro de testes da API com seus limites.
+
+## Integração local por arquivos
+
+O JAR caracteriza seis perfis existentes, CAP/FAT/INV/SIN e Raster; captura as
+quatro expansões e Raster por arquivos com bindings explícitos; executa o cenário
+analítico com entrada e oráculo separados e observa o sweep sintético de Coletas
+com contexto declarado. Trocar os arquivos não exige recompilar. A comparação
+percorre 19 contratos, cinco grãos e 35 escopos. Todos os efeitos SQL permanecem
+restritos ao laboratório local, com duas travas e rollback obrigatório.
+
+[Comandos do pacote](docs/catalogos/macrobloco-qualificacao-pacote/PACKAGE-README.md)
+e [contrato da composição](docs/adr/0052-integracao-local-por-artefatos.md).
+Integridade de arquivos não autentica o fornecedor nem concede aceite nominal.
+
+## Laboratório relacional sintético — Manifestos, Coletas e Fretes
+
+O entry point opt-in `RelationalLaboratoryMain` compõe capturas, bindings,
+backlog SQL, hidratação, histórico/delta/replay e reconciliação local. Os comandos
+`scenario`, `hydrate`, `replay` e `status` usam fixtures empacotadas e sempre
+revertem os dados; V029–V037 são instaladas separadamente. A execução padrão
+continua dormente. [Comandos e budgets](docs/catalogos/macrobloco-relacional/COMANDOS.md),
+[contrato sintético](docs/catalogos/macrobloco-relacional/CONTRATO.md) e
+[provas e limitações](docs/catalogos/macrobloco-relacional/RELATORIO.md).
+
+## Runtime local das cinco verticais — Bloco 55
+
+O JAR oficial protegido já publicou Coletas, Fretes, Manifestos, Cotações e
+Localização no laboratório Windows/SQL, com fonte em loopback. BACKFILL temporal,
+recuperação, comparação SQL independente e medição dos pipelines passaram.
+O lote manual de 20 requests foi interrompido e retomado pelo estado durável.
+Java 17 offline: 1.138 testes, zero falhas/erros e quatro skips preexistentes.
+
+O Bloco 55 concluiu A–J no laboratório: 42 publicações sintéticas, STATUS sob
+OPERATOR, negativas SQL e isolamento de dependências comprovados.
+[Operação, provas e limites](docs/runbooks/v2-022-bloco55-cinco-verticais-local.md),
+[ADR 0038](docs/adr/0038-runtime-cinco-verticais-e-consumidores-locais.md) e
+[manifest de evidências](database/manifest/runtime-bloco55.json).
+Não executar `clean` sobre o target que contém os históricos B53/B54/B55.
+
+## Motor local de Coletas/Fretes — fotografia do Bloco 51
+
+O Bloco 51 compõe dispatcher, contrato/travessia, staging auditado, candidate set, DQ e
+promoção pelos permits existentes. Dependências exigem recibo de publicação; cancelamento,
+lease e resultados incertos falham fechados. A composição explícita fica em
+`LocalColetasFretesRuntime`; o entry point oficial continua deny-all.
+
+A prova usa verticais e adapters JDBC reais com fonte e protocolo SQL sintéticos: 1001
+testes no `clean verify`, zero falhas/erros e quatro skips esperados. Não comprova SQL físico
+ou retomada após perda da JVM. Veja [escopo, validação e próximo pacote local](docs/runbooks/v2-022-motor-local-coletas-fretes.md)
+e [ADR 0033](docs/adr/0033-motor-local-coletas-fretes-e-recuperacao.md).
 ## Princípios
 
 - Um cliente Data Export genérico; contratos específicos para `6908`, `6389`, `6399`, `6906`, `8656`, `8636`, `4924`, `10633` e `6392`.
@@ -100,11 +152,29 @@ gitleaks git --config .gitleaks.toml --redact=100 --exit-code=1 --no-banner --lo
 A ordem de rotação, as condições de parada e a evidência permitida estão no runbook
 [`docs/runbooks/conter-e-rotacionar-segredos.md`](docs/runbooks/conter-e-rotacionar-segredos.md).
 
-Para gerar o relatório não bloqueante de vulnerabilidades conhecidas das dependências, use o perfil separado abaixo. Ele consulta apenas o feed público de vulnerabilidades e grava relatórios em `target/dependency-check/`; a primeira baseline e o workflow agendado/manual exigem `NVD_API_KEY` como secret exclusivo do CI, nunca no Git.
+O perfil separado de vulnerabilidades de dependências é fail-closed e opt-in. A
+política versionada fixa `failBuildOnCVSS=0.0`, bloqueia qualquer vulnerabilidade
+não exceptuada, preserva `failOnError=true` e exige JSON e HTML em
+`target/dependency-check/`. Antes de uma execução autorizada, valide localmente o
+catálogo e o vínculo físico sem consultar feed:
 
 ```powershell
-.\mvnw.cmd --batch-mode --no-transfer-progress -Psecurity-audit verify
+pwsh -NoProfile -File .\scripts\validation\Test-DependencyVulnerabilityPolicy.ps1 -PolicyOnly
+pwsh -NoProfile -File .\scripts\validation\Test-DependencyVulnerabilityPolicy.ps1 -VerifyImplementation
 ```
+
+Uma execução real do perfil exige rede/feed e autorização próprias, além de
+`NVD_API_KEY` exclusivamente por variável de ambiente. Quando autorizada, usa:
+
+```powershell
+.\mvnw.cmd --batch-mode --no-transfer-progress -Psecurity-audit clean verify
+```
+
+O workflow agendado/manual valida a implementação antes do Maven, valida depois o
+JSON como contrato de máquina e exige também o HTML humano. Relatório ausente é
+erro, nunca warning; `continue-on-error`, threshold por `-D` e suppression ad hoc
+são proibidos. A campanha local V2-015d não executou esse perfil, feed ou NVD, e
+seu resultado não é baseline aceita.
 
 Os workflows versionados estão configurados para verificar formato/testes e segredos em push/PR, além da auditoria de dependências semanal ou manual. Eles ainda não constituem CI ativo ou verde: isso exige remote, proteção e evidência de execução em V2-016b.
 
@@ -114,7 +184,10 @@ artefatos ficam em `target/surefire-reports`, `target/checkstyle-result.xml` e
 `target/site/jacoco` até o próximo `clean`; copie-os para o repositório de
 evidências aprovado antes de limpar quando uma execução precisar ser retida.
 
-O workflow de auditoria exige o secret `NVD_API_KEY` e falha antes da consulta quando ele não estiver cadastrado. Isso evita uma sincronização parcial ou lenta sem produzir uma baseline utilizável.
+O workflow de auditoria exige o secret `NVD_API_KEY` e falha antes da consulta
+quando ele não estiver cadastrado. Isso evita iniciar a auditoria sem a entrada
+externa obrigatória; erro do scanner, relatório parcial, ausente ou inválido
+continua bloqueante.
 
 O baseline de portabilidade V2-017/V2-017a é gerado e validado offline:
 

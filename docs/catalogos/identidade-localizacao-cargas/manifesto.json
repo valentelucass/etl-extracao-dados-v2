@@ -1,0 +1,159 @@
+{
+  "catalogVersion": "2026-09-04.v2-009b.1",
+  "identityFingerprintVersion": "localizacao-cargas-identity-v1",
+  "task": "V2-009b/8656",
+  "route": "P07",
+  "decisionStatus": "COMPLETE_LOCAL_BOUNDED",
+  "evidenceVocabulary": [
+    "HISTORICAL_SANITIZED_OBSERVATION",
+    "LEGACY_STATIC_EVIDENCE",
+    "SYNTHETIC_FIXTURES",
+    "NO_TEMPORAL_OR_TENANT_PAYLOAD_PROOF",
+    "NO_INDEPENDENT_COMPLETENESS_EVIDENCE"
+  ],
+  "quarantineReasons": [
+    "AMBIGUOUS_BUSINESS_ALIAS",
+    "CARDINALITY_DIVERGENCE",
+    "INVALID_SOURCE_KEY_TYPE",
+    "INVALID_SOURCE_KEY_VALUE",
+    "MISSING_SOURCE_KEY",
+    "SCOPE_MISMATCH",
+    "SOURCE_KEY_COLLISION",
+    "SOURCE_KEY_TOO_LONG",
+    "UNPROVEN_ALIAS_CHANGE",
+    "UNPROVEN_REKEY"
+  ],
+  "actions": [
+    "BLOCK_PROMOTION_PENDING_VERTICAL_RESOLUTION",
+    "KEEP_CANONICAL",
+    "NO_OP_REPLAY",
+    "PRESERVE_UNRESOLVED_OBSERVATION",
+    "QUARANTINE",
+    "REACTIVATE_EXACT_BINDING",
+    "REGISTER_NEW_CANONICAL",
+    "VERSION_ALIASES_PRESERVE_CANONICAL"
+  ],
+  "sourceFamily": {
+    "sourceKind": "ESL",
+    "transport": "DATA_EXPORT",
+    "sourceInstanceMeaning": "STABLE_NON_SECRET_LOGICAL_ESL_ACCOUNT"
+  },
+  "registry": {
+    "tuple": ["source_instance", "tenant_scope", "entity", "source_key"],
+    "comparison": "CASE_SENSITIVE_EXACT_BIN2",
+    "canonicalIdStrategy": "SQL_SURROGATE_BIGINT_IDENTITY",
+    "recordStateIdIsCanonicalId": false,
+    "physicalEnforcementGate": "V2-009d"
+  },
+  "scope": {
+    "policy": "EXPLICIT_SOURCE_INSTANCE_AND_TENANT_REQUIRED",
+    "globalUniquenessProven": false,
+    "tenantPayloadPath": null,
+    "tenantDerivation": "EXTERNAL_CONFIGURATION_REQUIRED_NO_BUSINESS_FIELD_DERIVATION",
+    "forbiddenTenantSentinels": ["DEFAULT", "GLOBAL", "SINGLETON"]
+  },
+  "canonicalization": {
+    "maximumStorageCharacters": 256,
+    "acceptedWireTypes": ["INTEGER"],
+    "integerEncoding": "INTEGER:<CANONICAL_DECIMAL>",
+    "stringEncoding": "STRING:<EXACT_TEXT>",
+    "integerAndStringEquivalent": false,
+    "textNormalization": "NONE_FAIL_ON_BLANK_BOUNDARY_SPACE_CONTROL_OR_INVALID_UNICODE",
+    "processingBound": "ONE_OBSERVATION_AT_A_TIME"
+  },
+  "identity": {
+    "entity": "localizacao_cargas",
+    "contractId": "dataexport-8656",
+    "contractVersion": "2026-09-04.v2-025b.1",
+    "sourceContractReleaseFingerprint": "da95fc17fc3db2fae7635c5456166d72af844b1d826e84ab6c2ba8b6f1b65c24",
+    "recordRoot": "/data/*",
+    "sourceKey": {
+      "path": "/corporation_sequence_number",
+      "name": "corporation_sequence_number",
+      "wireTypes": ["INTEGER"],
+      "role": "SCOPED_SOURCE_KEY_NEVER_CANONICAL_ID",
+      "decision": "ACCEPTED_FOR_SCOPED_LOGICAL_ROOT_ONLY",
+      "decisionBasis": "BOUNDED_PARTIAL_HISTORICAL_AND_LEGACY_STATIC_EVIDENCE_NOT_CURRENT_PROVIDER_GUARANTEE"
+    },
+    "canonicalKey": {
+      "strategy": "SQL_SURROGATE_BIGINT_IDENTITY",
+      "binding": "ACCEPTED_FOR_SCOPED_LOGICAL_ROOT",
+      "notEquivalentTo": ["corporation_sequence_number", "sequence_number", "page_order", "record_state_id"]
+    },
+    "businessKeys": {"accepted": [], "candidates": []},
+    "aliases": {
+      "accepted": [],
+      "rejected": ["sequence_number"],
+      "rekeyPolicy": "NO_REKEY_OR_REPOINT_WITHOUT_VERSIONED_EVIDENCE"
+    },
+    "physicalGrain": {
+      "root": "ONE_LOGICAL_LOCATION_RECORD_PER_SCOPED_CORPORATION_SEQUENCE_NUMBER",
+      "observed": "THREE_PHYSICAL_ROWS_THREE_DISTINCT_SOURCE_KEY_CANDIDATES_IN_ONE_SANITIZED_WINDOW",
+      "children": [],
+      "relationPolicy": "NO_CHILD_ARRAY_EXPANSION_OR_FREIGHT_RELATION_OBSERVED_OR_INFERRED"
+    },
+    "proof": {
+      "uniqueness": "LIMITED_LEGACY_PK_DEDUPE_AND_ONE_SANITIZED_WINDOW_ONLY_NOT_GLOBAL",
+      "temporalStability": "UNPROVEN_NO_VERSIONED_PROVIDER_GUARANTEE_OR_REPEAT_OBSERVATION",
+      "tenantScope": "UNPROVEN_IN_PAYLOAD_EXPLICIT_EXTERNAL_SCOPE_REQUIRED",
+      "cardinality": "LIMITED_ONE_TO_ONE_OBSERVED_WINDOW_ONLY"
+    },
+    "repeatAndConflictPolicy": {
+      "sameScopedRootSourceKey": "SAME_LOGICAL_ROOT_NEVER_A_SECOND_CANONICAL_ROOT",
+      "physicalVariants": "SCALAR_CHANGE_IS_A_NEW_OBSERVATION_NOT_REKEY",
+      "divergentRoot": "QUARANTINE_AND_BLOCK_PROMOTION_PENDING_V2_028_FRESHNESS_RESOLUTION",
+      "aliasCollision": "BLOCK_DEPENDENT_RESOLUTION_NO_AUTOMATIC_REPOINT",
+      "alternateKeyOrRekey": "QUARANTINE_UNPROVEN_REKEY_UNTIL_VERSIONED_EVIDENCE",
+      "missingOrInvalidScopeOrKey": "QUARANTINE",
+      "reactivation": "REUSE_EXISTING_CANONICAL_AFTER_VALID_SCOPED_KEY_REAPPEARS"
+    },
+    "outcome": {
+      "closeSubcheckbox": true,
+      "blockers": [],
+      "unblockEvidence": []
+    },
+    "capabilities": {
+      "shadowDomainImplementation": "IDENTITY_INPUT_ONLY_REQUIRES_V2_028_AND_V2_009D",
+      "sweepOrDeactivation": "BLOCKED_NO_COMPLETENESS_PROOF",
+      "cutover": "BLOCKED_NO_COMPLETENESS_PROOF",
+      "externalHolds": {"V2-025d": "BLOCKED_BY_V2_041_EXTERNAL_HOLD"}
+    },
+    "nextGates": ["V2-028", "V2-009d", "V2-025d"],
+    "evidenceBounds": {
+      "supports": [
+        "CORPORATION_SEQUENCE_NUMBER_INTEGER_SOURCE_KEY_IN_THE_CHARACTERIZED_SCOPE",
+        "NO_CHILD_OR_EXPANSION_OBSERVED",
+        "THREE_ROWS_THREE_KEYS_IN_ONE_SANITIZED_WINDOW"
+      ],
+      "doesNotSupport": [
+        "GLOBAL_UNIQUENESS_OR_TEMPORAL_STABILITY",
+        "PAYLOAD_TENANT_OR_GLOBAL_SENTINEL",
+        "SEQUENCE_NUMBER_AS_SOURCE_ALIAS_OR_KEY",
+        "FREIGHT_CROSSWALK_OR_RELATIONSHIP",
+        "COMPLETENESS_SWEEP_OR_CUTOVER"
+      ],
+      "files": [
+        {"path": "docs/adr/0018-identidade-e-crosswalk-da-primeira-onda.md", "role": "RATIFIED_REGISTRY_FRAMEWORK", "readOnly": true},
+        {"path": "docs/catalogos/identidade-primeira-onda/manifesto.json", "role": "RATIFIED_IDENTITY_POLICY_BASELINE", "readOnly": true},
+        {"path": "docs/catalogos/identidade-cotacoes/manifesto.json", "role": "BOUNDED_SINGLE_ENTITY_PRECEDENT", "readOnly": true},
+        {"path": "docs/catalogos/contratos-esl-8656/manifesto.json", "role": "VERSIONED_OFFLINE_CONTRACT", "readOnly": true},
+        {"path": "docs/catalogos/contratos-esl-8656/fixtures/8656-per-3-page-1.synthetic.json", "role": "SYNTHETIC_SHAPE_ONLY", "readOnly": true},
+        {"path": "STATES.md", "role": "ROADMAP_RULE_LOC_01", "readOnly": true},
+        {"path": "../etl-extracao-dados/src/main/java/br/com/extrator/dominio/dataexport/localizacaocarga/LocalizacaoCargaDTO.java", "role": "LEGACY_STATIC_TYPE_AND_ALIAS_LIMIT", "readOnly": true},
+        {"path": "../etl-extracao-dados/src/main/java/br/com/extrator/integracao/mapeamento/dataexport/localizacaocarga/LocalizacaoCargaMapper.java", "role": "LEGACY_STATIC_REQUIRED_KEY", "readOnly": true},
+        {"path": "../etl-extracao-dados/src/main/java/br/com/extrator/integracao/dataexport/support/Deduplicator.java", "role": "LEGACY_STATIC_DEDUPE_ONLY", "readOnly": true},
+        {"path": "../etl-extracao-dados/src/main/java/br/com/extrator/persistencia/repositorio/LocalizacaoCargaRepository.java", "role": "LEGACY_STATIC_MERGE_GRAIN_ONLY", "readOnly": true},
+        {"path": "../etl-extracao-dados/docs/legado/pipelines-antigos/02-apis/dataexport/localizacao-carga.md", "role": "PARTIAL_HISTORICAL_WIRE_SHAPE_ONLY", "readOnly": true},
+        {"path": "../etl-extracao-dados/database/tabelas/005_criar_tabela_localizacao_cargas.sql", "role": "LEGACY_STATIC_PK_ONLY", "readOnly": true}
+      ]
+    },
+    "fingerprintInputs": {
+      "identity": "dataexport-8656|localizacao_cargas|/corporation_sequence_number|INTEGER|SCOPED_ROOT_ACCEPTED|NO_BUSINESS_ALIAS|SEQUENCE_NUMBER_REJECTED|NO_CHILD_OBSERVED|CARDINALITY_1_TO_1_WINDOW_ONLY|EXPLICIT_SCOPE",
+      "release": "2026-09-04.v2-009b.1|localizacao-cargas-identity-v1|dataexport-8656"
+    },
+    "fingerprints": {
+      "identity": "14af11dce5fd7696238907b72f8f6c8c77f86a4cff3045b489da5eb132c0d6f0",
+      "release": "5dfe329f437dc4caa5750ab57dd2369774808822c9d47a99de0c5dc1850cb15f"
+    }
+  }
+}

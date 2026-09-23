@@ -1,0 +1,166 @@
+{
+  "template": 8636,
+  "httpStatus": 200,
+  "curlExit": 0,
+  "bytes": 5877,
+  "elapsedMilliseconds": 819,
+  "failure": null,
+  "metadata": {
+    "fields": [
+      {
+        "name": "ant_ils_sequence_code",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "document",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "ant_ils_pas_ant_classification",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "ant_ils_pas_ant_name",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "ant_ils_pas_value",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "ant_ces_acr_name",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "ant_ces_value",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "ant_rir_name",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "issue_date",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "competence_month",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "competence_year",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "ant_crn_psn_nickname",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "ant_uer_name",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "created_at",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "ant_ils_atn_liquidation_date",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "ant_ils_atn_transaction_date",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "ant_ils_atn_reconciled",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "comments",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "ant_ils_expense_description",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "ant_ils_comments",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "ant_aln_name",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "type",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "value",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "interest_value",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "discount_value",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "value_to_pay",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "paid",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "paid_value",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      }
+    ],
+    "fieldsCount": 28,
+    "fieldsNamesOmitted": 0,
+    "filters": [
+      {
+        "name": "created_at",
+        "declaredType": "date"
+      },
+      {
+        "name": "issue_date",
+        "declaredType": "date"
+      },
+      {
+        "name": "from_competence_period_string",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "document",
+        "declaredType": "string"
+      },
+      {
+        "name": "corporation_id",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "receiver_id",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "paid",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "type",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "accounting_planning_management_id",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      }
+    ],
+    "filtersCount": 9,
+    "filtersNamesOmitted": 0
+  }
+}

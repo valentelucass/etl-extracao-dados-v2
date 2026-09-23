@@ -1,0 +1,97 @@
+{
+  "version": 1,
+  "status": "PREPARED_NOT_AUTHORIZED",
+  "seventhCampaignAuthorized": false,
+  "database": "localhost/ETL_SISTEMA_V2_SHADOW",
+  "previousReservations": 109,
+  "additionalReservations": 19,
+  "maximumReservations": 128,
+  "maximumMinutes": 15,
+  "bundleSha256": "f2fe15f0ddaa3f8f92c07aef54e909df917eb8e3055b652b40af375f99e1a3bd",
+  "files": [
+    {
+      "path": "scripts/validation/Bloco54Process.cs",
+      "sha256": "08d958606359b130eabcbeb37659bf38a8ead097e087ed0f04a2fb16e97f6fea"
+    },
+    {
+      "path": "scripts/validation/Bloco54Artifact.psm1",
+      "sha256": "14be90fc616990df7d8c4b76b916de093e85a7f444d0db01dcf3f4d789484fd3"
+    },
+    {
+      "path": "scripts/validation/Invoke-Bloco54Manual.ps1",
+      "sha256": "3cc6748be6c64877e2662cc1a6e258e8c2f14a92acc8862cc0aecaf1a2078423"
+    },
+    {
+      "path": "config/laboratory/bloco54-temporal-coletas.json",
+      "sha256": "af012f85733d514c34fed472539f7d12a1feed318dcfeb86615e75b9fbfd67ce"
+    },
+    {
+      "path": "target/bloco54/seed/coletas-REPLAY.sql",
+      "sha256": "775ca1012e3354b4480031dc984a471f2386ece83b2f123b19d0e5ab442b5fc0"
+    },
+    {
+      "path": "target/bloco54/seed/fretes-REPLAY.sql",
+      "sha256": "96edb2a7d270122b4b47e0e7b10e862237d55e741ecbc0fccbd6fe884115d24b"
+    },
+    {
+      "path": "target/bloco54/resume-approved-supplemental/FINAL_RUN_COLETAS.request.json",
+      "sha256": "29cf524ef97a753725c9d52742a89d586695f435401314e914cf2f3cc3963c1c"
+    },
+    {
+      "path": "target/bloco54/resume-approved-supplemental/FINAL_RUN_FRETES_DAG.request.json",
+      "sha256": "347ac2f34088d64faeb1c10dacebc775dd9bc031e0e36046d0290f1020dcf1c9"
+    },
+    {
+      "path": "target/bloco54/resume-approved-supplemental/manual-shared-configuration.json",
+      "sha256": "65274a14d1a79c68fd5d09418e970075b649e4d0eb408aee75f66fd41828bb7f"
+    },
+    {
+      "path": "target/bloco54/resume-approved-supplemental/final-preservation-v3.sql",
+      "sha256": "5b4aeff278908749e87585d35dc5cebc5de8d7cafee99d2676fab56f900a4bd2"
+    },
+    {
+      "path": "target/bloco54/identity-inventory.json",
+      "sha256": "d4dc7caea9ead0c858347fa66a7fbb2bcc627e1f09816b46a8f124910cf8c770"
+    },
+    {
+      "path": "target/bloco54/preflight-catalog.sql",
+      "sha256": "66e578690ed2db850031fe5e33cc5259a210cdc773d8dccaa2373552cb8d832a"
+    },
+    {
+      "path": "database/proposals/bloco54-observability/verify.sql",
+      "sha256": "7e858a8e645ac1ce19c1cb81492d5ed7c2278a7cedf8b31867f2560f0a8ed35b"
+    },
+    {
+      "path": "database/proposals/bloco54-observability/verify-retained-replay.sql",
+      "sha256": "26141a98e4fce490a52e2a7dc21f593e006e22c4c188fad94e80a23fbcd6bde7"
+    },
+    {
+      "path": "src/test/resources/runtime-laboratory/6389-data.json",
+      "sha256": "fc4a45f5b50333525380ba53f707a47b7ee150c3b22c94db2148def7b2e9e3d9"
+    },
+    {
+      "path": "src/test/resources/runtime-laboratory/6389-info.json",
+      "sha256": "645a64b9bc6af087255bb3550fe8b14910b635ee0f452804b4b9581518a51c7d"
+    },
+    {
+      "path": "src/test/resources/runtime-laboratory/6908-data.json",
+      "sha256": "fe873b4554941aab37bc104ad0c2170fc3736394fcfd765e3bba51b7c5f3c785"
+    },
+    {
+      "path": "src/test/resources/runtime-laboratory/6908-info.json",
+      "sha256": "a449a9364ad40c30efd3403da5734a372d254b771d8c2711d05d1eacfb5958ce"
+    },
+    {
+      "path": "database/proposals/bloco54-residual-runtime/Invoke-ResidualRuntime.ps1",
+      "sha256": "76da789acb9b6ab798689b92995d94ab8c00cb2dc88ef265a78c64d9f291fadd"
+    },
+    {
+      "path": "database/proposals/bloco54-residual-runtime/budget-reviewed.psm1",
+      "sha256": "fdba51deb4f88626e92da3850ff752d0b3e3bbf655ce2cf26811f2232cdfe45d"
+    },
+    {
+      "path": "database/proposals/bloco54-residual-runtime/README.md",
+      "sha256": "769cbc17581a491e38442454be5535aed24a2624591b211399337fb84c3374d2"
+    }
+  ]
+}

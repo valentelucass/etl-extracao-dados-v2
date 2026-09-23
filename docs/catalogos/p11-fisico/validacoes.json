@@ -1,0 +1,96 @@
+{
+  "status": "PASS",
+  "scope": "Documentary succession, failed full verification history, existing native qualification, inherited regression chain and bounded scans; no functional P07/P08 acceptance",
+  "validations": [
+    {
+      "name": "physical",
+      "receipt": {
+        "path": "target/p11-fisico-20260921-01/validation-partial-physical-02.json",
+        "sha256": "5cbe37f28413f056058c7363624b42234b8afa9b8550c40b3217a7f2414e0ee1"
+      },
+      "stdout": {
+        "path": "target/p11-fisico-20260921-01/validation-partial-physical-02.stdout.log",
+        "sha256": "67f9dceec2214d05e606a710183b8cd7547327504281b779bd5759d06e859648"
+      },
+      "stderr": {
+        "path": "target/p11-fisico-20260921-01/validation-partial-physical-02.stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "regression-chain",
+      "receipt": {
+        "path": "target/p11-fisico-20260921-01/validation-partial-regression-chain-02.json",
+        "sha256": "8d3eedc869108c390b2148237f9716ee689698dc56b4b85733efeb9a7c675146"
+      },
+      "stdout": {
+        "path": "target/p11-fisico-20260921-01/validation-partial-regression-chain-02.stdout.log",
+        "sha256": "e19239b443a34fc015828df53e15b4d78d506ee36424b833457d2534f2b3401b"
+      },
+      "stderr": {
+        "path": "target/p11-fisico-20260921-01/validation-partial-regression-chain-02.stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "trail",
+      "receipt": {
+        "path": "target/p11-fisico-20260921-01/validation-partial-trail-02.json",
+        "sha256": "83b54d84f844fd80a0081774c3c047bc60719138e147ba75c1cad25adb838039"
+      },
+      "stdout": {
+        "path": "target/p11-fisico-20260921-01/validation-partial-trail-02.stdout.log",
+        "sha256": "624cf8745192e08e633174136c6a19c5ec4aca77162e538068e2d18465f14e55"
+      },
+      "stderr": {
+        "path": "target/p11-fisico-20260921-01/validation-partial-trail-02.stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "scan-catalog",
+      "receipt": {
+        "path": "target/p11-fisico-20260921-01/validation-partial-scan-catalog-02.json",
+        "sha256": "302810bbbcc9f2ff676b8f439cc877cfac57557ef273e9507bf56a1d203b8b13"
+      },
+      "stdout": {
+        "path": "target/p11-fisico-20260921-01/validation-partial-scan-catalog-02.stdout.log",
+        "sha256": "ae2e188d8cf9d5df21a79f7c7b9a2406a52f52f3d269b43b0aaeca65117fbdd4"
+      },
+      "stderr": {
+        "path": "target/p11-fisico-20260921-01/validation-partial-scan-catalog-02.stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "scan-scripts",
+      "receipt": {
+        "path": "target/p11-fisico-20260921-01/validation-partial-scan-scripts-02.json",
+        "sha256": "23f36a62463626d5f57663490b50d5d4dd33a837b60546e9f1b8fd163ef5521c"
+      },
+      "stdout": {
+        "path": "target/p11-fisico-20260921-01/validation-partial-scan-scripts-02.stdout.log",
+        "sha256": "93c9e9d20d31c296ef9aacca63d2ae2f84cbd2ecb4d366cf00107031d3de240e"
+      },
+      "stderr": {
+        "path": "target/p11-fisico-20260921-01/validation-partial-scan-scripts-02.stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "scan-checkpoints",
+      "receipt": {
+        "path": "target/p11-fisico-20260921-01/validation-partial-scan-checkpoints-02.json",
+        "sha256": "bb392b375dcdf94178c54c004e5f700e26be083c01e664be02dd804bd952c515"
+      },
+      "stdout": {
+        "path": "target/p11-fisico-20260921-01/validation-partial-scan-checkpoints-02.stdout.log",
+        "sha256": "4ba0c196a5395dfe7ffb87fceabc3ac0bf80c7ec9d73c6b17170d95a491f8611"
+      },
+      "stderr": {
+        "path": "target/p11-fisico-20260921-01/validation-partial-scan-checkpoints-02.stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  ]
+}

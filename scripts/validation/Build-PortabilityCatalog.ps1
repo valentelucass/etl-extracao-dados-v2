@@ -321,7 +321,22 @@ function Get-DataFieldDecision {
         ($Entity -eq 'localizacao_cargas' -and $lower -eq 'corporation_sequence_number')
     if ($isSourceIdentity) { return 'PROMOTE' }
     if ($Entity -eq 'contas_a_pagar') { return 'SPLIT' }
-    if ($Entity -eq 'manifestos' -and $lower -match 'pick|mdfe|mfs_') { return 'SPLIT' }
+    if ($Entity -eq 'manifestos') {
+        if ($lower -in @('mft_pfs_pck_sequence_code','mft_mfs_number','mft_mfs_key')) {
+            return 'SPLIT'
+        }
+        # mdfe_status is a root scalar replicated by the physical expansion. In the
+        # bounded corpus it is VALUE on every row, including the 148 rows without an
+        # MDF-e key/number, so it must neither signal nor identify an MDF-e child.
+        if ($lower -eq 'mdfe_status') { return 'PRESERVE' }
+        if ($lower -in @(
+            'generate_mdfe', 'pick_manifest_items_count', 'reverse_pick_manifest_items_count',
+            'calculated_pick_count', 'calculated_reverse_pick_count', 'pick_subtotal',
+            'reverse_pick_subtotal'
+        )) {
+            return 'PRESERVE'
+        }
+    }
     if ($Entity -eq 'inventario' -and $lower -match 'invoice|freight|mapping|minuta') { return 'SPLIT' }
     if ($Entity -eq 'sinistros' -and $lower -match 'invoice|freight|minuta|occurrence') { return 'SPLIT' }
     if ($Entity -eq 'faturas_por_cliente' -and $lower -match 'freight|invoice|cte|nfse|order') { return 'SPLIT' }
@@ -329,6 +344,33 @@ function Get-DataFieldDecision {
     if ($lower -match '(^|_)(sequence_code|corporation_sequence_number|unique_id|reference_number)($|_)') { return 'ALIAS' }
     if ($lower -match '(^|_)(status|type|classification)($|_)|_at$|_date$|_hour$|updated|created|finished|issued|departured|closed') { return 'NORMALIZE' }
     return 'PRESERVE'
+}
+
+function Get-ManifestosReducer {
+    param([Parameter(Mandatory)][string]$Name)
+
+    switch ($Name.ToLowerInvariant()) {
+        'sequence_code' { return 'SCOPED_ROOT_IDENTITY_P01' }
+        'created_at' { return 'SHARED_FRESHNESS_FINISHED_CLOSED_DEPARTURED_CREATED_V03' }
+        'departured_at' { return 'SHARED_FRESHNESS_FINISHED_CLOSED_DEPARTURED_CREATED_AND_COMPETENCE_PRIMARY_V03' }
+        'closed_at' { return 'SHARED_FRESHNESS_FINISHED_CLOSED_DEPARTURED_CREATED_V03' }
+        'finished_at' { return 'SHARED_FRESHNESS_FINISHED_CLOSED_DEPARTURED_CREATED_V03' }
+        'status' { return 'KNOWN_STATUS_PRECEDENCE_CLOSED_IN_TRANSIT_PENDING_AT_WINNING_FRESHNESS_V03' }
+        'mft_pfs_pck_sequence_code' { return 'ROOT_SCOPED_PICK_CHILD_KEY_P01_RELATION_PENDING_V2_046A' }
+        'mft_mfs_key' { return 'ROOT_SCOPED_MDFE_CHILD_KEY_P01_EXACT_STRING44_V03' }
+        'mft_mfs_number' { return 'MDFE_CHILD_ATTRIBUTE_PHYSICALLY_PAIRED_WITH_KEY_NOT_IDENTITY_V03' }
+        'mdfe_status' { return 'ROOT_SCALAR_REPLICATED_BY_EXPANSION_TRI_STATE_UNIQUE_AT_WINNING_FRESHNESS_NOT_CHILD_SIGNAL_V03' }
+        'km' { return 'UNIQUE_VALUE_COMPLEMENT_NULL_PRESERVE_ZERO_CONFLICT_QUARANTINE_V03' }
+        'total_cost' { return 'UNIQUE_VALUE_COMPLEMENT_NULL_PRESERVE_ZERO_CONFLICT_QUARANTINE_V03' }
+        'manifest_freights_total' { return 'UNIQUE_VALUE_COMPLEMENT_NULL_PRESERVE_ZERO_CONFLICT_QUARANTINE_V03' }
+        'total_taxed_weight' { return 'UNIQUE_VALUE_COMPLEMENT_NULL_PRESERVE_ZERO_CONFLICT_QUARANTINE_V03' }
+        'mft_vie_weight_capacity' { return 'ONE_SOURCE_SIGNAL_TWO_COMPATIBLE_PROJECTIONS_PRESERVE_ZERO_V03' }
+        'vehicle_weight_capacity' { return 'ONE_SOURCE_SIGNAL_TWO_COMPATIBLE_PROJECTIONS_PRESERVE_ZERO_V03' }
+        'capacidade_kg' { return 'DERIVE_FROM_REDUCED_MFT_VIE_WEIGHT_CAPACITY_NO_INDEPENDENT_REDUCER_V03' }
+        'manifest_items_count' { return 'UNIQUE_VALUE_COMPLEMENT_NULL_PRESERVE_ZERO_CONFLICT_QUARANTINE_V03' }
+        'finalized_manifest_items_count' { return 'UNIQUE_VALUE_COMPLEMENT_NULL_PRESERVE_ZERO_CONFLICT_QUARANTINE_V03' }
+        default { return 'ROOT_SCALAR_TRI_STATE_UNIQUE_AT_WINNING_FRESHNESS_V03' }
+    }
 }
 
 function Get-ProtectionPolicyId {
@@ -808,11 +850,21 @@ foreach ($spec in $dataExportSpecs) {
         $fieldName = $names[$i]
         $fromDto = $null -ne $spec.Dto -and ([System.IO.File]::ReadAllText((Join-Path $legacyRootResolved $spec.Dto)) -match [regex]::Escape('@JsonProperty("' + $fieldName + '")'))
         $explicitSample = $spec.Known -contains $fieldName
-        $status = if ($explicitSample) { 'OBSERVED_DATA_SAMPLE_PATH' } else { 'LOCAL_DTO_DATA_PATH_CANDIDATE' }
+        $isManifestos = $spec.Entity -eq 'manifestos'
+        $status = if ($isManifestos) { 'LOCAL_STATIC_PATH_AND_REDUCER_DECIDED_P01_V03' } elseif ($explicitSample) { 'OBSERVED_DATA_SAMPLE_PATH' } else { 'LOCAL_DTO_DATA_PATH_CANDIDATE' }
         $evidence = if ($fromDto) { (Get-RelativeLegacyPath (Join-Path $legacyRootResolved $spec.Dto)) } else { 'STATES.md + contrato sanitizado local' }
+        if ($isManifestos) {
+            $evidence += '; docs/catalogos/identidade-manifestos/manifesto.json; docs/catalogos/manifestos-v2-026/decisao-v03.json'
+        }
         $decision = Get-DataFieldDecision -Entity $spec.Entity -Name $fieldName
+        $reducer = if ($isManifestos) { Get-ManifestosReducer -Name $fieldName } else { 'FIELD_SPECIFIC_PENDING_VERTICAL' }
         $safeTargetName = [regex]::Replace($fieldName.ToLowerInvariant(), '[^a-z0-9_]+', '_').Trim('_')
-        $fields.Add((New-FieldRow -RowId ('DE-DATA-{0}-{1:D3}' -f $spec.Template, ($i + 1)) -RowKind 'DATA_EXPORT_DATA_FIELD' -Entity $spec.Entity -SourceContract 'ESL_DATA_EXPORT_DATA_CANDIDATE' -Template $spec.Template -SourceRoot $spec.Root -SourcePath ('/data/' + $fieldName) -SourceType 'UNVERIFIED_RUNTIME_TYPE' -Presence $(if ($explicitSample) {'OBSERVED_IN_SANITIZED_SAMPLE'} else {'DECLARED_BY_LOCAL_DTO_NOT_CURRENT_FINGERPRINT'}) -Cardinality $(if ($decision -eq 'SPLIT') {'CHILD_OR_RELATION_TO_MODEL'} else {'ROOT_SCALAR_OR_ALIAS_TO_PROVE'}) -Requested 'YES_IN_LEGACY_OR_PROBE' -DtoPresence $(if ($fromDto) {'YES'} else {'NO_OR_SIDECAR'}) -LegacyMapping ('candidate field ' + $fieldName + '; reconcile mapper/SQL separately') -V2Zone 'stg' -V2Target ('stg.' + $spec.Entity + '.' + $safeTargetName) -Transformation $(if ($decision -eq 'SPLIT') {'split typed root/child with explicit natural components'} elseif ($decision -eq 'ALIAS') {'preserve as explicit business key/alias; never source ID by inference'} elseif ($decision -eq 'NORMALIZE') {'preserve raw + normalize typed value with versioned rule'} else {'typed parse + explicit presence/provenance'}) -TimeZone 'America/Sao_Paulo_WHEN_TEMPORAL' -Reducer 'FIELD_SPECIFIC_PENDING_VERTICAL' -Unit 'UNRESOLVED_IF_NUMERIC' -Currency 'UNRESOLVED_IF_FINANCIAL' -PrecisionScale 'UNRESOLVED_IF_NUMERIC' -Rounding 'FAIL_ON_UNAPPROVED_ROUNDING' -ProtectionClass (Get-ProtectionClass $fieldName) -RetentionPolicy 'R-STG-CANDIDATE' -Consumer ('vertical ' + $spec.Entity) -Decision $decision -Owner (Get-OwnerForEntity $spec.Entity) -Status $status -DueGate 'V2-041->V2-025d/vertical-contract' -Evidence $evidence -Fixture ('sanitized /data fixture for ' + $fieldName) -PublicationBlocked 'YES' -DtoFieldName $(if ($fromDto) {$fieldName} else {''}) -DtoJavaType $(if ($fromDto) {$dtoFieldTypes[$spec.Entity][$fieldName]} else {''})))
+        $manifestChildKind = if (-not $isManifestos) { $null } elseif ($fieldName -eq 'mft_pfs_pck_sequence_code') { 'pick' } elseif ($fieldName -in @('mft_mfs_number','mft_mfs_key')) { 'mdfe' } else { $null }
+        $cardinality = if ($null -ne $manifestChildKind) { 'ROOT_ZERO_TO_MANY_PHYSICAL_RECORD_ZERO_OR_ONE_FAIL_CLOSED' } elseif ($isManifestos) { 'ROOT_SCALAR_TRI_STATE_ONE_OBSERVATION_PER_PHYSICAL_RECORD' } elseif ($decision -eq 'SPLIT') { 'CHILD_OR_RELATION_TO_MODEL' } else { 'ROOT_SCALAR_OR_ALIAS_TO_PROVE' }
+        $v2Target = if ($manifestChildKind -eq 'pick') { 'stg.manifestos.pick_child_observation.' + $safeTargetName } elseif ($manifestChildKind -eq 'mdfe') { 'stg.manifestos.mdfe_child_observation.' + $safeTargetName } elseif ($isManifestos) { 'stg.manifestos.root_observation.' + $safeTargetName } else { 'stg.' + $spec.Entity + '.' + $safeTargetName }
+        $transformation = if ($fieldName -eq 'mft_pfs_pck_sequence_code' -and $isManifestos) { 'preserve typed root-scoped pick child observation and V2-046a candidate; never materialize relation' } elseif ($fieldName -eq 'mft_mfs_key' -and $isManifestos) { 'validate exact 44 ASCII digits and register root-scoped MDF-e child observation; never combine number into identity' } elseif ($fieldName -eq 'mft_mfs_number' -and $isManifestos) { 'preserve as MDF-e attribute paired with key in the same physical observation; never identity or independent MAX' } elseif ($fieldName -eq 'mdfe_status' -and $isManifestos) { 'preserve ABSENT/NULL/VALUE as root scalar replicated by expansion; never signal or identify an MDF-e child' } elseif ($decision -eq 'SPLIT') { 'split typed root/child with explicit natural components' } elseif ($decision -eq 'ALIAS') { 'preserve as explicit business key/alias; never source ID by inference' } elseif ($decision -eq 'NORMALIZE') { 'preserve raw + normalize typed value with versioned rule' } else { 'typed parse + explicit presence/provenance' }
+        $dueGate = if ($isManifestos) { 'V2-026' } else { 'V2-041->V2-025d/vertical-contract' }
+        $fields.Add((New-FieldRow -RowId ('DE-DATA-{0}-{1:D3}' -f $spec.Template, ($i + 1)) -RowKind 'DATA_EXPORT_DATA_FIELD' -Entity $spec.Entity -SourceContract 'ESL_DATA_EXPORT_DATA_CANDIDATE' -Template $spec.Template -SourceRoot $spec.Root -SourcePath ('/data/' + $fieldName) -SourceType 'UNVERIFIED_RUNTIME_TYPE' -Presence $(if ($explicitSample) {'OBSERVED_IN_SANITIZED_SAMPLE'} else {'DECLARED_BY_LOCAL_DTO_NOT_CURRENT_FINGERPRINT'}) -Cardinality $cardinality -Requested 'YES_IN_LEGACY_OR_PROBE' -DtoPresence $(if ($fromDto) {'YES'} else {'NO_OR_SIDECAR'}) -LegacyMapping ('candidate field ' + $fieldName + '; reconcile mapper/SQL separately') -V2Zone 'stg' -V2Target $v2Target -Transformation $transformation -TimeZone 'America/Sao_Paulo_WHEN_TEMPORAL' -Reducer $reducer -Unit 'UNRESOLVED_IF_NUMERIC' -Currency 'UNRESOLVED_IF_FINANCIAL' -PrecisionScale 'UNRESOLVED_IF_NUMERIC' -Rounding 'FAIL_ON_UNAPPROVED_ROUNDING' -ProtectionClass (Get-ProtectionClass $fieldName) -RetentionPolicy 'R-STG-CANDIDATE' -Consumer ('vertical ' + $spec.Entity) -Decision $decision -Owner (Get-OwnerForEntity $spec.Entity) -Status $status -DueGate $dueGate -Evidence $evidence -Fixture ('sanitized /data fixture for ' + $fieldName) -PublicationBlocked 'YES' -DtoFieldName $(if ($fromDto) {$fieldName} else {''}) -DtoJavaType $(if ($fromDto) {$dtoFieldTypes[$spec.Entity][$fieldName]} else {''})))
     }
 }
 
@@ -826,27 +878,59 @@ $entityVerticalGates = @{
     'localizacao_cargas'='V2-028'; 'contas_a_pagar'='V2-029'; 'faturas_por_cliente'='V2-030';
     'inventario'='V2-031'; 'sinistros'='V2-032'
 }
+$manifestV1SourceOverrides = @{
+    'mdfe_number' = 'mft_mfs_number'
+    'mdfe_key' = 'mft_mfs_key'
+    'mdfe_status' = 'mdfe_status'
+    'pick_sequence_code' = 'mft_pfs_pck_sequence_code'
+    'vehicle_weight_capacity' = 'mft_vie_weight_capacity'
+    'capacidade_kg' = 'mft_vie_weight_capacity'
+}
+$manifestDecisionEvidence = 'docs/catalogos/identidade-manifestos/manifesto.json; docs/catalogos/manifestos-v2-026/decisao-v03.json'
 $entityColumnPosition = @{}
 foreach ($file in $tableFiles | Where-Object { $operationalTables.ContainsKey($_.BaseName.Substring(0,3)) }) {
     $entity = $operationalTables[$file.BaseName.Substring(0,3)]
     $entityColumnPosition[$entity] = 0
     foreach ($column in (Get-CreateTableColumns -Path $file.FullName)) {
         $entityColumnPosition[$entity]++
-        $known = $knownSourceFields[$entity] -contains $column.Name
+        $sourceFieldOverride = if ($entity -eq 'manifestos' -and $manifestV1SourceOverrides.ContainsKey($column.Name)) {
+            [string]$manifestV1SourceOverrides[$column.Name]
+        } else {
+            $null
+        }
+        $known = ($knownSourceFields[$entity] -contains $column.Name) -or $null -ne $sourceFieldOverride
         $technical = $column.Name -match '(?i)^(metadata|data_extracao|excluido_na_origem|data_exclusao_origem|ausente_na_origem_desde|confirmacoes_ausencia_origem|ultima_reconciliacao_origem_em|reconciliacao_origem_run_id|motivo_exclusao_origem|hash_|criado_em|atualizado_em)'
         if ($column.Name -eq 'metadata') { $decision = 'RETIRE'; $zone = 'recon'; $target = 'recon.field_presence_and_provenance'; $status = 'RAW_METADATA_COLUMN_RETIRED'; $sourcePath = 'MULTIPLE_UNTYPED_FIELDS' }
+        elseif ($entity -eq 'manifestos' -and $column.Name -eq 'id') {
+            $decision = 'RETIRE'; $zone = 'recon'; $target = 'recon.manifestos_legacy_surrogate_evidence'
+            $status = 'RETIRED_LEGACY_DATABASE_SURROGATE_NOT_SOURCE_IDENTITY'; $sourcePath = 'LEGACY_DATABASE_SURROGATE_NO_SOURCE_PATH'
+        }
+        elseif ($entity -eq 'manifestos' -and $column.Name -in @('identificador_unico','chave_merge_hash')) {
+            $decision = 'RETIRE'; $zone = 'recon'; $target = 'recon.manifestos_legacy_identity_heuristic_evidence'
+            $status = 'RETIRED_AS_IDENTITY_LEGACY_EVIDENCE_ONLY'; $sourcePath = 'LEGACY_DERIVED_IDENTIFIER_NO_SOURCE_PATH'
+        }
         elseif ($technical) { $decision = 'DERIVE'; $zone = 'ctl'; $target = 'ctl/recon derived audit state'; $status = 'TECHNICAL_COLUMN_CLASSIFIED'; $sourcePath = 'DERIVED_BY_PIPELINE' }
         else {
-            $decision = Get-DataFieldDecision -Entity $entity -Name $column.Name
-            if ($decision -eq 'SPLIT') { $zone = 'crosswalk'; $target = ('crosswalk.' + $entity + '.pending_relation_' + $column.Name) }
+            $decisionName = if ($null -ne $sourceFieldOverride) { $sourceFieldOverride } else { $column.Name }
+            $decision = if ($entity -eq 'manifestos' -and $column.Name -eq 'capacidade_kg') { 'DERIVE' } else { Get-DataFieldDecision -Entity $entity -Name $decisionName }
+            $manifestChildKind = if ($entity -ne 'manifestos') { $null } elseif ($decisionName -eq 'mft_pfs_pck_sequence_code') { 'pick' } elseif ($decisionName -in @('mft_mfs_number','mft_mfs_key')) { 'mdfe' } else { $null }
+            if ($manifestChildKind -eq 'pick') { $zone = 'core'; $target = 'core.manifestos.pick_child_observation.' + $decisionName }
+            elseif ($manifestChildKind -eq 'mdfe') { $zone = 'core'; $target = 'core.manifestos.mdfe_child_observation.' + $decisionName }
+            elseif ($entity -eq 'manifestos' -and $known) { $zone = 'core'; $target = 'core.manifestos.root_observation.' + $column.Name }
+            elseif ($decision -eq 'SPLIT') { $zone = 'crosswalk'; $target = ('crosswalk.' + $entity + '.pending_relation_' + $column.Name) }
             elseif ($decision -eq 'ALIAS') { $zone = 'crosswalk'; $target = ('crosswalk.' + $entity + '.alias_' + $column.Name) }
             else { $zone = 'core'; $target = ('core.' + $entity + '.' + $(if ($known) {$column.Name} else {'pending_' + $column.Name})) }
-            $status = if ($known) { 'PROVISIONAL_NAME_MATCH_NOT_SEMANTIC_PROOF' } else { 'UNRESOLVED_BIDIRECTIONAL_MAPPING' }
-            $sourcePath = if ($known) { '/data/' + $column.Name } else { 'UNRESOLVED_SOURCE_PATH' }
+            $status = if ($entity -eq 'manifestos' -and $known) { 'LOCAL_STATIC_PATH_AND_REDUCER_DECIDED_P01_V03' } elseif ($known) { 'PROVISIONAL_NAME_MATCH_NOT_SEMANTIC_PROOF' } else { 'UNRESOLVED_BIDIRECTIONAL_MAPPING' }
+            $sourcePath = if ($null -ne $sourceFieldOverride) { '/data/' + $sourceFieldOverride } elseif ($known) { '/data/' + $column.Name } else { 'UNRESOLVED_SOURCE_PATH' }
         }
-        $dueGate = if ($column.Name -eq 'metadata') { 'V2-021/' + $entityVerticalGates[$entity] } elseif ($technical) { 'V2-020/' + $entityVerticalGates[$entity] } elseif ($known) { 'V2-025d/' + $entityVerticalGates[$entity] } else { 'V2-041->V2-025d/' + $entityVerticalGates[$entity] }
-        $transformation = if ($technical) { 'derive from immutable execution/publication ledger' } elseif ($decision -eq 'SPLIT') { 'split root/relation and prove natural components/cardinality' } elseif ($decision -eq 'ALIAS') { 'store versioned business alias; never infer source identity' } elseif ($decision -eq 'NORMALIZE') { 'preserve raw and normalize with versioned rule' } else { 'typed mapping with explicit presence/provenance' }
-        $fields.Add((New-FieldRow -RowId ('V1-{0}-{1:D3}' -f $entity.ToUpperInvariant(), $entityColumnPosition[$entity]) -RowKind 'V1_OPERATIONAL_COLUMN' -Entity $entity -SourceContract 'V1_SQL_SERVER' -Template 'N/A' -SourceRoot ('dbo.' + $entity) -SourcePath $sourcePath -SourceType $column.Type -Presence $(if ($column.Nullable -eq 'NO') { 'REQUIRED_IN_V1_SQL' } else { 'NULLABLE_IN_V1_SQL' }) -Cardinality $(if ($decision -eq 'SPLIT') {'ROOT_OR_CHILD_RELATION_TO_PROVE'} else {'ONE_COLUMN_PER_LEGACY_ROW'}) -Requested 'N/A' -DtoPresence $(if ($known) { 'NAME_PRESENT_IN_DATA_CANDIDATE_NOT_INFO_PROOF' } else { 'TO_RECONCILE' }) -LegacyMapping ('dbo.' + $entity + '.' + $column.Name) -V2Zone $zone -V2Target $target -Transformation $transformation -TimeZone 'America/Sao_Paulo_WHEN_TEMPORAL' -Reducer 'FIELD_SPECIFIC_PENDING_VERTICAL' -Unit 'UNRESOLVED_IF_NUMERIC' -Currency 'UNRESOLVED_IF_FINANCIAL' -PrecisionScale $column.Type -Rounding 'FAIL_ON_UNAPPROVED_ROUNDING' -ProtectionClass (Get-ProtectionClass $column.Name) -RetentionPolicy $(if ($zone -eq 'ctl' -or $zone -eq 'recon') { 'R-AUDIT-APPEND-ONLY' } else { 'R-DOMAIN-OWNER' }) -Consumer 'core + downstream contracts listed in STATES.md' -Decision $decision -Owner (Get-OwnerForEntity $entity) -Status $status -DueGate $dueGate -Evidence (Get-RelativeLegacyPath $file.FullName) -Fixture ('schema + mapping fixture for ' + $column.Name) -PublicationBlocked 'YES'))
+        $dueGate = if ($column.Name -eq 'metadata') { 'V2-021/' + $entityVerticalGates[$entity] } elseif ($technical) { 'V2-020/' + $entityVerticalGates[$entity] } elseif ($entity -eq 'manifestos' -and ($known -or $decision -eq 'RETIRE')) { 'V2-026' } elseif ($known) { 'V2-025d/' + $entityVerticalGates[$entity] } else { 'V2-041->V2-025d/' + $entityVerticalGates[$entity] }
+        $transformation = if ($column.Name -eq 'metadata') { 'replace raw metadata with typed presence and provenance; no source reducer' } elseif ($entity -eq 'manifestos' -and $column.Name -in @('id','identificador_unico','chave_merge_hash')) { 'retain only as legacy comparison evidence; never source root child alias or tie breaker identity' } elseif ($technical) { 'derive from immutable execution/publication ledger' } elseif ($entity -eq 'manifestos' -and $column.Name -eq 'pick_sequence_code') { 'preserve typed root-scoped pick child observation and V2-046a candidate; never materialize relation' } elseif ($entity -eq 'manifestos' -and $column.Name -eq 'mdfe_key') { 'validate exact 44 ASCII digits and register root-scoped MDF-e child observation; never combine number into identity' } elseif ($entity -eq 'manifestos' -and $column.Name -eq 'mdfe_number') { 'preserve as MDF-e attribute paired with key in the same physical observation; never identity or independent MAX' } elseif ($entity -eq 'manifestos' -and $column.Name -eq 'mdfe_status') { 'preserve ABSENT/NULL/VALUE as root scalar replicated by expansion; never signal or identify an MDF-e child' } elseif ($entity -eq 'manifestos' -and $column.Name -eq 'capacidade_kg') { 'derive compatible projection from the same reduced mft_vie_weight_capacity signal; never reduce independently' } elseif ($decision -eq 'SPLIT') { 'split root/child observation; relation remains pending V2-046a' } elseif ($decision -eq 'ALIAS') { 'store versioned business alias; never infer source identity' } elseif ($decision -eq 'NORMALIZE') { 'preserve raw and normalize with versioned rule' } else { 'typed mapping with explicit presence/provenance' }
+        $reducerName = if ($entity -eq 'manifestos' -and $column.Name -eq 'capacidade_kg') { 'capacidade_kg' } elseif ($null -ne $sourceFieldOverride) { $sourceFieldOverride } else { $column.Name }
+        $reducer = if ($entity -ne 'manifestos') { 'FIELD_SPECIFIC_PENDING_VERTICAL' } elseif ($column.Name -eq 'metadata') { 'RAW_METADATA_RETIRED_PRESENCE_PROVENANCE_ONLY_NO_V03_REDUCER' } elseif ($column.Name -eq 'id') { 'LEGACY_DATABASE_SURROGATE_RETIRED_NO_SOURCE_REDUCER' } elseif ($column.Name -in @('identificador_unico','chave_merge_hash')) { 'LEGACY_IDENTITY_HEURISTIC_RETIRED_NO_V03_REDUCER' } elseif ($technical) { 'TECHNICAL_LEDGER_DERIVED_NO_SOURCE_REDUCER' } else { Get-ManifestosReducer -Name $reducerName }
+        $cardinality = if ($entity -eq 'manifestos' -and $decision -eq 'SPLIT') { 'ROOT_ZERO_TO_MANY_LEGACY_PHYSICAL_ROW_ZERO_OR_ONE_FAIL_CLOSED' } elseif ($entity -eq 'manifestos' -and ($technical -or $decision -eq 'RETIRE')) { 'NOT_APPLICABLE_TECHNICAL_OR_RETIRED' } elseif ($entity -eq 'manifestos') { 'ONE_ROOT_SCALAR_OBSERVATION_PER_LEGACY_ROW' } elseif ($decision -eq 'SPLIT') { 'ROOT_OR_CHILD_RELATION_TO_PROVE' } else { 'ONE_COLUMN_PER_LEGACY_ROW' }
+        $rowEvidence = Get-RelativeLegacyPath $file.FullName
+        if ($entity -eq 'manifestos' -and ($known -or $decision -eq 'RETIRE')) { $rowEvidence += '; ' + $manifestDecisionEvidence }
+        $fields.Add((New-FieldRow -RowId ('V1-{0}-{1:D3}' -f $entity.ToUpperInvariant(), $entityColumnPosition[$entity]) -RowKind 'V1_OPERATIONAL_COLUMN' -Entity $entity -SourceContract 'V1_SQL_SERVER' -Template 'N/A' -SourceRoot ('dbo.' + $entity) -SourcePath $sourcePath -SourceType $column.Type -Presence $(if ($column.Nullable -eq 'NO') { 'REQUIRED_IN_V1_SQL' } else { 'NULLABLE_IN_V1_SQL' }) -Cardinality $cardinality -Requested 'N/A' -DtoPresence $(if ($known) { 'NAME_PRESENT_IN_DATA_CANDIDATE_NOT_INFO_PROOF' } else { 'TO_RECONCILE' }) -LegacyMapping ('dbo.' + $entity + '.' + $column.Name) -V2Zone $zone -V2Target $target -Transformation $transformation -TimeZone 'America/Sao_Paulo_WHEN_TEMPORAL' -Reducer $reducer -Unit 'UNRESOLVED_IF_NUMERIC' -Currency 'UNRESOLVED_IF_FINANCIAL' -PrecisionScale $column.Type -Rounding 'FAIL_ON_UNAPPROVED_ROUNDING' -ProtectionClass (Get-ProtectionClass $column.Name) -RetentionPolicy $(if ($zone -eq 'ctl' -or $zone -eq 'recon') { 'R-AUDIT-APPEND-ONLY' } else { 'R-DOMAIN-OWNER' }) -Consumer 'core + downstream contracts listed in STATES.md' -Decision $decision -Owner (Get-OwnerForEntity $entity) -Status $status -DueGate $dueGate -Evidence $rowEvidence -Fixture ('schema + mapping fixture for ' + $column.Name) -PublicationBlocked 'YES'))
     }
 }
 
@@ -1108,7 +1192,7 @@ $ruleCases = Import-PowerShellDataFile -LiteralPath $ruleCasesPath
 $ruleSourceByPrefix = @{
     'COL'='STATES.md#coletas; GraphQLQueries.java; tabelas/001; views/012,015; procedure/005'
     'FRE'='STATES.md#fretes; GraphQLQueries.java; DTO 6389; tabelas/002; views/011; procedures/001,003'
-    'MAN'='STATES.md#manifestos; DTO/mapper 6399; tabelas/003; views/018,019; procedures/002,005'
+    'MAN'='STATES.md#manifestos; docs/catalogos/manifestos-v2-026/decisao-v03.json; DTO/mapper 6399; tabelas/003; views/018,019; procedures/002,005'
     'COT'='STATES.md#cotacoes; DTO/mapper 6906; tabelas/004; views/016'
     'LOC'='STATES.md#localizacao; DTO/mapper 8656; tabelas/005; views/014'
     'CAP'='STATES.md#contas-a-pagar; DTO/mapper 8636; tabelas/006; views/013'
@@ -1121,7 +1205,7 @@ $ruleSourceByPrefix = @{
     'PUB'='STATES.md#destino-das-19-views; views/011..025; views-dimensao/019..024'
 }
 $unresolvedRuleIds = @(
-    'COL-07','COL-10','FRE-04','FRE-05','FRE-06','FRE-07','MAN-03','MAN-06','MAN-07',
+    'COL-07','COL-10','FRE-04','FRE-05','FRE-06','FRE-07','MAN-03','MAN-06',
     'LOC-01','LOC-05','LOC-07','CAP-01','CAP-04','FAT-01','FAT-02','FAT-04','FAT-07',
     'INV-01','INV-04','SIN-01','RAS-01','RAS-02','RAS-03','RAS-04',
     'RAS-05','RAS-06','MAT-01','MAT-02','MAT-03','MAT-04','MAT-05','PUB-01','PUB-02',
@@ -1164,12 +1248,12 @@ foreach ($line in $statesLines) {
         affected_contract = $prefix + ' source/core/mart/pub conforme matriz-campos.csv'
         expected_test = ('PortabilityRule_{0}_positive_and_counterexample; implementation gate {1}' -f $id.Replace('-','_'), $gate)
         owner_role = $owner
-        acceptor = 'TIME_NOMINAL_NAO_INFORMADO'
+        acceptor = if ($id -in @('MAN-01','MAN-02','MAN-04','MAN-07')) { 'OWNER_EXPLICIT_AUTHORIZATION_2026_09_04' } else { 'TIME_NOMINAL_NAO_INFORMADO' }
         decision = 'PRESERVE'
-        status = if ($prefix -eq 'USR') { 'IMPLEMENTED_IN_SHADOW' } elseif ($isUnresolved) { 'UNRESOLVED_WITH_GATE' } else { 'BASELINE_CLASSIFIED_PENDING_OWNER_ACCEPTANCE' }
+        status = if ($prefix -eq 'USR') { 'IMPLEMENTED_IN_SHADOW' } elseif ($id -in @('MAN-01','MAN-02','MAN-04','MAN-07')) { 'LOCAL_DECISION_FROZEN_V03_EXECUTION_PENDING' } elseif ($isUnresolved) { 'UNRESOLVED_WITH_GATE' } else { 'BASELINE_CLASSIFIED_PENDING_OWNER_ACCEPTANCE' }
         due_gate = $gate
         publication_blocked = 'YES'
-        evidence = 'roadmap consolidado a partir de código/SQL legado; produção/owner é oráculo final'
+        evidence = if ($id -in @('MAN-01','MAN-02','MAN-04','MAN-07')) { 'decisão V03 local fail-closed + corpus estático legado versionado; execução/publicação continuam nos gates próprios' } else { 'roadmap consolidado a partir de código/SQL legado; produção/owner é oráculo final' }
     })
 }
 if ($rules.Count -ne $ruleCases.Count) {
@@ -1209,7 +1293,7 @@ foreach ($group in ($fieldsSorted | Group-Object row_kind | Sort-Object Name)) {
 $artifactCounts = [ordered]@{}
 foreach ($group in ($artifactsSorted | Group-Object artifact_type | Sort-Object Name)) { $artifactCounts[$group.Name] = $group.Count }
 $manifest = [ordered]@{
-    catalog_version = '2026-09-01.v2-035b-usuarios'
+    catalog_version = '2026-09-04.v2-026a-manifestos-v03'
     generator = 'scripts/validation/Build-PortabilityCatalog.ps1'
     source_policy = 'offline allowlist; no dashboards, credentials, network, database or payload values'
     baselines = [ordered]@{
@@ -1233,6 +1317,7 @@ $manifest = [ordered]@{
     vertical_slices = [ordered]@{
         usuarios = 'IMPLEMENTED_IN_SHADOW; current/history + core dimension view; pub compatibility and absence sweep blocked'
         governed_references = 'OFFLINE_FOUNDATION_COMPLETE; deterministic candidates inert; mutable baselines and activation external'
+        manifestos_decision = 'LOCAL_DECISION_FROZEN_V03; P01 identity and MAN-01/MAN-02/MAN-04/MAN-07 only; V2-026 execution and publication pending'
     }
     external_inputs = @(
         'nomes técnicos dos slots /info não persistidos, a fechar somente após V2-041 na rodada autorizada V2-025d',

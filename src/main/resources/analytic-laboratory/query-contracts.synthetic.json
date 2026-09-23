@@ -1,0 +1,5485 @@
+{
+  "version": "synthetic-analytic-query-contracts-v1",
+  "provenance": "SQL_SERVER_LOCAL_METADATA_VERIFIED_673_BUSINESS_COLUMNS",
+  "contracts": [
+    {
+      "id": "SQL-01",
+      "columns": [
+        {
+          "ordinal": 1,
+          "name": "Hora (Solicitacao)",
+          "type": "time",
+          "precision": 16,
+          "scale": 7,
+          "nullable": true
+        },
+        {
+          "ordinal": 2,
+          "name": "ID Único",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 3,
+          "name": "Filial",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 4,
+          "name": "Estado",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 5,
+          "name": "CT-e/Número",
+          "type": "varchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 6,
+          "name": "Número do Documento",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 7,
+          "name": "CT-e/Chave",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 8,
+          "name": "CT-e/Data de emissão",
+          "type": "datetimeoffset",
+          "precision": 34,
+          "scale": 7,
+          "nullable": true
+        },
+        {
+          "ordinal": 9,
+          "name": "Frete/Valor dos CT-es",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 10,
+          "name": "Terceiros/Valor CT-es",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 11,
+          "name": "CT-e/Status",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 12,
+          "name": "CT-e/Resultado",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 13,
+          "name": "Tipo",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 14,
+          "name": "Classificação",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 15,
+          "name": "Pagador do frete/Nome",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 16,
+          "name": "Pagador do frete/Documento",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 17,
+          "name": "Cliente/CNPJ",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 18,
+          "name": "Remetente/Nome",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 19,
+          "name": "Remetente/Documento",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 20,
+          "name": "Destinatário/Nome",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 21,
+          "name": "Destinatário/Documento",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 22,
+          "name": "Vendedor/Nome",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 23,
+          "name": "NFS-e/Número",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 24,
+          "name": "NFS-e/Série",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 25,
+          "name": "fit_nse_number",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 26,
+          "name": "N° NFS-e",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 27,
+          "name": "Carteira/Descrição",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 28,
+          "name": "Instrução Customizada",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 29,
+          "name": "Status do Processo",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 30,
+          "name": "Fatura/N° Documento",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 31,
+          "name": "Fatura/Emissão",
+          "type": "date",
+          "precision": 10,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 32,
+          "name": "Fatura/Valor",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 33,
+          "name": "Fatura/Valor Total",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 34,
+          "name": "Fatura/Número",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 35,
+          "name": "Fatura/Emissão Fatura",
+          "type": "date",
+          "precision": 10,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 36,
+          "name": "Parcelas/Vencimento",
+          "type": "date",
+          "precision": 10,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 37,
+          "name": "Fatura/Baixa",
+          "type": "date",
+          "precision": 10,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 38,
+          "name": "Fatura/Data Vencimento Original",
+          "type": "date",
+          "precision": 10,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 39,
+          "name": "Notas Fiscais",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 40,
+          "name": "Pedidos/Cliente",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 41,
+          "name": "Metadata",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 42,
+          "name": "Data da Última Atualização",
+          "type": "datetime2",
+          "precision": 27,
+          "scale": 7,
+          "nullable": true
+        }
+      ]
+    },
+    {
+      "id": "SQL-02",
+      "columns": [
+        {
+          "ordinal": 1,
+          "name": "Hora (Solicitacao)",
+          "type": "time",
+          "precision": 8,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 2,
+          "name": "ID",
+          "type": "bigint",
+          "precision": 19,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 3,
+          "name": "Nº Minuta",
+          "type": "bigint",
+          "precision": 19,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 4,
+          "name": "Chave CT-e",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 5,
+          "name": "Nº CT-e",
+          "type": "int",
+          "precision": 10,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 6,
+          "name": "Série",
+          "type": "int",
+          "precision": 10,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 7,
+          "name": "CT-e Emissão",
+          "type": "datetimeoffset",
+          "precision": 34,
+          "scale": 7,
+          "nullable": true
+        },
+        {
+          "ordinal": 8,
+          "name": "data_referencia_faturamento",
+          "type": "date",
+          "precision": 10,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 9,
+          "name": "CT-e Tipo Emissão",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 10,
+          "name": "CT-e ID",
+          "type": "bigint",
+          "precision": 19,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 11,
+          "name": "CT-e Criado em",
+          "type": "datetimeoffset",
+          "precision": 34,
+          "scale": 7,
+          "nullable": true
+        },
+        {
+          "ordinal": 12,
+          "name": "Documento Oficial/Tipo",
+          "type": "varchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": false
+        },
+        {
+          "ordinal": 13,
+          "name": "Documento Oficial/Chave",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 14,
+          "name": "Documento Oficial/Número",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 15,
+          "name": "Documento Oficial/Série",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 16,
+          "name": "Documento Oficial/XML",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 17,
+          "name": "Data frete",
+          "type": "datetimeoffset",
+          "precision": 34,
+          "scale": 7,
+          "nullable": true
+        },
+        {
+          "ordinal": 18,
+          "name": "Criado em",
+          "type": "datetimeoffset",
+          "precision": 34,
+          "scale": 7,
+          "nullable": true
+        },
+        {
+          "ordinal": 19,
+          "name": "Valor Total do Serviço",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 20,
+          "name": "Valor NF",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 21,
+          "name": "Kg NF",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 22,
+          "name": "Valor Frete",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 23,
+          "name": "Volumes",
+          "type": "int",
+          "precision": 10,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 24,
+          "name": "Kg Taxado",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 25,
+          "name": "Peso Taxado",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 26,
+          "name": "Kg Real",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 27,
+          "name": "Peso Real",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 28,
+          "name": "Kg Cubado",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 29,
+          "name": "Peso Cubado",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 30,
+          "name": "M3",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 31,
+          "name": "Total M3",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 32,
+          "name": "Pagador",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 33,
+          "name": "Pagador Doc",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 34,
+          "name": "Pagador ID",
+          "type": "bigint",
+          "precision": 19,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 35,
+          "name": "Remetente",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 36,
+          "name": "Remetente Doc",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 37,
+          "name": "Remetente ID",
+          "type": "bigint",
+          "precision": 19,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 38,
+          "name": "Origem",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 39,
+          "name": "UF Origem",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 40,
+          "name": "Destinatario",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 41,
+          "name": "Destinatario Doc",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 42,
+          "name": "Destinatario ID",
+          "type": "bigint",
+          "precision": 19,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 43,
+          "name": "Destino",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 44,
+          "name": "Cidade Destino",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 45,
+          "name": "UF Destino",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 46,
+          "name": "Região Destino",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 47,
+          "name": "Filial",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 48,
+          "name": "Filial Emissora",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 49,
+          "name": "Responsável pela Região de Destino",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 50,
+          "name": "Responsável Região Destino Key",
+          "type": "varchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 51,
+          "name": "Filial Apelido",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 52,
+          "name": "Filial CNPJ",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 53,
+          "name": "Tabela de Preço",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 54,
+          "name": "Classificação",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 55,
+          "name": "Centro de Custo",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 56,
+          "name": "Usuário",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 57,
+          "name": "NF",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 58,
+          "name": "Referência",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 59,
+          "name": "Corp ID",
+          "type": "bigint",
+          "precision": 19,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 60,
+          "name": "Cidade Destino ID",
+          "type": "bigint",
+          "precision": 19,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 61,
+          "name": "Previsão de Entrega",
+          "type": "date",
+          "precision": 10,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 62,
+          "name": "Data de Finalização",
+          "type": "datetimeoffset",
+          "precision": 34,
+          "scale": 7,
+          "nullable": true
+        },
+        {
+          "ordinal": 63,
+          "name": "Finalização da Performance",
+          "type": "date",
+          "precision": 10,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 64,
+          "name": "Performance Diferença de Dias",
+          "type": "int",
+          "precision": 10,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 65,
+          "name": "Performance Status",
+          "type": "varchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 66,
+          "name": "Performance Status Dif de Dias",
+          "type": "varchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 67,
+          "name": "Performance Status Dif de Dias Oficial",
+          "type": "varchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 68,
+          "name": "Comprovante Anexado",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": false
+        },
+        {
+          "ordinal": 69,
+          "name": "Modal",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 70,
+          "name": "Status",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 71,
+          "name": "Cortesia",
+          "type": "varchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 72,
+          "name": "Cortesia Flag",
+          "type": "bit",
+          "precision": 1,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 73,
+          "name": "is_elegivel_faturamento",
+          "type": "bit",
+          "precision": 1,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 74,
+          "name": "Tipo Frete",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 75,
+          "name": "Service Type",
+          "type": "int",
+          "precision": 10,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 76,
+          "name": "Seguro Habilitado",
+          "type": "varchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 77,
+          "name": "GRIS",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 78,
+          "name": "TDE",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 79,
+          "name": "Frete Peso",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 80,
+          "name": "Ad Valorem",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 81,
+          "name": "Pedágio",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 82,
+          "name": "ITR",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 83,
+          "name": "Modal CT-e",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 84,
+          "name": "Redispatch",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 85,
+          "name": "SUFRAMA",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 86,
+          "name": "Tipo Pagamento",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 87,
+          "name": "Doc Anterior",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 88,
+          "name": "Valor Produtos",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 89,
+          "name": "TRT",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 90,
+          "name": "ICMS CST",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 91,
+          "name": "CFOP",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 92,
+          "name": "Valor ICMS",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 93,
+          "name": "Valor PIS",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 94,
+          "name": "Valor COFINS",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 95,
+          "name": "Base de Cálculo ICMS",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 96,
+          "name": "Alíquota ICMS %",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 97,
+          "name": "Alíquota PIS %",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 98,
+          "name": "Alíquota COFINS %",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 99,
+          "name": "Possui DIFAL",
+          "type": "varchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 100,
+          "name": "DIFAL Origem",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 101,
+          "name": "DIFAL Destino",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 102,
+          "name": "Série NFS-e",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 103,
+          "name": "Nº NFS-e",
+          "type": "int",
+          "precision": 10,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 104,
+          "name": "NFS-e/ID Integração",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 105,
+          "name": "NFS-e/Status",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 106,
+          "name": "NFS-e/Emissão",
+          "type": "date",
+          "precision": 10,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 107,
+          "name": "NFS-e/Cancelamento/Motivo",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 108,
+          "name": "NFS-e/PDF",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 109,
+          "name": "NFS-e/Filial ID",
+          "type": "bigint",
+          "precision": 19,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 110,
+          "name": "NFS-e/Serviço/Descrição",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 111,
+          "name": "NFS-e/XML",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 112,
+          "name": "Seguro ID",
+          "type": "bigint",
+          "precision": 19,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 113,
+          "name": "Outras Tarifas",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 114,
+          "name": "KM",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 115,
+          "name": "Tipo Contábil Pagamento",
+          "type": "int",
+          "precision": 10,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 116,
+          "name": "Valor Segurado",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 117,
+          "name": "Globalizado",
+          "type": "varchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 118,
+          "name": "SEC/CAT",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 119,
+          "name": "Tipo Globalizado",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 120,
+          "name": "Tipo Contábil Tabela",
+          "type": "int",
+          "precision": 10,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 121,
+          "name": "Tipo Contábil Seguro",
+          "type": "int",
+          "precision": 10,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 122,
+          "name": "Metadata",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": false
+        },
+        {
+          "ordinal": 123,
+          "name": "Data de extracao",
+          "type": "datetime2",
+          "precision": 27,
+          "scale": 7,
+          "nullable": false
+        }
+      ]
+    },
+    {
+      "id": "SQL-03",
+      "columns": [
+        {
+          "ordinal": 1,
+          "name": "ID",
+          "type": "bigint",
+          "precision": 19,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 2,
+          "name": "Coleta",
+          "type": "bigint",
+          "precision": 19,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 3,
+          "name": "Solicitacao",
+          "type": "date",
+          "precision": 10,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 4,
+          "name": "Hora (Solicitacao)",
+          "type": "time",
+          "precision": 8,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 5,
+          "name": "Agendamento",
+          "type": "date",
+          "precision": 10,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 6,
+          "name": "Finalizacao",
+          "type": "date",
+          "precision": 10,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 7,
+          "name": "Status",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 8,
+          "name": "Excluída na Origem",
+          "type": "bit",
+          "precision": 1,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 9,
+          "name": "Volumes",
+          "type": "bigint",
+          "precision": 19,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 10,
+          "name": "Peso Real",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 11,
+          "name": "Peso Taxado",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 12,
+          "name": "Valor NF",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 13,
+          "name": "Numero Manifesto",
+          "type": "bigint",
+          "precision": 19,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 14,
+          "name": "Veiculo",
+          "type": "bigint",
+          "precision": 19,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 15,
+          "name": "Cliente",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 16,
+          "name": "Cliente Doc",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 17,
+          "name": "Local da Coleta",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 18,
+          "name": "Numero",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 19,
+          "name": "Complemento",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 20,
+          "name": "Cidade",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 21,
+          "name": "Bairro",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 22,
+          "name": "UF",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 23,
+          "name": "CEP",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 24,
+          "name": "Região da Coleta",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 25,
+          "name": "Região Logística",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 26,
+          "name": "Filial ID",
+          "type": "bigint",
+          "precision": 19,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 27,
+          "name": "Filial",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 28,
+          "name": "Usuario",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 29,
+          "name": "Motivo Cancel.",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 30,
+          "name": "Usuario Cancel. ID",
+          "type": "bigint",
+          "precision": 19,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 31,
+          "name": "Usuario Cancel. Nome",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 32,
+          "name": "Motivo Exclusao",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 33,
+          "name": "Usuario Exclusao ID",
+          "type": "bigint",
+          "precision": 19,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 34,
+          "name": "Usuario Exclusao Nome",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 35,
+          "name": "Status Atualizado Em",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 36,
+          "name": "Status Atualizado Em (normalizado)",
+          "type": "datetime2",
+          "precision": 27,
+          "scale": 7,
+          "nullable": true
+        },
+        {
+          "ordinal": 37,
+          "name": "Última Ocorrência",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 38,
+          "name": "Ação da Ocorrência",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 39,
+          "name": "Nº Tentativas",
+          "type": "smallint",
+          "precision": 5,
+          "scale": 0,
+          "nullable": false
+        },
+        {
+          "ordinal": 40,
+          "name": "Metadata",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 41,
+          "name": "Data de extracao",
+          "type": "datetime2",
+          "precision": 27,
+          "scale": 7,
+          "nullable": false
+        }
+      ]
+    },
+    {
+      "id": "SQL-04",
+      "columns": [
+        {
+          "ordinal": 1,
+          "name": "ID",
+          "type": "bigint",
+          "precision": 19,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 2,
+          "name": "Coleta",
+          "type": "bigint",
+          "precision": 19,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 3,
+          "name": "Solicitacao",
+          "type": "date",
+          "precision": 10,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 4,
+          "name": "Filial",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 5,
+          "name": "Status ESL bruto",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 6,
+          "name": "Status antes da exclusão",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 7,
+          "name": "Situação de sincronização",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 8,
+          "name": "Ausente desde",
+          "type": "datetime2",
+          "precision": 27,
+          "scale": 7,
+          "nullable": true
+        },
+        {
+          "ordinal": 9,
+          "name": "Confirmações de ausência",
+          "type": "tinyint",
+          "precision": 3,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 10,
+          "name": "Excluída em",
+          "type": "datetime2",
+          "precision": 27,
+          "scale": 7,
+          "nullable": true
+        },
+        {
+          "ordinal": 11,
+          "name": "Motivo",
+          "type": "varchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 12,
+          "name": "Execução de confirmação",
+          "type": "uniqueidentifier",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 13,
+          "name": "Última reconciliação",
+          "type": "datetime2",
+          "precision": 27,
+          "scale": 7,
+          "nullable": true
+        }
+      ]
+    },
+    {
+      "id": "SQL-05",
+      "columns": [
+        {
+          "ordinal": 1,
+          "name": "N° Cotação",
+          "type": "bigint",
+          "precision": 19,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 2,
+          "name": "Data Cotação",
+          "type": "datetimeoffset",
+          "precision": 34,
+          "scale": 7,
+          "nullable": true
+        },
+        {
+          "ordinal": 3,
+          "name": "Hora (Solicitacao)",
+          "type": "time",
+          "precision": 16,
+          "scale": 7,
+          "nullable": true
+        },
+        {
+          "ordinal": 4,
+          "name": "Data de extracao",
+          "type": "datetime2",
+          "precision": 27,
+          "scale": 7,
+          "nullable": false
+        },
+        {
+          "ordinal": 5,
+          "name": "Filial",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 6,
+          "name": "Unidade",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 7,
+          "name": "Unidade_Origem",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 8,
+          "name": "Solicitante",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 9,
+          "name": "Usuário",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 10,
+          "name": "Usuario Key",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 11,
+          "name": "Setor_Usuario",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 12,
+          "name": "Empresa",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 13,
+          "name": "Cliente Pagador",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 14,
+          "name": "CNPJ/CPF Cliente",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 15,
+          "name": "Pagador/Nome fantasia",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 16,
+          "name": "Cliente Grupo",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 17,
+          "name": "Cliente",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 18,
+          "name": "Cidade Origem",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 19,
+          "name": "UF Origem",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 20,
+          "name": "CEP Origem",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 21,
+          "name": "Origem",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": false
+        },
+        {
+          "ordinal": 22,
+          "name": "Cidade Destino",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 23,
+          "name": "UF Destino",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 24,
+          "name": "CEP Destino",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 25,
+          "name": "Destino",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": false
+        },
+        {
+          "ordinal": 26,
+          "name": "Trecho",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": false
+        },
+        {
+          "ordinal": 27,
+          "name": "Volume",
+          "type": "bigint",
+          "precision": 19,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 28,
+          "name": "Peso real",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 29,
+          "name": "Peso taxado",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 30,
+          "name": "Valor NF",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 31,
+          "name": "Valor frete",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 32,
+          "name": "Min. Frete/KG",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 33,
+          "name": "Tabela",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 34,
+          "name": "Tipo de operação",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 35,
+          "name": "Metadata",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 36,
+          "name": "Status Conversão",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": false
+        },
+        {
+          "ordinal": 37,
+          "name": "Status_Sistema",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": false
+        },
+        {
+          "ordinal": 38,
+          "name": "Status_Sistema_CTe",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": false
+        },
+        {
+          "ordinal": 39,
+          "name": "Status_Sistema_NFSe",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": false
+        },
+        {
+          "ordinal": 40,
+          "name": "Refino_CTe",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": false
+        },
+        {
+          "ordinal": 41,
+          "name": "Motivo Perda",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 42,
+          "name": "Observações para o frete",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 43,
+          "name": "CT-e/Data de emissão",
+          "type": "datetimeoffset",
+          "precision": 34,
+          "scale": 7,
+          "nullable": true
+        },
+        {
+          "ordinal": 44,
+          "name": "Nfse/Data de emissão",
+          "type": "datetimeoffset",
+          "precision": 34,
+          "scale": 7,
+          "nullable": true
+        },
+        {
+          "ordinal": 45,
+          "name": "Remetente/CNPJ",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 46,
+          "name": "Remetente/Nome fantasia",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 47,
+          "name": "Destinatário/CNPJ",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 48,
+          "name": "Destinatário/Nome fantasia",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 49,
+          "name": "Descontos/Subtotal parcelas",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 50,
+          "name": "Trechos/ITR",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 51,
+          "name": "Trechos/TDE",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 52,
+          "name": "Trechos/Coleta",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 53,
+          "name": "Trechos/Entrega",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 54,
+          "name": "Trechos/Outros valores",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        }
+      ]
+    },
+    {
+      "id": "SQL-06",
+      "columns": [
+        {
+          "ordinal": 1,
+          "name": "Hora (Solicitacao)",
+          "type": "time",
+          "precision": 16,
+          "scale": 7,
+          "nullable": true
+        },
+        {
+          "ordinal": 2,
+          "name": "Lançamento a Pagar/N°",
+          "type": "varchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 3,
+          "name": "N° Documento",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 4,
+          "name": "Emissão",
+          "type": "date",
+          "precision": 10,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 5,
+          "name": "Tipo",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 6,
+          "name": "Valor",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 7,
+          "name": "Juros",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 8,
+          "name": "Desconto",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 9,
+          "name": "Valor a pagar",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 10,
+          "name": "Pago",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 11,
+          "name": "Valor pago",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 12,
+          "name": "Fornecedor/Nome",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 13,
+          "name": "Filial",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 14,
+          "name": "Conta Contábil/Classificação",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 15,
+          "name": "Conta Contábil/Descrição",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 16,
+          "name": "Conta Contábil/Valor",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 17,
+          "name": "Centro de custo/Nome",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 18,
+          "name": "Centro de custo/Valor",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 19,
+          "name": "Área de Lançamento",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 20,
+          "name": "Mês de Competência",
+          "type": "varchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 21,
+          "name": "Ano de Competência",
+          "type": "varchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 22,
+          "name": "Data criação",
+          "type": "datetimeoffset",
+          "precision": 34,
+          "scale": 7,
+          "nullable": true
+        },
+        {
+          "ordinal": 23,
+          "name": "Observações",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 24,
+          "name": "Descrição da despesa",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 25,
+          "name": "Baixa/Data liquidação",
+          "type": "date",
+          "precision": 10,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 26,
+          "name": "Data transação",
+          "type": "date",
+          "precision": 10,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 27,
+          "name": "Usuário/Nome",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 28,
+          "name": "Status Pagamento",
+          "type": "varchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": false
+        },
+        {
+          "ordinal": 29,
+          "name": "Conciliado",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 30,
+          "name": "Metadata",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 31,
+          "name": "Data de extracao",
+          "type": "datetime2",
+          "precision": 27,
+          "scale": 7,
+          "nullable": true
+        }
+      ]
+    },
+    {
+      "id": "SQL-07",
+      "columns": [
+        {
+          "ordinal": 1,
+          "name": "Hora (Solicitacao)",
+          "type": "time",
+          "precision": 8,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 2,
+          "name": "N° Minuta",
+          "type": "bigint",
+          "precision": 19,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 3,
+          "name": "Tipo",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 4,
+          "name": "Data do frete",
+          "type": "datetimeoffset",
+          "precision": 34,
+          "scale": 7,
+          "nullable": true
+        },
+        {
+          "ordinal": 5,
+          "name": "Volumes",
+          "type": "int",
+          "precision": 10,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 6,
+          "name": "Peso Taxado",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 7,
+          "name": "Peso Taxado Decimal",
+          "type": "decimal",
+          "precision": 38,
+          "scale": 9,
+          "nullable": true
+        },
+        {
+          "ordinal": 8,
+          "name": "Valor NF",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 9,
+          "name": "Valor NF Decimal",
+          "type": "decimal",
+          "precision": 38,
+          "scale": 9,
+          "nullable": true
+        },
+        {
+          "ordinal": 10,
+          "name": "Valor Frete",
+          "type": "decimal",
+          "precision": 38,
+          "scale": 9,
+          "nullable": true
+        },
+        {
+          "ordinal": 11,
+          "name": "Tipo Serviço",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 12,
+          "name": "Filial Emissora",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 13,
+          "name": "Previsão Entrega/Previsão de entrega",
+          "type": "datetimeoffset",
+          "precision": 34,
+          "scale": 7,
+          "nullable": true
+        },
+        {
+          "ordinal": 14,
+          "name": "Região Destino",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 15,
+          "name": "Filial Destino",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 16,
+          "name": "Responsável pela Região de Destino",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 17,
+          "name": "Sigla Responsável Região Destino",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 18,
+          "name": "Classificação",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 19,
+          "name": "Status Carga",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 20,
+          "name": "Status Normalizado",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 21,
+          "name": "Status Terminal",
+          "type": "int",
+          "precision": 10,
+          "scale": 0,
+          "nullable": false
+        },
+        {
+          "ordinal": 22,
+          "name": "Cancelado Flag",
+          "type": "int",
+          "precision": 10,
+          "scale": 0,
+          "nullable": false
+        },
+        {
+          "ordinal": 23,
+          "name": "Filial Atual",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 24,
+          "name": "Região Origem",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 25,
+          "name": "Filial Origem",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 26,
+          "name": "Localização Atual",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 27,
+          "name": "Hash Localização",
+          "type": "char",
+          "precision": 0,
+          "scale": 0,
+          "nullable": false
+        },
+        {
+          "ordinal": 28,
+          "name": "Metadata",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": false
+        },
+        {
+          "ordinal": 29,
+          "name": "Data de extracao",
+          "type": "datetime2",
+          "precision": 23,
+          "scale": 3,
+          "nullable": false
+        }
+      ]
+    },
+    {
+      "id": "SQL-08",
+      "columns": [
+        {
+          "ordinal": 1,
+          "name": "Hora (Solicitacao)",
+          "type": "time",
+          "precision": 16,
+          "scale": 7,
+          "nullable": true
+        },
+        {
+          "ordinal": 2,
+          "name": "Hora (Criação)",
+          "type": "time",
+          "precision": 16,
+          "scale": 7,
+          "nullable": true
+        },
+        {
+          "ordinal": 3,
+          "name": "Número",
+          "type": "bigint",
+          "precision": 19,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 4,
+          "name": "Identificador Único",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 5,
+          "name": "Status",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 6,
+          "name": "Classificação",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 7,
+          "name": "Filial",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 8,
+          "name": "Filial Emissora",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 9,
+          "name": "Data criação",
+          "type": "datetimeoffset",
+          "precision": 34,
+          "scale": 7,
+          "nullable": true
+        },
+        {
+          "ordinal": 10,
+          "name": "Saída",
+          "type": "datetimeoffset",
+          "precision": 34,
+          "scale": 7,
+          "nullable": true
+        },
+        {
+          "ordinal": 11,
+          "name": "Fechamento",
+          "type": "datetimeoffset",
+          "precision": 34,
+          "scale": 7,
+          "nullable": true
+        },
+        {
+          "ordinal": 12,
+          "name": "Chegada",
+          "type": "datetimeoffset",
+          "precision": 34,
+          "scale": 7,
+          "nullable": true
+        },
+        {
+          "ordinal": 13,
+          "name": "MDFe",
+          "type": "int",
+          "precision": 10,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 14,
+          "name": "MDF-es/Chave",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 15,
+          "name": "MDFe/Status",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 16,
+          "name": "Polo de distribuição",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 17,
+          "name": "Veículo/Placa",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 18,
+          "name": "Tipo Veículo",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 19,
+          "name": "Proprietário/Nome",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 20,
+          "name": "Proprietário/Documento",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 21,
+          "name": "Tipo Motorista",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 22,
+          "name": "Motorista",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 23,
+          "name": "Km saída",
+          "type": "int",
+          "precision": 10,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 24,
+          "name": "Km chegada",
+          "type": "int",
+          "precision": 10,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 25,
+          "name": "KM viagem",
+          "type": "int",
+          "precision": 10,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 26,
+          "name": "Km manual",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 27,
+          "name": "Qtd NF",
+          "type": "int",
+          "precision": 10,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 28,
+          "name": "Volumes NF",
+          "type": "int",
+          "precision": 10,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 29,
+          "name": "Peso NF",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 30,
+          "name": "Total peso taxado",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 31,
+          "name": "Total M3",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 32,
+          "name": "Valor NF",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 33,
+          "name": "Fretes/Total",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 34,
+          "name": "Coletas/Total",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 35,
+          "name": "Receita Total Transportada",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 36,
+          "name": "Coleta/Número",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 37,
+          "name": "CIOT/Número",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 38,
+          "name": "Tipo de contrato do veículo",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 39,
+          "name": "Tipo de contrato do motorista",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 40,
+          "name": "Tipo de contrato",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 41,
+          "name": "Tipo de cálculo",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 42,
+          "name": "Tipo de carga",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 43,
+          "name": "Diária",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 44,
+          "name": "Custo total",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 45,
+          "name": "Valor frete",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 46,
+          "name": "Combustível",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 47,
+          "name": "Pedágio",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 48,
+          "name": "Serviços motorista/Total",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 49,
+          "name": "Despesa operacional",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 50,
+          "name": "Dados do agregado/INSS",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 51,
+          "name": "Dados do agregado/SEST/SENAT",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 52,
+          "name": "Dados do agregado/IR",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 53,
+          "name": "Saldo a pagar",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 54,
+          "name": "Destinos únicos/Qtd",
+          "type": "int",
+          "precision": 10,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 55,
+          "name": "Gerar MDF-e",
+          "type": "bit",
+          "precision": 1,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 56,
+          "name": "Solicitou Monitoramento",
+          "type": "bit",
+          "precision": 1,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 57,
+          "name": "Solicitação Monitoramento",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 58,
+          "name": "Leitura Móvel/Em",
+          "type": "datetimeoffset",
+          "precision": 34,
+          "scale": 7,
+          "nullable": true
+        },
+        {
+          "ordinal": 59,
+          "name": "KM Total",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 60,
+          "name": "Itens/Entrega",
+          "type": "int",
+          "precision": 10,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 61,
+          "name": "Itens/Transferência",
+          "type": "int",
+          "precision": 10,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 62,
+          "name": "Itens/Coleta",
+          "type": "int",
+          "precision": 10,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 63,
+          "name": "Itens/Despacho Rascunho",
+          "type": "int",
+          "precision": 10,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 64,
+          "name": "Itens/Consolidação",
+          "type": "int",
+          "precision": 10,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 65,
+          "name": "Itens/Coleta Reversa",
+          "type": "int",
+          "precision": 10,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 66,
+          "name": "Itens/Total",
+          "type": "int",
+          "precision": 10,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 67,
+          "name": "Itens/Finalizados",
+          "type": "int",
+          "precision": 10,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 68,
+          "name": "Calculado/Coleta",
+          "type": "int",
+          "precision": 10,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 69,
+          "name": "Calculado/Entrega",
+          "type": "int",
+          "precision": 10,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 70,
+          "name": "Calculado/Despacho",
+          "type": "int",
+          "precision": 10,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 71,
+          "name": "Calculado/Consolidação",
+          "type": "int",
+          "precision": 10,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 72,
+          "name": "Calculado/Coleta Reversa",
+          "type": "int",
+          "precision": 10,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 73,
+          "name": "Valor/Coletas",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 74,
+          "name": "Valor/Entregas",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 75,
+          "name": "Despachos",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 76,
+          "name": "Consolidações",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 77,
+          "name": "Coleta Reversa",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 78,
+          "name": "Adiantamento",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 79,
+          "name": "Custos Frota",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 80,
+          "name": "Adicionais",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 81,
+          "name": "Descontos",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 82,
+          "name": "Desconto/Valor",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 83,
+          "name": "Liberação de Custo de Agregado/Comentários",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 84,
+          "name": "IKS ID",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 85,
+          "name": "Programação/Número",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 86,
+          "name": "Programação/Início",
+          "type": "datetimeoffset",
+          "precision": 34,
+          "scale": 7,
+          "nullable": true
+        },
+        {
+          "ordinal": 87,
+          "name": "Programação/Término",
+          "type": "datetimeoffset",
+          "precision": 34,
+          "scale": 7,
+          "nullable": true
+        },
+        {
+          "ordinal": 88,
+          "name": "Carreta 1/Placa",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 89,
+          "name": "Carreta 1/Capacidade Peso",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 90,
+          "name": "Carreta 2/Placa",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 91,
+          "name": "Carreta 2/Capacidade Peso",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 92,
+          "name": "Veículo/Capacidade Peso",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 93,
+          "name": "Veículo/Peso Cubado",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 94,
+          "name": "Capacidade Lotação Kg",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 95,
+          "name": "Descarregamento/Destinatários",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 96,
+          "name": "Local de Descarregamento",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 97,
+          "name": "Entrega/Regiões",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 98,
+          "name": "Programação/Cliente",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 99,
+          "name": "Programação/Tipo Serviço",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 100,
+          "name": "Usuário/Emissor",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 101,
+          "name": "Usuário/Ajuste",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 102,
+          "name": "Liberação/Comentários Operacionais",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 103,
+          "name": "Comentários Fechamento",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 104,
+          "name": "Metadata",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": false
+        },
+        {
+          "ordinal": 105,
+          "name": "Data de extracao",
+          "type": "datetime2",
+          "precision": 27,
+          "scale": 7,
+          "nullable": false
+        }
+      ]
+    },
+    {
+      "id": "SQL-09",
+      "columns": [
+        {
+          "ordinal": 1,
+          "name": "Hora (Solicitacao)",
+          "type": "time",
+          "precision": 16,
+          "scale": 7,
+          "nullable": true
+        },
+        {
+          "ordinal": 2,
+          "name": "Hora (Criação)",
+          "type": "time",
+          "precision": 16,
+          "scale": 7,
+          "nullable": true
+        },
+        {
+          "ordinal": 3,
+          "name": "Número",
+          "type": "bigint",
+          "precision": 19,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 4,
+          "name": "Identificador Único",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 5,
+          "name": "Status",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 6,
+          "name": "Classificação",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 7,
+          "name": "Filial",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 8,
+          "name": "Filial Emissora",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 9,
+          "name": "Data criação",
+          "type": "datetimeoffset",
+          "precision": 34,
+          "scale": 7,
+          "nullable": true
+        },
+        {
+          "ordinal": 10,
+          "name": "Saída",
+          "type": "datetimeoffset",
+          "precision": 34,
+          "scale": 7,
+          "nullable": true
+        },
+        {
+          "ordinal": 11,
+          "name": "Fechamento",
+          "type": "datetimeoffset",
+          "precision": 34,
+          "scale": 7,
+          "nullable": true
+        },
+        {
+          "ordinal": 12,
+          "name": "Chegada",
+          "type": "datetimeoffset",
+          "precision": 34,
+          "scale": 7,
+          "nullable": true
+        },
+        {
+          "ordinal": 13,
+          "name": "MDFe",
+          "type": "int",
+          "precision": 10,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 14,
+          "name": "MDF-es/Chave",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 15,
+          "name": "MDFe/Status",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 16,
+          "name": "Polo de distribuição",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 17,
+          "name": "Veículo/Placa",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 18,
+          "name": "Tipo Veículo",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 19,
+          "name": "Proprietário/Nome",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 20,
+          "name": "Proprietário/Documento",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 21,
+          "name": "Tipo Motorista",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 22,
+          "name": "Motorista",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 23,
+          "name": "Km saída",
+          "type": "int",
+          "precision": 10,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 24,
+          "name": "Km chegada",
+          "type": "int",
+          "precision": 10,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 25,
+          "name": "KM viagem",
+          "type": "int",
+          "precision": 10,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 26,
+          "name": "Km manual",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 27,
+          "name": "Qtd NF",
+          "type": "int",
+          "precision": 10,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 28,
+          "name": "Volumes NF",
+          "type": "int",
+          "precision": 10,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 29,
+          "name": "Peso NF",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 30,
+          "name": "Total peso taxado",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 31,
+          "name": "Total M3",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 32,
+          "name": "Valor NF",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 33,
+          "name": "Fretes/Total",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 34,
+          "name": "Coletas/Total",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 35,
+          "name": "Receita Total Transportada",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 36,
+          "name": "Coleta/Número",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 37,
+          "name": "CIOT/Número",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 38,
+          "name": "Tipo de contrato do veículo",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 39,
+          "name": "Tipo de contrato do motorista",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 40,
+          "name": "Tipo de contrato",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 41,
+          "name": "Tipo de contrato key",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 42,
+          "name": "Tipo de cálculo",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 43,
+          "name": "Tipo de carga",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 44,
+          "name": "Diária",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 45,
+          "name": "Custo total",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 46,
+          "name": "Valor frete",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 47,
+          "name": "Combustível",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 48,
+          "name": "Pedágio",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 49,
+          "name": "Serviços motorista/Total",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 50,
+          "name": "Despesa operacional",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 51,
+          "name": "Dados do agregado/INSS",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 52,
+          "name": "Dados do agregado/SEST/SENAT",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 53,
+          "name": "Dados do agregado/IR",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 54,
+          "name": "Saldo a pagar",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 55,
+          "name": "Destinos únicos/Qtd",
+          "type": "int",
+          "precision": 10,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 56,
+          "name": "Gerar MDF-e",
+          "type": "bit",
+          "precision": 1,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 57,
+          "name": "Solicitou Monitoramento",
+          "type": "bit",
+          "precision": 1,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 58,
+          "name": "Solicitação Monitoramento",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 59,
+          "name": "Leitura Móvel/Em",
+          "type": "datetimeoffset",
+          "precision": 34,
+          "scale": 7,
+          "nullable": true
+        },
+        {
+          "ordinal": 60,
+          "name": "KM Total",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 61,
+          "name": "Itens/Entrega",
+          "type": "int",
+          "precision": 10,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 62,
+          "name": "Itens/Transferência",
+          "type": "int",
+          "precision": 10,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 63,
+          "name": "Itens/Coleta",
+          "type": "int",
+          "precision": 10,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 64,
+          "name": "Itens/Despacho Rascunho",
+          "type": "int",
+          "precision": 10,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 65,
+          "name": "Itens/Consolidação",
+          "type": "int",
+          "precision": 10,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 66,
+          "name": "Itens/Coleta Reversa",
+          "type": "int",
+          "precision": 10,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 67,
+          "name": "Itens/Total",
+          "type": "int",
+          "precision": 10,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 68,
+          "name": "Itens/Finalizados",
+          "type": "int",
+          "precision": 10,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 69,
+          "name": "Calculado/Coleta",
+          "type": "int",
+          "precision": 10,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 70,
+          "name": "Calculado/Entrega",
+          "type": "int",
+          "precision": 10,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 71,
+          "name": "Calculado/Despacho",
+          "type": "int",
+          "precision": 10,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 72,
+          "name": "Calculado/Consolidação",
+          "type": "int",
+          "precision": 10,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 73,
+          "name": "Calculado/Coleta Reversa",
+          "type": "int",
+          "precision": 10,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 74,
+          "name": "Valor/Coletas",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 75,
+          "name": "Valor/Entregas",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 76,
+          "name": "Despachos",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 77,
+          "name": "Consolidações",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 78,
+          "name": "Coleta Reversa",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 79,
+          "name": "Adiantamento",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 80,
+          "name": "Custos Frota",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 81,
+          "name": "Adicionais",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 82,
+          "name": "Descontos",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 83,
+          "name": "Desconto/Valor",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 84,
+          "name": "Liberação de Custo de Agregado/Comentários",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 85,
+          "name": "IKS ID",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 86,
+          "name": "Programação/Número",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 87,
+          "name": "Programação/Início",
+          "type": "datetimeoffset",
+          "precision": 34,
+          "scale": 7,
+          "nullable": true
+        },
+        {
+          "ordinal": 88,
+          "name": "Programação/Término",
+          "type": "datetimeoffset",
+          "precision": 34,
+          "scale": 7,
+          "nullable": true
+        },
+        {
+          "ordinal": 89,
+          "name": "Carreta 1/Placa",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 90,
+          "name": "Carreta 1/Capacidade Peso",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 91,
+          "name": "Carreta 2/Placa",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 92,
+          "name": "Carreta 2/Capacidade Peso",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 93,
+          "name": "Veículo/Capacidade Peso",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 94,
+          "name": "Veículo/Peso Cubado",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 95,
+          "name": "Capacidade Lotação Kg",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 96,
+          "name": "Descarregamento/Destinatários",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 97,
+          "name": "Local de Descarregamento",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 98,
+          "name": "Entrega/Regiões",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 99,
+          "name": "Programação/Cliente",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 100,
+          "name": "Programação/Tipo Serviço",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 101,
+          "name": "Usuário/Emissor",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 102,
+          "name": "Usuário/Ajuste",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 103,
+          "name": "Liberação/Comentários Operacionais",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 104,
+          "name": "Comentários Fechamento",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 105,
+          "name": "Metadata",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": false
+        },
+        {
+          "ordinal": 106,
+          "name": "Data de extracao",
+          "type": "datetime2",
+          "precision": 27,
+          "scale": 7,
+          "nullable": false
+        }
+      ]
+    },
+    {
+      "id": "SQL-10",
+      "columns": [
+        {
+          "ordinal": 1,
+          "name": "Id",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 2,
+          "name": "Inicio",
+          "type": "datetime2",
+          "precision": 27,
+          "scale": 7,
+          "nullable": true
+        },
+        {
+          "ordinal": 3,
+          "name": "Fim",
+          "type": "datetime2",
+          "precision": 27,
+          "scale": 7,
+          "nullable": true
+        },
+        {
+          "ordinal": 4,
+          "name": "Duracao (s)",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 5,
+          "name": "Data",
+          "type": "date",
+          "precision": 10,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 6,
+          "name": "Status",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 7,
+          "name": "Total Registros",
+          "type": "bigint",
+          "precision": 19,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 8,
+          "name": "Categoria Erro",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 9,
+          "name": "Mensagem Erro",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        }
+      ]
+    },
+    {
+      "id": "SQL-11",
+      "columns": [
+        {
+          "ordinal": 1,
+          "name": "Hora (Início)",
+          "type": "time",
+          "precision": 16,
+          "scale": 7,
+          "nullable": true
+        },
+        {
+          "ordinal": 2,
+          "name": "Identificador Único",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 3,
+          "name": "Nº Minuta",
+          "type": "varchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 4,
+          "name": "Pagador",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 5,
+          "name": "Remetente",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 6,
+          "name": "Origem",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 7,
+          "name": "Destinatário",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 8,
+          "name": "Destino",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 9,
+          "name": "Região Entrega",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 10,
+          "name": "Filial Entregadora",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 11,
+          "name": "N° Ordem",
+          "type": "varchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 12,
+          "name": "Filial",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 13,
+          "name": "Filial da Ordem de Conferência",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 14,
+          "name": "Filial Emissora do Frete",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 15,
+          "name": "Tipo",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 16,
+          "name": "Data/Hora início",
+          "type": "datetimeoffset",
+          "precision": 34,
+          "scale": 7,
+          "nullable": true
+        },
+        {
+          "ordinal": 17,
+          "name": "Data/Hora fim",
+          "type": "datetimeoffset",
+          "precision": 34,
+          "scale": 7,
+          "nullable": true
+        },
+        {
+          "ordinal": 18,
+          "name": "Status",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 19,
+          "name": "Conferente",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 20,
+          "name": "Notas Fiscais",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 21,
+          "name": "Valor de NF",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 22,
+          "name": "Peso Real",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 23,
+          "name": "M³",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 24,
+          "name": "Peso Taxado",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 25,
+          "name": "Volumes",
+          "type": "varchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 26,
+          "name": "Volumes Lidos",
+          "type": "varchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 27,
+          "name": "Previsão de Entrega",
+          "type": "datetimeoffset",
+          "precision": 34,
+          "scale": 7,
+          "nullable": true
+        },
+        {
+          "ordinal": 28,
+          "name": "Finalização da Performance",
+          "type": "datetimeoffset",
+          "precision": 34,
+          "scale": 7,
+          "nullable": true
+        },
+        {
+          "ordinal": 29,
+          "name": "Data de Finalização",
+          "type": "datetimeoffset",
+          "precision": 34,
+          "scale": 7,
+          "nullable": true
+        },
+        {
+          "ordinal": 30,
+          "name": "Data Última Ocorrência",
+          "type": "datetimeoffset",
+          "precision": 34,
+          "scale": 7,
+          "nullable": true
+        },
+        {
+          "ordinal": 31,
+          "name": "Ocorrência",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 32,
+          "name": "Comprovante Anexado",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 33,
+          "name": "Metadata",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 34,
+          "name": "Data de extracao",
+          "type": "datetime2",
+          "precision": 27,
+          "scale": 7,
+          "nullable": true
+        }
+      ]
+    },
+    {
+      "id": "SQL-12",
+      "columns": [
+        {
+          "ordinal": 1,
+          "name": "Identificador Único",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 2,
+          "name": "Nº do Sinistro",
+          "type": "varchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 3,
+          "name": "Data abertura",
+          "type": "date",
+          "precision": 10,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 4,
+          "name": "Data ocorrência",
+          "type": "date",
+          "precision": 10,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 5,
+          "name": "Hora ocorrência",
+          "type": "time",
+          "precision": 16,
+          "scale": 7,
+          "nullable": true
+        },
+        {
+          "ordinal": 6,
+          "name": "Previsão de solução",
+          "type": "date",
+          "precision": 10,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 7,
+          "name": "Local do sinistro",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 8,
+          "name": "Informado por",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 9,
+          "name": "Data finalização",
+          "type": "date",
+          "precision": 10,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 10,
+          "name": "Hora finalização",
+          "type": "time",
+          "precision": 16,
+          "scale": 7,
+          "nullable": true
+        },
+        {
+          "ordinal": 11,
+          "name": "Quantidade de documentos",
+          "type": "varchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 12,
+          "name": "Minuta",
+          "type": "varchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 13,
+          "name": "Nota Fiscal/Número",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 14,
+          "name": "Volumes",
+          "type": "varchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 15,
+          "name": "Peso",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 16,
+          "name": "Valor NF",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 17,
+          "name": "Pagador do frete/Nome fantasia",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 18,
+          "name": "valor a pagar ao cliente",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 19,
+          "name": "Valor nota de crédito ao cliente",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 20,
+          "name": "Valor a receber do responsável",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 21,
+          "name": "Valor nota de débito do responsável",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 22,
+          "name": "Valor a receber da seguradora",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 23,
+          "name": "Resultado final",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 24,
+          "name": "Pessoa/Nome fantasia",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 25,
+          "name": "Ocorrência/Ocorrência",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 26,
+          "name": "Usuário/Nome",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 27,
+          "name": "Veículo/Placa",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 28,
+          "name": "Ocorrência/Descrição",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 29,
+          "name": "Ocorrência/Código",
+          "type": "varchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 30,
+          "name": "Tratativa/Data tratativa",
+          "type": "datetimeoffset",
+          "precision": 34,
+          "scale": 7,
+          "nullable": true
+        },
+        {
+          "ordinal": 31,
+          "name": "Tratativa/Tipo tratativa",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 32,
+          "name": "Tratativa/Solução",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 33,
+          "name": "Metadata",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 34,
+          "name": "Data de extracao",
+          "type": "datetime2",
+          "precision": 27,
+          "scale": 7,
+          "nullable": true
+        }
+      ]
+    },
+    {
+      "id": "SQL-13",
+      "columns": [
+        {
+          "ordinal": 1,
+          "name": "cod_solicitacao",
+          "type": "varchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 2,
+          "name": "placa_veiculo",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 3,
+          "name": "status_viagem",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 4,
+          "name": "ORIGEM - SM",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 5,
+          "name": "DESTINO - SM",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 6,
+          "name": "Origem x Destino",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": false
+        },
+        {
+          "ordinal": 7,
+          "name": "ORIGEM",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 8,
+          "name": "ORDEM",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 9,
+          "name": "DESTINO",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 10,
+          "name": "HORÁRIO CORTE",
+          "type": "char",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 11,
+          "name": "PREV. CHEGADA (destino)",
+          "type": "char",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 12,
+          "name": "TRANSIT TIME",
+          "type": "varchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 13,
+          "name": "origem_sm",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 14,
+          "name": "destino_sm",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 15,
+          "name": "origem_destino",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": false
+        },
+        {
+          "ordinal": 16,
+          "name": "origem_nome",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 17,
+          "name": "ordem_parada_label",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 18,
+          "name": "destino_nome",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 19,
+          "name": "horario_corte_texto",
+          "type": "char",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 20,
+          "name": "previsao_chegada_destino",
+          "type": "char",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 21,
+          "name": "transit_time_texto",
+          "type": "varchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 22,
+          "name": "ordem_parada",
+          "type": "varchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 23,
+          "name": "tipo_parada",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 24,
+          "name": "data_hora_prev_ini_raster",
+          "type": "datetimeoffset",
+          "precision": 34,
+          "scale": 7,
+          "nullable": true
+        },
+        {
+          "ordinal": 25,
+          "name": "data_hora_prev_fim_raster",
+          "type": "datetimeoffset",
+          "precision": 34,
+          "scale": 7,
+          "nullable": true
+        },
+        {
+          "ordinal": 26,
+          "name": "data_hora_prev_chegada_parada",
+          "type": "datetimeoffset",
+          "precision": 34,
+          "scale": 7,
+          "nullable": true
+        },
+        {
+          "ordinal": 27,
+          "name": "data_hora_real_ini",
+          "type": "datetimeoffset",
+          "precision": 34,
+          "scale": 7,
+          "nullable": true
+        },
+        {
+          "ordinal": 28,
+          "name": "data_hora_real_fim",
+          "type": "datetimeoffset",
+          "precision": 34,
+          "scale": 7,
+          "nullable": true
+        },
+        {
+          "ordinal": 29,
+          "name": "data_hora_real_chegada",
+          "type": "datetimeoffset",
+          "precision": 34,
+          "scale": 7,
+          "nullable": true
+        },
+        {
+          "ordinal": 30,
+          "name": "data_hora_real_saida",
+          "type": "datetimeoffset",
+          "precision": 34,
+          "scale": 7,
+          "nullable": true
+        },
+        {
+          "ordinal": 31,
+          "name": "dentro_prazo_raster",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 32,
+          "name": "percentual_atraso_raster",
+          "type": "decimal",
+          "precision": 28,
+          "scale": 8,
+          "nullable": true
+        },
+        {
+          "ordinal": 33,
+          "name": "cod_rota",
+          "type": "varchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 34,
+          "name": "rota_descricao",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 35,
+          "name": "link_timeline",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 36,
+          "name": "Data de extracao",
+          "type": "datetime2",
+          "precision": 27,
+          "scale": 7,
+          "nullable": true
+        },
+        {
+          "ordinal": 37,
+          "name": "data_extracao_raster",
+          "type": "datetime2",
+          "precision": 27,
+          "scale": 7,
+          "nullable": true
+        }
+      ]
+    },
+    {
+      "id": "SQL-14",
+      "columns": [
+        {
+          "ordinal": 1,
+          "name": "NomeFilial",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 2,
+          "name": "Hora (Solicitacao)",
+          "type": "time",
+          "precision": 8,
+          "scale": 0,
+          "nullable": true
+        }
+      ]
+    },
+    {
+      "id": "SQL-15",
+      "columns": [
+        {
+          "ordinal": 1,
+          "name": "Nome",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        }
+      ]
+    },
+    {
+      "id": "SQL-16",
+      "columns": [
+        {
+          "ordinal": 1,
+          "name": "Placa",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 2,
+          "name": "TipoVeiculo",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 3,
+          "name": "Proprietario",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 4,
+          "name": "Filial",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        }
+      ]
+    },
+    {
+      "id": "SQL-17",
+      "columns": [
+        {
+          "ordinal": 1,
+          "name": "NomeMotorista",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 2,
+          "name": "Filial",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        }
+      ]
+    },
+    {
+      "id": "SQL-18",
+      "columns": [
+        {
+          "ordinal": 1,
+          "name": "Descricao",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 2,
+          "name": "Classificacao",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 3,
+          "name": "Hora (Solicitacao)",
+          "type": "time",
+          "precision": 8,
+          "scale": 0,
+          "nullable": true
+        }
+      ]
+    },
+    {
+      "id": "SQL-19",
+      "columns": [
+        {
+          "ordinal": 1,
+          "name": "User ID",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": false
+        },
+        {
+          "ordinal": 2,
+          "name": "Nome",
+          "type": "nvarchar",
+          "precision": 0,
+          "scale": 0,
+          "nullable": true
+        },
+        {
+          "ordinal": 3,
+          "name": "Data Atualizacao",
+          "type": "datetime2",
+          "precision": 23,
+          "scale": 3,
+          "nullable": false
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,763 @@
+{
+  "schema": "local-pmd-dispositions-v1",
+  "nominalSecurityAcceptance": false,
+  "releaseAcceptance": false,
+  "findings": [
+    {
+      "id": "PMD-001",
+      "path": "src/main/java/br/com/esl/etl/v2/bootstrap/Main.java",
+      "line": 428,
+      "rule": "PreserveStackTrace",
+      "method": "configurationPath",
+      "sourceSha256": "9696a9c6c7ce71544de06657dc3ff9c7763f766a9ca78fa781a2001485363edc",
+      "classification": "SANITIZACAO_DE_DADOS",
+      "rationale": "InvalidPathException pode incluir caminho informado; mensagem fixa evita reter caminho via cadeia de causas.",
+      "tests": [
+        {
+          "path": "src/test/java/br/com/esl/etl/v2/bootstrap/MainTest.java",
+          "sha256": "d08af36a6de54add9453370335610e497b9ff60a7941c386cd8ae6df71977199",
+          "className": "br.com.esl.etl.v2.bootstrap.MainTest",
+          "testCase": "rejectsAnInvalidConfigurationPathWithoutEchoingIt"
+        }
+      ],
+      "proofLimit": "Prova local sintetica e revisao do fluxo indicado; nao certifica outros ramos, fornecedor, producao ou aceite humano."
+    },
+    {
+      "id": "PMD-002",
+      "path": "src/main/java/br/com/esl/etl/v2/modulos/coletas/aplicacao/LigarReferenciaTemporalColeta.java",
+      "line": 91,
+      "rule": "PreserveStackTrace",
+      "method": "dataExportRequestDate",
+      "sourceSha256": "0de8d2cee55248e825bb67b4467ba62ae1cebb491e85109c6cf19a63fd4a580e",
+      "classification": "SANITIZACAO_DE_DADOS",
+      "rationale": "JsonProcessingException pode carregar fragmentos do payload de Coletas; erro de fronteira usa texto fixo e nao retém a causa crua.",
+      "tests": [
+        {
+          "path": "src/test/java/br/com/esl/etl/v2/modulos/coletas/aplicacao/ColetaTemporalLinkTest.java",
+          "sha256": "f447b27b43dae3445dc76943fee875bc5bc0b9385503e658f62ae793968de488",
+          "className": "br.com.esl.etl.v2.modulos.coletas.aplicacao.ColetaTemporalLinkTest",
+          "testCase": "malformedPreservedPayloadIsRejectedWithoutRetainingItsSensitiveCause"
+        }
+      ],
+      "proofLimit": "Prova local sintetica e revisao do fluxo indicado; nao certifica outros ramos, fornecedor, producao ou aceite humano."
+    },
+    {
+      "id": "PMD-003",
+      "path": "src/main/java/br/com/esl/etl/v2/modulos/manifestos/aplicacao/ManifestoDataExportRecordMapper.java",
+      "line": 97,
+      "rule": "PreserveStackTrace",
+      "method": "rootKey",
+      "sourceSha256": "f3865ac8acc9d7edcd4eacbbad5aa57ae966b929a2059242095722b12efb04d6",
+      "classification": "TRADUCAO_TIPADA",
+      "rationale": "IdentityQuarantineException vira ManifestoMappingException com reason enum; preserva codigo de quarentena e nao exige cadeia tecnica no registro.",
+      "tests": [
+        {
+          "path": "src/test/java/br/com/esl/etl/v2/modulos/manifestos/aplicacao/ManifestoDataExportRecordMapperTest.java",
+          "sha256": "daf536b16b8be9851f1f29d557fc671757c07de6348a15a199e3978c22766705",
+          "className": "br.com.esl.etl.v2.modulos.manifestos.aplicacao.ManifestoDataExportRecordMapperTest",
+          "testCase": "quarantinesIdentityTemporalAndChildAsymmetryFailClosed"
+        }
+      ],
+      "proofLimit": "Prova local sintetica e revisao do fluxo indicado; nao certifica outros ramos, fornecedor, producao ou aceite humano."
+    },
+    {
+      "id": "PMD-004",
+      "path": "src/main/java/br/com/esl/etl/v2/plataforma/autorizacao/LaboratorySqlBudget.java",
+      "line": 62,
+      "rule": "CloseResource",
+      "method": "open",
+      "sourceSha256": "41a810f07a4c77289266da8161b504f7416d2de9b67dd97bd2115b32d4c72981",
+      "classification": "FALSO_POSITIVO_OWNERSHIP_TRANSFERIDO",
+      "rationale": "Connection delegate transfere ownership ao proxy retornado; close usa AtomicBoolean e libera concorrencia uma vez mesmo se delegate.close falha. Recusas SQL/runtime/Error no opener liberam concorrencia, mantendo o budget de tentativas consumido. Fechar antes de retornar invalidaria o consumidor.",
+      "tests": [
+        {
+          "path": "src/test/java/br/com/esl/etl/v2/plataforma/autorizacao/LaboratorySqlBudgetTest.java",
+          "sha256": "29bb70d8ec01f11c8c1237fbc4c31bc83a68b0c6e83336895c09acf0c38eb83f",
+          "className": "br.com.esl.etl.v2.plataforma.autorizacao.LaboratorySqlBudgetTest",
+          "testCase": "concurrentConnectionsAreBoundedAndDoubleCloseDoesNotReleaseTwice"
+        },
+        {
+          "path": "src/test/java/br/com/esl/etl/v2/plataforma/autorizacao/LaboratorySqlBudgetTest.java",
+          "sha256": "29bb70d8ec01f11c8c1237fbc4c31bc83a68b0c6e83336895c09acf0c38eb83f",
+          "className": "br.com.esl.etl.v2.plataforma.autorizacao.LaboratorySqlBudgetTest",
+          "testCase": "failedOpensRemainConsumedButReleaseConcurrency"
+        },
+        {
+          "path": "src/test/java/br/com/esl/etl/v2/plataforma/autorizacao/LaboratorySqlBudgetTest.java",
+          "sha256": "29bb70d8ec01f11c8c1237fbc4c31bc83a68b0c6e83336895c09acf0c38eb83f",
+          "className": "br.com.esl.etl.v2.plataforma.autorizacao.LaboratorySqlBudgetTest",
+          "testCase": "failedOpenerErrorsConsumeAttemptsWithoutRetainingConcurrency"
+        }
+      ],
+      "proofLimit": "Testes de limite, tentativas consumidas, Error do opener e double-close local; nao certifica falhas fatais da JVM ao construir Proxy."
+    },
+    {
+      "id": "PMD-005",
+      "path": "src/main/java/br/com/esl/etl/v2/plataforma/autorizacao/RuntimeAuthorizationBoundary.java",
+      "line": 52,
+      "rule": "PreserveStackTrace",
+      "method": "authorize",
+      "sourceSha256": "bb49d253b049069e16f8fe9726074d2cf550aaba9443af3323d554f9138e02b4",
+      "classification": "SANITIZACAO_DE_DADOS",
+      "rationale": "Falha do relogio vira TEMPORAL_VALIDATION_UNAVAILABLE sem conservar detalhes tecnicos arbitrarios; autorizacao falha fechada.",
+      "tests": [
+        {
+          "path": "src/test/java/br/com/esl/etl/v2/plataforma/autorizacao/RuntimeAuthorizationBoundaryTest.java",
+          "sha256": "820c55db769244064b44a2484e6be8e27618f1f22258c29fb07ba16869a5fe3f",
+          "className": "br.com.esl.etl.v2.plataforma.autorizacao.RuntimeAuthorizationBoundaryTest",
+          "testCase": "failsClosedWithoutVerifyingOrAuditingWhenTimeCannotBeEstablished"
+        }
+      ],
+      "proofLimit": "Prova local sintetica e revisao do fluxo indicado; nao certifica outros ramos, fornecedor, producao ou aceite humano."
+    },
+    {
+      "id": "PMD-006",
+      "path": "src/main/java/br/com/esl/etl/v2/plataforma/autorizacao/RuntimeAuthorizationBoundary.java",
+      "line": 62,
+      "rule": "PreserveStackTrace",
+      "method": "authorize",
+      "sourceSha256": "bb49d253b049069e16f8fe9726074d2cf550aaba9443af3323d554f9138e02b4",
+      "classification": "SANITIZACAO_DE_DADOS",
+      "rationale": "Falha tipada de identidade e traduzida por mapIdentityReason em motivo autorizado e auditavel; nao liga causa sensivel do verificador.",
+      "tests": [
+        {
+          "path": "src/test/java/br/com/esl/etl/v2/plataforma/autorizacao/RuntimeAuthorizationBoundaryTest.java",
+          "sha256": "820c55db769244064b44a2484e6be8e27618f1f22258c29fb07ba16869a5fe3f",
+          "className": "br.com.esl.etl.v2.plataforma.autorizacao.RuntimeAuthorizationBoundaryTest",
+          "testCase": "translatesProviderNeutralIdentityRejectionsIntoSanitizedAuditableReasons"
+        }
+      ],
+      "proofLimit": "Prova local sintetica e revisao do fluxo indicado; nao certifica outros ramos, fornecedor, producao ou aceite humano."
+    },
+    {
+      "id": "PMD-007",
+      "path": "src/main/java/br/com/esl/etl/v2/plataforma/autorizacao/RuntimeAuthorizationBoundary.java",
+      "line": 65,
+      "rule": "PreserveStackTrace",
+      "method": "authorize",
+      "sourceSha256": "bb49d253b049069e16f8fe9726074d2cf550aaba9443af3323d554f9138e02b4",
+      "classification": "SANITIZACAO_DE_DADOS",
+      "rationale": "Falha runtime desconhecida do verificador produz AUTHORITY_UNAVAILABLE; evita reter detalhes externos na cadeia de causas.",
+      "tests": [
+        {
+          "path": "src/test/java/br/com/esl/etl/v2/plataforma/autorizacao/RuntimeAuthorizationBoundaryTest.java",
+          "sha256": "820c55db769244064b44a2484e6be8e27618f1f22258c29fb07ba16869a5fe3f",
+          "className": "br.com.esl.etl.v2.plataforma.autorizacao.RuntimeAuthorizationBoundaryTest",
+          "testCase": "convertsNullOrUnexpectedVerifierFailuresWithoutLeakingTheirMessage"
+        }
+      ],
+      "proofLimit": "Prova local sintetica e revisao do fluxo indicado; nao certifica outros ramos, fornecedor, producao ou aceite humano."
+    },
+    {
+      "id": "PMD-008",
+      "path": "src/main/java/br/com/esl/etl/v2/plataforma/autorizacao/RuntimeAuthorizationBoundary.java",
+      "line": 86,
+      "rule": "PreserveStackTrace",
+      "method": "authorize",
+      "sourceSha256": "bb49d253b049069e16f8fe9726074d2cf550aaba9443af3323d554f9138e02b4",
+      "classification": "SANITIZACAO_DE_DADOS",
+      "rationale": "Falha do segundo clock produz TEMPORAL_VALIDATION_UNAVAILABLE sem texto arbitrario e sem liberar autorizacao.",
+      "tests": [
+        {
+          "path": "src/test/java/br/com/esl/etl/v2/plataforma/autorizacao/RuntimeAuthorizationBoundaryTest.java",
+          "sha256": "820c55db769244064b44a2484e6be8e27618f1f22258c29fb07ba16869a5fe3f",
+          "className": "br.com.esl.etl.v2.plataforma.autorizacao.RuntimeAuthorizationBoundaryTest",
+          "testCase": "secondClockFailureIsSanitizedAndAuditedWithoutAuthorizing"
+        }
+      ],
+      "proofLimit": "Prova local sintetica e revisao do fluxo indicado; nao certifica outros ramos, fornecedor, producao ou aceite humano."
+    },
+    {
+      "id": "PMD-009",
+      "path": "src/main/java/br/com/esl/etl/v2/plataforma/autorizacao/RuntimeAuthorizationBoundary.java",
+      "line": 172,
+      "rule": "PreserveStackTrace",
+      "method": "recordOrDeny",
+      "sourceSha256": "bb49d253b049069e16f8fe9726074d2cf550aaba9443af3323d554f9138e02b4",
+      "classification": "SANITIZACAO_DE_DADOS",
+      "rationale": "Falha de auditoria produz AUDIT_UNAVAILABLE, incluindo caminho allow/deny; causa crua pode conter detalhe sensivel do sink.",
+      "tests": [
+        {
+          "path": "src/test/java/br/com/esl/etl/v2/plataforma/autorizacao/RuntimeAuthorizationBoundaryTest.java",
+          "sha256": "820c55db769244064b44a2484e6be8e27618f1f22258c29fb07ba16869a5fe3f",
+          "className": "br.com.esl.etl.v2.plataforma.autorizacao.RuntimeAuthorizationBoundaryTest",
+          "testCase": "failsClosedWhenTheSynchronousAuditFailsForAllowOrDeny"
+        }
+      ],
+      "proofLimit": "Prova local sintetica e revisao do fluxo indicado; nao certifica outros ramos, fornecedor, producao ou aceite humano."
+    },
+    {
+      "id": "PMD-010",
+      "path": "src/main/java/br/com/esl/etl/v2/plataforma/configuracao/RuntimeConfigurationFactory.java",
+      "line": 493,
+      "rule": "PreserveStackTrace",
+      "method": "parseUri",
+      "sourceSha256": "4aec96367abdbcfb47aaa5fa657fbfe4bb3aed9d437163fec8183bbf5b0a2566",
+      "classification": "SANITIZACAO_DE_DADOS",
+      "rationale": "URI.create pode ecoar URI/credenciais; fronteira devolve mensagem fixa recebida internamente, sem causa.",
+      "tests": [
+        {
+          "path": "src/test/java/br/com/esl/etl/v2/plataforma/configuracao/RuntimeConfigurationFactoryTest.java",
+          "sha256": "cac1b868d55414867c3af6e56da42e1ab5199fe61e966f764b1b242589817417",
+          "className": "br.com.esl.etl.v2.plataforma.configuracao.RuntimeConfigurationFactoryTest",
+          "testCase": "malformedTypedValuesDoNotEscapeThroughExceptionCauses"
+        }
+      ],
+      "proofLimit": "Prova local sintetica e revisao do fluxo indicado; nao certifica outros ramos, fornecedor, producao ou aceite humano."
+    },
+    {
+      "id": "PMD-011",
+      "path": "src/main/java/br/com/esl/etl/v2/plataforma/configuracao/RuntimeConfigurationFactory.java",
+      "line": 505,
+      "rule": "PreserveStackTrace",
+      "method": "parseIanaZone",
+      "sourceSha256": "4aec96367abdbcfb47aaa5fa657fbfe4bb3aed9d437163fec8183bbf5b0a2566",
+      "classification": "SANITIZACAO_DE_DADOS",
+      "rationale": "ZoneId.of pode ecoar valor de configuracao; mensagem fixa cobre formato e exige IANA registrado.",
+      "tests": [
+        {
+          "path": "src/test/java/br/com/esl/etl/v2/plataforma/configuracao/RuntimeConfigurationFactoryTest.java",
+          "sha256": "cac1b868d55414867c3af6e56da42e1ab5199fe61e966f764b1b242589817417",
+          "className": "br.com.esl.etl.v2.plataforma.configuracao.RuntimeConfigurationFactoryTest",
+          "testCase": "malformedTypedValuesDoNotEscapeThroughExceptionCauses"
+        }
+      ],
+      "proofLimit": "Prova local sintetica e revisao do fluxo indicado; nao certifica outros ramos, fornecedor, producao ou aceite humano."
+    },
+    {
+      "id": "PMD-012",
+      "path": "src/main/java/br/com/esl/etl/v2/plataforma/configuracao/RuntimeConfigurationFactory.java",
+      "line": 513,
+      "rule": "PreserveStackTrace",
+      "method": "parseTransport",
+      "sourceSha256": "4aec96367abdbcfb47aaa5fa657fbfe4bb3aed9d437163fec8183bbf5b0a2566",
+      "classification": "SANITIZACAO_DE_DADOS",
+      "rationale": "Transporte invalido vira texto fixo; nao devolve valor arbitrario da configuracao via excecao original.",
+      "tests": [
+        {
+          "path": "src/test/java/br/com/esl/etl/v2/plataforma/configuracao/RuntimeConfigurationFactoryTest.java",
+          "sha256": "cac1b868d55414867c3af6e56da42e1ab5199fe61e966f764b1b242589817417",
+          "className": "br.com.esl.etl.v2.plataforma.configuracao.RuntimeConfigurationFactoryTest",
+          "testCase": "malformedTypedValuesDoNotEscapeThroughExceptionCauses"
+        }
+      ],
+      "proofLimit": "Prova local sintetica e revisao do fluxo indicado; nao certifica outros ramos, fornecedor, producao ou aceite humano."
+    },
+    {
+      "id": "PMD-013",
+      "path": "src/main/java/br/com/esl/etl/v2/plataforma/configuracao/RuntimeConfigurationFactory.java",
+      "line": 596,
+      "rule": "PreserveStackTrace",
+      "method": "parseLong",
+      "sourceSha256": "4aec96367abdbcfb47aaa5fa657fbfe4bb3aed9d437163fec8183bbf5b0a2566",
+      "classification": "SANITIZACAO_DE_DADOS",
+      "rationale": "NumberFormatException inclui entrada; erro numerico fixo evita propagar o valor de configuracao.",
+      "tests": [
+        {
+          "path": "src/test/java/br/com/esl/etl/v2/plataforma/configuracao/RuntimeConfigurationFactoryTest.java",
+          "sha256": "cac1b868d55414867c3af6e56da42e1ab5199fe61e966f764b1b242589817417",
+          "className": "br.com.esl.etl.v2.plataforma.configuracao.RuntimeConfigurationFactoryTest",
+          "testCase": "malformedTypedValuesDoNotEscapeThroughExceptionCauses"
+        }
+      ],
+      "proofLimit": "Prova local sintetica e revisao do fluxo indicado; nao certifica outros ramos, fornecedor, producao ou aceite humano."
+    },
+    {
+      "id": "PMD-014",
+      "path": "src/main/java/br/com/esl/etl/v2/plataforma/configuracao/RuntimeEnvironment.java",
+      "line": 14,
+      "rule": "PreserveStackTrace",
+      "method": "fromConfiguration",
+      "sourceSha256": "c73e19fd3f6628a376f1cb41dd0dc9c8a460c6dff86d9180c785bd4e56b7cac6",
+      "classification": "SANITIZACAO_DE_DADOS",
+      "rationale": "valueOf pode ecoar entrada; o enum fechado e mensagem fixa recusam ambiente desconhecido sem reter valor.",
+      "tests": [
+        {
+          "path": "src/test/java/br/com/esl/etl/v2/plataforma/configuracao/RuntimeConfigurationFactoryTest.java",
+          "sha256": "cac1b868d55414867c3af6e56da42e1ab5199fe61e966f764b1b242589817417",
+          "className": "br.com.esl.etl.v2.plataforma.configuracao.RuntimeConfigurationFactoryTest",
+          "testCase": "malformedTypedValuesDoNotEscapeThroughExceptionCauses"
+        }
+      ],
+      "proofLimit": "Prova local sintetica e revisao do fluxo indicado; nao certifica outros ramos, fornecedor, producao ou aceite humano."
+    },
+    {
+      "id": "PMD-015",
+      "path": "src/main/java/br/com/esl/etl/v2/plataforma/configuracao/ShadowStorageTargetKind.java",
+      "line": 14,
+      "rule": "PreserveStackTrace",
+      "method": "fromConfiguration",
+      "sourceSha256": "a48ac5f9f988443c6b121dce964a167a48a2c01fa7977244fb8de6211adf3a4d",
+      "classification": "SANITIZACAO_DE_DADOS",
+      "rationale": "Tipo de alvo desconhecido e rejeitado por mensagem fixa, sem causa que ecoa a entrada do enum.",
+      "tests": [
+        {
+          "path": "src/test/java/br/com/esl/etl/v2/plataforma/configuracao/RuntimeConfigurationFactoryTest.java",
+          "sha256": "cac1b868d55414867c3af6e56da42e1ab5199fe61e966f764b1b242589817417",
+          "className": "br.com.esl.etl.v2.plataforma.configuracao.RuntimeConfigurationFactoryTest",
+          "testCase": "malformedTypedValuesDoNotEscapeThroughExceptionCauses"
+        }
+      ],
+      "proofLimit": "Prova local sintetica e revisao do fluxo indicado; nao certifica outros ramos, fornecedor, producao ou aceite humano."
+    },
+    {
+      "id": "PMD-016",
+      "path": "src/main/java/br/com/esl/etl/v2/plataforma/fonte/dataexport/DataExportHttpBodyHandler.java",
+      "line": 48,
+      "rule": "PreserveStackTrace",
+      "method": "validateContentLength",
+      "sourceSha256": "77871fac7f9dfa5098bd7aaf7a929fbe974ab3f6d2ba4eef9ff5489a6a594b67",
+      "classification": "SANITIZACAO_DE_DADOS",
+      "rationale": "Overflow de Long.parseLong no Content-Length vira erro fixo, sem header na causa; evita detalhes remotos.",
+      "tests": [
+        {
+          "path": "src/test/java/br/com/esl/etl/v2/plataforma/fonte/dataexport/DataExportHttpBodyHandlerTest.java",
+          "sha256": "cd078f1508cc83e63af4dde64f1a0835068602268570dbb27d6856eccdf2876a",
+          "className": "br.com.esl.etl.v2.plataforma.fonte.dataexport.DataExportHttpBodyHandlerTest",
+          "testCase": "overflowingNumericContentLengthIsRejectedWithoutRetainingTheHeader"
+        }
+      ],
+      "proofLimit": "Prova local sintetica e revisao do fluxo indicado; nao certifica outros ramos, fornecedor, producao ou aceite humano."
+    },
+    {
+      "id": "PMD-017",
+      "path": "src/main/java/br/com/esl/etl/v2/plataforma/fonte/dataexport/DataExportHttpBodyHandler.java",
+      "line": 133,
+      "rule": "PreserveStackTrace",
+      "method": "copy",
+      "sourceSha256": "77871fac7f9dfa5098bd7aaf7a929fbe974ab3f6d2ba4eef9ff5489a6a594b67",
+      "classification": "TRADUCAO_TIPADA",
+      "rationale": "Overflow de contador vira DataExportResponseLimitExceededException com template/limite e Long.MAX_VALUE; classifica limite e cancela body.",
+      "tests": [
+        {
+          "path": "src/test/java/br/com/esl/etl/v2/plataforma/fonte/dataexport/DataExportHttpBodyHandlerTest.java",
+          "sha256": "cd078f1508cc83e63af4dde64f1a0835068602268570dbb27d6856eccdf2876a",
+          "className": "br.com.esl.etl.v2.plataforma.fonte.dataexport.DataExportHttpBodyHandlerTest",
+          "testCase": "cancelsAsSoonAsObservedBytesCrossTheLimit"
+        },
+        {
+          "path": "src/test/java/br/com/esl/etl/v2/plataforma/fonte/dataexport/DataExportHttpBodyHandlerTest.java",
+          "sha256": "cd078f1508cc83e63af4dde64f1a0835068602268570dbb27d6856eccdf2876a",
+          "className": "br.com.esl.etl.v2.plataforma.fonte.dataexport.DataExportHttpBodyHandlerTest",
+          "testCase": "boundsAnErrorBodyWhileDiscardingItsContent"
+        }
+      ],
+      "proofLimit": "Guard aritmetico defensivo: configuracao runtime limita corpo a64MiB, buffer.remaining e int, portanto recebidos validos+um buffer nao chegam aLong.MAX_VALUE. Testes exercitam recusa imediata/cancelamento no cap, inclusive erro HTTP; nao injetam overflow em estado privado."
+    },
+    {
+      "id": "PMD-018",
+      "path": "src/main/java/br/com/esl/etl/v2/plataforma/fonte/dataexport/DataExportHttpExecutor.java",
+      "line": 181,
+      "rule": "PreserveStackTrace",
+      "method": "sendBounded",
+      "sourceSha256": "784939971b0d5283876e54f337376975ac6b3df4a7a5d11a3aaf3c835c74bfcf",
+      "classification": "FALSO_POSITIVO_CAUSA_PRESERVADA_COM_BUG_ADJACENTE_CORRIGIDO",
+      "rationale": "ExecutionException e desembrulhada; IOException/runtime sao propagadas e fallback preserva cause. Bug adjacente: Error antes virava IOException e recebia retry; agora Error e propagado diretamente.",
+      "tests": [
+        {
+          "path": "src/test/java/br/com/esl/etl/v2/plataforma/fonte/dataexport/DataExportHttpExecutorTest.java",
+          "sha256": "9553569d5893358efec5ad29bbc763f444bc7ceccc5394d8e8b7f0472b5ac6c1",
+          "className": "br.com.esl.etl.v2.plataforma.fonte.dataexport.DataExportHttpExecutorTest",
+          "testCase": "propagatesErrorWithoutRetryAndStillReleasesThePermit"
+        },
+        {
+          "path": "src/test/java/br/com/esl/etl/v2/plataforma/fonte/dataexport/DataExportHttpExecutorTest.java",
+          "sha256": "9553569d5893358efec5ad29bbc763f444bc7ceccc5394d8e8b7f0472b5ac6c1",
+          "className": "br.com.esl.etl.v2.plataforma.fonte.dataexport.DataExportHttpExecutorTest",
+          "testCase": "boundsCommunicationRetriesAndDoesNotEchoTheirTechnicalCause"
+        }
+      ],
+      "proofLimit": "Prova local sintetica e revisao do fluxo indicado; nao certifica outros ramos, fornecedor, producao ou aceite humano."
+    },
+    {
+      "id": "PMD-019",
+      "path": "src/main/java/br/com/esl/etl/v2/plataforma/fonte/dataexport/DataExportHttpExecutor.java",
+      "line": 228,
+      "rule": "PreserveStackTrace",
+      "method": "decodeUtf8",
+      "sourceSha256": "784939971b0d5283876e54f337376975ac6b3df4a7a5d11a3aaf3c835c74bfcf",
+      "classification": "SANITIZACAO_DE_DADOS",
+      "rationale": "Falha de UTF-8 vira erro fixo do template, sem cadeia potencialmente ligada a bytes remotos.",
+      "tests": [
+        {
+          "path": "src/test/java/br/com/esl/etl/v2/plataforma/fonte/dataexport/HttpDataExportGatewayTest.java",
+          "sha256": "bf297c719434a7be5d569aac1f7093a5c68ae0b919b745e75959981b999d1553",
+          "className": "br.com.esl.etl.v2.plataforma.fonte.dataexport.HttpDataExportGatewayTest",
+          "testCase": "rejectsMalformedUtf8WithoutReplacementOrRetainedBytes"
+        }
+      ],
+      "proofLimit": "Prova local sintetica e revisao do fluxo indicado; nao certifica outros ramos, fornecedor, producao ou aceite humano."
+    },
+    {
+      "id": "PMD-020",
+      "path": "src/main/java/br/com/esl/etl/v2/plataforma/fonte/dataexport/HttpDataExportGateway.java",
+      "line": 372,
+      "rule": "PreserveStackTrace",
+      "method": "parseResponse",
+      "sourceSha256": "027e76792c1a57b3ebf02560d04cc601807139dee414a8f438bbf2b2be81ba8f",
+      "classification": "SANITIZACAO_DE_DADOS",
+      "rationale": "JsonProcessingException pode reter payload; mensagem fixa com template remove causa bruta da fronteira.",
+      "tests": [
+        {
+          "path": "src/test/java/br/com/esl/etl/v2/plataforma/fonte/dataexport/HttpDataExportGatewayTest.java",
+          "sha256": "bf297c719434a7be5d569aac1f7093a5c68ae0b919b745e75959981b999d1553",
+          "className": "br.com.esl.etl.v2.plataforma.fonte.dataexport.HttpDataExportGatewayTest",
+          "testCase": "sanitizesMalformedJsonWithoutRetainingTheResponsePayload"
+        }
+      ],
+      "proofLimit": "Prova local sintetica e revisao do fluxo indicado; nao certifica outros ramos, fornecedor, producao ou aceite humano."
+    },
+    {
+      "id": "PMD-021",
+      "path": "src/main/java/br/com/esl/etl/v2/plataforma/fonte/dataexport/HttpDataExportTemplateInfoGateway.java",
+      "line": 143,
+      "rule": "PreserveStackTrace",
+      "method": "parseResponse",
+      "sourceSha256": "bf2c8db267a0b2eb45c625365da4da3be14de1cfd9a9c0f4ab74c66d1311335e",
+      "classification": "SANITIZACAO_DE_DADOS",
+      "rationale": "JSON de metadados invalido e reduzido a mensagem/template; evita payload em causa Jackson.",
+      "tests": [
+        {
+          "path": "src/test/java/br/com/esl/etl/v2/plataforma/fonte/dataexport/HttpDataExportTemplateInfoGatewayTest.java",
+          "sha256": "424fc6989e3611b904757f13ce71feed9b6d1e5947f35b1aefe44de8665f66fa",
+          "className": "br.com.esl.etl.v2.plataforma.fonte.dataexport.HttpDataExportTemplateInfoGatewayTest",
+          "testCase": "sanitizesMalformedMetadataJsonWithoutRetainingTheResponsePayload"
+        }
+      ],
+      "proofLimit": "Prova local sintetica e revisao do fluxo indicado; nao certifica outros ramos, fornecedor, producao ou aceite humano."
+    },
+    {
+      "id": "PMD-022",
+      "path": "src/main/java/br/com/esl/etl/v2/plataforma/fonte/graphql/GraphQlHttpExecutor.java",
+      "line": 185,
+      "rule": "PreserveStackTrace",
+      "method": "sendBounded",
+      "sourceSha256": "d4b2d9186efee753c6d108a8df8a4b744cd06bf5ef014872e74c137a20f7c195",
+      "classification": "DESEMPACOTAMENTO_E_SANITIZACAO",
+      "rationale": "unwrap propaga IOException e Error; motivos runtime seguros sao preservados e runtime desconhecido vira GraphQlTransportException sem causa. Wrapper ExecutionException nao e erro primario perdido.",
+      "tests": [
+        {
+          "path": "src/test/java/br/com/esl/etl/v2/plataforma/fonte/graphql/GraphQlHttpExecutorTest.java",
+          "sha256": "895d93ce5bd93287651515df725759708c4332f3c9367034b8931b49b8b4e7b6",
+          "className": "br.com.esl.etl.v2.plataforma.fonte.graphql.GraphQlHttpExecutorTest",
+          "testCase": "sanitizesUnknownRuntimeFailureWithoutRetryOrCause"
+        },
+        {
+          "path": "src/test/java/br/com/esl/etl/v2/plataforma/fonte/graphql/GraphQlHttpExecutorTest.java",
+          "sha256": "895d93ce5bd93287651515df725759708c4332f3c9367034b8931b49b8b4e7b6",
+          "className": "br.com.esl.etl.v2.plataforma.fonte.graphql.GraphQlHttpExecutorTest",
+          "testCase": "propagatesErrorWithoutRetryAndStillReleasesThePermit"
+        }
+      ],
+      "proofLimit": "Prova local sintetica e revisao do fluxo indicado; nao certifica outros ramos, fornecedor, producao ou aceite humano."
+    },
+    {
+      "id": "PMD-023",
+      "path": "src/main/java/br/com/esl/etl/v2/plataforma/fonte/graphql/GraphQlHttpExecutor.java",
+      "line": 245,
+      "rule": "PreserveStackTrace",
+      "method": "decodeUtf8",
+      "sourceSha256": "d4b2d9186efee753c6d108a8df8a4b744cd06bf5ef014872e74c137a20f7c195",
+      "classification": "SANITIZACAO_DE_DADOS",
+      "rationale": "CharacterCodingException vira codigo INVALID_UTF8 sem bytes nem causa remota.",
+      "tests": [
+        {
+          "path": "src/test/java/br/com/esl/etl/v2/plataforma/fonte/graphql/HttpGraphQlGatewayTest.java",
+          "sha256": "eab29ed29dda74cc7f731ad83e1211ec4105cf46e316a3570afdfc24775fd9c5",
+          "className": "br.com.esl.etl.v2.plataforma.fonte.graphql.HttpGraphQlGatewayTest",
+          "testCase": "malformedUtf8IsRejectedWithoutCauseOrRetryAndReleasesItsPermit"
+        }
+      ],
+      "proofLimit": "Prova local sintetica e revisao do fluxo indicado; nao certifica outros ramos, fornecedor, producao ou aceite humano."
+    },
+    {
+      "id": "PMD-024",
+      "path": "src/main/java/br/com/esl/etl/v2/plataforma/fonte/graphql/GraphQlPageStreamer.java",
+      "line": 182,
+      "rule": "PreserveStackTrace",
+      "method": "validatePage",
+      "sourceSha256": "c61c48ce94a27f0f3534d4513828df21fa084f68c6eaa12b7fc755f622a78484",
+      "classification": "TRADUCAO_TIPADA",
+      "rationale": "Overflow de soma de nos vira NODE_LIMIT e impede consumo de pagina; motivo fechado e suficiente ao contrato.",
+      "tests": [
+        {
+          "path": "src/test/java/br/com/esl/etl/v2/plataforma/fonte/graphql/GraphQlPageStreamerTest.java",
+          "sha256": "a9c4e9337e5830ce5146dcd351db2a8227fa90c6c9f143fc6279b1c4788d39d8",
+          "className": "br.com.esl.etl.v2.plataforma.fonte.graphql.GraphQlPageStreamerTest",
+          "testCase": "capsPagesAndNodesBeforeConsumerOrAnotherIo"
+        }
+      ],
+      "proofLimit": "Guard aritmetico defensivo: maxNodes<=10000000 e pagina limitada antes da soma. Estado valido nao alcanca overflowlong. Teste comprova NODE_LIMIT antes do consumidor/novoIO; nao se alega injecao do overflow privado."
+    },
+    {
+      "id": "PMD-025",
+      "path": "src/main/java/br/com/esl/etl/v2/plataforma/fonte/graphql/GraphQlRequestJsonSerializer.java",
+      "line": 33,
+      "rule": "PreserveStackTrace",
+      "method": "serialize",
+      "sourceSha256": "060aea11b346a1e76c5a878d07c54422579422aac23a6b4f9e3613a849e225c5",
+      "classification": "SANITIZACAO_DE_DADOS",
+      "rationale": "Falha Jackson de serializacao nao deve reter query/variaveis/cursor; mensagem fixa remove a causa que poderia incluir esses dados.",
+      "tests": [
+        {
+          "path": "src/test/java/br/com/esl/etl/v2/plataforma/fonte/graphql/GraphQlRequestJsonSerializerTest.java",
+          "sha256": "51c282edabb414015fb9e32ab90cd02d8bfe09d957b6edcc10576aebf4c7236f",
+          "className": "br.com.esl.etl.v2.plataforma.fonte.graphql.GraphQlRequestJsonSerializerTest",
+          "testCase": "serializationFailureDoesNotRetainRequestOrSensitiveCause"
+        }
+      ],
+      "proofLimit": "Prova local sintetica e revisao do fluxo indicado; nao certifica outros ramos, fornecedor, producao ou aceite humano."
+    },
+    {
+      "id": "PMD-026",
+      "path": "src/main/java/br/com/esl/etl/v2/plataforma/fonte/graphql/GraphQlResponseParser.java",
+      "line": 38,
+      "rule": "PreserveStackTrace",
+      "method": "parse",
+      "sourceSha256": "873e3089b0f05a3a01f691d8bdb52e5cea7f5451be63847571039eeb55b3f6a4",
+      "classification": "SANITIZACAO_DE_DADOS",
+      "rationale": "JSON malformado/overflow vira INVALID_JSON, sem documento de origem na cadeia de causas.",
+      "tests": [
+        {
+          "path": "src/test/java/br/com/esl/etl/v2/plataforma/fonte/graphql/GraphQlResponseParserTest.java",
+          "sha256": "16afee556f4a449a17c82e6b6b59342c5445ae611d3bb2def3c4e35293db0fbb",
+          "className": "br.com.esl.etl.v2.plataforma.fonte.graphql.GraphQlResponseParserTest",
+          "testCase": "strictJsonAndRuntimePathBoundaryRejectDuplicateTrailingAndShapeDrift"
+        }
+      ],
+      "proofLimit": "Prova local sintetica e revisao do fluxo indicado; nao certifica outros ramos, fornecedor, producao ou aceite humano."
+    },
+    {
+      "id": "PMD-027",
+      "path": "src/main/java/br/com/esl/etl/v2/plataforma/fonte/graphql/GraphQlResponseParser.java",
+      "line": 96,
+      "rule": "PreserveStackTrace",
+      "method": "parse",
+      "sourceSha256": "873e3089b0f05a3a01f691d8bdb52e5cea7f5451be63847571039eeb55b3f6a4",
+      "classification": "SANITIZACAO_DE_DADOS",
+      "rationale": "Cursor invalido vira INVALID_PAGE_INFO sem conservar valor sensivel do cursor na causa.",
+      "tests": [
+        {
+          "path": "src/test/java/br/com/esl/etl/v2/plataforma/fonte/graphql/GraphQlResponseParserTest.java",
+          "sha256": "16afee556f4a449a17c82e6b6b59342c5445ae611d3bb2def3c4e35293db0fbb",
+          "className": "br.com.esl.etl.v2.plataforma.fonte.graphql.GraphQlResponseParserTest",
+          "testCase": "rejectsInvalidEdgesNodesAndPageInfoWithoutPartialSuccess"
+        }
+      ],
+      "proofLimit": "Prova local sintetica e revisao do fluxo indicado; nao certifica outros ramos, fornecedor, producao ou aceite humano."
+    },
+    {
+      "id": "PMD-028",
+      "path": "src/main/java/br/com/esl/etl/v2/plataforma/identidade/ScopedSourceIdentity.java",
+      "line": 113,
+      "rule": "PreserveStackTrace",
+      "method": "checked",
+      "sourceSha256": "bfe48b97a42e5c520bfae12f3903b91528e2300060e93f44c334483aadfcd17e",
+      "classification": "TRADUCAO_TIPADA",
+      "rationale": "SourceKey invalida e traduzida para IdentityQuarantineException/INVALID_SOURCE_KEY_VALUE; evita valor de chave na quarentena.",
+      "tests": [
+        {
+          "path": "src/test/java/br/com/esl/etl/v2/plataforma/identidade/ScopedSourceIdentityTest.java",
+          "sha256": "a8f1e3147b91a85aad197bee48cfcff7f39f8c7b6cb53c8395a0bcf33deede20",
+          "className": "br.com.esl.etl.v2.plataforma.identidade.ScopedSourceIdentityTest",
+          "testCase": "missingInvalidAndOversizedKeysFailClosedWithoutLeakingValues"
+        }
+      ],
+      "proofLimit": "Prova local sintetica e revisao do fluxo indicado; nao certifica outros ramos, fornecedor, producao ou aceite humano."
+    },
+    {
+      "id": "PMD-029",
+      "path": "src/main/java/br/com/esl/etl/v2/plataforma/persistencia/analitico/JdbcRasterBatch.java",
+      "line": 37,
+      "rule": "CloseResource",
+      "method": "JdbcRasterBatch",
+      "sourceSha256": "5765fcff19157e6d12cc8b6338bf5e0c1a83b0484b3675a300dc3000da5c2d25",
+      "classification": "FALSO_POSITIVO_OWNERSHIP_TRANSFERIDO",
+      "rationale": "No sucesso, child/structure transferem ownership para stops/structures do batch e close fecha os3statements. Em falha SQL/runtime/Error de qualquer prepare/timeout, constructor fecha todos ja adquiridos e preserva principal; close secundario distinto vira suppressed, mesma instancia nao causa self-suppression. O alias prepared do foreach nao e aquisicao nova.",
+      "tests": [
+        {
+          "path": "src/test/java/br/com/esl/etl/v2/plataforma/persistencia/analitico/JdbcRasterBatchTest.java",
+          "sha256": "3089c4fe378c1cbffc218fb1672a73970fdbae6ca2ee8bdaf3fac53f4c78f817",
+          "className": "br.com.esl.etl.v2.plataforma.persistencia.analitico.JdbcRasterBatchTest",
+          "testCase": "failedInitializationClosesOnlyAcquiredStatementsAndRetainsItsFailure"
+        },
+        {
+          "path": "src/test/java/br/com/esl/etl/v2/plataforma/persistencia/analitico/JdbcRasterBatchTest.java",
+          "sha256": "3089c4fe378c1cbffc218fb1672a73970fdbae6ca2ee8bdaf3fac53f4c78f817",
+          "className": "br.com.esl.etl.v2.plataforma.persistencia.analitico.JdbcRasterBatchTest",
+          "testCase": "closesStatementsBeforeObserverInTheOriginalOrder"
+        }
+      ],
+      "proofLimit": "18 combinacoes de6pontos por3classes de falha mais cleanup misto/self-suppression e close de sucesso; doubles JDBC locais, sem alegar falha real do driver ou SQL externo."
+    },
+    {
+      "id": "PMD-030",
+      "path": "src/main/java/br/com/esl/etl/v2/plataforma/persistencia/analitico/JdbcRasterBatch.java",
+      "line": 38,
+      "rule": "CloseResource",
+      "method": "JdbcRasterBatch",
+      "sourceSha256": "5765fcff19157e6d12cc8b6338bf5e0c1a83b0484b3675a300dc3000da5c2d25",
+      "classification": "FALSO_POSITIVO_OWNERSHIP_TRANSFERIDO",
+      "rationale": "No sucesso, child/structure transferem ownership para stops/structures do batch e close fecha os3statements. Em falha SQL/runtime/Error de qualquer prepare/timeout, constructor fecha todos ja adquiridos e preserva principal; close secundario distinto vira suppressed, mesma instancia nao causa self-suppression. O alias prepared do foreach nao e aquisicao nova.",
+      "tests": [
+        {
+          "path": "src/test/java/br/com/esl/etl/v2/plataforma/persistencia/analitico/JdbcRasterBatchTest.java",
+          "sha256": "3089c4fe378c1cbffc218fb1672a73970fdbae6ca2ee8bdaf3fac53f4c78f817",
+          "className": "br.com.esl.etl.v2.plataforma.persistencia.analitico.JdbcRasterBatchTest",
+          "testCase": "failedInitializationClosesOnlyAcquiredStatementsAndRetainsItsFailure"
+        },
+        {
+          "path": "src/test/java/br/com/esl/etl/v2/plataforma/persistencia/analitico/JdbcRasterBatchTest.java",
+          "sha256": "3089c4fe378c1cbffc218fb1672a73970fdbae6ca2ee8bdaf3fac53f4c78f817",
+          "className": "br.com.esl.etl.v2.plataforma.persistencia.analitico.JdbcRasterBatchTest",
+          "testCase": "closesStatementsBeforeObserverInTheOriginalOrder"
+        }
+      ],
+      "proofLimit": "18 combinacoes de6pontos por3classes de falha mais cleanup misto/self-suppression e close de sucesso; doubles JDBC locais, sem alegar falha real do driver ou SQL externo."
+    },
+    {
+      "id": "PMD-031",
+      "path": "src/main/java/br/com/esl/etl/v2/plataforma/persistencia/analitico/JdbcRasterBatch.java",
+      "line": 50,
+      "rule": "CloseResource",
+      "method": "JdbcRasterBatch",
+      "sourceSha256": "5765fcff19157e6d12cc8b6338bf5e0c1a83b0484b3675a300dc3000da5c2d25",
+      "classification": "FALSO_POSITIVO_HANDLE_EMPRESTADO",
+      "rationale": "No sucesso, child/structure transferem ownership para stops/structures do batch e close fecha os3statements. Em falha SQL/runtime/Error de qualquer prepare/timeout, constructor fecha todos ja adquiridos e preserva principal; close secundario distinto vira suppressed, mesma instancia nao causa self-suppression. O alias prepared do foreach nao e aquisicao nova.",
+      "tests": [
+        {
+          "path": "src/test/java/br/com/esl/etl/v2/plataforma/persistencia/analitico/JdbcRasterBatchTest.java",
+          "sha256": "3089c4fe378c1cbffc218fb1672a73970fdbae6ca2ee8bdaf3fac53f4c78f817",
+          "className": "br.com.esl.etl.v2.plataforma.persistencia.analitico.JdbcRasterBatchTest",
+          "testCase": "constructorRetainsOriginalFailureAndClosesAllStatementsAfterMixedCleanupFailures"
+        },
+        {
+          "path": "src/test/java/br/com/esl/etl/v2/plataforma/persistencia/analitico/JdbcRasterBatchTest.java",
+          "sha256": "3089c4fe378c1cbffc218fb1672a73970fdbae6ca2ee8bdaf3fac53f4c78f817",
+          "className": "br.com.esl.etl.v2.plataforma.persistencia.analitico.JdbcRasterBatchTest",
+          "testCase": "constructorStillClosesLaterStatementsWhenCleanupRethrowsTheOriginalFailure"
+        }
+      ],
+      "proofLimit": "18 combinacoes de6pontos por3classes de falha mais cleanup misto/self-suppression e close de sucesso; doubles JDBC locais, sem alegar falha real do driver ou SQL externo."
+    },
+    {
+      "id": "PMD-032",
+      "path": "src/main/java/br/com/esl/etl/v2/plataforma/persistencia/coletas/ColetaTemporalLaboratorySession.java",
+      "line": 185,
+      "rule": "CloseResource",
+      "method": "cancelActiveStatements",
+      "sourceSha256": "bcc9a2426c78f3bb0d27dce67dd77294b2598018c1256894b6e4f11a2bf599ae",
+      "classification": "FALSO_POSITIVO_HANDLE_EMPRESTADO",
+      "rationale": "Iteracao de cancelamento usa Statements de terceiros rastreados; cancel nao transfere ownership e nao deve fechar trabalho ativo.",
+      "tests": [
+        {
+          "path": "src/test/java/br/com/esl/etl/v2/plataforma/persistencia/coletas/ColetaTemporalLaboratorySessionCloseTest.java",
+          "sha256": "05992fa207cf2392eb57d836a5328202a77dab9ff5539bb424a3fe0b14920e3e",
+          "className": "br.com.esl.etl.v2.plataforma.persistencia.coletas.ColetaTemporalLaboratorySessionCloseTest",
+          "testCase": "cancellationBorrowsTrackedHandlesAndPruningDoesNotCloseThemAgain"
+        }
+      ],
+      "proofLimit": "Prova local sintetica e revisao do fluxo indicado; nao certifica outros ramos, fornecedor, producao ou aceite humano."
+    },
+    {
+      "id": "PMD-033",
+      "path": "src/main/java/br/com/esl/etl/v2/plataforma/persistencia/coletas/ColetaTemporalLaboratorySession.java",
+      "line": 211,
+      "rule": "CloseResource",
+      "method": "pruneClosedStatements",
+      "sourceSha256": "bcc9a2426c78f3bb0d27dce67dd77294b2598018c1256894b6e4f11a2bf599ae",
+      "classification": "FALSO_POSITIVO_HANDLE_EMPRESTADO",
+      "rationale": "prune consulta isClosed e remove handles fechados; nao adquire ownership. O consumidor control agora protege prune e timeout: SQL/runtime/Error fecha o novo Statement, preserva causa primaria e nao adiciona self-suppression. Fechar handle emprestado do foreach seria incorreto.",
+      "tests": [
+        {
+          "path": "src/test/java/br/com/esl/etl/v2/plataforma/persistencia/coletas/ColetaTemporalLaboratorySessionCloseTest.java",
+          "sha256": "05992fa207cf2392eb57d836a5328202a77dab9ff5539bb424a3fe0b14920e3e",
+          "className": "br.com.esl.etl.v2.plataforma.persistencia.coletas.ColetaTemporalLaboratorySessionCloseTest",
+          "testCase": "cancellationBorrowsTrackedHandlesAndPruningDoesNotCloseThemAgain"
+        },
+        {
+          "path": "src/test/java/br/com/esl/etl/v2/plataforma/persistencia/coletas/ColetaTemporalLaboratorySessionCloseTest.java",
+          "sha256": "05992fa207cf2392eb57d836a5328202a77dab9ff5539bb424a3fe0b14920e3e",
+          "className": "br.com.esl.etl.v2.plataforma.persistencia.coletas.ColetaTemporalLaboratorySessionCloseTest",
+          "testCase": "statementSetupRetainsPrimaryFailureAndClosesNewHandleExactlyOnce"
+        }
+      ],
+      "proofLimit": "Prova local sintetica e revisao do fluxo indicado; nao certifica outros ramos, fornecedor, producao ou aceite humano."
+    },
+    {
+      "id": "PMD-034",
+      "path": "src/main/java/br/com/esl/etl/v2/plataforma/persistencia/controle/BoundedRuntimeDataSource.java",
+      "line": 87,
+      "rule": "CloseResource",
+      "method": "getConnection",
+      "sourceSha256": "1b0296a6e856e9354957a8b8080b3c2fb8ae1f9bdcab0663cb8de0691a1ce771",
+      "classification": "FALSO_POSITIVO_OWNERSHIP_TRANSFERIDO",
+      "rationale": "Connection alias transfere ownership ao proxy. Falha de abertura/preflight SQL/runtime/Error fecha conexao adquirida e libera permit em finally; falha de statement setup fecha handle e preserva causa sem self-suppression. AtomicBoolean garante apenas um close fisico e uma liberacao de permit em fechamentos sobrepostos.",
+      "tests": [
+        {
+          "path": "src/test/java/br/com/esl/etl/v2/plataforma/persistencia/controle/RuntimeJdbcBoundariesTest.java",
+          "sha256": "89b76fc3f7b4bb9d585ff96b6018792601e83314637ed307989eda29a05ed79d",
+          "className": "br.com.esl.etl.v2.plataforma.persistencia.controle.RuntimeJdbcBoundariesTest",
+          "testCase": "workloadConnectionsValidateTargetLimitConcurrencyAndReleaseOnEveryClose"
+        },
+        {
+          "path": "src/test/java/br/com/esl/etl/v2/plataforma/persistencia/controle/RuntimeJdbcBoundariesTest.java",
+          "sha256": "89b76fc3f7b4bb9d585ff96b6018792601e83314637ed307989eda29a05ed79d",
+          "className": "br.com.esl.etl.v2.plataforma.persistencia.controle.RuntimeJdbcBoundariesTest",
+          "testCase": "failedPreflightClosesTheConnectionAndReleasesItsPermitAfterAnyCleanupFailure"
+        },
+        {
+          "path": "src/test/java/br/com/esl/etl/v2/plataforma/persistencia/controle/RuntimeJdbcBoundariesTest.java",
+          "sha256": "89b76fc3f7b4bb9d585ff96b6018792601e83314637ed307989eda29a05ed79d",
+          "className": "br.com.esl.etl.v2.plataforma.persistencia.controle.RuntimeJdbcBoundariesTest",
+          "testCase": "failedOpenerReleasesItsPermitEvenWhenItThrowsAnError"
+        },
+        {
+          "path": "src/test/java/br/com/esl/etl/v2/plataforma/persistencia/controle/RuntimeJdbcBoundariesTest.java",
+          "sha256": "89b76fc3f7b4bb9d585ff96b6018792601e83314637ed307989eda29a05ed79d",
+          "className": "br.com.esl.etl.v2.plataforma.persistencia.controle.RuntimeJdbcBoundariesTest",
+          "testCase": "overlappingClosesReleaseOnePermitOnlyAfterThePhysicalCloseFinishes"
+        }
+      ],
+      "proofLimit": "Doubles JDBC exercitam falhas e sobreposicao controlada de close; nao representa incidente real de driver, falha fatal de JVM ou qualification SQL por si so."
+    },
+    {
+      "id": "PMD-035",
+      "path": "src/main/java/br/com/esl/etl/v2/plataforma/resiliencia/BoundedWindowRepartitioner.java",
+      "line": 48,
+      "rule": "PreserveStackTrace",
+      "method": "split",
+      "sourceSha256": "3e8252684512874982bd71ff7893476b5d97c935d4e78982117c4f39dba22f3d",
+      "classification": "TRADUCAO_TIPADA",
+      "rationale": "Duration.dividedBy overflow vira WINDOW_OUT_OF_RANGE; recusa fail-closed tipada em vez de detalhe aritmetico generico.",
+      "tests": [
+        {
+          "path": "src/test/java/br/com/esl/etl/v2/plataforma/resiliencia/BoundedWindowRepartitionerTest.java",
+          "sha256": "771df4ecc347136b534c577df9769a0fb27c9e00127a5a1142dc246b113c6956",
+          "className": "br.com.esl.etl.v2.plataforma.resiliencia.BoundedWindowRepartitionerTest",
+          "testCase": "validatesWindowAndUnit"
+        }
+      ],
+      "proofLimit": "Prova local sintetica e revisao do fluxo indicado; nao certifica outros ramos, fornecedor, producao ou aceite humano."
+    },
+    {
+      "id": "PMD-036",
+      "path": "src/main/java/br/com/esl/etl/v2/plataforma/resiliencia/BoundedWindowRepartitioner.java",
+      "line": 61,
+      "rule": "PreserveStackTrace",
+      "method": "split",
+      "sourceSha256": "3e8252684512874982bd71ff7893476b5d97c935d4e78982117c4f39dba22f3d",
+      "classification": "TRADUCAO_TIPADA",
+      "rationale": "Overflow ao calcular midpoint vira WINDOW_OUT_OF_RANGE, nao produz divisao incompleta. Motivo tipado e contrato da operacao.",
+      "tests": [
+        {
+          "path": "src/test/java/br/com/esl/etl/v2/plataforma/resiliencia/BoundedWindowRepartitionerTest.java",
+          "sha256": "771df4ecc347136b534c577df9769a0fb27c9e00127a5a1142dc246b113c6956",
+          "className": "br.com.esl.etl.v2.plataforma.resiliencia.BoundedWindowRepartitionerTest",
+          "testCase": "repeatedSplitsTerminateWithExactSemiOpenCoverageForEverySupportedUnitCount"
+        }
+      ],
+      "proofLimit": "Guard defensivo: apos alinhamento, unit*(units/2)<=duration; midpoint fica entre endpointsInstant validos. Teste comprova cobertura contigua, limites, budget e terminacao; nao força overflow impossivel sob essas invariantes."
+    }
+  ]
+}

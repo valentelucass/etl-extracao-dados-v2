@@ -1,0 +1,451 @@
+{
+  "coverage": {
+    "LINE": 91.78,
+    "BRANCH": 76.73
+  },
+  "directedTests": 60,
+  "javaPhysicalJdbc": false,
+  "directedRevision": "BEFORE_FOUR_RAW_CONSISTENCY_CASES",
+  "fullPhase": "verify-01",
+  "newJavaTests": 26,
+  "remoteCalls": 0,
+  "sql": {
+    "passed": true,
+    "physicalSql": true,
+    "syntheticOnly": true,
+    "transactionalDdl": true,
+    "durableDdl": false,
+    "durableDomainRows": 0,
+    "remoteCalls": 0,
+    "sourceTemporalEquivalenceAccepted": false,
+    "representativeAcceptance": false,
+    "proposalSha256": "3cd8ce7a7ae1ab20978a367985fe828901a7701736c88139b626c17ec66a0f84",
+    "scriptSha256": "a95c9acc13696433fc121ca64f332850bf3c29512ddcd9b82342eafd7b709c51",
+    "cases": [
+      {
+        "case": "MATCH",
+        "expectedError": 0,
+        "observedError": 0,
+        "passed": true,
+        "rollbackConfirmed": true,
+        "failure": null,
+        "summary": {
+          "blocked": 0,
+          "considered": 1,
+          "candidates": 1
+        },
+        "outcome": "COMPLEMENTED"
+      },
+      {
+        "case": "IDENTICAL_REFERENCE_REPEAT",
+        "expectedError": 0,
+        "observedError": 0,
+        "passed": true,
+        "rollbackConfirmed": true,
+        "failure": null,
+        "summary": {
+          "blocked": 0,
+          "considered": 1,
+          "candidates": 1
+        },
+        "outcome": "COMPLEMENTED"
+      },
+      {
+        "case": "CONFLICTING_REFERENCE_TIME",
+        "expectedError": 0,
+        "observedError": 0,
+        "passed": true,
+        "rollbackConfirmed": true,
+        "failure": null,
+        "summary": {
+          "blocked": 1,
+          "considered": 1,
+          "candidates": 0
+        },
+        "outcome": "REFERENCE_CONFLICT"
+      },
+      {
+        "case": "CONFLICTING_REFERENCE_STATUS",
+        "expectedError": 0,
+        "observedError": 0,
+        "passed": true,
+        "rollbackConfirmed": true,
+        "failure": null,
+        "summary": {
+          "blocked": 1,
+          "considered": 1,
+          "candidates": 0
+        },
+        "outcome": "REFERENCE_CONFLICT"
+      },
+      {
+        "case": "SUBMILLISECOND_CONFLICT",
+        "expectedError": 0,
+        "observedError": 0,
+        "passed": true,
+        "rollbackConfirmed": true,
+        "failure": null,
+        "summary": {
+          "blocked": 1,
+          "considered": 1,
+          "candidates": 0
+        },
+        "outcome": "REFERENCE_CONFLICT"
+      },
+      {
+        "case": "RETRY_IDENTICAL",
+        "expectedError": 0,
+        "observedError": 0,
+        "passed": true,
+        "rollbackConfirmed": true,
+        "failure": null,
+        "summary": {
+          "blocked": 0,
+          "considered": 1,
+          "candidates": 1
+        },
+        "outcome": "COMPLEMENTED"
+      },
+      {
+        "case": "RETRY_DIVERGENT",
+        "expectedError": 53002,
+        "observedError": 53002,
+        "passed": true,
+        "rollbackConfirmed": true,
+        "failure": null
+      },
+      {
+        "case": "LATE_STAGE",
+        "expectedError": 53003,
+        "observedError": 53003,
+        "passed": true,
+        "rollbackConfirmed": true,
+        "failure": null
+      },
+      {
+        "case": "CAPTURE_INCOMPLETE",
+        "expectedError": 53004,
+        "observedError": 53004,
+        "passed": true,
+        "rollbackConfirmed": true,
+        "failure": null
+      },
+      {
+        "case": "ORDINAL_GAP",
+        "expectedError": 53004,
+        "observedError": 53004,
+        "passed": true,
+        "rollbackConfirmed": true,
+        "failure": null
+      },
+      {
+        "case": "CONTRACT_DRIFT",
+        "expectedError": 53000,
+        "observedError": 53000,
+        "passed": true,
+        "rollbackConfirmed": true,
+        "failure": null
+      },
+      {
+        "case": "SELECTION_DRIFT",
+        "expectedError": 53000,
+        "observedError": 53000,
+        "passed": true,
+        "rollbackConfirmed": true,
+        "failure": null
+      },
+      {
+        "case": "RUN_SCOPE_DRIFT",
+        "expectedError": 53001,
+        "observedError": 53001,
+        "passed": true,
+        "rollbackConfirmed": true,
+        "failure": null
+      },
+      {
+        "case": "TENANT_BINDING",
+        "expectedError": 53006,
+        "observedError": 53006,
+        "passed": true,
+        "rollbackConfirmed": true,
+        "failure": null
+      },
+      {
+        "case": "AMBIGUOUS_BINDING",
+        "expectedError": 53007,
+        "observedError": 53007,
+        "passed": true,
+        "rollbackConfirmed": true,
+        "failure": null
+      },
+      {
+        "case": "BINDING_ABSENT",
+        "expectedError": 0,
+        "observedError": 0,
+        "passed": true,
+        "rollbackConfirmed": true,
+        "failure": null,
+        "summary": {
+          "blocked": 1,
+          "considered": 1,
+          "candidates": 0
+        },
+        "outcome": "BINDING_ABSENT"
+      },
+      {
+        "case": "REFERENCE_ABSENT",
+        "expectedError": 0,
+        "observedError": 0,
+        "passed": true,
+        "rollbackConfirmed": true,
+        "failure": null,
+        "summary": {
+          "blocked": 1,
+          "considered": 1,
+          "candidates": 0
+        },
+        "outcome": "REFERENCE_ABSENT"
+      },
+      {
+        "case": "WINDOW_MISMATCH",
+        "expectedError": 0,
+        "observedError": 0,
+        "passed": true,
+        "rollbackConfirmed": true,
+        "failure": null,
+        "summary": {
+          "blocked": 1,
+          "considered": 1,
+          "candidates": 0
+        },
+        "outcome": "WINDOW_MISMATCH"
+      },
+      {
+        "case": "STATUS_MISMATCH",
+        "expectedError": 0,
+        "observedError": 0,
+        "passed": true,
+        "rollbackConfirmed": true,
+        "failure": null,
+        "summary": {
+          "blocked": 1,
+          "considered": 1,
+          "candidates": 0
+        },
+        "outcome": "STATUS_MISMATCH"
+      },
+      {
+        "case": "NULL_TIME",
+        "expectedError": 0,
+        "observedError": 0,
+        "passed": true,
+        "rollbackConfirmed": true,
+        "failure": null,
+        "summary": {
+          "blocked": 1,
+          "considered": 1,
+          "candidates": 0
+        },
+        "outcome": "REFERENCE_INVALID"
+      },
+      {
+        "case": "ABSENT_TIME",
+        "expectedError": 0,
+        "observedError": 0,
+        "passed": true,
+        "rollbackConfirmed": true,
+        "failure": null,
+        "summary": {
+          "blocked": 1,
+          "considered": 1,
+          "candidates": 0
+        },
+        "outcome": "REFERENCE_INVALID"
+      },
+      {
+        "case": "INVALID_TIME",
+        "expectedError": 0,
+        "observedError": 0,
+        "passed": true,
+        "rollbackConfirmed": true,
+        "failure": null,
+        "summary": {
+          "blocked": 1,
+          "considered": 1,
+          "candidates": 0
+        },
+        "outcome": "REFERENCE_INVALID"
+      },
+      {
+        "case": "NATIVE_MATCH",
+        "expectedError": 0,
+        "observedError": 0,
+        "passed": true,
+        "rollbackConfirmed": true,
+        "failure": null,
+        "summary": {
+          "blocked": 0,
+          "considered": 1,
+          "candidates": 1
+        },
+        "outcome": "DATA_EXPORT_TIME_RETAINED"
+      },
+      {
+        "case": "NATIVE_LEXEME_UNPROVEN",
+        "expectedError": 0,
+        "observedError": 0,
+        "passed": true,
+        "rollbackConfirmed": true,
+        "failure": null,
+        "summary": {
+          "blocked": 1,
+          "considered": 1,
+          "candidates": 0
+        },
+        "outcome": "NATIVE_PRECISION_UNVERIFIED"
+      },
+      {
+        "case": "DATA_EXPANSION",
+        "expectedError": 0,
+        "observedError": 0,
+        "passed": true,
+        "rollbackConfirmed": true,
+        "failure": null,
+        "summary": {
+          "blocked": 0,
+          "considered": 2,
+          "candidates": 2
+        },
+        "outcome": "COMPLEMENTED"
+      },
+      {
+        "case": "DATA_ROOT_CONFLICT",
+        "expectedError": 0,
+        "observedError": 0,
+        "passed": true,
+        "rollbackConfirmed": true,
+        "failure": null,
+        "summary": {
+          "blocked": 2,
+          "considered": 2,
+          "candidates": 0
+        },
+        "outcome": "DATA_EXPORT_ROOT_CONFLICT"
+      },
+      {
+        "case": "DATA_NOT_STAGED",
+        "expectedError": 53006,
+        "observedError": 53006,
+        "passed": true,
+        "rollbackConfirmed": true,
+        "failure": null
+      },
+      {
+        "case": "CANCELED_MATCH",
+        "expectedError": 0,
+        "observedError": 0,
+        "passed": true,
+        "rollbackConfirmed": true,
+        "failure": null,
+        "summary": {
+          "blocked": 0,
+          "considered": 1,
+          "candidates": 1
+        },
+        "outcome": "COMPLEMENTED"
+      },
+      {
+        "case": "FINISHED_MATCH",
+        "expectedError": 0,
+        "observedError": 0,
+        "passed": true,
+        "rollbackConfirmed": true,
+        "failure": null,
+        "summary": {
+          "blocked": 0,
+          "considered": 1,
+          "candidates": 1
+        },
+        "outcome": "COMPLEMENTED"
+      },
+      {
+        "case": "DONE_VS_FINISHED",
+        "expectedError": 0,
+        "observedError": 0,
+        "passed": true,
+        "rollbackConfirmed": true,
+        "failure": null,
+        "summary": {
+          "blocked": 1,
+          "considered": 1,
+          "candidates": 0
+        },
+        "outcome": "STATUS_MISMATCH"
+      },
+      {
+        "case": "QUARANTINE",
+        "expectedError": 0,
+        "observedError": 0,
+        "passed": true,
+        "rollbackConfirmed": true,
+        "failure": null,
+        "summary": {
+          "blocked": 1,
+          "considered": 2,
+          "candidates": 1
+        },
+        "outcome": "COMPLEMENTED"
+      },
+      {
+        "case": "UNKNOWN_STATUS",
+        "expectedError": 0,
+        "observedError": 0,
+        "passed": true,
+        "rollbackConfirmed": true,
+        "failure": null,
+        "summary": {
+          "blocked": 1,
+          "considered": 1,
+          "candidates": 0
+        },
+        "outcome": "STATUS_MISMATCH"
+      },
+      {
+        "case": "UTC_EDGE",
+        "expectedError": 0,
+        "observedError": 0,
+        "passed": true,
+        "rollbackConfirmed": true,
+        "failure": null,
+        "summary": {
+          "blocked": 0,
+          "considered": 1,
+          "candidates": 1
+        },
+        "outcome": "COMPLEMENTED"
+      },
+      {
+        "case": "CONCURRENT_REFERENCE_GUARD",
+        "expectedError": 0,
+        "observedError": 0,
+        "passed": true,
+        "rollbackConfirmed": true,
+        "failure": null,
+        "summary": {
+          "blocked": 0,
+          "considered": 1,
+          "candidates": 1
+        },
+        "outcome": "COMPLEMENTED"
+      }
+    ]
+  },
+  "passed": true,
+  "offlineJava": true,
+  "full": {
+    "tests": 1556,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 4
+  }
+}

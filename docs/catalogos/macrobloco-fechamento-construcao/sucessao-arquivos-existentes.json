@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "predecessorSha256": "9eb1784292288fad57d5b636b36b8569ffaf3657fc154a37391b378733f652ce",
+  "paths": [
+    "STATES.md",
+    "docs/continuidade/RETOMADA.md",
+    "docs/runbooks/trilha-de-chats-gpt-5-6.md",
+    "scripts/validation/QualificationLaboratorySuccession.psm1",
+    "scripts/validation/Test-QualificationLaboratory.ps1",
+    "src/main/java/br/com/esl/etl/v2/bootstrap/QualificationSupervisor.java"
+  ]
+}

@@ -1,0 +1,75 @@
+{
+  "status": "SUCCESSION_AND_TRAIL_PASS",
+  "unit": {
+    "path": "target/avanco-seguranca-20260922-01/unit-check-04/result.json",
+    "sha256": "073bb6040659385a4ada7297c9fbe31763d388da2e4c9f7e38a35bb95907689d",
+    "tests": 2186,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 4,
+    "newCases": 24
+  },
+  "staticAnalysis": {
+    "path": "target/avanco-seguranca-20260922-01/static-analysis-main-02/result.json",
+    "sha256": "1ce587bd422f96bcb3cd4c751b682c69d11deb74ff99d5a7f8d4465491ffcb0c",
+    "state": "FINDINGS_OPEN",
+    "sources": 653,
+    "rules": 10,
+    "findings": 37
+  },
+  "selfTest": {
+    "path": "target/avanco-seguranca-20260922-01/static-analysis-tests-01/result.json",
+    "sha256": "3d68317d6030d9b79667d1640bbb3c9557d3c030971f95258675d3853d0c0797",
+    "cases": 12
+  },
+  "sourceReadback": {
+    "path": "target/avanco-seguranca-20260922-01/source-readback.json",
+    "sha256": "867cd8bc02235d355ea894e57efba6e935749537af99f972324bc3c6031d8b66"
+  },
+  "checks": [
+    {
+      "path": "target/avanco-seguranca-20260922-01/validation-succession-01-result.json",
+      "sha256": "0c93e3aa784b982a54ab2d993a1f09cf2b908e36b9d0e47d8f82757b8fb5cd7e",
+      "result": {
+        "id": "validation-succession-01",
+        "script": "target/avanco-seguranca-20260922-01/succession-check.ps1",
+        "args": [],
+        "layer": "OFFLINE_DOCUMENTARY",
+        "maximumSeconds": 180,
+        "sourceCalls": 0,
+        "databaseCalls": 0,
+        "utc": "2026-09-22T04:25:49.301Z",
+        "elapsedMilliseconds": 65147,
+        "exit": 0,
+        "timedOut": false,
+        "passed": true,
+        "stdoutSha256": "47284efe50f804caf3eeb01788ba915708eb12f438923e5ce57393e1b44d3b98",
+        "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "path": "target/avanco-seguranca-20260922-01/validation-trail-01-result.json",
+      "sha256": "e36f6b80539b1050518b0539031e8191d31c13e77ded5570f6522546cb5ecf36",
+      "result": {
+        "id": "validation-trail-01",
+        "script": "scripts/validation/Test-Gpt56ChatTrail.ps1",
+        "args": [],
+        "layer": "OFFLINE_DOCUMENTARY",
+        "maximumSeconds": 480,
+        "sourceCalls": 0,
+        "databaseCalls": 0,
+        "utc": "2026-09-22T04:29:48.549Z",
+        "elapsedMilliseconds": 303441,
+        "exit": 0,
+        "timedOut": false,
+        "passed": true,
+        "stdoutSha256": "624cf8745192e08e633174136c6a19c5ec4aca77162e538068e2d18465f14e55",
+        "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  ],
+  "finalReceipt": "target/avanco-seguranca-20260922-01/closed-receipt.json",
+  "finalScanAndReadback": "Consult final receipt; not inferred from prior manifests",
+  "physicalQualification": false,
+  "newAcceptances": 0
+}

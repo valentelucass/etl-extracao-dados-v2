@@ -94,6 +94,12 @@ $showplanGate = Get-Content -LiteralPath $showplanGatePath -Raw -Encoding utf8
 $adr = Get-Content -LiteralPath $adrPath -Raw -Encoding utf8
 $runbook = Get-Content -LiteralPath $runbookPath -Raw -Encoding utf8
 
+Require-True (Test-OrdinalContains $validator '@authorized_downstream_objects' `
+        -and (Test-OrdinalContains $validator "(N'coleta_sequence_code_alias', N'U')") `
+        -and (Test-OrdinalContains $validator `
+            'extensões downstream allowlisted')) `
+    'O validator V008 não reconcilia de modo exato a extensão ref de Coletas V010.'
+
 Require-True ($manifest.manifestVersion -eq 1) 'A versão do manifesto de referências deve ser 1.'
 Require-True ($manifest.roadmapTask -ceq 'V2-035a') 'O manifesto deve pertencer a V2-035a.'
 Require-True ($manifest.localState -ceq `

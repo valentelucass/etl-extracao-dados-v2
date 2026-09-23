@@ -1,0 +1,238 @@
+{
+  "schemaVersion": "v2-041-sanitized-attestation-v1",
+  "evidenceKind": "SYNTHETIC_CONTRACT_TEST_ONLY",
+  "scope": "V2-041",
+  "roadmapEffect": "NONE",
+  "closureState": "V2_041_REMAINS_EXTERNAL_HOLD",
+  "assertedOverallResult": "ASSERTED_PASS",
+  "restrictedEvidenceReferenceRecorded": true,
+  "attestedAtUtc": "2000-01-01T00:30:00Z",
+  "continuity": {
+    "legacyWriterHealthy": "ASSERTED_PASS",
+    "mandatoryJobsHealthy": "ASSERTED_PASS",
+    "concurrentWriterAbsent": "ASSERTED_PASS",
+    "rollbackPlanReady": "ASSERTED_PASS",
+    "checkedAtUtc": "2000-01-01T00:25:00Z"
+  },
+  "credentialClasses": [
+    {
+      "credentialClass": "ESL_REST",
+      "ownerRole": "LEGACY_OWNER",
+      "disposition": "RETIRED",
+      "liveConsumers": {
+        "jobs": 0,
+        "services": 0,
+        "operators": 0,
+        "ci": 0,
+        "workstations": 0
+      },
+      "assertedPreChangeHealth": "ASSERTED_PASS",
+      "assertedReplacementState": "NOT_APPLICABLE",
+      "assertedReloadState": "NOT_APPLICABLE",
+      "assertedPostChangeHealth": "NOT_APPLICABLE",
+      "assertedPreviousCredentialInvalidation": "ASSERTED_PASS",
+      "assertedRollbackState": "ASSERTED_PASS",
+      "completedAtUtc": "2000-01-01T00:10:00Z"
+    },
+    {
+      "credentialClass": "ESL_GRAPHQL",
+      "ownerRole": "ESL_INTEGRATION_OWNER",
+      "disposition": "ROTATED",
+      "liveConsumers": {
+        "jobs": 1,
+        "services": 1,
+        "operators": 0,
+        "ci": 0,
+        "workstations": 0
+      },
+      "assertedPreChangeHealth": "ASSERTED_PASS",
+      "assertedReplacementState": "ASSERTED_PASS",
+      "assertedReloadState": "ASSERTED_PASS",
+      "assertedPostChangeHealth": "ASSERTED_PASS",
+      "assertedPreviousCredentialInvalidation": "ASSERTED_PASS",
+      "assertedRollbackState": "ASSERTED_PASS",
+      "completedAtUtc": "2000-01-01T00:11:00Z"
+    },
+    {
+      "credentialClass": "ESL_DATA_EXPORT",
+      "ownerRole": "ESL_INTEGRATION_OWNER",
+      "disposition": "ROTATED",
+      "liveConsumers": {
+        "jobs": 1,
+        "services": 1,
+        "operators": 0,
+        "ci": 0,
+        "workstations": 0
+      },
+      "assertedPreChangeHealth": "ASSERTED_PASS",
+      "assertedReplacementState": "ASSERTED_PASS",
+      "assertedReloadState": "ASSERTED_PASS",
+      "assertedPostChangeHealth": "ASSERTED_PASS",
+      "assertedPreviousCredentialInvalidation": "ASSERTED_PASS",
+      "assertedRollbackState": "ASSERTED_PASS",
+      "completedAtUtc": "2000-01-01T00:12:00Z"
+    },
+    {
+      "credentialClass": "RASTER",
+      "ownerRole": "RASTER_OWNER",
+      "disposition": "DISABLED",
+      "liveConsumers": {
+        "jobs": 0,
+        "services": 0,
+        "operators": 0,
+        "ci": 0,
+        "workstations": 0
+      },
+      "assertedPreChangeHealth": "ASSERTED_PASS",
+      "assertedReplacementState": "NOT_APPLICABLE",
+      "assertedReloadState": "NOT_APPLICABLE",
+      "assertedPostChangeHealth": "NOT_APPLICABLE",
+      "assertedPreviousCredentialInvalidation": "ASSERTED_PASS",
+      "assertedRollbackState": "ASSERTED_PASS",
+      "completedAtUtc": "2000-01-01T00:13:00Z"
+    },
+    {
+      "credentialClass": "SQL_SERVER_LEGACY",
+      "ownerRole": "DBA",
+      "disposition": "ROTATED",
+      "liveConsumers": {
+        "jobs": 1,
+        "services": 1,
+        "operators": 0,
+        "ci": 0,
+        "workstations": 0
+      },
+      "assertedPreChangeHealth": "ASSERTED_PASS",
+      "assertedReplacementState": "ASSERTED_PASS",
+      "assertedReloadState": "ASSERTED_PASS",
+      "assertedPostChangeHealth": "ASSERTED_PASS",
+      "assertedPreviousCredentialInvalidation": "ASSERTED_PASS",
+      "assertedRollbackState": "ASSERTED_PASS",
+      "completedAtUtc": "2000-01-01T00:14:00Z"
+    },
+    {
+      "credentialClass": "V2_SHADOW_TESTS",
+      "ownerRole": "V2_ENVIRONMENT_OWNER",
+      "disposition": "ROTATED",
+      "liveConsumers": {
+        "jobs": 0,
+        "services": 0,
+        "operators": 1,
+        "ci": 0,
+        "workstations": 1
+      },
+      "assertedPreChangeHealth": "ASSERTED_PASS",
+      "assertedReplacementState": "ASSERTED_PASS",
+      "assertedReloadState": "ASSERTED_PASS",
+      "assertedPostChangeHealth": "ASSERTED_PASS",
+      "assertedPreviousCredentialInvalidation": "ASSERTED_PASS",
+      "assertedRollbackState": "ASSERTED_PASS",
+      "completedAtUtc": "2000-01-01T00:15:00Z"
+    }
+  ],
+  "approvals": [
+    {
+      "role": "SECURITY",
+      "decision": "ASSERTED_APPROVED",
+      "nominalIdentityStoredRestricted": true,
+      "attestedAtUtc": "2000-01-01T00:29:00Z"
+    },
+    {
+      "role": "LEGACY_OWNER",
+      "decision": "ASSERTED_APPROVED",
+      "nominalIdentityStoredRestricted": true,
+      "attestedAtUtc": "2000-01-01T00:29:00Z"
+    },
+    {
+      "role": "LEGACY_OPERATIONS",
+      "decision": "ASSERTED_APPROVED",
+      "nominalIdentityStoredRestricted": true,
+      "attestedAtUtc": "2000-01-01T00:29:00Z"
+    },
+    {
+      "role": "ESL_INTEGRATION_OWNER",
+      "decision": "ASSERTED_APPROVED",
+      "nominalIdentityStoredRestricted": true,
+      "attestedAtUtc": "2000-01-01T00:29:00Z"
+    },
+    {
+      "role": "RASTER_OWNER",
+      "decision": "ASSERTED_APPROVED",
+      "nominalIdentityStoredRestricted": true,
+      "attestedAtUtc": "2000-01-01T00:29:00Z"
+    },
+    {
+      "role": "DBA",
+      "decision": "ASSERTED_APPROVED",
+      "nominalIdentityStoredRestricted": true,
+      "attestedAtUtc": "2000-01-01T00:29:00Z"
+    },
+    {
+      "role": "V2_ENVIRONMENT_OWNER",
+      "decision": "ASSERTED_APPROVED",
+      "nominalIdentityStoredRestricted": true,
+      "attestedAtUtc": "2000-01-01T00:29:00Z"
+    }
+  ],
+  "scans": [
+    {
+      "tool": "OFFLINE_SECRET_SCAN",
+      "scope": "WORKTREE",
+      "version": "REPOSITORY_CURRENT",
+      "result": "ASSERTED_PASS",
+      "assertedScopeComplete": "ASSERTED_PASS",
+      "candidateItems": 10,
+      "inspectedItems": 10,
+      "uninspectedItems": 0,
+      "oversizedUninspectedItems": 0,
+      "findings": 0,
+      "repositorySha": "1111111111111111111111111111111111111111",
+      "executedAtUtc": "2000-01-01T00:26:00Z"
+    },
+    {
+      "tool": "GITLEAKS",
+      "scope": "WORKTREE",
+      "version": "8.29.1",
+      "result": "ASSERTED_PASS",
+      "assertedScopeComplete": "ASSERTED_PASS",
+      "candidateItems": 10,
+      "inspectedItems": 10,
+      "uninspectedItems": 0,
+      "oversizedUninspectedItems": 0,
+      "findings": 0,
+      "repositorySha": "1111111111111111111111111111111111111111",
+      "executedAtUtc": "2000-01-01T00:27:00Z"
+    },
+    {
+      "tool": "GITLEAKS",
+      "scope": "GIT_HISTORY",
+      "version": "8.29.1",
+      "result": "ASSERTED_PASS",
+      "assertedScopeComplete": "ASSERTED_PASS",
+      "candidateItems": 2,
+      "inspectedItems": 2,
+      "uninspectedItems": 0,
+      "oversizedUninspectedItems": 0,
+      "findings": 0,
+      "repositorySha": "1111111111111111111111111111111111111111",
+      "executedAtUtc": "2000-01-01T00:28:00Z"
+    }
+  ],
+  "declarations": {
+    "containsSecretValues": false,
+    "containsCredentialNames": false,
+    "containsUrls": false,
+    "containsTenantIdentifiers": false,
+    "containsPayloads": false,
+    "containsCursors": false,
+    "containsBusinessIdentifiers": false
+  },
+  "limitations": [
+    "NO_REMOTE_CHECK_BY_VALIDATOR",
+    "NO_AUTHENTICITY_VERIFICATION",
+    "NO_OPERATIONAL_TRUTH_ESTABLISHED",
+    "NO_NOMINAL_OWNER_ACCEPTANCE_VERIFICATION",
+    "NO_V2_041_STATE_CHANGE",
+    "NO_DOWNSTREAM_AUTHORIZATION_INHERITANCE"
+  ]
+}

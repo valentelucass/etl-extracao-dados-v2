@@ -1,11 +1,16 @@
 package br.com.esl.etl.v2.arquitetura;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import br.com.esl.etl.v2.bootstrap.Main;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.sun.source.tree.CompilationUnitTree;
+import com.sun.source.tree.MemberSelectTree;
+import com.sun.source.util.JavacTask;
+import com.sun.source.util.TreeScanner;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.lang.reflect.GenericArrayType;
@@ -15,6 +20,7 @@ import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.lang.reflect.TypeVariable;
 import java.lang.reflect.WildcardType;
+import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -34,9 +40,105 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.BaseStream;
 import java.util.stream.Stream;
+import javax.tools.JavaFileObject;
+import javax.tools.SimpleJavaFileObject;
+import javax.tools.ToolProvider;
 import org.junit.jupiter.api.Test;
 
 public class ArchitectureRulesTest {
+
+    @Test
+    void moduleDomainsMustNotDependOnJsonOrInfrastructure() throws Exception {
+        assertDomainBoundary(mainJavaSources());
+    }
+
+    @Test
+    void domainBoundaryRejectsImportsAndFullyQualifiedMethodBodyDependencies() throws Exception {
+        for (final String dependency :
+                List.of(
+                        "import com.fasterxml.jackson.databind.ObjectMapper; class Example {}",
+                        "class Example { Object read() { return new "
+                                + "com.fasterxml.jackson.databind.ObjectMapper(); } }",
+                        "import java.sql.Connection; class Example {}",
+                        "import java.net.http.HttpClient; class Example {}",
+                        "import br.com.esl.etl.v2.modulos.coletas.aplicacao.ColetaDataExportRecordMapper; "
+                                + "class Example {}")) {
+            final SourceFile fixture =
+                    new SourceFile(
+                            "Example.java",
+                            "package br.com.esl.etl.v2.modulos.qualquer.domain; " + dependency);
+            final AssertionError rejection =
+                    assertThrows(
+                            AssertionError.class, () -> assertDomainBoundary(List.of(fixture)));
+            assertTrue(rejection.getMessage().contains("Example.java"));
+        }
+        assertDomainBoundary(
+                List.of(
+                        new SourceFile(
+                                "Example.java",
+                                """
+                package br.com.esl.etl.v2.modulos.qualquer.domain;
+                // com.fasterxml.jackson.databind.ObjectMapper is forbidden in executable code.
+                class Example { String description = "java.sql.Connection"; }
+                """),
+                        new SourceFile(
+                                "Adapter.java",
+                                """
+                package br.com.esl.etl.v2.modulos.qualquer.aplicacao;
+                import com.fasterxml.jackson.databind.ObjectMapper;
+                class Adapter {}
+                """)));
+    }
+
+    private static void assertDomainBoundary(final Collection<SourceFile> sources)
+            throws IOException {
+        final Pattern domain = Pattern.compile("(?:^|\\.)(?:domain|dominio)(?:\\.|$)");
+        final Pattern forbidden =
+                Pattern.compile(
+                        "^(?:com\\.fasterxml\\.jackson|com\\.google\\.gson|org\\.json|java\\.sql|javax\\.sql"
+                                + "|java\\.net|javax\\.persistence|jakarta\\.persistence|org\\.hibernate"
+                                + "|br\\.com\\.esl\\.etl\\.v2\\.(?:bootstrap|plataforma\\.(?:fonte|persistencia))"
+                                + "|br\\.com\\.esl\\.etl\\.v2\\.modulos\\.[^.]+\\.aplicacao)(?:\\.|$)");
+        final List<String> violations = new ArrayList<>();
+        for (final SourceFile source : sources) {
+            final JavaFileObject file =
+                    new SimpleJavaFileObject(
+                            URI.create("string:///" + source.name()), JavaFileObject.Kind.SOURCE) {
+                        @Override
+                        public CharSequence getCharContent(final boolean ignoreEncodingErrors) {
+                            return source.content();
+                        }
+                    };
+            final JavacTask task =
+                    (JavacTask)
+                            ToolProvider.getSystemJavaCompiler()
+                                    .getTask(
+                                            null,
+                                            null,
+                                            null,
+                                            List.of("-proc:none"),
+                                            null,
+                                            List.of(file));
+            for (final CompilationUnitTree unit : task.parse()) {
+                if (unit.getPackageName() == null
+                        || !domain.matcher(unit.getPackageName().toString()).find()) {
+                    continue;
+                }
+                new TreeScanner<Void, Void>() {
+                    @Override
+                    public Void visitMemberSelect(final MemberSelectTree node, final Void unused) {
+                        if (forbidden.matcher(node.toString()).find()) {
+                            violations.add(source.name() + ": " + node);
+                        }
+                        return super.visitMemberSelect(node, unused);
+                    }
+                }.scan(unit, null);
+            }
+        }
+        assertTrue(
+                violations.isEmpty(),
+                () -> "Domínio depende de JSON/infraestrutura: " + violations);
+    }
 
     private static final Pattern REPOSITORY_ROLE =
             Pattern.compile(
@@ -79,6 +181,177 @@ public class ArchitectureRulesTest {
     private static final Map<String, String> BOUNDED_COLLECTION_APIS =
             Map.ofEntries(
                     Map.entry(
+                            "br.com.esl.etl.v2.bootstrap.DeclaredSqlOracles#factCandidates()",
+                            "INT-05: exatamente cinco nomes MAT01–MAT05 validados no parser."),
+                    Map.entry(
+                            "br.com.esl.etl.v2.bootstrap.QualificationScenarioVerifier$Result#sweepPreview()",
+                            "INT-06: zero ou exatamente33 responsabilidades; construtor limita antes da cópia."),
+                    Map.entry(
+                            "br.com.esl.etl.v2.plataforma.analitico.SyntheticCollectionSnapshot#declaredUniverse()",
+                            "INT-06: null legado ou2..32 roots distintos; construtor limita antes da cópia."),
+                    Map.entry(
+                            "br.com.esl.etl.v2.bootstrap.QualificationMetrics$Snapshot#inputs()",
+                            "QUAL-G: exatamente11 contadores técnicos; construtor valida antes da cópia."),
+                    Map.entry(
+                            "br.com.esl.etl.v2.bootstrap.QualificationMonitoring#row(long)",
+                            "QUAL-C: nove células literais de um evento; ordinal validado no máximo256 eventos técnicos."),
+                    Map.entry(
+                            "br.com.esl.etl.v2.bootstrap.QualificationScenarioVerifier$Result#outputs()",
+                            "QUAL-E: exatamente19 recibos agregados; construtor valida cardinalidade antes da cópia."),
+                    Map.entry(
+                            "br.com.esl.etl.v2.bootstrap.QualificationScenarioVerifier$Result#scopes()",
+                            "QUAL-E: exatamente35 gates técnicos do DAG; construtor valida cardinalidade."),
+                    Map.entry(
+                            "br.com.esl.etl.v2.bootstrap.QualificationSqlEvidence$Snapshot#tables()",
+                            "QUAL-G: até2048 contagens SQL por tabela, sem linhas/chaves de domínio;"
+                                    + " leitura e construtor recusam excesso."),
+                    Map.entry(
+                            "br.com.esl.etl.v2.bootstrap.QualificationWindowExecutor$Result#applied()",
+                            "QUAL-D: até3 janelas vezes5 fatos, máximo15 recibos técnicos, construtor valida."),
+                    Map.entry(
+                            "br.com.esl.etl.v2.plataforma.qualificacao.CampaignJournal#read()",
+                            "QUAL-F: até512 eventos de4096bytes; overflow recusado durante enumeração antes da leitura."),
+                    Map.entry(
+                            "br.com.esl.etl.v2.plataforma.qualificacao.CampaignJournal#root()",
+                            "QUAL-F: um Path de controle normalizado, Iterable de segmentos, sem universo de registros."),
+                    Map.entry(
+                            "br.com.esl.etl.v2.plataforma.qualificacao.CampaignJournal#status()",
+                            "QUAL-F: no máximo512 estados técnicos derivados dos512 eventos validados; campanha limita64 casos."),
+                    Map.entry(
+                            "br.com.esl.etl.v2.plataforma.qualificacao.QualificationCampaign#cases()",
+                            "QUAL-B: construtor e parser limitam1..64 casos; manifesto até131072bytes."),
+                    Map.entry(
+                            "br.com.esl.etl.v2.plataforma.qualificacao.QualificationCampaign$Case#blackouts()",
+                            "QUAL-D: até8 datas, validadas no parser e no construtor."),
+                    Map.entry(
+                            "br.com.esl.etl.v2.plataforma.qualificacao.QualificationCampaign$Case#dependencies()",
+                            "QUAL-B: até35 escopos, validados no parser e construtor."),
+                    Map.entry(
+                            "br.com.esl.etl.v2.plataforma.qualificacao.QualificationCampaign$Case#outputs()",
+                            "QUAL-B:1..19 contratos da enumeração fechada; parser e construtor validam limites."),
+                    Map.entry(
+                            "br.com.esl.etl.v2.plataforma.qualificacao.QualificationComparator$ExpectedRows#at(long)",
+                            "QUAL-C: uma linha lazy com1..123 células; consumidor confere cardinalidade do contrato antes de comparar."),
+                    Map.entry(
+                            "br.com.esl.etl.v2.plataforma.qualificacao.QualificationComparator$Result#sample()",
+                            "QUAL-C: até24 coordenadas sanitizadas, produtor e construtor recusam excesso."),
+                    Map.entry(
+                            "br.com.esl.etl.v2.plataforma.qualificacao.QualificationControlFiles#attempt(java.lang.String,boolean)",
+                            "QUAL-F: um Path de caso, identificador1..40 validado, sem coleção de dados."),
+                    Map.entry(
+                            "br.com.esl.etl.v2.plataforma.qualificacao.QualificationControlFiles"
+                                    + "#member(java.nio.file.Path,java.lang.String)",
+                            "QUAL-F: um Path de membro selecionado entre13 nomes fechados, sem coleção de dados."),
+                    Map.entry(
+                            "br.com.esl.etl.v2.plataforma.qualificacao.QualificationControlFiles#root()",
+                            "QUAL-F: um Path de diretório irmão validado dentro de target, sem coleção de dados."),
+                    Map.entry(
+                            "br.com.esl.etl.v2.plataforma.qualificacao.QualificationOracles$Evidence#monitor(long)",
+                            "QUAL-C: nove células de um evento técnico, QualificationMonitoring valida ordinal e256 eventos."),
+                    Map.entry(
+                            "br.com.esl.etl.v2.plataforma.qualificacao.QualificationOracles$Output#cells()",
+                            "QUAL-C:1..123 regras da saída, cardinalidade exata conferida pelo construtor e parser."),
+                    Map.entry(
+                            "br.com.esl.etl.v2.plataforma.qualificacao.QualificationPlanner$Plan#windows()",
+                            "QUAL-D: no máximo3 janelas do planner existente, construtor valida antes da cópia."),
+                    Map.entry(
+                            "br.com.esl.etl.v2.plataforma.qualificacao.QualificationTopology#evaluate(java.util.Map)",
+                            "QUAL-B: exatamente35 gates, enumeração de escopos fechada e evidência estrangeira recusada."),
+                    Map.entry(
+                            "br.com.esl.etl.v2.plataforma.qualificacao.QualificationTopology#nodes()",
+                            "QUAL-B: DAG literal de35 nós, cardinalidade e ordenação conferidas na inicialização."),
+                    Map.entry(
+                            "br.com.esl.etl.v2.plataforma.qualificacao.QualificationTopology$Node#dependencies()",
+                            "QUAL-B: máximo35 escopos por nó, construtor valida e DAG literal verifica existência."),
+                    Map.entry(
+                            "br.com.esl.etl.v2.plataforma.qualificacao.QualificationWireOracle"
+                                    + "#names(com.fasterxml.jackson.databind.JsonNode)",
+                            "QUAL-C: até128 nomes de campos de um objeto wire; recusa explícita antes da alocação."),
+                    Map.entry(
+                            "br.com.esl.etl.v2.plataforma.qualificacao.QualifiedPackage#member(java.lang.String,java.lang.String)",
+                            "QUAL-H: um Path do inventário verificado de até1024 membros; papel/nome exigidos."),
+                    Map.entry(
+                            "br.com.esl.etl.v2.plataforma.qualificacao.QualifiedPackage#members()",
+                            "QUAL-H: até1024 metadados de arquivos, parser e construtor validam antes da cópia."),
+                    Map.entry(
+                            "br.com.esl.etl.v2.plataforma.qualificacao.QualifiedPackage#root()",
+                            "QUAL-H: um Path local verificado, Iterable de segmentos, sem dados de domínio."),
+                    Map.entry(
+                            "br.com.esl.etl.v2.bootstrap.AnalyticExpansionCapture$Result#steps()",
+                            "ANA-35: exatamente seis intenções técnicas; limite conferido antes da cópia defensiva."),
+                    Map.entry(
+                            "br.com.esl.etl.v2.bootstrap.AnalyticScenarioRuntime$Cycle#sources()",
+                            "ANA-35: exatamente onze recibos técnicos, conferidos antes da cópia; SQL exige as onze entidades."),
+                    Map.entry(
+                            "br.com.esl.etl.v2.plataforma.analitico.AnalyticCollectionSupplement#fields()",
+                            "ANA-27: doze campos de uma única observação, construídos literalmente; sem universo de registros."),
+                    Map.entry(
+                            "br.com.esl.etl.v2.plataforma.analitico.AnalyticQuoteAttributes#fields()",
+                            "ANA-25:36campos de uma única observação tipada; construção literal finita."),
+                    Map.entry(
+                            "br.com.esl.etl.v2.plataforma.analitico.AnalyticFieldCatalog#quotes()",
+                            "ANA-35: metadados literais de36aliases/tipos COT, sem chaves capturadas."),
+                    Map.entry(
+                            "br.com.esl.etl.v2.plataforma.analitico.AnalyticFieldCatalog#collectionSupplement()",
+                            "ANA-35: metadados literais de12aliases de suplementoCOL, sem valores capturados."),
+                    Map.entry(
+                            "br.com.esl.etl.v2.plataforma.analitico.AnalyticSqlCatalog#columns("
+                                    + "br.com.esl.etl.v2.plataforma.analitico.AnalyticSqlContract)",
+                            "ANA-30:19contratos/673metadados; cada retorno1..123colunas, recurso262144bytes e cardinalidade validados."),
+                    Map.entry(
+                            "br.com.esl.etl.v2.plataforma.persistencia.analitico.JdbcAnalyticCollectionSweep$Prepared#captures()",
+                            "ANA-29: quatro capturas distintas no prepare; construtor valida quatro antes da cópia."),
+                    Map.entry(
+                            "br.com.esl.etl.v2.plataforma.persistencia.analitico.JdbcAnalyticFixtureBindings"
+                                    + "#fiscalSourcesPage(java.util.UUID,long,int)",
+                            "ANA-35: maximum1..64 antes de I/O, TOP parametrizado, keyset component_id e overflow recusado."),
+                    Map.entry(
+                            "br.com.esl.etl.v2.plataforma.persistencia.analitico.JdbcAnalyticFixtureBindings"
+                                    + "#sourcesPage(java.util.UUID,br.com.esl.etl.v2.plataforma.analitico."
+                                    + "AnalyticDimensionBinding$Entity,java.lang.String,int)",
+                            "ANA-35: maximum1..6 antes de I/O; TOP parametrizado/keyset, execução unívoca e overflow recusado."),
+                    Map.entry(
+                            "br.com.esl.etl.v2.plataforma.persistencia.analitico.JdbcAnalyticQueries$Row#values()",
+                            "ANA-30: uma linha tipada do contrato fechado; tamanho1..123 verificado antes da cópia."),
+                    Map.entry(
+                            "br.com.esl.etl.v2.plataforma.fonte.raster.RasterGateway$Response#body()",
+                            "ANA-03: resposta entre 1 byte e 10 MiB no construtor; cópia defensiva de uma única página."),
+                    Map.entry(
+                            "br.com.esl.etl.v2.bootstrap.ExpansionLaboratoryRelationFixtures#bindingBatch(jav"
+                                    + "a.time.LocalDate,int,int)",
+                            "EXP-12: count entre 1 e 14 antes da alocação; sete vínculos explícitos por raiz,"
+                                    + " TVP de até 98."),
+                    Map.entry(
+                            "br.com.esl.etl.v2.plataforma.expansao.ExpansionStrings#items()",
+                            "EXP-04: construtor limita 32 strings de até 256 caracteres; lista imutável de "
+                                    + "uma observação, sem identidade documental."),
+                    Map.entry(
+                            "br.com.esl.etl.v2.plataforma.persistencia.expansao.JdbcExpansionQueries#detailPa"
+                                    + "ge(java.util.UUID,br.com.esl.etl.v2.plataforma.persistencia.expansao.JdbcExpansi"
+                                    + "onQueries$Vertical,int,long,int)",
+                            "EXP-14: cursor exclusivo, maximum entre 1 e 100,"
+                                    + " SQL TOP parametrizado e overflow recusado."),
+                    Map.entry(
+                            "br.com.esl.etl.v2.plataforma.persistencia.expansao.JdbcExpansionQueries#invoiceF"
+                                    + "actsPage(java.util.UUID,long,int)",
+                            "EXP-17: grão de título, maximum entre 1 e 100,"
+                                    + " SQL TOP e cursor exclusivo; overflow recusado."),
+                    Map.entry(
+                            "br.com.esl.etl.v2.plataforma.persistencia.expansao.JdbcExpansionQueries#revenueF"
+                                    + "actsPage(java.util.UUID,long,int)",
+                            "EXP-19: grão de Frete vinculado, maximum entre 1 e 100,"
+                                    + " SQL TOP e cursor exclusivo; overflow recusado."),
+                    Map.entry(
+                            "br.com.esl.etl.v2.plataforma.persistencia.expansao.JdbcExpansionRecomposition#st"
+                                    + "epsBatch(java.util.UUID,int)",
+                            "EXP-20: maximum deve ser seis; PK e CHECK limitam entidades aos seis slots; JDBC "
+                                    + "recusa falta e overflow."),
+                    Map.entry(
+                            "br.com.esl.etl.v2.plataforma.persistencia.expansao.JdbcExpansionRelations#claimB"
+                                    + "atch(java.util.UUID,java.util.UUID,int,int)",
+                            "EXP-13: maximum entre 1 e 100 antes de I/O,"
+                                    + " TOP parametrizado no SQL e recusa de overflow no JDBC."),
+                    Map.entry(
                             "br.com.esl.etl.v2.plataforma.fonte.dataexport.DataExportPageRequest#filters()",
                             "Filtros tipados de uma única requisição."),
                     Map.entry(
@@ -91,7 +364,8 @@ public class ArchitectureRulesTest {
                             "br.com.esl.etl.v2.plataforma.fonte.dataexport.DataExportPayloadFieldProfile#jsonTypes()",
                             "Tipos distintos de um campo dentro de uma única página limitada."),
                     Map.entry(
-                            "br.com.esl.etl.v2.plataforma.fonte.dataexport.DataExportPayloadFieldProfile#textualFormats()",
+                            "br.com.esl.etl.v2.plataforma.fonte.dataexport.DataExportPayloadFieldProfile#text"
+                                    + "ualFormats()",
                             "Formatos distintos de um campo dentro de uma única página limitada."),
                     Map.entry(
                             "br.com.esl.etl.v2.plataforma.fonte.dataexport.DataExportPayloadProfile#fields()",
@@ -135,7 +409,80 @@ public class ArchitectureRulesTest {
                             "Containers opacos explícitos limitados a 128 paths."),
                     Map.entry(
                             "br.com.esl.etl.v2.plataforma.persistencia.staging.StagingBatch#records()",
-                            "Um único lote de staging com limite explícito e teto absoluto."));
+                            "Um único lote de staging com limite explícito e teto absoluto."),
+                    Map.entry(
+                            "br.com.esl.etl.v2.modulos.manifestos.domain.ManifestoStageRecord#rootFields()",
+                            "Campos fixos de uma observação física limitada a 100 itens por página."),
+                    Map.entry(
+                            "br.com.esl.etl.v2.modulos.manifestos.domain.ManifestoStageRecord#metrics()",
+                            "Set fechado das oito métricas MAN-07 de uma observação física."),
+                    Map.entry(
+                            "br.com.esl.etl.v2.modulos.manifestos.domain.ManifestoReductionResult#rootFields()",
+                            "Campos fixos reduzidos de uma única coorte limitada por página."),
+                    Map.entry(
+                            "br.com.esl.etl.v2.modulos.manifestos.domain.ManifestoReductionResult#metrics()",
+                            "Set fechado das oito métricas MAN-07 reduzidas."),
+                    Map.entry(
+                            "br.com.esl.etl.v2.modulos.manifestos.domain.ManifestoReductionResult#pickCandidates()",
+                            "Filhos Pick de uma única coorte física limitada a 100 observações."),
+                    Map.entry(
+                            "br.com.esl.etl.v2.modulos.manifestos.domain.ManifestoReductionResult#mdfeCandidates()",
+                            "Filhos MDF-e de uma única coorte física limitada a 100 observações."),
+                    Map.entry(
+                            "br.com.esl.etl.v2.modulos.manifestos.domain.ManifestoReductionResult#childQuaran"
+                                    + "tineReasons()",
+                            "Razões sanitizadas, no máximo uma por observação física da coorte."),
+                    Map.entry(
+                            "br.com.esl.etl.v2.plataforma.autorizacao.PinnedSqlTrustManager#getAcceptedIssuers()",
+                            "X509TrustManager: array novo de um único certificado fixado; teste de pin e "
+                                    + "cópia defensiva."),
+                    Map.entry(
+                            "br.com.esl.etl.v2.plataforma.orquestracao.RuntimeTemporalPolicy#blackouts()",
+                            "Até 64 intervalos; limite verificado antes de ordenar/copiar a configuração."),
+                    Map.entry(
+                            "br.com.esl.etl.v2.plataforma.orquestracao.RuntimeTemporalPlanner$Result#windows()",
+                            "Até 64 janelas; construtor recusa excesso e planner usa maximumBacklog de 1 a 64."),
+                    Map.entry(
+                            "br.com.esl.etl.v2.plataforma.orquestracao.RuntimeTemporalCoordinator$Reconciliat"
+                                    + "ion#pending()",
+                            "Até quatro decisões de próximo passo, limitadas pela concorrência e pelo construtor."),
+                    Map.entry(
+                            "br.com.esl.etl.v2.plataforma.orquestracao.RuntimeTemporalStore"
+                                    + "#readGapPage(java.lang.String,int,java.time.Instant)",
+                            "Resumo paginado SQL TOP maximum entre 1 e 64; sem payload ou universo de chaves "
+                                    + "de negócio."),
+                    Map.entry(
+                            "br.com.esl.etl.v2.bootstrap.RelationalLaboratoryFixtures#bindingBatch(java.time."
+                                    + "LocalDate,int,int)",
+                            "REL-LAB-03: até 50 raízes de fixture, duas evidências por raiz; recusa antes de alocar."),
+                    Map.entry(
+                            "br.com.esl.etl.v2.plataforma.persistencia.relacional.JdbcRelationalLaboratory"
+                                    + "#claimBatch(java.util.UUID,java.util.UUID,int,"
+                                    + "br.com.esl.etl.v2.plataforma.resiliencia.CancellationToken)",
+                            "REL-LAB-05: limite 1..100 validado antes de I/O,"
+                                    + " teto persistido/TOP no SQL e overflow recusado no JDBC."),
+                    Map.entry(
+                            "br.com.esl.etl.v2.plataforma.persistencia.controle.JdbcSqlServerTemporalPlan"
+                                    + "#readGapPage(java.lang.String,int,java.time.Instant)",
+                            "Valida maximum 1..64 antes de I/O, TOP no SQL e recusa overflow/ordem no result set."),
+                    Map.entry(
+                            "br.com.esl.etl.v2.bootstrap.LocalArtifactSequence#execute("
+                                    + "br.com.esl.etl.v2.plataforma.persistencia.coletas."
+                                    + "ColetaTemporalLaboratorySession,java.util.UUID,"
+                                    + "br.com.esl.etl.v2.bootstrap.AnalyticScenarioObserver,"
+                                    + "br.com.esl.etl.v2.plataforma.resiliencia.CancellationToken,"
+                                    + "java.util.function.Consumer)",
+                            "SEQ-01: o manifesto limita a sequência a no máximo oito etapas; cada resultado "
+                                    + "retém somente recibos técnicos dessa sequência."),
+                    Map.entry(
+                            "br.com.esl.etl.v2.bootstrap.LocalArtifactSequence#steps()",
+                            "SEQ-01: cópia imutável das duas a oito etapas validadas pelo construtor."),
+                    Map.entry(
+                            "br.com.esl.etl.v2.bootstrap.LocalArtifactSequence$StageResult#agenda()",
+                            "SEQ-04: cada etapa tem no máximo quatro recibos de agenda, um por família SQL."),
+                    Map.entry(
+                            "br.com.esl.etl.v2.bootstrap.SequenceMeasurements$Snapshot#samples()",
+                            "SEQ-06: a telemetria faz thinning e retém no máximo 128 amostras."));
 
     @Test
     void productiveCollectionApisMustHaveAnExplicitBoundedContract() throws Exception {
@@ -380,7 +727,9 @@ public class ArchitectureRulesTest {
                 continue;
             }
             for (final Field field : type.getDeclaredFields()) {
-                if (!field.isSynthetic() && isCollectionLike(field.getGenericType())) {
+                if (!field.isSynthetic()
+                        && isCollectionLike(field.getGenericType())
+                        && !isBoundedStatementHandleRegistry(field)) {
                     violations.add(type.getName() + "#field:" + field.getName());
                 }
             }
@@ -394,6 +743,17 @@ public class ArchitectureRulesTest {
             }
         }
         return violations.stream().sorted().toList();
+    }
+
+    // This exact field contains driver handles, never result rows or business keys. Its64-handle
+    // ceiling and reuse after overflow are exercised through the real JDBC driver in ControlIT.
+    private static boolean isBoundedStatementHandleRegistry(final Field field) {
+        return field.getDeclaringClass()
+                        .getName()
+                        .equals(
+                                "br.com.esl.etl.v2.plataforma.persistencia.coletas.ColetaTemporalLaboratorySession")
+                && field.getName().equals("controlledStatements")
+                && field.getGenericType().getTypeName().equals("java.util.Set<java.sql.Statement>");
     }
 
     private static boolean hasExplicitBoundParameter(final Method method) {
@@ -836,33 +1196,39 @@ public class ArchitectureRulesTest {
         List<String> findEverything();
     }
 
+    // Fixture methods are inspected through reflection by findRepositoryMaterialization.
     private static final class UniverseKeyRepository {
         private final Set<String> keys = Set.of();
 
+        @SuppressWarnings("unused")
         Set<String> loadAllKeys() {
             return keys;
         }
     }
 
     private static final class BoundedBatchPersistenceAdapterFixture {
+        @SuppressWarnings("unused")
         List<String> loadBatch(final int limit) {
             return List.of("one").stream().limit(limit).toList();
         }
     }
 
     private static final class UnboundedBatchRepository {
+        @SuppressWarnings("unused")
         List<String> loadBatch() {
             return List.of();
         }
     }
 
     private static final class MisleadingNumericBatchRepository {
+        @SuppressWarnings("unused")
         List<String> loadBatch(final long tenantId) {
             return List.of(Long.toString(tenantId));
         }
     }
 
     private static final class BackupRestore {
+        @SuppressWarnings("unused")
         List<String> loadAllKeys() {
             return List.of();
         }

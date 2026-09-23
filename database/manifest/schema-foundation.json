@@ -1,5 +1,5 @@
 {
-  "manifestVersion": 3,
+  "manifestVersion": 5,
   "roadmapTask": "V2-019",
   "flywayHistory": {
     "schema": "ctl",
@@ -27,7 +27,7 @@
   "grantPublisher": {
     "procedure": "dbo.usp_publish_v2_procedure_grant",
     "allowlistTable": "dbo.v2_procedure_grant_allowlist",
-    "allowedTriplets": 26,
+    "allowedTriplets": 41,
     "effectiveOwner": "dbo",
     "rejectsExecuteAsTargets": true,
     "publicTablePermissionsDenied": [

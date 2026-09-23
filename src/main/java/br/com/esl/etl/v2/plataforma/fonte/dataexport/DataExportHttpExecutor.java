@@ -191,6 +191,9 @@ final class DataExportHttpExecutor {
         if (cause instanceof IOException ioException) {
             return ioException;
         }
+        if (cause instanceof Error error) {
+            throw error;
+        }
         if (cause instanceof RuntimeException runtimeException) {
             throw runtimeException;
         }

@@ -1,0 +1,110 @@
+{
+  "captureId": "synthetic-reference",
+  "contractFingerprint": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+  "contractVersion": "2026-09-10.coletas-temporal.1",
+  "rows": [
+    {
+      "status": "pending",
+      "key": "STRING:synthetic-17",
+      "instant": "2036-01-20T10:00:00.123456789Z",
+      "timePresence": "VALUE"
+    },
+    {
+      "status": "done",
+      "key": "STRING:synthetic-18",
+      "instant": "2036-01-20T10:00:00.123456789Z",
+      "timePresence": "VALUE"
+    },
+    {
+      "status": "finished",
+      "key": "STRING:synthetic-19",
+      "instant": "2036-01-20T10:00:00.123456789Z",
+      "timePresence": "VALUE"
+    },
+    {
+      "status": "canceled",
+      "key": "STRING:synthetic-20",
+      "instant": "2036-01-20T10:00:00.123456789Z",
+      "timePresence": "VALUE"
+    },
+    {
+      "status": "pending",
+      "key": "STRING:synthetic-21",
+      "instant": "2036-01-20T10:00:00.123456789Z",
+      "timePresence": "VALUE"
+    },
+    {
+      "status": "pending",
+      "key": "STRING:synthetic-22",
+      "instant": "2036-01-20T10:00:00.123456789Z",
+      "timePresence": "VALUE"
+    },
+    {
+      "status": "pending",
+      "key": "STRING:synthetic-23",
+      "instant": "2036-01-20T10:00:00.123456789Z",
+      "timePresence": "VALUE"
+    },
+    {
+      "status": "pending",
+      "key": "STRING:synthetic-24",
+      "instant": "2036-01-20T07:00:00.123456789-03:00",
+      "timePresence": "VALUE"
+    },
+    {
+      "status": "pending",
+      "key": "STRING:synthetic-25",
+      "instant": "2036-01-20T10:00:00.123456789Z",
+      "timePresence": "VALUE"
+    },
+    {
+      "status": "pending",
+      "key": "STRING:synthetic-26",
+      "instant": "2036-01-20T10:00:00.123456789Z",
+      "timePresence": "VALUE"
+    },
+    {
+      "status": "pending",
+      "key": "STRING:synthetic-27",
+      "instant": "2036-01-20T10:00:00.123456789Z",
+      "timePresence": "VALUE"
+    },
+    {
+      "status": "pending",
+      "key": "STRING:synthetic-28",
+      "instant": "2036-01-20T10:00:00.123456789Z",
+      "timePresence": "VALUE"
+    },
+    {
+      "status": "pending",
+      "key": "STRING:synthetic-29",
+      "instant": "2036-01-20T10:00:00.123456789Z",
+      "timePresence": "VALUE"
+    },
+    {
+      "status": "pending",
+      "key": "STRING:synthetic-29",
+      "instant": "2036-01-20T10:00:00.123456789Z",
+      "timePresence": "VALUE"
+    },
+    {
+      "timePresence": "ABSENT",
+      "key": "STRING:synthetic-30",
+      "instant": null,
+      "status": "pending"
+    },
+    {
+      "timePresence": "NULL",
+      "key": "STRING:synthetic-31",
+      "instant": null,
+      "status": "pending"
+    },
+    {
+      "timePresence": "VALUE",
+      "key": "STRING:synthetic-32",
+      "instant": "invalid",
+      "status": "pending"
+    }
+  ],
+  "executionId": "10000000-0000-0000-0000-000000000002"
+}

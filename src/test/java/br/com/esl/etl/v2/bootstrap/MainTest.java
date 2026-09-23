@@ -25,6 +25,54 @@ class MainTest {
     @TempDir Path temporaryDirectory;
 
     @Test
+    void temporalPreviewHasNoEffectsAndMalformedOrUnconfiguredRunCannotSucceed() throws Exception {
+        final var configuration = temporaryDirectory.resolve("runtime.properties");
+        Files.writeString(
+                configuration,
+                "runtime.environment=LOCAL_SHADOW\nruntime.business-timezone=America/Sao_Paulo\n");
+        final String temporal = "config/laboratory/bloco54-temporal-coletas.json";
+        final var preview =
+                runWithDependencies(
+                        "plan", "--config", configuration.toString(), "--temporal", temporal);
+        assertEquals(0, preview.exitCode());
+        assertTrue(preview.standardOut().contains("TEMPORAL_PREVIEW effects=0 windows=3"));
+        final var run =
+                runWithDependencies(
+                        "run", "--config", configuration.toString(), "--temporal", temporal);
+        assertEquals(2, run.exitCode());
+        assertFalse(run.standardOut().contains("TEMPORAL_PERSISTED"));
+        final var bad = temporaryDirectory.resolve("bad.json");
+        Files.writeString(bad, "{\"purpose\":\"unapproved\"}");
+        assertEquals(
+                2,
+                runWithDependencies(
+                                "run",
+                                "--config",
+                                configuration.toString(),
+                                "--temporal",
+                                bad.toString())
+                        .exitCode());
+        assertEquals(
+                2,
+                runWithDependencies(
+                                "status",
+                                "--config",
+                                configuration.toString(),
+                                "--temporal",
+                                temporal)
+                        .exitCode());
+        assertEquals(
+                2,
+                runWithDependencies(
+                                "plan",
+                                "--config",
+                                configuration.toString(),
+                                "--temporal",
+                                bad.toString())
+                        .exitCode());
+    }
+
+    @Test
     void shouldPrintHelpWhenNoCommandIsProvided() {
         final CapturedOutput output = run();
 
@@ -88,6 +136,34 @@ class MainTest {
         assertEquals(0, dryRun.exitCode());
         assertTrue(dryRun.standardOut().contains("Dry-run sem efeitos"));
         assertEquals("", dryRun.standardError());
+    }
+
+    @Test
+    void plansOfflineAndRefusesEveryOperationalHandlerWithTheStableConfigAuthCode()
+            throws Exception {
+        final Path configuration = temporaryDirectory.resolve("runtime.properties");
+        Files.writeString(
+                configuration,
+                "runtime.environment=LOCAL_SHADOW\nruntime.business-timezone=America/Sao_Paulo\n",
+                StandardCharsets.UTF_8);
+
+        final CapturedOutput plan =
+                runWithDependencies("plan", "--config", configuration.toString());
+
+        assertEquals(0, plan.exitCode());
+        assertTrue(plan.standardOut().contains("Planejamento offline sem efeitos"));
+        for (final String command :
+                new String[] {
+                    "run", "replay", "sweep-preview", "sweep-apply", "force-run", "status"
+                }) {
+            final CapturedOutput operation =
+                    runWithDependencies(command, "--config", configuration.toString());
+
+            assertEquals(20, operation.exitCode());
+            assertTrue(operation.standardError().contains("política deny-all"));
+            assertFalse(operation.standardOut().contains(configuration.toString()));
+            assertFalse(operation.standardError().contains(configuration.toString()));
+        }
     }
 
     @Test

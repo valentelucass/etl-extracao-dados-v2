@@ -1,0 +1,91 @@
+{
+  "schema": {
+    "ownResidue": 0,
+    "newMigrations": 9,
+    "migrations": 37,
+    "installationDirectories": 6,
+    "preexistingTables": 129,
+    "currentTables": 143
+  },
+  "jar": {
+    "sha256": "6bc256fa2b60eaa7c8788818b3d7056d72ac95a890b265a8e674a07e7fe431d0",
+    "rollbackConfirmed": true,
+    "passed": true,
+    "cases": 10
+  },
+  "operationalPromotionAuthorized": false,
+  "concurrency": {
+    "sessions": 2,
+    "durableCrashRecoveryProven": false,
+    "actualClaimAndConsumption": true
+  },
+  "physicalFreshVsUpgradeEquivalenceProven": false,
+  "realQualificationAccepted": false,
+  "remoteCalls": 0,
+  "java": {
+    "version": 17,
+    "sourceCount": 797,
+    "heapMiB": 512,
+    "attempt": "verify-04",
+    "offline": true
+  },
+  "integration": {
+    "realJdbc": true,
+    "previousRegressionTests": 39,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "syntheticOnly": true,
+    "tests": 95,
+    "rollbackConfirmed": true
+  },
+  "newAcceptances": 0,
+  "passed": true,
+  "security": {
+    "gitleaksAvailable": false,
+    "offlineScannerPassed": true,
+    "selfTestCases": 11,
+    "externalVulnerabilityFeedQueried": false
+  },
+  "version": 1,
+  "status": "RELATIONAL_LOCAL_COMPLETE",
+  "full": {
+    "errors": 0,
+    "failures": 0,
+    "skipped": 4,
+    "tests": 1582
+  },
+  "scale": {
+    "actualPlans": 12,
+    "spills": 0,
+    "heapPlateauProven": false,
+    "exploratory4096Passed": false,
+    "completedScales": [
+      16,
+      256,
+      1024,
+      256
+    ],
+    "planAffectingConversions": 0
+  },
+  "fronts": [
+    "A",
+    "B",
+    "C",
+    "D",
+    "E",
+    "F",
+    "G",
+    "H",
+    "I",
+    "J"
+  ],
+  "closureValidation": {
+    "passed": true,
+    "predecessorGuards": 10,
+    "relationalGuards": 11,
+    "runtimeChecks": 6,
+    "historicalGuards": 12,
+    "offlineDeltaFiles": 67
+  }
+}

@@ -1,0 +1,26 @@
+# Revisão separada da implementação
+
+Revisão pelo próprio agente, após RED/GREEN, sem subagentes; não constitui revisão humana ou aceite nominal. O diff foi comparado com `before/`, não com HEAD. `review-supervisor.patch` registra a leitura separada.
+
+| Critério | Caminho revisto | Resultado e limite |
+|---|---|---|
+| Reserva/admissão | `QualificationLaboratoryMain resume` → controller lock → `reconcilePending` → laço de novos casos | Primeiro valida os seals; verifica todos os proprietários pendentes antes de abrir outra sessão. Proprietário vivo/reserva sem evidência bloqueia nova reserva, sem gastar orçamento de outro caso. RED anterior criou `case-independent`; GREEN conserva eventos e ausência do diretório |
+| Conclusão interrompida | Prefixos reais copiados após `EVIDENCE` e `ROLLBACK` | Acrescenta somente os eventos faltantes ao journal íntegro. Recibo, processo e prefixo permanecem iguais; segunda retomada é idempotente. RED retornava exit2 em ambos; GREEN retorna exit0 sem novo worker |
+| Falso sucesso/tampering | `status` antes de qualquer append; cadeia, nonce, pacote, logs, baseline, receipt e reconciliation | Alteração de log e reconciliação sem EVIDENCE continuam `QUAL_PROCESS_EVIDENCE_CHAIN`; não se reconstrói exit de recibo isolado nem se altera evidência velha. Novo teste confirma journal inalterado |
+| Resultado desconhecido | Owner encerrado e baseline; RECONCILED terminal; reserva sem STARTED ou evidência suficiente | Exit não observado permanece -1/desconhecido; rollback confirmado não vira PASS. Caso RECONCILED não é repetido. Reserva incompleta permanece bloqueada; falha de arquivo parcial permanece recusa explícita, sem reparar bytes por inferência |
+| Cancelamento/dependência | Dez casos anteriores de composição e seis novos | Composição passada preserva PASS/CANCELLED/OUTCOME_UNKNOWN e dependências; suite integral e smoke extraído verificam a revisão aplicável. Ausência de novas reservas não desativa ramo independente após encerramento conhecido |
+| Concorrência/limites | Lock do controlador, journal máximo512 eventos, campanha máxima64 casos, process PID/start/executable, heap/deadline/logs existentes | Nenhum lock/timeout/ownership foi ampliado, nenhum processo externo encerrado. Dois loops sobre a campanha limitada não acumulam dados de negócio |
+| SQL/dados | Diff do supervisor e testes; gateways/SQL/fixtures existentes | Nenhuma migration/SQL/regra de negócio/precisão/presença/timezone alterada. Provas dirigidas rollback-only com agregados iguais; não provam COMMIT/crash/restore de domínio |
+| Composição pública | `run` cria controle novo; `resume/status/compare` abrem controle existente | Não existe fallback produtivo. Comparação verifica evidência de execução revertida; não finge que o domínio continua publicado. Expansões/Raster operacionais e paridade real têm faltas explícitas na matriz |
+| Sucessão | Novo módulo e consumidores Qualification/Analytic anteriores | Manifests históricos permanecem byte a byte. Alteração atual exige hash após e snapshot antes exatos; inventário total e contraprovas preservados. Nada de whitelist por pasta ou hash antigo regravado |
+| Portabilidade/contagem | Matriz45/2437/401/75 e validador próprio | Preservados checkboxes originais e39/45; regra MAT-02 com asterisco inicialmente omitida pelo filtro foi detectada pelo guard e recolocada integralmente. Ligações por nome de campo não certificam equivalência; referências de fatos não são inferidas de views de fonte. Não se fabrica ganho por reclassificação |
+
+Verify integral aprovado com423IT,417 anteriores exatas,1976unitários/4skips históricos e cobertura/rollback. Dois pacotes byte-idênticos,5smokes/30comandos e4casos de retomada extraída/12comandos qualificados;21recusas extraídas e8de controle passaram. Validadores finais/diffs/encoding/scanner e seus resultados pertencem ao selo fora do ciclo do manifesto. Nenhuma conclusão produtiva/nominal decorre desta revisão local.
+
+Compatibilidade: campanha/journal continuam vinculados aos pins da própria revisão. O pacote novo não migra nem altera controles ou payloads históricos; um pin divergente continua sendo recusa, nunca motivo para repetir um efeito desconhecido.
+
+## Correções da conferência final de arquivos
+
+O scanner recusou a matriz de campos de 6.756.614 bytes pelo teto existente de 5 MiB. A matriz agora é um índice com três partes e hashes, preservando exatamente as 2.437 linhas e todos os campos originais. O teto, as regras e as contraprovas do scanner permanecem iguais. O validador confere as partes e reconcilia os mesmos dados contra o CSV original. A recusa e os bytes anteriores estão preservados na rodada.
+
+O Git da prova de aplicação não acessou um caminho longo nas cópias privadas; a execução passou a usar core.longpaths=true somente no comando. O diff falho e o exit da recusa permanecem em diff-failed-01. A entrega exige diff completo aplicado em cópia nova da baseline e igualdade dos bytes finais. Erros de contrato/formato nos scripts privados foram corrigidos após reconciliação: os resultados dos guards existentes usam PASS_LOCAL e recusas exit 2; o runner foi normalizado para uma lista mesmo quando há somente um check. Não houve efeito Java/SQL repetido por essas correções.

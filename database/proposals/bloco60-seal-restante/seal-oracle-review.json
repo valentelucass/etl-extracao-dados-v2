@@ -1,0 +1,16 @@
+{
+  "readbackSha256": "4e7d65b1866f90a760362c3276cd5a5622a268ab1f411be246caa2e52c86adb6",
+  "repeatedPhysicalExecution": false,
+  "originalFailedEvidencePreserved": true,
+  "passed": true,
+  "sources": [
+    "src/main/java/br/com/esl/etl/v2/bootstrap/LocalUsuariosRuntime.java:93",
+    "database/migrations/V024__bind_source_protocols_and_users_runtime.sql:859",
+    "src/test/java/br/com/esl/etl/v2/bootstrap/RuntimeUsersPhysicalProbe.java:201"
+  ],
+  "reason": "The physical fault halts before usp_apply_reconcile_publish_usuarios. LocalUsuariosRuntime seals the validated traversal before that invocation. Require PROMOTED, one seal, PASSED DQ with four checks, zero publication/application/history.",
+  "case": "HALT_BEFORE_APPLY",
+  "additionalAssertions": 13,
+  "correctedSeals": 1,
+  "originalSeals": 0
+}

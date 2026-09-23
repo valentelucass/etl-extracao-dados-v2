@@ -1,0 +1,27 @@
+-- REVIEW ONLY. Never executed by B54. Connect authority and nominal oracle remain pending.
+-- Parameters supplied by a future approved runner: @start_date DATE, @end_date DATE,
+-- @start_offset DATETIMEOFFSET(0), @end_offset DATETIMEOFFSET(0).
+-- Account, database connection, actual index plan and source snapshot are NOT inferred here.
+IF @start_date IS NULL OR @end_date<>DATEADD(DAY,1,@start_date)
+ THROW 52600,N'EXACT_ONE_APPROVED_CIVIL_DAY_REQUIRED',1;
+
+-- Coletas: aggregate at the stored root grain; alias uniqueness is a separate metric.
+SELECT COUNT_BIG(*) physical_rows,COUNT_BIG(DISTINCT id) root_keys,
+ SUM(CASE WHEN status IS NULL THEN CONVERT(BIGINT,1) ELSE 0 END) missing_status,
+ SUM(CASE WHEN total_value IS NULL THEN CONVERT(BIGINT,1) ELSE 0 END) missing_amount,
+ SUM(CONVERT(DECIMAL(38,4),total_value)) amount_sum
+FROM dbo.coletas
+WHERE request_date>=@start_date AND request_date<@end_date AND excluido_na_origem=0
+OPTION(MAXDOP 1);
+
+-- Fretes: offsets must be derived from the approved IANA civil interval, not an implicit server zone.
+SELECT COUNT_BIG(*) physical_rows,COUNT_BIG(DISTINCT id) root_keys,
+ SUM(CASE WHEN status IS NULL THEN CONVERT(BIGINT,1) ELSE 0 END) missing_status,
+ SUM(CASE WHEN valor_total IS NULL THEN CONVERT(BIGINT,1) ELSE 0 END) missing_amount,
+ SUM(CONVERT(DECIMAL(38,4),valor_total)) amount_sum
+FROM dbo.fretes
+WHERE servico_em>=@start_offset AND servico_em<@end_offset AND excluido_na_origem=0
+OPTION(MAXDOP 1);
+
+-- No raw IDs, aliases, payload or document values are projected. No cross-database names.
+-- Counterpart V2 monetary projection remains PENDING_NOMINAL_ORACLE; do not replace it with zero.

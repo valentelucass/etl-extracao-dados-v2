@@ -1,0 +1,89 @@
+{
+  "version": 1,
+  "status": "LOCAL_STAGE1_EXHAUSTED_HANDOFF_ONLY",
+  "predecessor": {
+    "path": "docs/continuidade/tres-etapas/manifesto.json",
+    "sha256": "9d73fa81f750232a25145adec7338fdf0a96924a04245649858af5ec7d2a4569"
+  },
+  "closedReceipt": {
+    "path": "target/tres-etapas-20260922-01/closed-receipt.json",
+    "sha256": "d9ea24973b83430db76093b096fc449da29206216246452ae4e49ca163e2f465"
+  },
+  "changedFiles": [
+    {
+      "path": "STATES.md",
+      "before": "5bd65b8193bb07f95f1d12b6847e1b9b823b8fdb6886ee80ebf7d23ae8aa7410",
+      "after": "4ff05217b6b51d12763b39b09d7e5f6f5e9b210832c25a1b59c25f27d6faa5ab",
+      "snapshot": "docs/continuidade/tres-etapas/handoff/before/STATES.md"
+    },
+    {
+      "path": "TRILHA_CONCLUSAO_POR_MODELO.md",
+      "before": "aa9aba694cc1ae282b516e0b71320837a4cfe0cc70a628c6c3bfd0ca638fe0e4",
+      "after": "e0677e3d6b922510fa25d893429ce26ba527b441e8486bccebd0e722f5369037",
+      "snapshot": "docs/continuidade/tres-etapas/handoff/before/TRILHA_CONCLUSAO_POR_MODELO.md"
+    },
+    {
+      "path": "docs/continuidade/RETOMADA.md",
+      "before": "2554e4e7d866b0c64555d0812e4ca6fecfe0fdd639b76bbaa07e2abeb580894d",
+      "after": "1ed4d993887ec781e09ad40aeeddda320e8570c04484f9dfc385d65e908f6fb5",
+      "snapshot": "docs/continuidade/tres-etapas/handoff/before/docs/continuidade/RETOMADA.md"
+    },
+    {
+      "path": "docs/continuidade/tres-etapas/GUIA_E_PROMPTS.md",
+      "before": "60a50825ee42342dd2940111c7abbe630994735695c42be5373b29641d5592d7",
+      "after": "e3c74b732360f7712e5b6f23d6816c451a8cc7f9c35577ab25233ef4a56bc888",
+      "snapshot": "docs/continuidade/tres-etapas/handoff/before/docs/continuidade/tres-etapas/GUIA_E_PROMPTS.md"
+    },
+    {
+      "path": "scripts/validation/QualificacaoP0733Succession.psm1",
+      "before": "f422f398e17c5bd4959903b0761930c6ad1f389b2b1f5186c1bd8e200c613e5d",
+      "after": "fde2878da82d3e46ae7aa8b5b2dc71d86d560ecb0adb23116eac4af5152b2a6e",
+      "snapshot": "docs/continuidade/tres-etapas/handoff/before/scripts/validation/QualificacaoP0733Succession.psm1"
+    }
+  ],
+  "newFiles": [
+    {
+      "path": "docs/continuidade/checkpoints/0245-encaminhamento-etapas-sem-retorno-automatico.md",
+      "sha256": "1122d0e474e053b4b4ce219c0499ccf4b6fd342ddfc1dcf92e811fc419cd3c91"
+    },
+    {
+      "path": "docs/continuidade/tres-etapas/handoff/ENCAMINHAMENTO.md",
+      "sha256": "38ee1331de593ec56d3f62a351e5ff6b008cd8da5c18b095f240d7080ccbd896"
+    },
+    {
+      "path": "docs/continuidade/tres-etapas/handoff/ETAPA_2.txt",
+      "sha256": "2a712dc5485780823d76f59779698684cd872423812642c4ea7da661467af654"
+    },
+    {
+      "path": "docs/continuidade/tres-etapas/handoff/ETAPA_3.txt",
+      "sha256": "bd9f185aaa32e18f49e6d1afe0d68a0f7372ced011b5417773cf93af811c7bfc"
+    },
+    {
+      "path": "docs/continuidade/tres-etapas/handoff/before/STATES.md",
+      "sha256": "5bd65b8193bb07f95f1d12b6847e1b9b823b8fdb6886ee80ebf7d23ae8aa7410"
+    },
+    {
+      "path": "docs/continuidade/tres-etapas/handoff/before/TRILHA_CONCLUSAO_POR_MODELO.md",
+      "sha256": "aa9aba694cc1ae282b516e0b71320837a4cfe0cc70a628c6c3bfd0ca638fe0e4"
+    },
+    {
+      "path": "docs/continuidade/tres-etapas/handoff/before/docs/continuidade/RETOMADA.md",
+      "sha256": "2554e4e7d866b0c64555d0812e4ca6fecfe0fdd639b76bbaa07e2abeb580894d"
+    },
+    {
+      "path": "docs/continuidade/tres-etapas/handoff/before/docs/continuidade/tres-etapas/GUIA_E_PROMPTS.md",
+      "sha256": "60a50825ee42342dd2940111c7abbe630994735695c42be5373b29641d5592d7"
+    },
+    {
+      "path": "docs/continuidade/tres-etapas/handoff/before/scripts/validation/QualificacaoP0733Succession.psm1",
+      "sha256": "f422f398e17c5bd4959903b0761930c6ad1f389b2b1f5186c1bd8e200c613e5d"
+    }
+  ],
+  "checkpoint": {
+    "path": "docs/continuidade/checkpoints/0245-encaminhamento-etapas-sem-retorno-automatico.md",
+    "sha256": "1122d0e474e053b4b4ce219c0499ccf4b6fd342ddfc1dcf92e811fc419cd3c91"
+  },
+  "newAcceptances": 0,
+  "sourceCalls": 0,
+  "databaseCalls": 0
+}

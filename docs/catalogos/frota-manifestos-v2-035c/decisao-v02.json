@@ -1,0 +1,378 @@
+{
+  "catalogVersion": "2026-09-05.v2-035c.2",
+  "decision": "FROTA_MANIFESTOS_AUTHORIZED_REASSESSMENT_FAIL_CLOSED",
+  "decisionStatus": "COMPLETE_LOCAL_REASSESSMENT_BLOCKED",
+  "task": "V2-035c",
+  "priorRoute": "D00",
+  "priorBlock": 38,
+  "scope": "REASSESSMENT_ONLY_CHAT_AND_WORKTREE_NO_IMPLEMENTATION_NO_SOURCE_IO_NO_PUBLICATION",
+  "recordedAt": "2026-09-05T14:07:36-03:00",
+  "ownerAuthorization": {
+    "source": "CURRENT_CHAT_OWNER_INSTRUCTION",
+    "authorizedAction": "REASSESS_VEHICLES_AND_DRIVERS_USING_ONLY_EVIDENCE_ALREADY_PROVIDED_IN_CHAT_OR_WORKTREE",
+    "classification": "AUTHORIZATION_ONLY_NOT_DIMENSIONAL_TECHNICAL_EVIDENCE",
+    "doesNotProve": [
+      "IMMUTABLE_PROVIDER_ID",
+      "SOURCE_BINDING",
+      "TENANT_BINDING",
+      "PLATE_OR_BRANCH_SEMANTICS",
+      "DRIVER_IDENTITY_POLICY",
+      "ENTITY_LIFECYCLE",
+      "RELATIONSHIP"
+    ]
+  },
+  "evidenceBoundary": {
+    "mode": "OFFLINE_READ_ONLY_EVIDENCE_AUDIT",
+    "priorDecision": {
+      "path": "docs/catalogos/frota-manifestos-v2-035c/decisao-v01.json",
+      "sha256": "ba3d280613c5c06ad0fd6bd71e1de9dea6b8d8c01cb84a2f02a60075096237f9",
+      "evidenceAnchorCount": 14,
+      "anchorPolicy": "REUSE_ONLY_AFTER_ALL_V01_SHA256_ANCHORS_MATCH"
+    },
+    "worktreeInventory": {
+      "baselineCutoff": "2026-09-05T13:35:21.2424688-03:00",
+      "excludedDirectories": [
+        ".git",
+        "target",
+        "logs"
+      ],
+      "filesAfterCutoffBeforeReassessment": 0,
+      "classification": "NO_NEW_TECHNICAL_EVIDENCE"
+    },
+    "chatAttachmentInventory": {
+      "label": "pasted-text.txt",
+      "modifiedAt": "2026-08-31T07:21:46.1035581-03:00",
+      "sha256": "2d768f7f5474047ba3f4b36f74c59ca54bad2555d7efeab743fee6279db845c0",
+      "classification": "GENERIC_OPERATIONAL_PROMPT_ONLY_NO_FLEET_CONTRACT",
+      "persistedCopy": false
+    },
+    "newQualifyingTechnicalEvidence": [],
+    "newQualifyingTechnicalEvidenceCount": 0,
+    "conclusion": "NO_EVIDENCE_PACKAGE_SATISFIES_ALL_REQUIREMENTS_FOR_EITHER_DIMENSION",
+    "prohibitedInputsNotUsed": [
+      "NETWORK",
+      "API",
+      "CURL",
+      "CREDENTIALS",
+      "DOT_ENV",
+      "REAL_PAYLOAD",
+      "DATABASE",
+      "SQLCMD",
+      "DEPLOY",
+      "COMMIT",
+      "PUSH"
+    ]
+  },
+  "closedVocabularies": {
+    "dimension": [
+      "VEICULOS",
+      "MOTORISTAS"
+    ],
+    "requirementStatus": [
+      "MISSING",
+      "PROVEN_LIMITED"
+    ],
+    "dimensionStatus": [
+      "EXECUTION_READY",
+      "PARTIAL_DECISION_ONLY",
+      "BLOCKED"
+    ],
+    "fixtureGate": [
+      "BLOCKED",
+      "PRESERVE_LIMITED_PROOF",
+      "ELIGIBLE_FOR_NEW_DECISION_SLICE"
+    ]
+  },
+  "gatePolicy": {
+    "allDimensionRequirementsRequired": true,
+    "anyMissingRequirement": "KEEP_DIMENSION_BLOCKED",
+    "authorizationWithoutContractEvidence": "NO_STATUS_CHANGE",
+    "sufficientEvidenceAction": "CREATE_NEW_EXPLICIT_DECISION_SLICE_UNDER_V2_035",
+    "insufficientEvidenceAction": "RECORD_EXACT_GAPS_WITHOUT_NEW_SLICE_ROUTE_BLOCK_OR_TERRA_PROMPT"
+  },
+  "requirements": [
+    {
+      "id": "FM2-VEH-001",
+      "dimension": "VEICULOS",
+      "requirement": "IMMUTABLE_PROVIDER_ID_WITH_EXPLICIT_SOURCE_AND_TENANT",
+      "status": "MISSING",
+      "origins": [
+        "docs/catalogos/contratos-esl-6399/manifesto.json",
+        "docs/catalogos/identidade-manifestos/manifesto.json",
+        "src/main/java/br/com/esl/etl/v2/modulos/manifestos/domain/ManifestoTextField.java"
+      ],
+      "exactGap": "NO_VEHICLE_OR_TRAILER_PROVIDER_ID_PATH_WIRE_TYPE_IMMUTABILITY_UNIQUENESS_STABILITY_OR_BINDING_TO_EXPLICIT_SOURCE_INSTANCE_AND_TENANT_SCOPE",
+      "limit": "SOURCE_INSTANCE_AND_TENANT_SCOPE_ARE_EXPLICIT_ONLY_FOR_THE_MANIFEST_ROOT_AND_DO_NOT_CREATE_A_VEHICLE_ID",
+      "counterexample": "THE_SAME_PLATE_SIGNAL_CAN_REFER_TO_DISTINCT_UNIDENTIFIED_VEHICLES_OR_MOVE_BETWEEN_THEM",
+      "fixtureIds": [
+        "VEHICLE_PROVIDER_ID_SCOPE_MISSING",
+        "VEHICLE_HYPOTHETICAL_COMPLETE_PACKAGE"
+      ],
+      "testAssertion": "REQUIRE_MISSING_AND_BLOCK_D03"
+    },
+    {
+      "id": "FM2-VEH-002",
+      "dimension": "VEICULOS",
+      "requirement": "PLATE_SEMANTICS_COLLISION_AND_REASSIGNMENT",
+      "status": "MISSING",
+      "origins": [
+        "src/main/java/br/com/esl/etl/v2/modulos/manifestos/domain/ManifestoTextField.java",
+        "../etl-extracao-dados/database/views-dimensao/021_criar_view_dim_veiculos.sql"
+      ],
+      "exactGap": "NO_VERSIONED_RULE_DEFINES_PLATE_AS_ATTRIBUTE_OR_ALIAS_OR_DEFINES_NORMALIZATION_VALIDATION_COLLISION_REUSE_REASSIGNMENT_OR_REKEY",
+      "limit": "PLATE_IS_BOUNDED_TEXT_ON_A_MANIFEST_OBSERVATION_AND_LEGACY_UPPER_TRIM_GROUPING_IS_COUNTEREVIDENCE_ONLY",
+      "counterexample": "PLATE_TEXT_REUSE_OR_REASSIGNMENT_WOULD_MERGE_DISTINCT_VEHICLES_UNDER_A_PLATE_KEY",
+      "fixtureIds": [
+        "VEHICLE_PLATE_REASSIGNMENT_MISSING",
+        "VEHICLE_HYPOTHETICAL_COMPLETE_PACKAGE"
+      ],
+      "testAssertion": "REQUIRE_MISSING_AND_BLOCK_D03"
+    },
+    {
+      "id": "FM2-VEH-003",
+      "dimension": "VEICULOS",
+      "requirement": "BRANCH_SEMANTICS_AND_CHANGE",
+      "status": "MISSING",
+      "origins": [
+        "docs/catalogos/frota-manifestos-v2-035c/decisao-v01.json",
+        "../etl-extracao-dados/database/views-dimensao/021_criar_view_dim_veiculos.sql"
+      ],
+      "exactGap": "NO_STABLE_BRANCH_KEY_OR_VERSIONED_SEMANTICS_IDENTIFY_OWNER_ASSIGNMENT_ORIGIN_CURRENT_BRANCH_KEY_PARTICIPATION_OR_CHANGE_AND_ABSENCE_POLICY",
+      "limit": "MFT_CRN_PSN_NICKNAME_IS_MANIFEST_CONTEXT_ONLY_AND_NOT_VEHICLE_OWNER_ASSIGNMENT_SOURCE_OR_TENANT",
+      "counterexample": "A_MANIFEST_BRANCH_CAN_DIFFER_FROM_THE_VEHICLE_OWNER_OR_CURRENT_ASSIGNMENT_BRANCH",
+      "fixtureIds": [
+        "VEHICLE_BRANCH_SEMANTICS_MISSING",
+        "VEHICLE_HYPOTHETICAL_COMPLETE_PACKAGE"
+      ],
+      "testAssertion": "REQUIRE_MISSING_AND_BLOCK_D03"
+    },
+    {
+      "id": "FM2-VEH-004",
+      "dimension": "VEICULOS",
+      "requirement": "VALIDITY_CURRENT_HISTORY_ABSENCE_CONFLICT_AND_REKEY",
+      "status": "MISSING",
+      "origins": [
+        "docs/catalogos/manifestos-v2-026/decisao-v03.json",
+        "database/migrations/V012__create_manifestos_shadow_vertical.sql"
+      ],
+      "exactGap": "NO_VEHICLE_EFFECTIVE_FROM_EFFECTIVE_TO_CURRENT_HISTORY_ENTITY_ABSENCE_REACTIVATION_CONFLICT_REKEY_MERGE_SPLIT_OR_REPOINT_CONTRACT",
+      "limit": "MANIFEST_FRESHNESS_REPLAY_CONFLICT_AND_NO_SWEEP_RULES_ORDER_MANIFEST_OBSERVATIONS_ONLY",
+      "counterexample": "ORDERED_MANIFEST_OBSERVATIONS_DO_NOT_IDENTIFY_THE_CURRENT_VEHICLE_MASTER_VERSION",
+      "fixtureIds": [
+        "VEHICLE_LIFECYCLE_MISSING",
+        "VEHICLE_HYPOTHETICAL_COMPLETE_PACKAGE"
+      ],
+      "testAssertion": "REQUIRE_MISSING_AND_BLOCK_D03"
+    },
+    {
+      "id": "FM2-VEH-005",
+      "dimension": "VEICULOS",
+      "requirement": "MAIN_VEHICLE_AND_EACH_TRAILER_REMAIN_DISTINCT",
+      "status": "PROVEN_LIMITED",
+      "origins": [
+        "src/main/java/br/com/esl/etl/v2/modulos/manifestos/domain/ManifestoTextField.java",
+        "docs/catalogos/frota-manifestos-v2-035c/decisao-v01.json"
+      ],
+      "exactGap": "DISTINCT_PATHS_DO_NOT_PROVE_DIMENSIONAL_IDENTITIES_CROSS_MANIFEST_STABILITY_POSITION_CHANGE_OR_THE_SAME_ENTITY_MOVING_BETWEEN_ROLES",
+      "limit": "ONLY_THE_OBSERVATION_ROLES_MAIN_VEHICLE_TRAILER_POSITION_1_AND_TRAILER_POSITION_2_ARE_PROVEN_DISTINCT",
+      "counterexample": "COLLAPSING_EQUAL_PLATE_TEXT_ACROSS_ROLES_ERASES_ROLE_PROVENANCE",
+      "fixtureIds": [
+        "VEHICLE_ROLE_SEPARATION_PRESENT",
+        "VEHICLE_HYPOTHETICAL_COMPLETE_PACKAGE"
+      ],
+      "testAssertion": "REQUIRE_PROVEN_LIMITED_AND_KEEP_ROLES_DISTINCT"
+    },
+    {
+      "id": "FM2-DRV-001",
+      "dimension": "MOTORISTAS",
+      "requirement": "IMMUTABLE_PROVIDER_ID_WITH_EXPLICIT_SOURCE_AND_TENANT",
+      "status": "MISSING",
+      "origins": [
+        "docs/catalogos/contratos-esl-6399/manifesto.json",
+        "docs/catalogos/identidade-manifestos/manifesto.json",
+        "src/main/java/br/com/esl/etl/v2/modulos/manifestos/domain/ManifestoTextField.java"
+      ],
+      "exactGap": "NO_DRIVER_PROVIDER_ID_PATH_WIRE_TYPE_IMMUTABILITY_UNIQUENESS_STABILITY_OR_BINDING_TO_EXPLICIT_SOURCE_INSTANCE_AND_TENANT_SCOPE",
+      "limit": "SOURCE_INSTANCE_AND_TENANT_SCOPE_ARE_EXPLICIT_ONLY_FOR_THE_MANIFEST_ROOT_AND_DRIVER_NAME_IS_NOT_AN_ID",
+      "counterexample": "THE_SAME_NAME_CAN_DENOTE_DISTINCT_PEOPLE_AND_ONE_PERSON_CAN_CHANGE_NAMES",
+      "fixtureIds": [
+        "DRIVER_PROVIDER_ID_SCOPE_MISSING",
+        "DRIVER_HYPOTHETICAL_COMPLETE_PACKAGE"
+      ],
+      "testAssertion": "REQUIRE_MISSING_AND_BLOCK_D04"
+    },
+    {
+      "id": "FM2-DRV-002",
+      "dimension": "MOTORISTAS",
+      "requirement": "HOMONYM_GENERIC_RENAME_MERGE_AND_SPLIT_POLICY",
+      "status": "MISSING",
+      "origins": [
+        "src/main/java/br/com/esl/etl/v2/modulos/manifestos/domain/ManifestoTextField.java",
+        "../etl-extracao-dados/database/views-dimensao/022_criar_view_dim_motoristas.sql"
+      ],
+      "exactGap": "NO_VERSIONED_POLICY_DISTINGUISHES_HOMONYMS_HANDLES_GENERIC_NAMES_OR_DEFINES_RENAME_MERGE_SPLIT_ALIAS_REPOINT_AND_COLLISION",
+      "limit": "EXACT_OR_NORMALIZED_NAME_AND_THE_LEGACY_GENERIC_SUBSTRING_FILTER_ARE_COUNTEREVIDENCE_ONLY",
+      "counterexample": "NAME_GROUPING_MERGES_HOMONYMS_WHILE_RENAME_MERGE_OR_SPLIT_FRAGMENTS_OR_REPOINTS_A_PERSON",
+      "fixtureIds": [
+        "DRIVER_NAME_IDENTITY_POLICY_MISSING",
+        "DRIVER_HYPOTHETICAL_COMPLETE_PACKAGE"
+      ],
+      "testAssertion": "REQUIRE_MISSING_AND_BLOCK_D04"
+    },
+    {
+      "id": "FM2-DRV-003",
+      "dimension": "MOTORISTAS",
+      "requirement": "DRIVER_CONTRACT_SEMANTICS",
+      "status": "MISSING",
+      "origins": [
+        "src/main/java/br/com/esl/etl/v2/modulos/manifestos/domain/ManifestoTextField.java",
+        "docs/catalogos/frota-manifestos-v2-035c/decisao-v01.json"
+      ],
+      "exactGap": "NO_VERSIONED_CONTRACT_ONTOLOGY_PARTIES_EFFECTIVE_INTERVAL_OR_CHANGE_SEMANTICS_AND_NO_PROOF_THAT_CONTEXTUAL_TYPE_IDENTIFIES_A_PERSON_OR_EMPLOYMENT_RELATIONSHIP",
+      "limit": "MFT_MDR_CONTRACT_TYPE_IS_CONTEXTUAL_TEXT_ON_A_MANIFEST_OBSERVATION_ONLY",
+      "counterexample": "THE_SAME_CONTEXTUAL_LABEL_CAN_APPLY_TO_DISTINCT_PEOPLE_AND_CANNOT_PROVE_CONTRACT_VALIDITY",
+      "fixtureIds": [
+        "DRIVER_CONTRACT_SEMANTICS_MISSING",
+        "DRIVER_HYPOTHETICAL_COMPLETE_PACKAGE"
+      ],
+      "testAssertion": "REQUIRE_MISSING_AND_BLOCK_D04"
+    },
+    {
+      "id": "FM2-DRV-004",
+      "dimension": "MOTORISTAS",
+      "requirement": "BRANCH_ASSIGNMENT_SEMANTICS_AND_CHANGE",
+      "status": "MISSING",
+      "origins": [
+        "docs/catalogos/frota-manifestos-v2-035c/decisao-v01.json",
+        "../etl-extracao-dados/database/views-dimensao/022_criar_view_dim_motoristas.sql"
+      ],
+      "exactGap": "NO_STABLE_BRANCH_KEY_OR_VERSIONED_SEMANTICS_IDENTIFY_DRIVER_ASSIGNMENT_LOTATION_SOURCE_TENANT_KEY_PARTICIPATION_OR_CHANGE_AND_ABSENCE_POLICY",
+      "limit": "MFT_CRN_PSN_NICKNAME_IS_MANIFEST_CONTEXT_ONLY_AND_NOT_DRIVER_ASSIGNMENT_SOURCE_OR_TENANT",
+      "counterexample": "A_DRIVER_CAN_OPERATE_A_MANIFEST_FROM_A_BRANCH_DIFFERENT_FROM_FORMAL_ASSIGNMENT",
+      "fixtureIds": [
+        "DRIVER_BRANCH_SEMANTICS_MISSING",
+        "DRIVER_HYPOTHETICAL_COMPLETE_PACKAGE"
+      ],
+      "testAssertion": "REQUIRE_MISSING_AND_BLOCK_D04"
+    },
+    {
+      "id": "FM2-DRV-005",
+      "dimension": "MOTORISTAS",
+      "requirement": "VALIDITY_CURRENT_HISTORY_ABSENCE_CONFLICT_AND_REKEY",
+      "status": "MISSING",
+      "origins": [
+        "docs/catalogos/manifestos-v2-026/decisao-v03.json",
+        "database/migrations/V012__create_manifestos_shadow_vertical.sql"
+      ],
+      "exactGap": "NO_DRIVER_EFFECTIVE_FROM_EFFECTIVE_TO_CURRENT_HISTORY_ENTITY_ABSENCE_REACTIVATION_CONFLICT_REKEY_MERGE_SPLIT_OR_REPOINT_CONTRACT",
+      "limit": "MANIFEST_FRESHNESS_REPLAY_CONFLICT_AND_NO_SWEEP_RULES_ORDER_MANIFEST_OBSERVATIONS_ONLY",
+      "counterexample": "ORDERED_MANIFEST_OBSERVATIONS_DO_NOT_DECIDE_RENAME_MERGE_SPLIT_OR_THE_CURRENT_DRIVER_MASTER_VERSION",
+      "fixtureIds": [
+        "DRIVER_LIFECYCLE_MISSING",
+        "DRIVER_HYPOTHETICAL_COMPLETE_PACKAGE"
+      ],
+      "testAssertion": "REQUIRE_MISSING_AND_BLOCK_D04"
+    },
+    {
+      "id": "FM2-SHARED-001",
+      "dimension": "BOTH",
+      "requirement": "VEHICLE_DRIVER_RELATION_CONTRACT",
+      "status": "MISSING",
+      "origins": [
+        "docs/catalogos/frota-manifestos-v2-035c/decisao-v01.json",
+        "docs/catalogos/manifestos-v2-026/decisao-v03.json"
+      ],
+      "exactGap": "NO_VERSIONED_RELATION_IDENTITY_CARDINALITY_VALIDITY_CONFLICT_OR_REKEY_CONTRACT_EXISTS_BETWEEN_VEHICLE_AND_DRIVER",
+      "limit": "COOCCURRENCE_IS_ONLY_A_MANIFEST_OBSERVATION",
+      "counterexample": "TEMPORARY_COOCCURRENCE_CANNOT_CREATE_A_STABLE_JOIN_OR_FOREIGN_KEY",
+      "fixtureIds": [
+        "COOCCURRENCE_NO_RELATION"
+      ],
+      "testAssertion": "REQUIRE_MISSING_AND_PROHIBIT_RELATION"
+    }
+  ],
+  "dimensions": [
+    {
+      "name": "VEICULOS",
+      "status": "BLOCKED",
+      "satisfiedLimitedRequirements": [
+        "FM2-VEH-005"
+      ],
+      "missingRequirements": [
+        "FM2-VEH-001",
+        "FM2-VEH-002",
+        "FM2-VEH-003",
+        "FM2-VEH-004"
+      ],
+      "resultReason": "ROLE_SEPARATION_ALONE_DOES_NOT_SUPPLY_IMMUTABLE_ID_SCOPE_PLATE_BRANCH_OR_LIFECYCLE_CONTRACT",
+      "unblockEvidence": [
+        "VERSIONED_IMMUTABLE_VEHICLE_AND_TRAILER_PROVIDER_ID_WITH_EXPLICIT_SOURCE_INSTANCE_AND_TENANT_SCOPE",
+        "VERSIONED_PLATE_ATTRIBUTE_ALIAS_NORMALIZATION_COLLISION_REUSE_REASSIGNMENT_AND_REKEY_POLICY",
+        "VERSIONED_BRANCH_ID_AND_OWNER_ASSIGNMENT_CHANGE_SEMANTICS",
+        "VERSIONED_EFFECTIVE_INTERVAL_CURRENT_HISTORY_ABSENCE_REACTIVATION_CONFLICT_AND_REKEY_POLICY",
+        "VERSIONED_MAIN_AND_EACH_TRAILER_IDENTITY_AND_ROLE_CHANGE_POLICY"
+      ]
+    },
+    {
+      "name": "MOTORISTAS",
+      "status": "BLOCKED",
+      "satisfiedLimitedRequirements": [],
+      "missingRequirements": [
+        "FM2-DRV-001",
+        "FM2-DRV-002",
+        "FM2-DRV-003",
+        "FM2-DRV-004",
+        "FM2-DRV-005"
+      ],
+      "resultReason": "NO_IMMUTABLE_DRIVER_ID_SCOPE_NAME_POLICY_CONTRACT_SEMANTICS_BRANCH_ASSIGNMENT_OR_ENTITY_LIFECYCLE_EXISTS",
+      "unblockEvidence": [
+        "VERSIONED_IMMUTABLE_DRIVER_PROVIDER_ID_WITH_EXPLICIT_SOURCE_INSTANCE_AND_TENANT_SCOPE",
+        "VERSIONED_HOMONYM_GENERIC_RENAME_MERGE_SPLIT_ALIAS_REPOINT_AND_COLLISION_POLICY",
+        "VERSIONED_DRIVER_CONTRACT_ONTOLOGY_PARTIES_VALIDITY_AND_CHANGE_SEMANTICS",
+        "VERSIONED_BRANCH_ASSIGNMENT_ID_AND_CHANGE_SEMANTICS",
+        "VERSIONED_EFFECTIVE_INTERVAL_CURRENT_HISTORY_ABSENCE_REACTIVATION_CONFLICT_AND_REKEY_POLICY"
+      ]
+    }
+  ],
+  "matrix": {
+    "path": "docs/catalogos/frota-manifestos-v2-035c/matriz-reavaliacao-v02.csv",
+    "sha256": "536633ee05867cc803d768359b273651dff7b1a4c8e0b5d505c6266200a71caa",
+    "rowCount": 11
+  },
+  "fixtureSet": {
+    "path": "docs/catalogos/frota-manifestos-v2-035c/fixtures/reavaliacao-v02.synthetic.json",
+    "sha256": "688d5a4a3d792f6fbc2dd49222c5088d42008efdea06e17119a2f6387b750e87",
+    "caseCount": 13,
+    "syntheticOnly": true,
+    "containsRealData": false
+  },
+  "routeDecision": {
+    "newDecisionSliceCreated": false,
+    "newFunctionalBlockAssigned": false,
+    "nowRouteCount": 0,
+    "d03": "CANDIDATE_BLOCKED_NOT_PROMOTED",
+    "d03Hold": "V2-035c/REASSESSMENT_V02/VEICULOS=BLOCKED",
+    "d04": "CANDIDATE_BLOCKED_NOT_PROMOTED",
+    "d04Hold": "V2-035c/REASSESSMENT_V02/MOTORISTAS=BLOCKED",
+    "v2035b": "OPEN",
+    "v2035": "OPEN",
+    "nextFunctionalBlock": "UNASSIGNED_39",
+    "terraRunbook": "MUST_NOT_EXIST",
+    "implementation": "NOT_STARTED",
+    "migration": "NOT_CREATED",
+    "relationship": "NOT_CREATED"
+  },
+  "validationContract": {
+    "validator": "scripts/validation/Test-FrotaManifestosV2035cDecisionCatalog.ps1",
+    "assertions": [
+      "STRICT_JSON_AND_NO_DUPLICATE_PROPERTIES",
+      "PRIOR_DECISION_AND_ALL_V01_EVIDENCE_HASHES_MATCH",
+      "NO_NEW_QUALIFYING_TECHNICAL_EVIDENCE",
+      "EXACT_REQUIREMENT_STATUS_GAPS_LIMITS_COUNTEREXAMPLES_FIXTURES_AND_TESTS",
+      "VEHICLES_AND_DRIVERS_REMAIN_BLOCKED",
+      "ONLY_MAIN_AND_TRAILER_ROLE_SEPARATION_IS_PROVEN_LIMITED",
+      "SYNTHETIC_FIXTURES_AND_HASHES_MATCH",
+      "NO_NEW_SLICE_BLOCK_ROUTE_MIGRATION_RELATION_IMPLEMENTATION_OR_TERRA_PROMPT"
+    ]
+  }
+}

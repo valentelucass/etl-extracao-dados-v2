@@ -1,0 +1,86 @@
+{
+  "catalogVersion": "2026-09-04.v2-027-v01.2",
+  "decision": "COTACOES_6906_DOMAIN_FRESHNESS_TARIFF_SHADOW",
+  "scope": "SHADOW_ONLY_NO_SOURCE_IO_NO_PUBLICATION_NO_SWEEP",
+  "sourceContract": "dataexport-6906",
+  "identity": {
+    "entity": "cotacoes",
+    "tuple": ["source_instance", "tenant_scope", "entity", "source_key"],
+    "sourceKey": {
+      "path": "/sequence_code",
+      "wireType": "INTEGER",
+      "role": "TYPE_TAGGED_SOURCE_KEY",
+      "domain": "POSITIVE_SIGNED_64_BIT",
+      "minimum": 1,
+      "maximum": "9223372036854775807",
+      "canonicalEncoding": "ASCII_DECIMAL_NO_SIGN_NO_LEADING_ZERO_NO_WHITESPACE"
+    },
+    "canonicalId": "SQL_SURROGATE_BIGINT_IDENTITY",
+    "tenant": "EXPLICIT_CONFIGURATION_NEVER_PAYLOAD",
+    "forbiddenTenantSentinels": ["DEFAULT", "GLOBAL", "SINGLETON"]
+  },
+  "presence": ["ABSENT", "NULL", "VALUE"],
+  "presenceSemantics": {
+    "absent": "PRESERVE_SAME_SCOPED_CURRENT_ROOT",
+    "null": "APPLY_SQL_NULL",
+    "value": "APPLY_TYPED_VALUE_INCLUDING_ZERO",
+    "requiredFields": [
+      "sequence_code",
+      "requested_at",
+      "qoe_qes_fit_nse_issued_at",
+      "qoe_qes_fit_fhe_cte_issued_at",
+      "qoe_qes_total",
+      "qoe_crn_psn_nickname",
+      "qoe_uer_name",
+      "qoe_qes_ony_sae_code",
+      "qoe_qes_diy_sae_code"
+    ]
+  },
+  "attributes": {
+    "user": {
+      "path": "/data/qoe_uer_name",
+      "matrixId": "DE-DATA-6906-017",
+      "classification": "LOCAL_DTO_DATA_PATH_CANDIDATE",
+      "normalization": "TRIM_NFC_DISPLAY_ONLY"
+    },
+    "originUf": {
+      "path": "/data/qoe_qes_ony_sae_code",
+      "matrixId": "DE-DATA-6906-007",
+      "classification": "LOCAL_DTO_DATA_PATH_CANDIDATE"
+    },
+    "destinationUf": {
+      "path": "/data/qoe_qes_diy_sae_code",
+      "matrixId": "DE-DATA-6906-009",
+      "classification": "LOCAL_DTO_DATA_PATH_CANDIDATE"
+    }
+  },
+  "freshness": {
+    "precedence": ["nfse_issued_at", "cte_issued_at", "requested_at"],
+    "dedupeAndPromotion": "SAME_PRECEDENCE",
+    "equalDivergentContent": "QUARANTINE_STABLE_REASON",
+    "replay": "SAME_TUPLE_NO_SECOND_ROOT",
+    "absence": "BLOCKED_NO_COMPLETENESS_PROOF"
+  },
+  "tariff": {
+    "reference": "ref.tarifa_rota_uf",
+    "referenceRelease": "EXPLICIT_REQUIRED",
+    "direction": "ORIGIN_UF_DESTINATION_UF",
+    "effectiveRouteScope": ["environment_name", "source_instance", "tenant_scope", "entity_name", "source_key"],
+    "effectiveUfPolicy": "ABSENT_FROM_SAME_SCOPED_CURRENT_ROOT_NULL_CLEARS_VALUE_APPLIES",
+    "validity": "[valid_from,valid_to_exclusive)",
+    "amount": "DECIMAL(19,4)",
+    "currency": "REFERENCE_ONLY_NO_6906_SOURCE_PATH",
+    "sourceCurrency": "FORBIDDEN_REFERENCE_ONLY",
+    "unit": "REFERENCE_ONLY",
+    "rounding": "REFERENCE_ONLY",
+    "failure": "CLOSED_ON_ABSENT_UNRATIFIED_REVOKED_OVERLAP_MISSING_UF_OR_UNCOVERED",
+    "forbidden": ["ZERO", "WILDCARD", "FALLBACK", "IMPLICIT_CURRENT_RELEASE"]
+  },
+  "limits": {
+    "publication": "PROHIBITED",
+    "sweep": "PROHIBITED",
+    "cutover": "PROHIBITED",
+    "network": "PROHIBITED",
+    "legacyTariffMatrix": "NOT_IMPORTED_OR_RATIFIED"
+  }
+}

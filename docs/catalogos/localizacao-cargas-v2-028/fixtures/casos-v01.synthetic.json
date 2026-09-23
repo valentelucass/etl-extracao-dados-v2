@@ -1,0 +1,174 @@
+{
+  "schemaVersion": "v2-028a-localizacao-cargas-decision-cases-v1",
+  "evidenceKind": "SYNTHETIC_DECISION_CASES_ONLY_NOT_SOURCE_CONTRACT_EVIDENCE",
+  "cases": [
+    {
+      "caseId": "LOC-01-SCOPED-KEY",
+      "rule": "LOC-01",
+      "scenario": "Chave inteira da raiz usa somente o escopo externo explícito",
+      "symbolicFacts": ["CORPORATION_SEQUENCE_NUMBER=INTEGER", "SOURCE_INSTANCE=EXPLICIT", "TENANT_SCOPE=EXPLICIT"],
+      "expected": {"disposition": "ACCEPT_DECISION", "reason": "SCOPED_INTEGER_IDENTITY_ACCEPTED", "roadmapEffect": "DECISION_ONLY"}
+    },
+    {
+      "caseId": "LOC-01-SEQUENCE-FALLBACK",
+      "rule": "LOC-01",
+      "scenario": "Campo histórico de ordenação tenta substituir a chave da raiz",
+      "symbolicFacts": ["CORPORATION_SEQUENCE_NUMBER=ABSENT", "SEQUENCE_NUMBER=VALUE", "FALLBACK=REQUESTED"],
+      "expected": {"disposition": "BLOCK", "reason": "SEQUENCE_NUMBER_NOT_IDENTITY_OR_ALIAS", "roadmapEffect": "DECISION_ONLY"}
+    },
+    {
+      "caseId": "LOC-01-SCOPE-SENTINEL",
+      "rule": "LOC-01",
+      "scenario": "Sentinela genérica tenta ocupar o escopo obrigatório",
+      "symbolicFacts": ["SOURCE_INSTANCE=EXPLICIT", "TENANT_SCOPE=DEFAULT", "SOURCE_KEY=INTEGER"],
+      "expected": {"disposition": "QUARANTINE", "reason": "EXPLICIT_SCOPE_REQUIRED", "roadmapEffect": "DECISION_ONLY"}
+    },
+    {
+      "caseId": "LOC-02-ABSENT",
+      "rule": "LOC-02",
+      "scenario": "Atributo ausente em observação parcial preserva o conhecido",
+      "symbolicFacts": ["PRESENCE=ABSENT", "KNOWN=VALUE", "RESULT=PRESERVE"],
+      "expected": {"disposition": "NO_OP", "reason": "ABSENT_PRESERVES_KNOWN_VALUE", "roadmapEffect": "DECISION_ONLY"}
+    },
+    {
+      "caseId": "LOC-02-NULL",
+      "rule": "LOC-02",
+      "scenario": "Nulo explícito mantém presença e proveniência separadas",
+      "symbolicFacts": ["PRESENCE=NULL", "RAW=NULL", "PROVENANCE=RECORDED"],
+      "expected": {"disposition": "ACCEPT_DECISION", "reason": "EXPLICIT_NULL_RECORDED", "roadmapEffect": "DECISION_ONLY"}
+    },
+    {
+      "caseId": "LOC-02-INVALID",
+      "rule": "LOC-02",
+      "scenario": "Valor presente inválido conserva bruto e falha de parse",
+      "symbolicFacts": ["PRESENCE=VALUE", "RAW=INVALID_TOKEN", "PARSE_STATE=INVALID"],
+      "expected": {"disposition": "QUARANTINE", "reason": "INVALID_TYPED_VALUE_PRESERVED", "roadmapEffect": "DECISION_ONLY"}
+    },
+    {
+      "caseId": "LOC-03-LOCAL-ZERO",
+      "rule": "LOC-03",
+      "scenario": "Volume local zero vence e não aciona fallback de Fretes",
+      "symbolicFacts": ["VOLUMES_LOCALIZACAO=0", "VOLUMES_FRETES=99", "RESULT=0"],
+      "expected": {"disposition": "ACCEPT_DECISION", "reason": "LOCAL_ZERO_IS_REAL_VALUE", "roadmapEffect": "DECISION_ONLY"}
+    },
+    {
+      "caseId": "LOC-03-FREIGHT-FALLBACK",
+      "rule": "LOC-03",
+      "scenario": "Volume de Fretes é candidato apenas quando o local é nulo",
+      "symbolicFacts": ["VOLUMES_LOCALIZACAO=NULL", "VOLUMES_FRETES=7", "CANDIDATE_MATCH=EXACT_ONE"],
+      "expected": {"disposition": "ACCEPT_DECISION", "reason": "FREIGHT_VOLUME_USED_WHEN_LOCAL_NULL", "roadmapEffect": "DECISION_ONLY"}
+    },
+    {
+      "caseId": "LOC-03-BOTH-NULL",
+      "rule": "LOC-03",
+      "scenario": "Zero final aparece somente quando ambos os volumes são nulos",
+      "symbolicFacts": ["VOLUMES_LOCALIZACAO=NULL", "VOLUMES_FRETES=NULL", "RESULT=0"],
+      "expected": {"disposition": "ACCEPT_DECISION", "reason": "ZERO_DEFAULT_ONLY_AFTER_BOTH_NULL", "roadmapEffect": "DECISION_ONLY"}
+    },
+    {
+      "caseId": "LOC-03-AMBIGUOUS-FREIGHT",
+      "rule": "LOC-03",
+      "scenario": "Alias escopado encontra mais de um candidato de Fretes",
+      "symbolicFacts": ["CANDIDATE_MATCH_COUNT=2", "TOP_1=FORBIDDEN", "RELATION=UNRESOLVED"],
+      "expected": {"disposition": "BLOCK", "reason": "AMBIGUOUS_FREIGHT_CANDIDATE", "roadmapEffect": "DECISION_ONLY"}
+    },
+    {
+      "caseId": "LOC-04-VALID",
+      "rule": "LOC-04",
+      "scenario": "Número ASCII dentro de precisão e escala converte exatamente",
+      "symbolicFacts": ["RAW=123.450000000", "PARSE_STATE=VALID", "ROUNDING=OFF"],
+      "expected": {"disposition": "ACCEPT_DECISION", "reason": "STRICT_NUMERIC_VALUE_ACCEPTED", "roadmapEffect": "DECISION_ONLY"}
+    },
+    {
+      "caseId": "LOC-04-AMBIGUOUS-LOCALE",
+      "rule": "LOC-04",
+      "scenario": "Separador ambíguo não recebe heurística regional",
+      "symbolicFacts": ["RAW=1,234", "LOCALE=AMBIGUOUS", "HEURISTIC=FORBIDDEN"],
+      "expected": {"disposition": "QUARANTINE", "reason": "AMBIGUOUS_NUMERIC_LOCALE", "roadmapEffect": "DECISION_ONLY"}
+    },
+    {
+      "caseId": "LOC-04-OVERFLOW",
+      "rule": "LOC-04",
+      "scenario": "Precisão ou escala fora do envelope não sofre arredondamento",
+      "symbolicFacts": ["PRECISION=39", "SCALE=10", "ROUNDING=FORBIDDEN"],
+      "expected": {"disposition": "QUARANTINE", "reason": "NUMERIC_RANGE_OR_SCALE_OVERFLOW", "roadmapEffect": "DECISION_ONLY"}
+    },
+    {
+      "caseId": "LOC-05-NEWER",
+      "rule": "LOC-05",
+      "scenario": "service_at válido mais novo autoriza promoção da observação",
+      "symbolicFacts": ["SERVICE_AT=VALID", "ORDER=NEWER", "PROMOTION=ALLOWED"],
+      "expected": {"disposition": "ACCEPT_DECISION", "reason": "NEWER_SERVICE_AT_PROMOTES", "roadmapEffect": "DECISION_ONLY"}
+    },
+    {
+      "caseId": "LOC-05-OLDER",
+      "rule": "LOC-05",
+      "scenario": "Observação antiga não regride o estado atual",
+      "symbolicFacts": ["SERVICE_AT=VALID", "ORDER=OLDER", "RESULT=NO_OP"],
+      "expected": {"disposition": "NO_OP", "reason": "OLDER_SERVICE_AT_NEVER_REGRESSES", "roadmapEffect": "DECISION_ONLY"}
+    },
+    {
+      "caseId": "LOC-05-EQUAL-IDENTICAL",
+      "rule": "LOC-05",
+      "scenario": "Mesmo service_at e mesmo conteúdo canônico formam replay",
+      "symbolicFacts": ["SERVICE_AT=EQUAL", "CANONICAL_CONTENT=IDENTICAL", "RESULT=NO_OP"],
+      "expected": {"disposition": "NO_OP", "reason": "EQUAL_IDENTICAL_IS_REPLAY", "roadmapEffect": "DECISION_ONLY"}
+    },
+    {
+      "caseId": "LOC-05-EQUAL-DIVERGENT",
+      "rule": "LOC-05",
+      "scenario": "Mesmo service_at com conteúdo divergente não desempata por chegada",
+      "symbolicFacts": ["SERVICE_AT=EQUAL", "CANONICAL_CONTENT=DIFFERENT", "ARRIVAL=IGNORED"],
+      "expected": {"disposition": "QUARANTINE", "reason": "EQUAL_SERVICE_AT_DIVERGENCE", "roadmapEffect": "DECISION_ONLY"}
+    },
+    {
+      "caseId": "LOC-05-TWO-NULL-DIVERGENT",
+      "rule": "LOC-05",
+      "scenario": "Dois frescores nulos divergentes não usam keep-last",
+      "symbolicFacts": ["CURRENT_SERVICE_AT=NULL", "INCOMING_SERVICE_AT=NULL", "CONTENT=DIFFERENT"],
+      "expected": {"disposition": "QUARANTINE", "reason": "NULL_FRESHNESS_DIVERGENCE", "roadmapEffect": "DECISION_ONLY"}
+    },
+    {
+      "caseId": "LOC-05-EXTRACTION-TIEBREAK",
+      "rule": "LOC-05",
+      "scenario": "Data de extração não decide empate nem nulo",
+      "symbolicFacts": ["SERVICE_AT=EQUAL", "DATA_EXTRACAO=DIFFERENT", "TIEBREAKER=REQUESTED"],
+      "expected": {"disposition": "BLOCK", "reason": "UNPROVEN_FRESHNESS_TIEBREAKER", "roadmapEffect": "DECISION_ONLY"}
+    },
+    {
+      "caseId": "LOC-06-BLANK",
+      "rule": "LOC-06",
+      "scenario": "Status nulo ou branco normaliza para sem_status",
+      "symbolicFacts": ["RAW=BLANK", "NORMALIZED=SEM_STATUS", "TERMINAL=FALSE"],
+      "expected": {"disposition": "ACCEPT_DECISION", "reason": "BLANK_STATUS_BECOMES_SEM_STATUS", "roadmapEffect": "DECISION_ONLY"}
+    },
+    {
+      "caseId": "LOC-06-KNOWN-TERMINAL",
+      "rule": "LOC-06",
+      "scenario": "Status terminal explicitamente catalogado mantém bruto e normalizado",
+      "symbolicFacts": ["RAW_TOKEN=DELIVERED", "NORMALIZED_TOKEN=DELIVERED", "TERMINAL=TRUE"],
+      "expected": {"disposition": "ACCEPT_DECISION", "reason": "KNOWN_TERMINAL_STATUS", "roadmapEffect": "DECISION_ONLY"}
+    },
+    {
+      "caseId": "LOC-06-UNKNOWN",
+      "rule": "LOC-06",
+      "scenario": "Status desconhecido é preservado sem terminalidade inferida",
+      "symbolicFacts": ["RAW_STATUS_IS_UNKNOWN_STATE", "NORMALIZED_STATUS_IS_UNKNOWN_STATE", "TERMINAL=FALSE"],
+      "expected": {"disposition": "ACCEPT_DECISION", "reason": "UNKNOWN_STATUS_IS_NON_TERMINAL", "roadmapEffect": "DECISION_ONLY"}
+    },
+    {
+      "caseId": "LOC-07-UNSOURCED",
+      "rule": "LOC-07",
+      "scenario": "Campo legado sem path permanece ausente com proveniência explícita",
+      "symbolicFacts": ["STATUS_BRANCH_NICKNAME=ABSENT", "PROVENANCE=UNSOURCED_LEGACY", "FALLBACK=OFF"],
+      "expected": {"disposition": "NO_OP", "reason": "UNSOURCED_LEGACY_REMAINS_ABSENT", "roadmapEffect": "DECISION_ONLY"}
+    },
+    {
+      "caseId": "LOC-07-NICKNAME-FALLBACK",
+      "rule": "LOC-07",
+      "scenario": "Nickname semelhante tenta preencher campo legado sem fonte",
+      "symbolicFacts": ["STATUS_BRANCH_NICKNAME=ABSENT", "SIMILAR_NICKNAME=VALUE", "FALLBACK=REQUESTED"],
+      "expected": {"disposition": "BLOCK", "reason": "SIMILAR_NICKNAME_FALLBACK_FORBIDDEN", "roadmapEffect": "DECISION_ONLY"}
+    }
+  ]
+}

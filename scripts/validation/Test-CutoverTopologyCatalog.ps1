@@ -124,7 +124,9 @@ Assert-True ($manifest.topology.technical_shadow_publication_is_point_of_no_retu
 Assert-True ($manifest.topology.point_of_no_return -ceq 'FIRST_ACCEPTED_AUTHORITATIVE_V2_PRODUCTION_PUBLICATION') 'Definição do ponto de não retorno divergente.'
 Assert-True ($manifest.topology.recovery_after_point_of_no_return -ceq 'ROLL_FORWARD_ONLY') 'Recuperação pós-PNR deve ser roll-forward.'
 Assert-True (@(Compare-Object @('ctl','stg','core','ref','mart','pub','recon') @($manifest.baselines.schemas) -CaseSensitive).Count -eq 0) 'Schemas V2-019 divergentes no catálogo de cutover.'
-Assert-True ([int]$manifest.baselines.grant_allowlist_triplets -eq 26) 'Allowlist atual V001–V009 deve possuir 26 triplets.'
+Assert-True ([int]$manifest.baselines.grant_allowlist_triplets -eq
+    [int]$schemaManifest.grantPublisher.allowedTriplets) `
+    'A quantidade de triplets deve corresponder à fundação validada, sem conceder permissões.'
 Assert-True ($manifest.schema_foundation_contract.roadmap_task -ceq 'V2-019' -and
     [int]$manifest.schema_foundation_contract.manifest_version -eq [int]$schemaManifest.manifestVersion -and
     $manifest.schema_foundation_contract.manifest_sha256 -ceq $schemaManifestSha256 -and

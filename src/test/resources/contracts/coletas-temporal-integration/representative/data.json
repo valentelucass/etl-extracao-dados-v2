@@ -1,0 +1,110 @@
+{
+  "captureId": "synthetic-data",
+  "contractFingerprint": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "contractVersion": "synthetic-coletas-temporal-v1",
+  "rows": [
+    {
+      "status": "pending",
+      "key": "INTEGER:17",
+      "instant": null,
+      "nativePresence": "ABSENT"
+    },
+    {
+      "status": "done",
+      "key": "INTEGER:18",
+      "instant": null,
+      "nativePresence": "ABSENT"
+    },
+    {
+      "status": "finished",
+      "key": "INTEGER:19",
+      "instant": null,
+      "nativePresence": "ABSENT"
+    },
+    {
+      "status": "canceled",
+      "key": "INTEGER:20",
+      "instant": null,
+      "nativePresence": "ABSENT"
+    },
+    {
+      "status": "pending",
+      "key": "INTEGER:21",
+      "instant": null,
+      "nativePresence": "ABSENT"
+    },
+    {
+      "status": "pending",
+      "key": "INTEGER:22",
+      "instant": null,
+      "nativePresence": "NULL"
+    },
+    {
+      "status": "pending",
+      "key": "INTEGER:23",
+      "instant": "invalid",
+      "nativePresence": "VALUE"
+    },
+    {
+      "status": "pending",
+      "key": "INTEGER:24",
+      "instant": null,
+      "nativePresence": "ABSENT"
+    },
+    {
+      "status": "pending",
+      "key": "INTEGER:25",
+      "instant": null,
+      "nativePresence": "ABSENT"
+    },
+    {
+      "status": "pending",
+      "key": "INTEGER:26",
+      "instant": null,
+      "nativePresence": "ABSENT"
+    },
+    {
+      "status": "pending",
+      "key": "INTEGER:27",
+      "instant": null,
+      "nativePresence": "ABSENT"
+    },
+    {
+      "status": "pending",
+      "key": "INTEGER:28",
+      "instant": null,
+      "nativePresence": "ABSENT"
+    },
+    {
+      "status": "pending",
+      "key": "INTEGER:28",
+      "instant": null,
+      "nativePresence": "ABSENT"
+    },
+    {
+      "status": "pending",
+      "key": "INTEGER:29",
+      "instant": null,
+      "nativePresence": "ABSENT"
+    },
+    {
+      "key": "INTEGER:30",
+      "nativePresence": "ABSENT",
+      "instant": null,
+      "status": "pending"
+    },
+    {
+      "key": "INTEGER:31",
+      "nativePresence": "ABSENT",
+      "instant": null,
+      "status": "pending"
+    },
+    {
+      "key": "INTEGER:32",
+      "nativePresence": "ABSENT",
+      "instant": null,
+      "status": "pending"
+    }
+  ],
+  "executionId": "10000000-0000-0000-0000-000000000001"
+}

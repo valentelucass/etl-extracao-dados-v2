@@ -1,0 +1,877 @@
+[
+  {
+    "id": "USUARIOS_RUN",
+    "request": "requests/USUARIOS_RUN.json",
+    "layer": "OFFICIAL_JAR_WINDOWS_SQL",
+    "artifact": "administered",
+    "account": "etl_v2_exec",
+    "command": "run",
+    "fault": "NONE",
+    "scenario": "NORMAL",
+    "group": "B60_C_986EF5EA704D73A5",
+    "delayMilliseconds": 0,
+    "cancel": false,
+    "waitBeforeSeconds": 0,
+    "pair": "",
+    "expectedExit": [
+      0
+    ],
+    "expectedHttp": [
+      2
+    ],
+    "expected": {
+      "publications": 1,
+      "seals": 1,
+      "consumptions": 1
+    },
+    "unchangedFrom": ""
+  },
+  {
+    "id": "USUARIOS_STATUS_ETL_V2_EXEC",
+    "request": "requests/USUARIOS_STATUS_ETL_V2_EXEC.json",
+    "layer": "OFFICIAL_JAR_WINDOWS_SQL",
+    "artifact": "administered",
+    "account": "etl_v2_exec",
+    "command": "status",
+    "fault": "NONE",
+    "scenario": "NORMAL",
+    "group": "B60_C_9FAD669D73E2921E",
+    "delayMilliseconds": 0,
+    "cancel": false,
+    "waitBeforeSeconds": 0,
+    "pair": "",
+    "expectedExit": [
+      0
+    ],
+    "expectedHttp": [
+      0
+    ],
+    "expected": {
+      "publications": 1,
+      "seals": 1,
+      "consumptions": 1
+    },
+    "unchangedFrom": "USUARIOS_RUN"
+  },
+  {
+    "id": "USUARIOS_STATUS_ETL_V2_VIEW",
+    "request": "requests/USUARIOS_STATUS_ETL_V2_VIEW.json",
+    "layer": "OFFICIAL_JAR_WINDOWS_SQL",
+    "artifact": "administered",
+    "account": "etl_v2_view",
+    "command": "status",
+    "fault": "NONE",
+    "scenario": "NORMAL",
+    "group": "B60_C_E641D473D0E488FA",
+    "delayMilliseconds": 0,
+    "cancel": false,
+    "waitBeforeSeconds": 0,
+    "pair": "",
+    "expectedExit": [
+      0
+    ],
+    "expectedHttp": [
+      0
+    ],
+    "expected": {
+      "publications": 1,
+      "seals": 1,
+      "consumptions": 1
+    },
+    "unchangedFrom": "USUARIOS_RUN"
+  },
+  {
+    "id": "USUARIOS_KNOWN",
+    "request": "requests/USUARIOS_KNOWN.json",
+    "layer": "OFFICIAL_JAR_WINDOWS_SQL",
+    "artifact": "administered",
+    "account": "etl_v2_exec",
+    "command": "run",
+    "fault": "NONE",
+    "scenario": "NORMAL",
+    "group": "B60_C_EEDCB2A630D2AFF8",
+    "delayMilliseconds": 0,
+    "cancel": false,
+    "waitBeforeSeconds": 0,
+    "pair": "",
+    "expectedExit": [
+      0
+    ],
+    "expectedHttp": [
+      0
+    ],
+    "expected": {
+      "publications": 1,
+      "seals": 1,
+      "consumptions": 1
+    },
+    "unchangedFrom": "USUARIOS_RUN"
+  },
+  {
+    "id": "COLETAS_RUN",
+    "request": "requests/COLETAS_RUN.json",
+    "layer": "OFFICIAL_JAR_WINDOWS_SQL",
+    "artifact": "administered",
+    "account": "etl_v2_exec",
+    "command": "run",
+    "fault": "NONE",
+    "scenario": "NORMAL",
+    "group": "B60_C_986EF5EA704D73A5",
+    "delayMilliseconds": 0,
+    "cancel": false,
+    "waitBeforeSeconds": 0,
+    "pair": "",
+    "expectedExit": [
+      0
+    ],
+    "expectedHttp": [
+      4
+    ],
+    "expected": {
+      "publications": 1,
+      "seals": 1,
+      "consumptions": 1
+    },
+    "unchangedFrom": ""
+  },
+  {
+    "id": "COLETAS_STATUS_ETL_V2_EXEC",
+    "request": "requests/COLETAS_STATUS_ETL_V2_EXEC.json",
+    "layer": "OFFICIAL_JAR_WINDOWS_SQL",
+    "artifact": "administered",
+    "account": "etl_v2_exec",
+    "command": "status",
+    "fault": "NONE",
+    "scenario": "NORMAL",
+    "group": "B60_C_07D6A05512A1E0FD",
+    "delayMilliseconds": 0,
+    "cancel": false,
+    "waitBeforeSeconds": 0,
+    "pair": "",
+    "expectedExit": [
+      0
+    ],
+    "expectedHttp": [
+      0
+    ],
+    "expected": {
+      "publications": 1,
+      "seals": 1,
+      "consumptions": 1
+    },
+    "unchangedFrom": "COLETAS_RUN"
+  },
+  {
+    "id": "COLETAS_STATUS_ETL_V2_VIEW",
+    "request": "requests/COLETAS_STATUS_ETL_V2_VIEW.json",
+    "layer": "OFFICIAL_JAR_WINDOWS_SQL",
+    "artifact": "administered",
+    "account": "etl_v2_view",
+    "command": "status",
+    "fault": "NONE",
+    "scenario": "NORMAL",
+    "group": "B60_C_271BEBA1C58E6B92",
+    "delayMilliseconds": 0,
+    "cancel": false,
+    "waitBeforeSeconds": 0,
+    "pair": "",
+    "expectedExit": [
+      0
+    ],
+    "expectedHttp": [
+      0
+    ],
+    "expected": {
+      "publications": 1,
+      "seals": 1,
+      "consumptions": 1
+    },
+    "unchangedFrom": "COLETAS_RUN"
+  },
+  {
+    "id": "COLETAS_KNOWN",
+    "request": "requests/COLETAS_KNOWN.json",
+    "layer": "OFFICIAL_JAR_WINDOWS_SQL",
+    "artifact": "administered",
+    "account": "etl_v2_exec",
+    "command": "run",
+    "fault": "NONE",
+    "scenario": "NORMAL",
+    "group": "B60_C_EFEB0A90EE9777DD",
+    "delayMilliseconds": 0,
+    "cancel": false,
+    "waitBeforeSeconds": 0,
+    "pair": "",
+    "expectedExit": [
+      0
+    ],
+    "expectedHttp": [
+      0
+    ],
+    "expected": {
+      "publications": 1,
+      "seals": 1,
+      "consumptions": 1
+    },
+    "unchangedFrom": "COLETAS_RUN"
+  },
+  {
+    "id": "FRETES_RUN",
+    "request": "requests/FRETES_RUN.json",
+    "layer": "OFFICIAL_JAR_WINDOWS_SQL",
+    "artifact": "administered",
+    "account": "etl_v2_exec",
+    "command": "run",
+    "fault": "NONE",
+    "scenario": "NORMAL",
+    "group": "B60_C_986EF5EA704D73A5",
+    "delayMilliseconds": 0,
+    "cancel": false,
+    "waitBeforeSeconds": 0,
+    "pair": "",
+    "expectedExit": [
+      0
+    ],
+    "expectedHttp": [
+      4
+    ],
+    "expected": {
+      "publications": 1,
+      "seals": 1,
+      "consumptions": 1
+    },
+    "unchangedFrom": ""
+  },
+  {
+    "id": "FRETES_STATUS_ETL_V2_EXEC",
+    "request": "requests/FRETES_STATUS_ETL_V2_EXEC.json",
+    "layer": "OFFICIAL_JAR_WINDOWS_SQL",
+    "artifact": "administered",
+    "account": "etl_v2_exec",
+    "command": "status",
+    "fault": "NONE",
+    "scenario": "NORMAL",
+    "group": "B60_C_9AF5D298223D280B",
+    "delayMilliseconds": 0,
+    "cancel": false,
+    "waitBeforeSeconds": 0,
+    "pair": "",
+    "expectedExit": [
+      0
+    ],
+    "expectedHttp": [
+      0
+    ],
+    "expected": {
+      "publications": 1,
+      "seals": 1,
+      "consumptions": 1
+    },
+    "unchangedFrom": "FRETES_RUN"
+  },
+  {
+    "id": "FRETES_STATUS_ETL_V2_VIEW",
+    "request": "requests/FRETES_STATUS_ETL_V2_VIEW.json",
+    "layer": "OFFICIAL_JAR_WINDOWS_SQL",
+    "artifact": "administered",
+    "account": "etl_v2_view",
+    "command": "status",
+    "fault": "NONE",
+    "scenario": "NORMAL",
+    "group": "B60_C_F6DBE3007C4F8F61",
+    "delayMilliseconds": 0,
+    "cancel": false,
+    "waitBeforeSeconds": 0,
+    "pair": "",
+    "expectedExit": [
+      0
+    ],
+    "expectedHttp": [
+      0
+    ],
+    "expected": {
+      "publications": 1,
+      "seals": 1,
+      "consumptions": 1
+    },
+    "unchangedFrom": "FRETES_RUN"
+  },
+  {
+    "id": "FRETES_KNOWN",
+    "request": "requests/FRETES_KNOWN.json",
+    "layer": "OFFICIAL_JAR_WINDOWS_SQL",
+    "artifact": "administered",
+    "account": "etl_v2_exec",
+    "command": "run",
+    "fault": "NONE",
+    "scenario": "NORMAL",
+    "group": "B60_C_9270FB6E1430F7D4",
+    "delayMilliseconds": 0,
+    "cancel": false,
+    "waitBeforeSeconds": 0,
+    "pair": "",
+    "expectedExit": [
+      0
+    ],
+    "expectedHttp": [
+      0
+    ],
+    "expected": {
+      "publications": 1,
+      "seals": 1,
+      "consumptions": 1
+    },
+    "unchangedFrom": "FRETES_RUN"
+  },
+  {
+    "id": "MANIFESTOS_RUN",
+    "request": "requests/MANIFESTOS_RUN.json",
+    "layer": "OFFICIAL_JAR_WINDOWS_SQL",
+    "artifact": "administered",
+    "account": "etl_v2_exec",
+    "command": "run",
+    "fault": "NONE",
+    "scenario": "NORMAL",
+    "group": "B60_C_986EF5EA704D73A5",
+    "delayMilliseconds": 0,
+    "cancel": false,
+    "waitBeforeSeconds": 0,
+    "pair": "",
+    "expectedExit": [
+      0
+    ],
+    "expectedHttp": [
+      4
+    ],
+    "expected": {
+      "publications": 1,
+      "seals": 1,
+      "consumptions": 1
+    },
+    "unchangedFrom": ""
+  },
+  {
+    "id": "MANIFESTOS_STATUS_ETL_V2_EXEC",
+    "request": "requests/MANIFESTOS_STATUS_ETL_V2_EXEC.json",
+    "layer": "OFFICIAL_JAR_WINDOWS_SQL",
+    "artifact": "administered",
+    "account": "etl_v2_exec",
+    "command": "status",
+    "fault": "NONE",
+    "scenario": "NORMAL",
+    "group": "B60_C_D69B2E5D66A04AD7",
+    "delayMilliseconds": 0,
+    "cancel": false,
+    "waitBeforeSeconds": 0,
+    "pair": "",
+    "expectedExit": [
+      0
+    ],
+    "expectedHttp": [
+      0
+    ],
+    "expected": {
+      "publications": 1,
+      "seals": 1,
+      "consumptions": 1
+    },
+    "unchangedFrom": "MANIFESTOS_RUN"
+  },
+  {
+    "id": "MANIFESTOS_STATUS_ETL_V2_VIEW",
+    "request": "requests/MANIFESTOS_STATUS_ETL_V2_VIEW.json",
+    "layer": "OFFICIAL_JAR_WINDOWS_SQL",
+    "artifact": "administered",
+    "account": "etl_v2_view",
+    "command": "status",
+    "fault": "NONE",
+    "scenario": "NORMAL",
+    "group": "B60_C_A069D090957AB4EA",
+    "delayMilliseconds": 0,
+    "cancel": false,
+    "waitBeforeSeconds": 0,
+    "pair": "",
+    "expectedExit": [
+      0
+    ],
+    "expectedHttp": [
+      0
+    ],
+    "expected": {
+      "publications": 1,
+      "seals": 1,
+      "consumptions": 1
+    },
+    "unchangedFrom": "MANIFESTOS_RUN"
+  },
+  {
+    "id": "MANIFESTOS_KNOWN",
+    "request": "requests/MANIFESTOS_KNOWN.json",
+    "layer": "OFFICIAL_JAR_WINDOWS_SQL",
+    "artifact": "administered",
+    "account": "etl_v2_exec",
+    "command": "run",
+    "fault": "NONE",
+    "scenario": "NORMAL",
+    "group": "B60_C_90E97B3EFFC55EC9",
+    "delayMilliseconds": 0,
+    "cancel": false,
+    "waitBeforeSeconds": 0,
+    "pair": "",
+    "expectedExit": [
+      0
+    ],
+    "expectedHttp": [
+      0
+    ],
+    "expected": {
+      "publications": 1,
+      "seals": 1,
+      "consumptions": 1
+    },
+    "unchangedFrom": "MANIFESTOS_RUN"
+  },
+  {
+    "id": "COTACOES_RUN",
+    "request": "requests/COTACOES_RUN.json",
+    "layer": "OFFICIAL_JAR_WINDOWS_SQL",
+    "artifact": "administered",
+    "account": "etl_v2_exec",
+    "command": "run",
+    "fault": "NONE",
+    "scenario": "NORMAL",
+    "group": "B60_C_986EF5EA704D73A5",
+    "delayMilliseconds": 0,
+    "cancel": false,
+    "waitBeforeSeconds": 0,
+    "pair": "",
+    "expectedExit": [
+      0
+    ],
+    "expectedHttp": [
+      4
+    ],
+    "expected": {
+      "publications": 1,
+      "seals": 1,
+      "consumptions": 1
+    },
+    "unchangedFrom": ""
+  },
+  {
+    "id": "COTACOES_STATUS_ETL_V2_EXEC",
+    "request": "requests/COTACOES_STATUS_ETL_V2_EXEC.json",
+    "layer": "OFFICIAL_JAR_WINDOWS_SQL",
+    "artifact": "administered",
+    "account": "etl_v2_exec",
+    "command": "status",
+    "fault": "NONE",
+    "scenario": "NORMAL",
+    "group": "B60_C_0016C6389946BA47",
+    "delayMilliseconds": 0,
+    "cancel": false,
+    "waitBeforeSeconds": 0,
+    "pair": "",
+    "expectedExit": [
+      0
+    ],
+    "expectedHttp": [
+      0
+    ],
+    "expected": {
+      "publications": 1,
+      "seals": 1,
+      "consumptions": 1
+    },
+    "unchangedFrom": "COTACOES_RUN"
+  },
+  {
+    "id": "COTACOES_STATUS_ETL_V2_VIEW",
+    "request": "requests/COTACOES_STATUS_ETL_V2_VIEW.json",
+    "layer": "OFFICIAL_JAR_WINDOWS_SQL",
+    "artifact": "administered",
+    "account": "etl_v2_view",
+    "command": "status",
+    "fault": "NONE",
+    "scenario": "NORMAL",
+    "group": "B60_C_D8E7C63BDFAF6586",
+    "delayMilliseconds": 0,
+    "cancel": false,
+    "waitBeforeSeconds": 0,
+    "pair": "",
+    "expectedExit": [
+      0
+    ],
+    "expectedHttp": [
+      0
+    ],
+    "expected": {
+      "publications": 1,
+      "seals": 1,
+      "consumptions": 1
+    },
+    "unchangedFrom": "COTACOES_RUN"
+  },
+  {
+    "id": "COTACOES_KNOWN",
+    "request": "requests/COTACOES_KNOWN.json",
+    "layer": "OFFICIAL_JAR_WINDOWS_SQL",
+    "artifact": "administered",
+    "account": "etl_v2_exec",
+    "command": "run",
+    "fault": "NONE",
+    "scenario": "NORMAL",
+    "group": "B60_C_91B31D391DBF396D",
+    "delayMilliseconds": 0,
+    "cancel": false,
+    "waitBeforeSeconds": 0,
+    "pair": "",
+    "expectedExit": [
+      0
+    ],
+    "expectedHttp": [
+      0
+    ],
+    "expected": {
+      "publications": 1,
+      "seals": 1,
+      "consumptions": 1
+    },
+    "unchangedFrom": "COTACOES_RUN"
+  },
+  {
+    "id": "LOCALIZACAO_CARGAS_RUN",
+    "request": "requests/LOCALIZACAO_CARGAS_RUN.json",
+    "layer": "OFFICIAL_JAR_WINDOWS_SQL",
+    "artifact": "administered",
+    "account": "etl_v2_exec",
+    "command": "run",
+    "fault": "NONE",
+    "scenario": "NORMAL",
+    "group": "B60_C_986EF5EA704D73A5",
+    "delayMilliseconds": 0,
+    "cancel": false,
+    "waitBeforeSeconds": 0,
+    "pair": "",
+    "expectedExit": [
+      0
+    ],
+    "expectedHttp": [
+      4
+    ],
+    "expected": {
+      "publications": 1,
+      "seals": 1,
+      "consumptions": 1
+    },
+    "unchangedFrom": ""
+  },
+  {
+    "id": "LOCALIZACAO_CARGAS_STATUS_ETL_V2_EXEC",
+    "request": "requests/LOCALIZACAO_CARGAS_STATUS_ETL_V2_EXEC.json",
+    "layer": "OFFICIAL_JAR_WINDOWS_SQL",
+    "artifact": "administered",
+    "account": "etl_v2_exec",
+    "command": "status",
+    "fault": "NONE",
+    "scenario": "NORMAL",
+    "group": "B60_C_713AF56AC7455D3B",
+    "delayMilliseconds": 0,
+    "cancel": false,
+    "waitBeforeSeconds": 0,
+    "pair": "",
+    "expectedExit": [
+      0
+    ],
+    "expectedHttp": [
+      0
+    ],
+    "expected": {
+      "publications": 1,
+      "seals": 1,
+      "consumptions": 1
+    },
+    "unchangedFrom": "LOCALIZACAO_CARGAS_RUN"
+  },
+  {
+    "id": "LOCALIZACAO_CARGAS_STATUS_ETL_V2_VIEW",
+    "request": "requests/LOCALIZACAO_CARGAS_STATUS_ETL_V2_VIEW.json",
+    "layer": "OFFICIAL_JAR_WINDOWS_SQL",
+    "artifact": "administered",
+    "account": "etl_v2_view",
+    "command": "status",
+    "fault": "NONE",
+    "scenario": "NORMAL",
+    "group": "B60_C_C7212A78A2038D96",
+    "delayMilliseconds": 0,
+    "cancel": false,
+    "waitBeforeSeconds": 0,
+    "pair": "",
+    "expectedExit": [
+      0
+    ],
+    "expectedHttp": [
+      0
+    ],
+    "expected": {
+      "publications": 1,
+      "seals": 1,
+      "consumptions": 1
+    },
+    "unchangedFrom": "LOCALIZACAO_CARGAS_RUN"
+  },
+  {
+    "id": "LOCALIZACAO_CARGAS_KNOWN",
+    "request": "requests/LOCALIZACAO_CARGAS_KNOWN.json",
+    "layer": "OFFICIAL_JAR_WINDOWS_SQL",
+    "artifact": "administered",
+    "account": "etl_v2_exec",
+    "command": "run",
+    "fault": "NONE",
+    "scenario": "NORMAL",
+    "group": "B60_C_0EF7E1025523DB39",
+    "delayMilliseconds": 0,
+    "cancel": false,
+    "waitBeforeSeconds": 0,
+    "pair": "",
+    "expectedExit": [
+      0
+    ],
+    "expectedHttp": [
+      0
+    ],
+    "expected": {
+      "publications": 1,
+      "seals": 1,
+      "consumptions": 1
+    },
+    "unchangedFrom": "LOCALIZACAO_CARGAS_RUN"
+  },
+  {
+    "id": "USERS_ONE_PAGE",
+    "request": "requests/USERS_ONE_PAGE.json",
+    "layer": "OFFICIAL_JAR_WINDOWS_SQL",
+    "artifact": "administered",
+    "account": "etl_v2_exec",
+    "command": "run",
+    "fault": "NONE",
+    "scenario": "ONE_PAGE",
+    "group": "B60_C_44C0E4621AB3551F",
+    "delayMilliseconds": 0,
+    "cancel": false,
+    "waitBeforeSeconds": 0,
+    "pair": "",
+    "expectedExit": [
+      0
+    ],
+    "expectedHttp": [
+      1
+    ],
+    "expected": {
+      "publications": 1,
+      "seals": 1,
+      "auditedRows": 1,
+      "consumptions": 1,
+      "pages": 1
+    },
+    "unchangedFrom": ""
+  },
+  {
+    "id": "USERS_NOOP",
+    "request": "requests/USERS_NOOP.json",
+    "layer": "OFFICIAL_JAR_WINDOWS_SQL",
+    "artifact": "administered",
+    "account": "etl_v2_exec",
+    "command": "run",
+    "fault": "NONE",
+    "scenario": "NORMAL",
+    "group": "B60_C_986EF5EA704D73A5",
+    "delayMilliseconds": 0,
+    "cancel": false,
+    "waitBeforeSeconds": 0,
+    "pair": "",
+    "expectedExit": [
+      0
+    ],
+    "expectedHttp": [
+      2
+    ],
+    "expected": {
+      "typedNoop": 2,
+      "publications": 1,
+      "typedUpdated": 0,
+      "consumptions": 1,
+      "seals": 1,
+      "typedInserted": 0
+    },
+    "unchangedFrom": ""
+  },
+  {
+    "id": "USERS_UPDATE",
+    "request": "requests/USERS_UPDATE.json",
+    "layer": "OFFICIAL_JAR_WINDOWS_SQL",
+    "artifact": "administered",
+    "account": "etl_v2_exec",
+    "command": "run",
+    "fault": "NONE",
+    "scenario": "UPDATE",
+    "group": "B60_C_986EF5EA704D73A5",
+    "delayMilliseconds": 0,
+    "cancel": false,
+    "waitBeforeSeconds": 0,
+    "pair": "",
+    "expectedExit": [
+      0
+    ],
+    "expectedHttp": [
+      2
+    ],
+    "expected": {
+      "typedNoop": 0,
+      "publications": 1,
+      "typedUpdated": 2,
+      "consumptions": 1,
+      "seals": 1,
+      "typedInserted": 0
+    },
+    "unchangedFrom": ""
+  },
+  {
+    "id": "USERS_CONFLICT",
+    "request": "requests/USERS_CONFLICT.json",
+    "layer": "OFFICIAL_JAR_WINDOWS_SQL",
+    "artifact": "administered",
+    "account": "etl_v2_exec",
+    "command": "run",
+    "fault": "NONE",
+    "scenario": "CONFLICT",
+    "group": "B60_C_261545B931E73BE1",
+    "delayMilliseconds": 0,
+    "cancel": false,
+    "waitBeforeSeconds": 0,
+    "pair": "",
+    "expectedExit": [
+      40
+    ],
+    "expectedHttp": [
+      2
+    ],
+    "expected": {
+      "publications": 0,
+      "seals": 0,
+      "consumptions": 1
+    },
+    "unchangedFrom": ""
+  },
+  {
+    "id": "USERS_PARTIAL",
+    "request": "requests/USERS_PARTIAL.json",
+    "layer": "OFFICIAL_JAR_WINDOWS_SQL",
+    "artifact": "administered",
+    "account": "etl_v2_exec",
+    "command": "run",
+    "fault": "NONE",
+    "scenario": "PARTIAL",
+    "group": "B60_C_E69BC63E037983EB",
+    "delayMilliseconds": 0,
+    "cancel": false,
+    "waitBeforeSeconds": 0,
+    "pair": "",
+    "expectedExit": [
+      40
+    ],
+    "expectedHttp": [
+      2
+    ],
+    "expected": {
+      "publications": 0,
+      "seals": 0,
+      "consumptions": 1,
+      "stageRows": 1,
+      "pages": 1
+    },
+    "unchangedFrom": ""
+  },
+  {
+    "id": "USERS_NULL_TERMINAL",
+    "request": "requests/USERS_NULL_TERMINAL.json",
+    "layer": "OFFICIAL_JAR_WINDOWS_SQL",
+    "artifact": "administered",
+    "account": "etl_v2_exec",
+    "command": "run",
+    "fault": "NONE",
+    "scenario": "NULL_TERMINAL",
+    "group": "B60_C_5C1D2EBFE1A15FEA",
+    "delayMilliseconds": 0,
+    "cancel": false,
+    "waitBeforeSeconds": 0,
+    "pair": "",
+    "expectedExit": [
+      40
+    ],
+    "expectedHttp": [
+      1
+    ],
+    "expected": {
+      "publications": 0,
+      "seals": 0,
+      "consumptions": 1
+    },
+    "unchangedFrom": ""
+  },
+  {
+    "id": "USERS_INVALID_NODE",
+    "request": "requests/USERS_INVALID_NODE.json",
+    "layer": "OFFICIAL_JAR_WINDOWS_SQL",
+    "artifact": "administered",
+    "account": "etl_v2_exec",
+    "command": "run",
+    "fault": "NONE",
+    "scenario": "INVALID_NODE",
+    "group": "B60_C_FCDFA2F406550A96",
+    "delayMilliseconds": 0,
+    "cancel": false,
+    "waitBeforeSeconds": 0,
+    "pair": "",
+    "expectedExit": [
+      40
+    ],
+    "expectedHttp": [
+      1
+    ],
+    "expected": {
+      "publications": 0,
+      "seals": 0,
+      "consumptions": 1
+    },
+    "unchangedFrom": ""
+  },
+  {
+    "id": "USERS_CANCEL",
+    "request": "requests/USERS_CANCEL.json",
+    "layer": "OFFICIAL_JAR_WINDOWS_SQL",
+    "artifact": "administered",
+    "account": "etl_v2_exec",
+    "command": "run",
+    "fault": "NONE",
+    "scenario": "NORMAL",
+    "group": "B60_C_AE152F85FAC7BA12",
+    "delayMilliseconds": 1500,
+    "cancel": true,
+    "waitBeforeSeconds": 0,
+    "pair": "",
+    "expectedExit": [
+      50
+    ],
+    "expectedHttp": [
+      1
+    ],
+    "expected": {
+      "publications": 0,
+      "seals": 0,
+      "consumptions": 1,
+      "state": "CANCELLED"
+    },
+    "unchangedFrom": ""
+  }
+]

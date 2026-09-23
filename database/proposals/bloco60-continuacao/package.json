@@ -1,0 +1,1091 @@
+{
+  "version": 1,
+  "block": 60,
+  "status": "CORRECTIVE_CONTINUATION_WITHIN_EXISTING_TOTAL_ENVELOPE",
+  "target": "localhost/ETL_SISTEMA_V2_SHADOW",
+  "serverName": "RTR-SVW-002",
+  "administrator": "RTR-SVW-002\\suporte",
+  "executor": "RTR-SVW-002\\etl_v2_exec",
+  "observer": "RTR-SVW-002\\etl_v2_view",
+  "validFrom": "2026-09-10T00:00:00Z",
+  "validUntil": "2026-09-16T00:00:00Z",
+  "authorityId": "fd966e17-71c7-4071-9ccc-bedcaecffcd0",
+  "policy": "c76b345af620f21984d3b2d3cec10b0064e53f3b3440984c3f484c834977cc5d",
+  "predecessorReceipt": "f2b35d102e8517b4fda6be67d2d84b8b1945077670470f77ef1d8f31307b605b",
+  "expectedCatalog": "cfd68974c4fc7667cde1bf9376250d41d58fccf026f9aae5a03268062ecd8e34",
+  "expectedRows": null,
+  "sourceInstance": "LOCAL_V2",
+  "tenantScope": "LOCAL_V2",
+  "loopback": "http://127.0.0.1:62160",
+  "limits": {
+    "campaignMinutes": 60,
+    "jvms": 80,
+    "sqlcmd": 240,
+    "ordinarySqlcmd": 232,
+    "recoveryEscrow": 8,
+    "concurrentJvms": 2,
+    "concurrentSqlcmd": 2,
+    "concurrentProcessesIncludingController": 5,
+    "concurrentSqlSessions": 10,
+    "jvmSeconds": 60,
+    "sqlcmdSeconds": 45,
+    "sqlCommandSeconds": 30,
+    "heapMiBPerJvm": 512,
+    "connectionsPerJvm": 256,
+    "submissionsPerJvm": 512,
+    "rpcInnerCommitCeilingPerJvm": 4096,
+    "sourceRequests": 400,
+    "pagesPerJvm": 4,
+    "nodesPerJvm": 80,
+    "graphQlPageSize": 20,
+    "graphQlNodesOffered": 800,
+    "dataExportRowsPerJvm": 16,
+    "dataExportDerivedRowsPerJvm": 512,
+    "responseBytesPerRequest": 1048576,
+    "sourceResponseBytesOffered": 16777216,
+    "sourceRequestBytes": 8388608,
+    "javaOutputBytes": 16384,
+    "sqlcmdOutputBytes": 1048576,
+    "refunded": 0,
+    "renewals": 0
+  },
+  "minimumPermissionDelta": [
+    "Exactly the same two procedure GRANT EXECUTE permissions as the predecessor",
+    "SERVICE mapping 19 -> 20: replay=1, force_run=1; original validity unchanged; principal-wide flags include the existing five BACKFILL verticals",
+    "Exactly four existing Users scopes 2 -> 3, revoked=0; same identities/environment/source/tenant/modes/policy",
+    "Append Users DQ backfill-v2/replay-v2 and eight strict checks; old v1 policies remain revoked",
+    "No migration, database, account, role, membership, source-kind change or new protocol binding"
+  ],
+  "compensation": [
+    "SERVICE mapping 20 -> 21: replay=0, force_run=0",
+    "Exactly four Users scopes 3 -> 4, revoked=1",
+    "Revoke two new v2 DQ policies and the exact two temporary procedure grants",
+    "Preserve V024, original validity, protocol bindings, synthetic data, history, decisions, publications, seals and receipts",
+    "Stop owned handles and loopback; verify exact compensated profile and historical row-hash multiset",
+    "Only one SERVICE mapping and exactly four Users scope rows are excluded from multiset; their complete profile is checked separately"
+  ],
+  "baselineMethod": "EXISTING_V024_COMPENSATED_SERVICE_19_NO_DDL",
+  "cleanEmptyDatabaseExecuted": false,
+  "cases": 74,
+  "variants": [
+    {
+      "path": "target/b60-correcao-20260910/bundle-v2/administered",
+      "variant": "administered",
+      "manifest": "5fe966089d28b82ca8524a88a6a9e58e69ab84f7ab9036bee7eec002aa3b5d59",
+      "expectedRefusal": false
+    },
+    {
+      "path": "target/b60-correcao-20260910/bundle-v2/swapped",
+      "variant": "swapped",
+      "manifest": "39b0f1b949d266e2b74ed7ef53bf408d8cdf68e48a6d3b443437051f94e69ec1",
+      "expectedRefusal": true
+    },
+    {
+      "path": "target/b60-correcao-20260910/bundle-v2/expired",
+      "variant": "expired",
+      "manifest": "3be52f98b745523d19e4241c8ca1b60d8e89d93c8523abe6e4b14b73d605ced4",
+      "expectedRefusal": true
+    },
+    {
+      "path": "target/b60-correcao-20260910/bundle-v2/inconsistent",
+      "variant": "inconsistent",
+      "manifest": "9c0497b7463626754142ea1fda15ee8157a7abc1858acc9ace2b551d877b8947",
+      "expectedRefusal": true
+    }
+  ],
+  "files": [
+    {
+      "sha256": "4492815b41e1415fe64dcc01c3865c7794f4c9e754e5aa94939397f2e4fdf923",
+      "path": "database/proposals/bloco60-continuacao/activate.sql"
+    },
+    {
+      "sha256": "d7715a68e8977f59f5d382888252a10d1c5537473057393bf337a9d9f1df230d",
+      "path": "database/proposals/bloco60-continuacao/README.md"
+    },
+    {
+      "sha256": "9bc35a0826a5d91d6d36188580e12d00083e461c51dfb8646f85c57e4631cd12",
+      "path": "database/proposals/bloco60-correcao/activate.sql"
+    },
+    {
+      "sha256": "8563572d2b31a2465e65598fef99b0c2d50f80ad7aab51db087c6f013eb7f7f7",
+      "path": "database/proposals/bloco60-correcao/adversarial.sql"
+    },
+    {
+      "sha256": "5fc4cc5bffe45dae3905ec235fab93ac1abea7d73265bc5722a82273a2acf8a3",
+      "path": "database/proposals/bloco60-correcao/all-quality-references.json"
+    },
+    {
+      "sha256": "0959de490f70a0ceffc55465368eb5ce7950749d4e4fe53e73b31bedd587921c",
+      "path": "database/proposals/bloco60-correcao/catalog.sql"
+    },
+    {
+      "sha256": "dddf0c80a3516d86238dc12efba90b35647ed36a19f41774dfb10eb7088cb7aa",
+      "path": "database/proposals/bloco60-correcao/collision-preflight.sql"
+    },
+    {
+      "sha256": "ec029646afcb583384435d775555cb6c0c1054df0915665c9a9402080238ac09",
+      "path": "database/proposals/bloco60-correcao/compensate.sql"
+    },
+    {
+      "sha256": "ed786c6df4b4f63e0850658a243ee10be58d9546a0e102d007f84e1281577ecd",
+      "path": "database/proposals/bloco60-correcao/concurrent-barrier.sql"
+    },
+    {
+      "sha256": "b172a3244a3a3cb0e7ddde65bd1b09ae85e3e50dd605637a326706e80138f173",
+      "path": "database/proposals/bloco60-correcao/concurrent-observe.sql"
+    },
+    {
+      "sha256": "7256c38a507ec9cddfc28ebd7e6ae64a06b83c75b22166e7c0169562adf0b5a2",
+      "path": "database/proposals/bloco60-correcao/master-target.sql"
+    },
+    {
+      "sha256": "ec2e9c9d416df3f9093fe0fe5fe171d86fc3160020f96d4653974865bb962afb",
+      "path": "database/proposals/bloco60-correcao/matrix.json"
+    },
+    {
+      "sha256": "cc4f84cb37f697248d8a096249480985b252a7303c2408fb4cc4614bc829a167",
+      "path": "database/proposals/bloco60-correcao/package.json"
+    },
+    {
+      "sha256": "ec5be299f7a281dc2f1116f6bde59c83567ebb2c8c034b3da2315f454c6b3db9",
+      "path": "database/proposals/bloco60-correcao/preflight.sql"
+    },
+    {
+      "sha256": "50ea3953f2ea6b2a8c2105454399cd8952003050ff81101fd4befdf8440850e1",
+      "path": "database/proposals/bloco60-correcao/preserved-row-hashes.sql"
+    },
+    {
+      "sha256": "fb80338b62bf403936e7a56321f46d3c5e8a79c3e4715855b753f3993e974a16",
+      "path": "database/proposals/bloco60-correcao/profile-active.sql"
+    },
+    {
+      "sha256": "ab739a7bd30825f09cc5aabfabaca495e0f85c162870ecf8af1290071aeac3c1",
+      "path": "database/proposals/bloco60-correcao/profile-after.sql"
+    },
+    {
+      "sha256": "97e4458629296a139af2679f543c4f927f5b730dfbc230e5fafa99de2e6fc625",
+      "path": "database/proposals/bloco60-correcao/profile-before.sql"
+    },
+    {
+      "sha256": "248a68818316261ea66e7c729e7faf5162834c4b4ad47ca0fb9ed84d43e3a0cd",
+      "path": "database/proposals/bloco60-correcao/quality-references.json"
+    },
+    {
+      "sha256": "cf6bc9b4f503cc3db2e1ac538031529edffc7d7efae33cc216148cbed6e94406",
+      "path": "database/proposals/bloco60-correcao/README.md"
+    },
+    {
+      "sha256": "0807d65d24f9e253418e763c93714b16d8303c1c899c4c9b561fd888427a1116",
+      "path": "database/proposals/bloco60-correcao/recovery-readback.sql"
+    },
+    {
+      "sha256": "98a428e4f40edb6b6d82c81308c7f707fe438a2b28d968e92d7c6de0fe6ecba8",
+      "path": "database/proposals/bloco60-correcao/recovery-state.sql"
+    },
+    {
+      "sha256": "da2bd49f31fcc83d335588b58db10dcde5845d3a49648e3bd6ba8c1fc827a249",
+      "path": "database/proposals/bloco60-correcao/requests/APPLY_ACK_LOST_RESUME.json"
+    },
+    {
+      "sha256": "8f98154aef67dfa2343467e874f2b51774c7617209d04e51e6b356d9e85a30b6",
+      "path": "database/proposals/bloco60-correcao/requests/APPLY_ACK_LOST.json"
+    },
+    {
+      "sha256": "47a24a414026568619f742d582880dacba8c717b9141788d551dd542903256e5",
+      "path": "database/proposals/bloco60-correcao/requests/AUDIT_ACK_LOST.json"
+    },
+    {
+      "sha256": "de5459dbfda835495934b5d4b3c19ed517945c5f9f17919c2b53e4d9edbb9fb8",
+      "path": "database/proposals/bloco60-correcao/requests/AUDIT_NULL.json"
+    },
+    {
+      "sha256": "a686caceba1b63cd62f8a20ef4ee1f144aae57c1b684c96bb88cd73485d37087",
+      "path": "database/proposals/bloco60-correcao/requests/AUTHORITY_EXPIRED.json"
+    },
+    {
+      "sha256": "9e36a95d5617402d414adf37cf4b04420e1a2ddccae7aa597d7e9753c0f0c756",
+      "path": "database/proposals/bloco60-correcao/requests/AUTHORITY_INCONSISTENT.json"
+    },
+    {
+      "sha256": "ed539180c6c08a44331d01d47487f97ba2fe16327d04065620deebce82ae363d",
+      "path": "database/proposals/bloco60-correcao/requests/AUTHORITY_SWAPPED.json"
+    },
+    {
+      "sha256": "cb0224f14269e8e28bce2246b118749f2cc321ac7729707c3c8487b2d0ce1e9b",
+      "path": "database/proposals/bloco60-correcao/requests/COLETAS_KNOWN.json"
+    },
+    {
+      "sha256": "71fa827411a75b1d18484716a50eca51781a49cbcb2a2b22e55adac4de181cd7",
+      "path": "database/proposals/bloco60-correcao/requests/COLETAS_RUN.json"
+    },
+    {
+      "sha256": "a47acc12e9963ef158c60a35a3d0b5f885a4e2bde146fd7b458408080e0f28cf",
+      "path": "database/proposals/bloco60-correcao/requests/COLETAS_STATUS_ETL_V2_EXEC.json"
+    },
+    {
+      "sha256": "20d66b1c586505575d9875c25a5f20ba1a3c1524873c8b25bc94f3dfb1441e64",
+      "path": "database/proposals/bloco60-correcao/requests/COLETAS_STATUS_ETL_V2_VIEW.json"
+    },
+    {
+      "sha256": "421fa4eb7ebb48f510417bbdfb4af571ee3862c01108edef26a7b11c202465f1",
+      "path": "database/proposals/bloco60-correcao/requests/CONCURRENT_A.json"
+    },
+    {
+      "sha256": "acd4d65087f325d156428994f61b9984d6bcf7ec3eafbc44cdbbd6af80e4aaea",
+      "path": "database/proposals/bloco60-correcao/requests/CONCURRENT_B.json"
+    },
+    {
+      "sha256": "bb074b3847bebc794bc21be457027ee0dbe037c355b0ca0ba77906f5da6594b8",
+      "path": "database/proposals/bloco60-correcao/requests/CONCURRENT_SEALED.json"
+    },
+    {
+      "sha256": "0f71c4269473032cc20c0ce241ebc5f0f1fbb34b74a7f13bf5bddfff284b93f7",
+      "path": "database/proposals/bloco60-correcao/requests/CONSUME_ACK_LOST.json"
+    },
+    {
+      "sha256": "f8d420819072aa16cc6c8a92f4376da17b77f34bbb8527211b2233bebf210205",
+      "path": "database/proposals/bloco60-correcao/requests/COTACOES_KNOWN.json"
+    },
+    {
+      "sha256": "8e6a3b5b7dc06790ce58c6d486117da54652175a291f2cbb7f905ad311da1a13",
+      "path": "database/proposals/bloco60-correcao/requests/COTACOES_RUN.json"
+    },
+    {
+      "sha256": "5ca6d2f8fbd9fa2b7004b5d51fa75a209d113553134905a0418c4316049634da",
+      "path": "database/proposals/bloco60-correcao/requests/COTACOES_STATUS_ETL_V2_EXEC.json"
+    },
+    {
+      "sha256": "30ee207669f572a98a9edb854ef6be05e25ccc67bb8fd073b9dc9fb9d33ea96e",
+      "path": "database/proposals/bloco60-correcao/requests/COTACOES_STATUS_ETL_V2_VIEW.json"
+    },
+    {
+      "sha256": "0830a5fa8c9e1b4f1b3582cb1293f8ebf0f709af82d7e64c980a12d5d68fe626",
+      "path": "database/proposals/bloco60-correcao/requests/DIAGNOSTIC_ADMINISTERED.json"
+    },
+    {
+      "sha256": "0851d9eeaa1a7013d85aab56fa880fd9c29d225b5e3a1caee0e94ab563f3f08e",
+      "path": "database/proposals/bloco60-correcao/requests/DIAGNOSTIC_STANDARD.json"
+    },
+    {
+      "sha256": "28e635afb291fb8e8f36fcb315c1b172a7362812ffc3d2597776726efd8bbc49",
+      "path": "database/proposals/bloco60-correcao/requests/DQ_ACK_LOST.json"
+    },
+    {
+      "sha256": "6dcd9a9c09cd34788a2588a411182ea8d1ece4432619e388d17a918ede643277",
+      "path": "database/proposals/bloco60-correcao/requests/DQ_MISSING.json"
+    },
+    {
+      "sha256": "a34694314510a8a38d2efd2b79bac6cfb060fcc3c9b92377f5a0e32d00161941",
+      "path": "database/proposals/bloco60-correcao/requests/FORCE_RUN.json"
+    },
+    {
+      "sha256": "fe98ee2aaf2c8b5b49f8b797211b78c35688884f6de2303708a9a0b2854bf8ec",
+      "path": "database/proposals/bloco60-correcao/requests/FRETES_KNOWN.json"
+    },
+    {
+      "sha256": "4fd306953e17d1956b4820ff9c63b9e2601e9313cf4920dbdc185e97dccc3f34",
+      "path": "database/proposals/bloco60-correcao/requests/FRETES_RUN.json"
+    },
+    {
+      "sha256": "1dbbc2087f06e34b99ebc6c6dbcfd63d0b2d6a24f7961a8537f8e444fd26f5a4",
+      "path": "database/proposals/bloco60-correcao/requests/FRETES_STATUS_ETL_V2_EXEC.json"
+    },
+    {
+      "sha256": "d7663fd473594ff25bd7ba76c67b98aaacb8116c8e685e563b2f5a455de56a1b",
+      "path": "database/proposals/bloco60-correcao/requests/FRETES_STATUS_ETL_V2_VIEW.json"
+    },
+    {
+      "sha256": "8105952cd967a4a17213815345dfd9fd5b6415511f4c1e9e5e31189c2e833585",
+      "path": "database/proposals/bloco60-correcao/requests/HALT_AFTER_APPLY_RESUME.json"
+    },
+    {
+      "sha256": "644170924174765553f884250b964bee0ba4c02a53116bf4aa77ba433ad07bc1",
+      "path": "database/proposals/bloco60-correcao/requests/HALT_AFTER_APPLY.json"
+    },
+    {
+      "sha256": "9e0e168b39acf51e34c337329761d7e03c05f1aeabdb009b5d2a1c9c12a201b5",
+      "path": "database/proposals/bloco60-correcao/requests/HALT_AFTER_PREPARE.json"
+    },
+    {
+      "sha256": "a547e4cda8f69703ef403cee760cb2226e4e65bc5cef14e2d970f52c74d59819",
+      "path": "database/proposals/bloco60-correcao/requests/HALT_AFTER_SEAL_RESUME.json"
+    },
+    {
+      "sha256": "f5fa0ae20b65ae8597878778ab563e98517f0a91d24001f57b42a52eb00e6dc3",
+      "path": "database/proposals/bloco60-correcao/requests/HALT_AFTER_SEAL.json"
+    },
+    {
+      "sha256": "1a6d29ebb05fd1e9bab2fc4d2f58bd097dea16a10218ef8874ace88554a041aa",
+      "path": "database/proposals/bloco60-correcao/requests/HALT_BEFORE_APPLY.json"
+    },
+    {
+      "sha256": "269df0ccbecb17ff089067f635543744bed6f27d966714f9a59032b4a1075612",
+      "path": "database/proposals/bloco60-correcao/requests/HALT_BEFORE_PREPARE.json"
+    },
+    {
+      "sha256": "7cdf73939d0e613de2d119bbd2749ab41b2e981d294c953f1735431fd06ae30c",
+      "path": "database/proposals/bloco60-correcao/requests/HALT_BEFORE_SEAL.json"
+    },
+    {
+      "sha256": "f4447f8dc6dc94b36834c63962743b3829657ba19b779d9fccb4f48bc4912ec7",
+      "path": "database/proposals/bloco60-correcao/requests/INVALID_OPERATION.json"
+    },
+    {
+      "sha256": "418e481d18d4c79c69b06fd7933c94aca75e33a13d5efc1a215e721ef794f407",
+      "path": "database/proposals/bloco60-correcao/requests/INVALID_PAGE.json"
+    },
+    {
+      "sha256": "338c97a9e896240ee8c58ee916451cd0b982c3f92a390848473c4f1053698c66",
+      "path": "database/proposals/bloco60-correcao/requests/INVALID_PROTOCOL.json"
+    },
+    {
+      "sha256": "2eea796ca44ac9b9f02d8a714618b14c55da5f5bc3ee5005c2f0167cd83862f7",
+      "path": "database/proposals/bloco60-correcao/requests/LEASE_EXPIRED_REFUSED.json"
+    },
+    {
+      "sha256": "63dc34ca87b65e4206ee29dfe1810d1ac9e21239618c83590bf712943049d2ba",
+      "path": "database/proposals/bloco60-correcao/requests/LEASE_EXPIRY_HALT.json"
+    },
+    {
+      "sha256": "5bf59631d00ffd360c9e00fa061737b78bbc6e148bd07cc03212c77fcaabddaa",
+      "path": "database/proposals/bloco60-correcao/requests/LOCALIZACAO_CARGAS_KNOWN.json"
+    },
+    {
+      "sha256": "cfaee8e8e27ee26f43a09ff6b776b97bc60cd6c8e7bbb429f449ab76a0bd1ea8",
+      "path": "database/proposals/bloco60-correcao/requests/LOCALIZACAO_CARGAS_RUN.json"
+    },
+    {
+      "sha256": "f11facb89d319ec6f50b64fe94ea252ae00b820e04c7ca672f84f392493756f5",
+      "path": "database/proposals/bloco60-correcao/requests/LOCALIZACAO_CARGAS_STATUS_ETL_V2_EXEC.json"
+    },
+    {
+      "sha256": "5ba2075c8fc14e0495c6e4a6dea8223b9ddb069d28084425dd3089a312b28fec",
+      "path": "database/proposals/bloco60-correcao/requests/LOCALIZACAO_CARGAS_STATUS_ETL_V2_VIEW.json"
+    },
+    {
+      "sha256": "a7fc3b132a9ae0c3faa2eced8028e79d0a509bee1bd80225c4503dd3a8cf3437",
+      "path": "database/proposals/bloco60-correcao/requests/MANIFESTOS_KNOWN.json"
+    },
+    {
+      "sha256": "f0fa8d9c8ed2e82415608126846474ac3e7746c144f810b311bff70f25b4054e",
+      "path": "database/proposals/bloco60-correcao/requests/MANIFESTOS_RUN.json"
+    },
+    {
+      "sha256": "ecf87a9c779d81984c6127432e8ee1c45bd5286777a9c90040e27b8a68c3c998",
+      "path": "database/proposals/bloco60-correcao/requests/MANIFESTOS_STATUS_ETL_V2_EXEC.json"
+    },
+    {
+      "sha256": "4463efdc3f9c5a46a3192ed7cdbe02154fdea0ef82f9057533f05882035caf04",
+      "path": "database/proposals/bloco60-correcao/requests/MANIFESTOS_STATUS_ETL_V2_VIEW.json"
+    },
+    {
+      "sha256": "0ff0c9e00346b8f0a0ff2a52271f45c864af872de8c6deabff8cdaad1549dd8d",
+      "path": "database/proposals/bloco60-correcao/requests/MUTATE_CONFIGURATION.json"
+    },
+    {
+      "sha256": "278efb7987e163dd9bb008d63faa9fc49a4ba9e6ddd690bf90c09080fa846d6d",
+      "path": "database/proposals/bloco60-correcao/requests/MUTATE_CONTRACT.json"
+    },
+    {
+      "sha256": "ff75eaa189709ef14dec850c34aa826524e4b68eb69b04fcd43798c6f399aa8a",
+      "path": "database/proposals/bloco60-correcao/requests/MUTATE_ENTITY.json"
+    },
+    {
+      "sha256": "07196346d0ecee06730c5339fa6005e9a417a620f653eec69d4189711c9d4bea",
+      "path": "database/proposals/bloco60-correcao/requests/MUTATE_PROTOCOL.json"
+    },
+    {
+      "sha256": "c14f310a6e8006d4368067525afe3b47982695a0d552ac525b2b0b1e7f15d36c",
+      "path": "database/proposals/bloco60-correcao/requests/MUTATE_TENANT.json"
+    },
+    {
+      "sha256": "312035861e95415658e97df8bc74f2804fbdc9acc3587cbf7166f1106db812db",
+      "path": "database/proposals/bloco60-correcao/requests/OPERATOR_CANNOT_WRITE.json"
+    },
+    {
+      "sha256": "18793e89a77842381b50c95fc37d4700525fcc2e87ba43e528b4f0172afc666e",
+      "path": "database/proposals/bloco60-correcao/requests/PREPARE_ACK_LOST.json"
+    },
+    {
+      "sha256": "8c7d41ba27a3dc9f14df20a6d11d4b7f929308fb429bed2864bcfc9ae1c79929",
+      "path": "database/proposals/bloco60-correcao/requests/REPLAY_USERS_PARTIAL.json"
+    },
+    {
+      "sha256": "7af3686ffe47e1f6aa89aa3a0e6804fcbfa8e67096cdec8a316b68411f7187e1",
+      "path": "database/proposals/bloco60-correcao/requests/REPLAY_USUARIOS_RUN.json"
+    },
+    {
+      "sha256": "0c79e5227a2a9bd280a355fa8cb7a5c8abaae22721043aaba633c60d27eb585f",
+      "path": "database/proposals/bloco60-correcao/requests/SEAL_ACK_LOST_RESUME.json"
+    },
+    {
+      "sha256": "60d2df317964870e91837f33bd84034b8755d948de3b671d826568582e8fbd04",
+      "path": "database/proposals/bloco60-correcao/requests/SEAL_ACK_LOST.json"
+    },
+    {
+      "sha256": "363504b804d0d19a60fb2882731893b8baf6556108cd332563d9ce7f95b87fd1",
+      "path": "database/proposals/bloco60-correcao/requests/STAGE_FAILURE.json"
+    },
+    {
+      "sha256": "efcc90556ffab87e42598d5e487e4fd911e2faa65829d89fd0385be60c97892d",
+      "path": "database/proposals/bloco60-correcao/requests/STANDARD_AUTHORITY_ABSENT.json"
+    },
+    {
+      "sha256": "0cd506a26f022bde512a0c293c6a6f912d8fef1f257bf383ce91f22fcb444651",
+      "path": "database/proposals/bloco60-correcao/requests/USERS_CANCEL.json"
+    },
+    {
+      "sha256": "54b2f30985f23453fddc8d377c452ab24715eb34a044e174b51e283cd6006dff",
+      "path": "database/proposals/bloco60-correcao/requests/USERS_CONFLICT.json"
+    },
+    {
+      "sha256": "fefeae9723bd87945546133f14b62e8ee1e1a47cb2393004fa1736e50a1c35de",
+      "path": "database/proposals/bloco60-correcao/requests/USERS_INVALID_NODE.json"
+    },
+    {
+      "sha256": "fd447814bec443401453afba7ec69d1a51bee7602e733edb6d0ee3a64eb564d5",
+      "path": "database/proposals/bloco60-correcao/requests/USERS_NOOP.json"
+    },
+    {
+      "sha256": "b8d65dc5c1627e04fdeaa048916f3cedc3382e9dd89e2dba9dfb52f70dd3186c",
+      "path": "database/proposals/bloco60-correcao/requests/USERS_NULL_TERMINAL.json"
+    },
+    {
+      "sha256": "82138861db9c6a774eb80f5f756751067ef9815b33f74fdb997c50febd09e401",
+      "path": "database/proposals/bloco60-correcao/requests/USERS_ONE_PAGE.json"
+    },
+    {
+      "sha256": "040b4e913533bfa89ffa4d815beca53e2eac6811764dd726f66b18f14605ec8f",
+      "path": "database/proposals/bloco60-correcao/requests/USERS_PARTIAL.json"
+    },
+    {
+      "sha256": "1cf76ae5b8f7ba5a24f1b391601f59e2b12544a679addb9428c47a57bfd3953f",
+      "path": "database/proposals/bloco60-correcao/requests/USERS_UPDATE.json"
+    },
+    {
+      "sha256": "5a72c00fd651da99c6fe9dd527cf48b80e057b70598043ee858758ddee371138",
+      "path": "database/proposals/bloco60-correcao/requests/USUARIOS_KNOWN.json"
+    },
+    {
+      "sha256": "2f1072f91e249ced72a8179eb0c3dc6c4a6b3310442a73f10682d4733fde31ab",
+      "path": "database/proposals/bloco60-correcao/requests/USUARIOS_RUN.json"
+    },
+    {
+      "sha256": "73b09f6bdf34c1f05671e3f381bf6e1c296611c678cf3a14e4a0c1fa4f47456f",
+      "path": "database/proposals/bloco60-correcao/requests/USUARIOS_STATUS_ETL_V2_EXEC.json"
+    },
+    {
+      "sha256": "f3652db4f6f39a3f90e6c73f43f5d7544b31ec7395721b24bd0d1623cbd8d64d",
+      "path": "database/proposals/bloco60-correcao/requests/USUARIOS_STATUS_ETL_V2_VIEW.json"
+    },
+    {
+      "sha256": "d986c671f7063b529da4fba02ef583ab1f495f6346fdf5489aa7340761268d5a",
+      "path": "database/proposals/bloco60-correcao/seed-quality.sql"
+    },
+    {
+      "sha256": "5a3f62fbaeb9025187cbe284bc7e3038a50d1346a2b1551e78780f7b16e91b1f",
+      "path": "database/proposals/bloco60-correcao/verify-quality.sql"
+    },
+    {
+      "sha256": "a3d28adeb17775bcb965756bece5e43ac18c8eea9f9d00349f66c976716db57e",
+      "path": "database/proposals/bloco60-local/package.json"
+    },
+    {
+      "sha256": "f08e710e8fbfacf81b1cc58b801263ac975d946acacb522635f203dbf26e0128",
+      "path": "database/validation/057_exercise_bloco60_adversarial_read.sql"
+    },
+    {
+      "sha256": "464cc0910d8117a883bae92aa139e72ca6f0e1ea78e75a5a770c436c40aef25a",
+      "path": "scripts/validation/Bloco60AdminProcess.cs"
+    },
+    {
+      "sha256": "c779ee66b7a274cba5cc9864164d626c6f9f22bdd99ed5267ae0ee3a9543cd7d",
+      "path": "scripts/validation/Bloco60Assertions.psm1"
+    },
+    {
+      "sha256": "927ac198ad43241dc876cdda561ff6eb91a8687f2bc0e5ecc1047589e4f22e95",
+      "path": "scripts/validation/Bloco60Budget.psm1"
+    },
+    {
+      "sha256": "8198b83b21cc6e98c3b0965a2c167331a401fac44fdee91f19209049150c2e91",
+      "path": "scripts/validation/Bloco60ContinuationBudget.psm1"
+    },
+    {
+      "sha256": "5234d49f6e9ff5f0dfd833c82092e742c5478ff48eecb3d2b88fd5b1c8d7fc44",
+      "path": "scripts/validation/Bloco60Process.cs"
+    },
+    {
+      "sha256": "13c25d5a6c6820860e56c1c9f1f59946b4b71283adfbaa87aad6e5e4e1bec846",
+      "path": "scripts/validation/Invoke-Bloco60Continuation.ps1"
+    },
+    {
+      "sha256": "fa07e3ec6c215ae844c5f748fa245f98bbe8f014314ad7463b4ce8dcd092701a",
+      "path": "scripts/validation/Invoke-Bloco60CorrectivePhysical.ps1"
+    },
+    {
+      "sha256": "3aa53865f40a27823ef4284dbdf05c9502f3f58a84262b3bc3b1b20e676aae1c",
+      "path": "scripts/validation/New-Bloco60CorrectiveBundle.ps1"
+    },
+    {
+      "sha256": "edc19b8324bed29aa78e9f63b638c6f5694b7f77f0d8fcef513f944c08fe7661",
+      "path": "scripts/validation/New-Bloco60CorrectivePackage.ps1"
+    },
+    {
+      "sha256": "6c12e9a72d25c3a0e3de0e21f420396d42cf5ce151638c4a1b508dcc295e603d",
+      "path": "scripts/validation/New-Bloco60CorrectiveProposal.ps1"
+    },
+    {
+      "sha256": "dd2714b30bfe5388bf4d56fd8bddc799560b88b52fbf3c28ea531f1dfb496b03",
+      "path": "scripts/validation/Test-Bloco60ContinuationBudget.ps1"
+    },
+    {
+      "sha256": "5c66cf9008d757096bf2422816db8ce7cd78dc36c1443431f7feadbca640062f",
+      "path": "scripts/validation/Test-Bloco60CorrectiveJar.ps1"
+    },
+    {
+      "sha256": "c1df372db0882b590beb51d69651147ffefc4048b5d2b4b63dfee4541246a6f0",
+      "path": "scripts/validation/Test-Bloco60CorrectivePackage.ps1"
+    },
+    {
+      "sha256": "36203fec6939c642a477acab99244fc712652fa0d1f321b6845166caceccb10c",
+      "path": "scripts/validation/Test-Bloco60SqlBatches.ps1"
+    },
+    {
+      "sha256": "ef5a3624e6642c3c547a8226addf1d240ed7dcd74a9a7f31fbba7546e6450b88",
+      "path": "src/main/java/br/com/esl/etl/v2/plataforma/autorizacao/AdministeredArtifactVerifier.java"
+    },
+    {
+      "sha256": "34ce4233d53876026326dc0e2b296dff0d812aed3b4332609f741100b7576db3",
+      "path": "src/test/java/br/com/esl/etl/v2/plataforma/autorizacao/AdministeredArtifactManifestTest.java"
+    },
+    {
+      "sha256": "6abd4f9993ec0bfbdf45aeebb3f083697b824ed9d6f74424bde4891a06be8b71",
+      "path": "src/test/java/br/com/esl/etl/v2/plataforma/autorizacao/AdministeredBundleOfflineProbe.java"
+    },
+    {
+      "sha256": "9eb8caa72b31005d83f432e0a0b2872671a42cf9cece706c8e65baabb5d9b845",
+      "path": "src/test/resources/runtime-laboratory-bloco55/6389-data.json"
+    },
+    {
+      "sha256": "645a64b9bc6af087255bb3550fe8b14910b635ee0f452804b4b9581518a51c7d",
+      "path": "src/test/resources/runtime-laboratory-bloco55/6389-info.json"
+    },
+    {
+      "sha256": "4480a644c8fc5b533f5982059eb8411495e98c42f4893f921cedb8ff8a05eb56",
+      "path": "src/test/resources/runtime-laboratory-bloco55/6399-data.json"
+    },
+    {
+      "sha256": "719eb62bd4570814ff812c292144b75b0cb9cfd7d38cbd39113064d30448fef3",
+      "path": "src/test/resources/runtime-laboratory-bloco55/6399-info.json"
+    },
+    {
+      "sha256": "61d9cc5b1cd396dde0db93663d21e3a0bc98b18d464b8ccdbe41321591f26903",
+      "path": "src/test/resources/runtime-laboratory-bloco55/6906-data.json"
+    },
+    {
+      "sha256": "8296537078153ea5bc8c059c6fea26b5167379299389b6caabe8e40d0f029982",
+      "path": "src/test/resources/runtime-laboratory-bloco55/6906-info.json"
+    },
+    {
+      "sha256": "e657c583d0bdec3f7a3c3cd511745d341299abdfbe7fc468ad680c01ecb7f5c4",
+      "path": "src/test/resources/runtime-laboratory-bloco55/6908-data.json"
+    },
+    {
+      "sha256": "a449a9364ad40c30efd3403da5734a372d254b771d8c2711d05d1eacfb5958ce",
+      "path": "src/test/resources/runtime-laboratory-bloco55/6908-info.json"
+    },
+    {
+      "sha256": "d823713a23e5aeae7513c592df14878d1530fc235c49a7026d953136284fb1c8",
+      "path": "src/test/resources/runtime-laboratory-bloco55/8656-data.json"
+    },
+    {
+      "sha256": "1cb89f6d2f121004f31d0c6e5c86913a13393afc2ed8500d29c040f2738f5664",
+      "path": "src/test/resources/runtime-laboratory-bloco55/8656-info.json"
+    },
+    {
+      "sha256": "773341987e4ee3f51f87ea12cd2cb229560ef4dc6ba94946dce95c73f1ce1bc0",
+      "path": "target/b60-correcao-20260910/bundle-v2/administered-entries.json"
+    },
+    {
+      "sha256": "7fabc4ca33ec4cf37f5dd004209e58b5e66408d173d81d6912f85ce43fc1252c",
+      "path": "target/b60-correcao-20260910/bundle-v2/administered/etl-dataexport-v2.jar"
+    },
+    {
+      "sha256": "873a606e23507969f9bbbea939d5e19274a88775ea5a169ba7e2d795aa5156e1",
+      "path": "target/b60-correcao-20260910/bundle-v2/administered/lib/jackson-annotations-2.17.2.jar"
+    },
+    {
+      "sha256": "721a189241dab0525d9e858e5cb604d3ecc0ede081e2de77d6f34fa5779a5b46",
+      "path": "target/b60-correcao-20260910/bundle-v2/administered/lib/jackson-core-2.17.2.jar"
+    },
+    {
+      "sha256": "c04993f33c0f845342653784f14f38373d005280e6359db5f808701cfae73c0c",
+      "path": "target/b60-correcao-20260910/bundle-v2/administered/lib/jackson-databind-2.17.2.jar"
+    },
+    {
+      "sha256": "9b80024a9822e70b07f6bb13824c76c137c1064a1b5eb518374ab141870fdbcc",
+      "path": "target/b60-correcao-20260910/bundle-v2/administered/lib/jackson-datatype-jsr310-2.17.2.jar"
+    },
+    {
+      "sha256": "f985a33a68d900badec5b0c3c613ab9db66415d2cf378987357ded9da5370e32",
+      "path": "target/b60-correcao-20260910/bundle-v2/administered/lib/logback-classic-1.5.16.jar"
+    },
+    {
+      "sha256": "f15e206b98ca25294506d2dadfe5ce2a6da9df9cf7c85d8e7191f99a422df3c9",
+      "path": "target/b60-correcao-20260910/bundle-v2/administered/lib/logback-core-1.5.16.jar"
+    },
+    {
+      "sha256": "e6933c0711e598a224060e52ed31392f720a4a7664e85d8ae37c52a85b67ebb0",
+      "path": "target/b60-correcao-20260910/bundle-v2/administered/lib/mssql-jdbc-12.8.1.jre11.jar"
+    },
+    {
+      "sha256": "a12578dde1ba00bd9b816d388a0b879928d00bab3c83c240f7013bf4196c579a",
+      "path": "target/b60-correcao-20260910/bundle-v2/administered/lib/slf4j-api-2.0.16.jar"
+    },
+    {
+      "sha256": "5fe966089d28b82ca8524a88a6a9e58e69ab84f7ab9036bee7eec002aa3b5d59",
+      "path": "target/b60-correcao-20260910/bundle-v2/administered/manifest.json"
+    },
+    {
+      "sha256": "9a92363a42db34e9f27cedffe18b139d7bb6c93495cb8338f7f8dbb93f3ae538",
+      "path": "target/b60-correcao-20260910/bundle-v2/administered/native/mssql-jdbc_auth-12.8.1.x64.dll"
+    },
+    {
+      "sha256": "0ab1ac66da25a710c87005749b58f4b3987c1e74410ef38eac4edf6e51e7839c",
+      "path": "target/b60-correcao-20260910/bundle-v2/administered/probe/br/com/esl/etl/v2/bootstrap/RuntimeUsersPhysicalProbe.class"
+    },
+    {
+      "sha256": "4ea2e4e34577cc9b862e7a6e338ebc82ffcc0c31552fcfb74e8757e0e66d292d",
+      "path": "target/b60-correcao-20260910/bundle-v2/administered/probe/br/com/esl/etl/v2/bootstrap/RuntimeUsersPhysicalProbe$Fault.class"
+    },
+    {
+      "sha256": "64f75624bfa0ac85c2fecf362947be9de8adf15ceb43e8fa0a7aef4cb8d40d5b",
+      "path": "target/b60-correcao-20260910/bundle-v2/administered/probe/br/com/esl/etl/v2/plataforma/autorizacao/RuntimeUsersPhysicalAuthority.class"
+    },
+    {
+      "sha256": "a131873019fcd2b2d49a68840ce80e27d856eae5cb3cf792106d7c564106de21",
+      "path": "target/b60-correcao-20260910/bundle-v2/administered/runtime.properties"
+    },
+    {
+      "sha256": "f391a6c50b64a1a8bf48a38f1b8563ebe99143d522af20c95c9f4a2c5aa330c9",
+      "path": "target/b60-correcao-20260910/bundle-v2/administered/standard/etl-dataexport-v2.jar"
+    },
+    {
+      "sha256": "873a606e23507969f9bbbea939d5e19274a88775ea5a169ba7e2d795aa5156e1",
+      "path": "target/b60-correcao-20260910/bundle-v2/administered/standard/lib/jackson-annotations-2.17.2.jar"
+    },
+    {
+      "sha256": "721a189241dab0525d9e858e5cb604d3ecc0ede081e2de77d6f34fa5779a5b46",
+      "path": "target/b60-correcao-20260910/bundle-v2/administered/standard/lib/jackson-core-2.17.2.jar"
+    },
+    {
+      "sha256": "c04993f33c0f845342653784f14f38373d005280e6359db5f808701cfae73c0c",
+      "path": "target/b60-correcao-20260910/bundle-v2/administered/standard/lib/jackson-databind-2.17.2.jar"
+    },
+    {
+      "sha256": "9b80024a9822e70b07f6bb13824c76c137c1064a1b5eb518374ab141870fdbcc",
+      "path": "target/b60-correcao-20260910/bundle-v2/administered/standard/lib/jackson-datatype-jsr310-2.17.2.jar"
+    },
+    {
+      "sha256": "f985a33a68d900badec5b0c3c613ab9db66415d2cf378987357ded9da5370e32",
+      "path": "target/b60-correcao-20260910/bundle-v2/administered/standard/lib/logback-classic-1.5.16.jar"
+    },
+    {
+      "sha256": "f15e206b98ca25294506d2dadfe5ce2a6da9df9cf7c85d8e7191f99a422df3c9",
+      "path": "target/b60-correcao-20260910/bundle-v2/administered/standard/lib/logback-core-1.5.16.jar"
+    },
+    {
+      "sha256": "e6933c0711e598a224060e52ed31392f720a4a7664e85d8ae37c52a85b67ebb0",
+      "path": "target/b60-correcao-20260910/bundle-v2/administered/standard/lib/mssql-jdbc-12.8.1.jre11.jar"
+    },
+    {
+      "sha256": "a12578dde1ba00bd9b816d388a0b879928d00bab3c83c240f7013bf4196c579a",
+      "path": "target/b60-correcao-20260910/bundle-v2/administered/standard/lib/slf4j-api-2.0.16.jar"
+    },
+    {
+      "sha256": "773341987e4ee3f51f87ea12cd2cb229560ef4dc6ba94946dce95c73f1ce1bc0",
+      "path": "target/b60-correcao-20260910/bundle-v2/expired-entries.json"
+    },
+    {
+      "sha256": "dfb76943ff663cb1f180f597b8245f45d1029008769395e2fb4d8205dffa6acb",
+      "path": "target/b60-correcao-20260910/bundle-v2/expired/etl-dataexport-v2.jar"
+    },
+    {
+      "sha256": "873a606e23507969f9bbbea939d5e19274a88775ea5a169ba7e2d795aa5156e1",
+      "path": "target/b60-correcao-20260910/bundle-v2/expired/lib/jackson-annotations-2.17.2.jar"
+    },
+    {
+      "sha256": "721a189241dab0525d9e858e5cb604d3ecc0ede081e2de77d6f34fa5779a5b46",
+      "path": "target/b60-correcao-20260910/bundle-v2/expired/lib/jackson-core-2.17.2.jar"
+    },
+    {
+      "sha256": "c04993f33c0f845342653784f14f38373d005280e6359db5f808701cfae73c0c",
+      "path": "target/b60-correcao-20260910/bundle-v2/expired/lib/jackson-databind-2.17.2.jar"
+    },
+    {
+      "sha256": "9b80024a9822e70b07f6bb13824c76c137c1064a1b5eb518374ab141870fdbcc",
+      "path": "target/b60-correcao-20260910/bundle-v2/expired/lib/jackson-datatype-jsr310-2.17.2.jar"
+    },
+    {
+      "sha256": "f985a33a68d900badec5b0c3c613ab9db66415d2cf378987357ded9da5370e32",
+      "path": "target/b60-correcao-20260910/bundle-v2/expired/lib/logback-classic-1.5.16.jar"
+    },
+    {
+      "sha256": "f15e206b98ca25294506d2dadfe5ce2a6da9df9cf7c85d8e7191f99a422df3c9",
+      "path": "target/b60-correcao-20260910/bundle-v2/expired/lib/logback-core-1.5.16.jar"
+    },
+    {
+      "sha256": "e6933c0711e598a224060e52ed31392f720a4a7664e85d8ae37c52a85b67ebb0",
+      "path": "target/b60-correcao-20260910/bundle-v2/expired/lib/mssql-jdbc-12.8.1.jre11.jar"
+    },
+    {
+      "sha256": "a12578dde1ba00bd9b816d388a0b879928d00bab3c83c240f7013bf4196c579a",
+      "path": "target/b60-correcao-20260910/bundle-v2/expired/lib/slf4j-api-2.0.16.jar"
+    },
+    {
+      "sha256": "3be52f98b745523d19e4241c8ca1b60d8e89d93c8523abe6e4b14b73d605ced4",
+      "path": "target/b60-correcao-20260910/bundle-v2/expired/manifest.json"
+    },
+    {
+      "sha256": "9a92363a42db34e9f27cedffe18b139d7bb6c93495cb8338f7f8dbb93f3ae538",
+      "path": "target/b60-correcao-20260910/bundle-v2/expired/native/mssql-jdbc_auth-12.8.1.x64.dll"
+    },
+    {
+      "sha256": "0ab1ac66da25a710c87005749b58f4b3987c1e74410ef38eac4edf6e51e7839c",
+      "path": "target/b60-correcao-20260910/bundle-v2/expired/probe/br/com/esl/etl/v2/bootstrap/RuntimeUsersPhysicalProbe.class"
+    },
+    {
+      "sha256": "4ea2e4e34577cc9b862e7a6e338ebc82ffcc0c31552fcfb74e8757e0e66d292d",
+      "path": "target/b60-correcao-20260910/bundle-v2/expired/probe/br/com/esl/etl/v2/bootstrap/RuntimeUsersPhysicalProbe$Fault.class"
+    },
+    {
+      "sha256": "64f75624bfa0ac85c2fecf362947be9de8adf15ceb43e8fa0a7aef4cb8d40d5b",
+      "path": "target/b60-correcao-20260910/bundle-v2/expired/probe/br/com/esl/etl/v2/plataforma/autorizacao/RuntimeUsersPhysicalAuthority.class"
+    },
+    {
+      "sha256": "a131873019fcd2b2d49a68840ce80e27d856eae5cb3cf792106d7c564106de21",
+      "path": "target/b60-correcao-20260910/bundle-v2/expired/runtime.properties"
+    },
+    {
+      "sha256": "f391a6c50b64a1a8bf48a38f1b8563ebe99143d522af20c95c9f4a2c5aa330c9",
+      "path": "target/b60-correcao-20260910/bundle-v2/expired/standard/etl-dataexport-v2.jar"
+    },
+    {
+      "sha256": "873a606e23507969f9bbbea939d5e19274a88775ea5a169ba7e2d795aa5156e1",
+      "path": "target/b60-correcao-20260910/bundle-v2/expired/standard/lib/jackson-annotations-2.17.2.jar"
+    },
+    {
+      "sha256": "721a189241dab0525d9e858e5cb604d3ecc0ede081e2de77d6f34fa5779a5b46",
+      "path": "target/b60-correcao-20260910/bundle-v2/expired/standard/lib/jackson-core-2.17.2.jar"
+    },
+    {
+      "sha256": "c04993f33c0f845342653784f14f38373d005280e6359db5f808701cfae73c0c",
+      "path": "target/b60-correcao-20260910/bundle-v2/expired/standard/lib/jackson-databind-2.17.2.jar"
+    },
+    {
+      "sha256": "9b80024a9822e70b07f6bb13824c76c137c1064a1b5eb518374ab141870fdbcc",
+      "path": "target/b60-correcao-20260910/bundle-v2/expired/standard/lib/jackson-datatype-jsr310-2.17.2.jar"
+    },
+    {
+      "sha256": "f985a33a68d900badec5b0c3c613ab9db66415d2cf378987357ded9da5370e32",
+      "path": "target/b60-correcao-20260910/bundle-v2/expired/standard/lib/logback-classic-1.5.16.jar"
+    },
+    {
+      "sha256": "f15e206b98ca25294506d2dadfe5ce2a6da9df9cf7c85d8e7191f99a422df3c9",
+      "path": "target/b60-correcao-20260910/bundle-v2/expired/standard/lib/logback-core-1.5.16.jar"
+    },
+    {
+      "sha256": "e6933c0711e598a224060e52ed31392f720a4a7664e85d8ae37c52a85b67ebb0",
+      "path": "target/b60-correcao-20260910/bundle-v2/expired/standard/lib/mssql-jdbc-12.8.1.jre11.jar"
+    },
+    {
+      "sha256": "a12578dde1ba00bd9b816d388a0b879928d00bab3c83c240f7013bf4196c579a",
+      "path": "target/b60-correcao-20260910/bundle-v2/expired/standard/lib/slf4j-api-2.0.16.jar"
+    },
+    {
+      "sha256": "773341987e4ee3f51f87ea12cd2cb229560ef4dc6ba94946dce95c73f1ce1bc0",
+      "path": "target/b60-correcao-20260910/bundle-v2/inconsistent-entries.json"
+    },
+    {
+      "sha256": "dfb76943ff663cb1f180f597b8245f45d1029008769395e2fb4d8205dffa6acb",
+      "path": "target/b60-correcao-20260910/bundle-v2/inconsistent/etl-dataexport-v2.jar"
+    },
+    {
+      "sha256": "873a606e23507969f9bbbea939d5e19274a88775ea5a169ba7e2d795aa5156e1",
+      "path": "target/b60-correcao-20260910/bundle-v2/inconsistent/lib/jackson-annotations-2.17.2.jar"
+    },
+    {
+      "sha256": "721a189241dab0525d9e858e5cb604d3ecc0ede081e2de77d6f34fa5779a5b46",
+      "path": "target/b60-correcao-20260910/bundle-v2/inconsistent/lib/jackson-core-2.17.2.jar"
+    },
+    {
+      "sha256": "c04993f33c0f845342653784f14f38373d005280e6359db5f808701cfae73c0c",
+      "path": "target/b60-correcao-20260910/bundle-v2/inconsistent/lib/jackson-databind-2.17.2.jar"
+    },
+    {
+      "sha256": "9b80024a9822e70b07f6bb13824c76c137c1064a1b5eb518374ab141870fdbcc",
+      "path": "target/b60-correcao-20260910/bundle-v2/inconsistent/lib/jackson-datatype-jsr310-2.17.2.jar"
+    },
+    {
+      "sha256": "f985a33a68d900badec5b0c3c613ab9db66415d2cf378987357ded9da5370e32",
+      "path": "target/b60-correcao-20260910/bundle-v2/inconsistent/lib/logback-classic-1.5.16.jar"
+    },
+    {
+      "sha256": "f15e206b98ca25294506d2dadfe5ce2a6da9df9cf7c85d8e7191f99a422df3c9",
+      "path": "target/b60-correcao-20260910/bundle-v2/inconsistent/lib/logback-core-1.5.16.jar"
+    },
+    {
+      "sha256": "e6933c0711e598a224060e52ed31392f720a4a7664e85d8ae37c52a85b67ebb0",
+      "path": "target/b60-correcao-20260910/bundle-v2/inconsistent/lib/mssql-jdbc-12.8.1.jre11.jar"
+    },
+    {
+      "sha256": "a12578dde1ba00bd9b816d388a0b879928d00bab3c83c240f7013bf4196c579a",
+      "path": "target/b60-correcao-20260910/bundle-v2/inconsistent/lib/slf4j-api-2.0.16.jar"
+    },
+    {
+      "sha256": "9c0497b7463626754142ea1fda15ee8157a7abc1858acc9ace2b551d877b8947",
+      "path": "target/b60-correcao-20260910/bundle-v2/inconsistent/manifest.json"
+    },
+    {
+      "sha256": "9a92363a42db34e9f27cedffe18b139d7bb6c93495cb8338f7f8dbb93f3ae538",
+      "path": "target/b60-correcao-20260910/bundle-v2/inconsistent/native/mssql-jdbc_auth-12.8.1.x64.dll"
+    },
+    {
+      "sha256": "0ab1ac66da25a710c87005749b58f4b3987c1e74410ef38eac4edf6e51e7839c",
+      "path": "target/b60-correcao-20260910/bundle-v2/inconsistent/probe/br/com/esl/etl/v2/bootstrap/RuntimeUsersPhysicalProbe.class"
+    },
+    {
+      "sha256": "4ea2e4e34577cc9b862e7a6e338ebc82ffcc0c31552fcfb74e8757e0e66d292d",
+      "path": "target/b60-correcao-20260910/bundle-v2/inconsistent/probe/br/com/esl/etl/v2/bootstrap/RuntimeUsersPhysicalProbe$Fault.class"
+    },
+    {
+      "sha256": "64f75624bfa0ac85c2fecf362947be9de8adf15ceb43e8fa0a7aef4cb8d40d5b",
+      "path": "target/b60-correcao-20260910/bundle-v2/inconsistent/probe/br/com/esl/etl/v2/plataforma/autorizacao/RuntimeUsersPhysicalAuthority.class"
+    },
+    {
+      "sha256": "05990a2d776e1f2152813c4de7d6657cb3d46eb58a280caf329031b9c6a881cd",
+      "path": "target/b60-correcao-20260910/bundle-v2/inconsistent/runtime.properties"
+    },
+    {
+      "sha256": "f391a6c50b64a1a8bf48a38f1b8563ebe99143d522af20c95c9f4a2c5aa330c9",
+      "path": "target/b60-correcao-20260910/bundle-v2/inconsistent/standard/etl-dataexport-v2.jar"
+    },
+    {
+      "sha256": "873a606e23507969f9bbbea939d5e19274a88775ea5a169ba7e2d795aa5156e1",
+      "path": "target/b60-correcao-20260910/bundle-v2/inconsistent/standard/lib/jackson-annotations-2.17.2.jar"
+    },
+    {
+      "sha256": "721a189241dab0525d9e858e5cb604d3ecc0ede081e2de77d6f34fa5779a5b46",
+      "path": "target/b60-correcao-20260910/bundle-v2/inconsistent/standard/lib/jackson-core-2.17.2.jar"
+    },
+    {
+      "sha256": "c04993f33c0f845342653784f14f38373d005280e6359db5f808701cfae73c0c",
+      "path": "target/b60-correcao-20260910/bundle-v2/inconsistent/standard/lib/jackson-databind-2.17.2.jar"
+    },
+    {
+      "sha256": "9b80024a9822e70b07f6bb13824c76c137c1064a1b5eb518374ab141870fdbcc",
+      "path": "target/b60-correcao-20260910/bundle-v2/inconsistent/standard/lib/jackson-datatype-jsr310-2.17.2.jar"
+    },
+    {
+      "sha256": "f985a33a68d900badec5b0c3c613ab9db66415d2cf378987357ded9da5370e32",
+      "path": "target/b60-correcao-20260910/bundle-v2/inconsistent/standard/lib/logback-classic-1.5.16.jar"
+    },
+    {
+      "sha256": "f15e206b98ca25294506d2dadfe5ce2a6da9df9cf7c85d8e7191f99a422df3c9",
+      "path": "target/b60-correcao-20260910/bundle-v2/inconsistent/standard/lib/logback-core-1.5.16.jar"
+    },
+    {
+      "sha256": "e6933c0711e598a224060e52ed31392f720a4a7664e85d8ae37c52a85b67ebb0",
+      "path": "target/b60-correcao-20260910/bundle-v2/inconsistent/standard/lib/mssql-jdbc-12.8.1.jre11.jar"
+    },
+    {
+      "sha256": "a12578dde1ba00bd9b816d388a0b879928d00bab3c83c240f7013bf4196c579a",
+      "path": "target/b60-correcao-20260910/bundle-v2/inconsistent/standard/lib/slf4j-api-2.0.16.jar"
+    },
+    {
+      "sha256": "36d477e6bb153066965e338cc9520b845fe2e448756ed05709735f50a39e5411",
+      "path": "target/b60-correcao-20260910/bundle-v2/swapped-entries.json"
+    },
+    {
+      "sha256": "e5347d123fb422af80dc3b40c8b72be0e6911412714a6bace1d31582c56e1d95",
+      "path": "target/b60-correcao-20260910/bundle-v2/swapped/etl-dataexport-v2.jar"
+    },
+    {
+      "sha256": "873a606e23507969f9bbbea939d5e19274a88775ea5a169ba7e2d795aa5156e1",
+      "path": "target/b60-correcao-20260910/bundle-v2/swapped/lib/jackson-annotations-2.17.2.jar"
+    },
+    {
+      "sha256": "721a189241dab0525d9e858e5cb604d3ecc0ede081e2de77d6f34fa5779a5b46",
+      "path": "target/b60-correcao-20260910/bundle-v2/swapped/lib/jackson-core-2.17.2.jar"
+    },
+    {
+      "sha256": "c04993f33c0f845342653784f14f38373d005280e6359db5f808701cfae73c0c",
+      "path": "target/b60-correcao-20260910/bundle-v2/swapped/lib/jackson-databind-2.17.2.jar"
+    },
+    {
+      "sha256": "9b80024a9822e70b07f6bb13824c76c137c1064a1b5eb518374ab141870fdbcc",
+      "path": "target/b60-correcao-20260910/bundle-v2/swapped/lib/jackson-datatype-jsr310-2.17.2.jar"
+    },
+    {
+      "sha256": "f985a33a68d900badec5b0c3c613ab9db66415d2cf378987357ded9da5370e32",
+      "path": "target/b60-correcao-20260910/bundle-v2/swapped/lib/logback-classic-1.5.16.jar"
+    },
+    {
+      "sha256": "f15e206b98ca25294506d2dadfe5ce2a6da9df9cf7c85d8e7191f99a422df3c9",
+      "path": "target/b60-correcao-20260910/bundle-v2/swapped/lib/logback-core-1.5.16.jar"
+    },
+    {
+      "sha256": "e6933c0711e598a224060e52ed31392f720a4a7664e85d8ae37c52a85b67ebb0",
+      "path": "target/b60-correcao-20260910/bundle-v2/swapped/lib/mssql-jdbc-12.8.1.jre11.jar"
+    },
+    {
+      "sha256": "a12578dde1ba00bd9b816d388a0b879928d00bab3c83c240f7013bf4196c579a",
+      "path": "target/b60-correcao-20260910/bundle-v2/swapped/lib/slf4j-api-2.0.16.jar"
+    },
+    {
+      "sha256": "39b0f1b949d266e2b74ed7ef53bf408d8cdf68e48a6d3b443437051f94e69ec1",
+      "path": "target/b60-correcao-20260910/bundle-v2/swapped/manifest.json"
+    },
+    {
+      "sha256": "9a92363a42db34e9f27cedffe18b139d7bb6c93495cb8338f7f8dbb93f3ae538",
+      "path": "target/b60-correcao-20260910/bundle-v2/swapped/native/mssql-jdbc_auth-12.8.1.x64.dll"
+    },
+    {
+      "sha256": "0ab1ac66da25a710c87005749b58f4b3987c1e74410ef38eac4edf6e51e7839c",
+      "path": "target/b60-correcao-20260910/bundle-v2/swapped/probe/br/com/esl/etl/v2/bootstrap/RuntimeUsersPhysicalProbe.class"
+    },
+    {
+      "sha256": "4ea2e4e34577cc9b862e7a6e338ebc82ffcc0c31552fcfb74e8757e0e66d292d",
+      "path": "target/b60-correcao-20260910/bundle-v2/swapped/probe/br/com/esl/etl/v2/bootstrap/RuntimeUsersPhysicalProbe$Fault.class"
+    },
+    {
+      "sha256": "64f75624bfa0ac85c2fecf362947be9de8adf15ceb43e8fa0a7aef4cb8d40d5b",
+      "path": "target/b60-correcao-20260910/bundle-v2/swapped/probe/br/com/esl/etl/v2/plataforma/autorizacao/RuntimeUsersPhysicalAuthority.class"
+    },
+    {
+      "sha256": "a131873019fcd2b2d49a68840ce80e27d856eae5cb3cf792106d7c564106de21",
+      "path": "target/b60-correcao-20260910/bundle-v2/swapped/runtime.properties"
+    },
+    {
+      "sha256": "f391a6c50b64a1a8bf48a38f1b8563ebe99143d522af20c95c9f4a2c5aa330c9",
+      "path": "target/b60-correcao-20260910/bundle-v2/swapped/standard/etl-dataexport-v2.jar"
+    },
+    {
+      "sha256": "873a606e23507969f9bbbea939d5e19274a88775ea5a169ba7e2d795aa5156e1",
+      "path": "target/b60-correcao-20260910/bundle-v2/swapped/standard/lib/jackson-annotations-2.17.2.jar"
+    },
+    {
+      "sha256": "721a189241dab0525d9e858e5cb604d3ecc0ede081e2de77d6f34fa5779a5b46",
+      "path": "target/b60-correcao-20260910/bundle-v2/swapped/standard/lib/jackson-core-2.17.2.jar"
+    },
+    {
+      "sha256": "c04993f33c0f845342653784f14f38373d005280e6359db5f808701cfae73c0c",
+      "path": "target/b60-correcao-20260910/bundle-v2/swapped/standard/lib/jackson-databind-2.17.2.jar"
+    },
+    {
+      "sha256": "9b80024a9822e70b07f6bb13824c76c137c1064a1b5eb518374ab141870fdbcc",
+      "path": "target/b60-correcao-20260910/bundle-v2/swapped/standard/lib/jackson-datatype-jsr310-2.17.2.jar"
+    },
+    {
+      "sha256": "f985a33a68d900badec5b0c3c613ab9db66415d2cf378987357ded9da5370e32",
+      "path": "target/b60-correcao-20260910/bundle-v2/swapped/standard/lib/logback-classic-1.5.16.jar"
+    },
+    {
+      "sha256": "f15e206b98ca25294506d2dadfe5ce2a6da9df9cf7c85d8e7191f99a422df3c9",
+      "path": "target/b60-correcao-20260910/bundle-v2/swapped/standard/lib/logback-core-1.5.16.jar"
+    },
+    {
+      "sha256": "e6933c0711e598a224060e52ed31392f720a4a7664e85d8ae37c52a85b67ebb0",
+      "path": "target/b60-correcao-20260910/bundle-v2/swapped/standard/lib/mssql-jdbc-12.8.1.jre11.jar"
+    },
+    {
+      "sha256": "a12578dde1ba00bd9b816d388a0b879928d00bab3c83c240f7013bf4196c579a",
+      "path": "target/b60-correcao-20260910/bundle-v2/swapped/standard/lib/slf4j-api-2.0.16.jar"
+    },
+    {
+      "sha256": "a99a026590cce84be320cb5af25387f468f2df65245e03265fafecc2614828dc",
+      "path": "target/b60-correcao-20260910/bundle-v2/variants.json"
+    },
+    {
+      "sha256": "4d13e839093ee60eceaaa13a157f0d87da82528087620732abdb3d7aff9149ad",
+      "path": "target/b60-correcao-20260910/semantic-green-02/result.json"
+    },
+    {
+      "sha256": "35f01020c58b747ae2d0f71280bedaa9aa45ed49bc3487fd7348437b56319b0d",
+      "path": "target/b60-correcao-20260910/verify-01/exit.json"
+    },
+    {
+      "sha256": "32cec1920f7bc49d45725b9b9dcc59550622a5589f09098ae149446f900a514f",
+      "path": "target/bloco60-local/physical-corrective/cc4f84cb37f69724/ACTIVATE_B60.sql.log"
+    },
+    {
+      "sha256": "3e839922b0a9578ef239100ea66d98d52111ead3588e09ce0f14882d78600dd9",
+      "path": "target/bloco60-local/physical-corrective/cc4f84cb37f69724/COMPENSATION_STATE.sql.log"
+    },
+    {
+      "sha256": "0ee15bd06a4cdc0287d1dbac474ea13473484e4d6a81dbd71ed1a50e79c94ef1",
+      "path": "target/bloco60-local/physical-corrective/cc4f84cb37f69724/controller-result.json"
+    },
+    {
+      "sha256": "46de65a2ded3d333e494124d56c5e62685384ecc518f185f26ca94ea15ee7648",
+      "path": "target/bloco60-local/physical-corrective/cc4f84cb37f69724/ledger.jsonl"
+    },
+    {
+      "sha256": "c3e77f06a54020a12a7902060cdd1ab3a9a7d86f135179ff53d0fca1e303b05a",
+      "path": "target/bloco60-local/physical-corrective/cc4f84cb37f69724/PROFILE_UNACTIVATED.sql.log"
+    },
+    {
+      "sha256": "407adf585df50aeda3c61d1c2cb21775e6c726a677c49a9ea240c8af658f101b",
+      "path": "target/bloco60-local/physical-corrective/cc4f84cb37f69724/RECOVERED_HISTORICAL_ROWS.sql.log"
+    },
+    {
+      "sha256": "3e77387344a503787b2741ae06f1f228f70784d048215bc42fd6aaa4445fd853",
+      "path": "target/bloco60-local/physical-corrective/cc4f84cb37f69724/results.json"
+    },
+    {
+      "sha256": "f2b35d102e8517b4fda6be67d2d84b8b1945077670470f77ef1d8f31307b605b",
+      "path": "target/execucao-b60-aprovada-20260909-2334/final/receipt.json"
+    },
+    {
+      "sha256": "734e9db748705b111c4c407dc42d1bb6ba5c1e34e4d7f30c6af976a3d6c596c7",
+      "path": "target/execucao-b60-corretiva-20260910-0040/cumulative-budget.log"
+    },
+    {
+      "sha256": "83b47d7f5d8643026365a127126cc7f13179768052c5f7e38a73ee217178630f",
+      "path": "target/execucao-b60-corretiva-20260910-0040/sql-batches-green.log"
+    },
+    {
+      "sha256": "34ef5603a35dd6f9aa6b85fb26aa0099bb5bea57582e1312c99bc64da59cf0ac",
+      "path": "target/execucao-b60-corretiva-20260910-0040/sql-batches-red.log"
+    },
+    {
+      "sha256": "49e92fcce9ca793903a7a20a4967c577d8ce5f68a07672b3a7b70605b54e9571",
+      "path": "target/execucao-b60-corretiva-20260910-0040/USER-INSTRUCTION.txt"
+    }
+  ],
+  "sqlExecuted": false,
+  "sourceRealExecuted": false,
+  "approvalRecorded": true,
+  "predecessorPackage": "a3d28adeb17775bcb965756bece5e43ac18c8eea9f9d00349f66c976716db57e",
+  "versions": {
+    "usersScopeBefore": 2,
+    "usersScopeActive": 3,
+    "usersScopeAfter": 4,
+    "serviceActive": 20,
+    "serviceBefore": 19,
+    "serviceAfter": 21
+  },
+  "entryPoint": "scripts/validation/Invoke-Bloco60Continuation.ps1",
+  "activationOverride": "database/proposals/bloco60-continuacao/activate.sql",
+  "continuation": {
+    "priorActivation": "NOT_COMMITTED_CONFIRMED_BY_SQL",
+    "authorization": "target/execucao-b60-corretiva-20260910-0040/USER-INSTRUCTION.txt",
+    "priorLedger": "target/bloco60-local/physical-corrective/cc4f84cb37f69724/ledger.jsonl",
+    "priorSqlcmd": 8,
+    "priorJvms": 0,
+    "priorHttp": 0,
+    "effectiveDeadlineUtc": "2026-09-10T04:40:10.0501172Z",
+    "predecessorPackage": "cc4f84cb37f697248d8a096249480985b252a7303c2408fb4cc4614bc829a167",
+    "renewals": 0
+  }
+}

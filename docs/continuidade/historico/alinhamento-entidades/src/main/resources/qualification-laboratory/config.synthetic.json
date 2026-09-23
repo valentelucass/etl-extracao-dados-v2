@@ -1,0 +1,18 @@
+{
+  "version": "qualification-config-v1",
+  "host": "localhost",
+  "database": "ETL_SISTEMA_V2_SHADOW",
+  "schemaVersion": 98,
+  "syntheticOnly": true,
+  "rollbackOnly": true,
+  "profileActive": true,
+  "integrationEnabled": true,
+  "querySeconds": 60,
+  "socketMillis": 90000,
+  "caseSeconds": 300,
+  "campaignSeconds": 3600,
+  "heapMiB": 512,
+  "maximumRows": 4096,
+  "maximumJdbcCalls": 100000,
+  "maximumBytes": 67108864
+}

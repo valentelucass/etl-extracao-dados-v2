@@ -1,0 +1,284 @@
+{
+  "version": 1,
+  "status": "EXPANSION_LOCAL_COMPLETE",
+  "passed": true,
+  "deliveryComplete": true,
+  "fronts": [
+    "A",
+    "B",
+    "C",
+    "D",
+    "E",
+    "F",
+    "G",
+    "H",
+    "I",
+    "J",
+    "K",
+    "L",
+    "M",
+    "N"
+  ],
+  "frontStates": {
+    "A": "CONSTRUIDO_LOCALMENTE_VERIFICADO",
+    "B": "CONSTRUIDO_LOCALMENTE_VERIFICADO",
+    "C": "CONSTRUIDO_LOCALMENTE_VERIFICADO",
+    "D": "CONSTRUIDO_LOCALMENTE_VERIFICADO",
+    "E": "CONSTRUIDO_LOCALMENTE_VERIFICADO",
+    "F": "CONSTRUIDO_LOCALMENTE_VERIFICADO",
+    "G": "CONSTRUIDO_LOCALMENTE_VERIFICADO",
+    "H": "CONSTRUIDO_LOCALMENTE_VERIFICADO",
+    "I": "CONSTRUIDO_LOCALMENTE_VERIFICADO",
+    "J": "CONSTRUIDO_LOCALMENTE_VERIFICADO",
+    "K": "CONSTRUIDO_LOCALMENTE_VERIFICADO",
+    "L": "CONSTRUIDO_LOCALMENTE_VERIFICADO",
+    "M": "CONSTRUIDO_LOCALMENTE_VERIFICADO",
+    "N": "CONSTRUIDO_LOCALMENTE_VERIFICADO"
+  },
+  "full": {
+    "failures": 0,
+    "skipped": 4,
+    "tests": 1775,
+    "errors": 0
+  },
+  "integration": {
+    "failures": 0,
+    "skipped": 0,
+    "tests": 233,
+    "errors": 0,
+    "realJdbc": true,
+    "syntheticOnly": true,
+    "rollbackConfirmed": true,
+    "previousRegressionTests": 95,
+    "newTests": 138
+  },
+  "java": {
+    "version": 17,
+    "offline": true,
+    "heapMiB": 512,
+    "attempt": "verify-03",
+    "sourceCount": 870,
+    "packagedClasses": 746,
+    "sourceAndJarChecked": true
+  },
+  "jar": {
+    "passed": true,
+    "cases": 21,
+    "rollbackConfirmed": true,
+    "sha256": "1c0b55a08aecd89e2f618d3306c7cddbea47878f692a021ebbcdfe4f25cb403f",
+    "secondsPerCase": 60
+  },
+  "scale": {
+    "maximumInFlightPages": 1,
+    "maximumBatchRows": 16,
+    "plansWithPlanAffectingConvert": 0,
+    "heapPlateauProven": false,
+    "maximumRetainedPages": 0,
+    "cases": [
+      {
+        "resultSha256": "515c8c5fc21b9129caa694181d8e444df42a187c0fd67e23f6a78d8d2d5854c0",
+        "roots": 16,
+        "seconds": 4.5183717,
+        "case": "scale-16-d2ab0d7a-8bfb-4576-9bf2-32be3836998d",
+        "heapPeakMiB": 165.4875030517578,
+        "preparedStatements": 78
+      },
+      {
+        "resultSha256": "a528733ff39303d64f980a78ae93435e8da5d0fbaceaa280bac69a820d5adf36",
+        "roots": 64,
+        "seconds": 13.335854001,
+        "case": "scale-64-1e346032-7387-4c57-84cb-6d2618fd46a9",
+        "heapPeakMiB": 166.2515869140625,
+        "preparedStatements": 207
+      },
+      {
+        "resultSha256": "1311a6a041c9b77ddb588ce7b9f43093af6d27da5c7fa4984025cbd9c997e88e",
+        "roots": 256,
+        "seconds": 44.6182178,
+        "case": "scale-256-92db76c9-4dd2-45b9-bc2e-c4f5705d7ee2",
+        "heapPeakMiB": 168.9032440185547,
+        "preparedStatements": 725
+      },
+      {
+        "resultSha256": "8a239eebc83b4dbb132aab2857e28095ddcfab3b1c1ade4e0956dd7d6ecef3ad",
+        "roots": 64,
+        "seconds": 13.9609945,
+        "case": "scale-64-b74bb4b0-3627-403f-af9e-3676d3f726cd",
+        "heapPeakMiB": 168.0411376953125,
+        "preparedStatements": 207
+      }
+    ],
+    "measurementScope": "Application JDBC preparation counters exclude SQL-internal statements; probe peak is sampled heap, not retained heap proof.",
+    "maximumInFlightBatches": 1,
+    "actualPlans": 148,
+    "passed": true,
+    "maximumPageBytes": 65536,
+    "sloProven": false,
+    "attempt": "verify-03",
+    "completedScales": [
+      16,
+      64,
+      256,
+      64
+    ],
+    "plansWithSpills": 0,
+    "operators": {
+      "Nested Loops": 301,
+      "Sort": 85,
+      "Compute Scalar": 236,
+      "Index Spool": 7,
+      "Table Scan": 136,
+      "Clustered Index Seek": 238,
+      "Assert": 64,
+      "Stream Aggregate": 76,
+      "Index Seek": 39,
+      "Clustered Index Scan": 72,
+      "Constant Scan": 36,
+      "Merge Join": 18,
+      "Clustered Index Update": 8,
+      "Index Scan": 22,
+      "Hash Match": 64,
+      "Segment": 24,
+      "Filter": 42,
+      "Table Insert": 72,
+      "Table Spool": 25,
+      "Sequence Project": 12,
+      "Concatenation": 12,
+      "Clustered Index Insert": 32
+    },
+    "spills": 0,
+    "planAffectingConversions": 0,
+    "plansWithMissingStatistics": 8
+  },
+  "schema": {
+    "migrations": 51,
+    "newMigrations": 14,
+    "installationDirectories": [
+      "schema-active-amounts-install-01",
+      "schema-capture-fences-install-01",
+      "schema-dependencies-install-01",
+      "schema-freight-terms-install-01",
+      "schema-install-01",
+      "schema-invoices-install-01",
+      "schema-projections-install-01",
+      "schema-recomposition-install-01",
+      "schema-references-install-01",
+      "schema-relations-install-01",
+      "schema-revenue-comparison-install-01",
+      "schema-revenue-install-01",
+      "schema-sinistro-arrays-install-01"
+    ],
+    "preexistingTables": 143,
+    "currentTables": 179,
+    "newTables": 36,
+    "ownResidue": 0,
+    "aggregateCountsPreserved": true,
+    "sqlValidation": "062"
+  },
+  "concurrency": {
+    "sessions": 2,
+    "actualClaimAndConsumption": true,
+    "actualProcedures": [
+      "ctl.usp_claim_expansion_queue",
+      "core.usp_apply_expansion_laboratory",
+      "mart.usp_materialize_expansion_invoices",
+      "mart.usp_materialize_expansion_revenue"
+    ],
+    "busyTimeoutMillis": 1200,
+    "durableCrashRecoveryProven": false
+  },
+  "security": {
+    "offlineScannerPassed": true,
+    "selfTestCases": 11,
+    "gitleaksAvailable": false,
+    "externalVulnerabilityFeedQueried": false
+  },
+  "staticChecks": {
+    "passed": true,
+    "count": 12
+  },
+  "closureValidation": {
+    "passed": true,
+    "checks": [
+      {
+        "passed": true,
+        "sha256": "41498e15b9314ce9f785d8c8c77f976822c0237007821e6bd1ec497238c1404b",
+        "name": "expansion",
+        "timedOut": false,
+        "log": "target\\macrobloco-expansao-20260912-01\\closure-candidate-01-expansion.log",
+        "exit": 0
+      },
+      {
+        "exit": 0,
+        "name": "relational",
+        "timedOut": false,
+        "sha256": "5f90d8c7831e8735abe5abbb267ff1dc20e08398643cb3d5d9ba14e75a76343a",
+        "passed": true,
+        "log": "target\\macrobloco-expansao-20260912-01\\closure-candidate-01-relational.log"
+      },
+      {
+        "timedOut": false,
+        "name": "predecessor",
+        "log": "target\\macrobloco-expansao-20260912-01\\closure-candidate-01-predecessor.log",
+        "passed": true,
+        "sha256": "7d86d4ae1f705874232581378a27685ede0f76c3665946631d03c0db3fa8b08d",
+        "exit": 0
+      },
+      {
+        "log": "target\\macrobloco-expansao-20260912-01\\closure-candidate-01-continuity.log",
+        "timedOut": false,
+        "name": "continuity",
+        "passed": true,
+        "sha256": "cfedbc6620b00bef8fe7d29cd575249f40e3c208463158b959385bfe257cb0d8",
+        "exit": 0
+      },
+      {
+        "name": "continuity-guards",
+        "passed": true,
+        "log": "target\\macrobloco-expansao-20260912-01\\closure-candidate-01-continuity-guards.log",
+        "exit": 0,
+        "timedOut": false,
+        "sha256": "8fed78c6b8b5fbae13bad7c431d3bc5f84436f7c2cd4d98e00eb11aebc3b0b48"
+      },
+      {
+        "log": "target\\macrobloco-expansao-20260912-01\\closure-candidate-01-trail.log",
+        "exit": 0,
+        "passed": true,
+        "sha256": "fc4260ded35d0c79a0ba8e910ceab7eea71a4720c06beb742d6594332efb5fff",
+        "timedOut": false,
+        "name": "trail"
+      },
+      {
+        "sha256": "9cc24083d10a91b13607d21531e87f7692905599ee40a08f67fc69092be99f90",
+        "passed": true,
+        "log": "target\\macrobloco-expansao-20260912-01\\closure-candidate-01-runtime.log",
+        "name": "runtime",
+        "timedOut": false,
+        "exit": 0
+      }
+    ],
+    "expansionGuards": 11,
+    "relationalGuards": 11,
+    "predecessorGuards": 10,
+    "historicalGuards": 12,
+    "runtimeChecks": 6,
+    "continuityAndTrailPassed": true,
+    "offlineDeltaFiles": 146,
+    "utf8Files": 165,
+    "exactDiffMembership": true,
+    "snapshotsByteExact": true
+  },
+  "construction": {
+    "before": 26,
+    "after": 32,
+    "denominator": 45,
+    "originalBeforeClassification": 29,
+    "documentaryCorrections": 3,
+    "rule": "Unidades com mecanismo funcional local no subescopo declarado; não conclusão integral dos pais."
+  },
+  "remoteCalls": 0,
+  "newAcceptances": 0,
+  "operationalPromotionAuthorized": false,
+  "realQualificationAccepted": false,
+  "physicalFreshVsUpgradeEquivalenceProven": false
+}

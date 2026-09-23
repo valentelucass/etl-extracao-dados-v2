@@ -1,0 +1,11 @@
+{
+  "status": "IMPLEMENTATION_IN_PROGRESS",
+  "mainProfile": "src/main/resources/analytic-laboratory/manifest-references.synthetic.json",
+  "fleetProfile": "src/main/resources/analytic-laboratory/fleet-references.synthetic.json",
+  "mainRows": 102,
+  "fleetRows": 25,
+  "source": "../etl-extracao-dados/database/procedures/005_criar_sp_carga_fato_gestao_vista_manifestos.sql",
+  "sourceSha256": "307e3693fcd15b6d6cf09121a5c57df729812cfaa0a2f53a6624b66183cf7bc5",
+  "classifications": "Explicit laboratory policies; no production identity or nominal approval",
+  "ownerDocumentProvenance": "TRACTOR_BINDING_REGISTRY_DOCUMENT; separate from the 6399 payload"
+}

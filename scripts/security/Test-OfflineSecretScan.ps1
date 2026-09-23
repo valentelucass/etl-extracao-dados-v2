@@ -1,5 +1,5 @@
 [CmdletBinding()]
-param()
+param([ValidatePattern('^[a-z0-9-]{1,64}$')][string]$EvidenceAttempt)
 
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
@@ -7,6 +7,16 @@ $ErrorActionPreference = 'Stop'
 $scannerPath = (Resolve-Path -LiteralPath (Join-Path $PSScriptRoot 'Invoke-OfflineSecretScan.ps1')).Path
 $temporaryRoot = [System.IO.Path]::GetFullPath([System.IO.Path]::GetTempPath()).TrimEnd('\', '/')
 $testRoot = Join-Path $temporaryRoot ('etl-v2-offline-scan-selftest-' + [guid]::NewGuid().ToString('N'))
+if ($EvidenceAttempt) {
+    $evidenceRoot = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot '../../target/macrobloco-qualificacao-pacote-20260913-01'))
+    $testRoot = Join-Path $evidenceRoot $EvidenceAttempt
+    if (Test-Path -LiteralPath $testRoot) { throw 'SCANNER_EVIDENCE_ATTEMPT_EXISTS' }
+    $parent = Get-Item -LiteralPath $evidenceRoot
+    while ($null -ne $parent) {
+        if (($parent.Attributes -band [IO.FileAttributes]::ReparsePoint) -ne 0) { throw 'SCANNER_EVIDENCE_REPARSE' }
+        $parent = $parent.Parent
+    }
+}
 $quote = [char] 34
 $caseCount = 0
 
@@ -48,6 +58,11 @@ function Invoke-ScannerCase {
     & $Arrange $caseRoot
     $output = @(& $scannerPath -Source $caseRoot 2>&1 | ForEach-Object { $_.ToString() })
     $exitCode = $LASTEXITCODE
+    if ($EvidenceAttempt) {
+        [IO.File]::WriteAllText((Join-Path $testRoot ($Name + '-stdout.log')), ($output -join "`n"), [Text.UTF8Encoding]::new($false))
+        [IO.File]::WriteAllText((Join-Path $testRoot ($Name + '-exit.json')),
+            (@{exit=$exitCode;expected=$ExpectedExitCode;rule=$ExpectedRule}|ConvertTo-Json), [Text.UTF8Encoding]::new($false))
+    }
     if ($exitCode -ne $ExpectedExitCode) {
         throw ('Scanner self-test case {0} returned an unexpected exit code.' -f $Name)
     }
@@ -68,6 +83,20 @@ function Invoke-ScannerCase {
 
 try {
     [void] (New-Item -ItemType Directory -Path $testRoot)
+
+    Invoke-ScannerCase -Name 'unexplained-tracked-removal' -ExpectedExitCode 1 -ExpectedRule 'MISSING_CANDIDATE' -Arrange {
+        param($caseRoot)
+        Write-TestFile -Root $caseRoot -RelativePath 'unexplained.txt' -Content 'safe fixture'
+        & git -C $caseRoot add -- unexplained.txt
+        if ($LASTEXITCODE -ne 0) { throw 'SCANNER_FIXTURE_INDEX' }
+        # Exact file created by this test; never remove a repository input.
+        Remove-Item -LiteralPath (Join-Path $caseRoot 'unexplained.txt')
+    }
+
+    Invoke-ScannerCase -Name 'unicode-candidate-path-is-read-as-utf8' -ExpectedExitCode 0 -Arrange {
+        param($caseRoot)
+        Write-TestFile -Root $caseRoot -RelativePath 'docs/catalogos/rotação/manifesto.json' -Content '{"safe":true}'
+    }
 
     $approvedValue = 'must-not-be-used-' + 'token'
     Invoke-ScannerCase `
@@ -98,6 +127,30 @@ try {
                 $content = $key + '=' + $quote + $unapprovedValue + $quote
                 Write-TestFile -Root $root -RelativePath 'fixture.properties' -Content $content
             }
+    }
+
+    foreach ($newTextExtension in @('cs', 'template', 'pom', 'txt')) {
+        $unapprovedValue = 'unapproved-' + 'new-text-format-123456'
+        Invoke-ScannerCase -Name ('scan-new-text-' + $newTextExtension) -ExpectedExitCode 1 -ExpectedRule 'SECRET_QUOTED_ASSIGNMENT' -ForbiddenOutputLiteral $unapprovedValue -Arrange {
+            param($root)
+            $key = 'SERVICE_' + 'TOKEN'
+            $content = $key + '=' + $quote + $unapprovedValue + $quote
+            Write-TestFile -Root $root -RelativePath ('fixture.' + $newTextExtension) -Content $content
+        }
+    }
+
+    $schemaDescription = 'An object encapsulating a security identity.'
+    foreach ($variant in @('approved', 'changed', 'other-path')) {
+        $expectedExit = if ($variant -ceq 'approved') { 0 } else { 1 }
+        $expectedRule = if ($expectedExit -eq 0) { '' } else { 'SECRET_QUOTED_ASSIGNMENT' }
+        Invoke-ScannerCase -Name ('schema-description-' + $variant) -ExpectedExitCode $expectedExit -ExpectedRule $expectedRule -Arrange {
+            param($root)
+            $relative = if ($variant -ceq 'other-path') { 'schema.json' } else {
+                'docs/catalogos/macrobloco-qualificacao-pacote/third-party/bom-1.6.schema.json'
+            }
+            $value = if ($variant -ceq 'changed') { 'unapproved-' + 'schema-value-123456' } else { $schemaDescription }
+            Write-TestFile -Root $root -RelativePath $relative -Content ('"token": "' + $value + '"')
+        }
     }
 
     $environmentExampleValue = 'unapproved-' + 'example-value-123456'
@@ -162,9 +215,37 @@ try {
                 -Content ($key + '=' + $ignoredEnvironmentValue)
         }
 
+    Invoke-ScannerCase `
+        -Name 'ignored-untracked-root-env-is-allowed' `
+        -ExpectedExitCode 0 `
+        -ForbiddenOutputLiteral $ignoredEnvironmentValue `
+        -Arrange {
+            param($root)
+            Write-TestFile -Root $root -RelativePath '.gitignore' -Content ".env*`n"
+            Write-TestFile -Root $root -RelativePath '.env' -Content ('LOCAL_VALUE=' + $ignoredEnvironmentValue)
+        }
+
+    Invoke-ScannerCase `
+        -Name 'tracked-root-env-is-inventoried' `
+        -ExpectedExitCode 1 `
+        -ExpectedRule 'SENSITIVE_FILE' `
+        -ForbiddenOutputLiteral $ignoredEnvironmentValue `
+        -Arrange {
+            param($root)
+            Write-TestFile -Root $root -RelativePath '.gitignore' -Content ".env*`n"
+            Write-TestFile -Root $root -RelativePath '.env' -Content ('LOCAL_VALUE=' + $ignoredEnvironmentValue)
+            & git -C $root add -f -- .env
+            if ($LASTEXITCODE -ne 0) { throw 'SCANNER_FIXTURE_INDEX' }
+        }
+
     Write-Output ('OFFLINE_SECRET_SCAN_SELF_TEST status=PASS cases={0}' -f $caseCount)
 }
 finally {
+    if ($EvidenceAttempt) {
+        [IO.File]::WriteAllText((Join-Path $testRoot 'result.json'),
+            (@{passed=($caseCount -eq 20);cases=$caseCount;evidenceRetained=$true;scannerSha256=(Get-FileHash -LiteralPath $scannerPath).Hash.ToLowerInvariant()}|ConvertTo-Json),
+            [Text.UTF8Encoding]::new($false))
+    } else {
     $resolvedTarget = [System.IO.Path]::GetFullPath($testRoot)
     $expectedPrefix = $temporaryRoot + [System.IO.Path]::DirectorySeparatorChar
     $expectedLeafPrefix = 'etl-v2-offline-scan-selftest-'
@@ -179,6 +260,7 @@ finally {
     }
     if (Test-Path -LiteralPath $resolvedTarget) {
         Remove-Item -LiteralPath $resolvedTarget -Recurse -Force
+    }
     }
 }
 

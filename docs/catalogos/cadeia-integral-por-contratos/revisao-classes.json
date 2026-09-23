@@ -1,0 +1,998 @@
+{
+  "version": 1,
+  "status": "JAVA_REVIEW_AND_FINAL_REGRESSION_COMPLETE",
+  "scope": "same46candidates; no removal quota",
+  "sourceCalls": 0,
+  "newNominalAcceptances": 0,
+  "candidates": [
+    {
+      "name": "LocalColetasTemporalRuntime",
+      "priorPath": "src/main/java/br/com/esl/etl/v2/bootstrap/LocalColetasTemporalRuntime.java",
+      "priorGroup": "TEMPORAL_COLETAS_TEST_ONLY",
+      "status": "PRESERVED_EXPLICIT_REVIEW",
+      "current": {
+        "path": "src/main/java/br/com/esl/etl/v2/bootstrap/LocalColetasTemporalRuntime.java",
+        "sha256": "ff1a522eb6966b62bbb0b96248b46c18fcbfc8346891ef93ba7aff629b93be64",
+        "name": "LocalColetasTemporalRuntime",
+        "fqn": "br.com.esl.etl.v2.bootstrap.LocalColetasTemporalRuntime",
+        "main": false,
+        "productionReferences": [],
+        "testReferences": [
+          "src/test/java/br/com/esl/etl/v2/plataforma/fonte/dataexport/ColetasTemporalPhysicalFixture.java",
+          "src/test/java/br/com/esl/etl/v2/plataforma/fonte/dataexport/ColetasTemporalLocalIntegrationIT.java"
+        ]
+      },
+      "testSupport": null,
+      "decision": "Preservado como biblioteca de integração temporal exercitada por ColetasTemporalLocalIntegrationIT e sua fixture física. Sem novo wiring no JAR integral; não substituir a prova temporal pela projeção analítica."
+    },
+    {
+      "name": "ColetaDataExportPageRequestFactory",
+      "priorPath": "src/main/java/br/com/esl/etl/v2/modulos/coletas/aplicacao/ColetaDataExportPageRequestFactory.java",
+      "priorGroup": "SINGLE_PAGE_ABSTRACTIONS_SUPERSEDED",
+      "status": "PREDECESSOR_REMOVAL_PRESERVED",
+      "current": null,
+      "testSupport": null,
+      "decision": "Remoção anterior preservada; tipo substituído antes de0154. Nenhuma nova remoção contada."
+    },
+    {
+      "name": "ColetaGraphQlTemporalMapper",
+      "priorPath": "src/main/java/br/com/esl/etl/v2/modulos/coletas/aplicacao/ColetaGraphQlTemporalMapper.java",
+      "priorGroup": "TEMPORAL_COLETAS_TEST_ONLY",
+      "status": "PRESERVED_EXPLICIT_REVIEW",
+      "current": {
+        "path": "src/main/java/br/com/esl/etl/v2/modulos/coletas/aplicacao/ColetaGraphQlTemporalMapper.java",
+        "sha256": "77c8065cdb70e2be26e63953ec550bd154ebccc8707f3007d3c62df49573ac1a",
+        "name": "ColetaGraphQlTemporalMapper",
+        "fqn": "br.com.esl.etl.v2.modulos.coletas.aplicacao.ColetaGraphQlTemporalMapper",
+        "main": false,
+        "productionReferences": [
+          "src/main/java/br/com/esl/etl/v2/modulos/coletas/aplicacao/PersistirReferenciasTemporaisColetas.java",
+          "src/main/java/br/com/esl/etl/v2/modulos/coletas/aplicacao/ExtrairReferenciasTemporaisColetas.java"
+        ],
+        "testReferences": [
+          "src/test/java/br/com/esl/etl/v2/modulos/coletas/aplicacao/ColetaTemporalLinkTest.java",
+          "src/test/java/br/com/esl/etl/v2/plataforma/persistencia/coletas/JdbcSqlServerColetaTemporalGatewayTest.java",
+          "src/test/java/br/com/esl/etl/v2/plataforma/fonte/graphql/ExtrairReferenciasTemporaisColetasTest.java"
+        ]
+      },
+      "testSupport": null,
+      "decision": "Preservado como biblioteca de integração temporal exercitada por ColetasTemporalLocalIntegrationIT e sua fixture física. Sem novo wiring no JAR integral; não substituir a prova temporal pela projeção analítica."
+    },
+    {
+      "name": "ColetaTemporalReferenceStore",
+      "priorPath": "src/main/java/br/com/esl/etl/v2/modulos/coletas/aplicacao/ColetaTemporalReferenceStore.java",
+      "priorGroup": "TEMPORAL_COLETAS_TEST_ONLY",
+      "status": "PRESERVED_EXPLICIT_REVIEW",
+      "current": {
+        "path": "src/main/java/br/com/esl/etl/v2/modulos/coletas/aplicacao/ColetaTemporalReferenceStore.java",
+        "sha256": "1701e3119fcb57d22f516345d216a91931d2d0217c873ee2c27a406b7f7562df",
+        "name": "ColetaTemporalReferenceStore",
+        "fqn": "br.com.esl.etl.v2.modulos.coletas.aplicacao.ColetaTemporalReferenceStore",
+        "main": false,
+        "productionReferences": [
+          "src/main/java/br/com/esl/etl/v2/plataforma/persistencia/coletas/JdbcSqlServerColetaTemporalGateway.java",
+          "src/main/java/br/com/esl/etl/v2/bootstrap/LocalColetasTemporalRuntime.java",
+          "src/main/java/br/com/esl/etl/v2/modulos/coletas/aplicacao/PersistirReferenciasTemporaisColetas.java"
+        ],
+        "testReferences": [
+          "src/test/java/br/com/esl/etl/v2/plataforma/persistencia/coletas/JdbcSqlServerColetaTemporalGatewayTest.java",
+          "src/test/java/br/com/esl/etl/v2/plataforma/fonte/graphql/PersistirReferenciasTemporaisColetasTest.java"
+        ]
+      },
+      "testSupport": null,
+      "decision": "Preservado como biblioteca de integração temporal exercitada por ColetasTemporalLocalIntegrationIT e sua fixture física. Sem novo wiring no JAR integral; não substituir a prova temporal pela projeção analítica."
+    },
+    {
+      "name": "ExtrairPaginaColetasDataExport",
+      "priorPath": "src/main/java/br/com/esl/etl/v2/modulos/coletas/aplicacao/ExtrairPaginaColetasDataExport.java",
+      "priorGroup": "SINGLE_PAGE_ABSTRACTIONS_SUPERSEDED",
+      "status": "PREDECESSOR_REMOVAL_PRESERVED",
+      "current": null,
+      "testSupport": null,
+      "decision": "Remoção anterior preservada; tipo substituído antes de0154. Nenhuma nova remoção contada."
+    },
+    {
+      "name": "ExtrairReferenciasTemporaisColetas",
+      "priorPath": "src/main/java/br/com/esl/etl/v2/modulos/coletas/aplicacao/ExtrairReferenciasTemporaisColetas.java",
+      "priorGroup": "TEMPORAL_COLETAS_TEST_ONLY",
+      "status": "PRESERVED_EXPLICIT_REVIEW",
+      "current": {
+        "path": "src/main/java/br/com/esl/etl/v2/modulos/coletas/aplicacao/ExtrairReferenciasTemporaisColetas.java",
+        "sha256": "a89f0893be6ac2ff98d8faf612a3d62f4e2da0db51050fe22894693544725c5c",
+        "name": "ExtrairReferenciasTemporaisColetas",
+        "fqn": "br.com.esl.etl.v2.modulos.coletas.aplicacao.ExtrairReferenciasTemporaisColetas",
+        "main": false,
+        "productionReferences": [
+          "src/main/java/br/com/esl/etl/v2/modulos/coletas/aplicacao/PersistirReferenciasTemporaisColetas.java"
+        ],
+        "testReferences": [
+          "src/test/java/br/com/esl/etl/v2/plataforma/fonte/graphql/ExtrairReferenciasTemporaisColetasTest.java"
+        ]
+      },
+      "testSupport": null,
+      "decision": "Preservado como biblioteca de integração temporal exercitada por ColetasTemporalLocalIntegrationIT e sua fixture física. Sem novo wiring no JAR integral; não substituir a prova temporal pela projeção analítica."
+    },
+    {
+      "name": "LigarReferenciaTemporalColeta",
+      "priorPath": "src/main/java/br/com/esl/etl/v2/modulos/coletas/aplicacao/LigarReferenciaTemporalColeta.java",
+      "priorGroup": "TEMPORAL_COLETAS_TEST_ONLY",
+      "status": "PRESERVED_EXPLICIT_REVIEW",
+      "current": {
+        "path": "src/main/java/br/com/esl/etl/v2/modulos/coletas/aplicacao/LigarReferenciaTemporalColeta.java",
+        "sha256": "0de8d2cee55248e825bb67b4467ba62ae1cebb491e85109c6cf19a63fd4a580e",
+        "name": "LigarReferenciaTemporalColeta",
+        "fqn": "br.com.esl.etl.v2.modulos.coletas.aplicacao.LigarReferenciaTemporalColeta",
+        "main": false,
+        "productionReferences": [],
+        "testReferences": [
+          "src/test/java/br/com/esl/etl/v2/modulos/coletas/aplicacao/ColetaTemporalLinkTest.java",
+          "src/test/java/br/com/esl/etl/v2/plataforma/fonte/graphql/ExtrairReferenciasTemporaisColetasTest.java"
+        ]
+      },
+      "testSupport": null,
+      "decision": "Preservado como biblioteca de integração temporal exercitada por ColetasTemporalLocalIntegrationIT e sua fixture física. Sem novo wiring no JAR integral; não substituir a prova temporal pela projeção analítica."
+    },
+    {
+      "name": "PersistirReferenciasTemporaisColetas",
+      "priorPath": "src/main/java/br/com/esl/etl/v2/modulos/coletas/aplicacao/PersistirReferenciasTemporaisColetas.java",
+      "priorGroup": "TEMPORAL_COLETAS_TEST_ONLY",
+      "status": "PRESERVED_EXPLICIT_REVIEW",
+      "current": {
+        "path": "src/main/java/br/com/esl/etl/v2/modulos/coletas/aplicacao/PersistirReferenciasTemporaisColetas.java",
+        "sha256": "437098e587603cfa720a28c54eeeed45b00e47234c41be9466458d5bdbeb2c1a",
+        "name": "PersistirReferenciasTemporaisColetas",
+        "fqn": "br.com.esl.etl.v2.modulos.coletas.aplicacao.PersistirReferenciasTemporaisColetas",
+        "main": false,
+        "productionReferences": [
+          "src/main/java/br/com/esl/etl/v2/bootstrap/LocalColetasTemporalRuntime.java"
+        ],
+        "testReferences": [
+          "src/test/java/br/com/esl/etl/v2/plataforma/fonte/dataexport/ColetasTemporalLocalIntegrationIT.java",
+          "src/test/java/br/com/esl/etl/v2/plataforma/fonte/graphql/PersistirReferenciasTemporaisColetasTest.java"
+        ]
+      },
+      "testSupport": null,
+      "decision": "Preservado como biblioteca de integração temporal exercitada por ColetasTemporalLocalIntegrationIT e sua fixture física. Sem novo wiring no JAR integral; não substituir a prova temporal pela projeção analítica."
+    },
+    {
+      "name": "ColetaAbsencePolicy",
+      "priorPath": "src/main/java/br/com/esl/etl/v2/modulos/coletas/domain/ColetaAbsencePolicy.java",
+      "priorGroup": "UNWIRED_DOMAIN_POLICIES",
+      "status": "PRESERVED_EXPLICIT_REVIEW",
+      "current": {
+        "path": "src/main/java/br/com/esl/etl/v2/modulos/coletas/domain/ColetaAbsencePolicy.java",
+        "sha256": "ee2734901bfddbdfc45d668ab87bb7ed8cb56e000564ab7b09dd1d9e3a4c22e5",
+        "name": "ColetaAbsencePolicy",
+        "fqn": "br.com.esl.etl.v2.modulos.coletas.domain.ColetaAbsencePolicy",
+        "main": false,
+        "productionReferences": [],
+        "testReferences": [
+          "src/test/java/br/com/esl/etl/v2/modulos/coletas/domain/ColetaStageValueObjectsTest.java"
+        ]
+      },
+      "testSupport": null,
+      "decision": "Preservado como modelo puro do contrato. O consumidor de massa permanece SQL; referências de teste indicam a regra isolada, não alcance operacional. Não foi demonstrado defeito que exija fundir a política ao runtime."
+    },
+    {
+      "name": "ColetaTemporalIdentityBinding",
+      "priorPath": "src/main/java/br/com/esl/etl/v2/modulos/coletas/domain/ColetaTemporalIdentityBinding.java",
+      "priorGroup": "TEMPORAL_COLETAS_TEST_ONLY",
+      "status": "PRESERVED_EXPLICIT_REVIEW",
+      "current": {
+        "path": "src/main/java/br/com/esl/etl/v2/modulos/coletas/domain/ColetaTemporalIdentityBinding.java",
+        "sha256": "ae98a021ac2dd6b467c59f3c7470531d5f89e7b9e5bb587aa14416f6655c3766",
+        "name": "ColetaTemporalIdentityBinding",
+        "fqn": "br.com.esl.etl.v2.modulos.coletas.domain.ColetaTemporalIdentityBinding",
+        "main": false,
+        "productionReferences": [
+          "src/main/java/br/com/esl/etl/v2/plataforma/persistencia/coletas/JdbcSqlServerColetaTemporalGateway.java",
+          "src/main/java/br/com/esl/etl/v2/bootstrap/LocalColetasTemporalRuntime.java",
+          "src/main/java/br/com/esl/etl/v2/modulos/coletas/aplicacao/LigarReferenciaTemporalColeta.java",
+          "src/main/java/br/com/esl/etl/v2/modulos/coletas/aplicacao/ColetaTemporalReferenceStore.java"
+        ],
+        "testReferences": [
+          "src/test/java/br/com/esl/etl/v2/modulos/coletas/aplicacao/ColetaTemporalLinkTest.java",
+          "src/test/java/br/com/esl/etl/v2/plataforma/persistencia/coletas/JdbcSqlServerColetaTemporalGatewayTest.java",
+          "src/test/java/br/com/esl/etl/v2/plataforma/fonte/dataexport/ColetasTemporalPhysicalFixture.java",
+          "src/test/java/br/com/esl/etl/v2/plataforma/fonte/graphql/PersistirReferenciasTemporaisColetasTest.java",
+          "src/test/java/br/com/esl/etl/v2/plataforma/fonte/graphql/ExtrairReferenciasTemporaisColetasTest.java"
+        ]
+      },
+      "testSupport": null,
+      "decision": "Preservado como biblioteca de integração temporal exercitada por ColetasTemporalLocalIntegrationIT e sua fixture física. Sem novo wiring no JAR integral; não substituir a prova temporal pela projeção analítica."
+    },
+    {
+      "name": "ColetaTemporalObservation",
+      "priorPath": "src/main/java/br/com/esl/etl/v2/modulos/coletas/domain/ColetaTemporalObservation.java",
+      "priorGroup": "TEMPORAL_COLETAS_TEST_ONLY",
+      "status": "PRESERVED_EXPLICIT_REVIEW",
+      "current": {
+        "path": "src/main/java/br/com/esl/etl/v2/modulos/coletas/domain/ColetaTemporalObservation.java",
+        "sha256": "ad9bc9c7d2a095ccc246704044d8c6bb9bd94b4229b736eff1ad5cada4625337",
+        "name": "ColetaTemporalObservation",
+        "fqn": "br.com.esl.etl.v2.modulos.coletas.domain.ColetaTemporalObservation",
+        "main": false,
+        "productionReferences": [
+          "src/main/java/br/com/esl/etl/v2/plataforma/persistencia/coletas/JdbcSqlServerColetaTemporalGateway.java",
+          "src/main/java/br/com/esl/etl/v2/modulos/coletas/aplicacao/LigarReferenciaTemporalColeta.java",
+          "src/main/java/br/com/esl/etl/v2/modulos/coletas/aplicacao/ExtrairReferenciasTemporaisColetas.java",
+          "src/main/java/br/com/esl/etl/v2/modulos/coletas/aplicacao/ColetaTemporalReferenceStore.java",
+          "src/main/java/br/com/esl/etl/v2/modulos/coletas/aplicacao/ColetaGraphQlTemporalMapper.java"
+        ],
+        "testReferences": [
+          "src/test/java/br/com/esl/etl/v2/modulos/coletas/aplicacao/ColetaTemporalLinkTest.java",
+          "src/test/java/br/com/esl/etl/v2/plataforma/persistencia/coletas/JdbcSqlServerColetaTemporalGatewayTest.java",
+          "src/test/java/br/com/esl/etl/v2/plataforma/fonte/graphql/PersistirReferenciasTemporaisColetasTest.java",
+          "src/test/java/br/com/esl/etl/v2/plataforma/fonte/graphql/ExtrairReferenciasTemporaisColetasTest.java"
+        ]
+      },
+      "testSupport": null,
+      "decision": "Preservado como biblioteca de integração temporal exercitada por ColetasTemporalLocalIntegrationIT e sua fixture física. Sem novo wiring no JAR integral; não substituir a prova temporal pela projeção analítica."
+    },
+    {
+      "name": "ExtrairPaginaFretesDataExport",
+      "priorPath": "src/main/java/br/com/esl/etl/v2/modulos/fretes/aplicacao/ExtrairPaginaFretesDataExport.java",
+      "priorGroup": "SINGLE_PAGE_ABSTRACTIONS_SUPERSEDED",
+      "status": "PREDECESSOR_REMOVAL_PRESERVED",
+      "current": null,
+      "testSupport": null,
+      "decision": "Remoção anterior preservada; tipo substituído antes de0154. Nenhuma nova remoção contada."
+    },
+    {
+      "name": "FreteDataExportPageRequestFactory",
+      "priorPath": "src/main/java/br/com/esl/etl/v2/modulos/fretes/aplicacao/FreteDataExportPageRequestFactory.java",
+      "priorGroup": "SINGLE_PAGE_ABSTRACTIONS_SUPERSEDED",
+      "status": "PREDECESSOR_REMOVAL_PRESERVED",
+      "current": null,
+      "testSupport": null,
+      "decision": "Remoção anterior preservada; tipo substituído antes de0154. Nenhuma nova remoção contada."
+    },
+    {
+      "name": "ExtrairPaginaLocalizacaoCargaDataExport",
+      "priorPath": "src/main/java/br/com/esl/etl/v2/modulos/localizacaocargas/aplicacao/ExtrairPaginaLocalizacaoCargaDataExport.java",
+      "priorGroup": "SINGLE_PAGE_ABSTRACTIONS_SUPERSEDED",
+      "status": "PREDECESSOR_REMOVAL_PRESERVED",
+      "current": null,
+      "testSupport": null,
+      "decision": "Remoção anterior preservada; tipo substituído antes de0154. Nenhuma nova remoção contada."
+    },
+    {
+      "name": "LocalizacaoCargaDataExportGateway",
+      "priorPath": "src/main/java/br/com/esl/etl/v2/modulos/localizacaocargas/aplicacao/LocalizacaoCargaDataExportGateway.java",
+      "priorGroup": "SINGLE_PAGE_ABSTRACTIONS_SUPERSEDED",
+      "status": "PREDECESSOR_REMOVAL_PRESERVED",
+      "current": null,
+      "testSupport": null,
+      "decision": "Remoção anterior preservada; tipo substituído antes de0154. Nenhuma nova remoção contada."
+    },
+    {
+      "name": "LocalizacaoCargaDataExportPageRequest",
+      "priorPath": "src/main/java/br/com/esl/etl/v2/modulos/localizacaocargas/aplicacao/LocalizacaoCargaDataExportPageRequest.java",
+      "priorGroup": "SINGLE_PAGE_ABSTRACTIONS_SUPERSEDED",
+      "status": "PREDECESSOR_REMOVAL_PRESERVED",
+      "current": null,
+      "testSupport": null,
+      "decision": "Remoção anterior preservada; tipo substituído antes de0154. Nenhuma nova remoção contada."
+    },
+    {
+      "name": "LocalizacaoCargaShadowCapability",
+      "priorPath": "src/main/java/br/com/esl/etl/v2/modulos/localizacaocargas/aplicacao/LocalizacaoCargaShadowCapability.java",
+      "priorGroup": "UNWIRED_DOMAIN_POLICIES",
+      "status": "PRESERVED_EXPLICIT_REVIEW",
+      "current": {
+        "path": "src/main/java/br/com/esl/etl/v2/modulos/localizacaocargas/aplicacao/LocalizacaoCargaShadowCapability.java",
+        "sha256": "a74b9a9576acd369a8b74c2dd6df60e03c907a45aaaf6bf03867b91905d2708c",
+        "name": "LocalizacaoCargaShadowCapability",
+        "fqn": "br.com.esl.etl.v2.modulos.localizacaocargas.aplicacao.LocalizacaoCargaShadowCapability",
+        "main": false,
+        "productionReferences": [],
+        "testReferences": [
+          "src/test/java/br/com/esl/etl/v2/modulos/localizacaocargas/aplicacao/LocalizacaoCargaDataExportBoundaryTest.java"
+        ]
+      },
+      "testSupport": null,
+      "decision": "Preservado como modelo puro do contrato. O consumidor de massa permanece SQL; referências de teste indicam a regra isolada, não alcance operacional. Não foi demonstrado defeito que exija fundir a política ao runtime."
+    },
+    {
+      "name": "LocalizacaoCargaAbsencePolicy",
+      "priorPath": "src/main/java/br/com/esl/etl/v2/modulos/localizacaocargas/domain/LocalizacaoCargaAbsencePolicy.java",
+      "priorGroup": "UNWIRED_DOMAIN_POLICIES",
+      "status": "PRESERVED_EXPLICIT_REVIEW",
+      "current": {
+        "path": "src/main/java/br/com/esl/etl/v2/modulos/localizacaocargas/domain/LocalizacaoCargaAbsencePolicy.java",
+        "sha256": "f7f7e4c7cfa80dfaa42f874d21018402919617729cf2029f0665f6e91e4c14a9",
+        "name": "LocalizacaoCargaAbsencePolicy",
+        "fqn": "br.com.esl.etl.v2.modulos.localizacaocargas.domain.LocalizacaoCargaAbsencePolicy",
+        "main": false,
+        "productionReferences": [],
+        "testReferences": []
+      },
+      "testSupport": null,
+      "decision": "Preservado explicitamente como documentação executável pura de ABSENT/NULL/VALUE e bloqueio de completude. Zero consumidor de produção/teste encontrado; não é alegado como comportamento integrado. O contrato segue exercitado no mapper/SQL existentes. Não há regra nova, uso forçado ou quota de remoção."
+    },
+    {
+      "name": "LocalizacaoCargaFieldReducer",
+      "priorPath": "src/main/java/br/com/esl/etl/v2/modulos/localizacaocargas/domain/LocalizacaoCargaFieldReducer.java",
+      "priorGroup": "UNWIRED_DOMAIN_POLICIES",
+      "status": "PRESERVED_EXPLICIT_REVIEW",
+      "current": {
+        "path": "src/main/java/br/com/esl/etl/v2/modulos/localizacaocargas/domain/LocalizacaoCargaFieldReducer.java",
+        "sha256": "a5ebf51355689fbeb6ba146f9fc923b1b2de3248bbdbab68ee7054856ee309d4",
+        "name": "LocalizacaoCargaFieldReducer",
+        "fqn": "br.com.esl.etl.v2.modulos.localizacaocargas.domain.LocalizacaoCargaFieldReducer",
+        "main": false,
+        "productionReferences": [],
+        "testReferences": [
+          "src/test/java/br/com/esl/etl/v2/modulos/localizacaocargas/domain/LocalizacaoCargaFieldReducerTest.java"
+        ]
+      },
+      "testSupport": null,
+      "decision": "Preservado como modelo puro do contrato. O consumidor de massa permanece SQL; referências de teste indicam a regra isolada, não alcance operacional. Não foi demonstrado defeito que exija fundir a política ao runtime."
+    },
+    {
+      "name": "LocalizacaoCargaFreshnessPolicy",
+      "priorPath": "src/main/java/br/com/esl/etl/v2/modulos/localizacaocargas/domain/LocalizacaoCargaFreshnessPolicy.java",
+      "priorGroup": "UNWIRED_DOMAIN_POLICIES",
+      "status": "PRESERVED_EXPLICIT_REVIEW",
+      "current": {
+        "path": "src/main/java/br/com/esl/etl/v2/modulos/localizacaocargas/domain/LocalizacaoCargaFreshnessPolicy.java",
+        "sha256": "59483639939ded85edae0c985115292892f2dfd62121b54b1f56ad6b9a7d4386",
+        "name": "LocalizacaoCargaFreshnessPolicy",
+        "fqn": "br.com.esl.etl.v2.modulos.localizacaocargas.domain.LocalizacaoCargaFreshnessPolicy",
+        "main": false,
+        "productionReferences": [],
+        "testReferences": [
+          "src/test/java/br/com/esl/etl/v2/modulos/localizacaocargas/domain/LocalizacaoCargaFreshnessPolicyTest.java"
+        ]
+      },
+      "testSupport": null,
+      "decision": "Preservado como modelo puro do contrato. O consumidor de massa permanece SQL; referências de teste indicam a regra isolada, não alcance operacional. Não foi demonstrado defeito que exija fundir a política ao runtime."
+    },
+    {
+      "name": "ExtrairPaginaManifestosDataExport",
+      "priorPath": "src/main/java/br/com/esl/etl/v2/modulos/manifestos/aplicacao/ExtrairPaginaManifestosDataExport.java",
+      "priorGroup": "SINGLE_PAGE_ABSTRACTIONS_SUPERSEDED",
+      "status": "PREDECESSOR_REMOVAL_PRESERVED",
+      "current": null,
+      "testSupport": null,
+      "decision": "Remoção anterior preservada; tipo substituído antes de0154. Nenhuma nova remoção contada."
+    },
+    {
+      "name": "ManifestoDataExportGateway",
+      "priorPath": "src/main/java/br/com/esl/etl/v2/modulos/manifestos/aplicacao/ManifestoDataExportGateway.java",
+      "priorGroup": "SINGLE_PAGE_ABSTRACTIONS_SUPERSEDED",
+      "status": "PREDECESSOR_REMOVAL_PRESERVED",
+      "current": null,
+      "testSupport": null,
+      "decision": "Remoção anterior preservada; tipo substituído antes de0154. Nenhuma nova remoção contada."
+    },
+    {
+      "name": "ManifestoReductionResult",
+      "priorPath": "src/main/java/br/com/esl/etl/v2/modulos/manifestos/domain/ManifestoReductionResult.java",
+      "priorGroup": "UNWIRED_DOMAIN_POLICIES",
+      "status": "PRESERVED_EXPLICIT_REVIEW",
+      "current": {
+        "path": "src/main/java/br/com/esl/etl/v2/modulos/manifestos/domain/ManifestoReductionResult.java",
+        "sha256": "95b0ac239832d5010c49006d6faf97a67c67edbc64717e836bf6cf5709684d04",
+        "name": "ManifestoReductionResult",
+        "fqn": "br.com.esl.etl.v2.modulos.manifestos.domain.ManifestoReductionResult",
+        "main": false,
+        "productionReferences": [
+          "src/main/java/br/com/esl/etl/v2/modulos/manifestos/domain/ManifestoRootReducer.java"
+        ],
+        "testReferences": [
+          "src/test/java/br/com/esl/etl/v2/modulos/manifestos/domain/ManifestoRootReducerTest.java"
+        ]
+      },
+      "testSupport": null,
+      "decision": "Preservado como modelo puro do contrato. O consumidor de massa permanece SQL; referências de teste indicam a regra isolada, não alcance operacional. Não foi demonstrado defeito que exija fundir a política ao runtime."
+    },
+    {
+      "name": "ManifestoRootReducer",
+      "priorPath": "src/main/java/br/com/esl/etl/v2/modulos/manifestos/domain/ManifestoRootReducer.java",
+      "priorGroup": "UNWIRED_DOMAIN_POLICIES",
+      "status": "PRESERVED_EXPLICIT_REVIEW",
+      "current": {
+        "path": "src/main/java/br/com/esl/etl/v2/modulos/manifestos/domain/ManifestoRootReducer.java",
+        "sha256": "e3c81c6843f47fd5336726caa5c1a1471018672a3f1ff7a756953ffd27451f72",
+        "name": "ManifestoRootReducer",
+        "fqn": "br.com.esl.etl.v2.modulos.manifestos.domain.ManifestoRootReducer",
+        "main": false,
+        "productionReferences": [],
+        "testReferences": [
+          "src/test/java/br/com/esl/etl/v2/modulos/manifestos/domain/ManifestoRootReducerTest.java"
+        ]
+      },
+      "testSupport": null,
+      "decision": "Preservado como modelo puro do contrato. O consumidor de massa permanece SQL; referências de teste indicam a regra isolada, não alcance operacional. Não foi demonstrado defeito que exija fundir a política ao runtime."
+    },
+    {
+      "name": "DataExport422ErrorCategory",
+      "priorPath": "src/main/java/br/com/esl/etl/v2/plataforma/fonte/dataexport/DataExport422ErrorCategory.java",
+      "priorGroup": "UNWIRED_CONTRACT_HTTP_HELPERS",
+      "status": "PRESERVED_EXPLICIT_REVIEW",
+      "current": {
+        "path": "src/main/java/br/com/esl/etl/v2/plataforma/fonte/dataexport/DataExport422ErrorCategory.java",
+        "sha256": "edceac8f850182c075bf751b89fc55ea3228def76773503a4f63e82593e8c608",
+        "name": "DataExport422ErrorCategory",
+        "fqn": "br.com.esl.etl.v2.plataforma.fonte.dataexport.DataExport422ErrorCategory",
+        "main": false,
+        "productionReferences": [
+          "src/main/java/br/com/esl/etl/v2/plataforma/fonte/dataexport/DataExport422FailureClassifier.java"
+        ],
+        "testReferences": [
+          "src/test/java/br/com/esl/etl/v2/plataforma/fonte/dataexport/DataExport422FailureClassifierTest.java"
+        ]
+      },
+      "testSupport": null,
+      "decision": "Preservado como suporte de classificação/perfil do contrato, com regressão unitária existente. Não apresentado como cliente HTTP da cadeia nem ampliado para rede."
+    },
+    {
+      "name": "DataExport422FailureClassifier",
+      "priorPath": "src/main/java/br/com/esl/etl/v2/plataforma/fonte/dataexport/DataExport422FailureClassifier.java",
+      "priorGroup": "UNWIRED_CONTRACT_HTTP_HELPERS",
+      "status": "PRESERVED_EXPLICIT_REVIEW",
+      "current": {
+        "path": "src/main/java/br/com/esl/etl/v2/plataforma/fonte/dataexport/DataExport422FailureClassifier.java",
+        "sha256": "c9db2e649d0626e0cfe256680d196b69211824118476ab7a1caa8af2e2f03318",
+        "name": "DataExport422FailureClassifier",
+        "fqn": "br.com.esl.etl.v2.plataforma.fonte.dataexport.DataExport422FailureClassifier",
+        "main": false,
+        "productionReferences": [],
+        "testReferences": [
+          "src/test/java/br/com/esl/etl/v2/plataforma/fonte/dataexport/DataExport422FailureClassifierTest.java"
+        ]
+      },
+      "testSupport": null,
+      "decision": "Preservado como suporte de classificação/perfil do contrato, com regressão unitária existente. Não apresentado como cliente HTTP da cadeia nem ampliado para rede."
+    },
+    {
+      "name": "DataExportPayloadFieldProfile",
+      "priorPath": "src/main/java/br/com/esl/etl/v2/plataforma/fonte/dataexport/DataExportPayloadFieldProfile.java",
+      "priorGroup": "UNWIRED_CONTRACT_HTTP_HELPERS",
+      "status": "PRESERVED_EXPLICIT_REVIEW",
+      "current": {
+        "path": "src/main/java/br/com/esl/etl/v2/plataforma/fonte/dataexport/DataExportPayloadFieldProfile.java",
+        "sha256": "035a7a1e4b36db1a25eef84f7ecb631d2d589cc54908b22ac5d25d175e090773",
+        "name": "DataExportPayloadFieldProfile",
+        "fqn": "br.com.esl.etl.v2.plataforma.fonte.dataexport.DataExportPayloadFieldProfile",
+        "main": false,
+        "productionReferences": [
+          "src/main/java/br/com/esl/etl/v2/plataforma/fonte/dataexport/DataExportPayloadProfile.java"
+        ],
+        "testReferences": [
+          "src/test/java/br/com/esl/etl/v2/contratos/ContractFieldEvidence.java",
+          "src/test/java/br/com/esl/etl/v2/plataforma/fonte/dataexport/DataExportPayloadProfileTest.java"
+        ]
+      },
+      "testSupport": null,
+      "decision": "Preservado como suporte de classificação/perfil do contrato, com regressão unitária existente. Não apresentado como cliente HTTP da cadeia nem ampliado para rede."
+    },
+    {
+      "name": "DataExportPayloadProfile",
+      "priorPath": "src/main/java/br/com/esl/etl/v2/plataforma/fonte/dataexport/DataExportPayloadProfile.java",
+      "priorGroup": "UNWIRED_CONTRACT_HTTP_HELPERS",
+      "status": "PRESERVED_EXPLICIT_REVIEW",
+      "current": {
+        "path": "src/main/java/br/com/esl/etl/v2/plataforma/fonte/dataexport/DataExportPayloadProfile.java",
+        "sha256": "d95311c94c83e723ca10f99f97f4fb1ad4ce69a1febfcc49f30fac8f9291454c",
+        "name": "DataExportPayloadProfile",
+        "fqn": "br.com.esl.etl.v2.plataforma.fonte.dataexport.DataExportPayloadProfile",
+        "main": false,
+        "productionReferences": [],
+        "testReferences": [
+          "src/test/java/br/com/esl/etl/v2/contratos/Contract4924PageObservation.java",
+          "src/test/java/br/com/esl/etl/v2/contratos/ContractPayloadEvidence.java",
+          "src/test/java/br/com/esl/etl/v2/plataforma/fonte/dataexport/DataExportPayloadProfileTest.java"
+        ]
+      },
+      "testSupport": null,
+      "decision": "Preservado como suporte de classificação/perfil do contrato, com regressão unitária existente. Não apresentado como cliente HTTP da cadeia nem ampliado para rede."
+    },
+    {
+      "name": "GraphQlColetasTemporalContractCatalog",
+      "priorPath": "src/main/java/br/com/esl/etl/v2/plataforma/fonte/graphql/GraphQlColetasTemporalContractCatalog.java",
+      "priorGroup": "TEMPORAL_COLETAS_TEST_ONLY",
+      "status": "PRESERVED_EXPLICIT_REVIEW",
+      "current": {
+        "path": "src/main/java/br/com/esl/etl/v2/plataforma/fonte/graphql/GraphQlColetasTemporalContractCatalog.java",
+        "sha256": "df2a35c533fa51280d437f95b7e456da962040eec3899825678a92dea00a4d42",
+        "name": "GraphQlColetasTemporalContractCatalog",
+        "fqn": "br.com.esl.etl.v2.plataforma.fonte.graphql.GraphQlColetasTemporalContractCatalog",
+        "main": false,
+        "productionReferences": [],
+        "testReferences": [
+          "src/test/java/br/com/esl/etl/v2/plataforma/fonte/graphql/GraphQlTestSupport.java"
+        ]
+      },
+      "testSupport": null,
+      "decision": "Preservado como biblioteca de integração temporal exercitada por ColetasTemporalLocalIntegrationIT e sua fixture física. Sem novo wiring no JAR integral; não substituir a prova temporal pela projeção analítica."
+    },
+    {
+      "name": "RasterHttpBodyHandler",
+      "priorPath": "src/main/java/br/com/esl/etl/v2/plataforma/fonte/raster/RasterHttpBodyHandler.java",
+      "priorGroup": "RASTER_TEST_TRANSPORT",
+      "status": "MOVED_TO_TEST_SUPPORT",
+      "current": null,
+      "testSupport": {
+        "path": "src/test/java/br/com/esl/etl/v2/plataforma/fonte/raster/RasterHttpBodyHandler.java",
+        "sha256": "a583f050d0c74edc25a7005e41b1771015520b704e5cc720843e7f7c257f7065"
+      },
+      "decision": "Movido byte-idêntico para src/test: o único caminho consumidor é AnalyticLaboratoryRasterTransportTest. Os três tipos referenciam-se entre si; nenhum entry point de produção foi removido. Scanner e contraprova acompanham o caminho exato."
+    },
+    {
+      "name": "RasterLoopbackTransport",
+      "priorPath": "src/main/java/br/com/esl/etl/v2/plataforma/fonte/raster/RasterLoopbackTransport.java",
+      "priorGroup": "RASTER_TEST_TRANSPORT",
+      "status": "MOVED_TO_TEST_SUPPORT",
+      "current": null,
+      "testSupport": {
+        "path": "src/test/java/br/com/esl/etl/v2/plataforma/fonte/raster/RasterLoopbackTransport.java",
+        "sha256": "9429638a8c575342f367e7658a5309cd256afb7df8d9f13ed25e8e16be15fff2"
+      },
+      "decision": "Movido byte-idêntico para src/test: o único caminho consumidor é AnalyticLaboratoryRasterTransportTest. Os três tipos referenciam-se entre si; nenhum entry point de produção foi removido. Scanner e contraprova acompanham o caminho exato."
+    },
+    {
+      "name": "RasterTransportConfiguration",
+      "priorPath": "src/main/java/br/com/esl/etl/v2/plataforma/fonte/raster/RasterTransportConfiguration.java",
+      "priorGroup": "RASTER_TEST_TRANSPORT",
+      "status": "MOVED_TO_TEST_SUPPORT",
+      "current": null,
+      "testSupport": {
+        "path": "src/test/java/br/com/esl/etl/v2/plataforma/fonte/raster/RasterTransportConfiguration.java",
+        "sha256": "5b0ee6cd587e486390833aede0cac610f79801cf52dc15ae5cd56da027d70011"
+      },
+      "decision": "Movido byte-idêntico para src/test: o único caminho consumidor é AnalyticLaboratoryRasterTransportTest. Os três tipos referenciam-se entre si; nenhum entry point de produção foi removido. Scanner e contraprova acompanham o caminho exato."
+    },
+    {
+      "name": "IdentityConflictPolicy",
+      "priorPath": "src/main/java/br/com/esl/etl/v2/plataforma/identidade/IdentityConflictPolicy.java",
+      "priorGroup": "UNWIRED_IDENTITY_POLICY",
+      "status": "PRESERVED_EXPLICIT_REVIEW",
+      "current": {
+        "path": "src/main/java/br/com/esl/etl/v2/plataforma/identidade/IdentityConflictPolicy.java",
+        "sha256": "17d9854a315147ce2e3556f3abf701dfac6ae1afd6885154b8b7e25404f50ee8",
+        "name": "IdentityConflictPolicy",
+        "fqn": "br.com.esl.etl.v2.plataforma.identidade.IdentityConflictPolicy",
+        "main": false,
+        "productionReferences": [],
+        "testReferences": [
+          "src/test/java/br/com/esl/etl/v2/plataforma/identidade/IdentityConflictPolicyTest.java"
+        ]
+      },
+      "testSupport": null,
+      "decision": "Preservado como política pura de conflito de identidade, exercitada isoladamente. Identidade integral continua explícita/type-tagged; a revisão não inventa um consumidor operacional."
+    },
+    {
+      "name": "ExecutionMetricsAccumulator",
+      "priorPath": "src/main/java/br/com/esl/etl/v2/plataforma/observabilidade/ExecutionMetricsAccumulator.java",
+      "priorGroup": "UNWIRED_OBSERVABILITY_HELPERS",
+      "status": "PRESERVED_EXPLICIT_REVIEW",
+      "current": {
+        "path": "src/main/java/br/com/esl/etl/v2/plataforma/observabilidade/ExecutionMetricsAccumulator.java",
+        "sha256": "22f2927b94ea9bfcec394086ec1f84a77951078b48295422c562f13f36e6f06e",
+        "name": "ExecutionMetricsAccumulator",
+        "fqn": "br.com.esl.etl.v2.plataforma.observabilidade.ExecutionMetricsAccumulator",
+        "main": false,
+        "productionReferences": [],
+        "testReferences": [
+          "src/test/java/br/com/esl/etl/v2/plataforma/observabilidade/ExecutionMetricsAccumulatorTest.java"
+        ]
+      },
+      "testSupport": null,
+      "decision": "Preservado como biblioteca de telemetria e sanitização com testes existentes. Não conectado artificialmente à cadeia para justificar sua existência."
+    },
+    {
+      "name": "SafeThrowableSummary",
+      "priorPath": "src/main/java/br/com/esl/etl/v2/plataforma/observabilidade/SafeThrowableSummary.java",
+      "priorGroup": "UNWIRED_OBSERVABILITY_HELPERS",
+      "status": "PRESERVED_EXPLICIT_REVIEW",
+      "current": {
+        "path": "src/main/java/br/com/esl/etl/v2/plataforma/observabilidade/SafeThrowableSummary.java",
+        "sha256": "089ccc01a4df94cba52ac5ef708fd0b87b9f438aec19e98b1f0e04c33585532f",
+        "name": "SafeThrowableSummary",
+        "fqn": "br.com.esl.etl.v2.plataforma.observabilidade.SafeThrowableSummary",
+        "main": false,
+        "productionReferences": [],
+        "testReferences": [
+          "src/test/java/br/com/esl/etl/v2/plataforma/observabilidade/SafeThrowableSummaryTest.java"
+        ]
+      },
+      "testSupport": null,
+      "decision": "Preservado como biblioteca de telemetria e sanitização com testes existentes. Não conectado artificialmente à cadeia para justificar sua existência."
+    },
+    {
+      "name": "SensitiveValueRedactor",
+      "priorPath": "src/main/java/br/com/esl/etl/v2/plataforma/observabilidade/SensitiveValueRedactor.java",
+      "priorGroup": "UNWIRED_OBSERVABILITY_HELPERS",
+      "status": "PRESERVED_EXPLICIT_REVIEW",
+      "current": {
+        "path": "src/main/java/br/com/esl/etl/v2/plataforma/observabilidade/SensitiveValueRedactor.java",
+        "sha256": "8764b81828830ac8202f765842828b11860521f7e58ac49ebf47607c921b43b1",
+        "name": "SensitiveValueRedactor",
+        "fqn": "br.com.esl.etl.v2.plataforma.observabilidade.SensitiveValueRedactor",
+        "main": false,
+        "productionReferences": [],
+        "testReferences": [
+          "src/test/java/br/com/esl/etl/v2/plataforma/observabilidade/SensitiveValueRedactorTest.java"
+        ]
+      },
+      "testSupport": null,
+      "decision": "Preservado como biblioteca de telemetria e sanitização com testes existentes. Não conectado artificialmente à cadeia para justificar sua existência."
+    },
+    {
+      "name": "RuntimeExecutionControl",
+      "priorPath": "src/main/java/br/com/esl/etl/v2/plataforma/orquestracao/RuntimeExecutionControl.java",
+      "priorGroup": "UNWIRED_RUNTIME_WRAPPER",
+      "status": "PRESERVED_EXPLICIT_REVIEW",
+      "current": {
+        "path": "src/main/java/br/com/esl/etl/v2/plataforma/orquestracao/RuntimeExecutionControl.java",
+        "sha256": "d07f9f0478babf44cbdb0da646cbe51866ab21b0bbb645c5da82ef432ad25ddd",
+        "name": "RuntimeExecutionControl",
+        "fqn": "br.com.esl.etl.v2.plataforma.orquestracao.RuntimeExecutionControl",
+        "main": false,
+        "productionReferences": [],
+        "testReferences": [
+          "src/test/java/br/com/esl/etl/v2/plataforma/orquestracao/RuntimeWorkloadRegistryTest.java"
+        ]
+      },
+      "testSupport": null,
+      "decision": "Preservado como contrato de controle de execução testado isoladamente. Não criado wrapper equivalente no caminho novo."
+    },
+    {
+      "name": "JdbcColetaTemporalLaboratory",
+      "priorPath": "src/main/java/br/com/esl/etl/v2/plataforma/persistencia/coletas/JdbcColetaTemporalLaboratory.java",
+      "priorGroup": "TEMPORAL_COLETAS_TEST_ONLY",
+      "status": "PRESERVED_EXPLICIT_REVIEW",
+      "current": {
+        "path": "src/main/java/br/com/esl/etl/v2/plataforma/persistencia/coletas/JdbcColetaTemporalLaboratory.java",
+        "sha256": "f2564926e2ea22a73acb0c00ad9c7c7ad538eede77e0763c8392af408c2da2ae",
+        "name": "JdbcColetaTemporalLaboratory",
+        "fqn": "br.com.esl.etl.v2.plataforma.persistencia.coletas.JdbcColetaTemporalLaboratory",
+        "main": false,
+        "productionReferences": [
+          "src/main/java/br/com/esl/etl/v2/bootstrap/LocalColetasTemporalRuntime.java"
+        ],
+        "testReferences": [
+          "src/test/java/br/com/esl/etl/v2/plataforma/fonte/dataexport/ColetasTemporalPhysicalFixture.java",
+          "src/test/java/br/com/esl/etl/v2/plataforma/fonte/dataexport/ColetasTemporalLocalIntegrationIT.java"
+        ]
+      },
+      "testSupport": null,
+      "decision": "Preservado como biblioteca de integração temporal exercitada por ColetasTemporalLocalIntegrationIT e sua fixture física. Sem novo wiring no JAR integral; não substituir a prova temporal pela projeção analítica."
+    },
+    {
+      "name": "JdbcSqlServerColetaTemporalGateway",
+      "priorPath": "src/main/java/br/com/esl/etl/v2/plataforma/persistencia/coletas/JdbcSqlServerColetaTemporalGateway.java",
+      "priorGroup": "TEMPORAL_COLETAS_TEST_ONLY",
+      "status": "PRESERVED_EXPLICIT_REVIEW",
+      "current": {
+        "path": "src/main/java/br/com/esl/etl/v2/plataforma/persistencia/coletas/JdbcSqlServerColetaTemporalGateway.java",
+        "sha256": "13f42d5d9fb4f1950acd8fe812ab55d48c340e4db5cd6cd04d14408a94202a93",
+        "name": "JdbcSqlServerColetaTemporalGateway",
+        "fqn": "br.com.esl.etl.v2.plataforma.persistencia.coletas.JdbcSqlServerColetaTemporalGateway",
+        "main": false,
+        "productionReferences": [
+          "src/main/java/br/com/esl/etl/v2/bootstrap/LocalColetasTemporalRuntime.java"
+        ],
+        "testReferences": [
+          "src/test/java/br/com/esl/etl/v2/plataforma/persistencia/coletas/JdbcSqlServerColetaTemporalGatewayTest.java",
+          "src/test/java/br/com/esl/etl/v2/plataforma/fonte/dataexport/ColetasTemporalLocalIntegrationIT.java"
+        ]
+      },
+      "testSupport": null,
+      "decision": "Preservado como biblioteca de integração temporal exercitada por ColetasTemporalLocalIntegrationIT e sua fixture física. Sem novo wiring no JAR integral; não substituir a prova temporal pela projeção analítica."
+    },
+    {
+      "name": "ShadowAuditFactory",
+      "priorPath": "src/main/java/br/com/esl/etl/v2/plataforma/persistencia/sombra/ShadowAuditFactory.java",
+      "priorGroup": "UNWIRED_AUDIT_FACTORY",
+      "status": "PRESERVED_EXPLICIT_REVIEW",
+      "current": {
+        "path": "src/main/java/br/com/esl/etl/v2/plataforma/persistencia/sombra/ShadowAuditFactory.java",
+        "sha256": "51333eb233efc3b310f4d91a28bb40a6dd437ec448056d7a8bb6ac027c1ef415",
+        "name": "ShadowAuditFactory",
+        "fqn": "br.com.esl.etl.v2.plataforma.persistencia.sombra.ShadowAuditFactory",
+        "main": false,
+        "productionReferences": [],
+        "testReferences": [
+          "src/test/java/br/com/esl/etl/v2/plataforma/configuracao/ShadowStoragePropertiesTest.java"
+        ]
+      },
+      "testSupport": null,
+      "decision": "Preservado como factory de auditoria testada; o caminho integral usa os gateways JDBC existentes. Sem expansão de responsabilidades."
+    },
+    {
+      "name": "JdbcSqlServerStagingPromotionKernel",
+      "priorPath": "src/main/java/br/com/esl/etl/v2/plataforma/persistencia/staging/JdbcSqlServerStagingPromotionKernel.java",
+      "priorGroup": "GENERIC_JDBC_TEST_KERNEL",
+      "status": "PRESERVED_EXPLICIT_REVIEW",
+      "current": {
+        "path": "src/main/java/br/com/esl/etl/v2/plataforma/persistencia/staging/JdbcSqlServerStagingPromotionKernel.java",
+        "sha256": "5c75f5b93ba0116f093f955624065f01b87d82d88909f427abe9dff331faa4d0",
+        "name": "JdbcSqlServerStagingPromotionKernel",
+        "fqn": "br.com.esl.etl.v2.plataforma.persistencia.staging.JdbcSqlServerStagingPromotionKernel",
+        "main": false,
+        "productionReferences": [],
+        "testReferences": [
+          "src/test/java/br/com/esl/etl/v2/plataforma/persistencia/staging/JdbcSqlServerStagingPromotionKernelTest.java"
+        ]
+      },
+      "testSupport": null,
+      "decision": "Preservado como kernel de integração limitado e seus tipos, consumidor de prova física existente. A cadeia usa staging específico por entidade e TVPs/set-based; não migra massa para uma estrutura Java genérica."
+    },
+    {
+      "name": "StagingBatch",
+      "priorPath": "src/main/java/br/com/esl/etl/v2/plataforma/persistencia/staging/StagingBatch.java",
+      "priorGroup": "GENERIC_JDBC_TEST_KERNEL",
+      "status": "PRESERVED_EXPLICIT_REVIEW",
+      "current": {
+        "path": "src/main/java/br/com/esl/etl/v2/plataforma/persistencia/staging/StagingBatch.java",
+        "sha256": "ce443f7a60f078c92f304f9dfc14c02a8faadef57ef26d52f7a01aceb61df14b",
+        "name": "StagingBatch",
+        "fqn": "br.com.esl.etl.v2.plataforma.persistencia.staging.StagingBatch",
+        "main": false,
+        "productionReferences": [
+          "src/main/java/br/com/esl/etl/v2/plataforma/persistencia/staging/StagingPromotionKernel.java",
+          "src/main/java/br/com/esl/etl/v2/plataforma/persistencia/staging/JdbcSqlServerStagingPromotionKernel.java"
+        ],
+        "testReferences": [
+          "src/test/java/br/com/esl/etl/v2/plataforma/contrato/ContractRunGuardTest.java",
+          "src/test/java/br/com/esl/etl/v2/plataforma/persistencia/staging/StagingValueObjectsTest.java",
+          "src/test/java/br/com/esl/etl/v2/plataforma/persistencia/staging/JdbcSqlServerStagingPromotionKernelTest.java"
+        ]
+      },
+      "testSupport": null,
+      "decision": "Preservado como kernel de integração limitado e seus tipos, consumidor de prova física existente. A cadeia usa staging específico por entidade e TVPs/set-based; não migra massa para uma estrutura Java genérica."
+    },
+    {
+      "name": "StagingDisposition",
+      "priorPath": "src/main/java/br/com/esl/etl/v2/plataforma/persistencia/staging/StagingDisposition.java",
+      "priorGroup": "GENERIC_JDBC_TEST_KERNEL",
+      "status": "PRESERVED_EXPLICIT_REVIEW",
+      "current": {
+        "path": "src/main/java/br/com/esl/etl/v2/plataforma/persistencia/staging/StagingDisposition.java",
+        "sha256": "85b3ad254e54ef065e2f7819ae2e3c2cc54f51abd74e1dc794f3853e9aff5f04",
+        "name": "StagingDisposition",
+        "fqn": "br.com.esl.etl.v2.plataforma.persistencia.staging.StagingDisposition",
+        "main": false,
+        "productionReferences": [
+          "src/main/java/br/com/esl/etl/v2/plataforma/persistencia/staging/StagingRecord.java"
+        ],
+        "testReferences": [
+          "src/test/java/br/com/esl/etl/v2/plataforma/persistencia/staging/StagingValueObjectsTest.java",
+          "src/test/java/br/com/esl/etl/v2/plataforma/persistencia/staging/JdbcSqlServerStagingPromotionKernelTest.java"
+        ]
+      },
+      "testSupport": null,
+      "decision": "Preservado como kernel de integração limitado e seus tipos, consumidor de prova física existente. A cadeia usa staging específico por entidade e TVPs/set-based; não migra massa para uma estrutura Java genérica."
+    },
+    {
+      "name": "StagingPromotionKernel",
+      "priorPath": "src/main/java/br/com/esl/etl/v2/plataforma/persistencia/staging/StagingPromotionKernel.java",
+      "priorGroup": "GENERIC_JDBC_TEST_KERNEL",
+      "status": "PRESERVED_EXPLICIT_REVIEW",
+      "current": {
+        "path": "src/main/java/br/com/esl/etl/v2/plataforma/persistencia/staging/StagingPromotionKernel.java",
+        "sha256": "1f0c4d2b79bc75caa5e2aa28385d51b497fda1d94e396644b98e767a7e59ac04",
+        "name": "StagingPromotionKernel",
+        "fqn": "br.com.esl.etl.v2.plataforma.persistencia.staging.StagingPromotionKernel",
+        "main": false,
+        "productionReferences": [
+          "src/main/java/br/com/esl/etl/v2/plataforma/persistencia/staging/JdbcSqlServerStagingPromotionKernel.java"
+        ],
+        "testReferences": [
+          "src/test/java/br/com/esl/etl/v2/plataforma/contrato/ContractRunGuardTest.java"
+        ]
+      },
+      "testSupport": null,
+      "decision": "Preservado como kernel de integração limitado e seus tipos, consumidor de prova física existente. A cadeia usa staging específico por entidade e TVPs/set-based; não migra massa para uma estrutura Java genérica."
+    },
+    {
+      "name": "StagingRecord",
+      "priorPath": "src/main/java/br/com/esl/etl/v2/plataforma/persistencia/staging/StagingRecord.java",
+      "priorGroup": "GENERIC_JDBC_TEST_KERNEL",
+      "status": "PRESERVED_EXPLICIT_REVIEW",
+      "current": {
+        "path": "src/main/java/br/com/esl/etl/v2/plataforma/persistencia/staging/StagingRecord.java",
+        "sha256": "39f7c95981065ff919547acab2676a82f3b910cf477af50430c6208519bc524b",
+        "name": "StagingRecord",
+        "fqn": "br.com.esl.etl.v2.plataforma.persistencia.staging.StagingRecord",
+        "main": false,
+        "productionReferences": [
+          "src/main/java/br/com/esl/etl/v2/plataforma/persistencia/staging/StagingBatch.java",
+          "src/main/java/br/com/esl/etl/v2/plataforma/persistencia/staging/JdbcSqlServerStagingPromotionKernel.java"
+        ],
+        "testReferences": [
+          "src/test/java/br/com/esl/etl/v2/plataforma/persistencia/staging/StagingValueObjectsTest.java",
+          "src/test/java/br/com/esl/etl/v2/plataforma/persistencia/staging/JdbcSqlServerStagingPromotionKernelTest.java"
+        ]
+      },
+      "testSupport": null,
+      "decision": "Preservado como kernel de integração limitado e seus tipos, consumidor de prova física existente. A cadeia usa staging específico por entidade e TVPs/set-based; não migra massa para uma estrutura Java genérica."
+    },
+    {
+      "name": "CheckpointDecisionPolicy",
+      "priorPath": "src/main/java/br/com/esl/etl/v2/plataforma/resiliencia/CheckpointDecisionPolicy.java",
+      "priorGroup": "UNWIRED_CHECKPOINT_POLICY",
+      "status": "PRESERVED_EXPLICIT_REVIEW",
+      "current": {
+        "path": "src/main/java/br/com/esl/etl/v2/plataforma/resiliencia/CheckpointDecisionPolicy.java",
+        "sha256": "1b23d100c06d786b7bec7863c3f5f1e11689328c71671167e2d7bcc0c5ac3df4",
+        "name": "CheckpointDecisionPolicy",
+        "fqn": "br.com.esl.etl.v2.plataforma.resiliencia.CheckpointDecisionPolicy",
+        "main": false,
+        "productionReferences": [],
+        "testReferences": [
+          "src/test/java/br/com/esl/etl/v2/plataforma/resiliencia/CycleOutcomeAndCheckpointTest.java"
+        ]
+      },
+      "testSupport": null,
+      "decision": "Preservado como regra pura de avanço de checkpoint, testada isoladamente; leases e publicação integrais passam pelo control plane SQL existente."
+    }
+  ],
+  "added": [
+    {
+      "path": "src/main/java/br/com/esl/etl/v2/bootstrap/DeclaredSqlOracles.java",
+      "sha256": "79c7eca7b3b11c7823612c7db9562ef4f4bec8210bea8077fefb57b37ef5d9ea",
+      "name": "DeclaredSqlOracles",
+      "fqn": "br.com.esl.etl.v2.bootstrap.DeclaredSqlOracles",
+      "main": false,
+      "productionReferences": [
+        "src/main/java/br/com/esl/etl/v2/bootstrap/LocalArtifactScenario.java",
+        "src/main/java/br/com/esl/etl/v2/bootstrap/QualificationScenarioVerifier.java"
+      ],
+      "testReferences": [
+        "src/test/java/br/com/esl/etl/v2/bootstrap/IntegralArtifactReplayIT.java"
+      ],
+      "decision": "Tipo novo com consumidor de produção concreto listado; admissão/adaptação/composição integral exercitada e presença no JAR final conferida."
+    },
+    {
+      "path": "src/main/java/br/com/esl/etl/v2/bootstrap/DeclaredIntegralInputs.java",
+      "sha256": "5e5fc16f4fd15736f2eac40e2bd041907e6ff53d00c2d651d160485066f35e2e",
+      "name": "DeclaredIntegralInputs",
+      "fqn": "br.com.esl.etl.v2.bootstrap.DeclaredIntegralInputs",
+      "main": false,
+      "productionReferences": [
+        "src/main/java/br/com/esl/etl/v2/bootstrap/AnalyticScenarioRuntime.java",
+        "src/main/java/br/com/esl/etl/v2/bootstrap/AnalyticExpansionCapture.java",
+        "src/main/java/br/com/esl/etl/v2/bootstrap/LocalArtifactScenario.java",
+        "src/main/java/br/com/esl/etl/v2/bootstrap/QualificationScenarioVerifier.java"
+      ],
+      "testReferences": [
+        "src/test/java/br/com/esl/etl/v2/bootstrap/IntegralArtifactBoundaryTest.java",
+        "src/test/java/br/com/esl/etl/v2/bootstrap/IntegralArtifactAdmissionTest.java",
+        "src/test/java/br/com/esl/etl/v2/bootstrap/IntegralSweepEdgesIT.java",
+        "src/test/java/br/com/esl/etl/v2/bootstrap/IntegralSupportFailureIT.java",
+        "src/test/java/br/com/esl/etl/v2/bootstrap/IntegralReferencesIT.java",
+        "src/test/java/br/com/esl/etl/v2/bootstrap/IntegralOracleRejectionIT.java",
+        "src/test/java/br/com/esl/etl/v2/bootstrap/IntegralDependencyFailureIT.java",
+        "src/test/java/br/com/esl/etl/v2/bootstrap/IntegralContextIsolationIT.java",
+        "src/test/java/br/com/esl/etl/v2/bootstrap/IntegralArtifactReplayIT.java"
+      ],
+      "decision": "Tipo novo com consumidor de produção concreto listado; admissão/adaptação/composição integral exercitada e presença no JAR final conferida."
+    },
+    {
+      "path": "src/main/java/br/com/esl/etl/v2/bootstrap/DeclaredCapturePages.java",
+      "sha256": "8c1a21a68ee2f3e5c1a393b6335c37aa2aaca0076f3c5250e9b3d36d8557becf",
+      "name": "DeclaredCapturePages",
+      "fqn": "br.com.esl.etl.v2.bootstrap.DeclaredCapturePages",
+      "main": false,
+      "productionReferences": [
+        "src/main/java/br/com/esl/etl/v2/bootstrap/DeclaredIntegralInputs.java",
+        "src/main/java/br/com/esl/etl/v2/bootstrap/CollectionSweepArtifact.java",
+        "src/main/java/br/com/esl/etl/v2/bootstrap/AnalyticScenarioRuntime.java"
+      ],
+      "testReferences": [
+        "src/test/java/br/com/esl/etl/v2/bootstrap/IntegralArtifactFixtures.java",
+        "src/test/java/br/com/esl/etl/v2/bootstrap/DeclaredCapturePagesTest.java"
+      ],
+      "decision": "Tipo novo com consumidor de produção concreto listado; admissão/adaptação/composição integral exercitada e presença no JAR final conferida."
+    },
+    {
+      "path": "src/main/java/br/com/esl/etl/v2/bootstrap/DeclaredAnalyticSupport.java",
+      "sha256": "f9e2d1079d0aacba8c1bdc39d1b61bf9e3339975f78ca69349565583013478b1",
+      "name": "DeclaredAnalyticSupport",
+      "fqn": "br.com.esl.etl.v2.bootstrap.DeclaredAnalyticSupport",
+      "main": false,
+      "productionReferences": [
+        "src/main/java/br/com/esl/etl/v2/bootstrap/DeclaredIntegralInputs.java"
+      ],
+      "testReferences": [],
+      "decision": "Tipo novo com consumidor de produção concreto listado; admissão/adaptação/composição integral exercitada e presença no JAR final conferida."
+    },
+    {
+      "path": "src/main/java/br/com/esl/etl/v2/bootstrap/DeclaredAnalyticReferences.java",
+      "sha256": "2670e69e213893124df3cc13f3955837eea84f13ac53f829a8e18a24a21ececa",
+      "name": "DeclaredAnalyticReferences",
+      "fqn": "br.com.esl.etl.v2.bootstrap.DeclaredAnalyticReferences",
+      "main": false,
+      "productionReferences": [
+        "src/main/java/br/com/esl/etl/v2/bootstrap/DeclaredIntegralInputs.java"
+      ],
+      "testReferences": [
+        "src/test/java/br/com/esl/etl/v2/bootstrap/IntegralArtifactBoundaryTest.java"
+      ],
+      "decision": "Tipo novo com consumidor de produção concreto listado; admissão/adaptação/composição integral exercitada e presença no JAR final conferida."
+    },
+    {
+      "path": "src/main/java/br/com/esl/etl/v2/plataforma/fonte/SyntheticSourceScope.java",
+      "sha256": "af34ff38fc29c1b33645e732f7d52951c189507990d4d9859d6795377b5ab201",
+      "name": "SyntheticSourceScope",
+      "fqn": "br.com.esl.etl.v2.plataforma.fonte.SyntheticSourceScope",
+      "main": false,
+      "productionReferences": [
+        "src/main/java/br/com/esl/etl/v2/bootstrap/DeclaredIntegralInputs.java",
+        "src/main/java/br/com/esl/etl/v2/bootstrap/CollectionSweepArtifact.java",
+        "src/main/java/br/com/esl/etl/v2/bootstrap/AnalyticScenarioRuntime.java",
+        "src/main/java/br/com/esl/etl/v2/bootstrap/LocalAnalyticUsersRuntime.java",
+        "src/main/java/br/com/esl/etl/v2/bootstrap/LocalAnalyticQuotesRuntime.java",
+        "src/main/java/br/com/esl/etl/v2/plataforma/persistencia/expansao/JdbcExpansionLaboratory.java",
+        "src/main/java/br/com/esl/etl/v2/plataforma/persistencia/analitico/JdbcRasterLaboratory.java",
+        "src/main/java/br/com/esl/etl/v2/plataforma/persistencia/analitico/JdbcAnalyticSourceContracts.java",
+        "src/main/java/br/com/esl/etl/v2/plataforma/persistencia/analitico/JdbcAnalyticQuality.java",
+        "src/main/java/br/com/esl/etl/v2/plataforma/persistencia/relacional/JdbcRelationalLaboratory.java",
+        "src/main/java/br/com/esl/etl/v2/plataforma/fonte/dataexport/ExpansionArtifact.java"
+      ],
+      "testReferences": [
+        "src/test/java/br/com/esl/etl/v2/plataforma/fonte/SyntheticSourceScopeTest.java"
+      ],
+      "decision": "Tipo novo com consumidor de produção concreto listado; admissão/adaptação/composição integral exercitada e presença no JAR final conferida."
+    },
+    {
+      "path": "src/main/java/br/com/esl/etl/v2/plataforma/fonte/graphql/AnalyticUsersCaptureSource.java",
+      "sha256": "368b25a9ea583de8501bbecbb218d0284c3d52fac7d25fbdd25688ddd4926c5b",
+      "name": "AnalyticUsersCaptureSource",
+      "fqn": "br.com.esl.etl.v2.plataforma.fonte.graphql.AnalyticUsersCaptureSource",
+      "main": false,
+      "productionReferences": [
+        "src/main/java/br/com/esl/etl/v2/bootstrap/DeclaredCapturePages.java",
+        "src/main/java/br/com/esl/etl/v2/bootstrap/LocalAnalyticUsersRuntime.java",
+        "src/main/java/br/com/esl/etl/v2/plataforma/fonte/graphql/AnalyticUsersSyntheticSource.java"
+      ],
+      "testReferences": [],
+      "decision": "Tipo novo com consumidor de produção concreto listado; admissão/adaptação/composição integral exercitada e presença no JAR final conferida."
+    },
+    {
+      "path": "src/main/java/br/com/esl/etl/v2/plataforma/fonte/dataexport/AnalyticQuotesCaptureSource.java",
+      "sha256": "a91d56d7bb2f4e4770c71fa6cbf8a99167498db41afafc84fd47e918a598b8ea",
+      "name": "AnalyticQuotesCaptureSource",
+      "fqn": "br.com.esl.etl.v2.plataforma.fonte.dataexport.AnalyticQuotesCaptureSource",
+      "main": false,
+      "productionReferences": [
+        "src/main/java/br/com/esl/etl/v2/bootstrap/DeclaredCapturePages.java",
+        "src/main/java/br/com/esl/etl/v2/bootstrap/LocalAnalyticQuotesRuntime.java",
+        "src/main/java/br/com/esl/etl/v2/plataforma/fonte/dataexport/AnalyticQuotesSyntheticSource.java"
+      ],
+      "testReferences": [],
+      "decision": "Tipo novo com consumidor de produção concreto listado; admissão/adaptação/composição integral exercitada e presença no JAR final conferida."
+    },
+    {
+      "path": "src/main/java/br/com/esl/etl/v2/plataforma/fonte/dataexport/RelationalCaptureSource.java",
+      "sha256": "cc2452f51d0a3099b255bbfb6fb2d7d5d9074c93b374b9674b6d5a3bdc1ae7aa",
+      "name": "RelationalCaptureSource",
+      "fqn": "br.com.esl.etl.v2.plataforma.fonte.dataexport.RelationalCaptureSource",
+      "main": false,
+      "productionReferences": [
+        "src/main/java/br/com/esl/etl/v2/bootstrap/DeclaredCapturePages.java",
+        "src/main/java/br/com/esl/etl/v2/bootstrap/CollectionSweepInput.java",
+        "src/main/java/br/com/esl/etl/v2/bootstrap/LocalAnalyticManifestRuntime.java",
+        "src/main/java/br/com/esl/etl/v2/bootstrap/LocalAnalyticCollectionRuntime.java",
+        "src/main/java/br/com/esl/etl/v2/bootstrap/LocalRelationalRuntime.java",
+        "src/main/java/br/com/esl/etl/v2/plataforma/fonte/dataexport/RelationalSyntheticSource.java"
+      ],
+      "testReferences": [],
+      "decision": "Tipo novo com consumidor de produção concreto listado; admissão/adaptação/composição integral exercitada e presença no JAR final conferida."
+    }
+  ],
+  "otherNewModule": {
+    "path": "scripts/validation/IntegralChainSuccession.psm1",
+    "consumer": "scripts/validation/EntityAlignmentSuccession.psm1",
+    "purpose": "Valida explicitamente o sucessor e compõe snapshots para consumidores históricos; provas do fechamento vinculadas pelo selo externo."
+  },
+  "bytecodeProof": {
+    "path": "target/macrobloco-cadeia-integral-20260914-01/bytecode-review-02/result.json",
+    "sha256": "76e211b6d1cf1d8a67624231005bba1feaa369ac1947ebae1e26e5020fbb23b8",
+    "jarSha256": "cf9f8be56bb8a60f82f6443cb0c807a3114bf03b0169029c9c3fe199923a9489"
+  }
+}

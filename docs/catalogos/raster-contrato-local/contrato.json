@@ -1,0 +1,155 @@
+{
+  "version": 1,
+  "task": "V2-025c",
+  "contractId": "raster-get-evento-fim-viagem",
+  "catalogVersion": "2026-09-08.v2-025c.1",
+  "sourceKind": "RASTER_DATASNAP",
+  "overallClassification": "TRANSITIONAL",
+  "classificationVocabulary": [
+    "PROVEN",
+    "TRANSITIONAL",
+    "ABSENT",
+    "BUSINESS_DECISION_PENDING"
+  ],
+  "aspects": {
+    "endpoint": {
+      "classification": "TRANSITIONAL",
+      "contract": "Base explicita allowlisted; caminho legado /datasnap/rest/TWebService/%22getEventoFimViagem%22. Sem host ou ambiente produtivo default no V2.",
+      "evidence": "LEGACY_STATIC_EVIDENCE_AND_LOCAL_POLICY"
+    },
+    "transport": {
+      "classification": "TRANSITIONAL",
+      "contract": "POST com JSON UTF-8 e Content-Type application/json; nao confundir POST de consulta legado com autorizacao de execucao remota.",
+      "evidence": "LEGACY_STATIC_EVIDENCE"
+    },
+    "authentication": {
+      "classification": "TRANSITIONAL",
+      "contract": "Login e Senha no body legado, resolvidos por secret provider apenas em operacao adotada; ausente com modulo habilitado recusa startup. Nunca logar body, URL de conta, resposta ou credencial.",
+      "evidence": "LEGACY_STATIC_EVIDENCE_AND_RAS_04"
+    },
+    "metadata": {
+      "classification": "ABSENT",
+      "contract": "Nao foi fornecido schema versionado do fornecedor nem endpoint de metadata. Nao inventar /info, template ESL ou wire types a partir de Long/Integer Java.",
+      "evidence": "NO_PROVIDER_SCHEMA"
+    },
+    "responseRoot": {
+      "classification": "TRANSITIONAL",
+      "contract": "Legado aceita result objeto/array, wrapper Viagens objeto/array e objeto direto com CodSolicitacao. Catalogo local testa result.Viagens e result[].Viagens; raiz ausente/nula/ambigua ou erro explicito nunca significa vazio bem-sucedido.",
+      "evidence": "LEGACY_STATIC_EVIDENCE_AND_LOCAL_FAIL_CLOSED_POLICY"
+    },
+    "filters": {
+      "classification": "TRANSITIONAL",
+      "contract": "Body legado: Ambiente, Login, Senha, TipoRetorno=JSON, DataInicial, DataFinal, StatusViagem. Datas ISO yyyy-MM-dd. Valores de Ambiente/StatusViagem exigem configuracao explicita; sem default Producao ou T no V2.",
+      "evidence": "LEGACY_STATIC_EVIDENCE"
+    },
+    "temporalTranslation": {
+      "classification": "BUSINESS_DECISION_PENDING",
+      "contract": "Janelas internas [inicio,fimExclusivo); legado envia bordas civis DataInicial/DataFinal e divide por dias inclusivos. Inclusao, precisao, campo filtrado e menor janela do fornecedor nao foram provados.",
+      "evidence": "NO_PROVIDER_TEMPORAL_GUARANTEE"
+    },
+    "ordering": {
+      "classification": "ABSENT",
+      "contract": "Nenhuma ordenacao total ou cursor estavel documentado; ordem do array nao e identidade nem prova de snapshot.",
+      "evidence": "LEGACY_STATIC_EVIDENCE_WITHOUT_GUARANTEE"
+    },
+    "per": {
+      "classification": "ABSENT",
+      "contract": "Nenhum per/page/cursor enviado pelo cliente legado; 500 e limite de alerta local, nao semantica de paginacao garantida.",
+      "evidence": "LEGACY_STATIC_EVIDENCE"
+    },
+    "rootIdentity": {
+      "classification": "TRANSITIONAL",
+      "contract": "CodSolicitacao/codSolicitacao candidato de raiz; Sequencial e CodFilial distintos. Long legado nao prova wire type, estabilidade, escopo global/tenant ou identidade canonica.",
+      "evidence": "V2_009C_REQUIRED"
+    },
+    "childIdentity": {
+      "classification": "TRANSITIONAL",
+      "contract": "ColetasEntregas[].Ordem/ordem candidata sob a raiz; PK legada composta nao prova estabilidade apos reordenacao. Fallback posicional do mapper nao e aceito como identidade V2.",
+      "evidence": "V2_009C_REQUIRED"
+    },
+    "pagination": {
+      "classification": "TRANSITIONAL",
+      "contract": "Nao ha cursor documentado. Cap >=500 exige reparticionamento somente dentro da granularidade contratada; persistencia do cap na menor janela bloqueia. Abaixo do cap, inclusive zero, terminalidade continua nao verificada.",
+      "evidence": "RAS_03_AND_NO_COMPLETENESS_PROOF"
+    },
+    "timezone": {
+      "classification": "BUSINESS_DECISION_PENDING",
+      "contract": "America/Sao_Paulo explicita para politica civil local; timestamps com offset preservam offset/origem. Sem offset exige semantica contratada; proibido timezone ou data atual do host.",
+      "evidence": "RAS_02_RAS_05_AND_NO_PROVIDER_TIMEZONE_GUARANTEE"
+    },
+    "limitsErrors": {
+      "classification": "TRANSITIONAL",
+      "contract": "Modulo disabled por padrao. Futuro request bounded: HTTPS, timeout <=30s, conexao <=10s, corpo <=10MiB, sem redirect/retry automatico nesta preparacao. Nao-2xx/429, error/Erro, parsing, shape ambiguo ou cap minimo bloqueiam. Politica do fornecedor desconhecida.",
+      "evidence": "LOCAL_PREPARATION_POLICY_NOT_SOURCE_EXECUTION"
+    },
+    "freshnessSnapshot": {
+      "classification": "BUSINESS_DECISION_PENDING",
+      "contract": "Definir watermark de origem separado do de execucao e precedencia antes de promover. data_extracao legado e relogio de ingestao; nao prova frescor remoto. Sem snapshot aprovado, ausencia nao desativa.",
+      "evidence": "RAS_02_AND_NO_PROVIDER_SNAPSHOT"
+    },
+    "sentinelDuration": {
+      "classification": "PROVEN",
+      "contract": "Politica legada: prefixo 1900-01-01 representa sentinela; V2 deve preservar bruto/proveniencia e exigir contrato temporal. PUB-08 aceita duracao 0..43200 min, depois fallback previsto valido; invalida exige metrica/fixture, nao silencio.",
+      "evidence": "LOCAL_ROADMAP_RAS_05_PUB_08_NOT_PROVIDER_GUARANTEE"
+    },
+    "atomicity": {
+      "classification": "PROVEN",
+      "contract": "Requisito V2: pai antes dos filhos, FK e transacao; replay, zero orfao, nulo/colisao e reativacao a provar com a vertical. Nao afirma implementacao presente.",
+      "evidence": "LOCAL_REQUIREMENT_RAS_01_RAS_04"
+    },
+    "completeness": {
+      "classification": "ABSENT",
+      "contract": "Nenhuma garantia versionada de conjunto completo ou oraculo independente aprovado. Sweep, desativacao por ausencia e cutover bloqueados.",
+      "evidence": "NO_INDEPENDENT_COMPLETENESS_EVIDENCE"
+    }
+  },
+  "request": {
+    "method": "POST",
+    "relativePath": "/datasnap/rest/TWebService/%22getEventoFimViagem%22",
+    "contentType": "application/json",
+    "bodyKeys": [
+      "Ambiente",
+      "Login",
+      "Senha",
+      "TipoRetorno",
+      "DataInicial",
+      "DataFinal",
+      "StatusViagem"
+    ],
+    "fixedNonSecretValues": {
+      "TipoRetorno": "JSON"
+    },
+    "dateFormat": "yyyy-MM-dd",
+    "orderingParameter": null,
+    "pageParameter": null,
+    "perParameter": null,
+    "cursorParameter": null
+  },
+  "policy": {
+    "enabledByDefault": false,
+    "automaticEnableFromCredentialPresence": false,
+    "productionDefault": false,
+    "hostTimezoneAllowed": false,
+    "implicitCurrentDateAllowed": false,
+    "positionalChildIdentityAllowed": false,
+    "shortBatchProvesCompleteness": false,
+    "emptyBatchProvesCompleteness": false,
+    "legacyAlertCap": 500,
+    "maximumDurationMinutes": 43200,
+    "remoteCalls": 0,
+    "sqlOperations": 0
+  },
+  "capabilities": {
+    "identityAccepted": false,
+    "shadowUpsert": "BLOCKED_V2_009C_AND_V2_034B",
+    "sweep": "BLOCKED_NO_COMPLETENESS_PROOF",
+    "deactivation": "BLOCKED_NO_COMPLETENESS_PROOF",
+    "cutover": "BLOCKED_NO_COMPLETENESS_PROOF",
+    "runtimeEnabled": false
+  },
+  "provenanceFiles": [
+    "docs/catalogos/raster-contrato-local/evidencias/legado.json docs/catalogos/raster-contrato-local/campos.json docs/catalogos/raster-contrato-local/decisao.json"
+  ],
+  "nextGate": "V2-009c",
+  "identityEvidence": "identidade-pendente.json"
+}

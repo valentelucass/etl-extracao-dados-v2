@@ -1,0 +1,15 @@
+{
+  "phase": "B56_SCHEMA_RELATIONS_01",
+  "authorization": "Same bounded documentation investigation; nine actual type names received in TYPE_01",
+  "document": "docs/catalogos/bloco56-continuacao/schema-relations.graphql",
+  "operation": "POST /graphql; static introspection only; no domain records",
+  "maximumCalls": 1,
+  "retry": 0,
+  "redirect": 0,
+  "timeoutSeconds": 30,
+  "maximumResponseBytes": 10485760,
+  "recovery": "Append-only ledger; no automatic repeat; no application write rollback",
+  "runtimeCampaigns": 0,
+  "sqlOperations": 0,
+  "budgetTransferred": false
+}

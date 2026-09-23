@@ -1,0 +1,164 @@
+{
+  "oracle": {
+    "owner": "Synthetic fixture author, not business acceptance",
+    "artifact": {
+      "sha256": "f14680243710eab99657d842a78d6dec2b58c0ae2568ef5d806b650fe1ce8215",
+      "path": "oracle.json"
+    },
+    "originKind": "SYNTHETIC_INDEPENDENT_EVENTS",
+    "originReference": "synthetic-independent-event-fixture-v1"
+  },
+  "version": 1,
+  "securityAttestationValidated": false,
+  "entity": "coletas",
+  "bindings": [
+    {
+      "referenceKey": "STRING:synthetic-17",
+      "dataCapture": "synthetic-data",
+      "dataKey": "INTEGER:17",
+      "caseId": "OPEN",
+      "referenceCapture": "synthetic-reference"
+    },
+    {
+      "referenceKey": "STRING:synthetic-18",
+      "dataCapture": "synthetic-data",
+      "dataKey": "INTEGER:18",
+      "caseId": "TO_DONE",
+      "referenceCapture": "synthetic-reference"
+    },
+    {
+      "referenceKey": "STRING:synthetic-19",
+      "dataCapture": "synthetic-data",
+      "dataKey": "INTEGER:19",
+      "caseId": "TO_FINISHED",
+      "referenceCapture": "synthetic-reference"
+    },
+    {
+      "referenceKey": "STRING:synthetic-20",
+      "dataCapture": "synthetic-data",
+      "dataKey": "INTEGER:20",
+      "caseId": "CANCELLATION",
+      "referenceCapture": "synthetic-reference"
+    },
+    {
+      "referenceKey": "STRING:synthetic-21",
+      "dataCapture": "synthetic-data",
+      "dataKey": "INTEGER:21",
+      "caseId": "NATIVE_ABSENT",
+      "referenceCapture": "synthetic-reference"
+    },
+    {
+      "referenceKey": "STRING:synthetic-22",
+      "dataCapture": "synthetic-data",
+      "dataKey": "INTEGER:22",
+      "caseId": "NATIVE_NULL",
+      "referenceCapture": "synthetic-reference"
+    },
+    {
+      "referenceKey": "STRING:synthetic-23",
+      "dataCapture": "synthetic-data",
+      "dataKey": "INTEGER:23",
+      "caseId": "NATIVE_INVALID",
+      "referenceCapture": "synthetic-reference"
+    },
+    {
+      "referenceKey": "STRING:synthetic-24",
+      "dataCapture": "synthetic-data",
+      "dataKey": "INTEGER:24",
+      "caseId": "OFFSET_EQUIVALENT",
+      "referenceCapture": "synthetic-reference"
+    },
+    {
+      "referenceKey": "STRING:synthetic-25",
+      "dataCapture": "synthetic-data",
+      "dataKey": "INTEGER:25",
+      "caseId": "SUBMILLISECOND",
+      "referenceCapture": "synthetic-reference"
+    },
+    {
+      "referenceKey": "STRING:synthetic-26",
+      "dataCapture": "synthetic-data",
+      "dataKey": "INTEGER:26",
+      "caseId": "TEMPORAL_TIE",
+      "referenceCapture": "synthetic-reference"
+    },
+    {
+      "referenceKey": "STRING:synthetic-27",
+      "dataCapture": "synthetic-data",
+      "dataKey": "INTEGER:27",
+      "caseId": "REVERSE_ORDER",
+      "referenceCapture": "synthetic-reference"
+    },
+    {
+      "referenceKey": "STRING:synthetic-28",
+      "dataCapture": "synthetic-data",
+      "dataKey": "INTEGER:28",
+      "caseId": "ROOT_EXPANSION",
+      "referenceCapture": "synthetic-reference"
+    },
+    {
+      "referenceKey": "STRING:synthetic-29",
+      "dataCapture": "synthetic-data",
+      "dataKey": "INTEGER:29",
+      "caseId": "DUPLICATE",
+      "referenceCapture": "synthetic-reference"
+    },
+    {
+      "referenceKey": "STRING:synthetic-30",
+      "referenceCapture": "synthetic-reference",
+      "caseId": "REFERENCE_ABSENT",
+      "dataCapture": "synthetic-data",
+      "dataKey": "INTEGER:30"
+    },
+    {
+      "referenceKey": "STRING:synthetic-31",
+      "referenceCapture": "synthetic-reference",
+      "caseId": "REFERENCE_NULL",
+      "dataCapture": "synthetic-data",
+      "dataKey": "INTEGER:31"
+    },
+    {
+      "referenceKey": "STRING:synthetic-32",
+      "referenceCapture": "synthetic-reference",
+      "caseId": "REFERENCE_INVALID",
+      "dataCapture": "synthetic-data",
+      "dataKey": "INTEGER:32"
+    }
+  ],
+  "captures": [
+    {
+      "captureId": "synthetic-data",
+      "tenant": "SYNTHETIC_COLETAS_TENANT",
+      "executionId": "10000000-0000-0000-0000-000000000001",
+      "contractVersion": "synthetic-coletas-temporal-v1",
+      "terminal": true,
+      "kind": "DATA_EXPORT_6908",
+      "contractFingerprint": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "queryDate": "2036-01-20",
+      "artifact": {
+        "sha256": "065d50ce2e5b43fe3f3104dfda2c326beb0a3d35e47ac474632c5a3fb547c012",
+        "path": "data.json"
+      },
+      "source": "SYNTHETIC_COLETAS_TEMPORAL_LAB"
+    },
+    {
+      "captureId": "synthetic-reference",
+      "tenant": "SYNTHETIC_COLETAS_TENANT",
+      "executionId": "10000000-0000-0000-0000-000000000002",
+      "contractVersion": "2026-09-10.coletas-temporal.1",
+      "terminal": true,
+      "kind": "GRAPHQL_TEMPORAL",
+      "contractFingerprint": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "queryDate": "2036-01-20",
+      "artifact": {
+        "sha256": "c868fc243ae29f76662d800aa6164e029063ff7fb5df744b40501057e51133b6",
+        "path": "reference.json"
+      },
+      "source": "SYNTHETIC_COLETAS_TEMPORAL_LAB"
+    }
+  ],
+  "tenant": "SYNTHETIC_COLETAS_TENANT",
+  "queryDate": "2036-01-20",
+  "source": "SYNTHETIC_COLETAS_TEMPORAL_LAB",
+  "mode": "SYNTHETIC"
+}

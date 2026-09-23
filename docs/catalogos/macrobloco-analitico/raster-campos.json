@@ -1,0 +1,933 @@
+[
+  {
+    "capability": "RASTER",
+    "rule": "RAS-01/02/05",
+    "entity": "TRIP",
+    "field": "codSolicitacao",
+    "aliases": [
+      "CodSolicitacao",
+      "codSolicitacao"
+    ],
+    "source": "src/main/java/br/com/extrator/dominio/raster/RasterViagemDTO.java",
+    "classification": "TYPED_ATTRIBUTE",
+    "type": "String",
+    "presence": "ABSENT_NULL_VALUE",
+    "identity": "EXPLICIT_SYNTHETIC_BINDING_ONLY",
+    "target": "stg/core.analytic_raster_trip",
+    "consumer": "RasterMapper/JdbcRasterLaboratory/SQL-13",
+    "test": "AnalyticLaboratoryRasterProofsIT: physical-raster-proofs-01 PASS; parser/transport and adversarial tests complementary"
+  },
+  {
+    "capability": "RASTER",
+    "rule": "RAS-01/02/05",
+    "entity": "TRIP",
+    "field": "sequencial",
+    "aliases": [
+      "Sequencial",
+      "sequencial"
+    ],
+    "source": "src/main/java/br/com/extrator/dominio/raster/RasterViagemDTO.java",
+    "classification": "TYPED_ATTRIBUTE",
+    "type": "String",
+    "presence": "ABSENT_NULL_VALUE",
+    "identity": "EXPLICIT_SYNTHETIC_BINDING_ONLY",
+    "target": "stg/core.analytic_raster_trip",
+    "consumer": "RasterMapper/JdbcRasterLaboratory/SQL-13",
+    "test": "AnalyticLaboratoryRasterProofsIT: physical-raster-proofs-01 PASS; parser/transport and adversarial tests complementary"
+  },
+  {
+    "capability": "RASTER",
+    "rule": "RAS-01/02/05",
+    "entity": "TRIP",
+    "field": "codFilial",
+    "aliases": [
+      "CodFilial",
+      "codFilial"
+    ],
+    "source": "src/main/java/br/com/extrator/dominio/raster/RasterViagemDTO.java",
+    "classification": "TYPED_ATTRIBUTE",
+    "type": "String",
+    "presence": "ABSENT_NULL_VALUE",
+    "identity": "EXPLICIT_SYNTHETIC_BINDING_ONLY",
+    "target": "stg/core.analytic_raster_trip",
+    "consumer": "RasterMapper/JdbcRasterLaboratory/SQL-13",
+    "test": "AnalyticLaboratoryRasterProofsIT: physical-raster-proofs-01 PASS; parser/transport and adversarial tests complementary"
+  },
+  {
+    "capability": "RASTER",
+    "rule": "RAS-01/02/05",
+    "entity": "TRIP",
+    "field": "statusViagem",
+    "aliases": [
+      "StatusViagem",
+      "statusViagem"
+    ],
+    "source": "src/main/java/br/com/extrator/dominio/raster/RasterViagemDTO.java",
+    "classification": "TYPED_ATTRIBUTE",
+    "type": "String",
+    "presence": "ABSENT_NULL_VALUE",
+    "identity": "EXPLICIT_SYNTHETIC_BINDING_ONLY",
+    "target": "stg/core.analytic_raster_trip",
+    "consumer": "RasterMapper/JdbcRasterLaboratory/SQL-13",
+    "test": "AnalyticLaboratoryRasterProofsIT: physical-raster-proofs-01 PASS; parser/transport and adversarial tests complementary"
+  },
+  {
+    "capability": "RASTER",
+    "rule": "RAS-01/02/05",
+    "entity": "TRIP",
+    "field": "placaVeiculo",
+    "aliases": [
+      "PlacaVeiculo",
+      "placaVeiculo"
+    ],
+    "source": "src/main/java/br/com/extrator/dominio/raster/RasterViagemDTO.java",
+    "classification": "TYPED_ATTRIBUTE",
+    "type": "String",
+    "presence": "ABSENT_NULL_VALUE",
+    "identity": "EXPLICIT_SYNTHETIC_BINDING_ONLY",
+    "target": "stg/core.analytic_raster_trip",
+    "consumer": "RasterMapper/JdbcRasterLaboratory/SQL-13",
+    "test": "AnalyticLaboratoryRasterProofsIT: physical-raster-proofs-01 PASS; parser/transport and adversarial tests complementary"
+  },
+  {
+    "capability": "RASTER",
+    "rule": "RAS-01/02/05",
+    "entity": "TRIP",
+    "field": "placaCarreta1",
+    "aliases": [
+      "PlacaCarreta1",
+      "placaCarreta1"
+    ],
+    "source": "src/main/java/br/com/extrator/dominio/raster/RasterViagemDTO.java",
+    "classification": "TYPED_ATTRIBUTE",
+    "type": "String",
+    "presence": "ABSENT_NULL_VALUE",
+    "identity": "EXPLICIT_SYNTHETIC_BINDING_ONLY",
+    "target": "stg/core.analytic_raster_trip",
+    "consumer": "RasterMapper/JdbcRasterLaboratory/SQL-13",
+    "test": "AnalyticLaboratoryRasterProofsIT: physical-raster-proofs-01 PASS; parser/transport and adversarial tests complementary"
+  },
+  {
+    "capability": "RASTER",
+    "rule": "RAS-01/02/05",
+    "entity": "TRIP",
+    "field": "placaCarreta2",
+    "aliases": [
+      "PlacaCarreta02",
+      "PlacaCarreta2",
+      "placaCarreta2"
+    ],
+    "source": "src/main/java/br/com/extrator/dominio/raster/RasterViagemDTO.java",
+    "classification": "TYPED_ATTRIBUTE",
+    "type": "String",
+    "presence": "ABSENT_NULL_VALUE",
+    "identity": "EXPLICIT_SYNTHETIC_BINDING_ONLY",
+    "target": "stg/core.analytic_raster_trip",
+    "consumer": "RasterMapper/JdbcRasterLaboratory/SQL-13",
+    "test": "AnalyticLaboratoryRasterProofsIT: physical-raster-proofs-01 PASS; parser/transport and adversarial tests complementary"
+  },
+  {
+    "capability": "RASTER",
+    "rule": "RAS-01/02/05",
+    "entity": "TRIP",
+    "field": "placaCarreta3",
+    "aliases": [
+      "PlacaCarreta3",
+      "placaCarreta3"
+    ],
+    "source": "src/main/java/br/com/extrator/dominio/raster/RasterViagemDTO.java",
+    "classification": "TYPED_ATTRIBUTE",
+    "type": "String",
+    "presence": "ABSENT_NULL_VALUE",
+    "identity": "EXPLICIT_SYNTHETIC_BINDING_ONLY",
+    "target": "stg/core.analytic_raster_trip",
+    "consumer": "RasterMapper/JdbcRasterLaboratory/SQL-13",
+    "test": "AnalyticLaboratoryRasterProofsIT: physical-raster-proofs-01 PASS; parser/transport and adversarial tests complementary"
+  },
+  {
+    "capability": "RASTER",
+    "rule": "RAS-01/02/05",
+    "entity": "TRIP",
+    "field": "cpfMotorista1",
+    "aliases": [
+      "CPFMotorista1",
+      "CpfMotorista1",
+      "cpfMotorista1"
+    ],
+    "source": "src/main/java/br/com/extrator/dominio/raster/RasterViagemDTO.java",
+    "classification": "TYPED_ATTRIBUTE",
+    "type": "String",
+    "presence": "ABSENT_NULL_VALUE",
+    "identity": "EXPLICIT_SYNTHETIC_BINDING_ONLY",
+    "target": "stg/core.analytic_raster_trip",
+    "consumer": "RasterMapper/JdbcRasterLaboratory/SQL-13",
+    "test": "AnalyticLaboratoryRasterProofsIT: physical-raster-proofs-01 PASS; parser/transport and adversarial tests complementary"
+  },
+  {
+    "capability": "RASTER",
+    "rule": "RAS-01/02/05",
+    "entity": "TRIP",
+    "field": "cpfMotorista2",
+    "aliases": [
+      "CPFMotorista2",
+      "CpfMotorista2",
+      "cpfMotorista2"
+    ],
+    "source": "src/main/java/br/com/extrator/dominio/raster/RasterViagemDTO.java",
+    "classification": "TYPED_ATTRIBUTE",
+    "type": "String",
+    "presence": "ABSENT_NULL_VALUE",
+    "identity": "EXPLICIT_SYNTHETIC_BINDING_ONLY",
+    "target": "stg/core.analytic_raster_trip",
+    "consumer": "RasterMapper/JdbcRasterLaboratory/SQL-13",
+    "test": "AnalyticLaboratoryRasterProofsIT: physical-raster-proofs-01 PASS; parser/transport and adversarial tests complementary"
+  },
+  {
+    "capability": "RASTER",
+    "rule": "RAS-01/02/05",
+    "entity": "TRIP",
+    "field": "cnpjClienteOrig",
+    "aliases": [
+      "CNPJClienteOrig",
+      "CnpjClienteOrig",
+      "cnpjClienteOrig"
+    ],
+    "source": "src/main/java/br/com/extrator/dominio/raster/RasterViagemDTO.java",
+    "classification": "TYPED_ATTRIBUTE",
+    "type": "String",
+    "presence": "ABSENT_NULL_VALUE",
+    "identity": "EXPLICIT_SYNTHETIC_BINDING_ONLY",
+    "target": "stg/core.analytic_raster_trip",
+    "consumer": "RasterMapper/JdbcRasterLaboratory/SQL-13",
+    "test": "AnalyticLaboratoryRasterProofsIT: physical-raster-proofs-01 PASS; parser/transport and adversarial tests complementary"
+  },
+  {
+    "capability": "RASTER",
+    "rule": "RAS-01/02/05",
+    "entity": "TRIP",
+    "field": "cnpjClienteDest",
+    "aliases": [
+      "CNPJClienteDest",
+      "CnpjClienteDest",
+      "cnpjClienteDest"
+    ],
+    "source": "src/main/java/br/com/extrator/dominio/raster/RasterViagemDTO.java",
+    "classification": "TYPED_ATTRIBUTE",
+    "type": "String",
+    "presence": "ABSENT_NULL_VALUE",
+    "identity": "EXPLICIT_SYNTHETIC_BINDING_ONLY",
+    "target": "stg/core.analytic_raster_trip",
+    "consumer": "RasterMapper/JdbcRasterLaboratory/SQL-13",
+    "test": "AnalyticLaboratoryRasterProofsIT: physical-raster-proofs-01 PASS; parser/transport and adversarial tests complementary"
+  },
+  {
+    "capability": "RASTER",
+    "rule": "RAS-01/02/05",
+    "entity": "TRIP",
+    "field": "codIbgeCidadeOrig",
+    "aliases": [
+      "CodIBGECidadeOrig",
+      "CodIbgeCidadeOrig",
+      "codIbgeCidadeOrig"
+    ],
+    "source": "src/main/java/br/com/extrator/dominio/raster/RasterViagemDTO.java",
+    "classification": "TYPED_ATTRIBUTE",
+    "type": "String",
+    "presence": "ABSENT_NULL_VALUE",
+    "identity": "EXPLICIT_SYNTHETIC_BINDING_ONLY",
+    "target": "stg/core.analytic_raster_trip",
+    "consumer": "RasterMapper/JdbcRasterLaboratory/SQL-13",
+    "test": "AnalyticLaboratoryRasterProofsIT: physical-raster-proofs-01 PASS; parser/transport and adversarial tests complementary"
+  },
+  {
+    "capability": "RASTER",
+    "rule": "RAS-01/02/05",
+    "entity": "TRIP",
+    "field": "codIbgeCidadeDest",
+    "aliases": [
+      "CodIBGECidadeDest",
+      "CodIbgeCidadeDest",
+      "codIbgeCidadeDest"
+    ],
+    "source": "src/main/java/br/com/extrator/dominio/raster/RasterViagemDTO.java",
+    "classification": "TYPED_ATTRIBUTE",
+    "type": "String",
+    "presence": "ABSENT_NULL_VALUE",
+    "identity": "EXPLICIT_SYNTHETIC_BINDING_ONLY",
+    "target": "stg/core.analytic_raster_trip",
+    "consumer": "RasterMapper/JdbcRasterLaboratory/SQL-13",
+    "test": "AnalyticLaboratoryRasterProofsIT: physical-raster-proofs-01 PASS; parser/transport and adversarial tests complementary"
+  },
+  {
+    "capability": "RASTER",
+    "rule": "RAS-01/02/05",
+    "entity": "TRIP",
+    "field": "dataHoraPrevIni",
+    "aliases": [
+      "DataHoraPrevIni",
+      "dataHoraPrevIni"
+    ],
+    "source": "src/main/java/br/com/extrator/dominio/raster/RasterViagemDTO.java",
+    "classification": "TYPED_ATTRIBUTE",
+    "type": "RasterTime",
+    "presence": "ABSENT_NULL_VALUE",
+    "identity": "EXPLICIT_SYNTHETIC_BINDING_ONLY",
+    "target": "stg/core.analytic_raster_trip",
+    "consumer": "RasterMapper/JdbcRasterLaboratory/SQL-13",
+    "test": "AnalyticLaboratoryRasterProofsIT: physical-raster-proofs-01 PASS; parser/transport and adversarial tests complementary"
+  },
+  {
+    "capability": "RASTER",
+    "rule": "RAS-01/02/05",
+    "entity": "TRIP",
+    "field": "dataHoraPrevFim",
+    "aliases": [
+      "DataHoraPrevFim",
+      "dataHoraPrevFim"
+    ],
+    "source": "src/main/java/br/com/extrator/dominio/raster/RasterViagemDTO.java",
+    "classification": "TYPED_ATTRIBUTE",
+    "type": "RasterTime",
+    "presence": "ABSENT_NULL_VALUE",
+    "identity": "EXPLICIT_SYNTHETIC_BINDING_ONLY",
+    "target": "stg/core.analytic_raster_trip",
+    "consumer": "RasterMapper/JdbcRasterLaboratory/SQL-13",
+    "test": "AnalyticLaboratoryRasterProofsIT: physical-raster-proofs-01 PASS; parser/transport and adversarial tests complementary"
+  },
+  {
+    "capability": "RASTER",
+    "rule": "RAS-01/02/05",
+    "entity": "TRIP",
+    "field": "dataHoraRealIni",
+    "aliases": [
+      "DataHoraRealIni",
+      "dataHoraRealIni"
+    ],
+    "source": "src/main/java/br/com/extrator/dominio/raster/RasterViagemDTO.java",
+    "classification": "TYPED_ATTRIBUTE",
+    "type": "RasterTime",
+    "presence": "ABSENT_NULL_VALUE",
+    "identity": "EXPLICIT_SYNTHETIC_BINDING_ONLY",
+    "target": "stg/core.analytic_raster_trip",
+    "consumer": "RasterMapper/JdbcRasterLaboratory/SQL-13",
+    "test": "AnalyticLaboratoryRasterProofsIT: physical-raster-proofs-01 PASS; parser/transport and adversarial tests complementary"
+  },
+  {
+    "capability": "RASTER",
+    "rule": "RAS-01/02/05",
+    "entity": "TRIP",
+    "field": "dataHoraRealFim",
+    "aliases": [
+      "DataHoraRealFim",
+      "dataHoraRealFim"
+    ],
+    "source": "src/main/java/br/com/extrator/dominio/raster/RasterViagemDTO.java",
+    "classification": "TYPED_ATTRIBUTE",
+    "type": "RasterTime",
+    "presence": "ABSENT_NULL_VALUE",
+    "identity": "EXPLICIT_SYNTHETIC_BINDING_ONLY",
+    "target": "stg/core.analytic_raster_trip",
+    "consumer": "RasterMapper/JdbcRasterLaboratory/SQL-13",
+    "test": "AnalyticLaboratoryRasterProofsIT: physical-raster-proofs-01 PASS; parser/transport and adversarial tests complementary"
+  },
+  {
+    "capability": "RASTER",
+    "rule": "RAS-01/02/05",
+    "entity": "TRIP",
+    "field": "dataHoraIdentificouFimViagem",
+    "aliases": [
+      "DataHoraIdentificouFimViagem",
+      "dataHoraIdentificouFimViagem"
+    ],
+    "source": "src/main/java/br/com/extrator/dominio/raster/RasterViagemDTO.java",
+    "classification": "TYPED_ATTRIBUTE",
+    "type": "RasterTime",
+    "presence": "ABSENT_NULL_VALUE",
+    "identity": "EXPLICIT_SYNTHETIC_BINDING_ONLY",
+    "target": "stg/core.analytic_raster_trip",
+    "consumer": "RasterMapper/JdbcRasterLaboratory/SQL-13",
+    "test": "AnalyticLaboratoryRasterProofsIT: physical-raster-proofs-01 PASS; parser/transport and adversarial tests complementary"
+  },
+  {
+    "capability": "RASTER",
+    "rule": "RAS-01/02/05",
+    "entity": "TRIP",
+    "field": "tempoTotalViagem",
+    "aliases": [
+      "TempoTotalViagem",
+      "tempoTotalViagem"
+    ],
+    "source": "src/main/java/br/com/extrator/dominio/raster/RasterViagemDTO.java",
+    "classification": "TYPED_ATTRIBUTE",
+    "type": "Integer",
+    "presence": "ABSENT_NULL_VALUE",
+    "identity": "EXPLICIT_SYNTHETIC_BINDING_ONLY",
+    "target": "stg/core.analytic_raster_trip",
+    "consumer": "RasterMapper/JdbcRasterLaboratory/SQL-13",
+    "test": "AnalyticLaboratoryRasterProofsIT: physical-raster-proofs-01 PASS; parser/transport and adversarial tests complementary"
+  },
+  {
+    "capability": "RASTER",
+    "rule": "RAS-01/02/05",
+    "entity": "TRIP",
+    "field": "dentroPrazo",
+    "aliases": [
+      "DentroPrazo",
+      "dentroPrazo"
+    ],
+    "source": "src/main/java/br/com/extrator/dominio/raster/RasterViagemDTO.java",
+    "classification": "TYPED_ATTRIBUTE",
+    "type": "String",
+    "presence": "ABSENT_NULL_VALUE",
+    "identity": "EXPLICIT_SYNTHETIC_BINDING_ONLY",
+    "target": "stg/core.analytic_raster_trip",
+    "consumer": "RasterMapper/JdbcRasterLaboratory/SQL-13",
+    "test": "AnalyticLaboratoryRasterProofsIT: physical-raster-proofs-01 PASS; parser/transport and adversarial tests complementary"
+  },
+  {
+    "capability": "RASTER",
+    "rule": "RAS-01/02/05",
+    "entity": "TRIP",
+    "field": "percentualAtraso",
+    "aliases": [
+      "PercentualAtraso",
+      "percentualAtraso"
+    ],
+    "source": "src/main/java/br/com/extrator/dominio/raster/RasterViagemDTO.java",
+    "classification": "TYPED_ATTRIBUTE",
+    "type": "java.math.BigDecimal",
+    "presence": "ABSENT_NULL_VALUE",
+    "identity": "EXPLICIT_SYNTHETIC_BINDING_ONLY",
+    "target": "stg/core.analytic_raster_trip",
+    "consumer": "RasterMapper/JdbcRasterLaboratory/SQL-13",
+    "test": "AnalyticLaboratoryRasterProofsIT: physical-raster-proofs-01 PASS; parser/transport and adversarial tests complementary"
+  },
+  {
+    "capability": "RASTER",
+    "rule": "RAS-01/02/05",
+    "entity": "TRIP",
+    "field": "rodouForaHorario",
+    "aliases": [
+      "RodouForaHorario",
+      "rodouForaHorario"
+    ],
+    "source": "src/main/java/br/com/extrator/dominio/raster/RasterViagemDTO.java",
+    "classification": "TYPED_ATTRIBUTE",
+    "type": "String",
+    "presence": "ABSENT_NULL_VALUE",
+    "identity": "EXPLICIT_SYNTHETIC_BINDING_ONLY",
+    "target": "stg/core.analytic_raster_trip",
+    "consumer": "RasterMapper/JdbcRasterLaboratory/SQL-13",
+    "test": "AnalyticLaboratoryRasterProofsIT: physical-raster-proofs-01 PASS; parser/transport and adversarial tests complementary"
+  },
+  {
+    "capability": "RASTER",
+    "rule": "RAS-01/02/05",
+    "entity": "TRIP",
+    "field": "velocidadeMedia",
+    "aliases": [
+      "VelocidadeMedia",
+      "velocidadeMedia"
+    ],
+    "source": "src/main/java/br/com/extrator/dominio/raster/RasterViagemDTO.java",
+    "classification": "TYPED_ATTRIBUTE",
+    "type": "java.math.BigDecimal",
+    "presence": "ABSENT_NULL_VALUE",
+    "identity": "EXPLICIT_SYNTHETIC_BINDING_ONLY",
+    "target": "stg/core.analytic_raster_trip",
+    "consumer": "RasterMapper/JdbcRasterLaboratory/SQL-13",
+    "test": "AnalyticLaboratoryRasterProofsIT: physical-raster-proofs-01 PASS; parser/transport and adversarial tests complementary"
+  },
+  {
+    "capability": "RASTER",
+    "rule": "RAS-01/02/05",
+    "entity": "TRIP",
+    "field": "eventosVelocidade",
+    "aliases": [
+      "EventosVelocidade",
+      "eventosVelocidade"
+    ],
+    "source": "src/main/java/br/com/extrator/dominio/raster/RasterViagemDTO.java",
+    "classification": "TYPED_ATTRIBUTE",
+    "type": "Integer",
+    "presence": "ABSENT_NULL_VALUE",
+    "identity": "EXPLICIT_SYNTHETIC_BINDING_ONLY",
+    "target": "stg/core.analytic_raster_trip",
+    "consumer": "RasterMapper/JdbcRasterLaboratory/SQL-13",
+    "test": "AnalyticLaboratoryRasterProofsIT: physical-raster-proofs-01 PASS; parser/transport and adversarial tests complementary"
+  },
+  {
+    "capability": "RASTER",
+    "rule": "RAS-01/02/05",
+    "entity": "TRIP",
+    "field": "desviosDeRota",
+    "aliases": [
+      "DesviosDeRota",
+      "desviosDeRota"
+    ],
+    "source": "src/main/java/br/com/extrator/dominio/raster/RasterViagemDTO.java",
+    "classification": "TYPED_ATTRIBUTE",
+    "type": "Integer",
+    "presence": "ABSENT_NULL_VALUE",
+    "identity": "EXPLICIT_SYNTHETIC_BINDING_ONLY",
+    "target": "stg/core.analytic_raster_trip",
+    "consumer": "RasterMapper/JdbcRasterLaboratory/SQL-13",
+    "test": "AnalyticLaboratoryRasterProofsIT: physical-raster-proofs-01 PASS; parser/transport and adversarial tests complementary"
+  },
+  {
+    "capability": "RASTER",
+    "rule": "RAS-01/02/05",
+    "entity": "TRIP",
+    "field": "linkTimeline",
+    "aliases": [
+      "LinkTimeLine",
+      "LinkTimeline",
+      "linkTimeLine",
+      "linkTimeline"
+    ],
+    "source": "src/main/java/br/com/extrator/dominio/raster/RasterViagemDTO.java",
+    "classification": "TYPED_ATTRIBUTE",
+    "type": "String",
+    "presence": "ABSENT_NULL_VALUE",
+    "identity": "EXPLICIT_SYNTHETIC_BINDING_ONLY",
+    "target": "stg/core.analytic_raster_trip",
+    "consumer": "RasterMapper/JdbcRasterLaboratory/SQL-13",
+    "test": "AnalyticLaboratoryRasterProofsIT: physical-raster-proofs-01 PASS; parser/transport and adversarial tests complementary"
+  },
+  {
+    "capability": "RASTER",
+    "rule": "RAS-01/02/05",
+    "entity": "TRIP",
+    "field": "rota",
+    "aliases": [
+      "Rota",
+      "rota"
+    ],
+    "source": "src/main/java/br/com/extrator/dominio/raster/RasterViagemDTO.java",
+    "classification": "TYPED_ROUTE_COMPONENT",
+    "type": "String",
+    "presence": "ABSENT_NULL_VALUE",
+    "identity": "EXPLICIT_SYNTHETIC_BINDING_ONLY",
+    "target": "stg/core.analytic_raster_trip",
+    "consumer": "RasterMapper/JdbcRasterLaboratory/SQL-13",
+    "test": "AnalyticLaboratoryRasterProofsIT: physical-raster-proofs-01 PASS; parser/transport and adversarial tests complementary"
+  },
+  {
+    "capability": "RASTER",
+    "rule": "RAS-01/02/05",
+    "entity": "TRIP",
+    "field": "coletasEntregas",
+    "aliases": [
+      "ColetasEntregas",
+      "coletasEntregas"
+    ],
+    "source": "src/main/java/br/com/extrator/dominio/raster/RasterViagemDTO.java",
+    "classification": "CHILD_COLLECTION",
+    "type": "String",
+    "presence": "ABSENT_NULL_VALUE",
+    "identity": "EXPLICIT_SYNTHETIC_BINDING_ONLY",
+    "target": "stg/core.analytic_raster_trip",
+    "consumer": "RasterMapper/JdbcRasterLaboratory/SQL-13",
+    "test": "AnalyticLaboratoryRasterProofsIT: physical-raster-proofs-01 PASS; parser/transport and adversarial tests complementary"
+  },
+  {
+    "capability": "RASTER",
+    "rule": "RAS-06",
+    "entity": "STOP",
+    "field": "ordem",
+    "aliases": [
+      "Ordem",
+      "ordem"
+    ],
+    "source": "src/main/java/br/com/extrator/dominio/raster/RasterParadaDTO.java",
+    "classification": "TYPED_ATTRIBUTE",
+    "type": "String",
+    "presence": "ABSENT_NULL_VALUE",
+    "identity": "EXPLICIT_SYNTHETIC_BINDING_ONLY",
+    "target": "stg/core.analytic_raster_stop",
+    "consumer": "RasterMapper/JdbcRasterLaboratory/SQL-13",
+    "test": "AnalyticLaboratoryRasterProofsIT: physical-raster-proofs-01 PASS; parser/transport and adversarial tests complementary"
+  },
+  {
+    "capability": "RASTER",
+    "rule": "RAS-01/02/05",
+    "entity": "STOP",
+    "field": "tipo",
+    "aliases": [
+      "Tipo",
+      "tipo"
+    ],
+    "source": "src/main/java/br/com/extrator/dominio/raster/RasterParadaDTO.java",
+    "classification": "TYPED_ATTRIBUTE",
+    "type": "String",
+    "presence": "ABSENT_NULL_VALUE",
+    "identity": "EXPLICIT_SYNTHETIC_BINDING_ONLY",
+    "target": "stg/core.analytic_raster_stop",
+    "consumer": "RasterMapper/JdbcRasterLaboratory/SQL-13",
+    "test": "AnalyticLaboratoryRasterProofsIT: physical-raster-proofs-01 PASS; parser/transport and adversarial tests complementary"
+  },
+  {
+    "capability": "RASTER",
+    "rule": "RAS-01/02/05",
+    "entity": "STOP",
+    "field": "codIbgeCidade",
+    "aliases": [
+      "CodIBGECidade",
+      "codIBGECidade",
+      "CodIbgeCidade"
+    ],
+    "source": "src/main/java/br/com/extrator/dominio/raster/RasterParadaDTO.java",
+    "classification": "TYPED_ATTRIBUTE",
+    "type": "String",
+    "presence": "ABSENT_NULL_VALUE",
+    "identity": "EXPLICIT_SYNTHETIC_BINDING_ONLY",
+    "target": "stg/core.analytic_raster_stop",
+    "consumer": "RasterMapper/JdbcRasterLaboratory/SQL-13",
+    "test": "AnalyticLaboratoryRasterProofsIT: physical-raster-proofs-01 PASS; parser/transport and adversarial tests complementary"
+  },
+  {
+    "capability": "RASTER",
+    "rule": "RAS-01/02/05",
+    "entity": "STOP",
+    "field": "cnpjCliente",
+    "aliases": [
+      "CNPJCliente",
+      "cnpjCliente",
+      "CnpjCliente"
+    ],
+    "source": "src/main/java/br/com/extrator/dominio/raster/RasterParadaDTO.java",
+    "classification": "TYPED_ATTRIBUTE",
+    "type": "String",
+    "presence": "ABSENT_NULL_VALUE",
+    "identity": "EXPLICIT_SYNTHETIC_BINDING_ONLY",
+    "target": "stg/core.analytic_raster_stop",
+    "consumer": "RasterMapper/JdbcRasterLaboratory/SQL-13",
+    "test": "AnalyticLaboratoryRasterProofsIT: physical-raster-proofs-01 PASS; parser/transport and adversarial tests complementary"
+  },
+  {
+    "capability": "RASTER",
+    "rule": "RAS-01/02/05",
+    "entity": "STOP",
+    "field": "codigoCliente",
+    "aliases": [
+      "CodigoCliente",
+      "codigoCliente"
+    ],
+    "source": "src/main/java/br/com/extrator/dominio/raster/RasterParadaDTO.java",
+    "classification": "TYPED_ATTRIBUTE",
+    "type": "String",
+    "presence": "ABSENT_NULL_VALUE",
+    "identity": "EXPLICIT_SYNTHETIC_BINDING_ONLY",
+    "target": "stg/core.analytic_raster_stop",
+    "consumer": "RasterMapper/JdbcRasterLaboratory/SQL-13",
+    "test": "AnalyticLaboratoryRasterProofsIT: physical-raster-proofs-01 PASS; parser/transport and adversarial tests complementary"
+  },
+  {
+    "capability": "RASTER",
+    "rule": "RAS-01/02/05",
+    "entity": "STOP",
+    "field": "dataHoraPrevChegada",
+    "aliases": [
+      "DataHoraPrevChegada",
+      "dataHoraPrevChegada"
+    ],
+    "source": "src/main/java/br/com/extrator/dominio/raster/RasterParadaDTO.java",
+    "classification": "TYPED_ATTRIBUTE",
+    "type": "RasterTime",
+    "presence": "ABSENT_NULL_VALUE",
+    "identity": "EXPLICIT_SYNTHETIC_BINDING_ONLY",
+    "target": "stg/core.analytic_raster_stop",
+    "consumer": "RasterMapper/JdbcRasterLaboratory/SQL-13",
+    "test": "AnalyticLaboratoryRasterProofsIT: physical-raster-proofs-01 PASS; parser/transport and adversarial tests complementary"
+  },
+  {
+    "capability": "RASTER",
+    "rule": "RAS-01/02/05",
+    "entity": "STOP",
+    "field": "dataHoraPrevSaida",
+    "aliases": [
+      "DataHoraPrevSaida",
+      "dataHoraPrevSaida"
+    ],
+    "source": "src/main/java/br/com/extrator/dominio/raster/RasterParadaDTO.java",
+    "classification": "TYPED_ATTRIBUTE",
+    "type": "RasterTime",
+    "presence": "ABSENT_NULL_VALUE",
+    "identity": "EXPLICIT_SYNTHETIC_BINDING_ONLY",
+    "target": "stg/core.analytic_raster_stop",
+    "consumer": "RasterMapper/JdbcRasterLaboratory/SQL-13",
+    "test": "AnalyticLaboratoryRasterProofsIT: physical-raster-proofs-01 PASS; parser/transport and adversarial tests complementary"
+  },
+  {
+    "capability": "RASTER",
+    "rule": "RAS-01/02/05",
+    "entity": "STOP",
+    "field": "dataHoraRealChegada",
+    "aliases": [
+      "DataHoraRealChegada",
+      "dataHoraRealChegada"
+    ],
+    "source": "src/main/java/br/com/extrator/dominio/raster/RasterParadaDTO.java",
+    "classification": "TYPED_ATTRIBUTE",
+    "type": "RasterTime",
+    "presence": "ABSENT_NULL_VALUE",
+    "identity": "EXPLICIT_SYNTHETIC_BINDING_ONLY",
+    "target": "stg/core.analytic_raster_stop",
+    "consumer": "RasterMapper/JdbcRasterLaboratory/SQL-13",
+    "test": "AnalyticLaboratoryRasterProofsIT: physical-raster-proofs-01 PASS; parser/transport and adversarial tests complementary"
+  },
+  {
+    "capability": "RASTER",
+    "rule": "RAS-01/02/05",
+    "entity": "STOP",
+    "field": "dataHoraRealSaida",
+    "aliases": [
+      "DataHoraRealSaida",
+      "dataHoraRealSaida"
+    ],
+    "source": "src/main/java/br/com/extrator/dominio/raster/RasterParadaDTO.java",
+    "classification": "TYPED_ATTRIBUTE",
+    "type": "RasterTime",
+    "presence": "ABSENT_NULL_VALUE",
+    "identity": "EXPLICIT_SYNTHETIC_BINDING_ONLY",
+    "target": "stg/core.analytic_raster_stop",
+    "consumer": "RasterMapper/JdbcRasterLaboratory/SQL-13",
+    "test": "AnalyticLaboratoryRasterProofsIT: physical-raster-proofs-01 PASS; parser/transport and adversarial tests complementary"
+  },
+  {
+    "capability": "RASTER",
+    "rule": "RAS-01/02/05",
+    "entity": "STOP",
+    "field": "latitude",
+    "aliases": [
+      "Latitude",
+      "latitude"
+    ],
+    "source": "src/main/java/br/com/extrator/dominio/raster/RasterParadaDTO.java",
+    "classification": "TYPED_ATTRIBUTE",
+    "type": "java.math.BigDecimal",
+    "presence": "ABSENT_NULL_VALUE",
+    "identity": "EXPLICIT_SYNTHETIC_BINDING_ONLY",
+    "target": "stg/core.analytic_raster_stop",
+    "consumer": "RasterMapper/JdbcRasterLaboratory/SQL-13",
+    "test": "AnalyticLaboratoryRasterProofsIT: physical-raster-proofs-01 PASS; parser/transport and adversarial tests complementary"
+  },
+  {
+    "capability": "RASTER",
+    "rule": "RAS-01/02/05",
+    "entity": "STOP",
+    "field": "longitude",
+    "aliases": [
+      "Longitude",
+      "longitude"
+    ],
+    "source": "src/main/java/br/com/extrator/dominio/raster/RasterParadaDTO.java",
+    "classification": "TYPED_ATTRIBUTE",
+    "type": "java.math.BigDecimal",
+    "presence": "ABSENT_NULL_VALUE",
+    "identity": "EXPLICIT_SYNTHETIC_BINDING_ONLY",
+    "target": "stg/core.analytic_raster_stop",
+    "consumer": "RasterMapper/JdbcRasterLaboratory/SQL-13",
+    "test": "AnalyticLaboratoryRasterProofsIT: physical-raster-proofs-01 PASS; parser/transport and adversarial tests complementary"
+  },
+  {
+    "capability": "RASTER",
+    "rule": "RAS-01/02/05",
+    "entity": "STOP",
+    "field": "dentroPrazo",
+    "aliases": [
+      "DentroPrazo",
+      "dentroPrazo"
+    ],
+    "source": "src/main/java/br/com/extrator/dominio/raster/RasterParadaDTO.java",
+    "classification": "TYPED_ATTRIBUTE",
+    "type": "String",
+    "presence": "ABSENT_NULL_VALUE",
+    "identity": "EXPLICIT_SYNTHETIC_BINDING_ONLY",
+    "target": "stg/core.analytic_raster_stop",
+    "consumer": "RasterMapper/JdbcRasterLaboratory/SQL-13",
+    "test": "AnalyticLaboratoryRasterProofsIT: physical-raster-proofs-01 PASS; parser/transport and adversarial tests complementary"
+  },
+  {
+    "capability": "RASTER",
+    "rule": "RAS-01/02/05",
+    "entity": "STOP",
+    "field": "diferencaTempo",
+    "aliases": [
+      "DiferencaTempo",
+      "diferencaTempo"
+    ],
+    "source": "src/main/java/br/com/extrator/dominio/raster/RasterParadaDTO.java",
+    "classification": "TYPED_ATTRIBUTE",
+    "type": "String",
+    "presence": "ABSENT_NULL_VALUE",
+    "identity": "EXPLICIT_SYNTHETIC_BINDING_ONLY",
+    "target": "stg/core.analytic_raster_stop",
+    "consumer": "RasterMapper/JdbcRasterLaboratory/SQL-13",
+    "test": "AnalyticLaboratoryRasterProofsIT: physical-raster-proofs-01 PASS; parser/transport and adversarial tests complementary"
+  },
+  {
+    "capability": "RASTER",
+    "rule": "RAS-01/02/05",
+    "entity": "STOP",
+    "field": "kmPercorridoEntrega",
+    "aliases": [
+      "KmPercorridoEntrega",
+      "kmPercorridoEntrega"
+    ],
+    "source": "src/main/java/br/com/extrator/dominio/raster/RasterParadaDTO.java",
+    "classification": "TYPED_ATTRIBUTE",
+    "type": "java.math.BigDecimal",
+    "presence": "ABSENT_NULL_VALUE",
+    "identity": "EXPLICIT_SYNTHETIC_BINDING_ONLY",
+    "target": "stg/core.analytic_raster_stop",
+    "consumer": "RasterMapper/JdbcRasterLaboratory/SQL-13",
+    "test": "AnalyticLaboratoryRasterProofsIT: physical-raster-proofs-01 PASS; parser/transport and adversarial tests complementary"
+  },
+  {
+    "capability": "RASTER",
+    "rule": "RAS-01/02/05",
+    "entity": "STOP",
+    "field": "kmRestanteEntrega",
+    "aliases": [
+      "KmRestanteEntrega",
+      "kmRestanteEntrega"
+    ],
+    "source": "src/main/java/br/com/extrator/dominio/raster/RasterParadaDTO.java",
+    "classification": "TYPED_ATTRIBUTE",
+    "type": "java.math.BigDecimal",
+    "presence": "ABSENT_NULL_VALUE",
+    "identity": "EXPLICIT_SYNTHETIC_BINDING_ONLY",
+    "target": "stg/core.analytic_raster_stop",
+    "consumer": "RasterMapper/JdbcRasterLaboratory/SQL-13",
+    "test": "AnalyticLaboratoryRasterProofsIT: physical-raster-proofs-01 PASS; parser/transport and adversarial tests complementary"
+  },
+  {
+    "capability": "RASTER",
+    "rule": "RAS-01/02/05",
+    "entity": "STOP",
+    "field": "chegouNaEntrega",
+    "aliases": [
+      "ChegouNaEntrega",
+      "chegouNaEntrega"
+    ],
+    "source": "src/main/java/br/com/extrator/dominio/raster/RasterParadaDTO.java",
+    "classification": "TYPED_ATTRIBUTE",
+    "type": "String",
+    "presence": "ABSENT_NULL_VALUE",
+    "identity": "EXPLICIT_SYNTHETIC_BINDING_ONLY",
+    "target": "stg/core.analytic_raster_stop",
+    "consumer": "RasterMapper/JdbcRasterLaboratory/SQL-13",
+    "test": "AnalyticLaboratoryRasterProofsIT: physical-raster-proofs-01 PASS; parser/transport and adversarial tests complementary"
+  },
+  {
+    "capability": "RASTER",
+    "rule": "RAS-01/02/05",
+    "entity": "STOP",
+    "field": "dataHoraUltimaPosicao",
+    "aliases": [
+      "DataHoraUltimaPosicao",
+      "dataHoraUltimaPosicao"
+    ],
+    "source": "src/main/java/br/com/extrator/dominio/raster/RasterParadaDTO.java",
+    "classification": "TYPED_ATTRIBUTE",
+    "type": "RasterTime",
+    "presence": "ABSENT_NULL_VALUE",
+    "identity": "EXPLICIT_SYNTHETIC_BINDING_ONLY",
+    "target": "stg/core.analytic_raster_stop",
+    "consumer": "RasterMapper/JdbcRasterLaboratory/SQL-13",
+    "test": "AnalyticLaboratoryRasterProofsIT: physical-raster-proofs-01 PASS; parser/transport and adversarial tests complementary"
+  },
+  {
+    "capability": "RASTER",
+    "rule": "RAS-01/02/05",
+    "entity": "STOP",
+    "field": "latitudeUltimaPosicao",
+    "aliases": [
+      "LatitudeUltimaPosicao",
+      "latitudeUltimaPosicao"
+    ],
+    "source": "src/main/java/br/com/extrator/dominio/raster/RasterParadaDTO.java",
+    "classification": "TYPED_ATTRIBUTE",
+    "type": "java.math.BigDecimal",
+    "presence": "ABSENT_NULL_VALUE",
+    "identity": "EXPLICIT_SYNTHETIC_BINDING_ONLY",
+    "target": "stg/core.analytic_raster_stop",
+    "consumer": "RasterMapper/JdbcRasterLaboratory/SQL-13",
+    "test": "AnalyticLaboratoryRasterProofsIT: physical-raster-proofs-01 PASS; parser/transport and adversarial tests complementary"
+  },
+  {
+    "capability": "RASTER",
+    "rule": "RAS-01/02/05",
+    "entity": "STOP",
+    "field": "longitudeUltimaPosicao",
+    "aliases": [
+      "LongitudeUltimaPosicao",
+      "longitudeUltimaPosicao"
+    ],
+    "source": "src/main/java/br/com/extrator/dominio/raster/RasterParadaDTO.java",
+    "classification": "TYPED_ATTRIBUTE",
+    "type": "java.math.BigDecimal",
+    "presence": "ABSENT_NULL_VALUE",
+    "identity": "EXPLICIT_SYNTHETIC_BINDING_ONLY",
+    "target": "stg/core.analytic_raster_stop",
+    "consumer": "RasterMapper/JdbcRasterLaboratory/SQL-13",
+    "test": "AnalyticLaboratoryRasterProofsIT: physical-raster-proofs-01 PASS; parser/transport and adversarial tests complementary"
+  },
+  {
+    "capability": "RASTER",
+    "rule": "RAS-01/02/05",
+    "entity": "STOP",
+    "field": "referenciaUltimaPosicao",
+    "aliases": [
+      "ReferenciaUltimaPosicao",
+      "referenciaUltimaPosicao"
+    ],
+    "source": "src/main/java/br/com/extrator/dominio/raster/RasterParadaDTO.java",
+    "classification": "TYPED_ATTRIBUTE",
+    "type": "String",
+    "presence": "ABSENT_NULL_VALUE",
+    "identity": "EXPLICIT_SYNTHETIC_BINDING_ONLY",
+    "target": "stg/core.analytic_raster_stop",
+    "consumer": "RasterMapper/JdbcRasterLaboratory/SQL-13",
+    "test": "AnalyticLaboratoryRasterProofsIT: physical-raster-proofs-01 PASS; parser/transport and adversarial tests complementary"
+  },
+  {
+    "capability": "RASTER",
+    "rule": "RAS-01/02/05",
+    "entity": "ROUTE",
+    "field": "codRota",
+    "aliases": [
+      "CodRota",
+      "codRota"
+    ],
+    "source": "src/main/java/br/com/extrator/dominio/raster/RasterRotaDTO.java",
+    "classification": "TYPED_ATTRIBUTE",
+    "type": "String",
+    "presence": "ABSENT_NULL_VALUE",
+    "identity": "EXPLICIT_SYNTHETIC_BINDING_ONLY",
+    "target": "stg/core.analytic_raster_trip.route_*",
+    "consumer": "RasterMapper/JdbcRasterLaboratory/SQL-13",
+    "test": "AnalyticLaboratoryRasterProofsIT: physical-raster-proofs-01 PASS; parser/transport and adversarial tests complementary"
+  },
+  {
+    "capability": "RASTER",
+    "rule": "RAS-01/02/05",
+    "entity": "ROUTE",
+    "field": "descricao",
+    "aliases": [
+      "Descricao",
+      "descricao",
+      "RotaDescricao",
+      "DescRota"
+    ],
+    "source": "src/main/java/br/com/extrator/dominio/raster/RasterRotaDTO.java",
+    "classification": "TYPED_ATTRIBUTE",
+    "type": "String",
+    "presence": "ABSENT_NULL_VALUE",
+    "identity": "EXPLICIT_SYNTHETIC_BINDING_ONLY",
+    "target": "stg/core.analytic_raster_trip.route_*",
+    "consumer": "RasterMapper/JdbcRasterLaboratory/SQL-13",
+    "test": "AnalyticLaboratoryRasterProofsIT: physical-raster-proofs-01 PASS; parser/transport and adversarial tests complementary"
+  }
+]

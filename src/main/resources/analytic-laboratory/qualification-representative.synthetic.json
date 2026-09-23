@@ -1,0 +1,21 @@
+{
+  "version": "qualification-representative-v1",
+  "origin": "DECLARED_SYNTHETIC_INPUT_VARIANT",
+  "freight": {
+    "criado_em": "2036-04-01T08:15:30.1234567-03:00",
+    "finished_at": "2036-04-03T10:00:00-03:00",
+    "fit_dpn_performance_finished_at": "2036-04-03T09:00:00-03:00"
+  },
+  "location": {
+    "service_type": "Entrega urbana",
+    "fit_crn_psn_nickname": "FILIAL EMISSORA SINTÉTICA",
+    "fit_dpn_delivery_prediction_at": "2036-04-04T10:00:00-03:00",
+    "fit_dyn_name": "REGIÃO DESTINO SINTÉTICA",
+    "fit_dyn_drt_nickname": "FILIAL DESTINO SINTÉTICA",
+    "fit_fsn_name": "CLASSIFICAÇÃO SINTÉTICA",
+    "fit_o_n_name": "REGIÃO ORIGEM SINTÉTICA",
+    "fit_o_n_drt_nickname": "FILIAL ORIGEM SINTÉTICA",
+    "fit_fln_cln_nickname": "PÁTIO SINTÉTICO"
+  },
+  "firstUserName": null
+}

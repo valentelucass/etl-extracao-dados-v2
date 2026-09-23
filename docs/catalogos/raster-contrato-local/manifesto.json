@@ -1,0 +1,205 @@
+{
+  "version": 1,
+  "block": 56,
+  "phase": "RASTER_LOCAL_DECISION_AND_CONTRACT",
+  "status": "LOCAL_RASTER_DECISION_CONTRACT_COMPLETE_IDENTITY_BLOCKED",
+  "acceptedTasks": [
+    "V2-034a",
+    "V2-025c"
+  ],
+  "newCanonicalAcceptances": 2,
+  "newIdentityAcceptances": 0,
+  "newVerticalImplementations": 0,
+  "remoteCalls": 0,
+  "sqlOperations": 0,
+  "runtimeCampaigns": 0,
+  "installations": 0,
+  "unknownResults": 0,
+  "budgetConsumed": 0,
+  "runtimeEnabled": false,
+  "rotationProven": false,
+  "budgetTransferred": false,
+  "validityRenewed": false,
+  "progress": {
+    "done": 67,
+    "total": 115,
+    "pending": 48,
+    "openRoutes": 191,
+    "now": 0
+  },
+  "predecessor": {
+    "path": "docs/catalogos/bloco56-continuacao/manifesto.json",
+    "sha256": "bd7f39d3aba7ac14e9e371886d6a35b51fa78a9372bb59aa76fcb14a0c3c4621"
+  },
+  "initialInventory": {
+    "path": "target/bloco56-raster/initial-inventory.json",
+    "sha256": "8b58bf459d06ed69f37cb21a999f14e07c5a50dccfbd66c78a7d295fbc512d18"
+  },
+  "changedExistingFiles": [
+    {
+      "path": "STATES.md",
+      "before": "bcb6b7867000905c10d06abdfe6707ad498b613cc58e7805fa1936da73a1a477",
+      "after": "6e7a6e85af13bb27158f15c79b5410c98c57c22bac24ed9c97612a43d5a10464",
+      "snapshot": "docs/continuidade/historico/bloco56-continuacao/STATES.md"
+    },
+    {
+      "path": "docs/runbooks/trilha-de-chats-gpt-5-6.md",
+      "before": "65488440adf95f47022777020183a0daeb6ab6ff8aa06e734376fd2608d1f112",
+      "after": "45cfea9c63fac94c25e3aad860c1d1c1ba460859e2bb1767adb60f2c208c9e83",
+      "snapshot": "docs/continuidade/historico/bloco56-continuacao/docs/runbooks/trilha-de-chats-gpt-5-6.md"
+    },
+    {
+      "path": "docs/continuidade/RETOMADA.md",
+      "before": "765905aa78ed132107e3b7c6fcfe30a0de24cf3dcfda00d3c1ed3f00960503d6",
+      "after": "498792f17f866289fa016fecf34de977e94e0b607da18eb577d453d4566825a4",
+      "snapshot": "docs/continuidade/historico/bloco56-continuacao/docs/continuidade/RETOMADA.md"
+    },
+    {
+      "path": "scripts/validation/Test-Bloco56Preparacao.ps1",
+      "before": "6315dfd8aefdcba94580c3c12a68ba7581ba9f4ec489bb389b95eb524224a585",
+      "after": "f72af2a36d16697cea2fec7cfcd19834383f9610f801613346898306e71a3e78",
+      "snapshot": "docs/continuidade/historico/bloco56-continuacao/scripts/validation/Test-Bloco56Preparacao.ps1"
+    },
+    {
+      "path": "scripts/validation/Test-Bloco56ContinuacaoGuards.ps1",
+      "before": "9f72a3d04892b550cbc8fa399a5d2cfd79fc7f6c6b255ba2c301516ef89aaea4",
+      "after": "bc2a49f320ae7f7dccdc7558d53d4775586448a96466ce3e94ab244291c4052e",
+      "snapshot": "docs/continuidade/historico/bloco56-continuacao/scripts/validation/Test-Bloco56ContinuacaoGuards.ps1"
+    },
+    {
+      "path": "scripts/validation/Test-Bloco56Continuacao.ps1",
+      "before": "4528fb1cd8f25708d0232d3a3b69c05a6ca234cdd46ee23746c099bc1a0cf1d2",
+      "after": "1c3b9980272dbe65a546f1579b8afcc49a2cd9a0fa83720bf73e65f46b78eb16",
+      "snapshot": "docs/continuidade/historico/bloco56-continuacao/scripts/validation/Test-Bloco56Continuacao.ps1"
+    },
+    {
+      "path": "scripts/validation/Test-ContinuidadeAgentes.ps1",
+      "before": "e3e7bc297d3ac053e6f73f2eada7c797e343f68ecb65daed4e07288771d20378",
+      "after": "8866974ee53f16a8821c079a08f8335ffe58c9ea87dc7b5c721cf227dcae91fa",
+      "snapshot": "docs/continuidade/historico/bloco56-continuacao/scripts/validation/Test-ContinuidadeAgentes.ps1"
+    },
+    {
+      "path": "scripts/validation/Test-Gpt56ChatTrail.ps1",
+      "before": "dacd5d014fb594430e62d0bc1829b00768f46be4aac71888aa2bb83096eb2a23",
+      "after": "76655f1f61fa4df3622744900037e9125b90497f8cc142e512dacad3a1ddef9d",
+      "snapshot": "docs/continuidade/historico/bloco56-continuacao/scripts/validation/Test-Gpt56ChatTrail.ps1"
+    }
+  ],
+  "newFiles": [
+    {
+      "path": "docs/adr/0039-raster-mantido-com-contrato-local-e-identidade-pendente.md",
+      "sha256": "c75e2e88e4c43c4f7dd7fcd22a15b7c0b04ef3405bd1d6addcd445fdf56d5938"
+    },
+    {
+      "path": "docs/catalogos/raster-contrato-local/campos.json",
+      "sha256": "2693482dc8b995945ea1af534f9f94ca0ae47d34ca026f04d912556ff7d0c317"
+    },
+    {
+      "path": "docs/catalogos/raster-contrato-local/contrato.json",
+      "sha256": "acd8437172e998195b230e3f2c9dada76f76d0401b2ddfa156c1ecc803503dd8"
+    },
+    {
+      "path": "docs/catalogos/raster-contrato-local/decisao.json",
+      "sha256": "d7db2eb027aa085612baaf6505817bfeded5ed67914159d8f7c45c9591ef6086"
+    },
+    {
+      "path": "docs/catalogos/raster-contrato-local/evidencias/legado.json",
+      "sha256": "de21cffefd6571900e79db31b5bfe667c11ed916a5c81466fb0da544f65203b3"
+    },
+    {
+      "path": "docs/catalogos/raster-contrato-local/fingerprints.json",
+      "sha256": "a82601193df14a99a666ca1528064982ce2f06a39cf6cbdccc8d0f3e0e1140bc"
+    },
+    {
+      "path": "docs/catalogos/raster-contrato-local/fixtures/limites.synthetic.json",
+      "sha256": "d0d02ffe0d1f60c627a1bd9e8438914efd5c33a0ec53f7ad61f65bb9f48353b4"
+    },
+    {
+      "path": "docs/catalogos/raster-contrato-local/fixtures/reordenacao.synthetic.json",
+      "sha256": "4b3c50edada70b9723747912d530fc3cc8961cf13e280979004818b1bfb309d7"
+    },
+    {
+      "path": "docs/catalogos/raster-contrato-local/fixtures/respostas.synthetic.json",
+      "sha256": "bebe34182b3d51449d68663ab556973a83a63c3bc495124c79235c25602df475"
+    },
+    {
+      "path": "docs/catalogos/raster-contrato-local/identidade-pendente.json",
+      "sha256": "be859541e221711555f6aded72fa7223d3217738687e25a70392cac0bd416499"
+    },
+    {
+      "path": "docs/catalogos/raster-contrato-local/README.md",
+      "sha256": "26fe0fb91fd684182d0287dbd6590c084f89b2475ce332a8ae81764045bc3bfd"
+    },
+    {
+      "path": "docs/continuidade/checkpoints/0009-bloco56-raster-decisao-e-contrato-local.md",
+      "sha256": "d12673c7ca2267c39f8e89637e2f2fb95620a5c798e4785edc430cc215ffb928"
+    },
+    {
+      "path": "docs/continuidade/checkpoints/0010-bloco56-raster-validacao-e-retomada.md",
+      "sha256": "4c93b94a0b687c265ed9e073ac13c91f69106cc9b2c8cd71f6e6dfc258028680"
+    },
+    {
+      "path": "docs/continuidade/historico/bloco56-continuacao/docs/continuidade/RETOMADA.md",
+      "sha256": "765905aa78ed132107e3b7c6fcfe30a0de24cf3dcfda00d3c1ed3f00960503d6"
+    },
+    {
+      "path": "docs/continuidade/historico/bloco56-continuacao/docs/runbooks/trilha-de-chats-gpt-5-6.md",
+      "sha256": "65488440adf95f47022777020183a0daeb6ab6ff8aa06e734376fd2608d1f112"
+    },
+    {
+      "path": "docs/continuidade/historico/bloco56-continuacao/scripts/validation/Test-Bloco56Continuacao.ps1",
+      "sha256": "4528fb1cd8f25708d0232d3a3b69c05a6ca234cdd46ee23746c099bc1a0cf1d2"
+    },
+    {
+      "path": "docs/continuidade/historico/bloco56-continuacao/scripts/validation/Test-Bloco56ContinuacaoGuards.ps1",
+      "sha256": "9f72a3d04892b550cbc8fa399a5d2cfd79fc7f6c6b255ba2c301516ef89aaea4"
+    },
+    {
+      "path": "docs/continuidade/historico/bloco56-continuacao/scripts/validation/Test-Bloco56Preparacao.ps1",
+      "sha256": "6315dfd8aefdcba94580c3c12a68ba7581ba9f4ec489bb389b95eb524224a585"
+    },
+    {
+      "path": "docs/continuidade/historico/bloco56-continuacao/scripts/validation/Test-ContinuidadeAgentes.ps1",
+      "sha256": "e3e7bc297d3ac053e6f73f2eada7c797e343f68ecb65daed4e07288771d20378"
+    },
+    {
+      "path": "docs/continuidade/historico/bloco56-continuacao/scripts/validation/Test-Gpt56ChatTrail.ps1",
+      "sha256": "dacd5d014fb594430e62d0bc1829b00768f46be4aac71888aa2bb83096eb2a23"
+    },
+    {
+      "path": "docs/continuidade/historico/bloco56-continuacao/STATES.md",
+      "sha256": "bcb6b7867000905c10d06abdfe6707ad498b613cc58e7805fa1936da73a1a477"
+    },
+    {
+      "path": "scripts/validation/Test-RasterContractCatalog.ps1",
+      "sha256": "8a25d795f65bfa5402dd19446d75f2c84f6b5309ab4de8e0283e020016b2a6da"
+    },
+    {
+      "path": "scripts/validation/Test-RasterContractGuards.ps1",
+      "sha256": "4d5c26eaf5191b83876178fa4bd24518e7bc056ca84aeb3dcd853bf90c59cdb7"
+    },
+    {
+      "path": "scripts/validation/Test-RasterLocalContinuation.ps1",
+      "sha256": "5526f43134d79c762b53074ff36be5fd4f27bfad427500c85b001cb1133d14d6"
+    },
+    {
+      "path": "scripts/validation/Test-RasterLocalContinuationGuards.ps1",
+      "sha256": "f4e77a442a16744eff0cb98abf7b43fd0d1b1324b3e2b0c9d392842cf03ad48d"
+    }
+  ],
+  "privateEvidence": [
+    {
+      "path": "target/bloco56-raster/adoption.json",
+      "sha256": "3fb185f6c5eb5aeb7c1fdee7abd473f718501e58f113b3db0eaf293f8eff6785"
+    },
+    {
+      "path": "target/bloco56-raster/contract-01.log",
+      "sha256": "e8fbf7a8c6264a156c9a7c9962ff56b039c62984571b073f9e0ccdb2a33731c3"
+    },
+    {
+      "path": "target/bloco56-raster/contract-guards-01.log",
+      "sha256": "d2ddfb427f9c25e417031ecc67faa786052dc0f1c26656137f0645e30afbe768"
+    }
+  ],
+  "recovery": "docs/catalogos/raster-contrato-local/README.md"
+}

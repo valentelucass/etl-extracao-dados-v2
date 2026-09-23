@@ -1,0 +1,531 @@
+{
+  "version": 1,
+  "status": "STATES_EXECUCAO_LOCAL_CONCLUIDA",
+  "construction": "39/45",
+  "historicalAcceptances": "67/115",
+  "newAcceptances": 0,
+  "sourceCalls": 0,
+  "defects": [
+    {
+      "id": "STATES-FISCAL-01",
+      "criteria": [
+        "V2-009",
+        "V2-030",
+        "V2-022"
+      ],
+      "files": [
+        "DeclaredAnalyticSupport.java"
+      ],
+      "red": "fiscal-identity-red-01",
+      "expected": "Tuplas fiscais STRING distintas conservam raiz/parcela/componente, mesmo contendo separadores permitidos.",
+      "observed": "Concatenação com dois-pontos produzia a mesma chave para duas tuplas válidas; ambas as massas A/B eram recusadas como duplicadas.",
+      "fix": "Array JSON interno preserva os três componentes sem alterar identidade de negócio ou SQL. Duplicata exata permanece recusada.",
+      "proof": "IntegralSupportPreflightTest; IntegralDecimalPropagationIT; série por raiz em SQL01 A2/B24 e contraprova independente"
+    },
+    {
+      "id": "STATES-DEC-01",
+      "criteria": [
+        "V2-034",
+        "V2-025",
+        "V2-037"
+      ],
+      "files": [
+        "RasterResponseParser.java",
+        "RasterFieldParser.java"
+      ],
+      "red": "raster-red-01",
+      "expected": "Decimal exato DECIMAL(28,8), sem arredondamento ou recusa de número válido.",
+      "observed": "DoubleNode perdeu precisão: quatro entradas válidas recusadas; 1.0000000000000001 virou1 e foi aceito.",
+      "fix": "BigDecimal exato/escala preservada no parser; leitura numérica por decimalValue com limites antes de setScale.",
+      "proof": "StatesRasterDecimalTest; IntegralDecimalPropagationIT; JAR A/B"
+    },
+    {
+      "id": "STATES-DEC-02",
+      "criteria": [
+        "V2-029",
+        "V2-030",
+        "V2-031",
+        "V2-032"
+      ],
+      "files": [
+        "ExpansionFieldParser.java"
+      ],
+      "red": "expansion-red-01",
+      "expected": "Número JSON e texto decimal válidos produzem o mesmo valor de domínio.",
+      "observed": "0.00000001, -0.00000001 e0.00000000 numéricos eram recusados pela representação exponencial interna.",
+      "fix": "Regex continua nos textos; números usam decimalValue exato com escala/largura limitadas.",
+      "proof": "StatesExpansionDecimalTest; IntegralDecimalPropagationIT; SQL01/06/11/12 JAR A/B"
+    },
+    {
+      "id": "STATES-DEC-03",
+      "criteria": [
+        "V2-018",
+        "V2-022",
+        "V2-025"
+      ],
+      "files": [
+        "QualificationJson.java"
+      ],
+      "red": "preflight-red-01",
+      "expected": "Admissão e consumo preservam escala da mesma entrada.",
+      "observed": "Strip de zeros transformava0E-8/1.00000000/1.000000000 em0/1/1, ocultando inclusive excesso de escala.",
+      "fix": "JsonMapper com STRIP_TRAILING_BIGDECIMAL_ZEROES desabilitado; regras de duplicata/UTF8/limites preservadas.",
+      "proof": "StatesExpansionDecimalTest e recusa de precisão; mesmas entradas completas no runtime"
+    },
+    {
+      "id": "STATES-SUP-01",
+      "criteria": [
+        "V2-050",
+        "V2-043",
+        "V2-022"
+      ],
+      "files": [
+        "DeclaredAnalyticSupport.java"
+      ],
+      "red": "support-red-01",
+      "expected": "Preflight limitado por lote e cancelamento durante a validação.",
+      "observed": "HashSet acumulava até8192chaves/grupo; token não era consultado por linha. RED: cancelamento no32ºcheck não ocorria.",
+      "fix": "Até64chaves/lote + filtro fixo128KiB/grupo. Colisão provoca comparação exata de arquivos pinados. Token por linha e durante releitura.",
+      "proof": "IntegralSupportPreflightTest, colisão Aa/BB,2/8/32/128páginas; regressão completa e JAR A/B"
+    }
+  ],
+  "observed": [
+    {
+      "attempt": "raster-red-01",
+      "exit": 1,
+      "phase": "Directed",
+      "rollbackConfirmed": null,
+      "pin": {
+        "path": "target/execucao-states-20260915-01/raster-red-01/result.json",
+        "sha256": "df85f17caafef5d0ebd05e60ffd84755d439acbcb349dbb71e19b66aa251171e"
+      }
+    },
+    {
+      "attempt": "expansion-red-01",
+      "exit": 1,
+      "phase": "Directed",
+      "rollbackConfirmed": null,
+      "pin": {
+        "path": "target/execucao-states-20260915-01/expansion-red-01/result.json",
+        "sha256": "badd10cf0ab00bd4975d3f360cc939b9c2ef9d480dd4ebc8d3136444cf7e01d4"
+      }
+    },
+    {
+      "attempt": "preflight-red-01",
+      "exit": 1,
+      "phase": "Directed",
+      "rollbackConfirmed": null,
+      "pin": {
+        "path": "target/execucao-states-20260915-01/preflight-red-01/result.json",
+        "sha256": "bf2501c6960799ac93ebbb4061614818415a82357bd90fc8c68102a79b769017"
+      }
+    },
+    {
+      "attempt": "decimal-green-01",
+      "exit": 0,
+      "phase": "Directed",
+      "rollbackConfirmed": null,
+      "pin": {
+        "path": "target/execucao-states-20260915-01/decimal-green-01/result.json",
+        "sha256": "0c5acd9a697e58604178538195412ff2cd32cc84837ca5236eaba7bf3cbd985e"
+      }
+    },
+    {
+      "attempt": "decimal-sql-01",
+      "exit": 0,
+      "phase": "Physical",
+      "rollbackConfirmed": true,
+      "pin": {
+        "path": "target/execucao-states-20260915-01/decimal-sql-01/result.json",
+        "sha256": "bbfe02936977649d8362fadca6f9994494fb29c13eaf16199483c6403e71c8e5"
+      }
+    },
+    {
+      "attempt": "support-red-01",
+      "exit": 1,
+      "phase": "Directed",
+      "rollbackConfirmed": null,
+      "pin": {
+        "path": "target/execucao-states-20260915-01/support-red-01/result.json",
+        "sha256": "23ef436f25f8de62a2f043ea2bde5b21eb727b13fda3c3e5ae45b9e80c737c67"
+      }
+    },
+    {
+      "attempt": "support-green-01",
+      "exit": 0,
+      "phase": "Directed",
+      "rollbackConfirmed": null,
+      "pin": {
+        "path": "target/execucao-states-20260915-01/support-green-01/result.json",
+        "sha256": "5cdea5e0e403b4d00094ed5a464f58d95bf9fd89548552154a498a99502abd61"
+      }
+    },
+    {
+      "attempt": "support-green-02",
+      "exit": 1,
+      "phase": "Directed",
+      "rollbackConfirmed": null,
+      "pin": {
+        "path": "target/execucao-states-20260915-01/support-green-02/result.json",
+        "sha256": "333986c7b2bb8f78a776d69ce5e4afc78e7476c151e08504fc00ee35f6b1d39c"
+      }
+    },
+    {
+      "attempt": "support-green-03",
+      "exit": 0,
+      "phase": "Directed",
+      "rollbackConfirmed": null,
+      "pin": {
+        "path": "target/execucao-states-20260915-01/support-green-03/result.json",
+        "sha256": "d38b0f0284cee8e4184a9c3fc0ee40072e7875392a4534758a4a20fb45787a08"
+      }
+    },
+    {
+      "attempt": "full-verify-01",
+      "exit": -1,
+      "phase": "VerifyPhysical",
+      "rollbackConfirmed": true,
+      "pin": {
+        "path": "target/execucao-states-20260915-01/full-verify-01/result.json",
+        "sha256": "e97a5b3feae5f863254bba3ed06d48c8692ea9e60f1e56291cf3817b6f20e44a"
+      }
+    },
+    {
+      "attempt": "full-verify-02",
+      "exit": -1,
+      "phase": "VerifyPhysical",
+      "rollbackConfirmed": true,
+      "pin": {
+        "path": "target/execucao-states-20260915-01/full-verify-02/result.json",
+        "sha256": "5f8561abe611daaa8c9739dc959e8b04a33c5909381cc0bb80ff2ad28a1bfea1"
+      }
+    },
+    {
+      "attempt": "fiscal-identity-red-01",
+      "exit": 1,
+      "phase": "Directed",
+      "rollbackConfirmed": null,
+      "pin": {
+        "path": "target/execucao-states-20260915-01/fiscal-identity-red-01/result.json",
+        "sha256": "d6e5fffeb92b381284db18aff0ce3a7b5ec613ac6ce2cf6d792e8be4dc64bc08"
+      }
+    },
+    {
+      "attempt": "fiscal-identity-green-01",
+      "exit": 0,
+      "phase": "Directed",
+      "rollbackConfirmed": null,
+      "pin": {
+        "path": "target/execucao-states-20260915-01/fiscal-identity-green-01/result.json",
+        "sha256": "791cb85de6848aae66ed3ff272d18c4930ca028f490292255d2c030dc99703ba"
+      }
+    },
+    {
+      "attempt": "fiscal-identity-sql-01",
+      "exit": 0,
+      "phase": "Physical",
+      "rollbackConfirmed": true,
+      "pin": {
+        "path": "target/execucao-states-20260915-01/fiscal-identity-sql-01/result.json",
+        "sha256": "cf9fb75b8a724f77f52a804103caaacb9dff4ce6e3b26ab32bef05a510e7c917"
+      }
+    },
+    {
+      "attempt": "full-verify-03",
+      "exit": 0,
+      "phase": "VerifyPhysical",
+      "rollbackConfirmed": true,
+      "pin": {
+        "path": "target/execucao-states-20260915-01/full-verify-03/result.json",
+        "sha256": "43af0384aeddb3a06721fb94ec59a2d70f4bcfec8fa24e791240db4f64996db3"
+      }
+    }
+  ],
+  "metrics": [
+    {
+      "pages": 2,
+      "rows": 128,
+      "elapsedMilliseconds": 190,
+      "verifiedPasses": 2,
+      "sourceCalls": 0,
+      "sql": false,
+      "heapPlateauClaimed": false
+    },
+    {
+      "pages": 8,
+      "rows": 512,
+      "elapsedMilliseconds": 331,
+      "verifiedPasses": 2,
+      "sourceCalls": 0,
+      "sql": false,
+      "heapPlateauClaimed": false
+    },
+    {
+      "pages": 32,
+      "rows": 2048,
+      "elapsedMilliseconds": 704,
+      "verifiedPasses": 2,
+      "sourceCalls": 0,
+      "sql": false,
+      "heapPlateauClaimed": false
+    },
+    {
+      "pages": 128,
+      "rows": 8192,
+      "elapsedMilliseconds": 2571,
+      "verifiedPasses": 2,
+      "sourceCalls": 0,
+      "sql": false,
+      "heapPlateauClaimed": false
+    }
+  ],
+  "unit": {
+    "classes": 238,
+    "tests": 2115,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 4
+  },
+  "integration": {
+    "classes": 103,
+    "tests": 483,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "jarCases": [
+    {
+      "id": "set-a-complete",
+      "passed": true,
+      "exit": 0,
+      "expectedExit": 0,
+      "layer": "DISTRIBUTED_JAR_EXTRACTED_PROCESS",
+      "rollbackConfirmed": true,
+      "comparisonsPassed": 19,
+      "factGrainsProved": true,
+      "previews": 33,
+      "previewMatrixProved": true,
+      "elapsedMilliseconds": 31808,
+      "jarSha256": "fa74c0c0ccbdb7321b7ed2409a57cb500c840532cd98fa7b972faccc0880a9fc",
+      "inputSha256": "8e1efbf277ab8f311191510bcc18966a3ab10b87314ed14602a45dd88a505506",
+      "oracleSha256": "096cfa94e435fba865a892fef7f4c131b8d53ed0a1f4325699661d28531cb031",
+      "evidence": [
+        {
+          "path": "target/execucao-states-20260915-01/jar-set-a-01/result.json",
+          "sha256": "8b8b955cbb477cf5bc48e49081d389dcf10158cfff09a006fa44b5faf29c0300"
+        },
+        {
+          "path": "target/execucao-states-20260915-01/jar-set-a-01/binding.json",
+          "sha256": "8142e3820a08f67e3579946ca1e44cb61257eab6dfa738b5f2908e71c36a26de"
+        },
+        {
+          "path": "target/execucao-states-20260915-01/jar-set-a-01/stdout.log",
+          "sha256": "0fa9bf268633fd2450578f8a06579943691e96cfc547a252f016a5d0da323377"
+        },
+        {
+          "path": "target/execucao-states-20260915-01/jar-set-a-01/before.log",
+          "sha256": "83fb98ebfe858dcc6290012029184d9e33664482303d839342c8012ed6e32797"
+        },
+        {
+          "path": "target/execucao-states-20260915-01/jar-set-a-01/after.log",
+          "sha256": "83fb98ebfe858dcc6290012029184d9e33664482303d839342c8012ed6e32797"
+        }
+      ]
+    },
+    {
+      "id": "set-b-complete",
+      "passed": true,
+      "exit": 0,
+      "expectedExit": 0,
+      "layer": "DISTRIBUTED_JAR_EXTRACTED_PROCESS",
+      "rollbackConfirmed": true,
+      "comparisonsPassed": 19,
+      "factGrainsProved": true,
+      "previews": 33,
+      "previewMatrixProved": true,
+      "elapsedMilliseconds": 78481,
+      "jarSha256": "fa74c0c0ccbdb7321b7ed2409a57cb500c840532cd98fa7b972faccc0880a9fc",
+      "inputSha256": "92ce78600793db1078af97645abc0da49df681316fcee1dbeaf3c7a7e6c77df8",
+      "oracleSha256": "9120197515dbe94ea1ad78b5e6820906ca81a4a1f86f51401e58e2d2207b0612",
+      "evidence": [
+        {
+          "path": "target/execucao-states-20260915-01/jar-set-b-01/result.json",
+          "sha256": "d4b162dbd0a763f2a6f734766e486ed8ce5449c421e4ba83c90fec22833214d7"
+        },
+        {
+          "path": "target/execucao-states-20260915-01/jar-set-b-01/binding.json",
+          "sha256": "7b95536ccb2fdb11e7628768d680b8d3b711578a53a12e18ad6d1642ea843c78"
+        },
+        {
+          "path": "target/execucao-states-20260915-01/jar-set-b-01/stdout.log",
+          "sha256": "96634f72a834355f6ca3ee6ac58c52931d32605b42066cd17f2baf216ea2df3b"
+        },
+        {
+          "path": "target/execucao-states-20260915-01/jar-set-b-01/before.log",
+          "sha256": "83fb98ebfe858dcc6290012029184d9e33664482303d839342c8012ed6e32797"
+        },
+        {
+          "path": "target/execucao-states-20260915-01/jar-set-b-01/after.log",
+          "sha256": "83fb98ebfe858dcc6290012029184d9e33664482303d839342c8012ed6e32797"
+        }
+      ]
+    },
+    {
+      "id": "missing-user",
+      "passed": true,
+      "exit": 20,
+      "expectedExit": 20,
+      "layer": "DISTRIBUTED_JAR_EXTRACTED_PROCESS",
+      "rollbackConfirmed": true,
+      "comparisonsPassed": 0,
+      "factGrainsProved": false,
+      "previews": 0,
+      "previewMatrixProved": false,
+      "elapsedMilliseconds": 929,
+      "jarSha256": "fa74c0c0ccbdb7321b7ed2409a57cb500c840532cd98fa7b972faccc0880a9fc",
+      "inputSha256": "69d37d484d4c2aa1658fe70320d40306af97baf454209be8f1ccc0a3e23631ed",
+      "oracleSha256": "b167d43c1d935532fa34ba3c959f7cc575c5be33b4c4a9728bf231f5a3eda697",
+      "evidence": [
+        {
+          "path": "target/execucao-states-20260915-01/jar-missing-user-01/result.json",
+          "sha256": "c6b3083ee3b351096fa111f11caa523c5db6799ec84ff4e7623b2b3e303493d1"
+        },
+        {
+          "path": "target/execucao-states-20260915-01/jar-missing-user-01/binding.json",
+          "sha256": "623f47aee66ae73bc4854acdd5374de10746063711628282f7ca228963a1e676"
+        },
+        {
+          "path": "target/execucao-states-20260915-01/jar-missing-user-01/stdout.log",
+          "sha256": "33d69cab01f01f6197ba5c5811db701a5344b8f6b80c3689cd6fa3de08523ab1"
+        },
+        {
+          "path": "target/execucao-states-20260915-01/jar-missing-user-01/before.log",
+          "sha256": "83fb98ebfe858dcc6290012029184d9e33664482303d839342c8012ed6e32797"
+        },
+        {
+          "path": "target/execucao-states-20260915-01/jar-missing-user-01/after.log",
+          "sha256": "83fb98ebfe858dcc6290012029184d9e33664482303d839342c8012ed6e32797"
+        }
+      ]
+    },
+    {
+      "id": "oracle-value",
+      "passed": true,
+      "exit": 40,
+      "expectedExit": 40,
+      "layer": "DISTRIBUTED_JAR_EXTRACTED_PROCESS",
+      "rollbackConfirmed": true,
+      "comparisonsPassed": 18,
+      "factGrainsProved": true,
+      "previews": 0,
+      "previewMatrixProved": false,
+      "elapsedMilliseconds": 30557,
+      "jarSha256": "fa74c0c0ccbdb7321b7ed2409a57cb500c840532cd98fa7b972faccc0880a9fc",
+      "inputSha256": "8e1efbf277ab8f311191510bcc18966a3ab10b87314ed14602a45dd88a505506",
+      "oracleSha256": "53c497c15c8472f3edfdc3cf42e509eae1ec2b0592a2cff1188846acf56d8371",
+      "evidence": [
+        {
+          "path": "target/execucao-states-20260915-01/jar-oracle-value-01/result.json",
+          "sha256": "26484c1db330cb39fd55439d810655a470f3f9172bbda982932bbc673f93ca12"
+        },
+        {
+          "path": "target/execucao-states-20260915-01/jar-oracle-value-01/binding.json",
+          "sha256": "c926095394ed2c6145171a14d5a109914bf39daf40a60085c789cc2b7f3c1fed"
+        },
+        {
+          "path": "target/execucao-states-20260915-01/jar-oracle-value-01/stdout.log",
+          "sha256": "a260e742a1b6a266ba7469f577d388dd096b3a0dea681beb2881b40aa1e0510a"
+        },
+        {
+          "path": "target/execucao-states-20260915-01/jar-oracle-value-01/before.log",
+          "sha256": "83fb98ebfe858dcc6290012029184d9e33664482303d839342c8012ed6e32797"
+        },
+        {
+          "path": "target/execucao-states-20260915-01/jar-oracle-value-01/after.log",
+          "sha256": "83fb98ebfe858dcc6290012029184d9e33664482303d839342c8012ed6e32797"
+        }
+      ]
+    },
+    {
+      "id": "oracle-fiscal",
+      "passed": true,
+      "exit": 40,
+      "expectedExit": 40,
+      "layer": "DISTRIBUTED_JAR_EXTRACTED_PROCESS",
+      "rollbackConfirmed": true,
+      "comparisonsPassed": 18,
+      "factGrainsProved": true,
+      "previews": 0,
+      "previewMatrixProved": false,
+      "elapsedMilliseconds": 27260,
+      "jarSha256": "fa74c0c0ccbdb7321b7ed2409a57cb500c840532cd98fa7b972faccc0880a9fc",
+      "inputSha256": "8e1efbf277ab8f311191510bcc18966a3ab10b87314ed14602a45dd88a505506",
+      "oracleSha256": "dfc54178a072ac0412614d5498433c3893ce4546217ecada2b95f9a6224c6d5e",
+      "evidence": [
+        {
+          "path": "target/execucao-states-20260915-01/jar-oracle-fiscal-01/result.json",
+          "sha256": "2874391a674c2c7571d63ce9e6140dd3ac8d4a80db35dca7a1647f1adcefacd8"
+        },
+        {
+          "path": "target/execucao-states-20260915-01/jar-oracle-fiscal-01/binding.json",
+          "sha256": "d92e219c3146613e0e395dd884ca051c886d564d2eb2b993bb2875af0d869326"
+        },
+        {
+          "path": "target/execucao-states-20260915-01/jar-oracle-fiscal-01/stdout.log",
+          "sha256": "88e79e60c213b9d7be411826758d7660ac3fbbd486fed9ad91e48aa134d8de11"
+        },
+        {
+          "path": "target/execucao-states-20260915-01/jar-oracle-fiscal-01/before.log",
+          "sha256": "83fb98ebfe858dcc6290012029184d9e33664482303d839342c8012ed6e32797"
+        },
+        {
+          "path": "target/execucao-states-20260915-01/jar-oracle-fiscal-01/after.log",
+          "sha256": "83fb98ebfe858dcc6290012029184d9e33664482303d839342c8012ed6e32797"
+        }
+      ]
+    },
+    {
+      "id": "missing-loc-target",
+      "passed": true,
+      "exit": 40,
+      "expectedExit": 40,
+      "layer": "DISTRIBUTED_JAR_EXTRACTED_PROCESS",
+      "rollbackConfirmed": true,
+      "comparisonsPassed": 18,
+      "factGrainsProved": true,
+      "previews": 0,
+      "previewMatrixProved": false,
+      "elapsedMilliseconds": 25723,
+      "jarSha256": "fa74c0c0ccbdb7321b7ed2409a57cb500c840532cd98fa7b972faccc0880a9fc",
+      "inputSha256": "d23e57aff180b68dcf0f3a5ab7930850069795ff09eaa85d47148542c348cd89",
+      "oracleSha256": "be247cbfe7c31d07059451545adea0e1bbd1f41129501b459186222900e3e525",
+      "evidence": [
+        {
+          "path": "target/execucao-states-20260915-01/jar-missing-loc-01/result.json",
+          "sha256": "b92d20de36e8f029c9adee1d7831b287a9da9c7269aeef9f86b2d6f0bdc14e95"
+        },
+        {
+          "path": "target/execucao-states-20260915-01/jar-missing-loc-01/binding.json",
+          "sha256": "a31655cbd6bb837d52d1fe2ba0f3617756abfaa268c28aefb80ca9e46fd58809"
+        },
+        {
+          "path": "target/execucao-states-20260915-01/jar-missing-loc-01/stdout.log",
+          "sha256": "7964c5af347bfcb1eabfdcb400b7751ccc99fd04c225572602331fed917abf62"
+        },
+        {
+          "path": "target/execucao-states-20260915-01/jar-missing-loc-01/before.log",
+          "sha256": "83fb98ebfe858dcc6290012029184d9e33664482303d839342c8012ed6e32797"
+        },
+        {
+          "path": "target/execucao-states-20260915-01/jar-missing-loc-01/after.log",
+          "sha256": "83fb98ebfe858dcc6290012029184d9e33664482303d839342c8012ed6e32797"
+        }
+      ]
+    }
+  ],
+  "campaign": {
+    "path": "target/execucao-states-20260915-01/artifact-campaign-final-01/result.json",
+    "sha256": "1a8984a69adc95272fbbdb0c3dab09402978854edd09a893de6e7568004cf9dd"
+  },
+  "deliveryAuthority": "FINAL-DELIVERY.json, external seal and independent readback must all pass; catalog alone is not final M/N qualification"
+}

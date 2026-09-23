@@ -1,0 +1,21 @@
+{
+  "invocationId": "9357d516-2d84-4796-8493-58a5da69a306",
+  "executionId": "f9674fe5-db7f-4eb5-9abb-2215ac2868a4",
+  "cycleId": "22e33150-1631-43cf-8479-b71bdcd51d03",
+  "mode": "BACKFILL",
+  "start": "2033-06-05T03:00:00Z",
+  "endExclusive": "2033-06-06T03:00:00Z",
+  "replayOf": "",
+  "idempotencyKey": "B60_eae7593264394874b97f6e0bfa5e3aaf",
+  "leaseSeconds": "30",
+  "pageSize": "2",
+  "maximumPages": "4",
+  "qualityVersion": "bloco55-manifestos-backfill-v2",
+  "qualityFingerprint": "f7a935a8e8017a71e49c8d5347a359e37c4c99708cd4030d0961bbea02411150",
+  "compatibilityVersion": "bloco60-compatible-v1",
+  "template": "MANIFESTOS",
+  "maximumRows": "16",
+  "maximumDistinctRoots": "16",
+  "businessStart": "2033-06-05",
+  "businessEnd": "2033-06-05"
+}

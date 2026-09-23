@@ -1,0 +1,42 @@
+[
+  {
+    "path": "../etl-extracao-dados/database/tabelas/001_criar_tabela_coletas.sql",
+    "sha256": "fe6a1eab02c6268ccfc10acb5ba9b0c8f75e3339abeda79d8ade8b325b7bfb55",
+    "provenance": "LOCAL_STATIC_READ_ONLY"
+  },
+  {
+    "path": "../etl-extracao-dados/database/tabelas/002_criar_tabela_fretes.sql",
+    "sha256": "c6d5e57fddbdd0a9cc41bcc2c4f18cfbc92c4f082426b5c243b829d3e62429e1",
+    "provenance": "LOCAL_STATIC_READ_ONLY"
+  },
+  {
+    "path": "../etl-extracao-dados/database/views/012_criar_view_fretes_powerbi.sql",
+    "sha256": "92fde7f7185cacc9ad25079a2397f570c51c79c85281011a3fee75688b422502",
+    "provenance": "LOCAL_STATIC_READ_ONLY"
+  },
+  {
+    "path": "../etl-extracao-dados/src/main/java/br/com/extrator/dominio/coletas/ColetaStatusPolicy.java",
+    "sha256": "5d5dcdd0548362413ce5bce851706536f1f2fa49b98c1642bd54fc1db346c025",
+    "provenance": "LOCAL_STATIC_READ_ONLY"
+  },
+  {
+    "path": "docs/catalogos/caracterizacao-v2-012/manifesto.json",
+    "sha256": "dc20b409ed726055bb6915fd6122af69704a975e570cd14867430c4a84496787",
+    "provenance": "LOCAL_STATIC_READ_ONLY"
+  },
+  {
+    "path": "docs/catalogos/caracterizacao-v2-012/q-fnd-02/manifesto.json",
+    "sha256": "45f0ac5b8f0f2a032534228b8366abc2843e4b1817a3352781d3fd128500e604",
+    "provenance": "LOCAL_STATIC_READ_ONLY"
+  },
+  {
+    "path": "docs/catalogos/bootstrap-v2-047/manifesto.json",
+    "sha256": "e6b33e3b035dcc6dd817e4f5e783e8b0585e077ab3ec4a7c5b13ced8730615be",
+    "provenance": "LOCAL_STATIC_READ_ONLY"
+  },
+  {
+    "path": "docs/catalogos/medicao-v2-050/manifesto.json",
+    "sha256": "4c9772d3fc0a80f3bbbee5b38dd07423d512392b8e0892d8d9293556708c7428",
+    "provenance": "LOCAL_STATIC_READ_ONLY"
+  }
+]

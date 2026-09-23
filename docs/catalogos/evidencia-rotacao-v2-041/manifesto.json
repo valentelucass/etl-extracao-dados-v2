@@ -1,0 +1,36 @@
+{
+  "schemaVersion": "v2-041-sanitized-attestation-v1",
+  "fixture": "fixtures/atestado-completo.synthetic.json",
+  "fixtureSha256": "e50cd04fda6269b142532b23ae240732f45c662bed998d2e458338b93c0fbbce",
+  "credentialClasses": [
+    "ESL_REST",
+    "ESL_GRAPHQL",
+    "ESL_DATA_EXPORT",
+    "RASTER",
+    "SQL_SERVER_LEGACY",
+    "V2_SHADOW_TESTS"
+  ],
+  "approvalRoles": [
+    "SECURITY",
+    "LEGACY_OWNER",
+    "LEGACY_OPERATIONS",
+    "ESL_INTEGRATION_OWNER",
+    "RASTER_OWNER",
+    "DBA",
+    "V2_ENVIRONMENT_OWNER"
+  ],
+  "scanProfiles": [
+    "OFFLINE_SECRET_SCAN|WORKTREE",
+    "GITLEAKS|WORKTREE",
+    "GITLEAKS|GIT_HISTORY"
+  ],
+  "limitations": [
+    "NO_REMOTE_CHECK_BY_VALIDATOR",
+    "NO_AUTHENTICITY_VERIFICATION",
+    "NO_OPERATIONAL_TRUTH_ESTABLISHED",
+    "NO_NOMINAL_OWNER_ACCEPTANCE_VERIFICATION",
+    "NO_V2_041_STATE_CHANGE",
+    "NO_DOWNSTREAM_AUTHORIZATION_INHERITANCE"
+  ],
+  "negativeCaseCount": 19
+}

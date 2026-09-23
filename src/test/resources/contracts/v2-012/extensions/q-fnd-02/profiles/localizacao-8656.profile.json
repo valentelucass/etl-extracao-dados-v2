@@ -1,0 +1,144 @@
+{
+  "schemaVersion": "V2_012_Q_FND_02_PROFILE_V1",
+  "profileId": "V2_012_LOCALIZACAO_8656_DATA_EXPORT",
+  "entity": "LOCALIZACAO_CARGAS",
+  "channels": [
+    {
+      "channelId": "LOCALIZACAO_DATA_EXPORT_8656",
+      "sourceProfile": "DATA_EXPORT",
+      "contract": {
+        "contractId": "dataexport-8656",
+        "contractVersion": "2026-09-04.v2-025b.1",
+        "releaseFingerprint": "da95fc17fc3db2fae7635c5456166d72af844b1d826e84ab6c2ba8b6f1b65c24",
+        "identityFingerprint": "14af11dce5fd7696238907b72f8f6c8c77f86a4cff3045b489da5eb132c0d6f0"
+      },
+      "sourceKey": {"path": "/corporation_sequence_number", "wireType": "INTEGER", "typeTagged": true},
+      "expectedPaths": [
+        "/corporation_sequence_number",
+        "/type",
+        "/service_at",
+        "/invoices_volumes",
+        "/taxed_weight",
+        "/invoices_value",
+        "/total",
+        "/service_type",
+        "/fit_crn_psn_nickname",
+        "/fit_dpn_delivery_prediction_at",
+        "/fit_dyn_name",
+        "/fit_dyn_drt_nickname",
+        "/fit_fsn_name",
+        "/fit_fln_status",
+        "/fit_fln_cln_nickname",
+        "/fit_o_n_name",
+        "/fit_o_n_drt_nickname"
+      ],
+      "fieldTypes": {
+        "/corporation_sequence_number": "INTEGER",
+        "/type": "UNVERIFIED_ORACLE_REQUIRED",
+        "/service_at": "UNVERIFIED_ORACLE_REQUIRED",
+        "/invoices_volumes": "UNVERIFIED_ORACLE_REQUIRED",
+        "/taxed_weight": "UNVERIFIED_ORACLE_REQUIRED",
+        "/invoices_value": "UNVERIFIED_ORACLE_REQUIRED",
+        "/total": "UNVERIFIED_ORACLE_REQUIRED",
+        "/service_type": "UNVERIFIED_ORACLE_REQUIRED",
+        "/fit_crn_psn_nickname": "UNVERIFIED_ORACLE_REQUIRED",
+        "/fit_dpn_delivery_prediction_at": "UNVERIFIED_ORACLE_REQUIRED",
+        "/fit_dyn_name": "UNVERIFIED_ORACLE_REQUIRED",
+        "/fit_dyn_drt_nickname": "UNVERIFIED_ORACLE_REQUIRED",
+        "/fit_fsn_name": "UNVERIFIED_ORACLE_REQUIRED",
+        "/fit_fln_status": "UNVERIFIED_ORACLE_REQUIRED",
+        "/fit_fln_cln_nickname": "UNVERIFIED_ORACLE_REQUIRED",
+        "/fit_o_n_name": "UNVERIFIED_ORACLE_REQUIRED",
+        "/fit_o_n_drt_nickname": "UNVERIFIED_ORACLE_REQUIRED"
+      },
+      "presenceByPath": {
+        "/corporation_sequence_number": ["ABSENT", "NULL", "VALUE"],
+        "/type": ["ABSENT", "NULL", "VALUE"],
+        "/service_at": ["ABSENT", "NULL", "VALUE"],
+        "/invoices_volumes": ["ABSENT", "NULL", "VALUE"],
+        "/taxed_weight": ["ABSENT", "NULL", "VALUE"],
+        "/invoices_value": ["ABSENT", "NULL", "VALUE"],
+        "/total": ["ABSENT", "NULL", "VALUE"],
+        "/service_type": ["ABSENT", "NULL", "VALUE"],
+        "/fit_crn_psn_nickname": ["ABSENT", "NULL", "VALUE"],
+        "/fit_dpn_delivery_prediction_at": ["ABSENT", "NULL", "VALUE"],
+        "/fit_dyn_name": ["ABSENT", "NULL", "VALUE"],
+        "/fit_dyn_drt_nickname": ["ABSENT", "NULL", "VALUE"],
+        "/fit_fsn_name": ["ABSENT", "NULL", "VALUE"],
+        "/fit_fln_status": ["ABSENT", "NULL", "VALUE"],
+        "/fit_fln_cln_nickname": ["ABSENT", "NULL", "VALUE"],
+        "/fit_o_n_name": ["ABSENT", "NULL", "VALUE"],
+        "/fit_o_n_drt_nickname": ["ABSENT", "NULL", "VALUE"]
+      },
+      "syntheticOnly": false,
+      "observationOnly": false,
+      "publicationBlocked": true,
+      "rootOrFreshnessAuthority": true,
+      "updatedAtFreshness": false,
+      "shortPageIsTerminal": false,
+      "completenessProven": false,
+      "snapshotProven": false,
+      "filterPolicy": "FREIGHTS_SERVICE_AT_CANDIDATE_FILTER_TRANSLATION_UNPROVEN",
+      "temporalTranslation": "SERVICE_AT_FILTER_TRANSLATION_UNPROVEN"
+    }
+  ],
+  "explicitScopeRequired": true,
+  "relationshipEnabled": false,
+  "sweepEnabled": false,
+  "publicationEnabled": false,
+  "bootstrapEnabled": false,
+  "parityEnabled": false,
+  "statusBranchNicknameState": "ABSENT_UNSOURCED_LEGACY",
+  "freshnessPolicy": "SERVICE_AT_ONLY_CANDIDATE_TRANSLATION_UNPROVEN_NO_TECHNICAL_TIEBREAKER",
+  "knownTerminalStatuses": ["finished", "delivered", "canceled", "cancelled"],
+  "decisionPolicies": {
+    "LOC-01": "CORPORATION_SEQUENCE_INTEGER_SCOPED_ONLY_SEQUENCE_NUMBER_FORBIDDEN",
+    "LOC-02": "PER_PATH_ABSENT_NULL_VALUE_RAW_TYPED_PARSE_PATH_PROVENANCE_ABSENT_PRESERVES",
+    "LOC-03": "LOCAL_VOLUME_ZERO_REAL_FREIGHT_FALLBACK_DEFERRED_EXACT_SCOPED_CANDIDATE_AMBIGUITY_BLOCKS",
+    "LOC-04": "STRICT_NUMERIC_NO_LOCALE_ROUNDING_TRUNCATION_INVALID_OVERFLOW_SCALE_QUARANTINE",
+    "LOC-05": "SERVICE_AT_ONLY_OLDER_NOOP_EQUAL_IDENTICAL_REPLAY_EQUAL_DIVERGENT_AND_TWO_NULL_DIVERGENT_QUARANTINE",
+    "LOC-06": "STATUS_TRIM_LOWER_NULL_BLANK_SEM_STATUS_EXPLICIT_TERMINALS_UNKNOWN_NON_TERMINAL",
+    "LOC-07": "STATUS_BRANCH_NICKNAME_ABSENT_UNSOURCED_LEGACY_NO_SIMILAR_FALLBACK"
+  },
+  "numericPolicies": {
+    "/invoices_volumes": {
+      "grammar": "ASCII_DIGITS_NO_SIGN_NO_GROUPING_NO_WHITESPACE",
+      "precision": 10,
+      "scale": 0,
+      "invalidPolicy": "QUARANTINE_PRESERVE_RAW_NEVER_ZERO_OR_NULL"
+    },
+    "/taxed_weight": {
+      "grammar": "ASCII_OPTIONAL_MINUS_DIGITS_OPTIONAL_DOT_FRACTION_NO_GROUPING_NO_WHITESPACE",
+      "precision": 38,
+      "scale": 9,
+      "invalidPolicy": "QUARANTINE_PRESERVE_RAW_NO_ROUNDING"
+    },
+    "/invoices_value": {
+      "grammar": "ASCII_OPTIONAL_MINUS_DIGITS_OPTIONAL_DOT_FRACTION_NO_GROUPING_NO_WHITESPACE",
+      "precision": 38,
+      "scale": 9,
+      "invalidPolicy": "QUARANTINE_PRESERVE_RAW_NO_ROUNDING"
+    },
+    "/total": {
+      "grammar": "ASCII_OPTIONAL_MINUS_DIGITS_OPTIONAL_DOT_FRACTION_NO_GROUPING_NO_WHITESPACE",
+      "precision": 38,
+      "scale": 9,
+      "invalidPolicy": "QUARANTINE_PRESERVE_RAW_NO_ROUNDING"
+    }
+  },
+  "absencePolicy": "INCREMENTAL_ABSENCE_NEVER_DEACTIVATES_SWEEP_DISABLED",
+  "limits": {
+    "maximumBytes": 65536,
+    "maximumRows": 1000,
+    "maximumPages": 100,
+    "maximumPaths": 256,
+    "maximumDepth": 16,
+    "maximumPageSize": 100,
+    "maximumMicrobatch": 100,
+    "maximumGraphQlEdges": 100,
+    "terminalContinuationProbePages": 1
+  },
+  "profileStatus": "PREPARED_NOT_EXECUTED",
+  "gateStatus": "ORACLE_REQUIRED",
+  "providerEvidence": "NOT_EXECUTED"
+}

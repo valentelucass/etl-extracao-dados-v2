@@ -1,0 +1,284 @@
+[
+  {
+    "id": "AUDIT_ACK_LOST",
+    "request": "requests/AUDIT_ACK_LOST.json",
+    "layer": "REAL_WINDOWS_SQL_CLIENT_FAULT_PROBE",
+    "artifact": "administered",
+    "account": "etl_v2_exec",
+    "command": "run",
+    "fault": "AUDIT_ACK_LOST",
+    "scenario": "NORMAL",
+    "group": "B60_C_4BD83634F76E894F",
+    "delayMilliseconds": 0,
+    "cancel": false,
+    "waitBeforeSeconds": 0,
+    "pair": "",
+    "expectedExit": [
+      40
+    ],
+    "expectedHttp": [
+      1
+    ],
+    "expected": {
+      "publications": 0,
+      "seals": 0,
+      "consumptions": 1
+    },
+    "unchangedFrom": ""
+  },
+  {
+    "id": "DQ_MISSING",
+    "request": "requests/DQ_MISSING.json",
+    "layer": "REAL_WINDOWS_SQL_CLIENT_FAULT_PROBE",
+    "artifact": "administered",
+    "account": "etl_v2_exec",
+    "command": "run",
+    "fault": "DQ_MISSING",
+    "scenario": "NORMAL",
+    "group": "B60_C_AF7DE8B32BCBA5AB",
+    "delayMilliseconds": 0,
+    "cancel": false,
+    "waitBeforeSeconds": 0,
+    "pair": "",
+    "expectedExit": [
+      40
+    ],
+    "expectedHttp": [
+      2
+    ],
+    "expected": {
+      "publications": 0,
+      "seals": 0,
+      "consumptions": 1
+    },
+    "unchangedFrom": ""
+  },
+  {
+    "id": "DQ_ACK_LOST",
+    "request": "requests/DQ_ACK_LOST.json",
+    "layer": "REAL_WINDOWS_SQL_CLIENT_FAULT_PROBE",
+    "artifact": "administered",
+    "account": "etl_v2_exec",
+    "command": "run",
+    "fault": "DQ_ACK_LOST",
+    "scenario": "NORMAL",
+    "group": "B60_C_B83CBDCE13E35986",
+    "delayMilliseconds": 0,
+    "cancel": false,
+    "waitBeforeSeconds": 0,
+    "pair": "",
+    "expectedExit": [
+      40
+    ],
+    "expectedHttp": [
+      2
+    ],
+    "expected": {
+      "publications": 0,
+      "seals": 0,
+      "consumptions": 1
+    },
+    "unchangedFrom": ""
+  },
+  {
+    "id": "PREPARE_ACK_LOST",
+    "request": "requests/PREPARE_ACK_LOST.json",
+    "layer": "REAL_WINDOWS_SQL_CLIENT_FAULT_PROBE",
+    "artifact": "administered",
+    "account": "etl_v2_exec",
+    "command": "run",
+    "fault": "PREPARE_ACK_LOST",
+    "scenario": "NORMAL",
+    "group": "B60_C_597D030D0DA41CCB",
+    "delayMilliseconds": 0,
+    "cancel": false,
+    "waitBeforeSeconds": 0,
+    "pair": "",
+    "expectedExit": [
+      40
+    ],
+    "expectedHttp": [
+      2
+    ],
+    "expected": {
+      "publications": 0,
+      "seals": 0,
+      "consumptions": 1
+    },
+    "unchangedFrom": ""
+  },
+  {
+    "id": "HALT_BEFORE_PREPARE",
+    "request": "requests/HALT_BEFORE_PREPARE.json",
+    "layer": "REAL_WINDOWS_SQL_CLIENT_FAULT_PROBE",
+    "artifact": "administered",
+    "account": "etl_v2_exec",
+    "command": "run",
+    "fault": "HALT_BEFORE_PREPARE",
+    "scenario": "NORMAL",
+    "group": "B60_C_8E6292DA5749A678",
+    "delayMilliseconds": 0,
+    "cancel": false,
+    "waitBeforeSeconds": 0,
+    "pair": "",
+    "expectedExit": [
+      86
+    ],
+    "expectedHttp": [
+      2
+    ],
+    "expected": {
+      "publications": 0,
+      "seals": 0,
+      "consumptions": 1
+    },
+    "unchangedFrom": ""
+  },
+  {
+    "id": "HALT_AFTER_PREPARE",
+    "request": "requests/HALT_AFTER_PREPARE.json",
+    "layer": "REAL_WINDOWS_SQL_CLIENT_FAULT_PROBE",
+    "artifact": "administered",
+    "account": "etl_v2_exec",
+    "command": "run",
+    "fault": "HALT_AFTER_PREPARE",
+    "scenario": "NORMAL",
+    "group": "B60_C_D7AA1FEFADF23FF1",
+    "delayMilliseconds": 0,
+    "cancel": false,
+    "waitBeforeSeconds": 0,
+    "pair": "",
+    "expectedExit": [
+      86
+    ],
+    "expectedHttp": [
+      2
+    ],
+    "expected": {
+      "publications": 0,
+      "seals": 0,
+      "consumptions": 1
+    },
+    "unchangedFrom": ""
+  },
+  {
+    "id": "HALT_BEFORE_SEAL",
+    "request": "requests/HALT_BEFORE_SEAL.json",
+    "layer": "REAL_WINDOWS_SQL_CLIENT_FAULT_PROBE",
+    "artifact": "administered",
+    "account": "etl_v2_exec",
+    "command": "run",
+    "fault": "HALT_BEFORE_SEAL",
+    "scenario": "NORMAL",
+    "group": "B60_C_2A05BB56F9F110C7",
+    "delayMilliseconds": 0,
+    "cancel": false,
+    "waitBeforeSeconds": 0,
+    "pair": "",
+    "expectedExit": [
+      86
+    ],
+    "expectedHttp": [
+      2
+    ],
+    "expected": {
+      "publications": 0,
+      "seals": 0,
+      "consumptions": 1
+    },
+    "unchangedFrom": ""
+  },
+  {
+    "id": "HALT_AFTER_SEAL",
+    "request": "requests/HALT_AFTER_SEAL.json",
+    "layer": "REAL_WINDOWS_SQL_CLIENT_FAULT_PROBE",
+    "artifact": "administered",
+    "account": "etl_v2_exec",
+    "command": "run",
+    "fault": "HALT_AFTER_SEAL",
+    "scenario": "NORMAL",
+    "group": "B60_C_365396FB6CF326E7",
+    "delayMilliseconds": 0,
+    "cancel": false,
+    "waitBeforeSeconds": 0,
+    "pair": "",
+    "expectedExit": [
+      86
+    ],
+    "expectedHttp": [
+      2
+    ],
+    "expected": {
+      "publications": 0,
+      "seals": 1,
+      "consumptions": 1
+    },
+    "unchangedFrom": ""
+  },
+  {
+    "id": "HALT_AFTER_SEAL_RESUME",
+    "request": "requests/HALT_AFTER_SEAL_RESUME.json",
+    "layer": "OFFICIAL_JAR_WINDOWS_SQL",
+    "artifact": "administered",
+    "account": "etl_v2_exec",
+    "command": "run",
+    "fault": "NONE",
+    "scenario": "NORMAL",
+    "group": "B60_C_81D90F0D4F9C280C",
+    "delayMilliseconds": 0,
+    "cancel": false,
+    "waitBeforeSeconds": 0,
+    "pair": "",
+    "expectedExit": [
+      0
+    ],
+    "expectedHttp": [
+      0
+    ],
+    "expected": {
+      "publications": 1,
+      "seals": 1,
+      "consumptions": 1
+    },
+    "unchangedFrom": ""
+  },
+  {
+    "id": "HALT_BEFORE_APPLY",
+    "request": "requests/HALT_BEFORE_APPLY.json",
+    "layer": "REAL_WINDOWS_SQL_CLIENT_FAULT_PROBE",
+    "artifact": "administered",
+    "account": "etl_v2_exec",
+    "command": "run",
+    "fault": "HALT_BEFORE_APPLY",
+    "scenario": "NORMAL",
+    "group": "B60_C_736ED7F7CC049AA1",
+    "delayMilliseconds": 0,
+    "cancel": false,
+    "waitBeforeSeconds": 0,
+    "pair": "",
+    "expectedExit": [
+      86
+    ],
+    "expectedHttp": [
+      2
+    ],
+    "expected": {
+      "failedChecks": 0,
+      "attempts": 1,
+      "pages": 2,
+      "state": "PROMOTED",
+      "stageRows": 2,
+      "consumptions": 1,
+      "passedChecks": 4,
+      "typedHistory": 0,
+      "completedChecks": 4,
+      "quality": "PASSED",
+      "candidateRows": 2,
+      "publications": 0,
+      "auditedRows": 2,
+      "seals": 1,
+      "applicationRows": 0
+    },
+    "unchangedFrom": ""
+  }
+]

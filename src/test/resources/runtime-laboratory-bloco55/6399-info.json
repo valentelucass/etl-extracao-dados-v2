@@ -1,0 +1,174 @@
+{
+  "fields": [
+    {
+      "name": "sequence_code",
+      "type": "integer"
+    },
+    {
+      "name": "mft_pfs_pck_sequence_code",
+      "type": "integer"
+    },
+    {
+      "name": "mft_mfs_number",
+      "type": "integer"
+    },
+    {
+      "name": "created_at",
+      "type": "string"
+    },
+    {
+      "name": "departured_at",
+      "type": "string"
+    },
+    {
+      "name": "closed_at",
+      "type": "string"
+    },
+    {
+      "name": "finished_at",
+      "type": "string"
+    },
+    {
+      "name": "status",
+      "type": "string"
+    },
+    {
+      "name": "mdfe_status",
+      "type": "string"
+    },
+    {
+      "name": "mft_mfs_key",
+      "type": "string"
+    },
+    {
+      "name": "km",
+      "type": "string"
+    },
+    {
+      "name": "total_cost",
+      "type": "string"
+    },
+    {
+      "name": "manifest_freights_total",
+      "type": "string"
+    },
+    {
+      "name": "total_taxed_weight",
+      "type": "string"
+    },
+    {
+      "name": "mft_vie_weight_capacity",
+      "type": "string"
+    },
+    {
+      "name": "manifest_items_count",
+      "type": "string"
+    },
+    {
+      "name": "finalized_manifest_items_count",
+      "type": "string"
+    },
+    {
+      "name": "mft_ape_name",
+      "type": "string"
+    },
+    {
+      "name": "mft_man_name",
+      "type": "string"
+    },
+    {
+      "name": "mft_vie_license_plate",
+      "type": "string"
+    },
+    {
+      "name": "mft_vie_vee_name",
+      "type": "string"
+    },
+    {
+      "name": "mft_vie_onr_name",
+      "type": "string"
+    },
+    {
+      "name": "mft_mdr_iil_name",
+      "type": "string"
+    },
+    {
+      "name": "mft_crn_psn_nickname",
+      "type": "string"
+    },
+    {
+      "name": "mft_cat_cot_number",
+      "type": "string"
+    },
+    {
+      "name": "contract_type",
+      "type": "string"
+    },
+    {
+      "name": "mft_mdr_contract_type",
+      "type": "string"
+    },
+    {
+      "name": "calculation_type",
+      "type": "string"
+    },
+    {
+      "name": "cargo_type",
+      "type": "string"
+    },
+    {
+      "name": "mft_uer_name",
+      "type": "string"
+    },
+    {
+      "name": "mft_aoe_rer_name",
+      "type": "string"
+    },
+    {
+      "name": "mft_aoe_comments",
+      "type": "string"
+    },
+    {
+      "name": "mft_cat_cot_status",
+      "type": "string"
+    },
+    {
+      "name": "mft_iks_id",
+      "type": "string"
+    },
+    {
+      "name": "mft_s_n_sequence_code",
+      "type": "string"
+    },
+    {
+      "name": "mft_tl1_license_plate",
+      "type": "string"
+    },
+    {
+      "name": "mft_tl2_license_plate",
+      "type": "string"
+    },
+    {
+      "name": "operational_comments",
+      "type": "string"
+    },
+    {
+      "name": "closing_comments",
+      "type": "string"
+    },
+    {
+      "name": "mft_s_n_svs_sge_pyr_nickname",
+      "type": "string"
+    },
+    {
+      "name": "mft_s_n_svs_sge_sse_name",
+      "type": "string"
+    }
+  ],
+  "filters": [
+    {
+      "name": "manifests.service_date",
+      "type": "date"
+    }
+  ]
+}

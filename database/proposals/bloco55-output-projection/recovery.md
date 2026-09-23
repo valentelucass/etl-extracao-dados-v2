@@ -1,0 +1,1 @@
+V023: antes do commit, ROLLBACK e comparação exata do catálogo/6.749 linhas. Após commit, correção somente por próxima migration livre. Preservar publicações, referências, grants e scopes. Nenhuma concessão nova. Parar diante de dependência não resolvida ou estado divergente.

@@ -1,0 +1,183 @@
+{
+  "version": 1,
+  "status": "CADEIA_INTEGRAL_LOCAL_CONCLUIDA",
+  "construction": "39/45",
+  "historicalAcceptances": "67/115",
+  "newAcceptances": 0,
+  "sourceCalls": 0,
+  "fronts": [
+    {
+      "id": "A",
+      "title": "Base e reprodução",
+      "status": "CONCLUIDA_NO_ESCOPO_LOCAL",
+      "result": "3.349 arquivos da base0154 preservados em before; controle válido e dois RED funcionais; V099 e inventário nominal conservados.",
+      "proofIds": [
+        "P01",
+        "P05",
+        "P24"
+      ],
+      "externalAcceptance": false
+    },
+    {
+      "id": "B",
+      "title": "Contrato integral",
+      "status": "CONCLUIDA_NO_ESCOPO_LOCAL",
+      "result": "Versões locais fechadas, onze famílias e apoios obrigatórios, paths/pins/limites, janela, relógio e escopo explícitos; ausência recusa antes de SQL.",
+      "proofIds": [
+        "P02",
+        "P03"
+      ],
+      "externalAcceptance": false
+    },
+    {
+      "id": "C",
+      "title": "Captura das seis famílias",
+      "status": "CONCLUIDA_NO_ESCOPO_LOCAL",
+      "result": "COL/FRE/MAN/COT/LOC/USER usam parsers, extratores, auditoria e staging existentes. FRE compartilha release/revisão nos dois caminhos; USER mantém snapshot.",
+      "proofIds": [
+        "P04",
+        "P05",
+        "P06",
+        "P07",
+        "P08",
+        "P09"
+      ],
+      "externalAcceptance": false
+    },
+    {
+      "id": "D",
+      "title": "Apoios explícitos",
+      "status": "CONCLUIDA_NO_ESCOPO_LOCAL",
+      "result": "Cinco referências e nove grupos de suplementos, termos, relações e fiscal recebidos; resolução SQL em conjuntos, revisão/vigência e recusas físicas.",
+      "proofIds": [
+        "P07",
+        "P12",
+        "P14"
+      ],
+      "externalAcceptance": false
+    },
+    {
+      "id": "E",
+      "title": "Composição pelo JAR",
+      "status": "CONCLUIDA_NO_ESCOPO_LOCAL",
+      "result": "A2/B24 executados pelo JAR extraído: onze entradas, cinco fatos,19 saídas, contexto e rollback. Quatro expansões e Raster integrados.",
+      "proofIds": [
+        "P08",
+        "P10",
+        "P11",
+        "P13"
+      ],
+      "externalAcceptance": false
+    },
+    {
+      "id": "F",
+      "title": "Entidades e contratos",
+      "status": "CONCLUIDA_NO_ESCOPO_LOCAL",
+      "result": "Onze entidades/2.437 campos do inventário preservados; decisões explícitas, presença, precisão, frescor e V099 conferidos. V1 lida como comparação, sem execução.",
+      "proofIds": [
+        "P04",
+        "P05",
+        "P06",
+        "P07",
+        "P09",
+        "P10",
+        "P14"
+      ],
+      "externalAcceptance": false
+    },
+    {
+      "id": "G",
+      "title": "Oráculos e variações",
+      "status": "CONCLUIDA_NO_ESCOPO_LOCAL",
+      "result": "Inputs A/B com datas/IDs/valores/relações/páginas distintas e esperados autorados antes do SQL; mutações de valor, chave, cardinalidade, precisão e fato recusadas.",
+      "proofIds": [
+        "P13",
+        "P14",
+        "P15"
+      ],
+      "externalAcceptance": false
+    },
+    {
+      "id": "H",
+      "title": "Sweep e preview",
+      "status": "CONCLUIDA_NO_ESCOPO_LOCAL",
+      "result": "Quatro observações declaradas, recibo físico, página/owner/contagem por raiz e recusa de apply; matriz nominal33 preservada por ID/disposição/razão.",
+      "proofIds": [
+        "P11",
+        "P16",
+        "P17"
+      ],
+      "externalAcceptance": false
+    },
+    {
+      "id": "I",
+      "title": "Falhas e recuperação",
+      "status": "CONCLUIDA_NO_ESCOPO_LOCAL",
+      "result": "Cancelamento, deadline, lease, hash, suporte/referência e materialização; replay/revisão/isolações; estados independentes conferidos, rollback e processos reconciliados.",
+      "proofIds": [
+        "P18",
+        "P19",
+        "P20",
+        "P21"
+      ],
+      "externalAcceptance": false
+    },
+    {
+      "id": "J",
+      "title": "Classes e arquitetura",
+      "status": "CONCLUIDA_NO_ESCOPO_LOCAL",
+      "result": "46 candidatos revisados; nove tipos novos com consumidor, três suportes Raster movidos byte-idênticos para testes; nove remoções anteriores preservadas, sem quota.",
+      "proofIds": [
+        "P22"
+      ],
+      "externalAcceptance": false
+    },
+    {
+      "id": "K",
+      "title": "Regressão e pacote",
+      "status": "CONCLUIDA_NO_ESCOPO_LOCAL",
+      "result": "Build VerifyPhysical, IDs de testes reconciliados, quatro skips históricos, análise estática/cobertura, schema102 e cinco processos do JAR extraído.",
+      "proofIds": [
+        "P21",
+        "P23"
+      ],
+      "externalAcceptance": false
+    },
+    {
+      "id": "L",
+      "title": "Segunda revisão",
+      "status": "CONCLUIDA_NO_ESCOPO_LOCAL",
+      "result": "Mesmo agente reviu diff/caminhos, defaults, oráculos, granularidade, resiliência, classes, seleção de testes, logs e embalagem. Falhas locais corrigidas permanecem nos recibos.",
+      "proofIds": [
+        "P14",
+        "P15",
+        "P18",
+        "P22",
+        "P23"
+      ],
+      "externalAcceptance": false
+    },
+    {
+      "id": "M",
+      "title": "Sucessão e readback",
+      "status": "CONCLUIDA_NO_ESCOPO_LOCAL",
+      "result": "Sucessor explícito de EntityAlignment, snapshots exatos, pointers e manifests preservados; patch/overlay aplicados e revertidos em cópia; scanner completo. A revisão final é vinculada pelo selo externo.",
+      "proofIds": [
+        "P24"
+      ],
+      "externalAcceptance": false,
+      "finalEvidenceAuthority": "External delivery seal binds final diff, canonical scanner, succession checks, archive and complete readback; no circular self-hash in this catalog."
+    },
+    {
+      "id": "N",
+      "title": "Entrega única",
+      "status": "CONCLUIDA_NO_ESCOPO_LOCAL",
+      "result": "Código aplicável, runtime, inputs/oráculos, testes, tentativas, revisões e matrizes; selo/readback e continuidade.39/45 e67/115 sem alteração; parcelas externas G01–G08 explícitas.",
+      "proofIds": [
+        "P24"
+      ],
+      "externalAcceptance": false,
+      "finalEvidenceAuthority": "External delivery seal binds final diff, canonical scanner, succession checks, archive and complete readback; no circular self-hash in this catalog."
+    }
+  ]
+}

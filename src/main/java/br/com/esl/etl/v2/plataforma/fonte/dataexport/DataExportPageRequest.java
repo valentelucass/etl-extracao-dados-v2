@@ -20,6 +20,9 @@ public record DataExportPageRequest(
         Objects.requireNonNull(template, "O template é obrigatório.");
         Objects.requireNonNull(businessDateWindow, "A janela de data de negócio é obrigatória.");
         updatedAtWindow = updatedAtWindow == null ? Optional.empty() : updatedAtWindow;
+        if (template.laboratoryBackfillOnly() && updatedAtWindow.isPresent()) {
+            throw new IllegalArgumentException("UPDATED_AT_FILTER_NOT_CONTRACTED");
+        }
         if (page < 1) {
             throw new IllegalArgumentException("A página deve ser maior que zero.");
         }
@@ -60,6 +63,9 @@ public record DataExportPageRequest(
     public Map<SearchPath, DataExportFilterValue> filters() {
         final Map<SearchPath, DataExportFilterValue> filters = new LinkedHashMap<>();
         filters.put(template.businessDateFilter(), businessDateWindow);
+        if (template == DataExportTemplate.CONTAS_A_PAGAR) {
+            filters.put(new SearchPath("accounting_debits", "created_at"), businessDateWindow);
+        }
         updatedAtWindow.ifPresent(value -> filters.put(template.updatedAtFilter(), value));
         return Collections.unmodifiableMap(filters);
     }

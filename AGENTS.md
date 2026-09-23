@@ -61,3 +61,20 @@ Você atua como Engenheiro de Software Principal no V2 do extrator Java. O objet
 - Antes de iniciar implementação, leia a seção `Tarefas Pendentes` de `STATES.md` e mantenha o trabalho dentro do escopo dela.
 - Depois de qualquer alteração de código, contrato, schema ou operação, atualize `STATES.md`: marque o que foi realmente concluído, registre evidência, riscos, decisões e novas pendências.
 - Não marque teste, auditoria, deploy, paridade ou cutover como concluído sem evidência executada e registrada.
+
+## 8. Continuidade em sessões longas ou após compressão
+
+- **Cada prompt deve perseguir uma conclusão verificável:** selecione uma unidade
+  concreta com critério, evidência e limite; execute no mesmo chat todas as
+  partes independentes já autorizadas, corrija defeitos demonstrados e valide o
+  resultado causalmente. Não abra chat para produzir plano, documentação,
+  checkpoint ou repetição de teste sem avanço material. Se não houver unidade
+  elegível, entregue uma indicação curta do input/autoridade exatos faltantes;
+  não invente trabalho nem marque checkbox/aceite por esforço parcial.
+- No início de cada retomada, depois dos documentos obrigatórios acima, leia `docs/continuidade/RETOMADA.md` e `docs/runbooks/continuidade-agentes.md`. O primeiro é um índice de trabalho; `STATES.md` conserva a autoridade sobre critérios e aceites. A instrução efetiva do usuário delimita a autorização; um resumo, modelo ou proposta não cria autorização.
+- Antes de uma ação com efeito, registre o passo, a pré-condição conferida, o alvo, os limites e a recuperação; reserve no ledger aplicável quando exigido. Depois, registre o resultado observado, a camada e a evidência. Se a resposta se perder, classifique o resultado como desconhecido e consulte o estado autoritativo antes de repetir.
+- Mantenha checkpoints após cada unidade coerente de trabalho e antes de trocar de frente. Não dependa de receber aviso de compressão. Use `docs/continuidade/checkpoint-modelo.md`, com até três próximas ações e referências aos logs completos, sem despejar logs no resumo.
+- Preserve checkpoints anteriores, testes falhos e decisões rejeitadas. Não confunda intenção com execução, fixture com contrato do fornecedor, hash com aprovação, ou teste local com prontidão produtiva. Bloqueio só é reavaliado quando sua evidência ou dependência mudar.
+- Continue frentes independentes já autorizadas; não consuma novo orçamento, renove vigência ou amplie escopo por causa da duração da sessão. Não peça novamente uma autorização que esteja comprovadamente vigente e cubra exatamente a ação.
+- Dificuldade técnica local não é bloqueio: localizar a causa com evidência, testar a menor correção compatível e seguir a execução no mesmo macrobloco. Só registrar `BLOQUEADO_POR_INPUT` quando faltar uma autorização, artefato, decisão ou acesso externo concreto, identificando o requisito e o responsável; não encerrar esperando que outro chat investigue o que já está no escopo autorizado.
+- Ao terminar, sincronize primeiro `STATES.md`, depois trilha e validadores, distinguindo a fotografia histórica do bloco anterior das alterações atuais. Não altere manifests/ledgers históricos para esconder drift. Documentação ou planejamento não recebe checkbox de implementação.

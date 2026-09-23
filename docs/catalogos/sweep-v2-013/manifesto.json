@@ -1,0 +1,110 @@
+{
+  "schemaVersion": "2026-09-06.v2-013.q-swp-fnd-01.1",
+  "task": {
+    "route": "Q-SWP-FND-01",
+    "block": 49,
+    "taskId": "V2-013/FUNDACAO_KERNEL_LOCAL"
+  },
+  "outcome": "FOUNDATION_LOCAL_COMPLETE_NO_ENTITY_SWEEP_ENABLED",
+  "foundation": {
+    "model": "SOL_ULTRA",
+    "executionMode": "SWEEP",
+    "decisionMode": "PREVIEW_ONLY",
+    "complexity": "O(1)_ONE_RESPONSIBILITY_PER_CALL",
+    "positiveDisposition": "PREVIEW_ELIGIBLE_NO_APPLY_CAPABILITY",
+    "positiveResponsibilityKind": "ROOT_ONLY_SYNTHETIC_LOCAL",
+    "entitySweepEnabledCount": 0,
+    "networkAccess": false,
+    "databaseAccess": false,
+    "productKernelFilesystemAccess": false,
+    "runtimeWiring": false,
+    "applyCapability": false
+  },
+  "matrix": {
+    "path": "docs/catalogos/sweep-v2-013/matriz-aplicabilidade-v01.csv",
+    "sha256": "69ef33c8c095c200f4025264e38c0dd248fa4f12bde8722aaa00101c570d3bd9",
+    "rowCount": 33,
+    "familyCount": 11,
+    "enabledCount": 0,
+    "provenCompleteCount": 0,
+    "blockedCount": 19,
+    "disabledCount": 5,
+    "notApplicableCount": 9,
+    "applicabilityVocabulary": ["ENABLED", "DISABLED", "BLOCKED", "NOT_APPLICABLE"],
+    "responsibilityKindVocabulary": [
+      "ROOT",
+      "CHILD",
+      "ONE_TO_ONE_COMPONENT",
+      "HISTORY",
+      "CONDITIONAL_COMPONENT",
+      "OBSERVATION_CHANNEL",
+      "REFERENCE",
+      "SOURCE_LINE",
+      "UNRESOLVED_CANDIDATE"
+    ]
+  },
+  "fixture": {
+    "catalogPath": "docs/catalogos/sweep-v2-013/fixtures/kernel-cases-v01.synthetic.json",
+    "resourcePath": "src/test/resources/contracts/v2-013/q-swp-fnd-01/kernel-cases-v01.synthetic.json",
+    "sha256": "596aba786543ab2dcc77190a14c1f918ccc4bd2f502312644d5dd2a8abd6f215",
+    "caseCount": 53,
+    "happyPathCount": 1,
+    "mutationCount": 52,
+    "executionGate": "SweepPreviewMutationCatalogTest",
+    "evidenceKind": "SYNTHETIC_LOCAL_PREVIEW_ONLY"
+  },
+  "governanceArtifacts": [
+    {"path":"docs/adr/0030-kernel-local-fail-closed-sweep-preview.md","sha256":"15c92e06884f4d2d622b3e4d395afff73a90f30f96f25b32978bd923f96efe9e"},
+    {"path":"docs/catalogos/sweep-v2-013/README.md","sha256":"3770b20b358e60af59945fc050fb0a0000efa57deb17ecb587bbe4ef25b688f1"},
+    {"path":"docs/runbooks/v2-013-fundacao-kernel-sweep-preview-sol.md","sha256":"8b838adea0840fd379d93d0d3e10dd043da6c806c4ded80562d9c6f308865274"},
+    {"path":"scripts/validation/Build-V2013SweepApplicabilityCatalog.ps1","sha256":"ce525a9142887e79e7cc7ba9de467301a9dcc792b56fa5e536022a3cba3130fb"},
+    {"path":"scripts/validation/Test-V2013SweepPreviewFoundation.ps1","sha256":"5b32c6fa13fb989e4250a5140f58a9346aaf25d41e6116e3cd16c2db3e78cdb6"}
+  ],
+  "kernelArtifacts": [
+    {"path":"src/main/java/br/com/esl/etl/v2/plataforma/reconciliacao/sweep/FailClosedSweepPreviewKernel.java","sha256":"ea468eac1baba24f034ec084f0e18156b1631409e4398f9c00f7a8000fc73070"},
+    {"path":"src/main/java/br/com/esl/etl/v2/plataforma/reconciliacao/sweep/SweepApplicability.java","sha256":"f5a8afa9d28ef768f5ac33d795c739facfa9d27f698c1f425c3731b621275012"},
+    {"path":"src/main/java/br/com/esl/etl/v2/plataforma/reconciliacao/sweep/SweepPreviewAssessment.java","sha256":"5ae379d3b7212777bfea1a73d82cc918274cd6ce7783540a12267035cd907b79"},
+    {"path":"src/main/java/br/com/esl/etl/v2/plataforma/reconciliacao/sweep/SweepPreviewBlockReason.java","sha256":"8e4285b6e374cd13ef8863c6bd3a981fbd5f002f8287dad551e9258c29cb2114"},
+    {"path":"src/main/java/br/com/esl/etl/v2/plataforma/reconciliacao/sweep/SweepPreviewEvidence.java","sha256":"d09ac5166cc2f216670d9e4cda2c991917aa9fa77e93342fe64589c3da565172"},
+    {"path":"src/main/java/br/com/esl/etl/v2/plataforma/reconciliacao/sweep/SweepScope.java","sha256":"149d86186cd440d50b64b42e6bd7f1b20b47d8dbcf6361ae979692b09e052244"}
+  ],
+  "testArtifacts": [
+    {"path":"src/test/java/br/com/esl/etl/v2/plataforma/reconciliacao/sweep/FailClosedSweepPreviewKernelTest.java","sha256":"7a82e4e21a7ddd26343abb703a6e2e1c062a85caa76f5f8ac81cc90c01783d2d"},
+    {"path":"src/test/java/br/com/esl/etl/v2/plataforma/reconciliacao/sweep/SweepApplicabilityMatrixTest.java","sha256":"239276cc03ead0c4bf98947f4a388c96db0ffffbe082deacb4b1c1e2de5cdc31"},
+    {"path":"src/test/java/br/com/esl/etl/v2/plataforma/reconciliacao/sweep/SweepPreviewBoundaryTest.java","sha256":"fe2c69387a3b7c5996837cb9aa8a2ae055e4d3885d3e3f7270e3e6f168f54f41"},
+    {"path":"src/test/java/br/com/esl/etl/v2/plataforma/reconciliacao/sweep/SweepPreviewDeterminismTest.java","sha256":"bc48cafd802cdf3a583135ffbd407aae6b85ee04ac19de8a194de1fad04903f8"},
+    {"path":"src/test/java/br/com/esl/etl/v2/plataforma/reconciliacao/sweep/SweepPreviewHardeningTest.java","sha256":"7fe04ae0de6a7a173af8cbed8934ad996ed9b8f5fe15efaea3efa59a83f7647f"},
+    {"path":"src/test/java/br/com/esl/etl/v2/plataforma/reconciliacao/sweep/SweepPreviewMutationCatalogTest.java","sha256":"eed372cc981395c6670ece1c5eb28fe33b1f030b5acaf0205f487c57547d234a"},
+    {"path":"src/test/java/br/com/esl/etl/v2/plataforma/reconciliacao/sweep/SweepPreviewTestFixture.java","sha256":"e9db40f48509f0f69b71e5956dd114ada92367e3557f8e6f9e16d5d17ec5f557"}
+  ],
+  "canonicalBindings": [
+    {"role":"BOOTSTRAP_ENTITY_UNIVERSE","path":"docs/catalogos/bootstrap-v2-047/manifesto.json","sha256":"e6b33e3b035dcc6dd817e4f5e783e8b0585e077ab3ec4a7c5b13ced8730615be"},
+    {"role":"COLETAS_SHADOW","path":"database/manifest/coletas-shadow-vertical.json","sha256":"68d20e991a0fb7171656245383e7ae2afe166f0295b25644d82d0ce059f31b86"},
+    {"role":"FRETES_SHADOW","path":"database/manifest/fretes-shadow-vertical.json","sha256":"303c5a6977c8fd52067b2954fee0a1d686f35fd1a78a330762050576596b700c"},
+    {"role":"MANIFESTOS_SHADOW","path":"database/manifest/manifestos-shadow-vertical.json","sha256":"f95bac1dd539cec9675efca1742d5a3a507f406126ed627588e0f93f3ee79891"},
+    {"role":"COTACOES_SHADOW","path":"database/manifest/cotacoes-shadow-vertical.json","sha256":"4dc1506cebccb48071b422fee4928a8dc09497235d15abe093a9c5cf21cb509a"},
+    {"role":"LOCALIZACAO_SHADOW","path":"database/manifest/localizacao-cargas-shadow-vertical.json","sha256":"f8dad82685ef4c5b290922af98a20c0cf50de07a07e5e4d9ea5349fca81708e2"},
+    {"role":"CAP_IDENTITY","path":"docs/catalogos/identidade-contas-a-pagar/manifesto.json","sha256":"811f49d84f814048f67cff2682417e38c4bc0103d8ef8d9a26d3d9a9fd4e7421"},
+    {"role":"FATURAS_IDENTITY","path":"docs/catalogos/identidade-faturas-por-cliente/manifesto.json","sha256":"1cfde9f1a5e1255848f242569442199d1938f79fecaf1282a04710049bae7bdc"},
+    {"role":"INVENTARIO_IDENTITY","path":"docs/catalogos/identidade-inventario/manifesto.json","sha256":"2014801e35de38685b40f275e191ef6eca2b5fec98f339b52b25db5becd5d044"},
+    {"role":"SINISTROS_IDENTITY","path":"docs/catalogos/identidade-sinistros/manifesto.json","sha256":"9cf986df26c43ad00f14f3176d61616590a81e86fcf86b1db100e37fd2473098"},
+    {"role":"Q_FND_02","path":"docs/catalogos/caracterizacao-v2-012/q-fnd-02/manifesto.json","sha256":"45f0ac5b8f0f2a032534228b8366abc2843e4b1817a3352781d3fd128500e604"},
+    {"role":"KERNEL_EXECUTION_MODE","path":"src/main/java/br/com/esl/etl/v2/plataforma/controle/ExecutionMode.java","sha256":"c615ae7d3982c158653644ffe39736ad529a8114fb8fa36063d74a0cb797c1fd"},
+    {"role":"KERNEL_SOURCE_COMPLETENESS_STATUS","path":"src/main/java/br/com/esl/etl/v2/plataforma/contrato/SourceCompletenessStatus.java","sha256":"56b6f52766b3b96ef76d56c269f13ef54af05196151d8991f2508c1e722c6f4c"}
+  ],
+  "evidenceSources": [
+    {
+      "path": "STATES.md",
+      "bindingMode": "EXACT_SYMBOL_PRESENCE_MUTABLE_CANONICAL_STATE",
+      "symbols": ["CAP-01","CAP-02","CAP-04","COL-07","COT-02","FAT-01","FRE-03","FRE-04","INV-01","INV-02","INV-03","INV-04","LOC-03","MAN-01","MAN-02","MAN-03","Q-*-04","RAS-01","RAS-06","SIN-01","V007","V012","V013","V2-010","V2-011","V2-026","V2-027","V2-028","V2-029","V2-030","V2-031","V2-032","V2-033","V2-034a","V2-034b","V2-035a","V2-046a","V2-046b"]
+    },
+    {"path":"docs/adr/0019-usuarios-current-history-em-sombra.md","bindingMode":"SHA256_PINNED","sha256":"8c14cebc95add8299ddbb9838836050f100d907be8801e5ea66b4bd3df72b9be","symbols":["ADR-0019"]},
+    {"path":"docs/catalogos/caracterizacao-v2-012/q-fnd-02/manifesto.json","bindingMode":"SHA256_PINNED","sha256":"45f0ac5b8f0f2a032534228b8366abc2843e4b1817a3352781d3fd128500e604","symbols":["Q-FND-02"]},
+    {"path":"docs/catalogos/identidade-contas-a-pagar/manifesto.json","bindingMode":"SHA256_PINNED","sha256":"811f49d84f814048f67cff2682417e38c4bc0103d8ef8d9a26d3d9a9fd4e7421","symbols":["identidade-contas-a-pagar"]},
+    {"path":"docs/catalogos/identidade-faturas-por-cliente/manifesto.json","bindingMode":"SHA256_PINNED","sha256":"1cfde9f1a5e1255848f242569442199d1938f79fecaf1282a04710049bae7bdc","symbols":["identidade-faturas-por-cliente"]},
+    {"path":"docs/catalogos/identidade-inventario/manifesto.json","bindingMode":"SHA256_PINNED","sha256":"2014801e35de38685b40f275e191ef6eca2b5fec98f339b52b25db5becd5d044","symbols":["identidade-inventario"]},
+    {"path":"docs/catalogos/identidade-sinistros/manifesto.json","bindingMode":"SHA256_PINNED","sha256":"9cf986df26c43ad00f14f3176d61616590a81e86fcf86b1db100e37fd2473098","symbols":["identidade-sinistros"]}
+  ],
+  "openRoutes": ["V2-013","Q-*-04","V2-034a","V2-034b"],
+  "prohibitedScope": ["SOURCE","NETWORK","ENV_SECRET","DATABASE","FILESYSTEM_RUNTIME","DDL","DML","MIGRATION","ENTITY_SWEEP_EXECUTION","SWEEP_MUTATION","APPLY","DELETE","DEACTIVATE","REACTIVATE","PRUNE","PERSIST","PUBLICATION","RELATION","BOOTSTRAP","PARITY","CUTOVER"]
+}

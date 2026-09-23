@@ -29,13 +29,18 @@ $metadataExcludedDirectories = @(
 $textExtensions = @(
     '.bat',
     '.cmd',
+    '.cjs',
+    '.cs',
     '.csv',
     '.editorconfig',
     '.gitattributes',
     '.gitignore',
+    '.graphql',
     '.java',
     '.json',
+    '.jsonl',
     '.md',
+    '.pom',
     '.properties',
     '.ps1',
     '.psd1',
@@ -44,7 +49,9 @@ $textExtensions = @(
     '.sha256',
     '.sh',
     '.sql',
+    '.template',
     '.toml',
+    '.txt',
     '.xml',
     '.yaml',
     '.yml'
@@ -65,6 +72,21 @@ $approvedBinaryFiles.Add(
 $allowedSyntheticFindings =
     [System.Collections.Generic.HashSet[string]]::new([System.StringComparer]::Ordinal)
 foreach ($entry in @(
+    # QUAL-I: four public CycloneDX1.6 schema descriptions; exact path/value, never a directory exemption.
+    'SECRET_QUOTED_ASSIGNMENT|docs/catalogos/macrobloco-qualificacao-pacote/third-party/bom-1.6.schema.json|A key used to encrypt and decrypt messages in symmetric cryptography.',
+    'SECRET_QUOTED_ASSIGNMENT|docs/catalogos/macrobloco-qualificacao-pacote/third-party/bom-1.6.schema.json|A piece of data known only to the parties involved, in a secure communication.',
+    'SECRET_QUOTED_ASSIGNMENT|docs/catalogos/macrobloco-qualificacao-pacote/third-party/bom-1.6.schema.json|A secret word, phrase, or sequence of characters used during authentication or authorization.',
+    'SECRET_QUOTED_ASSIGNMENT|docs/catalogos/macrobloco-qualificacao-pacote/third-party/bom-1.6.schema.json|An object encapsulating a security identity.',
+    # ANA-39: exact local fixture values; no generic exemption for token fields or synthetic paths.
+    # SQL joins compare token columns with the derived-table alias normalized; this is no literal.
+    'INLINE_SECRET_ASSIGNMENT|database/migrations/V071__consume_analytic_owned_fleet_references.sql|normalized',
+    'HARDCODED_SECRET_ARGUMENT|src/test/java/br/com/esl/etl/v2/plataforma/fonte/raster/RasterLoopbackTransport.java|synthetic-raster-password',
+    # Immutable predecessor copy, whose exact bytes are checked by IntegralChainSuccession.
+    'HARDCODED_SECRET_ARGUMENT|docs/continuidade/historico/cadeia-integral/src/main/java/br/com/esl/etl/v2/plataforma/fonte/raster/RasterLoopbackTransport.java|synthetic-raster-password',
+    'SECRET_QUOTED_ASSIGNMENT|src/main/resources/analytic-laboratory/fleet-references.synthetic.json|sha256-utf16le-v1',
+    'SECRET_QUOTED_ASSIGNMENT|src/main/resources/analytic-laboratory/fleet-references.synthetic.json|0f2f56d9b0a0734d3f7d76776e5fa095201448d200fd0661335406a169966785',
+    'SECRET_QUOTED_ASSIGNMENT|src/main/resources/analytic-laboratory/fleet-references.synthetic.json|d3c630b2817ba68a2ae0e37bc4bcfd4aa06b0f1ebee83b954cb60266bfa19d60',
+    'SECRET_QUOTED_ASSIGNMENT|src/main/resources/analytic-laboratory/fleet-references.synthetic.json|440b374138a2135d40f9a94f5191f22e86a1e9c789826e41c20a2dae3df18fb7',
     'HARDCODED_SECRET_ARGUMENT|src/test/java/br/com/esl/etl/v2/contratos/ContractDataExportProbeTest.java|synthetic-dataexport-token',
     'HARDCODED_SECRET_ARGUMENT|src/test/java/br/com/esl/etl/v2/contratos/ContractDataExportProbeTest.java|synthetic-graphql-token',
     'HARDCODED_SECRET_ARGUMENT|src/test/java/br/com/esl/etl/v2/contratos/ContractRemoteExecutionTest.java|synthetic-dataexport-token',
@@ -161,6 +183,8 @@ function Get-GitCandidatePaths {
     $startInfo.UseShellExecute = $false
     $startInfo.RedirectStandardOutput = $true
     $startInfo.RedirectStandardError = $true
+    $startInfo.StandardOutputEncoding = [System.Text.Encoding]::UTF8
+    $startInfo.StandardErrorEncoding = [System.Text.Encoding]::UTF8
     $startInfo.CreateNoWindow = $true
 
     $process = [System.Diagnostics.Process]::new()
@@ -174,6 +198,16 @@ function Get-GitCandidatePaths {
     }
 
     return @($standardOutput -split "`0" | Where-Object { $_.Length -gt 0 })
+}
+
+function Test-IgnoredUntrackedRootEnv {
+    param([Parameter(Mandatory)][string] $RelativePath)
+
+    if ($RelativePath -cne '.env') { return $false }
+    & git -C $sourceRoot check-ignore -q -- .env 2>$null
+    if ($LASTEXITCODE -ne 0) { return $false }
+    & git -C $sourceRoot ls-files --error-unmatch -- .env 2>$null | Out-Null
+    return $LASTEXITCODE -ne 0
 }
 
 function Get-LineNumber {
@@ -217,8 +251,29 @@ function Test-AllowedSyntheticFinding {
     )
 }
 
+function Get-MetadataFiles {
+    # Apply the same metadata exclusions before descending into accumulated build evidence.
+    $directories = [System.Collections.Generic.Stack[string]]::new()
+    $directories.Push($sourceRoot)
+    while ($directories.Count -gt 0) {
+        foreach ($item in (Get-ChildItem -LiteralPath $directories.Pop() -Force)) {
+            if (Test-ExcludedMetadataPath -RelativePath (Get-RelativePath -FullName $item.FullName)) {
+                continue
+            }
+            if ($item.PSIsContainer) {
+                if (($item.Attributes -band [System.IO.FileAttributes]::ReparsePoint) -eq 0) {
+                    $directories.Push($item.FullName)
+                }
+            }
+            else {
+                Write-Output $item
+            }
+        }
+    }
+}
+
 try {
-    foreach ($file in (Get-ChildItem -LiteralPath $sourceRoot -Recurse -Force -File)) {
+    foreach ($file in (Get-MetadataFiles)) {
         $relativePath = Get-RelativePath -FullName $file.FullName
         if (Test-ExcludedMetadataPath -RelativePath $relativePath) {
             continue
@@ -230,7 +285,8 @@ try {
             $file.Name -match '(?i)^(?:application(?:\..*)?\.local\.properties|config\.bat)$'
         $isPrivateMaterial = $file.Extension -match '(?i)^\.(?:jks|key|p12|pem|pfx)$'
         if (
-            ($isEnvironmentFile -and -not $isApprovedEnvironmentExample) -or
+            ($isEnvironmentFile -and -not $isApprovedEnvironmentExample -and
+                -not (Test-IgnoredUntrackedRootEnv -RelativePath $relativePath)) -or
             $isSensitiveLocalFile -or
             $isPrivateMaterial
         ) {
@@ -239,6 +295,8 @@ try {
     }
 
     $candidatePaths = @(Get-GitCandidatePaths)
+    Import-Module (Join-Path $PSScriptRoot 'VerifiedHistoricalRemovals.psm1') -Force
+    $verifiedRemovals = Get-VerifiedHistoricalRemovals -Root $sourceRoot
     foreach ($gitPath in $candidatePaths) {
         $relativePath = $gitPath -replace '\\', '/'
         $fullPath = [System.IO.Path]::GetFullPath((Join-Path $sourceRoot $gitPath))
@@ -247,6 +305,10 @@ try {
             continue
         }
         if (-not (Test-Path -LiteralPath $fullPath -PathType Leaf)) {
+            if (-not (Test-Path -LiteralPath $fullPath) -and $verifiedRemovals.Contains($relativePath)) {
+                Write-Output ('OFFLINE_SECRET_INVENTORY kind=VERIFIED_HISTORICAL_REMOVAL path=' + $relativePath)
+                continue
+            }
             Add-Finding -RuleId 'MISSING_CANDIDATE' -RelativePath $relativePath -Line 1
             continue
         }

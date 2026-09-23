@@ -1,0 +1,53 @@
+{
+  "schemaVersion": "V2_015D_DEPENDENCY_VULNERABILITY_POLICY_MANIFEST_V1",
+  "task": {
+    "roadmapTask": "V2-015d/DECISAO_POLITICA_LOCAL_FAIL_CLOSED",
+    "route": "G05A",
+    "block": 42,
+    "model": "SOL_ULTRA"
+  },
+  "outcome": "POLICY_DECISION_LOCAL_COMPLETE_TERRA_IMPLEMENTATION_PENDING",
+  "policyFingerprint": "sha256:83c8698663f33b0e79ac987d72c7853fb59b12af42f31b07d1809377a454e056",
+  "artifacts": [
+    {
+      "path": "docs/catalogos/vulnerabilidades-v2-015d/README.md",
+      "sha256": "44dc03fe43322b45d0973a45febd8048bd4215d02cb50f52a5ec4792f74877bd",
+      "role": "HUMAN_POLICY_GUIDE"
+    },
+    {
+      "path": "docs/catalogos/vulnerabilidades-v2-015d/politica-v01.json",
+      "sha256": "83c8698663f33b0e79ac987d72c7853fb59b12af42f31b07d1809377a454e056",
+      "role": "MACHINE_POLICY_CONTRACT"
+    },
+    {
+      "path": "docs/catalogos/vulnerabilidades-v2-015d/excecoes-v01.json",
+      "sha256": "dcfc408838f13710dbc7a72c56202ec41392392886176da4d8dc871d4999c18c",
+      "role": "EMPTY_VERSIONED_EXCEPTION_CATALOG"
+    },
+    {
+      "path": "docs/catalogos/vulnerabilidades-v2-015d/fixtures/casos-v01.synthetic.json",
+      "sha256": "6c56091ac66858fc60c0138dc23ad2cae15961161af86bae46f6b008a90f38e8",
+      "role": "SYNTHETIC_POLICY_HARNESS"
+    }
+  ],
+  "coverage": {
+    "syntheticCases": 33,
+    "passingCases": 3,
+    "blockingCases": 30,
+    "effectiveExceptions": 0
+  },
+  "prohibitedScope": [
+    "NETWORK",
+    "NVD_OR_FEED",
+    "DEPENDENCY_CHECK_EXECUTION",
+    "REAL_FINDINGS",
+    "REAL_DEPENDENCY_IDENTIFIERS",
+    "CREDENTIALS_OR_SECRET_VALUES",
+    "ENV_FILE",
+    "DATABASE",
+    "PRODUCTION",
+    "REAL_CI",
+    "RELEASE",
+    "DEPLOY"
+  ]
+}

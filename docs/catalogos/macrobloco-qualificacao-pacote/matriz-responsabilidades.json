@@ -1,0 +1,539 @@
+{
+  "version": "qualification-responsibility-matrix-v1",
+  "state": "QUALIFIED_LOCAL",
+  "owner": "Responsável nominal de negócio permanece externo; implementação local do macrobloco",
+  "universe": {
+    "inputs": 11,
+    "dimensions": 6,
+    "facts": 5,
+    "outputs": 19,
+    "nodes": 35,
+    "constructionUnits": 45
+  },
+  "nodes": [
+    {
+      "id": "INPUT_CAP",
+      "kind": "INPUT",
+      "dependencies": [],
+      "consumers": [
+        "LocalExpansionRuntime"
+      ],
+      "case": "SCENARIO",
+      "observer": "CAP",
+      "oracle": "QualificationMonitoring SQL capture/application equations; downstream explicit typed output oracles"
+    },
+    {
+      "id": "INPUT_FAT",
+      "kind": "INPUT",
+      "dependencies": [],
+      "consumers": [
+        "LocalExpansionRuntime"
+      ],
+      "case": "SCENARIO",
+      "observer": "FAT",
+      "oracle": "QualificationMonitoring SQL capture/application equations; downstream explicit typed output oracles"
+    },
+    {
+      "id": "INPUT_INV",
+      "kind": "INPUT",
+      "dependencies": [],
+      "consumers": [
+        "LocalExpansionRuntime"
+      ],
+      "case": "SCENARIO",
+      "observer": "INV",
+      "oracle": "QualificationMonitoring SQL capture/application equations; downstream explicit typed output oracles"
+    },
+    {
+      "id": "INPUT_SIN",
+      "kind": "INPUT",
+      "dependencies": [],
+      "consumers": [
+        "LocalExpansionRuntime"
+      ],
+      "case": "SCENARIO",
+      "observer": "SIN",
+      "oracle": "QualificationMonitoring SQL capture/application equations; downstream explicit typed output oracles"
+    },
+    {
+      "id": "INPUT_LOC",
+      "kind": "INPUT",
+      "dependencies": [],
+      "consumers": [
+        "LocalExpansionDependencyRuntime"
+      ],
+      "case": "SCENARIO",
+      "observer": "LOC",
+      "oracle": "QualificationMonitoring SQL capture/application equations; downstream explicit typed output oracles"
+    },
+    {
+      "id": "INPUT_FRE",
+      "kind": "INPUT",
+      "dependencies": [],
+      "consumers": [
+        "LocalRelationalRuntime",
+        "LocalExpansionDependencyRuntime",
+        "ExpansionLaboratoryHydrator"
+      ],
+      "case": "SCENARIO",
+      "observer": "FRE",
+      "oracle": "QualificationMonitoring SQL capture/application equations; downstream explicit typed output oracles"
+    },
+    {
+      "id": "INPUT_MAN",
+      "kind": "INPUT",
+      "dependencies": [],
+      "consumers": [
+        "LocalAnalyticManifestRuntime"
+      ],
+      "case": "SCENARIO",
+      "observer": "MAN",
+      "oracle": "QualificationMonitoring SQL capture/application equations; downstream explicit typed output oracles"
+    },
+    {
+      "id": "INPUT_COL",
+      "kind": "INPUT",
+      "dependencies": [],
+      "consumers": [
+        "LocalAnalyticCollectionRuntime",
+        "LocalAnalyticCollectionSweep"
+      ],
+      "case": "SCENARIO",
+      "observer": "COL",
+      "oracle": "QualificationMonitoring SQL capture/application equations; downstream explicit typed output oracles"
+    },
+    {
+      "id": "INPUT_COT",
+      "kind": "INPUT",
+      "dependencies": [],
+      "consumers": [
+        "LocalAnalyticQuotesRuntime"
+      ],
+      "case": "SCENARIO",
+      "observer": "COT",
+      "oracle": "QualificationMonitoring SQL capture/application equations; downstream explicit typed output oracles"
+    },
+    {
+      "id": "INPUT_USUARIO",
+      "kind": "INPUT",
+      "dependencies": [],
+      "consumers": [
+        "LocalAnalyticUsersRuntime"
+      ],
+      "case": "SCENARIO",
+      "observer": "USER",
+      "oracle": "QualificationMonitoring SQL capture/application equations; downstream explicit typed output oracles"
+    },
+    {
+      "id": "INPUT_RASTER",
+      "kind": "INPUT",
+      "dependencies": [],
+      "consumers": [
+        "LocalRasterRuntime"
+      ],
+      "case": "SCENARIO",
+      "observer": "RASTER",
+      "oracle": "QualificationMonitoring SQL capture/application equations; downstream explicit typed output oracles"
+    },
+    {
+      "id": "SQL-14",
+      "kind": "DIMENSION_OUTPUT",
+      "dependencies": [],
+      "consumers": [
+        "JdbcAnalyticQueries",
+        "QualificationComparator"
+      ],
+      "case": "SCENARIO",
+      "oracle": "QualificationOracles",
+      "businessColumns": 2,
+      "columns": "matriz-colunas.json#SQL-14"
+    },
+    {
+      "id": "SQL-15",
+      "kind": "DIMENSION_OUTPUT",
+      "dependencies": [],
+      "consumers": [
+        "JdbcAnalyticQueries",
+        "QualificationComparator"
+      ],
+      "case": "SCENARIO",
+      "oracle": "QualificationOracles",
+      "businessColumns": 1,
+      "columns": "matriz-colunas.json#SQL-15"
+    },
+    {
+      "id": "SQL-16",
+      "kind": "DIMENSION_OUTPUT",
+      "dependencies": [],
+      "consumers": [
+        "JdbcAnalyticQueries",
+        "QualificationComparator"
+      ],
+      "case": "SCENARIO",
+      "oracle": "QualificationOracles",
+      "businessColumns": 4,
+      "columns": "matriz-colunas.json#SQL-16"
+    },
+    {
+      "id": "SQL-17",
+      "kind": "DIMENSION_OUTPUT",
+      "dependencies": [],
+      "consumers": [
+        "JdbcAnalyticQueries",
+        "QualificationComparator"
+      ],
+      "case": "SCENARIO",
+      "oracle": "QualificationOracles",
+      "businessColumns": 2,
+      "columns": "matriz-colunas.json#SQL-17"
+    },
+    {
+      "id": "SQL-18",
+      "kind": "DIMENSION_OUTPUT",
+      "dependencies": [],
+      "consumers": [
+        "JdbcAnalyticQueries",
+        "QualificationComparator"
+      ],
+      "case": "SCENARIO",
+      "oracle": "QualificationOracles",
+      "businessColumns": 3,
+      "columns": "matriz-colunas.json#SQL-18"
+    },
+    {
+      "id": "SQL-19",
+      "kind": "DIMENSION_OUTPUT",
+      "dependencies": [
+        "INPUT_USUARIO"
+      ],
+      "consumers": [
+        "JdbcAnalyticQueries",
+        "QualificationComparator"
+      ],
+      "case": "SCENARIO",
+      "oracle": "QualificationOracles",
+      "businessColumns": 3,
+      "columns": "matriz-colunas.json#SQL-19"
+    },
+    {
+      "id": "MAT01",
+      "kind": "FACT",
+      "dependencies": [
+        "INPUT_FRE",
+        "INPUT_LOC",
+        "INPUT_INV",
+        "SQL-14",
+        "SQL-15"
+      ],
+      "consumers": [
+        "JdbcAnalyticMaterializations",
+        "QualificationWindowExecutor"
+      ],
+      "case": "SCENARIO/REPLAY/RECOMPOSE",
+      "oracle": "QualificationScenarioVerifier SQL fact receipts and downstream value comparison"
+    },
+    {
+      "id": "MAT02",
+      "kind": "FACT",
+      "dependencies": [
+        "INPUT_FRE",
+        "INPUT_INV",
+        "INPUT_MAN",
+        "SQL-14"
+      ],
+      "consumers": [
+        "JdbcAnalyticMaterializations",
+        "QualificationWindowExecutor"
+      ],
+      "case": "SCENARIO/REPLAY/RECOMPOSE",
+      "oracle": "QualificationScenarioVerifier SQL fact receipts and downstream value comparison"
+    },
+    {
+      "id": "MAT03",
+      "kind": "FACT",
+      "dependencies": [
+        "INPUT_FRE",
+        "INPUT_LOC",
+        "SQL-14",
+        "SQL-15"
+      ],
+      "consumers": [
+        "JdbcExpansionMaterializations",
+        "QualificationWindowExecutor"
+      ],
+      "case": "SCENARIO/REPLAY/RECOMPOSE",
+      "oracle": "QualificationScenarioVerifier SQL fact receipts and downstream value comparison"
+    },
+    {
+      "id": "MAT04",
+      "kind": "FACT",
+      "dependencies": [
+        "INPUT_FAT",
+        "INPUT_FRE",
+        "SQL-14",
+        "SQL-15"
+      ],
+      "consumers": [
+        "JdbcExpansionMaterializations",
+        "QualificationWindowExecutor"
+      ],
+      "case": "SCENARIO/REPLAY/RECOMPOSE",
+      "oracle": "QualificationScenarioVerifier SQL fact receipts and downstream value comparison"
+    },
+    {
+      "id": "MAT05",
+      "kind": "FACT",
+      "dependencies": [
+        "INPUT_MAN",
+        "INPUT_FRE",
+        "INPUT_COL",
+        "SQL-14",
+        "SQL-16",
+        "SQL-17"
+      ],
+      "consumers": [
+        "JdbcAnalyticMaterializations",
+        "QualificationWindowExecutor"
+      ],
+      "case": "SCENARIO/REPLAY/RECOMPOSE",
+      "oracle": "QualificationScenarioVerifier SQL fact receipts and downstream value comparison"
+    },
+    {
+      "id": "SQL-01",
+      "kind": "OUTPUT",
+      "dependencies": [
+        "INPUT_FAT",
+        "SQL-14",
+        "SQL-15"
+      ],
+      "consumers": [
+        "JdbcAnalyticQueries",
+        "QualificationComparator"
+      ],
+      "case": "SCENARIO",
+      "oracle": "QualificationOracles",
+      "businessColumns": 42,
+      "columns": "matriz-colunas.json#SQL-01"
+    },
+    {
+      "id": "SQL-02",
+      "kind": "OUTPUT",
+      "dependencies": [
+        "MAT01"
+      ],
+      "consumers": [
+        "JdbcAnalyticQueries",
+        "QualificationComparator"
+      ],
+      "case": "SCENARIO",
+      "oracle": "QualificationOracles",
+      "businessColumns": 123,
+      "columns": "matriz-colunas.json#SQL-02"
+    },
+    {
+      "id": "SQL-03",
+      "kind": "OUTPUT",
+      "dependencies": [
+        "INPUT_COL",
+        "INPUT_MAN",
+        "SQL-14",
+        "SQL-19"
+      ],
+      "consumers": [
+        "JdbcAnalyticQueries",
+        "QualificationComparator"
+      ],
+      "case": "SCENARIO",
+      "oracle": "QualificationOracles",
+      "businessColumns": 41,
+      "columns": "matriz-colunas.json#SQL-03"
+    },
+    {
+      "id": "SQL-04",
+      "kind": "OUTPUT",
+      "dependencies": [
+        "INPUT_COL",
+        "SQL-14"
+      ],
+      "consumers": [
+        "JdbcAnalyticQueries",
+        "QualificationComparator"
+      ],
+      "case": "ABSENCE_CONFIRMED",
+      "oracle": "QualificationOracles",
+      "businessColumns": 13,
+      "columns": "matriz-colunas.json#SQL-04"
+    },
+    {
+      "id": "SQL-05",
+      "kind": "OUTPUT",
+      "dependencies": [
+        "INPUT_COT",
+        "SQL-14"
+      ],
+      "consumers": [
+        "JdbcAnalyticQueries",
+        "QualificationComparator"
+      ],
+      "case": "SCENARIO",
+      "oracle": "QualificationOracles",
+      "businessColumns": 54,
+      "columns": "matriz-colunas.json#SQL-05"
+    },
+    {
+      "id": "SQL-06",
+      "kind": "OUTPUT",
+      "dependencies": [
+        "INPUT_CAP",
+        "SQL-14",
+        "SQL-18"
+      ],
+      "consumers": [
+        "JdbcAnalyticQueries",
+        "QualificationComparator"
+      ],
+      "case": "SCENARIO",
+      "oracle": "QualificationOracles",
+      "businessColumns": 31,
+      "columns": "matriz-colunas.json#SQL-06"
+    },
+    {
+      "id": "SQL-07",
+      "kind": "OUTPUT",
+      "dependencies": [
+        "INPUT_LOC",
+        "SQL-14"
+      ],
+      "consumers": [
+        "JdbcAnalyticQueries",
+        "QualificationComparator"
+      ],
+      "case": "SCENARIO",
+      "oracle": "QualificationOracles",
+      "businessColumns": 29,
+      "columns": "matriz-colunas.json#SQL-07"
+    },
+    {
+      "id": "SQL-08",
+      "kind": "OUTPUT",
+      "dependencies": [
+        "MAT05"
+      ],
+      "consumers": [
+        "JdbcAnalyticQueries",
+        "QualificationComparator"
+      ],
+      "case": "SCENARIO",
+      "oracle": "QualificationOracles",
+      "businessColumns": 105,
+      "columns": "matriz-colunas.json#SQL-08"
+    },
+    {
+      "id": "SQL-09",
+      "kind": "OUTPUT",
+      "dependencies": [
+        "MAT05"
+      ],
+      "consumers": [
+        "JdbcAnalyticQueries",
+        "QualificationComparator"
+      ],
+      "case": "SCENARIO",
+      "oracle": "QualificationOracles",
+      "businessColumns": 106,
+      "columns": "matriz-colunas.json#SQL-09"
+    },
+    {
+      "id": "SQL-10",
+      "kind": "OUTPUT",
+      "dependencies": [],
+      "consumers": [
+        "JdbcAnalyticQueries",
+        "QualificationComparator"
+      ],
+      "case": "SCENARIO",
+      "oracle": "QualificationOracles",
+      "businessColumns": 9,
+      "columns": "matriz-colunas.json#SQL-10"
+    },
+    {
+      "id": "SQL-11",
+      "kind": "OUTPUT",
+      "dependencies": [
+        "INPUT_INV",
+        "SQL-14"
+      ],
+      "consumers": [
+        "JdbcAnalyticQueries",
+        "QualificationComparator"
+      ],
+      "case": "SCENARIO",
+      "oracle": "QualificationOracles",
+      "businessColumns": 34,
+      "columns": "matriz-colunas.json#SQL-11"
+    },
+    {
+      "id": "SQL-12",
+      "kind": "OUTPUT",
+      "dependencies": [
+        "INPUT_SIN",
+        "SQL-14",
+        "SQL-16"
+      ],
+      "consumers": [
+        "JdbcAnalyticQueries",
+        "QualificationComparator"
+      ],
+      "case": "SCENARIO",
+      "oracle": "QualificationOracles",
+      "businessColumns": 34,
+      "columns": "matriz-colunas.json#SQL-12"
+    },
+    {
+      "id": "SQL-13",
+      "kind": "OUTPUT",
+      "dependencies": [
+        "INPUT_RASTER"
+      ],
+      "consumers": [
+        "JdbcAnalyticQueries",
+        "QualificationComparator"
+      ],
+      "case": "SCENARIO",
+      "oracle": "QualificationOracles",
+      "businessColumns": 37,
+      "columns": "matriz-colunas.json#SQL-13"
+    }
+  ],
+  "additionalCases": {
+    "VARIANTS": "non-null performance/location, null user, typed fallback",
+    "ABSENCE": "candidate/confirmation/reappearance SQL03/04",
+    "TEMPORAL": "five workload policies, actual capture windows and frontiers",
+    "ADMISSION": "blackout/deadline/not-due no child",
+    "WAVES": "independent CAP and deferred Raster dependent",
+    "CONCURRENCY": "two SPIDs shared JDBC budget, cancel and consume after rollback",
+    "BARRIERS": [
+      "BEFORE_SQL",
+      "DURING_CAPTURE",
+      "AFTER_PREPARATION",
+      "BEFORE_RECEIPT"
+    ],
+    "FAULTS": [
+      "RASTER_INCOMPLETE",
+      "MANIFEST_FLEET_MISSING",
+      "FINANCIAL_REFERENCE_MISSING",
+      "COLLECTION_SNAPSHOT_INVALID"
+    ]
+  },
+  "verification": {
+    "summary": "docs/catalogos/macrobloco-qualificacao-pacote/verification-summary.json",
+    "regression": {
+      "path": "target/macrobloco-qualificacao-pacote-20260913-01/regression-final-02/result.json",
+      "sha256": "835deec8ef5e2601c9b55b8a4b958f5afdcb7fc4aa4813ee86271ba212e39391"
+    },
+    "smokes": {
+      "path": "target/macrobloco-qualificacao-pacote-20260913-01/final-proofs-01/smokes.json",
+      "sha256": "6d52568bb13422a561be35e683a1a673ab247379077d966be3691673c6e637ab"
+    }
+  }
+}

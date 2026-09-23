@@ -229,7 +229,8 @@ public final class EslRequestGovernor {
                 if (repartitioner == null) {
                     this.repartitionUnit = partitionUnit;
                     repartitioner =
-                            new BoundedWindowRepartitioner(policy.maxRepartitions(), partitionUnit);
+                            new BoundedWindowRepartitioner(
+                                    policy.maxRepartitions(), partitionUnit, cancellationToken);
                 } else if (!repartitionUnit.equals(partitionUnit)) {
                     throw new IllegalStateException(
                             "A unidade de reparticionamento do workload é imutável.");

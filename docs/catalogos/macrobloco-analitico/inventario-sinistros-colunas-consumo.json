@@ -1,0 +1,432 @@
+{
+  "version": "analytic-inventory-incidents-v1",
+  "status": "TESTED_PHYSICAL_LOCAL",
+  "outputs": [
+    {
+      "id": "SQL-11",
+      "source": "../etl-extracao-dados/src/main/java/br/com/extrator/dominio/dataexport/inventario/InventarioDTO.java",
+      "sourceSha256": "1022874a092b4d841abae11f10ecfb8cf9e05de37927436f2f74273eed5924bd",
+      "view": "pub.analytic_lab_sql_11",
+      "grain": "run/reference_revision/root/part/component",
+      "columns": [
+        {
+          "ordinal": 1,
+          "name": "Hora (Início)",
+          "expression": "CONVERT(TIME(7),core.ufn_analytic_raster_time(f.[started_at],f.[started_at_nano],0) AT TIME ZONE zone.name)",
+          "sourcePath": null
+        },
+        {
+          "ordinal": 2,
+          "name": "Identificador Único",
+          "expression": "CONVERT(NVARCHAR(320),CONCAT(CONVERT(NVARCHAR(36),g.run_id),N'/',i.root_type,N':',i.root_key,N'/',i.part_type,N':',i.part_key,N'/',i.component_type,N':',i.component_key))",
+          "sourcePath": null
+        },
+        {
+          "ordinal": 3,
+          "name": "Nº Minuta",
+          "expression": "f.[cnr_c_s_fit_corporation_sequence_number]",
+          "sourcePath": "/cnr_c_s_fit_corporation_sequence_number"
+        },
+        {
+          "ordinal": 4,
+          "name": "Pagador",
+          "expression": "f.[cnr_c_s_fit_pyr_nickname]",
+          "sourcePath": "/cnr_c_s_fit_pyr_nickname"
+        },
+        {
+          "ordinal": 5,
+          "name": "Remetente",
+          "expression": "f.[cnr_c_s_fit_sdr_nickname]",
+          "sourcePath": "/cnr_c_s_fit_sdr_nickname"
+        },
+        {
+          "ordinal": 6,
+          "name": "Origem",
+          "expression": "f.[cnr_c_s_fit_sdr_ads_cty_name]",
+          "sourcePath": "/cnr_c_s_fit_sdr_ads_cty_name"
+        },
+        {
+          "ordinal": 7,
+          "name": "Destinatário",
+          "expression": "f.[cnr_c_s_fit_rpt_nickname]",
+          "sourcePath": "/cnr_c_s_fit_rpt_nickname"
+        },
+        {
+          "ordinal": 8,
+          "name": "Destino",
+          "expression": "f.[cnr_c_s_fit_rpt_ads_cty_name]",
+          "sourcePath": "/cnr_c_s_fit_rpt_ads_cty_name"
+        },
+        {
+          "ordinal": 9,
+          "name": "Região Entrega",
+          "expression": "f.[cnr_c_s_fit_dyn_name]",
+          "sourcePath": "/cnr_c_s_fit_dyn_name"
+        },
+        {
+          "ordinal": 10,
+          "name": "Filial Entregadora",
+          "expression": "f.[cnr_c_s_fit_dyn_drt_nickname]",
+          "sourcePath": "/cnr_c_s_fit_dyn_drt_nickname"
+        },
+        {
+          "ordinal": 11,
+          "name": "N° Ordem",
+          "expression": "f.[sequence_code]",
+          "sourcePath": "/sequence_code"
+        },
+        {
+          "ordinal": 12,
+          "name": "Filial",
+          "expression": "branch.normalized_name",
+          "sourcePath": null
+        },
+        {
+          "ordinal": 13,
+          "name": "Filial da Ordem de Conferência",
+          "expression": "branch.normalized_name",
+          "sourcePath": null
+        },
+        {
+          "ordinal": 14,
+          "name": "Filial Emissora do Frete",
+          "expression": "COALESCE(freight_branch.normalized_name,branch.normalized_name)",
+          "sourcePath": null
+        },
+        {
+          "ordinal": 15,
+          "name": "Tipo",
+          "expression": "COALESCE((SELECT l.label FROM ref.analytic_lab_label l WHERE l.reference_release_id=selection.reference_release_id AND l.category='INV_TYPE' AND l.raw_value=kind.type_token COLLATE Latin1_General_100_BIN2),kind.type_token)",
+          "sourcePath": null
+        },
+        {
+          "ordinal": 16,
+          "name": "Data/Hora início",
+          "expression": "core.ufn_analytic_raster_time(f.[started_at],f.[started_at_nano],0) AT TIME ZONE zone.name",
+          "sourcePath": "/started_at"
+        },
+        {
+          "ordinal": 17,
+          "name": "Data/Hora fim",
+          "expression": "core.ufn_analytic_raster_time(f.[finished_at],f.[finished_at_nano],0) AT TIME ZONE zone.name",
+          "sourcePath": "/finished_at"
+        },
+        {
+          "ordinal": 18,
+          "name": "Status",
+          "expression": "COALESCE((SELECT l.label FROM ref.analytic_lab_label l WHERE l.reference_release_id=selection.reference_release_id AND l.category='INV_STATUS' AND l.raw_value=f.status COLLATE Latin1_General_100_BIN2),f.status)",
+          "sourcePath": null
+        },
+        {
+          "ordinal": 19,
+          "name": "Conferente",
+          "expression": "f.[cnr_cis_eoe_psn_name]",
+          "sourcePath": "/cnr_cis_eoe_psn_name"
+        },
+        {
+          "ordinal": 20,
+          "name": "Notas Fiscais",
+          "expression": "notes.display_names",
+          "sourcePath": null
+        },
+        {
+          "ordinal": 21,
+          "name": "Valor de NF",
+          "expression": "f.[cnr_c_s_fit_invoices_value]",
+          "sourcePath": "/cnr_c_s_fit_invoices_value"
+        },
+        {
+          "ordinal": 22,
+          "name": "Peso Real",
+          "expression": "f.[cnr_c_s_fit_real_weight]",
+          "sourcePath": "/cnr_c_s_fit_real_weight"
+        },
+        {
+          "ordinal": 23,
+          "name": "M³",
+          "expression": "f.[cnr_c_s_fit_total_cubic_volume]",
+          "sourcePath": "/cnr_c_s_fit_total_cubic_volume"
+        },
+        {
+          "ordinal": 24,
+          "name": "Peso Taxado",
+          "expression": "f.[cnr_c_s_fit_taxed_weight]",
+          "sourcePath": "/cnr_c_s_fit_taxed_weight"
+        },
+        {
+          "ordinal": 25,
+          "name": "Volumes",
+          "expression": "f.[cnr_c_s_fit_invoices_volumes]",
+          "sourcePath": "/cnr_c_s_fit_invoices_volumes"
+        },
+        {
+          "ordinal": 26,
+          "name": "Volumes Lidos",
+          "expression": "f.[cnr_c_s_read_volumes]",
+          "sourcePath": "/cnr_c_s_read_volumes"
+        },
+        {
+          "ordinal": 27,
+          "name": "Previsão de Entrega",
+          "expression": "core.ufn_analytic_raster_time(f.[cnr_c_s_fit_dpn_delivery_prediction_at],f.[cnr_c_s_fit_dpn_delivery_prediction_at_nano],0) AT TIME ZONE zone.name",
+          "sourcePath": "/cnr_c_s_fit_dpn_delivery_prediction_at"
+        },
+        {
+          "ordinal": 28,
+          "name": "Finalização da Performance",
+          "expression": "core.ufn_analytic_raster_time(f.[cnr_c_s_fit_dpn_performance_finished_at],f.[cnr_c_s_fit_dpn_performance_finished_at_nano],0) AT TIME ZONE zone.name",
+          "sourcePath": "/cnr_c_s_fit_dpn_performance_finished_at"
+        },
+        {
+          "ordinal": 29,
+          "name": "Data de Finalização",
+          "expression": "core.ufn_analytic_raster_time(f.[cnr_c_s_fit_dpn_performance_finished_at],f.[cnr_c_s_fit_dpn_performance_finished_at_nano],0) AT TIME ZONE zone.name",
+          "sourcePath": "/cnr_c_s_fit_dpn_performance_finished_at"
+        },
+        {
+          "ordinal": 30,
+          "name": "Data Última Ocorrência",
+          "expression": "core.ufn_analytic_raster_time(f.[cnr_c_s_fit_fte_lce_occurrence_at],f.[cnr_c_s_fit_fte_lce_occurrence_at_nano],0) AT TIME ZONE zone.name",
+          "sourcePath": "/cnr_c_s_fit_fte_lce_occurrence_at"
+        },
+        {
+          "ordinal": 31,
+          "name": "Ocorrência",
+          "expression": "f.[cnr_c_s_fit_fte_lce_ore_description]",
+          "sourcePath": "/cnr_c_s_fit_fte_lce_ore_description"
+        },
+        {
+          "ordinal": 32,
+          "name": "Comprovante Anexado",
+          "expression": "CONVERT(NVARCHAR(3),CASE i.proof_attached WHEN 1 THEN N'Sim' ELSE N'Não' END)",
+          "sourcePath": null
+        },
+        {
+          "ordinal": 33,
+          "name": "Metadata",
+          "expression": "(SELECT i.execution_id,i.occurrence,i.observation_id,i.revision,f.[cnr_c_s_fit_corporation_sequence_number_p] AS [cnr_c_s_fit_corporation_sequence_number.presence],f.[cnr_c_s_fit_corporation_sequence_number_w] AS [cnr_c_s_fit_corporation_sequence_number.wire],f.[cnr_c_s_fit_corporation_sequence_number_raw] AS [cnr_c_s_fit_corporation_sequence_number.raw],f.[cnr_c_s_fit_dpn_delivery_prediction_at_p] AS [cnr_c_s_fit_dpn_delivery_prediction_at.presence],f.[cnr_c_s_fit_dpn_delivery_prediction_at_w] AS [cnr_c_s_fit_dpn_delivery_prediction_at.wire],f.[cnr_c_s_fit_dpn_delivery_prediction_at_raw] AS [cnr_c_s_fit_dpn_delivery_prediction_at.raw],f.[cnr_c_s_fit_dpn_performance_finished_at_p] AS [cnr_c_s_fit_dpn_performance_finished_at.presence],f.[cnr_c_s_fit_dpn_performance_finished_at_w] AS [cnr_c_s_fit_dpn_performance_finished_at.wire],f.[cnr_c_s_fit_dpn_performance_finished_at_raw] AS [cnr_c_s_fit_dpn_performance_finished_at.raw],f.[cnr_c_s_fit_dyn_drt_nickname_p] AS [cnr_c_s_fit_dyn_drt_nickname.presence],f.[cnr_c_s_fit_dyn_drt_nickname_w] AS [cnr_c_s_fit_dyn_drt_nickname.wire],f.[cnr_c_s_fit_dyn_drt_nickname_raw] AS [cnr_c_s_fit_dyn_drt_nickname.raw],f.[cnr_c_s_fit_dyn_name_p] AS [cnr_c_s_fit_dyn_name.presence],f.[cnr_c_s_fit_dyn_name_w] AS [cnr_c_s_fit_dyn_name.wire],f.[cnr_c_s_fit_dyn_name_raw] AS [cnr_c_s_fit_dyn_name.raw],f.[cnr_c_s_fit_fte_lce_occurrence_at_p] AS [cnr_c_s_fit_fte_lce_occurrence_at.presence],f.[cnr_c_s_fit_fte_lce_occurrence_at_w] AS [cnr_c_s_fit_fte_lce_occurrence_at.wire],f.[cnr_c_s_fit_fte_lce_occurrence_at_raw] AS [cnr_c_s_fit_fte_lce_occurrence_at.raw],f.[cnr_c_s_fit_fte_lce_ore_description_p] AS [cnr_c_s_fit_fte_lce_ore_description.presence],f.[cnr_c_s_fit_fte_lce_ore_description_w] AS [cnr_c_s_fit_fte_lce_ore_description.wire],f.[cnr_c_s_fit_fte_lce_ore_description_raw] AS [cnr_c_s_fit_fte_lce_ore_description.raw],f.[cnr_c_s_fit_invoices_mapping_p] AS [cnr_c_s_fit_invoices_mapping.presence],f.[cnr_c_s_fit_invoices_mapping_w] AS [cnr_c_s_fit_invoices_mapping.wire],f.[cnr_c_s_fit_invoices_mapping_raw] AS [cnr_c_s_fit_invoices_mapping.raw],f.[cnr_c_s_fit_invoices_value_p] AS [cnr_c_s_fit_invoices_value.presence],f.[cnr_c_s_fit_invoices_value_w] AS [cnr_c_s_fit_invoices_value.wire],f.[cnr_c_s_fit_invoices_value_raw] AS [cnr_c_s_fit_invoices_value.raw],f.[cnr_c_s_fit_invoices_volumes_p] AS [cnr_c_s_fit_invoices_volumes.presence],f.[cnr_c_s_fit_invoices_volumes_w] AS [cnr_c_s_fit_invoices_volumes.wire],f.[cnr_c_s_fit_invoices_volumes_raw] AS [cnr_c_s_fit_invoices_volumes.raw],f.[cnr_c_s_fit_pyr_nickname_p] AS [cnr_c_s_fit_pyr_nickname.presence],f.[cnr_c_s_fit_pyr_nickname_w] AS [cnr_c_s_fit_pyr_nickname.wire],f.[cnr_c_s_fit_pyr_nickname_raw] AS [cnr_c_s_fit_pyr_nickname.raw],f.[cnr_c_s_fit_real_weight_p] AS [cnr_c_s_fit_real_weight.presence],f.[cnr_c_s_fit_real_weight_w] AS [cnr_c_s_fit_real_weight.wire],f.[cnr_c_s_fit_real_weight_raw] AS [cnr_c_s_fit_real_weight.raw],f.[cnr_c_s_fit_rpt_ads_cty_name_p] AS [cnr_c_s_fit_rpt_ads_cty_name.presence],f.[cnr_c_s_fit_rpt_ads_cty_name_w] AS [cnr_c_s_fit_rpt_ads_cty_name.wire],f.[cnr_c_s_fit_rpt_ads_cty_name_raw] AS [cnr_c_s_fit_rpt_ads_cty_name.raw],f.[cnr_c_s_fit_rpt_nickname_p] AS [cnr_c_s_fit_rpt_nickname.presence],f.[cnr_c_s_fit_rpt_nickname_w] AS [cnr_c_s_fit_rpt_nickname.wire],f.[cnr_c_s_fit_rpt_nickname_raw] AS [cnr_c_s_fit_rpt_nickname.raw],f.[cnr_c_s_fit_sdr_ads_cty_name_p] AS [cnr_c_s_fit_sdr_ads_cty_name.presence],f.[cnr_c_s_fit_sdr_ads_cty_name_w] AS [cnr_c_s_fit_sdr_ads_cty_name.wire],f.[cnr_c_s_fit_sdr_ads_cty_name_raw] AS [cnr_c_s_fit_sdr_ads_cty_name.raw],f.[cnr_c_s_fit_sdr_nickname_p] AS [cnr_c_s_fit_sdr_nickname.presence],f.[cnr_c_s_fit_sdr_nickname_w] AS [cnr_c_s_fit_sdr_nickname.wire],f.[cnr_c_s_fit_sdr_nickname_raw] AS [cnr_c_s_fit_sdr_nickname.raw],f.[cnr_c_s_fit_taxed_weight_p] AS [cnr_c_s_fit_taxed_weight.presence],f.[cnr_c_s_fit_taxed_weight_w] AS [cnr_c_s_fit_taxed_weight.wire],f.[cnr_c_s_fit_taxed_weight_raw] AS [cnr_c_s_fit_taxed_weight.raw],f.[cnr_c_s_fit_total_cubic_volume_p] AS [cnr_c_s_fit_total_cubic_volume.presence],f.[cnr_c_s_fit_total_cubic_volume_w] AS [cnr_c_s_fit_total_cubic_volume.wire],f.[cnr_c_s_fit_total_cubic_volume_raw] AS [cnr_c_s_fit_total_cubic_volume.raw],f.[cnr_c_s_read_volumes_p] AS [cnr_c_s_read_volumes.presence],f.[cnr_c_s_read_volumes_w] AS [cnr_c_s_read_volumes.wire],f.[cnr_c_s_read_volumes_raw] AS [cnr_c_s_read_volumes.raw],f.[cnr_cis_eoe_psn_name_p] AS [cnr_cis_eoe_psn_name.presence],f.[cnr_cis_eoe_psn_name_w] AS [cnr_cis_eoe_psn_name.wire],f.[cnr_cis_eoe_psn_name_raw] AS [cnr_cis_eoe_psn_name.raw],f.[cnr_crn_psn_nickname_p] AS [cnr_crn_psn_nickname.presence],f.[cnr_crn_psn_nickname_w] AS [cnr_crn_psn_nickname.wire],f.[cnr_crn_psn_nickname_raw] AS [cnr_crn_psn_nickname.raw],f.[finished_at_p] AS [finished_at.presence],f.[finished_at_w] AS [finished_at.wire],f.[finished_at_raw] AS [finished_at.raw],f.[sequence_code_p] AS [sequence_code.presence],f.[sequence_code_w] AS [sequence_code.wire],f.[sequence_code_raw] AS [sequence_code.raw],f.[started_at_p] AS [started_at.presence],f.[started_at_w] AS [started_at.wire],f.[started_at_raw] AS [started_at.raw],f.[status_p] AS [status.presence],f.[status_w] AS [status.wire],f.[status_raw] AS [status.raw],f.[type_p] AS [type.presence],f.[type_w] AS [type.wire],f.[type_raw] AS [type.raw] FOR JSON PATH,INCLUDE_NULL_VALUES,WITHOUT_ARRAY_WRAPPER)",
+          "sourcePath": null
+        },
+        {
+          "ordinal": 34,
+          "name": "Data de extracao",
+          "expression": "capture.sealed_at",
+          "sourcePath": null
+        }
+      ]
+    },
+    {
+      "id": "SQL-12",
+      "source": "../etl-extracao-dados/src/main/java/br/com/extrator/dominio/dataexport/sinistros/SinistroDTO.java",
+      "sourceSha256": "c4d1be395a2607d4e55ef032d82cd1d1445630ea9eff1fd1240aa0e64ccc0428",
+      "view": "pub.analytic_lab_sql_12",
+      "grain": "run/reference_revision/root/part/component",
+      "columns": [
+        {
+          "ordinal": 1,
+          "name": "Identificador Único",
+          "expression": "CONVERT(NVARCHAR(320),CONCAT(CONVERT(NVARCHAR(36),g.run_id),N'/',i.root_type,N':',i.root_key,N'/',i.part_type,N':',i.part_key,N'/',i.component_type,N':',i.component_key))",
+          "sourcePath": null
+        },
+        {
+          "ordinal": 2,
+          "name": "Nº do Sinistro",
+          "expression": "f.[sequence_code]",
+          "sourcePath": "/sequence_code"
+        },
+        {
+          "ordinal": 3,
+          "name": "Data abertura",
+          "expression": "f.[opening_at_date]",
+          "sourcePath": "/opening_at_date"
+        },
+        {
+          "ordinal": 4,
+          "name": "Data ocorrência",
+          "expression": "f.[occurrence_at_date]",
+          "sourcePath": "/occurrence_at_date"
+        },
+        {
+          "ordinal": 5,
+          "name": "Hora ocorrência",
+          "expression": "CONVERT(TIME(7),core.ufn_analytic_raster_time(f.[occurrence_at_time]/1000000000,CONVERT(INT,f.[occurrence_at_time]%1000000000),0))",
+          "sourcePath": "/occurrence_at_time"
+        },
+        {
+          "ordinal": 6,
+          "name": "Previsão de solução",
+          "expression": "f.[expected_solution_date]",
+          "sourcePath": "/expected_solution_date"
+        },
+        {
+          "ordinal": 7,
+          "name": "Local do sinistro",
+          "expression": "f.[insurance_claim_location]",
+          "sourcePath": "/insurance_claim_location"
+        },
+        {
+          "ordinal": 8,
+          "name": "Informado por",
+          "expression": "f.[informed_by]",
+          "sourcePath": "/informed_by"
+        },
+        {
+          "ordinal": 9,
+          "name": "Data finalização",
+          "expression": "f.[finished_at_date]",
+          "sourcePath": "/finished_at_date"
+        },
+        {
+          "ordinal": 10,
+          "name": "Hora finalização",
+          "expression": "CONVERT(TIME(7),core.ufn_analytic_raster_time(f.[finished_at_time]/1000000000,CONVERT(INT,f.[finished_at_time]%1000000000),0))",
+          "sourcePath": "/finished_at_time"
+        },
+        {
+          "ordinal": 11,
+          "name": "Quantidade de documentos",
+          "expression": "f.[invoices_count]",
+          "sourcePath": "/invoices_count"
+        },
+        {
+          "ordinal": 12,
+          "name": "Minuta",
+          "expression": "f.[icm_fis_fit_corporation_sequence_number]",
+          "sourcePath": "/icm_fis_fit_corporation_sequence_number"
+        },
+        {
+          "ordinal": 13,
+          "name": "Nota Fiscal/Número",
+          "expression": "f.[icm_fis_ioe_number]",
+          "sourcePath": "/icm_fis_ioe_number"
+        },
+        {
+          "ordinal": 14,
+          "name": "Volumes",
+          "expression": "f.[invoices_volumes]",
+          "sourcePath": "/invoices_volumes"
+        },
+        {
+          "ordinal": 15,
+          "name": "Peso",
+          "expression": "f.[invoices_weight]",
+          "sourcePath": "/invoices_weight"
+        },
+        {
+          "ordinal": 16,
+          "name": "Valor NF",
+          "expression": "f.[invoices_value]",
+          "sourcePath": "/invoices_value"
+        },
+        {
+          "ordinal": 17,
+          "name": "Pagador do frete/Nome fantasia",
+          "expression": "f.[icm_fis_fit_pyr_nickname]",
+          "sourcePath": "/icm_fis_fit_pyr_nickname"
+        },
+        {
+          "ordinal": 18,
+          "name": "valor a pagar ao cliente",
+          "expression": "f.[customer_debits_subtotal]",
+          "sourcePath": "/customer_debits_subtotal"
+        },
+        {
+          "ordinal": 19,
+          "name": "Valor nota de crédito ao cliente",
+          "expression": "f.[customer_credit_entries_subtotal]",
+          "sourcePath": "/customer_credit_entries_subtotal"
+        },
+        {
+          "ordinal": 20,
+          "name": "Valor a receber do responsável",
+          "expression": "f.[responsible_credits_subtotal]",
+          "sourcePath": "/responsible_credits_subtotal"
+        },
+        {
+          "ordinal": 21,
+          "name": "Valor nota de débito do responsável",
+          "expression": "f.[responsible_debit_entries_subtotal]",
+          "sourcePath": "/responsible_debit_entries_subtotal"
+        },
+        {
+          "ordinal": 22,
+          "name": "Valor a receber da seguradora",
+          "expression": "f.[insurer_credits_subtotal]",
+          "sourcePath": "/insurer_credits_subtotal"
+        },
+        {
+          "ordinal": 23,
+          "name": "Resultado final",
+          "expression": "f.[insurance_claim_total]",
+          "sourcePath": "/insurance_claim_total"
+        },
+        {
+          "ordinal": 24,
+          "name": "Pessoa/Nome fantasia",
+          "expression": "branch.normalized_name",
+          "sourcePath": null
+        },
+        {
+          "ordinal": 25,
+          "name": "Ocorrência/Ocorrência",
+          "expression": "f.[icm_dvr_iil_name]",
+          "sourcePath": "/icm_dvr_iil_name"
+        },
+        {
+          "ordinal": 26,
+          "name": "Usuário/Nome",
+          "expression": "f.[icm_fer_name]",
+          "sourcePath": "/icm_fer_name"
+        },
+        {
+          "ordinal": 27,
+          "name": "Veículo/Placa",
+          "expression": "vehicle.license_plate",
+          "sourcePath": null
+        },
+        {
+          "ordinal": 28,
+          "name": "Ocorrência/Descrição",
+          "expression": "f.[icm_ttt_ore_description]",
+          "sourcePath": "/icm_ttt_ore_description"
+        },
+        {
+          "ordinal": 29,
+          "name": "Ocorrência/Código",
+          "expression": "f.[icm_ttt_ore_code]",
+          "sourcePath": "/icm_ttt_ore_code"
+        },
+        {
+          "ordinal": 30,
+          "name": "Tratativa/Data tratativa",
+          "expression": "core.ufn_analytic_raster_time(f.[icm_ttt_treatment_at],f.[icm_ttt_treatment_at_nano],0) AT TIME ZONE zone.name",
+          "sourcePath": "/icm_ttt_treatment_at"
+        },
+        {
+          "ordinal": 31,
+          "name": "Tratativa/Tipo tratativa",
+          "expression": "COALESCE((SELECT l.label FROM ref.analytic_lab_label l WHERE l.reference_release_id=selection.reference_release_id AND l.category='SIN_DEALING' AND l.raw_value=f.icm_ttt_dealing_type COLLATE Latin1_General_100_BIN2),f.icm_ttt_dealing_type)",
+          "sourcePath": null
+        },
+        {
+          "ordinal": 32,
+          "name": "Tratativa/Solução",
+          "expression": "COALESCE((SELECT l.label FROM ref.analytic_lab_label l WHERE l.reference_release_id=selection.reference_release_id AND l.category='SIN_SOLUTION' AND l.raw_value=f.icm_ttt_solution_type COLLATE Latin1_General_100_BIN2),f.icm_ttt_solution_type)",
+          "sourcePath": null
+        },
+        {
+          "ordinal": 33,
+          "name": "Metadata",
+          "expression": "(SELECT i.execution_id,i.occurrence,i.observation_id,i.revision,f.[bo_number_p] AS [bo_number.presence],f.[bo_number_w] AS [bo_number.wire],f.[bo_number_raw] AS [bo_number.raw],f.[brokers_case_number_p] AS [brokers_case_number.presence],f.[brokers_case_number_w] AS [brokers_case_number.wire],f.[brokers_case_number_raw] AS [brokers_case_number.raw],f.[customer_communication_contact_name_p] AS [customer_communication_contact_name.presence],f.[customer_communication_contact_name_w] AS [customer_communication_contact_name.wire],f.[customer_communication_contact_name_raw] AS [customer_communication_contact_name.raw],f.[customer_communication_date_p] AS [customer_communication_date.presence],f.[customer_communication_date_w] AS [customer_communication_date.wire],f.[customer_communication_date_raw] AS [customer_communication_date.raw],f.[customer_communication_time_p] AS [customer_communication_time.presence],f.[customer_communication_time_w] AS [customer_communication_time.wire],f.[customer_communication_time_raw] AS [customer_communication_time.raw],f.[customer_credit_entries_subtotal_p] AS [customer_credit_entries_subtotal.presence],f.[customer_credit_entries_subtotal_w] AS [customer_credit_entries_subtotal.wire],f.[customer_credit_entries_subtotal_raw] AS [customer_credit_entries_subtotal.raw],f.[customer_debits_subtotal_p] AS [customer_debits_subtotal.presence],f.[customer_debits_subtotal_w] AS [customer_debits_subtotal.wire],f.[customer_debits_subtotal_raw] AS [customer_debits_subtotal.raw],f.[expected_solution_date_p] AS [expected_solution_date.presence],f.[expected_solution_date_w] AS [expected_solution_date.wire],f.[expected_solution_date_raw] AS [expected_solution_date.raw],f.[finished_at_date_p] AS [finished_at_date.presence],f.[finished_at_date_w] AS [finished_at_date.wire],f.[finished_at_date_raw] AS [finished_at_date.raw],f.[finished_at_time_p] AS [finished_at_time.presence],f.[finished_at_time_w] AS [finished_at_time.wire],f.[finished_at_time_raw] AS [finished_at_time.raw],f.[finished_commentary_p] AS [finished_commentary.presence],f.[finished_commentary_w] AS [finished_commentary.wire],f.[finished_commentary_raw] AS [finished_commentary.raw],f.[icm_crn_psn_nickname_p] AS [icm_crn_psn_nickname.presence],f.[icm_crn_psn_nickname_w] AS [icm_crn_psn_nickname.wire],f.[icm_crn_psn_nickname_raw] AS [icm_crn_psn_nickname.raw],f.[icm_dvr_iil_name_p] AS [icm_dvr_iil_name.presence],f.[icm_dvr_iil_name_w] AS [icm_dvr_iil_name.wire],f.[icm_dvr_iil_name_raw] AS [icm_dvr_iil_name.raw],f.[icm_fer_name_p] AS [icm_fer_name.presence],f.[icm_fer_name_w] AS [icm_fer_name.wire],f.[icm_fer_name_raw] AS [icm_fer_name.raw],f.[icm_fis_fit_corporation_sequence_number_p] AS [icm_fis_fit_corporation_sequence_number.presence],f.[icm_fis_fit_corporation_sequence_number_w] AS [icm_fis_fit_corporation_sequence_number.wire],f.[icm_fis_fit_corporation_sequence_number_raw] AS [icm_fis_fit_corporation_sequence_number.raw],f.[icm_fis_fit_pyr_nickname_p] AS [icm_fis_fit_pyr_nickname.presence],f.[icm_fis_fit_pyr_nickname_w] AS [icm_fis_fit_pyr_nickname.wire],f.[icm_fis_fit_pyr_nickname_raw] AS [icm_fis_fit_pyr_nickname.raw],f.[icm_fis_ioe_number_p] AS [icm_fis_ioe_number.presence],f.[icm_fis_ioe_number_w] AS [icm_fis_ioe_number.wire],f.[icm_fis_ioe_number_raw] AS [icm_fis_ioe_number.raw],f.[icm_ttt_dealing_type_p] AS [icm_ttt_dealing_type.presence],f.[icm_ttt_dealing_type_w] AS [icm_ttt_dealing_type.wire],f.[icm_ttt_dealing_type_raw] AS [icm_ttt_dealing_type.raw],f.[icm_ttt_ore_code_p] AS [icm_ttt_ore_code.presence],f.[icm_ttt_ore_code_w] AS [icm_ttt_ore_code.wire],f.[icm_ttt_ore_code_raw] AS [icm_ttt_ore_code.raw],f.[icm_ttt_ore_description_p] AS [icm_ttt_ore_description.presence],f.[icm_ttt_ore_description_w] AS [icm_ttt_ore_description.wire],f.[icm_ttt_ore_description_raw] AS [icm_ttt_ore_description.raw],f.[icm_ttt_solution_type_p] AS [icm_ttt_solution_type.presence],f.[icm_ttt_solution_type_w] AS [icm_ttt_solution_type.wire],f.[icm_ttt_solution_type_raw] AS [icm_ttt_solution_type.raw],f.[icm_ttt_treatment_at_p] AS [icm_ttt_treatment_at.presence],f.[icm_ttt_treatment_at_w] AS [icm_ttt_treatment_at.wire],f.[icm_ttt_treatment_at_raw] AS [icm_ttt_treatment_at.raw],f.[icm_vie_license_plate_p] AS [icm_vie_license_plate.presence],f.[icm_vie_license_plate_w] AS [icm_vie_license_plate.wire],f.[icm_vie_license_plate_raw] AS [icm_vie_license_plate.raw],f.[informed_by_p] AS [informed_by.presence],f.[informed_by_w] AS [informed_by.wire],f.[informed_by_raw] AS [informed_by.raw],f.[insurance_claim_commentary_p] AS [insurance_claim_commentary.presence],f.[insurance_claim_commentary_w] AS [insurance_claim_commentary.wire],f.[insurance_claim_commentary_raw] AS [insurance_claim_commentary.raw],f.[insurance_claim_location_p] AS [insurance_claim_location.presence],f.[insurance_claim_location_w] AS [insurance_claim_location.wire],f.[insurance_claim_location_raw] AS [insurance_claim_location.raw],f.[insurance_claim_total_p] AS [insurance_claim_total.presence],f.[insurance_claim_total_w] AS [insurance_claim_total.wire],f.[insurance_claim_total_raw] AS [insurance_claim_total.raw],f.[insurer_credits_subtotal_p] AS [insurer_credits_subtotal.presence],f.[insurer_credits_subtotal_w] AS [insurer_credits_subtotal.wire],f.[insurer_credits_subtotal_raw] AS [insurer_credits_subtotal.raw],f.[internal_description_p] AS [internal_description.presence],f.[internal_description_w] AS [internal_description.wire],f.[internal_description_raw] AS [internal_description.raw],f.[invoices_count_p] AS [invoices_count.presence],f.[invoices_count_w] AS [invoices_count.wire],f.[invoices_count_raw] AS [invoices_count.raw],f.[invoices_value_p] AS [invoices_value.presence],f.[invoices_value_w] AS [invoices_value.wire],f.[invoices_value_raw] AS [invoices_value.raw],f.[invoices_volumes_p] AS [invoices_volumes.presence],f.[invoices_volumes_w] AS [invoices_volumes.wire],f.[invoices_volumes_raw] AS [invoices_volumes.raw],f.[invoices_weight_p] AS [invoices_weight.presence],f.[invoices_weight_w] AS [invoices_weight.wire],f.[invoices_weight_raw] AS [invoices_weight.raw],f.[list_of_claimed_products_p] AS [list_of_claimed_products.presence],f.[list_of_claimed_products_w] AS [list_of_claimed_products.wire],f.[list_of_claimed_products_raw] AS [list_of_claimed_products.raw],f.[occurrence_at_date_p] AS [occurrence_at_date.presence],f.[occurrence_at_date_w] AS [occurrence_at_date.wire],f.[occurrence_at_date_raw] AS [occurrence_at_date.raw],f.[occurrence_at_time_p] AS [occurrence_at_time.presence],f.[occurrence_at_time_w] AS [occurrence_at_time.wire],f.[occurrence_at_time_raw] AS [occurrence_at_time.raw],f.[opening_at_date_p] AS [opening_at_date.presence],f.[opening_at_date_w] AS [opening_at_date.wire],f.[opening_at_date_raw] AS [opening_at_date.raw],f.[policy_number_p] AS [policy_number.presence],f.[policy_number_w] AS [policy_number.wire],f.[policy_number_raw] AS [policy_number.raw],f.[rcfdc_p] AS [rcfdc.presence],f.[rcfdc_w] AS [rcfdc.wire],f.[rcfdc_raw] AS [rcfdc.raw],f.[rctac_p] AS [rctac.presence],f.[rctac_w] AS [rctac.wire],f.[rctac_raw] AS [rctac.raw],f.[rctrc_p] AS [rctrc.presence],f.[rctrc_w] AS [rctrc.wire],f.[rctrc_raw] AS [rctrc.raw],f.[responsible_credits_subtotal_p] AS [responsible_credits_subtotal.presence],f.[responsible_credits_subtotal_w] AS [responsible_credits_subtotal.wire],f.[responsible_credits_subtotal_raw] AS [responsible_credits_subtotal.raw],f.[responsible_debit_entries_subtotal_p] AS [responsible_debit_entries_subtotal.presence],f.[responsible_debit_entries_subtotal_w] AS [responsible_debit_entries_subtotal.wire],f.[responsible_debit_entries_subtotal_raw] AS [responsible_debit_entries_subtotal.raw],f.[sequence_code_p] AS [sequence_code.presence],f.[sequence_code_w] AS [sequence_code.wire],f.[sequence_code_raw] AS [sequence_code.raw] FOR JSON PATH,INCLUDE_NULL_VALUES,WITHOUT_ARRAY_WRAPPER)",
+          "sourcePath": null
+        },
+        {
+          "ordinal": 34,
+          "name": "Data de extracao",
+          "expression": "capture.sealed_at",
+          "sourcePath": null
+        }
+      ]
+    }
+  ]
+}

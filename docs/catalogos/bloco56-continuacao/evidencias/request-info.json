@@ -1,0 +1,21 @@
+{
+  "phase": "B56_CONTINUATION_INFO_01",
+  "authorization": "User requested continued API/documentation investigation and reaffirmed use of provisioned .env after the rotation question. This adopts bounded source reads only; no rotation or security acceptance is inferred.",
+  "predecessor": "target/bloco56/completion-receipt.json",
+  "templates": [8636, 4924, 10633, 6392],
+  "operation": "GET /api/analytics/reports/{template}/info",
+  "maximumCalls": 4,
+  "serial": true,
+  "retry": 0,
+  "redirect": 0,
+  "connectTimeoutSeconds": 10,
+  "timeoutSeconds": 30,
+  "maximumResponseBytes": 10485760,
+  "stop": "first non-2xx, 429, transport/schema/size failure or cap",
+  "retention": "status, counts, safe technical metadata names and type enums only; raw response and credentials in memory only",
+  "v2041": "UNRESOLVED_NO_ROTATION_INFERRED",
+  "sqlOperations": 0,
+  "runtimeCampaigns": 0,
+  "budgetTransferred": false,
+  "recovery": "GET has no application write rollback. Record the outcome per reservation; never repeat an unknown request. Preserve all earlier evidence."
+}

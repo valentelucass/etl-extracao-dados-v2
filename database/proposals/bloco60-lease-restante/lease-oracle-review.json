@@ -1,0 +1,16 @@
+{
+  "repeatedPhysicalExecution": false,
+  "reason": "Recovery refuses expired lease as LEASE_LOST with SOURCE_DQ=40, distinct from failure to acquire a lock. Require zero HTTP, unchanged sealed PROMOTED evidence, PASSED DQ and zero publication/application/history.",
+  "additionalAssertions": 13,
+  "correctedExit": 40,
+  "originalFailedEvidencePreserved": true,
+  "originalExit": 30,
+  "sources": [
+    "src/main/java/br/com/esl/etl/v2/bootstrap/LocalUsuariosRuntime.java:93",
+    "database/migrations/V024__bind_source_protocols_and_users_runtime.sql:859",
+    "src/test/java/br/com/esl/etl/v2/bootstrap/RuntimeUsersPhysicalProbe.java:201"
+  ],
+  "case": "LEASE_EXPIRED_REFUSED",
+  "readbackSha256": "4e7d65b1866f90a760362c3276cd5a5622a268ab1f411be246caa2e52c86adb6",
+  "passed": true
+}

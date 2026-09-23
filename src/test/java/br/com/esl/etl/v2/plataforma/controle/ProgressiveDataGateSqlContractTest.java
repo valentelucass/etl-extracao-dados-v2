@@ -1,5 +1,6 @@
 package br.com.esl.etl.v2.plataforma.controle;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -8,11 +9,42 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.stream.Stream;
 import org.junit.jupiter.api.Test;
 
 class ProgressiveDataGateSqlContractTest {
 
     private static final Path DATABASE_DIRECTORY = Path.of("database");
+
+    @Test
+    void repositoryMigrationAllowlistMatchesEveryVersionedFileAndBaseline() throws IOException {
+        final String validator = read(Path.of("scripts/validation/Test-ProgressiveDataGate.ps1"));
+        final Matcher declaration =
+                Pattern.compile("(?s)\\$expectedMigrations = @\\((.*?)\\)").matcher(validator);
+        assertTrue(declaration.find(), "An explicit migration allowlist is required.");
+        final List<String> allowed =
+                Pattern.compile("'(V[0-9]{3}__[^']+\\.sql)'")
+                        .matcher(declaration.group(1))
+                        .results()
+                        .map(match -> match.group(1))
+                        .sorted()
+                        .toList();
+        try (Stream<Path> files = Files.list(DATABASE_DIRECTORY.resolve("migrations"))) {
+            assertEquals(
+                    files.filter(Files::isRegularFile)
+                            .map(path -> path.getFileName().toString())
+                            .sorted()
+                            .toList(),
+                    allowed);
+        }
+        final String baseline =
+                read(DATABASE_DIRECTORY.resolve("baseline/001_schema_foundation_baseline.sql"));
+        for (final String migration : allowed) {
+            assertTrue(baseline.contains(":r \"..\\migrations\\" + migration + "\""), migration);
+        }
+    }
 
     @Test
     void keepsTheProgressiveGateBoundToBothManifestsAndAllActiveMigrations() {
@@ -31,8 +63,8 @@ class ProgressiveDataGateSqlContractTest {
         assertTrue(gate.contains("CK_ctl_execution_attempt_transition_sequence_lifecycle_bound"));
         assertTrue(gate.contains("CK_ctl_execution_state_event_lifecycle_bound"));
         assertTrue(gate.contains("ufn_invalid_execution_state_ledger"));
-        assertTrue(gate.contains("Constraint fora do contrato V001-V009."));
-        assertTrue(gate.contains("Permissão direta fora do contrato mínimo V001-V009."));
+        assertTrue(gate.contains("Constraint fora do contrato V001-V017."));
+        assertTrue(gate.contains("Permissão direta fora do contrato mínimo V001-V017."));
         assertTrue(gate.contains("ROLE_MEMBERSHIP"));
         assertTrue(gate.contains("Gate progressivo de dados V2 validado com sucesso."));
 
@@ -46,6 +78,12 @@ class ProgressiveDataGateSqlContractTest {
         assertTrue(exercise.contains("V007__create_usuarios_current_history.sql"));
         assertTrue(exercise.contains("V008__create_governed_references.sql"));
         assertTrue(exercise.contains("V009__create_usuario_dimension_current_view.sql"));
+        assertTrue(exercise.contains("V010__create_coletas_shadow_vertical.sql"));
+        assertTrue(exercise.contains("V011__create_cotacoes_shadow_vertical.sql"));
+        assertTrue(exercise.contains("V012__create_manifestos_shadow_vertical.sql"));
+        assertTrue(exercise.contains("V013__create_fretes_shadow_vertical.sql"));
+        assertTrue(exercise.contains("V014__create_localizacao_cargas_shadow_vertical.sql"));
+        assertTrue(exercise.contains("V015__create_runtime_durable_recovery.sql"));
         assertTrue(exercise.contains("005_validate_progressive_data_gate.sql"));
         assertTrue(exercise.contains("007_validate_staging_promotion_kernel.sql"));
         assertTrue(exercise.contains("009_validate_atomic_publication_protocol.sql"));
@@ -54,6 +92,9 @@ class ProgressiveDataGateSqlContractTest {
         assertTrue(exercise.contains("026_validate_usuarios_current_history.sql"));
         assertTrue(exercise.contains("030_validate_governed_references.sql"));
         assertTrue(exercise.contains("035_validate_usuarios_dimension_current.sql"));
+        assertTrue(exercise.contains("042_validate_manifestos_shadow_vertical.sql"));
+        assertTrue(exercise.contains("044_validate_fretes_shadow_vertical.sql"));
+        assertTrue(exercise.contains("046_validate_localizacao_cargas_shadow_vertical.sql"));
         assertTrue(exercise.contains("ROLLBACK TRANSACTION"));
     }
 
@@ -93,6 +134,9 @@ class ProgressiveDataGateSqlContractTest {
         assertTrue(runner.contains("032_exercise_governed_references_migrator_rollback.sql"));
         assertTrue(runner.contains("033_exercise_governed_references_negative_rollback.sql"));
         assertTrue(runner.contains("036_exercise_usuarios_dimension_current_rollback.sql"));
+        assertTrue(runner.contains("043_exercise_manifestos_shadow_vertical_rollback.sql"));
+        assertTrue(runner.contains("045_exercise_fretes_shadow_vertical_rollback.sql"));
+        assertTrue(runner.contains("047_exercise_localizacao_cargas_shadow_vertical_rollback.sql"));
         assertTrue(runner.contains("Test-ProgressiveDataGate.ps1"));
         assertTrue(runner.contains("Test-AtomicPublicationConcurrency.ps1"));
         assertTrue(runner.contains("Test-StagingLifecycleConcurrency.ps1"));
@@ -100,6 +144,9 @@ class ProgressiveDataGateSqlContractTest {
         assertTrue(runner.contains("Test-GovernedReferencesConcurrency.ps1"));
         assertTrue(runner.contains("Test-GovernedReferencesShowplan.ps1"));
         assertTrue(runner.contains("Test-UsuariosDimensionCurrentShowplan.ps1"));
+        assertTrue(runner.contains("Test-ManifestosShadowConcurrency.ps1"));
+        assertTrue(runner.contains("Test-FretesShadowConcurrency.ps1"));
+        assertTrue(runner.contains("Test-LocalizacaoCargasShadowConcurrency.ps1"));
         assertTrue(staticCheck.contains("Test-SchemaFoundationManifest.ps1"));
         assertTrue(staticCheck.contains("Test-ControlPlaneManifest.ps1"));
         assertTrue(staticCheck.contains("V003__create_control_plane.sql"));
@@ -112,6 +159,9 @@ class ProgressiveDataGateSqlContractTest {
         assertTrue(staticCheck.contains("Test-ObservabilityDataQualityManifest.ps1"));
         assertTrue(staticCheck.contains("Test-GovernedReferencesManifest.ps1"));
         assertTrue(staticCheck.contains("Test-UsuariosDimensionCurrentManifest.ps1"));
+        assertTrue(staticCheck.contains("Test-ManifestosV2026ShadowVertical.ps1"));
+        assertTrue(staticCheck.contains("Test-FretesV2011ShadowVertical.ps1"));
+        assertTrue(staticCheck.contains("Test-LocalizacaoCargasV2028ShadowVertical.ps1"));
         final String concurrencyProbe =
                 read(Path.of("scripts/validation/Test-AtomicPublicationConcurrency.ps1"));
         assertTrue(concurrencyProbe.contains("sys.sp_getapplock"));

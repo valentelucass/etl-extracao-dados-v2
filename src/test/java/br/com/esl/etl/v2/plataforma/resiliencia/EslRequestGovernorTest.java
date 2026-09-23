@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.Duration;
+import java.time.Instant;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
@@ -168,5 +169,28 @@ class EslRequestGovernorTest {
                 workload.repartitioner(Duration.ofDays(1)));
         assertThrows(
                 IllegalStateException.class, () -> workload.repartitioner(Duration.ofHours(1)));
+    }
+
+    @Test
+    void cancellationDominatesRepartitionWithoutConsumingItsBudget() {
+        final CancellationSignal signal = new CancellationSignal();
+        final EslRequestGovernor.Cycle.Workload workload =
+                new EslRequestGovernor(
+                                ResilienceTestSupport.policy(),
+                                MonotonicTicker.systemTicker(),
+                                ResilienceSleeper.threadSleeper())
+                        .beginCycle(signal)
+                        .beginWorkload(EslWorkload.COLETAS);
+        final BoundedWindowRepartitioner repartitioner = workload.repartitioner(Duration.ofDays(1));
+        final Instant start = Instant.parse("2026-08-01T00:00:00Z");
+        signal.cancel();
+
+        assertThrows(
+                ResilienceCancelledException.class,
+                () ->
+                        repartitioner.split(
+                                FailureKind.WINDOW_TOO_LARGE_HTTP_422,
+                                new RepartitionWindow(start, start.plus(Duration.ofDays(2)))));
+        assertEquals(0, repartitioner.usedRepartitions());
     }
 }

@@ -1,0 +1,20 @@
+{
+  "data": [
+    {
+      "sequence_code": 550690601,
+      "requested_at": "2024-01-01",
+      "qoe_qes_total": "10.00",
+      "qoe_qes_ony_sae_code": "SP",
+      "qoe_qes_diy_sae_code": "RJ",
+      "qoe_uer_name": "SYNTHETIC A"
+    },
+    {
+      "sequence_code": 550690602,
+      "requested_at": "2024-01-01",
+      "qoe_qes_total": "20.00",
+      "qoe_qes_ony_sae_code": "RJ",
+      "qoe_qes_diy_sae_code": "SP",
+      "qoe_uer_name": null
+    }
+  ]
+}

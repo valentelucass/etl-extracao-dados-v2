@@ -1,0 +1,89 @@
+{
+  "version": 1,
+  "layer": "OFFLINE_ONLY",
+  "status": "LOCAL_CORRECTION_VALIDATED",
+  "testedManifestSha256": "71e103819864c244ff09d3f221e582165ed0b90082f6c7fd675cde523e999923",
+  "validations": [
+    {
+      "path": "target/correcao-local-pos0216-20260921-01/succession-02.log",
+      "sha256": "5546de616909dbc473296291577855eafaa2d237be794280ed06215434c76d58",
+      "status": "PASS"
+    },
+    {
+      "path": "target/correcao-local-pos0216-20260921-01/fleet-02.log",
+      "sha256": "4843acbfaf0ef614a548791d4fbd32e36439bbb053f0613b0b70550e120c68fe",
+      "status": "PASS"
+    },
+    {
+      "path": "target/correcao-local-pos0216-20260921-01/trail-02.log",
+      "sha256": "624cf8745192e08e633174136c6a19c5ec4aca77162e538068e2d18465f14e55",
+      "status": "PASS"
+    },
+    {
+      "path": "target/correcao-local-pos0216-20260921-01/preparation-01.log",
+      "sha256": "d2612bdef3cf21d99d0f8cdcd7d5207ed31029648db854bcf8da6911373904c9",
+      "status": "PASS"
+    },
+    {
+      "path": "target/correcao-local-pos0216-20260921-01/trilha-preparation-01.log",
+      "sha256": "e19ec324df75fd620d8c2d11a5589a5e8001c85044ce62659a1bfe6f8134bc5e",
+      "status": "PASS"
+    },
+    {
+      "path": "target/correcao-local-pos0216-20260921-01/scan-catalog-01.log",
+      "sha256": "f6c8577402905353f826bf075bf00357e59d6622d245dc2ded802e6a14406ac8",
+      "status": "PASS"
+    },
+    {
+      "path": "target/correcao-local-pos0216-20260921-01/scan-snapshots-01.log",
+      "sha256": "f35c2a104d4b1c57d7dcfe675b29b2992008290ddb44f70ec90cbba60cf5ee3c",
+      "status": "PASS"
+    },
+    {
+      "path": "target/correcao-local-pos0216-20260921-01/scan-validators-01.log",
+      "sha256": "ba3e3172b61610ea121833299f8bd846e4029620a8655a5523f7b86f461218e9",
+      "status": "PASS"
+    }
+  ],
+  "preservedFailures": [
+    {
+      "path": "target/correcao-local-pos0216-20260921-01/succession-01.log",
+      "sha256": "a6236fc36f6757bb8ddf39648c9adb2518ee975bd3d5074b85cb54d9efed74da",
+      "status": "FAILED",
+      "cause": "OFFLINE_SUCCESSION_PATH",
+      "correction": "Unicode letters accepted; traversal and absolute paths remain rejected"
+    },
+    {
+      "path": "target/correcao-local-pos0216-20260921-01/fleet-01.log",
+      "sha256": "a6236fc36f6757bb8ddf39648c9adb2518ee975bd3d5074b85cb54d9efed74da",
+      "status": "FAILED",
+      "cause": "OFFLINE_SUCCESSION_PATH",
+      "correction": "Unicode letters accepted; traversal and absolute paths remain rejected"
+    },
+    {
+      "path": "target/correcao-local-pos0216-20260921-01/trail-01.log",
+      "sha256": "a6236fc36f6757bb8ddf39648c9adb2518ee975bd3d5074b85cb54d9efed74da",
+      "status": "FAILED",
+      "cause": "OFFLINE_SUCCESSION_PATH",
+      "correction": "Unicode letters accepted; traversal and absolute paths remain rejected"
+    }
+  ],
+  "guards": {
+    "succession": 14,
+    "p06": 11,
+    "preparation": 13,
+    "trailPreparation": 24
+  },
+  "historicalJavaEvidence": {
+    "path": "docs/catalogos/preparacao-offline-p10-p21/validacoes.json",
+    "sha256": "91fc18202b8ee537c9d5f27e83d3b62144ad8773ebfe8968bbc45e678217d46e",
+    "tests": 48,
+    "classes": 10,
+    "rerunThisCorrection": false,
+    "reason": "No Java/runtime/dependency/schema changes"
+  },
+  "construction": "39/45",
+  "acceptances": "67/115",
+  "externalEffects": 0,
+  "newAcceptances": 0
+}

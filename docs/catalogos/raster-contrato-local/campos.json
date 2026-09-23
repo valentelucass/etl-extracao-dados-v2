@@ -1,0 +1,631 @@
+{
+  "version": 1,
+  "provenance": "LEGACY_DTO_DECLARATIONS_NOT_PROVIDER_SCHEMA",
+  "fields": [
+    {
+      "entity": "TRIP",
+      "legacyField": "codSolicitacao",
+      "aliases": [
+        "CodSolicitacao",
+        "codSolicitacao"
+      ],
+      "declaredJavaType": "Long",
+      "wireTypeClassification": "TRANSITIONAL",
+      "coercionIsNotWireTypeProof": true,
+      "source": "src/main/java/br/com/extrator/dominio/raster/RasterViagemDTO.java"
+    },
+    {
+      "entity": "TRIP",
+      "legacyField": "sequencial",
+      "aliases": [
+        "Sequencial",
+        "sequencial"
+      ],
+      "declaredJavaType": "Long",
+      "wireTypeClassification": "TRANSITIONAL",
+      "coercionIsNotWireTypeProof": true,
+      "source": "src/main/java/br/com/extrator/dominio/raster/RasterViagemDTO.java"
+    },
+    {
+      "entity": "TRIP",
+      "legacyField": "codFilial",
+      "aliases": [
+        "CodFilial",
+        "codFilial"
+      ],
+      "declaredJavaType": "Integer",
+      "wireTypeClassification": "TRANSITIONAL",
+      "coercionIsNotWireTypeProof": true,
+      "source": "src/main/java/br/com/extrator/dominio/raster/RasterViagemDTO.java"
+    },
+    {
+      "entity": "TRIP",
+      "legacyField": "statusViagem",
+      "aliases": [
+        "StatusViagem",
+        "statusViagem"
+      ],
+      "declaredJavaType": "String",
+      "wireTypeClassification": "TRANSITIONAL",
+      "coercionIsNotWireTypeProof": true,
+      "source": "src/main/java/br/com/extrator/dominio/raster/RasterViagemDTO.java"
+    },
+    {
+      "entity": "TRIP",
+      "legacyField": "placaVeiculo",
+      "aliases": [
+        "PlacaVeiculo",
+        "placaVeiculo"
+      ],
+      "declaredJavaType": "String",
+      "wireTypeClassification": "TRANSITIONAL",
+      "coercionIsNotWireTypeProof": true,
+      "source": "src/main/java/br/com/extrator/dominio/raster/RasterViagemDTO.java"
+    },
+    {
+      "entity": "TRIP",
+      "legacyField": "placaCarreta1",
+      "aliases": [
+        "PlacaCarreta1",
+        "placaCarreta1"
+      ],
+      "declaredJavaType": "String",
+      "wireTypeClassification": "TRANSITIONAL",
+      "coercionIsNotWireTypeProof": true,
+      "source": "src/main/java/br/com/extrator/dominio/raster/RasterViagemDTO.java"
+    },
+    {
+      "entity": "TRIP",
+      "legacyField": "placaCarreta2",
+      "aliases": [
+        "PlacaCarreta02",
+        "PlacaCarreta2",
+        "placaCarreta2"
+      ],
+      "declaredJavaType": "String",
+      "wireTypeClassification": "TRANSITIONAL",
+      "coercionIsNotWireTypeProof": true,
+      "source": "src/main/java/br/com/extrator/dominio/raster/RasterViagemDTO.java"
+    },
+    {
+      "entity": "TRIP",
+      "legacyField": "placaCarreta3",
+      "aliases": [
+        "PlacaCarreta3",
+        "placaCarreta3"
+      ],
+      "declaredJavaType": "String",
+      "wireTypeClassification": "TRANSITIONAL",
+      "coercionIsNotWireTypeProof": true,
+      "source": "src/main/java/br/com/extrator/dominio/raster/RasterViagemDTO.java"
+    },
+    {
+      "entity": "TRIP",
+      "legacyField": "cpfMotorista1",
+      "aliases": [
+        "CPFMotorista1",
+        "CpfMotorista1",
+        "cpfMotorista1"
+      ],
+      "declaredJavaType": "String",
+      "wireTypeClassification": "TRANSITIONAL",
+      "coercionIsNotWireTypeProof": true,
+      "source": "src/main/java/br/com/extrator/dominio/raster/RasterViagemDTO.java"
+    },
+    {
+      "entity": "TRIP",
+      "legacyField": "cpfMotorista2",
+      "aliases": [
+        "CPFMotorista2",
+        "CpfMotorista2",
+        "cpfMotorista2"
+      ],
+      "declaredJavaType": "String",
+      "wireTypeClassification": "TRANSITIONAL",
+      "coercionIsNotWireTypeProof": true,
+      "source": "src/main/java/br/com/extrator/dominio/raster/RasterViagemDTO.java"
+    },
+    {
+      "entity": "TRIP",
+      "legacyField": "cnpjClienteOrig",
+      "aliases": [
+        "CNPJClienteOrig",
+        "CnpjClienteOrig",
+        "cnpjClienteOrig"
+      ],
+      "declaredJavaType": "String",
+      "wireTypeClassification": "TRANSITIONAL",
+      "coercionIsNotWireTypeProof": true,
+      "source": "src/main/java/br/com/extrator/dominio/raster/RasterViagemDTO.java"
+    },
+    {
+      "entity": "TRIP",
+      "legacyField": "cnpjClienteDest",
+      "aliases": [
+        "CNPJClienteDest",
+        "CnpjClienteDest",
+        "cnpjClienteDest"
+      ],
+      "declaredJavaType": "String",
+      "wireTypeClassification": "TRANSITIONAL",
+      "coercionIsNotWireTypeProof": true,
+      "source": "src/main/java/br/com/extrator/dominio/raster/RasterViagemDTO.java"
+    },
+    {
+      "entity": "TRIP",
+      "legacyField": "codIbgeCidadeOrig",
+      "aliases": [
+        "CodIBGECidadeOrig",
+        "CodIbgeCidadeOrig",
+        "codIbgeCidadeOrig"
+      ],
+      "declaredJavaType": "Long",
+      "wireTypeClassification": "TRANSITIONAL",
+      "coercionIsNotWireTypeProof": true,
+      "source": "src/main/java/br/com/extrator/dominio/raster/RasterViagemDTO.java"
+    },
+    {
+      "entity": "TRIP",
+      "legacyField": "codIbgeCidadeDest",
+      "aliases": [
+        "CodIBGECidadeDest",
+        "CodIbgeCidadeDest",
+        "codIbgeCidadeDest"
+      ],
+      "declaredJavaType": "Long",
+      "wireTypeClassification": "TRANSITIONAL",
+      "coercionIsNotWireTypeProof": true,
+      "source": "src/main/java/br/com/extrator/dominio/raster/RasterViagemDTO.java"
+    },
+    {
+      "entity": "TRIP",
+      "legacyField": "dataHoraPrevIni",
+      "aliases": [
+        "DataHoraPrevIni",
+        "dataHoraPrevIni"
+      ],
+      "declaredJavaType": "String",
+      "wireTypeClassification": "TRANSITIONAL",
+      "coercionIsNotWireTypeProof": true,
+      "source": "src/main/java/br/com/extrator/dominio/raster/RasterViagemDTO.java"
+    },
+    {
+      "entity": "TRIP",
+      "legacyField": "dataHoraPrevFim",
+      "aliases": [
+        "DataHoraPrevFim",
+        "dataHoraPrevFim"
+      ],
+      "declaredJavaType": "String",
+      "wireTypeClassification": "TRANSITIONAL",
+      "coercionIsNotWireTypeProof": true,
+      "source": "src/main/java/br/com/extrator/dominio/raster/RasterViagemDTO.java"
+    },
+    {
+      "entity": "TRIP",
+      "legacyField": "dataHoraRealIni",
+      "aliases": [
+        "DataHoraRealIni",
+        "dataHoraRealIni"
+      ],
+      "declaredJavaType": "String",
+      "wireTypeClassification": "TRANSITIONAL",
+      "coercionIsNotWireTypeProof": true,
+      "source": "src/main/java/br/com/extrator/dominio/raster/RasterViagemDTO.java"
+    },
+    {
+      "entity": "TRIP",
+      "legacyField": "dataHoraRealFim",
+      "aliases": [
+        "DataHoraRealFim",
+        "dataHoraRealFim"
+      ],
+      "declaredJavaType": "String",
+      "wireTypeClassification": "TRANSITIONAL",
+      "coercionIsNotWireTypeProof": true,
+      "source": "src/main/java/br/com/extrator/dominio/raster/RasterViagemDTO.java"
+    },
+    {
+      "entity": "TRIP",
+      "legacyField": "dataHoraIdentificouFimViagem",
+      "aliases": [
+        "DataHoraIdentificouFimViagem",
+        "dataHoraIdentificouFimViagem"
+      ],
+      "declaredJavaType": "String",
+      "wireTypeClassification": "TRANSITIONAL",
+      "coercionIsNotWireTypeProof": true,
+      "source": "src/main/java/br/com/extrator/dominio/raster/RasterViagemDTO.java"
+    },
+    {
+      "entity": "TRIP",
+      "legacyField": "tempoTotalViagem",
+      "aliases": [
+        "TempoTotalViagem",
+        "tempoTotalViagem"
+      ],
+      "declaredJavaType": "Integer",
+      "wireTypeClassification": "TRANSITIONAL",
+      "coercionIsNotWireTypeProof": true,
+      "source": "src/main/java/br/com/extrator/dominio/raster/RasterViagemDTO.java"
+    },
+    {
+      "entity": "TRIP",
+      "legacyField": "dentroPrazo",
+      "aliases": [
+        "DentroPrazo",
+        "dentroPrazo"
+      ],
+      "declaredJavaType": "String",
+      "wireTypeClassification": "TRANSITIONAL",
+      "coercionIsNotWireTypeProof": true,
+      "source": "src/main/java/br/com/extrator/dominio/raster/RasterViagemDTO.java"
+    },
+    {
+      "entity": "TRIP",
+      "legacyField": "percentualAtraso",
+      "aliases": [
+        "PercentualAtraso",
+        "percentualAtraso"
+      ],
+      "declaredJavaType": "BigDecimal",
+      "wireTypeClassification": "TRANSITIONAL",
+      "coercionIsNotWireTypeProof": true,
+      "source": "src/main/java/br/com/extrator/dominio/raster/RasterViagemDTO.java"
+    },
+    {
+      "entity": "TRIP",
+      "legacyField": "rodouForaHorario",
+      "aliases": [
+        "RodouForaHorario",
+        "rodouForaHorario"
+      ],
+      "declaredJavaType": "String",
+      "wireTypeClassification": "TRANSITIONAL",
+      "coercionIsNotWireTypeProof": true,
+      "source": "src/main/java/br/com/extrator/dominio/raster/RasterViagemDTO.java"
+    },
+    {
+      "entity": "TRIP",
+      "legacyField": "velocidadeMedia",
+      "aliases": [
+        "VelocidadeMedia",
+        "velocidadeMedia"
+      ],
+      "declaredJavaType": "BigDecimal",
+      "wireTypeClassification": "TRANSITIONAL",
+      "coercionIsNotWireTypeProof": true,
+      "source": "src/main/java/br/com/extrator/dominio/raster/RasterViagemDTO.java"
+    },
+    {
+      "entity": "TRIP",
+      "legacyField": "eventosVelocidade",
+      "aliases": [
+        "EventosVelocidade",
+        "eventosVelocidade"
+      ],
+      "declaredJavaType": "Integer",
+      "wireTypeClassification": "TRANSITIONAL",
+      "coercionIsNotWireTypeProof": true,
+      "source": "src/main/java/br/com/extrator/dominio/raster/RasterViagemDTO.java"
+    },
+    {
+      "entity": "TRIP",
+      "legacyField": "desviosDeRota",
+      "aliases": [
+        "DesviosDeRota",
+        "desviosDeRota"
+      ],
+      "declaredJavaType": "Integer",
+      "wireTypeClassification": "TRANSITIONAL",
+      "coercionIsNotWireTypeProof": true,
+      "source": "src/main/java/br/com/extrator/dominio/raster/RasterViagemDTO.java"
+    },
+    {
+      "entity": "TRIP",
+      "legacyField": "linkTimeline",
+      "aliases": [
+        "LinkTimeLine",
+        "LinkTimeline",
+        "linkTimeLine",
+        "linkTimeline"
+      ],
+      "declaredJavaType": "String",
+      "wireTypeClassification": "TRANSITIONAL",
+      "coercionIsNotWireTypeProof": true,
+      "source": "src/main/java/br/com/extrator/dominio/raster/RasterViagemDTO.java"
+    },
+    {
+      "entity": "TRIP",
+      "legacyField": "rota",
+      "aliases": [
+        "Rota",
+        "rota"
+      ],
+      "declaredJavaType": "RasterRotaDTO",
+      "wireTypeClassification": "TRANSITIONAL",
+      "coercionIsNotWireTypeProof": true,
+      "source": "src/main/java/br/com/extrator/dominio/raster/RasterViagemDTO.java"
+    },
+    {
+      "entity": "TRIP",
+      "legacyField": "coletasEntregas",
+      "aliases": [
+        "ColetasEntregas",
+        "coletasEntregas"
+      ],
+      "declaredJavaType": "List<RasterParadaDTO>",
+      "wireTypeClassification": "TRANSITIONAL",
+      "coercionIsNotWireTypeProof": true,
+      "source": "src/main/java/br/com/extrator/dominio/raster/RasterViagemDTO.java"
+    },
+    {
+      "entity": "STOP",
+      "legacyField": "ordem",
+      "aliases": [
+        "Ordem",
+        "ordem"
+      ],
+      "declaredJavaType": "Integer",
+      "wireTypeClassification": "TRANSITIONAL",
+      "coercionIsNotWireTypeProof": true,
+      "source": "src/main/java/br/com/extrator/dominio/raster/RasterParadaDTO.java"
+    },
+    {
+      "entity": "STOP",
+      "legacyField": "tipo",
+      "aliases": [
+        "Tipo",
+        "tipo"
+      ],
+      "declaredJavaType": "String",
+      "wireTypeClassification": "TRANSITIONAL",
+      "coercionIsNotWireTypeProof": true,
+      "source": "src/main/java/br/com/extrator/dominio/raster/RasterParadaDTO.java"
+    },
+    {
+      "entity": "STOP",
+      "legacyField": "codIbgeCidade",
+      "aliases": [
+        "CodIBGECidade",
+        "codIBGECidade",
+        "CodIbgeCidade"
+      ],
+      "declaredJavaType": "Long",
+      "wireTypeClassification": "TRANSITIONAL",
+      "coercionIsNotWireTypeProof": true,
+      "source": "src/main/java/br/com/extrator/dominio/raster/RasterParadaDTO.java"
+    },
+    {
+      "entity": "STOP",
+      "legacyField": "cnpjCliente",
+      "aliases": [
+        "CNPJCliente",
+        "cnpjCliente",
+        "CnpjCliente"
+      ],
+      "declaredJavaType": "String",
+      "wireTypeClassification": "TRANSITIONAL",
+      "coercionIsNotWireTypeProof": true,
+      "source": "src/main/java/br/com/extrator/dominio/raster/RasterParadaDTO.java"
+    },
+    {
+      "entity": "STOP",
+      "legacyField": "codigoCliente",
+      "aliases": [
+        "CodigoCliente",
+        "codigoCliente"
+      ],
+      "declaredJavaType": "String",
+      "wireTypeClassification": "TRANSITIONAL",
+      "coercionIsNotWireTypeProof": true,
+      "source": "src/main/java/br/com/extrator/dominio/raster/RasterParadaDTO.java"
+    },
+    {
+      "entity": "STOP",
+      "legacyField": "dataHoraPrevChegada",
+      "aliases": [
+        "DataHoraPrevChegada",
+        "dataHoraPrevChegada"
+      ],
+      "declaredJavaType": "String",
+      "wireTypeClassification": "TRANSITIONAL",
+      "coercionIsNotWireTypeProof": true,
+      "source": "src/main/java/br/com/extrator/dominio/raster/RasterParadaDTO.java"
+    },
+    {
+      "entity": "STOP",
+      "legacyField": "dataHoraPrevSaida",
+      "aliases": [
+        "DataHoraPrevSaida",
+        "dataHoraPrevSaida"
+      ],
+      "declaredJavaType": "String",
+      "wireTypeClassification": "TRANSITIONAL",
+      "coercionIsNotWireTypeProof": true,
+      "source": "src/main/java/br/com/extrator/dominio/raster/RasterParadaDTO.java"
+    },
+    {
+      "entity": "STOP",
+      "legacyField": "dataHoraRealChegada",
+      "aliases": [
+        "DataHoraRealChegada",
+        "dataHoraRealChegada"
+      ],
+      "declaredJavaType": "String",
+      "wireTypeClassification": "TRANSITIONAL",
+      "coercionIsNotWireTypeProof": true,
+      "source": "src/main/java/br/com/extrator/dominio/raster/RasterParadaDTO.java"
+    },
+    {
+      "entity": "STOP",
+      "legacyField": "dataHoraRealSaida",
+      "aliases": [
+        "DataHoraRealSaida",
+        "dataHoraRealSaida"
+      ],
+      "declaredJavaType": "String",
+      "wireTypeClassification": "TRANSITIONAL",
+      "coercionIsNotWireTypeProof": true,
+      "source": "src/main/java/br/com/extrator/dominio/raster/RasterParadaDTO.java"
+    },
+    {
+      "entity": "STOP",
+      "legacyField": "latitude",
+      "aliases": [
+        "Latitude",
+        "latitude"
+      ],
+      "declaredJavaType": "BigDecimal",
+      "wireTypeClassification": "TRANSITIONAL",
+      "coercionIsNotWireTypeProof": true,
+      "source": "src/main/java/br/com/extrator/dominio/raster/RasterParadaDTO.java"
+    },
+    {
+      "entity": "STOP",
+      "legacyField": "longitude",
+      "aliases": [
+        "Longitude",
+        "longitude"
+      ],
+      "declaredJavaType": "BigDecimal",
+      "wireTypeClassification": "TRANSITIONAL",
+      "coercionIsNotWireTypeProof": true,
+      "source": "src/main/java/br/com/extrator/dominio/raster/RasterParadaDTO.java"
+    },
+    {
+      "entity": "STOP",
+      "legacyField": "dentroPrazo",
+      "aliases": [
+        "DentroPrazo",
+        "dentroPrazo"
+      ],
+      "declaredJavaType": "String",
+      "wireTypeClassification": "TRANSITIONAL",
+      "coercionIsNotWireTypeProof": true,
+      "source": "src/main/java/br/com/extrator/dominio/raster/RasterParadaDTO.java"
+    },
+    {
+      "entity": "STOP",
+      "legacyField": "diferencaTempo",
+      "aliases": [
+        "DiferencaTempo",
+        "diferencaTempo"
+      ],
+      "declaredJavaType": "String",
+      "wireTypeClassification": "TRANSITIONAL",
+      "coercionIsNotWireTypeProof": true,
+      "source": "src/main/java/br/com/extrator/dominio/raster/RasterParadaDTO.java"
+    },
+    {
+      "entity": "STOP",
+      "legacyField": "kmPercorridoEntrega",
+      "aliases": [
+        "KmPercorridoEntrega",
+        "kmPercorridoEntrega"
+      ],
+      "declaredJavaType": "BigDecimal",
+      "wireTypeClassification": "TRANSITIONAL",
+      "coercionIsNotWireTypeProof": true,
+      "source": "src/main/java/br/com/extrator/dominio/raster/RasterParadaDTO.java"
+    },
+    {
+      "entity": "STOP",
+      "legacyField": "kmRestanteEntrega",
+      "aliases": [
+        "KmRestanteEntrega",
+        "kmRestanteEntrega"
+      ],
+      "declaredJavaType": "BigDecimal",
+      "wireTypeClassification": "TRANSITIONAL",
+      "coercionIsNotWireTypeProof": true,
+      "source": "src/main/java/br/com/extrator/dominio/raster/RasterParadaDTO.java"
+    },
+    {
+      "entity": "STOP",
+      "legacyField": "chegouNaEntrega",
+      "aliases": [
+        "ChegouNaEntrega",
+        "chegouNaEntrega"
+      ],
+      "declaredJavaType": "String",
+      "wireTypeClassification": "TRANSITIONAL",
+      "coercionIsNotWireTypeProof": true,
+      "source": "src/main/java/br/com/extrator/dominio/raster/RasterParadaDTO.java"
+    },
+    {
+      "entity": "STOP",
+      "legacyField": "dataHoraUltimaPosicao",
+      "aliases": [
+        "DataHoraUltimaPosicao",
+        "dataHoraUltimaPosicao"
+      ],
+      "declaredJavaType": "String",
+      "wireTypeClassification": "TRANSITIONAL",
+      "coercionIsNotWireTypeProof": true,
+      "source": "src/main/java/br/com/extrator/dominio/raster/RasterParadaDTO.java"
+    },
+    {
+      "entity": "STOP",
+      "legacyField": "latitudeUltimaPosicao",
+      "aliases": [
+        "LatitudeUltimaPosicao",
+        "latitudeUltimaPosicao"
+      ],
+      "declaredJavaType": "BigDecimal",
+      "wireTypeClassification": "TRANSITIONAL",
+      "coercionIsNotWireTypeProof": true,
+      "source": "src/main/java/br/com/extrator/dominio/raster/RasterParadaDTO.java"
+    },
+    {
+      "entity": "STOP",
+      "legacyField": "longitudeUltimaPosicao",
+      "aliases": [
+        "LongitudeUltimaPosicao",
+        "longitudeUltimaPosicao"
+      ],
+      "declaredJavaType": "BigDecimal",
+      "wireTypeClassification": "TRANSITIONAL",
+      "coercionIsNotWireTypeProof": true,
+      "source": "src/main/java/br/com/extrator/dominio/raster/RasterParadaDTO.java"
+    },
+    {
+      "entity": "STOP",
+      "legacyField": "referenciaUltimaPosicao",
+      "aliases": [
+        "ReferenciaUltimaPosicao",
+        "referenciaUltimaPosicao"
+      ],
+      "declaredJavaType": "String",
+      "wireTypeClassification": "TRANSITIONAL",
+      "coercionIsNotWireTypeProof": true,
+      "source": "src/main/java/br/com/extrator/dominio/raster/RasterParadaDTO.java"
+    },
+    {
+      "entity": "ROUTE",
+      "legacyField": "codRota",
+      "aliases": [
+        "CodRota",
+        "codRota"
+      ],
+      "declaredJavaType": "Long",
+      "wireTypeClassification": "TRANSITIONAL",
+      "coercionIsNotWireTypeProof": true,
+      "source": "src/main/java/br/com/extrator/dominio/raster/RasterRotaDTO.java"
+    },
+    {
+      "entity": "ROUTE",
+      "legacyField": "descricao",
+      "aliases": [
+        "Descricao",
+        "descricao",
+        "RotaDescricao",
+        "DescRota"
+      ],
+      "declaredJavaType": "String",
+      "wireTypeClassification": "TRANSITIONAL",
+      "coercionIsNotWireTypeProof": true,
+      "source": "src/main/java/br/com/extrator/dominio/raster/RasterRotaDTO.java"
+    }
+  ]
+}

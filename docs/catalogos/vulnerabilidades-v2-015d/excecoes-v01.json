@@ -1,0 +1,6 @@
+{
+  "schemaVersion": "V2_015D_DEPENDENCY_VULNERABILITY_EXCEPTIONS_V1",
+  "policyId": "V2-015D-LOCAL-FAIL-CLOSED-V1",
+  "policyFingerprint": "sha256:83c8698663f33b0e79ac987d72c7853fb59b12af42f31b07d1809377a454e056",
+  "exceptions": []
+}

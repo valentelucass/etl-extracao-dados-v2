@@ -1,0 +1,15 @@
+{
+  "provenance": "FIXTURE_SINTETICA_EXPLICITA",
+  "version": "expansion-freight-terms-v1",
+  "revision": 1,
+  "billingReferenceDate": "2036-04-05",
+  "classification": "normal",
+  "courtesy": false,
+  "eligible": true,
+  "fallbackVolumes": 2,
+  "payerReference": "0000000000000000000000000000000000000000000000000000000000000001",
+  "currency": "BRL",
+  "unit": "MAJOR",
+  "active": true,
+  "evidence": "synthetic-freight-terms-v1"
+}

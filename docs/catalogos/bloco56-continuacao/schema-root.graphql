@@ -1,0 +1,11 @@
+query B56SchemaRoot {
+  __schema {
+    queryType {
+      name
+      fields {
+        name
+        type { kind name ofType { kind name ofType { kind name } } }
+      }
+    }
+  }
+}

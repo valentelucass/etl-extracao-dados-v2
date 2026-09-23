@@ -1,0 +1,113 @@
+{
+  "version": 1,
+  "status": "PROVIDER_DOCUMENTATION_REGISTERED_NO_NEW_ACCEPTANCE",
+  "predecessor": {
+    "path": "docs/catalogos/raster-contrato-local/manifesto.json",
+    "sha256": "fc1fc85f83d8f08dfae8b2b80726548093428962c03351b6644fea16b8004bd7"
+  },
+  "publicDocumentationRead": true,
+  "newCanonicalAcceptances": 0,
+  "newIdentityAcceptances": 0,
+  "newVerticalImplementations": 0,
+  "sourceApiRequestsExecuted": 0,
+  "sqlOperations": 0,
+  "runtimeCampaigns": 0,
+  "budgetConsumed": 0,
+  "unknownEffects": 0,
+  "initialInventory": {
+    "path": "target/esl-documentacao-postman/initial-inventory.json",
+    "sha256": "2d80283862f53fb5d89e6310740295df74266c9aadc95e55602803a413973247"
+  },
+  "changedExistingFiles": [
+    {
+      "path": "STATES.md",
+      "before": "6e7a6e85af13bb27158f15c79b5410c98c57c22bac24ed9c97612a43d5a10464",
+      "after": "092355421c33e257fbb493a7370a0cedfa94bb8a525ac745eb2d112fbfc32c83",
+      "snapshot": "docs/continuidade/historico/bloco56-raster/STATES.md"
+    },
+    {
+      "path": "docs/continuidade/RETOMADA.md",
+      "before": "498792f17f866289fa016fecf34de977e94e0b607da18eb577d453d4566825a4",
+      "after": "5fb5841cd450fe4b690d9e2c5b59c029d98681a428b71d3aa2774e33e7de446c",
+      "snapshot": "docs/continuidade/historico/bloco56-raster/docs/continuidade/RETOMADA.md"
+    },
+    {
+      "path": "docs/runbooks/trilha-de-chats-gpt-5-6.md",
+      "before": "45cfea9c63fac94c25e3aad860c1d1c1ba460859e2bb1767adb60f2c208c9e83",
+      "after": "395884b3b2177e875d96a4e4383b5083c3084dfeb712ae0b8930b759fc4eafa5",
+      "snapshot": "docs/continuidade/historico/bloco56-raster/docs/runbooks/trilha-de-chats-gpt-5-6.md"
+    },
+    {
+      "path": "scripts/validation/Test-RasterLocalContinuation.ps1",
+      "before": "5526f43134d79c762b53074ff36be5fd4f27bfad427500c85b001cb1133d14d6",
+      "after": "1510e00c52963d2a7947d76e3ffc49a6f1ead45bec3cb7d8f719a21f77b0f87c",
+      "snapshot": "docs/continuidade/historico/bloco56-raster/scripts/validation/Test-RasterLocalContinuation.ps1"
+    },
+    {
+      "path": "scripts/validation/Test-RasterLocalContinuationGuards.ps1",
+      "before": "f4e77a442a16744eff0cb98abf7b43fd0d1b1324b3e2b0c9d392842cf03ad48d",
+      "after": "0a9ac320477ade631ffaf79cb113f768557786e0970965e3ca97fd339ff75a9c",
+      "snapshot": "docs/continuidade/historico/bloco56-raster/scripts/validation/Test-RasterLocalContinuationGuards.ps1"
+    }
+  ],
+  "newFiles": [
+    {
+      "path": "docs/continuidade/historico/bloco56-raster/STATES.md",
+      "sha256": "6e7a6e85af13bb27158f15c79b5410c98c57c22bac24ed9c97612a43d5a10464"
+    },
+    {
+      "path": "docs/continuidade/historico/bloco56-raster/docs/continuidade/RETOMADA.md",
+      "sha256": "498792f17f866289fa016fecf34de977e94e0b607da18eb577d453d4566825a4"
+    },
+    {
+      "path": "docs/continuidade/historico/bloco56-raster/docs/runbooks/trilha-de-chats-gpt-5-6.md",
+      "sha256": "45cfea9c63fac94c25e3aad860c1d1c1ba460859e2bb1767adb60f2c208c9e83"
+    },
+    {
+      "path": "docs/continuidade/historico/bloco56-raster/scripts/validation/Test-RasterLocalContinuation.ps1",
+      "sha256": "5526f43134d79c762b53074ff36be5fd4f27bfad427500c85b001cb1133d14d6"
+    },
+    {
+      "path": "docs/continuidade/historico/bloco56-raster/scripts/validation/Test-RasterLocalContinuationGuards.ps1",
+      "sha256": "f4e77a442a16744eff0cb98abf7b43fd0d1b1324b3e2b0c9d392842cf03ad48d"
+    },
+    {
+      "path": "docs/catalogos/esl-documentacao/README.md",
+      "sha256": "c7d062e3d3db3eb63d0be4a949b5deb290153ab3b668ae177be92a06d8f782ff"
+    },
+    {
+      "path": "docs/catalogos/esl-documentacao/fonte.json",
+      "sha256": "fff2a07e67d804377dbf412cb1e3a9f7d7a096f908b57208d56ec2996123e68c"
+    },
+    {
+      "path": "docs/catalogos/esl-documentacao/endpoints.csv",
+      "sha256": "a1c54e0270ca98e792355a58909056b7df971921eb648a8ec587ba6d7664d173"
+    },
+    {
+      "path": "docs/catalogos/esl-documentacao/graphql-operacoes.csv",
+      "sha256": "575a051bf96dd79a7af0c212c56858dd6cdb8b6a00d90e925c7c9e74dcf6a161"
+    },
+    {
+      "path": "docs/continuidade/checkpoints/0011-documentacao-esl-postman.md",
+      "sha256": "e883aef8c0aa7c81cd41c650071b5ea0225ad794c515463ae39de16bd315747a"
+    },
+    {
+      "path": "scripts/validation/Test-EslDocumentation.ps1",
+      "sha256": "5bfd943ec87f9f736f0bbe0b06c6d0f1e6cbfd1779ffca07271ce7976e56d12c"
+    }
+  ],
+  "privateEvidence": [
+    {
+      "path": "target/esl-documentacao-postman/public-document.html",
+      "sha256": "004ca412825dd81a06e6107efde3b11f18e509c35c9c27522b9910f38207c1ca"
+    },
+    {
+      "path": "target/esl-documentacao-postman/public-collection.json",
+      "sha256": "2412415bc4387d720c95791bd61f0b8ba6e7ab64f1d482aca6903ffbfc5d23ac"
+    },
+    {
+      "path": "target/esl-documentacao-postman/graphql-public-doc.html",
+      "sha256": "0310f2f461836dae860bc60cf5ae964caf62a39e97427eaf6ed9b0add6e054c3"
+    }
+  ]
+}

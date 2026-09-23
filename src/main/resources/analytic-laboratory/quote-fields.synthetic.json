@@ -1,0 +1,186 @@
+{
+  "version": "synthetic-analytic-quotes-v1",
+  "provenance": "FIXTURE_SINTETICA_EXPLICITA",
+  "fields": [
+    {
+      "name": "requested_at",
+      "kind": "INSTANT",
+      "wire": "STRING"
+    },
+    {
+      "name": "sequence_code",
+      "kind": "INTEGER",
+      "wire": "INTEGER"
+    },
+    {
+      "name": "qoe_qes_fon_name",
+      "kind": "TEXT",
+      "wire": "STRING"
+    },
+    {
+      "name": "qoe_cor_document",
+      "kind": "TEXT",
+      "wire": "STRING"
+    },
+    {
+      "name": "qoe_cor_name",
+      "kind": "TEXT",
+      "wire": "STRING"
+    },
+    {
+      "name": "qoe_qes_ony_name",
+      "kind": "TEXT",
+      "wire": "STRING"
+    },
+    {
+      "name": "qoe_qes_ony_sae_code",
+      "kind": "TEXT",
+      "wire": "STRING"
+    },
+    {
+      "name": "qoe_qes_diy_name",
+      "kind": "TEXT",
+      "wire": "STRING"
+    },
+    {
+      "name": "qoe_qes_diy_sae_code",
+      "kind": "TEXT",
+      "wire": "STRING"
+    },
+    {
+      "name": "qoe_qes_cre_name",
+      "kind": "TEXT",
+      "wire": "STRING"
+    },
+    {
+      "name": "qoe_qes_invoices_volumes",
+      "kind": "INTEGER",
+      "wire": "INTEGER"
+    },
+    {
+      "name": "qoe_qes_taxed_weight",
+      "kind": "DECIMAL",
+      "wire": "STRING"
+    },
+    {
+      "name": "qoe_qes_invoices_value",
+      "kind": "DECIMAL",
+      "wire": "STRING"
+    },
+    {
+      "name": "qoe_qes_total",
+      "kind": "DECIMAL",
+      "wire": "STRING"
+    },
+    {
+      "name": "qoe_qes_fit_fhe_cte_issued_at",
+      "kind": "INSTANT",
+      "wire": "STRING"
+    },
+    {
+      "name": "qoe_qes_fit_nse_issued_at",
+      "kind": "INSTANT",
+      "wire": "STRING"
+    },
+    {
+      "name": "qoe_uer_name",
+      "kind": "TEXT",
+      "wire": "STRING"
+    },
+    {
+      "name": "qoe_crn_psn_nickname",
+      "kind": "TEXT",
+      "wire": "STRING"
+    },
+    {
+      "name": "qoe_qes_sdr_document",
+      "kind": "TEXT",
+      "wire": "STRING"
+    },
+    {
+      "name": "qoe_qes_sdr_nickname",
+      "kind": "TEXT",
+      "wire": "STRING"
+    },
+    {
+      "name": "qoe_qes_rpt_document",
+      "kind": "TEXT",
+      "wire": "STRING"
+    },
+    {
+      "name": "qoe_qes_rpt_nickname",
+      "kind": "TEXT",
+      "wire": "STRING"
+    },
+    {
+      "name": "qoe_qes_origin_postal_code",
+      "kind": "TEXT",
+      "wire": "STRING"
+    },
+    {
+      "name": "qoe_qes_destination_postal_code",
+      "kind": "TEXT",
+      "wire": "STRING"
+    },
+    {
+      "name": "qoe_qes_real_weight",
+      "kind": "DECIMAL",
+      "wire": "STRING"
+    },
+    {
+      "name": "qoe_qes_disapprove_comments",
+      "kind": "TEXT",
+      "wire": "STRING"
+    },
+    {
+      "name": "qoe_qes_freight_comments",
+      "kind": "TEXT",
+      "wire": "STRING"
+    },
+    {
+      "name": "qoe_qes_fit_fdt_subtotal",
+      "kind": "DECIMAL",
+      "wire": "STRING"
+    },
+    {
+      "name": "requester_name",
+      "kind": "TEXT",
+      "wire": "STRING"
+    },
+    {
+      "name": "qoe_qes_itr_subtotal",
+      "kind": "DECIMAL",
+      "wire": "STRING"
+    },
+    {
+      "name": "qoe_qes_tde_subtotal",
+      "kind": "DECIMAL",
+      "wire": "STRING"
+    },
+    {
+      "name": "qoe_qes_collect_subtotal",
+      "kind": "DECIMAL",
+      "wire": "STRING"
+    },
+    {
+      "name": "qoe_qes_delivery_subtotal",
+      "kind": "DECIMAL",
+      "wire": "STRING"
+    },
+    {
+      "name": "qoe_qes_other_fees",
+      "kind": "DECIMAL",
+      "wire": "STRING"
+    },
+    {
+      "name": "qoe_crn_psn_name",
+      "kind": "TEXT",
+      "wire": "STRING"
+    },
+    {
+      "name": "qoe_cor_nickname",
+      "kind": "TEXT",
+      "wire": "STRING"
+    }
+  ]
+}

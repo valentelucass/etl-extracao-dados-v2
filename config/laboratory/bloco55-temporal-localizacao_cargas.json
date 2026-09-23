@@ -1,0 +1,23 @@
+{
+  "version": "bloco55-localizacao_cargas-civil-v1",
+  "purpose": "SYNTHETIC_BLOCO55_BACKFILL",
+  "workload": "localizacao_cargas",
+  "dependsOn": "",
+  "invocation": "89e732d6-2f1b-4837-8bc2-180df850709c",
+  "firstUnpublished": "2032-02-28",
+  "observedAt": "2032-03-01T12:00:00Z",
+  "zone": "America/Sao_Paulo",
+  "mode": "BACKFILL",
+  "strategy": "INTERVAL",
+  "cadence": "CIVIL_DAY",
+  "civilBoundary": "00:00",
+  "lookbackSeconds": "0",
+  "stabilizationSeconds": "60",
+  "slaSeconds": "3600",
+  "deadlineSeconds": "1800",
+  "concurrency": "1",
+  "maximumBacklog": "2",
+  "maximumReconciliation": "8",
+  "maximumDegraded": "1",
+  "blackouts": ""
+}

@@ -1,0 +1,91 @@
+{
+  "schemaVersion": "2026-09-07.v2-050.q-med-fnd-01.1",
+  "fixtureKind": "SYNTHETIC_FIXTURE",
+  "recordsPerPage": 8,
+  "scenarios": [
+    {
+      "scenario": "DATA_EXPORT_16",
+      "streamer": "DataExportPageStreamer",
+      "dataPages": 16,
+      "expectedFetchedPages": 17,
+      "expectedConsumedPages": 16,
+      "expectedRecords": 128,
+      "expectedMaxInFlightPages": 1,
+      "expectedFinalInFlightPages": 0,
+      "expectedAcquisitions": 17,
+      "expectedReleases": 17,
+      "expectedMaxRetainedPages": 0,
+      "expectedFinalRetainedPages": 0
+    },
+    {
+      "scenario": "DATA_EXPORT_256",
+      "streamer": "DataExportPageStreamer",
+      "dataPages": 256,
+      "expectedFetchedPages": 257,
+      "expectedConsumedPages": 256,
+      "expectedRecords": 2048,
+      "expectedMaxInFlightPages": 1,
+      "expectedFinalInFlightPages": 0,
+      "expectedAcquisitions": 257,
+      "expectedReleases": 257,
+      "expectedMaxRetainedPages": 0,
+      "expectedFinalRetainedPages": 0
+    },
+    {
+      "scenario": "DATA_EXPORT_4096",
+      "streamer": "DataExportPageStreamer",
+      "dataPages": 4096,
+      "expectedFetchedPages": 4097,
+      "expectedConsumedPages": 4096,
+      "expectedRecords": 32768,
+      "expectedMaxInFlightPages": 1,
+      "expectedFinalInFlightPages": 0,
+      "expectedAcquisitions": 4097,
+      "expectedReleases": 4097,
+      "expectedMaxRetainedPages": 0,
+      "expectedFinalRetainedPages": 0
+    },
+    {
+      "scenario": "GRAPHQL_16",
+      "streamer": "GraphQlPageStreamer",
+      "dataPages": 16,
+      "expectedFetchedPages": 16,
+      "expectedConsumedPages": 16,
+      "expectedRecords": 128,
+      "expectedMaxInFlightPages": 1,
+      "expectedFinalInFlightPages": 0,
+      "expectedAcquisitions": 16,
+      "expectedReleases": 16,
+      "expectedMaxRetainedPages": 0,
+      "expectedFinalRetainedPages": 0
+    },
+    {
+      "scenario": "GRAPHQL_256",
+      "streamer": "GraphQlPageStreamer",
+      "dataPages": 256,
+      "expectedFetchedPages": 256,
+      "expectedConsumedPages": 256,
+      "expectedRecords": 2048,
+      "expectedMaxInFlightPages": 1,
+      "expectedFinalInFlightPages": 0,
+      "expectedAcquisitions": 256,
+      "expectedReleases": 256,
+      "expectedMaxRetainedPages": 0,
+      "expectedFinalRetainedPages": 0
+    },
+    {
+      "scenario": "GRAPHQL_4096",
+      "streamer": "GraphQlPageStreamer",
+      "dataPages": 4096,
+      "expectedFetchedPages": 4096,
+      "expectedConsumedPages": 4096,
+      "expectedRecords": 32768,
+      "expectedMaxInFlightPages": 1,
+      "expectedFinalInFlightPages": 0,
+      "expectedAcquisitions": 4096,
+      "expectedReleases": 4096,
+      "expectedMaxRetainedPages": 0,
+      "expectedFinalRetainedPages": 0
+    }
+  ]
+}

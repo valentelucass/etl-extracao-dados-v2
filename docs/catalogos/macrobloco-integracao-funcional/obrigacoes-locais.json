@@ -1,0 +1,540 @@
+{
+  "version": 1,
+  "status": "INTEGRACAO_FUNCIONAL_LOCAL_CONCLUIDA",
+  "notANewCountingUniverse": true,
+  "construction": {
+    "before": 39,
+    "after": 39,
+    "total": 45
+  },
+  "historicalAcceptances": {
+    "accepted": 67,
+    "total": 115
+  },
+  "obligations": [
+    {
+      "id": "A",
+      "title": "Pendências executáveis por requisito",
+      "dependsOn": [],
+      "units": [
+        "TODAS_AS_45"
+      ],
+      "acceptance": "Baseline selada; separar código/integração/prova de input/configuração/ação, com consumidor.",
+      "state": "PROPOSTO",
+      "mandatory": true,
+      "status": "CONCLUIDO_LOCAL",
+      "input": "Baseline selada; separar código/integração/prova de input/configuração/ação, com consumidor.",
+      "consumer": "delivery control",
+      "localProof": "Baseline selada; separar código/integração/prova de input/configuração/ação, com consumidor.",
+      "dependency": "preceding local front",
+      "evidence": [
+        {
+          "path": "target/macrobloco-integracao-funcional-20260914-01/baseline-result.json",
+          "sha256": "9cf054e2d121932fbbd3c87ff8176645b9fefc0d2bd9aa125fbc4c03e0b2972d"
+        }
+      ],
+      "deliveredMechanism": "Lista fechada A–N, critérios originais das45 unidades, fotografia inicial3190 e9672 pins conferidos; obrigações preservadas até a conclusão.",
+      "finalEvidenceBinding": "Proof paths refer to current revision; historical failed attempts remain preserved in the round."
+    },
+    {
+      "id": "B",
+      "title": "Captura desacoplada nas quatro expansões",
+      "dependsOn": [
+        "A"
+      ],
+      "units": [
+        "V2-029",
+        "V2-030",
+        "V2-031",
+        "V2-032",
+        "V2-020",
+        "V2-021",
+        "V2-025",
+        "V2-009"
+      ],
+      "acceptance": "Duas entradas distintas por vertical no mesmo caso de uso/JDBC; nenhuma fixture concreta exigida pelo núcleo.",
+      "state": "PROPOSTO",
+      "mandatory": true,
+      "status": "CONCLUIDO_LOCAL",
+      "input": "Versioned local page artifacts for CAP/8636,FAT/4924,INV/10633,SIN/6392; explicit contract/date/scope/bindings and bounded pages",
+      "consumer": "LocalExpansionRuntime.capture → streamer/guard/audit → typed mapper → JdbcExpansionStaging/apply",
+      "localProof": "Two distinct inputs each; missing/divergent binding,partial/excess,cancel,duplicate,replay; preserve151 fields and tri-state",
+      "dependency": "Nominal root/part/component wire translations and representative identity proof remain G03",
+      "evidence": [
+        {
+          "path": "target/macrobloco-integracao-funcional-20260914-01/verify-final-02/result.json",
+          "sha256": "df4ef8225ae50cd0d5c851ef5dbb8296b3fe5613133899a61d883cd57ddb91b1"
+        },
+        {
+          "path": "target/macrobloco-integracao-funcional-20260914-01/file-consumers-final-01/result.json",
+          "sha256": "0ba1023af0edf3d6110d098f8a586f6097730a451f40d2c970f650068841f42d"
+        }
+      ],
+      "deliveredMechanism": "ExpansionCaptureSource/ExpansionPageSource/ExpansionArtifact → LocalExpansionRuntime → streamer, guard, auditoria e JDBC existentes. CAP28/FAT53/INV26/SIN44 campos; duas entradas por família e falhas/replay no mesmo caso de uso.",
+      "finalEvidenceBinding": "Proof paths refer to current revision; historical failed attempts remain preserved in the round."
+    },
+    {
+      "id": "C",
+      "title": "Composição e seleção no JAR",
+      "dependsOn": [
+        "B"
+      ],
+      "units": [
+        "V2-022",
+        "V2-018",
+        "V2-042",
+        "V2-043",
+        "V2-044"
+      ],
+      "acceptance": "Novo caminho local consumido no pacote fechado; recusa antes de efeito nos modos/alvos não autorizados.",
+      "state": "PROPOSTO",
+      "mandatory": true,
+      "status": "CONCLUIDO_LOCAL",
+      "input": "Typed local artifact mode and family selection; exact package/schema/window scope",
+      "consumer": "Packaged entrypoint → same capture and analytic composition",
+      "localProof": "Fresh extracted JAR runs four expansions and full chain; early reject invalid target/mode/family/dependency without source",
+      "dependency": "Operational authority and supplier adapters only to extent contracts proven; no positive real enablement",
+      "evidence": [
+        {
+          "path": "target/macrobloco-integracao-funcional-20260914-01/file-consumers-final-01/result.json",
+          "sha256": "0ba1023af0edf3d6110d098f8a586f6097730a451f40d2c970f650068841f42d"
+        },
+        {
+          "path": "target/macrobloco-integracao-funcional-20260914-01/artifact-input-guards-final-01/result.json",
+          "sha256": "b4b6d7f91417bbb11d9ed5d25ad30fcf5d5e10dbc5e0b4978ac4d37eecb05511"
+        }
+      ],
+      "deliveredMechanism": "Main local-data/local-profile/local-raster/local-scenario/local-sweep e Action.ARTIFACT consomem seleção explícita no JAR. ArtifactExpansionSources/AnalyticRasterSources/DeclaredExpansionRelations entram na composição atual, sem fallback.",
+      "finalEvidenceBinding": "Proof paths refer to current revision; historical failed attempts remain preserved in the round."
+    },
+    {
+      "id": "D",
+      "title": "Caracterização empacotada",
+      "dependsOn": [
+        "B",
+        "C"
+      ],
+      "units": [
+        "V2-012",
+        "V2-025",
+        "V2-009",
+        "V2-024",
+        "V2-033"
+      ],
+      "acceptance": "Lógica necessária fora de src/test, entrada limitada e recibo sanitizado; estrutura não equivale a evidência de fornecedor.",
+      "state": "PROPOSTO",
+      "mandatory": true,
+      "status": "CONCLUIDO_LOCAL",
+      "input": "Versioned explicit family/release/window/scope/limits and bounded payload",
+      "consumer": "Packaged structural characterization → existing parser/mappers",
+      "localProof": "Alternative inputs; identity,presence,type,cardinality,freshness,unknown completeness,truncation,swapped release",
+      "dependency": "No /info authenticity or V2-012a real acceptance",
+      "evidence": [
+        {
+          "path": "target/macrobloco-integracao-funcional-20260914-01/verify-final-02/result.json",
+          "sha256": "df4ef8225ae50cd0d5c851ef5dbb8296b3fe5613133899a61d883cd57ddb91b1"
+        },
+        {
+          "path": "target/macrobloco-integracao-funcional-20260914-01/file-consumers-final-01/result.json",
+          "sha256": "0ba1023af0edf3d6110d098f8a586f6097730a451f40d2c970f650068841f42d"
+        }
+      ],
+      "deliveredMechanism": "Seis perfis locais adaptados para src/main/resources e mapeadores existentes, quatro expansões e Raster caracterizados com validade estrutural separada de fornecedor. Entradas alternativas, pin/tipo/presença/identidade/cardinalidade/frescor/terminal/caps exercitados.",
+      "finalEvidenceBinding": "Proof paths refer to current revision; historical failed attempts remain preserved in the round."
+    },
+    {
+      "id": "E",
+      "title": "Paridade local por entrada/oráculo independente",
+      "dependsOn": [
+        "C",
+        "D"
+      ],
+      "units": [
+        "V2-012",
+        "V2-035",
+        "V2-037",
+        "MAT-01",
+        "MAT-02",
+        "MAT-03",
+        "MAT-04",
+        "MAT-05"
+      ],
+      "acceptance": "19 contratos/673 colunas e cinco grãos com esperado independente, divergência e dados alternativos no JAR.",
+      "state": "PROPOSTO",
+      "mandatory": true,
+      "status": "CONCLUIDO_LOCAL",
+      "input": "Independent external synthetic expected rows/rules bound to exact artifact/release/schema/window",
+      "consumer": "JDBC reader → bounded typed comparison → sanitized receipt/nonzero differences",
+      "localProof": "19 contracts/673 columns + five declared fact grains; alternate expected/actual and relevant counterproofs",
+      "dependency": "Real approved oracle/criteria/consumers remain G03/G04; hash is not approval",
+      "evidence": [
+        {
+          "path": "target/macrobloco-integracao-funcional-20260914-01/verify-final-02/result.json",
+          "sha256": "df4ef8225ae50cd0d5c851ef5dbb8296b3fe5613133899a61d883cd57ddb91b1"
+        },
+        {
+          "path": "target/macrobloco-integracao-funcional-20260914-01/artifact-small-final-01/result.json",
+          "sha256": "db1c5360bbc1dd6c434ef0d1f6da122e75181a2ffc2c4c86b63853edebb43ed1"
+        },
+        {
+          "path": "target/macrobloco-integracao-funcional-20260914-01/artifact-large-final-01/result.json",
+          "sha256": "5a6cd6370f97482212be0da3373be595eb2c16cc83a7268b2eea9174dfcce9fd"
+        },
+        {
+          "path": "target/macrobloco-integracao-funcional-20260914-01/file-consumers-final-01/result.json",
+          "sha256": "0ba1023af0edf3d6110d098f8a586f6097730a451f40d2c970f650068841f42d"
+        }
+      ],
+      "deliveredMechanism": "LocalArtifactScenario injeta entrada e oráculo independentes, ligados a runtime/schema/janela;19 contratos e971 metadados. LocalFactOracle verifica cinco grãos por OPENJSON/EXCEPT/COUNT e recusa20 mutações de conjunto, duplicata e valor.",
+      "finalEvidenceBinding": "Proof paths refer to current revision; historical failed attempts remain preserved in the round."
+    },
+    {
+      "id": "F",
+      "title": "Sweep de Coletas e consumidor de preview",
+      "dependsOn": [
+        "C",
+        "D"
+      ],
+      "units": [
+        "V2-013",
+        "V2-010",
+        "V2-011",
+        "V2-046"
+      ],
+      "acceptance": "Data/contexto explícitos, quatro observações independentes e 33 responsabilidades; nenhuma nova habilitação/aplicação nominal.",
+      "state": "PROPOSTO",
+      "mandatory": true,
+      "status": "CONCLUIDO_LOCAL",
+      "input": "Explicit execution snapshot and four capture inputs;33 responsibility bindings",
+      "consumer": "LocalAnalyticCollectionSweep → JDBC prepare/apply rollback-only; existing preview → dependency plan",
+      "localProof": "Alternate day and roots;initial absence,confirm,reappear,scope/lease/cancel;cycles/orphans/divergent scopes rejected",
+      "dependency": "No new nominal ENABLED; child presence/apply requires exact missing semantic policy",
+      "evidence": [
+        {
+          "path": "target/macrobloco-integracao-funcional-20260914-01/verify-final-02/result.json",
+          "sha256": "df4ef8225ae50cd0d5c851ef5dbb8296b3fe5613133899a61d883cd57ddb91b1"
+        },
+        {
+          "path": "target/macrobloco-integracao-funcional-20260914-01/file-consumers-final-01/result.json",
+          "sha256": "0ba1023af0edf3d6110d098f8a586f6097730a451f40d2c970f650068841f42d"
+        }
+      ],
+      "deliveredMechanism": "CollectionSweepInput/Artifact e Program vinculam dia, execução, snapshot e quatro travessias. SweepResponsibilityPlanner no bootstrap consome o kernel puro e33 responsabilidades, sem nova ativação; dois dias/conjuntos e lease/cancelamento exercitados.",
+      "finalEvidenceBinding": "Proof paths refer to current revision; historical failed attempts remain preserved in the round."
+    },
+    {
+      "id": "G",
+      "title": "Raster e relações com entradas explícitas",
+      "dependsOn": [
+        "B",
+        "C"
+      ],
+      "units": [
+        "V2-034",
+        "V2-046",
+        "V2-026",
+        "V2-027",
+        "V2-028",
+        "V2-035"
+      ],
+      "acceptance": "Dados locais alternativos, completude, órfãos/rekey/fan-out e refusas; transporte real continua condicionado.",
+      "state": "PROPOSTO",
+      "mandatory": true,
+      "status": "CONCLUIDO_LOCAL",
+      "input": "Explicit Raster trip/stop artifacts and existing relational bindings",
+      "consumer": "LocalRasterRuntime and existing relation/hydrator paths",
+      "localProof": "Complete/incomplete,TransitTime,replay,divergent bindings,time/DST,no partial publish; rekey/fanout/reducers preserved",
+      "dependency": "V2-034a=MANTER stays accepted; outside first wave remains default; remote disabled",
+      "evidence": [
+        {
+          "path": "target/macrobloco-integracao-funcional-20260914-01/verify-final-02/result.json",
+          "sha256": "df4ef8225ae50cd0d5c851ef5dbb8296b3fe5613133899a61d883cd57ddb91b1"
+        },
+        {
+          "path": "target/macrobloco-integracao-funcional-20260914-01/file-consumers-final-01/result.json",
+          "sha256": "0ba1023af0edf3d6110d098f8a586f6097730a451f40d2c970f650068841f42d"
+        }
+      ],
+      "deliveredMechanism": "RasterArtifact fornece payloads/bindings ao parser/ledger/runtime/JDBC, com repartição500/replay/DST/temporal/terminal. Cancelamento após último lote passou a impedir publicação parcial. Relações e identidades alternativas substituem literais impeditivos.",
+      "finalEvidenceBinding": "Proof paths refer to current revision; historical failed attempts remain preserved in the round."
+    },
+    {
+      "id": "H",
+      "title": "Campos e transformações efetivas",
+      "dependsOn": [
+        "B",
+        "D",
+        "E",
+        "F",
+        "G"
+      ],
+      "units": [
+        "V2-017",
+        "V2-025",
+        "V2-037",
+        "MAT-01",
+        "MAT-02",
+        "MAT-03",
+        "MAT-04",
+        "MAT-05"
+      ],
+      "acceptance": "Resolver linhas demonstráveis por código/contrato e corrigir perda/transformação; preservar opacidade e faltas nominais.",
+      "state": "PROPOSTO",
+      "mandatory": true,
+      "status": "CONCLUIDO_LOCAL",
+      "input": "2437 field rows,401 artifacts,75 rules;595 conditioned links",
+      "consumer": "Actual parser→rule→storage→reader column→independent case",
+      "localProof": "Resolve demonstrated local links and correct any functional loss; preserve all original rows and opaque442",
+      "dependency": "No nominal name-based joins;11 inputs,6dims,5facts,19contracts,673columns,971metadata,35scopes distinct",
+      "evidence": [
+        {
+          "path": "target/macrobloco-integracao-funcional-20260914-01/review-code-01/result.json",
+          "sha256": "a8b35809723f9411d32ec2de79469ebd1cee259fe05765adc947a83d7dee2fcb"
+        }
+      ],
+      "deliveredMechanism": "2437 linhas e campos originais preservados;595 vínculos examinados:235 caminhos locais explicitados e360 dependências nominais decompostas.401 artefatos/75 regras preservados;442 opacos não reclassificados. Evidência de caminho/grão não é aceite individual do campo.",
+      "finalEvidenceBinding": "Proof paths refer to current revision; historical failed attempts remain preserved in the round."
+    },
+    {
+      "id": "I",
+      "title": "Robustez e limites da cadeia alterada",
+      "dependsOn": [
+        "C",
+        "D",
+        "E",
+        "F",
+        "G"
+      ],
+      "units": [
+        "V2-020",
+        "V2-021",
+        "V2-022",
+        "V2-023",
+        "V2-043",
+        "V2-044",
+        "V2-047",
+        "V2-038"
+      ],
+      "acceptance": "Falha/lease/cancelamento/replay/dados desconhecidos no consumidor real; medir dois tamanhos limitados.",
+      "state": "PROPOSTO",
+      "mandatory": true,
+      "status": "CONCLUIDO_LOCAL",
+      "input": "New artifact and oracle failure states and two input sizes within existing caps",
+      "consumer": "Same capture/prepare/apply/relations/materialization/read and existing supervisor journal",
+      "localProof": "Early validation;cancel,lease,replay,unknown effects;bounded whole-path memory/time",
+      "dependency": "No new journal engine, cap increases or production SLO claim",
+      "evidence": [
+        {
+          "path": "target/macrobloco-integracao-funcional-20260914-01/cancel-measurements-final-02/result.json",
+          "sha256": "9d434643db02b48d3cdc1901b1bd6c76a87eaa260c3e2b9b685be936338ceb35"
+        },
+        {
+          "path": "target/macrobloco-integracao-funcional-20260914-01/verify-final-02/result.json",
+          "sha256": "df4ef8225ae50cd0d5c851ef5dbb8296b3fe5613133899a61d883cd57ddb91b1"
+        },
+        {
+          "path": "target/macrobloco-integracao-funcional-20260914-01/artifact-small-final-01/result.json",
+          "sha256": "db1c5360bbc1dd6c434ef0d1f6da122e75181a2ffc2c4c86b63853edebb43ed1"
+        },
+        {
+          "path": "target/macrobloco-integracao-funcional-20260914-01/artifact-large-final-01/result.json",
+          "sha256": "5a6cd6370f97482212be0da3373be595eb2c16cc83a7268b2eea9174dfcce9fd"
+        },
+        {
+          "path": "target/macrobloco-integracao-funcional-20260914-01/artifact-during-capture-final-01/result.json",
+          "sha256": "826b6735b9056c7a75c56e9e414022d9d91b1ed8b65a55eb74d2953531fe5485"
+        },
+        {
+          "path": "target/macrobloco-integracao-funcional-20260914-01/artifact-after-preparation-final-01/result.json",
+          "sha256": "d55c5c744d525e94ec2b385baa6d8e631e0d61972d7e8c3f99a806ed4595687f"
+        },
+        {
+          "path": "target/macrobloco-integracao-funcional-20260914-01/artifact-before-receipt-final-01/result.json",
+          "sha256": "1a06e85628c7a78060187c3adf2a7d8a78cb64fc1f8a34d6864cd0c68c845fb3"
+        },
+        {
+          "path": "target/macrobloco-integracao-funcional-20260914-01/artifact-resume-final-01/result.json",
+          "sha256": "4eb39ae9075cf566247fa01da1dce05192b126102a9fb5e093cecff912c4d086"
+        }
+      ],
+      "deliveredMechanism": "Mesmas fronteiras de captura, prepare, relações, cinco fatos, leitura/compare medidas com2/8 raízes. Caps,512MiB e deadlines mantidos; supervisor valida antes de RESERVED e worker antes de SQL; três barreiras, incluindo OUTCOME_UNKNOWN antes do recibo e quatro retomadas sem repetir worker.",
+      "finalEvidenceBinding": "Proof paths refer to current revision; historical failed attempts remain preserved in the round."
+    },
+    {
+      "id": "J",
+      "title": "Demais obrigações locais e gates",
+      "dependsOn": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "F",
+        "G",
+        "H",
+        "I"
+      ],
+      "units": [
+        "TODAS_AS_45"
+      ],
+      "acceptance": "Esgotar obrigações restantes; não refazer V2-045a/intake ou inventar CI/identidade.",
+      "state": "PROPOSTO",
+      "mandatory": true,
+      "status": "CONCLUIDO_LOCAL",
+      "input": "Remaining A obligations plus V2-045/020/021/042/043/044/config/release",
+      "consumer": "Existing real consumers only, no artificial second lifecycle/intake",
+      "localProof": "Cite unchanged adequate evidence or implement demonstrated independent gap",
+      "dependency": "Precise missing policy/storage/identity/action isolated",
+      "evidence": [
+        {
+          "path": "target/macrobloco-integracao-funcional-20260914-01/regression-final-01/result.json",
+          "sha256": "6590e025f15bfa62226466f2a81e9da375a840003fb5c6451412dceebac8ff0d"
+        },
+        {
+          "path": "target/macrobloco-integracao-funcional-20260914-01/review-code-01/result.json",
+          "sha256": "a8b35809723f9411d32ec2de79469ebd1cee259fe05765adc947a83d7dee2fcb"
+        }
+      ],
+      "deliveredMechanism": "Control plane, staging, autorização Windows/SQL, quotas, release/configuração e lifecycle já têm consumidores. Regressão preserva esses mecanismos; não se criou segundo lifecycle045a, intake041 ou CI fictício. Bordas dependentes de policy/alvo/identidade enumeradas por unidade.",
+      "finalEvidenceBinding": "Proof paths refer to current revision; historical failed attempts remain preserved in the round."
+    },
+    {
+      "id": "K",
+      "title": "Verify, pacote e reprodutibilidade",
+      "dependsOn": [
+        "B",
+        "C",
+        "D",
+        "E",
+        "F",
+        "G",
+        "H",
+        "I",
+        "J"
+      ],
+      "units": [
+        "V2-015",
+        "V2-038",
+        "V2-039"
+      ],
+      "acceptance": "423 IT anteriores por identidade, quatro skips históricos, gates atuais e caminhos novos extraídos.",
+      "state": "PROPOSTO",
+      "mandatory": true,
+      "status": "CONCLUIDO_LOCAL",
+      "input": "Final revision and423 previous IT identities/four historic skips",
+      "consumer": "Offline full verify physical + package/reproduction + extracted cases",
+      "localProof": "Existing gates/thresholds preserved; exact old cases present; new consumers actually executed",
+      "dependency": "No external feed or other OS claim",
+      "evidence": [
+        {
+          "path": "target/macrobloco-integracao-funcional-20260914-01/regression-final-01/result.json",
+          "sha256": "6590e025f15bfa62226466f2a81e9da375a840003fb5c6451412dceebac8ff0d"
+        },
+        {
+          "path": "target/macrobloco-integracao-funcional-20260914-01/artifact-final-01/result.json",
+          "sha256": "2ecdf1f6a3ec40da39143a4bf4b5e510d53c6d3b57009dc59c80a3bb4394d63c"
+        },
+        {
+          "path": "target/macrobloco-integracao-funcional-20260914-01/final-package-proofs-01/result.json",
+          "sha256": "e31279d3030217917354d7e1144aa58c4be1ca2fdf1fa83b7aceb6fff1b92e25"
+        }
+      ],
+      "deliveredMechanism": "Verify offline físico da última revisão;423 IT anteriores por identidade e quatro skips/razões preservados. Fontes/classes/recursos/dependências, JAR e ZIP reproduzidos em diretórios distintos; novas extrações executam arquivos alternativos e recusas.",
+      "finalEvidenceBinding": "Proof paths refer to current revision; historical failed attempts remain preserved in the round."
+    },
+    {
+      "id": "L",
+      "title": "Revisão separada",
+      "dependsOn": [
+        "K"
+      ],
+      "units": [
+        "TODAS_AS_45"
+      ],
+      "acceptance": "Critério/consumidor/sucesso/falha/prova/limite; nenhum trabalho independente abandonado.",
+      "state": "PROPOSTO",
+      "mandatory": true,
+      "status": "CONCLUIDO_LOCAL",
+      "input": "Critério/consumidor/sucesso/falha/prova/limite; nenhum trabalho independente abandonado.",
+      "consumer": "delivery control",
+      "localProof": "Critério/consumidor/sucesso/falha/prova/limite; nenhum trabalho independente abandonado.",
+      "dependency": "preceding local front",
+      "evidence": [
+        {
+          "path": "target/macrobloco-integracao-funcional-20260914-01/review-code-01/result.json",
+          "sha256": "a8b35809723f9411d32ec2de79469ebd1cee259fe05765adc947a83d7dee2fcb"
+        },
+        {
+          "path": "target/macrobloco-integracao-funcional-20260914-01/review-diff-01/result.json",
+          "sha256": "ff94ee8bf90f85a309b47b75b25ce401182add170db1ddb5c6e0b878c5c9d5be"
+        }
+      ],
+      "deliveredMechanism": "Revisão separada pelo mesmo agente contra a fotografia inicial; consumidores, sucesso/falha, bindings/valores/nulos/tempo, limites, falsos PASS, encoding e autoridade examinados. Não equivale à revisão humana.",
+      "finalEvidenceBinding": "Proof paths refer to current revision; historical failed attempts remain preserved in the round."
+    },
+    {
+      "id": "M",
+      "title": "Sucessão/diffs/selo",
+      "dependsOn": [
+        "L"
+      ],
+      "units": [
+        "TODAS_AS_45"
+      ],
+      "acceptance": "Sucessor do 0144, patches aplicados à baseline, cadeia inteira e hashes lidos novamente.",
+      "state": "PROPOSTO",
+      "mandatory": true,
+      "status": "CONCLUIDO_LOCAL",
+      "input": "Sucessor do 0144, patches aplicados à baseline, cadeia inteira e hashes lidos novamente.",
+      "consumer": "delivery control",
+      "localProof": "Sucessor do 0144, patches aplicados à baseline, cadeia inteira e hashes lidos novamente.",
+      "dependency": "preceding local front",
+      "evidence": [
+        {
+          "path": "target/macrobloco-integracao-funcional-20260914-01/functional-candidate-01/result.json",
+          "sha256": "5db685dce104e3222961877049e16095e59a39fcd8bd09dba1a08ceba561f68f"
+        },
+        {
+          "path": "target/macrobloco-integracao-funcional-20260914-01/closure-composition-01/result.json",
+          "sha256": "e9d4a701eb2baea7ff446c3a1d768c34d39170bc4a21189f52ffc477556e6500"
+        },
+        {
+          "path": "target/macrobloco-integracao-funcional-20260914-01/succession-composition-01/result.json",
+          "sha256": "496783195584edb0df9526a39370f0e31fab83285469cefc5fdcdc821d13f933"
+        },
+        {
+          "path": "target/macrobloco-integracao-funcional-20260914-01/review-diff-01/result.json",
+          "sha256": "ff94ee8bf90f85a309b47b75b25ce401182add170db1ddb5c6e0b878c5c9d5be"
+        }
+      ],
+      "deliveredMechanism": "Sucessão Functional→ConstructionClosure→Qualification→Analytic→Expansion→Relational→Temporal→Continuidade/CheckGuidance; snapshots históricos preservados. Diff completo aplicado à baseline isolada e bytes conferidos; validação final e readback vinculados pelo selo fora do manifesto.",
+      "finalEvidenceBinding": "Exact final checks, diff and seal readback are bound by final-seal.json outside the manifest cycle."
+    },
+    {
+      "id": "N",
+      "title": "Entrega e medida preservada",
+      "dependsOn": [
+        "M"
+      ],
+      "units": [
+        "TODAS_AS_45"
+      ],
+      "acceptance": "Fechamentos por requisitos reais; 39/45 e 67/115 separados, funções ainda incompletas explícitas.",
+      "state": "PROPOSTO",
+      "mandatory": true,
+      "status": "CONCLUIDO_LOCAL",
+      "input": "Fechamentos por requisitos reais; 39/45 e 67/115 separados, funções ainda incompletas explícitas.",
+      "consumer": "delivery control",
+      "localProof": "Fechamentos por requisitos reais; 39/45 e 67/115 separados, funções ainda incompletas explícitas.",
+      "dependency": "preceding local front",
+      "evidence": [
+        {
+          "path": "target/macrobloco-integracao-funcional-20260914-01/final-package-proofs-01/result.json",
+          "sha256": "e31279d3030217917354d7e1144aa58c4be1ca2fdf1fa83b7aceb6fff1b92e25"
+        }
+      ],
+      "deliveredMechanism": "Entrega consolidada de código, pacote, testes, provas, matriz A–N/45, relatório, diffs e continuidade, com39/45 e67/115 preservados e entradas externas precisas.",
+      "finalEvidenceBinding": "Exact final checks, diff and seal readback are bound by final-seal.json outside the manifest cycle."
+    }
+  ]
+}

@@ -1,0 +1,567 @@
+{
+  "template": 6392,
+  "httpStatus": 200,
+  "curlExit": 0,
+  "bytes": 4202,
+  "elapsedMilliseconds": 1139,
+  "failure": null,
+  "sample": {
+    "physicalRows": 2,
+    "profiledRows": 2,
+    "physicalLimitExceeded": false,
+    "empty": false,
+    "profiles": [
+      {
+        "path": "/bo_number",
+        "observations": 2,
+        "types": {
+          "STRING": 2
+        },
+        "emptyArrays": 0,
+        "arrayItems": 0,
+        "unprofiledObjectKeys": 0
+      },
+      {
+        "path": "/brokers_case_number",
+        "observations": 2,
+        "types": {
+          "STRING": 2
+        },
+        "emptyArrays": 0,
+        "arrayItems": 0,
+        "unprofiledObjectKeys": 0
+      },
+      {
+        "path": "/customer_communication_contact_name",
+        "observations": 2,
+        "types": {
+          "STRING": 2
+        },
+        "emptyArrays": 0,
+        "arrayItems": 0,
+        "unprofiledObjectKeys": 0
+      },
+      {
+        "path": "/customer_communication_date",
+        "observations": 2,
+        "types": {
+          "NULL": 2
+        },
+        "emptyArrays": 0,
+        "arrayItems": 0,
+        "unprofiledObjectKeys": 0
+      },
+      {
+        "path": "/customer_communication_time",
+        "observations": 2,
+        "types": {
+          "NULL": 2
+        },
+        "emptyArrays": 0,
+        "arrayItems": 0,
+        "unprofiledObjectKeys": 0
+      },
+      {
+        "path": "/customer_credit_entries_subtotal",
+        "observations": 2,
+        "types": {
+          "STRING": 2
+        },
+        "emptyArrays": 0,
+        "arrayItems": 0,
+        "unprofiledObjectKeys": 0
+      },
+      {
+        "path": "/customer_debits_subtotal",
+        "observations": 2,
+        "types": {
+          "STRING": 2
+        },
+        "emptyArrays": 0,
+        "arrayItems": 0,
+        "unprofiledObjectKeys": 0
+      },
+      {
+        "path": "/expected_solution_date",
+        "observations": 2,
+        "types": {
+          "STRING": 1,
+          "NULL": 1
+        },
+        "emptyArrays": 0,
+        "arrayItems": 0,
+        "unprofiledObjectKeys": 0
+      },
+      {
+        "path": "/finished_at_date",
+        "observations": 2,
+        "types": {
+          "NULL": 2
+        },
+        "emptyArrays": 0,
+        "arrayItems": 0,
+        "unprofiledObjectKeys": 0
+      },
+      {
+        "path": "/finished_at_time",
+        "observations": 2,
+        "types": {
+          "NULL": 2
+        },
+        "emptyArrays": 0,
+        "arrayItems": 0,
+        "unprofiledObjectKeys": 0
+      },
+      {
+        "path": "/finished_commentary",
+        "observations": 2,
+        "types": {
+          "NULL": 2
+        },
+        "emptyArrays": 0,
+        "arrayItems": 0,
+        "unprofiledObjectKeys": 0
+      },
+      {
+        "path": "/icm_crn_psn_nickname",
+        "observations": 2,
+        "types": {
+          "STRING": 2
+        },
+        "emptyArrays": 0,
+        "arrayItems": 0,
+        "unprofiledObjectKeys": 0
+      },
+      {
+        "path": "/icm_dvr_iil_name",
+        "observations": 2,
+        "types": {
+          "STRING": 2
+        },
+        "emptyArrays": 0,
+        "arrayItems": 0,
+        "unprofiledObjectKeys": 0
+      },
+      {
+        "path": "/icm_fer_name",
+        "observations": 2,
+        "types": {
+          "NULL": 2
+        },
+        "emptyArrays": 0,
+        "arrayItems": 0,
+        "unprofiledObjectKeys": 0
+      },
+      {
+        "path": "/icm_fis_fit_corporation_sequence_number",
+        "observations": 2,
+        "types": {
+          "INTEGER": 2
+        },
+        "emptyArrays": 0,
+        "arrayItems": 0,
+        "unprofiledObjectKeys": 0
+      },
+      {
+        "path": "/icm_fis_fit_pyr_nickname",
+        "observations": 2,
+        "types": {
+          "STRING": 2
+        },
+        "emptyArrays": 0,
+        "arrayItems": 0,
+        "unprofiledObjectKeys": 0
+      },
+      {
+        "path": "/icm_fis_ioe_number",
+        "observations": 2,
+        "types": {
+          "STRING": 2
+        },
+        "emptyArrays": 0,
+        "arrayItems": 0,
+        "unprofiledObjectKeys": 0
+      },
+      {
+        "path": "/icm_ttt_dealing_type",
+        "observations": 2,
+        "types": {
+          "NULL": 1,
+          "STRING": 1
+        },
+        "emptyArrays": 0,
+        "arrayItems": 0,
+        "unprofiledObjectKeys": 0
+      },
+      {
+        "path": "/icm_ttt_ore_code",
+        "observations": 2,
+        "types": {
+          "NULL": 1,
+          "INTEGER": 1
+        },
+        "emptyArrays": 0,
+        "arrayItems": 0,
+        "unprofiledObjectKeys": 0
+      },
+      {
+        "path": "/icm_ttt_ore_description",
+        "observations": 2,
+        "types": {
+          "NULL": 1,
+          "STRING": 1
+        },
+        "emptyArrays": 0,
+        "arrayItems": 0,
+        "unprofiledObjectKeys": 0
+      },
+      {
+        "path": "/icm_ttt_solution_type",
+        "observations": 2,
+        "types": {
+          "NULL": 1,
+          "STRING": 1
+        },
+        "emptyArrays": 0,
+        "arrayItems": 0,
+        "unprofiledObjectKeys": 0
+      },
+      {
+        "path": "/icm_ttt_treatment_at",
+        "observations": 2,
+        "types": {
+          "NULL": 1,
+          "STRING": 1
+        },
+        "emptyArrays": 0,
+        "arrayItems": 0,
+        "unprofiledObjectKeys": 0
+      },
+      {
+        "path": "/icm_vie_license_plate",
+        "observations": 2,
+        "types": {
+          "STRING": 2
+        },
+        "emptyArrays": 0,
+        "arrayItems": 0,
+        "unprofiledObjectKeys": 0
+      },
+      {
+        "path": "/informed_by",
+        "observations": 2,
+        "types": {
+          "STRING": 2
+        },
+        "emptyArrays": 0,
+        "arrayItems": 0,
+        "unprofiledObjectKeys": 0
+      },
+      {
+        "path": "/insurance_claim_commentary",
+        "observations": 2,
+        "types": {
+          "STRING": 2
+        },
+        "emptyArrays": 0,
+        "arrayItems": 0,
+        "unprofiledObjectKeys": 0
+      },
+      {
+        "path": "/insurance_claim_location",
+        "observations": 2,
+        "types": {
+          "STRING": 2
+        },
+        "emptyArrays": 0,
+        "arrayItems": 0,
+        "unprofiledObjectKeys": 0
+      },
+      {
+        "path": "/insurance_claim_total",
+        "observations": 2,
+        "types": {
+          "STRING": 2
+        },
+        "emptyArrays": 0,
+        "arrayItems": 0,
+        "unprofiledObjectKeys": 0
+      },
+      {
+        "path": "/insurer_credits_subtotal",
+        "observations": 2,
+        "types": {
+          "STRING": 2
+        },
+        "emptyArrays": 0,
+        "arrayItems": 0,
+        "unprofiledObjectKeys": 0
+      },
+      {
+        "path": "/internal_description",
+        "observations": 2,
+        "types": {
+          "NULL": 1,
+          "STRING": 1
+        },
+        "emptyArrays": 0,
+        "arrayItems": 0,
+        "unprofiledObjectKeys": 0
+      },
+      {
+        "path": "/invoices_count",
+        "observations": 2,
+        "types": {
+          "INTEGER": 2
+        },
+        "emptyArrays": 0,
+        "arrayItems": 0,
+        "unprofiledObjectKeys": 0
+      },
+      {
+        "path": "/invoices_value",
+        "observations": 2,
+        "types": {
+          "STRING": 2
+        },
+        "emptyArrays": 0,
+        "arrayItems": 0,
+        "unprofiledObjectKeys": 0
+      },
+      {
+        "path": "/invoices_volumes",
+        "observations": 2,
+        "types": {
+          "INTEGER": 2
+        },
+        "emptyArrays": 0,
+        "arrayItems": 0,
+        "unprofiledObjectKeys": 0
+      },
+      {
+        "path": "/invoices_weight",
+        "observations": 2,
+        "types": {
+          "STRING": 2
+        },
+        "emptyArrays": 0,
+        "arrayItems": 0,
+        "unprofiledObjectKeys": 0
+      },
+      {
+        "path": "/list_of_claimed_products",
+        "observations": 2,
+        "types": {
+          "STRING": 2
+        },
+        "emptyArrays": 0,
+        "arrayItems": 0,
+        "unprofiledObjectKeys": 0
+      },
+      {
+        "path": "/occurrence_at_date",
+        "observations": 2,
+        "types": {
+          "STRING": 2
+        },
+        "emptyArrays": 0,
+        "arrayItems": 0,
+        "unprofiledObjectKeys": 0
+      },
+      {
+        "path": "/occurrence_at_time",
+        "observations": 2,
+        "types": {
+          "STRING": 2
+        },
+        "emptyArrays": 0,
+        "arrayItems": 0,
+        "unprofiledObjectKeys": 0
+      },
+      {
+        "path": "/opening_at_date",
+        "observations": 2,
+        "types": {
+          "STRING": 2
+        },
+        "emptyArrays": 0,
+        "arrayItems": 0,
+        "unprofiledObjectKeys": 0
+      },
+      {
+        "path": "/policy_number",
+        "observations": 2,
+        "types": {
+          "STRING": 2
+        },
+        "emptyArrays": 0,
+        "arrayItems": 0,
+        "unprofiledObjectKeys": 0
+      },
+      {
+        "path": "/rcfdc",
+        "observations": 2,
+        "types": {
+          "ARRAY": 2
+        },
+        "emptyArrays": 2,
+        "arrayItems": 0,
+        "unprofiledObjectKeys": 0
+      },
+      {
+        "path": "/rctac",
+        "observations": 2,
+        "types": {
+          "ARRAY": 2
+        },
+        "emptyArrays": 2,
+        "arrayItems": 0,
+        "unprofiledObjectKeys": 0
+      },
+      {
+        "path": "/rctrc",
+        "observations": 2,
+        "types": {
+          "ARRAY": 2
+        },
+        "emptyArrays": 2,
+        "arrayItems": 0,
+        "unprofiledObjectKeys": 0
+      },
+      {
+        "path": "/responsible_credits_subtotal",
+        "observations": 2,
+        "types": {
+          "STRING": 2
+        },
+        "emptyArrays": 0,
+        "arrayItems": 0,
+        "unprofiledObjectKeys": 0
+      },
+      {
+        "path": "/responsible_debit_entries_subtotal",
+        "observations": 2,
+        "types": {
+          "STRING": 2
+        },
+        "emptyArrays": 0,
+        "arrayItems": 0,
+        "unprofiledObjectKeys": 0
+      },
+      {
+        "path": "/sequence_code",
+        "observations": 2,
+        "types": {
+          "INTEGER": 2
+        },
+        "emptyArrays": 0,
+        "arrayItems": 0,
+        "unprofiledObjectKeys": 0
+      }
+    ],
+    "candidateProfiles": [
+      {
+        "path": "/accounting_credit_id",
+        "missing": 2,
+        "nulls": 0,
+        "nonScalar": 0,
+        "sampledValues": 0,
+        "sampledDistinct": 0,
+        "sampledDuplicateValues": 0,
+        "identityProven": false
+      },
+      {
+        "path": "/accounting_debit_id",
+        "missing": 2,
+        "nulls": 0,
+        "nonScalar": 0,
+        "sampledValues": 0,
+        "sampledDistinct": 0,
+        "sampledDuplicateValues": 0,
+        "identityProven": false
+      },
+      {
+        "path": "/check_in_order_id",
+        "missing": 2,
+        "nulls": 0,
+        "nonScalar": 0,
+        "sampledValues": 0,
+        "sampledDistinct": 0,
+        "sampledDuplicateValues": 0,
+        "identityProven": false
+      },
+      {
+        "path": "/freight_id",
+        "missing": 2,
+        "nulls": 0,
+        "nonScalar": 0,
+        "sampledValues": 0,
+        "sampledDistinct": 0,
+        "sampledDuplicateValues": 0,
+        "identityProven": false
+      },
+      {
+        "path": "/icm_fis_fit_corporation_sequence_number",
+        "missing": 0,
+        "nulls": 0,
+        "nonScalar": 0,
+        "sampledValues": 2,
+        "sampledDistinct": 2,
+        "sampledDuplicateValues": 0,
+        "identityProven": false
+      },
+      {
+        "path": "/icm_fis_ioe_number",
+        "missing": 0,
+        "nulls": 0,
+        "nonScalar": 0,
+        "sampledValues": 2,
+        "sampledDistinct": 2,
+        "sampledDuplicateValues": 0,
+        "identityProven": false
+      },
+      {
+        "path": "/id",
+        "missing": 2,
+        "nulls": 0,
+        "nonScalar": 0,
+        "sampledValues": 0,
+        "sampledDistinct": 0,
+        "sampledDuplicateValues": 0,
+        "identityProven": false
+      },
+      {
+        "path": "/installment_id",
+        "missing": 2,
+        "nulls": 0,
+        "nonScalar": 0,
+        "sampledValues": 0,
+        "sampledDistinct": 0,
+        "sampledDuplicateValues": 0,
+        "identityProven": false
+      },
+      {
+        "path": "/insurance_claim_id",
+        "missing": 2,
+        "nulls": 0,
+        "nonScalar": 0,
+        "sampledValues": 0,
+        "sampledDistinct": 0,
+        "sampledDuplicateValues": 0,
+        "identityProven": false
+      },
+      {
+        "path": "/sequence_code",
+        "missing": 0,
+        "nulls": 0,
+        "nonScalar": 0,
+        "sampledValues": 2,
+        "sampledDistinct": 2,
+        "sampledDuplicateValues": 0,
+        "identityProven": false
+      }
+    ],
+    "universalUniquenessProven": false,
+    "stabilityProven": false
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "version": "synthetic-analytic-raster-v1",
+  "provenance": "FIXTURE_EXPLICIT_LOCAL_CONTRACT",
+  "trip": {
+    "CodSolicitacao": "10001",
+    "Sequencial": "20001",
+    "CodFilial": "7",
+    "StatusViagem": "closed",
+    "PlacaVeiculo": "SYN0001",
+    "PlacaCarreta1": "SYN0002",
+    "PlacaCarreta02": "SYN0003",
+    "PlacaCarreta3": "SINTÉTICO placaCarreta3",
+    "CPFMotorista1": "SINTÉTICO cpfMotorista1",
+    "CPFMotorista2": "SINTÉTICO cpfMotorista2",
+    "CNPJClienteOrig": "SINTÉTICO cnpjClienteOrig",
+    "CNPJClienteDest": "SINTÉTICO cnpjClienteDest",
+    "CodIBGECidadeOrig": "7",
+    "CodIBGECidadeDest": "7",
+    "DataHoraPrevIni": "2036-04-01T08:00:00.123456789-03:00",
+    "DataHoraPrevFim": "2036-04-01T09:30:00.123456789-03:00",
+    "DataHoraRealIni": "2036-04-01T09:00:00.123456789-03:00",
+    "DataHoraRealFim": "2036-04-01T09:00:00.123456789-03:00",
+    "DataHoraIdentificouFimViagem": "2036-04-01T09:00:00.123456789-03:00",
+    "TempoTotalViagem": 90,
+    "DentroPrazo": "SINTÉTICO dentroPrazo",
+    "PercentualAtraso": "7.12500000",
+    "RodouForaHorario": "SINTÉTICO rodouForaHorario",
+    "VelocidadeMedia": "7.12500000",
+    "EventosVelocidade": 2,
+    "DesviosDeRota": 2,
+    "LinkTimeLine": "SINTÉTICO linkTimeline",
+    "Rota": {
+      "CodRota": "7",
+      "Descricao": "ORIGEM/SP ATE DESTINO/RJ /BRASIL"
+    },
+    "ColetasEntregas": [
+      {
+        "Ordem": "1",
+        "Tipo": "Entrega",
+        "CodIBGECidade": "3509502",
+        "CNPJCliente": "SINTÉTICO cnpjCliente",
+        "CodigoCliente": "SINTÉTICO codigoCliente",
+        "DataHoraPrevChegada": "2036-04-01T09:00:00.123456789-03:00",
+        "DataHoraPrevSaida": "2036-04-01T09:00:00.123456789-03:00",
+        "DataHoraRealChegada": "2036-04-01T09:00:00.123456789-03:00",
+        "DataHoraRealSaida": "2036-04-01T09:00:00.123456789-03:00",
+        "Latitude": "7.12500000",
+        "Longitude": "7.12500000",
+        "DentroPrazo": "SINTÉTICO dentroPrazo",
+        "DiferencaTempo": "SINTÉTICO diferencaTempo",
+        "KmPercorridoEntrega": "7.12500000",
+        "KmRestanteEntrega": "7.12500000",
+        "ChegouNaEntrega": "SINTÉTICO chegouNaEntrega",
+        "DataHoraUltimaPosicao": "2036-04-01T09:00:00.123456789-03:00",
+        "LatitudeUltimaPosicao": "7.12500000",
+        "LongitudeUltimaPosicao": "7.12500000",
+        "ReferenciaUltimaPosicao": "SINTÉTICO referenciaUltimaPosicao"
+      }
+    ]
+  }
+}

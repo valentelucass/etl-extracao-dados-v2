@@ -18,6 +18,9 @@ $sqlcmd = Get-Command sqlcmd.exe -ErrorAction Stop
 & (Join-Path $PSScriptRoot 'Test-GovernedReferencesConcurrency.ps1')
 & (Join-Path $PSScriptRoot 'Test-GovernedReferencesShowplan.ps1')
 & (Join-Path $PSScriptRoot 'Test-UsuariosDimensionCurrentShowplan.ps1')
+& (Join-Path $PSScriptRoot 'Test-ManifestosShadowConcurrency.ps1')
+& (Join-Path $PSScriptRoot 'Test-FretesShadowConcurrency.ps1')
+& (Join-Path $PSScriptRoot 'Test-LocalizacaoCargasShadowConcurrency.ps1')
 
 $targetVerification = @(
     & $sqlcmd.Source -S localhost -C -E -f 65001 -d master -b -h -1 -W `
@@ -109,8 +112,20 @@ try {
     if ($LASTEXITCODE -ne 0) {
         throw 'O exercício rollback-only da dimensão current de Usuários falhou.'
     }
+    & $sqlcmd.Source -S localhost -C -E -f 65001 -d $targetDatabase -i '043_exercise_manifestos_shadow_vertical_rollback.sql' -b
+    if ($LASTEXITCODE -ne 0) {
+        throw 'O exercício rollback-only de Manifestos 6399 falhou.'
+    }
+    & $sqlcmd.Source -S localhost -C -E -f 65001 -d $targetDatabase -i '045_exercise_fretes_shadow_vertical_rollback.sql' -b
+    if ($LASTEXITCODE -ne 0) {
+        throw 'O exercício rollback-only de Fretes 6389 falhou.'
+    }
+    & $sqlcmd.Source -S localhost -C -E -f 65001 -d $targetDatabase -i '047_exercise_localizacao_cargas_shadow_vertical_rollback.sql' -b
+    if ($LASTEXITCODE -ne 0) {
+        throw 'O exercício rollback-only de Localização de Cargas 8656 falhou.'
+    }
 } finally {
     Pop-Location
 }
 
-Write-Output 'Gate progressivo, kernel, publicação, permit, lifecycle, Usuários current/dimensão, referências, concorrência, negativos isolados e SHOWPLAN executados no alvo local autorizado e revertidos integralmente.'
+Write-Output 'Gate progressivo, kernel, publicação, permit, lifecycle, Usuários current/dimensão, referências, Manifestos 6399, Fretes 6389, Localização 8656, concorrência, negativos isolados e SHOWPLAN executados no alvo local autorizado e revertidos integralmente.'

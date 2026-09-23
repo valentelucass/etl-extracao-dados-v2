@@ -1,0 +1,1627 @@
+{
+  "version": 1,
+  "provenance": "SQL_SERVER_DESCRIBE_RESULT_SET_READ_ONLY",
+  "evidence": "target/macrobloco-expansao-20260912-01/query-metadata.log",
+  "queries": [
+    {
+      "projection": "CAP",
+      "sql": "pub.ufn_expansion_cap",
+      "jdbc": "detailPage",
+      "grain": "componente corrente CAP",
+      "cursor": "component_id",
+      "maximum": 100,
+      "filter": "run_id obrigatório; cursor exclusivo; somente ativos; bloqueios retidos com disposição explícita",
+      "columns": [
+        {
+          "ordinal": 1,
+          "name": "run_id",
+          "sqlType": "uniqueidentifier",
+          "nullable": false
+        },
+        {
+          "ordinal": 2,
+          "name": "root_id",
+          "sqlType": "bigint",
+          "nullable": false
+        },
+        {
+          "ordinal": 3,
+          "name": "vertical",
+          "sqlType": "char(3)",
+          "nullable": false
+        },
+        {
+          "ordinal": 4,
+          "name": "root_type",
+          "sqlType": "varchar(8)",
+          "nullable": false
+        },
+        {
+          "ordinal": 5,
+          "name": "root_key",
+          "sqlType": "nvarchar(64)",
+          "nullable": false
+        },
+        {
+          "ordinal": 6,
+          "name": "currency",
+          "sqlType": "char(3)",
+          "nullable": false
+        },
+        {
+          "ordinal": 7,
+          "name": "unit",
+          "sqlType": "varchar(16)",
+          "nullable": false
+        },
+        {
+          "ordinal": 8,
+          "name": "root_amount",
+          "sqlType": "decimal(28,8)",
+          "nullable": true
+        },
+        {
+          "ordinal": 9,
+          "name": "amount_state",
+          "sqlType": "varchar(16)",
+          "nullable": false
+        },
+        {
+          "ordinal": 10,
+          "name": "component_id",
+          "sqlType": "bigint",
+          "nullable": false
+        },
+        {
+          "ordinal": 11,
+          "name": "part_type",
+          "sqlType": "varchar(8)",
+          "nullable": false
+        },
+        {
+          "ordinal": 12,
+          "name": "part_key",
+          "sqlType": "nvarchar(64)",
+          "nullable": false
+        },
+        {
+          "ordinal": 13,
+          "name": "component_type",
+          "sqlType": "varchar(8)",
+          "nullable": false
+        },
+        {
+          "ordinal": 14,
+          "name": "component_key",
+          "sqlType": "nvarchar(64)",
+          "nullable": false
+        },
+        {
+          "ordinal": 15,
+          "name": "proof_attached",
+          "sqlType": "bit",
+          "nullable": false
+        },
+        {
+          "ordinal": 16,
+          "name": "execution_id",
+          "sqlType": "uniqueidentifier",
+          "nullable": false
+        },
+        {
+          "ordinal": 17,
+          "name": "occurrence",
+          "sqlType": "bigint",
+          "nullable": false
+        },
+        {
+          "ordinal": 18,
+          "name": "observation_id",
+          "sqlType": "bigint",
+          "nullable": false
+        },
+        {
+          "ordinal": 19,
+          "name": "revision",
+          "sqlType": "int",
+          "nullable": true
+        },
+        {
+          "ordinal": 20,
+          "name": "fresh_second",
+          "sqlType": "bigint",
+          "nullable": true
+        },
+        {
+          "ordinal": 21,
+          "name": "fresh_nano",
+          "sqlType": "int",
+          "nullable": true
+        },
+        {
+          "ordinal": 22,
+          "name": "fresh_inclusive",
+          "sqlType": "tinyint",
+          "nullable": true
+        },
+        {
+          "ordinal": 23,
+          "name": "part_amount",
+          "sqlType": "decimal(28,8)",
+          "nullable": true
+        },
+        {
+          "ordinal": 24,
+          "name": "allocation_amount",
+          "sqlType": "decimal(28,8)",
+          "nullable": true
+        },
+        {
+          "ordinal": 25,
+          "name": "additive_allocation",
+          "sqlType": "bit",
+          "nullable": true
+        },
+        {
+          "ordinal": 26,
+          "name": "partition_start",
+          "sqlType": "date",
+          "nullable": false
+        },
+        {
+          "ordinal": 27,
+          "name": "unresolved_conflict",
+          "sqlType": "bit",
+          "nullable": true
+        },
+        {
+          "ordinal": 28,
+          "name": "installment_candidate",
+          "sqlType": "varchar(40)",
+          "nullable": true
+        },
+        {
+          "ordinal": 29,
+          "name": "installment_wire",
+          "sqlType": "varchar(8)",
+          "nullable": false
+        },
+        {
+          "ordinal": 30,
+          "name": "paid",
+          "sqlType": "bit",
+          "nullable": true
+        },
+        {
+          "ordinal": 31,
+          "name": "reconciled",
+          "sqlType": "bit",
+          "nullable": true
+        },
+        {
+          "ordinal": 32,
+          "name": "payment_state",
+          "sqlType": "varchar(6)",
+          "nullable": false
+        },
+        {
+          "ordinal": 33,
+          "name": "paid_label",
+          "sqlType": "nvarchar(3)",
+          "nullable": false
+        },
+        {
+          "ordinal": 34,
+          "name": "reconciliation_label",
+          "sqlType": "nvarchar(14)",
+          "nullable": false
+        },
+        {
+          "ordinal": 35,
+          "name": "type_raw",
+          "sqlType": "nvarchar(1024)",
+          "nullable": true
+        },
+        {
+          "ordinal": 36,
+          "name": "type_token",
+          "sqlType": "nvarchar(1024)",
+          "nullable": true
+        },
+        {
+          "ordinal": 37,
+          "name": "type_label",
+          "sqlType": "nvarchar(128)",
+          "nullable": true
+        },
+        {
+          "ordinal": 38,
+          "name": "classification_raw",
+          "sqlType": "nvarchar(1024)",
+          "nullable": true
+        },
+        {
+          "ordinal": 39,
+          "name": "classification_label",
+          "sqlType": "nvarchar(128)",
+          "nullable": true
+        },
+        {
+          "ordinal": 40,
+          "name": "label_release",
+          "sqlType": "bigint",
+          "nullable": true
+        },
+        {
+          "ordinal": 41,
+          "name": "issue_date",
+          "sqlType": "date",
+          "nullable": true
+        },
+        {
+          "ordinal": 42,
+          "name": "created_at",
+          "sqlType": "bigint",
+          "nullable": true
+        },
+        {
+          "ordinal": 43,
+          "name": "created_at_nano",
+          "sqlType": "int",
+          "nullable": true
+        },
+        {
+          "ordinal": 44,
+          "name": "transaction_date",
+          "sqlType": "date",
+          "nullable": true
+        },
+        {
+          "ordinal": 45,
+          "name": "liquidation_date",
+          "sqlType": "date",
+          "nullable": true
+        },
+        {
+          "ordinal": 46,
+          "name": "value_to_pay",
+          "sqlType": "decimal(28,8)",
+          "nullable": true
+        },
+        {
+          "ordinal": 47,
+          "name": "paid_value",
+          "sqlType": "decimal(28,8)",
+          "nullable": true
+        },
+        {
+          "ordinal": 48,
+          "name": "interest_value",
+          "sqlType": "decimal(28,8)",
+          "nullable": true
+        },
+        {
+          "ordinal": 49,
+          "name": "discount_value",
+          "sqlType": "decimal(28,8)",
+          "nullable": true
+        },
+        {
+          "ordinal": 50,
+          "name": "competence_month",
+          "sqlType": "varchar(40)",
+          "nullable": true
+        },
+        {
+          "ordinal": 51,
+          "name": "competence_year",
+          "sqlType": "varchar(40)",
+          "nullable": true
+        }
+      ]
+    },
+    {
+      "projection": "FAT",
+      "sql": "pub.ufn_expansion_fat",
+      "jdbc": "detailPage",
+      "grain": "componente corrente FAT",
+      "cursor": "component_id",
+      "maximum": 100,
+      "filter": "run_id obrigatório; cursor exclusivo; somente ativos; bloqueios retidos com disposição explícita",
+      "columns": [
+        {
+          "ordinal": 1,
+          "name": "run_id",
+          "sqlType": "uniqueidentifier",
+          "nullable": false
+        },
+        {
+          "ordinal": 2,
+          "name": "root_id",
+          "sqlType": "bigint",
+          "nullable": false
+        },
+        {
+          "ordinal": 3,
+          "name": "vertical",
+          "sqlType": "char(3)",
+          "nullable": false
+        },
+        {
+          "ordinal": 4,
+          "name": "root_type",
+          "sqlType": "varchar(8)",
+          "nullable": false
+        },
+        {
+          "ordinal": 5,
+          "name": "root_key",
+          "sqlType": "nvarchar(64)",
+          "nullable": false
+        },
+        {
+          "ordinal": 6,
+          "name": "currency",
+          "sqlType": "char(3)",
+          "nullable": false
+        },
+        {
+          "ordinal": 7,
+          "name": "unit",
+          "sqlType": "varchar(16)",
+          "nullable": false
+        },
+        {
+          "ordinal": 8,
+          "name": "root_amount",
+          "sqlType": "decimal(28,8)",
+          "nullable": true
+        },
+        {
+          "ordinal": 9,
+          "name": "amount_state",
+          "sqlType": "varchar(16)",
+          "nullable": false
+        },
+        {
+          "ordinal": 10,
+          "name": "component_id",
+          "sqlType": "bigint",
+          "nullable": false
+        },
+        {
+          "ordinal": 11,
+          "name": "part_type",
+          "sqlType": "varchar(8)",
+          "nullable": false
+        },
+        {
+          "ordinal": 12,
+          "name": "part_key",
+          "sqlType": "nvarchar(64)",
+          "nullable": false
+        },
+        {
+          "ordinal": 13,
+          "name": "component_type",
+          "sqlType": "varchar(8)",
+          "nullable": false
+        },
+        {
+          "ordinal": 14,
+          "name": "component_key",
+          "sqlType": "nvarchar(64)",
+          "nullable": false
+        },
+        {
+          "ordinal": 15,
+          "name": "proof_attached",
+          "sqlType": "bit",
+          "nullable": false
+        },
+        {
+          "ordinal": 16,
+          "name": "execution_id",
+          "sqlType": "uniqueidentifier",
+          "nullable": false
+        },
+        {
+          "ordinal": 17,
+          "name": "occurrence",
+          "sqlType": "bigint",
+          "nullable": false
+        },
+        {
+          "ordinal": 18,
+          "name": "observation_id",
+          "sqlType": "bigint",
+          "nullable": false
+        },
+        {
+          "ordinal": 19,
+          "name": "revision",
+          "sqlType": "int",
+          "nullable": true
+        },
+        {
+          "ordinal": 20,
+          "name": "fresh_second",
+          "sqlType": "bigint",
+          "nullable": true
+        },
+        {
+          "ordinal": 21,
+          "name": "fresh_nano",
+          "sqlType": "int",
+          "nullable": true
+        },
+        {
+          "ordinal": 22,
+          "name": "fresh_inclusive",
+          "sqlType": "tinyint",
+          "nullable": true
+        },
+        {
+          "ordinal": 23,
+          "name": "part_amount",
+          "sqlType": "decimal(28,8)",
+          "nullable": true
+        },
+        {
+          "ordinal": 24,
+          "name": "allocation_amount",
+          "sqlType": "decimal(28,8)",
+          "nullable": true
+        },
+        {
+          "ordinal": 25,
+          "name": "additive_allocation",
+          "sqlType": "bit",
+          "nullable": true
+        },
+        {
+          "ordinal": 26,
+          "name": "partition_start",
+          "sqlType": "date",
+          "nullable": false
+        },
+        {
+          "ordinal": 27,
+          "name": "unresolved_conflict",
+          "sqlType": "bit",
+          "nullable": true
+        },
+        {
+          "ordinal": 28,
+          "name": "line_candidate",
+          "sqlType": "varchar(40)",
+          "nullable": true
+        },
+        {
+          "ordinal": 29,
+          "name": "line_wire",
+          "sqlType": "varchar(8)",
+          "nullable": false
+        },
+        {
+          "ordinal": 30,
+          "name": "document_raw",
+          "sqlType": "nvarchar(1024)",
+          "nullable": true
+        },
+        {
+          "ordinal": 31,
+          "name": "has_invoice",
+          "sqlType": "bit",
+          "nullable": true
+        },
+        {
+          "ordinal": 32,
+          "name": "cte_number",
+          "sqlType": "varchar(40)",
+          "nullable": true
+        },
+        {
+          "ordinal": 33,
+          "name": "nfse_number",
+          "sqlType": "varchar(40)",
+          "nullable": true
+        },
+        {
+          "ordinal": 34,
+          "name": "nfse_alias",
+          "sqlType": "nvarchar(128)",
+          "nullable": true
+        },
+        {
+          "ordinal": 35,
+          "name": "fiscal_state",
+          "sqlType": "varchar(14)",
+          "nullable": false
+        },
+        {
+          "ordinal": 36,
+          "name": "official_number",
+          "sqlType": "nvarchar(128)",
+          "nullable": true
+        },
+        {
+          "ordinal": 37,
+          "name": "nfse_series_state",
+          "sqlType": "varchar(32)",
+          "nullable": true
+        },
+        {
+          "ordinal": 38,
+          "name": "cte_status_raw",
+          "sqlType": "nvarchar(1024)",
+          "nullable": true
+        },
+        {
+          "ordinal": 39,
+          "name": "cte_status_result",
+          "sqlType": "nvarchar(1024)",
+          "nullable": true
+        },
+        {
+          "ordinal": 40,
+          "name": "cte_status_label",
+          "sqlType": "nvarchar(128)",
+          "nullable": true
+        },
+        {
+          "ordinal": 41,
+          "name": "label_release",
+          "sqlType": "bigint",
+          "nullable": true
+        },
+        {
+          "ordinal": 42,
+          "name": "issue_date",
+          "sqlType": "date",
+          "nullable": true
+        },
+        {
+          "ordinal": 43,
+          "name": "due_date",
+          "sqlType": "date",
+          "nullable": true
+        },
+        {
+          "ordinal": 44,
+          "name": "paid_date",
+          "sqlType": "date",
+          "nullable": true
+        },
+        {
+          "ordinal": 45,
+          "name": "cte_issue_second",
+          "sqlType": "bigint",
+          "nullable": true
+        },
+        {
+          "ordinal": 46,
+          "name": "cte_issue_nano",
+          "sqlType": "int",
+          "nullable": true
+        },
+        {
+          "ordinal": 47,
+          "name": "title_value",
+          "sqlType": "decimal(28,8)",
+          "nullable": true
+        },
+        {
+          "ordinal": 48,
+          "name": "freight_value",
+          "sqlType": "decimal(28,8)",
+          "nullable": true
+        },
+        {
+          "ordinal": 49,
+          "name": "client_key",
+          "sqlType": "nvarchar(4000)",
+          "nullable": true
+        },
+        {
+          "ordinal": 50,
+          "name": "client_provenance",
+          "sqlType": "varchar(24)",
+          "nullable": false
+        },
+        {
+          "ordinal": 51,
+          "name": "payer_document_raw",
+          "sqlType": "nvarchar(1024)",
+          "nullable": true
+        },
+        {
+          "ordinal": 52,
+          "name": "payer_name_raw",
+          "sqlType": "nvarchar(1024)",
+          "nullable": true
+        },
+        {
+          "ordinal": 53,
+          "name": "freight_type_raw",
+          "sqlType": "nvarchar(1024)",
+          "nullable": true
+        },
+        {
+          "ordinal": 54,
+          "name": "freight_type",
+          "sqlType": "nvarchar(4000)",
+          "nullable": true
+        },
+        {
+          "ordinal": 55,
+          "name": "courtesy",
+          "sqlType": "bit",
+          "nullable": true
+        },
+        {
+          "ordinal": 56,
+          "name": "status_raw",
+          "sqlType": "nvarchar(1024)",
+          "nullable": true
+        },
+        {
+          "ordinal": 57,
+          "name": "classification_raw",
+          "sqlType": "nvarchar(1024)",
+          "nullable": true
+        },
+        {
+          "ordinal": 58,
+          "name": "service_second",
+          "sqlType": "bigint",
+          "nullable": true
+        },
+        {
+          "ordinal": 59,
+          "name": "service_nano",
+          "sqlType": "int",
+          "nullable": true
+        }
+      ]
+    },
+    {
+      "projection": "INV",
+      "sql": "pub.ufn_expansion_inv",
+      "jdbc": "detailPage",
+      "grain": "componente corrente INV",
+      "cursor": "component_id",
+      "maximum": 100,
+      "filter": "run_id obrigatório; cursor exclusivo; somente ativos; bloqueios retidos com disposição explícita",
+      "columns": [
+        {
+          "ordinal": 1,
+          "name": "run_id",
+          "sqlType": "uniqueidentifier",
+          "nullable": false
+        },
+        {
+          "ordinal": 2,
+          "name": "root_id",
+          "sqlType": "bigint",
+          "nullable": false
+        },
+        {
+          "ordinal": 3,
+          "name": "vertical",
+          "sqlType": "char(3)",
+          "nullable": false
+        },
+        {
+          "ordinal": 4,
+          "name": "root_type",
+          "sqlType": "varchar(8)",
+          "nullable": false
+        },
+        {
+          "ordinal": 5,
+          "name": "root_key",
+          "sqlType": "nvarchar(64)",
+          "nullable": false
+        },
+        {
+          "ordinal": 6,
+          "name": "currency",
+          "sqlType": "char(3)",
+          "nullable": false
+        },
+        {
+          "ordinal": 7,
+          "name": "unit",
+          "sqlType": "varchar(16)",
+          "nullable": false
+        },
+        {
+          "ordinal": 8,
+          "name": "root_amount",
+          "sqlType": "decimal(28,8)",
+          "nullable": true
+        },
+        {
+          "ordinal": 9,
+          "name": "amount_state",
+          "sqlType": "varchar(16)",
+          "nullable": false
+        },
+        {
+          "ordinal": 10,
+          "name": "component_id",
+          "sqlType": "bigint",
+          "nullable": false
+        },
+        {
+          "ordinal": 11,
+          "name": "part_type",
+          "sqlType": "varchar(8)",
+          "nullable": false
+        },
+        {
+          "ordinal": 12,
+          "name": "part_key",
+          "sqlType": "nvarchar(64)",
+          "nullable": false
+        },
+        {
+          "ordinal": 13,
+          "name": "component_type",
+          "sqlType": "varchar(8)",
+          "nullable": false
+        },
+        {
+          "ordinal": 14,
+          "name": "component_key",
+          "sqlType": "nvarchar(64)",
+          "nullable": false
+        },
+        {
+          "ordinal": 15,
+          "name": "proof_attached",
+          "sqlType": "bit",
+          "nullable": false
+        },
+        {
+          "ordinal": 16,
+          "name": "execution_id",
+          "sqlType": "uniqueidentifier",
+          "nullable": false
+        },
+        {
+          "ordinal": 17,
+          "name": "occurrence",
+          "sqlType": "bigint",
+          "nullable": false
+        },
+        {
+          "ordinal": 18,
+          "name": "observation_id",
+          "sqlType": "bigint",
+          "nullable": false
+        },
+        {
+          "ordinal": 19,
+          "name": "revision",
+          "sqlType": "int",
+          "nullable": true
+        },
+        {
+          "ordinal": 20,
+          "name": "fresh_second",
+          "sqlType": "bigint",
+          "nullable": true
+        },
+        {
+          "ordinal": 21,
+          "name": "fresh_nano",
+          "sqlType": "int",
+          "nullable": true
+        },
+        {
+          "ordinal": 22,
+          "name": "fresh_inclusive",
+          "sqlType": "tinyint",
+          "nullable": true
+        },
+        {
+          "ordinal": 23,
+          "name": "part_amount",
+          "sqlType": "decimal(28,8)",
+          "nullable": true
+        },
+        {
+          "ordinal": 24,
+          "name": "allocation_amount",
+          "sqlType": "decimal(28,8)",
+          "nullable": true
+        },
+        {
+          "ordinal": 25,
+          "name": "additive_allocation",
+          "sqlType": "bit",
+          "nullable": true
+        },
+        {
+          "ordinal": 26,
+          "name": "partition_start",
+          "sqlType": "date",
+          "nullable": false
+        },
+        {
+          "ordinal": 27,
+          "name": "unresolved_conflict",
+          "sqlType": "bit",
+          "nullable": true
+        },
+        {
+          "ordinal": 28,
+          "name": "sequence_candidate",
+          "sqlType": "varchar(40)",
+          "nullable": true
+        },
+        {
+          "ordinal": 29,
+          "name": "sequence_wire",
+          "sqlType": "varchar(8)",
+          "nullable": false
+        },
+        {
+          "ordinal": 30,
+          "name": "freight_candidate",
+          "sqlType": "varchar(40)",
+          "nullable": true
+        },
+        {
+          "ordinal": 31,
+          "name": "invoices_value",
+          "sqlType": "decimal(28,8)",
+          "nullable": true
+        },
+        {
+          "ordinal": 32,
+          "name": "volumes",
+          "sqlType": "varchar(40)",
+          "nullable": true
+        },
+        {
+          "ordinal": 33,
+          "name": "volumes_presence",
+          "sqlType": "varchar(6)",
+          "nullable": false
+        },
+        {
+          "ordinal": 34,
+          "name": "real_weight",
+          "sqlType": "decimal(28,8)",
+          "nullable": true
+        },
+        {
+          "ordinal": 35,
+          "name": "taxed_weight",
+          "sqlType": "decimal(28,8)",
+          "nullable": true
+        },
+        {
+          "ordinal": 36,
+          "name": "cubic_volume",
+          "sqlType": "decimal(28,8)",
+          "nullable": true
+        },
+        {
+          "ordinal": 37,
+          "name": "read_volumes",
+          "sqlType": "varchar(40)",
+          "nullable": true
+        },
+        {
+          "ordinal": 38,
+          "name": "mapping_count",
+          "sqlType": "smallint",
+          "nullable": true
+        },
+        {
+          "ordinal": 39,
+          "name": "mapping_presence",
+          "sqlType": "varchar(6)",
+          "nullable": false
+        },
+        {
+          "ordinal": 40,
+          "name": "status_raw",
+          "sqlType": "nvarchar(1024)",
+          "nullable": true
+        },
+        {
+          "ordinal": 41,
+          "name": "type_raw",
+          "sqlType": "nvarchar(1024)",
+          "nullable": true
+        },
+        {
+          "ordinal": 42,
+          "name": "occurrence_description",
+          "sqlType": "nvarchar(1024)",
+          "nullable": true
+        }
+      ]
+    },
+    {
+      "projection": "SIN",
+      "sql": "pub.ufn_expansion_sin",
+      "jdbc": "detailPage",
+      "grain": "componente corrente SIN",
+      "cursor": "component_id",
+      "maximum": 100,
+      "filter": "run_id obrigatório; cursor exclusivo; somente ativos; bloqueios retidos com disposição explícita",
+      "columns": [
+        {
+          "ordinal": 1,
+          "name": "run_id",
+          "sqlType": "uniqueidentifier",
+          "nullable": false
+        },
+        {
+          "ordinal": 2,
+          "name": "root_id",
+          "sqlType": "bigint",
+          "nullable": false
+        },
+        {
+          "ordinal": 3,
+          "name": "vertical",
+          "sqlType": "char(3)",
+          "nullable": false
+        },
+        {
+          "ordinal": 4,
+          "name": "root_type",
+          "sqlType": "varchar(8)",
+          "nullable": false
+        },
+        {
+          "ordinal": 5,
+          "name": "root_key",
+          "sqlType": "nvarchar(64)",
+          "nullable": false
+        },
+        {
+          "ordinal": 6,
+          "name": "currency",
+          "sqlType": "char(3)",
+          "nullable": false
+        },
+        {
+          "ordinal": 7,
+          "name": "unit",
+          "sqlType": "varchar(16)",
+          "nullable": false
+        },
+        {
+          "ordinal": 8,
+          "name": "root_amount",
+          "sqlType": "decimal(28,8)",
+          "nullable": true
+        },
+        {
+          "ordinal": 9,
+          "name": "amount_state",
+          "sqlType": "varchar(16)",
+          "nullable": false
+        },
+        {
+          "ordinal": 10,
+          "name": "component_id",
+          "sqlType": "bigint",
+          "nullable": false
+        },
+        {
+          "ordinal": 11,
+          "name": "part_type",
+          "sqlType": "varchar(8)",
+          "nullable": false
+        },
+        {
+          "ordinal": 12,
+          "name": "part_key",
+          "sqlType": "nvarchar(64)",
+          "nullable": false
+        },
+        {
+          "ordinal": 13,
+          "name": "component_type",
+          "sqlType": "varchar(8)",
+          "nullable": false
+        },
+        {
+          "ordinal": 14,
+          "name": "component_key",
+          "sqlType": "nvarchar(64)",
+          "nullable": false
+        },
+        {
+          "ordinal": 15,
+          "name": "proof_attached",
+          "sqlType": "bit",
+          "nullable": false
+        },
+        {
+          "ordinal": 16,
+          "name": "execution_id",
+          "sqlType": "uniqueidentifier",
+          "nullable": false
+        },
+        {
+          "ordinal": 17,
+          "name": "occurrence",
+          "sqlType": "bigint",
+          "nullable": false
+        },
+        {
+          "ordinal": 18,
+          "name": "observation_id",
+          "sqlType": "bigint",
+          "nullable": false
+        },
+        {
+          "ordinal": 19,
+          "name": "revision",
+          "sqlType": "int",
+          "nullable": true
+        },
+        {
+          "ordinal": 20,
+          "name": "fresh_second",
+          "sqlType": "bigint",
+          "nullable": true
+        },
+        {
+          "ordinal": 21,
+          "name": "fresh_nano",
+          "sqlType": "int",
+          "nullable": true
+        },
+        {
+          "ordinal": 22,
+          "name": "fresh_inclusive",
+          "sqlType": "tinyint",
+          "nullable": true
+        },
+        {
+          "ordinal": 23,
+          "name": "part_amount",
+          "sqlType": "decimal(28,8)",
+          "nullable": true
+        },
+        {
+          "ordinal": 24,
+          "name": "allocation_amount",
+          "sqlType": "decimal(28,8)",
+          "nullable": true
+        },
+        {
+          "ordinal": 25,
+          "name": "additive_allocation",
+          "sqlType": "bit",
+          "nullable": true
+        },
+        {
+          "ordinal": 26,
+          "name": "partition_start",
+          "sqlType": "date",
+          "nullable": false
+        },
+        {
+          "ordinal": 27,
+          "name": "unresolved_conflict",
+          "sqlType": "bit",
+          "nullable": true
+        },
+        {
+          "ordinal": 28,
+          "name": "sequence_candidate",
+          "sqlType": "varchar(40)",
+          "nullable": true
+        },
+        {
+          "ordinal": 29,
+          "name": "sequence_wire",
+          "sqlType": "varchar(8)",
+          "nullable": false
+        },
+        {
+          "ordinal": 30,
+          "name": "freight_candidate",
+          "sqlType": "varchar(40)",
+          "nullable": true
+        },
+        {
+          "ordinal": 31,
+          "name": "occurrence_candidate",
+          "sqlType": "nvarchar(128)",
+          "nullable": true
+        },
+        {
+          "ordinal": 32,
+          "name": "insurance_claim_total",
+          "sqlType": "decimal(28,8)",
+          "nullable": true
+        },
+        {
+          "ordinal": 33,
+          "name": "invoices_value",
+          "sqlType": "decimal(28,8)",
+          "nullable": true
+        },
+        {
+          "ordinal": 34,
+          "name": "invoices_volumes",
+          "sqlType": "varchar(40)",
+          "nullable": true
+        },
+        {
+          "ordinal": 35,
+          "name": "invoices_weight",
+          "sqlType": "decimal(28,8)",
+          "nullable": true
+        },
+        {
+          "ordinal": 36,
+          "name": "invoices_count",
+          "sqlType": "varchar(40)",
+          "nullable": true
+        },
+        {
+          "ordinal": 37,
+          "name": "customer_credit_entries_subtotal",
+          "sqlType": "decimal(28,8)",
+          "nullable": true
+        },
+        {
+          "ordinal": 38,
+          "name": "customer_debits_subtotal",
+          "sqlType": "decimal(28,8)",
+          "nullable": true
+        },
+        {
+          "ordinal": 39,
+          "name": "insurer_credits_subtotal",
+          "sqlType": "decimal(28,8)",
+          "nullable": true
+        },
+        {
+          "ordinal": 40,
+          "name": "responsible_credits_subtotal",
+          "sqlType": "decimal(28,8)",
+          "nullable": true
+        },
+        {
+          "ordinal": 41,
+          "name": "responsible_debit_entries_subtotal",
+          "sqlType": "decimal(28,8)",
+          "nullable": true
+        },
+        {
+          "ordinal": 42,
+          "name": "opening_at_date",
+          "sqlType": "date",
+          "nullable": true
+        },
+        {
+          "ordinal": 43,
+          "name": "occurrence_at_date",
+          "sqlType": "date",
+          "nullable": true
+        },
+        {
+          "ordinal": 44,
+          "name": "occurrence_time_nano",
+          "sqlType": "bigint",
+          "nullable": true
+        },
+        {
+          "ordinal": 45,
+          "name": "occurrence_at_time_raw",
+          "sqlType": "nvarchar(4000)",
+          "nullable": true
+        },
+        {
+          "ordinal": 46,
+          "name": "finished_at_date",
+          "sqlType": "date",
+          "nullable": true
+        },
+        {
+          "ordinal": 47,
+          "name": "finished_time_nano",
+          "sqlType": "bigint",
+          "nullable": true
+        },
+        {
+          "ordinal": 48,
+          "name": "finished_at_time_raw",
+          "sqlType": "nvarchar(4000)",
+          "nullable": true
+        },
+        {
+          "ordinal": 49,
+          "name": "treatment_second",
+          "sqlType": "bigint",
+          "nullable": true
+        },
+        {
+          "ordinal": 50,
+          "name": "treatment_nano",
+          "sqlType": "int",
+          "nullable": true
+        },
+        {
+          "ordinal": 51,
+          "name": "icm_ttt_dealing_type",
+          "sqlType": "nvarchar(1024)",
+          "nullable": true
+        },
+        {
+          "ordinal": 52,
+          "name": "icm_ttt_solution_type",
+          "sqlType": "nvarchar(1024)",
+          "nullable": true
+        }
+      ]
+    },
+    {
+      "projection": "INVOICE",
+      "sql": "mart.expansion_lab_invoice",
+      "jdbc": "invoiceFactsPage",
+      "grain": "título sintético (root_id)",
+      "cursor": "root_id",
+      "maximum": 100,
+      "filter": "run_id obrigatório; cursor exclusivo; somente ativos; bloqueios retidos com disposição explícita",
+      "columns": [
+        {
+          "ordinal": 1,
+          "name": "root_id",
+          "sqlType": "bigint",
+          "nullable": false
+        },
+        {
+          "ordinal": 2,
+          "name": "run_id",
+          "sqlType": "uniqueidentifier",
+          "nullable": false
+        },
+        {
+          "ordinal": 3,
+          "name": "issue_date",
+          "sqlType": "date",
+          "nullable": true
+        },
+        {
+          "ordinal": 4,
+          "name": "due_date",
+          "sqlType": "date",
+          "nullable": true
+        },
+        {
+          "ordinal": 5,
+          "name": "paid_date",
+          "sqlType": "date",
+          "nullable": true
+        },
+        {
+          "ordinal": 6,
+          "name": "base_date",
+          "sqlType": "date",
+          "nullable": true
+        },
+        {
+          "ordinal": 7,
+          "name": "monthly_reference_date",
+          "sqlType": "date",
+          "nullable": true
+        },
+        {
+          "ordinal": 8,
+          "name": "client_key",
+          "sqlType": "nvarchar(1100)",
+          "nullable": true
+        },
+        {
+          "ordinal": 9,
+          "name": "client_provenance",
+          "sqlType": "varchar(32)",
+          "nullable": true
+        },
+        {
+          "ordinal": 10,
+          "name": "has_invoice",
+          "sqlType": "bit",
+          "nullable": true
+        },
+        {
+          "ordinal": 11,
+          "name": "process_state",
+          "sqlType": "nvarchar(32)",
+          "nullable": true
+        },
+        {
+          "ordinal": 12,
+          "name": "payment_state",
+          "sqlType": "varchar(24)",
+          "nullable": true
+        },
+        {
+          "ordinal": 13,
+          "name": "days_past_due",
+          "sqlType": "int",
+          "nullable": true
+        },
+        {
+          "ordinal": 14,
+          "name": "operational_value",
+          "sqlType": "decimal(28,8)",
+          "nullable": true
+        },
+        {
+          "ordinal": 15,
+          "name": "currency",
+          "sqlType": "char(3)",
+          "nullable": false
+        },
+        {
+          "ordinal": 16,
+          "name": "unit",
+          "sqlType": "varchar(16)",
+          "nullable": false
+        },
+        {
+          "ordinal": 17,
+          "name": "disposition",
+          "sqlType": "varchar(32)",
+          "nullable": false
+        },
+        {
+          "ordinal": 18,
+          "name": "component_count",
+          "sqlType": "bigint",
+          "nullable": false
+        },
+        {
+          "ordinal": 19,
+          "name": "document_count",
+          "sqlType": "bigint",
+          "nullable": false
+        },
+        {
+          "ordinal": 20,
+          "name": "freight_count",
+          "sqlType": "bigint",
+          "nullable": false
+        },
+        {
+          "ordinal": 21,
+          "name": "reference_revision",
+          "sqlType": "int",
+          "nullable": false
+        },
+        {
+          "ordinal": 22,
+          "name": "label_release",
+          "sqlType": "bigint",
+          "nullable": true
+        },
+        {
+          "ordinal": 23,
+          "name": "business_date",
+          "sqlType": "date",
+          "nullable": false
+        },
+        {
+          "ordinal": 24,
+          "name": "last_receipt",
+          "sqlType": "uniqueidentifier",
+          "nullable": false
+        }
+      ]
+    },
+    {
+      "projection": "REVENUE",
+      "sql": "mart.expansion_lab_revenue",
+      "jdbc": "revenueFactsPage",
+      "grain": "Frete vinculado (dependency_id)",
+      "cursor": "dependency_id",
+      "maximum": 100,
+      "filter": "run_id obrigatório; cursor exclusivo; somente ativos; bloqueios retidos com disposição explícita",
+      "columns": [
+        {
+          "ordinal": 1,
+          "name": "dependency_id",
+          "sqlType": "bigint",
+          "nullable": false
+        },
+        {
+          "ordinal": 2,
+          "name": "run_id",
+          "sqlType": "uniqueidentifier",
+          "nullable": false
+        },
+        {
+          "ordinal": 3,
+          "name": "source_key",
+          "sqlType": "nvarchar(256)",
+          "nullable": false
+        },
+        {
+          "ordinal": 4,
+          "name": "freight_stage_id",
+          "sqlType": "bigint",
+          "nullable": false
+        },
+        {
+          "ordinal": 5,
+          "name": "term_id",
+          "sqlType": "bigint",
+          "nullable": true
+        },
+        {
+          "ordinal": 6,
+          "name": "term_revision",
+          "sqlType": "int",
+          "nullable": true
+        },
+        {
+          "ordinal": 7,
+          "name": "original_reference_date",
+          "sqlType": "date",
+          "nullable": true
+        },
+        {
+          "ordinal": 8,
+          "name": "billing_reference_date",
+          "sqlType": "date",
+          "nullable": true
+        },
+        {
+          "ordinal": 9,
+          "name": "branch_code",
+          "sqlType": "nvarchar(32)",
+          "nullable": true
+        },
+        {
+          "ordinal": 10,
+          "name": "calendar_release",
+          "sqlType": "bigint",
+          "nullable": true
+        },
+        {
+          "ordinal": 11,
+          "name": "branch_release",
+          "sqlType": "bigint",
+          "nullable": true
+        },
+        {
+          "ordinal": 12,
+          "name": "payer_release",
+          "sqlType": "bigint",
+          "nullable": true
+        },
+        {
+          "ordinal": 13,
+          "name": "source_value",
+          "sqlType": "decimal(28,8)",
+          "nullable": true
+        },
+        {
+          "ordinal": 14,
+          "name": "revenue_value",
+          "sqlType": "decimal(28,8)",
+          "nullable": true
+        },
+        {
+          "ordinal": 15,
+          "name": "currency",
+          "sqlType": "char(3)",
+          "nullable": true
+        },
+        {
+          "ordinal": 16,
+          "name": "unit",
+          "sqlType": "varchar(16)",
+          "nullable": true
+        },
+        {
+          "ordinal": 17,
+          "name": "cancelled",
+          "sqlType": "bit",
+          "nullable": false
+        },
+        {
+          "ordinal": 18,
+          "name": "cancellation_provenance",
+          "sqlType": "varchar(32)",
+          "nullable": false
+        },
+        {
+          "ordinal": 19,
+          "name": "billing_block",
+          "sqlType": "bit",
+          "nullable": false
+        },
+        {
+          "ordinal": 20,
+          "name": "courtesy",
+          "sqlType": "bit",
+          "nullable": true
+        },
+        {
+          "ordinal": 21,
+          "name": "eligible",
+          "sqlType": "bit",
+          "nullable": true
+        },
+        {
+          "ordinal": 22,
+          "name": "active",
+          "sqlType": "bit",
+          "nullable": true
+        },
+        {
+          "ordinal": 23,
+          "name": "volumes",
+          "sqlType": "int",
+          "nullable": true
+        },
+        {
+          "ordinal": 24,
+          "name": "volume_provenance",
+          "sqlType": "varchar(32)",
+          "nullable": false
+        },
+        {
+          "ordinal": 25,
+          "name": "location_stage_id",
+          "sqlType": "bigint",
+          "nullable": true
+        },
+        {
+          "ordinal": 26,
+          "name": "disposition",
+          "sqlType": "varchar(32)",
+          "nullable": false
+        },
+        {
+          "ordinal": 27,
+          "name": "invoice_count",
+          "sqlType": "bigint",
+          "nullable": false
+        },
+        {
+          "ordinal": 28,
+          "name": "document_count",
+          "sqlType": "bigint",
+          "nullable": false
+        },
+        {
+          "ordinal": 29,
+          "name": "reference_revision",
+          "sqlType": "int",
+          "nullable": false
+        },
+        {
+          "ordinal": 30,
+          "name": "business_date",
+          "sqlType": "date",
+          "nullable": false
+        },
+        {
+          "ordinal": 31,
+          "name": "last_receipt",
+          "sqlType": "uniqueidentifier",
+          "nullable": false
+        }
+      ]
+    }
+  ]
+}

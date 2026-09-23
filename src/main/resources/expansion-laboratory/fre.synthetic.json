@@ -1,0 +1,10 @@
+{
+  "id": 300001,
+  "corporation_sequence_number": 600001,
+  "status": "done",
+  "cte_created_at": "2036-04-01T13:00:00.123456789Z",
+  "cte_issued_at": "2036-04-01T12:00:00Z",
+  "servico_em": "2036-04-01T03:00:00Z",
+  "total": "120.00000000",
+  "reference_number": "synthetic-freight-reference"
+}

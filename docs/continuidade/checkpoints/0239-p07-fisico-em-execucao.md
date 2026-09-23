@@ -1,0 +1,11 @@
+# Checkpoint 0239 — P07 físico em execução
+
+UTC: 2026-09-22T05:10:04.204Z. Anterior: docs/continuidade/checkpoints/0238-seguranca-local-validada-p07-pronto.md, SHA-256 126c0a77f8ec7337160e29d4f90a928523ba95ac803ac32a7c4105521613a836. Estado: EM_EXECUCAO. Objetivo integral: tratar todos os critérios P09–P33 e requalificar P07/P08; pedido efetivo no anexo e reforços do usuário, sem perguntas de rotina.
+
+Autoridade: physical/authority.json, vigente até 2026-09-23T04:40:21.019Z. Somente localhost/ETL_SISTEMA_V2_SHADOW, autenticação integrada, sintéticos e rollback; sem DDL, commit de domínio, fontes externas, produção, publicação, deploy ou cutover. Teto total 43.200 segundos; 15480 reservados nesta fotografia. Duas reservas FULL consumidas, incluindo a primeira falha antes de Maven; não renovar por inferência.
+
+Ação e pré-condições: fonte final congelada com 3.852 arquivos; testes dirigidos e gate técnico PMD conferidos; pré-flight local aprovado. Primeira chamada falhou na associação de parâmetros PowerShell, sem iniciar o corpo do build. Logs e reserva permanecem intactos. Correção restrita ao controlador privado, com reprodução e testes offline; consultar os recibos de binding na pasta physical. Nenhum runtime público mudou. A nova reserva é p07-verify-02, iniciada em 2026-09-22T05:09:47.095Z, PID próprio 62896; buildAttempt continua pos0236-p07-verify-01, antes inexistente. Limite Maven 7.200 segundos e wrapper 7.500 segundos.
+
+Evidências desta fotografia: target/qualificacao-p07-p33-20260922-01/checkpoint-0239-pins.json. Fonte anterior em initial.json e before/; falhas históricas preservadas. Não há efeito de resultado desconhecido: a primeira falha é observada e a segunda execução está ativa. P07/P08 não aprovados nesta fotografia. 39/45 e 67/115 inalterados; nenhum aceite nominal novo.
+
+Retomada imediata: (1) observar o processo e resultado da reserva ativa, sem duplicar campanha; (2) após PASS integral, conferir regressões exatas e agregados, então executar P08 serial; (3) consolidar matriz, documentação, sucessão e integridade final. Em falha, interromper dependentes e diagnosticar dentro da autoridade e saldo existentes; manter resultados anteriores intactos.

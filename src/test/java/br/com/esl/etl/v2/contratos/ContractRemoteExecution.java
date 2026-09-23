@@ -105,7 +105,8 @@ public final class ContractRemoteExecution {
             final ContractTestConfiguration configuration) {
         final Map<DataExportTemplate, ContractRemoteCallBudget> budgets =
                 new EnumMap<>(DataExportTemplate.class);
-        for (final DataExportTemplate template : DataExportTemplate.values()) {
+        for (final DataExportTemplate template :
+                java.util.List.of(DataExportTemplate.COLETAS, DataExportTemplate.FRETES)) {
             budgets.put(
                     template, new ContractRemoteCallBudget(configuration.maxCallsFor(template)));
         }

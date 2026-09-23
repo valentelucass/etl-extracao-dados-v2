@@ -1,0 +1,223 @@
+{
+  "catalogVersion": "2026-09-04.v2-009b.2",
+  "identityFingerprintVersion": "manifestos-identity-v2",
+  "task": "V2-009b/6399",
+  "route": "P01",
+  "decisionStatus": "COMPLETE_LOCAL_CONSERVATIVE_FAIL_CLOSED",
+  "evidenceVocabulary": [
+    "VERSIONED_LEGACY_STATIC_CORPUS",
+    "LEGACY_STATIC_EVIDENCE",
+    "LOCAL_POLICY_AND_SYNTHETIC_FIXTURES",
+    "NO_CURRENT_PROVIDER_FINGERPRINT",
+    "NO_TEMPORAL_OR_TENANT_PAYLOAD_PROOF",
+    "NO_INDEPENDENT_COMPLETENESS_EVIDENCE"
+  ],
+  "quarantineReasons": [
+    "AMBIGUOUS_RECORD_ENVELOPE",
+    "CARDINALITY_DIVERGENCE",
+    "CHILD_NUMBER_SIGNAL_WITHOUT_VALID_KEY",
+    "EQUAL_FRESHNESS_CONFLICT",
+    "INVALID_CHILD_KEY_TYPE",
+    "INVALID_CHILD_KEY_VALUE",
+    "INVALID_SOURCE_KEY_TYPE",
+    "INVALID_SOURCE_KEY_VALUE",
+    "MDFE_NUMBER_KEY_PAIR_ASYMMETRY",
+    "MDFE_ATTRIBUTE_CONFLICT",
+    "MISSING_SOURCE_KEY",
+    "SCOPE_MISMATCH",
+    "SOURCE_KEY_COLLISION",
+    "SOURCE_KEY_TOO_LONG",
+    "UNPROVEN_ALIAS_CHANGE",
+    "UNPROVEN_REKEY",
+    "UNSUPPORTED_RECORD_ENVELOPE"
+  ],
+  "actions": [
+    "APPEND_RELATION_CANDIDATE_NO_MATERIALIZATION",
+    "KEEP_CANONICAL",
+    "NO_CHILD_FOR_ABSENT_OR_NULL_NUMBER_KEY_PAIR",
+    "NO_OP_REPLAY",
+    "PRESERVE_QUARANTINED_OBSERVATION",
+    "QUARANTINE",
+    "REACTIVATE_EXACT_BINDING",
+    "REGISTER_NEW_CANONICAL",
+    "REGISTER_OR_REUSE_CHILD_BY_NATURAL_KEY",
+    "VERSION_ALIASES_PRESERVE_CANONICAL"
+  ],
+  "sourceFamily": {
+    "sourceKind": "ESL",
+    "transport": "DATA_EXPORT",
+    "sourceInstanceMeaning": "STABLE_NON_SECRET_LOGICAL_ESL_ACCOUNT"
+  },
+  "registry": {
+    "tuple": ["source_instance", "tenant_scope", "entity", "source_key"],
+    "comparison": "CASE_SENSITIVE_EXACT_BIN2",
+    "canonicalIdStrategy": "SQL_SURROGATE_BIGINT_IDENTITY",
+    "recordStateIdIsCanonicalId": false,
+    "physicalEnforcementGate": "V2-009d"
+  },
+  "scope": {
+    "policy": "EXPLICIT_SOURCE_INSTANCE_AND_TENANT_REQUIRED",
+    "globalUniquenessProven": false,
+    "tenantPayloadPath": null,
+    "tenantDerivation": "EXTERNAL_CONFIGURATION_REQUIRED_NO_BUSINESS_FIELD_DERIVATION",
+    "forbiddenTenantSentinels": ["DEFAULT", "GLOBAL", "SINGLETON"]
+  },
+  "canonicalization": {
+    "maximumStorageCharacters": 256,
+    "acceptedWireTypes": ["INTEGER"],
+    "integerEncoding": "INTEGER:<CANONICAL_DECIMAL>",
+    "stringEncoding": "STRING:<EXACT_TEXT>",
+    "integerAndStringEquivalent": false,
+    "textNormalization": "NONE_FAIL_ON_BLANK_BOUNDARY_SPACE_CONTROL_OR_INVALID_UNICODE",
+    "processingBound": "ONE_OBSERVATION_AT_A_TIME"
+  },
+  "identity": {
+    "entity": "manifestos",
+    "contractId": "dataexport-6399",
+    "contractVersion": "2026-09-04.v2-025b.2",
+    "sourceContractReleaseFingerprint": "30181093f00f47507d1910d9806a97697118ab671aeae0598d21a4a2726a7cb8",
+    "recordRoot": "NORMALIZED_RECORD",
+    "recordRootVariants": [
+      {"path": "/data/*", "basis": "LOCAL_PROMOTABLE_POLICY_AND_SYNTHETIC_CONTRACT_SHAPE"},
+      {"path": "/*", "basis": "VERSIONED_HISTORICAL_STATIC_CORPUS_AND_LEGACY_ARRAY_PARSER"}
+    ],
+    "recordRootPolicy": "NORMALIZE_EXACTLY_ONE_ACCEPTED_ARRAY_VARIANT_TO_THE_SAME_RECORD; QUARANTINE_ANY_OTHER_OR_AMBIGUOUS_SHAPE",
+    "sourceKey": {
+      "path": "/sequence_code",
+      "name": "sequence_code",
+      "wireTypes": ["INTEGER"],
+      "valueConstraint": "POSITIVE_CANONICAL_BASE10_INTEGER",
+      "role": "SCOPED_SOURCE_KEY_NEVER_CANONICAL_ID",
+      "decision": "ACCEPTED_FOR_SCOPED_LOGICAL_ROOT_ONLY",
+      "decisionBasis": "BOUNDED_VERSIONED_STATIC_CORPUS_AND_LOCAL_MAN_01_POLICY_NOT_PROVIDER_GLOBAL_GUARANTEE"
+    },
+    "canonicalKey": {
+      "strategy": "SQL_SURROGATE_BIGINT_IDENTITY",
+      "binding": "ROOT_AND_CHILD_NATURAL_BINDINGS_ACCEPTED_FOR_DECISION_ONLY",
+      "notEquivalentTo": ["sequence_code", "mft_pfs_pck_sequence_code", "mft_mfs_key", "mft_mfs_number", "identificador_unico", "chave_merge_hash", "page_order", "record_state_id"]
+    },
+    "businessKeys": {
+      "accepted": [],
+      "candidates": [
+        {"names": ["mft_pfs_pck_sequence_code"], "paths": ["/mft_pfs_pck_sequence_code"], "decision": "ACCEPTED_ONLY_AS_ROOT_SCOPED_PICK_CHILD_NATURAL_COMPONENT_AND_UNRESOLVED_RELATION_CANDIDATE"},
+        {"names": ["mft_mfs_key"], "paths": ["/mft_mfs_key"], "decision": "ACCEPTED_ONLY_AS_ROOT_SCOPED_MDFE_CHILD_NATURAL_COMPONENT"},
+        {"names": ["mft_mfs_number"], "paths": ["/mft_mfs_number"], "decision": "SAME_RECORD_MDFE_ATTRIBUTE_NEVER_IDENTITY_ALONE_OR_COMPOSITE_COMPONENT"},
+        {"names": ["mdfe_status"], "paths": ["/mdfe_status"], "decision": "ROOT_SCALAR_REPLICATED_BY_EXPANSION_NEVER_CHILD_EXISTENCE_OR_IDENTITY_SIGNAL"}
+      ]
+    },
+    "aliases": {
+      "accepted": [],
+      "rejected": ["pick_sequence_code", "mft_mfs_number", "identificador_unico", "chave_merge_hash", "metadata_hash"],
+      "rekeyPolicy": "NO_REKEY_OR_REPOINT_WITHOUT_VERSIONED_EVIDENCE"
+    },
+    "physicalGrain": {
+      "root": "ONE_LOGICAL_MANIFEST_PER_SCOPED_INTEGER_SEQUENCE_CODE",
+      "observed": "VERSIONED_STATIC_CORPUS_228_PHYSICAL_ROWS_100_ROOTS_193_PICK_KEYS_43_MDFE_KEYS",
+      "children": [
+        {
+          "name": "pick_expansion",
+          "path": "/mft_pfs_pck_sequence_code",
+          "wireTypes": ["INTEGER"],
+          "valueConstraint": "POSITIVE_CANONICAL_BASE10_INTEGER",
+          "naturalComponents": ["root_canonical_id", "INTEGER:mft_pfs_pck_sequence_code"],
+          "cardinality": "ROOT_ZERO_TO_MANY; PHYSICAL_RECORD_ZERO_OR_ONE",
+          "absence": "ABSENT_OR_NULL_WITHOUT_OTHER_PICK_SIGNAL_MEANS_ZERO_CHILD",
+          "collision": "SAME_ROOT_AND_PICK_KEY_DIVERGENT_AFTER_V03_REDUCTION_IS_QUARANTINE_NOT_SECOND_CHILD",
+          "relation": "PRESERVE_CANDIDATE_FOR_V2_046A_NO_COLETA_RELATION_MATERIALIZED"
+        },
+        {
+          "name": "mdfe_expansion",
+          "path": "/mft_mfs_key",
+          "wireTypes": ["STRING"],
+          "valueConstraint": "EXACTLY_44_ASCII_DECIMAL_DIGITS",
+          "naturalComponents": ["root_canonical_id", "STRING:mft_mfs_key"],
+          "cardinality": "ROOT_ZERO_TO_MANY; PHYSICAL_RECORD_ZERO_OR_ONE",
+          "sameRecordPhysicalPair": ["/mft_mfs_number", "/mft_mfs_key"],
+          "numberRole": "POSITIVE_INTEGER_ATTRIBUTE_NEVER_IDENTITY",
+          "statusRole": "ROOT_SCALAR_REPLICATED_BY_EXPANSION; MAY_BE_COPIED_AS_CHILD_CONTEXT_ONLY_WHEN_KEY_EXISTS; NEVER_CREATES_OR_IDENTIFIES_CHILD",
+          "absence": "NUMBER_AND_KEY_ABSENT_OR_NULL_MEANS_ZERO_CHILD_EVEN_WHEN_MDFE_STATUS_IS_VALUE",
+          "asymmetry": "NUMBER_WITHOUT_VALID_KEY_OR_KEY_WITHOUT_VALID_NUMBER_IS_PRESERVED_AND_QUARANTINED; STATUS_ALONE_IS_NOT_ASYMMETRY",
+          "collision": "SAME_ROOT_AND_KEY_WITH_DIVERGENT_NUMBER_AFTER_V03_REDUCTION_IS_QUARANTINE_NOT_SECOND_CHILD",
+          "reduction": "NUMBER_AND_KEY_MUST_STAY_FROM_THE_SAME_PHYSICAL_RECORD; NEVER_INDEPENDENT_MAX_OR_SYNTHETIC_PAIR"
+        }
+      ],
+      "rootReplicatedScalars": [
+        {
+          "path": "/mdfe_status",
+          "observedPresence": "VALUE_IN_228_OF_228_PHYSICAL_ROWS_INCLUDING_148_WITHOUT_MDFE_CHILD",
+          "decision": "REDUCE_AT_ROOT_WINNING_FRESHNESS; NEVER_USE_AS_CHILD_SIGNAL_OR_IDENTITY"
+        }
+      ],
+      "relationPolicy": "ROOT_OWNS_EACH_CHILD; PICK_MDFE_COOCCURRENCE_AND_MANIFESTO_COLETA_RELATION_ARE_NOT_INFERRED"
+    },
+    "proof": {
+      "uniqueness": "BOUNDED_VERSIONED_CORPUS_ZERO_SCOPED_PICK_COLLISIONS_AND_ZERO_SCOPED_MDFE_KEY_ATTRIBUTE_CONFLICTS_NOT_GLOBAL_PROVIDER_PROOF",
+      "temporalStability": "UNPROVEN_NO_VERSIONED_PROVIDER_GUARANTEE_OR_CROSS_WINDOW_REKEY_PROOF",
+      "tenantScope": "UNPROVEN_IN_PAYLOAD_EXPLICIT_EXTERNAL_SCOPE_REQUIRED",
+      "cardinality": "BOUNDED_CORPUS_OBSERVED_ROOT_TO_PICK_ZERO_TO_TEN_AND_ROOT_TO_MDFE_ZERO_TO_TWO; CONTRACT_IS_ZERO_TO_MANY_WITHOUT_PROVIDER_MAXIMUM"
+    },
+    "repeatAndConflictPolicy": {
+      "sameScopedRootSourceKey": "SAME_LOGICAL_ROOT_NEVER_A_SECOND_CANONICAL_ROOT",
+      "physicalVariants": "DEDUPE_ROOT_PICK_AND_MDFE_SEPARATELY_BY_ACCEPTED_NATURAL_KEYS_AND_PRESERVE_SOURCE_OBSERVATIONS",
+      "divergentRoot": "REDUCE_WITH_V2_026A_THEN_QUARANTINE_EQUAL_FRESHNESS_DIVERGENCE",
+      "aliasCollision": "BLOCK_DEPENDENT_RESOLUTION_NO_AUTOMATIC_REPOINT",
+      "alternateKeyOrRekey": "QUARANTINE_UNPROVEN_REKEY_UNTIL_VERSIONED_EVIDENCE",
+      "missingOrInvalidScopeOrKey": "QUARANTINE",
+      "reactivation": "REUSE_EXISTING_CANONICAL_AFTER_VALID_SCOPED_KEY_REAPPEARS"
+    },
+    "outcome": {"closeSubcheckbox": true, "blockers": [], "unblockEvidence": []},
+    "capabilities": {
+      "shadowDomainImplementation": "DECISION_COMPLETE_IMPLEMENTATION_REQUIRES_V2_026_EXECUTION_AND_V2_009D",
+      "sweepOrDeactivation": "BLOCKED_NO_COMPLETENESS_PROOF",
+      "cutover": "BLOCKED_NO_COMPLETENESS_PROOF",
+      "externalHolds": {"V2-025d": "BLOCKED_BY_V2_041_EXTERNAL_HOLD"}
+    },
+    "nextGates": ["V2-026", "V2-009d", "V2-025d"],
+    "evidenceBounds": {
+      "supports": [
+        "DUAL_BOUNDED_RECORD_ROOT_VARIANTS_NORMALIZED_TO_ONE_RECORD",
+        "SEQUENCE_CODE_INTEGER_ROOT_PATH",
+        "MFT_PFS_PCK_SEQUENCE_CODE_INTEGER_OR_NULL_PICK_PATH",
+        "MFT_MFS_KEY_STRING_OR_NULL_AND_NUMBER_INTEGER_OR_NULL_SAME_RECORD_PAIR_PATHS",
+        "228_ROWS_100_ROOTS_193_SCOPED_PICK_KEYS_43_SCOPED_MDFE_KEYS_80_NUMBER_KEY_PAIRS",
+        "MDFE_STATUS_VALUE_IN_228_ROWS_AND_148_ROWS_WITHOUT_MDFE_CHILD_ZERO_ROOT_STATUS_DIVERGENCES",
+        "ZERO_SCOPED_PICK_REPETITIONS_AND_ZERO_MDFE_NUMBER_DIVERGENCES_IN_THE_CORPUS",
+        "ROOT_TO_PICK_AND_ROOT_TO_MDFE_ZERO_TO_MANY_CONSERVATIVE_GRAIN"
+      ],
+      "doesNotSupport": [
+        "CURRENT_PROVIDER_SCHEMA_OR_FINGERPRINT",
+        "GLOBAL_UNIQUENESS_OR_TEMPORAL_STABILITY",
+        "PAYLOAD_TENANT_OR_GLOBAL_SENTINEL",
+        "OBSERVED_MAXIMUM_AS_SCHEMA_OR_PROVIDER_CAP",
+        "MDFE_NUMBER_AS_IDENTITY",
+        "PICK_MDFE_OR_MANIFESTO_COLETA_RELATIONSHIP",
+        "COMPLETENESS_SWEEP_DEACTIVATION_PUBLICATION_OR_CUTOVER"
+      ],
+      "files": [
+        {"path": "docs/adr/0018-identidade-e-crosswalk-da-primeira-onda.md", "role": "RATIFIED_REGISTRY_FRAMEWORK", "readOnly": true},
+        {"path": "docs/catalogos/identidade-primeira-onda/manifesto.json", "role": "RATIFIED_IDENTITY_POLICY_BASELINE", "readOnly": true},
+        {"path": "docs/catalogos/contratos-esl-6399/manifesto.json", "role": "CORRECTED_VERSIONED_OFFLINE_CONTRACT", "readOnly": true},
+        {"path": "docs/catalogos/contratos-esl-6399/fixtures/6399-per-3-page-1.synthetic.json", "role": "SYNTHETIC_SHAPE_ONLY", "readOnly": true},
+        {"path": "docs/catalogos/portabilidade/matriz-campos.csv", "role": "V2_017A_BIDIRECTIONAL_PATH_MATRIX", "readOnly": true},
+        {"path": "STATES.md", "role": "ROADMAP_RULE_MAN_01", "readOnly": true},
+        {"path": "../etl-extracao-dados/docs/legado/pipelines-antigos/02-apis/dataexport/manifestos.md", "role": "VERSIONED_STATIC_CORPUS_AGGREGATED_WITHOUT_VALUE_EMISSION", "readOnly": true, "sha256": "0993449c8e3a87ebaffea5c5fde0c8a31b1d399d53218debdadad3e20dcf5ef9"},
+        {"path": "../etl-extracao-dados/src/main/java/br/com/extrator/integracao/DataExportPaginator.java", "role": "LEGACY_DUAL_ARRAY_ENVELOPE_PARSER", "readOnly": true},
+        {"path": "../etl-extracao-dados/src/main/java/br/com/extrator/dominio/dataexport/manifestos/ManifestoDTO.java", "role": "LEGACY_STATIC_FIELD_PATH_AND_WIRE_TARGETS", "readOnly": true},
+        {"path": "../etl-extracao-dados/src/main/java/br/com/extrator/integracao/mapeamento/dataexport/manifestos/ManifestoMapper.java", "role": "LEGACY_STATIC_PATH_TO_INTERNAL_MAPPING", "readOnly": true},
+        {"path": "../etl-extracao-dados/src/main/java/br/com/extrator/integracao/dataexport/support/Deduplicator.java", "role": "LEGACY_HEURISTIC_COUNTEREVIDENCE", "readOnly": true},
+        {"path": "../etl-extracao-dados/src/main/java/br/com/extrator/persistencia/repositorio/ManifestoRepository.java", "role": "LEGACY_PROMOTION_COUNTEREVIDENCE", "readOnly": true},
+        {"path": "../etl-extracao-dados/src/main/java/br/com/extrator/persistencia/entidade/ManifestoEntity.java", "role": "LEGACY_STATIC_INTERNAL_SHAPE", "readOnly": true},
+        {"path": "../etl-extracao-dados/database/tabelas/003_criar_tabela_manifestos.sql", "role": "LEGACY_MIXED_GRAIN_AND_HASH_COUNTEREVIDENCE", "readOnly": true},
+        {"path": "../etl-extracao-dados/database/procedures/005_criar_sp_carga_fato_gestao_vista_manifestos.sql", "role": "LEGACY_INDEPENDENT_MAX_AND_SUM_COUNTEREVIDENCE", "readOnly": true}
+      ]
+    },
+    "fingerprintInputs": {
+      "identity": "dataexport-6399|manifestos|recordRoots=/data/*+/*|root=/sequence_code:INTEGER|pick=/mft_pfs_pck_sequence_code:INTEGER|mdfe=/mft_mfs_key:STRING44|mdfeNumber=SAME_RECORD_ATTRIBUTE_ONLY|mdfeStatus=ROOT_SCALAR_NEVER_CHILD_SIGNAL|rootToPick=0..N|rootToMdfe=0..N|228rows/100roots/193pick/43mdfe/80numberKey/148statusWithoutChild|EXPLICIT_SCOPE|NO_RELATION_INFERENCE|FAIL_CLOSED",
+      "release": "2026-09-04.v2-009b.2|manifestos-identity-v2|dataexport-6399"
+    },
+    "fingerprints": {
+      "identity": "ad2e3457a91961372dd29cb96bd6f2cb5fd6f67614d1255303787a8e2c4085c3",
+      "release": "12e2b402a6ae1c7c484a7f4af33c443d0ee5ceb99201ec6e3e4811d2d7e2e4f3"
+    }
+  }
+}

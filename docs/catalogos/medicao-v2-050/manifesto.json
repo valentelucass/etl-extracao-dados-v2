@@ -1,0 +1,215 @@
+{
+  "schemaVersion": "2026-09-07.v2-050.q-med-fnd-01.1",
+  "task": {
+    "route": "Q-MED-FND-01",
+    "block": 50,
+    "taskId": "V2-050/FUNDACAO_MEDICAO_LOCAL"
+  },
+  "outcome": "FOUNDATION_LOCAL_COMPLETE_NO_ENTITY_SCALE_GATE_PASSED",
+  "foundation": {
+    "model": "GPT_5_6_SOL_ULTRA",
+    "executionMode": "LOCAL_OFFLINE_TEST_ONLY",
+    "fixtureKind": "SYNTHETIC_FIXTURE",
+    "scales": [16, 256, 4096],
+    "recordsPerPage": 8,
+    "streamers": ["DataExportPageStreamer", "GraphQlPageStreamer"],
+    "positiveDisposition": "PROVEN_SYNTHETICALLY",
+    "positiveReason": "MANAGED_IN_FLIGHT_BOUND_PROVEN_SYNTHETICALLY",
+    "mutantControl": "LEAK_MUTANT_REJECTED",
+    "mutantReason": "EXECUTION_WIDE_PAGE_RETENTION_DETECTED",
+    "diagnosticsPolicy": "JVM_HEAP_DIAGNOSTIC_ONLY",
+    "graphQlCycleDetectorBytes": 1048576,
+    "entityScaleGatePassedCount": 0,
+    "networkAccess": false,
+    "databaseAccess": false,
+    "secretAccess": false,
+    "sqlPlanExecution": false,
+    "runtimeWiring": false
+  },
+  "fixture": {
+    "resourcePath": "src/test/resources/contracts/v2-050/measurement-foundation.synthetic.json",
+    "catalogPath": "docs/catalogos/medicao-v2-050/fixtures/measurement-foundation.synthetic.json",
+    "sha256": "ebe72952e41a786278cf75a8e0f493b797352cf5bad59c343d9053e748701937",
+    "scenarioCount": 6
+  },
+  "receipt": {
+    "directory": "target/v2-050-measurement",
+    "path": "target/v2-050-measurement/measurement-foundation-receipt.json",
+    "schemaVersion": "2026-09-07.v2-050.measurement-receipt.1",
+    "encoding": "UTF-8_NO_BOM_STRICT",
+    "lineEndings": "LF",
+    "atomicPublication": "TEMP_FILE_ATOMIC_MOVE_REPLACE",
+    "sameObjectDeterministic": true,
+    "crossRunHashStable": false,
+    "runCount": 6
+  },
+  "governanceArtifacts": [
+    {
+      "path": "docs/catalogos/medicao-v2-050/README.md",
+      "sha256": "600ec32759776de38334ed273bed28773e4be742c8a4f2f8589389a5c1fe8deb"
+    },
+    {
+      "path": "docs/adr/0031-fundacao-medicao-local-multiescala.md",
+      "sha256": "818f78f9eed651d11c7f379e719ebe36e20d8e7b93c874c44eac30f852f90b5f"
+    },
+    {
+      "path": "docs/runbooks/v2-050-fundacao-medicao-local-sol.md",
+      "sha256": "da9b2b1dbf8a3e6795db76a44894cfb9a4025f28a8ec5323c1a6ddeb9aa97e8e"
+    },
+    {
+      "path": "scripts/validation/Invoke-V2050MeasurementFoundation.ps1",
+      "sha256": "553b5f7a04f75fb4f10cb28eb87045d04c75d21adf907b2a40461704c3669903"
+    },
+    {
+      "path": "scripts/validation/Test-V2050MeasurementFoundation.ps1",
+      "sha256": "7834a8e0e7b783e82e3434a764c8c95d689b295b3fb16db8ae2615a013641765"
+    }
+  ],
+  "testArtifacts": [
+    {
+      "path": "src/test/java/br/com/esl/etl/v2/contratos/medicao/ExecutionWidePageRetentionMutant.java",
+      "sha256": "b94e900e51ac570efca6a3bb8a1634b80a80345494ab5a066d41b7e1389082b6"
+    },
+    {
+      "path": "src/test/java/br/com/esl/etl/v2/contratos/medicao/ExecutionWidePageRetentionMutantTest.java",
+      "sha256": "8cff5288691d2fd040497645518d0633fb0b5dbdcef25775b5531500cdad42dd"
+    },
+    {
+      "path": "src/test/java/br/com/esl/etl/v2/contratos/medicao/ManagedPageGauge.java",
+      "sha256": "9386169fd572f0555f5a63b89419b7251b24bcfcb6743d697d6a6c02b3416b62"
+    },
+    {
+      "path": "src/test/java/br/com/esl/etl/v2/contratos/medicao/ManagedPageGaugeTest.java",
+      "sha256": "f325431aa3a3899e49830eea3e4bc2e58ea9adace50354b899b37d283f6a8e72"
+    },
+    {
+      "path": "src/test/java/br/com/esl/etl/v2/contratos/medicao/MeasurementAssessment.java",
+      "sha256": "3843797b184651f3fa3fa03565f7674cb69ce1586d0ea0022a1c4863903aba43"
+    },
+    {
+      "path": "src/test/java/br/com/esl/etl/v2/contratos/medicao/MeasurementDiagnostics.java",
+      "sha256": "62e9abbf297b28876ee9a9b9363d8f346dd6e3d39db8d50301f4a95dcb5ade8f"
+    },
+    {
+      "path": "src/test/java/br/com/esl/etl/v2/contratos/medicao/MeasurementDiagnosticsTest.java",
+      "sha256": "ef1445ec59030602e503c891c78eaf0bc9c94c94f7f8f88f9c9c62efca52c7a8"
+    },
+    {
+      "path": "src/test/java/br/com/esl/etl/v2/contratos/medicao/MeasurementEvaluator.java",
+      "sha256": "b9401116f3b5703d33e157459f62651ffd51557546aab1bde63f6d2d548860b2"
+    },
+    {
+      "path": "src/test/java/br/com/esl/etl/v2/contratos/medicao/MeasurementEvaluatorTest.java",
+      "sha256": "d8389ebfd4adf6b2e16976168e4a1e58b936d3bc4835358b57de3c49586fb465"
+    },
+    {
+      "path": "src/test/java/br/com/esl/etl/v2/contratos/medicao/MeasurementEvidence.java",
+      "sha256": "9dddb69ffbc1059596391f6584f1f109bac15e1b4ea07d4fa6c7b3be810e3199"
+    },
+    {
+      "path": "src/test/java/br/com/esl/etl/v2/contratos/medicao/MeasurementFoundationReceiptTest.java",
+      "sha256": "f4d383fbe2cbf04b516d0d654684a8063fc4cc38bde2cc28ca4092aaebda4e5e"
+    },
+    {
+      "path": "src/test/java/br/com/esl/etl/v2/contratos/medicao/MeasurementPlan.java",
+      "sha256": "0d91bcb5d8bdbb70d927a2394ce571a427c9b94169f61f1e050f23faec7af5fa"
+    },
+    {
+      "path": "src/test/java/br/com/esl/etl/v2/contratos/medicao/MeasurementPlanTest.java",
+      "sha256": "86ccefb8ae95181d67536871fee6c2a33c905ddfdc36578c6f6892efe628a667"
+    },
+    {
+      "path": "src/test/java/br/com/esl/etl/v2/contratos/medicao/MeasurementReceiptWriter.java",
+      "sha256": "0a715e2e001eddb2c94d3f4b8741c82ace1dd9e31b24fb1e7ff7482580932a4d"
+    },
+    {
+      "path": "src/test/java/br/com/esl/etl/v2/contratos/medicao/MeasurementReceiptWriterTest.java",
+      "sha256": "f27eddb9878fce580e1f2e09c38d1804d65e49bdb2ffc7ece949a415b725ca8c"
+    },
+    {
+      "path": "src/test/java/br/com/esl/etl/v2/contratos/medicao/MeasurementRun.java",
+      "sha256": "d855399ef1ef90a0fa9f20dafd8fc3d9aee5ef5307a7bb91f30d168cdaf51b0f"
+    },
+    {
+      "path": "src/test/java/br/com/esl/etl/v2/contratos/medicao/MeasurementRunTest.java",
+      "sha256": "f8f68a6cecc4554bde792af0db1e6cbfc6d36608dabb2805a1affbdb290bb253"
+    },
+    {
+      "path": "src/test/java/br/com/esl/etl/v2/contratos/medicao/MeasurementStreamer.java",
+      "sha256": "7736e50548faa9f60b224ccd74208d1b10efd8f98f5e76b364d9de3609121925"
+    },
+    {
+      "path": "src/test/java/br/com/esl/etl/v2/plataforma/fonte/dataexport/DataExportPageStreamerMultiscaleMeasurementTest.java",
+      "sha256": "58d02e97f84274381c43d3d6cbc4280a591bed61c29bc191d2a3587d9fd740fa"
+    },
+    {
+      "path": "src/test/java/br/com/esl/etl/v2/plataforma/fonte/graphql/GraphQlPageStreamerMultiscaleMeasurementTest.java",
+      "sha256": "ea28044a4cf5b5fd6cedf1d0ccb2794857412b3f6ca6193b363adb8e48810efe"
+    }
+  ],
+  "scopeBaselines": [
+    {
+      "path": "src/main",
+      "kind": "TREE",
+      "fileCount": 369,
+      "sha256": "a9864a473eb07080b303c095b13afda2690b8893fea40cc3ac51ac068f4ecb26"
+    },
+    {
+      "path": "database",
+      "kind": "TREE",
+      "fileCount": 98,
+      "sha256": "4d813607f302c5ef1a73d9dc7c3d35ae3903d457d63b2b3884ac49aeb263ea4c"
+    },
+    {
+      "path": ".github/workflows",
+      "kind": "TREE",
+      "fileCount": 2,
+      "sha256": "255e01fe6580534fa104fb5312376e0bb178dfb5401ebce6313cb92d8032e9b0"
+    },
+    {
+      "path": "pom.xml",
+      "kind": "FILE",
+      "fileCount": 1,
+      "sha256": "b34dbf97d2ca1f572981b9d6067b274df3e92f47e5bbf53d83526ba7c2f2ed86"
+    },
+    {
+      "path": "src/main/java/br/com/esl/etl/v2/bootstrap/Main.java",
+      "kind": "FILE",
+      "fileCount": 1,
+      "sha256": "f9ba1e6e223c0b5f0448eaa59f60e1eca2204c99063b48c2a256198e5e241ab5"
+    }
+  ],
+  "openGates": [
+    "V2-050",
+    "ENTITY_V2_050_GATE=OPEN",
+    "V2-038",
+    "ENTITY_ROUTES",
+    "OUTPUT_ROUTES"
+  ],
+  "prohibitedScope": [
+    "NETWORK",
+    "SOURCE",
+    "API",
+    "ENV_SECRET",
+    "DATABASE",
+    "SQLCMD",
+    "FLYWAY",
+    "SQL_PLAN_REAL",
+    "DDL",
+    "DML",
+    "MIGRATION",
+    "RUNTIME",
+    "MAIN",
+    "COMPOSITION_ROOT",
+    "POM",
+    "WORKFLOW",
+    "DEPLOY",
+    "PUBLICATION",
+    "SWEEP",
+    "PRUNE",
+    "CUTOVER",
+    "PRODUCTIVE_HEAP_CLAIM",
+    "PRODUCTIVE_SLO_CLAIM",
+    "PRODUCTIVE_SCALE_CLAIM"
+  ]
+}

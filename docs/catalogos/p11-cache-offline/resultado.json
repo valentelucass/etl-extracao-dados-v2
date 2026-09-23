@@ -1,0 +1,242 @@
+{
+  "version": 1,
+  "status": "COMPLETED_WITH_FINDINGS",
+  "engine": "12.2.0",
+  "dependencies": 13,
+  "scannerErrors": 0,
+  "exitCode": 1,
+  "networkGuardActive": true,
+  "originalCachePreserved": true,
+  "sourcePomSha256": "656986b3810b201c9661058913f5e242731192e1f54f7adb18627ef8ab19e830",
+  "feed": [
+    {
+      "name": "NVD API Last Checked",
+      "timestamp": "2026-08-26T09:44:34-03"
+    },
+    {
+      "name": "NVD API Last Modified",
+      "timestamp": "2026-07-22T18:32:12Z"
+    }
+  ],
+  "freshFeedAccepted": false,
+  "findings": [
+    {
+      "artifact": "jackson-databind-2.17.2.jar",
+      "scannerPurls": [
+        "pkg:maven/com.fasterxml.jackson.core/jackson-databind@2.17.2"
+      ],
+      "cve": "CVE-2026-54512",
+      "severity": "HIGH",
+      "fixedBranchMinimumInCachedAdvisory": "2.18.8",
+      "exceptionApproved": false,
+      "reachability": "NOT_DEMONSTRATED_NOT_AN_EXCEPTION"
+    },
+    {
+      "artifact": "jackson-databind-2.17.2.jar",
+      "scannerPurls": [
+        "pkg:maven/com.fasterxml.jackson.core/jackson-databind@2.17.2"
+      ],
+      "cve": "CVE-2026-54514",
+      "severity": "MEDIUM",
+      "fixedBranchMinimumInCachedAdvisory": "2.18.8",
+      "exceptionApproved": false,
+      "reachability": "NOT_DEMONSTRATED_NOT_AN_EXCEPTION"
+    },
+    {
+      "artifact": "jackson-databind-2.17.2.jar",
+      "scannerPurls": [
+        "pkg:maven/com.fasterxml.jackson.core/jackson-databind@2.17.2"
+      ],
+      "cve": "CVE-2026-54515",
+      "severity": "MEDIUM",
+      "fixedBranchMinimumInCachedAdvisory": "2.18.9",
+      "exceptionApproved": false,
+      "reachability": "NOT_DEMONSTRATED_NOT_AN_EXCEPTION"
+    },
+    {
+      "artifact": "mssql-jdbc-12.8.1.jre11.jar",
+      "scannerPurls": [
+        "pkg:maven/com.microsoft.sqlserver/mssql-jdbc@12.8.1",
+        "pkg:maven/com.microsoft.sqlserver/mssql-jdbc@12.8.1.jre11"
+      ],
+      "cve": "CVE-2025-59250",
+      "severity": "HIGH",
+      "fixedBranchMinimumInCachedAdvisory": "12.8.2",
+      "exceptionApproved": false,
+      "reachability": "NOT_DEMONSTRATED_NOT_AN_EXCEPTION"
+    }
+  ],
+  "newAcceptances": 0,
+  "candidate": {
+    "driver": "13.4.0.jre11",
+    "tests": 122,
+    "classes": 16,
+    "remainingFindings": 3,
+    "scanExit": 1,
+    "nativeAuthenticationQualified": false,
+    "sqlQualified": false,
+    "promoted": false
+  },
+  "receipts": [
+    {
+      "path": "target/conferencia-final-p10-p21-20260921-01/p11-cache-audit/build/target/dependency-check/dependency-check-report.json",
+      "sha256": "bbcc8f8c63eec567b289e8575dd0e763192cc34c250519c2ee84a0274f1919a1"
+    },
+    {
+      "path": "target/conferencia-final-p10-p21-20260921-01/p11-cache-audit/build/target/dependency-check/dependency-check-report.html",
+      "sha256": "aca8cc792b3a1b6b2f87579e7612b401c5b675d857bfd9dba231629d0b1cb02a"
+    },
+    {
+      "path": "target/conferencia-final-p10-p21-20260921-01/p11-cache-audit/intent.json",
+      "sha256": "cdc3148d6490069b12702962aecc0191009e53f4f086eae841f3d80de67b6a27"
+    },
+    {
+      "path": "target/conferencia-final-p10-p21-20260921-01/p11-cache-audit/receipt.json",
+      "sha256": "c8f2d79e2b252979cfa5ab9d3018a60b0ffb0d5c7ea77c1d5642befeb7204368"
+    },
+    {
+      "path": "target/conferencia-final-p10-p21-20260921-01/p11-cache-audit/receipt-02.json",
+      "sha256": "4adf48e11f4fedc36c41d08d52e93e3ac83f91357ca8cbad93ada532ca38c4ed"
+    },
+    {
+      "path": "target/conferencia-final-p10-p21-20260921-01/p11-cache-audit/guard-test-02.log",
+      "sha256": "0546f9f86246e98adf913cd0f295767179ad0cb092d916098733e723260b38ad"
+    },
+    {
+      "path": "target/conferencia-final-p10-p21-20260921-01/p11-cache-audit/scan-02.stdout.log",
+      "sha256": "3a87af44a4e16ba0397ec4ab1732944d29e6d9fc5a2971532f6cfe3c11d6a4bc"
+    },
+    {
+      "path": "target/conferencia-final-p10-p21-20260921-01/p11-cache-audit/scan-02.stderr.log",
+      "sha256": "f00aa40b147d3f2ff8892876fd716a18c5a6b8d1bc379d76628eb30a664c7a19"
+    },
+    {
+      "path": "target/conferencia-final-p10-p21-20260921-01/p11-cache-audit/candidate-build/target/dependency-check/dependency-check-report.json",
+      "sha256": "3c19fc4549b4c03201c086845a879b45d2ae036f922fcca51e3db52a28b8e7b0"
+    },
+    {
+      "path": "target/conferencia-final-p10-p21-20260921-01/p11-cache-audit/candidate-build/target/dependency-check/dependency-check-report.html",
+      "sha256": "cbac642878dd3dda2ed1158cf2b815c571f1d6beef6edfe1f2b7b26e2b1bca0c"
+    },
+    {
+      "path": "target/conferencia-final-p10-p21-20260921-01/p11-cache-audit/candidate-scan-01.json",
+      "sha256": "c536f7a083eeedd195c0dc95032a6e9a8f3597082828b66940a6a1cb5b75e36e"
+    },
+    {
+      "path": "target/conferencia-final-p10-p21-20260921-01/p11-cache-audit/candidate-test-04.json",
+      "sha256": "3801624fc0f9138c284275f0814bdac00a4d8880e6fe6504296296ff35f513f4"
+    },
+    {
+      "path": "target/conferencia-final-p10-p21-20260921-01/p11-cache-audit/candidate-build/target/surefire-reports/TEST-br.com.esl.etl.v2.arquitetura.ArchitectureRulesTest.xml",
+      "sha256": "6fa6cc58e9fc9311dbf3a53fe6900c446abbd8e22b9e9983e8cabf49291b6eba"
+    },
+    {
+      "path": "target/conferencia-final-p10-p21-20260921-01/p11-cache-audit/candidate-build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.controle.JdbcSqlServerControlPlaneTest.xml",
+      "sha256": "dae8fb389b0d714550b137066115ee8985153d096b96725cce0a6af8a1bae0b2"
+    },
+    {
+      "path": "target/conferencia-final-p10-p21-20260921-01/p11-cache-audit/candidate-build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.persistencia.coletas.JdbcSqlServerColetaGatewaysTest.xml",
+      "sha256": "cecbc9bc2a6665546c116423ddbac4c13c1b092cace5357853639b5382ab067c"
+    },
+    {
+      "path": "target/conferencia-final-p10-p21-20260921-01/p11-cache-audit/candidate-build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.persistencia.coletas.JdbcSqlServerColetaTemporalGatewayTest.xml",
+      "sha256": "53c6bc88061720162e82bec1af488b1065653acbc315b03dc12d32d90dff4ac0"
+    },
+    {
+      "path": "target/conferencia-final-p10-p21-20260921-01/p11-cache-audit/candidate-build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.persistencia.controle.JdbcSqlServerTemporalPlanTest.xml",
+      "sha256": "43f3245ea3def7aadae2815401f56fdb767c418f37fdae0d2ed8b46e455c2f5f"
+    },
+    {
+      "path": "target/conferencia-final-p10-p21-20260921-01/p11-cache-audit/candidate-build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.persistencia.controle.RuntimeJdbcBoundariesTest.xml",
+      "sha256": "5dad63ca6b952f3ad3a9bac4fbdcb33e6c5882e82106031d410a48fe0e59ac65"
+    },
+    {
+      "path": "target/conferencia-final-p10-p21-20260921-01/p11-cache-audit/candidate-build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.persistencia.cotacoes.JdbcSqlServerCotacaoGatewaysTest.xml",
+      "sha256": "7b8a6c63c0e5855e1fca42e05c633ca87070ae98f506224c605e64b7b5bba78f"
+    },
+    {
+      "path": "target/conferencia-final-p10-p21-20260921-01/p11-cache-audit/candidate-build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.persistencia.fretes.JdbcSqlServerFreteGatewaysTest.xml",
+      "sha256": "340c5894270e8a6048eaa304767a18c2dfad5fa8fcabc3ee42ba195af52a76b0"
+    },
+    {
+      "path": "target/conferencia-final-p10-p21-20260921-01/p11-cache-audit/candidate-build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.persistencia.localizacaocargas.JdbcSqlServerLocalizacaoCargaGatewaysTest.xml",
+      "sha256": "b63cf6f730e009e1a2545396a80fb105c87e5154eeb32d76c09477cb0947f96f"
+    },
+    {
+      "path": "target/conferencia-final-p10-p21-20260921-01/p11-cache-audit/candidate-build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.persistencia.manifestos.JdbcSqlServerManifestoPromotionGatewayTest.xml",
+      "sha256": "1b010a19953a260d4e2669b413e09c2aeb26782e8dd9e164e86df9a0da1bcc67"
+    },
+    {
+      "path": "target/conferencia-final-p10-p21-20260921-01/p11-cache-audit/candidate-build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.persistencia.manifestos.JdbcSqlServerManifestoStagingGatewayTest.xml",
+      "sha256": "23f534cb0fb029b1c652e72652d2ca48bc6a1290a746d05076b14a4352fce629"
+    },
+    {
+      "path": "target/conferencia-final-p10-p21-20260921-01/p11-cache-audit/candidate-build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.persistencia.observabilidade.JdbcSqlServerObservabilityGatewayTest.xml",
+      "sha256": "0d239a02075ef7893e0418c1b5380b5e40cc66996579089fc824387a417daa17"
+    },
+    {
+      "path": "target/conferencia-final-p10-p21-20260921-01/p11-cache-audit/candidate-build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.persistencia.sombra.JdbcDataExportExtractionAuditTest.xml",
+      "sha256": "9017b2a4438434f0dbca17c3170692f809f2ed1222603c05b7239112cae4759a"
+    },
+    {
+      "path": "target/conferencia-final-p10-p21-20260921-01/p11-cache-audit/candidate-build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.persistencia.staging.JdbcSqlServerStagingPromotionKernelTest.xml",
+      "sha256": "07a1e0e8698e0bd853deecb5678beb62d987d718fd398ba0ce27ada04097b804"
+    },
+    {
+      "path": "target/conferencia-final-p10-p21-20260921-01/p11-cache-audit/candidate-build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.persistencia.usuarios.JdbcSqlServerUsuarioPromotionGatewayTest.xml",
+      "sha256": "3cf0565b1da9e8c143f1738bda1f11600f15ecd22172bcb947904bed33851728"
+    },
+    {
+      "path": "target/conferencia-final-p10-p21-20260921-01/p11-cache-audit/candidate-build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.persistencia.usuarios.JdbcSqlServerUsuarioStagingGatewayTest.xml",
+      "sha256": "36d044b36ea9eeda6e0fd1327c6e775c986c476d1424eae46f11e3f8de483040"
+    },
+    {
+      "path": "target/conferencia-final-p10-p21-20260921-01/OfflineNetworkGuard.java",
+      "sha256": "f9aedd24b1593e5d31284cc6b52f24a4c7a279ee5619e68d6e13a53eca2a7c09"
+    },
+    {
+      "path": "target/conferencia-final-p10-p21-20260921-01/run-audit.cjs",
+      "sha256": "da8e427bfa397b63a6e15bbbaf8bee35a3af2d3a57d0f5dbdaacdc6bd53293a8"
+    },
+    {
+      "path": "target/conferencia-final-p10-p21-20260921-01/run-candidate.cjs",
+      "sha256": "eb1b8be888fc4e3e9865d7b97b1010ed4c03abe609995f31859d837d3486fd7c"
+    },
+    {
+      "path": "target/conferencia-final-p10-p21-20260921-01/p11-cache-audit/candidate-test.json",
+      "sha256": "1219c94f5427a744423cdd0ed5728c37ecb690465e05a662e1baf711f7d60929"
+    },
+    {
+      "path": "target/conferencia-final-p10-p21-20260921-01/p11-cache-audit/candidate-test-02.json",
+      "sha256": "1219c94f5427a744423cdd0ed5728c37ecb690465e05a662e1baf711f7d60929"
+    },
+    {
+      "path": "target/conferencia-final-p10-p21-20260921-01/p11-cache-audit/candidate-test-03.json",
+      "sha256": "1219c94f5427a744423cdd0ed5728c37ecb690465e05a662e1baf711f7d60929"
+    },
+    {
+      "path": "target/conferencia-final-p10-p21-20260921-01/p11-cache-audit/candidate-test-04.stdout.log",
+      "sha256": "9660456d43a683e88d77f961b6583b7a12f05fa39e1602b615ce7c3fa431d417"
+    },
+    {
+      "path": "target/conferencia-final-p10-p21-20260921-01/p11-cache-audit/candidate-test-04.stderr.log",
+      "sha256": "f00aa40b147d3f2ff8892876fd716a18c5a6b8d1bc379d76628eb30a664c7a19"
+    },
+    {
+      "path": "target/conferencia-final-p10-p21-20260921-01/p11-cache-audit/candidate-scan-01.stdout.log",
+      "sha256": "7dc85b68e9dabf0b4fe46b9765baf58c670aaa4296727de8b05728b0330c2e02"
+    },
+    {
+      "path": "target/conferencia-final-p10-p21-20260921-01/p11-cache-audit/candidate-scan-01.stderr.log",
+      "sha256": "f00aa40b147d3f2ff8892876fd716a18c5a6b8d1bc379d76628eb30a664c7a19"
+    },
+    {
+      "path": "target/conferencia-final-p10-p21-20260921-01/p11-cache-audit/build/pom.xml",
+      "sha256": "6f9cf3841bf6dff4b61c82da2212a93bd45c2cb35e27fa504065617e7a5da77d"
+    },
+    {
+      "path": "target/conferencia-final-p10-p21-20260921-01/p11-cache-audit/candidate-build/pom.xml",
+      "sha256": "4118c78afdf1c755153bdc73d709298f02d7b128d2ca0ffbbd4adec3174e360d"
+    }
+  ]
+}

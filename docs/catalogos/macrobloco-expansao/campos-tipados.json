@@ -1,0 +1,1673 @@
+{
+  "version": "expansion-synthetic-v1",
+  "provenance": "OBSERVACAO_CONTRATADA_AND_FIXTURE_SINTETICA_EXPLICITA_SEPARATE",
+  "specs": [
+    {
+      "id": "8636",
+      "module": "contasapagar",
+      "clazz": "ContaPagar",
+      "code": "CAP",
+      "template": "CONTAS_A_PAGAR",
+      "fields": [
+        {
+          "name": "ant_aln_name",
+          "kind": "TEXT",
+          "java": "String",
+          "observed": true,
+          "types": [],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "antAlnName"
+        },
+        {
+          "name": "ant_ces_acr_name",
+          "kind": "TEXT",
+          "java": "String",
+          "observed": true,
+          "types": [
+            "STRING"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "antCesAcrName"
+        },
+        {
+          "name": "ant_ces_value",
+          "kind": "DECIMAL",
+          "java": "java.math.BigDecimal",
+          "observed": true,
+          "types": [
+            "STRING"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "antCesValue"
+        },
+        {
+          "name": "ant_crn_psn_nickname",
+          "kind": "TEXT",
+          "java": "String",
+          "observed": true,
+          "types": [
+            "STRING"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "antCrnPsnNickname"
+        },
+        {
+          "name": "ant_ils_atn_liquidation_date",
+          "kind": "DATE",
+          "java": "java.time.LocalDate",
+          "observed": true,
+          "types": [
+            "STRING"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "antIlsAtnLiquidationDate"
+        },
+        {
+          "name": "ant_ils_atn_reconciled",
+          "kind": "BOOLEAN",
+          "java": "Boolean",
+          "observed": true,
+          "types": [
+            "BOOLEAN"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "antIlsAtnReconciled"
+        },
+        {
+          "name": "ant_ils_atn_transaction_date",
+          "kind": "DATE",
+          "java": "java.time.LocalDate",
+          "observed": true,
+          "types": [
+            "STRING"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "antIlsAtnTransactionDate"
+        },
+        {
+          "name": "ant_ils_comments",
+          "kind": "TEXT",
+          "java": "String",
+          "observed": true,
+          "types": [],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "antIlsComments"
+        },
+        {
+          "name": "ant_ils_expense_description",
+          "kind": "TEXT",
+          "java": "String",
+          "observed": true,
+          "types": [],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "antIlsExpenseDescription"
+        },
+        {
+          "name": "ant_ils_pas_ant_classification",
+          "kind": "TEXT",
+          "java": "String",
+          "observed": true,
+          "types": [
+            "STRING"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "antIlsPasAntClassification"
+        },
+        {
+          "name": "ant_ils_pas_ant_name",
+          "kind": "TEXT",
+          "java": "String",
+          "observed": true,
+          "types": [
+            "STRING"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "antIlsPasAntName"
+        },
+        {
+          "name": "ant_ils_pas_value",
+          "kind": "DECIMAL",
+          "java": "java.math.BigDecimal",
+          "observed": true,
+          "types": [
+            "STRING"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "antIlsPasValue"
+        },
+        {
+          "name": "ant_ils_sequence_code",
+          "kind": "INTEGER",
+          "java": "String",
+          "observed": true,
+          "types": [
+            "INTEGER"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "antIlsSequenceCode"
+        },
+        {
+          "name": "ant_rir_name",
+          "kind": "TEXT",
+          "java": "String",
+          "observed": true,
+          "types": [
+            "STRING"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "antRirName"
+        },
+        {
+          "name": "ant_uer_name",
+          "kind": "TEXT",
+          "java": "String",
+          "observed": true,
+          "types": [
+            "STRING"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "antUerName"
+        },
+        {
+          "name": "comments",
+          "kind": "TEXT",
+          "java": "String",
+          "observed": true,
+          "types": [
+            "STRING"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "comments"
+        },
+        {
+          "name": "competence_month",
+          "kind": "INTEGER",
+          "java": "String",
+          "observed": true,
+          "types": [
+            "INTEGER"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "competenceMonth"
+        },
+        {
+          "name": "competence_year",
+          "kind": "INTEGER",
+          "java": "String",
+          "observed": true,
+          "types": [
+            "INTEGER"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "competenceYear"
+        },
+        {
+          "name": "created_at",
+          "kind": "INSTANT",
+          "java": "java.time.Instant",
+          "observed": true,
+          "types": [
+            "STRING"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "createdAt"
+        },
+        {
+          "name": "discount_value",
+          "kind": "DECIMAL",
+          "java": "java.math.BigDecimal",
+          "observed": true,
+          "types": [
+            "STRING"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "discountValue"
+        },
+        {
+          "name": "document",
+          "kind": "TEXT",
+          "java": "String",
+          "observed": true,
+          "types": [
+            "STRING"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "document"
+        },
+        {
+          "name": "interest_value",
+          "kind": "DECIMAL",
+          "java": "java.math.BigDecimal",
+          "observed": true,
+          "types": [
+            "STRING"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "interestValue"
+        },
+        {
+          "name": "issue_date",
+          "kind": "DATE",
+          "java": "java.time.LocalDate",
+          "observed": true,
+          "types": [
+            "STRING"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "issueDate"
+        },
+        {
+          "name": "paid",
+          "kind": "BOOLEAN",
+          "java": "Boolean",
+          "observed": true,
+          "types": [
+            "BOOLEAN"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "paid"
+        },
+        {
+          "name": "paid_value",
+          "kind": "DECIMAL",
+          "java": "java.math.BigDecimal",
+          "observed": true,
+          "types": [
+            "STRING"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "paidValue"
+        },
+        {
+          "name": "type",
+          "kind": "TEXT",
+          "java": "String",
+          "observed": true,
+          "types": [
+            "STRING"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "type"
+        },
+        {
+          "name": "value",
+          "kind": "DECIMAL",
+          "java": "java.math.BigDecimal",
+          "observed": true,
+          "types": [
+            "STRING"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "value"
+        },
+        {
+          "name": "value_to_pay",
+          "kind": "DECIMAL",
+          "java": "java.math.BigDecimal",
+          "observed": true,
+          "types": [
+            "STRING"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "valueToPay"
+        }
+      ]
+    },
+    {
+      "id": "4924",
+      "module": "faturasporcliente",
+      "clazz": "FaturaCliente",
+      "code": "FAT",
+      "template": "FATURAS_POR_CLIENTE",
+      "fields": [
+        {
+          "name": "comments",
+          "kind": "TEXT",
+          "java": "String",
+          "observed": true,
+          "types": [
+            "STRING"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "comments"
+        },
+        {
+          "name": "corporation_sequence_number",
+          "kind": "INTEGER",
+          "java": "String",
+          "observed": true,
+          "types": [
+            "INTEGER"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "corporationSequenceNumber"
+        },
+        {
+          "name": "courtesy",
+          "kind": "BOOLEAN",
+          "java": "Boolean",
+          "observed": true,
+          "types": [
+            "BOOLEAN"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "courtesy"
+        },
+        {
+          "name": "emission_type",
+          "kind": "TEXT",
+          "java": "String",
+          "observed": true,
+          "types": [
+            "STRING"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "emissionType"
+        },
+        {
+          "name": "finished_at",
+          "kind": "INSTANT",
+          "java": "java.time.Instant",
+          "observed": true,
+          "types": [],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "finishedAt"
+        },
+        {
+          "name": "fit_ant_ant_name",
+          "kind": "TEXT",
+          "java": "String",
+          "observed": true,
+          "types": [
+            "STRING"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "fitAntAntName"
+        },
+        {
+          "name": "fit_ant_discount_value",
+          "kind": "DECIMAL",
+          "java": "java.math.BigDecimal",
+          "observed": true,
+          "types": [
+            "STRING"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "fitAntDiscountValue"
+        },
+        {
+          "name": "fit_ant_document",
+          "kind": "TEXT",
+          "java": "String",
+          "observed": true,
+          "types": [
+            "STRING"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "fitAntDocument"
+        },
+        {
+          "name": "fit_ant_ils_atn_transaction_date",
+          "kind": "DATE",
+          "java": "java.time.LocalDate",
+          "observed": true,
+          "types": [],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "fitAntIlsAtnTransactionDate"
+        },
+        {
+          "name": "fit_ant_ils_due_date",
+          "kind": "DATE",
+          "java": "java.time.LocalDate",
+          "observed": true,
+          "types": [
+            "STRING"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "fitAntIlsDueDate"
+        },
+        {
+          "name": "fit_ant_ils_original_due_date",
+          "kind": "DATE",
+          "java": "java.time.LocalDate",
+          "observed": true,
+          "types": [
+            "STRING"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "fitAntIlsOriginalDueDate"
+        },
+        {
+          "name": "fit_ant_interest_value",
+          "kind": "DECIMAL",
+          "java": "java.math.BigDecimal",
+          "observed": true,
+          "types": [
+            "STRING"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "fitAntInterestValue"
+        },
+        {
+          "name": "fit_ant_issue_date",
+          "kind": "DATE",
+          "java": "java.time.LocalDate",
+          "observed": true,
+          "types": [
+            "STRING"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "fitAntIssueDate"
+        },
+        {
+          "name": "fit_ant_tat_account_number",
+          "kind": "TEXT",
+          "java": "String",
+          "observed": true,
+          "types": [
+            "STRING"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "fitAntTatAccountNumber"
+        },
+        {
+          "name": "fit_ant_tat_agency_number",
+          "kind": "TEXT",
+          "java": "String",
+          "observed": true,
+          "types": [
+            "STRING"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "fitAntTatAgencyNumber"
+        },
+        {
+          "name": "fit_ant_tat_bnk_name",
+          "kind": "TEXT",
+          "java": "String",
+          "observed": true,
+          "types": [
+            "STRING"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "fitAntTatBnkName"
+        },
+        {
+          "name": "fit_ant_tat_bro_description",
+          "kind": "TEXT",
+          "java": "String",
+          "observed": true,
+          "types": [
+            "STRING"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "fitAntTatBroDescription"
+        },
+        {
+          "name": "fit_ant_tat_custom_instruction",
+          "kind": "TEXT",
+          "java": "String",
+          "observed": true,
+          "types": [
+            "STRING"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "fitAntTatCustomInstruction"
+        },
+        {
+          "name": "fit_ant_value",
+          "kind": "DECIMAL",
+          "java": "java.math.BigDecimal",
+          "observed": true,
+          "types": [
+            "STRING"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "fitAntValue"
+        },
+        {
+          "name": "fit_crn_psn_nickname",
+          "kind": "TEXT",
+          "java": "String",
+          "observed": true,
+          "types": [
+            "STRING"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "fitCrnPsnNickname"
+        },
+        {
+          "name": "fit_d_t_created_at",
+          "kind": "INSTANT",
+          "java": "java.time.Instant",
+          "observed": true,
+          "types": [],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "fitDTCreatedAt"
+        },
+        {
+          "name": "fit_diy_sae_name",
+          "kind": "TEXT",
+          "java": "String",
+          "observed": true,
+          "types": [
+            "STRING"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "fitDiySaeName"
+        },
+        {
+          "name": "fit_dyn_drt_nickname",
+          "kind": "TEXT",
+          "java": "String",
+          "observed": true,
+          "types": [
+            "STRING"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "fitDynDrtNickname"
+        },
+        {
+          "name": "fit_fhe_cte_issued_at",
+          "kind": "INSTANT",
+          "java": "java.time.Instant",
+          "observed": true,
+          "types": [
+            "STRING"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "fitFheCteIssuedAt"
+        },
+        {
+          "name": "fit_fhe_cte_key",
+          "kind": "TEXT",
+          "java": "String",
+          "observed": true,
+          "types": [
+            "STRING"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "fitFheCteKey"
+        },
+        {
+          "name": "fit_fhe_cte_number",
+          "kind": "INTEGER",
+          "java": "String",
+          "observed": true,
+          "types": [
+            "INTEGER"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "fitFheCteNumber"
+        },
+        {
+          "name": "fit_fhe_cte_status",
+          "kind": "TEXT",
+          "java": "String",
+          "observed": true,
+          "types": [
+            "STRING"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "fitFheCteStatus"
+        },
+        {
+          "name": "fit_fhe_cte_status_result",
+          "kind": "TEXT",
+          "java": "String",
+          "observed": true,
+          "types": [
+            "STRING"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "fitFheCteStatusResult"
+        },
+        {
+          "name": "fit_fsn_name",
+          "kind": "TEXT",
+          "java": "String",
+          "observed": true,
+          "types": [
+            "STRING"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "fitFsnName"
+        },
+        {
+          "name": "fit_fte_foe_ore_description",
+          "kind": "TEXT",
+          "java": "String",
+          "observed": true,
+          "types": [],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "fitFteFoeOreDescription"
+        },
+        {
+          "name": "fit_fte_has_delivery_receipt",
+          "kind": "BOOLEAN",
+          "java": "Boolean",
+          "observed": true,
+          "types": [
+            "BOOLEAN"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "fitFteHasDeliveryReceipt"
+        },
+        {
+          "name": "fit_fte_invoices_order_number",
+          "kind": "STRINGS",
+          "java": "ExpansionStrings",
+          "observed": true,
+          "types": [
+            "ARRAY"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "fitFteInvoicesOrderNumber"
+        },
+        {
+          "name": "fit_nse_number",
+          "kind": "INTEGER",
+          "java": "String",
+          "observed": true,
+          "types": [],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "fitNseNumber"
+        },
+        {
+          "name": "fit_pyr_cor_billing_cycle",
+          "kind": "TEXT",
+          "java": "String",
+          "observed": true,
+          "types": [
+            "STRING"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "fitPyrCorBillingCycle"
+        },
+        {
+          "name": "fit_pyr_cor_billing_due_in_days",
+          "kind": "INTEGER",
+          "java": "String",
+          "observed": true,
+          "types": [
+            "INTEGER"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "fitPyrCorBillingDueInDays"
+        },
+        {
+          "name": "fit_pyr_document",
+          "kind": "TEXT",
+          "java": "String",
+          "observed": true,
+          "types": [
+            "STRING"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "fitPyrDocument"
+        },
+        {
+          "name": "fit_pyr_name",
+          "kind": "TEXT",
+          "java": "String",
+          "observed": true,
+          "types": [
+            "STRING"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "fitPyrName"
+        },
+        {
+          "name": "fit_rpt_document",
+          "kind": "TEXT",
+          "java": "String",
+          "observed": true,
+          "types": [
+            "STRING"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "fitRptDocument"
+        },
+        {
+          "name": "fit_rpt_name",
+          "kind": "TEXT",
+          "java": "String",
+          "observed": true,
+          "types": [
+            "STRING"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "fitRptName"
+        },
+        {
+          "name": "fit_sdr_document",
+          "kind": "TEXT",
+          "java": "String",
+          "observed": true,
+          "types": [
+            "STRING"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "fitSdrDocument"
+        },
+        {
+          "name": "fit_sdr_name",
+          "kind": "TEXT",
+          "java": "String",
+          "observed": true,
+          "types": [
+            "STRING"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "fitSdrName"
+        },
+        {
+          "name": "fit_sps_slr_psn_name",
+          "kind": "TEXT",
+          "java": "String",
+          "observed": true,
+          "types": [
+            "STRING"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "fitSpsSlrPsnName"
+        },
+        {
+          "name": "id",
+          "kind": "INTEGER",
+          "java": "String",
+          "observed": true,
+          "types": [
+            "INTEGER"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "id"
+        },
+        {
+          "name": "invoices_mapping",
+          "kind": "STRINGS",
+          "java": "ExpansionStrings",
+          "observed": true,
+          "types": [
+            "ARRAY"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "invoicesMapping"
+        },
+        {
+          "name": "nfse_number",
+          "kind": "IDENTIFIER",
+          "java": "String",
+          "observed": true,
+          "types": [
+            "STRING"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "nfseNumber"
+        },
+        {
+          "name": "payment_type",
+          "kind": "TEXT",
+          "java": "String",
+          "observed": true,
+          "types": [
+            "STRING"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "paymentType"
+        },
+        {
+          "name": "reference_number",
+          "kind": "TEXT",
+          "java": "String",
+          "observed": true,
+          "types": [
+            "STRING"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "referenceNumber"
+        },
+        {
+          "name": "service_at",
+          "kind": "INSTANT",
+          "java": "java.time.Instant",
+          "observed": true,
+          "types": [
+            "STRING"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "serviceAt"
+        },
+        {
+          "name": "service_type",
+          "kind": "TEXT",
+          "java": "String",
+          "observed": true,
+          "types": [
+            "STRING"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "serviceType"
+        },
+        {
+          "name": "status",
+          "kind": "TEXT",
+          "java": "String",
+          "observed": true,
+          "types": [
+            "STRING"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "status"
+        },
+        {
+          "name": "third_party_ctes_value",
+          "kind": "DECIMAL",
+          "java": "java.math.BigDecimal",
+          "observed": false,
+          "types": [],
+          "origin": "LOCAL_DTO_CANDIDATE",
+          "field": "thirdPartyCtesValue"
+        },
+        {
+          "name": "total",
+          "kind": "DECIMAL",
+          "java": "java.math.BigDecimal",
+          "observed": true,
+          "types": [
+            "STRING"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "total"
+        },
+        {
+          "name": "type",
+          "kind": "TEXT",
+          "java": "String",
+          "observed": true,
+          "types": [
+            "STRING"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "type"
+        }
+      ]
+    },
+    {
+      "id": "10633",
+      "module": "inventario",
+      "clazz": "Inventario",
+      "code": "INV",
+      "template": "INVENTARIO",
+      "fields": [
+        {
+          "name": "cnr_c_s_fit_corporation_sequence_number",
+          "kind": "INTEGER",
+          "java": "String",
+          "observed": true,
+          "types": [
+            "INTEGER"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "cnrCSFitCorporationSequenceNumber"
+        },
+        {
+          "name": "cnr_c_s_fit_dpn_delivery_prediction_at",
+          "kind": "INSTANT",
+          "java": "java.time.Instant",
+          "observed": true,
+          "types": [
+            "STRING"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "cnrCSFitDpnDeliveryPredictionAt"
+        },
+        {
+          "name": "cnr_c_s_fit_dpn_performance_finished_at",
+          "kind": "INSTANT",
+          "java": "java.time.Instant",
+          "observed": true,
+          "types": [
+            "STRING"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "cnrCSFitDpnPerformanceFinishedAt"
+        },
+        {
+          "name": "cnr_c_s_fit_dyn_drt_nickname",
+          "kind": "TEXT",
+          "java": "String",
+          "observed": true,
+          "types": [
+            "STRING"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "cnrCSFitDynDrtNickname"
+        },
+        {
+          "name": "cnr_c_s_fit_dyn_name",
+          "kind": "TEXT",
+          "java": "String",
+          "observed": true,
+          "types": [
+            "STRING"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "cnrCSFitDynName"
+        },
+        {
+          "name": "cnr_c_s_fit_fte_lce_occurrence_at",
+          "kind": "INSTANT",
+          "java": "java.time.Instant",
+          "observed": true,
+          "types": [
+            "STRING"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "cnrCSFitFteLceOccurrenceAt"
+        },
+        {
+          "name": "cnr_c_s_fit_fte_lce_ore_description",
+          "kind": "TEXT",
+          "java": "String",
+          "observed": true,
+          "types": [
+            "STRING"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "cnrCSFitFteLceOreDescription"
+        },
+        {
+          "name": "cnr_c_s_fit_invoices_mapping",
+          "kind": "STRINGS",
+          "java": "ExpansionStrings",
+          "observed": true,
+          "types": [
+            "ARRAY"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "cnrCSFitInvoicesMapping"
+        },
+        {
+          "name": "cnr_c_s_fit_invoices_value",
+          "kind": "DECIMAL",
+          "java": "java.math.BigDecimal",
+          "observed": true,
+          "types": [
+            "STRING"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "cnrCSFitInvoicesValue"
+        },
+        {
+          "name": "cnr_c_s_fit_invoices_volumes",
+          "kind": "INTEGER",
+          "java": "String",
+          "observed": true,
+          "types": [
+            "INTEGER"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "cnrCSFitInvoicesVolumes"
+        },
+        {
+          "name": "cnr_c_s_fit_pyr_nickname",
+          "kind": "TEXT",
+          "java": "String",
+          "observed": true,
+          "types": [
+            "STRING"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "cnrCSFitPyrNickname"
+        },
+        {
+          "name": "cnr_c_s_fit_real_weight",
+          "kind": "DECIMAL",
+          "java": "java.math.BigDecimal",
+          "observed": true,
+          "types": [
+            "STRING"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "cnrCSFitRealWeight"
+        },
+        {
+          "name": "cnr_c_s_fit_rpt_ads_cty_name",
+          "kind": "TEXT",
+          "java": "String",
+          "observed": true,
+          "types": [
+            "STRING"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "cnrCSFitRptAdsCtyName"
+        },
+        {
+          "name": "cnr_c_s_fit_rpt_nickname",
+          "kind": "TEXT",
+          "java": "String",
+          "observed": true,
+          "types": [
+            "STRING"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "cnrCSFitRptNickname"
+        },
+        {
+          "name": "cnr_c_s_fit_sdr_ads_cty_name",
+          "kind": "TEXT",
+          "java": "String",
+          "observed": true,
+          "types": [
+            "STRING"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "cnrCSFitSdrAdsCtyName"
+        },
+        {
+          "name": "cnr_c_s_fit_sdr_nickname",
+          "kind": "TEXT",
+          "java": "String",
+          "observed": true,
+          "types": [
+            "STRING"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "cnrCSFitSdrNickname"
+        },
+        {
+          "name": "cnr_c_s_fit_taxed_weight",
+          "kind": "DECIMAL",
+          "java": "java.math.BigDecimal",
+          "observed": true,
+          "types": [
+            "STRING"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "cnrCSFitTaxedWeight"
+        },
+        {
+          "name": "cnr_c_s_fit_total_cubic_volume",
+          "kind": "DECIMAL",
+          "java": "java.math.BigDecimal",
+          "observed": true,
+          "types": [
+            "STRING"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "cnrCSFitTotalCubicVolume"
+        },
+        {
+          "name": "cnr_c_s_read_volumes",
+          "kind": "INTEGER",
+          "java": "String",
+          "observed": true,
+          "types": [
+            "INTEGER"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "cnrCSReadVolumes"
+        },
+        {
+          "name": "cnr_cis_eoe_psn_name",
+          "kind": "TEXT",
+          "java": "String",
+          "observed": true,
+          "types": [
+            "STRING"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "cnrCisEoePsnName"
+        },
+        {
+          "name": "cnr_crn_psn_nickname",
+          "kind": "TEXT",
+          "java": "String",
+          "observed": true,
+          "types": [
+            "STRING"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "cnrCrnPsnNickname"
+        },
+        {
+          "name": "finished_at",
+          "kind": "INSTANT",
+          "java": "java.time.Instant",
+          "observed": true,
+          "types": [
+            "STRING"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "finishedAt"
+        },
+        {
+          "name": "sequence_code",
+          "kind": "INTEGER",
+          "java": "String",
+          "observed": true,
+          "types": [
+            "INTEGER"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "sequenceCode"
+        },
+        {
+          "name": "started_at",
+          "kind": "INSTANT",
+          "java": "java.time.Instant",
+          "observed": true,
+          "types": [
+            "STRING"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "startedAt"
+        },
+        {
+          "name": "status",
+          "kind": "TEXT",
+          "java": "String",
+          "observed": true,
+          "types": [
+            "STRING"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "status"
+        },
+        {
+          "name": "type",
+          "kind": "TEXT",
+          "java": "String",
+          "observed": true,
+          "types": [
+            "STRING"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "type"
+        }
+      ]
+    },
+    {
+      "id": "6392",
+      "module": "sinistros",
+      "clazz": "Sinistro",
+      "code": "SIN",
+      "template": "SINISTROS",
+      "fields": [
+        {
+          "name": "bo_number",
+          "kind": "TEXT",
+          "java": "String",
+          "observed": true,
+          "types": [
+            "STRING"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "boNumber"
+        },
+        {
+          "name": "brokers_case_number",
+          "kind": "TEXT",
+          "java": "String",
+          "observed": true,
+          "types": [
+            "STRING"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "brokersCaseNumber"
+        },
+        {
+          "name": "customer_communication_contact_name",
+          "kind": "TEXT",
+          "java": "String",
+          "observed": true,
+          "types": [
+            "STRING"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "customerCommunicationContactName"
+        },
+        {
+          "name": "customer_communication_date",
+          "kind": "DATE",
+          "java": "java.time.LocalDate",
+          "observed": true,
+          "types": [],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "customerCommunicationDate"
+        },
+        {
+          "name": "customer_communication_time",
+          "kind": "TEXT",
+          "java": "String",
+          "observed": true,
+          "types": [],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "customerCommunicationTime"
+        },
+        {
+          "name": "customer_credit_entries_subtotal",
+          "kind": "DECIMAL",
+          "java": "java.math.BigDecimal",
+          "observed": true,
+          "types": [
+            "STRING"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "customerCreditEntriesSubtotal"
+        },
+        {
+          "name": "customer_debits_subtotal",
+          "kind": "DECIMAL",
+          "java": "java.math.BigDecimal",
+          "observed": true,
+          "types": [
+            "STRING"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "customerDebitsSubtotal"
+        },
+        {
+          "name": "expected_solution_date",
+          "kind": "DATE",
+          "java": "java.time.LocalDate",
+          "observed": true,
+          "types": [
+            "STRING"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "expectedSolutionDate"
+        },
+        {
+          "name": "finished_at_date",
+          "kind": "DATE",
+          "java": "java.time.LocalDate",
+          "observed": true,
+          "types": [],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "finishedAtDate"
+        },
+        {
+          "name": "finished_at_time",
+          "kind": "TIME",
+          "java": "java.time.LocalTime",
+          "observed": true,
+          "types": [],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "finishedAtTime"
+        },
+        {
+          "name": "finished_commentary",
+          "kind": "TEXT",
+          "java": "String",
+          "observed": true,
+          "types": [],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "finishedCommentary"
+        },
+        {
+          "name": "icm_crn_psn_nickname",
+          "kind": "TEXT",
+          "java": "String",
+          "observed": true,
+          "types": [
+            "STRING"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "icmCrnPsnNickname"
+        },
+        {
+          "name": "icm_dvr_iil_name",
+          "kind": "TEXT",
+          "java": "String",
+          "observed": true,
+          "types": [
+            "STRING"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "icmDvrIilName"
+        },
+        {
+          "name": "icm_fer_name",
+          "kind": "TEXT",
+          "java": "String",
+          "observed": true,
+          "types": [],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "icmFerName"
+        },
+        {
+          "name": "icm_fis_fit_corporation_sequence_number",
+          "kind": "INTEGER",
+          "java": "String",
+          "observed": true,
+          "types": [
+            "INTEGER"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "icmFisFitCorporationSequenceNumber"
+        },
+        {
+          "name": "icm_fis_fit_pyr_nickname",
+          "kind": "TEXT",
+          "java": "String",
+          "observed": true,
+          "types": [
+            "STRING"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "icmFisFitPyrNickname"
+        },
+        {
+          "name": "icm_fis_ioe_number",
+          "kind": "IDENTIFIER",
+          "java": "String",
+          "observed": true,
+          "types": [
+            "STRING"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "icmFisIoeNumber"
+        },
+        {
+          "name": "icm_ttt_dealing_type",
+          "kind": "TEXT",
+          "java": "String",
+          "observed": true,
+          "types": [
+            "STRING"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "icmTttDealingType"
+        },
+        {
+          "name": "icm_ttt_ore_code",
+          "kind": "INTEGER",
+          "java": "String",
+          "observed": true,
+          "types": [
+            "INTEGER"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "icmTttOreCode"
+        },
+        {
+          "name": "icm_ttt_ore_description",
+          "kind": "TEXT",
+          "java": "String",
+          "observed": true,
+          "types": [
+            "STRING"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "icmTttOreDescription"
+        },
+        {
+          "name": "icm_ttt_solution_type",
+          "kind": "TEXT",
+          "java": "String",
+          "observed": true,
+          "types": [
+            "STRING"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "icmTttSolutionType"
+        },
+        {
+          "name": "icm_ttt_treatment_at",
+          "kind": "INSTANT",
+          "java": "java.time.Instant",
+          "observed": true,
+          "types": [
+            "STRING"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "icmTttTreatmentAt"
+        },
+        {
+          "name": "icm_vie_license_plate",
+          "kind": "TEXT",
+          "java": "String",
+          "observed": true,
+          "types": [
+            "STRING"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "icmVieLicensePlate"
+        },
+        {
+          "name": "informed_by",
+          "kind": "TEXT",
+          "java": "String",
+          "observed": true,
+          "types": [
+            "STRING"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "informedBy"
+        },
+        {
+          "name": "insurance_claim_commentary",
+          "kind": "TEXT",
+          "java": "String",
+          "observed": true,
+          "types": [
+            "STRING"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "insuranceClaimCommentary"
+        },
+        {
+          "name": "insurance_claim_location",
+          "kind": "TEXT",
+          "java": "String",
+          "observed": true,
+          "types": [
+            "STRING"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "insuranceClaimLocation"
+        },
+        {
+          "name": "insurance_claim_total",
+          "kind": "DECIMAL",
+          "java": "java.math.BigDecimal",
+          "observed": true,
+          "types": [
+            "STRING"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "insuranceClaimTotal"
+        },
+        {
+          "name": "insurer_credits_subtotal",
+          "kind": "DECIMAL",
+          "java": "java.math.BigDecimal",
+          "observed": true,
+          "types": [
+            "STRING"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "insurerCreditsSubtotal"
+        },
+        {
+          "name": "internal_description",
+          "kind": "TEXT",
+          "java": "String",
+          "observed": true,
+          "types": [
+            "STRING"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "internalDescription"
+        },
+        {
+          "name": "invoices_count",
+          "kind": "INTEGER",
+          "java": "String",
+          "observed": true,
+          "types": [
+            "INTEGER"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "invoicesCount"
+        },
+        {
+          "name": "invoices_value",
+          "kind": "DECIMAL",
+          "java": "java.math.BigDecimal",
+          "observed": true,
+          "types": [
+            "STRING"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "invoicesValue"
+        },
+        {
+          "name": "invoices_volumes",
+          "kind": "INTEGER",
+          "java": "String",
+          "observed": true,
+          "types": [
+            "INTEGER"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "invoicesVolumes"
+        },
+        {
+          "name": "invoices_weight",
+          "kind": "DECIMAL",
+          "java": "java.math.BigDecimal",
+          "observed": true,
+          "types": [
+            "STRING"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "invoicesWeight"
+        },
+        {
+          "name": "list_of_claimed_products",
+          "kind": "TEXT",
+          "java": "String",
+          "observed": true,
+          "types": [
+            "STRING"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "listOfClaimedProducts"
+        },
+        {
+          "name": "occurrence_at_date",
+          "kind": "DATE",
+          "java": "java.time.LocalDate",
+          "observed": true,
+          "types": [
+            "STRING"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "occurrenceAtDate"
+        },
+        {
+          "name": "occurrence_at_time",
+          "kind": "TIME",
+          "java": "java.time.LocalTime",
+          "observed": true,
+          "types": [
+            "STRING"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "occurrenceAtTime"
+        },
+        {
+          "name": "opening_at_date",
+          "kind": "DATE",
+          "java": "java.time.LocalDate",
+          "observed": true,
+          "types": [
+            "STRING"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "openingAtDate"
+        },
+        {
+          "name": "policy_number",
+          "kind": "TEXT",
+          "java": "String",
+          "observed": true,
+          "types": [
+            "STRING"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "policyNumber"
+        },
+        {
+          "name": "rcfdc",
+          "kind": "STRINGS",
+          "java": "ExpansionStrings",
+          "observed": true,
+          "types": [
+            "ARRAY"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "rcfdc"
+        },
+        {
+          "name": "rctac",
+          "kind": "STRINGS",
+          "java": "ExpansionStrings",
+          "observed": true,
+          "types": [
+            "ARRAY"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "rctac"
+        },
+        {
+          "name": "rctrc",
+          "kind": "STRINGS",
+          "java": "ExpansionStrings",
+          "observed": true,
+          "types": [
+            "ARRAY"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "rctrc"
+        },
+        {
+          "name": "responsible_credits_subtotal",
+          "kind": "DECIMAL",
+          "java": "java.math.BigDecimal",
+          "observed": true,
+          "types": [
+            "STRING"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "responsibleCreditsSubtotal"
+        },
+        {
+          "name": "responsible_debit_entries_subtotal",
+          "kind": "DECIMAL",
+          "java": "java.math.BigDecimal",
+          "observed": true,
+          "types": [
+            "STRING"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "responsibleDebitEntriesSubtotal"
+        },
+        {
+          "name": "sequence_code",
+          "kind": "INTEGER",
+          "java": "String",
+          "observed": true,
+          "types": [
+            "INTEGER"
+          ],
+          "origin": "B56_CONTINUACAO_OBSERVED",
+          "field": "sequenceCode"
+        }
+      ]
+    }
+  ]
+}

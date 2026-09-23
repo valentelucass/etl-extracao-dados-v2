@@ -1,0 +1,680 @@
+{
+  "version": 1,
+  "evidence": "SYNTHETIC_LOCAL_ONLY",
+  "decision": "docs/adr/0019-usuarios-current-history-em-sombra.md",
+  "decisionSha256": "8c14cebc95add8299ddbb9838836050f100d907be8801e5ea66b4bd3df72b9be",
+  "cases": [
+    {
+      "id": "SYNTH_NAME_ABSENT",
+      "envelope": "{\"data\":{\"individual\":{\"edges\":[{\"node\":{\"id\":0}}],\"pageInfo\":{\"hasNextPage\":false,\"endCursor\":null}}}}",
+      "expected": [
+        {
+          "/quarantine": "NONE",
+          "/disposition": "VALID",
+          "/id/typed": "INTEGER:0",
+          "/id/wireType": "INTEGER",
+          "/name/presence": "ABSENT",
+          "/name/value": "NULL"
+        }
+      ],
+      "pipelineRefusal": "NONE",
+      "historicalDifference": "PROFILE_OMITS_ABSENT_LOCAL_DOMAIN_ACCEPTS"
+    },
+    {
+      "id": "SYNTH_NAME_NULL",
+      "envelope": "{\"data\":{\"individual\":{\"edges\":[{\"node\":{\"id\":0,\"name\":null}}],\"pageInfo\":{\"hasNextPage\":false,\"endCursor\":null}}}}",
+      "expected": [
+        {
+          "/quarantine": "NONE",
+          "/disposition": "VALID",
+          "/id/typed": "INTEGER:0",
+          "/id/wireType": "INTEGER",
+          "/name/presence": "NULL",
+          "/name/value": "NULL"
+        }
+      ],
+      "pipelineRefusal": "NONE",
+      "historicalDifference": "NO_ADDITIONAL_DOMAIN_DIFFERENCE"
+    },
+    {
+      "id": "SYNTH_NAME_EMPTY",
+      "envelope": "{\"data\":{\"individual\":{\"edges\":[{\"node\":{\"id\":0,\"name\":\"\"}}],\"pageInfo\":{\"hasNextPage\":false,\"endCursor\":null}}}}",
+      "expected": [
+        {
+          "/quarantine": "NONE",
+          "/disposition": "VALID",
+          "/id/typed": "INTEGER:0",
+          "/id/wireType": "INTEGER",
+          "/name/presence": "VALUE",
+          "/name/value": ""
+        }
+      ],
+      "pipelineRefusal": "NONE",
+      "historicalDifference": "NO_ADDITIONAL_DOMAIN_DIFFERENCE"
+    },
+    {
+      "id": "SYNTH_NAME_SPACES",
+      "envelope": "{\"data\":{\"individual\":{\"edges\":[{\"node\":{\"id\":0,\"name\":\"   \"}}],\"pageInfo\":{\"hasNextPage\":false,\"endCursor\":null}}}}",
+      "expected": [
+        {
+          "/quarantine": "NONE",
+          "/disposition": "VALID",
+          "/id/typed": "INTEGER:0",
+          "/id/wireType": "INTEGER",
+          "/name/presence": "VALUE",
+          "/name/value": "   "
+        }
+      ],
+      "pipelineRefusal": "NONE",
+      "historicalDifference": "NO_ADDITIONAL_DOMAIN_DIFFERENCE"
+    },
+    {
+      "id": "SYNTH_NAME_ACCENT",
+      "envelope": "{\"data\":{\"individual\":{\"edges\":[{\"node\":{\"id\":0,\"name\":\"Sintético\"}}],\"pageInfo\":{\"hasNextPage\":false,\"endCursor\":null}}}}",
+      "expected": [
+        {
+          "/quarantine": "NONE",
+          "/disposition": "VALID",
+          "/id/typed": "INTEGER:0",
+          "/id/wireType": "INTEGER",
+          "/name/presence": "VALUE",
+          "/name/value": "Sintético"
+        }
+      ],
+      "pipelineRefusal": "NONE",
+      "historicalDifference": "NO_ADDITIONAL_DOMAIN_DIFFERENCE"
+    },
+    {
+      "id": "SYNTH_NAME_COMBINING",
+      "envelope": "{\"data\":{\"individual\":{\"edges\":[{\"node\":{\"id\":0,\"name\":\"Síntetico\"}}],\"pageInfo\":{\"hasNextPage\":false,\"endCursor\":null}}}}",
+      "expected": [
+        {
+          "/quarantine": "NONE",
+          "/disposition": "VALID",
+          "/id/typed": "INTEGER:0",
+          "/id/wireType": "INTEGER",
+          "/name/presence": "VALUE",
+          "/name/value": "Síntetico"
+        }
+      ],
+      "pipelineRefusal": "NONE",
+      "historicalDifference": "NO_ADDITIONAL_DOMAIN_DIFFERENCE"
+    },
+    {
+      "id": "SYNTH_NAME_ASTRAL",
+      "envelope": "{\"data\":{\"individual\":{\"edges\":[{\"node\":{\"id\":0,\"name\":\"Sintético 🚚\"}}],\"pageInfo\":{\"hasNextPage\":false,\"endCursor\":null}}}}",
+      "expected": [
+        {
+          "/quarantine": "NONE",
+          "/disposition": "VALID",
+          "/id/typed": "INTEGER:0",
+          "/id/wireType": "INTEGER",
+          "/name/presence": "VALUE",
+          "/name/value": "Sintético 🚚"
+        }
+      ],
+      "pipelineRefusal": "NONE",
+      "historicalDifference": "NO_ADDITIONAL_DOMAIN_DIFFERENCE"
+    },
+    {
+      "id": "SYNTH_NAME_255_UTF16",
+      "envelope": "{\"data\":{\"individual\":{\"edges\":[{\"node\":{\"id\":0,\"name\":\"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\"}}],\"pageInfo\":{\"hasNextPage\":false,\"endCursor\":null}}}}",
+      "expected": [
+        {
+          "/quarantine": "NONE",
+          "/disposition": "VALID",
+          "/id/typed": "INTEGER:0",
+          "/id/wireType": "INTEGER",
+          "/name/presence": "VALUE",
+          "/name/value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+        }
+      ],
+      "pipelineRefusal": "NONE",
+      "historicalDifference": "NO_ADDITIONAL_DOMAIN_DIFFERENCE"
+    },
+    {
+      "id": "SYNTH_NAME_255_WITH_ASTRAL",
+      "envelope": "{\"data\":{\"individual\":{\"edges\":[{\"node\":{\"id\":0,\"name\":\"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx🚚\"}}],\"pageInfo\":{\"hasNextPage\":false,\"endCursor\":null}}}}",
+      "expected": [
+        {
+          "/quarantine": "NONE",
+          "/disposition": "VALID",
+          "/id/typed": "INTEGER:0",
+          "/id/wireType": "INTEGER",
+          "/name/presence": "VALUE",
+          "/name/value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx🚚"
+        }
+      ],
+      "pipelineRefusal": "NONE",
+      "historicalDifference": "NO_ADDITIONAL_DOMAIN_DIFFERENCE"
+    },
+    {
+      "id": "SYNTH_NAME_256_UTF16",
+      "envelope": "{\"data\":{\"individual\":{\"edges\":[{\"node\":{\"id\":0,\"name\":\"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\"}}],\"pageInfo\":{\"hasNextPage\":false,\"endCursor\":null}}}}",
+      "expected": [
+        {
+          "/quarantine": "INVALID_NAME_VALUE",
+          "/disposition": "QUARANTINE",
+          "/id/typed": "INTEGER:0",
+          "/id/wireType": "INTEGER",
+          "/name/presence": "NULL",
+          "/name/value": "NULL"
+        }
+      ],
+      "pipelineRefusal": "NONE",
+      "historicalDifference": "NO_ADDITIONAL_DOMAIN_DIFFERENCE"
+    },
+    {
+      "id": "SYNTH_NAME_256_WITH_ASTRAL",
+      "envelope": "{\"data\":{\"individual\":{\"edges\":[{\"node\":{\"id\":0,\"name\":\"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx🚚\"}}],\"pageInfo\":{\"hasNextPage\":false,\"endCursor\":null}}}}",
+      "expected": [
+        {
+          "/quarantine": "INVALID_NAME_VALUE",
+          "/disposition": "QUARANTINE",
+          "/id/typed": "INTEGER:0",
+          "/id/wireType": "INTEGER",
+          "/name/presence": "NULL",
+          "/name/value": "NULL"
+        }
+      ],
+      "pipelineRefusal": "NONE",
+      "historicalDifference": "NO_ADDITIONAL_DOMAIN_DIFFERENCE"
+    },
+    {
+      "id": "SYNTH_NAME_CONTROL",
+      "envelope": "{\"data\":{\"individual\":{\"edges\":[{\"node\":{\"id\":0,\"name\":\"s\\nn\"}}],\"pageInfo\":{\"hasNextPage\":false,\"endCursor\":null}}}}",
+      "expected": [
+        {
+          "/quarantine": "INVALID_NAME_VALUE",
+          "/disposition": "QUARANTINE",
+          "/id/typed": "INTEGER:0",
+          "/id/wireType": "INTEGER",
+          "/name/presence": "NULL",
+          "/name/value": "NULL"
+        }
+      ],
+      "pipelineRefusal": "NONE",
+      "historicalDifference": "NO_ADDITIONAL_DOMAIN_DIFFERENCE"
+    },
+    {
+      "id": "SYNTH_NAME_DEL",
+      "envelope": "{\"data\":{\"individual\":{\"edges\":[{\"node\":{\"id\":0,\"name\":\"sn\"}}],\"pageInfo\":{\"hasNextPage\":false,\"endCursor\":null}}}}",
+      "expected": [
+        {
+          "/quarantine": "INVALID_NAME_VALUE",
+          "/disposition": "QUARANTINE",
+          "/id/typed": "INTEGER:0",
+          "/id/wireType": "INTEGER",
+          "/name/presence": "NULL",
+          "/name/value": "NULL"
+        }
+      ],
+      "pipelineRefusal": "NONE",
+      "historicalDifference": "NO_ADDITIONAL_DOMAIN_DIFFERENCE"
+    },
+    {
+      "id": "SYNTH_NAME_C1",
+      "envelope": "{\"data\":{\"individual\":{\"edges\":[{\"node\":{\"id\":0,\"name\":\"sn\"}}],\"pageInfo\":{\"hasNextPage\":false,\"endCursor\":null}}}}",
+      "expected": [
+        {
+          "/quarantine": "INVALID_NAME_VALUE",
+          "/disposition": "QUARANTINE",
+          "/id/typed": "INTEGER:0",
+          "/id/wireType": "INTEGER",
+          "/name/presence": "NULL",
+          "/name/value": "NULL"
+        }
+      ],
+      "pipelineRefusal": "NONE",
+      "historicalDifference": "NO_ADDITIONAL_DOMAIN_DIFFERENCE"
+    },
+    {
+      "id": "SYNTH_NAME_LONE_SURROGATE",
+      "envelope": "{\"data\":{\"individual\":{\"edges\":[{\"node\":{\"id\":0,\"name\":\"s\\ud800\"}}],\"pageInfo\":{\"hasNextPage\":false,\"endCursor\":null}}}}",
+      "expected": [
+        {
+          "/quarantine": "INVALID_NAME_VALUE",
+          "/disposition": "QUARANTINE",
+          "/id/typed": "INTEGER:0",
+          "/id/wireType": "INTEGER",
+          "/name/presence": "NULL",
+          "/name/value": "NULL"
+        }
+      ],
+      "pipelineRefusal": "NONE",
+      "historicalDifference": "NO_ADDITIONAL_DOMAIN_DIFFERENCE"
+    },
+    {
+      "id": "SYNTH_NAME_TYPE_NUMBER",
+      "envelope": "{\"data\":{\"individual\":{\"edges\":[{\"node\":{\"id\":0,\"name\":1}}],\"pageInfo\":{\"hasNextPage\":false,\"endCursor\":null}}}}",
+      "expected": [
+        {
+          "/quarantine": "INVALID_NAME_TYPE",
+          "/disposition": "QUARANTINE",
+          "/id/typed": "INTEGER:0",
+          "/id/wireType": "INTEGER",
+          "/name/presence": "NULL",
+          "/name/value": "NULL"
+        }
+      ],
+      "pipelineRefusal": "CONTRACT",
+      "historicalDifference": "NO_ADDITIONAL_DOMAIN_DIFFERENCE"
+    },
+    {
+      "id": "SYNTH_NAME_TYPE_BOOL",
+      "envelope": "{\"data\":{\"individual\":{\"edges\":[{\"node\":{\"id\":0,\"name\":true}}],\"pageInfo\":{\"hasNextPage\":false,\"endCursor\":null}}}}",
+      "expected": [
+        {
+          "/quarantine": "INVALID_NAME_TYPE",
+          "/disposition": "QUARANTINE",
+          "/id/typed": "INTEGER:0",
+          "/id/wireType": "INTEGER",
+          "/name/presence": "NULL",
+          "/name/value": "NULL"
+        }
+      ],
+      "pipelineRefusal": "CONTRACT",
+      "historicalDifference": "NO_ADDITIONAL_DOMAIN_DIFFERENCE"
+    },
+    {
+      "id": "SYNTH_NAME_TYPE_OBJECT",
+      "envelope": "{\"data\":{\"individual\":{\"edges\":[{\"node\":{\"id\":0,\"name\":{}}}],\"pageInfo\":{\"hasNextPage\":false,\"endCursor\":null}}}}",
+      "expected": [
+        {
+          "/quarantine": "INVALID_NAME_TYPE",
+          "/disposition": "QUARANTINE",
+          "/id/typed": "INTEGER:0",
+          "/id/wireType": "INTEGER",
+          "/name/presence": "NULL",
+          "/name/value": "NULL"
+        }
+      ],
+      "pipelineRefusal": "CONTRACT",
+      "historicalDifference": "NO_ADDITIONAL_DOMAIN_DIFFERENCE"
+    },
+    {
+      "id": "SYNTH_NAME_TYPE_ARRAY",
+      "envelope": "{\"data\":{\"individual\":{\"edges\":[{\"node\":{\"id\":0,\"name\":[]}}],\"pageInfo\":{\"hasNextPage\":false,\"endCursor\":null}}}}",
+      "expected": [
+        {
+          "/quarantine": "INVALID_NAME_TYPE",
+          "/disposition": "QUARANTINE",
+          "/id/typed": "INTEGER:0",
+          "/id/wireType": "INTEGER",
+          "/name/presence": "NULL",
+          "/name/value": "NULL"
+        }
+      ],
+      "pipelineRefusal": "CONTRACT",
+      "historicalDifference": "NO_ADDITIONAL_DOMAIN_DIFFERENCE"
+    },
+    {
+      "id": "SYNTH_ID_NEGATIVE",
+      "envelope": "{\"data\":{\"individual\":{\"edges\":[{\"node\":{\"id\":-2}}],\"pageInfo\":{\"hasNextPage\":false,\"endCursor\":null}}}}",
+      "expected": [
+        {
+          "/quarantine": "NONE",
+          "/disposition": "VALID",
+          "/id/typed": "INTEGER:-2",
+          "/id/wireType": "INTEGER",
+          "/name/presence": "ABSENT",
+          "/name/value": "NULL"
+        }
+      ],
+      "pipelineRefusal": "NONE",
+      "historicalDifference": "NO_ADDITIONAL_DOMAIN_DIFFERENCE"
+    },
+    {
+      "id": "SYNTH_ID_INTEGER",
+      "envelope": "{\"data\":{\"individual\":{\"edges\":[{\"node\":{\"id\":1}}],\"pageInfo\":{\"hasNextPage\":false,\"endCursor\":null}}}}",
+      "expected": [
+        {
+          "/quarantine": "NONE",
+          "/disposition": "VALID",
+          "/id/typed": "INTEGER:1",
+          "/id/wireType": "INTEGER",
+          "/name/presence": "ABSENT",
+          "/name/value": "NULL"
+        }
+      ],
+      "pipelineRefusal": "NONE",
+      "historicalDifference": "NO_ADDITIONAL_DOMAIN_DIFFERENCE"
+    },
+    {
+      "id": "SYNTH_ID_STRING",
+      "envelope": "{\"data\":{\"individual\":{\"edges\":[{\"node\":{\"id\":\"1\"}}],\"pageInfo\":{\"hasNextPage\":false,\"endCursor\":null}}}}",
+      "expected": [
+        {
+          "/quarantine": "NONE",
+          "/disposition": "VALID",
+          "/id/typed": "STRING:1",
+          "/id/wireType": "STRING",
+          "/name/presence": "ABSENT",
+          "/name/value": "NULL"
+        }
+      ],
+      "pipelineRefusal": "NONE",
+      "historicalDifference": "NO_ADDITIONAL_DOMAIN_DIFFERENCE"
+    },
+    {
+      "id": "SYNTH_ID_LEADING_ZERO",
+      "envelope": "{\"data\":{\"individual\":{\"edges\":[{\"node\":{\"id\":\"01\"}}],\"pageInfo\":{\"hasNextPage\":false,\"endCursor\":null}}}}",
+      "expected": [
+        {
+          "/quarantine": "NONE",
+          "/disposition": "VALID",
+          "/id/typed": "STRING:01",
+          "/id/wireType": "STRING",
+          "/name/presence": "ABSENT",
+          "/name/value": "NULL"
+        }
+      ],
+      "pipelineRefusal": "NONE",
+      "historicalDifference": "NO_ADDITIONAL_DOMAIN_DIFFERENCE"
+    },
+    {
+      "id": "SYNTH_ID_CASE_UPPER",
+      "envelope": "{\"data\":{\"individual\":{\"edges\":[{\"node\":{\"id\":\"SYNTH\"}}],\"pageInfo\":{\"hasNextPage\":false,\"endCursor\":null}}}}",
+      "expected": [
+        {
+          "/quarantine": "NONE",
+          "/disposition": "VALID",
+          "/id/typed": "STRING:SYNTH",
+          "/id/wireType": "STRING",
+          "/name/presence": "ABSENT",
+          "/name/value": "NULL"
+        }
+      ],
+      "pipelineRefusal": "NONE",
+      "historicalDifference": "NO_ADDITIONAL_DOMAIN_DIFFERENCE"
+    },
+    {
+      "id": "SYNTH_ID_CASE_LOWER",
+      "envelope": "{\"data\":{\"individual\":{\"edges\":[{\"node\":{\"id\":\"synth\"}}],\"pageInfo\":{\"hasNextPage\":false,\"endCursor\":null}}}}",
+      "expected": [
+        {
+          "/quarantine": "NONE",
+          "/disposition": "VALID",
+          "/id/typed": "STRING:synth",
+          "/id/wireType": "STRING",
+          "/name/presence": "ABSENT",
+          "/name/value": "NULL"
+        }
+      ],
+      "pipelineRefusal": "NONE",
+      "historicalDifference": "NO_ADDITIONAL_DOMAIN_DIFFERENCE"
+    },
+    {
+      "id": "SYNTH_ID_UNICODE",
+      "envelope": "{\"data\":{\"individual\":{\"edges\":[{\"node\":{\"id\":\"SÍN🚚\"}}],\"pageInfo\":{\"hasNextPage\":false,\"endCursor\":null}}}}",
+      "expected": [
+        {
+          "/quarantine": "NONE",
+          "/disposition": "VALID",
+          "/id/typed": "STRING:SÍN🚚",
+          "/id/wireType": "STRING",
+          "/name/presence": "ABSENT",
+          "/name/value": "NULL"
+        }
+      ],
+      "pipelineRefusal": "NONE",
+      "historicalDifference": "NO_ADDITIONAL_DOMAIN_DIFFERENCE"
+    },
+    {
+      "id": "SYNTH_ID_249_CHARS",
+      "envelope": "{\"data\":{\"individual\":{\"edges\":[{\"node\":{\"id\":\"sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss\"}}],\"pageInfo\":{\"hasNextPage\":false,\"endCursor\":null}}}}",
+      "expected": [
+        {
+          "/quarantine": "NONE",
+          "/disposition": "VALID",
+          "/id/typed": "STRING:sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss",
+          "/id/wireType": "STRING",
+          "/name/presence": "ABSENT",
+          "/name/value": "NULL"
+        }
+      ],
+      "pipelineRefusal": "NONE",
+      "historicalDifference": "NO_ADDITIONAL_DOMAIN_DIFFERENCE"
+    },
+    {
+      "id": "SYNTH_ID_INTEGER_248_DIGITS",
+      "envelope": "{\"data\":{\"individual\":{\"edges\":[{\"node\":{\"id\":88888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888}}],\"pageInfo\":{\"hasNextPage\":false,\"endCursor\":null}}}}",
+      "expected": [
+        {
+          "/quarantine": "NONE",
+          "/disposition": "VALID",
+          "/id/typed": "INTEGER:88888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888",
+          "/id/wireType": "INTEGER",
+          "/name/presence": "ABSENT",
+          "/name/value": "NULL"
+        }
+      ],
+      "pipelineRefusal": "NONE",
+      "historicalDifference": "NO_ADDITIONAL_DOMAIN_DIFFERENCE"
+    },
+    {
+      "id": "SYNTH_ID_INTEGER_249_DIGITS",
+      "envelope": "{\"data\":{\"individual\":{\"edges\":[{\"node\":{\"id\":888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888}}],\"pageInfo\":{\"hasNextPage\":false,\"endCursor\":null}}}}",
+      "expected": [
+        {
+          "/quarantine": "SOURCE_KEY_TOO_LONG",
+          "/disposition": "QUARANTINE",
+          "/id/typed": "NULL",
+          "/id/wireType": "ABSENT",
+          "/name/presence": "NULL",
+          "/name/value": "NULL"
+        }
+      ],
+      "pipelineRefusal": "NONE",
+      "historicalDifference": "NO_ADDITIONAL_DOMAIN_DIFFERENCE"
+    },
+    {
+      "id": "SYNTH_ID_STRING_250_CHARS",
+      "envelope": "{\"data\":{\"individual\":{\"edges\":[{\"node\":{\"id\":\"ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss\"}}],\"pageInfo\":{\"hasNextPage\":false,\"endCursor\":null}}}}",
+      "expected": [
+        {
+          "/quarantine": "SOURCE_KEY_TOO_LONG",
+          "/disposition": "QUARANTINE",
+          "/id/typed": "NULL",
+          "/id/wireType": "ABSENT",
+          "/name/presence": "NULL",
+          "/name/value": "NULL"
+        }
+      ],
+      "pipelineRefusal": "NONE",
+      "historicalDifference": "NO_ADDITIONAL_DOMAIN_DIFFERENCE"
+    },
+    {
+      "id": "SYNTH_ID_SPACE_PREFIX",
+      "envelope": "{\"data\":{\"individual\":{\"edges\":[{\"node\":{\"id\":\" synth\"}}],\"pageInfo\":{\"hasNextPage\":false,\"endCursor\":null}}}}",
+      "expected": [
+        {
+          "/quarantine": "INVALID_SOURCE_KEY_VALUE",
+          "/disposition": "QUARANTINE",
+          "/id/typed": "NULL",
+          "/id/wireType": "ABSENT",
+          "/name/presence": "NULL",
+          "/name/value": "NULL"
+        }
+      ],
+      "pipelineRefusal": "NONE",
+      "historicalDifference": "NO_ADDITIONAL_DOMAIN_DIFFERENCE"
+    },
+    {
+      "id": "SYNTH_ID_SPACE_SUFFIX",
+      "envelope": "{\"data\":{\"individual\":{\"edges\":[{\"node\":{\"id\":\"synth \"}}],\"pageInfo\":{\"hasNextPage\":false,\"endCursor\":null}}}}",
+      "expected": [
+        {
+          "/quarantine": "INVALID_SOURCE_KEY_VALUE",
+          "/disposition": "QUARANTINE",
+          "/id/typed": "NULL",
+          "/id/wireType": "ABSENT",
+          "/name/presence": "NULL",
+          "/name/value": "NULL"
+        }
+      ],
+      "pipelineRefusal": "NONE",
+      "historicalDifference": "NO_ADDITIONAL_DOMAIN_DIFFERENCE"
+    },
+    {
+      "id": "SYNTH_ID_CONTROL",
+      "envelope": "{\"data\":{\"individual\":{\"edges\":[{\"node\":{\"id\":\"s\\nn\"}}],\"pageInfo\":{\"hasNextPage\":false,\"endCursor\":null}}}}",
+      "expected": [
+        {
+          "/quarantine": "INVALID_SOURCE_KEY_VALUE",
+          "/disposition": "QUARANTINE",
+          "/id/typed": "NULL",
+          "/id/wireType": "ABSENT",
+          "/name/presence": "NULL",
+          "/name/value": "NULL"
+        }
+      ],
+      "pipelineRefusal": "NONE",
+      "historicalDifference": "NO_ADDITIONAL_DOMAIN_DIFFERENCE"
+    },
+    {
+      "id": "SYNTH_ID_INVALID_UNICODE",
+      "envelope": "{\"data\":{\"individual\":{\"edges\":[{\"node\":{\"id\":\"s\\ud800\"}}],\"pageInfo\":{\"hasNextPage\":false,\"endCursor\":null}}}}",
+      "expected": [
+        {
+          "/quarantine": "INVALID_SOURCE_KEY_VALUE",
+          "/disposition": "QUARANTINE",
+          "/id/typed": "NULL",
+          "/id/wireType": "ABSENT",
+          "/name/presence": "NULL",
+          "/name/value": "NULL"
+        }
+      ],
+      "pipelineRefusal": "NONE",
+      "historicalDifference": "NO_ADDITIONAL_DOMAIN_DIFFERENCE"
+    },
+    {
+      "id": "SYNTH_ID_BLANK",
+      "envelope": "{\"data\":{\"individual\":{\"edges\":[{\"node\":{\"id\":\" \"}}],\"pageInfo\":{\"hasNextPage\":false,\"endCursor\":null}}}}",
+      "expected": [
+        {
+          "/quarantine": "INVALID_SOURCE_KEY_VALUE",
+          "/disposition": "QUARANTINE",
+          "/id/typed": "NULL",
+          "/id/wireType": "ABSENT",
+          "/name/presence": "NULL",
+          "/name/value": "NULL"
+        }
+      ],
+      "pipelineRefusal": "PARSER",
+      "historicalDifference": "NO_ADDITIONAL_DOMAIN_DIFFERENCE"
+    },
+    {
+      "id": "SYNTH_ID_EMPTY",
+      "envelope": "{\"data\":{\"individual\":{\"edges\":[{\"node\":{\"id\":\"\"}}],\"pageInfo\":{\"hasNextPage\":false,\"endCursor\":null}}}}",
+      "expected": [
+        {
+          "/quarantine": "INVALID_SOURCE_KEY_VALUE",
+          "/disposition": "QUARANTINE",
+          "/id/typed": "NULL",
+          "/id/wireType": "ABSENT",
+          "/name/presence": "NULL",
+          "/name/value": "NULL"
+        }
+      ],
+      "pipelineRefusal": "PARSER",
+      "historicalDifference": "NO_ADDITIONAL_DOMAIN_DIFFERENCE"
+    },
+    {
+      "id": "SYNTH_ID_ABSENT",
+      "envelope": "{\"data\":{\"individual\":{\"edges\":[{\"node\":{\"name\":null}}],\"pageInfo\":{\"hasNextPage\":false,\"endCursor\":null}}}}",
+      "expected": [
+        {
+          "/quarantine": "MISSING_SOURCE_KEY",
+          "/disposition": "QUARANTINE",
+          "/id/typed": "NULL",
+          "/id/wireType": "ABSENT",
+          "/name/presence": "NULL",
+          "/name/value": "NULL"
+        }
+      ],
+      "pipelineRefusal": "PARSER",
+      "historicalDifference": "NO_ADDITIONAL_DOMAIN_DIFFERENCE"
+    },
+    {
+      "id": "SYNTH_ID_NULL",
+      "envelope": "{\"data\":{\"individual\":{\"edges\":[{\"node\":{\"id\":null}}],\"pageInfo\":{\"hasNextPage\":false,\"endCursor\":null}}}}",
+      "expected": [
+        {
+          "/quarantine": "MISSING_SOURCE_KEY",
+          "/disposition": "QUARANTINE",
+          "/id/typed": "NULL",
+          "/id/wireType": "ABSENT",
+          "/name/presence": "NULL",
+          "/name/value": "NULL"
+        }
+      ],
+      "pipelineRefusal": "PARSER",
+      "historicalDifference": "NO_ADDITIONAL_DOMAIN_DIFFERENCE"
+    },
+    {
+      "id": "SYNTH_ID_DECIMAL",
+      "envelope": "{\"data\":{\"individual\":{\"edges\":[{\"node\":{\"id\":1.5}}],\"pageInfo\":{\"hasNextPage\":false,\"endCursor\":null}}}}",
+      "expected": [
+        {
+          "/quarantine": "INVALID_SOURCE_KEY_TYPE",
+          "/disposition": "QUARANTINE",
+          "/id/typed": "NULL",
+          "/id/wireType": "ABSENT",
+          "/name/presence": "NULL",
+          "/name/value": "NULL"
+        }
+      ],
+      "pipelineRefusal": "PARSER",
+      "historicalDifference": "NO_ADDITIONAL_DOMAIN_DIFFERENCE"
+    },
+    {
+      "id": "SYNTH_ID_BOOL",
+      "envelope": "{\"data\":{\"individual\":{\"edges\":[{\"node\":{\"id\":true}}],\"pageInfo\":{\"hasNextPage\":false,\"endCursor\":null}}}}",
+      "expected": [
+        {
+          "/quarantine": "INVALID_SOURCE_KEY_TYPE",
+          "/disposition": "QUARANTINE",
+          "/id/typed": "NULL",
+          "/id/wireType": "ABSENT",
+          "/name/presence": "NULL",
+          "/name/value": "NULL"
+        }
+      ],
+      "pipelineRefusal": "PARSER",
+      "historicalDifference": "NO_ADDITIONAL_DOMAIN_DIFFERENCE"
+    },
+    {
+      "id": "SYNTH_ID_OBJECT",
+      "envelope": "{\"data\":{\"individual\":{\"edges\":[{\"node\":{\"id\":{}}}],\"pageInfo\":{\"hasNextPage\":false,\"endCursor\":null}}}}",
+      "expected": [
+        {
+          "/quarantine": "INVALID_SOURCE_KEY_TYPE",
+          "/disposition": "QUARANTINE",
+          "/id/typed": "NULL",
+          "/id/wireType": "ABSENT",
+          "/name/presence": "NULL",
+          "/name/value": "NULL"
+        }
+      ],
+      "pipelineRefusal": "PARSER",
+      "historicalDifference": "NO_ADDITIONAL_DOMAIN_DIFFERENCE"
+    },
+    {
+      "id": "SYNTH_ID_ARRAY",
+      "envelope": "{\"data\":{\"individual\":{\"edges\":[{\"node\":{\"id\":[]}}],\"pageInfo\":{\"hasNextPage\":false,\"endCursor\":null}}}}",
+      "expected": [
+        {
+          "/quarantine": "INVALID_SOURCE_KEY_TYPE",
+          "/disposition": "QUARANTINE",
+          "/id/typed": "NULL",
+          "/id/wireType": "ABSENT",
+          "/name/presence": "NULL",
+          "/name/value": "NULL"
+        }
+      ],
+      "pipelineRefusal": "PARSER",
+      "historicalDifference": "NO_ADDITIONAL_DOMAIN_DIFFERENCE"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "invocationId": "12b78f70-36b8-4a1b-827f-c0c4a14be574",
+  "executionId": "8369211b-2fee-42a1-b553-b8f33d73c5ad",
+  "cycleId": "db7faa57-3ee8-44ee-9841-e650577aec63",
+  "mode": "BACKFILL",
+  "start": "2033-06-06T03:00:00Z",
+  "endExclusive": "2033-06-07T03:00:00Z",
+  "replayOf": "",
+  "idempotencyKey": "B60_52ff61be1357411e9e4627ba36f68ef9",
+  "leaseSeconds": "30",
+  "pageSize": "2",
+  "maximumPages": "4",
+  "qualityVersion": "bloco55-cotacoes-backfill-v2",
+  "qualityFingerprint": "e7d7ca60394ba3137d308716f8e6c952df287d8180f9d61a59c0046ff2327342",
+  "compatibilityVersion": "bloco60-compatible-v1",
+  "template": "COTACOES",
+  "maximumRows": "16",
+  "maximumDistinctRoots": "16",
+  "businessStart": "2033-06-06",
+  "businessEnd": "2033-06-06",
+  "referenceReleaseId": "3"
+}

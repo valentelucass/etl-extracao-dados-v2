@@ -10,12 +10,22 @@ public final class BoundedWindowRepartitioner {
 
     private final int maxRepartitions;
     private final Duration partitionUnit;
+    private final CancellationToken cancellationToken;
     private final AtomicInteger repartitions = new AtomicInteger();
 
     BoundedWindowRepartitioner(final int maxRepartitions, final Duration partitionUnit) {
+        this(maxRepartitions, partitionUnit, CancellationToken.none());
+    }
+
+    BoundedWindowRepartitioner(
+            final int maxRepartitions,
+            final Duration partitionUnit,
+            final CancellationToken cancellationToken) {
         this.maxRepartitions = maxRepartitions;
         this.partitionUnit =
                 Objects.requireNonNull(partitionUnit, "A unidade de partição é obrigatória.");
+        this.cancellationToken =
+                Objects.requireNonNull(cancellationToken, "O cancelamento é obrigatório.");
         if (partitionUnit.isZero()
                 || partitionUnit.isNegative()
                 || partitionUnit.compareTo(ExecutionDeadlines.MAX_TIMEOUT) > 0) {
@@ -26,6 +36,7 @@ public final class BoundedWindowRepartitioner {
     public RepartitionSplit split(final FailureKind failureKind, final RepartitionWindow window) {
         Objects.requireNonNull(failureKind, "A categoria de falha é obrigatória.");
         Objects.requireNonNull(window, "A janela é obrigatória.");
+        cancellationToken.throwIfCancellationRequested();
         if (failureKind != FailureKind.WINDOW_TOO_LARGE_HTTP_422) {
             throw new RepartitionRefusedException(RepartitionRefusalReason.CATEGORY_NOT_PROVEN);
         }
@@ -51,6 +62,7 @@ public final class BoundedWindowRepartitioner {
         }
         final RepartitionWindow first = new RepartitionWindow(window.start(), midpoint);
         final RepartitionWindow second = new RepartitionWindow(midpoint, window.endExclusive());
+        cancellationToken.throwIfCancellationRequested();
         reserve();
         return new RepartitionSplit(first, second);
     }

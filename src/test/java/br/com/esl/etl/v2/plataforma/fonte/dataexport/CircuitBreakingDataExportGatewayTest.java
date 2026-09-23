@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import br.com.esl.etl.v2.plataforma.resiliencia.EslResiliencePolicy;
+import br.com.esl.etl.v2.plataforma.resiliencia.ExecutionDeadlines;
 import java.time.Clock;
 import java.time.Duration;
 import java.time.Instant;
@@ -335,6 +337,41 @@ class CircuitBreakingDataExportGatewayTest {
         } finally {
             executor.shutdownNow();
         }
+    }
+
+    @Test
+    void rejectsCircuitLimitsOutsideTheSharedResilienceCeilings() {
+        assertThrows(
+                IllegalArgumentException.class,
+                () ->
+                        new DataExportCircuitBreakerPolicy(
+                                EslResiliencePolicy.MAX_CIRCUIT_FAILURE_THRESHOLD + 1,
+                                Duration.ofSeconds(1)));
+        assertThrows(
+                IllegalArgumentException.class,
+                () ->
+                        new DataExportCircuitBreakerPolicy(
+                                1, ExecutionDeadlines.MAX_TIMEOUT.plusNanos(1L)));
+    }
+
+    @Test
+    void anOpenCircuitNearTheInstantCeilingFailsClosedWithoutTemporalOverflow() {
+        final MutableClock clock = new MutableClock(Instant.MAX.minusSeconds(1L));
+        final DataExportGateway delegate =
+                request -> {
+                    throw new DataExportUnavailableException(
+                            request.template().templateId(), "HTTP 503");
+                };
+        final CircuitBreakingDataExportGateway gateway =
+                new CircuitBreakingDataExportGateway(
+                        delegate, new DataExportCircuitBreakerPolicy(1, Duration.ofDays(1)), clock);
+
+        assertThrows(
+                DataExportUnavailableException.class,
+                () -> gateway.fetch(request(DataExportTemplate.COLETAS)));
+        assertThrows(
+                DataExportCircuitOpenException.class,
+                () -> gateway.fetch(request(DataExportTemplate.COLETAS)));
     }
 
     private static DataExportPageRequest request(final DataExportTemplate template) {

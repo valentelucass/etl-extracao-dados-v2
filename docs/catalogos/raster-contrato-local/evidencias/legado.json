@@ -1,0 +1,93 @@
+{
+  "version": 1,
+  "origin": "LOCAL_SIBLING_V1",
+  "files": [
+    {
+      "path": "docs/modelagem/raster_viagens.md",
+      "sha256": "4eee9b7677cf63fcc4874d692bd19d4dd59398542445bf7746437fbbaa7e80dc",
+      "layer": "LEGACY_STATIC_EVIDENCE",
+      "currentProviderGuarantee": false
+    },
+    {
+      "path": "docs/modelagem/raster_viagem_paradas.md",
+      "sha256": "050891a8edefec06ec0f4ff3b81c241d9793471bb9db3a564816e041b97504d2",
+      "layer": "LEGACY_STATIC_EVIDENCE",
+      "currentProviderGuarantee": false
+    },
+    {
+      "path": "src/main/java/br/com/extrator/integracao/raster/ClienteApiRaster.java",
+      "sha256": "e14a7eae5d7151a5261d1545b36ac411b9bfa81e78c24bc820e3d075c0e38e20",
+      "layer": "LEGACY_STATIC_EVIDENCE",
+      "currentProviderGuarantee": false
+    },
+    {
+      "path": "src/main/java/br/com/extrator/suporte/configuracao/ConfigRaster.java",
+      "sha256": "7e2de468ff2d39fc9c5407ef50fdd34b56b246f54a27cdac42c5a92932379079",
+      "layer": "LEGACY_STATIC_EVIDENCE",
+      "currentProviderGuarantee": false
+    },
+    {
+      "path": "src/main/java/br/com/extrator/dominio/raster/RasterViagemDTO.java",
+      "sha256": "0a969620772dc31cf0751ab6279a703a74bae27a2d0da37efdc34a691330be8b",
+      "layer": "LEGACY_STATIC_EVIDENCE",
+      "currentProviderGuarantee": false
+    },
+    {
+      "path": "src/main/java/br/com/extrator/dominio/raster/RasterParadaDTO.java",
+      "sha256": "8793c7eba87218dddecf6aff03d4bd6e8e6ba11249649149f958e099e3c4e3d3",
+      "layer": "LEGACY_STATIC_EVIDENCE",
+      "currentProviderGuarantee": false
+    },
+    {
+      "path": "src/main/java/br/com/extrator/dominio/raster/RasterRotaDTO.java",
+      "sha256": "3edde3d55afa8fb839b1aed290e58e7cb5cdabba8b7166dd4b57fe7874373795",
+      "layer": "LEGACY_STATIC_EVIDENCE",
+      "currentProviderGuarantee": false
+    },
+    {
+      "path": "src/main/java/br/com/extrator/integracao/mapeamento/raster/RasterMapper.java",
+      "sha256": "2860657db7c6297c0758302a4c648923cca6e69abe18fbcfdc1ec9d32136006e",
+      "layer": "LEGACY_STATIC_EVIDENCE",
+      "currentProviderGuarantee": false
+    },
+    {
+      "path": "src/main/java/br/com/extrator/bootstrap/pipeline/PipelineCompositionRoot.java",
+      "sha256": "32a51f1d26e1a29380e6c2bb3eda48f98f196c694a09dbd9c0d5a7693aae538f",
+      "layer": "LEGACY_STATIC_EVIDENCE",
+      "currentProviderGuarantee": false
+    },
+    {
+      "path": "database/tabelas/024_criar_tabela_raster_viagens.sql",
+      "sha256": "92dfc5eaef88eb66043e7a91281ed6fb9e73e09602a62e0e1b93c92d6eb1f0a3",
+      "layer": "LEGACY_STATIC_EVIDENCE",
+      "currentProviderGuarantee": false
+    },
+    {
+      "path": "database/tabelas/025_criar_tabela_raster_viagem_paradas.sql",
+      "sha256": "ee96b6fd1754dcc3aa1f919a5054cda8c34d7d9552e8a83c738b45ec1e4a41c3",
+      "layer": "LEGACY_STATIC_EVIDENCE",
+      "currentProviderGuarantee": false
+    },
+    {
+      "path": "database/views/022_criar_view_raster_sm_transit_time.sql",
+      "sha256": "a501d35bd2712807c9e95600787bcbc668b2826d1abeaafd612e794428e0c113",
+      "layer": "LEGACY_STATIC_EVIDENCE",
+      "currentProviderGuarantee": false
+    },
+    {
+      "path": "database/views/023_publicar_wrappers_dashboard_dev_explicitos.sql",
+      "sha256": "d7a5e450643ea562e63b42868615197c66aac11f6ede3594edef3383c5975880",
+      "layer": "LEGACY_STATIC_EVIDENCE",
+      "currentProviderGuarantee": false
+    },
+    {
+      "path": "database/views/024_publicar_wrappers_dashboard_prod_explicitos.sql",
+      "sha256": "0156a1308ab1dbb214eed58d031b56988961db35e0af37f95d7c1d203d80e24d",
+      "layer": "LEGACY_STATIC_EVIDENCE",
+      "currentProviderGuarantee": false
+    }
+  ],
+  "rawResponsesRead": 0,
+  "credentialsRead": 0,
+  "remoteCalls": 0
+}

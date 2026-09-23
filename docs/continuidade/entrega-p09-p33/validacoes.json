@@ -1,0 +1,33 @@
+{
+  "status": "PASS",
+  "scope": "Only the executed validations enumerated below; final byte scan and readback are receipted separately",
+  "validations": [
+    {
+      "path": "target/conclusao-p09-p33-20260922-01/rotation-contract-result.json",
+      "sha256": "a0c01245debef0969a088b5c6df169cd78a23205b47f8bb31ec8990151e385cd"
+    },
+    {
+      "path": "target/conclusao-p09-p33-20260922-01/scanner-selftest-result.json",
+      "sha256": "cb4e291acbc4fba262a410655bced8af5f080bcd28a778e799ba767e384c1158"
+    },
+    {
+      "path": "target/conclusao-p09-p33-20260922-01/p29-docs-result.json",
+      "sha256": "9eaf0225176b3042f7c3e74edd1946a6757021617f2acf9cd603d272d48487ae"
+    },
+    {
+      "path": "target/conclusao-p09-p33-20260922-01/p29-pmd-security-01/result.json",
+      "sha256": "94f0405e77a8046d18629c57095ed2b278ea8037407669e4c717ae900c8f96ca"
+    },
+    {
+      "path": "target/conclusao-p09-p33-20260922-01/validation-succession-03.result.json",
+      "sha256": "67d78eedd1206412b37fae3c1bfc8eb2f0bf4875257933711eeb569b6fa402b8"
+    },
+    {
+      "path": "target/conclusao-p09-p33-20260922-01/validation-trail-01-result.json",
+      "sha256": "d9e44815fcb08ee28923a53f23394abc14796f6252416676313b130ddf65f3a3"
+    }
+  ],
+  "finalReadback": "target/conclusao-p09-p33-20260922-01/closed-receipt.json",
+  "physicalTestsNew": false,
+  "newNominalAcceptances": 0
+}

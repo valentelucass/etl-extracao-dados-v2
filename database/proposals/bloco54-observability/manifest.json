@@ -1,0 +1,56 @@
+{
+  "version": 1,
+  "status": "APPLIED_VERIFIED_V020_25_GRANTS_SUPPLEMENTAL_CLOSED",
+  "migration": "42b8baae9c6681b3b5d1201d7062e33c7e34562eb5c643c7c269186128888d4c",
+  "grantDelta": 3,
+  "expectedOriginalGrants": 22,
+  "expectedAfterGrants": 25,
+  "applied": true,
+  "originalUntil": "2026-10-07T22:34:30.615Z",
+  "files": [
+    {
+      "path": "apply.sql",
+      "sha256": "cc2572ad3b6f96b2373b455c1c574b3e698453f62e79b705d183f9096b90e537"
+    },
+    {
+      "path": "install-schema.sql",
+      "sha256": "f20a56b9ad9aed490cbff7013f683b77590216767ab577add3be74edd07ea678"
+    },
+    {
+      "path": "README.md",
+      "sha256": "2228e4afcbd3184f03a0cc17d8765789b93bd16924b42feb07be78dc2b11d4da"
+    },
+    {
+      "path": "recover.sql",
+      "sha256": "f3843c5bb2dd264f926571c7a686d2f7db0151c3dae1cae99269c50830ddb2d2"
+    },
+    {
+      "path": "V019__create_scoped_runtime_observability.sql",
+      "sha256": "42b8baae9c6681b3b5d1201d7062e33c7e34562eb5c643c7c269186128888d4c"
+    },
+    {
+      "path": "verify.sql",
+      "sha256": "7e858a8e645ac1ce19c1cb81492d5ed7c2278a7cedf8b31867f2560f0a8ed35b"
+    },
+    {
+      "path": "verify-retained-replay.sql",
+      "sha256": "26141a98e4fce490a52e2a7dc21f593e006e22c4c188fad94e80a23fbcd6bde7"
+    },
+    {
+      "path": "verify-original-retained-replay.sql",
+      "sha256": "e3294ab05c6d78f3ee7a0f42a470ab1267d18c0ac97140ecafa8f2935d4d25eb"
+    },
+    {
+      "path": "recover-retained-replay.sql",
+      "sha256": "6c0354fc9271847d84bcb5cd31bae3d484db2a1b84ac0c709cd49940a0f4843f"
+    },
+    {
+      "path": "supplemental-campaign.md",
+      "sha256": "25a4114dbb4d14f06f683a291f8640066353a5a3d2222d41cbb0f397eb527d64"
+    }
+  ],
+  "pendingV020Sha256": "7ba03d5627016e722e077ca2c6a7eec926ea4779dccce8c6010d77927ed14df4",
+  "grantsAuthorized": true,
+  "supplementalCampaignAuthorized": true,
+  "approvedApplicationManifestSha256": "e5f53caf92dbc45880ac148815b461610a893236c7d337b06d2c0ee63e85672e"
+}

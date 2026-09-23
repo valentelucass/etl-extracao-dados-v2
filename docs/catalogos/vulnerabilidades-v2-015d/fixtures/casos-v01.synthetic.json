@@ -1,0 +1,422 @@
+{
+  "schemaVersion": "V2_015D_DEPENDENCY_VULNERABILITY_CASES_V1",
+  "synthetic": true,
+  "evaluationTimeUtc": "2026-09-06T12:00:00Z",
+  "baseInput": {
+    "threshold": 0.0,
+    "failOnError": true,
+    "allowThresholdOverride": false,
+    "configuredFormats": [
+      "HTML",
+      "JSON"
+    ],
+    "machineReportRequired": true,
+    "scannerState": "SUCCESS",
+    "reportState": "VALID",
+    "reportFormat": "JSON",
+    "resultState": "COMPLETE",
+    "vulnerabilities": [],
+    "exceptions": [],
+    "literalSecretPresent": false,
+    "nvdCredentialSource": "ENVIRONMENT_VARIABLE_ONLY",
+    "continueOnError": false,
+    "artifactMissingBehavior": "ERROR"
+  },
+  "cases": [
+    {
+      "caseId": "CFG-COMPLIANT",
+      "override": {},
+      "expectedDecision": "PASS",
+      "expectedReason": "POLICY_COMPLIANT"
+    },
+    {
+      "caseId": "CFG-THRESHOLD-11",
+      "override": {
+        "threshold": 11.0
+      },
+      "expectedDecision": "BLOCK",
+      "expectedReason": "THRESHOLD_OUT_OF_RANGE"
+    },
+    {
+      "caseId": "CFG-THRESHOLD-ABOVE-10",
+      "override": {
+        "threshold": 10.1
+      },
+      "expectedDecision": "BLOCK",
+      "expectedReason": "THRESHOLD_OUT_OF_RANGE"
+    },
+    {
+      "caseId": "CFG-THRESHOLD-NEGATIVE",
+      "override": {
+        "threshold": -0.1
+      },
+      "expectedDecision": "BLOCK",
+      "expectedReason": "THRESHOLD_OUT_OF_RANGE"
+    },
+    {
+      "caseId": "CFG-THRESHOLD-EMPTY",
+      "override": {
+        "threshold": ""
+      },
+      "expectedDecision": "BLOCK",
+      "expectedReason": "THRESHOLD_INVALID"
+    },
+    {
+      "caseId": "CFG-THRESHOLD-NON-NUMERIC",
+      "override": {
+        "threshold": "invalid"
+      },
+      "expectedDecision": "BLOCK",
+      "expectedReason": "THRESHOLD_INVALID"
+    },
+    {
+      "caseId": "CFG-THRESHOLD-NAN",
+      "override": {
+        "threshold": "NaN"
+      },
+      "expectedDecision": "BLOCK",
+      "expectedReason": "THRESHOLD_INVALID"
+    },
+    {
+      "caseId": "CFG-FAIL-OPEN",
+      "override": {
+        "failOnError": false
+      },
+      "expectedDecision": "BLOCK",
+      "expectedReason": "FAIL_ON_ERROR_REQUIRED"
+    },
+    {
+      "caseId": "CFG-UNGOVERNED-OVERRIDE",
+      "override": {
+        "allowThresholdOverride": true
+      },
+      "expectedDecision": "BLOCK",
+      "expectedReason": "UNGOVERNED_OVERRIDE_FORBIDDEN"
+    },
+    {
+      "caseId": "CFG-LITERAL-SECRET",
+      "override": {
+        "literalSecretPresent": true
+      },
+      "expectedDecision": "BLOCK",
+      "expectedReason": "LITERAL_SECRET_FORBIDDEN"
+    },
+    {
+      "caseId": "CFG-CONTINUE-ON-ERROR",
+      "override": {
+        "continueOnError": true
+      },
+      "expectedDecision": "BLOCK",
+      "expectedReason": "CONTINUE_ON_ERROR_FORBIDDEN"
+    },
+    {
+      "caseId": "CFG-UPLOAD-WARN",
+      "override": {
+        "artifactMissingBehavior": "WARN"
+      },
+      "expectedDecision": "BLOCK",
+      "expectedReason": "ARTIFACT_MISSING_MUST_ERROR"
+    },
+    {
+      "caseId": "SCAN-ERROR",
+      "override": {
+        "scannerState": "ERROR"
+      },
+      "expectedDecision": "BLOCK",
+      "expectedReason": "SCANNER_ERROR"
+    },
+    {
+      "caseId": "REPORT-MISSING",
+      "override": {
+        "reportState": "MISSING"
+      },
+      "expectedDecision": "BLOCK",
+      "expectedReason": "REPORT_MISSING"
+    },
+    {
+      "caseId": "REPORT-MALFORMED",
+      "override": {
+        "reportState": "MALFORMED"
+      },
+      "expectedDecision": "BLOCK",
+      "expectedReason": "REPORT_MALFORMED"
+    },
+    {
+      "caseId": "REPORT-UNEXPECTED-FORMAT",
+      "override": {
+        "reportState": "UNEXPECTED_FORMAT"
+      },
+      "expectedDecision": "BLOCK",
+      "expectedReason": "REPORT_FORMAT_UNEXPECTED"
+    },
+    {
+      "caseId": "REPORT-PARTIAL",
+      "override": {
+        "resultState": "PARTIAL"
+      },
+      "expectedDecision": "BLOCK",
+      "expectedReason": "PARTIAL_RESULT"
+    },
+    {
+      "caseId": "REPORT-CLEAN",
+      "override": {},
+      "expectedDecision": "PASS",
+      "expectedReason": "POLICY_COMPLIANT"
+    },
+    {
+      "caseId": "VULNERABILITY-SCORE-0",
+      "override": {
+        "vulnerabilities": [
+          {
+            "vulnerabilityId": "SYNTH-VULN-0001",
+            "dependencyCoordinate": "pkg:maven/synthetic.example/synthetic-artifact@0.0.0-synthetic",
+            "score": 0.0,
+            "severity": "NONE"
+          }
+        ]
+      },
+      "expectedDecision": "BLOCK",
+      "expectedReason": "UNEXCEPTED_VULNERABILITY"
+    },
+    {
+      "caseId": "VULNERABILITY-SCORE-INTERMEDIATE",
+      "override": {
+        "vulnerabilities": [
+          {
+            "vulnerabilityId": "SYNTH-VULN-0001",
+            "dependencyCoordinate": "pkg:maven/synthetic.example/synthetic-artifact@0.0.0-synthetic",
+            "score": 5.5,
+            "severity": "MEDIUM"
+          }
+        ]
+      },
+      "expectedDecision": "BLOCK",
+      "expectedReason": "UNEXCEPTED_VULNERABILITY"
+    },
+    {
+      "caseId": "VULNERABILITY-SCORE-10",
+      "override": {
+        "vulnerabilities": [
+          {
+            "vulnerabilityId": "SYNTH-VULN-0001",
+            "dependencyCoordinate": "pkg:maven/synthetic.example/synthetic-artifact@0.0.0-synthetic",
+            "score": 10.0,
+            "severity": "CRITICAL"
+          }
+        ]
+      },
+      "expectedDecision": "BLOCK",
+      "expectedReason": "UNEXCEPTED_VULNERABILITY"
+    },
+    {
+      "caseId": "VULNERABILITY-SCORE-MISSING",
+      "override": {
+        "vulnerabilities": [
+          {
+            "vulnerabilityId": "SYNTH-VULN-0001",
+            "dependencyCoordinate": "pkg:maven/synthetic.example/synthetic-artifact@0.0.0-synthetic",
+            "score": null,
+            "severity": "MEDIUM"
+          }
+        ]
+      },
+      "expectedDecision": "BLOCK",
+      "expectedReason": "VULNERABILITY_SCORE_MISSING"
+    },
+    {
+      "caseId": "VULNERABILITY-SEVERITY-MISSING",
+      "override": {
+        "vulnerabilities": [
+          {
+            "vulnerabilityId": "SYNTH-VULN-0001",
+            "dependencyCoordinate": "pkg:maven/synthetic.example/synthetic-artifact@0.0.0-synthetic",
+            "score": 5.5,
+            "severity": null
+          }
+        ]
+      },
+      "expectedDecision": "BLOCK",
+      "expectedReason": "VULNERABILITY_SEVERITY_MISSING"
+    },
+    {
+      "caseId": "VULNERABILITY-SEVERITY-UNKNOWN",
+      "override": {
+        "vulnerabilities": [
+          {
+            "vulnerabilityId": "SYNTH-VULN-0001",
+            "dependencyCoordinate": "pkg:maven/synthetic.example/synthetic-artifact@0.0.0-synthetic",
+            "score": 5.5,
+            "severity": "UNKNOWN"
+          }
+        ]
+      },
+      "expectedDecision": "BLOCK",
+      "expectedReason": "VULNERABILITY_SEVERITY_UNKNOWN"
+    },
+    {
+      "caseId": "EXCEPTION-VALID",
+      "override": {
+        "vulnerabilities": [
+          {
+            "vulnerabilityId": "SYNTH-VULN-0001",
+            "dependencyCoordinate": "pkg:maven/synthetic.example/synthetic-artifact@0.0.0-synthetic",
+            "score": 5.5,
+            "severity": "MEDIUM"
+          }
+        ],
+        "exceptions": [
+          {
+            "vulnerabilityId": "SYNTH-VULN-0001",
+            "dependencyCoordinate": "pkg:maven/synthetic.example/synthetic-artifact@0.0.0-synthetic",
+            "justification": "Synthetic evaluator proof with no operational effect.",
+            "ownerRole": "SECURITY_GOVERNANCE_ROLE",
+            "expiresAtUtc": "2026-10-01T00:00:00Z",
+            "scope": "ETL_DATAEXPORT_V2_DEPENDENCY_AUDIT",
+            "policyFingerprint": "sha256:83c8698663f33b0e79ac987d72c7853fb59b12af42f31b07d1809377a454e056"
+          }
+        ]
+      },
+      "expectedDecision": "PASS",
+      "expectedReason": "POLICY_COMPLIANT"
+    },
+    {
+      "caseId": "EXCEPTION-JUSTIFICATION-MISSING",
+      "override": {
+        "exceptions": [
+          {
+            "vulnerabilityId": "SYNTH-VULN-0001",
+            "dependencyCoordinate": "pkg:maven/synthetic.example/synthetic-artifact@0.0.0-synthetic",
+            "ownerRole": "SECURITY_GOVERNANCE_ROLE",
+            "expiresAtUtc": "2026-10-01T00:00:00Z",
+            "scope": "ETL_DATAEXPORT_V2_DEPENDENCY_AUDIT",
+            "policyFingerprint": "sha256:83c8698663f33b0e79ac987d72c7853fb59b12af42f31b07d1809377a454e056"
+          }
+        ]
+      },
+      "expectedDecision": "BLOCK",
+      "expectedReason": "EXCEPTION_JUSTIFICATION_REQUIRED"
+    },
+    {
+      "caseId": "EXCEPTION-OWNER-ROLE-MISSING",
+      "override": {
+        "exceptions": [
+          {
+            "vulnerabilityId": "SYNTH-VULN-0001",
+            "dependencyCoordinate": "pkg:maven/synthetic.example/synthetic-artifact@0.0.0-synthetic",
+            "justification": "Synthetic evaluator proof with no operational effect.",
+            "expiresAtUtc": "2026-10-01T00:00:00Z",
+            "scope": "ETL_DATAEXPORT_V2_DEPENDENCY_AUDIT",
+            "policyFingerprint": "sha256:83c8698663f33b0e79ac987d72c7853fb59b12af42f31b07d1809377a454e056"
+          }
+        ]
+      },
+      "expectedDecision": "BLOCK",
+      "expectedReason": "EXCEPTION_OWNER_ROLE_REQUIRED"
+    },
+    {
+      "caseId": "EXCEPTION-EXPIRATION-MISSING",
+      "override": {
+        "exceptions": [
+          {
+            "vulnerabilityId": "SYNTH-VULN-0001",
+            "dependencyCoordinate": "pkg:maven/synthetic.example/synthetic-artifact@0.0.0-synthetic",
+            "justification": "Synthetic evaluator proof with no operational effect.",
+            "ownerRole": "SECURITY_GOVERNANCE_ROLE",
+            "scope": "ETL_DATAEXPORT_V2_DEPENDENCY_AUDIT",
+            "policyFingerprint": "sha256:83c8698663f33b0e79ac987d72c7853fb59b12af42f31b07d1809377a454e056"
+          }
+        ]
+      },
+      "expectedDecision": "BLOCK",
+      "expectedReason": "EXCEPTION_EXPIRATION_REQUIRED"
+    },
+    {
+      "caseId": "EXCEPTION-EXPIRED",
+      "override": {
+        "exceptions": [
+          {
+            "vulnerabilityId": "SYNTH-VULN-0001",
+            "dependencyCoordinate": "pkg:maven/synthetic.example/synthetic-artifact@0.0.0-synthetic",
+            "justification": "Synthetic evaluator proof with no operational effect.",
+            "ownerRole": "SECURITY_GOVERNANCE_ROLE",
+            "expiresAtUtc": "2026-09-06T11:59:59Z",
+            "scope": "ETL_DATAEXPORT_V2_DEPENDENCY_AUDIT",
+            "policyFingerprint": "sha256:83c8698663f33b0e79ac987d72c7853fb59b12af42f31b07d1809377a454e056"
+          }
+        ]
+      },
+      "expectedDecision": "BLOCK",
+      "expectedReason": "EXCEPTION_EXPIRED"
+    },
+    {
+      "caseId": "EXCEPTION-OUT-OF-SCOPE",
+      "override": {
+        "exceptions": [
+          {
+            "vulnerabilityId": "SYNTH-VULN-0001",
+            "dependencyCoordinate": "pkg:maven/synthetic.example/synthetic-artifact@0.0.0-synthetic",
+            "justification": "Synthetic evaluator proof with no operational effect.",
+            "ownerRole": "SECURITY_GOVERNANCE_ROLE",
+            "expiresAtUtc": "2026-10-01T00:00:00Z",
+            "scope": "OUTSIDE_AUTHORIZED_SCOPE",
+            "policyFingerprint": "sha256:83c8698663f33b0e79ac987d72c7853fb59b12af42f31b07d1809377a454e056"
+          }
+        ]
+      },
+      "expectedDecision": "BLOCK",
+      "expectedReason": "EXCEPTION_SCOPE_MISMATCH"
+    },
+    {
+      "caseId": "EXCEPTION-FINGERPRINT-MISMATCH",
+      "override": {
+        "exceptions": [
+          {
+            "vulnerabilityId": "SYNTH-VULN-0001",
+            "dependencyCoordinate": "pkg:maven/synthetic.example/synthetic-artifact@0.0.0-synthetic",
+            "justification": "Synthetic evaluator proof with no operational effect.",
+            "ownerRole": "SECURITY_GOVERNANCE_ROLE",
+            "expiresAtUtc": "2026-10-01T00:00:00Z",
+            "scope": "ETL_DATAEXPORT_V2_DEPENDENCY_AUDIT",
+            "policyFingerprint": "sha256:0000000000000000000000000000000000000000000000000000000000000000"
+          }
+        ]
+      },
+      "expectedDecision": "BLOCK",
+      "expectedReason": "EXCEPTION_POLICY_FINGERPRINT_MISMATCH"
+    },
+    {
+      "caseId": "EXCEPTION-VULNERABILITY-ID-MISSING",
+      "override": {
+        "exceptions": [
+          {
+            "dependencyCoordinate": "pkg:maven/synthetic.example/synthetic-artifact@0.0.0-synthetic",
+            "justification": "Synthetic evaluator proof with no operational effect.",
+            "ownerRole": "SECURITY_GOVERNANCE_ROLE",
+            "expiresAtUtc": "2026-10-01T00:00:00Z",
+            "scope": "ETL_DATAEXPORT_V2_DEPENDENCY_AUDIT",
+            "policyFingerprint": "sha256:83c8698663f33b0e79ac987d72c7853fb59b12af42f31b07d1809377a454e056"
+          }
+        ]
+      },
+      "expectedDecision": "BLOCK",
+      "expectedReason": "EXCEPTION_VULNERABILITY_ID_REQUIRED"
+    },
+    {
+      "caseId": "EXCEPTION-DEPENDENCY-COORDINATE-MISSING",
+      "override": {
+        "exceptions": [
+          {
+            "vulnerabilityId": "SYNTH-VULN-0001",
+            "justification": "Synthetic evaluator proof with no operational effect.",
+            "ownerRole": "SECURITY_GOVERNANCE_ROLE",
+            "expiresAtUtc": "2026-10-01T00:00:00Z",
+            "scope": "ETL_DATAEXPORT_V2_DEPENDENCY_AUDIT",
+            "policyFingerprint": "sha256:83c8698663f33b0e79ac987d72c7853fb59b12af42f31b07d1809377a454e056"
+          }
+        ]
+      },
+      "expectedDecision": "BLOCK",
+      "expectedReason": "EXCEPTION_DEPENDENCY_COORDINATE_REQUIRED"
+    }
+  ]
+}

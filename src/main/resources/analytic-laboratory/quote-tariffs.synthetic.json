@@ -1,0 +1,232 @@
+{
+  "version": "synthetic-analytic-quote-tariff-v1",
+  "provenance": "FIXTURE_SINTETICA_EXPLICITA",
+  "origin": "Legacy SQL05 candidate amounts; laboratory currency/KG/rounding explicit, no nominal ratification inferred",
+  "rows": [
+    {
+      "origin": "SP",
+      "destination": "SP",
+      "amount": "0.66",
+      "currency": "BRL",
+      "unit": "PER_WEIGHT",
+      "weightUnit": "KG",
+      "rounding": "HALF_UP"
+    },
+    {
+      "origin": "SP",
+      "destination": "RJ",
+      "amount": "1.21",
+      "currency": "BRL",
+      "unit": "PER_WEIGHT",
+      "weightUnit": "KG",
+      "rounding": "HALF_UP"
+    },
+    {
+      "origin": "SP",
+      "destination": "PR",
+      "amount": "0.74",
+      "currency": "BRL",
+      "unit": "PER_WEIGHT",
+      "weightUnit": "KG",
+      "rounding": "HALF_UP"
+    },
+    {
+      "origin": "SP",
+      "destination": "RS",
+      "amount": "1.70",
+      "currency": "BRL",
+      "unit": "PER_WEIGHT",
+      "weightUnit": "KG",
+      "rounding": "HALF_UP"
+    },
+    {
+      "origin": "SP",
+      "destination": "PE",
+      "amount": "1.54",
+      "currency": "BRL",
+      "unit": "PER_WEIGHT",
+      "weightUnit": "KG",
+      "rounding": "HALF_UP"
+    },
+    {
+      "origin": "RJ",
+      "destination": "SP",
+      "amount": "1.21",
+      "currency": "BRL",
+      "unit": "PER_WEIGHT",
+      "weightUnit": "KG",
+      "rounding": "HALF_UP"
+    },
+    {
+      "origin": "RJ",
+      "destination": "RJ",
+      "amount": "0.66",
+      "currency": "BRL",
+      "unit": "PER_WEIGHT",
+      "weightUnit": "KG",
+      "rounding": "HALF_UP"
+    },
+    {
+      "origin": "RJ",
+      "destination": "PR",
+      "amount": "0.98",
+      "currency": "BRL",
+      "unit": "PER_WEIGHT",
+      "weightUnit": "KG",
+      "rounding": "HALF_UP"
+    },
+    {
+      "origin": "RJ",
+      "destination": "RS",
+      "amount": "2.08",
+      "currency": "BRL",
+      "unit": "PER_WEIGHT",
+      "weightUnit": "KG",
+      "rounding": "HALF_UP"
+    },
+    {
+      "origin": "RJ",
+      "destination": "PE",
+      "amount": "1.95",
+      "currency": "BRL",
+      "unit": "PER_WEIGHT",
+      "weightUnit": "KG",
+      "rounding": "HALF_UP"
+    },
+    {
+      "origin": "PR",
+      "destination": "SP",
+      "amount": "0.74",
+      "currency": "BRL",
+      "unit": "PER_WEIGHT",
+      "weightUnit": "KG",
+      "rounding": "HALF_UP"
+    },
+    {
+      "origin": "PR",
+      "destination": "RJ",
+      "amount": "0.88",
+      "currency": "BRL",
+      "unit": "PER_WEIGHT",
+      "weightUnit": "KG",
+      "rounding": "HALF_UP"
+    },
+    {
+      "origin": "PR",
+      "destination": "PR",
+      "amount": "0.55",
+      "currency": "BRL",
+      "unit": "PER_WEIGHT",
+      "weightUnit": "KG",
+      "rounding": "HALF_UP"
+    },
+    {
+      "origin": "PR",
+      "destination": "RS",
+      "amount": "0.98",
+      "currency": "BRL",
+      "unit": "PER_WEIGHT",
+      "weightUnit": "KG",
+      "rounding": "HALF_UP"
+    },
+    {
+      "origin": "PR",
+      "destination": "PE",
+      "amount": "1.83",
+      "currency": "BRL",
+      "unit": "PER_WEIGHT",
+      "weightUnit": "KG",
+      "rounding": "HALF_UP"
+    },
+    {
+      "origin": "RS",
+      "destination": "SP",
+      "amount": "1.70",
+      "currency": "BRL",
+      "unit": "PER_WEIGHT",
+      "weightUnit": "KG",
+      "rounding": "HALF_UP"
+    },
+    {
+      "origin": "RS",
+      "destination": "RJ",
+      "amount": "1.95",
+      "currency": "BRL",
+      "unit": "PER_WEIGHT",
+      "weightUnit": "KG",
+      "rounding": "HALF_UP"
+    },
+    {
+      "origin": "RS",
+      "destination": "PR",
+      "amount": "1.46",
+      "currency": "BRL",
+      "unit": "PER_WEIGHT",
+      "weightUnit": "KG",
+      "rounding": "HALF_UP"
+    },
+    {
+      "origin": "RS",
+      "destination": "RS",
+      "amount": "0.98",
+      "currency": "BRL",
+      "unit": "PER_WEIGHT",
+      "weightUnit": "KG",
+      "rounding": "HALF_UP"
+    },
+    {
+      "origin": "RS",
+      "destination": "PE",
+      "amount": "2.20",
+      "currency": "BRL",
+      "unit": "PER_WEIGHT",
+      "weightUnit": "KG",
+      "rounding": "HALF_UP"
+    },
+    {
+      "origin": "PE",
+      "destination": "SP",
+      "amount": "1.46",
+      "currency": "BRL",
+      "unit": "PER_WEIGHT",
+      "weightUnit": "KG",
+      "rounding": "HALF_UP"
+    },
+    {
+      "origin": "PE",
+      "destination": "RJ",
+      "amount": "2.20",
+      "currency": "BRL",
+      "unit": "PER_WEIGHT",
+      "weightUnit": "KG",
+      "rounding": "HALF_UP"
+    },
+    {
+      "origin": "PE",
+      "destination": "PR",
+      "amount": "2.20",
+      "currency": "BRL",
+      "unit": "PER_WEIGHT",
+      "weightUnit": "KG",
+      "rounding": "HALF_UP"
+    },
+    {
+      "origin": "PE",
+      "destination": "RS",
+      "amount": "2.32",
+      "currency": "BRL",
+      "unit": "PER_WEIGHT",
+      "weightUnit": "KG",
+      "rounding": "HALF_UP"
+    },
+    {
+      "origin": "PE",
+      "destination": "PE",
+      "amount": "0.55",
+      "currency": "BRL",
+      "unit": "PER_WEIGHT",
+      "weightUnit": "KG",
+      "rounding": "HALF_UP"
+    }
+  ]
+}

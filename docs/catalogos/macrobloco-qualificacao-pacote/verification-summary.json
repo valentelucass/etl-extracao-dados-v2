@@ -1,0 +1,149 @@
+{
+  "version": 1,
+  "passed": true,
+  "deliveryComplete": true,
+  "status": "CONSTRUÇÃO_LOCAL_CONCLUÍDA",
+  "fronts": [
+    "A",
+    "B",
+    "C",
+    "D",
+    "E",
+    "F",
+    "G",
+    "H",
+    "I",
+    "J",
+    "K",
+    "L",
+    "M",
+    "N"
+  ],
+  "full": {
+    "attempt": "verify-physical-qualification-03",
+    "unitTests": 1976,
+    "integrationTests": 417,
+    "integrationClasses": 80,
+    "unitSkipped": 4,
+    "integrationSkipped": 0,
+    "failures": 0,
+    "errors": 0,
+    "previous378Exact": true,
+    "coveragePassed": true,
+    "rollbackConfirmed": true,
+    "historicalSkips": [
+      "br.com.esl.etl.v2.contratos.caracterizacao.CharacterizationDeterminismTest/refusesAReparsePointInsideTargetWhenThePlatformSupportsLinks",
+      "br.com.esl.etl.v2.contratos.caracterizacao.qfnd02.Qfnd02DeterminismTest/refusesSymbolicLinkInsideReceiptRoot",
+      "br.com.esl.etl.v2.contratos.mapping.CotacoesSourceCommandTest/command",
+      "br.com.esl.etl.v2.contratos.medicao.MeasurementReceiptWriterTest/refusesASymbolicLinkInsideTheMeasurementRootWhenSupported"
+    ],
+    "mandatoryNewClasses": 19,
+    "previousIT": 378,
+    "newIT": 39,
+    "rawUtf8": true,
+    "unchangedAfterVerify": [
+      "src/main",
+      "src/test"
+    ],
+    "coverageThresholds": {
+      "line": 0.8,
+      "branch": 0.6
+    }
+  },
+  "package": {
+    "first": "qualification-final-01",
+    "second": "qualification-repro-01",
+    "revision": "3b969cef84a2367e304748b930bbc66b95b3273ad93b5270a55f9d75b31dc540",
+    "manifestSha256": "b008ff7bcc5b4e4468db6de01a8bb2e7e9a0395363a4c6c8803e2e9d560e3b2f",
+    "archiveSha256": "54889e1d2153881856a0e68be17b8e770904351d77be10e7b960c56b98aa92d9",
+    "byteIdentical": true,
+    "sourceAndJarChecked": true,
+    "dependencies": 9,
+    "members": 172,
+    "sourceInputs": 1996,
+    "classResourceEntries": 1015,
+    "operatingSystem": "Windows",
+    "architecture": "x64",
+    "java": 17,
+    "maven": "3.9.14",
+    "sbom": "CycloneDX 1.6",
+    "feed": "NOT_EXECUTED",
+    "signed": false,
+    "publishedCi": false
+  },
+  "construction": {
+    "before": 37,
+    "after": 39,
+    "denominator": 45,
+    "historicalAcceptances": 67,
+    "acceptanceDenominator": 115,
+    "added": [
+      "V2-038",
+      "V2-039"
+    ]
+  },
+  "scale": {
+    "completedScales": [
+      4,
+      16,
+      32,
+      16
+    ],
+    "heapPlateauProven": false
+  },
+  "guards": {
+    "package": 25,
+    "extracted": 21,
+    "control": 8
+  },
+  "proofs": {
+    "regression": {
+      "path": "target/macrobloco-qualificacao-pacote-20260913-01/regression-final-02/result.json",
+      "sha256": "835deec8ef5e2601c9b55b8a4b958f5afdcb7fc4aa4813ee86271ba212e39391"
+    },
+    "reproducibility": {
+      "path": "target/macrobloco-qualificacao-pacote-20260913-01/artifact-final-01/reproducibility.json",
+      "sha256": "7fea5c0718c82ee53ff147a3ac89df74a14cc4f82a37d02d9217ab5b081bb3be"
+    },
+    "sourceBinding": {
+      "path": "target/macrobloco-qualificacao-pacote-20260913-01/artifact-final-01/source-binding.json",
+      "sha256": "abdea9fe4011de83225e248dce6ae6c8a07409e0a6edc91c64fdb7c19409176d"
+    },
+    "scales": {
+      "path": "target/macrobloco-qualificacao-pacote-20260913-01/final-proofs-01/scales.json",
+      "sha256": "94d0e8dcff2d2afdad436bedc01a5397ea4d1be5cde3362061c2ca10c181e1a3"
+    },
+    "packageGuards": {
+      "path": "target/macrobloco-qualificacao-pacote-20260913-01/final-proofs-01/package-guards.json",
+      "sha256": "5c14caf655af266901904628a1e83d2d8a758d8ab86041b0546f3be88a6d3dba"
+    },
+    "extractedGuards": {
+      "path": "target/macrobloco-qualificacao-pacote-20260913-01/final-proofs-01/extracted-guards.json",
+      "sha256": "6f16ad4a875370644affcdc41d21167495aa90a04a2e6b43d5169e645f1fa1f0"
+    },
+    "controlGuards": {
+      "path": "target/macrobloco-qualificacao-pacote-20260913-01/final-proofs-01/control-guards.json",
+      "sha256": "0dba78413e43621a4d93e0c1dadfcfe8e03e01c2444a00a7b522c662645eea1d"
+    },
+    "staticChecks": {
+      "path": "target/macrobloco-qualificacao-pacote-20260913-01/final-proofs-01/static-checks.json",
+      "sha256": "f9286e8b5e48501a696059c96ef40c690ef1ba4f37736ad21921d685cb775c04"
+    },
+    "plans": {
+      "path": "target/macrobloco-qualificacao-pacote-20260913-01/final-proofs-01/plans.json",
+      "sha256": "db3351f90d4cfc42e5e60359ab39dc6dca1c71f8ef06267c2f865e4593dc053b"
+    },
+    "smokes": {
+      "path": "target/macrobloco-qualificacao-pacote-20260913-01/final-proofs-01/smokes.json",
+      "sha256": "6d52568bb13422a561be35e683a1a673ab247379077d966be3691673c6e637ab"
+    }
+  },
+  "remoteCalls": 0,
+  "newAcceptances": 0,
+  "durableDomainRows": 0,
+  "operationalPromotionAuthorized": false,
+  "realQualificationAccepted": false,
+  "heapPlateauProven": false,
+  "finalValidationSeal": "target/macrobloco-qualificacao-pacote-20260913-01/final-seal.json",
+  "sealMeaning": "Delivery verdict requires the external final seal matching this summary and current canonical manifest; no self-referential validation hash."
+}

@@ -73,7 +73,7 @@ final class DataExportRetrySchedule {
         if (value.isEmpty()) {
             return Optional.empty();
         }
-        if (value.chars().allMatch(Character::isDigit)) {
+        if (value.chars().allMatch(character -> character >= '0' && character <= '9')) {
             return Optional.of(
                     checked(
                             durationFromDeltaSeconds(value),
@@ -82,10 +82,9 @@ final class DataExportRetrySchedule {
         try {
             final Instant requestedAt =
                     ZonedDateTime.parse(value, DateTimeFormatter.RFC_1123_DATE_TIME).toInstant();
+            final Instant now = clock.instant();
             final Duration delay =
-                    requestedAt.isAfter(clock.instant())
-                            ? Duration.between(clock.instant(), requestedAt)
-                            : Duration.ZERO;
+                    requestedAt.isAfter(now) ? Duration.between(now, requestedAt) : Duration.ZERO;
             return Optional.of(checked(delay, DataExportRetryDelaySource.RETRY_AFTER_DATE));
         } catch (final DateTimeException exception) {
             return Optional.empty();

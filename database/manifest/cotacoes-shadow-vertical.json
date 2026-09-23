@@ -1,0 +1,69 @@
+{
+  "manifestVersion": 1,
+  "roadmapTask": "V2-027",
+  "localState": "IMPLEMENTADA_EM_SHADOW",
+  "migration": "V011__create_cotacoes_shadow_vertical.sql",
+  "sourceContract": {
+    "contractId": "dataexport-6906",
+    "maximumPageSize": 1000,
+    "datasetCompleteness": "NOT_PROVEN"
+  },
+  "identity": {
+    "entity": "cotacoes",
+    "sourceKey": "INTEGER_TYPE_TAGGED_SEQUENCE_CODE",
+    "sourceKeyDomain": "POSITIVE_SIGNED_64_BIT_1_TO_9223372036854775807",
+    "sourceKeyEncoding": "ASCII_DECIMAL_NO_SIGN_NO_LEADING_ZERO_NO_WHITESPACE",
+    "canonicalKey": "BIGINT_IDENTITY",
+    "scope": ["environment_name", "source_instance", "tenant_scope", "entity_name", "source_key"]
+  },
+  "attributes": {
+    "presence": ["ABSENT", "NULL", "VALUE"],
+    "absent": "PRESERVE_SAME_SCOPED_CURRENT_ROOT",
+    "null": "APPLY_SQL_NULL",
+    "value": "APPLY_TYPED_VALUE_INCLUDING_ZERO",
+    "presenceFields": [
+      "sequence_code",
+      "requested_at",
+      "qoe_qes_fit_nse_issued_at",
+      "qoe_qes_fit_fhe_cte_issued_at",
+      "qoe_qes_total",
+      "qoe_crn_psn_nickname",
+      "qoe_uer_name",
+      "qoe_qes_ony_sae_code",
+      "qoe_qes_diy_sae_code"
+    ]
+  },
+  "freshness": {
+    "precedence": ["nfse_issued_at", "cte_issued_at", "requested_at"],
+    "equalDivergentContent": "QUARANTINE",
+    "absence": "BLOCKED_NO_COMPLETENESS_PROOF"
+  },
+  "tariff": {
+    "reference": "ref.tarifa_rota_uf",
+    "effectiveRouteScope": ["environment_name", "source_instance", "tenant_scope", "entity_name", "source_key"],
+    "effectiveUfPolicy": "ABSENT_FROM_SAME_SCOPED_CURRENT_ROOT_NULL_CLEARS_VALUE_APPLIES",
+    "referenceRelease": "EXPLICIT_RATIFIED_SHADOW_NOT_REVOKED",
+    "validity": "[valid_from,valid_to_exclusive)",
+    "coverage": "PRICED_ONLY",
+    "amount": "DECIMAL(19,4)_POSITIVE",
+    "currencyUnitRounding": "MATERIALIZED_FROM_REFERENCE",
+    "sourceCurrency": "FORBIDDEN_REFERENCE_ONLY",
+    "uncovered": "FAIL_CLOSED",
+    "implicitCurrent": "FORBIDDEN"
+  },
+  "persistence": {
+    "stage": "stg.cotacao_record",
+    "current": "core.cotacao",
+    "presenceEvidence": "recon.cotacao_root_presence_observation",
+    "stageProcedure": "stg.usp_stage_cotacao_record",
+    "applyProcedure": "core.usp_apply_reconcile_publish_cotacoes",
+    "applicationMode": "SET_BASED"
+  },
+  "runtime": {
+    "publication": "PROHIBITED",
+    "sweep": "PROHIBITED",
+    "cutover": "PROHIBITED",
+    "directTableDml": "DENIED",
+    "maximumPagesInFlight": 1
+  }
+}

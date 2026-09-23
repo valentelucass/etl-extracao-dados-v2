@@ -1,0 +1,15 @@
+{
+  "version": "synthetic-analytic-collection-supplement-v1",
+  "provenance": "FIXTURE_SINTETICA_EXPLICITA",
+  "data": {
+    "requestHour": "10:00:00.123456789",
+    "vehicleTypeId": 7,
+    "customer": { "name": "CLIENTE SINTÉTICO", "cnpj": "12345678000195" },
+    "pickAddress": { "line1": "ENDEREÇO SINTÉTICO", "number": "7A", "line2": "COMPLEMENTO SINTÉTICO" },
+    "corporation": { "id": 7 },
+    "cancellationUserId": 7,
+    "destroyReason": "MOTIVO SINTÉTICO",
+    "destroyUserId": 8,
+    "statusUpdatedAt": "2036-04-01T07:00:00.123456789-03:00"
+  }
+}

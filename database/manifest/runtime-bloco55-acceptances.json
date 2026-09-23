@@ -1,0 +1,78 @@
+{
+  "version": 1,
+  "block": 55,
+  "scope": "ADOPTED_LOCAL_WINDOWS_SQL_RUNTIME",
+  "accepted": [
+    "V2-042b",
+    "V2-042c",
+    "V2-022b",
+    "V2-042"
+  ],
+  "parent042Accepted": true,
+  "parent022Accepted": false,
+  "realSourceRequiredForTheseCriteria": false,
+  "productionGovernanceApproved": false,
+  "identityInputs": {
+    "provider": "WINDOWS_INTEGRATED_EXISTING_ACCOUNTS",
+    "authorityAudiences": "PINNED_LOCAL_SQL_DATABASE_ADMINISTERED_MODULES",
+    "principals": "etl_v2_exec_SERVICE_etl_v2_view_OPERATOR",
+    "roleAuthority": "OWNER_AUTHORIZED_LOCAL_ADMIN_ONLY",
+    "mappingRevocation": "DURABLE_VERSIONED_MAPPING_SCOPE_NO_RENEWAL",
+    "sqlPrincipals": "EXISTING_WINDOWS_LOGINS_EXACT_32_EXECUTES",
+    "durableSink": "V016_SQL_APPEND_ONLY_DECISION_CONSUMPTION",
+    "pseudonymization": "EXISTING_RANDOM_AUDIT_UUID_SID_ONLY_PROTECTED_SQL",
+    "approvalScope": "OWNER_ADOPTED_SECTION_3_REUSE_B53_B54_LAB_MECHANISM"
+  },
+  "originalUntil": "2026-10-07T22:34:30.615Z",
+  "proofFiles": [
+    {
+      "path": "database/manifest/runtime-bloco54.json",
+      "sha256": "2b6044a226732d69494f186a1c49296663fb54abe0a1f7cebd749cdb84fc0480"
+    },
+    {
+      "path": "docs/adr/0035-authority-windows-sql-consumo-duravel-e-plano-temporal.md",
+      "sha256": "abc7603e9eeac37d277f231ad2a13c2cd3e28f82e5dc2de56835a6c51da97039"
+    },
+    {
+      "path": "docs/runbooks/v2-042-contas-locais-windows.md",
+      "sha256": "d0ca2a36c36492f53e5fd184e8ff1f75ea0773442e100de079fc2ae1ec5dde9d"
+    },
+    {
+      "path": "target/bloco55/runtime/B55_SMOKE_03/results.json",
+      "sha256": "f137c3d7070d0d4ca4f90cd3f86b5f111ff898b341266d071cb115b53a9d402b"
+    },
+    {
+      "path": "target/bloco55/runtime/B55_MATRIX_01/results.json",
+      "sha256": "9910ba421d82ecc29ba14792cf1910bfbcd0fc04b0069f99c1b0ae7dbddff8ea"
+    },
+    {
+      "path": "target/bloco55/snapshots/B55_READ_01/receipt.json",
+      "sha256": "3c3366acdf620bfebe2eaca832f8418213114dfd86f9db01f53886aadfabeea5"
+    },
+    {
+      "path": "target/bloco55/final-jar-equivalence.json",
+      "sha256": "1277aa5f0f2ce7bcae735596cd6ef42708c33780b2e8b1471ee1fbe1f24cb0f8"
+    },
+    {
+      "path": "target/bloco55/verify-03.log",
+      "sha256": "5d922dc00aa54c85e97499f7bfa2f8f0537ca086d16faa18b9920b7796f66e76"
+    },
+    {
+      "path": "target/bloco55/sql-fence-reconciliation.json",
+      "sha256": "c4ba8882deced6a7c8ecbf2f8d7879b4de37f95b9d9e812955b5a61a49ce1a18"
+    },
+    {
+      "path": "target/bloco55/runtime/B55_SQL_01/results.json",
+      "sha256": "f9e802fa7a4f6635d169fe506d504b1b00f3e0b7c4438c5119da40ca72106195"
+    },
+    {
+      "path": "target/bloco55/snapshots/B55_READ_03/receipt.json",
+      "sha256": "b14abc9df2396d73aab403ea6e95797d55c9d819d73a7d1514f8fa2b0ffaf3c2"
+    },
+    {
+      "path": "target/bloco55/snapshots/B55_READ_03/PRESERVATION.log",
+      "sha256": "0d5631556aa3b9f3f8b03e8a0a0e4465d806a0c7f474f03380acbc818823542f"
+    }
+  ],
+  "criteriaReview": "docs/runbooks/v2-022-bloco55-cinco-verticais-local.md"
+}

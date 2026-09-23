@@ -1,0 +1,100 @@
+{
+  "version": 1,
+  "status": "AUDITORIA_E_CORRECOES_LOCAIS_CONCLUIDAS",
+  "sealRequired": true,
+  "fronts": [
+    {
+      "id": "A",
+      "status": "ACEITO_NO_ESCOPO",
+      "result": "3158 arquivos e195pins conferidos; snapshots e deltas próprios, sem HEAD como baseline.",
+      "evidence": "baseline-result.json"
+    },
+    {
+      "id": "B",
+      "status": "ACEITO_NO_ESCOPO",
+      "result": "45 IDs originais, seções/critério, checkboxes, consumidores, provas e faltas;39 contadas também auditadas.",
+      "evidence": "matriz-45-unidades.json"
+    },
+    {
+      "id": "C",
+      "status": "ACEITO_NO_ESCOPO",
+      "result": "401 artefatos,2437 linhas e75 regras reconciliados com destinos ou faltas concretas; nenhuma desopacificação/aceitação por fixture.",
+      "evidence": "rastreabilidade-resumo.json"
+    },
+    {
+      "id": "D",
+      "status": "ACEITO_NO_ESCOPO",
+      "result": "Comandos seguidos até consumidores; cinco Data Export+Usuários operacionais limitados, outras composições sintéticas explicitadas.",
+      "evidence": "COMPOSICAO-E-LIMITES.md"
+    },
+    {
+      "id": "E",
+      "status": "ACEITO_NO_ESCOPO",
+      "result": "Duas falhas reproduzidas e corrigidas no supervisor utilizado; nenhuma migration/regra de negócio inventada.",
+      "evidence": "resume-green-01/result.json"
+    },
+    {
+      "id": "F",
+      "status": "ACEITO_NO_ESCOPO",
+      "result": "Owner vivo/reserva insuficiente impede admissão; prefixo selado conclui sem repetir worker; adulteração/ausência de selo recusadas.",
+      "evidence": "resume-package-02/result.json"
+    },
+    {
+      "id": "G",
+      "status": "PREPARADO_BLOQUEADO_POR_INPUT",
+      "result": "G01/G02: intake existente preservado, baseline local auditado; sem atestado novo/provider/owners não há rotação/CI remoto.",
+      "evidence": "ENTRADAS-E-EFEITOS-EXTERNOS.md"
+    },
+    {
+      "id": "H",
+      "status": "PREPARADO_BLOQUEADO_POR_INPUT",
+      "result": "G03/G04: faltas de contrato/identidade/regra/oráculo/consumidor e adaptações funcionais ligadas às verticais/harness existentes.",
+      "evidence": "ENTRADAS-E-EFEITOS-EXTERNOS.md"
+    },
+    {
+      "id": "I",
+      "status": "PLANO_PRONTO_ENSAIO_NAO_EXECUTADO",
+      "result": "G05/G06:131 responsabilidades,49nós,11fences, banco V2 dedicado/DATABASE_WIDE, duas recuperações materiais planejadas.",
+      "evidence": "ENTRADAS-E-EFEITOS-EXTERNOS.md"
+    },
+    {
+      "id": "J",
+      "status": "PREPARADO_BLOQUEADO_POR_INPUT",
+      "result": "G07/G08: roteiro/precondições de corte e retirada; PNR real somente na primeira publicação produtiva aceita.",
+      "evidence": "ENTRADAS-E-EFEITOS-EXTERNOS.md"
+    },
+    {
+      "id": "K",
+      "status": "ACEITO_NO_ESCOPO",
+      "result": "1976unitários/4skips históricos,423IT/81classes,417identidades anteriores; pacote/rebuild/smokes/recusas na revisão atual.",
+      "evidence": "verification-summary.json"
+    },
+    {
+      "id": "L",
+      "status": "ACEITO_NO_ESCOPO",
+      "result": "Revisão separada do agente, diffs, falha/falso sucesso, limites e contagem; correções e contraprovas preservadas.",
+      "evidence": "REVISAO.md"
+    },
+    {
+      "id": "M",
+      "status": "ACEITE_CONDICIONADO_AO_SELO_FINAL",
+      "result": "Sucessor exato depois da entrega0141; todos validadores/contraprovas finais e diffs devem estar vinculados no selo.",
+      "evidence": "manifesto.json"
+    },
+    {
+      "id": "N",
+      "status": "ACEITO_NO_ESCOPO",
+      "result": "39/45 antes/depois;67/115 históricos separados; zero nova unidade, zero aceite real/operacional.",
+      "evidence": "matriz-45-unidades.json"
+    }
+  ],
+  "construction": {
+    "before": 39,
+    "after": 39,
+    "total": 45
+  },
+  "historicalAcceptances": {
+    "accepted": 67,
+    "total": 115
+  }
+}

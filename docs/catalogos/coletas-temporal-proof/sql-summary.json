@@ -1,0 +1,88 @@
+{
+  "target": "LOCAL_V2_SHADOW_ONLY",
+  "physicalSql": true,
+  "syntheticOnly": true,
+  "ddlExecuted": false,
+  "durableDomainRows": 0,
+  "precisionRoundingVerified": true,
+  "cases": [
+    {
+      "case": "NEWER_OPEN_TO_DONE",
+      "expectedSqlError": 0,
+      "observedSqlError": 0,
+      "state": "done",
+      "disposition": "UPDATED",
+      "passed": true,
+      "rollbackConfirmed": true,
+      "failure": null,
+      "freshnessVerified": true
+    },
+    {
+      "case": "RETROACTIVE_TERMINAL",
+      "expectedSqlError": 0,
+      "observedSqlError": 0,
+      "state": "done",
+      "disposition": "STALE_NO_OP",
+      "passed": true,
+      "rollbackConfirmed": true,
+      "failure": null,
+      "freshnessVerified": true
+    },
+    {
+      "case": "TERMINAL_CANNOT_REOPEN",
+      "expectedSqlError": 0,
+      "observedSqlError": 0,
+      "state": "done",
+      "disposition": "UPDATED",
+      "passed": true,
+      "rollbackConfirmed": true,
+      "failure": null,
+      "freshnessVerified": true
+    },
+    {
+      "case": "OLDER_OPEN_IS_STALE",
+      "expectedSqlError": 0,
+      "observedSqlError": 0,
+      "state": "pending",
+      "disposition": "STALE_NO_OP",
+      "passed": true,
+      "rollbackConfirmed": true,
+      "failure": null,
+      "freshnessVerified": true
+    },
+    {
+      "case": "IDENTICAL_RECORD_REPEAT",
+      "expectedSqlError": 0,
+      "observedSqlError": 0,
+      "state": "pending",
+      "disposition": "NO_OP",
+      "passed": true,
+      "rollbackConfirmed": true,
+      "failure": null,
+      "freshnessVerified": true
+    },
+    {
+      "case": "EQUAL_TIME_STATUS_CONFLICT",
+      "expectedSqlError": 51428,
+      "observedSqlError": 51428,
+      "state": null,
+      "disposition": null,
+      "passed": true,
+      "rollbackConfirmed": true,
+      "failure": null
+    },
+    {
+      "case": "SUBMILLISECOND_STATUS_CONFLICT",
+      "expectedSqlError": 51428,
+      "observedSqlError": 51428,
+      "state": null,
+      "disposition": null,
+      "passed": true,
+      "rollbackConfirmed": true,
+      "failure": null
+    }
+  ],
+  "passed": true,
+  "representativeParityAccepted": false,
+  "sourceTemporalEquivalenceAccepted": false
+}

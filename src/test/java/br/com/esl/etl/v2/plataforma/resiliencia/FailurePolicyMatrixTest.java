@@ -94,6 +94,79 @@ class FailurePolicyMatrixTest {
     }
 
     @Test
+    void permanentFailuresIgnoreEveryAvailableRecoveryBudget() {
+        final FailureKind[] permanentFailures = {
+            FailureKind.CONFIGURATION,
+            FailureKind.IDENTITY,
+            FailureKind.AUTHORIZATION,
+            FailureKind.SCHEMA_CONTRACT,
+            FailureKind.CONTRACT_DRIFT,
+            FailureKind.SQL_FAILURE,
+            FailureKind.CRITICAL_DATA_QUALITY,
+            FailureKind.UNCLASSIFIED_HTTP_422,
+            FailureKind.PERMANENT_SOURCE_REJECTION,
+            FailureKind.LOCK_UNAVAILABLE,
+            FailureKind.STEP_TIMEOUT,
+            FailureKind.CYCLE_TIMEOUT,
+            FailureKind.CIRCUIT_OPEN,
+            FailureKind.SOURCE_BUDGET_EXHAUSTED,
+            FailureKind.WORKLOAD_BUDGET_EXHAUSTED
+        };
+        final FailurePolicyContext[] contexts = {
+            new FailurePolicyContext(false, false),
+            new FailurePolicyContext(true, false),
+            new FailurePolicyContext(false, true),
+            new FailurePolicyContext(true, true)
+        };
+
+        for (final FailureKind kind : permanentFailures) {
+            for (final FailurePolicyContext context : contexts) {
+                final FailureDecision decision = matrix.decide(kind, context);
+                assertEquals(FailureAction.ABORT, decision.action(), kind.name());
+                assertTrue(decision.blocksCheckpoint(), kind.name());
+            }
+        }
+    }
+
+    @Test
+    void actionSelectionIsDeterministicWhenBothRecoveryBudgetsExist() {
+        final FailurePolicyContext bothAvailable = new FailurePolicyContext(true, true);
+
+        assertEquals(
+                FailureAction.ABORT,
+                matrix.decide(FailureKind.AUTHORIZATION, bothAvailable).action());
+        assertEquals(
+                FailureAction.RETRY,
+                matrix.decide(FailureKind.SOURCE_UNAVAILABLE, bothAvailable).action());
+        assertEquals(
+                FailureAction.REPARTITION,
+                matrix.decide(FailureKind.WINDOW_TOO_LARGE_HTTP_422, bothAvailable).action());
+        assertEquals(
+                FailureAction.DEGRADE,
+                matrix.decide(FailureKind.OPTIONAL_SOURCE_UNAVAILABLE, bothAvailable).action());
+        assertEquals(
+                FailureAction.BLOCK,
+                matrix.decide(FailureKind.REQUIRED_DEPENDENCY_FAILED, bothAvailable).action());
+    }
+
+    @Test
+    void cancellationAlwaysAbortsRegardlessOfRecoveryBudgets() {
+        for (final FailurePolicyContext context :
+                new FailurePolicyContext[] {
+                    new FailurePolicyContext(false, false),
+                    new FailurePolicyContext(true, false),
+                    new FailurePolicyContext(false, true),
+                    new FailurePolicyContext(true, true)
+                }) {
+            final FailureDecision decision = matrix.decide(FailureKind.CANCELLATION, context);
+            assertEquals(FailureAction.ABORT, decision.action());
+            assertEquals(ExecutionState.CANCELLED, decision.terminalState().orElseThrow());
+            assertEquals(RuntimeExitCategory.CANCELLED, decision.exitCategory());
+            assertTrue(decision.blocksCheckpoint());
+        }
+    }
+
+    @Test
     void refusesImpossibleDecisions() {
         assertThrows(
                 IllegalArgumentException.class,

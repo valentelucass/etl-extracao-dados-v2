@@ -1,0 +1,5 @@
+# B60 — 27 casos restantes após revisão do oráculo de auditoria
+
+47 casos originais físicos e uma rechecagem de cancelamento comprovados. AUDIT_NULL conserva o resultado original falho e recebe revisão explícita do oráculo: V018 registra terminalidade nula como NONE em páginas não vazias; são duas páginas antes de V024/DQ recusar a ausência de prova terminal. Não havia contrato de parada na primeira página nesse cenário. A revisão exige FAILED, quatro checks de DQ com exatamente uma falha, zero selo/publicação/aplicação/histórico; a execução física anterior satisfaz todas essas condições. Não se altera o runtime nem se repete essa execução já reconciliada. audit-oracle-review.json registra a base e a evidência. Novas identidades somente para os 27 casos não executados; aliases/oráculos preservados.
+
+Débitos cumulativos 101 sqlcmd, 50 JVMs, 38 HTTP. Tetos 240/80/400 e deadline existente 2026-09-10T13:15:21.8816492Z; sem reembolso/renovação. Políticas v5, effective .127, preservação das anteriores, recuperação SERVICE27/scopes10 revogadas/grants temporários retirados. Mesmo JAR oficial e entrada de falhas já testados.

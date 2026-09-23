@@ -1,0 +1,23 @@
+{
+  "version": "bloco54-temporal-v1",
+  "purpose": "SYNTHETIC_BLOCO54_PERSIST_ONLY",
+  "workload": "coletas",
+  "dependsOn": "",
+  "invocation": "00000000-0000-0000-0000-000000005401",
+  "firstUnpublished": "2024-02-28",
+  "observedAt": "2024-03-02T12:00:00Z",
+  "zone": "America/Sao_Paulo",
+  "mode": "BACKFILL",
+  "strategy": "INTERVAL",
+  "cadence": "CIVIL_DAY",
+  "civilBoundary": "00:00",
+  "lookbackSeconds": "3600",
+  "stabilizationSeconds": "60",
+  "slaSeconds": "3600",
+  "deadlineSeconds": "1800",
+  "concurrency": "1",
+  "maximumBacklog": "4",
+  "maximumReconciliation": "8",
+  "maximumDegraded": "1",
+  "blackouts": ""
+}

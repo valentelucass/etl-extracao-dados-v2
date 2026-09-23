@@ -1,12 +1,14 @@
 package br.com.esl.etl.v2.plataforma.fonte.dataexport;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.Clock;
 import java.time.Duration;
 import java.time.Instant;
+import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.util.Optional;
 import org.junit.jupiter.api.Test;
@@ -82,6 +84,52 @@ class DataExportRetryScheduleTest {
         final DataExportRetrySchedule schedule = schedule(Duration.ofSeconds(1), 1.0d);
 
         assertThrows(IllegalStateException.class, () -> schedule.resolve(1, Optional.empty()));
+    }
+
+    @Test
+    void samplesTheClockOnceWhenResolvingAnRfc1123Date() {
+        final Instant initial = Instant.parse("2026-08-30T15:00:00Z");
+        final Clock advancingClock =
+                new Clock() {
+                    private int reads;
+
+                    @Override
+                    public ZoneId getZone() {
+                        return ZoneOffset.UTC;
+                    }
+
+                    @Override
+                    public Clock withZone(final ZoneId zone) {
+                        return this;
+                    }
+
+                    @Override
+                    public Instant instant() {
+                        return reads++ == 0 ? initial : initial.plusSeconds(2);
+                    }
+                };
+        final DataExportRetrySchedule schedule =
+                new DataExportRetrySchedule(
+                        new DataExportRetryPolicy(3, Duration.ofMillis(100), Duration.ofSeconds(5)),
+                        advancingClock,
+                        () -> 0.0d);
+
+        final DataExportRetryDelay delay =
+                schedule.resolve(1, Optional.of("Sun, 30 Aug 2026 15:00:01 GMT"));
+
+        assertEquals(Duration.ofSeconds(1), delay.duration());
+        assertEquals(DataExportRetryDelaySource.RETRY_AFTER_DATE, delay.source());
+    }
+
+    @Test
+    void rejectsNonAsciiDigitsInRetryAfterDelta() {
+        final DataExportRetrySchedule schedule = schedule(Duration.ofSeconds(1), 0.0d);
+
+        final DataExportRetryDelay delay = schedule.resolve(1, Optional.of("\u0663"));
+
+        assertEquals(Duration.ofSeconds(1), delay.duration());
+        assertEquals(DataExportRetryDelaySource.BACKOFF, delay.source());
+        assertFalse(delay.serverDirected());
     }
 
     private static DataExportRetrySchedule schedule(

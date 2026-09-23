@@ -1,0 +1,159 @@
+{
+  "version": "qualification-location-hashes-v1",
+  "origin": "INDEPENDENT_LOC_ENVELOPE_V2",
+  "example": {
+    "encoding": "UTF-16LE",
+    "tokens": [
+      "localizacao-cargas-envelope-v2",
+      "INTEGER:600001",
+      "{\"corporation_sequence_number\":600001,\"type\":\"Freight::Normal\",\"service_at\":\"2036-04-01T03:00:00Z\",\"invoices_volumes\":\"3\",\"taxed_weight\":\"45.125\",\"invoices_value\":\"120\",\"total\":\"120\",\"service_type\":\"Entrega urbana\",\"fit_crn_psn_nickname\":\"FILIAL EMISSORA SINTÉTICA\",\"fit_dpn_delivery_prediction_at\":\"2036-04-04T10:00:00-03:00\",\"fit_dyn_name\":\"REGIÃO DESTINO SINTÉTICA\",\"fit_dyn_drt_nickname\":\"FILIAL DESTINO SINTÉTICA\",\"fit_fsn_name\":\"CLASSIFICAÇÃO SINTÉTICA\",\"fit_fln_status\":\"done\",\"fit_fln_cln_nickname\":\"PÁTIO SINTÉTICO\",\"fit_o_n_name\":\"REGIÃO ORIGEM SINTÉTICA\",\"fit_o_n_drt_nickname\":\"FILIAL ORIGEM SINTÉTICA\"}",
+      "{\"fields\":{\"corporation_sequence_number\":{\"path\":\"/corporation_sequence_number\",\"presence\":\"VALUE\",\"provenance\":\"DATAEXPORT_8656\",\"parseState\":\"PRESERVED_OR_STRICTLY_PARSED_BY_NAMED_FIELD\",\"typedState\":\"INTEGER_TYPE_TAGGED_SOURCE_KEY\",\"raw\":600001,\"rawWireLexeme\":\"UNAVAILABLE_AFTER_JSON_TREE_NORMALIZATION\"},\"type\":{\"path\":\"/type\",\"presence\":\"VALUE\",\"provenance\":\"DATAEXPORT_8656\",\"parseState\":\"PRESERVED_OR_STRICTLY_PARSED_BY_NAMED_FIELD\",\"typedState\":\"UNVERIFIED_SOURCE_TYPE_PRESERVED_RAW\",\"raw\":\"Freight::Normal\",\"rawWireLexeme\":\"NOT_APPLICABLE_NON_NUMERIC_TOKEN\"},\"service_at\":{\"path\":\"/service_at\",\"presence\":\"VALUE\",\"provenance\":\"DATAEXPORT_8656\",\"parseState\":\"PRESERVED_OR_STRICTLY_PARSED_BY_NAMED_FIELD\",\"typedState\":\"STRICT_TYPED_COLUMN\",\"raw\":\"2036-04-01T03:00:00Z\",\"rawWireLexeme\":\"NOT_APPLICABLE_NON_NUMERIC_TOKEN\"},\"invoices_volumes\":{\"path\":\"/invoices_volumes\",\"presence\":\"VALUE\",\"provenance\":\"DATAEXPORT_8656\",\"parseState\":\"PRESERVED_OR_STRICTLY_PARSED_BY_NAMED_FIELD\",\"typedState\":\"STRICT_TYPED_COLUMN\",\"raw\":\"3\",\"rawWireLexeme\":\"NOT_APPLICABLE_NON_NUMERIC_TOKEN\"},\"taxed_weight\":{\"path\":\"/taxed_weight\",\"presence\":\"VALUE\",\"provenance\":\"DATAEXPORT_8656\",\"parseState\":\"PRESERVED_OR_STRICTLY_PARSED_BY_NAMED_FIELD\",\"typedState\":\"STRICT_TYPED_COLUMN\",\"raw\":\"45.125\",\"rawWireLexeme\":\"NOT_APPLICABLE_NON_NUMERIC_TOKEN\"},\"invoices_value\":{\"path\":\"/invoices_value\",\"presence\":\"VALUE\",\"provenance\":\"DATAEXPORT_8656\",\"parseState\":\"PRESERVED_OR_STRICTLY_PARSED_BY_NAMED_FIELD\",\"typedState\":\"STRICT_TYPED_COLUMN\",\"raw\":\"120\",\"rawWireLexeme\":\"NOT_APPLICABLE_NON_NUMERIC_TOKEN\"},\"total\":{\"path\":\"/total\",\"presence\":\"VALUE\",\"provenance\":\"DATAEXPORT_8656\",\"parseState\":\"PRESERVED_OR_STRICTLY_PARSED_BY_NAMED_FIELD\",\"typedState\":\"STRICT_TYPED_COLUMN\",\"raw\":\"120\",\"rawWireLexeme\":\"NOT_APPLICABLE_NON_NUMERIC_TOKEN\"},\"service_type\":{\"path\":\"/service_type\",\"presence\":\"VALUE\",\"provenance\":\"DATAEXPORT_8656\",\"parseState\":\"PRESERVED_OR_STRICTLY_PARSED_BY_NAMED_FIELD\",\"typedState\":\"UNVERIFIED_SOURCE_TYPE_PRESERVED_RAW\",\"raw\":\"Entrega urbana\",\"rawWireLexeme\":\"NOT_APPLICABLE_NON_NUMERIC_TOKEN\"},\"fit_crn_psn_nickname\":{\"path\":\"/fit_crn_psn_nickname\",\"presence\":\"VALUE\",\"provenance\":\"DATAEXPORT_8656\",\"parseState\":\"PRESERVED_OR_STRICTLY_PARSED_BY_NAMED_FIELD\",\"typedState\":\"UNVERIFIED_SOURCE_TYPE_PRESERVED_RAW\",\"raw\":\"FILIAL EMISSORA SINTÉTICA\",\"rawWireLexeme\":\"NOT_APPLICABLE_NON_NUMERIC_TOKEN\"},\"fit_dpn_delivery_prediction_at\":{\"path\":\"/fit_dpn_delivery_prediction_at\",\"presence\":\"VALUE\",\"provenance\":\"DATAEXPORT_8656\",\"parseState\":\"PRESERVED_OR_STRICTLY_PARSED_BY_NAMED_FIELD\",\"typedState\":\"UNVERIFIED_SOURCE_TYPE_PRESERVED_RAW\",\"raw\":\"2036-04-04T10:00:00-03:00\",\"rawWireLexeme\":\"NOT_APPLICABLE_NON_NUMERIC_TOKEN\"},\"fit_dyn_name\":{\"path\":\"/fit_dyn_name\",\"presence\":\"VALUE\",\"provenance\":\"DATAEXPORT_8656\",\"parseState\":\"PRESERVED_OR_STRICTLY_PARSED_BY_NAMED_FIELD\",\"typedState\":\"UNVERIFIED_SOURCE_TYPE_PRESERVED_RAW\",\"raw\":\"REGIÃO DESTINO SINTÉTICA\",\"rawWireLexeme\":\"NOT_APPLICABLE_NON_NUMERIC_TOKEN\"},\"fit_dyn_drt_nickname\":{\"path\":\"/fit_dyn_drt_nickname\",\"presence\":\"VALUE\",\"provenance\":\"DATAEXPORT_8656\",\"parseState\":\"PRESERVED_OR_STRICTLY_PARSED_BY_NAMED_FIELD\",\"typedState\":\"UNVERIFIED_SOURCE_TYPE_PRESERVED_RAW\",\"raw\":\"FILIAL DESTINO SINTÉTICA\",\"rawWireLexeme\":\"NOT_APPLICABLE_NON_NUMERIC_TOKEN\"},\"fit_fsn_name\":{\"path\":\"/fit_fsn_name\",\"presence\":\"VALUE\",\"provenance\":\"DATAEXPORT_8656\",\"parseState\":\"PRESERVED_OR_STRICTLY_PARSED_BY_NAMED_FIELD\",\"typedState\":\"UNVERIFIED_SOURCE_TYPE_PRESERVED_RAW\",\"raw\":\"CLASSIFICAÇÃO SINTÉTICA\",\"rawWireLexeme\":\"NOT_APPLICABLE_NON_NUMERIC_TOKEN\"},\"fit_fln_status\":{\"path\":\"/fit_fln_status\",\"presence\":\"VALUE\",\"provenance\":\"DATAEXPORT_8656\",\"parseState\":\"PRESERVED_OR_STRICTLY_PARSED_BY_NAMED_FIELD\",\"typedState\":\"STRICT_TYPED_COLUMN\",\"raw\":\"done\",\"rawWireLexeme\":\"NOT_APPLICABLE_NON_NUMERIC_TOKEN\"},\"fit_fln_cln_nickname\":{\"path\":\"/fit_fln_cln_nickname\",\"presence\":\"VALUE\",\"provenance\":\"DATAEXPORT_8656\",\"parseState\":\"PRESERVED_OR_STRICTLY_PARSED_BY_NAMED_FIELD\",\"typedState\":\"UNVERIFIED_SOURCE_TYPE_PRESERVED_RAW\",\"raw\":\"PÁTIO SINTÉTICO\",\"rawWireLexeme\":\"NOT_APPLICABLE_NON_NUMERIC_TOKEN\"},\"fit_o_n_name\":{\"path\":\"/fit_o_n_name\",\"presence\":\"VALUE\",\"provenance\":\"DATAEXPORT_8656\",\"parseState\":\"PRESERVED_OR_STRICTLY_PARSED_BY_NAMED_FIELD\",\"typedState\":\"UNVERIFIED_SOURCE_TYPE_PRESERVED_RAW\",\"raw\":\"REGIÃO ORIGEM SINTÉTICA\",\"rawWireLexeme\":\"NOT_APPLICABLE_NON_NUMERIC_TOKEN\"},\"fit_o_n_drt_nickname\":{\"path\":\"/fit_o_n_drt_nickname\",\"presence\":\"VALUE\",\"provenance\":\"DATAEXPORT_8656\",\"parseState\":\"PRESERVED_OR_STRICTLY_PARSED_BY_NAMED_FIELD\",\"typedState\":\"UNVERIFIED_SOURCE_TYPE_PRESERVED_RAW\",\"raw\":\"FILIAL ORIGEM SINTÉTICA\",\"rawWireLexeme\":\"NOT_APPLICABLE_NON_NUMERIC_TOKEN\"}},\"policy\":{\"matrix\":\"LOCALIZACAO_8656_17_PATHS_V1\",\"freightVolumeFallback\":\"FREIGHT_VOLUME_FALLBACK_DEFERRED_RELATION_AND_PUBLICATION\",\"statusBranchNickname\":{\"path\":\"ABSENT\",\"presence\":\"ABSENT\",\"provenance\":\"UNSOURCED_LEGACY\"}}}",
+      "VALID",
+      "<NULL>",
+      "\"2036-04-01T03:00:00Z\"",
+      "2036-04-01T03:00:00",
+      "\"3\"",
+      "3",
+      "\"45.125\"",
+      "45.125000000",
+      "\"120\"",
+      "120.000000000",
+      "\"120\"",
+      "120.000000000",
+      "done",
+      "done",
+      "0",
+      "UNSOURCED_LEGACY"
+    ]
+  },
+  "hashes": [
+    {
+      "root": 1,
+      "sha256": "9af28acece7a9707674653d65352dfe37e6f2934ffc0813f05f651f2a1236386"
+    },
+    {
+      "root": 2,
+      "sha256": "8fedb6d2c2a14693fee483960320eb22d32f2947e0ebe6d145c7f323a5d7bed0"
+    },
+    {
+      "root": 3,
+      "sha256": "481a76328751d8b69aaa1e13c5dfa1353a6c07f620d18f8deef6bc8469208dfc"
+    },
+    {
+      "root": 4,
+      "sha256": "c2a018aad0d4f69a3b3ab8000fe0c28dc5a0e44f0876e1b75afb0fe2e976d452"
+    },
+    {
+      "root": 5,
+      "sha256": "b4c8c95ccfc0408a128a4f204d3958637b2d221487f2d55d181970f5caeca28e"
+    },
+    {
+      "root": 6,
+      "sha256": "c47dfad6227175e834f242510498d6f2cb37afa52fa037dd0c2fe7ea43fc12e2"
+    },
+    {
+      "root": 7,
+      "sha256": "5a3845390a82d37969e10adcbd32aaced5fcad47fb214c8c23cb4284ed6fed58"
+    },
+    {
+      "root": 8,
+      "sha256": "7b14f656ccf462788b15163507ec348b370d59e33d5d49497ba08cc5f81d3ff4"
+    },
+    {
+      "root": 9,
+      "sha256": "7aefb62f19052505e998eb369178593db8206ffb691e257af58366a9c54cb063"
+    },
+    {
+      "root": 10,
+      "sha256": "775c59547f1b2682ed3ec8fa8744ab7f9d556a9e41cb23eba4f25f1920f40b9a"
+    },
+    {
+      "root": 11,
+      "sha256": "65597b611a85046ef6979ba9dfd730b5835401a4ac7be3dd14d52b50595b3c68"
+    },
+    {
+      "root": 12,
+      "sha256": "b804da1adfaad09da626e64fe2f7cc647243ff7aaa146ae7a160369603aaa703"
+    },
+    {
+      "root": 13,
+      "sha256": "caf396499e29527688d0f3dd426d8ed424736168f8743b3b3a4887303339f577"
+    },
+    {
+      "root": 14,
+      "sha256": "ae5ad299bf1ad6cb35bba905b1425108543b3093917b01ef821ac87c1b244361"
+    },
+    {
+      "root": 15,
+      "sha256": "9c487e830ca9302aec63d9f308f1ae6d775b80c58329d55d730bebf9c932bb89"
+    },
+    {
+      "root": 16,
+      "sha256": "e9ac5e33f760b8847b19be3f7b673a9ebe48ac0cade54625dd75e02b018cab3b"
+    },
+    {
+      "root": 17,
+      "sha256": "f1de0d6aebe89c8f36a96057e1b204e445bceead82c744f5c86b12bbbc5b8313"
+    },
+    {
+      "root": 18,
+      "sha256": "1fccbcfd4656efcbe3462bd46899ebe2b7e260293e68092c027f3251644780a8"
+    },
+    {
+      "root": 19,
+      "sha256": "f5a0aa2594de48dd36499b6055650a0894dd66cdae6de68a6db29fa4e13bf779"
+    },
+    {
+      "root": 20,
+      "sha256": "a1eaef9bc8178cfc8e9fc0665c0f137dafcc667055b33c6142af17b47b0a016e"
+    },
+    {
+      "root": 21,
+      "sha256": "7dce982fb310a220c4f95bd7911bb7e1fbc1a2278699963c18562e8e913dd529"
+    },
+    {
+      "root": 22,
+      "sha256": "a4921c12965c156abf20403b07f38fa89f7df94fa53f178207ca01c5ca9ead9a"
+    },
+    {
+      "root": 23,
+      "sha256": "5dca4cbeb0bcc89d0f068c19a4c4fbc689a40314e620ba2b2771c35e8b739a00"
+    },
+    {
+      "root": 24,
+      "sha256": "f5a8c369e46415d267cf17aa4d29350b0063f898833855a748425974e2b482f6"
+    },
+    {
+      "root": 25,
+      "sha256": "9079fb1898c491375435f03faa2493bf8791cb01acdc62aca4df8501c5393fe7"
+    },
+    {
+      "root": 26,
+      "sha256": "e27892453a27ea112740f1f4eb861842aed87e08bbe1c333efe1a91b235ce06a"
+    },
+    {
+      "root": 27,
+      "sha256": "a97be8f951fa92676026194bf4c16d84ab389bca4c7e33cc728522ccb7a55f2d"
+    },
+    {
+      "root": 28,
+      "sha256": "9e250822b5f9674e9811ad89b881b5abd3eb5450c79c2905ea3c024ac14a7911"
+    },
+    {
+      "root": 29,
+      "sha256": "d8b426663f790954142ecdb832539c068fe112442cbe0bb992fea2c6e6da0788"
+    },
+    {
+      "root": 30,
+      "sha256": "ba092e50e5bab477b7c71be44f21141f3fa6bbf3f3555d2ae8bd2b9fbf75723e"
+    },
+    {
+      "root": 31,
+      "sha256": "fe7d9bc05a7f89e0f1e8e7a7e27a6bb607d205db9a15b4020f057b9c89f5da50"
+    },
+    {
+      "root": 32,
+      "sha256": "989c2f2cd09e5cf007a95880ec02e961a4c309a0998be70124659ca9992ff0d2"
+    }
+  ]
+}

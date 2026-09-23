@@ -197,6 +197,7 @@ public final class ContractTestConfiguration {
         return switch (Objects.requireNonNull(template, "O template Data Export é obrigatório.")) {
             case COLETAS -> coletasWindows;
             case FRETES -> fretesWindows;
+            default -> throw new IllegalArgumentException("FIRST_WAVE_PROBE_ONLY");
         };
     }
 
@@ -266,7 +267,8 @@ public final class ContractTestConfiguration {
             final Map<String, String> environment) {
         final Map<DataExportTemplate, Integer> maximumCalls =
                 new EnumMap<>(DataExportTemplate.class);
-        for (final DataExportTemplate template : DataExportTemplate.values()) {
+        for (final DataExportTemplate template :
+                java.util.List.of(DataExportTemplate.COLETAS, DataExportTemplate.FRETES)) {
             final String key = "CONTRACT_" + template.templateId() + "_MAX_CALLS";
             maximumCalls.put(template, requiredPositiveInteger(environment, key));
         }
@@ -316,7 +318,8 @@ public final class ContractTestConfiguration {
             final Map<String, String> environment) {
         final Map<DataExportTemplate, ContractTemplateConfirmation> confirmations =
                 new EnumMap<>(DataExportTemplate.class);
-        for (final DataExportTemplate template : DataExportTemplate.values()) {
+        for (final DataExportTemplate template :
+                java.util.List.of(DataExportTemplate.COLETAS, DataExportTemplate.FRETES)) {
             final String prefix = "CONTRACT_" + template.templateId() + "_";
             confirmations.put(
                     template,

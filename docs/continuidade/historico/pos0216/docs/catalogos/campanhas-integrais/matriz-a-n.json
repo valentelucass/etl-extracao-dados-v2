@@ -1,0 +1,343 @@
+{
+  "version": 1,
+  "status": "EM_EXECUCAO",
+  "fronts": [
+    {
+      "id": "A",
+      "title": "Admissao e sucessao",
+      "statesUnits": [
+        "V2-017",
+        "V2-039"
+      ],
+      "requiredEvidence": "Baseline0165 e provas anteriores preservadas",
+      "dependencies": "Nenhuma",
+      "status": "EM_EXECUCAO",
+      "proofs": [],
+      "limitations": [],
+      "reviewP06": {
+        "report": "P06-REVISAO-POS0202.md",
+        "status": "SEM_NOVO_ACEITE_P06",
+        "physicalConsumption": 0
+      }
+    },
+    {
+      "id": "B",
+      "title": "Contrato executavel da sequencia",
+      "statesUnits": [
+        "V2-018",
+        "V2-022",
+        "V2-044"
+      ],
+      "requiredEvidence": "Envelope versionado fechado, hashes e DAG, recusas antes dos efeitos",
+      "dependencies": "A",
+      "status": "ACEITO_NO_ESCOPO",
+      "proofs": [
+        "P03-B-H-RECONCILIACAO-20260919.md: B; p03-campaign-sql-07/LocalArtifactSequenceTest 25 unit PASS"
+      ],
+      "limitations": [
+        "Aceito somente como predecessor tecnico local de P04; nao e fonte real, P03 agregado ou aceite de pai V2."
+      ],
+      "reviewP06": {
+        "report": "P06-REVISAO-POS0202.md",
+        "status": "CONTRATO_REVALIDADO_OFFLINE_ACEITE_FISICO_HISTORICO",
+        "physicalConsumption": 0
+      }
+    },
+    {
+      "id": "C",
+      "title": "Executor integrado",
+      "statesUnits": [
+        "V2-021",
+        "V2-022"
+      ],
+      "requiredEvidence": "Consumidor src/main e estado entre etapas via JAR,11familias sem fallback",
+      "dependencies": "B",
+      "status": "ACEITO_NO_ESCOPO",
+      "proofs": [
+        "P03-B-H-RECONCILIACAO-20260919.md: C; p03-campaign-sql-07/IntegralCampaignIT 2 IT PASS"
+      ],
+      "limitations": [
+        "Nao prova supervisor em subprocesso, journal ou recibo P04.",
+        "A prova citada e in-process: nao satisfaz sozinha a parcela via JAR do requiredEvidence. Essa parcela permanece no gate M/P08; conferir implementacao e dependencias atuais alem dos pins de testes antes do proximo efeito."
+      ],
+      "reviewP06": {
+        "report": "P06-REVISAO-POS0202.md",
+        "status": "PROVA_HISTORICA_PRESERVADA_REQUALIFICAR_SESSAO_JAR_EM_P07_P08",
+        "physicalConsumption": 0
+      }
+    },
+    {
+      "id": "D",
+      "title": "Modos, revisao e idempotencia",
+      "statesUnits": [
+        "V2-020",
+        "V2-022"
+      ],
+      "requiredEvidence": "Replay e revisao posterior por arquivos; modo efetivo por familia",
+      "dependencies": "C",
+      "status": "ACEITO_NO_ESCOPO",
+      "proofs": [
+        "P03-B-H-RECONCILIACAO-20260919.md: D; p03-campaign-sql-07 e p03-regression-sql-01 reutilizado por pin"
+      ],
+      "limitations": [
+        "Nao concede recovery duravel apos perda de JVM."
+      ],
+      "reviewP06": {
+        "report": "P06-REVISAO-POS0202.md",
+        "status": "PROVA_HISTORICA_PRESERVADA_REQUALIFICAR_SESSAO_JAR_EM_P07_P08",
+        "physicalConsumption": 0
+      }
+    },
+    {
+      "id": "E",
+      "title": "Agenda e dependencias",
+      "statesUnits": [
+        "V2-020",
+        "V2-022",
+        "V2-043"
+      ],
+      "requiredEvidence": "Politicas aplicaveis efetivamente consumidas e fronteira contigua",
+      "dependencies": "C,D",
+      "status": "ACEITO_NO_ESCOPO",
+      "proofs": [
+        "P03-B-H-RECONCILIACAO-20260919.md: E; p03-campaign-sql-07/IntegralCampaignIT 2 IT PASS"
+      ],
+      "limitations": [
+        "A correcao temporal da fixture foi provada offline; P04 supervisor requer nova reserva autorizada."
+      ],
+      "reviewP06": {
+        "report": "P06-REVISAO-POS0202.md",
+        "status": "PROVA_HISTORICA_PRESERVADA_REQUALIFICAR_SESSAO_JAR_EM_P07_P08",
+        "physicalConsumption": 0
+      }
+    },
+    {
+      "id": "F",
+      "title": "Referencias e recomposicao",
+      "statesUnits": [
+        "V2-035",
+        "V2-036",
+        "V2-037",
+        "V2-046"
+      ],
+      "requiredEvidence": "Revisao declarada de apoios e recomposicao sem reextracao desnecessaria",
+      "dependencies": "C,D",
+      "status": "ACEITO_NO_ESCOPO",
+      "proofs": [
+        "P03-B-H-RECONCILIACAO-20260919.md: F; p03-campaign-sql-07/SequenceReferenceIT e SequenceRecompositionIT 4 IT PASS"
+      ],
+      "limitations": [
+        "Restrito a schema104 e dados sinteticos rollback-only."
+      ],
+      "reviewP06": {
+        "report": "P06-REVISAO-POS0202.md",
+        "status": "PROVA_HISTORICA_PRESERVADA_REQUALIFICAR_SESSAO_JAR_EM_P07_P08",
+        "physicalConsumption": 0
+      }
+    },
+    {
+      "id": "G",
+      "title": "Oraculos por etapa",
+      "statesUnits": [
+        "V2-012",
+        "V2-023",
+        "V2-036",
+        "V2-037"
+      ],
+      "requiredEvidence": "Cinco fatos e19SQL por etapa nos dois conjuntos; contraprovas independentes",
+      "dependencies": "B; acompanha C-F",
+      "status": "ACEITO_NO_ESCOPO",
+      "proofs": [
+        "P03-B-H-RECONCILIACAO-20260919.md: G; p03-campaign-sql-07 e p03-relational-counterproof-02 41 IT PASS"
+      ],
+      "limitations": [
+        "Nao substitui revisao P06, regressao P07 ou oraculo de fonte real."
+      ],
+      "reviewP06": {
+        "report": "P06-REVISAO-POS0202.md",
+        "status": "PROVA_HISTORICA_PRESERVADA_REQUALIFICAR_SESSAO_JAR_EM_P07_P08",
+        "physicalConsumption": 0
+      }
+    },
+    {
+      "id": "H",
+      "title": "Falhas e isolamento",
+      "statesUnits": [
+        "V2-020",
+        "V2-023",
+        "V2-043"
+      ],
+      "requiredEvidence": "Recusas e estado observado no novo executor",
+      "dependencies": "C-G",
+      "status": "ACEITO_NO_ESCOPO",
+      "proofs": [
+        "P03-B-H-RECONCILIACAO-20260919.md: H; p03-regression-sql-01/SequenceFailureIT e IntegralContextIsolationIT reutilizados por pin"
+      ],
+      "limitations": [
+        "Nao substitui os criterios P04 de cancelamento, recibos parciais e retomada."
+      ],
+      "reviewP06": {
+        "report": "P06-REVISAO-POS0202.md",
+        "status": "PROVA_HISTORICA_PRESERVADA_REQUALIFICAR_SESSAO_JAR_EM_P07_P08",
+        "physicalConsumption": 0
+      }
+    },
+    {
+      "id": "I",
+      "title": "Supervisor e recuperacao",
+      "statesUnits": [
+        "V2-022",
+        "V2-038"
+      ],
+      "requiredEvidence": "Journal, owner, resume e rollback sem falsa durabilidade de dominio",
+      "dependencies": "B,C,H",
+      "status": "ACEITO_NO_ESCOPO",
+      "proofs": [
+        "p04-0185-01: journal 4/4, cancellation 3/3 and concurrency 1/1 PASS; rollback aggregate equal; supervisor/resume blocked before worker by missing package artifact.",
+        "p04-0185-02: package artifact assembled and rollback aggregate equal; resume 4 errors of 6 from Windows classpath wildcard; attempt stopped at the 240-second step ceiling.",
+        "p04-requalificacao-physical-01: JAR/runtime libraries assembled before Failsafe; 12 units, cancellation 3/3 and concurrency 1/1 PASS; resume 2/6 and four exit-2 failures; historical timeout interpretation corrected by checkpoint0188: shallow stderr establishes QUAL_PACKAGE_RUNTIME_CLASSPATH, not a stage deadline.",
+        "p04-requalificacao-physical-02: 16 units, cancellation 3/3, concurrency 1/1 and resume 6/6 PASS; four bootstrap workers PASS_LOCAL with rollback. Sequence worker FAILED LOCAL_SCENARIO_ORACLE_BINDING; controller OBSERVED exit-1, rollback=true and aggregates equal after owned-tree containment. P04-I-J-RECONCILIACAO-20260920.md.",
+        "p04-0190-physical-01:16 units and15 ITs PASS; contained before sequence worker after offline reproduction of supervisor exploded-runtime binding mismatch; rollback and aggregate equality. p04-0190-bridge-final-offline:18 tests PASS for corrected test-only author/supervisor JAR bridge; no physical acceptance inferred. P04-CONTINUIDADE-0190.md.",
+        "P04-P05-POS0193-01: two finite P04 reservations consumed. 16 unit tests and four IT classes PASS in P04-02, but QualificationSequenceSupervisorIT XML is absent after owned-tree containment; controller guard corrected offline to reject missing requested reports with exit127. Rollback aggregate equality and zero owned processes reconfirmed.",
+        "P04-P05-POS0194-01: preflight 18/18 PASS; the single Physical attempt retained rollback equality and zero owned processes. Supervisor elapsed 2405.848 s, exceeding the 1800 s sequence limit, and XML has 5 tests with 1 failed late-oracle assertion (33 expected previews, 0 observed); controller exit127 also classified reports as missing from the workspace path. P04-P05-POS0194.md.",
+        "P04-P05-POS0196-20260920-01: corrected report guard 10/10 and private supervisor assertions 2/2 PASS offline/JDK17; canonical ArtifactDirected preflight exit124 at 240s while PackagedFixtureBindingIT ran, so no physical I evidence.",
+        "POS0198:72 offline tests and canonical ArtifactDirected18/18 PASS with unchanged240s controller; P04#1 reserved2026-09-20T21:52:44Z, physical result pending. No acceptance inferred.",
+        "POS0198/P04#1:20 physical IT and20 unit tests PASS; three sequence receipts, terminal journals, rollback,246 aggregate counts equal,2076 source/schema inputs matched,zero owned processes. p04-acceptance.json; P04-P05-POS0198-20260920.md."
+      ],
+      "limitations": [
+        "As duas tentativas da ordem de requalificacao foram consumidas. Classpath corrigido e provado nos workers; novo vinculo de runtime da fixture deve ser corrigido e validado offline antes de nova autorizacao fisica finita.",
+        "P03 permanece predecessor técnico local; I não é recuperação durável, aceite agregado ou prova de JAR P08.",
+        "A conclusao historica de0187 sobre inelegibilidade da segunda tentativa foi retificada em0188; a tentativa02 foi consumida e parou no primeiro recibo inesperado. Sequencia integral/recibos parciais/cancelamento de sequencia nao comprovados.",
+        "A campanha unica da continuidade0190 tambem foi consumida. Correcao final da ponte do supervisor comprovada offline, ainda sem prova fisica integral; nao reabrir reservas nem inferir aceite de I.",
+        "P04-P05-POS0193-01 consumed both P04 attempts. The missing supervisor report is a qualification gap, not a PASS from the wrapper; a new finite authorization and a complete physical receipt would be required.",
+        "P04-P05-POS0194-01 consumed its sole P04 reservation without qualification. Do not repeat or infer I acceptance from partial reports.",
+        "P02/0196 retifica somente a inferencia temporal: 2405.848 s e total de cinco testes; maximo 758.817 s; recibos abaixo 1800 s e etapas abaixo 240 s. Assercao terminal e caminho do guard demonstrados offline; compilacao JDK17 e Spotless PASS. Guard inalterado; XML historico 5/1/0/0 preservado. P02-DIAGNOSTICO-POS0194.md.",
+        "P04-P05-POS0196-20260920-01 has no physical reservation. Its exact preflight timed out at 240s in PackagedFixtureBindingIT; resolve and reprove the binding/preflight locally before P04.",
+        "Current POS0198 acceptance supersedes prior qualification gaps only for local synthetic I/J. Historical failures remain; no parent V2, durable domain recovery, apply, P06-P08, real parity or production acceptance."
+      ],
+      "reviewP06": {
+        "report": "P06-REVISAO-POS0202.md",
+        "status": "PROVA_HISTORICA_PRESERVADA_REQUALIFICAR_SESSAO_JAR_EM_P07_P08",
+        "physicalConsumption": 0
+      }
+    },
+    {
+      "id": "J",
+      "title": "Preview e completude",
+      "statesUnits": [
+        "V2-013"
+      ],
+      "requiredEvidence": "33responsabilidades, recusas de incompletude e apply preservadas",
+      "dependencies": "C,G",
+      "status": "ACEITO_NO_ESCOPO",
+      "proofs": [
+        "p04-0185-01 and p04-0185-02: IntegralSweepEdgesIT 5/5 PASS with rollback aggregate equality.",
+        "p04-requalificacao-physical-01: IntegralSweepEdgesIT 5/5 PASS and aggregate readback equal after containment.",
+        "p04-requalificacao-physical-02: IntegralSweepEdgesIT 5/5 PASS, incluindo33 previews e recusas de apply Java/SQL; rollback agregado igual. Sequencia nao concluida.",
+        "p04-0190-physical-01: IntegralSweepEdgesIT5/5 PASS novamente;33 previews e recusas apply. Ponte final passou offline18/18, mas sequencia fisica completa segue pendente.",
+        "P04-P05-POS0193-01: IntegralSweepEdgesIT5/5 PASS in both contained attempts; it does not replace the absent complete supervisor report or sealed sequence receipt.",
+        "P04-P05-POS0194-01: IntegralSweepEdgesIT 5/5 PASS in the isolated build, with rollback confirmed; supervisor failure and controller exit127 prevent aggregate P04 acceptance.",
+        "P04-P05-POS0196-20260920-01: real receipt helper accepts the late 33/33/33/33/0 shape and rejects four mutations offline; it does not substitute a physical sequence receipt.",
+        "POS0198:72 offline tests and canonical ArtifactDirected18/18 PASS with unchanged240s controller; P04#1 reserved2026-09-20T21:52:44Z, physical result pending. No acceptance inferred.",
+        "POS0198/P04#1:20 physical IT and20 unit tests PASS; three sequence receipts, terminal journals, rollback,246 aggregate counts equal,2076 source/schema inputs matched,zero owned processes. p04-acceptance.json; P04-P05-POS0198-20260920.md."
+      ],
+      "limitations": [
+        "A prova parcial de sweep/preview não substitui o receipt selado de sequência, completude por raiz e observação posterior.",
+        "A segunda tentativa condicional foi executada apos correcao causal/offline; recibo de sequencia FAILED por vinculo de runtime descompactado versus JAR, sem completude integral.",
+        "The two P04 reservations of P04-P05-POS0193-01 are consumed; P05 remains blocked because I/J were not accepted.",
+        "P04-P05-POS0194-01 did not qualify I/J; sweep evidence remains partial and cannot close J alone.",
+        "P02/0196: recibo tardio preserva quatro etapas PASS_LOCAL com 33 previews e terminal BLOCKED_DEPENDENCY com zero, conforme SEQ-06. Contraprovas JSON offline nao concedem aceite fisico nem executam P05.",
+        "P04-P05-POS0196-20260920-01 preflight is blocked; no complete physical receipt or P05 campaign exists.",
+        "Current POS0198 acceptance supersedes prior qualification gaps only for local synthetic I/J. Historical failures remain; no parent V2, durable domain recovery, apply, P06-P08, real parity or production acceptance."
+      ],
+      "reviewP06": {
+        "report": "P06-REVISAO-POS0202.md",
+        "status": "PROVA_HISTORICA_PRESERVADA_REQUALIFICAR_SESSAO_JAR_EM_P07_P08",
+        "physicalConsumption": 0
+      }
+    },
+    {
+      "id": "K",
+      "title": "Memoria, batching e SQL",
+      "statesUnits": [
+        "V2-050",
+        "V2-038"
+      ],
+      "requiredEvidence": "Quatro escalas admissiveis e medidas reais do caminho novo",
+      "dependencies": "C-I",
+      "status": "ACEITO_NO_ESCOPO",
+      "proofs": [
+        "POS0198/P05#1: SequenceScaleIT 4/4 (2,4,8,16), admission units 4/4; seven stages,19 outputs/33 previews each,12 actual SQL plans,246 aggregate counts equal per scale and campaign,rollback,zero owned processes; identical P04/P05 application JAR. p05-acceptance.json; P04-P05-POS0198-20260920.md."
+      ],
+      "limitations": [
+        "P04/I-J não foi aceito; por precedência, P05 não foi reservado nem executado.",
+        "O saldo de reserva remanescente não transforma P05 em elegível e não autoriza quatro escalas sem I/J.",
+        "P04-P05-POS0193-01 did not reserve or execute P05: both P04 reservations were consumed without I/J acceptance.",
+        "P04-P05-POS0194-01 consumed its sole P04 reservation without I/J acceptance; P05 has no reservation and was not executed.",
+        "P04-P05-POS0196-20260920-01 preserves its P05 allocation because P04 preflight did not pass; it was neither reserved nor executed.",
+        "POS0198: I/J now accepted locally; P05 is eligible but not yet reserved. Historical non-execution notes remain snapshots.",
+        "Current POS0198 local acceptance supersedes historical non-execution notes only for synthetic four-scale K. No production SLO, heap plateau, representative-volume V2-050/P27 acceptance, P06-P08 or cutover."
+      ],
+      "reviewP06": {
+        "report": "P06-REVISAO-POS0202.md",
+        "status": "PROVA_HISTORICA_PRESERVADA_REQUALIFICAR_SESSAO_JAR_EM_P07_P08",
+        "physicalConsumption": 0
+      }
+    },
+    {
+      "id": "L",
+      "title": "Revisao e regressao",
+      "statesUnits": [
+        "V2-015",
+        "V2-018",
+        "V2-039"
+      ],
+      "requiredEvidence": "Consumidores reais, compatibilidade, verify e falhas corrigidas",
+      "dependencies": "A-K",
+      "status": "EM_EXECUCAO",
+      "proofs": [],
+      "limitations": [],
+      "reviewP06": {
+        "report": "P06-REVISAO-POS0202.md",
+        "status": "REVISAO_P06_CONCLUIDA_REGRESSAO_P07_PENDENTE",
+        "physicalConsumption": 0
+      }
+    },
+    {
+      "id": "M",
+      "title": "Pacote executado",
+      "statesUnits": [
+        "V2-038",
+        "V2-039"
+      ],
+      "requiredEvidence": "JAR extraido e supervisor executam sequencias A/B, sucesso e recusas",
+      "dependencies": "L",
+      "status": "EM_EXECUCAO",
+      "proofs": [],
+      "limitations": [],
+      "reviewP06": {
+        "report": "P06-REVISAO-POS0202.md",
+        "status": "SEM_NOVO_ACEITE_P06",
+        "physicalConsumption": 0
+      }
+    },
+    {
+      "id": "N",
+      "title": "Entrega e continuidade",
+      "statesUnits": [
+        "V2-017",
+        "V2-039"
+      ],
+      "requiredEvidence": "Diff e overlay aplicados, scanner, selo/readback, sucessao e gates por parcela",
+      "dependencies": "M",
+      "status": "EM_EXECUCAO",
+      "proofs": [],
+      "limitations": [],
+      "reviewP06": {
+        "report": "P06-REVISAO-POS0202.md",
+        "status": "SEM_NOVO_ACEITE_P06",
+        "physicalConsumption": 0
+      }
+    }
+  ]
+}

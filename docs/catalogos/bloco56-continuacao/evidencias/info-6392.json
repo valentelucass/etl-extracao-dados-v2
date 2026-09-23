@@ -1,0 +1,218 @@
+{
+  "template": 6392,
+  "httpStatus": 200,
+  "curlExit": 0,
+  "bytes": 6429,
+  "elapsedMilliseconds": 696,
+  "failure": null,
+  "metadata": {
+    "fields": [
+      {
+        "name": "sequence_code",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "opening_at_date",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "occurrence_at_date",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "occurrence_at_time",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "expected_solution_date",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "insurance_claim_location",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "informed_by",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "rctrc",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "rctac",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "rcfdc",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "insurance_claim_commentary",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "list_of_claimed_products",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "customer_communication_contact_name",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "customer_communication_date",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "customer_communication_time",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "brokers_case_number",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "bo_number",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "finished_at_date",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "policy_number",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "finished_at_time",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "finished_commentary",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "internal_description",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "invoices_count",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "icm_fis_fit_corporation_sequence_number",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "icm_fis_ioe_number",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "invoices_volumes",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "invoices_weight",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "invoices_value",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "icm_fis_fit_pyr_nickname",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "customer_debits_subtotal",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "customer_credit_entries_subtotal",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "responsible_credits_subtotal",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "responsible_debit_entries_subtotal",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "insurer_credits_subtotal",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "insurance_claim_total",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "icm_crn_psn_nickname",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "icm_dvr_iil_name",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "icm_fer_name",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "icm_vie_license_plate",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "icm_ttt_ore_description",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "icm_ttt_ore_code",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "icm_ttt_treatment_at",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "icm_ttt_dealing_type",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "icm_ttt_solution_type",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      }
+    ],
+    "fieldsCount": 44,
+    "fieldsNamesOmitted": 0,
+    "filters": [
+      {
+        "name": "opening_at_date",
+        "declaredType": "date"
+      },
+      {
+        "name": "corporation_id",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "by_freight_payer_id",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      },
+      {
+        "name": "by_invoice_number",
+        "declaredType": "numeric"
+      },
+      {
+        "name": "by_freight_document_number",
+        "declaredType": "numeric"
+      },
+      {
+        "name": "status",
+        "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+      }
+    ],
+    "filtersCount": 6,
+    "filtersNamesOmitted": 0
+  }
+}

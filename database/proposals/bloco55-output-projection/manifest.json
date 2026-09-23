@@ -1,0 +1,24 @@
+{
+  "phase": "SCHEMA_ONLY_FORWARD_CORRECTION",
+  "database": "localhost/ETL_SISTEMA_V2_SHADOW",
+  "previousCatalog": "cbfe100d695d91da1165d31099bdfabb6b54104fba1a57befee5f67770de6c52",
+  "previousRows": 6749,
+  "migration": "V023__correct_scoped_runtime_output_projection.sql",
+  "migrationSha256": "053d5c40223f515dff3f884bdc6ed0e7122ce1f9044dccd4f64f9cd4b138bd8f",
+  "grantDelta": 0,
+  "scopeDelta": 0,
+  "files": [
+    {
+      "path": "apply.sql",
+      "sha256": "768be29adb50c2793827d3f32dc807c87e95cd99c1ee01e81007a2541e9b8493"
+    },
+    {
+      "path": "recovery.md",
+      "sha256": "0a1fd22454d4512ef8e012fb35eb5558ec52d28c8e57880cf8bb325d02af5a76"
+    },
+    {
+      "path": "verify-schema.sql",
+      "sha256": "baf160c177b941f317c0cd8099c9e0375dbfaee3648003322aad24db4b23c5ec"
+    }
+  ]
+}

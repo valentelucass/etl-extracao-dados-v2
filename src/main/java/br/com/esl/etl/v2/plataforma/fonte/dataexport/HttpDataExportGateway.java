@@ -204,6 +204,9 @@ public final class HttpDataExportGateway implements DataExportGateway {
      */
     public DataExportPageFetch fetchWithDiagnostics(final DataExportPageRequest request) {
         Objects.requireNonNull(request, "A requisição Data Export é obrigatória.");
+        if (request.template().syntheticOccurrenceCapture()) {
+            throw new IllegalArgumentException("EXP_SYNTHETIC_TRANSPORT_ONLY");
+        }
         if (contractObservationConfiguration.isPresent()
                 && contractObservationConfiguration.orElseThrow().template()
                         != request.template()) {

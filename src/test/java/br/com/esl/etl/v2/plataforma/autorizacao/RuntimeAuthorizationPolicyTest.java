@@ -2,6 +2,7 @@ package br.com.esl.etl.v2.plataforma.autorizacao;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -119,7 +120,7 @@ class RuntimeAuthorizationPolicyTest {
         assertThrows(
                 NullPointerException.class,
                 () -> RuntimeRoleSet.of(RuntimeRole.RUNTIME_EXECUTOR, null));
-        assertFalse(roles.equals("not-a-role-set"));
+        assertNotEquals(roles, "not-a-role-set");
     }
 
     private void assertRequired(final RuntimeAction action, final RuntimeRole... expectedRoles) {

@@ -1,0 +1,111 @@
+{
+  "status": "PASS",
+  "scope": "Current local qualification succession, historical chain, broad trail, scanner self-test and bounded changed-document scans; no nominal acceptance or CI execution",
+  "validations": [
+    {
+      "name": "succession",
+      "receipt": {
+        "path": "target/requalificacao-pos0227-20260922-01/validation-succession-01.json",
+        "sha256": "bc792ff6e258797fc5a25148f3c4fd8368e51de4235f9858977cfcb34d83b9a9"
+      },
+      "stdout": {
+        "path": "target/requalificacao-pos0227-20260922-01/validation-succession-01.stdout.log",
+        "sha256": "ab4aadff247d0e8df88425efe5aa2b04de3f00db5dfceaa223ca109bf756dea5"
+      },
+      "stderr": {
+        "path": "target/requalificacao-pos0227-20260922-01/validation-succession-01.stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "historical-chain",
+      "receipt": {
+        "path": "target/requalificacao-pos0227-20260922-01/validation-historical-chain-01.json",
+        "sha256": "646772c0e18b72955f75289bc201209dcdae8e84382c7b3fa49824d2369194de"
+      },
+      "stdout": {
+        "path": "target/requalificacao-pos0227-20260922-01/validation-historical-chain-01.stdout.log",
+        "sha256": "e19239b443a34fc015828df53e15b4d78d506ee36424b833457d2534f2b3401b"
+      },
+      "stderr": {
+        "path": "target/requalificacao-pos0227-20260922-01/validation-historical-chain-01.stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "trail",
+      "receipt": {
+        "path": "target/requalificacao-pos0227-20260922-01/validation-trail-01.json",
+        "sha256": "edd11d09de0e33f474e9d6a02369047faf6975242d39ee68ec62009238a84e52"
+      },
+      "stdout": {
+        "path": "target/requalificacao-pos0227-20260922-01/validation-trail-01.stdout.log",
+        "sha256": "624cf8745192e08e633174136c6a19c5ec4aca77162e538068e2d18465f14e55"
+      },
+      "stderr": {
+        "path": "target/requalificacao-pos0227-20260922-01/validation-trail-01.stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "scanner-selftest",
+      "receipt": {
+        "path": "target/requalificacao-pos0227-20260922-01/validation-scanner-selftest-01.json",
+        "sha256": "645768fd825ac35271f65054186c65bc9afd761077418976fefa22d4c9ccd327"
+      },
+      "stdout": {
+        "path": "target/requalificacao-pos0227-20260922-01/validation-scanner-selftest-01.stdout.log",
+        "sha256": "00a6cfb66a5247f20cb0a75cb7a67815f15a9693b7b811127cd24c01ddcc4f4a"
+      },
+      "stderr": {
+        "path": "target/requalificacao-pos0227-20260922-01/validation-scanner-selftest-01.stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "scan-catalog",
+      "receipt": {
+        "path": "target/requalificacao-pos0227-20260922-01/validation-scan-catalog-01.json",
+        "sha256": "69290dab716ba81b2a7064e90d0ef42c50d5e5f1e25a29b4bd5e635e7b87695a"
+      },
+      "stdout": {
+        "path": "target/requalificacao-pos0227-20260922-01/validation-scan-catalog-01.stdout.log",
+        "sha256": "ae2e188d8cf9d5df21a79f7c7b9a2406a52f52f3d269b43b0aaeca65117fbdd4"
+      },
+      "stderr": {
+        "path": "target/requalificacao-pos0227-20260922-01/validation-scan-catalog-01.stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "scan-scripts",
+      "receipt": {
+        "path": "target/requalificacao-pos0227-20260922-01/validation-scan-scripts-01.json",
+        "sha256": "d67224506f66222854e406e378fe349f95a8e5202263d9ef94b1c9d5447de6c9"
+      },
+      "stdout": {
+        "path": "target/requalificacao-pos0227-20260922-01/validation-scan-scripts-01.stdout.log",
+        "sha256": "85f7c876d86afa44c6343389a2f1e041e0609385f4bb0e57637c280df506baef"
+      },
+      "stderr": {
+        "path": "target/requalificacao-pos0227-20260922-01/validation-scan-scripts-01.stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "scan-checkpoints",
+      "receipt": {
+        "path": "target/requalificacao-pos0227-20260922-01/validation-scan-checkpoints-01.json",
+        "sha256": "35fde44e683d01040aaa73d0b50eebbe389bba8a041816e2848b4957caadd731"
+      },
+      "stdout": {
+        "path": "target/requalificacao-pos0227-20260922-01/validation-scan-checkpoints-01.stdout.log",
+        "sha256": "a74fd165a671227ee77bc3580ea329ac0fa0580fce30d392cb6b6a89244ad368"
+      },
+      "stderr": {
+        "path": "target/requalificacao-pos0227-20260922-01/validation-scan-checkpoints-01.stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  ]
+}

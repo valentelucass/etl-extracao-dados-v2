@@ -1,0 +1,46 @@
+{
+  "fields": [
+    {
+      "name": "sequence_code",
+      "type": "integer"
+    },
+    {
+      "name": "requested_at",
+      "type": "string"
+    },
+    {
+      "name": "qoe_qes_fit_nse_issued_at",
+      "type": "string"
+    },
+    {
+      "name": "qoe_qes_fit_fhe_cte_issued_at",
+      "type": "string"
+    },
+    {
+      "name": "qoe_qes_total",
+      "type": "string"
+    },
+    {
+      "name": "qoe_crn_psn_nickname",
+      "type": "string"
+    },
+    {
+      "name": "qoe_uer_name",
+      "type": "string"
+    },
+    {
+      "name": "qoe_qes_ony_sae_code",
+      "type": "string"
+    },
+    {
+      "name": "qoe_qes_diy_sae_code",
+      "type": "string"
+    }
+  ],
+  "filters": [
+    {
+      "name": "quotes.requested_at",
+      "type": "date"
+    }
+  ]
+}

@@ -6,7 +6,8 @@ Executa uma prova financeira sanitizada, estritamente read-only, entre 6908, 638
 .DESCRIPTION
 Usa somente curl.exe, respostas em memória e queries GraphQL estáticas. A saída contém somente
 contagens, flags e classificações; não grava nem imprime URL, token, payload, cursor, ID ou valor.
-O exemplo de janela fechada atualmente recomendado é 2026-01-02.
+Cada execucao exige uma ordem que declare a janela fechada e o teto; a data do
+exemplo nao constitui uma janela recomendada.
 
 .EXAMPLE
 pwsh -NoProfile -File .\scripts\probes\Invoke-DataExportFinancialProbeMinimal.ps1 -ClosedDate 2026-01-02
@@ -25,12 +26,15 @@ param(
     [int]$PageSize = 100,
 
     [Parameter(ParameterSetName = 'Probe')]
-    [ValidateRange(1, 10)]
+    [ValidateRange(1, 35)]
     [int]$MaxCalls = 10,
 
     [Parameter(ParameterSetName = 'Probe')]
     [ValidateRange(0, 10)]
-    [int]$InterCallDelaySeconds = 1,
+    [int]$InterCallDelaySeconds = 2,
+
+    [ValidateRange(2, 9)]
+    [int]$MaximumPagesPerSource = 2,
 
     [Parameter(Mandatory, ParameterSetName = 'SelfTest')]
     [switch]$SelfTest
@@ -38,13 +42,28 @@ param(
 
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
+. (Join-Path $PSScriptRoot 'DataExportProbeGate.ps1')
 
 $MaxResponseBytes = 10MB
 $CurlTimeoutSeconds = 30
 $CurlConnectTimeoutSeconds = 10
 $CaptureOverheadBytes = 512
 $GraphQlFirst = 100
-$MaximumPagesPerSource = 2
+$processingStage = 'INITIALIZATION'
+
+trap {
+    $failureState = Get-Variable -Name state -ValueOnly -ErrorAction SilentlyContinue
+    $callsAttempted = if ($failureState -is [System.Collections.IDictionary] -and $failureState.Contains('calls_attempted')) { $failureState['calls_attempted'] } else { $null }
+    $failureStage = Get-Variable -Name processingStage -ValueOnly -ErrorAction SilentlyContinue
+    [ordered]@{
+        transport = [ordered]@{ data_export = 'GET_QUERY'; graphql = 'POST_QUERY' }
+        calls_attempted = $callsAttempted
+        processing_stage = $failureStage
+        stopped = $true
+        stop_reason = 'INTERNAL_PROCESSING_FAILURE'
+    } | ConvertTo-Json -Compress
+    exit 1
+}
 
 function ConvertTo-ClosedDate {
     param([string]$Value)
@@ -64,6 +83,10 @@ function ConvertTo-ClosedDate {
 function Get-LegacyEnvPath {
     try {
         $v2Root = (Resolve-Path -LiteralPath (Join-Path $PSScriptRoot '..\..')).Path
+        $local = Join-Path $v2Root '.env'
+        if (Test-Path -LiteralPath $local -PathType Leaf) {
+            return (Resolve-Path -LiteralPath $local).Path
+        }
         $envPath = Join-Path (Split-Path -Parent $v2Root) 'etl-extracao-dados\.env'
         if (-not (Test-Path -LiteralPath $envPath -PathType Leaf)) { throw 'missing' }
         return (Resolve-Path -LiteralPath $envPath).Path
@@ -236,6 +259,7 @@ function Invoke-CurlJsonInMemory {
         Stop-Probe -State $State -Reason 'TRANSPORT_FAILURE'; return [pscustomobject]@{ Executed = $true; HttpStatus = $null; JsonParsed = $false; Json = $null }
     }
     $status = [int]$statusText
+    $State['last_http_status'] = $status
     $json = $null; $jsonParsed = $false
     try {
         $bodyText = [Text.Encoding]::UTF8.GetString($allBytes, 0, $startMarkerStart)
@@ -301,7 +325,14 @@ function Get-NestedMapScalar {
 function New-EntityIndex {
     param([string[]]$AttributeNames)
     $complete = @{}; $consistent = @{}
-    foreach ($name in $AttributeNames) { $complete[$name] = $true; $consistent[$name] = $true }
+    $normalizedAttributeNames = [Collections.Generic.List[string]]::new()
+    foreach ($name in @($AttributeNames)) {
+        if (-not [string]::IsNullOrWhiteSpace($name)) {
+            $normalizedAttributeNames.Add($name)
+            $complete[$name] = $true
+            $consistent[$name] = $true
+        }
+    }
     return [pscustomobject]@{
         IdentityValid = $true
         PhysicalRecordCount = 0
@@ -309,29 +340,40 @@ function New-EntityIndex {
         InconsistentEntityCount = 0
         EntityById = [Collections.Generic.Dictionary[string, object]]::new([StringComparer]::Ordinal)
         IdByNaturalKey = [Collections.Generic.Dictionary[string, string]]::new([StringComparer]::Ordinal)
-        AttributeNames = @($AttributeNames)
+        AttributeNames = $normalizedAttributeNames.ToArray()
         AttributeComplete = $complete
         AttributeConsistent = $consistent
     }
 }
 
 function Add-Entity {
-    param($Index, [string]$Id, [string]$NaturalKey, [System.Collections.IDictionary]$Attributes)
-    $Index.PhysicalRecordCount++
-    if ($null -eq $Id -or $null -eq $NaturalKey) { $Index.IdentityValid = $false; return }
+    param($Index, $Id, $NaturalKey, [System.Collections.IDictionary]$Attributes)
+    $script:processingStage = 'ENTITY_ADD_PHYSICAL_COUNT'
+    $Index.PhysicalRecordCount = [int]$Index.PhysicalRecordCount + 1
+    $script:processingStage = 'ENTITY_ADD_CANONICALIZE'
+    $canonicalId = ConvertTo-Scalar -Value $Id
+    $canonicalNaturalKey = ConvertTo-Scalar -Value $NaturalKey
+    if ($null -eq $canonicalId -or $null -eq $canonicalNaturalKey) { $Index.IdentityValid = $false; return }
     $existing = $null
-    if ($Index.EntityById.ContainsKey($Id)) {
-        $existing = $Index.EntityById[$Id]
-        if ($existing.NaturalKey -ne $NaturalKey) { $Index.IdentityValid = $false; $Index.InconsistentEntityCount++; return }
+    $script:processingStage = 'ENTITY_ADD_LOOKUP_ID'
+    if ($Index.EntityById.ContainsKey($canonicalId)) {
+        $existing = $Index.EntityById[$canonicalId]
+        if ($existing.NaturalKey -ne $canonicalNaturalKey) { $Index.IdentityValid = $false; $Index.InconsistentEntityCount++; return }
         $Index.DuplicatePhysicalRowCount++
-    } elseif ($Index.IdByNaturalKey.ContainsKey($NaturalKey)) {
+    $script:processingStage = 'ENTITY_ADD_LOOKUP_NATURAL_KEY'
+    } elseif ($Index.IdByNaturalKey.ContainsKey($canonicalNaturalKey)) {
         $Index.IdentityValid = $false; $Index.InconsistentEntityCount++; return
     } else {
+        $script:processingStage = 'ENTITY_ADD_BUILD_ATTRIBUTES'
         $initial = @{}
         foreach ($field in $Index.AttributeNames) { $initial[$field] = $Attributes[$field] }
-        $existing = [pscustomobject]@{ NaturalKey = $NaturalKey; Attributes = $initial }
-        $Index.EntityById[$Id] = $existing; $Index.IdByNaturalKey[$NaturalKey] = $Id
+        $existing = [pscustomobject]@{ NaturalKey = $canonicalNaturalKey; Attributes = $initial }
+        $script:processingStage = 'ENTITY_ADD_INSERT_ID'
+        [void]$Index.EntityById.Add($canonicalId, $existing)
+        $script:processingStage = 'ENTITY_ADD_INSERT_NATURAL_KEY'
+        [void]$Index.IdByNaturalKey.Add($canonicalNaturalKey, $canonicalId)
     }
+    $script:processingStage = 'ENTITY_ADD_ATTRIBUTES'
     foreach ($field in $Index.AttributeNames) {
         $value = $Attributes[$field]
         if ($null -eq $value) { $Index.AttributeComplete[$field] = $false; continue }
@@ -342,9 +384,10 @@ function Add-Entity {
 }
 
 function Get-EntityAttribute {
-    param($Index, [string]$Id, [string]$Name)
-    if (-not $Index.EntityById.ContainsKey($Id)) { return $null }
-    return $Index.EntityById[$Id].Attributes[$Name]
+    param($Index, $Id, [string]$Name)
+    $canonicalId = ConvertTo-Scalar -Value $Id
+    if ($null -eq $canonicalId -or -not $Index.EntityById.ContainsKey($canonicalId)) { return $null }
+    return $Index.EntityById[$canonicalId].Attributes[$Name]
 }
 
 function Test-StringSetsEqual {
@@ -429,6 +472,15 @@ function New-GraphQlPayload {
     return [ordered]@{ query = $query; variables = [ordered]@{ params = $params; after = $After; first = $GraphQlFirst } } | ConvertTo-Json -Compress -Depth 8
 }
 
+function Get-GraphQlEdges {
+    param($Connection)
+    $invalid = [pscustomobject]@{ Valid = $false; Edges = @() }
+    if (-not ($Connection -is [System.Collections.IDictionary]) -or -not $Connection.Contains('edges')) { return $invalid }
+    $edges = $Connection['edges']
+    if ($edges -is [string] -or -not ($edges -is [System.Collections.IList])) { return $invalid }
+    return [pscustomobject]@{ Valid = $true; Edges = $edges }
+}
+
 function Invoke-GraphQlTraversal {
     param([ValidateSet('PICK', 'FREIGHT')][string]$Kind, [datetime]$Date, [System.Uri]$Uri, [string]$Token,
         [System.Collections.IDictionary]$State, [int]$CallBudget, [int]$DelaySeconds)
@@ -436,46 +488,76 @@ function Invoke-GraphQlTraversal {
     $index = New-EntityIndex -AttributeNames $attributes
     $pickItemToSequence = [Collections.Generic.Dictionary[string, string]]::new([StringComparer]::Ordinal)
     $pickItemMappingComplete = $true; $pickItemMappingConflictCount = 0; $pages = 0; $terminal = $false; $after = $null
+    $edgeCount = 0; $invalidEdgeCount = 0; $processingFailureStage = $null
     $seenCursors = [Collections.Generic.HashSet[string]]::new([StringComparer]::Ordinal)
     $root = if ($Kind -eq 'PICK') { 'pick' } else { 'freight' }
     $naturalField = if ($Kind -eq 'PICK') { 'sequenceCode' } else { 'corporationSequenceNumber' }
     for ($page = 1; $page -le $MaximumPagesPerSource -and -not $State['stopped']; $page++) {
+        $script:processingStage = if ($Kind -eq 'PICK') { 'GRAPHQL_PICK_PAYLOAD' } else { 'GRAPHQL_FREIGHT_PAYLOAD' }
         $body = New-GraphQlPayload -Kind $Kind -Date $Date -After $after
+        $script:processingStage = if ($Kind -eq 'PICK') { 'GRAPHQL_PICK_REQUEST' } else { 'GRAPHQL_FREIGHT_REQUEST' }
         $response = Invoke-CurlJsonInMemory -Method POST -Uri $Uri -Token $Token -JsonBody $body -State $State -CallBudget $CallBudget -DelaySeconds $DelaySeconds
         $body = $null
+        $script:processingStage = if ($Kind -eq 'PICK') { 'GRAPHQL_PICK_ENVELOPE' } else { 'GRAPHQL_FREIGHT_ENVELOPE' }
         if ($State['stopped'] -or -not $response.JsonParsed -or -not ($response.Json -is [System.Collections.IDictionary]) -or
             $response.Json.Contains('errors') -or -not $response.Json.Contains('data') -or -not ($response.Json['data'] -is [System.Collections.IDictionary]) -or
             -not $response.Json['data'].Contains($root)) { if (-not $State['stopped']) { Stop-Probe -State $State -Reason 'GRAPHQL_INVALID_ENVELOPE' }; break }
         $connection = $response.Json['data'][$root]
-        if (-not ($connection -is [System.Collections.IDictionary]) -or -not $connection.Contains('edges') -or -not $connection.Contains('pageInfo') -or
-            -not ($connection['edges'] -is [System.Collections.IEnumerable]) -or -not ($connection['pageInfo'] -is [System.Collections.IDictionary])) { Stop-Probe -State $State -Reason 'GRAPHQL_INVALID_PAGE_SHAPE'; break }
+        $edgePage = Get-GraphQlEdges -Connection $connection
+        if (-not $edgePage.Valid -or -not $connection.Contains('pageInfo') -or -not ($connection['pageInfo'] -is [System.Collections.IDictionary])) { Stop-Probe -State $State -Reason 'GRAPHQL_INVALID_PAGE_SHAPE'; break }
         $pages++
-        foreach ($edge in @($connection['edges'])) {
-            if (-not ($edge -is [System.Collections.IDictionary]) -or -not $edge.Contains('node') -or -not ($edge['node'] -is [System.Collections.IDictionary])) { $index.IdentityValid = $false; continue }
-            $node = $edge['node']; $nodeAttributes = @{}
-            if ($Kind -eq 'FREIGHT') {
-                $nodeAttributes['pick_item_id'] = Get-MapScalar -Record $node -Field 'pickItemId'
-                $nodeAttributes['total'] = Get-MapScalar -Record $node -Field 'total'
-                $nodeAttributes['cte_key'] = Get-NestedMapScalar -Record $node -ObjectField 'cte' -Field 'key'
-                $nodeAttributes['accounting_credit_id'] = Get-MapScalar -Record $node -Field 'accountingCreditId'
-                $nodeAttributes['accounting_credit_installment_id'] = Get-MapScalar -Record $node -Field 'accountingCreditInstallmentId'
-            }
-            $nodeId = Get-MapScalar -Record $node -Field 'id'
-            Add-Entity -Index $index -Id $nodeId -NaturalKey (Get-MapScalar -Record $node -Field $naturalField) -Attributes $nodeAttributes
-            if ($Kind -eq 'PICK') {
-                if (-not $node.Contains('pickItems') -or -not ($node['pickItems'] -is [System.Collections.IEnumerable])) { $pickItemMappingComplete = $false; continue }
-                $itemCount = 0
-                foreach ($item in @($node['pickItems'])) {
-                    $itemId = Get-MapScalar -Record $item -Field 'id'; $sequence = Get-MapScalar -Record $node -Field 'sequenceCode'
-                    if ($null -eq $itemId -or $null -eq $sequence) { $pickItemMappingComplete = $false; continue }
-                    $itemCount++
-                    if ($pickItemToSequence.ContainsKey($itemId) -and $pickItemToSequence[$itemId] -ne $sequence) { $pickItemMappingComplete = $false; $pickItemMappingConflictCount++ }
-                    else { $pickItemToSequence[$itemId] = $sequence }
+        $edgeCount += $edgePage.Edges.Count
+        $script:processingStage = if ($Kind -eq 'PICK') { 'GRAPHQL_PICK_EDGES' } else { 'GRAPHQL_FREIGHT_EDGES' }
+        try {
+            foreach ($edge in $edgePage.Edges) {
+                $script:processingStage = if ($Kind -eq 'PICK') { 'GRAPHQL_PICK_EDGE_SHAPE' } else { 'GRAPHQL_FREIGHT_EDGE_SHAPE' }
+                if (-not ($edge -is [System.Collections.IDictionary]) -or -not $edge.Contains('node')) { $index.IdentityValid = $false; $invalidEdgeCount++; continue }
+                $script:processingStage = if ($Kind -eq 'PICK') { 'GRAPHQL_PICK_EDGE_NODE' } else { 'GRAPHQL_FREIGHT_EDGE_NODE' }
+                $node = $edge['node']; $nodeAttributes = @{}
+                if (-not ($node -is [System.Collections.IDictionary]) -or -not $node.Contains('id') -or -not $node.Contains($naturalField)) {
+                    $index.IdentityValid = $false
+                    $invalidEdgeCount++
+                    continue
                 }
-                if ($itemCount -eq 0) { $pickItemMappingComplete = $false }
+                if ($Kind -eq 'FREIGHT') {
+                    $nodeAttributes['pick_item_id'] = Get-MapScalar -Record $node -Field 'pickItemId'
+                    $nodeAttributes['total'] = Get-MapScalar -Record $node -Field 'total'
+                    $nodeAttributes['cte_key'] = Get-NestedMapScalar -Record $node -ObjectField 'cte' -Field 'key'
+                    $nodeAttributes['accounting_credit_id'] = Get-MapScalar -Record $node -Field 'accountingCreditId'
+                    $nodeAttributes['accounting_credit_installment_id'] = Get-MapScalar -Record $node -Field 'accountingCreditInstallmentId'
+                }
+                $script:processingStage = if ($Kind -eq 'PICK') { 'GRAPHQL_PICK_EDGE_ID_VALUE' } else { 'GRAPHQL_FREIGHT_EDGE_ID_VALUE' }
+                $nodeId = ConvertTo-Scalar -Value $node['id']
+                $script:processingStage = if ($Kind -eq 'PICK') { 'GRAPHQL_PICK_EDGE_NATURAL_KEY_VALUE' } else { 'GRAPHQL_FREIGHT_EDGE_NATURAL_KEY_VALUE' }
+                $nodeNaturalKey = ConvertTo-Scalar -Value $node[$naturalField]
+                if ($null -eq $nodeId -or $null -eq $nodeNaturalKey) {
+                    $index.IdentityValid = $false
+                    $invalidEdgeCount++
+                    continue
+                }
+                $script:processingStage = if ($Kind -eq 'PICK') { 'GRAPHQL_PICK_EDGE_ADD_ENTITY' } else { 'GRAPHQL_FREIGHT_EDGE_ADD_ENTITY' }
+                Add-Entity -Index $index -Id $nodeId -NaturalKey $nodeNaturalKey -Attributes $nodeAttributes
+                if ($Kind -eq 'PICK') {
+                    $script:processingStage = 'GRAPHQL_PICK_ITEMS'
+                    if (-not ($node -is [System.Collections.IDictionary]) -or -not $node.Contains('pickItems') -or -not ($node['pickItems'] -is [System.Collections.IEnumerable])) { $pickItemMappingComplete = $false; continue }
+                    $itemCount = 0
+                    foreach ($item in @($node['pickItems'])) {
+                        $itemId = Get-MapScalar -Record $item -Field 'id'; $sequence = Get-MapScalar -Record $node -Field 'sequenceCode'
+                        if ($null -eq $itemId -or $null -eq $sequence) { $pickItemMappingComplete = $false; continue }
+                        $itemCount++
+                        if ($pickItemToSequence.ContainsKey($itemId) -and $pickItemToSequence[$itemId] -ne $sequence) { $pickItemMappingComplete = $false; $pickItemMappingConflictCount++ }
+                        else { $pickItemToSequence[$itemId] = $sequence }
+                    }
+                    if ($itemCount -eq 0) { $pickItemMappingComplete = $false }
+                }
             }
+        } catch {
+            $processingFailureStage = $script:processingStage
+            Stop-Probe -State $State -Reason 'GRAPHQL_EDGE_PROCESSING_FAILURE'
+            break
         }
         if (-not $index.IdentityValid) { Stop-Probe -State $State -Reason 'GRAPHQL_INVALID_ENTITY_IDENTITY'; break }
+        $script:processingStage = if ($Kind -eq 'PICK') { 'GRAPHQL_PICK_PAGE_INFO' } else { 'GRAPHQL_FREIGHT_PAGE_INFO' }
         $pageInfo = $connection['pageInfo']
         if (-not ($pageInfo['hasNextPage'] -is [bool])) { Stop-Probe -State $State -Reason 'GRAPHQL_INVALID_PAGE_INFO'; break }
         if (-not $pageInfo['hasNextPage']) { $terminal = $true; break }
@@ -483,7 +565,7 @@ function Invoke-GraphQlTraversal {
         if ($null -eq $after -or -not $seenCursors.Add($after)) { Stop-Probe -State $State -Reason 'GRAPHQL_INVALID_CURSOR'; break }
     }
     if (-not $State['stopped'] -and -not $terminal) { Stop-Probe -State $State -Reason 'GRAPHQL_PAGE_LIMIT_REACHED' }
-    return [pscustomobject]@{ Index = $index; Pages = $pages; Terminal = $terminal; Completed = ($terminal -and $index.IdentityValid -and -not $State['stopped']); PickItemToSequence = $pickItemToSequence; PickItemMappingComplete = $pickItemMappingComplete; PickItemMappingConflictCount = $pickItemMappingConflictCount }
+    return [pscustomobject]@{ Index = $index; Pages = $pages; Terminal = $terminal; Completed = ($terminal -and $index.IdentityValid -and -not $State['stopped']); PickItemToSequence = $pickItemToSequence; PickItemMappingComplete = $pickItemMappingComplete; PickItemMappingConflictCount = $pickItemMappingConflictCount; EdgeCount = $edgeCount; InvalidEdgeCount = $invalidEdgeCount; ProcessingFailureStage = $processingFailureStage }
 }
 
 function Normalize-Cte {
@@ -515,12 +597,25 @@ function Get-FreteColetaEvidence {
     if ($candidateResolves) { foreach ($value in $candidateValues) { if (-not $DataColetas.Index.IdByNaturalKey.ContainsKey($value)) { $candidateResolves = $false; break } } }
     $baselineComplete = $GraphQlFretes.Completed -and $GraphQlFretes.Index.AttributeComplete['pick_item_id'] -and $GraphQlColetas.Completed -and $GraphQlColetas.PickItemMappingComplete -and $GraphQlFretes.Index.EntityById.Count -gt 0
     $baselineResolves = $baselineComplete
-    if ($baselineResolves) { foreach ($id in $GraphQlFretes.Index.EntityById.Keys) { if (-not $GraphQlColetas.PickItemToSequence.ContainsKey((Get-EntityAttribute -Index $GraphQlFretes.Index -Id $id -Name 'pick_item_id'))) { $baselineResolves = $false; break } } }
+    if ($baselineResolves) {
+        foreach ($id in $GraphQlFretes.Index.EntityById.Keys) {
+            $pickItemId = Get-EntityAttribute -Index $GraphQlFretes.Index -Id $id -Name 'pick_item_id'
+            if ($null -eq $pickItemId -or -not $GraphQlColetas.PickItemToSequence.ContainsKey($pickItemId)) {
+                $baselineResolves = $false
+                break
+            }
+        }
+    }
     $identity = Get-IdentityEvidence -Left $DataFretes.Index -Right $GraphQlFretes.Index -Completed ($DataFretes.Completed -and $GraphQlFretes.Completed)
     $candidateMatchesBaseline = $candidateResolves -and $baselineResolves -and $identity.canonical_ids_equal
     if ($candidateMatchesBaseline) {
         foreach ($id in $GraphQlFretes.Index.EntityById.Keys) {
-            if ((Get-EntityAttribute -Index $DataFretes.Index -Id $id -Name 'fit_p_m_pck_sequence_code') -ne $GraphQlColetas.PickItemToSequence[(Get-EntityAttribute -Index $GraphQlFretes.Index -Id $id -Name 'pick_item_id')]) { $candidateMatchesBaseline = $false; break }
+            $pickItemId = Get-EntityAttribute -Index $GraphQlFretes.Index -Id $id -Name 'pick_item_id'
+            if ($null -eq $pickItemId -or -not $GraphQlColetas.PickItemToSequence.ContainsKey($pickItemId) -or
+                (Get-EntityAttribute -Index $DataFretes.Index -Id $id -Name 'fit_p_m_pck_sequence_code') -ne $GraphQlColetas.PickItemToSequence[$pickItemId]) {
+                $candidateMatchesBaseline = $false
+                break
+            }
         }
     }
     return [ordered]@{ candidate_relation_count = $candidateValues.Count; candidate_keys_complete = $candidateComplete; candidate_keys_resolve_to_coletas = $candidateResolves; graphql_pick_item_baseline_complete = $baselineComplete; graphql_pick_item_baseline_resolves = $baselineResolves; candidate_matches_graphql_pick_baseline = $candidateMatchesBaseline; relation_confirmed = $false }
@@ -542,7 +637,9 @@ function Get-RevenueEvidence {
     $graphGroups = [Collections.Generic.Dictionary[string, decimal]]::new([StringComparer]::Ordinal)
     foreach ($id in $GraphQlFretes.Index.EntityById.Keys) {
         if (-not $DataFretes.Index.EntityById.ContainsKey($id)) { return $result }
-        $group = $GraphQlColetas.PickItemToSequence[(Get-EntityAttribute -Index $GraphQlFretes.Index -Id $id -Name 'pick_item_id')]
+        $pickItemId = Get-EntityAttribute -Index $GraphQlFretes.Index -Id $id -Name 'pick_item_id'
+        if ($null -eq $pickItemId -or -not $GraphQlColetas.PickItemToSequence.ContainsKey($pickItemId)) { return $result }
+        $group = $GraphQlColetas.PickItemToSequence[$pickItemId]
         $dataAmount = ConvertTo-StrictDecimal -Value (Get-EntityAttribute -Index $DataFretes.Index -Id $id -Name 'total')
         $graphAmount = ConvertTo-StrictDecimal -Value (Get-EntityAttribute -Index $GraphQlFretes.Index -Id $id -Name 'total')
         if ($null -eq $group -or $null -eq $dataAmount -or $null -eq $graphAmount) { return $result }
@@ -595,51 +692,112 @@ function Invoke-LocalSelfTest {
     Add-Entity -Index $index -Id 'synthetic-freight' -NaturalKey 'synthetic-sequence' -Attributes @{ total = '1.00' }
     Add-Entity -Index $index -Id 'synthetic-freight' -NaturalKey 'synthetic-sequence' -Attributes @{ total = '1.00' }
     if (-not $index.IdentityValid -or $index.EntityById.Count -ne 1 -or $index.DuplicatePhysicalRowCount -ne 1) { throw 'Falha do índice sintético.' }
+    $nullIdentityIndex = New-EntityIndex -AttributeNames @()
+    Add-Entity -Index $nullIdentityIndex -Id $null -NaturalKey $null -Attributes @{}
+    if ($nullIdentityIndex.IdentityValid -or $nullIdentityIndex.EntityById.Count -ne 0) { throw 'Falha ao recusar identidade nula.' }
+    $emptyAttributeIndex = New-EntityIndex -AttributeNames @()
+    if ($emptyAttributeIndex.AttributeNames.Count -ne 0) { throw 'Falha ao normalizar atributos vazios.' }
     $terminal = Get-DataExportRecords -Json (ConvertFrom-Json -InputObject '[]' -AsHashtable -NoEnumerate -DateKind String)
     if (-not $terminal.Valid -or $terminal.Records.Count -ne 0) { throw 'Falha ao reconhecer a página terminal sintética.' }
+    $missingPickItemIndex = New-EntityIndex -AttributeNames @('pick_item_id')
+    Add-Entity -Index $missingPickItemIndex -Id 'synthetic-missing-item' -NaturalKey 'synthetic-missing-item-key' -Attributes @{ pick_item_id = $null }
+    $missingPickItemIndex.AttributeComplete['pick_item_id'] = $true
+    $emptyIndex = New-EntityIndex -AttributeNames @()
+    Add-Entity -Index $emptyIndex -Id 'synthetic-pick' -NaturalKey 'synthetic-pick-key' -Attributes @{}
+    $emptyPickItemMap = [Collections.Generic.Dictionary[string, string]]::new([StringComparer]::Ordinal)
+    $missingPickItemEvidence = Get-FreteColetaEvidence `
+        -DataColetas ([pscustomobject]@{ Completed = $true; Index = $emptyIndex }) `
+        -DataFretes ([pscustomobject]@{ Completed = $false; Index = $emptyIndex }) `
+        -GraphQlColetas ([pscustomobject]@{ Completed = $true; Index = $emptyIndex; PickItemToSequence = $emptyPickItemMap; PickItemMappingComplete = $true }) `
+        -GraphQlFretes ([pscustomobject]@{ Completed = $true; Index = $missingPickItemIndex })
+    if ($missingPickItemEvidence.graphql_pick_item_baseline_resolves) { throw 'Falha ao recusar item GraphQL ausente.' }
+    $missingRevenueIndex = New-EntityIndex -AttributeNames @('pick_item_id', 'total')
+    Add-Entity -Index $missingRevenueIndex -Id 'synthetic-revenue' -NaturalKey 'synthetic-revenue-key' -Attributes @{ pick_item_id = $null; total = '1.00' }
+    $missingRevenueIndex.AttributeComplete['pick_item_id'] = $true
+    $missingRevenueEvidence = Get-RevenueEvidence `
+        -DataFretes ([pscustomobject]@{ Completed = $true; Index = $missingRevenueIndex }) `
+        -GraphQlFretes ([pscustomobject]@{ Completed = $true; Index = $missingRevenueIndex }) `
+        -GraphQlColetas ([pscustomobject]@{ PickItemToSequence = $emptyPickItemMap }) `
+        -Relation ([ordered]@{ candidate_matches_graphql_pick_baseline = $true })
+    if ($missingRevenueEvidence.comparable) { throw 'Falha ao recusar grupo de receita sem item.' }
+    $script:processingStage = 'SELFTEST_GRAPHQL_EDGE_SHAPE'
+    $fixturePick = ConvertFrom-Json -InputObject (Get-Content -Raw -LiteralPath (Join-Path $PSScriptRoot '..\..\src\test\resources\contracts\graphql\picks-first.json')) -AsHashtable -NoEnumerate -DateKind String
+    $fixtureEdges = Get-GraphQlEdges -Connection $fixturePick['data']['pick']
+    $invalidEdges = Get-GraphQlEdges -Connection ([ordered]@{ edges = [ordered]@{} })
+    if (-not $fixtureEdges.Valid -or $fixtureEdges.Edges.Count -ne 1 -or $invalidEdges.Valid) { throw 'Falha da forma sintética de edges GraphQL.' }
+    $script:processingStage = 'SELFTEST_GRAPHQL_NODE_IDENTITY'
+    $fixtureNode = $fixtureEdges.Edges[0]['node']
+    $fixtureNodeIndex = New-EntityIndex -AttributeNames @()
+    $fixtureNodeId = ConvertTo-Scalar -Value $fixtureNode['id']
+    $fixtureNodeNaturalKey = ConvertTo-Scalar -Value $fixtureNode['sequenceCode']
+    Add-Entity -Index $fixtureNodeIndex -Id $fixtureNodeId -NaturalKey $fixtureNodeNaturalKey -Attributes @{}
+    $nonMapNodeIndex = New-EntityIndex -AttributeNames @()
+    $nonMapNode = [object]::new()
+    Add-Entity -Index $nonMapNodeIndex -Id (Get-MapScalar -Record $nonMapNode -Field 'id') -NaturalKey (Get-MapScalar -Record $nonMapNode -Field 'sequenceCode') -Attributes @{}
+    if (-not $fixtureNodeIndex.IdentityValid -or $fixtureNodeIndex.EntityById.Count -ne 1 -or $nonMapNodeIndex.IdentityValid) { throw 'Falha na identidade sintética de nó GraphQL.' }
     $payload = New-GraphQlPayload -Kind FREIGHT -Date ([datetime]'2026-01-02') -After $null
     if (-not $payload.Contains('query') -or $payload.Contains('mutation')) { throw 'Falha da query estática sintética.' }
-    [ordered]@{ self_test = $true; network_calls = 0; cte_normalizer_passed = $true; entity_index_passed = $true; terminal_page_passed = $true; static_query_passed = $true; passed = $true } | ConvertTo-Json -Compress
+    [ordered]@{ self_test = $true; network_calls = 0; cte_normalizer_passed = $true; entity_index_passed = $true; null_identity_rejected = $true; empty_attribute_index_passed = $true; terminal_page_passed = $true; missing_pick_item_passed = $true; missing_revenue_group_passed = $true; graphql_edges_shape_passed = $true; graphql_node_identity_passed = $true; static_query_passed = $true; passed = $true } | ConvertTo-Json -Compress
 }
 
 if ($SelfTest) { Invoke-LocalSelfTest; exit 0 }
 
+$probeGate = Enter-DataExportProbeGate
+if ($null -eq $probeGate) {
+    [ordered]@{ transport = [ordered]@{ data_export = 'GET_QUERY'; graphql = 'POST_QUERY' }; calls_attempted = 0; stopped = $true; stop_reason = 'LOCAL_CONCURRENT_PROBE' } | ConvertTo-Json -Compress
+    exit 1
+}
+$probeExitCode = 0
+try {
 $date = ConvertTo-ClosedDate -Value $ClosedDate
 $envPath = Get-LegacyEnvPath
 $baseUri = ConvertTo-SafeHttpsUri -Value (Get-LastNonEmptyEnvValue -EnvPath $envPath -Name 'API_BASE_URL') -Name 'API_BASE_URL'
 $dataExportToken = Get-LastNonEmptyEnvValue -EnvPath $envPath -Name 'API_DATAEXPORT_TOKEN'
 $graphQlUri = Resolve-GraphQlUri -BaseUri $baseUri -Endpoint (Get-LastNonEmptyEnvValue -EnvPath $envPath -Name 'API_GRAPHQL_ENDPOINT')
 $graphQlToken = Get-LastNonEmptyEnvValue -EnvPath $envPath -Name 'API_GRAPHQL_TOKEN'
-$state = [ordered]@{ calls_attempted = 0; stopped = $false; stop_reason = $null }
+$state = [ordered]@{ calls_attempted = 0; stopped = $false; stop_reason = $null; last_http_status = $null }
 $coletaDefinition = [pscustomobject]@{ TemplateId = 6908; BusinessFilter = 'picks.request_date'; NaturalKey = 'sequence_code'; OrderBy = 'sequence_code asc'; Attributes = @() }
 $freteDefinition = [pscustomobject]@{ TemplateId = 6389; BusinessFilter = 'freights.service_at'; NaturalKey = 'corporation_sequence_number'; OrderBy = 'corporation_sequence_number asc'; Attributes = @('fit_p_m_pck_sequence_code', 'total', 'fit_fhe_cte_key', 'accounting_credit_id', 'accounting_credit_installment_id') }
 $invoiceDefinition = [pscustomobject]@{ TemplateId = 4924; BusinessFilter = 'freights.service_at'; NaturalKey = 'id'; OrderBy = $null; Attributes = @('fit_fhe_cte_key', 'fit_ant_value') }
+$processingStage = 'DATA_EXPORT_COLETAS'
 $dataColetas = Invoke-DataExportTraversal -Definition $coletaDefinition -Date $date -BaseUri $baseUri -Token $dataExportToken -State $state -CallBudget $MaxCalls -DelaySeconds $InterCallDelaySeconds
+$processingStage = 'DATA_EXPORT_FRETES'
 $dataFretes = if ($state['stopped']) { $null } else { Invoke-DataExportTraversal -Definition $freteDefinition -Date $date -BaseUri $baseUri -Token $dataExportToken -State $state -CallBudget $MaxCalls -DelaySeconds $InterCallDelaySeconds }
+$processingStage = 'DATA_EXPORT_FATURAS'
 $invoices = if ($state['stopped']) { $null } else { Invoke-DataExportTraversal -Definition $invoiceDefinition -Date $date -BaseUri $baseUri -Token $dataExportToken -State $state -CallBudget $MaxCalls -DelaySeconds $InterCallDelaySeconds }
+$processingStage = 'GRAPHQL_COLETAS_AUDIT'
 $graphQlColetas = if ($state['stopped']) { $null } else { Invoke-GraphQlTraversal -Kind PICK -Date $date -Uri $graphQlUri -Token $graphQlToken -State $state -CallBudget $MaxCalls -DelaySeconds $InterCallDelaySeconds }
+$processingStage = 'GRAPHQL_FRETES_AUDIT'
 $graphQlFretes = if ($state['stopped']) { $null } else { Invoke-GraphQlTraversal -Kind FREIGHT -Date $date -Uri $graphQlUri -Token $graphQlToken -State $state -CallBudget $MaxCalls -DelaySeconds $InterCallDelaySeconds }
 
+$processingStage = 'IDENTITY_EVIDENCE'
 $coletaIdentity = if ($null -eq $graphQlColetas) { [ordered]@{ completed = $false; entity_counts_equal = $false; natural_key_sets_equal = $false; canonical_ids_equal = $false } } else { Get-IdentityEvidence -Left $dataColetas.Index -Right $graphQlColetas.Index -Completed ($dataColetas.Completed -and $graphQlColetas.Completed) }
 $freteIdentity = if ($null -eq $dataFretes -or $null -eq $graphQlFretes) { [ordered]@{ completed = $false; entity_counts_equal = $false; natural_key_sets_equal = $false; canonical_ids_equal = $false } } else { Get-IdentityEvidence -Left $dataFretes.Index -Right $graphQlFretes.Index -Completed ($dataFretes.Completed -and $graphQlFretes.Completed) }
+$processingStage = 'RELATION_EVIDENCE'
 $relation = if ($null -eq $dataFretes -or $null -eq $invoices -or $null -eq $graphQlColetas -or $null -eq $graphQlFretes) { [ordered]@{ candidate_relation_count = 0; candidate_keys_complete = $false; candidate_keys_resolve_to_coletas = $false; graphql_pick_item_baseline_complete = $false; graphql_pick_item_baseline_resolves = $false; candidate_matches_graphql_pick_baseline = $false; relation_confirmed = $false } } else { Get-FreteColetaEvidence -DataColetas $dataColetas -DataFretes $dataFretes -GraphQlColetas $graphQlColetas -GraphQlFretes $graphQlFretes }
+$processingStage = 'REVENUE_EVIDENCE'
 $revenue = if ($null -eq $dataFretes -or $null -eq $graphQlFretes -or $null -eq $graphQlColetas) { [ordered]@{ comparable = $false; revenue_group_count = 0; group_sets_equal = $false; group_values_equal = $false } } else { Get-RevenueEvidence -DataFretes $dataFretes -GraphQlFretes $graphQlFretes -GraphQlColetas $graphQlColetas -Relation $relation }
+$processingStage = 'CTE_EVIDENCE'
 $cte = if ($null -eq $dataFretes -or $null -eq $invoices -or $null -eq $graphQlFretes) { [ordered]@{ data_export_frete_ctes_complete = $false; invoice_ctes_complete = $false; graphql_frete_ctes_complete = $false; data_export_frete_ctes_match_graphql = $false; invoice_ctes_cover_data_export_fretes = $false; relation_confirmed = $false } } else { Get-CteInvoiceEvidence -DataFretes $dataFretes -Invoices $invoices -GraphQlFretes $graphQlFretes }
+$processingStage = 'INVOICE_ID_EVIDENCE'
 $invoiceIds = if ($null -eq $dataFretes -or $null -eq $invoices) { [ordered]@{ comparison_completed = $false; invoice_entity_count = 0; overlapping_id_count = 0; every_invoice_id_is_a_frete_id = $false; id_equivalence_confirmed = $false } } else { Get-InvoiceIdCandidateEvidence -DataFretes $dataFretes -Invoices $invoices }
+$processingStage = 'ACCOUNTING_CLASSIFICATION'
 $accountCredit = if ($null -eq $dataFretes -or $null -eq $graphQlFretes) { 'ABSENT' } else { Get-AccountingClassification -DataFretes $dataFretes -GraphQlFretes $graphQlFretes -Attribute 'accounting_credit_id' }
 $accountInstallment = if ($null -eq $dataFretes -or $null -eq $graphQlFretes) { 'ABSENT' } else { Get-AccountingClassification -DataFretes $dataFretes -GraphQlFretes $graphQlFretes -Attribute 'accounting_credit_installment_id' }
 
+$processingStage = 'SANITIZED_SUMMARY'
 [ordered]@{
     transport = [ordered]@{ data_export = 'GET_QUERY'; graphql = 'POST_QUERY' }
     calls_attempted = $state['calls_attempted']; call_budget = $MaxCalls
+    last_http_status = $state['last_http_status']; processing_stage = $processingStage
     data_export = [ordered]@{
         coletas_6908 = Get-TraversalSummary -Traversal $dataColetas
         fretes_6389 = if ($null -eq $dataFretes) { $null } else { Get-TraversalSummary -Traversal $dataFretes }
         faturas_4924 = if ($null -eq $invoices) { $null } else { Get-TraversalSummary -Traversal $invoices -OrderingClaimed $false }
     }
     graphql = [ordered]@{
-        coletas = if ($null -eq $graphQlColetas) { $null } else { [ordered]@{ pages_executed = $graphQlColetas.Pages; terminal_observed = $graphQlColetas.Terminal; completed = $graphQlColetas.Completed; entity_count = $graphQlColetas.Index.EntityById.Count; identity_valid = $graphQlColetas.Index.IdentityValid; pick_item_mapping_complete = $graphQlColetas.PickItemMappingComplete; pick_item_mapping_conflict_count = $graphQlColetas.PickItemMappingConflictCount } }
-        fretes = if ($null -eq $graphQlFretes) { $null } else { [ordered]@{ pages_executed = $graphQlFretes.Pages; terminal_observed = $graphQlFretes.Terminal; completed = $graphQlFretes.Completed; entity_count = $graphQlFretes.Index.EntityById.Count; identity_valid = $graphQlFretes.Index.IdentityValid } }
+        coletas = if ($null -eq $graphQlColetas) { $null } else { [ordered]@{ pages_executed = $graphQlColetas.Pages; terminal_observed = $graphQlColetas.Terminal; completed = $graphQlColetas.Completed; entity_count = $graphQlColetas.Index.EntityById.Count; identity_valid = $graphQlColetas.Index.IdentityValid; edge_count = $graphQlColetas.EdgeCount; invalid_edge_count = $graphQlColetas.InvalidEdgeCount; processing_failure_stage = $graphQlColetas.ProcessingFailureStage; pick_item_mapping_complete = $graphQlColetas.PickItemMappingComplete; pick_item_mapping_conflict_count = $graphQlColetas.PickItemMappingConflictCount } }
+        fretes = if ($null -eq $graphQlFretes) { $null } else { [ordered]@{ pages_executed = $graphQlFretes.Pages; terminal_observed = $graphQlFretes.Terminal; completed = $graphQlFretes.Completed; entity_count = $graphQlFretes.Index.EntityById.Count; identity_valid = $graphQlFretes.Index.IdentityValid; edge_count = $graphQlFretes.EdgeCount; invalid_edge_count = $graphQlFretes.InvalidEdgeCount; processing_failure_stage = $graphQlFretes.ProcessingFailureStage } }
     }
     identity = [ordered]@{ coletas = $coletaIdentity; fretes = $freteIdentity }
     frete_coleta = $relation; frete_coleta_revenue = $revenue
@@ -647,4 +805,8 @@ $accountInstallment = if ($null -eq $dataFretes -or $null -eq $graphQlFretes) { 
     financial_fields = [ordered]@{ accounting_credit_id = $accountCredit; accounting_credit_installment_id = $accountInstallment; equivalence_confirmed = $false }
     stopped = $state['stopped']; stop_reason = $state['stop_reason']
 } | ConvertTo-Json -Depth 12
-if ($state['stopped']) { exit 1 }
+$probeExitCode = if ($state['stopped']) { 1 } else { 0 }
+} finally {
+    Exit-DataExportProbeGate -Gate $probeGate
+}
+exit $probeExitCode

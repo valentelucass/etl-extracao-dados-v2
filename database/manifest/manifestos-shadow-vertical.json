@@ -1,0 +1,63 @@
+{
+  "manifestVersion": 1,
+  "roadmapTask": "V2-026",
+  "route": "V04",
+  "entity": "manifestos",
+  "templateId": 6399,
+  "localState": "IMPLEMENTADA_EM_SHADOW",
+  "contract": {
+    "document": "dataexport-6399",
+    "version": "2026-09-04.v2-025b.2",
+    "releaseFingerprint": "30181093f00f47507d1910d9806a97697118ab671aeae0598d21a4a2726a7cb8"
+  },
+  "identity": {
+    "catalogVersion": "2026-09-04.v2-009b.2",
+    "fingerprint": "ad2e3457a91961372dd29cb96bd6f2cb5fd6f67614d1255303787a8e2c4085c3",
+    "root": "source_instance,tenant_scope,manifestos,INTEGER:sequence_code",
+    "pick": "root_canonical_id,INTEGER:mft_pfs_pck_sequence_code",
+    "mdfe": "root_canonical_id,STRING:mft_mfs_key"
+  },
+  "reducers": ["MAN-01", "MAN-02", "MAN-04", "MAN-07"],
+  "freshness": ["finished_at", "closed_at", "departured_at", "created_at"],
+  "competence": {
+    "primary": "departured_at",
+    "fallback": "created_at",
+    "noFallbackAfterInvalidPrimary": true
+  },
+  "objects": {
+    "staging": [
+      "stg.manifesto_observation",
+      "stg.manifesto_reduced_candidate",
+      "stg.manifesto_pick_candidate",
+      "stg.manifesto_mdfe_candidate"
+    ],
+    "core": ["core.manifesto", "core.manifesto_pick", "core.manifesto_mdfe"],
+    "reconciliation": [
+      "recon.manifesto_coleta_relation_candidate",
+      "recon.manifesto_root_presence_observation"
+    ]
+  },
+  "textPolicy": {
+    "paths": 27,
+    "unit": "UTF16_CODE_UNIT",
+    "overflow": "QUARANTINE_NO_TRUNCATION",
+    "contractNumber": "mft_cat_cot_number:50"
+  },
+  "relationshipCandidate": {
+    "path": "mft_pfs_pck_sequence_code",
+    "state": "APPEND_ONLY_UNRESOLVED_V2_046A",
+    "foreignKeyToColeta": false,
+    "lookupToColeta": false
+  },
+  "absence": "NO_SWEEP_DELETE_DEACTIVATION_OR_PUBLICATION",
+  "prohibited": [
+    "MANIFESTO_COLETA_FK",
+    "COLETA_LOOKUP",
+    "PUBLICATION",
+    "SWEEP",
+    "DELETE",
+    "ACTIVE_FALSE",
+    "MERGE",
+    "NETWORK_DISPATCH"
+  ]
+}

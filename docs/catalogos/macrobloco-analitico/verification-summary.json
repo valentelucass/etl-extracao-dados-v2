@@ -1,0 +1,585 @@
+{
+  "physicalFreshVsUpgradeEquivalenceProven": false,
+  "newAcceptances": 0,
+  "concurrency": {
+    "actualClaimAndConsumption": true,
+    "classes": [
+      "ExpansionLaboratoryConcurrencyIT",
+      "AnalyticLaboratoryConcurrencyIT",
+      "AnalyticScenarioPlanIT"
+    ],
+    "rollbackThenConsumption": true,
+    "realDistinctSpids": true
+  },
+  "durableDomainRows": 0,
+  "scale": {
+    "cap256Passed": true,
+    "heapPlateauProven": false,
+    "spillPlans": 0,
+    "conversionPlans": 4,
+    "proofSha256": "07042504150dab997177594d3d86a3c669015451d697e90d182eed356d6e0e9d",
+    "proof": "target/macrobloco-analitico-20260912-01/final-scale-proof.json",
+    "actualPlans": 284,
+    "missingIndexPlans": 0,
+    "completedScales": [
+      4,
+      16,
+      32,
+      16
+    ]
+  },
+  "staticCandidateChecks": [
+    {
+      "sha256": "6d5e54185e0f98218f8e2bb0c6b9a4d1d7d171fe431e7bfcd2d43a71332cded4",
+      "scope": "QUALIFIED_CANDIDATE_CHAIN_REPEAT_ON_FINAL_SEAL",
+      "path": "target/macrobloco-analitico-20260912-01/succession-candidate-01.log",
+      "name": "expansion"
+    },
+    {
+      "sha256": "2a415caca5545f1dc51c5db01bfd9a197d9b38b4b6ddc9c0b7bc83fa3ada4420",
+      "scope": "QUALIFIED_CANDIDATE_CHAIN_REPEAT_ON_FINAL_SEAL",
+      "path": "target/macrobloco-analitico-20260912-01/progressive-static-01.log",
+      "name": "progressive"
+    },
+    {
+      "sha256": "8fed78c6b8b5fbae13bad7c431d3bc5f84436f7c2cd4d98e00eb11aebc3b0b48",
+      "scope": "QUALIFIED_CANDIDATE_CHAIN_REPEAT_ON_FINAL_SEAL",
+      "path": "target/macrobloco-analitico-20260912-01/continuity-guards-01.log",
+      "name": "continuityGuards"
+    },
+    {
+      "sha256": "29de152e1548cad715d58cf8cf4c688821773aad6e64220a5e17a0561e156cd6",
+      "scope": "QUALIFIED_CANDIDATE_CHAIN_REPEAT_ON_FINAL_SEAL",
+      "path": "target/macrobloco-analitico-20260912-01/relational-succession-01.log",
+      "name": "relational"
+    },
+    {
+      "sha256": "6926098ee445dde80cedd0c05aa818db2829be0b5c764eebe291cc42bdd3c99c",
+      "scope": "QUALIFIED_CANDIDATE_CHAIN_REPEAT_ON_FINAL_SEAL",
+      "path": "target/macrobloco-analitico-20260912-01/analytic-candidate-01.log",
+      "name": "analyticCandidate"
+    },
+    {
+      "sha256": "8115442677f4773d4be00954fb33f2f546b20fe78a0f75fa41cac20fd4f47ba9",
+      "scope": "QUALIFIED_CANDIDATE_CHAIN_REPEAT_ON_FINAL_SEAL",
+      "path": "target/macrobloco-analitico-20260912-01/temporal-succession-01.log",
+      "name": "temporal"
+    },
+    {
+      "sha256": "df74a4dadb3dc045785ae4e16e2d3a0e275717f14fb4237e332de7f598a3b1e8",
+      "scope": "QUALIFIED_CANDIDATE_CHAIN_REPEAT_ON_FINAL_SEAL",
+      "path": "target/macrobloco-analitico-20260912-01/schema-static-01.log",
+      "name": "schema"
+    },
+    {
+      "sha256": "cfedbc6620b00bef8fe7d29cd575249f40e3c208463158b959385bfe257cb0d8",
+      "scope": "QUALIFIED_CANDIDATE_CHAIN_REPEAT_ON_FINAL_SEAL",
+      "path": "target/macrobloco-analitico-20260912-01/continuity-01.log",
+      "name": "continuity"
+    },
+    {
+      "sha256": "840732fbec1d4086f313d6b7766965f81bff9f5351a9bc9818e929981b714397",
+      "scope": "QUALIFIED_CANDIDATE_CHAIN_REPEAT_ON_FINAL_SEAL",
+      "path": "target/macrobloco-analitico-20260912-01/runtime-static-02.log",
+      "name": "runtime"
+    }
+  ],
+  "integration": {
+    "affectedRunTests": 20,
+    "previous233Exact": true,
+    "mandatoryAnalyticClasses": 40,
+    "rollbackConfirmed": true,
+    "newAnalyticCases": 145,
+    "countMeaning": "UNIQUE_TEST_CASES_ON_LATEST_QUALIFIED_REVISION_PER_CLASS",
+    "syntheticOnly": true,
+    "errors": 0,
+    "failures": 0,
+    "realJdbc": true,
+    "qualifiedClasses": {
+      "br.com.esl.etl.v2.bootstrap.ExpansionLaboratoryScaleIT": 4,
+      "br.com.esl.etl.v2.bootstrap.AnalyticManifestCompositionsIT": 1,
+      "br.com.esl.etl.v2.bootstrap.AnalyticLaboratoryRasterTransitIT": 6,
+      "br.com.esl.etl.v2.bootstrap.ExpansionLaboratoryRevenueIT": 12,
+      "br.com.esl.etl.v2.bootstrap.AnalyticLaboratoryFleetReferencesIT": 3,
+      "br.com.esl.etl.v2.bootstrap.AnalyticLaboratoryFreightFallbackIT": 3,
+      "br.com.esl.etl.v2.bootstrap.ExpansionLaboratoryCaptureFencesIT": 16,
+      "br.com.esl.etl.v2.bootstrap.ExpansionLaboratoryMainIT": 10,
+      "br.com.esl.etl.v2.bootstrap.AnalyticExpansionCaptureIT": 2,
+      "br.com.esl.etl.v2.bootstrap.AnalyticLaboratoryCollectionQueriesIT": 3,
+      "br.com.esl.etl.v2.plataforma.fonte.dataexport.ColetasTemporalLocalIntegrationIT": 38,
+      "br.com.esl.etl.v2.bootstrap.AnalyticLaboratoryManifestGatesIT": 4,
+      "br.com.esl.etl.v2.bootstrap.ExpansionLaboratoryAdversarialIT": 16,
+      "br.com.esl.etl.v2.bootstrap.ExpansionLaboratoryProjectionsIT": 8,
+      "br.com.esl.etl.v2.bootstrap.AnalyticLaboratoryCollectionSweepIT": 3,
+      "br.com.esl.etl.v2.bootstrap.ExpansionLaboratoryRelationsIT": 3,
+      "br.com.esl.etl.v2.bootstrap.AnalyticLaboratoryCollectionsIT": 3,
+      "br.com.esl.etl.v2.bootstrap.ExpansionLaboratoryFieldCoverageIT": 4,
+      "br.com.esl.etl.v2.plataforma.configuracao.ShadowAuditLocalIntegrationIT": 1,
+      "br.com.esl.etl.v2.bootstrap.ExpansionLaboratoryLocalIntegrationIT": 12,
+      "br.com.esl.etl.v2.bootstrap.AnalyticLaboratoryRasterProofsIT": 4,
+      "br.com.esl.etl.v2.bootstrap.RelationalLaboratoryLocalIntegrationIT": 12,
+      "br.com.esl.etl.v2.bootstrap.AnalyticLaboratoryFinancialQueriesIT": 3,
+      "br.com.esl.etl.v2.bootstrap.ExpansionLaboratoryReferencesIT": 4,
+      "br.com.esl.etl.v2.bootstrap.ExpansionLaboratoryConcurrencyIT": 4,
+      "br.com.esl.etl.v2.bootstrap.AnalyticLaboratoryUsersIT": 2,
+      "br.com.esl.etl.v2.bootstrap.ExpansionLaboratoryRecompositionIT": 12,
+      "br.com.esl.etl.v2.bootstrap.AnalyticLaboratoryQuotesIT": 5,
+      "br.com.esl.etl.v2.bootstrap.RelationalLaboratoryScaleIT": 4,
+      "br.com.esl.etl.v2.bootstrap.ExpansionLaboratoryEdgesIT": 14,
+      "br.com.esl.etl.v2.bootstrap.ExpansionLaboratoryDependenciesIT": 6,
+      "br.com.esl.etl.v2.bootstrap.AnalyticLaboratoryReferencesIT": 3,
+      "br.com.esl.etl.v2.bootstrap.AnalyticLaboratoryCollectionSupplementIT": 2,
+      "br.com.esl.etl.v2.bootstrap.AnalyticScenarioRuntimeIT": 3,
+      "br.com.esl.etl.v2.bootstrap.AnalyticLaboratoryManifestsIT": 5,
+      "br.com.esl.etl.v2.bootstrap.AnalyticLaboratoryCollectionAliasIT": 1,
+      "br.com.esl.etl.v2.bootstrap.AnalyticLaboratoryFreightOperationalIT": 4,
+      "br.com.esl.etl.v2.bootstrap.AnalyticLaboratoryCollectorsGatesIT": 17,
+      "br.com.esl.etl.v2.bootstrap.AnalyticLaboratoryCollectorsIT": 2,
+      "br.com.esl.etl.v2.bootstrap.AnalyticScenarioIsolationIT": 4,
+      "br.com.esl.etl.v2.bootstrap.ExpansionLaboratoryFreightTermsIT": 3,
+      "br.com.esl.etl.v2.bootstrap.ExpansionLaboratoryInvoicesIT": 10,
+      "br.com.esl.etl.v2.bootstrap.AnalyticLaboratoryManifestCaptureIT": 1,
+      "br.com.esl.etl.v2.bootstrap.RelationalLaboratoryMatrixIT": 40,
+      "br.com.esl.etl.v2.bootstrap.AnalyticScenarioPlanIT": 3,
+      "br.com.esl.etl.v2.bootstrap.AnalyticLaboratoryDimensionsIT": 8,
+      "br.com.esl.etl.v2.bootstrap.AnalyticLaboratoryObservationModesIT": 2,
+      "br.com.esl.etl.v2.bootstrap.AnalyticLaboratoryMonitoringIT": 3,
+      "br.com.esl.etl.v2.bootstrap.AnalyticLaboratoryConcurrencyIT": 4,
+      "br.com.esl.etl.v2.bootstrap.AnalyticLaboratoryFreightAttributesIT": 4,
+      "br.com.esl.etl.v2.bootstrap.AnalyticLaboratoryFreightLocationQueriesIT": 3,
+      "br.com.esl.etl.v2.bootstrap.AnalyticLaboratoryRasterIT": 4,
+      "br.com.esl.etl.v2.bootstrap.AnalyticLaboratoryQueryReaderIT": 2,
+      "br.com.esl.etl.v2.bootstrap.AnalyticLaboratoryInventoryIncidentQueriesIT": 3,
+      "br.com.esl.etl.v2.bootstrap.AnalyticLaboratoryFreightPathsIT": 3,
+      "br.com.esl.etl.v2.bootstrap.AnalyticLaboratoryCollectionSweepIsolationIT": 2,
+      "br.com.esl.etl.v2.bootstrap.AnalyticLaboratoryManifestPreparationIT": 7,
+      "br.com.esl.etl.v2.bootstrap.AnalyticRasterCivilTimeIT": 5,
+      "br.com.esl.etl.v2.bootstrap.AnalyticFixtureBindingsIT": 1,
+      "br.com.esl.etl.v2.bootstrap.AnalyticLaboratoryScaleIT": 5,
+      "br.com.esl.etl.v2.bootstrap.AnalyticLaboratoryRasterIdentityIT": 2
+    },
+    "tests": 378.0,
+    "fullRunTests": 361,
+    "affectedAttempt": "physical-analytic-closing-gates-02",
+    "mandatoryClassesPresent": true,
+    "skipped": 0
+  },
+  "realQualificationAccepted": false,
+  "jar": {
+    "rollbackConfirmed": true,
+    "identityGuards": 2,
+    "passed": true,
+    "cases": 40,
+    "results": [
+      {
+        "timedOut": false,
+        "passed": true,
+        "case": "scenario",
+        "exit": 0,
+        "expected": 0,
+        "elapsedMs": 50039
+      },
+      {
+        "timedOut": false,
+        "passed": true,
+        "case": "recompose",
+        "exit": 0,
+        "expected": 0,
+        "elapsedMs": 50876
+      },
+      {
+        "timedOut": false,
+        "passed": true,
+        "case": "replay",
+        "exit": 0,
+        "expected": 0,
+        "elapsedMs": 27260
+      },
+      {
+        "timedOut": false,
+        "passed": true,
+        "case": "status",
+        "exit": 0,
+        "expected": 0,
+        "elapsedMs": 18831
+      },
+      {
+        "timedOut": false,
+        "passed": true,
+        "case": "query-01",
+        "exit": 0,
+        "expected": 0,
+        "elapsedMs": 14373
+      },
+      {
+        "timedOut": false,
+        "passed": true,
+        "case": "query-02",
+        "exit": 0,
+        "expected": 0,
+        "elapsedMs": 7943
+      },
+      {
+        "timedOut": false,
+        "passed": true,
+        "case": "query-03",
+        "exit": 0,
+        "expected": 0,
+        "elapsedMs": 9250
+      },
+      {
+        "timedOut": false,
+        "passed": true,
+        "case": "query-04",
+        "exit": 0,
+        "expected": 0,
+        "elapsedMs": 18947
+      },
+      {
+        "timedOut": false,
+        "passed": true,
+        "case": "query-05",
+        "exit": 0,
+        "expected": 0,
+        "elapsedMs": 15921
+      },
+      {
+        "timedOut": false,
+        "passed": true,
+        "case": "query-06",
+        "exit": 0,
+        "expected": 0,
+        "elapsedMs": 14462
+      },
+      {
+        "timedOut": false,
+        "passed": true,
+        "case": "query-07",
+        "exit": 0,
+        "expected": 0,
+        "elapsedMs": 6865
+      },
+      {
+        "timedOut": false,
+        "passed": true,
+        "case": "query-08",
+        "exit": 0,
+        "expected": 0,
+        "elapsedMs": 8905
+      },
+      {
+        "timedOut": false,
+        "passed": true,
+        "case": "query-09",
+        "exit": 0,
+        "expected": 0,
+        "elapsedMs": 13548
+      },
+      {
+        "timedOut": false,
+        "passed": true,
+        "case": "query-10",
+        "exit": 0,
+        "expected": 0,
+        "elapsedMs": 13504
+      },
+      {
+        "timedOut": false,
+        "passed": true,
+        "case": "query-11",
+        "exit": 0,
+        "expected": 0,
+        "elapsedMs": 12453
+      },
+      {
+        "timedOut": false,
+        "passed": true,
+        "case": "query-12",
+        "exit": 0,
+        "expected": 0,
+        "elapsedMs": 8307
+      },
+      {
+        "timedOut": false,
+        "passed": true,
+        "case": "query-13",
+        "exit": 0,
+        "expected": 0,
+        "elapsedMs": 6868
+      },
+      {
+        "timedOut": false,
+        "passed": true,
+        "case": "query-14",
+        "exit": 0,
+        "expected": 0,
+        "elapsedMs": 13131
+      },
+      {
+        "timedOut": false,
+        "passed": true,
+        "case": "query-15",
+        "exit": 0,
+        "expected": 0,
+        "elapsedMs": 7409
+      },
+      {
+        "timedOut": false,
+        "passed": true,
+        "case": "query-16",
+        "exit": 0,
+        "expected": 0,
+        "elapsedMs": 16069
+      },
+      {
+        "timedOut": false,
+        "passed": true,
+        "case": "query-17",
+        "exit": 0,
+        "expected": 0,
+        "elapsedMs": 12810
+      },
+      {
+        "timedOut": false,
+        "passed": true,
+        "case": "query-18",
+        "exit": 0,
+        "expected": 0,
+        "elapsedMs": 14507
+      },
+      {
+        "timedOut": false,
+        "passed": true,
+        "case": "query-19",
+        "exit": 0,
+        "expected": 0,
+        "elapsedMs": 14056
+      },
+      {
+        "timedOut": false,
+        "passed": true,
+        "case": "degraded-raster_incomplete",
+        "exit": 10,
+        "expected": 10,
+        "elapsedMs": 23530
+      },
+      {
+        "timedOut": false,
+        "passed": true,
+        "case": "degraded-manifest_fleet_missing",
+        "exit": 10,
+        "expected": 10,
+        "elapsedMs": 20642
+      },
+      {
+        "timedOut": false,
+        "passed": true,
+        "case": "degraded-financial_reference_missing",
+        "exit": 10,
+        "expected": 10,
+        "elapsedMs": 20093
+      },
+      {
+        "timedOut": false,
+        "passed": true,
+        "case": "degraded-collection_snapshot_invalid",
+        "exit": 10,
+        "expected": 10,
+        "elapsedMs": 12229
+      },
+      {
+        "timedOut": false,
+        "passed": true,
+        "case": "refused-path",
+        "exit": 20,
+        "expected": 20,
+        "elapsedMs": 210
+      },
+      {
+        "timedOut": false,
+        "passed": true,
+        "case": "refused-source",
+        "exit": 20,
+        "expected": 20,
+        "elapsedMs": 217
+      },
+      {
+        "timedOut": false,
+        "passed": true,
+        "case": "refused-url",
+        "exit": 20,
+        "expected": 20,
+        "elapsedMs": 216
+      },
+      {
+        "timedOut": false,
+        "passed": true,
+        "case": "refused-permit",
+        "exit": 20,
+        "expected": 20,
+        "elapsedMs": 298
+      },
+      {
+        "timedOut": false,
+        "passed": true,
+        "case": "refused-mode",
+        "exit": 20,
+        "expected": 20,
+        "elapsedMs": 201
+      },
+      {
+        "timedOut": false,
+        "passed": true,
+        "case": "refused-roots",
+        "exit": 20,
+        "expected": 20,
+        "elapsedMs": 232
+      },
+      {
+        "timedOut": false,
+        "passed": true,
+        "case": "refused-page",
+        "exit": 20,
+        "expected": 20,
+        "elapsedMs": 337
+      },
+      {
+        "timedOut": false,
+        "passed": true,
+        "case": "refused-limit",
+        "exit": 20,
+        "expected": 20,
+        "elapsedMs": 210
+      },
+      {
+        "timedOut": false,
+        "passed": true,
+        "case": "refused-contract",
+        "exit": 20,
+        "expected": 20,
+        "elapsedMs": 201
+      },
+      {
+        "timedOut": false,
+        "passed": true,
+        "case": "refused-no-optin",
+        "exit": 20,
+        "expected": 20,
+        "elapsedMs": 210
+      },
+      {
+        "timedOut": false,
+        "passed": true,
+        "case": "refused-foreign-host",
+        "exit": 20,
+        "expected": 20,
+        "elapsedMs": 327
+      },
+      {
+        "timedOut": false,
+        "passed": true,
+        "case": "refused-production",
+        "exit": 20,
+        "expected": 20,
+        "elapsedMs": 223
+      },
+      {
+        "timedOut": false,
+        "passed": true,
+        "case": "main-default-no-io",
+        "exit": 0,
+        "expected": 0,
+        "elapsedMs": 231
+      }
+    ],
+    "directory": "target/macrobloco-analitico-20260912-01/jar-analytic-01"
+  },
+  "passed": true,
+  "version": 1,
+  "java": {
+    "affectedTestAttempt": "physical-analytic-closing-gates-02",
+    "jarSha256": "a86320f3069758d7ac02e35881242a478f97b39ebc4ab70b2eb5f43f235fed1d",
+    "heapMiB": 512,
+    "version": 17,
+    "sourceAndJarChecked": true,
+    "changedTests": [
+      {
+        "class": "br.com.esl.etl.v2.bootstrap.AnalyticLaboratoryCollectorsGatesIT",
+        "reportSha256": "d7e03263d310712de11a6c9b7684a8ea5379413292d9f7e85e032223ef837574",
+        "sha256": "7c841c0fdc4156d0f3e9615f835444449f5837fc3deb78ad47dcdb2a55c24d3b",
+        "tests": 17,
+        "path": "src/test/java/br/com/esl/etl/v2/bootstrap/AnalyticLaboratoryCollectorsGatesIT.java"
+      },
+      {
+        "class": "br.com.esl.etl.v2.bootstrap.AnalyticLaboratoryFreightFallbackIT",
+        "reportSha256": "f6b411ad400ceccc86fb28fca456ca85b7e30f31df35c7050060f607f135e833",
+        "sha256": "984cb1469c66078968284c7fab9730e1463b1553f9c725dd82a3cd2ebec862ce",
+        "tests": 3,
+        "path": "src/test/java/br/com/esl/etl/v2/bootstrap/AnalyticLaboratoryFreightFallbackIT.java"
+      }
+    ],
+    "sourceCount": 1027,
+    "packagedEntries": 921,
+    "offline": true,
+    "attempt": "verify-physical-analytic-02",
+    "mainAndResourcesUnchangedAfterFullVerify": true
+  },
+  "full": {
+    "tests": 1946.0,
+    "errors": 0,
+    "historicalSkips": [
+      "br.com.esl.etl.v2.contratos.caracterizacao.CharacterizationDeterminismTest/refusesAReparsePointInsideTargetWhenThePlatformSupportsLinks",
+      "br.com.esl.etl.v2.contratos.caracterizacao.qfnd02.Qfnd02DeterminismTest/refusesSymbolicLinkInsideReceiptRoot",
+      "br.com.esl.etl.v2.contratos.mapping.CotacoesSourceCommandTest/command",
+      "br.com.esl.etl.v2.contratos.medicao.MeasurementReceiptWriterTest/refusesASymbolicLinkInsideTheMeasurementRootWhenSupported"
+    ],
+    "coveragePassed": true,
+    "buildAttempt": "verify-physical-analytic-02",
+    "skipped": 4,
+    "failures": 0
+  },
+  "construction": {
+    "denominator": 45,
+    "historicalAcceptances": 67,
+    "newUnits": [
+      "MAT-01",
+      "MAT-02",
+      "MAT-05",
+      "V2-034",
+      "V2-037"
+    ],
+    "historicalTotal": 115,
+    "after": 37,
+    "before": 32
+  },
+  "operationalPromotionAuthorized": false,
+  "status": "CONSTRUÇÃO_LOCAL_CONCLUÍDA",
+  "schema": {
+    "migrations": 98,
+    "contracts": 19,
+    "physicalColumns": 971,
+    "physicalFreshVsUpgradeEquivalenceProven": false,
+    "inventory": "docs/catalogos/macrobloco-analitico/estrutura-local.json",
+    "businessColumns": 673,
+    "newMigrations": 47
+  },
+  "remoteCalls": 0,
+  "fronts": [
+    "A",
+    "B",
+    "C",
+    "D",
+    "E",
+    "F",
+    "G",
+    "H",
+    "I",
+    "J",
+    "K",
+    "L",
+    "M",
+    "N"
+  ],
+  "finalSeal": "target/macrobloco-analitico-20260912-01/final-seal.json",
+  "deliveryComplete": true
+}

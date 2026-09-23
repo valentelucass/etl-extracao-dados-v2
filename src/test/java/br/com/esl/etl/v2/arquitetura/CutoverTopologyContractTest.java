@@ -25,6 +25,46 @@ class CutoverTopologyContractTest {
     private static final Path CATALOG_ROOT = REPOSITORY_ROOT.resolve("docs/catalogos/cutover");
 
     @Test
+    void cutoverTracksTheCurrentSchemaVersionHashAndPermissionCount()
+            throws IOException, NoSuchAlgorithmException {
+        final Path schemaPath = REPOSITORY_ROOT.resolve("database/manifest/schema-foundation.json");
+        final ObjectMapper json = new ObjectMapper();
+        final JsonNode schema = json.readTree(schemaPath.toFile());
+        final JsonNode cutover = json.readTree(CATALOG_ROOT.resolve("manifesto.json").toFile());
+        assertEquals(
+                schema.path("manifestVersion"),
+                cutover.path("schema_foundation_contract").path("manifest_version"));
+        assertEquals(
+                schema.path("grantPublisher").path("allowedTriplets"),
+                cutover.path("baselines").path("grant_allowlist_triplets"));
+        assertEquals(
+                fileSha256(schemaPath),
+                cutover.path("schema_foundation_contract").path("manifest_sha256").textValue());
+    }
+
+    @Test
+    void bootstrapBindsEveryCanonicalSourceToItsCurrentBytes()
+            throws IOException, NoSuchAlgorithmException {
+        final Path manifestPath =
+                REPOSITORY_ROOT.resolve("docs/catalogos/bootstrap-v2-047/manifesto.json");
+        final JsonNode manifest = new ObjectMapper().readTree(manifestPath.toFile());
+        final JsonNode sources = manifest.path("canonicalSources");
+        assertEquals(16, sources.size());
+        for (final JsonNode source : sources) {
+            final Path sourcePath = REPOSITORY_ROOT.resolve(source.path("path").textValue());
+            assertEquals(
+                    fileSha256(sourcePath),
+                    source.path("sha256").textValue(),
+                    source.path("sourceId").textValue());
+        }
+    }
+
+    private static String fileSha256(final Path path) throws IOException, NoSuchAlgorithmException {
+        return HexFormat.of()
+                .formatHex(MessageDigest.getInstance("SHA-256").digest(Files.readAllBytes(path)));
+    }
+
+    @Test
     void manifestoFixaBancoNovoUnidadeDatabaseWideEPontoDeNaoRetornoProdutivo()
             throws IOException, NoSuchAlgorithmException {
         final Path manifestPath = CATALOG_ROOT.resolve("manifesto.json");

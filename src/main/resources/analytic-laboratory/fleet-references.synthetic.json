@@ -1,0 +1,180 @@
+{
+  "version": "analytic-fleet-references-v1",
+  "provenance": "FIXTURE_SINTETICA_EXPLICITA",
+  "tokenScheme": "sha256-utf16le-v1",
+  "normalization": "ascii-trim-upper-v1",
+  "documents": [
+    {
+      "documentToken": "0f2f56d9b0a0734d3f7d76776e5fa095201448d200fd0661335406a169966785",
+      "reason": "SYNTHETIC_OWNED_DOCUMENT"
+    }
+  ],
+  "aliases": [
+    {
+      "scope": "DRIVER_OWNERSHIP",
+      "aliasScope": "DRIVER_OWNERSHIP_CONTRACT",
+      "raw": "AGGREGATE",
+      "classification": "AGGREGATE",
+      "reason": "SYNTHETIC_CONTRACT_ALIAS"
+    },
+    {
+      "scope": "DRIVER_OWNERSHIP",
+      "aliasScope": "DRIVER_OWNERSHIP_CONTRACT",
+      "raw": "AGGREGATED",
+      "classification": "AGGREGATE",
+      "reason": "SYNTHETIC_CONTRACT_ALIAS"
+    },
+    {
+      "scope": "DRIVER_OWNERSHIP",
+      "aliasScope": "DRIVER_OWNERSHIP_CONTRACT",
+      "raw": "AGREGADO",
+      "classification": "AGGREGATE",
+      "reason": "SYNTHETIC_CONTRACT_ALIAS"
+    },
+    {
+      "scope": "DRIVER_OWNERSHIP",
+      "aliasScope": "DRIVER_OWNERSHIP_CONTRACT",
+      "raw": "PRESTADOR AGREGADO",
+      "classification": "AGGREGATE",
+      "reason": "SYNTHETIC_CONTRACT_ALIAS"
+    },
+    {
+      "scope": "DRIVER_OWNERSHIP",
+      "aliasScope": "DRIVER_OWNERSHIP_CONTRACT",
+      "raw": "EXCLUSIVE",
+      "classification": "AGGREGATE",
+      "reason": "SYNTHETIC_CONTRACT_ALIAS"
+    },
+    {
+      "scope": "DRIVER_OWNERSHIP",
+      "aliasScope": "DRIVER_OWNERSHIP_CONTRACT",
+      "raw": "EXCLUSIVO",
+      "classification": "AGGREGATE",
+      "reason": "SYNTHETIC_CONTRACT_ALIAS"
+    },
+    {
+      "scope": "DRIVER_OWNERSHIP",
+      "aliasScope": "DRIVER_OWNERSHIP_CONTRACT",
+      "raw": "THIRD_PARTY",
+      "classification": "THIRD_PARTY",
+      "reason": "SYNTHETIC_CONTRACT_ALIAS"
+    },
+    {
+      "scope": "DRIVER_OWNERSHIP",
+      "aliasScope": "DRIVER_OWNERSHIP_CONTRACT",
+      "raw": "SYN",
+      "classification": "THIRD_PARTY",
+      "reason": "SYNTHETIC_CONTRACT_ALIAS"
+    },
+    {
+      "scope": "VEHICLE_DRIVER_CONTRACT",
+      "aliasScope": "VEHICLE_CONTRACT",
+      "raw": "AGGREGATE",
+      "classification": "AGGREGATE",
+      "reason": "SYNTHETIC_CONTRACT_ALIAS"
+    },
+    {
+      "scope": "VEHICLE_DRIVER_CONTRACT",
+      "aliasScope": "VEHICLE_CONTRACT",
+      "raw": "DRIVER",
+      "classification": "DRIVER",
+      "reason": "SYNTHETIC_CONTRACT_ALIAS"
+    },
+    {
+      "scope": "VEHICLE_DRIVER_CONTRACT",
+      "aliasScope": "DRIVER_CONTRACT",
+      "raw": "COMPANY",
+      "classification": "COMPANY",
+      "reason": "SYNTHETIC_CONTRACT_ALIAS"
+    },
+    {
+      "scope": "VEHICLE_DRIVER_CONTRACT",
+      "aliasScope": "DRIVER_CONTRACT",
+      "raw": "AGGREGATE",
+      "classification": "AGGREGATE",
+      "reason": "SYNTHETIC_CONTRACT_ALIAS"
+    },
+    {
+      "scope": "VEHICLE_DRIVER_CONTRACT",
+      "aliasScope": "DRIVER_CONTRACT",
+      "raw": "THIRD_PARTY",
+      "classification": "THIRD_PARTY",
+      "reason": "SYNTHETIC_CONTRACT_ALIAS"
+    },
+    {
+      "scope": "VEHICLE_DRIVER_CONTRACT",
+      "aliasScope": "DRIVER_CONTRACT",
+      "raw": "__NULL__",
+      "classification": "UNSPECIFIED",
+      "reason": "SYNTHETIC_CONTRACT_ALIAS"
+    }
+  ],
+  "matrix": [
+    {
+      "vehicle": "AGGREGATE",
+      "driver": "UNSPECIFIED",
+      "classification": "THIRD_PARTY",
+      "reason": "SYNTHETIC_CONTRACT_MATRIX"
+    },
+    {
+      "vehicle": "DRIVER",
+      "driver": "UNSPECIFIED",
+      "classification": "FLEET_PLUS_PX",
+      "reason": "SYNTHETIC_CONTRACT_MATRIX"
+    },
+    {
+      "vehicle": "AGGREGATE",
+      "driver": "AGGREGATE",
+      "classification": "AGGREGATE",
+      "reason": "SYNTHETIC_CONTRACT_MATRIX"
+    },
+    {
+      "vehicle": "AGGREGATE",
+      "driver": "THIRD_PARTY",
+      "classification": "THIRD_PARTY",
+      "reason": "SYNTHETIC_CONTRACT_MATRIX"
+    },
+    {
+      "vehicle": "AGGREGATE",
+      "driver": "COMPANY",
+      "classification": "FLEET",
+      "reason": "SYNTHETIC_CONTRACT_MATRIX"
+    },
+    {
+      "vehicle": "DRIVER",
+      "driver": "AGGREGATE",
+      "classification": "FLEET_PLUS_PX",
+      "reason": "SYNTHETIC_CONTRACT_MATRIX"
+    },
+    {
+      "vehicle": "DRIVER",
+      "driver": "THIRD_PARTY",
+      "classification": "FLEET_PLUS_PX",
+      "reason": "SYNTHETIC_CONTRACT_MATRIX"
+    },
+    {
+      "vehicle": "DRIVER",
+      "driver": "COMPANY",
+      "classification": "FLEET",
+      "reason": "SYNTHETIC_CONTRACT_MATRIX"
+    }
+  ],
+  "exceptions": [
+    {
+      "scope": "DRIVER_OWNERSHIP",
+      "subjectToken": "d3c630b2817ba68a2ae0e37bc4bcfd4aa06b0f1ebee83b954cb60266bfa19d60",
+      "requiredVehicle": null,
+      "classification": "FLEET",
+      "priority": 100,
+      "reason": "SYNTHETIC_OWNED_NAME"
+    },
+    {
+      "scope": "VEHICLE_DRIVER_CONTRACT",
+      "subjectToken": "440b374138a2135d40f9a94f5191f22e86a1e9c789826e41c20a2dae3df18fb7",
+      "requiredVehicle": "AGGREGATE",
+      "classification": "FLEET_PLUS_PX",
+      "priority": 100,
+      "reason": "SYNTHETIC_PX_NAME"
+    }
+  ]
+}

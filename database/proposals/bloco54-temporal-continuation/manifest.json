@@ -1,0 +1,45 @@
+{
+  "version": 1,
+  "block": 54,
+  "status": "APPLIED_VERIFIED_LOCAL_V021",
+  "database": "localhost/ETL_SISTEMA_V2_SHADOW",
+  "authorization": "OWNER_APPROVED_ADDITIVE_VERSIONED_LOCAL_SCHEMA",
+  "migration": "V021__bind_durable_temporal_intent.sql",
+  "migrationSha256": "1f9ad81b40b7dc97055de9a28038ae989185744c34fabd15ca63da07f5163e24",
+  "grantDelta": 0,
+  "expectedGrants": 25,
+  "modules": [
+    {
+      "name": "ctl.fn_runtime_consumed_temporal_scope",
+      "sha256": "e4d4a6cbfa781b60ad9cfc466536afbcd325ae2acb1ce2345552116442ee0695"
+    },
+    {
+      "name": "ctl.usp_runtime_temporal_plan",
+      "sha256": "c7f98cfef5e0da091e45e3990237f4452f72adea8df32a548bdfe5d9124ab06c"
+    },
+    {
+      "name": "ctl.usp_runtime_temporal_gaps",
+      "sha256": "2f112cf25fb02d0af955dbec7a5e2cb891c9ebb50a7f5b7090a22e973168ac79"
+    }
+  ],
+  "files": [
+    {
+      "path": "apply.sql",
+      "sha256": "8d18c04bc8dc948b4c75cd90fe176ffc831f1820be3047cddf274af5f45e2ecf"
+    },
+    {
+      "path": "verify.sql",
+      "sha256": "d154a199d91478cd7f16d72921a3056c542d37197d45e7c7f243d8874c508063"
+    }
+  ],
+  "applied": true,
+  "catalogSha256": "7a86e28ea68cecd8ba993bbea8df5c677e0848f27aa7b0412402165071736408",
+  "testedPreparation": {
+    "path": "target/bloco54/completion-authorized-20260908/V021_SCHEMA_01/tested-manifest.json",
+    "sha256": "33fb84519827a35728c59027b0ba6a0a0d2c37dec64cba98c00a261fb16bf37d"
+  },
+  "applicationEvidence": {
+    "path": "target/bloco54/completion-authorized-20260908/V021_SCHEMA_01/results.json",
+    "sha256": "28c2df24b2369d8038e45df18ccae54d677c0531cf230db3182b247d48e7467b"
+  }
+}

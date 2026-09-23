@@ -28,6 +28,28 @@ public final class HttpGraphQlGateway implements GraphQlGateway {
             final Clock clock,
             final GraphQlJitterSource jitterSource,
             final GraphQlContractObservationConfiguration observationConfiguration) {
+        this(
+                operation,
+                properties,
+                httpClient,
+                objectMapper,
+                workload,
+                clock,
+                jitterSource,
+                observationConfiguration,
+                GraphQlHttpAttemptObserver.noop());
+    }
+
+    HttpGraphQlGateway(
+            final GraphQlReadOperation operation,
+            final GraphQlProperties properties,
+            final HttpClient httpClient,
+            final ObjectMapper objectMapper,
+            final EslRequestGovernor.Cycle.Workload workload,
+            final Clock clock,
+            final GraphQlJitterSource jitterSource,
+            final GraphQlContractObservationConfiguration observationConfiguration,
+            final GraphQlHttpAttemptObserver attempts) {
         this.operation = Objects.requireNonNull(operation, "A operação GraphQL é obrigatória.");
         this.properties = Objects.requireNonNull(properties, "As propriedades são obrigatórias.");
         if (Objects.requireNonNull(
@@ -39,7 +61,9 @@ public final class HttpGraphQlGateway implements GraphQlGateway {
         }
         serializer = new GraphQlRequestJsonSerializer(objectMapper);
         parser = new GraphQlResponseParser(observationConfiguration);
-        executor = new GraphQlHttpExecutor(httpClient, properties, workload, clock, jitterSource);
+        executor =
+                new GraphQlHttpExecutor(
+                        httpClient, properties, workload, clock, jitterSource, attempts);
     }
 
     @Override

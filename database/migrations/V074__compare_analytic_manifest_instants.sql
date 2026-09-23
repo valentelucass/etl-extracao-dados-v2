@@ -1,0 +1,367 @@
+-- Same instant with a different offset is coherent; a one-nanosecond change is not.
+SET ANSI_NULLS ON; SET QUOTED_IDENTIFIER ON;
+GO
+CREATE FUNCTION core.ufn_analytic_time_comparison(@raw NVARCHAR(4000)) RETURNS NVARCHAR(100) AS
+BEGIN
+ IF @raw IS NULL RETURN NULL;
+ DECLARE @comparison NVARCHAR(100);
+ SELECT @comparison=CONCAT(epoch_second,N':',nano) FROM core.ufn_analytic_manifest_clock(
+ CONCAT(N'{"finished_at":"',STRING_ESCAPE(@raw,'json'),N'"}')) WHERE epoch_second IS NOT NULL AND nano IS NOT NULL;
+ RETURN @comparison;
+END;
+GO
+CREATE OR ALTER PROCEDURE core.usp_prepare_analytic_manifest @run_id UNIQUEIDENTIFIER,@execution_id UNIQUEIDENTIFIER,@fingerprint CHAR(64),@now DATETIME2(7)
+AS BEGIN
+ SET NOCOUNT ON; SET XACT_ABORT ON;
+ EXEC ctl.usp_analytic_lab_lock @run_id,'MAT05';
+ DECLARE @rel UNIQUEIDENTIFIER,@rows BIGINT,@maximum INT;
+ SELECT @rel=g.relational_run,@maximum=r.maximum_rows FROM ctl.analytic_lab_source_group g JOIN ctl.analytic_lab_run r ON r.run_id=g.run_id WHERE g.run_id=@run_id;
+ IF @rel IS NULL OR @execution_id IS NULL OR @now IS NULL THROW 53601,N'ANA_MANIFEST_PREPARATION_SCOPE',1;
+ EXEC ctl.usp_relational_lab_lock @rel;
+ SELECT @rows=c.physical_rows FROM ctl.relational_lab_capture c JOIN ctl.execution_attempt e ON e.execution_id=c.execution_id
+ JOIN ctl.relational_lab_contract k ON k.run_id=c.run_id AND k.entity_name=c.entity_name
+ WHERE c.run_id=@rel AND c.execution_id=@execution_id AND c.entity_name=N'manifestos'
+ AND c.contract_fingerprint=@fingerprint COLLATE Latin1_General_100_BIN2 AND e.contract_fingerprint COLLATE Latin1_General_100_BIN2=c.contract_fingerprint
+ AND k.contract_fingerprint=c.contract_fingerprint AND e.contract_version=N'synthetic-relational-v1';
+ IF @rows IS NULL OR @rows>@maximum THROW 53602,N'ANA_MANIFEST_CAPTURE_PROFILE',1;
+ IF EXISTS(SELECT 1 FROM ctl.analytic_manifest_preparation WHERE run_id=@run_id AND execution_id=@execution_id)
+ BEGIN SELECT physical_rows,root_rows,blocked_roots FROM ctl.analytic_manifest_preparation WHERE run_id=@run_id AND execution_id=@execution_id; RETURN; END;
+ SELECT o.* INTO #observations FROM stg.manifesto_observation o WHERE o.execution_id=@execution_id;
+ IF (SELECT COUNT_BIG(*) FROM #observations)<>@rows THROW 53603,N'ANA_MANIFEST_CAPTURE_COUNT',1;
+ IF EXISTS(SELECT 1 FROM #observations o CROSS APPLY OPENJSON(o.payload_json) j GROUP BY o.manifesto_observation_id,j.[key] COLLATE Latin1_General_100_BIN2 HAVING COUNT_BIG(*)>1)
+ THROW 53604,N'ANA_MANIFEST_DUPLICATE_PROPERTY',1;
+ SELECT o.manifesto_observation_id source_observation_id,d.field_name COLLATE Latin1_General_100_BIN2 field_name,d.kind,d.maximum,d.reducer,
+ CONVERT(VARCHAR(6),CASE WHEN j.[key] IS NULL THEN 'ABSENT' WHEN j.type=0 THEN 'NULL' ELSE 'VALUE' END) presence,j.type wire_type,j.value raw_value
+ INTO #fields FROM #observations o CROSS JOIN(VALUES (N'sequence_code','BIGINT',255,'COHERENT'),
+ (N'mft_crn_psn_nickname','TEXT',255,'COHERENT'),
+ (N'created_at','TIME',64,'COHERENT'),
+ (N'departured_at','TIME',64,'COHERENT'),
+ (N'closed_at','TIME',64,'COHERENT'),
+ (N'finished_at','TIME',64,'COHERENT'),
+ (N'status','TEXT',50,'STATUS'),
+ (N'mft_mfs_number','INT',255,'CHILD'),
+ (N'mft_mfs_key','TEXT',100,'CHILD'),
+ (N'mdfe_status','TEXT',50,'COHERENT'),
+ (N'mft_ape_name','TEXT',255,'COHERENT'),
+ (N'mft_man_name','TEXT',255,'COHERENT'),
+ (N'mft_vie_license_plate','TEXT',10,'COHERENT'),
+ (N'mft_vie_vee_name','TEXT',255,'COHERENT'),
+ (N'mft_vie_onr_name','TEXT',255,'COHERENT'),
+ (N'mft_mdr_iil_name','TEXT',255,'COHERENT'),
+ (N'vehicle_departure_km','INT',255,'COHERENT'),
+ (N'closing_km','INT',255,'COHERENT'),
+ (N'traveled_km','INT',255,'COHERENT'),
+ (N'invoices_count','INT',255,'COHERENT'),
+ (N'invoices_volumes','INT',255,'COHERENT'),
+ (N'invoices_weight','DECIMAL',255,'COHERENT'),
+ (N'total_taxed_weight','DECIMAL',255,'METRIC'),
+ (N'total_cubic_volume','DECIMAL',255,'COHERENT'),
+ (N'invoices_value','DECIMAL',255,'COHERENT'),
+ (N'manifest_freights_total','DECIMAL',255,'METRIC'),
+ (N'mft_pfs_pck_sequence_code','BIGINT',255,'CHILD'),
+ (N'mft_cat_cot_number','TEXT',50,'COHERENT'),
+ (N'daily_subtotal','DECIMAL',255,'COHERENT'),
+ (N'total_cost','DECIMAL',255,'METRIC'),
+ (N'operational_expenses_total','DECIMAL',255,'COHERENT'),
+ (N'mft_a_t_inss_value','DECIMAL',255,'COHERENT'),
+ (N'mft_a_t_sest_senat_value','DECIMAL',255,'COHERENT'),
+ (N'mft_a_t_ir_value','DECIMAL',255,'COHERENT'),
+ (N'paying_total','DECIMAL',255,'COHERENT'),
+ (N'mft_uer_name','TEXT',255,'COHERENT'),
+ (N'mft_aoe_rer_name','TEXT',255,'COHERENT'),
+ (N'advance_subtotal','DECIMAL',255,'COHERENT'),
+ (N'toll_subtotal','DECIMAL',255,'COHERENT'),
+ (N'fleet_costs_subtotal','DECIMAL',255,'COHERENT'),
+ (N'mft_s_n_svs_sge_pyr_nickname','TEXT',255,'COHERENT'),
+ (N'mft_s_n_svs_sge_sse_name','TEXT',255,'COHERENT'),
+ (N'mobile_read_at','TIME',64,'COHERENT'),
+ (N'km','DECIMAL',255,'METRIC'),
+ (N'manual_km','BIT',255,'COHERENT'),
+ (N'generate_mdfe','BIT',255,'COHERENT'),
+ (N'monitoring_request','BIT',255,'COHERENT'),
+ (N'delivery_manifest_items_count','INT',255,'COHERENT'),
+ (N'transfer_manifest_items_count','INT',255,'COHERENT'),
+ (N'pick_manifest_items_count','INT',255,'COHERENT'),
+ (N'dispatch_draft_manifest_items_count','INT',255,'COHERENT'),
+ (N'consolidation_manifest_items_count','INT',255,'COHERENT'),
+ (N'reverse_pick_manifest_items_count','INT',255,'COHERENT'),
+ (N'manifest_items_count','INT',255,'METRIC'),
+ (N'finalized_manifest_items_count','INT',255,'METRIC'),
+ (N'uniq_destinations_count','INT',255,'COHERENT'),
+ (N'contract_type','TEXT',50,'COHERENT'),
+ (N'mft_mdr_contract_type','TEXT',50,'COHERENT'),
+ (N'calculation_type','TEXT',50,'COHERENT'),
+ (N'cargo_type','TEXT',255,'COHERENT'),
+ (N'calculated_pick_count','INT',255,'COHERENT'),
+ (N'calculated_delivery_count','INT',255,'COHERENT'),
+ (N'calculated_dispatch_count','INT',255,'COHERENT'),
+ (N'calculated_consolidation_count','INT',255,'COHERENT'),
+ (N'calculated_reverse_pick_count','INT',255,'COHERENT'),
+ (N'freight_subtotal','DECIMAL',255,'COHERENT'),
+ (N'fuel_subtotal','DECIMAL',255,'COHERENT'),
+ (N'pick_subtotal','DECIMAL',255,'COHERENT'),
+ (N'delivery_subtotal','DECIMAL',255,'COHERENT'),
+ (N'dispatch_subtotal','DECIMAL',255,'COHERENT'),
+ (N'consolidation_subtotal','DECIMAL',255,'COHERENT'),
+ (N'reverse_pick_subtotal','DECIMAL',255,'COHERENT'),
+ (N'additionals_subtotal','DECIMAL',255,'COHERENT'),
+ (N'discounts_subtotal','DECIMAL',255,'COHERENT'),
+ (N'discount_value','DECIMAL',255,'COHERENT'),
+ (N'driver_services_total','DECIMAL',255,'COHERENT'),
+ (N'mft_aoe_comments','TEXT',4000,'COHERENT'),
+ (N'mft_cat_cot_status','TEXT',50,'COHERENT'),
+ (N'mft_iks_id','TEXT',100,'COHERENT'),
+ (N'mft_s_n_sequence_code','TEXT',50,'COHERENT'),
+ (N'mft_s_n_starting_at','TIME',64,'COHERENT'),
+ (N'mft_s_n_ending_at','TIME',64,'COHERENT'),
+ (N'mft_tl1_license_plate','TEXT',10,'COHERENT'),
+ (N'mft_tl1_weight_capacity','DECIMAL',255,'COHERENT'),
+ (N'mft_tl2_license_plate','TEXT',10,'COHERENT'),
+ (N'mft_tl2_weight_capacity','DECIMAL',255,'COHERENT'),
+ (N'mft_vie_weight_capacity','DECIMAL',255,'METRIC'),
+ (N'mft_vie_cubic_weight','DECIMAL',255,'COHERENT'),
+ (N'operational_comments','TEXT',4000,'COHERENT'),
+ (N'closing_comments','TEXT',4000,'COHERENT'),
+ (N'mft_mte_unloading_recipient_names','ARRAY',4000,'COHERENT'),
+ (N'mft_mte_delivery_region_names','ARRAY',4000,'COHERENT')) d(field_name,kind,maximum,reducer)
+ OUTER APPLY(SELECT * FROM OPENJSON(o.payload_json) j WHERE j.[key] COLLATE Latin1_General_100_BIN2=d.field_name COLLATE Latin1_General_100_BIN2) j;
+ -- Raw is preserved by the immutable source; an excessive field is rejected before bounded audit insertion.
+ IF EXISTS(SELECT 1 FROM #fields WHERE DATALENGTH(raw_value)>8000) THROW 53605,N'ANA_MANIFEST_RAW_BOUND',1;
+ SELECT f.*,CONVERT(VARCHAR(32),CASE WHEN presence<>'VALUE' THEN NULL
+ WHEN (kind IN('TEXT','TIME','DECIMAL') AND wire_type<>1) OR(kind IN('BIGINT','INT') AND wire_type<>2)
+ OR(kind='BIT' AND wire_type<>3) OR(kind='ARRAY' AND wire_type<>4) THEN 'WIRE_TYPE'
+ WHEN kind IN('TEXT','TIME','ARRAY') AND DATALENGTH(raw_value)>maximum*2 THEN 'TEXT_BOUND'
+ WHEN kind='DECIMAL' AND stg.ufn_analytic_decimal_exact(raw_value) IS NULL THEN 'DECIMAL_EXACT'
+ WHEN kind IN('BIGINT','INT') AND (raw_value COLLATE Latin1_General_100_BIN2 LIKE N'%[^0-9+-]%' OR TRY_CONVERT(BIGINT,raw_value) IS NULL
+ OR(kind='INT' AND TRY_CONVERT(INT,raw_value) IS NULL)) THEN 'INTEGER_EXACT'
+ WHEN kind='TIME' AND core.ufn_analytic_iso_time(raw_value) IS NULL THEN 'ISO_OFFSET_TIME'
+ WHEN kind='ARRAY' AND ((SELECT COUNT_BIG(*) FROM OPENJSON(CASE WHEN kind='ARRAY' AND wire_type=4 THEN raw_value ELSE N'[]' END))>32 OR EXISTS(SELECT 1 FROM OPENJSON(CASE WHEN kind='ARRAY' AND wire_type=4 THEN raw_value ELSE N'[]' END) WHERE type<>1 OR DATALENGTH(value)>512)) THEN 'ARRAY_BOUND'
+ END) issue,
+ stg.ufn_analytic_decimal_exact(raw_value) decimal_value,
+ TRY_CONVERT(BIGINT,CASE WHEN kind IN('BIGINT','INT') THEN raw_value END) integer_value,
+ CASE WHEN kind='BIT' THEN CASE raw_value WHEN N'true' THEN 1 WHEN N'false' THEN 0 END END boolean_value,
+ core.ufn_analytic_iso_time(CASE WHEN kind='TIME' AND DATALENGTH(raw_value)<=128 THEN raw_value END) time_value,
+ CONVERT(NVARCHAR(4000),CASE WHEN kind IN('TEXT','ARRAY') THEN raw_value END) COLLATE Latin1_General_100_BIN2 text_value
+ INTO #parsed FROM #fields f;
+ SELECT o.manifesto_observation_id source_observation_id,clock.* INTO #exact_clock FROM #observations o CROSS APPLY core.ufn_analytic_manifest_clock(o.payload_json) clock;
+ IF EXISTS(SELECT 1 FROM #exact_clock WHERE epoch_second IS NULL OR nano IS NULL) THROW 53630,N'ANA_MANIFEST_EXACT_CLOCK_INVALID',1;
+ INSERT stg.analytic_manifest_attributes(source_observation_id,valid,fresh_second,fresh_nano,fresh_origin,[sequence_code],[mft_crn_psn_nickname],[created_at],[departured_at],[closed_at],[finished_at],[status],[mft_mfs_number],[mft_mfs_key],[mdfe_status],[mft_ape_name],[mft_man_name],[mft_vie_license_plate],[mft_vie_vee_name],[mft_vie_onr_name],[mft_mdr_iil_name],[vehicle_departure_km],[closing_km],[traveled_km],[invoices_count],[invoices_volumes],[invoices_weight],[total_taxed_weight],[total_cubic_volume],[invoices_value],[manifest_freights_total],[mft_pfs_pck_sequence_code],[mft_cat_cot_number],[daily_subtotal],[total_cost],[operational_expenses_total],[mft_a_t_inss_value],[mft_a_t_sest_senat_value],[mft_a_t_ir_value],[paying_total],[mft_uer_name],[mft_aoe_rer_name],[advance_subtotal],[toll_subtotal],[fleet_costs_subtotal],[mft_s_n_svs_sge_pyr_nickname],[mft_s_n_svs_sge_sse_name],[mobile_read_at],[km],[manual_km],[generate_mdfe],[monitoring_request],[delivery_manifest_items_count],[transfer_manifest_items_count],[pick_manifest_items_count],[dispatch_draft_manifest_items_count],[consolidation_manifest_items_count],[reverse_pick_manifest_items_count],[manifest_items_count],[finalized_manifest_items_count],[uniq_destinations_count],[contract_type],[mft_mdr_contract_type],[calculation_type],[cargo_type],[calculated_pick_count],[calculated_delivery_count],[calculated_dispatch_count],[calculated_consolidation_count],[calculated_reverse_pick_count],[freight_subtotal],[fuel_subtotal],[pick_subtotal],[delivery_subtotal],[dispatch_subtotal],[consolidation_subtotal],[reverse_pick_subtotal],[additionals_subtotal],[discounts_subtotal],[discount_value],[driver_services_total],[mft_aoe_comments],[mft_cat_cot_status],[mft_iks_id],[mft_s_n_sequence_code],[mft_s_n_starting_at],[mft_s_n_ending_at],[mft_tl1_license_plate],[mft_tl1_weight_capacity],[mft_tl2_license_plate],[mft_tl2_weight_capacity],[mft_vie_weight_capacity],[mft_vie_cubic_weight],[operational_comments],[closing_comments],[mft_mte_unloading_recipient_names],[mft_mte_delivery_region_names])
+ SELECT p.source_observation_id,CONVERT(BIT,CASE WHEN COUNT(issue)=0 THEN 1 ELSE 0 END),MAX(clock.epoch_second),MAX(clock.nano),MAX(clock.freshness_origin),CONVERT(BIGINT,MAX(CASE WHEN field_name=N'sequence_code' AND issue IS NULL THEN integer_value END)) [sequence_code],
+ CONVERT(NVARCHAR(255),MAX(CASE WHEN field_name=N'mft_crn_psn_nickname' AND issue IS NULL THEN text_value END)) [mft_crn_psn_nickname],
+ CONVERT(DATETIMEOFFSET(7),MAX(CASE WHEN field_name=N'created_at' AND issue IS NULL THEN time_value END)) [created_at],
+ CONVERT(DATETIMEOFFSET(7),MAX(CASE WHEN field_name=N'departured_at' AND issue IS NULL THEN time_value END)) [departured_at],
+ CONVERT(DATETIMEOFFSET(7),MAX(CASE WHEN field_name=N'closed_at' AND issue IS NULL THEN time_value END)) [closed_at],
+ CONVERT(DATETIMEOFFSET(7),MAX(CASE WHEN field_name=N'finished_at' AND issue IS NULL THEN time_value END)) [finished_at],
+ CONVERT(NVARCHAR(50),MAX(CASE WHEN field_name=N'status' AND issue IS NULL THEN text_value END)) [status],
+ CONVERT(INT,MAX(CASE WHEN field_name=N'mft_mfs_number' AND issue IS NULL THEN integer_value END)) [mft_mfs_number],
+ CONVERT(NVARCHAR(100),MAX(CASE WHEN field_name=N'mft_mfs_key' AND issue IS NULL THEN text_value END)) [mft_mfs_key],
+ CONVERT(NVARCHAR(50),MAX(CASE WHEN field_name=N'mdfe_status' AND issue IS NULL THEN text_value END)) [mdfe_status],
+ CONVERT(NVARCHAR(255),MAX(CASE WHEN field_name=N'mft_ape_name' AND issue IS NULL THEN text_value END)) [mft_ape_name],
+ CONVERT(NVARCHAR(255),MAX(CASE WHEN field_name=N'mft_man_name' AND issue IS NULL THEN text_value END)) [mft_man_name],
+ CONVERT(NVARCHAR(10),MAX(CASE WHEN field_name=N'mft_vie_license_plate' AND issue IS NULL THEN text_value END)) [mft_vie_license_plate],
+ CONVERT(NVARCHAR(255),MAX(CASE WHEN field_name=N'mft_vie_vee_name' AND issue IS NULL THEN text_value END)) [mft_vie_vee_name],
+ CONVERT(NVARCHAR(255),MAX(CASE WHEN field_name=N'mft_vie_onr_name' AND issue IS NULL THEN text_value END)) [mft_vie_onr_name],
+ CONVERT(NVARCHAR(255),MAX(CASE WHEN field_name=N'mft_mdr_iil_name' AND issue IS NULL THEN text_value END)) [mft_mdr_iil_name],
+ CONVERT(INT,MAX(CASE WHEN field_name=N'vehicle_departure_km' AND issue IS NULL THEN integer_value END)) [vehicle_departure_km],
+ CONVERT(INT,MAX(CASE WHEN field_name=N'closing_km' AND issue IS NULL THEN integer_value END)) [closing_km],
+ CONVERT(INT,MAX(CASE WHEN field_name=N'traveled_km' AND issue IS NULL THEN integer_value END)) [traveled_km],
+ CONVERT(INT,MAX(CASE WHEN field_name=N'invoices_count' AND issue IS NULL THEN integer_value END)) [invoices_count],
+ CONVERT(INT,MAX(CASE WHEN field_name=N'invoices_volumes' AND issue IS NULL THEN integer_value END)) [invoices_volumes],
+ CONVERT(DECIMAL(28,8),MAX(CASE WHEN field_name=N'invoices_weight' AND issue IS NULL THEN decimal_value END)) [invoices_weight],
+ CONVERT(DECIMAL(28,8),MAX(CASE WHEN field_name=N'total_taxed_weight' AND issue IS NULL THEN decimal_value END)) [total_taxed_weight],
+ CONVERT(DECIMAL(28,8),MAX(CASE WHEN field_name=N'total_cubic_volume' AND issue IS NULL THEN decimal_value END)) [total_cubic_volume],
+ CONVERT(DECIMAL(28,8),MAX(CASE WHEN field_name=N'invoices_value' AND issue IS NULL THEN decimal_value END)) [invoices_value],
+ CONVERT(DECIMAL(28,8),MAX(CASE WHEN field_name=N'manifest_freights_total' AND issue IS NULL THEN decimal_value END)) [manifest_freights_total],
+ CONVERT(BIGINT,MAX(CASE WHEN field_name=N'mft_pfs_pck_sequence_code' AND issue IS NULL THEN integer_value END)) [mft_pfs_pck_sequence_code],
+ CONVERT(NVARCHAR(50),MAX(CASE WHEN field_name=N'mft_cat_cot_number' AND issue IS NULL THEN text_value END)) [mft_cat_cot_number],
+ CONVERT(DECIMAL(28,8),MAX(CASE WHEN field_name=N'daily_subtotal' AND issue IS NULL THEN decimal_value END)) [daily_subtotal],
+ CONVERT(DECIMAL(28,8),MAX(CASE WHEN field_name=N'total_cost' AND issue IS NULL THEN decimal_value END)) [total_cost],
+ CONVERT(DECIMAL(28,8),MAX(CASE WHEN field_name=N'operational_expenses_total' AND issue IS NULL THEN decimal_value END)) [operational_expenses_total],
+ CONVERT(DECIMAL(28,8),MAX(CASE WHEN field_name=N'mft_a_t_inss_value' AND issue IS NULL THEN decimal_value END)) [mft_a_t_inss_value],
+ CONVERT(DECIMAL(28,8),MAX(CASE WHEN field_name=N'mft_a_t_sest_senat_value' AND issue IS NULL THEN decimal_value END)) [mft_a_t_sest_senat_value],
+ CONVERT(DECIMAL(28,8),MAX(CASE WHEN field_name=N'mft_a_t_ir_value' AND issue IS NULL THEN decimal_value END)) [mft_a_t_ir_value],
+ CONVERT(DECIMAL(28,8),MAX(CASE WHEN field_name=N'paying_total' AND issue IS NULL THEN decimal_value END)) [paying_total],
+ CONVERT(NVARCHAR(255),MAX(CASE WHEN field_name=N'mft_uer_name' AND issue IS NULL THEN text_value END)) [mft_uer_name],
+ CONVERT(NVARCHAR(255),MAX(CASE WHEN field_name=N'mft_aoe_rer_name' AND issue IS NULL THEN text_value END)) [mft_aoe_rer_name],
+ CONVERT(DECIMAL(28,8),MAX(CASE WHEN field_name=N'advance_subtotal' AND issue IS NULL THEN decimal_value END)) [advance_subtotal],
+ CONVERT(DECIMAL(28,8),MAX(CASE WHEN field_name=N'toll_subtotal' AND issue IS NULL THEN decimal_value END)) [toll_subtotal],
+ CONVERT(DECIMAL(28,8),MAX(CASE WHEN field_name=N'fleet_costs_subtotal' AND issue IS NULL THEN decimal_value END)) [fleet_costs_subtotal],
+ CONVERT(NVARCHAR(255),MAX(CASE WHEN field_name=N'mft_s_n_svs_sge_pyr_nickname' AND issue IS NULL THEN text_value END)) [mft_s_n_svs_sge_pyr_nickname],
+ CONVERT(NVARCHAR(255),MAX(CASE WHEN field_name=N'mft_s_n_svs_sge_sse_name' AND issue IS NULL THEN text_value END)) [mft_s_n_svs_sge_sse_name],
+ CONVERT(DATETIMEOFFSET(7),MAX(CASE WHEN field_name=N'mobile_read_at' AND issue IS NULL THEN time_value END)) [mobile_read_at],
+ CONVERT(DECIMAL(28,8),MAX(CASE WHEN field_name=N'km' AND issue IS NULL THEN decimal_value END)) [km],
+ CONVERT(BIT,MAX(CASE WHEN field_name=N'manual_km' AND issue IS NULL THEN CONVERT(INT,boolean_value) END)) [manual_km],
+ CONVERT(BIT,MAX(CASE WHEN field_name=N'generate_mdfe' AND issue IS NULL THEN CONVERT(INT,boolean_value) END)) [generate_mdfe],
+ CONVERT(BIT,MAX(CASE WHEN field_name=N'monitoring_request' AND issue IS NULL THEN CONVERT(INT,boolean_value) END)) [monitoring_request],
+ CONVERT(INT,MAX(CASE WHEN field_name=N'delivery_manifest_items_count' AND issue IS NULL THEN integer_value END)) [delivery_manifest_items_count],
+ CONVERT(INT,MAX(CASE WHEN field_name=N'transfer_manifest_items_count' AND issue IS NULL THEN integer_value END)) [transfer_manifest_items_count],
+ CONVERT(INT,MAX(CASE WHEN field_name=N'pick_manifest_items_count' AND issue IS NULL THEN integer_value END)) [pick_manifest_items_count],
+ CONVERT(INT,MAX(CASE WHEN field_name=N'dispatch_draft_manifest_items_count' AND issue IS NULL THEN integer_value END)) [dispatch_draft_manifest_items_count],
+ CONVERT(INT,MAX(CASE WHEN field_name=N'consolidation_manifest_items_count' AND issue IS NULL THEN integer_value END)) [consolidation_manifest_items_count],
+ CONVERT(INT,MAX(CASE WHEN field_name=N'reverse_pick_manifest_items_count' AND issue IS NULL THEN integer_value END)) [reverse_pick_manifest_items_count],
+ CONVERT(INT,MAX(CASE WHEN field_name=N'manifest_items_count' AND issue IS NULL THEN integer_value END)) [manifest_items_count],
+ CONVERT(INT,MAX(CASE WHEN field_name=N'finalized_manifest_items_count' AND issue IS NULL THEN integer_value END)) [finalized_manifest_items_count],
+ CONVERT(INT,MAX(CASE WHEN field_name=N'uniq_destinations_count' AND issue IS NULL THEN integer_value END)) [uniq_destinations_count],
+ CONVERT(NVARCHAR(50),MAX(CASE WHEN field_name=N'contract_type' AND issue IS NULL THEN text_value END)) [contract_type],
+ CONVERT(NVARCHAR(50),MAX(CASE WHEN field_name=N'mft_mdr_contract_type' AND issue IS NULL THEN text_value END)) [mft_mdr_contract_type],
+ CONVERT(NVARCHAR(50),MAX(CASE WHEN field_name=N'calculation_type' AND issue IS NULL THEN text_value END)) [calculation_type],
+ CONVERT(NVARCHAR(255),MAX(CASE WHEN field_name=N'cargo_type' AND issue IS NULL THEN text_value END)) [cargo_type],
+ CONVERT(INT,MAX(CASE WHEN field_name=N'calculated_pick_count' AND issue IS NULL THEN integer_value END)) [calculated_pick_count],
+ CONVERT(INT,MAX(CASE WHEN field_name=N'calculated_delivery_count' AND issue IS NULL THEN integer_value END)) [calculated_delivery_count],
+ CONVERT(INT,MAX(CASE WHEN field_name=N'calculated_dispatch_count' AND issue IS NULL THEN integer_value END)) [calculated_dispatch_count],
+ CONVERT(INT,MAX(CASE WHEN field_name=N'calculated_consolidation_count' AND issue IS NULL THEN integer_value END)) [calculated_consolidation_count],
+ CONVERT(INT,MAX(CASE WHEN field_name=N'calculated_reverse_pick_count' AND issue IS NULL THEN integer_value END)) [calculated_reverse_pick_count],
+ CONVERT(DECIMAL(28,8),MAX(CASE WHEN field_name=N'freight_subtotal' AND issue IS NULL THEN decimal_value END)) [freight_subtotal],
+ CONVERT(DECIMAL(28,8),MAX(CASE WHEN field_name=N'fuel_subtotal' AND issue IS NULL THEN decimal_value END)) [fuel_subtotal],
+ CONVERT(DECIMAL(28,8),MAX(CASE WHEN field_name=N'pick_subtotal' AND issue IS NULL THEN decimal_value END)) [pick_subtotal],
+ CONVERT(DECIMAL(28,8),MAX(CASE WHEN field_name=N'delivery_subtotal' AND issue IS NULL THEN decimal_value END)) [delivery_subtotal],
+ CONVERT(DECIMAL(28,8),MAX(CASE WHEN field_name=N'dispatch_subtotal' AND issue IS NULL THEN decimal_value END)) [dispatch_subtotal],
+ CONVERT(DECIMAL(28,8),MAX(CASE WHEN field_name=N'consolidation_subtotal' AND issue IS NULL THEN decimal_value END)) [consolidation_subtotal],
+ CONVERT(DECIMAL(28,8),MAX(CASE WHEN field_name=N'reverse_pick_subtotal' AND issue IS NULL THEN decimal_value END)) [reverse_pick_subtotal],
+ CONVERT(DECIMAL(28,8),MAX(CASE WHEN field_name=N'additionals_subtotal' AND issue IS NULL THEN decimal_value END)) [additionals_subtotal],
+ CONVERT(DECIMAL(28,8),MAX(CASE WHEN field_name=N'discounts_subtotal' AND issue IS NULL THEN decimal_value END)) [discounts_subtotal],
+ CONVERT(DECIMAL(28,8),MAX(CASE WHEN field_name=N'discount_value' AND issue IS NULL THEN decimal_value END)) [discount_value],
+ CONVERT(DECIMAL(28,8),MAX(CASE WHEN field_name=N'driver_services_total' AND issue IS NULL THEN decimal_value END)) [driver_services_total],
+ CONVERT(NVARCHAR(4000),MAX(CASE WHEN field_name=N'mft_aoe_comments' AND issue IS NULL THEN text_value END)) [mft_aoe_comments],
+ CONVERT(NVARCHAR(50),MAX(CASE WHEN field_name=N'mft_cat_cot_status' AND issue IS NULL THEN text_value END)) [mft_cat_cot_status],
+ CONVERT(NVARCHAR(100),MAX(CASE WHEN field_name=N'mft_iks_id' AND issue IS NULL THEN text_value END)) [mft_iks_id],
+ CONVERT(NVARCHAR(50),MAX(CASE WHEN field_name=N'mft_s_n_sequence_code' AND issue IS NULL THEN text_value END)) [mft_s_n_sequence_code],
+ CONVERT(DATETIMEOFFSET(7),MAX(CASE WHEN field_name=N'mft_s_n_starting_at' AND issue IS NULL THEN time_value END)) [mft_s_n_starting_at],
+ CONVERT(DATETIMEOFFSET(7),MAX(CASE WHEN field_name=N'mft_s_n_ending_at' AND issue IS NULL THEN time_value END)) [mft_s_n_ending_at],
+ CONVERT(NVARCHAR(10),MAX(CASE WHEN field_name=N'mft_tl1_license_plate' AND issue IS NULL THEN text_value END)) [mft_tl1_license_plate],
+ CONVERT(DECIMAL(28,8),MAX(CASE WHEN field_name=N'mft_tl1_weight_capacity' AND issue IS NULL THEN decimal_value END)) [mft_tl1_weight_capacity],
+ CONVERT(NVARCHAR(10),MAX(CASE WHEN field_name=N'mft_tl2_license_plate' AND issue IS NULL THEN text_value END)) [mft_tl2_license_plate],
+ CONVERT(DECIMAL(28,8),MAX(CASE WHEN field_name=N'mft_tl2_weight_capacity' AND issue IS NULL THEN decimal_value END)) [mft_tl2_weight_capacity],
+ CONVERT(DECIMAL(28,8),MAX(CASE WHEN field_name=N'mft_vie_weight_capacity' AND issue IS NULL THEN decimal_value END)) [mft_vie_weight_capacity],
+ CONVERT(DECIMAL(28,8),MAX(CASE WHEN field_name=N'mft_vie_cubic_weight' AND issue IS NULL THEN decimal_value END)) [mft_vie_cubic_weight],
+ CONVERT(NVARCHAR(4000),MAX(CASE WHEN field_name=N'operational_comments' AND issue IS NULL THEN text_value END)) [operational_comments],
+ CONVERT(NVARCHAR(4000),MAX(CASE WHEN field_name=N'closing_comments' AND issue IS NULL THEN text_value END)) [closing_comments],
+ CONVERT(NVARCHAR(4000),MAX(CASE WHEN field_name=N'mft_mte_unloading_recipient_names' AND issue IS NULL THEN text_value END)) [mft_mte_unloading_recipient_names],
+ CONVERT(NVARCHAR(4000),MAX(CASE WHEN field_name=N'mft_mte_delivery_region_names' AND issue IS NULL THEN text_value END)) [mft_mte_delivery_region_names]
+ FROM #parsed p JOIN #exact_clock clock ON clock.source_observation_id=p.source_observation_id WHERE NOT EXISTS(SELECT 1 FROM stg.analytic_manifest_attributes old WHERE old.source_observation_id=p.source_observation_id) GROUP BY p.source_observation_id;
+ INSERT stg.analytic_manifest_field_audit SELECT source_observation_id,field_name,presence,wire_type,CONVERT(NVARCHAR(4000),raw_value),issue,reducer FROM #parsed p
+ WHERE NOT EXISTS(SELECT 1 FROM stg.analytic_manifest_field_audit old WHERE old.source_observation_id=p.source_observation_id AND old.field_name=p.field_name);
+ -- Reconstruct the latest captured cohort across preparations; equal-clock corrections cannot hide behind the old root pointer.
+ SELECT a.*,o.source_key COLLATE Latin1_General_100_BIN2 source_key,o.freshness_at_utc,o.observed_at_utc,DENSE_RANK() OVER(PARTITION BY o.source_key ORDER BY a.fresh_second DESC,a.fresh_nano DESC) freshness_rank
+ INTO #all FROM stg.analytic_manifest_attributes a JOIN stg.manifesto_observation o ON o.manifesto_observation_id=a.source_observation_id
+ JOIN ctl.relational_lab_capture c ON c.execution_id=o.execution_id
+ WHERE c.run_id=@rel AND EXISTS(SELECT 1 FROM #observations changed WHERE changed.source_key=o.source_key);
+ SELECT * INTO #cohort FROM #all WHERE freshness_rank=1;
+ SELECT c.source_key,a.field_name,MAX(CASE WHEN a.issue IS NOT NULL THEN 1 ELSE 0 END) invalid,
+ CASE WHEN COUNT(DISTINCT CONVERT(VARBINARY(8000),CASE WHEN a.reducer='METRIC' THEN CONVERT(NVARCHAR(100),stg.ufn_analytic_decimal_exact(a.raw_value)) WHEN a.field_name IN(N'created_at',N'departured_at',N'closed_at',N'finished_at',N'mobile_read_at',N'mft_s_n_starting_at',N'mft_s_n_ending_at') THEN core.ufn_analytic_time_comparison(a.raw_value) ELSE a.raw_value END))>1
+ OR(MIN(CASE WHEN a.presence='NULL' THEN 0 WHEN a.presence='VALUE' THEN 1 END)=0 AND MAX(CASE WHEN a.presence='VALUE' THEN 1 ELSE 0 END)=1 AND a.reducer='COHERENT')
+ THEN 1 ELSE 0 END conflict
+ INTO #conflicts FROM #cohort c JOIN stg.analytic_manifest_field_audit a ON a.source_observation_id=c.source_observation_id
+ WHERE a.reducer NOT IN('CHILD','STATUS') GROUP BY c.source_key,a.field_name,a.reducer;
+ SELECT c.source_key,MAX(c.fresh_second) fresh_second,MAX(c.fresh_nano) fresh_nano,MAX(c.freshness_at_utc) cohort_at,COUNT_BIG(*) source_rows,MAX(c.observed_at_utc) extracted_at,
+ CONVERT(VARCHAR(32),CASE WHEN MIN(CONVERT(INT,c.valid))=0 THEN 'INVALID_ATTRIBUTES'
+ WHEN EXISTS(SELECT 1 FROM #conflicts x WHERE x.source_key=c.source_key AND x.conflict=1) THEN 'ATTRIBUTE_CONFLICT'
+ WHEN COUNT(DISTINCT c.status)>1 AND MAX(CASE WHEN c.status NOT IN(N'closed',N'in_transit',N'pending') THEN 1 ELSE 0 END)=1 THEN 'STATUS_CONFLICT'
+ ELSE 'READY' END) disposition,MAX(c.[sequence_code]) [sequence_code],
+ MAX(c.[mft_crn_psn_nickname]) [mft_crn_psn_nickname],
+ MAX(SWITCHOFFSET(c.[created_at],'+00:00')) [created_at],
+ MAX(SWITCHOFFSET(c.[departured_at],'+00:00')) [departured_at],
+ MAX(SWITCHOFFSET(c.[closed_at],'+00:00')) [closed_at],
+ MAX(SWITCHOFFSET(c.[finished_at],'+00:00')) [finished_at],
+ CASE WHEN MAX(CASE WHEN c.status NOT IN(N'closed',N'in_transit',N'pending') THEN 1 ELSE 0 END)=0 THEN CASE MAX(CASE c.status WHEN N'closed' THEN 3 WHEN N'in_transit' THEN 2 WHEN N'pending' THEN 1 END) WHEN 3 THEN N'closed' WHEN 2 THEN N'in_transit' WHEN 1 THEN N'pending' END ELSE MAX(c.status) END [status],
+ CASE WHEN COUNT(DISTINCT c.[mft_mfs_number])=1 THEN MAX(c.[mft_mfs_number]) END [mft_mfs_number],
+ CASE WHEN COUNT(DISTINCT CONVERT(VARBINARY(8000),c.[mft_mfs_key]))=1 THEN MAX(c.[mft_mfs_key]) END [mft_mfs_key],
+ CASE WHEN COUNT(DISTINCT CONVERT(VARBINARY(8000),c.[mdfe_status]))=1 THEN MAX(c.[mdfe_status]) END [mdfe_status],
+ MAX(c.[mft_ape_name]) [mft_ape_name],
+ MAX(c.[mft_man_name]) [mft_man_name],
+ MAX(c.[mft_vie_license_plate]) [mft_vie_license_plate],
+ MAX(c.[mft_vie_vee_name]) [mft_vie_vee_name],
+ MAX(c.[mft_vie_onr_name]) [mft_vie_onr_name],
+ MAX(c.[mft_mdr_iil_name]) [mft_mdr_iil_name],
+ MAX(c.[vehicle_departure_km]) [vehicle_departure_km],
+ MAX(c.[closing_km]) [closing_km],
+ MAX(c.[traveled_km]) [traveled_km],
+ MAX(c.[invoices_count]) [invoices_count],
+ MAX(c.[invoices_volumes]) [invoices_volumes],
+ MAX(c.[invoices_weight]) [invoices_weight],
+ MAX(c.[total_taxed_weight]) [total_taxed_weight],
+ MAX(c.[total_cubic_volume]) [total_cubic_volume],
+ MAX(c.[invoices_value]) [invoices_value],
+ MAX(c.[manifest_freights_total]) [manifest_freights_total],
+ CASE WHEN COUNT(DISTINCT c.[mft_pfs_pck_sequence_code])=1 THEN MAX(c.[mft_pfs_pck_sequence_code]) END [mft_pfs_pck_sequence_code],
+ MAX(c.[mft_cat_cot_number]) [mft_cat_cot_number],
+ MAX(c.[daily_subtotal]) [daily_subtotal],
+ MAX(c.[total_cost]) [total_cost],
+ MAX(c.[operational_expenses_total]) [operational_expenses_total],
+ MAX(c.[mft_a_t_inss_value]) [mft_a_t_inss_value],
+ MAX(c.[mft_a_t_sest_senat_value]) [mft_a_t_sest_senat_value],
+ MAX(c.[mft_a_t_ir_value]) [mft_a_t_ir_value],
+ MAX(c.[paying_total]) [paying_total],
+ MAX(c.[mft_uer_name]) [mft_uer_name],
+ MAX(c.[mft_aoe_rer_name]) [mft_aoe_rer_name],
+ MAX(c.[advance_subtotal]) [advance_subtotal],
+ MAX(c.[toll_subtotal]) [toll_subtotal],
+ MAX(c.[fleet_costs_subtotal]) [fleet_costs_subtotal],
+ MAX(c.[mft_s_n_svs_sge_pyr_nickname]) [mft_s_n_svs_sge_pyr_nickname],
+ MAX(c.[mft_s_n_svs_sge_sse_name]) [mft_s_n_svs_sge_sse_name],
+ MAX(SWITCHOFFSET(c.[mobile_read_at],'+00:00')) [mobile_read_at],
+ MAX(c.[km]) [km],
+ MAX(CONVERT(INT,c.[manual_km])) [manual_km],
+ MAX(CONVERT(INT,c.[generate_mdfe])) [generate_mdfe],
+ MAX(CONVERT(INT,c.[monitoring_request])) [monitoring_request],
+ MAX(c.[delivery_manifest_items_count]) [delivery_manifest_items_count],
+ MAX(c.[transfer_manifest_items_count]) [transfer_manifest_items_count],
+ MAX(c.[pick_manifest_items_count]) [pick_manifest_items_count],
+ MAX(c.[dispatch_draft_manifest_items_count]) [dispatch_draft_manifest_items_count],
+ MAX(c.[consolidation_manifest_items_count]) [consolidation_manifest_items_count],
+ MAX(c.[reverse_pick_manifest_items_count]) [reverse_pick_manifest_items_count],
+ MAX(c.[manifest_items_count]) [manifest_items_count],
+ MAX(c.[finalized_manifest_items_count]) [finalized_manifest_items_count],
+ MAX(c.[uniq_destinations_count]) [uniq_destinations_count],
+ MAX(c.[contract_type]) [contract_type],
+ MAX(c.[mft_mdr_contract_type]) [mft_mdr_contract_type],
+ MAX(c.[calculation_type]) [calculation_type],
+ MAX(c.[cargo_type]) [cargo_type],
+ MAX(c.[calculated_pick_count]) [calculated_pick_count],
+ MAX(c.[calculated_delivery_count]) [calculated_delivery_count],
+ MAX(c.[calculated_dispatch_count]) [calculated_dispatch_count],
+ MAX(c.[calculated_consolidation_count]) [calculated_consolidation_count],
+ MAX(c.[calculated_reverse_pick_count]) [calculated_reverse_pick_count],
+ MAX(c.[freight_subtotal]) [freight_subtotal],
+ MAX(c.[fuel_subtotal]) [fuel_subtotal],
+ MAX(c.[pick_subtotal]) [pick_subtotal],
+ MAX(c.[delivery_subtotal]) [delivery_subtotal],
+ MAX(c.[dispatch_subtotal]) [dispatch_subtotal],
+ MAX(c.[consolidation_subtotal]) [consolidation_subtotal],
+ MAX(c.[reverse_pick_subtotal]) [reverse_pick_subtotal],
+ MAX(c.[additionals_subtotal]) [additionals_subtotal],
+ MAX(c.[discounts_subtotal]) [discounts_subtotal],
+ MAX(c.[discount_value]) [discount_value],
+ MAX(c.[driver_services_total]) [driver_services_total],
+ MAX(c.[mft_aoe_comments]) [mft_aoe_comments],
+ MAX(c.[mft_cat_cot_status]) [mft_cat_cot_status],
+ MAX(c.[mft_iks_id]) [mft_iks_id],
+ MAX(c.[mft_s_n_sequence_code]) [mft_s_n_sequence_code],
+ MAX(SWITCHOFFSET(c.[mft_s_n_starting_at],'+00:00')) [mft_s_n_starting_at],
+ MAX(SWITCHOFFSET(c.[mft_s_n_ending_at],'+00:00')) [mft_s_n_ending_at],
+ MAX(c.[mft_tl1_license_plate]) [mft_tl1_license_plate],
+ MAX(c.[mft_tl1_weight_capacity]) [mft_tl1_weight_capacity],
+ MAX(c.[mft_tl2_license_plate]) [mft_tl2_license_plate],
+ MAX(c.[mft_tl2_weight_capacity]) [mft_tl2_weight_capacity],
+ MAX(c.[mft_vie_weight_capacity]) [mft_vie_weight_capacity],
+ MAX(c.[mft_vie_cubic_weight]) [mft_vie_cubic_weight],
+ MAX(c.[operational_comments]) [operational_comments],
+ MAX(c.[closing_comments]) [closing_comments],
+ MAX(c.[mft_mte_unloading_recipient_names]) [mft_mte_unloading_recipient_names],
+ MAX(c.[mft_mte_delivery_region_names]) [mft_mte_delivery_region_names]
+ INTO #roots FROM #cohort c GROUP BY c.source_key;
+ IF (SELECT COUNT_BIG(*) FROM #roots)>@maximum THROW 53606,N'ANA_MANIFEST_ROOT_BOUND',1;
+ INSERT ctl.analytic_manifest_preparation SELECT @run_id,@execution_id,@fingerprint,'analytic-manifest-preparation-v1',@rows,COUNT_BIG(*),COALESCE(SUM(CONVERT(BIGINT,CASE WHEN disposition<>'READY' THEN 1 ELSE 0 END)),0),@now FROM #roots;
+ INSERT core.analytic_manifest_snapshot(run_id,execution_id,source_key,cohort_at,source_rows,disposition,extracted_at,fresh_second,fresh_nano,[sequence_code],[mft_crn_psn_nickname],[created_at],[departured_at],[closed_at],[finished_at],[status],[mft_mfs_number],[mft_mfs_key],[mdfe_status],[mft_ape_name],[mft_man_name],[mft_vie_license_plate],[mft_vie_vee_name],[mft_vie_onr_name],[mft_mdr_iil_name],[vehicle_departure_km],[closing_km],[traveled_km],[invoices_count],[invoices_volumes],[invoices_weight],[total_taxed_weight],[total_cubic_volume],[invoices_value],[manifest_freights_total],[mft_pfs_pck_sequence_code],[mft_cat_cot_number],[daily_subtotal],[total_cost],[operational_expenses_total],[mft_a_t_inss_value],[mft_a_t_sest_senat_value],[mft_a_t_ir_value],[paying_total],[mft_uer_name],[mft_aoe_rer_name],[advance_subtotal],[toll_subtotal],[fleet_costs_subtotal],[mft_s_n_svs_sge_pyr_nickname],[mft_s_n_svs_sge_sse_name],[mobile_read_at],[km],[manual_km],[generate_mdfe],[monitoring_request],[delivery_manifest_items_count],[transfer_manifest_items_count],[pick_manifest_items_count],[dispatch_draft_manifest_items_count],[consolidation_manifest_items_count],[reverse_pick_manifest_items_count],[manifest_items_count],[finalized_manifest_items_count],[uniq_destinations_count],[contract_type],[mft_mdr_contract_type],[calculation_type],[cargo_type],[calculated_pick_count],[calculated_delivery_count],[calculated_dispatch_count],[calculated_consolidation_count],[calculated_reverse_pick_count],[freight_subtotal],[fuel_subtotal],[pick_subtotal],[delivery_subtotal],[dispatch_subtotal],[consolidation_subtotal],[reverse_pick_subtotal],[additionals_subtotal],[discounts_subtotal],[discount_value],[driver_services_total],[mft_aoe_comments],[mft_cat_cot_status],[mft_iks_id],[mft_s_n_sequence_code],[mft_s_n_starting_at],[mft_s_n_ending_at],[mft_tl1_license_plate],[mft_tl1_weight_capacity],[mft_tl2_license_plate],[mft_tl2_weight_capacity],[mft_vie_weight_capacity],[mft_vie_cubic_weight],[operational_comments],[closing_comments],[mft_mte_unloading_recipient_names],[mft_mte_delivery_region_names])
+ SELECT @run_id,@execution_id,source_key,cohort_at,source_rows,disposition,extracted_at,fresh_second,fresh_nano,[sequence_code],[mft_crn_psn_nickname],[created_at],[departured_at],[closed_at],[finished_at],[status],[mft_mfs_number],[mft_mfs_key],[mdfe_status],[mft_ape_name],[mft_man_name],[mft_vie_license_plate],[mft_vie_vee_name],[mft_vie_onr_name],[mft_mdr_iil_name],[vehicle_departure_km],[closing_km],[traveled_km],[invoices_count],[invoices_volumes],[invoices_weight],[total_taxed_weight],[total_cubic_volume],[invoices_value],[manifest_freights_total],[mft_pfs_pck_sequence_code],[mft_cat_cot_number],[daily_subtotal],[total_cost],[operational_expenses_total],[mft_a_t_inss_value],[mft_a_t_sest_senat_value],[mft_a_t_ir_value],[paying_total],[mft_uer_name],[mft_aoe_rer_name],[advance_subtotal],[toll_subtotal],[fleet_costs_subtotal],[mft_s_n_svs_sge_pyr_nickname],[mft_s_n_svs_sge_sse_name],[mobile_read_at],[km],[manual_km],[generate_mdfe],[monitoring_request],[delivery_manifest_items_count],[transfer_manifest_items_count],[pick_manifest_items_count],[dispatch_draft_manifest_items_count],[consolidation_manifest_items_count],[reverse_pick_manifest_items_count],[manifest_items_count],[finalized_manifest_items_count],[uniq_destinations_count],[contract_type],[mft_mdr_contract_type],[calculation_type],[cargo_type],[calculated_pick_count],[calculated_delivery_count],[calculated_dispatch_count],[calculated_consolidation_count],[calculated_reverse_pick_count],[freight_subtotal],[fuel_subtotal],[pick_subtotal],[delivery_subtotal],[dispatch_subtotal],[consolidation_subtotal],[reverse_pick_subtotal],[additionals_subtotal],[discounts_subtotal],[discount_value],[driver_services_total],[mft_aoe_comments],[mft_cat_cot_status],[mft_iks_id],[mft_s_n_sequence_code],[mft_s_n_starting_at],[mft_s_n_ending_at],[mft_tl1_license_plate],[mft_tl1_weight_capacity],[mft_tl2_license_plate],[mft_tl2_weight_capacity],[mft_vie_weight_capacity],[mft_vie_cubic_weight],[operational_comments],[closing_comments],[mft_mte_unloading_recipient_names],[mft_mte_delivery_region_names] FROM #roots;
+ INSERT core.analytic_manifest_snapshot_lineage(snapshot_id,source_observation_id)
+ SELECT s.snapshot_id,c.source_observation_id FROM core.analytic_manifest_snapshot s JOIN #cohort c ON c.source_key=s.source_key
+ WHERE s.run_id=@run_id AND s.execution_id=@execution_id;
+ UPDATE c SET snapshot_id=s.snapshot_id FROM core.analytic_manifest_current c JOIN core.analytic_manifest_snapshot s
+ ON s.run_id=c.run_id AND s.source_key=c.source_key WHERE s.run_id=@run_id AND s.execution_id=@execution_id;
+ INSERT core.analytic_manifest_current SELECT s.run_id,s.source_key,s.snapshot_id FROM core.analytic_manifest_snapshot s
+ WHERE s.run_id=@run_id AND s.execution_id=@execution_id AND NOT EXISTS(SELECT 1 FROM core.analytic_manifest_current c WHERE c.run_id=s.run_id AND c.source_key=s.source_key);
+ SELECT physical_rows,root_rows,blocked_roots FROM ctl.analytic_manifest_preparation WHERE run_id=@run_id AND execution_id=@execution_id;
+END;
+GO
+

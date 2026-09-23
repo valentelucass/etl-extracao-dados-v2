@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "round": "P07-CORRECAO-REPLAY-POS0207-20260921-01",
+  "predecessor": "docs/continuidade/checkpoints/0206-p07-falha-replay-p08-bloqueado.md",
+  "historicalFailurePreserved": true,
+  "p07": "QUALIFIED_SHADOW_REPLAY_CORRECTED",
+  "p08": "NOT_STARTED_ELIGIBLE_FUTURE_ORDER_REQUIRED",
+  "evidence": [
+    "target/macrobloco-qualificacao-pacote-20260913-01/p07-replay-pos0207-verify-01/result.json",
+    "target/macrobloco-qualificacao-pacote-20260913-01/p07-replay-pos0207-ledger-01/ledger.json",
+    "docs/catalogos/campanhas-integrais/P07-REPLAY-CORRECAO-POS0207.md"
+  ],
+  "hashes": {
+    "src/main/java/br/com/esl/etl/v2/bootstrap/AnalyticScenarioRuntime.java": "be6b0d22ac26788457d66e71eb7d49b652c83fcd2f44dbde3ce5f67fdd281b4c",
+    "src/test/java/br/com/esl/etl/v2/bootstrap/AnalyticScenarioRuntimeIT.java": "162398837d38368911d0cffd77c024c1c69f2f3ca552a523ee4b1eb9d3b65912",
+    "src/test/java/br/com/esl/etl/v2/bootstrap/AnalyticScenarioReplayLineageTest.java": "4dcdbd2c708175bdcb00bdcad431050a75b9bb75abb73009c9c2d087a1e35d68",
+    "docs/catalogos/campanhas-integrais/P07-REPLAY-CORRECAO-POS0207.md": "15909d8c8f7c0c4047c18445fd14cd576779e0fd38832b678cd6c68a11b375ca",
+    "docs/continuidade/checkpoints/0207-p07-replay-corrigido-requalificado.md": "bd1c46927306fd5e85465a9ca7b3c2456c141a9e7079e6c0b8bf06348c6162a8",
+    "target/macrobloco-qualificacao-pacote-20260913-01/p07-replay-pos0207-ledger-01/ledger.json": "647037d9ff92ed47fb589b38d92cc305239c85191fa35f5f4efd4f81859ca922",
+    "target/macrobloco-qualificacao-pacote-20260913-01/p07-replay-pos0207-verify-01/result.json": "b9075ad94022d5da6da2c0f562345958ff9fc15818b1b5f70a4cddeadf575dc2"
+  }
+}

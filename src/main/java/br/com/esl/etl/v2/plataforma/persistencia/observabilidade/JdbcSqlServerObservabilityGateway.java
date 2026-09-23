@@ -138,12 +138,35 @@ public final class JdbcSqlServerObservabilityGateway
 
     @Override
     public void raise(final OperationalAlert alert) {
+        raiseAt(null, alert);
+    }
+
+    public void raiseScoped(final UUID execution, final OperationalAlert alert) {
+        Objects.requireNonNull(execution);
+        Objects.requireNonNull(alert);
+        if (!br.com.esl.etl.v2.plataforma.observabilidade.CorrelationReference.fromExecutionId(
+                        execution)
+                .equals(alert.correlationReference())) {
+            throw new IllegalArgumentException("ALERT_EXECUTION_CORRELATION_MISMATCH");
+        }
+        raiseAt(execution, alert);
+    }
+
+    private void raiseAt(final UUID execution, final OperationalAlert alert) {
         final OperationalAlert required =
                 Objects.requireNonNull(alert, "O alerta operacional é obrigatório.");
         try (Connection connection = dataSource.getConnection();
-                CallableStatement statement = connection.prepareCall(RAISE_ALERT)) {
+                CallableStatement statement =
+                        connection.prepareCall(
+                                execution == null
+                                        ? RAISE_ALERT
+                                        : "{call recon.usp_runtime_raise_alert(?, ?, ?, ?, ?, ?, ?)}")) {
             statement.setQueryTimeout(queryTimeoutSeconds);
-            statement.setString(1, required.correlationReference().sha256());
+            statement.setString(
+                    1,
+                    execution == null
+                            ? required.correlationReference().sha256()
+                            : execution.toString());
             statement.setInt(2, required.sequence());
             statement.setString(3, required.severity().name());
             statement.setString(4, required.alertCode());

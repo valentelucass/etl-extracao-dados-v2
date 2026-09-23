@@ -31,14 +31,12 @@ public record DataExportRetryPolicy(int maxAttempts, Duration initialDelay, Dura
         }
         final int shift = Math.min(failedAttempt - 1, 20);
         final long multiplier = 1L << shift;
-        final long initialMillis = initialDelay.toMillis();
-        final long cappedMillis;
+        final Duration scaled;
         try {
-            cappedMillis =
-                    Math.min(Math.multiplyExact(initialMillis, multiplier), maxDelay.toMillis());
+            scaled = initialDelay.multipliedBy(multiplier);
         } catch (final ArithmeticException exception) {
             return maxDelay;
         }
-        return Duration.ofMillis(cappedMillis);
+        return scaled.compareTo(maxDelay) <= 0 ? scaled : maxDelay;
     }
 }

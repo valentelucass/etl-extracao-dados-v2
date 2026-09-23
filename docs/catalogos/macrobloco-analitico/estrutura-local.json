@@ -1,0 +1,1229 @@
+{
+  "migrations": [
+    {
+      "sha256": "cadbbba91382faf1afd6c282ae4213a0f313d424335250d824c83bcdd93abc9f",
+      "scope": "PREDECESSOR_IMMUTABLE",
+      "path": "database/migrations/V001__create_v2_schema_foundation.sql",
+      "evidence": [],
+      "version": 1
+    },
+    {
+      "sha256": "6e962af63a639380cd84e479c94f003dd80497fb1632c9cf29bd9983a94772b2",
+      "scope": "PREDECESSOR_IMMUTABLE",
+      "path": "database/migrations/V002__create_v2_database_roles.sql",
+      "evidence": [],
+      "version": 2
+    },
+    {
+      "sha256": "64cf2b6969707fa9e50aa888f8201eaa1de75379bbb1575fd8f7184ba5cee137",
+      "scope": "PREDECESSOR_IMMUTABLE",
+      "path": "database/migrations/V003__create_control_plane.sql",
+      "evidence": [],
+      "version": 3
+    },
+    {
+      "sha256": "36e575005ee00ecd4e61523924ef2ab8af6a31b30d5fe3f00790ea5e7d83f22e",
+      "scope": "PREDECESSOR_IMMUTABLE",
+      "path": "database/migrations/V004__create_staging_promotion_kernel.sql",
+      "evidence": [],
+      "version": 4
+    },
+    {
+      "sha256": "0e0d71d9ac7ee77341a356675bf0169de7e3cd8d57e1d492b32f70017d546923",
+      "scope": "PREDECESSOR_IMMUTABLE",
+      "path": "database/migrations/V005__create_staging_lifecycle.sql",
+      "evidence": [],
+      "version": 5
+    },
+    {
+      "sha256": "6fe537d98f258c390b86e21734c39278e0f7aa1e414e870a59f5e717e3670611",
+      "scope": "PREDECESSOR_IMMUTABLE",
+      "path": "database/migrations/V006__create_observability_data_quality.sql",
+      "evidence": [],
+      "version": 6
+    },
+    {
+      "sha256": "988a4a18a5c930a70a01e6fd9caff9369cacb1bb5faab16fe2bf0f62c78ef499",
+      "scope": "PREDECESSOR_IMMUTABLE",
+      "path": "database/migrations/V007__create_usuarios_current_history.sql",
+      "evidence": [],
+      "version": 7
+    },
+    {
+      "sha256": "f829632988cf5ee177c0bd93a6b38d2476d359c3953e9c334369721943f6f764",
+      "scope": "PREDECESSOR_IMMUTABLE",
+      "path": "database/migrations/V008__create_governed_references.sql",
+      "evidence": [],
+      "version": 8
+    },
+    {
+      "sha256": "d71b89ac9560783a00ea1b05d08c951ca56a001aa1399868acfe692656c8a342",
+      "scope": "PREDECESSOR_IMMUTABLE",
+      "path": "database/migrations/V009__create_usuario_dimension_current_view.sql",
+      "evidence": [],
+      "version": 9
+    },
+    {
+      "sha256": "73c8d4e862a36b3c1dde91379097548408d1768642e60171c93d3ed83de062d1",
+      "scope": "PREDECESSOR_IMMUTABLE",
+      "path": "database/migrations/V010__create_coletas_shadow_vertical.sql",
+      "evidence": [],
+      "version": 10
+    },
+    {
+      "sha256": "88a2ea1cacbad4c4291d117df2eff844c872f55ba1f44149eb2f2beb55541f5e",
+      "scope": "PREDECESSOR_IMMUTABLE",
+      "path": "database/migrations/V011__create_cotacoes_shadow_vertical.sql",
+      "evidence": [],
+      "version": 11
+    },
+    {
+      "sha256": "8bf1f0a51e741814699d8204799f81edc336978d610d1851c340a260a95dfe13",
+      "scope": "PREDECESSOR_IMMUTABLE",
+      "path": "database/migrations/V012__create_manifestos_shadow_vertical.sql",
+      "evidence": [],
+      "version": 12
+    },
+    {
+      "sha256": "20d8c088ba742dd207a35bef8003a6a9a7c3d52b0c52aba432894fbfcad4b824",
+      "scope": "PREDECESSOR_IMMUTABLE",
+      "path": "database/migrations/V013__create_fretes_shadow_vertical.sql",
+      "evidence": [],
+      "version": 13
+    },
+    {
+      "sha256": "8f9bbc269d2512925db41b4cfd984c03c06af2a35494346dbafc498464f26976",
+      "scope": "PREDECESSOR_IMMUTABLE",
+      "path": "database/migrations/V014__create_localizacao_cargas_shadow_vertical.sql",
+      "evidence": [],
+      "version": 14
+    },
+    {
+      "sha256": "91629327d944434c3cb252c02f6a13d228724a6315e0e29dd81917b1fca54227",
+      "scope": "PREDECESSOR_IMMUTABLE",
+      "path": "database/migrations/V015__create_runtime_durable_recovery.sql",
+      "evidence": [],
+      "version": 15
+    },
+    {
+      "sha256": "6c81c6c05d474c5fc592b9dc429d5cab1cf3aa14b239e73adb432071d5ec9b96",
+      "scope": "PREDECESSOR_IMMUTABLE",
+      "path": "database/migrations/V016__create_windows_runtime_authority.sql",
+      "evidence": [],
+      "version": 16
+    },
+    {
+      "sha256": "fd3afdb898e49084b4832946b289028777a0187f516d9ba8afb5ffeeffa3e712",
+      "scope": "PREDECESSOR_IMMUTABLE",
+      "path": "database/migrations/V017__create_runtime_temporal_plan.sql",
+      "evidence": [],
+      "version": 17
+    },
+    {
+      "sha256": "0e418d19fe93ea3611f6d083ffa77e8e58e764ed0f5a180eb1d3a33e6f971f49",
+      "scope": "PREDECESSOR_IMMUTABLE",
+      "path": "database/migrations/V018__enforce_durable_runtime_consumers.sql",
+      "evidence": [],
+      "version": 18
+    },
+    {
+      "sha256": "42b8baae9c6681b3b5d1201d7062e33c7e34562eb5c643c7c269186128888d4c",
+      "scope": "PREDECESSOR_IMMUTABLE",
+      "path": "database/migrations/V019__create_scoped_runtime_observability.sql",
+      "evidence": [],
+      "version": 19
+    },
+    {
+      "sha256": "7ba03d5627016e722e077ca2c6a7eec926ea4779dccce8c6010d77927ed14df4",
+      "scope": "PREDECESSOR_IMMUTABLE",
+      "path": "database/migrations/V020__bind_existing_runtime_occurrences.sql",
+      "evidence": [],
+      "version": 20
+    },
+    {
+      "sha256": "1f9ad81b40b7dc97055de9a28038ae989185744c34fabd15ca63da07f5163e24",
+      "scope": "PREDECESSOR_IMMUTABLE",
+      "path": "database/migrations/V021__bind_durable_temporal_intent.sql",
+      "evidence": [],
+      "version": 21
+    },
+    {
+      "sha256": "24bd97402526d2656a9eb30e1216325763853af73cf5806108d7f467e27e8779",
+      "scope": "PREDECESSOR_IMMUTABLE",
+      "path": "database/migrations/V022__extend_five_vertical_runtime.sql",
+      "evidence": [],
+      "version": 22
+    },
+    {
+      "sha256": "053d5c40223f515dff3f884bdc6ed0e7122ce1f9044dccd4f64f9cd4b138bd8f",
+      "scope": "PREDECESSOR_IMMUTABLE",
+      "path": "database/migrations/V023__correct_scoped_runtime_output_projection.sql",
+      "evidence": [],
+      "version": 23
+    },
+    {
+      "sha256": "40e7f05186bf3c69e9447117524ddd6bd0b648be32375d522a505165399128f6",
+      "scope": "PREDECESSOR_IMMUTABLE",
+      "path": "database/migrations/V024__bind_source_protocols_and_users_runtime.sql",
+      "evidence": [],
+      "version": 24
+    },
+    {
+      "sha256": "253ed54b915156bfe8d54de003118b6a1423c92e88c89f03eacee6a4eb87877e",
+      "scope": "PREDECESSOR_IMMUTABLE",
+      "path": "database/migrations/V025__restore_coletas_extraction_audit.sql",
+      "evidence": [],
+      "version": 25
+    },
+    {
+      "sha256": "81654a281d1408ea5000286c1699974cc6e3873f04973124a59564d5b2fa9f14",
+      "scope": "PREDECESSOR_IMMUTABLE",
+      "path": "database/migrations/V026__create_coletas_temporal_reference.sql",
+      "evidence": [],
+      "version": 26
+    },
+    {
+      "sha256": "ff8745a184b86b9e6b2fd3ef6f2d9341fbc4e378df044551205e06cf720ce114",
+      "scope": "PREDECESSOR_IMMUTABLE",
+      "path": "database/migrations/V027__create_coletas_exact_temporal_laboratory.sql",
+      "evidence": [],
+      "version": 27
+    },
+    {
+      "sha256": "6347275ac23c3262b2723a868e19e3bd12b53bc6921a00036a87fbe6a1736be1",
+      "scope": "PREDECESSOR_IMMUTABLE",
+      "path": "database/migrations/V028__align_coletas_laboratory_presence_collation.sql",
+      "evidence": [],
+      "version": 28
+    },
+    {
+      "sha256": "81a3e853a084523df813793155eefc191a497f57c7cf76ee6e7638d9428b67cc",
+      "scope": "PREDECESSOR_IMMUTABLE",
+      "path": "database/migrations/V029__create_relational_laboratory.sql",
+      "evidence": [],
+      "version": 29
+    },
+    {
+      "sha256": "a83af66254b11c67547ee519a680496212543f4d0827977efd851ea4d51d334b",
+      "scope": "PREDECESSOR_IMMUTABLE",
+      "path": "database/migrations/V030__capture_relational_laboratory.sql",
+      "evidence": [],
+      "version": 30
+    },
+    {
+      "sha256": "9efd6935b296d535641a7f2d2e4434b0044071566b05ccf0572c982f529a849c",
+      "scope": "PREDECESSOR_IMMUTABLE",
+      "path": "database/migrations/V031__resolve_relational_laboratory.sql",
+      "evidence": [],
+      "version": 31
+    },
+    {
+      "sha256": "53d678cbe0c0e337881f49f500d01a32823d8172994daf8729988ae238fb91de",
+      "scope": "PREDECESSOR_IMMUTABLE",
+      "path": "database/migrations/V032__recompose_relational_laboratory.sql",
+      "evidence": [],
+      "version": 32
+    },
+    {
+      "sha256": "59287118db1201a54f8ae12c95e92785f4e38e9afbe798d5ceb4b5f7c310fac1",
+      "scope": "PREDECESSOR_IMMUTABLE",
+      "path": "database/migrations/V033__align_relational_capture_components.sql",
+      "evidence": [],
+      "version": 33
+    },
+    {
+      "sha256": "eb8b2a0d4f01045d0108faede33f42ac97e810d0d050fda70fc194d77aac083a",
+      "scope": "PREDECESSOR_IMMUTABLE",
+      "path": "database/migrations/V034__strengthen_relational_cohorts_and_binding_dates.sql",
+      "evidence": [],
+      "version": 34
+    },
+    {
+      "sha256": "bd1180f39e84ba7d486ce22008fb84469f550b5fee4e98b9cfa98a35f59ea4c5",
+      "scope": "PREDECESSOR_IMMUTABLE",
+      "path": "database/migrations/V035__seal_relational_reconciliation_completeness.sql",
+      "evidence": [],
+      "version": 35
+    },
+    {
+      "sha256": "3d2f8330a9d25aa270f3d211e1bfaa43d742324ebd4e270a268d633ec16da471",
+      "scope": "PREDECESSOR_IMMUTABLE",
+      "path": "database/migrations/V036__guard_relational_key_padding.sql",
+      "evidence": [],
+      "version": 36
+    },
+    {
+      "sha256": "1b83b51f825d3fc2c1c06f14124a3e97e93f07d4e806296466229191a198137c",
+      "scope": "PREDECESSOR_IMMUTABLE",
+      "path": "database/migrations/V037__preserve_relational_mdfe_number_contract.sql",
+      "evidence": [],
+      "version": 37
+    },
+    {
+      "sha256": "16023ee4b2e0716e651799eaf86e313e9db2fe30fca0d3403eac71010c49c328",
+      "scope": "PREDECESSOR_IMMUTABLE",
+      "path": "database/migrations/V038__create_expansion_laboratory_captures.sql",
+      "evidence": [],
+      "version": 38
+    },
+    {
+      "sha256": "70ebb4ea9ca1bbf6112353ef4d21c25b32be5a31842e4c816b93da6c6f33fc4e",
+      "scope": "PREDECESSOR_IMMUTABLE",
+      "path": "database/migrations/V039__apply_expansion_laboratory.sql",
+      "evidence": [],
+      "version": 39
+    },
+    {
+      "sha256": "4dbc70fade3468ef28a3e6d96e6bc59701452081674945c7cc67068e9fc6635f",
+      "scope": "PREDECESSOR_IMMUTABLE",
+      "path": "database/migrations/V040__capture_expansion_dependencies.sql",
+      "evidence": [],
+      "version": 40
+    },
+    {
+      "sha256": "e1a731746c7c13990dc91e4dd152abd6427154f7e3a8f10fde8857bb4b6ed74f",
+      "scope": "PREDECESSOR_IMMUTABLE",
+      "path": "database/migrations/V041__resolve_expansion_relations.sql",
+      "evidence": [],
+      "version": 41
+    },
+    {
+      "sha256": "b774cc4b50a8806200f5e98eba453132821061c6047fdd5485959a3a5d4fa018",
+      "scope": "PREDECESSOR_IMMUTABLE",
+      "path": "database/migrations/V042__consume_expansion_references.sql",
+      "evidence": [],
+      "version": 42
+    },
+    {
+      "sha256": "b6233fbd7895a67e61cbb3f1d3dd0feccebb60e37385e3940cbaefe2f55e5d38",
+      "scope": "PREDECESSOR_IMMUTABLE",
+      "path": "database/migrations/V043__project_expansion_financial_inputs.sql",
+      "evidence": [],
+      "version": 43
+    },
+    {
+      "sha256": "89595bece46908a29cb87844bd7597097df4466ec7b80c17e1a55a6225193bc3",
+      "scope": "PREDECESSOR_IMMUTABLE",
+      "path": "database/migrations/V044__fence_expansion_captures_and_conflicts.sql",
+      "evidence": [],
+      "version": 44
+    },
+    {
+      "sha256": "97b69464e51e00b2890b6d9b46a637375f394e27a40e73528c106936133ca09b",
+      "scope": "PREDECESSOR_IMMUTABLE",
+      "path": "database/migrations/V045__materialize_expansion_invoices.sql",
+      "evidence": [],
+      "version": 45
+    },
+    {
+      "sha256": "e138f13b07d47972f5c96a34f0c04a7e4aee9dcabb5b0a59c42060c07d038e54",
+      "scope": "PREDECESSOR_IMMUTABLE",
+      "path": "database/migrations/V046__capture_expansion_freight_terms.sql",
+      "evidence": [],
+      "version": 46
+    },
+    {
+      "sha256": "7f0b16a3de2e68487075a442c788685d2cbed33131938eb5710553b862791c90",
+      "scope": "PREDECESSOR_IMMUTABLE",
+      "path": "database/migrations/V047__materialize_expansion_revenue.sql",
+      "evidence": [],
+      "version": 47
+    },
+    {
+      "sha256": "73b6cc6481d94cc6caa85cdca0f59f7cd06d599487efb245acbf61e5d66a9b8d",
+      "scope": "PREDECESSOR_IMMUTABLE",
+      "path": "database/migrations/V048__expansion_revenue_exact_comparison.sql",
+      "evidence": [],
+      "version": 48
+    },
+    {
+      "sha256": "59d903891275d5f3cc6a20deaf3e0fc7c0e9ee3d7e1add3dd14a1f155bce60d8",
+      "scope": "PREDECESSOR_IMMUTABLE",
+      "path": "database/migrations/V049__expansion_partition_recomposition.sql",
+      "evidence": [],
+      "version": 49
+    },
+    {
+      "sha256": "42b2c2d72d9e6d7f447cf1e291557d9b2a5c016b5f709490caf1a4e9eb3c227e",
+      "scope": "PREDECESSOR_IMMUTABLE",
+      "path": "database/migrations/V050__expansion_active_amount_reducers.sql",
+      "evidence": [],
+      "version": 50
+    },
+    {
+      "sha256": "55e6a66c2742c1b257ef7da15c42659c0039ce16f8ec9625fb87eef2427029de",
+      "scope": "PREDECESSOR_IMMUTABLE",
+      "path": "database/migrations/V051__expansion_sinistro_array_contract.sql",
+      "evidence": [],
+      "version": 51
+    },
+    {
+      "sha256": "dea79026182a56863f6ddb5654c939a4415344eafdd183c620f983ff366b5142",
+      "scope": "ANALYTIC_LOCAL_QUALIFIED_AND_INSTALLED",
+      "path": "database/migrations/V052__create_analytic_raster_laboratory.sql",
+      "evidence": [
+        {
+          "path": "target/macrobloco-analitico-20260912-01/schema-raster-02/ledger.jsonl",
+          "sha256": "b51faa99f493ca722f64f634e8510cb2d00e6f9079219458602cfd00c1fe3bc0",
+          "installed": false
+        },
+        {
+          "path": "target/macrobloco-analitico-20260912-01/schema-raster-install-01/ledger.jsonl",
+          "sha256": "2ca0a2129f7fcef7cece74f1bdc3c183371addc567257faace023602ef182480",
+          "installed": true
+        }
+      ],
+      "version": 52
+    },
+    {
+      "sha256": "76b926c08e93807cd96c0b6e9b0543da356cdb96de1b84cc57cc4fe0dd16a71e",
+      "scope": "ANALYTIC_LOCAL_QUALIFIED_AND_INSTALLED",
+      "path": "database/migrations/V053__apply_analytic_raster_laboratory.sql",
+      "evidence": [
+        {
+          "path": "target/macrobloco-analitico-20260912-01/schema-raster-01/ledger.jsonl",
+          "sha256": "e4e5908702bbb7b730a4468912a000c25f910b06606ddd214bb8602513e2c9ef",
+          "installed": false
+        },
+        {
+          "path": "target/macrobloco-analitico-20260912-01/schema-raster-02/ledger.jsonl",
+          "sha256": "b51faa99f493ca722f64f634e8510cb2d00e6f9079219458602cfd00c1fe3bc0",
+          "installed": false
+        },
+        {
+          "path": "target/macrobloco-analitico-20260912-01/schema-raster-install-01/ledger.jsonl",
+          "sha256": "2ca0a2129f7fcef7cece74f1bdc3c183371addc567257faace023602ef182480",
+          "installed": true
+        }
+      ],
+      "version": 53
+    },
+    {
+      "sha256": "eaf262d087e5d369ea2ba201e0cbbef3cecc4e42fbd00a5a30d4b18415f0b7cb",
+      "scope": "ANALYTIC_LOCAL_QUALIFIED_AND_INSTALLED",
+      "path": "database/migrations/V054__project_analytic_raster_transit.sql",
+      "evidence": [
+        {
+          "path": "target/macrobloco-analitico-20260912-01/schema-raster-projection-01/ledger.jsonl",
+          "sha256": "1104cd75e9159e2aa777c6c0e451a0b6962c250a9512293ec69163b7c2428f8b",
+          "installed": false
+        },
+        {
+          "path": "target/macrobloco-analitico-20260912-01/schema-raster-projection-install-01/ledger.jsonl",
+          "sha256": "e25ed434d5d2062f0d73e9d0825a3e2e35a4c32512063632f8315fff34f770c2",
+          "installed": true
+        }
+      ],
+      "version": 54
+    },
+    {
+      "sha256": "035b033fb3112810d2f2ba3c9774975c8ba03028b17e3e52bca3174adc75d3ef",
+      "scope": "ANALYTIC_LOCAL_QUALIFIED_AND_INSTALLED",
+      "path": "database/migrations/V055__create_analytic_governed_references.sql",
+      "evidence": [
+        {
+          "path": "target/macrobloco-analitico-20260912-01/schema-references-03/ledger.jsonl",
+          "sha256": "3264cea31e5d215ea788eac6f61063e6fbb33895de0306c917c23a48adc94d6b",
+          "installed": false
+        },
+        {
+          "path": "target/macrobloco-analitico-20260912-01/schema-references-install-01/ledger.jsonl",
+          "sha256": "8959b23063dc4eb3f30f454d9a82dfdf051f291ea51dd6eafb38d40578a216c1",
+          "installed": true
+        }
+      ],
+      "version": 55
+    },
+    {
+      "sha256": "39c5044debedfdfd2b51aa3c78ef8454652d8ba1b67d0c504a2915c94cb87e00",
+      "scope": "ANALYTIC_LOCAL_QUALIFIED_AND_INSTALLED",
+      "path": "database/migrations/V056__bind_analytic_sources_and_dimensions.sql",
+      "evidence": [
+        {
+          "path": "target/macrobloco-analitico-20260912-01/schema-dimensions-03/ledger.jsonl",
+          "sha256": "6745186394ec68807fee34b092f33a5c6dc307530c2a9cf441fd2b25e44c9eb8",
+          "installed": false
+        },
+        {
+          "path": "target/macrobloco-analitico-20260912-01/schema-dimensions-install-01/ledger.jsonl",
+          "sha256": "3b13035e01352d2806be9ceb367fe612544da2a3a733f7067ee53a71dc41d530",
+          "installed": true
+        }
+      ],
+      "version": 56
+    },
+    {
+      "sha256": "cc9a25d225a81f329bb1b97abbd8f348aac4e9f0e77ddb629c68f04d8d843376",
+      "scope": "ANALYTIC_LOCAL_QUALIFIED_AND_INSTALLED",
+      "path": "database/migrations/V057__capture_analytic_freight_attributes.sql",
+      "evidence": [
+        {
+          "path": "target/macrobloco-analitico-20260912-01/schema-freight-attributes-02/ledger.jsonl",
+          "sha256": "37bc326fa979c6a97194dfbb6a39d55a5813b625e8fbb6a621779801a147ebbd",
+          "installed": false
+        },
+        {
+          "path": "target/macrobloco-analitico-20260912-01/schema-freight-attributes-install-01/ledger.jsonl",
+          "sha256": "87968df4d74712bf3ee2ee0aa5f5d7bac2f441c07c69453662927f6eb98eaee5",
+          "installed": true
+        }
+      ],
+      "version": 57
+    },
+    {
+      "sha256": "4eac0f9f09e2857be3b96d1e0df3f7fd2e1cd93facface53c068c8b3eb8fbd69",
+      "scope": "ANALYTIC_LOCAL_QUALIFIED_AND_INSTALLED",
+      "path": "database/migrations/V058__materialize_analytic_freight_operational.sql",
+      "evidence": [
+        {
+          "path": "target/macrobloco-analitico-20260912-01/schema-mat01-install-01/ledger.jsonl",
+          "sha256": "51f01422c98c0e0a3350756e09487a2d8fbd713294575ef03795786b729e4ef9",
+          "installed": true
+        },
+        {
+          "path": "target/macrobloco-analitico-20260912-01/schema-mat01-qualify-01/ledger.jsonl",
+          "sha256": "03e53e72e3856df6a9951bdefc3f8a7cd33dcc623286df0999bb9eb8fc9281c5",
+          "installed": false
+        }
+      ],
+      "version": 58
+    },
+    {
+      "sha256": "871f6bcc3e1bc03113b95ec057da39cda831e55f545d5cf10a85ad2f2b91f533",
+      "scope": "ANALYTIC_LOCAL_QUALIFIED_AND_INSTALLED",
+      "path": "database/migrations/V059__align_analytic_location_forecast_path.sql",
+      "evidence": [
+        {
+          "path": "target/macrobloco-analitico-20260912-01/schema-mat01-location-install-01/ledger.jsonl",
+          "sha256": "95b28b39ffea29b0ef10bc7a875244bf52d26a32843cc7c73fe666250aefee31",
+          "installed": true
+        },
+        {
+          "path": "target/macrobloco-analitico-20260912-01/schema-mat01-location-qualify-02/ledger.jsonl",
+          "sha256": "2025b129d8e279fa5f129f8267bf69c589f948faeb18808479334101087b784c",
+          "installed": false
+        }
+      ],
+      "version": 59
+    },
+    {
+      "sha256": "e01f65f9553679c107e642ee87542bf7965a6e61b6180b6e13be73415f122398",
+      "scope": "ANALYTIC_LOCAL_QUALIFIED_AND_INSTALLED",
+      "path": "database/migrations/V060__project_analytic_freight_and_location.sql",
+      "evidence": [
+        {
+          "path": "target/macrobloco-analitico-20260912-01/schema-views-contract-install-01/ledger.jsonl",
+          "sha256": "d6c731dc5795a91838db6ee7fd5b27511fbee1650506d26fba383c4d2af9738a",
+          "installed": true
+        },
+        {
+          "path": "target/macrobloco-analitico-20260912-01/schema-views-contract-qualify-04/ledger.jsonl",
+          "sha256": "4f9efa5dadcbf42765ce5e331b7e2992d3bc87738715775441cfee613f8f0c76",
+          "installed": false
+        }
+      ],
+      "version": 60
+    },
+    {
+      "sha256": "a30cd27fe0e8d51509f893eb7b10d02fa06fe93d9258d71b9998004c32a6892e",
+      "scope": "ANALYTIC_LOCAL_QUALIFIED_AND_INSTALLED",
+      "path": "database/migrations/V061__bind_analytic_freight_capture_contract.sql",
+      "evidence": [
+        {
+          "path": "target/macrobloco-analitico-20260912-01/schema-views-contract-install-01/ledger.jsonl",
+          "sha256": "d6c731dc5795a91838db6ee7fd5b27511fbee1650506d26fba383c4d2af9738a",
+          "installed": true
+        },
+        {
+          "path": "target/macrobloco-analitico-20260912-01/schema-views-contract-qualify-04/ledger.jsonl",
+          "sha256": "4f9efa5dadcbf42765ce5e331b7e2992d3bc87738715775441cfee613f8f0c76",
+          "installed": false
+        }
+      ],
+      "version": 61
+    },
+    {
+      "sha256": "4a1f78d38a288d434cb351d4b65006d72bec5972674f3989693cf804b16bcb29",
+      "scope": "ANALYTIC_LOCAL_QUALIFIED_AND_INSTALLED",
+      "path": "database/migrations/V062__align_analytic_freight_capture_application.sql",
+      "evidence": [
+        {
+          "path": "target/macrobloco-analitico-20260912-01/schema-contract-apply-install-01/ledger.jsonl",
+          "sha256": "66cf317d7c5b070b0af9eb832821f2b22646ecd24e1f8560ca90644ad0faa490",
+          "installed": true
+        },
+        {
+          "path": "target/macrobloco-analitico-20260912-01/schema-contract-apply-qualify-01/ledger.jsonl",
+          "sha256": "c1700e71e08ef5c2f4c02a4c2ff15cfad2b6f5984583e86471f988b47edf2097",
+          "installed": false
+        }
+      ],
+      "version": 62
+    },
+    {
+      "sha256": "b8e4f180bca729a0c94a73acd34f17b7a74d6adae025c7517781bf887b379b66",
+      "scope": "ANALYTIC_LOCAL_QUALIFIED_AND_INSTALLED",
+      "path": "database/migrations/V063__bind_analytic_current_and_unloading_branches.sql",
+      "evidence": [
+        {
+          "path": "target/macrobloco-analitico-20260912-01/schema-branch-roles-install-01/ledger.jsonl",
+          "sha256": "ff5df626ef759e6495f55d6c08d5efa5ee1b08c99c82aa0c61061c78b7e49ea5",
+          "installed": true
+        },
+        {
+          "path": "target/macrobloco-analitico-20260912-01/schema-branch-roles-qualify-01/ledger.jsonl",
+          "sha256": "a5c7148f324471fc4541b563b1c74a0e27f975c7a7defd05cd625781a057860c",
+          "installed": false
+        }
+      ],
+      "version": 63
+    },
+    {
+      "sha256": "4bde2cb8d2f5ef0c582482fd2ec01592bca6a550a9e107f7c184b620de0fad52",
+      "scope": "ANALYTIC_LOCAL_QUALIFIED_AND_INSTALLED",
+      "path": "database/migrations/V064__prepare_analytic_manifest_attributes.sql",
+      "evidence": [
+        {
+          "path": "target/macrobloco-analitico-20260912-01/install-manifest-preparation-01/ledger.jsonl",
+          "sha256": "0cc7ad185a376b8a7aaae83a9dbf520e36645ab243668dce20c6303fd8bb90f6",
+          "installed": true
+        },
+        {
+          "path": "target/macrobloco-analitico-20260912-01/qualify-manifest-preparation-02/ledger.jsonl",
+          "sha256": "e2e3d61cdf00c15996a31c7d5d6e198b9ae75f28ecbc180637d01dd0682cbead",
+          "installed": false
+        }
+      ],
+      "version": 64
+    },
+    {
+      "sha256": "608c621654e78a4dbadb90d67fbb014e94e8704ca0f7a4d063e8102472e8ab65",
+      "scope": "ANALYTIC_LOCAL_QUALIFIED_AND_INSTALLED",
+      "path": "database/migrations/V065__bind_analytic_manifest_lifecycle.sql",
+      "evidence": [
+        {
+          "path": "target/macrobloco-analitico-20260912-01/install-manifest-state-collation-01/ledger.jsonl",
+          "sha256": "a5ed7dd94e69011f0f0ca1420980cfe4d4fce5d126509bf3dfc1a23e733775e4",
+          "installed": true
+        },
+        {
+          "path": "target/macrobloco-analitico-20260912-01/qualify-manifest-state-collation-01/ledger.jsonl",
+          "sha256": "c67dc5476fd49a71e7c6ea30e945ef07386264f290180b88dd47f0e7c160b785",
+          "installed": false
+        }
+      ],
+      "version": 65
+    },
+    {
+      "sha256": "7932acc3a8da7c1dbeccda526006d98eccc4149dbb2ba929e08e7cd1854b7f64",
+      "scope": "ANALYTIC_LOCAL_QUALIFIED_AND_INSTALLED",
+      "path": "database/migrations/V066__align_analytic_manifest_preparation_collation.sql",
+      "evidence": [
+        {
+          "path": "target/macrobloco-analitico-20260912-01/install-manifest-state-collation-01/ledger.jsonl",
+          "sha256": "a5ed7dd94e69011f0f0ca1420980cfe4d4fce5d126509bf3dfc1a23e733775e4",
+          "installed": true
+        },
+        {
+          "path": "target/macrobloco-analitico-20260912-01/qualify-manifest-state-collation-01/ledger.jsonl",
+          "sha256": "c67dc5476fd49a71e7c6ea30e945ef07386264f290180b88dd47f0e7c160b785",
+          "installed": false
+        }
+      ],
+      "version": 66
+    },
+    {
+      "sha256": "cbf2099b971568e733161a2c6a4e285b37140f9bb2356d57e9e90a496b6baffd",
+      "scope": "ANALYTIC_LOCAL_QUALIFIED_AND_INSTALLED",
+      "path": "database/migrations/V067__materialize_analytic_collectors.sql",
+      "evidence": [
+        {
+          "path": "target/macrobloco-analitico-20260912-01/install-collectors-01/ledger.jsonl",
+          "sha256": "5572ec8cf6b3d8326f8b93748451819ef8ebcc8613339839dac72aca42a86f7c",
+          "installed": true
+        },
+        {
+          "path": "target/macrobloco-analitico-20260912-01/qualify-collectors-02/ledger.jsonl",
+          "sha256": "c0beefd9d3c7599406d07571af46751e6dc6c6418ed4683f33358ce5dae7e94b",
+          "installed": false
+        }
+      ],
+      "version": 67
+    },
+    {
+      "sha256": "3aa083dee4a73789940f3ef180167603699df336c7b78d10fdf09bd6962484ce",
+      "scope": "ANALYTIC_LOCAL_QUALIFIED_AND_INSTALLED",
+      "path": "database/migrations/V068__preserve_analytic_manifest_exact_freshness.sql",
+      "evidence": [
+        {
+          "path": "target/macrobloco-analitico-20260912-01/install-manifest-exact-clock-01/ledger.jsonl",
+          "sha256": "9426a18f3fc4076bc9f0740e15e8dd122bbc7bb73a8a67ac177f66d2d1bb8eb6",
+          "installed": true
+        },
+        {
+          "path": "target/macrobloco-analitico-20260912-01/qualify-manifest-exact-clock-02/ledger.jsonl",
+          "sha256": "eb0e51ebd2cf6f3b90cc71ce3b00193ba16458ac252f029bd6d87e6b21dba6dc",
+          "installed": false
+        }
+      ],
+      "version": 68
+    },
+    {
+      "sha256": "a903c87f2e44275c9b57229da8b753bee87497fba78b5c0d8ef94111447481e7",
+      "scope": "ANALYTIC_LOCAL_QUALIFIED_AND_INSTALLED",
+      "path": "database/migrations/V069__link_analytic_manifest_snapshot_cohort.sql",
+      "evidence": [
+        {
+          "path": "target/macrobloco-analitico-20260912-01/install-manifest-lineage-01/ledger.jsonl",
+          "sha256": "d478782f36ba67064a2c115c0c66614ac6f08f39a9296df7b13e97dd6737e1ed",
+          "installed": true
+        },
+        {
+          "path": "target/macrobloco-analitico-20260912-01/qualify-manifest-lineage-01/ledger.jsonl",
+          "sha256": "173453611905ab8853e2dce4de8bc1f6365f3fc772ea88451a165b7f38d6a707",
+          "installed": false
+        }
+      ],
+      "version": 69
+    },
+    {
+      "sha256": "d692eb292dff65994cf548c6bc0c61df604fa0e51930307fc87b883bc234c020",
+      "scope": "ANALYTIC_LOCAL_QUALIFIED_AND_INSTALLED",
+      "path": "database/migrations/V070__bind_analytic_manifest_freight_paths.sql",
+      "evidence": [
+        {
+          "path": "target/macrobloco-analitico-20260912-01/install-manifest-freight-paths-01/ledger.jsonl",
+          "sha256": "11b3560b0c364adb5f1cac46c6a3cf7e2335223b499fe42edd4d9c93ded28859",
+          "installed": true
+        },
+        {
+          "path": "target/macrobloco-analitico-20260912-01/qualify-manifest-freight-paths-02/ledger.jsonl",
+          "sha256": "71c70b60354150c16a5b950bd58066bca19021c462fc194a6c905e48b55f2574",
+          "installed": false
+        }
+      ],
+      "version": 70
+    },
+    {
+      "sha256": "5753434520e1139b762d46fc68daffa2b74948375efdaca56fd359c742f7847a",
+      "scope": "ANALYTIC_LOCAL_QUALIFIED_AND_INSTALLED",
+      "path": "database/migrations/V071__consume_analytic_owned_fleet_references.sql",
+      "evidence": [
+        {
+          "path": "target/macrobloco-analitico-20260912-01/install-owned-fleet-01/ledger.jsonl",
+          "sha256": "1516d670bb60bbb832f0c7f5c9c0ec3e3aceea1024a2e9322bcf3d6c8db319d5",
+          "installed": true
+        },
+        {
+          "path": "target/macrobloco-analitico-20260912-01/qualify-owned-fleet-01/ledger.jsonl",
+          "sha256": "441da49419735c017df43cc51904b01eb1b57fa5c8582bade4b5b46a8ba30417",
+          "installed": false
+        }
+      ],
+      "version": 71
+    },
+    {
+      "sha256": "4f89ef96eee9725437847492de33af04ed9fbd82293ccee447dd347ec7de84fc",
+      "scope": "ANALYTIC_LOCAL_QUALIFIED_AND_INSTALLED",
+      "path": "database/migrations/V072__materialize_analytic_manifests.sql",
+      "evidence": [
+        {
+          "path": "target/macrobloco-analitico-20260912-01/install-mat05-01/ledger.jsonl",
+          "sha256": "8a83b1da13ac64e2f013a6056361fd044141aeaeca1a1861ac9c112bb3aaddf9",
+          "installed": true
+        },
+        {
+          "path": "target/macrobloco-analitico-20260912-01/qualify-mat05-02/ledger.jsonl",
+          "sha256": "49b3ef6f95967f122f26a3a02d4c9b117bdcb9edac3bb354e9f9412dd46d01b9",
+          "installed": false
+        }
+      ],
+      "version": 72
+    },
+    {
+      "sha256": "61459e19e3a5480bcd694bf6b255f610771e92f306d332702e969714ad24b802",
+      "scope": "ANALYTIC_LOCAL_QUALIFIED_AND_INSTALLED",
+      "path": "database/migrations/V073__project_analytic_manifest_consumption.sql",
+      "evidence": [
+        {
+          "path": "target/macrobloco-analitico-20260912-01/install-manifest-queries-01/ledger.jsonl",
+          "sha256": "7fff155ab587b2149b7cb58630a3836ca7da0facb7af88f8586abf48b0ba1b20",
+          "installed": true
+        },
+        {
+          "path": "target/macrobloco-analitico-20260912-01/qualify-manifest-queries-01/ledger.jsonl",
+          "sha256": "84db8aea82df6df1613868792f985670037a57af030491d6fe2ec5b95316838f",
+          "installed": false
+        }
+      ],
+      "version": 73
+    },
+    {
+      "sha256": "e7cf2180138affcb9b60dac38aee146e1ff910cccc98969b7d13f75d78326bb6",
+      "scope": "ANALYTIC_LOCAL_QUALIFIED_AND_INSTALLED",
+      "path": "database/migrations/V074__compare_analytic_manifest_instants.sql",
+      "evidence": [
+        {
+          "path": "target/macrobloco-analitico-20260912-01/install-time-and-alias-01/ledger.jsonl",
+          "sha256": "cd31b4f2f5b40422b50561edbe695e17600fc7262f531cda70fd05aa5dd3048d",
+          "installed": true
+        },
+        {
+          "path": "target/macrobloco-analitico-20260912-01/qualify-manifest-time-01/ledger.jsonl",
+          "sha256": "d84028b1aae9c934e4a862b687ee109b538dda4e0efcbdc7d1d61d126d0b363f",
+          "installed": false
+        },
+        {
+          "path": "target/macrobloco-analitico-20260912-01/qualify-time-and-alias-01/ledger.jsonl",
+          "sha256": "c7656efc8cab70dd6696fbf9aee5573d1fe27851e378cf73350ce119d3b0c80e",
+          "installed": false
+        }
+      ],
+      "version": 74
+    },
+    {
+      "sha256": "73e97b27003f8e455012b852631e0505d98f6421b14806f9fb374218735cc336",
+      "scope": "ANALYTIC_LOCAL_QUALIFIED_AND_INSTALLED",
+      "path": "database/migrations/V075__align_relational_collection_alias_wrapper.sql",
+      "evidence": [
+        {
+          "path": "target/macrobloco-analitico-20260912-01/install-time-and-alias-01/ledger.jsonl",
+          "sha256": "cd31b4f2f5b40422b50561edbe695e17600fc7262f531cda70fd05aa5dd3048d",
+          "installed": true
+        },
+        {
+          "path": "target/macrobloco-analitico-20260912-01/qualify-time-and-alias-01/ledger.jsonl",
+          "sha256": "c7656efc8cab70dd6696fbf9aee5573d1fe27851e378cf73350ce119d3b0c80e",
+          "installed": false
+        }
+      ],
+      "version": 75
+    },
+    {
+      "sha256": "e44d900a49ab0ba11874ea4093240a1201ce9234dde41ff8fa4b7f6e256a10c4",
+      "scope": "ANALYTIC_LOCAL_QUALIFIED_AND_INSTALLED",
+      "path": "database/migrations/V076__scope_manifest_relations_to_current_components.sql",
+      "evidence": [
+        {
+          "path": "target/macrobloco-analitico-20260912-01/install-manifest-cohort-links-01/ledger.jsonl",
+          "sha256": "84378a7160027a1cc8296e77d79b142531bdbe7f9c15e803d25aa2133fb2344c",
+          "installed": true
+        },
+        {
+          "path": "target/macrobloco-analitico-20260912-01/qualify-manifest-cohort-links-01/ledger.jsonl",
+          "sha256": "91be897feb07eb3b6003b3d7ac9b22e52dde824cf2eb93bb7ed897705484786b",
+          "installed": false
+        }
+      ],
+      "version": 76
+    },
+    {
+      "sha256": "f4c5b98c5452550172984adc038f4d66b07217dc07a3605457e8fb40ec7b335b",
+      "scope": "ANALYTIC_LOCAL_QUALIFIED_AND_INSTALLED",
+      "path": "database/migrations/V077__compare_relational_manifest_competence_instants.sql",
+      "evidence": [
+        {
+          "path": "target/macrobloco-analitico-20260912-01/install-manifest-cohort-links-01/ledger.jsonl",
+          "sha256": "84378a7160027a1cc8296e77d79b142531bdbe7f9c15e803d25aa2133fb2344c",
+          "installed": true
+        },
+        {
+          "path": "target/macrobloco-analitico-20260912-01/qualify-manifest-cohort-links-01/ledger.jsonl",
+          "sha256": "91be897feb07eb3b6003b3d7ac9b22e52dde824cf2eb93bb7ed897705484786b",
+          "installed": false
+        }
+      ],
+      "version": 77
+    },
+    {
+      "sha256": "239eecd4e287928332a3eaeec83c714dcd81f334f4188bef8e5802bd10e9d707",
+      "scope": "ANALYTIC_LOCAL_QUALIFIED_AND_INSTALLED",
+      "path": "database/migrations/V078__resolve_manifest_vehicle_roles.sql",
+      "evidence": [
+        {
+          "path": "target/macrobloco-analitico-20260912-01/install-manifest-fleet-roles-01/ledger.jsonl",
+          "sha256": "1444a4ca263a6fc9ba85cd0f84cb85feddae810ea8c2faeeaac4adb0e62ac651",
+          "installed": true
+        },
+        {
+          "path": "target/macrobloco-analitico-20260912-01/qualify-manifest-fleet-roles-01/ledger.jsonl",
+          "sha256": "132b32ba35a0551f69f90ccbac8f3ff88d5ee69a7815bc8ec08bb467195a5dbf",
+          "installed": false
+        }
+      ],
+      "version": 78
+    },
+    {
+      "sha256": "7dbf450f32459a2ac1c527c456a3658b7aaf60423ba49880ad0de2cbf8e90492",
+      "scope": "ANALYTIC_LOCAL_QUALIFIED_AND_INSTALLED",
+      "path": "database/migrations/V079__project_analytic_inventory_and_incidents.sql",
+      "evidence": [
+        {
+          "path": "target/macrobloco-analitico-20260912-01/install-inventory-incidents-01/ledger.jsonl",
+          "sha256": "567d5b77472837fc65b1a65e3bd08e435ef09ad676e2a470dca4f16aacd80a90",
+          "installed": true
+        },
+        {
+          "path": "target/macrobloco-analitico-20260912-01/qualify-inventory-incidents-03/ledger.jsonl",
+          "sha256": "f6044a32be821bf5983623c52f287e403f58feb6b903b264cd9fd5124be2bd59",
+          "installed": false
+        }
+      ],
+      "version": 79
+    },
+    {
+      "sha256": "f581f9eccaff1976759bc003a4228a460ade07bdf27e9444b5703e3490fa8082",
+      "scope": "ANALYTIC_LOCAL_QUALIFIED_AND_INSTALLED",
+      "path": "database/migrations/V080__project_analytic_financial_consumption.sql",
+      "evidence": [
+        {
+          "path": "target/macrobloco-analitico-20260912-01/install-financial-queries-01/ledger.jsonl",
+          "sha256": "095cf3f1c16aafb9f94417b75b4fe7191e3a909e38a09b22b69cad552046f934",
+          "installed": true
+        },
+        {
+          "path": "target/macrobloco-analitico-20260912-01/qualify-financial-queries-01/ledger.jsonl",
+          "sha256": "50d84be76a1045a6a148dabf8d556b6dd2e4dc01d62a4a42906624a0a8ab943e",
+          "installed": false
+        }
+      ],
+      "version": 80
+    },
+    {
+      "sha256": "350473245236649f8335c20074a84b529c25622710eb7525734527823eaa7305",
+      "scope": "ANALYTIC_LOCAL_QUALIFIED_AND_INSTALLED",
+      "path": "database/migrations/V081__project_analytic_internal_monitoring.sql",
+      "evidence": [
+        {
+          "path": "target/macrobloco-analitico-20260912-01/install-monitoring-01/ledger.jsonl",
+          "sha256": "68239dbeeb4fb134f430d1f2b62cd693d39e09385c88aa9deb3058b7dfc4980f",
+          "installed": true
+        },
+        {
+          "path": "target/macrobloco-analitico-20260912-01/qualify-monitoring-02/ledger.jsonl",
+          "sha256": "ed518ba8164ba63a9039b0269c896504f4e7d9d53ac348e50fac06352e32798c",
+          "installed": false
+        }
+      ],
+      "version": 81
+    },
+    {
+      "sha256": "a9f50e8c7a3a42b9ca80519246e701997e4b15eb4bd800af5f70049a5ddcfdd6",
+      "scope": "ANALYTIC_LOCAL_QUALIFIED_AND_INSTALLED",
+      "path": "database/migrations/V082__recognize_analytic_monitoring_quarantine_reasons.sql",
+      "evidence": [
+        {
+          "path": "target/macrobloco-analitico-20260912-01/install-monitoring-reasons-01/ledger.jsonl",
+          "sha256": "b19e12c206b82f1b5d70ef579dd824ecc9c6af61aa1fd70a46e114bc493c649c",
+          "installed": true
+        },
+        {
+          "path": "target/macrobloco-analitico-20260912-01/qualify-monitoring-reasons-01/ledger.jsonl",
+          "sha256": "808451702a65bef9c38a93a93d47e1e2de547fd1aa555fa4e564258363c2666f",
+          "installed": false
+        }
+      ],
+      "version": 82
+    },
+    {
+      "sha256": "1ded3c9bf0dcd1b9716f2ac7a798c62790f6f34e7921310af9a7b254e6515545",
+      "scope": "ANALYTIC_LOCAL_QUALIFIED_AND_INSTALLED",
+      "path": "database/migrations/V083__capture_analytic_quote_attributes.sql",
+      "evidence": [
+        {
+          "path": "target/macrobloco-analitico-20260912-01/install-quote-staging-01/ledger.jsonl",
+          "sha256": "215f064c15eba51fe231f6c31344f336a565ce3310cf8c906539e3311b14776c",
+          "installed": true
+        },
+        {
+          "path": "target/macrobloco-analitico-20260912-01/qualify-quote-staging-02/ledger.jsonl",
+          "sha256": "f037bbe0df81956674cf9411cc1745bea5cae60829a0dbb8b752e9f4ae10738f",
+          "installed": false
+        }
+      ],
+      "version": 83
+    },
+    {
+      "sha256": "0f86d00bf2a1bd3fcbd9fd1d8ff137164f31c590335b6b5cbd1addc68c878d24",
+      "scope": "ANALYTIC_LOCAL_QUALIFIED_AND_INSTALLED",
+      "path": "database/migrations/V084__consume_analytic_quote_tariffs.sql",
+      "evidence": [
+        {
+          "path": "target/macrobloco-analitico-20260912-01/install-quote-tariffs-01/ledger.jsonl",
+          "sha256": "50858e37cd01300708a95acffdd888640272ae4a9848c0637fa8952a0a7908d2",
+          "installed": true
+        },
+        {
+          "path": "target/macrobloco-analitico-20260912-01/qualify-quote-tariffs-01/ledger.jsonl",
+          "sha256": "45fc4b08fdeccd1c62ee1358f3cc2397509a5f6511de1ec42c062f95b8a2af72",
+          "installed": false
+        }
+      ],
+      "version": 84
+    },
+    {
+      "sha256": "4d5c66eb629042ad77ed222a260ce3ab1215af78cf434815cd9a2fba7b7da36e",
+      "scope": "ANALYTIC_LOCAL_QUALIFIED_AND_INSTALLED",
+      "path": "database/migrations/V085__prepare_analytic_quote_snapshots.sql",
+      "evidence": [
+        {
+          "path": "target/macrobloco-analitico-20260912-01/install-quote-preparation-01/ledger.jsonl",
+          "sha256": "86b11895ee2198a694a355f4b9ea0ae05711242352a6c80d0a21af9407065073",
+          "installed": true
+        },
+        {
+          "path": "target/macrobloco-analitico-20260912-01/qualify-quote-preparation-02/ledger.jsonl",
+          "sha256": "39c2c5bf5b94660155d0d8c73bcd8f269175cfa11f677ad6fe7981b9e1cc690d",
+          "installed": false
+        }
+      ],
+      "version": 85
+    },
+    {
+      "sha256": "7405f6637c6d5c4010c983e9372f2c10966aab592202f8724571a2ac612cf601",
+      "scope": "ANALYTIC_LOCAL_QUALIFIED_AND_INSTALLED",
+      "path": "database/migrations/V086__project_analytic_quote_consumption.sql",
+      "evidence": [
+        {
+          "path": "target/macrobloco-analitico-20260912-01/install-quote-query-01/ledger.jsonl",
+          "sha256": "4588ee69e30320c58d4eedf31b256a616bb153b576357842e9e88bbb9dafbcce",
+          "installed": true
+        },
+        {
+          "path": "target/macrobloco-analitico-20260912-01/qualify-quote-query-01/ledger.jsonl",
+          "sha256": "efa22c5076bff23240e872a484816dc6cd802018dad0f94943405813e65fd829",
+          "installed": false
+        }
+      ],
+      "version": 86
+    },
+    {
+      "sha256": "cde053bbca047ab2ab07c5920e1d8c21dadb6827e4d14d7c52c8389e9288b632",
+      "scope": "ANALYTIC_LOCAL_QUALIFIED_AND_INSTALLED",
+      "path": "database/migrations/V087__bind_analytic_quote_runtime_reference.sql",
+      "evidence": [
+        {
+          "path": "target/macrobloco-analitico-20260912-01/install-quote-runtime-binding-01/ledger.jsonl",
+          "sha256": "cfb90ca1b804d3a8f2836092c59aa81a1681d3ace970350c58964aff5da33d5a",
+          "installed": true
+        },
+        {
+          "path": "target/macrobloco-analitico-20260912-01/qualify-quote-runtime-binding-01/ledger.jsonl",
+          "sha256": "6f2e4c75bed4b2422d7b93c8f9930008ce3871f913cd5a8681773973b9a20989",
+          "installed": false
+        }
+      ],
+      "version": 87
+    },
+    {
+      "sha256": "f5528afc8c4a877dcabeee46c7e1f5cff29953c1c7a7fe29bbed4b6ffaeacdb4",
+      "scope": "ANALYTIC_LOCAL_QUALIFIED_AND_INSTALLED",
+      "path": "database/migrations/V088__bind_analytic_collection_supplements.sql",
+      "evidence": [
+        {
+          "path": "target/macrobloco-analitico-20260912-01/install-collection-supplement-01/ledger.jsonl",
+          "sha256": "f2c52ee551a25b18896b47f9515b7c9321b689fe350a18132c0066eeaadb3d35",
+          "installed": true
+        },
+        {
+          "path": "target/macrobloco-analitico-20260912-01/qualify-collection-supplement-01/ledger.jsonl",
+          "sha256": "8da111f631a0a2afd5c68d69bad9c99e5044d23025051ef4b19ee21552fd4e80",
+          "installed": false
+        }
+      ],
+      "version": 88
+    },
+    {
+      "sha256": "2d2733534c557639a3dda6d972eba4506d07f0470b59ec015acb3477e05cafed",
+      "scope": "ANALYTIC_LOCAL_QUALIFIED_AND_INSTALLED",
+      "path": "database/migrations/V089__prepare_analytic_collection_snapshots.sql",
+      "evidence": [
+        {
+          "path": "target/macrobloco-analitico-20260912-01/install-collection-preparation-01/ledger.jsonl",
+          "sha256": "c017a35fb79bfba639bb6367f0c05e792a835163714b9281b02bba0d664cc30c",
+          "installed": true
+        },
+        {
+          "path": "target/macrobloco-analitico-20260912-01/qualify-collection-preparation-03/ledger.jsonl",
+          "sha256": "75394f47365c11b4aaff96fa26a0abdcb6f94879db0f5c3b59bdd45224576747",
+          "installed": false
+        }
+      ],
+      "version": 89
+    },
+    {
+      "sha256": "1518572670ac87675eb0083f8bf99cee501a757bff26134333a1527b5c356332",
+      "scope": "ANALYTIC_LOCAL_QUALIFIED_AND_INSTALLED",
+      "path": "database/migrations/V090__bind_analytic_collection_regions.sql",
+      "evidence": [
+        {
+          "path": "target/macrobloco-analitico-20260912-01/install-collection-regions-01/ledger.jsonl",
+          "sha256": "0376d007bf4bc0afa187dce04fceee814b9745c341f252d6d2a4e904d2479c75",
+          "installed": true
+        },
+        {
+          "path": "target/macrobloco-analitico-20260912-01/qualify-collection-regions-01/ledger.jsonl",
+          "sha256": "16624063dcb498bbdda3f5cde40755b69ed05b257aadc31c73d0eefa9eedf78f",
+          "installed": false
+        }
+      ],
+      "version": 90
+    },
+    {
+      "sha256": "767077826fec1bb417f03b4d3c8319f74233cda1f901b5b1c3a5419bfbabeee9",
+      "scope": "ANALYTIC_LOCAL_QUALIFIED_AND_INSTALLED",
+      "path": "database/migrations/V091__project_analytic_collection_queries.sql",
+      "evidence": [
+        {
+          "path": "target/macrobloco-analitico-20260912-01/install-collection-query-01/ledger.jsonl",
+          "sha256": "5b4703e66cf79fe50e7e898f2697b22714aa7bb1afce9b9c8649d3bfbcf4e2a3",
+          "installed": true
+        },
+        {
+          "path": "target/macrobloco-analitico-20260912-01/qualify-collection-query-02/ledger.jsonl",
+          "sha256": "4727f760d50682512b68c501c35586fe131defc4ece622c490a2ca7c68ab1f7d",
+          "installed": false
+        }
+      ],
+      "version": 91
+    },
+    {
+      "sha256": "e734767e6398172e2d48394964a391012c2695289a6882eac92c16af8016f67f",
+      "scope": "ANALYTIC_LOCAL_QUALIFIED_AND_INSTALLED",
+      "path": "database/migrations/V092__guard_synthetic_collection_absence.sql",
+      "evidence": [
+        {
+          "path": "target/macrobloco-analitico-20260912-01/install-collection-sweep-01/ledger.jsonl",
+          "sha256": "17f77ebf7038a72c7fa09c286f94dd1739440c242222e799d6d7f30401a80ccc",
+          "installed": true
+        },
+        {
+          "path": "target/macrobloco-analitico-20260912-01/qualify-collection-sweep-02/ledger.jsonl",
+          "sha256": "7f048ead438f1323ac6c0f2fdd11548dc43788470af8eedce634038e5a3ada58",
+          "installed": false
+        }
+      ],
+      "version": 92
+    },
+    {
+      "sha256": "e8229f604a61d3f2899b59994abb6eb77e14e8fc3cddc129522ad810834e2cc7",
+      "scope": "ANALYTIC_LOCAL_QUALIFIED_AND_INSTALLED",
+      "path": "database/migrations/V093__prove_raster_windows_and_last_observation.sql",
+      "evidence": [
+        {
+          "path": "target/macrobloco-analitico-20260912-01/raster-proofs-install-01/ledger.jsonl",
+          "sha256": "c51df07c95938a76356749759a4286658f57129d39a7e6d65d8b8096b75828f6",
+          "installed": true
+        },
+        {
+          "path": "target/macrobloco-analitico-20260912-01/raster-proofs-qualify-01/ledger.jsonl",
+          "sha256": "3f0165a85355ede7bc7af3d6948666599f5911120e4679fb0a70dd5dd4a92d60",
+          "installed": false
+        }
+      ],
+      "version": 93
+    },
+    {
+      "sha256": "e68e3a2ebbdb411d5a7a0eebbc9adb1bf43a1260e69399b616769dead3fb0d8a",
+      "scope": "ANALYTIC_LOCAL_QUALIFIED_AND_INSTALLED",
+      "path": "database/migrations/V094__isolate_analytic_materialization_failures.sql",
+      "evidence": [
+        {
+          "path": "target/macrobloco-analitico-20260912-01/analytic-savepoints-install-01/ledger.jsonl",
+          "sha256": "a7aac4ef60bf60b7d5c4708b60d48b420622af1a02f0c6ea62603f0f044e243b",
+          "installed": true
+        },
+        {
+          "path": "target/macrobloco-analitico-20260912-01/analytic-savepoints-qualify-01/ledger.jsonl",
+          "sha256": "fc0ce2f7e770205dd5dacae7176ffb63f7b486c2108248ff44d4c84adc2a141b",
+          "installed": false
+        }
+      ],
+      "version": 94
+    },
+    {
+      "sha256": "d215a30e9ef3303e2d74674d8f4d971463f645ce4e48ef1cda43fecf77297e2a",
+      "scope": "ANALYTIC_LOCAL_QUALIFIED_AND_INSTALLED",
+      "path": "database/migrations/V095__batch_analytic_manifest_composition_seals.sql",
+      "evidence": [
+        {
+          "path": "target/macrobloco-analitico-20260912-01/composition-batch-install-01/ledger.jsonl",
+          "sha256": "bd2ace50da687c250681cb61c1c7f1df6afb24193e5c32b89d63a17a686053c1",
+          "installed": true
+        },
+        {
+          "path": "target/macrobloco-analitico-20260912-01/composition-batch-qualify-01/ledger.jsonl",
+          "sha256": "0242d67ae4caa9b99f204c3cfe38bfed8c3480b8e7a57bb0a7e3e504df70e85e",
+          "installed": false
+        }
+      ],
+      "version": 95
+    },
+    {
+      "sha256": "558ad6acf8730eebc0fbf3131748381b1aef6805797eb6ead535bfe5a6c3e347",
+      "scope": "ANALYTIC_LOCAL_QUALIFIED_AND_INSTALLED",
+      "path": "database/migrations/V096__seal_analytic_scenario_publication.sql",
+      "evidence": [
+        {
+          "path": "target/macrobloco-analitico-20260912-01/scenario-plan-install-01/ledger.jsonl",
+          "sha256": "8f7ed82af8166b487ddace40f7a3efb7eae1fd7769aab25e59f013d810de7eb7",
+          "installed": true
+        },
+        {
+          "path": "target/macrobloco-analitico-20260912-01/scenario-plan-qualify-03/ledger.jsonl",
+          "sha256": "a58d9468ae62d5be90bbb2e5ce463fc702bbd7464cb16b0787cfea59940a2ba7",
+          "installed": false
+        }
+      ],
+      "version": 96
+    },
+    {
+      "sha256": "8fcc289fd65863664ad99b53b12951ccf5651d39b9c0e604de43e19532e46e70",
+      "scope": "ANALYTIC_LOCAL_QUALIFIED_AND_INSTALLED",
+      "path": "database/migrations/V097__monitor_analytic_raster_and_materializations.sql",
+      "evidence": [
+        {
+          "path": "target/macrobloco-analitico-20260912-01/monitoring-complete-install-01/ledger.jsonl",
+          "sha256": "7b375db02773e27cba9e0558569777d9626d0fe26c21556e715ebe921ad9c1d5",
+          "installed": true
+        },
+        {
+          "path": "target/macrobloco-analitico-20260912-01/monitoring-complete-qualify-01/ledger.jsonl",
+          "sha256": "9b95ac8fe9268aac722b117090236be5d3e884a789d38bdc2f7bcc99077b42b1",
+          "installed": false
+        }
+      ],
+      "version": 97
+    },
+    {
+      "sha256": "6032b9058c2860bc1e063930c1e2db42ce89b00a00425a31176eb212d55c935e",
+      "scope": "ANALYTIC_LOCAL_QUALIFIED_AND_INSTALLED",
+      "path": "database/migrations/V098__bind_analytic_scenario_source_windows.sql",
+      "evidence": [
+        {
+          "path": "target/macrobloco-analitico-20260912-01/source-window-install-01/ledger.jsonl",
+          "sha256": "47eb41015eb962c62f8337e10c4ca5764bf1ef7f16153c96091073ec0ec1947a",
+          "installed": true
+        },
+        {
+          "path": "target/macrobloco-analitico-20260912-01/source-window-qualify-01/ledger.jsonl",
+          "sha256": "a1d68f1a361e1d223e7c30c99f9d8b4b1bd212aab214cc1e2b35c92db2631ee3",
+          "installed": false
+        }
+      ],
+      "version": 98
+    }
+  ],
+  "version": 1,
+  "publicationContracts": 19,
+  "baselineSha256": "607db6266b6b0ab633ac7e4a3a7dd6622162d1f32826b12806ccc0fb6fcf336b",
+  "businessColumns": 673,
+  "physicalColumns": 971,
+  "domainDmlRollbackOnly": true,
+  "target": "localhost/ETL_SISTEMA_V2_SHADOW",
+  "productionGatesUnchanged": true,
+  "physicalFreshVsUpgradeEquivalenceProven": false,
+  "lastVersion": 98,
+  "sourceDefinitionSnapshot": "docs/catalogos/macrobloco-analitico/definicoes-sql-observadas.json",
+  "newVersions": 47
+}

@@ -1,5 +1,5 @@
 {
-  "catalog_version": "2026-09-01.v2-035b-usuarios",
+  "catalog_version": "2026-09-04.v2-026a-manifestos-v03",
   "generator": "scripts/validation/Build-PortabilityCatalog.ps1",
   "source_policy": "offline allowlist; no dashboards, credentials, network, database or payload values",
   "baselines": {
@@ -49,7 +49,8 @@
   "unresolved_policy": "owner_role + due_gate + publication_blocked=YES; zero UNCLASSIFIED; acceptor nominal/time remains external",
   "vertical_slices": {
     "usuarios": "IMPLEMENTED_IN_SHADOW; current/history + core dimension view; pub compatibility and absence sweep blocked",
-    "governed_references": "OFFLINE_FOUNDATION_COMPLETE; deterministic candidates inert; mutable baselines and activation external"
+    "governed_references": "OFFLINE_FOUNDATION_COMPLETE; deterministic candidates inert; mutable baselines and activation external",
+    "manifestos_decision": "LOCAL_DECISION_FROZEN_V03; P01 identity and MAN-01/MAN-02/MAN-04/MAN-07 only; V2-026 execution and publication pending"
   },
   "external_inputs": [
     "nomes técnicos dos slots /info não persistidos, a fechar somente após V2-041 na rodada autorizada V2-025d",

@@ -1,0 +1,39 @@
+{
+  "passed": true,
+  "fullPhase": "verify-03",
+  "directedPhase": "directed-02",
+  "full": {
+    "tests": 1530,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 4
+  },
+  "directed": {
+    "tests": 272,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "newTests": 38,
+  "offline": true,
+  "java": 17,
+  "maven": "3.9.14",
+  "heapMiB": 512,
+  "lineCoverage": 91.73,
+  "branchCoverage": 76.71,
+  "enforcer": true,
+  "spotless": true,
+  "checkstyle": true,
+  "architecture": true,
+  "jacoco": true,
+  "physicalSql": false,
+  "remoteCalls": 0,
+  "operationalSidecarEnabled": false,
+  "sourceTemporalEquivalenceAccepted": false,
+  "newAcceptances": 0,
+  "firstAttempt": "directed-01: Checkstyle blocked one fixture line; no tests executed",
+  "evidence": {
+    "sha256": "5c4f46904848bd6a708fde1c8040f30157ecd2181eb20bf295279cb8a8b0d2b7",
+    "path": "target/coletas-temporal-link-20260910/java-verification.json"
+  }
+}

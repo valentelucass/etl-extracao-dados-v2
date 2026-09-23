@@ -1,0 +1,4888 @@
+{
+  "version": 1,
+  "classification": "LEGACY_STATIC_NOT_CONSUMER_ACCEPTANCE",
+  "contracts": [
+    {
+      "id": "SQL-01",
+      "legacyName": "vw_faturas_por_cliente_powerbi",
+      "source": "database/views/011_criar_view_faturas_por_cliente_powerbi.sql",
+      "sourceSha256": "c220827ee68399558d13c2657e363547ebd4153a3683295bcf189b3a731afd81",
+      "localName": "pub.analytic_lab_sql_01",
+      "columns": [
+        {
+          "ordinal": 1,
+          "name": "Hora (Solicitacao)",
+          "legacyExpression": "CAST(datas.data_emissao_cte AS TIME(0)) AS [Hora (Solicitacao)]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 2,
+          "name": "ID Único",
+          "legacyExpression": "fpc.unique_id AS [ID Único]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 3,
+          "name": "Filial",
+          "legacyExpression": "fpc.filial AS [Filial]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 4,
+          "name": "Estado",
+          "legacyExpression": "fpc.estado AS [Estado]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 5,
+          "name": "CT-e/Número",
+          "legacyExpression": "fpc.numero_cte AS [CT-e/Número]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 6,
+          "name": "Número do Documento",
+          "legacyExpression": "CASE \r\n        WHEN fpc.numero_cte IS NOT NULL THEN CONVERT(NVARCHAR(50), fpc.numero_cte)\r\n        WHEN fpc.numero_nfse IS NOT NULL THEN CONVERT(NVARCHAR(50), fpc.numero_nfse)\r\n        ELSE NULL\r\n    END AS [Número do Documento]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 7,
+          "name": "CT-e/Chave",
+          "legacyExpression": "fpc.chave_cte AS [CT-e/Chave]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 8,
+          "name": "CT-e/Data de emissão",
+          "legacyExpression": "datas.data_emissao_cte AS [CT-e/Data de emissão]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 9,
+          "name": "Frete/Valor dos CT-es",
+          "legacyExpression": "fpc.valor_frete AS [Frete/Valor dos CT-es]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 10,
+          "name": "Terceiros/Valor CT-es",
+          "legacyExpression": "fpc.third_party_ctes_value AS [Terceiros/Valor CT-es]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 11,
+          "name": "CT-e/Status",
+          "legacyExpression": "fpc.status_cte AS [CT-e/Status]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 12,
+          "name": "CT-e/Resultado",
+          "legacyExpression": "fpc.status_cte_result AS [CT-e/Resultado]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 13,
+          "name": "Tipo",
+          "legacyExpression": "fpc.tipo_frete AS [Tipo]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 14,
+          "name": "Classificação",
+          "legacyExpression": "fpc.classificacao AS [Classificação]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 15,
+          "name": "Pagador do frete/Nome",
+          "legacyExpression": "fpc.pagador_nome AS [Pagador do frete/Nome]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 16,
+          "name": "Pagador do frete/Documento",
+          "legacyExpression": "fpc.pagador_documento AS [Pagador do frete/Documento]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 17,
+          "name": "Cliente/CNPJ",
+          "legacyExpression": "COALESCE(fpc.cliente_cnpj, documentos.pagador_cnpj) AS [Cliente/CNPJ]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 18,
+          "name": "Remetente/Nome",
+          "legacyExpression": "fpc.remetente_nome AS [Remetente/Nome]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 19,
+          "name": "Remetente/Documento",
+          "legacyExpression": "fpc.remetente_documento AS [Remetente/Documento]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 20,
+          "name": "Destinatário/Nome",
+          "legacyExpression": "fpc.destinatario_nome AS [Destinatário/Nome]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 21,
+          "name": "Destinatário/Documento",
+          "legacyExpression": "fpc.destinatario_documento AS [Destinatário/Documento]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 22,
+          "name": "Vendedor/Nome",
+          "legacyExpression": "fpc.vendedor_nome AS [Vendedor/Nome]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 23,
+          "name": "NFS-e/Número",
+          "legacyExpression": "fpc.numero_nfse AS [NFS-e/Número]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 24,
+          "name": "NFS-e/Série",
+          "legacyExpression": "fpc.serie_nfse AS [NFS-e/Série]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 25,
+          "name": "fit_nse_number",
+          "legacyExpression": "fpc.numero_nfse AS [fit_nse_number]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 26,
+          "name": "N° NFS-e",
+          "legacyExpression": "fpc.numero_nfse AS [N° NFS-e]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 27,
+          "name": "Carteira/Descrição",
+          "legacyExpression": "CAST(NULL AS NVARCHAR(50)) AS [Carteira/Descrição]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 28,
+          "name": "Instrução Customizada",
+          "legacyExpression": "CAST(NULL AS NVARCHAR(MAX)) AS [Instrução Customizada]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 29,
+          "name": "Status do Processo",
+          "legacyExpression": "CASE WHEN fpc.fit_ant_document IS NOT NULL THEN 'Faturado' ELSE 'Aguardando Faturamento' END AS [Status do Processo]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 30,
+          "name": "Fatura/N° Documento",
+          "legacyExpression": "fpc.fit_ant_document AS [Fatura/N° Documento]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 31,
+          "name": "Fatura/Emissão",
+          "legacyExpression": "CONVERT(NVARCHAR(10), datas.fit_ant_issue_date, 23) AS [Fatura/Emissão]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 32,
+          "name": "Fatura/Valor",
+          "legacyExpression": "fpc.fit_ant_value AS [Fatura/Valor]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 33,
+          "name": "Fatura/Valor Total",
+          "legacyExpression": "fpc.valor_fatura AS [Fatura/Valor Total]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 34,
+          "name": "Fatura/Número",
+          "legacyExpression": "fpc.numero_fatura AS [Fatura/Número]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 35,
+          "name": "Fatura/Emissão Fatura",
+          "legacyExpression": "CONVERT(NVARCHAR(10), datas.data_emissao_fatura, 23) AS [Fatura/Emissão Fatura]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 36,
+          "name": "Parcelas/Vencimento",
+          "legacyExpression": "CONVERT(NVARCHAR(10), datas.data_vencimento_fatura, 23) AS [Parcelas/Vencimento]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 37,
+          "name": "Fatura/Baixa",
+          "legacyExpression": "CONVERT(NVARCHAR(10), datas.data_baixa_fatura, 23) AS [Fatura/Baixa]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 38,
+          "name": "Fatura/Data Vencimento Original",
+          "legacyExpression": "CONVERT(NVARCHAR(10), datas.fit_ant_ils_original_due_date, 23) AS [Fatura/Data Vencimento Original]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 39,
+          "name": "Notas Fiscais",
+          "legacyExpression": "fpc.notas_fiscais AS [Notas Fiscais]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 40,
+          "name": "Pedidos/Cliente",
+          "legacyExpression": "fpc.pedidos_cliente AS [Pedidos/Cliente]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 41,
+          "name": "Metadata",
+          "legacyExpression": "fpc.metadata AS [Metadata]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 42,
+          "name": "Data da Última Atualização",
+          "legacyExpression": "fpc.data_extracao AS [Data da Última Atualização]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        }
+      ]
+    },
+    {
+      "id": "SQL-02",
+      "legacyName": "vw_fretes_powerbi",
+      "source": "database/views/012_criar_view_fretes_powerbi.sql",
+      "sourceSha256": "92fde7f7185cacc9ad25079a2397f570c51c79c85281011a3fee75688b422502",
+      "localName": "pub.analytic_lab_sql_02",
+      "columns": [
+        {
+          "ordinal": 1,
+          "name": "Hora (Solicitacao)",
+          "legacyExpression": "CAST(f.servico_em AS TIME(0)) AS [Hora (Solicitacao)]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 2,
+          "name": "ID",
+          "legacyExpression": "f.id AS [ID]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 3,
+          "name": "Nº Minuta",
+          "legacyExpression": "f.corporation_sequence_number AS [Nº Minuta]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 4,
+          "name": "Chave CT-e",
+          "legacyExpression": "f.chave_cte AS [Chave CT-e]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 5,
+          "name": "Nº CT-e",
+          "legacyExpression": "f.numero_cte AS [Nº CT-e]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 6,
+          "name": "Série",
+          "legacyExpression": "f.serie_cte AS [Série]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 7,
+          "name": "CT-e Emissão",
+          "legacyExpression": "f.cte_issued_at AS [CT-e Emissão]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 8,
+          "name": "data_referencia_faturamento",
+          "legacyExpression": "f.data_referencia_faturamento AS data_referencia_faturamento",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 9,
+          "name": "CT-e Tipo Emissão",
+          "legacyExpression": "f.cte_emission_type AS [CT-e Tipo Emissão]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 10,
+          "name": "CT-e ID",
+          "legacyExpression": "f.cte_id AS [CT-e ID]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 11,
+          "name": "CT-e Criado em",
+          "legacyExpression": "f.cte_created_at AS [CT-e Criado em]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 12,
+          "name": "Documento Oficial/Tipo",
+          "legacyExpression": "CASE \r\n        WHEN f.cte_id IS NOT NULL\r\n          OR NULLIF(LTRIM(RTRIM(f.chave_cte)), '') IS NOT NULL\r\n          OR f.numero_cte IS NOT NULL\r\n          OR f.serie_cte IS NOT NULL THEN 'CT-e'\r\n        WHEN f.nfse_number IS NOT NULL\r\n          OR NULLIF(LTRIM(RTRIM(f.nfse_series)), '') IS NOT NULL\r\n          OR NULLIF(LTRIM(RTRIM(f.nfse_xml_document)), '') IS NOT NULL\r\n          OR NULLIF(LTRIM(RTRIM(f.nfse_integration_id)), '') IS NOT NULL THEN 'NFS-e'\r\n        ELSE 'Pendente/Não Emitido'\r\n    END AS [Documento Oficial/Tipo]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 13,
+          "name": "Documento Oficial/Chave",
+          "legacyExpression": "CASE \r\n        WHEN f.cte_id IS NOT NULL\r\n          OR NULLIF(LTRIM(RTRIM(f.chave_cte)), '') IS NOT NULL THEN f.chave_cte\r\n        ELSE NULL\r\n    END AS [Documento Oficial/Chave]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 14,
+          "name": "Documento Oficial/Número",
+          "legacyExpression": "CASE \r\n        WHEN f.cte_id IS NOT NULL\r\n          OR NULLIF(LTRIM(RTRIM(f.chave_cte)), '') IS NOT NULL\r\n          OR f.numero_cte IS NOT NULL\r\n          OR f.serie_cte IS NOT NULL THEN CONVERT(NVARCHAR(50), f.numero_cte)\r\n        WHEN f.nfse_number IS NOT NULL\r\n          OR NULLIF(LTRIM(RTRIM(f.nfse_series)), '') IS NOT NULL\r\n          OR NULLIF(LTRIM(RTRIM(f.nfse_xml_document)), '') IS NOT NULL\r\n          OR NULLIF(LTRIM(RTRIM(f.nfse_integration_id)), '') IS NOT NULL THEN CONVERT(NVARCHAR(50), f.nfse_number)\r\n        ELSE NULL\r\n    END AS [Documento Oficial/Número]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 15,
+          "name": "Documento Oficial/Série",
+          "legacyExpression": "CASE \r\n        WHEN f.cte_id IS NOT NULL\r\n          OR NULLIF(LTRIM(RTRIM(f.chave_cte)), '') IS NOT NULL\r\n          OR f.numero_cte IS NOT NULL\r\n          OR f.serie_cte IS NOT NULL THEN CONVERT(NVARCHAR(50), f.serie_cte)\r\n        WHEN f.nfse_number IS NOT NULL\r\n          OR NULLIF(LTRIM(RTRIM(f.nfse_series)), '') IS NOT NULL\r\n          OR NULLIF(LTRIM(RTRIM(f.nfse_xml_document)), '') IS NOT NULL\r\n          OR NULLIF(LTRIM(RTRIM(f.nfse_integration_id)), '') IS NOT NULL THEN f.nfse_series\r\n        ELSE NULL\r\n    END AS [Documento Oficial/Série]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 16,
+          "name": "Documento Oficial/XML",
+          "legacyExpression": "CASE \r\n        WHEN f.cte_id IS NOT NULL\r\n          OR NULLIF(LTRIM(RTRIM(f.chave_cte)), '') IS NOT NULL\r\n          OR f.numero_cte IS NOT NULL\r\n          OR f.serie_cte IS NOT NULL THEN NULL\r\n        WHEN f.nfse_number IS NOT NULL\r\n          OR NULLIF(LTRIM(RTRIM(f.nfse_series)), '') IS NOT NULL\r\n          OR NULLIF(LTRIM(RTRIM(f.nfse_xml_document)), '') IS NOT NULL\r\n          OR NULLIF(LTRIM(RTRIM(f.nfse_integration_id)), '') IS NOT NULL THEN f.nfse_xml_document\r\n        ELSE NULL\r\n    END AS [Documento Oficial/XML]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 17,
+          "name": "Data frete",
+          "legacyExpression": "f.servico_em AS [Data frete]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 18,
+          "name": "Criado em",
+          "legacyExpression": "f.criado_em AS [Criado em]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 19,
+          "name": "Valor Total do Serviço",
+          "legacyExpression": "f.valor_total AS [Valor Total do Serviço]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 20,
+          "name": "Valor NF",
+          "legacyExpression": "f.valor_notas AS [Valor NF]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 21,
+          "name": "Kg NF",
+          "legacyExpression": "f.peso_notas AS [Kg NF]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 22,
+          "name": "Valor Frete",
+          "legacyExpression": "f.subtotal AS [Valor Frete]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 23,
+          "name": "Volumes",
+          "legacyExpression": "COALESCE(lc.invoices_volumes, f.invoices_total_volumes, 0) AS [Volumes]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 24,
+          "name": "Kg Taxado",
+          "legacyExpression": "f.taxed_weight AS [Kg Taxado]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 25,
+          "name": "Peso Taxado",
+          "legacyExpression": "f.taxed_weight AS [Peso Taxado]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 26,
+          "name": "Kg Real",
+          "legacyExpression": "f.real_weight AS [Kg Real]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 27,
+          "name": "Peso Real",
+          "legacyExpression": "f.real_weight AS [Peso Real]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 28,
+          "name": "Kg Cubado",
+          "legacyExpression": "f.cubages_cubed_weight AS [Kg Cubado]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 29,
+          "name": "Peso Cubado",
+          "legacyExpression": "f.cubages_cubed_weight AS [Peso Cubado]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 30,
+          "name": "M3",
+          "legacyExpression": "f.total_cubic_volume AS [M3]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 31,
+          "name": "Total M3",
+          "legacyExpression": "f.total_cubic_volume AS [Total M3]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 32,
+          "name": "Pagador",
+          "legacyExpression": "f.pagador_nome AS [Pagador]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 33,
+          "name": "Pagador Doc",
+          "legacyExpression": "f.pagador_documento AS [Pagador Doc]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 34,
+          "name": "Pagador ID",
+          "legacyExpression": "f.pagador_id AS [Pagador ID]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 35,
+          "name": "Remetente",
+          "legacyExpression": "f.remetente_nome AS [Remetente]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 36,
+          "name": "Remetente Doc",
+          "legacyExpression": "f.remetente_documento AS [Remetente Doc]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 37,
+          "name": "Remetente ID",
+          "legacyExpression": "f.remetente_id AS [Remetente ID]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 38,
+          "name": "Origem",
+          "legacyExpression": "f.origem_cidade AS [Origem]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 39,
+          "name": "UF Origem",
+          "legacyExpression": "f.origem_uf AS [UF Origem]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 40,
+          "name": "Destinatario",
+          "legacyExpression": "f.destinatario_nome AS [Destinatario]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 41,
+          "name": "Destinatario Doc",
+          "legacyExpression": "f.destinatario_documento AS [Destinatario Doc]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 42,
+          "name": "Destinatario ID",
+          "legacyExpression": "f.destinatario_id AS [Destinatario ID]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 43,
+          "name": "Destino",
+          "legacyExpression": "f.destino_cidade AS [Destino]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 44,
+          "name": "Cidade Destino",
+          "legacyExpression": "f.destino_cidade AS [Cidade Destino]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 45,
+          "name": "UF Destino",
+          "legacyExpression": "f.destino_uf AS [UF Destino]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 46,
+          "name": "Região Destino",
+          "legacyExpression": "COALESCE(NULLIF(LTRIM(RTRIM(lc.destination_location_name)), ''), f.destino_uf, N'SEM_REGIAO') AS [Região Destino]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 47,
+          "name": "Filial",
+          "legacyExpression": "f.filial_nome AS [Filial]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 48,
+          "name": "Filial Emissora",
+          "legacyExpression": "f.filial_nome AS [Filial Emissora]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 49,
+          "name": "Responsável pela Região de Destino",
+          "legacyExpression": "indicador_base.filial_responsavel_destino AS [Responsável pela Região de Destino]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 50,
+          "name": "Responsável Região Destino Key",
+          "legacyExpression": "indicador_base.filial_responsavel_destino_key AS [Responsável Região Destino Key]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 51,
+          "name": "Filial Apelido",
+          "legacyExpression": "f.filial_apelido AS [Filial Apelido]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 52,
+          "name": "Filial CNPJ",
+          "legacyExpression": "f.filial_cnpj AS [Filial CNPJ]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 53,
+          "name": "Tabela de Preço",
+          "legacyExpression": "f.tabela_preco_nome AS [Tabela de Preço]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 54,
+          "name": "Classificação",
+          "legacyExpression": "f.classificacao_nome AS [Classificação]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 55,
+          "name": "Centro de Custo",
+          "legacyExpression": "f.centro_custo_nome AS [Centro de Custo]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 56,
+          "name": "Usuário",
+          "legacyExpression": "f.usuario_nome AS [Usuário]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 57,
+          "name": "NF",
+          "legacyExpression": "f.numero_nota_fiscal AS [NF]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 58,
+          "name": "Referência",
+          "legacyExpression": "f.reference_number AS [Referência]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 59,
+          "name": "Corp ID",
+          "legacyExpression": "f.id_corporacao AS [Corp ID]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 60,
+          "name": "Cidade Destino ID",
+          "legacyExpression": "f.id_cidade_destino AS [Cidade Destino ID]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 61,
+          "name": "Previsão de Entrega",
+          "legacyExpression": "indicador_base.previsao_entrega_oficial AS [Previsão de Entrega]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 62,
+          "name": "Data de Finalização",
+          "legacyExpression": "f.finished_at AS [Data de Finalização]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 63,
+          "name": "Finalização da Performance",
+          "legacyExpression": "indicador_base.finalizacao_performance_oficial AS [Finalização da Performance]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 64,
+          "name": "Performance Diferença de Dias",
+          "legacyExpression": "indicador_perf.performance_diferenca_dias AS [Performance Diferença de Dias]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 65,
+          "name": "Performance Status",
+          "legacyExpression": "CASE\r\n        WHEN indicador_perf.performance_diferenca_dias IS NULL THEN NULL\r\n        WHEN indicador_perf.performance_diferenca_dias <= 0 THEN 'NO PRAZO'\r\n        ELSE 'FORA DO PRAZO'\r\n    END AS [Performance Status]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 66,
+          "name": "Performance Status Dif de Dias",
+          "legacyExpression": "CASE\r\n        WHEN indicador_perf.performance_diferenca_dias IS NULL THEN NULL\r\n        WHEN indicador_perf.performance_diferenca_dias = 0 THEN 'NO PRAZO'\r\n        WHEN indicador_perf.performance_diferenca_dias = 1 THEN '1 DIA DE ATRASO'\r\n        WHEN indicador_perf.performance_diferenca_dias = 2 THEN '2 DIAS DE ATRASO'\r\n        WHEN indicador_perf.performance_diferenca_dias = 3 THEN '3 DIAS DE ATRASO'\r\n        WHEN indicador_perf.performance_diferenca_dias > 3 THEN 'ACIMA DE 3 DIAS DE ATRASO'\r\n        WHEN indicador_perf.performance_diferenca_dias = -1 THEN '1 DIA ANTES'\r\n        WHEN indicador_perf.performance_diferenca_dias = -2 THEN '2 DIAS ANTES'\r\n        WHEN indicador_perf.performance_diferenca_dias = -3 THEN '3 DIAS ANTES'\r\n        ELSE 'ACIMA DE 3 DIAS ANTES'\r\n    END AS [Performance Status Dif de Dias]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 67,
+          "name": "Performance Status Dif de Dias Oficial",
+          "legacyExpression": "CASE\r\n        WHEN indicador_perf.performance_diferenca_dias IS NULL THEN NULL\r\n        WHEN indicador_perf.performance_diferenca_dias = 0 THEN 'NO PRAZO'\r\n        WHEN indicador_perf.performance_diferenca_dias = 1 THEN '1 DIA DE ATRASO'\r\n        WHEN indicador_perf.performance_diferenca_dias = 2 THEN '2 DIAS DE ATRASO'\r\n        WHEN indicador_perf.performance_diferenca_dias = 3 THEN '3 DIAS DE ATRASO'\r\n        WHEN indicador_perf.performance_diferenca_dias > 3 THEN 'ACIMA DE 3 DIAS DE ATRASO'\r\n        WHEN indicador_perf.performance_diferenca_dias = -1 THEN '1 DIA ANTES'\r\n        WHEN indicador_perf.performance_diferenca_dias = -2 THEN '2 DIAS ANTES'\r\n        WHEN indicador_perf.performance_diferenca_dias = -3 THEN '3 DIAS ANTES'\r\n        ELSE 'ACIMA DE 3 DIAS ANTES'\r\n    END AS [Performance Status Dif de Dias Oficial]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 68,
+          "name": "Comprovante Anexado",
+          "legacyExpression": "CASE\r\n        WHEN EXISTS (\r\n            SELECT 1\r\n            FROM dbo.inventario AS inv\r\n            WHERE inv.numero_minuta = f.corporation_sequence_number\r\n              AND inv.flag_comprovante_anexado = 1\r\n              AND COALESCE(inv.excluido_na_origem, 0) = 0\r\n        )\r\n            THEN N'Sim'\r\n        ELSE N'Não'\r\n    END AS [Comprovante Anexado]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 69,
+          "name": "Modal",
+          "legacyExpression": "f.modal AS [Modal]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 70,
+          "name": "Status",
+          "legacyExpression": "CASE f.status\n        WHEN 'pending' THEN 'pendente'\n        WHEN 'finished' THEN 'finalizado'\n        WHEN 'done' THEN 'finalizado'\n        WHEN 'canceled' THEN 'cancelada'\n        WHEN 'cancelled' THEN 'cancelada'\n        WHEN 'in_transit' THEN 'em trânsito'\n        WHEN 'standby' THEN 'aguardando'\r\n        WHEN 'manifested' THEN 'registrado'\r\n        WHEN 'occurrence_treatment' THEN 'tratamento de ocorrência'\r\n        ELSE f.status\r\n    END AS [Status]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 71,
+          "name": "Cortesia",
+          "legacyExpression": "CASE WHEN f.cortesia = 1 THEN 'Sim'\r\n         WHEN f.cortesia = 0 THEN 'Não'\r\n         ELSE NULL\r\n    END AS [Cortesia]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 72,
+          "name": "Cortesia Flag",
+          "legacyExpression": "f.cortesia AS [Cortesia Flag]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 73,
+          "name": "is_elegivel_faturamento",
+          "legacyExpression": "f.is_elegivel_faturamento AS is_elegivel_faturamento",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 74,
+          "name": "Tipo Frete",
+          "legacyExpression": "REPLACE(f.tipo_frete, 'Freight::', '') AS [Tipo Frete]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 75,
+          "name": "Service Type",
+          "legacyExpression": "f.service_type AS [Service Type]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 76,
+          "name": "Seguro Habilitado",
+          "legacyExpression": "CASE WHEN f.insurance_enabled = 1 THEN 'Com seguro'\r\n         WHEN f.insurance_enabled = 0 THEN 'Sem seguro'\r\n         ELSE NULL\r\n    END AS [Seguro Habilitado]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 77,
+          "name": "GRIS",
+          "legacyExpression": "f.gris_subtotal AS [GRIS]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 78,
+          "name": "TDE",
+          "legacyExpression": "f.tde_subtotal AS [TDE]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 79,
+          "name": "Frete Peso",
+          "legacyExpression": "f.freight_weight_subtotal AS [Frete Peso]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 80,
+          "name": "Ad Valorem",
+          "legacyExpression": "f.ad_valorem_subtotal AS [Ad Valorem]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 81,
+          "name": "Pedágio",
+          "legacyExpression": "f.toll_subtotal AS [Pedágio]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 82,
+          "name": "ITR",
+          "legacyExpression": "f.itr_subtotal AS [ITR]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 83,
+          "name": "Modal CT-e",
+          "legacyExpression": "f.modal_cte AS [Modal CT-e]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 84,
+          "name": "Redispatch",
+          "legacyExpression": "f.redispatch_subtotal AS [Redispatch]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 85,
+          "name": "SUFRAMA",
+          "legacyExpression": "f.suframa_subtotal AS [SUFRAMA]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 86,
+          "name": "Tipo Pagamento",
+          "legacyExpression": "CASE f.payment_type\r\n        WHEN 'bill' THEN 'cobrança'\r\n        WHEN 'cash' THEN 'dinheiro'\r\n        ELSE f.payment_type\r\n    END AS [Tipo Pagamento]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 87,
+          "name": "Doc Anterior",
+          "legacyExpression": "CASE f.previous_document_type\r\n        WHEN 'electronic' THEN 'eletrônico'\r\n        ELSE f.previous_document_type\r\n    END AS [Doc Anterior]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 88,
+          "name": "Valor Produtos",
+          "legacyExpression": "f.products_value AS [Valor Produtos]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 89,
+          "name": "TRT",
+          "legacyExpression": "f.trt_subtotal AS [TRT]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 90,
+          "name": "ICMS CST",
+          "legacyExpression": "f.fiscal_cst_type AS [ICMS CST]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 91,
+          "name": "CFOP",
+          "legacyExpression": "f.fiscal_cfop_code AS [CFOP]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 92,
+          "name": "Valor ICMS",
+          "legacyExpression": "f.fiscal_tax_value AS [Valor ICMS]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 93,
+          "name": "Valor PIS",
+          "legacyExpression": "f.fiscal_pis_value AS [Valor PIS]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 94,
+          "name": "Valor COFINS",
+          "legacyExpression": "f.fiscal_cofins_value AS [Valor COFINS]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 95,
+          "name": "Base de Cálculo ICMS",
+          "legacyExpression": "f.fiscal_calculation_basis AS [Base de Cálculo ICMS]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 96,
+          "name": "Alíquota ICMS %",
+          "legacyExpression": "f.fiscal_tax_rate AS [Alíquota ICMS %]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 97,
+          "name": "Alíquota PIS %",
+          "legacyExpression": "f.fiscal_pis_rate AS [Alíquota PIS %]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 98,
+          "name": "Alíquota COFINS %",
+          "legacyExpression": "f.fiscal_cofins_rate AS [Alíquota COFINS %]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 99,
+          "name": "Possui DIFAL",
+          "legacyExpression": "CASE WHEN f.fiscal_has_difal = 1 THEN 'possui'\r\n         WHEN f.fiscal_has_difal = 0 THEN 'não possui'\r\n         ELSE NULL\r\n    END AS [Possui DIFAL]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 100,
+          "name": "DIFAL Origem",
+          "legacyExpression": "f.fiscal_difal_origin AS [DIFAL Origem]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 101,
+          "name": "DIFAL Destino",
+          "legacyExpression": "f.fiscal_difal_destination AS [DIFAL Destino]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 102,
+          "name": "Série NFS-e",
+          "legacyExpression": "f.nfse_series AS [Série NFS-e]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 103,
+          "name": "Nº NFS-e",
+          "legacyExpression": "f.nfse_number AS [Nº NFS-e]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 104,
+          "name": "NFS-e/ID Integração",
+          "legacyExpression": "f.nfse_integration_id AS [NFS-e/ID Integração]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 105,
+          "name": "NFS-e/Status",
+          "legacyExpression": "f.nfse_status AS [NFS-e/Status]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 106,
+          "name": "NFS-e/Emissão",
+          "legacyExpression": "f.nfse_issued_at AS [NFS-e/Emissão]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 107,
+          "name": "NFS-e/Cancelamento/Motivo",
+          "legacyExpression": "f.nfse_cancelation_reason AS [NFS-e/Cancelamento/Motivo]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 108,
+          "name": "NFS-e/PDF",
+          "legacyExpression": "f.nfse_pdf_service_url AS [NFS-e/PDF]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 109,
+          "name": "NFS-e/Filial ID",
+          "legacyExpression": "f.nfse_corporation_id AS [NFS-e/Filial ID]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 110,
+          "name": "NFS-e/Serviço/Descrição",
+          "legacyExpression": "f.nfse_service_description AS [NFS-e/Serviço/Descrição]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 111,
+          "name": "NFS-e/XML",
+          "legacyExpression": "f.nfse_xml_document AS [NFS-e/XML]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 112,
+          "name": "Seguro ID",
+          "legacyExpression": "f.insurance_id AS [Seguro ID]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 113,
+          "name": "Outras Tarifas",
+          "legacyExpression": "f.other_fees AS [Outras Tarifas]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 114,
+          "name": "KM",
+          "legacyExpression": "f.km AS [KM]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 115,
+          "name": "Tipo Contábil Pagamento",
+          "legacyExpression": "f.payment_accountable_type AS [Tipo Contábil Pagamento]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 116,
+          "name": "Valor Segurado",
+          "legacyExpression": "f.insured_value AS [Valor Segurado]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 117,
+          "name": "Globalizado",
+          "legacyExpression": "CASE WHEN f.globalized = 1 THEN 'verdadeiro'\r\n         WHEN f.globalized = 0 THEN 'falso'\r\n         ELSE NULL\r\n    END AS [Globalizado]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 118,
+          "name": "SEC/CAT",
+          "legacyExpression": "f.sec_cat_subtotal AS [SEC/CAT]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 119,
+          "name": "Tipo Globalizado",
+          "legacyExpression": "CASE f.globalized_type\r\n        WHEN 'none' THEN 'nenhum'\r\n        ELSE f.globalized_type\r\n    END AS [Tipo Globalizado]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 120,
+          "name": "Tipo Contábil Tabela",
+          "legacyExpression": "f.price_table_accountable_type AS [Tipo Contábil Tabela]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 121,
+          "name": "Tipo Contábil Seguro",
+          "legacyExpression": "f.insurance_accountable_type AS [Tipo Contábil Seguro]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 122,
+          "name": "Metadata",
+          "legacyExpression": "f.metadata AS [Metadata]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 123,
+          "name": "Data de extracao",
+          "legacyExpression": "f.data_extracao AS [Data de extracao]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        }
+      ]
+    },
+    {
+      "id": "SQL-03",
+      "legacyName": "vw_coletas_powerbi",
+      "source": "database/views/013_criar_view_coletas_powerbi.sql",
+      "sourceSha256": "df7b599098c5360230fd1d3ff25cbb2e58600587ea0346732302673f28312153",
+      "localName": "pub.analytic_lab_sql_03",
+      "columns": [
+        {
+          "ordinal": 1,
+          "name": "ID",
+          "legacyExpression": "c.id AS [ID]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 2,
+          "name": "Coleta",
+          "legacyExpression": "c.sequence_code AS [Coleta]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 3,
+          "name": "Solicitacao",
+          "legacyExpression": "c.request_date AS [Solicitacao]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 4,
+          "name": "Hora (Solicitacao)",
+          "legacyExpression": "CAST(ISNULL(c.request_hour, '00:00:00') AS TIME(0)) AS [Hora (Solicitacao)]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 5,
+          "name": "Agendamento",
+          "legacyExpression": "c.service_date AS [Agendamento]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 6,
+          "name": "Finalizacao",
+          "legacyExpression": "c.finish_date AS [Finalizacao]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 7,
+          "name": "Status",
+          "legacyExpression": "CASE\n        WHEN COALESCE(c.excluido_na_origem, 0) = 1\n          OR COALESCE(c.confirmacoes_ausencia_origem, 0) >= 1\n            THEN N'Excluída'\n        ELSE COALESCE(status_coleta.rotulo_powerbi, c.status)\n    END AS [Status]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 8,
+          "name": "Excluída na Origem",
+          "legacyExpression": "CAST(COALESCE(c.excluido_na_origem, 0) AS BIT) AS [Excluída na Origem]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 9,
+          "name": "Volumes",
+          "legacyExpression": "c.total_volumes AS [Volumes]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 10,
+          "name": "Peso Real",
+          "legacyExpression": "c.total_weight AS [Peso Real]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 11,
+          "name": "Peso Taxado",
+          "legacyExpression": "c.taxed_weight AS [Peso Taxado]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 12,
+          "name": "Valor NF",
+          "legacyExpression": "c.total_value AS [Valor NF]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 13,
+          "name": "Numero Manifesto",
+          "legacyExpression": "manifesto_canonico.sequence_code AS [Numero Manifesto]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 14,
+          "name": "Veiculo",
+          "legacyExpression": "c.vehicle_type_id AS [Veiculo]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 15,
+          "name": "Cliente",
+          "legacyExpression": "c.cliente_nome AS [Cliente]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 16,
+          "name": "Cliente Doc",
+          "legacyExpression": "c.cliente_doc AS [Cliente Doc]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 17,
+          "name": "Local da Coleta",
+          "legacyExpression": "c.local_coleta AS [Local da Coleta]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 18,
+          "name": "Numero",
+          "legacyExpression": "c.numero_coleta AS [Numero]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 19,
+          "name": "Complemento",
+          "legacyExpression": "c.complemento_coleta AS [Complemento]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 20,
+          "name": "Cidade",
+          "legacyExpression": "c.cidade_coleta AS [Cidade]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 21,
+          "name": "Bairro",
+          "legacyExpression": "c.bairro_coleta AS [Bairro]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 22,
+          "name": "UF",
+          "legacyExpression": "c.uf_coleta AS [UF]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 23,
+          "name": "CEP",
+          "legacyExpression": "c.cep_coleta AS [CEP]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 24,
+          "name": "Região da Coleta",
+          "legacyExpression": "c.pick_region AS [Região da Coleta]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 25,
+          "name": "Região Logística",
+          "legacyExpression": "COALESCE(\n        regra_cep.regiao_logistica,\n        regra_cidade.regiao_logistica,\n        CONCAT(\n            COALESCE(coleta_local.cidade_limpa, N'Sem cidade'),\n            N' - ',\n            COALESCE(coleta_local.uf_limpa, N'Sem UF')\n        )\n    ) AS [Região Logística]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 26,
+          "name": "Filial ID",
+          "legacyExpression": "c.filial_id AS [Filial ID]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 27,
+          "name": "Filial",
+          "legacyExpression": "c.filial_nome AS [Filial]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 28,
+          "name": "Usuario",
+          "legacyExpression": "c.usuario_nome AS [Usuario]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 29,
+          "name": "Motivo Cancel.",
+          "legacyExpression": "c.cancellation_reason AS [Motivo Cancel.]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 30,
+          "name": "Usuario Cancel. ID",
+          "legacyExpression": "c.cancellation_user_id AS [Usuario Cancel. ID]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 31,
+          "name": "Usuario Cancel. Nome",
+          "legacyExpression": "COALESCE(u_cancel.nome, CAST(c.cancellation_user_id AS VARCHAR(20))) AS [Usuario Cancel. Nome]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 32,
+          "name": "Motivo Exclusao",
+          "legacyExpression": "c.destroy_reason AS [Motivo Exclusao]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 33,
+          "name": "Usuario Exclusao ID",
+          "legacyExpression": "c.destroy_user_id AS [Usuario Exclusao ID]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 34,
+          "name": "Usuario Exclusao Nome",
+          "legacyExpression": "COALESCE(u_destroy.nome, CAST(c.destroy_user_id AS VARCHAR(20))) AS [Usuario Exclusao Nome]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 35,
+          "name": "Status Atualizado Em",
+          "legacyExpression": "c.status_updated_at AS [Status Atualizado Em]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 36,
+          "name": "Status Atualizado Em (normalizado)",
+          "legacyExpression": "c.status_updated_at_em AS [Status Atualizado Em (normalizado)]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 37,
+          "name": "Última Ocorrência",
+          "legacyExpression": "c.last_occurrence AS [Última Ocorrência]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 38,
+          "name": "Ação da Ocorrência",
+          "legacyExpression": "c.acao_ocorrencia AS [Ação da Ocorrência]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 39,
+          "name": "Nº Tentativas",
+          "legacyExpression": "c.numero_tentativas AS [Nº Tentativas]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 40,
+          "name": "Metadata",
+          "legacyExpression": "c.metadata AS [Metadata]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 41,
+          "name": "Data de extracao",
+          "legacyExpression": "c.data_extracao AS [Data de extracao]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        }
+      ]
+    },
+    {
+      "id": "SQL-04",
+      "legacyName": "vw_coletas_excluidas_origem",
+      "source": "database/views/014_criar_view_coletas_excluidas_origem.sql",
+      "sourceSha256": "253512817139588608c7564e938c79be2ebf36ed6c8b772bb4e47ce6381b98eb",
+      "localName": "pub.analytic_lab_sql_04",
+      "columns": [
+        {
+          "ordinal": 1,
+          "name": "ID",
+          "legacyExpression": "c.id AS [ID]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 2,
+          "name": "Coleta",
+          "legacyExpression": "c.sequence_code AS [Coleta]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 3,
+          "name": "Solicitacao",
+          "legacyExpression": "c.request_date AS [Solicitacao]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 4,
+          "name": "Filial",
+          "legacyExpression": "c.filial_nome AS [Filial]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 5,
+          "name": "Status ESL bruto",
+          "legacyExpression": "c.status AS [Status ESL bruto]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 6,
+          "name": "Status antes da exclusão",
+          "legacyExpression": "COALESCE(status_coleta.rotulo_powerbi, c.status) AS [Status antes da exclusão]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 7,
+          "name": "Situação de sincronização",
+          "legacyExpression": "N'Excluída na origem' AS [Situação de sincronização]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 8,
+          "name": "Ausente desde",
+          "legacyExpression": "c.ausente_na_origem_desde AS [Ausente desde]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 9,
+          "name": "Confirmações de ausência",
+          "legacyExpression": "c.confirmacoes_ausencia_origem AS [Confirmações de ausência]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 10,
+          "name": "Excluída em",
+          "legacyExpression": "c.data_exclusao_origem AS [Excluída em]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 11,
+          "name": "Motivo",
+          "legacyExpression": "c.motivo_exclusao_origem AS [Motivo]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 12,
+          "name": "Execução de confirmação",
+          "legacyExpression": "c.reconciliacao_origem_run_id AS [Execução de confirmação]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 13,
+          "name": "Última reconciliação",
+          "legacyExpression": "c.ultima_reconciliacao_origem_em AS [Última reconciliação]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        }
+      ]
+    },
+    {
+      "id": "SQL-05",
+      "legacyName": "vw_cotacoes_powerbi",
+      "source": "database/views/015_criar_view_cotacoes_powerbi.sql",
+      "sourceSha256": "554fe73bb87b95bada76a5399c04637340f7a45b5949925bd491aadf5a779f34",
+      "localName": "pub.analytic_lab_sql_05",
+      "columns": [
+        {
+          "ordinal": 1,
+          "name": "N° Cotação",
+          "legacyExpression": "sequence_code                                   AS [N° Cotação]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 2,
+          "name": "Data Cotação",
+          "legacyExpression": "requested_at                                    AS [Data Cotação]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 3,
+          "name": "Hora (Solicitacao)",
+          "legacyExpression": "CAST(requested_at AS TIME(0))                   AS [Hora (Solicitacao)]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 4,
+          "name": "Data de extracao",
+          "legacyExpression": "data_extracao                                   AS [Data de extracao]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 5,
+          "name": "Filial",
+          "legacyExpression": "branch_nickname                                 AS [Filial]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 6,
+          "name": "Unidade",
+          "legacyExpression": "branch_nickname                                 AS [Unidade]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 7,
+          "name": "Unidade_Origem",
+          "legacyExpression": "branch_nickname                                 AS [Unidade_Origem]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 8,
+          "name": "Solicitante",
+          "legacyExpression": "requester_name                                  AS [Solicitante]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 9,
+          "name": "Usuário",
+          "legacyExpression": "user_name                                       AS [Usuário]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 10,
+          "name": "Usuario Key",
+          "legacyExpression": "user_name_key                                   AS [Usuario Key]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 11,
+          "name": "Setor_Usuario",
+          "legacyExpression": "user_name                                       AS [Setor_Usuario]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 12,
+          "name": "Empresa",
+          "legacyExpression": "company_name                                    AS [Empresa]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 13,
+          "name": "Cliente Pagador",
+          "legacyExpression": "customer_name                                   AS [Cliente Pagador]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 14,
+          "name": "CNPJ/CPF Cliente",
+          "legacyExpression": "customer_doc                                    AS [CNPJ/CPF Cliente]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 15,
+          "name": "Pagador/Nome fantasia",
+          "legacyExpression": "customer_nickname                               AS [Pagador/Nome fantasia]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 16,
+          "name": "Cliente Grupo",
+          "legacyExpression": "customer_name                                   AS [Cliente Grupo]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 17,
+          "name": "Cliente",
+          "legacyExpression": "COALESCE(customer_nickname, customer_name)      AS [Cliente]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 18,
+          "name": "Cidade Origem",
+          "legacyExpression": "origin_city                                     AS [Cidade Origem]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 19,
+          "name": "UF Origem",
+          "legacyExpression": "origin_state                                    AS [UF Origem]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 20,
+          "name": "CEP Origem",
+          "legacyExpression": "origin_postal_code                              AS [CEP Origem]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 21,
+          "name": "Origem",
+          "legacyExpression": "CONCAT(origin_city, ' - ', origin_state)        AS [Origem]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 22,
+          "name": "Cidade Destino",
+          "legacyExpression": "destination_city                                AS [Cidade Destino]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 23,
+          "name": "UF Destino",
+          "legacyExpression": "destination_state                               AS [UF Destino]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 24,
+          "name": "CEP Destino",
+          "legacyExpression": "destination_postal_code                         AS [CEP Destino]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 25,
+          "name": "Destino",
+          "legacyExpression": "CONCAT(destination_city, ' - ', destination_state) AS [Destino]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 26,
+          "name": "Trecho",
+          "legacyExpression": "CONCAT(origin_city, ' - ', origin_state, ' x ', destination_city, ' - ', destination_state) AS [Trecho]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 27,
+          "name": "Volume",
+          "legacyExpression": "volumes                                         AS [Volume]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 28,
+          "name": "Peso real",
+          "legacyExpression": "real_weight                                     AS [Peso real]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 29,
+          "name": "Peso taxado",
+          "legacyExpression": "taxed_weight                                    AS [Peso taxado]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 30,
+          "name": "Valor NF",
+          "legacyExpression": "invoices_value                                  AS [Valor NF]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 31,
+          "name": "Valor frete",
+          "legacyExpression": "total_value                                     AS [Valor frete]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 32,
+          "name": "Min. Frete/KG",
+          "legacyExpression": "CASE\n        WHEN origin_state = 'SP' AND destination_state = 'SP' THEN 0.66\n        WHEN origin_state = 'SP' AND destination_state = 'RJ' THEN 1.21\n        WHEN origin_state = 'SP' AND destination_state = 'PR' THEN 0.74\n        WHEN origin_state = 'SP' AND destination_state = 'RS' THEN 1.70\n        WHEN origin_state = 'SP' AND destination_state = 'PE' THEN 1.54\n        WHEN origin_state = 'RJ' AND destination_state = 'SP' THEN 1.21\n        WHEN origin_state = 'RJ' AND destination_state = 'RJ' THEN 0.66\n        WHEN origin_state = 'RJ' AND destination_state = 'PR' THEN 0.98\n        WHEN origin_state = 'RJ' AND destination_state = 'RS' THEN 2.08\n        WHEN origin_state = 'RJ' AND destination_state = 'PE' THEN 1.95\n        WHEN origin_state = 'PR' AND destination_state = 'SP' THEN 0.74\n        WHEN origin_state = 'PR' AND destination_state = 'RJ' THEN 0.88\n        WHEN origin_state = 'PR' AND destination_state = 'PR' THEN 0.55\n        WHEN origin_state = 'PR' AND destination_state = 'RS' THEN 0.98\n        WHEN origin_state = 'PR' AND destination_state = 'PE' THEN 1.83\n        WHEN origin_state = 'RS' AND destination_state = 'SP' THEN 1.70\n        WHEN origin_state = 'RS' AND destination_state = 'RJ' THEN 1.95\n        WHEN origin_state = 'RS' AND destination_state = 'PR' THEN 1.46\n        WHEN origin_state = 'RS' AND destination_state = 'RS' THEN 0.98\n        WHEN origin_state = 'RS' AND destination_state = 'PE' THEN 2.20\n        WHEN origin_state = 'PE' AND destination_state = 'SP' THEN 1.46\n        WHEN origin_state = 'PE' AND destination_state = 'RJ' THEN 2.20\n        WHEN origin_state = 'PE' AND destination_state = 'PR' THEN 2.20\n        WHEN origin_state = 'PE' AND destination_state = 'RS' THEN 2.32\n        WHEN origin_state = 'PE' AND destination_state = 'PE' THEN 0.55\n        ELSE 0.00\n    END                                             AS [Min. Frete/KG]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 33,
+          "name": "Tabela",
+          "legacyExpression": "price_table                                     AS [Tabela]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 34,
+          "name": "Tipo de operação",
+          "legacyExpression": "operation_type                                  AS [Tipo de operação]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 35,
+          "name": "Metadata",
+          "legacyExpression": "metadata                                        AS [Metadata]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 36,
+          "name": "Status Conversão",
+          "legacyExpression": "CASE\r\n        WHEN cte_issued_at IS NOT NULL OR nfse_issued_at IS NOT NULL THEN 'Convertida'\r\n        WHEN disapprove_comments IS NOT NULL AND LEN(disapprove_comments) > 0 THEN 'Reprovada'\r\n        ELSE 'Pendente'\r\n    END                                             AS [Status Conversão]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 37,
+          "name": "Status_Sistema",
+          "legacyExpression": "CASE\r\n        WHEN cte_issued_at IS NOT NULL OR nfse_issued_at IS NOT NULL THEN 'Convertida'\r\n        WHEN disapprove_comments IS NOT NULL AND LEN(disapprove_comments) > 0 THEN 'Reprovada'\r\n        ELSE 'Pendente'\r\n    END                                             AS [Status_Sistema]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 38,
+          "name": "Status_Sistema_CTe",
+          "legacyExpression": "CASE \r\n        WHEN cte_issued_at IS NOT NULL THEN 'Emitido' \r\n        ELSE 'Pendente' \r\n    END                                             AS [Status_Sistema_CTe]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 39,
+          "name": "Status_Sistema_NFSe",
+          "legacyExpression": "CASE \r\n        WHEN nfse_issued_at IS NOT NULL THEN 'Emitida' \r\n        ELSE 'Pendente' \r\n    END                                             AS [Status_Sistema_NFSe]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 40,
+          "name": "Refino_CTe",
+          "legacyExpression": "CASE \r\n        WHEN cte_issued_at IS NOT NULL THEN 'Sim' \r\n        ELSE 'Não' \r\n    END                                             AS [Refino_CTe]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 41,
+          "name": "Motivo Perda",
+          "legacyExpression": "disapprove_comments                             AS [Motivo Perda]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 42,
+          "name": "Observações para o frete",
+          "legacyExpression": "freight_comments                                AS [Observações para o frete]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 43,
+          "name": "CT-e/Data de emissão",
+          "legacyExpression": "cte_issued_at                                   AS [CT-e/Data de emissão]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 44,
+          "name": "Nfse/Data de emissão",
+          "legacyExpression": "nfse_issued_at                                  AS [Nfse/Data de emissão]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 45,
+          "name": "Remetente/CNPJ",
+          "legacyExpression": "sender_document                                 AS [Remetente/CNPJ]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 46,
+          "name": "Remetente/Nome fantasia",
+          "legacyExpression": "sender_nickname                                 AS [Remetente/Nome fantasia]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 47,
+          "name": "Destinatário/CNPJ",
+          "legacyExpression": "receiver_document                               AS [Destinatário/CNPJ]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 48,
+          "name": "Destinatário/Nome fantasia",
+          "legacyExpression": "receiver_nickname                               AS [Destinatário/Nome fantasia]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 49,
+          "name": "Descontos/Subtotal parcelas",
+          "legacyExpression": "discount_subtotal                               AS [Descontos/Subtotal parcelas]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 50,
+          "name": "Trechos/ITR",
+          "legacyExpression": "itr_subtotal                                    AS [Trechos/ITR]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 51,
+          "name": "Trechos/TDE",
+          "legacyExpression": "tde_subtotal                                    AS [Trechos/TDE]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 52,
+          "name": "Trechos/Coleta",
+          "legacyExpression": "collect_subtotal                                AS [Trechos/Coleta]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 53,
+          "name": "Trechos/Entrega",
+          "legacyExpression": "delivery_subtotal                               AS [Trechos/Entrega]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 54,
+          "name": "Trechos/Outros valores",
+          "legacyExpression": "other_fees                                      AS [Trechos/Outros valores]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        }
+      ]
+    },
+    {
+      "id": "SQL-06",
+      "legacyName": "vw_contas_a_pagar_powerbi",
+      "source": "database/views/016_criar_view_contas_a_pagar_powerbi.sql",
+      "sourceSha256": "df3534a53d37bfef1fd32d46ab639e65dcbb9a3e961c3765bb7b5d5bc2a1a149",
+      "localName": "pub.analytic_lab_sql_06",
+      "columns": [
+        {
+          "ordinal": 1,
+          "name": "Hora (Solicitacao)",
+          "legacyExpression": "CAST(ISNULL(data_criacao, '1900-01-01T00:00:00+00:00') AS TIME(0)) AS [Hora (Solicitacao)]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 2,
+          "name": "Lançamento a Pagar/N°",
+          "legacyExpression": "sequence_code AS [Lançamento a Pagar/N°]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 3,
+          "name": "N° Documento",
+          "legacyExpression": "document_number AS [N° Documento]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 4,
+          "name": "Emissão",
+          "legacyExpression": "issue_date AS [Emissão]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 5,
+          "name": "Tipo",
+          "legacyExpression": "tipo_lancamento AS [Tipo]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 6,
+          "name": "Valor",
+          "legacyExpression": "valor_original AS [Valor]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 7,
+          "name": "Juros",
+          "legacyExpression": "valor_juros AS [Juros]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 8,
+          "name": "Desconto",
+          "legacyExpression": "valor_desconto AS [Desconto]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 9,
+          "name": "Valor a pagar",
+          "legacyExpression": "valor_a_pagar AS [Valor a pagar]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 10,
+          "name": "Pago",
+          "legacyExpression": "CASE WHEN status_pagamento = 'PAGO' THEN 'Sim' ELSE 'Não' END AS [Pago]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 11,
+          "name": "Valor pago",
+          "legacyExpression": "valor_pago AS [Valor pago]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 12,
+          "name": "Fornecedor/Nome",
+          "legacyExpression": "nome_fornecedor AS [Fornecedor/Nome]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 13,
+          "name": "Filial",
+          "legacyExpression": "nome_filial AS [Filial]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 14,
+          "name": "Conta Contábil/Classificação",
+          "legacyExpression": "classificacao_contabil AS [Conta Contábil/Classificação]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 15,
+          "name": "Conta Contábil/Descrição",
+          "legacyExpression": "descricao_contabil AS [Conta Contábil/Descrição]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 16,
+          "name": "Conta Contábil/Valor",
+          "legacyExpression": "valor_contabil AS [Conta Contábil/Valor]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 17,
+          "name": "Centro de custo/Nome",
+          "legacyExpression": "nome_centro_custo AS [Centro de custo/Nome]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 18,
+          "name": "Centro de custo/Valor",
+          "legacyExpression": "valor_centro_custo AS [Centro de custo/Valor]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 19,
+          "name": "Área de Lançamento",
+          "legacyExpression": "area_lancamento AS [Área de Lançamento]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 20,
+          "name": "Mês de Competência",
+          "legacyExpression": "mes_competencia AS [Mês de Competência]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 21,
+          "name": "Ano de Competência",
+          "legacyExpression": "ano_competencia AS [Ano de Competência]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 22,
+          "name": "Data criação",
+          "legacyExpression": "data_criacao AS [Data criação]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 23,
+          "name": "Observações",
+          "legacyExpression": "observacoes AS [Observações]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 24,
+          "name": "Descrição da despesa",
+          "legacyExpression": "descricao_despesa AS [Descrição da despesa]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 25,
+          "name": "Baixa/Data liquidação",
+          "legacyExpression": "data_liquidacao AS [Baixa/Data liquidação]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 26,
+          "name": "Data transação",
+          "legacyExpression": "data_transacao AS [Data transação]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 27,
+          "name": "Usuário/Nome",
+          "legacyExpression": "nome_usuario AS [Usuário/Nome]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 28,
+          "name": "Status Pagamento",
+          "legacyExpression": "status_pagamento AS [Status Pagamento]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 29,
+          "name": "Conciliado",
+          "legacyExpression": "CASE WHEN reconciliado = 1 THEN 'Conciliado'\r\n         WHEN reconciliado = 0 THEN 'Não conciliado'\r\n         ELSE NULL\r\n    END AS [Conciliado]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 30,
+          "name": "Metadata",
+          "legacyExpression": "metadata AS [Metadata]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 31,
+          "name": "Data de extracao",
+          "legacyExpression": "data_extracao AS [Data de extracao]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        }
+      ]
+    },
+    {
+      "id": "SQL-07",
+      "legacyName": "vw_localizacao_cargas_powerbi",
+      "source": "database/views/017_criar_view_localizacao_cargas_powerbi.sql",
+      "sourceSha256": "26cf6b2c422634a632541867675e140e94a9df9bc625fe7fd377134a373c2ed4",
+      "localName": "pub.analytic_lab_sql_07",
+      "columns": [
+        {
+          "ordinal": 1,
+          "name": "Hora (Solicitacao)",
+          "legacyExpression": "CAST(lc.service_at AS TIME(0)) AS [Hora (Solicitacao)]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 2,
+          "name": "N° Minuta",
+          "legacyExpression": "lc.sequence_number AS [N° Minuta]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 3,
+          "name": "Tipo",
+          "legacyExpression": "REPLACE(lc.type, 'Freight::', '') AS [Tipo]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 4,
+          "name": "Data do frete",
+          "legacyExpression": "lc.service_at AS [Data do frete]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 5,
+          "name": "Volumes",
+          "legacyExpression": "lc.invoices_volumes AS [Volumes]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 6,
+          "name": "Peso Taxado",
+          "legacyExpression": "lc.taxed_weight AS [Peso Taxado]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 7,
+          "name": "Peso Taxado Decimal",
+          "legacyExpression": "lc.taxed_weight_decimal AS [Peso Taxado Decimal]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 8,
+          "name": "Valor NF",
+          "legacyExpression": "lc.invoices_value AS [Valor NF]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 9,
+          "name": "Valor NF Decimal",
+          "legacyExpression": "lc.invoices_value_decimal AS [Valor NF Decimal]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 10,
+          "name": "Valor Frete",
+          "legacyExpression": "lc.total_value AS [Valor Frete]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 11,
+          "name": "Tipo Serviço",
+          "legacyExpression": "lc.service_type AS [Tipo Serviço]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 12,
+          "name": "Filial Emissora",
+          "legacyExpression": "lc.branch_nickname AS [Filial Emissora]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 13,
+          "name": "Previsão Entrega/Previsão de entrega",
+          "legacyExpression": "lc.predicted_delivery_at AS [Previsão Entrega/Previsão de entrega]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 14,
+          "name": "Região Destino",
+          "legacyExpression": "lc.destination_location_name AS [Região Destino]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 15,
+          "name": "Filial Destino",
+          "legacyExpression": "lc.destination_branch_nickname AS [Filial Destino]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 16,
+          "name": "Responsável pela Região de Destino",
+          "legacyExpression": "lc.destination_branch_nickname AS [Responsável pela Região de Destino]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 17,
+          "name": "Sigla Responsável Região Destino",
+          "legacyExpression": "COALESCE(regiao_alias.sigla, N'SEM_MAP') AS [Sigla Responsável Região Destino]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 18,
+          "name": "Classificação",
+          "legacyExpression": "lc.classification AS [Classificação]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 19,
+          "name": "Status Carga",
+          "legacyExpression": "CASE lc.status\r\n        WHEN 'pending' THEN 'Pendente'\r\n        WHEN 'delivering' THEN 'Em entrega'\r\n        WHEN 'in_warehouse' THEN 'Em armazém'\r\n        WHEN 'in_transfer' THEN 'Em transferência'\r\n        WHEN 'manifested' THEN 'Manifestado'\r\n        WHEN 'finished' THEN 'Finalizado'\r\n        WHEN 'delivered' THEN 'Entregue'\r\n        WHEN 'canceled' THEN 'Cancelado'\r\n        WHEN 'cancelled' THEN 'Cancelado'\r\n        ELSE lc.status\r\n    END AS [Status Carga]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 20,
+          "name": "Status Normalizado",
+          "legacyExpression": "COALESCE(lc.status_normalized, NULLIF(LOWER(LTRIM(RTRIM(lc.status))), ''), N'sem_status') AS [Status Normalizado]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 21,
+          "name": "Status Terminal",
+          "legacyExpression": "CASE WHEN COALESCE(lc.status_normalized, LOWER(LTRIM(RTRIM(lc.status)))) IN (N'finished', N'delivered', N'canceled', N'cancelled', N'finalizado', N'entregue', N'cancelado') THEN 1 ELSE 0 END AS [Status Terminal]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 22,
+          "name": "Cancelado Flag",
+          "legacyExpression": "CASE WHEN COALESCE(lc.status_normalized, LOWER(LTRIM(RTRIM(lc.status)))) IN (N'canceled', N'cancelled', N'cancelado') THEN 1 ELSE 0 END AS [Cancelado Flag]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 23,
+          "name": "Filial Atual",
+          "legacyExpression": "lc.status_branch_nickname AS [Filial Atual]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 24,
+          "name": "Região Origem",
+          "legacyExpression": "lc.origin_location_name AS [Região Origem]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 25,
+          "name": "Filial Origem",
+          "legacyExpression": "lc.origin_branch_nickname AS [Filial Origem]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 26,
+          "name": "Localização Atual",
+          "legacyExpression": "lc.fit_fln_cln_nickname AS [Localização Atual]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 27,
+          "name": "Hash Localização",
+          "legacyExpression": "lc.localizacao_hash AS [Hash Localização]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 28,
+          "name": "Metadata",
+          "legacyExpression": "lc.metadata AS [Metadata]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 29,
+          "name": "Data de extracao",
+          "legacyExpression": "lc.data_extracao AS [Data de extracao]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        }
+      ]
+    },
+    {
+      "id": "SQL-08",
+      "legacyName": "vw_manifestos_powerbi",
+      "source": "database/views/018_criar_view_manifestos_powerbi.sql",
+      "sourceSha256": "d8a74ceb2c583bcba8650714dccaafc9cec0203c3723b23573b254b177de6736",
+      "localName": "pub.analytic_lab_sql_08",
+      "columns": [
+        {
+          "ordinal": 1,
+          "name": "Hora (Solicitacao)",
+          "legacyExpression": "hora_solicitacao                 AS [Hora (Solicitacao)]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 2,
+          "name": "Hora (Criação)",
+          "legacyExpression": "hora_criacao                     AS [Hora (Criação)]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 3,
+          "name": "Número",
+          "legacyExpression": "sequence_code                    AS [Número]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 4,
+          "name": "Identificador Único",
+          "legacyExpression": "identificador_unico              AS [Identificador Único]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 5,
+          "name": "Status",
+          "legacyExpression": "status                           AS [Status]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 6,
+          "name": "Classificação",
+          "legacyExpression": "classificacao                    AS [Classificação]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 7,
+          "name": "Filial",
+          "legacyExpression": "filial                           AS [Filial]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 8,
+          "name": "Filial Emissora",
+          "legacyExpression": "filial_emissora                  AS [Filial Emissora]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 9,
+          "name": "Data criação",
+          "legacyExpression": "data_criacao                     AS [Data criação]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 10,
+          "name": "Saída",
+          "legacyExpression": "saida                            AS [Saída]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 11,
+          "name": "Fechamento",
+          "legacyExpression": "fechamento                       AS [Fechamento]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 12,
+          "name": "Chegada",
+          "legacyExpression": "chegada                          AS [Chegada]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 13,
+          "name": "MDFe",
+          "legacyExpression": "mdfe_number                      AS [MDFe]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 14,
+          "name": "MDF-es/Chave",
+          "legacyExpression": "mdfe_key                         AS [MDF-es/Chave]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 15,
+          "name": "MDFe/Status",
+          "legacyExpression": "mdfe_status                      AS [MDFe/Status]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 16,
+          "name": "Polo de distribuição",
+          "legacyExpression": "distribution_pole                AS [Polo de distribuição]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 17,
+          "name": "Veículo/Placa",
+          "legacyExpression": "placa_veiculo                    AS [Veículo/Placa]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 18,
+          "name": "Tipo Veículo",
+          "legacyExpression": "tipo_veiculo                     AS [Tipo Veículo]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 19,
+          "name": "Proprietário/Nome",
+          "legacyExpression": "proprietario_nome                AS [Proprietário/Nome]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 20,
+          "name": "Proprietário/Documento",
+          "legacyExpression": "proprietario_documento           AS [Proprietário/Documento]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 21,
+          "name": "Tipo Motorista",
+          "legacyExpression": "tipo_motorista                   AS [Tipo Motorista]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 22,
+          "name": "Motorista",
+          "legacyExpression": "motorista                        AS [Motorista]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 23,
+          "name": "Km saída",
+          "legacyExpression": "km_saida                         AS [Km saída]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 24,
+          "name": "Km chegada",
+          "legacyExpression": "km_chegada                       AS [Km chegada]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 25,
+          "name": "KM viagem",
+          "legacyExpression": "km_viagem                        AS [KM viagem]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 26,
+          "name": "Km manual",
+          "legacyExpression": "km_manual                        AS [Km manual]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 27,
+          "name": "Qtd NF",
+          "legacyExpression": "qtd_nf                           AS [Qtd NF]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 28,
+          "name": "Volumes NF",
+          "legacyExpression": "volumes_nf                       AS [Volumes NF]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 29,
+          "name": "Peso NF",
+          "legacyExpression": "peso_nf                          AS [Peso NF]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 30,
+          "name": "Total peso taxado",
+          "legacyExpression": "peso_taxado                      AS [Total peso taxado]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 31,
+          "name": "Total M3",
+          "legacyExpression": "total_m3                         AS [Total M3]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 32,
+          "name": "Valor NF",
+          "legacyExpression": "valor_nf                         AS [Valor NF]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 33,
+          "name": "Fretes/Total",
+          "legacyExpression": "fretes_total                     AS [Fretes/Total]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 34,
+          "name": "Coletas/Total",
+          "legacyExpression": "coletas_total                    AS [Coletas/Total]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 35,
+          "name": "Receita Total Transportada",
+          "legacyExpression": "receita_total                    AS [Receita Total Transportada]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 36,
+          "name": "Coleta/Número",
+          "legacyExpression": "coleta_numeros                   AS [Coleta/Número]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 37,
+          "name": "CIOT/Número",
+          "legacyExpression": "contract_number                  AS [CIOT/Número]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 38,
+          "name": "Tipo de contrato do veículo",
+          "legacyExpression": "tipo_contrato_veiculo            AS [Tipo de contrato do veículo]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 39,
+          "name": "Tipo de contrato do motorista",
+          "legacyExpression": "tipo_contrato_motorista          AS [Tipo de contrato do motorista]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 40,
+          "name": "Tipo de contrato",
+          "legacyExpression": "tipo_contrato                    AS [Tipo de contrato]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 41,
+          "name": "Tipo de cálculo",
+          "legacyExpression": "tipo_calculo                     AS [Tipo de cálculo]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 42,
+          "name": "Tipo de carga",
+          "legacyExpression": "tipo_carga                       AS [Tipo de carga]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 43,
+          "name": "Diária",
+          "legacyExpression": "diaria                           AS [Diária]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 44,
+          "name": "Custo total",
+          "legacyExpression": "custo_total                      AS [Custo total]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 45,
+          "name": "Valor frete",
+          "legacyExpression": "valor_frete                      AS [Valor frete]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 46,
+          "name": "Combustível",
+          "legacyExpression": "combustivel                      AS [Combustível]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 47,
+          "name": "Pedágio",
+          "legacyExpression": "pedagio                          AS [Pedágio]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 48,
+          "name": "Serviços motorista/Total",
+          "legacyExpression": "servicos_motorista_total         AS [Serviços motorista/Total]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 49,
+          "name": "Despesa operacional",
+          "legacyExpression": "despesa_operacional              AS [Despesa operacional]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 50,
+          "name": "Dados do agregado/INSS",
+          "legacyExpression": "inss_value                       AS [Dados do agregado/INSS]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 51,
+          "name": "Dados do agregado/SEST/SENAT",
+          "legacyExpression": "sest_senat_value                 AS [Dados do agregado/SEST/SENAT]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 52,
+          "name": "Dados do agregado/IR",
+          "legacyExpression": "ir_value                         AS [Dados do agregado/IR]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 53,
+          "name": "Saldo a pagar",
+          "legacyExpression": "saldo_pagar                      AS [Saldo a pagar]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 54,
+          "name": "Destinos únicos/Qtd",
+          "legacyExpression": "uniq_destinations_count          AS [Destinos únicos/Qtd]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 55,
+          "name": "Gerar MDF-e",
+          "legacyExpression": "gerar_mdfe                       AS [Gerar MDF-e]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 56,
+          "name": "Solicitou Monitoramento",
+          "legacyExpression": "solicitou_monitoramento          AS [Solicitou Monitoramento]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 57,
+          "name": "Solicitação Monitoramento",
+          "legacyExpression": "solicitacao_monitoramento        AS [Solicitação Monitoramento]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 58,
+          "name": "Leitura Móvel/Em",
+          "legacyExpression": "leitura_movel_em                 AS [Leitura Móvel/Em]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 59,
+          "name": "KM Total",
+          "legacyExpression": "km_total                         AS [KM Total]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 60,
+          "name": "Itens/Entrega",
+          "legacyExpression": "itens_entrega                    AS [Itens/Entrega]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 61,
+          "name": "Itens/Transferência",
+          "legacyExpression": "itens_transferencia              AS [Itens/Transferência]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 62,
+          "name": "Itens/Coleta",
+          "legacyExpression": "itens_coleta                     AS [Itens/Coleta]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 63,
+          "name": "Itens/Despacho Rascunho",
+          "legacyExpression": "itens_despacho_rascunho          AS [Itens/Despacho Rascunho]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 64,
+          "name": "Itens/Consolidação",
+          "legacyExpression": "itens_consolidacao               AS [Itens/Consolidação]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 65,
+          "name": "Itens/Coleta Reversa",
+          "legacyExpression": "itens_coleta_reversa             AS [Itens/Coleta Reversa]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 66,
+          "name": "Itens/Total",
+          "legacyExpression": "itens_total                      AS [Itens/Total]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 67,
+          "name": "Itens/Finalizados",
+          "legacyExpression": "itens_finalizados                AS [Itens/Finalizados]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 68,
+          "name": "Calculado/Coleta",
+          "legacyExpression": "calculado_coleta                 AS [Calculado/Coleta]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 69,
+          "name": "Calculado/Entrega",
+          "legacyExpression": "calculado_entrega                AS [Calculado/Entrega]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 70,
+          "name": "Calculado/Despacho",
+          "legacyExpression": "calculado_despacho               AS [Calculado/Despacho]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 71,
+          "name": "Calculado/Consolidação",
+          "legacyExpression": "calculado_consolidacao           AS [Calculado/Consolidação]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 72,
+          "name": "Calculado/Coleta Reversa",
+          "legacyExpression": "calculado_coleta_reversa         AS [Calculado/Coleta Reversa]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 73,
+          "name": "Valor/Coletas",
+          "legacyExpression": "valor_coletas                    AS [Valor/Coletas]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 74,
+          "name": "Valor/Entregas",
+          "legacyExpression": "valor_entregas                   AS [Valor/Entregas]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 75,
+          "name": "Despachos",
+          "legacyExpression": "despachos                        AS [Despachos]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 76,
+          "name": "Consolidações",
+          "legacyExpression": "consolidacoes                    AS [Consolidações]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 77,
+          "name": "Coleta Reversa",
+          "legacyExpression": "coleta_reversa                   AS [Coleta Reversa]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 78,
+          "name": "Adiantamento",
+          "legacyExpression": "adiantamento                     AS [Adiantamento]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 79,
+          "name": "Custos Frota",
+          "legacyExpression": "custos_frota                     AS [Custos Frota]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 80,
+          "name": "Adicionais",
+          "legacyExpression": "adicionais                       AS [Adicionais]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 81,
+          "name": "Descontos",
+          "legacyExpression": "descontos                        AS [Descontos]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 82,
+          "name": "Desconto/Valor",
+          "legacyExpression": "desconto_valor                   AS [Desconto/Valor]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 83,
+          "name": "Liberação de Custo de Agregado/Comentários",
+          "legacyExpression": "ajuste_comentarios               AS [Liberação de Custo de Agregado/Comentários]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 84,
+          "name": "IKS ID",
+          "legacyExpression": "iks_id                           AS [IKS ID]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 85,
+          "name": "Programação/Número",
+          "legacyExpression": "programacao_sequence_code        AS [Programação/Número]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 86,
+          "name": "Programação/Início",
+          "legacyExpression": "programacao_inicio               AS [Programação/Início]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 87,
+          "name": "Programação/Término",
+          "legacyExpression": "programacao_termino              AS [Programação/Término]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 88,
+          "name": "Carreta 1/Placa",
+          "legacyExpression": "carreta1_placa                   AS [Carreta 1/Placa]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 89,
+          "name": "Carreta 1/Capacidade Peso",
+          "legacyExpression": "carreta1_capacidade_peso         AS [Carreta 1/Capacidade Peso]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 90,
+          "name": "Carreta 2/Placa",
+          "legacyExpression": "carreta2_placa                   AS [Carreta 2/Placa]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 91,
+          "name": "Carreta 2/Capacidade Peso",
+          "legacyExpression": "carreta2_capacidade_peso         AS [Carreta 2/Capacidade Peso]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 92,
+          "name": "Veículo/Capacidade Peso",
+          "legacyExpression": "veiculo_capacidade_peso          AS [Veículo/Capacidade Peso]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 93,
+          "name": "Veículo/Peso Cubado",
+          "legacyExpression": "veiculo_peso_cubado              AS [Veículo/Peso Cubado]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 94,
+          "name": "Capacidade Lotação Kg",
+          "legacyExpression": "capacidade_lotacao_kg            AS [Capacidade Lotação Kg]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 95,
+          "name": "Descarregamento/Destinatários",
+          "legacyExpression": "descarregamento_destinatarios    AS [Descarregamento/Destinatários]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 96,
+          "name": "Local de Descarregamento",
+          "legacyExpression": "local_descarregamento            AS [Local de Descarregamento]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 97,
+          "name": "Entrega/Regiões",
+          "legacyExpression": "entrega_regioes                  AS [Entrega/Regiões]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 98,
+          "name": "Programação/Cliente",
+          "legacyExpression": "programacao_cliente              AS [Programação/Cliente]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 99,
+          "name": "Programação/Tipo Serviço",
+          "legacyExpression": "programacao_tipo_servico         AS [Programação/Tipo Serviço]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 100,
+          "name": "Usuário/Emissor",
+          "legacyExpression": "usuario_emissor                  AS [Usuário/Emissor]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 101,
+          "name": "Usuário/Ajuste",
+          "legacyExpression": "usuario_ajuste                   AS [Usuário/Ajuste]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 102,
+          "name": "Liberação/Comentários Operacionais",
+          "legacyExpression": "obs_operacional                  AS [Liberação/Comentários Operacionais]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 103,
+          "name": "Comentários Fechamento",
+          "legacyExpression": "obs_financeira                   AS [Comentários Fechamento]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 104,
+          "name": "Metadata",
+          "legacyExpression": "metadata                         AS [Metadata]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 105,
+          "name": "Data de extracao",
+          "legacyExpression": "data_extracao                    AS [Data de extracao]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        }
+      ]
+    },
+    {
+      "id": "SQL-09",
+      "legacyName": "vw_fato_manifestos_dash",
+      "source": "database/views/025_criar_view_fato_manifestos_dash.sql",
+      "sourceSha256": "492375148d5e5c7208dcda2db8d00271ac66e5079f7373e823d15e78bd133b64",
+      "localName": "pub.analytic_lab_sql_09",
+      "columns": [
+        {
+          "ordinal": 1,
+          "name": "Hora (Solicitacao)",
+          "legacyExpression": "hora_solicitacao                 AS [Hora (Solicitacao)]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 2,
+          "name": "Hora (Criação)",
+          "legacyExpression": "hora_criacao                     AS [Hora (Criação)]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 3,
+          "name": "Número",
+          "legacyExpression": "sequence_code                    AS [Número]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 4,
+          "name": "Identificador Único",
+          "legacyExpression": "identificador_unico              AS [Identificador Único]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 5,
+          "name": "Status",
+          "legacyExpression": "status                           AS [Status]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 6,
+          "name": "Classificação",
+          "legacyExpression": "classificacao                    AS [Classificação]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 7,
+          "name": "Filial",
+          "legacyExpression": "filial                           AS [Filial]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 8,
+          "name": "Filial Emissora",
+          "legacyExpression": "filial_emissora                  AS [Filial Emissora]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 9,
+          "name": "Data criação",
+          "legacyExpression": "data_criacao                     AS [Data criação]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 10,
+          "name": "Saída",
+          "legacyExpression": "saida                            AS [Saída]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 11,
+          "name": "Fechamento",
+          "legacyExpression": "fechamento                       AS [Fechamento]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 12,
+          "name": "Chegada",
+          "legacyExpression": "chegada                          AS [Chegada]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 13,
+          "name": "MDFe",
+          "legacyExpression": "mdfe_number                      AS [MDFe]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 14,
+          "name": "MDF-es/Chave",
+          "legacyExpression": "mdfe_key                         AS [MDF-es/Chave]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 15,
+          "name": "MDFe/Status",
+          "legacyExpression": "mdfe_status                      AS [MDFe/Status]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 16,
+          "name": "Polo de distribuição",
+          "legacyExpression": "distribution_pole                AS [Polo de distribuição]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 17,
+          "name": "Veículo/Placa",
+          "legacyExpression": "placa_veiculo                    AS [Veículo/Placa]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 18,
+          "name": "Tipo Veículo",
+          "legacyExpression": "tipo_veiculo                     AS [Tipo Veículo]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 19,
+          "name": "Proprietário/Nome",
+          "legacyExpression": "proprietario_nome                AS [Proprietário/Nome]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 20,
+          "name": "Proprietário/Documento",
+          "legacyExpression": "proprietario_documento           AS [Proprietário/Documento]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 21,
+          "name": "Tipo Motorista",
+          "legacyExpression": "tipo_motorista                   AS [Tipo Motorista]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 22,
+          "name": "Motorista",
+          "legacyExpression": "motorista                        AS [Motorista]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 23,
+          "name": "Km saída",
+          "legacyExpression": "km_saida                         AS [Km saída]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 24,
+          "name": "Km chegada",
+          "legacyExpression": "km_chegada                       AS [Km chegada]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 25,
+          "name": "KM viagem",
+          "legacyExpression": "km_viagem                        AS [KM viagem]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 26,
+          "name": "Km manual",
+          "legacyExpression": "km_manual                        AS [Km manual]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 27,
+          "name": "Qtd NF",
+          "legacyExpression": "qtd_nf                           AS [Qtd NF]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 28,
+          "name": "Volumes NF",
+          "legacyExpression": "volumes_nf                       AS [Volumes NF]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 29,
+          "name": "Peso NF",
+          "legacyExpression": "peso_nf                          AS [Peso NF]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 30,
+          "name": "Total peso taxado",
+          "legacyExpression": "peso_taxado                      AS [Total peso taxado]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 31,
+          "name": "Total M3",
+          "legacyExpression": "total_m3                         AS [Total M3]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 32,
+          "name": "Valor NF",
+          "legacyExpression": "valor_nf                         AS [Valor NF]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 33,
+          "name": "Fretes/Total",
+          "legacyExpression": "fretes_total                     AS [Fretes/Total]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 34,
+          "name": "Coletas/Total",
+          "legacyExpression": "coletas_total                    AS [Coletas/Total]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 35,
+          "name": "Receita Total Transportada",
+          "legacyExpression": "receita_total                    AS [Receita Total Transportada]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 36,
+          "name": "Coleta/Número",
+          "legacyExpression": "coleta_numeros                   AS [Coleta/Número]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 37,
+          "name": "CIOT/Número",
+          "legacyExpression": "contract_number                  AS [CIOT/Número]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 38,
+          "name": "Tipo de contrato do veículo",
+          "legacyExpression": "tipo_contrato_veiculo            AS [Tipo de contrato do veículo]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 39,
+          "name": "Tipo de contrato do motorista",
+          "legacyExpression": "tipo_contrato_motorista          AS [Tipo de contrato do motorista]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 40,
+          "name": "Tipo de contrato",
+          "legacyExpression": "tipo_contrato                    AS [Tipo de contrato]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 41,
+          "name": "Tipo de contrato key",
+          "legacyExpression": "tipo_contrato_key                AS [Tipo de contrato key]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 42,
+          "name": "Tipo de cálculo",
+          "legacyExpression": "tipo_calculo                     AS [Tipo de cálculo]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 43,
+          "name": "Tipo de carga",
+          "legacyExpression": "tipo_carga                       AS [Tipo de carga]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 44,
+          "name": "Diária",
+          "legacyExpression": "diaria                           AS [Diária]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 45,
+          "name": "Custo total",
+          "legacyExpression": "custo_total                      AS [Custo total]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 46,
+          "name": "Valor frete",
+          "legacyExpression": "valor_frete                      AS [Valor frete]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 47,
+          "name": "Combustível",
+          "legacyExpression": "combustivel                      AS [Combustível]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 48,
+          "name": "Pedágio",
+          "legacyExpression": "pedagio                          AS [Pedágio]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 49,
+          "name": "Serviços motorista/Total",
+          "legacyExpression": "servicos_motorista_total         AS [Serviços motorista/Total]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 50,
+          "name": "Despesa operacional",
+          "legacyExpression": "despesa_operacional              AS [Despesa operacional]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 51,
+          "name": "Dados do agregado/INSS",
+          "legacyExpression": "inss_value                       AS [Dados do agregado/INSS]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 52,
+          "name": "Dados do agregado/SEST/SENAT",
+          "legacyExpression": "sest_senat_value                 AS [Dados do agregado/SEST/SENAT]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 53,
+          "name": "Dados do agregado/IR",
+          "legacyExpression": "ir_value                         AS [Dados do agregado/IR]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 54,
+          "name": "Saldo a pagar",
+          "legacyExpression": "saldo_pagar                      AS [Saldo a pagar]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 55,
+          "name": "Destinos únicos/Qtd",
+          "legacyExpression": "uniq_destinations_count          AS [Destinos únicos/Qtd]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 56,
+          "name": "Gerar MDF-e",
+          "legacyExpression": "gerar_mdfe                       AS [Gerar MDF-e]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 57,
+          "name": "Solicitou Monitoramento",
+          "legacyExpression": "solicitou_monitoramento          AS [Solicitou Monitoramento]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 58,
+          "name": "Solicitação Monitoramento",
+          "legacyExpression": "solicitacao_monitoramento        AS [Solicitação Monitoramento]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 59,
+          "name": "Leitura Móvel/Em",
+          "legacyExpression": "leitura_movel_em                 AS [Leitura Móvel/Em]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 60,
+          "name": "KM Total",
+          "legacyExpression": "km_total                         AS [KM Total]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 61,
+          "name": "Itens/Entrega",
+          "legacyExpression": "itens_entrega                    AS [Itens/Entrega]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 62,
+          "name": "Itens/Transferência",
+          "legacyExpression": "itens_transferencia              AS [Itens/Transferência]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 63,
+          "name": "Itens/Coleta",
+          "legacyExpression": "itens_coleta                     AS [Itens/Coleta]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 64,
+          "name": "Itens/Despacho Rascunho",
+          "legacyExpression": "itens_despacho_rascunho          AS [Itens/Despacho Rascunho]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 65,
+          "name": "Itens/Consolidação",
+          "legacyExpression": "itens_consolidacao               AS [Itens/Consolidação]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 66,
+          "name": "Itens/Coleta Reversa",
+          "legacyExpression": "itens_coleta_reversa             AS [Itens/Coleta Reversa]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 67,
+          "name": "Itens/Total",
+          "legacyExpression": "itens_total                      AS [Itens/Total]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 68,
+          "name": "Itens/Finalizados",
+          "legacyExpression": "itens_finalizados                AS [Itens/Finalizados]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 69,
+          "name": "Calculado/Coleta",
+          "legacyExpression": "calculado_coleta                 AS [Calculado/Coleta]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 70,
+          "name": "Calculado/Entrega",
+          "legacyExpression": "calculado_entrega                AS [Calculado/Entrega]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 71,
+          "name": "Calculado/Despacho",
+          "legacyExpression": "calculado_despacho               AS [Calculado/Despacho]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 72,
+          "name": "Calculado/Consolidação",
+          "legacyExpression": "calculado_consolidacao           AS [Calculado/Consolidação]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 73,
+          "name": "Calculado/Coleta Reversa",
+          "legacyExpression": "calculado_coleta_reversa         AS [Calculado/Coleta Reversa]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 74,
+          "name": "Valor/Coletas",
+          "legacyExpression": "valor_coletas                    AS [Valor/Coletas]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 75,
+          "name": "Valor/Entregas",
+          "legacyExpression": "valor_entregas                   AS [Valor/Entregas]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 76,
+          "name": "Despachos",
+          "legacyExpression": "despachos                        AS [Despachos]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 77,
+          "name": "Consolidações",
+          "legacyExpression": "consolidacoes                    AS [Consolidações]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 78,
+          "name": "Coleta Reversa",
+          "legacyExpression": "coleta_reversa                   AS [Coleta Reversa]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 79,
+          "name": "Adiantamento",
+          "legacyExpression": "adiantamento                     AS [Adiantamento]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 80,
+          "name": "Custos Frota",
+          "legacyExpression": "custos_frota                     AS [Custos Frota]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 81,
+          "name": "Adicionais",
+          "legacyExpression": "adicionais                       AS [Adicionais]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 82,
+          "name": "Descontos",
+          "legacyExpression": "descontos                        AS [Descontos]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 83,
+          "name": "Desconto/Valor",
+          "legacyExpression": "desconto_valor                   AS [Desconto/Valor]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 84,
+          "name": "Liberação de Custo de Agregado/Comentários",
+          "legacyExpression": "ajuste_comentarios               AS [Liberação de Custo de Agregado/Comentários]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 85,
+          "name": "IKS ID",
+          "legacyExpression": "iks_id                           AS [IKS ID]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 86,
+          "name": "Programação/Número",
+          "legacyExpression": "programacao_sequence_code        AS [Programação/Número]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 87,
+          "name": "Programação/Início",
+          "legacyExpression": "programacao_inicio               AS [Programação/Início]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 88,
+          "name": "Programação/Término",
+          "legacyExpression": "programacao_termino              AS [Programação/Término]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 89,
+          "name": "Carreta 1/Placa",
+          "legacyExpression": "carreta1_placa                   AS [Carreta 1/Placa]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 90,
+          "name": "Carreta 1/Capacidade Peso",
+          "legacyExpression": "carreta1_capacidade_peso         AS [Carreta 1/Capacidade Peso]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 91,
+          "name": "Carreta 2/Placa",
+          "legacyExpression": "carreta2_placa                   AS [Carreta 2/Placa]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 92,
+          "name": "Carreta 2/Capacidade Peso",
+          "legacyExpression": "carreta2_capacidade_peso         AS [Carreta 2/Capacidade Peso]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 93,
+          "name": "Veículo/Capacidade Peso",
+          "legacyExpression": "veiculo_capacidade_peso          AS [Veículo/Capacidade Peso]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 94,
+          "name": "Veículo/Peso Cubado",
+          "legacyExpression": "veiculo_peso_cubado              AS [Veículo/Peso Cubado]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 95,
+          "name": "Capacidade Lotação Kg",
+          "legacyExpression": "capacidade_lotacao_kg            AS [Capacidade Lotação Kg]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 96,
+          "name": "Descarregamento/Destinatários",
+          "legacyExpression": "descarregamento_destinatarios    AS [Descarregamento/Destinatários]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 97,
+          "name": "Local de Descarregamento",
+          "legacyExpression": "local_descarregamento            AS [Local de Descarregamento]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 98,
+          "name": "Entrega/Regiões",
+          "legacyExpression": "entrega_regioes                  AS [Entrega/Regiões]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 99,
+          "name": "Programação/Cliente",
+          "legacyExpression": "programacao_cliente              AS [Programação/Cliente]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 100,
+          "name": "Programação/Tipo Serviço",
+          "legacyExpression": "programacao_tipo_servico         AS [Programação/Tipo Serviço]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 101,
+          "name": "Usuário/Emissor",
+          "legacyExpression": "usuario_emissor                  AS [Usuário/Emissor]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 102,
+          "name": "Usuário/Ajuste",
+          "legacyExpression": "usuario_ajuste                   AS [Usuário/Ajuste]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 103,
+          "name": "Liberação/Comentários Operacionais",
+          "legacyExpression": "obs_operacional                  AS [Liberação/Comentários Operacionais]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 104,
+          "name": "Comentários Fechamento",
+          "legacyExpression": "obs_financeira                   AS [Comentários Fechamento]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 105,
+          "name": "Metadata",
+          "legacyExpression": "metadata                         AS [Metadata]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 106,
+          "name": "Data de extracao",
+          "legacyExpression": "data_extracao                    AS [Data de extracao]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        }
+      ]
+    },
+    {
+      "id": "SQL-10",
+      "legacyName": "vw_bi_monitoramento",
+      "source": "database/views/019_criar_view_bi_monitoramento.sql",
+      "sourceSha256": "d51b045b9695a3194c558d219edfbccddaacf67aae492b35af6403699766ee4c",
+      "localName": "pub.analytic_lab_sql_10",
+      "columns": [
+        {
+          "ordinal": 1,
+          "name": "Id",
+          "legacyExpression": "id AS [Id]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 2,
+          "name": "Inicio",
+          "legacyExpression": "start_time AS [Inicio]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 3,
+          "name": "Fim",
+          "legacyExpression": "end_time AS [Fim]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 4,
+          "name": "Duracao (s)",
+          "legacyExpression": "duration_seconds AS [Duracao (s)]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 5,
+          "name": "Data",
+          "legacyExpression": "CAST(start_time AS DATE) AS [Data]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 6,
+          "name": "Status",
+          "legacyExpression": "status AS [Status]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 7,
+          "name": "Total Registros",
+          "legacyExpression": "total_records AS [Total Registros]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 8,
+          "name": "Categoria Erro",
+          "legacyExpression": "error_category AS [Categoria Erro]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 9,
+          "name": "Mensagem Erro",
+          "legacyExpression": "error_message AS [Mensagem Erro]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        }
+      ]
+    },
+    {
+      "id": "SQL-11",
+      "legacyName": "vw_inventario_powerbi",
+      "source": "database/views/020_criar_view_inventario_powerbi.sql",
+      "sourceSha256": "b16777328790ae0e7e4b5e1720dda8cbee4cfb699d5e03f866a3426841a2d04a",
+      "localName": "pub.analytic_lab_sql_11",
+      "columns": [
+        {
+          "ordinal": 1,
+          "name": "Hora (Início)",
+          "legacyExpression": "CAST(i.started_at AS TIME(0)) AS [Hora (Início)]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 2,
+          "name": "Identificador Único",
+          "legacyExpression": "i.identificador_unico AS [Identificador Único]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 3,
+          "name": "Nº Minuta",
+          "legacyExpression": "i.numero_minuta AS [Nº Minuta]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 4,
+          "name": "Pagador",
+          "legacyExpression": "i.pagador_nome AS [Pagador]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 5,
+          "name": "Remetente",
+          "legacyExpression": "i.remetente_nome AS [Remetente]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 6,
+          "name": "Origem",
+          "legacyExpression": "i.origem_cidade AS [Origem]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 7,
+          "name": "Destinatário",
+          "legacyExpression": "i.destinatario_nome AS [Destinatário]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 8,
+          "name": "Destino",
+          "legacyExpression": "i.destino_cidade AS [Destino]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 9,
+          "name": "Região Entrega",
+          "legacyExpression": "i.regiao_entrega AS [Região Entrega]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 10,
+          "name": "Filial Entregadora",
+          "legacyExpression": "i.filial_entregadora AS [Filial Entregadora]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 11,
+          "name": "N° Ordem",
+          "legacyExpression": "i.sequence_code AS [N° Ordem]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 12,
+          "name": "Filial",
+          "legacyExpression": "i.branch_nickname AS [Filial]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 13,
+          "name": "Filial da Ordem de Conferência",
+          "legacyExpression": "i.branch_nickname AS [Filial da Ordem de Conferência]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 14,
+          "name": "Filial Emissora do Frete",
+          "legacyExpression": "COALESCE(f.filial_nome, i.branch_nickname) AS [Filial Emissora do Frete]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 15,
+          "name": "Tipo",
+          "legacyExpression": "CASE i.type\r\n        WHEN 'CheckIn::Order::Loading' THEN 'Carregamento'\r\n        WHEN 'CheckIn::Order::Unloading' THEN 'Descarregamento'\r\n        WHEN 'CheckIn::Order::Picking' THEN 'Picking'\r\n        WHEN 'CheckIn::Order::Receipt' THEN 'Recebimento'\r\n        WHEN 'CheckIn::Order::Return' THEN 'Retorno'\r\n        ELSE i.type\r\n    END AS [Tipo]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 16,
+          "name": "Data/Hora início",
+          "legacyExpression": "i.started_at AS [Data/Hora início]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 17,
+          "name": "Data/Hora fim",
+          "legacyExpression": "i.finished_at AS [Data/Hora fim]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 18,
+          "name": "Status",
+          "legacyExpression": "CASE i.status\r\n        WHEN 'pending' THEN 'pendente'\r\n        WHEN 'finished' THEN 'finalizado'\r\n        ELSE i.status\r\n    END AS [Status]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 19,
+          "name": "Conferente",
+          "legacyExpression": "i.conferente_nome AS [Conferente]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 20,
+          "name": "Notas Fiscais",
+          "legacyExpression": "REPLACE(REPLACE(REPLACE(i.invoices_mapping, '[', ''), ']', ''), '\"', '') AS [Notas Fiscais]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 21,
+          "name": "Valor de NF",
+          "legacyExpression": "i.invoices_value AS [Valor de NF]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 22,
+          "name": "Peso Real",
+          "legacyExpression": "i.real_weight AS [Peso Real]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 23,
+          "name": "M³",
+          "legacyExpression": "i.total_cubic_volume AS [M³]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 24,
+          "name": "Peso Taxado",
+          "legacyExpression": "i.taxed_weight AS [Peso Taxado]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 25,
+          "name": "Volumes",
+          "legacyExpression": "i.invoices_volumes AS [Volumes]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 26,
+          "name": "Volumes Lidos",
+          "legacyExpression": "i.read_volumes AS [Volumes Lidos]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 27,
+          "name": "Previsão de Entrega",
+          "legacyExpression": "i.predicted_delivery_at AS [Previsão de Entrega]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 28,
+          "name": "Finalização da Performance",
+          "legacyExpression": "i.performance_finished_at AS [Finalização da Performance]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 29,
+          "name": "Data de Finalização",
+          "legacyExpression": "i.performance_finished_at AS [Data de Finalização]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 30,
+          "name": "Data Última Ocorrência",
+          "legacyExpression": "i.ultima_ocorrencia_at AS [Data Última Ocorrência]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 31,
+          "name": "Ocorrência",
+          "legacyExpression": "i.ultima_ocorrencia_descricao AS [Ocorrência]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 32,
+          "name": "Comprovante Anexado",
+          "legacyExpression": "CASE\n        WHEN i.flag_comprovante_anexado = 1 THEN N'Sim'\n        ELSE N'Não'\n    END AS [Comprovante Anexado]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 33,
+          "name": "Metadata",
+          "legacyExpression": "i.metadata AS [Metadata]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 34,
+          "name": "Data de extracao",
+          "legacyExpression": "i.data_extracao AS [Data de extracao]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        }
+      ]
+    },
+    {
+      "id": "SQL-12",
+      "legacyName": "vw_sinistros_powerbi",
+      "source": "database/views/021_criar_view_sinistros_powerbi.sql",
+      "sourceSha256": "d36eac632ab1427c1c6c7550fe7697716ca3a785cb0f87bc18881c17483f4018",
+      "localName": "pub.analytic_lab_sql_12",
+      "columns": [
+        {
+          "ordinal": 1,
+          "name": "Identificador Único",
+          "legacyExpression": "identificador_unico AS [Identificador Único]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 2,
+          "name": "Nº do Sinistro",
+          "legacyExpression": "sequence_code AS [Nº do Sinistro]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 3,
+          "name": "Data abertura",
+          "legacyExpression": "opening_at_date AS [Data abertura]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 4,
+          "name": "Data ocorrência",
+          "legacyExpression": "occurrence_at_date AS [Data ocorrência]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 5,
+          "name": "Hora ocorrência",
+          "legacyExpression": "occurrence_at_time AS [Hora ocorrência]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 6,
+          "name": "Previsão de solução",
+          "legacyExpression": "expected_solution_date AS [Previsão de solução]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 7,
+          "name": "Local do sinistro",
+          "legacyExpression": "insurance_claim_location AS [Local do sinistro]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 8,
+          "name": "Informado por",
+          "legacyExpression": "informed_by AS [Informado por]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 9,
+          "name": "Data finalização",
+          "legacyExpression": "finished_at_date AS [Data finalização]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 10,
+          "name": "Hora finalização",
+          "legacyExpression": "finished_at_time AS [Hora finalização]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 11,
+          "name": "Quantidade de documentos",
+          "legacyExpression": "invoices_count AS [Quantidade de documentos]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 12,
+          "name": "Minuta",
+          "legacyExpression": "corporation_sequence_number AS [Minuta]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 13,
+          "name": "Nota Fiscal/Número",
+          "legacyExpression": "insurance_occurrence_number AS [Nota Fiscal/Número]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 14,
+          "name": "Volumes",
+          "legacyExpression": "invoices_volumes AS [Volumes]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 15,
+          "name": "Peso",
+          "legacyExpression": "invoices_weight AS [Peso]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 16,
+          "name": "Valor NF",
+          "legacyExpression": "invoices_value AS [Valor NF]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 17,
+          "name": "Pagador do frete/Nome fantasia",
+          "legacyExpression": "payer_nickname AS [Pagador do frete/Nome fantasia]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 18,
+          "name": "valor a pagar ao cliente",
+          "legacyExpression": "customer_debits_subtotal AS [valor a pagar ao cliente]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 19,
+          "name": "Valor nota de crédito ao cliente",
+          "legacyExpression": "customer_credit_entries_subtotal AS [Valor nota de crédito ao cliente]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 20,
+          "name": "Valor a receber do responsável",
+          "legacyExpression": "responsible_credits_subtotal AS [Valor a receber do responsável]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 21,
+          "name": "Valor nota de débito do responsável",
+          "legacyExpression": "responsible_debit_entries_subtotal AS [Valor nota de débito do responsável]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 22,
+          "name": "Valor a receber da seguradora",
+          "legacyExpression": "insurer_credits_subtotal AS [Valor a receber da seguradora]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 23,
+          "name": "Resultado final",
+          "legacyExpression": "insurance_claim_total AS [Resultado final]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 24,
+          "name": "Pessoa/Nome fantasia",
+          "legacyExpression": "branch_nickname AS [Pessoa/Nome fantasia]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 25,
+          "name": "Ocorrência/Ocorrência",
+          "legacyExpression": "event_name AS [Ocorrência/Ocorrência]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 26,
+          "name": "Usuário/Nome",
+          "legacyExpression": "user_name AS [Usuário/Nome]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 27,
+          "name": "Veículo/Placa",
+          "legacyExpression": "vehicle_plate AS [Veículo/Placa]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 28,
+          "name": "Ocorrência/Descrição",
+          "legacyExpression": "occurrence_description AS [Ocorrência/Descrição]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 29,
+          "name": "Ocorrência/Código",
+          "legacyExpression": "occurrence_code AS [Ocorrência/Código]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 30,
+          "name": "Tratativa/Data tratativa",
+          "legacyExpression": "treatment_at AS [Tratativa/Data tratativa]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 31,
+          "name": "Tratativa/Tipo tratativa",
+          "legacyExpression": "CASE dealing_type\r\n        WHEN 'send_to_damages_dealing' THEN 'enviado para tratativa de avarias'\r\n        WHEN 'send_to_incidents_dealing' THEN 'enviado para tratativa de incidentes'\r\n        ELSE dealing_type\r\n    END AS [Tratativa/Tipo tratativa]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 32,
+          "name": "Tratativa/Solução",
+          "legacyExpression": "CASE solution_type\r\n        WHEN 'redelivery_without_freight_charge' THEN 'redespacho sem cobrança de frete'\r\n        ELSE solution_type\r\n    END AS [Tratativa/Solução]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 33,
+          "name": "Metadata",
+          "legacyExpression": "metadata AS [Metadata]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 34,
+          "name": "Data de extracao",
+          "legacyExpression": "data_extracao AS [Data de extracao]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        }
+      ]
+    },
+    {
+      "id": "SQL-13",
+      "legacyName": "vw_raster_sm_transit_time",
+      "source": "database/views/022_criar_view_raster_sm_transit_time.sql",
+      "sourceSha256": "a501d35bd2712807c9e95600787bcbc668b2826d1abeaafd612e794428e0c113",
+      "localName": "pub.analytic_lab_sql_13",
+      "columns": [
+        {
+          "ordinal": 1,
+          "name": "cod_solicitacao",
+          "legacyExpression": "cod_solicitacao",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 2,
+          "name": "placa_veiculo",
+          "legacyExpression": "placa_veiculo",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 3,
+          "name": "status_viagem",
+          "legacyExpression": "status_viagem",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 4,
+          "name": "ORIGEM - SM",
+          "legacyExpression": "origem_sm AS [ORIGEM - SM]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 5,
+          "name": "DESTINO - SM",
+          "legacyExpression": "destino_sm AS [DESTINO - SM]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 6,
+          "name": "Origem x Destino",
+          "legacyExpression": "origem_destino AS [Origem x Destino]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 7,
+          "name": "ORIGEM",
+          "legacyExpression": "origem_nome AS [ORIGEM]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 8,
+          "name": "ORDEM",
+          "legacyExpression": "ordem_parada_label AS [ORDEM]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 9,
+          "name": "DESTINO",
+          "legacyExpression": "destino_nome AS [DESTINO]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 10,
+          "name": "HORÁRIO CORTE",
+          "legacyExpression": "horario_corte_texto AS [HORÁRIO CORTE]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 11,
+          "name": "PREV. CHEGADA (destino)",
+          "legacyExpression": "previsao_chegada_destino AS [PREV. CHEGADA (destino)]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 12,
+          "name": "TRANSIT TIME",
+          "legacyExpression": "transit_time_texto AS [TRANSIT TIME]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 13,
+          "name": "origem_sm",
+          "legacyExpression": "origem_sm",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 14,
+          "name": "destino_sm",
+          "legacyExpression": "destino_sm",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 15,
+          "name": "origem_destino",
+          "legacyExpression": "origem_destino",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 16,
+          "name": "origem_nome",
+          "legacyExpression": "origem_nome",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 17,
+          "name": "ordem_parada_label",
+          "legacyExpression": "ordem_parada_label",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 18,
+          "name": "destino_nome",
+          "legacyExpression": "destino_nome",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 19,
+          "name": "horario_corte_texto",
+          "legacyExpression": "horario_corte_texto",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 20,
+          "name": "previsao_chegada_destino",
+          "legacyExpression": "previsao_chegada_destino",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 21,
+          "name": "transit_time_texto",
+          "legacyExpression": "transit_time_texto",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 22,
+          "name": "ordem_parada",
+          "legacyExpression": "ordem AS ordem_parada",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 23,
+          "name": "tipo_parada",
+          "legacyExpression": "tipo AS tipo_parada",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 24,
+          "name": "data_hora_prev_ini_raster",
+          "legacyExpression": "data_hora_prev_ini AS data_hora_prev_ini_raster",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 25,
+          "name": "data_hora_prev_fim_raster",
+          "legacyExpression": "data_hora_prev_fim AS data_hora_prev_fim_raster",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 26,
+          "name": "data_hora_prev_chegada_parada",
+          "legacyExpression": "data_hora_prev_chegada AS data_hora_prev_chegada_parada",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 27,
+          "name": "data_hora_real_ini",
+          "legacyExpression": "data_hora_real_ini",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 28,
+          "name": "data_hora_real_fim",
+          "legacyExpression": "data_hora_real_fim",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 29,
+          "name": "data_hora_real_chegada",
+          "legacyExpression": "data_hora_real_chegada",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 30,
+          "name": "data_hora_real_saida",
+          "legacyExpression": "data_hora_real_saida",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 31,
+          "name": "dentro_prazo_raster",
+          "legacyExpression": "dentro_prazo_raster",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 32,
+          "name": "percentual_atraso_raster",
+          "legacyExpression": "percentual_atraso_raster",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 33,
+          "name": "cod_rota",
+          "legacyExpression": "cod_rota",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 34,
+          "name": "rota_descricao",
+          "legacyExpression": "rota_descricao",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 35,
+          "name": "link_timeline",
+          "legacyExpression": "link_timeline",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 36,
+          "name": "Data de extracao",
+          "legacyExpression": "data_extracao_raster AS [Data de extracao]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 37,
+          "name": "data_extracao_raster",
+          "legacyExpression": "data_extracao_raster",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        }
+      ]
+    },
+    {
+      "id": "SQL-14",
+      "legacyName": "vw_dim_filiais",
+      "source": "database/views-dimensao/019_criar_view_dim_filiais.sql",
+      "sourceSha256": "4a48841953d1b4d010174fedcf8425f06b8e4aaa26b08d7194a27b6eae9ed775",
+      "localName": "pub.analytic_lab_sql_14",
+      "columns": [
+        {
+          "ordinal": 1,
+          "name": "NomeFilial",
+          "legacyExpression": "[NomeFilial]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 2,
+          "name": "Hora (Solicitacao)",
+          "legacyExpression": "CAST('00:00:00' AS TIME(0)) AS [Hora (Solicitacao)]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        }
+      ]
+    },
+    {
+      "id": "SQL-15",
+      "legacyName": "vw_dim_clientes",
+      "source": "database/views-dimensao/020_criar_view_dim_clientes.sql",
+      "sourceSha256": "8909560bbecc4d309e820e810268d52a078d66943e9841806eb8b98280b2ad8b",
+      "localName": "pub.analytic_lab_sql_15",
+      "columns": [
+        {
+          "ordinal": 1,
+          "name": "Nome",
+          "legacyExpression": "UPPER(LTRIM(RTRIM(Nome))) AS [Nome]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        }
+      ]
+    },
+    {
+      "id": "SQL-16",
+      "legacyName": "vw_dim_veiculos",
+      "source": "database/views-dimensao/021_criar_view_dim_veiculos.sql",
+      "sourceSha256": "1e1e4f14c09186648c0f256d161b935de3be5ec4ae526284f9c5aebff147cfd4",
+      "localName": "pub.analytic_lab_sql_16",
+      "columns": [
+        {
+          "ordinal": 1,
+          "name": "Placa",
+          "legacyExpression": "UPPER(LTRIM(RTRIM(vehicle_plate))) AS Placa",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 2,
+          "name": "TipoVeiculo",
+          "legacyExpression": "MAX(UPPER(LTRIM(RTRIM(vehicle_type)))) AS TipoVeiculo",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 3,
+          "name": "Proprietario",
+          "legacyExpression": "MAX(UPPER(LTRIM(RTRIM(vehicle_owner)))) AS Proprietario",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 4,
+          "name": "Filial",
+          "legacyExpression": "branch_nickname AS Filial",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        }
+      ]
+    },
+    {
+      "id": "SQL-17",
+      "legacyName": "vw_dim_motoristas",
+      "source": "database/views-dimensao/022_criar_view_dim_motoristas.sql",
+      "sourceSha256": "d0ad766b6c94cdfb7cbe582385950fd65c54b40bbe04232ab12f0e28e72b5f2d",
+      "localName": "pub.analytic_lab_sql_17",
+      "columns": [
+        {
+          "ordinal": 1,
+          "name": "NomeMotorista",
+          "legacyExpression": "UPPER(LTRIM(RTRIM(driver_name))) AS NomeMotorista",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 2,
+          "name": "Filial",
+          "legacyExpression": "branch_nickname AS Filial",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        }
+      ]
+    },
+    {
+      "id": "SQL-18",
+      "legacyName": "vw_dim_planocontas",
+      "source": "database/views-dimensao/023_criar_view_dim_planocontas.sql",
+      "sourceSha256": "916a0d6c08a7f105847e321bff4768c89eac772586f9fac507ae943eaa741fd8",
+      "localName": "pub.analytic_lab_sql_18",
+      "columns": [
+        {
+          "ordinal": 1,
+          "name": "Descricao",
+          "legacyExpression": "UPPER(LTRIM(RTRIM([Conta Contábil/Descrição]))) AS Descricao",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 2,
+          "name": "Classificacao",
+          "legacyExpression": "ISNULL(MAX([Conta Contábil/Classificação]), 'OUTROS / NÃO CLASSIFICADO') AS Classificacao",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 3,
+          "name": "Hora (Solicitacao)",
+          "legacyExpression": "CAST('00:00:00' AS TIME(0)) AS [Hora (Solicitacao)]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        }
+      ]
+    },
+    {
+      "id": "SQL-19",
+      "legacyName": "vw_dim_usuarios",
+      "source": "database/views-dimensao/024_criar_view_dim_usuarios.sql",
+      "sourceSha256": "3ba67f60e588f0f54726ba789fad27e29d9f3a1549353728527d375db37ee758",
+      "localName": "pub.analytic_lab_sql_19",
+      "columns": [
+        {
+          "ordinal": 1,
+          "name": "User ID",
+          "legacyExpression": "[user_id] AS [User ID]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 2,
+          "name": "Nome",
+          "legacyExpression": "LTRIM(RTRIM([nome])) AS [Nome]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        },
+        {
+          "ordinal": 3,
+          "name": "Data Atualizacao",
+          "legacyExpression": "[data_atualizacao] AS [Data Atualizacao]",
+          "implementation": "PENDING",
+          "physicalMetadata": "PENDING"
+        }
+      ]
+    }
+  ]
+}

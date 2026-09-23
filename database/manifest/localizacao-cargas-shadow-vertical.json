@@ -1,0 +1,216 @@
+{
+  "manifestVersion": 1,
+  "roadmapTask": "V2-028",
+  "decisionTask": "V2-028a",
+  "route": "V10",
+  "block": 47,
+  "entity": "localizacao_cargas",
+  "templateId": 8656,
+  "localState": "IMPLEMENTADA_EM_SHADOW",
+  "bindings": {
+    "decision": {
+      "version": "2026-09-06.v2-028a.1",
+      "path": "docs/catalogos/localizacao-cargas-v2-028/decisao-v01.json",
+      "sha256": "b837d1d6722d48976c9021a418dceccc8a176fc0497aa6a1f2e71889810d1e13"
+    },
+    "decisionFixture": {
+      "path": "docs/catalogos/localizacao-cargas-v2-028/fixtures/casos-v01.synthetic.json",
+      "sha256": "616121c17ae606cd8aa6e604845ca4c31ddffdee8bfe23ded324dd4c5c329fe2",
+      "caseCount": 24
+    },
+    "contract": {
+      "version": "2026-09-04.v2-025b.1",
+      "releaseFingerprint": "da95fc17fc3db2fae7635c5456166d72af844b1d826e84ab6c2ba8b6f1b65c24"
+    },
+    "identity": {
+      "version": "2026-09-04.v2-009b.1",
+      "identityFingerprint": "14af11dce5fd7696238907b72f8f6c8c77f86a4cff3045b489da5eb132c0d6f0",
+      "releaseFingerprint": "5dfe329f437dc4caa5750ab57dd2369774808822c9d47a99de0c5dc1850cb15f"
+    },
+    "portability": {
+      "identityBoundary": "V2-009d/8656 slice only aggregate open",
+      "namedPathBoundary": "V2-017a named paths only aggregate open",
+      "matrixIds": [
+        "DE-DATA-8656-001", "DE-DATA-8656-002", "DE-DATA-8656-003",
+        "DE-DATA-8656-004", "DE-DATA-8656-005", "DE-DATA-8656-006",
+        "DE-DATA-8656-007", "DE-DATA-8656-008", "DE-DATA-8656-009",
+        "DE-DATA-8656-010", "DE-DATA-8656-011", "DE-DATA-8656-012",
+        "DE-DATA-8656-013", "DE-DATA-8656-014", "DE-DATA-8656-015",
+        "DE-DATA-8656-016", "DE-DATA-8656-017"
+      ]
+    }
+  },
+  "implementedRules": ["LOC-01", "LOC-02", "LOC-03", "LOC-04", "LOC-05", "LOC-06", "LOC-07"],
+  "contract": {
+    "contractId": "dataexport-8656",
+    "version": "2026-09-04.v2-025b.1",
+    "releaseFingerprint": "da95fc17fc3db2fae7635c5456166d72af844b1d826e84ab6c2ba8b6f1b65c24",
+    "datasetCompleteness": "NOT_PROVEN",
+    "contractStatus": "TRANSITIONAL",
+    "contractedLocalCandidatePaths": [
+      "/data/corporation_sequence_number",
+      "/data/type",
+      "/data/service_at",
+      "/data/invoices_volumes",
+      "/data/taxed_weight",
+      "/data/invoices_value",
+      "/data/total",
+      "/data/service_type",
+      "/data/fit_crn_psn_nickname",
+      "/data/fit_dpn_delivery_prediction_at",
+      "/data/fit_dyn_name",
+      "/data/fit_dyn_drt_nickname",
+      "/data/fit_fsn_name",
+      "/data/fit_fln_status",
+      "/data/fit_fln_cln_nickname",
+      "/data/fit_o_n_name",
+      "/data/fit_o_n_drt_nickname"
+    ],
+    "evidenceClassification": "LOCAL_DTO_DATA_PATH_CANDIDATE_NOT_PROVIDER_GUARANTEE"
+  },
+  "identity": {
+    "catalogVersion": "2026-09-04.v2-009b.1",
+    "fingerprint": "14af11dce5fd7696238907b72f8f6c8c77f86a4cff3045b489da5eb132c0d6f0",
+    "scope": [
+      "environment_name",
+      "source_instance",
+      "tenant_scope",
+      "entity_name",
+      "source_key"
+    ],
+    "sourceKey": "/corporation_sequence_number:INTEGER_TYPE_TAGGED_NO_UNPROVEN_NUMERIC_RANGE",
+    "forbiddenAlias": "/sequence_number:NEVER_SOURCE_KEY_ALIAS_OR_FALLBACK",
+    "canonicalId": "BIGINT_IDENTITY",
+    "forbiddenScopeSentinels": [
+      "DEFAULT",
+      "GLOBAL",
+      "SINGLETON"
+    ]
+  },
+  "presence": {
+    "states": [
+      "ABSENT",
+      "NULL",
+      "VALUE"
+    ],
+    "evidence": "RAW_RAW_WIRE_LEXEME_TYPED_PARSE_STATE_PATH_PRESENCE_AND_PROVENANCE",
+    "closedEnvelope": "ROOT_FIELDS_POLICY_FIELDS_17_EACH_EXACTLY_7_KEYS_POLICY_3_KEYS",
+    "absent": "PRESERVE_KNOWN_VALUE",
+    "null": "APPLY_EXPLICIT_NULL_ONLY_ON_ACCEPTED_NEWER_OBSERVATION",
+    "value": "APPLY_TYPED_VALUE_INCLUDING_ZERO",
+    "incrementalAbsence": "NEVER_ALTERS_ACTIVE_STATE",
+    "pruneOrSweep": "DISABLED_NO_COMPLETENESS_PROOF"
+  },
+  "numeric": {
+    "invoicesVolumes": "INTEGER_32_NON_NEGATIVE_ASCII_DIGITS_NO_SIGN_NO_GROUPING_NO_WHITESPACE",
+    "decimalFields": [
+      "/taxed_weight",
+      "/invoices_value",
+      "/total"
+    ],
+    "decimalEnvelope": "DECIMAL_38_9_ASCII_OPTIONAL_MINUS_DIGITS_OPTIONAL_DOT_FRACTION",
+    "invalid": "QUARANTINE_PRESERVE_RAW_NEVER_ZERO_OR_NULL",
+    "scaleOverflow": "QUARANTINE_NO_ROUNDING",
+    "ambiguousLocale": "QUARANTINE_NO_HEURISTIC",
+    "currencyUnitRounding": "UNRESOLVED_NO_INFERENCE"
+  },
+  "freshness": {
+    "singleSharedPolicy": true,
+    "path": "/service_at",
+    "origin": "SERVICE_AT",
+    "presentInvalid": "QUARANTINE_NO_FALLBACK",
+    "noneValid": "DO_NOT_PROMOTE",
+    "older": "AUDIT_NO_OP_NO_REGRESSION",
+    "equalIdentical": "REPLAY_NO_OP",
+    "equalDivergent": "QUARANTINE",
+    "technicalTieBreakers": "FORBIDDEN"
+  },
+  "status": {
+    "path": "/fit_fln_status",
+    "catalogVersion": "localizacao-cargas-status-v1",
+    "normalization": "TRIM_THEN_LOWERCASE_INVARIANT",
+    "nullOrBlank": "sem_status",
+    "terminalExact": [
+      "finished",
+      "delivered",
+      "canceled",
+      "cancelled"
+    ],
+    "unknown": "PRESERVE_RAW_NON_TERMINAL_NO_INFERENCE"
+  },
+  "unsourcedLegacy": {
+    "field": "status_branch_nickname",
+    "presence": "ABSENT",
+    "provenance": "UNSOURCED_LEGACY",
+    "similarNicknameFallback": false
+  },
+  "volume": {
+    "downstreamProjection": "COALESCE(volumes_localizacao, volumes_fretes, 0)",
+    "zeroSemantics": "ZERO_IS_REAL_LOCAL_VALUE_NEVER_FALLBACK",
+    "freightCandidate": "EXACT_SAME_SCOPE_TYPED_ALIAS_CANDIDATE_ONLY",
+    "candidateStorage": "ROOT_PRESENCE_AND_PROVENANCE_ONLY_NO_RELATION",
+    "ambiguity": "BLOCK_ZERO_OR_MANY_NEVER_PICK_FIRST",
+    "materializedRelation": false
+  },
+  "incremental": {
+    "partition": "freights.service_at",
+    "overlap": "localizacao-cargas-service-at-overlap-v1",
+    "maximumRecordsPerLocalMicrobatch": 100,
+    "providerMaximumPageSizeClaimed": false,
+    "replay": "IDEMPOTENT_BY_SCOPED_KEY_FRESHNESS_AND_CANONICAL_HASH",
+    "absence": "NEVER_ALTERS_ACTIVE_STATE",
+    "pruneOrSweep": "DISABLED"
+  },
+  "syntheticLimits": {
+    "maximumRecordsPerLocalMicrobatch": 100,
+    "providerMaximumPageSizeClaimed": false,
+    "historicalPer10000IsV2Default": false,
+    "historicalTimeout90SecondsIsV2Default": false,
+    "historicalPageCap1200IsV2Default": false,
+    "historicalRowCap150000IsV2Default": false
+  },
+  "completeness": {
+    "proof": "ABSENT",
+    "deactivation": false,
+    "prune": false,
+    "sweep": false
+  },
+  "deferred": {
+    "freightRelation": "DEFERRED_NO_FK_JOIN_OR_CROSSWALK",
+    "freightVolumeFallback": "FREIGHT_VOLUME_FALLBACK_DEFERRED_RELATION_AND_PUBLICATION",
+    "parity": "DEFERRED",
+    "publication": "DEFERRED"
+  },
+  "persistence": {
+    "migration": "V014__create_localizacao_cargas_shadow_vertical.sql",
+    "stage": "stg.localizacao_carga_record",
+    "current": "core.localizacao_cargas",
+    "presenceEvidence": "recon.localizacao_carga_root_presence_observation",
+    "typedPromotionResult": "ctl.localizacao_carga_promotion_result",
+    "stageProcedure": "stg.usp_stage_localizacao_carga_record",
+    "prepareProcedure": "core.usp_prepare_staged_execution",
+    "applyProcedure": "core.usp_apply_reconcile_publish_localizacao_cargas",
+    "applicationMode": "SET_BASED_CANDIDATE_SET_WITH_17_FIELD_EFFECTIVE_REDUCER_AUDIT_LOCK_AND_RECOVERY",
+    "quarantineEnvelope": "PERSIST_RAW_PAYLOAD_AND_CLOSED_PRESENCE_WITHOUT_CANDIDATE_OR_PROMOTION",
+    "directPerRecordDml": false
+  },
+  "validation": {
+    "structural": "database/validation/046_validate_localizacao_cargas_shadow_vertical.sql",
+    "rollbackExercise": "database/validation/047_exercise_localizacao_cargas_shadow_vertical_rollback.sql",
+    "static": "scripts/validation/Test-LocalizacaoCargasV2028ShadowVertical.ps1",
+    "localRunner": "scripts/validation/Invoke-LocalizacaoCargasV2028ShadowValidation.ps1",
+    "concurrency": "scripts/validation/Test-LocalizacaoCargasShadowConcurrency.ps1",
+    "authorizedTarget": "localhost/ETL_SISTEMA_V2_SHADOW",
+    "sqlRequiresExplicitOptIn": true,
+    "exercisePersistsData": false
+  },
+  "prohibited": [
+    "NETWORK_OR_SOURCE_IO",
+    "FREIGHT_JOIN_OR_FK_OR_TOP1_LOOKUP",
+    "FINAL_CROSSWALK_OR_BACKFILL",
+    "PARITY_OR_PUBLICATION",
+    "SWEEP_OR_PRUNE_OR_DEACTIVATION",
+    "CHARACTERIZATION_OR_BOOTSTRAP",
+    "CUTOVER"
+  ]
+}

@@ -1,0 +1,418 @@
+{
+  "status": "EXTERNAL_INPUTS_UNCHANGED",
+  "utc": "2026-09-22T01:36:17.925Z",
+  "newSourceQueries": 0,
+  "newSearchPerformed": false,
+  "reason": "All relevant23 sources from the previous search retain their pins; no new external input or unconsulted relevant source identified in the current request.",
+  "source": {
+    "path": "docs/catalogos/p11-fisico/investigacao-inputs.json",
+    "sha256": "2af2a68a3610781cbd0cd92a5baadb095faf0b0de75fbc30a02de86b607f2fec"
+  },
+  "requirements": [
+    {
+      "id": "G02-PUBLICACAO",
+      "ownerRole": "Owner do repositorio",
+      "nominalOwner": null,
+      "status": "BLOQUEADO_POR_INPUT",
+      "finding": "Consulta local atual: zero remotes; nenhum CODEOWNERS nos caminhos convencionais. Politica reserva provider, conjunto e aprovadores ao owner. Nenhum destino foi inferido.",
+      "remainingRequirement": "Provider, remote/branch, conjunto exato aprovado, owners/aprovadores e autorizacao nominal de publicacao; inventario local nao e conjunto aprovado.",
+      "evidence": [
+        {
+          "path": "CONTRIBUTING.md",
+          "sha256": "9f72feeb251b7def0b52bb3111f1b16e7a5349d4e0a11042f6d55fe2d8dfd8c3",
+          "integrityChecked": true
+        },
+        {
+          "path": "SECURITY.md",
+          "sha256": "b360360a5c241edfb3dfbc071f048e967eac6ef2311b0dd661a4a9cbe6605b6e",
+          "integrityChecked": true
+        }
+      ],
+      "newNominalAcceptance": false,
+      "currentDecision": "REUSED_EXISTING_EVIDENCE_NO_NEW_EXTERNAL_INPUT",
+      "scopeAndValidity": "Evidence retains its original local or observed scope; no current supplier guarantee or nominal acceptance inferred.",
+      "stage": "P10",
+      "origin": "STATES.md"
+    },
+    {
+      "id": "G02-CI",
+      "ownerRole": "Owner do repositorio",
+      "nominalOwner": null,
+      "status": "BLOQUEADO_POR_INPUT",
+      "finding": "Workflows versionados e verificacoes locais existem; nao foi localizado recibo de CI de provedor vinculado ao SHA aprovado. Preparacao nao e execucao remota.",
+      "remainingRequirement": "Protecoes/checks obrigatorios e Gitleaks versionado; depois do efeito autorizado, SHA remoto, historico completo e recibos reais de CI vinculados ao mesmo SHA.",
+      "evidence": [
+        {
+          "path": ".github/workflows/ci.yml",
+          "sha256": "c53dfb8605cdef0b40599173ac61a3793e2f57311e67fe85a85df96ff96ed64a",
+          "integrityChecked": true
+        },
+        {
+          "path": ".github/workflows/security.yml",
+          "sha256": "dec59fada5f8c5ca00d343cd50936b5547a01e9212213c503649cb84ba708e3a",
+          "integrityChecked": true
+        },
+        {
+          "path": "docs/catalogos/preparacao-offline-p10-p21/validacoes.json",
+          "sha256": "91fc18202b8ee537c9d5f27e83d3b62144ad8773ebfe8968bbc45e678217d46e",
+          "integrityChecked": true
+        }
+      ],
+      "newNominalAcceptance": false,
+      "currentDecision": "REUSED_EXISTING_EVIDENCE_NO_NEW_EXTERNAL_INPUT",
+      "scopeAndValidity": "Evidence retains its original local or observed scope; no current supplier guarantee or nominal acceptance inferred.",
+      "stage": "P10",
+      "origin": ".github/workflows/security.yml"
+    },
+    {
+      "id": "FEED-BASELINE",
+      "ownerRole": "Responsavel de seguranca",
+      "nominalOwner": null,
+      "status": "BLOQUEADO_POR_INPUT",
+      "finding": "Reutilizados JSON/HTML e resultado P11: NVD atualizado, 13 dependencias, zero achados/erros. Documento declara aceite nominal de Seguranca ainda ausente.",
+      "remainingRequirement": "Aceite nominal da baseline pelo responsável de segurança; não foi inferido da autorização de consulta pública.",
+      "evidence": [
+        {
+          "path": "docs/catalogos/p11-publico-corrigido/RELATORIO.md",
+          "sha256": "fbb8435c7273e326cb7171cf61d841a7812fe8827c9ae7990f4bbc1c47b36a25",
+          "integrityChecked": true
+        },
+        {
+          "path": "docs/catalogos/p11-publico-corrigido/resultado.json",
+          "sha256": "c9f48273c4b950cbdb1d60ec956987670889c07ccb2c4ca99eb638ae1c03503c",
+          "integrityChecked": true
+        },
+        {
+          "path": "docs/catalogos/vulnerabilidades-v2-015d/README.md",
+          "sha256": "44dc03fe43322b45d0973a45febd8048bd4215d02cb50f52a5ec4792f74877bd",
+          "integrityChecked": true
+        }
+      ],
+      "newNominalAcceptance": false,
+      "currentDecision": "REUSED_EXISTING_EVIDENCE_NO_NEW_EXTERNAL_INPUT",
+      "scopeAndValidity": "Evidence retains its original local or observed scope; no current supplier guarantee or nominal acceptance inferred.",
+      "stage": "P11",
+      "origin": "docs/catalogos/vulnerabilidades-v2-015d/README.md"
+    },
+    {
+      "id": "G05-AMBIENTE",
+      "ownerRole": "DBA, Operacoes, Seguranca e Compliance",
+      "nominalOwner": null,
+      "status": "BLOQUEADO_POR_INPUT",
+      "finding": "Laboratorio local e provas SQL existem; alvo ONLINE confirmado nesta rodada. Nao comprovam ambiente definitivo, TLS/ACL, quotas e agenda aprovados.",
+      "remainingRequirement": "Alvo V2 dedicado isolado, principals segregados, TLS e ACL nominais, capacidade/quotas/storage, config/scheduler/alertas aprovados; sem valores de credenciais ou certificados.",
+      "evidence": [
+        {
+          "path": "docs/catalogos/campanhas-integrais/ENTRADAS-E-EFEITOS-EXTERNOS.md",
+          "sha256": "512ccfdbd037c758c9581548583ec3dfd51e8ebbc8929d41a211b4f48c502fcc",
+          "integrityChecked": true
+        },
+        {
+          "path": "SECURITY.md",
+          "sha256": "b360360a5c241edfb3dfbc071f048e967eac6ef2311b0dd661a4a9cbe6605b6e",
+          "integrityChecked": true
+        }
+      ],
+      "newNominalAcceptance": false,
+      "currentDecision": "REUSED_EXISTING_EVIDENCE_NO_NEW_EXTERNAL_INPUT",
+      "scopeAndValidity": "Evidence retains its original local or observed scope; no current supplier guarantee or nominal acceptance inferred.",
+      "stage": "P12",
+      "origin": "docs/catalogos/campanhas-integrais/ENTRADAS-E-EFEITOS-EXTERNOS.md"
+    },
+    {
+      "id": "G05-RETENCAO",
+      "ownerRole": "DBA, Operacoes, Seguranca e Compliance",
+      "nominalOwner": null,
+      "status": "BLOQUEADO_POR_INPUT",
+      "finding": "Lifecycle implementado/testado localmente; runbook declara TTL candidato nao aprovado e identidades/retenção nominal pendentes.",
+      "remainingRequirement": "Data owner e compliance ratificam policy/TTL por staging, logs e archive, autoridade de hold/release; DBA/Operacoes comprovam WORM ou imutabilidade equivalente, criptografia, capacidade e identidade de servico.",
+      "evidence": [
+        {
+          "path": "docs/runbooks/retencao-arquivamento-e-restore.md",
+          "sha256": "0e78382707c8cde96fdc460debca3241e6a93d6029ad5d9137ac77127da004b2",
+          "integrityChecked": true
+        }
+      ],
+      "newNominalAcceptance": false,
+      "currentDecision": "REUSED_EXISTING_EVIDENCE_NO_NEW_EXTERNAL_INPUT",
+      "scopeAndValidity": "Evidence retains its original local or observed scope; no current supplier guarantee or nominal acceptance inferred.",
+      "stage": "P12",
+      "origin": "docs/runbooks/retencao-arquivamento-e-restore.md"
+    },
+    {
+      "id": "G05-RECUPERACAO",
+      "ownerRole": "DBA, Operacoes, Seguranca e Compliance",
+      "nominalOwner": null,
+      "status": "BLOQUEADO_POR_INPUT",
+      "finding": "Rollback e readback agregado sao provas locais existentes; nao ha nesta evidencia backup/restore material nem RTO/RPO medidos.",
+      "remainingRequirement": "Backup e restore drill materiais, RTO/RPO medidos, COMMIT/crash/rebuild/replay quando requeridos, janela/orcamento e autorizacao individual por efeito com ledger previo. Rollback sintetico nao autoriza nem prova esses efeitos.",
+      "evidence": [
+        {
+          "path": "docs/runbooks/retencao-arquivamento-e-restore.md",
+          "sha256": "0e78382707c8cde96fdc460debca3241e6a93d6029ad5d9137ac77127da004b2",
+          "integrityChecked": true
+        },
+        {
+          "path": "docs/catalogos/campanhas-integrais/ENTRADAS-E-EFEITOS-EXTERNOS.md",
+          "sha256": "512ccfdbd037c758c9581548583ec3dfd51e8ebbc8929d41a211b4f48c502fcc",
+          "integrityChecked": true
+        }
+      ],
+      "newNominalAcceptance": false,
+      "currentDecision": "REUSED_EXISTING_EVIDENCE_NO_NEW_EXTERNAL_INPUT",
+      "scopeAndValidity": "Evidence retains its original local or observed scope; no current supplier guarantee or nominal acceptance inferred.",
+      "stage": "P12",
+      "origin": "docs/runbooks/retencao-arquivamento-e-restore.md"
+    },
+    {
+      "id": "G03-10633",
+      "ownerRole": "Fornecedor e owner de dados por fonte",
+      "nominalOwner": null,
+      "status": "BLOQUEADO_POR_INPUT",
+      "finding": "B56 remoto: mapping ARRAY de STRING observado. Nenhuma garantia de chave filha, estabilidade ou vinculo raiz/Frete; nao pedir novamente prova do shape ja observado.",
+      "remainingRequirement": "Garantia versionada de raiz/Frete, semântica e chave dos filhos, escopo/estabilidade, colisões e cardinalidade. ARRAY de STRING já observado, sem pedir nova fixture para esse shape.",
+      "evidence": [
+        {
+          "path": "docs/catalogos/bloco56-continuacao/README.md",
+          "sha256": "5ec46dc1fd3d52793d2d8f0772a80f300b4113248cd06a354847a14272d90625",
+          "integrityChecked": true
+        },
+        {
+          "path": "docs/catalogos/contratos-esl-10633/README.md",
+          "sha256": "a690c6e02348a69ebf494e64051d4b9808ebdbbd0477ac694a1865d89b06db2d",
+          "integrityChecked": true
+        },
+        {
+          "path": "docs/catalogos/identidade-inventario/README.md",
+          "sha256": "bbfc848d21841f69d77e17b2d33322bc026f70820348a2ee392e5cef1ecad953",
+          "integrityChecked": true
+        }
+      ],
+      "newNominalAcceptance": false,
+      "currentDecision": "REUSED_EXISTING_EVIDENCE_NO_NEW_EXTERNAL_INPUT",
+      "scopeAndValidity": "Evidence retains its original local or observed scope; no current supplier guarantee or nominal acceptance inferred.",
+      "stage": "P14",
+      "origin": "docs/catalogos/identidade-inventario/README.md"
+    },
+    {
+      "id": "G03-8636",
+      "ownerRole": "Fornecedor e owner de dados por fonte",
+      "nominalOwner": null,
+      "status": "BLOQUEADO_POR_INPUT",
+      "finding": "B56 remoto e contraexemplo historico: INTEGER na parcela, raiz tecnica ausente; candidata refutada como chave de linha. Schema GraphQL nao demonstra crosswalk.",
+      "remainingRequirement": "Identificador tipado da raiz accounting_debit e prova representativa raiz-parcela-rateio. ant_ils_sequence_code nao identifica raiz nem linha fisica.",
+      "evidence": [
+        {
+          "path": "docs/catalogos/bloco56-continuacao/README.md",
+          "sha256": "5ec46dc1fd3d52793d2d8f0772a80f300b4113248cd06a354847a14272d90625",
+          "integrityChecked": true
+        },
+        {
+          "path": "docs/catalogos/identidade-contas-a-pagar/README.md",
+          "sha256": "e6b0f1f083b3f39ac639c13bc462ed4a0c755661d6ea82759d8a5a3c109bbf0d",
+          "integrityChecked": true
+        }
+      ],
+      "newNominalAcceptance": false,
+      "currentDecision": "REUSED_EXISTING_EVIDENCE_NO_NEW_EXTERNAL_INPUT",
+      "scopeAndValidity": "Evidence retains its original local or observed scope; no current supplier guarantee or nominal acceptance inferred.",
+      "stage": "P14",
+      "origin": "docs/catalogos/identidade-contas-a-pagar/README.md"
+    },
+    {
+      "id": "G03-4924",
+      "ownerRole": "Fornecedor e owner de dados por fonte",
+      "nominalOwner": null,
+      "status": "BLOQUEADO_POR_INPUT",
+      "finding": "B56 remoto: ID INTEGER de linha e arrays de textos. Identidade da linha nao comprova titulo, filhos, documento ou Frete.",
+      "remainingRequirement": "Entidade e estabilidade do ID de linha; crosswalk linha/título/documento/Frete e identidade dos filhos. ARRAY de STRING já observado.",
+      "evidence": [
+        {
+          "path": "docs/catalogos/bloco56-continuacao/README.md",
+          "sha256": "5ec46dc1fd3d52793d2d8f0772a80f300b4113248cd06a354847a14272d90625",
+          "integrityChecked": true
+        },
+        {
+          "path": "docs/catalogos/identidade-faturas-por-cliente/README.md",
+          "sha256": "0af6a7ec95e7b76f7a1fc0c166befe5dd373f23f0a176627b88eff3890808af7",
+          "integrityChecked": true
+        }
+      ],
+      "newNominalAcceptance": false,
+      "currentDecision": "REUSED_EXISTING_EVIDENCE_NO_NEW_EXTERNAL_INPUT",
+      "scopeAndValidity": "Evidence retains its original local or observed scope; no current supplier guarantee or nominal acceptance inferred.",
+      "stage": "P14",
+      "origin": "docs/catalogos/identidade-faturas-por-cliente/README.md"
+    },
+    {
+      "id": "G03-6392",
+      "ownerRole": "Fornecedor e owner de dados por fonte",
+      "nominalOwner": null,
+      "status": "BLOQUEADO_POR_INPUT",
+      "finding": "B56 remoto: sequence INTEGER e numero de nota STRING; identificadores tecnicos testados ausentes. Nota nao comprova raiz/ocorrencia.",
+      "remainingRequirement": "Garantia versionada da raiz ou observacoes repetidas com colisoes entre sequencia, minuta e ocorrencia de invoice; papeis e cardinalidade, sem simplificar hash legado por inferencia.",
+      "evidence": [
+        {
+          "path": "docs/catalogos/bloco56-continuacao/README.md",
+          "sha256": "5ec46dc1fd3d52793d2d8f0772a80f300b4113248cd06a354847a14272d90625",
+          "integrityChecked": true
+        },
+        {
+          "path": "docs/catalogos/identidade-sinistros/README.md",
+          "sha256": "38eccfa07d65afa43354893061cce83b55544ccc61f516519da5b046f4ae2b14",
+          "integrityChecked": true
+        }
+      ],
+      "newNominalAcceptance": false,
+      "currentDecision": "REUSED_EXISTING_EVIDENCE_NO_NEW_EXTERNAL_INPUT",
+      "scopeAndValidity": "Evidence retains its original local or observed scope; no current supplier guarantee or nominal acceptance inferred.",
+      "stage": "P14",
+      "origin": "docs/catalogos/identidade-sinistros/README.md"
+    },
+    {
+      "id": "G03-RASTER",
+      "ownerRole": "Fornecedor e owner de dados por fonte",
+      "nominalOwner": null,
+      "status": "BLOQUEADO_POR_INPUT",
+      "finding": "Contrato local preserva CodSolicitacao e Ordem como candidatos; contraexemplo de reordenacao refuta fallback por posicao. Garantia de identidade ausente.",
+      "remainingRequirement": "Tipos/escopo/estabilidade de CodSolicitacao e identidade de parada; Ordem sob reordenacao/insercao/remocao/retorno, atomicidade/frescor e cardinalidade. Sem fallback posicional.",
+      "evidence": [
+        {
+          "path": "docs/catalogos/raster-contrato-local/README.md",
+          "sha256": "26fe0fb91fd684182d0287dbd6590c084f89b2475ce332a8ae81764045bc3bfd",
+          "integrityChecked": true
+        },
+        {
+          "path": "docs/catalogos/raster-contrato-local/identidade-pendente.json",
+          "sha256": "be859541e221711555f6aded72fa7223d3217738687e25a70392cac0bd416499",
+          "integrityChecked": true
+        }
+      ],
+      "newNominalAcceptance": false,
+      "currentDecision": "REUSED_EXISTING_EVIDENCE_NO_NEW_EXTERNAL_INPUT",
+      "scopeAndValidity": "Evidence retains its original local or observed scope; no current supplier guarantee or nominal acceptance inferred.",
+      "stage": "P14",
+      "origin": "docs/catalogos/raster-contrato-local/identidade-pendente.json"
+    },
+    {
+      "id": "G04-SEMANTICA",
+      "ownerRole": "Negocio e owners de referencias e consumidores",
+      "nominalOwner": null,
+      "status": "BLOQUEADO_POR_INPUT",
+      "finding": "FAT-02 registra divergencia mapper/SQL quando CT-e e NFS-e coexistem; fonte propria de serie NFS-e e precedencia nao ratificadas.",
+      "remainingRequirement": "Owner de negocio ratifica grao, relacoes, alias/rekey, titulo/documento e precedencia fiscal/financeira aplicaveis, incluindo fonte propria de serie NFS-e. Nenhuma chave ou owner nominal e inferido.",
+      "evidence": [
+        {
+          "path": "docs/catalogos/bloco56-continuacao/README.md",
+          "sha256": "5ec46dc1fd3d52793d2d8f0772a80f300b4113248cd06a354847a14272d90625",
+          "integrityChecked": true
+        },
+        {
+          "path": "docs/catalogos/macrobloco-analitico/manifesto-referencias.json",
+          "sha256": "fdceade134ba69229b02ed63e0cffdbfab2f6fd4ad8e79f96553b6caba701c38",
+          "integrityChecked": true
+        }
+      ],
+      "newNominalAcceptance": false,
+      "currentDecision": "REUSED_EXISTING_EVIDENCE_NO_NEW_EXTERNAL_INPUT",
+      "scopeAndValidity": "Evidence retains its original local or observed scope; no current supplier guarantee or nominal acceptance inferred.",
+      "stage": "P14",
+      "origin": "STATES.md"
+    },
+    {
+      "id": "G04-REFERENCIAS",
+      "ownerRole": "Negocio e owners de referencias e consumidores",
+      "nominalOwner": null,
+      "status": "BLOQUEADO_POR_INPUT",
+      "finding": "Manifestos e importadores/fixtures qualificam o formato; nao sao export oficial autorizado por familia, release e vigencia.",
+      "remainingRequirement": "Export/baseline autorizado por familia consumida, release/escopo, proveniencia, vigencia, grao, contagem e fingerprint; normalizacao e tokenizacao por versao aprovada, sem fornecer tokens/documentos/chaves neste chat.",
+      "evidence": [
+        {
+          "path": "docs/runbooks/importar-ratificar-e-revogar-referencias.md",
+          "sha256": "f820770651e6f05fbf3e935eb47f76c803563908dc4260a02a61a480082d51c5",
+          "integrityChecked": true
+        },
+        {
+          "path": "docs/catalogos/macrobloco-analitico/manifesto-referencias.json",
+          "sha256": "fdceade134ba69229b02ed63e0cffdbfab2f6fd4ad8e79f96553b6caba701c38",
+          "integrityChecked": true
+        }
+      ],
+      "newNominalAcceptance": false,
+      "currentDecision": "REUSED_EXISTING_EVIDENCE_NO_NEW_EXTERNAL_INPUT",
+      "scopeAndValidity": "Evidence retains its original local or observed scope; no current supplier guarantee or nominal acceptance inferred.",
+      "stage": "P15",
+      "origin": "docs/runbooks/importar-ratificar-e-revogar-referencias.md"
+    },
+    {
+      "id": "G04-RATIFICACAO",
+      "ownerRole": "Negocio e owners de referencias e consumidores",
+      "nominalOwner": null,
+      "status": "BLOQUEADO_POR_INPUT",
+      "finding": "Segregacao autor/importador/aprovador e cobertura sao exigencias testaveis. Nenhuma evidencia selecionada contem ratificacao real independente.",
+      "remainingRequirement": "Autor/importador/aprovador segregados, cobertura calendario/filial/frota/regiao/status/tarifas, fixtures de paridade e politicas de ausencia/conflito; importacao material requer P12/G05 e autorizacao propria.",
+      "evidence": [
+        {
+          "path": "docs/runbooks/importar-ratificar-e-revogar-referencias.md",
+          "sha256": "f820770651e6f05fbf3e935eb47f76c803563908dc4260a02a61a480082d51c5",
+          "integrityChecked": true
+        }
+      ],
+      "newNominalAcceptance": false,
+      "currentDecision": "REUSED_EXISTING_EVIDENCE_NO_NEW_EXTERNAL_INPUT",
+      "scopeAndValidity": "Evidence retains its original local or observed scope; no current supplier guarantee or nominal acceptance inferred.",
+      "stage": "P15",
+      "origin": "database/manifest/governed-references.json"
+    },
+    {
+      "id": "G04-DIMENSOES",
+      "ownerRole": "Negocio e owners de referencias e consumidores",
+      "nominalOwner": null,
+      "status": "BLOQUEADO_POR_INPUT",
+      "finding": "DAG, bindings sinteticos e current/history locais existentes. A evidencia declara fontes qualificadas e regras de vigencia/rekey externas pendentes.",
+      "remainingRequirement": "Por dimensao: fonte qualificada e paridade core das fatias usadas, grao/papeis, binding explicito, vigencia, current/history, ausencia, conflitos e rekey ratificados; publicacao contratual permanece P25.",
+      "evidence": [
+        {
+          "path": "docs/catalogos/preparacao-offline-p10-p21/RELATORIO.md",
+          "sha256": "d1a0f79401da14e5ec1bb438fc262d10a9b03de5fc558e11f0fce55e96468ecd",
+          "integrityChecked": true
+        },
+        {
+          "path": "docs/catalogos/campanhas-integrais/ENTRADAS-E-EFEITOS-EXTERNOS.md",
+          "sha256": "512ccfdbd037c758c9581548583ec3dfd51e8ebbc8929d41a211b4f48c502fcc",
+          "integrityChecked": true
+        }
+      ],
+      "newNominalAcceptance": false,
+      "currentDecision": "REUSED_EXISTING_EVIDENCE_NO_NEW_EXTERNAL_INPUT",
+      "scopeAndValidity": "Evidence retains its original local or observed scope; no current supplier guarantee or nominal acceptance inferred.",
+      "stage": "P21",
+      "origin": "STATES.md"
+    },
+    {
+      "id": "G04-FROTA",
+      "ownerRole": "Negocio e owners de referencias e consumidores",
+      "nominalOwner": null,
+      "status": "BLOQUEADO_POR_INPUT",
+      "finding": "Decisao V02 explicitamente BLOCKED: placa/nome/filial e coocorrencia nao fornecem IDs estaveis. Papeis principal/reboques comprovados somente no grao Manifesto.",
+      "remainingRequirement": "Veiculos/reboques e motoristas exigem ID estavel escopado do fornecedor, semantica de placa/nome/filial, colisoes/homonimos, merge/split, papeis separados e lifecycle. Evidencia tecnica do fornecedor por G03; ratificacao de negocio por G04. V2-035c nao autoriza inferir identidade.",
+      "evidence": [
+        {
+          "path": "docs/catalogos/frota-manifestos-v2-035c/README.md",
+          "sha256": "0a50e9e3e2a7345d747c007afcd7f88517aa39a857a751c8086ee779b5928284",
+          "integrityChecked": true
+        },
+        {
+          "path": "docs/catalogos/frota-manifestos-v2-035c/decisao-v02.json",
+          "sha256": "02a259fae743b9c0fc7c873f70e2929bef04a375d0f85f60675f52f62ec4af92",
+          "integrityChecked": true
+        }
+      ],
+      "newNominalAcceptance": false,
+      "currentDecision": "REUSED_EXISTING_EVIDENCE_NO_NEW_EXTERNAL_INPUT",
+      "scopeAndValidity": "Evidence retains its original local or observed scope; no current supplier guarantee or nominal acceptance inferred.",
+      "stage": "P21",
+      "origin": "docs/catalogos/frota-manifestos-v2-035c/README.md"
+    }
+  ]
+}

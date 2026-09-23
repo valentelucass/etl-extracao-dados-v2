@@ -1,0 +1,22 @@
+# Checkpoint0153 — integração funcional local concluída
+
+INTEGRACAO_FUNCIONAL_LOCAL_CONCLUIDA no escopo A–N adotado pelo pedido SHA2561639fb98c90b98d0d3fe23b5b1d066f2fb10a7d4f06350d1cb4967425e2eff6e. Validade final vinculada ao selo e seu readback, fora do ciclo do manifesto. Antecessor0152 SHA25627173e5bb8f032deb5040810467896a1302a5d11192750d51f5a43b6f3d117f3. Construção39/45;aceites67/115;zero novos aceites reais. V2-036 é pai de cinco MAT e V2-017 não recebe outra contagem.
+
+Entrega funcional: ExpansionCaptureSource/Artifact e quatro casos de uso/JDBC; composição no JAR com entradas/oráculos explícitos; seis perfis locais e quatro expansões/Raster caracterizáveis;19 contratos/673colunas/971metadados, cinco grãos independentes e35escopos; Raster/bindings/relações alternativos; Coletas com dia/snapshot/quatro capturas e consumidor do preview33. Seis fontes auxiliares/referências do cenário permanecem PACKAGED_ANALYTIC_SUPPORT_V1 explícitas. Modos reais continuam recusados.
+
+verify-final-02 da última revisão: 2042unitários/4skips históricos com razões idênticas;458IT/93classes/zero falha,erro,skip.423identidades anteriores preservadas;coverage/arquitetura/Spotless/Checkstyle/Enforcer/caps passaram sem relaxamento. Regressão vinculada em regression-final-01. Apenaslocalhost/ETL_SISTEMA_V2_SHADOW integrado/duas travas/master/rollback/agregados todas tabelas;nenhumDDL/COMMITdomínio.
+
+Pacote qualification-final-01 e qualification-final-02: ZIP 355bdc43f166a2be5ecbbf71c9d2575c0def11f46c159bf7d8471745f6d20557,411+2entradas;2058fontes e1074classes/recursos,9deps.51comandos diretos/2campanhas/3barreiras, preservando OUTCOME_UNKNOWN antes do recibo/4recusas antes de efeito/4retomadas sem repetirworker executados por extrações novas. Oráculo trocado e entradas distintas comprovados, exit40 para divergência conhecida. Escalas 2/8 raízes medidas no mesmo caminho. A lacuna de memória no cancelamento foi fechada por amostragem JDK do worker atual com oito raízes em cancel-measurements-final-02, sem delta Java/composição e sem SLO/platô produtivo.
+
+Revisão separada pelo mesmo agente em review-code-01, sem revisão humana.235vínculos locais explícitos/360nominais decompostos entre595examinados,2437linhas/401artefatos/75regras/442opacos preservados. Matriz45 mantém todos critérios anteriores e sete camadas por unidade. STATES recebeu primeiro as notas funcionais, sem mexer em checkbox/medida.034aMANTER e045a aceitas preservadas; nenhum segundo lifecycle/intake/CI fictício.
+
+Continuidade técnica: docs/catalogos/macrobloco-integracao-funcional contém relatório,obrigaçõesA–N,matrizes,externos,summary e manifesto. SucessãoFunctional→ConstructionClosure→Qualification→Analytic→Expansion→Relational→Temporal→Continuidade/CheckGuidance, snapshots anteriores imutáveis. Checks finais, diff-final-01(aplicação sobre3190originais/bytesexatos), revisão do diff e selo final são exigidos para completar a entrega. O selo externo lê novamente os9672pins históricos por caminho/snapshot e todos pins atuais.
+
+Continuidade vinculada ao estado observado do fechamento:
+1. Ler final-seal.json e seal-readback.json e conferir seus pins. Com PASS, A–N locais estão concluídos; não repetir verify, campanhas ou autores one-shot.
+2. Somente se o fechamento estiver ausente/incompleto, concluir os cinco grupos finais, diff-final-01, revisão e selo/readback nesta mesma execução autorizada; corrigir falha local sem pedir novo prompt.
+3. Com fechamento válido, entregar N uma única vez. Depois, entradas G01–G08 somente nos canais/intakes atuais; nenhuma operação adicional é presumida por este checkpoint.
+
+Pendências de implementação dependente: wire/crosswalk/identidades/oráculos nominais, planner/apply de presença dos filhos, adapters de storage/alerta/CI para destinos/policy não fornecidos e configuração de principals/release/alvo. Mecanismo/consumidor/prova local concluídos ou capacidade existente demonstrada, por unidade; faltas exatas em ENTRADAS-E-EFEITOS-EXTERNOS.md e matriz45. V2-048b=PLANO_PRONTO_ENSAIO_NAO_EXECUTADO,CUTOVER-DB-01/DATABASE_WIDE,bancoV2dedicado/duasrecuperações;shadow não promovido. PNRreal só na primeira publicação produtivaV2aceita,depoisroll-forwardV2.
+
+Nenhuma fonte real,.env/segredo,V1/dashboardmutação,DDL,domainCOMMIT,produção,serviço/agendamento,grant,feed,remoteGit/commit/push,restore/corte/retirada. Não reexecutar autores one-shot nem efeito com resultado desconhecido; conferir processo/journal/recibo/estado antes. Uma dependência externa isola somente sua parcela.

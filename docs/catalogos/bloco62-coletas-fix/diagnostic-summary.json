@@ -1,0 +1,171 @@
+[
+  {
+    "operation": "info",
+    "httpStatus": 200,
+    "curlExit": 0,
+    "bytes": 4833,
+    "failure": null,
+    "profile": {
+      "fields": [
+        {
+          "name": "id",
+          "declaredType": null
+        },
+        {
+          "name": "pck_crn_psn_nickname",
+          "declaredType": null
+        },
+        {
+          "name": "sequence_code",
+          "declaredType": null
+        },
+        {
+          "name": "created_at",
+          "declaredType": null
+        },
+        {
+          "name": "request_date",
+          "declaredType": null
+        },
+        {
+          "name": "service_date",
+          "declaredType": null
+        },
+        {
+          "name": "finish_date",
+          "declaredType": null
+        },
+        {
+          "name": "pck_cor_nickname",
+          "declaredType": null
+        },
+        {
+          "name": "invoices_volumes",
+          "declaredType": null
+        },
+        {
+          "name": "invoices_weight",
+          "declaredType": null
+        },
+        {
+          "name": "taxed_weight",
+          "declaredType": null
+        },
+        {
+          "name": "invoices_value",
+          "declaredType": null
+        },
+        {
+          "name": "status",
+          "declaredType": null
+        },
+        {
+          "name": "pck_pds_cty_name",
+          "declaredType": null
+        },
+        {
+          "name": "pck_pds_cty_sae_code",
+          "declaredType": null
+        },
+        {
+          "name": "pck_pds_postal_code",
+          "declaredType": null
+        },
+        {
+          "name": "pck_pds_neighborhood",
+          "declaredType": null
+        },
+        {
+          "name": "pck_prn_name",
+          "declaredType": null
+        },
+        {
+          "name": "pck_prn_drt_nickname",
+          "declaredType": null
+        },
+        {
+          "name": "updated_at",
+          "declaredType": null
+        },
+        {
+          "name": "pck_loe_ore_description",
+          "declaredType": null
+        },
+        {
+          "name": "pck_pus_ore_description",
+          "declaredType": null
+        },
+        {
+          "name": "pck_pus_ore_trigger",
+          "declaredType": null
+        },
+        {
+          "name": "pck_uer_name",
+          "declaredType": null
+        },
+        {
+          "name": "pck_ctr_name",
+          "declaredType": null
+        },
+        {
+          "name": "cancellation_reason",
+          "declaredType": null
+        },
+        {
+          "name": "pck_mik_attempt_number",
+          "declaredType": null
+        },
+        {
+          "name": "pck_mik_mft_crn_psn_nickname",
+          "declaredType": null
+        },
+        {
+          "name": "pck_mik_mft_sequence_code",
+          "declaredType": null
+        },
+        {
+          "name": "pck_mik_mft_vie_license_plate",
+          "declaredType": null
+        },
+        {
+          "name": "pck_mik_mft_vie_vee_name",
+          "declaredType": null
+        }
+      ],
+      "filters": [
+        {
+          "name": "finish_date",
+          "declaredType": "date"
+        },
+        {
+          "name": "service_date",
+          "declaredType": "date"
+        },
+        {
+          "name": "request_date",
+          "declaredType": "date"
+        },
+        {
+          "name": "corporation_id",
+          "declaredType": "select"
+        },
+        {
+          "name": "status",
+          "declaredType": "select"
+        },
+        {
+          "name": "by_updated_at",
+          "declaredType": "datetime"
+        }
+      ]
+    }
+  },
+  {
+    "operation": "data",
+    "httpStatus": 429,
+    "curlExit": 0,
+    "bytes": 25,
+    "failure": "HTTP_NON_2XX",
+    "profile": null
+  }
+]

@@ -1,0 +1,84 @@
+[
+  {
+    "material": "dq-policy-v1|56:bloco60-usuarios-backfill-v2|88d26323f8226ae3fa1792ae264f3696713ba5e117939b24f0f9587566489506|4|3600|32:laboratory-owner|32:laboratory-owner|38:bloco60-preserve-v1|32:laboratory-owner|2026-09-10T00:00:00.124|1:COUNT_EQUATION:0:0:32:laboratory-owner|2:PAGE_TERMINALITY:0:0:32:laboratory-owner|3:PROMOTION_RECONCILIATION:0:0:32:laboratory-owner|4:QUARANTINE_SLA:0:0:32:laboratory-owner",
+    "mode": "BACKFILL",
+    "fingerprint": "1b1ed0b7ab02f1ded1fed332558fe34ade77c58f74cfa283fcb305b10ce07298",
+    "scopeFingerprint": "88d26323f8226ae3fa1792ae264f3696713ba5e117939b24f0f9587566489506",
+    "template": "USUARIOS",
+    "version": "bloco60-usuarios-backfill-v2"
+  },
+  {
+    "material": "dq-policy-v1|52:bloco60-usuarios-replay-v2|9ab375081cab9e8f4515c10f37438f475020bb53a730bbd45693bf3cb473fdc8|4|3600|32:laboratory-owner|32:laboratory-owner|38:bloco60-preserve-v1|32:laboratory-owner|2026-09-10T00:00:00.124|1:COUNT_EQUATION:0:0:32:laboratory-owner|2:PAGE_TERMINALITY:0:0:32:laboratory-owner|3:PROMOTION_RECONCILIATION:0:0:32:laboratory-owner|4:QUARANTINE_SLA:0:0:32:laboratory-owner",
+    "mode": "REPLAY",
+    "fingerprint": "0ff01228f5fc1587d721c0bb71153cc5394aeafec5c9fd9e1ff7bdbfb1146977",
+    "scopeFingerprint": "9ab375081cab9e8f4515c10f37438f475020bb53a730bbd45693bf3cb473fdc8",
+    "template": "USUARIOS",
+    "version": "bloco60-usuarios-replay-v2"
+  },
+  {
+    "template": "COLETAS",
+    "mode": "BACKFILL",
+    "version": "B54_LOCAL_V2_coletas_BACKFILL",
+    "fingerprint": "39754abf19720aebb976df6c88841d61b75f90ac4c4dc7a2957c674fd6a64101"
+  },
+  {
+    "template": "COLETAS",
+    "mode": "REPLAY",
+    "version": "B54_LOCAL_V2_coletas_REPLAY",
+    "fingerprint": "b8ecadc8e1ba6cff5f96e3c0ddbd7732e9b72efce55b2f4e679a0a52e22e2965"
+  },
+  {
+    "template": "FRETES",
+    "mode": "BACKFILL",
+    "version": "B54_LOCAL_V2_fretes_BACKFILL",
+    "fingerprint": "40a2484eee5dd7d58a7bf55909da5f26f7f53b8a48826ead9df3df399832ac44"
+  },
+  {
+    "template": "FRETES",
+    "mode": "REPLAY",
+    "version": "B54_LOCAL_V2_fretes_REPLAY",
+    "fingerprint": "f1d9fc01f32da37de3caa031311d29b07dcc5341be785cd3d0720fe8a9b4943c"
+  },
+  {
+    "template": "COLETAS",
+    "mode": "INCREMENTAL",
+    "version": "B54_LOCAL_V2_coletas_INCREMENTAL",
+    "fingerprint": "63307bbdc011e961394080c958807ad2f181400df77747a21fa3fb04cfa7f6e8"
+  },
+  {
+    "template": "FRETES",
+    "mode": "INCREMENTAL",
+    "version": "B54_LOCAL_V2_fretes_INCREMENTAL",
+    "fingerprint": "a628235e1b21e51e42c4dcaf760560ee46ab9421037359c735f772d96813dfe7"
+  },
+  {
+    "template": "MANIFESTOS",
+    "mode": "BACKFILL",
+    "version": "bloco55-manifestos-backfill-v2",
+    "fingerprint": "f7a935a8e8017a71e49c8d5347a359e37c4c99708cd4030d0961bbea02411150",
+    "scope": "7b8f6f9c3f5f851230de377156940ebf4c804c28449e3b83987795089571e241",
+    "effectiveFrom": "2026-09-08T00:00:00.124",
+    "priorVersion": "bloco55-manifestos-backfill-v1",
+    "priorFingerprint": "88127ab8dbc7e2c3c81b866362da1a13e7e8ac4af75b922628bd8abdea39c722"
+  },
+  {
+    "template": "COTACOES",
+    "mode": "BACKFILL",
+    "version": "bloco55-cotacoes-backfill-v2",
+    "fingerprint": "e7d7ca60394ba3137d308716f8e6c952df287d8180f9d61a59c0046ff2327342",
+    "scope": "5052e3801fe9bb121f3636a16894f82914a576cfd8c3982429956e728f6af887",
+    "effectiveFrom": "2026-09-08T00:00:00.124",
+    "priorVersion": "bloco55-cotacoes-backfill-v1",
+    "priorFingerprint": "efbb2d1e09ab7f3d083072809f5bd97795f5c059ea3348309936b1909a75d0aa"
+  },
+  {
+    "template": "LOCALIZACAO_CARGAS",
+    "mode": "BACKFILL",
+    "version": "bloco55-localizacao_cargas-backfill-v2",
+    "fingerprint": "b124a3d48c76bb3d1a6a6bdc64d1cfd3647f9f7cba963f9fedb1a39a29c475af",
+    "scope": "67585b27c8adc885f6faa94411e80f1a59f8f9316efa842e33d3324d65903d8d",
+    "effectiveFrom": "2026-09-08T00:00:00.124",
+    "priorVersion": "bloco55-localizacao_cargas-backfill-v1",
+    "priorFingerprint": "6cc4f9addad28a3c4526501bc0648ae8a2dc9a769590e990bb1d5af1ab5e00a4"
+  }
+]

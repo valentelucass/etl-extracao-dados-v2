@@ -1,0 +1,609 @@
+{
+  "version": 1,
+  "status": "LOCAL_REQUALIFICATION_P07_P08_PASS",
+  "buildAttempt": "pos0227-p07-verify-01",
+  "sourceCalls": 0,
+  "externalNetworkCalls": 0,
+  "databaseUsed": true,
+  "databaseCalls": null,
+  "databaseCountStatus": "INNER_JDBC_NOT_INSTRUMENTED",
+  "fullPhysicalVerify": true,
+  "packageExecuted": true,
+  "ddl": false,
+  "domainCommit": false,
+  "productionUsed": false,
+  "newAcceptances": 0,
+  "unitTests": 2162,
+  "unitSkipped": 4,
+  "integrationTests": 492,
+  "integrationClasses": 105,
+  "coveragePassed": true,
+  "identitiesExact": true,
+  "reproduction": {
+    "members": 730,
+    "revision": "efa83839cbce17a0ca8f95b20bf320db238168f9787ad1b6fa7c04dd05b572f6",
+    "comparedBytes": 7940550,
+    "manifestSha256": "1c95f6558dc885564e93a9879f11c769c2808f004e793c76bf62c2d6c7a98ef9",
+    "byteIdentical": true,
+    "passed": true,
+    "dependencies": 9,
+    "archiveSha256": "a810c9ae603926335fd5e4d76115c54fae3a5bbad16b1e0c07386d6cba71fe33"
+  },
+  "smokeCommands": [
+    "inspect",
+    "plan",
+    "run",
+    "status",
+    "resume",
+    "compare"
+  ],
+  "sequences": [
+    {
+      "name": "sequence-a",
+      "state": "OBSERVED",
+      "elapsedMilliseconds": 97970,
+      "rollbackConfirmed": true,
+      "previews": 231,
+      "ddl": false,
+      "comparisons": 133,
+      "passed": true,
+      "domainCommit": false,
+      "expectedExit": 0,
+      "variant": "COMPLETE",
+      "timedOut": false,
+      "logLimitExceeded": false,
+      "case": "sequence-a",
+      "layer": "DISTRIBUTED_JAR_EXTRACTED_SEQUENCE",
+      "exit": 0,
+      "sourceCalls": 0,
+      "stages": 7
+    },
+    {
+      "name": "sequence-b",
+      "case": "sequence-b",
+      "sourceCalls": 0,
+      "exit": 0,
+      "passed": true,
+      "elapsedMilliseconds": 121782,
+      "variant": "COMPLETE",
+      "ddl": false,
+      "comparisons": 133,
+      "previews": 231,
+      "layer": "DISTRIBUTED_JAR_EXTRACTED_SEQUENCE",
+      "stages": 7,
+      "state": "OBSERVED",
+      "expectedExit": 0,
+      "rollbackConfirmed": true,
+      "timedOut": false,
+      "logLimitExceeded": false,
+      "domainCommit": false
+    },
+    {
+      "name": "value",
+      "previews": 0,
+      "ddl": false,
+      "passed": true,
+      "elapsedMilliseconds": 41096,
+      "timedOut": false,
+      "variant": "VALUE",
+      "logLimitExceeded": false,
+      "state": "OBSERVED",
+      "rollbackConfirmed": true,
+      "layer": "DISTRIBUTED_JAR_EXTRACTED_SEQUENCE",
+      "case": "sequence-a",
+      "domainCommit": false,
+      "expectedExit": 40,
+      "stages": 1,
+      "comparisons": 19,
+      "exit": 40,
+      "sourceCalls": 0
+    },
+    {
+      "name": "precision",
+      "stages": 1,
+      "layer": "DISTRIBUTED_JAR_EXTRACTED_SEQUENCE",
+      "ddl": false,
+      "expectedExit": 40,
+      "timedOut": false,
+      "case": "sequence-a",
+      "passed": true,
+      "previews": 0,
+      "exit": 40,
+      "state": "OBSERVED",
+      "elapsedMilliseconds": 39725,
+      "variant": "PRECISION",
+      "domainCommit": false,
+      "rollbackConfirmed": true,
+      "comparisons": 19,
+      "sourceCalls": 0,
+      "logLimitExceeded": false
+    },
+    {
+      "name": "key",
+      "expectedExit": 40,
+      "rollbackConfirmed": true,
+      "ddl": false,
+      "case": "sequence-a",
+      "logLimitExceeded": false,
+      "variant": "KEY",
+      "state": "OBSERVED",
+      "exit": 40,
+      "elapsedMilliseconds": 27153,
+      "layer": "DISTRIBUTED_JAR_EXTRACTED_SEQUENCE",
+      "passed": true,
+      "domainCommit": false,
+      "sourceCalls": 0,
+      "timedOut": false,
+      "comparisons": 19,
+      "previews": 0,
+      "stages": 1
+    },
+    {
+      "name": "multiplicity",
+      "expectedExit": 40,
+      "exit": 40,
+      "timedOut": false,
+      "comparisons": 19,
+      "logLimitExceeded": false,
+      "rollbackConfirmed": true,
+      "ddl": false,
+      "stages": 1,
+      "previews": 0,
+      "state": "OBSERVED",
+      "domainCommit": false,
+      "sourceCalls": 0,
+      "passed": true,
+      "layer": "DISTRIBUTED_JAR_EXTRACTED_SEQUENCE",
+      "elapsedMilliseconds": 27173,
+      "case": "sequence-a",
+      "variant": "MULTIPLICITY"
+    },
+    {
+      "name": "old-reference",
+      "expectedExit": 40,
+      "variant": "OLD_REFERENCE",
+      "timedOut": false,
+      "rollbackConfirmed": true,
+      "state": "OBSERVED",
+      "comparisons": 114,
+      "case": "sequence-a",
+      "stages": 6,
+      "ddl": false,
+      "logLimitExceeded": false,
+      "domainCommit": false,
+      "previews": 165,
+      "elapsedMilliseconds": 114700,
+      "sourceCalls": 0,
+      "passed": true,
+      "layer": "DISTRIBUTED_JAR_EXTRACTED_SEQUENCE",
+      "exit": 40
+    },
+    {
+      "name": "missing-user",
+      "variant": "MISSING_USER",
+      "case": "sequence-a",
+      "elapsedMilliseconds": 806,
+      "sourceCalls": 0,
+      "state": "OBSERVED",
+      "stages": 0,
+      "timedOut": false,
+      "rollbackConfirmed": true,
+      "layer": "DISTRIBUTED_JAR_EXTRACTED_SEQUENCE",
+      "ddl": false,
+      "exit": 20,
+      "logLimitExceeded": false,
+      "previews": 0,
+      "domainCommit": false,
+      "comparisons": 0,
+      "passed": true,
+      "expectedExit": 20
+    },
+    {
+      "name": "pin-drift",
+      "stages": 0,
+      "domainCommit": false,
+      "exit": 20,
+      "case": "sequence-a",
+      "ddl": false,
+      "variant": "PIN_DRIFT",
+      "previews": 0,
+      "sourceCalls": 0,
+      "comparisons": 0,
+      "elapsedMilliseconds": 1147,
+      "logLimitExceeded": false,
+      "expectedExit": 20,
+      "timedOut": false,
+      "state": "OBSERVED",
+      "layer": "DISTRIBUTED_JAR_EXTRACTED_SEQUENCE",
+      "passed": true,
+      "rollbackConfirmed": true
+    },
+    {
+      "name": "command",
+      "ddl": false,
+      "previews": 0,
+      "sourceCalls": 0,
+      "passed": true,
+      "expectedExit": 20,
+      "case": "sequence-a",
+      "rollbackConfirmed": true,
+      "timedOut": false,
+      "stages": 0,
+      "elapsedMilliseconds": 826,
+      "state": "OBSERVED",
+      "logLimitExceeded": false,
+      "layer": "DISTRIBUTED_JAR_EXTRACTED_SEQUENCE",
+      "domainCommit": false,
+      "variant": "COMMAND",
+      "comparisons": 0,
+      "exit": 20
+    }
+  ],
+  "guards": [
+    {
+      "kind": "control",
+      "count": 8,
+      "state": "PASS_LOCAL",
+      "jdbc": "NOT_STARTED"
+    },
+    {
+      "kind": "extracted",
+      "count": 21,
+      "state": "PASS_LOCAL",
+      "jdbc": "NOT_STARTED"
+    }
+  ],
+  "externalRequirementsOpen": 16,
+  "priorFailuresPreserved": true,
+  "causalityOfPriorTimeoutsProven": false,
+  "receipts": [
+    {
+      "path": "target/requalificacao-pos0227-20260922-01/authority.json",
+      "sha256": "26ba65e3ca5be5c23dffcb6fa5f8a35beb81f1b9ffec94a63428ed924ff8b3a5"
+    },
+    {
+      "path": "target/requalificacao-pos0227-20260922-01/initial.json",
+      "sha256": "85fe540f782afb6c1ad6aafbc47f9a0517cd9aa85ee08d9daebd90fbf002bcaf"
+    },
+    {
+      "path": "target/requalificacao-pos0227-20260922-01/runtime-drift.json",
+      "sha256": "7809e211add7c2fb08ca11a982fd737b3085afed0ad8ab12e78c3a085e96ccfe"
+    },
+    {
+      "path": "target/requalificacao-pos0227-20260922-01/reviewed-inputs.json",
+      "sha256": "882d6ee43ef863ea3d370f608145ed5df7cfebb9ac531c1ce70dd110f027f1f1"
+    },
+    {
+      "path": "target/requalificacao-pos0227-20260922-01/host-before.json",
+      "sha256": "79bd54e2d41047f9f4a6129faf17c9f8dcd22514f23992b005d7519d632f7aac"
+    },
+    {
+      "path": "target/requalificacao-pos0227-20260922-01/diagnostic-before.log",
+      "sha256": "441279c64951cbd5371c6e52c43c67167db6c31ca5fc2b9562fb0432712bd32e"
+    },
+    {
+      "path": "target/requalificacao-pos0227-20260922-01/p07-regression.json",
+      "sha256": "2a117c52b972f4dd173328b726fe442b767e25d38e2b87df48847c1e74db2962"
+    },
+    {
+      "path": "target/requalificacao-pos0227-20260922-01/p07-exact-predecessor.json",
+      "sha256": "c2229e2712c16fea31e2489f6b03d548faf2e8ba0feff9bfcb14fb867cc45e29"
+    },
+    {
+      "path": "target/requalificacao-pos0227-20260922-01/p08-plan.json",
+      "sha256": "e82f138bad3b82f4a77e58b4bf0ac3c1453de2410c1122e76ba8fce6da329447"
+    },
+    {
+      "path": "target/requalificacao-pos0227-20260922-01/p08-result-02.json",
+      "sha256": "8355164d01c4d94ddf1ebd16ccf64fe97d5326184d2bbb723a36717b4e1ebc48"
+    },
+    {
+      "path": "target/requalificacao-pos0227-20260922-01/reproduction.json",
+      "sha256": "0571bc21430b2a15620fcbe963f625d3b3307e29c10e0b509518e335418d87c9"
+    },
+    {
+      "path": "target/requalificacao-pos0227-20260922-01/host-after-final.json",
+      "sha256": "73ad83d4767e06936ace9deff5352b05e4890b72e2711ab20498709f47a8dd35"
+    },
+    {
+      "path": "target/requalificacao-pos0227-20260922-01/diagnostic-after-final.log",
+      "sha256": "3fe9016f19d5f00354bb0dfbf47e3168bb5acaf3c04745337b88dbd4a0f14dda"
+    },
+    {
+      "path": "target/requalificacao-pos0227-20260922-01/preflight-01/result.json",
+      "sha256": "f28abbd3dc1bacbe3e24df509d0c0dbf31741b3814a427a5aaeaa7b051581d3b"
+    },
+    {
+      "path": "target/requalificacao-pos0227-20260922-01/p07-verify-01/result.json",
+      "sha256": "55d08d7b35c706c30e1d4cfd62e3fc36385c59e58f19052fd847dd28c96fb6d1"
+    },
+    {
+      "path": "target/requalificacao-pos0227-20260922-01/p07-evidence-01/result.json",
+      "sha256": "fc0b8d5f282971ee7e76e50fb28fbf99ba2ef31392ae20d062c223716ea7aa3a"
+    },
+    {
+      "path": "target/requalificacao-pos0227-20260922-01/p07-readback-01/result.json",
+      "sha256": "b8f9982a1cef3ce8d2e4426e4c6c97ad7bf03ffc56f709b735ef2f5233908c33"
+    },
+    {
+      "path": "target/requalificacao-pos0227-20260922-01/examples-01/result.json",
+      "sha256": "6ce17bb79edc44ac081db37f25bf47036c05b718a17daa9a90365cd88659f6c5"
+    },
+    {
+      "path": "target/requalificacao-pos0227-20260922-01/package-primary-01/result.json",
+      "sha256": "a4c395d3e9521bf875e371520c9d118230a64504368b6712878456569ae3e425"
+    },
+    {
+      "path": "target/requalificacao-pos0227-20260922-01/package-reproduction-01/result.json",
+      "sha256": "0bd2212f6ba72b77087a8917c8360473eef9af7566e13c450d026ca15108cabc"
+    },
+    {
+      "path": "target/requalificacao-pos0227-20260922-01/reproduction-01/result.json",
+      "sha256": "871f21253207c97a44261137a87850cfb1030d4e9aa360b53b709aeb97c8bce8"
+    },
+    {
+      "path": "target/requalificacao-pos0227-20260922-01/smoke-01/result.json",
+      "sha256": "f9f2fc764f6c8d328748060296dfcb722503a34e5b78519c18d47c7080d6b2a2"
+    },
+    {
+      "path": "target/requalificacao-pos0227-20260922-01/path-red-01/result.json",
+      "sha256": "3ab01bad2df420e11a129a1ccc56b0594c47887697d1b5dac3a6af51fa13ce72"
+    },
+    {
+      "path": "target/requalificacao-pos0227-20260922-01/path-green-01/result.json",
+      "sha256": "b1d4f50f3939cb6968343629e532c3d6da9998fcb0e2d3d83eec20bb4d5b000c"
+    },
+    {
+      "path": "target/requalificacao-pos0227-20260922-01/smoke-failure-readback-01/result.json",
+      "sha256": "094692c61f2b25f05d4be72654386207c73543524aa47ca8eb13c1553ce7182a"
+    },
+    {
+      "path": "target/requalificacao-pos0227-20260922-01/smoke-02/result.json",
+      "sha256": "13dc81135b6b5d2df7f89739790e5dca5d49706e8208b71035edb80728b2005e"
+    },
+    {
+      "path": "target/requalificacao-pos0227-20260922-01/control-guards-01/result.json",
+      "sha256": "e6c6d1b418e081fd49c7abed4a6992b4934d04217a83f68341530bf2481376bc"
+    },
+    {
+      "path": "target/requalificacao-pos0227-20260922-01/extracted-guards-01/result.json",
+      "sha256": "05c4f8730f9fbb2a03ff14db0fc7cae0da2edff5bde2e1fc9ad287be3a7745ee"
+    },
+    {
+      "path": "target/requalificacao-pos0227-20260922-01/package-guards-01/result.json",
+      "sha256": "7b2f39da9a2918ff86fbdd422bc9ddd2e776f9c1f712625821bc062c92ba5560"
+    },
+    {
+      "path": "target/requalificacao-pos0227-20260922-01/sequence-a-01/result.json",
+      "sha256": "7d1db97a77358591be7054f47a12beb3c1290d68ec36cd32af72f04d07486d07"
+    },
+    {
+      "path": "target/requalificacao-pos0227-20260922-01/sequence-b-01/result.json",
+      "sha256": "e2d4ba6384d534639b892ce3465d5351fbf8d6732ef5bb46c5835abc942bbd0e"
+    },
+    {
+      "path": "target/requalificacao-pos0227-20260922-01/value-01/result.json",
+      "sha256": "0bae74c9de331adc150fa14b32498e221b551bec8b8aee59fca4f98f09d48a3d"
+    },
+    {
+      "path": "target/requalificacao-pos0227-20260922-01/precision-01/result.json",
+      "sha256": "d1891fb6f3e35f1e50b9eb0ee67a123ce38d09d06c089a07b711c6ea966fa064"
+    },
+    {
+      "path": "target/requalificacao-pos0227-20260922-01/key-01/result.json",
+      "sha256": "e1caf0ab5caab2e4aa610764e478f5a2a013b5140b188a45139d2dbbc6d9c312"
+    },
+    {
+      "path": "target/requalificacao-pos0227-20260922-01/multiplicity-01/result.json",
+      "sha256": "b3293a26a91ebe5db05214bdafdd382d4d563e19fec94ce5b37f132e24fe3ca4"
+    },
+    {
+      "path": "target/requalificacao-pos0227-20260922-01/old-reference-01/result.json",
+      "sha256": "defce7514173d6aef21d5f12612c4bed0a943254a8b2a286cc2bfccc1cd21dbb"
+    },
+    {
+      "path": "target/requalificacao-pos0227-20260922-01/missing-user-01/result.json",
+      "sha256": "3ff7b6356b14ca29e10cb29aed5591a3e0895b8631d497ce6f416e8bbc7201cb"
+    },
+    {
+      "path": "target/requalificacao-pos0227-20260922-01/pin-drift-01/result.json",
+      "sha256": "ec20edaf4ede02f9a2381553c064fa9929f0105a9e96e6247a6a9823bc82529b"
+    },
+    {
+      "path": "target/requalificacao-pos0227-20260922-01/command-01/result.json",
+      "sha256": "973c48da98055e8027df2f42066f48d283f2a8d1f8340d563e37defb25fbb480"
+    },
+    {
+      "path": "target/requalificacao-pos0227-20260922-01/final-readback-01/result.json",
+      "sha256": "a171c78e8753ae5fe29062e41992ff86f0ced89c38090c0c4e8d586022960b9a"
+    },
+    {
+      "path": "target/macrobloco-qualificacao-pacote-20260913-01/pos0227-p07-verify-01/result.json",
+      "sha256": "62089dd0eed22c002e6c00965cbf707f619355dfcffb232417100bce31004267"
+    },
+    {
+      "path": "target/macrobloco-qualificacao-pacote-20260913-01/pos0227-sequence-examples-01-author/result.json",
+      "sha256": "9efc336cff353f9606c7401a014c5175427c151d8997a986897e7f2640653af3"
+    },
+    {
+      "path": "target/macrobloco-qualificacao-pacote-20260913-01/pos0227-package-primary-01/result.json",
+      "sha256": "38ba9b4061f7aa8c54d6b26985bbc1a76beeced87d5f8b656dc810d1e7a944b3"
+    },
+    {
+      "path": "target/macrobloco-qualificacao-pacote-20260913-01/pos0227-package-reproduction-01/result.json",
+      "sha256": "38ba9b4061f7aa8c54d6b26985bbc1a76beeced87d5f8b656dc810d1e7a944b3"
+    },
+    {
+      "path": "target/macrobloco-qualificacao-pacote-20260913-01/pos0227-smoke-02/result.json",
+      "sha256": "a65b85f8c43fccea2e65ad41d52a5c7e7654c360c0abb36d02f011e3977ffa64"
+    },
+    {
+      "path": "target/macrobloco-qualificacao-pacote-20260913-01/pos0227-control-guards-01/result.json",
+      "sha256": "44a3dba77334b78cd2891ade2e0d5e6d854d67dd4fc84a97d55a546945af3539"
+    },
+    {
+      "path": "target/macrobloco-qualificacao-pacote-20260913-01/pos0227-extracted-guards-01/result.json",
+      "sha256": "c8047484ba0fff918ab4e7821181d1086643c90f6d5c4437792e367a744aa796"
+    },
+    {
+      "path": "target/macrobloco-qualificacao-pacote-20260913-01/pos0227-sequence-a-01/result.json",
+      "sha256": "1eddfe877654b7a1ace82092dec0e7edb9df9a4b22a7b3104a23965883c304ff"
+    },
+    {
+      "path": "target/macrobloco-qualificacao-pacote-20260913-01/pos0227-sequence-a-01/binding.json",
+      "sha256": "81c6cba352fc96dbf9124ceacb8fe9c0028cbe742d1b96d8262b70dae60e0d1d"
+    },
+    {
+      "path": "target/macrobloco-qualificacao-pacote-20260913-01/pos0227-sequence-b-01/result.json",
+      "sha256": "be3b3749939def7d193b751f63e3282e62da1e79a91e648311a24ec58682f1b3"
+    },
+    {
+      "path": "target/macrobloco-qualificacao-pacote-20260913-01/pos0227-sequence-b-01/binding.json",
+      "sha256": "31927dab3e4ccf1614c272fa97865accd2895effc6538b559581783585db73a0"
+    },
+    {
+      "path": "target/macrobloco-qualificacao-pacote-20260913-01/pos0227-value-01/result.json",
+      "sha256": "157a2f10ced385e61eaf125499d341c7511d772ec18fbb3c064932899612955e"
+    },
+    {
+      "path": "target/macrobloco-qualificacao-pacote-20260913-01/pos0227-value-01/binding.json",
+      "sha256": "3c5f2a43006980ba85ee49420e320745491e8c7e9c57fcfebd36e7931355caac"
+    },
+    {
+      "path": "target/macrobloco-qualificacao-pacote-20260913-01/pos0227-precision-01/result.json",
+      "sha256": "9a946cfdb030a365bf7b39238518ea467d718ebc5c2a32aefe1641aa07cef8d4"
+    },
+    {
+      "path": "target/macrobloco-qualificacao-pacote-20260913-01/pos0227-precision-01/binding.json",
+      "sha256": "39667a504c1958278e93200b19b7ffac1423bff72a3d030265c80d2403bbe24b"
+    },
+    {
+      "path": "target/macrobloco-qualificacao-pacote-20260913-01/pos0227-key-01/result.json",
+      "sha256": "0c0fb3ed675262ded623065c0ce96668f3800b143464a972ac14c2ae915a5603"
+    },
+    {
+      "path": "target/macrobloco-qualificacao-pacote-20260913-01/pos0227-key-01/binding.json",
+      "sha256": "6320c8a3fe678ed5ae6cbd87798f7a5942c27b2b336234cacbe32944e74982b4"
+    },
+    {
+      "path": "target/macrobloco-qualificacao-pacote-20260913-01/pos0227-multiplicity-01/result.json",
+      "sha256": "278ac07967c69903b91f668d5c2f19930cca2a36ec269c256a8c5171a469d79f"
+    },
+    {
+      "path": "target/macrobloco-qualificacao-pacote-20260913-01/pos0227-multiplicity-01/binding.json",
+      "sha256": "091f9a3ff5152c4700754c227008aa824265ec7269597e7250d6546708f75e58"
+    },
+    {
+      "path": "target/macrobloco-qualificacao-pacote-20260913-01/pos0227-old-reference-01/result.json",
+      "sha256": "a84ad2604737e6be0f67ab4d529c91322078988c4010d51a84af68b6afef30ca"
+    },
+    {
+      "path": "target/macrobloco-qualificacao-pacote-20260913-01/pos0227-old-reference-01/binding.json",
+      "sha256": "817b7b16836ce7f761e9e3d16bce3ee03ee53188e5c5414464e8f4fc2617547c"
+    },
+    {
+      "path": "target/macrobloco-qualificacao-pacote-20260913-01/pos0227-missing-user-01/result.json",
+      "sha256": "4e81ef74b4a53864e921bf097f9c9faac52460fbf2a7bf87c4cad801b4db8027"
+    },
+    {
+      "path": "target/macrobloco-qualificacao-pacote-20260913-01/pos0227-missing-user-01/binding.json",
+      "sha256": "4c25ff46a6868c934a9db4e8939891ddf601f44eff405992f238f08e4b39bf44"
+    },
+    {
+      "path": "target/macrobloco-qualificacao-pacote-20260913-01/pos0227-pin-drift-01/result.json",
+      "sha256": "439639f9f997d3be4fd04b070925a62b3887e4693a2e4a8d96895be4800d4051"
+    },
+    {
+      "path": "target/macrobloco-qualificacao-pacote-20260913-01/pos0227-pin-drift-01/binding.json",
+      "sha256": "720248616d6543d6624dad8c5b94d51266c1d8667094608e0cdf73be1e7f5778"
+    },
+    {
+      "path": "target/macrobloco-qualificacao-pacote-20260913-01/pos0227-command-01/result.json",
+      "sha256": "08ab613e0eb49d4a43ff66c349ccff9b675470c6de34f2d350e7f1abc50cd123"
+    },
+    {
+      "path": "target/macrobloco-qualificacao-pacote-20260913-01/pos0227-command-01/binding.json",
+      "sha256": "b100000905dbd310831a954d7228f0a395c1874f4045d081ac405f6dd60c5bf5"
+    },
+    {
+      "path": "target/macrobloco-qualificacao-pacote-20260913-01/package-guards-d9752024525d442d883b598786a83607/result.json",
+      "sha256": "8e28ed87f0786168177ecfd06bcfeebe7eb81989e53d944f6745bc2645422e29"
+    },
+    {
+      "path": "target/requalificacao-pos0227-20260922-01/package-guards-01/stdout.log",
+      "sha256": "f9dcdfb3d12b19d2506f8fdf711845d2642614a2c6eeb3648e6e4ce6b195d570"
+    },
+    {
+      "path": "target/requalificacao-pos0227-20260922-01/diagnosis.json",
+      "sha256": "70f2f14f8121bcc5db08933316db27266a171df5c8740891afc9259a70933775"
+    },
+    {
+      "path": "target/requalificacao-pos0227-20260922-01/host-during-01.json",
+      "sha256": "aab95ce3172a19fb00c9fac68ded425d75b292b371bda518fc72737ccc08488c"
+    },
+    {
+      "path": "target/requalificacao-pos0227-20260922-01/smoke-correction.json",
+      "sha256": "fafdc2527d741d6b19be78fa6613d7d9dbecccf86d68de17632e2c47bf8c727e"
+    },
+    {
+      "path": "target/requalificacao-pos0227-20260922-01/path-red.json",
+      "sha256": "b1c53587254831b50257303ab98cb8302a5dba0f689d9cf9b57429ea0fd2438d"
+    },
+    {
+      "path": "target/requalificacao-pos0227-20260922-01/path-green.json",
+      "sha256": "385bcb153c1f182abc7a2224a137866be12293999417c285920a01ed988bc09c"
+    },
+    {
+      "path": "target/requalificacao-pos0227-20260922-01/p08-result.json",
+      "sha256": "7b9609f4add255f030e4eb3665cf13f12c7255cc9747b4e7eb9aa1b47b0d97cb"
+    },
+    {
+      "path": "target/requalificacao-pos0227-20260922-01/p08-plan-02.json",
+      "sha256": "25c9ed495c55ba4a061f7fa69f00291863462dfddd50cebaea78b356bc0137f7"
+    },
+    {
+      "path": "target/requalificacao-pos0227-20260922-01/smoke-01/stderr.log",
+      "sha256": "449f6b019e33ea126643f78ac4bb6f9c309610413680518bba0be6ecd636bdf7"
+    },
+    {
+      "path": "target/requalificacao-pos0227-20260922-01/corrections.json",
+      "sha256": "f9350d8227b0e3ff14d6f5cb667da655d7143b1304563ab1e7b0df2a5f8b611b"
+    },
+    {
+      "path": "target/requalificacao-pos0227-20260922-01/master-before.log",
+      "sha256": "148bfbb90842d7164d180095866f89e4ab53cedb69aa9b94c933f638f5333bbd"
+    },
+    {
+      "path": "target/requalificacao-pos0227-20260922-01/master-after-p07.log",
+      "sha256": "148bfbb90842d7164d180095866f89e4ab53cedb69aa9b94c933f638f5333bbd"
+    },
+    {
+      "path": "target/requalificacao-pos0227-20260922-01/master-after-final.log",
+      "sha256": "148bfbb90842d7164d180095866f89e4ab53cedb69aa9b94c933f638f5333bbd"
+    },
+    {
+      "path": "target/requalificacao-pos0227-20260922-01/audit-before.log",
+      "sha256": "964c20f7dcae57344a5fa17049ae686a4af0fcfbd7cb110087f9f81e0855bdfb"
+    },
+    {
+      "path": "target/requalificacao-pos0227-20260922-01/audit-after-p07.log",
+      "sha256": "964c20f7dcae57344a5fa17049ae686a4af0fcfbd7cb110087f9f81e0855bdfb"
+    },
+    {
+      "path": "target/requalificacao-pos0227-20260922-01/audit-after-final.log",
+      "sha256": "964c20f7dcae57344a5fa17049ae686a4af0fcfbd7cb110087f9f81e0855bdfb"
+    },
+    {
+      "path": "target/requalificacao-pos0227-20260922-01/tables-before.log",
+      "sha256": "3e7eb885e665e829b77133b12d33fa6816ff41d09321aee2547f111342ef6e97"
+    },
+    {
+      "path": "target/requalificacao-pos0227-20260922-01/tables-after-p07.log",
+      "sha256": "3e7eb885e665e829b77133b12d33fa6816ff41d09321aee2547f111342ef6e97"
+    },
+    {
+      "path": "target/requalificacao-pos0227-20260922-01/tables-after-final.log",
+      "sha256": "3e7eb885e665e829b77133b12d33fa6816ff41d09321aee2547f111342ef6e97"
+    }
+  ]
+}

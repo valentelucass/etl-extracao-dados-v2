@@ -34,6 +34,8 @@ final class GraphQlTestSupport {
                     case USERS_SNAPSHOT -> GraphQlQueryParameters.enabledUsers();
                     case PICKS_TRANSITIONAL_SIDECAR ->
                             GraphQlQueryParameters.picksForDate(LocalDate.of(2026, 8, 30));
+                    case PICKS_TEMPORAL_REFERENCE ->
+                            GraphQlQueryParameters.picksTemporalForDate(LocalDate.of(2026, 8, 30));
                     case FREIGHTS_TRANSITIONAL_SIDECAR ->
                             GraphQlQueryParameters.freightsForWindow(
                                     LocalDate.of(2026, 8, 29), LocalDate.of(2026, 8, 30));
@@ -86,12 +88,14 @@ final class GraphQlTestSupport {
         final SourceContractRelease release =
                 operation == GraphQlReadOperation.USERS_SNAPSHOT
                         ? GraphQlFirstWaveContractCatalog.release(operation)
-                        : SourceContractRelease.create(
-                                ContractSourceKind.GRAPHQL,
-                                operation.documentReference(),
-                                operation.contractVersion(),
-                                GraphQlContractAdapter.metadata(operation),
-                                synthetic.response(operation, baselinePage));
+                        : operation == GraphQlReadOperation.PICKS_TEMPORAL_REFERENCE
+                                ? GraphQlColetasTemporalContractCatalog.release()
+                                : SourceContractRelease.create(
+                                        ContractSourceKind.GRAPHQL,
+                                        operation.documentReference(),
+                                        operation.contractVersion(),
+                                        GraphQlContractAdapter.metadata(operation),
+                                        synthetic.response(operation, baselinePage));
         final ContractCompatibilityPolicy policy =
                 ContractCompatibilityPolicy.create(
                         "graphql-policy-v1", release.contractFingerprint(), List.of());

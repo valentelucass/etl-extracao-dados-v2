@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "predecessorSha256": "143e07b35f0df031b3a7d0ed99edbc2a7ecedfa48331faddf04dd40c1200fe5d",
+  "paths": [
+    "README.md",
+    "STATES.md",
+    "docs/catalogos/macrobloco-qualificacao-pacote/PACKAGE-README.md",
+    "docs/continuidade/RETOMADA.md",
+    "docs/runbooks/trilha-de-chats-gpt-5-6.md",
+    "scripts/validation/ConstructionClosureSuccession.psm1",
+    "scripts/validation/New-QualificationPackage.ps1",
+    "scripts/validation/Test-ConstructionClosure.ps1",
+    "src/main/java/br/com/esl/etl/v2/bootstrap/AnalyticExpansionCapture.java",
+    "src/main/java/br/com/esl/etl/v2/bootstrap/AnalyticScenarioObserver.java",
+    "src/main/java/br/com/esl/etl/v2/bootstrap/AnalyticScenarioRuntime.java",
+    "src/main/java/br/com/esl/etl/v2/bootstrap/LocalAnalyticCollectionSweep.java",
+    "src/main/java/br/com/esl/etl/v2/bootstrap/LocalExpansionRuntime.java",
+    "src/main/java/br/com/esl/etl/v2/bootstrap/LocalRasterRuntime.java",
+    "src/main/java/br/com/esl/etl/v2/bootstrap/Main.java",
+    "src/main/java/br/com/esl/etl/v2/bootstrap/QualificationCaseExecutor.java",
+    "src/main/java/br/com/esl/etl/v2/bootstrap/QualificationScenarioVerifier.java",
+    "src/main/java/br/com/esl/etl/v2/bootstrap/QualificationSupervisor.java",
+    "src/main/java/br/com/esl/etl/v2/bootstrap/QualificationWorker.java",
+    "src/main/java/br/com/esl/etl/v2/plataforma/analitico/SyntheticCollectionSnapshot.java",
+    "src/main/java/br/com/esl/etl/v2/plataforma/fonte/dataexport/ExpansionSyntheticSource.java",
+    "src/main/java/br/com/esl/etl/v2/plataforma/qualificacao/QualificationCampaign.java",
+    "src/main/java/br/com/esl/etl/v2/plataforma/qualificacao/QualificationLineageEvidence.java",
+    "src/main/java/br/com/esl/etl/v2/plataforma/qualificacao/QualificationOracles.java",
+    "src/main/java/br/com/esl/etl/v2/plataforma/qualificacao/QualificationPackageContents.java",
+    "src/main/java/br/com/esl/etl/v2/plataforma/qualificacao/QualificationWireOracle.java"
+  ]
+}

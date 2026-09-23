@@ -10,6 +10,7 @@ import com.fasterxml.jackson.core.StreamReadConstraints;
 import com.fasterxml.jackson.core.StreamReadFeature;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.cfg.JsonNodeFeature;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 import java.io.IOException;
 
@@ -31,6 +32,9 @@ final class DataExportStrictJsonParser {
             JsonMapper.builder(STRICT_FACTORY)
                     .enable(StreamReadFeature.STRICT_DUPLICATE_DETECTION)
                     .enable(DeserializationFeature.FAIL_ON_TRAILING_TOKENS)
+                    // Preserve source decimal precision and scale before any domain conversion.
+                    .enable(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)
+                    .disable(JsonNodeFeature.STRIP_TRAILING_BIGDECIMAL_ZEROES)
                     .build();
 
     private DataExportStrictJsonParser() {}

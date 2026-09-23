@@ -1,0 +1,560 @@
+{
+  "version": "analytic-manifest-capture-v1",
+  "provenance": "FIXTURE_SINTETICA_EXPLICITA",
+  "source": "../etl-extracao-dados/src/main/java/br/com/extrator/dominio/dataexport/manifestos/ManifestoDTO.java",
+  "sourceSha256": "554d44fe98b85d9193609edecd2f958fc71d2883ea6ee93a58f126ebfd0623ba",
+  "fields": [
+    {
+      "name": "sequence_code",
+      "wire": "INTEGER",
+      "sourcePath": "/sequence_code",
+      "legacyJavaType": "Long"
+    },
+    {
+      "name": "mft_crn_psn_nickname",
+      "wire": "STRING",
+      "sourcePath": "/mft_crn_psn_nickname",
+      "legacyJavaType": "String"
+    },
+    {
+      "name": "created_at",
+      "wire": "STRING",
+      "sourcePath": "/created_at",
+      "legacyJavaType": "String"
+    },
+    {
+      "name": "departured_at",
+      "wire": "STRING",
+      "sourcePath": "/departured_at",
+      "legacyJavaType": "String"
+    },
+    {
+      "name": "closed_at",
+      "wire": "STRING",
+      "sourcePath": "/closed_at",
+      "legacyJavaType": "String"
+    },
+    {
+      "name": "finished_at",
+      "wire": "STRING",
+      "sourcePath": "/finished_at",
+      "legacyJavaType": "String"
+    },
+    {
+      "name": "status",
+      "wire": "STRING",
+      "sourcePath": "/status",
+      "legacyJavaType": "String"
+    },
+    {
+      "name": "mft_mfs_number",
+      "wire": "INTEGER",
+      "sourcePath": "/mft_mfs_number",
+      "legacyJavaType": "Integer"
+    },
+    {
+      "name": "mft_mfs_key",
+      "wire": "STRING",
+      "sourcePath": "/mft_mfs_key",
+      "legacyJavaType": "String"
+    },
+    {
+      "name": "mdfe_status",
+      "wire": "STRING",
+      "sourcePath": "/mdfe_status",
+      "legacyJavaType": "String"
+    },
+    {
+      "name": "mft_ape_name",
+      "wire": "STRING",
+      "sourcePath": "/mft_ape_name",
+      "legacyJavaType": "String"
+    },
+    {
+      "name": "mft_man_name",
+      "wire": "STRING",
+      "sourcePath": "/mft_man_name",
+      "legacyJavaType": "String"
+    },
+    {
+      "name": "mft_vie_license_plate",
+      "wire": "STRING",
+      "sourcePath": "/mft_vie_license_plate",
+      "legacyJavaType": "String"
+    },
+    {
+      "name": "mft_vie_vee_name",
+      "wire": "STRING",
+      "sourcePath": "/mft_vie_vee_name",
+      "legacyJavaType": "String"
+    },
+    {
+      "name": "mft_vie_onr_name",
+      "wire": "STRING",
+      "sourcePath": "/mft_vie_onr_name",
+      "legacyJavaType": "String"
+    },
+    {
+      "name": "mft_mdr_iil_name",
+      "wire": "STRING",
+      "sourcePath": "/mft_mdr_iil_name",
+      "legacyJavaType": "String"
+    },
+    {
+      "name": "vehicle_departure_km",
+      "wire": "INTEGER",
+      "sourcePath": "/vehicle_departure_km",
+      "legacyJavaType": "Integer"
+    },
+    {
+      "name": "closing_km",
+      "wire": "INTEGER",
+      "sourcePath": "/closing_km",
+      "legacyJavaType": "Integer"
+    },
+    {
+      "name": "traveled_km",
+      "wire": "INTEGER",
+      "sourcePath": "/traveled_km",
+      "legacyJavaType": "Integer"
+    },
+    {
+      "name": "invoices_count",
+      "wire": "INTEGER",
+      "sourcePath": "/invoices_count",
+      "legacyJavaType": "Integer"
+    },
+    {
+      "name": "invoices_volumes",
+      "wire": "INTEGER",
+      "sourcePath": "/invoices_volumes",
+      "legacyJavaType": "Integer"
+    },
+    {
+      "name": "invoices_weight",
+      "wire": "STRING",
+      "sourcePath": "/invoices_weight",
+      "legacyJavaType": "String"
+    },
+    {
+      "name": "total_taxed_weight",
+      "wire": "STRING",
+      "sourcePath": "/total_taxed_weight",
+      "legacyJavaType": "String"
+    },
+    {
+      "name": "total_cubic_volume",
+      "wire": "STRING",
+      "sourcePath": "/total_cubic_volume",
+      "legacyJavaType": "String"
+    },
+    {
+      "name": "invoices_value",
+      "wire": "STRING",
+      "sourcePath": "/invoices_value",
+      "legacyJavaType": "String"
+    },
+    {
+      "name": "manifest_freights_total",
+      "wire": "STRING",
+      "sourcePath": "/manifest_freights_total",
+      "legacyJavaType": "String"
+    },
+    {
+      "name": "mft_pfs_pck_sequence_code",
+      "wire": "INTEGER",
+      "sourcePath": "/mft_pfs_pck_sequence_code",
+      "legacyJavaType": "Long"
+    },
+    {
+      "name": "mft_cat_cot_number",
+      "wire": "STRING",
+      "sourcePath": "/mft_cat_cot_number",
+      "legacyJavaType": "String"
+    },
+    {
+      "name": "daily_subtotal",
+      "wire": "STRING",
+      "sourcePath": "/daily_subtotal",
+      "legacyJavaType": "String"
+    },
+    {
+      "name": "total_cost",
+      "wire": "STRING",
+      "sourcePath": "/total_cost",
+      "legacyJavaType": "String"
+    },
+    {
+      "name": "operational_expenses_total",
+      "wire": "STRING",
+      "sourcePath": "/operational_expenses_total",
+      "legacyJavaType": "String"
+    },
+    {
+      "name": "mft_a_t_inss_value",
+      "wire": "STRING",
+      "sourcePath": "/mft_a_t_inss_value",
+      "legacyJavaType": "String"
+    },
+    {
+      "name": "mft_a_t_sest_senat_value",
+      "wire": "STRING",
+      "sourcePath": "/mft_a_t_sest_senat_value",
+      "legacyJavaType": "String"
+    },
+    {
+      "name": "mft_a_t_ir_value",
+      "wire": "STRING",
+      "sourcePath": "/mft_a_t_ir_value",
+      "legacyJavaType": "String"
+    },
+    {
+      "name": "paying_total",
+      "wire": "STRING",
+      "sourcePath": "/paying_total",
+      "legacyJavaType": "String"
+    },
+    {
+      "name": "mft_uer_name",
+      "wire": "STRING",
+      "sourcePath": "/mft_uer_name",
+      "legacyJavaType": "String"
+    },
+    {
+      "name": "mft_aoe_rer_name",
+      "wire": "STRING",
+      "sourcePath": "/mft_aoe_rer_name",
+      "legacyJavaType": "String"
+    },
+    {
+      "name": "advance_subtotal",
+      "wire": "STRING",
+      "sourcePath": "/advance_subtotal",
+      "legacyJavaType": "String"
+    },
+    {
+      "name": "toll_subtotal",
+      "wire": "STRING",
+      "sourcePath": "/toll_subtotal",
+      "legacyJavaType": "String"
+    },
+    {
+      "name": "fleet_costs_subtotal",
+      "wire": "STRING",
+      "sourcePath": "/fleet_costs_subtotal",
+      "legacyJavaType": "String"
+    },
+    {
+      "name": "mft_s_n_svs_sge_pyr_nickname",
+      "wire": "STRING",
+      "sourcePath": "/mft_s_n_svs_sge_pyr_nickname",
+      "legacyJavaType": "String"
+    },
+    {
+      "name": "mft_s_n_svs_sge_sse_name",
+      "wire": "STRING",
+      "sourcePath": "/mft_s_n_svs_sge_sse_name",
+      "legacyJavaType": "String"
+    },
+    {
+      "name": "mobile_read_at",
+      "wire": "STRING",
+      "sourcePath": "/mobile_read_at",
+      "legacyJavaType": "String"
+    },
+    {
+      "name": "km",
+      "wire": "STRING",
+      "sourcePath": "/km",
+      "legacyJavaType": "String"
+    },
+    {
+      "name": "manual_km",
+      "wire": "BOOLEAN",
+      "sourcePath": "/manual_km",
+      "legacyJavaType": "Boolean"
+    },
+    {
+      "name": "generate_mdfe",
+      "wire": "BOOLEAN",
+      "sourcePath": "/generate_mdfe",
+      "legacyJavaType": "Boolean"
+    },
+    {
+      "name": "monitoring_request",
+      "wire": "BOOLEAN",
+      "sourcePath": "/monitoring_request",
+      "legacyJavaType": "Boolean"
+    },
+    {
+      "name": "delivery_manifest_items_count",
+      "wire": "INTEGER",
+      "sourcePath": "/delivery_manifest_items_count",
+      "legacyJavaType": "Integer"
+    },
+    {
+      "name": "transfer_manifest_items_count",
+      "wire": "INTEGER",
+      "sourcePath": "/transfer_manifest_items_count",
+      "legacyJavaType": "Integer"
+    },
+    {
+      "name": "pick_manifest_items_count",
+      "wire": "INTEGER",
+      "sourcePath": "/pick_manifest_items_count",
+      "legacyJavaType": "Integer"
+    },
+    {
+      "name": "dispatch_draft_manifest_items_count",
+      "wire": "INTEGER",
+      "sourcePath": "/dispatch_draft_manifest_items_count",
+      "legacyJavaType": "Integer"
+    },
+    {
+      "name": "consolidation_manifest_items_count",
+      "wire": "INTEGER",
+      "sourcePath": "/consolidation_manifest_items_count",
+      "legacyJavaType": "Integer"
+    },
+    {
+      "name": "reverse_pick_manifest_items_count",
+      "wire": "INTEGER",
+      "sourcePath": "/reverse_pick_manifest_items_count",
+      "legacyJavaType": "Integer"
+    },
+    {
+      "name": "manifest_items_count",
+      "wire": "INTEGER",
+      "sourcePath": "/manifest_items_count",
+      "legacyJavaType": "Integer"
+    },
+    {
+      "name": "finalized_manifest_items_count",
+      "wire": "INTEGER",
+      "sourcePath": "/finalized_manifest_items_count",
+      "legacyJavaType": "Integer"
+    },
+    {
+      "name": "uniq_destinations_count",
+      "wire": "INTEGER",
+      "sourcePath": "/uniq_destinations_count",
+      "legacyJavaType": "Integer"
+    },
+    {
+      "name": "contract_type",
+      "wire": "STRING",
+      "sourcePath": "/contract_type",
+      "legacyJavaType": "String"
+    },
+    {
+      "name": "mft_mdr_contract_type",
+      "wire": "STRING",
+      "sourcePath": "/mft_mdr_contract_type",
+      "legacyJavaType": "String"
+    },
+    {
+      "name": "calculation_type",
+      "wire": "STRING",
+      "sourcePath": "/calculation_type",
+      "legacyJavaType": "String"
+    },
+    {
+      "name": "cargo_type",
+      "wire": "STRING",
+      "sourcePath": "/cargo_type",
+      "legacyJavaType": "String"
+    },
+    {
+      "name": "calculated_pick_count",
+      "wire": "INTEGER",
+      "sourcePath": "/calculated_pick_count",
+      "legacyJavaType": "Integer"
+    },
+    {
+      "name": "calculated_delivery_count",
+      "wire": "INTEGER",
+      "sourcePath": "/calculated_delivery_count",
+      "legacyJavaType": "Integer"
+    },
+    {
+      "name": "calculated_dispatch_count",
+      "wire": "INTEGER",
+      "sourcePath": "/calculated_dispatch_count",
+      "legacyJavaType": "Integer"
+    },
+    {
+      "name": "calculated_consolidation_count",
+      "wire": "INTEGER",
+      "sourcePath": "/calculated_consolidation_count",
+      "legacyJavaType": "Integer"
+    },
+    {
+      "name": "calculated_reverse_pick_count",
+      "wire": "INTEGER",
+      "sourcePath": "/calculated_reverse_pick_count",
+      "legacyJavaType": "Integer"
+    },
+    {
+      "name": "freight_subtotal",
+      "wire": "STRING",
+      "sourcePath": "/freight_subtotal",
+      "legacyJavaType": "String"
+    },
+    {
+      "name": "fuel_subtotal",
+      "wire": "STRING",
+      "sourcePath": "/fuel_subtotal",
+      "legacyJavaType": "String"
+    },
+    {
+      "name": "pick_subtotal",
+      "wire": "STRING",
+      "sourcePath": "/pick_subtotal",
+      "legacyJavaType": "String"
+    },
+    {
+      "name": "delivery_subtotal",
+      "wire": "STRING",
+      "sourcePath": "/delivery_subtotal",
+      "legacyJavaType": "String"
+    },
+    {
+      "name": "dispatch_subtotal",
+      "wire": "STRING",
+      "sourcePath": "/dispatch_subtotal",
+      "legacyJavaType": "String"
+    },
+    {
+      "name": "consolidation_subtotal",
+      "wire": "STRING",
+      "sourcePath": "/consolidation_subtotal",
+      "legacyJavaType": "String"
+    },
+    {
+      "name": "reverse_pick_subtotal",
+      "wire": "STRING",
+      "sourcePath": "/reverse_pick_subtotal",
+      "legacyJavaType": "String"
+    },
+    {
+      "name": "additionals_subtotal",
+      "wire": "STRING",
+      "sourcePath": "/additionals_subtotal",
+      "legacyJavaType": "String"
+    },
+    {
+      "name": "discounts_subtotal",
+      "wire": "STRING",
+      "sourcePath": "/discounts_subtotal",
+      "legacyJavaType": "String"
+    },
+    {
+      "name": "discount_value",
+      "wire": "STRING",
+      "sourcePath": "/discount_value",
+      "legacyJavaType": "String"
+    },
+    {
+      "name": "driver_services_total",
+      "wire": "STRING",
+      "sourcePath": "/driver_services_total",
+      "legacyJavaType": "String"
+    },
+    {
+      "name": "mft_aoe_comments",
+      "wire": "STRING",
+      "sourcePath": "/mft_aoe_comments",
+      "legacyJavaType": "String"
+    },
+    {
+      "name": "mft_cat_cot_status",
+      "wire": "STRING",
+      "sourcePath": "/mft_cat_cot_status",
+      "legacyJavaType": "String"
+    },
+    {
+      "name": "mft_iks_id",
+      "wire": "STRING",
+      "sourcePath": "/mft_iks_id",
+      "legacyJavaType": "String"
+    },
+    {
+      "name": "mft_s_n_sequence_code",
+      "wire": "STRING",
+      "sourcePath": "/mft_s_n_sequence_code",
+      "legacyJavaType": "String"
+    },
+    {
+      "name": "mft_s_n_starting_at",
+      "wire": "STRING",
+      "sourcePath": "/mft_s_n_starting_at",
+      "legacyJavaType": "String"
+    },
+    {
+      "name": "mft_s_n_ending_at",
+      "wire": "STRING",
+      "sourcePath": "/mft_s_n_ending_at",
+      "legacyJavaType": "String"
+    },
+    {
+      "name": "mft_tl1_license_plate",
+      "wire": "STRING",
+      "sourcePath": "/mft_tl1_license_plate",
+      "legacyJavaType": "String"
+    },
+    {
+      "name": "mft_tl1_weight_capacity",
+      "wire": "STRING",
+      "sourcePath": "/mft_tl1_weight_capacity",
+      "legacyJavaType": "String"
+    },
+    {
+      "name": "mft_tl2_license_plate",
+      "wire": "STRING",
+      "sourcePath": "/mft_tl2_license_plate",
+      "legacyJavaType": "String"
+    },
+    {
+      "name": "mft_tl2_weight_capacity",
+      "wire": "STRING",
+      "sourcePath": "/mft_tl2_weight_capacity",
+      "legacyJavaType": "String"
+    },
+    {
+      "name": "mft_vie_weight_capacity",
+      "wire": "STRING",
+      "sourcePath": "/mft_vie_weight_capacity",
+      "legacyJavaType": "String"
+    },
+    {
+      "name": "mft_vie_cubic_weight",
+      "wire": "STRING",
+      "sourcePath": "/mft_vie_cubic_weight",
+      "legacyJavaType": "String"
+    },
+    {
+      "name": "operational_comments",
+      "wire": "STRING",
+      "sourcePath": "/operational_comments",
+      "legacyJavaType": "String"
+    },
+    {
+      "name": "closing_comments",
+      "wire": "STRING",
+      "sourcePath": "/closing_comments",
+      "legacyJavaType": "String"
+    },
+    {
+      "name": "mft_mte_unloading_recipient_names",
+      "wire": "ARRAY",
+      "sourcePath": "/mft_mte_unloading_recipient_names",
+      "legacyJavaType": "otherProperties"
+    },
+    {
+      "name": "mft_mte_delivery_region_names",
+      "wire": "ARRAY",
+      "sourcePath": "/mft_mte_delivery_region_names",
+      "legacyJavaType": "otherProperties"
+    }
+  ]
+}

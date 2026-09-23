@@ -1,5 +1,5 @@
 {
-  "catalog_version": "2026-09-01.v2-035b-usuarios-followup",
+  "catalog_version": "2026-09-10.pos-b60-gates",
   "roadmap_task": "V2-048a",
   "generator": "scripts/validation/Build-CutoverTopologyCatalog.ps1",
   "powershell_minimum_version": "7.0",
@@ -30,7 +30,7 @@
       "pub",
       "recon"
     ],
-    "grant_allowlist_triplets": 26,
+    "grant_allowlist_triplets": 41,
     "entity_sources": 11,
     "table_scripts": 35,
     "logical_table_responsibilities": 34,
@@ -46,8 +46,8 @@
   },
   "schema_foundation_contract": {
     "roadmap_task": "V2-019",
-    "manifest_version": 3,
-    "manifest_sha256": "55147fc05773ee08e8581f849beb407921db9cabf7ff38c6fae5b93fe3718bb0",
+    "manifest_version": 5,
+    "manifest_sha256": "aa8d28a83a70c5bab09898efe9cd6b2b982d6b580e1634e8ddac107e62ebb7e4",
     "schema_owner": "v2_schema_owner",
     "grant_publisher": "dbo.usp_publish_v2_procedure_grant",
     "role_names": [

@@ -1,0 +1,272 @@
+{
+  "passed": true,
+  "sourceCalls": 0,
+  "newAcceptances": 0,
+  "syntheticDomainCommit": false,
+  "rollbackConfirmed": true,
+  "schemaVersion": 102,
+  "unit": {
+    "classes": 235,
+    "tests": 2080,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 4
+  },
+  "integration": {
+    "classes": 102,
+    "tests": 481,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "testIdentityReconciliation": {
+    "passed": true,
+    "path": "target/macrobloco-cadeia-integral-20260914-01/test-ids-final-02/result.json",
+    "sha256": "c39db86ae7425d46fe6961ef4cb30b0dca045736d4922cda92895d8d66b73052",
+    "removed": 0
+  },
+  "package": {
+    "path": "target/macrobloco-cadeia-integral-20260914-01/runtime-package-01/result.json",
+    "sha256": "a6c8dad5e49f6706fa88305e7b81267359e68af336a332c256f97ea6ecbb5de5",
+    "archiveSha256": "1722dc94640c711df6865246574331f959fa5f7a3f8fe1592dd74e87fba977a0",
+    "manifestSha256": "b37f183ee48d2677ad9474e563967654e38126a15c15f25bcd984174a9846db6",
+    "jarSha256": "cf9f8be56bb8a60f82f6443cb0c807a3114bf03b0169029c9c3fe199923a9489"
+  },
+  "jarCases": [
+    {
+      "id": "set-a-complete",
+      "passed": true,
+      "exit": 0,
+      "expectedExit": 0,
+      "layer": "DISTRIBUTED_JAR_EXTRACTED_PROCESS",
+      "rollbackConfirmed": true,
+      "comparisonsPassed": 19,
+      "factGrainsProved": true,
+      "previews": 33,
+      "previewMatrixProved": true,
+      "elapsedMilliseconds": 33469,
+      "jarSha256": "cf9f8be56bb8a60f82f6443cb0c807a3114bf03b0169029c9c3fe199923a9489",
+      "inputSha256": "3d91f8ca3ec0f4a82ced63b2b4484aefbf6835fc0af7096bd158f678ae56fb48",
+      "oracleSha256": "45bbcb11df33a0ba5bc514b9892a71c2d00f92ad00980ebfab5668c91fde54ac",
+      "evidence": [
+        {
+          "path": "target/macrobloco-cadeia-integral-20260914-01/jar-set-a-01/result.json",
+          "sha256": "0dc17574e7111161504aebea05d156a5fe4d510cb30b562da65b54a6cd5ace88"
+        },
+        {
+          "path": "target/macrobloco-cadeia-integral-20260914-01/jar-set-a-01/binding.json",
+          "sha256": "416a72e8547050d1674b7fc4b8081b9148185bdef42eda4a089c752dc9112503"
+        },
+        {
+          "path": "target/macrobloco-cadeia-integral-20260914-01/jar-set-a-01/stdout.log",
+          "sha256": "0fa9bf268633fd2450578f8a06579943691e96cfc547a252f016a5d0da323377"
+        },
+        {
+          "path": "target/macrobloco-cadeia-integral-20260914-01/jar-set-a-01/before.log",
+          "sha256": "83fb98ebfe858dcc6290012029184d9e33664482303d839342c8012ed6e32797"
+        },
+        {
+          "path": "target/macrobloco-cadeia-integral-20260914-01/jar-set-a-01/after.log",
+          "sha256": "83fb98ebfe858dcc6290012029184d9e33664482303d839342c8012ed6e32797"
+        }
+      ]
+    },
+    {
+      "id": "set-b-complete",
+      "passed": true,
+      "exit": 0,
+      "expectedExit": 0,
+      "layer": "DISTRIBUTED_JAR_EXTRACTED_PROCESS",
+      "rollbackConfirmed": true,
+      "comparisonsPassed": 19,
+      "factGrainsProved": true,
+      "previews": 33,
+      "previewMatrixProved": true,
+      "elapsedMilliseconds": 75735,
+      "jarSha256": "cf9f8be56bb8a60f82f6443cb0c807a3114bf03b0169029c9c3fe199923a9489",
+      "inputSha256": "3503ed1aed9be80485c788b45ed686b64c28f370e06d469c2c87c3fd0e48b034",
+      "oracleSha256": "daf22bd967115be75400ab24264442e3615e3a832903f5eadaa882bf8ba51be8",
+      "evidence": [
+        {
+          "path": "target/macrobloco-cadeia-integral-20260914-01/jar-set-b-01/result.json",
+          "sha256": "e70214be4f37599bd85fbcee2d6839206e702739924dfbcca49ca4582ba9ba6f"
+        },
+        {
+          "path": "target/macrobloco-cadeia-integral-20260914-01/jar-set-b-01/binding.json",
+          "sha256": "45dd58bbaad7154e1812608ce4d89b61f376f42a90471622d92a2ec2241b80dc"
+        },
+        {
+          "path": "target/macrobloco-cadeia-integral-20260914-01/jar-set-b-01/stdout.log",
+          "sha256": "96634f72a834355f6ca3ee6ac58c52931d32605b42066cd17f2baf216ea2df3b"
+        },
+        {
+          "path": "target/macrobloco-cadeia-integral-20260914-01/jar-set-b-01/before.log",
+          "sha256": "83fb98ebfe858dcc6290012029184d9e33664482303d839342c8012ed6e32797"
+        },
+        {
+          "path": "target/macrobloco-cadeia-integral-20260914-01/jar-set-b-01/after.log",
+          "sha256": "83fb98ebfe858dcc6290012029184d9e33664482303d839342c8012ed6e32797"
+        }
+      ]
+    },
+    {
+      "id": "missing-user",
+      "passed": true,
+      "exit": 20,
+      "expectedExit": 20,
+      "layer": "DISTRIBUTED_JAR_EXTRACTED_PROCESS",
+      "rollbackConfirmed": true,
+      "comparisonsPassed": 0,
+      "factGrainsProved": false,
+      "previews": 0,
+      "previewMatrixProved": false,
+      "elapsedMilliseconds": 904,
+      "jarSha256": "cf9f8be56bb8a60f82f6443cb0c807a3114bf03b0169029c9c3fe199923a9489",
+      "inputSha256": "039742500e466bb781e55f34466bbbb8c70065352ce25ddbeb0c0106d7431903",
+      "oracleSha256": "5f9e670e5c793f87bd2ad904e2189ba672b0a1e04cbd4810773e4511f7405609",
+      "evidence": [
+        {
+          "path": "target/macrobloco-cadeia-integral-20260914-01/jar-missing-user-01/result.json",
+          "sha256": "4154abb2924b793ce90f3d75cc4e54a3b58c7f0fbf24463d58ac2f9199b46fbd"
+        },
+        {
+          "path": "target/macrobloco-cadeia-integral-20260914-01/jar-missing-user-01/binding.json",
+          "sha256": "05eb3159d03da27cecfd45c39df87252c714f69d7bdff1d6a627904ce5c355c7"
+        },
+        {
+          "path": "target/macrobloco-cadeia-integral-20260914-01/jar-missing-user-01/stdout.log",
+          "sha256": "33d69cab01f01f6197ba5c5811db701a5344b8f6b80c3689cd6fa3de08523ab1"
+        },
+        {
+          "path": "target/macrobloco-cadeia-integral-20260914-01/jar-missing-user-01/before.log",
+          "sha256": "83fb98ebfe858dcc6290012029184d9e33664482303d839342c8012ed6e32797"
+        },
+        {
+          "path": "target/macrobloco-cadeia-integral-20260914-01/jar-missing-user-01/after.log",
+          "sha256": "83fb98ebfe858dcc6290012029184d9e33664482303d839342c8012ed6e32797"
+        }
+      ]
+    },
+    {
+      "id": "oracle-value",
+      "passed": true,
+      "exit": 40,
+      "expectedExit": 40,
+      "layer": "DISTRIBUTED_JAR_EXTRACTED_PROCESS",
+      "rollbackConfirmed": true,
+      "comparisonsPassed": 18,
+      "factGrainsProved": true,
+      "previews": 0,
+      "previewMatrixProved": false,
+      "elapsedMilliseconds": 30641,
+      "jarSha256": "cf9f8be56bb8a60f82f6443cb0c807a3114bf03b0169029c9c3fe199923a9489",
+      "inputSha256": "3d91f8ca3ec0f4a82ced63b2b4484aefbf6835fc0af7096bd158f678ae56fb48",
+      "oracleSha256": "64f855949a04c8a0b08d4f36e08b120b1198a767abae7a46205b9e697b29fdfb",
+      "evidence": [
+        {
+          "path": "target/macrobloco-cadeia-integral-20260914-01/jar-oracle-value-01/result.json",
+          "sha256": "3bbad9820f31b2c049d10a2906c5c5d2fe99a751f617c716f092b278838e3c34"
+        },
+        {
+          "path": "target/macrobloco-cadeia-integral-20260914-01/jar-oracle-value-01/binding.json",
+          "sha256": "87404f578242bb0ee8454db0cdba52c04442024ce5328f5fb79bccf55ca48292"
+        },
+        {
+          "path": "target/macrobloco-cadeia-integral-20260914-01/jar-oracle-value-01/stdout.log",
+          "sha256": "360e3eaac548f9422447ac842db779cfd73879fcaed34f3b2942586c2dcd9f83"
+        },
+        {
+          "path": "target/macrobloco-cadeia-integral-20260914-01/jar-oracle-value-01/before.log",
+          "sha256": "83fb98ebfe858dcc6290012029184d9e33664482303d839342c8012ed6e32797"
+        },
+        {
+          "path": "target/macrobloco-cadeia-integral-20260914-01/jar-oracle-value-01/after.log",
+          "sha256": "83fb98ebfe858dcc6290012029184d9e33664482303d839342c8012ed6e32797"
+        }
+      ]
+    },
+    {
+      "id": "missing-loc-target",
+      "passed": true,
+      "exit": 40,
+      "expectedExit": 40,
+      "layer": "DISTRIBUTED_JAR_EXTRACTED_PROCESS",
+      "rollbackConfirmed": true,
+      "comparisonsPassed": 18,
+      "factGrainsProved": true,
+      "previews": 0,
+      "previewMatrixProved": false,
+      "elapsedMilliseconds": 20853,
+      "jarSha256": "cf9f8be56bb8a60f82f6443cb0c807a3114bf03b0169029c9c3fe199923a9489",
+      "inputSha256": "5d39048420ad5d360562d23a50fa9a3c4aa55b7e2f829a13f16cbc138d993b64",
+      "oracleSha256": "2d582a689e24134e8ec9d0573c7c06b3e78a86c67e460ccfbe2702d5af9f6f4b",
+      "evidence": [
+        {
+          "path": "target/macrobloco-cadeia-integral-20260914-01/jar-missing-loc-01/result.json",
+          "sha256": "dc7184a24e658ba4b43dcf79323fbadbfccd7f8e0389a34d04817c6f811771c2"
+        },
+        {
+          "path": "target/macrobloco-cadeia-integral-20260914-01/jar-missing-loc-01/binding.json",
+          "sha256": "aa09c13fa8fa4b2adf29b615d18423a1cb152bd63ca655e1f893dac9c1312014"
+        },
+        {
+          "path": "target/macrobloco-cadeia-integral-20260914-01/jar-missing-loc-01/stdout.log",
+          "sha256": "7964c5af347bfcb1eabfdcb400b7751ccc99fd04c225572602331fed917abf62"
+        },
+        {
+          "path": "target/macrobloco-cadeia-integral-20260914-01/jar-missing-loc-01/before.log",
+          "sha256": "83fb98ebfe858dcc6290012029184d9e33664482303d839342c8012ed6e32797"
+        },
+        {
+          "path": "target/macrobloco-cadeia-integral-20260914-01/jar-missing-loc-01/after.log",
+          "sha256": "83fb98ebfe858dcc6290012029184d9e33664482303d839342c8012ed6e32797"
+        }
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "path": "target/macrobloco-cadeia-integral-20260914-01/verify-integral-02/result.json",
+      "sha256": "ce31304971044604dbbfc7e609c35c45e229eba95fd20df44e8c7e59e950dd06"
+    },
+    {
+      "path": "target/macrobloco-cadeia-integral-20260914-01/verify-integral-02/inputs.json",
+      "sha256": "974523257fc9dc1e814af64b1c6121c3ba61a01e3d701230b80a8258ca58f40b"
+    },
+    {
+      "path": "target/macrobloco-cadeia-integral-20260914-01/test-ids-final-02/result.json",
+      "sha256": "c39db86ae7425d46fe6961ef4cb30b0dca045736d4922cda92895d8d66b73052"
+    },
+    {
+      "path": "target/macrobloco-cadeia-integral-20260914-01/runtime-package-01/qualified-source-inventory.json",
+      "sha256": "bf8f27722ef230080d33c26531d26a75e2ab04bb447dcc2e610d82bc199d7c50"
+    },
+    {
+      "path": "target/macrobloco-cadeia-integral-20260914-01/runtime-package-01/result.json",
+      "sha256": "a6c8dad5e49f6706fa88305e7b81267359e68af336a332c256f97ea6ecbb5de5"
+    },
+    {
+      "path": "target/macrobloco-cadeia-integral-20260914-01/proof-input-index.json",
+      "sha256": "a7701e85c6486a0868dacb34a004efd1f078b061343533e15caf4f7dd149f2f9"
+    },
+    {
+      "path": "src/test/java/br/com/esl/etl/v2/bootstrap/IntegralArtifactFixtures.java",
+      "sha256": "eb69126763605b5ec13de7ddd2379d327da9190b20658f4f638106225110bf89"
+    },
+    {
+      "path": "src/test/java/br/com/esl/etl/v2/bootstrap/IntegralArtifactOracleFixtures.java",
+      "sha256": "93e32d81f1ba5e989f17e0bdfd8cb6e0b89e44692bc63f8236fcb9593d0dadb6"
+    },
+    {
+      "path": "docs/catalogos/cadeia-integral-por-contratos/PROPAGACAO.md",
+      "sha256": "7534100452017eaea26f1659f1ae28987329d31c44a9e4832aff86fe0b1113f4"
+    }
+  ],
+  "limits": [
+    "V2-041/G01 held",
+    "G01-G08 external dependent portions retained",
+    "No V1 execution",
+    "No productive qualification/deployment/cutover",
+    "Final canonical diff/scanner/succession are bound in the external final seal"
+  ]
+}

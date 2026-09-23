@@ -70,6 +70,7 @@ class Contract4924DataExportProbeTest {
             serverSocket.setSoTimeout(5_000);
             final ExecutorService executor = Executors.newSingleThreadExecutor();
             try {
+                final Contract4924DataExportProbe probe = probe(serverSocket.getLocalPort(), 2);
                 final Future<List<String>> requests =
                         executor.submit(
                                 () ->
@@ -77,7 +78,6 @@ class Contract4924DataExportProbeTest {
                                                 serverSocket,
                                                 List.of(infoResponse(), dataResponse()),
                                                 List.of("200 OK", "200 OK")));
-                final Contract4924DataExportProbe probe = probe(serverSocket.getLocalPort(), 2);
 
                 final Contract4924TemplateInfo info = probe.fetchInfo();
                 final Contract4924PageObservation page = probe.fetchClosedWindowSample();
@@ -112,6 +112,7 @@ class Contract4924DataExportProbeTest {
             serverSocket.setSoTimeout(5_000);
             final ExecutorService executor = Executors.newSingleThreadExecutor();
             try {
+                final Contract4924DataExportProbe probe = probe(serverSocket.getLocalPort(), 2);
                 final Future<List<String>> requests =
                         executor.submit(
                                 () ->
@@ -119,7 +120,6 @@ class Contract4924DataExportProbeTest {
                                                 serverSocket,
                                                 List.of("{}"),
                                                 List.of("405 Method Not Allowed")));
-                final Contract4924DataExportProbe probe = probe(serverSocket.getLocalPort(), 2);
 
                 assertThrows(ContractRemoteCallException.class, probe::fetchClosedWindowSample);
                 assertEquals(1, requests.get(5, TimeUnit.SECONDS).size());
@@ -136,6 +136,12 @@ class Contract4924DataExportProbeTest {
             serverSocket.setSoTimeout(5_000);
             final ExecutorService executor = Executors.newSingleThreadExecutor();
             try {
+                final Contract4924DataExportProbe probe =
+                        probe(
+                                serverSocket.getLocalPort(),
+                                1,
+                                new ContractRunGuard(),
+                                DataExportTransport.GET_WITH_QUERY);
                 final Future<List<String>> requests =
                         executor.submit(
                                 () ->
@@ -143,12 +149,6 @@ class Contract4924DataExportProbeTest {
                                                 serverSocket,
                                                 List.of("{\"data\":[]}"),
                                                 List.of("200 OK")));
-                final Contract4924DataExportProbe probe =
-                        probe(
-                                serverSocket.getLocalPort(),
-                                1,
-                                new ContractRunGuard(),
-                                DataExportTransport.GET_WITH_QUERY);
 
                 probe.fetchClosedWindowSample();
 
@@ -169,6 +169,9 @@ class Contract4924DataExportProbeTest {
             serverSocket.setSoTimeout(5_000);
             final ExecutorService executor = Executors.newSingleThreadExecutor();
             try {
+                final ContractRunGuard runGuard = new ContractRunGuard();
+                final Contract4924DataExportProbe probe =
+                        probe(serverSocket.getLocalPort(), 2, runGuard);
                 final Future<List<String>> requests =
                         executor.submit(
                                 () ->
@@ -177,9 +180,6 @@ class Contract4924DataExportProbeTest {
                                                 List.of("{}"),
                                                 List.of("429 Too Many Requests"),
                                                 List.of(Optional.of("5"))));
-                final ContractRunGuard runGuard = new ContractRunGuard();
-                final Contract4924DataExportProbe probe =
-                        probe(serverSocket.getLocalPort(), 2, runGuard);
 
                 assertThrows(ContractRateLimitExceededException.class, probe::fetchInfo);
                 assertTrue(runGuard.isStopped());
@@ -197,6 +197,7 @@ class Contract4924DataExportProbeTest {
             serverSocket.setSoTimeout(5_000);
             final ExecutorService executor = Executors.newSingleThreadExecutor();
             try {
+                final Contract4924DataExportProbe probe = probe(serverSocket.getLocalPort(), 1);
                 final Future<List<String>> requests =
                         executor.submit(
                                 () ->
@@ -204,7 +205,6 @@ class Contract4924DataExportProbeTest {
                                                 serverSocket,
                                                 List.of("{\"fields\":[],\"filters\":[]}"),
                                                 List.of("200 OK")));
-                final Contract4924DataExportProbe probe = probe(serverSocket.getLocalPort(), 1);
 
                 probe.fetchInfo();
                 assertThrows(
@@ -223,6 +223,7 @@ class Contract4924DataExportProbeTest {
             serverSocket.setSoTimeout(5_000);
             final ExecutorService executor = Executors.newSingleThreadExecutor();
             try {
+                final Contract4924DataExportProbe probe = probe(serverSocket.getLocalPort(), 2);
                 final Future<List<String>> requests =
                         executor.submit(
                                 () ->
@@ -230,7 +231,6 @@ class Contract4924DataExportProbeTest {
                                                 serverSocket,
                                                 List.of("{\"fields\":[],\"filters\":[]}"),
                                                 List.of("200 OK")));
-                final Contract4924DataExportProbe probe = probe(serverSocket.getLocalPort(), 2);
 
                 probe.fetchInfo();
                 assertThrows(ContractRemoteCallException.class, probe::fetchInfo);
@@ -248,6 +248,7 @@ class Contract4924DataExportProbeTest {
             serverSocket.setSoTimeout(5_000);
             final ExecutorService executor = Executors.newSingleThreadExecutor();
             try {
+                final Contract4924DataExportProbe probe = probe(serverSocket.getLocalPort(), 1);
                 final Future<List<String>> requests =
                         executor.submit(
                                 () ->
@@ -255,7 +256,6 @@ class Contract4924DataExportProbeTest {
                                                 serverSocket,
                                                 List.of("remote-payload-900001"),
                                                 List.of("200 OK")));
-                final Contract4924DataExportProbe probe = probe(serverSocket.getLocalPort(), 1);
 
                 final ContractRemoteCallException exception =
                         assertThrows(ContractRemoteCallException.class, probe::fetchInfo);

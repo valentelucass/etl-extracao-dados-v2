@@ -2,6 +2,7 @@ package br.com.esl.etl.v2.plataforma.configuracao;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -19,6 +20,8 @@ import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 class RuntimeConfigurationFactoryTest {
 
@@ -26,6 +29,50 @@ class RuntimeConfigurationFactoryTest {
             Clock.fixed(Instant.parse("2026-08-30T15:00:00Z"), ZoneOffset.UTC);
 
     @TempDir Path temporaryDirectory;
+
+    @ParameterizedTest
+    @ValueSource(strings = {"uri", "zone", "transport", "number", "environment", "target"})
+    void malformedTypedValuesDoNotEscapeThroughExceptionCauses(final String kind) throws Exception {
+        final String sensitive = "synthetic-sensitive-value";
+        final String enabled = enabledDataExportConfiguration(10, 1048576, 1, 0, 1000);
+        final String configuration =
+                switch (kind) {
+                    case "uri" ->
+                            enabled.replace("https://dataexport.example.test", ":" + sensitive);
+                    case "zone" -> safeConfiguration().replace("America/Sao_Paulo", sensitive);
+                    case "transport" -> enabled.replace("GET_WITH_QUERY", sensitive);
+                    case "number" ->
+                            enabled.replace("timeout-seconds=10", "timeout-seconds=" + sensitive);
+                    case "environment" -> safeConfiguration().replace("LOCAL_SHADOW", sensitive);
+                    case "target" ->
+                            safeConfiguration()
+                                    + "shadow.audit.enabled=true\nshadow.target-kind="
+                                    + sensitive
+                                    + "\nshadow.jdbc-url=jdbc:sqlserver://localhost;"
+                                    + "databaseName=ETL_SISTEMA_V2_SHADOW;integratedSecurity=true";
+                    default -> throw new IllegalArgumentException("SYNTHETIC_CONFIGURATION_KIND");
+                };
+
+        final var failure =
+                assertThrows(
+                        IllegalArgumentException.class,
+                        () -> load(configuration, new Properties(), Map.of()));
+
+        final String expected =
+                switch (kind) {
+                    case "uri" -> "Configuração de URL base do Data Export inválida.";
+                    case "zone" -> "Configuração de timezone de negócio inválida.";
+                    case "transport" -> "Configuração de transporte do Data Export inválida.";
+                    case "number" -> "Configuração numérica inválida.";
+                    case "environment" -> "Ambiente de execução V2 inválido ou não autorizado.";
+                    case "target" -> "Configuração de tipo de alvo de sombra inválida.";
+                    default -> throw new IllegalArgumentException("SYNTHETIC_CONFIGURATION_KIND");
+                };
+        assertEquals(expected, failure.getMessage());
+        assertNull(failure.getCause());
+        assertEquals(0, failure.getSuppressed().length);
+        assertFalse(failure.toString().contains(sensitive));
+    }
 
     @Test
     void loadsAnExplicitSafeConfigurationAndInjectsTheClock() throws Exception {

@@ -43,6 +43,7 @@ final class GraphQlHttpExecutor {
     private final EslRequestGovernor.Cycle.Workload workload;
     private final Clock clock;
     private final GraphQlJitterSource jitterSource;
+    private final GraphQlHttpAttemptObserver attempts;
 
     GraphQlHttpExecutor(
             final HttpClient httpClient,
@@ -50,12 +51,29 @@ final class GraphQlHttpExecutor {
             final EslRequestGovernor.Cycle.Workload workload,
             final Clock clock,
             final GraphQlJitterSource jitterSource) {
+        this(
+                httpClient,
+                properties,
+                workload,
+                clock,
+                jitterSource,
+                GraphQlHttpAttemptObserver.noop());
+    }
+
+    GraphQlHttpExecutor(
+            final HttpClient httpClient,
+            final GraphQlProperties properties,
+            final EslRequestGovernor.Cycle.Workload workload,
+            final Clock clock,
+            final GraphQlJitterSource jitterSource,
+            final GraphQlHttpAttemptObserver attempts) {
         this.httpClient = Objects.requireNonNull(httpClient, "HttpClient é obrigatório.");
         this.properties = Objects.requireNonNull(properties, "As propriedades são obrigatórias.");
         this.workload = Objects.requireNonNull(workload, "O workload ESL é obrigatório.");
         this.clock = Objects.requireNonNull(clock, "O relógio é obrigatório.");
         this.jitterSource =
                 Objects.requireNonNull(jitterSource, "A fonte de jitter é obrigatória.");
+        this.attempts = Objects.requireNonNull(attempts, "O observador HTTP é obrigatório.");
     }
 
     GraphQlHttpResponse execute(
@@ -138,6 +156,7 @@ final class GraphQlHttpExecutor {
             throws IOException {
         permit.checkpoint();
         final CompletableFuture<HttpResponse<byte[]>> future;
+        attempts.beforeAttempt(operation);
         try {
             future =
                     httpClient.sendAsync(

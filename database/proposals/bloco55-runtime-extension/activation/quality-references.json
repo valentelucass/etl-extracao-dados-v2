@@ -1,0 +1,26 @@
+[
+  {
+    "template": "MANIFESTOS",
+    "mode": "BACKFILL",
+    "version": "bloco55-manifestos-backfill-v1",
+    "fingerprint": "88127ab8dbc7e2c3c81b866362da1a13e7e8ac4af75b922628bd8abdea39c722",
+    "scope": "7b8f6f9c3f5f851230de377156940ebf4c804c28449e3b83987795089571e241",
+    "effectiveFrom": "2026-09-08T00:00:00.123"
+  },
+  {
+    "template": "COTACOES",
+    "mode": "BACKFILL",
+    "version": "bloco55-cotacoes-backfill-v1",
+    "fingerprint": "efbb2d1e09ab7f3d083072809f5bd97795f5c059ea3348309936b1909a75d0aa",
+    "scope": "5052e3801fe9bb121f3636a16894f82914a576cfd8c3982429956e728f6af887",
+    "effectiveFrom": "2026-09-08T00:00:00.123"
+  },
+  {
+    "template": "LOCALIZACAO_CARGAS",
+    "mode": "BACKFILL",
+    "version": "bloco55-localizacao_cargas-backfill-v1",
+    "fingerprint": "6cc4f9addad28a3c4526501bc0648ae8a2dc9a769590e990bb1d5af1ab5e00a4",
+    "scope": "67585b27c8adc885f6faa94411e80f1a59f8f9316efa842e33d3324d65903d8d",
+    "effectiveFrom": "2026-09-08T00:00:00.123"
+  }
+]

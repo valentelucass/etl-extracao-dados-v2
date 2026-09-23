@@ -1,0 +1,200 @@
+[
+  {
+    "id": "USERS_CANCEL_RECHECK",
+    "request": "requests/USERS_CANCEL_RECHECK.json",
+    "layer": "OFFICIAL_JAR_WINDOWS_SQL",
+    "artifact": "administered",
+    "account": "etl_v2_exec",
+    "command": "run",
+    "fault": "NONE",
+    "scenario": "NORMAL",
+    "group": "B60_CANCEL_RECHECK",
+    "delayMilliseconds": 1500,
+    "cancel": true,
+    "waitBeforeSeconds": 0,
+    "pair": "",
+    "expectedExit": [
+      50
+    ],
+    "expectedHttp": [
+      1
+    ],
+    "expected": {
+      "publications": 0,
+      "seals": 0,
+      "consumptions": 1,
+      "state": "CANCELLED"
+    },
+    "unchangedFrom": ""
+  },
+  {
+    "id": "MUTATE_TENANT",
+    "request": "requests/MUTATE_TENANT.json",
+    "layer": "REAL_WINDOWS_SQL_CLIENT_FAULT_PROBE",
+    "artifact": "administered",
+    "account": "etl_v2_exec",
+    "command": "run",
+    "fault": "MUTATE_TENANT",
+    "scenario": "NORMAL",
+    "group": "B60_C_BE8D2B4CF25B3551",
+    "delayMilliseconds": 0,
+    "cancel": false,
+    "waitBeforeSeconds": 0,
+    "pair": "",
+    "expectedExit": [
+      40
+    ],
+    "expectedHttp": [
+      0
+    ],
+    "expected": {
+      "attempts": 0,
+      "seals": 0,
+      "consumptions": 1,
+      "publications": 0
+    },
+    "unchangedFrom": ""
+  },
+  {
+    "id": "MUTATE_ENTITY",
+    "request": "requests/MUTATE_ENTITY.json",
+    "layer": "REAL_WINDOWS_SQL_CLIENT_FAULT_PROBE",
+    "artifact": "administered",
+    "account": "etl_v2_exec",
+    "command": "run",
+    "fault": "MUTATE_ENTITY",
+    "scenario": "NORMAL",
+    "group": "B60_C_8FC671CD6DCE9951",
+    "delayMilliseconds": 0,
+    "cancel": false,
+    "waitBeforeSeconds": 0,
+    "pair": "",
+    "expectedExit": [
+      40
+    ],
+    "expectedHttp": [
+      0
+    ],
+    "expected": {
+      "attempts": 0,
+      "seals": 0,
+      "consumptions": 1,
+      "publications": 0
+    },
+    "unchangedFrom": ""
+  },
+  {
+    "id": "MUTATE_CONTRACT",
+    "request": "requests/MUTATE_CONTRACT.json",
+    "layer": "REAL_WINDOWS_SQL_CLIENT_FAULT_PROBE",
+    "artifact": "administered",
+    "account": "etl_v2_exec",
+    "command": "run",
+    "fault": "MUTATE_CONTRACT",
+    "scenario": "NORMAL",
+    "group": "B60_C_3FBD1275D6C44A12",
+    "delayMilliseconds": 0,
+    "cancel": false,
+    "waitBeforeSeconds": 0,
+    "pair": "",
+    "expectedExit": [
+      40
+    ],
+    "expectedHttp": [
+      0
+    ],
+    "expected": {
+      "attempts": 0,
+      "seals": 0,
+      "consumptions": 1,
+      "publications": 0
+    },
+    "unchangedFrom": ""
+  },
+  {
+    "id": "MUTATE_CONFIGURATION",
+    "request": "requests/MUTATE_CONFIGURATION.json",
+    "layer": "REAL_WINDOWS_SQL_CLIENT_FAULT_PROBE",
+    "artifact": "administered",
+    "account": "etl_v2_exec",
+    "command": "run",
+    "fault": "MUTATE_CONFIGURATION",
+    "scenario": "NORMAL",
+    "group": "B60_C_1AB37165270A6E0B",
+    "delayMilliseconds": 0,
+    "cancel": false,
+    "waitBeforeSeconds": 0,
+    "pair": "",
+    "expectedExit": [
+      40
+    ],
+    "expectedHttp": [
+      0
+    ],
+    "expected": {
+      "attempts": 0,
+      "seals": 0,
+      "consumptions": 1,
+      "publications": 0
+    },
+    "unchangedFrom": ""
+  },
+  {
+    "id": "MUTATE_PROTOCOL",
+    "request": "requests/MUTATE_PROTOCOL.json",
+    "layer": "REAL_WINDOWS_SQL_CLIENT_FAULT_PROBE",
+    "artifact": "administered",
+    "account": "etl_v2_exec",
+    "command": "run",
+    "fault": "MUTATE_PROTOCOL",
+    "scenario": "NORMAL",
+    "group": "B60_C_D626CDAD5ADD51BE",
+    "delayMilliseconds": 0,
+    "cancel": false,
+    "waitBeforeSeconds": 0,
+    "pair": "",
+    "expectedExit": [
+      40
+    ],
+    "expectedHttp": [
+      0
+    ],
+    "expected": {
+      "attempts": 0,
+      "seals": 0,
+      "consumptions": 1,
+      "publications": 0
+    },
+    "unchangedFrom": ""
+  },
+  {
+    "id": "OPERATOR_CANNOT_WRITE",
+    "request": "requests/OPERATOR_CANNOT_WRITE.json",
+    "layer": "OFFICIAL_JAR_WINDOWS_SQL",
+    "artifact": "administered",
+    "account": "etl_v2_view",
+    "command": "run",
+    "fault": "NONE",
+    "scenario": "NORMAL",
+    "group": "B60_C_54025C4BA19938E7",
+    "delayMilliseconds": 0,
+    "cancel": false,
+    "waitBeforeSeconds": 0,
+    "pair": "",
+    "expectedExit": [
+      20
+    ],
+    "expectedHttp": [
+      0
+    ],
+    "expected": {
+      "decisions": 1,
+      "publications": 0,
+      "seals": 0,
+      "consumptions": 0,
+      "attempts": 0,
+      "decision": "DENY"
+    },
+    "unchangedFrom": ""
+  }
+]

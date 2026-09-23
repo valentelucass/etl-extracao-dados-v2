@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.function.Consumer;
 
 /** Página normalizada e defensivamente copiada, inclusive para uma raiz objeto. */
 public final class DataExportPageResponse {
@@ -99,6 +100,15 @@ public final class DataExportPageResponse {
 
     public List<JsonNode> records() {
         return records.stream().map(record -> record.<JsonNode>deepCopy()).toList();
+    }
+
+    /** Entrega uma cópia defensiva por linha, sem duplicar a página física inteira. */
+    public void forEachRecord(final Consumer<JsonNode> consumer) {
+        final Consumer<JsonNode> required =
+                Objects.requireNonNull(consumer, "O consumidor de registros é obrigatório.");
+        for (final JsonNode record : records) {
+            required.accept(record.deepCopy());
+        }
     }
 
     /** Contagem O(1), sem copiar a página apenas para auditoria ou logs. */

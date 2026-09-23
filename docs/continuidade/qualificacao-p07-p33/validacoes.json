@@ -1,0 +1,227 @@
+{
+  "status": "PHYSICAL_AND_DOCUMENTARY_SUCCESSION_PASS",
+  "fullPhysicalResult": {
+    "path": "target/qualificacao-p07-p33-20260922-01/derived-physical-result.json",
+    "sha256": "ef6e98cce07c3b994d45603590eb6d39fe086042a3d61593985499aa48b45526"
+  },
+  "matrixValidation": {
+    "path": "target/qualificacao-p07-p33-20260922-01/final-materialized/validation.json",
+    "sha256": "3f804058577d2c16872686ed19e7561cfa01e2513bdb1788c1d56d82a963d8d2"
+  },
+  "fullStaticDisposition": {
+    "path": "target/qualificacao-p07-p33-20260922-01/static-disposition-full-p07-01/result.json",
+    "sha256": "4e8285892e7eb7b4c176936a8052c397cc52c8919bd504368524d38829acd5b0"
+  },
+  "staticDispositionCountertests": {
+    "path": "target/qualificacao-p07-p33-20260922-01/static-disposition-tests-05/result.json",
+    "sha256": "b0ef179625408516876bd3f232c8977883b16e547b10e005b33651c17d7455ea"
+  },
+  "scannerSelfTest": {
+    "path": "target/qualificacao-p07-p33-20260922-01/scanner-receipt-green-01/result.json",
+    "sha256": "cb23350d3ee7767f26d2b689545e9acbbad4123ec40c6975fc355988a3597cec"
+  },
+  "codeReview": {
+    "path": "target/qualificacao-p07-p33-20260922-01/code-review.json",
+    "sha256": "cf26d34521e2a65eaa09fcce9db772d7e522050c9c61cf4cade646d02d114ba8"
+  },
+  "reviewDiff": {
+    "path": "target/qualificacao-p07-p33-20260922-01/code-review-02.patch",
+    "sha256": "bc43c0ea7a5ef5e26857622bddadadd0a7b9c9932c2feed94bc9ffdf5edd993c"
+  },
+  "localQualification": {
+    "P07": true,
+    "P08": true,
+    "metrics": {
+      "unit": {
+        "tests": 2263,
+        "classes": 251,
+        "skipped": 4
+      },
+      "integration": {
+        "tests": 492,
+        "classes": 105,
+        "skipped": 0
+      },
+      "requiredNewCasesVerified": 77,
+      "sourceFilesChecked": 2096,
+      "package": {
+        "members": 730,
+        "dependencies": 9,
+        "comparedBytes": 7943947,
+        "revision": "e266fd695d5c9a3bccf1516f444802cc43908ae1f05f8fccea74fa60075ac964"
+      },
+      "guards": {
+        "control": {
+          "cases": 8,
+          "jdbc": "NOT_STARTED"
+        },
+        "extracted": {
+          "cases": 21,
+          "jdbc": "NOT_STARTED"
+        },
+        "archive": {
+          "cases": 25
+        }
+      },
+      "sequences": {
+        "sequence-a": {
+          "variant": "COMPLETE",
+          "exit": 0,
+          "expectedExit": 0,
+          "stages": 7,
+          "comparisons": 133,
+          "previews": 231,
+          "rollbackConfirmed": true
+        },
+        "sequence-b": {
+          "variant": "COMPLETE",
+          "exit": 0,
+          "expectedExit": 0,
+          "stages": 7,
+          "comparisons": 133,
+          "previews": 231,
+          "rollbackConfirmed": true
+        },
+        "value": {
+          "variant": "VALUE",
+          "exit": 40,
+          "expectedExit": 40,
+          "stages": 1,
+          "comparisons": 19,
+          "previews": 0,
+          "rollbackConfirmed": true
+        },
+        "precision": {
+          "variant": "PRECISION",
+          "exit": 40,
+          "expectedExit": 40,
+          "stages": 1,
+          "comparisons": 19,
+          "previews": 0,
+          "rollbackConfirmed": true
+        },
+        "key": {
+          "variant": "KEY",
+          "exit": 40,
+          "expectedExit": 40,
+          "stages": 1,
+          "comparisons": 19,
+          "previews": 0,
+          "rollbackConfirmed": true
+        },
+        "multiplicity": {
+          "variant": "MULTIPLICITY",
+          "exit": 40,
+          "expectedExit": 40,
+          "stages": 1,
+          "comparisons": 19,
+          "previews": 0,
+          "rollbackConfirmed": true
+        },
+        "old-reference": {
+          "variant": "OLD_REFERENCE",
+          "exit": 40,
+          "expectedExit": 40,
+          "stages": 6,
+          "comparisons": 114,
+          "previews": 165,
+          "rollbackConfirmed": true
+        },
+        "missing-user": {
+          "variant": "MISSING_USER",
+          "exit": 20,
+          "expectedExit": 20,
+          "stages": 0,
+          "comparisons": 0,
+          "previews": 0,
+          "rollbackConfirmed": true
+        },
+        "pin-drift": {
+          "variant": "PIN_DRIFT",
+          "exit": 20,
+          "expectedExit": 20,
+          "stages": 0,
+          "comparisons": 0,
+          "previews": 0,
+          "rollbackConfirmed": true
+        },
+        "command": {
+          "variant": "COMMAND",
+          "exit": 20,
+          "expectedExit": 20,
+          "stages": 0,
+          "comparisons": 0,
+          "previews": 0,
+          "rollbackConfirmed": true
+        }
+      },
+      "static": {
+        "rawFindings": 36,
+        "reviewedFindings": 36,
+        "reportFiles": 251,
+        "reportCases": 2263
+      }
+    }
+  },
+  "documentaryChecks": [
+    {
+      "name": "succession",
+      "receipt": {
+        "path": "target/qualificacao-p07-p33-20260922-01/physical/closure-validation-succession.json",
+        "sha256": "d0f0ee30db55f373b2ca0773b20e35ab372e7cf9d05c063327bacea77440d793"
+      },
+      "stdout": {
+        "path": "target/qualificacao-p07-p33-20260922-01/physical/closure-validation-succession.stdout.log",
+        "sha256": "c4a35edc698fcb17aa6a0734e05218afa980decc011eb61b5c7188164107a3d9"
+      },
+      "stderr": {
+        "path": "target/qualificacao-p07-p33-20260922-01/physical/closure-validation-succession.stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "historical-chain",
+      "receipt": {
+        "path": "target/qualificacao-p07-p33-20260922-01/physical/closure-validation-historical-chain.json",
+        "sha256": "96808bf320a9f9baaea3c7dd6f5fd36c3c72b7a0040770cfd8b1414536cb3ec1"
+      },
+      "stdout": {
+        "path": "target/qualificacao-p07-p33-20260922-01/physical/closure-validation-historical-chain.stdout.log",
+        "sha256": "e19239b443a34fc015828df53e15b4d78d506ee36424b833457d2534f2b3401b"
+      },
+      "stderr": {
+        "path": "target/qualificacao-p07-p33-20260922-01/physical/closure-validation-historical-chain.stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "trail",
+      "receipt": {
+        "path": "target/qualificacao-p07-p33-20260922-01/physical/closure-validation-trail.json",
+        "sha256": "7e60b079b531a1628bc8f5cfe97597de3437d37478c72aa43243add411453384"
+      },
+      "stdout": {
+        "path": "target/qualificacao-p07-p33-20260922-01/physical/closure-validation-trail.stdout.log",
+        "sha256": "624cf8745192e08e633174136c6a19c5ec4aca77162e538068e2d18465f14e55"
+      },
+      "stderr": {
+        "path": "target/qualificacao-p07-p33-20260922-01/physical/closure-validation-trail.stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  ],
+  "finalIntegrityReceipt": "target/qualificacao-p07-p33-20260922-01/physical/final-integrity.json",
+  "finalClosedReceipt": "target/qualificacao-p07-p33-20260922-01/physical/closed-receipt.json",
+  "finalReceiptPolicy": "O resultado do scanner, o readback dos bytes finais e o encerramento são autoritativos em target/qualificacao-p07-p33-20260922-01/physical/final-integrity.json e closed-receipt.json, após existirem. Esta fotografia registra somente provas já observadas; não antecipa essas execuções.",
+  "newAcceptances": 0,
+  "nominalApproval": false,
+  "releaseApproved": false,
+  "documentarySummary": {
+    "path": "target/qualificacao-p07-p33-20260922-01/physical/closure-validation-result.json",
+    "sha256": "b8f0e4949b12c6a4ae8abefb5fde9d428e26395bd8cf939c03e9753e4762d026"
+  },
+  "checkpoint": {
+    "path": "docs/continuidade/checkpoints/0243-qualificacao-local-e-sucessao-conferidas.md",
+    "sha256": "917e206cca19ec738b24225fec2fa5b921a22086d9ffb5fe251bfff83603a5ae"
+  }
+}

@@ -7,7 +7,8 @@ Compara em memoria a identidade Data Export e GraphQL de uma janela fechada.
 Usa somente curl.exe, GET_WITH_QUERY para 6908/6389 e POST GraphQL com
 documentos query estaticos. Executa duas travessias Data Export com tamanhos de
 pagina positivos e distintos, cada uma ate a pagina vazia, e as compara ao mesmo
-conjunto GraphQL terminal. Carrega a ultima definicao nao vazia do .env legado,
+conjunto GraphQL terminal. Carrega a ultima definicao nao vazia do .env V2,
+com fallback legado,
 nao grava corpos, URL, token, cursor ou identificador e imprime somente resumo
 sanitizado de contagens e flags de equivalencia.
 
@@ -53,6 +54,7 @@ param(
 
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
+. (Join-Path $PSScriptRoot 'DataExportProbeGate.ps1')
 
 if ($PageSizeA -eq $PageSizeB) {
     throw 'Os dois tamanhos de pagina Data Export devem ser positivos e distintos.'
@@ -97,6 +99,10 @@ function Assert-ClosedWindow {
 function Get-LegacyEnvPath {
     try {
         $v2Root = (Resolve-Path -LiteralPath (Join-Path $PSScriptRoot '..\..')).Path
+        $local = Join-Path $v2Root '.env'
+        if (Test-Path -LiteralPath $local -PathType Leaf) {
+            return (Resolve-Path -LiteralPath $local).Path
+        }
         $workspaceRoot = Split-Path -Parent $v2Root
         $envPath = Join-Path $workspaceRoot 'etl-extracao-dados\.env'
         if (-not (Test-Path -LiteralPath $envPath -PathType Leaf)) {
@@ -677,6 +683,13 @@ $definition = if ($TemplateId -eq 6908) {
     [pscustomobject]@{ BusinessFilter = 'freights.service_at'; NaturalKey = 'corporation_sequence_number'; OrderBy = 'corporation_sequence_number asc'; GraphQlRoot = 'freight'; GraphQlKey = 'corporationSequenceNumber' }
 }
 
+$probeGate = Enter-DataExportProbeGate
+if ($null -eq $probeGate) {
+    [ordered]@{ template = $TemplateId; transport = [ordered]@{ data_export = 'GET_QUERY'; graphql = 'POST_QUERY' }; calls_attempted = 0; stopped = $true; stop_reason = 'LOCAL_CONCURRENT_PROBE' } | ConvertTo-Json -Compress
+    exit 1
+}
+$probeExitCode = 0
+try {
 $envPath = Get-LegacyEnvPath
 $baseUri = ConvertTo-SafeHttpsUri -Value (Get-LastNonEmptyEnvValue -EnvPath $envPath -Name 'API_BASE_URL') -Name 'API_BASE_URL'
 $dataExportToken = Get-LastNonEmptyEnvValue -EnvPath $envPath -Name 'API_DATAEXPORT_TOKEN'
@@ -788,4 +801,8 @@ $dataExportPageSizesComparison = Get-CompletedIndexComparison -LeftIndex $dataEx
     stopped = $state['stopped']
     stop_reason = $state['stop_reason']
 } | ConvertTo-Json -Depth 8
-if ($state['stopped']) { exit 1 }
+$probeExitCode = if ($state['stopped']) { 1 } else { 0 }
+} finally {
+    Exit-DataExportProbeGate -Gate $probeGate
+}
+exit $probeExitCode

@@ -1,0 +1,159 @@
+{
+  "version": "qualification-location-hashes-v1",
+  "origin": "INDEPENDENT_LOC_ENVELOPE_V2",
+  "example": {
+    "encoding": "UTF-16LE",
+    "tokens": [
+      "localizacao-cargas-envelope-v2",
+      "INTEGER:600001",
+      "{\"corporation_sequence_number\":600001,\"type\":\"Freight::Normal\",\"service_at\":\"2036-04-01T03:00:00Z\",\"invoices_volumes\":\"3\",\"taxed_weight\":\"45.125\",\"invoices_value\":\"120\",\"total\":\"120\",\"fit_fln_status\":\"done\"}",
+      "{\"fields\":{\"corporation_sequence_number\":{\"path\":\"/corporation_sequence_number\",\"presence\":\"VALUE\",\"provenance\":\"DATAEXPORT_8656\",\"parseState\":\"PRESERVED_OR_STRICTLY_PARSED_BY_NAMED_FIELD\",\"typedState\":\"INTEGER_TYPE_TAGGED_SOURCE_KEY\",\"raw\":600001,\"rawWireLexeme\":\"UNAVAILABLE_AFTER_JSON_TREE_NORMALIZATION\"},\"type\":{\"path\":\"/type\",\"presence\":\"VALUE\",\"provenance\":\"DATAEXPORT_8656\",\"parseState\":\"PRESERVED_OR_STRICTLY_PARSED_BY_NAMED_FIELD\",\"typedState\":\"UNVERIFIED_SOURCE_TYPE_PRESERVED_RAW\",\"raw\":\"Freight::Normal\",\"rawWireLexeme\":\"NOT_APPLICABLE_NON_NUMERIC_TOKEN\"},\"service_at\":{\"path\":\"/service_at\",\"presence\":\"VALUE\",\"provenance\":\"DATAEXPORT_8656\",\"parseState\":\"PRESERVED_OR_STRICTLY_PARSED_BY_NAMED_FIELD\",\"typedState\":\"STRICT_TYPED_COLUMN\",\"raw\":\"2036-04-01T03:00:00Z\",\"rawWireLexeme\":\"NOT_APPLICABLE_NON_NUMERIC_TOKEN\"},\"invoices_volumes\":{\"path\":\"/invoices_volumes\",\"presence\":\"VALUE\",\"provenance\":\"DATAEXPORT_8656\",\"parseState\":\"PRESERVED_OR_STRICTLY_PARSED_BY_NAMED_FIELD\",\"typedState\":\"STRICT_TYPED_COLUMN\",\"raw\":\"3\",\"rawWireLexeme\":\"NOT_APPLICABLE_NON_NUMERIC_TOKEN\"},\"taxed_weight\":{\"path\":\"/taxed_weight\",\"presence\":\"VALUE\",\"provenance\":\"DATAEXPORT_8656\",\"parseState\":\"PRESERVED_OR_STRICTLY_PARSED_BY_NAMED_FIELD\",\"typedState\":\"STRICT_TYPED_COLUMN\",\"raw\":\"45.125\",\"rawWireLexeme\":\"NOT_APPLICABLE_NON_NUMERIC_TOKEN\"},\"invoices_value\":{\"path\":\"/invoices_value\",\"presence\":\"VALUE\",\"provenance\":\"DATAEXPORT_8656\",\"parseState\":\"PRESERVED_OR_STRICTLY_PARSED_BY_NAMED_FIELD\",\"typedState\":\"STRICT_TYPED_COLUMN\",\"raw\":\"120\",\"rawWireLexeme\":\"NOT_APPLICABLE_NON_NUMERIC_TOKEN\"},\"total\":{\"path\":\"/total\",\"presence\":\"VALUE\",\"provenance\":\"DATAEXPORT_8656\",\"parseState\":\"PRESERVED_OR_STRICTLY_PARSED_BY_NAMED_FIELD\",\"typedState\":\"STRICT_TYPED_COLUMN\",\"raw\":\"120\",\"rawWireLexeme\":\"NOT_APPLICABLE_NON_NUMERIC_TOKEN\"},\"service_type\":{\"path\":\"/service_type\",\"presence\":\"ABSENT\",\"provenance\":\"DATAEXPORT_8656\",\"parseState\":\"NOT_PRESENT\",\"typedState\":\"UNVERIFIED_SOURCE_TYPE_PRESERVED_RAW\",\"raw\":null,\"rawWireLexeme\":\"NOT_APPLICABLE_WITHOUT_VALUE\"},\"fit_crn_psn_nickname\":{\"path\":\"/fit_crn_psn_nickname\",\"presence\":\"ABSENT\",\"provenance\":\"DATAEXPORT_8656\",\"parseState\":\"NOT_PRESENT\",\"typedState\":\"UNVERIFIED_SOURCE_TYPE_PRESERVED_RAW\",\"raw\":null,\"rawWireLexeme\":\"NOT_APPLICABLE_WITHOUT_VALUE\"},\"fit_dpn_delivery_prediction_at\":{\"path\":\"/fit_dpn_delivery_prediction_at\",\"presence\":\"ABSENT\",\"provenance\":\"DATAEXPORT_8656\",\"parseState\":\"NOT_PRESENT\",\"typedState\":\"UNVERIFIED_SOURCE_TYPE_PRESERVED_RAW\",\"raw\":null,\"rawWireLexeme\":\"NOT_APPLICABLE_WITHOUT_VALUE\"},\"fit_dyn_name\":{\"path\":\"/fit_dyn_name\",\"presence\":\"ABSENT\",\"provenance\":\"DATAEXPORT_8656\",\"parseState\":\"NOT_PRESENT\",\"typedState\":\"UNVERIFIED_SOURCE_TYPE_PRESERVED_RAW\",\"raw\":null,\"rawWireLexeme\":\"NOT_APPLICABLE_WITHOUT_VALUE\"},\"fit_dyn_drt_nickname\":{\"path\":\"/fit_dyn_drt_nickname\",\"presence\":\"ABSENT\",\"provenance\":\"DATAEXPORT_8656\",\"parseState\":\"NOT_PRESENT\",\"typedState\":\"UNVERIFIED_SOURCE_TYPE_PRESERVED_RAW\",\"raw\":null,\"rawWireLexeme\":\"NOT_APPLICABLE_WITHOUT_VALUE\"},\"fit_fsn_name\":{\"path\":\"/fit_fsn_name\",\"presence\":\"ABSENT\",\"provenance\":\"DATAEXPORT_8656\",\"parseState\":\"NOT_PRESENT\",\"typedState\":\"UNVERIFIED_SOURCE_TYPE_PRESERVED_RAW\",\"raw\":null,\"rawWireLexeme\":\"NOT_APPLICABLE_WITHOUT_VALUE\"},\"fit_fln_status\":{\"path\":\"/fit_fln_status\",\"presence\":\"VALUE\",\"provenance\":\"DATAEXPORT_8656\",\"parseState\":\"PRESERVED_OR_STRICTLY_PARSED_BY_NAMED_FIELD\",\"typedState\":\"STRICT_TYPED_COLUMN\",\"raw\":\"done\",\"rawWireLexeme\":\"NOT_APPLICABLE_NON_NUMERIC_TOKEN\"},\"fit_fln_cln_nickname\":{\"path\":\"/fit_fln_cln_nickname\",\"presence\":\"ABSENT\",\"provenance\":\"DATAEXPORT_8656\",\"parseState\":\"NOT_PRESENT\",\"typedState\":\"UNVERIFIED_SOURCE_TYPE_PRESERVED_RAW\",\"raw\":null,\"rawWireLexeme\":\"NOT_APPLICABLE_WITHOUT_VALUE\"},\"fit_o_n_name\":{\"path\":\"/fit_o_n_name\",\"presence\":\"ABSENT\",\"provenance\":\"DATAEXPORT_8656\",\"parseState\":\"NOT_PRESENT\",\"typedState\":\"UNVERIFIED_SOURCE_TYPE_PRESERVED_RAW\",\"raw\":null,\"rawWireLexeme\":\"NOT_APPLICABLE_WITHOUT_VALUE\"},\"fit_o_n_drt_nickname\":{\"path\":\"/fit_o_n_drt_nickname\",\"presence\":\"ABSENT\",\"provenance\":\"DATAEXPORT_8656\",\"parseState\":\"NOT_PRESENT\",\"typedState\":\"UNVERIFIED_SOURCE_TYPE_PRESERVED_RAW\",\"raw\":null,\"rawWireLexeme\":\"NOT_APPLICABLE_WITHOUT_VALUE\"}},\"policy\":{\"matrix\":\"LOCALIZACAO_8656_17_PATHS_V1\",\"freightVolumeFallback\":\"FREIGHT_VOLUME_FALLBACK_DEFERRED_RELATION_AND_PUBLICATION\",\"statusBranchNickname\":{\"path\":\"ABSENT\",\"presence\":\"ABSENT\",\"provenance\":\"UNSOURCED_LEGACY\"}}}",
+      "VALID",
+      "<NULL>",
+      "\"2036-04-01T03:00:00Z\"",
+      "2036-04-01T03:00:00",
+      "\"3\"",
+      "3",
+      "\"45.125\"",
+      "45.125000000",
+      "\"120\"",
+      "120.000000000",
+      "\"120\"",
+      "120.000000000",
+      "done",
+      "done",
+      "0",
+      "UNSOURCED_LEGACY"
+    ]
+  },
+  "hashes": [
+    {
+      "root": 1,
+      "sha256": "6b65d04b8b0884cc4e80c34cc2493d6d0c64614fa9ac2b71cc75c516ea1661e4"
+    },
+    {
+      "root": 2,
+      "sha256": "b37677a5724bc5f3ed81dfd84424c57393c33330c2a0191969740641d6bfbc2f"
+    },
+    {
+      "root": 3,
+      "sha256": "fea4aaa3dace3fc6d1c737ed4778a7851a422bcb28cb732ec3cead053e446efd"
+    },
+    {
+      "root": 4,
+      "sha256": "2634ff2b227420f2dd783a76d2ada2710680eaaabfd921a62d0398da108bcdb0"
+    },
+    {
+      "root": 5,
+      "sha256": "d917ef9133d04412bfb4c93b2f010c9313035ececf08f587ed68f4e7f5ab80ff"
+    },
+    {
+      "root": 6,
+      "sha256": "4cef486a21bd4907631d88148ac4e316ccf393e16810eec5ac6d872678080af5"
+    },
+    {
+      "root": 7,
+      "sha256": "4d2979721a31aa4c624c1b427d6315f8d0920c9144674ae46d7942547e595c36"
+    },
+    {
+      "root": 8,
+      "sha256": "c91d3f2023244d31ef3a3c50932fec3eb33643af8fd90c7f4d6e7530413fcba5"
+    },
+    {
+      "root": 9,
+      "sha256": "ce75d5ba90cf8f15d4a00fae9d513d9f5fd675b0e5f727bcf0ff4777ef16f90f"
+    },
+    {
+      "root": 10,
+      "sha256": "dc664587e5183f7dd67c3172a64b2216617b08d33ed2a64ceff7eb4bd8f935bd"
+    },
+    {
+      "root": 11,
+      "sha256": "0516c64ba1b899a15123ea9c1d22e5a47362fc9228216313e3cebd5701663e55"
+    },
+    {
+      "root": 12,
+      "sha256": "1a29313884f151f05d08ad9b96ff63bcbdc04aa0739152b5e07dadf7775bca9c"
+    },
+    {
+      "root": 13,
+      "sha256": "7f549a600a65e40fdf848c5b5772f72172133fe3abb617c5b6382991880be2b7"
+    },
+    {
+      "root": 14,
+      "sha256": "7e9a8658865cdd6d843f4233c2d9a42c0c4c974933e34cff5fc827f79566a223"
+    },
+    {
+      "root": 15,
+      "sha256": "86821d0cc40eac80a51fe3f29ee015d50a704484451a7523e94182bc1dcf301e"
+    },
+    {
+      "root": 16,
+      "sha256": "791c36007aefe849d709154678941dbca53f3ba3de4a5d66ad36923ac829802f"
+    },
+    {
+      "root": 17,
+      "sha256": "6b97763b9c38acc07c82fe29a98d1bcaf136dd6c03db2573d2a1b489304c6cc9"
+    },
+    {
+      "root": 18,
+      "sha256": "06b9991015b800c4ab26e2d69bc9d43cb5ec3f830dcf1c9c1713c58cbf84163c"
+    },
+    {
+      "root": 19,
+      "sha256": "2499a85055461b4f94faca8a9fb1baf8d9a10bd72e5922511b4775bea26e787c"
+    },
+    {
+      "root": 20,
+      "sha256": "76ff86c4a2635a68134e04a2926e7595013844f729ade2fdd73ff91a71b04dab"
+    },
+    {
+      "root": 21,
+      "sha256": "9f5d21183e2305f52661a847539493b412acb78f56f847a5aedae3958e6980c7"
+    },
+    {
+      "root": 22,
+      "sha256": "30b837e466c2f3960f1617f2f99fefe42b8cff99adb48b5d06293e1fe32183d7"
+    },
+    {
+      "root": 23,
+      "sha256": "01bf303074bd8e02a35825f9272264323f1ce5d6d0a925e962d03941d1bfad19"
+    },
+    {
+      "root": 24,
+      "sha256": "27633a249bae26556274ad50cf9169f9dc7f6c371f90217a1df74a2a87729d3a"
+    },
+    {
+      "root": 25,
+      "sha256": "32c9222e40f40e207bf39be5b8812b944bdeac3fb951d7451b91acd9c2e6456d"
+    },
+    {
+      "root": 26,
+      "sha256": "a7e40bad4452dd81ecfab1a3dbe0b39f786735768a0a92aa24973e34d6267cc2"
+    },
+    {
+      "root": 27,
+      "sha256": "83fcba0f8eea7cf152c64e3319b01222c5f4c562aa8f5668d4277058c78bf9e0"
+    },
+    {
+      "root": 28,
+      "sha256": "66d8264ac893305b1617be02cef42640985fed4fd783e8ec6a8b982beaff7e5e"
+    },
+    {
+      "root": 29,
+      "sha256": "f3230c4d43a9d63106758fb05dc5eec38c8ac2ba69fa6061729cfc7e182e7f58"
+    },
+    {
+      "root": 30,
+      "sha256": "5e1092ba8b363dddd583d25159f8a2b344fd84c379efec54e98c084a22953f61"
+    },
+    {
+      "root": 31,
+      "sha256": "2837c9cb6a79975b2875b8c3a69629e1af68c2c4868aa01b1e0d5fa77c6b0703"
+    },
+    {
+      "root": 32,
+      "sha256": "afff1aca705db76c166f76790453bf6bcc82264bf3bd23d737d9b9a5f96d195d"
+    }
+  ]
+}

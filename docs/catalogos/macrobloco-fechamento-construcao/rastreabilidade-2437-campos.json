@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "source": {
+    "path": "docs/catalogos/portabilidade/matriz-campos.csv",
+    "sha256": "2b821ec9771d66205cd9ed7d7b3e9a77abbdc8aeb1481f63e5fac72a6b4075c2"
+  },
+  "note": "Catalogar a falta por path não resolve o gate nem dispensa implementação condicionada. Nenhum campo /info é desopacificado por fixture.",
+  "rowCount": 2437,
+  "parts": [
+    {
+      "path": "docs/catalogos/macrobloco-fechamento-construcao/rastreabilidade-2437-campos-001.json",
+      "sha256": "ced3e4dc342411ed5cebefd23c4c3481df607e761c69772cd4aa78ee5db54623",
+      "rows": 813
+    },
+    {
+      "path": "docs/catalogos/macrobloco-fechamento-construcao/rastreabilidade-2437-campos-002.json",
+      "sha256": "32acaee1509481e95bee928ff0ea8329a50d69bbfb31ead5a7eff828a2b9f6d9",
+      "rows": 813
+    },
+    {
+      "path": "docs/catalogos/macrobloco-fechamento-construcao/rastreabilidade-2437-campos-003.json",
+      "sha256": "20ea7590c990dc50981c5099f87c133c032cab5a6a3f95d2175bd9483fe46627",
+      "rows": 811
+    }
+  ]
+}

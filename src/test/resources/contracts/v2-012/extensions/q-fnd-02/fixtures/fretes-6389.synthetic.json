@@ -1,0 +1,121 @@
+{
+  "schemaVersion": "V2_012_Q_FND_02_FIXTURE_V1",
+  "fixtureMarker": "SYNTH_Q_FND_02_FRETES",
+  "profileId": "V2_012_FRETES_6389",
+  "evidenceClassification": "SYNTHETIC_FIXTURE",
+  "providerEvidence": "NOT_EXECUTED",
+  "channels": [
+    {
+      "channelId": "FRETES_DATA_EXPORT_6389",
+      "observedPaths": [
+        "/id",
+        "/updated_at",
+        "/reference_number",
+        "/fit_p_m_pck_sequence_code",
+        "/corporation_sequence_number",
+        "/finished_at",
+        "/fit_dpn_performance_finished_at"
+      ],
+      "observedTypes": {
+        "/id": "INTEGER",
+        "/updated_at": "UNVERIFIED_ORACLE_REQUIRED",
+        "/reference_number": "UNVERIFIED_ORACLE_REQUIRED",
+        "/fit_p_m_pck_sequence_code": "UNVERIFIED_ORACLE_REQUIRED",
+        "/corporation_sequence_number": "UNVERIFIED_ORACLE_REQUIRED",
+        "/finished_at": "UNVERIFIED_ORACLE_REQUIRED",
+        "/fit_dpn_performance_finished_at": "UNVERIFIED_ORACLE_REQUIRED"
+      },
+      "presenceByPath": {
+        "/id": ["ABSENT", "NULL", "VALUE"],
+        "/updated_at": ["ABSENT", "NULL", "VALUE"],
+        "/reference_number": ["ABSENT", "NULL", "VALUE"],
+        "/fit_p_m_pck_sequence_code": ["ABSENT", "NULL", "VALUE"],
+        "/corporation_sequence_number": ["ABSENT", "NULL", "VALUE"],
+        "/finished_at": ["ABSENT", "NULL", "VALUE"],
+        "/fit_dpn_performance_finished_at": ["ABSENT", "NULL", "VALUE"]
+      },
+      "sourceKeyPath": "/id",
+      "sourceKeyTypeTagged": true,
+      "shortPageIsTerminal": false,
+      "completenessProven": false,
+      "snapshotProven": false,
+      "relationshipEnabled": false,
+      "publicationEnabled": false,
+      "sweepEnabled": false,
+      "rootOrFreshnessAuthority": true
+    },
+    {
+      "channelId": "FRETES_GRAPHQL_SIDECAR",
+      "observedPaths": [
+        "/freight/edges/node/id",
+        "/freight/edges/node/accountingCreditId",
+        "/freight/edges/node/accountingCreditInstallmentId",
+        "/freight/edges/node/referenceNumber",
+        "/freight/edges/node/cte/key",
+        "/freight/edges/node/total",
+        "/freight/edges/node/corporationSequenceNumber",
+        "/freight/edges/node/pickItemId",
+        "/freight/pageInfo/hasNextPage",
+        "/freight/pageInfo/endCursor"
+      ],
+      "observedTypes": {
+        "/freight/edges/node/id": "UNVERIFIED_ORACLE_REQUIRED",
+        "/freight/edges/node/accountingCreditId": "UNVERIFIED_ORACLE_REQUIRED",
+        "/freight/edges/node/accountingCreditInstallmentId": "UNVERIFIED_ORACLE_REQUIRED",
+        "/freight/edges/node/referenceNumber": "UNVERIFIED_ORACLE_REQUIRED",
+        "/freight/edges/node/cte/key": "UNVERIFIED_ORACLE_REQUIRED",
+        "/freight/edges/node/total": "UNVERIFIED_ORACLE_REQUIRED",
+        "/freight/edges/node/corporationSequenceNumber": "UNVERIFIED_ORACLE_REQUIRED",
+        "/freight/edges/node/pickItemId": "UNVERIFIED_ORACLE_REQUIRED",
+        "/freight/pageInfo/hasNextPage": "UNVERIFIED_ORACLE_REQUIRED",
+        "/freight/pageInfo/endCursor": "UNVERIFIED_ORACLE_REQUIRED"
+      },
+      "presenceByPath": {
+        "/freight/edges/node/id": ["ABSENT", "NULL", "VALUE"],
+        "/freight/edges/node/accountingCreditId": ["ABSENT", "NULL", "VALUE"],
+        "/freight/edges/node/accountingCreditInstallmentId": ["ABSENT", "NULL", "VALUE"],
+        "/freight/edges/node/referenceNumber": ["ABSENT", "NULL", "VALUE"],
+        "/freight/edges/node/cte/key": ["ABSENT", "NULL", "VALUE"],
+        "/freight/edges/node/total": ["ABSENT", "NULL", "VALUE"],
+        "/freight/edges/node/corporationSequenceNumber": ["ABSENT", "NULL", "VALUE"],
+        "/freight/edges/node/pickItemId": ["ABSENT", "NULL", "VALUE"],
+        "/freight/pageInfo/hasNextPage": ["ABSENT", "NULL", "VALUE"],
+        "/freight/pageInfo/endCursor": ["ABSENT", "NULL", "VALUE"]
+      },
+      "sourceKeyPath": "",
+      "sourceKeyTypeTagged": false,
+      "shortPageIsTerminal": false,
+      "completenessProven": false,
+      "snapshotProven": false,
+      "relationshipEnabled": false,
+      "publicationEnabled": false,
+      "sweepEnabled": false,
+      "rootOrFreshnessAuthority": false
+    }
+  ],
+  "scenarios": [
+    {"scenarioId": "SYNTH_FRE_WRONG_KEY", "mutation": "PROFILE_WRONG_KEY", "expectedReason": "PROFILE_REJECTED"},
+    {"scenarioId": "SYNTH_FRE_MISSING_PATH", "mutation": "PROFILE_MISSING_PATH", "expectedReason": "PROFILE_REJECTED"},
+    {"scenarioId": "SYNTH_FRE_EXTRA_PATH", "mutation": "PROFILE_EXTRA_PATH", "expectedReason": "PROFILE_REJECTED"},
+    {"scenarioId": "SYNTH_FRE_INVENTED_TYPE", "mutation": "PROFILE_INVENTED_TYPE", "expectedReason": "PROFILE_REJECTED"},
+    {"scenarioId": "SYNTH_FRE_SIDECAR_MIXED", "mutation": "PROFILE_SIDECAR_MIXED", "expectedReason": "PROFILE_REJECTED"},
+    {"scenarioId": "SYNTH_FRE_SIDECAR_AUTHORITY", "mutation": "PROFILE_SIDECAR_AUTHORITY", "expectedReason": "PROFILE_REJECTED"},
+    {"scenarioId": "SYNTH_FRE_PUBLICATION", "mutation": "PROFILE_PUBLICATION_ENABLED", "expectedReason": "PROFILE_REJECTED"},
+    {"scenarioId": "SYNTH_FRE_COMPLETENESS", "mutation": "PROFILE_COMPLETENESS_CLAIMED", "expectedReason": "PROFILE_REJECTED"},
+    {"scenarioId": "SYNTH_FRE_EXECUTED", "mutation": "PROFILE_EXECUTED", "expectedReason": "PROFILE_REJECTED"},
+    {"scenarioId": "SYNTH_FRE_FINGERPRINT", "mutation": "PROFILE_FINGERPRINT_INVALID", "expectedReason": "PROFILE_REJECTED"},
+    {"scenarioId": "SYNTH_FRE_DUPLICATE_KEY", "mutation": "PROFILE_DUPLICATE_JSON_KEY", "expectedReason": "PROFILE_REJECTED"},
+    {"scenarioId": "SYNTH_FRE_OBSERVED_PATH", "mutation": "FIXTURE_MISSING_PATH", "expectedReason": "PATH_DRIFT"},
+    {"scenarioId": "SYNTH_FRE_POLICY_01", "mutation": "PROFILE_DECISION_FRE-01", "expectedReason": "PROFILE_REJECTED"},
+    {"scenarioId": "SYNTH_FRE_POLICY_02", "mutation": "PROFILE_DECISION_FRE-02", "expectedReason": "PROFILE_REJECTED"},
+    {"scenarioId": "SYNTH_FRE_POLICY_03", "mutation": "PROFILE_DECISION_FRE-03", "expectedReason": "PROFILE_REJECTED"},
+    {"scenarioId": "SYNTH_FRE_POLICY_04", "mutation": "PROFILE_DECISION_FRE-04", "expectedReason": "PROFILE_REJECTED"},
+    {"scenarioId": "SYNTH_FRE_POLICY_05", "mutation": "PROFILE_DECISION_FRE-05", "expectedReason": "PROFILE_REJECTED"},
+    {"scenarioId": "SYNTH_FRE_POLICY_06", "mutation": "PROFILE_DECISION_FRE-06", "expectedReason": "PROFILE_REJECTED"},
+    {"scenarioId": "SYNTH_FRE_POLICY_07", "mutation": "PROFILE_DECISION_FRE-07", "expectedReason": "PROFILE_REJECTED"},
+    {"scenarioId": "SYNTH_FRE_FRESHNESS", "mutation": "PROFILE_FRESHNESS_POLICY", "expectedReason": "PROFILE_REJECTED"},
+    {"scenarioId": "SYNTH_FRE_TERMINALS", "mutation": "PROFILE_TERMINAL_STATUS", "expectedReason": "PROFILE_REJECTED"},
+    {"scenarioId": "SYNTH_FRE_ABSENCE", "mutation": "PROFILE_ABSENCE_POLICY", "expectedReason": "PROFILE_REJECTED"},
+    {"scenarioId": "SYNTH_FRE_LIMIT", "mutation": "PROFILE_LIMIT", "expectedReason": "PROFILE_REJECTED"}
+  ]
+}

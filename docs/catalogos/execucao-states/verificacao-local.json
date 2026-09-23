@@ -1,0 +1,310 @@
+{
+  "passed": true,
+  "sourceCalls": 0,
+  "newAcceptances": 0,
+  "syntheticDomainCommit": false,
+  "rollbackConfirmed": true,
+  "schemaVersion": 102,
+  "unit": {
+    "classes": 238,
+    "tests": 2115,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 4
+  },
+  "integration": {
+    "classes": 103,
+    "tests": 483,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "testIdentityReconciliation": {
+    "passed": true,
+    "path": "target/execucao-states-20260915-01/test-ids-final-01/result.json",
+    "sha256": "05f3e86b3b8d1ea7631c4e24600053f83ad5d97224866121e26d153fbffbb3a4",
+    "removed": 0
+  },
+  "package": {
+    "path": "target/execucao-states-20260915-01/runtime-package-01/result.json",
+    "sha256": "8fd65c7a8d222fd2bc06c3d6459f0e05ee579a9586b286a85f8975774f0eb232",
+    "archiveSha256": "6fa145e6815c799cd5721e450faeb240a94ffdac6a35696c5546ae952caa0be5",
+    "manifestSha256": "178f284c1f32cb04e514dafa5d8411a7a0b9b0ca8a6a69c87c84ad8ea9700bd2",
+    "jarSha256": "fa74c0c0ccbdb7321b7ed2409a57cb500c840532cd98fa7b972faccc0880a9fc"
+  },
+  "jarCases": [
+    {
+      "id": "set-a-complete",
+      "passed": true,
+      "exit": 0,
+      "expectedExit": 0,
+      "layer": "DISTRIBUTED_JAR_EXTRACTED_PROCESS",
+      "rollbackConfirmed": true,
+      "comparisonsPassed": 19,
+      "factGrainsProved": true,
+      "previews": 33,
+      "previewMatrixProved": true,
+      "elapsedMilliseconds": 31808,
+      "jarSha256": "fa74c0c0ccbdb7321b7ed2409a57cb500c840532cd98fa7b972faccc0880a9fc",
+      "inputSha256": "8e1efbf277ab8f311191510bcc18966a3ab10b87314ed14602a45dd88a505506",
+      "oracleSha256": "096cfa94e435fba865a892fef7f4c131b8d53ed0a1f4325699661d28531cb031",
+      "evidence": [
+        {
+          "path": "target/execucao-states-20260915-01/jar-set-a-01/result.json",
+          "sha256": "8b8b955cbb477cf5bc48e49081d389dcf10158cfff09a006fa44b5faf29c0300"
+        },
+        {
+          "path": "target/execucao-states-20260915-01/jar-set-a-01/binding.json",
+          "sha256": "8142e3820a08f67e3579946ca1e44cb61257eab6dfa738b5f2908e71c36a26de"
+        },
+        {
+          "path": "target/execucao-states-20260915-01/jar-set-a-01/stdout.log",
+          "sha256": "0fa9bf268633fd2450578f8a06579943691e96cfc547a252f016a5d0da323377"
+        },
+        {
+          "path": "target/execucao-states-20260915-01/jar-set-a-01/before.log",
+          "sha256": "83fb98ebfe858dcc6290012029184d9e33664482303d839342c8012ed6e32797"
+        },
+        {
+          "path": "target/execucao-states-20260915-01/jar-set-a-01/after.log",
+          "sha256": "83fb98ebfe858dcc6290012029184d9e33664482303d839342c8012ed6e32797"
+        }
+      ]
+    },
+    {
+      "id": "set-b-complete",
+      "passed": true,
+      "exit": 0,
+      "expectedExit": 0,
+      "layer": "DISTRIBUTED_JAR_EXTRACTED_PROCESS",
+      "rollbackConfirmed": true,
+      "comparisonsPassed": 19,
+      "factGrainsProved": true,
+      "previews": 33,
+      "previewMatrixProved": true,
+      "elapsedMilliseconds": 78481,
+      "jarSha256": "fa74c0c0ccbdb7321b7ed2409a57cb500c840532cd98fa7b972faccc0880a9fc",
+      "inputSha256": "92ce78600793db1078af97645abc0da49df681316fcee1dbeaf3c7a7e6c77df8",
+      "oracleSha256": "9120197515dbe94ea1ad78b5e6820906ca81a4a1f86f51401e58e2d2207b0612",
+      "evidence": [
+        {
+          "path": "target/execucao-states-20260915-01/jar-set-b-01/result.json",
+          "sha256": "d4b162dbd0a763f2a6f734766e486ed8ce5449c421e4ba83c90fec22833214d7"
+        },
+        {
+          "path": "target/execucao-states-20260915-01/jar-set-b-01/binding.json",
+          "sha256": "7b95536ccb2fdb11e7628768d680b8d3b711578a53a12e18ad6d1642ea843c78"
+        },
+        {
+          "path": "target/execucao-states-20260915-01/jar-set-b-01/stdout.log",
+          "sha256": "96634f72a834355f6ca3ee6ac58c52931d32605b42066cd17f2baf216ea2df3b"
+        },
+        {
+          "path": "target/execucao-states-20260915-01/jar-set-b-01/before.log",
+          "sha256": "83fb98ebfe858dcc6290012029184d9e33664482303d839342c8012ed6e32797"
+        },
+        {
+          "path": "target/execucao-states-20260915-01/jar-set-b-01/after.log",
+          "sha256": "83fb98ebfe858dcc6290012029184d9e33664482303d839342c8012ed6e32797"
+        }
+      ]
+    },
+    {
+      "id": "missing-user",
+      "passed": true,
+      "exit": 20,
+      "expectedExit": 20,
+      "layer": "DISTRIBUTED_JAR_EXTRACTED_PROCESS",
+      "rollbackConfirmed": true,
+      "comparisonsPassed": 0,
+      "factGrainsProved": false,
+      "previews": 0,
+      "previewMatrixProved": false,
+      "elapsedMilliseconds": 929,
+      "jarSha256": "fa74c0c0ccbdb7321b7ed2409a57cb500c840532cd98fa7b972faccc0880a9fc",
+      "inputSha256": "69d37d484d4c2aa1658fe70320d40306af97baf454209be8f1ccc0a3e23631ed",
+      "oracleSha256": "b167d43c1d935532fa34ba3c959f7cc575c5be33b4c4a9728bf231f5a3eda697",
+      "evidence": [
+        {
+          "path": "target/execucao-states-20260915-01/jar-missing-user-01/result.json",
+          "sha256": "c6b3083ee3b351096fa111f11caa523c5db6799ec84ff4e7623b2b3e303493d1"
+        },
+        {
+          "path": "target/execucao-states-20260915-01/jar-missing-user-01/binding.json",
+          "sha256": "623f47aee66ae73bc4854acdd5374de10746063711628282f7ca228963a1e676"
+        },
+        {
+          "path": "target/execucao-states-20260915-01/jar-missing-user-01/stdout.log",
+          "sha256": "33d69cab01f01f6197ba5c5811db701a5344b8f6b80c3689cd6fa3de08523ab1"
+        },
+        {
+          "path": "target/execucao-states-20260915-01/jar-missing-user-01/before.log",
+          "sha256": "83fb98ebfe858dcc6290012029184d9e33664482303d839342c8012ed6e32797"
+        },
+        {
+          "path": "target/execucao-states-20260915-01/jar-missing-user-01/after.log",
+          "sha256": "83fb98ebfe858dcc6290012029184d9e33664482303d839342c8012ed6e32797"
+        }
+      ]
+    },
+    {
+      "id": "oracle-value",
+      "passed": true,
+      "exit": 40,
+      "expectedExit": 40,
+      "layer": "DISTRIBUTED_JAR_EXTRACTED_PROCESS",
+      "rollbackConfirmed": true,
+      "comparisonsPassed": 18,
+      "factGrainsProved": true,
+      "previews": 0,
+      "previewMatrixProved": false,
+      "elapsedMilliseconds": 30557,
+      "jarSha256": "fa74c0c0ccbdb7321b7ed2409a57cb500c840532cd98fa7b972faccc0880a9fc",
+      "inputSha256": "8e1efbf277ab8f311191510bcc18966a3ab10b87314ed14602a45dd88a505506",
+      "oracleSha256": "53c497c15c8472f3edfdc3cf42e509eae1ec2b0592a2cff1188846acf56d8371",
+      "evidence": [
+        {
+          "path": "target/execucao-states-20260915-01/jar-oracle-value-01/result.json",
+          "sha256": "26484c1db330cb39fd55439d810655a470f3f9172bbda982932bbc673f93ca12"
+        },
+        {
+          "path": "target/execucao-states-20260915-01/jar-oracle-value-01/binding.json",
+          "sha256": "c926095394ed2c6145171a14d5a109914bf39daf40a60085c789cc2b7f3c1fed"
+        },
+        {
+          "path": "target/execucao-states-20260915-01/jar-oracle-value-01/stdout.log",
+          "sha256": "a260e742a1b6a266ba7469f577d388dd096b3a0dea681beb2881b40aa1e0510a"
+        },
+        {
+          "path": "target/execucao-states-20260915-01/jar-oracle-value-01/before.log",
+          "sha256": "83fb98ebfe858dcc6290012029184d9e33664482303d839342c8012ed6e32797"
+        },
+        {
+          "path": "target/execucao-states-20260915-01/jar-oracle-value-01/after.log",
+          "sha256": "83fb98ebfe858dcc6290012029184d9e33664482303d839342c8012ed6e32797"
+        }
+      ]
+    },
+    {
+      "id": "oracle-fiscal",
+      "passed": true,
+      "exit": 40,
+      "expectedExit": 40,
+      "layer": "DISTRIBUTED_JAR_EXTRACTED_PROCESS",
+      "rollbackConfirmed": true,
+      "comparisonsPassed": 18,
+      "factGrainsProved": true,
+      "previews": 0,
+      "previewMatrixProved": false,
+      "elapsedMilliseconds": 27260,
+      "jarSha256": "fa74c0c0ccbdb7321b7ed2409a57cb500c840532cd98fa7b972faccc0880a9fc",
+      "inputSha256": "8e1efbf277ab8f311191510bcc18966a3ab10b87314ed14602a45dd88a505506",
+      "oracleSha256": "dfc54178a072ac0412614d5498433c3893ce4546217ecada2b95f9a6224c6d5e",
+      "evidence": [
+        {
+          "path": "target/execucao-states-20260915-01/jar-oracle-fiscal-01/result.json",
+          "sha256": "2874391a674c2c7571d63ce9e6140dd3ac8d4a80db35dca7a1647f1adcefacd8"
+        },
+        {
+          "path": "target/execucao-states-20260915-01/jar-oracle-fiscal-01/binding.json",
+          "sha256": "d92e219c3146613e0e395dd884ca051c886d564d2eb2b993bb2875af0d869326"
+        },
+        {
+          "path": "target/execucao-states-20260915-01/jar-oracle-fiscal-01/stdout.log",
+          "sha256": "88e79e60c213b9d7be411826758d7660ac3fbbd486fed9ad91e48aa134d8de11"
+        },
+        {
+          "path": "target/execucao-states-20260915-01/jar-oracle-fiscal-01/before.log",
+          "sha256": "83fb98ebfe858dcc6290012029184d9e33664482303d839342c8012ed6e32797"
+        },
+        {
+          "path": "target/execucao-states-20260915-01/jar-oracle-fiscal-01/after.log",
+          "sha256": "83fb98ebfe858dcc6290012029184d9e33664482303d839342c8012ed6e32797"
+        }
+      ]
+    },
+    {
+      "id": "missing-loc-target",
+      "passed": true,
+      "exit": 40,
+      "expectedExit": 40,
+      "layer": "DISTRIBUTED_JAR_EXTRACTED_PROCESS",
+      "rollbackConfirmed": true,
+      "comparisonsPassed": 18,
+      "factGrainsProved": true,
+      "previews": 0,
+      "previewMatrixProved": false,
+      "elapsedMilliseconds": 25723,
+      "jarSha256": "fa74c0c0ccbdb7321b7ed2409a57cb500c840532cd98fa7b972faccc0880a9fc",
+      "inputSha256": "d23e57aff180b68dcf0f3a5ab7930850069795ff09eaa85d47148542c348cd89",
+      "oracleSha256": "be247cbfe7c31d07059451545adea0e1bbd1f41129501b459186222900e3e525",
+      "evidence": [
+        {
+          "path": "target/execucao-states-20260915-01/jar-missing-loc-01/result.json",
+          "sha256": "b92d20de36e8f029c9adee1d7831b287a9da9c7269aeef9f86b2d6f0bdc14e95"
+        },
+        {
+          "path": "target/execucao-states-20260915-01/jar-missing-loc-01/binding.json",
+          "sha256": "a31655cbd6bb837d52d1fe2ba0f3617756abfaa268c28aefb80ca9e46fd58809"
+        },
+        {
+          "path": "target/execucao-states-20260915-01/jar-missing-loc-01/stdout.log",
+          "sha256": "7964c5af347bfcb1eabfdcb400b7751ccc99fd04c225572602331fed917abf62"
+        },
+        {
+          "path": "target/execucao-states-20260915-01/jar-missing-loc-01/before.log",
+          "sha256": "83fb98ebfe858dcc6290012029184d9e33664482303d839342c8012ed6e32797"
+        },
+        {
+          "path": "target/execucao-states-20260915-01/jar-missing-loc-01/after.log",
+          "sha256": "83fb98ebfe858dcc6290012029184d9e33664482303d839342c8012ed6e32797"
+        }
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "path": "target/execucao-states-20260915-01/full-verify-03/result.json",
+      "sha256": "43af0384aeddb3a06721fb94ec59a2d70f4bcfec8fa24e791240db4f64996db3"
+    },
+    {
+      "path": "target/execucao-states-20260915-01/full-verify-03/inputs.json",
+      "sha256": "026ccfd0463f2cc9de68f9c06f7778e41c64b96abd3e79293fd743f4e3eac71e"
+    },
+    {
+      "path": "target/execucao-states-20260915-01/test-ids-final-01/result.json",
+      "sha256": "05f3e86b3b8d1ea7631c4e24600053f83ad5d97224866121e26d153fbffbb3a4"
+    },
+    {
+      "path": "target/execucao-states-20260915-01/runtime-package-01/qualified-source-inventory.json",
+      "sha256": "111a03ea25362b8f60be8f43193377d50c211cbf362d122fd46c31682ae71a8a"
+    },
+    {
+      "path": "target/execucao-states-20260915-01/runtime-package-01/result.json",
+      "sha256": "8fd65c7a8d222fd2bc06c3d6459f0e05ee579a9586b286a85f8975774f0eb232"
+    },
+    {
+      "path": "target/execucao-states-20260915-01/proof-input-index.json",
+      "sha256": "3558ac5b721aecb5d2941a42a0acc6f503b15cf16e9806d8dfb7681377276304"
+    },
+    {
+      "path": "src/test/java/br/com/esl/etl/v2/bootstrap/IntegralArtifactFixtures.java",
+      "sha256": "534796c57997cc7df6858fb7696a0df5990c1190b492dd820aa9c0b3a04dad88"
+    },
+    {
+      "path": "src/test/java/br/com/esl/etl/v2/bootstrap/IntegralArtifactOracleFixtures.java",
+      "sha256": "74c9cb4f73a55271c4844bf94b472a18e82c22ea404eca1fdd643235d2a6c46d"
+    },
+    {
+      "path": "docs/catalogos/execucao-states/PROPAGACAO.md",
+      "sha256": "01716f95962b0cda8c1418ddc95fa101f62764ceaeb3f5a2b9573c2bc29cabf2"
+    }
+  ],
+  "limits": [
+    "V2-041/G01 held",
+    "G01-G08 external dependent portions retained",
+    "No V1 execution",
+    "No productive qualification/deployment/cutover",
+    "Final canonical diff/scanner/succession are bound in the external final seal"
+  ]
+}

@@ -1,0 +1,19 @@
+query B56SchemaTypes {
+  __schema { types { name kind } }
+  debit: __type(name: "AccountingDebitsReportAnalytical") {
+    name kind description
+    fields { name description type { kind name ofType { kind name ofType { kind name } } } }
+  }
+  credit: __type(name: "CreditBaseConnection") {
+    name kind description
+    fields { name description type { kind name ofType { kind name ofType { kind name } } } }
+  }
+  freight: __type(name: "FreightBaseConnection") {
+    name kind description
+    fields { name description type { kind name ofType { kind name ofType { kind name } } } }
+  }
+  invoice: __type(name: "InvoiceBaseConnection") {
+    name kind description
+    fields { name description type { kind name ofType { kind name ofType { kind name } } } }
+  }
+}

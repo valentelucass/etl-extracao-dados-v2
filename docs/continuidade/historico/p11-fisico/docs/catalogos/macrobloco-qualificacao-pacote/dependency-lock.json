@@ -1,0 +1,144 @@
+{
+  "version": "qualification-dependencies-v1",
+  "scope": "existing Maven Central artifacts, unchanged versions; local Windows/x64 laboratory",
+  "dependencies": [
+    {
+      "group": "com.fasterxml.jackson.core",
+      "name": "jackson-annotations",
+      "version": "2.17.2",
+      "type": "jar",
+      "file": "jackson-annotations-2.17.2.jar",
+      "sha256": "873a606e23507969f9bbbea939d5e19274a88775ea5a169ba7e2d795aa5156e1",
+      "size": 78492,
+      "license": {
+        "expression": "Apache-2.0"
+      },
+      "origin": "https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-annotations/2.17.2/jackson-annotations-2.17.2.jar",
+      "pom": "jackson-annotations-2.17.2.pom",
+      "pomSha256": "4378184d608adcdbbb04a778bc6466863f07a4552a72044465c910403f9ec0bb"
+    },
+    {
+      "group": "com.fasterxml.jackson.core",
+      "name": "jackson-core",
+      "version": "2.17.2",
+      "type": "jar",
+      "file": "jackson-core-2.17.2.jar",
+      "sha256": "721a189241dab0525d9e858e5cb604d3ecc0ede081e2de77d6f34fa5779a5b46",
+      "size": 581927,
+      "license": {
+        "expression": "Apache-2.0"
+      },
+      "origin": "https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-core/2.17.2/jackson-core-2.17.2.jar",
+      "pom": "jackson-core-2.17.2.pom",
+      "pomSha256": "17821e1988e832707ab471af1a306f4a5ee50134f22d8d2717b58da859eb35bb"
+    },
+    {
+      "group": "com.fasterxml.jackson.core",
+      "name": "jackson-databind",
+      "version": "2.17.2",
+      "type": "jar",
+      "file": "jackson-databind-2.17.2.jar",
+      "sha256": "c04993f33c0f845342653784f14f38373d005280e6359db5f808701cfae73c0c",
+      "size": 1649454,
+      "license": {
+        "expression": "Apache-2.0"
+      },
+      "origin": "https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-databind/2.17.2/jackson-databind-2.17.2.jar",
+      "pom": "jackson-databind-2.17.2.pom",
+      "pomSha256": "d2450698bae90be338f2b99faeda694cd450adb52124213e7a53b41219b54062"
+    },
+    {
+      "group": "com.fasterxml.jackson.datatype",
+      "name": "jackson-datatype-jsr310",
+      "version": "2.17.2",
+      "type": "jar",
+      "file": "jackson-datatype-jsr310-2.17.2.jar",
+      "sha256": "9b80024a9822e70b07f6bb13824c76c137c1064a1b5eb518374ab141870fdbcc",
+      "size": 132264,
+      "license": {
+        "expression": "Apache-2.0"
+      },
+      "origin": "https://repo.maven.apache.org/maven2/com/fasterxml/jackson/datatype/jackson-datatype-jsr310/2.17.2/jackson-datatype-jsr310-2.17.2.jar",
+      "pom": "jackson-datatype-jsr310-2.17.2.pom",
+      "pomSha256": "3f5c86e5f7b10afdf5632752f1357bebd9e00cb3509a2074e0d7e752a534e1e8"
+    },
+    {
+      "group": "ch.qos.logback",
+      "name": "logback-classic",
+      "version": "1.5.16",
+      "type": "jar",
+      "file": "logback-classic-1.5.16.jar",
+      "sha256": "f985a33a68d900badec5b0c3c613ab9db66415d2cf378987357ded9da5370e32",
+      "size": 306722,
+      "license": {
+        "expression": "EPL-1.0 OR LGPL-2.1-only"
+      },
+      "origin": "https://repo.maven.apache.org/maven2/ch/qos/logback/logback-classic/1.5.16/logback-classic-1.5.16.jar",
+      "pom": "logback-classic-1.5.16.pom",
+      "pomSha256": "cbbc96b250008d587a067377c736b017a7c1a82c5280687c2a90860c1e2eb987"
+    },
+    {
+      "group": "ch.qos.logback",
+      "name": "logback-core",
+      "version": "1.5.16",
+      "type": "jar",
+      "file": "logback-core-1.5.16.jar",
+      "sha256": "f15e206b98ca25294506d2dadfe5ce2a6da9df9cf7c85d8e7191f99a422df3c9",
+      "size": 621606,
+      "license": {
+        "expression": "EPL-1.0 OR LGPL-2.1-only"
+      },
+      "origin": "https://repo.maven.apache.org/maven2/ch/qos/logback/logback-core/1.5.16/logback-core-1.5.16.jar",
+      "pom": "logback-core-1.5.16.pom",
+      "pomSha256": "67a9f90f798691dcd5776c5193a6ff4126ba945b03462bfaedd657a146762195"
+    },
+    {
+      "group": "com.microsoft.sqlserver",
+      "name": "mssql-jdbc",
+      "version": "12.8.1.jre11",
+      "type": "jar",
+      "file": "mssql-jdbc-12.8.1.jre11.jar",
+      "sha256": "e6933c0711e598a224060e52ed31392f720a4a7664e85d8ae37c52a85b67ebb0",
+      "size": 1476685,
+      "license": {
+        "expression": "MIT"
+      },
+      "origin": "https://repo.maven.apache.org/maven2/com/microsoft/sqlserver/mssql-jdbc/12.8.1.jre11/mssql-jdbc-12.8.1.jre11.jar",
+      "pom": "mssql-jdbc-12.8.1.jre11.pom",
+      "pomSha256": "9adfbf6c45153e44086ae4eb036412d214edcab24255899ba89bf862aeaa3d7b"
+    },
+    {
+      "group": "org.slf4j",
+      "name": "slf4j-api",
+      "version": "2.0.16",
+      "type": "jar",
+      "file": "slf4j-api-2.0.16.jar",
+      "sha256": "a12578dde1ba00bd9b816d388a0b879928d00bab3c83c240f7013bf4196c579a",
+      "size": 69435,
+      "license": {
+        "expression": "MIT"
+      },
+      "origin": "https://repo.maven.apache.org/maven2/org/slf4j/slf4j-api/2.0.16/slf4j-api-2.0.16.jar",
+      "pom": "slf4j-api-2.0.16.pom",
+      "pomSha256": "b1a00f5b1c4dbe62b805d65d23911a6f77063889d7cb1e86fe8389d6190473f7"
+    },
+    {
+      "group": "com.microsoft.sqlserver",
+      "name": "mssql-jdbc_auth",
+      "version": "12.8.1.x64",
+      "type": "dll",
+      "file": "mssql-jdbc_auth-12.8.1.x64.dll",
+      "sha256": "9a92363a42db34e9f27cedffe18b139d7bb6c93495cb8338f7f8dbb93f3ae538",
+      "size": 305328,
+      "license": {
+        "license": {
+          "url": "https://raw.githubusercontent.com/microsoft/mssql-jdbc/v12.8.1/mssql-jdbc_auth_LICENSE",
+          "name": "Microsoft Proprietary License"
+        }
+      },
+      "origin": "https://repo.maven.apache.org/maven2/com/microsoft/sqlserver/mssql-jdbc_auth/12.8.1.x64/mssql-jdbc_auth-12.8.1.x64.dll",
+      "pom": "mssql-jdbc_auth-12.8.1.x64.pom",
+      "pomSha256": "b5d5d6bf403cd4303effa4bf4a45314c59662b3abcf1ba43e6881c824847573b"
+    }
+  ]
+}

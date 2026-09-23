@@ -1,0 +1,37 @@
+{
+  "fields": [
+    {
+      "name": "id",
+      "type": "integer",
+      "label": "Identificador sintético"
+    },
+    {
+      "name": "sequence_code",
+      "type": "integer",
+      "label": "Código de sequência sintético"
+    },
+    {
+      "name": "updated_at",
+      "type": "datetime",
+      "label": "Atualização sintética"
+    },
+    {
+      "type": "datetime",
+      "name": "request_date"
+    },
+    {
+      "type": "string",
+      "name": "status"
+    }
+  ],
+  "filters": [
+    {
+      "name": "request_date",
+      "type": "date"
+    },
+    {
+      "name": "scopes.by_updated_at",
+      "type": "datetime"
+    }
+  ]
+}

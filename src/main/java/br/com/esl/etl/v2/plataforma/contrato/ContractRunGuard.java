@@ -292,6 +292,12 @@ public final class ContractRunGuard {
         return responsePages;
     }
 
+    /** Revalida o vínculo antes de compor uma execução local, sem produzir evidência. */
+    public synchronized void verifyExecutionBinding(final ControlPlaneStart start) {
+        requireOpen();
+        binding.verify(start);
+    }
+
     public synchronized boolean alertObserved() {
         return alertObserved;
     }

@@ -1,0 +1,21 @@
+{
+  "invocationId": "c8b51aec-b708-486e-a1df-b6a5e890fa7d",
+  "executionId": "3a9a111e-6c9b-4f36-b092-9a168011f71f",
+  "cycleId": "971bf02c-46b0-4496-9673-1b4e3acb4898",
+  "mode": "BACKFILL",
+  "start": "2033-06-07T03:00:00Z",
+  "endExclusive": "2033-06-08T03:00:00Z",
+  "replayOf": "",
+  "idempotencyKey": "B60_853213e64fac4a199db5d7975414e439",
+  "leaseSeconds": "30",
+  "pageSize": "2",
+  "maximumPages": "4",
+  "qualityVersion": "bloco55-localizacao_cargas-backfill-v2",
+  "qualityFingerprint": "b124a3d48c76bb3d1a6a6bdc64d1cfd3647f9f7cba963f9fedb1a39a29c475af",
+  "compatibilityVersion": "bloco60-compatible-v1",
+  "template": "LOCALIZACAO_CARGAS",
+  "maximumRows": "16",
+  "maximumDistinctRoots": "16",
+  "businessStart": "2033-06-07",
+  "businessEnd": "2033-06-07"
+}

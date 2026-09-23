@@ -112,6 +112,28 @@ class EslResiliencePolicyTest {
                                 base.circuitCooldown()));
     }
 
+    @Test
+    void acceptsExactNumericCeilingsWithoutOverflow() {
+        final Duration maximumTimeout = ExecutionDeadlines.MAX_TIMEOUT;
+        final EslResiliencePolicy policy =
+                new EslResiliencePolicy(
+                        EslResiliencePolicy.MAX_REQUEST_INTERVAL,
+                        1,
+                        EslResiliencePolicy.MAX_REQUESTS_PER_CYCLE,
+                        EslResiliencePolicy.MAX_REQUESTS_PER_WORKLOAD,
+                        maximumTimeout,
+                        maximumTimeout,
+                        maximumTimeout,
+                        maximumTimeout.minusNanos(1L),
+                        EslResiliencePolicy.MAX_REPARTITIONS,
+                        EslResiliencePolicy.MAX_CIRCUIT_FAILURE_THRESHOLD,
+                        maximumTimeout);
+
+        assertEquals(maximumTimeout, policy.cycleTimeout());
+        assertEquals(EslResiliencePolicy.MAX_REQUESTS_PER_CYCLE, policy.maxRequestsPerCycle());
+        assertEquals(EslResiliencePolicy.MAX_REPARTITIONS, policy.maxRepartitions());
+    }
+
     private static EslResiliencePolicy policy(
             final int maxInFlight,
             final int cycleRequests,

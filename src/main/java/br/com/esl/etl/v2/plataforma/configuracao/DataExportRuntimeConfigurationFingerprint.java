@@ -52,7 +52,10 @@ public final class DataExportRuntimeConfigurationFingerprint {
         encoder.write(resilience.maxRepartitions());
         encoder.write(resilience.circuitFailureThreshold());
         encoder.write(resilience.circuitCooldown());
-        for (final DataExportTemplate template : DataExportTemplate.values()) {
+        // This v2 wire is frozen for durable B53/B54 occurrences. New template semantics are
+        // bound by their contract and operational request, without rewriting this history.
+        for (final DataExportTemplate template :
+                java.util.List.of(DataExportTemplate.COLETAS, DataExportTemplate.FRETES)) {
             encoder.write(template.name());
             encoder.write(template.contractSemanticsFingerprint().version());
             encoder.write(template.contractSemanticsFingerprint().sha256());

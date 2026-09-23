@@ -1,0 +1,19 @@
+{
+  "invocationId": "bdd0c37e-18d7-489c-a558-73edc4f22f2f",
+  "executionId": "3d9e21d9-8908-4263-8aaf-7572439dcd29",
+  "cycleId": "da5398d2-b6d4-48db-b622-685e636c14a9",
+  "mode": "BACKFILL",
+  "start": "2033-07-02T03:00:00Z",
+  "endExclusive": "2033-07-03T03:00:00Z",
+  "replayOf": "",
+  "idempotencyKey": "B60_8cdac89b7778459d936b47e5c51f20c3",
+  "leaseSeconds": "30",
+  "pageSize": "20",
+  "maximumPages": "4",
+  "qualityVersion": "bloco60-usuarios-backfill-v1",
+  "qualityFingerprint": "731a538266821669b3a11eb863ac8479eb331802add7fd81b7d9d7a869bb11c7",
+  "compatibilityVersion": "bloco60-compatible-v1",
+  "protocol": "GRAPHQL",
+  "operation": "USERS_SNAPSHOT",
+  "maximumNodes": "80"
+}

@@ -1,0 +1,269 @@
+{
+  "block": 62,
+  "phase": "BOUNDED_REAL_REPLAY_AND_GRAPHQL_COMPARISON",
+  "calls": 5,
+  "maximumCalls": 5,
+  "stopReason": null,
+  "elapsedMilliseconds": 47570,
+  "rawPayloadPersisted": false,
+  "rotationProven": false,
+  "v2012aAccepted": false,
+  "sqlExecuted": false,
+  "results": [
+    {
+      "operation": "COLETAS_INFO",
+      "httpStatus": 200,
+      "curlExit": 0,
+      "responseBytes": 4820,
+      "elapsedMilliseconds": 920,
+      "failure": null,
+      "profile": {
+        "fields": [
+          {
+            "name": "id",
+            "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+          },
+          {
+            "name": "pck_crn_psn_nickname",
+            "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+          },
+          {
+            "name": "sequence_code",
+            "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+          },
+          {
+            "name": "created_at",
+            "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+          },
+          {
+            "name": "request_date",
+            "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+          },
+          {
+            "name": "service_date",
+            "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+          },
+          {
+            "name": "finish_date",
+            "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+          },
+          {
+            "name": "pck_cor_nickname",
+            "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+          },
+          {
+            "name": "invoices_volumes",
+            "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+          },
+          {
+            "name": "invoices_weight",
+            "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+          },
+          {
+            "name": "taxed_weight",
+            "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+          },
+          {
+            "name": "invoices_value",
+            "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+          },
+          {
+            "name": "status",
+            "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+          },
+          {
+            "name": "pck_pds_cty_name",
+            "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+          },
+          {
+            "name": "pck_pds_cty_sae_code",
+            "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+          },
+          {
+            "name": "pck_pds_postal_code",
+            "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+          },
+          {
+            "name": "pck_pds_neighborhood",
+            "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+          },
+          {
+            "name": "pck_prn_name",
+            "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+          },
+          {
+            "name": "pck_prn_drt_nickname",
+            "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+          },
+          {
+            "name": "updated_at",
+            "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+          },
+          {
+            "name": "pck_loe_ore_description",
+            "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+          },
+          {
+            "name": "pck_pus_ore_description",
+            "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+          },
+          {
+            "name": "pck_pus_ore_trigger",
+            "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+          },
+          {
+            "name": "pck_uer_name",
+            "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+          },
+          {
+            "name": "pck_ctr_name",
+            "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+          },
+          {
+            "name": "cancellation_reason",
+            "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+          },
+          {
+            "name": "pck_mik_attempt_number",
+            "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+          },
+          {
+            "name": "pck_mik_mft_crn_psn_nickname",
+            "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+          },
+          {
+            "name": "pck_mik_mft_sequence_code",
+            "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+          },
+          {
+            "name": "pck_mik_mft_vie_license_plate",
+            "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+          },
+          {
+            "name": "pck_mik_mft_vie_vee_name",
+            "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+          }
+        ],
+        "fieldsCount": 31,
+        "fieldsNamesOmitted": 0,
+        "filters": [
+          {
+            "name": "finish_date",
+            "declaredType": "date"
+          },
+          {
+            "name": "service_date",
+            "declaredType": "date"
+          },
+          {
+            "name": "request_date",
+            "declaredType": "date"
+          },
+          {
+            "name": "corporation_id",
+            "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+          },
+          {
+            "name": "status",
+            "declaredType": "UNDECLARED_OR_UNRECOGNIZED"
+          },
+          {
+            "name": "by_updated_at",
+            "declaredType": "datetime"
+          }
+        ],
+        "filtersCount": 6,
+        "filtersNamesOmitted": 0,
+        "metadataGatePassed": true
+      }
+    },
+    {
+      "operation": "COLETAS_DATA_PAGE_1",
+      "httpStatus": 200,
+      "curlExit": 0,
+      "responseBytes": 5756,
+      "elapsedMilliseconds": 841,
+      "failure": null,
+      "profile": {
+        "physicalRows": 5,
+        "distinctRoots": 2,
+        "terminal": false
+      }
+    },
+    {
+      "operation": "COLETAS_DATA_PAGE_2_IF_NONEMPTY",
+      "httpStatus": 200,
+      "curlExit": 0,
+      "responseBytes": 2276,
+      "elapsedMilliseconds": 785,
+      "failure": null,
+      "profile": {
+        "physicalRows": 2,
+        "distinctRoots": 2,
+        "terminal": false
+      }
+    },
+    {
+      "operation": "COLETAS_GRAPHQL_PAGE_1",
+      "httpStatus": 200,
+      "curlExit": 0,
+      "responseBytes": 4291,
+      "elapsedMilliseconds": 876,
+      "failure": null,
+      "profile": {
+        "rows": 20,
+        "hasNextPage": true
+      }
+    },
+    {
+      "operation": "COLETAS_GRAPHQL_PAGE_2_IF_HAS_NEXT",
+      "httpStatus": 200,
+      "curlExit": 0,
+      "responseBytes": 4305,
+      "elapsedMilliseconds": 1056,
+      "failure": null,
+      "profile": {
+        "rows": 20,
+        "hasNextPage": true
+      }
+    }
+  ],
+  "replay": {
+    "accepted": true,
+    "layer": "SOURCE_BODY_REPLAY_IN_MEMORY_STAGING",
+    "contractVersion": "2026-09-10.b62-coletas-scalar-capture.1",
+    "contractFingerprint": "b143864a5bbde9ccc3f36f488cbcf0d67de1034743987104b793736f00beefe9",
+    "dataPages": 2,
+    "physicalRows": 7,
+    "distinctRoots": 4,
+    "repeatedRootsAcrossPages": 0,
+    "stagedRows": 7,
+    "quarantinedRows": 0,
+    "preservationDifferences": 0,
+    "unknownStatusRows": 0,
+    "unavailableFreshnessRows": 0,
+    "dataTerminalObserved": false,
+    "captureLimitReached": true,
+    "graphPages": 2,
+    "graphRows": 40,
+    "graphTerminalObserved": false,
+    "comparison": {
+      "globalSetEqualityProven": false,
+      "rowsOutsideGraphSample": 0,
+      "matchedPhysicalRows": 7,
+      "canonicalIdDifferences": 0,
+      "fieldDifferences": {
+        "cancellation_reason": 0,
+        "finish_date": 0,
+        "request_date": 0,
+        "service_date": 0,
+        "status": 0,
+        "status_updated_at": 7
+      }
+    },
+    "snapshotProven": false,
+    "representativeParityAccepted": false,
+    "operationalBindingValidated": false,
+    "sqlExecuted": false
+  }
+}

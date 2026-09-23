@@ -1,0 +1,410 @@
+{
+  "catalogVersion": "2026-09-04.v2-026a-v03.1",
+  "decision": "MANIFESTOS_6399_ROOT_CHILD_PRESENCE_FRESHNESS_REDUCERS",
+  "decisionStatus": "COMPLETE_LOCAL_DECISION_ONLY",
+  "scope": "DECISION_ONLY_NO_DDL_NO_RUNTIME_NO_SOURCE_IO_NO_PUBLICATION",
+  "task": "V2-026a",
+  "route": "V03",
+  "sourceContract": {
+    "id": "dataexport-6399",
+    "version": "2026-09-04.v2-025b.2",
+    "releaseFingerprint": "30181093f00f47507d1910d9806a97697118ab671aeae0598d21a4a2726a7cb8"
+  },
+  "identityDecision": {
+    "task": "V2-009b/6399",
+    "requiredStatus": "COMPLETE_LOCAL_CONSERVATIVE_FAIL_CLOSED",
+    "requiredCatalogVersion": "2026-09-04.v2-009b.2",
+    "reference": "docs/catalogos/identidade-manifestos/manifesto.json",
+    "requiredIdentityFingerprint": "ad2e3457a91961372dd29cb96bd6f2cb5fd6f67614d1255303787a8e2c4085c3",
+    "requiredReleaseFingerprint": "12e2b402a6ae1c7c484a7f4af33c443d0ee5ceb99201ec6e3e4811d2d7e2e4f3",
+    "fingerprintBinding": "EXACT_LOCAL_P01_IDENTITY_AND_RELEASE_FINGERPRINTS_RECOMPUTED_BY_VALIDATOR"
+  },
+  "execution": {
+    "status": "NOT_STARTED",
+    "owner": "V04",
+    "parentTask": "V2-026",
+    "parentTaskStatus": "OPEN",
+    "allowedArtifactsInV03": ["DOCUMENTATION", "LOCAL_VALIDATOR"],
+    "forbiddenArtifactsInV03": [
+      "JAVA_PRODUCTION_CODE",
+      "MIGRATION",
+      "SCHEMA",
+      "TABLE",
+      "PROCEDURE",
+      "VIEW",
+      "FACT",
+      "GRANT",
+      "INTEGRATION",
+      "RUNTIME"
+    ]
+  },
+  "logicalGrains": {
+    "root": {
+      "name": "manifesto",
+      "sourcePath": "/sequence_code",
+      "naturalComponents": [
+        "source_instance",
+        "tenant_scope",
+        "entity=manifestos",
+        "INTEGER:sequence_code"
+      ],
+      "cardinality": "ONE_LOGICAL_ROOT_PER_SCOPED_SOURCE_KEY",
+      "physicalExpansion": "MANY_PHYSICAL_OBSERVATIONS_MAY_DESCRIBE_ONE_ROOT",
+      "hashOrderAndArrival": "NEVER_IDENTITY_OR_TIE_BREAKER"
+    },
+    "pick": {
+      "name": "manifesto_pick",
+      "sourcePath": "/mft_pfs_pck_sequence_code",
+      "naturalComponents": ["root_canonical_id", "INTEGER:mft_pfs_pck_sequence_code"],
+      "cardinality": "ROOT_ZERO_TO_MANY_NO_PROVIDER_MAXIMUM",
+      "physicalRecordCardinality": "ZERO_OR_ONE_PICK_KEY_PER_PHYSICAL_RECORD",
+      "relationRole": "CANDIDATE_FOR_V2_046A_NO_COLETA_RELATION_MATERIALIZED"
+    },
+    "mdfe": {
+      "name": "manifesto_mdfe",
+      "sourcePath": "/mft_mfs_key",
+      "naturalComponents": ["root_canonical_id", "STRING:mft_mfs_key"],
+      "keyConstraint": "EXACT_44_ASCII_DECIMAL_DIGITS_FAIL_CLOSED",
+      "cardinality": "ROOT_ZERO_TO_MANY_NO_PROVIDER_MAXIMUM",
+      "physicalRecordCardinality": "ZERO_OR_ONE_MDFE_KEY_PER_PHYSICAL_RECORD",
+      "number": {
+        "sourcePath": "/mft_mfs_number",
+        "role": "POSITIVE_INTEGER_CORRELATED_ATTRIBUTE_NEVER_IDENTITY",
+        "physicalPair": ["/mft_mfs_number", "/mft_mfs_key"],
+        "numberWithoutKey": "PRESERVE_AND_QUARANTINE_NO_CHILD",
+        "keyWithoutNumber": "PRESERVE_AND_QUARANTINE_NO_CHILD"
+      },
+      "mdfeStatusContext": {
+        "sourcePath": "/mdfe_status",
+        "rootRole": "ROOT_SCALAR_REPLICATED_BY_EXPANSION_NEVER_CHILD_SIGNAL",
+        "childContext": "RAW_CONTEXT_PROVENANCE_ONLY_WHEN_VALID_MDFE_KEY_EXISTS_NEVER_CANONICAL_CHILD_ATTRIBUTE_OR_LIFECYCLE",
+        "withoutKey": "REDUCE_ON_ROOT_ONLY_NEVER_CREATE_OR_QUARANTINE_A_CHILD"
+      },
+      "reduction": "GROUP_BY_ROOT_AND_KEY_KEEP_NUMBER_FROM_THE_SAME_PHYSICAL_PAIR_NEVER_INDEPENDENT_FIELD_MAX"
+    }
+  },
+  "evidenceAggregates": {
+    "classification": "VERSIONED_LEGACY_STATIC_CORPUS_AGGREGATES_NO_VALUE_EMISSION",
+    "physicalRows": 228,
+    "logicalRoots": 100,
+    "pick": {
+      "valueRows": 193,
+      "nullRows": 35,
+      "distinctScopedKeys": 193,
+      "repeatedScopedKeys": 0,
+      "collisions": 0,
+      "rootsWithValue": 67,
+      "rootsWithMultiple": 42,
+      "observedMaximumPerRoot": 10,
+      "contractMaximum": "UNBOUNDED_ZERO_TO_MANY"
+    },
+    "mdfe": {
+      "numberValueRows": 80,
+      "numberNullRows": 148,
+      "keyValueRows": 80,
+      "keyNullRows": 148,
+      "numberKeyAsymmetries": 0,
+      "distinctScopedKeys": 43,
+      "repeatedScopedKeyGroups": 16,
+      "repeatedRowExcess": 37,
+      "observedMaximumRepeatedRowsPerScopedKey": 7,
+      "rootsWithValue": 41,
+      "rootsWithMultiple": 2,
+      "observedMaximumDistinctKeysPerRoot": 2,
+      "numberDivergencesPerScopedKey": 0,
+      "contractMaximum": "UNBOUNDED_ZERO_TO_MANY"
+    },
+    "mdfeStatus": {
+      "valueRows": 228,
+      "distinctValues": 2,
+      "valueRowsWithoutMdfeKey": 148,
+      "rootsWithDivergence": 0,
+      "scopedMdfeKeysWithDivergence": 0,
+      "rootsMixingRowsWithAndWithoutMdfeKey": 0,
+      "conclusion": "ROOT_SCALAR_REPLICATED_BY_EXPANSION_NOT_MDFE_CHILD_SIGNAL"
+    },
+    "cooccurrence": {
+      "pickAndMdfeKey": 59,
+      "pickOnly": 134,
+      "mdfeKeyOnly": 21,
+      "neither": 14,
+      "total": 228,
+      "conclusion": "NO_PICK_MDFE_OR_MANIFESTO_COLETA_RELATION_INFERENCE"
+    },
+    "limits": [
+      "LOCAL_CORPUS_COUNTS_ARE_NOT_PROVIDER_CARDINALITY_CAPS",
+      "ZERO_LOCAL_COLLISIONS_IS_NOT_GLOBAL_UNIQUENESS_OR_TEMPORAL_STABILITY",
+      "NO_COMPLETENESS_SNAPSHOT_SWEEP_PUBLICATION_OR_CUTOVER_PROOF"
+    ]
+  },
+  "attributePresence": {
+    "vocabulary": ["ABSENT", "NULL", "VALUE"],
+    "leafRepresentation": [
+      "source_path",
+      "presence",
+      "raw_value",
+      "typed_value",
+      "parse_state",
+      "provenance"
+    ],
+    "parseStates": ["NOT_APPLICABLE", "VALID", "INVALID"],
+    "invalidTypedValue": "PRESERVE_RAW_AND_QUARANTINE_NEVER_COERCE_TO_NULL",
+    "promotionApplicationTruthTable": [
+      {
+        "input": "ABSENT",
+        "result": "ABSENT_CURRENT_COHORT",
+        "targetAction": "PROMOTE_ABSENT_PRESENCE_WITHOUT_OLDER_VALUE_BACKFILL"
+      },
+      {
+        "input": "NULL",
+        "result": "EXPLICIT_NULL",
+        "targetAction": "CLEAR_NULLABLE_FIELD_ON_STRICTLY_NEWER_COHORT"
+      },
+      {
+        "input": "VALUE",
+        "result": "TYPED_VALUE",
+        "targetAction": "APPLY_ON_STRICTLY_NEWER_COHORT"
+      },
+      {
+        "input": "INVALID",
+        "result": "QUARANTINE",
+        "targetAction": "NO_PROMOTION"
+      }
+    ]
+  },
+  "freshness": {
+    "dedupeOrder": ["/finished_at", "/closed_at", "/departured_at", "/created_at"],
+    "promotionOrder": ["/finished_at", "/closed_at", "/departured_at", "/created_at"],
+    "selection": "FIRST_VALUE_AFTER_ALL_PRESENT_TEMPORALS_VALIDATE",
+    "absentOrNull": "CONTINUE_TO_NEXT_PATH",
+    "presentInvalid": "PRESERVE_RAW_AND_QUARANTINE_WHOLE_OBSERVATION_NO_FALLBACK",
+    "normalization": "OFFSET_AWARE_INSTANT_TO_UTC_PRESERVE_RAW_AND_ORIGINAL_OFFSET",
+    "unqualifiedLocalTimestamp": "INVALID_WITHOUT_VERSIONED_TIME_ZONE_PROOF",
+    "noValidValue": "PRESERVE_OBSERVATION_AND_BLOCK_PROMOTION",
+    "cohort": "MAXIMUM_VALID_FRESHNESS_PER_LOGICAL_ROOT_OR_CHILD",
+    "childFreshness": "INHERIT_PARENT_OBSERVATION_FRESHNESS_AS_CONTEXT_NOT_CHILD_LIFECYCLE_TIME",
+    "olderObservation": "PRESERVE_AUDIT_AND_NO_OP_PROMOTION",
+    "equalFreshness": {
+      "reducerResolvable": "APPLY_EXPLICIT_REDUCER_THEN_COMPARE_CANONICAL_RESULT",
+      "canonicalIdentical": "REPLAY_NO_OP",
+      "residualDivergence": "EQUAL_FRESHNESS_CONFLICT_QUARANTINE",
+      "forbiddenTieBreakers": ["ARRIVAL", "PAGE", "RECORD_ORDER", "HASH"]
+    },
+    "hashRole": "OPTIONAL_PRECOMPARE_ONLY_REQUIRES_EXACT_CANONICAL_COMPARISON"
+  },
+  "reducers": {
+    "scope": "ONLY_WITHIN_MAXIMUM_FRESHNESS_COHORT_NEVER_BACKFILL_FROM_OLDER_COHORT",
+    "rootDefault": {
+      "name": "TRISTATE_UNIQUE_VALUE_FAIL_CLOSED",
+      "truthTable": [
+        {
+          "inputs": "ONLY_ABSENT",
+          "result": "ABSENT",
+          "action": "CURRENT_COHORT_ABSENT_NO_OLDER_VALUE_BACKFILL"
+        },
+        {
+          "inputs": "NULL_AND_OPTIONAL_ABSENT_NO_VALUE",
+          "result": "NULL",
+          "action": "EXPLICIT_NULL"
+        },
+        {
+          "inputs": "ONE_CANONICAL_VALUE_REPEATED_AND_OPTIONAL_ABSENT_NO_NULL",
+          "result": "VALUE",
+          "action": "APPLY_UNIQUE_VALUE"
+        },
+        {
+          "inputs": "NULL_AND_VALUE",
+          "result": "CONFLICT",
+          "action": "QUARANTINE_FIELD_AND_BLOCK_ROOT_PROMOTION"
+        },
+        {
+          "inputs": "TWO_OR_MORE_DISTINCT_CANONICAL_VALUES",
+          "result": "CONFLICT",
+          "action": "QUARANTINE_FIELD_AND_BLOCK_ROOT_PROMOTION"
+        },
+        {
+          "inputs": "ANY_INVALID_TYPED_VALUE",
+          "result": "INVALID",
+          "action": "QUARANTINE_OBSERVATION"
+        }
+      ],
+      "forbidden": ["GENERIC_SUM", "GENERIC_MAX", "KEEP_LAST", "STALE_BACKFILL"]
+    },
+    "manifestStatus": {
+      "sourcePath": "/status",
+      "knownPrecedence": ["closed", "in_transit", "pending"],
+      "knownValuesInSameCohort": "HIGHEST_PRECEDENCE_WINS",
+      "oneUnknownValueRepeated": "PRESERVE_RAW_NO_INFERRED_TERMINALITY",
+      "knownAndUnknownOrDistinctUnknowns": "QUARANTINE_STATUS_CONFLICT",
+      "nullAndValue": "QUARANTINE_STATUS_CONFLICT",
+      "strictlyNewerStatus": "NEWER_COHORT_WINS_WITHOUT_INFERRED_TERMINAL_ANTI_REGRESSION"
+    },
+    "mdfeStatus": {
+      "sourcePath": "/mdfe_status",
+      "role": "ROOT_SCALAR_REPLICATED_BY_EXPANSION_NEVER_CHILD_SIGNAL",
+      "reducer": "TRISTATE_UNIQUE_VALUE_FAIL_CLOSED",
+      "semanticMapping": "NONE_PRESERVE_RAW_AND_TYPED_EXACT_VALUE",
+      "childContext": "RAW_PROVENANCE_CONTEXT_ONLY_AFTER_CHILD_EXISTS_NEVER_CANONICAL_CHILD_ATTRIBUTE_LIFECYCLE_OR_CREATION"
+    },
+    "man07Metrics": {
+      "attributes": [
+        {"logicalName": "km", "sourcePath": "/km", "aliasOf": null},
+        {"logicalName": "totalCost", "sourcePath": "/total_cost", "aliasOf": null},
+        {"logicalName": "manifestFreightsTotal", "sourcePath": "/manifest_freights_total", "aliasOf": null},
+        {"logicalName": "totalTaxedWeight", "sourcePath": "/total_taxed_weight", "aliasOf": null},
+        {"logicalName": "vehicleWeightCapacity", "sourcePath": "/mft_vie_weight_capacity", "aliasOf": null},
+        {"logicalName": "capacidadeKg", "sourcePath": "/mft_vie_weight_capacity", "aliasOf": "vehicleWeightCapacity"},
+        {"logicalName": "manifestItemsCount", "sourcePath": "/manifest_items_count", "aliasOf": null},
+        {"logicalName": "finalizedManifestItemsCount", "sourcePath": "/finalized_manifest_items_count", "aliasOf": null}
+      ],
+      "truthTable": [
+        {
+          "inputs": "ONLY_ABSENT",
+          "result": "ABSENT",
+          "action": "CURRENT_COHORT_ABSENT_NO_OLDER_VALUE_BACKFILL"
+        },
+        {
+          "inputs": "NULL_AND_OPTIONAL_ABSENT_NO_VALUE",
+          "result": "NULL",
+          "action": "EXPLICIT_NULL"
+        },
+        {
+          "inputs": "ONE_CANONICAL_VALUE_WITH_NULL_OR_ABSENT",
+          "result": "VALUE",
+          "action": "COMPLEMENTED_FROM_EXPANSION"
+        },
+        {
+          "inputs": "ONE_CANONICAL_VALUE_REPEATED",
+          "result": "VALUE",
+          "action": "APPLY_UNIQUE_VALUE"
+        },
+        {
+          "inputs": "TWO_OR_MORE_DISTINCT_CANONICAL_VALUES_INCLUDING_ZERO_VERSUS_NONZERO",
+          "result": "METRIC_VALUE_CONFLICT",
+          "action": "QUARANTINE_METRIC_AND_BLOCK_ROOT_PROMOTION"
+        },
+        {
+          "inputs": "ANY_INVALID_TYPED_VALUE",
+          "result": "INVALID",
+          "action": "QUARANTINE_OBSERVATION"
+        }
+      ],
+      "zero": "REAL_VALUE_NEVER_MISSING",
+      "capacityAlias": "ONE_REDUCED_SOURCE_SIGNAL_TWO_IDENTICAL_LOGICAL_PROJECTIONS_NEVER_DIVERGE",
+      "forbidden": ["SUM", "MAX", "METRIC_SCORE", "OLDER_VERSION_COMPLEMENT"]
+    },
+    "children": {
+      "pick": "GROUP_BY_ROOT_AND_PICK_KEY; IDENTICAL_REPLAY_NO_OP; SAME_KEY_DIVERGENCE_QUARANTINE_CHILD",
+      "mdfe": "GROUP_BY_ROOT_AND_MDFE_KEY; KEEP_NUMBER_FROM_SAME_PHYSICAL_PAIR; IDENTICAL_REPLAY_NO_OP; SAME_KEY_NUMBER_DIVERGENCE_QUARANTINE_CHILD",
+      "differentChildKeys": "PRESERVE_DISTINCT_CHILDREN_NEVER_ROOT_CONFLICT",
+      "missingChildInNewerPageOrWindow": "NO_DELETE_DEACTIVATION_OR_NEGATIVE_CLAIM"
+    }
+  },
+  "competence": {
+    "primaryPath": "/departured_at",
+    "fallbackPath": "/created_at",
+    "fallbackCondition": "PRIMARY_ABSENT_OR_NULL_ONLY",
+    "primaryPresentInvalid": "QUARANTINE_NO_FALLBACK",
+    "fallbackPresentInvalid": "QUARANTINE",
+    "bothWithoutValue": "UNKNOWN_BLOCK_DOWNSTREAM_CONSUMER",
+    "preserve": ["source_path", "raw_value", "fallback_origin", "instant_utc"],
+    "civilDateBucketing": "NOT_AUTHORIZED_WITHOUT_VERSIONED_TIME_ZONE_CONTRACT",
+    "forbiddenSubstitutes": ["EXTRACTION_TIME", "MAX", "CLOSED_AT", "FINISHED_AT"]
+  },
+  "relationshipCandidates": {
+    "manifestoToColetaPath": "/mft_pfs_pck_sequence_code",
+    "storage": "APPEND_ONLY_VALUE_PRESENCE_PROVENANCE",
+    "resolutionOwner": "V2-046A",
+    "materialization": "FORBIDDEN_IN_V03_AND_V04_BASE_INGESTION",
+    "cooccurrence": "NEVER_RELATION_PROOF",
+    "orphan": "PRESERVE_CANDIDATE_NEVER_NULL_OR_DROP",
+    "forbidden": ["COLETA_LOOKUP", "FOREIGN_KEY", "TOP_ONE", "ORPHAN_NULLING", "INFERRED_JOIN"]
+  },
+  "absence": {
+    "rootNotObservedInPageOrWindow": "NO_STATE_CHANGE",
+    "childNotObservedInPageOrWindow": "NO_STATE_CHANGE",
+    "emptyPage": "PAGINATION_STOP_SIGNAL_ONLY_NO_DOMAIN_ABSENCE",
+    "activation": "BLOCKED_UNTIL_V2_013_AND_INDEPENDENT_COMPLETE_SNAPSHOT_PROOF",
+    "forbidden": ["SWEEP", "DELETE", "DEACTIVATE", "SOFT_DELETE", "PUBLICATION"]
+  },
+  "forbiddenMechanics": [
+    "HASH_AS_IDENTITY",
+    "ORDER_AS_IDENTITY",
+    "MDFE_NUMBER_AS_IDENTITY",
+    "MDFE_STATUS_AS_CHILD_SIGNAL",
+    "COOCCURRENCE_AS_RELATION",
+    "ARRIVAL_AS_FRESHNESS",
+    "EQUAL_FRESHNESS_KEEP_LAST",
+    "GENERIC_SUM",
+    "GENERIC_MAX",
+    "METRIC_SCORE_TIE_BREAK",
+    "STALE_BACKFILL",
+    "INDEPENDENT_MDFE_FIELD_REDUCTION",
+    "ROOT_OR_CHILD_SWEEP",
+    "DELETE_OR_DEACTIVATE",
+    "RELATION_LOOKUP_OR_FOREIGN_KEY",
+    "PUBLICATION_OR_CUTOVER",
+    "DDL_OR_RUNTIME_IN_V03"
+  ],
+  "decisionFixtures": [
+    {"id": "PRESENCE_ONLY_ABSENT", "synthetic": true, "inputClass": "ONLY_ABSENT", "expected": "ABSENT_CURRENT_COHORT_NO_OLDER_BACKFILL"},
+    {"id": "PRESENCE_EXPLICIT_NULL", "synthetic": true, "inputClass": "NULL_AND_ABSENT", "expected": "NULL_EXPLICIT_CLEAR_ON_NEWER_COHORT"},
+    {"id": "FRESHNESS_FALLBACK", "synthetic": true, "inputClass": "FINISHED_NULL_CLOSED_ABSENT_DEPARTURED_VALUE", "expected": "DEPARTURED_AT_UTC"},
+    {"id": "FRESHNESS_INVALID", "synthetic": true, "inputClass": "ANY_PRESENT_TEMPORAL_INVALID", "expected": "QUARANTINE_NO_PROMOTION"},
+    {"id": "OUT_OF_ORDER", "synthetic": true, "inputClass": "OLDER_AFTER_NEWER", "expected": "PRESERVE_AUDIT_NO_OP"},
+    {"id": "IDENTICAL_REPLAY", "synthetic": true, "inputClass": "EQUAL_FRESHNESS_CANONICAL_IDENTICAL", "expected": "REPLAY_NO_OP"},
+    {"id": "EQUAL_FRESHNESS_ROOT_CONFLICT", "synthetic": true, "inputClass": "EQUAL_FRESHNESS_DISTINCT_ROOT_VALUES", "expected": "EQUAL_FRESHNESS_CONFLICT"},
+    {"id": "STATUS_PRECEDENCE", "synthetic": true, "inputClass": "PENDING_IN_TRANSIT_CLOSED", "expected": "CLOSED"},
+    {"id": "STATUS_UNKNOWN_CONFLICT", "synthetic": true, "inputClass": "KNOWN_AND_UNKNOWN", "expected": "QUARANTINE_STATUS_CONFLICT"},
+    {"id": "METRIC_NULL_COMPLEMENT", "synthetic": true, "inputClass": "NULL_ABSENT_ONE_UNIQUE_VALUE", "expected": "COMPLEMENTED_FROM_EXPANSION"},
+    {"id": "METRIC_ZERO_REPLAY", "synthetic": true, "inputClass": "ZERO_ZERO", "expected": "VALUE_ZERO"},
+    {"id": "METRIC_ZERO_CONFLICT", "synthetic": true, "inputClass": "ZERO_NONZERO", "expected": "METRIC_VALUE_CONFLICT"},
+    {"id": "MDFE_PHYSICAL_PAIR", "synthetic": true, "inputClass": "VALID_NUMBER_AND_KEY", "expected": "ONE_MDFE_CHILD_BY_KEY_NUMBER_ATTRIBUTE"},
+    {"id": "MDFE_NUMBER_WITHOUT_KEY", "synthetic": true, "inputClass": "NUMBER_VALUE_KEY_NULL", "expected": "QUARANTINE_NO_CHILD"},
+    {"id": "MDFE_STATUS_WITHOUT_KEY", "synthetic": true, "inputClass": "STATUS_VALUE_NUMBER_AND_KEY_NULL", "expected": "ROOT_STATUS_ONLY_NO_CHILD"},
+    {"id": "DISTINCT_CHILDREN", "synthetic": true, "inputClass": "SAME_ROOT_FRESHNESS_DISTINCT_PICK_OR_MDFE_KEYS", "expected": "PRESERVE_DISTINCT_CHILDREN_NO_ROOT_CONFLICT"},
+    {"id": "RELATION_CANDIDATE", "synthetic": true, "inputClass": "PICK_KEY_WITHOUT_COLETA_PROOF", "expected": "APPEND_CANDIDATE_NO_RELATION"},
+    {"id": "EMPTY_PAGE", "synthetic": true, "inputClass": "EMPTY_PAGE_AFTER_PARTIAL_WINDOW", "expected": "STOP_PAGINATION_NO_SWEEP"}
+  ],
+  "evidenceBounds": {
+    "supports": [
+      "BOUNDED_ROOT_PICK_AND_MDFE_GRAINS",
+      "MDFE_NUMBER_KEY_PHYSICAL_PAIR_IN_LOCAL_CORPUS",
+      "MDFE_STATUS_ROOT_SCALAR_REPLICATED_BY_EXPANSION",
+      "FAIL_CLOSED_PRESENCE_FRESHNESS_AND_REDUCER_DECISION",
+      "RELATION_CANDIDATE_PRESERVATION_WITHOUT_MATERIALIZATION"
+    ],
+    "doesNotSupport": [
+      "CURRENT_PROVIDER_SCHEMA_OR_FINGERPRINT",
+      "GLOBAL_UNIQUENESS_OR_TEMPORAL_STABILITY",
+      "OBSERVED_MAXIMUM_AS_PROVIDER_CARDINALITY_CAP",
+      "PICK_MDFE_OR_MANIFESTO_COLETA_RELATION",
+      "MDFE_STATUS_CHILD_LIFECYCLE_SEMANTICS",
+      "COMPLETENESS_SNAPSHOT_SWEEP_DELETE_DEACTIVATION",
+      "PUBLICATION_CUTOVER_OR_RUNTIME_CORRECTNESS"
+    ],
+    "files": [
+      {"path": "STATES.md", "role": "MAN_01_MAN_02_MAN_04_MAN_07_AND_V2_026A_DECISION", "readOnly": true},
+      {"path": "docs/catalogos/contratos-esl-6399/manifesto.json", "role": "CORRECTED_OFFLINE_6399_CONTRACT", "readOnly": true},
+      {"path": "docs/catalogos/identidade-manifestos/manifesto.json", "role": "P01_ROOT_AND_CHILD_IDENTITY_DECISION", "readOnly": true},
+      {"path": "docs/catalogos/portabilidade/matriz-campos.csv", "role": "V2_017A_BIDIRECTIONAL_FIELD_CLASSIFICATION", "readOnly": true},
+      {"path": "../etl-extracao-dados/docs/legado/pipelines-antigos/02-apis/dataexport/manifestos.md", "role": "VERSIONED_STATIC_CORPUS_AGGREGATES_WITHOUT_VALUE_EMISSION", "readOnly": true},
+      {"path": "../etl-extracao-dados/src/main/java/br/com/extrator/dominio/dataexport/manifestos/ManifestoDTO.java", "role": "LEGACY_PATHS_AND_ABSENT_NULL_COUNTEREVIDENCE", "readOnly": true},
+      {"path": "../etl-extracao-dados/src/main/java/br/com/extrator/integracao/mapeamento/dataexport/manifestos/ManifestoMapper.java", "role": "LEGACY_TYPED_MAPPING_AND_PARSE_COUNTEREVIDENCE", "readOnly": true},
+      {"path": "../etl-extracao-dados/src/main/java/br/com/extrator/integracao/dataexport/support/Deduplicator.java", "role": "LEGACY_FRESHNESS_SCORE_ZERO_AND_BACKFILL_COUNTEREVIDENCE", "readOnly": true},
+      {"path": "../etl-extracao-dados/src/main/java/br/com/extrator/persistencia/repositorio/ManifestoRepository.java", "role": "LEGACY_PROMOTION_AND_RELATION_COUNTEREVIDENCE", "readOnly": true},
+      {"path": "../etl-extracao-dados/src/main/java/br/com/extrator/persistencia/repositorio/AbstractRepository.java", "role": "LEGACY_EQUAL_FRESHNESS_AND_ARRIVAL_COUNTEREVIDENCE", "readOnly": true},
+      {"path": "../etl-extracao-dados/src/main/java/br/com/extrator/persistencia/entidade/ManifestoEntity.java", "role": "LEGACY_HASH_IDENTITY_COUNTEREVIDENCE", "readOnly": true},
+      {"path": "../etl-extracao-dados/database/tabelas/003_criar_tabela_manifestos.sql", "role": "LEGACY_MIXED_GRAIN_FK_AND_ORPHAN_NULLING_COUNTEREVIDENCE", "readOnly": true},
+      {"path": "../etl-extracao-dados/database/procedures/005_criar_sp_carga_fato_gestao_vista_manifestos.sql", "role": "LEGACY_MAX_SUM_AND_SWEEP_COUNTEREVIDENCE", "readOnly": true},
+      {"path": "../etl-extracao-dados/database/views/018_criar_view_manifestos_powerbi.sql", "role": "LEGACY_ROOT_VIEW_WRAPPER_CONSUMER_LIMIT", "readOnly": true},
+      {"path": "../etl-extracao-dados/database/views/025_criar_view_fato_manifestos_dash.sql", "role": "LEGACY_FACT_VIEW_WRAPPER_CONSUMER_LIMIT", "readOnly": true},
+      {"path": "../etl-extracao-dados/database/tabelas/032_criar_tabela_fato_gestao_vista_manifestos.sql", "role": "LEGACY_ONE_ROW_PER_SEQUENCE_FACT_GRAIN_LIMIT", "readOnly": true},
+      {"path": "../etl-extracao-dados/database/migrations/057_deduplicar_manifestos_na_view_coletas.sql", "role": "LEGACY_TOP_ONE_RELATION_COUNTEREVIDENCE", "readOnly": true},
+      {"path": "../etl-extracao-dados/database/validacao/032_validar_orfaos_manifestos_coletas.sql", "role": "LEGACY_ORPHAN_LOOKUP_VALIDATION_COUNTEREVIDENCE", "readOnly": true},
+      {"path": "../etl-extracao-dados/database/validacao/037_validar_manifestos_metricas_financeiras.sql", "role": "LEGACY_ZERO_AS_ABSENCE_VALIDATION_COUNTEREVIDENCE", "readOnly": true},
+      {"path": "../etl-extracao-dados/database/validacao/044_auditar_capacidade_manifestos.sql", "role": "LEGACY_CAPACITY_COALESCE_AND_SUM_VALIDATION_COUNTEREVIDENCE", "readOnly": true},
+      {"path": "../etl-extracao-dados/database/validacao/045_validar_fato_gestao_vista_manifestos.sql", "role": "LEGACY_FACT_GRAIN_VALIDATION_LIMIT", "readOnly": true}
+    ]
+  }
+}

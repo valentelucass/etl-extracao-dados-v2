@@ -1,0 +1,5 @@
+# B60 — 17 casos restantes
+
+57 casos originais e uma rechecagem de cancelamento comprovados. HALT_BEFORE_APPLY: o runtime sela a travessia antes da invocação de apply; logo o selo esperado é 1. A revisão exige PROMOTED, DQ PASSED com quatro checks, um selo e zero publicação/aplicação/histórico. O resultado físico já satisfaz essas condições, a falha da expectativa antiga permanece no ledger/results original e seal-oracle-review.json explicita a revisão. Nenhum runtime ou JAR alterado. Novas identidades somente para os 17 casos não executados; aliases/oráculos preservados.
+
+Débitos cumulativos 121 sqlcmd, 60 JVMs, 55 HTTP; tetos 240/80/400, deadline existente 2026-09-10T13:15:21.8816492Z, sem reembolso ou renovação automática. Políticas v6 effective .128, recuperação SERVICE29/scopes12 revogadas, dois grants temporários retirados. O array declarativo priorLedgers corrige a divisão acidental do caminho diagnóstico nas duas propostas anteriores; os controladores sempre usaram os oito caminhos completos e debitaram todos os eventos. Nenhum ledger é reescrito.

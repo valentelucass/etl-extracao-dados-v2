@@ -1,0 +1,67 @@
+{
+  "version": 1,
+  "task": "V2-034a",
+  "decision": "MANTER",
+  "authority": "USER_DELEGATION_CURRENT_CONVERSATION",
+  "instruction": "vc que decide, preciso continuar",
+  "decisionMaker": "ASSISTENTE_POR_DELEGACAO_DO_OWNER_DO_PROJETO",
+  "ownerRole": "OWNER_DO_PROJETO",
+  "nominalProductionOwner": null,
+  "need": "Preservar no V2 acompanhamento de viagens/paradas e a responsabilidade de Transit Time SM declarada no legado.",
+  "consumers": [
+    {
+      "name": "vw_raster_sm_transit_time",
+      "kind": "DECLARED_SQL_CONTRACT",
+      "inputs": [
+        "raster_viagens",
+        "raster_viagem_paradas"
+      ],
+      "impact": "Prazo, origem/destino, ordem, previsao de chegada e transit time dependem de pai/parada.",
+      "currentProductionUsageProven": false
+    },
+    {
+      "name": "Legacy DEV/PRD publication lists",
+      "kind": "DECLARED_PUBLICATION_LIST",
+      "impact": "A view consta das listas 023/024; manter responsabilidade, sem copiar wrappers cross-database.",
+      "currentProductionUsageProven": false
+    },
+    {
+      "name": "Legacy conditional Raster pipeline",
+      "kind": "DECLARED_EXTRACTION_DEPENDENCY",
+      "impact": "Preservar a integracao existente ate eventual corte formal; nao executar nem desligar V1.",
+      "currentProductionUsageProven": false
+    }
+  ],
+  "alternatives": [
+    {
+      "decision": "RETIRAR",
+      "rejectedReason": "Nao ha evidencia de obsolescencia nem plano aceito para os consumidores declarados."
+    }
+  ],
+  "specificLocalAuthorization": [
+    "FORMALIZAR_V2_025C_OFFLINE",
+    "INVESTIGAR_V2_009C_COM_ARTEFATOS_LOCAIS",
+    "IMPLEMENTAR_TESTAR_LOCAL_SOMENTE_COM_DEPENDENCIAS_COMPROVADAS"
+  ],
+  "enabledByDefault": false,
+  "remoteExecutionAuthorized": false,
+  "sqlExecutionAuthorized": false,
+  "productionChangeAuthorized": false,
+  "runtimeBudgetAdopted": false,
+  "nextGate": "V2-025c",
+  "laterGates": [
+    "V2-009c",
+    "V2-034b",
+    "V2-012a",
+    "V2-037",
+    "V2-038"
+  ],
+  "rules": [
+    "RAS-01",
+    "RAS-02",
+    "RAS-03",
+    "RAS-04",
+    "RAS-05",
+    "PUB-08"
+  ]
+}

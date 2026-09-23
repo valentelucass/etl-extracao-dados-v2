@@ -1,0 +1,34 @@
+{
+  "version": 1,
+  "task": "V2-009c",
+  "status": "BLOCKED_ROOT_SCOPE_WIRE_TYPE_AND_STOP_STABILITY_UNPROVEN",
+  "rootCandidatePaths": [
+    "/CodSolicitacao",
+    "/codSolicitacao"
+  ],
+  "childCandidatePaths": [
+    "/ColetasEntregas/*/Ordem",
+    "/coletasEntregas/*/ordem"
+  ],
+  "canonicalBinding": null,
+  "identityAccepted": false,
+  "currentProviderGuarantee": false,
+  "sampleUniquenessIsProof": false,
+  "legacyPrimaryKeyIsProof": false,
+  "positionFallbackAccepted": false,
+  "rootMissing": [
+    "wire type sem coercao",
+    "escopo de source_instance/tenant/filial",
+    "estabilidade e nao reutilizacao de CodSolicitacao",
+    "relacao de Sequencial e CodFilial com a raiz"
+  ],
+  "childMissing": [
+    "ID estavel da parada ou garantia versionada de Ordem por solicitacao",
+    "semantica de reordenacao/insercao/remocao/retorno",
+    "cardinalidade e conflito de Ordem repetida",
+    "atomicidade e frescor do snapshot pai/filhos"
+  ],
+  "requestedEvidence": "Declaracao versionada ou oraculo independente aprovado com paths, tipos, escopo, estabilidade, cardinalidade e casos sanitizados de colisao, rekey, reordenacao e retorno.",
+  "nextImplementation": "V2-034b_BLOCKED",
+  "remoteCalls": 0
+}

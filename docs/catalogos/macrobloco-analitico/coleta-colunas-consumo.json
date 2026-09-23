@@ -1,0 +1,944 @@
+{
+  "version": 1,
+  "canonicalIdentity": [
+    "run_id",
+    "source_key"
+  ],
+  "captureEvidence": "physical-collection-queries-02",
+  "metadataEvidence": "metadata-nineteen-contracts-01",
+  "contracts": [
+    {
+      "id": "SQL-03",
+      "legacyName": "vw_coletas_powerbi",
+      "localName": "pub.analytic_lab_sql_03",
+      "columns": [
+        {
+          "ordinal": 1,
+          "name": "ID",
+          "source": "snapshot.id",
+          "metadata": {
+            "localName": "analytic_lab_sql_03",
+            "ordinal": 1,
+            "columnName": "ID",
+            "sqlType": "bigint",
+            "bytes": 8,
+            "precision": 19,
+            "scale": 0,
+            "nullable": true,
+            "collation": null
+          },
+          "status": "TESTED_PHYSICAL_LOCAL"
+        },
+        {
+          "ordinal": 2,
+          "name": "Coleta",
+          "source": "snapshot.sequence_code",
+          "metadata": {
+            "localName": "analytic_lab_sql_03",
+            "ordinal": 2,
+            "columnName": "Coleta",
+            "sqlType": "bigint",
+            "bytes": 8,
+            "precision": 19,
+            "scale": 0,
+            "nullable": true,
+            "collation": null
+          },
+          "status": "TESTED_PHYSICAL_LOCAL"
+        },
+        {
+          "ordinal": 3,
+          "name": "Solicitacao",
+          "source": "snapshot.request_date",
+          "metadata": {
+            "localName": "analytic_lab_sql_03",
+            "ordinal": 3,
+            "columnName": "Solicitacao",
+            "sqlType": "date",
+            "bytes": 3,
+            "precision": 10,
+            "scale": 0,
+            "nullable": true,
+            "collation": null
+          },
+          "status": "TESTED_PHYSICAL_LOCAL"
+        },
+        {
+          "ordinal": 4,
+          "name": "Hora (Solicitacao)",
+          "source": "supplement.request_hour with documented TIME(0) zero fallback",
+          "metadata": {
+            "localName": "analytic_lab_sql_03",
+            "ordinal": 4,
+            "columnName": "Hora (Solicitacao)",
+            "sqlType": "time",
+            "bytes": 3,
+            "precision": 8,
+            "scale": 0,
+            "nullable": true,
+            "collation": null
+          },
+          "status": "TESTED_PHYSICAL_LOCAL"
+        },
+        {
+          "ordinal": 5,
+          "name": "Agendamento",
+          "source": "snapshot.service_date",
+          "metadata": {
+            "localName": "analytic_lab_sql_03",
+            "ordinal": 5,
+            "columnName": "Agendamento",
+            "sqlType": "date",
+            "bytes": 3,
+            "precision": 10,
+            "scale": 0,
+            "nullable": true,
+            "collation": null
+          },
+          "status": "TESTED_PHYSICAL_LOCAL"
+        },
+        {
+          "ordinal": 6,
+          "name": "Finalizacao",
+          "source": "snapshot.finish_date",
+          "metadata": {
+            "localName": "analytic_lab_sql_03",
+            "ordinal": 6,
+            "columnName": "Finalizacao",
+            "sqlType": "date",
+            "bytes": 3,
+            "precision": 10,
+            "scale": 0,
+            "nullable": true,
+            "collation": null
+          },
+          "status": "TESTED_PHYSICAL_LOCAL"
+        },
+        {
+          "ordinal": 7,
+          "name": "Status",
+          "source": "COL11 status_label/raw and absence candidate/confirmed",
+          "metadata": {
+            "localName": "analytic_lab_sql_03",
+            "ordinal": 7,
+            "columnName": "Status",
+            "sqlType": "nvarchar",
+            "bytes": 2048,
+            "precision": 0,
+            "scale": 0,
+            "nullable": true,
+            "collation": "Latin1_General_100_BIN2"
+          },
+          "status": "TESTED_PHYSICAL_LOCAL"
+        },
+        {
+          "ordinal": 8,
+          "name": "Excluída na Origem",
+          "source": "absence.confirmed",
+          "metadata": {
+            "localName": "analytic_lab_sql_03",
+            "ordinal": 8,
+            "columnName": "Excluída na Origem",
+            "sqlType": "bit",
+            "bytes": 1,
+            "precision": 1,
+            "scale": 0,
+            "nullable": true,
+            "collation": null
+          },
+          "status": "TESTED_PHYSICAL_LOCAL"
+        },
+        {
+          "ordinal": 9,
+          "name": "Volumes",
+          "source": "snapshot.invoices_volumes",
+          "metadata": {
+            "localName": "analytic_lab_sql_03",
+            "ordinal": 9,
+            "columnName": "Volumes",
+            "sqlType": "bigint",
+            "bytes": 8,
+            "precision": 19,
+            "scale": 0,
+            "nullable": true,
+            "collation": null
+          },
+          "status": "TESTED_PHYSICAL_LOCAL"
+        },
+        {
+          "ordinal": 10,
+          "name": "Peso Real",
+          "source": "snapshot.invoices_weight",
+          "metadata": {
+            "localName": "analytic_lab_sql_03",
+            "ordinal": 10,
+            "columnName": "Peso Real",
+            "sqlType": "decimal",
+            "bytes": 13,
+            "precision": 28,
+            "scale": 8,
+            "nullable": true,
+            "collation": null
+          },
+          "status": "TESTED_PHYSICAL_LOCAL"
+        },
+        {
+          "ordinal": 11,
+          "name": "Peso Taxado",
+          "source": "snapshot.taxed_weight",
+          "metadata": {
+            "localName": "analytic_lab_sql_03",
+            "ordinal": 11,
+            "columnName": "Peso Taxado",
+            "sqlType": "decimal",
+            "bytes": 13,
+            "precision": 28,
+            "scale": 8,
+            "nullable": true,
+            "collation": null
+          },
+          "status": "TESTED_PHYSICAL_LOCAL"
+        },
+        {
+          "ordinal": 12,
+          "name": "Valor NF",
+          "source": "snapshot.invoices_value",
+          "metadata": {
+            "localName": "analytic_lab_sql_03",
+            "ordinal": 12,
+            "columnName": "Valor NF",
+            "sqlType": "decimal",
+            "bytes": 13,
+            "precision": 28,
+            "scale": 8,
+            "nullable": true,
+            "collation": null
+          },
+          "status": "TESTED_PHYSICAL_LOCAL"
+        },
+        {
+          "ordinal": 13,
+          "name": "Numero Manifesto",
+          "source": "current MC binding + current MAN cohort/lifecycle; legacy sequence/id descending scalar policy",
+          "metadata": {
+            "localName": "analytic_lab_sql_03",
+            "ordinal": 13,
+            "columnName": "Numero Manifesto",
+            "sqlType": "bigint",
+            "bytes": 8,
+            "precision": 19,
+            "scale": 0,
+            "nullable": true,
+            "collation": null
+          },
+          "status": "TESTED_PHYSICAL_LOCAL"
+        },
+        {
+          "ordinal": 14,
+          "name": "Veiculo",
+          "source": "supplement.vehicle_type_id",
+          "metadata": {
+            "localName": "analytic_lab_sql_03",
+            "ordinal": 14,
+            "columnName": "Veiculo",
+            "sqlType": "bigint",
+            "bytes": 8,
+            "precision": 19,
+            "scale": 0,
+            "nullable": true,
+            "collation": null
+          },
+          "status": "TESTED_PHYSICAL_LOCAL"
+        },
+        {
+          "ordinal": 15,
+          "name": "Cliente",
+          "source": "supplement.customer_name",
+          "metadata": {
+            "localName": "analytic_lab_sql_03",
+            "ordinal": 15,
+            "columnName": "Cliente",
+            "sqlType": "nvarchar",
+            "bytes": 2048,
+            "precision": 0,
+            "scale": 0,
+            "nullable": true,
+            "collation": "Latin1_General_100_BIN2"
+          },
+          "status": "TESTED_PHYSICAL_LOCAL"
+        },
+        {
+          "ordinal": 16,
+          "name": "Cliente Doc",
+          "source": "supplement.customer_document",
+          "metadata": {
+            "localName": "analytic_lab_sql_03",
+            "ordinal": 16,
+            "columnName": "Cliente Doc",
+            "sqlType": "nvarchar",
+            "bytes": 2048,
+            "precision": 0,
+            "scale": 0,
+            "nullable": true,
+            "collation": "Latin1_General_100_BIN2"
+          },
+          "status": "TESTED_PHYSICAL_LOCAL"
+        },
+        {
+          "ordinal": 17,
+          "name": "Local da Coleta",
+          "source": "supplement.address_line",
+          "metadata": {
+            "localName": "analytic_lab_sql_03",
+            "ordinal": 17,
+            "columnName": "Local da Coleta",
+            "sqlType": "nvarchar",
+            "bytes": 2048,
+            "precision": 0,
+            "scale": 0,
+            "nullable": true,
+            "collation": "Latin1_General_100_BIN2"
+          },
+          "status": "TESTED_PHYSICAL_LOCAL"
+        },
+        {
+          "ordinal": 18,
+          "name": "Numero",
+          "source": "supplement.address_number",
+          "metadata": {
+            "localName": "analytic_lab_sql_03",
+            "ordinal": 18,
+            "columnName": "Numero",
+            "sqlType": "nvarchar",
+            "bytes": 2048,
+            "precision": 0,
+            "scale": 0,
+            "nullable": true,
+            "collation": "Latin1_General_100_BIN2"
+          },
+          "status": "TESTED_PHYSICAL_LOCAL"
+        },
+        {
+          "ordinal": 19,
+          "name": "Complemento",
+          "source": "supplement.address_complement",
+          "metadata": {
+            "localName": "analytic_lab_sql_03",
+            "ordinal": 19,
+            "columnName": "Complemento",
+            "sqlType": "nvarchar",
+            "bytes": 2048,
+            "precision": 0,
+            "scale": 0,
+            "nullable": true,
+            "collation": "Latin1_General_100_BIN2"
+          },
+          "status": "TESTED_PHYSICAL_LOCAL"
+        },
+        {
+          "ordinal": 20,
+          "name": "Cidade",
+          "source": "snapshot.pck_pds_cty_name",
+          "metadata": {
+            "localName": "analytic_lab_sql_03",
+            "ordinal": 20,
+            "columnName": "Cidade",
+            "sqlType": "nvarchar",
+            "bytes": 2048,
+            "precision": 0,
+            "scale": 0,
+            "nullable": true,
+            "collation": "Latin1_General_100_BIN2"
+          },
+          "status": "TESTED_PHYSICAL_LOCAL"
+        },
+        {
+          "ordinal": 21,
+          "name": "Bairro",
+          "source": "snapshot.pck_pds_neighborhood",
+          "metadata": {
+            "localName": "analytic_lab_sql_03",
+            "ordinal": 21,
+            "columnName": "Bairro",
+            "sqlType": "nvarchar",
+            "bytes": 2048,
+            "precision": 0,
+            "scale": 0,
+            "nullable": true,
+            "collation": "Latin1_General_100_BIN2"
+          },
+          "status": "TESTED_PHYSICAL_LOCAL"
+        },
+        {
+          "ordinal": 22,
+          "name": "UF",
+          "source": "snapshot.pck_pds_cty_sae_code",
+          "metadata": {
+            "localName": "analytic_lab_sql_03",
+            "ordinal": 22,
+            "columnName": "UF",
+            "sqlType": "nvarchar",
+            "bytes": 2048,
+            "precision": 0,
+            "scale": 0,
+            "nullable": true,
+            "collation": "Latin1_General_100_BIN2"
+          },
+          "status": "TESTED_PHYSICAL_LOCAL"
+        },
+        {
+          "ordinal": 23,
+          "name": "CEP",
+          "source": "snapshot.pck_pds_postal_code",
+          "metadata": {
+            "localName": "analytic_lab_sql_03",
+            "ordinal": 23,
+            "columnName": "CEP",
+            "sqlType": "nvarchar",
+            "bytes": 2048,
+            "precision": 0,
+            "scale": 0,
+            "nullable": true,
+            "collation": "Latin1_General_100_BIN2"
+          },
+          "status": "TESTED_PHYSICAL_LOCAL"
+        },
+        {
+          "ordinal": 24,
+          "name": "Região da Coleta",
+          "source": "city/UF derived per GraphQL mapper; Data Export region aliases remain separate",
+          "metadata": {
+            "localName": "analytic_lab_sql_03",
+            "ordinal": 24,
+            "columnName": "Região da Coleta",
+            "sqlType": "nvarchar",
+            "bytes": 4102,
+            "precision": 0,
+            "scale": 0,
+            "nullable": true,
+            "collation": "Latin1_General_100_BIN2"
+          },
+          "status": "TESTED_PHYSICAL_LOCAL"
+        },
+        {
+          "ordinal": 25,
+          "name": "Região Logística",
+          "source": "governed LOGISTICS_REGION CEP first, normalized city/UF second, city/UF text fallback",
+          "metadata": {
+            "localName": "analytic_lab_sql_03",
+            "ordinal": 25,
+            "columnName": "Região Logística",
+            "sqlType": "nvarchar",
+            "bytes": 4102,
+            "precision": 0,
+            "scale": 0,
+            "nullable": true,
+            "collation": "Latin1_General_100_BIN2"
+          },
+          "status": "TESTED_PHYSICAL_LOCAL"
+        },
+        {
+          "ordinal": 26,
+          "name": "Filial ID",
+          "source": "supplement.branch_source_id",
+          "metadata": {
+            "localName": "analytic_lab_sql_03",
+            "ordinal": 26,
+            "columnName": "Filial ID",
+            "sqlType": "bigint",
+            "bytes": 8,
+            "precision": 19,
+            "scale": 0,
+            "nullable": true,
+            "collation": null
+          },
+          "status": "TESTED_PHYSICAL_LOCAL"
+        },
+        {
+          "ordinal": 27,
+          "name": "Filial",
+          "source": "explicit current BRANCH binding + registry",
+          "metadata": {
+            "localName": "analytic_lab_sql_03",
+            "ordinal": 27,
+            "columnName": "Filial",
+            "sqlType": "nvarchar",
+            "bytes": 512,
+            "precision": 0,
+            "scale": 0,
+            "nullable": true,
+            "collation": "Latin1_General_100_BIN2"
+          },
+          "status": "TESTED_PHYSICAL_LOCAL"
+        },
+        {
+          "ordinal": 28,
+          "name": "Usuario",
+          "source": "snapshot.pck_uer_name",
+          "metadata": {
+            "localName": "analytic_lab_sql_03",
+            "ordinal": 28,
+            "columnName": "Usuario",
+            "sqlType": "nvarchar",
+            "bytes": 2048,
+            "precision": 0,
+            "scale": 0,
+            "nullable": true,
+            "collation": "Latin1_General_100_BIN2"
+          },
+          "status": "TESTED_PHYSICAL_LOCAL"
+        },
+        {
+          "ordinal": 29,
+          "name": "Motivo Cancel.",
+          "source": "snapshot.cancellation_reason",
+          "metadata": {
+            "localName": "analytic_lab_sql_03",
+            "ordinal": 29,
+            "columnName": "Motivo Cancel.",
+            "sqlType": "nvarchar",
+            "bytes": 2048,
+            "precision": 0,
+            "scale": 0,
+            "nullable": true,
+            "collation": "Latin1_General_100_BIN2"
+          },
+          "status": "TESTED_PHYSICAL_LOCAL"
+        },
+        {
+          "ordinal": 30,
+          "name": "Usuario Cancel. ID",
+          "source": "supplement.cancellation_user_id",
+          "metadata": {
+            "localName": "analytic_lab_sql_03",
+            "ordinal": 30,
+            "columnName": "Usuario Cancel. ID",
+            "sqlType": "bigint",
+            "bytes": 8,
+            "precision": 19,
+            "scale": 0,
+            "nullable": true,
+            "collation": null
+          },
+          "status": "TESTED_PHYSICAL_LOCAL"
+        },
+        {
+          "ordinal": 31,
+          "name": "Usuario Cancel. Nome",
+          "source": "explicit active user key attached to same run; raw ID fallback",
+          "metadata": {
+            "localName": "analytic_lab_sql_03",
+            "ordinal": 31,
+            "columnName": "Usuario Cancel. Nome",
+            "sqlType": "nvarchar",
+            "bytes": 510,
+            "precision": 0,
+            "scale": 0,
+            "nullable": true,
+            "collation": "Latin1_General_100_BIN2"
+          },
+          "status": "TESTED_PHYSICAL_LOCAL"
+        },
+        {
+          "ordinal": 32,
+          "name": "Motivo Exclusao",
+          "source": "supplement.destroy_reason",
+          "metadata": {
+            "localName": "analytic_lab_sql_03",
+            "ordinal": 32,
+            "columnName": "Motivo Exclusao",
+            "sqlType": "nvarchar",
+            "bytes": 2048,
+            "precision": 0,
+            "scale": 0,
+            "nullable": true,
+            "collation": "Latin1_General_100_BIN2"
+          },
+          "status": "TESTED_PHYSICAL_LOCAL"
+        },
+        {
+          "ordinal": 33,
+          "name": "Usuario Exclusao ID",
+          "source": "supplement.destroy_user_id",
+          "metadata": {
+            "localName": "analytic_lab_sql_03",
+            "ordinal": 33,
+            "columnName": "Usuario Exclusao ID",
+            "sqlType": "bigint",
+            "bytes": 8,
+            "precision": 19,
+            "scale": 0,
+            "nullable": true,
+            "collation": null
+          },
+          "status": "TESTED_PHYSICAL_LOCAL"
+        },
+        {
+          "ordinal": 34,
+          "name": "Usuario Exclusao Nome",
+          "source": "explicit active user key attached to same run; raw ID fallback",
+          "metadata": {
+            "localName": "analytic_lab_sql_03",
+            "ordinal": 34,
+            "columnName": "Usuario Exclusao Nome",
+            "sqlType": "nvarchar",
+            "bytes": 510,
+            "precision": 0,
+            "scale": 0,
+            "nullable": true,
+            "collation": "Latin1_General_100_BIN2"
+          },
+          "status": "TESTED_PHYSICAL_LOCAL"
+        },
+        {
+          "ordinal": 35,
+          "name": "Status Atualizado Em",
+          "source": "original captured status_updated_at raw local field",
+          "metadata": {
+            "localName": "analytic_lab_sql_03",
+            "ordinal": 35,
+            "columnName": "Status Atualizado Em",
+            "sqlType": "nvarchar",
+            "bytes": 8000,
+            "precision": 0,
+            "scale": 0,
+            "nullable": true,
+            "collation": "Latin1_General_CI_AS"
+          },
+          "status": "TESTED_PHYSICAL_LOCAL"
+        },
+        {
+          "ordinal": 36,
+          "name": "Status Atualizado Em (normalizado)",
+          "source": "exact effective root epoch/nano projected UTC DATETIME2(7); ninth digit remains captured",
+          "metadata": {
+            "localName": "analytic_lab_sql_03",
+            "ordinal": 36,
+            "columnName": "Status Atualizado Em (normalizado)",
+            "sqlType": "datetime2",
+            "bytes": 8,
+            "precision": 27,
+            "scale": 7,
+            "nullable": true,
+            "collation": null
+          },
+          "status": "TESTED_PHYSICAL_LOCAL"
+        },
+        {
+          "ordinal": 37,
+          "name": "Última Ocorrência",
+          "source": "COL11 snapshot.status_label",
+          "metadata": {
+            "localName": "analytic_lab_sql_03",
+            "ordinal": 37,
+            "columnName": "Última Ocorrência",
+            "sqlType": "nvarchar",
+            "bytes": 128,
+            "precision": 0,
+            "scale": 0,
+            "nullable": true,
+            "collation": "Latin1_General_100_BIN2"
+          },
+          "status": "TESTED_PHYSICAL_LOCAL"
+        },
+        {
+          "ordinal": 38,
+          "name": "Ação da Ocorrência",
+          "source": "COL11 snapshot.occurrence_action",
+          "metadata": {
+            "localName": "analytic_lab_sql_03",
+            "ordinal": 38,
+            "columnName": "Ação da Ocorrência",
+            "sqlType": "nvarchar",
+            "bytes": 4096,
+            "precision": 0,
+            "scale": 0,
+            "nullable": true,
+            "collation": "Latin1_General_100_BIN2"
+          },
+          "status": "TESTED_PHYSICAL_LOCAL"
+        },
+        {
+          "ordinal": 39,
+          "name": "Nº Tentativas",
+          "source": "COL11 snapshot.attempt_count",
+          "metadata": {
+            "localName": "analytic_lab_sql_03",
+            "ordinal": 39,
+            "columnName": "Nº Tentativas",
+            "sqlType": "smallint",
+            "bytes": 2,
+            "precision": 5,
+            "scale": 0,
+            "nullable": false,
+            "collation": null
+          },
+          "status": "TESTED_PHYSICAL_LOCAL"
+        },
+        {
+          "ordinal": 40,
+          "name": "Metadata",
+          "source": "31 Data Export fields + 12 lateral fields with presence/wire/raw/lineage",
+          "metadata": {
+            "localName": "analytic_lab_sql_03",
+            "ordinal": 40,
+            "columnName": "Metadata",
+            "sqlType": "nvarchar",
+            "bytes": -1,
+            "precision": 0,
+            "scale": 0,
+            "nullable": true,
+            "collation": "Latin1_General_CI_AS"
+          },
+          "status": "TESTED_PHYSICAL_LOCAL"
+        },
+        {
+          "ordinal": 41,
+          "name": "Data de extracao",
+          "source": "current.latest_extracted_at",
+          "metadata": {
+            "localName": "analytic_lab_sql_03",
+            "ordinal": 41,
+            "columnName": "Data de extracao",
+            "sqlType": "datetime2",
+            "bytes": 8,
+            "precision": 27,
+            "scale": 7,
+            "nullable": false,
+            "collation": null
+          },
+          "status": "TESTED_PHYSICAL_LOCAL"
+        }
+      ]
+    },
+    {
+      "id": "SQL-04",
+      "legacyName": "vw_coletas_excluidas_origem",
+      "localName": "pub.analytic_lab_sql_04",
+      "columns": [
+        {
+          "ordinal": 1,
+          "name": "ID",
+          "source": "snapshot.id",
+          "metadata": {
+            "localName": "analytic_lab_sql_04",
+            "ordinal": 1,
+            "columnName": "ID",
+            "sqlType": "bigint",
+            "bytes": 8,
+            "precision": 19,
+            "scale": 0,
+            "nullable": true,
+            "collation": null
+          },
+          "status": "TESTED_PHYSICAL_LOCAL"
+        },
+        {
+          "ordinal": 2,
+          "name": "Coleta",
+          "source": "snapshot.sequence_code",
+          "metadata": {
+            "localName": "analytic_lab_sql_04",
+            "ordinal": 2,
+            "columnName": "Coleta",
+            "sqlType": "bigint",
+            "bytes": 8,
+            "precision": 19,
+            "scale": 0,
+            "nullable": true,
+            "collation": null
+          },
+          "status": "TESTED_PHYSICAL_LOCAL"
+        },
+        {
+          "ordinal": 3,
+          "name": "Solicitacao",
+          "source": "snapshot.request_date",
+          "metadata": {
+            "localName": "analytic_lab_sql_04",
+            "ordinal": 3,
+            "columnName": "Solicitacao",
+            "sqlType": "date",
+            "bytes": 3,
+            "precision": 10,
+            "scale": 0,
+            "nullable": true,
+            "collation": null
+          },
+          "status": "TESTED_PHYSICAL_LOCAL"
+        },
+        {
+          "ordinal": 4,
+          "name": "Filial",
+          "source": "explicit BRANCH binding + registry",
+          "metadata": {
+            "localName": "analytic_lab_sql_04",
+            "ordinal": 4,
+            "columnName": "Filial",
+            "sqlType": "nvarchar",
+            "bytes": 512,
+            "precision": 0,
+            "scale": 0,
+            "nullable": true,
+            "collation": "Latin1_General_100_BIN2"
+          },
+          "status": "TESTED_PHYSICAL_LOCAL"
+        },
+        {
+          "ordinal": 5,
+          "name": "Status ESL bruto",
+          "source": "snapshot.status",
+          "metadata": {
+            "localName": "analytic_lab_sql_04",
+            "ordinal": 5,
+            "columnName": "Status ESL bruto",
+            "sqlType": "nvarchar",
+            "bytes": 2048,
+            "precision": 0,
+            "scale": 0,
+            "nullable": true,
+            "collation": "Latin1_General_100_BIN2"
+          },
+          "status": "TESTED_PHYSICAL_LOCAL"
+        },
+        {
+          "ordinal": 6,
+          "name": "Status antes da exclusão",
+          "source": "COL11 snapshot.status_label/raw",
+          "metadata": {
+            "localName": "analytic_lab_sql_04",
+            "ordinal": 6,
+            "columnName": "Status antes da exclusão",
+            "sqlType": "nvarchar",
+            "bytes": 2048,
+            "precision": 0,
+            "scale": 0,
+            "nullable": true,
+            "collation": "Latin1_General_100_BIN2"
+          },
+          "status": "TESTED_PHYSICAL_LOCAL"
+        },
+        {
+          "ordinal": 7,
+          "name": "Situação de sincronização",
+          "source": "confirmed absence display label",
+          "metadata": {
+            "localName": "analytic_lab_sql_04",
+            "ordinal": 7,
+            "columnName": "Situação de sincronização",
+            "sqlType": "nvarchar",
+            "bytes": 64,
+            "precision": 0,
+            "scale": 0,
+            "nullable": true,
+            "collation": "Latin1_General_CI_AS"
+          },
+          "status": "TESTED_PHYSICAL_LOCAL"
+        },
+        {
+          "ordinal": 8,
+          "name": "Ausente desde",
+          "source": "absence.absent_since",
+          "metadata": {
+            "localName": "analytic_lab_sql_04",
+            "ordinal": 8,
+            "columnName": "Ausente desde",
+            "sqlType": "datetime2",
+            "bytes": 8,
+            "precision": 27,
+            "scale": 7,
+            "nullable": true,
+            "collation": null
+          },
+          "status": "TESTED_PHYSICAL_LOCAL"
+        },
+        {
+          "ordinal": 9,
+          "name": "Confirmações de ausência",
+          "source": "absence.confirmations",
+          "metadata": {
+            "localName": "analytic_lab_sql_04",
+            "ordinal": 9,
+            "columnName": "Confirmações de ausência",
+            "sqlType": "tinyint",
+            "bytes": 1,
+            "precision": 3,
+            "scale": 0,
+            "nullable": true,
+            "collation": null
+          },
+          "status": "TESTED_PHYSICAL_LOCAL"
+        },
+        {
+          "ordinal": 10,
+          "name": "Excluída em",
+          "source": "absence.excluded_at",
+          "metadata": {
+            "localName": "analytic_lab_sql_04",
+            "ordinal": 10,
+            "columnName": "Excluída em",
+            "sqlType": "datetime2",
+            "bytes": 8,
+            "precision": 27,
+            "scale": 7,
+            "nullable": true,
+            "collation": null
+          },
+          "status": "TESTED_PHYSICAL_LOCAL"
+        },
+        {
+          "ordinal": 11,
+          "name": "Motivo",
+          "source": "absence.reason",
+          "metadata": {
+            "localName": "analytic_lab_sql_04",
+            "ordinal": 11,
+            "columnName": "Motivo",
+            "sqlType": "varchar",
+            "bytes": 64,
+            "precision": 0,
+            "scale": 0,
+            "nullable": true,
+            "collation": "Latin1_General_100_BIN2"
+          },
+          "status": "TESTED_PHYSICAL_LOCAL"
+        },
+        {
+          "ordinal": 12,
+          "name": "Execução de confirmação",
+          "source": "absence.last_cycle",
+          "metadata": {
+            "localName": "analytic_lab_sql_04",
+            "ordinal": 12,
+            "columnName": "Execução de confirmação",
+            "sqlType": "uniqueidentifier",
+            "bytes": 16,
+            "precision": 0,
+            "scale": 0,
+            "nullable": true,
+            "collation": null
+          },
+          "status": "TESTED_PHYSICAL_LOCAL"
+        },
+        {
+          "ordinal": 13,
+          "name": "Última reconciliação",
+          "source": "absence.last_reconciled_at",
+          "metadata": {
+            "localName": "analytic_lab_sql_04",
+            "ordinal": 13,
+            "columnName": "Última reconciliação",
+            "sqlType": "datetime2",
+            "bytes": 8,
+            "precision": 27,
+            "scale": 7,
+            "nullable": true,
+            "collation": null
+          },
+          "status": "TESTED_PHYSICAL_LOCAL"
+        }
+      ],
+      "evidence": "physical-collection-sweep-03"
+    }
+  ]
+}

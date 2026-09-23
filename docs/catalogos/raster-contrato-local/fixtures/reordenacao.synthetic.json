@@ -1,0 +1,22 @@
+{
+  "provenance": "SYNTHETIC_COUNTEREXAMPLE_NOT_OBSERVED_COLLISION",
+  "CodSolicitacao": 1,
+  "original": [
+    {
+      "CodigoCliente": "SYNTHETIC_A"
+    },
+    {
+      "CodigoCliente": "SYNTHETIC_B"
+    }
+  ],
+  "reordered": [
+    {
+      "CodigoCliente": "SYNTHETIC_B"
+    },
+    {
+      "CodigoCliente": "SYNTHETIC_A"
+    }
+  ],
+  "expected": "POSITION_IS_NOT_STABLE_CHILD_IDENTITY",
+  "identityProven": false
+}

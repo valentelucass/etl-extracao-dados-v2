@@ -1,0 +1,65 @@
+{
+  "passed": true,
+  "sourceCalls": 0,
+  "newAcceptances": 0,
+  "syntheticDomainCommit": false,
+  "unit": {
+    "classes": 230,
+    "tests": 2037,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 4
+  },
+  "integration": {
+    "classes": 93,
+    "tests": 458,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "resumption": {
+    "priorAttempt": "verify-03",
+    "priorExit": 124,
+    "priorRollbackConfirmed": true,
+    "completedClasses": 53,
+    "remainingAttempt": "verify-04",
+    "remainingExit": 1,
+    "remainingClasses": 40,
+    "sameInputsBetween03And04": true,
+    "completedReportsPreserved": true,
+    "finalAttempt": "verify-05",
+    "finalExit": 0,
+    "finalUnitAndAllQualificationRepeated": true,
+    "finalChanges": [
+      "database/migrations/V099__preserve_freight_terminal_omission_freshness.sql",
+      "src/main/java/br/com/esl/etl/v2/plataforma/qualificacao/QualificationConfiguration.java",
+      "src/main/java/br/com/esl/etl/v2/plataforma/qualificacao/QualificationPackageContents.java",
+      "src/main/java/br/com/esl/etl/v2/plataforma/qualificacao/QualifiedPackage.java",
+      "src/main/resources/qualification-laboratory/config.synthetic.json",
+      "src/test/java/br/com/esl/etl/v2/bootstrap/QualificationContractTest.java",
+      "src/test/java/br/com/esl/etl/v2/bootstrap/QualificationPackageCompositionIT.java",
+      "src/test/java/br/com/esl/etl/v2/bootstrap/QualificationPackageFixture.java"
+    ],
+    "qualificationClasses": 32,
+    "reportSelection": "latest XML per class; 03 reports retained in 04; current Qualification reports replace all earlier Qualification results; unchanged other classes retained",
+    "receiptOptIn": "receipt-final-02; MeasurementFoundationReceiptTest repeated with explicit property and compiled classes from verify-05; replaces fifth skip in verify-05",
+    "coverage": "verify-04 execution data retained; current unit and Qualification IT appended; final check passed"
+  },
+  "sqlCases": 16,
+  "sqlModules": 3,
+  "rollbackConfirmed": true,
+  "jar": {
+    "path": "target/correcao-basica-e-contratos-entidades-20260914-01/delivery-final/payload/etl-dataexport-v2.jar",
+    "sha256": "ddde4a7ea9e3dfff98097bdb8e5dca723d4da1e035f61315813de39a8fd6e074"
+  },
+  "limits": [
+    "G01/V2-041 external credential hold",
+    "No real identity/completeness/compatibility acceptance",
+    "No V1 execution",
+    "No deployment or cutover"
+  ],
+  "evidence": {
+    "path": "target/correcao-basica-e-contratos-entidades-20260914-01/verification.json",
+    "sha256": "5bfe540a0749c693640d2a856199e5f2e64cc5298efa539e23e76a7e85423b2b"
+  }
+}

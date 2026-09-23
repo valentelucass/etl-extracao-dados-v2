@@ -1,0 +1,31 @@
+{
+  "manifestVersion": 1,
+  "roadmapTask": "V2-022/P02R",
+  "migration": "V015__create_runtime_durable_recovery.sql",
+  "status": "APPLIED_LOCAL_OPERATIONAL_HOLD",
+  "tables": [
+    "ctl.runtime_contract_evidence",
+    "ctl.runtime_coleta_publication_receipt"
+  ],
+  "functions": [
+    "ctl.fn_runtime_recovery_field",
+    "ctl.fn_runtime_recovery_identity",
+    "ctl.fn_runtime_coleta_publication_hash"
+  ],
+  "triggers": [
+    "ctl.trg_runtime_contract_evidence_immutable",
+    "ctl.trg_runtime_coleta_receipt_immutable"
+  ],
+  "procedures": [
+    "ctl.usp_runtime_recovery"
+  ],
+  "grants": [],
+  "maximumSummaryRows": 1,
+  "identity": "runtime-recovery-v1/UTF16-byte-lengths",
+  "integrity": "SHA-256/immutable-post-guard-seal/audit-pages/DQ-checks/publication-events",
+  "continuation": "SQL-revalidation-with-existing-typed-entrypoints/no-permit-reissue",
+  "physicalEvidence": "EXECUTED_BLOCK53_LOCAL_WINDOWS_OWNER",
+  "evolvedProcedures": [
+    "core.usp_apply_reconcile_publish_coletas"
+  ]
+}

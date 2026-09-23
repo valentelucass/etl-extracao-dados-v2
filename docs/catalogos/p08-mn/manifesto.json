@@ -1,0 +1,37 @@
+{
+  "version": "p08-mn-documentary-succession-v1",
+  "status": "P08_M_N_ACEITO_NO_ESCOPO_LOCAL",
+  "predecessor": {
+    "path": "docs/catalogos/p07-p08/manifesto.json",
+    "sha256": "7e250ec5824c5201b66bff6b5a567220db5a4e88d374a4b3f3a32bd4bb2136a3",
+    "historicalP06Sha256": "a0c23aa471941dbdf249f04755377d2728d1f7d159ce3d6ab177142d2c0af7f2"
+  },
+  "scope": {
+    "target": "localhost/ETL_SISTEMA_V2_SHADOW",
+    "syntheticRollbackOnly": true,
+    "remoteCalls": 0,
+    "ddl": false,
+    "domainCommit": false,
+    "production": false,
+    "cutover": false,
+    "realParity": false,
+    "humanReview": false,
+    "parentV2Acceptance": false
+  },
+  "package": {
+    "members": 724,
+    "archiveSha256": "05700f87b3f376d7f48e4f7b334a876fd7505c4e1d00399b684e9ab68c179b4b",
+    "manifestSha256": "45a5c532c8997e88f6691c59ecd3d6e6b2879c7db376b4a658c7732eeba16a73",
+    "readbackSeal": "target/macrobloco-qualificacao-pacote-20260913-01/p08-mn-n-seal-23/seal.json",
+    "readbackSealSha256": "f4bad0388c65eb16c84e933e8fbd384ac63e7516350d9d28a25ca8b3e7461027"
+  },
+  "overlay": [
+    {"path":"STATES.md","sha256":"f6ac7ea164553c7f2069450025a89014a52ed4c84021b05e7aa19fbcea604497"},
+    {"path":"TRILHA_CONCLUSAO_POR_MODELO.md","sha256":"86c2cc48313378e5c203925f90ffec15844963003b6d4dde2d6e9a6ca729afef"},
+    {"path":"docs/runbooks/trilha-de-chats-gpt-5-6.md","sha256":"2031be8ebfe563c7fab92625d6cfc73a4c130a3819cdb0a8383971d5b87f2231"},
+    {"path":"docs/catalogos/campanhas-integrais/matriz-a-n.json","sha256":"e2176797c630cf207aa478c99dfa2afe601bd992acece43d049d60832917539b"},
+    {"path":"docs/catalogos/campanhas-integrais/P08-MN-FECHAMENTO-20260921.md","sha256":"db912720895bec21aa779f3d78cdfcc18e57980257b5c090572be852132c111c"},
+    {"path":"docs/continuidade/RETOMADA.md","sha256":"563215fc8bd2253107db4e43ff9cffe0098d9941ee696a920a2f4ba58493a789"}
+  ],
+  "counters": {"construction":"39/45","historicalAcceptances":"67/115"}
+}

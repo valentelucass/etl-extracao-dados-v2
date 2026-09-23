@@ -1,0 +1,174 @@
+{
+  "version": 1,
+  "status": "STATES_EXECUCAO_LOCAL_CONCLUIDA",
+  "construction": "39/45",
+  "historicalAcceptances": "67/115",
+  "sourceCalls": 0,
+  "newAcceptances": 0,
+  "fronts": [
+    {
+      "id": "A",
+      "status": "CONCLUIDA_NO_ESCOPO_LOCAL",
+      "scope": "45unidades, critérios originais, consumidores atuais e dependência específica; contagens preservadas.",
+      "proofIds": [
+        "P24"
+      ],
+      "externalAcceptance": false
+    },
+    {
+      "id": "B",
+      "status": "CONCLUIDA_NO_ESCOPO_LOCAL",
+      "scope": "11famílias,75regras e campos; formatos, presença, identidade e proveniência confrontados.",
+      "proofIds": [
+        "P01",
+        "P02",
+        "P03",
+        "P04",
+        "P05",
+        "P06",
+        "P07",
+        "P08",
+        "P09",
+        "P10",
+        "P11"
+      ],
+      "externalAcceptance": false
+    },
+    {
+      "id": "C",
+      "status": "CONCLUIDA_NO_ESCOPO_LOCAL",
+      "scope": "Hipóteses dirigidas com RED/esperado/observado; casos corretos preservados.",
+      "proofIds": [
+        "P01",
+        "P21"
+      ],
+      "externalAcceptance": false
+    },
+    {
+      "id": "D",
+      "status": "CONCLUIDA_NO_ESCOPO_LOCAL",
+      "scope": "Parsing decimal exato, escala no preflight, tupla fiscal sem ambiguidade e memória/cancelamento dos suplementos corrigidos.",
+      "proofIds": [
+        "P01",
+        "P21"
+      ],
+      "externalAcceptance": false
+    },
+    {
+      "id": "E",
+      "status": "CONCLUIDA_NO_ESCOPO_LOCAL",
+      "scope": "Configuração/Clock/composição, contratos, plano, lease, watermark, DQ e códigos de saída.",
+      "proofIds": [
+        "P02",
+        "P03",
+        "P04",
+        "P19",
+        "P20",
+        "P23"
+      ],
+      "externalAcceptance": false
+    },
+    {
+      "id": "F",
+      "status": "CONCLUIDA_NO_ESCOPO_LOCAL",
+      "scope": "Relações/referências e propagação a cinco fatos/19saídas; V1 apenas por leitura.",
+      "proofIds": [
+        "P07",
+        "P08",
+        "P10",
+        "P12",
+        "P13",
+        "P14",
+        "P15"
+      ],
+      "externalAcceptance": false
+    },
+    {
+      "id": "G",
+      "status": "CONCLUIDA_NO_ESCOPO_LOCAL",
+      "scope": "646arquivos Java de produção e46candidatos: consumidores, decisões anteriores, recursos/reflexão e bytecode.",
+      "proofIds": [
+        "P22"
+      ],
+      "externalAcceptance": false
+    },
+    {
+      "id": "H",
+      "status": "CONCLUIDA_NO_ESCOPO_LOCAL",
+      "scope": "Bordas, páginas, duplicatas, reordenação, presença, frescor e isolamento; V099 preservada.",
+      "proofIds": [
+        "P01",
+        "P03",
+        "P05",
+        "P14",
+        "P15",
+        "P16",
+        "P20",
+        "P21"
+      ],
+      "externalAcceptance": false
+    },
+    {
+      "id": "I",
+      "status": "CONCLUIDA_NO_ESCOPO_LOCAL",
+      "scope": "Replay/revisão posterior, cancelamento, deadline, lease, falha de materialização e rollback.",
+      "proofIds": [
+        "P18",
+        "P19",
+        "P20",
+        "P21"
+      ],
+      "externalAcceptance": false
+    },
+    {
+      "id": "J",
+      "status": "CONCLUIDA_NO_ESCOPO_LOCAL",
+      "scope": "33responsabilidades, incompletude/distribuição/owner; preview-only e apply recusado.",
+      "proofIds": [
+        "P16",
+        "P17"
+      ],
+      "externalAcceptance": false
+    },
+    {
+      "id": "K",
+      "status": "CONCLUIDA_NO_ESCOPO_LOCAL",
+      "scope": "Suplementos2/8/32/128páginas; streamers16/256/4096; SQLA2/B24 e lotes limitados.",
+      "proofIds": [
+        "P21"
+      ],
+      "externalAcceptance": false
+    },
+    {
+      "id": "L",
+      "status": "CONCLUIDA_NO_ESCOPO_LOCAL",
+      "scope": "VerifyPhysical da revisão final, formatter, arquitetura, estática, cobertura, SQLrollback e multiplicidades.",
+      "proofIds": [
+        "P23"
+      ],
+      "externalAcceptance": false
+    },
+    {
+      "id": "M",
+      "status": "CONCLUIDA_NO_ESCOPO_LOCAL",
+      "scope": "Segunda revisão, JAR extraído, casos alternativos, ARTIFACT, diff/overlay aplicados e scanner.",
+      "proofIds": [
+        "P13",
+        "P15",
+        "P22",
+        "P23",
+        "P24"
+      ],
+      "externalAcceptance": false
+    },
+    {
+      "id": "N",
+      "status": "CONCLUIDA_NO_ESCOPO_LOCAL",
+      "scope": "Pacote, entradas/oráculos, recibos RED/GREEN, matrizes, relatório, sucessão, selo e readback.",
+      "proofIds": [
+        "P24"
+      ],
+      "externalAcceptance": false
+    }
+  ]
+}

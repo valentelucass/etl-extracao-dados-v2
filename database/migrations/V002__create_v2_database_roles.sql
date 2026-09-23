@@ -85,6 +85,21 @@ VALUES
     (N'core', N'usp_apply_reconcile_publish_execution', N'v2_runtime'),
     (N'stg', N'usp_stage_usuario_record', N'v2_runtime'),
     (N'core', N'usp_apply_reconcile_publish_usuarios', N'v2_runtime'),
+    (N'stg', N'usp_stage_coleta_record', N'v2_runtime'),
+    (N'core', N'usp_apply_reconcile_publish_coletas', N'v2_runtime'),
+    (N'stg', N'usp_stage_cotacao_record', N'v2_runtime'),
+    (N'core', N'usp_apply_reconcile_publish_cotacoes', N'v2_runtime'),
+    (N'stg', N'usp_stage_manifesto_observation', N'v2_runtime'),
+    (N'stg', N'usp_stage_manifesto_reduced_candidate', N'v2_runtime'),
+    (N'core', N'usp_prepare_manifesto_candidate_set', N'v2_runtime'),
+    (N'core', N'usp_apply_reconcile_publish_manifestos', N'v2_runtime'),
+    (N'stg', N'usp_stage_frete_record', N'v2_runtime'),
+    (N'stg', N'usp_stage_frete_performance', N'v2_runtime'),
+    (N'stg', N'usp_stage_frete_sidecar', N'v2_runtime'),
+    (N'core', N'usp_prepare_frete_candidate_set', N'v2_runtime'),
+    (N'core', N'usp_apply_reconcile_publish_fretes', N'v2_runtime'),
+    (N'stg', N'usp_stage_localizacao_carga_record', N'v2_runtime'),
+    (N'core', N'usp_apply_reconcile_publish_localizacao_cargas', N'v2_runtime'),
     (N'ctl', N'usp_approve_staging_retention_policy', N'v2_retention_governor'),
     (N'ctl', N'usp_revoke_staging_retention_policy', N'v2_retention_governor'),
     (N'ctl', N'usp_place_staging_legal_hold', N'v2_retention_governor'),
@@ -105,7 +120,7 @@ GO
 
 -- SQL Server não permite repassar um GRANT OPTION herdado via role. Este publicador mínimo fica
 -- em dbo, fora dos schemas alteráveis pelo migrator, roda como owner e aceita somente os triplets
--- exatos de procedure/role existentes em V003-V007. Novos entrypoints exigem revisão owner desta
+-- exatos de procedure/role existentes em V003-V014. Novos entrypoints exigem revisão owner desta
 -- allowlist; o migrator não recebe CONTROL, TAKE OWNERSHIP nem ALTER sobre o publicador.
 GO
 

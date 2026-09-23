@@ -1,0 +1,239 @@
+{
+  "schemaVersion": "V2_047_BOOTSTRAP_PLANNING_CASES_V1",
+  "synthetic": true,
+  "baseline": {
+    "executionMode": "BOOTSTRAP",
+    "sourceInstanceState": "BOUND_EXPLICIT",
+    "tenantScopeState": "BOUND_EXPLICIT",
+    "reservedScopeState": "CLEAR",
+    "t0State": "BOUND_CONSISTENT",
+    "temporalOrder": "TCUT_AFTER_T0",
+    "partitionShape": "CONTIGUOUS_POSITIVE",
+    "deltaSemantics": "(T0,Tcut]",
+    "watermarkEffect": "NONE",
+    "contractFingerprintState": "MATCH",
+    "identityFingerprintState": "MATCH",
+    "canonicalIdPolicy": "REGISTRY_PRESERVE",
+    "rekeyPolicy": "VERSIONED_ONLY",
+    "parentChildPolicy": "ATOMIC_NO_ORPHAN",
+    "relationPolicy": "DEFER_V2_046",
+    "absencePolicy": "NO_DEACTIVATION_WITHOUT_PROOF",
+    "referencePolicy": "EXPLICIT_RELEASE_SAME_SCOPE",
+    "strategyPolicy": "SINGLE_CANDIDATE_NO_AUTOMATIC_FALLBACK",
+    "executionState": "BLOCKED",
+    "boundsState": "BOUNDED",
+    "evidenceState": "SANITIZED_AGGREGATE_ONLY",
+    "rollbackPolicy": "TRANSACTIONAL_NO_HARD_DELETE",
+    "derivedFactPolicy": "DEFER_UNTIL_INPUTS",
+    "userTemporalPolicy": "NO_INVENTED_DELTA",
+    "sourceBoundaryState": "Q01_REQUIRED",
+    "completionPolicy": "ALL_BASE_AND_DELTA_RECONCILED",
+    "lateDataPolicy": "SEPARATE_REPLAY_NO_WATERMARK"
+  },
+  "scenarios": [
+    {
+      "scenarioId": "SYNTH_VALID_COLETAS_CONTIGUOUS",
+      "overrides": { "entity": "coletas" },
+      "expectedDisposition": "PLANNING_ACCEPTED_EXECUTION_BLOCKED",
+      "expectedReason": "OK"
+    },
+    {
+      "scenarioId": "SYNTH_VALID_MANIFESTOS_ROOT_CHILD_ATOMIC",
+      "overrides": { "entity": "manifestos" },
+      "expectedDisposition": "PLANNING_ACCEPTED_EXECUTION_BLOCKED",
+      "expectedReason": "OK"
+    },
+    {
+      "scenarioId": "SYNTH_VALID_COTACOES_EXPLICIT_REFERENCE_REQUIRED",
+      "overrides": { "entity": "cotacoes" },
+      "expectedDisposition": "PLANNING_ACCEPTED_EXECUTION_BLOCKED",
+      "expectedReason": "OK"
+    },
+    {
+      "scenarioId": "SYNTH_VALID_USUARIOS_FULL_SNAPSHOT_NO_ABSENCE",
+      "overrides": { "entity": "usuarios" },
+      "expectedDisposition": "PLANNING_ACCEPTED_EXECUTION_BLOCKED",
+      "expectedReason": "OK"
+    },
+    {
+      "scenarioId": "SYNTH_VALID_FRETES_PLANNING_VERTICAL_BLOCKED",
+      "overrides": { "entity": "fretes" },
+      "expectedDisposition": "PLANNING_ACCEPTED_EXECUTION_BLOCKED",
+      "expectedReason": "OK"
+    },
+    {
+      "scenarioId": "SYNTH_VALID_LOCALIZACAO_PLANNING_VERTICAL_BLOCKED",
+      "overrides": { "entity": "localizacao_cargas" },
+      "expectedDisposition": "PLANNING_ACCEPTED_EXECUTION_BLOCKED",
+      "expectedReason": "OK"
+    },
+    {
+      "scenarioId": "SYNTH_VALID_OUT_OF_ORDER_NO_INCREMENTAL_WATERMARK",
+      "overrides": { "entity": "partition_ledger" },
+      "expectedDisposition": "PLANNING_ACCEPTED_EXECUTION_BLOCKED",
+      "expectedReason": "OK"
+    },
+    {
+      "scenarioId": "SYNTH_REJECT_MODE_NOT_BOOTSTRAP",
+      "overrides": { "executionMode": "INCREMENTAL" },
+      "expectedDisposition": "REJECTED",
+      "expectedReason": "MODE_NOT_BOOTSTRAP"
+    },
+    {
+      "scenarioId": "SYNTH_REJECT_SOURCE_INSTANCE_REQUIRED",
+      "overrides": { "sourceInstanceState": "MISSING" },
+      "expectedDisposition": "REJECTED",
+      "expectedReason": "SOURCE_INSTANCE_REQUIRED"
+    },
+    {
+      "scenarioId": "SYNTH_REJECT_TENANT_SCOPE_REQUIRED",
+      "overrides": { "tenantScopeState": "MISSING" },
+      "expectedDisposition": "REJECTED",
+      "expectedReason": "TENANT_SCOPE_REQUIRED"
+    },
+    {
+      "scenarioId": "SYNTH_REJECT_RESERVED_SCOPE",
+      "overrides": { "reservedScopeState": "RESERVED" },
+      "expectedDisposition": "REJECTED",
+      "expectedReason": "RESERVED_SCOPE_FORBIDDEN"
+    },
+    {
+      "scenarioId": "SYNTH_REJECT_T0_REQUIRED",
+      "overrides": { "t0State": "MISSING" },
+      "expectedDisposition": "REJECTED",
+      "expectedReason": "T0_REQUIRED"
+    },
+    {
+      "scenarioId": "SYNTH_REJECT_TCUT_NOT_AFTER_T0",
+      "overrides": { "temporalOrder": "TCUT_NOT_AFTER_T0" },
+      "expectedDisposition": "REJECTED",
+      "expectedReason": "TCUT_NOT_AFTER_T0"
+    },
+    {
+      "scenarioId": "SYNTH_REJECT_PARTITION_GAP_OR_OVERLAP",
+      "overrides": { "partitionShape": "GAP_OR_OVERLAP" },
+      "expectedDisposition": "REJECTED",
+      "expectedReason": "PARTITION_SHAPE_INVALID"
+    },
+    {
+      "scenarioId": "SYNTH_REJECT_DELTA_SEMANTICS",
+      "overrides": { "deltaSemantics": "[T0,Tcut]" },
+      "expectedDisposition": "REJECTED",
+      "expectedReason": "DELTA_SEMANTICS_MISMATCH"
+    },
+    {
+      "scenarioId": "SYNTH_REJECT_INCREMENTAL_WATERMARK",
+      "overrides": { "watermarkEffect": "ADVANCE" },
+      "expectedDisposition": "REJECTED",
+      "expectedReason": "INCREMENTAL_WATERMARK_FORBIDDEN"
+    },
+    {
+      "scenarioId": "SYNTH_REJECT_CONTRACT_FINGERPRINT",
+      "overrides": { "contractFingerprintState": "MISMATCH" },
+      "expectedDisposition": "REJECTED",
+      "expectedReason": "CONTRACT_FINGERPRINT_MISMATCH"
+    },
+    {
+      "scenarioId": "SYNTH_REJECT_IDENTITY_FINGERPRINT",
+      "overrides": { "identityFingerprintState": "MISMATCH" },
+      "expectedDisposition": "REJECTED",
+      "expectedReason": "IDENTITY_FINGERPRINT_MISMATCH"
+    },
+    {
+      "scenarioId": "SYNTH_REJECT_LEGACY_SURROGATE_CANONICAL",
+      "overrides": { "canonicalIdPolicy": "LEGACY_SURROGATE" },
+      "expectedDisposition": "REJECTED",
+      "expectedReason": "LEGACY_SURROGATE_AS_CANONICAL_FORBIDDEN"
+    },
+    {
+      "scenarioId": "SYNTH_REJECT_SILENT_REKEY",
+      "overrides": { "rekeyPolicy": "SILENT_REPOINT" },
+      "expectedDisposition": "REJECTED",
+      "expectedReason": "SILENT_REKEY_FORBIDDEN"
+    },
+    {
+      "scenarioId": "SYNTH_REJECT_ORPHAN_CHILD",
+      "overrides": { "parentChildPolicy": "ORPHAN_ALLOWED" },
+      "expectedDisposition": "REJECTED",
+      "expectedReason": "ORPHAN_CHILD_FORBIDDEN"
+    },
+    {
+      "scenarioId": "SYNTH_REJECT_RELATION_V2_046_ANTICIPATED",
+      "overrides": { "relationPolicy": "MATERIALIZE_NOW" },
+      "expectedDisposition": "REJECTED",
+      "expectedReason": "RELATION_V2_046_ANTICIPATED"
+    },
+    {
+      "scenarioId": "SYNTH_REJECT_ABSENCE_DEACTIVATION",
+      "overrides": { "absencePolicy": "DEACTIVATE_ON_ABSENCE" },
+      "expectedDisposition": "REJECTED",
+      "expectedReason": "ABSENCE_DEACTIVATION_FORBIDDEN"
+    },
+    {
+      "scenarioId": "SYNTH_REJECT_IMPLICIT_REFERENCE_RELEASE",
+      "overrides": { "referencePolicy": "CURRENT_OR_DEFAULT" },
+      "expectedDisposition": "REJECTED",
+      "expectedReason": "IMPLICIT_REFERENCE_RELEASE_FORBIDDEN"
+    },
+    {
+      "scenarioId": "SYNTH_REJECT_AUTOMATIC_FALLBACK",
+      "overrides": { "strategyPolicy": "AUTOMATIC_FALLBACK" },
+      "expectedDisposition": "REJECTED",
+      "expectedReason": "AUTOMATIC_FALLBACK_FORBIDDEN"
+    },
+    {
+      "scenarioId": "SYNTH_REJECT_EXECUTION_READY_WITH_OPEN_GATES",
+      "overrides": { "executionState": "READY" },
+      "expectedDisposition": "REJECTED",
+      "expectedReason": "EXECUTION_READY_WITH_OPEN_GATES"
+    },
+    {
+      "scenarioId": "SYNTH_REJECT_UNBOUNDED_PLAN",
+      "overrides": { "boundsState": "UNBOUNDED" },
+      "expectedDisposition": "REJECTED",
+      "expectedReason": "BOUNDS_REQUIRED"
+    },
+    {
+      "scenarioId": "SYNTH_REJECT_SENSITIVE_EVIDENCE",
+      "overrides": { "evidenceState": "ROW_CONTENT" },
+      "expectedDisposition": "REJECTED",
+      "expectedReason": "SENSITIVE_EVIDENCE_FORBIDDEN"
+    },
+    {
+      "scenarioId": "SYNTH_REJECT_DESTRUCTIVE_ROLLBACK",
+      "overrides": { "rollbackPolicy": "HARD_DELETE_OR_DOWN_MIGRATION" },
+      "expectedDisposition": "REJECTED",
+      "expectedReason": "DESTRUCTIVE_ROLLBACK_FORBIDDEN"
+    },
+    {
+      "scenarioId": "SYNTH_REJECT_DERIVED_FACT_BEFORE_INPUTS",
+      "overrides": { "derivedFactPolicy": "BUILD_BEFORE_INPUTS" },
+      "expectedDisposition": "REJECTED",
+      "expectedReason": "DERIVED_FACT_BEFORE_INPUTS"
+    },
+    {
+      "scenarioId": "SYNTH_REJECT_USER_TEMPORAL_DELTA",
+      "overrides": { "userTemporalPolicy": "INVENT_UPDATED_AT" },
+      "expectedDisposition": "REJECTED",
+      "expectedReason": "USER_TEMPORAL_DELTA_FORBIDDEN"
+    },
+    {
+      "scenarioId": "SYNTH_REJECT_SOURCE_BOUNDARY_ASSUMED",
+      "overrides": { "sourceBoundaryState": "ASSUMED" },
+      "expectedDisposition": "REJECTED",
+      "expectedReason": "SOURCE_BOUNDARY_UNPROVEN"
+    },
+    {
+      "scenarioId": "SYNTH_REJECT_COMPLETION_WITH_GAP",
+      "overrides": { "completionPolicy": "PARTIAL_ACCEPTED" },
+      "expectedDisposition": "REJECTED",
+      "expectedReason": "COMPLETION_WITH_GAP_FORBIDDEN"
+    },
+    {
+      "scenarioId": "SYNTH_REJECT_LATE_DATA_ADVANCES_WATERMARK",
+      "overrides": { "lateDataPolicy": "MOVE_INCREMENTAL_WATERMARK" },
+      "expectedDisposition": "REJECTED",
+      "expectedReason": "LATE_DATA_POLICY_INVALID"
+    }
+  ]
+}

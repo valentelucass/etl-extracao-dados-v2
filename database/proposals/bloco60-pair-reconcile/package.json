@@ -1,0 +1,38 @@
+{
+  "operation": "EXACT_TWO_RECOVERY_ESCROW_READBACKS",
+  "target": "localhost/ETL_SISTEMA_V2_SHADOW",
+  "files": [
+    {
+      "sha256": "319a9141d4f45af5c8b2f627d4b644594a3bba32cea962582d241ade1a841a6a",
+      "path": "scripts/validation/Invoke-Bloco60PairReconcile.ps1"
+    },
+    {
+      "sha256": "14fe1eb85b936661cd641c350d53aeff02db2c20edc09e19c2af19b2faf33c06",
+      "path": "scripts/validation/Bloco60PairRecoveryLedger.psm1"
+    },
+    {
+      "sha256": "464cc0910d8117a883bae92aa139e72ca6f0e1ea78e75a5a770c436c40aef25a",
+      "path": "scripts/validation/Bloco60AdminProcess.cs"
+    },
+    {
+      "sha256": "3a2c0f5071a0416f62682e4310e2de9e9b5a220ffba86043ef8922d5c408c5f9",
+      "path": "database/proposals/bloco60-pair-reconcile/pair.sql"
+    },
+    {
+      "sha256": "7256c38a507ec9cddfc28ebd7e6ae64a06b83c75b22166e7c0169562adf0b5a2",
+      "path": "database/proposals/bloco60-retomada-r2/master-target.sql"
+    },
+    {
+      "sha256": "89a17745b9be43987d221d4567f82727002fc4d9219ac23629e4f379779f1f2d",
+      "path": "database/proposals/bloco60-lease-restante/profile-after.sql"
+    }
+  ],
+  "deadlineUtc": "2026-09-10T13:15:21.8816492Z",
+  "jvms": 0,
+  "recoveryEscrowMaximum": 8,
+  "sqlcmdPlanned": 2,
+  "mutations": 0,
+  "priorJvms": 77,
+  "priorSqlcmd": 158,
+  "block": 60
+}

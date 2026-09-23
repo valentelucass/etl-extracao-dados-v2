@@ -1,0 +1,429 @@
+{
+  "provenance": "FIXTURE_SINTETICA_EXPLICITA",
+  "version": "analytic-references-v1",
+  "labels": [
+    {
+      "category": "FRE_STATUS",
+      "raw": "pending",
+      "label": "pendente"
+    },
+    {
+      "category": "FRE_STATUS",
+      "raw": "finished",
+      "label": "finalizado"
+    },
+    {
+      "category": "FRE_STATUS",
+      "raw": "done",
+      "label": "finalizado"
+    },
+    {
+      "category": "FRE_STATUS",
+      "raw": "canceled",
+      "label": "cancelada"
+    },
+    {
+      "category": "FRE_STATUS",
+      "raw": "cancelled",
+      "label": "cancelada"
+    },
+    {
+      "category": "FRE_STATUS",
+      "raw": "in_transit",
+      "label": "em trânsito"
+    },
+    {
+      "category": "FRE_STATUS",
+      "raw": "standby",
+      "label": "aguardando"
+    },
+    {
+      "category": "FRE_STATUS",
+      "raw": "manifested",
+      "label": "registrado"
+    },
+    {
+      "category": "FRE_STATUS",
+      "raw": "occurrence_treatment",
+      "label": "tratamento de ocorrência"
+    },
+    {
+      "category": "LOC_STATUS",
+      "raw": "pending",
+      "label": "Pendente"
+    },
+    {
+      "category": "LOC_STATUS",
+      "raw": "delivering",
+      "label": "Em entrega"
+    },
+    {
+      "category": "LOC_STATUS",
+      "raw": "in_warehouse",
+      "label": "Em armazém"
+    },
+    {
+      "category": "LOC_STATUS",
+      "raw": "in_transfer",
+      "label": "Em transferência"
+    },
+    {
+      "category": "LOC_STATUS",
+      "raw": "manifested",
+      "label": "Manifestado"
+    },
+    {
+      "category": "LOC_STATUS",
+      "raw": "finished",
+      "label": "Finalizado"
+    },
+    {
+      "category": "LOC_STATUS",
+      "raw": "delivered",
+      "label": "Entregue"
+    },
+    {
+      "category": "LOC_STATUS",
+      "raw": "canceled",
+      "label": "Cancelado"
+    },
+    {
+      "category": "LOC_STATUS",
+      "raw": "cancelled",
+      "label": "Cancelado"
+    },
+    {
+      "category": "INV_TYPE",
+      "raw": "Loading",
+      "label": "Carregamento"
+    },
+    {
+      "category": "INV_TYPE",
+      "raw": "Unloading",
+      "label": "Descarregamento"
+    },
+    {
+      "category": "INV_TYPE",
+      "raw": "Picking",
+      "label": "Picking"
+    },
+    {
+      "category": "INV_TYPE",
+      "raw": "Receipt",
+      "label": "Recebimento"
+    },
+    {
+      "category": "INV_TYPE",
+      "raw": "Return",
+      "label": "Retorno"
+    },
+    {
+      "category": "INV_STATUS",
+      "raw": "pending",
+      "label": "pendente"
+    },
+    {
+      "category": "INV_STATUS",
+      "raw": "finished",
+      "label": "finalizado"
+    },
+    {
+      "category": "SIN_DEALING",
+      "raw": "send_to_damages_dealing",
+      "label": "tratativa de avarias"
+    },
+    {
+      "category": "SIN_DEALING",
+      "raw": "send_to_incidents_dealing",
+      "label": "tratativa de incidentes"
+    },
+    {
+      "category": "SIN_SOLUTION",
+      "raw": "redelivery_without_freight_charge",
+      "label": "redespacho sem cobrança de frete"
+    },
+    {
+      "category": "PAYMENT",
+      "raw": "bill",
+      "label": "Faturado"
+    },
+    {
+      "category": "PAYMENT",
+      "raw": "cash",
+      "label": "À vista"
+    },
+    {
+      "category": "BOOLEAN",
+      "raw": "true",
+      "label": "Sim"
+    },
+    {
+      "category": "BOOLEAN",
+      "raw": "false",
+      "label": "Não"
+    },
+    {
+      "category": "FAT_CTE",
+      "raw": "authorized",
+      "label": "Autorizado"
+    },
+    {
+      "category": "FAT_CTE",
+      "raw": "cancelled",
+      "label": "Cancelado"
+    },
+    {
+      "category": "FAT_CTE",
+      "raw": "denied",
+      "label": "Negado"
+    },
+    {
+      "category": "FAT_CTE",
+      "raw": "pending",
+      "label": "Pendente"
+    },
+    {
+      "category": "PICK_STATUS",
+      "raw": "pending",
+      "label": "Pendente"
+    },
+    {
+      "category": "PICK_STATUS",
+      "raw": "finished",
+      "label": "Finalizada"
+    },
+    {
+      "category": "PICK_STATUS",
+      "raw": "done",
+      "label": "Finalizada"
+    },
+    {
+      "category": "PICK_STATUS",
+      "raw": "canceled",
+      "label": "Cancelada"
+    },
+    {
+      "category": "PICK_STATUS",
+      "raw": "cancelled",
+      "label": "Cancelada"
+    },
+    {
+      "category": "PICK_STATUS",
+      "raw": "in_transit",
+      "label": "Em trânsito"
+    },
+    {
+      "category": "PICK_STATUS",
+      "raw": "manifested",
+      "label": "Manifestada"
+    },
+    {
+      "category": "PICK_STATUS",
+      "raw": "draft",
+      "label": "Rascunho"
+    },
+    {
+      "category": "MFT_STATUS",
+      "raw": "closed",
+      "label": "Fechado"
+    },
+    {
+      "category": "MFT_STATUS",
+      "raw": "in_transit",
+      "label": "Em trânsito"
+    },
+    {
+      "category": "MFT_STATUS",
+      "raw": "pending",
+      "label": "Pendente"
+    },
+    {
+      "category": "CAP_CLASS",
+      "raw": "variable_costs",
+      "label": "Custos variáveis"
+    },
+    {
+      "category": "CAP_CLASS",
+      "raw": "fixed_costs",
+      "label": "Custos fixos"
+    },
+    {
+      "category": "EMISSION",
+      "raw": "normal",
+      "label": "Normal"
+    },
+    {
+      "category": "EMISSION",
+      "raw": "complement",
+      "label": "Complementar"
+    },
+    {
+      "category": "EMISSION",
+      "raw": "substitution",
+      "label": "Substituto"
+    },
+    {
+      "category": "EMISSION",
+      "raw": "electronic",
+      "label": "Eletrônico"
+    },
+    {
+      "category": "EMISSION",
+      "raw": "none",
+      "label": "Nenhum"
+    }
+  ],
+  "registry": [
+    {
+      "kind": "FILIAL",
+      "key": "synthetic-branch-a",
+      "name": " SYNTHETIC BRANCH A ",
+      "active": true,
+      "sourcePath": "synthetic/reference-registry-v1/FILIAL",
+      "document": "SYNTHETIC-BRANCH-DOCUMENT-A"
+    },
+    {
+      "kind": "FILIAL",
+      "key": "synthetic-branch-b",
+      "name": "SYNTHETIC BRANCH B",
+      "active": true,
+      "sourcePath": "synthetic/reference-registry-v1/FILIAL",
+      "document": "SYNTHETIC-BRANCH-DOCUMENT-B"
+    },
+    {
+      "kind": "CLIENTE",
+      "key": "synthetic-client-a",
+      "name": "SYNTHETIC CLIENT",
+      "active": true,
+      "sourcePath": "synthetic/reference-registry-v1/CLIENTE",
+      "document": "12345678000199"
+    },
+    {
+      "kind": "CLIENTE",
+      "key": "synthetic-client-b",
+      "name": "SYNTHETIC CLIENT",
+      "active": true,
+      "sourcePath": "synthetic/reference-registry-v1/CLIENTE",
+      "document": "12345678000270"
+    },
+    {
+      "kind": "VEICULO",
+      "key": "synthetic-tractor-a",
+      "name": "SYNTHETIC TRACTOR",
+      "active": true,
+      "sourcePath": "synthetic/reference-registry-v1/VEICULO",
+      "plate": "SYN0001",
+      "branch": "synthetic-branch-a",
+      "capacity": "10000.00000000",
+      "unit": "KG",
+      "vehicleType": "TRATOR",
+      "vehicleOwner": "SYNTHETIC OWNER"
+    },
+    {
+      "kind": "VEICULO",
+      "key": "synthetic-trailer-a",
+      "name": "SYNTHETIC TRAILER A",
+      "active": true,
+      "sourcePath": "synthetic/reference-registry-v1/VEICULO",
+      "plate": "SYN0002",
+      "branch": "synthetic-branch-a",
+      "capacity": "5000.00000000",
+      "unit": "KG",
+      "vehicleType": "REBOQUE",
+      "vehicleOwner": "SYNTHETIC OWNER"
+    },
+    {
+      "kind": "VEICULO",
+      "key": "synthetic-trailer-b",
+      "name": "SYNTHETIC TRAILER B",
+      "active": true,
+      "sourcePath": "synthetic/reference-registry-v1/VEICULO",
+      "plate": "SYN0003",
+      "branch": "synthetic-branch-a",
+      "capacity": "7000.00000000",
+      "unit": "KG",
+      "vehicleType": "REBOQUE",
+      "vehicleOwner": "SYNTHETIC OWNER"
+    },
+    {
+      "kind": "MOTORISTA",
+      "key": "synthetic-driver-a",
+      "name": "SYNTHETIC DRIVER",
+      "active": true,
+      "sourcePath": "synthetic/reference-registry-v1/MOTORISTA",
+      "branch": "synthetic-branch-a"
+    },
+    {
+      "kind": "MOTORISTA",
+      "key": "synthetic-driver-b",
+      "name": "SYNTHETIC DRIVER",
+      "active": true,
+      "sourcePath": "synthetic/reference-registry-v1/MOTORISTA",
+      "branch": "synthetic-branch-b"
+    },
+    {
+      "kind": "MOTORISTA",
+      "key": "synthetic-generic-driver",
+      "name": "MOTORISTA SYNTHETIC",
+      "active": true,
+      "sourcePath": "synthetic/reference-registry-v1/MOTORISTA",
+      "branch": "synthetic-branch-a"
+    },
+    {
+      "kind": "PLANOCONTAS",
+      "key": "synthetic-account-a",
+      "name": "SYNTHETIC ACCOUNT",
+      "active": true,
+      "sourcePath": "synthetic/reference-registry-v1/PLANOCONTAS",
+      "classification": "Custos variáveis"
+    },
+    {
+      "kind": "PLANOCONTAS",
+      "key": "synthetic-account-b",
+      "name": "SYNTHETIC UNCLASSIFIED ACCOUNT",
+      "active": true,
+      "sourcePath": "synthetic/reference-registry-v1/PLANOCONTAS"
+    },
+    {
+      "kind": "USUARIO",
+      "key": "synthetic-user-a",
+      "name": "SYNTHETIC USER",
+      "active": true,
+      "sourcePath": "synthetic/reference-registry-v1/USUARIO"
+    }
+  ],
+  "exclusions": [
+    {
+      "kind": "PAYER",
+      "value": "synthetic-excluded-payer"
+    },
+    {
+      "kind": "BRANCH_DOCUMENT",
+      "value": "SYNTHETIC-BRANCH-DOCUMENT-A"
+    },
+    {
+      "kind": "OPERATION_PREFIX",
+      "value": "Carga Fechada"
+    },
+    {
+      "kind": "OPERATION_PREFIX",
+      "value": "Acerto de Motorista"
+    },
+    {
+      "kind": "OPERATION_PREFIX",
+      "value": "Frete Retorno"
+    },
+    {
+      "kind": "OPERATION_PREFIX",
+      "value": "Viagem Vazia"
+    },
+    {
+      "kind": "LICENSE_PLATE",
+      "value": "ACM0000"
+    },
+    {
+      "kind": "GENERIC_DRIVER",
+      "value": "MOTORISTA"
+    }
+  ]
+}

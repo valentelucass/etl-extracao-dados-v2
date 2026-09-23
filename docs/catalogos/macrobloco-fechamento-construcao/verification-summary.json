@@ -1,0 +1,153 @@
+{
+  "version": 1,
+  "status": "AUDITORIA_E_CORRECOES_LOCAIS_CONCLUIDAS",
+  "passed": true,
+  "sealRequired": true,
+  "fronts": [
+    "A",
+    "B",
+    "C",
+    "D",
+    "E",
+    "F",
+    "G",
+    "H",
+    "I",
+    "J",
+    "K",
+    "L",
+    "M",
+    "N"
+  ],
+  "construction": {
+    "before": 39,
+    "after": 39,
+    "total": 45
+  },
+  "historicalAcceptances": {
+    "accepted": 67,
+    "total": 115
+  },
+  "newAcceptances": 0,
+  "remoteCalls": 0,
+  "durableDomainRows": 0,
+  "operationalPromotionAuthorized": false,
+  "realQualificationAccepted": false,
+  "heapPlateauProven": false,
+  "materialRecoveryProven": false,
+  "full": {
+    "attempt": "verify-final-01",
+    "unitTests": 1976,
+    "unitSkipped": 4,
+    "integrationTests": 423,
+    "integrationClasses": 81,
+    "integrationSkipped": 0,
+    "failures": 0,
+    "errors": 0,
+    "previous417Exact": true,
+    "newIntegrationCases": 6,
+    "coveragePassed": true,
+    "lineThreshold": 0.8,
+    "branchThreshold": 0.6,
+    "rollbackConfirmed": true
+  },
+  "package": {
+    "first": "qualification-final-01",
+    "second": "qualification-repro-01",
+    "revision": "bad77e34686dda2cded2fe2860ea7249d3bd115b32a0dc81e910aff99a410038",
+    "archiveSha256": "b1ae469e21a08937592496a72a252173af6a7d98e935b4c79c63135328364403",
+    "manifestSha256": "8aa50f6704007da5b3c1264d6a4269a89918a89567b7e71cec50990a25478c52",
+    "declaredMembers": 172,
+    "archiveEntries": 174,
+    "dependencies": 9,
+    "sourceCount": 1997,
+    "classResourceEntries": 1015,
+    "byteIdentical": true,
+    "sourceAndJarChecked": true
+  },
+  "execution": {
+    "smokes": 5,
+    "smokeCommands": 30,
+    "resumeBoundariesAndGuards": 4,
+    "resumeCommands": 12,
+    "extractedGuards": 21,
+    "controlGuards": 8,
+    "scalesRepeated": false,
+    "historicalScales": [
+      4,
+      16,
+      32,
+      16
+    ]
+  },
+  "proofs": {
+    "regression": {
+      "path": "target/macrobloco-fechamento-construcao-20260913-01/regression-final-01/result.json",
+      "sha256": "6c3b16f452b0e645731d1fbf03e3a4f2e6bab1025b05ffe75198f82669d5787e"
+    },
+    "artifact": {
+      "path": "target/macrobloco-fechamento-construcao-20260913-01/artifact-final-01/result.json",
+      "sha256": "a7a3e33fc327d31cb7aaa08db15b8c5992514dbeeb9a907440471d9d7c84b6d7"
+    },
+    "resumePackage": {
+      "path": "target/macrobloco-fechamento-construcao-20260913-01/resume-package-02/result.json",
+      "sha256": "43c6cafee05237e2b342b580b1865610f5e2cec37c74f39c8f9a864e243092bb"
+    },
+    "extractedGuards": {
+      "path": "target/macrobloco-fechamento-construcao-20260913-01/extracted-guards-01/result.json",
+      "sha256": "a233333cf37c42822f99b16c82562817da2551ec38caf943976cd76440c63d72"
+    },
+    "controlGuards": {
+      "path": "target/macrobloco-fechamento-construcao-20260913-01/control-guards-01/result.json",
+      "sha256": "daa725b106e11373d72fcbe6da74fb77a61203212d13445f247f973199f8d57d"
+    },
+    "smokes": {
+      "path": "target/macrobloco-fechamento-construcao-20260913-01/smokes-summary.json",
+      "sha256": "24227901b366baa064f93c862cf2c0450607e7842a3f45fe7a904fddd30983e0"
+    },
+    "baseline": {
+      "path": "target/macrobloco-fechamento-construcao-20260913-01/baseline-result.json",
+      "sha256": "b6e6ac8cbc290e333f1fda08d96d008e06f9977ab25c671b8017153df73d39a0"
+    },
+    "skips": {
+      "path": "target/macrobloco-fechamento-construcao-20260913-01/historical-skips-current.json",
+      "sha256": "094e2d28915a9188aeee127d3c5aec774bac5200764855fbb4233816ce9528ba"
+    },
+    "directed": {
+      "path": "target/macrobloco-fechamento-construcao-20260913-01/resume-green-01/result.json",
+      "sha256": "a55303b86fa9afe2b84411c517a59fb22cd59e08a8e3339ab62d252744fcdbb0"
+    }
+  },
+  "finalChecksBoundBySeal": [
+    "static-foundation-final-02",
+    "static-runtime-final-02",
+    "static-succession-final-02",
+    "static-closure-final-02"
+  ],
+  "externalGates": [
+    "G01",
+    "G02",
+    "G03",
+    "G04",
+    "G05",
+    "G06",
+    "G07",
+    "G08"
+  ],
+  "limitations": [
+    "35 = 11 entradas + 5 fatos + 19 contratos; as seis dimensões são dependências, não seis gates extras.",
+    "673 são colunas de saída, 971 são metadados físicos; nenhum desses totais substitui as 2437 linhas ou prova cobertura total do legado.",
+    "Oráculos e identidades sintéticos não autenticam regra/identidade de fonte; /info permanece opaco.",
+    "Retiradas e vínculos condicionados têm destino explícito de auditoria, sem conceder aceite ou aumentar contador."
+  ],
+  "auditData": {
+    "fields": 2437,
+    "parts": 3,
+    "index": {
+      "path": "docs/catalogos/macrobloco-fechamento-construcao/rastreabilidade-2437-campos.json",
+      "sha256": "63ec0c4c381c03a5d4437d7fc85eb7a29ee82e66e38474da00405a9bf2cc9eb6"
+    },
+    "maximumScannerBytes": 5242880,
+    "scannerLimitUnchanged": true
+  }
+}

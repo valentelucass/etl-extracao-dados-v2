@@ -1,0 +1,31 @@
+{
+  "sequence_code": 1,
+  "cnr_c_s_fit_corporation_sequence_number": 11,
+  "started_at": "2036-04-01T08:00:00-03:00",
+  "finished_at": "2036-04-01T09:00:00-03:00",
+  "cnr_c_s_fit_dpn_performance_finished_at": "2036-04-01T10:00:00.123456789-03:00",
+  "type": "CheckIn::Order::Loading",
+  "status": "finished",
+  "cnr_c_s_fit_invoices_mapping": [
+    "SYNTHETIC-NOTE-A",
+    "SYNTHETIC-NOTE-B"
+  ],
+  "cnr_c_s_fit_invoices_value": "100.00",
+  "cnr_c_s_fit_real_weight": "12.50000000",
+  "cnr_c_s_fit_total_cubic_volume": "0",
+  "cnr_c_s_fit_taxed_weight": "15.00000000",
+  "cnr_c_s_fit_invoices_volumes": 2,
+  "cnr_c_s_read_volumes": 2,
+  "cnr_c_s_fit_fte_lce_ore_description": "Comprovante de entrega anexado",
+  "cnr_crn_psn_nickname": "SYNTHETIC BRANCH",
+  "cnr_c_s_fit_dpn_delivery_prediction_at": "2036-04-01T11:00:00.123456789-03:00",
+  "cnr_c_s_fit_dyn_drt_nickname": "SYNTHETIC cnr_c_s_fit_dyn_drt_nickname",
+  "cnr_c_s_fit_dyn_name": "SYNTHETIC cnr_c_s_fit_dyn_name",
+  "cnr_c_s_fit_fte_lce_occurrence_at": "2036-04-01T11:00:00.123456789-03:00",
+  "cnr_c_s_fit_pyr_nickname": "SYNTHETIC cnr_c_s_fit_pyr_nickname",
+  "cnr_c_s_fit_rpt_ads_cty_name": "SYNTHETIC cnr_c_s_fit_rpt_ads_cty_name",
+  "cnr_c_s_fit_rpt_nickname": "SYNTHETIC cnr_c_s_fit_rpt_nickname",
+  "cnr_c_s_fit_sdr_ads_cty_name": "SYNTHETIC cnr_c_s_fit_sdr_ads_cty_name",
+  "cnr_c_s_fit_sdr_nickname": "SYNTHETIC cnr_c_s_fit_sdr_nickname",
+  "cnr_cis_eoe_psn_name": "SYNTHETIC cnr_cis_eoe_psn_name"
+}

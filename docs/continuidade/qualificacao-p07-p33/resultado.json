@@ -1,0 +1,617 @@
+{
+  "status": "LOCAL_REQUALIFICATION_P07_P08_PASS",
+  "utc": "2026-09-22T06:46:44.106Z",
+  "layer": "DERIVED_FROM_REAL_P07_P08_RECEIPTS",
+  "sourceCalls": 0,
+  "externalNetworkCalls": 0,
+  "databaseCalls": null,
+  "newAcceptances": 0,
+  "construction": "39/45",
+  "historicalAcceptances": "67/115",
+  "fullPhysicalVerify": true,
+  "packageExecuted": true,
+  "currentP07Qualified": true,
+  "currentP08Qualified": true,
+  "ddl": false,
+  "domainCommit": false,
+  "productionUsed": false,
+  "nominalApproval": false,
+  "releaseApproved": false,
+  "deploymentUsed": false,
+  "cutover": false,
+  "checkpoint": {
+    "path": "docs/continuidade/checkpoints/0243-qualificacao-local-e-sucessao-conferidas.md",
+    "sha256": "917e206cca19ec738b24225fec2fa5b921a22086d9ffb5fe251bfff83603a5ae"
+  },
+  "physical": {
+    "round": "target/qualificacao-p07-p33-20260922-01/physical/",
+    "buildAttempt": "pos0236-p07-verify-01",
+    "packagePrimary": "pos0236-package-primary-01",
+    "packageReproduction": "pos0236-package-reproduction-01",
+    "smokeAttempt": "pos0236-smoke-01",
+    "controlAttempt": "pos0236-control-guards-01",
+    "extractedAttempt": "pos0236-extracted-guards-01",
+    "sequences": {
+      "sequence-a": "pos0236-sequence-a-01",
+      "sequence-b": "pos0236-sequence-b-01",
+      "value": "pos0236-value-01",
+      "precision": "pos0236-precision-01",
+      "key": "pos0236-key-01",
+      "multiplicity": "pos0236-multiplicity-01",
+      "old-reference": "pos0236-old-reference-01",
+      "missing-user": "pos0236-missing-user-01",
+      "pin-drift": "pos0236-pin-drift-01",
+      "command": "pos0236-command-01"
+    }
+  },
+  "staticAnalysis": {
+    "engineResult": {
+      "path": "target/qualificacao-p07-p33-20260922-01/static-disposition-full-p07-01/result.json",
+      "sha256": "4e8285892e7eb7b4c176936a8052c397cc52c8919bd504368524d38829acd5b0"
+    },
+    "catalog": {
+      "path": "docs/continuidade/qualificacao-p07-p33/disposicoes-pmd.json",
+      "sha256": "94f12c6b18f3a8b80f73a8049b8ea6fccf24626e3a34931ee58127b08b6be6ae"
+    },
+    "pmdDirectory": "target/qualificacao-p07-p33-20260922-01/static-main-01",
+    "testSourceRoot": "target/macrobloco-qualificacao-pacote-20260913-01/pos0236-p07-verify-01/build",
+    "testReportDirectories": [
+      "target/macrobloco-qualificacao-pacote-20260913-01/pos0236-p07-verify-01/build/target/surefire-reports"
+    ],
+    "rawFindingCount": 36
+  },
+  "metrics": {
+    "unit": {
+      "tests": 2263,
+      "classes": 251,
+      "skipped": 4
+    },
+    "integration": {
+      "tests": 492,
+      "classes": 105,
+      "skipped": 0
+    },
+    "requiredNewCasesVerified": 77,
+    "sourceFilesChecked": 2096,
+    "package": {
+      "members": 730,
+      "dependencies": 9,
+      "comparedBytes": 7943947,
+      "revision": "e266fd695d5c9a3bccf1516f444802cc43908ae1f05f8fccea74fa60075ac964"
+    },
+    "guards": {
+      "control": {
+        "cases": 8,
+        "jdbc": "NOT_STARTED"
+      },
+      "extracted": {
+        "cases": 21,
+        "jdbc": "NOT_STARTED"
+      },
+      "archive": {
+        "cases": 25
+      }
+    },
+    "sequences": {
+      "sequence-a": {
+        "variant": "COMPLETE",
+        "exit": 0,
+        "expectedExit": 0,
+        "stages": 7,
+        "comparisons": 133,
+        "previews": 231,
+        "rollbackConfirmed": true
+      },
+      "sequence-b": {
+        "variant": "COMPLETE",
+        "exit": 0,
+        "expectedExit": 0,
+        "stages": 7,
+        "comparisons": 133,
+        "previews": 231,
+        "rollbackConfirmed": true
+      },
+      "value": {
+        "variant": "VALUE",
+        "exit": 40,
+        "expectedExit": 40,
+        "stages": 1,
+        "comparisons": 19,
+        "previews": 0,
+        "rollbackConfirmed": true
+      },
+      "precision": {
+        "variant": "PRECISION",
+        "exit": 40,
+        "expectedExit": 40,
+        "stages": 1,
+        "comparisons": 19,
+        "previews": 0,
+        "rollbackConfirmed": true
+      },
+      "key": {
+        "variant": "KEY",
+        "exit": 40,
+        "expectedExit": 40,
+        "stages": 1,
+        "comparisons": 19,
+        "previews": 0,
+        "rollbackConfirmed": true
+      },
+      "multiplicity": {
+        "variant": "MULTIPLICITY",
+        "exit": 40,
+        "expectedExit": 40,
+        "stages": 1,
+        "comparisons": 19,
+        "previews": 0,
+        "rollbackConfirmed": true
+      },
+      "old-reference": {
+        "variant": "OLD_REFERENCE",
+        "exit": 40,
+        "expectedExit": 40,
+        "stages": 6,
+        "comparisons": 114,
+        "previews": 165,
+        "rollbackConfirmed": true
+      },
+      "missing-user": {
+        "variant": "MISSING_USER",
+        "exit": 20,
+        "expectedExit": 20,
+        "stages": 0,
+        "comparisons": 0,
+        "previews": 0,
+        "rollbackConfirmed": true
+      },
+      "pin-drift": {
+        "variant": "PIN_DRIFT",
+        "exit": 20,
+        "expectedExit": 20,
+        "stages": 0,
+        "comparisons": 0,
+        "previews": 0,
+        "rollbackConfirmed": true
+      },
+      "command": {
+        "variant": "COMMAND",
+        "exit": 20,
+        "expectedExit": 20,
+        "stages": 0,
+        "comparisons": 0,
+        "previews": 0,
+        "rollbackConfirmed": true
+      }
+    },
+    "static": {
+      "rawFindings": 36,
+      "reviewedFindings": 36,
+      "reportFiles": 251,
+      "reportCases": 2263
+    }
+  },
+  "wrappers": {
+    "p07": {
+      "path": "target/qualificacao-p07-p33-20260922-01/physical/p07-verify-02/result.json",
+      "sha256": "91be23ce1e22a7b64e370483a6124c5d4779440cfbf910c2fc1fbd8e6af1ed83"
+    },
+    "p08Pipeline": {
+      "path": "target/qualificacao-p07-p33-20260922-01/physical/p08-result.json",
+      "sha256": "05f564f994533a25bddbd8b42456b71fe8eeea21a1dbf14452d05bf01dc11afd"
+    },
+    "plan": {
+      "path": "target/qualificacao-p07-p33-20260922-01/physical/p08-plan.json",
+      "sha256": "61996bacbfd0181d1867dce5921ee7452a1c22128cad989e34ee52e55b4dba70"
+    }
+  },
+  "preservedHistoricalEvidence": [
+    {
+      "evidence": {
+        "path": "target/qualificacao-p07-p33-20260922-01/physical/p07-verify-01/result.json",
+        "sha256": "9fd3a1ae70af3f1142759dd170f7bb8c5597709fc5c1bfbbb280a1f5da5e2d5c"
+      },
+      "classification": "PRESERVED_NONQUALIFYING_PRIOR_ATTEMPT",
+      "observedState": "OBSERVED_FAILURE",
+      "observedExit": 1,
+      "qualifiesP07": false,
+      "qualifiesP08": false
+    },
+    {
+      "evidence": {
+        "path": "target/qualificacao-p07-p33-20260922-01/physical/binding-review-before/result.json",
+        "sha256": "8c3bb16908332461731b276ed963037cc01925eb388ed28d31416929f73139cf"
+      },
+      "classification": "PRESERVED_NONQUALIFYING_PRIOR_ATTEMPT",
+      "observedState": "FAIL",
+      "observedExit": null,
+      "qualifiesP07": false,
+      "qualifiesP08": false
+    },
+    {
+      "evidence": {
+        "path": "target/qualificacao-p07-p33-20260922-01/physical/binding-review-after/result.json",
+        "sha256": "b274a9b967a27f68dec9624301525df59a1eb0f91e8e567d8a6250aa87990309"
+      },
+      "classification": "PRESERVED_NONQUALIFYING_PRIOR_ATTEMPT",
+      "observedState": "FAIL",
+      "observedExit": null,
+      "qualifiesP07": false,
+      "qualifiesP08": false
+    }
+  ],
+  "receipts": [
+    {
+      "path": "docs/continuidade/qualificacao-p07-p33/disposicoes-pmd.json",
+      "sha256": "94f12c6b18f3a8b80f73a8049b8ea6fccf24626e3a34931ee58127b08b6be6ae"
+    },
+    {
+      "path": "target/macrobloco-qualificacao-pacote-20260913-01/pos0236-command-01/result.json",
+      "sha256": "5c0f2ca0fedb0ad0ff22acd1b205189b608db61b54f2d2ca3156fd24a0c391f9"
+    },
+    {
+      "path": "target/macrobloco-qualificacao-pacote-20260913-01/pos0236-control-guards-01/result.json",
+      "sha256": "16df11cb93008f8751fd2a56437618dad77b4eb9cb0315c0b0b9da3ed426961f"
+    },
+    {
+      "path": "target/macrobloco-qualificacao-pacote-20260913-01/pos0236-extracted-guards-01/result.json",
+      "sha256": "05670780902d81684391483004019371580271ff9398f42523925ed4ed432fc9"
+    },
+    {
+      "path": "target/macrobloco-qualificacao-pacote-20260913-01/pos0236-key-01/result.json",
+      "sha256": "7c15bcad24c42c23582ec73ed67f29fe71ee962151236d156b3bb7e79f52a80f"
+    },
+    {
+      "path": "target/macrobloco-qualificacao-pacote-20260913-01/pos0236-missing-user-01/result.json",
+      "sha256": "92098ccdd2eb2f40ef270d80a1ba656cd24781f14622333c38a63e7bfffdfcb2"
+    },
+    {
+      "path": "target/macrobloco-qualificacao-pacote-20260913-01/pos0236-multiplicity-01/result.json",
+      "sha256": "e0bc35a869af2cf571517fe41a921fabdbe3095b55409e7896b282e1c3af6594"
+    },
+    {
+      "path": "target/macrobloco-qualificacao-pacote-20260913-01/pos0236-old-reference-01/result.json",
+      "sha256": "1e1f624551226b27dd60a9daab0dbc1bf9b336b69a2931aa5e2a005010514f77"
+    },
+    {
+      "path": "target/macrobloco-qualificacao-pacote-20260913-01/pos0236-p07-verify-01/after.log",
+      "sha256": "3e7eb885e665e829b77133b12d33fa6816ff41d09321aee2547f111342ef6e97"
+    },
+    {
+      "path": "target/macrobloco-qualificacao-pacote-20260913-01/pos0236-p07-verify-01/before.log",
+      "sha256": "3e7eb885e665e829b77133b12d33fa6816ff41d09321aee2547f111342ef6e97"
+    },
+    {
+      "path": "target/macrobloco-qualificacao-pacote-20260913-01/pos0236-p07-verify-01/inputs.json",
+      "sha256": "b472cec3d4231441d49b7c4fa93e3a376f276605377f859201be33e25aa9f5a2"
+    },
+    {
+      "path": "target/macrobloco-qualificacao-pacote-20260913-01/pos0236-p07-verify-01/result.json",
+      "sha256": "dc577cb413cdb829377a12b587976ec3e348391d90df4d02918b0442fe911ce4"
+    },
+    {
+      "path": "target/macrobloco-qualificacao-pacote-20260913-01/pos0236-p07-verify-01/stderr.log",
+      "sha256": "940dedfa2eba3f5b8b742174efab09479640941d0c56e6fa44d95b9ebe9c3763"
+    },
+    {
+      "path": "target/macrobloco-qualificacao-pacote-20260913-01/pos0236-p07-verify-01/stdout.log",
+      "sha256": "3909289ea92f2afee9c5e06f38e7a92f192cb3aa8178564d0b392bf664935d1b"
+    },
+    {
+      "path": "target/macrobloco-qualificacao-pacote-20260913-01/pos0236-package-primary-01/qualification.zip",
+      "sha256": "ebe0021f2bf6fa016284ea09179dca38cd9b087ee5bf08026dc03eeafad4ff62"
+    },
+    {
+      "path": "target/macrobloco-qualificacao-pacote-20260913-01/pos0236-package-primary-01/qualified-source-inventory.json",
+      "sha256": "32f124f2f4c153a77e6b5c9c1bdf3f0b14cc2dbcbf35841264d5d36a32ba0c99"
+    },
+    {
+      "path": "target/macrobloco-qualificacao-pacote-20260913-01/pos0236-package-primary-01/result.json",
+      "sha256": "2f4e7c88dd8011032621afe41870abe35c840efa17c9c2880a7d4a9fc642810c"
+    },
+    {
+      "path": "target/macrobloco-qualificacao-pacote-20260913-01/pos0236-package-reproduction-01/qualification.zip",
+      "sha256": "ebe0021f2bf6fa016284ea09179dca38cd9b087ee5bf08026dc03eeafad4ff62"
+    },
+    {
+      "path": "target/macrobloco-qualificacao-pacote-20260913-01/pos0236-package-reproduction-01/qualified-source-inventory.json",
+      "sha256": "32f124f2f4c153a77e6b5c9c1bdf3f0b14cc2dbcbf35841264d5d36a32ba0c99"
+    },
+    {
+      "path": "target/macrobloco-qualificacao-pacote-20260913-01/pos0236-package-reproduction-01/result.json",
+      "sha256": "2f4e7c88dd8011032621afe41870abe35c840efa17c9c2880a7d4a9fc642810c"
+    },
+    {
+      "path": "target/macrobloco-qualificacao-pacote-20260913-01/pos0236-pin-drift-01/result.json",
+      "sha256": "0fbf4d61883ef1ec96621351751c706971474b02595b9d586a265ee3488b78aa"
+    },
+    {
+      "path": "target/macrobloco-qualificacao-pacote-20260913-01/pos0236-precision-01/result.json",
+      "sha256": "fa3678a3e308efbbd34250390340e6def04754fc0965bbb36cad4d28bac0deee"
+    },
+    {
+      "path": "target/macrobloco-qualificacao-pacote-20260913-01/pos0236-sequence-a-01/result.json",
+      "sha256": "0b1f16003cb7373e1a0cfeb7be0275c73186b4ce670e1e25d0e98137876004b6"
+    },
+    {
+      "path": "target/macrobloco-qualificacao-pacote-20260913-01/pos0236-sequence-b-01/result.json",
+      "sha256": "d0172ae86560f766edd2494a0fd5df8ce4f8a4f242f844485f2ac23080c18140"
+    },
+    {
+      "path": "target/macrobloco-qualificacao-pacote-20260913-01/pos0236-smoke-01/result.json",
+      "sha256": "b0e790d16854a8e49b250a6d8eff44582cfad898e9a45d875abf52fd3a52047f"
+    },
+    {
+      "path": "target/macrobloco-qualificacao-pacote-20260913-01/pos0236-value-01/result.json",
+      "sha256": "eb1d80fe34e6fb78cf83c396628f951034ac28ef0b427f1cd2849c6dc8770a42"
+    },
+    {
+      "path": "target/qualificacao-p07-p33-20260922-01/physical/audit-after-final.log",
+      "sha256": "964c20f7dcae57344a5fa17049ae686a4af0fcfbd7cb110087f9f81e0855bdfb"
+    },
+    {
+      "path": "target/qualificacao-p07-p33-20260922-01/physical/audit-after-p07.log",
+      "sha256": "964c20f7dcae57344a5fa17049ae686a4af0fcfbd7cb110087f9f81e0855bdfb"
+    },
+    {
+      "path": "target/qualificacao-p07-p33-20260922-01/physical/audit-before.log",
+      "sha256": "964c20f7dcae57344a5fa17049ae686a4af0fcfbd7cb110087f9f81e0855bdfb"
+    },
+    {
+      "path": "target/qualificacao-p07-p33-20260922-01/physical/authority.json",
+      "sha256": "9deba502c3f403478ace08641c32a271da1652b38caaaef047269f5586b7d5c9"
+    },
+    {
+      "path": "target/qualificacao-p07-p33-20260922-01/physical/command-01/request.json",
+      "sha256": "b97ea963b5a6fdd1f960e3bded56d6aa22cd11c25382e0e61b90fad225c6e3da"
+    },
+    {
+      "path": "target/qualificacao-p07-p33-20260922-01/physical/command-01/result.json",
+      "sha256": "2f06eb023fb8a2910eda2a9a12171960b2b2b1756fc2b9719502c5962d9aba68"
+    },
+    {
+      "path": "target/qualificacao-p07-p33-20260922-01/physical/control-guards-01/request.json",
+      "sha256": "12e1929c247bb58cc280f163f1a7234c4ec79b0673ef7701e9cde05fb690fdcb"
+    },
+    {
+      "path": "target/qualificacao-p07-p33-20260922-01/physical/control-guards-01/result.json",
+      "sha256": "bdaf70cd9ef3f1746180c3cc330574d528a83ef9da9413328e446b15cb88fe8d"
+    },
+    {
+      "path": "target/qualificacao-p07-p33-20260922-01/physical/examples-01/request.json",
+      "sha256": "b71ea7cfa93573d0c9eb269a0ac0f88b91ac6f95ec1946d4bb435e73db58cc41"
+    },
+    {
+      "path": "target/qualificacao-p07-p33-20260922-01/physical/examples-01/result.json",
+      "sha256": "1f02c751cfddfc538acc7b8026c6fbf249cf6f20ba48c72383ebf768bd58002d"
+    },
+    {
+      "path": "target/qualificacao-p07-p33-20260922-01/physical/extracted-guards-01/request.json",
+      "sha256": "f5706e0fd3443266b559120b2a0588fc125e7853344535cf090a78881afdad86"
+    },
+    {
+      "path": "target/qualificacao-p07-p33-20260922-01/physical/extracted-guards-01/result.json",
+      "sha256": "a844b06c1a37735d4cf842b3d300e8f9893f1d121a656e3ac8e571651f4c3853"
+    },
+    {
+      "path": "target/qualificacao-p07-p33-20260922-01/physical/final-readback-01/request.json",
+      "sha256": "8d595bd42fab619e70a9332f305e770f8dcbaf0c41653ee77b62b9ceb66f309d"
+    },
+    {
+      "path": "target/qualificacao-p07-p33-20260922-01/physical/final-readback-01/result.json",
+      "sha256": "a7cbd6d3fc020fcaa2d844f4200e2208f47b6c729c120f3d0b114d0ec74d8ae1"
+    },
+    {
+      "path": "target/qualificacao-p07-p33-20260922-01/physical/key-01/request.json",
+      "sha256": "16840ce5ef6438be846c535d850436a5b88da807e7f7ef668b8a4b79bee2db94"
+    },
+    {
+      "path": "target/qualificacao-p07-p33-20260922-01/physical/key-01/result.json",
+      "sha256": "d06c7db16761e588ad2141e9d877c17f50bed485286ebe21de3a230a68955575"
+    },
+    {
+      "path": "target/qualificacao-p07-p33-20260922-01/physical/master-after-final.log",
+      "sha256": "148bfbb90842d7164d180095866f89e4ab53cedb69aa9b94c933f638f5333bbd"
+    },
+    {
+      "path": "target/qualificacao-p07-p33-20260922-01/physical/master-after-p07.log",
+      "sha256": "148bfbb90842d7164d180095866f89e4ab53cedb69aa9b94c933f638f5333bbd"
+    },
+    {
+      "path": "target/qualificacao-p07-p33-20260922-01/physical/master-before.log",
+      "sha256": "148bfbb90842d7164d180095866f89e4ab53cedb69aa9b94c933f638f5333bbd"
+    },
+    {
+      "path": "target/qualificacao-p07-p33-20260922-01/physical/missing-user-01/request.json",
+      "sha256": "f93746e40207371cc945282de36f16b573fbfb8d2b5e85d0dd57c6912f8bd508"
+    },
+    {
+      "path": "target/qualificacao-p07-p33-20260922-01/physical/missing-user-01/result.json",
+      "sha256": "aef8d5962a7de6acdacf893bc8b22172c2d333b8266ce41c2910680e185b8912"
+    },
+    {
+      "path": "target/qualificacao-p07-p33-20260922-01/physical/multiplicity-01/request.json",
+      "sha256": "4fda53e840c47590c44cec89bd78b920ffd33531256ea69192e5dea1cd6c969a"
+    },
+    {
+      "path": "target/qualificacao-p07-p33-20260922-01/physical/multiplicity-01/result.json",
+      "sha256": "d8681dc8bf5ab2b900be25208ef15ef3e704e16e53c2b209a3e4dfa991a39fad"
+    },
+    {
+      "path": "target/qualificacao-p07-p33-20260922-01/physical/old-reference-01/request.json",
+      "sha256": "bc95b288f651071ae537725515b9b19eb4db4a44bf2dd2ec4ae0cd7858f1d94e"
+    },
+    {
+      "path": "target/qualificacao-p07-p33-20260922-01/physical/old-reference-01/result.json",
+      "sha256": "eae7ccfe00a65f67d8befee1b624326d63b94100cf39c8c9d4a8eb51d5b14e0e"
+    },
+    {
+      "path": "target/qualificacao-p07-p33-20260922-01/physical/p07-exact-predecessor.json",
+      "sha256": "8fee062df903e9e75dafc09e4ab353e37c4f0c87a50c40e9e0081b8b21ece828"
+    },
+    {
+      "path": "target/qualificacao-p07-p33-20260922-01/physical/p07-regression.json",
+      "sha256": "77bda624ae62ba8dab75b52d2c9cc17cc5d5f74349f2afd8ff148c2197425225"
+    },
+    {
+      "path": "target/qualificacao-p07-p33-20260922-01/physical/p07-verify-02/request.json",
+      "sha256": "27ceb34ad33276b9282097f1e20c9409e6136e4b13720aaa1698530549eea734"
+    },
+    {
+      "path": "target/qualificacao-p07-p33-20260922-01/physical/p07-verify-02/result.json",
+      "sha256": "91be23ce1e22a7b64e370483a6124c5d4779440cfbf910c2fc1fbd8e6af1ed83"
+    },
+    {
+      "path": "target/qualificacao-p07-p33-20260922-01/physical/p08-plan.json",
+      "sha256": "61996bacbfd0181d1867dce5921ee7452a1c22128cad989e34ee52e55b4dba70"
+    },
+    {
+      "path": "target/qualificacao-p07-p33-20260922-01/physical/p08-result.json",
+      "sha256": "05f564f994533a25bddbd8b42456b71fe8eeea21a1dbf14452d05bf01dc11afd"
+    },
+    {
+      "path": "target/qualificacao-p07-p33-20260922-01/physical/package-guards-01/request.json",
+      "sha256": "2508b676c3e36f15cb276d17df77ab967cd7bceb8410d0f780384efe345e2f9a"
+    },
+    {
+      "path": "target/qualificacao-p07-p33-20260922-01/physical/package-guards-01/result.json",
+      "sha256": "3963931cac240588d96272e1c355b9de8d823fb6aa17434250e7d5975215a984"
+    },
+    {
+      "path": "target/qualificacao-p07-p33-20260922-01/physical/package-guards-01/stdout.log",
+      "sha256": "55145bbaaca8256284c2065e9e6786ff9327e3c60d83e2075e9a2ed3b731e0ee"
+    },
+    {
+      "path": "target/qualificacao-p07-p33-20260922-01/physical/package-primary-01/request.json",
+      "sha256": "69c5fdf1d454b8a7c0f9ab4db003e680d9d71269589b6659d17be1d31ed4ab80"
+    },
+    {
+      "path": "target/qualificacao-p07-p33-20260922-01/physical/package-primary-01/result.json",
+      "sha256": "75f26c1aebeec2ea7b61b6db388ff3e190d16471e393e36a10b9d6ff6399c38b"
+    },
+    {
+      "path": "target/qualificacao-p07-p33-20260922-01/physical/package-reproduction-01/request.json",
+      "sha256": "7342044178a0fd2305c8c30131b4c3ec1572e29ef4cf2621c6fddadd89163af2"
+    },
+    {
+      "path": "target/qualificacao-p07-p33-20260922-01/physical/package-reproduction-01/result.json",
+      "sha256": "04af30261d7784d2941db304475f19b46ec872284088a51e73d0494bf6f6081e"
+    },
+    {
+      "path": "target/qualificacao-p07-p33-20260922-01/physical/pin-drift-01/request.json",
+      "sha256": "ce5f44ecffa6f5f1c319c074ddc10daa3e1c5a2ca1e020ba3df138fd15404e8d"
+    },
+    {
+      "path": "target/qualificacao-p07-p33-20260922-01/physical/pin-drift-01/result.json",
+      "sha256": "e2bb33e08dc7b3fbfd84496ac870b942bc380fff0a60d863cfe9a0900188bbcc"
+    },
+    {
+      "path": "target/qualificacao-p07-p33-20260922-01/physical/precision-01/request.json",
+      "sha256": "5f2432b3f70e604f5e3f05188990657246eb40bee6f83cc945d43bb9653b444a"
+    },
+    {
+      "path": "target/qualificacao-p07-p33-20260922-01/physical/precision-01/result.json",
+      "sha256": "ee12c48815a3b14b637883e235d469731e46b3715cec15b41d9b428f5a240155"
+    },
+    {
+      "path": "target/qualificacao-p07-p33-20260922-01/physical/regression-references.json",
+      "sha256": "1e89b864ab6c8f9bfff1fc7f9eab89f603ea1f0f54f40dbff2d4664425187f03"
+    },
+    {
+      "path": "target/qualificacao-p07-p33-20260922-01/physical/reproduction-01/request.json",
+      "sha256": "bcc3f3c769811b1ba1e8e457a47d90467e4551224320375264201da1245b26d8"
+    },
+    {
+      "path": "target/qualificacao-p07-p33-20260922-01/physical/reproduction-01/result.json",
+      "sha256": "3d61c9a1fdbd65b5c0615b2a5076aa4ebeac06f614a03324c81676117f1ada47"
+    },
+    {
+      "path": "target/qualificacao-p07-p33-20260922-01/physical/reproduction.json",
+      "sha256": "b490bbb730a6b80ecd09e1982a43272cf88ec8c55d5b9ebac88f9a4846449741"
+    },
+    {
+      "path": "target/qualificacao-p07-p33-20260922-01/physical/sequence-a-01/request.json",
+      "sha256": "e640adc06b13761f31d539186edb6f437ad59035af15540646c87aa47671b80c"
+    },
+    {
+      "path": "target/qualificacao-p07-p33-20260922-01/physical/sequence-a-01/result.json",
+      "sha256": "4811b99de44f73d25f3d5e8ca30f2ad85ce6dafd1d32119e59a1968084e2b31f"
+    },
+    {
+      "path": "target/qualificacao-p07-p33-20260922-01/physical/sequence-b-01/request.json",
+      "sha256": "5234c6b73eeb6649608d2e8679cc52e7a95e2b50b704409be20340c28eba3905"
+    },
+    {
+      "path": "target/qualificacao-p07-p33-20260922-01/physical/sequence-b-01/result.json",
+      "sha256": "540cf661e264f982a22ecaf8820600a14d38ba0e8fb756ae153e7486455af490"
+    },
+    {
+      "path": "target/qualificacao-p07-p33-20260922-01/physical/smoke-01/request.json",
+      "sha256": "ee658f5427020c1477394b083679a2049d2b826bfa97012843e4edb82a5b8eb4"
+    },
+    {
+      "path": "target/qualificacao-p07-p33-20260922-01/physical/smoke-01/result.json",
+      "sha256": "91b81417bc395c816a493a69d7a411d28a64d465bfd6eb11d48ba71cf94a8cb8"
+    },
+    {
+      "path": "target/qualificacao-p07-p33-20260922-01/physical/source-snapshot.json",
+      "sha256": "d502f2781558541e4ad24cea837eb0a973b147400ddf05dfd8b683941a46eae9"
+    },
+    {
+      "path": "target/qualificacao-p07-p33-20260922-01/physical/tables-after-final.log",
+      "sha256": "3e7eb885e665e829b77133b12d33fa6816ff41d09321aee2547f111342ef6e97"
+    },
+    {
+      "path": "target/qualificacao-p07-p33-20260922-01/physical/tables-after-p07.log",
+      "sha256": "3e7eb885e665e829b77133b12d33fa6816ff41d09321aee2547f111342ef6e97"
+    },
+    {
+      "path": "target/qualificacao-p07-p33-20260922-01/physical/tables-before.log",
+      "sha256": "3e7eb885e665e829b77133b12d33fa6816ff41d09321aee2547f111342ef6e97"
+    },
+    {
+      "path": "target/qualificacao-p07-p33-20260922-01/physical/value-01/request.json",
+      "sha256": "75fc19508674a7e83ced191c01959f9b92dcc5f8409a605226cf7dfbe86c0e3a"
+    },
+    {
+      "path": "target/qualificacao-p07-p33-20260922-01/physical/value-01/result.json",
+      "sha256": "f006e455031d87a8ae01d45da49222ca65bafaff99b989bc0b738a896fe50895"
+    },
+    {
+      "path": "target/qualificacao-p07-p33-20260922-01/static-disposition-full-p07-01/result.json",
+      "sha256": "4e8285892e7eb7b4c176936a8052c397cc52c8919bd504368524d38829acd5b0"
+    },
+    {
+      "path": "target/qualificacao-p07-p33-20260922-01/static-main-01/result.json",
+      "sha256": "10a200e3c5258f490e9f5275b9d6b181361077a9f85aff2bcc778b7ce100fe3d"
+    },
+    {
+      "path": "target/qualificacao-p07-p33-20260922-01/static-main-01/source-inventory.json",
+      "sha256": "57da7ea2ce3be096830846ec0bb4fc56700f25a65a8eec7703a9b6e121839c6e"
+    }
+  ],
+  "composition": {
+    "composer": {
+      "path": "target/qualificacao-p07-p33-20260922-01/compose-physical-result.cjs",
+      "sha256": "d6bd9b1b517c786c47ffe196ebccf2abf2c549bd81402ccf3e17acec2457a650"
+    },
+    "contract": {
+      "path": "target/qualificacao-p07-p33-20260922-01/succession-contract.md",
+      "sha256": "3e8fec3f3935727da8410685fb9c3e064f1662ac49282b3e7eeb33da529ef760"
+    },
+    "validator": {
+      "path": "scripts/validation/QualificacaoP0733Succession.psm1",
+      "sha256": "ebb0e0fad75e5ad4e5a78d52c3d43cdc413665b33f0eed1c516828949b815ba4"
+    },
+    "readOnlyReplay": true,
+    "javaExecuted": false,
+    "sqlExecuted": false,
+    "networkUsed": false,
+    "publicationStatus": "PUBLISHED_LOCAL_RESULT_DOCUMENTARY_SUCCESSION_PASS",
+    "remainingBoundary": "O resultado do scanner, o readback dos bytes finais e o encerramento são autoritativos em target/qualificacao-p07-p33-20260922-01/physical/final-integrity.json e closed-receipt.json, após existirem. Esta fotografia registra somente provas já observadas; não antecipa essas execuções."
+  },
+  "documentaryValidation": {
+    "path": "target/qualificacao-p07-p33-20260922-01/physical/closure-validation-result.json",
+    "sha256": "b8f0e4949b12c6a4ae8abefb5fde9d428e26395bd8cf939c03e9753e4762d026"
+  }
+}

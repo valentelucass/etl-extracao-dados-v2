@@ -1,0 +1,20 @@
+{
+  "data": [
+    {
+      "pck_mik_mft_sequence_code": 54009,
+      "id": 540690801,
+      "sequence_code": 54001,
+      "request_date": "2024-01-01T12:00:00Z",
+      "updated_at": "2024-01-01T12:00:00Z",
+      "status": "pending"
+    },
+    {
+      "pck_mik_mft_sequence_code": null,
+      "id": 540690802,
+      "sequence_code": 54002,
+      "request_date": "2024-01-01T12:00:00Z",
+      "updated_at": "2024-01-01T12:00:00Z",
+      "status": "pending"
+    }
+  ]
+}

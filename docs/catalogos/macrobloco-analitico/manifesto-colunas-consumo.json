@@ -1,0 +1,1074 @@
+{
+  "version": "analytic-manifest-consumption-v1",
+  "status": "TESTED_PHYSICAL_LOCAL",
+  "sourceSha256": "307e3693fcd15b6d6cf09121a5c57df729812cfaa0a2f53a6624b66183cf7bc5",
+  "outputs": [
+    {
+      "id": "SQL-08",
+      "view": "pub.analytic_lab_sql_08",
+      "columns": [
+        {
+          "ordinal": 1,
+          "name": "Hora (Solicitacao)",
+          "expression": "CONVERT(TIME(7),m.created_at AT TIME ZONE zone.name)"
+        },
+        {
+          "ordinal": 2,
+          "name": "Hora (Criação)",
+          "expression": "CONVERT(TIME(7),m.created_at AT TIME ZONE zone.name)"
+        },
+        {
+          "ordinal": 3,
+          "name": "Número",
+          "expression": "m.sequence_code"
+        },
+        {
+          "ordinal": 4,
+          "name": "Identificador Único",
+          "expression": "CONVERT(NVARCHAR(320),CONCAT(CONVERT(NVARCHAR(36),f.run_id),N'/',f.source_key))"
+        },
+        {
+          "ordinal": 5,
+          "name": "Status",
+          "expression": "COALESCE((SELECT l.label FROM ref.analytic_lab_label l WHERE l.reference_release_id=f.reference_release_id AND l.category='MAN_STATUS' AND l.raw_value=m.status),m.status)"
+        },
+        {
+          "ordinal": 6,
+          "name": "Classificação",
+          "expression": "m.mft_man_name"
+        },
+        {
+          "ordinal": 7,
+          "name": "Filial",
+          "expression": "branch.normalized_name"
+        },
+        {
+          "ordinal": 8,
+          "name": "Filial Emissora",
+          "expression": "branch.normalized_name"
+        },
+        {
+          "ordinal": 9,
+          "name": "Data criação",
+          "expression": "COALESCE(m.departured_at AT TIME ZONE zone.name,m.created_at AT TIME ZONE zone.name)"
+        },
+        {
+          "ordinal": 10,
+          "name": "Saída",
+          "expression": "m.departured_at AT TIME ZONE zone.name"
+        },
+        {
+          "ordinal": 11,
+          "name": "Fechamento",
+          "expression": "m.closed_at AT TIME ZONE zone.name"
+        },
+        {
+          "ordinal": 12,
+          "name": "Chegada",
+          "expression": "m.finished_at AT TIME ZONE zone.name"
+        },
+        {
+          "ordinal": 13,
+          "name": "MDFe",
+          "expression": "m.[mft_mfs_number]"
+        },
+        {
+          "ordinal": 14,
+          "name": "MDF-es/Chave",
+          "expression": "m.[mft_mfs_key]"
+        },
+        {
+          "ordinal": 15,
+          "name": "MDFe/Status",
+          "expression": "COALESCE((SELECT l.label FROM ref.analytic_lab_label l WHERE l.reference_release_id=f.reference_release_id AND l.category='MAN_MDFE_STATUS' AND l.raw_value=m.mdfe_status),m.mdfe_status)"
+        },
+        {
+          "ordinal": 16,
+          "name": "Polo de distribuição",
+          "expression": "m.[mft_ape_name]"
+        },
+        {
+          "ordinal": 17,
+          "name": "Veículo/Placa",
+          "expression": "tractor.license_plate"
+        },
+        {
+          "ordinal": 18,
+          "name": "Tipo Veículo",
+          "expression": "tractor.vehicle_type"
+        },
+        {
+          "ordinal": 19,
+          "name": "Proprietário/Nome",
+          "expression": "m.mft_vie_onr_name"
+        },
+        {
+          "ordinal": 20,
+          "name": "Proprietário/Documento",
+          "expression": "f.owner_document"
+        },
+        {
+          "ordinal": 21,
+          "name": "Tipo Motorista",
+          "expression": "COALESCE((SELECT l.label FROM ref.analytic_lab_label l WHERE l.reference_release_id=f.reference_release_id AND l.category='MAN_OWNERSHIP' AND l.raw_value=f.ownership_code),N'SEM_MAP')"
+        },
+        {
+          "ordinal": 22,
+          "name": "Motorista",
+          "expression": "driver.raw_name"
+        },
+        {
+          "ordinal": 23,
+          "name": "Km saída",
+          "expression": "m.[vehicle_departure_km]"
+        },
+        {
+          "ordinal": 24,
+          "name": "Km chegada",
+          "expression": "m.[closing_km]"
+        },
+        {
+          "ordinal": 25,
+          "name": "KM viagem",
+          "expression": "m.[traveled_km]"
+        },
+        {
+          "ordinal": 26,
+          "name": "Km manual",
+          "expression": "CONVERT(NVARCHAR(16),CASE m.manual_km WHEN 1 THEN N'é manual' WHEN 0 THEN N'não é manual' END)"
+        },
+        {
+          "ordinal": 27,
+          "name": "Qtd NF",
+          "expression": "m.[invoices_count]"
+        },
+        {
+          "ordinal": 28,
+          "name": "Volumes NF",
+          "expression": "m.[invoices_volumes]"
+        },
+        {
+          "ordinal": 29,
+          "name": "Peso NF",
+          "expression": "m.[invoices_weight]"
+        },
+        {
+          "ordinal": 30,
+          "name": "Total peso taxado",
+          "expression": "m.[total_taxed_weight]"
+        },
+        {
+          "ordinal": 31,
+          "name": "Total M3",
+          "expression": "m.[total_cubic_volume]"
+        },
+        {
+          "ordinal": 32,
+          "name": "Valor NF",
+          "expression": "m.[invoices_value]"
+        },
+        {
+          "ordinal": 33,
+          "name": "Fretes/Total",
+          "expression": "f.direct_revenue"
+        },
+        {
+          "ordinal": 34,
+          "name": "Coletas/Total",
+          "expression": "f.collection_revenue"
+        },
+        {
+          "ordinal": 35,
+          "name": "Receita Total Transportada",
+          "expression": "f.total_revenue"
+        },
+        {
+          "ordinal": 36,
+          "name": "Coleta/Número",
+          "expression": "display.collection_numbers"
+        },
+        {
+          "ordinal": 37,
+          "name": "CIOT/Número",
+          "expression": "m.[mft_cat_cot_number]"
+        },
+        {
+          "ordinal": 38,
+          "name": "Tipo de contrato do veículo",
+          "expression": "COALESCE((SELECT l.label FROM ref.analytic_lab_label l WHERE l.reference_release_id=f.reference_release_id AND l.category='MAN_VEHICLE_CONTRACT' AND l.raw_value=m.contract_type),m.contract_type)"
+        },
+        {
+          "ordinal": 39,
+          "name": "Tipo de contrato do motorista",
+          "expression": "COALESCE((SELECT l.label FROM ref.analytic_lab_label l WHERE l.reference_release_id=f.reference_release_id AND l.category='MAN_DRIVER_CONTRACT' AND l.raw_value=m.mft_mdr_contract_type),m.mft_mdr_contract_type)"
+        },
+        {
+          "ordinal": 40,
+          "name": "Tipo de contrato",
+          "expression": "COALESCE((SELECT l.label FROM ref.analytic_lab_label l WHERE l.reference_release_id=f.reference_release_id AND l.category='MAN_CONTRACT' AND l.raw_value=f.contract_code),N'SEM_MAP')"
+        },
+        {
+          "ordinal": 41,
+          "name": "Tipo de cálculo",
+          "expression": "COALESCE((SELECT l.label FROM ref.analytic_lab_label l WHERE l.reference_release_id=f.reference_release_id AND l.category='MAN_CALCULATION' AND l.raw_value=m.calculation_type),m.calculation_type)"
+        },
+        {
+          "ordinal": 42,
+          "name": "Tipo de carga",
+          "expression": "COALESCE((SELECT l.label FROM ref.analytic_lab_label l WHERE l.reference_release_id=f.reference_release_id AND l.category='MAN_CARGO' AND l.raw_value=m.cargo_type),m.cargo_type)"
+        },
+        {
+          "ordinal": 43,
+          "name": "Diária",
+          "expression": "m.[daily_subtotal]"
+        },
+        {
+          "ordinal": 44,
+          "name": "Custo total",
+          "expression": "m.[total_cost]"
+        },
+        {
+          "ordinal": 45,
+          "name": "Valor frete",
+          "expression": "m.[freight_subtotal]"
+        },
+        {
+          "ordinal": 46,
+          "name": "Combustível",
+          "expression": "m.[fuel_subtotal]"
+        },
+        {
+          "ordinal": 47,
+          "name": "Pedágio",
+          "expression": "m.[toll_subtotal]"
+        },
+        {
+          "ordinal": 48,
+          "name": "Serviços motorista/Total",
+          "expression": "m.[driver_services_total]"
+        },
+        {
+          "ordinal": 49,
+          "name": "Despesa operacional",
+          "expression": "m.[operational_expenses_total]"
+        },
+        {
+          "ordinal": 50,
+          "name": "Dados do agregado/INSS",
+          "expression": "m.[mft_a_t_inss_value]"
+        },
+        {
+          "ordinal": 51,
+          "name": "Dados do agregado/SEST/SENAT",
+          "expression": "m.[mft_a_t_sest_senat_value]"
+        },
+        {
+          "ordinal": 52,
+          "name": "Dados do agregado/IR",
+          "expression": "m.[mft_a_t_ir_value]"
+        },
+        {
+          "ordinal": 53,
+          "name": "Saldo a pagar",
+          "expression": "m.[paying_total]"
+        },
+        {
+          "ordinal": 54,
+          "name": "Destinos únicos/Qtd",
+          "expression": "m.[uniq_destinations_count]"
+        },
+        {
+          "ordinal": 55,
+          "name": "Gerar MDF-e",
+          "expression": "m.generate_mdfe"
+        },
+        {
+          "ordinal": 56,
+          "name": "Solicitou Monitoramento",
+          "expression": "m.monitoring_request"
+        },
+        {
+          "ordinal": 57,
+          "name": "Solicitação Monitoramento",
+          "expression": "CONVERT(NVARCHAR(3),CASE m.monitoring_request WHEN 1 THEN N'sim' WHEN 0 THEN N'não' END)"
+        },
+        {
+          "ordinal": 58,
+          "name": "Leitura Móvel/Em",
+          "expression": "m.[mobile_read_at]"
+        },
+        {
+          "ordinal": 59,
+          "name": "KM Total",
+          "expression": "m.[km]"
+        },
+        {
+          "ordinal": 60,
+          "name": "Itens/Entrega",
+          "expression": "m.[delivery_manifest_items_count]"
+        },
+        {
+          "ordinal": 61,
+          "name": "Itens/Transferência",
+          "expression": "m.[transfer_manifest_items_count]"
+        },
+        {
+          "ordinal": 62,
+          "name": "Itens/Coleta",
+          "expression": "m.[pick_manifest_items_count]"
+        },
+        {
+          "ordinal": 63,
+          "name": "Itens/Despacho Rascunho",
+          "expression": "m.[dispatch_draft_manifest_items_count]"
+        },
+        {
+          "ordinal": 64,
+          "name": "Itens/Consolidação",
+          "expression": "m.[consolidation_manifest_items_count]"
+        },
+        {
+          "ordinal": 65,
+          "name": "Itens/Coleta Reversa",
+          "expression": "m.[reverse_pick_manifest_items_count]"
+        },
+        {
+          "ordinal": 66,
+          "name": "Itens/Total",
+          "expression": "m.[manifest_items_count]"
+        },
+        {
+          "ordinal": 67,
+          "name": "Itens/Finalizados",
+          "expression": "m.[finalized_manifest_items_count]"
+        },
+        {
+          "ordinal": 68,
+          "name": "Calculado/Coleta",
+          "expression": "m.[calculated_pick_count]"
+        },
+        {
+          "ordinal": 69,
+          "name": "Calculado/Entrega",
+          "expression": "m.[calculated_delivery_count]"
+        },
+        {
+          "ordinal": 70,
+          "name": "Calculado/Despacho",
+          "expression": "m.[calculated_dispatch_count]"
+        },
+        {
+          "ordinal": 71,
+          "name": "Calculado/Consolidação",
+          "expression": "m.[calculated_consolidation_count]"
+        },
+        {
+          "ordinal": 72,
+          "name": "Calculado/Coleta Reversa",
+          "expression": "m.[calculated_reverse_pick_count]"
+        },
+        {
+          "ordinal": 73,
+          "name": "Valor/Coletas",
+          "expression": "m.[pick_subtotal]"
+        },
+        {
+          "ordinal": 74,
+          "name": "Valor/Entregas",
+          "expression": "m.[delivery_subtotal]"
+        },
+        {
+          "ordinal": 75,
+          "name": "Despachos",
+          "expression": "m.[dispatch_subtotal]"
+        },
+        {
+          "ordinal": 76,
+          "name": "Consolidações",
+          "expression": "m.[consolidation_subtotal]"
+        },
+        {
+          "ordinal": 77,
+          "name": "Coleta Reversa",
+          "expression": "m.[reverse_pick_subtotal]"
+        },
+        {
+          "ordinal": 78,
+          "name": "Adiantamento",
+          "expression": "m.[advance_subtotal]"
+        },
+        {
+          "ordinal": 79,
+          "name": "Custos Frota",
+          "expression": "m.[fleet_costs_subtotal]"
+        },
+        {
+          "ordinal": 80,
+          "name": "Adicionais",
+          "expression": "m.[additionals_subtotal]"
+        },
+        {
+          "ordinal": 81,
+          "name": "Descontos",
+          "expression": "m.[discounts_subtotal]"
+        },
+        {
+          "ordinal": 82,
+          "name": "Desconto/Valor",
+          "expression": "m.[discount_value]"
+        },
+        {
+          "ordinal": 83,
+          "name": "Liberação de Custo de Agregado/Comentários",
+          "expression": "m.[mft_aoe_comments]"
+        },
+        {
+          "ordinal": 84,
+          "name": "IKS ID",
+          "expression": "m.[mft_iks_id]"
+        },
+        {
+          "ordinal": 85,
+          "name": "Programação/Número",
+          "expression": "m.[mft_s_n_sequence_code]"
+        },
+        {
+          "ordinal": 86,
+          "name": "Programação/Início",
+          "expression": "m.[mft_s_n_starting_at]"
+        },
+        {
+          "ordinal": 87,
+          "name": "Programação/Término",
+          "expression": "m.[mft_s_n_ending_at]"
+        },
+        {
+          "ordinal": 88,
+          "name": "Carreta 1/Placa",
+          "expression": "trailer1.license_plate"
+        },
+        {
+          "ordinal": 89,
+          "name": "Carreta 1/Capacidade Peso",
+          "expression": "f.trailer1_capacity"
+        },
+        {
+          "ordinal": 90,
+          "name": "Carreta 2/Placa",
+          "expression": "trailer2.license_plate"
+        },
+        {
+          "ordinal": 91,
+          "name": "Carreta 2/Capacidade Peso",
+          "expression": "f.trailer2_capacity"
+        },
+        {
+          "ordinal": 92,
+          "name": "Veículo/Capacidade Peso",
+          "expression": "f.tractor_capacity"
+        },
+        {
+          "ordinal": 93,
+          "name": "Veículo/Peso Cubado",
+          "expression": "m.[mft_vie_cubic_weight]"
+        },
+        {
+          "ordinal": 94,
+          "name": "Capacidade Lotação Kg",
+          "expression": "f.total_capacity"
+        },
+        {
+          "ordinal": 95,
+          "name": "Descarregamento/Destinatários",
+          "expression": "display.unloading_names"
+        },
+        {
+          "ordinal": 96,
+          "name": "Local de Descarregamento",
+          "expression": "display.unloading_names"
+        },
+        {
+          "ordinal": 97,
+          "name": "Entrega/Regiões",
+          "expression": "display.region_names"
+        },
+        {
+          "ordinal": 98,
+          "name": "Programação/Cliente",
+          "expression": "m.[mft_s_n_svs_sge_pyr_nickname]"
+        },
+        {
+          "ordinal": 99,
+          "name": "Programação/Tipo Serviço",
+          "expression": "m.[mft_s_n_svs_sge_sse_name]"
+        },
+        {
+          "ordinal": 100,
+          "name": "Usuário/Emissor",
+          "expression": "m.[mft_uer_name]"
+        },
+        {
+          "ordinal": 101,
+          "name": "Usuário/Ajuste",
+          "expression": "m.[mft_aoe_rer_name]"
+        },
+        {
+          "ordinal": 102,
+          "name": "Liberação/Comentários Operacionais",
+          "expression": "m.[operational_comments]"
+        },
+        {
+          "ordinal": 103,
+          "name": "Comentários Fechamento",
+          "expression": "m.[closing_comments]"
+        },
+        {
+          "ordinal": 104,
+          "name": "Metadata",
+          "expression": "display.metadata_json"
+        },
+        {
+          "ordinal": 105,
+          "name": "Data de extracao",
+          "expression": "f.extracted_at"
+        }
+      ]
+    },
+    {
+      "id": "SQL-09",
+      "view": "pub.analytic_lab_sql_09",
+      "columns": [
+        {
+          "ordinal": 1,
+          "name": "Hora (Solicitacao)",
+          "expression": "CONVERT(TIME(7),m.created_at AT TIME ZONE zone.name)"
+        },
+        {
+          "ordinal": 2,
+          "name": "Hora (Criação)",
+          "expression": "CONVERT(TIME(7),m.created_at AT TIME ZONE zone.name)"
+        },
+        {
+          "ordinal": 3,
+          "name": "Número",
+          "expression": "m.sequence_code"
+        },
+        {
+          "ordinal": 4,
+          "name": "Identificador Único",
+          "expression": "CONVERT(NVARCHAR(320),CONCAT(CONVERT(NVARCHAR(36),f.run_id),N'/',f.source_key))"
+        },
+        {
+          "ordinal": 5,
+          "name": "Status",
+          "expression": "COALESCE((SELECT l.label FROM ref.analytic_lab_label l WHERE l.reference_release_id=f.reference_release_id AND l.category='MAN_STATUS' AND l.raw_value=m.status),m.status)"
+        },
+        {
+          "ordinal": 6,
+          "name": "Classificação",
+          "expression": "m.mft_man_name"
+        },
+        {
+          "ordinal": 7,
+          "name": "Filial",
+          "expression": "branch.normalized_name"
+        },
+        {
+          "ordinal": 8,
+          "name": "Filial Emissora",
+          "expression": "branch.normalized_name"
+        },
+        {
+          "ordinal": 9,
+          "name": "Data criação",
+          "expression": "COALESCE(m.departured_at AT TIME ZONE zone.name,m.created_at AT TIME ZONE zone.name)"
+        },
+        {
+          "ordinal": 10,
+          "name": "Saída",
+          "expression": "m.departured_at AT TIME ZONE zone.name"
+        },
+        {
+          "ordinal": 11,
+          "name": "Fechamento",
+          "expression": "m.closed_at AT TIME ZONE zone.name"
+        },
+        {
+          "ordinal": 12,
+          "name": "Chegada",
+          "expression": "m.finished_at AT TIME ZONE zone.name"
+        },
+        {
+          "ordinal": 13,
+          "name": "MDFe",
+          "expression": "m.[mft_mfs_number]"
+        },
+        {
+          "ordinal": 14,
+          "name": "MDF-es/Chave",
+          "expression": "m.[mft_mfs_key]"
+        },
+        {
+          "ordinal": 15,
+          "name": "MDFe/Status",
+          "expression": "COALESCE((SELECT l.label FROM ref.analytic_lab_label l WHERE l.reference_release_id=f.reference_release_id AND l.category='MAN_MDFE_STATUS' AND l.raw_value=m.mdfe_status),m.mdfe_status)"
+        },
+        {
+          "ordinal": 16,
+          "name": "Polo de distribuição",
+          "expression": "m.[mft_ape_name]"
+        },
+        {
+          "ordinal": 17,
+          "name": "Veículo/Placa",
+          "expression": "tractor.license_plate"
+        },
+        {
+          "ordinal": 18,
+          "name": "Tipo Veículo",
+          "expression": "tractor.vehicle_type"
+        },
+        {
+          "ordinal": 19,
+          "name": "Proprietário/Nome",
+          "expression": "m.mft_vie_onr_name"
+        },
+        {
+          "ordinal": 20,
+          "name": "Proprietário/Documento",
+          "expression": "f.owner_document"
+        },
+        {
+          "ordinal": 21,
+          "name": "Tipo Motorista",
+          "expression": "COALESCE((SELECT l.label FROM ref.analytic_lab_label l WHERE l.reference_release_id=f.reference_release_id AND l.category='MAN_OWNERSHIP' AND l.raw_value=f.ownership_code),N'SEM_MAP')"
+        },
+        {
+          "ordinal": 22,
+          "name": "Motorista",
+          "expression": "driver.raw_name"
+        },
+        {
+          "ordinal": 23,
+          "name": "Km saída",
+          "expression": "m.[vehicle_departure_km]"
+        },
+        {
+          "ordinal": 24,
+          "name": "Km chegada",
+          "expression": "m.[closing_km]"
+        },
+        {
+          "ordinal": 25,
+          "name": "KM viagem",
+          "expression": "m.[traveled_km]"
+        },
+        {
+          "ordinal": 26,
+          "name": "Km manual",
+          "expression": "CONVERT(NVARCHAR(16),CASE m.manual_km WHEN 1 THEN N'é manual' WHEN 0 THEN N'não é manual' END)"
+        },
+        {
+          "ordinal": 27,
+          "name": "Qtd NF",
+          "expression": "m.[invoices_count]"
+        },
+        {
+          "ordinal": 28,
+          "name": "Volumes NF",
+          "expression": "m.[invoices_volumes]"
+        },
+        {
+          "ordinal": 29,
+          "name": "Peso NF",
+          "expression": "m.[invoices_weight]"
+        },
+        {
+          "ordinal": 30,
+          "name": "Total peso taxado",
+          "expression": "m.[total_taxed_weight]"
+        },
+        {
+          "ordinal": 31,
+          "name": "Total M3",
+          "expression": "m.[total_cubic_volume]"
+        },
+        {
+          "ordinal": 32,
+          "name": "Valor NF",
+          "expression": "m.[invoices_value]"
+        },
+        {
+          "ordinal": 33,
+          "name": "Fretes/Total",
+          "expression": "f.direct_revenue"
+        },
+        {
+          "ordinal": 34,
+          "name": "Coletas/Total",
+          "expression": "f.collection_revenue"
+        },
+        {
+          "ordinal": 35,
+          "name": "Receita Total Transportada",
+          "expression": "f.total_revenue"
+        },
+        {
+          "ordinal": 36,
+          "name": "Coleta/Número",
+          "expression": "display.collection_numbers"
+        },
+        {
+          "ordinal": 37,
+          "name": "CIOT/Número",
+          "expression": "m.[mft_cat_cot_number]"
+        },
+        {
+          "ordinal": 38,
+          "name": "Tipo de contrato do veículo",
+          "expression": "COALESCE((SELECT l.label FROM ref.analytic_lab_label l WHERE l.reference_release_id=f.reference_release_id AND l.category='MAN_VEHICLE_CONTRACT' AND l.raw_value=m.contract_type),m.contract_type)"
+        },
+        {
+          "ordinal": 39,
+          "name": "Tipo de contrato do motorista",
+          "expression": "COALESCE((SELECT l.label FROM ref.analytic_lab_label l WHERE l.reference_release_id=f.reference_release_id AND l.category='MAN_DRIVER_CONTRACT' AND l.raw_value=m.mft_mdr_contract_type),m.mft_mdr_contract_type)"
+        },
+        {
+          "ordinal": 40,
+          "name": "Tipo de contrato",
+          "expression": "COALESCE((SELECT l.label FROM ref.analytic_lab_label l WHERE l.reference_release_id=f.reference_release_id AND l.category='MAN_CONTRACT' AND l.raw_value=f.contract_code),N'SEM_MAP')"
+        },
+        {
+          "ordinal": 41,
+          "name": "Tipo de contrato key",
+          "expression": "LOWER(COALESCE((SELECT l.label FROM ref.analytic_lab_label l WHERE l.reference_release_id=f.reference_release_id AND l.category='MAN_CONTRACT' AND l.raw_value=f.contract_code),N'SEM_MAP'))"
+        },
+        {
+          "ordinal": 42,
+          "name": "Tipo de cálculo",
+          "expression": "COALESCE((SELECT l.label FROM ref.analytic_lab_label l WHERE l.reference_release_id=f.reference_release_id AND l.category='MAN_CALCULATION' AND l.raw_value=m.calculation_type),m.calculation_type)"
+        },
+        {
+          "ordinal": 43,
+          "name": "Tipo de carga",
+          "expression": "COALESCE((SELECT l.label FROM ref.analytic_lab_label l WHERE l.reference_release_id=f.reference_release_id AND l.category='MAN_CARGO' AND l.raw_value=m.cargo_type),m.cargo_type)"
+        },
+        {
+          "ordinal": 44,
+          "name": "Diária",
+          "expression": "m.[daily_subtotal]"
+        },
+        {
+          "ordinal": 45,
+          "name": "Custo total",
+          "expression": "m.[total_cost]"
+        },
+        {
+          "ordinal": 46,
+          "name": "Valor frete",
+          "expression": "m.[freight_subtotal]"
+        },
+        {
+          "ordinal": 47,
+          "name": "Combustível",
+          "expression": "m.[fuel_subtotal]"
+        },
+        {
+          "ordinal": 48,
+          "name": "Pedágio",
+          "expression": "m.[toll_subtotal]"
+        },
+        {
+          "ordinal": 49,
+          "name": "Serviços motorista/Total",
+          "expression": "m.[driver_services_total]"
+        },
+        {
+          "ordinal": 50,
+          "name": "Despesa operacional",
+          "expression": "m.[operational_expenses_total]"
+        },
+        {
+          "ordinal": 51,
+          "name": "Dados do agregado/INSS",
+          "expression": "m.[mft_a_t_inss_value]"
+        },
+        {
+          "ordinal": 52,
+          "name": "Dados do agregado/SEST/SENAT",
+          "expression": "m.[mft_a_t_sest_senat_value]"
+        },
+        {
+          "ordinal": 53,
+          "name": "Dados do agregado/IR",
+          "expression": "m.[mft_a_t_ir_value]"
+        },
+        {
+          "ordinal": 54,
+          "name": "Saldo a pagar",
+          "expression": "m.[paying_total]"
+        },
+        {
+          "ordinal": 55,
+          "name": "Destinos únicos/Qtd",
+          "expression": "m.[uniq_destinations_count]"
+        },
+        {
+          "ordinal": 56,
+          "name": "Gerar MDF-e",
+          "expression": "m.generate_mdfe"
+        },
+        {
+          "ordinal": 57,
+          "name": "Solicitou Monitoramento",
+          "expression": "m.monitoring_request"
+        },
+        {
+          "ordinal": 58,
+          "name": "Solicitação Monitoramento",
+          "expression": "CONVERT(NVARCHAR(3),CASE m.monitoring_request WHEN 1 THEN N'sim' WHEN 0 THEN N'não' END)"
+        },
+        {
+          "ordinal": 59,
+          "name": "Leitura Móvel/Em",
+          "expression": "m.[mobile_read_at]"
+        },
+        {
+          "ordinal": 60,
+          "name": "KM Total",
+          "expression": "m.[km]"
+        },
+        {
+          "ordinal": 61,
+          "name": "Itens/Entrega",
+          "expression": "m.[delivery_manifest_items_count]"
+        },
+        {
+          "ordinal": 62,
+          "name": "Itens/Transferência",
+          "expression": "m.[transfer_manifest_items_count]"
+        },
+        {
+          "ordinal": 63,
+          "name": "Itens/Coleta",
+          "expression": "m.[pick_manifest_items_count]"
+        },
+        {
+          "ordinal": 64,
+          "name": "Itens/Despacho Rascunho",
+          "expression": "m.[dispatch_draft_manifest_items_count]"
+        },
+        {
+          "ordinal": 65,
+          "name": "Itens/Consolidação",
+          "expression": "m.[consolidation_manifest_items_count]"
+        },
+        {
+          "ordinal": 66,
+          "name": "Itens/Coleta Reversa",
+          "expression": "m.[reverse_pick_manifest_items_count]"
+        },
+        {
+          "ordinal": 67,
+          "name": "Itens/Total",
+          "expression": "m.[manifest_items_count]"
+        },
+        {
+          "ordinal": 68,
+          "name": "Itens/Finalizados",
+          "expression": "m.[finalized_manifest_items_count]"
+        },
+        {
+          "ordinal": 69,
+          "name": "Calculado/Coleta",
+          "expression": "m.[calculated_pick_count]"
+        },
+        {
+          "ordinal": 70,
+          "name": "Calculado/Entrega",
+          "expression": "m.[calculated_delivery_count]"
+        },
+        {
+          "ordinal": 71,
+          "name": "Calculado/Despacho",
+          "expression": "m.[calculated_dispatch_count]"
+        },
+        {
+          "ordinal": 72,
+          "name": "Calculado/Consolidação",
+          "expression": "m.[calculated_consolidation_count]"
+        },
+        {
+          "ordinal": 73,
+          "name": "Calculado/Coleta Reversa",
+          "expression": "m.[calculated_reverse_pick_count]"
+        },
+        {
+          "ordinal": 74,
+          "name": "Valor/Coletas",
+          "expression": "m.[pick_subtotal]"
+        },
+        {
+          "ordinal": 75,
+          "name": "Valor/Entregas",
+          "expression": "m.[delivery_subtotal]"
+        },
+        {
+          "ordinal": 76,
+          "name": "Despachos",
+          "expression": "m.[dispatch_subtotal]"
+        },
+        {
+          "ordinal": 77,
+          "name": "Consolidações",
+          "expression": "m.[consolidation_subtotal]"
+        },
+        {
+          "ordinal": 78,
+          "name": "Coleta Reversa",
+          "expression": "m.[reverse_pick_subtotal]"
+        },
+        {
+          "ordinal": 79,
+          "name": "Adiantamento",
+          "expression": "m.[advance_subtotal]"
+        },
+        {
+          "ordinal": 80,
+          "name": "Custos Frota",
+          "expression": "m.[fleet_costs_subtotal]"
+        },
+        {
+          "ordinal": 81,
+          "name": "Adicionais",
+          "expression": "m.[additionals_subtotal]"
+        },
+        {
+          "ordinal": 82,
+          "name": "Descontos",
+          "expression": "m.[discounts_subtotal]"
+        },
+        {
+          "ordinal": 83,
+          "name": "Desconto/Valor",
+          "expression": "m.[discount_value]"
+        },
+        {
+          "ordinal": 84,
+          "name": "Liberação de Custo de Agregado/Comentários",
+          "expression": "m.[mft_aoe_comments]"
+        },
+        {
+          "ordinal": 85,
+          "name": "IKS ID",
+          "expression": "m.[mft_iks_id]"
+        },
+        {
+          "ordinal": 86,
+          "name": "Programação/Número",
+          "expression": "m.[mft_s_n_sequence_code]"
+        },
+        {
+          "ordinal": 87,
+          "name": "Programação/Início",
+          "expression": "m.[mft_s_n_starting_at]"
+        },
+        {
+          "ordinal": 88,
+          "name": "Programação/Término",
+          "expression": "m.[mft_s_n_ending_at]"
+        },
+        {
+          "ordinal": 89,
+          "name": "Carreta 1/Placa",
+          "expression": "trailer1.license_plate"
+        },
+        {
+          "ordinal": 90,
+          "name": "Carreta 1/Capacidade Peso",
+          "expression": "f.trailer1_capacity"
+        },
+        {
+          "ordinal": 91,
+          "name": "Carreta 2/Placa",
+          "expression": "trailer2.license_plate"
+        },
+        {
+          "ordinal": 92,
+          "name": "Carreta 2/Capacidade Peso",
+          "expression": "f.trailer2_capacity"
+        },
+        {
+          "ordinal": 93,
+          "name": "Veículo/Capacidade Peso",
+          "expression": "f.tractor_capacity"
+        },
+        {
+          "ordinal": 94,
+          "name": "Veículo/Peso Cubado",
+          "expression": "m.[mft_vie_cubic_weight]"
+        },
+        {
+          "ordinal": 95,
+          "name": "Capacidade Lotação Kg",
+          "expression": "f.total_capacity"
+        },
+        {
+          "ordinal": 96,
+          "name": "Descarregamento/Destinatários",
+          "expression": "display.unloading_names"
+        },
+        {
+          "ordinal": 97,
+          "name": "Local de Descarregamento",
+          "expression": "display.unloading_names"
+        },
+        {
+          "ordinal": 98,
+          "name": "Entrega/Regiões",
+          "expression": "display.region_names"
+        },
+        {
+          "ordinal": 99,
+          "name": "Programação/Cliente",
+          "expression": "m.[mft_s_n_svs_sge_pyr_nickname]"
+        },
+        {
+          "ordinal": 100,
+          "name": "Programação/Tipo Serviço",
+          "expression": "m.[mft_s_n_svs_sge_sse_name]"
+        },
+        {
+          "ordinal": 101,
+          "name": "Usuário/Emissor",
+          "expression": "m.[mft_uer_name]"
+        },
+        {
+          "ordinal": 102,
+          "name": "Usuário/Ajuste",
+          "expression": "m.[mft_aoe_rer_name]"
+        },
+        {
+          "ordinal": 103,
+          "name": "Liberação/Comentários Operacionais",
+          "expression": "m.[operational_comments]"
+        },
+        {
+          "ordinal": 104,
+          "name": "Comentários Fechamento",
+          "expression": "m.[closing_comments]"
+        },
+        {
+          "ordinal": 105,
+          "name": "Metadata",
+          "expression": "display.metadata_json"
+        },
+        {
+          "ordinal": 106,
+          "name": "Data de extracao",
+          "expression": "f.extracted_at"
+        }
+      ]
+    }
+  ]
+}

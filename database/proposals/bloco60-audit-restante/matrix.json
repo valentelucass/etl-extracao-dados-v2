@@ -1,0 +1,739 @@
+[
+  {
+    "id": "AUDIT_ACK_LOST",
+    "request": "requests/AUDIT_ACK_LOST.json",
+    "layer": "REAL_WINDOWS_SQL_CLIENT_FAULT_PROBE",
+    "artifact": "administered",
+    "account": "etl_v2_exec",
+    "command": "run",
+    "fault": "AUDIT_ACK_LOST",
+    "scenario": "NORMAL",
+    "group": "B60_C_4BD83634F76E894F",
+    "delayMilliseconds": 0,
+    "cancel": false,
+    "waitBeforeSeconds": 0,
+    "pair": "",
+    "expectedExit": [
+      40
+    ],
+    "expectedHttp": [
+      1
+    ],
+    "expected": {
+      "publications": 0,
+      "seals": 0,
+      "consumptions": 1
+    },
+    "unchangedFrom": ""
+  },
+  {
+    "id": "DQ_MISSING",
+    "request": "requests/DQ_MISSING.json",
+    "layer": "REAL_WINDOWS_SQL_CLIENT_FAULT_PROBE",
+    "artifact": "administered",
+    "account": "etl_v2_exec",
+    "command": "run",
+    "fault": "DQ_MISSING",
+    "scenario": "NORMAL",
+    "group": "B60_C_AF7DE8B32BCBA5AB",
+    "delayMilliseconds": 0,
+    "cancel": false,
+    "waitBeforeSeconds": 0,
+    "pair": "",
+    "expectedExit": [
+      40
+    ],
+    "expectedHttp": [
+      2
+    ],
+    "expected": {
+      "publications": 0,
+      "seals": 0,
+      "consumptions": 1
+    },
+    "unchangedFrom": ""
+  },
+  {
+    "id": "DQ_ACK_LOST",
+    "request": "requests/DQ_ACK_LOST.json",
+    "layer": "REAL_WINDOWS_SQL_CLIENT_FAULT_PROBE",
+    "artifact": "administered",
+    "account": "etl_v2_exec",
+    "command": "run",
+    "fault": "DQ_ACK_LOST",
+    "scenario": "NORMAL",
+    "group": "B60_C_B83CBDCE13E35986",
+    "delayMilliseconds": 0,
+    "cancel": false,
+    "waitBeforeSeconds": 0,
+    "pair": "",
+    "expectedExit": [
+      40
+    ],
+    "expectedHttp": [
+      2
+    ],
+    "expected": {
+      "publications": 0,
+      "seals": 0,
+      "consumptions": 1
+    },
+    "unchangedFrom": ""
+  },
+  {
+    "id": "PREPARE_ACK_LOST",
+    "request": "requests/PREPARE_ACK_LOST.json",
+    "layer": "REAL_WINDOWS_SQL_CLIENT_FAULT_PROBE",
+    "artifact": "administered",
+    "account": "etl_v2_exec",
+    "command": "run",
+    "fault": "PREPARE_ACK_LOST",
+    "scenario": "NORMAL",
+    "group": "B60_C_597D030D0DA41CCB",
+    "delayMilliseconds": 0,
+    "cancel": false,
+    "waitBeforeSeconds": 0,
+    "pair": "",
+    "expectedExit": [
+      40
+    ],
+    "expectedHttp": [
+      2
+    ],
+    "expected": {
+      "publications": 0,
+      "seals": 0,
+      "consumptions": 1
+    },
+    "unchangedFrom": ""
+  },
+  {
+    "id": "HALT_BEFORE_PREPARE",
+    "request": "requests/HALT_BEFORE_PREPARE.json",
+    "layer": "REAL_WINDOWS_SQL_CLIENT_FAULT_PROBE",
+    "artifact": "administered",
+    "account": "etl_v2_exec",
+    "command": "run",
+    "fault": "HALT_BEFORE_PREPARE",
+    "scenario": "NORMAL",
+    "group": "B60_C_8E6292DA5749A678",
+    "delayMilliseconds": 0,
+    "cancel": false,
+    "waitBeforeSeconds": 0,
+    "pair": "",
+    "expectedExit": [
+      86
+    ],
+    "expectedHttp": [
+      2
+    ],
+    "expected": {
+      "publications": 0,
+      "seals": 0,
+      "consumptions": 1
+    },
+    "unchangedFrom": ""
+  },
+  {
+    "id": "HALT_AFTER_PREPARE",
+    "request": "requests/HALT_AFTER_PREPARE.json",
+    "layer": "REAL_WINDOWS_SQL_CLIENT_FAULT_PROBE",
+    "artifact": "administered",
+    "account": "etl_v2_exec",
+    "command": "run",
+    "fault": "HALT_AFTER_PREPARE",
+    "scenario": "NORMAL",
+    "group": "B60_C_D7AA1FEFADF23FF1",
+    "delayMilliseconds": 0,
+    "cancel": false,
+    "waitBeforeSeconds": 0,
+    "pair": "",
+    "expectedExit": [
+      86
+    ],
+    "expectedHttp": [
+      2
+    ],
+    "expected": {
+      "publications": 0,
+      "seals": 0,
+      "consumptions": 1
+    },
+    "unchangedFrom": ""
+  },
+  {
+    "id": "HALT_BEFORE_SEAL",
+    "request": "requests/HALT_BEFORE_SEAL.json",
+    "layer": "REAL_WINDOWS_SQL_CLIENT_FAULT_PROBE",
+    "artifact": "administered",
+    "account": "etl_v2_exec",
+    "command": "run",
+    "fault": "HALT_BEFORE_SEAL",
+    "scenario": "NORMAL",
+    "group": "B60_C_2A05BB56F9F110C7",
+    "delayMilliseconds": 0,
+    "cancel": false,
+    "waitBeforeSeconds": 0,
+    "pair": "",
+    "expectedExit": [
+      86
+    ],
+    "expectedHttp": [
+      2
+    ],
+    "expected": {
+      "publications": 0,
+      "seals": 0,
+      "consumptions": 1
+    },
+    "unchangedFrom": ""
+  },
+  {
+    "id": "HALT_AFTER_SEAL",
+    "request": "requests/HALT_AFTER_SEAL.json",
+    "layer": "REAL_WINDOWS_SQL_CLIENT_FAULT_PROBE",
+    "artifact": "administered",
+    "account": "etl_v2_exec",
+    "command": "run",
+    "fault": "HALT_AFTER_SEAL",
+    "scenario": "NORMAL",
+    "group": "B60_C_365396FB6CF326E7",
+    "delayMilliseconds": 0,
+    "cancel": false,
+    "waitBeforeSeconds": 0,
+    "pair": "",
+    "expectedExit": [
+      86
+    ],
+    "expectedHttp": [
+      2
+    ],
+    "expected": {
+      "publications": 0,
+      "seals": 1,
+      "consumptions": 1
+    },
+    "unchangedFrom": ""
+  },
+  {
+    "id": "HALT_AFTER_SEAL_RESUME",
+    "request": "requests/HALT_AFTER_SEAL_RESUME.json",
+    "layer": "OFFICIAL_JAR_WINDOWS_SQL",
+    "artifact": "administered",
+    "account": "etl_v2_exec",
+    "command": "run",
+    "fault": "NONE",
+    "scenario": "NORMAL",
+    "group": "B60_C_81D90F0D4F9C280C",
+    "delayMilliseconds": 0,
+    "cancel": false,
+    "waitBeforeSeconds": 0,
+    "pair": "",
+    "expectedExit": [
+      0
+    ],
+    "expectedHttp": [
+      0
+    ],
+    "expected": {
+      "publications": 1,
+      "seals": 1,
+      "consumptions": 1
+    },
+    "unchangedFrom": ""
+  },
+  {
+    "id": "HALT_BEFORE_APPLY",
+    "request": "requests/HALT_BEFORE_APPLY.json",
+    "layer": "REAL_WINDOWS_SQL_CLIENT_FAULT_PROBE",
+    "artifact": "administered",
+    "account": "etl_v2_exec",
+    "command": "run",
+    "fault": "HALT_BEFORE_APPLY",
+    "scenario": "NORMAL",
+    "group": "B60_C_736ED7F7CC049AA1",
+    "delayMilliseconds": 0,
+    "cancel": false,
+    "waitBeforeSeconds": 0,
+    "pair": "",
+    "expectedExit": [
+      86
+    ],
+    "expectedHttp": [
+      2
+    ],
+    "expected": {
+      "publications": 0,
+      "seals": 0,
+      "consumptions": 1
+    },
+    "unchangedFrom": ""
+  },
+  {
+    "id": "HALT_AFTER_APPLY",
+    "request": "requests/HALT_AFTER_APPLY.json",
+    "layer": "REAL_WINDOWS_SQL_CLIENT_FAULT_PROBE",
+    "artifact": "administered",
+    "account": "etl_v2_exec",
+    "command": "run",
+    "fault": "HALT_AFTER_APPLY",
+    "scenario": "NORMAL",
+    "group": "B60_C_E578F2F49F9285AD",
+    "delayMilliseconds": 0,
+    "cancel": false,
+    "waitBeforeSeconds": 0,
+    "pair": "",
+    "expectedExit": [
+      86
+    ],
+    "expectedHttp": [
+      2
+    ],
+    "expected": {
+      "publications": 1,
+      "seals": 1,
+      "consumptions": 1
+    },
+    "unchangedFrom": ""
+  },
+  {
+    "id": "HALT_AFTER_APPLY_RESUME",
+    "request": "requests/HALT_AFTER_APPLY_RESUME.json",
+    "layer": "OFFICIAL_JAR_WINDOWS_SQL",
+    "artifact": "administered",
+    "account": "etl_v2_exec",
+    "command": "run",
+    "fault": "NONE",
+    "scenario": "NORMAL",
+    "group": "B60_C_4180CCC085B7855D",
+    "delayMilliseconds": 0,
+    "cancel": false,
+    "waitBeforeSeconds": 0,
+    "pair": "",
+    "expectedExit": [
+      0
+    ],
+    "expectedHttp": [
+      0
+    ],
+    "expected": {
+      "publications": 1,
+      "seals": 1,
+      "consumptions": 1
+    },
+    "unchangedFrom": "HALT_AFTER_APPLY"
+  },
+  {
+    "id": "SEAL_ACK_LOST",
+    "request": "requests/SEAL_ACK_LOST.json",
+    "layer": "REAL_WINDOWS_SQL_CLIENT_FAULT_PROBE",
+    "artifact": "administered",
+    "account": "etl_v2_exec",
+    "command": "run",
+    "fault": "SEAL_ACK_LOST",
+    "scenario": "NORMAL",
+    "group": "B60_C_E1C466377847E616",
+    "delayMilliseconds": 0,
+    "cancel": false,
+    "waitBeforeSeconds": 0,
+    "pair": "",
+    "expectedExit": [
+      40
+    ],
+    "expectedHttp": [
+      2
+    ],
+    "expected": {
+      "publications": 0,
+      "seals": 1,
+      "consumptions": 1
+    },
+    "unchangedFrom": ""
+  },
+  {
+    "id": "SEAL_ACK_LOST_RESUME",
+    "request": "requests/SEAL_ACK_LOST_RESUME.json",
+    "layer": "OFFICIAL_JAR_WINDOWS_SQL",
+    "artifact": "administered",
+    "account": "etl_v2_exec",
+    "command": "run",
+    "fault": "NONE",
+    "scenario": "NORMAL",
+    "group": "B60_C_AFB88E97515750B7",
+    "delayMilliseconds": 0,
+    "cancel": false,
+    "waitBeforeSeconds": 0,
+    "pair": "",
+    "expectedExit": [
+      0
+    ],
+    "expectedHttp": [
+      0
+    ],
+    "expected": {
+      "publications": 1,
+      "seals": 1,
+      "consumptions": 1
+    },
+    "unchangedFrom": ""
+  },
+  {
+    "id": "APPLY_ACK_LOST",
+    "request": "requests/APPLY_ACK_LOST.json",
+    "layer": "REAL_WINDOWS_SQL_CLIENT_FAULT_PROBE",
+    "artifact": "administered",
+    "account": "etl_v2_exec",
+    "command": "run",
+    "fault": "APPLY_ACK_LOST",
+    "scenario": "NORMAL",
+    "group": "B60_C_D767CD54AB62E9C8",
+    "delayMilliseconds": 0,
+    "cancel": false,
+    "waitBeforeSeconds": 0,
+    "pair": "",
+    "expectedExit": [
+      40
+    ],
+    "expectedHttp": [
+      2
+    ],
+    "expected": {
+      "publications": 1,
+      "seals": 1,
+      "consumptions": 1
+    },
+    "unchangedFrom": ""
+  },
+  {
+    "id": "APPLY_ACK_LOST_RESUME",
+    "request": "requests/APPLY_ACK_LOST_RESUME.json",
+    "layer": "OFFICIAL_JAR_WINDOWS_SQL",
+    "artifact": "administered",
+    "account": "etl_v2_exec",
+    "command": "run",
+    "fault": "NONE",
+    "scenario": "NORMAL",
+    "group": "B60_C_13DB7D1BFBA7574B",
+    "delayMilliseconds": 0,
+    "cancel": false,
+    "waitBeforeSeconds": 0,
+    "pair": "",
+    "expectedExit": [
+      0
+    ],
+    "expectedHttp": [
+      0
+    ],
+    "expected": {
+      "publications": 1,
+      "seals": 1,
+      "consumptions": 1
+    },
+    "unchangedFrom": "APPLY_ACK_LOST"
+  },
+  {
+    "id": "LEASE_EXPIRY_HALT",
+    "request": "requests/LEASE_EXPIRY_HALT.json",
+    "layer": "REAL_WINDOWS_SQL_CLIENT_FAULT_PROBE",
+    "artifact": "administered",
+    "account": "etl_v2_exec",
+    "command": "run",
+    "fault": "HALT_AFTER_SEAL",
+    "scenario": "NORMAL",
+    "group": "B60_C_39CBB94CC0AED212",
+    "delayMilliseconds": 0,
+    "cancel": false,
+    "waitBeforeSeconds": 0,
+    "pair": "",
+    "expectedExit": [
+      86
+    ],
+    "expectedHttp": [
+      2
+    ],
+    "expected": {
+      "publications": 0,
+      "seals": 1,
+      "consumptions": 1
+    },
+    "unchangedFrom": ""
+  },
+  {
+    "id": "LEASE_EXPIRED_REFUSED",
+    "request": "requests/LEASE_EXPIRED_REFUSED.json",
+    "layer": "OFFICIAL_JAR_WINDOWS_SQL",
+    "artifact": "administered",
+    "account": "etl_v2_exec",
+    "command": "run",
+    "fault": "NONE",
+    "scenario": "NORMAL",
+    "group": "B60_C_FF57E21BE093041A",
+    "delayMilliseconds": 0,
+    "cancel": false,
+    "waitBeforeSeconds": 5,
+    "pair": "",
+    "expectedExit": [
+      30
+    ],
+    "expectedHttp": [
+      0
+    ],
+    "expected": {
+      "publications": 0,
+      "seals": 1,
+      "consumptions": 1
+    },
+    "unchangedFrom": "LEASE_EXPIRY_HALT"
+  },
+  {
+    "id": "REPLAY_USUARIOS_RUN",
+    "request": "requests/REPLAY_USUARIOS_RUN.json",
+    "layer": "OFFICIAL_JAR_WINDOWS_SQL",
+    "artifact": "administered",
+    "account": "etl_v2_exec",
+    "command": "replay",
+    "fault": "NONE",
+    "scenario": "NORMAL",
+    "group": "B60_C_1746F52013CFAAF0",
+    "delayMilliseconds": 0,
+    "cancel": false,
+    "waitBeforeSeconds": 0,
+    "pair": "",
+    "expectedExit": [
+      0
+    ],
+    "expectedHttp": [
+      2
+    ],
+    "expected": {
+      "publications": 1,
+      "seals": 1,
+      "consumptions": 1,
+      "replayOf": "55290ed3-5262-4dfc-833d-d23003a8b4cc"
+    },
+    "unchangedFrom": ""
+  },
+  {
+    "id": "REPLAY_USERS_PARTIAL",
+    "request": "requests/REPLAY_USERS_PARTIAL.json",
+    "layer": "OFFICIAL_JAR_WINDOWS_SQL",
+    "artifact": "administered",
+    "account": "etl_v2_exec",
+    "command": "replay",
+    "fault": "NONE",
+    "scenario": "NORMAL",
+    "group": "B60_C_1746F52013CFAAF0",
+    "delayMilliseconds": 0,
+    "cancel": false,
+    "waitBeforeSeconds": 0,
+    "pair": "",
+    "expectedExit": [
+      0
+    ],
+    "expectedHttp": [
+      2
+    ],
+    "expected": {
+      "publications": 1,
+      "seals": 1,
+      "consumptions": 1,
+      "replayOf": "852261f4-d9f2-4131-8255-4aaf56527a2b"
+    },
+    "unchangedFrom": ""
+  },
+  {
+    "id": "FORCE_RUN",
+    "request": "requests/FORCE_RUN.json",
+    "layer": "OFFICIAL_JAR_WINDOWS_SQL",
+    "artifact": "administered",
+    "account": "etl_v2_exec",
+    "command": "force-run",
+    "fault": "NONE",
+    "scenario": "NORMAL",
+    "group": "B60_C_04254EDA1E5FED96",
+    "delayMilliseconds": 0,
+    "cancel": false,
+    "waitBeforeSeconds": 0,
+    "pair": "",
+    "expectedExit": [
+      0
+    ],
+    "expectedHttp": [
+      2
+    ],
+    "expected": {
+      "publications": 1,
+      "seals": 1,
+      "consumptions": 1
+    },
+    "unchangedFrom": ""
+  },
+  {
+    "id": "AUTHORITY_SWAPPED",
+    "request": "requests/AUTHORITY_SWAPPED.json",
+    "layer": "OFFICIAL_JAR_WINDOWS_SQL",
+    "artifact": "swapped",
+    "account": "etl_v2_exec",
+    "command": "run",
+    "fault": "NONE",
+    "scenario": "NORMAL",
+    "group": "B60_C_D0362B4450858B6A",
+    "delayMilliseconds": 0,
+    "cancel": false,
+    "waitBeforeSeconds": 0,
+    "pair": "",
+    "expectedExit": [
+      20
+    ],
+    "expectedHttp": [
+      0
+    ],
+    "expected": {
+      "attempts": 0,
+      "decisions": 1,
+      "consumptions": 0,
+      "publications": 0,
+      "decision": "DENY"
+    },
+    "unchangedFrom": ""
+  },
+  {
+    "id": "AUTHORITY_EXPIRED",
+    "request": "requests/AUTHORITY_EXPIRED.json",
+    "layer": "OFFICIAL_JAR_WINDOWS_SQL",
+    "artifact": "expired",
+    "account": "etl_v2_exec",
+    "command": "run",
+    "fault": "NONE",
+    "scenario": "NORMAL",
+    "group": "B60_C_3149685884D550E1",
+    "delayMilliseconds": 0,
+    "cancel": false,
+    "waitBeforeSeconds": 0,
+    "pair": "",
+    "expectedExit": [
+      20
+    ],
+    "expectedHttp": [
+      0
+    ],
+    "expected": {
+      "attempts": 0,
+      "decisions": 0,
+      "consumptions": 0,
+      "publications": 0
+    },
+    "unchangedFrom": ""
+  },
+  {
+    "id": "AUTHORITY_INCONSISTENT",
+    "request": "requests/AUTHORITY_INCONSISTENT.json",
+    "layer": "OFFICIAL_JAR_WINDOWS_SQL",
+    "artifact": "inconsistent",
+    "account": "etl_v2_exec",
+    "command": "run",
+    "fault": "NONE",
+    "scenario": "NORMAL",
+    "group": "B60_C_252D3C293DA63FF4",
+    "delayMilliseconds": 0,
+    "cancel": false,
+    "waitBeforeSeconds": 0,
+    "pair": "",
+    "expectedExit": [
+      20
+    ],
+    "expectedHttp": [
+      0
+    ],
+    "expected": {
+      "attempts": 0,
+      "decisions": 0,
+      "consumptions": 0,
+      "publications": 0
+    },
+    "unchangedFrom": ""
+  },
+  {
+    "id": "CONCURRENT_SEALED",
+    "request": "requests/CONCURRENT_SEALED.json",
+    "layer": "REAL_WINDOWS_SQL_CLIENT_FAULT_PROBE",
+    "artifact": "administered",
+    "account": "etl_v2_exec",
+    "command": "run",
+    "fault": "HALT_AFTER_SEAL",
+    "scenario": "NORMAL",
+    "group": "B60_C_FF1E658E3BE3C411",
+    "delayMilliseconds": 0,
+    "cancel": false,
+    "waitBeforeSeconds": 0,
+    "pair": "",
+    "expectedExit": [
+      86
+    ],
+    "expectedHttp": [
+      2
+    ],
+    "expected": {
+      "publications": 0,
+      "seals": 1,
+      "consumptions": 1
+    },
+    "unchangedFrom": ""
+  },
+  {
+    "id": "CONCURRENT_A",
+    "request": "requests/CONCURRENT_A.json",
+    "layer": "OFFICIAL_JAR_WINDOWS_SQL",
+    "artifact": "administered",
+    "account": "etl_v2_exec",
+    "command": "run",
+    "fault": "NONE",
+    "scenario": "NORMAL",
+    "group": "B60_C_2E6390413BE08207",
+    "delayMilliseconds": 0,
+    "cancel": false,
+    "waitBeforeSeconds": 0,
+    "pair": "B60_RECOVERY_PAIR",
+    "expectedExit": [
+      0,
+      40
+    ],
+    "expectedHttp": [
+      0
+    ],
+    "expected": {
+      "publications": 1,
+      "seals": 1,
+      "consumptions": 1
+    },
+    "unchangedFrom": ""
+  },
+  {
+    "id": "CONCURRENT_B",
+    "request": "requests/CONCURRENT_B.json",
+    "layer": "OFFICIAL_JAR_WINDOWS_SQL",
+    "artifact": "administered",
+    "account": "etl_v2_exec",
+    "command": "run",
+    "fault": "NONE",
+    "scenario": "NORMAL",
+    "group": "B60_C_B37A5ABA74599EB5",
+    "delayMilliseconds": 0,
+    "cancel": false,
+    "waitBeforeSeconds": 0,
+    "pair": "B60_RECOVERY_PAIR",
+    "expectedExit": [
+      0,
+      40
+    ],
+    "expectedHttp": [
+      0
+    ],
+    "expected": {
+      "publications": 1,
+      "seals": 1,
+      "consumptions": 1
+    },
+    "unchangedFrom": ""
+  }
+]

@@ -52,6 +52,29 @@ class JdbcSqlServerObservabilityGatewayTest {
             new DataQualityPolicyReference("synthetic-dq-v1", "a".repeat(64));
 
     @Test
+    void bindsScopedAlertToExecutionAndRejectsDifferentCorrelationBeforeSql() {
+        final var jdbc = new RecordingJdbc();
+        final var gateway = gateway(jdbc);
+        final var alert =
+                new OperationalAlert(
+                        CorrelationReference.fromExecutionId(EXECUTION_ID),
+                        1,
+                        AlertSeverity.WARNING,
+                        "CONTRACT_COMPATIBLE_DRIFT",
+                        "contract-owner",
+                        1,
+                        NOW);
+        gateway.raiseScoped(EXECUTION_ID, alert);
+        assertEquals(
+                "{call recon.usp_runtime_raise_alert(?, ?, ?, ?, ?, ?, ?)}", jdbc.statementSql);
+        assertEquals(EXECUTION_ID.toString(), jdbc.params().get(0));
+        assertTrue(jdbc.connectionClosed);
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> gateway.raiseScoped(UUID.randomUUID(), alert));
+    }
+
+    @Test
     void mapsExactlyOneFixedDataQualitySummaryAndBindsOnlyScalarParameters() {
         final RecordingJdbc jdbc = new RecordingJdbc().rows(List.of(dataQualityRow()));
         final JdbcSqlServerObservabilityGateway gateway = gateway(jdbc);

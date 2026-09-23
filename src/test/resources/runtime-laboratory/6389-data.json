@@ -1,0 +1,24 @@
+{
+  "data": [
+    {
+      "corporation_sequence_number": 54011,
+      "fit_p_m_pck_sequence_code": 54001,
+      "fit_dpn_performance_finished_at": "2024-01-01T12:00:00Z",
+      "servico_em": "2024-01-01T12:00:00Z",
+      "finished_at": "2024-01-01",
+      "updated_at": "2024-01-01T12:00:00Z",
+      "status": "finished",
+      "id": 540638901
+    },
+    {
+      "corporation_sequence_number": 54012,
+      "fit_p_m_pck_sequence_code": null,
+      "fit_dpn_performance_finished_at": null,
+      "servico_em": "2024-01-01T12:00:00Z",
+      "finished_at": "2024-01-01",
+      "updated_at": "2024-01-01T12:00:00Z",
+      "status": "finished",
+      "id": 540638902
+    }
+  ]
+}

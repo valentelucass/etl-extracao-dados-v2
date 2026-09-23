@@ -1,0 +1,84 @@
+{
+  "provenance": "FIXTURE_SINTETICA_EXPLICITA",
+  "version": "expansion-references-v1",
+  "branchCode": "SYNTHETIC_BRANCH",
+  "branchLabel": "Filial sintética",
+  "payerReference": "0000000000000000000000000000000000000000000000000000000000000001",
+  "labels": [
+    {
+      "category": "CAP_TYPE",
+      "raw": "Manual",
+      "label": "Manual"
+    },
+    {
+      "category": "CAP_TYPE",
+      "raw": "Advance",
+      "label": "Adiantamento"
+    },
+    {
+      "category": "CAP_TYPE",
+      "raw": "CiotBilling",
+      "label": "Pagamento CIOT"
+    },
+    {
+      "category": "CAP_TYPE",
+      "raw": "DriverBilling",
+      "label": "Pagamento Motorista"
+    },
+    {
+      "category": "CAP_TYPE",
+      "raw": "StorageInvoice",
+      "label": "Nota Fiscal Armazenagem"
+    },
+    {
+      "category": "CAP_CLASS",
+      "raw": "variable_costs",
+      "label": "4. Custos Variáveis"
+    },
+    {
+      "category": "CAP_CLASS",
+      "raw": "static_expenses",
+      "label": "3. Custos Fixos"
+    },
+    {
+      "category": "CAP_CLASS",
+      "raw": "revenue",
+      "label": "1. Receitas"
+    },
+    {
+      "category": "CAP_CLASS",
+      "raw": "deductions",
+      "label": "2. Deduções"
+    },
+    {
+      "category": "CAP_CLASS",
+      "raw": "financial_result",
+      "label": "5. Resultado Financeiro"
+    },
+    {
+      "category": "CAP_CLASS",
+      "raw": "taxes",
+      "label": "6. Impostos"
+    },
+    {
+      "category": "FAT_CTE",
+      "raw": "authorized",
+      "label": "Autorizado"
+    },
+    {
+      "category": "FAT_CTE",
+      "raw": "cancelled",
+      "label": "Cancelado"
+    },
+    {
+      "category": "FAT_CTE",
+      "raw": "denied",
+      "label": "Negado"
+    },
+    {
+      "category": "FAT_CTE",
+      "raw": "pending",
+      "label": "Pendente"
+    }
+  ]
+}

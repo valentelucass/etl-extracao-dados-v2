@@ -1,4 +1,4 @@
--- Gate progressivo de dados. Somente leitura: valida V001-V009 já aplicadas.
+-- Gate progressivo de dados. Somente leitura: valida V001-V017 já aplicadas.
 -- Fonte estrutural: manifests/fingerprints da fundação, control plane e kernel, conferidos pelo runner.
 
 SET NOCOUNT ON;
@@ -37,7 +37,15 @@ VALUES
     (N'partition_publication_pointer'),
     (N'execution_publication_event'),
     (N'incremental_publication_watermark'),
-    (N'execution_promotion_result');
+    (N'execution_promotion_result'),
+    (N'runtime_contract_evidence'),
+    (N'runtime_authority_configuration'),
+    (N'runtime_identity_mapping'),
+    (N'runtime_identity_scope'),
+    (N'runtime_authorization_decision'),
+    (N'runtime_authorization_consumption'),
+    (N'runtime_temporal_policy'),
+    (N'runtime_temporal_window');
 
 INSERT INTO @failures (category, object_name, detail)
 SELECT N'TABLE', CONCAT(N'ctl.', expected.object_name), N'Tabela obrigatória ausente.'
@@ -56,18 +64,22 @@ VALUES
     (N'usp_control_plane_transition_execution'),
     (N'usp_control_plane_register_incremental_frontier'),
     (N'usp_control_plane_publish_execution'),
-    (N'usp_control_plane_recover_stale_executions');
+    (N'usp_control_plane_recover_stale_executions'),
+    (N'usp_runtime_authorization'),
+    (N'usp_runtime_status'),
+    (N'usp_runtime_temporal_plan'),
+    (N'usp_runtime_temporal_gaps');
 
 INSERT INTO @failures (category, object_name, detail)
 SELECT N'PROCEDURE', CONCAT(N'ctl.', expected.object_name), N'Procedure obrigatória ausente.'
 FROM @expected_procedures AS expected
 WHERE OBJECT_ID(CONCAT(N'ctl.', expected.object_name), N'P') IS NULL;
 
--- O gate cobre exatamente a fundação, o plano comum e a vertical de Usuários autorizada. O
+-- O gate cobre exatamente a fundação, o plano comum e as verticais locais autorizadas. O
 -- histórico interno Flyway é permitido quando a transição guardada for aplicada pelo owner.
 INSERT INTO @failures (category, object_name, detail)
 SELECT N'OBJECT', CONCAT(schema_definition.name, N'.', object_definition.name),
-       N'Objeto fora do escopo V001-V009 detectado.'
+       N'Objeto fora do escopo V001-V017 detectado.'
 FROM sys.objects AS object_definition
 INNER JOIN sys.schemas AS schema_definition
     ON schema_definition.schema_id = object_definition.schema_id
@@ -79,7 +91,8 @@ WHERE object_definition.is_ms_shipped = 0
       schema_definition.name = N'ctl'
       AND object_definition.type = N'U'
       AND object_definition.name IN (
-          N'flyway_schema_history',
+          N'runtime_authority_configuration', N'runtime_identity_mapping', N'runtime_identity_scope', N'runtime_authorization_decision', N'runtime_authorization_consumption', N'runtime_temporal_policy', N'runtime_temporal_window',
+          N'flyway_schema_history', N'runtime_contract_evidence', N'runtime_coleta_publication_receipt',
           N'source_catalog',
           N'execution_cycle',
           N'execution_partition',
@@ -102,13 +115,17 @@ WHERE object_definition.is_ms_shipped = 0
           N'staging_lifecycle_purge_event',
           N'data_quality_policy',
           N'data_quality_check_policy',
-          N'usuario_promotion_result'
+          N'usuario_promotion_result', N'coleta_promotion_result', N'cotacao_promotion_result',
+          N'manifesto_promotion_result', N'frete_promotion_result',
+          N'localizacao_carga_promotion_result'
       )
   )
   AND NOT (
       schema_definition.name = N'ctl'
       AND object_definition.type = N'P'
       AND object_definition.name IN (
+          N'usp_runtime_authorization', N'usp_runtime_status', N'usp_runtime_temporal_plan', N'usp_runtime_temporal_gaps',
+          N'usp_runtime_recovery',
           N'usp_control_plane_register_source',
           N'usp_control_plane_start_cycle',
           N'usp_control_plane_start_execution',
@@ -138,7 +155,11 @@ WHERE object_definition.is_ms_shipped = 0
       schema_definition.name = N'stg'
       AND object_definition.type = N'U'
       AND object_definition.name IN (
-          N'execution_record', N'execution_candidate', N'usuario_record'
+          N'execution_record', N'execution_candidate', N'usuario_record', N'coleta_record',
+          N'cotacao_record', N'manifesto_observation', N'manifesto_reduced_candidate',
+          N'manifesto_pick_candidate', N'manifesto_mdfe_candidate', N'frete_record',
+          N'frete_performance_observation', N'frete_sidecar_observation',
+          N'localizacao_carga_record'
       )
   )
   AND NOT (
@@ -163,14 +184,20 @@ WHERE object_definition.is_ms_shipped = 0
           N'usuario_reconciliation_result',
           N'usuario_stage_disposal_evidence',
           N'usuario_stage_archive',
-          N'usuario_stage_restore'
+          N'usuario_stage_restore', N'coleta_root_presence_observation',
+          N'cotacao_root_presence_observation', N'manifesto_coleta_relation_candidate',
+          N'manifesto_root_presence_observation', N'frete_coleta_relation_candidate',
+          N'frete_terminal_transition_observation', N'frete_root_presence_observation',
+          N'localizacao_carga_root_presence_observation'
       )
   )
   AND NOT (
       schema_definition.name = N'core'
       AND object_definition.type = N'U'
       AND object_definition.name IN (
-          N'entity_record_state', N'usuario', N'usuario_history'
+          N'entity_record_state', N'usuario', N'usuario_history', N'coleta', N'cotacao',
+          N'manifesto', N'manifesto_pick', N'manifesto_mdfe', N'frete',
+          N'frete_performance', N'localizacao_cargas'
       )
   )
   AND NOT (
@@ -183,7 +210,10 @@ WHERE object_definition.is_ms_shipped = 0
       AND object_definition.type = N'P'
       AND object_definition.name IN (
           N'usp_stage_record',
-          N'usp_stage_usuario_record',
+          N'usp_stage_usuario_record', N'usp_stage_coleta_record', N'usp_stage_cotacao_record',
+          N'usp_stage_manifesto_observation', N'usp_stage_manifesto_reduced_candidate',
+          N'usp_stage_frete_record', N'usp_stage_frete_performance',
+          N'usp_stage_frete_sidecar', N'usp_stage_localizacao_carga_record',
           N'usp_plan_staging_lifecycle',
           N'usp_plan_staging_lifecycle_at',
           N'usp_archive_staging_lifecycle',
@@ -196,7 +226,11 @@ WHERE object_definition.is_ms_shipped = 0
       AND object_definition.name IN (
           N'usp_prepare_staged_execution',
           N'usp_apply_reconcile_publish_execution',
-          N'usp_apply_reconcile_publish_usuarios'
+          N'usp_apply_reconcile_publish_usuarios', N'usp_apply_reconcile_publish_coletas',
+          N'usp_apply_reconcile_publish_cotacoes', N'usp_prepare_manifesto_candidate_set',
+          N'usp_apply_reconcile_publish_manifestos', N'usp_prepare_frete_candidate_set',
+          N'usp_apply_reconcile_publish_fretes',
+          N'usp_apply_reconcile_publish_localizacao_cargas'
       )
   )
   AND NOT (
@@ -234,6 +268,8 @@ WHERE object_definition.is_ms_shipped = 0
           N'usp_raise_observability_alert'
       )
   )
+  AND NOT (schema_definition.name=N'ctl' AND object_definition.type=N'FN'
+      AND object_definition.name IN(N'fn_runtime_recovery_field',N'fn_runtime_recovery_identity',N'fn_runtime_coleta_publication_hash'))
   AND NOT (
       schema_definition.name = N'recon'
       AND object_definition.type = N'FN'
@@ -261,13 +297,17 @@ WHERE object_definition.is_ms_shipped = 0
       schema_definition.name = N'ctl'
       AND object_definition.type = N'TR'
       AND object_definition.name IN (
+          N'tr_runtime_authorization_decision_immutable', N'tr_runtime_authorization_consumption_immutable', N'tr_runtime_temporal_policy_immutable', N'tr_runtime_temporal_window_immutable',
+          N'trg_runtime_contract_evidence_immutable', N'trg_runtime_coleta_receipt_immutable',
           N'trg_data_quality_policy_immutable',
           N'trg_data_quality_check_policy_immutable',
           N'trg_execution_publication_requires_data_quality',
            N'trg_usuario_prepare_candidate_set',
            N'trg_usuario_publication_requires_apply_wrapper',
            N'trg_usuario_lifecycle_plan_budget',
-           N'trg_usuario_promotion_result_immutable'
+           N'trg_usuario_promotion_result_immutable', N'trg_coleta_prepare_candidate_set',
+           N'trg_cotacao_prepare_candidate_set', N'trg_frete_prepare_candidate_set',
+           N'trg_localizacao_carga_prepare_candidate_set'
       )
   )
   AND NOT (
@@ -298,7 +338,7 @@ WHERE object_definition.is_ms_shipped = 0
               N'classificacao_frota_excecao_token',
               N'atribuicao_filial', N'pagador_exclusao_cubagem',
               N'regiao_logistica_cep', N'regiao_logistica_cidade_uf',
-              N'tarifa_rota_uf'
+              N'tarifa_rota_uf', N'coleta_sequence_code_alias'
           )
           OR object_definition.type = N'V'
              AND object_definition.name = N'v_status_coleta_seed_candidate_v1'
@@ -418,7 +458,38 @@ VALUES
     (N'CK_ctl_incremental_publication_watermark_non_blank', N'C', N'incremental_publication_watermark'),
     (N'PK_ctl_execution_promotion_result', N'PK', N'execution_promotion_result'),
     (N'FK_ctl_execution_promotion_result_execution', N'F', N'execution_promotion_result'),
-    (N'CK_ctl_execution_promotion_result_counts', N'C', N'execution_promotion_result');
+    (N'CK_ctl_execution_promotion_result_counts', N'C', N'execution_promotion_result'),
+    (N'PK_ctl_runtime_contract_evidence',N'PK',N'runtime_contract_evidence'),
+    (N'FK_ctl_runtime_contract_evidence_attempt',N'F',N'runtime_contract_evidence'),
+    (N'CK_ctl_runtime_contract_evidence_counts',N'C',N'runtime_contract_evidence'),
+    (N'CK_ctl_runtime_contract_evidence_hash',N'C',N'runtime_contract_evidence'),
+    (N'PK_ctl_runtime_coleta_publication_receipt',N'PK',N'runtime_coleta_publication_receipt'),
+    (N'FK_ctl_runtime_coleta_publication_receipt',N'F',N'runtime_coleta_publication_receipt'),
+    (N'CK_ctl_runtime_coleta_publication_receipt',N'C',N'runtime_coleta_publication_receipt');
+
+INSERT INTO @expected_constraints VALUES
+    (N'PK_runtime_authority_configuration',N'PK',N'runtime_authority_configuration'),
+    (N'CK_runtime_authority_configuration',N'C',N'runtime_authority_configuration'),
+    (N'PK_runtime_identity_mapping',N'PK',N'runtime_identity_mapping'),
+    (N'UQ_runtime_identity_audit_reference',N'UQ',N'runtime_identity_mapping'),
+    (N'CK_runtime_identity_mapping',N'C',N'runtime_identity_mapping'),
+    (N'PK_runtime_identity_scope',N'PK',N'runtime_identity_scope'),
+    (N'UQ_runtime_identity_scope',N'UQ',N'runtime_identity_scope'),
+    (N'FK_runtime_identity_scope_mapping',N'F',N'runtime_identity_scope'),
+    (N'CK_runtime_identity_scope',N'C',N'runtime_identity_scope'),
+    (N'PK_runtime_authorization_decision',N'PK',N'runtime_authorization_decision'),
+    (N'UQ_runtime_authorization_receipt',N'UQ',N'runtime_authorization_decision'),
+    (N'CK_runtime_authorization_decision',N'C',N'runtime_authorization_decision'),
+    (N'PK_runtime_authorization_consumption',N'PK',N'runtime_authorization_consumption'),
+    (N'UQ_runtime_authorization_fence',N'UQ',N'runtime_authorization_consumption'),
+    (N'FK_runtime_authorization_consumption_decision',N'F',N'runtime_authorization_consumption'),
+    (N'PK_runtime_temporal_policy',N'PK',N'runtime_temporal_policy'),
+    (N'CK_runtime_temporal_policy',N'C',N'runtime_temporal_policy'),
+    (N'UQ_runtime_temporal_occurrence',N'UQ',N'runtime_temporal_window'),
+    (N'PK_runtime_temporal_window',N'PK',N'runtime_temporal_window'),
+    (N'UQ_runtime_temporal_partition',N'UQ',N'runtime_temporal_window'),
+    (N'FK_runtime_temporal_window_policy',N'F',N'runtime_temporal_window'),
+    (N'CK_runtime_temporal_window',N'C',N'runtime_temporal_window');
 
 INSERT INTO @failures (category, object_name, detail)
 SELECT N'CONSTRAINT', expected.constraint_name, N'Constraint obrigatória ausente ou associada à tabela errada.'
@@ -434,7 +505,7 @@ WHERE object_definition.object_id IS NULL
 
 INSERT INTO @failures (category, object_name, detail)
 SELECT N'CONSTRAINT', CONCAT(N'ctl.', OBJECT_NAME(object_definition.parent_object_id), N'.', object_definition.name),
-       N'Constraint fora do contrato V001-V009.'
+       N'Constraint fora do contrato V001-V017.'
 FROM sys.objects AS object_definition
 INNER JOIN sys.schemas AS schema_definition
     ON schema_definition.schema_id = object_definition.schema_id
@@ -450,7 +521,9 @@ WHERE schema_definition.name COLLATE DATABASE_DEFAULT = N'ctl'
       N'staging_lifecycle_purge_event',
       N'data_quality_policy',
       N'data_quality_check_policy',
-      N'usuario_promotion_result'
+      N'usuario_promotion_result', N'coleta_promotion_result', N'cotacao_promotion_result',
+      N'manifesto_promotion_result', N'frete_promotion_result',
+      N'localizacao_carga_promotion_result'
   )
   AND NOT EXISTS (
       SELECT 1
@@ -603,6 +676,21 @@ VALUES
     (N'core', N'usp_apply_reconcile_publish_execution', N'v2_runtime'),
     (N'stg', N'usp_stage_usuario_record', N'v2_runtime'),
     (N'core', N'usp_apply_reconcile_publish_usuarios', N'v2_runtime'),
+    (N'stg', N'usp_stage_coleta_record', N'v2_runtime'),
+    (N'core', N'usp_apply_reconcile_publish_coletas', N'v2_runtime'),
+    (N'stg', N'usp_stage_cotacao_record', N'v2_runtime'),
+    (N'core', N'usp_apply_reconcile_publish_cotacoes', N'v2_runtime'),
+    (N'stg', N'usp_stage_manifesto_observation', N'v2_runtime'),
+    (N'stg', N'usp_stage_manifesto_reduced_candidate', N'v2_runtime'),
+    (N'core', N'usp_prepare_manifesto_candidate_set', N'v2_runtime'),
+    (N'core', N'usp_apply_reconcile_publish_manifestos', N'v2_runtime'),
+    (N'stg', N'usp_stage_frete_record', N'v2_runtime'),
+    (N'stg', N'usp_stage_frete_performance', N'v2_runtime'),
+    (N'stg', N'usp_stage_frete_sidecar', N'v2_runtime'),
+    (N'core', N'usp_prepare_frete_candidate_set', N'v2_runtime'),
+    (N'core', N'usp_apply_reconcile_publish_fretes', N'v2_runtime'),
+    (N'stg', N'usp_stage_localizacao_carga_record', N'v2_runtime'),
+    (N'core', N'usp_apply_reconcile_publish_localizacao_cargas', N'v2_runtime'),
     (N'ctl', N'usp_approve_staging_retention_policy', N'v2_retention_governor'),
     (N'ctl', N'usp_revoke_staging_retention_policy', N'v2_retention_governor'),
     (N'ctl', N'usp_place_staging_legal_hold', N'v2_retention_governor'),
@@ -710,6 +798,21 @@ VALUES
     (N'v2_runtime', N'G', 1, N'core', N'usp_prepare_staged_execution', N'EXECUTE'),
     (N'v2_runtime', N'G', 1, N'core', N'usp_apply_reconcile_publish_execution', N'EXECUTE'),
     (N'v2_runtime', N'G', 1, N'core', N'usp_apply_reconcile_publish_usuarios', N'EXECUTE'),
+    (N'v2_runtime', N'G', 1, N'stg', N'usp_stage_coleta_record', N'EXECUTE'),
+    (N'v2_runtime', N'G', 1, N'core', N'usp_apply_reconcile_publish_coletas', N'EXECUTE'),
+    (N'v2_runtime', N'G', 1, N'stg', N'usp_stage_cotacao_record', N'EXECUTE'),
+    (N'v2_runtime', N'G', 1, N'core', N'usp_apply_reconcile_publish_cotacoes', N'EXECUTE'),
+    (N'v2_runtime', N'G', 1, N'stg', N'usp_stage_manifesto_observation', N'EXECUTE'),
+    (N'v2_runtime', N'G', 1, N'stg', N'usp_stage_manifesto_reduced_candidate', N'EXECUTE'),
+    (N'v2_runtime', N'G', 1, N'core', N'usp_prepare_manifesto_candidate_set', N'EXECUTE'),
+    (N'v2_runtime', N'G', 1, N'core', N'usp_apply_reconcile_publish_manifestos', N'EXECUTE'),
+    (N'v2_runtime', N'G', 1, N'stg', N'usp_stage_frete_record', N'EXECUTE'),
+    (N'v2_runtime', N'G', 1, N'stg', N'usp_stage_frete_performance', N'EXECUTE'),
+    (N'v2_runtime', N'G', 1, N'stg', N'usp_stage_frete_sidecar', N'EXECUTE'),
+    (N'v2_runtime', N'G', 1, N'core', N'usp_prepare_frete_candidate_set', N'EXECUTE'),
+    (N'v2_runtime', N'G', 1, N'core', N'usp_apply_reconcile_publish_fretes', N'EXECUTE'),
+    (N'v2_runtime', N'G', 1, N'stg', N'usp_stage_localizacao_carga_record', N'EXECUTE'),
+    (N'v2_runtime', N'G', 1, N'core', N'usp_apply_reconcile_publish_localizacao_cargas', N'EXECUTE'),
     (N'v2_runtime', N'G', 1, N'recon', N'usp_evaluate_execution_data_quality', N'EXECUTE'),
     (N'v2_runtime', N'G', 1, N'recon', N'usp_observe_execution_data_quality', N'EXECUTE'),
     (N'v2_runtime', N'G', 1, N'recon', N'usp_record_execution_metric', N'EXECUTE'),
@@ -756,7 +859,7 @@ WHERE NOT EXISTS (
 
 INSERT INTO @failures (category, object_name, detail)
 SELECT N'PERMISSION', CONCAT(principal_definition.name, N':', permission_definition.permission_name),
-       N'Permissão direta fora do contrato mínimo V001-V009.'
+       N'Permissão direta fora do contrato mínimo V001-V017.'
 FROM sys.database_permissions AS permission_definition
 INNER JOIN sys.database_principals AS principal_definition
     ON principal_definition.principal_id = permission_definition.grantee_principal_id
@@ -866,7 +969,7 @@ WHERE OBJECT_ID(N'dbo.v2_procedure_grant_allowlist', N'U') IS NULL
            WHERE object_id = OBJECT_ID(N'dbo.v2_procedure_grant_allowlist', N'U')),
           (SELECT principal_id FROM sys.schemas WHERE name = N'dbo')
       ) <> DATABASE_PRINCIPAL_ID(N'dbo')
-   OR (SELECT COUNT_BIG(*) FROM dbo.v2_procedure_grant_allowlist) <> 26
+   OR (SELECT COUNT_BIG(*) FROM dbo.v2_procedure_grant_allowlist) <> 41
    OR (SELECT COUNT_BIG(*) FROM sys.columns
        WHERE object_id = OBJECT_ID(N'dbo.v2_procedure_grant_allowlist', N'U')) <> 3
    OR EXISTS (

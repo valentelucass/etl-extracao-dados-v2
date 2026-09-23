@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "status": "SEVENTH_AUTHORIZED_EXECUTED_PARTIAL_RESOLVED_BY_COMPLETION",
+  "preparedManifest": {
+    "path": "database/proposals/bloco54-residual-runtime/manifest.json",
+    "sha256": "d6f46fb1d2fac8eefddfe5b02c9afd181a3b053a19e11022efeab976fdc5deea"
+  },
+  "previousReservations": 109,
+  "reservationsAfter": 128,
+  "campaign": 7,
+  "rightsCompensated": true,
+  "currentMappingVersion": 17,
+  "retainedRevokedReplayScopes": 2,
+  "executedEvidence": {
+    "path": "target/bloco54/residual-runtime/results.json",
+    "sha256": "79e0c951c4959a2f5de3ad3a43022087daaa1b2f9dce9225c15cf736456871af"
+  },
+  "historicalManual": {
+    "path": "target/bloco54/completion-authorized-20260908/initial/scripts/validation/Invoke-Bloco54Manual.ps1",
+    "sha256": "3cc6748be6c64877e2662cc1a6e258e8c2f14a92acc8862cc0aecaf1a2078423"
+  },
+  "completionManifest": "database/manifest/runtime-bloco54.json"
+}

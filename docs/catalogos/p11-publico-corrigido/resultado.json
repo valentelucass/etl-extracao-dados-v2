@@ -1,0 +1,265 @@
+{
+  "version": 1,
+  "status": "PATCHED_SCAN_PASS",
+  "sourcePomSha256": "ff2d9ee64cefd61066b920c47c3022a080b6ba34a4a1d53b5af48ba69a2ff0f3",
+  "reportPath": "target/p11-publico-20260921-01/build/target/dependency-check/dependency-check-report.json",
+  "dependencies": 13,
+  "findings": 0,
+  "scannerErrors": 0,
+  "exitCode": 0,
+  "feedUpdated": true,
+  "feed": [
+    {
+      "name": "NVD API Last Checked",
+      "timestamp": "2026-09-21T19:08:25-03"
+    },
+    {
+      "name": "NVD API Last Modified",
+      "timestamp": "2026-09-21T21:17:22Z"
+    }
+  ],
+  "updatedRecords": 41788,
+  "tests": {
+    "total": 205,
+    "classes": 29,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "policyReport": "PASS",
+  "collectionRegressionCases": 6,
+  "publicNetworkAuthorized": true,
+  "credentials": false,
+  "businessSourceCalls": 0,
+  "sqlCalls": 0,
+  "baselineHumanAccepted": false,
+  "newAcceptances": 0,
+  "pins": {
+    "jackson": "2.18.11",
+    "jdbc": "12.8.2.jre11",
+    "nativeAuth": "12.8.2.x64"
+  },
+  "nativeAuthenticationQualified": false,
+  "receipts": [
+    {
+      "path": "target/p11-publico-20260921-01/build/target/dependency-check/dependency-check-report.json",
+      "sha256": "3b89ed377563987bb55a71cd290aa22559d9e90042591273be6a7a532636aeb7"
+    },
+    {
+      "path": "target/p11-publico-20260921-01/build/target/dependency-check/dependency-check-report.html",
+      "sha256": "54fa688f5f05cdff4f7323879708dce7356ebeca3f57b2ef1f0b52b98a3d1483"
+    },
+    {
+      "path": "target/p11-publico-20260921-01/intent.json",
+      "sha256": "8f4f1852ef40ecedcb754e0b5c81c889bb214f94b1bd0d93ad6244d6f22f3942"
+    },
+    {
+      "path": "target/p11-publico-20260921-01/network-ledger.jsonl",
+      "sha256": "84b77513d3150511f7168613852799cc20f541677d6cd39c7e33256c3b28d226"
+    },
+    {
+      "path": "target/p11-publico-20260921-01/execution-ledger.jsonl",
+      "sha256": "91075484d5e1e08f5c27f11bc0646976e957b0f888f46afb2ee436f4736839de"
+    },
+    {
+      "path": "target/p11-publico-20260921-01/scan-01.json",
+      "sha256": "1b2cb7d2df9baa326ce5ab508f0c0daac97f6910ce8b2c1c19944753cb1b3910"
+    },
+    {
+      "path": "target/p11-publico-20260921-01/scan-01.stdout.log",
+      "sha256": "2611078c264cde624a3341484eac63d6d9856e75ab3dd87fecaf235a3888d3f8"
+    },
+    {
+      "path": "target/p11-publico-20260921-01/scan-02.json",
+      "sha256": "e719ef7c799015e1e5e57b5f5eb10b08b2946f3749201947be167cef3f3fa473"
+    },
+    {
+      "path": "target/p11-publico-20260921-01/scan-02.stdout.log",
+      "sha256": "b1690e8f03ae2715a358d1a553a56bedf3fc8160056d493a706498599a7a3b74"
+    },
+    {
+      "path": "target/p11-publico-20260921-01/scan-02.stderr.log",
+      "sha256": "0f7fc45eae67a4555b59dcb517ce3684d83cee2ada11c4e92b3978c95c4196af"
+    },
+    {
+      "path": "target/p11-publico-20260921-01/test-01.json",
+      "sha256": "5867c1bb1678cb4aa6e889985755dcd9887ef1dc806735cf1baafa99916482ea"
+    },
+    {
+      "path": "target/p11-publico-20260921-01/test-01.stdout.log",
+      "sha256": "20ca8b5df8d353d33d0d831697a706d3db8f96f909bf690e54a80c93799b21f7"
+    },
+    {
+      "path": "target/p11-publico-20260921-01/test-02.json",
+      "sha256": "fb2ab694cb463a5a95a29d1ced1c6ca992423755372bcb347b56904abe900f24"
+    },
+    {
+      "path": "target/p11-publico-20260921-01/test-02.stdout.log",
+      "sha256": "a7e0aef44fb5ee0bcff786b724ae785828a0bfeaadd26d395bc235bdc801ddd1"
+    },
+    {
+      "path": "target/p11-publico-20260921-01/test-02.stderr.log",
+      "sha256": "f00aa40b147d3f2ff8892876fd716a18c5a6b8d1bc379d76628eb30a664c7a19"
+    },
+    {
+      "path": "target/p11-publico-20260921-01/policy-report.log",
+      "sha256": "918305b7d50f2178f03b2b1e1135e1258f258fe5fb86f611ffa15f17a1d52b1b"
+    },
+    {
+      "path": "target/p11-publico-20260921-01/policy-report-02.log",
+      "sha256": "44701adb48e1676a28a18f5c9d16b2dbc79b7cd7708f9387a4e3096dcda18305"
+    },
+    {
+      "path": "target/p11-publico-20260921-01/collections-01.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "target/p11-publico-20260921-01/collections-02.log",
+      "sha256": "e180e4d1484bf67bddaeac1e41df510faff77d48a277b5babca66e0455ac78bb"
+    },
+    {
+      "path": "target/p11-publico-20260921-01/build/target/report-collections-02/receipt.json",
+      "sha256": "4f2650b8c3b313c41ffea283f35e6511cc544e2764753d64d9e2e7802ca55c5b"
+    },
+    {
+      "path": "target/p11-publico-20260921-01/PublicAuditGuard.java",
+      "sha256": "0387e4719a2409278c629bf1419ff411a250745f4c17c7a56d59ccd99a903aae"
+    },
+    {
+      "path": "target/p11-publico-20260921-01/OfflineNetworkGuard.java",
+      "sha256": "2e7c16f376165d9e60355f7f6c65b5899e47a9660b05b31e43d0c4dae639b9a9"
+    },
+    {
+      "path": "target/p11-publico-20260921-01/run.cjs",
+      "sha256": "81bb73db215f0ec960a91e582c0852b15c19646d8857cf73995c1e5621d9ce78"
+    },
+    {
+      "path": "target/p11-publico-20260921-01/build/pom.xml",
+      "sha256": "fee89d33e61158c635a29787f61d8f2b83239c3bc9b7d6c16ae9f3d554af27d8"
+    },
+    {
+      "path": "target/p11-publico-20260921-01/jackson-bom.pom",
+      "sha256": "3d929643b852c463090a3597c63d04fcb88d9bc0f22c5a0c781ae624b49deb40"
+    },
+    {
+      "path": "target/p11-publico-20260921-01/jdbc-auth.pom",
+      "sha256": "223f6776fbe668640121080d2b709c68d0ab9a26e1e5474e7921bf79872828bf"
+    },
+    {
+      "path": "target/p11-publico-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.arquitetura.ArchitectureRulesTest.xml",
+      "sha256": "dc1b56186fa84b9f0c32e076074052373dcfa0eee0b3133f3d91221636901079"
+    },
+    {
+      "path": "target/p11-publico-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.bootstrap.AnalyticLaboratoryQuoteMapperTest.xml",
+      "sha256": "26c07b6d94c9132f21ea83068f72176fe431036b760825e3ef7c25b67c69338c"
+    },
+    {
+      "path": "target/p11-publico-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.contratos.caracterizacao.StrictUtf8JsonLoaderTest.xml",
+      "sha256": "ac50390160c9742151eb7fa758d8a7d346312979d4e89e056703aa4bb145171a"
+    },
+    {
+      "path": "target/p11-publico-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.modulos.coletas.aplicacao.ColetaDataExportRecordMapperTest.xml",
+      "sha256": "96ee095b69e1ec4873e0231614e95574d7520804f4912f497c6a829fd561cea0"
+    },
+    {
+      "path": "target/p11-publico-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.modulos.cotacoes.aplicacao.CotacaoDataExportRecordMapperTest.xml",
+      "sha256": "11f3f2e52997f03964f179ecc6f9115a8cd61140d5735b627c04c2d64d03f498"
+    },
+    {
+      "path": "target/p11-publico-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.modulos.fretes.aplicacao.FreightAnalyticAttributesMapperTest.xml",
+      "sha256": "ca949fb9561156a43eb9d6802a9e4f742d2449257f58d4977197699f598bbb03"
+    },
+    {
+      "path": "target/p11-publico-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.modulos.fretes.aplicacao.FreteDataExportRecordMapperTest.xml",
+      "sha256": "68bd16d9339128aefcf23e8f2b8fb919a5ea02ea175aa5b4e02e1abc6dee6ae2"
+    },
+    {
+      "path": "target/p11-publico-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.modulos.fretes.aplicacao.FreteGraphQlSidecarMapperTest.xml",
+      "sha256": "f5fb29443a4b27c20b009b6b76c6fa8d156a759407dc353f4f071f40abe7e2cf"
+    },
+    {
+      "path": "target/p11-publico-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.modulos.localizacaocargas.aplicacao.LocalizacaoCargaDataExportRecordMapperTest.xml",
+      "sha256": "ade0595d352c7f66dd4baeb2d9321bdf9c0ec3538eb14305aa65c55f79abe1fa"
+    },
+    {
+      "path": "target/p11-publico-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.modulos.manifestos.aplicacao.ManifestoDataExportRecordMapperTest.xml",
+      "sha256": "aafcf77ce81f04453d7311a8b2296f32e5bca905e89f7d11be384916a2adb7dc"
+    },
+    {
+      "path": "target/p11-publico-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.modulos.usuarios.aplicacao.UsuarioGraphQlNodeMapperTest.xml",
+      "sha256": "ef81d4f20d2851636b83d366a9a2fdebc8195b82fff7062ae1ee4206ebd8c2c4"
+    },
+    {
+      "path": "target/p11-publico-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.controle.JdbcSqlServerControlPlaneTest.xml",
+      "sha256": "4457f3f9f958061e9fecbce7e6353e60b0635f5ad4864765b5e780770673ce0b"
+    },
+    {
+      "path": "target/p11-publico-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.fonte.dataexport.DataExportPayloadProfileTest.xml",
+      "sha256": "5f1fd522e99951eaeed205823f5018fa18b531ab49e8abaef505d91f931ed68c"
+    },
+    {
+      "path": "target/p11-publico-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.fonte.dataexport.DataExportRequestJsonSerializerTest.xml",
+      "sha256": "640bb10622b228fbe202d874f1508e7856d952483aa8ade25f7f8bd3c09c5060"
+    },
+    {
+      "path": "target/p11-publico-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.persistencia.coletas.JdbcSqlServerColetaGatewaysTest.xml",
+      "sha256": "d8f52598c1382c4b463e0a0de5c7a7f4c2b30a7699ad7287c93d9fcfd642b168"
+    },
+    {
+      "path": "target/p11-publico-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.persistencia.coletas.JdbcSqlServerColetaTemporalGatewayTest.xml",
+      "sha256": "9e2549fc414e801dbb03683e284232209c26d74c6d9f7e3451a6f65a50e36ae3"
+    },
+    {
+      "path": "target/p11-publico-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.persistencia.controle.JdbcSqlServerTemporalPlanTest.xml",
+      "sha256": "03ab14ee3d5f9a7a4594f7889cc3817a3ece1b441602f4770a6825a44d9fe31c"
+    },
+    {
+      "path": "target/p11-publico-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.persistencia.controle.RuntimeJdbcBoundariesTest.xml",
+      "sha256": "44223122be3cf3375121f12b4c15ae2f87e52cef7313212e008b740b4bb35a47"
+    },
+    {
+      "path": "target/p11-publico-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.persistencia.cotacoes.JdbcSqlServerCotacaoGatewaysTest.xml",
+      "sha256": "4fc97cfdb90dfc6225772ed39ba708328459d7c2b731045a7a106690a6c1c936"
+    },
+    {
+      "path": "target/p11-publico-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.persistencia.fretes.JdbcSqlServerFreteGatewaysTest.xml",
+      "sha256": "d9bcf474d246acb9fb9b2ef6a00bbe63dd3e180f5077d1eeb42e950f9fdc3321"
+    },
+    {
+      "path": "target/p11-publico-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.persistencia.localizacaocargas.JdbcSqlServerLocalizacaoCargaGatewaysTest.xml",
+      "sha256": "32f24f53cd056c046ef2306e3694153bee40964babb7994702ed00990aec19e1"
+    },
+    {
+      "path": "target/p11-publico-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.persistencia.manifestos.JdbcSqlServerManifestoPromotionGatewayTest.xml",
+      "sha256": "60efda32bb157faeda17ddc8e3962e5c4d91c81dbd0a1e30934b2a7bf3cf4931"
+    },
+    {
+      "path": "target/p11-publico-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.persistencia.manifestos.JdbcSqlServerManifestoStagingGatewayTest.xml",
+      "sha256": "8896247d310febc1e479b9cc27765a679b3db3be225ae71b7d0036bfa4c2bba2"
+    },
+    {
+      "path": "target/p11-publico-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.persistencia.observabilidade.JdbcSqlServerObservabilityGatewayTest.xml",
+      "sha256": "7e35191f63960de4a048d6fb20cbe3072de895ee4ca358f706c993765818b72c"
+    },
+    {
+      "path": "target/p11-publico-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.persistencia.sombra.JdbcDataExportExtractionAuditTest.xml",
+      "sha256": "e431f25511ec6ec309b576b06258709a6c57d9ec0aa1d4cb27c34e5393d8c76d"
+    },
+    {
+      "path": "target/p11-publico-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.persistencia.staging.JdbcSqlServerStagingPromotionKernelTest.xml",
+      "sha256": "308d2bb417fb08c96726bcda53c975402da2b8acc0874753ad1a2e07219e85d4"
+    },
+    {
+      "path": "target/p11-publico-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.persistencia.usuarios.JdbcSqlServerUsuarioPromotionGatewayTest.xml",
+      "sha256": "285c2151cffb04541cb3b3c9606d36c5130034a7d8b70b4e0dc4e42e02dc8377"
+    },
+    {
+      "path": "target/p11-publico-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.persistencia.usuarios.JdbcSqlServerUsuarioStagingGatewayTest.xml",
+      "sha256": "10ab3cea623b13c238b706233ec9821f6e8c0dbaa666f0c7759174f1b49d2ea7"
+    },
+    {
+      "path": "target/p11-publico-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.qualificacao.QualificationJsonPathTest.xml",
+      "sha256": "8029a0227def304633805113e201cbc4cc155ef5346fd56da75de448068e55ee"
+    }
+  ]
+}

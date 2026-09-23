@@ -1,0 +1,3244 @@
+{
+  "stage": "types",
+  "httpStatus": 200,
+  "curlExit": 0,
+  "bytes": 42671,
+  "elapsedMilliseconds": 1339,
+  "failure": null,
+  "schema": {
+    "data": {
+      "__schema": {
+        "types": [
+          {
+            "name": "AccountingCostCenter",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "AccountingCostCenterCreateInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "AccountingCostCenterCreatePayload",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "AccountingCostCenterInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "AccountingCostCenterUpdateInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "AccountingCostCenterUpdatePayload",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "AccountingCreditReportSearchCreditsInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "AccountingCreditReportSearchInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "AccountingCreditReportSearchInstallmentsInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "AccountingCreditsReportAnalytical",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "AccountingCreditsReportAnalyticalGroup",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "AccountingCreditsReportAnalyticalGroupConnection",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "AccountingCreditsReportAnalyticalGroupEdge",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "AccountingCreditsReportAnalyticalRow",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "AccountingCreditsReportSynthetic",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "AccountingCreditsReportSyntheticRow",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "AccountingCreditsReportSyntheticRowConnection",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "AccountingCreditsReportSyntheticRowEdge",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "AccountingDebitReportSearchCostCentersInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "AccountingDebitReportSearchDebitsInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "AccountingDebitReportSearchInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "AccountingDebitReportSearchInstallmentsInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "AccountingDebitsReportAnalytical",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "AccountingDebitsReportAnalyticalGroup",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "AccountingDebitsReportAnalyticalGroupConnection",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "AccountingDebitsReportAnalyticalGroupEdge",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "AccountingDebitsReportAnalyticalRow",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "AccountingDebitsReportSynthetic",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "AccountingDebitsReportSyntheticRow",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "AccountingDebitsReportSyntheticRowConnection",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "AccountingDebitsReportSyntheticRowEdge",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "AccountingReportSearchPlanningManagementsInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "AccountingReportSearchTransactionsInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "AdValoremInvoiceRangesInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "AdditionalServiceInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "Address",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "AddressInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "AddressType",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "Agent",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "AgentLocation",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "AgentLocationCreateInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "AgentLocationCreatePayload",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "AgentLocationUpdateInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "AgentLocationUpdatePayload",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "AgentPriceTable",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "AgentPriceTableCreateInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "AgentPriceTableCreatePayload",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "AgentPriceTableUpdateInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "AgentPriceTableUpdatePayload",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "Aggregate",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "AggregateInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "AggregatePriceTableInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "Airline",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "AirlineInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "AirlinePriceRange",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "AirlinePriceRangeInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "AirlinePriceRangeUpdateInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "AirlinePriceRangeUpdatePayload",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "AirlinePriceTable",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "AirlinePriceTableConnection",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "AirlinePriceTableCreateInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "AirlinePriceTableCreatePayload",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "AirlinePriceTableEdge",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "AirlinePriceTableInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "AirlinePriceTableQueryInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "AirlinePriceTableUpdateInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "AirlinePriceTableUpdatePayload",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "AirlineSpecificTax",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "AirlineStretch",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "AirlineStretchCreateInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "AirlineStretchCreatePayload",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "AirlineStretchUpdateInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "AirlineStretchUpdatePayload",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "AirportInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "AttachmentInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "Bank",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "BankAccount",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "BankAccountConnection",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "BankAccountEdge",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "BankAccountInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "BankInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "BankPortfolio",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "BaseCostCenter",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "BaseDateTypeEnum",
+            "kind": "ENUM"
+          },
+          {
+            "name": "BasePlanningManagement",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "BasePlanningManagementInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "Batch",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "BatchConnection",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "BatchCreateInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "BatchEdge",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "BatchQueryInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "BillingStatusEnum",
+            "kind": "ENUM"
+          },
+          {
+            "name": "Boolean",
+            "kind": "SCALAR"
+          },
+          {
+            "name": "CalculationBasisTypeEnum",
+            "kind": "ENUM"
+          },
+          {
+            "name": "CalculationTypeEnum",
+            "kind": "ENUM"
+          },
+          {
+            "name": "CargoClassification",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "CargoClassificationConnection",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "CargoClassificationEdge",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "CargoClassificationInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "CheckInInspector",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "CheckInInspectorInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "CheckInOrder",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "CheckInOrderCommon",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "CheckInOrderCreateInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "CheckInOrderCreatePayload",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "CheckInOrderFinishInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "CheckInOrderFinishPayload",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "CheckInOrderInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "CheckInOrderUpdateInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "CheckInOrderUpdatePayload",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "CheckInOrderVolumeReaderInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "CheckInOrderVolumeReaderPayload",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "CheckingAccountDebit",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "CheckingAccountDebitCreateInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "CheckingAccountDebitCreatePayload",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "City",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "CityInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "CollectOverweightRangesInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "CommissionTypeEnum",
+            "kind": "ENUM"
+          },
+          {
+            "name": "Common",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "CommonInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "Company",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "CompanyConnection",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "CompanyCreateInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "CompanyCreatePayload",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "CompanyEdge",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "CompanyInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "CompanyUpdateInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "CompanyUpdatePayload",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "ComplementaryInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "ConfirmedInvoiceInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "Contact",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "ContactInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "ContactOccurrenceNotification",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "ContactOccurrenceNotificationInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "ContractTypeEnum",
+            "kind": "ENUM"
+          },
+          {
+            "name": "Corporation",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "CostCenter",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "CostCenterInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "Country",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "CreditBase",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "CreditBaseConnection",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "CreditBaseEdge",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "CreditBaseUpdateInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "CreditBaseUpdatePayload",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "CreditCustomerBillingInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "CreditCustomerBillingPayInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "CreditCustomerBillingPayPayload",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "CreditCustomerBillingUpdateInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "CreditCustomerBillingUpdatePayload",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "CreditInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "CreditInstallment",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "CreditInstallmentPayInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "CreditInstallmentPayPayload",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "CreditLinePaymentEnum",
+            "kind": "ENUM"
+          },
+          {
+            "name": "CreditManual",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "CreditManualCreatePayload",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "CreditManualInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "CreditManualUpdateInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "CreditManualUpdatePayload",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "Cte",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "CteConnection",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "CteEdge",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "CteInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "Cubage",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "CubageInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "Customer",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "CustomerClassificationInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "CustomerCreditLine",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "CustomerCreditLineConnection",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "CustomerCreditLineCreatePayload",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "CustomerCreditLineDestroyPayload",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "CustomerCreditLineEdge",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "CustomerCreditLineInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "CustomerCreditLineSearchInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "CustomerCreditLineUpdatePayload",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "CustomerFreightBase",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "CustomerFreightBaseConnection",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "CustomerFreightBaseEdge",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "CustomerFreightInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "CustomerFreightInvoice",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "CustomerInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "CustomerPerson",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "CustomerPersonPriceTableInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "CustomerPick",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "CustomerPickSchedule",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "CustomerPriceTable",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "CustomerPriceTableConnection",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "CustomerPriceTableCreateInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "CustomerPriceTableCreatePayload",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "CustomerPriceTableEdge",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "CustomerPriceTableUpdateInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "CustomerPriceTableUpdatePayload",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "DangerousProductInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "DeadlinePrediction",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "DeadlinePredictionInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "DebitAdvance",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "DebitAdvanceCreateInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "DebitAdvanceCreatePayload",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "DebitAdvanceUpdateInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "DebitAdvanceUpdatePayload",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "DebitBase",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "DebitBaseUpdateInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "DebitBaseUpdatePayload",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "DebitCostCenterInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "DebitInstallment",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "DebitInstallmentPayInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "DebitInstallmentPayPayload",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "DebitManual",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "DebitManualCreatePayload",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "DebitManualInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "DebitManualUpdateInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "DebitManualUpdatePayload",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "DeliveryOverweightRangesInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "DeliveryRegion",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "DeliveryRegionConnection",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "DeliveryRegionCorporation",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "DeliveryRegionCorporationInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "DeliveryRegionCorporationUpdatePayload",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "DeliveryRegionCreateInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "DeliveryRegionCreatePayload",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "DeliveryRegionEdge",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "DeliveryRegionLocation",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "DeliveryRegionLocationCreateInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "DeliveryRegionLocationCreatePayload",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "DeliveryRegionLocationInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "DeliveryRegionLocationUpdatePayload",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "DeliveryRegionPayer",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "DeliveryRegionPayerInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "DeliveryRegionPayerUpdatePayload",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "DeliveryRegionQueryInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "DeliveryRegionRecipient",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "DeliveryRegionRecipientInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "DeliveryRegionRecipientUpdatePayload",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "DeliveryRegionServiceAgent",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "DeliveryRegionServiceAgentCreatePayload",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "DeliveryRegionServiceAgentInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "DeliveryRegionServiceAgentUpdatePayload",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "DeliveryRegionUpdateInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "DeliveryRegionUpdatePayload",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "DocumentType",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "DocumentTypeConnection",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "DocumentTypeEdge",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "DocumentTypeInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "Driver",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "DriverContractTypeEnum",
+            "kind": "ENUM"
+          },
+          {
+            "name": "DriverDocument",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "DriverDocumentInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "DriverInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "DriverUpdateInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "DriverUpdatePayload",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "ExchangeRate",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "ExchangeRateConnection",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "ExchangeRateCreatePayload",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "ExchangeRateCurrencyTypeEnum",
+            "kind": "ENUM"
+          },
+          {
+            "name": "ExchangeRateEdge",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "ExchangeRateInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "ExchangeRateQueryInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "ExchangeRateUpdatePayload",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "ExternalControl",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "ExternalControlControllableTypeEnum",
+            "kind": "ENUM"
+          },
+          {
+            "name": "ExternalControlUpdateInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "ExternalControlUpdatePayload",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "FiscalDetail",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "Float",
+            "kind": "SCALAR"
+          },
+          {
+            "name": "FreightAddressInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "FreightAerialDetailInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "FreightAgent",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "FreightAgentInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "FreightAgileBatchCreatePayload",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "FreightAgileInvoice",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "FreightBase",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "FreightBaseConnection",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "FreightBaseCreateInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "FreightBaseCreatePayload",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "FreightBaseEdge",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "FreightBaseMutationInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "FreightBaseUpdatePayload",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "FreightClassification",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "FreightClassificationInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "FreightComplementaryCreatePayload",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "FreightConfirmInvoicePayload",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "FreightCreateCubageInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "FreightCreateDangerousProductInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "FreightCreateOperationalDetailInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "FreightCreateValueInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "FreightCte",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "FreightCteCommentInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "FreightCubage",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "FreightDeliveryPredictionInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "FreightDeliveryReportAnalytical",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "FreightDeliveryReportAnalyticalGroup",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "FreightDeliveryReportAnalyticalGroupConnection",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "FreightDeliveryReportAnalyticalGroupEdge",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "FreightDeliveryReportAnalyticalRow",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "FreightDeliveryReportSynthetic",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "FreightDeliveryReportSyntheticRow",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "FreightDeliveryReportSyntheticRowConnection",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "FreightDeliveryReportSyntheticRowEdge",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "FreightDiscountInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "FreightDiscountValueInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "FreightDiscountsInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "FreightDocument",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "FreightDocumentInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "FreightInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "FreightInvoice",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "FreightInvoiceInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "FreightMarginsReportAnalytical",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "FreightMarginsReportAnalyticalGroup",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "FreightMarginsReportAnalyticalGroupConnection",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "FreightMarginsReportAnalyticalGroupEdge",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "FreightMarginsReportAnalyticalRow",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "FreightMarginsReportSynthetic",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "FreightMarginsReportSyntheticRow",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "FreightMarginsReportSyntheticRowConnection",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "FreightMarginsReportSyntheticRowEdge",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "FreightOperationTypeEnum",
+            "kind": "ENUM"
+          },
+          {
+            "name": "FreightOperationalDetail",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "FreightOperationalDetailInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "FreightOperationalDetailsInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "FreightPerformanceReportAnalytical",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "FreightPerformanceReportAnalyticalGroup",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "FreightPerformanceReportAnalyticalGroupConnection",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "FreightPerformanceReportAnalyticalGroupEdge",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "FreightPerformanceReportAnalyticalRow",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "FreightPerformanceReportSynthetic",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "FreightPerformanceReportSyntheticRow",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "FreightPerformanceReportSyntheticRowConnection",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "FreightPerformanceReportSyntheticRowEdge",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "FreightRedispatchInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "FreightSchedule",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "FreightScheduleConnection",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "FreightScheduleCreatePayload",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "FreightScheduleEdge",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "FreightScheduleInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "FreightScheduleQueryInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "FreightSearchFreightsInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "FreightSearchInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "FreightStayInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "FreightTotalsReportAnalytical",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "FreightTotalsReportAnalyticalGroup",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "FreightTotalsReportAnalyticalGroupConnection",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "FreightTotalsReportAnalyticalGroupEdge",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "FreightTotalsReportAnalyticalRow",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "FreightTotalsReportSynthetic",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "FreightTotalsReportSyntheticRow",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "FreightTotalsReportSyntheticRowConnection",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "FreightTotalsReportSyntheticRowEdge",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "FreightValue",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "FreightValueInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "FuelTypeEnum",
+            "kind": "ENUM"
+          },
+          {
+            "name": "GrisInvoiceRangesInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "ID",
+            "kind": "SCALAR"
+          },
+          {
+            "name": "ISO8601Date",
+            "kind": "SCALAR"
+          },
+          {
+            "name": "ISO8601DateTime",
+            "kind": "SCALAR"
+          },
+          {
+            "name": "Individual",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "IndividualConnection",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "IndividualCreateInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "IndividualCreatePayload",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "IndividualEdge",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "IndividualInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "IndividualUpdateInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "IndividualUpdatePayload",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "Installment",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "Int",
+            "kind": "SCALAR"
+          },
+          {
+            "name": "IntegrationBillingTypeEnum",
+            "kind": "ENUM"
+          },
+          {
+            "name": "IntegrationRiskManagerTrip",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "InvoiceBase",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "InvoiceBaseConnection",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "InvoiceBaseEdge",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "InvoiceBaseInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "InvoiceCubage",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "InvoiceDeclarationCreatePayload",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "InvoiceDeclarationUpdatePayload",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "InvoiceNfCreatePayload",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "InvoiceNfInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "InvoiceNfUpdatePayload",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "InvoiceNfeCreatePayload",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "InvoiceNfeInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "InvoiceNfeUpdatePayload",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "InvoiceOccurrence",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "InvoiceOccurrenceCreatePayload",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "InvoiceOccurrenceInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "InvoiceOccurrenceScheduleInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "InvoiceOtherCreatePayload",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "InvoiceOtherUpdatePayload",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "InvoiceProductInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "InvoiceQueryInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "InvoiceTypeEnum",
+            "kind": "ENUM"
+          },
+          {
+            "name": "IssRate",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "Itinerary",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "ItineraryDocument",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "ItineraryDocumentCreateInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "ItineraryDocumentCreatePayload",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "ItineraryUpdateInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "ItineraryUpdatePayload",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "JSON",
+            "kind": "SCALAR"
+          },
+          {
+            "name": "KeyTypeEnum",
+            "kind": "ENUM"
+          },
+          {
+            "name": "LocationInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "LogisticGroup",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "LogisticGroupConnection",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "LogisticGroupCreatePayload",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "LogisticGroupDestroyPayload",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "LogisticGroupDocument",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "LogisticGroupDocumentDestroyPayload",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "LogisticGroupDocumentUpdateInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "LogisticGroupDocumentUpdatePayload",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "LogisticGroupEdge",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "LogisticGroupInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "LogisticGroupUpdatePayload",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "Mailbag",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "MailbagCreatePayload",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "MailbagInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "Manifest",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "ManifestAnalysisReportAnalytical",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "ManifestAnalysisReportAnalyticalGroup",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "ManifestAnalysisReportAnalyticalGroupConnection",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "ManifestAnalysisReportAnalyticalGroupEdge",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "ManifestAnalysisReportAnalyticalRow",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "ManifestAnalysisReportSynthetic",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "ManifestAnalysisReportSyntheticRow",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "ManifestAnalysisReportSyntheticRowConnection",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "ManifestAnalysisReportSyntheticRowEdge",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "ManifestAnalysisSearchAggregateManifestsInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "ManifestAnalysisSearchInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "ManifestAnalysisSearchManifestsInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "ManifestAnalysisSearchVehiclesInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "ManifestCloseInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "ManifestCloseOperationalInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "ManifestCloseOperationalPayload",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "ManifestClosePayload",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "ManifestCreateInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "ManifestCreatePayload",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "ManifestFreightReferenceInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "ManifestInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "ManifestItem",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "ManifestItemTypeEnum",
+            "kind": "ENUM"
+          },
+          {
+            "name": "ManifestItemsCreateInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "ManifestItemsCreatePayload",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "ManifestMinimumFreightRelease",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "ManifestMinimumFreightReleaseInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "ManifestRelationReportAnalytical",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "ManifestRelationReportAnalyticalGroup",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "ManifestRelationReportAnalyticalGroupConnection",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "ManifestRelationReportAnalyticalGroupEdge",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "ManifestRelationReportAnalyticalRow",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "ManifestRelationReportSynthetic",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "ManifestRelationReportSyntheticRow",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "ManifestRelationReportSyntheticRowConnection",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "ManifestRelationReportSyntheticRowEdge",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "ManifestRelationSearchAggregateManifestsInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "ManifestRelationSearchInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "ManifestRelationSearchManifestsInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "ManifestRelationSearchVehiclesInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "ManifestSeal",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "ManifestSealInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "ManifestSearchUnloadingRecipientsInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "ManifestStartTransportInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "ManifestStartTransportPayload",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "ManifestUpdateInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "ManifestUpdatePayload",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "ManifestsLocation",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "ManifestsLocationCreatePayload",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "ManifestsLocationInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "Mutation",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "Nfse",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "NfseConnection",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "NfseEdge",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "NfseInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "NfseService",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "Occurrence",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "OccurrenceGroupContactNotification",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "OccurrenceGroupContactNotificationInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "OwnerTypeEnum",
+            "kind": "ENUM"
+          },
+          {
+            "name": "Package",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "PackageConnection",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "PackageCreatePayload",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "PackageEdge",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "PackageInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "PackageUpdatePayload",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "PageInfo",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "PaymentMethodEnum",
+            "kind": "ENUM"
+          },
+          {
+            "name": "Person",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "PersonBankAccount",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "PersonBankAccountInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "PersonBankPixInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "PersonEmailSettings",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "PersonEmailSettingsInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "PersonHelperInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "PersonPriceTable",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "PersonType",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "PersonTypeEnum",
+            "kind": "ENUM"
+          },
+          {
+            "name": "PersonTypeInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "Pick",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "PickAddress",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "PickCancellationInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "PickCancellationPayload",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "PickConnection",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "PickCreatePayload",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "PickDocument",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "PickDocumentInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "PickEdge",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "PickInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "PickItem",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "PickItemAddress",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "PickItemAddressInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "PickItemCubage",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "PickItemCubageInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "PickItemInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "PickItemInvoice",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "PickItemInvoiceInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "PickMailbagCreatePayload",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "PickMailbagInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "PickMailbagItem",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "PickMailbagItemInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "PickMutationInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "PickReportAnalytical",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "PickReportAnalyticalGroup",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "PickReportAnalyticalGroupConnection",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "PickReportAnalyticalGroupEdge",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "PickReportAnalyticalRow",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "PickReportSearchInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "PickReportSearchPickItemsInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "PickReportSearchPicksInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "PickReportSynthetic",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "PickReportSyntheticRow",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "PickReportSyntheticRowConnection",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "PickReportSyntheticRowEdge",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "PickType",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "PickTypeConnection",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "PickTypeEdge",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "PickTypeInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "PickUpdatePayload",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "PlanningManagementBase",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "PlanningManagementCreditCreateInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "PlanningManagementCreditCreatePayload",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "PlanningManagementCreditUpdateInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "PlanningManagementCreditUpdatePayload",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "PlanningManagementDebitCreateInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "PlanningManagementDebitCreatePayload",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "PlanningManagementDebitUpdateInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "PlanningManagementDebitUpdatePayload",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "PlanningManagementInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "PreBoarding",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "PreBoardingConnection",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "PreBoardingCreatePayload",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "PreBoardingDestroyPayload",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "PreBoardingDocument",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "PreBoardingDocumentInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "PreBoardingEdge",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "PreBoardingInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "PreBoardingMutationInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "PriceRange",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "PriceRangeInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "PriceRangeUpdateInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "PriceRangeUpdatePayload",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "PriceTable",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "PriceTableInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "PriceTableRegion",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "PriceTableRegionCity",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "PriceTableRegionCityInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "PriceTableRegionCityUpdatePayload",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "PriceTableRegionConnection",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "PriceTableRegionCreateInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "PriceTableRegionCreatePayload",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "PriceTableRegionEdge",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "PriceTableRegionPostalCode",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "PriceTableRegionPostalCodeCreateInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "PriceTableRegionPostalCodeUpdateInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "PriceTableRegionPostalCodeUpdatePayload",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "PriceTableRegionQueryInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "PriceTableRegionUpdateInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "PriceTableRegionUpdatePayload",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "ProductClassification",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "ProductClassificationConnection",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "ProductClassificationEdge",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "ProductClassificationInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "Query",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "Quote",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "QuoteCreateInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "QuoteCreatePayload",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "QuoteDestroyPayload",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "QuoteReportAnalytical",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "QuoteReportAnalyticalGroup",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "QuoteReportAnalyticalGroupConnection",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "QuoteReportAnalyticalGroupEdge",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "QuoteReportAnalyticalRow",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "QuoteReportSynthetic",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "QuoteReportSyntheticRow",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "QuoteReportSyntheticRowConnection",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "QuoteReportSyntheticRowEdge",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "QuoteSearchInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "QuoteSearchQuoteStretchBidsInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "QuoteSearchQuotesInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "QuoteStretchBid",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "QuoteStretchBidInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "RangeTypeEnum",
+            "kind": "ENUM"
+          },
+          {
+            "name": "RedispatchCarrier",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "RedispatchOverweightRangesInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "RedispatchPriceTable",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "RedispatchPriceTableCreateInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "RedispatchPriceTableCreatePayload",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "RedispatchPriceTableInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "RedispatchPriceTableUpdateInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "RedispatchPriceTableUpdatePayload",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "RedispatchStretchCreateInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "RedispatchStretchCreatePayload",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "RedispatchStretchUpdateInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "RedispatchStretchUpdatePayload",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "ResultCenter",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "ResultCenterCreateInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "ResultCenterCreatePayload",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "ResultCenterInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "ResultCenterUpdateInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "ResultCenterUpdatePayload",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "RiskManagerTypeEnum",
+            "kind": "ENUM"
+          },
+          {
+            "name": "ScenarioServiceType",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "SchedulingItemScenario",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "SchedulingOperation",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "SchedulingOperationCreateManifestInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "SchedulingOperationCreateManifestPayload",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "SchedulingOperationCreatePayload",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "SchedulingOperationInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "SchedulingOperationMutationInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "SchedulingOperationUpdateInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "SchedulingOperationUpdatePayload",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "SchedulingService",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "SchedulingServiceAddress",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "SchedulingServiceAddressInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "SchedulingServiceConnection",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "SchedulingServiceCreatePayload",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "SchedulingServiceEdge",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "SchedulingServiceGlobalizedTypeEnum",
+            "kind": "ENUM"
+          },
+          {
+            "name": "SchedulingServiceInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "SchedulingServiceMutationInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "SchedulingServiceQueryInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "SchedulingServiceType",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "SchedulingServiceUpdatePayload",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "SecCatOverweightRangesInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "SellerCommission",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "SellerCommissionInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "SellerCommissionReportAnalytical",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "SellerCommissionReportAnalyticalGroup",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "SellerCommissionReportAnalyticalGroupConnection",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "SellerCommissionReportAnalyticalGroupEdge",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "SellerCommissionReportAnalyticalRow",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "SellerCommissionReportSynthetic",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "SellerCommissionReportSyntheticRow",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "SellerCommissionReportSyntheticRowConnection",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "SellerCommissionReportSyntheticRowEdge",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "SellerCommissionSearchAccountingCreditBillingsInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "SellerCommissionSearchFreightsInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "SellerCommissionSearchInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "SellerCommissionSearchSellerPaymentsInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "ServiceType",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "ServiceTypeEnum",
+            "kind": "ENUM"
+          },
+          {
+            "name": "ServiceTypeInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "Ship",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "ShipCreatePayload",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "ShipInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "ShipUpdatePayload",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "ShippingContainer",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "ShippingContainerInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "ShippingItem",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "ShippingItemInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "ShippingItemUpdatePayload",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "ShippingProcess",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "ShippingProcessConnection",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "ShippingProcessCreateFreightInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "ShippingProcessCreateFreightPayload",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "ShippingProcessCreateInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "ShippingProcessCreatePayload",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "ShippingProcessDestroyPayload",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "ShippingProcessEdge",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "ShippingProcessItemScenario",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "ShippingProcessQueryInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "ShippingProcessUpdateInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "ShippingProcessUpdatePayload",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "State",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "StateTypeEnum",
+            "kind": "ENUM"
+          },
+          {
+            "name": "Stretch",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "StretchAdditionalServiceInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "StretchAirlineSpecificTax",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "StretchAirlineSpecificTaxInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "StretchConnection",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "StretchCreateInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "StretchCreatePayload",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "StretchEdge",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "StretchInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "StretchStayInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "StretchUpdateInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "StretchUpdatePayload",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "String",
+            "kind": "SCALAR"
+          },
+          {
+            "name": "Supplier",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "SupplierInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "ThirdPartyCte",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "ThirdPartyCteConnection",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "ThirdPartyCteEdge",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "ThirdPartyCteInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "ThirdPartyFreight",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "ThirdPartyFreightInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "Ticket",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "TicketCreateInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "TicketCreatePayload",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "TimeChargeEnum",
+            "kind": "ENUM"
+          },
+          {
+            "name": "TimeUnitEnum",
+            "kind": "ENUM"
+          },
+          {
+            "name": "TollPlaza",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "TollPlazaConnection",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "TollPlazaDetail",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "TollPlazaDetailInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "TollPlazaEdge",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "TollPlazaInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "TollPlazaQueryInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "TransportOperation",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "TransportRoute",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "TransportRouteAdvance",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "TransportRouteAdvanceCreateInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "TransportRouteConnection",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "TransportRouteCreateInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "TransportRouteCreatePayload",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "TransportRouteEdge",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "TransportRouteInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "TransportRouteLocation",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "TransportRouteLocationCreateInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "TransportRouteMdfe",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "TransportRouteMdfeCreateInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "TransportRouteMdfeStateCreateInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "TransportRouteQueryInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "TransportRouteTollPlaza",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "TransportRouteTollPlazaInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "TransportRouteTollPlazaUpdatePayload",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "TransportRouteTrajectory",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "TransportRouteTrajectoryInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "TransportRouteUpdateInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "TransportRouteUpdatePayload",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "UserBase",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "UserGuest",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "UserGuestInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "UserMobile",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "UserMobileInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "UserSearchInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "Vehicle",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "VehicleBase",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "VehicleConnection",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "VehicleCreateInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "VehicleCreatePayload",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "VehicleDocument",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "VehicleDocumentInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "VehicleEdge",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "VehicleEnum",
+            "kind": "ENUM"
+          },
+          {
+            "name": "VehicleInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "VehicleTypeInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "VehicleUpdateInput",
+            "kind": "INPUT_OBJECT"
+          },
+          {
+            "name": "VehicleUpdatePayload",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "VolumeCodeTypeEnum",
+            "kind": "ENUM"
+          },
+          {
+            "name": "__Directive",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "__DirectiveLocation",
+            "kind": "ENUM"
+          },
+          {
+            "name": "__EnumValue",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "__Field",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "__InputValue",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "__Schema",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "__Type",
+            "kind": "OBJECT"
+          },
+          {
+            "name": "__TypeKind",
+            "kind": "ENUM"
+          }
+        ]
+      },
+      "debit": {
+        "name": "AccountingDebitsReportAnalytical",
+        "kind": "OBJECT",
+        "description": "Resultado do relatório analítico de contas a pagar",
+        "fields": [
+          {
+            "name": "groupedCollection",
+            "description": null,
+            "type": {
+              "kind": "OBJECT",
+              "name": "AccountingDebitsReportAnalyticalGroupConnection",
+              "ofType": null
+            }
+          },
+          {
+            "name": "groups",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "JSON",
+              "ofType": null
+            }
+          },
+          {
+            "name": "totals",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "JSON",
+                "ofType": null
+              }
+            }
+          }
+        ]
+      },
+      "credit": {
+        "name": "CreditBaseConnection",
+        "kind": "OBJECT",
+        "description": "The connection type for CreditBase.",
+        "fields": [
+          {
+            "name": "edges",
+            "description": "A list of edges.",
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "CreditBaseEdge",
+                "ofType": null
+              }
+            }
+          },
+          {
+            "name": "nodes",
+            "description": "A list of nodes.",
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "CreditBase",
+                "ofType": null
+              }
+            }
+          },
+          {
+            "name": "pageInfo",
+            "description": "Information to aid in pagination.",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "PageInfo",
+                "ofType": null
+              }
+            }
+          }
+        ]
+      },
+      "freight": {
+        "name": "FreightBaseConnection",
+        "kind": "OBJECT",
+        "description": "The connection type for FreightBase.",
+        "fields": [
+          {
+            "name": "edges",
+            "description": "A list of edges.",
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "FreightBaseEdge",
+                "ofType": null
+              }
+            }
+          },
+          {
+            "name": "nodes",
+            "description": "A list of nodes.",
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "FreightBase",
+                "ofType": null
+              }
+            }
+          },
+          {
+            "name": "pageInfo",
+            "description": "Information to aid in pagination.",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "PageInfo",
+                "ofType": null
+              }
+            }
+          }
+        ]
+      },
+      "invoice": {
+        "name": "InvoiceBaseConnection",
+        "kind": "OBJECT",
+        "description": "The connection type for InvoiceBase.",
+        "fields": [
+          {
+            "name": "edges",
+            "description": "A list of edges.",
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "InvoiceBaseEdge",
+                "ofType": null
+              }
+            }
+          },
+          {
+            "name": "nodes",
+            "description": "A list of nodes.",
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "InvoiceBase",
+                "ofType": null
+              }
+            }
+          },
+          {
+            "name": "pageInfo",
+            "description": "Information to aid in pagination.",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "PageInfo",
+                "ofType": null
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

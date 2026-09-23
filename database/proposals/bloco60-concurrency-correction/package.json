@@ -1,0 +1,33 @@
+{
+  "priorHttp": 71,
+  "status": "OFFLINE_CORRECTED_PHYSICAL_WINDOW_REQUIRED",
+  "priorSqlcmd": 160,
+  "physicalExecuted": false,
+  "block": 60,
+  "files": [
+    {
+      "path": "scripts/validation/Bloco60ConcurrentPair.psm1",
+      "sha256": "eb965969461d7aa3c888c1bcd0faef75695d3e5279760e5c3ebf47defd84d15c"
+    },
+    {
+      "path": "scripts/validation/Test-Bloco60ConcurrentPair.ps1",
+      "sha256": "b804a531a88545903483ad175e283a160979202e473f7e86b7ac91425b21916c"
+    },
+    {
+      "path": "scripts/validation/Invoke-Bloco60ConcurrencyCorrection.ps1",
+      "sha256": "142597d22600cf4151a1532b3b016f8610ac665995e79b02faa9b37aa5a79352"
+    },
+    {
+      "path": "database/proposals/bloco60-concurrency-correction/barrier-ready.sql",
+      "sha256": "1031a19955b36cc15370c64ebbb82e0da0bf89ce69e44730da3625ce8e21ffb1"
+    },
+    {
+      "path": "database/proposals/bloco60-concurrency-correction/README.md",
+      "sha256": "bd2732ad7986b8e107f19358c0ecbd618b4bb79ef9a4085fb6c3ce168b8f7bc7"
+    }
+  ],
+  "priorJvms": 77,
+  "approvalRecorded": false,
+  "automaticRenewals": 0,
+  "remainingJvms": 3
+}

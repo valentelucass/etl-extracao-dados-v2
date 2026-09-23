@@ -1,0 +1,2197 @@
+{
+  "version": 1,
+  "status": "LOCAL_REGRESSION_PASS_PHYSICAL_PENDING",
+  "sourcePomSha256": "ff2d9ee64cefd61066b920c47c3022a080b6ba34a4a1d53b5af48ba69a2ff0f3",
+  "externalNetworkCalls": 0,
+  "databaseCalls": 0,
+  "nativeAuthenticationTested": false,
+  "fullPhysicalVerify": false,
+  "coverageGateReexecuted": false,
+  "packageBuilt": true,
+  "packageExecuted": false,
+  "newAcceptances": 0,
+  "tests": {
+    "errors": 0,
+    "exactHistoricalCaseMultiplicity": true,
+    "skipped": 4,
+    "priorTests": 2162,
+    "addedCases": [],
+    "total": 2162,
+    "sameHistoricalSkips": true,
+    "failures": 0,
+    "classes": 247,
+    "missingCaseMultiplicity": [],
+    "reports": [
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.arquitetura.ArchitectureRulesTest.xml",
+        "sha256": "6a721139d5fdbdb3abe2e75198a4d3c5459b52a0a0819196b4d228f2a2973a72"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.arquitetura.CutoverTopologyContractTest.xml",
+        "sha256": "c364829f35a7f19d02ed65348f429056813fa27499f654e7c8a725bd66b5a6bb"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.bootstrap.AnalyticLaboratoryCollectionContractTest.xml",
+        "sha256": "34b01453a2ab81744f9c708d3c7c44943205d4f4c62553c9254ceaf5cdad9434"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.bootstrap.AnalyticLaboratoryFieldGateTest.xml",
+        "sha256": "0f97081fb4ced9233b7a01f7c530f5ef006e80511bdd7860d9761d5e0dd21fd8"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.bootstrap.AnalyticLaboratoryOptionsTest.xml",
+        "sha256": "d42960231263ea39769d59950b6d899ec8f775d39bd640ac4607e8bf81b61877"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.bootstrap.AnalyticLaboratoryQuoteMapperTest.xml",
+        "sha256": "b69504cdb407123578d220a4f9c3053fc797c12a61b4115ba1966febb72840c2"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.bootstrap.AnalyticLaboratoryRasterParserTest.xml",
+        "sha256": "119749edc1c470d05f530eee0e250c873eca1199167f8e1c7730ed92fcbb8167"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.bootstrap.AnalyticLaboratoryRasterTransportTest.xml",
+        "sha256": "5f8d42f27aad555be87c841b49001e153fa79ac9e45b33897041cb94430ec4f2"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.bootstrap.AnalyticScenarioReplayLineageTest.xml",
+        "sha256": "e4687ad0fb0937ddc05e5b42fb093f141527957d7808f568733025b7e206a1b2"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.bootstrap.DeclaredCapturePagesTest.xml",
+        "sha256": "6227cbcdbc255596db0a3969cff3a0a3b8f474eaf938714341a01e83e453caab"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.bootstrap.ExpansionLaboratoryContractTest.xml",
+        "sha256": "7aaa9751747492fb8bada61883b5cb3d3dbb2ae4a0cdb218228b37f18e9e3577"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.bootstrap.ExpansionLaboratoryFieldRejectionTest.xml",
+        "sha256": "99837ebfd12da493a41667a66a7918576c1a04f6871e689a37abbeceb93878bb"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.bootstrap.ExpansionLaboratoryMainTest.xml",
+        "sha256": "c3a7c3ab7209c4ffddf8f15e973fabfc142431ea5a21a13c6033c881bb71b8a5"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.bootstrap.IntegralArtifactAdmissionTest.xml",
+        "sha256": "97e1c5f1080381c9d5b66d1702abac06d37411ecf304bccf10fb546eede51304"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.bootstrap.IntegralArtifactBoundaryTest.xml",
+        "sha256": "27a6977cf643e554c2b3896a3f3e46400b299c4d5c6b8507d5bdfd6937a32d7e"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.bootstrap.IntegralSupportPreflightTest.xml",
+        "sha256": "243548e9aa483f1b4e8d1e7b6e95cc07fa979b9284e630eeb9024abcd07ef040"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.bootstrap.LocalArtifactSequenceTest.xml",
+        "sha256": "5eb74f1b0ca4265246542f97aa77c4655eb62467e1307d73933380f558772b3a"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.bootstrap.LocalFiveVerticalRuntimeTest.xml",
+        "sha256": "c2e1878b741dd6f07e98233d779783f5b1b7ee1ad37d9240f6d064acd2ccedce"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.bootstrap.LocalizacaoCharacterizationPathTest.xml",
+        "sha256": "7e1db6f3160c054e33a0c1d64791bd50aae1ecba9dd759194821da82415b0113"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.bootstrap.MainTest.xml",
+        "sha256": "7ea72a0b00e86a78dcb2fb70e36fac6e62ae8ceb915d02f0c842c30c6102444b"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.bootstrap.QualificationArtifactInputTest.xml",
+        "sha256": "1dbdcdfbc79fdcf505cbda99144193280660c57574c5e2a6baecd42ceb3c3a14"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.bootstrap.QualificationArtifactPreflightTest.xml",
+        "sha256": "4d3cd4caef25eb16b75bbe2d342a0239b09e28e7daa2f14fbe163330881d852d"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.bootstrap.QualificationArtifactScenarioRefusalTest.xml",
+        "sha256": "d4f8b5ff2a5e2aabb3c3d1b91035f526aca00efc42c6aae7e1d82a1fd3815bbf"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.bootstrap.QualificationBoundedContractsTest.xml",
+        "sha256": "fb9a8cf46f3bc45df3646e0a764e4acdf20bf7fc230ab1674f1ec50bae5582bc"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.bootstrap.QualificationComparatorTest.xml",
+        "sha256": "a8344e0ae9064994ae6ede95b369d00bee080bda8e9cc0522c58343164494ea7"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.bootstrap.QualificationContractTest.xml",
+        "sha256": "4fcee8a7a5fd4ab28346cccd62bf16d4501d5150a850007a595a7ee491f9fbb0"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.bootstrap.QualificationControlFilesTest.xml",
+        "sha256": "60481c9867345b6f90b56ffdd026238f3b06e01d81218b4c93c7b34274967828"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.bootstrap.QualificationJournalTest.xml",
+        "sha256": "7bed89c2e0c0286e8ebe748a7133278c6ba8c050a87492ddabedae9fc2bf7606"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.bootstrap.QualificationOracleTest.xml",
+        "sha256": "aea3fb43697ad4637f7e4aafe74c723ea2c1615ad6486c8441aa078f1b91b268"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.bootstrap.QualificationPhysicalMetadataTest.xml",
+        "sha256": "eb002ebce917066071c6315a45c36e0695d75773986f7b884dd3a1341572c850"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.bootstrap.QualificationProcessEvidenceTest.xml",
+        "sha256": "c4350f8de20de0b3ce903f6adcfed23d2a324b8f049fb1485eb3ba31f199d9e9"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.bootstrap.QualificationProfileArtifactTest.xml",
+        "sha256": "768e2f044345f8158c6937a1ee98cde1ba2937b3ec0bf02ce222dfe51f6cf1de"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.bootstrap.QualificationRasterArtifactTest.xml",
+        "sha256": "08c48d11ad02145bdc56ea9bb50ac1e0d551f0b131e28582542535a8d8f66709"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.bootstrap.QualificationSequenceSupervisorAssertionTest.xml",
+        "sha256": "f875f1a37f895c1f38de0392ba612b35ef7a6623bfe6f2b85b9600d18ded1e9e"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.bootstrap.QualificationSupervisorTest.xml",
+        "sha256": "813e85314c7aef0fbf611235f6c4aa220ac2b2dacb6bd28b4c39cedfbfbdb7e4"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.bootstrap.QualificationSweepPlannerTest.xml",
+        "sha256": "3feac0317550587054bd401be675e36b9580df1d834d0b1d2a80550fa71c4af6"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.bootstrap.QualificationTemporalMatrixTest.xml",
+        "sha256": "f446f2f1b861eb3953326122cafc71e5779a56f0b11874f5bd1fdb0d6075e9e2"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.bootstrap.RelationalLaboratoryContractTest.xml",
+        "sha256": "0a593deb62b1f7e5a4ba11672e6f7d6092b1d27156d431af0151b5f81e242d84"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.bootstrap.RuntimeCancellationControlTest.xml",
+        "sha256": "fc72330fbc0b5e5ee5687888bf5847fb4772e017d8f0ca90bf71107947bc6b75"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.bootstrap.RuntimeCompositionRootTest.xml",
+        "sha256": "5ca9bfc345402f13af570d443158cf4a51bc19e4c7162318c3734ddb30144c62"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.bootstrap.RuntimeFiveVerticalPipelineTest.xml",
+        "sha256": "aaedbf3ca576f9fdff13baf21ec1e2ce9ad16d7b9a8cb31bb6dbd932313202b0"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.bootstrap.RuntimeLaboratoryContractTest.xml",
+        "sha256": "300ca0673f8c7fd4c27091d3497a7e9881405de4eceddae70b144fc5416a3de9"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.bootstrap.RuntimeOperationalExecutionTest.xml",
+        "sha256": "c23be5d0fd4a8fa0996d101c6c3162849af1bbe7067d15dfbc30738d160f94d1"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.bootstrap.RuntimeRequiredDriftAlertTest.xml",
+        "sha256": "1cf2ab534fb2808b53fe63b39170c6e743f568c394397866270cc66fbf95e746"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.bootstrap.RuntimeSqlObservationTest.xml",
+        "sha256": "5b0f788b5190e9b877220c7fffdfaf95d1be5f9c88023fa62293254150938ac1"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.bootstrap.RuntimeTemporalBindingTest.xml",
+        "sha256": "07d51ab03ea5424a5b26535a765879747e0a5eaff61e67e6b4c20389e89810b9"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.bootstrap.RuntimeUsersIntegrationTest.xml",
+        "sha256": "7fde7f72f484b9683c45c973d390299b319910c1ce398e2a679ad49b44e3e3ba"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.bootstrap.RuntimeUsersOperationalRequestTest.xml",
+        "sha256": "dc5a6df641f34409d51dfd287761b471c9d1a579328fcf343990be8115bb33e2"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.bootstrap.RuntimeUsersPhysicalProbeTest.xml",
+        "sha256": "9ade7ae685b9d542175f89885992ec62889e5e9fd04ef3661b96028fcf5902c1"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.bootstrap.RuntimeUsersSessionTest.xml",
+        "sha256": "682e5205aff0541d228f92b34ca1245b81a42c99df2d9e08ab35cad1f39b3e5a"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.bootstrap.SequenceMeasurementsTest.xml",
+        "sha256": "660d3ecc2a263aaf04a48ffa82a616e6a579fcace94d5297a17292502679c8e4"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.bootstrap.SequenceScaleAdmissionTest.xml",
+        "sha256": "f5c0d0d4e3f3828db63dd4cf798663754bfe6896d7734f8007fd8c08e0828d57"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.bootstrap.StatesRasterDecimalTest.xml",
+        "sha256": "30e19282378782b12aa808d02b44bdb02bfb617c82d699a8964de9c2e6623e6c"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.contratos.bloco58.ColetasCharacterizationTest.xml",
+        "sha256": "da79e6c46612360d308ed828e983af762be54f85d4973a1160471674accedeb2"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.contratos.bloco58.ColetasCurrentTemporalTest.xml",
+        "sha256": "0263c6805567528554d1449794d685991a563e43dbf3c89399041e159be30bc4"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.contratos.bloco58.ColetasTemporalCharacterizationTest.xml",
+        "sha256": "cb3b93b281a4d269c71e849d4adba6f80620b88842c87282928a201f83de6459"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.contratos.bloco58.ColetasTraversalCharacterizationTest.xml",
+        "sha256": "1c7718d3a667dc36567d8b9e950439166c09e381cf6efc89dd738a0ba8306111"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.contratos.bloco58.LocalCharacterizationBoundsTest.xml",
+        "sha256": "d7936184a4891aa54a2d2ae5ac4d5ddec4af1221ba68a00507b7db6036ee67c8"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.contratos.bloco58.UsuariosCharacterizationTest.xml",
+        "sha256": "2f782d2988f2f22125c64416354686677f85686c52e350348cb1bc7f3fa2f592"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.contratos.bloco58.UsuariosTraversalCharacterizationTest.xml",
+        "sha256": "f53676d05cdb518f0149f79d8952f9a291fa188ec895fbe4e357e2fc77f67bbc"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.contratos.bloco62.SourceObservationBoundaryTest.xml",
+        "sha256": "79f8a449b51a740a664d8f3aadb417fd38eea3996438ba9360bd829de5b9be72"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.contratos.caracterizacao.CharacterizationClosedSchemaTest.xml",
+        "sha256": "66dea307625b2f239ff945e1b4767b7b8528f50d43c7ff5ddbb68577f750614d"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.contratos.caracterizacao.CharacterizationDeterminismTest.xml",
+        "sha256": "08926e54b4c09e1c9c4fea2f003825b5919a12fdb490707c7cd08fd4dd6ee2e7"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.contratos.caracterizacao.CharacterizationFoundationTest.xml",
+        "sha256": "432009d3ed6386265600158c56a3e94acd2529cfa6c9585cacea584eca2142c0"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.contratos.caracterizacao.CharacterizationOfflineBoundaryTest.xml",
+        "sha256": "3b9dd589c6d691d7e80dc372cca2b6a3d4741bb1bc8a9549893ad50972193303"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.contratos.caracterizacao.qfnd02.Qfnd02ClosedSchemaTest.xml",
+        "sha256": "11588a6e8a428db07f39732233ef399f52fbfdc5e18ca4d4bbac6bc66a2eed67"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.contratos.caracterizacao.qfnd02.Qfnd02DeterminismTest.xml",
+        "sha256": "fc1d6806af8230bb401fc8e17846424bda60a478e1402752fa8234a74ef12028"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.contratos.caracterizacao.qfnd02.Qfnd02FoundationTest.xml",
+        "sha256": "2a4294ce410863612253eef9015e379fdf94f9d45e7e774dc3626ca2d271dd1f"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.contratos.caracterizacao.qfnd02.Qfnd02MutationTest.xml",
+        "sha256": "dae2812f765e4329b486191c3a1efb2825ac4a02bbd97113e6e72fc683d6332c"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.contratos.caracterizacao.qfnd02.Qfnd02OfflineBoundaryTest.xml",
+        "sha256": "c02e6d7b9010489e68ca20231a82aea5b19f7aa1b09c3ed84ab39d71a171a8f0"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.contratos.caracterizacao.qfnd02.Qfnd02Q01ImmutabilityTest.xml",
+        "sha256": "15bd776ac23e17888bb2cd7e8dd7f438ef993563a5adc984e40609ac9bb3ecc6"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.contratos.caracterizacao.StrictUtf8JsonLoaderTest.xml",
+        "sha256": "caaf1c91f35bc723acc984af03470be0a365ae2b72174d281fe30ec48a5027a5"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.contratos.Contract4924ConfigurationTest.xml",
+        "sha256": "9e9da9c228c7bfb76550e8c1c75f90ef847e8770bf6ce616dc2700eb70121547"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.contratos.Contract4924DataExportProbeTest.xml",
+        "sha256": "4ba08013db09209ae705df9cd77fa7a1fcdc6f85b40a6439e0d23269207d9efd"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.contratos.ContractCrossDomainComparatorTest.xml",
+        "sha256": "fa4f065da2608cbc856f5ef29cc42af86fc77506b9d6fa02a742dfdf6b3dcd4f"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.contratos.ContractDataExportProbeTest.xml",
+        "sha256": "eb644e149fd2b1c11fa2d64df209a64d3a209d4e446438350da3ee94c97cc1b9"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.contratos.ContractDateWindowTest.xml",
+        "sha256": "b329b3ab0c471f8e3656985d05ab511c289684b17cadef97904c7599d8a54e70"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.contratos.ContractEvidenceWriterTest.xml",
+        "sha256": "d96e2a4db0c05c1bbf2c01b33aee100ca7bbb949f77cc8ae25dfab4c3cf357dc"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.contratos.ContractParityComparatorTest.xml",
+        "sha256": "16e290d7110cf7112546a92f2a2b79075194361a8867cdcb23de239fad88c275"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.contratos.ContractRemoteEvidenceRunnerChecksTest.xml",
+        "sha256": "619130ab66a94e0530a05a6aea196c4b7d3ba781dc10dcc57c4e7e50841a1207"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.contratos.ContractRemoteExecutionTest.xml",
+        "sha256": "41b5704c288f77f612391b064ffe48eae9e16d7d145856cb90b9dc105d257b88"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.contratos.ContractRunGuardTest.xml",
+        "sha256": "aa2dd4307fad13dfd2a4f41e7a8f02776760abe61c06deb060ddc920c2fc358a"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.contratos.ContractTestConfigurationTest.xml",
+        "sha256": "7d6386917720cba93e8543a5e6eb09e587fceae2e9697bf503e493d37859bc23"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.contratos.ContractTestGateTest.xml",
+        "sha256": "bc2c7717c92ed1cd19d7a6ff7b5d55e16b98eb5b19e1c5a039e4bdf982527dc6"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.contratos.mapping.CotacoesCurlTransportTest.xml",
+        "sha256": "237b67c3f3629d2c988da0cae3f5ceceb9d876c88f6cbfa450c17bfe957cd137"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.contratos.mapping.CotacoesSourceCommandTest.xml",
+        "sha256": "7d48b687049bf93d30119c7f45052799c72ca8d1e933fe4537bb6a7dd8bd010b"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.contratos.mapping.CotacoesSourceRunnerTest.xml",
+        "sha256": "97078986a7d618a7e5f61754d1b1a0de96c39e9b90fc3e9d895ecaf9358c3edb"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.contratos.mapping.MapperCharacterizationLimitsTest.xml",
+        "sha256": "d982a69cb2c6646cd2c883f5c06ad602f947573ed7282005ad02644aa29e1e63"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.contratos.mapping.MapperCharacterizationTest.xml",
+        "sha256": "dfea586ba32538eab6bfe475a678a89d366bd26f0f013dca74db94b0d2e095f3"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.contratos.medicao.ExecutionWidePageRetentionMutantTest.xml",
+        "sha256": "1499815275b3adf8941f7e5bd909e2d42c189bce47044cc86fae78f49d9192e7"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.contratos.medicao.ManagedPageGaugeTest.xml",
+        "sha256": "6233179bce484b3717d84f8846a9a525f0ed11aad78065e27f3ee0e1d8580d6f"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.contratos.medicao.MeasurementDiagnosticsTest.xml",
+        "sha256": "c036352b0d2ef34e4753b5a0ee9c6f535767435b6c598543087bb72747f9f414"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.contratos.medicao.MeasurementEvaluatorTest.xml",
+        "sha256": "91ad2cd0b6cd597c379ddbdb4be4a5e2c875260aa014076fd90100ed73aa06d2"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.contratos.medicao.MeasurementFoundationReceiptTest.xml",
+        "sha256": "b6be3599b028b0f6602fafa2e166b5836d0d18996db3e57143a995125a08bbc3"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.contratos.medicao.MeasurementPlanTest.xml",
+        "sha256": "8fa19e0e56315448f56cf882f6e4f113f17bd5a9c3acaf59400bd9ec33ed77b8"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.contratos.medicao.MeasurementReceiptWriterTest.xml",
+        "sha256": "69d0a6e6ade9561ddebe8321ac3a936edd45d492975f50a7c2ac1231356232b0"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.contratos.medicao.MeasurementRunTest.xml",
+        "sha256": "790aa28c8863be73f05ef0676809ed7a50ef2a01f69a70a6866ea908b53d763d"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.contratos.ReadOnlyGraphQlParityHarnessTest.xml",
+        "sha256": "5f95cf4e303b8534e3c478e6a155c9c723e1654c9f176b58c4ba5ec72b66c774"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.modulos.coletas.aplicacao.ColetaDataExportRecordMapperTest.xml",
+        "sha256": "c8ff61922c93ace82c48b02715078a430fa71e2f320117b77f16267ef3f95fd9"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.modulos.coletas.aplicacao.ColetaTemporalLinkTest.xml",
+        "sha256": "530751b6309230254177375516f8534da04fc235ed2ccabe01b6ca2fa9dd8304"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.modulos.coletas.domain.ColetaStageValueObjectsTest.xml",
+        "sha256": "9023bec36988f61c2504852639cf6701606e9d740b97176b9743edb6e7ecbebd"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.modulos.cotacoes.aplicacao.CotacaoDataExportRecordMapperTest.xml",
+        "sha256": "6ddef40d26b53298f0d97b3d24d752bfb75c13e13fa7b66c41d10a7ff3669ab8"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.modulos.cotacoes.domain.CotacaoStageValueObjectsTest.xml",
+        "sha256": "2e88b17ccaf278eed49e416f72b8966f6145dae9db6d9e3b36cb3105d1ba17da"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.modulos.fretes.aplicacao.FreightAnalyticAttributesMapperTest.xml",
+        "sha256": "0b5dfdced29019343fe3cc667617caf09fe3bfd455b22b79a3fb4a1008802aef"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.modulos.fretes.aplicacao.FreteDataExportRecordMapperTest.xml",
+        "sha256": "ff043b237bf91058b6bb6d69f2cc27b3efa3bed053f853f5b776f77aca23ad70"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.modulos.fretes.aplicacao.FreteGraphQlSidecarMapperTest.xml",
+        "sha256": "2aca789a9a0a172f9a768bff7b498ba10e34e6051b23f12386db22df2911a8a9"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.modulos.fretes.domain.FreteFreshnessPolicyTest.xml",
+        "sha256": "251e0fe82db2f7d214efbbcea2368139ab6d7410dab89efbec4e31ecaba05c0c"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.modulos.fretes.domain.FreteStageBatchTest.xml",
+        "sha256": "7439048ffb4ddb6483bd2d144edaa5daef7d3b233cf9b9452f4aa5502dbb5218"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.modulos.localizacaocargas.aplicacao.LocalizacaoCargaDataExportBoundaryTest.xml",
+        "sha256": "fb028e8c8eb604bc12213ec00f89c22480a6e0aa0f27d0c433581bf34b7711a4"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.modulos.localizacaocargas.aplicacao.LocalizacaoCargaDataExportRecordMapperTest.xml",
+        "sha256": "8a5f52bae887d842b89ff540998fb564af3817554ce6afee425df3a2bc1bbc78"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.modulos.localizacaocargas.domain.LocalizacaoCargaFieldReducerTest.xml",
+        "sha256": "c49312e4a005618866edcb589fd3a0a715840a4b3d9b131defecb2f8dd766d8b"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.modulos.localizacaocargas.domain.LocalizacaoCargaFreshnessPolicyTest.xml",
+        "sha256": "097be0f5dce300d4c1818f7e72b0dcec2f3e8d4fdb11a6baed20446f1d81d0ae"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.modulos.localizacaocargas.domain.LocalizacaoCargaStageBatchTest.xml",
+        "sha256": "04ea35aa4f5a3955f8fe2716e71ab5b1149fd0250a0513b3c7290bad16212279"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.modulos.localizacaocargas.LocalizacaoCargaArchitectureBoundaryTest.xml",
+        "sha256": "72e837a849af3816f82884ae6b5709c5e57de5ed979ae86e4d0d0d8771a6dbc0"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.modulos.manifestos.aplicacao.ManifestoDataExportPageRequestTest.xml",
+        "sha256": "8f00541370222b037e85c4234e499e06fe8504d368e4f6191c358766cba9ea8f"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.modulos.manifestos.aplicacao.ManifestoDataExportRecordMapperTest.xml",
+        "sha256": "942ecae35fc2e09fb5f2a7dd85b879effcdd598f45a4ebd3cbc5150919f98bb5"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.modulos.manifestos.domain.ManifestoRootReducerTest.xml",
+        "sha256": "d51ee9d5d046acbf5fa79995e349e38a49b6bdff6df523c81508b23a700e7b8f"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.modulos.manifestos.domain.ManifestoStageBatchTest.xml",
+        "sha256": "6c234c131ee7342c3062d16ac40372dd15e08cafdf7869f833bf3b92db425e80"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.modulos.usuarios.aplicacao.UsuarioGraphQlNodeMapperTest.xml",
+        "sha256": "757aa262b575251bd2fba1aed08cd64f5df65f379aed45f0a56189aeb7153780"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.modulos.usuarios.domain.UsuarioStageValueObjectsTest.xml",
+        "sha256": "a7a50880b1958c2978b5173c510c309af602e286d3bc55a08a27a146174be9d1"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.autorizacao.AdministeredArtifactManifestTest.xml",
+        "sha256": "dce1e6861322b721b013be5e16ea054f39124821481fa82fdc9c47a6ed399f73"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.autorizacao.AdministeredArtifactVerifierTest.xml",
+        "sha256": "536fc2c66d128217c231d0406a1f10998458578d3efad72bb4f16deaf4daee03"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.autorizacao.AuthorizationValueObjectsTest.xml",
+        "sha256": "c7e5d74075b1d35fa5d0c6e122086fbb34809287ebe083a180c950e56efcd40a"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.autorizacao.LaboratorySqlBudgetTest.xml",
+        "sha256": "5fa165a128826fc7c267d3af7a31a11cd78da0bf048d99036230a10dc06012dd"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.autorizacao.PinnedSqlTrustManagerTest.xml",
+        "sha256": "ea2347160b01c5a1817e370113d9d0eedd1f6e5d5838510894995f1328698b8f"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.autorizacao.RuntimeAuthorizationBoundaryTest.xml",
+        "sha256": "15f10e2d8ecfb940f4e1652b8a698667a8bd525679f2d68ad17ca9a7409c8bb8"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.autorizacao.RuntimeAuthorizationPolicyTest.xml",
+        "sha256": "81235e4cd49b938bce2033f716fa5efb1c773af5bccb76d597aba3a164f6e708"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.autorizacao.RuntimeUsersPhysicalEntryTest.xml",
+        "sha256": "ff084a1cb69863ca47cc4592090bdb6f98b7a602d2dba64806b667c731eacd20"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.autorizacao.WindowsSqlRuntimeAuthorizationTest.xml",
+        "sha256": "4afcd09bb66f4914487a8101e555306d43128c2b727376fae1634a7247df6f97"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.configuracao.DataExportClientSettingsTest.xml",
+        "sha256": "39576bf8b7c39325f52c00a2ef4a1dec34bc23c715a22af658a0a253fc4d29a6"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.configuracao.DataExportPropertiesTest.xml",
+        "sha256": "bc2e02fbaa5da239834e5a42975ce19815a54f3b1cb37932811f8a410fdc2aee"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.configuracao.DataExportRuntimeConfigurationFingerprintTest.xml",
+        "sha256": "a3362d1f49a36bf75801929fc512ec4165b8cea8bc6f328e43df8f57829eeac6"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.configuracao.GraphQlConfigurationTest.xml",
+        "sha256": "cb30b835c9edacb9b1d7e8c0f790e9a32fffbedbd99593bd8b446d1494e2f40b"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.configuracao.RuntimeConfigurationFactoryTest.xml",
+        "sha256": "49942998542abd35da3a03c93f907cc19d1b5ead53a2be692a3877c2a6df91fc"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.configuracao.ShadowStoragePropertiesTest.xml",
+        "sha256": "9e29f01981144188be19b81dffef47d6215985f682bbdf1a2d0d3457420a0d6f"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.contrato.ContractResponseProfilerTest.xml",
+        "sha256": "acda3adaf842587e31578ce5d9a141ce6e1b260fc84e2d0c578c0ff1ce10e9d4"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.contrato.ContractRunGuardTest.xml",
+        "sha256": "79fdbb1a254196c882eb974e854b4d457142824574090cc568573a755856da79"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.contrato.ContractValidatorTest.xml",
+        "sha256": "34682a9096e4ba9537904dfeb55b7df44f47fab971ede323e2fa81edeaf88c86"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.contrato.FirstWaveCompletenessGateTest.xml",
+        "sha256": "b14a5e0fb3d04b3f37a2133c7bb6aaba604a482cd3d0f6fa516dec788ae55e58"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.contrato.SourceContractReleaseTest.xml",
+        "sha256": "ac0f50024a2729451c604ff5830abfaf4a6b0405613ab2658c4e5fc6764ab6ed"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.controle.ControlPlaneSqlContractTest.xml",
+        "sha256": "f3dba86625b4cd4fc5032e6fb53475f6faa6711f3b786ae435fd38ceb2318c1e"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.controle.ControlPlaneValueObjectsTest.xml",
+        "sha256": "67394a812317f32a02d7c31f5bb3dee76576a2c622b8484ea7b0c7bceb037b89"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.controle.JdbcSqlServerControlPlaneTest.xml",
+        "sha256": "1d403e054a46401b0b350541d8bb0eecdbbb2a39cc47b67105158181ce3589f9"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.controle.ProgressiveDataGateSqlContractTest.xml",
+        "sha256": "2dd6c466110bdb866940bce017a1d5965bba0dd9ea30dd4554a8167a6f3b2831"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.fonte.dataexport.CircuitBreakingDataExportGatewayTest.xml",
+        "sha256": "3db9e3de8e461d076031283f39495bb1a73e13c2f4a73e2f7aada9d54c21fbf8"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.fonte.dataexport.ColetasSourceReplayTest.xml",
+        "sha256": "5b9339973f5bb7a7e21a489574d0f5605238cb39339ae2728b7b728374a622c4"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.fonte.dataexport.DataExport422FailureClassifierTest.xml",
+        "sha256": "a96ec79b3ecb3cbe919e1fc14bc95f431b8315f853d74b7ba32ff91529f1b7bb"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.fonte.dataexport.DataExportColetasContractTest.xml",
+        "sha256": "7f38f5db73911b7cfc6aa462727ac572e8695962d74e1ab2768c3cbc19555826"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.fonte.dataexport.DataExportContractGateTest.xml",
+        "sha256": "3a2c2796d37dbc2f0170096808670e47fd3ce8f651230cfae2d5ea127b0aab36"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.fonte.dataexport.DataExportExtractionAuditTest.xml",
+        "sha256": "cc4259d5329a12bb79d35a35de89f1c5618020bfb3b1a4c07c336940b9397a13"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.fonte.dataexport.DataExportExtractionLimitsTest.xml",
+        "sha256": "7a9e055becf34e420682d966b6cf10fb250acccddab96d2af25aeb82799d22db"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.fonte.dataexport.DataExportFirstWaveContractTest.xml",
+        "sha256": "809efef2089c8036518ae49640b5c48b606717b0ec0062b6d85d4e96f46cebfa"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.fonte.dataexport.DataExportHttpAttemptTest.xml",
+        "sha256": "d0ee16622078340b46f6ee496ae626073e0a146a6e060813ca4283bf5a1a8bd1"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.fonte.dataexport.DataExportHttpBodyHandlerTest.xml",
+        "sha256": "6d0b6a5e631922cdc47332d50f33bb0eb61d4086bf5c975cac395074f5d227a8"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.fonte.dataexport.DataExportHttpExecutorTest.xml",
+        "sha256": "f8d3d955de3e689b031b3323ab73b29c778cf86e6a784578edc6008406ba237d"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.fonte.dataexport.DataExportHttpGatewayFactoryContractBindingTest.xml",
+        "sha256": "73d9ebec066f6b1fcb622fa2b75d782e85db777cc5820ebf6d4f3a3d448827ca"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.fonte.dataexport.DataExportHttpResilienceIntegrationTest.xml",
+        "sha256": "6f8c5aaa36d40d205b92ab36e4b86253b34cea87486da5e6b0ac969d664252cd"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.fonte.dataexport.DataExportPageEntityLimitValidatorTest.xml",
+        "sha256": "3da751bca6e6347e2eedfa46779be8ba981415b909f07e9144ac116abca0cee7"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.fonte.dataexport.DataExportPageRequestTest.xml",
+        "sha256": "15937ab0ffc15acb8bcd9d1c9f73a0b103437e38509ad2600ac0d29e48cfa23f"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.fonte.dataexport.DataExportPageStreamerMultiscaleMeasurementTest.xml",
+        "sha256": "ab1ed61ad012720d0e1429ea5c5033ff5816033399608314a405f9b10c84f315"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.fonte.dataexport.DataExportPageStreamerTest.xml",
+        "sha256": "17165a50be829933111c030c97822a507cd81d26d2726724c588e843ae834750"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.fonte.dataexport.DataExportPayloadProfileTest.xml",
+        "sha256": "ac30995474cffdbd7c72b03572339ded29ccfa2f247bc0b4f90fa30b737d425d"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.fonte.dataexport.DataExportQueryEncoderTest.xml",
+        "sha256": "f17fd7756950b60f84045d59203ef9dcae1252acc78ad8cee00c9861b832ed06"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.fonte.dataexport.DataExportRequestJsonSerializerTest.xml",
+        "sha256": "d66b4e40d4931b6b93623d16f3694748218dce16c5c629ff80d2465df487a865"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.fonte.dataexport.DataExportResponseFormTest.xml",
+        "sha256": "194a4d56f4bcddc23aaa370668e44c1adaed187d872f0bf47dbfea0d12b15db7"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.fonte.dataexport.DataExportResponseNormalizerTest.xml",
+        "sha256": "5ec5bd3592a567d6b56678c6d15a58558c5681afc4590c5ef54631412181182a"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.fonte.dataexport.DataExportRetryPolicyTest.xml",
+        "sha256": "59b151e1faea467993d0a0b45efe37e006c7db804d1b28fec1dff808b5187026"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.fonte.dataexport.DataExportRetryScheduleTest.xml",
+        "sha256": "d9d9ebf82606187a5406804a4c9eca3337c60da25056cbd10799879ecedf94f3"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.fonte.dataexport.DataExportSafeToStringTest.xml",
+        "sha256": "ba91805852e957765be0e8c92b6c5ec0a7783e5e48e6e6219ab87fcb6234b097"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.fonte.dataexport.DataExportStagingPipelineTest.xml",
+        "sha256": "2e632865d63a53bc42c07a83fef40792210aa30b4f07bc42c4e6f6b7c0e986f3"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.fonte.dataexport.DataExportTemplateInfoParserTest.xml",
+        "sha256": "4ef4ada2c3fba294ef99670b2bda2c5f1e14b4f6cac3e6a9b08d80e3f6743622"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.fonte.dataexport.HttpDataExportGatewayTest.xml",
+        "sha256": "e5130fafdff90e159e5906438a3290b39264f9b68a1370d626c4bdae99b2b171"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.fonte.dataexport.HttpDataExportTemplateInfoGatewayTest.xml",
+        "sha256": "355a83d4a3c8410076f8c2bd4f765ebb30537091348d34c1e24e94faebd84a69"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.fonte.dataexport.LocalRuntimeIntegrationTest.xml",
+        "sha256": "cef7c27bd2bc99e1115bf003f773d42ec0eaa2f6412af6f5af9f09a1fb850fee"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.fonte.dataexport.RuntimeDurableRecoveryIntegrationTest.xml",
+        "sha256": "bc88a88fdf87ca0a462d16372c7cd8b22726f85228f1c708fbcfd86a4a28176c"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.fonte.dataexport.SharedDataExportCircuitBreakerTest.xml",
+        "sha256": "43edbc1c2779b11533055f09eb264d7d382710f9f5fff322e12b47dff8181e63"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.fonte.dataexport.SourceDateTimeRangeTest.xml",
+        "sha256": "718c29867e23d364f7d36049fcdb395d9d38ba9704e04aa993a37f6bc0fa9c06"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.fonte.dataexport.StatesExpansionDecimalTest.xml",
+        "sha256": "8a07c581134ea31aed72e3b59216bb1c6a9332f05f7fdbebcec8f355436b0aa7"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.fonte.graphql.ControlPlaneGraphQlExtractionAuditTest.xml",
+        "sha256": "37efddd66b9c12daea8732f2800572d6044a6e66407e04f1334da6b6558fb8d2"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.fonte.graphql.ExtrairReferenciasTemporaisColetasTest.xml",
+        "sha256": "c2f96029fad9d49922ed8855fcaa355f6b4d45146eeffb43fc1bae62afbfe601"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.fonte.graphql.ExtrairUsuariosGraphQlTest.xml",
+        "sha256": "6631dda9b01e4727aeb2f7ebb4a48ab0c764f4ef3c4d903ebdff6791a26f4a01"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.fonte.graphql.GraphQlContractGateTest.xml",
+        "sha256": "7c7e7743c36f771437fef3acbf210a0daf7e610ba45f26d92d9c485a85c3579a"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.fonte.graphql.GraphQlFixtureContractTest.xml",
+        "sha256": "a5555ab237f2360c02644b4946ff28209cd03669716fcabf4612b57dac21dde1"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.fonte.graphql.GraphQlHttpBodyHandlerTest.xml",
+        "sha256": "52eb8b40dee1b82d6817380193c15a947e452af51fd4e3569d267d921ba2e8dc"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.fonte.graphql.GraphQlHttpExecutorTest.xml",
+        "sha256": "0c497eca5c1f3083816e81ec7fe6866c8e56f1b1bc5b5e161109c891e81bc7c3"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.fonte.graphql.GraphQlOperationalAuditTest.xml",
+        "sha256": "a09c7977228adec354a0deb93541ce306e6c75e8383ec89bbbbebc61fe4975b7"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.fonte.graphql.GraphQlPageStreamerMultiscaleMeasurementTest.xml",
+        "sha256": "8a47bb0e86a41b6abdcdd0e1eadd08c389192bb2cdae73c36cc55133defd6735"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.fonte.graphql.GraphQlPageStreamerTest.xml",
+        "sha256": "b8efad17df3bbc73f5200dcc1311d26fcea08debfcc8a0e9a9d5aab5fb8d1608"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.fonte.graphql.GraphQlResilienceTest.xml",
+        "sha256": "6fd0bd6c4f08fe146b6fbf99da2169a354dc08edec502bd4c903ca09ee86507c"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.fonte.graphql.GraphQlResponseParserTest.xml",
+        "sha256": "61637e3ce62a572407974c030009b150f7a71fce8afa9122c4b9a0b170a34e67"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.fonte.graphql.GraphQlTransitionCatalogTest.xml",
+        "sha256": "e3ab37e9d0322408eb39283447bc8f3d354314a38760c930ac02a65755d19e62"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.fonte.graphql.GraphQlUsersFirstWaveContractTest.xml",
+        "sha256": "20d8b02b949c842e8a8a4a45fea298e0d218bb06c8fff539c83eda59a6bdc73c"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.fonte.graphql.HttpGraphQlGatewayTest.xml",
+        "sha256": "ee0fc6c3dfd1b646d7011465c81dab364e4bc121495c5425fb9a46b25786d84a"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.fonte.graphql.PersistirReferenciasTemporaisColetasTest.xml",
+        "sha256": "8b24e7a0711e682155d029b8a2ec222c8e05ed1d7b61d32812573d28ba8265a6"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.fonte.SyntheticSourceScopeTest.xml",
+        "sha256": "871721621c14d25fe6e97688df59ea26c2da415f3d125caefc03d515c0c7d242"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.identidade.FirstWaveIdentityCatalogTest.xml",
+        "sha256": "29a1ad79e60516d8928db3f37b994e4fb05a1d1a5471a6584574b76e4b237509"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.identidade.IdentityConflictPolicyTest.xml",
+        "sha256": "143436f3f00a3bf599ab1603bc89bc95a9bf4827ebc2b3b8ac5168edbab6ad49"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.identidade.ScopedSourceIdentityTest.xml",
+        "sha256": "f776d670b7dbfbde381551958da314b23ade47af6fd82b87a6fddcd939f85507"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.observabilidade.BoundedStructuredLoggerTest.xml",
+        "sha256": "91b180078602bd9bf5eaef6e99b0e6c95f43777827e076ca36dc1a8c0f060e48"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.observabilidade.ExecutionMetricsAccumulatorTest.xml",
+        "sha256": "e3c8e1e20f9d889b8a58c351c4ce8c9307e2bc1fdd4634a5b7401d7d66517783"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.observabilidade.ObservabilityValueObjectsTest.xml",
+        "sha256": "85fb9463b3811419a1f32c3e5fc7b57594d5926f8292c40170089bfef46766a9"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.observabilidade.SafeThrowableSummaryTest.xml",
+        "sha256": "57b4980703e1bbf5271995d68083fa74fb36b7db6e756cd30e7e9d26ca82b577"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.observabilidade.SensitiveValueRedactorTest.xml",
+        "sha256": "07fc5b7d02ef972ef8402fbf1fecbf37baba2c7876640b8b05106aab129e6d2a"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.observabilidade.StructuredCorrelationContextTest.xml",
+        "sha256": "c3f678e04245294d0f332626f0ccf27bee7ff1a503a6ad93b7aed7796f8f3f35"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.orquestracao.RuntimeTemporalCoordinatorTest.xml",
+        "sha256": "2555bcb5c339850a58d25ecc162e6dcb0a18f1361cd49e1e49ee1a92301f4e59"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.orquestracao.RuntimeTemporalPlannerTest.xml",
+        "sha256": "f5a75f733b562be1cc963cdea93c860df5fe2543a57ff88186c7d33fc0e3b312"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.orquestracao.RuntimeWorkloadRegistryTest.xml",
+        "sha256": "7ea64162e313052c435697622cfc2dbbecf6a5b17447531f2f7d601d2f06f2b7"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.persistencia.coletas.ColetaExactTimeWriterTest.xml",
+        "sha256": "74db4cdbe4265dbe4c43f8686a10f286e85ead7b18ad57bf0b25134cc610e2c7"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.persistencia.coletas.ColetaTemporalLaboratorySessionCloseTest.xml",
+        "sha256": "0e9f2225eff76eb49f210e3af59d141a56d6af331b7a03baca1887bf55d6ede6"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.persistencia.coletas.JdbcSqlServerColetaGatewaysTest.xml",
+        "sha256": "4aca61d371adb3352f373ba9be88b476a4e0866800fa37f3ab19634e2481c8b8"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.persistencia.coletas.JdbcSqlServerColetaTemporalGatewayTest.xml",
+        "sha256": "d96513d01aeee92f39b6d54c9d21179f3da5b1a4bf3764e5e40e4950ff0f9186"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.persistencia.controle.JdbcSqlServerTemporalPlanTest.xml",
+        "sha256": "df697a3198af4eb87769cabcd57a849518c517a884d171e0a188bf2125dd89d2"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.persistencia.controle.RuntimeJdbcBoundariesTest.xml",
+        "sha256": "5135db1169b593fd09a13a9e0a8dcbd48ce186553c998bfe24a1b4507a8f8c4f"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.persistencia.cotacoes.JdbcSqlServerCotacaoGatewaysTest.xml",
+        "sha256": "2062c27e1fae5e1f1e53838b49521e72938120324fca8d3bf257e2fa53639537"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.persistencia.fretes.JdbcSqlServerFreteGatewaysTest.xml",
+        "sha256": "03b998244fb12e298c087123499a297ed4c6604a35fe5e323f577b0804ac1c4c"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.persistencia.localizacaocargas.JdbcSqlServerLocalizacaoCargaGatewaysTest.xml",
+        "sha256": "24484df52a6432ddfdc9ca92c13ef0465eee521ab9f92bc067c1df77c01f5275"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.persistencia.localizacaocargas.LocalizacaoCargaShadowSqlContractTest.xml",
+        "sha256": "1256200721462653a08eaa08ff639ad160d71fb6d7fafc9373c746a2b0c41c7f"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.persistencia.manifestos.JdbcSqlServerManifestoPromotionGatewayTest.xml",
+        "sha256": "0be246533704ef6bb5626ff68d22e0311a34011fd7e09c113fd690947f391b85"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.persistencia.manifestos.JdbcSqlServerManifestoStagingGatewayTest.xml",
+        "sha256": "3d500a63ff7a999ec9bbc402e0c0a36eb61f097be3789e457ea0b5d61202aefe"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.persistencia.observabilidade.JdbcSqlServerObservabilityGatewayTest.xml",
+        "sha256": "0968d20c77ed155364a9aef3dbef5299dfd2f7dbe017906c5a7472a3ba398ee7"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.persistencia.observabilidade.ObservabilityDataQualitySqlContractTest.xml",
+        "sha256": "3aaa026e1f30f9eec5d916094ef714b49bf9d257ef756372dbbe56ab996388d7"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.persistencia.sombra.GovernedReferencesSqlContractTest.xml",
+        "sha256": "7c6a04e54316c92b864eb1755490af085b1e46d6dc4884b05c29b8f34c371399"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.persistencia.sombra.JdbcDataExportExtractionAuditTest.xml",
+        "sha256": "1a6ecae912bad122f5ca82e96a5938ef8251459782608e57daf0c52e102782c6"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.persistencia.sombra.SchemaFoundationSqlContractTest.xml",
+        "sha256": "419e1ce627f873ce63338c398759f6e00696bc88819b058330ae7c5b065390a0"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.persistencia.sombra.UsuariosDimensionCurrentSqlContractTest.xml",
+        "sha256": "a801050bc9044b5564809990a248b14861cc7041c118de83cfe5c784a661e749"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.persistencia.staging.JdbcSqlServerStagingPromotionKernelTest.xml",
+        "sha256": "32861cb02753d351fc027ff5884f3737b105b18b592850510efa14342c12ec33"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.persistencia.staging.StagingLifecycleSqlContractTest.xml",
+        "sha256": "928b0243e1197cfc36c48a9576c2269a3a3bed26dda92b099614ba0aa33aa178"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.persistencia.staging.StagingPromotionKernelSqlContractTest.xml",
+        "sha256": "ffaf2c14930cf3e1adc54b7e4100fc2c1092ac97ead697d463d5379d0819cdf4"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.persistencia.staging.StagingValueObjectsTest.xml",
+        "sha256": "5ace744146c2ed109bf4f8bb9b31b86f25fe996ed044599f66df34d0956289a0"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.persistencia.usuarios.JdbcSqlServerUsuarioPromotionGatewayTest.xml",
+        "sha256": "95b9472c97a2653a4b2f303cd1f7f1d8a162765472d0804de65af37cde8f9184"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.persistencia.usuarios.JdbcSqlServerUsuarioStagingGatewayTest.xml",
+        "sha256": "c5e9b0faee794f6ad305f0611b1be23178b9d1eff8ec084bef053b59caec8e5f"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.qualidade.FailClosedDataQualityEngineTest.xml",
+        "sha256": "3704a76a9f0edffa7d0a26d38a4252c707eac98cda9c7f8a7404108a3529a0b2"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.qualificacao.QualificationDeclaredWirePresenceTest.xml",
+        "sha256": "7afb720ce7a6bba19816df13c2762ef6cb3f03e647e9339981bfd407ab6ce117"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.qualificacao.QualificationJsonPathTest.xml",
+        "sha256": "4cf961893ef18ef30b7219dc2f8c81a1dc59e591622193577a6058e9de7f38a3"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.qualificacao.QualifiedPackageClasspathTest.xml",
+        "sha256": "b4db47b124ab1c92994a2beefdb78fd229218dfde0fb643c409dc688c52f7986"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.reconciliacao.sweep.FailClosedSweepPreviewKernelTest.xml",
+        "sha256": "d3145b8cba09c7e04c5e9616113d5314a05f438c815f128d3061f1af72bb3d46"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.reconciliacao.sweep.SweepApplicabilityMatrixTest.xml",
+        "sha256": "7e54a46b03cf51851c5bb03e9f80eab8a776f00a5ebf3e24366579ff3a62272f"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.reconciliacao.sweep.SweepPreviewBoundaryTest.xml",
+        "sha256": "39e3eb9c690c64f8e7aef465a21fa0f639a2847dbc5bbeafe26bd7f93a51a719"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.reconciliacao.sweep.SweepPreviewDeterminismTest.xml",
+        "sha256": "79507771b6378acbdaefa23867cd634e2aeb25df10534f6c2b149b91aae24a21"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.reconciliacao.sweep.SweepPreviewHardeningTest.xml",
+        "sha256": "93c0cb3e0bd5b65d7aaa5768df9e75bec7ce320e86f822cd18ed548da03448b0"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.reconciliacao.sweep.SweepPreviewMutationCatalogTest.xml",
+        "sha256": "4a0d21e00d02c6287c0cc6144d50aa7b2eb957387c097c6f7e565eadea34d581"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.resiliencia.BoundedWindowRepartitionerTest.xml",
+        "sha256": "681fd9135858687fd96f1aed98aede4ffeb477837a3735b08c699c93ed91f7e4"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.resiliencia.CycleOutcomeAndCheckpointTest.xml",
+        "sha256": "191012903f3e2c056a2485f492d7a5df94b6716a42a6aba76ccad44a19e5375c"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.resiliencia.EslRequestGovernorTest.xml",
+        "sha256": "c03f1c107a1621954b5ea70ed946bc14902f6c91d1854824e35ab47005540dc4"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.resiliencia.EslResiliencePolicyTest.xml",
+        "sha256": "c504f921bc9a4381d75ee10bc3f4635f3d2db87031c434e0cf6cf4936c550a04"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.resiliencia.ExecutionDeadlinesTest.xml",
+        "sha256": "b35a2ad4f78462da72a48fb1ecd76472209351772f47d5b07e45d1096298a7bf"
+      },
+      {
+        "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.resiliencia.FailurePolicyMatrixTest.xml",
+        "sha256": "3b701a7e83842132c14b14ab6c3e5f14e2d842879b219fd43d90303a2c31031c"
+      }
+    ],
+    "skipCases": [
+      "br.com.esl.etl.v2.contratos.caracterizacao.CharacterizationDeterminismTest/refusesAReparsePointInsideTargetWhenThePlatformSupportsLinks",
+      "br.com.esl.etl.v2.contratos.caracterizacao.qfnd02.Qfnd02DeterminismTest/refusesSymbolicLinkInsideReceiptRoot",
+      "br.com.esl.etl.v2.contratos.mapping.CotacoesSourceCommandTest/command",
+      "br.com.esl.etl.v2.contratos.medicao.MeasurementReceiptWriterTest/refusesASymbolicLinkInsideTheMeasurementRootWhenSupported"
+    ],
+    "priorClasses": 247
+  },
+  "scope": "Default Surefire suite in isolated copy; no IT profile; 512 MiB; forkCount=0; resources copied and hash checked; no coverage claim",
+  "libraries": [
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/lib/jackson-annotations-2.18.11.jar",
+      "sha256": "9eab0d36da981645392427eedcb087e13be542488e37f935723dc0be50d18a53"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/lib/jackson-core-2.18.11.jar",
+      "sha256": "825fa72dfb9e2f8a642322f1390dbac22c30d15ebd6dc6b3772158821ee124eb"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/lib/jackson-databind-2.18.11.jar",
+      "sha256": "075ad94a76c3edf83e1972dc26f476361eb6b9d0e260d93fc11105509bc79cab"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/lib/jackson-datatype-jsr310-2.18.11.jar",
+      "sha256": "b2bab3e2c34f7b0b7f83bdb4de4c869c884466f756d76ed661ab3d2d9f35d1d3"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/lib/logback-classic-1.5.16.jar",
+      "sha256": "f985a33a68d900badec5b0c3c613ab9db66415d2cf378987357ded9da5370e32"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/lib/logback-core-1.5.16.jar",
+      "sha256": "f15e206b98ca25294506d2dadfe5ce2a6da9df9cf7c85d8e7191f99a422df3c9"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/lib/mssql-jdbc-12.8.2.jre11.jar",
+      "sha256": "a298b4b42a80c283961674cc37223b84cacecf5cc6abccf1319ebd7d2a2462df"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/lib/slf4j-api-2.0.16.jar",
+      "sha256": "a12578dde1ba00bd9b816d388a0b879928d00bab3c83c240f7013bf4196c579a"
+    }
+  ],
+  "receipts": [
+    {
+      "path": "target/p11-regressao-20260921-01/intent.json",
+      "sha256": "58c9f313c810eabeb9a2b16746b374124f3a0805cb71318cf5d7d12512b6ee29"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/initial.json",
+      "sha256": "c2e72bc79c642d8d15778dde431f755b9509d51cf76c32cf2ab072dc34ed71c2"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/prepare.cjs",
+      "sha256": "53c4f9e2bf7ffcc5da3ed120dd6f3f3eee8ee78a0dc3c85f6601d7c36090e296"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/run.cjs",
+      "sha256": "6a97aef93efb97d44ce8f4462c5dc483b176d1d5341beb585dfe8f87980b17e7"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/package.cjs",
+      "sha256": "0838c904cfe086c1ef580073fb07c00af5a5cb2703702924aff71aebccd8f00d"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/OfflineNetworkGuard.java",
+      "sha256": "74b1778b637d5916fcff56c498c9a4fadcc05a20d36ca5c7603c640abfe53179"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/GuardProbe.java",
+      "sha256": "3656ede66f9e72eb52e812ab59b99d81380d0fcbf8f963b45b66a241e442d2d1"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/resource-copy.json",
+      "sha256": "db085a63085313f61d6e06f4628e11fb93bdeb539f3a636212387c221c4be5c7"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/unit-01.json",
+      "sha256": "2d9860b5321b6b102b2c79acf4d90bc1754b51add8317541c7aeb1742468b9bb"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/unit-01.stdout.log",
+      "sha256": "7e57cab433e5034150ad14ee5df8ea1ef301d94589973b0750fa5b0e90eb470d"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/unit-02.json",
+      "sha256": "f9f0399718370ff7410855f6b90da3919875ae0c493c06af6cc121f3d9e2ddcf"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/unit-02.stdout.log",
+      "sha256": "97037be256a09ed1e069246696613c8d9b4ec9113e35369a9a8bc73407e597fe"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/unit-02-summary.json",
+      "sha256": "9d870a92134fb0db891d6c6635bd089db9ef19a415a8947c15bdcd1dd8d5bddb"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/unit-03.json",
+      "sha256": "5d42c1c4d6a651e574279459ce82750c5ef7f5b3d76268f97ec8e9ec56793a2d"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/unit-03-stop.json",
+      "sha256": "4142527f15fcd82c3722bc09e6fe13f05ad37120dceed918f890d8bc757b8eea"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/unit-04.json",
+      "sha256": "29a1a20011695e2e1016a71e25e12b3f9c9ee474f8125e1730be3228e1e9efdc"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/unit-04.stdout.log",
+      "sha256": "6fc351f04cc8deb0ad754352aa3e1d9da340571260a891024526260e225c6618"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/unit-04.stderr.log",
+      "sha256": "f00aa40b147d3f2ff8892876fd716a18c5a6b8d1bc379d76628eb30a664c7a19"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/unit-summary.json",
+      "sha256": "a2fb3b69e722c91e4cf7db72dd4507d549db73e5edc0f64760800df6181fe868"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/package-01.json",
+      "sha256": "2894f6c6d1cdbdfc00f8055497319d52c43740f49325e8fdc701e232fcb511ed"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/package-01.stdout.log",
+      "sha256": "32f2041ca2199f791ea3dd86b7797354231d1fecdc47486dd3ec29bd51b5163f"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/guard-probe-final.stdout.log",
+      "sha256": "d8bd08e6e71b7c4042b5e4e64dd8d81f894f03d9915817f1c8c975d3757d2eee"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/pom.xml",
+      "sha256": "70c502e9cfe96d529d7ca936541838512b56e39eeb2463279a1e6a799fa09970"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/etl-dataexport-v2.jar",
+      "sha256": "f5baff5e548315cb5f49d41d36b6c9b397936c022a454249c8a2878beb904a6c"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/lib/jackson-annotations-2.18.11.jar",
+      "sha256": "9eab0d36da981645392427eedcb087e13be542488e37f935723dc0be50d18a53"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/lib/jackson-core-2.18.11.jar",
+      "sha256": "825fa72dfb9e2f8a642322f1390dbac22c30d15ebd6dc6b3772158821ee124eb"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/lib/jackson-databind-2.18.11.jar",
+      "sha256": "075ad94a76c3edf83e1972dc26f476361eb6b9d0e260d93fc11105509bc79cab"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/lib/jackson-datatype-jsr310-2.18.11.jar",
+      "sha256": "b2bab3e2c34f7b0b7f83bdb4de4c869c884466f756d76ed661ab3d2d9f35d1d3"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/lib/logback-classic-1.5.16.jar",
+      "sha256": "f985a33a68d900badec5b0c3c613ab9db66415d2cf378987357ded9da5370e32"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/lib/logback-core-1.5.16.jar",
+      "sha256": "f15e206b98ca25294506d2dadfe5ce2a6da9df9cf7c85d8e7191f99a422df3c9"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/lib/mssql-jdbc-12.8.2.jre11.jar",
+      "sha256": "a298b4b42a80c283961674cc37223b84cacecf5cc6abccf1319ebd7d2a2462df"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/lib/slf4j-api-2.0.16.jar",
+      "sha256": "a12578dde1ba00bd9b816d388a0b879928d00bab3c83c240f7013bf4196c579a"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.arquitetura.ArchitectureRulesTest.xml",
+      "sha256": "6a721139d5fdbdb3abe2e75198a4d3c5459b52a0a0819196b4d228f2a2973a72"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.arquitetura.CutoverTopologyContractTest.xml",
+      "sha256": "c364829f35a7f19d02ed65348f429056813fa27499f654e7c8a725bd66b5a6bb"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.bootstrap.AnalyticLaboratoryCollectionContractTest.xml",
+      "sha256": "34b01453a2ab81744f9c708d3c7c44943205d4f4c62553c9254ceaf5cdad9434"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.bootstrap.AnalyticLaboratoryFieldGateTest.xml",
+      "sha256": "0f97081fb4ced9233b7a01f7c530f5ef006e80511bdd7860d9761d5e0dd21fd8"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.bootstrap.AnalyticLaboratoryOptionsTest.xml",
+      "sha256": "d42960231263ea39769d59950b6d899ec8f775d39bd640ac4607e8bf81b61877"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.bootstrap.AnalyticLaboratoryQuoteMapperTest.xml",
+      "sha256": "b69504cdb407123578d220a4f9c3053fc797c12a61b4115ba1966febb72840c2"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.bootstrap.AnalyticLaboratoryRasterParserTest.xml",
+      "sha256": "119749edc1c470d05f530eee0e250c873eca1199167f8e1c7730ed92fcbb8167"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.bootstrap.AnalyticLaboratoryRasterTransportTest.xml",
+      "sha256": "5f8d42f27aad555be87c841b49001e153fa79ac9e45b33897041cb94430ec4f2"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.bootstrap.AnalyticScenarioReplayLineageTest.xml",
+      "sha256": "e4687ad0fb0937ddc05e5b42fb093f141527957d7808f568733025b7e206a1b2"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.bootstrap.DeclaredCapturePagesTest.xml",
+      "sha256": "6227cbcdbc255596db0a3969cff3a0a3b8f474eaf938714341a01e83e453caab"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.bootstrap.ExpansionLaboratoryContractTest.xml",
+      "sha256": "7aaa9751747492fb8bada61883b5cb3d3dbb2ae4a0cdb218228b37f18e9e3577"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.bootstrap.ExpansionLaboratoryFieldRejectionTest.xml",
+      "sha256": "99837ebfd12da493a41667a66a7918576c1a04f6871e689a37abbeceb93878bb"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.bootstrap.ExpansionLaboratoryMainTest.xml",
+      "sha256": "c3a7c3ab7209c4ffddf8f15e973fabfc142431ea5a21a13c6033c881bb71b8a5"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.bootstrap.IntegralArtifactAdmissionTest.xml",
+      "sha256": "97e1c5f1080381c9d5b66d1702abac06d37411ecf304bccf10fb546eede51304"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.bootstrap.IntegralArtifactBoundaryTest.xml",
+      "sha256": "27a6977cf643e554c2b3896a3f3e46400b299c4d5c6b8507d5bdfd6937a32d7e"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.bootstrap.IntegralSupportPreflightTest.xml",
+      "sha256": "243548e9aa483f1b4e8d1e7b6e95cc07fa979b9284e630eeb9024abcd07ef040"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.bootstrap.LocalArtifactSequenceTest.xml",
+      "sha256": "5eb74f1b0ca4265246542f97aa77c4655eb62467e1307d73933380f558772b3a"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.bootstrap.LocalFiveVerticalRuntimeTest.xml",
+      "sha256": "c2e1878b741dd6f07e98233d779783f5b1b7ee1ad37d9240f6d064acd2ccedce"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.bootstrap.LocalizacaoCharacterizationPathTest.xml",
+      "sha256": "7e1db6f3160c054e33a0c1d64791bd50aae1ecba9dd759194821da82415b0113"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.bootstrap.MainTest.xml",
+      "sha256": "7ea72a0b00e86a78dcb2fb70e36fac6e62ae8ceb915d02f0c842c30c6102444b"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.bootstrap.QualificationArtifactInputTest.xml",
+      "sha256": "1dbdcdfbc79fdcf505cbda99144193280660c57574c5e2a6baecd42ceb3c3a14"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.bootstrap.QualificationArtifactPreflightTest.xml",
+      "sha256": "4d3cd4caef25eb16b75bbe2d342a0239b09e28e7daa2f14fbe163330881d852d"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.bootstrap.QualificationArtifactScenarioRefusalTest.xml",
+      "sha256": "d4f8b5ff2a5e2aabb3c3d1b91035f526aca00efc42c6aae7e1d82a1fd3815bbf"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.bootstrap.QualificationBoundedContractsTest.xml",
+      "sha256": "fb9a8cf46f3bc45df3646e0a764e4acdf20bf7fc230ab1674f1ec50bae5582bc"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.bootstrap.QualificationComparatorTest.xml",
+      "sha256": "a8344e0ae9064994ae6ede95b369d00bee080bda8e9cc0522c58343164494ea7"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.bootstrap.QualificationContractTest.xml",
+      "sha256": "4fcee8a7a5fd4ab28346cccd62bf16d4501d5150a850007a595a7ee491f9fbb0"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.bootstrap.QualificationControlFilesTest.xml",
+      "sha256": "60481c9867345b6f90b56ffdd026238f3b06e01d81218b4c93c7b34274967828"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.bootstrap.QualificationJournalTest.xml",
+      "sha256": "7bed89c2e0c0286e8ebe748a7133278c6ba8c050a87492ddabedae9fc2bf7606"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.bootstrap.QualificationOracleTest.xml",
+      "sha256": "aea3fb43697ad4637f7e4aafe74c723ea2c1615ad6486c8441aa078f1b91b268"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.bootstrap.QualificationPhysicalMetadataTest.xml",
+      "sha256": "eb002ebce917066071c6315a45c36e0695d75773986f7b884dd3a1341572c850"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.bootstrap.QualificationProcessEvidenceTest.xml",
+      "sha256": "c4350f8de20de0b3ce903f6adcfed23d2a324b8f049fb1485eb3ba31f199d9e9"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.bootstrap.QualificationProfileArtifactTest.xml",
+      "sha256": "768e2f044345f8158c6937a1ee98cde1ba2937b3ec0bf02ce222dfe51f6cf1de"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.bootstrap.QualificationRasterArtifactTest.xml",
+      "sha256": "08c48d11ad02145bdc56ea9bb50ac1e0d551f0b131e28582542535a8d8f66709"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.bootstrap.QualificationSequenceSupervisorAssertionTest.xml",
+      "sha256": "f875f1a37f895c1f38de0392ba612b35ef7a6623bfe6f2b85b9600d18ded1e9e"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.bootstrap.QualificationSupervisorTest.xml",
+      "sha256": "813e85314c7aef0fbf611235f6c4aa220ac2b2dacb6bd28b4c39cedfbfbdb7e4"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.bootstrap.QualificationSweepPlannerTest.xml",
+      "sha256": "3feac0317550587054bd401be675e36b9580df1d834d0b1d2a80550fa71c4af6"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.bootstrap.QualificationTemporalMatrixTest.xml",
+      "sha256": "f446f2f1b861eb3953326122cafc71e5779a56f0b11874f5bd1fdb0d6075e9e2"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.bootstrap.RelationalLaboratoryContractTest.xml",
+      "sha256": "0a593deb62b1f7e5a4ba11672e6f7d6092b1d27156d431af0151b5f81e242d84"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.bootstrap.RuntimeCancellationControlTest.xml",
+      "sha256": "fc72330fbc0b5e5ee5687888bf5847fb4772e017d8f0ca90bf71107947bc6b75"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.bootstrap.RuntimeCompositionRootTest.xml",
+      "sha256": "5ca9bfc345402f13af570d443158cf4a51bc19e4c7162318c3734ddb30144c62"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.bootstrap.RuntimeFiveVerticalPipelineTest.xml",
+      "sha256": "aaedbf3ca576f9fdff13baf21ec1e2ce9ad16d7b9a8cb31bb6dbd932313202b0"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.bootstrap.RuntimeLaboratoryContractTest.xml",
+      "sha256": "300ca0673f8c7fd4c27091d3497a7e9881405de4eceddae70b144fc5416a3de9"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.bootstrap.RuntimeOperationalExecutionTest.xml",
+      "sha256": "c23be5d0fd4a8fa0996d101c6c3162849af1bbe7067d15dfbc30738d160f94d1"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.bootstrap.RuntimeRequiredDriftAlertTest.xml",
+      "sha256": "1cf2ab534fb2808b53fe63b39170c6e743f568c394397866270cc66fbf95e746"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.bootstrap.RuntimeSqlObservationTest.xml",
+      "sha256": "5b0f788b5190e9b877220c7fffdfaf95d1be5f9c88023fa62293254150938ac1"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.bootstrap.RuntimeTemporalBindingTest.xml",
+      "sha256": "07d51ab03ea5424a5b26535a765879747e0a5eaff61e67e6b4c20389e89810b9"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.bootstrap.RuntimeUsersIntegrationTest.xml",
+      "sha256": "7fde7f72f484b9683c45c973d390299b319910c1ce398e2a679ad49b44e3e3ba"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.bootstrap.RuntimeUsersOperationalRequestTest.xml",
+      "sha256": "dc5a6df641f34409d51dfd287761b471c9d1a579328fcf343990be8115bb33e2"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.bootstrap.RuntimeUsersPhysicalProbeTest.xml",
+      "sha256": "9ade7ae685b9d542175f89885992ec62889e5e9fd04ef3661b96028fcf5902c1"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.bootstrap.RuntimeUsersSessionTest.xml",
+      "sha256": "682e5205aff0541d228f92b34ca1245b81a42c99df2d9e08ab35cad1f39b3e5a"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.bootstrap.SequenceMeasurementsTest.xml",
+      "sha256": "660d3ecc2a263aaf04a48ffa82a616e6a579fcace94d5297a17292502679c8e4"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.bootstrap.SequenceScaleAdmissionTest.xml",
+      "sha256": "f5c0d0d4e3f3828db63dd4cf798663754bfe6896d7734f8007fd8c08e0828d57"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.bootstrap.StatesRasterDecimalTest.xml",
+      "sha256": "30e19282378782b12aa808d02b44bdb02bfb617c82d699a8964de9c2e6623e6c"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.contratos.bloco58.ColetasCharacterizationTest.xml",
+      "sha256": "da79e6c46612360d308ed828e983af762be54f85d4973a1160471674accedeb2"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.contratos.bloco58.ColetasCurrentTemporalTest.xml",
+      "sha256": "0263c6805567528554d1449794d685991a563e43dbf3c89399041e159be30bc4"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.contratos.bloco58.ColetasTemporalCharacterizationTest.xml",
+      "sha256": "cb3b93b281a4d269c71e849d4adba6f80620b88842c87282928a201f83de6459"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.contratos.bloco58.ColetasTraversalCharacterizationTest.xml",
+      "sha256": "1c7718d3a667dc36567d8b9e950439166c09e381cf6efc89dd738a0ba8306111"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.contratos.bloco58.LocalCharacterizationBoundsTest.xml",
+      "sha256": "d7936184a4891aa54a2d2ae5ac4d5ddec4af1221ba68a00507b7db6036ee67c8"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.contratos.bloco58.UsuariosCharacterizationTest.xml",
+      "sha256": "2f782d2988f2f22125c64416354686677f85686c52e350348cb1bc7f3fa2f592"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.contratos.bloco58.UsuariosTraversalCharacterizationTest.xml",
+      "sha256": "f53676d05cdb518f0149f79d8952f9a291fa188ec895fbe4e357e2fc77f67bbc"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.contratos.bloco62.SourceObservationBoundaryTest.xml",
+      "sha256": "79f8a449b51a740a664d8f3aadb417fd38eea3996438ba9360bd829de5b9be72"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.contratos.caracterizacao.CharacterizationClosedSchemaTest.xml",
+      "sha256": "66dea307625b2f239ff945e1b4767b7b8528f50d43c7ff5ddbb68577f750614d"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.contratos.caracterizacao.CharacterizationDeterminismTest.xml",
+      "sha256": "08926e54b4c09e1c9c4fea2f003825b5919a12fdb490707c7cd08fd4dd6ee2e7"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.contratos.caracterizacao.CharacterizationFoundationTest.xml",
+      "sha256": "432009d3ed6386265600158c56a3e94acd2529cfa6c9585cacea584eca2142c0"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.contratos.caracterizacao.CharacterizationOfflineBoundaryTest.xml",
+      "sha256": "3b9dd589c6d691d7e80dc372cca2b6a3d4741bb1bc8a9549893ad50972193303"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.contratos.caracterizacao.qfnd02.Qfnd02ClosedSchemaTest.xml",
+      "sha256": "11588a6e8a428db07f39732233ef399f52fbfdc5e18ca4d4bbac6bc66a2eed67"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.contratos.caracterizacao.qfnd02.Qfnd02DeterminismTest.xml",
+      "sha256": "fc1d6806af8230bb401fc8e17846424bda60a478e1402752fa8234a74ef12028"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.contratos.caracterizacao.qfnd02.Qfnd02FoundationTest.xml",
+      "sha256": "2a4294ce410863612253eef9015e379fdf94f9d45e7e774dc3626ca2d271dd1f"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.contratos.caracterizacao.qfnd02.Qfnd02MutationTest.xml",
+      "sha256": "dae2812f765e4329b486191c3a1efb2825ac4a02bbd97113e6e72fc683d6332c"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.contratos.caracterizacao.qfnd02.Qfnd02OfflineBoundaryTest.xml",
+      "sha256": "c02e6d7b9010489e68ca20231a82aea5b19f7aa1b09c3ed84ab39d71a171a8f0"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.contratos.caracterizacao.qfnd02.Qfnd02Q01ImmutabilityTest.xml",
+      "sha256": "15bd776ac23e17888bb2cd7e8dd7f438ef993563a5adc984e40609ac9bb3ecc6"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.contratos.caracterizacao.StrictUtf8JsonLoaderTest.xml",
+      "sha256": "caaf1c91f35bc723acc984af03470be0a365ae2b72174d281fe30ec48a5027a5"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.contratos.Contract4924ConfigurationTest.xml",
+      "sha256": "9e9da9c228c7bfb76550e8c1c75f90ef847e8770bf6ce616dc2700eb70121547"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.contratos.Contract4924DataExportProbeTest.xml",
+      "sha256": "4ba08013db09209ae705df9cd77fa7a1fcdc6f85b40a6439e0d23269207d9efd"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.contratos.ContractCrossDomainComparatorTest.xml",
+      "sha256": "fa4f065da2608cbc856f5ef29cc42af86fc77506b9d6fa02a742dfdf6b3dcd4f"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.contratos.ContractDataExportProbeTest.xml",
+      "sha256": "eb644e149fd2b1c11fa2d64df209a64d3a209d4e446438350da3ee94c97cc1b9"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.contratos.ContractDateWindowTest.xml",
+      "sha256": "b329b3ab0c471f8e3656985d05ab511c289684b17cadef97904c7599d8a54e70"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.contratos.ContractEvidenceWriterTest.xml",
+      "sha256": "d96e2a4db0c05c1bbf2c01b33aee100ca7bbb949f77cc8ae25dfab4c3cf357dc"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.contratos.ContractParityComparatorTest.xml",
+      "sha256": "16e290d7110cf7112546a92f2a2b79075194361a8867cdcb23de239fad88c275"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.contratos.ContractRemoteEvidenceRunnerChecksTest.xml",
+      "sha256": "619130ab66a94e0530a05a6aea196c4b7d3ba781dc10dcc57c4e7e50841a1207"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.contratos.ContractRemoteExecutionTest.xml",
+      "sha256": "41b5704c288f77f612391b064ffe48eae9e16d7d145856cb90b9dc105d257b88"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.contratos.ContractRunGuardTest.xml",
+      "sha256": "aa2dd4307fad13dfd2a4f41e7a8f02776760abe61c06deb060ddc920c2fc358a"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.contratos.ContractTestConfigurationTest.xml",
+      "sha256": "7d6386917720cba93e8543a5e6eb09e587fceae2e9697bf503e493d37859bc23"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.contratos.ContractTestGateTest.xml",
+      "sha256": "bc2c7717c92ed1cd19d7a6ff7b5d55e16b98eb5b19e1c5a039e4bdf982527dc6"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.contratos.mapping.CotacoesCurlTransportTest.xml",
+      "sha256": "237b67c3f3629d2c988da0cae3f5ceceb9d876c88f6cbfa450c17bfe957cd137"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.contratos.mapping.CotacoesSourceCommandTest.xml",
+      "sha256": "7d48b687049bf93d30119c7f45052799c72ca8d1e933fe4537bb6a7dd8bd010b"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.contratos.mapping.CotacoesSourceRunnerTest.xml",
+      "sha256": "97078986a7d618a7e5f61754d1b1a0de96c39e9b90fc3e9d895ecaf9358c3edb"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.contratos.mapping.MapperCharacterizationLimitsTest.xml",
+      "sha256": "d982a69cb2c6646cd2c883f5c06ad602f947573ed7282005ad02644aa29e1e63"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.contratos.mapping.MapperCharacterizationTest.xml",
+      "sha256": "dfea586ba32538eab6bfe475a678a89d366bd26f0f013dca74db94b0d2e095f3"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.contratos.medicao.ExecutionWidePageRetentionMutantTest.xml",
+      "sha256": "1499815275b3adf8941f7e5bd909e2d42c189bce47044cc86fae78f49d9192e7"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.contratos.medicao.ManagedPageGaugeTest.xml",
+      "sha256": "6233179bce484b3717d84f8846a9a525f0ed11aad78065e27f3ee0e1d8580d6f"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.contratos.medicao.MeasurementDiagnosticsTest.xml",
+      "sha256": "c036352b0d2ef34e4753b5a0ee9c6f535767435b6c598543087bb72747f9f414"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.contratos.medicao.MeasurementEvaluatorTest.xml",
+      "sha256": "91ad2cd0b6cd597c379ddbdb4be4a5e2c875260aa014076fd90100ed73aa06d2"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.contratos.medicao.MeasurementFoundationReceiptTest.xml",
+      "sha256": "b6be3599b028b0f6602fafa2e166b5836d0d18996db3e57143a995125a08bbc3"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.contratos.medicao.MeasurementPlanTest.xml",
+      "sha256": "8fa19e0e56315448f56cf882f6e4f113f17bd5a9c3acaf59400bd9ec33ed77b8"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.contratos.medicao.MeasurementReceiptWriterTest.xml",
+      "sha256": "69d0a6e6ade9561ddebe8321ac3a936edd45d492975f50a7c2ac1231356232b0"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.contratos.medicao.MeasurementRunTest.xml",
+      "sha256": "790aa28c8863be73f05ef0676809ed7a50ef2a01f69a70a6866ea908b53d763d"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.contratos.ReadOnlyGraphQlParityHarnessTest.xml",
+      "sha256": "5f95cf4e303b8534e3c478e6a155c9c723e1654c9f176b58c4ba5ec72b66c774"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.modulos.coletas.aplicacao.ColetaDataExportRecordMapperTest.xml",
+      "sha256": "c8ff61922c93ace82c48b02715078a430fa71e2f320117b77f16267ef3f95fd9"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.modulos.coletas.aplicacao.ColetaTemporalLinkTest.xml",
+      "sha256": "530751b6309230254177375516f8534da04fc235ed2ccabe01b6ca2fa9dd8304"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.modulos.coletas.domain.ColetaStageValueObjectsTest.xml",
+      "sha256": "9023bec36988f61c2504852639cf6701606e9d740b97176b9743edb6e7ecbebd"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.modulos.cotacoes.aplicacao.CotacaoDataExportRecordMapperTest.xml",
+      "sha256": "6ddef40d26b53298f0d97b3d24d752bfb75c13e13fa7b66c41d10a7ff3669ab8"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.modulos.cotacoes.domain.CotacaoStageValueObjectsTest.xml",
+      "sha256": "2e88b17ccaf278eed49e416f72b8966f6145dae9db6d9e3b36cb3105d1ba17da"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.modulos.fretes.aplicacao.FreightAnalyticAttributesMapperTest.xml",
+      "sha256": "0b5dfdced29019343fe3cc667617caf09fe3bfd455b22b79a3fb4a1008802aef"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.modulos.fretes.aplicacao.FreteDataExportRecordMapperTest.xml",
+      "sha256": "ff043b237bf91058b6bb6d69f2cc27b3efa3bed053f853f5b776f77aca23ad70"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.modulos.fretes.aplicacao.FreteGraphQlSidecarMapperTest.xml",
+      "sha256": "2aca789a9a0a172f9a768bff7b498ba10e34e6051b23f12386db22df2911a8a9"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.modulos.fretes.domain.FreteFreshnessPolicyTest.xml",
+      "sha256": "251e0fe82db2f7d214efbbcea2368139ab6d7410dab89efbec4e31ecaba05c0c"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.modulos.fretes.domain.FreteStageBatchTest.xml",
+      "sha256": "7439048ffb4ddb6483bd2d144edaa5daef7d3b233cf9b9452f4aa5502dbb5218"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.modulos.localizacaocargas.aplicacao.LocalizacaoCargaDataExportBoundaryTest.xml",
+      "sha256": "fb028e8c8eb604bc12213ec00f89c22480a6e0aa0f27d0c433581bf34b7711a4"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.modulos.localizacaocargas.aplicacao.LocalizacaoCargaDataExportRecordMapperTest.xml",
+      "sha256": "8a5f52bae887d842b89ff540998fb564af3817554ce6afee425df3a2bc1bbc78"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.modulos.localizacaocargas.domain.LocalizacaoCargaFieldReducerTest.xml",
+      "sha256": "c49312e4a005618866edcb589fd3a0a715840a4b3d9b131defecb2f8dd766d8b"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.modulos.localizacaocargas.domain.LocalizacaoCargaFreshnessPolicyTest.xml",
+      "sha256": "097be0f5dce300d4c1818f7e72b0dcec2f3e8d4fdb11a6baed20446f1d81d0ae"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.modulos.localizacaocargas.domain.LocalizacaoCargaStageBatchTest.xml",
+      "sha256": "04ea35aa4f5a3955f8fe2716e71ab5b1149fd0250a0513b3c7290bad16212279"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.modulos.localizacaocargas.LocalizacaoCargaArchitectureBoundaryTest.xml",
+      "sha256": "72e837a849af3816f82884ae6b5709c5e57de5ed979ae86e4d0d0d8771a6dbc0"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.modulos.manifestos.aplicacao.ManifestoDataExportPageRequestTest.xml",
+      "sha256": "8f00541370222b037e85c4234e499e06fe8504d368e4f6191c358766cba9ea8f"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.modulos.manifestos.aplicacao.ManifestoDataExportRecordMapperTest.xml",
+      "sha256": "942ecae35fc2e09fb5f2a7dd85b879effcdd598f45a4ebd3cbc5150919f98bb5"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.modulos.manifestos.domain.ManifestoRootReducerTest.xml",
+      "sha256": "d51ee9d5d046acbf5fa79995e349e38a49b6bdff6df523c81508b23a700e7b8f"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.modulos.manifestos.domain.ManifestoStageBatchTest.xml",
+      "sha256": "6c234c131ee7342c3062d16ac40372dd15e08cafdf7869f833bf3b92db425e80"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.modulos.usuarios.aplicacao.UsuarioGraphQlNodeMapperTest.xml",
+      "sha256": "757aa262b575251bd2fba1aed08cd64f5df65f379aed45f0a56189aeb7153780"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.modulos.usuarios.domain.UsuarioStageValueObjectsTest.xml",
+      "sha256": "a7a50880b1958c2978b5173c510c309af602e286d3bc55a08a27a146174be9d1"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.autorizacao.AdministeredArtifactManifestTest.xml",
+      "sha256": "dce1e6861322b721b013be5e16ea054f39124821481fa82fdc9c47a6ed399f73"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.autorizacao.AdministeredArtifactVerifierTest.xml",
+      "sha256": "536fc2c66d128217c231d0406a1f10998458578d3efad72bb4f16deaf4daee03"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.autorizacao.AuthorizationValueObjectsTest.xml",
+      "sha256": "c7e5d74075b1d35fa5d0c6e122086fbb34809287ebe083a180c950e56efcd40a"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.autorizacao.LaboratorySqlBudgetTest.xml",
+      "sha256": "5fa165a128826fc7c267d3af7a31a11cd78da0bf048d99036230a10dc06012dd"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.autorizacao.PinnedSqlTrustManagerTest.xml",
+      "sha256": "ea2347160b01c5a1817e370113d9d0eedd1f6e5d5838510894995f1328698b8f"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.autorizacao.RuntimeAuthorizationBoundaryTest.xml",
+      "sha256": "15f10e2d8ecfb940f4e1652b8a698667a8bd525679f2d68ad17ca9a7409c8bb8"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.autorizacao.RuntimeAuthorizationPolicyTest.xml",
+      "sha256": "81235e4cd49b938bce2033f716fa5efb1c773af5bccb76d597aba3a164f6e708"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.autorizacao.RuntimeUsersPhysicalEntryTest.xml",
+      "sha256": "ff084a1cb69863ca47cc4592090bdb6f98b7a602d2dba64806b667c731eacd20"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.autorizacao.WindowsSqlRuntimeAuthorizationTest.xml",
+      "sha256": "4afcd09bb66f4914487a8101e555306d43128c2b727376fae1634a7247df6f97"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.configuracao.DataExportClientSettingsTest.xml",
+      "sha256": "39576bf8b7c39325f52c00a2ef4a1dec34bc23c715a22af658a0a253fc4d29a6"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.configuracao.DataExportPropertiesTest.xml",
+      "sha256": "bc2e02fbaa5da239834e5a42975ce19815a54f3b1cb37932811f8a410fdc2aee"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.configuracao.DataExportRuntimeConfigurationFingerprintTest.xml",
+      "sha256": "a3362d1f49a36bf75801929fc512ec4165b8cea8bc6f328e43df8f57829eeac6"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.configuracao.GraphQlConfigurationTest.xml",
+      "sha256": "cb30b835c9edacb9b1d7e8c0f790e9a32fffbedbd99593bd8b446d1494e2f40b"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.configuracao.RuntimeConfigurationFactoryTest.xml",
+      "sha256": "49942998542abd35da3a03c93f907cc19d1b5ead53a2be692a3877c2a6df91fc"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.configuracao.ShadowStoragePropertiesTest.xml",
+      "sha256": "9e29f01981144188be19b81dffef47d6215985f682bbdf1a2d0d3457420a0d6f"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.contrato.ContractResponseProfilerTest.xml",
+      "sha256": "acda3adaf842587e31578ce5d9a141ce6e1b260fc84e2d0c578c0ff1ce10e9d4"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.contrato.ContractRunGuardTest.xml",
+      "sha256": "79fdbb1a254196c882eb974e854b4d457142824574090cc568573a755856da79"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.contrato.ContractValidatorTest.xml",
+      "sha256": "34682a9096e4ba9537904dfeb55b7df44f47fab971ede323e2fa81edeaf88c86"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.contrato.FirstWaveCompletenessGateTest.xml",
+      "sha256": "b14a5e0fb3d04b3f37a2133c7bb6aaba604a482cd3d0f6fa516dec788ae55e58"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.contrato.SourceContractReleaseTest.xml",
+      "sha256": "ac0f50024a2729451c604ff5830abfaf4a6b0405613ab2658c4e5fc6764ab6ed"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.controle.ControlPlaneSqlContractTest.xml",
+      "sha256": "f3dba86625b4cd4fc5032e6fb53475f6faa6711f3b786ae435fd38ceb2318c1e"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.controle.ControlPlaneValueObjectsTest.xml",
+      "sha256": "67394a812317f32a02d7c31f5bb3dee76576a2c622b8484ea7b0c7bceb037b89"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.controle.JdbcSqlServerControlPlaneTest.xml",
+      "sha256": "1d403e054a46401b0b350541d8bb0eecdbbb2a39cc47b67105158181ce3589f9"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.controle.ProgressiveDataGateSqlContractTest.xml",
+      "sha256": "2dd6c466110bdb866940bce017a1d5965bba0dd9ea30dd4554a8167a6f3b2831"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.fonte.dataexport.CircuitBreakingDataExportGatewayTest.xml",
+      "sha256": "3db9e3de8e461d076031283f39495bb1a73e13c2f4a73e2f7aada9d54c21fbf8"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.fonte.dataexport.ColetasSourceReplayTest.xml",
+      "sha256": "5b9339973f5bb7a7e21a489574d0f5605238cb39339ae2728b7b728374a622c4"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.fonte.dataexport.DataExport422FailureClassifierTest.xml",
+      "sha256": "a96ec79b3ecb3cbe919e1fc14bc95f431b8315f853d74b7ba32ff91529f1b7bb"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.fonte.dataexport.DataExportColetasContractTest.xml",
+      "sha256": "7f38f5db73911b7cfc6aa462727ac572e8695962d74e1ab2768c3cbc19555826"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.fonte.dataexport.DataExportContractGateTest.xml",
+      "sha256": "3a2c2796d37dbc2f0170096808670e47fd3ce8f651230cfae2d5ea127b0aab36"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.fonte.dataexport.DataExportExtractionAuditTest.xml",
+      "sha256": "cc4259d5329a12bb79d35a35de89f1c5618020bfb3b1a4c07c336940b9397a13"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.fonte.dataexport.DataExportExtractionLimitsTest.xml",
+      "sha256": "7a9e055becf34e420682d966b6cf10fb250acccddab96d2af25aeb82799d22db"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.fonte.dataexport.DataExportFirstWaveContractTest.xml",
+      "sha256": "809efef2089c8036518ae49640b5c48b606717b0ec0062b6d85d4e96f46cebfa"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.fonte.dataexport.DataExportHttpAttemptTest.xml",
+      "sha256": "d0ee16622078340b46f6ee496ae626073e0a146a6e060813ca4283bf5a1a8bd1"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.fonte.dataexport.DataExportHttpBodyHandlerTest.xml",
+      "sha256": "6d0b6a5e631922cdc47332d50f33bb0eb61d4086bf5c975cac395074f5d227a8"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.fonte.dataexport.DataExportHttpExecutorTest.xml",
+      "sha256": "f8d3d955de3e689b031b3323ab73b29c778cf86e6a784578edc6008406ba237d"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.fonte.dataexport.DataExportHttpGatewayFactoryContractBindingTest.xml",
+      "sha256": "73d9ebec066f6b1fcb622fa2b75d782e85db777cc5820ebf6d4f3a3d448827ca"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.fonte.dataexport.DataExportHttpResilienceIntegrationTest.xml",
+      "sha256": "6f8c5aaa36d40d205b92ab36e4b86253b34cea87486da5e6b0ac969d664252cd"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.fonte.dataexport.DataExportPageEntityLimitValidatorTest.xml",
+      "sha256": "3da751bca6e6347e2eedfa46779be8ba981415b909f07e9144ac116abca0cee7"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.fonte.dataexport.DataExportPageRequestTest.xml",
+      "sha256": "15937ab0ffc15acb8bcd9d1c9f73a0b103437e38509ad2600ac0d29e48cfa23f"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.fonte.dataexport.DataExportPageStreamerMultiscaleMeasurementTest.xml",
+      "sha256": "ab1ed61ad012720d0e1429ea5c5033ff5816033399608314a405f9b10c84f315"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.fonte.dataexport.DataExportPageStreamerTest.xml",
+      "sha256": "17165a50be829933111c030c97822a507cd81d26d2726724c588e843ae834750"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.fonte.dataexport.DataExportPayloadProfileTest.xml",
+      "sha256": "ac30995474cffdbd7c72b03572339ded29ccfa2f247bc0b4f90fa30b737d425d"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.fonte.dataexport.DataExportQueryEncoderTest.xml",
+      "sha256": "f17fd7756950b60f84045d59203ef9dcae1252acc78ad8cee00c9861b832ed06"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.fonte.dataexport.DataExportRequestJsonSerializerTest.xml",
+      "sha256": "d66b4e40d4931b6b93623d16f3694748218dce16c5c629ff80d2465df487a865"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.fonte.dataexport.DataExportResponseFormTest.xml",
+      "sha256": "194a4d56f4bcddc23aaa370668e44c1adaed187d872f0bf47dbfea0d12b15db7"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.fonte.dataexport.DataExportResponseNormalizerTest.xml",
+      "sha256": "5ec5bd3592a567d6b56678c6d15a58558c5681afc4590c5ef54631412181182a"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.fonte.dataexport.DataExportRetryPolicyTest.xml",
+      "sha256": "59b151e1faea467993d0a0b45efe37e006c7db804d1b28fec1dff808b5187026"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.fonte.dataexport.DataExportRetryScheduleTest.xml",
+      "sha256": "d9d9ebf82606187a5406804a4c9eca3337c60da25056cbd10799879ecedf94f3"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.fonte.dataexport.DataExportSafeToStringTest.xml",
+      "sha256": "ba91805852e957765be0e8c92b6c5ec0a7783e5e48e6e6219ab87fcb6234b097"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.fonte.dataexport.DataExportStagingPipelineTest.xml",
+      "sha256": "2e632865d63a53bc42c07a83fef40792210aa30b4f07bc42c4e6f6b7c0e986f3"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.fonte.dataexport.DataExportTemplateInfoParserTest.xml",
+      "sha256": "4ef4ada2c3fba294ef99670b2bda2c5f1e14b4f6cac3e6a9b08d80e3f6743622"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.fonte.dataexport.HttpDataExportGatewayTest.xml",
+      "sha256": "e5130fafdff90e159e5906438a3290b39264f9b68a1370d626c4bdae99b2b171"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.fonte.dataexport.HttpDataExportTemplateInfoGatewayTest.xml",
+      "sha256": "355a83d4a3c8410076f8c2bd4f765ebb30537091348d34c1e24e94faebd84a69"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.fonte.dataexport.LocalRuntimeIntegrationTest.xml",
+      "sha256": "cef7c27bd2bc99e1115bf003f773d42ec0eaa2f6412af6f5af9f09a1fb850fee"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.fonte.dataexport.RuntimeDurableRecoveryIntegrationTest.xml",
+      "sha256": "bc88a88fdf87ca0a462d16372c7cd8b22726f85228f1c708fbcfd86a4a28176c"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.fonte.dataexport.SharedDataExportCircuitBreakerTest.xml",
+      "sha256": "43edbc1c2779b11533055f09eb264d7d382710f9f5fff322e12b47dff8181e63"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.fonte.dataexport.SourceDateTimeRangeTest.xml",
+      "sha256": "718c29867e23d364f7d36049fcdb395d9d38ba9704e04aa993a37f6bc0fa9c06"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.fonte.dataexport.StatesExpansionDecimalTest.xml",
+      "sha256": "8a07c581134ea31aed72e3b59216bb1c6a9332f05f7fdbebcec8f355436b0aa7"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.fonte.graphql.ControlPlaneGraphQlExtractionAuditTest.xml",
+      "sha256": "37efddd66b9c12daea8732f2800572d6044a6e66407e04f1334da6b6558fb8d2"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.fonte.graphql.ExtrairReferenciasTemporaisColetasTest.xml",
+      "sha256": "c2f96029fad9d49922ed8855fcaa355f6b4d45146eeffb43fc1bae62afbfe601"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.fonte.graphql.ExtrairUsuariosGraphQlTest.xml",
+      "sha256": "6631dda9b01e4727aeb2f7ebb4a48ab0c764f4ef3c4d903ebdff6791a26f4a01"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.fonte.graphql.GraphQlContractGateTest.xml",
+      "sha256": "7c7e7743c36f771437fef3acbf210a0daf7e610ba45f26d92d9c485a85c3579a"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.fonte.graphql.GraphQlFixtureContractTest.xml",
+      "sha256": "a5555ab237f2360c02644b4946ff28209cd03669716fcabf4612b57dac21dde1"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.fonte.graphql.GraphQlHttpBodyHandlerTest.xml",
+      "sha256": "52eb8b40dee1b82d6817380193c15a947e452af51fd4e3569d267d921ba2e8dc"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.fonte.graphql.GraphQlHttpExecutorTest.xml",
+      "sha256": "0c497eca5c1f3083816e81ec7fe6866c8e56f1b1bc5b5e161109c891e81bc7c3"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.fonte.graphql.GraphQlOperationalAuditTest.xml",
+      "sha256": "a09c7977228adec354a0deb93541ce306e6c75e8383ec89bbbbebc61fe4975b7"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.fonte.graphql.GraphQlPageStreamerMultiscaleMeasurementTest.xml",
+      "sha256": "8a47bb0e86a41b6abdcdd0e1eadd08c389192bb2cdae73c36cc55133defd6735"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.fonte.graphql.GraphQlPageStreamerTest.xml",
+      "sha256": "b8efad17df3bbc73f5200dcc1311d26fcea08debfcc8a0e9a9d5aab5fb8d1608"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.fonte.graphql.GraphQlResilienceTest.xml",
+      "sha256": "6fd0bd6c4f08fe146b6fbf99da2169a354dc08edec502bd4c903ca09ee86507c"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.fonte.graphql.GraphQlResponseParserTest.xml",
+      "sha256": "61637e3ce62a572407974c030009b150f7a71fce8afa9122c4b9a0b170a34e67"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.fonte.graphql.GraphQlTransitionCatalogTest.xml",
+      "sha256": "e3ab37e9d0322408eb39283447bc8f3d354314a38760c930ac02a65755d19e62"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.fonte.graphql.GraphQlUsersFirstWaveContractTest.xml",
+      "sha256": "20d8b02b949c842e8a8a4a45fea298e0d218bb06c8fff539c83eda59a6bdc73c"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.fonte.graphql.HttpGraphQlGatewayTest.xml",
+      "sha256": "ee0fc6c3dfd1b646d7011465c81dab364e4bc121495c5425fb9a46b25786d84a"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.fonte.graphql.PersistirReferenciasTemporaisColetasTest.xml",
+      "sha256": "8b24e7a0711e682155d029b8a2ec222c8e05ed1d7b61d32812573d28ba8265a6"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.fonte.SyntheticSourceScopeTest.xml",
+      "sha256": "871721621c14d25fe6e97688df59ea26c2da415f3d125caefc03d515c0c7d242"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.identidade.FirstWaveIdentityCatalogTest.xml",
+      "sha256": "29a1ad79e60516d8928db3f37b994e4fb05a1d1a5471a6584574b76e4b237509"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.identidade.IdentityConflictPolicyTest.xml",
+      "sha256": "143436f3f00a3bf599ab1603bc89bc95a9bf4827ebc2b3b8ac5168edbab6ad49"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.identidade.ScopedSourceIdentityTest.xml",
+      "sha256": "f776d670b7dbfbde381551958da314b23ade47af6fd82b87a6fddcd939f85507"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.observabilidade.BoundedStructuredLoggerTest.xml",
+      "sha256": "91b180078602bd9bf5eaef6e99b0e6c95f43777827e076ca36dc1a8c0f060e48"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.observabilidade.ExecutionMetricsAccumulatorTest.xml",
+      "sha256": "e3c8e1e20f9d889b8a58c351c4ce8c9307e2bc1fdd4634a5b7401d7d66517783"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.observabilidade.ObservabilityValueObjectsTest.xml",
+      "sha256": "85fb9463b3811419a1f32c3e5fc7b57594d5926f8292c40170089bfef46766a9"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.observabilidade.SafeThrowableSummaryTest.xml",
+      "sha256": "57b4980703e1bbf5271995d68083fa74fb36b7db6e756cd30e7e9d26ca82b577"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.observabilidade.SensitiveValueRedactorTest.xml",
+      "sha256": "07fc5b7d02ef972ef8402fbf1fecbf37baba2c7876640b8b05106aab129e6d2a"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.observabilidade.StructuredCorrelationContextTest.xml",
+      "sha256": "c3f678e04245294d0f332626f0ccf27bee7ff1a503a6ad93b7aed7796f8f3f35"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.orquestracao.RuntimeTemporalCoordinatorTest.xml",
+      "sha256": "2555bcb5c339850a58d25ecc162e6dcb0a18f1361cd49e1e49ee1a92301f4e59"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.orquestracao.RuntimeTemporalPlannerTest.xml",
+      "sha256": "f5a75f733b562be1cc963cdea93c860df5fe2543a57ff88186c7d33fc0e3b312"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.orquestracao.RuntimeWorkloadRegistryTest.xml",
+      "sha256": "7ea64162e313052c435697622cfc2dbbecf6a5b17447531f2f7d601d2f06f2b7"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.persistencia.coletas.ColetaExactTimeWriterTest.xml",
+      "sha256": "74db4cdbe4265dbe4c43f8686a10f286e85ead7b18ad57bf0b25134cc610e2c7"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.persistencia.coletas.ColetaTemporalLaboratorySessionCloseTest.xml",
+      "sha256": "0e9f2225eff76eb49f210e3af59d141a56d6af331b7a03baca1887bf55d6ede6"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.persistencia.coletas.JdbcSqlServerColetaGatewaysTest.xml",
+      "sha256": "4aca61d371adb3352f373ba9be88b476a4e0866800fa37f3ab19634e2481c8b8"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.persistencia.coletas.JdbcSqlServerColetaTemporalGatewayTest.xml",
+      "sha256": "d96513d01aeee92f39b6d54c9d21179f3da5b1a4bf3764e5e40e4950ff0f9186"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.persistencia.controle.JdbcSqlServerTemporalPlanTest.xml",
+      "sha256": "df697a3198af4eb87769cabcd57a849518c517a884d171e0a188bf2125dd89d2"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.persistencia.controle.RuntimeJdbcBoundariesTest.xml",
+      "sha256": "5135db1169b593fd09a13a9e0a8dcbd48ce186553c998bfe24a1b4507a8f8c4f"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.persistencia.cotacoes.JdbcSqlServerCotacaoGatewaysTest.xml",
+      "sha256": "2062c27e1fae5e1f1e53838b49521e72938120324fca8d3bf257e2fa53639537"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.persistencia.fretes.JdbcSqlServerFreteGatewaysTest.xml",
+      "sha256": "03b998244fb12e298c087123499a297ed4c6604a35fe5e323f577b0804ac1c4c"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.persistencia.localizacaocargas.JdbcSqlServerLocalizacaoCargaGatewaysTest.xml",
+      "sha256": "24484df52a6432ddfdc9ca92c13ef0465eee521ab9f92bc067c1df77c01f5275"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.persistencia.localizacaocargas.LocalizacaoCargaShadowSqlContractTest.xml",
+      "sha256": "1256200721462653a08eaa08ff639ad160d71fb6d7fafc9373c746a2b0c41c7f"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.persistencia.manifestos.JdbcSqlServerManifestoPromotionGatewayTest.xml",
+      "sha256": "0be246533704ef6bb5626ff68d22e0311a34011fd7e09c113fd690947f391b85"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.persistencia.manifestos.JdbcSqlServerManifestoStagingGatewayTest.xml",
+      "sha256": "3d500a63ff7a999ec9bbc402e0c0a36eb61f097be3789e457ea0b5d61202aefe"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.persistencia.observabilidade.JdbcSqlServerObservabilityGatewayTest.xml",
+      "sha256": "0968d20c77ed155364a9aef3dbef5299dfd2f7dbe017906c5a7472a3ba398ee7"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.persistencia.observabilidade.ObservabilityDataQualitySqlContractTest.xml",
+      "sha256": "3aaa026e1f30f9eec5d916094ef714b49bf9d257ef756372dbbe56ab996388d7"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.persistencia.sombra.GovernedReferencesSqlContractTest.xml",
+      "sha256": "7c6a04e54316c92b864eb1755490af085b1e46d6dc4884b05c29b8f34c371399"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.persistencia.sombra.JdbcDataExportExtractionAuditTest.xml",
+      "sha256": "1a6ecae912bad122f5ca82e96a5938ef8251459782608e57daf0c52e102782c6"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.persistencia.sombra.SchemaFoundationSqlContractTest.xml",
+      "sha256": "419e1ce627f873ce63338c398759f6e00696bc88819b058330ae7c5b065390a0"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.persistencia.sombra.UsuariosDimensionCurrentSqlContractTest.xml",
+      "sha256": "a801050bc9044b5564809990a248b14861cc7041c118de83cfe5c784a661e749"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.persistencia.staging.JdbcSqlServerStagingPromotionKernelTest.xml",
+      "sha256": "32861cb02753d351fc027ff5884f3737b105b18b592850510efa14342c12ec33"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.persistencia.staging.StagingLifecycleSqlContractTest.xml",
+      "sha256": "928b0243e1197cfc36c48a9576c2269a3a3bed26dda92b099614ba0aa33aa178"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.persistencia.staging.StagingPromotionKernelSqlContractTest.xml",
+      "sha256": "ffaf2c14930cf3e1adc54b7e4100fc2c1092ac97ead697d463d5379d0819cdf4"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.persistencia.staging.StagingValueObjectsTest.xml",
+      "sha256": "5ace744146c2ed109bf4f8bb9b31b86f25fe996ed044599f66df34d0956289a0"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.persistencia.usuarios.JdbcSqlServerUsuarioPromotionGatewayTest.xml",
+      "sha256": "95b9472c97a2653a4b2f303cd1f7f1d8a162765472d0804de65af37cde8f9184"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.persistencia.usuarios.JdbcSqlServerUsuarioStagingGatewayTest.xml",
+      "sha256": "c5e9b0faee794f6ad305f0611b1be23178b9d1eff8ec084bef053b59caec8e5f"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.qualidade.FailClosedDataQualityEngineTest.xml",
+      "sha256": "3704a76a9f0edffa7d0a26d38a4252c707eac98cda9c7f8a7404108a3529a0b2"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.qualificacao.QualificationDeclaredWirePresenceTest.xml",
+      "sha256": "7afb720ce7a6bba19816df13c2762ef6cb3f03e647e9339981bfd407ab6ce117"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.qualificacao.QualificationJsonPathTest.xml",
+      "sha256": "4cf961893ef18ef30b7219dc2f8c81a1dc59e591622193577a6058e9de7f38a3"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.qualificacao.QualifiedPackageClasspathTest.xml",
+      "sha256": "b4db47b124ab1c92994a2beefdb78fd229218dfde0fb643c409dc688c52f7986"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.reconciliacao.sweep.FailClosedSweepPreviewKernelTest.xml",
+      "sha256": "d3145b8cba09c7e04c5e9616113d5314a05f438c815f128d3061f1af72bb3d46"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.reconciliacao.sweep.SweepApplicabilityMatrixTest.xml",
+      "sha256": "7e54a46b03cf51851c5bb03e9f80eab8a776f00a5ebf3e24366579ff3a62272f"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.reconciliacao.sweep.SweepPreviewBoundaryTest.xml",
+      "sha256": "39e3eb9c690c64f8e7aef465a21fa0f639a2847dbc5bbeafe26bd7f93a51a719"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.reconciliacao.sweep.SweepPreviewDeterminismTest.xml",
+      "sha256": "79507771b6378acbdaefa23867cd634e2aeb25df10534f6c2b149b91aae24a21"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.reconciliacao.sweep.SweepPreviewHardeningTest.xml",
+      "sha256": "93c0cb3e0bd5b65d7aaa5768df9e75bec7ce320e86f822cd18ed548da03448b0"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.reconciliacao.sweep.SweepPreviewMutationCatalogTest.xml",
+      "sha256": "4a0d21e00d02c6287c0cc6144d50aa7b2eb957387c097c6f7e565eadea34d581"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.resiliencia.BoundedWindowRepartitionerTest.xml",
+      "sha256": "681fd9135858687fd96f1aed98aede4ffeb477837a3735b08c699c93ed91f7e4"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.resiliencia.CycleOutcomeAndCheckpointTest.xml",
+      "sha256": "191012903f3e2c056a2485f492d7a5df94b6716a42a6aba76ccad44a19e5375c"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.resiliencia.EslRequestGovernorTest.xml",
+      "sha256": "c03f1c107a1621954b5ea70ed946bc14902f6c91d1854824e35ab47005540dc4"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.resiliencia.EslResiliencePolicyTest.xml",
+      "sha256": "c504f921bc9a4381d75ee10bc3f4635f3d2db87031c434e0cf6cf4936c550a04"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.resiliencia.ExecutionDeadlinesTest.xml",
+      "sha256": "b35a2ad4f78462da72a48fb1ecd76472209351772f47d5b07e45d1096298a7bf"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/build/target/surefire-reports/TEST-br.com.esl.etl.v2.plataforma.resiliencia.FailurePolicyMatrixTest.xml",
+      "sha256": "3b701a7e83842132c14b14ab6c3e5f14e2d842879b219fd43d90303a2c31031c"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/jar-static.json",
+      "sha256": "26dc3d33f15f1a52c1a108c2286e5258c74a375cf7ddabb82978df4202868529"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/ast.json",
+      "sha256": "dc4f22a084a5aad03d4feb59cba66a9c7122936e4cd440ab931994caeaab7e91"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/matrix-only.stdout.log",
+      "sha256": "a5a918001877410ec3b4ca13103a591debbcb969d962ec4b211870aa60e5ced4"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/guard-probe-final.stderr.log",
+      "sha256": "012ba33755ca66918dc8241359a482efb5d289dd7430c0d25f6023eb9603c858"
+    },
+    {
+      "path": "target/p11-regressao-20260921-01/execution-ledger.jsonl",
+      "sha256": "914721b9d539f7f7f77ce261c016c83c7ffec1f45e577333ad3eadf0e984f9ab"
+    }
+  ],
+  "historicalNativeCache": "12.8.2.x64 DLL absent at read-only inventory",
+  "physicalBlockOrigin": "User attachment A/B: specific authorization absent; finite orders and ledgers required"
+}

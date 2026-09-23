@@ -32,6 +32,9 @@ class ControlPlaneGraphQlExtractionAuditTest {
         final ControlPlaneGraphQlExtractionAudit audit =
                 new ControlPlaneGraphQlExtractionAudit(controlPlane);
 
+        audit.executionStarted(
+                new GraphQlExtractionAudit.ExecutionStarted(
+                        EXECUTION_ID, GraphQlReadOperation.USERS_SNAPSHOT, 20, 2, 40, NOW));
         audit.pageRead(page(1, 2, 2, 512, true));
         audit.pageRead(page(2, 1, 1, 256, false));
 
@@ -52,22 +55,26 @@ class ControlPlaneGraphQlExtractionAuditTest {
     }
 
     @Test
-    void lifecycleCallbacksAreValidationOnlyAndFailuresFromControlPlanePropagate() {
+    void lifecycleRequiresRealPagesAndFailuresFromControlPlanePropagate() {
         final RecordingControlPlane recording = new RecordingControlPlane();
         final ControlPlaneGraphQlExtractionAudit audit =
                 new ControlPlaneGraphQlExtractionAudit(recording);
         audit.executionStarted(
                 new GraphQlExtractionAudit.ExecutionStarted(
                         EXECUTION_ID, GraphQlReadOperation.USERS_SNAPSHOT, 20, 2, 40, NOW));
-        audit.executionCompleted(
-                new GraphQlExtractionResult(
-                        EXECUTION_ID,
-                        GraphQlReadOperation.USERS_SNAPSHOT,
-                        1,
-                        1,
-                        NOW,
-                        NOW,
-                        GraphQlTraversalVerification.LOCAL_PAGE_INFO_TERMINAL_UNVERIFIED));
+        assertThrows(
+                IllegalStateException.class,
+                () ->
+                        audit.executionCompleted(
+                                new GraphQlExtractionResult(
+                                        EXECUTION_ID,
+                                        GraphQlReadOperation.USERS_SNAPSHOT,
+                                        1,
+                                        1,
+                                        NOW,
+                                        NOW,
+                                        GraphQlTraversalVerification
+                                                .LOCAL_PAGE_INFO_TERMINAL_UNVERIFIED)));
         audit.executionFailed(
                 new GraphQlExtractionAudit.ExecutionFailed(
                         EXECUTION_ID,
@@ -82,11 +89,16 @@ class ControlPlaneGraphQlExtractionAuditTest {
         assertThrows(NullPointerException.class, () -> audit.pageRead(null));
         assertThrows(NullPointerException.class, () -> audit.executionCompleted(null));
         assertThrows(NullPointerException.class, () -> audit.executionFailed(null));
-        assertThrows(
-                IllegalStateException.class,
-                () ->
-                        new ControlPlaneGraphQlExtractionAudit(new RecordingControlPlane(true))
-                                .pageRead(page(1, 1, 1, 64, false)));
+        final var failing = new ControlPlaneGraphQlExtractionAudit(new RecordingControlPlane(true));
+        failing.executionStarted(
+                new GraphQlExtractionAudit.ExecutionStarted(
+                        EXECUTION_ID, GraphQlReadOperation.USERS_SNAPSHOT, 20, 2, 40, NOW));
+        assertEquals(
+                "synthetic-control-plane-failure",
+                assertThrows(
+                                IllegalStateException.class,
+                                () -> failing.pageRead(page(1, 1, 1, 64, false)))
+                        .getMessage());
         assertThrows(
                 NullPointerException.class, () -> new ControlPlaneGraphQlExtractionAudit(null));
     }

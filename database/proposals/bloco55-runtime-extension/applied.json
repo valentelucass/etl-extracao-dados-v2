@@ -1,0 +1,11 @@
+{
+  "id": "B55_SCHEMA_APPLY_02",
+  "packageSha256": "6ecf87b3f2563ef1af7a959885d2282afc2d1addf73e8d0f3d7de4dfe94b0eb7",
+  "catalogSha256": "d645bc93095b0ce89677b1e92abe52bacce0127a73487854b177682597b49100",
+  "migrationSha256": "24bd97402526d2656a9eb30e1216325763853af73cf5806108d7f467e27e8779",
+  "dataRows": 6723,
+  "grantDelta": 0,
+  "scopeDelta": 0,
+  "passed": true,
+  "utc": "2026-09-08T18:59:11.8304308+00:00"
+}

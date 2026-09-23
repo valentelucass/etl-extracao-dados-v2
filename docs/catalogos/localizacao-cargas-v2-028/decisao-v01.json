@@ -1,0 +1,287 @@
+{
+  "catalogVersion": "2026-09-06.v2-028a.1",
+  "decision": "LOCALIZACAO_CARGAS_8656_LOCAL_DOMAIN_DECISION",
+  "decisionStatus": "COMPLETE_LOCAL_DECISION_ONLY",
+  "scope": "DECISION_ONLY_NO_IMPLEMENTATION_NO_SOURCE_IO_NO_RELATION",
+  "task": "V2-028a",
+  "route": "V10A",
+  "block": 46,
+  "sourceContract": {
+    "id": "dataexport-8656",
+    "version": "2026-09-04.v2-025b.1",
+    "releaseFingerprint": "da95fc17fc3db2fae7635c5456166d72af844b1d826e84ab6c2ba8b6f1b65c24",
+    "reference": "docs/catalogos/contratos-esl-8656/manifesto.json"
+  },
+  "identityDecision": {
+    "task": "V2-009b/8656",
+    "catalogVersion": "2026-09-04.v2-009b.1",
+    "identityFingerprint": "14af11dce5fd7696238907b72f8f6c8c77f86a4cff3045b489da5eb132c0d6f0",
+    "reference": "docs/catalogos/identidade-localizacao-cargas/manifesto.json"
+  },
+  "execution": {
+    "parentTask": "V2-028",
+    "parentStatus": "OPEN_IMPLEMENTATION_PENDING",
+    "implementationOwner": "V10",
+    "allowedArtifacts": [
+      "DOCUMENTATION",
+      "LOCAL_VALIDATOR",
+      "SYNTHETIC_DECISION_CASES"
+    ],
+    "forbiddenArtifacts": [
+      "JAVA_PRODUCTION_CODE",
+      "MAPPER",
+      "MIGRATION",
+      "SQL",
+      "DATABASE",
+      "SOURCE_IO",
+      "RELATION",
+      "CHARACTERIZATION",
+      "BOOTSTRAP",
+      "PUBLICATION",
+      "SWEEP",
+      "CUTOVER"
+    ]
+  },
+  "rules": [
+    {
+      "id": "LOC-01",
+      "title": "Identidade escopada",
+      "decision": "Usar somente /corporation_sequence_number INTEGER na tupla escopada; sequence_number nunca é chave, alias ou fallback.",
+      "evidence": "docs/catalogos/identidade-localizacao-cargas/manifesto.json",
+      "implementationGate": "V10"
+    },
+    {
+      "id": "LOC-02",
+      "title": "Presença explícita",
+      "decision": "Preservar raw, typed, parse state, path, presence e proveniência; ausência incremental e sweep não alteram estado ativo.",
+      "evidence": "docs/catalogos/portabilidade/regras-negocio.csv#LOC-02",
+      "implementationGate": "V10"
+    },
+    {
+      "id": "LOC-03",
+      "title": "Volume e candidato de Fretes",
+      "decision": "Congelar COALESCE local, Fretes, zero com zero real; manter associação exata escopada apenas como candidato e bloquear ambiguidade.",
+      "evidence": "docs/catalogos/portabilidade/regras-negocio.csv#LOC-03",
+      "implementationGate": "V10"
+    },
+    {
+      "id": "LOC-04",
+      "title": "Conversão numérica estrita",
+      "decision": "Quarentenar valor inválido, overflow, escala excessiva e locale ambíguo sem coerção, inferência ou arredondamento.",
+      "evidence": "docs/catalogos/portabilidade/regras-negocio.csv#LOC-04",
+      "implementationGate": "V10"
+    },
+    {
+      "id": "LOC-05",
+      "title": "Frescor por service_at",
+      "decision": "Usar somente service_at válido para dedupe e promoção; bloquear regressão, conflito e desempates por keep-last ou metadado técnico.",
+      "evidence": "docs/catalogos/portabilidade/regras-negocio.csv#LOC-05",
+      "implementationGate": "V10"
+    },
+    {
+      "id": "LOC-06",
+      "title": "Status fail-closed",
+      "decision": "Normalizar por trim e lowercase, usar sem_status para nulo ou branco e tratar desconhecido como não terminal sem inferência.",
+      "evidence": "docs/catalogos/portabilidade/regras-negocio.csv#LOC-06",
+      "implementationGate": "V10"
+    },
+    {
+      "id": "LOC-07",
+      "title": "Campo legado sem fonte",
+      "decision": "Manter status_branch_nickname como ABSENT/UNSOURCED_LEGACY e proibir fallback por qualquer nickname semelhante.",
+      "evidence": "docs/catalogos/contratos-esl-8656/manifesto.json",
+      "implementationGate": "V10"
+    }
+  ],
+  "identity": {
+    "entity": "localizacao_cargas",
+    "tuple": [
+      "source_instance",
+      "tenant_scope",
+      "entity",
+      "source_key"
+    ],
+    "sourceKey": {
+      "path": "/corporation_sequence_number",
+      "wireType": "INTEGER",
+      "role": "TYPE_TAGGED_SCOPED_SOURCE_KEY"
+    },
+    "forbiddenAlias": {
+      "path": "/sequence_number",
+      "role": "NEVER_SOURCE_KEY_ALIAS_OR_FALLBACK"
+    },
+    "canonicalId": "INTERNAL_SQL_SURROGATE_BIGINT_IDENTITY",
+    "scope": {
+      "policy": "EXPLICIT_SOURCE_INSTANCE_AND_TENANT_REQUIRED",
+      "forbiddenSentinels": [
+        "DEFAULT",
+        "GLOBAL",
+        "SINGLETON"
+      ]
+    }
+  },
+  "presence": {
+    "vocabulary": [
+      "ABSENT",
+      "NULL",
+      "VALUE"
+    ],
+    "representation": [
+      "RAW",
+      "TYPED",
+      "PARSE_STATE",
+      "PATH",
+      "PRESENCE",
+      "PROVENANCE"
+    ],
+    "absent": "PRESERVE_KNOWN_VALUE_AND_RECORD_ABSENT",
+    "null": "APPLY_EXPLICIT_NULL_ONLY_ON_ACCEPTED_NEWER_OBSERVATION",
+    "value": "APPLY_TYPED_VALUE_WITH_RAW_PATH_PARSE_STATE_AND_PROVENANCE",
+    "incrementalAbsence": "NO_ACTIVE_STATE_CHANGE",
+    "sweep": "DISABLED_NO_COMPLETENESS_PROOF"
+  },
+  "volume": {
+    "downstreamProjection": "COALESCE(volumes_localizacao, volumes_fretes, 0)",
+    "zeroSemantics": "ZERO_IS_REAL_LOCAL_VALUE_NEVER_FALLBACK",
+    "localVolumesPath": "/invoices_volumes",
+    "freightCandidate": {
+      "localPath": "/corporation_sequence_number",
+      "freightAliasPath": "/corporation_sequence_number",
+      "matching": "EXACT_SAME_SOURCE_INSTANCE_TENANT_AND_TYPED_ALIAS_CANDIDATE_ONLY",
+      "ambiguity": "BLOCK_ZERO_OR_MANY_NEVER_PICK_FIRST",
+      "storage": "PRESENCE_AND_PROVENANCE_ONLY_NO_RELATION"
+    },
+    "forbidden": [
+      "FK",
+      "JOIN",
+      "FINAL_CROSSWALK",
+      "TOP_1",
+      "FUZZY_NAME_MATCH",
+      "PUBLICATION"
+    ],
+    "publication": "FORBIDDEN_PENDING_RELATIONAL_PARITY_AND_CONSUMER_GATES"
+  },
+  "numeric": {
+    "fields": [
+      {
+        "path": "/invoices_volumes",
+        "targetType": "INTEGER_32_NON_NEGATIVE",
+        "grammar": "ASCII_DIGITS_NO_SIGN_NO_GROUPING_NO_WHITESPACE",
+        "precision": 10,
+        "scale": 0
+      },
+      {
+        "path": "/taxed_weight",
+        "targetType": "DECIMAL_38_9",
+        "grammar": "ASCII_OPTIONAL_MINUS_DIGITS_OPTIONAL_DOT_FRACTION_NO_GROUPING_NO_WHITESPACE",
+        "precision": 38,
+        "scale": 9
+      },
+      {
+        "path": "/invoices_value",
+        "targetType": "DECIMAL_38_9",
+        "grammar": "ASCII_OPTIONAL_MINUS_DIGITS_OPTIONAL_DOT_FRACTION_NO_GROUPING_NO_WHITESPACE",
+        "precision": 38,
+        "scale": 9
+      },
+      {
+        "path": "/total",
+        "targetType": "DECIMAL_38_9",
+        "grammar": "ASCII_OPTIONAL_MINUS_DIGITS_OPTIONAL_DOT_FRACTION_NO_GROUPING_NO_WHITESPACE",
+        "precision": 38,
+        "scale": 9
+      }
+    ],
+    "invalid": "QUARANTINE_PRESERVE_RAW_NEVER_ZERO_OR_NULL",
+    "overflow": "QUARANTINE_PRESERVE_RAW",
+    "scaleOverflow": "QUARANTINE_NO_ROUNDING",
+    "ambiguousLocale": "QUARANTINE_NO_HEURISTIC",
+    "currency": "UNRESOLVED_NO_INFERENCE",
+    "unit": "UNRESOLVED_NO_INFERENCE",
+    "rounding": "FORBIDDEN"
+  },
+  "freshness": {
+    "path": "/service_at",
+    "selection": "ONLY_PRESENT_TYPED_VALID_SERVICE_AT",
+    "invalid": "PRESERVE_RAW_AND_QUARANTINE_NO_PROMOTION",
+    "olderObservation": "AUDIT_AND_NO_OP_NO_REGRESSION",
+    "equalCanonical": "REPLAY_NO_OP",
+    "equalDivergent": "QUARANTINE_STABLE_REASON",
+    "bothNullCanonical": "REPLAY_NO_OP",
+    "bothNullDivergent": "QUARANTINE_STABLE_REASON_NEVER_KEEP_LAST",
+    "forbiddenTieBreakers": [
+      "DATA_EXTRACAO",
+      "EXTRACTION_TIMESTAMP",
+      "HASH",
+      "PAGE",
+      "ARRIVAL",
+      "RECORD_ORDER"
+    ]
+  },
+  "status": {
+    "path": "/fit_fln_status",
+    "normalization": "TRIM_THEN_LOWERCASE_INVARIANT",
+    "nullOrBlank": "sem_status",
+    "terminalStatuses": [
+      "finished",
+      "delivered",
+      "canceled",
+      "cancelled"
+    ],
+    "unknown": "PRESERVE_RAW_AS_NON_TERMINAL_NO_INFERENCE",
+    "preservation": "RAW_NORMALIZED_AND_TERMINAL_FLAG_WITH_CATALOG_VERSION",
+    "publication": "FORBIDDEN_IN_V2_028A"
+  },
+  "unsourcedLegacy": {
+    "field": "status_branch_nickname",
+    "state": "ABSENT",
+    "provenance": "UNSOURCED_LEGACY",
+    "fallback": "FORBIDDEN_NO_SIMILAR_FIELD_MATCH",
+    "forbiddenFallbackPaths": [
+      "/fit_crn_psn_nickname",
+      "/fit_dyn_drt_nickname",
+      "/fit_fln_cln_nickname",
+      "/fit_o_n_drt_nickname"
+    ],
+    "enablementGate": "VERSIONED_SOURCE_PATH_OR_CONSUMER_APPROVED_RETIREMENT"
+  },
+  "historicalLimits": {
+    "classification": "HISTORICAL_CANDIDATES_NOT_V2_DEFAULTS",
+    "per": 10000,
+    "timeoutSeconds": 90,
+    "pageCap": 1200,
+    "rowCap": 150000,
+    "appliesAsV2Defaults": false
+  },
+  "logicalSchema": [
+    "SCOPED_SOURCE_IDENTITY_AND_INTERNAL_SURROGATE",
+    "RAW_TYPED_PARSE_PATH_PRESENCE_AND_PROVENANCE",
+    "SERVICE_AT_FRESHNESS_REPLAY_AND_CONFLICT",
+    "RAW_NORMALIZED_STATUS_AND_EXPLICIT_TERMINALITY",
+    "STRICT_NUMERIC_PARSE_AND_QUARANTINE",
+    "FREIGHT_ASSOCIATION_CANDIDATE_ONLY",
+    "ABSENCE_EVIDENCE_WITH_SWEEP_DISABLED"
+  ],
+  "documentation": {
+    "adr": "docs/adr/0028-localizacao-cargas-8656-dominio-presenca-frescor-status-e-schema.md",
+    "runbook": "docs/runbooks/v2-028a-decisao-localizacao-cargas-sol.md",
+    "readme": "docs/catalogos/localizacao-cargas-v2-028/README.md"
+  },
+  "limitations": [
+    "NO_JAVA_PRODUCTION_CODE",
+    "NO_MAPPER_OR_RUNTIME",
+    "NO_MIGRATION_OR_SQL_OR_DATABASE",
+    "NO_SOURCE_OR_NETWORK_IO",
+    "NO_RELATION_FK_JOIN_CROSSWALK_OR_TOP_1",
+    "NO_CHARACTERIZATION_OR_BOOTSTRAP",
+    "NO_PUBLICATION_SWEEP_OR_CUTOVER",
+    "NO_COMPLETENESS_PROOF",
+    "NO_CURRENCY_UNIT_OR_ROUNDING_INFERENCE",
+    "V2_046A_AND_V2_046B_REMAIN_OPEN"
+  ],
+  "fixture": {
+    "path": "fixtures/casos-v01.synthetic.json",
+    "sha256": "616121c17ae606cd8aa6e604845ca4c31ddffdee8bfe23ded324dd4c5c329fe2",
+    "caseCount": 24
+  }
+}

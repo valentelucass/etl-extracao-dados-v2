@@ -1,0 +1,38 @@
+query B56SchemaRelations {
+  debit: __type(name: "DebitBase") {
+    name kind description
+    fields { name description type { kind name ofType { kind name ofType { kind name ofType { kind name } } } } }
+  }
+  installment: __type(name: "DebitInstallment") {
+    name kind description
+    fields { name description type { kind name ofType { kind name ofType { kind name ofType { kind name } } } } }
+  }
+  credit: __type(name: "CreditBase") {
+    name kind description
+    fields { name description type { kind name ofType { kind name ofType { kind name ofType { kind name } } } } }
+  }
+  relationA: __type(name: "CreditInstallment") {
+    name kind description
+    fields { name description type { kind name ofType { kind name ofType { kind name ofType { kind name } } } } }
+  }
+  inventory: __type(name: "CheckInOrder") {
+    name kind description
+    fields { name description type { kind name ofType { kind name ofType { kind name ofType { kind name } } } } }
+  }
+  relationB: __type(name: "CheckInOrderCommon") {
+    name kind description
+    fields { name description type { kind name ofType { kind name ofType { kind name ofType { kind name } } } } }
+  }
+  freight: __type(name: "FreightBase") {
+    name kind description
+    fields { name description type { kind name ofType { kind name ofType { kind name ofType { kind name } } } } }
+  }
+  invoice: __type(name: "InvoiceBase") {
+    name kind description
+    fields { name description type { kind name ofType { kind name ofType { kind name ofType { kind name } } } } }
+  }
+  relationC: __type(name: "AccountingDebitsReportAnalyticalRow") {
+    name kind description
+    fields { name description type { kind name ofType { kind name ofType { kind name ofType { kind name } } } } }
+  }
+}

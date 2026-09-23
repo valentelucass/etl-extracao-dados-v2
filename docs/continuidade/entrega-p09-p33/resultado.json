@@ -1,0 +1,186 @@
+{
+  "status": "DOCUMENTARY_SUCCESSION_P09_P33",
+  "completion": "LOCAL_EXECUTABLE_WORK_COMPLETED_EXTERNAL_REQUIREMENTS_REMAIN",
+  "sourceCalls": 0,
+  "databaseUsed": false,
+  "databaseCalls": 0,
+  "newAcceptances": 0,
+  "construction": "39/45",
+  "historicalAcceptances": "67/115",
+  "runtimeChanged": false,
+  "schemaChanged": false,
+  "physicalTestsExecutedThisRound": false,
+  "physicalEvidenceReused": "0233/P07/P08 only for unchanged runtime/schema/dependencies/oracles",
+  "packageQualification": "NEW_DOCUMENTARY_ENVELOPE_OFFLINE_ONLY",
+  "counts": {
+    "stages": 25,
+    "entities": 11,
+    "dimensions": 6,
+    "facts": 5,
+    "externalContracts": 18,
+    "internalContracts": 1
+  },
+  "openPriorExternalRequirements": 16,
+  "additionalExternalScope": "P09 and P17–P33 criteria in matrix; not counted as new invented gates",
+  "eligibleFunctionalWorkRemaining": 0,
+  "closurePending": false,
+  "receipts": [
+    {
+      "path": "target/conclusao-p09-p33-20260922-01/baseline-reconciliation.json",
+      "sha256": "1f32679351e2cc060817f67c3ff027e8f41412cb00a7295e9a2e80f045fc880f"
+    },
+    {
+      "path": "target/conclusao-p09-p33-20260922-01/baseline-reconciliation-02.json",
+      "sha256": "1190e0fe55df46b21a3356b87553e7a92ef3f7aa216acc45c017167f9e2adcf2"
+    },
+    {
+      "path": "target/conclusao-p09-p33-20260922-01/p09-input-presence.json",
+      "sha256": "a5ea47ce4ca6e3990d7055e5a765136b1a5782599b1746807dbacad17f3c99b2"
+    },
+    {
+      "path": "target/conclusao-p09-p33-20260922-01/rotation-contract-result.json",
+      "sha256": "a0c01245debef0969a088b5c6df169cd78a23205b47f8bb31ec8990151e385cd"
+    },
+    {
+      "path": "target/conclusao-p09-p33-20260922-01/rotation-contract.stdout.log",
+      "sha256": "ca910314655d6b50cf06a8617f946f4cf38661f7d7a208299bb71d90deb3efaf"
+    },
+    {
+      "path": "target/conclusao-p09-p33-20260922-01/scanner-selftest-result.json",
+      "sha256": "cb4e291acbc4fba262a410655bced8af5f080bcd28a778e799ba767e384c1158"
+    },
+    {
+      "path": "target/conclusao-p09-p33-20260922-01/scanner-selftest.stdout.log",
+      "sha256": "00a6cfb66a5247f20cb0a75cb7a67815f15a9693b7b811127cd24c01ddcc4f4a"
+    },
+    {
+      "path": "target/conclusao-p09-p33-20260922-01/accepted-agent-evidence.json",
+      "sha256": "24e12c9b49ff8181d4574cf2c58408ee7a7cbd8446e0a888e98d5fba03b31557"
+    },
+    {
+      "path": "target/conclusao-p09-p33-20260922-01/verticais-p13-p21.json",
+      "sha256": "30a1ae64d6ec419e513f08460676b785fff2b6de4962d4ef4c12458fa85ecc63"
+    },
+    {
+      "path": "target/conclusao-p09-p33-20260922-01/analitico-p22-p27.json",
+      "sha256": "e17ed3a0ca35d3f0e35076e3d6ba9f8f29b1442b295a2987dad689ca819761c1"
+    },
+    {
+      "path": "target/conclusao-p09-p33-20260922-01/p29-docs-result.json",
+      "sha256": "9eaf0225176b3042f7c3e74edd1946a6757021617f2acf9cd603d272d48487ae"
+    },
+    {
+      "path": "target/conclusao-p09-p33-20260922-01/p29-docs-reproduction.json",
+      "sha256": "3acc461384758d2afbaab1c111909830238d48b36c2d6017af98e965e07214ac"
+    },
+    {
+      "path": "target/conclusao-p09-p33-20260922-01/p29-docs-inspectplan.json",
+      "sha256": "413ba34f2ad886bcb9a87d9767327bf55e8202e3fede4b710d58cb5e0a207694"
+    },
+    {
+      "path": "target/conclusao-p09-p33-20260922-01/accepted-package-proof.json",
+      "sha256": "9b792ee6bcc1eb76bdefc414a76d340546609ff93b3d076a2f58e04616705b9f"
+    },
+    {
+      "path": "target/conclusao-p09-p33-20260922-01/validation-succession-01.result.json",
+      "sha256": "13ab8d91fa058869f3fd4ec5730fc6581b83088dc9ccf2cfc76ff3b777ae9590"
+    },
+    {
+      "path": "target/conclusao-p09-p33-20260922-01/validation-succession-02.result.json",
+      "sha256": "e31900907d56d713703112d6e19e33143fe45a32566c6b4b12d4e9c9f2340c48"
+    },
+    {
+      "path": "target/conclusao-p09-p33-20260922-01/validation-succession-correction.json",
+      "sha256": "829d5db5ce5a399b7ed22d63a0037a1ebd3e6c1c33f6977d2f85eb9d5560446e"
+    },
+    {
+      "path": "target/conclusao-p09-p33-20260922-01/validation-succession-03.result.json",
+      "sha256": "67d78eedd1206412b37fae3c1bfc8eb2f0bf4875257933711eeb569b6fa402b8"
+    },
+    {
+      "path": "target/conclusao-p09-p33-20260922-01/validation-succession-03.stdout.log",
+      "sha256": "f0f2cfd1e79a5321db7bdb25b44bb88c895ed00f061956b59fca9f58c50d221b"
+    },
+    {
+      "path": "target/conclusao-p09-p33-20260922-01/validation-trail-01-result.json",
+      "sha256": "d9e44815fcb08ee28923a53f23394abc14796f6252416676313b130ddf65f3a3"
+    },
+    {
+      "path": "target/conclusao-p09-p33-20260922-01/p29-sast-readiness.json",
+      "sha256": "9bf4b08fc41bb6438248d10d4a660174532f22554018edd1daf9bdf9dfdf2b52"
+    },
+    {
+      "path": "target/conclusao-p09-p33-20260922-01/p29-pmd-security-01/result.json",
+      "sha256": "94f0405e77a8046d18629c57095ed2b278ea8037407669e4c717ae900c8f96ca"
+    }
+  ],
+  "closureReceipt": "target/conclusao-p09-p33-20260922-01/closed-receipt.json",
+  "noHumanAcceptance": true,
+  "currentPackage": {
+    "id": "p29-docs-primary-01",
+    "state": "OFFLINE_DOCUMENTARY_ENVELOPE_PASS",
+    "revision": "0c7285c410fbad8a3c95b5f5b0e76410b051d164b61cf4c7c53e0d7b2768d87a",
+    "members": 730,
+    "manifestSha256": "5465cbedd115bb88cd94a04f1d4f902f18d033a68478494c398bf955ee582962",
+    "archiveSha256": "837ad53e5bb9e21120e65c0d14c117fa28d1fd5dc5c7f792c17b58e681df1546",
+    "archiveBytes": 7941140,
+    "sourceDelta": [
+      {
+        "path": "docs/catalogos/macrobloco-qualificacao-pacote/PACKAGE-README.md",
+        "before": "a34d6dc5f2cec987d7622af74b570c29e2b83966feffeaedea2750b111f14c67",
+        "after": "faa4bdfbb2e4ae8c96b0c851ca70ea984dddb7bcfe3c1977e807e3f86d6e2941"
+      }
+    ],
+    "memberDelta": [
+      {
+        "path": "config/campaign.synthetic.json",
+        "before": "ab85f87dae18489a78bd26009f403809aff21df5797d498b4ab863dd74a6120e",
+        "after": "f98c2db5900a60d1b833f33210e22caaf58967944f17c6bd45d6f7b4a5758b9f"
+      },
+      {
+        "path": "config/campaign.sequence-a.json",
+        "before": "f3d4ec75d1b8c5cf0ef1cbcaf169d9cbfdad4ce88d30bc4be914e11545d9987e",
+        "after": "a9fbe4f22cc6dd8778d6391d6bb4be72beca7852ba1a4175fa68b0e159c33aa2"
+      },
+      {
+        "path": "config/campaign.sequence-b.json",
+        "before": "afde9c21984b82354102fa2aeafea623e5ccf5dc554097211941990fb825d53d",
+        "after": "64b87991a0531e0b60467a6ffab5cfcf84321077ace19d95d222816b45bae43e"
+      },
+      {
+        "path": "README.md",
+        "before": "a34d6dc5f2cec987d7622af74b570c29e2b83966feffeaedea2750b111f14c67",
+        "after": "faa4bdfbb2e4ae8c96b0c851ca70ea984dddb7bcfe3c1977e807e3f86d6e2941"
+      },
+      {
+        "path": "provenance.json",
+        "before": "6a99eb0bd3691e606ac160422b6463c142849eddf4a10fc25b72dd3d001b5112",
+        "after": "c8be017bf91fd56637438866bb4a5415625faa761112515666337625a9d87f58"
+      },
+      {
+        "path": "package.json",
+        "before": "1c95f6558dc885564e93a9879f11c769c2808f004e793c76bf62c2d6c7a98ef9",
+        "after": "5465cbedd115bb88cd94a04f1d4f902f18d033a68478494c398bf955ee582962"
+      },
+      {
+        "path": "package.sha256",
+        "before": "e0b19ed117a16232adbe78bf5ffbd038f39c7ddfd678b4c031999f833de53bba",
+        "after": "c45aaaf9c68d25d279d2d2110404c54701746dd54f3b17435c0eb1cc3989a5b0"
+      }
+    ],
+    "unchangedPayloadMembers": 725,
+    "physicalQualificationReexecuted": false,
+    "sql": false,
+    "elapsedSeconds": 18.8530877
+  },
+  "pmd": {
+    "files": 652,
+    "rules": [
+      "HardCodedCryptoKey",
+      "InsecureCryptoIv"
+    ],
+    "violations": 0,
+    "errors": 0,
+    "approvedSastGate": false
+  }
+}

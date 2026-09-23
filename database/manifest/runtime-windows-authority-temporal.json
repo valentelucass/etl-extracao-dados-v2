@@ -1,0 +1,157 @@
+{
+  "manifestVersion": 1,
+  "block": 53,
+  "mechanism": "WINDOWS_INTEGRATED_SQL_CALLER",
+  "status": "APPLIED_LOCAL_RESTRICTED_ACCOUNTS_VERIFIED",
+  "database": "localhost/ETL_SISTEMA_V2_SHADOW",
+  "catalogSha256": "df70c3666f94d6aaeefadc9f3842178611b8bf51bb9fa16d2f025eff21612f9f",
+  "migrations": [
+    {
+      "file": "V016__create_windows_runtime_authority.sql",
+      "sha256": "6c81c6c05d474c5fc592b9dc429d5cab1cf3aa14b239e73adb432071d5ec9b96"
+    },
+    {
+      "file": "V017__create_runtime_temporal_plan.sql",
+      "sha256": "fd3afdb898e49084b4832946b289028777a0187f516d9ba8afb5ffeeffa3e712"
+    }
+  ],
+  "compiledPolicySha256": "c76b345af620f21984d3b2d3cec10b0064e53f3b3440984c3f484c834977cc5d",
+  "authorityConfiguration": "ADMINISTERED_PROTECTED_LOCAL_ARTIFACT",
+  "principalMappings": 2,
+  "operationalGrants": [
+    {
+      "permission": "EXECUTE",
+      "principal": "SERVICE",
+      "object": "ctl.usp_runtime_authorization"
+    },
+    {
+      "permission": "EXECUTE",
+      "principal": "SERVICE",
+      "object": "ctl.usp_runtime_status"
+    },
+    {
+      "permission": "EXECUTE",
+      "principal": "SERVICE",
+      "object": "ctl.usp_runtime_recovery"
+    },
+    {
+      "permission": "EXECUTE",
+      "principal": "SERVICE",
+      "object": "ctl.usp_control_plane_register_source"
+    },
+    {
+      "permission": "EXECUTE",
+      "principal": "SERVICE",
+      "object": "ctl.usp_control_plane_start_cycle"
+    },
+    {
+      "permission": "EXECUTE",
+      "principal": "SERVICE",
+      "object": "ctl.usp_control_plane_start_execution"
+    },
+    {
+      "permission": "EXECUTE",
+      "principal": "SERVICE",
+      "object": "ctl.usp_control_plane_heartbeat_lease"
+    },
+    {
+      "permission": "EXECUTE",
+      "principal": "SERVICE",
+      "object": "ctl.usp_control_plane_record_page"
+    },
+    {
+      "permission": "EXECUTE",
+      "principal": "SERVICE",
+      "object": "ctl.usp_control_plane_record_counts"
+    },
+    {
+      "permission": "EXECUTE",
+      "principal": "SERVICE",
+      "object": "ctl.usp_control_plane_transition_execution"
+    },
+    {
+      "permission": "EXECUTE",
+      "principal": "SERVICE",
+      "object": "ctl.usp_control_plane_register_incremental_frontier"
+    },
+    {
+      "permission": "EXECUTE",
+      "principal": "SERVICE",
+      "object": "stg.usp_stage_coleta_record"
+    },
+    {
+      "permission": "EXECUTE",
+      "principal": "SERVICE",
+      "object": "stg.usp_stage_frete_record"
+    },
+    {
+      "permission": "EXECUTE",
+      "principal": "SERVICE",
+      "object": "core.usp_prepare_staged_execution"
+    },
+    {
+      "permission": "EXECUTE",
+      "principal": "SERVICE",
+      "object": "core.usp_prepare_frete_candidate_set"
+    },
+    {
+      "permission": "EXECUTE",
+      "principal": "SERVICE",
+      "object": "core.usp_apply_reconcile_publish_coletas"
+    },
+    {
+      "permission": "EXECUTE",
+      "principal": "SERVICE",
+      "object": "core.usp_apply_reconcile_publish_fretes"
+    },
+    {
+      "permission": "EXECUTE",
+      "principal": "SERVICE",
+      "object": "recon.usp_evaluate_execution_data_quality"
+    },
+    {
+      "permission": "EXECUTE",
+      "principal": "SERVICE",
+      "object": "ctl.usp_runtime_temporal_plan"
+    },
+    {
+      "permission": "EXECUTE",
+      "principal": "SERVICE",
+      "object": "ctl.usp_runtime_temporal_gaps"
+    },
+    {
+      "permission": "EXECUTE",
+      "principal": "OPERATOR",
+      "object": "ctl.usp_runtime_authorization"
+    },
+    {
+      "permission": "EXECUTE",
+      "principal": "OPERATOR",
+      "object": "ctl.usp_runtime_status"
+    }
+  ],
+  "authorizationReceiptColumns": 11,
+  "scopeStringProperties": 22,
+  "capabilityMaximumSeconds": 60,
+  "proposedCapabilitySeconds": 30,
+  "temporalMaximumWindows": 64,
+  "temporalMaximumPending": 4,
+  "authorityPhysicalProof": "DURABLE_DENY_IDEMPOTENT_TWO_JVMS",
+  "temporalPhysicalProof": "THREE_WINDOWS_IDEMPOTENT_TWO_JVMS",
+  "positiveRestrictedPrincipal": "NEW_WINDOWS_SESSIONS_SERVICE_OPERATOR_PASS",
+  "officialJarPositive": "STATUS_AUTHORIZED_TWO_ACCOUNTS_NOT_FOUND_EXIT_10",
+  "operationalTemporalMatrix": "EXTERNAL_INPUT_REQUIRED",
+  "evidence": "docs/runbooks/v2-022-bloco53-integrado.md",
+  "catalogBeforeLocalProvisioningSha256": "7d3d916b3e1723ecc9992d98c582d846eb930354fb8d21dfd53adbf35cdd5378",
+  "localScope": "LOCAL_SHADOW/LOCAL_V2/LOCAL_V2",
+  "localScopeCount": 8,
+  "localAccounts": [
+    "etl_v2_exec",
+    "etl_v2_view"
+  ],
+  "localAccountValidityDays": 30,
+  "tlsVerification": "JAVA_JDBC_EXACT_LOCAL_PUBLIC_CERTIFICATE_TRUSTSTORE",
+  "productionDatabaseAccess": 0,
+  "sourceCalls": 0,
+  "provisioningEvidence": "docs/runbooks/v2-042-contas-locais-windows.md"
+}

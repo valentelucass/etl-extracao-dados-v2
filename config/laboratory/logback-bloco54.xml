@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+  <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder class="ch.qos.logback.classic.encoder.JsonEncoder">
+      <withSequenceNumber>true</withSequenceNumber>
+      <withTimestamp>true</withTimestamp>
+      <withNanoseconds>false</withNanoseconds>
+      <withLevel>true</withLevel>
+      <withThreadName>false</withThreadName>
+      <withLoggerName>true</withLoggerName>
+      <withContext>false</withContext>
+      <withMarkers>false</withMarkers>
+      <withMDC>false</withMDC>
+      <withKVPList>true</withKVPList>
+      <withMessage>false</withMessage>
+      <withArguments>false</withArguments>
+      <withThrowable>false</withThrowable>
+      <withFormattedMessage>false</withFormattedMessage>
+    </encoder>
+  </appender>
+  <logger name="br.com.esl.etl.v2.plataforma.fonte.dataexport.DataExportHttpExecutor" level="INFO" additivity="false">
+    <appender-ref ref="CONSOLE" />
+  </logger>
+  <logger name="br.com.esl.etl.v2.plataforma.fonte.dataexport.HttpDataExportGateway" level="INFO" additivity="false">
+    <appender-ref ref="CONSOLE" />
+  </logger>
+  <root level="OFF"></root>
+</configuration>

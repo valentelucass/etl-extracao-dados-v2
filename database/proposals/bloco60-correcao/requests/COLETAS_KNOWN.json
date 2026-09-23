@@ -1,0 +1,21 @@
+{
+  "invocationId": "a60b2531-7ef6-48d8-8951-5f4745401c7c",
+  "executionId": "8d2fffea-18aa-4ca8-89ba-0bd05d82322d",
+  "cycleId": "46528d76-f5f0-4c92-bc03-e821025820e1",
+  "mode": "BACKFILL",
+  "start": "2033-06-03T03:00:00Z",
+  "endExclusive": "2033-06-04T03:00:00Z",
+  "replayOf": "",
+  "idempotencyKey": "B60_a58f009402124ab4b21abe963e36d1dc",
+  "leaseSeconds": "30",
+  "pageSize": "2",
+  "maximumPages": "4",
+  "qualityVersion": "B54_LOCAL_V2_coletas_BACKFILL",
+  "qualityFingerprint": "39754abf19720aebb976df6c88841d61b75f90ac4c4dc7a2957c674fd6a64101",
+  "compatibilityVersion": "bloco60-compatible-v1",
+  "template": "COLETAS",
+  "maximumRows": "16",
+  "maximumDistinctRoots": "16",
+  "businessStart": "2033-06-03",
+  "businessEnd": "2033-06-03"
+}

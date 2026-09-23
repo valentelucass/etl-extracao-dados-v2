@@ -1,0 +1,283 @@
+{
+  "version": 1,
+  "layer": "SYNTHETIC_OFFLINE",
+  "physicalExecuted": false,
+  "requests": [
+    {
+      "invocationId": "SYNTHETIC_A",
+      "executionId": "SYNTHETIC_OCCURRENCE",
+      "cycleId": "SYNTHETIC_CYCLE",
+      "mode": "BACKFILL",
+      "start": "2036-01-01T00:00:00Z",
+      "endExclusive": "2036-01-02T00:00:00Z",
+      "replayOf": "",
+      "idempotencyKey": "SYNTHETIC_OCCURRENCE",
+      "leaseSeconds": "30",
+      "pageSize": "20",
+      "maximumPages": "4",
+      "qualityVersion": "SYNTHETIC_QUALITY",
+      "qualityFingerprint": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "compatibilityVersion": "SYNTHETIC_COMPATIBILITY",
+      "protocol": "GRAPHQL",
+      "operation": "USERS_SNAPSHOT",
+      "maximumNodes": "80"
+    },
+    {
+      "invocationId": "SYNTHETIC_B",
+      "executionId": "SYNTHETIC_OCCURRENCE",
+      "cycleId": "SYNTHETIC_CYCLE",
+      "mode": "BACKFILL",
+      "start": "2036-01-01T00:00:00Z",
+      "endExclusive": "2036-01-02T00:00:00Z",
+      "replayOf": "",
+      "idempotencyKey": "SYNTHETIC_OCCURRENCE",
+      "leaseSeconds": "30",
+      "pageSize": "20",
+      "maximumPages": "4",
+      "qualityVersion": "SYNTHETIC_QUALITY",
+      "qualityFingerprint": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "compatibilityVersion": "SYNTHETIC_COMPATIBILITY",
+      "protocol": "GRAPHQL",
+      "operation": "USERS_SNAPSHOT",
+      "maximumNodes": "80"
+    }
+  ],
+  "processes": [
+    101,
+    102
+  ],
+  "samples": [
+    {
+      "sample": 1,
+      "observedUtc": "2036-01-01T00:00:00.000Z",
+      "simultaneousOwnWaiters": 0,
+      "sessions": []
+    },
+    {
+      "sample": 2,
+      "observedUtc": "2036-01-01T00:00:00.250Z",
+      "simultaneousOwnWaiters": 0,
+      "sessions": []
+    },
+    {
+      "sample": 3,
+      "observedUtc": "2036-01-01T00:00:00.500Z",
+      "simultaneousOwnWaiters": 0,
+      "sessions": []
+    },
+    {
+      "sample": 4,
+      "observedUtc": "2036-01-01T00:00:00.750Z",
+      "simultaneousOwnWaiters": 0,
+      "sessions": []
+    },
+    {
+      "sample": 5,
+      "observedUtc": "2036-01-01T00:00:01.000Z",
+      "simultaneousOwnWaiters": 0,
+      "sessions": []
+    },
+    {
+      "sample": 6,
+      "observedUtc": "2036-01-01T00:00:01.250Z",
+      "simultaneousOwnWaiters": 0,
+      "sessions": []
+    },
+    {
+      "sample": 7,
+      "observedUtc": "2036-01-01T00:00:01.500Z",
+      "simultaneousOwnWaiters": 0,
+      "sessions": []
+    },
+    {
+      "sample": 8,
+      "observedUtc": "2036-01-01T00:00:01.750Z",
+      "simultaneousOwnWaiters": 0,
+      "sessions": []
+    },
+    {
+      "sample": 9,
+      "observedUtc": "2036-01-01T00:00:02.000Z",
+      "simultaneousOwnWaiters": 0,
+      "sessions": []
+    },
+    {
+      "sample": 10,
+      "observedUtc": "2036-01-01T00:00:02.250Z",
+      "simultaneousOwnWaiters": 0,
+      "sessions": []
+    },
+    {
+      "sample": 11,
+      "observedUtc": "2036-01-01T00:00:02.500Z",
+      "simultaneousOwnWaiters": 0,
+      "sessions": []
+    },
+    {
+      "sample": 12,
+      "observedUtc": "2036-01-01T00:00:02.750Z",
+      "simultaneousOwnWaiters": 0,
+      "sessions": []
+    },
+    {
+      "sample": 13,
+      "observedUtc": "2036-01-01T00:00:03.000Z",
+      "simultaneousOwnWaiters": 0,
+      "sessions": []
+    },
+    {
+      "sample": 14,
+      "observedUtc": "2036-01-01T00:00:03.250Z",
+      "simultaneousOwnWaiters": 0,
+      "sessions": []
+    },
+    {
+      "sample": 15,
+      "observedUtc": "2036-01-01T00:00:03.500Z",
+      "simultaneousOwnWaiters": 0,
+      "sessions": []
+    },
+    {
+      "sample": 16,
+      "observedUtc": "2036-01-01T00:00:03.750Z",
+      "simultaneousOwnWaiters": 0,
+      "sessions": []
+    },
+    {
+      "sample": 17,
+      "observedUtc": "2036-01-01T00:00:04.000Z",
+      "simultaneousOwnWaiters": 0,
+      "sessions": []
+    },
+    {
+      "sample": 18,
+      "observedUtc": "2036-01-01T00:00:04.250Z",
+      "simultaneousOwnWaiters": 0,
+      "sessions": []
+    },
+    {
+      "sample": 19,
+      "observedUtc": "2036-01-01T00:00:04.500Z",
+      "simultaneousOwnWaiters": 0,
+      "sessions": []
+    },
+    {
+      "sample": 20,
+      "observedUtc": "2036-01-01T00:00:04.750Z",
+      "simultaneousOwnWaiters": 0,
+      "sessions": []
+    },
+    {
+      "sample": 21,
+      "observedUtc": "2036-01-01T00:00:05.000Z",
+      "simultaneousOwnWaiters": 0,
+      "sessions": []
+    },
+    {
+      "sample": 22,
+      "observedUtc": "2036-01-01T00:00:05.250Z",
+      "simultaneousOwnWaiters": 0,
+      "sessions": []
+    },
+    {
+      "sample": 23,
+      "observedUtc": "2036-01-01T00:00:05.500Z",
+      "simultaneousOwnWaiters": 0,
+      "sessions": []
+    },
+    {
+      "sample": 24,
+      "observedUtc": "2036-01-01T00:00:05.750Z",
+      "simultaneousOwnWaiters": 0,
+      "sessions": []
+    },
+    {
+      "sample": 25,
+      "observedUtc": "2036-01-01T00:00:06.000Z",
+      "simultaneousOwnWaiters": 0,
+      "sessions": []
+    },
+    {
+      "sample": 26,
+      "observedUtc": "2036-01-01T00:00:06.250Z",
+      "simultaneousOwnWaiters": 0,
+      "sessions": []
+    },
+    {
+      "sample": 27,
+      "observedUtc": "2036-01-01T00:00:06.500Z",
+      "simultaneousOwnWaiters": 0,
+      "sessions": []
+    },
+    {
+      "sample": 28,
+      "observedUtc": "2036-01-01T00:00:06.750Z",
+      "simultaneousOwnWaiters": 2,
+      "sessions": [
+        {
+          "processId": 101,
+          "sessionId": 51,
+          "waitType": "LCK_M_X",
+          "blockingSessionId": 50,
+          "matchingBarrierLock": 1
+        },
+        {
+          "processId": 102,
+          "sessionId": 52,
+          "waitType": "LCK_M_X",
+          "blockingSessionId": 51,
+          "matchingBarrierLock": 1
+        }
+      ]
+    }
+  ],
+  "results": [
+    {
+      "processId": 101,
+      "exit": 0,
+      "readback": {
+        "publications": 1,
+        "seals": 1,
+        "quality": "PASSED",
+        "completedChecks": 4,
+        "passedChecks": 4,
+        "failedChecks": 0,
+        "pages": 1,
+        "stageRows": 2,
+        "candidateRows": 2,
+        "applicationRows": 2,
+        "typedHistory": 2,
+        "typedReceiptHash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "historyHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "currentHash": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+      }
+    },
+    {
+      "processId": 102,
+      "exit": 0,
+      "readback": {
+        "publications": 1,
+        "seals": 1,
+        "quality": "PASSED",
+        "completedChecks": 4,
+        "passedChecks": 4,
+        "failedChecks": 0,
+        "pages": 1,
+        "stageRows": 2,
+        "candidateRows": 2,
+        "applicationRows": 2,
+        "typedHistory": 2,
+        "typedReceiptHash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "historyHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "currentHash": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+      }
+    }
+  ],
+  "recovery": {
+    "status": "COMPENSATED",
+    "unknownEffects": 0,
+    "profileRestored": true,
+    "beforeRows": "{\"table_name\":\"synthetic\",\"hashes\":\"dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd\"}",
+    "afterRows": "{\"table_name\":\"synthetic\",\"hashes\":\"dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd\"}"
+  }
+}

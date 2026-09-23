@@ -1,0 +1,455 @@
+{
+  "version": 1,
+  "evidence": "SYNTHETIC_LOCAL_ONLY",
+  "entity": "LOCALIZACAO_CARGAS",
+  "decision": "docs/catalogos/localizacao-cargas-v2-028/decisao-v01.json",
+  "decisionSha256": "b837d1d6722d48976c9021a418dceccc8a176fc0497aa6a1f2e71889810d1e13",
+  "cases": [
+    {
+      "id": "SYNTH_BASE_SEVENTEEN_FIELDS",
+      "envelope": "{\"data\":[{\"corporation_sequence_number\":1,\"service_at\":\"2036-03-20T12:00:00Z\"}]}",
+      "expected": [
+        {
+          "/quarantine": "NONE",
+          "/corporation_sequence_number/typed": "INTEGER:1",
+          "/service_at/typed": "2036-03-20T12:00:00Z",
+          "/service_at/parseState": "VALID",
+          "/invoices_volumes/typed": "NULL",
+          "/invoices_volumes/parseState": "NOT_PRESENT",
+          "/taxed_weight/typed": "NULL",
+          "/invoices_value/typed": "NULL",
+          "/total/typed": "NULL",
+          "/fit_fln_status/typed": "sem_status",
+          "/fit_fln_status/terminal": "false",
+          "/status_branch_nickname/provenance": "UNSOURCED_LEGACY",
+          "/status_branch_nickname/presence": "ABSENT",
+          "/invoices_volumes/fallback": "FREIGHT_VOLUME_FALLBACK_DEFERRED_RELATION_AND_PUBLICATION",
+          "/corporation_sequence_number/presence": "VALUE",
+          "/corporation_sequence_number/mappedPresence": "VALUE",
+          "/corporation_sequence_number/provenance": "DATAEXPORT_8656",
+          "/corporation_sequence_number/path": "/corporation_sequence_number",
+          "/type/presence": "ABSENT",
+          "/type/mappedPresence": "ABSENT",
+          "/type/provenance": "DATAEXPORT_8656",
+          "/type/path": "/type",
+          "/service_at/presence": "VALUE",
+          "/service_at/mappedPresence": "VALUE",
+          "/service_at/provenance": "DATAEXPORT_8656",
+          "/service_at/path": "/service_at",
+          "/invoices_volumes/presence": "ABSENT",
+          "/invoices_volumes/mappedPresence": "ABSENT",
+          "/invoices_volumes/provenance": "DATAEXPORT_8656",
+          "/invoices_volumes/path": "/invoices_volumes",
+          "/taxed_weight/presence": "ABSENT",
+          "/taxed_weight/mappedPresence": "ABSENT",
+          "/taxed_weight/provenance": "DATAEXPORT_8656",
+          "/taxed_weight/path": "/taxed_weight",
+          "/invoices_value/presence": "ABSENT",
+          "/invoices_value/mappedPresence": "ABSENT",
+          "/invoices_value/provenance": "DATAEXPORT_8656",
+          "/invoices_value/path": "/invoices_value",
+          "/total/presence": "ABSENT",
+          "/total/mappedPresence": "ABSENT",
+          "/total/provenance": "DATAEXPORT_8656",
+          "/total/path": "/total",
+          "/service_type/presence": "ABSENT",
+          "/service_type/mappedPresence": "ABSENT",
+          "/service_type/provenance": "DATAEXPORT_8656",
+          "/service_type/path": "/service_type",
+          "/fit_crn_psn_nickname/presence": "ABSENT",
+          "/fit_crn_psn_nickname/mappedPresence": "ABSENT",
+          "/fit_crn_psn_nickname/provenance": "DATAEXPORT_8656",
+          "/fit_crn_psn_nickname/path": "/fit_crn_psn_nickname",
+          "/fit_dpn_delivery_prediction_at/presence": "ABSENT",
+          "/fit_dpn_delivery_prediction_at/mappedPresence": "ABSENT",
+          "/fit_dpn_delivery_prediction_at/provenance": "DATAEXPORT_8656",
+          "/fit_dpn_delivery_prediction_at/path": "/fit_dpn_delivery_prediction_at",
+          "/fit_dyn_name/presence": "ABSENT",
+          "/fit_dyn_name/mappedPresence": "ABSENT",
+          "/fit_dyn_name/provenance": "DATAEXPORT_8656",
+          "/fit_dyn_name/path": "/fit_dyn_name",
+          "/fit_dyn_drt_nickname/presence": "ABSENT",
+          "/fit_dyn_drt_nickname/mappedPresence": "ABSENT",
+          "/fit_dyn_drt_nickname/provenance": "DATAEXPORT_8656",
+          "/fit_dyn_drt_nickname/path": "/fit_dyn_drt_nickname",
+          "/fit_fsn_name/presence": "ABSENT",
+          "/fit_fsn_name/mappedPresence": "ABSENT",
+          "/fit_fsn_name/provenance": "DATAEXPORT_8656",
+          "/fit_fsn_name/path": "/fit_fsn_name",
+          "/fit_fln_status/presence": "ABSENT",
+          "/fit_fln_status/mappedPresence": "ABSENT",
+          "/fit_fln_status/provenance": "DATAEXPORT_8656",
+          "/fit_fln_status/path": "/fit_fln_status",
+          "/fit_fln_cln_nickname/presence": "ABSENT",
+          "/fit_fln_cln_nickname/mappedPresence": "ABSENT",
+          "/fit_fln_cln_nickname/provenance": "DATAEXPORT_8656",
+          "/fit_fln_cln_nickname/path": "/fit_fln_cln_nickname",
+          "/fit_o_n_name/presence": "ABSENT",
+          "/fit_o_n_name/mappedPresence": "ABSENT",
+          "/fit_o_n_name/provenance": "DATAEXPORT_8656",
+          "/fit_o_n_name/path": "/fit_o_n_name",
+          "/fit_o_n_drt_nickname/presence": "ABSENT",
+          "/fit_o_n_drt_nickname/mappedPresence": "ABSENT",
+          "/fit_o_n_drt_nickname/provenance": "DATAEXPORT_8656",
+          "/fit_o_n_drt_nickname/path": "/fit_o_n_drt_nickname"
+        }
+      ]
+    },
+    {
+      "id": "SYNTH_VOLUMES_NULL",
+      "envelope": "{\"data\":[{\"corporation_sequence_number\":1,\"service_at\":\"2036-03-20T12:00:00Z\",\"invoices_volumes\":null}]}",
+      "expected": [
+        {
+          "/quarantine": "NONE",
+          "/invoices_volumes/typed": "NULL",
+          "/invoices_volumes/parseState": "EXPLICIT_NULL",
+          "/invoices_volumes/presence": "NULL",
+          "/invoices_volumes/mappedPresence": "NULL"
+        }
+      ]
+    },
+    {
+      "id": "SYNTH_VOLUMES_ZERO",
+      "envelope": "{\"data\":[{\"corporation_sequence_number\":1,\"service_at\":\"2036-03-20T12:00:00Z\",\"invoices_volumes\":0}]}",
+      "expected": [
+        {
+          "/quarantine": "NONE",
+          "/invoices_volumes/typed": "0",
+          "/invoices_volumes/parseState": "VALID",
+          "/invoices_volumes/presence": "VALUE",
+          "/invoices_volumes/mappedPresence": "VALUE"
+        }
+      ]
+    },
+    {
+      "id": "SYNTH_VOLUMES_MAX",
+      "envelope": "{\"data\":[{\"corporation_sequence_number\":1,\"service_at\":\"2036-03-20T12:00:00Z\",\"invoices_volumes\":2147483647}]}",
+      "expected": [
+        {
+          "/quarantine": "NONE",
+          "/invoices_volumes/typed": "2147483647",
+          "/invoices_volumes/parseState": "VALID",
+          "/invoices_volumes/presence": "VALUE",
+          "/invoices_volumes/mappedPresence": "VALUE"
+        }
+      ]
+    },
+    {
+      "id": "SYNTH_DECIMAL_WIRE_PRECISION_SCALE",
+      "envelope": "{\"data\":[{\"corporation_sequence_number\":1,\"service_at\":\"2036-03-20T12:00:00Z\",\"taxed_weight\":99999999999999999999999999999.123456789,\"invoices_value\":\"1.230000000\",\"total\":0.000000000}]}",
+      "expected": [
+        {
+          "/quarantine": "NONE",
+          "/taxed_weight/typed": "99999999999999999999999999999.123456789",
+          "/taxed_weight/rawWireLexeme": "99999999999999999999999999999.123456789",
+          "/invoices_value/typed": "1.230000000",
+          "/total/typed": "0E-9",
+          "/total/rawWireLexeme": "0.000000000"
+        }
+      ]
+    },
+    {
+      "id": "SYNTH_SEVENTEEN_VALUES_PROVENANCE",
+      "envelope": "{\"data\":[{\"corporation_sequence_number\":1,\"type\":\"SYNTH_TYPE\",\"service_at\":\"2036-03-20T12:00:00Z\",\"invoices_volumes\":0,\"taxed_weight\":\"12.340000000\",\"invoices_value\":\"99.01\",\"total\":\"100.02\",\"service_type\":\"SYNTH_SERVICE\",\"fit_crn_psn_nickname\":\"SYNTH_FILIAL\",\"fit_dpn_delivery_prediction_at\":\"2036-03-21\",\"fit_dyn_name\":\"SYNTH_DESTINO\",\"fit_dyn_drt_nickname\":\"SYNTH_DRT\",\"fit_fsn_name\":\"SYNTH_RESPONSAVEL\",\"fit_fln_status\":\"  DELIVERED  \",\"fit_fln_cln_nickname\":\"SYNTH_BRANCH\",\"fit_o_n_name\":\"SYNTH_ORIGEM\",\"fit_o_n_drt_nickname\":\"SYNTH_DRT_ORIGEM\"}]}",
+      "expected": [
+        {
+          "/quarantine": "NONE",
+          "/corporation_sequence_number/typed": "INTEGER:1",
+          "/service_at/typed": "2036-03-20T12:00:00Z",
+          "/service_at/parseState": "VALID",
+          "/invoices_volumes/typed": "0",
+          "/invoices_volumes/parseState": "VALID",
+          "/taxed_weight/typed": "12.340000000",
+          "/invoices_value/typed": "99.01",
+          "/total/typed": "100.02",
+          "/fit_fln_status/typed": "delivered",
+          "/fit_fln_status/terminal": "true",
+          "/status_branch_nickname/provenance": "UNSOURCED_LEGACY",
+          "/status_branch_nickname/presence": "ABSENT",
+          "/invoices_volumes/fallback": "FREIGHT_VOLUME_FALLBACK_DEFERRED_RELATION_AND_PUBLICATION",
+          "/corporation_sequence_number/presence": "VALUE",
+          "/corporation_sequence_number/mappedPresence": "VALUE",
+          "/corporation_sequence_number/provenance": "DATAEXPORT_8656",
+          "/corporation_sequence_number/path": "/corporation_sequence_number",
+          "/type/presence": "VALUE",
+          "/type/mappedPresence": "VALUE",
+          "/type/provenance": "DATAEXPORT_8656",
+          "/type/path": "/type",
+          "/service_at/presence": "VALUE",
+          "/service_at/mappedPresence": "VALUE",
+          "/service_at/provenance": "DATAEXPORT_8656",
+          "/service_at/path": "/service_at",
+          "/invoices_volumes/presence": "VALUE",
+          "/invoices_volumes/mappedPresence": "VALUE",
+          "/invoices_volumes/provenance": "DATAEXPORT_8656",
+          "/invoices_volumes/path": "/invoices_volumes",
+          "/taxed_weight/presence": "VALUE",
+          "/taxed_weight/mappedPresence": "VALUE",
+          "/taxed_weight/provenance": "DATAEXPORT_8656",
+          "/taxed_weight/path": "/taxed_weight",
+          "/invoices_value/presence": "VALUE",
+          "/invoices_value/mappedPresence": "VALUE",
+          "/invoices_value/provenance": "DATAEXPORT_8656",
+          "/invoices_value/path": "/invoices_value",
+          "/total/presence": "VALUE",
+          "/total/mappedPresence": "VALUE",
+          "/total/provenance": "DATAEXPORT_8656",
+          "/total/path": "/total",
+          "/service_type/presence": "VALUE",
+          "/service_type/mappedPresence": "VALUE",
+          "/service_type/provenance": "DATAEXPORT_8656",
+          "/service_type/path": "/service_type",
+          "/fit_crn_psn_nickname/presence": "VALUE",
+          "/fit_crn_psn_nickname/mappedPresence": "VALUE",
+          "/fit_crn_psn_nickname/provenance": "DATAEXPORT_8656",
+          "/fit_crn_psn_nickname/path": "/fit_crn_psn_nickname",
+          "/fit_dpn_delivery_prediction_at/presence": "VALUE",
+          "/fit_dpn_delivery_prediction_at/mappedPresence": "VALUE",
+          "/fit_dpn_delivery_prediction_at/provenance": "DATAEXPORT_8656",
+          "/fit_dpn_delivery_prediction_at/path": "/fit_dpn_delivery_prediction_at",
+          "/fit_dyn_name/presence": "VALUE",
+          "/fit_dyn_name/mappedPresence": "VALUE",
+          "/fit_dyn_name/provenance": "DATAEXPORT_8656",
+          "/fit_dyn_name/path": "/fit_dyn_name",
+          "/fit_dyn_drt_nickname/presence": "VALUE",
+          "/fit_dyn_drt_nickname/mappedPresence": "VALUE",
+          "/fit_dyn_drt_nickname/provenance": "DATAEXPORT_8656",
+          "/fit_dyn_drt_nickname/path": "/fit_dyn_drt_nickname",
+          "/fit_fsn_name/presence": "VALUE",
+          "/fit_fsn_name/mappedPresence": "VALUE",
+          "/fit_fsn_name/provenance": "DATAEXPORT_8656",
+          "/fit_fsn_name/path": "/fit_fsn_name",
+          "/fit_fln_status/presence": "VALUE",
+          "/fit_fln_status/mappedPresence": "VALUE",
+          "/fit_fln_status/provenance": "DATAEXPORT_8656",
+          "/fit_fln_status/path": "/fit_fln_status",
+          "/fit_fln_cln_nickname/presence": "VALUE",
+          "/fit_fln_cln_nickname/mappedPresence": "VALUE",
+          "/fit_fln_cln_nickname/provenance": "DATAEXPORT_8656",
+          "/fit_fln_cln_nickname/path": "/fit_fln_cln_nickname",
+          "/fit_o_n_name/presence": "VALUE",
+          "/fit_o_n_name/mappedPresence": "VALUE",
+          "/fit_o_n_name/provenance": "DATAEXPORT_8656",
+          "/fit_o_n_name/path": "/fit_o_n_name",
+          "/fit_o_n_drt_nickname/presence": "VALUE",
+          "/fit_o_n_drt_nickname/mappedPresence": "VALUE",
+          "/fit_o_n_drt_nickname/provenance": "DATAEXPORT_8656",
+          "/fit_o_n_drt_nickname/path": "/fit_o_n_drt_nickname",
+          "/corporation_sequence_number/wireType": "INTEGER",
+          "/type/wireType": "STRING",
+          "/service_at/wireType": "STRING",
+          "/invoices_volumes/wireType": "INTEGER",
+          "/taxed_weight/wireType": "STRING",
+          "/invoices_value/wireType": "STRING",
+          "/total/wireType": "STRING",
+          "/service_type/wireType": "STRING",
+          "/fit_crn_psn_nickname/wireType": "STRING",
+          "/fit_dpn_delivery_prediction_at/wireType": "STRING",
+          "/fit_dyn_name/wireType": "STRING",
+          "/fit_dyn_drt_nickname/wireType": "STRING",
+          "/fit_fsn_name/wireType": "STRING",
+          "/fit_fln_status/wireType": "STRING",
+          "/fit_fln_cln_nickname/wireType": "STRING",
+          "/fit_o_n_name/wireType": "STRING",
+          "/fit_o_n_drt_nickname/wireType": "STRING"
+        }
+      ]
+    },
+    {
+      "id": "SYNTH_INVALID_NEGATIVE_ZERO",
+      "envelope": "{\"data\":[{\"corporation_sequence_number\":1,\"service_at\":\"2036-03-20T12:00:00Z\",\"invoices_volumes\":-0}]}",
+      "expected": [
+        {
+          "/quarantine": "INVALID_INVOICES_VOLUMES"
+        }
+      ]
+    },
+    {
+      "id": "SYNTH_INVALID_EXPONENT",
+      "envelope": "{\"data\":[{\"corporation_sequence_number\":1,\"service_at\":\"2036-03-20T12:00:00Z\",\"taxed_weight\":1e2}]}",
+      "expected": [
+        {
+          "/quarantine": "INVALID_TAXED_WEIGHT"
+        }
+      ]
+    },
+    {
+      "id": "SYNTH_INVALID_SCALE",
+      "envelope": "{\"data\":[{\"corporation_sequence_number\":1,\"service_at\":\"2036-03-20T12:00:00Z\",\"invoices_value\":1.1234567890}]}",
+      "expected": [
+        {
+          "/quarantine": "INVALID_INVOICES_VALUE"
+        }
+      ]
+    },
+    {
+      "id": "SYNTH_INVALID_OVERFLOW",
+      "envelope": "{\"data\":[{\"corporation_sequence_number\":1,\"service_at\":\"2036-03-20T12:00:00Z\",\"total\":123456789012345678901234567890.1}]}",
+      "expected": [
+        {
+          "/quarantine": "INVALID_TOTAL"
+        }
+      ]
+    },
+    {
+      "id": "SYNTH_INVALID_LOCALE",
+      "envelope": "{\"data\":[{\"corporation_sequence_number\":1,\"service_at\":\"2036-03-20T12:00:00Z\",\"taxed_weight\":\"1,23\"}]}",
+      "expected": [
+        {
+          "/quarantine": "INVALID_TAXED_WEIGHT"
+        }
+      ]
+    },
+    {
+      "id": "SYNTH_INVALID_VOLUMES_OVERFLOW",
+      "envelope": "{\"data\":[{\"corporation_sequence_number\":1,\"service_at\":\"2036-03-20T12:00:00Z\",\"invoices_volumes\":2147483648}]}",
+      "expected": [
+        {
+          "/quarantine": "INVALID_INVOICES_VOLUMES"
+        }
+      ]
+    },
+    {
+      "id": "SYNTH_INVALID_STATUS_TYPE",
+      "envelope": "{\"data\":[{\"corporation_sequence_number\":1,\"service_at\":\"2036-03-20T12:00:00Z\",\"fit_fln_status\":true}]}",
+      "expected": [
+        {
+          "/quarantine": "INVALID_STATUS_TYPE"
+        }
+      ]
+    },
+    {
+      "id": "SYNTH_INVALID_FORBIDDEN_FIELD",
+      "envelope": "{\"data\":[{\"corporation_sequence_number\":1,\"service_at\":\"2036-03-20T12:00:00Z\",\"status_branch_nickname\":\"SYNTH_IGNORED\"}]}",
+      "expected": [
+        {
+          "/quarantine": "UNAPPROVED_SOURCE_PATH"
+        }
+      ]
+    },
+    {
+      "id": "SYNTH_DATE_DAY",
+      "envelope": "{\"data\":[{\"corporation_sequence_number\":1,\"service_at\":\"2036-02-30\"}]}",
+      "expected": [
+        {
+          "/quarantine": "INVALID_SERVICE_AT"
+        }
+      ]
+    },
+    {
+      "id": "SYNTH_DATE_GAP",
+      "envelope": "{\"data\":[{\"corporation_sequence_number\":1,\"service_at\":\"2018-11-04T00:30:00\"}]}",
+      "expected": [
+        {
+          "/quarantine": "INVALID_SERVICE_AT"
+        }
+      ]
+    },
+    {
+      "id": "SYNTH_DATE_OVERLAP",
+      "envelope": "{\"data\":[{\"corporation_sequence_number\":1,\"service_at\":\"2019-02-16T23:30:00\"}]}",
+      "expected": [
+        {
+          "/quarantine": "INVALID_SERVICE_AT"
+        }
+      ]
+    },
+    {
+      "id": "SYNTH_DATE_WRONG_TYPE",
+      "envelope": "{\"data\":[{\"corporation_sequence_number\":1,\"service_at\":8}]}",
+      "expected": [
+        {
+          "/quarantine": "INVALID_SERVICE_AT"
+        }
+      ]
+    },
+    {
+      "id": "SYNTH_DATE_OFFSET_DURING_OVERLAP",
+      "envelope": "{\"data\":[{\"corporation_sequence_number\":1,\"service_at\":\"2019-02-16T23:30:00-02:00\"}]}",
+      "expected": [
+        {
+          "/quarantine": "NONE",
+          "/service_at/typed": "2019-02-17T01:30:00Z"
+        }
+      ]
+    },
+    {
+      "id": "SYNTH_MISSING_FRESHNESS",
+      "envelope": "{\"data\":[{\"corporation_sequence_number\":1}]}",
+      "expected": [
+        {
+          "/quarantine": "MISSING_VALID_SERVICE_AT"
+        }
+      ]
+    },
+    {
+      "id": "SYNTH_NULL_FRESHNESS",
+      "envelope": "{\"data\":[{\"corporation_sequence_number\":1,\"service_at\":null}]}",
+      "expected": [
+        {
+          "/quarantine": "MISSING_VALID_SERVICE_AT"
+        }
+      ]
+    },
+    {
+      "id": "SYNTH_MISSING_ID",
+      "envelope": "{\"data\":[{\"service_at\":\"2036-03-20\"}]}",
+      "expected": [
+        {
+          "/quarantine": "MISSING_SOURCE_KEY"
+        }
+      ]
+    },
+    {
+      "id": "SYNTH_TEXT_ID",
+      "envelope": "{\"data\":[{\"corporation_sequence_number\":\"1\",\"service_at\":\"2036-03-20T12:00:00Z\"}]}",
+      "expected": [
+        {
+          "/quarantine": "INVALID_SOURCE_KEY_TYPE"
+        }
+      ]
+    },
+    {
+      "id": "SYNTH_NO_SEQUENCE_ALIAS",
+      "envelope": "{\"data\":[{\"sequence_number\":1,\"service_at\":\"2036-03-20\"}]}",
+      "expected": [
+        {
+          "/quarantine": "UNAPPROVED_SOURCE_PATH"
+        }
+      ]
+    },
+    {
+      "id": "SYNTH_UNKNOWN_STATUS",
+      "envelope": "{\"data\":[{\"corporation_sequence_number\":1,\"service_at\":\"2036-03-20T12:00:00Z\",\"fit_fln_status\":\"  SYNTH_UNKNOWN  \"}]}",
+      "expected": [
+        {
+          "/quarantine": "NONE",
+          "/fit_fln_status/typed": "synth_unknown",
+          "/fit_fln_status/terminal": "false"
+        }
+      ]
+    },
+    {
+      "id": "SYNTH_BLANK_STATUS",
+      "envelope": "{\"data\":[{\"corporation_sequence_number\":1,\"service_at\":\"2036-03-20T12:00:00Z\",\"fit_fln_status\":\"  \"}]}",
+      "expected": [
+        {
+          "/quarantine": "NONE",
+          "/fit_fln_status/typed": "sem_status",
+          "/fit_fln_status/terminal": "false"
+        }
+      ]
+    },
+    {
+      "id": "SYNTH_NULL_STATUS",
+      "envelope": "{\"data\":[{\"corporation_sequence_number\":1,\"service_at\":\"2036-03-20T12:00:00Z\",\"fit_fln_status\":null}]}",
+      "expected": [
+        {
+          "/quarantine": "NONE",
+          "/fit_fln_status/typed": "sem_status",
+          "/fit_fln_status/presence": "NULL"
+        }
+      ]
+    }
+  ]
+}

@@ -17,4 +17,16 @@ class DataExportRetryPolicyTest {
         assertEquals(Duration.ofSeconds(2), policy.delayAfterFailure(3));
         assertEquals(Duration.ofSeconds(2), policy.delayAfterFailure(4));
     }
+
+    @Test
+    void preservesSubMillisecondPrecisionWhileApplyingBackoff() {
+        final DataExportRetryPolicy policy =
+                new DataExportRetryPolicy(
+                        4, Duration.ofNanos(500_000L), Duration.ofNanos(2_000_000L));
+
+        assertEquals(Duration.ofNanos(500_000L), policy.delayAfterFailure(1));
+        assertEquals(Duration.ofMillis(1), policy.delayAfterFailure(2));
+        assertEquals(Duration.ofMillis(2), policy.delayAfterFailure(3));
+        assertEquals(Duration.ofMillis(2), policy.delayAfterFailure(4));
+    }
 }

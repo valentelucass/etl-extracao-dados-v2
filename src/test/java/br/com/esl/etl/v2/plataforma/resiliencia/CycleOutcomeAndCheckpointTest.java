@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import br.com.esl.etl.v2.plataforma.controle.ExecutionMode;
 import br.com.esl.etl.v2.plataforma.controle.ExecutionState;
 import java.util.Optional;
 import org.junit.jupiter.api.Test;
@@ -55,6 +56,77 @@ class CycleOutcomeAndCheckpointTest {
         assertTrue(
                 checkpointPolicy.canAdvanceEntityCheckpoint(
                         ExecutionState.PUBLISHED, true, true, Optional.empty()));
+    }
+
+    @Test
+    void refusesCheckpointForCapsTimeoutCancellationQuarantineAndUnprovenTerminality() {
+        final CheckpointDecisionPolicy checkpointPolicy = new CheckpointDecisionPolicy();
+        final FailurePolicyMatrix matrix = new FailurePolicyMatrix();
+
+        assertFalse(
+                checkpointPolicy.canAdvanceEntityCheckpoint(
+                        ExecutionState.PUBLISHED, false, true, Optional.empty()),
+                "cap, parcialidade ou terminalidade não comprovada");
+        assertFalse(
+                checkpointPolicy.canAdvanceEntityCheckpoint(
+                        ExecutionState.PUBLISHED, true, false, Optional.empty()),
+                "reconciliação ou quarantine pendente");
+        for (final FailureKind kind :
+                new FailureKind[] {
+                    FailureKind.STEP_TIMEOUT,
+                    FailureKind.CYCLE_TIMEOUT,
+                    FailureKind.CANCELLATION,
+                    FailureKind.SOURCE_BUDGET_EXHAUSTED,
+                    FailureKind.WORKLOAD_BUDGET_EXHAUSTED,
+                    FailureKind.CRITICAL_DATA_QUALITY
+                }) {
+            assertFalse(
+                    checkpointPolicy.canAdvanceEntityCheckpoint(
+                            ExecutionState.PUBLISHED,
+                            true,
+                            true,
+                            Optional.of(matrix.decide(kind, FailurePolicyContext.exhausted()))),
+                    kind.name());
+        }
+    }
+
+    @Test
+    void failureOfAnotherEntityDoesNotUndoAnIndependentPublishedCheckpoint() {
+        final CheckpointDecisionPolicy checkpointPolicy = new CheckpointDecisionPolicy();
+        final CycleOutcomeAccumulator cycle = new CycleOutcomeAccumulator();
+        cycle.recordPublished();
+
+        assertTrue(
+                checkpointPolicy.canAdvanceEntityCheckpoint(
+                        ExecutionState.PUBLISHED, true, true, Optional.empty()));
+
+        cycle.recordDecision(
+                new FailurePolicyMatrix()
+                        .decide(FailureKind.SQL_FAILURE, FailurePolicyContext.exhausted()));
+
+        assertEquals(ExecutionState.FAILED, cycle.snapshot().state());
+        assertEquals(1, cycle.snapshot().publishedEntities());
+        assertTrue(
+                checkpointPolicy.canAdvanceEntityCheckpoint(
+                        ExecutionState.PUBLISHED, true, true, Optional.empty()));
+    }
+
+    @Test
+    void onlyAContiguousIncrementalPublicationCanAdvanceTheOperationalWatermark() {
+        final CheckpointDecisionPolicy checkpointPolicy = new CheckpointDecisionPolicy();
+
+        for (final ExecutionMode mode : ExecutionMode.values()) {
+            assertEquals(
+                    mode == ExecutionMode.INCREMENTAL,
+                    checkpointPolicy.canAdvanceOperationalWatermark(mode, true, true),
+                    mode.name());
+            assertFalse(
+                    checkpointPolicy.canAdvanceOperationalWatermark(mode, false, true),
+                    mode.name());
+            assertFalse(
+                    checkpointPolicy.canAdvanceOperationalWatermark(mode, true, false),
+                    mode.name());
+        }
     }
 
     @Test

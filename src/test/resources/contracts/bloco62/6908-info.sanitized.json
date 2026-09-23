@@ -1,0 +1,123 @@
+{
+  "fields": [
+    {
+      "name": "id"
+    },
+    {
+      "name": "pck_crn_psn_nickname"
+    },
+    {
+      "name": "sequence_code"
+    },
+    {
+      "name": "created_at"
+    },
+    {
+      "name": "request_date"
+    },
+    {
+      "name": "service_date"
+    },
+    {
+      "name": "finish_date"
+    },
+    {
+      "name": "pck_cor_nickname"
+    },
+    {
+      "name": "invoices_volumes"
+    },
+    {
+      "name": "invoices_weight"
+    },
+    {
+      "name": "taxed_weight"
+    },
+    {
+      "name": "invoices_value"
+    },
+    {
+      "name": "status"
+    },
+    {
+      "name": "pck_pds_cty_name"
+    },
+    {
+      "name": "pck_pds_cty_sae_code"
+    },
+    {
+      "name": "pck_pds_postal_code"
+    },
+    {
+      "name": "pck_pds_neighborhood"
+    },
+    {
+      "name": "pck_prn_name"
+    },
+    {
+      "name": "pck_prn_drt_nickname"
+    },
+    {
+      "name": "updated_at"
+    },
+    {
+      "name": "pck_loe_ore_description"
+    },
+    {
+      "name": "pck_pus_ore_description"
+    },
+    {
+      "name": "pck_pus_ore_trigger"
+    },
+    {
+      "name": "pck_uer_name"
+    },
+    {
+      "name": "pck_ctr_name"
+    },
+    {
+      "name": "cancellation_reason"
+    },
+    {
+      "name": "pck_mik_attempt_number"
+    },
+    {
+      "name": "pck_mik_mft_crn_psn_nickname"
+    },
+    {
+      "name": "pck_mik_mft_sequence_code"
+    },
+    {
+      "name": "pck_mik_mft_vie_license_plate"
+    },
+    {
+      "name": "pck_mik_mft_vie_vee_name"
+    }
+  ],
+  "filters": [
+    {
+      "type": "date",
+      "name": "finish_date"
+    },
+    {
+      "type": "date",
+      "name": "service_date"
+    },
+    {
+      "type": "date",
+      "name": "request_date"
+    },
+    {
+      "type": "select",
+      "name": "corporation_id"
+    },
+    {
+      "type": "select",
+      "name": "status"
+    },
+    {
+      "type": "datetime",
+      "name": "by_updated_at"
+    }
+  ]
+}

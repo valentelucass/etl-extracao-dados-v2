@@ -1,0 +1,2 @@
+{"stage":"relations","state":"RESERVED_OUTCOME_UNKNOWN","requestSha256":"c09bd75ad48e18ea2a2cec4e33788258ebeef47f3164442a6693aedea16ac124","documentSha256":"2ace0496c5f98c9dc87f19b4b62ff099b936caafe1f5eff3f131095118d8d998","utc":"2026-09-08T23:10:43.1902396+00:00"}
+{"stage":"relations","state":"OBSERVED","httpStatus":200,"failure":null,"utc":"2026-09-08T23:10:44.9114468+00:00"}

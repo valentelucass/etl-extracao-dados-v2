@@ -1,0 +1,225 @@
+{
+  "fixtureVersion": "2026-09-05.v2-035c.reassessment.2",
+  "syntheticOnly": true,
+  "containsRealData": false,
+  "representation": "SYMBOLIC_EVIDENCE_PACKAGES_AND_SYNTH_TOKENS_ONLY",
+  "purpose": "PROVE_THE_REASSESSMENT_GATE_FAILS_CLOSED_WITH_ANY_MISSING_REQUIREMENT_WITHOUT_ASSERTING_THAT_A_REAL_COMPLETE_PACKAGE_EXISTS",
+  "closedExpectedGates": [
+    "BLOCKED",
+    "PRESERVE_LIMITED_PROOF",
+    "ELIGIBLE_FOR_NEW_DECISION_SLICE"
+  ],
+  "cases": [
+    {
+      "id": "VEHICLE_PROVIDER_ID_SCOPE_MISSING",
+      "synthetic": true,
+      "dimension": "VEICULOS",
+      "symbols": [
+        "SYNTH_VEHICLE_PLATE_ONLY",
+        "SYNTH_MANIFEST_SOURCE_SCOPE",
+        "SYNTH_MANIFEST_TENANT_SCOPE"
+      ],
+      "missingRequirements": [
+        "IMMUTABLE_PROVIDER_ID",
+        "VEHICLE_ID_SOURCE_BINDING",
+        "VEHICLE_ID_TENANT_BINDING"
+      ],
+      "expectedGate": "BLOCKED"
+    },
+    {
+      "id": "VEHICLE_PLATE_REASSIGNMENT_MISSING",
+      "synthetic": true,
+      "dimension": "VEICULOS",
+      "symbols": [
+        "SYNTH_SAME_PLATE",
+        "SYNTH_DISTINCT_VEHICLE_A",
+        "SYNTH_DISTINCT_VEHICLE_B",
+        "SYNTH_REASSIGNMENT_UNKNOWN"
+      ],
+      "missingRequirements": [
+        "PLATE_SEMANTICS",
+        "PLATE_COLLISION_POLICY",
+        "PLATE_REASSIGNMENT_POLICY"
+      ],
+      "expectedGate": "BLOCKED"
+    },
+    {
+      "id": "VEHICLE_BRANCH_SEMANTICS_MISSING",
+      "synthetic": true,
+      "dimension": "VEICULOS",
+      "symbols": [
+        "SYNTH_MANIFEST_BRANCH_CONTEXT",
+        "SYNTH_VEHICLE_OWNER_BRANCH_UNKNOWN"
+      ],
+      "missingRequirements": [
+        "VEHICLE_BRANCH_ROLE",
+        "VEHICLE_BRANCH_IDENTITY",
+        "VEHICLE_BRANCH_CHANGE_POLICY"
+      ],
+      "expectedGate": "BLOCKED"
+    },
+    {
+      "id": "VEHICLE_LIFECYCLE_MISSING",
+      "synthetic": true,
+      "dimension": "VEICULOS",
+      "symbols": [
+        "SYNTH_VEHICLE_OBSERVATION_OLD",
+        "SYNTH_VEHICLE_OBSERVATION_NEW",
+        "SYNTH_VEHICLE_ABSENCE_UNKNOWN"
+      ],
+      "missingRequirements": [
+        "EFFECTIVE_INTERVAL",
+        "CURRENT_HISTORY",
+        "ABSENCE_POLICY",
+        "CONFLICT_POLICY",
+        "REKEY_POLICY"
+      ],
+      "expectedGate": "BLOCKED"
+    },
+    {
+      "id": "VEHICLE_ROLE_SEPARATION_PRESENT",
+      "synthetic": true,
+      "dimension": "VEICULOS",
+      "symbols": [
+        "SYNTH_MAIN_VEHICLE_ROLE",
+        "SYNTH_TRAILER_POSITION_1_ROLE",
+        "SYNTH_TRAILER_POSITION_2_ROLE"
+      ],
+      "missingRequirements": [],
+      "expectedGate": "PRESERVE_LIMITED_PROOF"
+    },
+    {
+      "id": "VEHICLE_HYPOTHETICAL_COMPLETE_PACKAGE",
+      "synthetic": true,
+      "dimension": "VEICULOS",
+      "symbols": [
+        "SYNTH_IMMUTABLE_VEHICLE_PROVIDER_ID",
+        "SYNTH_EXPLICIT_SOURCE_INSTANCE",
+        "SYNTH_EXPLICIT_TENANT_SCOPE",
+        "SYNTH_VERSIONED_PLATE_POLICY",
+        "SYNTH_VERSIONED_BRANCH_POLICY",
+        "SYNTH_VERSIONED_VEHICLE_LIFECYCLE",
+        "SYNTH_DISTINCT_VEHICLE_ROLES"
+      ],
+      "missingRequirements": [],
+      "expectedGate": "ELIGIBLE_FOR_NEW_DECISION_SLICE"
+    },
+    {
+      "id": "DRIVER_PROVIDER_ID_SCOPE_MISSING",
+      "synthetic": true,
+      "dimension": "MOTORISTAS",
+      "symbols": [
+        "SYNTH_DRIVER_NAME_ONLY",
+        "SYNTH_MANIFEST_SOURCE_SCOPE",
+        "SYNTH_MANIFEST_TENANT_SCOPE"
+      ],
+      "missingRequirements": [
+        "IMMUTABLE_PROVIDER_ID",
+        "DRIVER_ID_SOURCE_BINDING",
+        "DRIVER_ID_TENANT_BINDING"
+      ],
+      "expectedGate": "BLOCKED"
+    },
+    {
+      "id": "DRIVER_NAME_IDENTITY_POLICY_MISSING",
+      "synthetic": true,
+      "dimension": "MOTORISTAS",
+      "symbols": [
+        "SYNTH_DRIVER_HOMONYM_A",
+        "SYNTH_DRIVER_HOMONYM_B",
+        "SYNTH_DRIVER_GENERIC_LABEL",
+        "SYNTH_DRIVER_RENAME",
+        "SYNTH_DRIVER_MERGE",
+        "SYNTH_DRIVER_SPLIT"
+      ],
+      "missingRequirements": [
+        "HOMONYM_POLICY",
+        "GENERIC_NAME_POLICY",
+        "RENAME_POLICY",
+        "MERGE_POLICY",
+        "SPLIT_POLICY"
+      ],
+      "expectedGate": "BLOCKED"
+    },
+    {
+      "id": "DRIVER_CONTRACT_SEMANTICS_MISSING",
+      "synthetic": true,
+      "dimension": "MOTORISTAS",
+      "symbols": [
+        "SYNTH_MANIFEST_DRIVER_CONTRACT_LABEL",
+        "SYNTH_EMPLOYMENT_CONTRACT_UNKNOWN",
+        "SYNTH_CONTRACT_EFFECTIVE_INTERVAL_UNKNOWN"
+      ],
+      "missingRequirements": [
+        "CONTRACT_ONTOLOGY",
+        "CONTRACT_PARTIES",
+        "CONTRACT_EFFECTIVE_INTERVAL",
+        "CONTRACT_CHANGE_POLICY"
+      ],
+      "expectedGate": "BLOCKED"
+    },
+    {
+      "id": "DRIVER_BRANCH_SEMANTICS_MISSING",
+      "synthetic": true,
+      "dimension": "MOTORISTAS",
+      "symbols": [
+        "SYNTH_MANIFEST_BRANCH_CONTEXT",
+        "SYNTH_DRIVER_ASSIGNMENT_BRANCH_UNKNOWN"
+      ],
+      "missingRequirements": [
+        "DRIVER_BRANCH_ROLE",
+        "DRIVER_BRANCH_IDENTITY",
+        "DRIVER_BRANCH_CHANGE_POLICY"
+      ],
+      "expectedGate": "BLOCKED"
+    },
+    {
+      "id": "DRIVER_LIFECYCLE_MISSING",
+      "synthetic": true,
+      "dimension": "MOTORISTAS",
+      "symbols": [
+        "SYNTH_DRIVER_OBSERVATION_OLD",
+        "SYNTH_DRIVER_OBSERVATION_NEW",
+        "SYNTH_DRIVER_ABSENCE_UNKNOWN"
+      ],
+      "missingRequirements": [
+        "EFFECTIVE_INTERVAL",
+        "CURRENT_HISTORY",
+        "ABSENCE_POLICY",
+        "CONFLICT_POLICY",
+        "REKEY_POLICY"
+      ],
+      "expectedGate": "BLOCKED"
+    },
+    {
+      "id": "DRIVER_HYPOTHETICAL_COMPLETE_PACKAGE",
+      "synthetic": true,
+      "dimension": "MOTORISTAS",
+      "symbols": [
+        "SYNTH_IMMUTABLE_DRIVER_PROVIDER_ID",
+        "SYNTH_EXPLICIT_SOURCE_INSTANCE",
+        "SYNTH_EXPLICIT_TENANT_SCOPE",
+        "SYNTH_VERSIONED_DRIVER_NAME_POLICY",
+        "SYNTH_VERSIONED_DRIVER_CONTRACT_POLICY",
+        "SYNTH_VERSIONED_DRIVER_BRANCH_POLICY",
+        "SYNTH_VERSIONED_DRIVER_LIFECYCLE"
+      ],
+      "missingRequirements": [],
+      "expectedGate": "ELIGIBLE_FOR_NEW_DECISION_SLICE"
+    },
+    {
+      "id": "COOCCURRENCE_NO_RELATION",
+      "synthetic": true,
+      "dimension": "BOTH",
+      "symbols": [
+        "SYNTH_MANIFEST_OBSERVATION",
+        "SYNTH_VEHICLE_SIGNAL",
+        "SYNTH_DRIVER_SIGNAL"
+      ],
+      "missingRequirements": [
+        "VERSIONED_VEHICLE_DRIVER_RELATION_CONTRACT"
+      ],
+      "expectedGate": "BLOCKED"
+    }
+  ]
+}

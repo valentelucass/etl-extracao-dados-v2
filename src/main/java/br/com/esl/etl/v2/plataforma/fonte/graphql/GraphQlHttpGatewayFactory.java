@@ -86,6 +86,22 @@ public final class GraphQlHttpGatewayFactory {
             final GraphQlContractObservationConfiguration observationConfiguration,
             final ContractRunGuard contractRunGuard,
             final CancellationToken cancellationToken) {
+        return forOperation(
+                cycle,
+                operation,
+                observationConfiguration,
+                contractRunGuard,
+                cancellationToken,
+                GraphQlHttpAttemptObserver.noop());
+    }
+
+    public GraphQlGateway forOperation(
+            final EslRequestGovernor.Cycle cycle,
+            final GraphQlReadOperation operation,
+            final GraphQlContractObservationConfiguration observationConfiguration,
+            final ContractRunGuard contractRunGuard,
+            final CancellationToken cancellationToken,
+            final GraphQlHttpAttemptObserver attempts) {
         final EslRequestGovernor.Cycle requiredCycle =
                 Objects.requireNonNull(cycle, "O ciclo ESL é obrigatório.");
         final CancellationToken requiredCancellation =
@@ -98,7 +114,8 @@ public final class GraphQlHttpGatewayFactory {
                         observationConfiguration, "A observação GraphQL é obrigatória.");
         return GraphQlContractGate.enforce(
                 bindCancellation(
-                        observedForOperation(requiredCycle, operation, requiredObservation),
+                        observedForOperation(
+                                requiredCycle, operation, requiredObservation, attempts),
                         requiredCancellation),
                 requiredObservation,
                 Objects.requireNonNull(contractRunGuard, "O gate de contrato é obrigatório."),
@@ -109,6 +126,15 @@ public final class GraphQlHttpGatewayFactory {
             final EslRequestGovernor.Cycle cycle,
             final GraphQlReadOperation operation,
             final GraphQlContractObservationConfiguration observationConfiguration) {
+        return observedForOperation(
+                cycle, operation, observationConfiguration, GraphQlHttpAttemptObserver.noop());
+    }
+
+    GraphQlGateway observedForOperation(
+            final EslRequestGovernor.Cycle cycle,
+            final GraphQlReadOperation operation,
+            final GraphQlContractObservationConfiguration observationConfiguration,
+            final GraphQlHttpAttemptObserver attempts) {
         final EslRequestGovernor.Cycle requiredCycle =
                 Objects.requireNonNull(cycle, "O ciclo ESL é obrigatório.");
         final GraphQlReadOperation requiredOperation =
@@ -133,7 +159,8 @@ public final class GraphQlHttpGatewayFactory {
                         requiredCycle.beginWorkload(requiredOperation.workload()),
                         clock,
                         jitterSource,
-                        requiredObservation);
+                        requiredObservation,
+                        Objects.requireNonNull(attempts, "O observador HTTP é obrigatório."));
         return new CircuitBreakingGraphQlGateway(gateway, circuitRegistry);
     }
 

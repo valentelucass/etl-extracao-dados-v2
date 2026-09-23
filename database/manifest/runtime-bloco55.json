@@ -1,0 +1,342 @@
+{
+  "version": 1,
+  "block": 55,
+  "status": "LOCAL_A_J_COMPLETE",
+  "database": "localhost/ETL_SISTEMA_V2_SHADOW",
+  "installedThrough": "V023",
+  "catalogSha256": "ceb70df963b995b5b8f43231a856a8c3c3a67af57458eca6948bbd989bf636ae",
+  "databaseRows": 9137,
+  "artifactManifestSha256": "a586b69ca27ade4082c363186067e3213db455398090f594f229960df5032c13",
+  "bundle": "target/bloco55/reviewed-bundle-v4",
+  "tests": 1138,
+  "testFailures": 0,
+  "testErrors": 0,
+  "testSkips": 4,
+  "grants": 32,
+  "grantDelta": 7,
+  "scopes": 16,
+  "scopeDelta": 6,
+  "mappings": 2,
+  "serviceMappingVersion": 17,
+  "operatorMappingVersion": 1,
+  "originalScope1Version": 10,
+  "otherOriginalScopesVersion": 1,
+  "originalUntil": "2026-10-07T22:34:30.615Z",
+  "renewed": false,
+  "qualityHistorical": 6,
+  "qualityActive": 3,
+  "qualityRevoked": 3,
+  "tariffReleases": 1,
+  "tariffRows": 2,
+  "reservations": 259,
+  "maximumUnits": 384,
+  "declaredBatches": 3,
+  "campaignsOpened": 11,
+  "campaignsClosed": 11,
+  "refundedUnits": 0,
+  "httpRequests": 208,
+  "maximumHttp": 2048,
+  "jarCasesExecuted": 149,
+  "jarCountIncludesFailedCases": true,
+  "jarCountIncludesTemporalPersist": true,
+  "newAttempts": 56,
+  "newPublications": 42,
+  "auditedPages": 142,
+  "auditedEntries": 96,
+  "outputRows": 114,
+  "restrictedSessions": 0,
+  "observerTransactions": 0,
+  "b53Attempts": 95,
+  "b53Publications": 75,
+  "b53Extracting": 8,
+  "b53Reservations": 112,
+  "b54Attempts": 45,
+  "b54Publications": 30,
+  "b54Pages": 70,
+  "b54Entries": 74,
+  "b54Reservations": 302,
+  "b54UnreusedUnits": 18,
+  "frontsCompleted": [
+    "A",
+    "B",
+    "C",
+    "D",
+    "E",
+    "F",
+    "G",
+    "H",
+    "I",
+    "J"
+  ],
+  "frontsPending": [],
+  "canonicalAcceptances": [
+    "V2-042b",
+    "V2-042c",
+    "V2-022b",
+    "V2-042"
+  ],
+  "integrationAccepted": true,
+  "checkboxes": 115,
+  "done": 65,
+  "pending": 50,
+  "openRoutes": 193,
+  "realSourceExecuted": false,
+  "productionExecuted": false,
+  "validRuntimeGroups": [
+    "B55_SMOKE_03",
+    "B55_MATRIX_01",
+    "B55_MANUAL_STOP",
+    "B55_MANUAL_RESUME",
+    "B55_MANUAL_OPERATOR",
+    "B55_MANUAL_DEPENDENCY"
+  ],
+  "excludedRuntimeGroups": [
+    "B55_SMOKE_01",
+    "B55_SMOKE_02"
+  ],
+  "temporalFalseNegativesReconciled": 3,
+  "sqlFalseNegativesReconciled": 4,
+  "comparisonCases": 30,
+  "estimatedConsumers": 9,
+  "measurementFiles": [
+    "target/bloco55/measurement/36d8f1b0-a3ce-4c4e-85c0-26d440e87f4f/LOCALIZACAO_CARGAS.json",
+    "target/bloco55/measurement/21074169-d400-4f01-8ac6-044f015067eb/COTACOES.json",
+    "target/bloco55/measurement/6334c637-2c8a-496b-99e0-d1aa520bab47/MANIFESTOS.json",
+    "target/bloco55/measurement/528e1a4e-e117-4c14-a9ce-7e2436b0ffac/FRETES.json",
+    "target/bloco55/measurement/159f218b-291a-48c9-bfe3-6f67a58f4bc8/COLETAS.json"
+  ],
+  "manualValidator": "target/bloco55/manual/validator-4c76738f-50e9-4b16-809a-e08aa2935a55/results.json",
+  "pendingPhysical": [],
+  "completedPhysical": [
+    "B55_MANUAL_OPERATOR",
+    "B55_MANUAL_DEPENDENCY",
+    "B55_SQL_01"
+  ],
+  "completedController": "scripts/validation/Invoke-Bloco55RemainingPhysical.ps1",
+  "completedControllerSha256": "4100006d8e94ca7b9fa48cb4271699f96d596c16663c86309c26eca44a6edce4",
+  "blocker": "",
+  "scopeOrAccountsMissing": false,
+  "review": "target/bloco55/reviews/REVIEW_05",
+  "sqlSnapshot": "target/bloco55/snapshots/B55_READ_03",
+  "initialFilesPreserved": 1230,
+  "changedInitialFiles": 42,
+  "newPaths": 99,
+  "proofFiles": [
+    {
+      "path": "database/manifest/runtime-bloco55-acceptances.json",
+      "sha256": "44646503e6a5b1a40ff3d912bf2b40ac13f38cd54dc806adace36dba6654dabe"
+    },
+    {
+      "path": "database/proposals/bloco55-dq-correction/manifest.json",
+      "sha256": "c07fe2c271d9f0a94e57b752a4bacc6d5d4b99a9581cbf254652bec939e36abb"
+    },
+    {
+      "path": "database/proposals/bloco55-output-projection/manifest.json",
+      "sha256": "fb648e5d74f1a8e4595c26d0ff569bd93c20201d7f1401a34e741538dc7eb532"
+    },
+    {
+      "path": "database/proposals/bloco55-runtime-extension/activation/manifest.json",
+      "sha256": "04e0bd2df11b40cd923348c6ccb2c0a1f6250700ab29ad9deb8f6becab514b23"
+    },
+    {
+      "path": "database/proposals/bloco55-runtime-extension/manifest.json",
+      "sha256": "6ecf87b3f2563ef1af7a959885d2282afc2d1addf73e8d0f3d7de4dfe94b0eb7"
+    },
+    {
+      "path": "docs/adr/0038-runtime-cinco-verticais-e-consumidores-locais.md",
+      "sha256": "e6ec1868da143270b59666db7cc76139315e5a6c4ab902916804c909f845c9e3"
+    },
+    {
+      "path": "docs/runbooks/v2-022-bloco55-cinco-verticais-local.md",
+      "sha256": "15b14d272298dc7e95c8e267822f8054c8d5fde6b0c62664eecd1f02688754cc"
+    },
+    {
+      "path": "target/bloco55/activation/B55_ACTIVATE_02/receipt.json",
+      "sha256": "61b9546a462a59e26d069321a514fb1fbf2aa747accba252d5c350cbfa0e54c9"
+    },
+    {
+      "path": "target/bloco55/batch-01.json",
+      "sha256": "e0ad2b1520e70faec01a760e69c2d689cce8761b79e32fec190285a9c11865f3"
+    },
+    {
+      "path": "target/bloco55/batch-02.json",
+      "sha256": "13d9d9251d76f6dd7abf023387e7674d594fd47ede8420be59affbf035ef951a"
+    },
+    {
+      "path": "target/bloco55/batch-03.json",
+      "sha256": "d14d44d358f90ce3798f159ad9d1d16aee469f7a05ca312c7f6ee9341104492f"
+    },
+    {
+      "path": "target/bloco55/comparison/B55_COMPARE_02/results.json",
+      "sha256": "0ed453be359a1e77627c002c7e85154c8f9f20ddb8752f205ad5547c903f0f77"
+    },
+    {
+      "path": "target/bloco55/dq-correction/B55_DQ_FIX_01/receipt.json",
+      "sha256": "3aee4a00702cc2858dc19a011fc904c881191074930e03ad4dd18be31beeaf19"
+    },
+    {
+      "path": "target/bloco55/final-jar-equivalence.json",
+      "sha256": "1277aa5f0f2ce7bcae735596cd6ef42708c33780b2e8b1471ee1fbe1f24cb0f8"
+    },
+    {
+      "path": "target/bloco55/guards-b54-02.log",
+      "sha256": "76aa1b895d1aa93f2b168be98d6c7bd640fbbb70993dd871afd35fd10ad41d6e"
+    },
+    {
+      "path": "target/bloco55/guards-b55-04.log",
+      "sha256": "6eaab5df2b9e53a27b0324cb67fea1e86f64a758dafe256fb4bfc007583e5104"
+    },
+    {
+      "path": "target/bloco55/ledger.jsonl",
+      "sha256": "04d67fd1ba1138b94d0a034891e9d83003895f5379739062288364afceafb3b5"
+    },
+    {
+      "path": "target/bloco55/loopback-quiescence-final.json",
+      "sha256": "4849aa3e14b30397ee0419d3cf93bafda535dbe00f47641aa74f7e1e484b6cef"
+    },
+    {
+      "path": "target/bloco55/manual-preview.log",
+      "sha256": "4ba716f186b5b1e96893eb8db8481909be94645ad506dfe95a75539e1a5d9415"
+    },
+    {
+      "path": "target/bloco55/manual/validator-4c76738f-50e9-4b16-809a-e08aa2935a55/results.json",
+      "sha256": "5591ca60ca4773043da023c1a0805c1fe15aec5625cda3f4274943777a59519b"
+    },
+    {
+      "path": "target/bloco55/measurement/159f218b-291a-48c9-bfe3-6f67a58f4bc8/COLETAS.json",
+      "sha256": "677eef1e005e084c82fe45ec64127fb0d57c6a6242db4dfc1ae2716ab439d93c"
+    },
+    {
+      "path": "target/bloco55/measurement/21074169-d400-4f01-8ac6-044f015067eb/COTACOES.json",
+      "sha256": "e60fb791a13ebf42a002d44e285e58f0c39450a4ff29d1ebe64a484853314e7e"
+    },
+    {
+      "path": "target/bloco55/measurement/36d8f1b0-a3ce-4c4e-85c0-26d440e87f4f/LOCALIZACAO_CARGAS.json",
+      "sha256": "6cf4b1e3eeb9866a3610fb7f2370861596255f54aeedf702dd41f49a05d063c9"
+    },
+    {
+      "path": "target/bloco55/measurement/528e1a4e-e117-4c14-a9ce-7e2436b0ffac/FRETES.json",
+      "sha256": "be0ce913aaad913a1ba11e6292c0081dce2ed7326903f63d1b7d82bf1904f32d"
+    },
+    {
+      "path": "target/bloco55/measurement/6334c637-2c8a-496b-99e0-d1aa520bab47/MANIFESTOS.json",
+      "sha256": "22e905bd84441f62ff03ca06c2cebaa273139e6eaeb3709c764e6d4cf5b35acc"
+    },
+    {
+      "path": "target/bloco55/plans/B55_PLANS_05/results.json",
+      "sha256": "73ef2bf493a66871982dc5950813082d3ab796d602379cb84a1de42856fc8fd8"
+    },
+    {
+      "path": "target/bloco55/pom-equivalence.json",
+      "sha256": "abd835d96ed0df9f4bba45b7ddfea5c0a486f2ca2642b6d7ac88587140d96e60"
+    },
+    {
+      "path": "target/bloco55/reviews/REVIEW_05/bloco55-only.patch",
+      "sha256": "deebefad3bbc1ae64f1c02202304d30dfd50a93a23cd92df23ac5bc99218206e"
+    },
+    {
+      "path": "target/bloco55/reviews/REVIEW_05/current-inventory.json",
+      "sha256": "3a9aa040d21291180416012b0fc270f6e123970dcc455a81306d4ee73360f63e"
+    },
+    {
+      "path": "target/bloco55/reviews/REVIEW_05/receipt.json",
+      "sha256": "2853a8d2a1f9480f102325a6b60e467ef905a04fe3dc7dce9ccc446278b1c938"
+    },
+    {
+      "path": "target/bloco55/runtime/B55_MANUAL_DEPENDENCY/manual-summary.json",
+      "sha256": "cae2d562e2b6fd8b5ae4a9f26e83764d12cd4baa2a7c60f884c3f8e1c07d829b"
+    },
+    {
+      "path": "target/bloco55/runtime/B55_MANUAL_DEPENDENCY/results.json",
+      "sha256": "2dd8ccf5592940eeb7bae1d85e8b40d48e05b1c6e0e11e2e1947b070230ba394"
+    },
+    {
+      "path": "target/bloco55/runtime/B55_MANUAL_OPERATOR/manual-summary.json",
+      "sha256": "100ad4908ae0a9915930632015653f368c05db7e251892c23c3d356932aa5c2c"
+    },
+    {
+      "path": "target/bloco55/runtime/B55_MANUAL_OPERATOR/results.json",
+      "sha256": "b81e24e0c2862c622a02f59ed61f3d3a25416e626ae9f6321a30cc2431ef21c5"
+    },
+    {
+      "path": "target/bloco55/runtime/B55_MANUAL_RESUME/manual-summary.json",
+      "sha256": "312caa90b6ef240e957a307b0d6603a0e039b7bce851585fdf921b9e9a635785"
+    },
+    {
+      "path": "target/bloco55/runtime/B55_MANUAL_RESUME/results.json",
+      "sha256": "eb887a9c0b21b69b729afed3f859accb8da997a390a0994dfec179306c29008d"
+    },
+    {
+      "path": "target/bloco55/runtime/B55_MANUAL_STOP/manual-summary.json",
+      "sha256": "3386d454148a5990b894b55c7924bd06cea0199b86c22249092d3b6487137320"
+    },
+    {
+      "path": "target/bloco55/runtime/B55_MANUAL_STOP/results.json",
+      "sha256": "ff755a8321de3b5a8c863b45c943a3602d6f75d08ad539ca1638cb349b6413c9"
+    },
+    {
+      "path": "target/bloco55/runtime/B55_MATRIX_01/results.json",
+      "sha256": "9910ba421d82ecc29ba14792cf1910bfbcd0fc04b0069f99c1b0ae7dbddff8ea"
+    },
+    {
+      "path": "target/bloco55/runtime/B55_SMOKE_01/acceptance-exclusions.json",
+      "sha256": "3ad63cf3331b1032350b340eb74e356a8b33434c9d58a1fca590cf1e9460a351"
+    },
+    {
+      "path": "target/bloco55/runtime/B55_SMOKE_03/results.json",
+      "sha256": "f137c3d7070d0d4ca4f90cd3f86b5f111ff898b341266d071cb115b53a9d402b"
+    },
+    {
+      "path": "target/bloco55/runtime/B55_SQL_01/results.json",
+      "sha256": "f9e802fa7a4f6635d169fe506d504b1b00f3e0b7c4438c5119da40ca72106195"
+    },
+    {
+      "path": "target/bloco55/runtime/B55_TIME_01/results.json",
+      "sha256": "ebadb85c527350740e3109e3e52d04076242b80fb390f4eff41fa8f6e25f257d"
+    },
+    {
+      "path": "target/bloco55/schema/B55_SCHEMA_APPLY_02/receipt.json",
+      "sha256": "aa8a0ba08f4e218533975c2f954214548a2a69d688ee4e92462c07a647a1d877"
+    },
+    {
+      "path": "target/bloco55/schema/B55_V023_APPLY/receipt.json",
+      "sha256": "1edd94ec632d36f8c4ec3fe5066b43d47358d3bb5bfeaa8d38dad02d56c56ca6"
+    },
+    {
+      "path": "target/bloco55/secret-scan-04.log",
+      "sha256": "0be111ff59bb0e9088e3bbec1844b3adc28efb820923b784bad0fb14c99230cc"
+    },
+    {
+      "path": "target/bloco55/secret-selftests-01.log",
+      "sha256": "bce22bd704efa45789beb574a1daefeb08fd743ef0195d7a362efe86b4369f73"
+    },
+    {
+      "path": "target/bloco55/snapshots/B55_READ_03/PRESERVATION.log",
+      "sha256": "0d5631556aa3b9f3f8b03e8a0a0e4465d806a0c7f474f03380acbc818823542f"
+    },
+    {
+      "path": "target/bloco55/snapshots/B55_READ_03/receipt.json",
+      "sha256": "b14abc9df2396d73aab403ea6e95797d55c9d819d73a7d1514f8fa2b0ffaf3c2"
+    },
+    {
+      "path": "target/bloco55/snapshots/B55_SQL_01_DIAGNOSE/receipt.json",
+      "sha256": "81ef92817ba1f23c0945698be479ac988e25af264f09cdb2bcd52f30e5c591fd"
+    },
+    {
+      "path": "target/bloco55/sql-fence-reconciliation.json",
+      "sha256": "c4ba8882deced6a7c8ecbf2f8d7879b4de37f95b9d9e812955b5a61a49ce1a18"
+    },
+    {
+      "path": "target/bloco55/static-final-02.log",
+      "sha256": "74de738e711cf44ed2ca35dcb2778f095239e0fd6ad94ca76bdb6ead39fc5b64"
+    },
+    {
+      "path": "target/bloco55/temporal-reconciliation.json",
+      "sha256": "b521afb9f0757b145ad14f8b248f034fef14131adf05e57096edb6433260f34c"
+    },
+    {
+      "path": "target/bloco55/verify-03.log",
+      "sha256": "5d922dc00aa54c85e97499f7bfa2f8f0537ca086d16faa18b9920b7796f66e76"
+    }
+  ]
+}

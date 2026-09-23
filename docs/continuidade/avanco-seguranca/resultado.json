@@ -1,0 +1,179 @@
+{
+  "status": "LOCAL_STATIC_ANALYSIS_ADVANCE",
+  "completion": "LOCAL_CODE_FIXED_AND_UNIT_TESTED_RELEASE_REQUIREMENTS_OPEN",
+  "sourceCalls": 0,
+  "databaseUsed": false,
+  "newAcceptances": 0,
+  "construction": "39/45",
+  "historicalAcceptances": "67/115",
+  "runtimeChanged": true,
+  "currentP07Qualified": false,
+  "currentP08Qualified": false,
+  "schemaChanged": false,
+  "physicalTestsExecutedThisRound": false,
+  "defectsFixed": 8,
+  "newRegressionCases": 24,
+  "unitTests": {
+    "tests": 2186,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 4,
+    "classes": 250
+  },
+  "intermediateUnitTests": {
+    "status": "FAILED",
+    "layer": "OFFLINE_UNIT_ONLY",
+    "tests": 2175,
+    "failures": 0,
+    "errors": 5,
+    "skipped": 5,
+    "classes": 249,
+    "newRegressionCases": 13,
+    "newRegressionCasesPassed": 13,
+    "cause": "512MiB heap cap applied to Maven but missing from forked Surefire JVM",
+    "sourceCalls": 0,
+    "databaseCalls": 0
+  },
+  "staticAnalysis": {
+    "rules": 10,
+    "sourceFiles": 653,
+    "findingsBefore": 40,
+    "findingsAfter": 37,
+    "selfTestCases": 12,
+    "state": "FINDINGS_OPEN",
+    "suppressionsAdded": 0
+  },
+  "priorExternalRequirements": 16,
+  "bugs": [
+    {
+      "id": "SEC-01",
+      "location": "QualificationConcurrency",
+      "problem": "Encerramento do executor substituía a falha da operação.",
+      "test": "QualificationConcurrencyTest",
+      "newCases": 6,
+      "origin": "PMD selected rules plus direct code-path review; synthetic regressions",
+      "businessRuleChanged": false
+    },
+    {
+      "id": "SEC-02",
+      "location": "LocalArtifactScenario.previewSequence",
+      "problem": "Rollback substituía Error do trabalho isolado.",
+      "test": "SavepointScopeTest",
+      "newCases": 5,
+      "origin": "PMD selected rules plus direct code-path review; synthetic regressions",
+      "businessRuleChanged": false
+    },
+    {
+      "id": "SEC-03",
+      "location": "QualificationTemporalMatrix.isolated",
+      "problem": "Rollback substituía Error do trabalho isolado.",
+      "test": "SavepointScopeTest",
+      "newCases": 0,
+      "origin": "PMD selected rules plus direct code-path review; synthetic regressions",
+      "businessRuleChanged": false
+    },
+    {
+      "id": "SEC-04",
+      "location": "ColetaTemporalLaboratorySession.control",
+      "problem": "Falha ao verificar statement anterior deixava o novo aberto.",
+      "test": "ColetaTemporalLaboratorySessionCloseTest",
+      "newCases": 2,
+      "origin": "PMD selected rules plus direct code-path review; synthetic regressions",
+      "businessRuleChanged": false
+    },
+    {
+      "id": "SEC-05",
+      "location": "BoundedRuntimeDataSource",
+      "problem": "Falha ao configurar timeout deixava statement recém-criado aberto.",
+      "test": "RuntimeJdbcBoundariesTest",
+      "newCases": 4,
+      "origin": "PMD selected rules plus direct code-path review; synthetic regressions",
+      "businessRuleChanged": false
+    },
+    {
+      "id": "SEC-06",
+      "location": "BoundedRuntimeDataSource",
+      "problem": "Recusa RuntimeException do opener consumia permanentemente permit.",
+      "test": "RuntimeJdbcBoundariesTest",
+      "newCases": 1,
+      "origin": "PMD selected rules plus direct code-path review; synthetic regressions",
+      "businessRuleChanged": false
+    },
+    {
+      "id": "SEC-07",
+      "location": "JdbcRasterBatch.close",
+      "problem": "Falha posterior de fechamento/observer substituía a primeira.",
+      "test": "JdbcRasterBatchTest",
+      "newCases": 5,
+      "origin": "PMD selected rules plus direct code-path review; synthetic regressions",
+      "businessRuleChanged": false
+    },
+    {
+      "id": "SEC-08",
+      "location": "DataExportHttpExecutor",
+      "problem": "Error assíncrono era convertido em IOException e podia ser repetido.",
+      "test": "DataExportHttpExecutorTest",
+      "newCases": 1,
+      "origin": "PMD selected rules plus direct code-path review; synthetic regressions",
+      "businessRuleChanged": false
+    }
+  ],
+  "receipts": [
+    {
+      "path": "target/avanco-seguranca-20260922-01/baseline.json",
+      "sha256": "78d34b2228880061706d6ff71a1ce59e17e9929b651a987e763f6a667276e6fa"
+    },
+    {
+      "path": "target/avanco-seguranca-20260922-01/source-readback.json",
+      "sha256": "867cd8bc02235d355ea894e57efba6e935749537af99f972324bc3c6031d8b66"
+    },
+    {
+      "path": "target/avanco-seguranca-20260922-01/static-analysis-gate-result-02.json",
+      "sha256": "373454ee869cbe67f42c7f927221ab1d17b4e35c200a0e62fa5f7689796fd8ef"
+    },
+    {
+      "path": "target/avanco-seguranca-20260922-01/pmd-diagnostic-01/result.json",
+      "sha256": "8a64f8eef7d203e0446b0001973f480a299fa7b0539b145ec4f4537ec75bfdc1"
+    },
+    {
+      "path": "target/avanco-seguranca-20260922-01/static-analysis-tests-01/result.json",
+      "sha256": "3d68317d6030d9b79667d1640bbb3c9557d3c030971f95258675d3853d0c0797"
+    },
+    {
+      "path": "target/avanco-seguranca-20260922-01/static-analysis-main-02/result.json",
+      "sha256": "1ce587bd422f96bcb3cd4c751b682c69d11deb74ff99d5a7f8d4465491ffcb0c"
+    },
+    {
+      "path": "target/avanco-seguranca-20260922-01/unit-check-01/test-result.json",
+      "sha256": "248dbc79915b83774f8a166a34bf26d698651cbf780c470056bbe9233dbe69e9"
+    },
+    {
+      "path": "target/avanco-seguranca-20260922-01/unit-check-03/test-result.json",
+      "sha256": "4253ab97133e1c230845d289d3aca20b98b865181301d989d9741c976f3d8482"
+    },
+    {
+      "path": "target/avanco-seguranca-20260922-01/static-analysis-main-01/result.json",
+      "sha256": "6723526ecc8f04091b2d36e911ecd3f32af9cc13589407ec9deba122df5a555e"
+    },
+    {
+      "path": "target/avanco-seguranca-20260922-01/unit-check-02/result-summary.json",
+      "sha256": "f09c3578283fd59772a60f06025185863ce4ea8cd203fcd4d845d68ea099cbcd"
+    },
+    {
+      "path": "target/avanco-seguranca-20260922-01/unit-check-04/result.json",
+      "sha256": "073bb6040659385a4ada7297c9fbe31763d388da2e4c9f7e38a35bb95907689d"
+    },
+    {
+      "path": "target/avanco-seguranca-20260922-01/security-review.json",
+      "sha256": "5ade051d22a0a0cd8736e6235b9cde77cabc6f500ac7321dda2d499c6ad7eaeb"
+    },
+    {
+      "path": "target/avanco-seguranca-20260922-01/findings-triage.json",
+      "sha256": "bbc0fb56848e9b6c51a6297f13bf21d6c1f7dfbae4bed79421f34007a072db1b"
+    },
+    {
+      "path": "target/avanco-seguranca-20260922-01/spotless-selection-diagnostic.json",
+      "sha256": "945ffdb2f20cab5d8a409d170a41b597bdbd1a9a7772b9b52bd781ca13b05d87"
+    }
+  ]
+}

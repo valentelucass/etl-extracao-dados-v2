@@ -1,0 +1,11 @@
+{
+  "authorityServer": null,
+  "authorityId": null,
+  "policyFingerprint": null,
+  "serviceLogin": null,
+  "operatorLogin": null,
+  "validFromUtc": null,
+  "validUntilUtc": null,
+  "scopes": [],
+  "reviewReference": null
+}
