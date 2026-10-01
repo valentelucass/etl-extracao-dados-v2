@@ -53,6 +53,10 @@ uma decisão interna conservadora para a futura staging, não uma alegação de 
 Valor inválido, overflow, escala maior que nove ou representação de locale ambígua é preservado
 bruto e quarantinado; nunca vira zero ou nulo silencioso. Não há inferência de moeda, unidade,
 precisão comercial ou arredondamento, e nenhuma aritmética é autorizada.
+O léxico decimal textual é limitado a 8.192 caracteres antes de criar `BigDecimal`;
+acima desse teto, o valor bruto é preservado em quarentena. O parser JSON já
+recusa tokens numéricos acima do mesmo teto. A regra impede que a forma textual
+contorne o limite de leitura sem mudar `DECIMAL(38,9)` nem coerção.
 
 ### LOC-05 — frescor, empate e temporalidade
 
@@ -101,4 +105,3 @@ completude, sweep ou cutover.
 - transformar erro numérico em zero/nulo ou adivinhar locale, moeda, unidade e arredondamento;
 - escolher um Frete ambíguo com `TOP 1`, nome aproximado ou materializar relação;
 - ativar sweep/publicação sem completude, paridade e contrato consumidor.
-

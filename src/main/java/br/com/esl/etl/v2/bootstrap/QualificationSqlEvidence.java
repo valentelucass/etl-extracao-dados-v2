@@ -24,10 +24,9 @@ public final class QualificationSqlEvidence {
     private QualificationSqlEvidence() {}
 
     public static void master(final QualificationConfiguration configuration) throws SQLException {
-        if (!Boolean.getBoolean("shadow.local.integration.enabled")
-                || !Boolean.getBoolean("shadow.local.integration.profile.active")) {
-            throw new IllegalArgumentException("QUAL_SQL_OPT_IN_REQUIRED");
-        }
+        QualificationSqlOptIn.require(
+                Boolean.getBoolean("shadow.local.integration.enabled"),
+                Boolean.getBoolean("shadow.local.integration.profile.active"));
         final var url =
                 configuration
                         .jdbcUrl()

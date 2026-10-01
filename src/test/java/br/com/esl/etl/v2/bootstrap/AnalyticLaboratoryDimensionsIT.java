@@ -442,7 +442,12 @@ class AnalyticLaboratoryDimensionsIT {
         final var policy =
                 new ExpansionPolicy(
                         DATE, DATE.plusDays(3), DATE, 2, 100, 1000, FiscalPolicy.SYNTHETIC_CTE);
-        new JdbcExpansionLaboratory(session, CLOCK).start(expansion, policy);
+        RuntimePhaseEvidence.sql(
+                RuntimePhaseEvidence.Phase.EXPANSION_START,
+                () -> {
+                    new JdbcExpansionLaboratory(session, CLOCK).start(expansion, policy);
+                    return null;
+                });
         new JdbcRelationalLaboratory(session, CLOCK)
                 .start(
                         relational,
@@ -450,9 +455,16 @@ class AnalyticLaboratoryDimensionsIT {
                                 DATE, DATE.plusDays(2), 1000, 10, 3, 60, 2, 0, 2, 100),
                         contracts);
         new JdbcAnalyticDimensions(session).associate(run, expansion, relational);
-        new JdbcAnalyticReferences(session, CLOCK)
-                .importPackaged(
-                        run, 1, DATE, DATE.plusDays(3), AnalyticLaboratoryReferencesIT.POLICIES);
+        RuntimePhaseEvidence.sql(
+                RuntimePhaseEvidence.Phase.REFERENCE_IMPORT,
+                () ->
+                        new JdbcAnalyticReferences(session, CLOCK)
+                                .importPackaged(
+                                        run,
+                                        1,
+                                        DATE,
+                                        DATE.plusDays(3),
+                                        AnalyticLaboratoryReferencesIT.POLICIES));
         final UUID freight = UUID.randomUUID(), cap = UUID.randomUUID();
         new LocalExpansionDependencyRuntime(session, expansion, policy, CLOCK, Clock.systemUTC())
                 .capture(

@@ -71,7 +71,11 @@ public final class LigarReferenciaTemporalColeta {
             return result(record, reference, binding, Outcome.STATUS_MISMATCH);
         }
         if (reference.statusAtUtc() == null) {
-            return result(record, reference, binding, Outcome.REFERENCE_INVALID);
+            return result(
+                    record,
+                    reference,
+                    binding,
+                    nativeTime ? Outcome.DATA_EXPORT_TIME_RETAINED : Outcome.REFERENCE_INVALID);
         }
         if (nativeTime && !record.freshnessAtUtc().equals(reference.statusAtUtc())) {
             return result(record, reference, binding, Outcome.SOURCE_TIME_CONFLICT);

@@ -25,9 +25,18 @@ final class QualificationPackageFixture {
     }
 
     static QualificationPackageFixture create() throws Exception {
-        final Path root =
+        return create(
                 Path.of("target", "qf", UUID.randomUUID().toString().substring(0, 18), "payload")
-                        .toAbsolutePath();
+                        .toAbsolutePath(),
+                false);
+    }
+
+    static QualificationPackageFixture createOffline(final Path root) throws Exception {
+        return create(root, true);
+    }
+
+    private static QualificationPackageFixture create(final Path root, final boolean offline)
+            throws Exception {
         Files.createDirectories(root);
         final var document =
                 JsonNodeFactory.instance
@@ -50,6 +59,33 @@ final class QualificationPackageFixture {
         final Path catalog = Path.of("docs/catalogos/macrobloco-qualificacao-pacote");
         fixture.copy(
                 catalog.resolve("dependency-lock.json"), "dependencies.json", "JSON", "POLICY");
+        final byte[] nativePlaceholder =
+                "synthetic non-executable native member"
+                        .getBytes(java.nio.charset.StandardCharsets.UTF_8);
+        if (offline) {
+            final java.util.Map<String, String> currentPomHashes = new java.util.HashMap<>();
+            final var copiedLock = QualificationJson.read(root.resolve("dependencies.json"), 65536);
+            for (final var item : copiedLock.path("dependencies")) {
+                final String pom = item.path("pom").asText();
+                currentPomHashes.put(
+                        pom, QualificationJson.sha256(catalog.resolve("third-party").resolve(pom)));
+            }
+            fixture.mutate(
+                    "dependencies.json",
+                    value -> {
+                        for (final var item : value.path("dependencies")) {
+                            ((ObjectNode) item)
+                                    .put(
+                                            "pomSha256",
+                                            currentPomHashes.get(item.path("pom").asText()));
+                            if ("dll".equals(item.path("type").asText())) {
+                                ((ObjectNode) item)
+                                        .put("sha256", QualificationJson.sha256(nativePlaceholder))
+                                        .put("size", nativePlaceholder.length);
+                            }
+                        }
+                    });
+        }
         final var lock = QualificationJson.read(root.resolve("dependencies.json"), 65536);
         final var bom =
                 JsonNodeFactory.instance
@@ -68,11 +104,15 @@ final class QualificationPackageFixture {
             final boolean nativeAuth = dependency.path("type").asText().equals("dll");
             final String name =
                     (nativeAuth ? "native/" : "lib/") + dependency.path("file").asText();
-            fixture.copy(
-                    Path.of("target").resolve(name),
-                    name,
-                    nativeAuth ? "DLL" : "JAR",
-                    nativeAuth ? "NATIVE_AUTH" : "DEPENDENCY");
+            if (offline && nativeAuth) {
+                fixture.write(name, nativePlaceholder, "DLL", "NATIVE_AUTH");
+            } else {
+                fixture.copy(
+                        Path.of("target").resolve(name),
+                        name,
+                        nativeAuth ? "DLL" : "JAR",
+                        nativeAuth ? "NATIVE_AUTH" : "DEPENDENCY");
+            }
             fixture.copy(
                     catalog.resolve("third-party").resolve(dependency.path("pom").asText()),
                     "licenses/" + dependency.path("pom").asText(),
@@ -159,6 +199,11 @@ final class QualificationPackageFixture {
                     jar,
                     "qualification-laboratory/physical-columns.v098.json",
                     "contracts/physical-columns.v098.json",
+                    "CONTRACT");
+            fixture.resource(
+                    jar,
+                    "qualification-laboratory/physical-columns.v105.json",
+                    "contracts/physical-columns.v105.json",
                     "CONTRACT");
             for (final String name :
                     new String[] {

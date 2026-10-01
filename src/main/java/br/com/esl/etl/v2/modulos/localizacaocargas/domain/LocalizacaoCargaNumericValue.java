@@ -5,6 +5,7 @@ import java.util.regex.Pattern;
 
 /** Parsers numéricos LOC-04: ASCII, sem locale, coerção ou arredondamento. */
 public final class LocalizacaoCargaNumericValue {
+    public static final int MAXIMUM_DECIMAL_WIRE_CHARACTERS = 8_192;
     private static final Pattern INTEGER = Pattern.compile("[0-9]+");
     private static final Pattern DECIMAL = Pattern.compile("-?[0-9]+(?:\\.[0-9]+)?");
 
@@ -37,7 +38,9 @@ public final class LocalizacaoCargaNumericValue {
             return missing(path, presence);
         }
         BigDecimal typed = null;
-        if (wireText != null && DECIMAL.matcher(wireText).matches()) {
+        if (wireText != null
+                && wireText.length() <= MAXIMUM_DECIMAL_WIRE_CHARACTERS
+                && DECIMAL.matcher(wireText).matches()) {
             try {
                 final BigDecimal parsed = new BigDecimal(wireText);
                 final long integerDigits = Math.max(0L, (long) parsed.precision() - parsed.scale());

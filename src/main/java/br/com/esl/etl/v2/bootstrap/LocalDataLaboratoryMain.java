@@ -86,25 +86,10 @@ public final class LocalDataLaboratoryMain {
                                     .atStartOfDay(ExpansionFreshness.ZONE)
                                     .toInstant(),
                             ExpansionFreshness.ZONE);
-            try (var session = ColetaTemporalLaboratorySession.openFromEnvironment()) {
-                session.controlStatements(30, 100000);
-                final UUID run = UUID.randomUUID();
-                new JdbcExpansionLaboratory(session, clock).start(run, policy);
-                final var result =
-                        new LocalExpansionRuntime(session, run, policy, clock, Clock.systemUTC())
-                                .capture(
-                                        input.template(),
-                                        input.date(),
-                                        ExecutionMode.BOOTSTRAP,
-                                        null,
-                                        source,
-                                        token);
-                output.printf(
-                        "LOCAL_DATA_CAPTURE_ROLLBACK_ONLY family=%s pages=%d bytes=%d%n",
-                        input.template(),
-                        result.metrics().fetchedPages(),
-                        result.metrics().bytes());
-            }
+            final var result = new SqlCapture().capture(input, policy, source, clock, token);
+            output.printf(
+                    "LOCAL_DATA_CAPTURE_ROLLBACK_ONLY family=%s pages=%d bytes=%d%n",
+                    input.template(), result.metrics().fetchedPages(), result.metrics().bytes());
             output.println("LOCAL_DATA_ROLLBACK_CONFIRMED");
             return RuntimeExitCategory.SUCCESS;
         } catch (final ResilienceCancelledException failure) {
@@ -116,6 +101,30 @@ public final class LocalDataLaboratoryMain {
         } catch (final IOException | RuntimeException failure) {
             output.println("LOCAL_DATA_INPUT_OR_CONFIG_REJECTED");
             return RuntimeExitCategory.CONFIG_AUTH;
+        }
+    }
+
+    private static final class SqlCapture {
+        private LocalExpansionRuntime.Capture capture(
+                final ExpansionArtifact input,
+                final ExpansionPolicy policy,
+                final ExpansionCaptureSource source,
+                final Clock clock,
+                final CancellationToken token)
+                throws SQLException {
+            try (var session = ColetaTemporalLaboratorySession.openFromEnvironment()) {
+                session.controlStatements(30, 100000);
+                final UUID run = UUID.randomUUID();
+                new JdbcExpansionLaboratory(session, clock).start(run, policy);
+                return new LocalExpansionRuntime(session, run, policy, clock, Clock.systemUTC())
+                        .capture(
+                                input.template(),
+                                input.date(),
+                                ExecutionMode.BOOTSTRAP,
+                                null,
+                                source,
+                                token);
+            }
         }
     }
 }

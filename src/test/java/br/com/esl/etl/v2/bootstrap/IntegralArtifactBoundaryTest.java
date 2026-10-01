@@ -1,6 +1,7 @@
 package br.com.esl.etl.v2.bootstrap;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import br.com.esl.etl.v2.plataforma.qualificacao.PinnedLocalJson;
@@ -101,6 +102,69 @@ class IntegralArtifactBoundaryTest {
                 assertThrows(
                                 IllegalArgumentException.class,
                                 () -> declared.verifyFiles(CancellationToken.none()))
+                        .getMessage());
+    }
+
+    @Test
+    void completeInputBindsCaptureContractsAndPolicyToTheDeclaredWindow() throws Exception {
+        final var file = IntegralArtifactFixtures.write(folder, false, 2);
+        final var input = load(file, CancellationToken.none());
+        final var contracts = input.contracts();
+        assertEquals(
+                input.capture("MAN").contractRelease().contractFingerprint().sha256(),
+                contracts.manifestos());
+        assertEquals(
+                input.capture("COL").contractRelease().contractFingerprint().sha256(),
+                contracts.coletas());
+        assertEquals(
+                input.capture("FRE").contractRelease().contractFingerprint().sha256(),
+                contracts.fretes());
+        assertEquals(input.start(), input.policy().start());
+        assertEquals(input.end().minusDays(1), input.policy().end());
+        assertEquals(input.pageSize(), input.policy().pageSize());
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> input.policy().validateDate(input.start().minusDays(1)));
+        assertEquals(
+                "INTEGRAL_INPUT_FAMILY_MISSING",
+                assertThrows(IllegalArgumentException.class, () -> input.capture("UNDECLARED"))
+                        .getMessage());
+        input.verifyFiles(CancellationToken.none());
+    }
+
+    @Test
+    void declaredCaptureFamiliesExposeOnlyTheirOwnSyntheticAdapters() throws Exception {
+        final var input =
+                load(IntegralArtifactFixtures.write(folder, false, 2), CancellationToken.none());
+        assertNotNull(input.capture("MAN").relational(AnalyticScenarioObserver.NONE));
+        assertNotNull(input.capture("COL").relational(AnalyticScenarioObserver.NONE));
+        assertNotNull(input.capture("FRE").dependency(AnalyticScenarioObserver.NONE));
+        assertNotNull(input.capture("LOC").dependency(AnalyticScenarioObserver.NONE));
+        assertNotNull(input.capture("COT").quotes());
+        assertNotNull(input.capture("USER").users());
+        assertEquals(
+                "INTEGRAL_RELATIONAL_FAMILY",
+                assertThrows(
+                                IllegalArgumentException.class,
+                                () ->
+                                        input.capture("USER")
+                                                .relational(AnalyticScenarioObserver.NONE))
+                        .getMessage());
+        assertEquals(
+                "INTEGRAL_DEPENDENCY_FAMILY",
+                assertThrows(
+                                IllegalArgumentException.class,
+                                () ->
+                                        input.capture("COL")
+                                                .dependency(AnalyticScenarioObserver.NONE))
+                        .getMessage());
+        assertEquals(
+                "INTEGRAL_QUOTES_FAMILY",
+                assertThrows(IllegalArgumentException.class, () -> input.capture("MAN").quotes())
+                        .getMessage());
+        assertEquals(
+                "INTEGRAL_USERS_FAMILY",
+                assertThrows(IllegalArgumentException.class, () -> input.capture("FRE").users())
                         .getMessage());
     }
 

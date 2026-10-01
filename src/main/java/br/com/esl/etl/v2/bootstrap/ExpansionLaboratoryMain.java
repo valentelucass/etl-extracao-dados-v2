@@ -34,6 +34,16 @@ public final class ExpansionLaboratoryMain {
     }
 
     public static RuntimeExitCategory run(final String[] arguments, final PrintStream output) {
+        return run(arguments, output, new SqlSession()::execute);
+    }
+
+    @FunctionalInterface
+    interface SqlCommand {
+        Result execute(Options options) throws SQLException;
+    }
+
+    static RuntimeExitCategory run(
+            final String[] arguments, final PrintStream output, final SqlCommand command) {
         final Options options;
         try {
             options = Options.parse(arguments);
@@ -41,18 +51,8 @@ public final class ExpansionLaboratoryMain {
             output.println("EXP_LAB_CONFIG_REJECTED");
             return RuntimeExitCategory.CONFIG_AUTH;
         }
-        try (var session = ColetaTemporalLaboratorySession.openFromEnvironment()) {
-            final var deadlines =
-                    ExecutionDeadlines.start(
-                            Duration.ofSeconds(240),
-                            MonotonicTicker.systemTicker(),
-                            CancellationToken.none());
-            final CancellationToken cancellation =
-                    () -> {
-                        deadlines.checkpointCycle();
-                        return false;
-                    };
-            final var result = execute(options, session, cancellation);
+        try {
+            final var result = command.execute(options);
             output.printf(
                     "EXP_LAB_ROLLBACK_ONLY command=%s projection=%s detail_rows=%d %s%n",
                     options.command(), options.projection(), result.detailRows(), result.status());
@@ -79,6 +79,24 @@ public final class ExpansionLaboratoryMain {
         }
     }
 
+    private static final class SqlSession {
+        private Result execute(final Options options) throws SQLException {
+            try (var session = ColetaTemporalLaboratorySession.openFromEnvironment()) {
+                final var deadlines =
+                        ExecutionDeadlines.start(
+                                Duration.ofSeconds(240),
+                                MonotonicTicker.systemTicker(),
+                                CancellationToken.none());
+                final CancellationToken cancellation =
+                        () -> {
+                            deadlines.checkpointCycle();
+                            return false;
+                        };
+                return ExpansionLaboratoryMain.execute(options, session, cancellation);
+            }
+        }
+    }
+
     static Result execute(
             final Options options,
             final ColetaTemporalLaboratorySession session,
@@ -97,8 +115,6 @@ public final class ExpansionLaboratoryMain {
                         1000,
                         10000,
                         FiscalPolicy.SYNTHETIC_CTE);
-        new JdbcExpansionLaboratory(session, clock).start(run, policy);
-        final var plans = new JdbcExpansionRecomposition(session, clock);
         final var slots = new ArrayList<JdbcExpansionRecomposition.Slot>(options.days());
         for (int day = 0; day < options.days(); day++) {
             slots.add(
@@ -111,47 +127,69 @@ public final class ExpansionLaboratoryMain {
                             1,
                             1));
         }
-        plans.plan(run, ExecutionMode.BOOTSTRAP, 1, null, slots);
-        final var executor =
-                new ExpansionLaboratoryExecutor(session, run, clock, Clock.systemUTC());
-        final boolean deferred = Set.of("status", "hydrate").contains(options.command());
-        for (int ordinal = 1; ordinal <= options.days(); ordinal++) {
-            executor.execute(
-                    ExecutionMode.BOOTSTRAP, 1, ordinal, !deferred, cancellation, boundary -> {});
-        }
-        if (options.command().equals("hydrate") || options.command().equals("replay")) {
-            final var mode =
-                    options.command().equals("hydrate")
-                            ? ExecutionMode.BACKFILL
-                            : ExecutionMode.REPLAY;
-            plans.plan(run, mode, 1, mode == ExecutionMode.REPLAY ? 1 : null, slots);
-            for (int ordinal = options.days(); ordinal >= 1; ordinal--) {
-                executor.execute(mode, 1, ordinal, true, cancellation, boundary -> {});
+        return new SqlExecution()
+                .execute(options, session, cancellation, clock, run, policy, slots);
+    }
+
+    private static final class SqlExecution {
+        private Result execute(
+                final Options options,
+                final ColetaTemporalLaboratorySession session,
+                final CancellationToken cancellation,
+                final Clock clock,
+                final UUID run,
+                final ExpansionPolicy policy,
+                final List<JdbcExpansionRecomposition.Slot> slots)
+                throws SQLException {
+            new JdbcExpansionLaboratory(session, clock).start(run, policy);
+            final var plans = new JdbcExpansionRecomposition(session, clock);
+            plans.plan(run, ExecutionMode.BOOTSTRAP, 1, null, slots);
+            final var executor =
+                    new ExpansionLaboratoryExecutor(session, run, clock, Clock.systemUTC());
+            final boolean deferred = Set.of("status", "hydrate").contains(options.command());
+            for (int ordinal = 1; ordinal <= options.days(); ordinal++) {
+                executor.execute(
+                        ExecutionMode.BOOTSTRAP,
+                        1,
+                        ordinal,
+                        !deferred,
+                        cancellation,
+                        boundary -> {});
             }
+            if (options.command().equals("hydrate") || options.command().equals("replay")) {
+                final var mode =
+                        options.command().equals("hydrate")
+                                ? ExecutionMode.BACKFILL
+                                : ExecutionMode.REPLAY;
+                plans.plan(run, mode, 1, mode == ExecutionMode.REPLAY ? 1 : null, slots);
+                for (int ordinal = options.days(); ordinal >= 1; ordinal--) {
+                    executor.execute(mode, 1, ordinal, true, cancellation, boundary -> {});
+                }
+            }
+            int detailRows = 0;
+            if (options.command().equals("query")) {
+                final var queries = new JdbcExpansionQueries(session);
+                detailRows =
+                        switch (options.projection()) {
+                            case "INVOICE" ->
+                                    queries.invoiceFactsPage(run, options.after(), options.limit())
+                                            .size();
+                            case "REVENUE" ->
+                                    queries.revenueFactsPage(run, options.after(), options.limit())
+                                            .size();
+                            default ->
+                                    queries.detailPage(
+                                                    run,
+                                                    JdbcExpansionQueries.Vertical.valueOf(
+                                                            options.projection()),
+                                                    1,
+                                                    options.after(),
+                                                    options.limit())
+                                            .size();
+                        };
+            }
+            return new Result(new JdbcExpansionStatus(session).read(run), detailRows);
         }
-        int detailRows = 0;
-        if (options.command().equals("query")) {
-            final var queries = new JdbcExpansionQueries(session);
-            detailRows =
-                    switch (options.projection()) {
-                        case "INVOICE" ->
-                                queries.invoiceFactsPage(run, options.after(), options.limit())
-                                        .size();
-                        case "REVENUE" ->
-                                queries.revenueFactsPage(run, options.after(), options.limit())
-                                        .size();
-                        default ->
-                                queries.detailPage(
-                                                run,
-                                                JdbcExpansionQueries.Vertical.valueOf(
-                                                        options.projection()),
-                                                1,
-                                                options.after(),
-                                                options.limit())
-                                        .size();
-                    };
-        }
-        return new Result(new JdbcExpansionStatus(session).read(run), detailRows);
     }
 
     record Result(JdbcExpansionStatus.Status status, int detailRows) {}

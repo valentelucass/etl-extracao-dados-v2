@@ -51,42 +51,58 @@ public final class AnalyticScenarioFaults {
             final CancellationToken token,
             final AnalyticScenarioObserver observer)
             throws SQLException {
-        final var runtime =
-                new LocalAnalyticCollectionRuntime(
-                        session,
-                        run.id(),
-                        run.relational(),
-                        AnalyticScenarioRuntime.policy(run.pageSize()),
-                        AnalyticScenarioRuntime.LOGICAL_CLOCK,
-                        technicalClock);
-        final var captures = new ArrayList<UUID>(4);
-        for (int ordinal = 0; ordinal < 4; ordinal++) {
-            captures.add(
-                    runtime.capture(
-                                    AnalyticScenarioRuntime.START,
-                                    ExecutionMode.BACKFILL,
-                                    null,
-                                    AnalyticCollectionsFixtures.source(
-                                                    2, run.roots() - 1, run.pageSize())
-                                            .observed(observer),
-                                    token)
-                            .source()
-                            .executionId());
-        }
-        try {
-            new JdbcAnalyticCollectionSweep(session)
-                    .prepare(
-                            new SyntheticCollectionSnapshot(
-                                    run.id(), AnalyticScenarioRuntime.START, run.roots(), false),
-                            UUID.randomUUID(),
-                            captures,
-                            token);
-        } catch (final SQLException failure) {
-            if (failure.getErrorCode() == 53775) {
-                return;
+        new SqlFault()
+                .rejectPartialCollectionSnapshot(session, run, technicalClock, token, observer);
+    }
+
+    private static final class SqlFault {
+        private void rejectPartialCollectionSnapshot(
+                final ColetaTemporalLaboratorySession session,
+                final AnalyticScenarioRuntime.Run run,
+                final Clock technicalClock,
+                final CancellationToken token,
+                final AnalyticScenarioObserver observer)
+                throws SQLException {
+            final var runtime =
+                    new LocalAnalyticCollectionRuntime(
+                            session,
+                            run.id(),
+                            run.relational(),
+                            AnalyticScenarioRuntime.policy(run.pageSize()),
+                            AnalyticScenarioRuntime.LOGICAL_CLOCK,
+                            technicalClock);
+            final var captures = new ArrayList<UUID>(4);
+            for (int ordinal = 0; ordinal < 4; ordinal++) {
+                captures.add(
+                        runtime.capture(
+                                        AnalyticScenarioRuntime.START,
+                                        ExecutionMode.BACKFILL,
+                                        null,
+                                        AnalyticCollectionsFixtures.source(
+                                                        2, run.roots() - 1, run.pageSize())
+                                                .observed(observer),
+                                        token)
+                                .source()
+                                .executionId());
             }
-            throw failure;
+            try {
+                new JdbcAnalyticCollectionSweep(session)
+                        .prepare(
+                                new SyntheticCollectionSnapshot(
+                                        run.id(),
+                                        AnalyticScenarioRuntime.START,
+                                        run.roots(),
+                                        false),
+                                UUID.randomUUID(),
+                                captures,
+                                token);
+            } catch (final SQLException failure) {
+                if (failure.getErrorCode() == 53775) {
+                    return;
+                }
+                throw failure;
+            }
+            throw new IllegalStateException("ANA_SCENARIO_INVALID_SNAPSHOT_ACCEPTED");
         }
-        throw new IllegalStateException("ANA_SCENARIO_INVALID_SNAPSHOT_ACCEPTED");
     }
 }

@@ -1,0 +1,22 @@
+# 0388 — P08: identidade OS elevada PASS; guard SQL master recusou 55804
+
+- Data local: 29/09/2026. Anterior: [0387](0387-p08-sonda-imagem-os-acesso-negado-sem-sql.md), SHA `19CE6335507B26DD0F3DE5B32A15E2615E7E88B778730F3A07B8B37A73ECFA7E`.
+- Autoridade: nova unidade do Supervisor para **uma leitura OS elevada** na instância local `LUCAS/MSSQLSERVER` pelo mecanismo de helper de 0385, seguida apenas após PASS por sequência `sqlcmd -E -C` não elevada e read-only em `master`/shadow exatos. Banco é único executor OS/SQL/ledger/editor, teto 600 s; sem efeito de serviço, ACL, depuração, banco ou fonte externa. `../CONTEXTO_GLOBAL.md` permanece ausente no caminho esperado; AGENTS, STATES, RETOMADA, runbook de continuidade e `maestri list` foram consultados.
+- Estado: **STOP_SQL_GUARD_55804**, com identidade OS comprovada, SQL do shadow não iniciado e P08 aberto.
+
+## Preparo e reserva
+
+1. Cópia privada `target/p08-elevated-os-readback-20260929-01` conservou a sonda de 0387 byte a byte. Prova offline SHA `DB5622C8464C79F209BABBD9EC74A1FF1B7AF20F6F2DBD97D71183D71DE044C6`: parser dos helpers, `OpenProcess(0x1000)`/`QueryFullProcessImageNameW` no próprio processo, quatro negativos específicos, hash da cópia da sonda, SHA pinado/Authenticode Microsoft do binário instalado, assinatura Microsoft do shell elevado, argv de um `Start-Process` oculto/`RunAs` e argv `sqlcmd` master/shadow com `SqlFile` não vazio PASS; zero chamada elevada/SQL. Dois FAILs de scanner estático excessivamente amplo (`offline-attempt1.json`, `offline-attempt2.json`) foram preservados e corrigidos **antes** da reserva; não indicavam execução física.
+2. Reserva nova `reservation.json`, máximo **600 s**, fixou alvo local, impacto de consultas OS/catálogo/DMV e recuperação fail-closed antes da primeira chamada elevada ou SQL. Ledger privado registrou reserva, PASS OS e fechamento. Nenhum saldo de 0385/0386 foi usado.
+
+## Execução e readback
+
+1. **Uma** chamada do helper elevado retornou 0. Recibo OS sanitizado SHA `C96E7FA75CFC9E6CEDC8E5AC68A2FFF0F26D74B4071F9808CD48603E7F7C7C37`: `MSSQLSERVER` `Running/Manual`, processo único vinculado ao serviço, imagem desse processo obtida por `QueryFullProcessImageNameW` com handle `0x1000`, caminho canônico exato do binário instalado, SHA pinado `A20556C74F2FE56266102CE074C5E1EB7C578D16A6635842BE5B77A29A08023D` e Authenticode Microsoft `Valid`. Dois listeners apenas `::1`/`127.0.0.1`, zero cliente. Nenhum caminho de imagem ou PID consta deste checkpoint, STATES ou handoff.
+2. Primeira e **única** chamada `sqlcmd -E -C` não elevada, em `lpc:localhost/master`, retornou exit não zero com recusa explícita **SQL 55804 `TARGET_OR_CLIENT_GUARD_MISMATCH`**. A saída privada possui SHA `E4B77835645F5F3EFAA50FD8FE2D44D964EDB5A77A30C0C41B7A27B0C1693385`; `post-sql.json` preserva o FAIL do invocador. O guard 55804 é composto: alvo online, ausência de qualquer outro banco de usuário e ausência de sessão no shadow. **Não há prova de qual ramo disparou**. A existência de outro banco, por si, não prova grant do reader. Nenhum marcador `SECURITY_MASTER_OK`, nenhuma consulta ao shadow e nenhum readback SQL posterior; parada sem retry nem relaxamento.
+3. Readback OS posterior SHA `69C77BEDA8342C847DBDFE31B3E1D6E6E564B38D91D7FBB00740DA5ED6B4C124` confirmou mesmo PID do serviço, `Running/Manual`, listeners somente loopback e zero cliente. O resultado SQL é **recusa explícita**, não timeout ou exit indeterminado; logo não se repetiu SQL. Master/shadow, modo misto efetivo, `sa`, reader, Flyway 106/105/0, agregados, 064, stats e consumidores/transações SQL **não foram revalidados por marcadores aceitos** nesta unidade.
+4. `final-receipt.json` SHA `1926C14210377CC4AEA545792FF541E212FC01EC3C649BA60BA353E6422483A3`; ledger fechado SHA `8A0B8A1BAF91BEAB60250FEDEC17416DB7D3BE70C0BCA7D8C17037F50D4DF311`, duração **134,182 s** do teto 600 s, uma chamada OS elevada, uma chamada SQL em master, zero shadow. Nenhuma alteração de serviço, ACL, depuração, DDL/DML, Flyway, login/grant, JDBC/IT/Maven/DLL, fonte real, remoto ou produção.
+
+## Retomada
+
+- Preservados 0385–0387 e FAILs 0354/0378–0380, 8 erros/74 classes faltantes, stats 2536 somente observacionais, JaCoCo/Gate 1/P08 abertos.
+- Próximo responsável: Supervisor ETL. Um gate **novo**, com reserva própria, deve separar os predicados do 55804 por leituras read-only sem ampliar banco/host nem enfraquecer recusa de consumidor/transação; depois reavaliar se o reader está restrito ao shadow. Não reaproveitar esta reserva nem repetir a sequência SQL desta unidade.

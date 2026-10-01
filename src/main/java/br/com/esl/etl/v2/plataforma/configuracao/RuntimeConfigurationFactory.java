@@ -552,6 +552,9 @@ public final class RuntimeConfigurationFactory {
             if (value == null) {
                 return defaultValue;
             }
+            if (!value.matches("[A-Za-z]+")) {
+                throw new IllegalArgumentException("Configuração booleana inválida.");
+            }
             if ("true".equalsIgnoreCase(value)) {
                 return true;
             }

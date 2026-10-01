@@ -1,12 +1,13 @@
 #Requires -Version 7.5
 param([Parameter(Mandatory)][ValidatePattern('^[a-z0-9-]{1,64}$')][string]$PackageAttempt,
-    [Parameter(Mandatory)][ValidatePattern('^[a-z0-9-]{1,64}$')][string]$Attempt)
+    [Parameter(Mandatory)][ValidatePattern('^[a-z0-9-]{1,64}$')][string]$Attempt,
+    [ValidatePattern('^macrobloco-[a-z0-9-]{1,90}$')][string]$RoundName='macrobloco-qualificacao-pacote-20260913-01')
 $ErrorActionPreference='Stop'
 Set-StrictMode -Version Latest
 $utf8=[Text.UTF8Encoding]::new($false,$true)
 [Console]::OutputEncoding=$utf8
 $root=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '../..'))
-$round=Join-Path $root 'target/macrobloco-qualificacao-pacote-20260913-01'
+$round=Join-Path $root ('target/'+$RoundName)
 $evidence=Join-Path $round $Attempt
 if(Test-Path -LiteralPath $evidence){throw 'QUAL_GUARDS_ATTEMPT_EXISTS'}
 $null=[IO.Directory]::CreateDirectory($evidence)
@@ -39,6 +40,7 @@ $cases=@(
     @{name='replay-mode';kind='action';code='QUAL_CAMPAIGN_ACTION_MODE'},
     @{name='oracle-versus-jar';kind='member';member='oracles/outputs.synthetic.json';code='QUAL_PACKAGE_JAR_RESOURCE_HASH'},
     @{name='physical-schema-versus-jar';kind='member';member='contracts/physical-columns.v098.json';code='QUAL_PACKAGE_JAR_RESOURCE_HASH'},
+    @{name='physical-schema-v105-versus-jar';kind='member';member='contracts/physical-columns.v105.json';code='QUAL_PACKAGE_JAR_RESOURCE_HASH'},
     @{name='sbom-duplicate';kind='sbom';member='sbom.cdx.json';code='QUAL_SBOM_CONTENT'},
     @{name='dependency-provenance';kind='dependency';member='dependencies.json';code='QUAL_SBOM_LOCK_CORRESPONDENCE'},
     @{name='native-path-limit';kind='native-path';code='QUAL_PACKAGE_NATIVE_PATH_LIMIT'}
@@ -51,7 +53,7 @@ foreach($case in $cases){
     $payload=Join-Path $caseRoot 'pacote verificado'
     if($case.kind -ceq 'native-path'){
         # Keep the JAR loadable while exceeding the explicit native-member bound of240.
-        $padding=250-$caseRoot.Length-2-'native/mssql-jdbc_auth-12.8.1.x64.dll'.Length
+        $padding=250-$caseRoot.Length-2-'native/mssql-jdbc_auth-12.8.2.x64.dll'.Length
         if($padding -lt 1 -or $padding -gt 200){throw 'QUAL_NATIVE_PATH_MUTANT_ROOT'}
         $payload=Join-Path $caseRoot ('n'*$padding)
     }

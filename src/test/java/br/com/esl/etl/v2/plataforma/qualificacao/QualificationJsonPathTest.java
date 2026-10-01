@@ -74,7 +74,7 @@ class QualificationJsonPathTest {
         final Path log = directory.resolve("junction.log");
         final var process =
                 new ProcessBuilder(
-                                "pwsh.exe",
+                                "powershell.exe",
                                 "-NoProfile",
                                 "-NonInteractive",
                                 "-Command",

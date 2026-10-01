@@ -23,6 +23,9 @@ coverage/
 
 # IDE e sistema operacional
 .codex-local/
+.codex/
+.maestri/
+graphify-out/
 .idea/
 .venv/
 .vscode/
@@ -30,3 +33,4 @@ node_modules/
 *.iml
 .DS_Store
 Thumbs.db
+/*.bak*

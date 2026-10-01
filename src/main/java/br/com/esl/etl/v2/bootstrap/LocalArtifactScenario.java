@@ -198,43 +198,86 @@ public final class LocalArtifactScenario {
             throws Exception {
         verifyFiles(token);
         final Instant started = Instant.now();
-        new QualificationPhysicalMetadata().verify(session);
-        final var runtime =
-                integral != null
-                        ? new AnalyticScenarioRuntime(
-                                session, Clock.systemUTC(), observer, integral)
-                        : new AnalyticScenarioRuntime(
-                                session,
-                                Clock.systemUTC(),
-                                observer,
-                                AnalyticScenarioVariant.BASELINE,
-                                sources,
-                                (count, revision) -> {
-                                    if (count != roots || revision != raster.revision()) {
-                                        throw new IllegalArgumentException(
-                                                "LOCAL_SCENARIO_RASTER_SELECTION");
-                                    }
-                                    return raster.gateway();
-                                },
-                                relations);
-        final var run = runtime.start(runId, roots, pageSize, AnalyticScenarioRuntime.Fault.NONE);
-        final var cycle =
-                runtime.capture(
-                        run,
-                        ExecutionMode.BOOTSTRAP,
-                        integral == null ? 1 : integral.revision(),
-                        false,
-                        null,
-                        token);
+        final var sql = new SqlExecution();
+        final var captured = sql.capture(session, token, observer, runId);
         afterPreparation.run();
         if (integral != null) {
             final var verified =
-                    verifier.verifyIntegral(session, run, cycle, integral, started, token);
+                    sql.verifyIntegral(session, captured.run(), captured.cycle(), started, token);
             if (verified.selected().state()
                     != br.com.esl.etl.v2.plataforma.qualificacao.QualificationGate.State
                             .PASS_LOCAL) {
                 return verified;
             }
+            return new QualificationScenarioVerifier.Result(
+                    verified.scopes(),
+                    verified.outputs(),
+                    verified.selected(),
+                    verified.retainedTechnicalRecords(),
+                    sql.observeSweep(session, captured.run(), observer, token));
+        }
+        return sql.verifyBaseline(session, captured.run(), captured.cycle(), started, token);
+    }
+
+    br.com.esl.etl.v2.plataforma.fonte.raster.RasterGateway rasterGateway(
+            final int count, final int revision) {
+        if (count != roots || revision != raster.revision()) {
+            throw new IllegalArgumentException("LOCAL_SCENARIO_RASTER_SELECTION");
+        }
+        return raster.gateway();
+    }
+
+    private record Captured(AnalyticScenarioRuntime.Run run, AnalyticScenarioRuntime.Cycle cycle) {}
+
+    private final class SqlExecution {
+        private Captured capture(
+                final ColetaTemporalLaboratorySession session,
+                final CancellationToken token,
+                final AnalyticScenarioObserver observer,
+                final java.util.UUID runId)
+                throws Exception {
+            new QualificationPhysicalMetadata().verify(session);
+            final var runtime =
+                    integral != null
+                            ? new AnalyticScenarioRuntime(
+                                    session, Clock.systemUTC(), observer, integral)
+                            : new AnalyticScenarioRuntime(
+                                    session,
+                                    Clock.systemUTC(),
+                                    observer,
+                                    AnalyticScenarioVariant.BASELINE,
+                                    sources,
+                                    LocalArtifactScenario.this::rasterGateway,
+                                    relations);
+            final var run =
+                    runtime.start(runId, roots, pageSize, AnalyticScenarioRuntime.Fault.NONE);
+            final var cycle =
+                    runtime.capture(
+                            run,
+                            ExecutionMode.BOOTSTRAP,
+                            integral == null ? 1 : integral.revision(),
+                            false,
+                            null,
+                            token);
+            return new Captured(run, cycle);
+        }
+
+        private QualificationScenarioVerifier.Result verifyIntegral(
+                final ColetaTemporalLaboratorySession session,
+                final AnalyticScenarioRuntime.Run run,
+                final AnalyticScenarioRuntime.Cycle cycle,
+                final Instant started,
+                final CancellationToken token)
+                throws Exception {
+            return verifier.verifyIntegral(session, run, cycle, integral, started, token);
+        }
+
+        private List<SweepResponsibilityPlanner.Preview> observeSweep(
+                final ColetaTemporalLaboratorySession session,
+                final AnalyticScenarioRuntime.Run run,
+                final AnalyticScenarioObserver observer,
+                final CancellationToken token)
+                throws Exception {
             final var sweep = integral.sweep();
             final var observation =
                     new LocalAnalyticCollectionSweep(
@@ -250,20 +293,71 @@ public final class LocalArtifactScenario {
                                     java.util.UUID.randomUUID(),
                                     sweep.inputs(run.id(), token, observer),
                                     token);
-            return new QualificationScenarioVerifier.Result(
-                    verified.scopes(),
-                    verified.outputs(),
-                    verified.selected(),
-                    verified.retainedTechnicalRecords(),
-                    observation.preview());
+            return observation.preview();
         }
-        return verifier.verify(
-                session,
-                run,
-                List.of(cycle),
-                started,
-                List.of(AnalyticSqlContract.values()),
-                token);
+
+        private QualificationScenarioVerifier.Result verifyBaseline(
+                final ColetaTemporalLaboratorySession session,
+                final AnalyticScenarioRuntime.Run run,
+                final AnalyticScenarioRuntime.Cycle cycle,
+                final Instant started,
+                final CancellationToken token)
+                throws Exception {
+            return verifier.verify(
+                    session,
+                    run,
+                    List.of(cycle),
+                    started,
+                    List.of(AnalyticSqlContract.values()),
+                    token);
+        }
+
+        private QualificationScenarioVerifier.Result compareSequence(
+                final ColetaTemporalLaboratorySession session,
+                final AnalyticScenarioRuntime.Run run,
+                final List<AnalyticScenarioRuntime.Cycle> cycles,
+                final Instant started,
+                final CancellationToken token)
+                throws Exception {
+            return verifier.verifyIntegral(session, run, cycles, integral, started, token);
+        }
+
+        private SequenceRecomposition.Receipt recompose(
+                final ColetaTemporalLaboratorySession session,
+                final AnalyticScenarioRuntime.Run run,
+                final AnalyticScenarioRuntime.Cycle source,
+                final CancellationToken token)
+                throws Exception {
+            return SequenceRecomposition.execute(
+                    session, run, source, integral, integralOracles.factCandidates(), token);
+        }
+
+        private QualificationScenarioVerifier.Result compareRecomposition(
+                final ColetaTemporalLaboratorySession session,
+                final AnalyticScenarioRuntime.Run run,
+                final List<AnalyticScenarioRuntime.Cycle> cycles,
+                final Instant started,
+                final CancellationToken token,
+                final List<SequenceRecomposition.Receipt> recompositions)
+                throws Exception {
+            return verifier.verifyIntegral(
+                    session, run, cycles, integral, started, token, recompositions);
+        }
+
+        private List<SweepResponsibilityPlanner.Preview> previewSequence(
+                final ColetaTemporalLaboratorySession session,
+                final AnalyticScenarioRuntime.Run run,
+                final AnalyticScenarioObserver observer,
+                final CancellationToken token)
+                throws Exception {
+            // A preview owns its snapshot and cannot replace the captured cohort.
+            try (var connection = session.getConnection()) {
+                final var savepoint = SavepointScope.open(connection);
+                try (savepoint) {
+                    return observeSweep(session, run, observer, token);
+                }
+            }
+        }
     }
 
     public int roots() {
@@ -284,7 +378,8 @@ public final class LocalArtifactScenario {
             final Instant started,
             final CancellationToken token)
             throws Exception {
-        return verifier.verifyIntegral(session, run, cycles, integralInputs(), started, token);
+        integralInputs();
+        return new SqlExecution().compareSequence(session, run, cycles, started, token);
     }
 
     SequenceRecomposition.Receipt recompose(
@@ -293,8 +388,8 @@ public final class LocalArtifactScenario {
             final AnalyticScenarioRuntime.Cycle source,
             final CancellationToken token)
             throws Exception {
-        return SequenceRecomposition.execute(
-                session, run, source, integralInputs(), integralOracles.factCandidates(), token);
+        integralInputs();
+        return new SqlExecution().recompose(session, run, source, token);
     }
 
     QualificationScenarioVerifier.Result compareRecomposition(
@@ -305,8 +400,9 @@ public final class LocalArtifactScenario {
             final CancellationToken token,
             final List<SequenceRecomposition.Receipt> recompositions)
             throws Exception {
-        return verifier.verifyIntegral(
-                session, run, cycles, integralInputs(), started, token, recompositions);
+        integralInputs();
+        return new SqlExecution()
+                .compareRecomposition(session, run, cycles, started, token, recompositions);
     }
 
     List<SweepResponsibilityPlanner.Preview> previewSequence(
@@ -315,29 +411,8 @@ public final class LocalArtifactScenario {
             final AnalyticScenarioObserver observer,
             final CancellationToken token)
             throws Exception {
-        final var input = integralInputs();
-        // The declared preview captures its own snapshot. Its observations must not replace the
-        // scenario's captured cohort before the next dependent stage.
-        try (var connection = session.getConnection()) {
-            final var savepoint = SavepointScope.open(connection);
-            try (savepoint) {
-                final var sweep = input.sweep();
-                return new LocalAnalyticCollectionSweep(
-                                session,
-                                run.id(),
-                                run.relational(),
-                                input.policy(),
-                                input.clock(),
-                                Clock.systemUTC(),
-                                observer)
-                        .observe(
-                                sweep.snapshot(run.id()),
-                                java.util.UUID.randomUUID(),
-                                sweep.inputs(run.id(), token, observer),
-                                token)
-                        .preview();
-            }
-        }
+        integralInputs();
+        return new SqlExecution().previewSequence(session, run, observer, token);
     }
 
     public java.time.LocalDate start() {

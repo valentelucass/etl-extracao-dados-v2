@@ -110,7 +110,7 @@ public final class ShadowStorageProperties {
         }
 
         final Map<String, String> parameters = parseJdbcParameters(normalized);
-        if (!EXPECTED_DATABASE.equalsIgnoreCase(parameters.get("databasename"))) {
+        if (!EXPECTED_DATABASE.equals(parameters.get("databasename"))) {
             throw new IllegalArgumentException(
                     "O armazenamento de sombra deve usar o banco isolado aprovado.");
         }
@@ -152,7 +152,11 @@ public final class ShadowStorageProperties {
             if (separator <= 0 || separator == segment.length() - 1) {
                 throw new IllegalArgumentException("Configuração de JDBC de sombra inválida.");
             }
-            final String key = segment.substring(0, separator).trim().toLowerCase(Locale.ROOT);
+            final String rawKey = segment.substring(0, separator).trim();
+            if (!rawKey.matches("[A-Za-z]+")) {
+                throw new IllegalArgumentException("Configuração de JDBC de sombra inválida.");
+            }
+            final String key = rawKey.toLowerCase(Locale.ROOT);
             final String value = segment.substring(separator + 1).trim();
             if (!ALLOWED_JDBC_PROPERTIES.contains(key)
                     || value.isEmpty()
@@ -166,7 +170,9 @@ public final class ShadowStorageProperties {
     private static void validateOptionalBoolean(
             final Map<String, String> parameters, final String key) {
         final String value = parameters.get(key);
-        if (value != null && !"true".equalsIgnoreCase(value) && !"false".equalsIgnoreCase(value)) {
+        if (value != null
+                && (!value.matches("[A-Za-z]+")
+                        || (!"true".equalsIgnoreCase(value) && !"false".equalsIgnoreCase(value)))) {
             throw new IllegalArgumentException("Configuração de JDBC de sombra inválida.");
         }
     }

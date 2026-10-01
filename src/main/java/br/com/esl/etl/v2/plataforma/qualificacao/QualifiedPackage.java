@@ -16,7 +16,7 @@ import java.util.jar.JarFile;
 /** Exact content inventory, pinned by the caller, verified before opening a laboratory session. */
 public record QualifiedPackage(
         Path root, String manifestSha256, String revision, Map<String, Member> members) {
-    public static final int SCHEMA_VERSION = 104;
+    public static final int SCHEMA_VERSION = 105;
 
     /** A manifest can list up to 1,024 payload members; package metadata adds two files. */
     public static final int MAX_MEMBERS = 1024;

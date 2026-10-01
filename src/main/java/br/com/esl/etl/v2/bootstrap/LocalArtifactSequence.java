@@ -318,135 +318,148 @@ public final class LocalArtifactSequence {
             final CancellationToken cancellation,
             final Consumer<StageResult> completed)
             throws Exception {
-        final var deadline =
-                ExecutionDeadlines.start(
-                        Duration.ofSeconds(maximumSeconds),
-                        MonotonicTicker.systemTicker(),
-                        bounded(cancellation));
-        final CancellationToken total =
-                () -> {
-                    deadline.checkpointCycle();
-                    return false;
-                };
-        verifyFiles(total);
-        new QualificationPhysicalMetadata().verify(session);
-        final var cycles = new ArrayList<AnalyticScenarioRuntime.Cycle>(steps.size());
-        final var results = new ArrayList<StageResult>(steps.size());
-        final var recompositions = new ArrayList<SequenceRecomposition.Receipt>();
-        AnalyticScenarioRuntime.Run run = null;
-        final Instant started = Instant.now();
-        for (final var step : steps) {
-            final var stepDeadline =
+        return new SqlExecution().execute(session, runId, observer, cancellation, completed);
+    }
+
+    private final class SqlExecution {
+        List<StageResult> execute(
+                final ColetaTemporalLaboratorySession session,
+                final UUID runId,
+                final AnalyticScenarioObserver observer,
+                final CancellationToken cancellation,
+                final Consumer<StageResult> completed)
+                throws Exception {
+            final var deadline =
                     ExecutionDeadlines.start(
-                            Duration.ofSeconds(step.maximumSeconds()),
+                            Duration.ofSeconds(maximumSeconds),
                             MonotonicTicker.systemTicker(),
-                            total);
-            final CancellationToken token =
+                            bounded(cancellation));
+            final CancellationToken total =
                     () -> {
-                        stepDeadline.checkpointCycle();
+                        deadline.checkpointCycle();
                         return false;
                     };
-            final long nanos = System.nanoTime();
-            final long calls = session.preparedStatements() + session.createdStatements();
-            manifest.verify();
-            final var scenario = load(step, token);
-            final var input = scenario.integralInputs();
-            final var agenda =
-                    step.schedule() == null
-                            ? null
-                            : new SequenceAgenda(step.schedule(), step.mode(), input);
-            final var runtime =
-                    new AnalyticScenarioRuntime(session, Clock.systemUTC(), observer, input);
-            if (run == null) {
-                run = runtime.start(runId, roots, pageSize, AnalyticScenarioRuntime.Fault.NONE);
-            }
-            final AnalyticScenarioRuntime.Cycle cycle;
-            if (step.operation() == Operation.RECOMPOSE) {
-                verifyRecompositionBinding(steps.get(results.size() - 1), step);
-                cycle = cycles.get(cycles.size() - 1);
-                recompositions.add(scenario.recompose(session, run, cycle, token));
-            } else {
-                if (!cycles.isEmpty()
-                        && step.referenceRevision()
-                                != steps.get(results.size() - 1).referenceRevision()) {
-                    final long tariff =
-                            input.references()
-                                    .importInto(
-                                            session,
-                                            run.id(),
-                                            run.expansion(),
-                                            input.clock(),
-                                            token);
-                    run =
-                            new AnalyticScenarioRuntime.Run(
-                                    run.id(),
-                                    run.expansion(),
-                                    run.relational(),
-                                    run.roots(),
-                                    run.pageSize(),
-                                    tariff,
-                                    run.fault(),
-                                    run.variant());
+            verifyFiles(total);
+            new QualificationPhysicalMetadata().verify(session);
+            final var cycles = new ArrayList<AnalyticScenarioRuntime.Cycle>(steps.size());
+            final var results = new ArrayList<StageResult>(steps.size());
+            final var recompositions = new ArrayList<SequenceRecomposition.Receipt>();
+            AnalyticScenarioRuntime.Run run = null;
+            final Instant started = Instant.now();
+            for (final var step : steps) {
+                final var stepDeadline =
+                        ExecutionDeadlines.start(
+                                Duration.ofSeconds(step.maximumSeconds()),
+                                MonotonicTicker.systemTicker(),
+                                total);
+                final CancellationToken token =
+                        () -> {
+                            stepDeadline.checkpointCycle();
+                            return false;
+                        };
+                final long nanos = System.nanoTime();
+                final long calls = session.preparedStatements() + session.createdStatements();
+                manifest.verify();
+                final var scenario = load(step, token);
+                final var input = scenario.integralInputs();
+                final var agenda =
+                        step.schedule() == null
+                                ? null
+                                : new SequenceAgenda(step.schedule(), step.mode(), input);
+                final var runtime =
+                        new AnalyticScenarioRuntime(session, Clock.systemUTC(), observer, input);
+                if (run == null) {
+                    run = runtime.start(runId, roots, pageSize, AnalyticScenarioRuntime.Fault.NONE);
                 }
-                cycle =
-                        runtime.capture(
-                                run,
+                final AnalyticScenarioRuntime.Cycle cycle;
+                if (step.operation() == Operation.RECOMPOSE) {
+                    verifyRecompositionBinding(steps.get(results.size() - 1), step);
+                    cycle = cycles.get(cycles.size() - 1);
+                    recompositions.add(scenario.recompose(session, run, cycle, token));
+                } else {
+                    if (!cycles.isEmpty()
+                            && step.referenceRevision()
+                                    != steps.get(results.size() - 1).referenceRevision()) {
+                        final long tariff =
+                                input.references()
+                                        .importInto(
+                                                session,
+                                                run.id(),
+                                                run.expansion(),
+                                                input.clock(),
+                                                token);
+                        run =
+                                new AnalyticScenarioRuntime.Run(
+                                        run.id(),
+                                        run.expansion(),
+                                        run.relational(),
+                                        run.roots(),
+                                        run.pageSize(),
+                                        tariff,
+                                        run.fault(),
+                                        run.variant());
+                    }
+                    cycle =
+                            runtime.capture(
+                                    run,
+                                    step.mode(),
+                                    step.executionRevision(),
+                                    false,
+                                    cycles.isEmpty() ? null : cycles.get(cycles.size() - 1),
+                                    token,
+                                    agenda,
+                                    step.id());
+                    cycles.add(cycle);
+                }
+                final var verified =
+                        scenario.compareRecomposition(
+                                session, run, cycles, started, token, recompositions);
+                final var comparison =
+                        new QualificationScenarioVerifier.Result(
+                                verified.scopes(),
+                                verified.outputs(),
+                                verified.selected(),
+                                verified.retainedTechnicalRecords(),
+                                verified.selected().state() == QualificationGate.State.PASS_LOCAL
+                                        ? verifyPreviews(
+                                                scenario.previewSequence(
+                                                        session, run, observer, token))
+                                        : List.of());
+                token.throwIfCancellationRequested();
+                final var agendaReceipts =
+                        agenda == null
+                                ? List.<SequenceAgenda.Receipt>of()
+                                : agenda.reconcile(session, run.id(), step.id());
+                final String sourceFrontier =
+                        new br.com.esl.etl.v2.plataforma.persistencia.analitico
+                                        .JdbcAnalyticScenario(session)
+                                .status(cycle.intent().cycle())
+                                .nextDate()
+                                .toString();
+                final var result =
+                        new StageResult(
+                                step.id(),
+                                step.operation(),
                                 step.mode(),
                                 step.executionRevision(),
-                                false,
-                                cycles.isEmpty() ? null : cycles.get(cycles.size() - 1),
-                                token,
-                                agenda,
-                                step.id());
-                cycles.add(cycle);
+                                cycle.sourceRevision(),
+                                step.referenceRevision(),
+                                input.supplementRevision(),
+                                input.captureDate().toString(),
+                                input.clock().instant().toString(),
+                                sourceFrontier,
+                                comparison,
+                                (System.nanoTime() - nanos) / 1_000_000,
+                                session.preparedStatements() + session.createdStatements() - calls,
+                                agendaReceipts);
+                results.add(result);
+                completed.accept(result);
+                if (comparison.selected().state() != QualificationGate.State.PASS_LOCAL) {
+                    break;
+                }
             }
-            final var verified =
-                    scenario.compareRecomposition(
-                            session, run, cycles, started, token, recompositions);
-            final var comparison =
-                    new QualificationScenarioVerifier.Result(
-                            verified.scopes(),
-                            verified.outputs(),
-                            verified.selected(),
-                            verified.retainedTechnicalRecords(),
-                            verified.selected().state() == QualificationGate.State.PASS_LOCAL
-                                    ? verifyPreviews(
-                                            scenario.previewSequence(session, run, observer, token))
-                                    : List.of());
-            token.throwIfCancellationRequested();
-            final var agendaReceipts =
-                    agenda == null
-                            ? List.<SequenceAgenda.Receipt>of()
-                            : agenda.reconcile(session, run.id(), step.id());
-            final String sourceFrontier =
-                    new br.com.esl.etl.v2.plataforma.persistencia.analitico.JdbcAnalyticScenario(
-                                    session)
-                            .status(cycle.intent().cycle())
-                            .nextDate()
-                            .toString();
-            final var result =
-                    new StageResult(
-                            step.id(),
-                            step.operation(),
-                            step.mode(),
-                            step.executionRevision(),
-                            cycle.sourceRevision(),
-                            step.referenceRevision(),
-                            input.supplementRevision(),
-                            input.captureDate().toString(),
-                            input.clock().instant().toString(),
-                            sourceFrontier,
-                            comparison,
-                            (System.nanoTime() - nanos) / 1_000_000,
-                            session.preparedStatements() + session.createdStatements() - calls,
-                            agendaReceipts);
-            results.add(result);
-            completed.accept(result);
-            if (comparison.selected().state() != QualificationGate.State.PASS_LOCAL) {
-                break;
-            }
+            return List.copyOf(results);
         }
-        return List.copyOf(results);
     }
 
     public List<Step> steps() {

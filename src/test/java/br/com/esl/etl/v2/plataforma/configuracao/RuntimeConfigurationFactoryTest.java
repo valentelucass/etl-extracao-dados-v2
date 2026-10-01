@@ -88,6 +88,29 @@ class RuntimeConfigurationFactoryTest {
     }
 
     @Test
+    void rejectsUnicodeCaseFoldedBooleanFlagsFromFileAndEnvironment() throws Exception {
+        final String confusableFalse = "fal\u017Fe";
+        assertThrows(
+                IllegalArgumentException.class,
+                () ->
+                        load(
+                                safeConfiguration() + "shadow.audit.enabled=" + confusableFalse,
+                                new Properties(),
+                                Map.of()));
+        assertThrows(
+                IllegalArgumentException.class,
+                () ->
+                        load(
+                                safeConfiguration(),
+                                new Properties(),
+                                Map.of("V2_SHADOW_AUDIT_ENABLED", confusableFalse)));
+        assertFalse(
+                load(safeConfiguration() + "shadow.audit.enabled=FALSE", new Properties(), Map.of())
+                        .shadowStorage()
+                        .auditEnabled());
+    }
+
+    @Test
     void environmentOverridesTheExternalNonSecretConfiguration() throws Exception {
         final RuntimeConfiguration configuration =
                 load(

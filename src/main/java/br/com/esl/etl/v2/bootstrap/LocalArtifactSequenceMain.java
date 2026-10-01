@@ -18,6 +18,16 @@ public final class LocalArtifactSequenceMain {
     }
 
     public static RuntimeExitCategory run(final String[] arguments, final PrintStream output) {
+        return run(arguments, output, new SqlSession()::execute);
+    }
+
+    @FunctionalInterface
+    interface SequenceCommand {
+        boolean execute(LocalArtifactSequence sequence, PrintStream output) throws Exception;
+    }
+
+    static RuntimeExitCategory run(
+            final String[] arguments, final PrintStream output, final SequenceCommand command) {
         try {
             if (arguments.length != 3
                     || !"run".equals(arguments[0])
@@ -26,63 +36,7 @@ public final class LocalArtifactSequenceMain {
             }
             final var sequence =
                     new LocalArtifactSequence(Path.of(arguments[2]), CancellationToken.none());
-            final boolean passed;
-            try (var session = ColetaTemporalLaboratorySession.openFromEnvironment()) {
-                session.controlStatements(60, 100000);
-                final var results =
-                        sequence.execute(
-                                session,
-                                UUID.randomUUID(),
-                                AnalyticScenarioObserver.NONE,
-                                CancellationToken.none(),
-                                result -> {
-                                    output.printf(
-                                            "SEQUENCE_STAGE id=%s operation=%s mode=%s executionRevision=%d sourceRevision=%d "
-                                                    + "referenceRevision=%d supplementRevision=%d state=%s millis=%d jdbc=%d%n",
-                                            result.id(),
-                                            result.operation(),
-                                            result.mode(),
-                                            result.executionRevision(),
-                                            result.sourceRevision(),
-                                            result.referenceRevision(),
-                                            result.supplementRevision(),
-                                            result.comparison().selected().state(),
-                                            result.elapsedMillis(),
-                                            result.jdbcCalls());
-                                    output.printf(
-                                            "SEQUENCE_STATE stage=%s captureDate=%s sourceFrontier=%s scopes=%d previews=%d%n",
-                                            result.id(),
-                                            result.captureDate(),
-                                            result.sourceFrontier(),
-                                            result.comparison().scopes().size(),
-                                            result.comparison().sweepPreview().size());
-                                    for (final var preview : result.comparison().sweepPreview()) {
-                                        output.printf(
-                                                "SEQUENCE_SWEEP stage=%s responsibility=%s disposition=%s reason=%s%n",
-                                                result.id(),
-                                                preview.responsibility().id(),
-                                                preview.assessment().disposition(),
-                                                preview.assessment().reason());
-                                    }
-                                    for (final var comparison : result.comparison().outputs()) {
-                                        output.printf(
-                                                "SEQUENCE_COMPARE stage=%s contract=%s expected=%d observed=%d differences=%d%n",
-                                                result.id(),
-                                                comparison.contract(),
-                                                comparison.expectedRows(),
-                                                comparison.observedRows(),
-                                                comparison.differences());
-                                    }
-                                });
-                passed =
-                        results.size() == sequence.steps().size()
-                                && results.stream()
-                                        .allMatch(
-                                                value ->
-                                                        value.comparison().selected().state()
-                                                                == QualificationGate.State
-                                                                        .PASS_LOCAL);
-            }
+            final boolean passed = command.execute(sequence, output);
             output.println("SEQUENCE_ROLLBACK_CONFIRMED");
             return passed ? RuntimeExitCategory.SUCCESS : RuntimeExitCategory.SOURCE_DQ;
         } catch (final ResilienceCancelledException failure) {
@@ -97,6 +51,69 @@ public final class LocalArtifactSequenceMain {
                                     ? " code=" + code
                                     : ""));
             return RuntimeExitCategory.CONFIG_AUTH;
+        }
+    }
+
+    private static final class SqlSession {
+        private boolean execute(final LocalArtifactSequence sequence, final PrintStream output)
+                throws Exception {
+            try (var session = ColetaTemporalLaboratorySession.openFromEnvironment()) {
+                session.controlStatements(60, 100000);
+                final var results =
+                        sequence.execute(
+                                session,
+                                UUID.randomUUID(),
+                                AnalyticScenarioObserver.NONE,
+                                CancellationToken.none(),
+                                result -> printStage(result, output));
+                return results.size() == sequence.steps().size()
+                        && results.stream()
+                                .allMatch(
+                                        value ->
+                                                value.comparison().selected().state()
+                                                        == QualificationGate.State.PASS_LOCAL);
+            }
+        }
+    }
+
+    static void printStage(
+            final LocalArtifactSequence.StageResult result, final PrintStream output) {
+        output.printf(
+                "SEQUENCE_STAGE id=%s operation=%s mode=%s executionRevision=%d sourceRevision=%d "
+                        + "referenceRevision=%d supplementRevision=%d state=%s millis=%d jdbc=%d%n",
+                result.id(),
+                result.operation(),
+                result.mode(),
+                result.executionRevision(),
+                result.sourceRevision(),
+                result.referenceRevision(),
+                result.supplementRevision(),
+                result.comparison().selected().state(),
+                result.elapsedMillis(),
+                result.jdbcCalls());
+        output.printf(
+                "SEQUENCE_STATE stage=%s captureDate=%s sourceFrontier=%s scopes=%d previews=%d%n",
+                result.id(),
+                result.captureDate(),
+                result.sourceFrontier(),
+                result.comparison().scopes().size(),
+                result.comparison().sweepPreview().size());
+        for (final var preview : result.comparison().sweepPreview()) {
+            output.printf(
+                    "SEQUENCE_SWEEP stage=%s responsibility=%s disposition=%s reason=%s%n",
+                    result.id(),
+                    preview.responsibility().id(),
+                    preview.assessment().disposition(),
+                    preview.assessment().reason());
+        }
+        for (final var comparison : result.comparison().outputs()) {
+            output.printf(
+                    "SEQUENCE_COMPARE stage=%s contract=%s expected=%d observed=%d differences=%d%n",
+                    result.id(),
+                    comparison.contract(),
+                    comparison.expectedRows(),
+                    comparison.observedRows(),
+                    comparison.differences());
         }
     }
 }

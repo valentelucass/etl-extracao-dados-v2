@@ -16,7 +16,6 @@ import java.nio.charset.CodingErrorAction;
 import java.nio.charset.StandardCharsets;
 import java.time.Clock;
 import java.time.Duration;
-import java.util.Locale;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.concurrent.CancellationException;
@@ -25,6 +24,7 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import java.util.function.Function;
+import java.util.regex.Pattern;
 
 /** Executor HTTP interno que aplica limites de corpo e retry aos recursos do Data Export. */
 final class DataExportHttpExecutor {
@@ -35,6 +35,8 @@ final class DataExportHttpExecutor {
                     1_000_000,
                     268_435_456);
     private static final long COMPLETION_POLL_NANOS = Duration.ofMillis(50).toNanos();
+    private static final Pattern JSON_MEDIA_TYPE =
+            Pattern.compile("application/json", Pattern.CASE_INSENSITIVE);
 
     private final HttpClient httpClient;
     private final DataExportProperties properties;
@@ -233,8 +235,15 @@ final class DataExportHttpExecutor {
     private boolean declaresJsonContentType(final HttpResponse<byte[]> response) {
         return response.headers()
                 .firstValue("Content-Type")
-                .map(value -> value.toLowerCase(Locale.ROOT).startsWith("application/json"))
+                .map(DataExportHttpExecutor::isJsonContentType)
                 .orElse(false);
+    }
+
+    static boolean isJsonContentType(final String value) {
+        final int parameterSeparator = value.indexOf(';');
+        final String mediaType =
+                (parameterSeparator < 0 ? value : value.substring(0, parameterSeparator)).trim();
+        return JSON_MEDIA_TYPE.matcher(mediaType).matches();
     }
 
     private void validateBodyLength(final byte[] body, final int templateId) {

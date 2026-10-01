@@ -1,19 +1,26 @@
 #Requires -Version 7.5
 param(
     [Parameter(Mandatory)][ValidatePattern('^[a-z0-9-]{1,64}$')][string]$Attempt,
-    [ValidateSet('Compile','Directed','Physical','PackagePhysical','VerifyPhysical','Package','PackageDirected')][string]$Phase='Compile',
+    [ValidateSet('Compile','Directed','Physical','PackagePhysical','VerifyPhysical','Package','PackageDirected','PackageShadow')][string]$Phase='Compile',
     [ValidatePattern('^[A-Za-z0-9,*]*$')][string]$Tests='',
     # Full local integration has 115 classes; the previous 3,600-second cap
     # stopped a clean run after 91 completed classes. Keep a finite ceiling
     # while allowing a single full qualification window when explicitly reserved.
     [ValidateRange(60,7200)][int]$BudgetSeconds=900,
-    [string]$Snapshot=''
+    [string]$Snapshot='',
+    [string]$JavaHome='',
+    [ValidatePattern('^macrobloco-[a-z0-9-]{1,90}$')][string]$RoundName='macrobloco-qualificacao-pacote-20260913-01'
 )
 $ErrorActionPreference='Stop'
 Set-StrictMode -Version Latest
 if($Phase -ceq 'PackageDirected' -and -not $Tests){throw 'QUAL_DIRECTED_PACKAGE_TESTS_REQUIRED'}
+$jdkHome=if($JavaHome){[IO.Path]::GetFullPath($JavaHome)}elseif($env:JAVA_HOME){[IO.Path]::GetFullPath($env:JAVA_HOME)}else{throw 'QUAL_JDK17_REQUIRED'}
+$java=Join-Path $jdkHome 'bin/java.exe'
+if(-not (Test-Path -LiteralPath $java -PathType Leaf)){throw 'QUAL_JDK17_REQUIRED'}
+$javaVersion=(& $java -version 2>&1 | Out-String)
+if($LASTEXITCODE -ne 0 -or $javaVersion -notmatch 'version "17[\.]'){throw 'QUAL_JDK17_REQUIRED'}
 $root=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '../..'))
-$round=Join-Path $root 'target/macrobloco-qualificacao-pacote-20260913-01'
+$round=Join-Path $root ('target/'+$RoundName)
 $attemptRoot=Join-Path $round $Attempt
 if(Test-Path -LiteralPath $attemptRoot){throw 'QUAL_BUILD_ATTEMPT_EXISTS'}
 $null=[IO.Directory]::CreateDirectory($attemptRoot)
@@ -44,6 +51,10 @@ $inventory=@(foreach($relative in $files|Sort-Object){
 })
 Save 'inputs.json' $inventory
 $physical=$Phase -in @('Physical','PackagePhysical','VerifyPhysical')
+$shadowPackage=$Phase -ceq 'PackageShadow'
+if($physical -and [string]::IsNullOrWhiteSpace($env:V2_SHADOW_JDBC_URL)){
+    throw 'QUAL_SHADOW_URL_REQUIRED'
+}
 $query="SET NOCOUNT ON; IF DB_NAME()<>N'ETL_SISTEMA_V2_SHADOW' THROW 53900,N'QUAL_WRONG_TARGET',1; SELECT SCHEMA_NAME(t.schema_id)+N'.'+t.name,SUM(p.rows) FROM sys.tables t JOIN sys.partitions p ON p.object_id=t.object_id AND p.index_id IN(0,1) GROUP BY t.schema_id,t.name ORDER BY 1;"
 function Sql([string]$database,[string]$statement,[string]$name){
     $info=[Diagnostics.ProcessStartInfo]::new('sqlcmd.exe');$info.UseShellExecute=$false;$info.CreateNoWindow=$true
@@ -61,24 +72,29 @@ if($physical){
     Sql 'master' "IF (SELECT COUNT(*) FROM sys.databases WHERE name=N'ETL_SISTEMA_V2_SHADOW' AND state_desc=N'ONLINE')<>1 THROW 53900,N'QUAL_SHADOW_MISSING',1;" 'master.log'
     Sql 'ETL_SISTEMA_V2_SHADOW' $query 'before.log'
 }
-$arguments=@('--offline','--batch-mode','--no-transfer-progress','spotless:apply')
+# The lifecycle runs spotless:check; keep the copied source bytes immutable.
+$arguments=@('--offline','--batch-mode','--no-transfer-progress')
 switch($Phase){
     'Compile' {$arguments+='test-compile'}
     'Directed' {$arguments+='test';if($Tests){$arguments+=('-Dtest='+$Tests)}}
-    'Package' {$arguments+=@('package','-DskipTests','-Pshadow-local-integration','-Dshadow.local.integration.enabled=true')}
-    'PackageDirected' {$arguments+=@('package',('-Dtest='+$Tests),'-Pshadow-local-integration','-Dshadow.local.integration.enabled=true')}
+    # Offline package phases must use the global 12.8.2 pair pinned by the P08 lock.
+    'Package' {$arguments+=@('package','-DskipTests')}
+    'PackageDirected' {$arguments+=@('package',('-Dtest='+$Tests))}
+    'PackageShadow' {$arguments+=@('package','-DskipTests')}
     'Physical' {$arguments+=@('process-test-classes','failsafe:integration-test','failsafe:verify');if($Tests){$arguments+=('-Dit.test='+$Tests)}}
     'PackagePhysical' {$arguments+=@('package','failsafe:integration-test','failsafe:verify','-Dtest=Qualification*Test');if($Tests){$arguments+=('-Dit.test='+$Tests)}}
     'VerifyPhysical' {$arguments+=@('verify','-Dv2.measurement.receipt=true')}
 }
-if($physical){$arguments+=@('-Pshadow-local-integration','-Dshadow.local.integration.enabled=true')}
-$info=[Diagnostics.ProcessStartInfo]::new('C:\Program Files (x86)\apache-maven-3.9.14\bin\mvn.cmd')
+if($physical -or $shadowPackage){$arguments+=@('-Pshadow-local-integration','-Dshadow.local.integration.enabled=true')}
+$mavenWrapper=Join-Path $build 'mvnw.cmd'
+if(-not (Test-Path -LiteralPath $mavenWrapper -PathType Leaf)){throw 'QUAL_MAVEN_WRAPPER_REQUIRED'}
+$info=[Diagnostics.ProcessStartInfo]::new($mavenWrapper)
 $info.WorkingDirectory=$build;$info.UseShellExecute=$false;$info.CreateNoWindow=$true
 $info.RedirectStandardOutput=$true;$info.RedirectStandardError=$true
 $info.StandardOutputEncoding=$utf8;$info.StandardErrorEncoding=$utf8
-$info.Environment['JAVA_HOME']='C:\Program Files\Eclipse Adoptium\jdk-17.0.20.101-hotspot'
+$info.Environment['JAVA_HOME']=$jdkHome
 $info.Environment['JAVA_TOOL_OPTIONS']='-Xmx512m -Dfile.encoding=UTF-8'
-if($physical){$info.Environment['V2_SHADOW_JDBC_URL']='jdbc:sqlserver://localhost;databaseName=ETL_SISTEMA_V2_SHADOW;integratedSecurity=true;encrypt=true;trustServerCertificate=true;loginTimeout=5;socketTimeout=45000'}
+if($shadowPackage){$null=$info.Environment.Remove('V2_SHADOW_JDBC_URL')}
 foreach($argument in $arguments){$info.ArgumentList.Add($argument)}
 $process=[Diagnostics.Process]::Start($info)
 $logLimitExceeded=$false;$logIntegrity=$true
@@ -105,23 +121,68 @@ try{
     }
     if(-not $logIntegrity){$code=126}
 }finally{if(-not $process.HasExited){$process.Kill($true);$process.WaitForExit()};$process.Dispose()}
-# Copy formatting back only for files changed by THIS request and still matching the input snapshot.
-$before=Get-Content -Raw -LiteralPath (Join-Path $round 'inventory-before.json')|ConvertFrom-Json
-$original=@{};foreach($entry in $before.files){$original[$entry.path]=$entry.sha256}
-if(-not $Snapshot){foreach($entry in $inventory){
-    if($entry.path.EndsWith('.java') -and (-not $original.ContainsKey($entry.path) -or $original[$entry.path] -cne $entry.sha256)){
-        $current=Join-Path $root $entry.path
-        if((Get-FileHash -LiteralPath $current).Hash.ToLowerInvariant() -cne $entry.sha256){throw 'QUAL_CONCURRENT_SOURCE_CHANGE'}
-        [IO.File]::Copy((Join-Path $build $entry.path),$current,$true)
+if($code -eq 0 -and $Phase -in @('Package','PackageDirected')){
+    # The lock's native member is packaged as bytes only; it is never loaded by these phases.
+    $lock=Get-Content -Raw -LiteralPath (Join-Path $build 'docs/catalogos/macrobloco-qualificacao-pacote/dependency-lock.json')|ConvertFrom-Json
+    $auth=@($lock.dependencies|Where-Object {$_.name -ceq 'mssql-jdbc_auth' -and $_.type -ceq 'dll'})
+    if($auth.Count -ne 1 -or $auth[0].version -cne '12.8.2.x64' -or $auth[0].file -cne 'mssql-jdbc_auth-12.8.2.x64.dll'){
+        throw 'QUAL_PACKAGE_NATIVE_LOCK'
     }
-}}
+    $native=Join-Path $build 'target/native'
+    $null=[IO.Directory]::CreateDirectory($native)
+    if(@(Get-ChildItem -LiteralPath $native -File).Count -ne 0){throw 'QUAL_PACKAGE_NATIVE_UNEXPECTED'}
+    $source=Join-Path $env:USERPROFILE '.m2/repository/com/microsoft/sqlserver/mssql-jdbc_auth/12.8.2.x64/mssql-jdbc_auth-12.8.2.x64.dll'
+    if(-not (Test-Path -LiteralPath $source -PathType Leaf)){throw 'QUAL_PACKAGE_NATIVE_CACHE_MISSING'}
+    if((Get-Item -LiteralPath $source).Length -ne $auth[0].size -or
+       (Get-FileHash -LiteralPath $source -Algorithm SHA256).Hash.ToLowerInvariant() -cne $auth[0].sha256){
+        throw 'QUAL_PACKAGE_NATIVE_CACHE_DRIFT'
+    }
+    [IO.File]::Copy($source,(Join-Path $native $auth[0].file),$false)
+    Save 'native-staging.json' @{state='PASSIVE_BYTES_ONLY';phase=$Phase;file=$auth[0].file;sha256=$auth[0].sha256;source='local Maven cache';loaded=$false}
+}
+if($code -eq 0 -and $shadowPackage){
+    $lock=Get-Content -Raw -LiteralPath (Join-Path $build 'docs/catalogos/macrobloco-qualificacao-pacote/dependency-lock.shadow-local-12.8.2.json')|ConvertFrom-Json
+    $jdbc=@($lock.dependencies|Where-Object {$_.name -ceq 'mssql-jdbc' -and $_.type -ceq 'jar'})
+    $auth=@($lock.dependencies|Where-Object {$_.name -ceq 'mssql-jdbc_auth' -and $_.type -ceq 'dll'})
+    if($lock.dependencies.Count -ne 9 -or $jdbc.Count -ne 1 -or $auth.Count -ne 1 -or
+       $jdbc[0].version -cne '12.8.2.jre11' -or $auth[0].version -cne '12.8.2.x64'){
+        throw 'QUAL_SHADOW_PACKAGE_LOCK_PAIR'
+    }
+    $actualLib=@(Get-ChildItem -LiteralPath (Join-Path $build 'target/lib') -File)
+    $actualNative=@(Get-ChildItem -LiteralPath (Join-Path $build 'target/native') -File)
+    if($actualLib.Count -ne 8 -or $actualNative.Count -ne 1){throw 'QUAL_SHADOW_PACKAGE_DEPENDENCY_SET'}
+    foreach($entry in $lock.dependencies){
+        $folder=if($entry.type -ceq 'dll'){'native'}else{'lib'}
+        $file=Join-Path $build ('target/'+$folder+'/'+$entry.file)
+        if(-not (Test-Path -LiteralPath $file -PathType Leaf) -or
+           (Get-Item -LiteralPath $file).Length -ne $entry.size -or
+           (Get-FileHash -LiteralPath $file -Algorithm SHA256).Hash.ToLowerInvariant() -cne $entry.sha256){
+            throw 'QUAL_SHADOW_PACKAGE_DEPENDENCY_DRIFT'
+        }
+    }
+    Save 'native-staging.json' @{state='PASSIVE_BYTES_ONLY';phase=$Phase;file=$auth[0].file;
+        sha256=$auth[0].sha256;source='Maven Central cache via opt-in profile';loaded=$false}
+}
+$inputIntegrity=$null
+if($code -eq 0){
+    $inputIntegrity=$true
+    foreach($entry in $inventory){
+        $copied=Join-Path $build $entry.path
+        if(-not (Test-Path -LiteralPath $copied -PathType Leaf) -or
+            (Get-FileHash -LiteralPath $copied -Algorithm SHA256).Hash.ToLowerInvariant() -cne $entry.sha256){
+            $inputIntegrity=$false;$code=127;break
+        }
+    }
+}
 $rollback=$null
 if($physical){
     Sql 'ETL_SISTEMA_V2_SHADOW' $query 'after.log'
     $rollback=[IO.File]::ReadAllText((Join-Path $attemptRoot 'before.log'),$utf8) -ceq [IO.File]::ReadAllText((Join-Path $attemptRoot 'after.log'),$utf8)
 }
 Save 'result.json' @{state='OBSERVED';phase=$Phase;exit=$code;timedOut=$timedOut;rollbackConfirmed=$rollback;arguments=$arguments;
-    rawLogMaximumBytes=16777216;logLimitExceeded=$logLimitExceeded;logUtf8Integrity=$logIntegrity}
+    packageVariant=if($shadowPackage){'SHADOW_LOCAL_12_8_2'}else{'NORMAL_12_8_2'};
+    rawLogMaximumBytes=16777216;logLimitExceeded=$logLimitExceeded;logUtf8Integrity=$logIntegrity;
+    inputIntegrity=$inputIntegrity}
 Get-Content -LiteralPath (Join-Path $attemptRoot 'stdout.log') -Tail 24
 Get-Content -LiteralPath (Join-Path $attemptRoot 'stderr.log') -Tail 5
 if($physical -and -not $rollback){throw 'QUAL_AGGREGATE_DRIFT'}

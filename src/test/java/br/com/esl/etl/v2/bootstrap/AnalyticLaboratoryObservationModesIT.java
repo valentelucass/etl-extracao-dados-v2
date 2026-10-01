@@ -4,6 +4,7 @@ import static br.com.esl.etl.v2.bootstrap.AnalyticLaboratoryFreightOperationalIT
 import static br.com.esl.etl.v2.bootstrap.AnalyticLaboratoryRasterIT.scalar;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import br.com.esl.etl.v2.plataforma.controle.ControlPlaneSource;
 import br.com.esl.etl.v2.plataforma.controle.ExecutionMode;
 import br.com.esl.etl.v2.plataforma.persistencia.analitico.JdbcAnalyticQuoteTariffs;
 import br.com.esl.etl.v2.plataforma.persistencia.coletas.ColetaTemporalLaboratorySession;
@@ -69,20 +70,34 @@ class AnalyticLaboratoryObservationModesIT {
                             .importPackaged(f.run(), 1, DATE, DATE.plusDays(3));
             final var runtime = new LocalAnalyticQuotesRuntime(session, Clock.systemUTC());
             final var initial = DATE.atStartOfDay().toInstant(java.time.ZoneOffset.UTC);
-            new br.com.esl.etl.v2.plataforma.controle.JdbcSqlServerControlPlane(session)
-                    .registerIncrementalFrontier(
-                            new br.com.esl.etl.v2.plataforma.controle.ExecutionPartitionKey(
-                                    "LOCAL_SHADOW",
-                                    "LOCAL_V2",
-                                    "LOCAL_V2",
-                                    "cotacoes",
-                                    ExecutionMode.INCREMENTAL,
-                                    initial,
-                                    DATE.plusDays(1)
-                                            .atStartOfDay()
-                                            .toInstant(java.time.ZoneOffset.UTC)),
-                            initial,
-                            java.time.Instant.now());
+            final var control =
+                    new br.com.esl.etl.v2.plataforma.controle.JdbcSqlServerControlPlane(session);
+            RuntimePhaseEvidence.sql(
+                    RuntimePhaseEvidence.Phase.SOURCE_REGISTER,
+                    () -> {
+                        control.registerSource(
+                                new ControlPlaneSource(
+                                        "LOCAL_V2", "DATA_EXPORT", java.time.Instant.now()));
+                        return null;
+                    });
+            RuntimePhaseEvidence.sql(
+                    RuntimePhaseEvidence.Phase.FRONTIER_REGISTER,
+                    () -> {
+                        control.registerIncrementalFrontier(
+                                new br.com.esl.etl.v2.plataforma.controle.ExecutionPartitionKey(
+                                        "LOCAL_SHADOW",
+                                        "LOCAL_V2",
+                                        "LOCAL_V2",
+                                        "cotacoes",
+                                        ExecutionMode.INCREMENTAL,
+                                        initial,
+                                        DATE.plusDays(1)
+                                                .atStartOfDay()
+                                                .toInstant(java.time.ZoneOffset.UTC)),
+                                initial,
+                                java.time.Instant.now());
+                        return null;
+                    });
             UUID first = null;
             for (final var mode :
                     List.of(

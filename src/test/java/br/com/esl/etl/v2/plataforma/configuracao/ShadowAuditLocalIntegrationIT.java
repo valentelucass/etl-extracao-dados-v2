@@ -1,8 +1,11 @@
 package br.com.esl.etl.v2.plataforma.configuracao;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import br.com.esl.etl.v2.plataforma.contrato.ContractTestSupport;
@@ -38,6 +41,7 @@ import java.util.logging.Logger;
 import javax.sql.DataSource;
 import org.junit.jupiter.api.Assumptions;
 import org.junit.jupiter.api.Test;
+import org.opentest4j.TestAbortedException;
 
 /**
  * Exercita a auditoria JDBC somente quando o perfil e a flag explícita são fornecidos pelo
@@ -56,6 +60,28 @@ class ShadowAuditLocalIntegrationIT {
     private static final String COUNT_PAGE_AUDIT_ROWS = "SELECT COUNT(*) FROM ctl.page_audit";
 
     @Test
+    void bothExplicitGatesAreRequiredBeforeReadingTheEnvironment() {
+        final String originalEnabled = System.getProperty(ENABLED_PROPERTY);
+        final String originalProfile = System.getProperty(PROFILE_ACTIVE_PROPERTY);
+        try {
+            for (final boolean[] gates :
+                    new boolean[][] {{false, false}, {true, false}, {false, true}}) {
+                System.setProperty(ENABLED_PROPERTY, Boolean.toString(gates[0]));
+                System.setProperty(PROFILE_ACTIVE_PROPERTY, Boolean.toString(gates[1]));
+                assertThrows(
+                        TestAbortedException.class,
+                        ShadowAuditLocalIntegrationIT::requireExplicitLocalIntegrationGate);
+            }
+            System.setProperty(ENABLED_PROPERTY, "true");
+            System.setProperty(PROFILE_ACTIVE_PROPERTY, "true");
+            assertDoesNotThrow(ShadowAuditLocalIntegrationIT::requireExplicitLocalIntegrationGate);
+        } finally {
+            restoreProperty(ENABLED_PROPERTY, originalEnabled);
+            restoreProperty(PROFILE_ACTIVE_PROPERTY, originalProfile);
+        }
+    }
+
+    @Test
     void streamsSyntheticPagesToJdbcAuditAndRollsEverythingBackOnOneSharedConnection()
             throws SQLException {
         requireExplicitLocalIntegrationGate();
@@ -63,6 +89,7 @@ class ShadowAuditLocalIntegrationIT {
         final ShadowStorageProperties properties = localPropertiesFromEnvironment();
         try (Connection physicalConnection = DriverManager.getConnection(properties.jdbcUrl())) {
             physicalConnection.setAutoCommit(false);
+            final AuditRowCounts before = auditRowCounts(physicalConnection);
             final RollbackOnlySharedConnectionDataSource dataSource =
                     new RollbackOnlySharedConnectionDataSource(physicalConnection);
             final JdbcDataExportExtractionAudit audit =
@@ -86,8 +113,33 @@ class ShadowAuditLocalIntegrationIT {
                 physicalConnection.rollback();
             }
 
-            assertNoPersistedAuditRows(physicalConnection);
+            assertEquals(before, auditRowCounts(physicalConnection));
         }
+    }
+
+    @Test
+    void sharedConnectionProxyRejectsCommitAndKeepsThePhysicalConnectionOpen() throws SQLException {
+        final AtomicInteger physicalCloses = new AtomicInteger();
+        final Connection physical =
+                (Connection)
+                        Proxy.newProxyInstance(
+                                getClass().getClassLoader(),
+                                new Class<?>[] {Connection.class},
+                                (proxy, method, arguments) -> {
+                                    if ("close".equals(method.getName())) {
+                                        physicalCloses.incrementAndGet();
+                                    }
+                                    return null;
+                                });
+        final RollbackOnlySharedConnectionDataSource dataSource =
+                new RollbackOnlySharedConnectionDataSource(physical);
+        final Connection first = dataSource.getConnection();
+        assertSame(first, dataSource.getConnection());
+        assertEquals(2, dataSource.connectionRequests());
+        assertThrows(SQLException.class, first::commit);
+        assertThrows(SQLException.class, () -> first.setAutoCommit(true));
+        first.close();
+        assertEquals(0, physicalCloses.get());
     }
 
     private static DataExportGateway syntheticGateway() {
@@ -145,6 +197,14 @@ class ShadowAuditLocalIntegrationIT {
         Assumptions.assumeTrue(
                 Boolean.parseBoolean(System.getProperty(PROFILE_ACTIVE_PROPERTY)),
                 "A integração local exige o perfil shadow-local-integration.");
+    }
+
+    private static void restoreProperty(final String name, final String value) {
+        if (value == null) {
+            System.clearProperty(name);
+        } else {
+            System.setProperty(name, value);
+        }
     }
 
     private static void assertSanitizedMetadata(final Connection connection, final UUID executionId)
@@ -213,11 +273,13 @@ class ShadowAuditLocalIntegrationIT {
         }
     }
 
-    private static void assertNoPersistedAuditRows(final Connection connection)
-            throws SQLException {
-        assertEquals(0, countRows(connection, COUNT_EXECUTION_AUDIT_ROWS));
-        assertEquals(0, countRows(connection, COUNT_PAGE_AUDIT_ROWS));
+    private static AuditRowCounts auditRowCounts(final Connection connection) throws SQLException {
+        return new AuditRowCounts(
+                countRows(connection, COUNT_EXECUTION_AUDIT_ROWS),
+                countRows(connection, COUNT_PAGE_AUDIT_ROWS));
     }
+
+    private record AuditRowCounts(int executionRows, int pageRows) {}
 
     private static int countRows(final Connection connection, final String statementSql)
             throws SQLException {

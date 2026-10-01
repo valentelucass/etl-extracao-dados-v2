@@ -175,6 +175,11 @@ public final class QualificationPackageContents {
                             payload.member("contracts/physical-columns.v098.json", "CONTRACT")));
             resource(
                     jar,
+                    "qualification-laboratory/physical-columns.v105.json",
+                    QualificationJson.sha256(
+                            payload.member("contracts/physical-columns.v105.json", "CONTRACT")));
+            resource(
+                    jar,
                     "qualification-laboratory/config.synthetic.json",
                     payload.members().get("config/config.synthetic.json").sha256());
         }

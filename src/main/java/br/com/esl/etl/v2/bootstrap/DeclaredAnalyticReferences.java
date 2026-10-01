@@ -230,38 +230,57 @@ public final class DeclaredAnalyticReferences {
             final CancellationToken token)
             throws IOException, SQLException {
         verifyFiles(token);
-        files.get("expansion")
-                .consume(
-                        bytes ->
-                                new JdbcExpansionReferences(session, clock)
-                                        .importFixture(
-                                                expansion, revision, from, toExclusive, bytes));
-        token.throwIfCancellationRequested();
-        files.get("dimensions")
-                .consume(
-                        bytes ->
-                                new JdbcAnalyticReferences(session, clock)
-                                        .importFixture(
-                                                run, revision, from, toExclusive, policies, bytes));
-        token.throwIfCancellationRequested();
-        files.get("fleet")
-                .consume(
-                        bytes ->
-                                new JdbcAnalyticFleetReferences(session, clock)
-                                        .importFixture(run, revision, from, toExclusive, bytes));
-        token.throwIfCancellationRequested();
-        files.get("regions")
-                .consume(
-                        bytes ->
-                                new JdbcAnalyticCollectionRegions(session)
-                                        .importFixture(run, revision, from, toExclusive, bytes));
-        token.throwIfCancellationRequested();
-        return files.get("tariffs")
-                .consume(
-                        bytes ->
-                                new JdbcAnalyticQuoteTariffs(session)
-                                        .importFixture(run, revision, from, toExclusive, bytes))
-                .release();
+        return new SqlImports().importInto(session, run, expansion, clock, token);
+    }
+
+    private final class SqlImports {
+        private long importInto(
+                final ColetaTemporalLaboratorySession session,
+                final UUID run,
+                final UUID expansion,
+                final Clock clock,
+                final CancellationToken token)
+                throws IOException, SQLException {
+            files.get("expansion")
+                    .consume(
+                            bytes ->
+                                    new JdbcExpansionReferences(session, clock)
+                                            .importFixture(
+                                                    expansion, revision, from, toExclusive, bytes));
+            token.throwIfCancellationRequested();
+            files.get("dimensions")
+                    .consume(
+                            bytes ->
+                                    new JdbcAnalyticReferences(session, clock)
+                                            .importFixture(
+                                                    run,
+                                                    revision,
+                                                    from,
+                                                    toExclusive,
+                                                    policies,
+                                                    bytes));
+            token.throwIfCancellationRequested();
+            files.get("fleet")
+                    .consume(
+                            bytes ->
+                                    new JdbcAnalyticFleetReferences(session, clock)
+                                            .importFixture(
+                                                    run, revision, from, toExclusive, bytes));
+            token.throwIfCancellationRequested();
+            files.get("regions")
+                    .consume(
+                            bytes ->
+                                    new JdbcAnalyticCollectionRegions(session)
+                                            .importFixture(
+                                                    run, revision, from, toExclusive, bytes));
+            token.throwIfCancellationRequested();
+            return files.get("tariffs")
+                    .consume(
+                            bytes ->
+                                    new JdbcAnalyticQuoteTariffs(session)
+                                            .importFixture(run, revision, from, toExclusive, bytes))
+                    .release();
+        }
     }
 
     public int revision() {

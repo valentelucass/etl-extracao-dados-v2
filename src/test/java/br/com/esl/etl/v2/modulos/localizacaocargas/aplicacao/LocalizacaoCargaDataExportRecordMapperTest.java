@@ -149,6 +149,18 @@ class LocalizacaoCargaDataExportRecordMapperTest {
     }
 
     @Test
+    void quarantinesQuotedDecimalAboveNumericLexemeCeilingBeforeBigDecimal() throws Exception {
+        final String oversized =
+                "0".repeat(LocalizacaoCargaJson.MAXIMUM_NUMERIC_TOKEN_CHARACTERS + 1);
+
+        final var record = mapper.map(1, validJson(",\"taxed_weight\":\"" + oversized + "\""));
+
+        assertTrue(record.quarantined());
+        assertEquals("INVALID_TAXED_WEIGHT", record.quarantineReasonCode());
+        assertNull(record.taxedWeight());
+    }
+
+    @Test
     void keepsExactNumericWireLexemeAndScaleInCanonicalRawEvidence() throws Exception {
         final var record = mapper.map(1, validJson(",\"taxed_weight\":10.250000000"));
         final JsonNode evidence =

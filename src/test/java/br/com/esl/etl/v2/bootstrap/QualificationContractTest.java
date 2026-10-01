@@ -103,7 +103,10 @@ class QualificationContractTest {
                 Path.of("src/main/resources/qualification-laboratory/config.synthetic.json");
         assertTrue(
                 QualificationConfiguration.read(path)
-                        .jdbcUrl()
+                        .validatedJdbcUrl(
+                                "jdbc:sqlserver://localhost;databaseName=ETL_SISTEMA_V2_SHADOW;"
+                                        + "integratedSecurity=true;encrypt=true;"
+                                        + "trustServerCertificate=false;loginTimeout=5;socketTimeout=90000")
                         .startsWith("jdbc:sqlserver://localhost;"));
         for (final var key : List.of("host", "database", "version")) {
             final var invalid = (ObjectNode) QualificationJson.read(path, 8192);

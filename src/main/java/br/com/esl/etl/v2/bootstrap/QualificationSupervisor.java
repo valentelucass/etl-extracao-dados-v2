@@ -25,6 +25,7 @@ import java.nio.file.StandardOpenOption;
 import java.time.Instant;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
@@ -33,6 +34,11 @@ import java.util.concurrent.TimeUnit;
  * case.
  */
 public final class QualificationSupervisor {
+    @FunctionalInterface
+    interface AggregateSnapshot {
+        String sha256() throws Exception;
+    }
+
     private final QualifiedPackage payload;
     private final QualificationCampaign campaign;
     private final QualificationConfiguration configuration;
@@ -40,6 +46,7 @@ public final class QualificationSupervisor {
     private final CampaignJournal journal;
     private final String campaignHash;
     private final String configurationHash;
+    private final AggregateSnapshot aggregateSnapshot;
 
     public QualificationSupervisor(
             final QualifiedPackage payload,
@@ -48,10 +55,28 @@ public final class QualificationSupervisor {
             final QualificationControlFiles files,
             final boolean create)
             throws IOException {
+        this(
+                payload,
+                campaign,
+                configuration,
+                files,
+                create,
+                () -> QualificationSqlEvidence.snapshot(configuration).sha256());
+    }
+
+    QualificationSupervisor(
+            final QualifiedPackage payload,
+            final QualificationCampaign campaign,
+            final QualificationConfiguration configuration,
+            final QualificationControlFiles files,
+            final boolean create,
+            final AggregateSnapshot aggregateSnapshot)
+            throws IOException {
         this.payload = payload;
         this.campaign = campaign;
         this.configuration = configuration;
         this.files = files;
+        this.aggregateSnapshot = Objects.requireNonNull(aggregateSnapshot);
         payload.verifyPins(campaign.pins());
         campaignHash = QualificationJson.sha256(files.root().resolve("campaign.json"));
         configurationHash = QualificationJson.sha256(files.root().resolve("configuration.json"));
@@ -182,117 +207,143 @@ public final class QualificationSupervisor {
             final Path directory,
             final long campaignDeadline)
             throws Exception {
-        QualificationSqlEvidence.master(configuration);
-        final String before = QualificationSqlEvidence.snapshot(configuration).sha256();
-        QualificationControlFiles.atomic(
-                QualificationControlFiles.member(directory, "baseline.json"),
-                JsonNodeFactory.instance
-                        .objectNode()
-                        .put("nonce", nonce.toString())
-                        .put("aggregate", before));
-        final var java =
-                Path.of(System.getProperty("java.home"), "bin", "java.exe").toAbsolutePath();
-        final var jar = payload.member("etl-dataexport-v2.jar", "APPLICATION");
-        // The child is intentionally launched from the sealed package rather than Maven's test
-        // classpath. Keep its dependency classpath explicit so the packaged JDBC driver is
-        // available without granting it anything outside the package.
-        final String classpath = childClasspath(jar, payload.root().resolve("lib"));
-        final var command =
-                List.of(
-                        java.toString(),
-                        "-Xmx" + configuration.heapMiB() + "m",
-                        "-Dfile.encoding=UTF-8",
-                        "-Dshadow.local.integration.enabled=true",
-                        "-Dshadow.local.integration.profile.active=true",
-                        "-Djava.library.path=" + payload.root().resolve("native"),
-                        "-cp",
-                        classpath,
-                        "br.com.esl.etl.v2.bootstrap.QualificationLaboratoryMain",
-                        "worker",
-                        "--manifest-sha=" + payload.manifestSha256(),
-                        "--control=" + files.root(),
-                        "--case=" + item.id(),
-                        "--nonce=" + nonce);
-        final var stdout = QualificationControlFiles.member(directory, "stdout.log");
-        final var stderr = QualificationControlFiles.member(directory, "stderr.log");
-        Files.createFile(stdout);
-        Files.createFile(stderr);
-        final var builder =
-                new ProcessBuilder(command)
-                        .directory(payload.root().toFile())
-                        .redirectOutput(stdout.toFile())
-                        .redirectError(stderr.toFile());
-        for (final var name :
-                List.of("JAVA_TOOL_OPTIONS", "JDK_JAVA_OPTIONS", "_JAVA_OPTIONS", "CLASSPATH")) {
-            builder.environment().remove(name);
-        }
-        final var process = builder.start();
-        final var start = process.info().startInstant().orElseThrow();
-        final long deadline =
-                Math.min(
-                        campaignDeadline,
-                        System.nanoTime()
-                                + QualificationArtifactCase.caseSeconds(item, configuration)
-                                        * 1_000_000_000L);
-        boolean signalled = false;
-        boolean forced = false;
-        long cancellationAt = Long.MAX_VALUE;
-        try {
+        new SqlChildExecution().run(item, nonce, directory, campaignDeadline);
+    }
+
+    private final class SqlChildExecution {
+        private void run(
+                final QualificationCampaign.Case item,
+                final UUID nonce,
+                final Path directory,
+                final long campaignDeadline)
+                throws Exception {
+            final String validatedUrl = configuration.jdbcUrl();
+            QualificationSqlEvidence.master(configuration);
+            final String before = QualificationSqlEvidence.snapshot(configuration).sha256();
             QualificationControlFiles.atomic(
-                    QualificationControlFiles.member(directory, "process.json"),
+                    QualificationControlFiles.member(directory, "baseline.json"),
                     JsonNodeFactory.instance
                             .objectNode()
-                            .put("pid", process.pid())
-                            .put("start", start.toString())
                             .put("nonce", nonce.toString())
-                            .put("java", java.toString())
-                            .put("jar", payload.members().get("etl-dataexport-v2.jar").sha256()));
-            journal.append(
-                    item.id(), nonce, CampaignJournal.Kind.STARTED, Long.toString(process.pid()));
-            boolean barrierRecorded = false;
-            while (!process.waitFor(100, TimeUnit.MILLISECONDS)) {
-                String cancelReason = null;
-                if (Files.size(stdout) > 1048576 || Files.size(stderr) > 1048576) {
-                    cancelReason = "LOG_LIMIT";
-                }
-                if (System.nanoTime() >= deadline) {
-                    cancelReason = "CASE_DEADLINE";
-                }
-                final var barrierPath = directory.resolve("barrier.json");
-                if (!barrierRecorded && Files.exists(barrierPath)) {
-                    verifyBarrier(barrierPath, item, nonce, process.pid());
-                    journal.append(
-                            item.id(), nonce, CampaignJournal.Kind.BARRIER, item.barrier().name());
-                    barrierRecorded = true;
-                    if (item.barrier() != QualificationCampaign.Barrier.BEFORE_RECEIPT) {
-                        cancelReason = "CONTROLLED_BARRIER";
+                            .put("aggregate", before));
+            final var java =
+                    Path.of(System.getProperty("java.home"), "bin", "java.exe").toAbsolutePath();
+            final var jar = payload.member("etl-dataexport-v2.jar", "APPLICATION");
+            // The child is intentionally launched from the sealed package rather than Maven's test
+            // classpath. Keep its dependency classpath explicit so the packaged JDBC driver is
+            // available without granting it anything outside the package.
+            final String classpath = childClasspath(jar, payload.root().resolve("lib"));
+            final var command =
+                    List.of(
+                            java.toString(),
+                            "-Xmx" + configuration.heapMiB() + "m",
+                            "-Dfile.encoding=UTF-8",
+                            "-Dshadow.local.integration.enabled=true",
+                            "-Dshadow.local.integration.profile.active=true",
+                            "-Djava.library.path=" + payload.root().resolve("native"),
+                            "-cp",
+                            classpath,
+                            "br.com.esl.etl.v2.bootstrap.QualificationLaboratoryMain",
+                            "worker",
+                            "--manifest-sha=" + payload.manifestSha256(),
+                            "--control=" + files.root(),
+                            "--case=" + item.id(),
+                            "--nonce=" + nonce);
+            final var stdout = QualificationControlFiles.member(directory, "stdout.log");
+            final var stderr = QualificationControlFiles.member(directory, "stderr.log");
+            Files.createFile(stdout);
+            Files.createFile(stderr);
+            final var builder =
+                    new ProcessBuilder(command)
+                            .directory(payload.root().toFile())
+                            .redirectOutput(stdout.toFile())
+                            .redirectError(stderr.toFile());
+            for (final var name :
+                    List.of(
+                            "JAVA_TOOL_OPTIONS",
+                            "JDK_JAVA_OPTIONS",
+                            "_JAVA_OPTIONS",
+                            "CLASSPATH")) {
+                builder.environment().remove(name);
+            }
+            QualificationSqlOptIn.projectWorkerEnvironment(
+                    builder.environment(), configuration, validatedUrl);
+            final var process = builder.start();
+            final var start = process.info().startInstant().orElseThrow();
+            final long deadline =
+                    Math.min(
+                            campaignDeadline,
+                            System.nanoTime()
+                                    + QualificationArtifactCase.caseSeconds(item, configuration)
+                                            * 1_000_000_000L);
+            boolean signalled = false;
+            boolean forced = false;
+            long cancellationAt = Long.MAX_VALUE;
+            try {
+                QualificationControlFiles.atomic(
+                        QualificationControlFiles.member(directory, "process.json"),
+                        JsonNodeFactory.instance
+                                .objectNode()
+                                .put("pid", process.pid())
+                                .put("start", start.toString())
+                                .put("nonce", nonce.toString())
+                                .put("java", java.toString())
+                                .put(
+                                        "jar",
+                                        payload.members().get("etl-dataexport-v2.jar").sha256()));
+                journal.append(
+                        item.id(),
+                        nonce,
+                        CampaignJournal.Kind.STARTED,
+                        Long.toString(process.pid()));
+                boolean barrierRecorded = false;
+                while (!process.waitFor(100, TimeUnit.MILLISECONDS)) {
+                    String cancelReason = null;
+                    if (Files.size(stdout) > 1048576 || Files.size(stderr) > 1048576) {
+                        cancelReason = "LOG_LIMIT";
+                    }
+                    if (System.nanoTime() >= deadline) {
+                        cancelReason = "CASE_DEADLINE";
+                    }
+                    final var barrierPath = directory.resolve("barrier.json");
+                    if (!barrierRecorded && Files.exists(barrierPath)) {
+                        verifyBarrier(barrierPath, item.barrier(), nonce, process.pid());
+                        journal.append(
+                                item.id(),
+                                nonce,
+                                CampaignJournal.Kind.BARRIER,
+                                item.barrier().name());
+                        barrierRecorded = true;
+                        if (item.barrier() != QualificationCampaign.Barrier.BEFORE_RECEIPT) {
+                            cancelReason = "CONTROLLED_BARRIER";
+                        }
+                    }
+                    if (cancelReason != null && !signalled) {
+                        QualificationControlFiles.atomic(
+                                QualificationControlFiles.member(directory, "cancel.json"),
+                                JsonNodeFactory.instance
+                                        .objectNode()
+                                        .put("nonce", nonce.toString())
+                                        .put("reason", cancelReason));
+                        signalled = true;
+                        cancellationAt = System.nanoTime();
+                    }
+                    if (signalled && System.nanoTime() - cancellationAt >= 5_000_000_000L) {
+                        destroyOwned(process, start);
+                        forced = true;
+                        break;
                     }
                 }
-                if (cancelReason != null && !signalled) {
-                    QualificationControlFiles.atomic(
-                            QualificationControlFiles.member(directory, "cancel.json"),
-                            JsonNodeFactory.instance
-                                    .objectNode()
-                                    .put("nonce", nonce.toString())
-                                    .put("reason", cancelReason));
-                    signalled = true;
-                    cancellationAt = System.nanoTime();
+                if (process.isAlive()) {
+                    throw new IllegalStateException("QUAL_OWNED_PROCESS_UNRELEASED");
                 }
-                if (signalled && System.nanoTime() - cancellationAt >= 5_000_000_000L) {
+                verifyLog(stdout);
+                verifyLog(stderr);
+                reconcile(item, nonce, directory, process.exitValue(), forced, before);
+            } finally {
+                if (process.isAlive()) {
                     destroyOwned(process, start);
-                    forced = true;
-                    break;
                 }
-            }
-            if (process.isAlive()) {
-                throw new IllegalStateException("QUAL_OWNED_PROCESS_UNRELEASED");
-            }
-            verifyLog(stdout);
-            verifyLog(stderr);
-            reconcile(item, nonce, directory, process.exitValue(), forced, before);
-        } finally {
-            if (process.isAlive()) {
-                destroyOwned(process, start);
             }
         }
     }
@@ -310,7 +361,7 @@ public final class QualificationSupervisor {
             final boolean forced,
             final String before)
             throws Exception {
-        final String after = QualificationSqlEvidence.snapshot(configuration).sha256();
+        final String after = aggregateSnapshot.sha256();
         final boolean rollback = before.equals(after);
         final var receiptPath = directory.resolve("receipt.json");
         final JsonNode receipt = Files.exists(receiptPath) ? receipt(item, nonce, directory) : null;
@@ -551,7 +602,7 @@ public final class QualificationSupervisor {
                             QualificationJson.read(directory.resolve("process.json"), 8192);
                     verifyBarrier(
                             directory.resolve("barrier.json"),
-                            item,
+                            item.barrier(),
                             status.nonce(),
                             process.path("pid").longValue());
                     testPassed =
@@ -651,9 +702,9 @@ public final class QualificationSupervisor {
                 Path.of(System.getProperty("java.home"), "bin", "java.exe"));
     }
 
-    private static void verifyBarrier(
+    static void verifyBarrier(
             final Path path,
-            final QualificationCampaign.Case item,
+            final QualificationCampaign.Barrier point,
             final UUID nonce,
             final long pid)
             throws IOException {
@@ -661,8 +712,8 @@ public final class QualificationSupervisor {
         QualificationJson.fields(barrier, "nonce", "point", "pid", "observedAt");
         if (!nonce.toString().equals(barrier.path("nonce").asText())
                 || pid != barrier.path("pid").longValue()
-                || !item.barrier().name().equals(barrier.path("point").asText())
-                || item.barrier() == QualificationCampaign.Barrier.NONE) {
+                || !point.name().equals(barrier.path("point").asText())
+                || point == QualificationCampaign.Barrier.NONE) {
             throw new IllegalArgumentException("QUAL_BARRIER_BINDING");
         }
     }
@@ -677,7 +728,7 @@ public final class QualificationSupervisor {
         }
     }
 
-    private static void verifyLog(final Path file) throws IOException {
+    static void verifyLog(final Path file) throws IOException {
         QualificationJson.regular(file);
         if (Files.size(file) > 1048576) {
             throw new IllegalArgumentException("QUAL_PROCESS_LOG_LIMIT");

@@ -76,7 +76,10 @@ public final class LocalRasterRuntime {
                 cancellation.throwIfCancellationRequested();
                 database.seal(capture, progress.trips, progress.stops, progress.calls);
                 cancellation.throwIfCancellationRequested();
-                final var receipt = database.apply(run, capture);
+                final var receipt =
+                        RuntimePhaseEvidence.sql(
+                                RuntimePhaseEvidence.Phase.RASTER_APPLY,
+                                () -> database.apply(run, capture));
                 cancellation.throwIfCancellationRequested();
                 return new Capture(
                         capture,

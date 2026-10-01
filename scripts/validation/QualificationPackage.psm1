@@ -53,7 +53,7 @@ function Read-QualificationManifest([byte[]]$Bytes,[string]$Sha256){
         $manifest.java -isnot [long] -and $manifest.java -isnot [int] -or $manifest.java -ne 17 -or
         $manifest.os -cne 'Windows' -or $manifest.architecture -cne 'x64' -or
         ($manifest.schemaVersion -isnot [long] -and $manifest.schemaVersion -isnot [int]) -or
-        $manifest.schemaVersion -cnotin @(98,99,102,104) -or
+        $manifest.schemaVersion -cnotin @(98,99,102,104,105) -or
         # Two declared integral sequences carry their independently pinned
         # synthetic inputs and oracles.  The resulting 724 members remain
         # bounded; retain a hard 1024-member compatibility ceiling.

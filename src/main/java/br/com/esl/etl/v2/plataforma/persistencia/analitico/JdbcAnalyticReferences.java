@@ -1,5 +1,6 @@
 package br.com.esl.etl.v2.plataforma.persistencia.analitico;
 
+import br.com.esl.etl.v2.plataforma.persistencia.JdbcStatementEvidence;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.microsoft.sqlserver.jdbc.SQLServerDataTable;
@@ -158,7 +159,7 @@ public final class JdbcAnalyticReferences {
                     12,
                     Timestamp.from(clock.instant()),
                     java.util.Calendar.getInstance(java.util.TimeZone.getTimeZone("UTC")));
-            try (var row = statement.executeQuery()) {
+            try (var row = JdbcStatementEvidence.referenceExecute(statement)) {
                 if (!row.next()) {
                     throw new SQLException("ANA_REFERENCE_RECEIPT_MISSING");
                 }

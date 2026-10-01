@@ -135,7 +135,8 @@ class SchemaFoundationSqlContractTest {
                         "V101__accept_bound_integral_freight_capture.sql",
                         "V102__prove_declared_collection_preview.sql",
                         "V103__declare_complete_manifest_collection_sets.sql",
-                        "V104__revise_quote_reference_with_preserved_source.sql"),
+                        "V104__revise_quote_reference_with_preserved_source.sql",
+                        "V105__align_audit_and_expansion_label_bin2.sql"),
                 migrationNames);
 
         final String allMigrations =

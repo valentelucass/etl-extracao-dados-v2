@@ -246,50 +246,61 @@ final class RuntimeTemporalOperation {
         }
         final String namespace =
                 hash("LOCAL_SHADOW|LOCAL_V2|LOCAL_V2|" + workload + "|" + policy.mode());
-        final var authority = WindowsSqlRuntimeAuthorization.fromAdministeredArtifact();
-        int persisted = 0;
-        for (final var window : result.windows()) {
-            final var frozen = freeze(configuration, window);
-            final var scope = frozen.scope();
-            final var cycle = frozen.cycle();
-            final var capability = authority.authorize(scope);
-            persisted +=
-                    authority.consumeAndExecute(
-                            capability,
-                            scope,
-                            () -> {
-                                final var store =
-                                        new JdbcSqlServerTemporalPlan(
-                                                new BoundedRuntimeDataSource(
-                                                        configuration.shadowStorage()));
-                                final int count =
-                                        store.persist(
-                                                cycle,
-                                                namespace,
-                                                policy,
-                                                new RuntimeTemporalPlanner.Result(
-                                                        List.of(window), false, false));
-                                final var reconciliation =
-                                        new br.com.esl.etl.v2.plataforma.orquestracao
-                                                        .RuntimeTemporalCoordinator(store)
-                                                .reconcile(
-                                                        namespace,
-                                                        policy,
-                                                        result.windows().get(0).partitionStart(),
-                                                        plannedOccurrences(configuration));
-                                diagnostic.accept(
-                                        "TEMPORAL_RECONCILIATION contiguous="
-                                                + reconciliation.contiguousEnd()
-                                                + " pending="
-                                                + reconciliation.pending().size()
-                                                + " degraded="
-                                                + reconciliation.degraded()
-                                                + " limit="
-                                                + reconciliation.limitReached());
-                                return count;
-                            });
+        return new SqlPersistence().persist(configuration, diagnostic, namespace);
+    }
+
+    private final class SqlPersistence {
+        private int persist(
+                final RuntimeConfiguration configuration,
+                final java.util.function.Consumer<String> diagnostic,
+                final String namespace) {
+            final var authority = WindowsSqlRuntimeAuthorization.fromAdministeredArtifact();
+            int persisted = 0;
+            for (final var window : result.windows()) {
+                final var frozen = freeze(configuration, window);
+                final var scope = frozen.scope();
+                final var cycle = frozen.cycle();
+                final var capability = authority.authorize(scope);
+                persisted +=
+                        authority.consumeAndExecute(
+                                capability,
+                                scope,
+                                () -> {
+                                    final var store =
+                                            new JdbcSqlServerTemporalPlan(
+                                                    new BoundedRuntimeDataSource(
+                                                            configuration.shadowStorage()));
+                                    final int count =
+                                            store.persist(
+                                                    cycle,
+                                                    namespace,
+                                                    policy,
+                                                    new RuntimeTemporalPlanner.Result(
+                                                            List.of(window), false, false));
+                                    final var reconciliation =
+                                            new br.com.esl.etl.v2.plataforma.orquestracao
+                                                            .RuntimeTemporalCoordinator(store)
+                                                    .reconcile(
+                                                            namespace,
+                                                            policy,
+                                                            result.windows()
+                                                                    .get(0)
+                                                                    .partitionStart(),
+                                                            plannedOccurrences(configuration));
+                                    diagnostic.accept(
+                                            "TEMPORAL_RECONCILIATION contiguous="
+                                                    + reconciliation.contiguousEnd()
+                                                    + " pending="
+                                                    + reconciliation.pending().size()
+                                                    + " degraded="
+                                                    + reconciliation.degraded()
+                                                    + " limit="
+                                                    + reconciliation.limitReached());
+                                    return count;
+                                });
+            }
+            return persisted;
         }
-        return persisted;
     }
 
     record Frozen(UUID cycle, String namespace, RuntimeAuthorizationScope scope) {}

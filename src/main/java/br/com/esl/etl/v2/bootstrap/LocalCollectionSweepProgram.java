@@ -95,44 +95,52 @@ public final class LocalCollectionSweepProgram {
                 throw new SQLException("LOCAL_SWEEP_INPUT_CHANGED", failure);
             }
         }
-        final var zone = ZoneId.of("America/Sao_Paulo");
-        final var logical = Clock.fixed(end.plusDays(1).atStartOfDay(zone).toInstant(), zone);
-        final UUID run = UUID.randomUUID(),
-                expansion = UUID.randomUUID(),
-                relational = UUID.randomUUID();
-        final int pageSize = artifacts.get(0).pageSize();
-        final var policy =
-                new RelationalLaboratoryPolicy(
-                        start, end.minusDays(1), 1000, 10, 3, 60, 2, 0, pageSize, 1000);
-        new JdbcRasterLaboratory(session, Clock.systemUTC())
-                .start(run, start, end, zone, 100000, 1000);
-        new JdbcExpansionLaboratory(session, logical)
-                .start(
-                        expansion,
-                        new ExpansionPolicy(
-                                start,
-                                end,
-                                start,
-                                pageSize,
-                                1000,
-                                100000,
-                                FiscalPolicy.SYNTHETIC_CTE));
-        new JdbcRelationalLaboratory(session, logical)
-                .start(relational, policy, RelationalSyntheticSource.analyticContracts());
-        new JdbcAnalyticDimensions(session).associate(run, expansion, relational);
-        final var sweep =
-                new LocalAnalyticCollectionSweep(
-                        session, run, relational, policy, logical, Clock.systemUTC());
-        final var result = new ArrayList<LocalAnalyticCollectionSweep.Observation>(4);
-        for (final var artifact : artifacts) {
-            token.throwIfCancellationRequested();
-            result.add(
-                    sweep.observe(
-                            artifact.snapshot(run),
-                            UUID.randomUUID(),
-                            artifact.inputs(run, token),
-                            token));
+        return new SqlExecution().execute(session, token);
+    }
+
+    private final class SqlExecution {
+        private List<LocalAnalyticCollectionSweep.Observation> execute(
+                final ColetaTemporalLaboratorySession session, final CancellationToken token)
+                throws SQLException {
+            final var zone = ZoneId.of("America/Sao_Paulo");
+            final var logical = Clock.fixed(end.plusDays(1).atStartOfDay(zone).toInstant(), zone);
+            final UUID run = UUID.randomUUID(),
+                    expansion = UUID.randomUUID(),
+                    relational = UUID.randomUUID();
+            final int pageSize = artifacts.get(0).pageSize();
+            final var policy =
+                    new RelationalLaboratoryPolicy(
+                            start, end.minusDays(1), 1000, 10, 3, 60, 2, 0, pageSize, 1000);
+            new JdbcRasterLaboratory(session, Clock.systemUTC())
+                    .start(run, start, end, zone, 100000, 1000);
+            new JdbcExpansionLaboratory(session, logical)
+                    .start(
+                            expansion,
+                            new ExpansionPolicy(
+                                    start,
+                                    end,
+                                    start,
+                                    pageSize,
+                                    1000,
+                                    100000,
+                                    FiscalPolicy.SYNTHETIC_CTE));
+            new JdbcRelationalLaboratory(session, logical)
+                    .start(relational, policy, RelationalSyntheticSource.analyticContracts());
+            new JdbcAnalyticDimensions(session).associate(run, expansion, relational);
+            final var sweep =
+                    new LocalAnalyticCollectionSweep(
+                            session, run, relational, policy, logical, Clock.systemUTC());
+            final var result = new ArrayList<LocalAnalyticCollectionSweep.Observation>(4);
+            for (final var artifact : artifacts) {
+                token.throwIfCancellationRequested();
+                result.add(
+                        sweep.observe(
+                                artifact.snapshot(run),
+                                UUID.randomUUID(),
+                                artifact.inputs(run, token),
+                                token));
+            }
+            return List.copyOf(result);
         }
-        return List.copyOf(result);
     }
 }

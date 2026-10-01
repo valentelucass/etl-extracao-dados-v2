@@ -73,6 +73,11 @@ public final class QualificationLaboratoryMain {
         if (!allowed.containsAll(options.keySet())) {
             throw new IllegalArgumentException("QUAL_COMMAND_EXTRA_ARGUMENT");
         }
+        if (Set.of("run", "resume", "worker").contains(command)) {
+            QualificationSqlOptIn.require(
+                    Boolean.getBoolean("shadow.local.integration.enabled"),
+                    Boolean.getBoolean("shadow.local.integration.profile.active"));
+        }
         final var jar =
                 Path.of(
                         QualificationLaboratoryMain.class
@@ -142,6 +147,9 @@ public final class QualificationLaboratoryMain {
             }
             System.out.println(report);
             return 0;
+        }
+        if (Set.of("run", "resume", "worker").contains(command)) {
+            configuration.jdbcUrl();
         }
         if (command.equals("worker")) {
             final var item =

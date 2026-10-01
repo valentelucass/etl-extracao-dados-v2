@@ -19,11 +19,11 @@ class QualificationPhysicalMetadataIT {
         final var document =
                 QualificationJson.read(
                         Path.of(
-                                "src/main/resources/qualification-laboratory/physical-columns.v098.json"),
+                                "src/main/resources/qualification-laboratory/physical-columns.v105.json"),
                         524288);
         final var first = (ObjectNode) document.path("columns").get(0);
         first.put("nullable", !first.path("nullable").booleanValue());
-        final var guard = new QualificationPhysicalMetadata(document);
+        final var guard = new QualificationPhysicalMetadata(105, document);
         try (var session = ColetaTemporalLaboratorySession.openFromEnvironment()) {
             assertEquals(
                     "QUAL_PHYSICAL_SCHEMA_DRIFT",
@@ -34,9 +34,9 @@ class QualificationPhysicalMetadataIT {
 
     @Test
     @Timeout(30)
-    void allPhysicalColumnsMatchTheApprovedSchemaIncludingTechnicalColumns() throws Exception {
+    void allPhysicalColumnsMatchTheLocalEpochIncludingTechnicalColumns() throws Exception {
         try (var session = ColetaTemporalLaboratorySession.openFromEnvironment()) {
-            assertEquals(971, new QualificationPhysicalMetadata().verify(session));
+            assertEquals(971, new QualificationPhysicalMetadata(105).verify(session));
         }
     }
 }

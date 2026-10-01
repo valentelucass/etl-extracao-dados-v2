@@ -5,23 +5,145 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import br.com.esl.etl.v2.plataforma.controle.ExecutionMode;
+import br.com.esl.etl.v2.plataforma.fonte.dataexport.DataExportTemplate;
 import br.com.esl.etl.v2.plataforma.fonte.dataexport.RelationalSyntheticSource;
+import br.com.esl.etl.v2.plataforma.orquestracao.RuntimeWindowStrategy;
 import br.com.esl.etl.v2.plataforma.persistencia.relacional.JdbcRelationalLaboratory;
 import br.com.esl.etl.v2.plataforma.relacional.RelationalBinding;
 import br.com.esl.etl.v2.plataforma.relacional.RelationalCaptureContracts;
 import br.com.esl.etl.v2.plataforma.relacional.RelationalLaboratoryPolicy;
+import br.com.esl.etl.v2.plataforma.resiliencia.CancellationToken;
+import br.com.esl.etl.v2.plataforma.resiliencia.ResilienceCancelledException;
 import br.com.esl.etl.v2.plataforma.resiliencia.RuntimeExitCategory;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
+import java.time.ZoneOffset;
 import java.util.List;
+import java.util.UUID;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 class RelationalLaboratoryContractTest {
     private static final LocalDate DATE = LocalDate.of(2036, 4, 1);
+
+    @Test
+    void relationalCaptureMapsOnlyTheThreeScopedSourceFamiliesBeforeJdbc() {
+        assertEquals("manifestos", LocalRelationalRuntime.entity(DataExportTemplate.MANIFESTOS));
+        assertEquals("coletas", LocalRelationalRuntime.entity(DataExportTemplate.COLETAS));
+        assertEquals("fretes", LocalRelationalRuntime.entity(DataExportTemplate.FRETES));
+        assertEquals(
+                "REL_LAB_ENTITY_DENIED",
+                assertThrows(
+                                IllegalArgumentException.class,
+                                () -> LocalRelationalRuntime.entity(DataExportTemplate.COTACOES))
+                        .getMessage());
+    }
+
+    @Test
+    void relationalCaptureAdmissionRejectsDatesModesAndCancellationBeforeJdbc() {
+        final var bounds = policy(new int[] {10000, 4, 3, 20, 2, 1, 17, 200});
+        final var execution = UUID.randomUUID();
+        final var replay = UUID.randomUUID();
+        final var day =
+                LaboratoryCaptureWindow.day(DATE, ZoneOffset.UTC, RuntimeWindowStrategy.FULL);
+        LocalRelationalRuntime.requireCaptureAdmission(
+                execution,
+                bounds,
+                DATE,
+                ExecutionMode.BOOTSTRAP,
+                null,
+                CancellationToken.none(),
+                day);
+        LocalRelationalRuntime.requireCaptureAdmission(
+                execution,
+                bounds,
+                DATE,
+                ExecutionMode.REPLAY,
+                replay,
+                CancellationToken.none(),
+                day);
+
+        final var otherDay =
+                LaboratoryCaptureWindow.day(
+                        DATE.plusDays(1), ZoneOffset.UTC, RuntimeWindowStrategy.FULL);
+        assertEquals(
+                "REL_LAB_SINGLE_SOURCE_DAY_REQUIRED",
+                assertThrows(
+                                IllegalArgumentException.class,
+                                () ->
+                                        LocalRelationalRuntime.requireCaptureAdmission(
+                                                execution,
+                                                bounds,
+                                                DATE,
+                                                ExecutionMode.BOOTSTRAP,
+                                                null,
+                                                CancellationToken.none(),
+                                                otherDay))
+                        .getMessage());
+        final var outside = DATE.minusDays(2);
+        assertEquals(
+                "REL_LAB_WINDOW_BOUND",
+                assertThrows(
+                                IllegalArgumentException.class,
+                                () ->
+                                        LocalRelationalRuntime.requireCaptureAdmission(
+                                                execution,
+                                                bounds,
+                                                outside,
+                                                ExecutionMode.BOOTSTRAP,
+                                                null,
+                                                CancellationToken.none(),
+                                                LaboratoryCaptureWindow.day(
+                                                        outside,
+                                                        ZoneOffset.UTC,
+                                                        RuntimeWindowStrategy.FULL)))
+                        .getMessage());
+        for (final var mode : List.of(ExecutionMode.SWEEP, ExecutionMode.REPLAY)) {
+            assertEquals(
+                    "REL_LAB_MODE_DENIED",
+                    assertThrows(
+                                    IllegalArgumentException.class,
+                                    () ->
+                                            LocalRelationalRuntime.requireCaptureAdmission(
+                                                    execution,
+                                                    bounds,
+                                                    DATE,
+                                                    mode,
+                                                    null,
+                                                    CancellationToken.none(),
+                                                    day))
+                            .getMessage());
+        }
+        assertEquals(
+                "REL_LAB_MODE_DENIED",
+                assertThrows(
+                                IllegalArgumentException.class,
+                                () ->
+                                        LocalRelationalRuntime.requireCaptureAdmission(
+                                                execution,
+                                                bounds,
+                                                DATE,
+                                                ExecutionMode.BACKFILL,
+                                                replay,
+                                                CancellationToken.none(),
+                                                day))
+                        .getMessage());
+        assertThrows(
+                ResilienceCancelledException.class,
+                () ->
+                        LocalRelationalRuntime.requireCaptureAdmission(
+                                execution,
+                                bounds,
+                                DATE,
+                                ExecutionMode.BOOTSTRAP,
+                                null,
+                                () -> true,
+                                day));
+    }
 
     @ParameterizedTest
     @ValueSource(

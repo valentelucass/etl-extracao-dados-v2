@@ -20,6 +20,68 @@ import org.junit.jupiter.api.Test;
 
 class QualificationBoundedContractsTest {
     @Test
+    void sqlEvidenceRequiresBothIndependentLocalShadowGatesBeforeAnyConnection() {
+        assertEquals(
+                "QUAL_SQL_OPT_IN_REQUIRED",
+                assertThrows(
+                                IllegalArgumentException.class,
+                                () -> QualificationSqlOptIn.require(false, false))
+                        .getMessage());
+        assertEquals(
+                "QUAL_SQL_OPT_IN_REQUIRED",
+                assertThrows(
+                                IllegalArgumentException.class,
+                                () -> QualificationSqlOptIn.require(true, false))
+                        .getMessage());
+        assertEquals(
+                "QUAL_SQL_OPT_IN_REQUIRED",
+                assertThrows(
+                                IllegalArgumentException.class,
+                                () -> QualificationSqlOptIn.require(false, true))
+                        .getMessage());
+        org.junit.jupiter.api.Assertions.assertDoesNotThrow(
+                () -> QualificationSqlOptIn.require(true, true));
+    }
+
+    @Test
+    void qualificationCommandRefusesUnknownDuplicateAndUnscopedInputsBeforePackageOrSql()
+            throws Exception {
+        assertEquals(2, QualificationLaboratoryMain.execute(new String[0]));
+        assertEquals(
+                "QUAL_COMMAND_INVALID",
+                assertThrows(
+                                IllegalArgumentException.class,
+                                () -> QualificationLaboratoryMain.execute(new String[] {"deploy"}))
+                        .getMessage());
+        assertEquals(
+                "QUAL_COMMAND_ARGUMENT",
+                assertThrows(
+                                IllegalArgumentException.class,
+                                () ->
+                                        QualificationLaboratoryMain.execute(
+                                                new String[] {
+                                                    "inspect",
+                                                    "--manifest-sha=x",
+                                                    "--manifest-sha=y"
+                                                }))
+                        .getMessage());
+        assertEquals(
+                "QUAL_COMMAND_EXTRA_ARGUMENT",
+                assertThrows(
+                                IllegalArgumentException.class,
+                                () ->
+                                        QualificationLaboratoryMain.execute(
+                                                new String[] {"inspect", "--database=ETL_SISTEMA"}))
+                        .getMessage());
+        assertEquals(
+                "QUAL_COMMAND_REQUIRED_ARGUMENT",
+                assertThrows(
+                                IllegalArgumentException.class,
+                                () -> QualificationLaboratoryMain.execute(new String[] {"inspect"}))
+                        .getMessage());
+    }
+
+    @Test
     void directConstructionCannotBypassParsedCollectionCeilings() throws Exception {
         final var original = QualificationCampaign.parse(QualificationContractTest.campaign());
         assertThrows(
@@ -123,5 +185,67 @@ class QualificationBoundedContractsTest {
         assertThrows(
                 IllegalArgumentException.class,
                 () -> new QualificationSqlEvidence.Snapshot(tables, "a".repeat(64)));
+    }
+
+    @Test
+    void caseReportPreservesFailedGateAndBoundedDifferenceCoordinatesWithoutSql() {
+        final var scopes = new java.util.LinkedHashMap<String, QualificationGate>();
+        for (final var node :
+                br.com.esl.etl.v2.plataforma.qualificacao.QualificationTopology.nodes()) {
+            scopes.put(
+                    node.id(),
+                    new QualificationGate(
+                            node.id(), QualificationGate.State.PASS_LOCAL, "PROVEN", "ORACLE"));
+        }
+        final var outputs = new java.util.ArrayList<QualificationComparator.Result>();
+        for (final var contract :
+                br.com.esl.etl.v2.plataforma.analitico.AnalyticSqlContract.values()) {
+            final boolean divergent = contract.id().equals("SQL-03");
+            outputs.add(
+                    new QualificationComparator.Result(
+                            contract.id(),
+                            2,
+                            2,
+                            divergent ? 1 : 0,
+                            divergent
+                                    ? List.of(
+                                            new QualificationComparator.Diff(
+                                                    7, 2, QualificationComparator.Difference.VALUE))
+                                    : List.of(),
+                            divergent
+                                    ? QualificationGate.State.FAILED
+                                    : QualificationGate.State.PASS_LOCAL));
+        }
+        final var selected =
+                new QualificationGate(
+                        "SELECTED", QualificationGate.State.FAILED, "ORACLE_DIVERGENCE", "ORACLE");
+        final var result = new QualificationScenarioVerifier.Result(scopes, outputs, selected, 0);
+        final var report = JsonNodeFactory.instance.objectNode();
+        QualificationCaseExecutor.comparison(report, result);
+        assertEquals("FAILED", report.path("selectedState").asText());
+        assertEquals(35, report.path("scopes").size());
+        assertEquals(19, report.path("outputs").size());
+        final var output =
+                java.util.stream.StreamSupport.stream(report.path("outputs").spliterator(), false)
+                        .filter(row -> row.path("contract").asText().equals("SQL-03"))
+                        .findFirst()
+                        .orElseThrow();
+        assertEquals("FAILED", output.path("gate").asText());
+        assertEquals(1, output.path("differences").asInt());
+        assertEquals(7, output.path("sample").get(0).path("row").asInt());
+        assertEquals(2, output.path("sample").get(0).path("ordinal").asInt());
+        assertEquals("VALUE", output.path("sample").get(0).path("kind").asText());
+        assertEquals(3, output.path("sample").get(0).size());
+
+        final var missing = new java.util.LinkedHashMap<>(scopes);
+        missing.remove(scopes.keySet().iterator().next());
+        assertEquals(
+                "QUAL_VERIFIER_RESULT_BOUND",
+                assertThrows(
+                                IllegalArgumentException.class,
+                                () ->
+                                        new QualificationScenarioVerifier.Result(
+                                                missing, outputs, selected, 0))
+                        .getMessage());
     }
 }

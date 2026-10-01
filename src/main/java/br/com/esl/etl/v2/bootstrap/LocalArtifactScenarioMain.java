@@ -21,6 +21,17 @@ public final class LocalArtifactScenarioMain {
     }
 
     public static RuntimeExitCategory run(final String[] arguments, final PrintStream output) {
+        return run(arguments, output, new SqlSession()::execute);
+    }
+
+    @FunctionalInterface
+    interface ScenarioCommand {
+        boolean execute(LocalArtifactScenario scenario, CancellationToken token, PrintStream output)
+                throws Exception;
+    }
+
+    static RuntimeExitCategory run(
+            final String[] arguments, final PrintStream output, final ScenarioCommand command) {
         try {
             if (arguments.length != 5
                     || !"run".equals(arguments[0])
@@ -40,37 +51,7 @@ public final class LocalArtifactScenarioMain {
                     };
             final var scenario =
                     new LocalArtifactScenario(Path.of(arguments[2]), Path.of(arguments[4]), token);
-            final boolean passed;
-            try (var session = ColetaTemporalLaboratorySession.openFromEnvironment()) {
-                session.controlStatements(30, 100000);
-                final var result = scenario.execute(session, token);
-                for (final var comparison : result.outputs()) {
-                    output.printf(
-                            "LOCAL_SCENARIO_COMPARE contract=%s expected=%d actual=%d differences=%d state=%s%n",
-                            comparison.contract(),
-                            comparison.expectedRows(),
-                            comparison.observedRows(),
-                            comparison.differences(),
-                            comparison.gate());
-                    for (final var sample : comparison.sample()) {
-                        output.printf(
-                                "LOCAL_SCENARIO_DIFF contract=%s row=%d column=%d kind=%s%n",
-                                comparison.contract(),
-                                sample.row(),
-                                sample.ordinal(),
-                                sample.kind());
-                    }
-                }
-                passed = result.selected().state() == QualificationGate.State.PASS_LOCAL;
-                for (final var preview : result.sweepPreview()) {
-                    output.printf(
-                            "LOCAL_SCENARIO_SWEEP responsibility=%s disposition=%s%n",
-                            preview.responsibility().id(), preview.assessment().disposition());
-                }
-                output.printf(
-                        "LOCAL_SCENARIO_FACT_GRAINS count=5 state=PASS_LOCAL scopes=%d%n",
-                        result.scopes().size());
-            }
+            final boolean passed = command.execute(scenario, token, output);
             output.println("LOCAL_SCENARIO_ROLLBACK_CONFIRMED");
             return passed ? RuntimeExitCategory.SUCCESS : RuntimeExitCategory.SOURCE_DQ;
         } catch (final ResilienceCancelledException failure) {
@@ -83,5 +64,46 @@ public final class LocalArtifactScenarioMain {
             output.println("LOCAL_SCENARIO_INPUT_OR_EXECUTION_REJECTED");
             return RuntimeExitCategory.CONFIG_AUTH;
         }
+    }
+
+    private static final class SqlSession {
+        private boolean execute(
+                final LocalArtifactScenario scenario,
+                final CancellationToken token,
+                final PrintStream output)
+                throws Exception {
+            try (var session = ColetaTemporalLaboratorySession.openFromEnvironment()) {
+                session.controlStatements(30, 100000);
+                final var result = scenario.execute(session, token);
+                printResult(result, output);
+                return result.selected().state() == QualificationGate.State.PASS_LOCAL;
+            }
+        }
+    }
+
+    static void printResult(
+            final QualificationScenarioVerifier.Result result, final PrintStream output) {
+        for (final var comparison : result.outputs()) {
+            output.printf(
+                    "LOCAL_SCENARIO_COMPARE contract=%s expected=%d actual=%d differences=%d state=%s%n",
+                    comparison.contract(),
+                    comparison.expectedRows(),
+                    comparison.observedRows(),
+                    comparison.differences(),
+                    comparison.gate());
+            for (final var sample : comparison.sample()) {
+                output.printf(
+                        "LOCAL_SCENARIO_DIFF contract=%s row=%d column=%d kind=%s%n",
+                        comparison.contract(), sample.row(), sample.ordinal(), sample.kind());
+            }
+        }
+        for (final var preview : result.sweepPreview()) {
+            output.printf(
+                    "LOCAL_SCENARIO_SWEEP responsibility=%s disposition=%s%n",
+                    preview.responsibility().id(), preview.assessment().disposition());
+        }
+        output.printf(
+                "LOCAL_SCENARIO_FACT_GRAINS count=5 state=PASS_LOCAL scopes=%d%n",
+                result.scopes().size());
     }
 }

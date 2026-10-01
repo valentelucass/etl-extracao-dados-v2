@@ -406,25 +406,12 @@ public final class DeclaredSqlOracles {
                         cycle.intent().mat04(),
                         "MAT05",
                         cycle.intent().mat05()));
-        try (var connection = session.getConnection();
-                var sql =
-                        connection.prepareStatement(
-                                "SELECT invoice_receipt,revenue_receipt FROM recon.expansion_lab_partition"
-                                        + " WHERE partition_id=? AND run_id=?")) {
-            sql.setQueryTimeout(10);
-            sql.setString(1, cycle.expanded().partition().toString());
-            sql.setString(2, run.expansion().toString());
-            try (var row = sql.executeQuery()) {
-                if (!row.next()) {
-                    throw new SQLException("INTEGRAL_ORACLE_PARTITION_MISSING");
-                }
-                ids.put("PARTITION_INVOICE", UUID.fromString(row.getString(1)));
-                ids.put("PARTITION_REVENUE", UUID.fromString(row.getString(2)));
-                if (row.next()) {
-                    throw new SQLException("INTEGRAL_ORACLE_PARTITION_AMBIGUOUS");
-                }
-            }
-        }
+        new SqlPartitionReceipts().read(session, run, cycle, ids);
+        return expectedMonitorRows(ids, priorCycles);
+    }
+
+    List<QualificationMonitoring.Expectation> expectedMonitorRows(
+            final Map<String, UUID> ids, final int priorCycles) {
         final var declarations = new ArrayList<QualificationMonitoring.Expectation>();
         for (final var row : monitors) {
             declarations.add(
@@ -440,6 +427,35 @@ public final class DeclaredSqlOracles {
                             row.state()));
         }
         return List.copyOf(declarations);
+    }
+
+    private static final class SqlPartitionReceipts {
+        private void read(
+                final ColetaTemporalLaboratorySession session,
+                final AnalyticScenarioRuntime.Run run,
+                final AnalyticScenarioRuntime.Cycle cycle,
+                final Map<String, UUID> ids)
+                throws SQLException {
+            try (var connection = session.getConnection();
+                    var sql =
+                            connection.prepareStatement(
+                                    "SELECT invoice_receipt,revenue_receipt FROM recon.expansion_lab_partition"
+                                            + " WHERE partition_id=? AND run_id=?")) {
+                sql.setQueryTimeout(10);
+                sql.setString(1, cycle.expanded().partition().toString());
+                sql.setString(2, run.expansion().toString());
+                try (var row = sql.executeQuery()) {
+                    if (!row.next()) {
+                        throw new SQLException("INTEGRAL_ORACLE_PARTITION_MISSING");
+                    }
+                    ids.put("PARTITION_INVOICE", UUID.fromString(row.getString(1)));
+                    ids.put("PARTITION_REVENUE", UUID.fromString(row.getString(2)));
+                    if (row.next()) {
+                        throw new SQLException("INTEGRAL_ORACLE_PARTITION_AMBIGUOUS");
+                    }
+                }
+            }
+        }
     }
 
     public Map<String, Long> factCandidates() {

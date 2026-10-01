@@ -3,6 +3,7 @@ package br.com.esl.etl.v2.plataforma.persistencia.expansao;
 import br.com.esl.etl.v2.plataforma.controle.ExecutionMode;
 import br.com.esl.etl.v2.plataforma.expansao.ExpansionPolicy;
 import br.com.esl.etl.v2.plataforma.fonte.dataexport.DataExportTemplate;
+import br.com.esl.etl.v2.plataforma.persistencia.JdbcStatementEvidence;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.Clock;
@@ -98,7 +99,7 @@ public final class JdbcExpansionLaboratory {
                 statement.setString(4, release.contractFingerprint().sha256());
                 statement.addBatch();
             }
-            statement.executeBatch();
+            JdbcStatementEvidence.contractBatch(statement);
         }
     }
 

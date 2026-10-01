@@ -309,364 +309,400 @@ public final class DeclaredAnalyticSupport {
             final Clock clock,
             final CancellationToken token)
             throws SQLException, IOException {
-        verifyFiles(token);
-        final var counts = new LinkedHashMap<String, Integer>();
-        for (final var kind : KINDS) {
-            int count = 0;
-            for (final var file : batches.get(kind)) {
-                final var rows = read(file);
-                for (int offset = 0; offset < rows.size(); offset += 16) {
-                    token.throwIfCancellationRequested();
-                    final var batch = new ArrayList<JsonNode>(16);
-                    for (int index = offset; index < Math.min(offset + 16, rows.size()); index++) {
-                        batch.add(rows.get(index));
+        new SqlApply()
+                .apply(session, run, expansion, relationalRun, relationalFreight, clock, token);
+    }
+
+    private final class SqlApply {
+        void apply(
+                final ColetaTemporalLaboratorySession session,
+                final UUID run,
+                final UUID expansion,
+                final UUID relationalRun,
+                final UUID relationalFreight,
+                final Clock clock,
+                final CancellationToken token)
+                throws SQLException, IOException {
+            verifyFiles(token);
+            final var counts = new LinkedHashMap<String, Integer>();
+            for (final var kind : KINDS) {
+                int count = 0;
+                for (final var file : batches.get(kind)) {
+                    final var rows = read(file);
+                    for (int offset = 0; offset < rows.size(); offset += 16) {
+                        token.throwIfCancellationRequested();
+                        final var batch = new ArrayList<JsonNode>(16);
+                        for (int index = offset;
+                                index < Math.min(offset + 16, rows.size());
+                                index++) {
+                            batch.add(rows.get(index));
+                        }
+                        applyBatch(
+                                session,
+                                run,
+                                expansion,
+                                relationalRun,
+                                relationalFreight,
+                                clock,
+                                kind,
+                                batch,
+                                token);
+                        count += batch.size();
                     }
-                    applyBatch(
-                            session,
-                            run,
-                            expansion,
-                            relationalRun,
-                            relationalFreight,
-                            clock,
-                            kind,
-                            batch,
-                            token);
-                    count += batch.size();
+                }
+                if ("relational".equals(kind)) {
+                    // The pinned integral supplement declares complete MC sets for included
+                    // origins.
+                    // Declare only after every batch; ordinary capture/bind remains partial
+                    // evidence.
+                    new JdbcRelationalLaboratory(session, clock)
+                            .declareCompleteMcSets(relationalRun, revision, token);
+                }
+                counts.put(kind, count);
+            }
+            // Exact coverage; a supplied row must resolve to one current source and every required
+            // source needs its own row.
+            for (final var entry :
+                    Map.of(
+                                    "financial",
+                                    "FRETE",
+                                    "freight",
+                                    "FRETE",
+                                    "collections",
+                                    "COL",
+                                    "manifestStates",
+                                    "MAN",
+                                    "compositions",
+                                    "MAN")
+                            .entrySet()) {
+                try (var connection = session.getConnection();
+                        var sql =
+                                connection.prepareStatement(
+                                        "SELECT COUNT(DISTINCT source_key) FROM core.analytic_lab_source_current"
+                                                + " WHERE run_id=? AND entity=? AND usable=1")) {
+                    sql.setQueryTimeout(10);
+                    sql.setString(1, run.toString());
+                    sql.setString(2, entry.getValue());
+                    try (var rows = sql.executeQuery()) {
+                        if (!rows.next() || rows.getInt(1) != counts.get(entry.getKey())) {
+                            throw new SQLException(
+                                    "INTEGRAL_SUPPORT_SOURCE_COVERAGE_" + entry.getKey());
+                        }
+                    }
                 }
             }
-            if ("relational".equals(kind)) {
-                // The pinned integral supplement declares complete MC sets for included origins.
-                // Declare only after every batch; ordinary capture/bind remains partial evidence.
-                new JdbcRelationalLaboratory(session, clock)
-                        .declareCompleteMcSets(relationalRun, revision, token);
-            }
-            counts.put(kind, count);
-        }
-        // Exact coverage; a supplied row must resolve to one current source and every required
-        // source needs its own row.
-        for (final var entry :
-                Map.of(
-                                "financial",
-                                "FRETE",
-                                "freight",
-                                "FRETE",
-                                "collections",
-                                "COL",
-                                "manifestStates",
-                                "MAN",
-                                "compositions",
-                                "MAN")
-                        .entrySet()) {
             try (var connection = session.getConnection();
                     var sql =
                             connection.prepareStatement(
-                                    "SELECT COUNT(DISTINCT source_key) FROM core.analytic_lab_source_current"
-                                            + " WHERE run_id=? AND entity=? AND usable=1")) {
+                                    "SELECT COUNT_BIG(*) FROM core.expansion_lab_current_input WHERE run_id=? AND vertical='FAT'")) {
                 sql.setQueryTimeout(10);
-                sql.setString(1, run.toString());
-                sql.setString(2, entry.getValue());
+                sql.setString(1, expansion.toString());
                 try (var rows = sql.executeQuery()) {
-                    if (!rows.next() || rows.getInt(1) != counts.get(entry.getKey())) {
-                        throw new SQLException(
-                                "INTEGRAL_SUPPORT_SOURCE_COVERAGE_" + entry.getKey());
+                    if (!rows.next() || rows.getLong(1) != counts.get("fiscal")) {
+                        throw new SQLException("INTEGRAL_SUPPORT_FISCAL_COVERAGE");
                     }
                 }
             }
         }
-        try (var connection = session.getConnection();
-                var sql =
-                        connection.prepareStatement(
-                                "SELECT COUNT_BIG(*) FROM core.expansion_lab_current_input WHERE run_id=? AND vertical='FAT'")) {
-            sql.setQueryTimeout(10);
-            sql.setString(1, expansion.toString());
-            try (var rows = sql.executeQuery()) {
-                if (!rows.next() || rows.getLong(1) != counts.get("fiscal")) {
-                    throw new SQLException("INTEGRAL_SUPPORT_FISCAL_COVERAGE");
-                }
-            }
-        }
-    }
 
-    private void applyBatch(
-            final ColetaTemporalLaboratorySession session,
-            final UUID run,
-            final UUID expansion,
-            final UUID relationalRun,
-            final UUID relationalFreight,
-            final Clock clock,
-            final String kind,
-            final List<JsonNode> batch,
-            final CancellationToken token)
-            throws SQLException {
-        final var sources = sources(session, run, kind, batch);
-        switch (kind) {
-            case "financial" -> {
-                // Financial terms have already reached the expansion adapter. The bounded lookup
-                // above proves that every declared term has a captured current source.
-            }
-            case "dimensions" -> {
-                final var bindings = new ArrayList<AnalyticDimensionBinding>(batch.size());
-                for (final var row : batch) {
-                    bindings.add(
-                            new AnalyticDimensionBinding(
-                                    AnalyticDimensionBinding.Entity.valueOf(text(row, "entity")),
-                                    text(row, "sourceKey"),
-                                    sources.get(
-                                            new SourceIdentity(
-                                                    text(row, "entity"), text(row, "sourceKey"))),
-                                    AnalyticDimensionBinding.Role.valueOf(text(row, "role")),
-                                    text(row, "entityKey"),
-                                    revision,
-                                    LocalDate.parse(text(row, "from")),
-                                    LocalDate.parse(text(row, "toExclusive")),
-                                    QualificationJson.flag(row, "active"),
-                                    nullable(row, "previousEntityKey"),
-                                    text(row, "evidence")));
-                }
-                new JdbcAnalyticDimensions(session).bindBatch(run, bindings, token);
-            }
-            case "relational" -> {
-                final var bindings = new ArrayList<RelationalBinding>(batch.size());
-                for (final var row : batch) {
-                    bindings.add(relational(row));
-                }
-                new JdbcRelationalLaboratory(session, clock)
-                        .bindBatch(relationalRun, bindings, token);
-            }
-            case "freight" -> {
-                final var executions =
-                        new LinkedHashMap<UUID, List<FreightSupplementObservation>>();
-                for (final var row : batch) {
-                    final var execution =
-                            sources.get(new SourceIdentity("FRETE", text(row, "sourceKey")));
-                    executions
-                            .computeIfAbsent(execution, ignored -> new ArrayList<>())
-                            .add(
-                                    new FreightSupplementObservation(
-                                            text(row, "sourceKey"),
-                                            revision,
-                                            new FreightAnalyticAttributesMapper()
-                                                    .map(row.path("attributes")),
-                                            text(row, "evidence")));
-                }
-                final var repository = new JdbcFreightAnalyticAttributes(session);
-                for (final var execution : executions.entrySet()) {
-                    token.throwIfCancellationRequested();
-                    repository.captureBatch(run, execution.getKey(), execution.getValue(), token);
-                }
-            }
-            case "collections" -> {
-                final var bindings =
-                        new ArrayList<JdbcAnalyticCollectionSupplements.Binding>(batch.size());
-                for (final var row : batch) {
-                    bindings.add(
-                            new JdbcAnalyticCollectionSupplements.Binding(
-                                    text(row, "sourceKey"),
-                                    sources.get(new SourceIdentity("COL", text(row, "sourceKey"))),
-                                    revision,
-                                    new AnalyticCollectionSupplementMapper()
-                                            .map(row.path("attributes")),
-                                    nullable(row, "cancellationUserKey"),
-                                    nullable(row, "destroyUserKey")));
-                }
-                new JdbcAnalyticCollectionSupplements(session).bind(run, bindings, token);
-            }
-            case "manifestStates" -> {
-                final var states = new ArrayList<AnalyticManifestState>(batch.size());
-                for (final var row : batch) {
-                    states.add(
-                            new AnalyticManifestState(
-                                    text(row, "sourceKey"),
-                                    sources.get(new SourceIdentity("MAN", text(row, "sourceKey"))),
-                                    revision,
-                                    QualificationJson.flag(row, "active"),
-                                    QualificationJson.flag(row, "reactivate")));
-                }
-                new JdbcAnalyticManifestState(session).bindBatch(run, states, token);
-            }
-            case "freightRelations" -> {
-                final var bindings = new ArrayList<AnalyticFreightRelationBinding>(batch.size());
-                for (final var row : batch) {
-                    final var relationKind =
-                            AnalyticFreightRelationBinding.Kind.valueOf(text(row, "kind"));
-                    final var origin =
-                            relationKind == AnalyticFreightRelationBinding.Kind.DIRECT
-                                    ? sources.get(new SourceIdentity("MAN", text(row, "originKey")))
-                                    : relationalFreight;
-                    bindings.add(
-                            new AnalyticFreightRelationBinding(
-                                    relationKind,
-                                    text(row, "originKey"),
-                                    origin,
-                                    text(row, "freightKey"),
-                                    sources.get(
-                                            new SourceIdentity("FRETE", text(row, "freightKey"))),
-                                    revision,
-                                    QualificationJson.flag(row, "active"),
-                                    nullable(row, "previousFreightKey")));
-                }
-                new JdbcAnalyticFreightRelations(session).bindBatch(run, bindings, token);
-            }
-            case "compositions" -> {
-                final var declarations =
-                        new ArrayList<JdbcAnalyticManifestCompositions.Declaration>(batch.size());
-                for (final var row : batch) {
-                    declarations.add(
-                            new JdbcAnalyticManifestCompositions.Declaration(
-                                    text(row, "sourceKey"),
-                                    sources.get(new SourceIdentity("MAN", text(row, "sourceKey"))),
-                                    revision,
-                                    QualificationJson.number(row, "expectedFreights", 0, 10000)));
-                }
-                new JdbcAnalyticManifestCompositions(session).seal(run, declarations, token);
-            }
-            case "fiscal" -> applyFiscal(session, run, expansion, batch, token);
-            default -> throw new IllegalArgumentException("INTEGRAL_SUPPORT_KIND");
-        }
-    }
-
-    private record SourceIdentity(String entity, String key) {}
-
-    private static Map<SourceIdentity, UUID> sources(
-            final ColetaTemporalLaboratorySession session,
-            final UUID run,
-            final String kind,
-            final List<JsonNode> batch)
-            throws SQLException {
-        final var requested = new java.util.LinkedHashSet<SourceIdentity>();
-        for (final var row : batch) {
+        private void applyBatch(
+                final ColetaTemporalLaboratorySession session,
+                final UUID run,
+                final UUID expansion,
+                final UUID relationalRun,
+                final UUID relationalFreight,
+                final Clock clock,
+                final String kind,
+                final List<JsonNode> batch,
+                final CancellationToken token)
+                throws SQLException {
+            final var sources = sources(session, run, kind, batch);
             switch (kind) {
-                case "financial", "freight" ->
-                        requested.add(new SourceIdentity("FRETE", text(row, "sourceKey")));
-                case "dimensions" ->
-                        requested.add(
-                                new SourceIdentity(text(row, "entity"), text(row, "sourceKey")));
-                case "collections" ->
-                        requested.add(new SourceIdentity("COL", text(row, "sourceKey")));
-                case "manifestStates", "compositions" ->
-                        requested.add(new SourceIdentity("MAN", text(row, "sourceKey")));
-                case "freightRelations" -> {
-                    requested.add(new SourceIdentity("FRETE", text(row, "freightKey")));
-                    if ("DIRECT".equals(text(row, "kind"))) {
-                        requested.add(new SourceIdentity("MAN", text(row, "originKey")));
+                case "financial" -> {
+                    // Financial terms have already reached the expansion adapter. The bounded
+                    // lookup
+                    // above proves that every declared term has a captured current source.
+                }
+                case "dimensions" -> {
+                    final var bindings = new ArrayList<AnalyticDimensionBinding>(batch.size());
+                    for (final var row : batch) {
+                        bindings.add(
+                                new AnalyticDimensionBinding(
+                                        AnalyticDimensionBinding.Entity.valueOf(
+                                                text(row, "entity")),
+                                        text(row, "sourceKey"),
+                                        sources.get(
+                                                new SourceIdentity(
+                                                        text(row, "entity"),
+                                                        text(row, "sourceKey"))),
+                                        AnalyticDimensionBinding.Role.valueOf(text(row, "role")),
+                                        text(row, "entityKey"),
+                                        revision,
+                                        LocalDate.parse(text(row, "from")),
+                                        LocalDate.parse(text(row, "toExclusive")),
+                                        QualificationJson.flag(row, "active"),
+                                        nullable(row, "previousEntityKey"),
+                                        text(row, "evidence")));
+                    }
+                    new JdbcAnalyticDimensions(session).bindBatch(run, bindings, token);
+                }
+                case "relational" -> {
+                    final var bindings = new ArrayList<RelationalBinding>(batch.size());
+                    for (final var row : batch) {
+                        bindings.add(relational(row));
+                    }
+                    new JdbcRelationalLaboratory(session, clock)
+                            .bindBatch(relationalRun, bindings, token);
+                }
+                case "freight" -> {
+                    final var executions =
+                            new LinkedHashMap<UUID, List<FreightSupplementObservation>>();
+                    for (final var row : batch) {
+                        final var execution =
+                                sources.get(new SourceIdentity("FRETE", text(row, "sourceKey")));
+                        executions
+                                .computeIfAbsent(execution, ignored -> new ArrayList<>())
+                                .add(
+                                        new FreightSupplementObservation(
+                                                text(row, "sourceKey"),
+                                                revision,
+                                                new FreightAnalyticAttributesMapper()
+                                                        .map(row.path("attributes")),
+                                                text(row, "evidence")));
+                    }
+                    final var repository = new JdbcFreightAnalyticAttributes(session);
+                    for (final var execution : executions.entrySet()) {
+                        token.throwIfCancellationRequested();
+                        repository.captureBatch(
+                                run, execution.getKey(), execution.getValue(), token);
                     }
                 }
-                default -> {
-                    // Relational bindings and fiscal attributes use their own typed identities.
+                case "collections" -> {
+                    final var bindings =
+                            new ArrayList<JdbcAnalyticCollectionSupplements.Binding>(batch.size());
+                    for (final var row : batch) {
+                        bindings.add(
+                                new JdbcAnalyticCollectionSupplements.Binding(
+                                        text(row, "sourceKey"),
+                                        sources.get(
+                                                new SourceIdentity("COL", text(row, "sourceKey"))),
+                                        revision,
+                                        new AnalyticCollectionSupplementMapper()
+                                                .map(row.path("attributes")),
+                                        nullable(row, "cancellationUserKey"),
+                                        nullable(row, "destroyUserKey")));
+                    }
+                    new JdbcAnalyticCollectionSupplements(session).bind(run, bindings, token);
                 }
+                case "manifestStates" -> {
+                    final var states = new ArrayList<AnalyticManifestState>(batch.size());
+                    for (final var row : batch) {
+                        states.add(
+                                new AnalyticManifestState(
+                                        text(row, "sourceKey"),
+                                        sources.get(
+                                                new SourceIdentity("MAN", text(row, "sourceKey"))),
+                                        revision,
+                                        QualificationJson.flag(row, "active"),
+                                        QualificationJson.flag(row, "reactivate")));
+                    }
+                    new JdbcAnalyticManifestState(session).bindBatch(run, states, token);
+                }
+                case "freightRelations" -> {
+                    final var bindings =
+                            new ArrayList<AnalyticFreightRelationBinding>(batch.size());
+                    for (final var row : batch) {
+                        final var relationKind =
+                                AnalyticFreightRelationBinding.Kind.valueOf(text(row, "kind"));
+                        final var origin =
+                                relationKind == AnalyticFreightRelationBinding.Kind.DIRECT
+                                        ? sources.get(
+                                                new SourceIdentity("MAN", text(row, "originKey")))
+                                        : relationalFreight;
+                        bindings.add(
+                                new AnalyticFreightRelationBinding(
+                                        relationKind,
+                                        text(row, "originKey"),
+                                        origin,
+                                        text(row, "freightKey"),
+                                        sources.get(
+                                                new SourceIdentity(
+                                                        "FRETE", text(row, "freightKey"))),
+                                        revision,
+                                        QualificationJson.flag(row, "active"),
+                                        nullable(row, "previousFreightKey")));
+                    }
+                    new JdbcAnalyticFreightRelations(session).bindBatch(run, bindings, token);
+                }
+                case "compositions" -> {
+                    final var declarations =
+                            new ArrayList<JdbcAnalyticManifestCompositions.Declaration>(
+                                    batch.size());
+                    for (final var row : batch) {
+                        declarations.add(
+                                new JdbcAnalyticManifestCompositions.Declaration(
+                                        text(row, "sourceKey"),
+                                        sources.get(
+                                                new SourceIdentity("MAN", text(row, "sourceKey"))),
+                                        revision,
+                                        QualificationJson.number(
+                                                row, "expectedFreights", 0, 10000)));
+                    }
+                    new JdbcAnalyticManifestCompositions(session).seal(run, declarations, token);
+                }
+                case "fiscal" -> applyFiscal(session, run, expansion, batch, token);
+                default -> throw new IllegalArgumentException("INTEGRAL_SUPPORT_KIND");
             }
         }
-        final var result = new LinkedHashMap<SourceIdentity, UUID>();
-        if (requested.isEmpty()) {
+
+        private record SourceIdentity(String entity, String key) {}
+
+        private Map<SourceIdentity, UUID> sources(
+                final ColetaTemporalLaboratorySession session,
+                final UUID run,
+                final String kind,
+                final List<JsonNode> batch)
+                throws SQLException {
+            final var requested = new java.util.LinkedHashSet<SourceIdentity>();
+            for (final var row : batch) {
+                switch (kind) {
+                    case "financial", "freight" ->
+                            requested.add(new SourceIdentity("FRETE", text(row, "sourceKey")));
+                    case "dimensions" ->
+                            requested.add(
+                                    new SourceIdentity(
+                                            text(row, "entity"), text(row, "sourceKey")));
+                    case "collections" ->
+                            requested.add(new SourceIdentity("COL", text(row, "sourceKey")));
+                    case "manifestStates", "compositions" ->
+                            requested.add(new SourceIdentity("MAN", text(row, "sourceKey")));
+                    case "freightRelations" -> {
+                        requested.add(new SourceIdentity("FRETE", text(row, "freightKey")));
+                        if ("DIRECT".equals(text(row, "kind"))) {
+                            requested.add(new SourceIdentity("MAN", text(row, "originKey")));
+                        }
+                    }
+                    default -> {
+                        // Relational bindings and fiscal attributes use their own typed identities.
+                    }
+                }
+            }
+            final var result = new LinkedHashMap<SourceIdentity, UUID>();
+            if (requested.isEmpty()) {
+                return result;
+            }
+            final var json = JsonNodeFactory.instance.arrayNode();
+            for (final var identity : requested) {
+                json.addObject().put("entity", identity.entity()).put("sourceKey", identity.key());
+            }
+            // A technical MAN observation can be a no-op. Its lifecycle must bind the
+            // preserved current snapshot, while other supplements retain their own source contract.
+            final String lookup =
+                    kind.equals("manifestStates")
+                            ? "SELECT q.entity,q.source_key,s.execution_id FROM OPENJSON(?)"
+                                    + " WITH(entity varchar(16) '$.entity',source_key nvarchar(256) '$.sourceKey') q"
+                                    + " LEFT JOIN core.analytic_manifest_current c ON c.run_id=? AND c.source_key=q.source_key"
+                                    + " LEFT JOIN core.analytic_manifest_snapshot s ON s.snapshot_id=c.snapshot_id AND s.run_id=c.run_id"
+                            : "SELECT DISTINCT q.entity,q.source_key,s.execution_id FROM OPENJSON(?)"
+                                    + " WITH(entity varchar(16) '$.entity',source_key nvarchar(256) '$.sourceKey') q"
+                                    + " LEFT JOIN core.analytic_lab_source_current s ON s.run_id=?"
+                                    + " AND s.entity=q.entity AND s.source_key=q.source_key AND s.usable=1";
+            try (var connection = session.getConnection();
+                    var sql = connection.prepareStatement(lookup)) {
+                sql.setQueryTimeout(10);
+                sql.setFetchSize(16);
+                sql.setMaxRows(33);
+                sql.setNString(1, json.toString());
+                sql.setString(2, run.toString());
+                try (var rows = sql.executeQuery()) {
+                    while (rows.next()) {
+                        final var identity =
+                                new SourceIdentity(rows.getString(1), rows.getString(2));
+                        final var execution = rows.getString(3);
+                        if (execution == null) {
+                            throw new SQLException(
+                                    "INTEGRAL_SUPPORT_SOURCE_MISSING_" + identity.entity());
+                        }
+                        if (!requested.contains(identity)
+                                || result.putIfAbsent(identity, UUID.fromString(execution))
+                                        != null) {
+                            throw new SQLException("INTEGRAL_SUPPORT_SOURCE_AMBIGUOUS");
+                        }
+                    }
+                }
+            }
+            if (result.size() != requested.size()) {
+                throw new SQLException("INTEGRAL_SUPPORT_SOURCE_COVERAGE");
+            }
             return result;
         }
-        final var json = JsonNodeFactory.instance.arrayNode();
-        for (final var identity : requested) {
-            json.addObject().put("entity", identity.entity()).put("sourceKey", identity.key());
-        }
-        // A technical MAN observation can be a no-op. Its lifecycle must bind the
-        // preserved current snapshot, while other supplements retain their own source contract.
-        final String lookup =
-                kind.equals("manifestStates")
-                        ? "SELECT q.entity,q.source_key,s.execution_id FROM OPENJSON(?)"
-                                + " WITH(entity varchar(16) '$.entity',source_key nvarchar(256) '$.sourceKey') q"
-                                + " LEFT JOIN core.analytic_manifest_current c ON c.run_id=? AND c.source_key=q.source_key"
-                                + " LEFT JOIN core.analytic_manifest_snapshot s ON s.snapshot_id=c.snapshot_id AND s.run_id=c.run_id"
-                        : "SELECT DISTINCT q.entity,q.source_key,s.execution_id FROM OPENJSON(?)"
-                                + " WITH(entity varchar(16) '$.entity',source_key nvarchar(256) '$.sourceKey') q"
-                                + " LEFT JOIN core.analytic_lab_source_current s ON s.run_id=?"
-                                + " AND s.entity=q.entity AND s.source_key=q.source_key AND s.usable=1";
-        try (var connection = session.getConnection();
-                var sql = connection.prepareStatement(lookup)) {
-            sql.setQueryTimeout(10);
-            sql.setFetchSize(16);
-            sql.setMaxRows(33);
-            sql.setNString(1, json.toString());
-            sql.setString(2, run.toString());
-            try (var rows = sql.executeQuery()) {
-                while (rows.next()) {
-                    final var identity = new SourceIdentity(rows.getString(1), rows.getString(2));
-                    final var execution = rows.getString(3);
-                    if (execution == null) {
-                        throw new SQLException(
-                                "INTEGRAL_SUPPORT_SOURCE_MISSING_" + identity.entity());
-                    }
-                    if (!requested.contains(identity)
-                            || result.putIfAbsent(identity, UUID.fromString(execution)) != null) {
-                        throw new SQLException("INTEGRAL_SUPPORT_SOURCE_AMBIGUOUS");
-                    }
-                }
-            }
-        }
-        if (result.size() != requested.size()) {
-            throw new SQLException("INTEGRAL_SUPPORT_SOURCE_COVERAGE");
-        }
-        return result;
-    }
 
-    private void applyFiscal(
-            final ColetaTemporalLaboratorySession session,
-            final UUID run,
-            final UUID expansion,
-            final List<JsonNode> batch,
-            final CancellationToken token)
-            throws SQLException {
-        final var json = JsonNodeFactory.instance.arrayNode();
-        for (int index = 0; index < batch.size(); index++) {
-            final var row = batch.get(index);
-            final var root = key(row.path("root"));
-            final var part = key(row.path("part"));
-            final var component = key(row.path("component"));
-            json.addObject()
-                    .put("ordinal", index)
-                    .put("rootType", root.type().name())
-                    .put("rootKey", root.value())
-                    .put("partType", part.type().name())
-                    .put("partKey", part.value())
-                    .put("componentType", component.type().name())
-                    .put("componentKey", component.value());
-        }
-        final var attributes = new LinkedHashMap<Integer, AnalyticFiscalAttribute>();
-        try (var connection = session.getConnection();
-                var sql =
-                        connection.prepareStatement(
-                                "SELECT q.ordinal,i.component_id,i.execution_id FROM OPENJSON(?) WITH("
-                                        + "ordinal int '$.ordinal',root_type varchar(16) '$.rootType',"
-                                        + "root_key nvarchar(256) '$.rootKey',part_type varchar(16) '$.partType',"
-                                        + "part_key nvarchar(256) '$.partKey',component_type varchar(16) '$.componentType',"
-                                        + "component_key nvarchar(256) '$.componentKey') q"
-                                        + " JOIN core.expansion_lab_root r ON r.root_type=q.root_type AND r.root_key=q.root_key"
-                                        + " JOIN core.expansion_lab_component c ON c.root_id=r.root_id"
-                                        + " AND c.part_type=q.part_type AND c.part_key=q.part_key"
-                                        + " AND c.component_type=q.component_type AND c.component_key=q.component_key"
-                                        + " JOIN core.expansion_lab_current_input i ON i.component_id=c.component_id"
-                                        + " AND i.run_id=? AND i.vertical='FAT'")) {
-            sql.setQueryTimeout(10);
-            sql.setFetchSize(16);
-            sql.setMaxRows(17);
-            sql.setNString(1, json.toString());
-            sql.setString(2, expansion.toString());
-            try (var rows = sql.executeQuery()) {
-                while (rows.next()) {
-                    final int ordinal = rows.getInt(1);
-                    if (ordinal < 0 || ordinal >= batch.size() || attributes.containsKey(ordinal)) {
-                        throw new SQLException("INTEGRAL_FISCAL_SOURCE_AMBIGUOUS");
+        private void applyFiscal(
+                final ColetaTemporalLaboratorySession session,
+                final UUID run,
+                final UUID expansion,
+                final List<JsonNode> batch,
+                final CancellationToken token)
+                throws SQLException {
+            final var json = JsonNodeFactory.instance.arrayNode();
+            for (int index = 0; index < batch.size(); index++) {
+                final var row = batch.get(index);
+                final var root = key(row.path("root"));
+                final var part = key(row.path("part"));
+                final var component = key(row.path("component"));
+                json.addObject()
+                        .put("ordinal", index)
+                        .put("rootType", root.type().name())
+                        .put("rootKey", root.value())
+                        .put("partType", part.type().name())
+                        .put("partKey", part.value())
+                        .put("componentType", component.type().name())
+                        .put("componentKey", component.value());
+            }
+            final var attributes = new LinkedHashMap<Integer, AnalyticFiscalAttribute>();
+            try (var connection = session.getConnection();
+                    var sql =
+                            connection.prepareStatement(
+                                    "SELECT q.ordinal,i.component_id,i.execution_id FROM OPENJSON(?) WITH("
+                                            + "ordinal int '$.ordinal',root_type varchar(16) '$.rootType',"
+                                            + "root_key nvarchar(256) '$.rootKey',part_type varchar(16) '$.partType',"
+                                            + "part_key nvarchar(256) '$.partKey',component_type varchar(16) '$.componentType',"
+                                            + "component_key nvarchar(256) '$.componentKey') q"
+                                            + " JOIN core.expansion_lab_root r ON r.root_type=q.root_type AND r.root_key=q.root_key"
+                                            + " JOIN core.expansion_lab_component c ON c.root_id=r.root_id"
+                                            + " AND c.part_type=q.part_type AND c.part_key=q.part_key"
+                                            + " AND c.component_type=q.component_type AND c.component_key=q.component_key"
+                                            + " JOIN core.expansion_lab_current_input i ON i.component_id=c.component_id"
+                                            + " AND i.run_id=? AND i.vertical='FAT'")) {
+                sql.setQueryTimeout(10);
+                sql.setFetchSize(16);
+                sql.setMaxRows(17);
+                sql.setNString(1, json.toString());
+                sql.setString(2, expansion.toString());
+                try (var rows = sql.executeQuery()) {
+                    while (rows.next()) {
+                        final int ordinal = rows.getInt(1);
+                        if (ordinal < 0
+                                || ordinal >= batch.size()
+                                || attributes.containsKey(ordinal)) {
+                            throw new SQLException("INTEGRAL_FISCAL_SOURCE_AMBIGUOUS");
+                        }
+                        attributes.put(
+                                ordinal,
+                                new AnalyticFiscalAttribute(
+                                        rows.getLong(2),
+                                        UUID.fromString(rows.getString(3)),
+                                        revision,
+                                        nullable(batch.get(ordinal), "nfseSeries")));
                     }
-                    attributes.put(
-                            ordinal,
-                            new AnalyticFiscalAttribute(
-                                    rows.getLong(2),
-                                    UUID.fromString(rows.getString(3)),
-                                    revision,
-                                    nullable(batch.get(ordinal), "nfseSeries")));
                 }
             }
+            if (attributes.size() != batch.size()) {
+                throw new SQLException("INTEGRAL_FISCAL_SOURCE_MISSING");
+            }
+            new JdbcAnalyticFiscalAttributes(session)
+                    .bindBatch(run, List.copyOf(attributes.values()), token);
         }
-        if (attributes.size() != batch.size()) {
-            throw new SQLException("INTEGRAL_FISCAL_SOURCE_MISSING");
-        }
-        new JdbcAnalyticFiscalAttributes(session)
-                .bindBatch(run, List.copyOf(attributes.values()), token);
     }
 
     private ExpansionFreightTerms terms(final JsonNode row) {

@@ -11,6 +11,7 @@ import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.sql.SQLException;
 import java.time.Instant;
 import java.util.UUID;
 
@@ -26,6 +27,10 @@ public final class QualificationWorker {
             final QualificationCampaign.Case item,
             final UUID nonce)
             throws Exception {
+        QualificationSqlOptIn.require(
+                Boolean.getBoolean("shadow.local.integration.enabled"),
+                Boolean.getBoolean("shadow.local.integration.profile.active"));
+        configuration.jdbcUrl();
         final var directory = files.attempt(item.id(), false);
         final var intent = QualificationJson.read(directory.resolve("intent.json"), 4096);
         QualificationJson.fields(
@@ -96,7 +101,8 @@ public final class QualificationWorker {
                     try {
                         report.put(
                                 "physicalColumns",
-                                new QualificationPhysicalMetadata().verify(session));
+                                new QualificationPhysicalMetadata(QualifiedPackage.SCHEMA_VERSION)
+                                        .verify(session));
                         final var result =
                                 new QualificationCaseExecutor(payload, configuration)
                                         .execute(
@@ -137,13 +143,7 @@ public final class QualificationWorker {
                     executionFailure = true;
                     state = QualificationGate.State.FAILED;
                     reason = "CASE_EXECUTION_EXCEPTION";
-                    report.put("failureClass", failure.getClass().getSimpleName());
-                    // The message is reduced to a closed diagnostic code, never raw SQL or driver
-                    // text.
-                    final String message = failure.getMessage();
-                    if (message != null && message.matches("[A-Z][A-Z0-9_]{1,80}")) {
-                        report.put("failureCode", message);
-                    }
+                    failureEvidence(report, failure);
                 }
             }
             if (!rollback) {
@@ -183,6 +183,28 @@ public final class QualificationWorker {
         QualificationControlFiles.atomic(
                 QualificationControlFiles.member(directory, "receipt.json"), receipt);
         return passed ? 0 : 2;
+    }
+
+    static void failureEvidence(final ObjectNode report, final Exception failure) {
+        report.put("failureClass", failure.getClass().getSimpleName());
+        // Only closed codes and a numeric SQL error reach the receipt; driver text stays private.
+        final String message = failure.getMessage();
+        if (message != null && message.matches("[A-Z][A-Z0-9_]{1,80}")) {
+            report.put("failureCode", message);
+        }
+        Throwable cause = failure.getCause();
+        for (int depth = 0; cause != null && depth < 8; depth++, cause = cause.getCause()) {
+            final String causeCode = cause.getMessage();
+            if (!report.has("failureCauseCode")
+                    && causeCode != null
+                    && causeCode.matches("[A-Z][A-Z0-9_]{1,80}")) {
+                report.put("failureCauseCode", causeCode);
+            }
+            if (cause instanceof SQLException sql && sql.getErrorCode() > 0) {
+                report.put("failureSqlNumber", sql.getErrorCode());
+                break;
+            }
+        }
     }
 
     private static ObjectNode handshake(

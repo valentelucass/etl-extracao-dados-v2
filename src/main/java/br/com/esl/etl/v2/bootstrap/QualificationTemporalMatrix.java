@@ -17,7 +17,6 @@ import br.com.esl.etl.v2.plataforma.persistencia.coletas.ColetaTemporalLaborator
 import br.com.esl.etl.v2.plataforma.persistencia.controle.JdbcSqlServerTemporalPlan;
 import br.com.esl.etl.v2.plataforma.persistencia.expansao.JdbcExpansionLaboratory;
 import br.com.esl.etl.v2.plataforma.persistencia.relacional.JdbcRelationalLaboratory;
-import br.com.esl.etl.v2.plataforma.qualificacao.QualificationJson;
 import br.com.esl.etl.v2.plataforma.relacional.RelationalCaptureContracts;
 import br.com.esl.etl.v2.plataforma.relacional.RelationalLaboratoryPolicy;
 import br.com.esl.etl.v2.plataforma.resiliencia.CancellationToken;
@@ -32,7 +31,6 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.ZoneOffset;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HexFormat;
 import java.util.List;
@@ -61,7 +59,7 @@ public final class QualificationTemporalMatrix {
     public ObjectNode execute() throws Exception {
         final var report = JsonNodeFactory.instance.objectNode();
         final var rows = report.putArray("workloads");
-        final var policies = policies();
+        final var policies = QualificationTemporalPolicyCatalog.policies();
         for (final var item : policies) {
             rows.add(isolated(() -> captureWorkload(item)));
         }
@@ -75,43 +73,6 @@ public final class QualificationTemporalMatrix {
         report.set("frontiers", isolated(() -> frontiers(base)));
         report.set("civilAndAdmission", isolated(() -> civilAndAdmission(base)));
         return report.put("passed", true).put("fixtureRecovery", "ROLLBACK_EACH_ISOLATED_PROOF");
-    }
-
-    private static List<RuntimeTemporalOperation> policies() throws Exception {
-        try (var stream =
-                QualificationTemporalMatrix.class.getResourceAsStream(
-                        "/analytic-laboratory/temporal-matrix.synthetic.json")) {
-            if (stream == null) {
-                throw new IllegalArgumentException("QUAL_TEMPORAL_MATRIX_MISSING");
-            }
-            final var bytes = stream.readNBytes(16385);
-            if (bytes.length > 16384) {
-                throw new IllegalArgumentException("QUAL_TEMPORAL_MATRIX_BOUND");
-            }
-            final var root = QualificationJson.parse(bytes, 16384);
-            QualificationJson.fields(root, "version", "origin", "workloads");
-            require(
-                    root.path("version").asText().equals("qualification-temporal-matrix-v1")
-                            && root.path("origin").asText().equals("CURRENT_FIVE_WORKLOAD_POLICIES")
-                            && root.path("workloads").size() == 5,
-                    "MATRIX_CONTRACT");
-            final var result = new ArrayList<RuntimeTemporalOperation>();
-            for (final var row : root.path("workloads")) {
-                QualificationJson.fields(row, "path", "sha256", "document");
-                require(
-                        row.path("path")
-                                        .asText()
-                                        .matches(
-                                                "config/laboratory/bloco5[45]-temporal-[a-z_]+\\.json")
-                                && row.path("sha256").asText().matches("[a-f0-9]{64}"),
-                        "MATRIX_ORIGIN");
-                result.add(new RuntimeTemporalOperation(row.get("document")));
-            }
-            require(
-                    result.stream().map(p -> p.workload).distinct().count() == 5,
-                    "MATRIX_DUPLICATE");
-            return List.copyOf(result);
-        }
     }
 
     private ObjectNode captureWorkload(final RuntimeTemporalOperation operation) throws Exception {

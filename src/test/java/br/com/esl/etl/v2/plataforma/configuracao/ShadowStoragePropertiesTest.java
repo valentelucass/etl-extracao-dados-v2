@@ -91,6 +91,50 @@ class ShadowStoragePropertiesTest {
     }
 
     @Test
+    void requiresExactShadowDatabaseSpellingBeforeAnyJdbcComposition() {
+        for (final String database :
+                new String[] {"ETL_\u017FISTEMA_V2_SHADOW", "etl_sistema_v2_shadow"}) {
+            final String jdbcUrl =
+                    "jdbc:sqlserver://localhost;databaseName="
+                            + database
+                            + ";integratedSecurity=true";
+            assertThrows(
+                    IllegalArgumentException.class,
+                    () ->
+                            ShadowStorageProperties.enabled(
+                                    ShadowStorageTargetKind.LOCAL_EPHEMERAL, jdbcUrl, null));
+        }
+    }
+
+    @Test
+    void rejectsUnicodeCaseFoldedJdbcPropertyName() {
+        final String jdbcUrl =
+                "jdbc:sqlserver://localhost;databaseName=ETL_SISTEMA_V2_SHADOW;"
+                        + "integratedSecurity=true;soc\u212AetTimeout=2000";
+
+        assertThrows(
+                IllegalArgumentException.class,
+                () ->
+                        ShadowStorageProperties.enabled(
+                                ShadowStorageTargetKind.LOCAL_EPHEMERAL, jdbcUrl, null));
+    }
+
+    @Test
+    void rejectsUnicodeCaseFoldedCertificateFlag() {
+        final String jdbcUrl =
+                "jdbc:sqlserver://localhost;databaseName=ETL_SISTEMA_V2_SHADOW;"
+                        + "integratedSecurity=true;encrypt=true;trustServerCertificate=fal\u017Fe";
+
+        assertThrows(
+                IllegalArgumentException.class,
+                () ->
+                        ShadowStorageProperties.enabled(
+                                ShadowStorageTargetKind.APPROVED_NON_PRODUCTION,
+                                jdbcUrl,
+                                "CHG-TEST-001"));
+    }
+
+    @Test
     void requiresAnApprovalReferenceForANonProductionApprovedTarget() {
         assertThrows(
                 IllegalStateException.class,

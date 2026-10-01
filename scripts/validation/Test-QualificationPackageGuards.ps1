@@ -50,6 +50,13 @@ function Expand([string]$file,[string]$name){
     Expand-QualificationPackage -Archive $file -ArchiveSha256 (Get-FileHash -LiteralPath $file).Hash.ToLowerInvariant() -Destination (Join-Path $attempt $name) -AllowedRoot $attempt
 }
 try{
+    $currentManifest=[ordered]@{};foreach($entry in $manifest.GetEnumerator()){$currentManifest[$entry.Key]=$entry.Value}
+    $currentManifest.schemaVersion=105
+    $currentBytes=$utf8.GetBytes(($currentManifest|ConvertTo-Json -Depth 8))
+    Check 'schema-v105-accepted' {Read-QualificationManifest $currentBytes (Get-QualificationByteHash $currentBytes)} 'ACCEPTED'
+    $currentManifest.schemaVersion=106
+    $futureBytes=$utf8.GetBytes(($currentManifest|ConvertTo-Json -Depth 8))
+    Check 'schema-v106-rejected' {Read-QualificationManifest $futureBytes (Get-QualificationByteHash $futureBytes)} 'QUAL_PACKAGE_COMPATIBILITY'
     $valid=Archive 'valid'
     Check 'valid-envelope-extraction' {Expand $valid 'valid extraction ação'} 'ACCEPTED'
     Check 'reused-destination' {Expand $valid 'valid extraction ação'} 'QUAL_EXTRACT_DESTINATION'

@@ -1,0 +1,29 @@
+# 0339 — P08/V105: DMV independente das 971 colunas publicadas
+
+- Data: 2026-09-29; anterior: [0338](0338-p08-v105-dmv-metadados-views-01-13-readonly.md).
+- Autoridade: Supervisor autorizou **um gate somente leitura** para descrever `SELECT *` das 19 views `pub.analytic_lab_sql_01`–`19` por `sys.dm_exec_describe_first_result_set`, com preflight, reserva e readback. Sem execução dos SELECTs de dados, DDL, JDBC, Flyway, smoke, restore ou acesso remoto/produtivo.
+- Estado: **DMV 971/971 e readback PASS no escopo de metadados; P08 ainda aberto.** FAIL 0336, as recusas pré-DMV 0338 e candidatos A/B foram preservados. Nenhuma migration, V105, baseline, manifesto ou snapshot foi editado.
+
+## Preparação e preflight
+
+O SQL privado `target/shadow-local-rebuild-20260928-01/p08-v105-0339-dmv-all.sql`, SHA-256 `E87907B1F7B096D74D752EA93D5EFED812AEDF3D1C05C61B0FF9C81D2AE45507`, foi gerado de uma allowlist exata de 19 views e 971 ordinais do resource V098 pinado SHA-256 `16EF4E66339805B2B164A7A802FCF6862A0AF528BBB84AA5E6E3B03CFBFC72FF`. Contém 19 chamadas da DMV, nomes serializados em hex de bytes UTF-16LE e nenhuma escrita. O catálogo 0336 permaneceu no SHA-256 `E544D351AF565D3D5BD58378FF61C0AD03CB1A2AC7C97ED2B01D09DD9E3F080D`; V105 aplicada permaneceu no pin `29D6612E42DAE014388EB3384F46F4A30D0402FAC66E8548806121E1D4E3DB17`.
+
+Preflight novo `sqlcmd -E -C -S lpc:localhost` confirmou `master` e `ETL_SISTEMA_V2_SHADOW` por Windows auth/Shared memory, SQL Server **17.0.1000.7**, compatibilidade **170**, collation efetiva no alvo `Latin1_General_100_CI_AS_SC`; o `master` apresenta `collation_name=NULL` com `AUTO_CLOSE=1` como observado em 0338. Serviço `MSSQLSERVER` Running PID 20404 e TCP listeners só `::1`/`127.0.0.1:1433`, zero outros consumidores. Flyway **106 = SCHEMA+105 SQL/zero falhas**, 1819 objetos/247 tabelas/147 linhas, sete schemas/principals V2, contagens globais monitoradas zero. Inventário de **873** grupos de estatísticas igual ao pós-0338. Catálogo encontrou 19 definições de view; hashes ativos das views 01/13 repetiram 0338. A reserva própria fixou uma chamada DMV, possibilidade de metadata automática, readback e parada sem retry em caso de erro/delta. Ledger privado `target/shadow-local-rebuild-20260928-01/p08-v105-0339-dmv-ledger.jsonl`, SHA-256 `D4140A4D8904270DD0B237AD0FA98B43729775676098A96D1F37A129821FB9BC`.
+
+## Chamada única e comparação
+
+Uma chamada `sqlcmd -u` da DMV saiu **0**. Saída `p08-v105-0339-dmv-all-utf16le.out` de 251634 bytes, BOM `FF FE`, SHA-256 `3FE337F5A92E6F88EBEBD8A3B126D948FA8C7A13FA162AA13288A77471ADEEF5`: **19 views/971 colunas**, zero `error_number`, zero ocultas, zero chaves duplicadas, zero divergências de view/ordinal e **zero divergências de nomes UTF-16LE** contra V098. A subsequência das views 01/13 é exatamente a saída 119/119 de 0338.
+
+Comparação completa de tipo, max_length em bytes, precisão, escala, nulidade e collation: **971/971 iguais** ao catálogo `sys.columns` 0336 nos mesmos view/ordinal; nomes do dump 0336 não foram utilizados por causa da codepage. Contra V098, há exatamente **181** mudanças `Latin1_General_CI_AS`→`Latin1_General_100_CI_AS_SC` e cinco mudanças de largura, sem diferença adicional: SQL-01 ordinal 17 `[Cliente/CNPJ]` **28→56 bytes**; SQL-13 ordinais 5 `[DESTINO - SM]`, 9 `[DESTINO]`, 14 `destino_sm`, 18 `destino_nome` **2048→4096 bytes**. São 186 diferenças de campo em 181 colunas; os cinco comprimentos recaem em colunas com a mudança de collation.
+
+Digests canônicos: DMV 971 com nomes Unicode em hex `64DDE46C66F2E4088BAB043CA5ED7442FE751513CCC185EEB3C236ED466D6C77`; catálogo 0336 sem nomes danificados `FE70F092B5D303480697C3E73DA4FCA85B022F15A90E09BA3E55065F1AA9BECF`; V098 com nomes Unicode em hex `DDF36AFE1552C918E41A35F85566F5233A287EC90D79CDEA3BA88AF09D38B48B`. O recibo privado `p08-v105-0339-dmv-comparison.json` SHA-256 `A03D8E800D9896EF4AD33D009CAB55B6AFB8B0F9356DC6A67B0B8202096F85E2` contém contagens, classes, cinco larguras, digests e hashes de readback, sem matriz bruta; comparador SHA-256 `D9E05C994AD2D3B6C77726517C98627063E7BD8470E281BAFD919278289B86F9`. A saída DMV bruta é evidência privada de nomes hex, **não** snapshot aprovado ou fonte para geração automática de contrato.
+
+Hashes SHA-256 UTF-16LE das 19 definições de view ativas foram capturados antes/depois com digest canônico `AE4C0E486A838C5654988CC77C081CB51AA5E021C0D6A095C958B162F4C1B619`; output bruto pré/pós SHA-256 `886D8ED788752F4551C3402470C20ABA0C235C6428A3A7DBB9A2BB7FE190DA9B`. Hashes dos arquivos V043/V052/V080/V093 conferiram os respectivos pins do manifesto V105. Isso fixa as definições atuais observadas, mas não recupera o arquivo-fonte de metadados V098 ausente nem prova a causa histórica da inferência das cinco larguras.
+
+Readback independente após a DMV repetiu **byte a byte** outputs de `master`, alvo, contagens, inventário dos 873 grupos de estatísticas e hashes das 19 definições; serviço/PID/listeners loopback estáveis. Nenhuma metadata adicional, mudança de dado, objeto, principal ou Flyway foi observada. A prova independente completa o confronto **do estado atual** entre duas APIs; a decisão de origem/intenção do contrato V105 ainda depende da derivação offline do Runtime e revisão do Supervisor. **P08 não recebe aceite.** Limites do backup 0325 e FAIL do smoke A 0336 permanecem.
+
+## Retomada
+
+1. Supervisor confronta a derivação offline de Runtime com as 971 linhas confirmadas e decide se o contrato V105 proposto tem proveniência suficiente; não usar o dump sqlcmd como fonte automática.
+2. Runtime pode preparar resource/guard/pacote novo sob seus pins e testes offline; qualquer smoke físico futuro exige autorização/gate próprios do Banco.
+3. Preservar snapshots históricos, FAILs 0336/0338 e candidatos A/B, sem restore ou correção automática.

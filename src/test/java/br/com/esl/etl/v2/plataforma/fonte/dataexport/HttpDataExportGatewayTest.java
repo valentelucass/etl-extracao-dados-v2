@@ -127,6 +127,45 @@ class HttpDataExportGatewayTest {
     }
 
     @Test
+    void classifiesOnlyExactJsonMediaTypeInPageDiagnostics() throws Exception {
+        assertJsonContentTypeDeclaration("application/jsonp", false);
+        assertJsonContentTypeDeclaration("application/json-seq", false);
+        assertJsonContentTypeDeclaration("APPLICATION/JSON", true);
+        assertJsonContentTypeDeclaration("application/json; charset=UTF-8", true);
+        assertFalse(DataExportHttpExecutor.isJsonContentType("application/j\u017Fon"));
+    }
+
+    private static void assertJsonContentTypeDeclaration(
+            final String contentType, final boolean expected) throws Exception {
+        try (ServerSocket serverSocket = new ServerSocket(0)) {
+            serverSocket.setSoTimeout(5_000);
+            final ExecutorService executor = Executors.newSingleThreadExecutor();
+            try {
+                final Future<String> capturedRequest =
+                        executor.submit(
+                                () -> receiveAndRespondWithContentType(serverSocket, contentType));
+                final HttpDataExportGateway gateway =
+                        new HttpDataExportGateway(
+                                java.net.http.HttpClient.newHttpClient(),
+                                properties(serverSocket, 1_024L),
+                                new ObjectMapper(),
+                                duration -> {});
+
+                final DataExportPageFetch pageFetch =
+                        gateway.fetchWithDiagnostics(requestForColetas());
+
+                assertEquals(expected, pageFetch.jsonContentTypeDeclared(), contentType);
+                assertTrue(
+                        capturedRequest
+                                .get(5, TimeUnit.SECONDS)
+                                .startsWith("GET /api/analytics/reports/6908/data HTTP/1.1"));
+            } finally {
+                executor.shutdownNow();
+            }
+        }
+    }
+
+    @Test
     void rejectsMoreDistinctEntitiesThanRequestedDirectlyAtTheGateway() throws Exception {
         try (ServerSocket serverSocket = new ServerSocket(0)) {
             serverSocket.setSoTimeout(5_000);
@@ -757,6 +796,25 @@ class HttpDataExportGatewayTest {
             return receiveAndRespond(serverSocket, status, responseBody);
         } finally {
             serverSocket.close();
+        }
+    }
+
+    private static String receiveAndRespondWithContentType(
+            final ServerSocket serverSocket, final String contentType) throws IOException {
+        try (Socket socket = serverSocket.accept()) {
+            final String request = readRequest(socket);
+            final byte[] body = "{\"data\":[{\"id\":\"1\"}]}".getBytes(StandardCharsets.UTF_8);
+            final String headers =
+                    "HTTP/1.1 200 OK\r\nContent-Type: "
+                            + contentType
+                            + "\r\nContent-Length: "
+                            + body.length
+                            + "\r\nConnection: close\r\n\r\n";
+            final OutputStream output = socket.getOutputStream();
+            output.write(headers.getBytes(StandardCharsets.US_ASCII));
+            output.write(body);
+            output.flush();
+            return request;
         }
     }
 

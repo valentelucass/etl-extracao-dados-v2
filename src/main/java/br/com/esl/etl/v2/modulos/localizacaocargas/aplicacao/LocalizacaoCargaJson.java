@@ -1,5 +1,6 @@
 package br.com.esl.etl.v2.modulos.localizacaocargas.aplicacao;
 
+import br.com.esl.etl.v2.modulos.localizacaocargas.domain.LocalizacaoCargaNumericValue;
 import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -18,7 +19,8 @@ final class LocalizacaoCargaJson {
      * Admite a contraprova cross-layer de 5.001 caracteres sem deixar um token numérico consumir
      * todo o limite de um registro. Valores tipados continuam limitados pelos parsers LOC-04.
      */
-    static final int MAXIMUM_NUMERIC_TOKEN_CHARACTERS = 8_192;
+    static final int MAXIMUM_NUMERIC_TOKEN_CHARACTERS =
+            LocalizacaoCargaNumericValue.MAXIMUM_DECIMAL_WIRE_CHARACTERS;
 
     private static final JsonFactory JSON_FACTORY =
             JsonFactory.builder()

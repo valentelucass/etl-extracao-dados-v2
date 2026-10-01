@@ -1,8 +1,14 @@
 package br.com.esl.etl.v2.plataforma.qualificacao;
 
+import br.com.esl.etl.v2.plataforma.configuracao.ShadowStorageProperties;
+import br.com.esl.etl.v2.plataforma.configuracao.ShadowStorageTargetKind;
 import com.fasterxml.jackson.databind.JsonNode;
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Set;
 
 /** No credentials or executable connection text are accepted from a configuration document. */
 public record QualificationConfiguration(
@@ -70,10 +76,78 @@ public record QualificationConfiguration(
         return result;
     }
 
+    /** Only the process environment can supply a physical target; never persist or print it. */
     public String jdbcUrl() {
-        return "jdbc:sqlserver://localhost;databaseName=ETL_SISTEMA_V2_SHADOW;"
-                + "integratedSecurity=true;encrypt=true;trustServerCertificate=true;"
-                + "loginTimeout=5;socketTimeout="
-                + socketMillis();
+        return validatedJdbcUrl(System.getenv("V2_SHADOW_JDBC_URL"));
+    }
+
+    public String validatedJdbcUrl(final String candidate) {
+        if (candidate == null || candidate.length() > 512 || candidate.isBlank()) {
+            throw new IllegalArgumentException("QUAL_SHADOW_URL_REQUIRED");
+        }
+        final String prefix = "jdbc:sqlserver://localhost;";
+        if (!candidate.startsWith(prefix)
+                || candidate.endsWith(";")
+                || candidate.indexOf('\n') >= 0
+                || candidate.indexOf('\r') >= 0) {
+            throw new IllegalArgumentException("QUAL_SHADOW_URL_INVALID");
+        }
+        final Set<String> allowed =
+                Set.of(
+                        "databasename",
+                        "integratedsecurity",
+                        "encrypt",
+                        "trustservercertificate",
+                        "logintimeout",
+                        "sockettimeout");
+        final Map<String, String> values = new HashMap<>();
+        for (final String segment : candidate.substring(prefix.length()).split(";", -1)) {
+            final int equals = segment.indexOf('=');
+            if (equals <= 0
+                    || equals == segment.length() - 1
+                    || segment.indexOf('=', equals + 1) >= 0) {
+                throw new IllegalArgumentException("QUAL_SHADOW_URL_INVALID");
+            }
+            final String key = segment.substring(0, equals).toLowerCase(Locale.ROOT);
+            final String value = segment.substring(equals + 1);
+            if (!allowed.contains(key)
+                    || !segment.substring(0, equals).matches("[A-Za-z]+")
+                    || !value.matches("[A-Za-z0-9_]+")
+                    || values.putIfAbsent(key, value) != null) {
+                throw new IllegalArgumentException("QUAL_SHADOW_URL_INVALID");
+            }
+        }
+        if (!"ETL_SISTEMA_V2_SHADOW".equals(values.get("databasename"))
+                || !"true".equals(values.get("integratedsecurity"))
+                || !"true".equals(values.get("encrypt"))
+                || !("true".equals(values.get("trustservercertificate"))
+                        || "false".equals(values.get("trustservercertificate")))) {
+            throw new IllegalArgumentException("QUAL_SHADOW_URL_INVALID");
+        }
+        final int login = boundedTimeout(values.get("logintimeout"), 1, 5);
+        final int socket = boundedTimeout(values.get("sockettimeout"), 2000, socketMillis());
+        final String validated =
+                prefix
+                        + "databaseName=ETL_SISTEMA_V2_SHADOW;integratedSecurity=true;encrypt=true;"
+                        + "trustServerCertificate="
+                        + values.get("trustservercertificate")
+                        + ";loginTimeout="
+                        + login
+                        + ";socketTimeout="
+                        + socket;
+        // The broader runtime policy is applied only to our canonical, bounded value.
+        ShadowStorageProperties.enabled(ShadowStorageTargetKind.LOCAL_EPHEMERAL, validated, null);
+        return validated;
+    }
+
+    private static int boundedTimeout(final String value, final int minimum, final int maximum) {
+        if (value == null || !value.matches("[1-9][0-9]{0,5}")) {
+            throw new IllegalArgumentException("QUAL_SHADOW_URL_INVALID");
+        }
+        final int parsed = Integer.parseInt(value);
+        if (parsed < minimum || parsed > maximum) {
+            throw new IllegalArgumentException("QUAL_SHADOW_URL_INVALID");
+        }
+        return parsed;
     }
 }

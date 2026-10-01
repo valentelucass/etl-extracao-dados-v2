@@ -1,0 +1,81 @@
+{
+  "manifestVersion": 1,
+  "roadmapTask": "P08",
+  "epoch": 105,
+  "migration": "V105__align_audit_and_expansion_label_bin2.sql",
+  "historicalOrigins": [
+    "V025__restore_coletas_extraction_audit.sql",
+    "V042__consume_expansion_references.sql"
+  ],
+  "historicalManifestsRemainUnchanged": [
+    "control-plane.json",
+    "governed-references.json"
+  ],
+  "semanticCollation": "Latin1_General_100_BIN2",
+  "persistedColumns": [
+    "ctl.execution_audit.status",
+    "ctl.execution_audit.traversal_verification",
+    "ctl.execution_audit.failure_category",
+    "ref.expansion_lab_label.label"
+  ],
+  "tableType": {
+    "name": "ref.expansion_lab_label_batch",
+    "columnsInOrder": [
+      "category VARCHAR(16) COLLATE Latin1_General_100_BIN2 NOT NULL",
+      "raw_value NVARCHAR(128) COLLATE Latin1_General_100_BIN2 NOT NULL",
+      "label NVARCHAR(128) COLLATE Latin1_General_100_BIN2 NOT NULL"
+    ],
+    "primaryKeyInOrder": ["category", "raw_value"]
+  },
+  "procedure": {
+    "name": "ref.usp_import_expansion_references",
+    "signatureOrigin": "V042",
+    "parameterCount": 10,
+    "tableTypeParameterOrdinal": 6,
+    "receiptColumnsInOrder": [
+      "label_release",
+      "calendar_release",
+      "branch_release",
+      "payer_release"
+    ],
+    "replayComparison": "BIDIRECTIONAL_EXCEPT_BIN2",
+    "caseOnlyMismatch": "EXP_REF_CONTENT_DIVERGENT"
+  },
+  "reviewedDefinitions": {
+    "procedureV042Utf16Bytes": 9342,
+    "procedureV042Sha256Utf16Le": "3E94EF77EF79F58BBE38E68BDD965270F5F6A13DFF1A0AC9F3D2EC58869110AA",
+    "statusCheckOrigin": "V025",
+    "statusCheckSqlServerUtf16Bytes": 136,
+    "statusCheckSqlServerSha256Utf16Le": "E10FF7DCE79EA0B13851DA9F0E329388F4303B92038C21E3861AF5D3613D29F6",
+    "labelCheckOrigin": "V042",
+    "labelCheckSqlServerUtf16Bytes": 450,
+    "labelCheckSqlServerSha256Utf16Le": "499FFDF7169311C0AD586B2C4E79041305A4224897DA2E5DA92CC4A971B9E95F",
+    "statusIndexOrigin": "V025",
+    "statusIndexOptions": "NONCLUSTERED_NONUNIQUE_PRIMARY_FILEGROUP_UNPARTITIONED_UNCOMPRESSED_DEFAULT_LOCKS_AND_PADDING"
+  },
+  "privileges": {
+    "schemaPermissionsRemain": true,
+    "directProcedureOrTypePermissions": "FAIL_BEFORE_DDL_IF_PRESENT"
+  },
+  "dependencyPolicy": {
+    "affectedColumnStatistics": "FAIL_BEFORE_DDL_EXCEPT_REBUILT_STATUS_INDEX_STATISTIC",
+    "standaloneFilteredStatisticsOnAffectedTables": "FAIL_BEFORE_DDL",
+    "additionalTypeParametersColumnsOrExpressions": "FAIL_BEFORE_DDL",
+    "foreignKeysDefaultsFulltextComputedAndSchemaBoundReferences": "FAIL_BEFORE_DDL_IF_UNREVIEWED",
+    "snapshot": "064_V105_STATISTICS_TYPE_AND_COLUMN_DEPENDENCY_COUNTS"
+  },
+  "dataPlan": {
+    "existingRows": "ALTER_COLUMN_IN_TRANSACTION_WITHOUT_DML",
+    "noncanonicalExistingStatus": "FAIL_BEFORE_DDL",
+    "prePostChecks": [
+      "audit_row_count_and_text_bytes",
+      "label_row_count_and_text_bytes",
+      "expansion_release_and_receipt_counts"
+    ]
+  },
+  "flywayTechnicalExclusion": {
+    "schema": "ctl",
+    "table": "flyway_schema_history"
+  },
+  "physicalGate": "NOT_AUTHORIZED_IN_PREPARATION_UNIT"
+}

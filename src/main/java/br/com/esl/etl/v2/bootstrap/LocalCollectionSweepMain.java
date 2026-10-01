@@ -9,6 +9,7 @@ import br.com.esl.etl.v2.plataforma.resiliencia.RuntimeExitCategory;
 import java.io.PrintStream;
 import java.nio.file.Path;
 import java.time.Duration;
+import java.util.List;
 
 /** Package consumer for synthetic Coletas observations and the nominal responsibility preview. */
 public final class LocalCollectionSweepMain {
@@ -19,6 +20,17 @@ public final class LocalCollectionSweepMain {
     }
 
     public static RuntimeExitCategory run(final String[] arguments, final PrintStream output) {
+        return run(arguments, output, new SqlSession()::execute);
+    }
+
+    @FunctionalInterface
+    interface SweepCommand {
+        List<LocalAnalyticCollectionSweep.Observation> execute(
+                LocalCollectionSweepProgram program, CancellationToken token) throws Exception;
+    }
+
+    static RuntimeExitCategory run(
+            final String[] arguments, final PrintStream output, final SweepCommand command) {
         try {
             if (arguments.length != 3
                     || !"observe".equals(arguments[0])
@@ -36,26 +48,23 @@ public final class LocalCollectionSweepMain {
                         return false;
                     };
             final var program = new LocalCollectionSweepProgram(Path.of(arguments[2]), token);
-            try (var session = ColetaTemporalLaboratorySession.openFromEnvironment()) {
-                session.controlStatements(30, 100000);
-                final var observations = program.execute(session, token);
-                for (int index = 0; index < observations.size(); index++) {
-                    final var result = observations.get(index).result();
-                    output.printf(
-                            "LOCAL_SWEEP_OBSERVATION phase=%d candidates=%d confirmations=%d reactivated=%d%n",
-                            index + 1,
-                            result.candidates(),
-                            result.confirmations(),
-                            result.reactivated());
-                }
-                for (final var row : observations.get(3).preview()) {
-                    output.printf(
-                            "LOCAL_SWEEP_PREVIEW responsibility=%s applicability=%s disposition=%s reason=%s%n",
-                            row.responsibility().id(),
-                            row.responsibility().applicability(),
-                            row.assessment().disposition(),
-                            row.responsibility().reason());
-                }
+            final var observations = command.execute(program, token);
+            for (int index = 0; index < observations.size(); index++) {
+                final var result = observations.get(index).result();
+                output.printf(
+                        "LOCAL_SWEEP_OBSERVATION phase=%d candidates=%d confirmations=%d reactivated=%d%n",
+                        index + 1,
+                        result.candidates(),
+                        result.confirmations(),
+                        result.reactivated());
+            }
+            for (final var row : observations.get(3).preview()) {
+                output.printf(
+                        "LOCAL_SWEEP_PREVIEW responsibility=%s applicability=%s disposition=%s reason=%s%n",
+                        row.responsibility().id(),
+                        row.responsibility().applicability(),
+                        row.assessment().disposition(),
+                        row.responsibility().reason());
             }
             output.println("LOCAL_SWEEP_ROLLBACK_CONFIRMED nominal_apply=NONE");
             return RuntimeExitCategory.SUCCESS;
@@ -65,6 +74,17 @@ public final class LocalCollectionSweepMain {
         } catch (final Exception failure) {
             output.println("LOCAL_SWEEP_INPUT_OR_EXECUTION_REJECTED");
             return RuntimeExitCategory.SOURCE_DQ;
+        }
+    }
+
+    private static final class SqlSession {
+        private List<LocalAnalyticCollectionSweep.Observation> execute(
+                final LocalCollectionSweepProgram program, final CancellationToken token)
+                throws Exception {
+            try (var session = ColetaTemporalLaboratorySession.openFromEnvironment()) {
+                session.controlStatements(30, 100000);
+                return program.execute(session, token);
+            }
         }
     }
 }

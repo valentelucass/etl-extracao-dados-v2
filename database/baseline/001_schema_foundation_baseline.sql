@@ -107,3 +107,4 @@
 :r "..\migrations\V102__prove_declared_collection_preview.sql"
 :r "..\migrations\V103__declare_complete_manifest_collection_sets.sql"
 :r "..\migrations\V104__revise_quote_reference_with_preserved_source.sql"
+:r "..\migrations\V105__align_audit_and_expansion_label_bin2.sql"

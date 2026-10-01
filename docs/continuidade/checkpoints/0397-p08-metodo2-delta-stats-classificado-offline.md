@@ -1,0 +1,24 @@
+# 0397 — P08: delta POST do método 2 classificado offline
+
+- Data: 30/09/2026. Anterior: [0396](0396-p08-metodo2-failsafe-pass-post-stats-delta.md), SHA `B74A0BDE296B0EA53FB602CB4EC52592DEC9B3700A64A0E1ED49117598743A97`.
+- Autoridade desta unidade: somente inspeção dos artefatos já capturados e de código/SQL versionado. **Zero reserva, sonda OS, SQL, Maven, JDBC ou IT novos.** Método 2 mantém o `STOP_POST` original; método 1 PASS local 0395 permanece. Nenhum método 3–6 foi iniciado.
+
+## Evidência observada
+
+- Classificador privado novo `target/p08-method2-delta-offline-20260930-01/classify-offline.ps1`, SHA `505ABF2E12DFF74D7AF57E33CF55CE995B3EABE956E6AF03CAA777464628B87D`, e recibo v2 SHA `E7F12AB36A5C5AE13F61AA6708F7A0602DF80B85C32669866B23AA8B0AEDD088`. Consulta de inventário SHA `D59B4A21C16B89F9D3901B4CAE87F06B8E8DDEFDBE834E95F49DE2331D6EC9FB`; runner e argv pinados mostram a mesma SQL, escopo shadow explícito, Windows auth e dez campos em todas as quatro leituras. Cada linha passou formato e unicidade. PRE e segundo PRE têm SHA `2782DFE69FA94677F16D27F3531C58FD3A7A7D938EB1FD400F7730212A7BC57A`; POST e segundo POST têm SHA `76B7AD41BD28AC20A32E5F2511203BAE40F267F8D68D0DE391BC8E87E0667460`.
+- Comparação integral: **2537→2538 grupos**, uma linha/grupo de coluna acrescentado, zero linhas removidas, zero grupos de coluna modificados; a coluna não existia no grupo PRE. Classes PRE→POST: `auto_created` **1715→1716**, `user_created` **0→0**, filtrado **34→34**, indexado **822→822**. O acréscimo tem uma entrada, `auto_created=1`, `user_created=0`, sem filtro ou índice. Não colide com as quatro colunas V105 de 064 nem com tabela de auditoria ou schemas mart/recon/ctl. Os valores de 064, guards, contagens e segurança PRE/POST já capturados permanecem iguais, conforme correção aditiva 0396.
+- **19 negativos recusados** no classificador privado: formato, hash, duplicata, combinações de classe, filtro/índice, grupo de mais de uma entrada, recortes mart/recon/ctl/audit e coluna V105. O primeiro diagnóstico 0396 com `-cne` sob rótulos de igualdade permanece intacto SHA `23FD25E6C492D68E45D7C61AD14525DEC6B780BF7F28B93FEEE6676B1451664A`; correção aditiva SHA `694D595D8DDD632F7455156578D372AB2A8836B0CD7F70663AE6DB583C34FD2B` também permanece.
+- A IT versionada consulta seis projeções, faz leituras adicionais e fecha a sessão com rollback; as views versionadas de V056 contêm filtros e joins. Isso torna criação automática de estatística durante a janela **plausível**, mas não prova que a IT a provocou. O último PRE é anterior ao guard 55104/Maven; o primeiro inventário POST é posterior às consultas de readback. Os recibos existentes não registram criador nem instante da estatística. A consulta de inventário agrega por schema/tabela/coluna/tipo/flags; não registra `stats_id` ou nome de estatística. Portanto zero modificações significa zero **grupos agregados** alterados, não prova identidade de cada objeto de estatística.
+
+## Decisão técnica para revisão do Supervisor
+
+**Propor um predicado de readback limitado à rodada 0396**, sem alterar o recibo/ledger `STOP_POST`: exigir todos os gates já provados (preflight, guard 55104 no instante anterior, um seletor, Failsafe 1/0/0/0, readback OS, master/alvo/segurança/contagens/064 iguais), inventários da mesma SQL e escopo com SHA verificado, dez campos e unicidade, duas leituras POST iguais, zero remoções ou grupos modificados e **exatamente um** acréscimo de uma entrada `auto_created=1`, `user_created=0`, não filtrada nem indexada, fora das quatro colunas V105 e de audit/mart/recon/ctl. Recusar qualquer outro delta. Sob essa regra explícita, a evidência preservada **permite propor aceite físico local do método 2 sem repetir a IT**. A regra precisaria ser adotada pelo Supervisor em decisão separada antes de registrar PASS; esta classificação não marca checkbox de IT nem altera o STOP original. **2538 não vira baseline durável** e não serve de PRE automático para métodos posteriores.
+
+O predicado avalia impacto observável, sem atribuir causa ou instante. Se o aceite exigir identidade e estabilidade de cada objeto de `sys.stats`, ou atribuição causal à IT, os recibos 0396 são insuficientes: faltam inventários por `object_id/stats_id` e evento temporal/trace do criador. A SQL agregada preservada não permite recuperar esses dados retroativamente. Sem nova autoridade, não inferir essa prova.
+
+## Retomada
+
+1. Supervisor decide se adota o predicado restrito para classificar o resultado físico local do método 2, mantendo STOP 0396 e sem baseline 2538; se exigir prova de objeto/causa, o resultado segue sem PASS.
+2. Somente em unidade distinta e autorizada avaliar os métodos 3–6, com preflight e referência contemporânea próprios. P08/Gate 1/JaCoCo, 107 ITs/A-B, oito erros e 74 classes faltantes seguem abertos.
+
+Sem alterações de código, SQL, guard, migration ou ledger histórico. Sem nomes, IDs ou hashes de IDs de estatísticas nos resumos.

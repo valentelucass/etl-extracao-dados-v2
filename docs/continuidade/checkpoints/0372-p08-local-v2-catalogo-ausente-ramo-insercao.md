@@ -1,0 +1,29 @@
+# 0372 — LOCAL_V2 ausente no catálogo persistido; ramo V024 de inserção
+
+- Data: 2026-09-29. Anterior: [0371](0371-p08-local-v2-guard-sql130-fail.md), SHA-256 `9ADC8CE87C2432195BF0F8E5E2CDBEB1A877459F9A4399DD9E6A89457C51AE08`.
+- Autoridade: Supervisor pós-0371 autorizou **unidade física nova** somente catalog-only, com correção privada do guard SQL 130, prova offline, reserva ≤300 s, preflight/readback estritos. A exceção de consumidores admite até duas sessões reader de usuário `SLEEPING` no shadow, sem request/transação; não libera IT, smoke ou efeito de schema.
+- Estado: **CLOSED_CATALOG_OBSERVED_NO_DELTA**. Resultado físico catalogal: fonte ausente, ramo V024 de inserção; **P08 não aceito**.
+
+## Prova offline e reserva
+
+1. Nova cópia privada `target/p08-local-v2-catalog-20260929-05/local-v2-catalog.sql`, SHA-256 `35112F710EA1D1C8D2043A7B6E859D9BABA4294A9FE69BB36D49552F9FA85391`. Apenas o bloco do guard diferiu do SQL privado FAIL 0371: contagens separadas de sessões antes/depois, `IF EXISTS` sobre sessões não elegíveis, requests e transações associadas ao alvo; nenhum `SUM(CASE...)` com subconsulta. O guard ficou imediatamente antes do único SELECT catalogal no mesmo lote. Nenhum script/output/ledger FAIL 0368–0371 foi editado.
+2. `offline-proof.json` SHA-256 `59A31446D0A323456B8A9617BA8700D1C54074CFE6662A5C939FB6E824C0D178`: parse PowerShell, três argv completos `sqlcmd -E -C` com fixture sintética e `-i` absoluto não vazio, literais master/alvo/contagens/064/stats contra outputs preservados, fechamento UTC por `DateTimeOffset`, hashes dos FAILs antigos, e oito cenários sintéticos. Casos 0/1/2 leitores idle passaram; leitor ativo, transação, terceiro, outro login e request no alvo foram recusados. **A prova offline não compila nem executa T-SQL**; só a invocação física posterior demonstrou compilação e passagem do guard com esses bytes.
+3. Reserva física **nova** `target/p08-local-v2-catalog-20260929-05/physical-ledger.jsonl`, teto 300 s, login 5 s, snapshots 15 s, catálogo 10 s e `LOCK_TIMEOUT` 1800 ms. Alvo `localhost/ETL_SISTEMA_V2_SHADOW`, Windows auth `-E -C`/Shared memory. Impacto previsto: leituras locais de metadados podem alterar autoestatísticas. Recuperação: parar sem retry, readback independente SQL/OS/stats e classificar delta sem baseline ou mutação corretiva. Reserva 0371 não reutilizada.
+
+## Resultado observado
+
+1. Preflight OS: serviço ativo, listeners somente loopback. `master` e shadow exatos, Flyway 106 = 1 SCHEMA + 105 SQL/0 falhas, 1819 objetos, 247 tabelas, 147 linhas agregadas e contagens esperadas. `064` SHA-256 `78F6F2664AD673D815D01C7B281DF2D606AF8DE419FAE1A9BC48816582E6D2E3`. Stats antes/depois de 064: **2536** grupos, SHA-256 `9090E84C838A0C0E7ED77742736A03AF4281CB0008EDACA26E3E051F51B3D33F`, coincidindo com pós-0354 **como observação de entrada, sem baseline aceita**. Marcador do alvo indicava duas outras sessões; o preflight agregado não classifica seu cliente.
+2. Uma única invocação `catalog.out`, exit 0/stderr vazio, atravessou o guard reader no próprio lote e retornou exatamente uma linha de **flags sanitizadas**: `present=0`, `active=-1` por ausência, `primaryKindDataExport=0`, `bindingDataExport=0`, `v024CatalogBranch=CATALOG_INSERT_BRANCH`. Hash do output `4883FFAE3DB1C6A560344234FD43BB587984196FDB89F2B024A6952DD3C214F8`; `catalog-receipt.json` SHA-256 `0C0CD9389B5B3497B5416A01678B3AA031AA0B5219D12F914C43ACAC7404F022`. Nenhum row, ID, payload, URL ou segredo foi retornado. O guard comprova sua condição **no instante dessa invocação**, sem identificar owner ou garantir permanência das sessões.
+3. Pelo contrato V024 já analisado em [0367](0367-p08-runtime-seletor-candidatos-offline.md), fonte ausente segue ramo de inserção ativa com binding `DATA_EXPORT`; portanto o predicado catalogal para `registerSource(LOCAL_V2,DATA_EXPORT)` **admitiria fonte nova no estado persistido observado**. Isto não executa procedure nem prova resultado da IT corrigida, estado dentro de outra transação, permissão futura ou aceite P08. `LOCAL_V2` não foi registrado nesta unidade.
+4. Readback independente SQL/OS/stats: master, estrutura do alvo, contagens, 064, inventário de stats e serviço/PID/listeners loopback sem delta nos recortes medidos; marcador de outras sessões continuou em dois, sem prova de identidade ou continuidade das mesmas sessões. `2536` permanece somente referência observacional. `final-result.json` SHA-256 `1F2554D9EA9743AFB6ED31313FB65C7ED190849FFFFB50D0D0C1468DC5694EF8`, fechamento em **37,2 s** sob teto. Ledger SHA-256 `46A6023EB8E5FBB9F5ED934EE5DDEA85C7952C5C4BB63883B93D8B10FB1E84C1`.
+
+## Preservação e decisão
+
+- FAILs 0368–0371 e recibos originais preservados; nenhuma repetição do FAIL 0371. Stats 2448→2536 (+88 automáticas) continuam sem query criadora e **sem aceite de 2536 como baseline**. Preservados 0354: **8 FAILs, 33/107 classes executadas, 74 faltantes**, JaCoCo não alcançado, A/B físico e Gate 1/P08 abertos; correção/pins 0367 só candidatos offline.
+- Sem KILL, fechamento de cliente, DDL/Flyway, restart/login, IT/smoke, cinco bancos, fonte real ou produção. Nenhum arquivo Runtime, SQL versionado, contrato ou schema alterado. O readback cobre apenas os objetos/contagens/064/stats e OS medidos, sem afirmar ausência de toda mutação possível em cada tabela.
+- Próximo responsável: **Supervisor** revisa o recibo e decide eventual gate físico **distinto** para a correção dirigida, com autoridade/preflight/reserva/readback próprios; **Banco** permanece único executor SQL/ledger. A observação catalogal não promove aceite P08 ou A/B.
+
+## Próximas ações
+
+1. Supervisor confronta flags/ramo de 0372 com o fixture corrigido e decide se autoriza um gate dirigido distinto; candidatos 0367 continuam offline até qualificação física.
+2. Se autorizado depois, Banco prepara reserva e guard próprios para qualquer SQL/JDBC físico, sem reutilizar esta rodada.

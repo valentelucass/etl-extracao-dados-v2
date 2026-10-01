@@ -1,0 +1,14 @@
+# 0358 — classificação SPID 73 expirou sem marcador; SQL auth suspensa
+
+- Data: 2026-09-29 UTC. Antecessor: [0357](0357-spid73-transacao-ativa-parada.md), SHA-256 `49C2835264B9B1002CD33BD2A8A0A170F87BDE70E6C29103D9E5158CEFA5C4FE`.
+- Autoridade: Supervisor autorizou uma unidade read-only curta para classificar SPID 73 por `is_user_process`, conexão, transação, requests/locks agregados sem texto SQL. SQL auth local somente em gate distinto se SPID interna **e** zero sessões/transações de usuário provados. Classificação incerta impõe parada sem KILL/restart.
+- Preflight OS: `MSSQLSERVER` Running PID 20404; listeners `::1:1433` e `127.0.0.1:1433`, nenhum não loopback nem cliente TCP estabelecido. Recibo privado `p08-v105-0358-os-preflight.json`, SHA `2C87900601271C136A55A9CDDDDE4FCC7BCBA390612EFEF9BC1670E166A39002`.
+- Gate `master` reservado: `sqlcmd -E -S lpc:localhost -d master -l 3 -t 8`, consulta curta sem extended procedure. Exit 0 e marcador `MASTER_OK|master|1|1`: Windows auth/Shared memory, Windows-only e banco shadow exato online. Saída SHA `5C0AE0C8224E253592C10207250EC2C03BBD017B3956115AB6CD81DFDD73F579`.
+- Gate DMV reservado: uma chamada `sqlcmd -E` ao shadow exato com script SHA `C0CCE1D2BECF6C13E96050F05A1FE26CEE2DDCC00710BFBF383B3E480E00823E`. Script previa somente `sys.dm_exec_sessions`, `sys.dm_exec_connections`, `sys.dm_tran_session_transactions`/`active_transactions`, `sys.dm_exec_requests` e `sys.dm_tran_locks` agregados; não continha DBCC INPUTBUFFER, SQL text ou payload. A saída contém apenas **`Timeout expired`**, sem `TARGET_OK`, `SESSION73` ou `SUMMARY`; SHA `59B1B8296AD710F16CE3B5BBE94918D4314D7BC8A5865CB6FD082FE224663C78`. O processo `sqlcmd` retornou 0, mas o gate é **FAIL/incerto** pela falta dos marcadores. Não se sabe se a espera ocorreu no login, guarda inicial ou DMV, nem se SPID 73 ainda existe ou é interna.
+- Readback só OS após parada: serviço Running PID 20404, mesmos dois listeners loopback, zero socket cliente TCP estabelecido, nenhum processo `sqlcmd` remanescente. SHA `E8805DE26A00D830DF01788678CF2797014E658511D028F13648E894707FD62B`. Não demonstra estado de sessões Shared memory nem zero transações. Ledger físico privado SHA `B8B7FBA237C30B86976879B60D017D06F7CE92FB5237E8B0D8DAF53F883FA0F6`.
+- Decisão: sem retry, KILL, fechamento de cliente, restart, LoginMode, login/user, senha ou DPAPI. O acesso SQL por VS Code continua não configurado. P08 0354 FAIL, stats 2536 não aceitas, FAILs anteriores e limites do backup 0325 preservados.
+
+## Próximas ações
+
+1. Supervisor decidir diagnóstico mais estreito para distinguir login de espera de consulta e provar `is_user_process`/zero consumidores com marcador e readback, considerando pressão de memória observada em 0357. Não inferir sessão interna de `sa`/host nulo.
+2. Somente com novo preflight completo e zero usuários/transações demonstrados, reservar e executar configuração SQL auth em gate próprio; manter P08 separado.

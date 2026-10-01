@@ -134,6 +134,36 @@ class IntegralSupportPreflightTest {
                         .getMessage());
     }
 
+    @Test
+    void financialTermsResolveOnlyThePinnedScopedSourceWithoutSql() throws Exception {
+        final var spec = new IntegralArtifactFixtures.Spec(false, 2);
+        IntegralArtifactFixtures.write(folder, spec);
+        final var support =
+                new DeclaredAnalyticSupport(
+                        PinnedLocalJson.open(folder.resolve("support/manifest.json"), 131072),
+                        spec.start(),
+                        spec.end(),
+                        spec.revision(),
+                        CancellationToken.none());
+        final String key = "INTEGER:" + spec.id("FRE", 1);
+        final var terms = support.financialTerms(key);
+        assertEquals(key, terms.sourceKey());
+        assertEquals(spec.revision(), terms.revision());
+        assertEquals(spec.start().plusDays(1), terms.billingReferenceDate());
+        assertEquals("normal", terms.classification());
+        assertEquals(Boolean.FALSE, terms.courtesy());
+        assertEquals(Boolean.TRUE, terms.eligible());
+        assertEquals(2, terms.fallbackVolumes());
+        assertEquals("BRL", terms.currency());
+        assertEquals("MAJOR", terms.unit());
+        assertEquals(
+                "INTEGRAL_FINANCIAL_MISSING",
+                assertThrows(
+                                IllegalArgumentException.class,
+                                () -> support.financialTerms("INTEGER:999999999"))
+                        .getMessage());
+    }
+
     private DeclaredAnalyticSupport load(final Path manifest, final CancellationToken token)
             throws Exception {
         return new DeclaredAnalyticSupport(

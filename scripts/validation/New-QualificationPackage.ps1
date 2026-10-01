@@ -2,6 +2,7 @@
 param([Parameter(Mandatory)][ValidatePattern('^[a-z0-9-]{1,64}$')][string]$BuildAttempt,
     [Parameter(Mandatory)][ValidatePattern('^[a-z0-9-]{1,64}$')][string]$OutputName,
     [switch]$Candidate,
+    [switch]$ShadowLocalCandidate,
     [ValidatePattern('^macrobloco-[a-z0-9-]{1,90}$')][string]$RoundName='macrobloco-qualificacao-pacote-20260913-01',
     [string]$ArtifactInputs='')
 $ErrorActionPreference='Stop'
@@ -15,10 +16,30 @@ if(Test-Path -LiteralPath $output){throw 'QUAL_PACKAGE_OUTPUT_EXISTS'}
 Assert-QualificationPath $build
 $result=Read-QualificationJsonBytes ([IO.File]::ReadAllBytes((Join-Path $attempt 'result.json')))
 if($result.exit -ne 0 -or $result.timedOut -or (-not $Candidate -and ($result.phase -cne 'VerifyPhysical' -or -not $result.rollbackConfirmed))){throw 'QUAL_PACKAGE_BUILD_NOT_QUALIFIED'}
+if($ShadowLocalCandidate){
+    if(-not $Candidate -or $result.phase -cne 'PackageShadow' -or $result.packageVariant -cne 'SHADOW_LOCAL_12_8_2'){
+        throw 'QUAL_SHADOW_PACKAGE_BUILD_REQUIRED'
+    }
+}elseif($result.phase -ceq 'PackageShadow'){throw 'QUAL_SHADOW_PACKAGE_VARIANT_REQUIRED'}
+$variant=if($ShadowLocalCandidate){'SHADOW_LOCAL_12_8_2'}else{'NORMAL_12_8_2'}
+$catalog='docs/catalogos/macrobloco-qualificacao-pacote/'
+$lockRelative=$catalog+$(if($ShadowLocalCandidate){'dependency-lock.shadow-local-12.8.2.json'}else{'dependency-lock.json'})
+$readmeRelative=$catalog+$(if($ShadowLocalCandidate){'PACKAGE-README-SHADOW-12.8.2.md'}else{'PACKAGE-README.md'})
+$pomInputs=@(Get-ChildItem -LiteralPath (Join-Path $build ($catalog+'third-party')) -File|Sort-Object Name|
+    ForEach-Object {[IO.Path]::GetRelativePath($build,$_.FullName).Replace('\','/')})
+if($ShadowLocalCandidate){
+    # The historical 12.8.1 POMs remain in the catalog; package only the
+    # currently pinned 12.8.2 pair from third-party without rewriting either.
+    $pomInputs=@($pomInputs|Where-Object {$_ -cnotmatch '/mssql-jdbc(?:_auth)?-12[.]8[.]1[.].*[.]pom$'})
+}
+$pomNames=@($pomInputs|ForEach-Object {[IO.Path]::GetFileName($_)})
+if($pomInputs.Count -lt 15 -or $pomInputs.Count -gt 30 -or @($pomNames|Select-Object -Unique).Count -ne $pomNames.Count){
+    throw 'QUAL_PACKAGE_POM_SET'
+}
 $utf8=[Text.UTF8Encoding]::new($false)
 $null=[IO.Directory]::CreateDirectory($output)
 function Evidence([string]$name,$value){[IO.File]::WriteAllText((Join-Path $output $name),($value|ConvertTo-Json -Depth 20),$utf8)}
-Evidence 'reservation.json' ([ordered]@{state='RESERVED';step='deterministic-package';build=$BuildAttempt;candidate=[bool]$Candidate;
+Evidence 'reservation.json' ([ordered]@{state='RESERVED';step='deterministic-package';build=$BuildAttempt;candidate=[bool]$Candidate;variant=$variant;
     target=$output;limits='offline files only; no JDBC, installer or source endpoint';recovery='retain partial output; new attempt for retry'})
 $payload=Join-Path $output 'payload';$null=[IO.Directory]::CreateDirectory($payload)
 $members=[Collections.Generic.List[object]]::new()
@@ -46,10 +67,9 @@ foreach($directory in @('src','database','config','.mvn')){
         if(-not $Candidate -and (Get-FileHash -LiteralPath (Join-Path $root $relative)).Hash.ToLowerInvariant() -cne $hash){throw 'QUAL_PACKAGE_SOURCE_DRIFT'}
     }
 }
-$packagingInputs=@('pom.xml','scripts/validation/New-QualificationPackage.ps1','scripts/validation/QualificationPackage.psm1','scripts/validation/Invoke-Qualification.ps1','docs/catalogos/macrobloco-qualificacao-pacote/dependency-lock.json','docs/catalogos/macrobloco-qualificacao-pacote/PACKAGE-README.md')
+$packagingInputs=@('pom.xml','scripts/validation/New-QualificationPackage.ps1','scripts/validation/QualificationPackage.psm1','scripts/validation/Invoke-Qualification.ps1',$lockRelative,$readmeRelative)
 $packagingInputs+=@('docs/catalogos/campanhas-integrais/CONTRATO.md','docs/adr/0051-sequencias-integrais-declaradas-no-pacote.md')
-$packagingInputs+=@(Get-ChildItem -LiteralPath (Join-Path $build 'docs/catalogos/macrobloco-qualificacao-pacote/third-party') -File|
-    ForEach-Object {[IO.Path]::GetRelativePath($build,$_.FullName).Replace('\','/')})
+$packagingInputs+=$pomInputs
 foreach($relative in $packagingInputs){
     $file=Join-Path $build $relative;$hash=(Get-FileHash -LiteralPath $file).Hash.ToLowerInvariant()
     $sourceInventory.Add([ordered]@{path=$relative;sha256=$hash})
@@ -59,9 +79,15 @@ $inventory=@($sourceInventory|Sort-Object path -CaseSensitive)
 $revision=Get-QualificationByteHash ($utf8.GetBytes(($inventory|ForEach-Object {$_.path+'|'+$_.sha256+"`n"}) -join ''))
 Evidence 'qualified-source-inventory.json' $inventory
 Add (Join-Path $build 'target/etl-dataexport-v2.jar') 'etl-dataexport-v2.jar' 'JAR' 'APPLICATION'
-$lockPath=Join-Path $build 'docs/catalogos/macrobloco-qualificacao-pacote/dependency-lock.json'
+$lockPath=Join-Path $build $lockRelative
 $lock=Read-QualificationJsonBytes ([IO.File]::ReadAllBytes($lockPath))
 if($lock.version -cne 'qualification-dependencies-v1' -or $lock.dependencies.Count -ne 9){throw 'QUAL_DEPENDENCY_LOCK'}
+if($ShadowLocalCandidate){
+    $jdbc=@($lock.dependencies|Where-Object {$_.name -ceq 'mssql-jdbc' -and $_.type -ceq 'jar'})
+    $auth=@($lock.dependencies|Where-Object {$_.name -ceq 'mssql-jdbc_auth' -and $_.type -ceq 'dll'})
+    if($jdbc.Count -ne 1 -or $auth.Count -ne 1 -or $jdbc[0].version -cne '12.8.2.jre11' -or
+       $auth[0].version -cne '12.8.2.x64'){throw 'QUAL_SHADOW_PACKAGE_LOCK_PAIR'}
+}
 $components=@(foreach($entry in $lock.dependencies){
     $folder=if($entry.type -ceq 'dll'){'native'}else{'lib'}
     $name=$folder+'/'+$entry.file;$source=Join-Path $build ('target/'+$name)
@@ -76,6 +102,7 @@ $components=@(foreach($entry in $lock.dependencies){
 if(@(Get-ChildItem -LiteralPath (Join-Path $build 'target/lib') -File).Count -ne 8){throw 'QUAL_DEPENDENCY_EXTRA'}
 Add $lockPath 'dependencies.json' 'JSON' 'POLICY'
 Add (Join-Path $build 'src/main/resources/qualification-laboratory/config.synthetic.json') 'config/config.synthetic.json' 'JSON' 'CONFIGURATION'
+Add (Join-Path $build 'config/application.example.properties') 'config/application.example.properties' 'TEXT' 'CONFIGURATION'
 Add (Join-Path $build 'src/main/resources/analytic-laboratory/query-contracts.synthetic.json') 'contracts/query-contracts.synthetic.json' 'JSON' 'CONTRACT'
 Add (Join-Path $build 'docs/catalogos/campanhas-integrais/CONTRATO.md') 'contracts/sequence-contract.md' 'TEXT' 'CONTRACT'
 Add (Join-Path $build 'docs/adr/0051-sequencias-integrais-declaradas-no-pacote.md') 'contracts/sequence-adr.md' 'TEXT' 'CONTRACT'
@@ -83,6 +110,7 @@ Add (Join-Path $build 'src/main/resources/qualification-laboratory/outputs.synth
 Add (Join-Path $build 'src/main/resources/qualification-laboratory/location-hashes.synthetic.json') 'oracles/location-hashes.synthetic.json' 'JSON' 'ORACLE'
 Add (Join-Path $build 'src/main/resources/qualification-laboratory/location-representative-hashes.synthetic.json') 'oracles/location-representative-hashes.synthetic.json' 'JSON' 'ORACLE'
 Add (Join-Path $build 'src/main/resources/qualification-laboratory/physical-columns.v098.json') 'contracts/physical-columns.v098.json' 'JSON' 'CONTRACT'
+Add (Join-Path $build 'src/main/resources/qualification-laboratory/physical-columns.v105.json') 'contracts/physical-columns.v105.json' 'JSON' 'CONTRACT'
 $fixtureEntries=@(foreach($folder in @('analytic-laboratory','expansion-laboratory')){
     foreach($file in Get-ChildItem -LiteralPath (Join-Path $build ('src/main/resources/'+$folder)) -File|Sort-Object Name){
         $name='fixtures/'+$folder+'/'+$file.Name
@@ -125,13 +153,28 @@ if($ArtifactInputs){
     if(-not $seen.SetEquals([string[]]$actual)){throw 'QUAL_ARTIFACT_INPUT_SET'}
     Add $indexFile 'artifact-cases/index.json' 'JSON' 'FIXTURE'
 }
-$schemaEntries=@(foreach($file in Get-ChildItem -LiteralPath (Join-Path $build 'database/migrations') -File|Sort-Object Name){
+$schemaVersion=105
+$migrationFiles=@(Get-ChildItem -LiteralPath (Join-Path $build 'database/migrations') -File|Sort-Object Name -CaseSensitive)
+if($migrationFiles.Count -ne $schemaVersion){throw 'QUAL_SCHEMA_COUNT'}
+$epochInventory=Read-QualificationJsonBytes ([IO.File]::ReadAllBytes((Join-Path $build 'database/manifest/epoch-v104-v105-inventory.json')))
+if($epochInventory.epoch -ne $schemaVersion -or $epochInventory.migrations.Count -ne $schemaVersion){throw 'QUAL_SCHEMA_INVENTORY_DRIFT'}
+$schemaEntries=@(for($i=0;$i -lt $schemaVersion;$i++){
+    $file=$migrationFiles[$i];$ordinal=$i+1
+    if($file.Name -cnotmatch ('^V{0:D3}__[a-z0-9_]+[.]sql$' -f $ordinal)){throw 'QUAL_SCHEMA_SEQUENCE'}
+    $hash=(Get-FileHash -LiteralPath $file.FullName).Hash.ToLowerInvariant()
+    $pin=$epochInventory.migrations[$i]
+    if($pin.version -ne $ordinal -or $pin.file -cne $file.Name -or $pin.sha256 -cnotmatch '^[a-fA-F0-9]{64}$' -or
+       $pin.sha256.ToLowerInvariant() -cne $hash){throw 'QUAL_SCHEMA_INVENTORY_DRIFT'}
     $name='schema/migrations/'+$file.Name;Add $file.FullName $name 'SQL' 'SCHEMA'
-    [ordered]@{path=$name;sha256=(Get-FileHash -LiteralPath $file.FullName).Hash.ToLowerInvariant()}
+    [ordered]@{path=$name;sha256=$hash}
 })
-if($schemaEntries.Count -ne 104){throw 'QUAL_SCHEMA_COUNT'}
+$baselinePath=Join-Path $build 'database/baseline/001_schema_foundation_baseline.sql'
+$baselineHash=(Get-FileHash -LiteralPath $baselinePath).Hash.ToLowerInvariant()
+if($epochInventory.baseline -cne 'database/baseline/001_schema_foundation_baseline.sql' -or
+   $epochInventory.baselineSha256 -cnotmatch '^[a-fA-F0-9]{64}$' -or
+   $epochInventory.baselineSha256.ToLowerInvariant() -cne $baselineHash){throw 'QUAL_SCHEMA_BASELINE_DRIFT'}
 Add (Join-Path $build 'database/baseline/001_schema_foundation_baseline.sql') 'schema/baseline/001_schema_foundation_baseline.sql' 'SQL' 'SCHEMA'
-Json 'schema/schema-index.json' ([ordered]@{version='qualification-schema-v1';lastVersion=104;installationAutomatic=$false;migrations=$schemaEntries;baselineSha256=(Get-FileHash -LiteralPath (Join-Path $build 'database/baseline/001_schema_foundation_baseline.sql')).Hash.ToLowerInvariant()}) 'SCHEMA'
+Json 'schema/schema-index.json' ([ordered]@{version='qualification-schema-v1';lastVersion=$schemaVersion;installationAutomatic=$false;migrations=$schemaEntries;baselineSha256=$baselineHash}) 'SCHEMA'
 # All referenced hashes already exist; the campaign does not refer to its containing manifest.
 function MemberHash([string]$name){$found=@($members|Where-Object path -CEQ $name);if($found.Count -ne 1){throw 'QUAL_EXAMPLE_MEMBER'};return $found[0].sha256}
 Json 'config/campaign.synthetic.json' ([ordered]@{version='qualification-campaign-v1';id='package-smoke';pins=[ordered]@{
@@ -162,8 +205,9 @@ if($ArtifactInputs){
 }
 Add (Join-Path $build 'scripts/validation/Invoke-Qualification.ps1') 'Invoke-Qualification.ps1' 'POWERSHELL' 'LAUNCHER'
 Add (Join-Path $build 'scripts/validation/QualificationPackage.psm1') 'QualificationPackage.psm1' 'POWERSHELL' 'LAUNCHER'
-Add (Join-Path $build 'docs/catalogos/macrobloco-qualificacao-pacote/PACKAGE-README.md') 'README.md' 'TEXT' 'DOCUMENTATION'
-foreach($file in Get-ChildItem -LiteralPath (Join-Path $build 'docs/catalogos/macrobloco-qualificacao-pacote/third-party') -File|Sort-Object Name){
+Add (Join-Path $build $readmeRelative) 'README.md' 'TEXT' 'DOCUMENTATION'
+foreach($relative in $pomInputs){
+    $file=Get-Item -LiteralPath (Join-Path $build $relative)
     $type=switch($file.Extension){'.json'{'JSON'};'.pom'{'XML'};default{'TEXT'}}
     Add $file.FullName ('licenses/'+$file.Name) $type 'LICENSE'
 }
@@ -172,7 +216,7 @@ Json 'sbom.cdx.json' ([ordered]@{'$schema'='http://cyclonedx.org/schema/bom-1.6.
     components=@($components|Sort-Object 'bom-ref' -CaseSensitive)}) 'SBOM'
 Json 'provenance.json' ([ordered]@{version='qualification-provenance-v1';revision=$revision;sourceKind='LOCAL_BYTE_SNAPSHOT';outputTimestamp='2026-09-13T00:00:00Z';java=17;maven='3.9.14';offline=$true;vulnerabilityFeed='NOT_EXECUTED';signed=$false;publishedCi=$false;operationalApproval=$false;dependencyLockSha256=(Get-FileHash -LiteralPath $lockPath).Hash.ToLowerInvariant()}) 'PROVENANCE'
 $null=Test-QualificationSbom -Bom (Join-Path $payload 'sbom.cdx.json') -SchemaDirectory (Join-Path $payload 'licenses')
-$manifest=[ordered]@{version='qualification-package-v1';revision=$revision;java=17;os='Windows';architecture='x64';schemaVersion=104;files=@($members|Sort-Object path -CaseSensitive)}
+$manifest=[ordered]@{version='qualification-package-v1';revision=$revision;java=17;os='Windows';architecture='x64';schemaVersion=$schemaVersion;files=@($members|Sort-Object path -CaseSensitive)}
 $manifestBytes=$utf8.GetBytes(($manifest|ConvertTo-Json -Depth 10 -Compress)+"`n")
 $manifestHash=Get-QualificationByteHash $manifestBytes
 [IO.File]::WriteAllBytes((Join-Path $payload 'package.json'),$manifestBytes)
@@ -189,6 +233,6 @@ try{
         try{$input.CopyTo($destination)}finally{$input.Dispose();$destination.Dispose()}
     }
 }finally{$zip.Dispose();$stream.Dispose()}
-Evidence 'result.json' ([ordered]@{state='PACKAGED_NOT_SMOKE_QUALIFIED';candidate=[bool]$Candidate;revision=$revision;manifestSha256=$manifestHash;
+Evidence 'result.json' ([ordered]@{state='PACKAGED_NOT_SMOKE_QUALIFIED';candidate=[bool]$Candidate;variant=$variant;dependencyLockSha256=(Get-FileHash -LiteralPath $lockPath).Hash.ToLowerInvariant();revision=$revision;manifestSha256=$manifestHash;
     archiveSha256=(Get-FileHash -LiteralPath $archive).Hash.ToLowerInvariant();members=$manifest.files.Count;dependencies=9;sourceCount=$inventory.Count})
 Get-Content -LiteralPath (Join-Path $output 'result.json') -Raw

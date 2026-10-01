@@ -23,13 +23,20 @@ class QualificationTemporalMatrixTest {
                 json.readTree(
                         Files.readAllBytes(
                                 Path.of(
-                                        "src/main/resources/analytic-laboratory/temporal-matrix.synthetic.json")));
+                                        "src/main/resources/analytic-laboratory/temporal-matrix-v2.synthetic.json")));
+        assertEquals("qualification-temporal-matrix-v2", matrix.path("version").textValue());
         assertEquals(5, matrix.path("workloads").size());
         for (final var row : matrix.path("workloads")) {
             final var source = Path.of(row.path("path").textValue());
             assertEquals(QualificationJson.sha256(source), row.path("sha256").textValue());
             assertEquals(json.readTree(Files.readAllBytes(source)), row.path("document"));
         }
+        assertEquals(
+                java.util.Set.of(
+                        "coletas", "fretes", "manifestos", "cotacoes", "localizacao_cargas"),
+                QualificationTemporalPolicyCatalog.policies().stream()
+                        .map(operation -> operation.workload)
+                        .collect(java.util.stream.Collectors.toSet()));
     }
 
     @Test

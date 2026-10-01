@@ -3,3 +3,5 @@
 *.bat text eol=crlf
 *.cmd text eol=crlf
 *.jar binary
+graphify-out/graph.json merge=graphify
+docs/catalogos/macrobloco-qualificacao-pacote/third-party/*.pom -text -diff -eol

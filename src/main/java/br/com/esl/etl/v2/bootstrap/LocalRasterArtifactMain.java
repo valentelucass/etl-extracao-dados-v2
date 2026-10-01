@@ -58,6 +58,27 @@ public final class LocalRasterArtifactMain {
             if (arguments[0].equals("characterize")) {
                 return RuntimeExitCategory.SUCCESS;
             }
+            final var result = new SqlCapture().capture(artifact, token);
+            output.printf(
+                    "LOCAL_RASTER_CAPTURE applied=%d duplicates=%d quarantine=%d unbound=%d%n",
+                    result.applied(), result.duplicates(), result.quarantine(), result.unbound());
+            if (!result.complete() || result.quarantine() != 0 || result.unbound() != 0) {
+                return RuntimeExitCategory.SOURCE_DQ;
+            }
+            output.println("LOCAL_RASTER_ROLLBACK_CONFIRMED");
+            return RuntimeExitCategory.SUCCESS;
+        } catch (final ResilienceCancelledException failure) {
+            output.println("LOCAL_RASTER_CANCELLED");
+            return RuntimeExitCategory.CANCELLED;
+        } catch (final Exception failure) {
+            output.println("LOCAL_RASTER_INPUT_OR_EXECUTION_REJECTED");
+            return RuntimeExitCategory.SOURCE_DQ;
+        }
+    }
+
+    private static final class SqlCapture {
+        private JdbcRasterLaboratory.Receipt capture(
+                final RasterArtifact artifact, final CancellationToken token) throws Exception {
             try (var session = ColetaTemporalLaboratorySession.openFromEnvironment()) {
                 session.controlStatements(30, 100000);
                 final UUID run = UUID.randomUUID();
@@ -69,35 +90,17 @@ public final class LocalRasterArtifactMain {
                                 artifact.zone(),
                                 artifact.maximumRows(),
                                 artifact.maximumCalls());
-                final var result =
-                        new LocalRasterRuntime(session, Clock.systemUTC(), artifact.zone())
-                                .capture(
-                                        run,
-                                        ExecutionMode.BOOTSTRAP,
-                                        artifact.window(),
-                                        artifact.gateway(),
-                                        artifact.maximumCalls(),
-                                        artifact.maximumRows(),
-                                        token)
-                                .receipt();
-                output.printf(
-                        "LOCAL_RASTER_CAPTURE applied=%d duplicates=%d quarantine=%d unbound=%d%n",
-                        result.applied(),
-                        result.duplicates(),
-                        result.quarantine(),
-                        result.unbound());
-                if (!result.complete() || result.quarantine() != 0 || result.unbound() != 0) {
-                    return RuntimeExitCategory.SOURCE_DQ;
-                }
+                return new LocalRasterRuntime(session, Clock.systemUTC(), artifact.zone())
+                        .capture(
+                                run,
+                                ExecutionMode.BOOTSTRAP,
+                                artifact.window(),
+                                artifact.gateway(),
+                                artifact.maximumCalls(),
+                                artifact.maximumRows(),
+                                token)
+                        .receipt();
             }
-            output.println("LOCAL_RASTER_ROLLBACK_CONFIRMED");
-            return RuntimeExitCategory.SUCCESS;
-        } catch (final ResilienceCancelledException failure) {
-            output.println("LOCAL_RASTER_CANCELLED");
-            return RuntimeExitCategory.CANCELLED;
-        } catch (final Exception failure) {
-            output.println("LOCAL_RASTER_INPUT_OR_EXECUTION_REJECTED");
-            return RuntimeExitCategory.SOURCE_DQ;
         }
     }
 }

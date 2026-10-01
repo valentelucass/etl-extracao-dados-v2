@@ -74,6 +74,16 @@ class JdbcRasterBatchTest {
         assertEquals(List.of("trips", "stops", "structures"), calls);
     }
 
+    @Test
+    void disabledTelemetryStillClosesEveryAcquiredStatement() throws Exception {
+        final var calls = new ArrayList<String>();
+        final var connection = initializingConnection(calls, 7, null, null, null, null);
+
+        new JdbcRasterBatch(connection, new UUID(0, 1)).close();
+
+        assertEquals(List.of("trips", "stops", "structures"), calls);
+    }
+
     private static Stream<Arguments> initializationFailures() {
         return IntStream.rangeClosed(1, 6)
                 .boxed()

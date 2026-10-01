@@ -1,0 +1,25 @@
+# 0340 — P08/V105: revisão independente offline do recurso físico
+
+- Data: 2026-09-29; anterior: [0339](0339-p08-v105-dmv-971-readonly.md).
+- Autoridade: Supervisor solicitou ao Banco **revisão somente offline** do `physical-columns.v105.json` entregue pelo Runtime. Nenhum SQL, JDBC, Flyway, smoke, restore ou edição de resource/guard, migration, baseline ou manifesto nesta unidade.
+- Estado: **recurso V105 concorda 971/971 com a DMV 0339 no escopo de metadados; P08 aberto.** Isto não aprova o contrato de negócio, guard, pacote ou smoke. FAIL 0336, candidatos A/B anteriores, recusas pré-DMV 0338 e limites do backup 0325 permanecem históricos.
+
+## Inputs e método
+
+O recurso V105 tinha SHA-256 `8286ECFEE465C7999002288EE9B1F5AFE710613763DCE9548016C6C262B2B424` antes e depois da revisão. V098 permaneceu SHA-256 `16EF4E66339805B2B164A7A802FCF6862A0AF528BBB84AA5E6E3B03CFBFC72FF`. O comparador privado `target/shadow-local-rebuild-20260928-01/p08-v105-0340-review-resource.js`, SHA-256 `C3CF1F8FE8316F5782D844CF8B42261B0629EDE424FA06CA45B3BD994A4D8EB9`, leu JSONs como UTF-8 estrito e a saída DMV privada 0339 **bruta**, SHA-256 `3FE337F5A92E6F88EBEBD8A3B126D948FA8C7A13FA162AA13288A77471ADEEF5`, com BOM `FF FE` e decodificação UTF-16LE estrita. Para cada coluna, converteu o nome do resource em bytes UTF-16LE e comparou seu hex à DMV, além de view/ordinal/tipo/bytes/precisão/escala/nulidade/collation. O dump `sys.columns` 0336 foi lido só para campos ASCII de metadados, sem usar seus nomes afetados por codepage. O digest declarado no cabeçalho do V105 **não substituiu** nenhuma comparação de linha.
+
+Resultado: **19 views, 971 colunas e 971 chaves view+ordinal únicas**; zero erro/oculta na DMV, zero diferença de nome Unicode, forma ou qualquer campo do recurso V105 contra a DMV. Nos campos técnicos sem nome, zero diferença contra o catálogo 0336. O V105 comparado campo a campo com V098 mudou exatamente **181 collations** `Latin1_General_CI_AS`→`Latin1_General_100_CI_AS_SC` e **cinco larguras**, sem outro campo: SQL-01 ordinal 17 `[Cliente/CNPJ]` 28→56 bytes; SQL-13 ordinais 5 `[DESTINO - SM]`, 9 `[DESTINO]`, 14 `destino_sm`, 18 `destino_nome` 2048→4096 bytes. A matriz V105 normalizada na forma da DMV reproduziu o digest 0339 `64DDE46C66F2E4088BAB043CA5ED7442FE751513CCC185EEB3C236ED466D6C77`; recurso V105 em forma compacta própria `F5ED16BE38E5F4F6BA4AD06199C3827FF09428F37D8C907990A6AEEC273B175A`. V098 e catálogo repetiram seus digests 0339 `DDF36AFE1552C918E41A35F85566F5233A287EC90D79CDEA3BA88AF09D38B48B` e `FE70F092B5D303480697C3E73DA4FCA85B022F15A90E09BA3E55065F1AA9BECF`.
+
+## Proveniência conferida e limites
+
+O cabeçalho V105 tem `version=qualification-physical-schema-v2`, `schemaVersion=105`, `origin=LOCAL_SCHEMA_DMV_0339` e conjunto de chaves exato. Seus pins foram comparados aos **artefatos**, com normalização de caixa: `baseSha256` é o arquivo V098; `catalogSha256` é o digest **canônico sem nomes danificados** do catálogo 0336 (`FE70...`), não o hash bruto `E544...`; `partialDmvSha256` aponta ao **recibo de comparação** 0338 SHA-256 `AD68CBEC1BB456AC51B73AE255BB1C77E5B09EAEDDECB80CB4E33DD391CEFF52`, não à saída DMV 119 bruta; `dmvSha256` é o digest canônico das 971 linhas 0339 (`64DD...`), não o hash bruto `3FE3...`; `checkpointSha256` igualou o arquivo checkpoint 0339 `E7E8C1104ACC33880CB493FCA45512EEA566002BF88E6D220522CA0E42264415`. Todos passaram. Os nomes dos campos do cabeçalho exigem esta distinção ao revisar o pacote; hash e rótulo de origem não demonstram autoria nem intenção histórica.
+
+O recibo de alvo 0339, SHA-256 `D2F7B09054A58EA8DF120775D0D8EB8D1607A43086F2D38A3B4F8F2A68CD1CF6`, fixa SQL Server **17.0.1000.7**, compatibilidade **170**, collation `Latin1_General_100_CI_AS_SC`, 106 Flyway=SCHEMA+105 SQL/zero falhas; o master 0339 também manteve o alvo exato. Os hashes das **19 definições SQL de view** preservados em 0339 conferiram o output bruto SHA-256 `886D8ED788752F4551C3402470C20ABA0C235C6428A3A7DBB9A2BB7FE190DA9B` e digest canônico `AE4C0E486A838C5654988CC77C081CB51AA5E021C0D6A095C958B162F4C1B619`; pré e pós 0339 iguais. Arquivos versionados V043, V052, V080, V093 e V105 ainda conferem seus hashes do manifesto. Tudo isto é **releitura offline da fotografia 0339**, não readback novo do banco ou prova da causa histórica das larguras.
+
+Recibo privado íntegro `target/shadow-local-rebuild-20260928-01/p08-v105-0340-resource-review.json`, SHA-256 `134F7AA6CE724C4043319397FC9ECCACC9137F3AAD19C7A62400C1AA49891D43`, registra todas as verificações sem despejar as 971 entradas. Estado `V105_RESOURCE_OFFLINE_DMV_CONCORDANT`. Nenhum contrato foi gerado da saída SQLCMD; nenhum arquivo do Runtime ou schema foi editado pelo Banco.
+
+## Retomada
+
+1. Supervisor integra esta revisão com testes/mutantes e empacotamento offline do Runtime, distinguindo concordância de metadados da qualificação do guard/pacote.
+2. Qualquer smoke físico novo requer autorização, pins, preflight e ledger próprios; preservar FAIL 0336 e candidatos anteriores.
+3. P08 permanece aberto; não declarar backup restaurado/testado nem causa histórica de inferência das cinco larguras.

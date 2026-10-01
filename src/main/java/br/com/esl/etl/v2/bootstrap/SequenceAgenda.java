@@ -141,43 +141,58 @@ public final class SequenceAgenda {
             final UUID run,
             final String stage,
             final LocalDate captureDate) {
-        final var coordinator =
-                new RuntimeTemporalCoordinator(new JdbcSqlServerTemporalPlan(session));
-        for (final var family : List.of("COL", "FRE", "MAN", "COT")) {
-            final var plan = plans.get(family);
-            coordinator.persistCatchUp(
-                    UUID.randomUUID(),
-                    namespace(run, stage, family),
-                    plan.policy(),
-                    captureDate,
-                    plan.tick());
-        }
-        // LOC uses the expansion's existing persisted six-source plan and reserved execution ID.
+        new SqlPersistence().persist(session, run, stage, captureDate);
     }
 
     List<Receipt> reconcile(
             final ColetaTemporalLaboratorySession session, final UUID run, final String stage) {
-        final var coordinator =
-                new RuntimeTemporalCoordinator(new JdbcSqlServerTemporalPlan(session));
-        final var receipts = new ArrayList<Receipt>();
-        for (final var family : List.of("COL", "FRE", "MAN", "COT")) {
-            final var plan = plans.get(family);
-            final var result =
-                    coordinator.reconcile(
-                            namespace(run, stage, family),
-                            plan.policy(),
-                            plan.window().partitionStart(),
-                            List.of(execution(run, stage, family)));
-            receipts.add(
-                    new Receipt(
-                            family,
-                            plan.window().partitionStart(),
-                            plan.window().endExclusive(),
-                            plan.window().extractionStart(),
-                            result.contiguousEnd(),
-                            result.degraded(),
-                            plan.backlog()));
+        return new SqlPersistence().reconcile(session, run, stage);
+    }
+
+    private final class SqlPersistence {
+        private void persist(
+                final ColetaTemporalLaboratorySession session,
+                final UUID run,
+                final String stage,
+                final LocalDate captureDate) {
+            final var coordinator =
+                    new RuntimeTemporalCoordinator(new JdbcSqlServerTemporalPlan(session));
+            for (final var family : List.of("COL", "FRE", "MAN", "COT")) {
+                final var plan = plans.get(family);
+                coordinator.persistCatchUp(
+                        UUID.randomUUID(),
+                        namespace(run, stage, family),
+                        plan.policy(),
+                        captureDate,
+                        plan.tick());
+            }
+            // LOC uses the expansion's persisted six-source plan and reserved execution ID.
         }
-        return List.copyOf(receipts);
+
+        private List<Receipt> reconcile(
+                final ColetaTemporalLaboratorySession session, final UUID run, final String stage) {
+            final var coordinator =
+                    new RuntimeTemporalCoordinator(new JdbcSqlServerTemporalPlan(session));
+            final var receipts = new ArrayList<Receipt>();
+            for (final var family : List.of("COL", "FRE", "MAN", "COT")) {
+                final var plan = plans.get(family);
+                final var result =
+                        coordinator.reconcile(
+                                namespace(run, stage, family),
+                                plan.policy(),
+                                plan.window().partitionStart(),
+                                List.of(execution(run, stage, family)));
+                receipts.add(
+                        new Receipt(
+                                family,
+                                plan.window().partitionStart(),
+                                plan.window().endExclusive(),
+                                plan.window().extractionStart(),
+                                result.contiguousEnd(),
+                                result.degraded(),
+                                plan.backlog()));
+            }
+            return List.copyOf(receipts);
+        }
     }
 }

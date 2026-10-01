@@ -2,7 +2,7 @@
   "version": "qualification-config-v1",
   "host": "localhost",
   "database": "ETL_SISTEMA_V2_SHADOW",
-  "schemaVersion": 104,
+  "schemaVersion": 105,
   "syntheticOnly": true,
   "rollbackOnly": true,
   "profileActive": true,

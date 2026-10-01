@@ -101,147 +101,175 @@ public final class LocalAnalyticUsersRuntime {
             final CancellationToken cancellation)
             throws Exception {
         Objects.requireNonNull(cancellation).throwIfCancellationRequested();
-        try (var connection = session.getConnection()) {
-            final var savepoint = connection.setSavepoint();
-            try {
-                final var result =
-                        captureWithin(run, execution, date, mode, replayOf, source, cancellation);
-                cancellation.throwIfCancellationRequested();
-                return result;
-            } catch (final Exception failure) {
-                try {
-                    connection.rollback(savepoint);
-                } catch (final SQLException rollback) {
-                    failure.addSuppressed(rollback);
-                }
-                throw failure;
-            }
+        try {
+            requireObservationMode(mode, replayOf);
+            return new SqlCapture()
+                    .captureWithinTransaction(
+                            run, execution, date, mode, replayOf, source, cancellation);
         } finally {
             observer.captureClosed();
         }
     }
 
-    private StagingPublicationResult captureWithin(
-            final UUID run,
-            final UUID execution,
-            final LocalDate date,
-            final ExecutionMode mode,
-            final UUID replayOf,
-            final AnalyticUsersCaptureSource source,
-            final CancellationToken cancellation)
-            throws Exception {
+    static void requireObservationMode(final ExecutionMode mode, final UUID replayOf) {
         if ((mode != ExecutionMode.BACKFILL && mode != ExecutionMode.REPLAY)
                 || (mode == ExecutionMode.REPLAY) != (replayOf != null)) {
             throw new IllegalArgumentException("ANA_USERS_OBSERVATION_MODE");
         }
-        cancellation.throwIfCancellationRequested();
-        final var quality =
-                new JdbcAnalyticQuality(session)
-                        .register(run, JdbcAnalyticQuality.Entity.USUARIOS, mode, scope);
-        final var configuration = configuration(clock, scope);
-        final var document =
-                JsonNodeFactory.instance
-                        .objectNode()
-                        .put("protocol", "GRAPHQL")
-                        .put("operation", "USERS_SNAPSHOT")
-                        .put("invocationId", UUID.randomUUID().toString())
-                        .put("executionId", execution.toString())
-                        .put("cycleId", UUID.randomUUID().toString())
-                        .put("mode", mode.name())
-                        .put("start", date.atStartOfDay(ZoneId.of("UTC")).toInstant().toString())
-                        .put(
-                                "endExclusive",
-                                date.plusDays(1)
-                                        .atStartOfDay(ZoneId.of("UTC"))
-                                        .toInstant()
-                                        .toString())
-                        .put("replayOf", replayOf == null ? "" : replayOf.toString())
-                        .put("idempotencyKey", execution.toString())
-                        .put("leaseSeconds", "60")
-                        .put("pageSize", "20")
-                        .put("maximumPages", "256")
-                        .put("maximumNodes", "5120")
-                        .put("qualityVersion", quality.version())
-                        .put("qualityFingerprint", quality.sha256())
-                        .put("compatibilityVersion", "analytic-users-strict-v1");
-        final var request = RuntimeUsersRequest.read(configuration, document);
-        final RuntimeExecutionPlanItem[] selected = new RuntimeExecutionPlanItem[1];
-        request.plan().forEach(item -> selected[0] = item);
-        final var item = selected[0];
-        final var start =
-                new ControlPlaneStart(
-                        execution,
-                        request.plan().cycleId(),
-                        item.partition(),
-                        item.request().windowStrategy().name(),
-                        item.definition().contract(),
-                        item.definition().configuration(),
-                        item.request().idempotencyKey(),
-                        item.request().replayOfExecutionId(),
-                        item.definition().leaseDuration(),
-                        clock.instant());
-        final var guard =
-                new ContractRunGuard(
-                        request.binding(),
-                        request.release(),
-                        request.compatibility(),
-                        start,
-                        ignored -> {});
-        final var observation =
-                new GraphQlContractObservationConfiguration(
-                        GraphQlReadOperation.USERS_SNAPSHOT,
-                        ContractObservationLimits.runtimeDefaults(),
-                        ContractResponsePathBoundary.forRuntime(
-                                request.release(), request.compatibility()),
-                        request.binding().runtimeConfigurationFingerprint());
-        final var handler =
-                new LocalUsuariosRuntime(
-                        item.partition(),
-                        guard,
-                        request.limits(),
-                        (bound, token) -> source.observed(observer).bind(observation, bound, token),
-                        batch -> {
-                            observer.batchStarted(batch.size());
-                            new JdbcSqlServerUsuarioStagingGateway(session).stage(batch);
-                            observer.batchStaged(batch.size());
-                        },
-                        new JdbcSqlServerUsuarioPromotionGateway(session),
-                        new FailClosedDataQualityEngine(
-                                new JdbcSqlServerObservabilityGateway(
-                                        session, clock, Duration.ofSeconds(10))),
-                        quality);
-        final RuntimeException[] failure = new RuntimeException[1];
-        final var result =
-                new RuntimeDispatcher(
-                                new JdbcSqlServerControlPlane(session),
-                                clock,
-                                new JdbcSqlServerRuntimeRecovery(
-                                        session, Duration.ofSeconds(10), Duration.ofSeconds(20)),
-                                new RuntimeDispatchBinding(
-                                        item.definition().id(),
-                                        active -> {
-                                            try {
-                                                handler.execute(active);
-                                            } catch (final RuntimeException error) {
-                                                failure[0] = error;
-                                                throw error;
-                                            }
-                                        }))
-                        .dispatch(request.plan(), cancellation)
-                        .result(item.definition().id());
-        if (result.status() != RuntimeExecutionResult.Status.PUBLISHED) {
-            throw new SQLException(
-                    "ANA_USERS_CAPTURE_" + result.status(),
-                    result.recovery()
-                            .flatMap(
-                                    br.com.esl.etl.v2.plataforma.orquestracao
-                                                    .RuntimeExecutionSession
-                                            ::failureCause)
-                            .orElse(failure[0]));
+    }
+
+    private final class SqlCapture {
+        private StagingPublicationResult captureWithinTransaction(
+                final UUID run,
+                final UUID execution,
+                final LocalDate date,
+                final ExecutionMode mode,
+                final UUID replayOf,
+                final AnalyticUsersCaptureSource source,
+                final CancellationToken cancellation)
+                throws Exception {
+            try (var connection = session.getConnection()) {
+                final var savepoint = connection.setSavepoint();
+                try {
+                    final var result =
+                            captureWithin(
+                                    run, execution, date, mode, replayOf, source, cancellation);
+                    cancellation.throwIfCancellationRequested();
+                    return result;
+                } catch (final Exception failure) {
+                    try {
+                        connection.rollback(savepoint);
+                    } catch (final SQLException rollback) {
+                        failure.addSuppressed(rollback);
+                    }
+                    throw failure;
+                }
+            }
         }
-        new JdbcAnalyticDimensions(session)
-                .attachExecution(run, AnalyticDimensionBinding.Entity.USUARIO, execution);
-        return result.publication().orElseThrow();
+
+        private StagingPublicationResult captureWithin(
+                final UUID run,
+                final UUID execution,
+                final LocalDate date,
+                final ExecutionMode mode,
+                final UUID replayOf,
+                final AnalyticUsersCaptureSource source,
+                final CancellationToken cancellation)
+                throws Exception {
+            cancellation.throwIfCancellationRequested();
+            final var quality =
+                    new JdbcAnalyticQuality(session)
+                            .register(run, JdbcAnalyticQuality.Entity.USUARIOS, mode, scope);
+            final var configuration = configuration(clock, scope);
+            final var document =
+                    JsonNodeFactory.instance
+                            .objectNode()
+                            .put("protocol", "GRAPHQL")
+                            .put("operation", "USERS_SNAPSHOT")
+                            .put("invocationId", UUID.randomUUID().toString())
+                            .put("executionId", execution.toString())
+                            .put("cycleId", UUID.randomUUID().toString())
+                            .put("mode", mode.name())
+                            .put(
+                                    "start",
+                                    date.atStartOfDay(ZoneId.of("UTC")).toInstant().toString())
+                            .put(
+                                    "endExclusive",
+                                    date.plusDays(1)
+                                            .atStartOfDay(ZoneId.of("UTC"))
+                                            .toInstant()
+                                            .toString())
+                            .put("replayOf", replayOf == null ? "" : replayOf.toString())
+                            .put("idempotencyKey", execution.toString())
+                            .put("leaseSeconds", "60")
+                            .put("pageSize", "20")
+                            .put("maximumPages", "256")
+                            .put("maximumNodes", "5120")
+                            .put("qualityVersion", quality.version())
+                            .put("qualityFingerprint", quality.sha256())
+                            .put("compatibilityVersion", "analytic-users-strict-v1");
+            final var request = RuntimeUsersRequest.read(configuration, document);
+            final RuntimeExecutionPlanItem[] selected = new RuntimeExecutionPlanItem[1];
+            request.plan().forEach(item -> selected[0] = item);
+            final var item = selected[0];
+            final var start =
+                    new ControlPlaneStart(
+                            execution,
+                            request.plan().cycleId(),
+                            item.partition(),
+                            item.request().windowStrategy().name(),
+                            item.definition().contract(),
+                            item.definition().configuration(),
+                            item.request().idempotencyKey(),
+                            item.request().replayOfExecutionId(),
+                            item.definition().leaseDuration(),
+                            clock.instant());
+            final var guard =
+                    new ContractRunGuard(
+                            request.binding(),
+                            request.release(),
+                            request.compatibility(),
+                            start,
+                            ignored -> {});
+            final var observation =
+                    new GraphQlContractObservationConfiguration(
+                            GraphQlReadOperation.USERS_SNAPSHOT,
+                            ContractObservationLimits.runtimeDefaults(),
+                            ContractResponsePathBoundary.forRuntime(
+                                    request.release(), request.compatibility()),
+                            request.binding().runtimeConfigurationFingerprint());
+            final var handler =
+                    new LocalUsuariosRuntime(
+                            item.partition(),
+                            guard,
+                            request.limits(),
+                            (bound, token) ->
+                                    source.observed(observer).bind(observation, bound, token),
+                            batch -> {
+                                observer.batchStarted(batch.size());
+                                new JdbcSqlServerUsuarioStagingGateway(session).stage(batch);
+                                observer.batchStaged(batch.size());
+                            },
+                            new JdbcSqlServerUsuarioPromotionGateway(session),
+                            new FailClosedDataQualityEngine(
+                                    new JdbcSqlServerObservabilityGateway(
+                                            session, clock, Duration.ofSeconds(10))),
+                            quality);
+            final RuntimeException[] failure = new RuntimeException[1];
+            final var result =
+                    new RuntimeDispatcher(
+                                    new JdbcSqlServerControlPlane(session),
+                                    clock,
+                                    new JdbcSqlServerRuntimeRecovery(
+                                            session,
+                                            Duration.ofSeconds(10),
+                                            Duration.ofSeconds(20)),
+                                    new RuntimeDispatchBinding(
+                                            item.definition().id(),
+                                            active -> {
+                                                try {
+                                                    handler.execute(active);
+                                                } catch (final RuntimeException error) {
+                                                    failure[0] = error;
+                                                    throw error;
+                                                }
+                                            }))
+                            .dispatch(request.plan(), cancellation)
+                            .result(item.definition().id());
+            if (result.status() != RuntimeExecutionResult.Status.PUBLISHED) {
+                throw new SQLException(
+                        "ANA_USERS_CAPTURE_" + result.status(),
+                        result.recovery()
+                                .flatMap(
+                                        br.com.esl.etl.v2.plataforma.orquestracao
+                                                        .RuntimeExecutionSession
+                                                ::failureCause)
+                                .orElse(failure[0]));
+            }
+            new JdbcAnalyticDimensions(session)
+                    .attachExecution(run, AnalyticDimensionBinding.Entity.USUARIO, execution);
+            return result.publication().orElseThrow();
+        }
     }
 
     private static RuntimeConfiguration configuration(

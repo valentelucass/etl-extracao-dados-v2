@@ -192,13 +192,13 @@
       "line": 493,
       "rule": "PreserveStackTrace",
       "method": "parseUri",
-      "sourceSha256": "4aec96367abdbcfb47aaa5fa657fbfe4bb3aed9d437163fec8183bbf5b0a2566",
+      "sourceSha256": "85a6d4acce5d0c18f0d8724fc291865944638194a2531f724e5bed5a2d39b447",
       "classification": "SANITIZACAO_DE_DADOS",
       "rationale": "URI.create pode ecoar URI/credenciais; fronteira devolve mensagem fixa recebida internamente, sem causa.",
       "tests": [
         {
           "path": "src/test/java/br/com/esl/etl/v2/plataforma/configuracao/RuntimeConfigurationFactoryTest.java",
-          "sha256": "cac1b868d55414867c3af6e56da42e1ab5199fe61e966f764b1b242589817417",
+          "sha256": "67064c61479b6614dc5e9984afd941d326875982798208b7532c5b30ace8c35b",
           "className": "br.com.esl.etl.v2.plataforma.configuracao.RuntimeConfigurationFactoryTest",
           "testCase": "malformedTypedValuesDoNotEscapeThroughExceptionCauses"
         }
@@ -211,13 +211,13 @@
       "line": 505,
       "rule": "PreserveStackTrace",
       "method": "parseIanaZone",
-      "sourceSha256": "4aec96367abdbcfb47aaa5fa657fbfe4bb3aed9d437163fec8183bbf5b0a2566",
+      "sourceSha256": "85a6d4acce5d0c18f0d8724fc291865944638194a2531f724e5bed5a2d39b447",
       "classification": "SANITIZACAO_DE_DADOS",
       "rationale": "ZoneId.of pode ecoar valor de configuracao; mensagem fixa cobre formato e exige IANA registrado.",
       "tests": [
         {
           "path": "src/test/java/br/com/esl/etl/v2/plataforma/configuracao/RuntimeConfigurationFactoryTest.java",
-          "sha256": "cac1b868d55414867c3af6e56da42e1ab5199fe61e966f764b1b242589817417",
+          "sha256": "67064c61479b6614dc5e9984afd941d326875982798208b7532c5b30ace8c35b",
           "className": "br.com.esl.etl.v2.plataforma.configuracao.RuntimeConfigurationFactoryTest",
           "testCase": "malformedTypedValuesDoNotEscapeThroughExceptionCauses"
         }
@@ -230,13 +230,13 @@
       "line": 513,
       "rule": "PreserveStackTrace",
       "method": "parseTransport",
-      "sourceSha256": "4aec96367abdbcfb47aaa5fa657fbfe4bb3aed9d437163fec8183bbf5b0a2566",
+      "sourceSha256": "85a6d4acce5d0c18f0d8724fc291865944638194a2531f724e5bed5a2d39b447",
       "classification": "SANITIZACAO_DE_DADOS",
       "rationale": "Transporte invalido vira texto fixo; nao devolve valor arbitrario da configuracao via excecao original.",
       "tests": [
         {
           "path": "src/test/java/br/com/esl/etl/v2/plataforma/configuracao/RuntimeConfigurationFactoryTest.java",
-          "sha256": "cac1b868d55414867c3af6e56da42e1ab5199fe61e966f764b1b242589817417",
+          "sha256": "67064c61479b6614dc5e9984afd941d326875982798208b7532c5b30ace8c35b",
           "className": "br.com.esl.etl.v2.plataforma.configuracao.RuntimeConfigurationFactoryTest",
           "testCase": "malformedTypedValuesDoNotEscapeThroughExceptionCauses"
         }
@@ -246,16 +246,16 @@
     {
       "id": "PMD-013",
       "path": "src/main/java/br/com/esl/etl/v2/plataforma/configuracao/RuntimeConfigurationFactory.java",
-      "line": 596,
+      "line": 599,
       "rule": "PreserveStackTrace",
       "method": "parseLong",
-      "sourceSha256": "4aec96367abdbcfb47aaa5fa657fbfe4bb3aed9d437163fec8183bbf5b0a2566",
+      "sourceSha256": "85a6d4acce5d0c18f0d8724fc291865944638194a2531f724e5bed5a2d39b447",
       "classification": "SANITIZACAO_DE_DADOS",
       "rationale": "NumberFormatException inclui entrada; erro numerico fixo evita propagar o valor de configuracao.",
       "tests": [
         {
           "path": "src/test/java/br/com/esl/etl/v2/plataforma/configuracao/RuntimeConfigurationFactoryTest.java",
-          "sha256": "cac1b868d55414867c3af6e56da42e1ab5199fe61e966f764b1b242589817417",
+          "sha256": "67064c61479b6614dc5e9984afd941d326875982798208b7532c5b30ace8c35b",
           "className": "br.com.esl.etl.v2.plataforma.configuracao.RuntimeConfigurationFactoryTest",
           "testCase": "malformedTypedValuesDoNotEscapeThroughExceptionCauses"
         }
@@ -274,7 +274,7 @@
       "tests": [
         {
           "path": "src/test/java/br/com/esl/etl/v2/plataforma/configuracao/RuntimeConfigurationFactoryTest.java",
-          "sha256": "cac1b868d55414867c3af6e56da42e1ab5199fe61e966f764b1b242589817417",
+          "sha256": "67064c61479b6614dc5e9984afd941d326875982798208b7532c5b30ace8c35b",
           "className": "br.com.esl.etl.v2.plataforma.configuracao.RuntimeConfigurationFactoryTest",
           "testCase": "malformedTypedValuesDoNotEscapeThroughExceptionCauses"
         }
@@ -293,7 +293,7 @@
       "tests": [
         {
           "path": "src/test/java/br/com/esl/etl/v2/plataforma/configuracao/RuntimeConfigurationFactoryTest.java",
-          "sha256": "cac1b868d55414867c3af6e56da42e1ab5199fe61e966f764b1b242589817417",
+          "sha256": "67064c61479b6614dc5e9984afd941d326875982798208b7532c5b30ace8c35b",
           "className": "br.com.esl.etl.v2.plataforma.configuracao.RuntimeConfigurationFactoryTest",
           "testCase": "malformedTypedValuesDoNotEscapeThroughExceptionCauses"
         }
@@ -347,10 +347,10 @@
     {
       "id": "PMD-018",
       "path": "src/main/java/br/com/esl/etl/v2/plataforma/fonte/dataexport/DataExportHttpExecutor.java",
-      "line": 181,
+      "line": 183,
       "rule": "PreserveStackTrace",
       "method": "sendBounded",
-      "sourceSha256": "784939971b0d5283876e54f337376975ac6b3df4a7a5d11a3aaf3c835c74bfcf",
+      "sourceSha256": "cf67333eca7fa17eab7851266577af007af0a04880b06a80b587a7328fcf423d",
       "classification": "FALSO_POSITIVO_CAUSA_PRESERVADA_COM_BUG_ADJACENTE_CORRIGIDO",
       "rationale": "ExecutionException e desembrulhada; IOException/runtime sao propagadas e fallback preserva cause. Bug adjacente: Error antes virava IOException e recebia retry; agora Error e propagado diretamente.",
       "tests": [
@@ -372,16 +372,16 @@
     {
       "id": "PMD-019",
       "path": "src/main/java/br/com/esl/etl/v2/plataforma/fonte/dataexport/DataExportHttpExecutor.java",
-      "line": 228,
+      "line": 230,
       "rule": "PreserveStackTrace",
       "method": "decodeUtf8",
-      "sourceSha256": "784939971b0d5283876e54f337376975ac6b3df4a7a5d11a3aaf3c835c74bfcf",
+      "sourceSha256": "cf67333eca7fa17eab7851266577af007af0a04880b06a80b587a7328fcf423d",
       "classification": "SANITIZACAO_DE_DADOS",
       "rationale": "Falha de UTF-8 vira erro fixo do template, sem cadeia potencialmente ligada a bytes remotos.",
       "tests": [
         {
           "path": "src/test/java/br/com/esl/etl/v2/plataforma/fonte/dataexport/HttpDataExportGatewayTest.java",
-          "sha256": "bf297c719434a7be5d569aac1f7093a5c68ae0b919b745e75959981b999d1553",
+          "sha256": "1d4586251ea066df0730dd23dda379160c5a400e6cc98668a512602c54ab24ff",
           "className": "br.com.esl.etl.v2.plataforma.fonte.dataexport.HttpDataExportGatewayTest",
           "testCase": "rejectsMalformedUtf8WithoutReplacementOrRetainedBytes"
         }
@@ -400,7 +400,7 @@
       "tests": [
         {
           "path": "src/test/java/br/com/esl/etl/v2/plataforma/fonte/dataexport/HttpDataExportGatewayTest.java",
-          "sha256": "bf297c719434a7be5d569aac1f7093a5c68ae0b919b745e75959981b999d1553",
+          "sha256": "1d4586251ea066df0730dd23dda379160c5a400e6cc98668a512602c54ab24ff",
           "className": "br.com.esl.etl.v2.plataforma.fonte.dataexport.HttpDataExportGatewayTest",
           "testCase": "sanitizesMalformedJsonWithoutRetainingTheResponsePayload"
         }
@@ -577,13 +577,13 @@
       "tests": [
         {
           "path": "src/test/java/br/com/esl/etl/v2/plataforma/persistencia/analitico/JdbcRasterBatchTest.java",
-          "sha256": "3089c4fe378c1cbffc218fb1672a73970fdbae6ca2ee8bdaf3fac53f4c78f817",
+          "sha256": "f7598ab768467e7da16b71365a53f04956be574d6508412d343c72094c6fafd6",
           "className": "br.com.esl.etl.v2.plataforma.persistencia.analitico.JdbcRasterBatchTest",
           "testCase": "failedInitializationClosesOnlyAcquiredStatementsAndRetainsItsFailure"
         },
         {
           "path": "src/test/java/br/com/esl/etl/v2/plataforma/persistencia/analitico/JdbcRasterBatchTest.java",
-          "sha256": "3089c4fe378c1cbffc218fb1672a73970fdbae6ca2ee8bdaf3fac53f4c78f817",
+          "sha256": "f7598ab768467e7da16b71365a53f04956be574d6508412d343c72094c6fafd6",
           "className": "br.com.esl.etl.v2.plataforma.persistencia.analitico.JdbcRasterBatchTest",
           "testCase": "closesStatementsBeforeObserverInTheOriginalOrder"
         }
@@ -602,13 +602,13 @@
       "tests": [
         {
           "path": "src/test/java/br/com/esl/etl/v2/plataforma/persistencia/analitico/JdbcRasterBatchTest.java",
-          "sha256": "3089c4fe378c1cbffc218fb1672a73970fdbae6ca2ee8bdaf3fac53f4c78f817",
+          "sha256": "f7598ab768467e7da16b71365a53f04956be574d6508412d343c72094c6fafd6",
           "className": "br.com.esl.etl.v2.plataforma.persistencia.analitico.JdbcRasterBatchTest",
           "testCase": "failedInitializationClosesOnlyAcquiredStatementsAndRetainsItsFailure"
         },
         {
           "path": "src/test/java/br/com/esl/etl/v2/plataforma/persistencia/analitico/JdbcRasterBatchTest.java",
-          "sha256": "3089c4fe378c1cbffc218fb1672a73970fdbae6ca2ee8bdaf3fac53f4c78f817",
+          "sha256": "f7598ab768467e7da16b71365a53f04956be574d6508412d343c72094c6fafd6",
           "className": "br.com.esl.etl.v2.plataforma.persistencia.analitico.JdbcRasterBatchTest",
           "testCase": "closesStatementsBeforeObserverInTheOriginalOrder"
         }
@@ -627,13 +627,13 @@
       "tests": [
         {
           "path": "src/test/java/br/com/esl/etl/v2/plataforma/persistencia/analitico/JdbcRasterBatchTest.java",
-          "sha256": "3089c4fe378c1cbffc218fb1672a73970fdbae6ca2ee8bdaf3fac53f4c78f817",
+          "sha256": "f7598ab768467e7da16b71365a53f04956be574d6508412d343c72094c6fafd6",
           "className": "br.com.esl.etl.v2.plataforma.persistencia.analitico.JdbcRasterBatchTest",
           "testCase": "constructorRetainsOriginalFailureAndClosesAllStatementsAfterMixedCleanupFailures"
         },
         {
           "path": "src/test/java/br/com/esl/etl/v2/plataforma/persistencia/analitico/JdbcRasterBatchTest.java",
-          "sha256": "3089c4fe378c1cbffc218fb1672a73970fdbae6ca2ee8bdaf3fac53f4c78f817",
+          "sha256": "f7598ab768467e7da16b71365a53f04956be574d6508412d343c72094c6fafd6",
           "className": "br.com.esl.etl.v2.plataforma.persistencia.analitico.JdbcRasterBatchTest",
           "testCase": "constructorStillClosesLaterStatementsWhenCleanupRethrowsTheOriginalFailure"
         }

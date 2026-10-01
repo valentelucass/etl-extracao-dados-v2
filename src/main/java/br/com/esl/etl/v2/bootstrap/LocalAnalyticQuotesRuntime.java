@@ -18,6 +18,7 @@ import br.com.esl.etl.v2.plataforma.orquestracao.RuntimeDispatcher;
 import br.com.esl.etl.v2.plataforma.orquestracao.RuntimeExecutionPlanItem;
 import br.com.esl.etl.v2.plataforma.orquestracao.RuntimeExecutionRequest;
 import br.com.esl.etl.v2.plataforma.orquestracao.RuntimeExecutionResult;
+import br.com.esl.etl.v2.plataforma.orquestracao.RuntimeExecutionSession;
 import br.com.esl.etl.v2.plataforma.orquestracao.RuntimePlanningRequest;
 import br.com.esl.etl.v2.plataforma.orquestracao.RuntimeWindowStrategy;
 import br.com.esl.etl.v2.plataforma.orquestracao.RuntimeWorkloadDefinition;
@@ -268,7 +269,11 @@ public final class LocalAnalyticQuotesRuntime {
                                 .dispatch(plan, cancellation)
                                 .result(id);
                 if (result.status() != RuntimeExecutionResult.Status.PUBLISHED) {
-                    throw new SQLException("ANA_QUOTE_CAPTURE_" + result.status(), failure[0]);
+                    throw new SQLException(
+                            "ANA_QUOTE_CAPTURE_" + result.status(),
+                            result.recovery()
+                                    .flatMap(RuntimeExecutionSession::failureCause)
+                                    .orElse(failure[0]));
                 }
                 cancellation.throwIfCancellationRequested();
                 final var receipt = promotion.prepare(execution);

@@ -1,5 +1,5 @@
 #Requires -Version 7.5
-param([Parameter(Mandatory)][ValidateSet('inspect','plan','run','status','resume','compare')][string]$Command,
+param([Parameter(Mandatory)][ValidateSet('inspect','plan','run','status','resume','compare','config-validate','dry-run')][string]$Command,
     [Parameter(Mandatory)][ValidatePattern('^[a-f0-9]{64}$')][string]$ManifestSha256,
     [string]$Campaign='', [string]$Control='', [string]$Configuration='')
 $ErrorActionPreference='Stop'
@@ -12,19 +12,45 @@ Import-Module (Join-Path $PSScriptRoot 'QualificationPackage.psm1') -Force
 $null=Test-QualificationPackage -Directory $PSScriptRoot -ManifestSha256 $ManifestSha256
 $java=(Get-Command java.exe -CommandType Application -ErrorAction Stop|Select-Object -First 1).Source
 $jar=Join-Path $PSScriptRoot 'etl-dataexport-v2.jar'
-$arguments=@('-Xmx512m','-Dfile.encoding=UTF-8','-Dshadow.local.integration.profile.active=true',
-    '-Dshadow.local.integration.enabled=true',('-Djava.library.path='+(Join-Path $PSScriptRoot 'native')),
-    '-cp',$jar,'br.com.esl.etl.v2.bootstrap.QualificationLaboratoryMain',$Command,
-    ('--manifest-sha='+$ManifestSha256))
-if($Campaign){$arguments+=('--campaign='+[IO.Path]::GetFullPath($Campaign))}
-if($Control){$arguments+=('--control='+[IO.Path]::GetFullPath($Control))}
-if($Configuration){$arguments+=('--configuration='+[IO.Path]::GetFullPath($Configuration))}
+$offline=$Command -in @('config-validate','dry-run')
+if($offline){
+    if($Campaign -or $Control -or $Configuration){throw 'QUAL_OFFLINE_SMOKE_INPUTS'}
+    $safeConfig=Join-Path $PSScriptRoot 'config/application.example.properties'
+    $arguments=@('-Xmx512m','-Dfile.encoding=UTF-8','-cp',$jar,'br.com.esl.etl.v2.bootstrap.Main')
+    if($Command -ceq 'config-validate'){$arguments+=@('config','validate')}
+    else{$arguments+='dry-run'}
+    $arguments+=@('--config',$safeConfig)
+}else{
+    $lock=Read-QualificationJsonBytes ([IO.File]::ReadAllBytes((Join-Path $PSScriptRoot 'dependencies.json'))) 65536
+    $jdbc=@($lock.dependencies|Where-Object {$_.group -ceq 'com.microsoft.sqlserver' -and $_.name -ceq 'mssql-jdbc' -and $_.type -ceq 'jar'})
+    $auth=@($lock.dependencies|Where-Object {$_.group -ceq 'com.microsoft.sqlserver' -and $_.name -ceq 'mssql-jdbc_auth' -and $_.type -ceq 'dll'})
+    if($jdbc.Count -ne 1 -or $auth.Count -ne 1 -or
+       $jdbc[0].version -cne '12.8.2.jre11' -or $auth[0].version -cne '12.8.2.x64' -or
+       $jdbc[0].file -cne 'mssql-jdbc-12.8.2.jre11.jar' -or
+       $auth[0].file -cne 'mssql-jdbc_auth-12.8.2.x64.dll'){
+        throw 'QUAL_PHYSICAL_AUTH_PAIR_REQUIRED'
+    }
+    # The supervisor itself performs the master preflight before spawning a worker.
+    $classpath=$jar+[IO.Path]::PathSeparator+(Join-Path $PSScriptRoot 'lib/*')
+    $arguments=@('-Xmx512m','-Dfile.encoding=UTF-8','-Dshadow.local.integration.profile.active=true',
+        '-Dshadow.local.integration.enabled=true',('-Djava.library.path='+(Join-Path $PSScriptRoot 'native')),
+        '-cp',$classpath,'br.com.esl.etl.v2.bootstrap.QualificationLaboratoryMain',$Command,
+        ('--manifest-sha='+$ManifestSha256))
+    if($Campaign){$arguments+=('--campaign='+[IO.Path]::GetFullPath($Campaign))}
+    if($Control){$arguments+=('--control='+[IO.Path]::GetFullPath($Control))}
+    if($Configuration){$arguments+=('--configuration='+[IO.Path]::GetFullPath($Configuration))}
+}
 $info=[Diagnostics.ProcessStartInfo]::new($java);$info.WorkingDirectory=$PSScriptRoot
 $info.UseShellExecute=$false;$info.CreateNoWindow=$true
 $info.RedirectStandardOutput=$true;$info.RedirectStandardError=$true
 $info.StandardOutputEncoding=$utf8;$info.StandardErrorEncoding=$utf8
 # Inherited VM/classpath options are not package inputs and must not inject another agent or jar.
 foreach($name in @('JAVA_TOOL_OPTIONS','JDK_JAVA_OPTIONS','_JAVA_OPTIONS','CLASSPATH')){$null=$info.Environment.Remove($name)}
+if($offline){
+    foreach($name in @($info.Environment.Keys|Where-Object { $_.StartsWith('V2_',[StringComparison]::OrdinalIgnoreCase) })){
+        $null=$info.Environment.Remove($name)
+    }
+}
 foreach($argument in $arguments){$info.ArgumentList.Add($argument)}
 $process=[Diagnostics.Process]::Start($info)
 try{

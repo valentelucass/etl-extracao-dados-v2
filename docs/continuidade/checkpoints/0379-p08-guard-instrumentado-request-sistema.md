@@ -1,0 +1,30 @@
+# 0379 — P08: guard instrumentado recusa request de sistema no shadow
+
+- Data: 2026-09-29 UTC. Anterior: [0378](0378-p08-seis-esperas-guard-request-active.md), SHA-256 `BA08B817D789F842D616F5E1F0B315C15AF993DF6BDC2D055130787B0020948D`.
+- Autoridade: nova unidade explícita do Supervisor pós-0378, **separada da campanha encerrada**: diagnosticar SQL 55104 no próprio guard e qualificar somente `AnalyticExpansionCaptureIT#packagedInputsHydrateMissingFreightAndReuseBothFactsAcrossFourModes` se o guard passasse. Uma tentativa com teto 600 s, apenas `localhost/ETL_SISTEMA_V2_SHADOW`, Windows auth, Maven offline JDK17/perfil e trava shadow/fixture sintético rollback-only se admitido. Parar no primeiro guard, erro, delta ou teto; sem retry, 0376/outros métodos/107 ITs/A-B, KILL, DDL/Flyway, restart/login, fonte real, remoto ou produção.
+- Estado: **STOP_GUARD_SYSTEM_REQUEST_ACTIVE_NO_MAVEN**. Guard recusou; método não executado. Sem resultado físico incerto ou reserva ativa.
+
+## Revisão e prova offline
+
+1. AGENTS/STATES/RETOMADA/runbook e 0378/0376/0366 relidos; `../CONTEXTO_GLOBAL.md` ausente. `maestri list` confirmou Supervisor `Codex`. Nenhum arquivo Java, SQL versionado, migration, baseline ou contrato foi editado.
+2. Cópia privada `target/p08-directed-wait-20260929-03/reader-guard.sql` SHA `65C01533143386BDBFB9EDC6101C5C2D46A52C52EB52D08DC024BF693F0E824C`; guard original 0378 SHA `DD1468EF1BB56D7FB22447D29DA24370D0F2D8755F41F4151ACDCF780AF36AD3`. O diff fica inteiramente no bloco da request. As duas sondas originais por `r.database_id` e `s.database_id` e o `THROW 55104` permanecem; uma amostra agregada positiva também recusa, mesmo se a request terminar antes das sondas originais. Categorias anteriores e sua precedência fora desse bloco permaneceram idênticas.
+3. Diagnóstico no mesmo guard usa apenas contagens limitadas a `0/1/2/3+` para total, vínculo `rdb`/`sdb`, processo de usuário reader/outro, sistema/desconhecido, e dois flags de transação. Não imprime sessão, login bruto, host, programa, SQL text, payload, URL ou segredo. Prova sintética privada: **30 casos** (22 categorias/precedência e 8 combinações de flags), diff restrito, parser PowerShell, argv exato `sqlcmd -E -C`/Shared memory, UTF-8 sem BOM, formatos e limites; `offline-guard-proof.json` SHA `271B51B8506977F11D2D1980CAF16889E6E0C7906821C3454972A3461347C277`. Prova offline não compilou SQL. A primeira versão do verificador herdado deu `SQL_GUARD_SHAPE` porque rejeitava qualquer `SUM(CASE)`; snapshot e nota do FAIL foram preservados. A regra foi estreitada para rejeitar apenas o antigo padrão problemático, sem `EXISTS` dentro da agregação. Nenhum efeito físico ocorreu nesse ajuste.
+
+## Espelho, reserva, guard e readback
+
+1. Espelho físico **novo** `C:\Users\lucas\p08m0379_01` sem `target`/`.env` herdados: **2170/2170** hashes, pins 0374 revision/manifest/ZIP/lock apenas candidatos, seletor exato e prova de bytecode 0377 conferidos. Reserva **nova** `target/p08-directed-wait-20260929-03/reservation.json` antes de SQL, 600 s, impacto de leituras locais e eventual teste transacional sintético, recuperação por parada/readback/congelamento sem retry.
+2. Preflight Windows `sqlcmd -E -C` em `master` e shadow exatos, serviço e listeners só loopback, Flyway **106=SCHEMA+105 SQL/0 fail**, 1819 objetos/247 tabelas/147 linhas agregadas, contagens, 064 e stats **2536 somente observacionais** passou; recibo pré SHA `0BC8BF8419011DBE445FAA8EA7DAC554240EA2D8DEB93C6B7C2C7BA880F31DEC`.
+3. O **único guard instrumentado** compilou e recusou SQL **55104 `REQUEST_ACTIVE`**. Marcador sanitizado: **total 1**, `rdb=1`, `sdb=1`, `system=1`, `userReader=0`, `userOther=0`, `unknown=0`, `openTran=1`, `tranAssoc=0`. Significa uma request de processo de sistema associada ao shadow nas duas visões naquele instante, com `open_transaction_count>0` e sem associação observada na DMV de transações consultada. Não identifica sessão, owner, statement, blocker ou causa de 0378/0354. **Zero Maven/JDBC/DLL/Failsafe/IT**, sem retry.
+4. Readback independente Windows/OS confirmou `master`/alvo/Flyway/schema/objetos/agregados/064/PID/listeners sem delta nos recortes medidos; stats **2536→2536**, ainda não baseline aceita. Pre/post mostraram zero outras sessões nos seus instantes, sem invalidar a captura transitória do guard. Recibo pós SHA `5F75301D24026B5E23238D59549283957D4842CB88FE8D83C1530D5B96253044`. Zero processo próprio e espelho ainda sem `target`.
+5. Ledger físico fechado em **88,902 s**: `target/p08-directed-wait-20260929-03/final-receipt.json` SHA `C9EC0D8D3D484D8FE0E848AA2D1992A613D1203168674840B860DA9B5C0BE3B4`; ledger SHA `1F0790DA10E1158753CA13EEE42EF5218F31633A427DCFFE4E3C458C45EA503E`; diagnóstico derivado sanitizado SHA `72FDB0BFC794DBD41150529EB2078A1397B6D68EF56013E8BFCD9D9F59E3DD6C`. O resultado bruto privado do runner serializou metadados de caminho PowerShell junto à string diagnóstica; foi preservado para auditoria, enquanto o recibo derivado contém só contagens/flags e é a fonte para documentação/handoff.
+
+## Limites e handoff
+
+- A recusa 0379 classifica a request observada nesta rodada; não comprova que foi a mesma de 0378. A flag `tranAssoc=0` não nega transação fora da DMV/amostra. Nenhum teste do método foi executado, logo nenhum PASS de IT ou avanço de Gate 1/P08.
+- Preservados o FAIL 0378, o PASS isolado 0376, os oito erros e 74 classes faltantes de 0354, sete esperas sem causa fechada, JaCoCo, A/B físico, Gate 1/P08 abertos, 2536 sem baseline aceita e pins 0374 sem aceite. Nenhum efeito de escrita, DDL/Flyway, KILL, restart/login, outro banco, fonte real ou produção.
+- Arquivos compartilhados desta unidade: `STATES.md`, `TRILHA_CONCLUSAO_POR_MODELO.md`, `RETOMADA.md` e este checkpoint. Próximo responsável: **Supervisor** avalia a pré-condição de request de sistema e define eventual gate novo; **Banco** continua único executor SQL/JDBC/ledger e encerra o turno após handoff.
+
+## Próximas ações
+
+1. Supervisor revisa recibo/flags e a limitação temporal sem atribuir owner ou causa histórica.
+2. Qualquer novo efeito exige unidade/reserva próprias; a recusa 0379 não admite retry nesta campanha.

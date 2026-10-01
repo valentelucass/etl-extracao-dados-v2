@@ -40,6 +40,7 @@ $textExtensions = @(
     '.json',
     '.jsonl',
     '.md',
+    '.mjs',
     '.pom',
     '.properties',
     '.ps1',

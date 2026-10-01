@@ -18,3 +18,51 @@ targetRules = ["generic-api-key"]
 regexTarget = "match"
 paths = ['''(?:^|/)scripts/validation/Build-CutoverTopologyCatalog\.ps1$''']
 regexes = ['''08-auditar_api\.bat','verificar''']
+
+[[allowlists]]
+description = "Synthetic B60 request idempotency keys in the eight frozen proposal fixture sets"
+condition = "AND"
+targetRules = ["generic-api-key"]
+regexTarget = "match"
+paths = ['''(?:^|/)database/proposals/bloco60-(?:local|correcao|retomada-r2|restante|final-restante|audit-restante|seal-restante|lease-restante)/requests/[^/]+\.json$''']
+regexes = ['''^idempotencyKey"\s*:\s*"B60_[A-Za-z0-9]{32}"$''']
+
+[[allowlists]]
+description = "SQL column assignment mistaken for an API key in three migrations"
+condition = "AND"
+targetRules = ["generic-api-key"]
+regexTarget = "match"
+paths = ['''(?:^|/)database/migrations/V(?:058__materialize_analytic_freight_operational|059__align_analytic_location_forecast_path|094__isolate_analytic_materialization_failures)\.sql$''']
+regexes = ['''^o\.branch_key,indicator_valid=o\.indicator_valid$''']
+
+[[allowlists]]
+description = "Synthetic qualification scenario key in one receipt"
+condition = "AND"
+targetRules = ["generic-api-key"]
+regexTarget = "match"
+paths = ['''(?:^|/)docs/continuidade/qualificacao-p07-p33/resultado\.json$''']
+regexes = ['''^key"\s*:\s*"[a-z]{3}[0-9]{4}-[a-z]{3}-[0-9]{2}"$''']
+
+[[allowlists]]
+description = "Static B60 group label in six validation fixtures"
+condition = "AND"
+targetRules = ["generic-api-key"]
+regexTarget = "match"
+paths = ['''(?:^|/)scripts/validation/Bloco60(?:SealFinal|AuditFinal|Remaining|Final|LeaseFinal)?Process\.cs$''']
+regexes = ['''^KeyGroup\s*=\s*"B60_[A-Z]{9}"$''']
+
+[[allowlists]]
+description = "Technical Manifestos fingerprint component names in the contract validator"
+condition = "AND"
+targetRules = ["generic-api-key"]
+regexTarget = "match"
+paths = ['''(?:^|/)scripts/validation/Test-ManifestosV2026DecisionCatalog\.ps1$''']
+regexes = ['''^193_scoped_pick_keys', '43_scoped_mdfe_keys'$''']
+
+[[allowlists]]
+description = "Deterministic synthetic reference digests in the analytic fixture"
+condition = "AND"
+targetRules = ["generic-api-key"]
+regexTarget = "match"
+paths = ['''(?:^|/)src/main/resources/analytic-laboratory/fleet-references\.synthetic\.json$''']
+regexes = ['''^(?:documentToken|subjectToken)"\s*:\s*"[0-9a-f]{64}"$''']

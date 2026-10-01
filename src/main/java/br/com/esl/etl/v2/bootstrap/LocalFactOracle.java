@@ -92,6 +92,18 @@ public final class LocalFactOracle {
         for (final var fact : Fact.values()) {
             token.throwIfCancellationRequested();
             final String expected = tuples(fact);
+            new SqlComparison().verify(session, run, expansion, fact, expected);
+        }
+    }
+
+    private static final class SqlComparison {
+        private void verify(
+                final ColetaTemporalLaboratorySession session,
+                final UUID run,
+                final UUID expansion,
+                final Fact fact,
+                final String expected)
+                throws SQLException {
             final String columns = String.join(",", names(fact));
             // The expected JSON is independently supplied. These queries only read fact tuples;
             // they do not reproduce the calculations that materialized them.

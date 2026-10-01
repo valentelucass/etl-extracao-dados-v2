@@ -1,3 +1,3373 @@
+# P08 — 0415: método 5 R4 OS limitado PASS, IT exata verde, POST 55813 STOP — 30/09/2026
+
+[Checkpoint 0415](docs/continuidade/checkpoints/0415-p08-metodo5-r4-os-pass-post-55813-stop.md), SHA `713AB443A4870E72630A41B73003F26EF0A1209739146FFA881CAA9928D69772`. Banco concluiu R4/03 sobre o pacote 0412: `target/p08-method5-continuity-0412-r4-20260930-01/os-continuity-result.json` SHA `2958FCF15A012E1C6180D3E7B1499571E46D85617EA62DAD1BEDD9CA2853F836` prova **PASS somente da continuidade OS** da imagem elevada pinada 0388 para o processo estável, serviço/listeners loopback e hash/assinatura de disco, sem nova consulta elevada da imagem ativa. PRE local/segurança PASS, 2174 inputs congelados; somente `AnalyticLaboratoryCollectionQueriesIT#lateralAbsentPreservesWhileExplicitNullClearsWithoutRewritingObservedFields` executou, Maven/Failsafe **1/0/0/0**, `sampleCount=0`. O POST formal recusou **55813 `SHADOW_CONSUMERS_PRESENT`**: request SYSTEM `UCS_TASK_NO_SPEC`/`PAGEIOLATCH_SH`, `blocking_session_id=0` **ambíguo**, três transações `UNASSOCIATED` (duas RW, uma RO); `database_transaction_state=3` nas três indica nenhum log gerado até o snapshot, sem provar inocuidade futura ou associação à request. `UCS_TASK_NO_SPEC` não tem definição pública exata confirmada; nenhuma causalidade da IT ou benignidade foi demonstrada. `target/p08-method5-0412-physical-20260930-03/final-receipt.json` SHA `CB8A4141C0D6046842159F6C20DA657CC69C8E16DD0C41FFECBD6D193C420456` fecha `TERMINAL_STOP_GUARD_55813`, `accepted=false`, `p08Accepted=false`, sem retry. Readback tardio sem processo próprio nem delta durável observado em master/alvo, contagens, V064 e stats **não converte o POST em PASS nem prova rollback runtime explícito**. R1–R6/FAILs históricos preservados; **P08/P07/Gate 1**, 107 ITs históricas sem gate integral atual, JaCoCo shadow e A/B físicos seguem abertos; 67/115 é checklist histórico. Handoff causal Banco read-only: **INSUFICIENTE** para atribuição/waiver; o trace histórico não contém elo `transaction_id` entre request, transações e locks, logo não há unidade física elegível agora. Somente em recorrência natural caberia captura read-only sob unidade/reserva nova do Banco, sem IT provocadora. Eventual refinamento prospectivo para SYSTEM comprovadamente ocioso, sem request/transação/lock do alvo, não libera R4/03; 55813/STOP permanece. Runtime só integrou documentação, sem SQL/Maven/UAC/sonda.
+
+# P08 — 0414: BLOCKER diagnóstico offline e método 5 UAC pré-spawn abertos — 30/09/2026
+
+[Checkpoint 0414](docs/continuidade/checkpoints/0414-p08-guard-blocker-e-uac-offline.md), SHA `460D08EC24BB3279D85BB0F90E394523EF15CD5403FF9CEC6CF98BBF3457745B`. Dois handoffs **offline**, nenhum efeito físico novo. Banco corrigiu **somente o rótulo diagnóstico `BLOCKER`** nos dois CASE de 55813/55814 em candidato privado: `0` deixa de significar `NONE`, sentinelas negativas são distintas; diff de dois CASE, TSql160Parser zero erros, dez ramos estáticos e quatro mutantes inseguros recusados. Recibo `target/p08-guard-0413-offline-20260930-01/audit-receipt.json` SHA `BC1A493DBC284D4662DB2417BF7A0446080E3680946A07CE26E6F3EA1DDB9FE5`; predicados/`THROW` preservados, **guard fail-closed, sem waiver**. O R6 não salvou `blocking_session_id` bruto nem comando/wait brutos: seu `BLOCKER=NONE` não pode ser reclassificado retroativamente, `OTHER/IO` após Maven não é atribuído à IT nem prova SYSTEM benigno; `TERMINAL_STOP_POST_55813` permanece. Runtime registrou `target/p08-method5-runtime-audit-20260930-01/diagnostic-receipt.json` SHA `5A878DFCE80477613122509448C52B91500103528E44F077E4DC6F03B89F0C90`: o candidato 0403 limita só a espera **após** `Start-Process -Verb RunAs` retornar, sem resolver UAC pré-spawn. Método 5 requer operador autorizado presente na sessão Windows para responder ao UAC do `pwsh`/helper pinados em janela nova, ou mecanismo isolado de spawn com limite/observação autorizado e provado offline; sem isso, não iniciar. R1–R6/FAILs históricos preservados, nenhum método/P08 PASS novo. P07/P08/Gate 1, 107 ITs históricas sem gate atual integral, JaCoCo shadow e A/B físicos seguem abertos; 67/115 é checklist histórico. Runtime só integrou documentação, sem SQL/Maven/UAC/sonda.
+
+# P08 — 0413: R6 raster XML e fase verdes, POST 55813 STOP — 30/09/2026
+
+[Checkpoint 0413](docs/continuidade/checkpoints/0413-p08-0412-r6-raster-stop-post-55813.md), SHA `278C16246FBA289588722F9F4B8A58D329CC46E25A251B5CA710A0DA49A63237`. Banco executou R6 separada no espelho 0412, 2174/2174 inputs sem drift, request/reserva/PRE/reader guard próprios PASS e Maven dirigida uma vez. XML `AnalyticLaboratoryRasterProofsIT#splitCapturesProveEveryLeafWhileMinimumWindowCapRollsBack` SHA `D85588C9BD54796C0499351A9619666A84C7EADC4B2A9FC819D114044A42A583` **1/0/0/0**, Maven exit 0; `RASTER_APPLY` START/END **SUCCESS 619 ms**, mas `sampleCount=0`: espera raster 0354 não reproduzida ou explicada. POST formal `SQL_security-shadow_EXIT_1` recusou **55813**: zero atividade de usuário, 1 sessão/1 request SYSTEM, 3 outras transações/28 outros locks; comando `OTHER`, espera `IO`, blocker `NONE` observados **depois do Maven**, sem vínculo causal demonstrado com a IT. `target/p08-diagnostic-0412-20260930-06/final-receipt.json` SHA `6E69C6C1C34AD93DC6A9DF45EF13B294303657F26CCAC03B5A86F34C8EB1EC00` classifica **`TERMINAL_STOP_POST_55813`**, `accepted=false`/`p08Accepted=false`, sem retry; ledger SHA `E27F104A70A2EAA8F526A39C712842A3CC6CA1B2D81B1F93FAA26C8ADD916E86`. Reconciliação posterior SHA `F4E4C9DA1214D1315A0174ABDFF7A51CD1959A408E9D59DB4B8A9EC25408AAD4`: sem processo próprio, consultas PASS, hashes comparáveis PRE/readback iguais, stats **2544**, sem delta durável observado; **não torna o POST PASS nem prova rollback runtime explícito**. R1–R5 e FAILs históricos preservados. P07/P08/Gate 1, 107 ITs históricas sem gate atual integral, JaCoCo shadow, A/B físicos e P01–P33 seguem abertos; 67/115 permanece checklist histórico. Runtime só integrou documentação, sem SQL/JDBC/Maven/sonda.
+
+# P08 — 0412: R5 XML 1/0/0/0, POST formal 55813 STOP; R6 separada pendente — 30/09/2026
+
+[Checkpoint 0412](docs/continuidade/checkpoints/0412-p08-0412-r5-stop-post-55813.md), SHA `6DA9A6CB044A4E021A2C1C54B4B40278757A55613E61794B5E2723E05DF92552`. Banco executou R5 distinta no pacote 0412, 2174/2174 inputs sem drift, request/reserva/preflight novos, PRE/reader guard PASS e Maven dirigido uma vez. Prova de ordem offline teve **FAIL 19/20** preservado, corrigido para **20/20** no handoff; `target/p08-diagnostic-0412-20260930-05/order-0365-proof.json` SHA `DC4C9722C338107FF659013209679248B0FDD7E6C0F44FFC73E9AD5921E29290` confirma a ordem final sem chamadas físicas. XML `AnalyticLaboratoryObservationModesIT#quotesPublishFourModesWithExplicitTariffAndIdempotentBusinessSnapshot` **1/0/0/0**, SHA `A1338CE2EE27BE65F45163E81F86412268269DE1810BDEEE8C226D66B18489B8`, Maven exit 0; `SOURCE_REGISTER` seq. **3** SUCCESS antes de `FRONTIER_REGISTER` seq. **4** SUCCESS. Porém o POST formal recusou **55813 `SHADOW_CONSUMERS_PRESENT`** em `SQL_security-shadow_EXIT_1`: zero atividade de usuário, **1 sessão/1 request SYSTEM, 2 outras transações/10 outros locks**. `target/p08-diagnostic-0412-20260930-05/final-receipt.json` SHA `C84B26D4D25983BDF7D5CA8EDAB924455C96599C4C9372BBCF5F220A9900A2AE` classifica **`TERMINAL_STOP_POST_55813`**, `accepted=false`, `p08Accepted=false`, sem retry; ledger SHA `05727D0E80C51DB1FD7A87E5C5CD2834854B97186108CD401B366A9ED47AD898`. Reconciliação posterior SHA `2666E08A4E38B1DDA671733DD70623AFE564B8751CD45EA6F8B817E7603945A1`: processos próprios ausentes, consultas PASS, segurança/contagens/V064/stats iguais ao PRE, **2544** apenas da rodada. **Readback estável não converte STOP em PASS nem fornece recibo runtime explícito de rollback.** R1–R4 e FAILs 0354 preservados; P07/P08/Gate 1, 107 ITs históricas sem gate atual integral, JaCoCo shadow, A/B físicos e P01–P33 abertos; 67/115 permanece checklist histórico. Banco executa R6 raster separada agora; resultado **não incorporado**. Runtime só integrou documentação, sem SQL/JDBC/Maven/efeito físico.
+
+# P08 — 0411: R4 IT dirigida PASS no 0412, sem reprodução da espera 0354 — 30/09/2026
+
+[Checkpoint 0411](docs/continuidade/checkpoints/0411-p08-0412-r4-it-dirigida-pass-sem-espera.md), SHA `7FAF98B3449BE466EED9F8303799EC5E32D5F6CA609A03446F6E58123BB52A35`. Banco executou R4 separada sobre o espelho 0412 com **2174/2174 inputs sem drift**, request/reserva/preflight novos, reader guard PASS e uma chamada Maven opt-in dirigida. `target/p08-diagnostic-0412-20260930-04/final-receipt.json` SHA `40E9F3C927365C5B24540A4BBDFAD4C2FB02D5DF528264463824B86B54D283E2`, ledger SHA `EB5448E4351362784E7959FDE0FB7602DC1709718849935821959124D94D15A2`, XML Failsafe SHA `ACB05EA0A6C0BC6F600B7A9C1405C163F3E20BA25E59C7C9AF9CB5BC96D79EFF`: **somente** `AnalyticExpansionCaptureIT#packagedManifestObservationsUseTypedPreparationAndDuplicateLineage` PASS **1/0/0/0**, Maven exit 0, ledger fechado sem retry. Telemetria `REFERENCE_IMPORT` START/END **211 ms** e `REFERENCE_EXECUTE` **180 ms** SUCCESS; `sampleCount=0`, nenhum blocker/plano/statement ativo capturado, **causa da espera histórica 0354 não observada**. Readback PRE/POST PASS: master/alvo, segurança, contagens, V064 e hashes comparáveis estáveis; stats **2544→2544**, sem baseline durável. O contrato congelado chama `physical.rollback` em `ColetaTemporalLaboratorySession.close`, mas **não há recibo runtime explícito do rollback**; readback prova apenas ausência de delta durável observado. R1–R3 e oito erros/74 classes faltantes de 0354 preservados. **P07/P08/Gate 1, 107 ITs históricas sem gate atual integral, JaCoCo shadow e A/B físicos seguem abertos; 67/115 é checklist histórico, não medida atual.** P03/B restrito 0412 permanece, P03 agregado/C–H/L abertos. Banco executa R5 em unidade separada agora; resultado/readback **não incorporados**. Runtime só integrou documentos, sem SQL/JDBC/Maven/efeito físico.
+
+# P08 — 0410: R1/R2/R3 diagnósticos 0412 encerrados sem aceite; consumidor a identificar — 30/09/2026
+
+[Checkpoint 0410](docs/continuidade/checkpoints/0410-p08-0412-r1-r3-paradas-diagnosticas.md), SHA `9169A2446FF1F2D275CF911AD457EC42464A1CA238392A885258B66C753FD7E4`. Banco executou três unidades distintas no snapshot/pacote 0412, com ledger fechado e 2174/2174 inputs executáveis preservados. **R1** `STOP_CONTROLLER_DEADLINE_PARSE_PRE_GUARD`: erro de parse cultural do deadline depois de preflight, antes de guard/Maven/JDBC (0/0/0); recibo privado `target/p08-diagnostic-0412-20260930-01/final-receipt.json` SHA `B50FD567FB1091112029EA0576F9C92990BD9FF13C400235A65B828D7FB01E61`. **R2** guard PASS, Maven dirigido iniciado **uma vez**, controlador falhou ao compartilhar stderr aberto; efeito IT/JDBC transitório **UNKNOWN**, sem PID, XML ou rollback explícito. Reconciliação/readback e DMV: nenhum processo/sessão/request/transação/lock de usuário residual, hashes PRE/POST iguais e stats 2544, sem delta durável observado; isso não prova ausência de execução transitória. Recibo `target/p08-diagnostic-0412-20260930-02/reconciliation-receipt.json` SHA `C1CA383E766A155024622B5F0A74C089E4D6AD26E1DEB842AA40BAEB6A62CCF5`. **R3** runner stderr/PID provado só em Windows sintético; preflight SQL shadow **55813 `SHADOW_CONSUMERS_PRESENT`** antes de reader guard/Maven/IT (0/0/0), sem efeito ou readback pós-IT; recibo `target/p08-diagnostic-0412-20260930-03/preflight-stop.json` SHA `2B7B49C66513B780C2CD62948C8FE10A145689A6CFDC75904F4E795866E74514`. **Não repetir R2/R3 nem abrir R4** por estes recibos. Banco identifica o consumidor em investigação read-only separada; identidade/resultado pendentes. P07/P08/Gate 1, P03 agregado/C–H/L, JaCoCo shadow e A/B físicos continuam sem aceite; P03/B restrito de 0409 permanece, 107 ITs e 67/115 são históricos. Runtime só integrou documentação, sem SQL/JDBC/efeito físico.
+
+# P06/L e P08/P07 — 0409: seletor shadow e pacote offline 0412; IT física Banco pendente — 30/09/2026
+
+[Checkpoint 0409](docs/continuidade/checkpoints/0409-p06-l-p08-shadow-selector-pacote-offline.md), SHA `798C0D1528CFC01CE0ABD838B9CAC8331ECC456CCAB0F3C186FBA28500363236`. Contra 0411, somente `pom.xml` mudou no snapshot: três includes explícitos de `SequenceReferenceIT`, `SequenceRecompositionIT` e `SequenceFailureIT` no Failsafe shadow. Effective POM offline com perfil/trava contém as três, base nenhuma; três mutantes de omissão recusados e três classes compiladas. **Seleção apenas, sem IT shadow executada.** Snapshot 0412 de 4166 arquivos/1214 Java, pacote 2174: JDK17 `--offline clean verify` sem perfil shadow/skip PASS Enforcer/Spotless/Checkstyle, Surefire **2378/0/0/5**, Failsafe offline **6/0/0/0**, JaCoCo `report/check`; scanner **4167/4166/um binário permitido/zero achados**. PackageShadow A/B 12.8.2 no mesmo snapshot, depois da base, validou ZIP/manifest/extração/2174 hashes e CLI offline quatro exits 0. Pins A=B: revision `4763D5AF123BC685D3EDDF19BD0726416577CC80A0CD81B9B930CEDA22849130`, manifest `C7CF032CDA8CC8ECC59580D5E9D090B2C5BEFAF7C5BA44FD97F61A55880A49DE`, ZIP `71904040C6B193B407DA63C9619053DBB755514EEDDCD02F504C3CD2036C7924`, lock `7CA07D0509DFE2300BBBE0077EC2B83E5F177A57E857E29D64DAEEE660763465`. Validador privado corrigido para exigir recibo/SHA do log **base 0412**; mutante de SHA recusado e FAIL instrumental `QUAL_EXTRACT_DESTINATION` preservado. Recibo de entrega SHA `BCB4AAE06ED36D4FB7131528961A76B10EBCDAFE999D88A462F73FA26B0E7503`; 0408/0411 históricos. Handoff Regras limita P03/B aos bytes 0408 e também aos atuais 0412: fonte/teste/sete dependências inalterados, XML 0412 `LocalArtifactSequenceTest` **27/0/0/0**; sem repetir B; C–H, L/P06 e P03 agregado abertos. **PACKAGED_NOT_SMOKE_QUALIFIED**: 0354 oito FAILs/74 classes, 0402 método 5 sem PASS, JaCoCo shadow, A/B físicos, P07/P08/Gate 1/P01–P33 abertos; **107 ITs é cardinalidade histórica de 0354**, sem inventário/execução da seleção futura; 67/115 é checklist histórico. Supervisor encaminhou a Banco uma IT diagnóstica física separada sobre 0412, uma por vez; **resultado/readback ainda pendente**, sem incorporação de aceite. Banco mantém SQL/JDBC/ledger/preflight/reserva/readback. Zero SQL/JDBC físico, UAC, Flyway, serviço, rede de fonte, release ou cutover por Runtime nesta unidade.
+
+# P08/P07 — 0408: base offline PASS e candidatos PackageShadow A/B, físico aberto — 30/09/2026
+
+[Checkpoint 0408](docs/continuidade/checkpoints/0408-p08-p07-package-shadow-ab-base-offline.md), SHA `27CFA988984CDFD033ED99D7BA73BAF8025A358B5029D743CB5E69E2BDE6512F`. Snapshot novo após 0407: **4164 arquivos/1214 Java**, sem `target`/`.env`; inventário de pacote **2174**. Gate base JDK17 Maven `--offline clean verify`, sem perfil shadow, URL, DLL executada ou skip: **PASS** Enforcer/Spotless/Checkstyle, Surefire **2377/0/0/5**, Failsafe offline **6/0/0/0**, JaCoCo `report/check` e Failsafe `verify`; log SHA `2521C7F9419F712368EB3D68782F730602D3A443089F79D02143C0EA47E2D606`. Três FAILs instrumentais anteriores desta unidade, com `JAVA_TOOL_OPTIONS` presente e stdout Java poluído, foram preservados; a correção foi `Remove-Item Env:JAVA_TOOL_OPTIONS` no runner privado, sem mudar fonte/limiar/skips. Só depois do PASS, PackageShadow A/B rodou Maven offline `package -DskipTests` com perfil shadow **exclusivamente para empacotar** 12.8.2/DLL passiva, URL removida, sem Failsafe/IT/JDBC. A/B 4164 inputs iguais, revision `6014FC5E66CCBCC9394F183E76721C9D8BEA2239FEDD962E3CFD99C365B86331`, manifest `F7E1A0A09FAD5DB8750AB5D18E6A8EC160E967E251F957129506CF177AEECA89`, ZIP `298B1CB7AEB0BE97DCD871DADD89B3CAABC717FEB21BAC6EBEF562EBF958485E`, lock 12.8.2 inalterado `7CA07D0509DFE2300BBBE0077EC2B83E5F177A57E857E29D64DAEEE660763465`; todos **CANDIDATOS PACKAGED_NOT_SMOKE_QUALIFIED**. ZIP/manifest/payload byte a byte, extração segura 190 arquivos e 2174 hashes PASS; CLI offline deny-all A/B `config-validate`/`dry-run` 4 exits 0; sete seletores/cinco fases no bytecode sem IT; guardas 27 e 22 PASS, scanner inicial zero achados. Validador privado primeiro FAIL por ordem de inventário, corrigido em `target` sem tocar pacote. Pins 0383, FAILs 0406 e oito FAILs/74 classes 0354 preservados. Método 5 sem PASS, P08/P07/Gate 1/JaCoCo shadow/107 ITs/A-B físicos/P01–P33 abertos; nenhum aceite físico ou produtivo. Próximo: Supervisor revisa recibos e decide gate físico distinto com Banco, reserva/preflight e readback novos. Zero SQL/JDBC físico, OS elevado, serviço, Flyway ou fonte real.
+# P08/P07 — 0407: duas sobrecargas batch JDBC agora void; gate focado PASS, base 0406 preservada — 30/09/2026
+
+[Checkpoint 0407](docs/continuidade/checkpoints/0407-p08-p07-banco-contractbatch-void-offline.md), SHA `EBBDFA0ADF7C36B8C270650F45E81A7F7559067DF88A4929291683AAADF3DAED`. Banco corrigiu somente as duas sobrecargas `JdbcStatementEvidence.contractBatch` para `void`: cada uma continua a chamar `statement.executeBatch()` uma vez sob a mesma medição, descartando o `int[]` já ignorado pelo callsite. Teste falso adaptado confirma emissão única sanitizada, sucesso, `SQLException`/lock timeout pela mesma instância e sink falho contido; `referenceExecute` mantém `ResultSet` por identidade. Maven JDK17 **offline, sem perfil shadow**, Enforcer/Spotless/Checkstyle PASS, Surefire dirigido **25/0/0/0**: ArchitectureRulesTest inteira 17/0/0/0 incluindo os dois métodos recusados em 0406, CiCoverageScopePolicyTest 3/0/0/0 e JdbcStatementEvidenceTest 5/0/0/0. Scanner zero achados, Graphify atualizado; recibo sanitizado SHA `BD43E5F92BC7625383FCF695893F6896B2C3097F4DD476BFA862BABAEA1C8B78`. **STOP_BASE 0406 e seus FAILs/outputs permanecem**; nenhum `clean verify` integral novo, candidato A/B ou aceite de gate. Oito FAILs/74 classes de 0354, STOP 0402/método 5 sem PASS, P08/P07/Gate 1/JaCoCo/107 ITs/A-B físicos continuam abertos. Zero SQL/JDBC físico, perfil shadow, URL/DLL, UAC, serviço, Flyway, fonte real/remoto/produção. Próximo responsável: Supervisor revisa; Runtime faz gate integral em unidade nova com bytes/pins próprios.
+
+# P08/P07 — 0406: gate base offline FAIL; sem candidatos PackageShadow — 30/09/2026
+
+[Checkpoint 0406](docs/continuidade/checkpoints/0406-p08-p07-base-offline-fail-sem-candidatos.md), SHA `E502C0AD395DCA87D55CDD6DAAE01018293A3019BE69F290C472A5DC0FAE6257`. Runtime revisou os quatro Java novos 0404/0405, cinco arquivos de callsite JDBC/Runtime, XML JDBC **5/0/0/0** e scanner PASS, sem defeito de instrumentação reproduzido nessa prova. Snapshot novo sem `target`/`.env`: **4162 arquivos**, 128696048 bytes, **1214 fontes Java** (658 principais/556 testes), inventário de pacote atual **2174** contra 2170 em 0383. Comparação exata: quatro Java adicionados, cinco callsites alterados, nenhum removido; bytecode compilado confirma **7/7 métodos históricos e 5/5 fases** (checagem estática, nenhuma seleção Failsafe executada); revision apenas diagnóstica `47209BD43158A3F30D97AC6D0169100504C4DB6DF14648A9E00C110083B9EBDB`, **não pin candidato**. Maven JDK17 `--offline clean verify`, sem perfil shadow/URL/DLL, preservou **FAIL** Surefire **2377 testes/3 falhas/0 erros/5 skips**: duas regras de arquitetura recusam os retornos `int[]` de `JdbcStatementEvidence.contractBatch` (ownership Banco); `CiCoverageScopePolicyTest` recusou hashes/escopo antigos. Enforcer/Spotless/Checkstyle passaram; Failsafe e relatório/check JaCoCo não foram alcançados. Nenhum PackageShadow A/B, manifest, ZIP, extração, smoke CLI ou pin novo foi produzido; pins 0383 permanecem históricos.
+
+Runtime corrigiu somente o catálogo de escopo sob seu ownership: hashes exatos de `LocalRasterRuntime` e dos dois callsites JDBC, entrada `RuntimePhaseEvidence` como `UNIT_INCLUDED` e pacote novo `plataforma.persistencia`, preservando classificações físicas e thresholds. As duas primeiras provas dirigidas do catálogo ainda falharam em entradas sucessivas; terceira prova em snapshot isolado Maven offline passou `CiCoverageScopePolicyTest` **3/0/0/0**, com logs FAIL preservados. Banco permanece dono do helper JDBC: proposta precisa no checkpoint para não retornar `int[]` do batch, mantendo a chamada/resultado físico ignorado, tempo/log sanitizado e exceção original; não editar arquitetura/limiar para silenciar as duas falhas. Scanner final PASS, 4164 candidatos/4163 textos/zero achados; trilha de preparação PASS; continuidade histórica FAIL `HANDOFF_PATH`, sem mascarar. Hashes e limites no checkpoint. **Gate base atual não foi reexecutado nem aprovado após o catálogo; dois FAILs arquiteturais demonstrados permanecem.** Zero SQL/JDBC físico, perfil shadow, DLL, UAC/OS elevado, serviço, Flyway, migration, fonte real/remoto/produção. Oito FAILs/74 classes de 0354, STOP 0402/método 5 sem PASS, Gate 1/JaCoCo/P08/P07/A-B físico/P01–P33 continuam abertos. Próximo: Supervisor recebe handoff e delega correção JDBC ao Banco; depois, nova unidade congela bytes e executa `clean verify` integral antes de considerar PackageShadow.
+
+# P08 — 0405: fases JDBC internas instrumentadas e testadas offline; P08 aberto — 30/09/2026
+
+[Checkpoint 0405](docs/continuidade/checkpoints/0405-p08-banco-fases-jdbc-offline.md), SHA `C8A838272FB9D84994DAC7845CC120814CE5D26FB30D42616C5BADF98BB4BB91`. Banco instrumentou somente `executeBatch()` de `JdbcExpansionLaboratory.registerContracts` (`CONTRACT_BATCH`) e `executeQuery()` de `JdbcAnalyticReferences.importFixture` (`REFERENCE_EXECUTE`) com helper pequeno da persistência. Cada chamada emite uma linha sanitizada de duração monotônica/outcome e, em falha, tipo simples, SQLState validado e vendor code; não há SQL, parâmetro, nome de contrato, payload, ID, mensagem, stack, URL ou segredo. Exceção/resultado mantidos por identidade e sink falho contido. Os cinco Java Runtime 0404 conservam seus hashes. Maven JDK17 `--offline -Dtest=JdbcStatementEvidenceTest test` passou Enforcer/Spotless/Checkstyle e Surefire **5/0/0/0** com statements falsos; scanner offline zero achados, graphify atualizado e diff/UTF-8 conferidos. Trilha de preparação PASS; validador histórico de continuidade mantém FAIL `HANDOFF_PATH` conhecido. Recibo sanitizado SHA `966DDC3F2F13BE3D7F58410CCEEA6FF4ADDDB6CD931051DD2F6DB75C63F64343`. Fonte Java atual **1214** (658 principais/556 testes); pins 0383 e espelhos 0395–0402 são históricos e não servem para novo efeito. **Zero SQL/JDBC físico, perfil Maven shadow, UAC, serviço, Flyway, reserva/ledger ou IT**; sem nova evidência causal das esperas 0354. Oito FAILs/74 classes, STOPs 0400/0402, método 5 sem PASS, Gate 1/JaCoCo/P08/107 ITs/A-B permanecem abertos. Supervisor revisa o diff e decide qualquer gate físico distinto com inventário/pins/reserva/preflight novos.
+
+# P08 — 0404: fases Runtime sanitizadas para as sete esperas 0354; causa física aberta — 30/09/2026
+
+[Checkpoint 0404](docs/continuidade/checkpoints/0404-p08-runtime-fases-timeouts-offline.md), SHA `B2CD7BF3DF2F79B9653A1B128777683300A4E6EA7BCF5DF2B5A78CE3B5CF000A`. Unidade estritamente offline após 0403. A auditoria dos sete métodos 0354/0365 confirmou três limites de chamada sob Runtime: `REFERENCE_IMPORT` no fixture compartilhado `AnalyticLaboratoryDimensionsIT.start`, `EXPANSION_START` ali e em `AnalyticExpansionCaptureIT`, e `RASTER_APPLY` em `LocalRasterRuntime.capture`. Novo `RuntimePhaseEvidence` emite somente fase fixa, duração monotônica em ms, resultado, tipo simples e SQLState/código numérico validados; não emite mensagem, SQL, payload, ID ou segredo e relança a mesma exceção. Nenhum timeout, retry, transação, rollback, assinatura ou fixture 0365 foi alterado. O batch exato de contratos fica em `JdbcExpansionLaboratory.registerContracts:101`, ownership Banco; o log externo `EXPANSION_START` não o discrimina. Handoff de patch preciso no checkpoint, sem editar JDBC. `JdbcAnalyticReferences.importFixture:161` também exige patch Banco se for necessária a duração do statement interno; a fase externa de importação já é observável. Nenhuma causa dos timeouts foi atribuída.
+
+Reserva offline SHA `412A9D3EEC5C2DB453A46E43C6E0C8FCB0E80567AF3D337030E1B11359D76634`. Primeiro `test-compile` FAIL Spotless por ordem de imports, corrigido sem `apply`; primeiro Failsafe direto FAIL por `${argLine}` literal, corrigido na invocação com `-DargLine=` sem skip ou perfil shadow; primeiro scan FAIL em marcador sintético de teste, corrigido. Logs históricos desta unidade preservados. Snapshot final `compile-c` Maven `--offline test-compile` exit 0, integridade de entrada/UTF-8 PASS, 555 fontes de teste, Enforcer/Spotless/Checkstyle PASS; Surefire `RuntimePhaseEvidenceTest` **4/0/0/0**, Failsafe `-Dit.test=RuntimePhaseEvidenceTest` **4/0/0/0**, ambos sem URL/DLL/SQL. Os sete métodos históricos existem no bytecode compilado, mas **nenhuma IT física foi executada**. Scanner offline PASS, 4160 candidatos/4159 textos/0 achados; trilha de preparação PASS e validador histórico de continuidade mantém FAIL `HANDOFF_PATH` conhecido em 0383; `graphify update .` exit 0. Evidências e hashes no checkpoint. **Oito FAILs 0354, 74 classes faltantes, Gate 1/JaCoCo/P08/A-B e P01–P33 continuam abertos; não há novo PASS físico.** Próximo owner: Supervisor avalia o diff e, se exigir fase do statement de contratos, delega ao Banco o patch JDBC e prova offline antes de qualquer gate físico próprio. Zero SQL/JDBC físico, OS elevado, UAC, serviço, fonte real, rede, Flyway, deploy, perfil Maven shadow ou alteração de ledger/guards/pins/migration/target histórico.
+
+# P08 — 0403: launcher OS 0402 reconciliado read-only; causa histórica indeterminada — 30/09/2026
+
+[Checkpoint 0403](docs/continuidade/checkpoints/0403-p08-launcher-os-0402-reconciliacao-readonly.md), SHA `CAAA6ED1E3C642D437A18000B97CD298C539ED360C02D442C8BFACB0C67CEA1D`. Request/reserva/recibos/ledger `STOP_OS` 0402 rehashados e preservados. Launcher exato usa `Start-Process -Verb RunAs -Wait -PassThru` sem timeout interno, descarta erro nativo/PID/exit no `catch` genérico e não exige recibo do helper antes de `CHILD_RETURNED_ZERO`; o transcript mostra interrupção do invocador/exit 1, **não a causa da espera**. Única fotografia OS não elevada: `Running/Manual`, PID único/loopback/zero cliente; nenhum processo com comando do helper ainda ativo, nenhum candidato inacessível na janela e nenhum recibo tardio. Isso não prova se filho/helper executaram e encerraram antes; efeito read-only histórico, recusa UAC e falha de spawn ficam indeterminados. Fotografia SHA `9F8733AD56D4353ACA925B835E83BF1FA717BAAABBA0B35CE76DE6C2F218CC7B`, reconciliação SHA `61DE86AEF5B10A0A055D31547EC498DCF6BE714132520F57FD1B889AFF62B054`. Correção privada **não ativada**: classificador puro e fluxo injetado passaram um positivo e 12 negativos cada para falha/recusa/timeout/recibo ausente ou tardio/status incerto; recibos SHA `792AF1FEFE595C6EE38521E1CAA8836A7D1036BA8C26AC9CE8A8949173A422B4` e `B213DAED3E8F3F047BF3546440177431859D482932C781B42D3A063058842DC1`. `WaitForExit` limitado após spawn ainda não limita espera de UAC no próprio spawn. Nova tentativa do método 5 exige unidade/autoridade próprias, operador disponível para UAC ou mecanismo autorizado de limite/observação do spawn, integração/prova offline do invocador efetivo e request/reserva/preflight novos. **Zero reserva/elevação/SQL/Maven/JDBC/IT nesta unidade; método 5 sem PASS, 2544 histórico sem baseline.** Métodos 1–4 só PASS locais; método 6/107 ITs/A-B/P08/Gate1/JaCoCo, oito erros/74 classes faltantes e FAILs históricos preservados.
+
+# P08 — 0402: método 5 STOP_OS na sonda elevada, zero SQL/IT — 30/09/2026
+
+[Checkpoint 0402](docs/continuidade/checkpoints/0402-p08-metodo5-stop-os-elevacao-incerta.md), SHA `325DD66F85E81F00739223F3424EB22964E5DB788273B734818D12B30FE0C64A`. Após a revisão 0401, rodada **nova só método 5**: espelho vazio sem `target`/`.env`, 2170/2170 hashes, pins candidatos 0383/JDK17/DLL12.8.2, bytecode seletor único, fixture sintética rollback-only, URL integrada local e guards master/shadow/55104 intactos. Predicado prospectivo por linhas exatas recusou **23 mutantes** offline, SHA `C6E087E092BC931B32874CD3DA73BC0700A0A5247564599B6EE71EFA3CAFAB0A`. Request/reserva novos congelados, fluxo UTC/helper/PRE/runner/POST/fechamento em duas culturas, 16 negativos, parser/ScriptDom160/argv até `PHYSICAL_INVOCATION_READY` PASS, recibo SHA `F826752111C221F5197E7E904ADAF85B94FBF9FBAF3B2A70C11482E5C34A7EC0`. Reserva física **nova 900 s** com alvo/impacto/recuperação. A única tentativa elevada terminou `ELEVATED_LAUNCH_UNCERTAIN_OR_REFUSED`, sem recibo de imagem, SHA `24A026F41815A46D7CD1628BDAED5574D013CAD2BE9828923DD64A31EE31A949`. Readback OS não elevado confirmou `Running/Manual`, PID único vinculado, loopback/zero cliente, mas **imagem/assinatura/SHA não verificados**, SHA `E1BF3030ABF7469F033F6DE9427F3256C060C65B9AC368BE8112A9148441F922`. **Zero PRE SQL, guard 55104 físico, Maven/JDBC/IT/XML, POST/stats PRE/POST**; 2544 de 0400 é histórico, não baseline nem PRE. Inputs pós 2170/2170 sem drift. Ledger `STOP_OS` fechado em **217,987 s**, zero retry: recibo SHA `D86C077FE826A96DBEA31A98B82A9FF9A0EBBFD8B9BE723C8EF247C50D998B84`, ledger SHA `FA016C4A69B199255190DBAE73DDF980C81CE344E47FF0F6D8B2F3989D8EDC33`. Método 5 sem PASS; Supervisor decide unidade distinta para sonda elevada, sem reutilizar reserva/request. Métodos 1–4 apenas PASS locais, 6/107 ITs/A-B/P08/Gate 1/JaCoCo e oito erros/74 classes faltantes abertos; FAILs históricos preservados. Sem DDL/Flyway/login/grant/serviço, outros bancos/fonte real/remoto/produção.
+
+# P08 — 0401: método 4 PASS local aditivo por linhas exatas; P08 aberto — 30/09/2026
+
+[Checkpoint 0401](docs/continuidade/checkpoints/0401-p08-metodo4-revisao-exact-rows-local.md), SHA `14FB0B79D877FC66A25917CB1BED0385595CEEA6CA641B940900F55F1F194FF4`. Decisão explícita do Supervisor aplicada **somente offline** aos quatro inventários imutáveis 0400: hashes, mesma SQL/escopo shadow, dez campos/linha, unicidade, leituras PRE iguais e POST iguais. POST **2538→2544** é superconjunto exato: seis adições auto_created=1/user_created=0 de uma coluna sem filtro/índice, zero remoções/substituições, fora V105/audit/mart/recon/ctl; classes não auto, segurança, Flyway 106/105/0, agregados e 064 iguais. Predicado privado por linhas exatas passou dois positivos e **22 negativos** (remoção, linha substituída, classe/escopo/hash/formato/duplicata e POST divergente), SHA `8437F4D157E18C1F709D3456B3FB4D5E52E192FD2D90045EC49B288E25C4A886`. Recibo aditivo SHA `74335B6ED5B7A8CE34F8BA3873516EEFF3510BEE604CD93891C14D6A2B26365D`: **`PASS_METHOD4_LOCAL_OBSERVED_WITH_AUTO_STATS_DELTA`**. Suplemento SHA `B21F4C79DCC8DB1602FC8D00865E269F34B89D6A4C029B58AD24D5F069DDCC8D` provou STOP_POST/ledger/XML/outputs 0400 preservados; nenhum novo efeito. A recusa original por quatro grupos de coluna existentes alterados por adição segue histórica. Sem atribuir criador/instante nem promover 2544 a baseline. Métodos 1/2/3/4 só PASS locais; método 5 requer rodada própria conforme ordem atual, método 6 não iniciado; P08/Gate 1/JaCoCo, 107 ITs/A-B, oito erros/74 classes faltantes abertos.
+
+# P08 — 0400: método 4 STOP_POST por stats fora do predicado — 30/09/2026
+
+[Checkpoint 0400](docs/continuidade/checkpoints/0400-p08-metodo4-stop-post-stats.md), SHA `AB35DF0E543EB0FDD73E6EB0BB2865241F31C87F0B0E446DD27A76B9AB41A3F2`. Somente `AnalyticLaboratoryCollectionQueriesIT#regionUsesCepThenCityThenTextAndMissingReleaseBlocksReadiness` foi executado uma vez. Espelho novo sem `target`/`.env`, **2170/2170** hashes e pins candidatos 0383; seletor/fixture sintética rollback-only, JDK17/Maven offline/DLL12.8.2, URL integrada local, guards master/shadow/55104 intactos. Request/reserva novos congelados, fluxo UTC/helper/PRE/runner/POST/fechamento em duas culturas com 16 negativos, ScriptDom160/parser/argv PASS até `PHYSICAL_INVOCATION_READY`, recibo SHA `0D1A763943A773F28DFF79BABABD09CC2D4FD74F4214025A2ACEB79870962320`. Predicado stats prospectivo de 0399 recusou 21 mutantes offline, recibo SHA `B62B152413D31EC5FA2B1BA3BA6EF6F4B60D9B17CEEED81263E6C5D7EFCEF9A4`. Reserva **nova 900 s**; OS elevado PASS Microsoft/SHA pinado/PID único/`Running/Manual`/loopback/zero cliente. PRE SQL Windows auth master/shadow PASS guards, Flyway **106/105/0**, agregados/064 e stats integrais **2538** atuais em duas leituras iguais, sem baseline. Guard 55104 PASS antes de uma Maven offline: exit 0, XML Failsafe método 4 **1/0/0/0**. POST SQL observou master/alvo/segurança/contagens/064 iguais, mas stats **2538→2544**, duas leituras POST iguais: seis linhas auto adicionadas, quatro grupos de coluna existentes alterados por adição e dois grupos novos, zero linhas removidas, fora de V105/audit/mart/recon/ctl; ultrapassa o máximo autorizado de uma adição. Diagnóstico SHA `1140B1C845DB0E0DD0BCC95D42D6EB2A481410E25B0D15D916982EE97AB65CF9`; suplemento SHA `77E7217012AF9F6ED4B4B93F5F099903F02FDE2ADB2A171325291D87DE233BE5`. **`STOP_POST`, sem `post-receipt.json` e sem PASS do método 4**. OS posterior PASS, inputs pós 2170/2170 sem drift. Ledger fechado em **153,751 s**, zero retry: recibo SHA `4BEF0746BEACCA2456A495E5370064963D0B76EAD6D1A9076387A4642C7599AF`, ledger SHA `51A84A37CFB102945730D119C37793E610D38E5AA5B4F4DE903B2B5F2BFAFD2A`. Criador/instante do delta não provados; 2544 não é baseline. Supervisor decide eventual revisão offline em unidade distinta; não repetir 4 ou avançar 5/6 por suposição. Métodos 1/2/3 apenas PASS locais, STOP 0396 e FAILs históricos preservados; P08/Gate 1/JaCoCo, 107 ITs/A-B, oito erros/74 classes faltantes abertos. Sem alterações versionadas de código/SQL/guards, DDL/Flyway/login/grant/serviço, outros bancos, fonte real/remoto/produção.
+
+# P08 — 0399: método 3 PASS local, stats PRE=POST; P08 aberto — 30/09/2026
+
+[Checkpoint 0399](docs/continuidade/checkpoints/0399-p08-metodo3-pass-local-sem-delta-stats.md), SHA `C4F82B793D17103E05756EFA6FA244B15E7E76D43149835AE4BCB4CE16FA07FE`. Apenas `AnalyticLaboratoryCollectionAliasIT#stagingValueWrapperPreservesNumericAliasAndTheCaptureContractRejectsTextualDrift` uma vez: espelho novo sem `target`/`.env`, **2170/2170** hashes e pins candidatos 0383/JDK17/DLL12.8.2, seletor/fixture/rollback-only e guards master/shadow/55104 intactos. Request/reserva novos congelados, parser/ScriptDom160/argv, fluxo UTC efetivo duas culturas/16 negativos até `PHYSICAL_INVOCATION_READY` PASS, recibo SHA `7A6530D4BF81797111B6DCFDC55734E41A6A7F778A1D0E3FABCBE4B910A8A2B2`. Predicado POST prospectivo aceitou zero delta ou uma adição auto de uma coluna fora dos recortes bloqueadores; recusou **21 mutantes**, recibo SHA `CD35447E420F5FEA0834EC076AC78CB31DF4FC1FF23A569D6794106A9A49B356`. Reserva nova **900 s**; OS elevado PASS imagem assinada/SHA pinado/PID único/`Running/Manual`/loopback/zero cliente. PRE SQL Windows auth master/shadow PASS Flyway **106/105/0**, agregados/064, stats integrais **2538** atuais em duas leituras iguais, **sem baseline durável**. Guard 55104 PASS imediatamente antes de uma Maven offline com perfil/duas travas/URL integrada local/DLL temporária; exit 0, XML Failsafe **1/0/0/0** método 3. POST SQL/OS PASS, master/alvo/segurança/contagens/064 iguais, stats **2538→2538** e duas leituras POST iguais, `PASS_NO_DELTA`; 2170/2170 inputs pós sem drift. Verificação SHA `3BF82C8AA22C31E7DFFB3BA205887BABB2371F80F294FA0E8153804C73816A97`. Ledger fechado **PASS em 165,826 s**, sem retry: recibo SHA `E13AB24DF55096366B56255CC6E16BB338ECFB67F658E4EB1AF212513F443E51`, ledger SHA `4F35CA408EC044BBAB27224F82F41B260E923B822CEAEB16E0F8787AEA433E23`. **PASS só local do método 3**; método 1 PASS local 0395 e método 2 reclassificado PASS local 0398 preservados, STOP 0396 intacto. Métodos 4–6, 107 ITs/A-B, P08/Gate 1/JaCoCo, oito erros/74 classes faltantes abertos. 2538 não é baseline; rollback inferido do código e fechamento sem recibo JDBC individual. Sem outros bancos/fonte real/remoto/produção ou mudanças versionadas/DDL/Flyway/login/grant/serviço.
+
+# P08 — 0398: método 2 reclassificado com critério local adotado — 30/09/2026
+
+[Checkpoint 0398](docs/continuidade/checkpoints/0398-p08-metodo2-reclassificacao-local-aditiva.md), SHA `23E6DB5D7B4F37B2E9A2FA2098506A58F2B0781BC0D0B94F717A14DEEF020745`. Supervisor adotou somente para evidência local o predicado 0397. Aplicação offline aos outputs imutáveis 0396 passou SHA/guards, Failsafe **1/0/0/0**, OS, segurança/master/alvo/contagens/064 iguais e inventários integrais **2537→2538** com um grupo auto de uma coluna sem filtro/índice/user fora dos recortes bloqueadores, zero remoções/modificações e duas leituras POST iguais. Recibo aditivo SHA `821123B1BA8480C80382EFDBADB9B695F7E57E850BDD1052EC092CE1A4C88AF0`: **`PASS_METHOD2_LOCAL_OBSERVED_WITH_AUTO_STATS_DELTA`**. Ledger/recibo/XML/outputs 0396 e `STOP_POST` originais preservados; a reclassificação posterior não altera a execução histórica. Criador/instante do auto stat não provados; Microsoft Learn dá plausibilidade, não causalidade. **2538 sem baseline**, P08/Gate 1/JaCoCo/107 ITs/A-B abertos, oito erros/74 classes faltantes preservados. Método 3 autorizado em rodada distinta com prova offline/reserva/preflight próprios; métodos 1/2 não serão repetidos.
+
+# P08 — 0397: delta POST do método 2 classificado offline; decisão proposta — 30/09/2026
+
+[Checkpoint 0397](docs/continuidade/checkpoints/0397-p08-metodo2-delta-stats-classificado-offline.md), SHA `ACFCB56423E4452AA4E401FEC70C914F41AD448530A191BD30D0B1BF46D1F829`. Quatro inventários 0396 da mesma SQL/escopo Windows shadow e dez campos, hashes pinados, linhas únicas: PRE duplicado **2537**, POST duplicado **2538**, leituras de cada fase idênticas. Comparação de conjuntos completos: **um grupo de coluna adicionado, zero removidos/modificados**; um `auto_created`, sem filtro/índice, `user_created=0`, fora das quatro colunas bloqueadoras 064 e de audit/mart/recon/ctl. Classes PRE→POST auto **1715→1716**, user **0→0**, filtrado **34→34**, indexado **822→822**. Classificador privado/recibo v2 SHA `505ABF2E12DFF74D7AF57E33CF55CE995B3EABE956E6AF03CAA777464628B87D` / `E7F12AB36A5C5AE13F61AA6708F7A0602DF80B85C32669866B23AA8B0AEDD088`, **19 negativos recusados**; diagnóstico inicial 0396 com `-cne` e correção aditiva preservados. Código/SQL versionado tornam auto stats durante a janela plausíveis, mas não provam causa ou instante; inventário agrupado não contém identidade de cada estatística. **Proposta ao Supervisor:** predicado de readback somente para 0396 que preserve todos os guards, Failsafe 1/0/0/0, OS/segurança/agregados/064 iguais e admita exclusivamente esse acréscimo benigno, com duas leituras POST iguais. Os recibos existentes bastam para avaliar esse predicado agregado; adoção e eventual PASS físico local exigem decisão separada do Supervisor. **STOP_POST 0396 permanece, método 2 ainda sem checkbox/PASS e 2538 não é baseline.** Se for exigida prova por `stats_id` ou atribuição temporal, ela não existe nos recibos e não pode ser reconstruída retroativamente. Zero reserva/OS/SQL/Maven/JDBC/IT novos; métodos 3–6 não iniciados. Método 1 PASS local 0395, P08/Gate 1/JaCoCo, 107 ITs/A-B, oito erros e 74 classes faltantes preservados.
+
+# P08 — 0396: método 2 Failsafe verde, POST stats delta; sem PASS — 30/09/2026
+
+[Checkpoint 0396](docs/continuidade/checkpoints/0396-p08-metodo2-failsafe-pass-post-stats-delta.md), SHA `B74A0BDE296B0EA53FB602CB4EC52592DEC9B3700A64A0E1ED49117598743A97`. Rodada **somente método 2** de 0377 (`AnalyticFixtureBindingsIT#currentCaptureProvenanceFeedsSixDimensionsWithoutMergingHomonymousUsers`), sem repetir método 1 PASS local 0395. Cópia UTC privada e espelho **novos**, 2170/2170 hashes sem `target`/`.env`, pins candidatos 0383/JDK17/DLL12.8.2, fixture/seletor único em bytecode, guards master P08-MASTER-TARGET-01/shadow 55811–55814/55104 intactos, parser/ScriptDom160/argv PASS. Request/reserva candidatos novos congelados; prova offline da sequência em duas culturas e **16 negativos** até `PHYSICAL_INVOCATION_READY`, recibo SHA `E5B8DC06E1DBF2CBEA82AB8E9604E44F98EE5CEA85FED8AE2E4709B495538E97`. Reserva física nova **900 s**, impacto/recuperação; OS elevado PASS imagem Microsoft/SHA pinado/PID único/`Running/Manual`/loopback/zero cliente. PRE SQL master/shadow explícitos Windows auth PASS guards, Flyway **106/105/0**, agregados/064 e stats integrais **2537** idênticos ao histórico 0395/0390 só como referência da rodada. Guard 55104 PASS imediatamente antes de **uma** IT Maven offline com duas travas/URL integrada/DLL temporária; exit **0**, Failsafe **1 teste/0 erro/falha/skip** do método 2. POST SQL **recusou `STATS_0390_SNAPSHOT_MISMATCH`**: comparação offline dos outputs capturados mostrou stats **2537→2538**, uma linha exata adicionada e zero removidas; outputs master/alvo/guards/agregados/064 PRE=POST, duas leituras POST stats idênticas. Sem `post-receipt.json` ou PASS do método 2. OS posterior PASS mesmo processo/loopback/zero cliente. Diagnóstico booleano inicial incorreto preservado SHA `23FD25E6C492D68E45D7C61AD14525DEC6B780BF7F28B93FEEE6676B1451664A`; correção aditiva offline SHA `694D595D8DDD632F7455156578D372AB2A8836B0CD7F70663AE6DB583C34FD2B`. Ledger **STOP_POST** fechado em **206,527 s**, sem retry: recibo SHA `FA081B0328F076F26627B07333E28620AA016F96DA07DE2DD65DB469CE634A26`, ledger SHA `80ED9B864FE183C63904A9E27715D585D08A8FC964AE7C7E298F797E5DB3A7A2`. **2538 não é baseline**; tipo/causa/momento desconhecidos. Método 1 PASS local 0395 preservado; quatro restantes, 107 ITs/A-B, P08/Gate 1/JaCoCo e 8 erros/74 classes faltantes abertos; FAILs históricos preservados. Supervisor decide investigação distinta se necessária; não repetir método 2 nem avançar por suposição.
+
+# P08 — 0395: método 1 PASS local no shadow; P08 agregado aberto — 30/09/2026
+
+[Checkpoint 0395](docs/continuidade/checkpoints/0395-p08-metodo1-it-local-pass-rollback-readback.md), SHA `C3C46A5108CA132DC8F0B7ACC1C522C58A5F9D697AEEBC6AAF1B2F87653228B7`. Corrigidos apenas os parsers privados de `deadlineUtc`/reserva no fluxo método 1; código, SQL e guards versionados intactos. Espelho novo **2170/2170** sem `target`/`.env`, pins 0383/JDK17/DLL12.8.2, seletor único, parser/ScriptDom160/argv e guards master P08-MASTER-TARGET-01, shadow 55811–55814 e reader 55104 PASS offline. Request/reserva novos gerados uma vez e congelados; prova da sequência até a invocação física em `en-US`/`pt-BR` e **16 negativos** PASS, recibo SHA `3D5E59F4A7BFD0CB29F077C5BCEBED9BDE88D5FC21ECF7246FF469979A5B2CDC`. Reserva física nova **900 s** com impacto/recuperação. Uma sonda OS elevada PASS imagem Microsoft/SHA pinado/PID único/`Running/Manual`/loopback/zero cliente. PRE SQL Windows auth master/shadow explícitos PASS guards, Flyway **106/105/0**, agregados/064 e stats integrais **2537 iguais a 0390**, referência só desta rodada. Guard 55104 PASS imediatamente antes de **uma** IT `AnalyticExpansionCaptureIT#packagedInputsHydrateMissingFreightAndReuseBothFactsAcrossFourModes`; Maven JDK17 offline, perfil/duas travas, URL integrada local e DLL temporária, exit **0**, Failsafe **1 teste, 0 erro/falha/skip**. Sessão sintética pinada bloqueia `commit` e fecha com `rollback`; sem recibo JDBC direto, execução do fechamento inferida do `try-with-resources` bem sucedido e persistência nula corroborada por contagens POST. POST SQL/OS PASS, agregados/064 e inventário stats **idênticos ao PRE**, zero cliente; verificação SHA `969A39BCC2F0D48C01AEEE2C78AA30CED8DCDEC3D1B265D05DB6008A348321DA`. Ledger fechado em **309,561 s**, sem retry; recibo SHA `321C8AC6B331A9E635DEB5E8865CCC9CED49087EC79B80C1977417ECE9190662`, ledger SHA `B697CA945B8B58CEF8F4877AEC9183F893B5713FFBCA60A0F7B300C6F1466D4D`. **PASS apenas local do método 1; P08/Gate 1/JaCoCo, cinco métodos restantes, 107 ITs/A-B e 8 erros/74 classes faltantes seguem abertos.** 2537 não é baseline; guard prova apenas o instante, sem inferir ausência de grant em outros bancos. FAILs 0354/0378–0394 preservados. Supervisor avalia antes de qualquer novo método/unidade; não repetir método 1.
+
+# P08 — 0394: PRE UTC passou offline; runner recusou antes da reserva — 30/09/2026
+
+[Checkpoint 0394](docs/continuidade/checkpoints/0394-p08-pre-utc-pass-runner-utc-offline-fail.md), SHA `A43DF21269BA56A85BECCF7ED1BB19938EA7B7C6E4F8391875B6EBBDE1B24D0A`. Cópia privada nova e espelho novo **2170/2170**, sem `target`/`.env`; pins candidatos 0383, seletor único, parser/ScriptDom160/argv e guards master P08-MASTER-TARGET-01, shadow 55811–55814 e 55104 PASS offline. Request OS final criado uma vez e congelado SHA `6A4C6406B2F1E8EDB638CBED21DD8C48EEA1E7B0D9CD414FE80952527CD2C00F`; mesma precondição do helper passou offline e recusou seis negativos. Parser `deadlineUtc` **somente no PRE privado** corrigido para string UTC canônica, parse exato invariante e SHA congelado; rotina efetiva passou em duas culturas e recusou seis negativos. Reserva **candidata offline**, SHA `6944B97C83A0F3EE8EA13C0A6996682B5776BE10DC3F44D34A0E5215092893EA`, nunca ativada. A prova do runner Maven privado encontrou `ConvertFrom-Json` produzindo `System.DateTime` e `[DateTimeOffset]::Parse` falhando; parser do runner fora do escopo de correção desta unidade. Prova parcial SHA `489D12410CA1301872149974CBA73281ED1B4A8B9A90E680F4989022EE5C6DDE`; recibo de parada SHA `DCF1CACE4F133AD2D09D4124C5DA078401DC5ACBE070D60E5F0733C77C3B10C3`. **Gate completo FAIL, zero reserva física/ledger/OS/SQL/55104 físico/Maven/JDBC/IT/stats PRE/POST.** Método 1/P08 abertos; 2537 de 0390 segue histórico, sem baseline; FAILs 0354/0378–0393 e oito erros/74 classes faltantes preservados. Próxima unidade requer autorização para corrigir o parser UTC também no runner privado e provar o fluxo completo offline antes de uma reserva nova; não ativar a candidata 0394.
+
+# P08 — 0393: request congelado/OS PASS; PRE falhou antes de SQL — 30/09/2026
+
+[Checkpoint 0393](docs/continuidade/checkpoints/0393-p08-request-congelado-pass-snapshot-data-parse-fail.md), SHA `9B0D62377CA0C991A5CB414B460961E740A349BD0FFE3325A8F25BA10A86D614`. Nova unidade para método 1 de 0377: espelho novo **2170/2170** sem `target`/`.env`, pins 0383 candidatos, guards master/shadow/55104 inalterados. Request OS final criado **uma vez** e congelado SHA `23A173FCE611C39C89549600F54F69659977814C195DB9D7BFE75AA8D4678937`; a **mesma rotina** do helper físico retornou `PRECONDITION_VALID` offline no próprio arquivo e recusou seis negativos (ausente, renomeado, hash da sonda, path, campo extra e SHA de lock), com parser/ScriptDom160/argv PASS. Reserva física **nova 900 s** antes do efeito. Uma chamada elevada OS passou imagem Microsoft/SHA pinado, PID único, `Running/Manual`, loopback/zero cliente, request SHA estável. O PRE privado falhou **antes do primeiro `sqlcmd`**: `ConvertFrom-Json` sem `-DateKind String` transformou `deadlineUtc` em DateTime e o parse localizado posterior recusou. Parada sem retry: **zero SQL/master/shadow/guard 55104/Maven/JDBC/DLL/IT/XML/stats PRE/POST**. Readback OS posterior confirmou mesmo PID/loopback/zero cliente. Primeiro fechamento em PowerShell 5.1 gravou duração `null`; recibo parcial e ledger original preservados, correção **aditiva** em PowerShell 7 fixou **92,09 s**. Recibo final SHA `B03E835BA45A56E9F5F9745E46CF29B3E6C2811CE7423EFE9DFFEFA9BE668096`, ledger SHA `67DC0BD4A5C6D685CEB958EBE120D55061EE21F16501A65E9AE6A373D79F7CF5`. 2537 de 0390 continua histórico, não PRE nem baseline. Método 1/IT e P08/Gate 1/JaCoCo abertos, FAILs 0354/0378–0392 e 8 erros/74 classes faltantes preservados. Supervisor decide nova unidade; antes de reservar, provar offline o parser UTC do snapshot com negativo de formato/cultura. Não repetir o PRE nem reutilizar reserva 0393.
+
+# P08 — 0392: método 1 parou no contrato do helper OS, sem SQL — 30/09/2026
+
+[Checkpoint 0392](docs/continuidade/checkpoints/0392-p08-metodo1-preflight-elevado-recusado-sem-sql.md), SHA `28AA1941028FBC669C4E6FFA7E8868855627344A12FA432379F00F5613E1E9B5`. Nova unidade física autorizada apenas para método 1 de 0377: espelho novo sem `target`/`.env`, **2170/2170** hashes, pins 0383 revision/manifest/ZIP candidatos, seletor/fixture/POM, JDK17/Maven offline, duas travas, URL local integrada, DLL 12.8.2 temporária e guards 55801–55804/55811–55814/55104 conferidos offline. ScriptDom160, parser, argv e dois mutantes do runner passaram; primeiro FAIL de sintaxe do próprio teste preservado antes da reserva. Reserva física **nova 900 s**, impacto/recuperação antes do efeito. A primeira e única chamada elevada retornou **`FAIL_ELEVATED_OS_FREEZE` em `PRECONDITION`**: prova offline escreveu `osProbeSha256`, enquanto o helper exigia `probeSha256` sob `Set-StrictMode Latest`. Lacuna do teste offline; sem evidência de consulta OS interna. Parada sem retry: **zero SQL/master/shadow/guard 55104, Maven/JDBC/DLL/IT, XML, stats PRE/POST**. Readback OS independente confirmou serviço `Running/Manual`, processo único, loopback e zero cliente, sem reconsultar imagem. Recibo SHA `C16A4DD4B945DAC4339F31DBF90B4B83228460D755D9B70C37633688F8233344`; ledger fechado SHA `34031614449463A24F1BD4AE25FF5086E4DEAEDC380B64725217995B1A487C5E` em **122,176 s**. O 2537 de 0390 continua só observação histórica, não PRE desta rodada nem baseline aceita. Método 1 permanece não executado; cinco restantes, 107 ITs/A-B, JaCoCo/Gate 1/P08 abertos. Preservados FAILs 0354/0378–0391 e 8 erros/74 classes faltantes. Supervisor decide unidade/reserva novas; antes de qualquer efeito, corrigir em cópia privada o contrato `probeSha256` e testar negativo de campo ausente/renomeado. Não repetir esta chamada elevada ou inferir IT.
+
+# P08 — 0391: delta de stats 2536→2537 classificado offline — 30/09/2026
+
+[Checkpoint 0391](docs/continuidade/checkpoints/0391-p08-stats-delta-classificado-offline.md), SHA `0BEDCE80137DAC4BBF905724DD983236E9711FD892FF36174A8C2D107738460A`. Os inventários individuais pré/pós, inclusive após 064, de 0376 e 0380, mais os de 0378, existem: **12 outputs históricos idênticos**, 2536 grupos e dez campos por linha; o output 0390 da mesma consulta tem 2537 grupos. Comparação privada de conjuntos completos: **um grupo adicionado, zero removidos, zero modificados**. O adicional é automático, não criado pelo usuário, não filtrado, não associado a índice, com uma entrada de coluna; não coincide com colunas bloqueadoras V105 nem tabela com nome de auditoria. Totais de grupos: automáticos **1714→1715**, criados pelo usuário **0→0**, filtrados **34→34**, associados a índice **822→822**. Hash/formato/unicidade/escopo da consulta e seis negativos passaram offline; recibo sanitizado SHA `484BE59C86E6EC27541BD3835658BA24625DCF129A8B6617E0AFC4BDB35AEB9C`. A condição para nova sonda SQL por falta de inventário **não ocorreu**: zero SQL/OS novos, reserva/ledger novos ou IT. A classificação vale para os snapshots capturados, **não prova causa nem estado atual**. 2537 não é baseline aceita, 2536 permanece referência histórica; `STATS_OBSERVATION_DELTA` 0390, FAILs históricos, 8 erros/74 classes faltantes e P08/Gate 1/JaCoCo abertos. Supervisor decide eventual investigação causal ou novo snapshot em unidade/autoridade/reserva próprias; não inferir admissão IT.
+
+# P08 — 0390: guard master 55804 revisado PASS; stats 2537 observacionais — 30/09/2026
+
+[Checkpoint 0390](docs/continuidade/checkpoints/0390-p08-master-target-guard-revisado-stats-delta.md), SHA `9944284612404B2A0B0DD056DB61114A0FFB5766679F1ECAC4B063F69506EECB`. Regra **P08-MASTER-TARGET-01**, origem AGENTS alvo exato: em cópia privada, removidos apenas o predicado de existência de outro banco de usuário em 55804 e `NO_OTHER_USER_DATABASE` do marcador. 55801–55803, alvo shadow ONLINE/zero sessões em 55804 e todo guard shadow 55811–55814 permaneceram byte a byte. ScriptDom160, diff exato, parser, argv/sanitização, sete mutantes e modelo sintético com cinco bancos adicionais PASS offline; primeiro FAIL do próprio teste PowerShell preservado e corrigido antes de reserva. Reserva física nova 600 s com impacto/recuperação. Uma sonda OS elevada PASS imagem Microsoft/SHA pinado, PID único, `Running/Manual`, loopback/zero cliente. Uma sequência serial read-only `sqlcmd -E -C` não elevada em `master` e shadow explícito passou guards de modo misto, `sa` disabled, reader sem server role/permissão extra no servidor, user com `db_datareader`+`VIEW DEFINITION` no shadow, zero consumidores/requests/transações nos instantes conferidos, Flyway **106=SCHEMA+105 SQL/0 fail**, 1819 objetos/247 tabelas/147 linhas agregadas, contagens e 064. **Parada na etapa final `STATS_OBSERVATION_DELTA`**: 2537 grupos atuais contra 2536 históricos, hash diferente; stats seguem somente observacionais, sem baseline aceita ou investigação causal nesta unidade. Sem repetição de SQL; readback OS posterior PASS. Recibo SHA `94FB492683467BFB6892C966ED535248142DD09E19D9469667CA2ED471689525`, ledger fechado SHA `85F7A3325517CD0DA98F71C50D5F1B5D3B6D19DB632391BC66F2BAB6E9DC2EAA` em **111,338 s**. Outros cinco bancos **não foram conectados**: ausência de user/grant do reader neles não foi provada; snapshots não provam ausência contínua de consumidor. **Nenhuma IT admitida**, P08/Gate 1/JaCoCo abertos. FAIL 0388, diagnóstico 0389, demais FAILs e 8 erros/74 classes faltantes preservados. Zero start/restart/KILL, JDBC/IT/Maven/DLL, DDL/DML/Flyway/login/grant, fonte real/remoto/produção. Supervisor decide eventual investigação read-only do delta de stats e critério adicional para escopo do reader em unidade/reserva próprias; não reutilizar ledger nem repetir esta sequência por suposição.
+
+# P08 — 0389: diagnóstico read-only separou 55804; outros bancos = 5 — 30/09/2026
+
+[Checkpoint 0389](docs/continuidade/checkpoints/0389-p08-diagnostico-55804-master-read-only.md). Unidade distinta após 0388, somente `lpc:localhost/master`: SQL estático privado com três predicados separados, contagens de outros bancos sem nomes e flags agregadas de sessão/request/transação, **sem repetir o guard composto nem conectar ao shadow**. Prova offline `ScriptDom160`/escopo SQL/argv/formato e negativos PASS; primeira tentativa falhou porque o caminho antigo da DLL de parser não existia, FAIL preservado e corrigido antes da reserva. Reserva **nova** 600 s com impacto/recuperação. Uma sonda OS elevada read-only passou imagem Microsoft/SHA pinado, PID único, `Running/Manual`, listeners loopback e zero cliente. Uma chamada não elevada `sqlcmd -E -C` em master retornou marcador estrito: alvo exato **ONLINE=1**; **cinco outros bancos de usuário ONLINE**, zero OFFLINE/outros estados; **zero** outras sessões no shadow, inclusive de usuário, e zero flags agregadas de request, open transaction e associação de transação. Portanto, no snapshot diagnóstico, **somente o predicado “nenhum outro banco de usuário” é falso**; a recusa 55804 de 0388 não tem ramo histórico retroativamente provado. A mera existência de outros bancos **não demonstra** user/grant do reader neles. Este diagnóstico não reexecutou guard de consumidor/transação e **não admite IT**. Readback OS posterior confirmou mesmo PID/loopback/zero cliente. Recibo SHA `E86495290C789255CEDD73B54433E87DD602DA87B66F673F4AA6951F578281CE`; ledger fechado em **90,398 s** SHA `4B3932A1C1195D7EFAA7C9C2E781E34C97D2ED6FBC52540296FEC0DAFA846E9B`. Preservados 0388/FAILs 0354/0378–0380/0385–0387, 8 erros/74 classes faltantes, stats 2536 só históricas e P08 aberto. Próximo gate, se decidido pelo Supervisor, exige critério read-only específico para privileges do reader e guard de consumidor/transação intacto, em **unidade/reserva novas**; não converter contagem de bancos ou snapshot de sessão em autorização para IT. Zero Start-Service/restart/KILL/JDBC/IT/Maven/DLL/DDL/DML/Flyway/login/grant/fonte real/remoto/produção.
+
+# P08 — 0388: imagem OS elevada comprovada; guard SQL master recusou 55804 — 29/09/2026
+
+[Checkpoint 0388](docs/continuidade/checkpoints/0388-p08-os-elevado-pass-guard-master-55804.md). Unidade distinta após 0387. Prova offline da cópia privada: parser, argv de um único helper elevado e `sqlcmd` master/shadow, API no próprio processo, quatro negativos, hash da sonda copiada, SHA pinado e Authenticode Microsoft dos executáveis PASS; primeira checagem estática excessivamente ampla FAIL preservada e corrigida antes da reserva. Reserva física **nova** 600 s, impacto/recuperação antes da primeira chamada elevada/SQL. **Uma** sonda OS elevada, sem serviço/ACL/depuração/escrita de configuração, passou: `MSSQLSERVER` `Running/Manual`, processo/PID único vinculado ao serviço, `QueryFullProcessImageNameW` positivo, caminho canônico da imagem instalado exato, SHA `A20556C74F2FE56266102CE074C5E1EB7C578D16A6635842BE5B77A29A08023D`, assinatura Microsoft `Valid`, dois listeners só loopback e zero cliente. Uma chamada `sqlcmd -E -C` **não elevada** em `lpc:localhost/master` retornou **SQL 55804 `TARGET_OR_CLIENT_GUARD_MISMATCH`**, recusa explícita do guard composto; o ramo exato é desconhecido. Parada sem retry: **zero chamada ao shadow**, nenhum marcador de modo efetivo/`sa`/reader/Flyway/agregados/064/stats aceito nesta rodada. Readback OS posterior confirmou mesmo PID, serviço `Running`, listeners loopback e zero clientes. Ledger fechado em **134,182 s** SHA `8A0B8A1BAF91BEAB60250FEDEC17416DB7D3BE70C0BCA7D8C17037F50D4DF311`; recibo sanitizado SHA `1926C14210377CC4AEA545792FF541E212FC01EC3C649BA60BA353E6422483A3`. P08 permanece aberto; 2536 stats só observação histórica, FAILs 0354/0378–0380/0385–0387 e 8 erros/74 classes faltantes preservados. O guard 55804 combina alvo online, existência de **qualquer** outro banco de usuário e sessão no shadow; nenhuma dessas alternativas foi isolada, e a existência de outro banco não demonstraria grant do reader. Reabrir somente em unidade/reserva novas com diagnóstico read-only que separe esses predicados sem supor causa nem relaxar bloqueio de consumidor/transação. Sem Start-Service/restart/KILL/ACL/SeDebugPrivilege/JDBC/IT/Maven/DLL/DDL/DML/Flyway/login/grant/fonte real/remoto/produção.
+
+# P08 — 0387: sonda de imagem OS recusada por ACL antes de reserva/SQL — 29/09/2026
+
+[Checkpoint 0387](docs/continuidade/checkpoints/0387-p08-sonda-imagem-os-acesso-negado-sem-sql.md). Unidade distinta após 0386 para obter a imagem **do processo** por `OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION=0x1000)` e `QueryFullProcessImageNameW`, sem elevação ou `SeDebugPrivilege`. Sonda privada passou parser, consulta ao próprio processo PowerShell e vínculo do PID único ao serviço `MSSQLSERVER`; quatro casos negativos recusaram pelo código esperado. A consulta da imagem do PID do serviço retornou **Windows 5 `ACCESS_DENIED`** em `OpenProcess(0x1000)`. Portanto não há prova nova de caminho canônico da imagem carregada, SHA pinado ou assinatura vinculados ao processo; caminho configurado do serviço não foi usado como substituto. Parada fail-closed **antes de reserva física, preflight OS definitivo e qualquer `sqlcmd`**: zero SQL/output, nenhum efeito no serviço. Recibo privado SHA `08C35D76DA447E5B20C7154FCE24CDF1D9D12CE520A0DD3B148AB0CCD0103719`; nenhuma linha de ledger físico nova, pois nenhuma reserva/SQL foi aberta. 0385/0386 e seus FAILs preservados; master/shadow, modo efetivo, `sa`, reader, Flyway 106/105/0, agregados/064/stats e consumidores/transações SQL seguem não revalidados. P08 e 74 classes faltantes/8 erros 0354 abertos; 2536 stats só observação histórica. Reabrir apenas em unidade e reserva novas quando a operação de consulta limitada ao PID do serviço **suceder sob contexto autorizado** e caminho exato, SHA `A20556C74F2FE56266102CE074C5E1EB7C578D16A6635842BE5B77A29A08023D` e assinatura Microsoft forem provados; depois revalidar os demais predicados OS. Esta ordem não autoriza elevar, pedir privilégio de depuração ou alterar ACL. Sem start/restart/KILL, JDBC/IT/Maven/DLL, DDL/DML/Flyway/login/grant/fonte real/remoto/produção.
+
+# P08 — 0386: invocador privado provado; preflight OS recusou antes de SQL — 29/09/2026
+
+[Checkpoint 0386](docs/continuidade/checkpoints/0386-p08-readback-sql-preflight-os-identidade-nao-provada.md). Nova unidade read-only após 0385. Cópia **privada** do invocador substituiu o parâmetro PowerShell automático `$input` por `SqlInputFile`; parser e argv passaram offline em 2 casos positivos (`master` e shadow) e 5 negativos, com `SqlFile` absoluto e não vazio, sem `sqlcmd`. O helper e o FAIL 0385 permaneceram intactos. Reserva física **nova** de 600 s registrou alvo, impacto e recuperação, sem usar saldo 0385. Primeiro helper de OS falhou antes da consulta por desserialização de UTC; a cópia privada foi corrigida e validada offline. No preflight efetivo, `MSSQLSERVER` estava `Running/Manual`, PID único, dois listeners somente loopback e zero `sqlcmd`/cliente TCP, mas **a identidade do executável do processo não foi verificada** pelo predicado de caminho. Diagnóstico OS read-only confirmou essa única lacuna; guard recusou, sem relaxamento nem repetição. **Zero SQL/sqlcmd/output SQL**, nenhuma verificação nova de modo misto efetivo, `sa`, reader, Flyway 106/105/0, agregados, 064, stats ou consumidores/transações SQL. Ledger fechado em 128,677 s, SHA `49BEEB3B544BF39443A00E44A71BB856188BFA656128AF5A618FCE322F0C5D2E`; recibo SHA `3C278F0208BADF4ED7E149E133D67B7C86E78D88BBF736933BE21CBBD80B62F4`, correção aditiva de duração SHA `EE1F73BE98828B3D946F05E290BEA23E426D4BC704E36A9259CDF1231870B936`. P08 permanece aberto; 2536 stats só observação histórica, FAILs 0354/0378–0380 e 74 classes faltantes preservados. Reabrir SQL read-only somente em unidade/reserva novas após prova OS verificável de que o processo único pertence à imagem instalada Microsoft assinada/pinada, além dos demais predicados intactos; não inferir isso da configuração do serviço. Sem Start-Service/restart/KILL/JDBC/IT/Maven/DLL/DDL/DML/Flyway/login/grant/fonte real/remoto/produção.
+
+# P08 — 0385: serviço local iniciado; readback SQL não executado — 29/09/2026
+
+[Checkpoint 0385](docs/continuidade/checkpoints/0385-p08-servico-local-iniciado-sql-readback-congelado.md). Unidade operacional distinta para iniciar **uma vez** o `MSSQLSERVER` já instalado em `LUCAS`, sem IT/Maven. Preflight OS/config passou: serviço exato `Stopped/Manual`, conta `NT Service\MSSQLSERVER`, imagem `sqlservr.exe` da instância `MSSQL17.MSSQLSERVER` versão 17.0.1000.7, SHA `A20556C74F2FE56266102CE074C5E1EB7C578D16A6635842BE5B77A29A08023D`, assinatura Microsoft `Valid`; registry `LoginMode=2`, TCP habilitado somente em `::1`/`127.0.0.1`, Named Pipes off, sem outro `sqlservr`, `sqlcmd`, listener ou cliente TCP 1433. Reserva física nova 600 s com impacto/recuperação antes do efeito; preflight elevado repetiu PASS. **Uma chamada `Start-Service -Name MSSQLSERVER` retornou sucesso**. Readback OS posterior e final: serviço `Running`, PID presente, dois listeners somente loopback, zero outro `sqlservr`/cliente TCP. A primeira etapa de readback SQL falhou **antes de invocar `sqlcmd`**, por argumento vazio `SqlFile` no invocador PowerShell privado; nenhum arquivo de saída SQL, nenhuma consulta. Pela regra de parada, verificação SQL congelada sem correção/retry nesta unidade: `master`/shadow, modo misto efetivo, `sa`, principals/roles, Flyway 106/105/0, agregados, 064, stats e consumidores SQL **não revalidados**. O serviço permanece ligado, sem reversão automática. Recibo sanitizado `target/p08-service-start-20260929-01/final-receipt.json` SHA `994ADB76940F5F55D28AFB40AD62C82C04CC2B06019722E34BE417BE0FF01B17`; ledger fechado `CLOSED_FROZEN_POST_SQL_PRE_INVOKE_FAIL` SHA `4AB2F1BEC2899D7DE6638EB329D5FEA3843C7F27911EA51D9B16E404C6207A65`. **Zero SQL/sqlcmd, JDBC/IT/Maven, DDL/DML/Flyway/login/grant/KILL/restart/fonte real/remoto/produção**. 2536 stats só observação histórica; FAILs 0354/0378–0380, oito erros/74 classes e Gate 1/P08 abertos. Supervisor decide gate **read-only novo** após corrigir offline o invocador, com reserva própria; esta unidade não autoriza repetição nem qualificação.
+
+# P08 — 0384: preflight parou no serviço local antes de SQL — 29/09/2026
+
+[Checkpoint 0384](docs/continuidade/checkpoints/0384-p08-metodo1-preflight-servico-parado.md). Em unidade física nova sob pedido vigente de qualificação, Banco conferiu os candidatos A/B offline 0383 (revision `16B013BF258A76E54E451CDF0039F598EECF3D23D1D8C8246AE86F93F119E1EB`, manifest `576C60B115DEA15D3B4C4D1271780500DD54A8271C873A648B37222A5EEAC171`, ZIP `64A01528AF95F209D662598E7C02D135FB7B6C8E44A240779DD2CD99FC912CC6`) apenas como pins candidatos e construiu espelho novo `C:\Users\lucas\p08m0384_01`: **2170/2170 hashes**, sem `target`/`.env` herdados. Cópia privada do guard 0380 manteve SHA `62E4B9640429F653D183B60E50896AC45ACD336626F2E2750DC51740A170FBF5`; nenhum relaxamento de 55104. Reserva física nova fixou 900 s, alvo exclusivo `localhost/ETL_SISTEMA_V2_SHADOW`, impacto e recuperação antes de SQL. O **único preflight** parou no controle OS: serviço local `MSSQLSERVER` não estava `Running`. Readback OS independente confirmou estado `Stopped`, PID ausente, zero listeners/processos próprios, espelho sem `target` e **zero arquivos de saída SQL**. Portanto **zero SQL/sqlcmd conectado, zero guard, zero Maven/JDBC/DLL/IT**, sem retry nem start/restart do serviço; não há readback SQL desta rodada. Ledger encerrado como `CLOSED_PREFLIGHT_SERVICE_NOT_RUNNING`, recibo sanitizado `target/p08-directed-wait-20260929-05/final-receipt.json` SHA `C26CD9A408A128DD342848110404C0C7163ED62A1F0934E309397CA2422F40A8`, ledger SHA `297474EC35492C0ADF45A73E4F70FE0B2CC0EE7B5E98967D4F2FCBA230A0FF0E`. UTF-8 estrito sem BOM nos quatro arquivos da unidade, `git diff --check` e preparação de trilha sob PowerShell 7.5.11 (1 positivo/24 negativos, 33 etapas/48 IDs/nove pacotes) passaram offline. O método 1 de 0377 e os outros cinco continuam não executados; Gate 1/P08 abertos. Stats 2536 permanecem **observação histórica sem baseline**, sem medição nesta unidade. Preservados PASS isolado 0376, FAILs 0378–0380/0354, oito erros, 74 classes faltantes e os pins 0383 apenas offline. Próximo responsável: Supervisor decide nova unidade após evidência de serviço `Running` ou autoridade distinta para intervenção; Banco não reutiliza a reserva nem inicia serviço nesta unidade.
+# P08 — 0383: PowerShell portátil verificado e PackageShadow A/B validado offline — 29/09/2026
+
+[Checkpoint 0383](docs/continuidade/checkpoints/0383-p08-package-shadow-ab-pwsh-portatil-offline.md). Preflight antes do download confirmou Windows/processo x64, destino novo fora do repositório e 692.253.749.248 bytes livres. O único ZIP oficial PowerShell 7.5.11 win-x64 teve SHA `75CDAB18DB9C8AC32F02E82149698166551E42D2A904DA4B3A60FB5FCB3AD021` igual ao pin informado; após extrair no diretório novo do usuário, `pwsh.exe` teve assinatura Authenticode **Valid**, signer Microsoft Corporation, e executou como 7.5.11 x64 por caminho absoluto. Nenhum MSI/winget, UAC, serviço, PATH global ou sobrescrita. O JDK 17 já provisionado fora do repositório foi usado apenas nos processos de build/guard. Fonte qualificada congelada de 0382: **2170/2170 hashes sem drift**; builds A/B copiaram **4135 entradas iguais** e rodaram Maven `--offline` `PackageShadow` com `inputIntegrity=true`, Spotless check 1210 limpos, Checkstyle 0 violações, sem `spotless:apply`. `-DskipTests` ficou restrito à fase de pacote conforme correção expressa da ordem; `clean verify` integral dos mesmos 2170 insumos já passara em 0381, sem novos testes nessa fase. Candidatos A/B novos coincidem em revision `16B013BF258A76E54E451CDF0039F598EECF3D23D1D8C8246AE86F93F119E1EB`, manifest `576C60B115DEA15D3B4C4D1271780500DD54A8271C873A648B37222A5EEAC171` e ZIP `64A01528AF95F209D662598E7C02D135FB7B6C8E44A240779DD2CD99FC912CC6`; 188 membros declarados, 190 arquivos com manifest/sidecar extraídos por candidato, hashes de payload/extração e 2170 fontes conferidos. Recibo privado `target/p08-runtime-0383-package-shadow-offline/final-receipt.json` SHA `5AD2DEC505800333AFC600696256C4718332BC2C00D28B7C826D1F0879031163`. Scanner self-test **20 PASS**, varredura **4136 candidatos/0 achados PASS**, `Test-TrilhaPreparation` **33 etapas/48 IDs/9 pacotes PASS**, guardas pacote **27 PASS**, schema **4 PASS**. Primeiro guard extraído **FAIL** por Java 25 no PATH do processo (`QUAL_PACKAGE_RUNTIME_LOCATION`); nova tentativa com JDK 17 só no PATH do processo passou **22/22**, JDBC não iniciado. `Test-ContinuidadeAgentes` e `Test-Gpt56ChatTrail` preservam **FAIL `HANDOFF_PATH`** de escopo histórico; não foram promovidos a PASS. Nenhuma fonte, POM, script versionado ou threshold mudou; DLL foi apenas byte passivo do pacote, nunca carregada. Zero SQL/JDBC/IT física, rede de fonte, Flyway, serviço, segredo ou deploy. Candidatos **PACKAGED_NOT_SMOKE_QUALIFIED**; JaCoCo shadow, smoke/IT e Gate 1 **não executados nesta unidade**, 8 erros/74 classes faltantes de 0354 e FAILs históricos preservados, P08/P01–P33 abertos. Próximo gate: Supervisor revisa recibos/pins e decide campanha física distinta com Banco executor exclusivo, sem tratar A/B offline como aceite.
+
+# P08 — 0382: PackageShadow A/B impedido pelo PowerShell 7.5 ausente — 29/09/2026
+
+[Checkpoint 0382](docs/continuidade/checkpoints/0382-p08-package-shadow-pwsh-ausente-offline.md). A unidade pediu novos candidatos A/B nos bytes atuais, sem skip/apply/limiar reduzido e sem qualquer efeito físico. O inventário qualificado 0374 foi congelado em `target/p08-runtime-0382-package-shadow-blocked-offline/current-source-inventory.json` (**2170/2170** entradas presentes; SHA `D43A5BF7EE106D64351E76A7A7F4F473C375136697A7270868193A36EF543A12`). Frente a 0374, **exatamente dois hashes** mudaram, `QualificationJsonPathTest.java` e `QualificationPackageIntegrityIT.java`; o recibo `receipt.json` SHA `181C4EBACC137A6CBF3F1CFA09F9C03B9804A314B0FCCE9E7A00785F5C2C8A54` registra os quatro hashes e uma revision **apenas calculada**, sem promoção a pin. `pwsh.exe` não está disponível; o shell é Windows PowerShell **5.1.26100.9444**, mas `Invoke-QualificationBuild.ps1`, `New-QualificationPackage.ps1` e `QualificationPackage.psm1` exigem `#Requires -Version 7.5`. Além disso, a fase `PackageShadow` do script existente adiciona `-DskipTests`, incompatível com o pedido **sem skip**. **0 tentativas de package, 0 A/B novos, 0 manifests/ZIPs/payloads/extrações novos**; os pins 0374 permanecem históricos/inválidos para os dois testes atuais. Scanner 0381 segue **ERROR/FAIL**, sem nova execução; validadores de trilha que exigem PS7 ficam **não executados/sem PASS**. Nenhum PowerShell foi instalado e não houve SQL/JDBC/DLL/IT física/serviço/rede/Flyway/segredo/deploy. O `clean verify` offline 0381 permanece prova de outra camada; 0354 conserva 8 erros e 74 classes faltantes, JaCoCo shadow/A-B físico/Gate 1/P08/P01–P33 seguem abertos. Próximo gate: ambiente autorizado com PowerShell 7.5 e fluxo PackageShadow que execute sem skip, seguido de A/B e comparações completas em unidade nova, sem inferir aceite físico.
+
+# P08 — 0381: déficit JaCoCo shadow classificado e verify offline corrigido — 29/09/2026
+
+[Checkpoint 0381](docs/continuidade/checkpoints/0381-p08-jacoco-shadow-classificacao-offline.md). O XML JaCoCo **histórico 0351**, SHA `26E83D29254DD5FD267C47C50466664EC368DF5A2B9EE1A00D29D69CDF4D51B3`, foi confrontado com as regras shadow atuais, iguais às do POM 0351: `analitico` 1936/2282 linhas e 575/958 branches passa por margem estreita; `expansao` 886/1210 e 158/317 precisa **+82 linhas/+33 branches**; `relacional` 141/333 e 28/101 precisa **+126/+33**. Das **53 classes** exigidas, **42** falham e **29** têm zero linha coberta. `JdbcExpansionQueries` 0/207 linhas/0/60 branches, `JdbcExpansionStatus` 0/32/0/2 e `JdbcRelationalRecomposition` 0/87/0/26 explicam parte dos pacotes; `QualificationTemporalMatrix` 0/450/0/130, `ExpansionLaboratoryExecutor` 0/120/0/37 e `RelationalLaboratoryExecutor` 0/116/0/30 exemplificam o déficit de classes. Recibos privados com todas as classes/linhas: `target/p08-offline-coverage-0381/historical-0351-coverage-diagnostic.json` SHA `166BE0F51F4E39086536EF459F78BC8BA08BB60E7D902942F3A9FDF21ADAF61B` e `historical-0351-line-evidence.json` SHA `42805D9741F38D9A07D6ECA0452769A3618C8F3A246BCA4C8B9D6FB475FE43C1`.
+
+A execução 0351 selecionou só `QualificationPackagePhysicalCompositionIT` (8 testes ativos); o check shadow do POM cobre os três pacotes e 53 classes, logo esse seletor não satisfaz o gate. O gate de 107 ITs 0354 parou após 33 classes/8 erros, **antes do JaCoCo**; 74 classes ficaram sem execução. Não houve mudança de threshold, exclusão, skip ou POM. No espelho isolado, sem perfil shadow/URL/JDBC, o primeiro `clean verify` teve 2368 testes/um erro por ausência de `pwsh.exe`; o segundo teve JaCoCo base PASS, mas Failsafe 6 testes/uma falha por CLI `resume` corretamente recusada sem opt-in. Dois ajustes mínimos em testes Runtime corrigiram a execução offline: o teste Windows de junction chama `powershell.exe` disponível; a IT de retomada sintética usa `QualificationSupervisor.resume()` local nas duas chamadas, preservando a leitura CLI `status` e o teste separado que exige ambas as travas para CLI `resume`. Testes dirigidos 2/2 e 1/1 passaram. O `clean verify` final Maven/JDK17 **offline, sem perfil shadow**, saiu 0: Surefire **2368/0/0/5**, Failsafe offline **6/0/0/0**, Spotless/Checkstyle e JaCoCo base PASS, log SHA `C4267100537646FD8A57B5CE23208F8B0E836A302BC05056B752FBD0C468E21B`. Aplicar as mesmas regras shadow **somente como prova aritmética offline** ao XML final SHA `25DA88308B63517CF2D6ECD19D276E30DAEDAD34B89D4A59B25C539957A809A2` recusa três pacotes e **53/53 classes**; recibo SHA `C85E956473BC9AE3E20FCC096A0512DAFEC4196186F1B407C2B11A81F2B761C5`. O inventário A/B candidato 0374 tem **2170 entradas, exatamente dois hashes agora diferentes**, os dois testes tocados; seus pins não representam estes bytes e precisam de nova qualificação offline antes de futuro gate físico. UTF-8 estrito dos seis arquivos finais e `git diff --check` passaram. O scanner/self-test sob Windows PowerShell 5.1 terminou **ERROR/FAIL**, não PASS; PowerShell 7 (`pwsh.exe`) ausente impediu os validadores de trilha `#Requires 7`. Lacuna de validação entregue ao Supervisor. **Cobertura shadow não passou nem foi executada nesta unidade.** Gate 1/P08/A-B seguem abertos; FAILs 0351/0354/0378–0380, 8 erros/74 classes, sete esperas e stats 2536 apenas observacionais preservados. Nenhum SQL, serviço, rede, Flyway, credencial ou efeito físico.
+
+# P08 — 0380: request de sistema BACKGROUND/PAGE impede método 1 — 29/09/2026
+
+[Checkpoint 0380](docs/continuidade/checkpoints/0380-p08-guard-request-sistema-page-locks.md). Em unidade física **distinta** pós-0379, Banco manteve os dois predicados `r.database_id`/`s.database_id`, a recusa conservadora e `THROW 55104` do guard privado anterior; adicionou somente captura categórica no ramo de recusa, sem emitir identificadores, texto SQL, objeto, recurso, host, programa, login bruto ou segredo. Parser T-SQL ScriptDom, diff fail-closed, parser PowerShell, argv `sqlcmd -E -C`, sanitização e **67 casos sintéticos** passaram offline; a primeira falha do modelo PowerShell para negativo foi preservada e corrigida antes de SQL. Espelho físico novo `C:\Users\lucas\p08m0380_01` sem `target`/`.env` herdados conferiu **2170/2170** hashes e pins 0374 apenas candidatos. Reserva nova 600 s no único alvo `localhost/ETL_SISTEMA_V2_SHADOW`, impacto/recuperação e preflight Windows `master`/alvo/loopback PASS. O **único guard** compilou e recusou SQL **55104 `REQUEST_ACTIVE`**: uma request de **sistema**, `BACKGROUND`, vinculada ao shadow por request e sessão, família de espera `PAGE`, comando/valor exato da espera **UNKNOWN** por allowlist, `blocking_session_id>0=NO`, flags de transação da request/sessão `YES`, duração `1–10 s`, locks do alvo **3+ no total e 3+ compartilhados**, demais modos zero na amostra. `tranAssoc=0` é só ausência de associação observada naquela DMV, não ausência de transação. **Zero Maven/JDBC/DLL/IT**, sem retry. Readback independente `master`/alvo/Flyway **106=SCHEMA+105 SQL/0 fail**, 1819 objetos/247 tabelas/147 linhas agregadas, contagens/064/PID/listeners e stats **2536→2536** sem delta nos recortes medidos; 2536 segue apenas observacional. Recibo sanitizado `target/p08-directed-wait-20260929-04/final-receipt.json` SHA `0F1780FCF6EE6A54FB26B7D90886D7A1C87B5D9237AA83E2A38004A4F148A9FC`; ledger SHA `C2681019BC143D1AEA686A136F5C833F869A30E27CC603D0709E7875CF8BD7AB`, fechado em **72,209 s**. Isso classifica somente a request desta rodada, sem nomear tarefa/owner ou ligar causalmente a 0378/0379/0354. Preservados FAILs 0378/0379, PASS isolado 0376, 8 erros/74 classes faltantes de 0354, sete esperas sem causa fechada, JaCoCo/A-B/Gate 1/P08 abertos; método 1 de 0377 ainda sem IT executada. Nenhum Java/SQL versionado, migration/baseline, DDL/Flyway, KILL, restart/login, fonte real, outro banco ou produção. Próximo responsável: Supervisor avalia a pré-condição de request interna e define eventual gate distinto; Banco fica ocioso após handoff.
+# P08 — 0379: guard instrumentado recusou request de sistema; método 1 sem Maven — 29/09/2026
+
+[Checkpoint 0379](docs/continuidade/checkpoints/0379-p08-guard-instrumentado-request-sistema.md). Sob nova unidade do Supervisor pós-0378, Banco alterou **somente a cópia privada do guard**, preservando as duas condições originais de request ativa e acrescentando recusa conservadora quando a amostra agregada observa request. Prova offline sintética de **30 casos** de categorias/precedência/flags, parser, argv `sqlcmd -E -C`, UTF-8 e ausência de identificadores na linha de diagnóstico passou; uma primeira versão do verificador recusou falsamente o `SUM(CASE)` simples e foi preservada como falha de preparação, sem SQL. Espelho físico novo `C:\Users\lucas\p08m0379_01` sem `target`/`.env` herdados conferiu **2170/2170** hashes e pins 0374 somente candidatos. Reserva física nova de 600 s, alvo único `localhost/ETL_SISTEMA_V2_SHADOW`, impacto/recuperação e preflight Windows `master`/alvo/loopback PASS. O único guard instrumentado compilou e recusou **SQL 55104 `REQUEST_ACTIVE`**; diagnóstico limitado: total 1, `r.database_id` e `s.database_id` vinculados ao shadow, **processo de sistema**, zero reader/outro usuário, flag `open_transaction_count>0`, sem associação observada em `dm_tran_session_transactions`. São flags no instante, sem identidade, owner, statement ou blocker. **Zero Maven/JDBC/DLL/IT**, sem retry. Readback independente `master`/alvo/Flyway **106=SCHEMA+105 SQL/0 fail**, 1819 objetos/247 tabelas/147 linhas agregadas, contagens, 064, PID/listeners e stats **2536→2536** sem delta nos recortes medidos; 2536 permanece observacional, sem baseline. Recibo sanitizado privado `target/p08-directed-wait-20260929-03/final-receipt.json` SHA `C9EC0D8D3D484D8FE0E848AA2D1992A613D1203168674840B860DA9B5C0BE3B4`; ledger SHA `1F0790DA10E1158753CA13EEE42EF5218F31633A427DCFFE4E3C458C45EA503E`, fechado em **88,902 s**. O resultado bruto privado do runner incluiu metadados de caminho do PowerShell junto à string; o recibo derivado retém exclusivamente categorias/contagens/flags. Preservados FAIL 0378, PASS dirigido 0376, 8 erros/74 classes faltantes de 0354, sete esperas sem causa fechada, JaCoCo/A-B/Gate 1/P08 abertos. Esta observação **não prova ser a mesma request de 0378**. Não houve alteração Java/SQL versionado, migrations, DDL/Flyway, KILL, restart/login, fonte real ou produção. Próximo responsável: Supervisor revisa a pré-condição de request de sistema e define eventual gate distinto; Banco fica ocioso após handoff.
+# P08 — 0378: campanha retomada parou no guard do método 1, sem Maven — 29/09/2026
+
+[Checkpoint 0378](docs/continuidade/checkpoints/0378-p08-seis-esperas-guard-request-active.md). O novo pedido explícito do usuário retomou os seis métodos não iniciados de 0377, com teto de 3600 s total e 600 s por método, ordem serial e parada na primeira recusa. Para o **método 1**, Banco preparou espelho novo `C:\Users\lucas\p08m0378_01` sem `target`/`.env` herdados, revalidou **2170/2170** hashes, pins candidatos 0374 e a prova offline dos seis métodos de 0377. Reserva física nova fixou somente `localhost/ETL_SISTEMA_V2_SHADOW`, Windows auth, impacto e recuperação. Preflight `master`/alvo e listeners loopback passou. O guard categórico imediatamente anterior ao Maven recusou com **SQL 55104 `REQUEST_ACTIVE`**; **zero chamada Maven, zero IT, zero DLL/JDBC** nesta rodada. Sem retry. Readback independente `master`/alvo/Flyway **106=SCHEMA+105 SQL/0 fail**, 1819 objetos/247 tabelas/147 linhas agregadas, contagens, 064, PID/listeners e stats **2536→2536** sem delta nos recortes medidos; 2536 continua observação, sem baseline aceita. O guard só classifica request ativa no instante da sonda; preflight/readback registraram zero outras sessões nos seus instantes e não identificam request, owner, blocker ou causa histórica. Recibo privado `target/p08-six-waits-20260929-02-m01/final-receipt.json` SHA `76ED118CFB77053B4425CB15DBDFCDA106060DBBAA44798A228D08C255F5507F`; ledger SHA `1D8AA0C407739FEE9BAAB8622E436B05B0FFEB909D81B2D35F60DE3AE6D1A10F`, encerrado em **168,844 s** do teto do método. **Método 1 parado antes da IT; métodos 2–6 não iniciados**, pois a primeira recusa encerra a campanha. Preservados PASS isolado 0376, FAILs 0354 e demais históricos, 8 erros/74 classes faltantes, sete esperas sem causa fechada, JaCoCo/A-B/Gate 1/P08 abertos, pins 0374 sem aceite. Nenhum DDL/Flyway, KILL, restart/login, fonte real, outro banco ou produção. Próximo responsável: Supervisor revisa a recusa e decide eventual autorização distinta; Banco fica ocioso após handoff.
+# P08 — 0377: campanha de seis esperas PAUSADA antes de efeito físico — 29/09/2026
+
+[Checkpoint 0377](docs/continuidade/checkpoints/0377-p08-seis-esperas-pausa-sem-efeito.md). O usuário substituiu a autorização restante da campanha por ordem urgente de **documentar e pausar** antes de desligar o PC. Antes dessa ordem, Banco havia criado apenas artefatos privados offline e espelho limpo `C:\Users\lucas\p08m0377_01`, com **2170/2170 hashes** e pins 0374 conferidos como candidatos. A primeira invocação do helper privado de prova parou em `OFFLINE_INPUT_INVALID` por leitura aninhada do JSON no PowerShell, **antes de Maven**; a cópia privada foi corrigida, preservando a observação do FAIL. Uma única compilação Maven **offline**, iniciada antes da ordem de pausa e concluída sem JDBC, passou com Spotless/Checkstyle ativos, zero violação, seis seletores exatos presentes uma vez no bytecode e 2170 inputs sem drift. Prova `target/p08-six-waits-20260929-01-campaign/offline-proof.json` SHA `589C91A3EDE20C11D2A0DC8B148EA5D01884D469000286F0CF2F89D9A83DA5CD`; log privado da compilação SHA `2C88E68495DF01D1EC77C32BE8F2F5C08740346CD37A01CF17ADAA2085EBF78C`. **Zero dos seis métodos físicos executados; os seis permanecem não iniciados na ordem autorizada.** Nenhum SQL, preflight, guard, reserva, ledger físico, URL/JDBC, XML Failsafe ou readback SQL ocorreu nesta campanha; não há resultado físico incerto e **zero processo próprio remanescente**. Nenhuma reserva precisa ser fechada porque não foi aberta. O PASS isolado 0376 e todos os FAILs/outputs/ledgers históricos seguem intactos. Permanecem **8 erros 0354, 74 classes faltantes, sete esperas sem causa física fechada, JaCoCo/A-B/P08 abertos; stats 2536 só observacionais, sem baseline aceita; pins 0374 sem aceite**. **Não retomar automaticamente**: somente novo pedido explícito do usuário pode autorizar a campanha; então revalidar bytes/pins, iniciar espelho físico limpo sem `target` herdado, reserva/preflight/guard novos para o primeiro método ainda não executado, sem repetir o método dirigido 0376 nem qualquer efeito físico anterior. Próximo responsável: Supervisor registra a pausa e aguarda novo pedido; Banco fica ocioso.
+
+# P08 — 0376: primeira espera dirigida PASS isolado após guard categórico — 29/09/2026
+
+[Checkpoint 0376](docs/continuidade/checkpoints/0376-p08-primeira-espera-it-dirigida-pass.md). Nova ordem do Supervisor autorizou **uma** execução de `AnalyticExpansionCaptureIT#packagedManifestObservationsUseTypedPreparationAndDuplicateLineage` somente após guard classificado. A cópia privada do helper corrigiu `master` para aceitar collation `NULL` **só com `AUTO_CLOSE=1`**, conservando collation literal no shadow. Guard privado passou a recusar com códigos distintos para contagem >2, login não reader, estado não `SLEEPING`, request, transação, outro usuário/sistema e contagem alterada; **14 casos sintéticos**, precedência, parser, argv `sqlcmd -E -C`, UTF-8 e UTC passaram offline, sem alegar compilação SQL nessa etapa. FAIL e artefatos 0375 preservados. Espelho novo `C:\Users\lucas\p08m0376` conferiu **2170/2170 hashes** e pins 0374 apenas candidatos offline, sem `target`/`.env` herdados; `test-compile` JDK17/Maven offline passou com Spotless/Checkstyle ativos, seletor único no Failsafe/bytecode, zero JDBC. Reserva física **nova de 900 s** registrou impacto/recuperação. Preflight `sqlcmd -E -C` em `master`/shadow local exatos e listeners loopback passou: Flyway **106=SCHEMA+105 SQL/0 fail**, 1819 objetos/247 tabelas/147 linhas agregadas, contagens/064 e stats **2536 só observacionais, sem baseline aceita**. O único guard categórico imediatamente antes do Maven passou com **duas sessões reader elegíveis** naquele instante. **Uma** chamada Maven offline com perfil/trava shadow, URL privada integrada, DLL 12.8.2 temporária e fixture sintético rollback-only saiu **0**; XML sanitizado: **1 teste/0 falhas/0 erros/0 skips**, só o método selecionado. Readback independente master/alvo/contagens/schema/histórico/064/stats/socket sem delta nos recortes; stats **2536→2536**, 2170 inputs sem drift e nenhum processo próprio remanescente. O wrapper chama `rollback()` no `close()`, mas não há recibo individual; igualdade agregada tem alcance limitado. Ledger privado `target/p08-directed-wait-20260929-02/physical-ledger.jsonl` SHA `593BC576FE41D80375D1F0C7C814B8D9A1566603880B6FFBA48320E6246DA066`; recibo final SHA `10F766357812ACF9E24F68545837CF40EE057B7A6341B91B9E5449CC3C18D437`. **O PASS qualifica só este método nessa rodada; não determina blocker/plano/transporte da espera histórica 0354.** Permanecem **8 erros históricos, 74 classes faltantes, sete esperas sem causa física fechada, JaCoCo, A/B físico e P08 abertos**; pins 0374 não aceitos. Supervisor revisa evidências e decide novo gate distinto; Banco continua único executor SQL/JDBC/ledger. Sem KILL/fechamento, DDL/Flyway, restart/login, outros métodos/107/A-B, fonte real, cinco bancos ou produção.
+
+# P08 — 0375: primeira espera dirigida parou no guard 55061, sem IT — 29/09/2026
+
+[Checkpoint 0375](docs/continuidade/checkpoints/0375-p08-primeira-espera-guard-55061-sem-it.md). Ordem nova do Supervisor autorizou **uma vez somente** `AnalyticExpansionCaptureIT#packagedManifestObservationsUseTypedPreparationAndDuplicateLineage` no shadow local; **a IT não foi iniciada**. Espelho novo fora do checkout, sem `target`/`.env` herdados, conferiu os **2170 hashes** e pins revision `C05B97B06CFC06F5DE8B3A5B2CC6516B61F21EA642E1740C7F538A95EF517565`/manifest `0E0DFB3E7C1B066D3D09466D52A18CA2A99D96E0C06531E487168858A7D07AD2`/ZIP `CC48CEAC3241537ACA46496C121BB7FA0731FB43CB68689343DC44CA9D685123` **só como candidatos offline**. `test-compile` JDK17/Maven offline passou com Spotless ativo (1210/1210 limpos), Checkstyle 0, 656 principais/554 testes; Failsafe `skipITs=true` e bytecode provaram o seletor de um método sem JDBC, sem `spotless:apply`/skip ou alteração Java. Nova reserva 900 s registrou impacto/recuperação. O helper inicial de preflight marcou **FAIL `MASTER_GUARD_MISMATCH`**, preservado: `master` exibiu collation `NULL` com `AUTO_CLOSE=1`, condição permitida pelo **próprio guard SQL**; o alvo retornou a collation exata. Os outputs SQL/OS da mesma rodada foram reconciliados offline, **sem repetir SQL**: Windows auth `master`/shadow exatos, loopback, Flyway 106=SCHEMA+105 SQL/0 fail, 1819 objetos/247 tabelas/147 linhas agregadas, contagens, 064 e stats 2536 apenas observacionais. O **único guard de consumidores**, imediatamente antes de qualquer Maven, recusou com **SQL 55061 na linha 22**: contagem inicial não excedeu duas sessões, mas pelo menos uma sessão com banco corrente shadow não satisfez algum predicado reader/`SLEEPING`/sem request/transação. O predicado exato e o dono são **desconhecidos**. O runner parou exit 126, **zero chamadas Maven físicas e zero XML Failsafe da IT**, sem retry. Snapshots pré/pós mostraram zero outras sessões, sem demonstrar identidade/continuidade; readback independente master/alvo/contagens/schema/064/stats/socket sem delta nos recortes, stats **2536→2536 sem aceite de baseline**. Ledger privado `target/p08-directed-wait-20260929-01/physical-ledger.jsonl` SHA `349AD583B2C0333E154C6AFF77DF8CDF9EF712E353DE23EC09B7BDDE6D5D12D7`; recibo final SHA `0E41B62CBB6D263557624CD80B60159A59A4192853E433408C274C39D80A8C92`. **Primeiro timeout 0354 continua sem nova prova causal; 8 erros históricos, 74 classes faltantes, sete esperas, JaCoCo, A/B físico e P08 abertos.** Supervisor decide diagnóstico separado da sessão transitória/novo gate com reserva própria; Banco segue único executor SQL/JDBC/ledger. Sem KILL/fechamento, DDL/Flyway, restart/login, cinco bancos, fonte real ou produção.
+
+# P08 — 0374: Spotless do espelho isolado corrigido por LF explícito; pacote A/B apenas offline — 29/09/2026
+
+[Checkpoint 0374](docs/continuidade/checkpoints/0374-p08-spotless-mirror-line-endings-offline.md). Runtime reproduziu offline o FAIL de formatação 0373 em cópia byte-idêntica das 2170 entradas, fora do checkout Git: Spotless 3.10.0 padrão recusou **1210/1210 Java**. Amostras e inventário tinham LF e SHA iguais no worktree, espelho 0373 e cópia; `git check-attr eol` no checkout retornou `lf`, mas o espelho sem `.git` não dispõe desse contexto. O default do plugin é `GIT_ATTRIBUTES_FAST_ALLSAME`; uma única linha `<lineEndings>UNIX</lineEndings>` em `pom.xml`, coerente com `.gitattributes`/`.editorconfig`, fez o mesmo snapshot passar **1210/1210 sem reformatar Java**. `test-compile` JDK17/Maven offline na cópia sem Git passou com Spotless check ativo, Checkstyle zero e 656 fontes principais/554 de teste compiladas. O wrapper `Invoke-QualificationBuild.ps1` deixou de chamar `spotless:apply` e de copiar Java de volta ao worktree; agora confere hash de todos os inputs copiados após Maven. Rodada nova `Compile` saiu 0, `inputIntegrity=true` para 4126 arquivos, sem `inventory-before.json`, URL shadow ou JDBC. `graphify update .` saiu 0. Os 2170 itens qualificados preservam todos os bytes anteriores exceto `pom.xml`; o script do wrapper não integra esse inventário e seu SHA foi registrado separadamente. Candidatos `PackageShadow` A/B novos, offline e sem smoke, saíram 0 com `inputIntegrity=true`; payload/ZIP e fontes A/B conferidos: revision `C05B97B06CFC06F5DE8B3A5B2CC6516B61F21EA642E1740C7F538A95EF517565`, manifest `0E0DFB3E7C1B066D3D09466D52A18CA2A99D96E0C06531E487168858A7D07AD2`, ZIP `CC48CEAC3241537ACA46496C121BB7FA0731FB43CB68689343DC44CA9D685123`, 2170 fontes/188 membros, estado **PACKAGED_NOT_SMOKE_QUALIFIED**. Recibo `target/macrobloco-p08-runtime-0374-offline-20260929-01/candidate-a-b-validation.json` SHA `E1A846B1683E1F4E6C2B2B9F30322B33EF1C4AAE6ADFE43D8DDF4E675C07FCA5`. O PASS 0373 continua **somente 1 método dirigido**, sem novo efeito físico nesta unidade. Mantidos **8 erros históricos 0354, sete esperas sem causa física, 74 classes faltantes, JaCoCo/A-B físico/Gate 1/P08 abertos e 2536 stats sem baseline aceita**; nenhum aceite P01–P33. Sem SQL/JDBC/rede/Flyway/migration/restart/login/IT física/smoke/cinco bancos. Supervisor revisa diff e pins offline; Banco segue único executor SQL/ledger em ordem futura distinta.
+
+# P08 — 0373: IT dirigida da correção 0365 PASS, P08 aberto — 29/09/2026
+
+[Checkpoint 0373](docs/continuidade/checkpoints/0373-p08-it-dirigida-cotacoes-pass-readback.md). Sob ordem nova do Supervisor, Banco executou **uma vez somente** `AnalyticLaboratoryObservationModesIT#quotesPublishFourModesWithExplicitTariffAndIdempotentBusinessSnapshot` no shadow local. O fixture conservou SHA-256 `3C6462058679A04B486927F26B82D8D1F70D78FB0411A503218F7658AEBCA2B0`; inventário candidato 0367 de 2170 fontes sem drift no espelho limpo, sem `target`/`.env` herdados. A primeira compilação offline falhou no Spotless por formatação de 1210 arquivos copiados; o log foi preservado. Compilação offline dos bytes exatos passou com **somente o check de formatação desativado no espelho**, e a prova Failsafe com `skipITs=true` confirmou argv de uma classe/um método e o método no bytecode, sem JDBC. Nova reserva física de 900 s registrou impacto e recuperação; preflight Windows `sqlcmd -E -C` em `master`/shadow, loopback, Flyway **106 = SCHEMA + 105 SQL/0 fail**, 1819 objetos/247 tabelas/147 linhas agregadas, contagens, 064 e stats 2536 **apenas observacionais** PASS. Guard imediatamente antes da IT admitiu **duas** sessões reader `SLEEPING`, sem request/transação, nenhuma outra. Uma chamada Maven JDK17 offline com perfil/trava shadow e DLL 12.8.2 no `target/native` saiu **0**; XML sanitizado confirma **1 teste/0 falhas/0 erros/0 skips**, só o método solicitado. Readback independente master/alvo/contagens/schema/064/stats/socket sem delta nos recortes medidos; 2536 segue **sem aceite de baseline**. O `close()` do wrapper chama rollback e contagens agregadas antes=depois, mas **não houve recibo de rollback individual**. Ledger privado `target/p08-directed-it-20260929-01/physical-ledger.jsonl` SHA `BA519F8989F9140910E98607CEA345C459DA1812A0871DEB284034ADB5A0895E`; recibo final SHA `E9766C4A8E9633F567F5D3896C6D8514AF901C61AAE8A1618AB9B8B7C69523D8`. **A correção 0365 passou neste método dirigido, sem aceitar P08, as sete esperas ou pins/smoke A/B.** Preservados os **8 erros 0354**, 74 classes faltantes e JaCoCo aberto. Sem primeiro timeout, 107 ITs, A/B físico, DDL/Flyway, KILL, restart/login, fonte real ou produção. Supervisor revisa o recibo e decide novo gate distinto; Banco permanece único executor SQL/ledger.
+
+# P08/LOCAL_V2 — 0372: catálogo ausente, ramo V024 de inserção observado — 29/09/2026
+
+[Checkpoint 0372](docs/continuidade/checkpoints/0372-p08-local-v2-catalogo-ausente-ramo-insercao.md). Cópia privada nova do guard 0371 removeu `SUM(CASE...)` com `EXISTS` e usou contagens separadas e predicados `IF EXISTS` simples; bytes fora do bloco do guard iguais aos da cópia FAIL 0371. Prova offline passou parser/argv/literais/UTC e 8 casos sintéticos (0/1/2 leitores idle admitidos; ativo/transação/terceiro/outro login/request recusados), **sem alegar compilação SQL pela prova offline**. Reserva física nova 300 s, impacto/recuperação, Windows auth `sqlcmd -E -C` local. Preflight master/shadow, loopback, Flyway 106=SCHEMA+105 SQL/0 fail, 1819 objetos/247 tabelas/147 linhas, contagens, 064 e stats 2536/hash pós-0354 **somente referência observacional** PASS. Na **única invocação catalog-only**, o guard reader embutido imediatamente antes do SELECT passou e retornou só flags: **presença=0, active=-1 (ausente), kind primário DATA_EXPORT=0, binding DATA_EXPORT=0; ramo catalogal V024 `CATALOG_INSERT_BRANCH`**. Assim, `registerSource(LOCAL_V2,DATA_EXPORT)` seguiria o ramo de **fonte nova** no estado persistido observado; procedure/fixture/IT **não foram executados**, nem há aceite P08. Readback independente master/alvo/contagens/064/stats/socket PASS sem delta nesses recortes; duas outras sessões no marcador pré/pós, sem prova de identidade/continuidade, e o guard só vale no instante da invocação. `2536` não é baseline aceita. Ledger privado `target/p08-local-v2-catalog-20260929-05/physical-ledger.jsonl` fechado `CLOSED_CATALOG_OBSERVED_NO_DELTA` em 37,2 s, SHA-256 `46A6023EB8E5FBB9F5ED934EE5DDEA85C7952C5C4BB63883B93D8B10FB1E84C1`; recibo final SHA `1F2554D9EA9743AFB6ED31313FB65C7ED190849FFFFB50D0D0C1468DC5694EF8`. FAILs 0368–0371 preservados, sem retry. Preservados 8 FAILs 0354, 74 classes faltantes, JaCoCo/A-B/Gate 1/P08 abertos; correção e pins 0367 só candidatos offline. Supervisor avalia a evidência e decide eventual gate físico **distinto**; Banco segue único executor SQL/ledger. Nenhum KILL/fechamento, DDL/Flyway, restart/login, IT/smoke, cinco bancos ou produção nesta unidade.
+
+# P08/LOCAL_V2 — 0371 parou na compilação do guard reader; catálogo desconhecido — 29/09/2026
+
+[Checkpoint 0371](docs/continuidade/checkpoints/0371-p08-local-v2-guard-sql130-fail.md). Ordem nova do Supervisor trocou **somente para uma consulta catalog-only** o zero consumidores por no máximo duas sessões reader de usuário, `SLEEPING`, banco corrente shadow, sem request/transação; não liberou IT, smoke ou schema. Helper privado novo passou prova offline de parse, literais 0369, argv `sqlcmd -E -C` com `-i` absoluto, preservação dos FAILs/recibos e fechamento `DateTimeOffset`. Reserva física nova de 300 s, impacto/recuperação registrados. Preflight `master`/shadow exatos, loopback, Flyway 106=SCHEMA+105 SQL/0 fail, 1819 objetos/247 tabelas/147 linhas, contagens, 064 e stats 2536/hash pós-0354 **apenas observacionais** PASS; marcador do alvo mostrou duas outras sessões, sem classificá-las agora. **A única invocação do catálogo saiu 1 com SQL 130 nas linhas 24–25 do guard embutido:** `SUM(CASE...)` continha `EXISTS` correlacionados, expressão que SQL Server recusou na compilação. Sem marcador/flags, o guard não foi provado e o SELECT de `LOCAL_V2` não foi alcançado; ramo V024 **DESCONHECIDO**. Sem retry. Readback independente master/alvo/contagens/064/stats/socket PASS, dois outros sessions no marcador pré/pós, sem delta nesses recortes; não prova identidade/estado dessas sessões. Reserva fechada `CLOSED_SQL130_GUARD_COMPILE_FAIL_NO_DELTA`: último readback físico 23,5 s, fechamento 96,1 s sob teto; ledger `target/p08-local-v2-catalog-20260929-04/physical-ledger.jsonl` SHA-256 `DBCFDD80023AE13EC3B07F4F9177B350AE6D206F1F241ED6AD7F1CE353D75F6C`. O teste estático offline **não detectou** a restrição semântica SQL 130; helper executado preservado para auditoria, sem correção ou segunda consulta nesta reserva. 2536 não é baseline aceita. Preservados 8 FAILs 0354, 74 classes faltantes, JaCoCo/A-B/Gate 1/P08 abertos e candidatos 0367 só offline. Supervisor decide nova ordem/reserva após revisão do guard; Banco continua único executor SQL/ledger. Sem KILL/fechamento, DDL/Flyway, restart/login, IT/smoke, cinco bancos ou produção.
+
+# P08 — 0370 classificou consumidores do guard 55003; cliente responsável desconhecido — 29/09/2026
+
+[Checkpoint 0370](docs/continuidade/checkpoints/0370-p08-consumidores-reader-dmv-local.md). Após revisão offline dos literais/argv 0369 contra outputs preservados, uma **nova** reserva curta de 120 s executou Windows auth `sqlcmd -E -C` apenas em `lpc:localhost/master`: guard de alvo exato, **uma** consulta DMV categórica e readback do guard. A DMV observou **duas sessões de usuário**, categoria do login reader, estado `SLEEPING`, programa `OTHER` e host `LOCAL_LIKE`; ambas associadas ao shadow pelo banco corrente, **zero requests no alvo e zero transações abertas/associadas ao shadow** no instante da leitura. Logo, 55003 em 0369 é explicado pela contagem positiva de sessões, sem precisar supor lock ou transação; **cliente/owner não identificado, VS Code não atribuído**. Readback OS confirmou serviço/PID/listeners somente loopback estáveis; marcador/hash do guard SQL `master` pré/pós idênticos. A operação física terminou em 28,1 s e o fechamento em 57,6 s, sob o teto. O primeiro helper privado de fechamento interpretou UTC como horário local e produziu falso excesso de teto; recibo e ledger originais preservados, emenda offline separada comprova os tempos sem novo SQL. Ledger privado `target/p08-consumers-20260929-03/physical-ledger.jsonl` SHA-256 `874F7D4278BFB7E2D740F00306F5926E2F7E718788D44D8D42B5375388984215`, emenda SHA-256 `668271A3B244962F5B5A0FEBA540D80270BCC4F26C7C260239239E3D191E757D`. Nenhuma consulta LOCAL_V2/stats, KILL, rollback de terceiros, restart/login, DDL/Flyway, IT/smoke ou cinco bancos. O 2536 permanece só observação de 0354, sem baseline. Preservados 8 FAILs, 74 classes faltantes, JaCoCo/A-B/Gate 1/P08 abertos. Supervisor decide como identificar/encerrar graciosamente o cliente responsável e se depois autoriza novo preflight catalog-only; Banco segue único executor SQL/ledger.
+
+# P08/LOCAL_V2 — 0369 parou em consumidores no preflight; catálogo desconhecido — 29/09/2026
+
+[Checkpoint 0369](docs/continuidade/checkpoints/0369-p08-local-v2-preflight-consumidores-fail.md). Cópia privada do invocador 0368: `$input` renomeado para `$sqlFile`; parse PowerShell e quatro argv completos com fixture sintética, `-i` absoluto não vazio, `-E -C`, alvo local e timeouts passaram offline. Script/ledger FAIL 0368 mantiveram hashes. Reserva física **nova**, teto 300 s, impacto/recuperação registrados. Preflight Windows `sqlcmd -E -C` passou nos guards de `master` e shadow exatos, 106=SCHEMA+105 SQL/0 falhas, 1819 objetos/247 tabelas/147 linhas agregadas, contagens esperadas e 064; stats antes/depois de 064 repetiram exatamente o pós-0354, **2536 apenas observação, sem baseline aceita**. Guard independente de consumidores retornou **55003/SHADOW_CONSUMERS_PRESENT**; o alvo já havia mostrado sessões adicionais. Parada sem retry: **consulta LOCAL_V2 não executada, ramo V024 desconhecido**. Readback OS independente confirmou serviço/PID/listeners loopback estáveis; pós SQL não foi aberto após a pré-condição falhar. Recibo inicial do helper privado teve falsos negativos por literais incorretos de collation, sessões, contagens e hash 064; reconciliação offline separada dos outputs SQL produziu `final-result.json` PASS para os demais guards, preservando o primeiro recibo. Ledger privado `target/p08-local-v2-catalog-20260929-02/physical-ledger.jsonl` fechado `CLOSED_PREFLIGHT_CONSUMERS_FAIL`, SHA-256 `FA018F0606E00DE699D66034EE8ACEF0C8207F5A5DA67E521F68632E9BD2EB2F`. Nenhum Maven IT, smoke A/B, DDL/Flyway, restart/login, fonte real ou produção. Supervisor decide como obter zero consumidores e se autoriza uma **nova** unidade catalog-only com helper revisto; Banco segue único executor SQL/ledger. Preservados 8 FAILs 0354, 74 classes faltantes, JaCoCo, A/B físico, Gate 1/P08 abertos e candidatos 0367 apenas offline.
+# P08/LOCAL_V2 — preflight catalog-only 0368 parou antes de SQL; estado físico desconhecido — 29/09/2026
+
+[Checkpoint 0368](docs/continuidade/checkpoints/0368-p08-local-v2-preflight-invocador-fail.md). Sob ordem finita do Supervisor, Banco abriu reserva física nova de 300 s com impacto/recuperação e pins privados. O OS preflight confirmou serviço em execução e listeners loopback. O primeiro `sqlcmd -E -C` para `master` recusou **`-i` sem argumento**, exit 1, antes de conexão ou marcador; nenhum arquivo `.out` foi criado. Causa reproduzida offline: parâmetro do helper chamado `$input`, variável automática do PowerShell, ficou vazio. Readback OS manteve serviço/PID/listeners; ledger privado `target/p08-local-v2-catalog-20260929-01/physical-ledger.jsonl` fechado `CLOSED_PRE_SQL_INVOCATION_FAIL`, SHA-256 `3F03BD294DED0F19E2EA0F8FA3FE3F93495A4D29CBEF94504A753A74E7D835C5`. **Zero consultas SQL e zero consulta LOCAL_V2**; master/alvo, consumidores, Flyway, objetos/contagens, 064 e stats atuais não foram aferidos nesta rodada. Sem retry. O 2536 pós-0354 continua fotografia histórica sem aceite; ramo V024 físico permanece **DESCONHECIDO**. Supervisor decide eventual nova unidade/reserva após correção e teste offline do invocador. Preservados 8 FAILs, 74 classes faltantes, JaCoCo, A/B e Gate 1/P08 abertos; candidatos 0367 somente offline. Nenhum SQL/JDBC/IT Maven/smoke/DDL/Flyway/restart/login/fonte real.
+
+# P08 — bytes 0365 qualificados offline; seletor de duas ITs e candidatos A/B sem execução física — 29/09/2026
+
+[Checkpoint 0367](docs/continuidade/checkpoints/0367-p08-runtime-seletor-candidatos-offline.md). Runtime revisou o caminho do método corrigido de `AnalyticLaboratoryObservationModesIT`: o fixture anterior usa fontes sintéticas distintas de `LOCAL_V2`; o método de usuários na mesma classe usa `LOCAL_V2`/`GRAPHQL`, porém abre outra sessão rollback-only. O catálogo físico preexistente continua desconhecido. V024 aceita `registerSource(LOCAL_V2,DATA_EXPORT)` se a fonte estiver ausente (inserção ativa/binding) ou ativa com binding `DATA_EXPORT`; recusa fonte inativa ou binding ausente com 51301, sem reativação/associação automática. O registro está antes da frontier, preservando recusa fechada. A alteração de código foi feita em 0365, sem novo delta de fonte nesta unidade; SHA atual `3C6462058679A04B486927F26B82D8D1F70D78FB0411A503218F7658AEBCA2B0`. Snapshot offline JDK17 compilou 656 fontes principais e 554 de teste, Spotless/Checkstyle PASS; o wrapper saiu 1 **após** Maven `BUILD SUCCESS` pela falta de `inventory-before.json` da rodada. Failsafe 3.3.1 confirmou a propriedade do seletor exato com ITs puladas; sonda de sintaxe em dois métodos puros saiu **2/0/0/0**, sem JDBC; os dois métodos físicos constam no bytecode, **não foram executados**. Inventário antigo 0350 difere em exatamente esse fonte; candidatos A/B novos `PackageShadow` offline saíram 0, 2170 fontes, 188 membros, ZIP/manifest/revision idênticos e verificação de payload, extração e hashes fonte A/B PASS. Estado do pacote: `PACKAGED_NOT_SMOKE_QUALIFIED`; Gate 1/P08 **FAIL/abertos**, A/B físico não executado, JaCoCo 0354 não alcançado, **8 FAILs e 74 classes faltantes** preservados, 2536 stats não aceitas e nenhum aceite P01–P33. Nenhum SQL/JDBC/rede/Flyway/migration/restart/login/IT física/smoke executado. Próximo: Supervisor revisa os novos pins/diff e decide se o risco de catálogo físico divergente será tratado em unidade própria; Banco permanece único executor SQL/ledger, sem solicitação de novo gate físico nesta unidade.
+
+# P08 — sete esperas 0354 mapeadas por caminho SQL/Java, sem causa física atribuída — 29/09/2026
+
+[Checkpoint 0366](docs/continuidade/checkpoints/0366-p08-esperas-sql-topologia-offline.md). Banco revisou offline V052/V055/V093, o registro de release V008, o contrato de expansão V044, os três wrappers JDBC e XMLs privados. **Dois** `Lock request time out` no batch de seis contratos têm espera SQL confirmada, coerente com `SET LOCK_TIMEOUT 1800`, mas sem blocker/recurso capturado. **Três** `SQLTimeoutException` na importação de referências e **um** no raster identificam expiração do comando JDBC de 20 s, sem statement interno ou wait; **um** `Read timed out`/socket na importação não identifica falha de rede física. A lane de app lock `DIMENSION` é distinta de `RASTER` (1200 ms/erro `53502`), e o registro de release usa outro app lock (5000 ms/erro `52037`); nenhuma dessas assinaturas aparece nos XMLs. V055 inclui registro governado, triggers e comparação; V093 inclui reconciliação, ranks temporários e DML staging/core; `registerContracts` não chama app lock. A topologia torna hipóteses verificáveis, sem provar qual etapa bloqueou ou consumiu tempo. Recontagem separada do inventário privado confirma **2448→2536**, +88 grupos automáticos, zero removidos/modificados; sete nas tabelas de raster examinadas, nenhum nas tabelas de importação ou contratos de expansão examinadas. Inventário agregado pré/pós não possui `stats_id`, momento, plano ou consulta criadora; **2536 não aceito como baseline**. Critério para eventual gate distinto: correlação temporal cliente/servidor da request e blocker, statement/plano/métricas/stats individuais, término do servidor versus leitura do cliente e cancelamento por timeout, com preflight/reserva/readback próprios; gate não executado. Preservados **8 FAILs**, 74 classes faltantes, JaCoCo e A/B não executados, Gate 1/P08 abertos; nenhum aceite novo. Nenhum SQL/JDBC/rede de projeto/Flyway/migration/restart/login/IT física/smoke nesta unidade. Uma consulta de status ao serviço local ai-memory ocorreu, sem consulta histórica de projeto. Supervisor decide se autoriza diagnóstico físico futuro; Banco segue único executor SQL/ledger.
+
+# P08 — oito erros Failsafe 0354 classificados offline; um fixture corrigido sem gate físico — 29/09/2026
+
+[Checkpoint 0365](docs/continuidade/checkpoints/0365-p08-oito-erros-failsafe-triagem-offline.md). XML/log privados das **33/107 classes** correlacionados com métodos e chamadas: quatro `SQLTimeoutException` em importação de referências (3) e apply raster (1), dois `SQLServerException` de lock timeout no batch de contratos, um `SQLServerException` de leitura/socket timeout e um `ControlPlanePersistenceException` que preserva a recusa SQL da fronteira incremental. O primeiro erro cronológico observável foi timeout de `ref.usp_import_analytic_references`; blocker, consulta interna e relação causal entre esperas, stats e pressão não foram capturados. Causa de contrato separada e demonstrada: `AnalyticLaboratoryObservationModesIT` registrava frontier de `LOCAL_V2` antes de registrar a fonte; V018 exige fonte ativa. Runtime inseriu `registerSource` antes de `registerIncrementalFrontier` no fixture, dentro da sessão rollback-only. Maven offline JDK17 **sem perfil shadow/URL**: Enforcer/Spotless/Checkstyle e compilação de 554 fontes de teste PASS; `JdbcSqlServerControlPlaneTest` **4/0/0/0** e `ColetaTemporalLaboratorySessionCloseTest` **25/0/0/0**, ambos exit 0. Uma primeira tentativa falhou no Spotless e foi corrigida antes dos testes. A IT alterada não foi executada fisicamente; correção **IMPLEMENTADA_NAO_QUALIFICADA**. Preservados os **8 FAILs**, **74 classes não executadas**, JaCoCo não alcançado, 2448→2536 (+88 auto) **sem aceite de 2536**, Gate 1/P08 FAIL e A/B não executado; nenhum novo aceite P01–P33. Sem SQL/JDBC/rede/Flyway/migration/restart/login/smoke nesta unidade. Próximo: Supervisor revisa diagnóstico/diff e decide apenas eventual unidade offline para isolar a espera; qualquer gate físico posterior exige autoridade própria, Banco executor SQL/ledger.
+
+# Conector VS Code — RELATO DO OPERADOR de conexão local — 29/09/2026
+
+O usuário relatou que o conector VS Code conectou com `etl_shadow_reader` ao `ETL_SISTEMA_V2_SHADOW` local. É **RELATO DO OPERADOR**, sem captura técnica da UI nesta unidade; a prova ADO.NET e de permissões permanece distinta no [checkpoint 0363](docs/continuidade/checkpoints/0363-sql-auth-reader-ado-gates-pass-vscode-pendente.md). [Handoff 0364](docs/continuidade/checkpoints/0364-handoff-operador-vscode-p08-aberto.md): P08 0354 continua FAIL (8 erros Failsafe em 33/107 classes, 2536 stats não aceitas, A/B não executado). Próximo owner Runtime e Qualificação para triagem offline antes de proposta de novo gate físico ao Supervisor; Banco segue único executor SQL/ledger. Nenhum SQL/JDBC/Flyway/rede ou alteração de login/segredo nesta unidade.
+
+# SQL auth reader — ADO.NET local e permissões PASS; UI VS Code pendente — 29/09/2026
+
+[Checkpoint 0363](docs/continuidade/checkpoints/0363-sql-auth-reader-ado-gates-pass-vscode-pendente.md). Após FAIL 0362 preservado, preflight novo `sqlcmd -E -C` confirmou master/shadow exatos por Windows auth, zero sessões/transações de usuário no alvo, modo2/`sa` disabled, login reader sem server role, 106/105/0 Flyway, 1819 objetos/247 tabelas/147 linhas agregadas, DPAPI/ACL e listeners só loopback. **Uma prova SQL auth TCP 127.0.0.1:1433 PASS**: `DB_NAME`/`SUSER_SNAME` exatos. Gates separados: SELECT de auditoria e permissões 1/0/1 PASS; UPDATE `WHERE 1=0` negado SQL 229 e rollback em `finally`, contagem 0→0; `msdb.dbo.sysjobs` `TOP (0)` negado SQL 229. Readbacks independentes master/shadow/OS após auth, escrita e final repetiram hashes SQL pré e mantiveram PID 41324/modo2/loopback/ACL, sem delta observado. Ledger SHA `44F0585104856620E54FE97201B36B7813055EF7415906BCE62F17A55B7CFE3C`. **O conector VS Code não foi testado na UI**; orientar campos e clipboard DPAPI sem segredo. Nenhum principal, senha, modo ou serviço alterado; P08 0354 FAIL e stats 2536 não aceitas seguem separados.
+
+# SQL auth VS Code — 0362 parou no certificado do preflight — 29/09/2026
+
+[Checkpoint 0362](docs/continuidade/checkpoints/0362-sql-auth-preflight-cert-fail-sem-tentativa.md). Instrumentação PowerShell 5.1 por fase/cadeia de exceções sem texto sensível e conversão DPAPI no mesmo usuário passaram self-test offline v2; FAIL inicial do próprio self-test preservado. OS preflight reservado PASS: PID 41324, modo 2, listeners só loopback, zero cliente TCP, DPAPI/ACL restrita. **`sqlcmd -E` no `master` saiu 1 antes de marcador** por certificado não confiável do ODBC 18: esta invocação omitiu `-C`. Parada sem repetir com outra flag; readback apenas OS confirmou PID/modo/listeners/ACL, não prova estado SQL. Nenhuma conexão SQL auth, preflight shadow, SELECT, tentativa UPDATE ou isolamento de outro banco foi executado. Ledger SHA `CEE4866260F0E803CE5063DAFA4F5E14CB739AA365967090E3E11C27926B6B96`. Supervisor decide novo gate de preflight corrigido; **VS Code não qualificado**. FAILs 0360/0361 e P08 0354/2536 stats não aceitas preservados.
+
+# SQL auth VS Code — tentativa cliente 0361 FAIL encapsulada; sem delta — 29/09/2026
+
+[Checkpoint 0361](docs/continuidade/checkpoints/0361-sql-auth-cliente-fail-wrapped-sem-delta.md). Correção privada do builder PowerShell 5.1 por indexadores canônicos passou self-test offline, sem conectar. Preflight reservado confirmou `master`/shadow Windows auth, zero consumidores/transações de usuário no alvo, 106/105/0 Flyway, 1819 objetos/247 tabelas/147 linhas agregadas, login `etl_shadow_reader` sem server role, user `db_datareader`/`VIEW DEFINITION`, `sa` disabled, modo misto, PID 41324/listeners só loopback e DPAPI/ACL restrita no caminho real. **Uma prova SQL auth TCP 127.0.0.1:1433 saiu 1** na fase abertura/SELECT, `System.Management.Automation.MethodInvocationException`; código SQL/nativo **desconhecido (não capturado)**. Não se provou login, SELECT, recusa de UPDATE ou de leitura em outro banco; essas duas tentativas negativas não foram alcançadas. Eventos existentes não trouxeram 18456/estado. Readback independente Windows/OS repetiu hashes do preflight para master/shadow e preservou PID/loopback, sem delta observado. Sem retry, restart ou alteração de principal. Acesso VS Code **não qualificado**; Supervisor precisa autorizar eventual diagnóstico que capture exceção interna sem segredo. FAIL 0360 preservado. P08 0354 FAIL e stats 2536 não aceitas seguem separados.
+
+# SQL auth VS Code — modo misto/login local criados; prova cliente FAIL congelada — 29/09/2026
+
+[Checkpoint 0360](docs/continuidade/checkpoints/0360-sql-auth-reader-criado-prova-cliente-fail.md). Gate novo: `master` Windows auth confirmou Windows-only, `sa` disabled, login ausente, shadow online; **zero sessões/transações de usuário no shadow**, uma sessão `SQLServerCEIP` local no `master` sem transação. Shadow respondeu com 106=SCHEMA+105 SQL/0 falhas, 1819 objetos/247 tabelas/147 linhas agregadas, zero user reader e zero sessões de usuário no alvo. OS PID 20404/listeners somente `::1`/`127.0.0.1`, registro `LoginMode=1`. Helper elevado SHA `CDF43F419998B9F525B3EDBDAA7987D806C6EFF09F4B9D500BE172BB96C355B6` repetiu preflight e fez **uma** mudança `LoginMode=2` e **um** restart, PID 41324. Readback independente: modo misto efetivo (`IsIntegratedSecurityOnly=0`), Windows auth funcionando, `sa` disabled, mesmos dois listeners loopback, shadow/histórico/objetos/contagens preservados. Script de criação SHA `519071F872D6FF5F56BBEA98D53BEEB05FE0A1F0C50CA57BCB4945DC2862DB96` gerou senha aleatória 48 caracteres somente em memória, cifrou por DPAPI CurrentUser fora do Git em `C:\Users\lucas\AppData\Local\ETL-V2-Shadow-Secrets\etl_shadow_reader.dpapi` com ACL restrita a usuário atual/SYSTEM, criou **um** login `etl_shadow_reader` sem server role e user apenas no shadow, `db_datareader` e `VIEW DEFINITION`. Catálogo independente confirmou principal/grants, `sa` disabled, 106/105/0 e 1819/247/147, auditoria zero.
+
+**Verificação SQL auth NÃO PASSOU:** um único cliente local planejado para `tcp:127.0.0.1,1433` e `localhost` saiu 1 em `tcp-127-auth-select`, `System.ArgumentException`, sem número SQL, SELECT autenticado ou tentativa UPDATE. Prova offline com senha fictícia reproduziu causa no PowerShell 5.1: atribuir `.DataSource` em `SqlConnectionStringBuilder` resulta em chave `DataSource` não suportada; usar o indexador `['Data Source']` constrói conexão offline, **sem novo SQL auth**. Gate congelado sem retry. Readback Windows/OS após FAIL igual ao anterior, sem delta de dados/schema/histórico e sem cliente TCP residual. Acesso por username/senha existe no catálogo, mas **funcionamento e recusa de escrita ainda não qualificados**. Ledger SHA `6B6DBCB8F725A310A5BD33E7019EB27A0965ADC618B8474626634896D8FB884E`; recuperação automática não executada. Supervisor precisa autorizar novo gate de cliente corrigido, sem repetir restart/login. P08 0354 FAIL e stats 2536 não aceitas permanecem separados.
+
+# SQL auth VS Code — SPID 73 desapareceu; zero consumidores não provado — 29/09/2026
+
+[Checkpoint 0359](docs/continuidade/checkpoints/0359-spid73-ausente-master-minimo.md). Diagnóstico novo **somente `lpc:localhost/master`** com Windows auth, duas reservas e readback OS. Marcadores imediatos `CONNECTED_MASTER`/`BEFORE_SESSION73`/`SESSION_QUERY_DONE` e exit 0: a seleção pontual em `sys.dm_exec_sessions` **não devolveu SPID 73**. Segundo gate separado `CONNECTED_MASTER_TRAN`/`BEFORE_TRAN73`/`TRAN_QUERY_DONE` exit 0: associação em `sys.dm_tran_session_transactions` também sem linha. Portanto a SPID 73 desapareceu entre 0357 e 0359, mas sua natureza/owner anterior e **zero sessões/transações de usuário atuais não foram provados**; não extrapolar de uma SPID ausente. O timeout 0358 não se repetiu nas duas seleções mínimas, sem causa histórica identificada. Serviço PID 20404/listeners somente loopback/zero TCP cliente no readback, sem provar Shared memory. **Sem shadow, SQL auth, login/senha/DPAPI, restart, KILL ou retry**. Ledger SHA `9257F50BE06694FE598035B7C74DA31C9C1DBFD7E94E7FF2EAC241315E5F2AE7`. Supervisor decide novo gate para zero usuários/transações e preflight completo; P08 0354 FAIL/stats 2536 não aceitas seguem independentes.
+
+# SQL auth VS Code — classificação 0358 incerta por timeout; sem efeito — 29/09/2026
+
+[Checkpoint 0358](docs/continuidade/checkpoints/0358-spid73-dmv-timeout-sem-auth.md). Novo gate somente leitura e reservado para classificar SPID 73: preflight OS `MSSQLSERVER` Running PID 20404, listeners apenas `::1`/`127.0.0.1`, zero sockets TCP cliente; `master` Windows auth/Shared memory confirmou alvo online e Windows-only, exit 0/marcador `MASTER_OK`. Uma chamada DMV no shadow, sem texto SQL/payload, retornou **`Timeout expired` sem `TARGET_OK`/`SUMMARY`**, embora `sqlcmd` tenha devolvido 0; classificação de `is_user_process`, transação e consumidores permanece **DESCONHECIDA**. Sem repetição, KILL, restart, login, senha/DPAPI ou modo misto. Readback Windows: mesmo PID/listeners, zero TCP cliente e nenhum `sqlcmd` remanescente; não prova estado das sessões Shared memory. Ledger SHA `B8B7FBA237C30B86976879B60D017D06F7CE92FB5237E8B0D8DAF53F883FA0F6`. Gate SQL auth suspenso até novo diagnóstico/autorização do Supervisor; P08 0354 FAIL e stats 2536 não aceitas separados.
+
+# SQL auth VS Code — SPID 73 com transação aberta impede preflight — 29/09/2026
+
+[Checkpoint 0357](docs/continuidade/checkpoints/0357-spid73-transacao-ativa-parada.md). Revisão somente leitura: ERRORLOG em disco recusou acesso por ACL, sem alteração; Application Log do SQL registrou `10311` (AppDomain `master` descarregado por pressão de memória) às 12:00:31Z, perto do timeout 0356, e havia ~550 MiB físicos livres antes da sonda. O script 0356 continha `xp_instance_regread` e consultas de catálogo; sua saída `Timeout expired` após ~56 s, apesar de exit 0, sugere espera na consulta/recursos mais que falha permanente de login, **sem prova da instrução causadora**. Uma única sonda curta `lpc:localhost/master`, sem extended proc, saiu 0 em 0,2 s com `MASTER_PING_OK`, Windows auth/Shared memory/Windows-only. DMV mínima no shadow, em reserva separada, saiu 0 e encontrou **SPID 73, login `sa`, host/programa/PID cliente nulos, `sleeping`, `open_transaction_count=1`**; `CONSUMER_COUNT=1` excluindo o próprio SPID. Não há vínculo provado com Maven 0354 ou VS Code; `sa` nesse recibo não prova SQL auth habilitada. Por transação aberta e ausência de cliente próprio identificável, parada sem KILL/fechamento. Readback OS: serviço Running PID 20404, dois listeners só loopback, zero TCP cliente local; não resolve sessão Shared memory. Ledger SHA `3C0B4BA747A9C5B0DB4D8FA4B1BDBC3236ACA930150A5420B3C24231C03E6598`. **Zero consumidores falso; nenhum login/senha/DPAPI, mudança de modo ou restart.** Supervisor deve classificar ownership/segurança da transação em novo gate; P08 0354 FAIL e 2536 stats não aceitas permanecem.
+
+# Diagnóstico de consumidores — master expirou; SQL auth sem efeito — 29/09/2026
+
+[Checkpoint 0356](docs/continuidade/checkpoints/0356-consumidores-master-timeout-sem-sql.md). Nova unidade autorizada para classificar as sessões de 54913 e, **só após zero consumidores provados**, configurar o login local. Reserva read-only feita; a chamada `sqlcmd -E` em `lpc:localhost/master` devolveu texto `Timeout expired` após 45 s, sem marcador exigido, embora o executável tenha retornado 0. **Preflight FAIL: consulta de SPID/login/host/programa/transação e snapshot SQL não executados, zero consumidores não comprovado.** Readback apenas do Windows: `MSSQLSERVER` Running PID 20404, dois listeners só loopback, zero sockets TCP cliente locais para 1433; isso não exclui sessões Shared memory. Sem retry, KILL, fechamento de cliente, senha/DPAPI, login/user, modo misto ou restart. Ledger SHA `D3C3C96196B02D81527003EF61601AE0D63D12C92F1FDCC1E4F42966AAE43FAF`. Supervisor precisa decidir nova sonda/preflight após a indisponibilidade do `master`; P08 0354 FAIL e stats 2536 não aceitas permanecem independentes.
+
+# Acesso VS Code ao shadow — preflight recusou consumidores; zero efeito — 29/09/2026
+
+[Checkpoint 0355](docs/continuidade/checkpoints/0355-sql-auth-preflight-consumers-stop.md). Exceção específica do pedido do usuário registrada em `AGENTS.md`/STATES antes do efeito. Gate físico P08 0354 já havia sido reconciliado como FAIL. Novo preflight reservado em `master` confirmou Windows-only efetivo e registro `LoginMode=1`, `sa` desabilitado, login `etl_shadow_reader` ausente e shadow online. A consulta no alvo exato, por Windows auth, saiu 1 com **54913/SHADOW_CONSUMERS_PRESENT** antes de produzir linha; número/identidade de sessões não foi coletado. Por ordem expressa de parada em qualquer falha de preflight: **sem retry, senha, arquivo DPAPI, CREATE LOGIN/USER, modo misto ou reinício**. Ledger físico SHA `5C0E576E76413F58D31A5BD0DE86219BDD655044B321E28D3D6F22B596CB942D`. Acesso SQL do VS Code não está configurado; nova unidade depende de zero consumidores comprovado e decisão do Supervisor. O FAIL P08 0354, 2536 stats ainda não aceitas, Gate 1/P08 abertos e A/B pendente permanecem.
+
+# Acesso VS Code ao shadow — exceção local SQL auth registrada, efeito pendente — 29/09/2026
+
+Pedido explícito do usuário após reconciliação do [gate P08 0354](docs/continuidade/checkpoints/0354-p08-107-it-gate-fail-readback.md): configurar exclusivamente a instância local de `ETL_SISTEMA_V2_SHADOW` para um login SQL `etl_shadow_reader` somente leitura. A exceção estreita está em `AGENTS.md` §1 **antes do efeito**: novo preflight master/alvo Windows auth, modo Windows-only, `sa` desabilitado, zero consumidores e loopback; segredo aleatório DPAPI fora do repo com ACL; criar login/user apenas no shadow, `db_datareader` e `VIEW DEFINITION` se necessário; modo misto/reinício em reserva própria; verificar SQL auth/negação de escrita/Windows auth/readback. Recuperação: congelar resultado incerto; reversão via Windows auth e retorno a modo Windows-only apenas em gate reservado, sem retry automático. Nenhum privilégio em outro banco/remoto/produção. **Ainda não executado** neste registro; 2536 stats pós-FAIL 0354 não são baseline aceita de P08.
+
+# P08 — gate de 107 ITs FAIL reconciliado; acesso SQL local em unidade separada — 29/09/2026
+
+[Checkpoint 0354](docs/continuidade/checkpoints/0354-p08-107-it-gate-fail-readback.md). Espelho novo `C:\Users\lucas\p08m0354`, 4103 arquivos sem drift e sem `target`/`.env`; ZIP/manifest/revision A/B 0350 e 2170 fontes pinadas, CSV SHA `20E0D1348C1A6E0192B13E5C775C52942C2EA9C284D2C2A58A420186F2581F39` com 108 ITs, 107 selecionadas e exclusão exata de `ShadowJdbcTransportReadOnlyIT`. Preflight reservado 106=SCHEMA+105 SQL/0 falhas, zero consumidores, loopback, dados/schema e **2448 stats/064 pós-0351** estáveis. Uma chamada Maven JDK17 offline com perfil, duas travas e seletor de 107: Surefire **2368/0/0/5**, Failsafe **33 classes/123 testes/0 falhas/8 erros/0 skips**; processo próprio encerrado ao detectar erros, 74 classes não executadas, JaCoCo não alcançado, Maven exit 1, sem retry. Readback externo master/alvo/contagens/schema/histórico/PID/socket iguais; 064 igual; stats globais **2448→2536**, 88 grupos novos automáticos, sem removidos/modificados/manuais/filtrados/indexados ou novas nas quatro colunas V105, estáveis pós-064. **Gate FAIL, 2536 não aceito como nova baseline; Gate 1/P08 e A/B abertos.** Recibo privado SHA `D456A295A9C2BE77211233684F83EA0DDABFBA72C83E6A95566725FD5DA61CB7`; FAILs 0336/0351 e backup 0325 preservados. Pedido explícito posterior de login SQL somente leitura para VS Code será tratado em unidade e reserva próprias, após este readback, sem inferir aceite do gate.
+
+# P08 — 2448 stats aceitos somente como ponto observacional — 29/09/2026
+
+[Checkpoint 0353](docs/continuidade/checkpoints/0353-p08-stats-2448-decisao-observacional.md). Decisão expressa do Supervisor após 0352: **2448 grupos**/SHA `E92AA86CDDAB2B7ADB918F6F1310AA2D86D7702962999E12FA134B15E81DB2E0` e **064 pós**/SHA `78F6F2664AD673D815D01C7B281DF2D606AF8DE419FAE1A9BC48816582E6D2E3` são apenas referência observacional para futuro preflight. A fotografia anterior **2235 grupos**/SHA `178325C1E554AC608F6469D6FA908AB2343A9CD35DDA7F199BE3CBBB18D7B17C`, o 064 pré/SHA `A0B50FFD1CB4FBDB3F8E51D5875FC3B7094B905F71741C7271CC3E3A90F8B865` e o **FAIL estrito 0351** permanecem históricos. Gate 1 e P08 seguem abertos; smoke A/B não foi executado. Qualquer DDL futuro em `ctl.execution_audit.failure_category` exige guard novo de estatísticas, preflight, autorização e recuperação próprios; este aceite não o dispensa. Runtime inventaria elegibilidade das ITs antes de outro gate. Unidade documental: nenhum SQL/JDBC/IT/Flyway/smoke ou metadata alterada.
+
+# P08 — delta de estatísticas 0351 classificado offline; baseline 2448 proposta — 29/09/2026
+
+[Checkpoint 0352](docs/continuidade/checkpoints/0352-p08-stats-2448-v105-revisao-offline.md). Comparação independente dos dumps preservados: **2235→2448 grupos**, +213 em 38 tabelas, zero removidos/modificados; todos novos `auto_created=1/user_created=0`, sem filtro/índice, grupo de tamanho 1. Entre quatro colunas V105, só `ctl.execution_audit.failure_category` ganhou um grupo `nvarchar`; 064 mudou apenas `V105_STATISTICS_BLOCKERS` **1/1/0/0→2/2/0/0** e stats pós-064 ficaram estáveis. Master/alvo/contagens/schema/histórico/socket iguais pelo readback 0351. V105 recusa estatísticas não revisadas **antes do DDL** para evitar perda em ALTER de collation; o auto grupo pós-migration não invalida V105 aplicada, mas futura ALTER exige nova migration/plano. **Proposta**, pendente de decisão do Supervisor: usar 2448/SHA `E92AA86CDDAB2B7ADB918F6F1310AA2D86D7702962999E12FA134B15E81DB2E0` e 064 pós/SHA `78F6F2664AD673D815D01C7B281DF2D606AF8DE419FAE1A9BC48816582E6D2E3` somente como ponto observacional de próximo preflight, com igualdade exata ou nova revisão de qualquer delta. A fotografia 2235/064 pré e o **FAIL estrito 0351**, inclusive JaCoCo shadow, não são apagados; Gate 1/P08 abertos, A/B físico parado. Nenhum SQL/JDBC/IT/Flyway/smoke ou metadata alterada nesta unidade; consulta criadora e número de objetos `sys.stats` distintos não provados.
+
+# P08 — espelho novo: Surefire FAIL, oito cenários não iniciados — 29/09/2026
+
+[Checkpoint 0349](docs/continuidade/checkpoints/0349-p08-fullclass-mirror-surefire-fail.md). Um espelho novo `C:\Users\lucas\p08m0349` foi criado **sem `target` herdado/.env**; 2170 fontes do inventário A/B `B1E04955...` tiveram zero drift na origem e no espelho, ZIP/manifest/revision Runtime 0345-runtime-fix pinados. Preflight/reserva novos no ledger SHA `C7D0F3768DCC86B1CFB2A88AEEE5B5F802D9AD7D8F94B3331167E0215D8D613E`: master/shadow Windows auth exatos, Flyway 106=SCHEMA+105 SQL/0 fail, zero consumidores, loopback, contagens/objetos/principals, `064` e **2235 stats** estáveis. Uma chamada Maven JDK17 offline, perfil/two locks, URL privada, comando Runtime de classe completa **sem flags de skip**, terminou **exit 1 no Surefire**. Seus 283 XML somam **2368 testes/2 falhas/0 erros/5 skips**: `CiCoverageScopePolicyTest` compara SHA antiga `BE6B0D22...` de `AnalyticScenarioRuntime` contra bytes atuais `CBF55B1A...`; `SchemaFoundationSqlContractTest` espera migrations até V104 enquanto o diretório versionado contém V105. **Failsafe zero XML/zero recibos: oito cenários não iniciados; JaCoCo report/check não alcançados.** Log SHA `5AD0846AC92999BD3301A7E722C818B9CF6F0A77EEAF88E48ADBC9C4CD9A62D0`, sem URL. Readback externo independente pré/pós: master/alvo/dados/schema/histórico/`064`/stats/socket iguais, **2235→2235**, zero consumidores. Recibo sanitizado SHA `1D3D080851134A14EB8349495835C24194979848043100207B45E549DD9F2845`. **Gate físico FAIL, sem retry nem smoke A/B**. Supervisor coordena revisão offline dos dois contratos antes de nova autoridade/pins; Gate 1/P08 abertos. FAILs 0336/0342/0345/0347, 873→1088→2235 e limites backup 0325 preservados. Sem editar Runtime/POM/migrations/stats.
+
+# P08 — 2235 stats aceitos só como ponto observacional futuro — 29/09/2026
+
+[Checkpoint 0348](docs/continuidade/checkpoints/0348-p08-stats-2235-observacional-offline.md). Revisão **somente offline** dos dumps 0347 aplicou os critérios 0343: inventário global 1088→2235, **1147 grupos agregados novos em 79 tabelas**, zero removidos e zero contagens de grupos existentes modificadas. Todos os novos têm `COUNT_BIG=1`, `auto_created=1`, `user_created=0`, sem filtro e sem índice; **nenhum nas quatro colunas V105** (`ctl.execution_audit.{status,traversal_verification,failure_category}` e `ref.expansion_lab_label.label`). Master/alvo/contagens/objetos/principals/histórico/`064` byte-idênticos, sockets loopback iguais no recibo 0347, inventário stats estável após o `064`. Script offline SHA `9CC2378F75CEA1F0C592BD69B159D939BC6E44B6E9A42312EED7B65DEE8D9F16` saiu 0; recibo SHA `2AEC08F37D3B711370D05FE7BC30A2E4AC519478F8AFF7F8507C25495C2CDF07`. Sob decisão do Supervisor, **2235/SHA `178325C1E554AC608F6469D6FA908AB2343A9CD35DDA7F199BE3CBBB18D7B17C` é apenas novo ponto observacional de preflight**, sem atribuir query criadora, provar objetos `sys.stats` distintos ou aceitar 0347. **FAIL estrito 0347**, histórico 0342 873→1088/215, falha Maven JaCoCo 0347, Gate 1 de oito cenários, A/B físico e P08 permanecem abertos. Futuro readback incremental proposto por cenário com pre/post e reserva próprios; Runtime precisa viabilizar seletores individuais comprovados, Supervisor decide qualquer novo efeito. Nenhum SQL/JDBC/IT/Flyway/smoke ou edição de stats/Runtime/POM nesta unidade.
+
+# P08 — diagnóstico binding PASS_LOCAL, readback estrito FAIL por autoestatísticas — 29/09/2026
+
+[Checkpoint 0347](docs/continuidade/checkpoints/0347-p08-diagnostico-binding-autoestatisticas.md). Revisão SQL independente do binding Runtime SHA `CBF55B1AD47E7920E571DCAF816C8533DD43D464818BA7CB6A6FC25457BA7DD6` contra PK/FK/triggers V024 e sessão compartilhada não encontrou violação estrutural; teste novo SHA `8EFE6DFEAE4EF612D6DAFDE76186DDB7CF5A9B95BD29EAB46D5B85DBB87840ED`. PackageShadow A/B novos ZIP `224A4F97456C7509CD0AE4E2F7DF69C8CB67902F22620481DA4BFEE8B785A79F`, manifest `E43D2FC2F7E3B1767E0AF134D35689EC23BE2B0C225F8BFD2D4880B827F6085E`, revision `E86E1D453BF3813415DB143B15F4B0F4C95A921C36197BC2BD35005F156265A3`, inventário A/B igual e 2170 fontes sem drift; nenhum smoke físico.
+
+Com autorização nova, preflight/reserva no ledger físico confirmaram `master`/shadow local por Windows auth, Flyway 106=SCHEMA+105 SQL/0 fail, zero consumidores, loopback, contagens, objetos/principals, `064` e 1088 grupos globais de stats estáveis. Uma chamada Maven offline JDK17 com perfil, duas travas, URL privada e seletor único executou **1 Failsafe/0 failure/0 error/0 skip**; recibo `PASS_LOCAL/ALL_REQUIRED_SCOPES_PROVEN`, exit interno 0, rollback, before=after, 19 outputs/35 scopes/11 inputs, sem código/número SQL de falha. **Maven exit 1 por JaCoCo `check` de cobertura após a IT**, não por falha do método. Readback externo: master/alvo/histórico/objetos/principals/contagens/`064`/socket iguais, porém inventário geral **1088→2235, +1147 grupos em 79 tabelas**, todos `auto_created=1/user_created=0/sem filtro/sem índice`; zero grupos removidos, pós-`064` estável. Classificação limitada a metadata automática compatível com a carga, sem identificar consulta criadora. Script de readback parou em `P08_STATS_BASELINE_MISMATCH`; **FAIL estrito e parada sem retry**. Recibo sanitizado SHA `7D1CC808E202F37B319DD18F4960F7C3D142F1E519B601B76C439036DB582300`, XML Failsafe `3701EE857155C2256A90BF0BFF6C287D6FEE1E7BA29E71A369643FF6EB1BE899`, log `A431CEF8DF5AEC15D5A4F36445A8C5511D9CDA4BC1068767E352B63343DF1E97` sem URL. **Gate 1 de oito cenários, A/B físico e P08 seguem abertos**; Supervisor decide qualquer novo efeito. FAILs 0342/0345, 873→1088/215 auto stats históricos, 0336/0341 e limites do backup 0325 preservados. Sem catalog-only separado, outras ITs, smoke, DDL/Flyway/restore.
+
+# P08 — revisão offline dos dois predicados 51301; ramo físico incerto — 29/09/2026
+
+[Checkpoint 0346](docs/continuidade/checkpoints/0346-p08-51301-predicados-revisao-offline.md): V024 pinada SHA `40E7F05186BF3C69E9447117524DDD6BD0B648BE32375D522A505165399128F6` lança `51301/SOURCE_PROTOCOL_NOT_REGISTERED` **somente com catálogo existente** quando `active=0` **ou** falta binding do `source_kind` solicitado. V024 fez backfill do kind original; triggers preservam identidade/bindings, mas permitem mudar `active`. Baseline atual inclui V024/V105, inventário epoch pinado; os 81 arquivos V025–V105 não referem literalmente essas duas tabelas/procedure para redefini-las. Flyway 106/105/0 e `063` anterior sustentam o epoch estrutural, **não** fotografia de linhas nem hash integral da procedure viva. O manifesto B60 com `sqlApplied=false` é histórico até V023, não estado físico 0345.
+
+Outro `THROW` **idêntico em texto e número** está em `AnalyticScenarioRuntime.bindLegacyQuoteProtocol`: falta de catálogo ativo com binding `GRAPHQL`. A fixture não integral usa o mesmo escopo local em usuários `GRAPHQL`, tenta adicionar binding `DATA_EXPORT` e depois captura cotações `DATA_EXPORT` em uma conexão física com rollback. O wrapper externo `ANA_QUOTE_CAPTURE_RECOVERY_REQUIRED` favorece a rota V024 dentro da captura, pois o binder roda antes; **não identifica a instrução SQL**. `QualificationWorker.failureEvidence` também registra primeiro código fechado e primeiro número SQL positivo separadamente na cadeia, sem provar que são da mesma exceção. `056` só verifica binding do kind original, `063` objeto/fragmentos da procedure e `064`/readbacks 0345 não mostram `source_catalog.active` ou bindings para esse escopo. A expectativa estática de ambos os bindings antes das cotações não resolve o FAIL físico; estado transacional/ramo permanece **não comprovado**, sem correção inferida.
+
+Proposto, **não executado nem autorizado**, gate catalog-only com novo preflight/reserva/readback no shadow exato: retornar somente contagens/flags para catálogo ativo/inativo, kind original e bindings `GRAPHQL`/`DATA_EXPORT` do escopo sintético, mais presença dos guards da definição viva; sem nomes/IDs/payload. Comparar histórico/objetos/principals/contagens/`064`/1088 stats/socket antes/depois. Essa leitura mostraria apenas estado **persistido após rollback**, não o estado transitório do FAIL 0345; qualquer delta incerto bloqueia. Supervisor decide. Nenhum SQL/JDBC/IT/Flyway/smoke ou edição de V024/Runtime/metadata nesta unidade. **FAILs 0342/0345, 1088 stats, Gate 1/2 e P08 abertos**, além de 0336/0341 e limites backup 0325 preservados.
+
+# P08 — IT diagnóstica única capturou assinatura SQL 51301, sem delta — 29/09/2026
+
+Sob autorização estrita do Supervisor, Banco executou **uma tentativa física** do método `QualificationPackagePhysicalCompositionIT#diagnosticScenarioBootstrapWithRollbackReceipt` no shadow local após pins, preflight e reserva novos: [checkpoint 0345](docs/continuidade/checkpoints/0345-p08-diagnostico-fisico-causa-sql-rollback.md). IT SHA `D5EEC6876D6BF928115EF5D43EEC72361ED10CD28905165566F40D303F426FF6`, três hashes Runtime 0344 e candidatos Runtime 0345 A/B ZIP `E08A457E645751D479A67D2DEEB5992557AFE2E4D3A9BEDB91BDBC22001AEC11`/manifest `80DB7671F42E1A5EADB088E4B756998E2AA48469A59F1F159C8B8F83ED5A5976` conferidos; inventários 2169 fontes qualificadas + 4096 inputs por candidato, zero drift. A/B permanecem `PACKAGED_NOT_SMOKE_QUALIFIED`; config-validate/dry-run offline PASS, JDBC do pacote não iniciado.
+
+Preflight `sqlcmd -E` master/alvo, serviço/listeners loopback/zero consumidores, Flyway 106=SCHEMA+105 SQL/0 falhas, objetos/tabelas/principals, contagens globais zero, `064` estável e **1088 grupos gerais de stats** antes/depois do próprio `064` passou. Ledger físico SHA `87FA79EB72502E46824B01868E826A561BDBCF12F7541BB870854EF581E990B0`. Uma chamada Maven offline/JDK17/perfil e duas travas, URL privada de seis segmentos, selecionou **1 teste/1 failure/0 errors/0 skips**, Maven exit 1; não executou os demais oito cenários. Recibo sanitizado SHA `2344A99DCAFC7FA4D1E06F4BC3C885F91159519571E3AD7C8B1057C2BD8316F9`: `FAILED / CASE_EXECUTION_EXCEPTION`, exit interno 2, `rollback=true`, `before=after`, `failureCode=ANA_QUOTE_CAPTURE_RECOVERY_REQUIRED`, **`failureCauseCode=SOURCE_PROTOCOL_NOT_REGISTERED` e `failureSqlNumber=51301`**. Log SHA `88065DB7D10A166D00C8B6345AAC4354368837CF632A8859B26F0FE103D942EC`, sem URL. A dupla coincide com `THROW` versionado V024, cujo predicado tem dois ramos; o ramo efetivo e a causa de estado do catálogo não foram comprovados, sem correção inferida.
+
+Readback externo independente SHA `D4C0EF9C1DFB2CE3E75A40313E46EFE171795DEBF495CC3D1A1E6E161504B661`: master/alvo/contagens/`064`/stats/serviço/socket/consumidores iguais ao pré; **1088→1088, zero novas stats**, sem delta de dados/schema/histórico observado. Tentativa diagnóstica reconciliada, **não é PASS de Gate 1 nem P08**. FAIL 0342 e seu 873→1088/215 autoestatísticas continuam históricos; Gate 2 A/B físico não iniciado. FAIL 0336/0341, limites backup 0325 e ausência de restore testado preservados. Nenhum retry, outros testes, smoke, Flyway/DDL/restore, fonte real, remoto ou produção.
+
+# P08 — diagnóstico Runtime offline integrado; causa SQL 0342 ainda desconhecida — 29/09/2026
+
+Handoff Runtime pós-0342 integrado **somente offline** no [checkpoint 0344](docs/continuidade/checkpoints/0344-p08-runtime-failure-evidence-offline-handoff.md). Hashes de arquivos inteiros conferidos sem edição pelo Banco: `LocalAnalyticQuotesRuntime.java` `8E6169527043189297C8F516C2D07752A32C70960280CE2204CFD748D7337320`, `QualificationWorker.java` `498BCEBA20D55182046108073BEF6EC9E2A2D96753E57AD119AEA5AFE422C627` e novo `QualificationWorkerFailureEvidenceTest.java` `75A5C3DE4F448808228CC4553FBAC13894614FD9BFAC1814A6E5A817EF377764`. A alteração encadeia a causa da recuperação e limita o recibo a código fechado e número SQL positivo; o teste verifica não imprimir texto privado. O número SQL do teste é **sintético**, não observado no shadow. Três relatórios Surefire existentes em JDK17 registram **2+4+27=33/33 PASS, zero skips/errors**; o Banco leu os relatórios, sem rodar Maven.
+
+Essa prova não identifica a causa/número SQL real das sete falhas `ANA_QUOTE_CAPTURE_RECOVERY_REQUIRED` de 0342 nem reconcilia Gate 1. **FAIL 0342 e `P08_STATS_COUNT_MISMATCH` 873→1088 preservados; P08 aberto, Gate 2 A/B não iniciado.** Runtime empacota novos bytes offline, ainda sem pin/qualificação física desta unidade. Próxima decisão física cabe ao Supervisor com autoridade, pins e critério de readback novos; não decorre dos 33 testes. Nenhum SQL/JDBC/IT/Flyway/smoke, ledger físico novo, metadata ou arquivo Runtime alterado pelo Banco. FAIL 0336/0341 e limites do backup 0325 também preservados.
+
+# P08 — delta de stats 0342 classificado offline por inventário; FAIL preservado — 29/09/2026
+
+Unidade **somente offline** [checkpoint 0343](docs/continuidade/checkpoints/0343-p08-auto-stats-0342-revisao-offline.md): comparação linha a linha dos dumps brutos pré/pós 0342 SHA `58C6248C0B73F9843006A132DF481CF9364AF60B9ACAA66B196458E19A4B935C` e `FE8EB389AFD9CC4A82ECD9256075181FDA4A3FB7D778F7BD8FF1E2EF1189ED64` confirma **873→1088 grupos únicos, 215 acrescentados/zero removidos ou alterados**. Cada acréscimo é par tabela-coluna distinto com `COUNT_BIG=1`, `auto_created=1`, `user_created=0`, sem filtro/índice; 62 tabelas, core 32/ctl 56/recon 16/ref 45/stg 66. Nenhum toca as quatro colunas V105. Grupos automáticos sem filtro/índice 51→266, indexados 822 e filtrados 34 invariantes. Os dumps agrupam `sys.stats_columns`, sem `stats_id`: **não provam 215 objetos de estatística distintos**, ausência de churn/atualização de histogramas ou query/timestamp criador.
+
+064 SHA `A0B50FFD1CB4FBDB3F8E51D5875FC3B7094B905F71741C7271CC3E3A90F8B865` idêntico pré/pós observa somente stats das quatro colunas alteradas e filtradas autônomas nas duas tabelas V105, além de seus outros agregados estruturais; não inventaria stats gerais. Os 215 já constavam do inventário pós antes de executar 064; não houve inventário depois do 064, então metadata adicional por essa consulta não é excluída. O guard V105 era **pré-DDL** e não deve ser reavaliado retroativamente nem alterado. Metadado automático é compatível com `AUTO_CREATE_STATISTICS=ON` observado em 0334 e carga sintética, mas impacto de plano/latência e criador exato não foram medidos.
+
+Critério proposto para próxima leitura física: preservar FAIL/873 pré e 1088 pós 0342 como fotografias distintas; pin novo pre/post global de stats além de 064, Flyway/schema/principals/contagens/socket. Igualdade do inventário é o caminho sem delta. Novas linhas somente automáticas, sem filtro/índice e sem remoção/modificação seriam **candidatas a classificação e revisão**, não PASS automático; manual/filtrada/indexada, delta de dados/objeto ou grupo preexistente bloqueia. Capturar stats após cada consulta capaz de criar metadata. Se for necessária prova de objetos individuais, falta `stats_id` pré-0342; gate catalog-only futuro proposto no checkpoint, sem execução nesta unidade. **P08 permanece aberto; Gate 2 A/B parado.** Nenhum SQL/JDBC/IT/Flyway/smoke, metadata, V105 ou resource Runtime alterado; FAILs 0336/0341/0342 e limites backup 0325 preservados.
+
+# P08 — IT de composição 8 executados/7 FAIL; 215 autoestatísticas novas — 29/09/2026
+
+Supervisor autorizou nova unidade física após o FAIL Surefire 0341. Prova offline sem URL/JDBC com `-DskipITs=true` e `-Dsurefire.failIfNoSpecifiedTests=false` saiu 0 e alcançou `failsafe:integration-test`; log SHA `1DD4C19072E854B19A7B1787E4E02F937040ECE88D429AC4C1CE2940E489EEDB`. Pins 0340/Runtime/IT/pacote A/B permaneceram exatos. Preflight reservado Windows auth no master/alvo local confirmou Flyway 106=SCHEMA+105 SQL/zero falhas, zero consumidores, listeners loopback, 063 0335 PASS, 064 hash observacional `A0B50FFD1CB4FBDB3F8E51D5875FC3B7094B905F71741C7271CC3E3A90F8B865`, contagens globais zero e 873 stats.
+
+Uma chamada Maven offline JDK17/perfil `shadow-local-integration`/duas travas com seletor corrigido executou a IT física: Failsafe **8 run, 7 failures, 0 errors, 0 skips**, Maven exit 1. Cinco casos worker e dois supervisor tiveram recibo `FAILED / CASE_EXECUTION_EXCEPTION`, `SQLException / ANA_QUOTE_CAPTURE_RECOVERY_REQUIRED`; um supervisor `CANCELLED / CONTROLLED_BARRIER` esperado. `OUTCOME_UNKNOWN` esperado não comprovado. Oito recibos confirmam `rollback=true` e agregados antes/depois iguais, sem explicar causa interna do dispatcher. Log SHA `CF8A04F56CA7A9B57A9F8B6E3E246A3FA2F96EFE6852888EA578089B8050850B`; reports e recibos no [checkpoint 0342](docs/continuidade/checkpoints/0342-p08-it-composicao-fail-auto-stats.md).
+
+Readback externo master/alvo/contagens/064/socket manteve os mesmos hashes e estado, mas o catálogo geral de stats passou **873→1088**: 215 entradas novas, todas automáticas, sem filtro/índice, nenhuma removida ou manual. O wrapper estrito parou em `P08_STATS_COUNT_MISMATCH`; saídas SQL preservadas e comparação offline privada SHA `3F75640EEE75F19431E9CB9066C15FE78105C3C6427DB011FAD4C02E27940A63`. Metadata delta e sete FAILs impedem reconciliação do Gate 1; **Gate 2 A/B não extraído/executado, P08 aberto**, sem retry/drop/update stats/DDL/Flyway/restore. Ledger SHA `6BBEDD34C4861E2E66B1CE855C6D72866273344A02C1A81C42A2063795704B68`. Supervisor/Runtime revisam offline a causa da recuperação exigida e decidem o tratamento do delta antes de nova autoridade física. FAIL 0336, 0341, estatística prévia e limites backup 0325 preservados.
+
+# P08 — Gate 1 Maven parou no Surefire antes da IT; smoke A/B não iniciado — 29/09/2026
+
+Supervisor autorizou Gate 1 `QualificationPackagePhysicalCompositionIT` (oito cenários) e, condicionado ao PASS integral, smoke novo A/B serial. Pins 0340 de V105/resource/063/064, IT SHA `8589E887E4B3135544C61FF63EE8F65E99E6846189BCCFA9C840EA88CE3A4EA7`, ZIP A/B `DBA9C4E554A65B2B16AFB2B1657583F16CF16E230FC9B610856449F99CFE4C31` e inventário `76A46AC794A2D32E945B7D25546CF4A0AB9EE39C61FBCDDCFAFCFD2849E14079` conferiram. Duas falhas locais do wrapper de preflight ocorreram antes de SQL e foram preservadas; preflight corrigido com nova reserva passou em master/alvo Windows auth, 106 Flyway=SCHEMA+105 SQL/zero falhas, zero consumidores, listeners loopback, 063 anterior PASS, 064 atual SHA `A0B50FFD1CB4FBDB3F8E51D5875FC3B7094B905F71741C7271CC3E3A90F8B865`, contagens globais zero e 873 stats estáveis.
+
+Uma chamada Maven offline/JDK17 com perfil e duas travas saiu **1 antes do Failsafe/JDBC**: `-Dtest=none -DfailIfNoTests=false` foi recusado pelo Surefire (`No tests matching pattern "none"`; a propriedade específica indicada é `surefire.failIfNoSpecifiedTests=false`). Portanto **nenhum dos oito cenários nem CANCELLED/OUTCOME_UNKNOWN executou**; Gate 1 não qualificado, sem retry. Log SHA `D404502F0412010AB70C91BCF246D43C9134C29A53E82AD47758546CF4D6092B`, sem URL. Readback SQL/socket independente manteve master/alvo/contagens/064/stats e 106 histórico/zero falhas idênticos ao pré; zero delta. Gate 2 A/B ficou inelegível: sem extração, controle, run/status/resume/compare. Ledger SHA `4DB83D0784828CCC3FDC5B5E6ED7CC1402294FF0194BE90BE8A86DBCB849905C`; [checkpoint 0341](docs/continuidade/checkpoints/0341-p08-gate1-it-maven-fail-sem-sql.md). **P08 aberto**; Supervisor decide eventual unidade física nova com seleção Maven corrigida e reservas novas. FAIL 0336, autoestatística e limites backup 0325 preservados; sem DDL/Flyway/restore/remoto/produção.
+
+# P08/V105 — recurso físico V105 revisado offline contra DMV 0339 — 29/09/2026
+
+Banco revisou **sem SQL/JDBC/Flyway** o recurso Runtime `physical-columns.v105.json` SHA-256 `8286ECFEE465C7999002288EE9B1F5AFE710613763DCE9548016C6C262B2B424`. Comparador privado leu UTF-8 estrito e a saída bruta DMV 0339 com BOM UTF-16LE, confrontando **cada uma das 971 entradas** por nome Unicode em bytes, view/ordinal/tipo/bytes/precisão/escala/nulidade/collation. Resultado: 19 views, 971 ordinais únicos, zero erro/oculta, **zero diferenças V105×DMV** e zero diferenças técnicas V105×catálogo 0336. Frente ao V098 pinado SHA-256 `16EF4E66339805B2B164A7A802FCF6862A0AF528BBB84AA5E6E3B03CFBFC72FF`, há exatamente **181 collations** CI_AS→100_CI_AS_SC e as cinco larguras já listadas; zero outro campo. A matriz V105 normalizada reproduziu o digest DMV `64DDE46C66F2E4088BAB043CA5ED7442FE751513CCC185EEB3C236ED466D6C77` **após** a comparação de linhas, não apenas pelo cabeçalho declarado.
+
+Cabeçalho/pins conferiram os artefatos 0336/0338/0339: `baseSha256` é SHA do V098; `catalogSha256` é digest canônico `FE70...` do catálogo 971 sem nomes danificados; `partialDmvSha256` é SHA do **recibo 0338** `AD68...`; `dmvSha256` é digest canônico da matriz 0339, não hash bruto da saída; `checkpointSha256` é SHA do checkpoint 0339. Engine 17.0.1000.7/compat 170/collation `Latin1_General_100_CI_AS_SC` e hashes das 19 definições SQL foram reconferidos **nos recibos preservados 0339**, não no banco atual; V043/V052/V080/V093/V105 mantiveram pins do manifesto. Recibo privado `target/shadow-local-rebuild-20260928-01/p08-v105-0340-resource-review.json` SHA-256 `134F7AA6CE724C4043319397FC9ECCACC9137F3AAD19C7A62400C1AA49891D43`; [checkpoint 0340](docs/continuidade/checkpoints/0340-p08-v105-recurso-fisico-revisado-offline.md). **Concordância de metadados não é aceite do guard/pacote nem P08 PASS**; causa histórica das cinco larguras não provada. FAIL 0336, candidatos A/B, recusas 0338 e limites backup 0325 preservados. Banco não editou resource/guard, migration V105, baseline ou manifesto; Runtime testa/empacota offline em paralelo.
+
+# P08/V105 — DMV read-only independente das 971 colunas — 29/09/2026
+
+Supervisor autorizou um gate read-only para as 19 views de `physical-columns.v098.json`. Preflight/reserva novos confirmaram `master`/alvo exatos por Windows auth/Shared memory, serviço PID 20404 e listeners apenas loopback, zero consumidores, SQL Server 17.0.1000.7/compatibilidade 170/collation alvo `Latin1_General_100_CI_AS_SC`, Flyway 106=SCHEMA+105 SQL/zero falhas, 1819 objetos/247 tabelas/147 linhas, sete schemas/principals V2, contagens globais zero e 873 grupos de stats iguais a 0338. O SQL privado foi gerado da allowlist V098 pinada: 19 chamadas `sys.dm_exec_describe_first_result_set` de `SELECT *` descrito, sem consulta de dados. **Uma chamada** `sqlcmd -u` saiu 0 e retornou 971 colunas/19 views, BOM UTF-16LE, zero erro/ocultas/ordinais duplicados, nomes Unicode em hex lossless e zero divergências de nome contra V098. A subsequência 01/13 igualou exatamente 0338.
+
+Comparação estrita: DMV **971/971 igual** ao catálogo não textual `sys.columns` 0336 em view/ordinal/tipo/bytes/precisão/escala/nulidade/collation; nomes do dump 0336 não foram usados. Contra V098: **181** collations `Latin1_General_CI_AS`→`Latin1_General_100_CI_AS_SC` e **cinco** larguras já isoladas (SQL-01 ordinal 17 28→56 bytes; SQL-13 ordinais 5/9/14/18 2048→4096), nenhum campo adicional. Digest da matriz DMV 971 com nomes hex `64DDE46C66F2E4088BAB043CA5ED7442FE751513CCC185EEB3C236ED466D6C77`; catálogo 971 `FE70F092B5D303480697C3E73DA4FCA85B022F15A90E09BA3E55065F1AA9BECF`; V098 971 `DDF36AFE1552C918E41A35F85566F5233A287EC90D79CDEA3BA88AF09D38B48B`. Hashes das 19 definições SQL ativas ficaram iguais antes/depois; V043/V052/V080/V093 conferiram manifesto. Readback independente master/alvo/contagens/873 stats/definições/socket repetiu byte a byte o preflight, sem metadata adicional observada. Recibo privado SHA-256 `A03D8E800D9896EF4AD33D009CAB55B6AFB8B0F9356DC6A67B0B8202096F85E2`, ledger `D4140A4D8904270DD0B237AD0FA98B43729775676098A96D1F37A129821FB9BC`; [checkpoint 0339](docs/continuidade/checkpoints/0339-p08-v105-dmv-971-readonly.md).
+
+Esta é prova independente **do estado atual** das 971 colunas, sem prova da causa histórica das cinco larguras, aprovação de snapshot V105 ou aceite P08. FAIL 0336, recusas pré-DMV 0338, candidatos A/B e limites do backup 0325 permanecem. Sem DDL/JDBC/Flyway/smoke/restore, nem edição de V105/migration/baseline/manifest/snapshot. Runtime prepara contrato V105 offline em paralelo; Supervisor decide proveniência antes de qualquer qualificação/pacote novo.
+
+# P08/V105 — DMV read-only independente das views 01/13 — 29/09/2026
+
+Supervisor autorizou uma sonda catalog-only no shadow exato. Após duas recusas **pré-DMV** preservadas (cliente ODBC18 sem `-C`, depois `sys.databases.collation_name=NULL` no `master` com `AUTO_CLOSE=1`), preflight corrigido confirmou localhost/Windows auth/Shared memory, serviço e listeners só loopback, SQL Server 17.0.1000.7, compat 170 e collation no próprio alvo `Latin1_General_100_CI_AS_SC`; 106 Flyway=SCHEMA+105 SQL/zero falhas, 1819 objetos/247 tabelas/147 linhas, sete schemas/principals V2, zero outras sessões e 873 grupos de estatísticas iguais a 0336. Uma chamada de `sys.dm_exec_describe_first_result_set` para `pub.analytic_lab_sql_01` e `_13` saiu 0: **119 colunas, zero erro/ocultas**, nomes em hex UTF-16LE lossless (BOM confirmado) e zero diferenças de nome contra V098. Ordinal/tipo/bytes/precisão/escala/nulidade/collation concordaram 119/119 com os metadados não textuais do catálogo 0336. Contra V098, nessas duas views há **63** collations CI_AS→100_CI_AS_SC e as mesmas cinco larguras (SQL-01 ordinal 17 28→56 bytes; SQL-13 ordinais 5/9/14/18 2048→4096). Os **181** deltas de collation na matriz completa de 971 continuam evidência catalog-only de 0336/0337; a DMV cobriu 119.
+
+Readback independente repetiu exatamente master/alvo/contagens/873 stats e socket antes/depois, sem metadata adicional observada. Digests canônicos da matriz DMV 119 `D4F856716AE634E9FFF3DD6FA3E114008622D77C2B066BB331D0B55E38D0D397`, catálogo 971 sem nomes danificados `FE70F092B5D303480697C3E73DA4FCA85B022F15A90E09BA3E55065F1AA9BECF`, V098 971 com nomes Unicode `DDF36AFE1552C918E41A35F85566F5233A287EC90D79CDEA3BA88AF09D38B48B`. V043/V052/V080/V093 conferiram hashes do manifesto; quatro definições SQL ativas tiveram hashes UTF-16LE registrados no recibo privado. [Checkpoint 0338](docs/continuidade/checkpoints/0338-p08-v105-dmv-metadados-views-01-13-readonly.md), ledger SHA-256 `12938E60476B29516305B09668800691A203641BE6F0AE89D72FB8DE9CE92A0D`. **Não prova a causa histórica das larguras nem aprova snapshot V105; FAIL 0336 e P08 aberto.** Sem dados, DDL, JDBC, Flyway, smoke, restore ou edição de migration/baseline/manifest/snapshot.
+
+# P08/V105 — reconciliação offline do FAIL físico 0336 — 29/09/2026
+
+Após 0336, Banco comparou deterministicamente o contrato V098 e o log catalog-only V105: 971 colunas em ambos, **186 diferenças de campo em 181 colunas** (181 collations `Latin1_General_CI_AS`→`Latin1_General_100_CI_AS_SC` e cinco larguras; demais campos comparados iguais). Os cinco comprimentos são SQL-01 `[Cliente/CNPJ]` 28→56 bytes e quatro aliases SQL-13 2048→4096 bytes. Linhagem estática V043/V080 e V052/V093 mostra expressões `CASE`/`SUBSTRING` e `COALESCE`/`LEFT` sem cast explícito de largura final; as quatro saídas SQL-13 derivam de dois aliases. A causa exata da diferença de inferência de metadados entre capturas continua **não provada** offline, pois o arquivo-fonte histórico da matriz não está disponível. O banco atual usa default `Latin1_General_100_CI_AS_SC` desde a criação 0311; as 181 colunas catalogadas em 0336 têm essa collation. V098 declara epoch 98; não é contrato automaticamente aprovado para V105.
+
+Manifesto V105 conferiu hashes/ordem dos 105 arquivos e baseline inclui exatamente V001–V105. V099–V105 não redefinem as views publicadas nem as fontes das cinco larguras. V105 pinada altera apenas quatro collations **persistidas** fora dessas views e reconstrói TVP/procedure dependente; não explica os 186 campos. Recibo privado SHA-256 `3CC4788B2EAA8FB2FBFEE28983383152421059953DCED70B4D57749994987DD7`; [checkpoint 0337](docs/continuidade/checkpoints/0337-p08-v105-reconciliacao-offline-contrato-fisico.md) registra a proposta de contrato por epoch, proveniência independente e mutantes. **FAIL 0336, A terminal FAILED, B não extraído, P08 aberto.** Sem novo SQL/JDBC/Flyway/smoke, nem edição de V105, baseline, manifesto ou snapshot. Supervisor decide proveniência/critério V105 com Runtime antes de novo pacote/gate físico.
+
+# P08/V105 — smoke PackageShadow A FAILED no guard físico; B não elegível — 29/09/2026
+
+Após checkpoint 0335, Supervisor autorizou A/B serial com preflight/readback
+por run. ZIPs A/B, manifesto, revisão e V105 conferiram os pins; 4.081
+inputs de origem idênticos entre A/B tiveram drift apenas em `STATES.md`,
+TRILHA e RETOMADA, atualizados depois da montagem, sem drift de código,
+migration ou payload. `Expand-QualificationPackage` extraiu **só A** em
+`target/p08-0336-a` (189 membros). Configuração externa pinada reduziu
+o teto de campanha de 3600 para 420 s; 512 MiB, caso 300 s, query 60 s
+e socket 90 s permaneceram. JDK17/PS7.6 e URL de seis segmentos ficaram
+no ambiente privado; não houve credencial ou URL em log.
+
+Dois erros locais pré-efeito foram preservados: quoting PowerShell impediu
+a chamada de extração antes de criar destino; a primeira chamada do
+invocador `run` falhou em `P08_URL_SHAPE` antes de iniciar filho/JDBC, sem
+controle/log. A expressão local foi corrigida, passou self-test offline
+de seis chaves e teve preflight novo. Esse preflight confirmou
+master/alvo exatos por Windows auth, serviço/listeners só loopback,
+zero consumidores, 106 Flyway = SCHEMA+105 SQL/zero falhas, agregados
+de domínio/auditoria zero, 064 SHA-256
+`A0B50FFD1CB4FBDB3F8E51D5875FC3B7094B905F71741C7271CC3E3A90F8B865`
+e inventário de 873 grupos de stats SHA-256
+`BAEB5ED431D478B5537B4939F51AB203C223902070C6AC011188EE925BFD8717`.
+
+A única chamada efetiva `Invoke-Qualification.ps1 -Command run` de A saiu
+**2**, controle terminal `smoke=FAILED`, `CASE_EXECUTION_EXCEPTION`,
+`SQLException`/`QUAL_PHYSICAL_SCHEMA_DRIFT`. Recibo/reconciliação/journal
+confirmaram rollback, estado terminal e agregados antes/depois iguais.
+Readback externo após run repetiu master/alvo/contagens/064/stats/socket,
+sem delta de dados, objetos, principals, histórico ou estatísticas. O
+`status`, `resume` e `compare` não eram elegíveis; B não foi extraído,
+executado ou reservado para run.
+
+Diagnóstico catalog-only, reservado, confirmou 971 colunas `pub.analytic_lab_sql_*`
+no V105 atual contra as 971 do contrato físico **V098** embutido no JAR.
+A primeira divergência material é a collation de `analytic_lab_sql_01`
+ordinal 4: esperada `Latin1_General_CI_AS`, atual
+`Latin1_General_100_CI_AS_SC`. Há 181 divergências dessa collation e cinco
+de comprimento em bytes (uma 28→56, quatro 2048→4096); nomes Unicode
+não foram contados pela codepage da saída sqlcmd. Inventário de stats e
+readback pós-diagnóstico ficaram estáveis. O guard de pacote explica o FAIL;
+a origem histórica das diferenças e eventual defeito de schema ainda
+exigem revisão offline de contrato/migrations/baseline, sem afrouxar a
+assertion ou alterar V105. **P08 aberto**, sem retry/restore/DDL/Flyway,
+fonte real/remoto/produção. Ledger físico SHA-256
+`576EF9555C13922A70C7271C0E5633FDF3F94E8A9E3E2B6345F97DDE1358952A`;
+[checkpoint 0336](docs/continuidade/checkpoints/0336-p08-v105-package-shadow-a-fail-schema-guard.md).
+O PASS 5/5 da IT 0333 e 063/064 0335 continuam separados; backup 0325
+mantém limitações já registradas. Próximo gate físico depende de pacote
+revisado e autorização nova do Supervisor.
+
+# P08/V105 — 063/064 PASS; baseline observacional pós-IT estável — 29/09/2026
+
+Pela decisão do Supervisor após 0334, Banco reservou separadamente dois
+gates read-only no `localhost/ETL_SISTEMA_V2_SHADOW`. Preflight por Windows
+auth confirmou master/alvo exatos, serviço Running, listeners somente
+loopback, zero consumidores, 106 linhas Flyway = SCHEMA + 105 SQL/zero
+falhas, 1819 objetos, 247 tabelas, 147 linhas, sete schemas/principals V2
+e contagens globais monitoradas de domínio/auditoria zero. Pins V105/063/064
+conferidos. Inventário inicial de estatísticas: 873 grupos catalogados,
+SHA-256 `BAEB5ED431D478B5537B4939F51AB203C223902070C6AC011188EE925BFD8717`.
+
+Uma chamada 063 saiu 0 com `EPOCH_V105_STRUCTURAL_PASS`, output SHA-256
+`6CE5EF46A0AA267F9AC7085E2FC3BF73D943E619643F97626D2DCB359AED967E`.
+O catálogo imediatamente após ficou idêntico. Em reserva distinta, uma
+chamada 064 saiu 0, output SHA-256
+`A0B50FFD1CB4FBDB3F8E51D5875FC3B7094B905F71741C7271CC3E3A90F8B865`,
+idêntico ao snapshot pós-IT 0333; o catálogo imediato também ficou idêntico.
+Readback independente após cada gate igualou os hashes normalizados de
+master/alvo/contagens do preflight, com sockets loopback. A estatística em
+`ref.expansion_lab_label.label` segue automática, não manual/filtrada nem
+associada a índice; nenhum stat novo, delta de dados, schema, principals ou
+histórico foi observado. Esta é a **baseline observacional pós-IT**; não
+substitui a fotografia pré-IT nem apaga o FAIL do critério estrito em 0333.
+
+Ledger físico SHA-256
+`7F027E1B3F8C8C29730C4FF308217E5D160FCE4983029424298102253AE9B022`;
+[checkpoint 0335](docs/continuidade/checkpoints/0335-p08-v105-063-064-baseline-observacional-pos-it.md).
+PASS 5/5 da IT 0333 e 063/064 desta unidade são evidências parciais;
+**P08 permanece aberto**. Sem IT/JDBC/Flyway/smoke/restore/DDL explícito,
+edição V105/063/064/manifests ou ajuste de estatística. Backup 0325 mantém
+as limitações registradas; próximo gate depende de decisão própria.
+
+# P08/V105 — estatística automática catalogada; 063/064 adiados por risco — 29/09/2026
+
+Supervisor autorizou diagnóstico somente leitura/offline após 0333,
+condicionando 063/064 à ausência de risco de criar outra estatística.
+IT/V105/063/064 mantiveram os pins. Revisão estática: a IT filtra
+`l.label=N'Autorizado'`; V105 recusa estatísticas não revisadas **antes**
+do ALTER COLLATE para impedir perda silenciosa; 064 conta o mesmo estado
+depois. 063 consulta `ctl.flyway_schema_history` por `success/type`; 064
+também filtra `ref.reference_release.family_code`. Com
+`AUTO_CREATE_STATISTICS=ON`, esses predicados **podem** gerar estatísticas
+adicionais conforme Microsoft Learn. Por essa condição da autoridade,
+**063 e 064 não foram executados nesta unidade**; sem workaround.
+
+Preflight reservado `lpc:localhost` por Windows auth: master/alvo exatos,
+serviço/listeners somente loopback, zero consumidores. Master SHA-256
+`FC9044AA34788EB0581CC52D7BBEE77032075FBA7E3C6A038C37A52DE3902762`;
+alvo catalog-only SHA-256
+`D3BB206627B4837D99D07D87CC71824F132CCBEFDAD948881E49735DFE635EB3`:
+`AUTO_CREATE_STATISTICS=1`, `AUTO_UPDATE_STATISTICS=1`, uma estatística
+automática em `ref.expansion_lab_label.label`. Consulta catalog-only
+reservada, output SHA-256
+`9857ACE43FBF845E60E07983EA95AF64FBE265AE29165FCD7F86AE49C9281905`:
+coluna `nvarchar(128)`, `auto_created=1`, `user_created=0`, sem filtro,
+sem índice, contagem 1; `MIN/MAX(last_updated)` no horário do servidor
+`2026-09-29 02:20:28.8100000`. Esse campo é a atualização do histograma,
+não prova a hora de criação ou a instrução exata. Nenhum nome gerado, ID
+ou payload foi impresso.
+
+Readback independente master/alvo/agregado/socket repetiu os três SHA
+pré e listeners loopback; a estatística acompanhada ficou estável.
+O metadado é **compatível com criação automática normal do otimizador
+pós-V105**, não evidência de defeito estrutural da migration. O critério
+físico 064 sem delta em 0333 continua não atendido; PASS 5/5 da IT não
+encerra P08. Ledger físico SHA-256
+`A02F6C391CAEEF820F9A06ECB138CF19AAEA3FA8D868632DCD01AE780E9476F6`;
+[checkpoint 0334](docs/continuidade/checkpoints/0334-p08-v105-auto-stat-catalogo-gates-063-064-adiados.md).
+Sem `DROP/UPDATE STATISTICS`, edição V105/063/064/manifests, IT/JDBC,
+Flyway, smoke ou restore. Supervisor define gate separado para risco
+de autoestatísticas ou critério pós-DDL, preservando guard pré-DDL,
+FAILs 0329/0330 e limites do backup 0325. **P08 aberto**.
+
+# P08/V105 — classe completa IT 5 PASS, 064 com delta de estatística automática — 29/09/2026
+
+Supervisor autorizou uma execução física de toda a classe
+`ExpansionLaboratoryReferencesIT` (cinco métodos), não aceite P08.
+IT SHA-256 `00CC2578A21120DEBF4EB05AB69185F3D646F62AE5D11F599943CB1C7906353E`
+e V105 `29D6612E42DAE014388EB3384F46F4A30D0402FAC66E8548806121E1D4E3DB17`
+conferiram antes/depois. JDK17/Maven offline, perfil shadow, duas travas,
+URL de seis segmentos só no processo; runner privado SHA-256
+`6CFE68B248AB8AAA754214FF53B1A80C15444EB501D5C6631DF8FB41CF47A613`.
+Banco não editou IT, POM, migration ou schema. 063 e validate PASS 0328
+continuaram pinados, sem reexecução.
+
+Preflight reservado master/alvo/064/contagens/socket por Windows auth no
+`lpc:localhost` passou: histórico 106 = SCHEMA+105 SQL, zero falhas,
+zero consumidores, contagens globais monitoradas zero, listeners somente
+loopback. Uma chamada Maven saiu 0; Failsafe **5 testes, 0 falhas, 0 erros,
+0 skips**, exatamente os cinco métodos atuais da classe, inclusive
+`caseOnlyLabelReplayUsesContentComparisonAndRollsBack`. Log SHA-256
+`3417AFB7C5F43B5885A5DDD039EC272D527596772A9DB30CEC50E03496DB7503`;
+reports TXT/XML/summary SHA-256
+`5C47F50E83DAA535524292C16DE031B05070B466CFD5E30171BE5801AC418C74`,
+`96E6AB729A0F6B4E6DF58070ED018D52CFF003DA14EFE77F2E710F9847E7CC96`,
+`5445546D40EBA92717D5D22829797685DCE7A773F4CFDA2DAE32AC5754848AEB`;
+sem URL literal.
+
+Readback independente master/alvo/contagens/socket igualou o pré, com
+histórico e dados monitorados sem delta. SHA-256 master
+`FC9044AA34788EB0581CC52D7BBEE77032075FBA7E3C6A038C37A52DE3902762`,
+alvo `CA025A54ECFDABC8853C8892E02BCE86A2DA047DD15680A8E389BFC300BC58D8`,
+contagens `3C1015B95C285C7926C5A10F6F7C22666DB6FECC4D28E4338B544C57066B1BC6`.
+**064 divergiu**: pré
+`EF6C39570B7E6D4B1C881B205E07A8EF92BFF4001E9B783AF1AA86D1B8DED1E4`,
+pós `A0B50FFD1CB4FBDB3F8E51D5875FC3B7094B905F71741C7271CC3E3A90F8B865`.
+Única diferença: `V105_STATISTICS_BLOCKERS` total 0→1, automáticas
+0→1. Diagnóstico SQL somente leitura encontrou uma estatística automática,
+sem filtro/índice, sobre `ref.expansion_lab_label.label`; output SHA-256
+`0B745A41B89A8E86EE6D7C7FC4DC4A65983B61C3C0B483225ACC0E95EC1BDA9E`.
+A instrução exata geradora não foi isolada. **Camada de testes PASS, mas
+critério físico 064 sem delta NÃO atendido**. Estado congelado; sem
+`DROP STATISTICS`, retry, fallback, restore, replay avulso ou outra IT.
+Ledger físico SHA-256
+`6A36292C6E8967A433D857B67840F776475F0D89EEBED26799947BE21AD0415D`;
+[checkpoint 0333](docs/continuidade/checkpoints/0333-p08-v105-classe-it-5-pass-064-auto-stats-delta.md).
+FAILs 0329/0330, 0331/0332 e limites do backup 0325 preservados.
+**P08 aberto**; Supervisor decide tratamento separado dos metadados.
+
+# P08/V105 — IT case-only selecionada PASS, rollback sem delta — 29/09/2026
+
+Supervisor autorizou uma execução física apenas de
+`ExpansionLaboratoryReferencesIT#caseOnlyLabelReplayUsesContentComparisonAndRollsBack`
+após a sonda 0331. IT SHA-256
+`00CC2578A21120DEBF4EB05AB69185F3D646F62AE5D11F599943CB1C7906353E`,
+V105 `29D6612E42DAE014388EB3384F46F4A30D0402FAC66E8548806121E1D4E3DB17`;
+recibos 063 PASS e `flyway:validate` normal PASS 0328 intactos. Runner
+privado SHA-256 `F4032FCA3BC02158EE72E3069A0C0D575FF6DBF6E84759B94547816DFAE031E6`
+reutilizou a montagem URL de seis segmentos, somente no processo, com
+JDK17/Maven offline, perfil shadow e duas travas. Banco não editou IT,
+POM, migration, schema ou código de produção.
+
+Preflight reservado no `lpc:localhost` por Windows auth: master/alvo/064/
+contagens e socket exatos, 106 linhas Flyway = SCHEMA+105 SQL, zero falhas,
+V105 instalada, zero consumidores e contagens globais monitoradas zero.
+Uma chamada Maven saiu 0; Failsafe **1 run, 0 failure, 0 error, 0 skipped**,
+somente o método autorizado. Os asserts passaram para 4 releases/receipts,
+15 labels, 4 selections/IDs, replay idêntico, divergência case-only 53437/
+`EXP_REF_CONTENT_DIVERGENT`, `XACT_STATE` admissível e nova sessão vazia.
+O valor exato de `XACT_STATE` não foi registrado. Log SHA-256
+`D119D2606CDA2433598F5038874B0DAF947093748716AA40225FD8787CA4327F`;
+reports TXT/XML/summary SHA-256
+`DC7660E128F23A053750D93C6482DAFD9C71C81B98621E987A3C02073D509FC7`,
+`F84E537D015DEDD219379ACD1EC5ABE68FA8FB48507BB2C88EFA6C4A67FA946E`,
+`300C3BD846F17C9C6604624B5E9D6703484B73DAF9E5FA72BC17D31B371CA87D`.
+Sem URL literal nos recibos.
+
+Readback SQL/socket independente repetiu **exatamente** master/alvo/
+contagens/064 pré: SHA-256
+`FC9044AA34788EB0581CC52D7BBEE77032075FBA7E3C6A038C37A52DE3902762`,
+`CA025A54ECFDABC8853C8892E02BCE86A2DA047DD15680A8E389BFC300BC58D8`,
+`3C1015B95C285C7926C5A10F6F7C22666DB6FECC4D28E4338B544C57066B1BC6`,
+`EF6C39570B7E6D4B1C881B205E07A8EF92BFF4001E9B783AF1AA86D1B8DED1E4`.
+Histórico/contagens e listeners loopback estáveis; zero delta persistido.
+Ledger físico SHA-256
+`87A48A2DE65A98B9265BE77BB5E865F56F437224F67A51931BBBE70F2F71A196`.
+FAILs 0329/0330, sonda 0331 e limites do backup 0325 preservados.
+Sem retry, outra IT, SQL replay, pacote smoke, restore, DDL ou produção.
+[Checkpoint 0332](docs/continuidade/checkpoints/0332-p08-v105-it-case-only-pass-rollback-sem-delta.md).
+**P08 continua aberto**; este é somente o gate do método selecionado.
+
+# P08/V105 — sonda sintética UUID/BIN2 somente leitura, causa de consulta esclarecida — 29/09/2026
+
+Supervisor autorizou somente diagnóstico read-only de
+`ref.reference_release.scope_code` no shadow local. Banco reservou o gate,
+fez preflight master/alvo/contagens/socket por Windows auth e executou uma
+consulta `NEWID()` sem imprimir UUID, ID ou linha de domínio. O tipo é
+`nvarchar(128)` e a collation `Latin1_General_100_BIN2`. Flags BIN2:
+texto nativo versus lowercase **0**, nativo versus lowercase convertido a
+`uniqueidentifier` e renderizado novamente **1**, lowercase versus
+reconvertido **0**; o nativo continha hex maiúsculo. Portanto a comparação
+textual lowercase usada pela IT do FAIL 0330 não encontra o escopo montado
+por `CONVERT` SQL sob BIN2. A sonda não observou o UUID daquela IT nem
+reexecutou o teste; Runtime é o único editor da correção.
+
+Master/alvo/contagens pré e pós tiveram SHA-256 idênticos a 0330:
+`FC9044AA34788EB0581CC52D7BBEE77032075FBA7E3C6A038C37A52DE3902762`,
+`CA025A54ECFDABC8853C8892E02BCE86A2DA047DD15680A8E389BFC300BC58D8`,
+`3C1015B95C285C7926C5A10F6F7C22666DB6FECC4D28E4338B544C57066B1BC6`.
+Histórico SCHEMA+105 SQL/zero falhas, contagens globais zero, listeners
+somente loopback e zero consumidores. Um FAIL falso no verificador local
+decorreu de comparar os listeners em ordem fixa; os mesmos recibos foram
+reavaliados por conjunto sem repetir SQL. Sonda exit 0, output SHA-256
+`D6C22FAA1236B36E1AD724BED6A63A5FED82FF67620DBB7EBEAACA55AC57231C`;
+ledger físico 0331 SHA-256
+`49EAF3F444E0760032CAC452D1A240A862C060C5AB641AF569B434602235A704`.
+Readback independente sem delta. Nenhuma IT/JDBC/Flyway/replay/DDL/DML;
+FAIL 0330 preservado. [Checkpoint 0331](docs/continuidade/checkpoints/0331-p08-v105-uuid-bin2-sonda-readonly.md).
+**P08 aberto**, nova prova física depende de autoridade própria.
+
+# P08 — segunda IT V105 selecionada: self-test URL PASS, assert de release FAIL, zero delta — 29/09/2026
+
+O Supervisor autorizou corrigir somente a montagem da variável JDBC no
+ambiente privado do processo e, após self-test offline obrigatório, **uma**
+nova execução do método
+`ExpansionLaboratoryReferencesIT#caseOnlyLabelReplayUsesContentComparisonAndRollsBack`.
+IT SHA-256 `55E2607D34C6CC84034A3F7828B00C62D9F14A2034C3A1293F8245382D67AC71`,
+V105 `29D6612E42DAE014388EB3384F46F4A30D0402FAC66E8548806121E1D4E3DB17`,
+DLL 12.8.2 `02DB7B0053C4A65B622EF53ECCB8B55687FDA16AE808F96DC73ACC7340C89C6E`
+e JDK17.0.20.1 conferiram, sem edição de código/IT/migration/POM.
+
+Script temporário em `target/` SHA-256
+`00821C72C15434CEB27F856EAF8A0CEC189DB8B955431BAA6CFA5130839DF497`
+montou seis segmentos por adições explícitas. Self-test Java temporário
+SHA-256 `6A004F32874DA9F8A4B1CE3009BA22654DA81F0B0D3B7CF023B2FF778A1B5613`
+verificou separadores, chaves exatas, host `localhost`, banco exato,
+`integratedSecurity=true`, ausência de usuário/senha/domínio e chamou
+`ShadowStorageProperties.enabled(LOCAL_EPHEMERAL, ...)` sem
+`DriverManager`/conexão. Uma primeira invocação offline não iniciou Java:
+PowerShell 5.1 bloqueou o carregamento do script temporário por política
+de execução. O runner privado em PowerShell 7.6.6 já instalado, SHA-256
+`53ECA8EEE8EC3CC0604AC47E3BD08E946A3D05F006C16C5E1F83B3E0D7B307AD`,
+executou o **mesmo** script: self-test exit 0, `PASS segments=6`, guard
+PASS, conexão NONE, log sanitizado SHA-256
+`9C097EB46D1DE56FC5B1F4B9CAF77D1873DEFFE931B1751B1361CBDF6A663F22`.
+URL literal não apareceu no log.
+
+Preflight SQL novo `lpc:localhost`, Windows auth, master/alvo/064/contagens
+e serviço PID 20404/listeners apenas `::1`/`127.0.0.1`, zero consumidores,
+repetiu os hashes 0329: master
+`FC9044AA34788EB0581CC52D7BBEE77032075FBA7E3C6A038C37A52DE3902762`,
+alvo `CA025A54ECFDABC8853C8892E02BCE86A2DA047DD15680A8E389BFC300BC58D8`,
+contagens independentes
+`3C1015B95C285C7926C5A10F6F7C22666DB6FECC4D28E4338B544C57066B1BC6`,
+064 `EF6C39570B7E6D4B1C881B205E07A8EF92BFF4001E9B783AF1AA86D1B8DED1E4`.
+Histórico 106 = SCHEMA+105 SQL, zero falhas, V105 sucesso; releases,
+receipts, labels, selections e auditorias globais zero.
+
+Com reserva física própria, **uma** invocação Maven offline/JDK17 pelo
+mesmo runner privado, perfil `shadow-local-integration`, duas travas e
+`-Dit.test` do único método saiu **1**. Failsafe: **1 run, 1 failure,
+0 errors, 0 skipped**. A IT passou do guard e alcançou JDBC; após duas
+chamadas `importPackaged`, o assert em
+`ExpansionLaboratoryReferencesIT.java:149` esperava quatro releases no
+`referenceState` da execução e observou zero. Log SHA-256
+`272E32ED8204452F55CD12944155CD31BFCE8C27E566A4A9BEFC34A84E222F10`;
+relatórios TXT/XML/summary SHA-256
+`BAF3160B6F9FC8E6CD23B53DC3A338BE2E504392BEC15415C609D060FB23F044`,
+`479E1CFAB389F5984712F0FA63B46FCF32AD3FD4F4AFF2DE871CED2749ACDC56`,
+`9C7CF9D2659E0A3D0ABFC897105A53B38BF1FC61B13E602BA07124AD2B587C69`.
+O replay divergente, erro 53437 e assert de `XACT_STATE` **não foram
+atingidos**. Hipótese estática, não provada: a consulta da IT compara
+`scope_code` BIN2 montado no SQL a partir de `uniqueidentifier` com UUID
+Java enviado como texto, podendo diferir apenas na caixa. Runtime/Supervisor
+devem revisar; Banco não editou a IT.
+
+Readback independente após FAIL repetiu **exatamente** master/alvo/
+contagens/064, 106/105/zero falhas, PID/listeners e todos os pins, sem
+delta persistido. O fechamento da sessão ocorreu no caminho de exceção,
+mas isso **não** satisfaz os asserts de rollback desejados. Log/report
+não contêm URL literal. Ledger físico
+`target/shadow-local-rebuild-20260928-01/p08-v105-0330-selected-it-ledger.jsonl`
+SHA-256 `26473FAF433E01E71BA7B6E7C094FACBBAAD5A7B3EA4C57E32B313A9F5998B2F`.
+FAIL 0329 e limites do backup 0325 preservados. Sem segunda IT, retry,
+fallback, replay SQL adicional, package smoke, restore, DDL, remoto ou
+produção. **P08/P01–P33 abertos**; próximo gate exige revisão do assert
+e autoridade própria. Checkpoint 0330.
+
+Validador documental offline `Test-TrilhaPreparation.ps1` PASS:
+33 etapas, 48 IDs abertos, 9 pacotes de entrada, `executionAuthorized=false`;
+log SHA-256 `B631C3CF43CFD377A3CB36774F1CF30171075154BF66E01D6B783E164225D75C`.
+
+# P08 — IT selecionada V105 falhou antes de JDBC; shadow sem delta — 29/09/2026
+
+O Supervisor autorizou uma única execução física de
+`ExpansionLaboratoryReferencesIT#caseOnlyLabelReplayUsesContentComparisonAndRollsBack`
+no shadow local. O arquivo da IT manteve SHA-256
+`55E2607D34C6CC84034A3F7828B00C62D9F14A2034C3A1293F8245382D67AC71`;
+V105 `29D6612E42DAE014388EB3384F46F4A30D0402FAC66E8548806121E1D4E3DB17`
+e 063/064 os pins 0324. Os recibos 0328 de 063 PASS, 064 PASS e
+`flyway:validate` normal PASS mantiveram seus hashes; não foram promovidos
+a nova prova funcional. A DLL 12.8.2 e JDK17 locais estavam presentes.
+
+Preflight SQL read-only novo em `lpc:localhost`, Windows auth, master/alvo
+exatos, serviço PID 20404 e listeners só `::1`/`127.0.0.1`, zero consumidores:
+master SHA-256 `FC9044AA34788EB0581CC52D7BBEE77032075FBA7E3C6A038C37A52DE3902762`,
+alvo `CA025A54ECFDABC8853C8892E02BCE86A2DA047DD15680A8E389BFC300BC58D8`,
+snapshot 064 `EF6C39570B7E6D4B1C881B205E07A8EF92BFF4001E9B783AF1AA86D1B8DED1E4`.
+Histórico 106 = SCHEMA+105 SQL, zero falhas, V105 sucesso único. Consulta
+independente, só de contagens, SHA-256
+`3C1015B95C285C7926C5A10F6F7C22666DB6FECC4D28E4338B544C57066B1BC6`:
+releases, receipts, labels, selections, calendar/branch/payer, auditorias
+e staging sintético todos zero. Query privada SHA-256
+`8025F3A739477ACFE20145ABD09628508EAFB1B30EBAA3D68372193F549CDBC4`.
+
+Com reserva física, uma chamada Maven offline/JDK17, perfil
+`shadow-local-integration`, duas travas e `-Dit.test` restrito ao método
+autorizado saiu **1**. Failsafe selecionou **1 teste**, **0 skipped**,
+**0 failures**, **1 error**; não houve outra IT. Log privado SHA-256
+`49DD848CE6BD23559904A919AA6B4BD61965F73AC1368C0EB71B3FA6598CDAA4`.
+O erro ocorreu em `ShadowStorageProperties.validateJdbcUrl` antes de abrir
+a conexão, na linha 142 do teste: `databaseName` não correspondia ao alvo.
+Diagnóstico offline mostrou que a construção PowerShell do ambiente agrupou
+seis propriedades num único segmento de 134 caracteres, em vez de seis
+segmentos; a primeira propriedade começou com o banco correto mas continha
+texto adicional. Nenhuma URL literal foi registrada no log ou relatório.
+**53437, XACT_STATE e rollback transacional não foram exercitados.**
+Relatórios Failsafe TXT/XML/summary preservados no diretório privado
+(SHA-256 `121ECE2AF5FF076EA00C840EBAAAD2217492D3B60DF8E630571F3885FDD99B27`,
+`3EE47A8C5B1F1F28EA3BA4B21BC6346966505729AEA5785F1228EB166E67C1C2`,
+`46FE5B2ABBAD8C22D311BF6557AFB16CEA5EBE919538FBC6480046421122D451`).
+
+Readback SQL/socket independente após o FAIL repetiu exatamente os quatro
+hashes do preflight, 106/105/zero falhas, V105/063/064/IT bytes estáveis
+e zero delta em todas as contagens. O recibo anterior de Flyway validate
+normal permanece íntegro; nenhuma nova validação foi chamada após o FAIL.
+Validação documental `Test-TrilhaPreparation.ps1` em PowerShell 7.6.6 saiu 0 (33 etapas, 48 IDs abertos, nove pacotes), recibo SHA-256 `B631C3CF43CFD377A3CB36774F1CF30171075154BF66E01D6B783E164225D75C`.
+Ledger físico `target/shadow-local-rebuild-20260928-01/p08-v105-0329-selected-it-ledger.jsonl`
+SHA-256 `EB3CCC1E6B067D964166E3AFDC1666497F852C1F37127BC1DF996CDA07C2E8D9`.
+**Sem retry, fallback, DDL, replay SQL adicional, outra IT, smoke, restore,
+fonte real ou produção.** O Supervisor precisa autorizar gate novo após
+revisar a montagem correta do ambiente de processo; esta falha não concede
+segunda tentativa. Pacote Runtime offline 0324 e FAILs 0326/0327 seguem
+históricos. P08/P01–P33 permanecem abertos. Checkpoint 0329.
+
+# P08 — V105 aplicada uma vez no shadow após espelho V001–V104 validado — 29/09/2026
+
+O Supervisor revogou o critério `ignoreMigrationPatterns` após o FAIL 0327 e
+autorizou espelho temporário em `target/`, prevalidate normal das V001–V104
+e, condicionado ao PASS, uma chamada V105 no diretório original. Banco criou
+`target/shadow-local-rebuild-20260928-01/p08-v105-0328-mirror-v001-v104`
+com exatamente 104 arquivos e sem V105. Antes, depois do gate e ao fechar,
+nomes, ordem e SHA-256 das 104 cópias e dos originais coincidiram com o
+manifesto 0319 SHA-256 `A1C0C03F59772EDCE804733DBDFBB065517F6ADD04322D99740662332A2C6F21`.
+Inventário do espelho antes/depois SHA-256
+`C47BF957E799EE8FC6CBB48A747D22734AFE13CBACAA2AF71AF71CCF46C1D618`;
+o original tinha exatamente V001–V105. Descritor local do plugin Community
+9.22.3 declara `flyway.locations` configurável por System Property. Com
+localização de processo `filesystem:<espelho>`, `flyway:info` saiu 0 com
+SCHEMA + V001–V104 `Success` e zero Pending/Missing/Failed, provando a
+localização efetiva; log SHA-256
+`48C07B4FD470CE34C684917BB4592A6E9FACCC85E5F036EC4DC4F1C1743E63BF`.
+`flyway:validate` normal, sem ignore, saiu 0 para as 104 SQL aplicadas
+(105 registros incluindo SCHEMA); log SHA-256
+`33EB5948E3E7F9C3379A497D9683AEA16D60062C72E3FE2EE344709D0FA5CC39`.
+V105 ainda não era objeto desse validate. Readback independente não mostrou
+delta.
+
+Preflight novo para migrate confirmou master/alvo exatos via Windows auth e
+shared memory, serviço PID 20404/listeners só `::1` e `127.0.0.1`, zero
+consumidores, histórico 105 linhas = SCHEMA+104 SQL/zero falhas, 064 pré-V105,
+backup 0325 `RESTORE VERIFYONLY WITH CHECKSUM` exit 0, 104 hashes históricos,
+cinco pins 0324, POM e 105 arquivos originais. O primeiro comparador local
+tinha literal de hash master truncado; a saída SQL já era igual ao recibo
+0327 e a comparação read-only corrigida passou para master/alvo/064/backup.
+`flyway:info` **sem override** no original saiu 0 com V001–V104 Success e
+somente V105 Pending; log SHA-256
+`EC0CABE65365A3564AF66C408FB5F09AAF357A37ECF228A438D2CFFA2E2C2180`.
+
+Com reserva física distinta, **uma** chamada offline `flyway:migrate` no
+original, com POM normal e `validateOnMigrate=true`, sem locations/ignore
+de processo, saiu 0; log SHA-256
+`363AF1C287FCA25A586810B3F11A29BF3104078208AE56FE2A22CD0DBE00CD6C`.
+Antes de interpretar esse exit, readback SQL independente confirmou **106**
+linhas Flyway = SCHEMA+105 SQL, V105 sucesso único, zero falhas, 1.819 objetos,
+247 tabelas, sete principals e sete schemas owned, serviço/socket inalterados.
+A contagem global foi de 146 para 147 apenas pela linha Flyway V105.
+
+Gates posteriores separados: `064` exit 0, SHA-256
+`EF6C39570B7E6D4B1C881B205E07A8EF92BFF4001E9B783AF1AA86D1B8DED1E4`,
+confirmou quatro colunas persistidas BIN2, TVP label BIN2, definições e
+opções revisadas, zero bloqueadores e agregados de auditoria/labels/receipts
+sem delta; `063` exit 0 com `EPOCH_V105_STRUCTURAL_PASS`, SHA-256
+`6CE5EF46A0AA267F9AC7085E2FC3BF73D943E619643F97626D2DCB359AED967E`;
+`flyway:validate` normal original exit 0, 106 registros, SHA-256
+`AEF5660134F3E88605A1300D93B92C9F936E0AEF1E3B250344C00B86022EF603`.
+Cada gate teve reserva e readback independente idêntico SHA-256
+`CA025A54ECFDABC8853C8892E02BCE86A2DA047DD15680A8E389BFC300BC58D8`.
+Os 104 arquivos originais, V105, 063, 064, inventário e baseline retêm
+os hashes fixados; recibo final SHA-256
+`A2B0E6CEA7851E39B98DC7AC61C78F0147B569926D50C4478FBC5258FAF8BFCE`.
+Ledger físico `target/shadow-local-rebuild-20260928-01/p08-v105-0328-ledger.jsonl`
+SHA-256 `7FE5E104EF9353DC0A029ABC60C1F61CAC3C5CF3D4BA2B76AE187D8ED3C7507D`.
+
+Validação documental `Test-TrilhaPreparation.ps1` em PowerShell 7.6.6 saiu 0 (33 etapas, 48 IDs abertos, nove pacotes), recibo SHA-256 `B631C3CF43CFD377A3CB36774F1CF30171075154BF66E01D6B783E164225D75C`; `git diff --check` dos três documentos rastreados e UTF-8 estrito sem BOM dos quatro documentos tocados passaram.
+
+Os FAIL 0326/0327 permanecem evidência histórica. Backup 0325 continua sem
+prova de ausência anterior, tamanho/SHA físico e restauração; possível
+overwrite por INIT não foi descartado. Flyway 9.22.3 avisou que SQL Server
+17 é mais novo que seu suporte testado (16). Não houve restore, retry,
+clean/repair/drop, JDBC, replay, IT, smoke, fonte real, remoto ou produção.
+Pacote Runtime ZIP SHA-256
+`80CC18349268E07002E3E395FCE0239EDD95F1639F7AC81E7046C78877483499`
+continua evidência offline. V105/schema/validate estão qualificados **apenas
+nesta unidade local**; P08/P01–P33 seguem abertos para provas entre componentes
+e demais critérios. Checkpoint 0328.
+
+# P08 — gate V105 0327: Flyway Community recusou `versioned:pending`; sem migrate — 29/09/2026
+
+O Supervisor autorizou novo gate somente leitura para validar V001–V104 com
+`-Dflyway.ignoreMigrationPatterns=versioned:pending`, seguido de uma tentativa
+V105 **somente se** esse gate e o novo preflight passassem. Banco preservou o
+FAIL 0326, o POM e os bytes de V001–V105. O recibo estático privado
+`p08-v105-0327-static.out` SHA-256
+`68F904A6632CDEA1159FDE1443C2E85AFD6101B0EA7B75904FCA45565A563140`
+confirma os 104 hashes do manifesto 0319 e os cinco pins 0324: V105
+`29D6612E42DAE014388EB3384F46F4A30D0402FAC66E8548806121E1D4E3DB17`,
+063 `381C177B2E42B33E6BB5A72F7730B8033C05DA50000085808C8207E18D11E7A4`,
+064 `D990AD9C862F6F4F51D08650D0C4B68755F0419877641938C3EC46269B5D4533`,
+inventário `4E242D9EFA5641E5C9C078FC7166BD8E1FF6F854A42851D00589D46FF792A711`
+e baseline `291871CE9B1CFF3C524CCAD8C8C4C68A67FAE3BC0672A49B803A04038CBA4126`.
+
+Novo preflight `sqlcmd -S lpc:localhost -E` em master/alvo, 064 e
+`RESTORE VERIFYONLY WITH CHECKSUM` saiu 0, com recibos idênticos ao 0326:
+master `FC9044AA34788EB0581CC52D7BBEE77032075FBA7E3C6A038C37A52DE3902762`,
+alvo `17B94EEBDA713DE1D4B3628C1FFD71932774E8791583F082E556ABA997C1E6F3`,
+064 `27169AF1E65F589A3E4F81FA685181262E126D992F464473C51D8C7B21760314`,
+VERIFYONLY `6DCEFC727169F3950FC50455FD57D908C75593D90E7FE5A94B2C6BE74C805B0D`.
+Serviço PID 20404, listeners apenas `::1`/`127.0.0.1`, zero consumidores;
+histórico 105 linhas = SCHEMA +104 SQL, zero falhas, V105 ausente, 1.819
+objetos, 247 tabelas, 146 linhas agregadas, sete principals/schemas. Um
+primeiro recibo 064 usou formatação `sqlcmd` diferente; a execução no formato
+original deu hash idêntico. Ambos tinham exit 0 e mesmos valores. O backup
+continua com as limitações 0325: ausência anterior, tamanho/SHA físico e
+RESTORE não provados; `INIT` poderia ter sobrescrito arquivo órfão.
+
+`flyway:info` offline no plugin **Community 9.22.3** saiu 0: exatamente V001–V104
+`Success`, somente V105 `Pending`, SCHEMA `Success`, nenhum estado anômalo.
+Log privado SHA-256
+`546CEF029765FD804CF842EAE45237A5FDD705350EDE0B665EF20B11DF7D6001`.
+Com reserva distinta, **uma** chamada `flyway:validate` com a única propriedade
+de processo `-Dflyway.ignoreMigrationPatterns=versioned:pending` saiu **1**:
+`FlywayTeamsUpgradeRequiredException` informa que o tipo `versioned` nesse
+padrão exige Flyway Teams e não é suportado pelo Community 9.22.3. Log privado
+SHA-256 `5861E96153C5013CC808A077C5E8B75544C792D9499200CF24A20F16DB2A38FE`.
+A propriedade foi reconhecida, mas **V001–V104 não receberam validate PASS**;
+V105 aplicada tampouco foi validada. A documentação atual do Flyway descreve
+`versioned:pending`, mas não altera a limitação da versão/edição instalada.
+
+Pela condição expressa de parada, **zero reservas/chamadas `flyway:migrate`**,
+sem fallback `*:pending`, edição de POM, upgrade/licença, clean/repair/drop,
+restore, replay, JDBC, IT ou smoke. Readback independente após o FAIL repetiu
+master/alvo/064 e sockets com hashes acima e zero delta; V105 segue pendente.
+Ledger físico `target/shadow-local-rebuild-20260928-01/p08-v105-0327-ledger.jsonl`
+SHA-256 `873CC70977E1F2D4F9E6DD45729A1B7266D2CBFF3999F62295C44893A7DE00F8`.
+O pacote Runtime A/B ZIP SHA-256
+`80CC18349268E07002E3E395FCE0239EDD95F1639F7AC81E7046C78877483499`
+segue evidência **offline**, sem execução por Banco. Supervisor precisa decidir
+um critério/ferramenta de prevalidate compatível com a instalação e autorizar
+novo gate antes de V105; esta tentativa não consumiu migrate. P08/P01–P33
+continuam abertos.
+
+# P08 — V105 não migrada: validate prévio recusou a migration pendente — 29/09/2026
+
+O Supervisor aceitou **apenas como contingência para uma tentativa V105** o
+backup 0325 verificado por `RESTORE VERIFYONLY WITH CHECKSUM`, header/filelist
+e `msdb`; a ausência prévia do arquivo, comprimento/SHA físicos e restauração
+real seguem sem prova, inclusive o possível overwrite por `WITH INIT`. A nova
+autorização restringiu-se a **uma** chamada `flyway:migrate` V105 após
+preflight/`flyway:validate` prévios, com parada obrigatória se divergirem.
+
+Preflight local novo `lpc:localhost`, Windows NTLM/shared memory, master e
+`ETL_SISTEMA_V2_SHADOW` explícitos, serviço PID 20404 e listeners somente
+`127.0.0.1`/`::1`, zero consumidores: SQL exit 0/0. O alvo tinha 105 linhas
+Flyway (SCHEMA + 104 SQL), zero falhas, V105 ausente, 1.819 objetos, 247
+tabelas, 146 linhas agregadas, sete principals e sete schemas owned. `064`
+exit 0 e SHA de saída
+`27169AF1E65F589A3E4F81FA685181262E126D992F464473C51D8C7B21760314`,
+idêntico a 0325: contagens/bytes de auditoria e labels, collations CI e TVP
+pré-V105, definições/opções revisadas e bloqueadores extras sem delta.
+`RESTORE VERIFYONLY WITH CHECKSUM` do mesmo `.bak` saiu 0 novamente, recibo
+SHA-256 `6DCEFC727169F3950FC50455FD57D908C75593D90E7FE5A94B2C6BE74C805B0D`.
+V001–V104 coincidiram com os 104 hashes históricos; havia 105 migrations no
+diretório. V105/063/064/inventário/baseline coincidiram com os cinco hashes
+fixados na autorização, respectivamente
+`29D6612E42DAE014388EB3384F46F4A30D0402FAC66E8548806121E1D4E3DB17`,
+`381C177B2E42B33E6BB5A72F7730B8033C05DA50000085808C8207E18D11E7A4`,
+`D990AD9C862F6F4F51D08650D0C4B68755F0419877641938C3EC46269B5D4533`,
+`4E242D9EFA5641E5C9C078FC7166BD8E1FF6F854A42851D00589D46FF792A711`
+e `291871CE9B1CFF3C524CCAD8C8C4C68A67FAE3BC0672A49B803A04038CBA4126`.
+JDK 17.0.20.1, POM e DLL 12.8.2 conferiram. A primeira checagem local
+`java -version` foi tratada como erro pelo PowerShell 5.1 ao ler stderr,
+antes de SQL; metadado `FileVersion=17.0.20.1` encerrou essa distinção.
+
+Com reserva física para o gate read-only, `mvnw.cmd --offline ...
+-Pshadow-migrations-windows-auth flyway:validate` em JDK17/Windows auth saiu
+**1**: Flyway 9.22.3 informou `Detected resolved migration not applied to
+database: 105`. O log privado SHA-256
+`D47D2CB198B2E08E53CB7A5C866ECBB5CF2014DED6B33BA6F30B618D3E28CD1B`
+preserva a causa. Isto é recusa da **V105 pendente**, não linha de histórico
+Flyway falha. A sugestão do Flyway de `ignoreMigrationPatterns='*:pending'`
+não foi executada: seria alterar o critério após FAIL sob instrução expressa
+de parar sem retry/fallback. **Não houve reserva nem chamada `flyway:migrate`.**
+
+Readback independente após o FAIL, com reserva própria, confirmou master,
+alvo/064 e sockets idênticos ao preflight: hashes
+`FC9044AA34788EB0581CC52D7BBEE77032075FBA7E3C6A038C37A52DE3902762`,
+`17B94EEBDA713DE1D4B3628C1FFD71932774E8791583F082E556ABA997C1E6F3`
+e `27169AF1E65F589A3E4F81FA685181262E126D992F464473C51D8C7B21760314`;
+zero delta, V105 ausente. Ledger físico
+`target/shadow-local-rebuild-20260928-01/p08-v105-0326-migrate-ledger.jsonl`
+SHA-256 `34C2EABEA6C9EB6C590C34DFB3CF7000F5375E8A433BCD9BB6EE45AA4E99B164`.
+Não foram executados 063 pós-V105, validate pós-migrate, restore, DDL, JDBC,
+replay ou smoke. Supervisor precisa decidir explicitamente o critério de
+validate prévio com V105 pendente e emitir nova autoridade/gates se desejar
+reavaliar; a autorização de tentativa única desta rodada não foi consumida
+por migrate, mas não autoriza contornar o FAIL. P08/P01–P33 abertos.
+
+Handoff Runtime recebido, **sem execução Banco**: pacote offline A/B repinado
+para hashes 0324, ZIP idêntico SHA-256
+`80CC18349268E07002E3E395FCE0239EDD95F1639F7AC81E7046C78877483499`,
+27 guardas, quatro mutantes, 21 extraídos, sete Maven, config/dry-run PASS;
+continua sem smoke físico nem aceite P08.
+
+# P08 — backup copy-only local do V104 verificado pelo SQL Server; hash do arquivo indisponível — 29/09/2026
+
+O Supervisor autorizou **somente um BACKUP** local de
+`localhost/ETL_SISTEMA_V2_SHADOW` como preparação V105, sem migrate, restore,
+DDL adicional, JDBC físico ou replay. Banco executou **uma** chamada
+`BACKUP DATABASE [ETL_SISTEMA_V2_SHADOW] TO DISK =
+N'C:\Program Files\Microsoft SQL Server\MSSQL17.MSSQLSERVER\MSSQL\Backup\ETL_SISTEMA_V2_SHADOW_preV105_20260929_001.bak'
+WITH COPY_ONLY, INIT, CHECKSUM` em `lpc:localhost/master`, Windows `-E`.
+`sqlcmd` saiu 0 e registrou 1.698 páginas processadas; recibo privado SHA-256
+`E44E6CBB1F797088641CE368C1247C63E75E7F707B51B8629C39C9A19200BB7A`.
+`Test-Path` devolveu falso no preflight para o arquivo proposto, mas a mesma
+conta recebe falso após o BACKUP validado por SQL Server devido à ACL; logo,
+**ausência prévia do arquivo não ficou comprovada**. `msdb` contém só a entrada
+atual nesse caminho, o que não exclui arquivo antigo sem histórico. `INIT`
+poderia ter substituído mídia preexistente inacessível; isso não foi observado,
+mas permanece risco de pré-condição. Diretório nativo igual a
+`InstanceDefaultBackupPath`, banco online, dois arquivos somando 100.663.296
+bytes, nenhum consumidor ativo, cerca de 718 GB livres, serviço PID 20404 e
+listeners exclusivamente `127.0.0.1`/`::1`. A ACL do diretório não pôde ser
+lida pela conta deste terminal; não se alterou ACL nem destino.
+
+Em **gate de verificação separado**, `RESTORE VERIFYONLY WITH CHECKSUM` saiu 0
+(`The backup set on file 1 is valid`), recibo SHA-256
+`6DCEFC727169F3950FC50455FD57D908C75593D90E7FE5A94B2C6BE74C805B0D`.
+`HEADERONLY`/`FILELISTONLY` saíram 0 e mostram `DatabaseName` exato, full
+database, posição 1, copy-only/checksums = 1, sem dano, dois arquivos lógicos
+esperados. `msdb` mostrou uma entrada exata com `is_copy_only=1`,
+`has_backup_checksums=1`, `is_damaged=0` e `backup_size=13.983.744` bytes,
+coerente com o header. **Esse número é tamanho do backup set no metadata, não
+medição independente do arquivo físico.** O terminal não consegue obter
+`Get-Item`/`Get-FileHash` do `.bak` por `UnauthorizedAccessException`; a
+tentativa read-only `OPENROWSET(BULK)` falhou com erro 4861/acesso negado.
+Logo, comprimento físico e SHA-256 do `.bak` permanecem **sem prova**. O
+primeiro comando de verificação foi rejeitado pelo cliente `sqlcmd` por opções
+de formatação incompatíveis, antes de conexão; FAIL preservado, corrigida só
+a invocação read-only. Não houve segunda chamada BACKUP.
+
+Preflight e readback SQL/socket independentes antes/depois da verificação
+repetiram histórico Flyway 105/104/zero falhas e snapshot SHA-256
+`78ED7BD652FD28452C861AEC5A36CF3877422AAC8AC1096C2F5A8136FE892B7B`;
+`064` SHA de resultado
+`27169AF1E65F589A3E4F81FA685181262E126D992F464473C51D8C7B21760314`,
+sem delta. O ledger físico novo
+`target/shadow-local-rebuild-20260928-01/p08-v105-0325-backup-ledger.jsonl`
+SHA-256 `8D3743D1D70F403C65087266EC7DE5C5CC021D7D5279D7425B82FD50F8870318`
+preserva reserva, efeito, FAIL do cliente, verificação, recusa de acesso,
+readback e correção explícita da afirmação `destination_absent=true` da
+reserva. V105/063/064/inventário mantêm hashes 0324, respectivamente
+`29D6612E42DAE014388EB3384F46F4A30D0402FAC66E8548806121E1D4E3DB17`,
+`381C177B2E42B33E6BB5A72F7730B8033C05DA50000085808C8207E18D11E7A4`,
+`D990AD9C862F6F4F51D08650D0C4B68755F0419877641938C3EC46269B5D4533`
+e `4E242D9EFA5641E5C9C078FC7166BD8E1FF6F854A42851D00589D46FF792A711`.
+Supervisor deve avaliar a pré-condição de ausência não comprovada e decidir
+se a prova SQL `VERIFYONLY` basta ou se exige acesso read-only ao arquivo para
+SHA/medição física antes de considerar autorização separada para migrate.
+**Nenhum migrate/restore/DDL/JDBC/replay ocorreu. P08 e
+P01–P33 continuam abertos.** Histórico da revisão 0324 abaixo.
+
+# P08 — revisão V105 e prova read-only do validador em V104 — 29/09/2026
+
+O Supervisor **não autorizou backup nem migrate V105**. Banco revisou o
+candidato antes de DDL: `V105__align_audit_and_expansion_label_bin2.sql`
+SHA-256 `29D6612E42DAE014388EB3384F46F4A30D0402FAC66E8548806121E1D4E3DB17`
+recusa estatísticas manuais/automáticas nas quatro colunas afetadas (salvo a
+estatística do índice que será reconstruído), estatística filtrada autônoma,
+consumidor extra do TVP em parâmetros/colunas/expressões, FK/default/full text,
+computed, check extra e outra referência schema-bound. Confere antes do DROP
+comprimento e SHA-256 UTF-16LE de `sys.sql_modules.definition` iguais à V042
+revisada, as duas definições de CHECK normalizadas de V025/V042, e opções
+físicas/partição/compressão do índice V025. Pós-condições repetem hashes e
+opções. Uma divergência recusa a migration; não há política de perda silenciosa.
+
+`064_snapshot_epoch_v105.sql` SHA-256
+`D990AD9C862F6F4F51D08650D0C4B68755F0419877641938C3EC46269B5D4533`
+observa essas classes por contagem sem payload/corpo. Manifest novo de reparo
+SHA-256 `6D71EBD264E1C4178FAE120FE93385A413E6856DB791456B75337D5986AC339D`.
+O gerador do inventário corrigiu sete defaults literais e duas FKs de
+`ALTER TABLE … ADD` antes omitidos; agora V104/V105 têm 569 objetos, 23 TVPs,
+1.019 constraints nomeadas, **224 sem nome** e 100 índices. Manifest SHA-256
+`4E242D9EFA5641E5C9C078FC7166BD8E1FF6F854A42851D00589D46FF792A711`;
+validador 063 regenerado SHA-256
+`381C177B2E42B33E6BB5A72F7730B8033C05DA50000085808C8207E18D11E7A4`.
+Baseline permanece SHA-256
+`291871CE9B1CFF3C524CCAD8C8C4C68A67FAE3BC0672A49B803A04038CBA4126`.
+V001–V104, SQL 003/005/030 e seus FAIL originais não foram editados.
+
+Gates SQL **somente leitura**, cada um com preflight novo em `master`/alvo,
+Windows auth, listeners `127.0.0.1`/`::1`, reserva anterior e readback posterior:
+primeiro 063 saiu 1 com erro 1934 (`QUOTED_IDENTIFIER`), log SHA-256
+`92308DC68B09F66218DC4BADDF567CF4B0F04C1D50998067E83647760899D25E`;
+segundo 063 saiu 1 com nove falsos achados de constraints sem nome, log
+`4BD20D5AB5AC58CC5D61C1671412B84DD1F372135BA0DACD2F463892CB93672C`.
+Após correção causal, 063 final saiu 1 **esperado** em V104: cinco `COLLATION`,
+um `TVP_SHAPE` pela collation CI e `MIGRATION_PENDING`, sem achado de
+inventário; log SHA-256
+`C87A4D7743FF3C0DD37A324BEC4F6A0AA15C08B6DDC9080428DB1DB4D6A58464`.
+`064` final saiu 0; log SHA-256
+`27169AF1E65F589A3E4F81FA685181262E126D992F464473C51D8C7B21760314`:
+Flyway 105 linhas/104 SQL/zero falhas, 1.819 objetos, 247 tabelas, 146 linhas
+agregadas, sete principals/schemas, auditorias/labels zero, quatro colunas CI e
+TVP CI; quatro definições/opções revisadas = 1 cada, e todas as classes novas
+de estatística/dependência = 0. Os diagnósticos read-only de hashes/definições
+dos checks tiveram gates próprios. Todos os readbacks repetiram SHA-256
+`78ED7BD652FD28452C861AEC5A36CF3877422AAC8AC1096C2F5A8136FE892B7B`
+antes/depois. Ledger físico novo SHA-256
+`2C0168D265557E27E897E57FF4C54193F57AEAD84F07E3894D4F5BED3445339A`.
+Nenhum BACKUP, RESTORE, Flyway, DDL/DML durável ou V105 ocorreu nesta unidade.
+
+Teste causal offline V105 PASS, incluindo quatro mutantes de dependência e
+cinco de definições/opções, recibo SHA-256
+`09B3DCDFA0C3043803507C4F6E66B4701AFC6BB6D51F861C06AB6ACE75130612`;
+checkers de fundação/progressivo PASS. Scanner completo PASS: 4.072 textos,
+zero achados, recibo SHA-256
+`22608DCD6A92B883268A784AFF0D4C33DA7A4476D6B3C66C9C5933EBAF3D29BE`.
+`Test-TrilhaPreparation.ps1` PASS (33 etapas, 48 IDs abertos, nove pacotes),
+recibo SHA-256 `B631C3CF43CFD377A3CB36774F1CF30171075154BF66E01D6B783E164225D75C`.
+Plano concreto de backup local e restauração condicional em
+`docs/runbooks/p08-v105-preparacao-20260928.md`: destino nativo do SQL Server
+existe e arquivo proposto não existe, mas ACL da conta de serviço não pôde ser
+lida e capacidade de escrita segue **não comprovada**; nenhum backup feito.
+
+Handoff Runtime: pacote 105 A/B idêntico SHA-256
+`802DF14E6300545B415E5FD43481A6D43C6550FCABC866DAD3BE39CC6264DA22`,
+27 guardas, quatro mutantes, 21 extraídos e sete Maven PASS, estado
+`PACKAGED_NOT_SMOKE_QUALIFIED` antes das edições atuais. Alterações V105,
+manifest/inventário invalidaram esse candidato; Runtime precisa regenerar e
+retestar sob seu domínio após congelamento de bytes. Banco não editou scripts
+de pacote. P08/P01–P33 permanecem abertos; Supervisor revisa a nova proposta
+e decide autorização física futura separada, sem presumir aceite.
+
+# P08 — V105 e validador de epoch preparados offline, sem SQL — 29/09/2026
+
+Por autorização **apenas para preparar**, o Builder Banco e Persistência
+produziu a migration candidata
+`database/migrations/V105__align_audit_and_expansion_label_bin2.sql` SHA-256
+`578355923BDDB402F8321B10F2ED5D0A5571B1BAF3B4ABF83117C0912FB99E07`,
+o validador estrutural
+`database/validation/063_validate_epoch_v104_v105.sql` SHA-256
+`ED739ABC646538FEF636D0F4E52816E6986B5A9F3739E92E15E9BEC39B40B0FC`
+e o readback planejado `064_snapshot_epoch_v105.sql` SHA-256
+`A888C43D4670C9DFDE11B7ED08D3B035B309C38D50ED9D4EFD96E47300B14AF6`.
+**Nenhum SQL, Flyway, migration, snapshot ou validador físico foi executado
+nesta unidade.** O banco permanece no último readback autoritativo de 0322,
+V001–V104 aplicadas e V105 pendente. Os FAIL originais 003/005/030 e seus
+hashes seguem preservados.
+
+O baseline agora inclui V105 após as 104 linhas existentes (SHA-256
+`291871CE9B1CFF3C524CCAD8C8C4C68A67FAE3BC0672A49B803A04038CBA4126`).
+As migrations V001–V104 e os validadores 003/005/030 não foram editados. O
+novo manifest derivado das 105 entradas contíguas e seus CREATE/DROP,
+`database/manifest/epoch-v104-v105-inventory.json` SHA-256
+`D06407B5D0C53C28D37A8240140F6845F8C71693AF28C19C4F135FD14DB041D1`,
+fecha 569 objetos de aplicação, 23 TVPs, 1.019 constraints nomeadas, 215 sem
+nome por tabela/tipo/colunas/referência e 100 índices nomeados. O conjunto
+estrutural V104/V105 é igual; a exclusão técnica é apenas
+`ctl.flyway_schema_history` por identidade exata. O manifest novo
+`epoch-v105-collation-repair.json` SHA-256
+`20A2DECD28B38F65AB643DACA065C06DB998C72253EBC21D3BE358BB7B0E5633`
+declara as quatro collations e o contrato TVP/procedure; os manifests
+históricos de control plane e referências não foram reescritos. Os checkers
+offline de fundação e progressivo foram atualizados para exigir V001–V105.
+
+V105 recusa shape/ownership/dependência/privilege drift e status existentes
+incompatíveis com BIN2 antes de DDL. Em transação, conserva definições físicas
+dos dois checks, contagens e bytes agregados, substitui quatro collations,
+reconstrói índice/checks/TVP e recria a procedure com corpo e assinatura
+textualmente idênticos a V042. Permissões diretas inesperadas no tipo ou
+procedure interrompem a migration antes do DROP; privilégios de schema
+permanecem. O validador 063 compara inventários em ambos os sentidos,
+mantém `MIGRATION_PENDING` em V104, exige BIN2 e verifica ordem
+comprimento/trim, lock/clock, protocolo BIN2, `EXCEPT` bidirecional,
+assinatura TVP e dependências reconstruídas. Checks sem nome são comparados
+por identidade estrutural e quantidade; o conteúdo de todos os predicados
+CHECK não é qualificado integralmente por este validador e segue sob provas
+especializadas. Plano físico, readback e recuperação em
+`docs/runbooks/p08-v105-preparacao-20260928.md`.
+
+`Test-EpochV105Offline.mjs` PASS: três mutantes de ordem/BIN2 V024, cinco
+collations e quatro alterações de inventário foram rejeitados; V105/V104
+geram o mesmo conjunto estrutural, 334 objetos V18+ reconciliam o `005`,
+e o corpo da procedure V105 coincide exatamente com V042. Recibo privado
+`target/shadow-local-rebuild-20260928-01/p08-prep-0323-offline.out` SHA-256
+`FA64C1AD6B9579F75B514D9C29608081C824B6FDBB9877001B54FD17D7C44760`.
+Os checkers `Test-SchemaFoundationManifest.ps1` e
+`Test-ProgressiveDataGate.ps1` passaram em PowerShell 7.6.6, apenas offline;
+recibos SHA-256 `CF9A0D58A76A74768CE13B24BF279926402EB441081377C36024ADADDF53F02A`
+e `1BB674AF268604948C4C62C5139BF3DB8D220BCB5DF8AD563D9F58467ED44BD1`.
+`Test-TrilhaPreparation.ps1` passou (33 etapas, 48 IDs abertos, nove pacotes),
+recibo SHA-256 `B631C3CF43CFD377A3CB36774F1CF30171075154BF66E01D6B783E164225D75C`.
+O primeiro scanner offline classificou os três `.mjs` novos como arquivos não
+texto e saiu 1, sem achado de segredo; a saída FAIL está no terminal desta
+unidade, sem recibo de arquivo próprio. A extensão
+`.mjs` foi adicionada à lista de texto em `Invoke-OfflineSecretScan.ps1`, sem
+exclusão nem allowlist, e a nova varredura saiu 0 com 4.070 textos lidos,
+zero achados; recibo SHA-256
+`F4B940E0349E25649D151FD686633BDDB56DD2CD7BF545700E399D29B5EF9E6F`.
+
+Handoff Runtime recebido: `JdbcExpansionReferences` usa dez parâmetros,
+`setStructured(6, "ref.expansion_lab_label_batch", labels)` e recibo de
+quatro IDs; `category VARCHAR(16)`, `raw_value NVARCHAR(128)` e
+`label NVARCHAR(128)` conservam nome, ordem, nulidade e PK. Seus 15+19 testes
+offline adjacentes passaram, sem exercitar V105. O callback Maestri direto a
+Runtime recusou conexão entre terminais; `maestri debug` mostrou daemon local
+saudável, e a revisão foi entregue pelo usuário. Pós-autorização e migrate,
+Banco deve fazer replay exato positivo e replay de mesma fingerprint/release
+com label só por caixa negativo (`EXP_REF_CONTENT_DIVERGENT`) sob rollback,
+contagens/IDs antes/depois e IT selecionada
+`ExpansionLaboratoryReferencesIT`. `New-QualificationPackage.ps1` ainda fixa
+104 migrations/`lastVersion=104`; Runtime deve alinhar o pacote antes de P08.
+Não há aceite físico, P08 integral, produção, remoto, fonte real, clean,
+repair, drop ou retry. Próximo owner: Supervisor revisa bytes, impacto,
+recuperação e plano de readback e decide autoridade física separada.
+
+# P08 — triagem causal de 003/005/030 após V104 — 28/09/2026
+
+O Builder Banco e Persistência investigou os três FAIL originais do checkpoint
+0321 sem reexecutá-los nem alterar migrations aplicadas. O plano versionado e
+as dependências de uma correção constam em
+`docs/runbooks/p08-validadores-versionados-v104-20260928.md`. Os logs FAIL de
+0321 (`003` 11, `005` 505, `030` 28) e os ledgers anteriores permanecem
+intactos; nenhum PASS novo foi atribuído a esses validadores.
+
+- `003` é o contrato literal V2-020b/V003: V024 substituiu
+  `ctl.usp_control_plane_register_source`, preservando ordem comprimento antes
+  de trim, lock antes de relógio, `@now` persistido e comparação BIN2, mas com
+  nomes/formatação novos. Isso explica `CLOCK_AUTHORITY` e `NORMALIZATION`,
+  além de um `COLLATION` de comparação literal. Dos oito `COLLATION` restantes,
+  cinco são campos da tabela técnica Flyway e **três são desvio real**: V025
+  criou `ctl.execution_audit.status`, `.traversal_verification` e
+  `.failure_category` sem BIN2, contra o manifest control-plane. O catálogo
+  confirmou a collation herdada `Latin1_General_100_CI_AS_SC`.
+- `005` declara V001–V017 e fecha inventários de objetos/constraints. Em V104,
+  503/505 achados correspondem a migrations posteriores: 333 objetos e 162
+  constraints mapeados, mais `ctl.page_audit` e suas sete constraints de V025.
+  As duas restantes são constraints técnicas de `ctl.flyway_schema_history`.
+  A triagem não constitui inventário fechado V104 nem PASS histórico V017.
+- `030` é a fundação V008 com uma extensão V010 allowlisted. Os 27 objetos
+  extras vêm de V042/V055/V056/V065/V071/V080/V084/V090. O `COLLATION`
+  restante é **desvio real** de `ref.expansion_lab_label.label` em V042; o
+  campo `label` do tipo `ref.expansion_lab_label_batch` também herda CI, e a
+  procedure V042 compara os dois conjuntos por `EXCEPT`.
+
+Provas offline: `Test-ControlPlaneManifest.ps1`,
+`Test-ProgressiveDataGate.ps1` (104 migrations/baseline) e
+`Test-GovernedReferencesManifest.ps1` passaram em PowerShell 7.6.6, cada qual
+na própria camada; o teste causal privado rejeitou três mutações de ordem e
+comparação V024 e reconciliou as contagens 505/28. O teste
+`Test-Bloco60SqlContract.ps1` falhou em expectativa histórica de sufixo do
+baseline/HANDOFF_PATH diante do baseline V104; recibo preservado, sem usar
+esse FAIL para aceitar nem rejeitar as collations atuais. Recibos privados:
+`p08-triage-0322-causal-offline.out` SHA-256
+`48DECB874F4DB0D9F3013637ED5BF50A01F800D938878A2F3DF68D1F6FA561E9`,
+`p08-triage-0322-origin-map-v2.json` SHA-256
+`5C6141AC98D004D33CFA80B1224B29E1ED40CC1E22C9B5C6CAA5D0F6D8D3DA87`,
+e `p08-triage-0322-b60-offline.out` SHA-256
+`E05E4D1E52DB00BBAE49B83997726289D274DD81C40C9944D10C4367F917D35A`.
+
+Como único executor SQL, fiz apenas duas consultas diagnósticas somente
+leitura, cada uma com preflight `master`/alvo, reserva e readback novos no
+ledger `target/shadow-local-rebuild-20260928-01/p08-triage-0322-ledger.jsonl`
+SHA-256 `5A19AD1720B3BDE5DBDC4387DBFDC50EEA1F32879A5F78CBE6B7C9780F7CB9E4`.
+Alvo `lpc:localhost/ETL_SISTEMA_V2_SHADOW`, Windows auth, serviço PID 20404,
+somente `::1:1433` e `127.0.0.1:1433`; consultas exit 0. A segunda confirmou
+zero linhas em `ctl.execution_audit`, `ref.expansion_lab_label` e releases
+`EXPANSION_LABELS`, índice/checks de auditoria e procedure dependente do TVP.
+Dois preflights iniciais da segunda consulta recusaram somente diferenças de
+formatação/BOM do `sqlcmd` antes da reserva; outputs preservados. Após ajustar
+o invocador, o snapshot pós-consulta foi byte-idêntico ao de 0321: 105/104/0
+histórico, 1.819 objetos, sete principals e schemas, 247 tabelas, 146 linhas
+agregadas, auditorias 0/0; SHA-256
+`78ED7BD652FD28452C861AEC5A36CF3877422AAC8AC1096C2F5A8136FE892B7B`.
+
+**Decisão/limite:** preservar 003/005/030 como provas históricas, criar
+validador novo de V104 com inventário independente e manter as quatro
+collations reais como FAIL até V105 própria, revisada e autorizada para bytes,
+alvo, impacto e recuperação. Nenhum V105 foi criado/aplicado e nenhum
+validador falho foi repetido. Sem reset, identidade nova, DDL/DML, fonte real,
+remoto ou produção. P08 e os aceites P01–P33 seguem abertos; próximo owner:
+Supervisor decide autorização/ordem para V105 e critério V104 com revisão de
+Runtime na dependência TVP/JDBC. Checkpoint 0322 registra a sequência.
+Após a sincronização, `Test-TrilhaPreparation.ps1` passou em PowerShell 7.6.6
+(33 etapas, 48 IDs abertos, nove pacotes, sem SQL/rede/Maven); recibo SHA-256
+`B631C3CF43CFD377A3CB36774F1CF30171075154BF66E01D6B783E164225D75C`.
+`git diff --check` e UTF-8 estrito dos cinco documentos da unidade passaram.
+
+# P08 — validadores pós-migration e IT JDBC de auditoria local — 28/09/2026
+
+O Builder Banco e Persistência, único executor SQL e dono do ledger físico, partiu
+do checkpoint 0320: `localhost/ETL_SISTEMA_V2_SHADOW` contém 105 linhas de
+histórico Flyway (uma `SCHEMA`, 104 `SQL` bem-sucedidas, zero falhas). A decisão
+atual do Supervisor **veda** executar `013`, `015`, `023`, `031`, `032` e `036`
+de `database/validation/`: todos incluem o reset histórico incompatível com as
+104 migrations presentes e contêm `CREATE USER` fora da exceção estrita V002.
+Nenhum desses scripts, reset, `clean`, `repair`, `drop` ou retry foi executado.
+
+Classificação estática do `001_validate_schema_foundation.sql` confirmou apenas
+leituras de catálogo/permissão e inserções em variáveis de tabela para agregar
+falhas; SHA-256 `A6814EE8662495DAEB3B97A542A40C9B912E75565BE8D7264285002DCE5DCFB1`.
+Preflight novo com `sqlcmd -E -C` em `lpc:localhost/master` e no alvo explícito
+saiu 0/0; serviço SQL PID 20404 tinha somente `::1:1433` e
+`127.0.0.1:1433`. O primeiro comando de apresentação dos listeners usou
+`Join-String`, ausente no PowerShell 5.1; a comparação por conjunto e os
+preflights SQL passaram, e a apresentação foi corrigida antes da reserva.
+`001` foi executado **uma vez**, exit 0, com mensagem de sucesso; readback
+autoritativo idêntico ao anterior: 105/104/0 no histórico, 1.819 objetos,
+sete principals e schemas V2, 247 tabelas, 146 linhas agregadas,
+`ctl.execution_audit=0` e `ctl.page_audit=0`.
+
+Entre 28 arquivos `*validate*.sql`, cinco wrappers `showplan` incluem reset
+histórico e não são elegíveis neste banco; `053` pressupõe dois logins/usuários
+Windows não provisionados nem autorizados. Os 22 demais validadores estruturais
+foram executados individualmente, com classificação estática, preflight,
+reserva e readback próprios; `061` aguardou o término da IT Java/JAR de
+rollback, conforme sua pré-condição. **19 passaram e três falharam**, todos
+sem delta nas contagens, histórico, principals ou objetos:
+
+- `003`: exit 1, 11 divergências (`CLOCK_AUTHORITY` 1, `COLLATION` 9,
+  `NORMALIZATION` 1); o recibo inclui colunas do Flyway e auditoria.
+- `005`: exit 1, 505 divergências (`CONSTRAINT` 171, `OBJECT` 334) no inventário
+  progressivo diante do schema V001–V104.
+- `030`: exit 1, 28 divergências (`COLLATION` 1, `OBJECT` 27) em referências
+  governadas e extensões posteriores.
+
+Essas falhas são gates reais abertos; sua causa/expectativa deve ser avaliada
+contra as migrations atuais antes de corrigir um validador. Os outros 19
+resultados não promovem aceite integral P08. Recibos privados incluem os
+outputs originais `003`, `005`, `030`, o resultado resumido e o ledger
+`target/shadow-local-rebuild-20260928-01/p08-validation-0321-ledger.jsonl`
+SHA-256 `BE82739B1F127109EED4158FAB96699373F59980674AF4E88093CAD288E7D976`.
+
+Após preflight/reserva próprios, foi executada uma única IT selecionada
+`ShadowAuditLocalIntegrationIT` em Maven offline/JDK17, perfil
+`shadow-local-integration`, flag `shadow.local.integration.enabled=true` e URL
+exata local somente no ambiente do processo. A fonte atual da IT SHA-256
+`2181D321133604F2A584C18B69D3DB03C042D44091837EEC096800474A5990AE`
+usa gateway sintético, uma conexão compartilhada que bloqueia `commit` e
+faz `ROLLBACK`; a comparação agora usa contagens agregadas antes/depois.
+Failsafe: **3 testes, zero falhas, erros ou skips**, `BUILD SUCCESS`; Spotless
+e Checkstyle passaram nesse lifecycle. Log privado SHA-256
+`918F8BD108B3A2F47F9D7BEA6A8A6CE0A3038BB6CA622FD2983091273E6C1E7D`.
+Readback independente `master`/alvo saiu 0/0, listeners inalterados e snapshot
+byte-idêntico ao anterior: auditorias 0/0, histórico 105/104, objetos 1.819,
+sete principals/schemas. `ShadowJdbcTransportReadOnlyIT` não foi executada
+porque seu contrato exige schema vazio. Não houve fonte real, remoto,
+produção, deploy ou cutover. P07/P08 e P01–P33 permanecem abertos; próximo
+responsável: Supervisor coordena com Runtime a evidência agregada da IT e a
+triagem dos três validadores falhos, sem ampliar a exceção de usuários.
+Após esta sincronização, `Test-TrilhaPreparation.ps1` sob PowerShell 7.6.6
+passou com 33 etapas, 48 IDs abertos e nove pacotes; log SHA-256
+`B631C3CF43CFD377A3CB36774F1CF30171075154BF66E01D6B783E164225D75C`.
+`git diff --check` e leitura UTF-8 estrita dos quatro documentos passaram.
+
+# P08 — V001–V104 aplicadas uma vez no shadow local; Flyway validate passou — 28/09/2026
+
+Com a exceção estrita V002 registrada em `AGENTS.md` §1 e no estado abaixo
+**antes do efeito**, o Builder Banco e Persistência concluiu somente o gate
+físico de migrations P08. A ferramenta local
+`target/ci-p10-20260925-01/pwsh-tool/pwsh.exe` reportou PowerShell 7.6.6,
+assinatura Microsoft válida e SHA-256
+`BFB46AF89433268872DDB43D1CA7A3F433452EE91ED356A9786940F90118E285`;
+o ZIP local coincidiu com o digest do metadado oficial preservado. O
+`Test-ProgressiveDataGate.ps1` original passou nesse executável, sem SQL;
+recibo SHA-256 `1BB674AF268604948C4C62C5139BF3DB8D220BCB5DF8AD563D9F58467ED44BD1`.
+Todos os 104 scripts V001–V104 (3.322.636 bytes) e o `pom.xml` continuaram
+byte a byte iguais ao espelho v4 do gate `flyway:info`; V002 SHA-256
+`6E962AF63A639380CD84E479C94F003DD80497FB1632C9CF29BD9983A94772B2`.
+A varredura de DDL ativo encontrou somente o `CREATE USER` autorizado de
+V002, nenhum `CREATE LOGIN`/`CREATE CREDENTIAL`.
+
+Preflight novo em `lpc:localhost/master` e no banco explícito
+`ETL_SISTEMA_V2_SHADOW` passou com `sqlcmd -E -C`: Express local sem cluster,
+alvo online com dois arquivos, collation esperada, nenhum schema/objeto/
+principal V2 ou histórico; serviço Running/Manual PID 20404 e listeners
+apenas `::1:1433` e `127.0.0.1:1433`. O primeiro guard de socket recusou
+somente a ordem textual dos endereços **antes de qualquer SQL**; leitura
+isolada confirmou o conjunto correto e a reserva seguinte usou comparação
+por conjunto. Ambos os attempts e a correção estão preservados.
+
+Em gate reservado distinto, uma única invocação offline JDK17/Maven/Flyway
+9.22.3 `flyway:migrate` no espelho byte-idêntico saiu 0; log privado SHA-256
+`A33E8E4D60728C05EB279F93B7CC6E249D8E13E380034881C5EFC9F1699AF6D4`.
+O primeiro assert de readback recusou `HISTORY_COUNT_MISMATCH` porque exigia
+104 linhas totais e omitia a marca técnica `SCHEMA`; não houve retry de
+migration. Consulta diagnóstica autoritativa mostrou **105 linhas = uma
+`SCHEMA` + 104 `SQL` bem-sucedidas**, zero falhas, 104 versões numéricas
+distintas de 1 a 104, sete schemas V2 todos pertencentes a
+`v2_schema_owner` com `authentication_type_desc=NONE`, 1.819 objetos de
+usuário e sete principals V2; `master` confirmou zero login de mesmo nome.
+Em novo gate, uma única chamada `flyway:validate` saiu 0; log privado SHA-256
+`58F8A69C00DFA127DA98CE72A3614648E526245E86171C62A14AC00E358F7D14`.
+Readback pós-validate em `master`/alvo saiu 0/0 com os mesmos 105/104,
+1.819 objetos e sete schemas/ownership; PID e dois listeners loopback
+permaneceram estáveis. O teste com `-C` não é aceite TLS P12.
+
+Ledger físico terminal, sem reescrever o 0319:
+`target/shadow-local-rebuild-20260928-01/p08-migrate-0320-ledger.jsonl`,
+SHA-256 `C5F2144D825499FCA14B79ACAF09826083C95FB4C1F25212D3B02CFBE775B385`.
+Não houve `clean`, `repair`, `drop`, retry, fonte real, banco remoto/produtivo,
+login, senha, credencial, associação de identidade, deploy ou cutover.
+**Limite:** isto comprova migration e validate locais, não P07/P08 integrais,
+paridade, auditoria JDBC pós-schema, pacote ou aceites P01–P33. Varredura
+estática identificou seis scripts `database/validation/` contendo
+`CREATE USER`; nenhum script de validação SQL foi executado. Esses seis
+exigem revisão/autorização separada; a exceção V002 não os cobre.
+Após a sincronização documental, `Test-TrilhaPreparation.ps1` sob PowerShell
+7.6.6 passou com 33 etapas, 48 IDs abertos e nove pacotes, sem SQL/rede/Maven;
+log SHA-256 `B631C3CF43CFD377A3CB36774F1CF30171075154BF66E01D6B783E164225D75C`.
+`Invoke-OfflineSecretScan.ps1` passou em 4.058 candidatos (4.057 textos,
+um binário verificado), zero finding, oversized ou conteúdo não inspecionado;
+log SHA-256 `B6161DEAA6ABE577BDC36D291984CD6CF95C118D41C60CF9667566F2B33620B1`.
+Nenhum build Java amplo foi repetido nesta unidade de SQL/documentação;
+as mudanças Java dos outros Builders conservam suas provas próprias.
+
+# P08 — exceção V002 registrada antes de migration; gate físico pendente — 28/09/2026
+
+O Supervisor, sob delegação expressa do usuário nesta sessão, autorizou
+**somente** `CREATE USER v2_schema_owner WITHOUT LOGIN` dentro da migration
+versionada e inalterada `V002__create_v2_database_roles.sql`, exclusivamente
+em `localhost/ETL_SISTEMA_V2_SHADOW`, para ownership dos sete schemas V2
+conforme V002 e ADR 0013. A exceção foi incorporada a `AGENTS.md` §1 antes
+de qualquer `flyway:migrate`. Ela não autoriza login, senha, credencial,
+associação de identidade, usuário adicional, remoto ou produção. Scripts de
+validação que criem usuários temporários continuam fora do escopo e exigem
+revisão separada. O bloqueio de autorização apontado no checkpoint 0319 foi
+resolvido para V002 apenas; a fotografia histórica abaixo permanece intacta.
+
+**Estado atual desta retomada:** ainda não houve migration nem `validate`.
+Antes do efeito, falta executar o checker progressivo original em PowerShell 7
+local verificável (sem contorno), conferir diff e 104 bytes, refazer preflight
+`master`/alvo/listeners, impacto/recuperação e reservar gate físico novo. Se
+tudo passar, executar uma única chamada `flyway:migrate` V001–V104, reconciliar
+histórico/catálogo no banco autoritativo e só então reservar `flyway:validate`
+em gate distinto. Falha ou resposta incerta preserva estado e recibos, sem
+`clean`, `repair`, `drop` ou retry. P07/P08 e P01–P33 não recebem aceite por
+esta decisão documental.
+
+# P08 — preflight V001–V104 passou, migration suspensa por conflito de autorização — 28/09/2026
+
+O Builder Banco e Persistência retomou após o checkpoint 0318 como único executor
+SQL e dono do ledger físico. A instrução atual autorizou qualificar P08 após
+`flyway:info`, com preflight/reserva novos e `flyway:migrate` V001–V104 somente
+se autorização, alvo, bytes, impacto e recuperação conferissem. O alvo lido com
+`sqlcmd -E -C` foi exclusivamente `lpc:localhost/master` e o banco explícito
+`ETL_SISTEMA_V2_SHADOW`; `-C` corresponde apenas ao teste local com certificado
+confiado explicitamente, sem aceite TLS P12. O serviço `MSSQLSERVER` permaneceu
+Running/Manual, PID 20404, com listeners apenas em `::1:1433` e
+`127.0.0.1:1433`. O preflight v3 confirmou instância Express local sem cluster,
+banco online, dois arquivos, collation `Latin1_General_100_CI_AS_SC`, `ctl`
+ausente, zero objetos de usuário e histórico Flyway ausente. Readback separado
+repetiu master/alvo com exit 0/0 e confirmou ausência de delta.
+
+Os 104 scripts ativos V001–V104 são contíguos, somam 3.322.636 bytes e são
+byte a byte iguais aos do espelho v4 usado no gate anterior; `pom.xml` mantém
+SHA-256 `9D1313FEBF940EE4617547AF9F8452D169C9A12350E5937D4D7700E691215A98`.
+O baseline referencia os 104 nomes exatamente uma vez. JDK 17, JAR e DLL
+12.8.2 conferem com os hashes do checkpoint 0318. O checker
+`Test-SchemaFoundationManifest.ps1` passou sob Windows PowerShell 5.1; o
+`Test-ProgressiveDataGate.ps1` não chegou a validar porque seu parser nessa
+versão recusou a concatenação em `Test-GovernedReferencesManifest.ps1`. O
+`pwsh` 7 não estava disponível nesta sessão. Preservam-se a lacuna e o log,
+sem converter a checagem parcial em PASS do gate progressivo. As primeiras
+leituras SQL também preservam duas falhas sem efeito: v1 recusada no cliente
+por certificado não confiado sem `-C`; v2 recusada pelo parser SQL por alias
+reservado `clustered`. A v3 usou reserva própria e passou.
+
+**Condição de parada:** `V002__create_v2_database_roles.sql:30` contém
+`CREATE USER v2_schema_owner WITHOUT LOGIN` e transfere a propriedade dos sete
+schemas V2 para esse principal. `AGENTS.md` §1 permite migrations versionadas
+no shadow mas também proíbe criar usuário; a autorização condicional atual não
+resolve explicitamente esse impacto. Por integridade, nenhuma migration,
+`flyway:validate`, `repair`, `clean`, DDL, DML ou prova sintética pós-schema foi
+executada. Não há rollback físico a fazer; o banco continua vazio. Para
+prosseguir, o usuário/owner precisa decidir expressamente se o usuário interno
+sem login de V002 está coberto ou fornecer migration versionada revisada.
+Depois da decisão, repetir preflight e reserva em gate novo; `migrate`,
+`validate`, inventário e validações rollback-only continuam separados.
+Ledger privado novo `target/shadow-local-rebuild-20260928-01/p08-migrate-0319-ledger.jsonl`
+SHA-256 `AC1DFAA91EC56A1C701D29F59144FE1860F82F1075D5AAF9701C80A98223F12C`;
+o histórico 0318 e todos os attempts falhos permanecem intactos.
+
+Handoffs paralelos conferidos sem promover aceite: Fontes e Contratos encerrou
+read-only sem fatia local elegível P09–P15; G01/G03 externos seguem. Regras de
+Negócio alterou `LigarReferenciaTemporalColeta.java` e
+`ColetaTemporalLinkTest.java`: tempo nativo Data Export válido com
+`statusAtUtc` de referência nulo retém `DATA_EXPORT_TIME_RETAINED`; RED
+`REFERENCE_INVALID`, GREEN 56 focados e prova sintética foram reportados,
+com XML local da classe mostrando 29/29, zero falhas/erros; P16 permanece
+aberto. Runtime e Qualificação alterou `QualificationLaboratoryMain.java` e
+criou `QualificationCommandOptInTest.java`: `run`/`resume`/`worker` exigem as
+duas travas antes de acessar o pacote; RED `QUAL_PACKAGE_PIN` prematuro,
+GREEN nove focados e Spotless/Checkstyle offline foram reportados, com XML
+local da nova classe 1/1, zero falhas/erros. Os diffs estreitos e
+`git diff --check` passaram na revisão de integração; nenhuma dessas provas
+fecha P08, P16 ou o gate físico entre componentes. Não houve produção, remoto,
+fonte real, credencial, deploy ou cutover.
+`Test-TrilhaPreparation.ps1` recusou antes da validação por exigir PowerShell
+7, indisponível neste terminal (Windows PowerShell 5.1); a trilha permanece
+sem PASS novo. `graphify update .` saiu 0 após os handoffs de código.
+
+# Governança de quatro Builders — 28/09/2026
+
+`AGENTS.md` recebeu responsabilidades, editor único por arquivo compartilhado e handoff manual sem terminal em espera, conforme limitação da versão instalada do Maestri. Alteração apenas documental; nenhuma migration, SQL, prova técnica, gate ou aceite foi executado ou marcado nesta unidade. O estado P08 abaixo permanece vigente.
+
+# P08 — JDBC Windows auth e Flyway info locais passaram; schema ainda vazio — 28/09/2026
+
+O usuário encerrou a frente deste chat após a unidade JDBC e, se seguro,
+`flyway:info`. **Não iniciar migration, campanha P07/P08 ampla ou nova frente
+nesta sessão.** A autorização anterior para migrations V001–V104 permanece
+registrada, mas qualquer agente sucessor deve reavaliar preflight, reserva,
+alvo/impacto/recuperação e critério antes de efeito. Nenhum aceite integral
+P07/P08 ou P01–P33 foi marcado.
+
+O primeiro launcher JDBC falhou **antes de iniciar Java** por usar
+`ProcessStartInfo.ArgumentList` ausente no PowerShell 5.1; apenas a DLL
+12.8.2 foi copiada para `target/native`. O Supervisor rejeitou o launcher v2
+porque contornava perfil Maven, URL de ambiente e JDK 17; ele só teve
+self-test pré-conexão e nunca foi usado para JDBC. Os attempts, DLL e recibos
+foram preservados. O JDK 17.0.20.1+1 ZIP oficial foi baixado e extraído em
+`LOCALAPPDATA` isolado, tamanho 190.817.615 e SHA-256
+`E53A79C3C3D86865BD7E787903884331068E71321714FFD44F145785AFFC7CB0`,
+sem instalador, UAC ou alteração global de PATH.
+
+Foi adicionada `ShadowJdbcTransportReadOnlyIT` ao perfil opt-in
+`shadow-local-integration` de `pom.xml`. Ela exige as duas travas Maven,
+obtém somente `V2_SHADOW_JDBC_URL` do ambiente e passa pelo validador P08
+`QualificationConfiguration.validatedJdbcUrl` antes de `DriverManager`;
+aceita apenas a máquina local em ASCII, confirma banco/TCP/endereço loopback/
+porta/objetos e executa `rollback()` em `finally`. O bytecode do JDK 17
+mostrou chamadas de rollback no caminho normal e no handler de exceção.
+No espelho isolado v4, Maven offline JDK17 passou: os 3 testes
+`QualificationJdbcTargetTest` incluem recusas de porta, `encrypt=false` e
+certificado ausente; na IT, o teste ASCII aceitou `Lucas`/`LUCAS`, recusou
+grafias Unicode parecidas, e a conexão ficou suspensa sem URL (1 passou,
+1 pulou). Formatter, compilação e cópia Maven da DLL 12.8.2 passaram.
+
+O primeiro attempt físico Maven opt-in conectou por Windows auth ao banco
+exato, mas falhou no assert case-sensitive `LUCAS` versus `Lucas` antes dos
+asserts de transporte. Readback preservou PID 20404, somente
+`::1:1433`/`127.0.0.1:1433`, banco com zero tabelas/views/procs de usuário e
+sem histórico; não houve retry. Fonte, report e log desse teste falho foram
+preservados. Após correção ASCII/teste offline, o **único reattempt distinto**
+autorizado passou no perfil Maven/JDK17 com URL apenas no processo,
+`localhost` sem porta, `encrypt=true` e `trustServerCertificate=true` como
+candidato local (não aceite TLS P12): IT 2/2, zero falhas/skips. Ela confirmou
+JDBC TCP loopback e alvo vazio, com rollback. Readback independente novamente
+confirmou serviço/listeners e banco sem delta.
+
+Em gate separado, `flyway:info` Maven 9.22.3 via Windows auth saiu 0 e
+identificou **104 migrations pendentes V001–V104**. Readback independente
+confirmou `ctl` ausente, sem `flyway_schema_history`, zero objetos de usuário,
+master/alvo exatos e listeners locais inalterados. Nenhum `migrate`, `validate`
+físico, validação sintética ou IT de auditoria pós-schema foi executado.
+Ledger privado `target/shadow-local-rebuild-20260928-01/pin-1282-jdbc-flyway-ledger.jsonl`
+SHA-256 `53E780FEE03643FD752812F8DC9AA04923E1C48C42F0497FAE327923C6485EE3`;
+o log privado Flyway contém a URL local e não deve ser copiado para material
+público. `pom.xml` SHA `9D1313FEBF940EE4617547AF9F8452D169C9A12350E5937D4D7700E691215A98`;
+IT SHA `53C27AE18823D91AE94841123DE891A53ECE63CCE1604115853AF3369B57F1A6`.
+Checkpoint 0318 contém recibos, limites e handoff.
+
+# P08 — SQL TCP local restrito a loopback comprovado — 28/09/2026
+
+Com autorização explícita nova para **uma** tentativa, o Builder executou
+`docs/runbooks/p08-loopback-wmi-flag-proposta-20260928.md` em attempt distinto
+v3. Preflight read-only confirmou máquina `LUCAS`, `MSSQLSERVER` Running/Manual
+PID 2116, TCP/NP desligados, `ListenOnAllIPs=1`, 24 entradas com endereço,
+IP19=`::1`/IP20=`127.0.0.1` ativos/desabilitados na porta 1433, outras 22
+desabilitadas e zero listeners. `lpc:localhost/master` confirmou alvo exato
+ONLINE/dois arquivos; `ETL_SISTEMA_V2_SHADOW` tinha zero tabelas/views/procedures
+de usuário. Helper v3 SHA-256
+`E153ED7BC58014C5D003E48E32ADFF987662AEAA3FEA8977330BBE08FE2B2AA0`,
+launcher distinto e reserva foram registrados antes do efeito.
+
+Uma elevação iniciou o helper (exit 0). Ele aplicou `SetFlag(false)` a
+`ListenOnAllIPs`, `SetEnable()` somente às instâncias IP19 e IP20,
+`SetEnable()` ao protocolo TCP por último e **um** restart de `MSSQLSERVER`.
+Readback independente confirmou PID novo 20404, Running/Manual, TCP=true,
+NP=false, `ListenOnAllIPs=0`, registro/WMI IP19/IP20 habilitados e demais IPs
+desabilitados; o processo SQL possui exatamente dois listeners, `::1:1433` e
+`127.0.0.1:1433`, sem bind wildcard/remoto/porta extra. `master` e alvo exato
+passaram novamente, alvo ainda 0/0/0 objetos de usuário. Nenhuma regra de
+firewall, conexão remota, schema ou dado foi alterado. Ledger privado
+`target/shadow-local-rebuild-20260928-01/pin-1282-uac-v3-ledger.jsonl`
+SHA-256 `70C5FB2E32CDE84457EBE930324DF1FC3605F3816AA2AB3B3DA999A09EF0CA74`.
+Os attempts v1/v2 e suas recusas ficaram preservados. Isto conclui apenas o
+gate de **transporte SQL local loopback**; JDBC Windows auth, Flyway,
+migrations/validações/IT e P07/P08 integrais ainda não foram executados nesta
+unidade. Próximo gate separado: prova JDBC/Flyway read-only com JAR/DLL 12.8.2
+e URL de processo validada, sem avançar se houver deriva.
+
+# P08 — alternativa WMI tipada preparada sem novo efeito — 28/09/2026
+
+Unidade offline `P08-WMI-METHOD-0316`: após o attempt v2 sem efeito, a inspeção
+read-only do namespace SQL Server 17 confirmou `SetFlag(BoolValue:Boolean)` e
+`SetNumericalValue(NumValue:UInt32)` em `ServerNetworkProtocolProperty`.
+`ListenOnAllIPs` tem `PropertyType=0`, `PropertyValType=4`, valor 1; `Enabled`
+também tem tipo 0/valor 0, ao passo que `KeepAlive` tem tipo 1/valor 30000.
+A classe `ServerNetworkProtocolIPAddress` expõe `SetEnable()`/`SetDisable()`;
+há instâncias únicas `IP19`/`IP20`, mapeadas por propriedade de endereço a
+`::1`/`127.0.0.1`, ativas/desabilitadas, porta 1433 e dinâmica vazia. Das 24
+entradas com endereço, as outras 22 têm `Enabled=0`. TCP/NP seguem off.
+Referências oficiais documentam `SetFlag` para flags, `SetEnable` para IP e
+protocolo, e `Listen All=No` para configuração por IP.
+
+Conclusão **demonstrada**: `SetNumericalValue` retornou
+`0x80041024` (`WBEM_E_PROVIDER_NOT_CAPABLE`) para `ListenOnAllIPs` e não
+alterou estado. A diferença entre o setter numérico e a natureza booleana da
+opção sugere erro de método; `SetFlag(false)` seguido de `SetEnable()` apenas
+para `IP19`/`IP20` é alternativa tipada e documentada, **ainda não executada
+nem comprovada nesta instância**. Proposta exata, guardas antes/depois de cada
+efeito, prova de sockets exclusivamente loopback e rollback condicionado em
+`docs/runbooks/p08-loopback-wmi-flag-proposta-20260928.md`. Recibo sanitizado
+privado `target/shadow-local-rebuild-20260928-01/pin-1282-wmi-method-analysis-0316.json`.
+O ledger e helpers dos attempts 0313/0315 ficaram intactos. Nenhum UAC,
+escrita WMI/registro, restart, SQL DDL, JDBC ou migration nesta unidade.
+P07/P08 e P01–P33 permanecem abertos; efeito futuro exige revisão da proposta,
+novo sinal do operador, preflight e reserva distintos.
+
+# P08 — segunda elevação iniciou; provedor WMI recusou configuração — 28/09/2026
+
+O operador corrigiu expressamente o histórico: **não cancelou** a tentativa
+0313. O evento PowerShell 4100 conserva a mensagem literal retornada pelo
+Windows, mas não prova que o prompt foi exibido, visto ou recusado por pessoa.
+Investigação offline/read-only: a sessão é console 3 com Explorer, token de
+integridade média e grupo Administradores somente para negação; UAC está ativo,
+`PromptOnSecureDesktop=1`, `ConsentPromptBehaviorAdmin=5`, AppInfo Running.
+Nenhum evento correlato na janela da tentativa antiga nos canais UAC,
+Winlogon, UserConsentVerifier, Shell-Core, Application ou System prova
+apresentação/resposta do prompt. A hipótese de apresentação inacessível do
+desktop seguro fica delimitada, sem causa específica demonstrada. Não foi
+alterada política de UAC.
+
+Após novo sinal explícito de prontidão, preflight read-only WMI/serviço/socket
+passou: `MSSQLSERVER` Running/Manual PID 2116, TCP/NP desligados,
+`ListenOnAllIPs=1`, `::1`/`127.0.0.1` presentes e desabilitados, zero
+listeners. `lpc:localhost/master` e alvo exato passaram: SQL Server
+17.0.1000.7, dois arquivos, zero tabelas/views/procedures de usuário.
+Attempt distinto `LOOPBACK_UAC_V2` foi reservado em ledger novo. A chamada
+direta ao launcher `.ps1` foi recusada pela política de scripts **antes de
+`Start-Process`/UAC**; execução posterior com `-ExecutionPolicy Bypass` somente
+no processo invocador usou a mesma reserva e fez **uma única elevação** com
+janela normal. `Start-Process` retornou processo iniciado; recibo de entrada
+do helper confirmou sessão 3. O helper elevado parou no primeiro
+`SetNumericalValue(ListenOnAllIPs,0)` com retorno `2147749924`
+(`0x80041024`, `WBEM_E_PROVIDER_NOT_CAPABLE`). A classe/método WMI existem,
+o provedor `MSSQL_ManagementProvider` iniciou sem erro, mas recusou a operação;
+não houve segunda escrita WMI nem restart.
+
+Readback read-only após a falha confirmou **nenhum efeito observado**: mesmo
+PID 2116, serviço Running/Manual, TCP/NP false, `ListenOnAllIPs=1`, nenhum IP
+habilitado, zero listeners SQL/1433, registro TCP Enabled=0, e
+`master`/alvo exato novamente passaram com zero objetos de usuário. Ledger
+privado `target/shadow-local-rebuild-20260928-01/pin-1282-uac-v2-ledger.jsonl`
+SHA-256 `8166F314DE9816FAA4F0DD7DA547679F3F5D0C52812E42BC1145B42BC6600D61`;
+helper original/ledger 0313 preservados. A causa demonstrada da segunda
+falha é a recusa do provedor WMI nessa propriedade; a razão interna dessa
+recusa ainda não foi demonstrada. Próximo experimento seguro: comparar somente
+em leitura a capacidade do provedor e a configuração SQL Server com o método
+suportado pelo Configuration Manager; não reexecutar `SetNumericalValue` como
+sonda. O limite de uma elevação foi consumido. **Parada sem retry**: nenhum
+JDBC, Flyway, migration, IT ou promoção P01–P33.
+
+# P08 — diagnóstico causal offline da tentativa UAC de loopback — 28/09/2026
+
+Unidade `P08-UAC-CAUSAL-0314`: a tentativa reservada às 19:05:53 foi
+reexaminada sem novo UAC nem acesso a serviço, TCP, SQL, JDBC ou migrations.
+O evento local `Microsoft-Windows-PowerShell/Operational` 4100, record ID
+47081, às 19:08:05.529 -03:00, registra o erro completo de `Start-Process`:
+`InvalidOperationException,Microsoft.PowerShell.Commands.StartProcessCommand`
+e **“A operação foi cancelada pelo usuário.”** A captura anterior mostrou só
+o tipo da exceção; isso ocultou a causa reportada pelo Windows. O executável e
+script de destino existem, o conjunto de parâmetros é válido para
+`UseShellExecute` em PowerShell 5.1, e o helper original conserva SHA-256
+`6259DF3F9574C0FF8F2360B2585D9934FF5687FF395F9AA6E519FA3D5A82EC89`
+com zero erros de parser. Não há recibo nem evento de execução do helper.
+
+Classificação corrigida: **cancelamento da solicitação de elevação reportado
+pelo Windows antes do helper**. O evento não prova qual gesto humano ou condição
+da interface produziu o cancelamento; não há evidência de defeito causal
+no comando ou helper, nem base para alegar recusa deliberada do operador.
+O readback do checkpoint 0313 continua sendo a prova de nenhum efeito
+observado; ele não foi repetido nesta unidade. O ledger e o attempt originais
+ficaram intactos. Recibo sanitizado:
+`target/shadow-local-rebuild-20260928-01/pin-1282-uac-diagnostic-0314.json`.
+Melhoria identificada para uma futura chamada autorizada: capturar mensagem,
+`FullyQualifiedErrorId` e código nativo quando existir, sem dados sensíveis;
+isso aumenta a visibilidade, mas não corrige um cancelamento de UAC. Não há
+correção mínima comprovada que justifique outro helper ou retry agora.
+Próximo gate físico exige novo sinal de prontidão do operador, preflight
+read-only atual e reserva distinta. P07/P08, P01–P33 e aceites externos seguem
+abertos; nenhum gate físico avançou.
+
+# P07/P08 — pin shadow 12.8.2 offline; UAC de loopback sem efeito — 28/09/2026
+
+Decisão explícita do usuário em 28/09 autorizou trocar o par shadow JDBC
+12.8.1→12.8.2 e prosseguir somente em `localhost/ETL_SISTEMA_V2_SHADOW`.
+`AGENTS.md`, os perfis `shadow-local-integration` e
+`shadow-migrations-windows-auth`, guardas ativos e `PackageShadow` agora
+exigem `mssql-jdbc:12.8.2.jre11` e `mssql-jdbc_auth:12.8.2.x64`.
+Lock/README/runbook 12.8.2 são novos; lock, README, POMs e recibos 12.8.1
+ficaram históricos. O lock novo tem nove dependências: sete não JDBC iguais ao
+histórico e duas entradas JDBC iguais ao lock normal, com 18 hashes de
+artefato/POM, tamanhos e origem Maven Central conferidos. Os três POMs efetivos
+(IT shadow, migrations e normal) resolveram o par 12.8.2. O comando
+`mvnw.cmd` direto foi recusado duas vezes pelo parsing Windows de `-D`; a
+chamada Java direta ao wrapper passou sem executar build/SQL nessas recusas.
+
+Dois builds `PackageShadow` A/B isolados saíram 0, variante
+`SHADOW_LOCAL_12_8_2`, revisão
+`8617f00768d0ef1f75eb7fb2ca7dd75406eb54fe0cc5ed3c58b83fadef70d97f`,
+manifesto `ea623a77fd342d676414e80671daa4a0e5cbb22d7defe976f8d917ad23576918`
+e ZIP SHA-256 idêntico
+`C7BDFA580F6EF206B125D73064A29F2E080A5C9B38E0F4F3E321D6A6149F5DFB`;
+186 membros/nove dependências/2.159 inputs. Extração verificada A/B,
+`config-validate`/`dry-run`/`inspect`/`plan` 8/8 e 21/21 recusas dirigidas
+passaram sem controle nem JDBC. O estado do pacote continua
+`PACKAGED_NOT_SMOKE_QUALIFIED`. `clean verify` v1 em espelho novo falhou:
+`JAVA_TOOL_OPTIONS` do invocador poluiu JSON de dois subprocessos IT e a
+cobertura `bootstrap` caiu a 0,78. O attempt foi preservado. Em espelho v2,
+sem essa variável herdada, `clean verify` JDK17 offline passou 2.360
+Surefire (zero falha/erro, cinco skips), seis ITs offline (zero falha/erro),
+formatter/Checkstyle e JaCoCo. PMD examinou 656 fontes, manteve 36 achados;
+o catálogo local recebeu apenas novos hashes/linhas dos arquivos P29 e a
+disposição 36/36 passou, sem aceite de Segurança. SpotBugs/FindSecBugs atual:
+272 brutos/87 SECURITY/46 Unicode, multiconjunto tipo+classe igual a v102,
+XML SHA-256 `CD2A20624F9057CA6391320469DDCB59145B3D00D5AC26C72D978D02DA7A7CB2`.
+Scan offline de segredos 4.047 candidatos/zero achado, validadores estáticos
+de schema e trilha 33/48/9 passaram. P11 feed/SCA atual e aceite nominal de
+Segurança permanecem externos/abertos; o cache de feed local está ausente.
+
+Preflight read-only `lpc:localhost/master` inicial recusou o predicado de
+collation porque `AUTO_CLOSE=ON` expõe `sys.databases.collation_name=NULL`
+quando o banco fecha. Consultas de reconciliação mostraram `ONLINE`,
+compatibilidade 170, collation correta ao abrir o alvo e acesso Windows. O
+preflight v2 separou estado/compatibilidade no `master` da collation no alvo;
+ambos passaram: SQL Server Express 17.0.1000.7 local, banco exato ONLINE,
+dois arquivos e zero tabelas/views/procedures de usuário. Migrations V001–V104
+e histórico Flyway continuam ausentes.
+
+O próximo gate exigia habilitar TCP somente em `::1`/`127.0.0.1` via WMI com
+UAC e reiniciar uma vez `MSSQLSERVER`. O lançamento elevado único retornou
+`InvalidOperationException`, sem recibo do helper. A reconciliação read-only
+mostrou mesmo PID 2116, serviço Running/Manual, TCP e Named Pipes desligados,
+`ListenOnAllIPs=1`, ambas as entradas loopback desabilitadas e zero listeners
+SQL; `master`/alvo passaram novamente com zero objetos. Classificação:
+**nenhum efeito observado; UAC cancelado/indisponível ou resposta incerta**.
+Por ordem do usuário, não houve retry. Transporte JDBC, Flyway auth,
+`flyway:info/migrate/validate`, validators físicos e IT/JDBC não ocorreram.
+P07/P08 e P01–P33 integrais continuam abertos. Para retomar a fase física,
+é necessário novo sinal de prontidão do operador para UAC, preflight novo e
+reserva única; não repetir a tentativa atual nem limpar/recriar o banco.
+Recibos privados: `target/shadow-local-rebuild-20260928-01/pin-1282-ledger.jsonl`,
+`pin-1282-*` e `target/macrobloco-qualificacao-pacote-20260928-02/`.
+
+# P29 — classificação ASCII exata de media type e fronteira URI — 28/09/2026
+
+Unidade offline `HTTP-JSON-MEDIA-TYPE-01`, origem: diagnóstico
+`DataExportPageFetch.jsonContentTypeDeclared` e triagem de entradas HTTP P29.
+Contrato afetado: classificação do `Content-Type` de respostas Data Export,
+inclusive template-info pelo executor comum; não altera parsing do body,
+retry, GraphQL nem contrato do fornecedor. Exemplo causal: resposta sintética
+`application/jsonp` com body JSON era marcada como JSON pelo prefixo
+`startsWith("application/json")`. O teste focal foi RED com uma falha de
+asserção/zero erro após uma invocação que parou apenas no formatter. O
+classificador agora separa parâmetros em `;`, exige o token inteiro por
+`Pattern.CASE_INSENSITIVE` ASCII e preserva `APPLICATION/JSON` e
+`application/json; charset=UTF-8`. A contraprova interna com long-s Unicode
+é recusada. Teste focal final 1/1 e regressão dirigida seis classes/49 testes
+PASS em JDK17 offline, sem perfil físico. Responsável de negócio não
+identificado; revisão/aceite de Segurança e release seguem pendentes.
+
+No lote de nove achados `IMPROPER_UNICODE` v96 das classes
+`DataExportClientSettings`, `DataExportProperties` e `GraphQlClientSettings`,
+três testes sintéticos passaram: `URI` com host `localho\u017Ft` não produz
+`getHost()` e os três construtores recusam HTTP; esquema `http\u017F` é
+recusado pelo parser; `HTTP://LOCALHOST` ASCII continua aceito. Isto é
+contraprova técnica limitada a estas três bordas, sem disposição nominal dos
+nove alertas e sem inferir segurança dos outros 37 Unicode. O scanner
+SpotBugs/FindSecBugs v101 identificou um alerta Unicode novo na primeira
+correção, que usava `toLowerCase` após guarda ASCII; esse attempt foi
+preservado. A versão final usa regex ASCII de token exato. Novo espelho v102
+compilou 656 fontes/Checkstyle zero e SpotBugs/FindSecBugs passou com 272
+alertas brutos, 87 SECURITY e 46 Unicode, mesmo multiconjunto tipo+classe
+que v96, sem filtro/supressão/aceite. XML SHA-256
+`02439F26ACAFEFE2E84ACCA42021DC7EB2374B06A6D7CBD0BD9BA140DC613D4E`.
+Recibos privados em `target/shadow-local-rebuild-20260928-01/p29-*`;
+Graphify AST atualizado. P29 e P01–P33 integrais permanecem abertos.
+O scanner offline de segredos concluiu PASS: 4.044 candidatos, 4.043 textos,
+um binário verificado e zero achados. O validador da trilha concluiu PASS:
+33 estágios, 48 IDs abertos e nove pacotes. `git diff --check` e leitura
+estrita UTF-8 sem BOM dos dez arquivos da unidade passaram. Estes recibos
+fecham somente a unidade P29 v102, sem aceite nominal de Segurança.
+
+Revisão factual P07/P08: o UAC foi sinalizado e a instância/banco local vazios
+já foram criados (0311); não são mais os inputs ausentes. `AGENTS.md`, os dois
+perfis shadow e o pacote candidato continuam em 12.8.1, suspenso por
+Segurança; o lock normal global é 12.8.2. Faltam decisão explícita do usuário
+sobre o pin, gates de pacote/SCA atuais, autenticação Flyway revisada, schema
+V001–V104 e prova de transporte JDBC exclusivamente loopback (TCP/NP seguem
+off), antes de P07/P08 físico. Nenhuma migration, IT, JDBC, DLL, banco remoto,
+fonte real, deploy ou cutover ocorreu nesta unidade. Nenhum checkbox foi
+promovido por prova parcial.
+# P07/P08 — instância e banco shadow local materializados — 28/09/2026
+
+O usuário confirmou prontidão para o UAC antes pausado. O Builder executou
+uma única extração elevada da mídia Microsoft já verificada e uma única
+instalação SQL Server 2025 Express x64 (17.0.1000.7) na instância padrão
+`LUCAS/MSSQLSERVER`; ambas saíram 0. `Summary.txt` registrou `Passed`.
+Serviço `Manual` iniciado localmente; TCP e Named Pipes desabilitados, sem
+listener TCP do processo. SHA-256 da mídia, assinatura Microsoft, árvore
+extraída, setup, logs, PID/exit e reservas estão no recibo privado
+`target/shadow-local-rebuild-20260928-01/ledger.jsonl`.
+
+O preflight read-only em `lpc:localhost/master` confirmou Express, Windows
+auth, Shared Memory, collation `Latin1_General_100_CI_AS_SC`, memória máxima
+2 GiB e zero entradas do banco exato em `sys.databases`/`sys.master_files`;
+os arquivos alvo também não existiam. A primeira consulta foi recusada apenas
+por alias SQL reservado, sem efeito; a consulta corrigida saiu 0. Após reserva
+separada, um único `CREATE DATABASE [ETL_SISTEMA_V2_SHADOW]` saiu 0. Readback
+em `master` e no alvo confirmou `ONLINE`, compatibilidade 170, collation
+esperada, dados 64/2048 MiB e log 32/512 MiB com crescimento 16 MiB, zero
+tabelas/views/procedures de usuário e zero histórico Flyway. Não houve outro
+banco, login, job, conexão remota, migration, IT, JDBC, carga da DLL 12.8.1,
+mudança do pin 12.8.2, deploy ou produção. P07/P08 físicos seguem abertos;
+Segurança mantém a variante 12.8.1 suspensa e a mudança do pin depende de
+decisão explícita do usuário. Checkpoint 0311 e runbook local documentam o
+readback e a recuperação por preservação, sem retry/drop/limpeza.
+Validação documental: UTF-8 estrito sem BOM nos quatro arquivos tocados e
+`git diff --check` passaram; `Test-TrilhaPreparation.ps1` passou com 33
+etapas, 48 IDs abertos e nove pacotes; secret scan offline passou em
+4.042 candidatos, zero achado. `Test-Gpt56ChatTrail.ps1` recusou
+`HANDOFF_PATH` histórico fora do escopo P01–P33 (recusa já registrada no
+checkpoint 0308), sem ser contabilizado como PASS. Build Java não se aplica
+à instalação e documentação desta unidade.
+
+# P29 — guardas Unicode do alvo shadow validadas offline — 28/09/2026
+
+Regra `SHADOW-URL-EXACT-DB-01`, origem: alvo exato
+`ETL_SISTEMA_V2_SHADOW` em `AGENTS.md`, sem aprovação para outro banco.
+O host desta classe possui política legada de loopback; o perfil físico P08
+usa `QualificationConfiguration` com `localhost` literal e não foi alterado.
+Contrato afetado: `ShadowStorageProperties.enabled` antes de qualquer
+`DataSource`; owner de negócio não designado, Segurança/release devem revisar
+o aceite. Entre 47 alertas `IMPROPER_UNICODE`, oito são nessa classe. A
+comparação `EXPECTED_DATABASE.equalsIgnoreCase(...)` admitia uma grafia
+Unicode com long-s (`ETL_\u017FISTEMA_V2_SHADOW`) e caixa ASCII alterada.
+Teste focal novo de recusa nos dois exemplos falhou causalmente (10 testes,
+uma falha, nenhum erro: nenhuma exceção para o primeiro valor). A comparação
+agora exige `String.equals` com a grafia canônica; teste focal passou 10/10.
+O espelho v87 desse primeiro ajuste passou `clean verify` offline com 2.353
+Surefire/cinco skips, seis ITs e JaCoCo 80/60; PMD bruto v87 manteve 36
+achados. Na mesma triagem, duas novas contraprovas mostraram que
+`soc\u212AetTimeout` (Kelvin sign) era aceito como chave `socketTimeout` após
+case-folding e `trustServerCertificate=fal\u017Fe` (long-s) como `false`
+no alvo aprovado; teste focado RED teve 12 testes/duas falhas. Agora as
+chaves JDBC e flags booleanas opcionais exigem ASCII antes da comparação;
+primeiro green falhou apenas formatter, correção de formato depois passou
+12/12. Regra `SHADOW-URL-ASCII-KEY-FLAG-02`, origem: allowlist estrita e TLS
+em `AGENTS.md`, exemplos acima, contrato `ShadowStorageProperties`, owner
+Segurança/release para aceite. O parser de URL P08 separado não mudou.
+Nos bytes finais, espelho isolado v89: `clean verify` JDK17 offline saiu 0,
+2.355 Surefire em 280 XML/cinco skips, seis ITs offline, formatter,
+Checkstyle e JaCoCo 80/60 PASS. PMD v89 analisou 656 fontes, manteve 36
+achados brutos com as mesmas assinaturas do v83 e a disposição local passou
+36/36 contra 2.361 casos, sem aceite nominal. SpotBugs/FindSecBugs v90
+analisou fontes e 1.135 classes/recursos idênticos ao v89, zero erros/classes
+ausentes: 272 alertas brutos, 87 SECURITY, 46 `IMPROPER_UNICODE`. O único
+delta de tipo+classe versus v84 é um alerta Unicode removido da classe
+`ShadowStorageProperties` após exigir a grafia exata do banco. Os outros
+272 alertas seguem abertos; o detector estático não substitui a prova das
+guardas de chave/flag. XML bruto SHA-256
+`6249729705FBA79CA6F1DEFDECC36CA5735C3D739CD1F44ED5F54ED3811ABD3E`.
+Recibos em `target/ci-p10-20260927-01/clean-verify-v89-private.log`,
+`pmd-v89/`, `pmd-disposition-v89/` e
+`p29-sast-mirror-v90/target/spotbugsXml.xml`. As duas tentativas de invocar
+o scanner com caminho de JDK17 inexistente falharam antes da análise e foram
+preservadas; a terceira usou o JDK17 privado da campanha. A triagem parcial
+dos demais avisos Unicode encontrou validação ASCII anterior ao case-folding
+em `QualificationConfiguration` e `AdministeredArtifactVerifier`, sem
+classificá-los nominalmente; as 46 instâncias restantes requerem revisão de
+fluxo/contraprova e decisão da Segurança. Não houve JDBC, DLL, SQL ou UAC.
+
+# P29/P08 — 12.8.1 físico suspenso e LOC-04 validada offline — 28/09/2026
+
+Segurança/Supervisor decidiu provisoriamente **não executar** o candidato
+físico shadow com JAR/DLL 12.8.1 nem JDBC: 12.8.1 está na faixa afetada por
+CVE-2025-59250; Microsoft corrigiu em 12.8.2. A regra canônica em `AGENTS.md`
+permanece 12.8.1 até decisão explícita do usuário, portanto nenhum perfil,
+lock, pacote ou runbook foi promovido a 12.8.2. 0304/0305/0306 são históricos.
+UAC segue pausado até sinal do operador. Não houve SQL, DDL, DLL carregada,
+serviço ou instalação. O delta exato de mudança e rollback está preparado
+no relatório P29, sem execução física.
+
+Na triagem técnica dos seis alertas `REDOS` do scan bruto P29, o mapper 8656
+tinha teto de 8.192 caracteres para token numérico JSON, mas aceitava texto
+decimal até o teto de registro de 1 MiB e construía `BigDecimal` antes de
+verificar precisão. A contraprova focada com 8.193 zeros entre aspas falhou
+causalmente: teste novo esperava quarentena, resultado era valor válido
+(`11` testes, uma falha, zero erro). `LocalizacaoCargaNumericValue` agora
+limita também o léxico decimal textual a 8.192 antes do regex/`BigDecimal`,
+`LocalizacaoCargaJson` referencia o mesmo teto de domínio e a regra LOC-04
+foi documentada na ADR 0028. Reexecução focada: 11/11 PASS. O primeiro
+`clean verify` isolado v81 teve 2.352 Surefire, zero falhas de asserção e
+um erro de invocador (`pwsh.exe` ausente do PATH do filho); v82 teve
+2.352 Surefire, zero falhas/erros e dois erros nas ITs offline porque
+`JAVA_TOOL_OPTIONS` do invocador contaminou a saída JSON do Java filho.
+Ambos REDs estão preservados, sem atribuí-los à correção. No novo espelho
+v83, com JDK17/PowerShell 7 só no PATH do processo e sem essa variável,
+`clean verify` offline saiu 0: 2.352 Surefire em 280 XML, cinco skips,
+seis ITs offline, formatter, Checkstyle e JaCoCo 80/60 PASS. Recibo
+`target/ci-p10-20260927-01/clean-verify-v83-private.log`.
+
+PMD v83 reanalisou 656 fontes e manteve os mesmos 36 achados por
+tipo/classe/linha/método do bruto v78. A disposição contra os 280 XML/
+2.358 casos do v83 passou 36/36, `PASS_LOCAL_REVIEWED_FINDINGS`, sem
+aceite nominal. O primeiro invocador de disposição apontou
+`TestSourceRoot` ao diretório errado e foi recusado `DISPOSITION_PATH_SCOPE`;
+v83b corrigiu apenas o alvo do espelho, preservando a recusa. SpotBugs
+4.10.4.1 + FindSecBugs 1.14.0 v84 reanalisou os mesmos bytes de 656 fontes
+e 1.135 classes/recursos do v83, 1.091 classes, zero erro/classe ausente.
+O XML bruto SHA-256
+`A630C04A46F93B1F97FFA716FA5DF293F039125E27DAC32D875570490BCE0F0A`
+mantém 273 alertas/88 SECURITY e o multiconjunto tipo+classe não mudou.
+O alerta `REDOS` do regex decimal continua no XML estático; o teto e a
+contraprova executada documentam a redução causal do caminho de entrada,
+sem supressão ou disposição nominal. Recibos `pmd-v83/`,
+`pmd-disposition-v83b/` e `p29-sast-mirror-v84/target/spotbugsXml.xml`
+sob `target/ci-p10-20260927-01/`.
+
+Triagem técnica adicional, sem aprovação de Segurança: os outros cinco
+`REDOS` observados têm regex temporal de largura fixa (Fretes) ou entrada
+limitada a 256 caracteres (`ContractMetadata`); os dois
+`PREDICTABLE_RANDOM` alimentam só jitter de backoff, e o
+`COMMAND_INJECTION` observado usa `ProcessBuilder` com lista de argumentos,
+sem shell. Os cinco achados de rank 7–8 (sincronização, retorno ignorado,
+condição redundante) também foram localizados, mas não há correção causal
+demonstrada para eles. Todos os 273 permanecem no inventário bruto,
+sem aceite/exceção/supressão automática. A proposta
+`docs/catalogos/p29-sast-preparacao-20260928/PROPOSTA-SHADOW-12.8.2.md`
+lista delta, hashes, provas e rollback; **não foi aplicada**. Nenhum finding
+foi aceito/suprimido nominalmente nem P29/P11/P08 promovido.
+
+Na continuação da triagem, os **16** `SQL_INJECTION_JDBC` e os seis
+`SQL_PREPARED_STATEMENT_GENERATED_FROM_NONCONSTANT_STRING` do XML v84
+foram rastreados até os 19 sinks distintos (três alertas sobrepostos).
+Nos trechos observados, os nomes/procedures vieram de literais,
+enum `Fact`/`AnalyticSqlContract`/verticais fechadas, booleanos de escolha
+fechada ou recurso SQL empacotado com teto de 8.192 bytes; os valores
+variáveis eram vinculados por parâmetros JDBC. Não se encontrou nesta
+inspeção concatenação de texto de entrada em SQL, mas isso **não** dispõe
+nem aprova os 22 alertas; a revisão de Segurança e as rotas físicas seguem
+abertas. Os nove `UNSAFE_HASH_EQUALS` também foram localizados em SHA/
+fingerprints de pacote, recibo ou frescor de dados; não são comparações
+observadas de senha/token, mas o contexto de exposição/tempo não foi
+atestado. Assim, 42 achados distintos receberam exame técnico localizado
+(14 anteriores + 19 sinks SQL + nove hashes), e **todos os 273** continuam
+no XML bruto sem classificação nominal. [Relatório P29](docs/catalogos/p29-sast-preparacao-20260928/RELATORIO.md).
+
+Guardas da revisão após essa triagem: Gitleaks 8.29.1 no espelho de 4.038
+arquivos e scanner offline em 4.038 candidatos (4.037 textos, um binário)
+passaram com zero achados; trilha 33/48/9 PASS, nove documentos UTF-8
+estrito, `git diff --check` exit0. Os quatro arquivos de fonte/teste/POM
+relevantes continuam byte-idênticos ao espelho v83; não se repetiu Maven
+por documentação. Recibos privados `gitleaks-p29-v85-private.log` e
+`offline-secret-scan-p29-v85-private.log` sob
+`target/ci-p10-20260927-01/`. Os guardas não alteram P08/P11/P29 integral.
+
+`graphify update .` via atalho `~/.local/bin` e suas variantes retornaram
+0 sem output e sem atualizar `graph.json` (mtime anterior à LOC-04). O
+executável do ambiente isolado `AppData/Roaming/uv/tools/graphifyy/Scripts`
+foi invocado diretamente com `update . --no-cluster`: AST 789/789, saída 0,
+grafo atualizado com 37.230 nós/95.228 arestas. Recibo privado
+`target/ci-p10-20260927-01/graphify-update-p29-v84-private.log`.
+O no-op do atalho continua uma diferença de invocação, não falha do grafo
+atualizado nem bloqueio dos gates Maven/SAST/PMD.
+
+# P29/P11 — SAST exploratório, licenças e baseline técnica — 28/09/2026
+
+Critérios originais: P11/V2-015d exige política bloqueante aprovada, feed/NVD
+autorizado, achados classificados, exceções com owner/prazo quando existirem e
+primeira baseline aceita. P29/V2-039b e V2-015c exigem RC/configuração e
+fingerprint congelados, pacote reproduzível com checksum/SBOM/proveniência,
+SAST/licenças/segurança e smoke nos SOs suportados **da mesma revisão**.
+O gate PMD de dez regras e o scanner de segredos de 0305 não eram SAST
+abrangente. O usuário/Supervisor autorizou esta preparação técnica offline,
+sem criar política ou aceite nominal.
+
+**Nova análise de código, parcela técnica:** em espelho privado isolado, o
+SpotBugs Maven Plugin `4.10.4.1` (Apache-2.0), engine SpotBugs `4.10.4`
+(LGPL-2.1) e FindSecBugs `1.14.0` (LGPL-3.0) foram resolvidos do Maven
+Central e executados em Java 17, esforço Max/threshold Low, sem filtros ou
+supressões. As 656 fontes Java principais e 1.135 artefatos de classes/recursos
+são byte-idênticos ao espelho v79 aprovado por `clean verify`; nenhuma mudança
+foi feita no POM do worktree. O XML bruto analisou 1.091 classes, erros 0,
+classes ausentes 0, e preserva **273 alertas**: 88 SECURITY, 66 MALICIOUS_CODE,
+60 BAD_PRACTICE, 42 STYLE, oito MT_CORRECTNESS, cinco PERFORMANCE e quatro
+CORRECTNESS. Em SECURITY: 47 IMPROPER_UNICODE, 16 SQL_INJECTION_JDBC, nove
+UNSAFE_HASH_EQUALS, seis SQL_PREPARED_STATEMENT_GENERATED_FROM_NONCONSTANT_STRING,
+seis REDOS, dois PREDICTABLE_RANDOM, um USO_UNSAFE_OBJECT_SYNCHRONIZATION e
+um COMMAND_INJECTION. Os 104 detectores perfilados incluem 22 FindSecBugs.
+XML SHA-256 `47ed49fee7058090ce71d43f106e06a664193ea6d602e61784108e0964fe8224`;
+recibos privados `target/ci-p10-20260927-01/p29-sast-mirror-v80/target/spotbugsXml.xml`,
+`p29-sast-v80-result.json` e `p29-spotbugs-v80b-private.log`. O primeiro RED
+foi apenas settings privados com `offline=true`; foi preservado e corrigido
+sem alterar o projeto. Triagem inicial verificou exemplos: consulta dinâmica
+de `JdbcAnalyticQueries` deriva de enum fechado e o `ProcessBuilder` P08 usa
+argumentos em lista de pacote selado; isso **não** dispõe os respectivos
+achados, nem os 273 restantes. Sem ruleset/limiar/baseline/exceções e aceitante
+ratificados por Segurança, estado `RAW_FINDINGS_OPEN_NO_NOMINAL_ACCEPTANCE`.
+Este scan cobre bytecode Java principal, não PowerShell, SQL, SOs, histórico
+remoto nem licença legal; não equivale ao gate SAST integral V2-015c.
+
+**SBOM/licenças e contraprova:** nos pacotes v79 shadow 12.8.1 e normal
+12.8.2, cada lock tem nove dependências, o CycloneDX 1.6 tem nove componentes
+e todos os nove POMs correspondem aos hashes pinados; a DLL nativa declara
+`Microsoft Proprietary License`, distinta da licença MIT do JAR. O pacote
+shadow traz 22 arquivos de licença/POM/schema e o normal 24, incluindo
+metadata de versões históricas; completude técnica não constitui aprovação
+jurídica de licença. Uma cópia privada do pacote shadow teve só a licença do
+primeiro componente trocada e SBOM, manifesto e sidecar re-hasheados: o
+envelope externo passou, mas `inspect` saiu 2 com
+`QUAL_SBOM_LOCK_CORRESPONDENCE` antes de JDBC. Recibos
+`target/ci-p10-20260927-01/p29-license-counterproof-v80-private.log` e script
+privado; o primeiro RED do harness por LF/CRLF no sidecar foi preservado e
+corrigido. Nenhum arquivo do pacote original foi alterado. O validador
+existente já confronta lock, SBOM, binários, POMs e proveniência; não foi
+duplicado. A proveniência do candidato declara `vulnerabilityFeed=NOT_EXECUTED`,
+`signed=false` e `publishedCi=false`; não é RC aprovado.
+
+**P11 e conflito de versão:** os validadores atuais da política de
+vulnerabilidades passaram (`-PolicyOnly`: 33 casos, 30 recusas; implementação:
+33 casos/30 recusas, threshold 0.0, zero exceções). O último scan público
+histórico P11 foi em 21/09 para dependências do POM normal com JDBC 12.8.2;
+não há `dependency-check-report.json` nem cache de feed no alvo atual desta
+sessão. O validador do relatório físico retornou `MACHINE_REPORT_MISSING`
+em contraprova offline, portanto não se afirma baseline atual para o
+candidato shadow. A
+variante física de teste exigida por `AGENTS.md` fixa JAR/DLL 12.8.1. A
+[Microsoft informa que 12.8.2 corrige CVE-2025-59250](https://learn.microsoft.com/en-us/sql/connect/jdbc/release-notes-for-the-jdbc-driver),
+e a [faixa afetada inclui 12.8.1](https://nvd.nist.gov/vuln/detail/CVE-2025-59250).
+O candidato 12.8.1 permanece **somente** para teste local autorizado; sua
+prova não qualifica release com 12.8.2. Não se executou DLL nem se alterou o
+perfil físico. Para P11/P29 integral faltam feed/baseline atual e aceite
+nominal por Segurança, política SAST e licenças/SOs/configuração/RC pelo
+release owner, além da qualificação física de versão correspondente. Não
+houve novo UAC, SQL, serviço, DDL, publicação ou checkbox promovido.
+
+**Fechamento dos guardas documentais desta unidade:** no espelho privado de
+4.036 arquivos do worktree, Gitleaks 8.29.1 saiu 0 sem achados; o scanner
+offline passou em 4.036 candidatos (4.035 textos, um binário verificado),
+zero achados. `Test-TrilhaPreparation.ps1` passou com 33 etapas, 48 IDs
+abertos e nove pacotes; `git diff --check` saiu 0 e os documentos novos
+passaram UTF-8 estrito. Recibos privados `gitleaks-p29-v80-private.log`,
+`gitleaks-report-p29-v80-private.json` e
+`offline-secret-scan-p29-v80-private.log` sob
+`target/ci-p10-20260927-01/`. Esses guardas não são aceite SAST/P11/P29.
+
+# P08/P29 — verificação final offline da URL de processo e pacote 12.8.1 — 28/09/2026
+
+A decisão do Supervisor está implementada: `run` e `worker` exigem
+`V2_SHADOW_JDBC_URL` de processo antes de controle, master ou worker. O parser
+aceita somente host literal `localhost`, banco `ETL_SISTEMA_V2_SHADOW`,
+`integratedSecurity=true`, `encrypt=true`, escolha explícita do certificado
+(`trustServerCertificate=true|false`) e timeouts limitados; recusa credenciais,
+domínio, porta/instância, propriedades extras/duplicadas e alvo ausente. A URL
+não entra em configuração, comando ou log e somente a versão validada é
+projetada para o filho. `status`/`resume` mantêm leitura offline. Testes
+positivos/negativos e de projeção pai→filho foram executados no gate abaixo.
+
+O espelho privado v79 de 4.033 arquivos, criado **após** a correção do literal
+de fixture sinalizado pelo scanner, passou `clean verify` JDK17/Maven offline
+exit 0: 2.351 Surefire em 279 XML, cinco skips, zero falhas/erros, seis ITs
+offline; formatter, Checkstyle e JaCoCo 80/60 passaram sem redução. Recibo
+`target/ci-p10-20260927-01/clean-verify-v79-private.log`. O scanner offline
+v79 passou em 4.033 candidatos, 4.032 textos e um binário verificado, zero
+achados. PMD bruto v78 continua aplicável aos mesmos bytes de 656 fontes Java
+principais: 36 achados; disposição v79 revalidou 36/36 contra os 279 XML/
+2.351 testes, `PASS_LOCAL_REVIEWED_FINDINGS`, sem aceite nominal de Segurança.
+Recibos `pmd-v78/result.json` e `pmd-disposition-v79/result.json` sob
+`target/ci-p10-20260927-01/`.
+
+`PackageShadow` v79 saiu 0 em A/B, sem URL de processo, SQL ou DLL carregada.
+`p08-shadow-url-v79-candidate-a/b` são byte-idênticos: revisão
+`be9e54929e4d510d4803271c64f9a3850e9c894ca1bb24725d05c96ea2a0ec2d`,
+manifesto `007a779729ec36f3bfed3c85e41f7159d704982d9ffb4cd885cabdcbf5048d8f`,
+ZIP `4e707a9c146a4deca7e5bb75ca3e34b03e1633d2f2321e7b717225530addbc8e`,
+186 membros, nove dependências, 2.158 inputs. Ambos foram extraídos e
+verificados; `config-validate`, `dry-run`, `inspect` e `plan` passaram nas duas
+extrações (oito exit 0, stderr 0, sem JDBC). O pacote normal 12.8.2 foi
+reconstruído separadamente (188 membros, ZIP
+`282a1ce42c23b7c411928d352070b193f19e820bbfa095495d0914c87fa4811b`);
+seus dois comandos puros passaram. Seis recusas dirigidas passaram: par
+12.8.2 em comando físico, duas variantes de build trocadas e pin inválido
+antes de Java; URL ausente/remota recusada pelo Java com exit 2 antes de
+controle/SQL. Guardas de envelope sintético: 25/25 PASS. Recibos privados
+`p08-shadow-preflight-v79-result.json`, `p08-shadow-guards-v79-result.json`,
+`p08-envelope-guards-v79-private.log` e resultados dos candidatos em
+`target/macrobloco-qualificacao-pacote-20260928-01/`.
+
+**Aceites não promovidos:** o estado continua `PACKAGED_NOT_SMOKE_QUALIFIED`.
+Sem sinal de prontidão do operador após UAC cancelado, não houve instalação,
+serviço, SQL, DLL carregada, migração, smoke físico, rollback material ou
+campanha P07/P08 na revisão atual. P10/G02 ainda requer SHA/checks remotos e
+aceite externo; P29 requer RC e aceites nominais de Segurança/licenças/SOs.
+Nenhum checkbox integral P07/P08/P10/P29 foi marcado por esta prova offline.
+
+# P08 / decisão de URL de processo — implementação em qualificação — 28/09/2026
+
+O Supervisor decidiu que P08 deve consumir exclusivamente
+`V2_SHADOW_JDBC_URL` de processo, validada fail-closed, e que o contrato
+estático anterior não será autorizado. Esta decisão substitui a alternativa
+de owner/Segurança registrada na fotografia 0304 abaixo; ela **não** libera
+UAC, banco, DLL ou campanha física. A implementação agora valida host literal
+`localhost`, DB exato `ETL_SISTEMA_V2_SHADOW`, autenticação Windows integrada,
+`encrypt=true`, escolha explícita de `trustServerCertificate=true|false` vinda
+da variável e timeouts limitados; recusa porta/instância, IP/host diferente,
+usuário/senha/domínio, propriedade extra/duplicada e ausência da variável.
+O documento de configuração sintético continua sem URL/segredo. `run` e
+`worker` validam antes de criar controle/ler intento; `status`/`resume`
+preservam readback offline e qualquer caminho que chega a `master`, snapshot
+ou worker valida antes de JDBC. O supervisor projeta
+ao filho só a URL já validada entre as variáveis `V2_*`. O controlador físico
+deixou de definir URL/certificado hardcoded; exige variável de processo.
+Nenhum SQL/UAC/DLL foi executado nesta alteração.
+
+**Diagnóstico de gate em andamento:** os testes focados de URL/contrato
+passaram 10/10. O primeiro `clean verify` isolado v74 falhou por hashes exatos
+da política de escopo ainda antigos e `pwsh.exe` ausente no `PATH` do processo;
+ambas as causas foram corrigidas sem mudar classificações nem limiares, e
+oito testes dirigidos passaram. O v75 preservou outro RED: `JAVA_TOOL_OPTIONS`
+injetou o aviso `Picked up` no stdout JSON de dois ITs; o POM já fixa heap e
+encoding dos forks, então a execução seguinte retirou essa variável herdada.
+O v76 revelou que o guard de URL aplicado a `status`/`resume` impedia o
+readback offline de falha selada; a correção restringiu o guard antecipado a
+`run`/`worker`, preservando a validação própria imediatamente antes de todo
+`master`, snapshot ou lançamento de worker. A IT dirigida de integridade do
+pacote passou 6/6 sem URL/SQL após essa correção. Os REDs permanecem nos logs
+privados de v74–v76.
+
+**P29/PMD na nova fonte:** o v77 `clean verify` terminou PASS (2.351
+Surefire, cinco skips, seis ITs offline e JaCoCo 80/60 intacto). PMD bruto
+v77 detectou 37 achados, um novo `PreserveStackTrace` no catch que sanitizava
+a URL. O parser estrito passou a construir URL canônica antes de chamar
+`ShadowStorageProperties`, eliminando o catch sem expor entrada; PMD v78 voltou
+a 36 achados brutos e seis testes focados de alvo/escopo passaram. Essa
+alteração mudou os bytes Java; os ZIPs v77 e o RED PMD permanecem preservados
+como fotografias intermediárias.
+
+**Gate final offline v78:** espelho isolado `clean verify` JDK17/Maven offline
+exit 0, formatter/Checkstyle e JaCoCo 80/60 intactos; 2.351 Surefire em 279
+XML, cinco skips, zero falhas/erros, seis ITs offline PASS. Os 1.211 arquivos
+críticos Java/POM/scripts/lock/README/política de cobertura do worktree são
+byte a byte idênticos ao espelho; A/B confrontados contra 2.158 inputs cada,
+zero drift. PMD bruto v78: 656 fontes, 36 achados preservados; disposição
+local 36/36 PASS contra 279 XML/2.351 casos, `nominalSecurityAcceptance=false`.
+Recibos `target/ci-p10-20260927-01/clean-verify-v78-private.log`,
+`pmd-v78/` e `pmd-disposition-v78/result.json`. O v77 anterior passou no
+seu próprio snapshot, mas foi substituído pela correção PMD.
+
+**Pacote final candidato:** `p08-shadow-url-final-build-a/b` saíram 0 com
+`PackageShadow` offline, URL removida do processo e DLL 12.8.1 apenas como
+bytes passivos. Os ZIPs A/B `p08-shadow-url-final-candidate-a/b` têm revisão
+`f1a7ef4d8c13d487f68d359b33f806cdb328f8adf2e874c80d3e25dd6de438f9`,
+manifesto `fc8ecbba10b9595ed726e1c36aa50d79d8bb12a7710d3271657c95814594897b`,
+ZIP `848a4aaef0fb70a633a4aa62dba4b928eea959e0c4d664a23babfb02f28fdbe3`,
+186 membros/nove dependências/2.158 inputs, idênticos e envelope verificado.
+`config-validate`, `dry-run`, `inspect`, `plan` nos dois JARs extraídos:
+oito saídas 0/stderr 0, sem SQL/DLL. O normal 12.8.2 foi reconstruído com
+lock global intacto, 188 membros e dois comandos puros PASS. Seis recusas
+dirigidas PASS: 12.8.2 físico, variantes trocadas, pin inválido (quatro antes
+de Java) e `run` com URL ausente/remota (Java saiu 2 antes de controle/SQL).
+Envelope sintético 25/25 PASS. Recibos privados
+`target/ci-p10-20260927-01/p08-shadow-{preflight,guards}-v78-result.json` e
+`target/macrobloco-qualificacao-pacote-20260928-01/p08-shadow-url-final-candidate-{a,b}/result.json`.
+O status dos ZIPs segue `PACKAGED_NOT_SMOKE_QUALIFIED`: nenhum supervisor/worker
+físico, rollback SQL, A/B material, selo/readback ou aceite P08 foi obtido.
+P07 físico depende da sombra local; P10/G02 e P29 externo mantêm evidências
+nominais próprias. O usuário ainda não sinalizou prontidão UAC.
+
+# P08 / variante física 12.8.1 preparada e testada offline — 28/09/2026
+
+O conflito foi localizado nos **dois** artefatos do lock P08 normal:
+`mssql-jdbc:12.8.2.jre11` em `lib/` e `mssql-jdbc_auth:12.8.2.x64` em
+`native/`. O perfil Maven `shadow-local-integration` já fixa o par 12.8.1;
+seu `process-test-classes` copia a DLL autorizada para `target/native`, sem
+carregá-la. O launcher físico P08 anterior só colocava o JAR da aplicação no
+classpath do **supervisor**, apesar de `QualificationSqlEvidence.master` abrir
+JDBC em `master` antes de iniciar o worker. O worker já usava `lib/*` e
+`native/`. A correção acrescentou `lib/*` ao classpath do supervisor e recusa
+o par normal 12.8.2 **antes de Java** em todos os comandos físicos. Os comandos
+puramente offline do checkpoint 0303 continuam sem caminho nativo.
+
+Uma variante aditiva `PackageShadow` seleciona
+`dependency-lock.shadow-local-12.8.1.json` (SHA-256
+`a62b4009dbd44769502a886d3bf7e31c0354ee037c569c4a3996ffb388c6f2b2`),
+com JAR `12.8.1.jre11` (1.476.685 bytes, SHA-256
+`e6933c0711e598a224060e52ed31392f720a4a7664e85d8ae37c52a85b67ebb0`)
+e DLL `12.8.1.x64` (305.328 bytes, SHA-256
+`9a92363a42db34e9f27cedffe18b139d7bb6c93495cb8338f7f8dbb93f3ae538`).
+O cache Maven indica Central como origem, a DLL tem assinatura Microsoft
+`Valid`, e os POMs correspondentes estão pinados em `third-party-shadow-local/`.
+Os POMs 12.8.1 históricos do catálogo têm bytes diferentes e foram
+preservados; a variante inclui apenas os novos POMs exatos. O lock global
+12.8.2 não mudou e foi testado separadamente. Nenhuma DLL foi carregada.
+
+Dois builds finais `PackageShadow` A/B em JDK17, Maven offline,
+`package -DskipTests` com as duas travas do perfil e URL shadow removida do
+processo, saíram 0. Os ZIPs candidatos A/B têm revisão
+`5f8caceff8e9c2065026d5b8821928730f51cc375ac65ed750a7139a6b772e43`,
+manifesto `bf9feb190d42cd3597db064659376507ae3fb2e4b76cf0e799d262219e530676`,
+ZIP `29185f5caccf90fe5d3ec037c7a58f10dac6c5c4a0769fa705d9a55d4f07d8c3`,
+186 membros, nove dependências e 2.157 inputs, byte-idênticos. Extração
+segura/verificação do envelope A/B passou; `config-validate`, `dry-run`,
+`inspect` e `plan` em ambas as extrações saíram 0, sem stderr, SQL ou worker,
+sob JDK17/512 MiB/30 s por comando. O `inspect` exercitou o classpath do
+supervisor; oito comandos puros passaram. Um build/ZIP normal de regressão
+preservou o lock 12.8.2 (SHA-256
+`8723c2509a63647dcd7e6edba6a0a008e32e7f4e66b5c2d2b2dbd9268b116eec`),
+188 membros e os dois comandos `Main` puros. Quatro recusas dirigidas
+passaram antes de Java: pacote normal em comando físico, troca de variante
+nos dois sentidos e pin inválido. Guardas genéricos do envelope: 25/25 PASS.
+Recibos privados: `target/ci-p10-20260927-01/p08-shadow-{preflight,guards}-v72-result.json`,
+`*v72-private.log` e
+`target/macrobloco-qualificacao-pacote-20260928-01/p08-shadow-final-candidate-{a,b}/result.json`.
+A primeira tentativa `PackageShadow` RED foi preservada: Maven terminou
+`BUILD SUCCESS`, mas o controlador tentou copiar de volta um inventário
+ausente; a fase offline foi excluída do copyback, e A/B novos passaram.
+
+**Limite material:** o laboratório P08 usa URL JDBC estática de
+`QualificationConfiguration.jdbcUrl()` para `localhost/ETL_SISTEMA_V2_SHADOW`
+(`trustServerCertificate=true`), enquanto a IT Maven opt-in autorizada exige
+`V2_SHADOW_JDBC_URL` validada. A variante 12.8.1 resolve consistência de
+JAR/DLL/classpath, mas não estende a autoridade da IT ao fluxo físico do
+pacote. Antes de `run`/`resume`/worker, o owner técnico/Segurança precisa
+escolher entre adaptar o laboratório a consumir a URL allowlisted (com nova
+revisão e A/B) ou autorizar nominalmente o contrato estático/certificado para
+o alvo local exato. [Preflight e comandos preparados](docs/runbooks/p08-shadow-12.8.1-preflight-20260928.md).
+Não houve serviço SQL, UAC repetido, conexão, DDL ou aceite físico.
+`PACKAGED_NOT_SMOKE_QUALIFIED` permanece; P07/P08 integrais, P10/G02 remoto
+e P29 nominal continuam abertos. O operador ainda deve indicar prontidão
+antes de qualquer novo prompt UAC.
+
+# P08 / smoke offline do JAR extraído A/B na revisão atual — 28/09/2026
+
+O launcher `Invoke-Qualification.ps1` acrescentava incondicionalmente as duas
+flags shadow e `java.library.path=native` para os comandos do supervisor;
+`QualificationSupervisor.SqlChildExecution` abre `QualificationSqlEvidence.master`
+antes do worker, e o pacote fixa DLL 12.8.2, proibida para o perfil shadow
+12.8.1. O smoke de 0281 era outro caminho: `Main config validate`/`dry-run`,
+`LOCAL_SHADOW`, fontes/auditoria desligadas, deny-all, sem clientes ou SQL.
+Foi corrigido apenas o caminho offline do launcher: `config-validate` e
+`dry-run` verificam o manifesto e chamam `Main` com a configuração exemplo
+agora incluída/pinada no ZIP, sem flags shadow, classpath JDBC ou
+`java.library.path`. O processo filho remove `V2_*` herdadas e opções JVM
+externas. Os comandos físicos permanecem inalterados e estão explicitamente
+suspensos no README empacotado enquanto lock 12.8.2/perfil 12.8.1 divergirem.
+
+Dois novos builds `Package` A/B com JDK17 e Maven offline saíram 0, sem SQL,
+com DLL 12.8.2 apenas como bytes passivos verificados pelo lock. Os ZIPs
+candidatos finais são idênticos: revisão
+`f0f326b4804fe17bca5c1faa6374d71ffd823f09513ab2d984ec56e0b3b243fb`,
+manifesto `545857495d77ea1708d9a0854f6f95e775068be9e6050300d3284bd6ffa0cb22`,
+ZIP `c49dc4b3ac1fe9c952d0fa1f57ef6e66776a7c3593e1d5e9afb61d06a81b696f`,
+188 membros de payload, nove dependências e 2.159 inputs. A extração segura
+de A/B conferiu 190 entradas do envelope e manifesto antes/depois. Sob JDK17,
+heap 512 MiB e limite de 30 segundos por comando, `config-validate` e
+`dry-run` de **ambos JARs extraídos** saíram 0, stderr vazio, resultado
+`LOCAL_SHADOW`, Data Export/auditoria desligadas e deny-all, mesmo com
+variáveis `V2_*` hostis herdadas no processo pai. Entrada extra e pin errado
+foram recusados antes de Java; 25 guardas sintéticos do envelope passaram.
+Recibo `target/ci-p10-20260927-01/p08-offline-smoke-v71-result.json` SHA-256
+`550DE92FE976B4ED4308B49CBFACC27CBCBF4A7A5F7D9DA5B3853B87DB766AA2`;
+pacotes e logs privados em `target/macrobloco-qualificacao-pacote-20260928-01/`
+e `target/ci-p10-20260927-01/`. `graphify update . --no-cluster` saiu 0
+(37.152 nós/95.072 arestas). Os 1.204 Java/POM atuais são byte a byte
+idênticos ao espelho `clean verify` v66; as mudanças v71 são scripts/README.
+Os gates de segurança/documentação v71 saíram 0: parser dos três scripts,
+`git diff --check`, `Test-TrilhaPreparation.ps1` (33 etapas/48 IDs/nove
+pacotes, `executionAuthorized=false`), scanner offline (4.025 candidatos,
+4.024 textos/um binário, zero achados) e Gitleaks 8.29.1 em espelho de
+4.025 arquivos/126.484.328 bytes (zero leaks, relatório `[]`). Os logs
+`*p08-v71-private.log` e relatório privado preservam os recibos.
+Serviço/processos SQL ausentes, URL JDBC ausente, nenhum UAC, carregamento
+de DLL, conexão SQL ou DDL. O resultado do empacotador permanece
+`PACKAGED_NOT_SMOKE_QUALIFIED`: este é **smoke parcial de CLI/configuração**,
+não prova supervisor/worker/JDBC, A/B físicas, guardas completos, rollback,
+sucessão, selo ou aceite integral P08. A pausa UAC do usuário continua vigente.
+
+# P01–P33 / UAC cancelado e investigação da mídia sem elevação — 28/09/2026
+
+O usuário confirmou que a autorização de instalação local continua, mas mandou
+**não repetir o prompt UAC até o operador indicar que está pronto**. Esta
+rodada não executou setup, iniciou serviço, conectou ao SQL Server nem fez
+`CREATE DATABASE`/DDL. A tentativa anterior de extração elevada continua
+registrada abaixo como cancelada pelo Windows, sem efeito SQL. O próximo
+efeito depende da ação explícita do operador no prompt; uma recusa UAC não é
+diagnóstico definitivo de impossibilidade técnica da instalação.
+
+Os gates offline após checkpoint/retomada passaram: `Test-TrilhaPreparation.ps1`
+exit 0 (33 etapas, 48 IDs abertos, nove pacotes, execução não autorizada),
+`Invoke-OfflineSecretScan.ps1` exit 0 (4.025 candidatos, 4.024 textos, um
+binário verificado, zero achados), Gitleaks 8.29.1 exit 0 em espelho de
+4.025 arquivos/126.478.091 bytes (zero leaks, relatório `[]`), UTF-8 estrito
+em sete arquivos e `git diff --check` exit 0. Recibos privados:
+`*uac-final-private.log` e `gitleaks-report-uac-final-private.json`.
+
+Investigação somente local da mídia: o executável Microsoft assinado de
+748.772.024 bytes contém 201 CABs concatenados e contíguos a partir do
+offset 116.652, com 201 arquivos e 826.661.623 bytes descompactados. A
+leitura de cabeçalhos encontrou zero nomes com travessia, mas os nomes são
+planos e 15 se repetem; a organização de diretórios do extrator não está
+comprovada. O 7-Zip 26.03 obtido da página oficial foi usado sem instalação
+para extrair **somente amostras** `MEDIAINFO.XML`, `SETUP.EXE` e configuração
+para pasta privada em `target/`. O `SETUP.EXE` amostrado tem 59.408 bytes,
+SHA-256 `C6E338CA0FC844D90E15050763CAADC72A5339EA916403F9B7C0CA62B7DBA9FC`
+e assinatura Microsoft `Valid`; não foi executado. A extração independente
+de CABs é possível em user-scope, mas essas amostras não provam uma árvore de
+instalação executável. O caminho suportado pela mídia assinada ainda requer
+extração normal quando houver UAC legítimo. Inventário e hashes privados:
+`target/ci-p10-20260927-01/tooling-microsoft/cab-inspect/` e
+`media-receipt.json`. O runbook contém comando/preflight/recuperação preparados,
+sem executá-los. P07/P08 físicos seguem abertos; P08 offline mantém dois
+pacotes reproduzíveis, sem smoke por conflito de DLL no launcher.
+
+# P01–P33 / autorização de reconstrução shadow local — 28/09/2026
+
+**Mudança de autoridade, ainda sem efeito SQL.** O usuário confirmou duas
+vezes que o Builder pode instalar SQL Server **nesta máquina** e criar
+exclusivamente `localhost/ETL_SISTEMA_V2_SHADOW` para testes. A máquina da
+sombra antiga permanece fora do escopo. A verificação local antes do efeito
+encontrou Windows 11 Pro x64 (`LUCAS`), 682,5 GiB livres em C:, nenhum
+serviço/processo SQL Server e sessão `LUCAS\lucas` **sem elevação**. Não houve
+`CREATE DATABASE`, DDL, conexão SQL ou instalação de serviço nesta sessão.
+O cliente `sqlcmd` Go v1.10.0 e o bootstrapper oficial SQL Server 2025
+Express foram baixados para `target/ci-p10-20260927-01/tooling-microsoft/`,
+com hashes/assinaturas no recibo privado; o cliente apenas respondeu
+`--version`/`-?`. A mídia completa está em obtenção/verificação antes de
+executar setup. A edição proposta é SQL Server 2025 Express x64, instância
+local padrão `MSSQLSERVER` para o nome `localhost`, autenticação somente
+Windows, protocolos remotos desabilitados na instalação e nenhuma extensão,
+login, senha ou job. O plano exato e a recuperação devem ser registrados no
+runbook e ledger antes de qualquer efeito. Se a elevação local não estiver
+disponível, parar nesse pré-requisito concreto e seguir parcelas offline.
+P07/P08/P10/P29 não recebem checkbox por autorização ou download.
+
+**Resultado de preparo do servidor:** a mídia completa oficial SQL Server
+2025 Express x64 `SQLEXPR_x64_ENU.exe`, 748.772.024 bytes, SHA-256
+`74AA90C11202A5524E769B9BC22531BAEF22D91E9B2D2E8C3CB99E89A65C5297`,
+tem assinatura Authenticode `Valid` da Microsoft e FileVersion
+`17.0.1000.7`; recibo privado
+`target/ci-p10-20260927-01/tooling-microsoft/media-receipt.json` SHA-256
+`2BC334582178CF3FFF63922ED62017CF82CCAE4195457EBA2B35808CE9CC9C2B`.
+A tentativa de **extração apenas** da mídia acionou SmartScreen/UAC antes
+de criar arquivo, foi cancelada e deixou zero serviços SQL, zero processos
+setup/sqlservr e zero mídia extraída. O token `LUCAS\lucas` não é elevado.
+O input operacional exato pendente é aprovação do prompt UAC do Windows
+para essa máquina; não se contorna elevação. Não houve preflight no master,
+CREATE, DDL ou SQL. A escolha/limites/recuperação da instância e banco estão
+no runbook de reconstrução local, pendentes do efeito e verificação real.
+
+Uma segunda tentativa **somente de extração**, agora com `Start-Process
+-Verb RunAs` e argumentos `/q /x:%LOCALAPPDATA%\ETL-V2-SQL2025-Media`,
+mostrou SmartScreen/UAC e retornou literalmente “operação cancelada pelo
+usuário”. A leitura posterior confirmou zero serviços/processos SQL,
+zero mídia extraída e `V2_SHADOW_JDBC_URL` ausente. Essa recusa do sistema
+encerra a tentativa de instalação nesta rodada; não repetir UAC, contornar
+elevação ou iniciar setup sem ação administrativa legítima do operador.
+Autorização de escopo para o banco local permanece, mas é insuficiente para
+executar instalador no token atual. O Supervisor recebeu status sanitizado.
+
+**P08 offline, parcela nova:** `Invoke-QualificationBuild.ps1` agora separa
+as fases `Package`/`PackageDirected` sem SQL do perfil shadow: elas usam o
+driver global 12.8.2 coerente com o lock P08 e copiam a DLL 12.8.2 do cache
+Maven **apenas como bytes passivos**, após tamanho/hash do lock, sem carregá-la.
+As fases físicas continuam no perfil shadow 12.8.1. O controlador usa o
+wrapper do snapshot, exige JDK17 de processo/parâmetro e aceita rodada
+privada nova, sem alterar a rodada histórica. Em
+`target/macrobloco-qualificacao-pacote-20260928-01`, os builds candidatos
+`p08-offline-package-a/b` saíram 0 com `package -DskipTests`, zero flags
+shadow/URL/JDBC; cada um trouxe oito JARs em `target/lib` e DLL passiva
+12.8.2 de 318.120 bytes, SHA-256
+`02DB7B0053C4A65B622EF53ECCB8B55687FDA16AE808F96DC73ACC7340C89C6E`.
+Os dois pacotes candidatos passaram a verificação interna, com **187 membros
+de payload, nove dependências e 2.159 inputs**; revisão
+`d406590a03e1b0c4bd4ac99615b0d8a9e5995c959e0276307f00fde62837b37a`,
+manifesto `789cdc6ebfcdfe3356586ea8754df44739aa0cc480148e338ff7fab9c42e0379`
+e ZIP `15da781f70c8666444e50de556bcf1473b0e1ed34e0da0c05ffb61c596df86f6`
+idênticos A/B. A extração segura do A validou **189 entradas do envelope** e
+os hashes. Estado registrado pelo empacotador: `PACKAGED_NOT_SMOKE_QUALIFIED`.
+O launcher do pacote ainda ativa flags shadow com DLL 12.8.2; **não foi
+executado**, obedecendo à decisão do Supervisor de não executar 12.8.2 no
+perfil shadow. Esse conflito de runtime/lock, mais IT/SQL física, smoke,
+guardas e aceite, impede P08 integral. A prova de build normal v66 continua
+válida para os mesmos bytes de Java/POM; o delta novo é de controlador e
+recibos de empacotamento, não um novo `clean verify` físico.
+
+**Gates finais desta parcela:** `Test-TrilhaPreparation.ps1` saiu 0
+(33 etapas, 48 IDs abertos, nove pacotes; `executionAuthorized=false`);
+scanner offline saiu 0 sobre 4.024 candidatos (4.023 textos, um binário
+verificado, zero achados); Gitleaks 8.29.1 em espelho privado de 4.023
+arquivos saiu 0, zero vazamentos. `graphify update . --no-cluster` após o
+controlador saiu 0, 37.140 nós/95.051 arestas. UTF-8 estrito em sete
+arquivos alterados e `git diff --check` passaram; avisos Git de futura
+normalização CRLF em arquivos preexistentes não são erro do diff. Logs
+privados em `target/ci-p10-20260927-01/*p08-v68-private.log` e recibos da
+rodada P08 permanecem preservados.
+
+# P01–P33 / bytes finais v66, perfis shadow 12.8.1 e ambiente pendente — 28/09/2026
+
+**Fechamento da parcela executável.** Após a subetapa v63 abaixo, o perfil
+`shadow-migrations-windows-auth` também passou a fixar driver
+`mssql-jdbc:12.8.1.jre11` e propriedade de DLL
+`mssql-jdbc_auth:12.8.1.x64`; o perfil `shadow-local-integration` já usa o
+mesmo par. O build normal mantém o par global 12.8.2 para o lock de pacote
+existente. `help:evaluate` offline confirmou as seis propriedades efetivas;
+`dependency:tree` do perfil de migrations resolveu o driver 12.8.1 sem URL
+ou SQL. A opção Flyway de Windows integrada ainda exige revisar o uso da
+DLL 12.8.1 antes de um goal SQL: o perfil fixa versões, mas não configura
+sozinho `java.library.path` e o limite atual de DLL é a IT local opt-in.
+Nenhuma migration foi executada. O runbook especifica alvo, preflight,
+recuperação e a decisão ainda pendente do usuário sobre instalar serviço e
+criar o banco exato nesta máquina.
+
+No espelho v66, os **1.313 arquivos `src/`**, `pom.xml` e **20 POMs** do
+catálogo são idênticos por SHA-256 ao worktree; nenhum `.env` foi copiado.
+`mvnw -o clean verify` com Java 17/heap 512 MiB, sem perfil shadow/URL, saiu
+**0** nos bytes finais: Spotless, Checkstyle, Enforcer, pacote,
+**2.348 Surefire** (cinco skips) e **seis Failsafe offline**, zero
+falhas/erros. JaCoCo `bootstrap`: **4.384/5.457 linhas (80,34%)** e
+**1.942/2.853 ramos (68,07%)**, limiares 80/60 intactos, exclusões somente
+de classes físicas SQL exatas pinadas. Log
+`target/ci-p10-20260927-01/clean-verify-v66-private.log` SHA-256
+`b522aa9cbd1fcd1158277336f0e57c30ec3063308a3358f339839388410db438`;
+JaCoCo XML SHA-256
+`6b42f524f5cd6e0ee18093e6bdd8c86bd2900204364a1ce837edd2435398d320`.
+Em espelho separado v67 com os mesmos bytes de fonte/POM,
+`process-test-classes` opt-in com as duas travas shadow saiu 0 sem URL/JDBC,
+copiou **uma única** DLL `12.8.1.x64` a `target/native`, SHA-256
+`9a92363a42db34e9f27cedffe18b139d7bb6c93495cb8338f7f8dbb93f3ae538`;
+log SHA-256 `9b7300139f28b717a738797dccfee85c4d261b87a3379b44a77f8645382fcdf3`.
+Graphify AST no Python isolado passou após o POM final: 37.128 nós/95.033
+arestas, log `target/ci-p10-20260927-01/graphify-update-v66-private.log`.
+
+PMD bruto segue com 36 achados (`FINDINGS_OPEN`, zero parser errors).
+A disposição local com os **2.348 Surefire v66/278 XML/48 vínculos** saiu
+`PASS_LOCAL_REVIEWED_FINDINGS` 36/36, zero supressões, sem SAST integral ou
+aceite nominal; `target/ci-p10-20260927-01/pmd-disposition-v66/result.json`
+SHA-256 `9c8c6cfea8063bd16bad639d518e6990289a3dd03dd21b94f77f5479cfe5ff5e`.
+P07/P08 físicos permanecem sem prova atual: banco local ainda não existe em
+instância conferida, não houve preflight `master`, IT JDBC, sintéticos,
+rollback/contagens, nem pacote extraído A/B/selo/readback; a incompatibilidade
+entre lock P08 12.8.2 e build Package que ativa perfil shadow 12.8.1 não foi
+ocultada. P10/G02 externo ainda carece de owner, publicação autorizada,
+histórico remoto escaneado e checks reais no SHA novo. P29 requer política,
+SAST/licenças/SOs e aceite de Segurança/release owner. **Nenhum checkbox
+integral P01–P33 foi promovido.** A próxima etapa local é scanner/Gitleaks,
+trilha, UTF-8/diff e checkpoint; a próxima etapa SQL exige resposta do
+usuário, instância exata e preflight.
+
+# P01–P33 / reconstrução shadow local e revisão JDBC 12.8.1 — 28/09/2026
+
+**Autoridade e ambiente materialmente alterado.** O usuário esclareceu que a
+sombra anterior está **em outra máquina**; não houve nem haverá conexão a ela
+sob a autorização `localhost`. O único alvo proposto é
+`localhost/ETL_SISTEMA_V2_SHADOW`, autenticação Windows existente. A inspeção
+read-only local encontrou zero serviços SQL Server e zero listeners locais na
+porta 1433; `sqlcmd.exe` e `V2_SHADOW_JDBC_URL` não estão disponíveis neste
+processo. Não há nome/versão/edição de instância, collation, storage, quota,
+backup ou preflight de `master` e não se infere a existência do banco. Nenhum
+SQL, `CREATE DATABASE`, instalação de serviço, DDL, fonte, push, merge, deploy
+ou cutover foi executado. A instrução vigente permite migrations V2 e testes
+sintéticos revertidos **somente depois** de conferir o alvo local exato; não
+autoriza instalar o serviço nem criar o banco. O Supervisor declarou que não
+pode conceder essa nova autorização e encaminhou pergunta específica ao
+usuário; resposta ainda pendente. O procedimento e recuperação estão em
+`docs/runbooks/reconstrucao-shadow-local-20260928.md`. O banco da outra máquina
+e os recibos privados de 22/09 não são evidência da nova sombra.
+
+**Inventário e preparo sem SQL.** `database/migrations/` contém V001–V104
+contíguas; `database/baseline/001_schema_foundation_baseline.sql` inclui as 104
+em ordem; `database/manifest/` tem 36 arquivos e `database/validation/` 67.
+Os validadores estáticos `Test-SchemaFoundationManifest.ps1` e
+`Test-ProgressiveDataGate.ps1` passaram na v60, sem afirmar equivalência de
+schema material. O plugin Maven Flyway e `flyway-sqlserver` 9.22.3, fixados no
+POM, foram obtidos do Maven Central em cache local (log
+`target/ci-p10-20260927-01/flyway-tooling-cache-private.log`, SHA-256
+`eb33f807335adc47405342492c858ec034ff4e009c8dc7781e8f5044e4835a2a`).
+O goal offline `flyway:help` falhou porque essa versão não oferece `help`;
+ela enumerou `baseline/clean/info/migrate/repair/undo/validate`, sem conectar
+ao banco. Não se executou `info`, `migrate`, `validate` ou outro goal com SQL.
+
+**Decisão JDBC e regressão P07/P10.** O Supervisor fixou a DLL autorizada
+`mssql-jdbc_auth:12.8.1.x64`. A documentação Microsoft de NativeAuthentication
+usa o nome versionado da DLL; por isso o perfil `shadow-local-integration`
+seleciona **ambos** `mssql-jdbc:12.8.1.jre11` e
+`mssql-jdbc_auth:12.8.1.x64`. Os valores globais 12.8.2 ficaram intactos.
+O driver JAR e a DLL 12.8.1 vieram do Maven Central; SHA-256 respectivos
+`e6933c0711e598a224060e52ed31392f720a4a7664e85d8ae37c52a85b67ebb0`
+e `9a92363a42db34e9f27cedffe18b139d7bb6c93495cb8338f7f8dbb93f3ae538`.
+No espelho v64, 1.313 fontes/POM idênticos por SHA ao worktree, as duas
+travas Maven compilaram 656 fontes principais/547 de teste e copiaram **só**
+`mssql-jdbc_auth-12.8.1.x64.dll` para `target/native`; `dependency:tree`
+confirmou o driver 12.8.1. Não houve URL, carregamento nativo nem IT/JDBC;
+log `shadow-profile-process-test-classes-v64b-private.log`, SHA-256
+`78870ac3e9146b62057945162030cabf4d9a7f675efdea9d10d8f3b611c190ba`.
+Uma primeira invocação parou antes do Maven por parsing PowerShell do `-D`
+sem aspas e foi preservada; a repetição com argumento citado passou.
+
+Na revisão v63, antes do ajuste final no perfil de migrations, o espelho possui 1.313 fontes, POM e POMs
+de catálogo idênticos por SHA ao worktree. `mvnw -o clean verify`, Java 17,
+heap 512 MiB, sem perfil shadow/URL, saiu **0**: Spotless, Checkstyle,
+Enforcer, build e pacote; **2.348 Surefire**, cinco skips, zero falhas/erros;
+**seis Failsafe offline**, zero falhas/erros. JaCoCo `bootstrap` manteve
+4.384/5.457 linhas (80,34%) e 1.942/2.853 ramos (68,07%), com limiares
+80/60 intactos e apenas classes físicas SQL exatas excluídas. Log
+`target/ci-p10-20260927-01/clean-verify-v63-private.log` SHA-256
+`8bd7226ffb708ec0e7d732fece1ec6626e7af39a37fb3d02aec0bf18a4a4cc00`;
+XML JaCoCo SHA-256
+`dd3a450a0fe544a7c15940dda70df96a068e9f3cf4e9898eae1bc40d76414a65`.
+O perfil shadow não recebeu `clean verify` porque a IT exigiria o banco exato;
+`process-test-classes` isolou a prova de seleção de artefatos sem SQL.
+
+**P08 e P29 na camada offline.** Os nove POMs do fornecedor continuam nos
+bytes do lock; a IT offline de integridade e as outras cinco ITs de pacote
+passaram no v63. O lock de distribuição P08 é 12.8.2 e o controlador
+`Invoke-QualificationBuild.ps1` ativa `shadow-local-integration` em
+`Package/PackageDirected`, que agora produz 12.8.1. Essa divergência é real:
+não usar 12.8.2 pelo perfil shadow, alterar lock histórico para ocultá-la ou
+alegar pacote físico P08 qualificado. O fluxo de pacote e smoke deve ser
+reconciliado na revisão final com o owner; P07/P08 físicos exigem banco local,
+preflight, sintéticos/rollback, contagens antes/depois e novos recibos.
+PMD bruto permanece `FINDINGS_OPEN` (36 achados/656 fontes/dez regras).
+Contra os **2.348 Surefire v63, 278 XML e 48 vínculos**, a disposição local
+passou `PASS_LOCAL_REVIEWED_FINDINGS` 36/36, zero supressões, sem aceite SAST
+nominal ou release; `target/ci-p10-20260927-01/pmd-disposition-v63c/result.json`
+SHA-256 `e1cd893defa94abf732bbca8fc1b5e38bc98d079e9b2696c8f1ae756f59af351`.
+Duas invocações anteriores com raiz incorreta foram preservadas como RED
+`DISPOSITION_PATH_SCOPE` e `DISPOSITION_PATH_MISSING` antes dos achados.
+
+**Aceites e próxima frente.** Nenhum checkbox P01–P33 foi promovido. P10/G02
+local tem o gate normal verde; ainda faltam IT shadow e, do owner do
+repositório, remote/branch/conjunto/proteções/aprovadores, autorização de
+publicação, varredura do histórico após fetch permitido e três checks reais
+no novo SHA. P07/P08 exigem autorização específica do usuário para instalar
+serviço/criar exclusivamente o banco local, ou provisionamento do DBA, seguido
+do preflight e provas materiais; o nome exato de instância/host/storage e plano
+de recuperação ainda precisam ser fixados. P29 requer a política/artefatos
+SAST/licenças/SOs e aceite nominal de Segurança/release owner. P11, P12,
+P13 e demais frentes mantêm os inputs externos discriminados no mapa de 33 P;
+nenhum desses inputs é substituído pelo trabalho offline. Próximo passo local:
+scanner/Gitleaks finais, validação documental/UTF-8 e checkpoint; após a
+decisão do usuário, qualificar o serviço/alvo exato antes de qualquer DDL.
+
+# P01–P33 / P07–P08–P10–P29 — gate offline final v60 e POMs do fornecedor, 28/09/2026
+
+**Unidade, autoridade e limite.** O mapa por critério original permanece em
+`docs/continuidade/qualificacao-p07-p33/mapa-p01-p33-20260927.md` (33 P).
+Após o checkpoint 0300, o Supervisor visível pediu resolver o cache PMD e
+qualificar as parcelas offline de P07/P08/P29. O Builder atuou somente no
+worktree e em espelhos/recibos sob `target/`, preservando deltas anteriores,
+manifests, ledgers e logs RED. Não houve SQL, conexão de fonte, push, merge,
+deploy, cutover, atualização de dependência do POM ou autorização nova de
+produção. O `../CONTEXTO_GLOBAL.md` segue ausente na busca segura já
+registrada. Pré-condições, alvos, limites e recuperação antes dos efeitos estão
+no `target/ci-p10-20260927-01/action-log.md` privado.
+
+**P08, defeito reproduzido e corrigido.** A tentativa isolada de executar só
+`QualificationPackageCompositionIT#verifiedPackageRejectsCrossDocumentDriftEvenWithResealedOuterHashes`
+preservou três REDs: goal Failsafe direto sem `argLine`; depois falta da DLL
+pinada somente em `target/native`; depois
+`QUAL_DEPENDENCY_POM_CORRESPONDENCE` no `@BeforeAll`, antes do método e sem
+SQL. O terceiro erro era concreto: cinco POMs de terceiros no checkout tinham
+LF, mas o lock exigia os bytes CRLF publicados pelo Maven Central. A
+reconstituição CRLF e os cinco POMs do cache correspondiam exatamente aos
+SHA-256 já pinados; os outros quatro já correspondiam. A regra específica
+`-text -diff -eol` em `.gitattributes` e a cópia dos cinco bytes publicados
+restabeleceram os nove hashes sem mudar versão, lock ou manifest histórico.
+A contraprova selecionada passou em v59d: **um método, zero falhas/erros**,
+recibo `target/ci-p10-20260925-01/offline-package-mutants-v59d-private.log`
+(SHA-256 `b92624e6df7423c7c3eb2c361f3d06a7b2981f903d5e66622c70ff17e68ea278`).
+Nova `QualificationPackageIntegrityIT#catalogPomsRetainThePinnedPublisherBytes`
+falha se qualquer um dos nove POMs divergir do lock; não abre JDBC. A DLL
+12.8.2 foi copiada só para o `target/native` do espelho daquela contraprova,
+com hash/tamanho conferidos, sem carregar código nativo ou versioná-la.
+Isto prova integridade offline, não o pacote físico P08, JAR extraído, A/B,
+guardas, selo/readback ou 492 ITs nos bytes atuais.
+
+**P07/P10, bytes finais e gate local.** Um ZIP oficial Eclipse Temurin
+17.0.20.1+1 foi obtido para `target/` somente, com SHA-256 e tamanho
+publicados conferidos antes da extração; não houve instalação ou `PATH` global.
+O espelho v60 tem **1.313 arquivos `src/` e `pom.xml` idênticos** por SHA-256
+ao worktree, nove POMs do catálogo iguais ao lock e nenhum `.env`. Com
+Java 17, Maven offline e heap 512 MiB, `mvnw clean verify` saiu **0**:
+Spotless, Checkstyle, Enforcer, compilação e pacote passaram; **2.348
+Surefire** sem falhas/erros e cinco skips; **seis Failsafe offline** sem
+falhas/erros, incluindo a guarda nova. JaCoCo `bootstrap`, após excluir
+somente as classes físicas exatas pinadas, manteve **4.384/5.457 linhas
+(80,34%) e 1.942/2.853 ramos (68,07%)** contra 80/60 intactos. Log
+`target/ci-p10-20260925-01/clean-verify-v60-private.log` SHA-256
+`54930beef5cdb136923ee96ab73cdd3d952c3b46f20c9fc9a9d4724fa2318982`;
+XML `candidate-repo-mirror-v60/target/site/jacoco/jacoco.xml` SHA-256
+`a554923f17cdca3b7b0a3a53b29ee7015303442a01aeb48aab9acbf36388f946`.
+O runtime Java 17 e o PowerShell foram selecionados só no processo desta
+rodada. `graphify update . --no-cluster` no Python isolado saiu 0, 37.119
+nós/95.019 arestas, após o crash Python 3.14 já diagnosticado.
+
+**P29, análise estática local.** O cache Maven recebeu somente os artefatos
+PMD 7.17.0/plugin 3.28.0 fixados e o skin transitivo exato da fonte Maven
+Central; os três pins principais foram conferidos. PMD offline analisou
+**656 fontes, dez regras, zero erros, 36 alertas brutos** (29
+`PreserveStackTrace`, sete `CloseResource`), estado `FINDINGS_OPEN`/exit 1,
+recibo `target/ci-p10-20260927-01/pmd-static-v2/result.json` SHA-256
+`ea00c00796827910626681bb6427499bd965f3956edcc053375a076efcfdd8e9`.
+Os 36 achados, caminhos, linhas e hashes dos fontes correspondem exatamente
+ao catálogo técnico preexistente. Só um arquivo de teste vinculado mudou,
+pela adição de um caso; os seis vínculos para seus métodos não alterados
+foram repinados, sem mudar classificações ou suprimir finding. O verificador
+composto sobre os **2.348 Surefire v60, 278 XML e 48 vínculos** saiu
+`PASS_LOCAL_REVIEWED_FINDINGS`, mantendo o raw `FINDINGS_OPEN` e os flags
+`nominalSecurityAcceptance=false`/`releaseAcceptance=false`.
+`target/ci-p10-20260927-01/pmd-disposition-v60/result.json` SHA-256
+`8a5b53e429bec80578d31933e7de7530e2dc8a8585ac2a45c508bc86f49ba959`.
+Isso fecha apenas a disposição técnica local; SAST integral, política,
+baseline/exceções e aceite nominal permanecem com Segurança e release owner.
+
+**Scanner local na revisão.** `Invoke-OfflineSecretScan.ps1` saiu 0 no worktree:
+4.022 candidatos, 4.021 textos, um binário conhecido, zero achados;
+`target/ci-p10-20260927-01/offline-secret-scan-v60-precheckpoint-private.log`.
+Gitleaks `dir` saiu 0/zero leaks em espelho novo sem `.env`, `target`, Git ou
+Graphify; `target/ci-p10-20260925-01/gitleaks-v61-precheckpoint-private.log`.
+Ambos serão conferidos novamente após a última atualização documental; nenhum
+desses scans equivale à varredura do histórico remoto exigida em G02.
+
+**Lacunas e próximo efeito elegível.** P07/P08 ainda exigem a instância
+`localhost`/`ETL_SISTEMA_V2_SHADOW`, URL Windows integrada válida,
+`sqlcmd`, preflight de nome exato no `master`, contagens antes/depois e
+transações sintéticas revertidas; a configuração e o serviço local continuam
+ausentes na checagem desta sessão. Sem isso, nem o perfil opt-in de duas
+travas, nem a cadeia serial física P08 são provas atuais. P10/G02 ainda exige
+do owner do repositório provider/remote/branch, conjunto exato aprovado,
+proteções/aprovadores, autorização de publicação, varredura do histórico
+após fetch autorizado e três checks reais no novo SHA; o HEAD remoto
+histórico falho não foi substituído. P29 exige Segurança/release owner para
+SAST/licenças/SOs e RC nominal. P11 exige aceite de baseline por Segurança;
+P12, ambiente/TTL/restore material por DBA/Operações/Segurança/Compliance;
+P13, G01 e contrato/oráculo de fornecedor/data owner antes de nova sonda.
+O gate offline não promove **nenhum checkbox integral P01–P33**. Próximas
+frentes independentes são validar scanner/trilha/UTF-8/diff no delta final e
+qualificar algum novo artefato externo somente quando seu owner o entregar.
+
+# P01–P33 / P10-G02 — gate Ubuntu local fechado na revisão v56, 28/09/2026
+
+**Critério e limite.** O mapa vigente dos 33 critérios originais permanece em
+`docs/continuidade/qualificacao-p07-p33/mapa-p01-p33-20260927.md`. Nesta
+sessão, o único Builder visível corrigiu a lacuna técnica local de P10/G02 sem
+promover checkbox: no espelho isolado v56, com JDK 17 e heap Maven 512 MiB,
+`mvnw clean verify` saiu **0**. Passaram Spotless, Checkstyle, Enforcer,
+compilação, empacotamento, **2.348 testes Surefire sem falhas/erros (cinco
+skips)** e **cinco ITs Failsafe offline sem falhas/erros**. O JaCoCo do pacote
+`bootstrap`, com exclusões exatas de classes físicas, registrou
+**4.384/5.457 linhas (80,34%)** e **1.942/2.853 ramos (68,07%)**, acima dos
+limiares preservados de 80/60. A comparação SHA-256 do `pom.xml` e dos
+**1.313 arquivos em `src/`** entre worktree e espelho v56 mostrou zero
+faltantes, extras ou divergentes. Recibos em
+`target/ci-p10-20260925-01/{focused-v56b,clean-verify-v56}-private.log` e
+`candidate-repo-mirror-v56/target/site/jacoco/jacoco.xml`.
+
+**Delta técnico e causalidade.** A instrumentação das ITs offline alcança os
+JARs filhos. Testes sintéticos novos exercitam paginação de Usuários, oráculos
+de monitor/SQL, reconciliação do Supervisor, binding de barreira e logs,
+sweep, capturas integrais e mapeamento de resultado das CLIs. Apenas rotas que
+abrem sessão ou executam SQL foram movidas para classes físicas aninhadas com
+SHA-256 pinado em `docs/catalogos/ci-coverage-scope/`, exclusão exata no gate
+Ubuntu e inclusão exata no gate shadow; a política de escopo testa mutações de
+fonte/POM. Admissão, projeção e classificação de resultados continuam no gate
+Ubuntu. O RED v50 por `pwsh.exe` ausente do `PATH` do processo de teste foi
+preservado; v51–v56 usaram o PowerShell local apenas no `PATH` daquele processo.
+`git diff --check` saiu 0, com avisos de CRLF preexistentes.
+
+**Validações e riscos ainda abertos.** O scanner offline final passou em 4.022
+candidatos, 4.021 textos, um binário verificado, zero achados. O primeiro
+Gitleaks no espelho já compilado encontrou três correspondências em
+`target/classes` sintético gerado; a primeira cópia de varredura incluiu
+indevidamente o `.env` local. Essa cópia foi removida por caminho exato,
+preservando o original; Gitleaks repetido na árvore limpa saiu 0, zero
+achados após sincronizar a documentação final
+(`target/ci-p10-20260925-01/gitleaks-final-private.log`).
+`Test-TrilhaPreparation.ps1` passou: 33 estágios, 48 IDs abertos, nove
+pacotes de input e `executionAuthorized=false`. O PMD fixado
+permanece indisponível no cache local (`STATIC_TOOL_CACHE_MISSING_OR_DRIFT`),
+sem alegação de SAST integral. `graphify update . --no-cluster` no Python
+do ambiente isolado saiu 0 após o crash nativo intermitente anterior de
+Python 3.14/`ucrtbase.dll`: 37.108 nós e 95.003 arestas.
+
+**Shadow e G02.** O processo não tem `V2_SHADOW_JDBC_URL` não vazio; a última
+definição local `.env` também não é não vazia, `sqlcmd` não está disponível e
+nenhum serviço SQL Server local está em execução. Portanto não houve conexão
+ao `master`, preflight do alvo, IT shadow, DDL/DML ou prova física de rollback
+nos bytes v56. A prova local histórica P07/P08 de 22/09 pertence a bytes
+anteriores. G02 ainda exige do owner do repositório provider/remote/branch,
+conjunto exato aprovado, proteções/aprovadores, autorização de publicação e
+três checks reais vinculados a novo SHA; o HEAD remoto histórico segue falho.
+Nenhum push, merge, deploy, cutover, sonda de fonte ou SQL foi feito nesta
+rodada. P10/G02 e P07/P08 **não** recebem aceite integral por este gate Ubuntu.
+
+# P01–P33 / P10-G02 — medição v44 da revisão atual, 27/09/2026
+
+**Estado canônico desta unidade:** o mapa dos 33 critérios originais está em
+`docs/continuidade/qualificacao-p07-p33/mapa-p01-p33-20260927.md`.
+O pacote P10/G02 avançou materialmente, mas nenhum checkbox foi promovido.
+O espelho v44 contém os mesmos bytes de `pom.xml` e dos 1.309 arquivos sob
+`src/` do worktree (zero faltantes, zero divergentes por SHA-256). Em JDK 17,
+`mvnw clean verify` executou **2.332 Surefire, zero falhas/erros, cinco skips**
+e **quatro ITs Failsafe offline, zero falhas/erros**. Spotless, Checkstyle,
+Enforcer, compilação, testes e empacotamento passaram. JaCoCo recusou apenas
+o mínimo de linhas do pacote `bootstrap`: **4.076/5.536 linhas**, faltam
+**353** para 80%; **1.830/2.865 ramos** já superam 60%. Limiar e inclusão da
+lógica pura não foram relaxados. Recibos e XML:
+`target/ci-p10-20260925-01/{targeted-v44,clean-verify-v44}-private.log` e
+`target/ci-p10-20260925-01/candidate-repo-mirror-v44/target/site/jacoco/jacoco.xml`.
+
+**Delta v41–v44:** teste offline de owner de processo ainda vivo evita
+reconciliação indevida; `DeclaredAnalyticReferences$SqlImports` e
+`LocalFactOracle$SqlComparison` foram isolados como classes físicas SQL exatas
+com pins e paridade de include shadow/exclude Ubuntu, enquanto validação pura
+permaneceu no Ubuntu. As projeções CLI da sequência e do cenário ganharam
+testes puros para os 19 contratos e saída sanitizada. Os testes focados de
+escopo e projeção passaram. Não houve execução shadow: o processo segue sem
+`V2_SHADOW_JDBC_URL` não vazio, `sqlcmd` ou instância SQL Server local
+verificável; nenhuma conexão, DDL/DML ou prova de rollback físico foi inferida.
+
+**Pendência técnica local P10:** cobrir causalmente mais 353 linhas puras
+relevantes e/ou isolar somente rotas físicas SQL demonstradas em classes
+exatas, testar, repetir `clean verify` nos bytes finais e provar as classes
+físicas no shadow quando o preflight de `localhost`/
+`ETL_SISTEMA_V2_SHADOW` for possível. O déficit JaCoCo é técnico local,
+distinto de G02. G02 requer do owner do repositório provider/remote/branch,
+conjunto aprovado, proteções/aprovadores, autorização de publicação e três
+checks reais no novo SHA; o HEAD remoto histórico está falho. P07/P08 de
+22/09 são evidência histórica para bytes anteriores. Nenhum push, merge,
+deploy, cutover, sonda externa ou SQL foi executado nesta unidade.
+
+# P01–P33 / P10-G02 — revisão local 27/09/2026, gate de linhas ainda aberto
+
+**Autoridade e escopo.** Nova instrução do Supervisor em 27/09 autoriza o único
+Builder visível a avançar P01–P33 e modificar arquivos, preservando o delta
+anterior, sem push/merge/deploy nem SQL fora do shadow local autorizado. O mapa
+de critérios, camadas, lacunas, inputs externos e próximas ações está em
+`docs/continuidade/qualificacao-p07-p33/mapa-p01-p33-20260927.md`; a matriz é
+índice e não aceite. `main`/`origin/main` e o delta preexistente foram
+inventariados antes das alterações. A busca segura sob
+`C:/Users/lucas/OneDrive/Documentos` não localizou `../CONTEXTO_GLOBAL.md`.
+
+**P10/G02: efeito local executado, sem aceite.** No espelho isolado v40 dos bytes
+de código/POM/teste atuais, `mvnw clean verify` em JDK 17 com heap Maven 512 MiB
+executou **2.330 Surefire, zero falhas/erros e cinco skips**, e **três ITs
+Failsafe offline, zero falhas/erros**. Spotless, Checkstyle, Enforcer, compilação,
+testes e empacotamento chegaram ao JaCoCo. O único gate vermelho foi o pacote
+`bootstrap` filtrado: **4.034/5.575 linhas** e **1.822/2.881 ramos**, limiares
+80/60; faltam **426 linhas**, enquanto o gate de ramos passou. O v31 anterior
+tinha 3.705/5.768 linhas e 1.647/2.950 ramos, faltando 910 linhas e 123 ramos.
+O v37 teve RED de expectativa de teste empacotado (três etapas esperadas vs.
+sete reais), corrigido e provado verde em v40; o RED permanece no recibo
+privado. Recibos `target/ci-p10-20260925-01/{targeted-v40b,clean-verify-v40}-private.log`
+e XML v40 preservados; nenhum `verify` verde é alegado.
+
+**Mudanças e decisão de cobertura.** O agente JaCoCo da JVM de teste é
+repassado apenas aos processos JAR filhos das ITs offline, contabilizando o
+bytecode realmente executado. Novos testes sintéticos cobrem entradas
+temporais, paginação/bindings, sweep, Raster, plano de agenda, CLI fail-closed,
+tuplas dos oráculos e seleção de sequência selada com sete etapas. Corpos que
+dependem de sessão/consulta JDBC foram isolados em classes físicas exatas de
+`AnalyticLaboratoryMain`, `SequenceAgenda`, `ExpansionLaboratoryMain`,
+`RelationalLaboratoryMain`, `LocalCollectionSweepProgram`,
+`AnalyticScenarioFaults` e `DeclaredSqlOracles`, com SHA-256 do fonte no
+catálogo `docs/catalogos/ci-coverage-scope/`, exclusão exata no gate Ubuntu,
+inclusão exata no gate shadow e contraprovas de escopo em
+`CiCoverageScopePolicyTest`. A preparação/validação puras continuam no gate
+Ubuntu; os limiares 80/60 não foram reduzidos. As classes SQL novas ainda
+precisam de prova física no perfil shadow e nenhuma foi marcada aceita.
+
+**Ambiente e dependências.** O processo não tem `V2_SHADOW_JDBC_URL`, a `.env`
+não contém definição não vazia dessa chave, `sqlcmd` não foi encontrado e não
+há serviço SQL Server local ativo; por isso não houve preflight no `master`, IT
+shadow, DDL/DML ou alegação de rollback físico nesta revisão. É necessário
+provisionar configuração Windows integrada para `localhost`/
+`ETL_SISTEMA_V2_SHADOW` e instância local verificável para a prova JDBC,
+respeitando as duas travas opt-in e contagens antes/depois. A falha antiga de
+Graphify foi diagnosticada como crash nativo intermitente de Python 3.14/
+`ucrtbase.dll`; uma execução posterior de `graphify update . --no-cluster`
+terminou 0, mas será repetida após os últimos fontes. O gate remoto G02 ainda
+carece de owner nominal, provider/remote/branch e conjunto aprovado,
+proteções/aprovadores, autorização de publicação e três checks reais no novo
+SHA; o HEAD remoto histórico permanece falho. A cobertura Ubuntu tem lacuna
+**técnica local**, não bloqueio por input externo. P07/P08 de 22/09 seguem
+históricos porque estes bytes mudaram; nenhum checkbox foi promovido.
+
+**Próxima ação independente:** continuar testes sem banco dos caminhos puros
+ranqueados no XML v40 até fechar as 426 linhas, repetir `clean verify` sobre
+bytes finais e então requalificar P07/P08 afetados. Scanner/Gitleaks, análise
+estática, Graphify final, diff/UTF-8, trilha e checkpoint da presente unidade
+serão registrados depois desta sincronização; não são aceites ainda.
+
+# P10/G02 — fechamento documental da rodada local 0298/0299 — 25/09/2026
+
+**Instrução final desta rodada:** encerrar e documentar o candidato atual, sem
+nova implementação, teste de cobertura ou extração de classe. Checkpoint 0298
+reconciliado pelo SHA-256
+`779053a985ab14a47be6f90fcdb97d031e5147dacf114f8cc4bc2b30b975e5d9`.
+Os quatro recibos privados v31 (`clean-verify`, scanner, Gitleaks, trilha)
+existem em `target/ci-p10-20260925-01/`; não havia processo Maven/pwsh do
+candidato em andamento. Um processo Java alheio ao candidato permaneceu
+intocado. O HEAD local e o `origin/HEAD` consultado read-only continuam
+`b9dac416737ac69c98d0e63715411b7c62fa03f7`. O diff atual foi
+inspecionado, `git diff --check` saiu 0, e os **45 inputs modificados/não
+versionados de `pom.xml`, `.gitleaks.toml` e `src/`** foram comparados por
+SHA-256 com o espelho v31: zero ausentes/zero diferentes. Assim, nenhum efeito
+Maven incerto exigia repetição, e nenhum fonte/teste/POM foi editado neste
+fechamento. Mudanças preexistentes em `.gitattributes`, `.gitignore`,
+`AGENTS.md`, backups e índice real foram preservadas.
+
+**Resultado real nos bytes de código atuais:** os relatórios XML do espelho
+v31 confirmam 2.318 Surefire (zero falhas/erros, cinco skips históricos) e
+duas ITs Failsafe offline (zero falhas/erros). O `clean verify` JDK 17/
+`-Xmx512m` já executado **saiu 1 na regra JaCoCo de `bootstrap`**: pacote
+filtrado 3.705/5.768 linhas (0,642) e 1.647/2.950 ramos (0,558), abaixo de
+80/60; faltam 910 linhas/123 ramos no denominador v31. Não houve novo
+`verify` nesta etapa documental, nem CI verde inferido do teste unitário.
+Scanner offline v31 no espelho Git indexado teve 4.007 candidatos, 4.006
+textos, um binário, zero achados/não inspecionados; Gitleaks 8.29.1 teve
+zero achados. A validação final de trilha/documentos fica no checkpoint 0299.
+
+**Validadores do fechamento, sem novo Maven:** após a sincronização documental,
+`Test-TrilhaPreparation.ps1` saiu 0 (`preparation stages=33`, `openIds=48`,
+`inputPackages=9`, `executionAuthorized=false`); `git diff --check` saiu 0
+e os quatro arquivos documentais tocados passaram UTF-8 estrito sem BOM.
+Espelho v32 criado apenas sob `target/ci-p10-20260925-01/`, com HEAD exato
+mais overlay e índice Git local (`core.longpaths=true` somente nessa chamada):
+4.009 arquivos. Scanner offline retornou **PASS** em 4.009 candidatos,
+4.008 textos, um binário verificado, zero não inspecionados, oversized ou
+achados; Gitleaks 8.29.1 reportou **no leaks found**. Recibos privados
+`{trilha,scanner,gitleaks}-v32-private.log`. O espelho cobre a documentação
+antes desta anotação de resultado; esta anotação contém apenas contagens e
+nomes de validação, sem fonte/segredo. Nenhum scanner foi tratado como prova
+de `verify` verde.
+
+**Lacunas sem aceite:** shadow IT opt-in **não executada** porque
+`V2_SHADOW_JDBC_URL` não estava presente no processo; a inclusão estrutural
+das classes físicas no gate shadow não substitui Windows integrado,
+localhost/`ETL_SISTEMA_V2_SHADOW`, sintéticos, rollback e cobertura 80/60
+física. `graphify update . --no-cluster` falhou localmente nas duas tentativas
+anteriores com `-1073741819`; o grafo pode estar desatualizado e não foi
+repetido sem diagnóstico novo. No HEAD remoto consultado, `dependency-audit`
+estava skipped, `secret-scan` e `verify` falhos; o log oficial retornou 403.
+Não existe novo SHA remoto com três checks satisfatórios, nem aceite nominal
+do owner/G02 (remote/provedor, aprovadores, proteções e autorização de
+publicação). **P10/G02 permanece aberto e sem checkbox novo.** Próximo
+trabalho técnico, somente sob nova direção, é fechar causalmente o déficit
+Ubuntu de `bootstrap` e repetir `clean verify`; para o gate físico, obter
+configuração exata autorizada de shadow. A promoção remota exige owner/G02,
+SHA publicado por agente autorizado e checks desse novo SHA. Nenhum push,
+merge, deploy, banco, fonte externa ou alteração de segredo ocorreu.
+
+# P10/G02 — diagnóstico e correção local de CI em andamento — 25/09/2026
+
+**Alvo e limite.** HEAD local e remoto conferidos como
+`b9dac416737ac69c98d0e63715411b7c62fa03f7`; sem push, merge ou deploy.
+Consulta pública read-only, serial e limitada mostrou três check-runs nesse SHA:
+`dependency-audit` skipped, `secret-scan` failure e `verify` failure. Metadados
+sanitizados apontam a etapa 7 do secret-scan e a etapa 4 do verify. O único GET
+de log oficial tentou secret-scan e recebeu HTTP 403; nenhum outro log foi pedido.
+Annotations salvas em `target/ci-p10-20260925-01/` foram reconciliadas depois
+de corrigir o helper privado de SHA-256 para `SHA256.Create().ComputeHash()`;
+não trazem causa além da falha genérica. `../CONTEXTO_GLOBAL.md` não foi
+encontrado na busca limitada sob OneDrive. Recibos privados não são artefatos
+versionados. Os arquivos preexistentes `.gitattributes`, `.gitignore`,
+`AGENTS.md`, `.maestri/` e backups `AGENTS.md.bak-*` foram preservados.
+
+**Causas locais comprovadas e correções candidatas.** Gitleaks 8.29.1 no HEAD
+isolado encontrou 336 ocorrências `generic-api-key`: 322 chaves sintéticas
+`B60_` em oito diretórios de requests e 14 outros achados classificados
+separadamente (3 colunas SQL, 1 recibo, 6 rótulos C#, 1 literal de validador,
+3 digestos sintéticos). `.gitleaks.toml` recebeu seis exceções exatas e
+limitadas por caminho/regra; seis contraprovas com valores diferentes nos mesmos
+caminhos continuam detectadas. Espelho Git prospectivo com índice local,
+`core.longpaths=true` apenas nele: scanner offline PASS em 3.976 candidatos,
+3.975 textos e um binário aprovado, zero achado ou não inspecionado. A rodada
+anterior sem índice, `candidate_files=0`, permanece SEM COBERTURA, nunca PASS.
+Gitleaks no histórico local HEAD também retornou zero achados.
+
+No HEAD, o menor `verify` reproduziu 14 achados além das chaves: cinco pins
+temporais, cinco erros de limite de heap, uma falha local Windows por ausência
+de `pwsh.exe` e três grupos de cobertura JaCoCo; Spotless/Checkstyle passaram.
+Os cinco pins históricos correspondem exatamente a CRLF dos mesmos blobs Git
+que hoje estão em LF; worktree, blob e recurso JAR atual são byte a byte iguais.
+Foi criado recurso sintético v2 com pins LF e o v1 foi preservado. Surefire agora
+impõe `-Xmx512m`; os cinco testes de heap passaram sem aumentar o teto. A
+ausência de pwsh afeta apenas o ramo Windows do teste; Ubuntu usa symlink Java,
+portanto o workflow não foi alterado. Uma cópia portátil verificada de pwsh foi
+usada somente no processo local. Em espelho v3, 2.274 testes, zero falhas,
+zero erros e cinco skips históricos; `verify` saiu 1 exclusivamente no JaCoCo.
+
+**Cobertura: classificação causal ainda aberta.** XML do espelho v3: os três
+pacotes JDBC físicos `persistencia.analitico` (54/2.282 linhas),
+`persistencia.expansao` (5/1.210) e `persistencia.relacional` (4/333) dependem
+de SQL shadow e seus ITs opt-in. Os pacotes mistos `bootstrap` (3.023/9.403),
+`qualificacao` (1.301/2.264) e `persistencia.coletas` (394/559) têm caminhos
+puros e físicos: nenhum foi excluído. `analitico` (295/345), `expansao`
+(118/145) e `fonte` (12/12) foram elevados por testes causais e passam o
+limiar geral; `fonte.dataexport` continua abaixo do limiar especial de linha
+(2.504/2.994). Foram adicionados testes de contratos de binding analítico,
+limites de expansão, oráculo wire/localização, inventário de controles e
+métricas sem SQL. A classificação por classe, manifesto fail-closed, gate
+Ubuntu 80/60 e gate opt-in shadow separado ainda **não estão implementados**;
+o gate JaCoCo permanece reprovado. O perfil físico não foi executado nesta
+rodada: `V2_SHADOW_JDBC_URL` não estava no ambiente do processo, e não há
+alegação de PASS físico. Próxima ação executável: classificar por classe as
+linhas físicas descobertas, testar os validadores puros restantes e configurar
+ambos os gates sem reduzir limiares. P10/G02 segue **aberto** até novo SHA
+remoto verde nos checks e aceite do owner; o SHA consultado permanece falho.
+
+**Delta posterior do mesmo bloco.** `pom.xml` passou a excluir somente os três
+pacotes JDBC físicos acima da regra Ubuntu geral 80/60 e acrescentou uma
+execução JaCoCo 80/60 no perfil `shadow-local-integration` que os inclui
+explicitamente. Com o `jacoco.exec` do espelho v3, a execução direta da regra
+Ubuntu ainda saiu 1 por `bootstrap`, `qualificacao`, `persistencia.coletas` e
+o limiar especial `fonte.dataexport`; os três pacotes físicos não apareceram
+entre violações. A execução direta da regra física com o perfil ativo saiu 1
+pelos três pacotes físicos (linhas/ramos), demonstrando que o gate não vira
+PASS com dados unitários. Isso é teste estrutural do gate, **não execução do
+IT shadow**. Testes causais adicionais de oráculo de localização, inventário
+de controles e métricas sintéticas passaram focalmente; o `verify` integral
+ainda não foi repetido depois deles. A classificação exata das classes
+físicas nos pacotes mistos, o manifesto de escopo e os testes fail-closed
+continuam pendentes; não há promoção de CI verde.
+
+**Revisão supervisora e novo candidato v7.** O teste isolado de métodos `NONE`
+foi removido por não ter efeito observável. Um teste existente de fechamento
+de `JdbcRasterBatch` agora prova que, sem telemetria, três statements adquiridos
+são fechados; a captura sintética de cotações/expansão prova contagem e rejeição
+de marcador ausente, sem SQL nem I/O externo. O teste do oráculo de localização
+agora compara pins exatos de quatro raízes de borda e os dois SHA-256 de
+recursos históricos, byte a byte iguais ao HEAD. O teste de política deixou
+de fabricar `assertEquals` falhos: injeta classe JDBC nova e alteração em
+classe física, corrompe manifesto temporário e reduz limiar em POM temporário;
+as quatro contraprovas reprovam o validador, e o original passa. O manifesto
+classifica 55 pacotes e 36 fontes JDBC físicas por path/hash normalizado;
+`bootstrap` e `qualificacao` **ainda não têm classificação por classe**, logo
+o manifesto completo continua pendente.
+
+Em espelho v7, `verify` saiu 1 após **2.298 testes, zero falhas/erros e cinco
+skips históricos**. JaCoCo agora passa `analitico`, `expansao`, `fonte`
+(10/12 linhas), `fonte.dataexport` (2.604/2.994 linhas, 799/1.103 ramos) e
+`persistencia.coletas` após excluir do gate Ubuntu somente o corpo SQL de
+`JdbcColetaTemporalLaboratory`; o record de resultado fica no pacote Ubuntu.
+Os únicos pacotes ainda violados pela regra unitária são `bootstrap`
+(3.161/9.403 linhas, 1.372/4.278 ramos) e `qualificacao` (1.378/2.264,
+752/1.541). O gate shadow possui regra 80/60 separada para o corpo SQL de
+Coletas além dos três pacotes JDBC; **IT shadow não executado**. Não há CI
+verde local ou remoto.
+
+O scanner do espelho v7 com índice Git falhou inicialmente porque o novo
+manifesto `.tsv` não era extensão textual aprovada; renomeado para `.txt`,
+passou com **3.989 candidatos, 3.988 textos, um binário verificado, zero
+achado/não inspecionado**. Gitleaks no espelho v7 após Maven detectou três
+cópias de fixture em `target/classes` (saída de build, fora do índice); o
+espelho limpo v8 sem `target/`, com o mesmo conjunto versionável prospectivo,
+passou Gitleaks 8.29.1 com zero achados. Nenhum ignore ou exceção foi ampliado
+para mascarar a saída. Próxima ação: prova causal por classe SQL dentro de
+`bootstrap`/`qualificacao`, cobertura dos caminhos puros restantes e novo
+`verify`; depois repetir scanner e Gitleaks no candidato final. G02 segue
+aberto até SHA/checks remotos verdes e owner, sem push.
+
+**Checkpoint de cobertura v9/v10, sem aceite G02.** O manifesto novo
+`docs/catalogos/ci-coverage-scope/mixed-class-scope.txt` fixa path, SHA-256
+normalizado e rota para os 117 fontes Java de `bootstrap` (96) e `qualificacao`
+(21): 116 `UNIT_INCLUDED`; apenas `QualificationLineageEvidence` é
+`SHADOW_EXCLUDED`. Essa classe abre cinco consultas por
+`ColetaTemporalLaboratorySession.getConnection()`; o POM a exclui por nome de
+classe exato da regra Ubuntu e a exige no gate shadow 80/60. O teste de
+política passou com mutantes reais: fonte nova em `bootstrap`, fonte unitária
+alterada, troca de rota no manifesto e exclusão adicional no POM são
+reprovadas, assim como as mutações anteriores de fonte JDBC, hash e limiar.
+O manifesto classifica o **escopo**, não transforma 117 fontes em prova física
+nem concede PASS de cobertura. `QualificationTemporalMatrix` permanece no gate
+Ubuntu porque sua leitura de políticas é pura; o teste agora chama o carregador
+real e confere os cinco workloads. `QualifiedPackagePolicyTest` exercita índice
+de artefatos válido, membro órfão e ausência de índice; o teste de wire rejeita
+mutação de campo de Frete e dá só coordenada para diferença de Manifesto.
+
+Para cobrir verificação pura que só pode ocorrer após o JAR Maven, o `verify`
+default passou a executar uma IT offline de integridade do pacote, com membro
+DLL **sintético e não executável** apenas na fixture, sem SQL/rede. Ela valida
+lock/SBOM/recursos/schema, reprova origin alterado após reseal e, no teste
+focal posterior ao v10, comprova que o supervisor bloqueia a admissão,
+retoma o mesmo resultado e não cria `process.json`. O lock histórico permaneceu
+imutável: cinco POMs de terceiros no worktree estão em LF, enquanto seus pins
+históricos correspondem aos mesmos bytes em CRLF; a fixture offline recalcula
+somente seus pins próprios dos bytes atuais. O teste focal pós-v10
+`package failsafe:integration-test failsafe:verify` passou (um teste Failsafe,
+sem falha/erro), assim como `CiCoverageScopePolicyTest` após os mutantes novos.
+
+No espelho v9, `verify` saiu 1 com 2.299 Surefire, zero falhas/erros e cinco
+skips históricos. No espelho v10, `verify` saiu 1 com 2.300 Surefire e uma IT
+Failsafe offline, zero falhas/erros e cinco skips históricos; Spotless e testes
+passaram. A regra JaCoCo Ubuntu reexecutada com diagnóstico explícito acusa
+**somente `bootstrap`** (linhas 0,33 versus 0,80; ramos 0,32 versus 0,60).
+`qualificacao` saiu da lista de violação após a IT pura e a única exclusão SQL
+exata. O XML bruto v10 mostra `bootstrap` 3.196/9.403 linhas e 1.393/4.278
+ramos; `qualificacao` 1.712/2.264 linhas e 901/1.541 ramos antes da exclusão
+SQL. A regra shadow, invocada somente sobre o exec unitário, reprovou os três
+pacotes JDBC e as classes SQL exatas de Coletas e Qualificação; isso demonstra
+que a regra continua exigente, **não** é execução do IT físico. Sem
+`V2_SHADOW_JDBC_URL` no processo, IT shadow permanece não executado.
+
+O espelho v10 limpo passou Gitleaks 8.29.1 com zero achados e scanner offline
+com índice Git local de 3.991 candidatos, 3.990 textos, um binário verificado,
+zero achados/não inspecionados/oversized. O primeiro `graphify update .` teve
+access violation local; `graphify update . --no-cluster` concluiu extração AST
+de 794 arquivos e atualizou `graph.json`, sem alterar índice Git real.
+**Próximo executável:** classificar por classe as rotas físicas ainda misturadas
+em `bootstrap`, separar os caminhos puros antes de qualquer exclusão e cobrir
+seus déficits causais; repetir `verify` integral no candidato final, scanner e
+Gitleaks. P10/G02 continua aberto sem novo SHA/checks remotos verdes/owner,
+sem push, merge ou deploy.
+
+**Delta v11–v19, checkpoint de classificação ainda sem aceite.** O XML v11
+mostrou `bootstrap` bruto com 3.317/9.406 linhas e 1.437/4.280 ramos; as
+maiores ausências foram executores de sessão SQL, `QualificationSupervisor`,
+`DeclaredAnalyticSupport`, `LocalArtifactSequence` e verificadores. A inspeção
+de métodos e chamadas, complementada por consulta Graphify, fixou 118 fontes
+de `bootstrap`/`qualificacao` por path, hash normalizado e rota. Dentre elas,
+19 classes externas de `bootstrap` são agora `SHADOW_EXCLUDED` por abertura de
+sessão ou chamada concreta a adaptador JDBC; `QualificationLineageEvidence`
+continua a única externa excluída de `qualificacao`. `physical-sources.txt`
+contém 56 fontes físicas exatas. `LocalArtifactSequence$SqlExecution`,
+`DeclaredAnalyticSupport$SqlApply` e seu `SourceIdentity` têm manifesto
+separado de classe compilada, hash da fonte e exclusão/inclusão exata nos dois
+gates; as classes externas continuam no Ubuntu. O catálogo de escopo registra
+a rota causal individual. A política fail-closed passou com mutantes de fonte
+nova/alterada, hash, rota de classe interna, exclusão POM ampliada e limiar
+reduzido. Os limiares Ubuntu e shadow continuam 80% linhas/60% ramos.
+
+Testes puros novos no código existente validam o carregador real das cinco
+políticas temporais, paginação/correção de fixture sintética, relatório de
+sequência completo sem SQL com mutações de fronteira e responsabilidade
+duplicada, e termos financeiros escopados de suplemento pinado. A revisão dos
+três testes fracos continua válida: `SyntheticCaptureObserverTest` removido em
+favor do efeito de fechamento de statements em `JdbcRasterBatchTest`;
+`QualificationLocationOracleContractTest` compara quatro raízes e hashes
+históricos exatos; `CiCoverageScopePolicyTest` muta manifests/POM/fontes reais,
+sem `assertThrows` fabricado. O v1 histórico de pins não foi reescrito; o v2
+causal acompanha bytes LF. O teto Surefire segue 512 MiB e os cinco skips
+históricos permanecem skips. Nenhum perfil shadow foi executado por ausência
+de `V2_SHADOW_JDBC_URL` no processo; seu check estrutural sobre `jacoco.exec`
+unitário reprova como esperado, sem prova física.
+
+No espelho v19 do HEAD remoto com mudanças candidatas, indexado com
+`git -c core.longpaths=true add -A` apenas no repositório temporário,
+`verify` **saiu 1**: 2.303 Surefire e uma Failsafe offline, zero
+falhas/erros, cinco skips históricos; apenas a regra JaCoCo de `bootstrap`
+reprovou. Depois das exclusões exatas, o pacote tem 3.422/6.703 linhas
+(0,51) e 1.489/3.241 ramos (0,46), ainda abaixo de 0,80/0,60. Não há
+alegação de CI verde. O scanner offline no mesmo espelho indexado passou com
+3.995 candidatos, 3.994 textos, um binário verificado e zero achado/não
+inspecionado; Gitleaks 8.29.1 no espelho limpo retornou zero achados. A
+primeira invocação de `graphify update . --no-cluster` não produziu recibo;
+a repetição observada concluiu 801 fontes AST, 36.831 nós e 93.972 arestas,
+atualizando `graph.json`. O índice Git real e os backups preexistentes não
+foram alterados. Próximo executável: separar os caminhos SQL de
+`QualificationScenarioVerifier`/`QualificationCaseExecutor` sem excluir seus
+invariantes puros, cobrir os déficits puros do XML e repetir o `verify` até
+o gate Ubuntu passar. G02 segue **aberto** até novo SHA com checks remotos
+verdes e aceite do owner; sem push, merge ou deploy.
+
+**Delta v20–v21 — separação física adicional, gate ainda vermelho.** O XML v19
+mostrou `QualificationScenarioVerifier` (17/239 linhas) e
+`QualificationCaseExecutor` (0/331) dominados por consulta/captura SQL. Seus
+métodos físicos foram movidos, sem alterar o contrato público, para as classes
+internas exatas `SqlVerification`/`Evidence` e `SqlExecution`/`AbsenceEvidence`;
+o POM as exclui somente do check Ubuntu e as inclui no check shadow. As classes
+externas permanecem no Ubuntu. O teste de comparação do executor confere 35
+escopos, 19 saídas, falha `SQL-03`, coordenadas e ausência de escopo; o oráculo
+do verificador prova supressão seletiva `SQL-13`/`SQL-08`/`SQL-09`, limite de
+`SQL-16` e manutenção de `SQL-07`. Também passaram testes de admissão pura da
+CLI `QualificationLaboratoryMain`, `observationMode` de usuários,
+`entity` relacional e a IT offline que altera o resultado de campanha para
+exit 2 e verifica rejeição da cadeia, além de executar `plan` no JAR empacotado
+com saída/código observáveis. O espelho v20 indexou 3.996 arquivos: scanner
+3.996 candidatos/3.995 textos/um binário, zero achados; Gitleaks zero. Seu
+`verify` saiu 1 apenas em JaCoCo: 2.304 Surefire + uma IT offline Failsafe,
+zero falhas/erros, cinco skips históricos. Após exclusões exatas, `bootstrap`
+teve 3.457/6.195 linhas (0,558) e 1.494/3.058 ramos (0,489), melhoria
+causal ante v19, ainda abaixo de 80/60.
+
+Em v21, `QualificationPhysicalMetadata` mantém no Ubuntu o construtor que
+valida documento/estrutura/hash; somente a classe interna
+`SqlVerification`, cujo único método abre `session.getConnection()` e consulta
+`sys.views`/`sys.columns` para confrontar 971 colunas físicas, foi fixada no
+manifesto por nome compilado, rota e SHA normalizado, excluída no Ubuntu e
+incluída no shadow. O teste de política e cinco suítes focais passaram após
+corrigir uma linha Checkstyle de 141 caracteres. O `verify` integral sobre esses
+bytes **saiu 1**, exclusivamente no check JaCoCo de `bootstrap`: 2.309
+Surefire + uma IT Failsafe offline, zero falhas/erros e cinco skips históricos.
+O XML e a lista exata de exclusões do POM dão 3.758/6.652 linhas (0,565) e
+1.540/3.032 ramos (0,508); a classe externa de metadata tem 35 linhas
+cobertas/17 descobertas, enquanto as 29 linhas físicas da interna seguem
+descobertas sem SQL. A diferença v20→v21 inclui novos testes e a separação,
+logo não atribuir o delta inteiro a um único método. O espelho v21 indexado
+preservou a árvore candidata (3.996 arquivos); scanner passou com 3.995
+textos/um binário e zero achado; Gitleaks 8.29.1 retornou zero. Duas
+tentativas de `graphify update . --no-cluster` no Windows terminaram em
+`-1073741819`, sem recibo de atualização; a consulta do grafo existente
+funcionou, mas este delta ainda não está refletido nele. Logs privados ficam
+somente em `target/ci-p10-20260925-01/`. Nenhum shadow IT foi executado:
+`V2_SHADOW_JDBC_URL` segue ausente. Não há novo SHA/check remoto verde nem
+aceite do owner; P10/G02 permanece **aberto**, sem push/merge/deploy.
+
+**Próximo executável:** classificar no XML v21 as rotas puras e SQL restantes
+em `QualificationSupervisor`, runtimes mistos e CLI wrappers; manter testes
+observáveis de status/plano/preflight no Ubuntu, separar somente classes SQL
+internas ou wrappers cuja única rota útil física esteja demonstrada, com pin
+fail-closed e inclusão shadow. Repetir `verify` e scanners nos bytes finais.
+
+**Delta v22 — ranking causal e contrato puro de cancelamento/frete.** O catálogo
+`docs/catalogos/ci-coverage-scope/bootstrap-v21-ranking.md` confronta as 12
+maiores classes descobertas com linhas/ramos, método, consumidor e testes
+existentes. `QualificationSupervisor` lidera com processo filho físico e
+decisões puras de status/recibo; os runtimes de usuários/relacional misturam
+captura JDBC com `observationMode`/`entity`; `QualificationLaboratoryMain`
+permanece no Ubuntu. `QualificationCaseControl` estava inteiramente descoberta
+no v21, embora nonce, motivo, prazo e barreira `BEFORE_RECEIPT` sejam
+executáveis sem SQL. Quatro testes offline novos verificam saída/barreira
+atômica só no ponto declarado, cancelamento pelo nonce próprio e motivo
+permitido, rejeição de nonce estrangeiro/motivo não declarado e prazo expirado.
+Eles não instanciam sessão; o XML focal e o `clean verify` v22 mediram
+**64/100 linhas e 18/34 ramos** na classe, contra zero no v21. O IT
+`DURING_CAPTURE` com statement real continua reservado ao shadow.
+
+`AnalyticScenarioEnrichment` tinha `freightData` puro misturado a `apply`,
+`freight` e `collections`, que paginam `JdbcAnalyticFixtureBindings` e gravam
+bindings JDBC na sessão. A transformação limitada do recurso sintético foi
+extraída para `AnalyticFreightScenarioData`, ainda no Ubuntu. Seu teste passa
+os documentos pelo mapper tipado e prova km de revisão, datas/km de correção e
+recaptura do baseline sem mutação; no XML v22 a classe pura tem **14/18 linhas
+e 6/8 ramos**. Só `AnalyticScenarioEnrichment` restante foi classificada
+`SHADOW_EXCLUDED`, com SHA normalizado em ambos os manifests, exclusão por
+classe exata no gate Ubuntu, inclusão explícita no shadow e teste de política
+fail-closed focal aprovado. O corpo SQL da classe tem 0/77 linhas e 0/18
+ramos na suíte offline; o IT físico continua **não executado**.
+
+O teste focal inicial de controle encontrou apenas formatação Spotless e foi
+corrigido; o teste focal de enriquecimento também exigiu ajuste de formatação,
+corrigido e repetido. Os testes focais finais de controle, transformação e
+política passaram. O `verify` no worktree saiu 1 apenas JaCoCo, mas seus
+relatórios incrementais não são a medição autoritativa deste delta: o espelho
+v22 foi recriado do HEAD exato mais overlay versionável, indexado somente nele
+(`git -c core.longpaths=true add -A`, **4.001 arquivos**), e executou
+`clean verify` com JDK 17 e heap 512 MiB. Resultado **exit 1 somente JaCoCo
+`bootstrap`**, com 2.313 Surefire e uma IT Failsafe offline, zero falhas/erros,
+cinco skips históricos; Spotless, Checkstyle, demais pacotes e testes passaram.
+Após as exclusões exatas, o XML limpo dá **3.587/6.094 linhas (0,589)** e
+**1.564/3.016 ramos (0,519)**, ainda abaixo de 80/60. O v21 era build
+incremental em `target` do worktree: seus totais 3.758/6.652 não devem ser
+tratados como delta causal direto contra o build limpo v22. Comparação mais
+próxima é v20 em espelho (3.457/6.195; 1.494/3.058), com +130 linhas e +70
+ramos cobertos, mas inclui vários testes e mudanças entre as rodadas.
+Scanner do espelho v22 **PASS** em 4.001 candidatos/4.000 textos/um binário,
+zero achados/não inspecionados; Gitleaks 8.29.1 exit 0, zero achados. Não
+houve novo input externo, rede CI ou SQL. Graphify não foi repetido após os
+dois crashes locais v21, conforme direção supervisora.
+
+**Decisão arquitetural para continuação, sem alterar limiares.** No XML limpo,
+manter o denominador atual exigiria mais 1.289 linhas cobertas e 246 ramos
+para 80/60. Microtestes de getters ou nomes de `Main` não provariam esses
+fluxos. Próximo trabalho: harness offline de transições observáveis de
+`QualificationSupervisor`/CLI e separação limitada das execuções JDBC dos
+runtimes e oráculos mistos, com pin fail-closed e inclusão física; jamais
+excluir `QualificationLaboratoryMain`, `QualificationSupervisor` ou wrappers
+que ainda contenham rejeição/configuração pura. O gate shadow mantém suas
+travas localhost/`ETL_SISTEMA_V2_SHADOW`, Windows integrado, sintéticos e
+rollback; `V2_SHADOW_JDBC_URL` ausente, IT **não executado**, nunca PASS.
+P10/G02 segue **aberto** até `verify` local verde e novo SHA/checks remotos
+verdes/owner. Sem push, merge ou deploy.
+
+**Delta v23 — harness offline de Supervisor/CLI, sem alegação SQL.** O segundo
+caso de `QualificationPackageIntegrityIT` usa o JAR empacotado, lock sintético
+recalculado e controle temporário irmão do payload. A CLI `status` inicialmente
+retorna exit 2; uma reserva sem `process.json` faz `resume` recusar novo worker,
+sem avançar o journal ou criar resultado. O teste constrói então, **apenas como
+fixture**, um processo inexistente, baseline, recibo `FAILED`, reconciliação
+com hash agregado igual e selo de evidência; o `resume` CLI consome a cadeia,
+anexa `ROLLBACK`/`TERMINAL`, retorna `FAILED`/exit 2 e grava
+`campaign-result.json`. `status` e `resume` repetidos devolvem o mesmo resultado;
+alteração posterior do log é recusada com `QUAL_PROCESS_EVIDENCE_CHAIN`. Isso
+prova decisões de admissão, falha, retomada, conclusão e tamper dentro do
+contrato **sintético offline**; não prova rollback SQL, processo JDBC real ou
+aprovação física. Nenhum worker, sessão SQL ou banco foi aberto pelo teste.
+O primeiro foco falhou em `QUAL_CONTROL_ROOT` porque o diretório temporário
+não era irmão do payload sob `target`; o alvo foi corrigido sem afrouxar a
+regra, e a repetição focal passou (duas ITs offline, zero falha/erro).
+
+O XML focal e o `clean verify` v23 no espelho novo mostram
+`QualificationSupervisor` de **123/431 para 175/431 linhas** e de
+**44/240 para 70/240 ramos** entre v22 e v23; o ganho é exatamente 52 linhas
+e 26 ramos. `QualificationLaboratoryMain` ficou em 30/126 linhas e 15/62
+ramos: a CLI empacotada roda em JVM separada sem agente JaCoCo, embora suas
+saídas/códigos tenham sido validados. Não usar execução externa como cobertura
+medida do gate. O espelho v23 recriado do HEAD exato+overlay, com índice Git
+somente próprio (**4.002 arquivos**), executou `clean verify` JDK 17/heap 512
+MiB: **exit 1 apenas JaCoCo `bootstrap`**, 2.313 Surefire + duas ITs Failsafe
+offline, zero falhas/erros, cinco skips históricos. Pós-exclusão, o pacote tem
+**3.639/6.094 linhas (0,597)** e **1.590/3.016 ramos (0,527)**, ainda abaixo
+de 80/60. Scanner no mesmo espelho indexado passou com 4.002 candidatos,
+4.001 textos, um binário verificado e zero achado/não inspecionado; Gitleaks
+8.29.1 exit 0, zero achados. POM/manifestos de shadow não foram alterados nesta
+unidade; o IT shadow físico permanece **não executado** por ausência de URL
+local. Não houve rede CI, push, merge ou deploy.
+
+**Decisão de arquitetura após a medição.** O harness foi causal e ganhou
+52 linhas/26 ramos, mas o check ainda precisa de **1.237 linhas e 220 ramos**
+com o denominador limpo atual. Repetir variações sintéticas de jornal só para
+percentual seria artificial. A próxima frente deve isolar blocos físicos
+concretos (`runChild`/`reconcile` do Supervisor, consultas dos runtimes/oráculos)
+sem excluir `QualificationSupervisor`/CLI externos, e testar seus contratos
+puros por observação de saída/estado. Executáveis empacotados em JVM separada
+exigem instrumentação explícita se sua cobertura contar no Ubuntu; os testes
+atuais não fornecem essa métrica. Cada nova classe física requer pin exato,
+mutante fail-closed e check shadow. Manter 80/60 e shadow IT não executada.
+P10/G02 continua **aberto** sem `verify` verde, novo SHA/check remoto verde ou
+owner nominal.
+
+**Delta v24/v25 — cadeia SQL do Supervisor, pins exatos e contraprovas.** O
+catálogo `bootstrap-v21-ranking.md` ganhou traço por método do XML limpo v23:
+`QualificationLaboratoryMain.execute` → `QualificationSupervisor.controlled` →
+`runChild` (0/85 linhas, 0/28 ramos) → `QualificationSqlEvidence.master`
+(0/17, 0/12)/`snapshot` (0/22, 0/14) → DriverManager/sessão SQL e worker
+empacotado. A classe interna exata `QualificationSupervisor$SqlChildExecution`
+agora contém o trecho que confirma `master`/snapshot, lança o worker e observa
+processo. Supervisor externo **permanece no Ubuntu**, com admissão, journal,
+`status`, recibo, validação de barreira/log e retomada; `reconcile` ainda
+obtém snapshot SQL em seu caminho de processo perdido e precisa de separação
+posterior, sem ocultar a classe externa. O teste offline do JAR continuou
+passando após a delegação. Fonte, POM e manifesto fixam a classe interna por
+nome compilado e SHA normalizado, com exclusão Ubuntu e inclusão shadow.
+
+`QualificationSqlEvidence` tinha guard booleano puro na entrada de `master`,
+mas os métodos úteis restantes abrem `DriverManager` ou
+`ColetaTemporalLaboratorySession.getConnection()` para consultar metadata,
+contagens e SPID. `QualificationSqlOptIn.require(enabled, profileActive)`
+preserva a regra de duas travas separadas, testada nas quatro combinações sem
+alterar propriedades globais nem abrir banco. A classe externa
+`QualificationSqlEvidence` restante foi classificada com path/SHA exatos em
+`physical-sources.txt` e `mixed-class-scope.txt`, excluída somente do Ubuntu
+e incluída no shadow; o record `Snapshot` continua classe compilada distinta.
+O teste de política passou com as contraprovas anteriores de classe
+nova/alterada sem classificação e agora **remove de POM temporário** cada um
+dos dois novos includes shadow; ambos os mutantes reprovam o verificador.
+Isso é verificação estrutural, **não execução física shadow**.
+
+O foco inicial v24 reprovou apenas Spotless no teste de política; formatado em
+espelho privado e repetido com sucesso. O espelho v25 foi criado do HEAD
+exato+overlay final, indexado só nele com `core.longpaths=true` (**4.004
+arquivos**) e submetido a `clean verify` JDK 17/heap 512 MiB. Resultado
+**exit 1 somente JaCoCo `bootstrap`**: 2.314 Surefire + duas ITs Failsafe
+offline, zero falhas/erros, cinco skips históricos; demais gates Maven
+passaram. Pós-exclusão exata, `bootstrap` tem **3.642/5.966 linhas (0,610)**
+e **1.594/2.964 ramos (0,538)**, ainda abaixo de 80/60. Contra v23 limpo,
++3 linhas/+4 ramos cobertos e -128 linhas/-52 ramos no denominador; a
+separação preserva o ganho causal do harness. XML v25: Supervisor externo
+175/348 linhas e 70/212 ramos; filho físico 0/89 e 0/28; opt-in puro 3/3
+linhas e 4/4 ramos; evidência SQL 0/48 linhas e 0/24 ramos. Scanner v25 no
+mesmo espelho Git indexado **PASS** com 4.004 candidatos, 4.003 textos e um
+binário verificado, zero achado/não inspecionado; Gitleaks 8.29.1 exit 0,
+zero achados. O crash local anterior do Graphify não foi reintentado.
+
+**Próximo executável e limite.** Sob o denominador limpo v25, faltam
+**1.131 linhas e 185 ramos** para 80/60. O traço também identifica
+`LocalAnalyticUsersRuntime.capture/captureWithin`,
+`LocalRelationalRuntime.capture`, `DeclaredSqlOracles.monitorDeclarations` e
+`LocalArtifactScenario.execute/previewSequence` como mistos. Inspecionar cada
+um por rota/consumidor e separar somente execuções JDBC, preservando
+`observationMode`, `entity`, oráculos, pins e preflight no Ubuntu; qualquer
+colaborador físico precisa de pin, check shadow e mutante real. Não aumentar
+testes sintéticos de journal sem invariante novo. Shadow IT permanece **não
+executado** sem `V2_SHADOW_JDBC_URL`; G02 segue **aberto** até `verify` local
+verde e novo SHA/checks remotos verdes/owner, sem push/merge/deploy.
+
+**Delta v26 — maior rota mista de runtime classificada por fluxo.** O XML v25
+ranqueou `LocalAnalyticUsersRuntime` em 4/126 linhas e 3/17 ramos:
+`capture` 0/14 → `session.getConnection`/savepoint → `captureWithin` 0/71,
+0/14 → `JdbcAnalyticQuality`, `JdbcSqlServerControlPlane`, staging, promoção
+e dimensões JDBC. O consumidor é `AnalyticScenarioRuntime.captureUsers`;
+`observationMode` (4/4, 3/3) e a configuração sintética não abrem SQL.
+Extraí **somente** a transação e o dispatcher JDBC para a classe interna
+`LocalAnalyticUsersRuntime$SqlCapture`; a classe externa continua Ubuntu,
+agora rejeita modo/replay antes da conexão e mantém `captureClosed` no
+`finally`. `RuntimeUsersOperationalRequestTest` passou com os modos
+BACKFILL/REPLAY admitidos e quatro rejeições com código estável
+`ANA_USERS_OBSERVATION_MODE`, sem SQL. Esta prova cobre admissão pura, não
+captura física ou rollback SQL.
+
+O manifesto fixa a fonte por SHA LF normalizado
+`ae4249c0894e2c88940f9c297ee213fbc2d4ecbe43ccfd2f8776bcca0301fd78`
+e a classe aninhada compilada exata. POM exclui apenas `$SqlCapture` do Ubuntu
+e inclui a mesma classe no check shadow 80/60. O teste de política passou
+com mutante de fonte alterada sem novo pin e mutante que remove o include
+shadow; ambos reprovam, e o `.class` compilado existe. O Maven focal passou.
+No espelho v26 fresco do HEAD+overlay, Git foi indexado apenas nele com
+`core.longpaths=true`: 4.005 arquivos. Scanner offline **PASS** 4.005
+candidatos/4.004 textos/um binário, zero achados/não inspecionados;
+Gitleaks 8.29.1 exit 0, zero achados. `clean verify` JDK 17/heap 512 MiB
+saiu **1 só em JaCoCo bootstrap**: 2.315 Surefire + duas ITs Failsafe offline,
+zero falhas/erros, cinco skips históricos; formatter e demais gates Maven
+passaram. XML v26 após exclusões exatas: 3.645/5.877 linhas (0,620) e
+1.604/2.960 ramos (0,542), contra 80/60. Antes/depois por classe:
+externa 4/126,3/17 → 7/37,13/13; filho físico novo 0/96,0/4.
+Portanto +3 linhas/+10 ramos cobertos, -89 linhas/-4 ramos no denominador
+filtrado; não há alegação de cobertura shadow executada. Logs privados
+`target/ci-p10-20260925-01/{focal-v26,clean-verify-v26,scanner-v26,gitleaks-v26}-private.log`.
+O escopo segue distante (faltam 1.057 linhas/172 ramos sob o novo
+denominador); continuar com `LocalRelationalRuntime`, `DeclaredSqlOracles`
+e `LocalArtifactScenario` apenas por fronteira causal, preservando puro no
+Ubuntu. Shadow IT **não executada** sem `V2_SHADOW_JDBC_URL`; G02 **aberto**
+até `verify` local verde e novo SHA/checks remotos verdes/owner, sem publicação.
+
+**Fechamento de bytes v27.** Após registrar checkpoint 0296 e trilha, novo
+espelho do mesmo HEAD+overlay final foi indexado somente no repositório
+temporário (**4.006 arquivos**). POM, os dois Java alterados e ambos os
+manifests de escopo v26/v27 foram comparados byte a byte e permanecem
+idênticos; por isso a conclusão de `clean verify` v26 vale para esses inputs,
+sem alegar nova execução Maven v27. O scanner offline v27 passou sobre
+4.006 candidatos/4.005 textos/um binário, zero achados/não inspecionados;
+Gitleaks 8.29.1 exit 0, zero achados. Logs privados
+`target/ci-p10-20260925-01/{scanner-v27,gitleaks-v27}-private.log`.
+`Test-TrilhaPreparation.ps1` e `git diff --check` passaram; UTF-8 estrito sem
+BOM nos arquivos tocados conferidos. `STATES.md` permanece autoritativo:
+JaCoCo Ubuntu vermelho, shadow IT não executada e G02 aberto.
+
+**Delta v28 — maior rota JDBC relacional, fronteira pura observável.** O XML
+v26 ranqueou `LocalRelationalRuntime` em 5/108 linhas, 4/24 ramos; o
+overload explícito de `capture` tinha 0/75 linhas, 0/20 ramos e, depois da
+admissão, chamava `JdbcRelationalLaboratory.policy/scope`, abria
+conexão/savepoint e compunha controle, extração auditada, staging e receipt.
+Consumidores: `RelationalLaboratoryMain` e `AnalyticScenarioRuntime`.
+`DeclaredSqlOracles` ficou em 111/202, 60/110, com rota física
+`monitoring`/`monitorDeclarations` de 57 linhas/18 ramos descobertos e
+oráculos `row`/`cell` puros; `LocalArtifactScenario` em 137/219, 49/86,
+com `execute`/`previewSequence` físico de 54 linhas/oito ramos e pins/
+fingerprints/preflight puros. A captura relacional era a maior rota JDBC.
+
+`LocalRelationalRuntime$SqlCapture` agora começa na primeira leitura SQL
+da política persistida e contém a transação/dispatcher físico. A classe
+externa preserva `entity`, `Capture` e a admissão antes do banco:
+execução não nula, dia único, limite de data, proibição de SWEEP,
+consistência replay e cancelamento. `RelationalLaboratoryContractTest`
+passou com BOOTSTRAP/REPLAY admitidos, dia divergente, data fora da política,
+modo/replay negados e cancelamento rejeitados com resultados observáveis.
+Não representa execução ou rollback SQL. Fonte pinada por SHA LF
+`5b110cab4c8dfaff330ac2ed8b65cc827645cc1d6d51501609bd2f13e82e4bc9`
+em `mixed-class-scope.txt` e classe interna compilada exata em
+`physical-nested-classes.txt`. POM exclui somente esse `.class` do gate
+Ubuntu e o inclui no check shadow 80/60. `CiCoverageScopePolicyTest`
+passou com mutante de fonte alterada sem pin e mutante de include shadow
+removido, além da conferência do `.class` compilado. A classe física tem
+0/83 linhas e 0/6 ramos no XML unitário: é exigência shadow **estrutural**,
+não alegação de execução física.
+
+Foco Maven passou. Espelho v28 fresco do HEAD+overlay indexado somente nele
+com `core.longpaths=true` (**4.006 arquivos**): scanner offline **PASS**
+4.006 candidatos/4.005 textos/um binário, zero achados/não inspecionados;
+Gitleaks 8.29.1 exit 0, zero achados. `clean verify` JDK 17/heap 512 MiB
+saiu **1 só no JaCoCo bootstrap**: 2.316 Surefire + duas ITs Failsafe
+offline, zero falhas/erros, cinco skips históricos; formatter e demais gates
+Maven passaram. XML v26→v28 pós-exclusões exatas: `bootstrap`
+3.645/5.877→3.659/5.800 linhas (0,631), 1.604/2.960→1.616/2.954
+ramos (0,547), ainda abaixo de 80/60. Classe externa relacional
+5/108,4/24→16/31,16/18; classe física nova 0/83,0/6.
+Ganho puro: +11 linhas/+12 ramos nessa classe, mais três linhas em
+`LaboratoryCaptureWindow.day` exercidas pelo teste; -77 linhas/-6 ramos
+no denominador. Faltam 981 linhas/157 ramos no bootstrap filtrado.
+Logs privados `target/ci-p10-20260925-01/{focal-v28,clean-verify-v28,scanner-v28,gitleaks-v28}-private.log`.
+A fronteira foi mantida porque a admissão produz falhas contratuais
+antes de qualquer SQL e o check shadow exige a classe física exata; não
+foi simples troca de nome de código descoberto. Próximas rotas:
+`DeclaredSqlOracles` e `LocalArtifactScenario` por classe/método, mantendo
+seus oráculos e preflight puros no Ubuntu. Shadow IT **não executada**
+sem `V2_SHADOW_JDBC_URL`; G02 **aberto** até `verify` local verde e novo
+SHA/checks remotos verdes/owner, sem publicação.
+
+**Fechamento de bytes v29.** Após checkpoint 0297/trilha, o espelho final
+do mesmo HEAD+overlay foi indexado somente nele (**4.007 arquivos**).
+POM, fonte/testes alterados e manifests de escopo v28/v29 foram comparados
+por SHA de bytes: seis inputs Maven idênticos. Não houve novo `verify`
+v29; o resultado executado e vermelho de v28 permanece a evidência desses
+inputs. Scanner offline v29 **PASS** 4.007 candidatos/4.006 textos/um
+binário, zero achados/não inspecionados; Gitleaks 8.29.1 exit 0,
+zero achados. Logs privados
+`target/ci-p10-20260925-01/{scanner-v29,gitleaks-v29}-private.log`.
+Shadow IT não executada e G02 aberto.
+
+**Delta v30 — cenário físico isolado; oráculos puros em validação v31.** O
+XML v28 mostrou `DeclaredSqlOracles` 111/202 linhas, 60/110 ramos, com
+`monitoring`/`monitorDeclarations` somando 57 linhas e 18 ramos
+descobertos, mas seu método maior mistura a consulta curta de recibos SQL
+com a construção pura de seletores/expectativas; `row` 0/13, 0/8 e `cell`
+39/48, 29/42 são puros. `LocalArtifactScenario` 137/219, 49/86 trazia
+cadeia física maior: `execute` 0/38, 0/8, `previewSequence` 0/16,
+comparação/recomposição e metadata via sessão, consumidos por
+`LocalArtifactScenarioMain` e `LocalArtifactSequence`. Grafo Graphify foi
+somente navegação por estar desatualizado; chamadas/linhas foram conferidas
+na fonte e no XML. A extração isolou em `LocalArtifactScenario$SqlExecution`
+metadata, `AnalyticScenarioRuntime.start/capture`, comparações SQL,
+recomposição e preview com savepoint. A externa mantém `verifyFiles` antes
+do SQL, guarda de sequência integral, seleção de raster, callback e escolha
+de resultado PASS/FAIL com preview. `QualificationArtifactScenarioRefusalTest`
+passou: seleção válida de raster, rejeição de cardinalidade/revisão e
+sequência baseline recusada antes de acessar sessão. Fonte pinada por SHA LF
+`4d4b4752ca24023f7bba42ee08736cada9e73cf50b3b24c1b49fa50f5baaa16d`;
+manifesto nomeia a classe compilada exata e POM a exclui somente do Ubuntu
+e a inclui no check shadow 80/60. `CiCoverageScopePolicyTest` passou com
+mutantes de fonte alterada sem pin e include shadow retirado. `Captured`
+record permanece classe distinta sob Ubuntu. Essa é fronteira física
+exigível estruturalmente, **não cobertura shadow executada**.
+
+Espelho v30 fresco do HEAD+overlay indexado só nele com `core.longpaths=true`
+(**4.007 arquivos**): scanner offline **PASS** 4.007 candidatos/4.006
+textos/um binário, zero achados/não inspecionados; Gitleaks 8.29.1 exit 0,
+zero achados. `clean verify` JDK 17/heap 512 MiB saiu **1 só em JaCoCo
+bootstrap**: 2.317 Surefire + duas Failsafe offline, zero falhas/erros,
+cinco skips históricos; demais gates Maven passaram. XML v28→v30 após
+exclusões exatas: bootstrap 3.659/5.800→3.663/5.768 linhas (0,635),
+1.616/2.954→1.621/2.950 ramos (0,549), abaixo de 80/60. Classe externa
+do cenário 137/219,49/86→141/186,54/82; filho SQL novo 0/37,0/4;
+`Captured` 0/1. +4 linhas/+5 ramos puros e -32 linhas/-4 ramos no
+denominador. Faltam 952 linhas/149 ramos sob esse denominador. Como o
+ganho numérico é pequeno, a frente seguinte priorizou teste causal do
+oráculo puro: `QualificationOracleTest` focal passou para chave de execução
+escopada, ordinal inválido e janela de tempo observada; acréscimo final
+de fronteira de ±1 ms ainda exige nova execução v31. Logs privados
+`target/ci-p10-20260925-01/{focal-v30,clean-verify-v30,scanner-v30,gitleaks-v30,oracle-focal-v31}-private.log`.
+Shadow IT **não executada** sem `V2_SHADOW_JDBC_URL`; G02 aberto até
+`verify` local verde e novo SHA/checks remotos verdes/owner, sem push.
+
+**v31 — oráculo puro com invariantes de identidade e tempo.** O novo teste
+em `QualificationOracleTest` cria fixture integral sintética autorada sem
+SQL e lê `DeclaredSqlOracles.expected` pelos pins reais. Prova quatro
+linhas SQL-01 declaradas, chave técnica formada pelo UUID da execução
+com sufixo estável entre duas execuções, recusa ordinal negativo e igual
+ao count, e equivalência de `observedTime` SQL-03 somente na janela
+observada com tolerância exata de 1 ms; tempo anterior, 2 ms além da borda
+e tipo não temporal reprovam. O teste focal inicial passou; o candidato
+final v31 com as bordas adicionais executou `clean verify` JDK 17/
+heap 512 MiB: **2.318 Surefire + duas ITs Failsafe offline, zero falhas/
+erros, cinco skips históricos**, exit **1 somente JaCoCo bootstrap**.
+`DeclaredSqlOracles` ganhou 9 linhas/seis ramos (111/202,60/110→
+120/202,66/110) e a classe anônima pura de `expected` ganhou 33 linhas/
+20 ramos; pacote filtrado v30→v31 3.663/5.768→3.705/5.768 linhas
+(0,642) e 1.621/2.950→1.647/2.950 ramos (0,558), ainda abaixo de
+80/60. Faltam **910 linhas e 123 ramos** sob o denominador v31.
+O espelho v31 do mesmo HEAD+overlay foi indexado somente nele (4.007
+arquivos); scanner offline **PASS** 4.007 candidatos/4.006 textos/um
+binário, zero achados/não inspecionados; Gitleaks 8.29.1 exit 0,
+zero achados. Logs privados `target/ci-p10-20260925-01/{clean-verify-v31,scanner-v31,gitleaks-v31}-private.log`.
+`DeclaredSqlOracles.monitorDeclarations` ainda mistura mapeamento puro e
+consulta curta SQL; próxima frente deve cobrir outros oráculos puros e
+decisões observáveis, ou justificar extração menor sem ocultar o mapeamento.
+Shadow IT continua **não executada**; G02 **aberto**, sem SHA/check remoto
+verde/owner ou publicação.
+
 # Preparação do .gitignore para publicação — 23/09/2026
 
 Pedido do usuário: ajustar o `.gitignore` antes de subir este repositório ao
@@ -6337,3 +9707,119 @@ Composição parcial J: physical-analytic-expansion-composition-04 passou2IT (qu
 ANALYTIC_LOCAL_CANDIDATE: sucessão documental em validação; sem conclusão local presumida.
 
 Sucessão de integridade em qualificação: QUALIFICATION_LOCAL_CANDIDATE. A–N permanece EM_EXECUCAO; não é entrega final.
+# P29 — booleanos Unicode de configuração recusados offline — 28/09/2026
+
+Regra `RUNTIME-BOOL-ASCII-01`, origem: configuração opt-in/fail-closed em
+`AGENTS.md` e achados `IMPROPER_UNICODE` v90 na rotina comum de
+`RuntimeConfigurationFactory.ConfigurationValues.booleanValue`. Contratos
+afetados: flags `dataexport.enabled`, `graphql.enabled` e
+`shadow.audit.enabled` vindas do arquivo ou ambiente; owner de negócio não
+designado, revisão de Segurança/release pendente. O valor sintético
+`shadow.audit.enabled=fal\u017Fe` era aceito como `false` por
+`equalsIgnoreCase`, desabilitando a auditoria sem grafia ASCII. O novo teste
+de arquivo e `V2_SHADOW_AUDIT_ENABLED` foi RED 30 testes/uma falha antes da
+correção; v93 foi recusado antes dos testes somente pelo formatter do próprio
+teste e está preservado. A rotina agora exige ASCII antes da comparação;
+continua aceitando `FALSE` ASCII. Foco v95: 30/30 PASS, sem JDBC.
+
+Espelho isolado v95 nos bytes de código/teste finais: `clean verify` JDK17
+offline exit0, 2.356 Surefire em 280 XML/cinco skips, seis ITs offline,
+formatter, Checkstyle e JaCoCo 80/60 PASS. PMD v95 analisou 656 fontes,
+36 achados brutos; somente `parseLong` mudou de linha 596 para 599 por
+adição anterior, sem novo tipo/método. As seis entradas de disposição que
+referem a fonte ou teste alterado foram atualizadas com SHA atual após
+revisão dos mesmos fluxos de sanitização; a primeira validação recusou
+`DISPOSITION_TEST_SOURCE_HASH` porque duas entradas adicionais usavam o
+mesmo teste, e v95b passou 36/36 contra 2.362 casos, sem aceite nominal.
+SpotBugs/FindSecBugs v96 analisou fontes e 1.135 classes/recursos iguais por
+SHA ao build v95, 1.091 classes, zero erros/classes ausentes, 272 alertas
+brutos/87 SECURITY/46 `IMPROPER_UNICODE`, mesmo multiconjunto tipo+classe
+de v90. XML SHA-256
+`71214946789B0FC3C89B2B584396848ECEDEC7E81FA924EB9A92FB95F05CA09A`.
+O detector ainda assinala as duas comparações, sem modelar a guarda ASCII.
+Recibos em `target/ci-p10-20260927-01/p29-unicode-boolean-red-v94-private.log`,
+`p29-unicode-boolean-green-v95-private.log`, `clean-verify-v95-private.log`,
+`pmd-v95/`, `pmd-disposition-v95/`, `pmd-disposition-v95b/` e
+`p29-sast-mirror-v96/target/spotbugsXml.xml`. Não houve JDBC, DLL, SQL,
+UAC, serviço, DDL, mudança do pin ou aceite integral P08/P11/P29/G02.
+# P07/P08/P29 — parada segura e instalação local preparada — 28/09/2026
+
+O usuário priorizou concluir uma unidade verificável antes de desligar o PC,
+preparar instalação e **aguardar sinal de prontidão UAC** e decisão explícita
+para mudar `AGENTS.md`/pin a 12.8.2. Não houve sinal até este checkpoint;
+nenhum novo UAC foi disparado. A instalação SQL Server local já autorizada
+fica pronta no [runbook](docs/runbooks/reconstrucao-shadow-local-20260928.md),
+mas só será tentada uma vez após o sinal, com readback serial. A decisão de
+Segurança continua proibindo JDBC/variante física 12.8.1 mesmo se o serviço
+for instalado. Sem autorização do novo pin, não há migrations/IT/JDBC.
+
+Preflight **somente leitura**, sem conexão SQL: host Windows `LUCAS`, serviço
+`MSSQLSERVER` ausente, nenhum processo `sqlservr`/`setup`/mídia ativo e
+diretório de extração ausente; C: com 672,4 GiB livres. Mídia
+`SQLEXPR_x64_ENU.exe` de 748.772.024 bytes, SHA-256
+`74AA90C11202A5524E769B9BC22531BAEF22D91E9B2D2E8C3CB99E89A65C5297`,
+assinatura Microsoft válida e recibo coincidente; `sqlcmd` local v1.10.0.
+Escolha preparada: SQL Server 2025 Express x64, mídia 17.0.1000.7,
+instância padrão `MSSQLSERVER`, Windows auth, serviço Manual, TCP/Named
+Pipes desabilitados, memória máxima 2 GiB, collation
+`Latin1_General_100_CI_AS_SC`, alvo de banco exclusivamente
+`localhost/ETL_SISTEMA_V2_SHADOW`, quotas de dados/log no runbook. A
+[documentação oficial de instalação](https://learn.microsoft.com/en-us/sql/database-engine/install-windows/install-sql-server-from-the-command-prompt?view=sql-server-ver17)
+exige `/SUPPRESSPRIVACYSTATEMENTNOTICE` junto de `/Q`; comando preparado
+foi ajustado antes de qualquer efeito. Extração e setup podem solicitar UAC;
+o operador deve clicar **Sim** nos prompts legítimos após sinalizar prontidão.
+Se cancelar, houver deriva ou resultado incerto, preservar logs/estado, não
+repetir nem limpar. Banco existente/objetos suspendem DDL. Nada foi instalado,
+criado, conectado, migrado, testado em JDBC ou acessado na máquina antiga.
+
+P29 v96 tem 272 alertas brutos. Para a próxima triagem em **lote por causa e
+alcançabilidade**, o inventário bruto se divide em SECURITY 87 (46 Unicode,
+22 SQL dos quais 19 sinks distintos, nove hash, seis REDOS, dois jitter,
+um `COMMAND_INJECTION`, um sincronismo), MALICIOUS_CODE 66 (65 exposições
+de referência e uma estática), BAD_PRACTICE 60 (57 declarações genéricas,
+duas construtoras e um recurso DB), STYLE 42, MT_CORRECTNESS oito,
+PERFORMANCE cinco e CORRECTNESS quatro. As correções causais anteriores de
+Unicode/LOC-04 estão nos checkpoints 0308/0309/0307; nenhuma destas contagens
+é aceite nominal de Segurança. A triagem restante deve priorizar fronteiras
+alcançáveis, agrupar contraprovas e fazer **um** gate final nos bytes do lote.
+# P07/P08 — instância e banco shadow local materializados — 28/09/2026
+
+O usuário confirmou prontidão para o UAC antes pausado. O Builder executou
+uma única extração elevada da mídia Microsoft já verificada e uma única
+instalação SQL Server 2025 Express x64 (17.0.1000.7) na instância padrão
+`LUCAS/MSSQLSERVER`; ambas saíram 0. `Summary.txt` registrou `Passed`.
+Serviço `Manual` iniciado localmente; TCP e Named Pipes desabilitados, sem
+listener TCP do processo. SHA-256 da mídia, assinatura Microsoft, árvore
+extraída, setup, logs, PID/exit e reservas estão no recibo privado
+`target/shadow-local-rebuild-20260928-01/ledger.jsonl`.
+
+O preflight read-only em `lpc:localhost/master` confirmou Express, Windows
+auth, Shared Memory, collation `Latin1_General_100_CI_AS_SC`, memória máxima
+2 GiB e zero entradas do banco exato em `sys.databases`/`sys.master_files`;
+os arquivos alvo também não existiam. A primeira consulta foi recusada apenas
+por alias SQL reservado, sem efeito; a consulta corrigida saiu 0. Após reserva
+separada, um único `CREATE DATABASE [ETL_SISTEMA_V2_SHADOW]` saiu 0. Readback
+em `master` e no alvo confirmou `ONLINE`, compatibilidade 170, collation
+esperada, dados 64/2048 MiB e log 32/512 MiB com crescimento 16 MiB, zero
+tabelas/views/procedures de usuário e zero histórico Flyway. Não houve outro
+banco, login, job, conexão remota, migration, IT, JDBC, carga da DLL 12.8.1,
+mudança do pin 12.8.2, deploy ou produção. P07/P08 físicos seguem abertos;
+Segurança mantém a variante 12.8.1 suspensa e a mudança do pin depende de
+decisão explícita do usuário. Checkpoint 0311 e runbook local documentam o
+readback e a recuperação por preservação, sem retry/drop/limpeza.
+Validação documental: UTF-8 estrito sem BOM nos quatro arquivos tocados e
+`git diff --check` passaram; `Test-TrilhaPreparation.ps1` passou com 33
+etapas, 48 IDs abertos e nove pacotes; secret scan offline passou em
+4.042 candidatos, zero achado. `Test-Gpt56ChatTrail.ps1` recusou
+`HANDOFF_PATH` histórico fora do escopo P01–P33 (recusa já registrada no
+checkpoint 0308), sem ser contabilizado como PASS. Build Java não se aplica
+à instalação e documentação desta unidade.
+# P08 — revisão offline dos contratos Surefire 0349; Gate 1 ainda FAIL — 29/09/2026
+
+[Checkpoint 0350](docs/continuidade/checkpoints/0350-p08-surefire-contratos-revisao-offline.md). No espelho congelado 0349, o teste de escopo ainda pina SHA antiga de `AnalyticScenarioRuntime` em **dois** inventários; o diff revisado mantém a rota `DIRECT_SQL_JDBC`/`SHADOW_EXCLUDED`, e repinar ambas as linhas após revisão preserva o guard de hash exato. O teste de schema lista V001–V104; comparação offline confirmou 104/104 nomes como prefixo, somente V105 adicional, inventário de epoch com 105/105 hashes e baseline V105 pinado. Anexar V105 à lista **exata**, preservando os asserts históricos e conferindo seu pin, mantém o guard de drift; prefixo/contagem/expectativa derivada do diretório ou remoção de checagem de hash o enfraqueceria. Mutantes mínimos propostos: byte do fonte e pin de apenas um inventário; V106 não revisada e byte alterado de V105 em cópia isolada. Nenhum mutante/teste foi executado nem arquivo Runtime alterado por Banco. **Surefire FAIL 0349, Failsafe zero, Gate 1/A/B físico/P08 abertos**, readback anterior 2235→2235, FAILs 0336/0342/0345/0347 e backup 0325 preservados. Runtime corrige/testa offline; Supervisor decide nova autoridade física.
+# P08 — oito cenários Failsafe PASS; Gate 1 FAIL em JaCoCo shadow e stats — 29/09/2026
+
+[Checkpoint 0351](docs/continuidade/checkpoints/0351-p08-fullclass-failsafe-pass-jacoco-stats-fail.md). Espelho novo `C:\Users\lucas\p08m0351`, 2170 entradas package sem drift e 4103 arquivos iguais ao snapshot Runtime 0350, sem `target`/`.env` herdado; A/B ZIP/manifest/revision e três inventários de escopo pinados, arquivos untracked preservados. Preflight/reserva no ledger SHA `6DDE2ABFF5B57A2A357D88CE739D7DD67797E8CFAD445C47EA6E385A925E8DD2`: master/shadow exatos por Windows auth, Flyway 106=SCHEMA+105 SQL/0 fail, zero consumidores, loopback, dados/schema/064/2235 stats estáveis. **Uma** chamada Maven JDK17 offline perfil/two locks saiu **1**: Surefire 2368/0/0/5; Failsafe 9 total, **8 ativos PASS**, diagnóstico skip esperado, 7 recibos físicos (6 `PASS_LOCAL`, 1 `CANCELLED`) rollback e before=after; `OUTCOME_UNKNOWN` sem recibo por contrato. JaCoCo base PASS, **shadow check FAIL** por cobertura; log SHA `70E994775B88E9C9CFB062F23E0BF5AD4C917802F258C0D0D57A69CE17B050EF`, sem URL. Readback externo: master/alvo/contagens/objetos/principals/histórico/socket iguais, mas inventário global **2235→2448, +213 grupos auto** em 38 tabelas, zero removidos/modificados/manual/filtrado/indexado, um novo em `ctl.execution_audit.failure_category`; 064 mudou só `V105_STATISTICS_BLOCKERS` 1→2, pós estável. Recibo sanitizado SHA `400DEADA68B1245A6F8F3A9DFB1CD025852601FE80D52895B0A7ECE1F79E2275`. **Gate 1 FAIL, P08 aberto; 2448 apenas observação pós-FAIL**, sem aceite como baseline. Supervisor decide cobertura shadow e metadata V105 antes de nova autoridade; A/B físico não iniciado. FAILs 0336/0342/0345/0347/0349, 873→1088→2235 e limites backup 0325 preservados. Sem retry, DDL/Flyway/restore, edição Runtime/POM ou stats.
+# P08 — 0378: campanha retomada parou no guard do método 1, sem Maven — 29/09/2026
+
+[Checkpoint 0378](docs/continuidade/checkpoints/0378-p08-seis-esperas-guard-request-active.md). O novo pedido explícito do usuário retomou os seis métodos não iniciados de 0377, com teto de 3600 s total e 600 s por método, ordem serial e parada na primeira recusa. Para o **método 1**, Banco preparou espelho novo `C:\Users\lucas\p08m0378_01` sem `target`/`.env` herdados, revalidou **2170/2170** hashes, pins candidatos 0374 e a prova offline dos seis métodos de 0377. Reserva física nova fixou somente `localhost/ETL_SISTEMA_V2_SHADOW`, Windows auth, impacto e recuperação. Preflight `master`/alvo e listeners loopback passou. O guard categórico imediatamente anterior ao Maven recusou com **SQL 55104 `REQUEST_ACTIVE`**; **zero chamada Maven, zero IT, zero DLL/JDBC** nesta rodada. Sem retry. Readback independente `master`/alvo/Flyway **106=SCHEMA+105 SQL/0 fail**, 1819 objetos/247 tabelas/147 linhas agregadas, contagens, 064, PID/listeners e stats **2536→2536** sem delta nos recortes medidos; 2536 continua observação, sem baseline aceita. O guard só classifica request ativa no instante da sonda; preflight/readback registraram zero outras sessões nos seus instantes e não identificam request, owner, blocker ou causa histórica. Recibo privado `target/p08-six-waits-20260929-02-m01/final-receipt.json` SHA `76ED118CFB77053B4425CB15DBDFCDA106060DBBAA44798A228D08C255F5507F`; ledger SHA `1D8AA0C407739FEE9BAAB8622E436B05B0FFEB909D81B2D35F60DE3AE6D1A10F`, encerrado em **168,844 s** do teto do método. **Método 1 parado antes da IT; métodos 2–6 não iniciados**, pois a primeira recusa encerra a campanha. Preservados PASS isolado 0376, FAILs 0354 e demais históricos, 8 erros/74 classes faltantes, sete esperas sem causa fechada, JaCoCo/A-B/Gate 1/P08 abertos, pins 0374 sem aceite. Nenhum DDL/Flyway, KILL, restart/login, fonte real, outro banco ou produção. Próximo responsável: Supervisor revisa a recusa e decide eventual autorização distinta; Banco fica ocioso após handoff.

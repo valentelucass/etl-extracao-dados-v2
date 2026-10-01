@@ -166,11 +166,12 @@ $expectedMigrations = @(
     'V101__accept_bound_integral_freight_capture.sql',
     'V102__prove_declared_collection_preview.sql',
     'V103__declare_complete_manifest_collection_sets.sql',
-    'V104__revise_quote_reference_with_preserved_source.sql'
+    'V104__revise_quote_reference_with_preserved_source.sql',
+    'V105__align_audit_and_expansion_label_bin2.sql'
 )
 $actualMigrations = @(Get-ChildItem -LiteralPath $migrationsDirectory -File | ForEach-Object Name | Sort-Object)
 Require-True (@(Compare-Object $expectedMigrations $actualMigrations -CaseSensitive).Count -eq 0) `
-    'O gate progressivo exige exatamente V001-V104 no repositório; a instalação física tem validação própria.'
+    'O gate progressivo exige exatamente V001-V105 no repositório; a instalação física tem validação própria.'
 
 $baseline = Get-Content -LiteralPath $baselinePath -Raw
 foreach ($migration in $expectedMigrations) {

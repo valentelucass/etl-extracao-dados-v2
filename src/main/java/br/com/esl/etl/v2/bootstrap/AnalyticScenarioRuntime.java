@@ -36,6 +36,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
+import javax.sql.DataSource;
 
 /** All eleven inputs and five facts execute in the caller's local rollback-only SQL session. */
 public final class AnalyticScenarioRuntime {
@@ -525,6 +526,9 @@ public final class AnalyticScenarioRuntime {
                                         Math.min(run.roots(), 256),
                                         variant == AnalyticScenarioVariant.VALUES_AND_NULLS),
                         token);
+        if (integral == null) {
+            bindLegacyQuoteProtocol(session, sqlScope().source());
+        }
         final UUID quotes =
                 agenda == null ? UUID.randomUUID() : agenda.execution(run.id(), stage, "COT");
         final var quoteWindow = sourceWindow(agenda, "COT", captureDate);
@@ -735,6 +739,37 @@ public final class AnalyticScenarioRuntime {
                 ? new br.com.esl.etl.v2.plataforma.fonte.SyntheticSourceScope(
                         "LOCAL_V2", "LOCAL_V2")
                 : integral.scope();
+    }
+
+    /** V024 requires an explicit second protocol binding for the legacy shared local scope. */
+    static void bindLegacyQuoteProtocol(final DataSource source, final String sourceInstance)
+            throws SQLException {
+        if (!"LOCAL_V2".equals(sourceInstance)) {
+            throw new IllegalArgumentException("ANA_LEGACY_PROTOCOL_SCOPE");
+        }
+        try (var connection = source.getConnection();
+                var statement =
+                        connection.prepareStatement(
+                                """
+                    IF @@TRANCOUNT=0 OR DB_NAME()<>N'ETL_SISTEMA_V2_SHADOW'
+                        THROW 53850,N'INTEGRAL_PROTOCOL_LOCAL_RUN_REQUIRED',1;
+                    IF NOT EXISTS(SELECT 1 FROM ctl.source_catalog s
+                        JOIN ctl.source_protocol_binding b ON b.source_instance=s.source_instance
+                        WHERE s.source_instance=? AND s.active=1
+                        AND b.source_kind=N'GRAPHQL' COLLATE Latin1_General_100_BIN2)
+                        THROW 51301,N'SOURCE_PROTOCOL_NOT_REGISTERED',1;
+                    INSERT ctl.source_protocol_binding(source_instance,source_kind,registered_at_utc)
+                    SELECT s.source_instance,N'DATA_EXPORT',SYSUTCDATETIME()
+                    FROM ctl.source_catalog s WHERE s.source_instance=? AND s.active=1
+                        AND NOT EXISTS(SELECT 1 FROM ctl.source_protocol_binding b
+                            WHERE b.source_instance=s.source_instance
+                            AND b.source_kind=N'DATA_EXPORT' COLLATE Latin1_General_100_BIN2);
+                    """)) {
+            statement.setQueryTimeout(10);
+            statement.setNString(1, sourceInstance);
+            statement.setNString(2, sourceInstance);
+            statement.executeUpdate();
+        }
     }
 
     public static RelationalLaboratoryPolicy policy(final int pageSize) {

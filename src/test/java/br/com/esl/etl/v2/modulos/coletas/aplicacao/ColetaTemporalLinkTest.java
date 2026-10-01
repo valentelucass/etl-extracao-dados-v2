@@ -166,6 +166,18 @@ class ColetaTemporalLinkTest {
     }
 
     @Test
+    void invalidReferenceTimeDoesNotDiscardValidNativeDataExportTime() {
+        final var data = data("pending", "2026-09-09T20:02:03.123456789Z");
+        final var invalidReference = reference(node("pending", "2026-09-09T17:02:03"));
+
+        final var result = link(data, invalidReference);
+
+        assertEquals(Outcome.DATA_EXPORT_TIME_RETAINED, result.outcome());
+        assertEquals(data.freshnessAtUtc(), result.candidateAtUtc());
+        assertSame(invalidReference, result.reference());
+    }
+
+    @Test
     void repeatedRowsAndReverseArrivalPreserveIndividualEventsWithoutChoosingAWinner() {
         final var older = reference(node("pending", "2026-09-09T10:00:00.1231Z"));
         final var newer = reference(node("pending", "2026-09-09T10:00:00.1234Z"));

@@ -17,7 +17,14 @@ extração curto dentro da rodada. Um caminho de268caracteres foi recusado pelo
 carregador nativo nesta máquina, com o mesmo arquivo que carregou em173.
 
 A entrada fixa é Invoke-Qualification.ps1, com Command inspect/plan/run/status/
-resume/compare e ManifestSha256 explícito. Campaign informa um contrato JSON
+resume/compare e ManifestSha256 explícito. Para smoke offline do JAR extraído,
+`config-validate` e `dry-run` chamam o Main com
+`config/application.example.properties` pinado no pacote, sem flags shadow,
+`java.library.path`, JDBC ou carregamento da DLL. O processo filho remove
+variáveis `V2_*` herdadas e opções JVM externas; fontes e auditoria ficam
+desligadas, com `LOCAL_SHADOW` e autorização deny-all. Esse smoke prova só
+entrada/configuração do JAR; não qualifica supervisor, SQL, rollback, P08 físico
+ou release. Campaign informa um contrato JSON
 fechado; Control é um diretório próprio novo para run e existente para status/
 resume. Configuration opcional informa configuração externa sintética fechada.
 config/campaign.synthetic.json contém um cenário de duas raízes e as dezenove
@@ -25,7 +32,19 @@ saídas, com os pins desta revisão já preenchidos. config/config.synthetic.jso
 declara alvo, duas travas, rollback e limites numéricos.
 
 Após a extração validada pelo SHA256 externo indicado no relatório da entrega,
-abra PowerShell no diretório extraído e execute:
+abra PowerShell no diretório extraído. O smoke offline permitido nesta revisão é:
+
+```powershell
+$pin = (Get-Content .\package.sha256 -Raw).Trim()
+& .\Invoke-Qualification.ps1 -Command config-validate -ManifestSha256 $pin
+& .\Invoke-Qualification.ps1 -Command dry-run -ManifestSha256 $pin
+```
+
+Os comandos físicos abaixo **estão suspensos na revisão atual**: o lock do
+pacote contém DLL 12.8.2, enquanto o perfil shadow autorizado exige o par
+driver/DLL 12.8.1. Executá-los somente depois de requalificar lock,
+perfil, banco local e autorização aplicável, com preflight/rollback. O smoke
+acima não libera essa etapa.
 
 ```powershell
 $pin = (Get-Content .\package.sha256 -Raw).Trim()

@@ -3,10 +3,17 @@ package br.com.esl.etl.v2.bootstrap;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import br.com.esl.etl.v2.plataforma.analitico.AnalyticSqlContract;
+import br.com.esl.etl.v2.plataforma.qualificacao.QualificationTopology;
+import br.com.esl.etl.v2.plataforma.reconciliacao.sweep.SweepApplicability;
+import br.com.esl.etl.v2.plataforma.reconciliacao.sweep.SweepPreviewAssessment;
+import br.com.esl.etl.v2.plataforma.reconciliacao.sweep.SweepPreviewBlockReason;
+import br.com.esl.etl.v2.plataforma.reconciliacao.sweep.SweepScope;
 import br.com.esl.etl.v2.plataforma.resiliencia.CancellationToken;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
@@ -20,6 +27,62 @@ class LocalArtifactSequenceTest {
     @BeforeAll
     static void authorOnce() throws Exception {
         IntegralSequenceFixtures.write(authored, false, 2);
+    }
+
+    @Test
+    void sequencePreviewRequiresAllCatalogueResponsibilitiesBlockedForMissingApplicability() {
+        final var rows =
+                new SweepResponsibilityPlanner()
+                        .bindings("0".repeat(64), "0".repeat(64)).stream()
+                                .map(
+                                        binding ->
+                                                new SweepResponsibilityPlanner.Preview(
+                                                        new SweepResponsibilityPlanner
+                                                                .Responsibility(
+                                                                binding.id(),
+                                                                "SYNTHETIC",
+                                                                binding.parent(),
+                                                                SweepScope.ResponsibilityKind.ROOT,
+                                                                SweepApplicability.BLOCKED,
+                                                                "",
+                                                                "",
+                                                                "",
+                                                                ""),
+                                                        new SweepPreviewAssessment(
+                                                                SweepPreviewAssessment.Disposition
+                                                                        .BLOCKED,
+                                                                SweepPreviewBlockReason
+                                                                        .APPLICABILITY_NOT_ENABLED)))
+                                .toList();
+        assertEquals(rows, LocalArtifactSequence.verifyPreviews(rows));
+        assertEquals(
+                "SEQUENCE_SWEEP_ORACLE_COUNT",
+                assertThrows(
+                                IllegalArgumentException.class,
+                                () -> LocalArtifactSequence.verifyPreviews(rows.subList(0, 32)))
+                        .getMessage());
+        final var duplicate = new ArrayList<>(rows);
+        duplicate.set(1, duplicate.get(0));
+        assertEquals(
+                "SEQUENCE_SWEEP_ORACLE_DIVERGENCE",
+                assertThrows(
+                                IllegalArgumentException.class,
+                                () -> LocalArtifactSequence.verifyPreviews(duplicate))
+                        .getMessage());
+        final var wrongReason = new ArrayList<>(rows);
+        wrongReason.set(
+                0,
+                new SweepResponsibilityPlanner.Preview(
+                        rows.get(0).responsibility(),
+                        new SweepPreviewAssessment(
+                                SweepPreviewAssessment.Disposition.BLOCKED,
+                                SweepPreviewBlockReason.MODE_NOT_SWEEP)));
+        assertEquals(
+                "SEQUENCE_SWEEP_ORACLE_DIVERGENCE",
+                assertThrows(
+                                IllegalArgumentException.class,
+                                () -> LocalArtifactSequence.verifyPreviews(wrongReason))
+                        .getMessage());
     }
 
     @ParameterizedTest
@@ -105,6 +168,96 @@ class LocalArtifactSequenceTest {
                 assertThrows(
                                 IllegalArgumentException.class,
                                 () -> sequence.verifyFiles(CancellationToken.none()))
+                        .getMessage());
+    }
+
+    @Test
+    void reportOracleBindsEveryStageFrontierCoverageAndSweepWithoutSql() throws Exception {
+        final var sequence = new LocalArtifactSequence(sequence(), CancellationToken.none());
+        final var report = IntegralArtifactFixtures.object();
+        final var stages = report.putArray("stages");
+        for (final var step : sequence.steps()) {
+            final var input = step.input().read();
+            final var stage =
+                    stages.addObject()
+                            .put("id", step.id())
+                            .put("operation", step.operation().name())
+                            .put("mode", step.mode().name())
+                            .put("executionRevision", step.executionRevision())
+                            .put("sourceRevision", step.sourceRevision())
+                            .put("referenceRevision", step.referenceRevision())
+                            .put("inputSha256", step.input().sha256())
+                            .put("oracleSha256", step.oracle().sha256())
+                            .put("selectedState", "PASS_LOCAL")
+                            .put("elapsedMillis", 1)
+                            .put("physicalColumns", 971)
+                            .put("captureDate", input.path("windowStart").asText())
+                            .put("logicalClock", input.path("logicalClock").asText())
+                            .put("supplementRevision", input.path("revision").asInt())
+                            .put("sourceFrontier", sequence.start().toString());
+            final var outputs = stage.putArray("outputs");
+            for (final var contract : AnalyticSqlContract.values()) {
+                outputs.addObject()
+                        .put("contract", contract.id())
+                        .put("expectedRows", 0)
+                        .put("observedRows", 0)
+                        .put("differences", 0)
+                        .put("gate", "PASS_LOCAL")
+                        .putArray("sample");
+            }
+            final var scopes = stage.putArray("scopes");
+            for (final var node : QualificationTopology.nodes()) {
+                scopes.addObject()
+                        .put("scope", node.id())
+                        .put("state", "PASS_LOCAL")
+                        .put("reason", "PROVEN")
+                        .put("layer", "ORACLE");
+            }
+            final var sweep = stage.putArray("sweepPreview");
+            for (final var binding :
+                    new SweepResponsibilityPlanner().bindings("0".repeat(64), "0".repeat(64))) {
+                final var row = sweep.addObject();
+                row.putObject("responsibility").put("id", binding.id());
+                row.putObject("assessment")
+                        .put("disposition", "BLOCKED")
+                        .put("reason", "APPLICABILITY_NOT_ENABLED");
+            }
+            stage.putArray("agenda");
+        }
+        sequence.verifyReport(report);
+
+        final var frontier = report.deepCopy();
+        ((ObjectNode) frontier.path("stages").get(0))
+                .put("sourceFrontier", sequence.start().plusDays(1).toString());
+        assertEquals(
+                "QUAL_SEQUENCE_SOURCE_FRONTIER",
+                assertThrows(IllegalArgumentException.class, () -> sequence.verifyReport(frontier))
+                        .getMessage());
+
+        final var duplicate = report.deepCopy();
+        final var firstSweep = duplicate.path("stages").get(0).path("sweepPreview");
+        ((ObjectNode) firstSweep.get(1).path("responsibility"))
+                .put("id", firstSweep.get(0).path("responsibility").path("id").asText());
+        assertEquals(
+                "QUAL_SEQUENCE_SWEEP_ORACLE",
+                assertThrows(IllegalArgumentException.class, () -> sequence.verifyReport(duplicate))
+                        .getMessage());
+
+        final var rejectedState = report.deepCopy();
+        ((ObjectNode) rejectedState.path("stages").get(0)).put("selectedState", "FAILED");
+        assertEquals(
+                "QUAL_SEQUENCE_STAGE_BINDING",
+                assertThrows(
+                                IllegalArgumentException.class,
+                                () -> sequence.verifyReport(rejectedState))
+                        .getMessage());
+        final var wrongSupplement = report.deepCopy();
+        ((ObjectNode) wrongSupplement.path("stages").get(0)).put("supplementRevision", -1);
+        assertEquals(
+                "QUAL_SEQUENCE_STAGE_INPUT_METADATA",
+                assertThrows(
+                                IllegalArgumentException.class,
+                                () -> sequence.verifyReport(wrongSupplement))
                         .getMessage());
     }
 

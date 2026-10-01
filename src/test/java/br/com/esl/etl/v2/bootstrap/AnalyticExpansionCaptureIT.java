@@ -24,17 +24,22 @@ class AnalyticExpansionCaptureIT {
     void packagedInputsHydrateMissingFreightAndReuseBothFactsAcrossFourModes() throws Exception {
         try (var session = ColetaTemporalLaboratorySession.openFromEnvironment()) {
             final UUID run = UUID.randomUUID();
-            new JdbcExpansionLaboratory(session, CLOCK)
-                    .start(
-                            run,
-                            new ExpansionPolicy(
-                                    DATE,
-                                    DATE.plusDays(3),
-                                    DATE,
-                                    2,
-                                    100,
-                                    1000,
-                                    FiscalPolicy.SYNTHETIC_CTE));
+            RuntimePhaseEvidence.sql(
+                    RuntimePhaseEvidence.Phase.EXPANSION_START,
+                    () -> {
+                        new JdbcExpansionLaboratory(session, CLOCK)
+                                .start(
+                                        run,
+                                        new ExpansionPolicy(
+                                                DATE,
+                                                DATE.plusDays(3),
+                                                DATE,
+                                                2,
+                                                100,
+                                                1000,
+                                                FiscalPolicy.SYNTHETIC_CTE));
+                        return null;
+                    });
             final var runtime =
                     new AnalyticExpansionCapture(session, run, CLOCK, Clock.systemUTC());
             int revision = 0;

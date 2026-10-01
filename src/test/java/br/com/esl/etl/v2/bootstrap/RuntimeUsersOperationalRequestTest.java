@@ -11,6 +11,7 @@ import br.com.esl.etl.v2.plataforma.configuracao.RuntimeConfiguration;
 import br.com.esl.etl.v2.plataforma.configuracao.RuntimeEnvironment;
 import br.com.esl.etl.v2.plataforma.configuracao.ShadowStorageProperties;
 import br.com.esl.etl.v2.plataforma.configuracao.ShadowStorageTargetKind;
+import br.com.esl.etl.v2.plataforma.controle.ExecutionMode;
 import br.com.esl.etl.v2.plataforma.fonte.graphql.GraphQlRetryPolicy;
 import br.com.esl.etl.v2.plataforma.resiliencia.EslResiliencePolicy;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
@@ -29,6 +30,52 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 class RuntimeUsersOperationalRequestTest {
     static final Instant NOW = Instant.parse("2036-03-19T18:42:10Z");
+
+    @Test
+    void userSnapshotObservationRetainsReplayAndRejectsSweepBeforeJdbc() {
+        for (final var mode :
+                java.util.List.of(
+                        ExecutionMode.BOOTSTRAP,
+                        ExecutionMode.INCREMENTAL,
+                        ExecutionMode.BACKFILL)) {
+            assertEquals(ExecutionMode.BACKFILL, LocalAnalyticUsersRuntime.observationMode(mode));
+        }
+        assertEquals(
+                ExecutionMode.REPLAY,
+                LocalAnalyticUsersRuntime.observationMode(ExecutionMode.REPLAY));
+        assertEquals(
+                "ANA_USERS_CYCLE_MODE",
+                assertThrows(
+                                IllegalArgumentException.class,
+                                () ->
+                                        LocalAnalyticUsersRuntime.observationMode(
+                                                ExecutionMode.SWEEP))
+                        .getMessage());
+        assertThrows(
+                NullPointerException.class, () -> LocalAnalyticUsersRuntime.observationMode(null));
+    }
+
+    @Test
+    void usersCaptureAdmissionRejectsModeAndReplayMismatchBeforeJdbc() {
+        final UUID replay = UUID.randomUUID();
+        LocalAnalyticUsersRuntime.requireObservationMode(ExecutionMode.BACKFILL, null);
+        LocalAnalyticUsersRuntime.requireObservationMode(ExecutionMode.REPLAY, replay);
+        for (final var denied :
+                java.util.List.of(
+                        new Object[] {ExecutionMode.BOOTSTRAP, null},
+                        new Object[] {ExecutionMode.SWEEP, null},
+                        new Object[] {ExecutionMode.BACKFILL, replay},
+                        new Object[] {ExecutionMode.REPLAY, null})) {
+            assertEquals(
+                    "ANA_USERS_OBSERVATION_MODE",
+                    assertThrows(
+                                    IllegalArgumentException.class,
+                                    () ->
+                                            LocalAnalyticUsersRuntime.requireObservationMode(
+                                                    (ExecutionMode) denied[0], (UUID) denied[1]))
+                            .getMessage());
+        }
+    }
 
     @Test
     void operationalObserverCountsGraphQlAndKeepsTheDataExportBudget() throws Exception {

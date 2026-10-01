@@ -28,6 +28,16 @@ public final class RelationalLaboratoryMain {
     }
 
     public static RuntimeExitCategory run(final String[] arguments, final PrintStream output) {
+        return run(arguments, output, new SqlSession()::execute);
+    }
+
+    @FunctionalInterface
+    interface SqlCommand {
+        JdbcRelationalLaboratory.Status execute(Options options) throws SQLException;
+    }
+
+    static RuntimeExitCategory run(
+            final String[] arguments, final PrintStream output, final SqlCommand command) {
         final Options options;
         try {
             options = Options.parse(arguments);
@@ -35,8 +45,8 @@ public final class RelationalLaboratoryMain {
             output.println("REL_LAB_CONFIG_REJECTED");
             return RuntimeExitCategory.CONFIG_AUTH;
         }
-        try (var session = ColetaTemporalLaboratorySession.openFromEnvironment()) {
-            final var status = execute(options, session, CancellationToken.none());
+        try {
+            final var status = command.execute(options);
             output.printf(
                     "REL_LAB_ROLLBACK_ONLY command=%s roots=%d/%d/%d links=%d/%d pending=%d"
                             + " quarantine=%d unbound=%d captures=%d rows=%d receipts=%d%n",
@@ -72,6 +82,14 @@ public final class RelationalLaboratoryMain {
         }
     }
 
+    private static final class SqlSession {
+        private JdbcRelationalLaboratory.Status execute(final Options options) throws SQLException {
+            try (var session = ColetaTemporalLaboratorySession.openFromEnvironment()) {
+                return RelationalLaboratoryMain.execute(options, session, CancellationToken.none());
+            }
+        }
+    }
+
     static JdbcRelationalLaboratory.Status execute(
             final Options options,
             final ColetaTemporalLaboratorySession session,
@@ -93,60 +111,74 @@ public final class RelationalLaboratoryMain {
                         1,
                         options.pageSize(),
                         1024);
-        final var lab = new JdbcRelationalLaboratory(session, clock);
-        lab.start(run, policy, RelationalSyntheticSource.contracts());
-        final var executor =
-                new RelationalLaboratoryExecutor(session, run, clock, Clock.systemUTC());
-        if (options.command().equals("replay")) {
-            for (final var mode :
-                    new ExecutionMode[] {ExecutionMode.BOOTSTRAP, ExecutionMode.REPLAY}) {
-                executor.plan(mode, 1, options.roots());
-                for (int ordinal = 1; ordinal <= options.days(); ordinal++) {
-                    executor.executePartition(mode, ordinal, cancellation, boundary -> {});
+        return new SqlExecution().execute(options, session, cancellation, date, clock, run, policy);
+    }
+
+    private static final class SqlExecution {
+        private JdbcRelationalLaboratory.Status execute(
+                final Options options,
+                final ColetaTemporalLaboratorySession session,
+                final CancellationToken cancellation,
+                final LocalDate date,
+                final Clock clock,
+                final UUID run,
+                final RelationalLaboratoryPolicy policy)
+                throws SQLException {
+            final var lab = new JdbcRelationalLaboratory(session, clock);
+            lab.start(run, policy, RelationalSyntheticSource.contracts());
+            final var executor =
+                    new RelationalLaboratoryExecutor(session, run, clock, Clock.systemUTC());
+            if (options.command().equals("replay")) {
+                for (final var mode :
+                        new ExecutionMode[] {ExecutionMode.BOOTSTRAP, ExecutionMode.REPLAY}) {
+                    executor.plan(mode, 1, options.roots());
+                    for (int ordinal = 1; ordinal <= options.days(); ordinal++) {
+                        executor.executePartition(mode, ordinal, cancellation, boundary -> {});
+                    }
                 }
-            }
-        } else {
-            final var runtime =
-                    new LocalRelationalRuntime(session, run, policy, clock, Clock.systemUTC());
-            for (int day = 0; day < options.days(); day++) {
-                final LocalDate partition = date.plusDays(day);
-                final int first = 1 + day * options.roots();
-                for (final var template :
-                        new DataExportTemplate[] {
-                            DataExportTemplate.MANIFESTOS, DataExportTemplate.FRETES
-                        }) {
-                    runtime.capture(
-                            template,
-                            partition,
-                            ExecutionMode.BOOTSTRAP,
-                            null,
-                            RelationalLaboratoryFixtures.source(
-                                    template,
-                                    partition,
-                                    first,
-                                    options.roots(),
-                                    options.pageSize(),
-                                    true),
+            } else {
+                final var runtime =
+                        new LocalRelationalRuntime(session, run, policy, clock, Clock.systemUTC());
+                for (int day = 0; day < options.days(); day++) {
+                    final LocalDate partition = date.plusDays(day);
+                    final int first = 1 + day * options.roots();
+                    for (final var template :
+                            new DataExportTemplate[] {
+                                DataExportTemplate.MANIFESTOS, DataExportTemplate.FRETES
+                            }) {
+                        runtime.capture(
+                                template,
+                                partition,
+                                ExecutionMode.BOOTSTRAP,
+                                null,
+                                RelationalLaboratoryFixtures.source(
+                                        template,
+                                        partition,
+                                        first,
+                                        options.roots(),
+                                        options.pageSize(),
+                                        true),
+                                cancellation);
+                    }
+                    lab.bindBatch(
+                            run,
+                            RelationalLaboratoryFixtures.bindingBatch(
+                                    partition, first, options.roots()),
                             cancellation);
                 }
-                lab.bindBatch(
-                        run,
-                        RelationalLaboratoryFixtures.bindingBatch(
-                                partition, first, options.roots()),
-                        cancellation);
-            }
-            lab.resolve(run, UUID.randomUUID(), cancellation);
-            if (!options.command().equals("status")) {
-                for (int day = 0; day < options.days(); day++) {
-                    executor.hydrate(
-                            options.roots(),
-                            cancellation,
-                            MonotonicTicker.systemTicker(),
-                            RelationalLaboratoryFixtures::hydration);
+                lab.resolve(run, UUID.randomUUID(), cancellation);
+                if (!options.command().equals("status")) {
+                    for (int day = 0; day < options.days(); day++) {
+                        executor.hydrate(
+                                options.roots(),
+                                cancellation,
+                                MonotonicTicker.systemTicker(),
+                                RelationalLaboratoryFixtures::hydration);
+                    }
                 }
             }
+            return lab.status(run);
         }
-        return lab.status(run);
     }
 
     record Options(String command, int roots, int pageSize, int days) {
