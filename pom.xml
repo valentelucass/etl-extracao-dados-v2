@@ -621,6 +621,7 @@
                                 <include>**/ShadowAuditLocalIntegrationIT.java</include>
                                 <include>**/ShadowJdbcTransportReadOnlyIT.java</include>
                                 <include>**/ColetasTemporalLocalIntegrationIT.java</include>
+                                <include>**/Coletas6908PilotShadowIT.java</include>
                                 <include>**/RelationalLaboratory*IT.java</include>
                                 <include>**/ExpansionLaboratory*IT.java</include>
                                 <include>**/AnalyticLaboratory*IT.java</include>

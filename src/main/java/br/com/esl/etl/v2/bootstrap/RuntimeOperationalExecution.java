@@ -1,5 +1,6 @@
 package br.com.esl.etl.v2.bootstrap;
 
+import br.com.esl.etl.v2.modulos.coletas.aplicacao.ColetaPromotionGateway;
 import br.com.esl.etl.v2.plataforma.autorizacao.RuntimeAction;
 import br.com.esl.etl.v2.plataforma.configuracao.DataExportRuntimeConfigurationFingerprint;
 import br.com.esl.etl.v2.plataforma.configuracao.EnvironmentSecretProvider;
@@ -128,6 +129,38 @@ final class RuntimeOperationalExecution {
             final SourceGateways gateways,
             final java.util.function.Consumer<String> diagnostic,
             final java.io.InputStream controls) {
+        return executeInternal(
+                configuration, request, action, dataSource, gateways, diagnostic, controls, null);
+    }
+
+    static RuntimeExitCategory executePilot(
+            final RuntimeConfiguration configuration,
+            final RuntimeOperationalRequest request,
+            final javax.sql.DataSource dataSource,
+            final SourceGateways gateways,
+            final Coletas6908PilotExtraction extraction,
+            final ColetaPromotionGateway promotion,
+            final Runnable checkpoint) {
+        return executeInternal(
+                configuration,
+                request,
+                RuntimeAction.RUN,
+                dataSource,
+                gateways,
+                ignored -> {},
+                null,
+                new PilotComponents(extraction, promotion, checkpoint));
+    }
+
+    private static RuntimeExitCategory executeInternal(
+            final RuntimeConfiguration configuration,
+            final RuntimeOperationalRequest request,
+            final RuntimeAction action,
+            final javax.sql.DataSource dataSource,
+            final SourceGateways gateways,
+            final java.util.function.Consumer<String> diagnostic,
+            final java.io.InputStream controls,
+            final PilotComponents pilot) {
         final var recovery =
                 new JdbcSqlServerRuntimeRecovery(
                         dataSource,
@@ -162,7 +195,13 @@ final class RuntimeOperationalExecution {
             final var durableRequest =
                     new RuntimeRecoveryRequest(
                             start, request.plan.fingerprint(), request.binding, request.quality);
+            if (pilot != null) {
+                pilot.checkpoint().run();
+            }
             final var snapshot = recovery.read(durableRequest, cancellation);
+            if (pilot != null) {
+                pilot.checkpoint().run();
+            }
             diagnostic.accept(
                     "RUNTIME_OBSERVATION reason="
                             + snapshot.reason().name()
@@ -189,13 +228,18 @@ final class RuntimeOperationalExecution {
                                     start,
                                     cancellation,
                                     dataSource,
-                                    gateways)
+                                    gateways,
+                                    pilot)
                             : session -> {
                                 throw new IllegalStateException("RECOVERY_CANNOT_FETCH");
                             };
             final var dispatcher =
                     new RuntimeDispatcher(
-                            new JdbcSqlServerControlPlane(dataSource),
+                            pilot == null
+                                    ? new JdbcSqlServerControlPlane(dataSource)
+                                    : new Coletas6908PilotControlPlane(
+                                            new JdbcSqlServerControlPlane(dataSource),
+                                            pilot.checkpoint()),
                             configuration.clock(),
                             recovery,
                             new RuntimeDispatchBinding(definition.id(), handler));
@@ -236,7 +280,8 @@ final class RuntimeOperationalExecution {
             final ControlPlaneStart start,
             final CancellationSignal cancellation,
             final javax.sql.DataSource dataSource,
-            final SourceGateways gateways) {
+            final SourceGateways gateways,
+            final PilotComponents pilot) {
         final var limits = ContractObservationLimits.runtimeDefaults();
         final var boundary =
                 ContractResponsePathBoundary.forRuntime(request.release, request.compatibility);
@@ -316,12 +361,19 @@ final class RuntimeOperationalExecution {
             delegate =
                     switch (request.template) {
                         case COLETAS ->
-                                LocalColetasFretesRuntime.coletas(
-                                        input,
-                                        new JdbcSqlServerColetaStagingGateway(dataSource),
-                                        new JdbcSqlServerColetaPromotionGateway(dataSource),
-                                        quality,
-                                        request.quality);
+                                pilot == null
+                                        ? LocalColetasFretesRuntime.coletas(
+                                                input,
+                                                new JdbcSqlServerColetaStagingGateway(dataSource),
+                                                new JdbcSqlServerColetaPromotionGateway(dataSource),
+                                                quality,
+                                                request.quality)
+                                        : new DataExportRuntimeWorkload(
+                                                input,
+                                                pilot.extraction(),
+                                                pilot.promotion(),
+                                                quality,
+                                                request.quality);
                         case FRETES ->
                                 LocalColetasFretesRuntime.fretes(
                                         input,
@@ -394,6 +446,17 @@ final class RuntimeOperationalExecution {
                                                 .instant()
                                                 .truncatedTo(
                                                         java.time.temporal.ChronoUnit.MILLIS))));
+    }
+
+    private record PilotComponents(
+            Coletas6908PilotExtraction extraction,
+            ColetaPromotionGateway promotion,
+            Runnable checkpoint) {
+        private PilotComponents {
+            java.util.Objects.requireNonNull(extraction);
+            java.util.Objects.requireNonNull(promotion);
+            java.util.Objects.requireNonNull(checkpoint);
+        }
     }
 
     static RuntimeWorkloadHandler withRequiredDriftAlert(

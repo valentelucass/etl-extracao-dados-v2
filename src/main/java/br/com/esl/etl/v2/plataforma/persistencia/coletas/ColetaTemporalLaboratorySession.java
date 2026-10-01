@@ -18,6 +18,7 @@ import javax.sql.DataSource;
 /** One physical connection; adapter commits are suppressed and close always rolls back. */
 public final class ColetaTemporalLaboratorySession implements DataSource, AutoCloseable {
     public static final int MAXIMUM_OPEN_STATEMENTS = 64;
+    public static final int PILOT_QUERY_SECONDS = 20;
     private final Connection physical;
     private boolean closed;
     private int suppressedCommits;
@@ -29,6 +30,11 @@ public final class ColetaTemporalLaboratorySession implements DataSource, AutoCl
     private LaboratoryJdbcBudget statementBudget;
     private final Set<Statement> controlledStatements = ConcurrentHashMap.newKeySet();
 
+    @FunctionalInterface
+    interface Connections {
+        Connection open(String url) throws SQLException;
+    }
+
     private ColetaTemporalLaboratorySession(final Connection physical) {
         this.physical = physical;
     }
@@ -37,8 +43,32 @@ public final class ColetaTemporalLaboratorySession implements DataSource, AutoCl
         return open(System.getenv("V2_SHADOW_JDBC_URL"));
     }
 
+    static ColetaTemporalLaboratorySession openPilotFromEnvironment() throws SQLException {
+        return openPilot(System.getenv("V2_SHADOW_JDBC_URL"));
+    }
+
+    static ColetaTemporalLaboratorySession openPilot(final String jdbcUrl) throws SQLException {
+        return openPilot(jdbcUrl, DriverManager::getConnection);
+    }
+
+    static ColetaTemporalLaboratorySession openPilot(
+            final String jdbcUrl, final Connections connections) throws SQLException {
+        return openValidated(jdbcUrl, true, connections);
+    }
+
     /** The typed package configuration uses this same target and opt-in boundary. */
     public static ColetaTemporalLaboratorySession open(final String jdbcUrl) throws SQLException {
+        return open(jdbcUrl, DriverManager::getConnection);
+    }
+
+    static ColetaTemporalLaboratorySession open(final String jdbcUrl, final Connections connections)
+            throws SQLException {
+        return openValidated(jdbcUrl, false, connections);
+    }
+
+    private static ColetaTemporalLaboratorySession openValidated(
+            final String jdbcUrl, final boolean pilot, final Connections connections)
+            throws SQLException {
         if (!Boolean.getBoolean("shadow.local.integration.enabled")
                 || !Boolean.getBoolean("shadow.local.integration.profile.active")) {
             throw new IllegalStateException("COL_LAB_OPT_IN_REQUIRED");
@@ -50,8 +80,8 @@ public final class ColetaTemporalLaboratorySession implements DataSource, AutoCl
             throw new IllegalArgumentException("COL_LAB_WINDOWS_REQUIRED");
         }
         final String boundedUrl =
-                properties.jdbcUrl().replaceAll("(?i);loginTimeout=[^;]*", "") + ";loginTimeout=5";
-        final var connection = DriverManager.getConnection(boundedUrl);
+                pilot ? boundedJdbcUrl(properties.jdbcUrl()) : legacyJdbcUrl(properties.jdbcUrl());
+        final var connection = java.util.Objects.requireNonNull(connections).open(boundedUrl);
         try {
             connection.setAutoCommit(false);
             try (var statement = connection.createStatement()) {
@@ -77,6 +107,15 @@ public final class ColetaTemporalLaboratorySession implements DataSource, AutoCl
             }
             throw failure;
         }
+    }
+
+    static String legacyJdbcUrl(final String validatedJdbcUrl) {
+        return validatedJdbcUrl.replaceAll("(?i);loginTimeout=[^;]*", "") + ";loginTimeout=5";
+    }
+
+    static String boundedJdbcUrl(final String validatedJdbcUrl) {
+        return validatedJdbcUrl.replaceAll("(?i);\\s*(?:loginTimeout|socketTimeout)\\s*=[^;]*", "")
+                + ";loginTimeout=5;queryTimeout=20;cancelQueryTimeout=5;socketTimeout=30000";
     }
 
     @Override

@@ -21,6 +21,19 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 class ColetaTemporalLaboratorySessionCloseTest {
     @Test
+    void pilotDriverBoundsReplaceCallerLoginAndSocketTimeouts() {
+        final String bounded =
+                ColetaTemporalLaboratorySession.boundedJdbcUrl(
+                        "jdbc:sqlserver://localhost;databaseName=ETL_SISTEMA_V2_SHADOW"
+                                + ";integratedSecurity=true; loginTimeout =0;socketTimeout=0");
+        assertTrue(
+                bounded.contains(
+                        ";loginTimeout=5;queryTimeout=20;cancelQueryTimeout=5;socketTimeout=30000"));
+        assertEquals(1, bounded.split("(?i);loginTimeout=", -1).length - 1);
+        assertEquals(1, bounded.split("(?i);socketTimeout=", -1).length - 1);
+    }
+
+    @Test
     void cancellationBorrowsTrackedHandlesAndPruningDoesNotCloseThemAgain() throws Exception {
         final var closed = new AtomicBoolean();
         final var closes = new AtomicInteger();

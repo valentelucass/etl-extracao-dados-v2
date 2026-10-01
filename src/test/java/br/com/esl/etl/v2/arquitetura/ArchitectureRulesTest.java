@@ -181,6 +181,22 @@ public class ArchitectureRulesTest {
     private static final Map<String, String> BOUNDED_COLLECTION_APIS =
             Map.ofEntries(
                     Map.entry(
+                            "br.com.esl.etl.v2.modulos.coletas.domain.ColetaObservedRootComparator$ExpectedRoot#fieldPresence()",
+                            "COL-OBS-01: apenas os 13 campos 6908 declarados; o construtor valida chaves e teto antes da copia."),
+                    Map.entry(
+                            "br.com.esl.etl.v2.modulos.coletas.domain.ColetaObservedRootComparator$ExpectedRoot#sourcePages()",
+                            "COL-OBS-01: no maximo quatro paginas 1..4 por raiz; o construtor valida antes da copia."),
+                    Map.entry(
+                            "br.com.esl.etl.v2.modulos.coletas.domain.ColetaObservedRootComparator$ObservedRow#fieldPresence()",
+                            "COL-OBS-01: apenas os 13 campos 6908 declarados; o construtor valida chaves e teto antes da copia."),
+                    Map.entry(
+                            "br.com.esl.etl.v2.plataforma.persistencia.coletas.ColetaShadowSetComparator"
+                                    + "#readBoundedBatchRows(br.com.esl.etl.v2.plataforma.persistencia.coletas."
+                                    + "ColetaTemporalLaboratorySession,java.util.UUID,"
+                                    + "br.com.esl.etl.v2.plataforma.identidade.ScopedSourceIdentity,int,java.lang.String)",
+                            "COL-OBS-01: ate 1000 linhas da unica executionId, com overflow recusado "
+                                    + "antes de adicionar; nao le universo global."),
+                    Map.entry(
                             "br.com.esl.etl.v2.bootstrap.DeclaredSqlOracles#factCandidates()",
                             "INT-05: exatamente cinco nomes MAT01–MAT05 validados no parser."),
                     Map.entry(
