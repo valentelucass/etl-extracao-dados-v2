@@ -24,7 +24,13 @@ function Get-VerifiedHistoricalRemovals {
         throw 'REMOVAL_MANIFEST_HASH'
     }
     $bytes = [IO.File]::ReadAllBytes($manifest)
-    if ([Convert]::ToHexString([Security.Cryptography.SHA256]::HashData($bytes)).ToLowerInvariant() -cne
+    $algorithm = [Security.Cryptography.SHA256]::Create()
+    try {
+        $digest = [BitConverter]::ToString($algorithm.ComputeHash($bytes)).Replace('-', '').ToLowerInvariant()
+    } finally {
+        $algorithm.Dispose()
+    }
+    if ($digest -cne
         'f23b401f5829216d8f929b021dfff6632620ca55eec1f8718961eec1ab7b518d') { throw 'REMOVAL_MANIFEST_HASH' }
     $document = [Text.UTF8Encoding]::new($false, $true).GetString($bytes) | ConvertFrom-Json
     foreach ($entry in $document.changedExistingFiles | Where-Object { $null -eq $_.after }) {

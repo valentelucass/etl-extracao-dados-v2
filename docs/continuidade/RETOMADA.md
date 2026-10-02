@@ -1,3 +1,19 @@
+# Retomada VM — 0419: ambiente PS7 pronto; primeira leitura aguardando inputs — 02/10/2026
+
+[Checkpoint 0419](checkpoints/0419-vm-powershell-portatil-trilha-e-continuidade.md), SHA `13E77B5667CA895A8F561C6B0CED14403CA5754A0AFBD8F6AB2DCDA7A73C2750`. PowerShell 7.6.6 portátil em `C:\Users\suporte\.codex\tools\powershell-7.6.6-v2\pwsh.exe`, ZIP/digest/assinatura Microsoft verificados, sem PATH/serviço. Trilha PASS e 20 autotestes scanner PS7 PASS. Continuidade histórica FAIL HANDOFF_PATH: recibo original `target/tres-etapas-20260922-01/closed-receipt.json` ausente; não fabricar/repinar.
+
+Offline 0418 integrado permanece válido. Próximos: (1) usuário/owner fornece origem/tenant/dia/G01 e ratifica teto para sonda 6908 isolada, sem esperar todos P17–P29/P08 físico; (2) escopo/local seguro da credencial sa para Banco, sem inferir habilitação/grants ou substituir integratedSecurity; (3) recuperar recibo histórico original se disponível e comparar schema/Flyway em unidade própria. Não repetir gates/sondas sem input novo. STATES é canônico.
+
+# Retomada VM — 0418: offline integrado; inputs da primeira leitura pendentes — 02/10/2026
+
+[Checkpoint 0418](checkpoints/0418-vm-qualificacao-offline-integrada-primeira-leitura.md), SHA `ACA02EB89B59E1F8B7FF3803DD4582AAD3DDDBA4ACEA432042BE3021D32FAC08`. Base 2433/0/0/5 e seis ITs offline de pacote/JaCoCo PASS; main/POM/migrations inalterados. Comparador final 9/0/0/0; scanner PS5.1 corrigido, 20 autotestes e varredura zero achados; Graphify AST atualizado. Quatro Builders entregaram revisão/evidência privada, integrada por Codex. Nenhum aceite P08 físico/fonte real.
+
+Próximos: (1) origem/tenant/dia-corte e condição G01/autoridade/teto para sonda 6908; ela não depende de todas P17–P29/P08 físico; pwsh >=7.5 ainda precisa ser localizado/verificado. (2) escopo/local seguro da credencial sa solicitado pelo usuário; nenhum uso/habilitação/grant ou SQL adicional via usuario_etl. (3) unidade Banco de schema/Flyway/Windows/listeners antes de trial SQL. Falhas e checkpoints anteriores preservados; não renovar budgets nem repetir sondas sem input. STATES é canônico.
+
+# Retomada VM — 0417: acesso Windows SQL recusado — 01/10/2026
+
+[Checkpoint 0417](checkpoints/0417-vm-sql-windows-auth-recusada.md), SHA-256 `63A1C9AC57887D1657294C5D3569886EC8044E5D02447E2E950C79726A0E1639`. Serviço SQL ativo, conexão Windows em localhost/master recusada por falha de login; existência/schema do shadow não confirmados. Administrador da instância deve habilitar acesso Windows da conta desta sessão antes de novo preflight e provisionamento local. Nenhum DDL/migration/IT ou aceite. Evidências da máquina anterior e déficit JaCoCo 0416 preservados; CONTEXTO_GLOBAL ausente.
+
 # Retomada Runtime/Banco — 0416: piloto Coletas 6908 IT opt-in; JaCoCo aberto — 01/10/2026
 
 [Checkpoint 0416](checkpoints/0416-coletas6908-it-opt-in-offline-gate-jacoco-aberto.md), SHA `EF9C11CA530DF0275A8FF7522F46BEE05D132BD43DB443A71AC24C3B426A82F0`. Nova IT shadow sintética chama o runner, percorre até página vazia e exige recibo de promoção simulada revertida e contagens `ctl`/`stg`/`core` estáveis; Failsafe opt-in a seleciona com duas travas. Seleção, compilação JDK17 e testes offline Runtime **8/0/0/0** mais regressão padrão **5/0/0/0** PASS; **zero SQL/HTTP real** e IT física ainda não executada. `clean verify` offline anterior ao oitavo teste teve Surefire **2410/0/0/5** e pacote Failsafe **6/0/0/0**, mas **FAIL JaCoCo** `persistencia.coletas` linhas **0,74 < 0,80**, branches **0,57 < 0,60**; Banco cobre os ramos e Runtime refaz gate nos bytes finais. Depois de freeze, somente Banco pode executar uma IT física com request/reserva/PRE/POST 55813/55814/readback novos; XML 1/0/0/0 e rollback explícito serão exigidos. Fonte real requer source instance/tenant scope, dia/corte, release 6908 autenticado e autorização separada. P07/P08/Gate 1/P01–P33 abertos, 67/115 histórico; 0415/STOP preservado.

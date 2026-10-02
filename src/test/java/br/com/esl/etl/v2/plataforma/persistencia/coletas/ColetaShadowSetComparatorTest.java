@@ -171,6 +171,162 @@ class ColetaShadowSetComparatorTest {
                         .getMessage());
     }
 
+    @Test
+    void corruptPresenceCannotBecomeAnObservedRoot() throws Exception {
+        for (final String json :
+                new String[] {
+                    null,
+                    " ".repeat(16385),
+                    "[]",
+                    "{",
+                    "{\"status\":42}",
+                    "{\"status\":\"UNKNOWN\"}",
+                    "{\"status\":\"NULL\",\"status\":\"VALUE\"}"
+                }) {
+            final var jdbc = new FakeComparison(new long[12]);
+            jdbc.rows = List.<Object[]>of(new Object[] {1, "INTEGER:1", json});
+            assertEquals(
+                    "COL_SHADOW_READER_PRESENCE_INVALID",
+                    assertThrows(
+                                    SQLException.class,
+                                    () ->
+                                            ColetaShadowSetComparator.readBoundedBatchRows(
+                                                    jdbc.session(),
+                                                    UUID.randomUUID(),
+                                                    root("INTEGER:1", 1).identity(),
+                                                    1,
+                                                    "1"))
+                            .getMessage());
+        }
+    }
+
+    @Test
+    void readerRejectsExcessRowsAndUnboundPageBeforeReturningPartialEvidence() throws Exception {
+        final var jdbc = new FakeComparison(new long[12]);
+        jdbc.rows =
+                List.<Object[]>of(
+                        new Object[] {1, "INTEGER:1", "{}"}, new Object[] {1, "INTEGER:2", "{}"});
+        assertEquals(
+                "COL_SHADOW_READER_ROW_LIMIT",
+                assertThrows(
+                                SQLException.class,
+                                () ->
+                                        ColetaShadowSetComparator.readBoundedBatchRows(
+                                                jdbc.session(),
+                                                UUID.randomUUID(),
+                                                root("INTEGER:1", 1).identity(),
+                                                1,
+                                                "1"))
+                        .getMessage());
+        for (final int batch : new int[] {0, 2}) {
+            jdbc.rows = List.<Object[]>of(new Object[] {batch, "INTEGER:1", "{}"});
+            assertEquals(
+                    "COL_SHADOW_READER_PAGE_UNBOUND",
+                    assertThrows(
+                                    SQLException.class,
+                                    () ->
+                                            ColetaShadowSetComparator.readBoundedBatchRows(
+                                                    jdbc.session(),
+                                                    UUID.randomUUID(),
+                                                    root("INTEGER:1", 1).identity(),
+                                                    1,
+                                                    "1"))
+                            .getMessage());
+        }
+        for (final String pages : new String[] {"0", "5"}) {
+            jdbc.rows = List.<Object[]>of(new Object[] {1, "INTEGER:1", "{}"});
+            assertEquals(
+                    "COL_SHADOW_READER_PAGE_UNBOUND",
+                    assertThrows(
+                                    SQLException.class,
+                                    () ->
+                                            ColetaShadowSetComparator.readBoundedBatchRows(
+                                                    jdbc.session(),
+                                                    UUID.randomUUID(),
+                                                    root("INTEGER:1", 1).identity(),
+                                                    1,
+                                                    pages))
+                            .getMessage());
+        }
+    }
+
+    @Test
+    void missingOrDuplicateSqlEvidenceCannotEstablishBindingOrParity() throws Exception {
+        final var jdbc = new FakeComparison(new long[12]);
+        jdbc.emptyResult = true;
+        assertEquals(
+                "COL_SHADOW_BINDING_UNOBSERVABLE",
+                assertThrows(
+                                SQLException.class,
+                                () ->
+                                        ColetaShadowSetComparator.readObservedBinding(
+                                                jdbc.session(), UUID.randomUUID()))
+                        .getMessage());
+        assertEquals(
+                "COL_SHADOW_COMPARISON_UNOBSERVABLE",
+                assertThrows(
+                                SQLException.class,
+                                () ->
+                                        ColetaShadowSetComparator.compare(
+                                                jdbc.session(),
+                                                UUID.randomUUID(),
+                                                List.of(root("INTEGER:1", 1))))
+                        .getMessage());
+        jdbc.emptyResult = false;
+        jdbc.rows = List.<Object[]>of(new Object[12], new Object[12]);
+        assertThrows(
+                SQLException.class,
+                () ->
+                        ColetaShadowSetComparator.compare(
+                                jdbc.session(), UUID.randomUUID(), List.of(root("INTEGER:1", 1))));
+    }
+
+    @Test
+    void absentTimesOrTerminalAuditCannotAuthorizeObservedBinding() throws Exception {
+        final UUID run = UUID.randomUUID();
+        for (final int column : new int[] {2, 3, 6, 7}) {
+            final var jdbc = new FakeComparison(new long[12]);
+            final Object[] row = bindingRow(run);
+            row[column] = column < 4 ? null : 0;
+            jdbc.rows = List.<Object[]>of(row);
+            assertEquals(
+                    column < 4
+                            ? "COL_SHADOW_BINDING_UNOBSERVABLE"
+                            : "COL_SHADOW_TERMINAL_AUDIT_REQUIRED",
+                    assertThrows(
+                                    SQLException.class,
+                                    () ->
+                                            ColetaShadowSetComparator.readObservedBinding(
+                                                    jdbc.session(), run))
+                            .getMessage());
+        }
+        final var jdbc = new FakeComparison(new long[12]);
+        final Object[] invalidCohort = bindingRow(run);
+        invalidCohort[5] = "invalid-cohort";
+        jdbc.rows = List.<Object[]>of(invalidCohort);
+        assertEquals(
+                "COL_SHADOW_BINDING_INVALID",
+                assertThrows(
+                                SQLException.class,
+                                () ->
+                                        ColetaShadowSetComparator.readObservedBinding(
+                                                jdbc.session(), run))
+                        .getMessage());
+    }
+
+    private static Object[] bindingRow(final UUID run) {
+        return new Object[] {
+            "source-a",
+            "tenant-a",
+            Timestamp.from(Instant.parse("2026-09-30T03:00:00Z")),
+            Timestamp.from(Instant.parse("2026-10-01T03:00:00Z")),
+            "a".repeat(64),
+            run.toString(),
+            1L,
+            2
+        };
+    }
+
     private static ExpectedRoot root(final String key, final int rows) {
         return new ExpectedRoot(
                 new ScopedSourceIdentity(
@@ -187,6 +343,7 @@ class ColetaShadowSetComparatorTest {
         private final long[] aggregate;
         private final List<Object> bindings = new ArrayList<>();
         private List<Object[]> rows = List.of();
+        private boolean emptyResult;
         private String sql;
 
         private FakeComparison(final long[] aggregate) {
@@ -244,14 +401,21 @@ class ColetaShadowSetComparatorTest {
                                         final java.lang.reflect.Method method,
                                         final Object[] args) {
                                     if (method.getName().equals("next")) {
+                                        if (emptyResult) {
+                                            return false;
+                                        }
                                         return ++cursor == 1
                                                 || (rows.size() > 1 && cursor <= rows.size());
                                     }
                                     if (method.getName().equals("getLong")) {
                                         return rows.isEmpty()
                                                 ? aggregate[(int) args[0] - 1]
-                                                : ((Number) rows.get(cursor - 1)[(int) args[0] - 1])
-                                                        .longValue();
+                                                : rows.get(cursor - 1)[(int) args[0] - 1] == null
+                                                        ? 0L
+                                                        : ((Number)
+                                                                        rows.get(cursor - 1)[
+                                                                                (int) args[0] - 1])
+                                                                .longValue();
                                     }
                                     if (method.getName().equals("getInt")) {
                                         return ((Number) rows.get(cursor - 1)[(int) args[0] - 1])

@@ -205,10 +205,36 @@ function Test-IgnoredUntrackedRootEnv {
     param([Parameter(Mandatory)][string] $RelativePath)
 
     if ($RelativePath -cne '.env') { return $false }
-    & git -C $sourceRoot check-ignore -q -- .env 2>$null
-    if ($LASTEXITCODE -ne 0) { return $false }
-    & git -C $sourceRoot ls-files --error-unmatch -- .env 2>$null | Out-Null
-    return $LASTEXITCODE -ne 0
+    # Windows PowerShell 5.1 turns expected Git stderr into a terminating error.
+    # Inspect the native exit code while discarding output, never the env content.
+    foreach ($arguments in @('check-ignore -q -- .env', 'ls-files --error-unmatch -- .env')) {
+        $startInfo = [System.Diagnostics.ProcessStartInfo]::new()
+        $startInfo.FileName = 'git'
+        $startInfo.Arguments = $arguments
+        $startInfo.WorkingDirectory = $sourceRoot
+        $startInfo.UseShellExecute = $false
+        $startInfo.RedirectStandardOutput = $true
+        $startInfo.RedirectStandardError = $true
+        $startInfo.CreateNoWindow = $true
+        $process = [System.Diagnostics.Process]::new()
+        $process.StartInfo = $startInfo
+        try {
+            [void] $process.Start()
+            [void] $process.StandardOutput.ReadToEnd()
+            [void] $process.StandardError.ReadToEnd()
+            $process.WaitForExit()
+            if ($arguments.StartsWith('check-ignore')) {
+                if ($process.ExitCode -eq 1) { return $false }
+                if ($process.ExitCode -ne 0) { throw 'Git ignore check failed.' }
+            } else {
+                if ($process.ExitCode -notin @(0, 1)) { throw 'Git tracking check failed.' }
+                return $process.ExitCode -eq 1
+            }
+        } finally {
+            $process.Dispose()
+        }
+    }
+    return $false
 }
 
 function Get-LineNumber {

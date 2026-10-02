@@ -1,0 +1,4 @@
+# Explicit local VM scope shared by the five Maestri Codex terminals.
+workspace = "default"
+project = "etl-extracao-dados-v2"
+project_strategy = "repo-root"

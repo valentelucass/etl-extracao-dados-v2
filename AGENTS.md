@@ -93,7 +93,7 @@ Você atua como Engenheiro de Software Principal no V2 do extrator Java. O objet
 
 O ai-memory deve ser usado de forma proativa como memória histórica complementar do projeto.
 
-Os hooks automáticos do ai-memory podem estar desativados no Windows para evitar abertura repetitiva de janelas de terminal. Portanto, não dependa de captura automática de sessão.
+Nesta VM Windows, os hooks nativos do ai-memory estão instalados e confiados no Codex. A captura automática foi validada; continue registrando evidência canônica em STATES.md.
 
 Em toda nova sessão, retomada de trabalho ou troca relevante de contexto:
 
@@ -248,3 +248,13 @@ latest binary's recommended copy:
 Both are idempotent: re-runs replace the block delimited by the ai-memory
 start/end HTML-comment markers, without disturbing the rest of the file.
 <!-- ai-memory:end -->
+
+
+## Integração local da VM Windows — 2026-10-01
+
+- ai-memory 2.5.0: serviço WinSW 2.12.0 como LocalSystem, dados em `C:\ProgramData\ai-memory`, MCP somente em `http://127.0.0.1:49374/mcp`.
+- Em chamadas MCP de memória deste projeto, passe explicitamente `workspace = default` e `project = etl-extracao-dados-v2`, conforme `.ai-memory.toml`. Não use o último escopo ativo do servidor como escopo do projeto.
+- Graphify 0.9.73: skill oficial global em `C:\Users\suporte\.codex\skills\graphify`; Python do pacote em `C:\Users\suporte\AppData\Roaming\uv\tools\graphifyy\Scripts\python.exe`. `graphify-out/.graphify_python` aponta para esse interpretador; exemplos POSIX da skill devem ser adaptados ao PowerShell nativo.
+- MCP Graphify consulta o grafo local deste projeto. Hooks Git post-commit/post-checkout atualizam o grafo por AST, sem API. O hook Codex oficial é intencionalmente inerte; a orientação de uso vem deste AGENTS.md.
+- O grafo inicial desta VM foi produzido por análise local de código, SQL e documentos com extrator AST, sem extração semântica remota. Não representa validação de negócio nem autorização para banco/deploy.
+- O arquivo `../CONTEXTO_GLOBAL.md` estava ausente na VM na inspeção; não foi recriado nem substituído por memória histórica.
