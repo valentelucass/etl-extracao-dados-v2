@@ -1,7 +1,9 @@
 package br.com.esl.etl.v2.plataforma.persistencia.coletas;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import br.com.esl.etl.v2.modulos.coletas.domain.ColetaAttributePresence;
 import br.com.esl.etl.v2.modulos.coletas.domain.ColetaFreshnessOrigin;
@@ -41,8 +43,155 @@ import java.util.OptionalInt;
 import java.util.Set;
 import java.util.UUID;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.function.Executable;
 
 class ColetaShadowRollbackTrialTest {
+    @Test
+    void sampleReadsOnlyStagingWithoutPromotionOrTerminalAndRollsBack() throws Exception {
+        final var jdbc = new FakePhysical();
+        final UUID run = UUID.randomUUID();
+        jdbc.verificationRun = run;
+        ColetaShadowRollbackTrial.execute(
+                jdbc.session(),
+                trial -> {
+                    trial.stage(batch(run), () -> false);
+                    final var result =
+                            trial.verifyObservedSample(
+                                    sampleBinding(run),
+                                    List.of(expectedRoot()),
+                                    Map.of(1, 1),
+                                    () -> false);
+                    assertTrue(result.matches());
+                    assertEquals(1, result.observedPhysicalRows());
+                    assertEquals(0, result.presenceComparedCells());
+                    assertFalse(result.windowCompletenessProven());
+                    assertFalse(result.childCompletenessProven());
+                    trial.checkpoint();
+                    return null;
+                });
+        assertFalse(jdbc.preparedQueries.stream().anyMatch(sql -> sql.contains("core.")));
+        assertEquals(0, jdbc.physicalCommits);
+        assertEquals(List.of("rollback", "rollback", "close"), jdbc.lifecycle);
+    }
+
+    @Test
+    void sampleRejectsTerminalAuditSetDivergenceAndCopiedBinding() throws Exception {
+        for (final String defect : List.of("terminal", "set", "binding", "generic")) {
+            final var jdbc = new FakePhysical();
+            final UUID run = UUID.randomUUID();
+            jdbc.verificationRun = run;
+            jdbc.sampleTerminalCount = defect.equals("terminal") ? 1 : 0;
+            jdbc.divergeStage = defect.equals("set");
+            jdbc.sampleFingerprint = defect.equals("binding") ? "b".repeat(64) : "a".repeat(64);
+            jdbc.sampleGenericRows = defect.equals("generic") ? 2 : 1;
+            assertThrows(
+                    SQLException.class,
+                    () ->
+                            ColetaShadowRollbackTrial.execute(
+                                    jdbc.session(),
+                                    trial -> {
+                                        trial.stage(batch(run), () -> false);
+                                        trial.verifyObservedSample(
+                                                sampleBinding(run),
+                                                List.of(expectedRoot()),
+                                                Map.of(1, 1),
+                                                () -> false);
+                                        return null;
+                                    }),
+                    defect);
+            assertEquals(0, jdbc.physicalCommits);
+            assertEquals(List.of("rollback", "rollback", "close"), jdbc.lifecycle);
+        }
+    }
+
+    @Test
+    void sampleRejectsWrongPageMapPresenceAndLostMultiplicity() throws Exception {
+        for (final String defect : List.of("map", "presence", "multiplicity", "page")) {
+            final var jdbc = new FakePhysical();
+            final UUID run = UUID.randomUUID();
+            jdbc.verificationRun = run;
+            final var root = expectedRoot();
+            final var expected =
+                    new ExpectedRoot(
+                            root.identity(),
+                            OptionalInt.of(defect.equals("multiplicity") ? 2 : 1),
+                            defect.equals("presence")
+                                    ? Map.of("status", ColetaAttributePresence.VALUE)
+                                    : Map.of(),
+                            Set.of(1));
+            assertThrows(
+                    SQLException.class,
+                    () ->
+                            ColetaShadowRollbackTrial.execute(
+                                    jdbc.session(),
+                                    trial -> {
+                                        trial.stage(batch(run), () -> false);
+                                        trial.verifyObservedSample(
+                                                defect.equals("page")
+                                                        ? binding(run)
+                                                        : sampleBinding(run),
+                                                List.of(expected),
+                                                Map.of(1, defect.equals("map") ? 2 : 1),
+                                                () -> false);
+                                        return null;
+                                    }),
+                    defect);
+            assertEquals(List.of("rollback", "rollback", "close"), jdbc.lifecycle);
+        }
+    }
+
+    @Test
+    void sampleCancellationOrPreparedStateCannotReachReadback() throws Exception {
+        for (final boolean cancel : List.of(true, false)) {
+            final var jdbc = new FakePhysical();
+            final UUID run = UUID.randomUUID();
+            jdbc.verificationRun = run;
+            ColetaShadowRollbackTrial.execute(
+                    jdbc.session(),
+                    trial -> {
+                        trial.stage(batch(run), () -> false);
+                        if (!cancel) {
+                            trial.prepare(ContractTestSupport.promotionPermit(run), () -> false);
+                        }
+                        final int queries = jdbc.preparedQueries.size();
+                        final Executable verification =
+                                () ->
+                                        trial.verifyObservedSample(
+                                                sampleBinding(run),
+                                                List.of(expectedRoot()),
+                                                Map.of(1, 1),
+                                                () -> cancel);
+                        if (cancel) {
+                            assertThrows(ResilienceCancelledException.class, verification);
+                        } else {
+                            assertThrows(SQLException.class, verification);
+                        }
+                        assertFalse(
+                                jdbc
+                                        .preparedQueries
+                                        .subList(queries, jdbc.preparedQueries.size())
+                                        .stream()
+                                        .anyMatch(
+                                                sql -> sql.contains("FROM ctl.execution_attempt")));
+                        assertThrows(SQLException.class, trial::checkpoint);
+                        return null;
+                    });
+            assertEquals(0, jdbc.physicalCommits);
+            assertEquals(List.of("rollback", "rollback", "close"), jdbc.lifecycle);
+        }
+    }
+
+    private static Binding sampleBinding(final UUID run) {
+        final var binding = binding(run);
+        return new Binding(
+                binding.sourceInstance(),
+                binding.tenantScope(),
+                binding.requestDate(),
+                binding.contractFingerprint(),
+                run,
+                1);
+    }
+
     @Test
     void trackedStagingUsesOnePhysicalConnectionAndRollsBackBeforeClose() throws Exception {
         final var jdbc = new FakePhysical();
@@ -587,6 +736,10 @@ class ColetaShadowRollbackTrialTest {
     }
 
     private static final class FakePhysical {
+        private final List<String> preparedQueries = new ArrayList<>();
+        private int sampleTerminalCount;
+        private int sampleGenericRows = 1;
+        private String sampleFingerprint = "a".repeat(64);
         private final List<String> lifecycle = new ArrayList<>();
         private final Map<String, Integer> callTimeouts = new HashMap<>();
         private String timeoutOperation;
@@ -669,14 +822,19 @@ class ColetaShadowRollbackTrialTest {
         }
 
         private PreparedStatement preparedStatement(final String sql) {
+            preparedQueries.add(sql);
             if (sql.contains("MAX(page_number)")) {
                 return pageStatement();
             }
             if (sql.contains("SELECT p.source_instance")) {
-                return queryStatement(bindingRows());
+                return queryStatement(
+                        sql.contains("a.current_state=N'FAILED'")
+                                ? sampleBindingRows()
+                                : bindingRows());
             }
             if (sql.startsWith("WITH expected AS")) {
-                return queryStatement(comparisonRows());
+                return queryStatement(
+                        sql.contains("missing_core") ? comparisonRows() : sampleComparisonRows());
             }
             if (sql.startsWith("SELECT r.input_batch_number")) {
                 return queryStatement(observedRows());
@@ -779,6 +937,33 @@ class ColetaShadowRollbackTrialTest {
                 row.put(column, column <= 6 || column == 11 ? 1L : 0L);
             }
             row.put(7, divergeStage ? 1L : 0L);
+            return rows(row);
+        }
+
+        private ResultSet sampleBindingRows() {
+            final var row = new HashMap<Object, Object>();
+            final var date = LocalDate.of(2026, 9, 30);
+            final var zone = ZoneId.of("America/Sao_Paulo");
+            row.put(1, "synthetic-source");
+            row.put(2, "synthetic-tenant");
+            row.put(3, Timestamp.from(date.atStartOfDay(zone).toInstant()));
+            row.put(4, Timestamp.from(date.plusDays(1).atStartOfDay(zone).toInstant()));
+            row.put(5, sampleFingerprint);
+            row.put(6, verificationRun.toString());
+            row.put(7, 1L);
+            row.put(8, 1L);
+            row.put(9, 1L);
+            row.put(10, (long) sampleTerminalCount);
+            return rows(row);
+        }
+
+        private ResultSet sampleComparisonRows() {
+            final var row = new HashMap<Object, Object>();
+            for (int column = 1; column <= 9; column++) {
+                row.put(column, column <= 4 ? 1L : 0L);
+            }
+            row.put(5, divergeStage ? 1L : 0L);
+            row.put(7, (long) sampleGenericRows);
             return rows(row);
         }
 

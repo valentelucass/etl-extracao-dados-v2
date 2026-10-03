@@ -334,6 +334,81 @@ public final class ColetaShadowRollbackTrial implements AutoCloseable {
         }
     }
 
+    /** One observed page before preparation/publication; never grants a completion permit. */
+    public SampleVerification verifyObservedSample(
+            final Binding expectedBinding,
+            final List<ExpectedRoot> expectedRoots,
+            final Map<Integer, Integer> sourceBatchPages,
+            final CancellationToken cancellation)
+            throws SQLException {
+        try {
+            Objects.requireNonNull(cancellation).throwIfCancellationRequested();
+            checkTransaction();
+            if (stagedBatches == 0 || prepared || promoted || lastStagedPage != 1) {
+                throw new SQLException("COL_SAMPLE_UNPROMOTED_STAGE_REQUIRED");
+            }
+            verifySourceBatchPages(sourceBatchPages);
+            final Binding binding = Objects.requireNonNull(expectedBinding);
+            if (!executionId.equals(binding.comparisonCohort()) || binding.sourcePage() != 1) {
+                throw new SQLException("COL_SAMPLE_BINDING_MISMATCH");
+            }
+            final List<ExpectedRoot> roots = List.copyOf(Objects.requireNonNull(expectedRoots));
+            final long auditedRows = ColetaShadowSampleComparator.verifyBinding(session, binding);
+            checkTransaction();
+            cancellation.throwIfCancellationRequested();
+            final int physicalRows =
+                    ColetaShadowSampleComparator.compare(session, binding, roots, auditedRows);
+            checkTransaction();
+            cancellation.throwIfCancellationRequested();
+            final List<ObservedRow> observed =
+                    ColetaShadowSetComparator.readBoundedBatchRows(
+                            session,
+                            executionId,
+                            roots.get(0).identity(),
+                            physicalRows,
+                            batchPages);
+            checkTransaction();
+            cancellation.throwIfCancellationRequested();
+            final var compared =
+                    ColetaObservedRootComparator.compare(
+                            ExpectedProvenance.CAPTURED_6908_PAGE_BEFORE_MAPPER,
+                            binding,
+                            binding,
+                            roots,
+                            observed);
+            if (!compared.declaredObservationsMatch()) {
+                throw new SQLException("COL_SAMPLE_PRESENCE_OR_MULTIPLICITY_DIVERGENCE");
+            }
+            return new SampleVerification(
+                    compared.observedPhysicalRows(), compared.presenceComparedCells());
+        } catch (final SQLException | RuntimeException | Error failure) {
+            failed = true;
+            throw failure;
+        }
+    }
+
+    public record SampleVerification(int observedPhysicalRows, int presenceComparedCells) {
+        public SampleVerification {
+            if (observedPhysicalRows < 1
+                    || observedPhysicalRows > 1000
+                    || presenceComparedCells < 0) {
+                throw new IllegalArgumentException("COL_SAMPLE_VERIFICATION_INVALID");
+            }
+        }
+
+        public boolean matches() {
+            return true;
+        }
+
+        public boolean windowCompletenessProven() {
+            return false;
+        }
+
+        public boolean childCompletenessProven() {
+            return false;
+        }
+    }
+
     private void checkTransaction() throws SQLException {
         if (closed || failed) {
             throw new SQLException("COL_SHADOW_TRIAL_UNAVAILABLE");

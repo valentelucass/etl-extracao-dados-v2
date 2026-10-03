@@ -109,7 +109,7 @@ final class Coletas6908PilotRunner {
                 false);
     }
 
-    private static void preflight(
+    static void preflight(
             final Coletas6908PilotPlan plan,
             final RuntimeConfiguration configuration,
             final RuntimeOperationalRequest request) {

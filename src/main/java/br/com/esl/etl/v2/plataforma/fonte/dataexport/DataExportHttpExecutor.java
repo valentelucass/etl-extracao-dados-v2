@@ -114,8 +114,16 @@ final class DataExportHttpExecutor {
                     if (isRetryableStatus(response.statusCode())
                             && (attempt < maxAttempts
                                     || attemptGovernor.appliesTerminalEmbargo())) {
-                        final DataExportRetryDelay retryDelay =
-                                retrySchedule.resolve(attempt, response.retryAfter());
+                        final DataExportRetryDelay retryDelay;
+                        try {
+                            retryDelay = retrySchedule.resolve(attempt, response.retryAfter());
+                        } catch (final DataExportRetryAfterLimitExceededException exception) {
+                            // Preserve the observed status without copying the rejected header.
+                            exception.initCause(
+                                    new DataExportUnavailableException(
+                                            templateId, response.statusCode(), Optional.empty()));
+                            throw exception;
+                        }
                         if (response.statusCode() == 429 || retryDelay.serverDirected()) {
                             attemptGovernor.imposeRateLimitEmbargo(retryDelay.duration());
                         }

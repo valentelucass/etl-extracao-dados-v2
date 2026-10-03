@@ -14,6 +14,7 @@ import br.com.esl.etl.v2.plataforma.resiliencia.EslWorkload;
 import br.com.esl.etl.v2.plataforma.resiliencia.MonotonicTicker;
 import br.com.esl.etl.v2.plataforma.resiliencia.ResilienceCancelledException;
 import br.com.esl.etl.v2.plataforma.resiliencia.ResilienceSleeper;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import java.net.Authenticator;
 import java.net.CookieHandler;
@@ -28,6 +29,7 @@ import java.time.Duration;
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.ZoneOffset;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
@@ -94,6 +96,77 @@ class DataExportHttpExecutorTest {
         assertEquals(2, waits.get());
         assertFalse(failure.getMessage().contains("sensitive-transport-detail"));
         assertTrue(failure.getCause() instanceof IOException);
+    }
+
+    @Test
+    void preservesTerminal429StatusWhenRetryAfterExceedsTheLimit() {
+        assertTerminalStatusPreserved(429);
+    }
+
+    @Test
+    void preservesTerminal503StatusWhenRetryAfterExceedsTheLimit() {
+        assertTerminalStatusPreserved(503);
+    }
+
+    private static void assertTerminalStatusPreserved(final int status) {
+        final StubHttpClient client =
+                new StubHttpClient(status, null, Map.of("Retry-After", List.of("120")));
+        final var retryPolicy = new DataExportRetryPolicy(1, Duration.ZERO, Duration.ZERO);
+        final var properties =
+                new DataExportProperties(
+                        URI.create("https://source.invalid"),
+                        "synthetic-token",
+                        ZoneId.of("America/Sao_Paulo"),
+                        Duration.ofSeconds(1),
+                        DataExportTransport.GET_WITH_QUERY,
+                        retryPolicy,
+                        1_024L);
+        final var policy =
+                new EslResiliencePolicy(
+                        Duration.ZERO,
+                        1,
+                        2,
+                        2,
+                        Duration.ofSeconds(1),
+                        Duration.ofSeconds(2),
+                        Duration.ofSeconds(3),
+                        Duration.ZERO,
+                        0,
+                        2,
+                        Duration.ofSeconds(1));
+        final AtomicInteger waits = new AtomicInteger();
+        final AtomicInteger attempts = new AtomicInteger();
+        final var governor =
+                new EslRequestGovernor(
+                        policy, MonotonicTicker.systemTicker(), ignored -> waits.incrementAndGet());
+        final var cycle = governor.beginCycle(CancellationToken.none());
+        final var gateway =
+                new HttpDataExportTemplateInfoGateway(
+                        client,
+                        properties,
+                        new ObjectMapper(),
+                        ignored -> attempts.incrementAndGet(),
+                        new EslDataExportHttpAttemptGovernor(
+                                cycle.beginWorkload(EslWorkload.COLETAS)));
+
+        final var failure =
+                assertThrows(
+                        DataExportRetryAfterLimitExceededException.class,
+                        () -> gateway.fetchInfo(DataExportTemplate.COLETAS));
+
+        assertEquals(1, client.requests());
+        assertEquals(1, attempts.get());
+        assertEquals(1, cycle.sourceRequests());
+        assertEquals(1, governor.availablePermits());
+        assertEquals(0, waits.get());
+        assertTrue(failure.getCause() instanceof DataExportUnavailableException);
+        final var unavailable = (DataExportUnavailableException) failure.getCause();
+        assertEquals(status, unavailable.httpStatus().orElseThrow());
+        assertEquals(DataExportTemplate.COLETAS.templateId(), unavailable.templateId());
+        assertTrue(unavailable.retryAfter().isEmpty());
+        assertEquals(
+                new DataExportRetryAfterLimitExceededException().getMessage(),
+                failure.getMessage());
     }
 
     @Test
@@ -197,11 +270,20 @@ class DataExportHttpExecutorTest {
 
         private final int statusCode;
         private final Throwable failure;
+        private final Map<String, List<String>> headers;
         private final AtomicInteger requests = new AtomicInteger();
 
         private StubHttpClient(final int statusCode, final Throwable failure) {
+            this(statusCode, failure, Map.of());
+        }
+
+        private StubHttpClient(
+                final int statusCode,
+                final Throwable failure,
+                final Map<String, List<String>> headers) {
             this.statusCode = statusCode;
             this.failure = failure;
+            this.headers = headers;
         }
 
         private static StubHttpClient responding(final int statusCode) {
@@ -277,12 +359,12 @@ class DataExportHttpExecutorTest {
                 return failed;
             }
             final HttpResponse.BodySubscriber<T> subscriber =
-                    responseBodyHandler.apply(new StubResponseInfo(statusCode));
+                    responseBodyHandler.apply(new StubResponseInfo(statusCode, headers));
             subscriber.onSubscribe(new NoopSubscription());
             subscriber.onComplete();
             final T body = subscriber.getBody().toCompletableFuture().join();
             return CompletableFuture.completedFuture(
-                    new StubHttpResponse<>(request, statusCode, body));
+                    new StubHttpResponse<>(request, statusCode, body, headers));
         }
 
         @Override
@@ -294,11 +376,12 @@ class DataExportHttpExecutorTest {
         }
     }
 
-    private record StubResponseInfo(int statusCode) implements HttpResponse.ResponseInfo {
+    private record StubResponseInfo(int statusCode, Map<String, List<String>> headerValues)
+            implements HttpResponse.ResponseInfo {
 
         @Override
         public HttpHeaders headers() {
-            return HttpHeaders.of(Map.of(), (ignoredName, ignoredValue) -> true);
+            return HttpHeaders.of(headerValues, (ignoredName, ignoredValue) -> true);
         }
 
         @Override
@@ -307,7 +390,8 @@ class DataExportHttpExecutorTest {
         }
     }
 
-    private record StubHttpResponse<T>(HttpRequest request, int statusCode, T body)
+    private record StubHttpResponse<T>(
+            HttpRequest request, int statusCode, T body, Map<String, List<String>> headerValues)
             implements HttpResponse<T> {
 
         @Override
@@ -317,7 +401,7 @@ class DataExportHttpExecutorTest {
 
         @Override
         public HttpHeaders headers() {
-            return HttpHeaders.of(Map.of(), (ignoredName, ignoredValue) -> true);
+            return HttpHeaders.of(headerValues, (ignoredName, ignoredValue) -> true);
         }
 
         @Override

@@ -138,7 +138,7 @@ final class RuntimeOperationalExecution {
             final RuntimeOperationalRequest request,
             final javax.sql.DataSource dataSource,
             final SourceGateways gateways,
-            final Coletas6908PilotExtraction extraction,
+            final DataExportRuntimeWorkload.Extraction extraction,
             final ColetaPromotionGateway promotion,
             final Runnable checkpoint) {
         return executeInternal(
@@ -149,7 +149,26 @@ final class RuntimeOperationalExecution {
                 gateways,
                 ignored -> {},
                 null,
-                new PilotComponents(extraction, promotion, checkpoint));
+                new PilotComponents(extraction, promotion, checkpoint, false));
+    }
+
+    static RuntimeExitCategory executeSample(
+            final RuntimeConfiguration configuration,
+            final RuntimeOperationalRequest request,
+            final javax.sql.DataSource dataSource,
+            final SourceGateways gateways,
+            final DataExportRuntimeWorkload.Extraction extraction,
+            final ColetaPromotionGateway forbiddenPromotion,
+            final Runnable checkpoint) {
+        return executeInternal(
+                configuration,
+                request,
+                RuntimeAction.RUN,
+                dataSource,
+                gateways,
+                ignored -> {},
+                null,
+                new PilotComponents(extraction, forbiddenPromotion, checkpoint, true));
     }
 
     private static RuntimeExitCategory executeInternal(
@@ -201,6 +220,11 @@ final class RuntimeOperationalExecution {
             final var snapshot = recovery.read(durableRequest, cancellation);
             if (pilot != null) {
                 pilot.checkpoint().run();
+            }
+            if (pilot != null
+                    && pilot.sample()
+                    && snapshot.reason() != RuntimeRecoverySnapshot.Reason.NOT_FOUND) {
+                throw new IllegalStateException("COL_SAMPLE_FRESH_OCCURRENCE_REQUIRED");
             }
             diagnostic.accept(
                     "RUNTIME_OBSERVATION reason="
@@ -368,12 +392,14 @@ final class RuntimeOperationalExecution {
                                                 new JdbcSqlServerColetaPromotionGateway(dataSource),
                                                 quality,
                                                 request.quality)
-                                        : new DataExportRuntimeWorkload(
-                                                input,
-                                                pilot.extraction(),
-                                                pilot.promotion(),
-                                                quality,
-                                                request.quality);
+                                        : pilot.sample()
+                                                ? sampleWorkload(input, pilot)
+                                                : new DataExportRuntimeWorkload(
+                                                        input,
+                                                        pilot.extraction(),
+                                                        pilot.promotion(),
+                                                        quality,
+                                                        request.quality);
                         case FRETES ->
                                 LocalColetasFretesRuntime.fretes(
                                         input,
@@ -449,14 +475,56 @@ final class RuntimeOperationalExecution {
     }
 
     private record PilotComponents(
-            Coletas6908PilotExtraction extraction,
+            DataExportRuntimeWorkload.Extraction extraction,
             ColetaPromotionGateway promotion,
-            Runnable checkpoint) {
+            Runnable checkpoint,
+            boolean sample) {
         private PilotComponents {
             java.util.Objects.requireNonNull(extraction);
             java.util.Objects.requireNonNull(promotion);
             java.util.Objects.requireNonNull(checkpoint);
         }
+    }
+
+    private static RuntimeWorkloadHandler sampleWorkload(
+            final DataExportRuntimeWorkload.Input input, final PilotComponents pilot) {
+        return session -> {
+            final var guard = input.guard();
+            try {
+                if (!input.partition().equals(session.start().partition())) {
+                    throw new IllegalArgumentException("COL_SAMPLE_PARTITION_MISMATCH");
+                }
+                guard.verifyExecutionBinding(session.start());
+                final var cancellation = session.cancellation();
+                cancellation.throwIfCancellationRequested();
+                final var bound =
+                        br.com.esl.etl.v2.plataforma.fonte.dataexport.DataExportContractGate
+                                .enforce(input.gateways(), input.request().template(), guard);
+                bound.templateInfoGateway().fetchInfo(input.request().template());
+                pilot.checkpoint().run();
+                final var streamer =
+                        new br.com.esl.etl.v2.plataforma.fonte.dataexport.DataExportPageStreamer(
+                                page -> {
+                                    if (page.page() != 1) {
+                                        throw new IllegalStateException(
+                                                "COL_SAMPLE_SINGLE_PAGE_REQUIRED");
+                                    }
+                                    final var response = bound.dataGateway().fetch(page);
+                                    if (response.recordCount() == 0) {
+                                        throw new IllegalStateException("COL_SAMPLE_EMPTY");
+                                    }
+                                    return response;
+                                },
+                                session.extractionAudit(input.request().template()),
+                                session.clock());
+                pilot.extraction()
+                        .execute(streamer, guard, input.request(), input.limits(), cancellation);
+                throw new IllegalStateException("COL_SAMPLE_COMPLETION_FORBIDDEN");
+            } catch (final RuntimeException failure) {
+                guard.invalidateEvidence();
+                throw failure;
+            }
+        };
     }
 
     static RuntimeWorkloadHandler withRequiredDriftAlert(

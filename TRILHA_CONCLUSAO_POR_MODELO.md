@@ -1,3 +1,29 @@
+# Atualização0426 — correções qualificadas; metadados classificados — 03/10/2026
+
+STATES registra dois patches causais Fontes/Runtime com red/green e cleanverify atual PASS2459/0/0/5 +7/0/0/0, 19gates/295XMLs, 4212inputs sem drift no fechamento. Banco executou nova metadata02 reservada2con/12cmd/6,052s, saldo0/0, close/readback/hashes conferidos: dez textos diferem só layout/comentários; FK38/38match; duas dependências e outras facetas ainda NOT_PROVED. Guard estrito, Windows/listeners/TLS e STOP429 continuam impeditivos. Regras revisão sem patch. Qualificação offline concluída, extração real não executada, nenhum checkbox/contador agregado promovido. Manifests históricos preservados; docs/grafo posteriores não repinam o gate.
+# Atualização0425 — Hermes/read06 integrado, sem aceite físico — 02/10/2026
+
+Handoff read06 existente conferido: 16 hashes/evidências PASS, contrato físico NOT_PROVED. Dez textos estritos e duas dependências sem resolução; correções do comparador22 checks offline PASS não reaplicadas fisicamente. Preservar 38 diferenças FK brutas sem tratá-las como drift comprovado. Monitor atual zero HTTP/SQL, sem autorização para nova leitura, código/CI/qualificação0424 intactos. Próxima unidade física precisa reserva/autoridade nova; Hermes waiting_user após checkpoint real. STOP429/gates e critérios permanecem em STATES, sem caixas/contadores alterados.
+
+# Continuação read06 — contrato físico SAMPLE em verificação — 02/10/2026
+
+Pedido “continue”: Banco recebeu unidade própria de comparação metadata-only dos objetos SQL realmente tocados, conforme teto/preflight/recuperação no topo de STATES. Codex revisou o caminho causal; nenhum contrato físico equivalente presumido. Qualificação0424/código/tests/CI preservados; sem API, SQLwrite, mudança de autenticação/listeners/TLS/schema ou repetição Maven. Resultado depende do handoff Banco; STOP429 permanece.
+
+# Atualização0424 — SAMPLE qualificado offline, gate02 PASS — 02/10/2026
+
+`clean verify` completo02 PASS: Surefire2456/0/0/5, Failsafe7/0/0/0, 18 gates e JaCoCo originais PASS; Codex conferiu hashes/4210 inputs root-snapshot e totais XML, drift0 antes da integração documental. Aceite somente de qualificação offline local, sem checkbox/P08/G01/paridade/cutover. FAIL01/causalFAIL preservados; STOP429 e preflight físico inelegível, zero HTTP/SQL real/carga. Manifest/limites/pendências canônicos em STATES; grafo/documentos pós-gate não repinam histórico.
+
+# Atualização0423 — gate SAMPLE integrado FAIL — 02/10/2026
+
+Snapshot completo cap2 sem drift: Surefire2453/0/0/5; Failsafe6/0/2/0 (parse NOTE); JaCoCo bootstrap linhas0.79<0.80, exit1. Nenhum aceite integral/físico. Runtime corrige causalmente launcher e testes de ramos ainda descobertos, sem limiares/exclusões, antes de novo gate justificado. FAIL01/manifest preservados; STOP429, zero HTTP/SQL real. STATES e checkpoint0423 conservam critérios/evidências.
+
+# Atualização SAMPLE — qualificação focada, sem prova física — 02/10/2026
+
+CLI SAMPLE e API Banco staging-only implementadas; ADR0056/COL-SAMPLE-01. Runtime44/0/0/0 e Banco59/0/0/0 focados PASS; Fontes17 checks diagnósticos offline PASS. Gates completos dos bytes finais ainda sob Runtime. HTTP429 impede nova chamada; preflight físico Banco inelegível para JDBC Windows/listeners/TLS/objetos. Zero carga real/SQLwrite, sem checkbox, P08/G01/cutover ou alteração dos contadores históricos. Evidência e limites canônicos no topo de STATES; snapshots anteriores preservados.
+
+# Atualização 0420 — amostra real Coletas — 02/10/2026
+
+Primeira rodada 6908 autorizada pelo pedido de pequena extração recente, com janela/origem delegadas: HTTP 200 em /info e página 1, uma linha/entidade, 31 campos, duas chamadas; parada esperada CALL_BUDGET_REACHED/exit 1. Evidência sanitizada e limites em STATES e checkpoint0420. Somente amostra parcial: nenhum aceite de paginação, G01, P08, JDBC, produção ou checkbox. Não repetir rodada encerrada; holds e contadores históricos preservados.
 # VM — 0419: ambiente PS7 pronto, preparação da trilha PASS — 02/10/2026
 
 [STATES.md](STATES.md) e [checkpoint 0419](docs/continuidade/checkpoints/0419-vm-powershell-portatil-trilha-e-continuidade.md). PowerShell portátil oficial 7.6.6 com ZIP/digest/assinatura Microsoft verificados; sem PATH/instalação global/serviço. Preparação da trilha PASS (33 estágios/48 abertos/nove inputs, sem autorização de execução) e 20 autotestes do scanner PASS sob PS7. Continuidade FAIL histórico HANDOFF_PATH: `target/tres-etapas-20260922-01/closed-receipt.json` ausente; não fabricar evidência nem renovar budget. Offline 0418 válido na camada. Primeira sonda ainda depende dos inputs da fonte/G01; sa depende de escopo/segredo local. Nenhum checkbox, contador, P08 físico ou aceite produtivo promovido.

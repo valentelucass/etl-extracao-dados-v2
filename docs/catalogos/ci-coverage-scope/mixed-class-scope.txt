@@ -21,9 +21,12 @@ src/main/java/br/com/esl/etl/v2/bootstrap/CollectionSweepInput.java	77e19d0927f8
 src/main/java/br/com/esl/etl/v2/bootstrap/Coletas6908PilotControlPlane.java	8b80a3a31da08112f5ad68946eaedd4cfc7c66f24341995c683055b0f20fc1fc	UNIT_INCLUDED
 src/main/java/br/com/esl/etl/v2/bootstrap/Coletas6908PilotDeadline.java	f6c912e2d6f5463fadb93e0823ba41cf2ef7c77fa59f23f073cf5e6abedf2828	UNIT_INCLUDED
 src/main/java/br/com/esl/etl/v2/bootstrap/Coletas6908PilotExtraction.java	0c384d7c7f1dad258b747df83d5564d7e0dfe350f832ad135e60d06069f8f34a	UNIT_INCLUDED
-src/main/java/br/com/esl/etl/v2/bootstrap/Coletas6908PilotMain.java	f8768e6f5fe79592c8a9b736f70a429d1ecd8e91890083aeec58fe2b59681727	UNIT_INCLUDED
+src/main/java/br/com/esl/etl/v2/bootstrap/Coletas6908PilotMain.java	73554972b57e8190d4c774de40ed8668812e1703bef384c7d27ef73dbfcc1f15	UNIT_INCLUDED
 src/main/java/br/com/esl/etl/v2/bootstrap/Coletas6908PilotPlan.java	6e0866fdfaf0736b726e3721c035db5ca1598850e9c36499b02f9d35f7aa70f4	UNIT_INCLUDED
-src/main/java/br/com/esl/etl/v2/bootstrap/Coletas6908PilotRunner.java	5c826ce0c5800f11cc29143a2c8b502d7a3278adf663eb02b42744128dbd2f7b	UNIT_INCLUDED
+src/main/java/br/com/esl/etl/v2/bootstrap/Coletas6908PilotRunner.java	ad450ba92feee341f8a74b4646166ad40d29a5b15bb30e733c95bdeb9dc70e9b	UNIT_INCLUDED
+src/main/java/br/com/esl/etl/v2/bootstrap/Coletas6908SampleExtraction.java	1878ed09b72587866329b3e5bf4b5f2f53639458ec54de28999b5b877201ad59	UNIT_INCLUDED
+src/main/java/br/com/esl/etl/v2/bootstrap/Coletas6908SamplePreflight.java	c7e981980963e2ca73d598af6544eb6fc21499e9665025a94365ebff61172c3a	UNIT_INCLUDED
+src/main/java/br/com/esl/etl/v2/bootstrap/Coletas6908SampleRunner.java	8cdbb34a22fe0827a89b7c3437922c2c41ba7fe4bfbb41cbfbec5bbcb2557f93	UNIT_INCLUDED
 src/main/java/br/com/esl/etl/v2/bootstrap/DeclaredAnalyticReferences.java	ed749440e99248fba2d3cec4c8edd901431cc7fcba24d8d4503b1c8d80bbf925	UNIT_INCLUDED
 src/main/java/br/com/esl/etl/v2/bootstrap/DeclaredAnalyticSupport.java	41289a6afd0b6fcb0db61a81de952c0890495028792122df53f34d766de47a5a	UNIT_INCLUDED
 src/main/java/br/com/esl/etl/v2/bootstrap/DeclaredCapturePages.java	8c1a21a68ee2f3e5c1a393b6335c37aa2aaca0076f3c5250e9b3d36d8557becf	UNIT_INCLUDED
@@ -90,7 +93,7 @@ src/main/java/br/com/esl/etl/v2/bootstrap/RuntimeCompositionRoot.java	731e7d050f
 src/main/java/br/com/esl/etl/v2/bootstrap/RuntimeFiveVerticalContract.java	880ca8453ce297d5fff6df1243122a7e93fce90e4f5f0c90489682c70e414831	UNIT_INCLUDED
 src/main/java/br/com/esl/etl/v2/bootstrap/RuntimeHttpAttempts.java	889b28db886495278e3c1c3b2d4d0009e3192cd982d8e2aca2b6269fade069f7	UNIT_INCLUDED
 src/main/java/br/com/esl/etl/v2/bootstrap/RuntimeLaboratoryContract.java	e560505ddc3a14e0039c4f87072ee7e5ce069c76a28989fc57df22e9b2177088	UNIT_INCLUDED
-src/main/java/br/com/esl/etl/v2/bootstrap/RuntimeOperationalExecution.java	d2362a546ed682e5ffff56935bc671a398bff2091860bbe4d30cc28f50cd2da8	UNIT_INCLUDED
+src/main/java/br/com/esl/etl/v2/bootstrap/RuntimeOperationalExecution.java	b8b04a5eb4466ba62b8a55996d830ead94f5566533353393f80866ff1f2a36d4	UNIT_INCLUDED
 src/main/java/br/com/esl/etl/v2/bootstrap/RuntimeOperationalRequest.java	491b4f2a585f10620c6e7b20b91b79eaa9d79ff78f861e670b69624639bc5a0a	UNIT_INCLUDED
 src/main/java/br/com/esl/etl/v2/bootstrap/RuntimePhaseEvidence.java	cf914d6482246e6c33fb04ee557b8c0ed9358e1ba5ad708c253b94e48d58482a	UNIT_INCLUDED
 src/main/java/br/com/esl/etl/v2/bootstrap/RuntimeSqlObservation.java	6156fca267b64c0be2e298f6b07ed59aadd572271e2246d5f5b3ba7dee561d3e	UNIT_INCLUDED

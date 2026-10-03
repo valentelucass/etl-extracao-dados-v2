@@ -33,6 +33,71 @@ class QualificationPackageIntegrityIT {
     @TempDir Path directory;
 
     @Test
+    void emptyJdkJavaOptionsContaminatePackageJsonWhileAbsentOptionsPreserveIt() throws Exception {
+        final var fixture =
+                QualificationPackageFixture.createOffline(
+                        directory.resolve("target/environment-comparison/payload"));
+        final var payload = fixture.verify();
+        final var document = fixture.campaign();
+        final var files =
+                new QualificationControlFiles(
+                        payload.root(), payload.root().resolveSibling("control"), true);
+        QualificationControlFiles.atomic(files.root().resolve("campaign.json"), document);
+        QualificationControlFiles.atomic(
+                files.root().resolve("configuration.json"),
+                QualificationJson.read(
+                        payload.root().resolve("config/config.synthetic.json"), 8192));
+        final String executable =
+                System.getProperty("os.name").startsWith("Windows") ? "java.exe" : "java";
+        final String classpath =
+                payload.root().resolve("etl-dataexport-v2.jar")
+                        + System.getProperty("path.separator")
+                        + payload.root().resolve("lib")
+                        + java.io.File.separator
+                        + "*";
+        for (final boolean emptyOption : new boolean[] {true, false}) {
+            final var builder =
+                    new ProcessBuilder(
+                                    instrumentedJarCommand(
+                                            executable,
+                                            classpath,
+                                            "plan",
+                                            "--manifest-sha=" + payload.manifestSha256(),
+                                            "--campaign=" + files.root().resolve("campaign.json"),
+                                            "--configuration="
+                                                    + files.root().resolve("configuration.json")))
+                            .redirectErrorStream(true);
+            for (final String option :
+                    java.util.List.of("JAVA_TOOL_OPTIONS", "JDK_JAVA_OPTIONS", "_JAVA_OPTIONS")) {
+                builder.environment().remove(option);
+            }
+            if (emptyOption) {
+                builder.environment().put("JDK_JAVA_OPTIONS", "");
+            }
+            final var process = builder.start();
+            if (!process.waitFor(30, TimeUnit.SECONDS)) {
+                process.destroyForcibly();
+                throw new AssertionError("offline environment comparison timed out");
+            }
+            final byte[] output = process.getInputStream().readNBytes(65537);
+            assertTrue(output.length <= 65536);
+            assertEquals(0, process.exitValue());
+            if (emptyOption) {
+                assertTrue(
+                        new String(output, java.nio.charset.StandardCharsets.UTF_8)
+                                .startsWith("NOTE: Picked up JDK_JAVA_OPTIONS:"));
+                assertThrows(
+                        com.fasterxml.jackson.core.JsonParseException.class,
+                        () -> QualificationJson.parse(output, 65536));
+            } else {
+                assertEquals(
+                        QualificationCampaign.parse(document).id(),
+                        QualificationJson.parse(output, 65536).path("campaign").asText());
+            }
+        }
+    }
+
+    @Test
     void catalogPomsRetainThePinnedPublisherBytes() throws Exception {
         final var catalog = Path.of("docs/catalogos/macrobloco-qualificacao-pacote");
         final var lock = QualificationJson.read(catalog.resolve("dependency-lock.json"), 65536);
