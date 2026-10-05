@@ -8,6 +8,8 @@ import br.com.esl.etl.v2.modulos.coletas.domain.ColetaObservedRootComparator.Exp
 import br.com.esl.etl.v2.modulos.coletas.domain.ColetaObservedRootComparator.ExpectedRoot;
 import br.com.esl.etl.v2.modulos.coletas.domain.ColetaObservedRootComparator.ObservedRow;
 import br.com.esl.etl.v2.modulos.coletas.domain.ColetaStageBatch;
+import br.com.esl.etl.v2.plataforma.configuracao.SecretProvider;
+import br.com.esl.etl.v2.plataforma.configuracao.ShadowStorageProperties;
 import br.com.esl.etl.v2.plataforma.contrato.ContractPromotionPermit;
 import br.com.esl.etl.v2.plataforma.persistencia.staging.StagingPublicationResult;
 import br.com.esl.etl.v2.plataforma.qualidade.DataQualityPromotionPermit;
@@ -31,6 +33,9 @@ public final class ColetaShadowRollbackTrial implements AutoCloseable {
     private static final String CURRENT_AUDITED_PAGE =
             "SELECT MAX(page_number) FROM ctl.execution_page_audit"
                     + " WHERE execution_id=? AND physical_rows>0 AND terminal_empty_page=0";
+    private static final String SAMPLE_ENTITY_COUNT =
+            "SELECT COUNT_BIG(DISTINCT source_key COLLATE Latin1_General_100_BIN2)"
+                    + " FROM stg.execution_record WHERE execution_id=?";
     private final ColetaTemporalLaboratorySession session;
     private final TransactionState boundary;
     private UUID executionId;
@@ -42,25 +47,69 @@ public final class ColetaShadowRollbackTrial implements AutoCloseable {
     private boolean promoted;
     private boolean failed;
     private boolean closed;
+    private int sampleStagedRows;
 
     private ColetaShadowRollbackTrial(final ColetaTemporalLaboratorySession session)
             throws SQLException {
         this.session = Objects.requireNonNull(session);
-        session.controlStatements(ColetaTemporalLaboratorySession.PILOT_QUERY_SECONDS);
+        if (session.sharedSampleOnly()) {
+            ColetaSharedSampleIsolation.verifyAdmissionDeadline(session);
+        }
+        session.controlStatements(
+                session.sharedSampleOnly()
+                        ? 10
+                        : ColetaTemporalLaboratorySession.PILOT_QUERY_SECONDS);
         try (var connection = session.getConnection();
                 var statement = connection.createStatement()) {
             statement.setQueryTimeout(10);
             statement.execute("BEGIN TRANSACTION; BEGIN TRANSACTION;");
         }
+        if (session.sharedSampleOnly()) {
+            ColetaSharedSampleIsolation.acquire(session);
+        }
         boundary = readTransactionState();
         if (boundary.depth() < 2 || boundary.state() != 1 || boundary.sessionId() < 1) {
             throw new SQLException("COL_SHADOW_TRANSACTION_NOT_PROTECTED");
+        }
+        if (session.sharedSampleOnly()
+                && (boundary.transactionId() < 1
+                        || boundary.protectedObjects() != ColetaSharedSampleIsolation.OBJECTS
+                        || boundary.lockTimeout() != 0)) {
+            throw new SQLException("COL_SAMPLE_SHARED_FOOTPRINT_NOT_PROTECTED");
+        }
+        if (session.sharedSampleOnly()) {
+            ColetaSharedSampleIsolation.verifyAdmissionDeadline(session);
         }
     }
 
     public static <T> T executeFromEnvironment(final Work<T> work) throws Exception {
         Objects.requireNonNull(work);
         return execute(ColetaTemporalLaboratorySession.openPilotFromEnvironment(), work);
+    }
+
+    /** Separate SAMPLE-only SA path; never selected by the existing Windows entry. */
+    public static <T> T executeSampleSa(
+            final ShadowStorageProperties target, final SecretProvider secrets, final Work<T> work)
+            throws Exception {
+        Objects.requireNonNull(work);
+        return execute(ColetaTemporalLaboratorySession.openSampleSa(target, secrets), work);
+    }
+
+    /** Explicit coexistence contract; only this entry acquires the shared SAMPLE footprint. */
+    public static <T> T executeSharedSampleSa(
+            final ShadowStorageProperties target, final SecretProvider secrets, final Work<T> work)
+            throws Exception {
+        Objects.requireNonNull(work);
+        return execute(ColetaTemporalLaboratorySession.openSharedSampleSa(target, secrets), work);
+    }
+
+    /** Manual exact-leaf pin mode. Existing shared/Windows entries retain their own admission. */
+    public static <T> T executePinnedSharedSampleSa(
+            final ShadowStorageProperties target, final SecretProvider secrets, final Work<T> work)
+            throws Exception {
+        Objects.requireNonNull(work);
+        return execute(
+                ColetaTemporalLaboratorySession.openPinnedSharedSampleSa(target, secrets), work);
     }
 
     static <T> T execute(final ColetaTemporalLaboratorySession session, final Work<T> work)
@@ -160,6 +209,20 @@ public final class ColetaShadowRollbackTrial implements AutoCloseable {
         try {
             cancellation.throwIfCancellationRequested();
             final int sourcePage = currentAuditedPage(batch.executionId());
+            if (session.sampleSaOnly() && sourcePage != 1) {
+                throw new SQLException("COL_SAMPLE_SA_SINGLE_PAGE_REQUIRED");
+            }
+            if (session.sampleSaOnly()) {
+                if (sampleStagedRows + batch.size() > 1000) {
+                    throw new SQLException("COL_SAMPLE_SA_ROW_LIMIT");
+                }
+                for (int index = 0; index < batch.size(); index++) {
+                    final var key = batch.recordAt(index).sourceKey();
+                    if (key == null) {
+                        throw new SQLException("COL_SAMPLE_SA_ENTITY_REQUIRED");
+                    }
+                }
+            }
             if (batch.batchNumber() != stagedBatches + 1 || batch.batchNumber() > MAXIMUM_BATCHES) {
                 throw new IllegalStateException("COL_SHADOW_BATCH_SEQUENCE");
             }
@@ -171,18 +234,47 @@ public final class ColetaShadowRollbackTrial implements AutoCloseable {
             }
             new JdbcSqlServerColetaStagingGateway(session).stage(batch, cancellation);
             checkTransaction();
+            if (session.sampleSaOnly()) {
+                cancellation.throwIfCancellationRequested();
+                verifySampleEntityCount(batch.executionId());
+                checkTransaction();
+            }
             executionId = batch.executionId();
             batchPages += (char) ('0' + sourcePage);
             lastStagedPage = sourcePage;
             stagedBatches++;
+            if (session.sampleSaOnly()) {
+                sampleStagedRows += batch.size();
+            }
         } catch (final SQLException | RuntimeException | Error failure) {
             failed = true;
             throw failure;
         }
     }
 
+    private void verifySampleEntityCount(final UUID run) throws SQLException {
+        try (var connection = session.getConnection();
+                var statement = connection.prepareStatement(SAMPLE_ENTITY_COUNT)) {
+            statement.setQueryTimeout(10);
+            statement.setString(1, run.toString());
+            try (var rows = statement.executeQuery()) {
+                if (!rows.next()) {
+                    throw new SQLException("COL_SAMPLE_SA_ENTITY_COUNT_UNOBSERVABLE");
+                }
+                final long entities = rows.getLong(1);
+                if (rows.wasNull()
+                        || entities < 1
+                        || entities > (session.sharedSampleOnly() ? 1 : 5)
+                        || rows.next()) {
+                    throw new SQLException("COL_SAMPLE_SA_ENTITY_LIMIT");
+                }
+            }
+        }
+    }
+
     public void prepare(final ContractPromotionPermit permit, final CancellationToken cancellation)
             throws SQLException {
+        requireTraversalMode();
         if (stagedBatches == 0) {
             failed = true;
             throw new IllegalStateException("COL_SHADOW_EMPTY_TRAVERSAL");
@@ -211,6 +303,7 @@ public final class ColetaShadowRollbackTrial implements AutoCloseable {
             final DataQualityPromotionPermit quality,
             final CancellationToken cancellation)
             throws SQLException {
+        requireTraversalMode();
         Objects.requireNonNull(permit);
         Objects.requireNonNull(quality);
         Objects.requireNonNull(cancellation);
@@ -234,12 +327,20 @@ public final class ColetaShadowRollbackTrial implements AutoCloseable {
     }
 
     public UUID promotedExecutionId() throws SQLException {
+        requireTraversalMode();
         checkTransaction();
         if (!promoted) {
             failed = true;
             throw new IllegalStateException("COL_SHADOW_NOT_PROMOTED");
         }
         return executionId;
+    }
+
+    private void requireTraversalMode() {
+        if (session.sampleSaOnly()) {
+            failed = true;
+            throw new IllegalStateException("COL_SAMPLE_SA_PROMOTION_FORBIDDEN");
+        }
     }
 
     public Verification verifyObservedTraversal(
@@ -428,14 +529,24 @@ public final class ColetaShadowRollbackTrial implements AutoCloseable {
 
     private TransactionState readTransactionState() throws SQLException {
         try (var connection = session.getConnection();
-                var statement = connection.prepareStatement(TRANSACTION_STATE)) {
+                var statement =
+                        connection.prepareStatement(
+                                session.sharedSampleOnly()
+                                        ? ColetaSharedSampleIsolation.transactionStateSql()
+                                        : TRANSACTION_STATE)) {
             statement.setQueryTimeout(10);
             try (var rows = statement.executeQuery()) {
                 if (!rows.next()) {
                     throw new SQLException("COL_SHADOW_TRANSACTION_UNOBSERVABLE");
                 }
                 final var state =
-                        new TransactionState(rows.getInt(1), rows.getInt(2), rows.getInt(3));
+                        new TransactionState(
+                                rows.getInt(1),
+                                rows.getInt(2),
+                                rows.getInt(3),
+                                session.sharedSampleOnly() ? rows.getLong(4) : 0,
+                                session.sharedSampleOnly() ? rows.getInt(5) : 0,
+                                session.sharedSampleOnly() ? rows.getInt(6) : 0);
                 if (rows.next()) {
                     throw new SQLException("COL_SHADOW_TRANSACTION_UNOBSERVABLE");
                 }
@@ -491,5 +602,11 @@ public final class ColetaShadowRollbackTrial implements AutoCloseable {
         T apply(ColetaShadowRollbackTrial trial) throws Exception;
     }
 
-    private record TransactionState(int depth, int state, int sessionId) {}
+    private record TransactionState(
+            int depth,
+            int state,
+            int sessionId,
+            long transactionId,
+            int protectedObjects,
+            int lockTimeout) {}
 }

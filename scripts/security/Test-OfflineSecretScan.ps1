@@ -238,12 +238,90 @@ try {
             if ($LASTEXITCODE -ne 0) { throw 'SCANNER_FIXTURE_INDEX' }
         }
 
+    $sampleProviderExpression = 'final var ' + 'secrets = ' + 'secretProvider' + '.get();'
+    $sampleProviderPath = 'src/main/java/br/com/esl/etl/v2/bootstrap/Coletas6908SampleRunner.java'
+    $samplePropertyPath = 'src/test/java/br/com/esl/etl/v2/plataforma/configuracao/RuntimeSampleSaConfigurationTest.java'
+    $samplePropertyKey = 'V2_SHADOW_SAMPLE_SA_' + 'PASSWORD'
+    Invoke-ScannerCase -Name 'sample-exact-provider-reference' -ExpectedExitCode 0 -Arrange {
+        param($root)
+        Write-TestFile -Root $root -RelativePath $sampleProviderPath -Content ('final var provider = ' + 'secretProvider' + '.get();')
+    }
+    Invoke-ScannerCase -Name 'sample-provider-other-path-refused' -ExpectedExitCode 1 -ExpectedRule 'INLINE_SECRET_ASSIGNMENT' -Arrange {
+        param($root)
+        Write-TestFile -Root $root -RelativePath 'src/Other.java' -Content $sampleProviderExpression
+    }
+    Invoke-ScannerCase -Name 'sample-exact-refused-property-fixture' -ExpectedExitCode 0 -Arrange {
+        param($root)
+        Write-TestFile -Root $root -RelativePath $samplePropertyPath -Content ('system.setProperty(' + $quote + $samplePropertyKey + $quote + ', ' + $quote + 'synthetic' + $quote + ');')
+    }
+    $sampleDifferentValue = 'synthetic-causal-' + 'fixture-98765'
+    Invoke-ScannerCase -Name 'sample-property-different-value-refused' -ExpectedExitCode 1 -ExpectedRule 'HARDCODED_SECRET_ARGUMENT' -ForbiddenOutputLiteral $sampleDifferentValue -Arrange {
+        param($root)
+        Write-TestFile -Root $root -RelativePath $samplePropertyPath -Content ('system.setProperty(' + $quote + $samplePropertyKey + $quote + ', ' + $quote + $sampleDifferentValue + $quote + ');')
+    }
+    $publicLeafPath = 'src/test/resources/tls/sql-sample-manual-pin-325fac56a833.cer'
+    $publicLeafBytes = [IO.File]::ReadAllBytes((Join-Path $PSScriptRoot ('../../' + $publicLeafPath)))
+    $publicLeafHash = ([Security.Cryptography.SHA256]::Create().ComputeHash($publicLeafBytes) |
+        ForEach-Object { $_.ToString('x2') }) -join ''
+    if ($publicLeafHash -cne 'bf723ae91fc90f3cc448122366c90650cbc2c6f5cd4a849f4b3c88c68e7a43a0') {
+        throw 'PUBLIC_SAMPLE_LEAF_FIXTURE_DRIFT'
+    }
+    Invoke-ScannerCase -Name 'sample-public-leaf-exact-bytes-and-path' -ExpectedExitCode 0 -Arrange {
+        param($root)
+        $destination = Join-Path $root $publicLeafPath
+        [void][IO.Directory]::CreateDirectory([IO.Path]::GetDirectoryName($destination))
+        [IO.File]::WriteAllBytes($destination, $publicLeafBytes)
+    }
+    Invoke-ScannerCase -Name 'sample-public-leaf-changed-bytes-refused' -ExpectedExitCode 1 -ExpectedRule 'BINARY_INTEGRITY_MISMATCH' -Arrange {
+        param($root)
+        $destination = Join-Path $root $publicLeafPath
+        [void][IO.Directory]::CreateDirectory([IO.Path]::GetDirectoryName($destination))
+        $changed = [byte[]]$publicLeafBytes.Clone()
+        $changed[$changed.Length - 1] = $changed[$changed.Length - 1] -bxor 1
+        [IO.File]::WriteAllBytes($destination, $changed)
+    }
+    Invoke-ScannerCase -Name 'sample-public-leaf-other-path-refused' -ExpectedExitCode 1 -ExpectedRule 'UNSCANNED_NON_TEXT' -Arrange {
+        param($root)
+        $destination = Join-Path $root 'src/test/resources/tls/other.cer'
+        [void][IO.Directory]::CreateDirectory([IO.Path]::GetDirectoryName($destination))
+        [IO.File]::WriteAllBytes($destination, $publicLeafBytes)
+    }
+    $pinDriverFixturePath = 'src/test/java/br/com/esl/etl/v2/plataforma/configuracao/PinnedSampleRealDriverTest.java'
+    $pinDriverFakeValue = 'synthetic-only-driver-fixture'
+    Invoke-ScannerCase -Name 'sample-pin-driver-exact-fake-value-and-path' -ExpectedExitCode 0 -Arrange {
+        param($root)
+        Write-TestFile -Root $root -RelativePath $pinDriverFixturePath -Content ('props.setProperty(' + $quote + 'password' + $quote + ', ' + $quote + $pinDriverFakeValue + $quote + ');')
+    }
+    Invoke-ScannerCase -Name 'sample-pin-driver-other-path-refused' -ExpectedExitCode 1 -ExpectedRule 'HARDCODED_SECRET_ARGUMENT' -ForbiddenOutputLiteral $pinDriverFakeValue -Arrange {
+        param($root)
+        Write-TestFile -Root $root -RelativePath 'src/Other.java' -Content ('props.setProperty(' + $quote + 'password' + $quote + ', ' + $quote + $pinDriverFakeValue + $quote + ');')
+    }
+    $differentPinDriverValue = 'synthetic-pin-different-value-67890'
+    Invoke-ScannerCase -Name 'sample-pin-driver-other-value-refused' -ExpectedExitCode 1 -ExpectedRule 'HARDCODED_SECRET_ARGUMENT' -ForbiddenOutputLiteral $differentPinDriverValue -Arrange {
+        param($root)
+        Write-TestFile -Root $root -RelativePath $pinDriverFixturePath -Content ('props.setProperty(' + $quote + 'password' + $quote + ', ' + $quote + $differentPinDriverValue + $quote + ');')
+    }
+    $pinConnectorPath = 'src/test/java/br/com/esl/etl/v2/plataforma/configuracao/PinnedSampleConnectorFailureTest.java'
+    $pinConnectorValue = '  synthetic-only  '
+    Invoke-ScannerCase -Name 'sample-pin-connector-exact-injected-fake-whitespace' -ExpectedExitCode 0 -Arrange {
+        param($root)
+        Write-TestFile -Root $root -RelativePath $pinConnectorPath -Content ('props.setProperty(' + $quote + 'password' + $quote + ', ' + $quote + $pinConnectorValue + $quote + ');')
+    }
+    Invoke-ScannerCase -Name 'sample-pin-connector-other-path-refused' -ExpectedExitCode 1 -ExpectedRule 'HARDCODED_SECRET_ARGUMENT' -ForbiddenOutputLiteral $pinConnectorValue -Arrange {
+        param($root)
+        Write-TestFile -Root $root -RelativePath 'src/Other.java' -Content ('props.setProperty(' + $quote + 'password' + $quote + ', ' + $quote + $pinConnectorValue + $quote + ');')
+    }
+    $differentConnectorValue = 'synthetic-connector-different-67890'
+    Invoke-ScannerCase -Name 'sample-pin-connector-other-value-refused' -ExpectedExitCode 1 -ExpectedRule 'HARDCODED_SECRET_ARGUMENT' -ForbiddenOutputLiteral $differentConnectorValue -Arrange {
+        param($root)
+        Write-TestFile -Root $root -RelativePath $pinConnectorPath -Content ('props.setProperty(' + $quote + 'password' + $quote + ', ' + $quote + $differentConnectorValue + $quote + ');')
+    }
     Write-Output ('OFFLINE_SECRET_SCAN_SELF_TEST status=PASS cases={0}' -f $caseCount)
 }
 finally {
     if ($EvidenceAttempt) {
         [IO.File]::WriteAllText((Join-Path $testRoot 'result.json'),
-            (@{passed=($caseCount -eq 20);cases=$caseCount;evidenceRetained=$true;scannerSha256=(Get-FileHash -LiteralPath $scannerPath).Hash.ToLowerInvariant()}|ConvertTo-Json),
+            (@{passed=($caseCount -eq 33);cases=$caseCount;evidenceRetained=$true;scannerSha256=(Get-FileHash -LiteralPath $scannerPath).Hash.ToLowerInvariant()}|ConvertTo-Json),
             [Text.UTF8Encoding]::new($false))
     } else {
     $resolvedTarget = [System.IO.Path]::GetFullPath($testRoot)

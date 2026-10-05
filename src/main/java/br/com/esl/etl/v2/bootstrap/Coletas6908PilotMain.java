@@ -27,7 +27,9 @@ public final class Coletas6908PilotMain {
                 System.getProperties(),
                 System.getenv(),
                 Clock.systemUTC(),
-                Coletas6908SampleRunner::runInLocalShadow);
+                Coletas6908SampleRunner::runInLocalShadow,
+                Coletas6908SampleRunner::runInSharedShadow,
+                Coletas6908SampleRunner::runInPinnedSharedShadow);
     }
 
     static int run(
@@ -38,13 +40,68 @@ public final class Coletas6908PilotMain {
             final Map<String, String> environment,
             final Clock clock,
             final SampleExecutor executor) {
+        return run(
+                args,
+                out,
+                error,
+                properties,
+                environment,
+                clock,
+                executor,
+                (p, c, r, e, admission) -> {
+                    throw new IllegalStateException("COL_SAMPLE_SHARED_EXECUTOR_REQUIRED");
+                });
+    }
+
+    static int run(
+            final String[] args,
+            final PrintStream out,
+            final PrintStream error,
+            final Properties properties,
+            final Map<String, String> environment,
+            final Clock clock,
+            final SampleExecutor executor,
+            final SharedSampleExecutor sharedExecutor) {
+        return run(
+                args,
+                out,
+                error,
+                properties,
+                environment,
+                clock,
+                executor,
+                sharedExecutor,
+                (p, c, r, e, admission) -> {
+                    throw new IllegalStateException("COL_SAMPLE_PIN_EXECUTOR_REQUIRED");
+                });
+    }
+
+    static int run(
+            final String[] args,
+            final PrintStream out,
+            final PrintStream error,
+            final Properties properties,
+            final Map<String, String> environment,
+            final Clock clock,
+            final SampleExecutor executor,
+            final SharedSampleExecutor sharedExecutor,
+            final SharedSampleExecutor pinnedExecutor) {
         if (args.length == 9
-                && "--sample".equals(args[0])
+                && ("--sample".equals(args[0]) || "--sample-sql-pin".equals(args[0]))
                 && "--config".equals(args[1])
                 && "--plan".equals(args[3])
                 && "--request".equals(args[5])
                 && "--bank-preflight".equals(args[7])) {
-            return sample(args, out, error, properties, environment, clock, executor);
+            return sample(
+                    args,
+                    out,
+                    error,
+                    properties,
+                    environment,
+                    clock,
+                    executor,
+                    sharedExecutor,
+                    pinnedExecutor);
         }
         if (args.length != 2 || !"--plan".equals(args[0])) {
             error.println("COL_PILOT_EXECUTION_NOT_AUTHORIZED");
@@ -78,7 +135,16 @@ public final class Coletas6908PilotMain {
             final Properties properties,
             final Map<String, String> environment,
             final Clock clock,
-            final SampleExecutor executor) {
+            final SampleExecutor executor,
+            final SharedSampleExecutor sharedExecutor,
+            final SharedSampleExecutor pinnedExecutor) {
+        final boolean pinned = "--sample-sql-pin".equals(args[0]);
+        final String pinOptIn = properties.getProperty("coletas6908.sample.sql-pin.enabled");
+        if ((pinned && !"true".equals(pinOptIn))
+                || (!pinned && pinOptIn != null && !"false".equals(pinOptIn))) {
+            error.println("COL_SAMPLE_PIN_OPT_IN_REQUIRED");
+            return 3;
+        }
         if (!"true".equals(properties.getProperty("shadow.local.integration.enabled"))
                 || !"true".equals(properties.getProperty("shadow.local.integration.profile.active"))
                 || !"true".equals(properties.getProperty("coletas6908.sample.enabled"))
@@ -93,16 +159,52 @@ public final class Coletas6908PilotMain {
             final Path config = Path.of(args[2]);
             final Path planFile = Path.of(args[4]);
             final Path requestFile = Path.of(args[6]);
-            final var configuration =
+            final var loaded =
                     new RuntimeConfigurationFactory()
                             .load(config, configurationProperties(properties), environment, clock);
+            final var configuration =
+                    pinned ? Coletas6908SampleRunner.pinnedConfiguration(loaded) : loaded;
             final var plan = Coletas6908PilotPlan.read(planFile);
             final var request = RuntimeOperationalRequest.read(configuration, requestFile);
+            Coletas6908SampleRunner.validateAuthentication(configuration, properties);
             Coletas6908SampleRunner.preflight(plan, configuration, request);
-            Coletas6908SamplePreflight.validate(
-                    Path.of(args[8]), config, planFile, requestFile, configuration, request);
+            final var shared =
+                    Coletas6908SamplePreflight.validate(
+                            Path.of(args[8]),
+                            config,
+                            planFile,
+                            requestFile,
+                            configuration,
+                            request);
+            if (shared.isPresent()) {
+                if (pinned) {
+                    Coletas6908SampleRunner.preflightPinned(
+                            plan, configuration, request, properties, shared.orElseThrow());
+                } else {
+                    Coletas6908SampleRunner.preflightShared(
+                            plan, configuration, request, properties);
+                }
+                shared.orElseThrow().check(clock);
+            } else if (pinned
+                    || "true".equals(properties.getProperty("coletas6908.sample.shared.enabled"))) {
+                throw new IllegalArgumentException("COL_SAMPLE_SHARED_RECEIPT_REQUIRED");
+            }
             phase = "TRIAL";
-            final var receipt = executor.execute(plan, configuration, request, environment);
+            final var receipt =
+                    pinned
+                            ? pinnedExecutor.execute(
+                                    plan, configuration, request, environment, shared.orElseThrow())
+                            : shared.isPresent()
+                                    ? sharedExecutor.execute(
+                                            plan,
+                                            configuration,
+                                            request,
+                                            environment,
+                                            shared.orElseThrow())
+                                    : executor.execute(plan, configuration, request, environment);
+            if (shared.isPresent()) {
+                shared.orElseThrow().check(clock);
+            }
             out.println(
                     "COL_SAMPLE_RESULT status="
                             + receipt.status()
@@ -117,6 +219,16 @@ public final class Coletas6908PilotMain {
                             + " presenceComparedCells=0"
                             + " promoted=false windowCompleteness=false childCompleteness=false");
             out.println(receipt.httpAttempts());
+            if (pinned) {
+                out.println(
+                        "COL_SAMPLE_SQL_IDENTITY mode="
+                                + Coletas6908SamplePreflight.PIN_IDENTITY
+                                + " leafSha256="
+                                + Coletas6908SamplePreflight.PIN_SHA256
+                                + " manualApprovalReference="
+                                + Coletas6908SamplePreflight.PIN_APPROVAL
+                                + " dnsHostnameValidated=false scope=JDBC_SAMPLE_ONLY");
+            }
             return 0;
         } catch (final Exception failure) {
             error.println("COL_SAMPLE_STOP phase=" + phase);
@@ -134,6 +246,17 @@ public final class Coletas6908PilotMain {
             }
         }
         return selected;
+    }
+
+    @FunctionalInterface
+    interface SharedSampleExecutor {
+        Coletas6908SampleRunner.Receipt execute(
+                Coletas6908PilotPlan plan,
+                RuntimeConfiguration configuration,
+                RuntimeOperationalRequest request,
+                Map<String, String> environment,
+                Coletas6908SamplePreflight.SharedAdmission admission)
+                throws Exception;
     }
 
     @FunctionalInterface

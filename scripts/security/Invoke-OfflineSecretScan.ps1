@@ -69,6 +69,11 @@ $approvedBinaryFiles.Add(
     '.mvn/wrapper/maven-wrapper.jar',
     '4e2fbf6554bc8a4702cdfdd3bef464f423393d784ddbb037216320ce55d5e4e1'
 )
+# COL-SAMPLE-TLS-PIN-001: exact public X.509 leaf, never a key/store or directory exemption.
+$approvedBinaryFiles.Add(
+    'src/test/resources/tls/sql-sample-manual-pin-325fac56a833.cer',
+    'bf723ae91fc90f3cc448122366c90650cbc2c6f5cd4a849f4b3c88c68e7a43a0'
+)
 
 $allowedSyntheticFindings =
     [System.Collections.Generic.HashSet[string]]::new([System.StringComparer]::Ordinal)
@@ -78,6 +83,12 @@ foreach ($entry in @(
     'SECRET_QUOTED_ASSIGNMENT|docs/catalogos/macrobloco-qualificacao-pacote/third-party/bom-1.6.schema.json|A piece of data known only to the parties involved, in a secure communication.',
     'SECRET_QUOTED_ASSIGNMENT|docs/catalogos/macrobloco-qualificacao-pacote/third-party/bom-1.6.schema.json|A secret word, phrase, or sequence of characters used during authentication or authorization.',
     'SECRET_QUOTED_ASSIGNMENT|docs/catalogos/macrobloco-qualificacao-pacote/third-party/bom-1.6.schema.json|An object encapsulating a security identity.',
+    # COL-SAMPLE-SA-01: exact synthetic value in a refused property fixture, never a path exemption.
+    'HARDCODED_SECRET_ARGUMENT|src/test/java/br/com/esl/etl/v2/plataforma/configuracao/RuntimeSampleSaConfigurationTest.java|synthetic',
+    # COL-SAMPLE-TLS-PIN-001: fake streams never reach LOGIN7; exact fixture/path only.
+    'HARDCODED_SECRET_ARGUMENT|src/test/java/br/com/esl/etl/v2/plataforma/configuracao/PinnedSampleRealDriverTest.java|synthetic-only-driver-fixture',
+    # COL-SAMPLE-TLS-PIN-001: injected connector/streams only; preserve synthetic whitespace.
+    'HARDCODED_SECRET_ARGUMENT|src/test/java/br/com/esl/etl/v2/plataforma/configuracao/PinnedSampleConnectorFailureTest.java|synthetic-only',
     # ANA-39: exact local fixture values; no generic exemption for token fields or synthetic paths.
     # SQL joins compare token columns with the derived-table alias normalized; this is no literal.
     'INLINE_SECRET_ASSIGNMENT|database/migrations/V071__consume_analytic_owned_fleet_references.sql|normalized',

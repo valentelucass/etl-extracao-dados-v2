@@ -30,16 +30,39 @@ public final class ShadowStorageProperties {
     private final ShadowStorageTargetKind targetKind;
     private final String jdbcUrl;
     private final String approvalReference;
+    private final boolean sampleSaAuthentication;
+    private final boolean sampleSqlPinAuthentication;
 
     private ShadowStorageProperties(
             final boolean auditEnabled,
             final ShadowStorageTargetKind targetKind,
             final String jdbcUrl,
             final String approvalReference) {
+        this(auditEnabled, targetKind, jdbcUrl, approvalReference, false);
+    }
+
+    private ShadowStorageProperties(
+            final boolean auditEnabled,
+            final ShadowStorageTargetKind targetKind,
+            final String jdbcUrl,
+            final String approvalReference,
+            final boolean sampleSaAuthentication) {
+        this(auditEnabled, targetKind, jdbcUrl, approvalReference, sampleSaAuthentication, false);
+    }
+
+    private ShadowStorageProperties(
+            final boolean auditEnabled,
+            final ShadowStorageTargetKind targetKind,
+            final String jdbcUrl,
+            final String approvalReference,
+            final boolean sampleSaAuthentication,
+            final boolean sampleSqlPinAuthentication) {
         this.auditEnabled = auditEnabled;
         this.targetKind = targetKind;
         this.jdbcUrl = jdbcUrl;
         this.approvalReference = approvalReference;
+        this.sampleSaAuthentication = sampleSaAuthentication;
+        this.sampleSqlPinAuthentication = sampleSqlPinAuthentication;
     }
 
     public static ShadowStorageProperties disabled() {
@@ -68,6 +91,58 @@ public final class ShadowStorageProperties {
 
     public boolean auditEnabled() {
         return auditEnabled;
+    }
+
+    /** Separate SAMPLE-only SQL-auth target; the Windows factory retains its original policy. */
+    public static ShadowStorageProperties enabledSampleSa(final String jdbcUrl) {
+        Objects.requireNonNull(jdbcUrl, "O JDBC do SAMPLE local é obrigatório.");
+        final String normalized = jdbcUrl.trim();
+        if (!normalized.matches("(?i)jdbc:sqlserver://localhost(?::1433)?;.*")) {
+            throw new IllegalArgumentException("COL_SAMPLE_SA_LOCAL_TARGET_REQUIRED");
+        }
+        final Map<String, String> parameters = parseJdbcParameters(normalized);
+        if (!EXPECTED_DATABASE.equals(parameters.get("databasename"))
+                || !"false".equalsIgnoreCase(parameters.get("integratedsecurity"))
+                || !"true".equalsIgnoreCase(parameters.get("encrypt"))
+                || !"false".equalsIgnoreCase(parameters.get("trustservercertificate"))) {
+            throw new IllegalArgumentException("COL_SAMPLE_SA_VERIFIED_TARGET_REQUIRED");
+        }
+        validateOptionalBoolean(parameters, "integratedsecurity");
+        validateOptionalBoolean(parameters, "encrypt");
+        validateOptionalBoolean(parameters, "trustservercertificate");
+        for (final String key : Set.of("logintimeout", "sockettimeout")) {
+            final String value = parameters.get(key);
+            if (value != null && !value.matches("[0-9]{1,9}")) {
+                throw new IllegalArgumentException("COL_SAMPLE_SA_DRIVER_SETTING_INVALID");
+            }
+        }
+        final String application = parameters.get("applicationname");
+        if (application != null && !application.matches("[A-Za-z0-9 _.\\-]{1,128}")) {
+            throw new IllegalArgumentException("COL_SAMPLE_SA_DRIVER_SETTING_INVALID");
+        }
+        return new ShadowStorageProperties(
+                true, ShadowStorageTargetKind.LOCAL_EPHEMERAL, normalized, null, true);
+    }
+
+    public boolean usesSampleSaAuthentication() {
+        requireEnabled();
+        return sampleSaAuthentication;
+    }
+
+    /** Manual leaf pin and DNS exception apply only to this separately selected SQL SAMPLE mode. */
+    public static ShadowStorageProperties enabledSampleSqlPin(
+            final String jdbcUrl, final String manualApprovalReference) {
+        if (!"HERMES325fac56a833".equals(manualApprovalReference)) {
+            throw new IllegalArgumentException("COL_SAMPLE_SQL_PIN_MANUAL_APPROVAL_REQUIRED");
+        }
+        final ShadowStorageProperties strict = enabledSampleSa(jdbcUrl);
+        return new ShadowStorageProperties(
+                true, strict.targetKind, strict.jdbcUrl, manualApprovalReference, true, true);
+    }
+
+    public boolean usesSampleSqlPinAuthentication() {
+        requireEnabled();
+        return sampleSqlPinAuthentication;
     }
 
     public ShadowStorageTargetKind targetKind() {

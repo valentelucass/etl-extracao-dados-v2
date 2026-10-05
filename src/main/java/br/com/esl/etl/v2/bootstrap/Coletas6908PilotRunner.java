@@ -117,6 +117,14 @@ final class Coletas6908PilotRunner {
         Objects.requireNonNull(configuration);
         Objects.requireNonNull(request);
         BoundedRuntimeDataSource.validateTarget(configuration.shadowStorage());
+        preflightScope(plan, configuration, request);
+    }
+
+    /** Shared source/scope checks; each entry validates its own storage/authentication first. */
+    static void preflightScope(
+            final Coletas6908PilotPlan plan,
+            final RuntimeConfiguration configuration,
+            final RuntimeOperationalRequest request) {
         final var source = configuration.dataExport().orElseThrow();
         if (request.template != DataExportTemplate.COLETAS
                 || request.temporal != null

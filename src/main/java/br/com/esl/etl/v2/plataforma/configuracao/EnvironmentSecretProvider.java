@@ -28,7 +28,7 @@ public final class EnvironmentSecretProvider implements SecretProvider {
         if (value == null || value.isBlank()) {
             throw new IllegalStateException("Segredo obrigatório ausente no provider protegido.");
         }
-        return value.trim();
+        return key == SecretKey.SHADOW_SAMPLE_SA_PASSWORD ? value : value.trim();
     }
 
     @Override

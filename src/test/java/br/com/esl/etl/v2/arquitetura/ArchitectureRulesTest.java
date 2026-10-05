@@ -453,6 +453,10 @@ public class ArchitectureRulesTest {
                             "X509TrustManager: array novo de um único certificado fixado; teste de pin e "
                                     + "cópia defensiva."),
                     Map.entry(
+                            "br.com.esl.etl.v2.plataforma.configuracao.PinnedSampleTrustManager#getAcceptedIssuers()",
+                            "COL-SAMPLE-TLS-PIN-001: array novo vazio, limite zero de emissores; "
+                                    + "PinnedSampleTlsTest verifica esse contrato."),
+                    Map.entry(
                             "br.com.esl.etl.v2.plataforma.orquestracao.RuntimeTemporalPolicy#blackouts()",
                             "Até 64 intervalos; limite verificado antes de ordenar/copiar a configuração."),
                     Map.entry(

@@ -175,7 +175,10 @@ class DataExportClientSettingsTest {
         assertEquals(originalValue, provider.require(SecretKey.DATA_EXPORT_TOKEN));
         assertEquals("V2_DATAEXPORT_TOKEN", SecretKey.DATA_EXPORT_TOKEN.environmentVariable());
         assertEquals("V2_GRAPHQL_TOKEN", SecretKey.GRAPHQL_TOKEN.environmentVariable());
-        assertEquals(2, SecretKey.values().length);
+        assertEquals(
+                "V2_SHADOW_SAMPLE_SA_PASSWORD",
+                SecretKey.SHADOW_SAMPLE_SA_PASSWORD.environmentVariable());
+        assertEquals(3, SecretKey.values().length);
         assertEquals("EnvironmentSecretProvider[redacted]", provider.toString());
         assertFalse(provider.toString().contains(originalValue));
         assertFalse(provider.toString().contains("must-not-be-selected"));

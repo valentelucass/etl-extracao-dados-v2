@@ -1,5 +1,7 @@
 package br.com.esl.etl.v2.plataforma.persistencia.coletas;
 
+import br.com.esl.etl.v2.plataforma.configuracao.SecretKey;
+import br.com.esl.etl.v2.plataforma.configuracao.SecretProvider;
 import br.com.esl.etl.v2.plataforma.configuracao.ShadowStorageProperties;
 import br.com.esl.etl.v2.plataforma.configuracao.ShadowStorageTargetKind;
 import java.io.PrintWriter;
@@ -10,6 +12,9 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.SQLFeatureNotSupportedException;
 import java.sql.Statement;
+import java.util.Locale;
+import java.util.Objects;
+import java.util.Properties;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Logger;
@@ -20,6 +25,9 @@ public final class ColetaTemporalLaboratorySession implements DataSource, AutoCl
     public static final int MAXIMUM_OPEN_STATEMENTS = 64;
     public static final int PILOT_QUERY_SECONDS = 20;
     private final Connection physical;
+    private final boolean sampleSaOnly;
+    private final boolean sharedSampleOnly;
+    private final long sharedAdmissionStartedNanos;
     private boolean closed;
     private int suppressedCommits;
     private int releasedConnections;
@@ -35,8 +43,246 @@ public final class ColetaTemporalLaboratorySession implements DataSource, AutoCl
         Connection open(String url) throws SQLException;
     }
 
+    @FunctionalInterface
+    interface SqlConnections {
+        Connection open(String url, Properties credentials) throws SQLException;
+    }
+
     private ColetaTemporalLaboratorySession(final Connection physical) {
+        this(physical, false);
+    }
+
+    private ColetaTemporalLaboratorySession(final Connection physical, final boolean sampleSaOnly) {
+        this(physical, sampleSaOnly, false);
+    }
+
+    private ColetaTemporalLaboratorySession(
+            final Connection physical, final boolean sampleSaOnly, final boolean sharedSampleOnly) {
+        this(physical, sampleSaOnly, sharedSampleOnly, System.nanoTime());
+    }
+
+    private ColetaTemporalLaboratorySession(
+            final Connection physical,
+            final boolean sampleSaOnly,
+            final boolean sharedSampleOnly,
+            final long sharedAdmissionStartedNanos) {
         this.physical = physical;
+        this.sampleSaOnly = sampleSaOnly;
+        this.sharedSampleOnly = sharedSampleOnly;
+        this.sharedAdmissionStartedNanos = sharedAdmissionStartedNanos;
+    }
+
+    /** Pure validation; never reads a secret or opens a connection. */
+    public static void validateSampleSaTarget(final ShadowStorageProperties target) {
+        if (target == null
+                || !target.auditEnabled()
+                || !target.usesSampleSaAuthentication()
+                || target.usesSampleSqlPinAuthentication()
+                || target.targetKind() != ShadowStorageTargetKind.LOCAL_EPHEMERAL) {
+            throw new IllegalArgumentException("COL_SAMPLE_SA_EXPLICIT_TARGET_REQUIRED");
+        }
+        ShadowStorageProperties.enabledSampleSa(target.jdbcUrl());
+    }
+
+    static ColetaTemporalLaboratorySession openSampleSa(
+            final ShadowStorageProperties target, final SecretProvider secrets)
+            throws SQLException {
+        return openSampleSa(target, secrets, DriverManager::getConnection);
+    }
+
+    static ColetaTemporalLaboratorySession openSampleSa(
+            final ShadowStorageProperties target,
+            final SecretProvider secrets,
+            final SqlConnections connections)
+            throws SQLException {
+        return openSampleSa(target, secrets, connections, false);
+    }
+
+    static ColetaTemporalLaboratorySession openSharedSampleSa(
+            final ShadowStorageProperties target, final SecretProvider secrets)
+            throws SQLException {
+        return openSharedSampleSa(target, secrets, DriverManager::getConnection);
+    }
+
+    static ColetaTemporalLaboratorySession openSharedSampleSa(
+            final ShadowStorageProperties target,
+            final SecretProvider secrets,
+            final SqlConnections connections)
+            throws SQLException {
+        if (!Boolean.getBoolean("coletas6908.sample.shared.enabled")) {
+            throw new IllegalStateException("COL_SAMPLE_SHARED_OPT_IN_REQUIRED");
+        }
+        return openSampleSa(target, secrets, connections, true);
+    }
+
+    static ColetaTemporalLaboratorySession openPinnedSharedSampleSa(
+            final ShadowStorageProperties target, final SecretProvider secrets)
+            throws SQLException {
+        return openSampleSa(
+                target,
+                secrets,
+                (url, credentials) ->
+                        PinnedSampleSaJdbcConnector.openCredentials(target, credentials),
+                true,
+                true);
+    }
+
+    static ColetaTemporalLaboratorySession openPinnedSharedSampleSa(
+            final ShadowStorageProperties target,
+            final SecretProvider secrets,
+            final SqlConnections connections)
+            throws SQLException {
+        return openSampleSa(target, secrets, connections, true, true);
+    }
+
+    private static ColetaTemporalLaboratorySession openSampleSa(
+            final ShadowStorageProperties target,
+            final SecretProvider secrets,
+            final SqlConnections connections,
+            final boolean shared)
+            throws SQLException {
+        return openSampleSa(target, secrets, connections, shared, false);
+    }
+
+    private static ColetaTemporalLaboratorySession openSampleSa(
+            final ShadowStorageProperties target,
+            final SecretProvider secrets,
+            final SqlConnections connections,
+            final boolean shared,
+            final boolean pinned)
+            throws SQLException {
+        if (pinned) {
+            br.com.esl.etl.v2.plataforma.configuracao.PinnedSampleTlsScope.validate(target);
+        } else {
+            validateSampleSaTarget(target);
+        }
+        if (!Boolean.getBoolean("shadow.local.integration.enabled")
+                || !Boolean.getBoolean("shadow.local.integration.profile.active")
+                || !Boolean.getBoolean("coletas6908.sample.enabled")
+                || !Boolean.getBoolean("coletas6908.sample.sa.enabled")) {
+            throw new IllegalStateException("COL_SAMPLE_SA_OPT_IN_REQUIRED");
+        }
+        Objects.requireNonNull(connections);
+        final long admissionStarted = System.nanoTime();
+        final String password;
+        try {
+            password = Objects.requireNonNull(secrets).require(SecretKey.SHADOW_SAMPLE_SA_PASSWORD);
+            if (password == null || password.isBlank() || password.length() > 4096) {
+                throw new IllegalStateException("COL_SAMPLE_SA_SECRET_INVALID");
+            }
+        } catch (final RuntimeException | Error failure) {
+            throw new IllegalStateException("COL_SAMPLE_SA_SECRET_UNAVAILABLE");
+        }
+        final Properties credentials = new Properties();
+        credentials.setProperty("user", "sa");
+        credentials.setProperty("password", password);
+        credentials.setProperty("authentication", "SqlPassword");
+        credentials.setProperty("connectRetryCount", "0");
+        Connection connection = null;
+        try {
+            connection =
+                    Objects.requireNonNull(
+                            connections.open(
+                                    shared
+                                            ? sharedSampleJdbcUrl(target.jdbcUrl())
+                                            : boundedJdbcUrl(target.jdbcUrl()),
+                                    credentials));
+            // Identity SELECT runs before any session setting or explicit transaction.
+            try (var statement = connection.createStatement()) {
+                statement.setQueryTimeout(10);
+                try (var row =
+                        statement.executeQuery(
+                                "SELECT CASE WHEN DB_NAME()=N'ETL_SISTEMA_V2_SHADOW'"
+                                        + " AND ORIGINAL_LOGIN()=N'sa' AND SUSER_SNAME()=N'sa'"
+                                        + " AND CONNECTIONPROPERTY('auth_scheme')=N'SQL'"
+                                        + " AND CONNECTIONPROPERTY('net_transport')=N'TCP'"
+                                        + " AND @@TRANCOUNT=0 THEN 1 ELSE 0 END,"
+                                        + " CONVERT(nvarchar(128),CONNECTIONPROPERTY('local_net_address')),"
+                                        + " CONVERT(nvarchar(128),CONNECTIONPROPERTY('client_net_address'))"
+                                        + (shared
+                                                ? ", CASE WHEN EXISTS (SELECT 1 FROM sys.dm_exec_connections"
+                                                        + " WHERE session_id=@@SPID AND encrypt_option=N'TRUE')"
+                                                        + " THEN 1 ELSE 0 END"
+                                                : ""))) {
+                    if (!row.next()
+                            || row.getInt(1) != 1
+                            || !literalLoopback(row.getString(2))
+                            || !literalLoopback(row.getString(3))
+                            || (shared && row.getInt(4) != 1)
+                            || row.next()) {
+                        throw new SQLException("COL_SAMPLE_SA_IDENTITY_REFUSED");
+                    }
+                }
+                connection.setAutoCommit(false);
+                statement.execute(
+                        shared
+                                ? "SET LOCK_TIMEOUT 0; SET XACT_ABORT ON;"
+                                : "SET LOCK_TIMEOUT 1800; SET XACT_ABORT ON;");
+            }
+            return new ColetaTemporalLaboratorySession(connection, true, shared, admissionStarted);
+        } catch (final SQLException | RuntimeException | Error failure) {
+            // Driver/provider failures may include credential material. Keep only typed metadata.
+            if (pinned
+                    && connection == null
+                    && failure instanceof PinnedSampleSaJdbcConnector.ConnectionFailure sanitized) {
+                throw sanitized;
+            }
+            final SQLException safe;
+            if (failure instanceof SQLException sql) {
+                final String state = sql.getSQLState();
+                safe =
+                        new SQLException(
+                                "COL_SAMPLE_SA_CONNECTION_OR_IDENTITY_FAILED",
+                                state != null && state.matches("[A-Z0-9]{5}") ? state : null,
+                                sql.getErrorCode());
+            } else {
+                safe = new SQLException("COL_SAMPLE_SA_CONNECTION_OR_IDENTITY_FAILED");
+            }
+            if (connection != null) {
+                try {
+                    connection.rollback();
+                } catch (final SQLException | RuntimeException | Error cleanup) {
+                    safe.addSuppressed(new SQLException("COL_SAMPLE_SA_CLEANUP_ROLLBACK_FAILED"));
+                }
+                try {
+                    connection.close();
+                } catch (final SQLException | RuntimeException | Error cleanup) {
+                    safe.addSuppressed(new SQLException("COL_SAMPLE_SA_CLEANUP_CLOSE_FAILED"));
+                }
+            }
+            throw safe;
+        } finally {
+            credentials.clear();
+        }
+    }
+
+    private static boolean literalLoopback(final String value) {
+        if (value == null || !value.matches("[0-9A-Fa-f:.]+")) {
+            return false;
+        }
+        // Literal allowlist only: no DNS/resolver calls, mapped IPv4 loopback is explicit.
+        return Set.of(
+                        "127.0.0.1",
+                        "::1",
+                        "0:0:0:0:0:0:0:1",
+                        "0000:0000:0000:0000:0000:0000:0000:0001",
+                        "::ffff:127.0.0.1",
+                        "::ffff:7f00:1",
+                        "0:0:0:0:0:ffff:7f00:1",
+                        "0:0:0:0:0:ffff:127.0.0.1")
+                .contains(value.toLowerCase(Locale.ROOT));
+    }
+
+    boolean sampleSaOnly() {
+        return sampleSaOnly;
+    }
+
+    boolean sharedSampleOnly() {
+        return sharedSampleOnly;
+    }
+
+    long sharedAdmissionStartedNanos() {
+        return sharedAdmissionStartedNanos;
     }
 
     public static ColetaTemporalLaboratorySession openFromEnvironment() throws SQLException {
@@ -116,6 +362,12 @@ public final class ColetaTemporalLaboratorySession implements DataSource, AutoCl
     static String boundedJdbcUrl(final String validatedJdbcUrl) {
         return validatedJdbcUrl.replaceAll("(?i);\\s*(?:loginTimeout|socketTimeout)\\s*=[^;]*", "")
                 + ";loginTimeout=5;queryTimeout=20;cancelQueryTimeout=5;socketTimeout=30000";
+    }
+
+    private static String sharedSampleJdbcUrl(final String validatedJdbcUrl) {
+        return boundedJdbcUrl(validatedJdbcUrl)
+                .replace(";queryTimeout=20;", ";queryTimeout=10;")
+                .replace(";socketTimeout=30000", ";socketTimeout=15000");
     }
 
     @Override

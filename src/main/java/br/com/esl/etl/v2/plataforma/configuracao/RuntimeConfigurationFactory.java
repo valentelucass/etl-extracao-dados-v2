@@ -83,6 +83,7 @@ public final class RuntimeConfigurationFactory {
                     "shadow.audit.enabled",
                     "shadow.target-kind",
                     "shadow.jdbc-url",
+                    "shadow.sample-sa.enabled",
                     "shadow.approval-reference");
     private static final Set<String> ENVIRONMENT_KEYS =
             Set.of(
@@ -133,6 +134,8 @@ public final class RuntimeConfigurationFactory {
                     "V2_SHADOW_AUDIT_ENABLED",
                     "V2_SHADOW_TARGET_KIND",
                     "V2_SHADOW_JDBC_URL",
+                    "V2_SHADOW_SAMPLE_SA_ENABLED",
+                    "V2_SHADOW_SAMPLE_SA_PASSWORD",
                     "V2_SHADOW_APPROVAL_REFERENCE");
 
     public RuntimeConfiguration load(
@@ -169,6 +172,11 @@ public final class RuntimeConfigurationFactory {
                         : Optional.empty();
         verifySharedEslConfiguration(dataExport, graphQl);
         final ShadowStorageProperties shadowStorage = createShadowStorage(values);
+        if (shadowStorage.auditEnabled()
+                && shadowStorage.usesSampleSaAuthentication()
+                && environmentKind != RuntimeEnvironment.LOCAL_SHADOW) {
+            throw new IllegalArgumentException("COL_SAMPLE_SA_LOCAL_ENVIRONMENT_REQUIRED");
+        }
         return new RuntimeConfiguration(
                 environmentKind, businessZone, clock, dataExport, graphQl, shadowStorage);
     }
@@ -385,6 +393,14 @@ public final class RuntimeConfigurationFactory {
                         values.required("shadow.target-kind", "V2_SHADOW_TARGET_KIND"));
         final String approvalReference =
                 values.optional("shadow.approval-reference", "V2_SHADOW_APPROVAL_REFERENCE");
+        if (values.booleanValue("shadow.sample-sa.enabled", "V2_SHADOW_SAMPLE_SA_ENABLED", false)) {
+            if (targetKind != ShadowStorageTargetKind.LOCAL_EPHEMERAL
+                    || approvalReference != null) {
+                throw new IllegalArgumentException("COL_SAMPLE_SA_LOCAL_TARGET_REQUIRED");
+            }
+            return ShadowStorageProperties.enabledSampleSa(
+                    values.required("shadow.jdbc-url", "V2_SHADOW_JDBC_URL"));
+        }
         return ShadowStorageProperties.enabled(
                 targetKind,
                 values.required("shadow.jdbc-url", "V2_SHADOW_JDBC_URL"),
@@ -443,6 +459,10 @@ public final class RuntimeConfigurationFactory {
             final ConfigurationValues values,
             final Properties fileProperties,
             final Map<String, String> environment) {
+        if (!values.booleanValue("shadow.sample-sa.enabled", "V2_SHADOW_SAMPLE_SA_ENABLED", false)
+                && environment.containsKey("V2_SHADOW_SAMPLE_SA_PASSWORD")) {
+            throw new IllegalArgumentException("COL_SAMPLE_SA_DORMANT_SECRET_REFUSED");
+        }
         if (!values.booleanValue("dataexport.enabled", "V2_DATAEXPORT_ENABLED", false)
                 && (hasSubordinateFileKey(fileProperties, "dataexport.", "dataexport.enabled")
                         || hasSubordinateEnvironmentKey(
