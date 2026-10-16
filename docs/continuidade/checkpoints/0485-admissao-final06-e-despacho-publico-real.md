@@ -1,0 +1,18 @@
+# Checkpoint0485 — admissão final06 e despacho público real
+
+Mesmo0ddd/madrugada EM_EXECUCAO, sem conclusão/recibo comunicação. Anterior0484 SHA256807b114c6c2e7859bf2bc2e97c77f882f01d24243b80f9dfed37abf03ea4a465 intacto. Root recebe Runtime handoff08 real/admission06 SHA256b0b930b6539e0b8d1cf963bea085ebcbc6eca38ffce18b55fdfbcdf18f3ffe09. Runtime atual43pins/41reusados/11classes,12corpos invariantes/49tokens core/4casos novos/3processos conhecidos fechados, um exit1 esperado e dois wrappers0. Provas nativas antigas6 reutilizadas por hash; sem Java recompilado/suites41/22/Maven. Harness07 FAIL tratava exit1 com Finish que recusa por contrato; corrigido apenas Runtime, falha/nativeclosure preservados. Root14pins handoff08 conferidos0drift,43ativos Root33 já conferidos. Admission06 não admite auth/trust/captura.
+
+Root issuer06 check-only atual PASS/43pins/entry e module exatos. Intent37 escrito antes da emissão; root/public-chain-authorization06.json criado uma vez por Root, SHA256b125184563223327511bfc6eca22a580c3b619d610f92f7992e34e30b8d69436, evento ROOTPUB06-ca8ba9b5f13b4312a70de55a203789e2, emitido2026-10-12T02:04:54.609624Z, expires02:14:54.609624Z. Banco recebeu despacho para nova claim/reserva antes de UMA unidade pública. Uma autoridade emitida não comprova conexão/DER; recibo físico ainda não consumido nesta fotografia. Namespace06 separado da autoridade01 consumida; E3/manifest03/04/candidate05 preservados.
+
+Limites exatos: target127.0.0.1:1433/1con/connect5/socket10/deadline60/8certs/64KiBcada/512KiBchain/1048576bytes/512pacotes por direção; auth/provider/credenciais/Login7/SQL/HTTP/retry/fallback/trustWrites0. Banco único executor/prepost16.0.1000.6/hash atuais/fechamento próprio; efeito incerto reconcilia antes de decisão nova, nunca replay. Root issuer não abre socket/SQL nem modifica servidor.
+
+Alternativa independente nova: queryprovider34 indisponível; leitor legado35 retorna64eventos sem certificado no recorte, limite não prova ausência. Root confirmou IDs corretos na documentação Microsoft e consultaXPath36 filtrada antes cap8 obtém evento26018 em2026-10-09T18:31:43.7176313Z, carregamento autogerado semhash. É evidência existente do reinício, não DER atual/hostname/posse/CA/LoadedImage. Fontes quota continua sem recibo vigente após alternativas autorizadas; Regras/Runtime diagnóstico primeira captura concluído na camada própria, data01/10 já preparada.
+
+Referências privadas: root/root-issuer-static-qualification32.json; root/root-exact-successor06-review33.json; root/root-exact-cert-event-intent36.json e result36.json; root/root-actual-runtime08-dispatch-intent37.json; root/root-public-dispatch-review31.json; root/public-chain-authorization06.json; runtime/handoff08.json/public-chain-admission06.json/review07/qualification08.json. Nenhuma conta/credencial/permissão/versão/serviço/certificado/trust/schema/V1/produção alterada Root; zero SQL/HTTP/provider dados novos nesta fotografia.
+
+Próximas ações:
+1. Consumir Banco ocorrência06/claim/recibo PREPOST/DER e fechamento atuais; se desconhecido, reconciliação sem repetir.
+2. Root revisa DER/hash/assinatura/validade/alvo/procedência efetivos e prepara decisão específica se folha diferente; E3 não renovado silenciosamente.
+3. Executar catálogo/writers/captura somente com gates, ou provar inputs externos exatos restantes e consolidar diagnóstico/recibo. Quota vigente6908 exige canal/recibo existente Lucas/adminESL e seis vínculos Runtime.
+
+Banco recebe despacho/WORKING; Runtime, Fontes e Regras encerram entregas na camada declarada/OCIOSOS. Confirmar estados reais no fechamento; nenhum chat reiniciado/callbackHermes/checkbox integral.

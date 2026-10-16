@@ -1,0 +1,8 @@
+{
+  "synthetic": true,
+  "scale": 2,
+  "batchSize": 4,
+  "maximumInFlight": 1,
+  "maximumBytes": 1048576,
+  "deadlineSeconds": 30
+}

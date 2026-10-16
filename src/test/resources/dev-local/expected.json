@@ -1,0 +1,555 @@
+{
+  "synthetic": true,
+  "entities": [
+    {
+      "entity": "Users",
+      "inputRows": 4,
+      "pages": 2,
+      "accepted": 3,
+      "quarantined": 1,
+      "filtered": 0,
+      "checks": [
+        {
+          "path": "/rows/0/presence",
+          "value": "VALUE"
+        },
+        {
+          "path": "/rows/1/presence",
+          "value": "NULL"
+        },
+        {
+          "path": "/rows/2/presence",
+          "value": "ABSENT"
+        },
+        {
+          "path": "/rows/0/sourceKey",
+          "value": "INTEGER:1101"
+        },
+        {
+          "path": "/rows/0/eligible",
+          "value": true
+        },
+        {
+          "path": "/rows/3/valid",
+          "value": false
+        },
+        {
+          "path": "/rows/1/sourceKey",
+          "value": "STRING:1101"
+        }
+      ]
+    },
+    {
+      "entity": "Manifestos",
+      "inputRows": 4,
+      "pages": 2,
+      "accepted": 2,
+      "quarantined": 1,
+      "filtered": 1,
+      "checks": [
+        {
+          "path": "/rows/0/presence",
+          "value": "ABSENT"
+        },
+        {
+          "path": "/rows/1/presence",
+          "value": "NULL"
+        },
+        {
+          "path": "/rows/2/presence",
+          "value": "VALUE"
+        },
+        {
+          "path": "/rows/0/sourceKey",
+          "value": "INTEGER:2101"
+        },
+        {
+          "path": "/rows/0/eligible",
+          "value": true
+        },
+        {
+          "path": "/rows/3/valid",
+          "value": false
+        },
+        {
+          "path": "/rows/0/freshness",
+          "value": "2026-10-01T10:00:00Z"
+        },
+        {
+          "path": "/rows/2/filterDecision",
+          "value": "OUTSIDE_WINDOW"
+        },
+        {
+          "path": "/rows/0/relationKey",
+          "value": "INTEGER:3101"
+        }
+      ]
+    },
+    {
+      "entity": "Coletas",
+      "inputRows": 4,
+      "pages": 2,
+      "accepted": 2,
+      "quarantined": 1,
+      "filtered": 1,
+      "checks": [
+        {
+          "path": "/rows/0/presence",
+          "value": "ABSENT"
+        },
+        {
+          "path": "/rows/1/presence",
+          "value": "NULL"
+        },
+        {
+          "path": "/rows/2/presence",
+          "value": "VALUE"
+        },
+        {
+          "path": "/rows/0/sourceKey",
+          "value": "INTEGER:3101"
+        },
+        {
+          "path": "/rows/0/eligible",
+          "value": true
+        },
+        {
+          "path": "/rows/3/valid",
+          "value": false
+        },
+        {
+          "path": "/rows/0/freshness",
+          "value": "2026-10-01T10:00:00Z"
+        },
+        {
+          "path": "/rows/2/filterDecision",
+          "value": "OUTSIDE_WINDOW"
+        }
+      ]
+    },
+    {
+      "entity": "Fretes",
+      "inputRows": 4,
+      "pages": 2,
+      "accepted": 2,
+      "quarantined": 1,
+      "filtered": 1,
+      "checks": [
+        {
+          "path": "/rows/0/presence",
+          "value": "ABSENT"
+        },
+        {
+          "path": "/rows/1/presence",
+          "value": "NULL"
+        },
+        {
+          "path": "/rows/2/presence",
+          "value": "VALUE"
+        },
+        {
+          "path": "/rows/0/sourceKey",
+          "value": "INTEGER:4101"
+        },
+        {
+          "path": "/rows/0/eligible",
+          "value": true
+        },
+        {
+          "path": "/rows/3/valid",
+          "value": false
+        },
+        {
+          "path": "/rows/0/freshness",
+          "value": "2026-10-01T10:00:00Z"
+        },
+        {
+          "path": "/rows/2/filterDecision",
+          "value": "OUTSIDE_WINDOW"
+        }
+      ]
+    },
+    {
+      "entity": "Cotacoes",
+      "inputRows": 4,
+      "pages": 2,
+      "accepted": 2,
+      "quarantined": 1,
+      "filtered": 1,
+      "checks": [
+        {
+          "path": "/rows/0/presence",
+          "value": "ABSENT"
+        },
+        {
+          "path": "/rows/1/presence",
+          "value": "NULL"
+        },
+        {
+          "path": "/rows/2/presence",
+          "value": "VALUE"
+        },
+        {
+          "path": "/rows/0/sourceKey",
+          "value": "INTEGER:5101"
+        },
+        {
+          "path": "/rows/0/eligible",
+          "value": true
+        },
+        {
+          "path": "/rows/3/valid",
+          "value": false
+        },
+        {
+          "path": "/rows/0/freshness",
+          "value": "2026-10-01T10:00:00Z"
+        },
+        {
+          "path": "/rows/2/filterDecision",
+          "value": "OUTSIDE_WINDOW"
+        },
+        {
+          "path": "/rows/0/total",
+          "value": "150.25"
+        }
+      ]
+    },
+    {
+      "entity": "Localizacao",
+      "inputRows": 4,
+      "pages": 2,
+      "accepted": 2,
+      "quarantined": 1,
+      "filtered": 1,
+      "checks": [
+        {
+          "path": "/rows/0/presence",
+          "value": "ABSENT"
+        },
+        {
+          "path": "/rows/1/presence",
+          "value": "NULL"
+        },
+        {
+          "path": "/rows/2/presence",
+          "value": "VALUE"
+        },
+        {
+          "path": "/rows/0/sourceKey",
+          "value": "INTEGER:6101"
+        },
+        {
+          "path": "/rows/0/eligible",
+          "value": true
+        },
+        {
+          "path": "/rows/3/valid",
+          "value": false
+        },
+        {
+          "path": "/rows/0/freshness",
+          "value": "2026-10-01T10:00:00Z"
+        },
+        {
+          "path": "/rows/2/filterDecision",
+          "value": "OUTSIDE_WINDOW"
+        },
+        {
+          "path": "/rows/0/total",
+          "value": "50.25"
+        },
+        {
+          "path": "/rows/0/volumes",
+          "value": 2
+        }
+      ]
+    },
+    {
+      "entity": "CAP",
+      "inputRows": 4,
+      "pages": 2,
+      "accepted": 3,
+      "quarantined": 1,
+      "filtered": 0,
+      "checks": [
+        {
+          "path": "/rows/0/presence",
+          "value": "ABSENT"
+        },
+        {
+          "path": "/rows/1/presence",
+          "value": "NULL"
+        },
+        {
+          "path": "/rows/2/presence",
+          "value": "VALUE"
+        },
+        {
+          "path": "/rows/0/sourceKey",
+          "value": "SYNTHETIC:CAP:1"
+        },
+        {
+          "path": "/rows/0/eligible",
+          "value": true
+        },
+        {
+          "path": "/rows/3/valid",
+          "value": false
+        },
+        {
+          "path": "/rows/0/values/value/typed",
+          "value": "100.25000000"
+        },
+        {
+          "path": "/rows/0/values/paid/typed",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "entity": "Faturas",
+      "inputRows": 4,
+      "pages": 2,
+      "accepted": 3,
+      "quarantined": 1,
+      "filtered": 0,
+      "checks": [
+        {
+          "path": "/rows/0/presence",
+          "value": "ABSENT"
+        },
+        {
+          "path": "/rows/1/presence",
+          "value": "NULL"
+        },
+        {
+          "path": "/rows/2/presence",
+          "value": "VALUE"
+        },
+        {
+          "path": "/rows/0/sourceKey",
+          "value": "SYNTHETIC:Faturas:1"
+        },
+        {
+          "path": "/rows/0/eligible",
+          "value": true
+        },
+        {
+          "path": "/rows/3/valid",
+          "value": false
+        },
+        {
+          "path": "/rows/0/values/total/typed",
+          "value": "150.25000000"
+        }
+      ]
+    },
+    {
+      "entity": "Inventario",
+      "inputRows": 4,
+      "pages": 2,
+      "accepted": 3,
+      "quarantined": 1,
+      "filtered": 0,
+      "checks": [
+        {
+          "path": "/rows/0/presence",
+          "value": "ABSENT"
+        },
+        {
+          "path": "/rows/1/presence",
+          "value": "NULL"
+        },
+        {
+          "path": "/rows/2/presence",
+          "value": "VALUE"
+        },
+        {
+          "path": "/rows/0/sourceKey",
+          "value": "SYNTHETIC:Inventario:1"
+        },
+        {
+          "path": "/rows/0/eligible",
+          "value": true
+        },
+        {
+          "path": "/rows/3/valid",
+          "value": false
+        },
+        {
+          "path": "/rows/0/values/cnrCSFitInvoicesValue/typed",
+          "value": "25.75000000"
+        }
+      ]
+    },
+    {
+      "entity": "Sinistros",
+      "inputRows": 4,
+      "pages": 2,
+      "accepted": 3,
+      "quarantined": 1,
+      "filtered": 0,
+      "checks": [
+        {
+          "path": "/rows/0/presence",
+          "value": "ABSENT"
+        },
+        {
+          "path": "/rows/1/presence",
+          "value": "NULL"
+        },
+        {
+          "path": "/rows/2/presence",
+          "value": "VALUE"
+        },
+        {
+          "path": "/rows/0/sourceKey",
+          "value": "SYNTHETIC:Sinistros:1"
+        },
+        {
+          "path": "/rows/0/eligible",
+          "value": true
+        },
+        {
+          "path": "/rows/3/valid",
+          "value": false
+        },
+        {
+          "path": "/rows/0/values/insuranceClaimTotal/typed",
+          "value": "550.25000000"
+        }
+      ]
+    },
+    {
+      "entity": "Raster",
+      "inputRows": 4,
+      "pages": 2,
+      "accepted": 3,
+      "quarantined": 1,
+      "filtered": 0,
+      "checks": [
+        {
+          "path": "/rows/0/presence",
+          "value": "ABSENT"
+        },
+        {
+          "path": "/rows/1/presence",
+          "value": "NULL"
+        },
+        {
+          "path": "/rows/2/presence",
+          "value": "VALUE"
+        },
+        {
+          "path": "/rows/0/sourceKey",
+          "value": "SYNTHETIC:Raster:1"
+        },
+        {
+          "path": "/rows/0/eligible",
+          "value": true
+        },
+        {
+          "path": "/rows/3/valid",
+          "value": false
+        },
+        {
+          "path": "/rows/0/stopPresence",
+          "value": "VALUE"
+        },
+        {
+          "path": "/rows/0/stops/0/latitude/typed",
+          "value": "-23.50000000"
+        }
+      ]
+    }
+  ],
+  "freshnessChecks": [
+    {
+      "path": "/insert",
+      "value": "INSERT"
+    },
+    {
+      "path": "/replay",
+      "value": "REPLAY_NO_OP"
+    },
+    {
+      "path": "/stale",
+      "value": "STALE_NO_OP"
+    },
+    {
+      "path": "/update",
+      "value": "UPDATE"
+    },
+    {
+      "path": "/conflict",
+      "value": "EQUAL_FRESHNESS_CONFLICT"
+    }
+  ],
+  "relationBindingChecks": [
+    {
+      "path": "/relationBindings",
+      "value": [
+        {
+          "relation": "MC",
+          "originKey": "INTEGER:2101",
+          "originComponent": "INTEGER:3101",
+          "targetKey": "INTEGER:3101",
+          "targetComponent": "ROOT",
+          "evidence": "synthetic-mc-fixture-v1",
+          "revision": 1,
+          "cardinality": "ONE_TO_ONE",
+          "date": "2026-10-01"
+        },
+        {
+          "relation": "CF",
+          "originKey": "INTEGER:3101",
+          "originComponent": "INTEGER:4101",
+          "targetKey": "INTEGER:4101",
+          "targetComponent": "INTEGER:3101",
+          "evidence": "synthetic-cf-fixture-v1",
+          "revision": 1,
+          "cardinality": "ONE_TO_ONE",
+          "date": "2026-10-01"
+        }
+      ]
+    },
+    {
+      "path": "/relationBindingObservations",
+      "value": [
+        {
+          "relation": "MC",
+          "evidence": "synthetic-mc-fixture-v1",
+          "identityScope": "SYNTHETIC_LOCAL_ONLY",
+          "originEntity": "Manifestos",
+          "originKey": "INTEGER:2101",
+          "originObservedRows": 1,
+          "originEligibleRows": 1,
+          "targetEntity": "Coletas",
+          "targetKey": "INTEGER:3101",
+          "targetObservedRows": 1,
+          "targetEligibleRows": 1,
+          "componentAuthority": "DECLARED_SYNTHETIC_BINDING",
+          "canonicalIdentityProven": false,
+          "status": "OBSERVED_SYNTHETIC_ROOTS"
+        },
+        {
+          "relation": "CF",
+          "evidence": "synthetic-cf-fixture-v1",
+          "identityScope": "SYNTHETIC_LOCAL_ONLY",
+          "originEntity": "Coletas",
+          "originKey": "INTEGER:3101",
+          "originObservedRows": 1,
+          "originEligibleRows": 1,
+          "targetEntity": "Fretes",
+          "targetKey": "INTEGER:4101",
+          "targetObservedRows": 1,
+          "targetEligibleRows": 1,
+          "componentAuthority": "DECLARED_SYNTHETIC_BINDING",
+          "canonicalIdentityProven": false,
+          "status": "OBSERVED_SYNTHETIC_ROOTS"
+        }
+      ]
+    }
+  ]
+}

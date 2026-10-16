@@ -7,6 +7,7 @@ import br.com.esl.etl.v2.plataforma.configuracao.RuntimeConfigurationFactory;
 import br.com.esl.etl.v2.plataforma.configuracao.RuntimePreflightReport;
 import br.com.esl.etl.v2.plataforma.configuracao.SecretInputPolicy;
 import br.com.esl.etl.v2.plataforma.resiliencia.RuntimeExitCategory;
+
 import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
@@ -112,6 +113,9 @@ public final class Main {
             return 2;
         }
         final String command = args.length == 0 ? "--help" : args[0];
+        if ("run".equals(command) && args.length > 1 && "--dev-bundle".equals(args[1])) {
+            return runDevWorkspace(args, standardOut, standardError, dependencies);
+        }
         if ((args.length == 5
                         || (args.length == 7 || args.length == 9 && "--window".equals(args[7]))
                                 && "plan".equals(command)
@@ -206,6 +210,141 @@ public final class Main {
             if (argument.startsWith("--")) {
                 SecretInputPolicy.rejectSecretCommandLineOption(argument);
             }
+        }
+    }
+
+    private static int runDevWorkspace(
+            final String[] args,
+            final PrintStream out,
+            final PrintStream err,
+            final RuntimeDependencies dependencies) {
+        final boolean catalog =
+                args.length == 9
+                        && "--dev-catalog".equals(args[5])
+                        && "--dispatch-sha256".equals(args[7]);
+        final boolean engineDispatch =
+                args.length == 9
+                        && "--dev-engine".equals(args[5])
+                        && "--dispatch-sha256".equals(args[7]);
+        final boolean engine = args.length == 6 && "--dev-engine".equals(args[5]) || engineDispatch;
+        if ((args.length != 5 && !catalog && !engine) || !"--profile".equals(args[3])) {
+            err.println("DEV_WORKSPACE_CLI_INVALID");
+            return 2;
+        }
+        if (engine
+                && !"true"
+                        .equals(
+                                dependencies
+                                        .systemProperties()
+                                        .getProperty("runtime.dev.engine.enabled"))) {
+            err.println("DEV_ENGINE_EXPLICIT_OPT_IN_REQUIRED");
+            return RuntimeExitCategory.CONFIG_AUTH.code();
+        }
+        if (engineDispatch && !args[8].matches("[a-f0-9]{64}")) {
+            err.println("DEV_ENGINE_DISPATCH_DIGEST_INVALID");
+            return RuntimeExitCategory.CONFIG_AUTH.code();
+        }
+        if (dependencies.environment().values().stream().anyMatch(value -> !value.isBlank())) {
+            err.println("DEV_WORKSPACE_CONFIG_ENV_OVERRIDE_REFUSED");
+            return 2;
+        }
+        final String receipt;
+        RuntimeExitCategory category = RuntimeExitCategory.CONFIG_AUTH;
+        try (var bundle = RuntimeDevWorkspaceBundle.open(Path.of(args[2]), args[4])) {
+            final var configurationProperties = new Properties();
+            configurationProperties.putAll(dependencies.systemProperties());
+            // Validated profile selectors are bootstrap controls, not configuration secrets.
+            for (final String selector :
+                    java.util.List.of(
+                            "runtime.dev.workspace.enabled",
+                            "c78.local.shadow.enabled",
+                            "c78.local.shadow.sql-pin.enabled")) {
+                configurationProperties.remove(selector);
+            }
+            if (engine) {
+                configurationProperties.remove("runtime.dev.engine.enabled");
+                configurationProperties.remove("runtime.dev.engine.sample.enabled");
+            }
+            configurationProperties.remove("runtime.dev.source.provisioning.enabled");
+            try (var sourceConfiguration =
+                    RuntimeDevSourceConfiguration.open(
+                            bundle,
+                            dependencies.configurationFactory(),
+                            configurationProperties,
+                            dependencies.environment(),
+                            dependencies.clock())) {
+                final var base = sourceConfiguration.configuration;
+                final var target =
+                        br.com.esl.etl.v2.plataforma.configuracao.C78LocalSqlTarget.approved(
+                                br.com.esl.etl.v2.plataforma.configuracao.C78LocalSqlTarget
+                                        .APPROVAL_REFERENCE);
+                final var effective = RuntimeDevPreparedInvocation.composeC78(base, target);
+                final var composition = new RuntimeCompositionRoot(effective);
+                final var prepared =
+                        composition.prepareDevOperationalRequest(
+                                bundle,
+                                target,
+                                sourceConfiguration.curatedSource,
+                                sourceConfiguration.sampleOptIn);
+                if (engine) {
+                    final var result =
+                            composition.executeDevEngine(
+                                    prepared,
+                                    bundle,
+                                    err,
+                                    engineDispatch ? Path.of(args[6]) : null,
+                                    engineDispatch ? args[8] : null);
+                    receipt = result.receipt();
+                    category = result.category();
+                } else if (catalog) {
+                    receipt =
+                            RuntimeDevCatalogExecution.execute(
+                                    prepared, bundle, Path.of(args[6]), args[8], out);
+                    category = RuntimeExitCategory.SUCCESS;
+                } else {
+                    receipt =
+                            new com.fasterxml.jackson.databind.ObjectMapper()
+                                    .writeValueAsString(prepared.preparationReceipt(bundle));
+                }
+            }
+        } catch (final RuntimeDevWorkspaceBundle.Failure failure) {
+            err.println(failure.getMessage());
+            return RuntimeExitCategory.CONFIG_AUTH.code();
+        } catch (final Exception failure) {
+            publishDevFailure(failure, err);
+            return 2;
+        }
+        // Print only after all byte leases close; preparation never grants effect authority.
+        out.println(receipt);
+        return category.code();
+    }
+
+    static void publishDevFailure(final Exception failure, final PrintStream err) {
+        if (failure
+                instanceof
+                br.com.esl.etl.v2.plataforma.persistencia.controle.C78DevCatalogInspector
+                                        .CatalogFailure
+                                catalog) {
+            err.println("DEV_CATALOG_REFUSED reason=" + catalog.reasonCode());
+        }
+        err.println("DEV_WORKSPACE_PREPARATION_REFUSED type=" + failure.getClass().getName());
+        Throwable current = failure;
+        for (int depth = 0; current != null && depth < 8; depth++) {
+            for (final var frame : current.getStackTrace()) {
+                if (frame.getClassName().startsWith("br.com.esl.etl.v2.")) {
+                    err.println(
+                            "DEV_CAUSE type="
+                                    + current.getClass().getName()
+                                    + " frame="
+                                    + frame.getClassName()
+                                    + "."
+                                    + frame.getMethodName()
+                                    + ":"
+                                    + frame.getLineNumber());
+                    break;
+                }
+            }
+            current = current.getCause();
         }
     }
 
@@ -380,7 +519,14 @@ public final class Main {
             standardError.println("Autorização operacional recusada: " + failure.reason());
             return RuntimeExitCategory.CONFIG_AUTH.code();
         } catch (final IllegalArgumentException failure) {
-            standardError.println("Configuração ou pedido operacional inválido.");
+            final String reason = failure.getMessage();
+            if ("WINDOWS_WORKLOAD_TARGET_REQUIRED".equals(reason)
+                    || "VERIFIED_LOCAL_WORKLOAD_TLS_REQUIRED".equals(reason)) {
+                standardError.println(
+                        "Configuração ou pedido operacional inválido: " + reason + ".");
+            } else {
+                standardError.println("Configuração ou pedido operacional inválido.");
+            }
             return 2;
         } catch (final RuntimeException failure) {
             standardError.println(
@@ -442,42 +588,69 @@ public final class Main {
         standardOut.println("  --help     Exibe esta ajuda.");
         standardOut.println("  --version  Exibe a versão.");
         standardOut.println(
-                "  local-data characterize|capture --artifact <json>  Expansão por artefato sintético local.");
+                "  local-data characterize|capture --artifact <json>  Expansão por artefato"
+                        + " sintético local.");
         standardOut.println(
-                "  local-profile characterize --artifact <json>  Perfis locais e mapeadores tipados.");
+                "  local-profile characterize --artifact <json>  Perfis locais e mapeadores"
+                        + " tipados.");
         standardOut.println(
-                "  local-scenario run --input <json> --oracle <json>  Composição e comparação independente.");
+                "  local-scenario run --input <json> --oracle <json>  Composição e comparação"
+                        + " independente.");
         standardOut.println(
-                "  local-sweep observe --input <json>                Coletas e preview das responsabilidades.");
+                "  local-sweep observe --input <json>                Coletas e preview das"
+                        + " responsabilidades.");
         standardOut.println(
-                "  local-raster characterize|capture --artifact <json>  Raster por artefato sintético local.");
+                "  local-raster characterize|capture --artifact <json>  Raster por artefato"
+                        + " sintético local.");
         standardOut.println(
-                "  Comandos locais: captura somente no shadow explicitamente habilitado, com rollback obrigatório.");
+                "  Comandos locais: captura somente no shadow explicitamente habilitado, com"
+                        + " rollback obrigatório.");
         standardOut.println(
                 "  config validate --config <arquivo>  Valida configuração sem efeitos.");
         standardOut.println(
-                "  local-sequence run --sequence <json>  Executa sequência sintética local com rollback.");
+                "  local-sequence run --sequence <json>  Executa sequência sintética local com"
+                        + " rollback.");
         standardOut.println(
                 "  dry-run --config <arquivo>           Executa somente o preflight seguro.");
         standardOut.println(
                 "  plan --config <arquivo>              Planeja offline, sem criar conexões.");
         standardOut.println("  plan|run --config <arquivo> --temporal <json>");
         standardOut.println(
-                "                                      plan: preview; run: persiste janelas com recibo por janela, sem extrair.");
+                "                                      plan: preview; run: persiste janelas com"
+                        + " recibo por janela, sem extrair.");
         standardOut.println("  plan --config <arquivo> --temporal <json> --request <modelo-json>");
         standardOut.println(
-                "                                      --window <1-4>: exporta uma janela com seu predecessor explícito.");
+                "                                      --window <1-4>: exporta uma janela com seu"
+                        + " predecessor explícito.");
         standardOut.println(
-                "                                      Exporta até quatro requests; execute cada janela por run --request.");
+                "                                      Exporta até quatro requests; execute cada"
+                        + " janela por run --request.");
         standardOut.println(
                 "  run|replay|sweep-preview|sweep-apply|force-run|status --config <arquivo>");
         standardOut.println(
-                "                                      Recusado por deny-all até o subgate V2-022b.");
+                "                                      Recusado por deny-all até o subgate"
+                        + " V2-022b.");
         standardOut.println("  run|replay|force-run|status --config <arquivo> --request <json>");
+        standardOut.println("  run --dev-bundle <manifest> --profile C78_LOCAL_SHADOW_SQL_PIN_V1");
         standardOut.println(
-                "                                      --control-stdin em execução: envie cancel seguido de Enter para cancelar.");
+                "                                      Prepara DEV; efeitos exigem admissão"
+                        + " própria.");
         standardOut.println(
-                "                                      Requer authority Windows/SQL administrada e consumo durável.");
+                "                                      --dev-catalog <Rootdispatch>"
+                        + " --dispatch-sha256 <sha256>");
+        standardOut.println(
+                "                                      Catálogo limitado, somente pelo controller"
+                        + " Banco admitido.");
+        standardOut.println(
+                "                                      --dev-engine: executor real com opt-in"
+                        + " DEV próprio e admissão Banco independente.");
+        standardOut.println("  --dev-engine <Rootdispatch> --dispatch-sha256 <sha256>");
+        standardOut.println(
+                "                                      --control-stdin em execução: envie cancel"
+                        + " seguido de Enter para cancelar.");
+        standardOut.println(
+                "                                      Requer authority Windows/SQL administrada e"
+                        + " consumo durável.");
         standardOut.println(
                 "As cargas de Coletas e Fretes exigem contrato e storage de sombra aprovados.");
     }

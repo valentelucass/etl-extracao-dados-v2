@@ -1,0 +1,18 @@
+# Checkpoint0514 — Ponte Main→engine C78 em implementação
+
+HERMES_863b2573942e, 13/10/2026: Lucas pediu avançar e concluir mais etapas do mesmo objetivo Main V2 integrada/extração real/paridade V1. Retomada0513 conferida; catálogo39 permanece prova real anterior consumida, sem replay. Estado: IMPLEMENTADO_NAO_QUALIFICADO na nova ponte; banco e pacote em implementação. Não é aceite de engine/extração.
+
+Root coordenou os quatro builders existentes, sem novo agente ou callback Hermes. Runtime voltou a processar após o bloqueio histórico de capacidade e criou RuntimeDevEngineBankBinding para ligar uma entrada DEV separada ao executor operacional concreto existente. Banco recebeu ownership de persistência/adaptador C78 e comparação executável do report39; Fontes entregou contrato de quota/caller anterior à factory/segredo; Regras entregou ENGAUTH01–06 para o RUN da Main pública. Windows/E3/BF/catalog conservam seus contratos. Uma interface ou provider ausente não fecha a entrega; integração concreta e qualificação continuam neste pedido.
+
+O RUN de validação autorizado nesta etapa é processo Java real local, com recusa específica do gate ausente/exit20 e nenhum efeito SQL/TDS/HTTP/provider. Gate antes do executor é necessário porque recovery SQL precede fonte no caminho antigo. Backend positivo precisa de admissão real, alvo/bytes/contratos/proteção/limites/reserva próprios; o catálogo ou hashes não concedem efeitos. Snapshot de writers não elimina corrida. Nenhuma unidade física/admissão SQL/HTTP foi emitida pelo Root neste pedido.
+
+STOP429 permanece na operação dependente: Fontes não recebeu quota6908 vigente do mesmo caller. Canal previamente identificado é produção/nonshadow e não tem admissão de leitura/TLS por herança C78. Não sondar para descobrir quota, criar recibo falso, canal, conta ou grant. Antes do efeito fonte/captura é necessária evidência original por canal existente legitimamente autorizado. SQL instalado foi lido localmente: ProductVersion16.0.1000.6, SHA25673dcd4a89ff178cf6b2978ee29dccd8898fe5c1977abac8208aa4ecb5ec43e32 preservados. Nenhuma modificação SQL16/instalação/contas/permissões/ACL/serviços/listeners/certificados/trust/schema/Flyway/V1/PM2/produção.
+
+Inventário inicial privado: root/baseline01.json, 1353 arquivos Java, SHA2566d38e406953bda874a1c1688ce0b5bfd5112906c66d5a98f1315710e4970b027. Evidências já recebidas: fontes01/handoff01.json PONG_863b02_FONTES/contrato entregue sem liberação; regras01/handoff01.json/critério entregue sem delta final. Os quatro terminais foram observados processando a retomada; Fontes e Regras concluíram suas primeiras unidades e ficaram ociosos. Estado histórico running não comprova atividade. ../CONTEXTO_GLOBAL.md continua ausente e não foi recriado. Sem testes novos declarados nem checkbox/percentual promovido.
+
+Próximas ações deste mesmo conjunto:
+1. Banco concluir comparação do catálogo real e adaptador C78 com gate/fechamento; Runtime integrar o port, preservar defaults e qualificar apenas consumidores alterados.
+2. Runtime empacotar bytes atuais e executar Main pública real no gate ausente, com PID/exit/log/fechamento e zero efeitos demonstrados, sem mock convertido em engine/extração.
+3. Root/Regras conferir diffs e resultados recebidos, registrar checkpoint final e recibo863b; extração permanece dependente dos gates externos reais.
+
+Checkpoint anterior0513 SHA256: 09d1d659df13b920dcad1a37d85ee3b597f16974d8e08c8ec0d1d85f03c8211a. Artefatos deste pedido: C:/Users/suporte/Documents/Armazenamento-Projetos/etl-extracao-dados-v2/execucao-esl-shadow-20261008-164952/hermes863b2573942e/. Recibo final ainda não emitido.

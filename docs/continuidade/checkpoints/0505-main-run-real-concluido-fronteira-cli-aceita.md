@@ -1,0 +1,22 @@
+# Checkpoint0505 — RUN real concluído; fronteira CLI aceita
+
+UTC 2026-10-13T01:35:25.954704+00:00, HERMES_4c5eefc033c7 e complemento funcional do Lucas. Pedido delimitado EXECUTADO_ATE_BLOQUEIO_CONCRETO; não significa funcionamento integrado do ETL. Anterior0504 SHA256 93d91f9c4aa7180acfa9affef3f3f10264821d354fb395593d001f3529cd682f preservado. Resultado consolidado e recibo4c5eef são desta mesma unidade; aguardar Lucas antes de outro macrobloco.
+
+Main pública executada em quatro JVMs após a primeira JVM falhar antes da entrada. Lançador corrigido e diagnóstico MAIN-STARTUP-DIAG-01 corrigido na Main; metadata legítima preparada sem segredo/consumo. Último RUN05 PID39204/exit20/968ms/sem timeout, erro real Autorização operacional recusada: UNCONFIGURED. Main leu/configurou/validou request e Registry.plan, atingiu o verifier de artefato administrado e recusou CodeSource local antes autoridade SQL. Processos próprios/streams/readers encerrados; nenhum servidor mantido. Exatamente o caminho/limites em checkpoint0504, runbook main-principal-primeiro-run.md e runtime01/handoff-final08.json.
+
+Regras03 recebeu final08 e aceitou os oito critérios da FRONTEIRA_STARTUP_CLI_REAL,129pins e reuso de corpos dos dois testes históricos conferidos; não engine/extração/tabelas. Root readback18 conferiu177pins. UTC absoluta de criação nativa não consta no recibo do RUN05; não fabricar por elapsed/log.3casos novos PASS across2+1 e6regressões pertinentes com reuso, compile Java17 estrito/formatter/Checkstyle PASS. PMD não executado, três tools pinadas ausentes. AST somente2 fontes atualizadas,42334→42346, gráfico89743739ef40e7e9388debfbe9ae959e5945180f399317e33f479d66eafaa662, exit0/ownactive0/handles fechados. Falhas anteriores e controllers refutados preservados, sem reexecutar Main por auditoria/readback.
+
+Read-only adicional Root21, depois do review: as três pastas aceitas pelo verifier atual (app-bloco54/55/60 em ProgramData/EslEtlV2) foram observadas AUSENTES. Só presença de diretório, sem ACL, manifest, configuração de autoridade, credencial ou SQL. O review anterior corretamente não alegou autoridade ausente; este novo resultado confirma ausência das três instalações admitidas, sem inferir outros locais/identidades. Implantação/renovação/proteção não estão autorizadas neste pedido. Não instalar nem relaxar o verifier para transformar a recusa em sucesso.
+
+Engine de negócio/origem/persistência NÃO iniciaram e dados reais persistidos0/tabelas populadas0. Main exige composição/autoridade Windows strict administrada; C78 opt-in SA não é herdado. Próxima dependência mínima: caminho operacional legítimo compatível com o perfil efetivamente aprovado e artefato/proteção/autoridade vigentes; operação de fonte mantém STOP429 até quota do mesmo caller comprovada. Antes de qualquer captura, alvo/proteção writers/contratos/bytes/limites/reservas novos próprios. Não pedir de novo autorização genérica do teste já executado.
+
+Preservação: SQL instalado16.0.1000.6 e SHA73dcd4a89ff178cf6b2978ee29dccd8898fe5c1977abac8208aa4ecb5ec43e32, arquivo PRE/POST; JAMAIS alterar versão ou instalação. ZERO SQL/TDS/HTTP fornecedor/provider/DDL/Flyway/grants/conta/permissão/ACL/serviço/listener/certificado/trustglobal/PM2/V1/produção. V1/config/originais/retidos e demais fontes fora das duas edições designadas preservados. Nenhum checkbox produtivo promovido.
+
+Final checks20: scanner repositório4437candidatos/4433textos/4binários verificados/0finding/0oversized,88131ms aproximadamente (elapsed efetivo88031ms); trilha-preparation e diff-check PASS, UTF8/noBOM/noNUL/sourcepins/histórias como sufixo exato PASS. Esta atualização documental final será qualificada em DELTA nos mesmos validadores/scanner, sem outra suíte Java/SQL. Root/closure22 registra resultados exatos.
+
+Participantes efetivamente observados OCIOSOS, com PONG/ACK: Builder ETL, Fontes e Contratos, Regras de Negócio, Runtime e Qualificação. Codex integra e encerra este bloco; PONG_4c5eef_CODEX. root/participants21.json guarda terminais reais e pins, não texto digitado. Sem callback Hermes/Codex, novos agentes/sessões, polling/espera artificial ou próximo macrobloco.
+
+Próximas ações:
+1. Concluir delta documental/recibo UTF8 e readback; encerrar o pedido atual.
+2. Aguardar decisão do Lucas sobre a próxima unidade, levando o gate operacional localizado e quota pendente.
+3. Não executar provisionamento/captura/SQL/fonte, alterar SQL/V1 ou renovar autoridade por inferência desta prova.

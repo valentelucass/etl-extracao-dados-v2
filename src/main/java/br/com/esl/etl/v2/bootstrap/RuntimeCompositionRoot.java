@@ -7,6 +7,7 @@ import br.com.esl.etl.v2.plataforma.autorizacao.RuntimeAuthorizationBoundary;
 import br.com.esl.etl.v2.plataforma.configuracao.RuntimeConfiguration;
 import br.com.esl.etl.v2.plataforma.configuracao.RuntimePreflightReport;
 import br.com.esl.etl.v2.plataforma.configuracao.RuntimeTargetPreflight;
+
 import java.util.Objects;
 import java.util.UUID;
 
@@ -86,6 +87,57 @@ public final class RuntimeCompositionRoot {
         return validateConfiguration();
     }
 
+    RuntimeDevPreparedInvocation prepareDevOperationalRequest(
+            final RuntimeDevWorkspaceBundle bundle,
+            final br.com.esl.etl.v2.plataforma.configuracao.C78LocalSqlTarget target) {
+        return prepareDevOperationalRequest(bundle, target, false, false);
+    }
+
+    RuntimeDevPreparedInvocation prepareDevOperationalRequest(
+            final RuntimeDevWorkspaceBundle bundle,
+            final br.com.esl.etl.v2.plataforma.configuracao.C78LocalSqlTarget target,
+            final boolean curatedSource,
+            final boolean sampleOptIn) {
+        validateConfiguration();
+        if (!configuration.shadowStorage().usesC78LocalAuthentication()
+                || !target.jdbcUrl().equals(configuration.shadowStorage().jdbcUrl())) {
+            throw new IllegalArgumentException("DEV_C78_EFFECTIVE_TARGET_REQUIRED");
+        }
+        final var request = RuntimeOperationalRequest.read(configuration, bundle.request());
+        if (request.laboratory()) {
+            throw new IllegalArgumentException("DEV_LABORATORY_REQUEST_REFUSED");
+        }
+        if (sampleOptIn) {
+            RuntimeDevSampleExecution.validateScope(configuration, request);
+        }
+        return new RuntimeDevPreparedInvocation(
+                configuration, request, target, curatedSource, sampleOptIn);
+    }
+
+    RuntimeDevEngineExecution.Result executeDevEngine(
+            final RuntimeDevPreparedInvocation prepared,
+            final RuntimeDevWorkspaceBundle bundle,
+            final java.io.PrintStream diagnostic,
+            final java.nio.file.Path dispatch,
+            final String dispatchSHA256)
+            throws Exception {
+        if (prepared.configuration != configuration
+                || prepared.request.laboratory()
+                || prepared.request.users != null
+                || prepared.request.temporal != null
+                || prepared.request.dependency != null
+                || !java.util.Set.of(
+                                br.com.esl.etl.v2.plataforma.fonte.dataexport.DataExportTemplate
+                                        .COLETAS,
+                                br.com.esl.etl.v2.plataforma.fonte.dataexport.DataExportTemplate
+                                        .FRETES)
+                        .contains(prepared.request.template)) {
+            throw new IllegalArgumentException("DEV_ENGINE_PREPARED_SCOPE_REQUIRED");
+        }
+        return RuntimeDevEngineExecution.execute(
+                prepared, bundle, diagnostic, dispatch, dispatchSHA256);
+    }
+
     /**
      * Scope is frozen before the authority; business composition happens only after consumption.
      */
@@ -138,7 +190,8 @@ public final class RuntimeCompositionRoot {
                                 != br.com.esl.etl.v2.plataforma.resiliencia.RuntimeExitCategory
                                         .SUCCESS) {
                             diagnostic.accept(
-                                    "RUNTIME_DEPENDENCY reason=DEPENDENCY_NOT_PUBLISHED source_composed=0");
+                                    "RUNTIME_DEPENDENCY reason=DEPENDENCY_NOT_PUBLISHED"
+                                            + " source_composed=0");
                             return br.com.esl.etl.v2.plataforma.resiliencia.RuntimeExitCategory
                                     .SOURCE_DQ;
                         }

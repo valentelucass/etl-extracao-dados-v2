@@ -7,6 +7,7 @@ import br.com.esl.etl.v2.modulos.coletas.domain.ColetaStatus;
 import br.com.esl.etl.v2.plataforma.identidade.ScopedSourceIdentity;
 import br.com.esl.etl.v2.plataforma.persistencia.staging.StagingPersistenceException;
 import br.com.esl.etl.v2.plataforma.resiliencia.CancellationToken;
+
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -15,16 +16,22 @@ import java.sql.Types;
 import java.util.Calendar;
 import java.util.Objects;
 import java.util.TimeZone;
+
 import javax.sql.DataSource;
 
 /** Adaptador JDBC de uma página 6908, com uma transação e sem DML por atributo na JVM. */
 public final class JdbcSqlServerColetaStagingGateway implements ColetaStagingGateway {
 
     private static final String STAGE_COLETA =
-            "{call stg.usp_stage_coleta_record(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
+            "{call stg.usp_stage_coleta_record(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,"
+                    + " ?, ?, ?, ?, ?, ?)}";
 
     private final DataSource dataSource;
     private final boolean exactTemporalRepresentation;
+    private final boolean ownsTransaction;
+    private final int maximumRows;
+    private final int querySeconds;
+    private final boolean perCall;
 
     public JdbcSqlServerColetaStagingGateway(final DataSource dataSource) {
         this(dataSource, false);
@@ -33,9 +40,47 @@ public final class JdbcSqlServerColetaStagingGateway implements ColetaStagingGat
     /** Explicit V027 contract; historical callers keep their original SQL binding. */
     public JdbcSqlServerColetaStagingGateway(
             final DataSource dataSource, final boolean exactTemporalRepresentation) {
+        this(
+                dataSource,
+                exactTemporalRepresentation,
+                true,
+                ColetaStageRecord.MAXIMUM_PAGE_SIZE,
+                20,
+                false);
+    }
+
+    private JdbcSqlServerColetaStagingGateway(
+            final DataSource dataSource,
+            final boolean exactTemporalRepresentation,
+            final boolean ownsTransaction,
+            final int maximumRows,
+            final int querySeconds,
+            final boolean perCall) {
         this.dataSource =
                 Objects.requireNonNull(dataSource, "O DataSource de Coletas é obrigatório.");
         this.exactTemporalRepresentation = exactTemporalRepresentation;
+        this.ownsTransaction = ownsTransaction;
+        this.maximumRows = maximumRows;
+        this.querySeconds = querySeconds;
+        this.perCall = perCall;
+    }
+
+    /** Real staging in the caller's existing transaction; only the caller commits/rolls back. */
+    public static JdbcSqlServerColetaStagingGateway borrowedTransaction(
+            final DataSource dataSource, final int maximumRows) {
+        if (maximumRows < 1 || maximumRows > ColetaStageRecord.MAXIMUM_PAGE_SIZE) {
+            throw new IllegalArgumentException("COLETA_BORROWED_BATCH_LIMIT");
+        }
+        return new JdbcSqlServerColetaStagingGateway(
+                dataSource, false, false, Math.min(maximumRows, 100), 10, false);
+    }
+
+    /**
+     * SAMPLE12 executes each qualified23-bind CALL so its owner verifies transaction identity after
+     * each.
+     */
+    public static JdbcSqlServerColetaStagingGateway borrowedSample12(final DataSource dataSource) {
+        return new JdbcSqlServerColetaStagingGateway(dataSource, false, false, 12, 10, true);
     }
 
     @Override
@@ -50,26 +95,46 @@ public final class JdbcSqlServerColetaStagingGateway implements ColetaStagingGat
         final CancellationToken cancellation =
                 Objects.requireNonNull(cancellationToken, "O cancelamento é obrigatório.");
         cancellation.throwIfCancellationRequested();
+        if (required.size() > maximumRows) {
+            throw new IllegalArgumentException("COLETA_BORROWED_BATCH_LIMIT");
+        }
         try (Connection connection = dataSource.getConnection()) {
-            connection.setAutoCommit(false);
+            if (ownsTransaction) {
+                connection.setAutoCommit(false);
+            } else if (connection.getAutoCommit()) {
+                throw new SQLException("COLETA_OWNER_TRANSACTION_REQUIRED");
+            }
             try (CallableStatement statement = connection.prepareCall(STAGE_COLETA)) {
-                statement.setQueryTimeout(20);
+                statement.setQueryTimeout(querySeconds);
                 for (int index = 0; index < required.size(); index++) {
+                    cancellation.throwIfCancellationRequested();
                     bind(statement, required, required.recordAt(index));
-                    statement.addBatch();
+                    if (perCall) {
+                        statement.executeUpdate();
+                    } else {
+                        statement.addBatch();
+                    }
                 }
                 cancellation.throwIfCancellationRequested();
-                statement.executeBatch();
+                if (!perCall) {
+                    statement.executeBatch();
+                }
                 if (exactTemporalRepresentation) {
                     ColetaExactTimeWriter.stage(connection, required, cancellation);
                 }
                 cancellation.throwIfCancellationRequested();
-                connection.commit();
+                if (ownsTransaction) {
+                    connection.commit();
+                }
             } catch (final SQLException exception) {
-                rollback(connection, exception);
+                if (ownsTransaction) {
+                    rollback(connection, exception);
+                }
                 throw exception;
             } catch (final RuntimeException exception) {
-                rollback(connection, exception);
+                if (ownsTransaction) {
+                    rollback(connection, exception);
+                }
                 throw exception;
             }
         } catch (final SQLException exception) {

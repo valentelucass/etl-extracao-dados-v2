@@ -7,6 +7,11 @@ public record ExpansionValue<T>(Presence presence, Wire wire, String raw, T valu
     public ExpansionValue {
         Objects.requireNonNull(presence);
         Objects.requireNonNull(wire);
+        if ((presence == Presence.ABSENT && wire != Wire.ABSENT)
+                || (presence == Presence.NULL && wire != Wire.NULL)
+                || (presence == Presence.VALUE && (wire == Wire.ABSENT || wire == Wire.NULL))) {
+            throw new IllegalArgumentException("EXP_WIRE_PRESENCE_CONFLICT");
+        }
         if (raw != null && raw.length() > 4000) {
             throw new IllegalArgumentException("EXP_RAW_BOUND");
         }

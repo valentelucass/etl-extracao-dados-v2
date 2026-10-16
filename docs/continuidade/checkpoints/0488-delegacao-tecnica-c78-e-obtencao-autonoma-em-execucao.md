@@ -1,0 +1,15 @@
+# Checkpoint0488 — decisão técnica delegada; obtenção autônoma em execução
+
+HERMES_5d489ad1eea2 vigente: Lucas delegou a decisão C78 condicionada a evidência real independente e pediu que os agentes encontrem quota e imagem, sem voltar a solicitar documentos que ele não tem. Retoma0487, não cria outro macrobloco. Anterior0487 preservado; SHA em initial-inventory01.json. Estado EM_EXECUCAO, nenhum final/recibo de comunicação emitido.
+
+Unidade privada execucao-esl-shadow-20261008-164952/hermes5d489ad1eea2: inventário/snapshots antes preservados; builder-tasks02 e batch03 comprovam quatro prompts efetivamente recebidos. Mesmas sessões. Banco único SQL/TDS; Root único docs/CI. Nenhuma authority/claim histórica renovada. CONTEXTO_GLOBAL continua ausente no pai, sem inferência.
+
+Runtime snapshot01 real: uma unidade OS read-only/deadline30s, exit0,4,272s, child/SCM/resources fechados. ServiçoMSSQLSERVER/PID48480/criação09Oct18:31:41.951705Z PREPOST estáveis; listeners1433 ::/0.0.0.0 owner48480 preexistentes, não declararloopbackOnlyglobal. Arquivo instalado16.0.1000.6/hash73dcd4...c43e32 estável e assinaturaMicrosoftcacheonly. CIMExecutablePath null: não prova LoadedImage/certificado/posse. Root-current-binding-review07 conferiu pins/resultados reais, sem promover camada.
+
+Banco investiga/qualifica alternativa kernel SystemProcessIdInformation88 e observador C78 estrito Finished NOAUTH para review. OpenProcess negado inalterado não se repete. Direitos atuais somente; nativebuffers/handles finitos e fechamento conhecido; sem driver/privilegeadjust/ACL/elevation. TLS ainda NÃO despachado, autorizações físicas próprias após bytes/review. Cadeia/posse/service-acceptedtuple/imagem atuais exigidos antes da adoção para autenticação; continuar/delegar não certifica identidade.
+
+Fontes obtém recibo EXISTENTE6908 por rotas novas/delta, sem HTTP ESL; STOP429/CLOSED/PAUSED mantidos. Root consulta Pages6908quota: zeroitems/nextnull/partialfalse, não ausência global. Busca diretório pluginsESLCloud só retorna integrações nãoESL e nãoinstaladas; nenhum plugin conectado provado ou instalado. Ferramentas atuais sem ESL/audit/email/Slack/Telegram e Maestri sem portal; canais mínimos externos só após alternativas reais esgotadas. Nenhuma busca interna atribuída ao Lucas.
+
+Regras entrega critério verificável de confiança/provas insuficientes, sem fixtures antigas ou efeitos. E3/BF/defaults/SQL16.0.1000.6/contas/identidades/permissões/serviço/listeners/trustglobal/schema/V1/produção preservados. Nenhum SQL/HTTP/TLS/provider/captura/commit/dados novos desta fotografia. Ainda sem resultado nativo/posseC78/quota vigente ou aceite integral. Data01/10 já preparada.
+
+Próximas três ações: consumir resultados OS Banco e critérios Regras/Runtime; qualificar/admitir/despachar uma unidade TLS C78NOAUTH somente se adequada com alvo/pin/service/image/bytes atuais; decidir opt-in isolado/catálogo próprios e captura apenas sob TODOSgates/quota/writers/caller/reservas/confirmar. Não encerrar em plano enquanto houver correção interna elegível. Nenhum callbackHermes/novo chat/polling de espera.

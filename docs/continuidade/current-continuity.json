@@ -1,0 +1,57 @@
+{
+  "schema": "V2_CURRENT_DOCUMENT_CONTINUITY_V1",
+  "request": "HERMES_3cdb8d7b3d12",
+  "purpose": "CURRENT_DOCUMENTS_WITH_EXPLICIT_HISTORICAL_EVIDENCE_STATE",
+  "authorizesPhysicalEffects": false,
+  "grantsHistoricalAcceptance": false,
+  "changesCanonicalCheckboxes": false,
+  "checkpoint": "docs/continuidade/checkpoints/0527-3cdb-memoria-atual-e-causa-wms-dev.md",
+  "documents": [
+    {
+      "path": "AGENTS.md",
+      "bytes": 51533,
+      "sha256": "ec7a95cdda1e559e6480823ce72096a90013a99a1c99568bfafe52822b535c5a"
+    },
+    {
+      "path": "STATES.md",
+      "bytes": 1708766,
+      "sha256": "53e83948d73fe6cf1950a24dce94bdeb0df9fe9f66fed27c754bfea00ff57be4"
+    },
+    {
+      "path": "TRILHA_CONCLUSAO_POR_MODELO.md",
+      "bytes": 357037,
+      "sha256": "76f35cd6cfa7c07dd23a1d786211d8a95e27413cf4642b58b696334ce3cc1e28"
+    },
+    {
+      "path": "docs/continuidade/RETOMADA.md",
+      "bytes": 440594,
+      "sha256": "644ca64eb6e984fc209bacefdc90a995de1fdfeb2bd326ca7ea8ad6752226156"
+    },
+    {
+      "path": "docs/runbooks/continuidade-agentes.md",
+      "bytes": 13060,
+      "sha256": "770e472d3f2d6f1d7af85610aec4b7c9bc0b0973afe722fd8a9f14e268481d29"
+    },
+    {
+      "path": "scripts/validation/Test-CurrentContinuity.ps1",
+      "bytes": 6766,
+      "sha256": "6ef6ce7a02a57da8bfc9e45ecaf0f14abb695775b531b9eb3fb2fb8653ec637c"
+    },
+    {
+      "path": "docs/continuidade/checkpoints/0527-3cdb-memoria-atual-e-causa-wms-dev.md",
+      "bytes": 4697,
+      "sha256": "f3e2d74909f84aed14dd54a1e67b6ec144652401d0ed31adb35be13c73c3d8b9"
+    }
+  ],
+  "historical": {
+    "manifest": {
+      "path": "docs/continuidade/tres-etapas/handoff/manifesto.json",
+      "sha256": "b7efe60fb2997be5e5e4171e22f829c4235d73e334fee938f55a72aee85bb528"
+    },
+    "closedReceipt": {
+      "path": "target/tres-etapas-20260922-01/closed-receipt.json",
+      "sha256": "d9ea24973b83430db76093b096fc449da29206216246452ae4e49ca163e2f465"
+    },
+    "expectedReceiptState": "MISSING_NOT_RECONSTRUCTED"
+  }
+}

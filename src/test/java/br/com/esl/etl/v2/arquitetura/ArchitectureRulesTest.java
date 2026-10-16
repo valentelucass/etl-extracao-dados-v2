@@ -5,12 +5,16 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import br.com.esl.etl.v2.bootstrap.Main;
+
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.sun.source.tree.CompilationUnitTree;
 import com.sun.source.tree.MemberSelectTree;
 import com.sun.source.util.JavacTask;
 import com.sun.source.util.TreeScanner;
+
+import org.junit.jupiter.api.Test;
+
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.lang.reflect.GenericArrayType;
@@ -40,10 +44,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.BaseStream;
 import java.util.stream.Stream;
+
 import javax.tools.JavaFileObject;
 import javax.tools.SimpleJavaFileObject;
 import javax.tools.ToolProvider;
-import org.junit.jupiter.api.Test;
 
 public class ArchitectureRulesTest {
 
@@ -61,8 +65,9 @@ public class ArchitectureRulesTest {
                                 + "com.fasterxml.jackson.databind.ObjectMapper(); } }",
                         "import java.sql.Connection; class Example {}",
                         "import java.net.http.HttpClient; class Example {}",
-                        "import br.com.esl.etl.v2.modulos.coletas.aplicacao.ColetaDataExportRecordMapper; "
-                                + "class Example {}")) {
+                        "import"
+                            + " br.com.esl.etl.v2.modulos.coletas.aplicacao.ColetaDataExportRecordMapper;"
+                            + " class Example {}")) {
             final SourceFile fixture =
                     new SourceFile(
                             "Example.java",
@@ -77,17 +82,17 @@ public class ArchitectureRulesTest {
                         new SourceFile(
                                 "Example.java",
                                 """
-                package br.com.esl.etl.v2.modulos.qualquer.domain;
-                // com.fasterxml.jackson.databind.ObjectMapper is forbidden in executable code.
-                class Example { String description = "java.sql.Connection"; }
-                """),
+package br.com.esl.etl.v2.modulos.qualquer.domain;
+// com.fasterxml.jackson.databind.ObjectMapper is forbidden in executable code.
+class Example { String description = "java.sql.Connection"; }
+"""),
                         new SourceFile(
                                 "Adapter.java",
                                 """
-                package br.com.esl.etl.v2.modulos.qualquer.aplicacao;
-                import com.fasterxml.jackson.databind.ObjectMapper;
-                class Adapter {}
-                """)));
+                                package br.com.esl.etl.v2.modulos.qualquer.aplicacao;
+                                import com.fasterxml.jackson.databind.ObjectMapper;
+                                class Adapter {}
+                                """)));
     }
 
     private static void assertDomainBoundary(final Collection<SourceFile> sources)
@@ -96,9 +101,9 @@ public class ArchitectureRulesTest {
         final Pattern forbidden =
                 Pattern.compile(
                         "^(?:com\\.fasterxml\\.jackson|com\\.google\\.gson|org\\.json|java\\.sql|javax\\.sql"
-                                + "|java\\.net|javax\\.persistence|jakarta\\.persistence|org\\.hibernate"
-                                + "|br\\.com\\.esl\\.etl\\.v2\\.(?:bootstrap|plataforma\\.(?:fonte|persistencia))"
-                                + "|br\\.com\\.esl\\.etl\\.v2\\.modulos\\.[^.]+\\.aplicacao)(?:\\.|$)");
+                            + "|java\\.net|javax\\.persistence|jakarta\\.persistence|org\\.hibernate"
+                            + "|br\\.com\\.esl\\.etl\\.v2\\.(?:bootstrap|plataforma\\.(?:fonte|persistencia))"
+                            + "|br\\.com\\.esl\\.etl\\.v2\\.modulos\\.[^.]+\\.aplicacao)(?:\\.|$)");
         final List<String> violations = new ArrayList<>();
         for (final SourceFile source : sources) {
             final JavaFileObject file =
@@ -181,61 +186,165 @@ public class ArchitectureRulesTest {
     private static final Map<String, String> BOUNDED_COLLECTION_APIS =
             Map.ofEntries(
                     Map.entry(
+                            "br.com.esl.etl.v2.plataforma.persistencia.controle.C78DevCatalogPlan#queries()",
+                            "F4: lista literal imutável de exatamente12 SELECTs de metadata; o modo"
+                                    + " escolhe somente DQ_METADATA ou MODULE_CONTRACTS, sem"
+                                    + " entidades."),
+                    Map.entry(
+                            "br.com.esl.etl.v2.plataforma.persistencia.controle.C78DevCatalogInspector$Evidence#rows()",
+                            "F4: até512 linhas técnicas por SELECT fixo; células de256 caracteres"
+                                    + " ou512 para chunks HEX de módulos. ORIGINAL12 conserva65536"
+                                    + " caracteres por query; coverage limita1500000 no relatório,"
+                                    + " sem dados ou chaves de negócio."),
+                    Map.entry(
+                            "br.com.esl.etl.v2.plataforma.persistencia.controle.C78DevCatalogInspector$Report#evidence()",
+                            "F4: exatamente12 evidências imutáveis em ordem fixa; ORIGINAL12"
+                                + " conserva262144 caracteres, CONTRACT_COVERAGE12 limita1500000."
+                                + " Modo explícito e saída UTF-8 até2097152 bytes; não é captura."),
+                    Map.entry(
+                            "br.com.esl.etl.v2.plataforma.configuracao.C78LocalTrustManager#getAcceptedIssuers()",
+                            "ADR0062: retorno literal de array vazio, zero emissores; não enumera"
+                                    + " certificados ou confiança global."),
+                    Map.entry(
+                            "br.com.esl.etl.v2.plataforma.persistencia.devlocal.DevLocalLedger#"
+                                    + "readOutput(java.lang.String,java.lang.String)",
+                            "DEV-FS-001: uma cópia defensiva de um artefato sintético já journaled;"
+                                + " máximo4194304bytes, size/hash antes da entrega, overflow4194305"
+                                + " testado."),
+                    Map.entry(
+                            "br.com.esl.etl.v2.plataforma.persistencia.devlocal.DevLocalLedger#runs()",
+                            "DEV-FS-001: no máximo1000 recibos técnicos imutáveis; replay lê no"
+                                + " máximo100000 records limitados4096bytes, não contém universo de"
+                                + " registros de negócio."),
+                    Map.entry(
+                            "br.com.esl.etl.v2.plataforma.persistencia.devlocal.DevLocalLedger#pendingStartIds()",
+                            "DEV-FS-002: lista imutável de zero ou uma intenção própria pendente;"
+                                    + " segundo slot é recusado, sem reconciliação automática."),
+                    Map.entry(
+                            "br.com.esl.etl.v2.plataforma.persistencia.devlocal.DevLocalLedger#orphanFiles(java.lang.String)",
+                            "DEV-FS-001: nomes técnicos em3diretórios locais declarados,"
+                                    + " limite100000por diretório; somente leitura, sem purge. Não"
+                                    + " carrega o conteúdo dos arquivos."),
+                    Map.entry(
+                            "br.com.esl.etl.v2.plataforma.persistencia.devlocal.DevLocalLedger$Run#events()",
+                            "DEV-FS-001: metadata técnica imutável; events+outputs limitado100000"
+                                + " antes da cópia, overflow100001 testado; payloads permanecem em"
+                                + " arquivos próprios."),
+                    Map.entry(
+                            "br.com.esl.etl.v2.plataforma.persistencia.devlocal.DevLocalLedger$Run#outputs()",
+                            "DEV-FS-001: referências/hash/size imutáveis de artefatos; teto"
+                                + " compartilhado100000 com events verificado antes da cópia; nunca"
+                                + " entrega todos os bytes."),
+                    Map.entry(
+                            "br.com.esl.etl.v2.plataforma.fonte.dataexport.DataExportObservedPage$PhysicalObservation#records()",
+                            "TEST-OBS-PHYSICAL-001: zero ou um registro do corpo completo; envelope"
+                                + " fechado, coleções conhecidas somam no máximo um item e"
+                                + " estruturas desconhecidas são recusadas. Testes physical* cobrem"
+                                + " overflow, irmãos, aninhamento e vazio; entidades e per remoto"
+                                + " continuam UNVERIFIED."),
+                    Map.entry(
+                            "br.com.esl.etl.v2.plataforma.fonte.dataexport.ExpansionObservedPageMapper#mapPhysical("
+                                + "br.com.esl.etl.v2.plataforma.fonte.dataexport.DataExportObservedPage$PhysicalObservation)",
+                            "TEST-OBS-PHYSICAL-001: lista imutável de zero ou uma observação tipada"
+                                    + " derivada da página física já limitada, binding nulo; testes"
+                                    + " physicalExpansion* cobrem vazio, quarentena e recusa de"
+                                    + " estruturas/associações excedentes antes do mapper."),
+                    Map.entry(
+                            "br.com.esl.etl.v2.plataforma.fonte.dataexport.DataExportObservedPage#records()",
+                            "OBS-DE-DELIVERY-100: somente página 1/per 1; factory exige maximumRows"
+                                + " 1..100, página recusa overflow antes da entrega e devolve"
+                                + " cópias defensivas. DataExportObservedPageTest cobre 100/101"
+                                + " linhas e vazio; limite local não comprova paginação remota nem"
+                                + " completude."),
+                    Map.entry(
+                            "br.com.esl.etl.v2.plataforma.fonte.dataexport.ExpansionObservedPageMapper#map("
+                                + "br.com.esl.etl.v2.plataforma.fonte.dataexport.DataExportObservedPage)",
+                            "OBS-DE-DELIVERY-100: uma observação por linha da única página limitada"
+                                    + " a 100; retorno imutável, inclusive vazio, sem acumular"
+                                    + " travessia. DataExportObservedPageTest cobre 100/101 linhas,"
+                                    + " vazio e binding nulo."),
+                    Map.entry(
+                            "br.com.esl.etl.v2.plataforma.fonte.graphql.UsersGraphQlObservationClient$Receipt#records()",
+                            "OBS-USERS-FIRST1-001: lista imutável de zero ou um UsuarioStageRecord;"
+                                + " parser recusa edges acima de first=1 e adapter recusa"
+                                + " nodeCount>1. UsersGraphQlObservationClientTest cobre overflow,"
+                                + " vazio, hasNext e quarentena, sem seguir cursor ou declarar"
+                                + " snapshot completo."),
+                    Map.entry(
+                            "br.com.esl.etl.v2.bootstrap.RuntimeDevEngineBankBinding$SampleExpectation#expectedRoots()",
+                            "SAMPLE12-OWNER: exactly one immutable scoped root; constructor checks"
+                                    + " cardinality before copying, physical multiplicity1..12,"
+                                    + " empty field-presence and source page1; memory only."),
+                    Map.entry(
+                            "br.com.esl.etl.v2.bootstrap.RuntimeDevEngineBankBinding$SampleExpectation#batchPages()",
+                            "SAMPLE12-OWNER: exactly one immutable map entry, checked before"
+                                    + " copying; batch1 maps to source page1 under rows1..12."),
+                    Map.entry(
                             "br.com.esl.etl.v2.modulos.coletas.domain.ColetaObservedRootComparator$ExpectedRoot#fieldPresence()",
-                            "COL-OBS-01: apenas os 13 campos 6908 declarados; o construtor valida chaves e teto antes da copia."),
+                            "COL-OBS-01: apenas os 13 campos 6908 declarados; o construtor valida"
+                                    + " chaves e teto antes da copia."),
                     Map.entry(
                             "br.com.esl.etl.v2.modulos.coletas.domain.ColetaObservedRootComparator$ExpectedRoot#sourcePages()",
-                            "COL-OBS-01: no maximo quatro paginas 1..4 por raiz; o construtor valida antes da copia."),
+                            "COL-OBS-01: no maximo quatro paginas 1..4 por raiz; o construtor"
+                                    + " valida antes da copia."),
                     Map.entry(
                             "br.com.esl.etl.v2.modulos.coletas.domain.ColetaObservedRootComparator$ObservedRow#fieldPresence()",
-                            "COL-OBS-01: apenas os 13 campos 6908 declarados; o construtor valida chaves e teto antes da copia."),
+                            "COL-OBS-01: apenas os 13 campos 6908 declarados; o construtor valida"
+                                    + " chaves e teto antes da copia."),
                     Map.entry(
                             "br.com.esl.etl.v2.plataforma.persistencia.coletas.ColetaShadowSetComparator"
-                                    + "#readBoundedBatchRows(br.com.esl.etl.v2.plataforma.persistencia.coletas."
-                                    + "ColetaTemporalLaboratorySession,java.util.UUID,"
-                                    + "br.com.esl.etl.v2.plataforma.identidade.ScopedSourceIdentity,int,java.lang.String)",
-                            "COL-OBS-01: ate 1000 linhas da unica executionId, com overflow recusado "
-                                    + "antes de adicionar; nao le universo global."),
+                                + "#readBoundedBatchRows(br.com.esl.etl.v2.plataforma.persistencia.coletas."
+                                + "ColetaTemporalLaboratorySession,java.util.UUID,"
+                                + "br.com.esl.etl.v2.plataforma.identidade.ScopedSourceIdentity,int,java.lang.String)",
+                            "COL-OBS-01: ate 1000 linhas da unica executionId, com overflow"
+                                    + " recusado antes de adicionar; nao le universo global."),
                     Map.entry(
                             "br.com.esl.etl.v2.bootstrap.DeclaredSqlOracles#factCandidates()",
                             "INT-05: exatamente cinco nomes MAT01–MAT05 validados no parser."),
                     Map.entry(
                             "br.com.esl.etl.v2.bootstrap.QualificationScenarioVerifier$Result#sweepPreview()",
-                            "INT-06: zero ou exatamente33 responsabilidades; construtor limita antes da cópia."),
+                            "INT-06: zero ou exatamente33 responsabilidades; construtor limita"
+                                    + " antes da cópia."),
                     Map.entry(
                             "br.com.esl.etl.v2.plataforma.analitico.SyntheticCollectionSnapshot#declaredUniverse()",
-                            "INT-06: null legado ou2..32 roots distintos; construtor limita antes da cópia."),
+                            "INT-06: null legado ou2..32 roots distintos; construtor limita antes"
+                                    + " da cópia."),
                     Map.entry(
                             "br.com.esl.etl.v2.bootstrap.QualificationMetrics$Snapshot#inputs()",
-                            "QUAL-G: exatamente11 contadores técnicos; construtor valida antes da cópia."),
+                            "QUAL-G: exatamente11 contadores técnicos; construtor valida antes da"
+                                    + " cópia."),
                     Map.entry(
                             "br.com.esl.etl.v2.bootstrap.QualificationMonitoring#row(long)",
-                            "QUAL-C: nove células literais de um evento; ordinal validado no máximo256 eventos técnicos."),
+                            "QUAL-C: nove células literais de um evento; ordinal validado no"
+                                    + " máximo256 eventos técnicos."),
                     Map.entry(
                             "br.com.esl.etl.v2.bootstrap.QualificationScenarioVerifier$Result#outputs()",
-                            "QUAL-E: exatamente19 recibos agregados; construtor valida cardinalidade antes da cópia."),
+                            "QUAL-E: exatamente19 recibos agregados; construtor valida"
+                                    + " cardinalidade antes da cópia."),
                     Map.entry(
                             "br.com.esl.etl.v2.bootstrap.QualificationScenarioVerifier$Result#scopes()",
-                            "QUAL-E: exatamente35 gates técnicos do DAG; construtor valida cardinalidade."),
+                            "QUAL-E: exatamente35 gates técnicos do DAG; construtor valida"
+                                    + " cardinalidade."),
                     Map.entry(
                             "br.com.esl.etl.v2.bootstrap.QualificationSqlEvidence$Snapshot#tables()",
-                            "QUAL-G: até2048 contagens SQL por tabela, sem linhas/chaves de domínio;"
-                                    + " leitura e construtor recusam excesso."),
+                            "QUAL-G: até2048 contagens SQL por tabela, sem linhas/chaves de"
+                                    + " domínio; leitura e construtor recusam excesso."),
                     Map.entry(
                             "br.com.esl.etl.v2.bootstrap.QualificationWindowExecutor$Result#applied()",
-                            "QUAL-D: até3 janelas vezes5 fatos, máximo15 recibos técnicos, construtor valida."),
+                            "QUAL-D: até3 janelas vezes5 fatos, máximo15 recibos técnicos,"
+                                    + " construtor valida."),
                     Map.entry(
                             "br.com.esl.etl.v2.plataforma.qualificacao.CampaignJournal#read()",
-                            "QUAL-F: até512 eventos de4096bytes; overflow recusado durante enumeração antes da leitura."),
-                    Map.entry(
-                            "br.com.esl.etl.v2.plataforma.qualificacao.CampaignJournal#root()",
-                            "QUAL-F: um Path de controle normalizado, Iterable de segmentos, sem universo de registros."),
+                            "QUAL-F: até512 eventos de4096bytes; overflow recusado durante"
+                                    + " enumeração antes da leitura."),
                     Map.entry(
                             "br.com.esl.etl.v2.plataforma.qualificacao.CampaignJournal#status()",
-                            "QUAL-F: no máximo512 estados técnicos derivados dos512 eventos validados; campanha limita64 casos."),
+                            "QUAL-F: no máximo512 estados técnicos derivados dos512 eventos"
+                                    + " validados; campanha limita64 casos."),
                     Map.entry(
                             "br.com.esl.etl.v2.plataforma.qualificacao.QualificationCampaign#cases()",
-                            "QUAL-B: construtor e parser limitam1..64 casos; manifesto até131072bytes."),
+                            "QUAL-B: construtor e parser limitam1..64 casos; manifesto"
+                                    + " até131072bytes."),
                     Map.entry(
                             "br.com.esl.etl.v2.plataforma.qualificacao.QualificationCampaign$Case#blackouts()",
                             "QUAL-D: até8 datas, validadas no parser e no construtor."),
@@ -244,127 +353,134 @@ public class ArchitectureRulesTest {
                             "QUAL-B: até35 escopos, validados no parser e construtor."),
                     Map.entry(
                             "br.com.esl.etl.v2.plataforma.qualificacao.QualificationCampaign$Case#outputs()",
-                            "QUAL-B:1..19 contratos da enumeração fechada; parser e construtor validam limites."),
+                            "QUAL-B:1..19 contratos da enumeração fechada; parser e construtor"
+                                    + " validam limites."),
                     Map.entry(
                             "br.com.esl.etl.v2.plataforma.qualificacao.QualificationComparator$ExpectedRows#at(long)",
-                            "QUAL-C: uma linha lazy com1..123 células; consumidor confere cardinalidade do contrato antes de comparar."),
+                            "QUAL-C: uma linha lazy com1..123 células; consumidor confere"
+                                    + " cardinalidade do contrato antes de comparar."),
                     Map.entry(
                             "br.com.esl.etl.v2.plataforma.qualificacao.QualificationComparator$Result#sample()",
-                            "QUAL-C: até24 coordenadas sanitizadas, produtor e construtor recusam excesso."),
-                    Map.entry(
-                            "br.com.esl.etl.v2.plataforma.qualificacao.QualificationControlFiles#attempt(java.lang.String,boolean)",
-                            "QUAL-F: um Path de caso, identificador1..40 validado, sem coleção de dados."),
-                    Map.entry(
-                            "br.com.esl.etl.v2.plataforma.qualificacao.QualificationControlFiles"
-                                    + "#member(java.nio.file.Path,java.lang.String)",
-                            "QUAL-F: um Path de membro selecionado entre13 nomes fechados, sem coleção de dados."),
-                    Map.entry(
-                            "br.com.esl.etl.v2.plataforma.qualificacao.QualificationControlFiles#root()",
-                            "QUAL-F: um Path de diretório irmão validado dentro de target, sem coleção de dados."),
+                            "QUAL-C: até24 coordenadas sanitizadas, produtor e construtor recusam"
+                                    + " excesso."),
                     Map.entry(
                             "br.com.esl.etl.v2.plataforma.qualificacao.QualificationOracles$Evidence#monitor(long)",
-                            "QUAL-C: nove células de um evento técnico, QualificationMonitoring valida ordinal e256 eventos."),
+                            "QUAL-C: nove células de um evento técnico, QualificationMonitoring"
+                                    + " valida ordinal e256 eventos."),
                     Map.entry(
                             "br.com.esl.etl.v2.plataforma.qualificacao.QualificationOracles$Output#cells()",
-                            "QUAL-C:1..123 regras da saída, cardinalidade exata conferida pelo construtor e parser."),
+                            "QUAL-C:1..123 regras da saída, cardinalidade exata conferida pelo"
+                                    + " construtor e parser."),
                     Map.entry(
                             "br.com.esl.etl.v2.plataforma.qualificacao.QualificationPlanner$Plan#windows()",
-                            "QUAL-D: no máximo3 janelas do planner existente, construtor valida antes da cópia."),
+                            "QUAL-D: no máximo3 janelas do planner existente, construtor valida"
+                                    + " antes da cópia."),
                     Map.entry(
                             "br.com.esl.etl.v2.plataforma.qualificacao.QualificationTopology#evaluate(java.util.Map)",
-                            "QUAL-B: exatamente35 gates, enumeração de escopos fechada e evidência estrangeira recusada."),
+                            "QUAL-B: exatamente35 gates, enumeração de escopos fechada e evidência"
+                                    + " estrangeira recusada."),
                     Map.entry(
                             "br.com.esl.etl.v2.plataforma.qualificacao.QualificationTopology#nodes()",
-                            "QUAL-B: DAG literal de35 nós, cardinalidade e ordenação conferidas na inicialização."),
+                            "QUAL-B: DAG literal de35 nós, cardinalidade e ordenação conferidas na"
+                                    + " inicialização."),
                     Map.entry(
                             "br.com.esl.etl.v2.plataforma.qualificacao.QualificationTopology$Node#dependencies()",
-                            "QUAL-B: máximo35 escopos por nó, construtor valida e DAG literal verifica existência."),
+                            "QUAL-B: máximo35 escopos por nó, construtor valida e DAG literal"
+                                    + " verifica existência."),
                     Map.entry(
                             "br.com.esl.etl.v2.plataforma.qualificacao.QualificationWireOracle"
                                     + "#names(com.fasterxml.jackson.databind.JsonNode)",
-                            "QUAL-C: até128 nomes de campos de um objeto wire; recusa explícita antes da alocação."),
-                    Map.entry(
-                            "br.com.esl.etl.v2.plataforma.qualificacao.QualifiedPackage#member(java.lang.String,java.lang.String)",
-                            "QUAL-H: um Path do inventário verificado de até1024 membros; papel/nome exigidos."),
+                            "QUAL-C: até128 nomes de campos de um objeto wire; recusa explícita"
+                                    + " antes da alocação."),
                     Map.entry(
                             "br.com.esl.etl.v2.plataforma.qualificacao.QualifiedPackage#members()",
-                            "QUAL-H: até1024 metadados de arquivos, parser e construtor validam antes da cópia."),
-                    Map.entry(
-                            "br.com.esl.etl.v2.plataforma.qualificacao.QualifiedPackage#root()",
-                            "QUAL-H: um Path local verificado, Iterable de segmentos, sem dados de domínio."),
+                            "QUAL-H: até1024 metadados de arquivos, parser e construtor validam"
+                                    + " antes da cópia."),
                     Map.entry(
                             "br.com.esl.etl.v2.bootstrap.AnalyticExpansionCapture$Result#steps()",
-                            "ANA-35: exatamente seis intenções técnicas; limite conferido antes da cópia defensiva."),
+                            "ANA-35: exatamente seis intenções técnicas; limite conferido antes da"
+                                    + " cópia defensiva."),
                     Map.entry(
                             "br.com.esl.etl.v2.bootstrap.AnalyticScenarioRuntime$Cycle#sources()",
-                            "ANA-35: exatamente onze recibos técnicos, conferidos antes da cópia; SQL exige as onze entidades."),
+                            "ANA-35: exatamente onze recibos técnicos, conferidos antes da cópia;"
+                                    + " SQL exige as onze entidades."),
                     Map.entry(
                             "br.com.esl.etl.v2.plataforma.analitico.AnalyticCollectionSupplement#fields()",
-                            "ANA-27: doze campos de uma única observação, construídos literalmente; sem universo de registros."),
+                            "ANA-27: doze campos de uma única observação, construídos literalmente;"
+                                    + " sem universo de registros."),
                     Map.entry(
                             "br.com.esl.etl.v2.plataforma.analitico.AnalyticQuoteAttributes#fields()",
-                            "ANA-25:36campos de uma única observação tipada; construção literal finita."),
+                            "ANA-25:36campos de uma única observação tipada; construção literal"
+                                    + " finita."),
                     Map.entry(
                             "br.com.esl.etl.v2.plataforma.analitico.AnalyticFieldCatalog#quotes()",
-                            "ANA-35: metadados literais de36aliases/tipos COT, sem chaves capturadas."),
+                            "ANA-35: metadados literais de36aliases/tipos COT, sem chaves"
+                                    + " capturadas."),
                     Map.entry(
                             "br.com.esl.etl.v2.plataforma.analitico.AnalyticFieldCatalog#collectionSupplement()",
-                            "ANA-35: metadados literais de12aliases de suplementoCOL, sem valores capturados."),
+                            "ANA-35: metadados literais de12aliases de suplementoCOL, sem valores"
+                                    + " capturados."),
                     Map.entry(
                             "br.com.esl.etl.v2.plataforma.analitico.AnalyticSqlCatalog#columns("
                                     + "br.com.esl.etl.v2.plataforma.analitico.AnalyticSqlContract)",
-                            "ANA-30:19contratos/673metadados; cada retorno1..123colunas, recurso262144bytes e cardinalidade validados."),
+                            "ANA-30:19contratos/673metadados; cada retorno1..123colunas,"
+                                    + " recurso262144bytes e cardinalidade validados."),
                     Map.entry(
                             "br.com.esl.etl.v2.plataforma.persistencia.analitico.JdbcAnalyticCollectionSweep$Prepared#captures()",
-                            "ANA-29: quatro capturas distintas no prepare; construtor valida quatro antes da cópia."),
+                            "ANA-29: quatro capturas distintas no prepare; construtor valida quatro"
+                                    + " antes da cópia."),
                     Map.entry(
                             "br.com.esl.etl.v2.plataforma.persistencia.analitico.JdbcAnalyticFixtureBindings"
-                                    + "#fiscalSourcesPage(java.util.UUID,long,int)",
-                            "ANA-35: maximum1..64 antes de I/O, TOP parametrizado, keyset component_id e overflow recusado."),
+                                + "#fiscalSourcesPage(java.util.UUID,long,int)",
+                            "ANA-35: maximum1..64 antes de I/O, TOP parametrizado, keyset"
+                                    + " component_id e overflow recusado."),
                     Map.entry(
                             "br.com.esl.etl.v2.plataforma.persistencia.analitico.JdbcAnalyticFixtureBindings"
-                                    + "#sourcesPage(java.util.UUID,br.com.esl.etl.v2.plataforma.analitico."
-                                    + "AnalyticDimensionBinding$Entity,java.lang.String,int)",
-                            "ANA-35: maximum1..6 antes de I/O; TOP parametrizado/keyset, execução unívoca e overflow recusado."),
+                                + "#sourcesPage(java.util.UUID,br.com.esl.etl.v2.plataforma.analitico."
+                                + "AnalyticDimensionBinding$Entity,java.lang.String,int)",
+                            "ANA-35: maximum1..6 antes de I/O; TOP parametrizado/keyset, execução"
+                                    + " unívoca e overflow recusado."),
                     Map.entry(
                             "br.com.esl.etl.v2.plataforma.persistencia.analitico.JdbcAnalyticQueries$Row#values()",
-                            "ANA-30: uma linha tipada do contrato fechado; tamanho1..123 verificado antes da cópia."),
+                            "ANA-30: uma linha tipada do contrato fechado; tamanho1..123 verificado"
+                                    + " antes da cópia."),
                     Map.entry(
                             "br.com.esl.etl.v2.plataforma.fonte.raster.RasterGateway$Response#body()",
-                            "ANA-03: resposta entre 1 byte e 10 MiB no construtor; cópia defensiva de uma única página."),
+                            "ANA-03: resposta entre 1 byte e 10 MiB no construtor; cópia defensiva"
+                                    + " de uma única página."),
                     Map.entry(
                             "br.com.esl.etl.v2.bootstrap.ExpansionLaboratoryRelationFixtures#bindingBatch(jav"
-                                    + "a.time.LocalDate,int,int)",
-                            "EXP-12: count entre 1 e 14 antes da alocação; sete vínculos explícitos por raiz,"
-                                    + " TVP de até 98."),
+                                + "a.time.LocalDate,int,int)",
+                            "EXP-12: count entre 1 e 14 antes da alocação; sete vínculos explícitos"
+                                    + " por raiz, TVP de até 98."),
                     Map.entry(
                             "br.com.esl.etl.v2.plataforma.expansao.ExpansionStrings#items()",
-                            "EXP-04: construtor limita 32 strings de até 256 caracteres; lista imutável de "
-                                    + "uma observação, sem identidade documental."),
+                            "EXP-04: construtor limita 32 strings de até 256 caracteres; lista"
+                                    + " imutável de uma observação, sem identidade documental."),
                     Map.entry(
                             "br.com.esl.etl.v2.plataforma.persistencia.expansao.JdbcExpansionQueries#detailPa"
-                                    + "ge(java.util.UUID,br.com.esl.etl.v2.plataforma.persistencia.expansao.JdbcExpansi"
-                                    + "onQueries$Vertical,int,long,int)",
+                                + "ge(java.util.UUID,br.com.esl.etl.v2.plataforma.persistencia.expansao.JdbcExpansi"
+                                + "onQueries$Vertical,int,long,int)",
                             "EXP-14: cursor exclusivo, maximum entre 1 e 100,"
                                     + " SQL TOP parametrizado e overflow recusado."),
                     Map.entry(
                             "br.com.esl.etl.v2.plataforma.persistencia.expansao.JdbcExpansionQueries#invoiceF"
-                                    + "actsPage(java.util.UUID,long,int)",
+                                + "actsPage(java.util.UUID,long,int)",
                             "EXP-17: grão de título, maximum entre 1 e 100,"
                                     + " SQL TOP e cursor exclusivo; overflow recusado."),
                     Map.entry(
                             "br.com.esl.etl.v2.plataforma.persistencia.expansao.JdbcExpansionQueries#revenueF"
-                                    + "actsPage(java.util.UUID,long,int)",
+                                + "actsPage(java.util.UUID,long,int)",
                             "EXP-19: grão de Frete vinculado, maximum entre 1 e 100,"
                                     + " SQL TOP e cursor exclusivo; overflow recusado."),
                     Map.entry(
                             "br.com.esl.etl.v2.plataforma.persistencia.expansao.JdbcExpansionRecomposition#st"
-                                    + "epsBatch(java.util.UUID,int)",
-                            "EXP-20: maximum deve ser seis; PK e CHECK limitam entidades aos seis slots; JDBC "
-                                    + "recusa falta e overflow."),
+                                + "epsBatch(java.util.UUID,int)",
+                            "EXP-20: maximum deve ser seis; PK e CHECK limitam entidades aos seis"
+                                    + " slots; JDBC recusa falta e overflow."),
                     Map.entry(
                             "br.com.esl.etl.v2.plataforma.persistencia.expansao.JdbcExpansionRelations#claimB"
-                                    + "atch(java.util.UUID,java.util.UUID,int,int)",
+                                + "atch(java.util.UUID,java.util.UUID,int,int)",
                             "EXP-13: maximum entre 1 e 100 antes de I/O,"
                                     + " TOP parametrizado no SQL e recusa de overflow no JDBC."),
                     Map.entry(
@@ -381,7 +497,7 @@ public class ArchitectureRulesTest {
                             "Tipos distintos de um campo dentro de uma única página limitada."),
                     Map.entry(
                             "br.com.esl.etl.v2.plataforma.fonte.dataexport.DataExportPayloadFieldProfile#text"
-                                    + "ualFormats()",
+                                + "ualFormats()",
                             "Formatos distintos de um campo dentro de uma única página limitada."),
                     Map.entry(
                             "br.com.esl.etl.v2.plataforma.fonte.dataexport.DataExportPayloadProfile#fields()",
@@ -428,7 +544,8 @@ public class ArchitectureRulesTest {
                             "Um único lote de staging com limite explícito e teto absoluto."),
                     Map.entry(
                             "br.com.esl.etl.v2.modulos.manifestos.domain.ManifestoStageRecord#rootFields()",
-                            "Campos fixos de uma observação física limitada a 100 itens por página."),
+                            "Campos fixos de uma observação física limitada a 100 itens por"
+                                    + " página."),
                     Map.entry(
                             "br.com.esl.etl.v2.modulos.manifestos.domain.ManifestoStageRecord#metrics()",
                             "Set fechado das oito métricas MAN-07 de uma observação física."),
@@ -446,45 +563,54 @@ public class ArchitectureRulesTest {
                             "Filhos MDF-e de uma única coorte física limitada a 100 observações."),
                     Map.entry(
                             "br.com.esl.etl.v2.modulos.manifestos.domain.ManifestoReductionResult#childQuaran"
-                                    + "tineReasons()",
+                                + "tineReasons()",
                             "Razões sanitizadas, no máximo uma por observação física da coorte."),
                     Map.entry(
                             "br.com.esl.etl.v2.plataforma.autorizacao.PinnedSqlTrustManager#getAcceptedIssuers()",
-                            "X509TrustManager: array novo de um único certificado fixado; teste de pin e "
-                                    + "cópia defensiva."),
+                            "X509TrustManager: array novo de um único certificado fixado; teste de"
+                                    + " pin e cópia defensiva."),
                     Map.entry(
                             "br.com.esl.etl.v2.plataforma.configuracao.PinnedSampleTrustManager#getAcceptedIssuers()",
                             "COL-SAMPLE-TLS-PIN-001: array novo vazio, limite zero de emissores; "
                                     + "PinnedSampleTlsTest verifica esse contrato."),
                     Map.entry(
+                            "br.com.esl.etl.v2.plataforma.configuracao.TestRetainedTrustManager#getAcceptedIssuers()",
+                            "TEST-RETAINED-TLS-001: array novo vazio, limite zero de emissores; "
+                                    + "TestRetainedTlsTest verifica esse contrato."),
+                    Map.entry(
                             "br.com.esl.etl.v2.plataforma.orquestracao.RuntimeTemporalPolicy#blackouts()",
-                            "Até 64 intervalos; limite verificado antes de ordenar/copiar a configuração."),
+                            "Até 64 intervalos; limite verificado antes de ordenar/copiar a"
+                                    + " configuração."),
                     Map.entry(
                             "br.com.esl.etl.v2.plataforma.orquestracao.RuntimeTemporalPlanner$Result#windows()",
-                            "Até 64 janelas; construtor recusa excesso e planner usa maximumBacklog de 1 a 64."),
+                            "Até 64 janelas; construtor recusa excesso e planner usa maximumBacklog"
+                                    + " de 1 a 64."),
                     Map.entry(
                             "br.com.esl.etl.v2.plataforma.orquestracao.RuntimeTemporalCoordinator$Reconciliat"
-                                    + "ion#pending()",
-                            "Até quatro decisões de próximo passo, limitadas pela concorrência e pelo construtor."),
+                                + "ion#pending()",
+                            "Até quatro decisões de próximo passo, limitadas pela concorrência e"
+                                    + " pelo construtor."),
                     Map.entry(
                             "br.com.esl.etl.v2.plataforma.orquestracao.RuntimeTemporalStore"
                                     + "#readGapPage(java.lang.String,int,java.time.Instant)",
-                            "Resumo paginado SQL TOP maximum entre 1 e 64; sem payload ou universo de chaves "
-                                    + "de negócio."),
+                            "Resumo paginado SQL TOP maximum entre 1 e 64; sem payload ou universo"
+                                    + " de chaves de negócio."),
                     Map.entry(
                             "br.com.esl.etl.v2.bootstrap.RelationalLaboratoryFixtures#bindingBatch(java.time."
-                                    + "LocalDate,int,int)",
-                            "REL-LAB-03: até 50 raízes de fixture, duas evidências por raiz; recusa antes de alocar."),
+                                + "LocalDate,int,int)",
+                            "REL-LAB-03: até 50 raízes de fixture, duas evidências por raiz; recusa"
+                                    + " antes de alocar."),
                     Map.entry(
                             "br.com.esl.etl.v2.plataforma.persistencia.relacional.JdbcRelationalLaboratory"
-                                    + "#claimBatch(java.util.UUID,java.util.UUID,int,"
-                                    + "br.com.esl.etl.v2.plataforma.resiliencia.CancellationToken)",
+                                + "#claimBatch(java.util.UUID,java.util.UUID,int,"
+                                + "br.com.esl.etl.v2.plataforma.resiliencia.CancellationToken)",
                             "REL-LAB-05: limite 1..100 validado antes de I/O,"
                                     + " teto persistido/TOP no SQL e overflow recusado no JDBC."),
                     Map.entry(
                             "br.com.esl.etl.v2.plataforma.persistencia.controle.JdbcSqlServerTemporalPlan"
-                                    + "#readGapPage(java.lang.String,int,java.time.Instant)",
-                            "Valida maximum 1..64 antes de I/O, TOP no SQL e recusa overflow/ordem no result set."),
+                                + "#readGapPage(java.lang.String,int,java.time.Instant)",
+                            "Valida maximum 1..64 antes de I/O, TOP no SQL e recusa overflow/ordem"
+                                    + " no result set."),
                     Map.entry(
                             "br.com.esl.etl.v2.bootstrap.LocalArtifactSequence#execute("
                                     + "br.com.esl.etl.v2.plataforma.persistencia.coletas."
@@ -492,14 +618,16 @@ public class ArchitectureRulesTest {
                                     + "br.com.esl.etl.v2.bootstrap.AnalyticScenarioObserver,"
                                     + "br.com.esl.etl.v2.plataforma.resiliencia.CancellationToken,"
                                     + "java.util.function.Consumer)",
-                            "SEQ-01: o manifesto limita a sequência a no máximo oito etapas; cada resultado "
-                                    + "retém somente recibos técnicos dessa sequência."),
+                            "SEQ-01: o manifesto limita a sequência a no máximo oito etapas; cada"
+                                    + " resultado retém somente recibos técnicos dessa sequência."),
                     Map.entry(
                             "br.com.esl.etl.v2.bootstrap.LocalArtifactSequence#steps()",
-                            "SEQ-01: cópia imutável das duas a oito etapas validadas pelo construtor."),
+                            "SEQ-01: cópia imutável das duas a oito etapas validadas pelo"
+                                    + " construtor."),
                     Map.entry(
                             "br.com.esl.etl.v2.bootstrap.LocalArtifactSequence$StageResult#agenda()",
-                            "SEQ-04: cada etapa tem no máximo quatro recibos de agenda, um por família SQL."),
+                            "SEQ-04: cada etapa tem no máximo quatro recibos de agenda, um por"
+                                    + " família SQL."),
                     Map.entry(
                             "br.com.esl.etl.v2.bootstrap.SequenceMeasurements$Snapshot#samples()",
                             "SEQ-06: a telemetria faz thinning e retém no máximo 128 amostras."));
@@ -640,6 +768,56 @@ public class ArchitectureRulesTest {
     }
 
     @Test
+    void ruleTreatsSqlExceptionsAsFailuresButStillDetectsCollectionsOfFailures() {
+        assertEquals(2, productiveCollectionApis(List.of(SqlFailureApiFixture.class)).size());
+        assertEquals(1, findRepositoryMaterialization(List.of(SqlFailureRepository.class)).size());
+    }
+
+    @Test
+    void retainedControlFieldExceptionsDoNotAdmitSimilarNamesInOtherRepositories() {
+        assertEquals(
+                3,
+                findRepositoryMaterialization(List.of(MisleadingControlRepository.class)).size());
+    }
+
+    @Test
+    void pathIsAScalarButCollectionsAndArraysOfPathsStillRequireBounds() {
+        assertEquals(3, productiveCollectionApis(List.of(PathApiFixture.class)).size());
+    }
+
+    @Test
+    void devLocalMetadataContractsDoNotAdmitSimilarRepositories() {
+        assertEquals(
+                11,
+                findRepositoryMaterialization(List.of(MisleadingDevLocalRepository.class)).size());
+    }
+
+    @Test
+    void catalogMetadataContractsDoNotAdmitSimilarRepositoriesOrApis() {
+        assertEquals(
+                1,
+                findRepositoryMaterialization(List.of(MisleadingCatalogReportStore.class)).size());
+        final var impostorApis =
+                productiveCollectionApis(List.of(MisleadingCatalogMetadataApi.class));
+        assertEquals(2, impostorApis.size());
+        assertTrue(impostorApis.stream().noneMatch(BOUNDED_COLLECTION_APIS::containsKey));
+    }
+
+    @Test
+    void devLocalMetadataExceptionsAreBoundToReviewedProtocolBytes() throws Exception {
+        final Path source =
+                Path.of(
+                        "src/main/java/br/com/esl/etl/v2/plataforma/persistencia/devlocal/DevLocalLedger.java");
+        assertTrue(Files.size(source) <= 65_536);
+        assertEquals(
+                "a448bd728dcdb2f2c137c6c9adfb17bd52ec0946d44921104051439c328892b9",
+                java.util.HexFormat.of()
+                        .formatHex(
+                                java.security.MessageDigest.getInstance("SHA-256")
+                                        .digest(Files.readAllBytes(source))));
+    }
+
+    @Test
     void ruleIgnoresAnApiWhoseDeclaringTypeIsNotExternallyVisible() {
         assertTrue(productiveCollectionApis(List.of(HiddenCollectionApiFixture.class)).isEmpty());
     }
@@ -650,6 +828,41 @@ public class ArchitectureRulesTest {
                 findRepositoryMaterialization(List.of(UniverseKeyRepository.class));
 
         assertEquals(2, violations.size());
+    }
+
+    @Test
+    void c78EngineResourceNamesDoNotExcuseAnotherRepository() {
+        assertEquals(
+                5,
+                findRepositoryMaterialization(List.of(MisleadingC78EngineRepository.class)).size());
+    }
+
+    @Test
+    void c78EngineMetadataExceptionsAreBoundToReviewedProtocolBytes() throws Exception {
+        final var sources =
+                Map.of(
+                        "C78DevEngineDispatch.java",
+                        "b2042621c25908bac5e199d2103c1b63280a7a4b3000ad50bf63daba7906dc1f",
+                        "C78DevEngineSession.java",
+                        "15374b907bd8bb88a3cbb17e10015d0121f13a045ee93d08f48203b8afd29ecb",
+                        "C78Sample12Owner.java",
+                        "0acae4f9c16795417897a662279517116c557fe03d49059f7a25e71d5b01e989",
+                        "C78DevCatalogPlan.java",
+                        "1d830b3ad0a79eeb7d63d10fe0c47612c1dfe9122071172e95eb2be974dedea2",
+                        "C78DevCatalogReportStore.java",
+                        "f0848d59c3073261de174c466dcea39ee0aed9fe119e398e20fc8c8b1d3e188b");
+        for (final var entry : sources.entrySet()) {
+            final Path source =
+                    Path.of("src/main/java/br/com/esl/etl/v2/plataforma/persistencia/controle")
+                            .resolve(entry.getKey());
+            assertTrue(Files.size(source) <= 65_536);
+            assertEquals(
+                    entry.getValue(),
+                    java.util.HexFormat.of()
+                            .formatHex(
+                                    java.security.MessageDigest.getInstance("SHA-256")
+                                            .digest(Files.readAllBytes(source))));
+        }
     }
 
     @Test
@@ -683,14 +896,14 @@ public class ArchitectureRulesTest {
                                         + "while (hasNext()) { allRecords.add(next()); } } }"),
                         new SourceFile(
                                 "FieldTraversal.java",
-                                "final class FieldTraversal { private final java.util.Deque<String> "
-                                        + "allRecords = new java.util.ArrayDeque<>(); void run() { "
-                                        + "while (hasNext()) { allRecords.addLast(next()); } } }"),
+                                "final class FieldTraversal { private final java.util.Deque<String>"
+                                        + " allRecords = new java.util.ArrayDeque<>(); void run() {"
+                                        + " while (hasNext()) { allRecords.addLast(next()); } } }"),
                         new SourceFile(
                                 "NestedTraversal.java",
-                                "final class NestedTraversal { void run() { var allRecords = "
-                                        + "new java.util.ArrayList<String>(); try { while (hasNext()) "
-                                        + "{ allRecords.add(next()); } } finally { close(); } } }"),
+                                "final class NestedTraversal { void run() { var allRecords = new"
+                                    + " java.util.ArrayList<String>(); try { while (hasNext()) {"
+                                    + " allRecords.add(next()); } } finally { close(); } } }"),
                         new SourceFile(
                                 "ForEachTraversal.java",
                                 "final class ForEachTraversal { private java.util.List<String> "
@@ -749,13 +962,18 @@ public class ArchitectureRulesTest {
             for (final Field field : type.getDeclaredFields()) {
                 if (!field.isSynthetic()
                         && isCollectionLike(field.getGenericType())
-                        && !isBoundedStatementHandleRegistry(field)) {
+                        && !isBoundedStatementHandleRegistry(field)
+                        && !isBoundedRetainedControlField(field)
+                        && !isBoundedC78EngineControlField(field)
+                        && !isBoundedDevLocalLedgerField(field)) {
                     violations.add(type.getName() + "#field:" + field.getName());
                 }
             }
             for (final Method method : type.getDeclaredMethods()) {
                 if (!method.isSynthetic()
                         && isCollectionLike(method.getGenericReturnType())
+                        && !isBoundedDevLocalLedgerMethod(method)
+                        && !isBoundedCatalogReportSerializer(method)
                         && (!BOUNDED_REPOSITORY_METHOD.matcher(method.getName()).matches()
                                 || !hasExplicitBoundParameter(method))) {
                     violations.add(methodKey(method));
@@ -763,6 +981,52 @@ public class ArchitectureRulesTest {
             }
         }
         return violations.stream().sorted().toList();
+    }
+
+    // Exact reviewed metadata methods only. Coverage is capped at2097152 UTF-8 bytes;
+    // ORIGINAL12 keeps327680 bytes. The source hashes below bind these resource limits.
+    private static boolean isBoundedCatalogReportSerializer(final Method method) {
+        if (!Modifier.isStatic(method.getModifiers()) || method.getReturnType() != byte[].class) {
+            return false;
+        }
+        final String owner = method.getDeclaringClass().getName();
+        final Class<?>[] parameters = method.getParameterTypes();
+        final String mode =
+                "br.com.esl.etl.v2.plataforma.persistencia.controle.C78DevCatalogPlan$Mode";
+        if (owner.equals(
+                "br.com.esl.etl.v2.plataforma.persistencia.controle.C78DevEngineDispatch")) {
+            return method.getName().equals("pinnedBytes")
+                    && Modifier.isPrivate(method.getModifiers())
+                    && java.util.Arrays.equals(
+                            parameters,
+                            new Class<?>[] {java.nio.channels.FileChannel.class, String.class});
+        }
+        if (!owner.equals(
+                "br.com.esl.etl.v2.plataforma.persistencia.controle.C78DevCatalogReportStore")) {
+            return false;
+        }
+        return switch (method.getName()) {
+            case "serialize" ->
+                    Modifier.isPrivate(method.getModifiers())
+                            && parameters.length == 2
+                            && parameters[0]
+                                    .getName()
+                                    .equals(
+                                            "br.com.esl.etl.v2.plataforma.persistencia.controle.C78DevCatalogInspector$Report")
+                            && parameters[1].getName().equals(mode);
+            case "encodeUtf8" ->
+                    !Modifier.isPublic(method.getModifiers())
+                            && parameters.length == 2
+                            && parameters[0] == CharSequence.class
+                            && parameters[1].getName().equals(mode);
+            case "readback" ->
+                    !Modifier.isPublic(method.getModifiers())
+                            && parameters.length == 3
+                            && parameters[0] == java.nio.channels.FileChannel.class
+                            && parameters[1] == byte[].class
+                            && parameters[2].getName().equals(mode);
+            default -> false;
+        };
     }
 
     // This exact field contains driver handles, never result rows or business keys. Its64-handle
@@ -774,6 +1038,79 @@ public class ArchitectureRulesTest {
                                 "br.com.esl.etl.v2.plataforma.persistencia.coletas.ColetaTemporalLaboratorySession")
                 && field.getName().equals("controlledStatements")
                 && field.getGenericType().getTypeName().equals("java.util.Set<java.sql.Statement>");
+    }
+
+    // Closed SQL names and owned JDBC handles are not a universe of domain keys. These exceptions
+    // require exact declaring class, field, type and modifiers; runtime tests enforce the bounds.
+    private static boolean isBoundedRetainedControlField(final Field field) {
+        final String owner = field.getDeclaringClass().getName();
+        final String type = field.getGenericType().getTypeName();
+        final int modifiers = field.getModifiers();
+        if (!Modifier.isFinal(modifiers)) {
+            return false;
+        }
+        if (owner.equals(
+                "br.com.esl.etl.v2.plataforma.persistencia.controle.TestRetainedSqlContract")) {
+            return Modifier.isStatic(modifiers)
+                    && ((field.getName().equals("CALLS")
+                                    && type.equals(
+                                            "java.util.Map<java.lang.String, java.lang.Integer>"))
+                            || (field.getName().equals("WRITE_TABLES")
+                                    && type.equals("java.lang.String[]")));
+        }
+        return owner.equals(
+                        "br.com.esl.etl.v2.plataforma.persistencia.controle.TestRetainedSqlSession")
+                && field.getName().equals("openStatements")
+                && type.equals("java.util.Set<java.sql.Statement>")
+                && Modifier.isPrivate(modifiers)
+                && !Modifier.isStatic(modifiers);
+    }
+
+    // Exact C78 engine metadata and owned handles, never a domain-key registry. The declaring
+    // class, field, generic type and modifiers are fixed; source pins bind the reviewed limits.
+    private static boolean isBoundedC78EngineControlField(final Field field) {
+        final String owner = field.getDeclaringClass().getName();
+        final String type = field.getGenericType().getTypeName();
+        final int modifiers = field.getModifiers();
+        if (!Modifier.isFinal(modifiers)) {
+            return false;
+        }
+        // This closed list has14 SQL table names; readback retains aggregate scalars only.
+        if (owner.equals("br.com.esl.etl.v2.plataforma.persistencia.controle.C78Sample12Owner")) {
+            return field.getName().equals("OCCURRENCE_TABLES")
+                    && type.equals("java.util.List<java.lang.String>")
+                    && Modifier.isPrivate(modifiers)
+                    && Modifier.isStatic(modifiers);
+        }
+        if (owner.equals(
+                "br.com.esl.etl.v2.plataforma.persistencia.controle.C78DevEngineDispatch")) {
+            return Modifier.isPrivate(modifiers)
+                    && !Modifier.isStatic(modifiers)
+                    && (field.getName().equals("inputs")
+                                    && type.equals(
+                                            "java.util.Map<java.nio.file.Path, java.lang.String>")
+                            || field.getName().equals("leases")
+                                    && type.equals(
+                                            "java.util.Map<java.nio.file.Path,"
+                                                    + " java.nio.channels.FileChannel>")
+                            || field.getName().equals("ancestors")
+                                    && type.equals(
+                                            "java.util.Map<java.nio.file.Path, java.lang.Object>"));
+        }
+        if (!owner.equals(
+                "br.com.esl.etl.v2.plataforma.persistencia.controle.C78DevEngineSession")) {
+            return false;
+        }
+        return field.getName().equals("statements")
+                        && type.equals("java.util.Set<java.sql.Statement>")
+                        && Modifier.isPrivate(modifiers)
+                        && !Modifier.isStatic(modifiers)
+                || field.getName().equals("TABLES")
+                        && type.equals("java.util.Set<java.lang.String>")
+                        && Modifier.isStatic(modifiers)
+                        && !Modifier.isPrivate(modifiers)
+                        && !Modifier.isProtected(modifiers)
+                        && !Modifier.isPublic(modifiers);
     }
 
     private static boolean hasExplicitBoundParameter(final Method method) {
@@ -790,6 +1127,51 @@ public class ArchitectureRulesTest {
                                                                 + "BatchSize|PageSize).*")
                                                 .matcher(parameter.getType().getSimpleName())
                                                 .matches());
+    }
+
+    // Exact synthetic receipt metadata, not a domain-key universe or a persistence-package bypass.
+    // The reviewed source pin above binds these contracts to the executed byte/metadata guards.
+    private static boolean isBoundedDevLocalLedgerField(final Field field) {
+        final String owner = field.getDeclaringClass().getName();
+        final String type = field.getGenericType().getTypeName();
+        final int modifiers = field.getModifiers();
+        if (!Modifier.isPrivate(modifiers)
+                || !Modifier.isFinal(modifiers)
+                || Modifier.isStatic(modifiers)) {
+            return false;
+        }
+        final String ledger = "br.com.esl.etl.v2.plataforma.persistencia.devlocal.DevLocalLedger";
+        return owner.equals(ledger) && field.getName().equals("identity") && type.equals("byte[]")
+                || owner.equals(ledger + "$Data")
+                        && field.getName().equals("runs")
+                        && type.equals("java.util.Map<java.lang.String, " + ledger + "$MutableRun>")
+                || owner.equals(ledger + "$Data")
+                        && field.getName().equals("starts")
+                        && type.equals("java.util.Map<java.lang.String, " + ledger + "$Entry>")
+                || owner.equals(ledger + "$Data")
+                        && field.getName().equals("startIntents")
+                        && type.equals(
+                                "java.util.Map<java.lang.String, " + ledger + "$StartIntent>")
+                || owner.equals(ledger + "$MutableRun")
+                        && (field.getName().equals("events")
+                                        && type.equals("java.util.List<" + ledger + "$Event>")
+                                || field.getName().equals("outputs")
+                                        && type.equals(
+                                                "java.util.Map<java.lang.String, "
+                                                        + ledger
+                                                        + "$Output>"));
+    }
+
+    private static boolean isBoundedDevLocalLedgerMethod(final Method method) {
+        final String ledger = "br.com.esl.etl.v2.plataforma.persistencia.devlocal.DevLocalLedger";
+        return method.getDeclaringClass().getName().equals(ledger)
+                && Set.of(
+                                ledger + "#readOutput(java.lang.String,java.lang.String)",
+                                ledger + "#runs()",
+                                ledger + "#pendingStartIds()",
+                                ledger + "#orphanFiles(java.lang.String)",
+                                ledger + "#readFile(java.nio.file.Path,int)")
+                        .contains(methodKey(method));
     }
 
     private static boolean isNumericBoundType(final Class<?> parameter) {
@@ -1042,6 +1424,11 @@ public class ArchitectureRulesTest {
                 return true;
             }
             return !JsonNode.class.isAssignableFrom(rawClass)
+                    // SQLException iterates its failure chain, not rows or business keys.
+                    && !java.sql.SQLException.class.isAssignableFrom(rawClass)
+                    // A Path is one scalar location; its Iterable describes path segments, not
+                    // rows.
+                    && !Path.class.isAssignableFrom(rawClass)
                     && (rawClass.isArray()
                             || Collection.class.isAssignableFrom(rawClass)
                             || Map.class.isAssignableFrom(rawClass)
@@ -1212,11 +1599,96 @@ public class ArchitectureRulesTest {
         T value();
     }
 
+    public interface SqlFailureApiFixture {
+        java.sql.SQLException failure();
+
+        List<java.sql.SQLException> failures();
+
+        Iterable<Throwable> failureCollection();
+    }
+
+    public interface PathApiFixture {
+        Path location();
+
+        Optional<Path> optionalLocation();
+
+        Path[] locations();
+
+        List<Path> locationList();
+
+        Iterable<Path> locationIterable();
+    }
+
+    private static final class MisleadingDevLocalRepository {
+        private final byte[] identity = {};
+        private final Map<String, String> runs = Map.of();
+        private final Map<String, String> starts = Map.of();
+        private final Map<String, String> startIntents = Map.of();
+        private final List<String> events = List.of();
+        private final Map<String, String> outputs = Map.of();
+
+        byte[] readOutput(final String execution, final String name) {
+            return identity.clone();
+        }
+
+        List<String> runs() {
+            return List.of();
+        }
+
+        List<String> orphanFiles(final String execution) {
+            return List.of();
+        }
+
+        List<String> pendingStartIds() {
+            return List.of();
+        }
+
+        byte[] readFile(final Path path, final int limit) {
+            return identity.clone();
+        }
+    }
+
+    private interface SqlFailureRepository {
+        java.sql.SQLException failure();
+
+        List<java.sql.SQLException> failures();
+    }
+
+    public interface MisleadingCatalogMetadataApi {
+        List<String> rows();
+
+        List<String> evidence();
+    }
+
+    private static final class MisleadingCatalogReportStore {
+        @SuppressWarnings("unused")
+        private static byte[] serialize(
+                final br.com.esl.etl.v2.plataforma.persistencia.controle.C78DevCatalogInspector
+                                .Report
+                        report) {
+            return new byte[0];
+        }
+    }
+
+    private static final class MisleadingControlRepository {
+        private static final Map<String, Integer> CALLS = Map.of();
+        private static final String[] WRITE_TABLES = {};
+        private final Set<java.sql.Statement> openStatements = Set.of();
+    }
+
     private interface HiddenCollectionApiFixture {
         List<String> findEverything();
     }
 
     // Fixture methods are inspected through reflection by findRepositoryMaterialization.
+    private static final class MisleadingC78EngineRepository {
+        private final Map<Path, String> inputs = Map.of();
+        private final Map<Path, java.nio.channels.FileChannel> leases = Map.of();
+        private final Map<Path, Object> ancestors = Map.of();
+        static final Set<String> TABLES = Set.of();
+        private final Set<java.sql.Statement> statements = Set.of();
+    }
+
     private static final class UniverseKeyRepository {
         private final Set<String> keys = Set.of();
 

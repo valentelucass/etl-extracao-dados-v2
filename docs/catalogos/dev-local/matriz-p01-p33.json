@@ -1,0 +1,2004 @@
+{
+  "schemaVersion": 1,
+  "request": "HERMES_b77c5029cfbd",
+  "state": "DEV_LOCAL_COMPLETED",
+  "canonicalPlan": {
+    "path": "docs/catalogos/preparacao-trilha/plano.json",
+    "sha256": "67e2a49f4fc0302cd245d09cca8b674868d22767ceb93068e97207e964ffac2c"
+  },
+  "scope": "DEV_LOCAL_SYNTHETIC_NO_SQL_NO_EXTERNAL",
+  "historicalIntegralCounters": {
+    "construction": "39/45",
+    "accepted": "67/115",
+    "newIntegralAcceptances": 0
+  },
+  "stages": [
+    {
+      "id": "P01",
+      "canonicalUnits": [
+        "V2-022"
+      ],
+      "canonicalScope": "Campanha e revisao atual",
+      "canonicalExit": "Estado e camada reconciliados; nenhum resultado desconhecido repetido.",
+      "status": "VERIFICADO_LOCAL",
+      "exclusion": null,
+      "impact": "Nenhum efeito externo/produtivo no DEV; critério integral preservado e não aceito.",
+      "futureTrack": "Plano canônico P01; inputs contratos físicos/nominais da unidade. Não há execução futura automática.",
+      "evidence": [
+        "BANK_FILESYSTEM_FINAL",
+        "CLI_PACKAGED"
+      ],
+      "integralAcceptanceGranted": false,
+      "localCriterion": "Ocorrências STARTED/terminais e artefatos retidos reconciliados por readback; replay consulta resultado conhecido e não repete efeito incerto.",
+      "interpretation": "Status do recorte DEV; canonicalExit e aceite integral permanecem separados."
+    },
+    {
+      "id": "P02",
+      "canonicalUnits": [
+        "V2-022"
+      ],
+      "canonicalScope": "Falha causal delimitada, somente se ainda existir",
+      "canonicalExit": "Causa e contraprova ou dispensa fundamentada; nao repetir diagnostico resolvido.",
+      "status": "VERIFICADO_LOCAL",
+      "exclusion": null,
+      "impact": "Nenhum efeito externo/produtivo no DEV; critério integral preservado e não aceito.",
+      "futureTrack": "Plano canônico P02; inputs contratos físicos/nominais da unidade. Não há execução futura automática.",
+      "evidence": [
+        "BANK_FILESYSTEM_FINAL",
+        "ENGINE_FINAL",
+        "CLI_PACKAGED",
+        "CI_EXACT_GUARDS"
+      ],
+      "integralAcceptanceGranted": false,
+      "localCriterion": "Falhas locais demonstradas em replay, deadline, roundtrip JSON e enumeração limitada recebem correção causal e contraprova; tentativas falhas preservadas.",
+      "interpretation": "Status do recorte DEV; canonicalExit e aceite integral permanecem separados."
+    },
+    {
+      "id": "P03",
+      "canonicalUnits": [
+        "V2-022"
+      ],
+      "canonicalScope": "B-H como predecessor tecnico, nao pacote final",
+      "canonicalExit": "Criterios B-H do recorte atendidos na revisao; JAR extraido continua exigido em P08.",
+      "status": "VERIFICADO_LOCAL",
+      "exclusion": "B–H JDBC/SQL real não executado; fluxos sintéticos sem banco serão qualificados separadamente.",
+      "impact": "Nenhum efeito externo/produtivo no DEV; critério integral preservado e não aceito.",
+      "futureTrack": "Plano canônico P03; inputs contratos físicos/nominais da unidade. Não há execução futura automática.",
+      "evidence": [
+        "SOURCE_FIXTURE_FINAL",
+        "ENGINE_FINAL",
+        "CLI_PACKAGED"
+      ],
+      "integralAcceptanceGranted": false,
+      "localCriterion": "Composição sintética usa mappers/regras existentes com tipos, filtros, presença, frescor, ledger e outputs integrados; critérios JDBC ficam fora do DEV.",
+      "interpretation": "Status do recorte DEV; canonicalExit e aceite integral permanecem separados."
+    },
+    {
+      "id": "P04",
+      "canonicalUnits": [
+        "V2-022",
+        "V2-013"
+      ],
+      "canonicalScope": "I/J sinteticos rollback-only",
+      "canonicalExit": "STARTED, worker, journal, recibos internos, negativos e 33 previews comprovados; rollback observado.",
+      "status": "VERIFICADO_LOCAL",
+      "exclusion": "Rollback/savepoint SQL e journal físico excluídos; cancelamento/journal/preview local precisam prova própria.",
+      "impact": "Nenhum efeito externo/produtivo no DEV; critério integral preservado e não aceito.",
+      "futureTrack": "Plano canônico P04; inputs contratos físicos/nominais da unidade. Não há execução futura automática.",
+      "evidence": [
+        "BANK_FILESYSTEM_FINAL",
+        "ENGINE_FINAL",
+        "CLI_PACKAGED"
+      ],
+      "integralAcceptanceGranted": false,
+      "localCriterion": "Journal STARTED/eventos/outputs/terminal, cancelamento e 33 previews bloqueados; apply somente em responsabilidade explicitamente SYNTHETIC nos cenários fechados.",
+      "interpretation": "Status do recorte DEV; canonicalExit e aceite integral permanecem separados."
+    },
+    {
+      "id": "P05",
+      "canonicalUnits": [
+        "V2-050"
+      ],
+      "canonicalScope": "K local, quatro massas",
+      "canonicalExit": "Quatro relatorios, heap/bytes/lotes/JDBC/planos/duracao; sem alegar SLO produtivo.",
+      "status": "VERIFICADO_LOCAL",
+      "exclusion": "Planos/IO/JDBC reais e SLO produtivo excluídos; escalas locais não são SLO.",
+      "impact": "Nenhum efeito externo/produtivo no DEV; critério integral preservado e não aceito.",
+      "futureTrack": "Plano canônico P05; inputs contratos físicos/nominais da unidade. Não há execução futura automática.",
+      "evidence": [
+        "CLI_PACKAGED"
+      ],
+      "integralAcceptanceGranted": false,
+      "localCriterion": "Quatro execuções reais em JVM separada, escalas2/4/8/16, heap observado, bytes, lotes, retenção materializada e duração; SQL/IO não aplicáveis.",
+      "interpretation": "Status do recorte DEV; canonicalExit e aceite integral permanecem separados."
+    },
+    {
+      "id": "P06",
+      "canonicalUnits": [
+        "V2-022"
+      ],
+      "canonicalScope": "Delta e suficiencia A-K",
+      "canonicalExit": "Achados tratados com revalidacao dirigida das correcoes.",
+      "status": "VERIFICADO_LOCAL",
+      "exclusion": null,
+      "impact": "Nenhum efeito externo/produtivo no DEV; critério integral preservado e não aceito.",
+      "futureTrack": "Plano canônico P06; inputs contratos físicos/nominais da unidade. Não há execução futura automática.",
+      "evidence": [
+        "CI_EXACT_GUARDS",
+        "ENGINE_FINAL",
+        "BANK_FILESYSTEM_FINAL"
+      ],
+      "integralAcceptanceGranted": false,
+      "localCriterion": "Achados de integração e negócio revalidados pelos owners; guards de CI exatos com contraprovas, sem bypass de pacote nem revisão humana alegada.",
+      "interpretation": "Status do recorte DEV; canonicalExit e aceite integral permanecem separados."
+    },
+    {
+      "id": "P07",
+      "canonicalUnits": [
+        "V2-015"
+      ],
+      "canonicalScope": "Regressao L da revisao final",
+      "canonicalExit": "Gates reais verdes, contagens e skips explicados, revisao qualificada identificada.",
+      "status": "VERIFICADO_LOCAL",
+      "exclusion": null,
+      "impact": "Nenhum efeito externo/produtivo no DEV; critério integral preservado e não aceito.",
+      "futureTrack": "Plano canônico P07; inputs contratos físicos/nominais da unidade. Não há execução futura automática.",
+      "evidence": [
+        "AGGREGATE_CURRENT",
+        "SCANNER_WHOLE",
+        "SCANNER_SELF58"
+      ],
+      "integralAcceptanceGranted": false,
+      "localCriterion": "Agregado offline corrente com JDK17, formatter, Checkstyle, arquitetura, cobertura e scanner; XML nativo e cinco skips explicados.",
+      "interpretation": "Status do recorte DEV; canonicalExit e aceite integral permanecem separados."
+    },
+    {
+      "id": "P08",
+      "canonicalUnits": [
+        "V2-039",
+        "V2-039a"
+      ],
+      "canonicalScope": "M/N e integridade da entrega local",
+      "canonicalExit": "JAR executado, overlay aplicado em copia, scanner integral, selo/readback e A-N completos.",
+      "status": "VERIFICADO_LOCAL",
+      "exclusion": "A/B SQL e despachos físicos históricos não reexecutados; pacote/CLI sem SQL têm aceites DEV próprios.",
+      "impact": "Nenhum efeito externo/produtivo no DEV; critério integral preservado e não aceito.",
+      "futureTrack": "Plano canônico P08; inputs contratos físicos/nominais da unidade. Não há execução futura automática.",
+      "evidence": [
+        "CLI_PACKAGED",
+        "AGGREGATE_CURRENT",
+        "SCANNER_WHOLE"
+      ],
+      "integralAcceptanceGranted": false,
+      "localCriterion": "Pacote DEV atual com dependências locais, pins de fonte/classes/JAR, comandos reais e leitura/replay dos outputs; não concede despachos SQL históricos.",
+      "interpretation": "Status do recorte DEV; canonicalExit e aceite integral permanecem separados."
+    },
+    {
+      "id": "P09",
+      "canonicalUnits": [
+        "V2-041"
+      ],
+      "canonicalScope": "Classes e consumidores efetivamente usados",
+      "canonicalExit": "Invalidacao e continuidade do writer comprovadas pelos responsaveis.",
+      "status": "EXCLUIDO_DEV_LOCAL",
+      "exclusion": "Rotação/invalidação/continuidade de credenciais reais exige Segurança/Operações G01; DEV não usa credenciais.",
+      "impact": "Nenhum efeito externo/produtivo no DEV; critério integral preservado e não aceito.",
+      "futureTrack": "Plano canônico P09; inputs G01. Não há execução futura automática.",
+      "evidence": [],
+      "integralAcceptanceGranted": false,
+      "interpretation": "Status do recorte DEV; canonicalExit e aceite integral permanecem separados."
+    },
+    {
+      "id": "P10",
+      "canonicalUnits": [
+        "V2-016",
+        "V2-016b"
+      ],
+      "canonicalScope": "Repositorio e SHA remoto aprovados",
+      "canonicalExit": "Governanca, historico e CI reais no SHA aprovado; nao depende de P09.",
+      "status": "EXCLUIDO_DEV_LOCAL",
+      "exclusion": "Governança, proteção, publicação e CI remotos exigem provider/remote/owners G02; nenhuma publicação autorizada.",
+      "impact": "Nenhum efeito externo/produtivo no DEV; critério integral preservado e não aceito.",
+      "futureTrack": "Plano canônico P10; inputs G02. Não há execução futura automática.",
+      "evidence": [],
+      "integralAcceptanceGranted": false,
+      "interpretation": "Status do recorte DEV; canonicalExit e aceite integral permanecem separados."
+    },
+    {
+      "id": "P11",
+      "canonicalUnits": [
+        "V2-015d"
+      ],
+      "canonicalScope": "Baseline de vulnerabilidades",
+      "canonicalExit": "Feed e baseline reais aceitos, achados/excecoes tratados.",
+      "status": "EXCLUIDO_DEV_LOCAL",
+      "exclusion": "Feed e aceite real de vulnerabilidades não disponíveis nesta unidade sem download/autoridade; política offline preservada.",
+      "impact": "Nenhum efeito externo/produtivo no DEV; critério integral preservado e não aceito.",
+      "futureTrack": "Plano canônico P11; inputs FEED. Não há execução futura automática.",
+      "evidence": [],
+      "integralAcceptanceGranted": false,
+      "interpretation": "Status do recorte DEV; canonicalExit e aceite integral permanecem separados."
+    },
+    {
+      "id": "P12",
+      "canonicalUnits": [
+        "V2-045",
+        "V2-045b",
+        "V2-039a",
+        "V2-022"
+      ],
+      "canonicalScope": "Ambiente operacional e efeito material solicitado",
+      "canonicalExit": "Controles materiais comprovados no alvo autorizado; nenhum COMMIT herdado de rollback-only.",
+      "status": "EXCLUIDO_DEV_LOCAL",
+      "exclusion": "Ambiente SQL definitivo/TLS/principals/backup/restore e RTO/RPO materiais G05 excluídos; DEV usa arquivos sintéticos locais.",
+      "impact": "Nenhum efeito externo/produtivo no DEV; critério integral preservado e não aceito.",
+      "futureTrack": "Plano canônico P12; inputs G05. Não há execução futura automática.",
+      "evidence": [],
+      "integralAcceptanceGranted": false,
+      "interpretation": "Status do recorte DEV; canonicalExit e aceite integral permanecem separados."
+    },
+    {
+      "id": "P13",
+      "canonicalUnits": [
+        "V2-025",
+        "V2-025d"
+      ],
+      "canonicalScope": "Uma fonte/entidade",
+      "canonicalExit": "Contrato real do recorte verificado; USER e Raster conservam canais e autorizacoes proprios.",
+      "status": "VERIFICADO_LOCAL",
+      "exclusion": "Contratos reais de fornecedor G03 não comprovados por fixtures.",
+      "impact": "Nenhum efeito externo/produtivo no DEV; critério integral preservado e não aceito.",
+      "futureTrack": "Plano canônico P13; inputs G03. Não há execução futura automática.",
+      "evidence": [
+        "SOURCE_FIXTURE_FINAL",
+        "CLI_PACKAGED"
+      ],
+      "integralAcceptanceGranted": false,
+      "localCriterion": "Onze datasets/contratos sintéticos limitados com mapper/parser real e oráculo independente; vínculos MC/CF declarados e endpoints escopados. A rodada cURL025d é excluída separadamente.",
+      "interpretation": "Status do recorte DEV; canonicalExit e aceite integral permanecem separados."
+    },
+    {
+      "id": "P14",
+      "canonicalUnits": [
+        "V2-009",
+        "V2-009b",
+        "V2-009b/10633",
+        "V2-009b/8636",
+        "V2-009b/4924",
+        "V2-009b/6392",
+        "V2-009c"
+      ],
+      "canonicalScope": "Entidade com ambiguidade ainda pendente",
+      "canonicalExit": "Chave, grao e crosswalk sustentados por evidencia, nao inventados.",
+      "status": "VERIFICADO_LOCAL",
+      "exclusion": "Identidade/grão/crosswalk nominal G03/G04 não decidido a partir de exemplos sintéticos.",
+      "impact": "Nenhum efeito externo/produtivo no DEV; critério integral preservado e não aceito.",
+      "futureTrack": "Plano canônico P14; inputs G03,G04. Não há execução futura automática.",
+      "evidence": [
+        "SOURCE_FIXTURE_FINAL",
+        "ENGINE_FINAL",
+        "CLI_PACKAGED"
+      ],
+      "integralAcceptanceGranted": false,
+      "localCriterion": "Identidade de ocorrência sintética explicitamente separada das candidatas wire; colisões/tipos/raízes ausentes recusados e ambiguidades nominais preservadas.",
+      "interpretation": "Status do recorte DEV; canonicalExit e aceite integral permanecem separados."
+    },
+    {
+      "id": "P15",
+      "canonicalUnits": [
+        "V2-035",
+        "V2-035a"
+      ],
+      "canonicalScope": "Somente referencias consumidas",
+      "canonicalExit": "Referencias ratificadas e verificadas; dimensoes derivadas permanecem P21.",
+      "status": "VERIFICADO_LOCAL",
+      "exclusion": "Ratificação/importação material de referências G04 não substituída por samples.",
+      "impact": "Nenhum efeito externo/produtivo no DEV; critério integral preservado e não aceito.",
+      "futureTrack": "Plano canônico P15; inputs G04. Não há execução futura automática.",
+      "evidence": [
+        "ENGINE_FINAL",
+        "CLI_PACKAGED"
+      ],
+      "integralAcceptanceGranted": false,
+      "localCriterion": "Release de referência sintético explícito e estável em bootstrap/delta/recomposição; mudança não ratificada recusada, sem seeds nominais.",
+      "interpretation": "Status do recorte DEV; canonicalExit e aceite integral permanecem separados."
+    },
+    {
+      "id": "P16",
+      "canonicalUnits": [
+        "V2-009d",
+        "V2-029",
+        "V2-030",
+        "V2-031",
+        "V2-032",
+        "V2-034",
+        "V2-034b"
+      ],
+      "canonicalScope": "Uma entidade e referencias usadas",
+      "canonicalExit": "Enforcement, mapper, presenca/frescor, staging, DQ e replay provados em sombra.",
+      "status": "VERIFICADO_LOCAL",
+      "exclusion": "Staging/promoção/DQ/replay físicos SQL/fonte real fora do pedido.",
+      "impact": "Nenhum efeito externo/produtivo no DEV; critério integral preservado e não aceito.",
+      "futureTrack": "Plano canônico P16; inputs G03. Não há execução futura automática.",
+      "evidence": [
+        "SOURCE_FIXTURE_FINAL",
+        "ENGINE_FINAL",
+        "CLI_PACKAGED"
+      ],
+      "integralAcceptanceGranted": false,
+      "localCriterion": "Onze entidades locais percorrem DTO/mapper/parser, regras, quarentena/filtro, presença/frescor e persistência de outputs; nenhum staging/promoção SQL alegado.",
+      "interpretation": "Status do recorte DEV; canonicalExit e aceite integral permanecem separados."
+    },
+    {
+      "id": "P17",
+      "canonicalUnits": [
+        "V2-012",
+        "V2-012a"
+      ],
+      "canonicalScope": "Caracterizacao inicial por entidade",
+      "canonicalExit": "Divergencias resolvidas/classificadas e aceite da fatia 012a.",
+      "status": "VERIFICADO_LOCAL",
+      "exclusion": "Paridade fonte-oráculo real/aceite nominal não substituído por caracterização sintética.",
+      "impact": "Nenhum efeito externo/produtivo no DEV; critério integral preservado e não aceito.",
+      "futureTrack": "Plano canônico P17; inputs G03. Não há execução futura automática.",
+      "evidence": [
+        "SOURCE_FIXTURE_FINAL",
+        "CLI_PACKAGED"
+      ],
+      "integralAcceptanceGranted": false,
+      "localCriterion": "Caracterização confronta fixture com oráculo independente literal, incluindo valores, tipos, regras, contagens, raiz/expansão e vínculos; divergência é recusada.",
+      "interpretation": "Status do recorte DEV; canonicalExit e aceite integral permanecem separados."
+    },
+    {
+      "id": "P18",
+      "canonicalUnits": [
+        "V2-047"
+      ],
+      "canonicalScope": "Historico da entidade",
+      "canonicalExit": "Historico reconciliado ou NOT_APPLICABLE aceito; sem elevar watermark por maior data.",
+      "status": "VERIFICADO_LOCAL",
+      "exclusion": "Bootstrap histórico real/origem/destino e migração legado não autorizados.",
+      "impact": "Nenhum efeito externo/produtivo no DEV; critério integral preservado e não aceito.",
+      "futureTrack": "Plano canônico P18; inputs G03,G05. Não há execução futura automática.",
+      "evidence": [
+        "ENGINE_FINAL",
+        "CLI_PACKAGED"
+      ],
+      "integralAcceptanceGranted": false,
+      "localCriterion": "BOOTSTRAP separado, estado persistido e INCREMENTAL/RECOMPOSE com --previous da ocorrência lida; watermark de fornecedor não inferido.",
+      "interpretation": "Status do recorte DEV; canonicalExit e aceite integral permanecem separados."
+    },
+    {
+      "id": "P19",
+      "canonicalUnits": [
+        "V2-046",
+        "V2-046a",
+        "V2-046b"
+      ],
+      "canonicalScope": "MC antes de CF, somente relacoes usadas",
+      "canonicalExit": "Cardinalidade, orfaos, conflitos, replay e SLA provados em SQL.",
+      "status": "VERIFICADO_LOCAL",
+      "exclusion": "Cardinalidade/órfãos/conflitos/SLA SQL reais não provados por relações de fixture.",
+      "impact": "Nenhum efeito externo/produtivo no DEV; critério integral preservado e não aceito.",
+      "futureTrack": "Plano canônico P19; inputs G03. Não há execução futura automática.",
+      "evidence": [
+        "SOURCE_FIXTURE_FINAL",
+        "ENGINE_FINAL",
+        "CLI_PACKAGED"
+      ],
+      "integralAcceptanceGranted": false,
+      "localCriterion": "MC precede CF no consumo dos bindings sintéticos declarados; cardinalidade, raiz ausente/filtrada/quarentenada, conflito e scope inválido recusados, replay observado.",
+      "interpretation": "Status do recorte DEV; canonicalExit e aceite integral permanecem separados."
+    },
+    {
+      "id": "P20",
+      "canonicalUnits": [
+        "V2-012b"
+      ],
+      "canonicalScope": "Paridade core por entidade",
+      "canonicalExit": "Paridade core nominal aceita nas janelas do escopo.",
+      "status": "VERIFICADO_LOCAL",
+      "exclusion": "Paridade core nominal em janelas reais G03/G04 não disponível.",
+      "impact": "Nenhum efeito externo/produtivo no DEV; critério integral preservado e não aceito.",
+      "futureTrack": "Plano canônico P20; inputs G03. Não há execução futura automática.",
+      "evidence": [
+        "ENGINE_FINAL",
+        "CLI_PACKAGED"
+      ],
+      "integralAcceptanceGranted": false,
+      "localCriterion": "Estado sintético de core relido sem alterar valores/hashes passa por delta/recomposição e validações independentes; paridade nominal set-based permanece excluída.",
+      "interpretation": "Status do recorte DEV; canonicalExit e aceite integral permanecem separados."
+    },
+    {
+      "id": "P21",
+      "canonicalUnits": [
+        "V2-035b"
+      ],
+      "canonicalScope": "Dimensao e fontes efetivamente usadas",
+      "canonicalExit": "Grao, papeis, vigencia/rekey e paridade proprios; publicacao contratual em P25.",
+      "status": "VERIFICADO_LOCAL",
+      "exclusion": "Bindings/rekey/vigência/cadastros/paridade nominal das dimensões não provados por sample.",
+      "impact": "Nenhum efeito externo/produtivo no DEV; critério integral preservado e não aceito.",
+      "futureTrack": "Plano canônico P21; inputs G04. Não há execução futura automática.",
+      "evidence": [
+        "ENGINE_FINAL",
+        "CLI_PACKAGED"
+      ],
+      "integralAcceptanceGranted": false,
+      "localCriterion": "Seis famílias de bindings de dimensão identificadas e validadas em outputs locais; conteúdos/rekey/vigência/cadastros e publicação SQL não substituídos.",
+      "interpretation": "Status do recorte DEV; canonicalExit e aceite integral permanecem separados."
+    },
+    {
+      "id": "P22",
+      "canonicalUnits": [
+        "V2-013"
+      ],
+      "canonicalScope": "Responsabilidade por entidade",
+      "canonicalExit": "Politica nominal aceita, inclusive linhas sem apply.",
+      "status": "VERIFICADO_LOCAL",
+      "exclusion": "Política nominal de ausência/atestado real não gerado; proteção essencial preservada.",
+      "impact": "Nenhum efeito externo/produtivo no DEV; critério integral preservado e não aceito.",
+      "futureTrack": "Plano canônico P22; inputs G04. Não há execução futura automática.",
+      "evidence": [
+        "ENGINE_FINAL",
+        "CLI_PACKAGED"
+      ],
+      "integralAcceptanceGranted": false,
+      "localCriterion": "As33 políticas canônicas ficam BLOCKED/apply=false; cenário SYNTHETIC separado exige política/owner/completude e mantém recusas explícitas.",
+      "interpretation": "Status do recorte DEV; canonicalExit e aceite integral permanecem separados."
+    },
+    {
+      "id": "P23",
+      "canonicalUnits": [
+        "V2-013"
+      ],
+      "canonicalScope": "Somente linhas com apply permitido",
+      "canonicalExit": "Soft delete, reativacao e recusas provados; nenhuma mutacao em linha nao habilitada.",
+      "status": "VERIFICADO_LOCAL",
+      "exclusion": "Apply físico SQL/domínio real não autorizado; ausência parcial deve continuar recusada.",
+      "impact": "Nenhum efeito externo/produtivo no DEV; critério integral preservado e não aceito.",
+      "futureTrack": "Plano canônico P23; inputs G03,G04,G05. Não há execução futura automática.",
+      "evidence": [
+        "ENGINE_FINAL",
+        "CLI_PACKAGED"
+      ],
+      "integralAcceptanceGranted": false,
+      "localCriterion": "CLI scenario percorre ausência e reativação sintéticas com estados/outputs próprios; parcial, quarentena e owner inválido recusados sem mutação indevida.",
+      "interpretation": "Status do recorte DEV; canonicalExit e aceite integral permanecem separados."
+    },
+    {
+      "id": "P24",
+      "canonicalUnits": [
+        "V2-036"
+      ],
+      "canonicalScope": "Um fato MAT-01..05",
+      "canonicalExit": "Entradas PUBLISHED, grao, cardinalidade, no-op e recomposicao em paridade.",
+      "status": "EXCLUIDO_DEV_LOCAL",
+      "exclusion": "As cinco materializações MAT-01..05 dependem de loaders set-based SQL e entradas PUBLISHED. A composição local não as chama; aproximações com semântica/schema diferentes foram rejeitadas. Retém somente metadata SQL_ONLY/computed=false/apply=false, sem linhas fictícias. Código SQL, testes e histórico são preservados.",
+      "impact": "Nenhum efeito externo/produtivo no DEV; critério integral preservado e não aceito.",
+      "futureTrack": "Plano canônico P24; inputs G04. Não há execução futura automática.",
+      "evidence": [],
+      "integralAcceptanceGranted": false,
+      "interpretation": "Status do recorte DEV; canonicalExit e aceite integral permanecem separados."
+    },
+    {
+      "id": "P25",
+      "canonicalUnits": [
+        "V2-037"
+      ],
+      "canonicalScope": "Um contrato core, dimensao ou fato",
+      "canonicalExit": "Nomes, ordem, tipos, nullability, grao, filtros e linhagem aprovados.",
+      "status": "VERIFICADO_LOCAL",
+      "exclusion": "Manifestos/consumidores/aceite nominal SQL externo G04 não disponíveis; contratos locais explicitamente sintéticos.",
+      "impact": "Nenhum efeito externo/produtivo no DEV; critério integral preservado e não aceito.",
+      "futureTrack": "Plano canônico P25; inputs G04. Não há execução futura automática.",
+      "evidence": [
+        "ENGINE_FINAL",
+        "CLI_PACKAGED"
+      ],
+      "integralAcceptanceGranted": false,
+      "localCriterion": "Catálogo sintético existente de19contratos carregado e fingerprint/schema/metadata preservados nos outputs; não produz19views SQL nem linhas de fatos inventadas.",
+      "interpretation": "Status do recorte DEV; canonicalExit e aceite integral permanecem separados."
+    },
+    {
+      "id": "P26",
+      "canonicalUnits": [
+        "V2-012c"
+      ],
+      "canonicalScope": "Uma saida e todas suas entradas",
+      "canonicalExit": "Divergencias corrigidas ou aceitas nominalmente por saida.",
+      "status": "EXCLUIDO_DEV_LOCAL",
+      "exclusion": "Paridade analítica de fatos/views precisa de saídas SQL e oráculo nominal aprovados. Como materializações reais estão fora deste DEV, nenhum cálculo aproximado pode comprovar essa paridade. A exclusão não impede ingestão/regras/ledger/CLI sintéticos.",
+      "impact": "Nenhum efeito externo/produtivo no DEV; critério integral preservado e não aceito.",
+      "futureTrack": "Plano canônico P26; inputs G03,G04. Não há execução futura automática.",
+      "evidence": [],
+      "integralAcceptanceGranted": false,
+      "interpretation": "Status do recorte DEV; canonicalExit e aceite integral permanecem separados."
+    },
+    {
+      "id": "P27",
+      "canonicalUnits": [
+        "V2-050"
+      ],
+      "canonicalScope": "Vertical ou saida, nao o projeto inteiro",
+      "canonicalExit": "Heap, lotes, planos/IO e duracao comprovados no volume do escopo.",
+      "status": "VERIFICADO_LOCAL",
+      "exclusion": "Volume representativo real, planos/IO SQL e SLO produtivo indisponíveis.",
+      "impact": "Nenhum efeito externo/produtivo no DEV; critério integral preservado e não aceito.",
+      "futureTrack": "Plano canônico P27; inputs G05. Não há execução futura automática.",
+      "evidence": [
+        "CLI_PACKAGED",
+        "MEASUREMENT_OPTIN"
+      ],
+      "integralAcceptanceGranted": false,
+      "localCriterion": "Escalas locais medidas por subprocesso e seis medições sintéticas do harness opt-in; relatório declara retenção integral limitada e distingue heap atual/peaks de RSS/SLO.",
+      "interpretation": "Status do recorte DEV; canonicalExit e aceite integral permanecem separados."
+    },
+    {
+      "id": "P28",
+      "canonicalUnits": [
+        "V2-038",
+        "V2-022"
+      ],
+      "canonicalScope": "Entidade/saida e efeitos especificos",
+      "canonicalExit": "E2E, replay, cancelamento, concorrencia, recovery e desempenho vinculados ao SHA.",
+      "status": "VERIFICADO_LOCAL",
+      "exclusion": "COMMIT/crash/restore/concurrency SQL/recovery operacional externos não substituídos por arquivos.",
+      "impact": "Nenhum efeito externo/produtivo no DEV; critério integral preservado e não aceito.",
+      "futureTrack": "Plano canônico P28; inputs G05. Não há execução futura automática.",
+      "evidence": [
+        "BANK_FILESYSTEM_FINAL",
+        "ENGINE_FINAL",
+        "CLI_PACKAGED",
+        "AGGREGATE_CURRENT"
+      ],
+      "integralAcceptanceGranted": false,
+      "localCriterion": "Comandos startup/run/status/replay/cancel/error/stop/scenario, lock entre JVMs, crash local conhecido e recovery explícito exercitados; saída terminal e bytes preservados.",
+      "interpretation": "Status do recorte DEV; canonicalExit e aceite integral permanecem separados."
+    },
+    {
+      "id": "P29",
+      "canonicalUnits": [
+        "V2-039",
+        "V2-039b",
+        "V2-015c"
+      ],
+      "canonicalScope": "Onda/unidade e mesma revisao de RC",
+      "canonicalExit": "Release candidate e gates coerentes, sem chamar teste local de CI real.",
+      "status": "VERIFICADO_LOCAL",
+      "exclusion": "Release/CI remota/SBOM/SO operacional/aceite Segurança do RC produtivo excluídos; pacote DEV é distinto.",
+      "impact": "Nenhum efeito externo/produtivo no DEV; critério integral preservado e não aceito.",
+      "futureTrack": "Plano canônico P29; inputs G01. Não há execução futura automática.",
+      "evidence": [
+        "CLI_PACKAGED",
+        "AGGREGATE_CURRENT",
+        "SCANNER_WHOLE"
+      ],
+      "integralAcceptanceGranted": false,
+      "localCriterion": "Pacote e configuração DEV congelados, checksums/proveniência local e smoke do launcher no Windows corrente; RC, SBOM/CI/SO e Segurança produtivos continuam em trilha própria.",
+      "interpretation": "Status do recorte DEV; canonicalExit e aceite integral permanecem separados."
+    },
+    {
+      "id": "P30",
+      "canonicalUnits": [
+        "V2-048",
+        "V2-048b"
+      ],
+      "canonicalScope": "CUTOVER-DB-01 DATABASE_WIDE",
+      "canonicalExit": "Pacote de ensaio completo; revisao nao concede corte ou provisionamento.",
+      "status": "EXCLUIDO_DEV_LOCAL",
+      "exclusion": "Revisão nominal CUTOVER-DB-01/Tcut/writer/fences reais exige topologia e owners produtivos; não necessária ao DEV sintético.",
+      "impact": "Nenhum efeito externo/produtivo no DEV; critério integral preservado e não aceito.",
+      "futureTrack": "Plano canônico P30; inputs G04,G05. Não há execução futura automática.",
+      "evidence": [],
+      "integralAcceptanceGranted": false,
+      "interpretation": "Status do recorte DEV; canonicalExit e aceite integral permanecem separados."
+    },
+    {
+      "id": "P31",
+      "canonicalUnits": [
+        "V2-048b"
+      ],
+      "canonicalScope": "Ensaio material isolado",
+      "canonicalExit": "Ensaio aceito, RTO/RPO medidos e somente SIMULATED_PNR.",
+      "status": "EXCLUIDO_DEV_LOCAL",
+      "exclusion": "Ensaio material de cutover/restore/RTO/RPO G06 não autorizado; DEV não troca writer nem banco.",
+      "impact": "Nenhum efeito externo/produtivo no DEV; critério integral preservado e não aceito.",
+      "futureTrack": "Plano canônico P31; inputs G06. Não há execução futura automática.",
+      "evidence": [],
+      "integralAcceptanceGranted": false,
+      "interpretation": "Status do recorte DEV; canonicalExit e aceite integral permanecem separados."
+    },
+    {
+      "id": "P32",
+      "canonicalUnits": [
+        "V2-014"
+      ],
+      "canonicalScope": "Unidade inteira autorizada",
+      "canonicalExit": "Publicacao produtiva aceita, writer unico e PNR; apos PNR recovery permanece V2.",
+      "status": "EXCLUIDO_DEV_LOCAL",
+      "exclusion": "Corte/publicação produtiva G07 expressamente fora deste pedido.",
+      "impact": "Nenhum efeito externo/produtivo no DEV; critério integral preservado e não aceito.",
+      "futureTrack": "Plano canônico P32; inputs G07. Não há execução futura automática.",
+      "evidence": [],
+      "integralAcceptanceGranted": false,
+      "interpretation": "Status do recorte DEV; canonicalExit e aceite integral permanecem separados."
+    },
+    {
+      "id": "P33",
+      "canonicalUnits": [
+        "V2-040"
+      ],
+      "canonicalScope": "Todas as responsabilidades mantidas",
+      "canonicalExit": "Retirada autorizada e comprovada, nenhuma responsabilidade mantida sem destino.",
+      "status": "EXCLUIDO_DEV_LOCAL",
+      "exclusion": "Retirada do legado/consumidores/credenciais/jobs G08 expressamente fora deste pedido; nenhum código histórico removido.",
+      "impact": "Nenhum efeito externo/produtivo no DEV; critério integral preservado e não aceito.",
+      "futureTrack": "Plano canônico P33; inputs G08. Não há execução futura automática.",
+      "evidence": [],
+      "integralAcceptanceGranted": false,
+      "interpretation": "Status do recorte DEV; canonicalExit e aceite integral permanecem separados."
+    }
+  ],
+  "units": [
+    {
+      "id": "V2-009",
+      "stages": [
+        "P14"
+      ],
+      "status": "VERIFICADO_LOCAL",
+      "evidence": [
+        "CLI_PACKAGED",
+        "ENGINE_FINAL",
+        "SOURCE_FIXTURE_FINAL"
+      ],
+      "integralAcceptanceGranted": false,
+      "localCriterion": "Registry de ocorrência sintética com scope/tipo e hash de input; candidatas wire não recebem identidade canônica nominal.",
+      "excludedFacets": [
+        {
+          "stage": "P14",
+          "reason": "Identidade/grão/crosswalk nominal G03/G04 não decidido a partir de exemplos sintéticos.",
+          "impact": "Nenhum efeito externo/produtivo no DEV; critério integral preservado e não aceito.",
+          "futureTrack": "Plano canônico P14; inputs G03,G04. Não há execução futura automática."
+        }
+      ],
+      "interpretation": "Estado exclusivo do recorte DEV, não conclusão integral da unidade original."
+    },
+    {
+      "id": "V2-009b",
+      "stages": [
+        "P14"
+      ],
+      "status": "VERIFICADO_LOCAL",
+      "evidence": [
+        "CLI_PACKAGED",
+        "ENGINE_FINAL",
+        "SOURCE_FIXTURE_FINAL"
+      ],
+      "integralAcceptanceGranted": false,
+      "localCriterion": "Candidatas tipadas dos datasets são caracterizadas; ocorrências ordinais SYNTHETIC não viram business keys do fornecedor.",
+      "excludedFacets": [
+        {
+          "stage": "P14",
+          "reason": "Identidade/grão/crosswalk nominal G03/G04 não decidido a partir de exemplos sintéticos.",
+          "impact": "Nenhum efeito externo/produtivo no DEV; critério integral preservado e não aceito.",
+          "futureTrack": "Plano canônico P14; inputs G03,G04. Não há execução futura automática."
+        }
+      ],
+      "interpretation": "Estado exclusivo do recorte DEV, não conclusão integral da unidade original."
+    },
+    {
+      "id": "V2-009b/10633",
+      "stages": [
+        "P14"
+      ],
+      "status": "VERIFICADO_LOCAL",
+      "evidence": [
+        "CLI_PACKAGED",
+        "ENGINE_FINAL",
+        "SOURCE_FIXTURE_FINAL"
+      ],
+      "integralAcceptanceGranted": false,
+      "localCriterion": "INV mapper/regra preserva raiz/componentes e observações; binding canônico raiz/frete/invoice continua não resolvido e nominal=false.",
+      "excludedFacets": [
+        {
+          "stage": "P14",
+          "reason": "Identidade/grão/crosswalk nominal G03/G04 não decidido a partir de exemplos sintéticos.",
+          "impact": "Nenhum efeito externo/produtivo no DEV; critério integral preservado e não aceito.",
+          "futureTrack": "Plano canônico P14; inputs G03,G04. Não há execução futura automática."
+        }
+      ],
+      "interpretation": "Estado exclusivo do recorte DEV, não conclusão integral da unidade original."
+    },
+    {
+      "id": "V2-009b/4924",
+      "stages": [
+        "P14"
+      ],
+      "status": "VERIFICADO_LOCAL",
+      "evidence": [
+        "CLI_PACKAGED",
+        "ENGINE_FINAL",
+        "SOURCE_FIXTURE_FINAL"
+      ],
+      "integralAcceptanceGranted": false,
+      "localCriterion": "FAT mapper/regra preserva linha escopada/precedência fiscal; título/filhos/crosswalk nominal não inferidos.",
+      "excludedFacets": [
+        {
+          "stage": "P14",
+          "reason": "Identidade/grão/crosswalk nominal G03/G04 não decidido a partir de exemplos sintéticos.",
+          "impact": "Nenhum efeito externo/produtivo no DEV; critério integral preservado e não aceito.",
+          "futureTrack": "Plano canônico P14; inputs G03,G04. Não há execução futura automática."
+        }
+      ],
+      "interpretation": "Estado exclusivo do recorte DEV, não conclusão integral da unidade original."
+    },
+    {
+      "id": "V2-009b/6392",
+      "stages": [
+        "P14"
+      ],
+      "status": "VERIFICADO_LOCAL",
+      "evidence": [
+        "CLI_PACKAGED",
+        "ENGINE_FINAL",
+        "SOURCE_FIXTURE_FINAL"
+      ],
+      "integralAcceptanceGranted": false,
+      "localCriterion": "SIN mapper/regra preserva componentes e conflitos, sem promover sequence_code a raiz canônica provada.",
+      "excludedFacets": [
+        {
+          "stage": "P14",
+          "reason": "Identidade/grão/crosswalk nominal G03/G04 não decidido a partir de exemplos sintéticos.",
+          "impact": "Nenhum efeito externo/produtivo no DEV; critério integral preservado e não aceito.",
+          "futureTrack": "Plano canônico P14; inputs G03,G04. Não há execução futura automática."
+        }
+      ],
+      "interpretation": "Estado exclusivo do recorte DEV, não conclusão integral da unidade original."
+    },
+    {
+      "id": "V2-009b/8636",
+      "stages": [
+        "P14"
+      ],
+      "status": "VERIFICADO_LOCAL",
+      "evidence": [
+        "CLI_PACKAGED",
+        "ENGINE_FINAL",
+        "SOURCE_FIXTURE_FINAL"
+      ],
+      "integralAcceptanceGranted": false,
+      "localCriterion": "CAP mapper/regra preserva observações/parcela/tipos, raiz ausente e grão nominal bloqueados.",
+      "excludedFacets": [
+        {
+          "stage": "P14",
+          "reason": "Identidade/grão/crosswalk nominal G03/G04 não decidido a partir de exemplos sintéticos.",
+          "impact": "Nenhum efeito externo/produtivo no DEV; critério integral preservado e não aceito.",
+          "futureTrack": "Plano canônico P14; inputs G03,G04. Não há execução futura automática."
+        }
+      ],
+      "interpretation": "Estado exclusivo do recorte DEV, não conclusão integral da unidade original."
+    },
+    {
+      "id": "V2-009c",
+      "stages": [
+        "P14"
+      ],
+      "status": "VERIFICADO_LOCAL",
+      "evidence": [
+        "CLI_PACKAGED",
+        "ENGINE_FINAL",
+        "SOURCE_FIXTURE_FINAL"
+      ],
+      "integralAcceptanceGranted": false,
+      "localCriterion": "Raster parser real lê viagem/paradas sintéticas com limite e chaves de ocorrência; contrato remoto não aceito.",
+      "excludedFacets": [
+        {
+          "stage": "P14",
+          "reason": "Identidade/grão/crosswalk nominal G03/G04 não decidido a partir de exemplos sintéticos.",
+          "impact": "Nenhum efeito externo/produtivo no DEV; critério integral preservado e não aceito.",
+          "futureTrack": "Plano canônico P14; inputs G03,G04. Não há execução futura automática."
+        }
+      ],
+      "interpretation": "Estado exclusivo do recorte DEV, não conclusão integral da unidade original."
+    },
+    {
+      "id": "V2-009d",
+      "stages": [
+        "P16"
+      ],
+      "status": "VERIFICADO_LOCAL",
+      "evidence": [
+        "CLI_PACKAGED",
+        "ENGINE_FINAL",
+        "SOURCE_FIXTURE_FINAL"
+      ],
+      "integralAcceptanceGranted": false,
+      "localCriterion": "Enforcement local de tipos, keys sintéticas, colisões, replay e quarentena; constraints/concorrência SQL excluídas.",
+      "excludedFacets": [
+        {
+          "stage": "P16",
+          "reason": "Staging/promoção/DQ/replay físicos SQL/fonte real fora do pedido.",
+          "impact": "Nenhum efeito externo/produtivo no DEV; critério integral preservado e não aceito.",
+          "futureTrack": "Plano canônico P16; inputs G03. Não há execução futura automática."
+        }
+      ],
+      "interpretation": "Estado exclusivo do recorte DEV, não conclusão integral da unidade original."
+    },
+    {
+      "id": "V2-012",
+      "stages": [
+        "P17"
+      ],
+      "status": "VERIFICADO_LOCAL",
+      "evidence": [
+        "CLI_PACKAGED",
+        "SOURCE_FIXTURE_FINAL"
+      ],
+      "integralAcceptanceGranted": false,
+      "localCriterion": "Comparador de caracterização usa oráculo literal independente e recusa divergência sintética.",
+      "excludedFacets": [
+        {
+          "stage": "P17",
+          "reason": "Paridade fonte-oráculo real/aceite nominal não substituído por caracterização sintética.",
+          "impact": "Nenhum efeito externo/produtivo no DEV; critério integral preservado e não aceito.",
+          "futureTrack": "Plano canônico P17; inputs G03. Não há execução futura automática."
+        }
+      ],
+      "interpretation": "Estado exclusivo do recorte DEV, não conclusão integral da unidade original."
+    },
+    {
+      "id": "V2-012a",
+      "stages": [
+        "P17"
+      ],
+      "status": "VERIFICADO_LOCAL",
+      "evidence": [
+        "CLI_PACKAGED",
+        "SOURCE_FIXTURE_FINAL"
+      ],
+      "integralAcceptanceGranted": false,
+      "localCriterion": "Campos/tipos/presença/status/tempo/expansão/contagens/bindings do fixture são comparados antes de bootstrap.",
+      "excludedFacets": [
+        {
+          "stage": "P17",
+          "reason": "Paridade fonte-oráculo real/aceite nominal não substituído por caracterização sintética.",
+          "impact": "Nenhum efeito externo/produtivo no DEV; critério integral preservado e não aceito.",
+          "futureTrack": "Plano canônico P17; inputs G03. Não há execução futura automática."
+        }
+      ],
+      "interpretation": "Estado exclusivo do recorte DEV, não conclusão integral da unidade original."
+    },
+    {
+      "id": "V2-012b",
+      "stages": [
+        "P20"
+      ],
+      "status": "VERIFICADO_LOCAL",
+      "evidence": [
+        "CLI_PACKAGED",
+        "ENGINE_FINAL"
+      ],
+      "integralAcceptanceGranted": false,
+      "localCriterion": "Readback/delta/recomposição validam estado e hashes de core sintético; comparação SQL real não alegada.",
+      "excludedFacets": [
+        {
+          "stage": "P20",
+          "reason": "Paridade core nominal em janelas reais G03/G04 não disponível.",
+          "impact": "Nenhum efeito externo/produtivo no DEV; critério integral preservado e não aceito.",
+          "futureTrack": "Plano canônico P20; inputs G03. Não há execução futura automática."
+        }
+      ],
+      "interpretation": "Estado exclusivo do recorte DEV, não conclusão integral da unidade original."
+    },
+    {
+      "id": "V2-012c",
+      "stages": [
+        "P26"
+      ],
+      "status": "EXCLUIDO_DEV_LOCAL",
+      "evidence": [],
+      "integralAcceptanceGranted": false,
+      "exclusion": "Paridade analítica de fatos/views precisa de saídas SQL e oráculo nominal aprovados. Como materializações reais estão fora deste DEV, nenhum cálculo aproximado pode comprovar essa paridade. A exclusão não impede ingestão/regras/ledger/CLI sintéticos.",
+      "impact": "Função opcional externa/SQL/produtiva não compõe este DEV. Código, salvaguardas, dados e evidências anteriores preservados; nenhum aceite integral concedido.",
+      "futureTrack": "Plano canônico P26 e seus inputs/owners, somente com nova autoridade concreta.",
+      "interpretation": "Estado exclusivo do recorte DEV, não conclusão integral da unidade original."
+    },
+    {
+      "id": "V2-013",
+      "stages": [
+        "P04",
+        "P22",
+        "P23"
+      ],
+      "status": "VERIFICADO_LOCAL",
+      "evidence": [
+        "BANK_FILESYSTEM_FINAL",
+        "CLI_PACKAGED",
+        "ENGINE_FINAL"
+      ],
+      "integralAcceptanceGranted": false,
+      "localCriterion": "33previews canônicos bloqueados e quatro cenários de kernel SYNTHETIC com autoridade/completude/reativação e recusas.",
+      "excludedFacets": [
+        {
+          "stage": "P04",
+          "reason": "Rollback/savepoint SQL e journal físico excluídos; cancelamento/journal/preview local precisam prova própria.",
+          "impact": "Nenhum efeito externo/produtivo no DEV; critério integral preservado e não aceito.",
+          "futureTrack": "Plano canônico P04; inputs contratos físicos/nominais da unidade. Não há execução futura automática."
+        },
+        {
+          "stage": "P22",
+          "reason": "Política nominal de ausência/atestado real não gerado; proteção essencial preservada.",
+          "impact": "Nenhum efeito externo/produtivo no DEV; critério integral preservado e não aceito.",
+          "futureTrack": "Plano canônico P22; inputs G04. Não há execução futura automática."
+        },
+        {
+          "stage": "P23",
+          "reason": "Apply físico SQL/domínio real não autorizado; ausência parcial deve continuar recusada.",
+          "impact": "Nenhum efeito externo/produtivo no DEV; critério integral preservado e não aceito.",
+          "futureTrack": "Plano canônico P23; inputs G03,G04,G05. Não há execução futura automática."
+        }
+      ],
+      "interpretation": "Estado exclusivo do recorte DEV, não conclusão integral da unidade original."
+    },
+    {
+      "id": "V2-014",
+      "stages": [
+        "P32"
+      ],
+      "status": "EXCLUIDO_DEV_LOCAL",
+      "evidence": [],
+      "integralAcceptanceGranted": false,
+      "exclusion": "Corte/publicação produtiva G07 expressamente fora deste pedido.",
+      "impact": "Função opcional externa/SQL/produtiva não compõe este DEV. Código, salvaguardas, dados e evidências anteriores preservados; nenhum aceite integral concedido.",
+      "futureTrack": "Plano canônico P32 e seus inputs/owners, somente com nova autoridade concreta.",
+      "interpretation": "Estado exclusivo do recorte DEV, não conclusão integral da unidade original."
+    },
+    {
+      "id": "V2-015",
+      "stages": [
+        "P07"
+      ],
+      "status": "VERIFICADO_LOCAL",
+      "evidence": [
+        "AGGREGATE_CURRENT",
+        "SCANNER_SELF58",
+        "SCANNER_WHOLE"
+      ],
+      "integralAcceptanceGranted": false,
+      "localCriterion": "Gates de código, arquitetura, cobertura, scanner e recusas executados na revisão DEV final; feed/CI real separados.",
+      "excludedFacets": [],
+      "interpretation": "Estado exclusivo do recorte DEV, não conclusão integral da unidade original."
+    },
+    {
+      "id": "V2-015c",
+      "stages": [
+        "P29"
+      ],
+      "status": "VERIFICADO_LOCAL",
+      "evidence": [
+        "AGGREGATE_CURRENT",
+        "CLI_PACKAGED",
+        "SCANNER_WHOLE"
+      ],
+      "integralAcceptanceGranted": false,
+      "localCriterion": "Parcela DEV: scanner offline e smoke do pacote Windows com proveniência local; não concede SAST/SBOM/release produtivos integrais.",
+      "excludedFacets": [
+        {
+          "stage": "P29",
+          "reason": "Release/CI remota/SBOM/SO operacional/aceite Segurança do RC produtivo excluídos; pacote DEV é distinto.",
+          "impact": "Nenhum efeito externo/produtivo no DEV; critério integral preservado e não aceito.",
+          "futureTrack": "Plano canônico P29; inputs G01. Não há execução futura automática."
+        }
+      ],
+      "interpretation": "Estado exclusivo do recorte DEV, não conclusão integral da unidade original."
+    },
+    {
+      "id": "V2-015d",
+      "stages": [
+        "P11"
+      ],
+      "status": "EXCLUIDO_DEV_LOCAL",
+      "evidence": [],
+      "integralAcceptanceGranted": false,
+      "exclusion": "Feed e aceite real de vulnerabilidades não disponíveis nesta unidade sem download/autoridade; política offline preservada.",
+      "impact": "Função opcional externa/SQL/produtiva não compõe este DEV. Código, salvaguardas, dados e evidências anteriores preservados; nenhum aceite integral concedido.",
+      "futureTrack": "Plano canônico P11 e seus inputs/owners, somente com nova autoridade concreta.",
+      "interpretation": "Estado exclusivo do recorte DEV, não conclusão integral da unidade original."
+    },
+    {
+      "id": "V2-016",
+      "stages": [
+        "P10"
+      ],
+      "status": "EXCLUIDO_DEV_LOCAL",
+      "evidence": [],
+      "integralAcceptanceGranted": false,
+      "exclusion": "Governança, proteção, publicação e CI remotos exigem provider/remote/owners G02; nenhuma publicação autorizada.",
+      "impact": "Função opcional externa/SQL/produtiva não compõe este DEV. Código, salvaguardas, dados e evidências anteriores preservados; nenhum aceite integral concedido.",
+      "futureTrack": "Plano canônico P10 e seus inputs/owners, somente com nova autoridade concreta.",
+      "interpretation": "Estado exclusivo do recorte DEV, não conclusão integral da unidade original."
+    },
+    {
+      "id": "V2-016b",
+      "stages": [
+        "P10"
+      ],
+      "status": "EXCLUIDO_DEV_LOCAL",
+      "evidence": [],
+      "integralAcceptanceGranted": false,
+      "exclusion": "Governança, proteção, publicação e CI remotos exigem provider/remote/owners G02; nenhuma publicação autorizada.",
+      "impact": "Função opcional externa/SQL/produtiva não compõe este DEV. Código, salvaguardas, dados e evidências anteriores preservados; nenhum aceite integral concedido.",
+      "futureTrack": "Plano canônico P10 e seus inputs/owners, somente com nova autoridade concreta.",
+      "interpretation": "Estado exclusivo do recorte DEV, não conclusão integral da unidade original."
+    },
+    {
+      "id": "V2-022",
+      "stages": [
+        "P01",
+        "P02",
+        "P03",
+        "P04",
+        "P06",
+        "P12",
+        "P28"
+      ],
+      "status": "VERIFICADO_LOCAL",
+      "evidence": [
+        "AGGREGATE_CURRENT",
+        "BANK_FILESYSTEM_FINAL",
+        "CI_EXACT_GUARDS",
+        "CLI_PACKAGED",
+        "ENGINE_FINAL",
+        "SOURCE_FIXTURE_FINAL"
+      ],
+      "integralAcceptanceGranted": false,
+      "localCriterion": "CLI one-shot isolada integra fixture, engine, ledger, medição, replay, cancelamento, falha, recuperação e close.",
+      "excludedFacets": [
+        {
+          "stage": "P03",
+          "reason": "B–H JDBC/SQL real não executado; fluxos sintéticos sem banco serão qualificados separadamente.",
+          "impact": "Nenhum efeito externo/produtivo no DEV; critério integral preservado e não aceito.",
+          "futureTrack": "Plano canônico P03; inputs contratos físicos/nominais da unidade. Não há execução futura automática."
+        },
+        {
+          "stage": "P04",
+          "reason": "Rollback/savepoint SQL e journal físico excluídos; cancelamento/journal/preview local precisam prova própria.",
+          "impact": "Nenhum efeito externo/produtivo no DEV; critério integral preservado e não aceito.",
+          "futureTrack": "Plano canônico P04; inputs contratos físicos/nominais da unidade. Não há execução futura automática."
+        },
+        {
+          "stage": "P12",
+          "reason": "Ambiente SQL definitivo/TLS/principals/backup/restore e RTO/RPO materiais G05 excluídos; DEV usa arquivos sintéticos locais.",
+          "impact": "Nenhum efeito externo/produtivo no DEV; critério integral preservado e não aceito.",
+          "futureTrack": "Plano canônico P12; inputs G05. Não há execução futura automática."
+        },
+        {
+          "stage": "P28",
+          "reason": "COMMIT/crash/restore/concurrency SQL/recovery operacional externos não substituídos por arquivos.",
+          "impact": "Nenhum efeito externo/produtivo no DEV; critério integral preservado e não aceito.",
+          "futureTrack": "Plano canônico P28; inputs G05. Não há execução futura automática."
+        }
+      ],
+      "interpretation": "Estado exclusivo do recorte DEV, não conclusão integral da unidade original."
+    },
+    {
+      "id": "V2-025",
+      "stages": [
+        "P13"
+      ],
+      "status": "VERIFICADO_LOCAL",
+      "evidence": [
+        "CLI_PACKAGED",
+        "SOURCE_FIXTURE_FINAL"
+      ],
+      "integralAcceptanceGranted": false,
+      "localCriterion": "Onze fixtures e contratos de source limitados caracterizados por adapters reais, sem canal externo ou completude nominal.",
+      "excludedFacets": [
+        {
+          "stage": "P13",
+          "reason": "Contratos reais de fornecedor G03 não comprovados por fixtures.",
+          "impact": "Nenhum efeito externo/produtivo no DEV; critério integral preservado e não aceito.",
+          "futureTrack": "Plano canônico P13; inputs G03. Não há execução futura automática."
+        }
+      ],
+      "interpretation": "Estado exclusivo do recorte DEV, não conclusão integral da unidade original."
+    },
+    {
+      "id": "V2-025d",
+      "stages": [
+        "P13"
+      ],
+      "status": "EXCLUIDO_DEV_LOCAL",
+      "evidence": [],
+      "integralAcceptanceGranted": false,
+      "exclusion": "A unidade inteira é uma rodada cURL final autenticada /info+/data de nove templates, distinta dos fixtures locais de025. HTTP externo, segredo real e nova quota são expressamente proibidos neste pedido; nenhuma execução cURL é declarada.",
+      "impact": "Função opcional externa/SQL/produtiva não compõe este DEV. Código, salvaguardas, dados e evidências anteriores preservados; nenhum aceite integral concedido.",
+      "futureTrack": "Plano canônico P13 e seus inputs/owners, somente com nova autoridade concreta.",
+      "interpretation": "Estado exclusivo do recorte DEV, não conclusão integral da unidade original."
+    },
+    {
+      "id": "V2-029",
+      "stages": [
+        "P16"
+      ],
+      "status": "VERIFICADO_LOCAL",
+      "evidence": [
+        "CLI_PACKAGED",
+        "ENGINE_FINAL",
+        "SOURCE_FIXTURE_FINAL"
+      ],
+      "integralAcceptanceGranted": false,
+      "localCriterion": "CAP sintético executa mapper/regras existentes e retém aceitas/quarentena; importação e core SQL não chamados.",
+      "excludedFacets": [
+        {
+          "stage": "P16",
+          "reason": "Staging/promoção/DQ/replay físicos SQL/fonte real fora do pedido.",
+          "impact": "Nenhum efeito externo/produtivo no DEV; critério integral preservado e não aceito.",
+          "futureTrack": "Plano canônico P16; inputs G03. Não há execução futura automática."
+        }
+      ],
+      "interpretation": "Estado exclusivo do recorte DEV, não conclusão integral da unidade original."
+    },
+    {
+      "id": "V2-030",
+      "stages": [
+        "P16"
+      ],
+      "status": "VERIFICADO_LOCAL",
+      "evidence": [
+        "CLI_PACKAGED",
+        "ENGINE_FINAL",
+        "SOURCE_FIXTURE_FINAL"
+      ],
+      "integralAcceptanceGranted": false,
+      "localCriterion": "FAT sintético executa mapper/regras existentes e mantém precedence/filtros/quarentena; sem publicação SQL.",
+      "excludedFacets": [
+        {
+          "stage": "P16",
+          "reason": "Staging/promoção/DQ/replay físicos SQL/fonte real fora do pedido.",
+          "impact": "Nenhum efeito externo/produtivo no DEV; critério integral preservado e não aceito.",
+          "futureTrack": "Plano canônico P16; inputs G03. Não há execução futura automática."
+        }
+      ],
+      "interpretation": "Estado exclusivo do recorte DEV, não conclusão integral da unidade original."
+    },
+    {
+      "id": "V2-031",
+      "stages": [
+        "P16"
+      ],
+      "status": "VERIFICADO_LOCAL",
+      "evidence": [
+        "CLI_PACKAGED",
+        "ENGINE_FINAL",
+        "SOURCE_FIXTURE_FINAL"
+      ],
+      "integralAcceptanceGranted": false,
+      "localCriterion": "INV sintético executa mapper/regras existentes preservando expansão e ambiguidade de identidade.",
+      "excludedFacets": [
+        {
+          "stage": "P16",
+          "reason": "Staging/promoção/DQ/replay físicos SQL/fonte real fora do pedido.",
+          "impact": "Nenhum efeito externo/produtivo no DEV; critério integral preservado e não aceito.",
+          "futureTrack": "Plano canônico P16; inputs G03. Não há execução futura automática."
+        }
+      ],
+      "interpretation": "Estado exclusivo do recorte DEV, não conclusão integral da unidade original."
+    },
+    {
+      "id": "V2-032",
+      "stages": [
+        "P16"
+      ],
+      "status": "VERIFICADO_LOCAL",
+      "evidence": [
+        "CLI_PACKAGED",
+        "ENGINE_FINAL",
+        "SOURCE_FIXTURE_FINAL"
+      ],
+      "integralAcceptanceGranted": false,
+      "localCriterion": "SIN sintético executa mapper/regras existentes com timestamps/conflito e grão explicitamente sintético.",
+      "excludedFacets": [
+        {
+          "stage": "P16",
+          "reason": "Staging/promoção/DQ/replay físicos SQL/fonte real fora do pedido.",
+          "impact": "Nenhum efeito externo/produtivo no DEV; critério integral preservado e não aceito.",
+          "futureTrack": "Plano canônico P16; inputs G03. Não há execução futura automática."
+        }
+      ],
+      "interpretation": "Estado exclusivo do recorte DEV, não conclusão integral da unidade original."
+    },
+    {
+      "id": "V2-034",
+      "stages": [
+        "P16"
+      ],
+      "status": "VERIFICADO_LOCAL",
+      "evidence": [
+        "CLI_PACKAGED",
+        "ENGINE_FINAL",
+        "SOURCE_FIXTURE_FINAL"
+      ],
+      "integralAcceptanceGranted": false,
+      "localCriterion": "Raster mantido exclusivamente como parser de fixture local limitado; decisão/canal de operação real não inferidos.",
+      "excludedFacets": [
+        {
+          "stage": "P16",
+          "reason": "Staging/promoção/DQ/replay físicos SQL/fonte real fora do pedido.",
+          "impact": "Nenhum efeito externo/produtivo no DEV; critério integral preservado e não aceito.",
+          "futureTrack": "Plano canônico P16; inputs G03. Não há execução futura automática."
+        }
+      ],
+      "interpretation": "Estado exclusivo do recorte DEV, não conclusão integral da unidade original."
+    },
+    {
+      "id": "V2-034b",
+      "stages": [
+        "P16"
+      ],
+      "status": "VERIFICADO_LOCAL",
+      "evidence": [
+        "CLI_PACKAGED",
+        "ENGINE_FINAL",
+        "SOURCE_FIXTURE_FINAL"
+      ],
+      "integralAcceptanceGranted": false,
+      "localCriterion": "Parcela DEV: parser Raster real, sentinela/timezone, limites e ocorrência pai/filho local; nenhum acesso/provider Raster.",
+      "excludedFacets": [
+        {
+          "stage": "P16",
+          "reason": "Staging/promoção/DQ/replay físicos SQL/fonte real fora do pedido.",
+          "impact": "Nenhum efeito externo/produtivo no DEV; critério integral preservado e não aceito.",
+          "futureTrack": "Plano canônico P16; inputs G03. Não há execução futura automática."
+        }
+      ],
+      "interpretation": "Estado exclusivo do recorte DEV, não conclusão integral da unidade original."
+    },
+    {
+      "id": "V2-035",
+      "stages": [
+        "P15"
+      ],
+      "status": "VERIFICADO_LOCAL",
+      "evidence": [
+        "CLI_PACKAGED",
+        "ENGINE_FINAL"
+      ],
+      "integralAcceptanceGranted": false,
+      "localCriterion": "Referência sintética e seis famílias de bindings separadas no output; não produz seed/cadastro nominal.",
+      "excludedFacets": [
+        {
+          "stage": "P15",
+          "reason": "Ratificação/importação material de referências G04 não substituída por samples.",
+          "impact": "Nenhum efeito externo/produtivo no DEV; critério integral preservado e não aceito.",
+          "futureTrack": "Plano canônico P15; inputs G04. Não há execução futura automática."
+        }
+      ],
+      "interpretation": "Estado exclusivo do recorte DEV, não conclusão integral da unidade original."
+    },
+    {
+      "id": "V2-035a",
+      "stages": [
+        "P15"
+      ],
+      "status": "VERIFICADO_LOCAL",
+      "evidence": [
+        "CLI_PACKAGED",
+        "ENGINE_FINAL"
+      ],
+      "integralAcceptanceGranted": false,
+      "localCriterion": "Release sintético declarado e verificado; mudança em incremental/recomposição exige contexto coerente, sem baseline produtiva.",
+      "excludedFacets": [
+        {
+          "stage": "P15",
+          "reason": "Ratificação/importação material de referências G04 não substituída por samples.",
+          "impact": "Nenhum efeito externo/produtivo no DEV; critério integral preservado e não aceito.",
+          "futureTrack": "Plano canônico P15; inputs G04. Não há execução futura automática."
+        }
+      ],
+      "interpretation": "Estado exclusivo do recorte DEV, não conclusão integral da unidade original."
+    },
+    {
+      "id": "V2-035b",
+      "stages": [
+        "P21"
+      ],
+      "status": "VERIFICADO_LOCAL",
+      "evidence": [
+        "CLI_PACKAGED",
+        "ENGINE_FINAL"
+      ],
+      "integralAcceptanceGranted": false,
+      "localCriterion": "Seis famílias de bindings de dimensão do fixture com roles tipados; não materializa seis cadastros/views SQL.",
+      "excludedFacets": [
+        {
+          "stage": "P21",
+          "reason": "Bindings/rekey/vigência/cadastros/paridade nominal das dimensões não provados por sample.",
+          "impact": "Nenhum efeito externo/produtivo no DEV; critério integral preservado e não aceito.",
+          "futureTrack": "Plano canônico P21; inputs G04. Não há execução futura automática."
+        }
+      ],
+      "interpretation": "Estado exclusivo do recorte DEV, não conclusão integral da unidade original."
+    },
+    {
+      "id": "V2-036",
+      "stages": [
+        "P24"
+      ],
+      "status": "EXCLUIDO_DEV_LOCAL",
+      "evidence": [],
+      "integralAcceptanceGranted": false,
+      "exclusion": "As cinco materializações MAT-01..05 dependem de loaders set-based SQL e entradas PUBLISHED. A composição local não as chama; aproximações com semântica/schema diferentes foram rejeitadas. Retém somente metadata SQL_ONLY/computed=false/apply=false, sem linhas fictícias. Código SQL, testes e histórico são preservados.",
+      "impact": "Função opcional externa/SQL/produtiva não compõe este DEV. Código, salvaguardas, dados e evidências anteriores preservados; nenhum aceite integral concedido.",
+      "futureTrack": "Plano canônico P24 e seus inputs/owners, somente com nova autoridade concreta.",
+      "interpretation": "Estado exclusivo do recorte DEV, não conclusão integral da unidade original."
+    },
+    {
+      "id": "V2-037",
+      "stages": [
+        "P25"
+      ],
+      "status": "VERIFICADO_LOCAL",
+      "evidence": [
+        "CLI_PACKAGED",
+        "ENGINE_FINAL"
+      ],
+      "integralAcceptanceGranted": false,
+      "localCriterion": "Parcela DEV:19contratos sintéticos existentes, metadata e fingerprints carregados; views/linhagem nominal não publicadas.",
+      "excludedFacets": [
+        {
+          "stage": "P25",
+          "reason": "Manifestos/consumidores/aceite nominal SQL externo G04 não disponíveis; contratos locais explicitamente sintéticos.",
+          "impact": "Nenhum efeito externo/produtivo no DEV; critério integral preservado e não aceito.",
+          "futureTrack": "Plano canônico P25; inputs G04. Não há execução futura automática."
+        }
+      ],
+      "interpretation": "Estado exclusivo do recorte DEV, não conclusão integral da unidade original."
+    },
+    {
+      "id": "V2-038",
+      "stages": [
+        "P28"
+      ],
+      "status": "VERIFICADO_LOCAL",
+      "evidence": [
+        "AGGREGATE_CURRENT",
+        "BANK_FILESYSTEM_FINAL",
+        "CLI_PACKAGED",
+        "ENGINE_FINAL"
+      ],
+      "integralAcceptanceGranted": false,
+      "localCriterion": "E2E CLI, quatro escalas, replay/delta/cancelamento/erro/lock/crash/recovery local com pins e outputs lidos.",
+      "excludedFacets": [
+        {
+          "stage": "P28",
+          "reason": "COMMIT/crash/restore/concurrency SQL/recovery operacional externos não substituídos por arquivos.",
+          "impact": "Nenhum efeito externo/produtivo no DEV; critério integral preservado e não aceito.",
+          "futureTrack": "Plano canônico P28; inputs G05. Não há execução futura automática."
+        }
+      ],
+      "interpretation": "Estado exclusivo do recorte DEV, não conclusão integral da unidade original."
+    },
+    {
+      "id": "V2-039",
+      "stages": [
+        "P08",
+        "P29"
+      ],
+      "status": "VERIFICADO_LOCAL",
+      "evidence": [
+        "AGGREGATE_CURRENT",
+        "CLI_PACKAGED",
+        "SCANNER_WHOLE"
+      ],
+      "integralAcceptanceGranted": false,
+      "localCriterion": "Entrega isolada JAR+lib+launcher/config/sample, proveniência e comandos reais DEV com defaults antigos preservados.",
+      "excludedFacets": [
+        {
+          "stage": "P08",
+          "reason": "A/B SQL e despachos físicos históricos não reexecutados; pacote/CLI sem SQL têm aceites DEV próprios.",
+          "impact": "Nenhum efeito externo/produtivo no DEV; critério integral preservado e não aceito.",
+          "futureTrack": "Plano canônico P08; inputs contratos físicos/nominais da unidade. Não há execução futura automática."
+        },
+        {
+          "stage": "P29",
+          "reason": "Release/CI remota/SBOM/SO operacional/aceite Segurança do RC produtivo excluídos; pacote DEV é distinto.",
+          "impact": "Nenhum efeito externo/produtivo no DEV; critério integral preservado e não aceito.",
+          "futureTrack": "Plano canônico P29; inputs G01. Não há execução futura automática."
+        }
+      ],
+      "interpretation": "Estado exclusivo do recorte DEV, não conclusão integral da unidade original."
+    },
+    {
+      "id": "V2-039a",
+      "stages": [
+        "P08",
+        "P12"
+      ],
+      "status": "VERIFICADO_LOCAL",
+      "evidence": [
+        "AGGREGATE_CURRENT",
+        "CLI_PACKAGED",
+        "SCANNER_WHOLE"
+      ],
+      "integralAcceptanceGranted": false,
+      "localCriterion": "Parcela DEV: JAR/config/health por status/shutdown e runbook; service account/TLS/scheduler/backup físicos não instalados.",
+      "excludedFacets": [
+        {
+          "stage": "P08",
+          "reason": "A/B SQL e despachos físicos históricos não reexecutados; pacote/CLI sem SQL têm aceites DEV próprios.",
+          "impact": "Nenhum efeito externo/produtivo no DEV; critério integral preservado e não aceito.",
+          "futureTrack": "Plano canônico P08; inputs contratos físicos/nominais da unidade. Não há execução futura automática."
+        },
+        {
+          "stage": "P12",
+          "reason": "Ambiente SQL definitivo/TLS/principals/backup/restore e RTO/RPO materiais G05 excluídos; DEV usa arquivos sintéticos locais.",
+          "impact": "Nenhum efeito externo/produtivo no DEV; critério integral preservado e não aceito.",
+          "futureTrack": "Plano canônico P12; inputs G05. Não há execução futura automática."
+        }
+      ],
+      "interpretation": "Estado exclusivo do recorte DEV, não conclusão integral da unidade original."
+    },
+    {
+      "id": "V2-039b",
+      "stages": [
+        "P29"
+      ],
+      "status": "VERIFICADO_LOCAL",
+      "evidence": [
+        "AGGREGATE_CURRENT",
+        "CLI_PACKAGED",
+        "SCANNER_WHOLE"
+      ],
+      "integralAcceptanceGranted": false,
+      "localCriterion": "Pacote DEV congelado e smoke Windows atual com checksum/classes/fontes; não RC operacional integral.",
+      "excludedFacets": [
+        {
+          "stage": "P29",
+          "reason": "Release/CI remota/SBOM/SO operacional/aceite Segurança do RC produtivo excluídos; pacote DEV é distinto.",
+          "impact": "Nenhum efeito externo/produtivo no DEV; critério integral preservado e não aceito.",
+          "futureTrack": "Plano canônico P29; inputs G01. Não há execução futura automática."
+        }
+      ],
+      "interpretation": "Estado exclusivo do recorte DEV, não conclusão integral da unidade original."
+    },
+    {
+      "id": "V2-040",
+      "stages": [
+        "P33"
+      ],
+      "status": "EXCLUIDO_DEV_LOCAL",
+      "evidence": [],
+      "integralAcceptanceGranted": false,
+      "exclusion": "Retirada do legado/consumidores/credenciais/jobs G08 expressamente fora deste pedido; nenhum código histórico removido.",
+      "impact": "Função opcional externa/SQL/produtiva não compõe este DEV. Código, salvaguardas, dados e evidências anteriores preservados; nenhum aceite integral concedido.",
+      "futureTrack": "Plano canônico P33 e seus inputs/owners, somente com nova autoridade concreta.",
+      "interpretation": "Estado exclusivo do recorte DEV, não conclusão integral da unidade original."
+    },
+    {
+      "id": "V2-041",
+      "stages": [
+        "P09"
+      ],
+      "status": "EXCLUIDO_DEV_LOCAL",
+      "evidence": [],
+      "integralAcceptanceGranted": false,
+      "exclusion": "Rotação/invalidação/continuidade de credenciais reais exige Segurança/Operações G01; DEV não usa credenciais.",
+      "impact": "Função opcional externa/SQL/produtiva não compõe este DEV. Código, salvaguardas, dados e evidências anteriores preservados; nenhum aceite integral concedido.",
+      "futureTrack": "Plano canônico P09 e seus inputs/owners, somente com nova autoridade concreta.",
+      "interpretation": "Estado exclusivo do recorte DEV, não conclusão integral da unidade original."
+    },
+    {
+      "id": "V2-045",
+      "stages": [
+        "P12"
+      ],
+      "status": "EXCLUIDO_DEV_LOCAL",
+      "evidence": [],
+      "integralAcceptanceGranted": false,
+      "exclusion": "Ambiente SQL definitivo/TLS/principals/backup/restore e RTO/RPO materiais G05 excluídos; DEV usa arquivos sintéticos locais.",
+      "impact": "Função opcional externa/SQL/produtiva não compõe este DEV. Código, salvaguardas, dados e evidências anteriores preservados; nenhum aceite integral concedido.",
+      "futureTrack": "Plano canônico P12 e seus inputs/owners, somente com nova autoridade concreta.",
+      "interpretation": "Estado exclusivo do recorte DEV, não conclusão integral da unidade original."
+    },
+    {
+      "id": "V2-045b",
+      "stages": [
+        "P12"
+      ],
+      "status": "EXCLUIDO_DEV_LOCAL",
+      "evidence": [],
+      "integralAcceptanceGranted": false,
+      "exclusion": "Ambiente SQL definitivo/TLS/principals/backup/restore e RTO/RPO materiais G05 excluídos; DEV usa arquivos sintéticos locais.",
+      "impact": "Função opcional externa/SQL/produtiva não compõe este DEV. Código, salvaguardas, dados e evidências anteriores preservados; nenhum aceite integral concedido.",
+      "futureTrack": "Plano canônico P12 e seus inputs/owners, somente com nova autoridade concreta.",
+      "interpretation": "Estado exclusivo do recorte DEV, não conclusão integral da unidade original."
+    },
+    {
+      "id": "V2-046",
+      "stages": [
+        "P19"
+      ],
+      "status": "VERIFICADO_LOCAL",
+      "evidence": [
+        "CLI_PACKAGED",
+        "ENGINE_FINAL",
+        "SOURCE_FIXTURE_FINAL"
+      ],
+      "integralAcceptanceGranted": false,
+      "localCriterion": "MC/CF somente por bindings declarados/scoped, sem heurística de associação ou crosswalk nominal publicado.",
+      "excludedFacets": [
+        {
+          "stage": "P19",
+          "reason": "Cardinalidade/órfãos/conflitos/SLA SQL reais não provados por relações de fixture.",
+          "impact": "Nenhum efeito externo/produtivo no DEV; critério integral preservado e não aceito.",
+          "futureTrack": "Plano canônico P19; inputs G03. Não há execução futura automática."
+        }
+      ],
+      "interpretation": "Estado exclusivo do recorte DEV, não conclusão integral da unidade original."
+    },
+    {
+      "id": "V2-046a",
+      "stages": [
+        "P19"
+      ],
+      "status": "VERIFICADO_LOCAL",
+      "evidence": [
+        "CLI_PACKAGED",
+        "ENGINE_FINAL",
+        "SOURCE_FIXTURE_FINAL"
+      ],
+      "integralAcceptanceGranted": false,
+      "localCriterion": "MC sintético validado antes de CF, endpoints elegíveis e cardinalidade/conflito/órfão recusados; backlog/SLA SQL separado.",
+      "excludedFacets": [
+        {
+          "stage": "P19",
+          "reason": "Cardinalidade/órfãos/conflitos/SLA SQL reais não provados por relações de fixture.",
+          "impact": "Nenhum efeito externo/produtivo no DEV; critério integral preservado e não aceito.",
+          "futureTrack": "Plano canônico P19; inputs G03. Não há execução futura automática."
+        }
+      ],
+      "interpretation": "Estado exclusivo do recorte DEV, não conclusão integral da unidade original."
+    },
+    {
+      "id": "V2-046b",
+      "stages": [
+        "P19"
+      ],
+      "status": "VERIFICADO_LOCAL",
+      "evidence": [
+        "CLI_PACKAGED",
+        "ENGINE_FINAL",
+        "SOURCE_FIXTURE_FINAL"
+      ],
+      "integralAcceptanceGranted": false,
+      "localCriterion": "CF sintético usa binding explicitamente declarado e raízes escopadas; replay local sem reextrair, nenhuma associação heurística.",
+      "excludedFacets": [
+        {
+          "stage": "P19",
+          "reason": "Cardinalidade/órfãos/conflitos/SLA SQL reais não provados por relações de fixture.",
+          "impact": "Nenhum efeito externo/produtivo no DEV; critério integral preservado e não aceito.",
+          "futureTrack": "Plano canônico P19; inputs G03. Não há execução futura automática."
+        }
+      ],
+      "interpretation": "Estado exclusivo do recorte DEV, não conclusão integral da unidade original."
+    },
+    {
+      "id": "V2-047",
+      "stages": [
+        "P18"
+      ],
+      "status": "VERIFICADO_LOCAL",
+      "evidence": [
+        "CLI_PACKAGED",
+        "ENGINE_FINAL"
+      ],
+      "integralAcceptanceGranted": false,
+      "localCriterion": "Bootstrap local persistido, incremental e recomposição por ocorrência anterior com release/hash verificados; horizonte histórico real excluído.",
+      "excludedFacets": [
+        {
+          "stage": "P18",
+          "reason": "Bootstrap histórico real/origem/destino e migração legado não autorizados.",
+          "impact": "Nenhum efeito externo/produtivo no DEV; critério integral preservado e não aceito.",
+          "futureTrack": "Plano canônico P18; inputs G03,G05. Não há execução futura automática."
+        }
+      ],
+      "interpretation": "Estado exclusivo do recorte DEV, não conclusão integral da unidade original."
+    },
+    {
+      "id": "V2-048",
+      "stages": [
+        "P30"
+      ],
+      "status": "EXCLUIDO_DEV_LOCAL",
+      "evidence": [],
+      "integralAcceptanceGranted": false,
+      "exclusion": "Revisão nominal CUTOVER-DB-01/Tcut/writer/fences reais exige topologia e owners produtivos; não necessária ao DEV sintético.",
+      "impact": "Função opcional externa/SQL/produtiva não compõe este DEV. Código, salvaguardas, dados e evidências anteriores preservados; nenhum aceite integral concedido.",
+      "futureTrack": "Plano canônico P30 e seus inputs/owners, somente com nova autoridade concreta.",
+      "interpretation": "Estado exclusivo do recorte DEV, não conclusão integral da unidade original."
+    },
+    {
+      "id": "V2-048b",
+      "stages": [
+        "P30",
+        "P31"
+      ],
+      "status": "EXCLUIDO_DEV_LOCAL",
+      "evidence": [],
+      "integralAcceptanceGranted": false,
+      "exclusion": "Revisão nominal CUTOVER-DB-01/Tcut/writer/fences reais exige topologia e owners produtivos; não necessária ao DEV sintético. Ensaio material de cutover/restore/RTO/RPO G06 não autorizado; DEV não troca writer nem banco.",
+      "impact": "Função opcional externa/SQL/produtiva não compõe este DEV. Código, salvaguardas, dados e evidências anteriores preservados; nenhum aceite integral concedido.",
+      "futureTrack": "Plano canônico P30,P31 e seus inputs/owners, somente com nova autoridade concreta.",
+      "interpretation": "Estado exclusivo do recorte DEV, não conclusão integral da unidade original."
+    },
+    {
+      "id": "V2-050",
+      "stages": [
+        "P05",
+        "P27"
+      ],
+      "status": "VERIFICADO_LOCAL",
+      "evidence": [
+        "CLI_PACKAGED",
+        "MEASUREMENT_OPTIN"
+      ],
+      "integralAcceptanceGranted": false,
+      "localCriterion": "Quatro massas locais limitadas, bytes/lotes/retainedRows e heap observado; seis medições sintéticas opt-in. Sem prova de push-down SQL/SLO.",
+      "excludedFacets": [
+        {
+          "stage": "P05",
+          "reason": "Planos/IO/JDBC reais e SLO produtivo excluídos; escalas locais não são SLO.",
+          "impact": "Nenhum efeito externo/produtivo no DEV; critério integral preservado e não aceito.",
+          "futureTrack": "Plano canônico P05; inputs contratos físicos/nominais da unidade. Não há execução futura automática."
+        },
+        {
+          "stage": "P27",
+          "reason": "Volume representativo real, planos/IO SQL e SLO produtivo indisponíveis.",
+          "impact": "Nenhum efeito externo/produtivo no DEV; critério integral preservado e não aceito.",
+          "futureTrack": "Plano canônico P27; inputs G05. Não há execução futura automática."
+        }
+      ],
+      "interpretation": "Estado exclusivo do recorte DEV, não conclusão integral da unidade original."
+    }
+  ],
+  "counts": {
+    "stages": 33,
+    "uniqueUnits": 48,
+    "unitOccurrences": 60,
+    "stagesByStatus": {
+      "VERIFICADO_LOCAL": 23,
+      "EXCLUIDO_DEV_LOCAL": 10
+    },
+    "unitsByStatus": {
+      "VERIFICADO_LOCAL": 35,
+      "EXCLUIDO_DEV_LOCAL": 13
+    }
+  },
+  "proofs": [
+    {
+      "id": "SOURCE_FIXTURE_FINAL",
+      "status": "PASS",
+      "layer": "OFFLINE",
+      "artifact": {
+        "path": "target/dev-local-b77c5029cfbd/root/fontes-handoff03-audit.json",
+        "sha256": "e1d3118cfc917b36e1316e4d42decc82dafb6e1ee6c501f463d4614d8c197764",
+        "bytes": 327
+      }
+    },
+    {
+      "id": "BANK_FILESYSTEM_FINAL",
+      "status": "PASS",
+      "layer": "FILE_READBACK",
+      "artifact": {
+        "path": "target/dev-local-b77c5029cfbd/root/banco-junction04-scoped-audit.json",
+        "sha256": "19def3193e696852fa4e42f67041bf6faa9e9cfc2dfb2a4b623734d184faeb97",
+        "bytes": 11875
+      }
+    },
+    {
+      "id": "ENGINE_FINAL",
+      "status": "PASS",
+      "layer": "OFFLINE",
+      "artifact": {
+        "path": "target/dev-local-b77c5029cfbd/root/regras-handoff02-audit.json",
+        "sha256": "46a47232cf258aa1c6bdeacd59813ab8394a3d12cf7a0b0fd5391c91e92e9b83",
+        "bytes": 324
+      }
+    },
+    {
+      "id": "CLI_PACKAGED",
+      "status": "PASS",
+      "layer": "PACKAGED_CLI",
+      "artifact": {
+        "path": "target/dev-local-b77c5029cfbd/root/packaged-smoke01/result.json",
+        "sha256": "3f863993de90269f7f1091840d7b58cbc1f5ba4bad05f910f3d3b00dcc2efcbf",
+        "bytes": 38174
+      }
+    },
+    {
+      "id": "AGGREGATE_CURRENT",
+      "status": "PASS",
+      "layer": "OFFLINE",
+      "artifact": {
+        "path": "target/dev-local-b77c5029cfbd/runtime/aggregate05/result.json",
+        "sha256": "fcbb2ed858fae16b84a612707c9ae9505cd1d7a340c0be1ac67f477992c0e7d0",
+        "bytes": 345456
+      }
+    },
+    {
+      "id": "CI_EXACT_GUARDS",
+      "status": "PASS",
+      "layer": "OFFLINE",
+      "artifact": {
+        "path": "target/dev-local-b77c5029cfbd/root/ci-causal04/scoped-result.json",
+        "sha256": "117ff1520520468ed7fe536b5881787c119d4925ec8a98a360ae6810f1dbddcf",
+        "bytes": 3023
+      }
+    },
+    {
+      "id": "SCANNER_WHOLE",
+      "status": "PASS",
+      "layer": "OFFLINE",
+      "artifact": {
+        "path": "target/dev-local-b77c5029cfbd/root/secret-code04.log",
+        "sha256": "f0e92d1f8183642088da75a51f03d3101cb5e6f9bf389893b2c296b60a15a6ec",
+        "bytes": 482
+      }
+    },
+    {
+      "id": "SCANNER_SELF58",
+      "status": "PASS",
+      "layer": "OFFLINE",
+      "artifact": {
+        "path": "target/macrobloco-qualificacao-pacote-20260913-01/b77-dev-config-canary-causal01/result.json",
+        "sha256": "54a4b139247b015acc9328d0c7c2516df708a83d1f3bce1ba43ddd9e719f2d0a",
+        "bytes": 155
+      }
+    },
+    {
+      "id": "MEASUREMENT_OPTIN",
+      "status": "PASS",
+      "layer": "OFFLINE",
+      "artifact": {
+        "path": "target/dev-local-b77c5029cfbd/runtime/measurement-skip-closure01.json",
+        "sha256": "ac1db1de808c854f54449d26760fd87d7f4a7e8a62c50d7b24e0a4f6f5428f92",
+        "bytes": 2499
+      }
+    }
+  ],
+  "deliveryPins": [
+    {
+      "path": "target/dev-local-package-b77/Invoke-DevLocal.ps1",
+      "sha256": "bc60fe7c161bb5d303e9dd2000bde332f208d63c36e64765f5384dfb86885f4e",
+      "bytes": 1722
+    },
+    {
+      "path": "target/dev-local-package-b77/dev-local.sample.json",
+      "sha256": "ae7a4f0e2b52c8da4d5ea7c69726b0aa1e0128ca8650782a54ab21f45e235d4e",
+      "bytes": 132
+    },
+    {
+      "path": "target/dev-local-package-b77/etl-dataexport-v2-dev-local-fat.jar",
+      "sha256": "9ca8d82df36523281e5e1d586141d4d7d2dfc5a66cb9e3ece98081d3b20bea1e",
+      "bytes": 7392613
+    },
+    {
+      "path": "target/dev-local-package-b77/etl-dataexport-v2.jar",
+      "sha256": "fa8262c356a8d0f10bec36cdb061661985435deda78fd3bbf82fc3a7ff313658",
+      "bytes": 2862240
+    },
+    {
+      "path": "target/dev-local-package-b77/lib/jackson-annotations-2.18.11.jar",
+      "sha256": "9eab0d36da981645392427eedcb087e13be542488e37f935723dc0be50d18a53",
+      "bytes": 78413
+    },
+    {
+      "path": "target/dev-local-package-b77/lib/jackson-core-2.18.11.jar",
+      "sha256": "825fa72dfb9e2f8a642322f1390dbac22c30d15ebd6dc6b3772158821ee124eb",
+      "bytes": 588755
+    },
+    {
+      "path": "target/dev-local-package-b77/lib/jackson-databind-2.18.11.jar",
+      "sha256": "075ad94a76c3edf83e1972dc26f476361eb6b9d0e260d93fc11105509bc79cab",
+      "bytes": 1666375
+    },
+    {
+      "path": "target/dev-local-package-b77/lib/jackson-datatype-jsr310-2.18.11.jar",
+      "sha256": "b2bab3e2c34f7b0b7f83bdb4de4c869c884466f756d76ed661ab3d2d9f35d1d3",
+      "bytes": 133538
+    },
+    {
+      "path": "target/dev-local-package-b77/lib/logback-classic-1.5.16.jar",
+      "sha256": "f985a33a68d900badec5b0c3c613ab9db66415d2cf378987357ded9da5370e32",
+      "bytes": 306722
+    },
+    {
+      "path": "target/dev-local-package-b77/lib/logback-core-1.5.16.jar",
+      "sha256": "f15e206b98ca25294506d2dadfe5ce2a6da9df9cf7c85d8e7191f99a422df3c9",
+      "bytes": 621606
+    },
+    {
+      "path": "target/dev-local-package-b77/lib/mssql-jdbc-12.8.2.jre11.jar",
+      "sha256": "a298b4b42a80c283961674cc37223b84cacecf5cc6abccf1319ebd7d2a2462df",
+      "bytes": 1219348
+    },
+    {
+      "path": "target/dev-local-package-b77/lib/slf4j-api-2.0.16.jar",
+      "sha256": "a12578dde1ba00bd9b816d388a0b879928d00bab3c83c240f7013bf4196c579a",
+      "bytes": 69435
+    },
+    {
+      "path": "config/dev-local.synthetic.json",
+      "sha256": "ae7a4f0e2b52c8da4d5ea7c69726b0aa1e0128ca8650782a54ab21f45e235d4e",
+      "bytes": 132
+    },
+    {
+      "path": "scripts/dev/Invoke-DevLocal.ps1",
+      "sha256": "bc60fe7c161bb5d303e9dd2000bde332f208d63c36e64765f5384dfb86885f4e",
+      "bytes": 1722
+    },
+    {
+      "path": "scripts/dev/dev-local.sample.json",
+      "sha256": "ae7a4f0e2b52c8da4d5ea7c69726b0aa1e0128ca8650782a54ab21f45e235d4e",
+      "bytes": 132
+    },
+    {
+      "path": "scripts/security/Invoke-OfflineSecretScan.ps1",
+      "sha256": "b0baaac005cf15f17287d03dfaa824e7a6f314069473710a98d89499a91adf72",
+      "bytes": 21766
+    },
+    {
+      "path": "scripts/security/Test-OfflineSecretScan.ps1",
+      "sha256": "63a3bee75e556a9aebabe64a0d740d4a76c4260a0f1389dd3b60c53ce451f4b7",
+      "bytes": 25791
+    },
+    {
+      "path": "scripts/validation/Test-DevLocalMatrix.ps1",
+      "sha256": "1f1b81333d44a420e3300909b6ef46163a800ab8186908997f1d4ec30cd833a8",
+      "bytes": 6585
+    },
+    {
+      "path": "src/main/java/br/com/esl/etl/v2/bootstrap/DevLocalEngine.java",
+      "sha256": "d8fe104fb2e6329c8b559c30cb3b860e4a104bb1dd7d3a5a53b1a18487c8c071",
+      "bytes": 15502
+    },
+    {
+      "path": "src/main/java/br/com/esl/etl/v2/bootstrap/DevLocalEngineAnalytics.java",
+      "sha256": "264c086f0282ca691b6dd756e4a51f98d2d8ebc6cdb11a85744238de5332c3e0",
+      "bytes": 32901
+    },
+    {
+      "path": "src/main/java/br/com/esl/etl/v2/bootstrap/DevLocalEngineObservations.java",
+      "sha256": "a2291e489b443aa3c0c07daeac334f34ebc66c8c09189e0d3327f7643347e3af",
+      "bytes": 6873
+    },
+    {
+      "path": "src/main/java/br/com/esl/etl/v2/bootstrap/DevLocalEngineSample.java",
+      "sha256": "a862ff8eaacb717eb05015400a5b345c041cadb52972f5f91d9f629dd8a009e5",
+      "bytes": 1129
+    },
+    {
+      "path": "src/main/java/br/com/esl/etl/v2/bootstrap/DevLocalEngineScenario.java",
+      "sha256": "36438a4b4d61a97821e923cac7ed5b5bc2edf0e0b8f3ece26bf00d32fa972e85",
+      "bytes": 16773
+    },
+    {
+      "path": "src/main/java/br/com/esl/etl/v2/bootstrap/DevLocalEngineSweep.java",
+      "sha256": "85c677055487543a16888dffb3ff47b10a8b3319a1e606442839a55bfc203507",
+      "bytes": 11072
+    },
+    {
+      "path": "src/main/java/br/com/esl/etl/v2/bootstrap/DevLocalMain.java",
+      "sha256": "a841fff9eaa62df598fa6f23a78b5c61e2cb8cb6edf473319cf09b05137ec687",
+      "bytes": 17886
+    },
+    {
+      "path": "src/main/java/br/com/esl/etl/v2/bootstrap/DevLocalMainArguments.java",
+      "sha256": "71eab47f0a536c45f518b707a65bb2da192f06dededc0920edbbabd368a63ad7",
+      "bytes": 4622
+    },
+    {
+      "path": "src/main/java/br/com/esl/etl/v2/bootstrap/DevLocalMainConfiguration.java",
+      "sha256": "545647326ee16e786b3850929f1f82db04d1f48e3f4447972174a763405fa02c",
+      "bytes": 5814
+    },
+    {
+      "path": "src/main/java/br/com/esl/etl/v2/bootstrap/DevLocalMainJson.java",
+      "sha256": "fa3b10d5d0a41cbb579c77b45b0f459437eb4bf9b3bcf5b7387d83379e6aa924",
+      "bytes": 1464
+    },
+    {
+      "path": "src/main/java/br/com/esl/etl/v2/bootstrap/Main.java",
+      "sha256": "9696a9c6c7ce71544de06657dc3ff9c7763f766a9ca78fa781a2001485363edc",
+      "bytes": 24725
+    },
+    {
+      "path": "src/main/java/br/com/esl/etl/v2/plataforma/fonte/devlocal/DevLocalDataset.java",
+      "sha256": "2ee8b9721b6168d9849956f2d73ded37b27a9225e638b33490e3aaddee2ab189",
+      "bytes": 27333
+    },
+    {
+      "path": "src/main/java/br/com/esl/etl/v2/plataforma/fonte/devlocal/DevLocalRelationBindings.java",
+      "sha256": "d8e63d6eeeea10be0c4721925c5f103744d5c2ab1d859a3c75daa9eb81bf2939",
+      "bytes": 9534
+    },
+    {
+      "path": "src/main/java/br/com/esl/etl/v2/plataforma/fonte/devlocal/DevLocalSamples.java",
+      "sha256": "6ac40f950a8e83013e47a40ada6f911a3279e959110ffdc9d0be4ce3817769c0",
+      "bytes": 34137
+    },
+    {
+      "path": "src/main/java/br/com/esl/etl/v2/plataforma/persistencia/devlocal/DevLocalLedger.java",
+      "sha256": "23141bd2cfd580c3c9797eeca748bb980422ffeb155bf57739c02c1fc56f9134",
+      "bytes": 31467
+    },
+    {
+      "path": "src/test/java/br/com/esl/etl/v2/arquitetura/ArchitectureRulesTest.java",
+      "sha256": "48e93ec42ba262bc3215536a5efebc259809cbce67133eee62193892ffb167f2",
+      "bytes": 80176
+    },
+    {
+      "path": "src/test/java/br/com/esl/etl/v2/bootstrap/DevLocalEngineTest.java",
+      "sha256": "25062b49986b0542ad695eb8693043f07e7cc2c04585db6e21fec7bafa0a2d15",
+      "bytes": 36848
+    },
+    {
+      "path": "src/test/java/br/com/esl/etl/v2/bootstrap/DevLocalMainAdmissionTest.java",
+      "sha256": "922cf7dcfecb5e333cacdcb91acc0677e6efe70a80595a8a732c6088520495a7",
+      "bytes": 8802
+    },
+    {
+      "path": "src/test/java/br/com/esl/etl/v2/bootstrap/DevLocalMainConfigurationTest.java",
+      "sha256": "8fdafdbd388c894ab97e61c38a49bfe7977b8c95f25a33f5db3d3a0ad4cdc7d5",
+      "bytes": 7209
+    },
+    {
+      "path": "src/test/java/br/com/esl/etl/v2/bootstrap/DevLocalMainJsonTest.java",
+      "sha256": "32cd26375c5db05ef24f50d5547569867896dacdba21e5055f84c7513cb10d83",
+      "bytes": 1695
+    },
+    {
+      "path": "src/test/java/br/com/esl/etl/v2/bootstrap/DevLocalMainProcessTest.java",
+      "sha256": "3435ea78b94f1a6395c35f299a12d0be6df289ce413b1a54cfa470c23b286309",
+      "bytes": 21270
+    },
+    {
+      "path": "src/test/java/br/com/esl/etl/v2/plataforma/fonte/devlocal/DevLocalDatasetTest.java",
+      "sha256": "56f2b0dd626801cc4e73a4d282b90fd0aee0016d6823481d34bfd61e4555ee67",
+      "bytes": 11634
+    },
+    {
+      "path": "src/test/java/br/com/esl/etl/v2/plataforma/fonte/devlocal/DevLocalRelationBindingsTest.java",
+      "sha256": "fbdcb7c2e59850058d3a3770253d97716faa46f5806833e59e756ccb1fad7595",
+      "bytes": 14585
+    },
+    {
+      "path": "src/test/java/br/com/esl/etl/v2/plataforma/persistencia/devlocal/DevLocalLedgerJournalLimitTest.java",
+      "sha256": "134f0b2bb6d3f54f4865852ee2573f8641367b904d083ee9b4f22038bd01ae19",
+      "bytes": 6755
+    },
+    {
+      "path": "src/test/java/br/com/esl/etl/v2/plataforma/persistencia/devlocal/DevLocalLedgerProcessFixture.java",
+      "sha256": "f5f2081c9d7a9e5b9dcdec9e316dfdfb48752e5c8dc4b6035cb490fdf84bf68b",
+      "bytes": 1768
+    },
+    {
+      "path": "src/test/java/br/com/esl/etl/v2/plataforma/persistencia/devlocal/DevLocalLedgerTest.java",
+      "sha256": "f964deda0d7d729e297afe37af9f534a9fde918575731feb343ef5bb60034b42",
+      "bytes": 32983
+    },
+    {
+      "path": "src/test/resources/dev-local/expected.json",
+      "sha256": "c3c7e256a169fca97e2be3b1bdd1edcd1a091d0666683efc17998e6747669970",
+      "bytes": 12283
+    },
+    {
+      "path": "src/test/resources/dev-local/sample.json",
+      "sha256": "cc37b7601532ed01d7483ca219a3b7015ce996f37e013029770ad98e0d7242aa",
+      "bytes": 9740
+    }
+  ],
+  "essentialDependencies": []
+}

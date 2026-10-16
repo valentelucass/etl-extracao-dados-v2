@@ -197,3 +197,8 @@ Preparar o prompt não executa o macrobloco, cria autorização ou renova limite
 Uma entrega parcial conserva sua lacuna; um bloqueio não é promovido a aceite.
 Os registros0172 e prefácios que exigiam passagem automática ficam históricos,
 superados por esta correção do usuário.
+
+
+## Verificação atual com lacuna histórica explícita — c54d6a25880d
+
+Test-CurrentContinuity.ps1 confere sete documentos atuais por bytes/SHA/UTF8 e o manifesto histórico imutável. Seu manifesto docs/continuidade/current-continuity.json declara a presença ou ausência real do recibo antigo. A saída currentDocumentsValid não aceita fechamento histórico, não altera checkboxes e jamais concede efeito físico. Atualizações dos documentos exigem nova fotografia atual honesta; não reescrever snapshots/manifestos anteriores. O validador histórico Test-ContinuidadeAgentes.ps1 permanece estrito e pode continuar recusando HANDOFF_PATH se a prova privada original estiver ausente. O checker atual não converte essa recusa em PASS histórico e não substitui critérios de Main/SQL/fonte. Nenhuma cópia do recibo foi encontrada nos dois diretórios deste projeto pesquisados nesta rodada; nenhum recibo foi reconstruído.

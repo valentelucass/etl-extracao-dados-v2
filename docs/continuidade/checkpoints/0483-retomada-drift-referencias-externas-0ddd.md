@@ -1,0 +1,18 @@
+# Checkpoint0483 — retomada real e drift de duas referências externas
+
+Estado EM_EXECUCAO no mesmo HERMES_0ddd5518b433. Lucas reiterou concluir a pendente e autorizou diagnóstico pós-qualificação da primeira extração no arquivo etl-autorizacao-madrugada.txt. Anterior0482 SHA25689b15af3d2cabb0dfb7158f34c1b742d31508a9305cff803b1b5ae4ddc36afd3 preservado. Root único docs/CI; Banco único executor físico; nenhum callback Hermes.
+
+Runtime handoff04/admission03 existem e foram consumidos, manifest03 SHA25645179259134c95a919bdaa74b7c2c74aca73010347081bfedf8f351e4db15e7b/45membros. Root readback atual27 verifica todos45 e encontra43iguais/2drifts: README externo8257bytes SHA2458219340ef75ee409b4332bfcf9bba2a69476d9c7f95ff13b4c2d912c47d46 e status477bytes SHAa1740859b039b9726519ebd8a7183b316421f671c033a291ef81b9197a286d19. Manifest03/admission03/histórias não alterados. Despacho03 não emitido; Banco recebeu correção sucessora mínima, Runtime reconciliação independente. Não repetir suites concluídas nem atualizar manifest histórico para esconder drift.
+
+Documentos externos09/10 registram reinício15h31 e conexões em master posteriores/SQL16.0.1000.6. São evidências existentes com UTC próprio, não leitura atual shadow/TLS/catálogo/writers. Novo caminho seguro Root consulta única de evento17190 após reinício, max8, não obtém evidência de certificado; root-new-restart-event-result28.json conserva recusa/projeção sanitizada,0SQL/rede/provider/permissões. Leitura do ../CONTEXTO_GLOBAL.md solicitado falhou: arquivo ausente no pai do projeto; nenhuma autoridade inventada.
+
+Evidências privadas: root/root-resume-readback27.json; root/root-new-restart-event-intent28.json e result28.json; runtime/handoff04.json; banco/prepared-manifest03.json; regras/acceptance-matrix02.json; fontes/missing-channel01.json. Worktree preexistente preservado, três documentos originais copiados em root/resume0483-originals antes do front corrente. Zero nova conexão/reserva/SQL/HTTP ESL/trust/servidor/PM2/DDL/credencial/commit/dados Root nesta retomada.
+
+Critério primeira extração: qualificação DEV/offline não é integração real. Exige caller/captura exatos admitidos; folha atual/decisão específica se diferente do E3 imutável; catálogo/identidade/LoadedImage/proteção writers; quota6908 vigente vinculada nas seis dimensões; reserva/captura própria página1/per1/1..1000linhas/capHTTP2/30s/10MiB/deadline60s; readback e decisão owner transacional; confirmação pós-commit em reserva independente. Retenção parcial CANCELLED/CAPTURE_RETAINED_PARTIAL não prova completude/DQ/promoção. Janela2026-10-01 já provisionada, não pedir nova data.
+
+Próximas ações:
+1. Banco entrega sucessor mínimo para2referências modificadas sem alterar runtime compartilhado; Runtime revisa bytes reais e Root confere composição antes de nova autoridade pública.
+2. Banco observa cadeia pública somente com despacho/reserva próprios1con/60s, sem auth/Login7/provider/SQL/HTTP/trust; Root revisa DER e alternativas independentes.
+3. Consolidar diagnóstico pós-qualificação e tentativas quota existentes; captura só com todos gates. Input externo quota de Lucas/adminESL permanece necessário se nenhum recibo vigente legítimo existir.
+
+Quatro builders existentes acionados, sessões preservadas. Estados ainda em trabalho para entregas atuais; sem percentual inferido, sem final/comunicação completed ou checkbox integral. Atualização é evidência de drift causal encontrado, não conclusão do objetivo.

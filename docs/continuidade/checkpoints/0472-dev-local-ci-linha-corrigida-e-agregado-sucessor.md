@@ -1,0 +1,13 @@
+# Checkpoint0472 — CI local corrigida após a segunda recusa do agregado
+
+Mesmo HERMES_b77c5029cfbd; anterior0471 SHA256 `df93164b2bf6876d626b1250ceed7a7baf3d96413af3d60ca13f47df0c4f9f04`. Estado CORRECAO_CAUSAL_LOCAL_QUALIFICADA_AGREGADO_PENDENTE. Objetivo continua entrega executável DEV P01–P33, com exclusões honestas; sem efeito SQL/HTTP externo/provider real/V1/produção/download, sem novo aceite integral ou orçamento físico.
+
+Fontes handoff03 atual `7c1eb284ea8334bcd0a859f75089360bdbb81e23151561c2d52ed848f0bad8fe`,63pinsRoot PASS e pipelinePOM/bytecode equivalente; Regras02 `57b4ad60c0417fa92d9ec37522642eedf56f613ed0501fdac5062f2c9e91da38`,17pinsRoot PASS/4classes byte-idênticos. Somente7formatos, sem lógica/testes repetidos. Native observer Runtime corrigido com controles reais exit0/7; a primeira falha fica preservada com exit não persistido/indeterminado.
+
+Evento Root02 + admissão Runtime218pins permitiram aggregate02. Formatter PASS; Checkstyle recusou uma assinatura literal de142caracteres em ArchitectureRulesTest linha184, teto140. Native GetExitCodeProcess=wait=qualificationExit=1, processo próprio fechado, sem image requery posterior. Zero testes/integracao/JAR produzidos; não repetir tentativa idêntica.
+
+Root dividiu exclusivamente esse literal de assinatura com concatenação constante. Não era o hash Ledger nem nova exceção. Guard/API/limites/thresholds/tests preservados. Prova root/ci-format03/result.json PASS: Spotlessapply/check + CheckstylePOM offline + javacbefore/after,23classes byte-idênticos com -g:none. SourceCI atual `3185473ff40477cf5942563dd543463ac034be649f28865824a0eb19c0800388`; predecessorCI798/handoffBanco/previews/testes9 anteriores preservados e vinculados pela equivalência. Ledger23141... inalterado.
+
+Scanner dos sources formatados atual4379candidatos/4376textos/3binários/0findings PASS (root/secret-code03.log),58contraprovas preservadas; AST02 atualiza29files por leitura local/exit0, sem LLM/semanticdocs ou aceite do pacote. A única alteração posterior ao scan/AST é a quebra do literal CI qualificada sem mudança de valor, em espera de fechamento final.
+
+Próximas:1)Runtime prepara sucessor03 e recebe novo evento Root03 após pins/provas correntes;2)um agregado completo offline e pacote/launcher/Rootsmoke;3)matriz final/validator/scanner/estado/recibo e encerrar aguardando Lucas. Fontes/Banco/Regras ociosos; Root sole docs/CI editor e Runtime somente sua unidade. Main/POM/AGENTS/plano/runbook byte-idênticos, STOP429/PAUSED e counters39/45,67/115 intactos. Nenhuma dependência externa essencial ao DEV identificada; entrega ainda não concedida sem agregado e smoke finais.

@@ -1,0 +1,23 @@
+# Checkpoint0508 — Main DEV: preparo real e backend concreto em integração
+
+HERMES_8fdb85e78657 EM_EXECUÇÃO, não encerrado. User autorizou continuidade do mesmo objetivo; nenhum recibo final escrito. ADR0064 e checkpoints0506–0507 preservados. Root editor docs/CI; Runtime composição/Main/DTO/control/binder; Banco Scope/Connector/peer-proof/Inspector/report e sole executorSQL; Fontes auditoria read-only; Regras review.
+
+## Evidência recebida
+
+Main DEV pública/JAR real PID7016,exit20,1234ms, saída completa482bytes, semstderr/timeout e child/readers/streams fechados. Prepared1workload com C78metadata/audit true, integrated false, SAMPLEfalse,8arquivos pinned. Não engine/SQL/fonte/provider, nem readiness física. Causa SecretInputPolicy/seletor bootstrap demonstrada no RUN anterior foi corrigida só na cópia Properties, globals/policyoriginal intactos. Handoff Runtime parcial05 recebido.
+
+Runtime full compile05:727fontes/1268classes,Java17 release17/parameters/Xlintall/Werror,exit0/19,328s/sem drift durante compile. Não é coorte física final: binder/Scope/catalog deltas posteriores em curso. Root teste dirigido2 checks teve falha owncopy10 por Path.is_file>260, preservada; successor11 revelou parcial976classes e parâmetros ausentes na compile04. Nenhuma alteração de CI para ocultar coorte incompleta. Fullcohort05 no Root13 detectou apenas2APIs metadata limitadas e private serializerbyte[]. RootCI mudou assinaturas EXATAS; Root15 três casos PASS, incluindo impostores recusados, semallowblanket package/Store. Formatter/layout e Checkstyle17 PASS no arquivo final; qualificação da coorte física final pendente. Não reexecutar suites amplas iguais por esse preparo.
+
+Banco final02:38casos locais únicos com26reused+12deltacausal, @param/cleanupknown corrigidos; semschema físico. Novo overload DEV Scope/Connector requer C78DevPeerProof/Tuple uma vez no socket real apósTCPconnect/antesstreams. Controller Banco prova reverse tuple/service/PID/início bruto/kernelImage/arquivo16/hash atuais, permit privado; pin/TLS Finished do driver continua antesLOGIN7. Runtimecontract06 dizia afterFinished: Root16 corrigiu a premissa, não alegar Finished antecipado. Perfil original open/enter/defaults/BF/E3/Windows preservados. Pré-limite antes List.copyOf/mapperDEV razões e testes Banco14 em curso; native controller/PRE/current bundle/admissão/reserva concretos ainda internos pendentes. NÃO TDS/SQL físico despachado até esse gate.
+
+## Fonte e scope
+
+Fontes02 resolveu canal declarado dbo.page_audit por5arquivos/43024bytes/30s máximo, semSQL/TCP/HTTP/provider/secret/IDs/argv/env dump/V1writes. Configuração provisionada aponta PRODUCTION/nonshadow, loopback declarado1433, SQL auth e trustServerCertificate=true; não provar liveoverrides/peer/rights. Rootdecisão16 NÃO admite esse acesso porherança C78/shadow nemTLSacceptallV1. CSV/fallback conhecidos ausentes, schema declarado não contém seisvínculos/quotaTTL. STOP4296908 continua apenas dependente; acesso concreto a recibo/auditoria existente comUTC/procedência/validade/restrições/mesmo caller é input externo mínimo, não pesquisa técnica atribuída aLucas.
+
+SQL arquivo16.0.1000.6/hash históricoatual do PRE/POST preparos preservado, semLoadedImage atual ainda. JAMAIS mudar versão/instalação/contas/identidades/permissões/ACL/serviços/certificados/trustglobal/schema/Flyway/V1/PM2/produção. Nenhuma extração/tabela nova real/captura/DQ/promoção/paridade integral comprovada; nenhum checkboxprodutivo promovido. Não terminar por coldprepare/auditoria/fixture; continuar backend e engine reais independentes.
+
+1. Runtime/Banco concluir ligação concreta Main→catalog/IPC/peer-proof/controller e qualificar coorte final; Root revisar despacho/pins/reserva e Banco executar unidade física1conn/12SELECT/10s-query/60s-total/retry0 quando apta.
+2. Corrigir próximas causas internas no mesmo ciclo real e integrar componentes/engine/sourcegate reais com limites próprios; captura só com gates atuais e provaquota, nunca mocks.
+3. Regras revisar novoresultado real; sincronizar STATES/trilha/checkpoints e grafo dirigido após bytes finais, recibo somente objetivo verificado ou obstáculo externo sem trabalho interno elegível.
+
+Evidências privadas em hermes8fdb85e78657: runtime01/handoff-partial05,compile05,catalog-binding-contract06,ownership-binding06; banco01/handoff02,banco02-preauth/ownership-interface01; fontes02/target-access01,handoff01/readback05; root/architecture10/11/13/15,format17,audit-scope-decision16; binding-review16. PONG Root/Runtime/Banco/Fontes recebidos, Regras03 evento em curso; estados finais de participantes ainda não coletados. Não callbackHermes nem polling/espera artificial.

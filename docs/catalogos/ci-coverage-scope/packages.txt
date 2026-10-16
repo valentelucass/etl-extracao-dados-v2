@@ -30,6 +30,7 @@ br.com.esl.etl.v2.plataforma.controle
 br.com.esl.etl.v2.plataforma.expansao
 br.com.esl.etl.v2.plataforma.fonte
 br.com.esl.etl.v2.plataforma.fonte.dataexport
+br.com.esl.etl.v2.plataforma.fonte.devlocal
 br.com.esl.etl.v2.plataforma.fonte.graphql
 br.com.esl.etl.v2.plataforma.fonte.raster
 br.com.esl.etl.v2.plataforma.identidade
@@ -40,6 +41,7 @@ br.com.esl.etl.v2.plataforma.persistencia.analitico
 br.com.esl.etl.v2.plataforma.persistencia.coletas
 br.com.esl.etl.v2.plataforma.persistencia.controle
 br.com.esl.etl.v2.plataforma.persistencia.cotacoes
+br.com.esl.etl.v2.plataforma.persistencia.devlocal
 br.com.esl.etl.v2.plataforma.persistencia.expansao
 br.com.esl.etl.v2.plataforma.persistencia.fretes
 br.com.esl.etl.v2.plataforma.persistencia.localizacaocargas

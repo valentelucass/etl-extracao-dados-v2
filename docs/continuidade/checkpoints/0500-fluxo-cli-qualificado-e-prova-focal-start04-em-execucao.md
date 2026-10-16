@@ -1,0 +1,18 @@
+# Checkpoint0500 — Fluxo CLI qualificado; prova focal START04 em execução
+
+Mesmo HERMES_ce7fca106978/paridade01, UTC2026-10-12T23:45:52.246235+00:00. EM_EXECUCAO, ainda sem encerramento. Anterior0499 SHA256 5d600a2c2ce92742bee60b93702a49a038f2d9db6039b6202e01b2418a294f96 preservado.
+
+Banco ledger FINAL18 novos/35 regressões PASS, Runtime10CLI/12 controles qualificados com reuso explícito5/10, Root build720Java17/arquitetura22PASS. Runtime FINAL handoff-final06 e final06/manifest publicados; Root runtime-package-readback29 verificou18payloads/todos23ZIPmembers/303JARentries byte-idênticos às classes/resources qualificados, incluindo10classes ledger iguais ao FINAL Banco. BancoZIP contém89payloads+manifest=90membros, todosclassificados em archive-complete-readback26. Prefixo synthetic grande64KiB não foi recibo completo; readback e replay reais separados. Provas antigas e falhas preservadas.
+
+Gates finais unificados na flag bank.start.external-fixtures.enabled: absent/false abort13Banco/skip3Runtime, não PASS; true exige fixtures próprias, Runtime também hash esperadoagent/ASM, Banco tambémJARlegacy. Contrato final Runtime fixture-contract-final.json substitui descrição preparatória; runbook foi ajustado ao contrato executado. Source current ledgera448/CLI a02/Args641/testRuntime903b/testBanco c5e. Nenhum byte Main/C78/BF/E3/POM/defaults alterado.
+
+Delta final code-delta-final14:1448arquivos iniciais,4alterados+2novos,0drift fora de6caminhos/0deletados. Grafo AST dirigido somente nesses6:42249→42334nós,282ASTnodes/980edges, semreclustering; ownjob exit0/34438ms,active0/handleclosedtrue. GraphafterSHA b9819ea82bce40fbe606513c30b8bf35f862cc128782213737949f8f442625ea. Query real confirmou reconcileStart/pendingStartIds/novo teste CLI, graph-symbol-readback30. Não atualizar novamente por nova documentação/prova privada sem mudança de código.
+
+Regras FINAL regras03/handoff01/start-review01 aceitou o fluxo local observado, mas não declarou toda matriz START01..07: START04 parcial porque a própria reconciliação não havia sido interrompida. Root adotou fechar essa prova focal no mesmo bloco, sem novo inputLucas ou outro macrobloco. Despacho start04-event31 ao Banco: novo diretório privado banco03-start04; até9JVMs próprias (3cenários/3JVMs),10s/cleanup3/unidade180s/compile1até30s/semretry. Pendência INTENT_DURABLE → JVMnova reconcile interrompido em DIRECTORY_1/BEFORE_START/AFTER_START → JVMnova readback/reconcile/stopSTOPPED/segunda retomada semwrites, exatamente1START/1terminal. Usar agente pin93bf/ASM8cadd existentes, com açãoRECONCILE e coorte observadas, não inferência do método comum. Sem código/CI/agente/histórico editados; falha causal de produto congela antes de qualquer correção compartilhada.
+
+Essa prova ainda não foi recebida ou aceita. Modelo de morte de processo em fronteiras de gravações completas, não quedaenergia/mid-write/stopatômico/writerhostil. Nenhuma repetição de53/22/suites, nenhum efeitoSQL/TDS/HTTP/provider/DDL/PM2/V1/serviço/ACL/trust/produção. STOP429 continua só no dependente dequota6908, sem nova busca/sonda. Versão/instalaçãoSQL16.0.1000.6 JAMAIS alteradas, executável atualhash73dcd4… preservado por leitura. C78 técnico separado preservado, nenhuma fonte/SQL/E2E/extração/completude/DQ/promoção/cutover comprovada por este bloco.
+
+Próximas ações:
+1. Consumir prova focal Banco START04, verificarbytes/ocorrências/fechamento; sefalhar investigar causalmente no mesmo escopo, semretry/sobrescrita.
+2. Regras revisa somente complemento focal recebido; finalizar ADR/relatório/estado com aceites e limites reais.
+3. Checks finais apropriados, pongs/ociosidade reais e reciboce7f consolidado, preservandoanterior; terminar este único bloco semcallbackHermes e aguardar decisão.

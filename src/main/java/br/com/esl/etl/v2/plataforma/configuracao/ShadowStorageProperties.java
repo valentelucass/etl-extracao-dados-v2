@@ -32,6 +32,7 @@ public final class ShadowStorageProperties {
     private final String approvalReference;
     private final boolean sampleSaAuthentication;
     private final boolean sampleSqlPinAuthentication;
+    private final boolean c78LocalAuthentication;
 
     private ShadowStorageProperties(
             final boolean auditEnabled,
@@ -57,12 +58,49 @@ public final class ShadowStorageProperties {
             final String approvalReference,
             final boolean sampleSaAuthentication,
             final boolean sampleSqlPinAuthentication) {
+        this(
+                auditEnabled,
+                targetKind,
+                jdbcUrl,
+                approvalReference,
+                sampleSaAuthentication,
+                sampleSqlPinAuthentication,
+                false);
+    }
+
+    private ShadowStorageProperties(
+            final boolean auditEnabled,
+            final ShadowStorageTargetKind targetKind,
+            final String jdbcUrl,
+            final String approvalReference,
+            final boolean sampleSaAuthentication,
+            final boolean sampleSqlPinAuthentication,
+            final boolean c78LocalAuthentication) {
         this.auditEnabled = auditEnabled;
         this.targetKind = targetKind;
         this.jdbcUrl = jdbcUrl;
         this.approvalReference = approvalReference;
         this.sampleSaAuthentication = sampleSaAuthentication;
         this.sampleSqlPinAuthentication = sampleSqlPinAuthentication;
+        this.c78LocalAuthentication = c78LocalAuthentication;
+    }
+
+    /** Metadata for the exact C78 profile; this grants no connection or effect authority. */
+    public static ShadowStorageProperties enabledC78Local(final C78LocalSqlTarget target) {
+        Objects.requireNonNull(target, "C78_LOCAL_SHADOW_EXACT_TARGET_REQUIRED");
+        final var exact = new C78LocalSqlTarget(target.jdbcUrl(), target.approvalReference());
+        return new ShadowStorageProperties(
+                true,
+                ShadowStorageTargetKind.LOCAL_EPHEMERAL,
+                exact.jdbcUrl(),
+                exact.approvalReference(),
+                false,
+                false,
+                true);
+    }
+
+    public boolean usesC78LocalAuthentication() {
+        return c78LocalAuthentication;
     }
 
     public static ShadowStorageProperties disabled() {

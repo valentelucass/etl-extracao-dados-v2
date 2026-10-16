@@ -52,3 +52,7 @@ linhas e 60% de ramos para estas classes e para os três pacotes JDBC; sua
 execução requer as travas locais documentadas em `AGENTS.md`. O perfil físico
 não foi executado nesta rodada. `bootstrap` ainda reprova 80/60 no Ubuntu; as
 demais classes mistas permanecem `UNIT_INCLUDED` até prova causal individual.
+
+## DEV LOCAL b77: classificação unitária exata
+
+As dez classes `DevLocal*` de bootstrap foram revisadas como `UNIT_INCLUDED` por bytes atuais no manifesto: engine, analytics, observations, sample, scenario, sweep e main, arguments, configuration, json. A composição usa exclusivamente fixtures sintéticas, arquivos locais limitados e regras puras; o catálogo SQL é metadata, sem conexão/aplicação. Os novos pacotes fonte.devlocal e persistencia.devlocal seguem o gate PACKAGE padrão80/60. Nenhuma exclusão física nova ou limiar alterado. Duas classes CI completas25casos PASS em root/ci-causal04/scoped-result.json; o verify final deverá conferir o conjunto corrente. O agregado04 e a recusa por caminho junction longo estão preservados no checkpoint0474.

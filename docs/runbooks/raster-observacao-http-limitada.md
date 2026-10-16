@@ -1,0 +1,17 @@
+# Observação HTTP Raster para testes
+
+Regra `RAS-HTTP-OBS-001`, responsável técnico Fontes e Contratos/Codex. Origem: pedido de 05/10/2026 para extrair todas as entidades no banco de testes, contrato local [Raster](../catalogos/raster-contrato-local/contrato.json) e transporte estático do legado. Esta regra prepara uma consulta limitada; não transforma candidatos de identidade em chaves canônicas nem comprova completude do fornecedor.
+
+`HttpRasterObservationClient` recebe configuração explícita e um provedor de credenciais em memória. O módulo continua desabilitado por padrão, sem alteração de Main ou leitura automática de segredo. O alvo HTTPS deve ter o caminho exato `/datasnap/rest/TWebService/%22getEventoFimViagem%22`, sem userinfo, query ou fragmento; nenhum host de produção é default. Login e Senha seguem no corpo JSON definido pelo contrato, nunca em logs ou recibos.
+
+A requisição contém Ambiente e StatusViagem explícitos, TipoRetorno=JSON e datas civis ISO DataInicial/DataFinal. Para a primeira observação, usar o mesmo dia nos dois campos. Isso não certifica a inclusividade remota nem converte uma janela interna em contrato temporal ratificado. Não enviar per, página ou cursor que o fornecedor não documentou.
+
+Limites locais: uma chamada por instância, conexão até10s, operação até30s, resposta até10MiB, no máximo499 viagens e1000 paradas. A resposta inteira passa pelo parser e pelos limites antes de entregar a primeira observação ao Sink; dados acima do limite são recusados, sem salvar um prefixo como sucesso. Timeout, 429, qualquer não2xx, redirect, shape inválido ou ambíguo e falha do Sink interrompem a ocorrência sem retry/fallback. Zero registros e volume abaixo do cap não provam terminalidade.
+
+O processo deve iniciar com `jdk.httpclient.disableRetryConnect=true`, `jdk.httpclient.enableAllMethodRetry=false` e `jdk.httpclient.redirects.retrylimit=1`. O cliente valida essas opções antes de consultar o provedor ou criar transporte; não muda propriedades globais depois de iniciar. HTTPS usa a confiança e validação de hostname estritas normais, sem relação com a exceção do certificado SQL local.
+
+O recibo expõe somente status HTTP e contagens. `sourceCompletenessProven` e `canonicalIdentityProven` permanecem falsos. O Sink é responsabilidade do chamador e, quando escrever, deve participar de uma transação própria com rollback em falha; o cliente não promove dados nem inventa bindings `synthetic-*`. Candidatos de raiz/parada, sentinelas e timestamps continuam sujeitos ao parser/contrato existente. Por exemplo, uma resposta com501 viagens recusa antes do Sink; uma com uma viagem válida pode ser observada sem receber selo de identidade ou snapshot completo.
+
+Testes causais em `HttpRasterObservationClientTest`: single-use, corpo/filtros, opções JVM, status HTTP, limites e metadados de tamanho, timeout/cancelamento, parse completo antes do Sink e erros sanitizados. Os resultados executados ficam em STATES e na unidade `target/test-database-all-entities-20261005/fontes/`; este runbook não é evidência de chamada real.
+
+Para executar, ainda é necessário congelar a configuração efetivamente provisionada, janela e reserva específica, qualificar a composição final e registrar fechamento. Os catálogos/manifestos históricos não são alterados por este adendo. Recuperação: desabilitar esta entrada e encerrar seus recursos; nenhum retry automático, alteração de servidor ou remoção de dados confirmados.

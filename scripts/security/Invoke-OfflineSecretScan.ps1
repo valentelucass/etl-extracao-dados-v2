@@ -57,7 +57,7 @@ $textExtensions = @(
     '.yaml',
     '.yml'
 )
-$extensionlessTextFiles = @('.env.example', 'Dockerfile', 'LICENSE', 'NOTICE', 'mvnw')
+$extensionlessTextFiles = @('.env.example', '.graphifyignore', '.graphify_version', 'Dockerfile', 'LICENSE', 'NOTICE', 'mvnw')
 $maximumTextFileBytes = 5MB
 $strictUtf8 = [System.Text.UTF8Encoding]::new($false, $true)
 
@@ -74,10 +74,25 @@ $approvedBinaryFiles.Add(
     'src/test/resources/tls/sql-sample-manual-pin-325fac56a833.cer',
     'bf723ae91fc90f3cc448122366c90650cbc2c6f5cd4a849f4b3c88c68e7a43a0'
 )
+# TEST-RETAINED-TLS-001: separately approved public leaf; exact path and bytes only.
+$approvedBinaryFiles.Add(
+    'src/test/resources/tls/sql-test-retained-e3-20261005.cer',
+    'e3a5a7061fb56c225f93cc330cd733f5911f7d3f420d608ebe9afa7371ace276'
+)
+# C78-LOCAL-TLS-001/ADR0062: exact 1028-byte public X.509 DER; no key/store/path-family exemption.
+$approvedBinaryFiles.Add(
+    'src/test/resources/tls/C78LocalCurrent.der',
+    'c78bbe9a3fdb1a997971a46fb41e7860ef7153ec7813a41250a9156363f86bcc'
+)
 
 $allowedSyntheticFindings =
     [System.Collections.Generic.HashSet[string]]::new([System.StringComparer]::Ordinal)
 foreach ($entry in @(
+    # DEV-LOCAL-SEC-001: public Graphify token-count variables, exact rule/path/value only.
+    'SECRET_BARE_ASSIGNMENT|.agents/skills/graphify/SKILL.md|input_tok,',
+    'SECRET_BARE_ASSIGNMENT|.agents/skills/graphify/SKILL.md|output_tok,',
+    # DEV-LOCAL-SEC-002: invalid-config refusal canary; exact test/path/value only.
+    'HARDCODED_SECRET_ARGUMENT|src/test/java/br/com/esl/etl/v2/bootstrap/DevLocalMainProcessTest.java|SYNTHETIC_CONFIG_CANARY',
     # QUAL-I: four public CycloneDX1.6 schema descriptions; exact path/value, never a directory exemption.
     'SECRET_QUOTED_ASSIGNMENT|docs/catalogos/macrobloco-qualificacao-pacote/third-party/bom-1.6.schema.json|A key used to encrypt and decrypt messages in symmetric cryptography.',
     'SECRET_QUOTED_ASSIGNMENT|docs/catalogos/macrobloco-qualificacao-pacote/third-party/bom-1.6.schema.json|A piece of data known only to the parties involved, in a secure communication.',
@@ -87,8 +102,13 @@ foreach ($entry in @(
     'HARDCODED_SECRET_ARGUMENT|src/test/java/br/com/esl/etl/v2/plataforma/configuracao/RuntimeSampleSaConfigurationTest.java|synthetic',
     # COL-SAMPLE-TLS-PIN-001: fake streams never reach LOGIN7; exact fixture/path only.
     'HARDCODED_SECRET_ARGUMENT|src/test/java/br/com/esl/etl/v2/plataforma/configuracao/PinnedSampleRealDriverTest.java|synthetic-only-driver-fixture',
+    # TEST-RETAINED-TLS-001: isolated fake driver streams, exact synthetic value and path.
+    'HARDCODED_SECRET_ARGUMENT|src/test/java/br/com/esl/etl/v2/plataforma/configuracao/TestRetainedRealDriverTest.java|synthetic-only-driver-fixture',
+    # TEST-RETAINED-TLS-001: rejected JDBC URL fixture, exact synthetic literal and path.
+    'INLINE_SECRET_ASSIGNMENT|src/test/java/br/com/esl/etl/v2/plataforma/configuracao/TestRetainedProfileBoundaryTest.java|synthetic-only',
     # COL-SAMPLE-TLS-PIN-001: injected connector/streams only; preserve synthetic whitespace.
     'HARDCODED_SECRET_ARGUMENT|src/test/java/br/com/esl/etl/v2/plataforma/configuracao/PinnedSampleConnectorFailureTest.java|synthetic-only',
+    'HARDCODED_SECRET_ARGUMENT|src/test/java/br/com/esl/etl/v2/plataforma/persistencia/controle/TestRetainedSaJdbcConnectorTest.java|synthetic-only',
     # ANA-39: exact local fixture values; no generic exemption for token fields or synthetic paths.
     # SQL joins compare token columns with the derived-table alias normalized; this is no literal.
     'INLINE_SECRET_ASSIGNMENT|database/migrations/V071__consume_analytic_owned_fleet_references.sql|normalized',

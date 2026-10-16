@@ -34,6 +34,7 @@ import br.com.esl.etl.v2.plataforma.resiliencia.EslRequestGovernor;
 import br.com.esl.etl.v2.plataforma.resiliencia.MonotonicTicker;
 import br.com.esl.etl.v2.plataforma.resiliencia.ResilienceSleeper;
 import br.com.esl.etl.v2.plataforma.resiliencia.RuntimeExitCategory;
+
 import java.time.Duration;
 
 /** One-shot concrete handlers. Called exclusively after durable authorization consumption. */
@@ -110,6 +111,12 @@ final class RuntimeOperationalExecution {
                 return attempts;
             }
         };
+    }
+
+    static SourceGateways observedDataExportSourceGateways(
+            final DataExportHttpAttemptObserver attempts) {
+        return (configuration, request, cancellation, observation) ->
+                sourceGateways(configuration, request, cancellation, observation, attempts);
     }
 
     static RuntimeExitCategory execute(

@@ -173,3 +173,8 @@ diff-review.patch sem histórico duplicado, java-verification.json,
 packaged-class-verification.json, scale-verification-verify03.json,
 actual-plan-inspection-verify03.json, jar-01/, logs/, ledgers e recibos.
 O checkpoint vigente e seu hash estão em docs/continuidade/RETOMADA.md.
+
+
+### EXP-PRESENCE-WIRE-052 — presença coerente com representação original
+
+Qualificação52/Regras04 revelou que construção direta ABSENT+STRING podia passar e chegar ao consumidor. ExpansionValue agora recusa com EXP_WIRE_PRESENCE_CONFLICT: ABSENT exige wireABSENT, NULL exige wireNULL, VALUE exige wire de valor. Origem: contrato existente de ExpansionValue/ExpansionFieldParser; exemplo negativo acima. Teste permanente ExpansionValueTest(44 casos); regressões177 e arquitetura1 passaram. Afeta ContaPagarObservation, FaturaClienteObservation, InventarioObservation, SinistroObservation, RasterTrip e RasterRoute. Preserva raw4000/raw/value/issue, API e quarentena; não modifica fonte/dados nem comprova DQ física. Responsável técnico Regras de Negócio; responsável de negócio não conhecido. Evidência: target/etl-retomar-52abc2e66154-20261007/qualifications-v1-active/regras/integration04/{rule-for-root04.json,handoff-regras04.json,manifest04.json}. Código a4606a04e88400bd5dc1a1f610a02c214b96a58405e8592ac93b280593632e35; manifesto8526d3a1591634c9c33e372743cdc8910b4d635bc20e176246051befaedde479.

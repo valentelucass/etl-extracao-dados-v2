@@ -1,0 +1,36 @@
+# Checkpoint0466 — qualificação local final; física fechada
+
+UTC 2026-10-07T22:43:49.333489+00:00; anterior `docs/continuidade/checkpoints/0465-deltas-locais-pass-agregado-ci-pin-recusado.md` SHA256 `0e0738b3e0be9e32ec73fa65e8e7e6f333a81977118c947d4743659976c8428e`.
+
+## Fechamento0466 — qualificação local a04 admitida; provas externas continuam pendentes
+
+Pedido HERMES_a04a51d61e4e concluído no escopo local/offline. Exclusividade reconciliada antes das edições: continuação original retirada por aviso e controller-close, sem apagar conflito/recibos. Codex é o único Supervisor desta unidade; quatro builders existentes e owners por arquivo conforme adoption.json. CONTEXTO_GLOBAL.md continua ausente. Esta conclusão encerra a unidade autorizada e não inicia outra, rotina ou prova física.
+
+Banco integrou active() antes de borrowed.rollback: conhecido e incerto não compensados. Correção pós-readback09 mantida. Três testes dirigidos permanentes GREEN3/0 contra RED1PASS/2FAIL. Runtime integrou o guard do caller em finishPartial(Expected,deadline), quatro casos dirigidos PASS, e corrigiu a nova falha demonstrada por Regras durante own physical.close. Dois negativos reais falharam antes da correção; depois três casos passaram, incluindo controle59s. O guard final roda após fechamento e antes de atribuir sucesso. Commit/readback/uncertainty/close preservados, sem rollback/purge/refetch/retry/replay/doubleclose para esconder recusa. Source sessão70e78a3cee91820fc0a81b68d0d6ead9daaaf6c884c37bdc71b63ae55cb1b79e; runner87bdba2c1151882cbc1906902bbf834b9ca0e864eff536648a0f2134b47118a4. Root atualizou somente o hash revisado do runner no gate CI; nenhum limite/exclusão/escopo alterado.
+
+Agregado sucessor offline Maven verify encerrou exit0 conhecido: Surefire2884 testes/0falhas/0erros/5skips; Failsafe7 testes/0falhas/0erros/0skips. Resultado extraído dos XML, JAR/classes/sources e CI final vinculados por Runtime; ausência de drift conferida. Agregado01FAIL2881/1porpinCI e todos RED/contraprovas permanecem preservados. Não somar suites históricas ou testes dirigidos aos totais Maven. Regras confirmou as duas causas no JAR final com fixtures locais; Main CLI/SQL/fonte real não executados nessa confirmação.
+
+Provider06 stream2 e seus dois consumidores reais vinculados; helper05 FAIL histórico preservado. Fontes708checks/78bindings/11rotas locais reaproveitados sem suite invariável repetida; Users factory pública positiva executada26checks com config/provider/admissãoFAKE e zero send. Onze rotas externas UNKNOWN/CLOSED; shared governor Raster é requisito de composição futura, sem consumidor atual. Plano sucessor a04 corrige CLEAN_PRE/IDENTITY_PRE/IDENTITY_POST/CLEAN_POST; plano02/freeze04 históricos preservados. Runtime admitiu tecnicamente os bytes finais do emissor9bd8fe43820baf80674dd00f18c678b6bff756d47c6ffe208a767530c86fa3a0 e freeze837830abddb60e4ac60be9cdb36c7244756726865aad9f0b24b59f8a72738dc5. Root baseline canônico real PASS: 334 membros conferidos, somente check; -Issue continua recusado. Quatro negativos fullscript e19guards AST/policy com fixtures explícitas, sintaxe e successor linkage PASS. MAX_PATH/staleplan/refusals preservados, sem chamar falha de harness de prova de produto.
+
+Runtime review admitted=true significa qualificação offline, com qualificationOnly=true, physicalReady=false e dispatchAuthorized=false. SQL/conexões/HTTP externo/segredo real/DPAPI/CIM/PM2/reserva/despacho/captura/dados retidos novos=0 nesta unidade. Testes podem usar drivers/servidores locais de fixture. Nenhuma mutação V1/SQL16/contas/permissões/serviços/certificados/trust/schema/produção/deploy; ledgers físicos históricos CLOSED não reabertos. Fonte/captura/writers CLOSED, STOP429 e PAUSED preservados. Não há novos checkboxes, revisão humana, extração, DQ, promoção ou cutover.
+
+Provas externas concretas: pares físicos das33expressões e strict53 ainda NOT_PROVED; contrato/proteção contra writers e origem/loadedcaller efetivos; escopo de autenticação/quota/IP e evidência de liberação429 da mesma origem; unidade própria para confirmação independente pós-commit, retenção/travessia/DQ/promoção. Fixtures/admissão local não fornecem essas provas. Próximo passo sugerido a Lucas: decidir uma unidade física delimitada após revisar pacote final e seus requisitos, com autoridade/reserva novas; este pedido não a executa. Encerrar e aguardar Lucas, sem callbacks Hermes ou retomada automática.
+
+Evidência final em target/etl-qualificacao-a04a51d61e4e: runtime/aggregate-handoff.json, runtime/runtime-catalog-expression02-review01.json, regras/handoff04.json, root/baseline-final-result.json, final-delivery-readback02.json e matriz-final.json. Validadores pós-sincronização e scan restrito dos arquivos atuais são registrados separadamente em final-validation.json/final-scoped-scan.json, sem afirmar scan integral do repositório.
+
+Recusas do harness sucessor também preservadas: alteração documental foi declarada no snapshot; depois o save do nome histórico maven01-start.json recusou após Popen. Root corrigiu a inferência inicial de ausência de processo. Runtime reconciliou o MESMO PID16884 por comando/imagem nativos exatos e observou exit0 por GetExitCodeProcess após WaitForSingleObject, sem CIM ou relançamento. Isso é saída real, não inferência por log BUILD SUCCESS. Fonte/CI/pom/pacote permaneceram congelados; sincronização documental abaixo ocorre após o agregado e conserva o snapshot histórico.
+
+| Evidência executada/consumida | SHA256 |
+| --- | --- |
+| `target/etl-qualificacao-a04a51d61e4e/adoption.json` | `b8462741a7d2f6953e6987e2a20229cb078bc03ac7afe1d1b515a7436ea1f55c` |
+| `target/etl-qualificacao-a04a51d61e4e/banco/handoff.json` | `e611dea954084227bae0c64a46257e1d91805e71fab29918110722a4b93d2425` |
+| `target/etl-qualificacao-a04a51d61e4e/fontes/handoff02.json` | `01927ec8e7cb5e454b3f761cd02eab138881bb8f1fb92b59c787ca963aa9e905` |
+| `target/etl-qualificacao-a04a51d61e4e/regras/handoff04.json` | `9f8d21a08d443f3ac08b7c351a4cde4a0290436fe2686f1d05bb39ef46710b8b` |
+| `target/etl-qualificacao-a04a51d61e4e/runtime/caller-final-handoff02.json` | `37de9fa75a0d82c4c83b27be229055c8b975718a4719033a1b0e4a5205eb2c1b` |
+| `target/etl-qualificacao-a04a51d61e4e/runtime/aggregate-handoff.json` | `654306fa23fa3e02d9525fa9858021e0a9a958e0a95d97831080a3f12bf3367f` |
+| `target/etl-qualificacao-a04a51d61e4e/runtime/runtime-catalog-expression02-review01.json` | `8be747ad7afa98fecea605044dbbea29194f817adcc2fee2c16d25542293dc0e` |
+| `target/etl-qualificacao-a04a51d61e4e/root/baseline-final-result.json` | `167e1eae46890b04e81779223a80bcc990b64156ad2abecd25a7f60df396b52d` |
+| `target/etl-qualificacao-a04a51d61e4e/root/ci-pin-review.json` | `24fec54dbc430489d312636921803cd00cf0326d7f2d8223ae76e49863e4e93a` |
+| `target/etl-qualificacao-a04a51d61e4e/final-delivery-readback02.json` | `606c9e534d4a8c251e4205810a615803ef0f59bda6f084252606ab3d35f12549` |
+
+Nenhum efeito físico desconhecido; Maven sucessor/fixtures próprios encerrados. Critério local cumprido por testes/pacote/revisão/baseline executados, não planejamento. Processos atuais e PONGs em participant-states-final.json. Até três próximas ações: entregar recibo; aguardar Lucas; somente depois de nova decisão delimitar prova externa com Banco como executor SQL. Nenhuma ação física fica automaticamente pendente de execução.

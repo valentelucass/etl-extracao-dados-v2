@@ -7,6 +7,11 @@ Extrator em sombra, Data Export-first, para a migração controlada das nove ver
 
 ## Integração local por arquivos
 
+O novo [DEV LOCAL sintético](docs/catalogos/dev-local/README.md) oferece uma composição
+opt-in separada com11entidades, ledger em arquivos e comandos de bootstrap,
+incremental, recomposição, replay, cenários de ausência e encerramento. O pacote
+DEV e sua qualificação são distintos dos laboratórios JDBC históricos abaixo.
+
 O JAR caracteriza seis perfis existentes, CAP/FAT/INV/SIN e Raster; captura as
 quatro expansões e Raster por arquivos com bindings explícitos; executa o cenário
 analítico com entrada e oráculo separados e observa o sweep sintético de Coletas

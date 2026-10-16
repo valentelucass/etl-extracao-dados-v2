@@ -34,3 +34,8 @@ node_modules/
 .DS_Store
 Thumbs.db
 /*.bak*
+
+# Saídas e configuração local das ferramentas MCP.
+.graphify/
+AGENTS.md.bak-*
+*.mcp-tools.tmp

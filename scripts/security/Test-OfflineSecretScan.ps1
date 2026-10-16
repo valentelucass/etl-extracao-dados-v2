@@ -1,5 +1,8 @@
 [CmdletBinding()]
-param([ValidatePattern('^[a-z0-9-]{1,64}$')][string]$EvidenceAttempt)
+param(
+    [ValidatePattern('^[a-z0-9-]{1,64}$')][string]$EvidenceAttempt,
+    [switch]$C78Only
+)
 
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
@@ -84,6 +87,42 @@ function Invoke-ScannerCase {
 try {
     [void] (New-Item -ItemType Directory -Path $testRoot)
 
+    $c78LeafPath = 'src/test/resources/tls/C78LocalCurrent.der'
+    $c78LeafBytes = [IO.File]::ReadAllBytes((Join-Path $PSScriptRoot ('../../' + $c78LeafPath)))
+    $c78Hasher = [Security.Cryptography.SHA256]::Create()
+    try {
+        $c78LeafHash = ($c78Hasher.ComputeHash($c78LeafBytes) |
+            ForEach-Object { $_.ToString('x2') }) -join ''
+    } finally { $c78Hasher.Dispose() }
+    if ($c78LeafBytes.Length -ne 1028 -or
+        $c78LeafHash -cne 'c78bbe9a3fdb1a997971a46fb41e7860ef7153ec7813a41250a9156363f86bcc') {
+        throw 'PUBLIC_C78_LEAF_FIXTURE_DRIFT'
+    }
+    Invoke-ScannerCase -Name 'c78-public-leaf-exact-bytes-and-path' -ExpectedExitCode 0 -Arrange {
+        param($root)
+        $destination = Join-Path $root $c78LeafPath
+        [void][IO.Directory]::CreateDirectory([IO.Path]::GetDirectoryName($destination))
+        [IO.File]::WriteAllBytes($destination, $c78LeafBytes)
+    }
+    Invoke-ScannerCase -Name 'c78-public-leaf-changed-bytes-refused' -ExpectedExitCode 1 -ExpectedRule 'BINARY_INTEGRITY_MISMATCH' -Arrange {
+        param($root)
+        $destination = Join-Path $root $c78LeafPath
+        [void][IO.Directory]::CreateDirectory([IO.Path]::GetDirectoryName($destination))
+        $changed = [byte[]]$c78LeafBytes.Clone()
+        $changed[$changed.Length - 1] = $changed[$changed.Length - 1] -bxor 1
+        [IO.File]::WriteAllBytes($destination, $changed)
+    }
+    Invoke-ScannerCase -Name 'c78-public-leaf-other-path-refused' -ExpectedExitCode 1 -ExpectedRule 'UNSCANNED_NON_TEXT' -Arrange {
+        param($root)
+        $destination = Join-Path $root 'src/test/resources/tls/OtherC78.der'
+        [void][IO.Directory]::CreateDirectory([IO.Path]::GetDirectoryName($destination))
+        [IO.File]::WriteAllBytes($destination, $c78LeafBytes)
+    }
+    if ($C78Only) {
+        Write-Host ('OFFLINE_SECRET_SCAN_SELFTEST status=PASS scope=C78_ONLY cases={0}' -f $caseCount)
+        return
+    }
+
     Invoke-ScannerCase -Name 'unexplained-tracked-removal' -ExpectedExitCode 1 -ExpectedRule 'MISSING_CANDIDATE' -Arrange {
         param($caseRoot)
         Write-TestFile -Root $caseRoot -RelativePath 'unexplained.txt' -Content 'safe fixture'
@@ -99,6 +138,39 @@ try {
     }
 
     $approvedValue = 'must-not-be-used-' + 'token'
+    foreach ($metadataName in @('.graphifyignore', '.graphify_version')) {
+        Invoke-ScannerCase -Name ('graphify-text-' + $metadataName.Substring(1)) -ExpectedExitCode 0 -Arrange {
+            param($root)
+            Write-TestFile -Root $root -RelativePath $metadataName -Content 'safe-public-metadata'
+        }
+        $metadataValue = 'unapproved-' + 'metadata-value-123456'
+        Invoke-ScannerCase -Name ('graphify-sensitive-' + $metadataName.Substring(1)) -ExpectedExitCode 1 -ExpectedRule 'SECRET_QUOTED_ASSIGNMENT' -ForbiddenOutputLiteral $metadataValue -Arrange {
+            param($root)
+            Write-TestFile -Root $root -RelativePath $metadataName -Content ('SERVICE_' + 'TOKEN=' + $quote + $metadataValue + $quote)
+        }
+    }
+    foreach ($counterName in @('input_tok', 'output_tok')) {
+        foreach ($counterVariant in @('exact', 'changed', 'other-path')) {
+            $counterPath = if ($counterVariant -ceq 'other-path') { 'other/SKILL.md' } else { '.agents/skills/graphify/SKILL.md' }
+            $counterValue = if ($counterVariant -ceq 'changed') { 'unapproved-' + 'counter-value-123456' } else { $counterName }
+            $counterExit = if ($counterVariant -ceq 'exact') { 0 } else { 1 }
+            $counterRule = if ($counterExit -eq 0) { '' } else { 'SECRET_BARE_ASSIGNMENT' }
+            Invoke-ScannerCase -Name ('graphify-counter-' + $counterName + '-' + $counterVariant) -ExpectedExitCode $counterExit -ExpectedRule $counterRule -ForbiddenOutputLiteral $counterValue -Arrange {
+                param($root)
+                Write-TestFile -Root $root -RelativePath $counterPath -Content ("'input_" + "tokens': " + $counterValue + ',')
+            }
+        }
+    }
+    foreach ($variant in @('exact', 'changed', 'other-path')) {
+        $canaryPath = if ($variant -ceq 'other-path') { 'src/OtherDev.java' } else { 'src/test/java/br/com/esl/etl/v2/bootstrap/DevLocalMainProcessTest.java' }
+        $canaryValue = if ($variant -ceq 'changed') { 'unapproved-' + 'config-canary-123456' } else { 'SYNTHETIC_CONFIG_' + 'CANARY' }
+        $canaryExit = if ($variant -ceq 'exact') { 0 } else { 1 }
+        $canaryRule = if ($canaryExit -eq 0) { '' } else { 'HARDCODED_SECRET_ARGUMENT' }
+        Invoke-ScannerCase -Name ('dev-config-canary-' + $variant) -ExpectedExitCode $canaryExit -ExpectedRule $canaryRule -ForbiddenOutputLiteral $canaryValue -Arrange {
+            param($root)
+            Write-TestFile -Root $root -RelativePath $canaryPath -Content ('config.put(' + $quote + 'password' + $quote + ', ' + $quote + $canaryValue + $quote + ');')
+        }
+    }
     Invoke-ScannerCase `
         -Name 'exact-approved-fixture' `
         -ExpectedExitCode 0 `
@@ -286,6 +358,33 @@ try {
         [void][IO.Directory]::CreateDirectory([IO.Path]::GetDirectoryName($destination))
         [IO.File]::WriteAllBytes($destination, $publicLeafBytes)
     }
+    $retainedLeafPath = 'src/test/resources/tls/sql-test-retained-e3-20261005.cer'
+    $retainedLeafBytes = [IO.File]::ReadAllBytes((Join-Path $PSScriptRoot ('../../' + $retainedLeafPath)))
+    $retainedLeafHash = ([Security.Cryptography.SHA256]::Create().ComputeHash($retainedLeafBytes) |
+        ForEach-Object { $_.ToString('x2') }) -join ''
+    if ($retainedLeafHash -cne 'e3a5a7061fb56c225f93cc330cd733f5911f7d3f420d608ebe9afa7371ace276') {
+        throw 'PUBLIC_TEST_RETAINED_LEAF_FIXTURE_DRIFT'
+    }
+    Invoke-ScannerCase -Name 'retained-public-leaf-exact-bytes-and-path' -ExpectedExitCode 0 -Arrange {
+        param($root)
+        $destination = Join-Path $root $retainedLeafPath
+        [void][IO.Directory]::CreateDirectory([IO.Path]::GetDirectoryName($destination))
+        [IO.File]::WriteAllBytes($destination, $retainedLeafBytes)
+    }
+    Invoke-ScannerCase -Name 'retained-public-leaf-changed-bytes-refused' -ExpectedExitCode 1 -ExpectedRule 'BINARY_INTEGRITY_MISMATCH' -Arrange {
+        param($root)
+        $destination = Join-Path $root $retainedLeafPath
+        [void][IO.Directory]::CreateDirectory([IO.Path]::GetDirectoryName($destination))
+        $changed = [byte[]]$retainedLeafBytes.Clone()
+        $changed[$changed.Length - 1] = $changed[$changed.Length - 1] -bxor 1
+        [IO.File]::WriteAllBytes($destination, $changed)
+    }
+    Invoke-ScannerCase -Name 'retained-public-leaf-in-sample-path-refused' -ExpectedExitCode 1 -ExpectedRule 'BINARY_INTEGRITY_MISMATCH' -Arrange {
+        param($root)
+        $destination = Join-Path $root $publicLeafPath
+        [void][IO.Directory]::CreateDirectory([IO.Path]::GetDirectoryName($destination))
+        [IO.File]::WriteAllBytes($destination, $retainedLeafBytes)
+    }
     $pinDriverFixturePath = 'src/test/java/br/com/esl/etl/v2/plataforma/configuracao/PinnedSampleRealDriverTest.java'
     $pinDriverFakeValue = 'synthetic-only-driver-fixture'
     Invoke-ScannerCase -Name 'sample-pin-driver-exact-fake-value-and-path' -ExpectedExitCode 0 -Arrange {
@@ -301,7 +400,35 @@ try {
         param($root)
         Write-TestFile -Root $root -RelativePath $pinDriverFixturePath -Content ('props.setProperty(' + $quote + 'password' + $quote + ', ' + $quote + $differentPinDriverValue + $quote + ');')
     }
+    $retainedDriverPath = 'src/test/java/br/com/esl/etl/v2/plataforma/configuracao/TestRetainedRealDriverTest.java'
+    Invoke-ScannerCase -Name 'retained-driver-exact-fake-value-and-path' -ExpectedExitCode 0 -Arrange {
+        param($root)
+        Write-TestFile -Root $root -RelativePath $retainedDriverPath -Content ('props.setProperty(' + $quote + 'password' + $quote + ', ' + $quote + $pinDriverFakeValue + $quote + ');')
+    }
+    Invoke-ScannerCase -Name 'retained-driver-other-path-refused' -ExpectedExitCode 1 -ExpectedRule 'HARDCODED_SECRET_ARGUMENT' -ForbiddenOutputLiteral $pinDriverFakeValue -Arrange {
+        param($root)
+        Write-TestFile -Root $root -RelativePath 'src/OtherRetained.java' -Content ('props.setProperty(' + $quote + 'password' + $quote + ', ' + $quote + $pinDriverFakeValue + $quote + ');')
+    }
+    Invoke-ScannerCase -Name 'retained-driver-other-value-refused' -ExpectedExitCode 1 -ExpectedRule 'HARDCODED_SECRET_ARGUMENT' -ForbiddenOutputLiteral $differentPinDriverValue -Arrange {
+        param($root)
+        Write-TestFile -Root $root -RelativePath $retainedDriverPath -Content ('props.setProperty(' + $quote + 'password' + $quote + ', ' + $quote + $differentPinDriverValue + $quote + ');')
+    }
     $pinConnectorPath = 'src/test/java/br/com/esl/etl/v2/plataforma/configuracao/PinnedSampleConnectorFailureTest.java'
+    $retainedBoundaryPath = 'src/test/java/br/com/esl/etl/v2/plataforma/configuracao/TestRetainedProfileBoundaryTest.java'
+    $retainedBoundaryValue = 'synthetic-only'
+    Invoke-ScannerCase -Name 'retained-boundary-exact-refused-url-fixture' -ExpectedExitCode 0 -Arrange {
+        param($root)
+        Write-TestFile -Root $root -RelativePath $retainedBoundaryPath -Content ('target + ' + $quote + ';password=' + $retainedBoundaryValue + $quote)
+    }
+    Invoke-ScannerCase -Name 'retained-boundary-other-path-refused' -ExpectedExitCode 1 -ExpectedRule 'INLINE_SECRET_ASSIGNMENT' -ForbiddenOutputLiteral $retainedBoundaryValue -Arrange {
+        param($root)
+        Write-TestFile -Root $root -RelativePath 'src/OtherBoundary.java' -Content ('target + ' + $quote + ';password=' + $retainedBoundaryValue + $quote)
+    }
+    $retainedBoundaryDifferentValue = 'different-boundary-fixture-98765'
+    Invoke-ScannerCase -Name 'retained-boundary-other-value-refused' -ExpectedExitCode 1 -ExpectedRule 'INLINE_SECRET_ASSIGNMENT' -ForbiddenOutputLiteral $retainedBoundaryDifferentValue -Arrange {
+        param($root)
+        Write-TestFile -Root $root -RelativePath $retainedBoundaryPath -Content ('target + ' + $quote + ';password=' + $retainedBoundaryDifferentValue + $quote)
+    }
     $pinConnectorValue = '  synthetic-only  '
     Invoke-ScannerCase -Name 'sample-pin-connector-exact-injected-fake-whitespace' -ExpectedExitCode 0 -Arrange {
         param($root)
@@ -316,12 +443,27 @@ try {
         param($root)
         Write-TestFile -Root $root -RelativePath $pinConnectorPath -Content ('props.setProperty(' + $quote + 'password' + $quote + ', ' + $quote + $differentConnectorValue + $quote + ');')
     }
+    $retainedConnectorPath = 'src/test/java/br/com/esl/etl/v2/plataforma/persistencia/controle/TestRetainedSaJdbcConnectorTest.java'
+    $retainedConnectorValue = 'synthetic-only'
+    Invoke-ScannerCase -Name 'retained-connector-exact-fake-value-and-path' -ExpectedExitCode 0 -Arrange {
+        param($root)
+        Write-TestFile -Root $root -RelativePath $retainedConnectorPath -Content ('props.setProperty(' + $quote + 'password' + $quote + ', ' + $quote + $retainedConnectorValue + $quote + ');')
+    }
+    Invoke-ScannerCase -Name 'retained-connector-other-path-refused' -ExpectedExitCode 1 -ExpectedRule 'HARDCODED_SECRET_ARGUMENT' -ForbiddenOutputLiteral $retainedConnectorValue -Arrange {
+        param($root)
+        Write-TestFile -Root $root -RelativePath 'src/OtherRetainedConnector.java' -Content ('props.setProperty(' + $quote + 'password' + $quote + ', ' + $quote + $retainedConnectorValue + $quote + ');')
+    }
+    Invoke-ScannerCase -Name 'retained-connector-other-value-refused' -ExpectedExitCode 1 -ExpectedRule 'HARDCODED_SECRET_ARGUMENT' -ForbiddenOutputLiteral $differentConnectorValue -Arrange {
+        param($root)
+        Write-TestFile -Root $root -RelativePath $retainedConnectorPath -Content ('props.setProperty(' + $quote + 'password' + $quote + ', ' + $quote + $differentConnectorValue + $quote + ');')
+    }
     Write-Output ('OFFLINE_SECRET_SCAN_SELF_TEST status=PASS cases={0}' -f $caseCount)
 }
 finally {
     if ($EvidenceAttempt) {
+        $expectedCases = if ($C78Only) { 3 } else { 61 }
         [IO.File]::WriteAllText((Join-Path $testRoot 'result.json'),
-            (@{passed=($caseCount -eq 33);cases=$caseCount;evidenceRetained=$true;scannerSha256=(Get-FileHash -LiteralPath $scannerPath).Hash.ToLowerInvariant()}|ConvertTo-Json),
+            (@{passed=($caseCount -eq $expectedCases);cases=$caseCount;evidenceRetained=$true;scannerSha256=(Get-FileHash -LiteralPath $scannerPath).Hash.ToLowerInvariant()}|ConvertTo-Json),
             [Text.UTF8Encoding]::new($false))
     } else {
     $resolvedTarget = [System.IO.Path]::GetFullPath($testRoot)

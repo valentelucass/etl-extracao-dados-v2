@@ -1,0 +1,15 @@
+# Checkpoint0512 — Retomada e admissão39 Main/DPAPI
+
+HERMES_8fdb85e78657 permanece EM_EXECUÇÃO, mesmo recibo ainda ausente. Lucas autorizou uma retomada após capacidade temporária, sem repetição das etapas concluídas; nenhuma indisponibilidade de capacidade foi observada nesta retomada. PrepareAdmit39 já existia. Root conferiu ausência de autoridade39/recibo e executou AdmitCatalog39 UMA vez, após qualificação atual do provedor DPAPI e conferência das fontes730/JAR07/pins. Autoridade39 SHA85118658bfc5f03f52f6fe3506c0dea95b22f6a966abb78ba5af1c4b8dbcf081; ocorrência nova banco06/C78CAT01-45dc46ac43b6407c98a499b94eda378f, reserva SHAb48d129c31d952ddf5edb739a239f65a09058c5185ea5468bb06bb28407bfda1. Root33 permanece consumida, falha PRELAUNCH conhecida, sem replay.
+
+Banco05 qualificou9 casos/8 filhos próprios do canal privado, atual provider/primary f420 e helpers, AST PowerShell e fechamento. Estas provas não decriptaram a credencial real nem executaram SQL. A nova reserva autoriza uma leitura delimitada da PSCredential sa existente, sem inicialização/profile/ACL/contas/secret em logs ou hash do arquivo de credencial, timeout10s dentro de unidade60s. Banco único executor físico: Main1/conexão1/12SELECT/query10s/retry0/HTTP0/DDL0/commit0/capturefalse. Mesmo socket deve provar tuple/native atual antes TLS, folha C78 e Finished antes LOGIN7. PRE antigo é baseline, não prova atual da conexão.
+
+Despacho40 falhou localmente no parser JSON antes de maestri ask, por BOM UTF8 da escrita PowerShell5.1. Texto preservado; sucessor41 removeu somente BOM e enviou o despacho real ao Banco. Resultado físico ainda pendente, sem alegação de Main/SQL/engine/extração nesta unidade. Runtime recebeu trabalho independente delimitado: fronteira real Main→engine e menor delta, preparado privadamente enquanto os bytes reservados estiverem em uso. Nada de mocks ou repetição de suítes já qualificadas.
+
+Preservar SQL16.0.1000.6/instalação/contas/identidades/permissões/serviços/listeners/certificados/trust/schema/Flyway/V1/PM2/produção. STOP429 sem prova bloqueia operação dependente; não encerra correções internas elegíveis. Não promover checkbox de catálogo, engine, tabelas, captura, DQ ou paridade completa por esta admissão.
+
+1. Receber outcome real banco06/handoff01 e preservar claims/relatório/PREPOST/fechamento; reconciliar resultado incerto antes de outro efeito.
+2. Corrigir menor causa interna demonstrada, qualificar delta e seguir Main no mesmo pedido; integrar fronteira engine real conforme fatos.
+3. Após conclusão verificável ou obstáculo externo sem trabalho interno elegível, sincronizar STATES/trilha/grafo/validadores e escrever apenas o recibo8f original.
+
+Evidências privadas: root/PrepareAdmit39, AdmitCatalog39, catalog-authority39/catalog-admission39; banco06/occurrences/C78CAT01-45dc.../root-reservation; banco05-provider/handoff01/final02; run-bank40 (parser failure) e run-bank41 (despacho); runtime01/final03/deployment07. Root PONG_8fdb_CODEX. Sem callbacks Hermes/Root WORKING, novos agentes ou loops de espera.
