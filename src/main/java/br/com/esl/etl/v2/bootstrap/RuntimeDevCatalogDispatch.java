@@ -2,13 +2,11 @@ package br.com.esl.etl.v2.bootstrap;
 
 import br.com.esl.etl.v2.plataforma.configuracao.C78LocalSqlTarget;
 import br.com.esl.etl.v2.plataforma.configuracao.C78LocalTlsScope;
-
 import com.fasterxml.jackson.core.StreamReadFeature;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.sun.nio.file.ExtendedOpenOption;
-
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
@@ -29,6 +27,17 @@ import java.util.UUID;
 /** Separate, current Root dispatch. Bundle hashes grant no effect authority. */
 final class RuntimeDevCatalogDispatch implements AutoCloseable {
     static final String SCHEMA = "V2_DEV_C78_CATALOG_DISPATCH_V1";
+    static final String OWNED_RECOVERY_OPERATION = "CATALOG12_OWNED_RECOVERY_SELECT_ONLY";
+    static final String OWNED_RECOVERY_EXECUTION = "065aaf34-6f37-4b4e-a84f-9f295968a255";
+    static final int OWNED_RECOVERY_MAIN_PID = 38360;
+    static final int OWNED_RECOVERY_CLIENT_PORT = 58506;
+    static final Path OWNED_RECOVERY_CONSUMED_DISPATCH =
+            Path.of(
+                    "C:/Users/suporte/Documents/Armazenamento-Projetos/etl-extracao-dados-v2/"
+                            + "execucao-esl-shadow-20261008-164952/user20261016-continuar-v2/"
+                            + "root/sample12-dispatch01.json");
+    static final String OWNED_RECOVERY_CONSUMED_SHA256 =
+            "00297f1bdc96486a07c8e3cad23c0f1e0e1b11b3acf037789d99dc13c77dada0";
     static final String SQL_IMAGE_SHA256 =
             "73dcd4a89ff178cf6b2978ee29dccd8898fe5c1977abac8208aa4ecb5ec43e32";
     static final Set<String> CORE =
@@ -95,6 +104,16 @@ final class RuntimeDevCatalogDispatch implements AutoCloseable {
             dispatch = new RuntimeDevCatalogDispatch(node, expectedSHA, directory);
             dispatch.leases.add(descriptorLease);
             dispatch.validateCurrent(bundle, prepared);
+            if (isOwnedRecovery(node)) {
+                final Path consumed = localFile(OWNED_RECOVERY_CONSUMED_DISPATCH);
+                if (!consumed.equals(unit.resolve("root/sample12-dispatch01.json"))) {
+                    throw refused("OWNED_RECOVERY_EVIDENCE_NAMESPACE");
+                }
+                final var evidence = lease(consumed);
+                dispatch.leases.add(evidence);
+                // This is a readback lease of consumed evidence, never a revived permit.
+                verifyConsumedEvidence(evidence, OWNED_RECOVERY_CONSUMED_SHA256);
+            }
             final Path javaHome = Path.of(System.getProperty("java.home")).toRealPath();
             for (final JsonNode pin : node.path("runtimePins")) {
                 final var core = lease(localFile(javaHome.resolve(pin.path("path").textValue())));
@@ -122,6 +141,7 @@ final class RuntimeDevCatalogDispatch implements AutoCloseable {
         return switch (unit.getFileName().toString()) {
             case "hermes8fdb85e78657" -> "HERMES_8fdb85e78657";
             case "hermesf4eda62e83d1" -> "HERMES_f4eda62e83d1";
+            case "user20261016-continuar-v2" -> "USER_20261016_CONTINUAR_V2";
             default -> throw refused("UNIT");
         };
     }
@@ -131,7 +151,8 @@ final class RuntimeDevCatalogDispatch implements AutoCloseable {
     }
 
     static JsonNode parse(final byte[] bytes, final String expectedRequest) throws IOException {
-        if (!Set.of("HERMES_8fdb85e78657", "HERMES_f4eda62e83d1").contains(expectedRequest)) {
+        if (!Set.of("HERMES_8fdb85e78657", "HERMES_f4eda62e83d1", "USER_20261016_CONTINUAR_V2")
+                .contains(expectedRequest)) {
             throw refused("UNIT");
         }
         if (bytes.length > 65_536) {
@@ -148,39 +169,57 @@ final class RuntimeDevCatalogDispatch implements AutoCloseable {
         } catch (final IOException malformed) {
             throw refused("JSON");
         }
-        keys(
-                node,
-                Set.of(
-                        "schema",
-                        "request",
-                        "operation",
-                        "dispatchId",
-                        "invocationId",
-                        "nonce",
-                        "bundleManifestSHA256",
-                        "configurationSHA256",
-                        "requestSHA256",
-                        "planSHA256",
-                        "profile",
-                        "target",
-                        "leafSHA256",
-                        "sourceHeld",
-                        "captureAdmitted",
-                        "issuedUtc",
-                        "deadlineUtc",
-                        "parentPID",
-                        "parentStartUtc",
-                        "occurrenceDirectory",
-                        "limits",
-                        "runtimePins",
-                        "nativeImage"));
+        final boolean ownedRecovery =
+                expectedRequest.equals("USER_20261016_CONTINUAR_V2") && isOwnedRecovery(node);
+        final var expectedKeys =
+                new HashSet<>(
+                        Set.of(
+                                "schema",
+                                "request",
+                                "operation",
+                                "dispatchId",
+                                "invocationId",
+                                "nonce",
+                                "bundleManifestSHA256",
+                                "configurationSHA256",
+                                "requestSHA256",
+                                "planSHA256",
+                                "profile",
+                                "target",
+                                "leafSHA256",
+                                "sourceHeld",
+                                "captureAdmitted",
+                                "issuedUtc",
+                                "deadlineUtc",
+                                "parentPID",
+                                "parentStartUtc",
+                                "occurrenceDirectory",
+                                "limits",
+                                "runtimePins",
+                                "nativeImage"));
+        if (ownedRecovery) {
+            expectedKeys.add("recoveryScope");
+        }
+        keys(node, expectedKeys);
         exact(node, "schema", SCHEMA);
         exact(node, "request", expectedRequest);
-        exact(node, "operation", "CATALOG12_SELECT_ONLY");
+        exact(
+                node,
+                "operation",
+                ownedRecovery ? OWNED_RECOVERY_OPERATION : "CATALOG12_SELECT_ONLY");
         exact(node, "profile", C78LocalSqlTarget.PROFILE);
         exact(node, "target", C78LocalSqlTarget.URL);
         exact(node, "leafSHA256", C78LocalTlsScope.LEAF_SHA256);
-        match(node, "dispatchId", "C78CAT01-[a-f0-9]{32}");
+        final boolean currentSample = expectedRequest.equals("USER_20261016_CONTINUAR_V2");
+        match(
+                node,
+                "dispatchId",
+                ownedRecovery
+                        ? "U20261016RECOVERY12-[a-f0-9]{32}"
+                        : currentSample ? "U20261016CAT12-[a-f0-9]{32}" : "C78CAT01-[a-f0-9]{32}");
+        if (ownedRecovery) {
+            validateRecoveryScope(node.path("recoveryScope"));
+        }
         match(node, "nonce", "[a-f0-9]{64}");
         for (final var key :
                 List.of(
@@ -224,7 +263,15 @@ final class RuntimeDevCatalogDispatch implements AutoCloseable {
                         "frameBytes"));
         final boolean coverage = expectedRequest.equals("HERMES_f4eda62e83d1");
         final int[] expected = {
-            1, 12, 10, 60, 0, 512, coverage ? 1_500_000 : 65536, coverage ? 1_500_000 : 262144, 8192
+            1,
+            12,
+            10,
+            60,
+            0,
+            currentSample ? 2048 : 512,
+            currentSample ? 1_900_000 : coverage ? 1_500_000 : 65536,
+            currentSample ? 1_900_000 : coverage ? 1_500_000 : 262144,
+            8192
         };
         final String[] names = {
             "connections",
@@ -265,6 +312,36 @@ final class RuntimeDevCatalogDispatch implements AutoCloseable {
         positiveLong(image, "pid");
         match(image, "rawCreation", "[1-9][0-9]{0,18}");
         return node;
+    }
+
+    static boolean isOwnedRecovery(final JsonNode descriptor) {
+        return descriptor != null
+                && OWNED_RECOVERY_OPERATION.equals(descriptor.path("operation").textValue());
+    }
+
+    static void validateRecoveryScope(final JsonNode scope) throws IOException {
+        keys(scope, Set.of("executionId", "mainPID", "clientPort", "consumedSampleDispatch"));
+        exact(scope, "executionId", OWNED_RECOVERY_EXECUTION);
+        for (final var key : Set.of("mainPID", "clientPort")) {
+            final int expected =
+                    key.equals("mainPID") ? OWNED_RECOVERY_MAIN_PID : OWNED_RECOVERY_CLIENT_PORT;
+            if (!scope.path(key).isIntegralNumber()
+                    || !scope.path(key).canConvertToInt()
+                    || scope.path(key).intValue() != expected) {
+                throw refused("OWNED_RECOVERY_SCOPE");
+            }
+        }
+        final var consumed = scope.path("consumedSampleDispatch");
+        keys(consumed, Set.of("path", "sha256"));
+        exact(consumed, "path", OWNED_RECOVERY_CONSUMED_DISPATCH.toString());
+        exact(consumed, "sha256", OWNED_RECOVERY_CONSUMED_SHA256);
+    }
+
+    static void verifyConsumedEvidence(final FileChannel evidence, final String expectedSHA256)
+            throws Exception {
+        if (!expectedSHA256.equals(hash(bytes(evidence, 65_536)))) {
+            throw refused("OWNED_RECOVERY_EVIDENCE_CHANGED");
+        }
     }
 
     void validateCurrent(

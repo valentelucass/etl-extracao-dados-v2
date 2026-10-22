@@ -47,6 +47,15 @@ public final class C78DevCatalogReportStore {
         }
         if (admittedMode == C78DevCatalogPlan.Mode.CONTRACT_COVERAGE12) {
             verifyModules(report);
+        } else if (admittedMode == C78DevCatalogPlan.Mode.SAMPLE12_CURRENT12) {
+            verifyModules(
+                    report,
+                    C78DevCatalogPlan.Query.CURRENT_MODULES,
+                    C78DevCatalogPlan.currentModuleNames(),
+                    C78DevCatalogPlan.CURRENT_MODULE_CHUNK_BYTES,
+                    false);
+        } else if (admittedMode == C78DevCatalogPlan.Mode.OWNED_SAMPLE12_RECOVERY12) {
+            verifyOwnedRecovery(report);
         }
         final Path directory =
                 Objects.requireNonNull(reviewedOwnOccurrenceDirectory).toAbsolutePath().normalize();
@@ -86,11 +95,21 @@ public final class C78DevCatalogReportStore {
     private static byte[] serialize(
             final C78DevCatalogInspector.Report report, final C78DevCatalogPlan.Mode admittedMode)
             throws IOException {
+        final boolean recovery = admittedMode == C78DevCatalogPlan.Mode.OWNED_SAMPLE12_RECOVERY12;
         final var output =
-                new StringBuilder("{\"schema\":\"C78_DEV_CATALOG_REPORT_V1\",\"invocation\":\"")
-                        .append(report.plan().invocationId())
+                new StringBuilder("{\"schema\":\"")
                         .append(
-                                "\",\"profile\":\"C78_LOCAL_SHADOW_SQL_PIN_V1\",\"layer\":\"catalog_metadata_only\",")
+                                recovery
+                                        ? "C78_DEV_OWNED_RECOVERY_REPORT_V1"
+                                        : "C78_DEV_CATALOG_REPORT_V1")
+                        .append("\",\"invocation\":\"")
+                        .append(report.plan().invocationId())
+                        .append("\",\"profile\":\"C78_LOCAL_SHADOW_SQL_PIN_V1\",\"layer\":\"")
+                        .append(
+                                recovery
+                                        ? "owned_occurrence_recovery_counts_only"
+                                        : "catalog_metadata_only")
+                        .append("\",")
                         .append("\"selectsAttempted\":12,\"jdbcClosed\":true,\"queries\":[");
         boolean firstQuery = true;
         for (final var evidence : report.evidence()) {
@@ -110,6 +129,33 @@ public final class C78DevCatalogReportStore {
             output.append("]}");
         }
         return encodeUtf8(output.append("]}\n"), admittedMode);
+    }
+
+    static void verifyOwnedRecovery(final C78DevCatalogInspector.Report report) throws IOException {
+        final var matches =
+                report.evidence().stream()
+                        .filter(
+                                value ->
+                                        value.query()
+                                                == C78DevCatalogPlan.Query.OWNED_RECOVERY_SUMMARY)
+                        .toList();
+        final var names = C78DevCatalogPlan.ownedRecoveryMetricNames();
+        if (matches.size() != 1 || matches.get(0).rows().size() != names.size()) {
+            throw new IOException("C78_OWNED_RECOVERY_SUMMARY_INCOMPLETE");
+        }
+        for (int index = 0; index < names.size(); index++) {
+            final String[] cells = matches.get(0).rows().get(index).split("\\|", -1);
+            if (cells.length != 2
+                    || !names.get(index).equals(cells[0])
+                    || !cells[1].matches("0|[1-9][0-9]{0,18}")) {
+                throw new IOException("C78_OWNED_RECOVERY_SUMMARY_SHAPE");
+            }
+            try {
+                Long.parseLong(cells[1]);
+            } catch (final NumberFormatException invalid) {
+                throw new IOException("C78_OWNED_RECOVERY_SUMMARY_COUNT", invalid);
+            }
+        }
     }
 
     static byte[] encodeUtf8(final CharSequence text, final C78DevCatalogPlan.Mode admittedMode)
@@ -139,7 +185,7 @@ public final class C78DevCatalogReportStore {
         if (admittedMode == null) {
             throw new IOException("C78_CATALOG_REPORT_MODE_SCOPE");
         }
-        return admittedMode == C78DevCatalogPlan.Mode.CONTRACT_COVERAGE12
+        return admittedMode != C78DevCatalogPlan.Mode.ORIGINAL12
                 ? MAX_COVERAGE_FILE_BYTES
                 : MAX_FILE_BYTES;
     }
@@ -167,14 +213,29 @@ public final class C78DevCatalogReportStore {
 
     private static void verifyModules(final C78DevCatalogInspector.Report report)
             throws IOException {
+        verifyModules(
+                report,
+                C78DevCatalogPlan.Query.MODULE_CONTRACTS,
+                C78DevCatalogPlan.moduleContractNames(),
+                256,
+                true);
+    }
+
+    private static void verifyModules(
+            final C78DevCatalogInspector.Report report,
+            final C78DevCatalogPlan.Query query,
+            final List<String> names,
+            final int chunkBytes,
+            final boolean allowUnavailable)
+            throws IOException {
         final List<String> rows =
                 report.evidence().stream()
-                        .filter(e -> e.query() == C78DevCatalogPlan.Query.MODULE_CONTRACTS)
+                        .filter(e -> e.query() == query)
                         .findFirst()
                         .orElseThrow(() -> new IOException("C78_CATALOG_MODULE_QUERY_REQUIRED"))
                         .rows();
         int position = 0;
-        for (final String name : C78DevCatalogPlan.moduleContractNames()) {
+        for (final String name : names) {
             if (position == rows.size()) {
                 throw new IOException("C78_CATALOG_MODULE_NOT_OBSERVED");
             }
@@ -202,7 +263,7 @@ public final class C78DevCatalogReportStore {
                 if (Integer.parseInt(cells[2]) != chunk
                         || size > 131072
                         || size % 2 != 0
-                        || chunk >= 512
+                        || chunk >= 131072 / chunkBytes
                         || unavailable) {
                     throw new IOException("C78_CATALOG_MODULE_CONTIGUITY");
                 }
@@ -213,14 +274,17 @@ public final class C78DevCatalogReportStore {
                     throw new IOException("C78_CATALOG_MODULE_DECLARED_BYTES");
                 }
                 if (size == 0 && cells[4].equals("UNAVAILABLE") && cells[5].equals("UNAVAILABLE")) {
+                    if (!allowUnavailable) {
+                        throw new IOException("C78_CATALOG_CURRENT_MODULE_UNAVAILABLE");
+                    }
                     unavailable = true;
                 } else {
                     if (!cells[4].matches("[A-Fa-f0-9]{64}")
-                            || !cells[5].matches("(?:[A-Fa-f0-9]{2}){1,256}")) {
+                            || !cells[5].matches("(?:[A-Fa-f0-9]{2}){1," + chunkBytes + "}")) {
                         throw new IOException("C78_CATALOG_MODULE_HEX_OR_DIGEST");
                     }
                     final byte[] raw = HexFormat.of().parseHex(cells[5]);
-                    if (raw.length != Math.min(256, size - bytes) || size - bytes <= 0) {
+                    if (raw.length != Math.min(chunkBytes, size - bytes) || size - bytes <= 0) {
                         throw new IOException("C78_CATALOG_MODULE_DECLARED_BYTES");
                     }
                     digest.update(raw);

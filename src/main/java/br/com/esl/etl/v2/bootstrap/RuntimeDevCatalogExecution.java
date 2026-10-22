@@ -6,9 +6,7 @@ import br.com.esl.etl.v2.plataforma.configuracao.SecretProvider;
 import br.com.esl.etl.v2.plataforma.persistencia.controle.C78DevCatalogInspector;
 import br.com.esl.etl.v2.plataforma.persistencia.controle.C78DevCatalogPlan;
 import br.com.esl.etl.v2.plataforma.persistencia.controle.C78DevCatalogReportStore;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 import java.io.PrintStream;
 import java.nio.file.Path;
 import java.util.Map;
@@ -29,10 +27,7 @@ final class RuntimeDevCatalogExecution {
                                 dispatchPath, dispatchSHA256, bundle, prepared);
                 var control = new RuntimeDevCatalogControl(dispatch, System.in, output)) {
             final var plan =
-                    planForRequest(
-                            dispatch.descriptor.path("request").textValue(),
-                            dispatch.invocation(),
-                            prepared.target);
+                    planForDispatch(dispatch.descriptor, dispatch.invocation(), prepared.target);
             // Lazy, separate credential namespace. Configuration never receives this value.
             final SecretProvider provider =
                     key -> {
@@ -54,7 +49,7 @@ final class RuntimeDevCatalogExecution {
                     .writeValueAsString(
                             Map.of(
                                     "status",
-                                    "DEV_C78_CATALOG_COMPLETE_REPORT_STORED",
+                                    completionStatus(plan),
                                     "reportSHA256",
                                     stored.sha256(),
                                     "reportBytes",
@@ -72,11 +67,39 @@ final class RuntimeDevCatalogExecution {
         }
     }
 
+    static String completionStatus(final C78DevCatalogPlan plan) {
+        return plan.mode() == C78DevCatalogPlan.Mode.OWNED_SAMPLE12_RECOVERY12
+                ? "RECOVERY_READONLY_OBSERVED"
+                : "DEV_C78_CATALOG_COMPLETE_REPORT_STORED";
+    }
+
+    static C78DevCatalogPlan planForDispatch(
+            final com.fasterxml.jackson.databind.JsonNode descriptor,
+            final java.util.UUID invocation,
+            final br.com.esl.etl.v2.plataforma.configuracao.C78LocalSqlTarget target)
+            throws java.io.IOException {
+        if (RuntimeDevCatalogDispatch.isOwnedRecovery(descriptor)) {
+            RuntimeDevCatalogDispatch.exact(descriptor, "request", "USER_20261016_CONTINUAR_V2");
+            final var scope = descriptor.path("recoveryScope");
+            RuntimeDevCatalogDispatch.validateRecoveryScope(scope);
+            return C78DevCatalogPlan.prepareOwnedSample12Recovery(
+                    invocation,
+                    target,
+                    java.util.UUID.fromString(scope.path("executionId").textValue()),
+                    scope.path("mainPID").intValue(),
+                    scope.path("clientPort").intValue());
+        }
+        RuntimeDevCatalogDispatch.exact(descriptor, "operation", "CATALOG12_SELECT_ONLY");
+        return planForRequest(descriptor.path("request").textValue(), invocation, target);
+    }
+
     static C78DevCatalogPlan planForRequest(
             final String request,
             final java.util.UUID invocation,
             final br.com.esl.etl.v2.plataforma.configuracao.C78LocalSqlTarget target) {
         return switch (request) {
+            case "USER_20261016_CONTINUAR_V2" ->
+                    C78DevCatalogPlan.prepareSample12Current(invocation, target);
             case "HERMES_f4eda62e83d1" -> C78DevCatalogPlan.prepareCoverage(invocation, target);
             case "HERMES_8fdb85e78657" -> C78DevCatalogPlan.prepare(invocation, target);
             default -> throw new IllegalArgumentException("DEV_CATALOG_COVERAGE_SCOPE_REQUIRED");

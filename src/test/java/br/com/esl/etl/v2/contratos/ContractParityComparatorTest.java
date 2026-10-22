@@ -1,5 +1,6 @@
 package br.com.esl.etl.v2.contratos;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -116,8 +117,126 @@ class ContractParityComparatorTest {
         assertTrue(result.firstRunEntityCountsWithinPageSize());
         assertFalse(result.hasAtLeastThreeNonEmptyPagesInBothRuns());
         assertTrue(result.keySetsStable());
+        assertTrue(result.entityKeyAssociationsStable());
         assertFalse(result.orderedKeysStable());
         assertFalse(result.toString().contains("700001"));
+    }
+
+    @Test
+    void rejectsDisjointIdsWithTheSameOrderedNaturalKeysAcrossPageSizes() throws Exception {
+        final ContractPaginationResult result =
+                ContractParityComparator.compareRepeatedPagination(
+                        List.of(
+                                observed(1, 1, row("{\"id\":900001,\"sequence_code\":700001}")),
+                                observed(2, 1, row("{\"id\":900002,\"sequence_code\":700002}")),
+                                observed(3, 1)),
+                        List.of(
+                                observed(
+                                        1,
+                                        2,
+                                        row("{\"id\":910001,\"sequence_code\":700001}"),
+                                        row("{\"id\":910002,\"sequence_code\":700002}")),
+                                observed(2, 2)),
+                        "sequence_code");
+
+        assertTrue(result.entityCountsEqual());
+        assertTrue(result.orderedKeysStable());
+        assertTrue(result.keySetsStable());
+        assertFalse(result.entityKeyAssociationsStable());
+        assertFalse(result.hasInternallyConsistentTraversal());
+    }
+
+    @Test
+    void rejectsPermutedIdAssociationsWithTheSameIdsAndOrderedNaturalKeys() throws Exception {
+        final ContractPaginationResult result =
+                ContractParityComparator.compareRepeatedPagination(
+                        List.of(
+                                observed(1, 1, row("{\"id\":900001,\"sequence_code\":700001}")),
+                                observed(2, 1, row("{\"id\":900002,\"sequence_code\":700002}")),
+                                observed(3, 1)),
+                        List.of(
+                                observed(
+                                        1,
+                                        2,
+                                        row("{\"id\":900002,\"sequence_code\":700001}"),
+                                        row("{\"id\":900001,\"sequence_code\":700002}")),
+                                observed(2, 2)),
+                        "sequence_code");
+
+        assertTrue(result.entityCountsEqual());
+        assertTrue(result.orderedKeysStable());
+        assertTrue(result.keySetsStable());
+        assertFalse(result.entityKeyAssociationsStable());
+        assertFalse(result.hasInternallyConsistentTraversal());
+    }
+
+    @Test
+    void preservesAssociationsAcrossPageSizesAndPhysicalExpansionWithoutExposingKeys()
+            throws Exception {
+        final JsonNode first = row("{\"id\":900001,\"sequence_code\":700001}");
+        final JsonNode second = row("{\"id\":900002,\"sequence_code\":700002}");
+        final ContractPaginationResult result =
+                ContractParityComparator.compareRepeatedPagination(
+                        List.of(
+                                observed(1, 1, first, first, first),
+                                observed(2, 1, second, second),
+                                observed(3, 1)),
+                        List.of(observed(1, 2, first, first, second), observed(2, 2)),
+                        "sequence_code");
+
+        assertEquals(5, result.firstRunRecordCount());
+        assertEquals(3, result.secondRunRecordCount());
+        assertTrue(result.entityKeyAssociationsStable());
+        assertTrue(result.hasInternallyConsistentTraversal());
+        final String evidence = objectMapper.writeValueAsString(result) + result;
+        for (final String value : List.of("900001", "900002", "700001", "700002")) {
+            assertFalse(evidence.contains(value));
+        }
+    }
+
+    @Test
+    void rejectsUnverifiableIdsOrNaturalKeysEvenWhenBothRunsRepeatThem() throws Exception {
+        for (final String invalid :
+                List.of(
+                        "{\"id\":null,\"sequence_code\":700001}",
+                        "{\"id\":{},\"sequence_code\":700001}",
+                        "{\"id\":[],\"sequence_code\":700001}",
+                        "{\"id\":900001,\"sequence_code\":null}",
+                        "{\"id\":900001,\"sequence_code\":{}}",
+                        "{\"id\":900001,\"sequence_code\":[]}")) {
+            final List<ContractObservedPage> run =
+                    List.of(observed(1, 1, row(invalid)), observed(2, 1));
+            final ContractPaginationResult result =
+                    ContractParityComparator.compareRepeatedPagination(run, run, "sequence_code");
+
+            assertTrue(result.entityKeyAssociationsStable());
+            assertFalse(result.hasInternallyConsistentTraversal());
+        }
+    }
+
+    @Test
+    void stableAssociationsDoNotExcuseAnEntityRepeatedAcrossPages() throws Exception {
+        final JsonNode record = row("{\"id\":900001,\"sequence_code\":700001}");
+        final List<ContractObservedPage> run =
+                List.of(observed(1, 1, record), observed(2, 1, record), observed(3, 1));
+        final ContractPaginationResult result =
+                ContractParityComparator.compareRepeatedPagination(run, run, "sequence_code");
+
+        assertTrue(result.entityKeyAssociationsStable());
+        assertFalse(result.firstRunEntityIdsUniqueAcrossPages());
+        assertFalse(result.hasInternallyConsistentTraversal());
+    }
+
+    @Test
+    void stableAssociationsStillRequireAnObservedTerminalEmptyPage() throws Exception {
+        final List<ContractObservedPage> run =
+                List.of(observed(1, 1, row("{\"id\":900001,\"sequence_code\":700001}")));
+        final ContractPaginationResult result =
+                ContractParityComparator.compareRepeatedPagination(run, run, "sequence_code");
+
+        assertTrue(result.entityKeyAssociationsStable());
+        assertFalse(result.firstRunHasTerminalEmptyPage());
+        assertFalse(result.hasInternallyConsistentTraversal());
     }
 
     @Test

@@ -20,7 +20,15 @@ enum C78Sample12Namespace {
             "IssueSample12AdmissionC54.py",
             "e1f743049599232891b174fa0dee194691818d1a3668cba2ed423e29cfb23bb0",
             "RunC78Sample12AdmissionC54Bridge.py",
-            "e9f58477959d971809d9e236a46dd0ae71507fb5962b9e23041b3dc19f46c5ce");
+            "e9f58477959d971809d9e236a46dd0ae71507fb5962b9e23041b3dc19f46c5ce"),
+    USER_20261016(
+            "user20261016-continuar-v2",
+            "USER_20261016_CONTINUAR_V2",
+            "U20261016SAMPLE12-[a-f0-9]{32}",
+            "IssueSample12AdmissionUser20261016.py",
+            "dacf47746a94d564e4d2981679594d3636072ff636763004fd2ca425a8f7070f",
+            "RunC78Sample12AdmissionUser20261016Bridge.py",
+            "4e95ead60f1254355733f869b75c21b1c1ce33d54d0fb855a1a4d9fea1c1f3d2");
 
     final String unitName;
     final String request;
@@ -54,6 +62,7 @@ enum C78Sample12Namespace {
         return switch (unit.getFileName().toString()) {
             case "hermesf4eda62e83d1" -> F4;
             case "hermesc54d6a25880d" -> C54;
+            case "user20261016-continuar-v2" -> USER_20261016;
             default -> throw new IOException("ROOT_SAMPLE12_REQUEST_NAMESPACE_REFUSED");
         };
     }

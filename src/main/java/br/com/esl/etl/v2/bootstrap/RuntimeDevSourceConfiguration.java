@@ -2,9 +2,8 @@ package br.com.esl.etl.v2.bootstrap;
 
 import br.com.esl.etl.v2.plataforma.configuracao.RuntimeConfiguration;
 import br.com.esl.etl.v2.plataforma.configuracao.RuntimeConfigurationFactory;
-
+import br.com.esl.etl.v2.plataforma.fonte.dataexport.CurrentSourceInfoEvidence;
 import com.sun.nio.file.ExtendedOpenOption;
-
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.ByteBuffer;
@@ -103,17 +102,7 @@ final class RuntimeDevSourceConfiguration implements AutoCloseable {
         }
         final Path unit = bundle.configuration().getParent().getParent().getParent();
         final String namespace = unit.getFileName().toString();
-        final boolean currentSample = namespace.equals("hermesc54d6a25880d") && sample;
-        if (!namespace.equals("hermesf4eda62e83d1") && !currentSample) {
-            throw new IOException("DEV_SOURCE_METADATA_CURRENT_UNIT_REQUIRED");
-        }
-        if (currentSample) {
-            for (final String name : Set.of("V2_DATAEXPORT_BASE_URL", "V2_DATAEXPORT_TOKEN")) {
-                if (environment.containsKey(name) || system.containsKey(name)) {
-                    throw new IOException("DEV_SOURCE_NATIVE_OVERRIDE_AMBIGUOUS");
-                }
-            }
-        }
+        validateCurrentUnit(namespace, sample, system, environment);
         plan.remove("runtime.dev.source.provisioning.enabled");
         plan.remove("runtime.dev.engine.sample.enabled");
         if (!REFERENCE.equals(Path.of(plan.getProperty(REFERENCE_KEY, "")))
@@ -160,6 +149,25 @@ final class RuntimeDevSourceConfiguration implements AutoCloseable {
                 failure.addSuppressed(cleanup);
             }
             throw failure;
+        }
+    }
+
+    static void validateCurrentUnit(
+            final String namespace,
+            final boolean sample,
+            final Properties system,
+            final Map<String, String> environment)
+            throws IOException {
+        final boolean currentSample = sample && CurrentSourceInfoEvidence.supportsUnit(namespace);
+        if (!"hermesf4eda62e83d1".equals(namespace) && !currentSample) {
+            throw new IOException("DEV_SOURCE_METADATA_CURRENT_UNIT_REQUIRED");
+        }
+        if (currentSample) {
+            for (final String name : Set.of("V2_DATAEXPORT_BASE_URL", "V2_DATAEXPORT_TOKEN")) {
+                if (environment.containsKey(name) || system.containsKey(name)) {
+                    throw new IOException("DEV_SOURCE_NATIVE_OVERRIDE_AMBIGUOUS");
+                }
+            }
         }
     }
 

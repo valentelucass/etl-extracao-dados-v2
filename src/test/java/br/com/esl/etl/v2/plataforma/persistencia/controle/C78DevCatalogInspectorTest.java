@@ -9,13 +9,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import br.com.esl.etl.v2.plataforma.configuracao.C78LocalSqlTarget;
 import br.com.esl.etl.v2.plataforma.configuracao.SecretProvider;
-
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
-
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
@@ -28,6 +21,11 @@ import java.util.EnumMap;
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 /** JDBC doubles qualify the new adapter boundary only; these are not physical Main/SQL proofs. */
 final class C78DevCatalogInspectorTest {
@@ -134,6 +132,32 @@ final class C78DevCatalogInspectorTest {
         assertTrue(fixture.timeouts.stream().allMatch(n -> n == 10));
         assertEquals(plan().queries(), fixture.executed);
         assertThrows(UnsupportedOperationException.class, () -> report.evidence().clear());
+    }
+
+    @Test
+    void coverageFixtureUsesItsAdmittedTwelveQueriesAndTheirCoverageSql() throws SQLException {
+        final var selected = C78DevCatalogPlan.prepareCoverage(UUID.randomUUID(), plan().target());
+        final var fixture = new Fixture();
+        final var report = fixture.inspector.inspect(selected, unavailable, fixture);
+        assertEquals(selected.queries(), fixture.executed);
+        assertEquals(C78DevCatalogPlan.Query.MODULE_CONTRACTS, fixture.executed.get(9));
+        assertEquals(12, report.selectsAttempted());
+        assertEquals(12, fixture.statementsClosed);
+        assertEquals(12, fixture.resultsClosed);
+        assertTrue(fixture.receiptClosed);
+    }
+
+    @Test
+    void fixtureRefusesAnUnselectedEnumQueryBeforeConsumingAStatement() throws SQLException {
+        final var fixture = new Fixture();
+        fixture.beforeOpen(plan());
+        try (var statement = fixture.statement()) {
+            assertThrows(
+                    AssertionError.class,
+                    () -> statement.executeQuery(C78DevCatalogPlan.Query.CURRENT_INDEXES.sql()));
+        }
+        assertTrue(fixture.executed.isEmpty());
+        assertEquals(0, fixture.opens);
     }
 
     @Test
@@ -752,6 +776,7 @@ final class C78DevCatalogInspectorTest {
     }
 
     private static final class Fixture implements C78DevCatalogAdmission, InvocationHandler {
+        private C78DevCatalogPlan selectedPlan = plan();
         private final EnumMap<C78DevCatalogPlan.Query, List<List<String>>> rows =
                 new EnumMap<>(C78DevCatalogPlan.Query.class);
         private final List<C78DevCatalogPlan.Query> executed = new ArrayList<>();
@@ -784,7 +809,7 @@ final class C78DevCatalogInspectorTest {
                         () -> now);
 
         Fixture() {
-            for (final var query : C78DevCatalogPlan.Query.values()) {
+            for (final var query : selectedPlan.queries()) {
                 rows.put(query, List.of());
             }
             final var context =
@@ -802,6 +827,10 @@ final class C78DevCatalogInspectorTest {
                 throw new SQLException("UNREVIEWED_PRIVATE_ADMISSION_DETAIL");
             }
             assertNotNull(value);
+            selectedPlan = value;
+            for (final var query : selectedPlan.queries()) {
+                rows.putIfAbsent(query, List.of());
+            }
         }
 
         @Override
@@ -854,9 +883,8 @@ final class C78DevCatalogInspectorTest {
                                     yield null;
                                 }
                                 case "executeQuery" -> {
-                                    final var query =
-                                            C78DevCatalogPlan.Query.values()[executed.size()];
-                                    assertEquals(query.sql(), arguments[0]);
+                                    final var query = selectedPlan.queries().get(executed.size());
+                                    assertEquals(selectedPlan.sql(query), arguments[0]);
                                     executed.add(query);
                                     now += queryNanos;
                                     if (query == failQuery) {

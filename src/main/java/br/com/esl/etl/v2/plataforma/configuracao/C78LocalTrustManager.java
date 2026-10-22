@@ -10,7 +10,6 @@ import java.security.interfaces.RSAPublicKey;
 import java.time.Clock;
 import java.util.Date;
 import java.util.HexFormat;
-
 import javax.net.ssl.SSLEngine;
 import javax.net.ssl.SSLSocket;
 import javax.net.ssl.X509ExtendedTrustManager;

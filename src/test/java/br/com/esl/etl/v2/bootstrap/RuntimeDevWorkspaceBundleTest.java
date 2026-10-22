@@ -10,17 +10,14 @@ import br.com.esl.etl.v2.plataforma.configuracao.C78LocalTlsScope;
 import br.com.esl.etl.v2.plataforma.configuracao.RuntimeConfiguration;
 import br.com.esl.etl.v2.plataforma.configuracao.RuntimeEnvironment;
 import br.com.esl.etl.v2.plataforma.configuracao.ShadowStorageProperties;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
-
-import org.junit.jupiter.api.Test;
-
 import java.nio.charset.StandardCharsets;
 import java.time.Clock;
 import java.time.ZoneId;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import org.junit.jupiter.api.Test;
 
 class RuntimeDevWorkspaceBundleTest {
     @Test

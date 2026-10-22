@@ -5,7 +5,6 @@ import br.com.esl.etl.v2.plataforma.autorizacao.RuntimeAction;
 import br.com.esl.etl.v2.plataforma.controle.ExecutionMode;
 import br.com.esl.etl.v2.plataforma.orquestracao.RuntimeExecutionPlan;
 import br.com.esl.etl.v2.plataforma.orquestracao.RuntimeExecutionPlanItem;
-
 import java.util.Objects;
 
 /** Descriptive immutable selected plan only. This class grants no authority or physical effects. */

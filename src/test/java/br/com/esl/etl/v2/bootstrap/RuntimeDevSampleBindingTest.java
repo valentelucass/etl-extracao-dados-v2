@@ -10,11 +10,9 @@ import br.com.esl.etl.v2.plataforma.configuracao.C78LocalSqlTarget;
 import br.com.esl.etl.v2.plataforma.persistencia.controle.C78DevEngineAdmissionProducer;
 import br.com.esl.etl.v2.plataforma.persistencia.controle.C78DevEngineBankAdapter;
 import br.com.esl.etl.v2.plataforma.persistencia.controle.C78Sample12AdmissionProducer;
-
-import org.junit.jupiter.api.Test;
-
 import java.sql.SQLException;
 import java.util.concurrent.atomic.AtomicInteger;
+import org.junit.jupiter.api.Test;
 
 /** Real factory/adapter linkage under missing Root only; never an authenticated or physical run. */
 class RuntimeDevSampleBindingTest {

@@ -42,14 +42,17 @@ public final class AnalyticQuotesFixtures {
             throw new IllegalArgumentException("ANA_QUOTE_FIXTURE_SCOPE");
         }
         final var seed = data();
+        final int rootsPerPage = Math.max(1, pageSize / 3);
         return new AnalyticQuotesSyntheticSource(
                 page -> {
                     final var rows = JsonNodeFactory.instance.arrayNode();
-                    final int start = Math.multiplyExact(page - 1, pageSize);
+                    final int start = Math.multiplyExact(page - 1, rootsPerPage);
                     for (int index = start;
-                            index < Math.min(roots * 3, start + pageSize);
+                            index < Math.min(roots, start + rootsPerPage);
                             index++) {
-                        rows.add(seed.deepCopy().put("sequence_code", first + index / 3));
+                        for (int copy = 0; copy < 3; copy++) {
+                            rows.add(seed.deepCopy().put("sequence_code", first + index));
+                        }
                     }
                     return rows.toString();
                 });

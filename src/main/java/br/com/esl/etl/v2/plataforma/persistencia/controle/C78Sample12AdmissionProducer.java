@@ -7,13 +7,11 @@ import br.com.esl.etl.v2.bootstrap.RuntimeDevEngineBankBinding.Scope;
 import br.com.esl.etl.v2.plataforma.configuracao.C78LocalSqlTarget;
 import br.com.esl.etl.v2.plataforma.configuracao.C78LocalTlsScope;
 import br.com.esl.etl.v2.plataforma.fonte.dataexport.CurrentSourceInfoEvidence;
-
 import com.fasterxml.jackson.core.StreamReadFeature;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.sun.nio.file.ExtendedOpenOption;
-
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
@@ -121,7 +119,8 @@ public final class C78Sample12AdmissionProducer implements RuntimeDevEngineBankB
                             reply,
                             acceptedSource,
                             Instant.parse(descriptor.path("issuedUtc").asText()),
-                            Instant.now());
+                            Instant.now(),
+                            descriptor.path("request").asText());
             files.checkpoint();
             acceptedSource = observed;
             return observed;
@@ -588,6 +587,21 @@ public final class C78Sample12AdmissionProducer implements RuntimeDevEngineBankB
             final Instant issued,
             final Instant now)
             throws IOException {
+        return verifySourceReply(expected, reply, first, issued, now, "HERMES_c54d6a25880d");
+    }
+
+    static CurrentSourceInfoEvidence.AcceptedInfo verifySourceReply(
+            final JsonNode expected,
+            final JsonNode reply,
+            final CurrentSourceInfoEvidence.AcceptedInfo first,
+            final Instant issued,
+            final Instant now,
+            final String expectedRequest)
+            throws IOException {
+        if (!"HERMES_c54d6a25880d".equals(expectedRequest)
+                && !"USER_20261016_CONTINUAR_V2".equals(expectedRequest)) {
+            throw new IOException("SOURCE_PRIVATE_REQUEST_NAMESPACE");
+        }
         if (reply == null || !reply.isObject() || reply.size() != 9 || !reply.has("observation")) {
             throw new IOException("SOURCE_PRIVATE_OBSERVATION_SHAPE");
         }
@@ -625,7 +639,8 @@ public final class C78Sample12AdmissionProducer implements RuntimeDevEngineBankB
                             observation.path("metadataFields").intValue(),
                             observation.path("attempts").intValue(),
                             Instant.parse(observation.path("observedAt").textValue()));
-            if (accepted.observedAt().isBefore(issued)
+            if (!accepted.requestId().equals(expectedRequest)
+                    || accepted.observedAt().isBefore(issued)
                     || accepted.observedAt().isAfter(now)
                     || (first != null && !first.equals(accepted))) {
                 throw new IOException("SOURCE_PRIVATE_FIRST_OBSERVATION_CHANGED");

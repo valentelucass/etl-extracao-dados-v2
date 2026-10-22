@@ -35,6 +35,7 @@ import br.com.esl.etl.v2.plataforma.fonte.dataexport.DataExportResponseForm;
 import br.com.esl.etl.v2.plataforma.fonte.dataexport.DataExportTemplate;
 import br.com.esl.etl.v2.plataforma.fonte.dataexport.SourceDateTimeRange;
 import br.com.esl.etl.v2.plataforma.resiliencia.CancellationSignal;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import java.time.Clock;
@@ -65,6 +66,9 @@ class RuntimeFiveVerticalPipelineTest {
         assertEquals(2, fixture.batches);
         assertEquals(16, fixture.records);
         assertEquals(3, fixture.pages);
+        assertEquals(2, fixture.firstTwoPageIdentities.size());
+        assertEquals(8, fixture.firstTwoPageIdentities.get(0).stream().distinct().count());
+        assertEquals(fixture.firstTwoPageIdentities.get(0), fixture.firstTwoPageIdentities.get(1));
         assertNotNull(fixture.guard.complete());
     }
 
@@ -223,6 +227,26 @@ class RuntimeFiveVerticalPipelineTest {
         };
     }
 
+    private static ObjectNode pageRow(
+            final DataExportTemplate template, final int index, final int page) {
+        final var record = row(template, index);
+        if (index != 0) {
+            return record;
+        }
+        // Repeated identities can carry corrected business values on a later physical page.
+        return switch (template) {
+            case COLETAS, FRETES -> record.put("updated_at", NOW.plusSeconds(page - 1L).toString());
+            case MANIFESTOS -> record.put("km", Integer.toString(page - 1));
+            case COTACOES ->
+                    record.put(
+                            "qoe_qes_total",
+                            java.math.BigDecimal.valueOf(1000L + (page - 1L) * 100L, 2)
+                                    .toPlainString());
+            case LOCALIZACAO_CARGAS -> record.put("invoices_volumes", Integer.toString(page - 1));
+            default -> throw new IllegalArgumentException("FIVE_VERTICAL_FIXTURE_ONLY");
+        };
+    }
+
     private static final class Fixture {
         private final DataExportTemplate template;
         private final ContractRunGuard guard;
@@ -230,6 +254,7 @@ class RuntimeFiveVerticalPipelineTest {
         private final int scale;
         private final CancellationSignal cancellation = new CancellationSignal();
         private final List<Object> retained = new ArrayList<>();
+        private final List<List<JsonNode>> firstTwoPageIdentities = new ArrayList<>();
         private final java.util.ArrayDeque<java.lang.ref.WeakReference<Object>> batchReferences =
                 new java.util.ArrayDeque<>();
         private int pages, batches, records, inFlight, peak;
@@ -270,7 +295,16 @@ class RuntimeFiveVerticalPipelineTest {
                                 final var array = envelope.putArray("data");
                                 if (request.page() <= scale) {
                                     for (int i = 0; i < 8; i++) {
-                                        array.add(row(template, i));
+                                        array.add(pageRow(template, i, request.page()));
+                                    }
+                                    if (request.page() <= 2) {
+                                        final var identities = new ArrayList<JsonNode>();
+                                        for (final JsonNode record : array) {
+                                            identities.add(
+                                                    record.get(template.paginationEntityField())
+                                                            .deepCopy());
+                                        }
+                                        firstTwoPageIdentities.add(List.copyOf(identities));
                                     }
                                 }
                                 guard.observeDataExportResponse(

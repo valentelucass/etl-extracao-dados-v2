@@ -5,16 +5,12 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import br.com.esl.etl.v2.bootstrap.Main;
-
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.sun.source.tree.CompilationUnitTree;
 import com.sun.source.tree.MemberSelectTree;
 import com.sun.source.util.JavacTask;
 import com.sun.source.util.TreeScanner;
-
-import org.junit.jupiter.api.Test;
-
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.lang.reflect.GenericArrayType;
@@ -44,10 +40,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.BaseStream;
 import java.util.stream.Stream;
-
 import javax.tools.JavaFileObject;
 import javax.tools.SimpleJavaFileObject;
 import javax.tools.ToolProvider;
+import org.junit.jupiter.api.Test;
 
 public class ArchitectureRulesTest {
 
@@ -66,8 +62,8 @@ public class ArchitectureRulesTest {
                         "import java.sql.Connection; class Example {}",
                         "import java.net.http.HttpClient; class Example {}",
                         "import"
-                            + " br.com.esl.etl.v2.modulos.coletas.aplicacao.ColetaDataExportRecordMapper;"
-                            + " class Example {}")) {
+                                + " br.com.esl.etl.v2.modulos.coletas.aplicacao.ColetaDataExportRecordMapper;"
+                                + " class Example {}")) {
             final SourceFile fixture =
                     new SourceFile(
                             "Example.java",
@@ -101,9 +97,9 @@ class Example { String description = "java.sql.Connection"; }
         final Pattern forbidden =
                 Pattern.compile(
                         "^(?:com\\.fasterxml\\.jackson|com\\.google\\.gson|org\\.json|java\\.sql|javax\\.sql"
-                            + "|java\\.net|javax\\.persistence|jakarta\\.persistence|org\\.hibernate"
-                            + "|br\\.com\\.esl\\.etl\\.v2\\.(?:bootstrap|plataforma\\.(?:fonte|persistencia))"
-                            + "|br\\.com\\.esl\\.etl\\.v2\\.modulos\\.[^.]+\\.aplicacao)(?:\\.|$)");
+                                + "|java\\.net|javax\\.persistence|jakarta\\.persistence|org\\.hibernate"
+                                + "|br\\.com\\.esl\\.etl\\.v2\\.(?:bootstrap|plataforma\\.(?:fonte|persistencia))"
+                                + "|br\\.com\\.esl\\.etl\\.v2\\.modulos\\.[^.]+\\.aplicacao)(?:\\.|$)");
         final List<String> violations = new ArrayList<>();
         for (final SourceFile source : sources) {
             final JavaFileObject file =
@@ -199,8 +195,8 @@ class Example { String description = "java.sql.Connection"; }
                     Map.entry(
                             "br.com.esl.etl.v2.plataforma.persistencia.controle.C78DevCatalogInspector$Report#evidence()",
                             "F4: exatamente12 evidências imutáveis em ordem fixa; ORIGINAL12"
-                                + " conserva262144 caracteres, CONTRACT_COVERAGE12 limita1500000."
-                                + " Modo explícito e saída UTF-8 até2097152 bytes; não é captura."),
+                                    + " conserva262144 caracteres, CONTRACT_COVERAGE12 limita1500000."
+                                    + " Modo explícito e saída UTF-8 até2097152 bytes; não é captura."),
                     Map.entry(
                             "br.com.esl.etl.v2.plataforma.configuracao.C78LocalTrustManager#getAcceptedIssuers()",
                             "ADR0062: retorno literal de array vazio, zero emissores; não enumera"
@@ -209,13 +205,13 @@ class Example { String description = "java.sql.Connection"; }
                             "br.com.esl.etl.v2.plataforma.persistencia.devlocal.DevLocalLedger#"
                                     + "readOutput(java.lang.String,java.lang.String)",
                             "DEV-FS-001: uma cópia defensiva de um artefato sintético já journaled;"
-                                + " máximo4194304bytes, size/hash antes da entrega, overflow4194305"
-                                + " testado."),
+                                    + " máximo4194304bytes, size/hash antes da entrega, overflow4194305"
+                                    + " testado."),
                     Map.entry(
                             "br.com.esl.etl.v2.plataforma.persistencia.devlocal.DevLocalLedger#runs()",
                             "DEV-FS-001: no máximo1000 recibos técnicos imutáveis; replay lê no"
-                                + " máximo100000 records limitados4096bytes, não contém universo de"
-                                + " registros de negócio."),
+                                    + " máximo100000 records limitados4096bytes, não contém universo de"
+                                    + " registros de negócio."),
                     Map.entry(
                             "br.com.esl.etl.v2.plataforma.persistencia.devlocal.DevLocalLedger#pendingStartIds()",
                             "DEV-FS-002: lista imutável de zero ou uma intenção própria pendente;"
@@ -228,23 +224,23 @@ class Example { String description = "java.sql.Connection"; }
                     Map.entry(
                             "br.com.esl.etl.v2.plataforma.persistencia.devlocal.DevLocalLedger$Run#events()",
                             "DEV-FS-001: metadata técnica imutável; events+outputs limitado100000"
-                                + " antes da cópia, overflow100001 testado; payloads permanecem em"
-                                + " arquivos próprios."),
+                                    + " antes da cópia, overflow100001 testado; payloads permanecem em"
+                                    + " arquivos próprios."),
                     Map.entry(
                             "br.com.esl.etl.v2.plataforma.persistencia.devlocal.DevLocalLedger$Run#outputs()",
                             "DEV-FS-001: referências/hash/size imutáveis de artefatos; teto"
-                                + " compartilhado100000 com events verificado antes da cópia; nunca"
-                                + " entrega todos os bytes."),
+                                    + " compartilhado100000 com events verificado antes da cópia; nunca"
+                                    + " entrega todos os bytes."),
                     Map.entry(
                             "br.com.esl.etl.v2.plataforma.fonte.dataexport.DataExportObservedPage$PhysicalObservation#records()",
                             "TEST-OBS-PHYSICAL-001: zero ou um registro do corpo completo; envelope"
-                                + " fechado, coleções conhecidas somam no máximo um item e"
-                                + " estruturas desconhecidas são recusadas. Testes physical* cobrem"
-                                + " overflow, irmãos, aninhamento e vazio; entidades e per remoto"
-                                + " continuam UNVERIFIED."),
+                                    + " fechado, coleções conhecidas somam no máximo um item e"
+                                    + " estruturas desconhecidas são recusadas. Testes physical* cobrem"
+                                    + " overflow, irmãos, aninhamento e vazio; entidades e per remoto"
+                                    + " continuam UNVERIFIED."),
                     Map.entry(
                             "br.com.esl.etl.v2.plataforma.fonte.dataexport.ExpansionObservedPageMapper#mapPhysical("
-                                + "br.com.esl.etl.v2.plataforma.fonte.dataexport.DataExportObservedPage$PhysicalObservation)",
+                                    + "br.com.esl.etl.v2.plataforma.fonte.dataexport.DataExportObservedPage$PhysicalObservation)",
                             "TEST-OBS-PHYSICAL-001: lista imutável de zero ou uma observação tipada"
                                     + " derivada da página física já limitada, binding nulo; testes"
                                     + " physicalExpansion* cobrem vazio, quarentena e recusa de"
@@ -252,13 +248,13 @@ class Example { String description = "java.sql.Connection"; }
                     Map.entry(
                             "br.com.esl.etl.v2.plataforma.fonte.dataexport.DataExportObservedPage#records()",
                             "OBS-DE-DELIVERY-100: somente página 1/per 1; factory exige maximumRows"
-                                + " 1..100, página recusa overflow antes da entrega e devolve"
-                                + " cópias defensivas. DataExportObservedPageTest cobre 100/101"
-                                + " linhas e vazio; limite local não comprova paginação remota nem"
-                                + " completude."),
+                                    + " 1..100, página recusa overflow antes da entrega e devolve"
+                                    + " cópias defensivas. DataExportObservedPageTest cobre 100/101"
+                                    + " linhas e vazio; limite local não comprova paginação remota nem"
+                                    + " completude."),
                     Map.entry(
                             "br.com.esl.etl.v2.plataforma.fonte.dataexport.ExpansionObservedPageMapper#map("
-                                + "br.com.esl.etl.v2.plataforma.fonte.dataexport.DataExportObservedPage)",
+                                    + "br.com.esl.etl.v2.plataforma.fonte.dataexport.DataExportObservedPage)",
                             "OBS-DE-DELIVERY-100: uma observação por linha da única página limitada"
                                     + " a 100; retorno imutável, inclusive vazio, sem acumular"
                                     + " travessia. DataExportObservedPageTest cobre 100/101 linhas,"
@@ -266,10 +262,10 @@ class Example { String description = "java.sql.Connection"; }
                     Map.entry(
                             "br.com.esl.etl.v2.plataforma.fonte.graphql.UsersGraphQlObservationClient$Receipt#records()",
                             "OBS-USERS-FIRST1-001: lista imutável de zero ou um UsuarioStageRecord;"
-                                + " parser recusa edges acima de first=1 e adapter recusa"
-                                + " nodeCount>1. UsersGraphQlObservationClientTest cobre overflow,"
-                                + " vazio, hasNext e quarentena, sem seguir cursor ou declarar"
-                                + " snapshot completo."),
+                                    + " parser recusa edges acima de first=1 e adapter recusa"
+                                    + " nodeCount>1. UsersGraphQlObservationClientTest cobre overflow,"
+                                    + " vazio, hasNext e quarentena, sem seguir cursor ou declarar"
+                                    + " snapshot completo."),
                     Map.entry(
                             "br.com.esl.etl.v2.bootstrap.RuntimeDevEngineBankBinding$SampleExpectation#expectedRoots()",
                             "SAMPLE12-OWNER: exactly one immutable scoped root; constructor checks"
@@ -293,9 +289,9 @@ class Example { String description = "java.sql.Connection"; }
                                     + " chaves e teto antes da copia."),
                     Map.entry(
                             "br.com.esl.etl.v2.plataforma.persistencia.coletas.ColetaShadowSetComparator"
-                                + "#readBoundedBatchRows(br.com.esl.etl.v2.plataforma.persistencia.coletas."
-                                + "ColetaTemporalLaboratorySession,java.util.UUID,"
-                                + "br.com.esl.etl.v2.plataforma.identidade.ScopedSourceIdentity,int,java.lang.String)",
+                                    + "#readBoundedBatchRows(br.com.esl.etl.v2.plataforma.persistencia.coletas."
+                                    + "ColetaTemporalLaboratorySession,java.util.UUID,"
+                                    + "br.com.esl.etl.v2.plataforma.identidade.ScopedSourceIdentity,int,java.lang.String)",
                             "COL-OBS-01: ate 1000 linhas da unica executionId, com overflow"
                                     + " recusado antes de adicionar; nao le universo global."),
                     Map.entry(
@@ -431,13 +427,13 @@ class Example { String description = "java.sql.Connection"; }
                                     + " antes da cópia."),
                     Map.entry(
                             "br.com.esl.etl.v2.plataforma.persistencia.analitico.JdbcAnalyticFixtureBindings"
-                                + "#fiscalSourcesPage(java.util.UUID,long,int)",
+                                    + "#fiscalSourcesPage(java.util.UUID,long,int)",
                             "ANA-35: maximum1..64 antes de I/O, TOP parametrizado, keyset"
                                     + " component_id e overflow recusado."),
                     Map.entry(
                             "br.com.esl.etl.v2.plataforma.persistencia.analitico.JdbcAnalyticFixtureBindings"
-                                + "#sourcesPage(java.util.UUID,br.com.esl.etl.v2.plataforma.analitico."
-                                + "AnalyticDimensionBinding$Entity,java.lang.String,int)",
+                                    + "#sourcesPage(java.util.UUID,br.com.esl.etl.v2.plataforma.analitico."
+                                    + "AnalyticDimensionBinding$Entity,java.lang.String,int)",
                             "ANA-35: maximum1..6 antes de I/O; TOP parametrizado/keyset, execução"
                                     + " unívoca e overflow recusado."),
                     Map.entry(
@@ -450,7 +446,7 @@ class Example { String description = "java.sql.Connection"; }
                                     + " de uma única página."),
                     Map.entry(
                             "br.com.esl.etl.v2.bootstrap.ExpansionLaboratoryRelationFixtures#bindingBatch(jav"
-                                + "a.time.LocalDate,int,int)",
+                                    + "a.time.LocalDate,int,int)",
                             "EXP-12: count entre 1 e 14 antes da alocação; sete vínculos explícitos"
                                     + " por raiz, TVP de até 98."),
                     Map.entry(
@@ -459,28 +455,28 @@ class Example { String description = "java.sql.Connection"; }
                                     + " imutável de uma observação, sem identidade documental."),
                     Map.entry(
                             "br.com.esl.etl.v2.plataforma.persistencia.expansao.JdbcExpansionQueries#detailPa"
-                                + "ge(java.util.UUID,br.com.esl.etl.v2.plataforma.persistencia.expansao.JdbcExpansi"
-                                + "onQueries$Vertical,int,long,int)",
+                                    + "ge(java.util.UUID,br.com.esl.etl.v2.plataforma.persistencia.expansao.JdbcExpansi"
+                                    + "onQueries$Vertical,int,long,int)",
                             "EXP-14: cursor exclusivo, maximum entre 1 e 100,"
                                     + " SQL TOP parametrizado e overflow recusado."),
                     Map.entry(
                             "br.com.esl.etl.v2.plataforma.persistencia.expansao.JdbcExpansionQueries#invoiceF"
-                                + "actsPage(java.util.UUID,long,int)",
+                                    + "actsPage(java.util.UUID,long,int)",
                             "EXP-17: grão de título, maximum entre 1 e 100,"
                                     + " SQL TOP e cursor exclusivo; overflow recusado."),
                     Map.entry(
                             "br.com.esl.etl.v2.plataforma.persistencia.expansao.JdbcExpansionQueries#revenueF"
-                                + "actsPage(java.util.UUID,long,int)",
+                                    + "actsPage(java.util.UUID,long,int)",
                             "EXP-19: grão de Frete vinculado, maximum entre 1 e 100,"
                                     + " SQL TOP e cursor exclusivo; overflow recusado."),
                     Map.entry(
                             "br.com.esl.etl.v2.plataforma.persistencia.expansao.JdbcExpansionRecomposition#st"
-                                + "epsBatch(java.util.UUID,int)",
+                                    + "epsBatch(java.util.UUID,int)",
                             "EXP-20: maximum deve ser seis; PK e CHECK limitam entidades aos seis"
                                     + " slots; JDBC recusa falta e overflow."),
                     Map.entry(
                             "br.com.esl.etl.v2.plataforma.persistencia.expansao.JdbcExpansionRelations#claimB"
-                                + "atch(java.util.UUID,java.util.UUID,int,int)",
+                                    + "atch(java.util.UUID,java.util.UUID,int,int)",
                             "EXP-13: maximum entre 1 e 100 antes de I/O,"
                                     + " TOP parametrizado no SQL e recusa de overflow no JDBC."),
                     Map.entry(
@@ -497,7 +493,7 @@ class Example { String description = "java.sql.Connection"; }
                             "Tipos distintos de um campo dentro de uma única página limitada."),
                     Map.entry(
                             "br.com.esl.etl.v2.plataforma.fonte.dataexport.DataExportPayloadFieldProfile#text"
-                                + "ualFormats()",
+                                    + "ualFormats()",
                             "Formatos distintos de um campo dentro de uma única página limitada."),
                     Map.entry(
                             "br.com.esl.etl.v2.plataforma.fonte.dataexport.DataExportPayloadProfile#fields()",
@@ -563,7 +559,7 @@ class Example { String description = "java.sql.Connection"; }
                             "Filhos MDF-e de uma única coorte física limitada a 100 observações."),
                     Map.entry(
                             "br.com.esl.etl.v2.modulos.manifestos.domain.ManifestoReductionResult#childQuaran"
-                                + "tineReasons()",
+                                    + "tineReasons()",
                             "Razões sanitizadas, no máximo uma por observação física da coorte."),
                     Map.entry(
                             "br.com.esl.etl.v2.plataforma.autorizacao.PinnedSqlTrustManager#getAcceptedIssuers()",
@@ -587,7 +583,7 @@ class Example { String description = "java.sql.Connection"; }
                                     + " de 1 a 64."),
                     Map.entry(
                             "br.com.esl.etl.v2.plataforma.orquestracao.RuntimeTemporalCoordinator$Reconciliat"
-                                + "ion#pending()",
+                                    + "ion#pending()",
                             "Até quatro decisões de próximo passo, limitadas pela concorrência e"
                                     + " pelo construtor."),
                     Map.entry(
@@ -597,18 +593,18 @@ class Example { String description = "java.sql.Connection"; }
                                     + " de chaves de negócio."),
                     Map.entry(
                             "br.com.esl.etl.v2.bootstrap.RelationalLaboratoryFixtures#bindingBatch(java.time."
-                                + "LocalDate,int,int)",
+                                    + "LocalDate,int,int)",
                             "REL-LAB-03: até 50 raízes de fixture, duas evidências por raiz; recusa"
                                     + " antes de alocar."),
                     Map.entry(
                             "br.com.esl.etl.v2.plataforma.persistencia.relacional.JdbcRelationalLaboratory"
-                                + "#claimBatch(java.util.UUID,java.util.UUID,int,"
-                                + "br.com.esl.etl.v2.plataforma.resiliencia.CancellationToken)",
+                                    + "#claimBatch(java.util.UUID,java.util.UUID,int,"
+                                    + "br.com.esl.etl.v2.plataforma.resiliencia.CancellationToken)",
                             "REL-LAB-05: limite 1..100 validado antes de I/O,"
                                     + " teto persistido/TOP no SQL e overflow recusado no JDBC."),
                     Map.entry(
                             "br.com.esl.etl.v2.plataforma.persistencia.controle.JdbcSqlServerTemporalPlan"
-                                + "#readGapPage(java.lang.String,int,java.time.Instant)",
+                                    + "#readGapPage(java.lang.String,int,java.time.Instant)",
                             "Valida maximum 1..64 antes de I/O, TOP no SQL e recusa overflow/ordem"
                                     + " no result set."),
                     Map.entry(
@@ -842,15 +838,15 @@ class Example { String description = "java.sql.Connection"; }
         final var sources =
                 Map.of(
                         "C78DevEngineDispatch.java",
-                        "b2042621c25908bac5e199d2103c1b63280a7a4b3000ad50bf63daba7906dc1f",
+                        "125a9671af811040eaf2ddeff78c4f0ccd663a528c9cf8113eb96f872c398a73",
                         "C78DevEngineSession.java",
-                        "15374b907bd8bb88a3cbb17e10015d0121f13a045ee93d08f48203b8afd29ecb",
+                        "cad902839780d248e06442e415e154f40fd6aebca7c192a2f89f64c3bf8aad59",
                         "C78Sample12Owner.java",
-                        "0acae4f9c16795417897a662279517116c557fe03d49059f7a25e71d5b01e989",
+                        "9e89b846168cafa3239afe8e2245f61488a88546069be347cd35ee466f21edd7",
                         "C78DevCatalogPlan.java",
-                        "1d830b3ad0a79eeb7d63d10fe0c47612c1dfe9122071172e95eb2be974dedea2",
+                        "01f4a98f57b7a456a26a5ab8e056ccdf295eba2c20059dd66ed6882cc4daa74c",
                         "C78DevCatalogReportStore.java",
-                        "f0848d59c3073261de174c466dcea39ee0aed9fe119e398e20fc8c8b1d3e188b");
+                        "1edbc565912cbf1bb39b69c96375277948ace91792bcba984322447c4c2ef4e9");
         for (final var entry : sources.entrySet()) {
             final Path source =
                     Path.of("src/main/java/br/com/esl/etl/v2/plataforma/persistencia/controle")
@@ -902,8 +898,8 @@ class Example { String description = "java.sql.Connection"; }
                         new SourceFile(
                                 "NestedTraversal.java",
                                 "final class NestedTraversal { void run() { var allRecords = new"
-                                    + " java.util.ArrayList<String>(); try { while (hasNext()) {"
-                                    + " allRecords.add(next()); } } finally { close(); } } }"),
+                                        + " java.util.ArrayList<String>(); try { while (hasNext()) {"
+                                        + " allRecords.add(next()); } } finally { close(); } } }"),
                         new SourceFile(
                                 "ForEachTraversal.java",
                                 "final class ForEachTraversal { private java.util.List<String> "

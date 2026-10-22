@@ -5,20 +5,17 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import br.com.esl.etl.v2.bootstrap.RuntimeDevEngineBankBinding;
-
 import com.fasterxml.jackson.core.StreamReadFeature;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-
-import org.junit.jupiter.api.Test;
-
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.time.Instant;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
+import org.junit.jupiter.api.Test;
 
 /**
  * Offline private wire qualification. An observation fixture supplies no Root or Source authority.
@@ -60,6 +57,43 @@ class C78CurrentSourcePrivateChannelTest {
                         .put("observedAt", OBSERVED.toString()));
         // Real serialized wire roundtrip changes LongNode PIDs/byte count into IntNode.
         return (ObjectNode) JSON.readTree(JSON.writeValueAsBytes(answer));
+    }
+
+    @Test
+    void newRequestMustMatchTheActualDescriptorAndCannotBorrowC54Observation() throws Exception {
+        final var current = reply();
+        ((ObjectNode) current.path("observation")).put("requestId", "USER_20261016_CONTINUAR_V2");
+        final var accepted =
+                C78Sample12AdmissionProducer.verifySourceReply(
+                        expected(), current, null, ISSUED, NOW, "USER_20261016_CONTINUAR_V2");
+        assertEquals("USER_20261016_CONTINUAR_V2", accepted.requestId());
+        assertThrows(
+                IOException.class,
+                () ->
+                        C78Sample12AdmissionProducer.verifySourceReply(
+                                expected(),
+                                reply(),
+                                null,
+                                ISSUED,
+                                NOW,
+                                "USER_20261016_CONTINUAR_V2"));
+        assertThrows(
+                IOException.class,
+                () ->
+                        C78Sample12AdmissionProducer.verifySourceReply(
+                                expected(), current, null, ISSUED, NOW));
+    }
+
+    @Test
+    void requestAliasesAndAbsentExpectedRequestNeverSelectCurrentEvidence() {
+        for (final String request :
+                new String[] {null, "", "USER_20261016_CONTINUAR_V2-copy", "HERMES_3cdb8d7b3d12"}) {
+            assertThrows(
+                    IOException.class,
+                    () ->
+                            C78Sample12AdmissionProducer.verifySourceReply(
+                                    expected(), reply(), null, ISSUED, NOW, request));
+        }
     }
 
     @Test

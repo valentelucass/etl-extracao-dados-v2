@@ -16,7 +16,6 @@ import br.com.esl.etl.v2.plataforma.identidade.FirstWaveIdentityCatalog;
 import br.com.esl.etl.v2.plataforma.identidade.FirstWaveIdentityContract;
 import br.com.esl.etl.v2.plataforma.identidade.ScopedSourceIdentity;
 import br.com.esl.etl.v2.plataforma.resiliencia.CancellationToken;
-
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;

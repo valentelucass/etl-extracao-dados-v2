@@ -48,7 +48,8 @@ public final class ContractParityComparator {
             final List<ContractObservedPage> firstRunPages,
             final List<ContractObservedPage> secondRunPages,
             final String naturalKeyField) {
-        return compareRepeatedPagination(firstRunPages, secondRunPages, "id", naturalKeyField);
+        return compareRepeatedPagination(
+                firstRunPages, secondRunPages, "id", naturalKeyField, false);
     }
 
     public static ContractPaginationResult compareRepeatedPagination(
@@ -58,18 +59,24 @@ public final class ContractParityComparator {
             final String naturalKeyField) {
         Objects.requireNonNull(template, "O template Data Export é obrigatório.");
         return compareRepeatedPagination(
-                firstRunPages, secondRunPages, template.paginationEntityField(), naturalKeyField);
+                firstRunPages,
+                secondRunPages,
+                template.paginationEntityField(),
+                naturalKeyField,
+                requiresIntegerNaturalKey(template, naturalKeyField));
     }
 
     private static ContractPaginationResult compareRepeatedPagination(
             final List<ContractObservedPage> firstRunPages,
             final List<ContractObservedPage> secondRunPages,
             final String entityIdField,
-            final String naturalKeyField) {
+            final String naturalKeyField,
+            final boolean integerNaturalKey) {
         final PaginationRun firstRun =
-                analyzePagination(firstRunPages, entityIdField, naturalKeyField);
+                analyzePagination(firstRunPages, entityIdField, naturalKeyField, integerNaturalKey);
         final PaginationRun secondRun =
-                analyzePagination(secondRunPages, entityIdField, naturalKeyField);
+                analyzePagination(
+                        secondRunPages, entityIdField, naturalKeyField, integerNaturalKey);
         return new ContractPaginationResult(
                 firstRun.physicalRecordCount(),
                 secondRun.physicalRecordCount(),
@@ -97,7 +104,9 @@ public final class ContractParityComparator {
                 secondRun.keysUnique(),
                 firstRun.entityCount() == secondRun.entityCount(),
                 firstRun.orderedKeys().equals(secondRun.orderedKeys()),
-                firstRun.keySet().equals(secondRun.keySet()));
+                firstRun.keySet().equals(secondRun.keySet()),
+                // As mesmas chaves naturais não bastam se os IDs ou suas associações mudaram.
+                firstRun.keysByEntityId().equals(secondRun.keysByEntityId()));
     }
 
     private static <T> ContractIdentityParityResult compareIdentity(
@@ -161,7 +170,10 @@ public final class ContractParityComparator {
         boolean idsComplete = entities.entityIdsVerifiable();
         boolean idsUnique = entities.entityIdsVerifiable();
         for (final ContractDataExportEntityIndex.Entity entity : entities.entities()) {
-            final Optional<String> key = entity.consistentScalar(naturalKeyField);
+            final Optional<String> key =
+                    requiresIntegerNaturalKey(template, naturalKeyField)
+                            ? entity.consistentInteger(naturalKeyField)
+                            : entity.consistentScalar(naturalKeyField);
             final Optional<String> id = normalize(entity.id().asText());
             if (key.isEmpty()) {
                 keysComplete = false;
@@ -228,7 +240,8 @@ public final class ContractParityComparator {
     private static PaginationRun analyzePagination(
             final List<ContractObservedPage> pages,
             final String entityIdField,
-            final String naturalKeyField) {
+            final String naturalKeyField,
+            final boolean integerNaturalKey) {
         Objects.requireNonNull(pages, "As páginas são obrigatórias.");
         if (entityIdField == null || entityIdField.isBlank()) {
             throw new IllegalArgumentException("O campo de entidade é obrigatório.");
@@ -266,7 +279,10 @@ public final class ContractParityComparator {
             entityIdsVerifiable &= pageEntities.entityIdsVerifiable();
             entityCountsWithinPageSize &= pageEntities.entityLimitWithin(page.requestedPageSize());
             for (final ContractDataExportEntityIndex.Entity entity : pageEntities.entities()) {
-                final Optional<String> key = entity.consistentScalar(naturalKeyField);
+                final Optional<String> key =
+                        integerNaturalKey
+                                ? entity.consistentInteger(naturalKeyField)
+                                : entity.consistentScalar(naturalKeyField);
                 if (keysByEntityId.containsKey(entity.id())) {
                     entityIdsUniqueAcrossPages = false;
                     if (!Objects.equals(keysByEntityId.get(entity.id()), key)) {
@@ -302,7 +318,13 @@ public final class ContractParityComparator {
                 keysComplete,
                 keysUnique,
                 List.copyOf(orderedKeys),
-                Set.copyOf(uniqueKeys));
+                Set.copyOf(uniqueKeys),
+                Map.copyOf(keysByEntityId));
+    }
+
+    private static boolean requiresIntegerNaturalKey(
+            final DataExportTemplate template, final String naturalKeyField) {
+        return template == DataExportTemplate.COLETAS && "sequence_code".equals(naturalKeyField);
     }
 
     private static Optional<String> normalize(final Optional<String> value) {
@@ -336,5 +358,6 @@ public final class ContractParityComparator {
             boolean keysComplete,
             boolean keysUnique,
             List<String> orderedKeys,
-            Set<String> keySet) {}
+            Set<String> keySet,
+            Map<JsonNode, Optional<String>> keysByEntityId) {}
 }

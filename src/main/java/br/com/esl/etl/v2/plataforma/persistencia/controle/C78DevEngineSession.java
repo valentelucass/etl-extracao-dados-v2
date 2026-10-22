@@ -3,7 +3,6 @@ package br.com.esl.etl.v2.plataforma.persistencia.controle;
 import br.com.esl.etl.v2.bootstrap.RuntimeDevEngineBankBinding;
 import br.com.esl.etl.v2.bootstrap.RuntimeDevEngineBankBinding.MissingGate;
 import br.com.esl.etl.v2.bootstrap.RuntimeDevEngineBankBinding.Refusal;
-
 import java.io.PrintWriter;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -16,7 +15,6 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.logging.Logger;
-
 import javax.sql.DataSource;
 
 /** One physical C78 session; borrowed handles cannot commit or escape the owner transaction. */

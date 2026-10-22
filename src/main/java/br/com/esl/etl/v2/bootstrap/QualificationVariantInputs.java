@@ -20,6 +20,8 @@ public final class QualificationVariantInputs {
             throw new IllegalArgumentException("QUAL_VARIANT_SOURCE_LIMIT");
         }
         final var patch = patch(template);
+        // Keep each root's two physical copies together within the original row-page budget.
+        final int rootsPerPage = Math.max(1, pageSize / 2);
         final var source =
                 new ExpansionDependencySource(
                         page -> {
@@ -27,14 +29,16 @@ public final class QualificationVariantInputs {
                                 throw new IllegalArgumentException("QUAL_VARIANT_PAGE");
                             }
                             final var rows = JsonNodeFactory.instance.arrayNode();
-                            final int start = Math.multiplyExact(page - 1, pageSize);
+                            final int start = Math.multiplyExact(page - 1, rootsPerPage);
                             for (int ordinal = start;
-                                    ordinal < Math.min(roots * 2, start + pageSize);
+                                    ordinal < Math.min(roots, start + rootsPerPage);
                                     ordinal++) {
-                                rows.add(
-                                        ExpansionDependencyFixtures.data(
-                                                        template, first + ordinal / 2)
-                                                .setAll(patch));
+                                for (int copy = 0; copy < 2; copy++) {
+                                    rows.add(
+                                            ExpansionDependencyFixtures.data(
+                                                            template, first + ordinal)
+                                                    .setAll(patch));
+                                }
                             }
                             return rows.toString();
                         });

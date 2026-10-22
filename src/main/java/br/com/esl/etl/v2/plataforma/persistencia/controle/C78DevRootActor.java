@@ -1,7 +1,6 @@
 package br.com.esl.etl.v2.plataforma.persistencia.controle;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.time.Instant;

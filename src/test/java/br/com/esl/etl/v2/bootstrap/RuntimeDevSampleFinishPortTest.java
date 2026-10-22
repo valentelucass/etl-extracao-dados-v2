@@ -9,9 +9,6 @@ import br.com.esl.etl.v2.modulos.coletas.domain.ColetaObservedRootComparator.Exp
 import br.com.esl.etl.v2.plataforma.identidade.FirstWaveIdentityContract;
 import br.com.esl.etl.v2.plataforma.identidade.ScopedSourceIdentity;
 import br.com.esl.etl.v2.plataforma.resiliencia.RuntimeExitCategory;
-
-import org.junit.jupiter.api.Test;
-
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -20,6 +17,7 @@ import java.util.Optional;
 import java.util.OptionalInt;
 import java.util.Set;
 import java.util.UUID;
+import org.junit.jupiter.api.Test;
 
 /** Offline port invariants only; booleans do not qualify a physical owner or supplier admission. */
 class RuntimeDevSampleFinishPortTest {

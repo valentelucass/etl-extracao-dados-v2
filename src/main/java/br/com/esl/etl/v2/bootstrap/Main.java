@@ -7,7 +7,6 @@ import br.com.esl.etl.v2.plataforma.configuracao.RuntimeConfigurationFactory;
 import br.com.esl.etl.v2.plataforma.configuracao.RuntimePreflightReport;
 import br.com.esl.etl.v2.plataforma.configuracao.SecretInputPolicy;
 import br.com.esl.etl.v2.plataforma.resiliencia.RuntimeExitCategory;
-
 import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;

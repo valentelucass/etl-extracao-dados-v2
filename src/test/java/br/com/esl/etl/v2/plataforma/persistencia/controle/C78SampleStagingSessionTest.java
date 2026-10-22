@@ -7,9 +7,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import br.com.esl.etl.v2.modulos.coletas.domain.ColetaStageBatch;
 import br.com.esl.etl.v2.modulos.coletas.domain.ColetaStageRecord;
 import br.com.esl.etl.v2.plataforma.persistencia.coletas.JdbcSqlServerColetaStagingGateway;
-
-import org.junit.jupiter.api.Test;
-
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.lang.reflect.Proxy;
@@ -20,6 +17,7 @@ import java.time.Instant;
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicInteger;
+import org.junit.jupiter.api.Test;
 
 /** Own session/gateway component proof; isolated JDBC seam never proves physical admission. */
 class C78SampleStagingSessionTest {

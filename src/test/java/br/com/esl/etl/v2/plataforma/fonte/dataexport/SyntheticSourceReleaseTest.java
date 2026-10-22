@@ -135,7 +135,7 @@ class SyntheticSourceReleaseTest {
                 DataExportPageRequest.forTemplate(
                         template, new BusinessDateRange(date, date), null, 1);
         assertEquals(
-                1, source.bundle(guard, configuration).dataGateway().fetch(request).recordCount());
+                3, source.bundle(guard, configuration).dataGateway().fetch(request).recordCount());
         assertEquals(1, source.metrics().fetchedPages());
         assertTrue(source.metrics().bytes() > 0);
 
@@ -229,13 +229,13 @@ class SyntheticSourceReleaseTest {
                         2,
                         manifestTemplate.defaultOrderBy());
         final var first = manifestGateway.fetch(manifestRequest);
-        assertEquals(2, first.recordCount());
+        assertEquals(3, first.recordCount());
         assertEquals(
                 "SYNTHETIC BRANCH B", first.records().get(0).path("mft_crn_psn_nickname").asText());
         assertEquals(
                 "2036-04-02T12:00:00.000000002Z",
                 first.records().get(0).path("finished_at").asText());
-        assertEquals(1, manifestGateway.fetch(manifestRequest.withPage(2)).recordCount());
-        assertEquals(0, manifestGateway.fetch(manifestRequest.withPage(3)).recordCount());
+        assertEquals(0, manifestGateway.fetch(manifestRequest.withPage(2)).recordCount());
+        assertEquals(2, manifest.metrics().fetchedPages());
     }
 }

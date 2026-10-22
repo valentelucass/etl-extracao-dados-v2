@@ -22,9 +22,6 @@ import br.com.esl.etl.v2.plataforma.orquestracao.RuntimeWorkloadDefinition;
 import br.com.esl.etl.v2.plataforma.orquestracao.RuntimeWorkloadId;
 import br.com.esl.etl.v2.plataforma.orquestracao.RuntimeWorkloadRegistry;
 import br.com.esl.etl.v2.plataforma.resiliencia.RuntimeExitCategory;
-
-import org.junit.jupiter.api.Test;
-
 import java.lang.reflect.Proxy;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -42,6 +39,7 @@ import java.util.Optional;
 import java.util.OptionalInt;
 import java.util.Set;
 import java.util.UUID;
+import org.junit.jupiter.api.Test;
 
 /**
  * JDBC protocol components only. Fixtures grant no admission and execute no physical SQL/source.

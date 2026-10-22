@@ -8,7 +8,6 @@ import java.net.InetSocketAddress;
 import java.net.Proxy;
 import java.net.Socket;
 import java.net.SocketAddress;
-
 import javax.net.SocketFactory;
 
 /** Driver12.8.2 supported factory; no name resolution/proxy or second socket. */

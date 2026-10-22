@@ -63,14 +63,16 @@ public final class AnalyticScenarioFixtures {
             final boolean correction) {
         bounds(first, roots, pageSize, revision);
         final var seed = manifest();
+        // Three physical copies share a root; underfill per to preserve the existing page budget.
+        final int rootsPerPage = Math.max(1, pageSize / 3);
         return new RelationalSyntheticSource(
                         page -> {
                             final var rows = JsonNodeFactory.instance.arrayNode();
-                            final int start = Math.multiplyExact(page - 1, pageSize);
+                            final int start = Math.multiplyExact(page - 1, rootsPerPage);
                             for (int index = start;
-                                    index < Math.min(roots * 3, start + pageSize);
+                                    index < Math.min(roots, start + rootsPerPage);
                                     index++) {
-                                final int root = first + index / 3;
+                                final int root = first + index;
                                 final var row =
                                         seed.deepCopy()
                                                 .put("sequence_code", root)
@@ -90,7 +92,9 @@ public final class AnalyticScenarioFixtures {
                                     row.put("departured_at", DATE.plusDays(1) + "T12:00:00Z");
                                     row.put("mft_crn_psn_nickname", "SYNTHETIC BRANCH B");
                                 }
-                                rows.add(row);
+                                for (int copy = 0; copy < 3; copy++) {
+                                    rows.add(row.deepCopy());
+                                }
                             }
                             return rows.toString();
                         })

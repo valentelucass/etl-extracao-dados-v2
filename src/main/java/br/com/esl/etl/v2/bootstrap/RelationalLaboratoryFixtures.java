@@ -12,6 +12,7 @@ import java.util.List;
 public final class RelationalLaboratoryFixtures {
     private RelationalLaboratoryFixtures() {}
 
+    /** Pages count distinct roots; expanded copies stay together and preserve physical volume. */
     public static RelationalSyntheticSource source(
             final DataExportTemplate template,
             final LocalDate date,
@@ -31,13 +32,15 @@ public final class RelationalLaboratoryFixtures {
         return new RelationalSyntheticSource(
                 page -> {
                     final int offset = Math.multiplyExact(page - 1, pageSize);
-                    final int end = Math.min(count * repetitions, offset + pageSize);
+                    final int end = Math.min(count, offset + pageSize);
                     final var text = new StringBuilder("[");
                     for (int ordinal = offset; ordinal < end; ordinal++) {
-                        if (ordinal > offset) {
-                            text.append(',');
+                        for (int copy = 0; copy < repetitions; copy++) {
+                            if (ordinal > offset || copy > 0) {
+                                text.append(',');
+                            }
+                            text.append(row(template, date, first + ordinal));
                         }
-                        text.append(row(template, date, first + ordinal / repetitions));
                     }
                     return text.append(']').toString();
                 });

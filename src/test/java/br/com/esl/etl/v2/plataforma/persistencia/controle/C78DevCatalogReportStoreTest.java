@@ -6,10 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import br.com.esl.etl.v2.plataforma.configuracao.C78LocalSqlTarget;
-
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.io.TempDir;
-
 import java.io.IOException;
 import java.nio.channels.FileChannel;
 import java.nio.charset.StandardCharsets;
@@ -22,6 +18,8 @@ import java.util.Collections;
 import java.util.HexFormat;
 import java.util.List;
 import java.util.UUID;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 /** Real files and complete readback, with synthetic catalog metadata, never physical SQL. */
 final class C78DevCatalogReportStoreTest {

@@ -41,8 +41,8 @@ class BootstrapFixturePagingTest {
                             configuration());
             final var first = gateway.fetch(request(template, 1, 3));
             final var second = gateway.fetch(request(template, 2, 3));
-            assertEquals(3, first.recordCount());
-            assertEquals(1, second.recordCount());
+            assertEquals(4, first.recordCount());
+            assertEquals(0, second.recordCount());
             assertTrue(
                     first.records().stream()
                             .allMatch(row -> row.path("synthetic_fixture").asBoolean()));

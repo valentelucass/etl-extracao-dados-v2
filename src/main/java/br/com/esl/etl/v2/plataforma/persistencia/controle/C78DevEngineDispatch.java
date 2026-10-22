@@ -6,14 +6,12 @@ import br.com.esl.etl.v2.bootstrap.RuntimeDevEngineBankBinding.Scope;
 import br.com.esl.etl.v2.plataforma.configuracao.C78DevPeerProof;
 import br.com.esl.etl.v2.plataforma.configuracao.C78LocalSqlTarget;
 import br.com.esl.etl.v2.plataforma.configuracao.C78LocalTlsScope;
-
 import com.fasterxml.jackson.core.StreamReadFeature;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.sun.nio.file.ExtendedOpenOption;
-
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
@@ -512,7 +510,7 @@ final class C78DevEngineDispatch implements C78DevPeerProof, AutoCloseable {
         final var matcher =
                 java.util.regex.Pattern.compile(
                                 "\\{call"
-                                    + " ([a-z_]+\\.[a-z_]+)\\(\\s*(\\?(?:\\s*,\\s*\\?)*)?\\s*\\)\\}")
+                                        + " ([a-z_]+\\.[a-z_]+)\\(\\s*(\\?(?:\\s*,\\s*\\?)*)?\\s*\\)\\}")
                         .matcher(sql);
         if (!matcher.matches() || matcher.group(1).startsWith("core.")) {
             return false;

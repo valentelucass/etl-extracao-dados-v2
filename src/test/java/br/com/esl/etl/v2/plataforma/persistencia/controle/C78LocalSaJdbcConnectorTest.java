@@ -11,11 +11,6 @@ import br.com.esl.etl.v2.plataforma.configuracao.C78LocalConnectorFixture;
 import br.com.esl.etl.v2.plataforma.configuracao.C78LocalSqlTarget;
 import br.com.esl.etl.v2.plataforma.configuracao.C78LocalTlsScope;
 import br.com.esl.etl.v2.plataforma.configuracao.SecretKey;
-
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
 import java.lang.reflect.Proxy;
 import java.net.Socket;
 import java.sql.Connection;
@@ -23,6 +18,9 @@ import java.sql.SQLException;
 import java.util.Properties;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 class C78LocalSaJdbcConnectorTest {
     private static final String[] FLAGS = {

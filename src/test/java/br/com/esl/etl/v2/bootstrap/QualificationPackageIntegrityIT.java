@@ -395,7 +395,10 @@ class QualificationPackageIntegrityIT {
         }
         final byte[] planBytes = planProcess.getInputStream().readNBytes(65537);
         assertTrue(planBytes.length <= 65536);
-        assertEquals(0, planProcess.exitValue());
+        assertEquals(
+                0,
+                planProcess.exitValue(),
+                () -> new String(planBytes, java.nio.charset.StandardCharsets.UTF_8));
         final var plan = QualificationJson.parse(planBytes, 65536);
         assertEquals(campaign.id(), plan.path("campaign").asText());
         assertEquals(campaign.cases().size(), plan.path("cases").size());
@@ -427,11 +430,32 @@ class QualificationPackageIntegrityIT {
 
     @Test
     void packagedSequenceSelectionBindsTheDeclaredCaseBeforeAnySqlSession() throws Exception {
-        final var fixture =
-                QualificationPackageFixture.createOffline(
-                        directory.resolve("target/sequence/payload"));
+        final Path payloadRoot = directory.resolve("target/sequence/payload");
+        try (var runtime =
+                new PackagedFixtureRuntime(
+                        Path.of("target/etl-dataexport-v2.jar").toAbsolutePath())) {
+            runtime.invokeTest(getClass(), "assertPackagedSequenceSelection", payloadRoot);
+        }
+        try (var exploded = PackagedFixtureRuntime.exploded()) {
+            assertEquals(
+                    "LOCAL_SCENARIO_ORACLE_BINDING",
+                    assertThrows(
+                                    IllegalArgumentException.class,
+                                    () ->
+                                            exploded.verifySequence(
+                                                    payloadRoot.resolve(
+                                                            "artifact-cases/sequence-a/sequence.json")))
+                            .getMessage());
+        }
+    }
+
+    private void assertPackagedSequenceSelection(final Path payloadRoot) throws Exception {
+        final var fixture = QualificationPackageFixture.createOffline(payloadRoot);
         fixture.includeSequenceCases();
         final var payload = fixture.verify();
+        assertEquals(
+                payload.members().get("etl-dataexport-v2.jar").sha256(),
+                LocalArtifactScenario.runtimeFingerprint());
         final var campaign =
                 QualificationCampaign.parse(
                         fixture.sequenceCampaign("sequence-a", "PASS_LOCAL", "NONE"));
@@ -503,6 +527,7 @@ class QualificationPackageIntegrityIT {
             final String executable, final String classpath, final String... arguments) {
         final var command = new ArrayList<String>();
         command.add(Path.of(System.getProperty("java.home"), "bin", executable).toString());
+        command.add("-Xmx256m");
         // The package still runs in its own JVM. Forward only the coverage agent so its
         // executed bytecode is counted by the same Maven report as the parent IT.
         ManagementFactory.getRuntimeMXBean().getInputArguments().stream()

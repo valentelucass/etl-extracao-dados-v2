@@ -67,6 +67,7 @@ public final class DataExportPageStreamer {
         long recordsDelivered = 0L;
         int currentPage = initialRequest.page();
         boolean completionAttempted = false;
+        final DataExportPageProgressGuard progressGuard = new DataExportPageProgressGuard();
         final StructuredCorrelationContext.Scope correlationScope =
                 StructuredCorrelationContext.openExecution(executionId);
         try {
@@ -121,6 +122,8 @@ public final class DataExportPageStreamer {
                     return result;
                 }
 
+                cancellationToken.throwIfCancellationRequested();
+                progressGuard.observe(response);
                 cancellationToken.throwIfCancellationRequested();
                 pageConsumer.accept(readPage);
                 recordsDelivered = Math.addExact(recordsDelivered, recordCount);

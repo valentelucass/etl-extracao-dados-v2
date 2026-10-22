@@ -2,11 +2,9 @@ package br.com.esl.etl.v2.bootstrap;
 
 import br.com.esl.etl.v2.plataforma.fonte.devlocal.DevLocalDataset;
 import br.com.esl.etl.v2.plataforma.persistencia.devlocal.DevLocalLedger;
-
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-
 import java.io.IOException;
 import java.io.PrintStream;
 import java.lang.management.ManagementFactory;

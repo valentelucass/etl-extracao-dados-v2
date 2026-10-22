@@ -12,11 +12,7 @@ import br.com.esl.etl.v2.plataforma.controle.ImmutableFingerprint;
 import br.com.esl.etl.v2.plataforma.orquestracao.RuntimeRecoveryException;
 import br.com.esl.etl.v2.plataforma.qualidade.DataQualityPolicyReference;
 import br.com.esl.etl.v2.plataforma.resiliencia.CancellationToken;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
-
-import org.junit.jupiter.api.Test;
-
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Proxy;
 import java.nio.file.Path;
@@ -30,8 +26,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
-
 import javax.sql.DataSource;
+import org.junit.jupiter.api.Test;
 
 /** Exact live caller/whitelist seam; component handles never connect or execute SQL. */
 class C78DevEngineStatusCallTest {

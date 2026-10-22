@@ -8,7 +8,6 @@ import br.com.esl.etl.v2.plataforma.configuracao.C78LocalTlsScope;
 import br.com.esl.etl.v2.plataforma.configuracao.C78LocalTrustManager;
 import br.com.esl.etl.v2.plataforma.configuracao.SecretKey;
 import br.com.esl.etl.v2.plataforma.configuracao.SecretProvider;
-
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Objects;

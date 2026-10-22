@@ -26,25 +26,28 @@ public final class AnalyticCollectionsFixtures {
         if (first < 1
                 || roots < 0
                 || roots > 4096
-                || first + roots > 8193
+                || first > 8193 - roots
                 || pageSize < 1
                 || pageSize > 16) {
             throw new IllegalArgumentException("ANA_COLLECTION_FIXTURE_SCOPE");
         }
         final var seed = data();
+        final int rootsPerPage = Math.max(1, pageSize / 3);
         return new RelationalSyntheticSource(
                         page -> {
-                            final int begin = Math.multiplyExact(page - 1, pageSize);
+                            final int begin = Math.multiplyExact(page - 1, rootsPerPage);
                             final var rows = JsonNodeFactory.instance.arrayNode();
                             for (int index = begin;
-                                    index < Math.min(roots * 3, begin + pageSize);
+                                    index < Math.min(roots, begin + rootsPerPage);
                                     index++) {
-                                final int root = first + index / 3;
-                                rows.add(
-                                        seed.deepCopy()
-                                                .put("id", 200000 + root)
-                                                .put("sequence_code", 100000 + root)
-                                                .put("synthetic_item_key", root));
+                                final int root = first + index;
+                                for (int copy = 0; copy < 3; copy++) {
+                                    rows.add(
+                                            seed.deepCopy()
+                                                    .put("id", 200000 + root)
+                                                    .put("sequence_code", 100000 + root)
+                                                    .put("synthetic_item_key", root));
+                                }
                             }
                             return rows.toString();
                         })

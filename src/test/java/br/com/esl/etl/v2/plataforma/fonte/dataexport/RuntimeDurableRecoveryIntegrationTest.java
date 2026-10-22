@@ -620,6 +620,8 @@ class RuntimeDurableRecoveryIntegrationTest {
     private static void runProcess(final String... arguments) throws Exception {
         final var command = new java.util.ArrayList<String>();
         command.add(Path.of(System.getProperty("java.home"), "bin", "java.exe").toString());
+        command.add("-Xms16m");
+        command.add("-Xmx128m");
         command.add("-cp");
         command.add(
                 System.getProperty(

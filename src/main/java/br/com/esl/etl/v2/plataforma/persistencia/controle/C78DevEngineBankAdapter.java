@@ -4,7 +4,6 @@ import br.com.esl.etl.v2.bootstrap.RuntimeDevEngineBankBinding;
 import br.com.esl.etl.v2.plataforma.configuracao.C78DevPeerProof;
 import br.com.esl.etl.v2.plataforma.configuracao.SecretKey;
 import br.com.esl.etl.v2.plataforma.configuracao.SecretProvider;
-
 import java.nio.file.Path;
 import java.sql.Connection;
 import java.sql.SQLException;

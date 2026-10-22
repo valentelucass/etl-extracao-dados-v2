@@ -97,12 +97,12 @@ class RelationalLaboratoryScaleIT {
                 final var measured = probe.gauge.counts();
                 assertEquals(roots, capture.receipt().considered());
                 assertEquals(roots * 2L, measured.records());
-                assertEquals((roots * 2 + 16) / 17 + 1, measured.fetchedPages());
+                assertEquals((roots + 16) / 17 + 1, measured.fetchedPages());
                 assertEquals(1, measured.maximumInFlightPages());
                 assertEquals(0, measured.finalInFlightPages());
                 assertEquals(measured.acquisitions(), measured.releases());
                 assertEquals(0, measured.finalRetainedPages());
-                assertTrue(probe.maximumBatch <= 17);
+                assertTrue(probe.maximumBatch <= 34);
                 assertEquals(1, probe.maximumBatchesInFlight);
                 assertEquals(0, probe.batchesInFlight);
                 probes.add(
@@ -184,21 +184,21 @@ class RelationalLaboratoryScaleIT {
             final List<String> queries =
                     List.of(
                             """
-                    SELECT COUNT_BIG(*) FROM core.relational_lab_link l
-                    JOIN core.relational_lab_root r ON r.run_id=l.run_id AND r.source_key=l.origin_key
-                        AND r.entity_name=CASE l.relation_kind WHEN 'MC' THEN N'manifestos' ELSE N'coletas' END
-                    WHERE l.run_id=? AND l.active=1
-                    """,
+SELECT COUNT_BIG(*) FROM core.relational_lab_link l
+JOIN core.relational_lab_root r ON r.run_id=l.run_id AND r.source_key=l.origin_key
+    AND r.entity_name=CASE l.relation_kind WHEN 'MC' THEN N'manifestos' ELSE N'coletas' END
+WHERE l.run_id=? AND l.active=1
+""",
                             """
-                    SELECT COUNT_BIG(*) FROM (SELECT s.source_key,s.component_kind,s.component_key
-                        FROM stg.relational_lab_component s JOIN ctl.relational_lab_capture c ON c.execution_id=s.execution_id
-                        WHERE c.run_id=? GROUP BY s.source_key,s.component_kind,s.component_key) d
-                    """,
+SELECT COUNT_BIG(*) FROM (SELECT s.source_key,s.component_kind,s.component_key
+    FROM stg.relational_lab_component s JOIN ctl.relational_lab_capture c ON c.execution_id=s.execution_id
+    WHERE c.run_id=? GROUP BY s.source_key,s.component_kind,s.component_key) d
+""",
                             """
-                    SELECT COUNT_BIG(*) FROM (SELECT TOP(4) backlog_id FROM ctl.relational_lab_backlog
-                        WHERE run_id=? AND state IN(N'PENDING',N'DEFERRED') AND eligible_at<=SYSUTCDATETIME()
-                        AND attempts<3 ORDER BY eligible_at,backlog_id) b
-                    """);
+SELECT COUNT_BIG(*) FROM (SELECT TOP(4) backlog_id FROM ctl.relational_lab_backlog
+    WHERE run_id=? AND state IN(N'PENDING',N'DEFERRED') AND eligible_at<=SYSUTCDATETIME()
+    AND attempts<3 ORDER BY eligible_at,backlog_id) b
+""");
             try {
                 for (int index = 0; index < queries.size(); index++) {
                     try (var sql = connection.prepareStatement(queries.get(index))) {

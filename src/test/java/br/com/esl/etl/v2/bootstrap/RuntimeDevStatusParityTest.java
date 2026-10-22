@@ -9,10 +9,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import br.com.esl.etl.v2.modulos.coletas.domain.ColetaStatus;
 import br.com.esl.etl.v2.plataforma.fonte.dataexport.RuntimeBootstrapTestFixture;
 import br.com.esl.etl.v2.plataforma.resiliencia.RuntimeExitCategory;
-
-import org.junit.jupiter.api.Test;
-
 import java.util.LinkedHashMap;
+import org.junit.jupiter.api.Test;
 
 /** C54-PARITY-STATUS-01 component negatives; no supplier, physical session or Main. */
 class RuntimeDevStatusParityTest {

@@ -9,11 +9,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import br.com.esl.etl.v2.plataforma.configuracao.C78DevPeerConnectorFixture;
 import br.com.esl.etl.v2.plataforma.configuracao.C78LocalSqlTarget;
-
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
 import java.io.IOException;
 import java.lang.reflect.Proxy;
 import java.sql.Connection;
@@ -21,6 +16,9 @@ import java.sql.SQLException;
 import java.util.Properties;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicReference;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 final class C78DevPeerConnectorTest {
     private String enabled;

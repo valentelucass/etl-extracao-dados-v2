@@ -66,7 +66,7 @@ class AnalyticCollectionSweepFixturesTest {
         for (final var input : inputs) {
             input.validate(snapshot);
             final var rows = firstPage(input.source(), date);
-            assertEquals(2, rows.size());
+            assertEquals(3, rows.size());
             assertEquals(200002, rows.get(0).path("id").intValue());
             assertTrue(rows.stream().allMatch(row -> row.path("synthetic_fixture").asBoolean()));
         }

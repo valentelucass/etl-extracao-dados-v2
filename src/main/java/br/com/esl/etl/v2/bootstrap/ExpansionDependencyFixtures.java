@@ -118,13 +118,17 @@ public final class ExpansionDependencyFixtures {
                 || pageSize > 100) {
             throw new IllegalArgumentException("EXP_DEP_SOURCE_BUDGET");
         }
+        // Keep each two-row expansion together without enlarging the physical page budget.
+        final int rootsPerPage = Math.max(1, pageSize / 2);
         return new ExpansionDependencySource(
                 page -> {
                     final var array = JSON.createArrayNode();
-                    for (int ordinal = (page - 1) * pageSize;
-                            ordinal < Math.min(page * pageSize, roots * 2);
+                    for (int ordinal = (page - 1) * rootsPerPage;
+                            ordinal < Math.min(page * rootsPerPage, roots);
                             ordinal++) {
-                        array.add(data(template, ordinal / 2 + firstRoot));
+                        final var row = data(template, ordinal + firstRoot);
+                        array.add(row);
+                        array.add(row.deepCopy());
                     }
                     return array.toString();
                 });

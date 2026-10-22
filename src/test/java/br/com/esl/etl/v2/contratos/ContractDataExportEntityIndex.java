@@ -108,13 +108,22 @@ final class ContractDataExportEntityIndex {
         }
 
         Optional<String> consistentScalar(final String fieldName) {
+            return consistentScalar(fieldName, false);
+        }
+
+        Optional<String> consistentInteger(final String fieldName) {
+            return consistentScalar(fieldName, true);
+        }
+
+        private Optional<String> consistentScalar(
+                final String fieldName, final boolean requireInteger) {
             if (fieldName == null || fieldName.isBlank()) {
                 throw new IllegalArgumentException("O campo escalar é obrigatório.");
             }
             String observedValue = null;
             for (final JsonNode record : records) {
                 final JsonNode value = scalarNode(record, fieldName);
-                if (value == null) {
+                if (value == null || requireInteger && !value.isIntegralNumber()) {
                     return Optional.empty();
                 }
                 final String normalizedValue = normalize(value.asText());

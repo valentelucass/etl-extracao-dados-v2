@@ -149,6 +149,20 @@ final class PackagedFixtureRuntime implements AutoCloseable {
         }
     }
 
+    void invokeTest(final Class<?> suite, final String method, final Path directory)
+            throws Exception {
+        final var type = loader.loadClass(suite.getName());
+        final var constructor = type.getDeclaredConstructor();
+        constructor.setAccessible(true);
+        final var test = type.getDeclaredMethod(method, Path.class);
+        test.setAccessible(true);
+        try {
+            test.invoke(constructor.newInstance(), directory);
+        } catch (final InvocationTargetException failure) {
+            rethrow(failure);
+        }
+    }
+
     private static void rethrow(final InvocationTargetException failure) throws Exception {
         if (failure.getCause() instanceof Exception cause) {
             throw cause;

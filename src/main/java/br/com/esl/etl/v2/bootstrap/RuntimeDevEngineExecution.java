@@ -1,13 +1,12 @@
 package br.com.esl.etl.v2.bootstrap;
 
+import br.com.esl.etl.v2.plataforma.fonte.dataexport.CurrentSourceInfoEvidence;
 import br.com.esl.etl.v2.plataforma.persistencia.controle.C78DevEngineAdmissionProducer;
 import br.com.esl.etl.v2.plataforma.persistencia.controle.C78DevEngineBankAdapter;
 import br.com.esl.etl.v2.plataforma.persistencia.controle.C78Sample12AdmissionProducer;
 import br.com.esl.etl.v2.plataforma.persistencia.controle.C78Sample12Selection;
 import br.com.esl.etl.v2.plataforma.resiliencia.RuntimeExitCategory;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 import java.io.PrintStream;
 import java.sql.SQLException;
 import java.util.LinkedHashMap;
@@ -45,7 +44,7 @@ final class RuntimeDevEngineExecution {
                         request.limits);
         final var unit = bundle.configuration().getParent().getParent().getParent();
         final boolean currentSourceUnit =
-                sampleOptIn && unit.getFileName().toString().equals("hermesc54d6a25880d");
+                usesCurrentSource(unit, sampleOptIn, prepared.curatedSource);
         final RuntimeDevEngineBankBinding.Admission producer;
         final RuntimeDevSourceEvidenceInspection reader;
         if (currentSourceUnit) {
@@ -94,6 +93,9 @@ final class RuntimeDevEngineExecution {
             final java.nio.file.Path dispatch,
             final String dispatchSHA256,
             final PrintStream diagnostic) {
+        if (!usesCurrentSource(unit, true, true)) {
+            throw new IllegalArgumentException("DEV_CURRENT_SOURCE_NAMESPACE_REQUIRED");
+        }
         final var actualSource =
                 new java.util.concurrent.atomic.AtomicReference<
                         RuntimeDevSourceEvidenceInspection>();
@@ -116,6 +118,15 @@ final class RuntimeDevEngineExecution {
                         });
         return new CurrentSourceComposition(
                 producer, java.util.Objects.requireNonNull(actualSource.get()));
+    }
+
+    static boolean usesCurrentSource(
+            final java.nio.file.Path unit, final boolean sampleOptIn, final boolean curatedSource) {
+        return sampleOptIn
+                && curatedSource
+                && unit != null
+                && unit.getFileName() != null
+                && CurrentSourceInfoEvidence.supportsUnit(unit.getFileName().toString());
     }
 
     static RuntimeDevEngineBankBinding.Admission admissionProducer(

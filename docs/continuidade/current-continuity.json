@@ -1,31 +1,31 @@
 {
   "schema": "V2_CURRENT_DOCUMENT_CONTINUITY_V1",
-  "request": "HERMES_3cdb8d7b3d12",
+  "request": "USER_20261016_CONTINUAR_V2",
   "purpose": "CURRENT_DOCUMENTS_WITH_EXPLICIT_HISTORICAL_EVIDENCE_STATE",
   "authorizesPhysicalEffects": false,
   "grantsHistoricalAcceptance": false,
   "changesCanonicalCheckboxes": false,
-  "checkpoint": "docs/continuidade/checkpoints/0527-3cdb-memoria-atual-e-causa-wms-dev.md",
+  "checkpoint": "docs/continuidade/checkpoints/0537-roteiro-condicionado-de-retomada-real-e-fechamento-local.md",
   "documents": [
     {
       "path": "AGENTS.md",
-      "bytes": 51533,
-      "sha256": "ec7a95cdda1e559e6480823ce72096a90013a99a1c99568bfafe52822b535c5a"
+      "bytes": 57861,
+      "sha256": "7fa19679f2f3207bed151a26692e9a241e7fd38a74bb846b5d6fd2906e144800"
     },
     {
       "path": "STATES.md",
-      "bytes": 1708766,
-      "sha256": "53e83948d73fe6cf1950a24dce94bdeb0df9fe9f66fed27c754bfea00ff57be4"
+      "bytes": 1719346,
+      "sha256": "57fd474cf0522d4646048554c8ff5387b073badff310216a3e5cbd58244df68a"
     },
     {
       "path": "TRILHA_CONCLUSAO_POR_MODELO.md",
-      "bytes": 357037,
-      "sha256": "76f35cd6cfa7c07dd23a1d786211d8a95e27413cf4642b58b696334ce3cc1e28"
+      "bytes": 367617,
+      "sha256": "a380cf8cf6a69b42807df9a0f89961dba7a4e81c08ee7e0d016bbf7488540930"
     },
     {
       "path": "docs/continuidade/RETOMADA.md",
-      "bytes": 440594,
-      "sha256": "644ca64eb6e984fc209bacefdc90a995de1fdfeb2bd326ca7ea8ad6752226156"
+      "bytes": 450994,
+      "sha256": "cdbe0d74f0f65842d169b9c0618d2772dc900730b3cbaf210d8524d82639eeef"
     },
     {
       "path": "docs/runbooks/continuidade-agentes.md",
@@ -34,13 +34,13 @@
     },
     {
       "path": "scripts/validation/Test-CurrentContinuity.ps1",
-      "bytes": 6766,
-      "sha256": "6ef6ce7a02a57da8bfc9e45ecaf0f14abb695775b531b9eb3fb2fb8653ec637c"
+      "bytes": 6833,
+      "sha256": "97fb906131a77ef97cb236096cb5a88003c0e9e2e2636ae60d323fc29b150924"
     },
     {
-      "path": "docs/continuidade/checkpoints/0527-3cdb-memoria-atual-e-causa-wms-dev.md",
-      "bytes": 4697,
-      "sha256": "f3e2d74909f84aed14dd54a1e67b6ec144652401d0ed31adb35be13c73c3d8b9"
+      "path": "docs/continuidade/checkpoints/0537-roteiro-condicionado-de-retomada-real-e-fechamento-local.md",
+      "bytes": 5507,
+      "sha256": "92f2d064c569ae497a24abaa29c0c6fbd4678dde4d948f3839b7abed29056ec2"
     }
   ],
   "historical": {

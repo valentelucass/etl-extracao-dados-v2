@@ -7,7 +7,6 @@ import br.com.esl.etl.v2.modulos.coletas.domain.ColetaStatus;
 import br.com.esl.etl.v2.plataforma.identidade.ScopedSourceIdentity;
 import br.com.esl.etl.v2.plataforma.persistencia.staging.StagingPersistenceException;
 import br.com.esl.etl.v2.plataforma.resiliencia.CancellationToken;
-
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -16,7 +15,6 @@ import java.sql.Types;
 import java.util.Calendar;
 import java.util.Objects;
 import java.util.TimeZone;
-
 import javax.sql.DataSource;
 
 /** Adaptador JDBC de uma página 6908, com uma transação e sem DML por atributo na JVM. */

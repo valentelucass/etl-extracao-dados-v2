@@ -2,9 +2,7 @@ package br.com.esl.etl.v2.plataforma.persistencia.controle;
 
 import br.com.esl.etl.v2.bootstrap.RuntimeDevEngineBankBinding.SampleFinish;
 import br.com.esl.etl.v2.bootstrap.RuntimeDevEngineBankBinding.SampleReadback;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -47,9 +45,17 @@ CAST(? AS datetime2(3)) start_utc,CAST(? AS datetime2(3)) end_utc)
                     + OCCURRENCE_TABLES.stream()
                             .map(
                                     table ->
-                                            "(SELECT COUNT_BIG(*) FROM "
-                                                    + table
-                                                    + " WHERE execution_id=unit.execution_id)")
+                                            table.equals("stg.coleta_exact_time")
+                                                    ? "(SELECT COUNT_BIG(*) FROM"
+                                                            + " stg.coleta_exact_time t JOIN"
+                                                            + " stg.coleta_record r ON"
+                                                            + " r.stage_record_id=t.stage_record_id"
+                                                            + " WHERE"
+                                                            + " r.execution_id=unit.execution_id)"
+                                                    : "(SELECT COUNT_BIG(*) FROM "
+                                                            + table
+                                                            + " WHERE"
+                                                            + " execution_id=unit.execution_id)")
                             .collect(java.util.stream.Collectors.joining(","))
                     + ",ISNULL((SELECT c.* FROM ctl.execution_cycle c WHERE"
                     + " c.cycle_id=unit.cycle_id FOR JSON"
@@ -114,7 +120,8 @@ SELECT (SELECT COUNT_BIG(*) FROM expected),(SELECT SUM(physical_rows) FROM expec
 (SELECT COUNT_BIG(*) FROM stg.execution_record WHERE execution_id=? AND
  (input_batch_number<>1 OR input_record_ordinal<1 OR input_record_ordinal>?)),
 (SELECT COUNT(DISTINCT input_record_ordinal) FROM stg.execution_record WHERE execution_id=?),
-(SELECT COUNT_BIG(*) FROM stg.coleta_exact_time WHERE execution_id=?)
+ (SELECT COUNT_BIG(*) FROM stg.coleta_exact_time t JOIN stg.coleta_record r
+  ON r.stage_record_id=t.stage_record_id WHERE r.execution_id=?)
 """;
 
     record Baseline(List<Long> counts, List<String> snapshots, long ownX) {

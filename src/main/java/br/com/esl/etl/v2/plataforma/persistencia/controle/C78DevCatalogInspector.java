@@ -4,7 +4,6 @@ import br.com.esl.etl.v2.plataforma.configuracao.C78DevPeerProof;
 import br.com.esl.etl.v2.plataforma.configuracao.C78LocalSqlTarget;
 import br.com.esl.etl.v2.plataforma.configuracao.C78LocalTlsScope;
 import br.com.esl.etl.v2.plataforma.configuracao.SecretProvider;
-
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -26,11 +25,11 @@ public final class C78DevCatalogInspector {
         public Evidence {
             Objects.requireNonNull(query);
             Objects.requireNonNull(rows);
-            if (rows.size() > C78DevCatalogPlan.MAX_ROWS_PER_QUERY) {
+            if (rows.size() > C78DevCatalogPlan.rowsPerQuery(query)) {
                 throw new IllegalArgumentException("C78_CATALOG_EVIDENCE_LIMIT");
             }
             rows = List.copyOf(rows);
-            if (rows.size() > C78DevCatalogPlan.MAX_ROWS_PER_QUERY
+            if (rows.size() > C78DevCatalogPlan.rowsPerQuery(query)
                     || rows.stream().mapToLong(String::length).sum()
                             > C78DevCatalogPlan.queryCharacters(query)) {
                 throw new IllegalArgumentException("C78_CATALOG_EVIDENCE_LIMIT");
@@ -132,7 +131,7 @@ public final class C78DevCatalogInspector {
                     try (final var results = statement.executeQuery(plan.sql(query))) {
                         while (results.next()) {
                             remainingSeconds(started);
-                            if (rows.size() == C78DevCatalogPlan.MAX_ROWS_PER_QUERY) {
+                            if (rows.size() == C78DevCatalogPlan.rowsPerQuery(query)) {
                                 throw refused("ROW_LIMIT");
                             }
                             final String row = readRow(results, query);

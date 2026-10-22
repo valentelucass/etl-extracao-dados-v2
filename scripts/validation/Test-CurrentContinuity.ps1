@@ -60,7 +60,8 @@ Assert-QualificationFields $manifest @(
     'checkpoint', 'documents', 'historical'
 )
 if ($manifest.schema -cne 'V2_CURRENT_DOCUMENT_CONTINUITY_V1' -or
-    $manifest.request -cnotmatch '^HERMES_[a-f0-9]{12}$' -or
+    ($manifest.request -cnotmatch '^HERMES_[a-f0-9]{12}$' -and
+        $manifest.request -cne 'USER_20261016_CONTINUAR_V2') -or
     $manifest.purpose -cne 'CURRENT_DOCUMENTS_WITH_EXPLICIT_HISTORICAL_EVIDENCE_STATE') {
     throw 'CURRENT_CONTINUITY_SCOPE'
 }

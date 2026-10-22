@@ -8,14 +8,12 @@ import br.com.esl.etl.v2.plataforma.configuracao.C78LocalSqlTarget;
 import br.com.esl.etl.v2.plataforma.persistencia.controle.C78DevCatalogAdmission;
 import br.com.esl.etl.v2.plataforma.persistencia.controle.C78DevCatalogInspector;
 import br.com.esl.etl.v2.plataforma.persistencia.controle.C78DevCatalogPlan;
-
-import org.junit.jupiter.api.Test;
-
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
 import java.sql.SQLException;
 import java.util.UUID;
+import org.junit.jupiter.api.Test;
 
 /** Diagnostic controls only; actual inspector refuses before provider/connector/socket access. */
 class MainDevCatalogDiagnosticTest {
@@ -39,21 +37,32 @@ class MainDevCatalogDiagnosticTest {
                         throw new AssertionError("NO_CONNECTOR_OR_CLOSE_EXPECTED");
                     }
                 };
-        final var failure =
-                assertThrows(
-                        C78DevCatalogInspector.CatalogFailure.class,
-                        () ->
-                                new C78DevCatalogInspector(
-                                                tuple -> {
-                                                    throw new AssertionError("NO_SOCKET_EXPECTED");
-                                                })
-                                        .inspect(
-                                                plan,
-                                                key -> {
-                                                    throw new AssertionError(
-                                                            "NO_PROVIDER_EXPECTED");
-                                                },
-                                                admission));
+        final String enabledBefore = System.getProperty("c78.local.shadow.enabled");
+        final String pinBefore = System.getProperty("c78.local.shadow.sql-pin.enabled");
+        final C78DevCatalogInspector.CatalogFailure failure;
+        try {
+            System.setProperty("c78.local.shadow.enabled", "true");
+            System.setProperty("c78.local.shadow.sql-pin.enabled", "true");
+            failure =
+                    assertThrows(
+                            C78DevCatalogInspector.CatalogFailure.class,
+                            () ->
+                                    new C78DevCatalogInspector(
+                                                    tuple -> {
+                                                        throw new AssertionError(
+                                                                "NO_SOCKET_EXPECTED");
+                                                    })
+                                            .inspect(
+                                                    plan,
+                                                    key -> {
+                                                        throw new AssertionError(
+                                                                "NO_PROVIDER_EXPECTED");
+                                                    },
+                                                    admission));
+        } finally {
+            restore("c78.local.shadow.enabled", enabledBefore);
+            restore("c78.local.shadow.sql-pin.enabled", pinBefore);
+        }
         final String actual = diagnostic(failure);
         assertTrue(actual.contains("DEV_CATALOG_REFUSED reason=ADMISSION_REFUSED"), actual);
         assertFalse(actual.contains(privateContent));
@@ -69,6 +78,14 @@ class MainDevCatalogDiagnosticTest {
         assertTrue(actual.contains("DEV_WORKSPACE_PREPARATION_REFUSED type=java.sql.SQLException"));
         assertFalse(actual.contains(privateContent));
         assertFalse(actual.contains("DEV_CATALOG_REFUSED reason="));
+    }
+
+    private static void restore(final String key, final String value) {
+        if (value == null) {
+            System.clearProperty(key);
+        } else {
+            System.setProperty(key, value);
+        }
     }
 
     private static String diagnostic(final Exception failure) throws Exception {

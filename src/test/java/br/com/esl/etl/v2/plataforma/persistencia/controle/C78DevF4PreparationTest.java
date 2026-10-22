@@ -9,12 +9,10 @@ import br.com.esl.etl.v2.bootstrap.RuntimeDevEngineBankBinding;
 import br.com.esl.etl.v2.bootstrap.RuntimeDevEngineBankBinding.MissingGate;
 import br.com.esl.etl.v2.bootstrap.RuntimeDevEngineBankBinding.Refusal;
 import br.com.esl.etl.v2.plataforma.configuracao.C78LocalSqlTarget;
-
-import org.junit.jupiter.api.Test;
-
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicInteger;
+import org.junit.jupiter.api.Test;
 
 /** Real component guards/metadata only: no synthetic backend is integrated or made an authority. */
 class C78DevF4PreparationTest {

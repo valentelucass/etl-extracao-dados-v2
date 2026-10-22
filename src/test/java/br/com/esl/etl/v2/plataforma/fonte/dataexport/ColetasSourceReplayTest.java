@@ -68,9 +68,16 @@ class ColetasSourceReplayTest {
                         .replace("finished", "pending")
                         .replace("\"cancellationReason\":null", "\"cancellationReason\":\"\"");
         final var result =
-                replay(List.of("[" + ROW + "]", "[" + ROW + "]"), List.of(graph(different)));
+                replay(
+                        List.of("[" + rowForManifest(301) + "]", "[" + rowForManifest(302) + "]"),
+                        List.of(graph(different)));
         final var json = new ObjectMapper().valueToTree(result);
+        assertEquals(true, result.get("accepted"));
+        assertEquals(2, result.get("stagedRows"));
+        assertEquals(1, result.get("distinctRoots"));
+        assertEquals(0, result.get("preservationDifferences"));
         assertEquals(1, result.get("repeatedRootsAcrossPages"));
+        assertEquals(2, json.at("/comparison/matchedPhysicalRows").intValue());
         assertEquals(2, json.at("/comparison/canonicalIdDifferences").intValue());
         assertEquals(2, json.at("/comparison/fieldDifferences/status").intValue());
         assertEquals(2, json.at("/comparison/fieldDifferences/cancellation_reason").intValue());
@@ -208,6 +215,12 @@ class ColetasSourceReplayTest {
         return "{\"data\":{\"pick\":{\"edges\":[{\"node\":"
                 + node
                 + "}],\"pageInfo\":{\"hasNextPage\":false,\"endCursor\":null}}}}";
+    }
+
+    private static String rowForManifest(final int manifestSequence) {
+        return ROW.replace(
+                "\"cancellation_reason\":null",
+                "\"cancellation_reason\":null,\"pck_mik_mft_sequence_code\":" + manifestSequence);
     }
 
     private static java.util.Map<String, Object> replay(

@@ -10,19 +10,15 @@ import br.com.esl.etl.v2.modulos.coletas.aplicacao.ColetaStagingGateway;
 import br.com.esl.etl.v2.plataforma.autorizacao.RuntimeAction;
 import br.com.esl.etl.v2.plataforma.autorizacao.RuntimeAuthorizationScope;
 import br.com.esl.etl.v2.plataforma.configuracao.C78LocalSqlTarget;
-
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
-import org.junit.jupiter.api.Test;
-
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.lang.reflect.Proxy;
 import java.nio.charset.StandardCharsets;
 import java.sql.SQLException;
-
 import javax.sql.DataSource;
+import org.junit.jupiter.api.Test;
 
 /** Negative selected-SAMPLE boundaries only; no connection, source, provider or Main is used. */
 class RuntimeDevSamplePreparationFinishTest {

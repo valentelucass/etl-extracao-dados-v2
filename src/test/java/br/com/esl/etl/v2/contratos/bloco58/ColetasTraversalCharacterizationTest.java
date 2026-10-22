@@ -10,6 +10,7 @@ import br.com.esl.etl.v2.plataforma.fonte.dataexport.DataExportFirstWaveContract
 import br.com.esl.etl.v2.plataforma.fonte.dataexport.DataExportTemplate;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import java.util.Map;
 import java.util.TreeMap;
 import org.junit.jupiter.api.AfterAll;
@@ -23,7 +24,7 @@ class ColetasTraversalCharacterizationTest {
     private static final String ROW =
             "{\"id\":0,\"sequence_code\":700,\"updated_at\":\"synthetic\",\"pck_mik_mft_sequence_code\":null}";
 
-    private static JsonNode expected() {
+    private static ObjectNode expected() {
         return JSON.createObjectNode()
                 .put("/quarantine", "NONE")
                 .put("/id/typed", "INTEGER:0")
@@ -33,6 +34,12 @@ class ColetasTraversalCharacterizationTest {
 
     private static String page(final int rows) {
         return "{\"data\":[" + String.join(",", java.util.Collections.nCopies(rows, ROW)) + "]}";
+    }
+
+    private static String pageForManifest(final int manifestSequence) {
+        return page(1).replace(
+                        "\"pck_mik_mft_sequence_code\":null",
+                        "\"pck_mik_mft_sequence_code\":" + manifestSequence);
     }
 
     @Test
@@ -57,13 +64,20 @@ class ColetasTraversalCharacterizationTest {
     void faultsAndCancellationNeverCompletePartialStaging(final Fault fault) {
         final var report =
                 ColetasCharacterization.pipeline(
-                        number -> input(number <= 2 ? page(1) : page(0)),
+                        number -> input(number <= 2 ? pageForManifest(300 + number) : page(0)),
                         DataExportFirstWaveContractCatalog.release(DataExportTemplate.COLETAS),
                         1,
                         3,
                         2,
                         fault,
-                        (number, row) -> expected());
+                        (number, row) ->
+                                expected()
+                                        .put(
+                                                "/pck_mik_mft_sequence_code/preserved",
+                                                Integer.toString(300 + number))
+                                        .put(
+                                                "/pck_mik_mft_sequence_code/candidateValue",
+                                                Integer.toString(300 + number)));
         final Layer refusal =
                 switch (fault) {
                     case NONE -> Layer.NONE;

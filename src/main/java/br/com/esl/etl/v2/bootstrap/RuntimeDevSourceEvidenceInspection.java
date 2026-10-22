@@ -1,13 +1,11 @@
 package br.com.esl.etl.v2.bootstrap;
 
 import br.com.esl.etl.v2.plataforma.fonte.dataexport.CurrentSourceInfoEvidence;
-
 import com.fasterxml.jackson.core.StreamReadFeature;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.sun.nio.file.ExtendedOpenOption;
-
 import java.io.IOException;
 import java.io.PrintStream;
 import java.nio.ByteBuffer;
@@ -103,9 +101,9 @@ final class RuntimeDevSourceEvidenceInspection implements RuntimeDevEngineBankBi
                 currentScopeHoldObserved = true;
                 diagnostic.println(
                         "{\"status\":\"DEV_SOURCE_EVIDENCE_INSPECTED_HELD\","
-                            + "\"reasonCode\":\"STOP429_SAME_CURRENT_OPERATIONAL_SCOPE_NOT_PROVED\","
-                            + "\"sourceReleased\":false,\"supplierClientCreated\":false,"
-                            + "\"supplierTokenRead\":false,\"factsSHA256\":\""
+                                + "\"reasonCode\":\"STOP429_SAME_CURRENT_OPERATIONAL_SCOPE_NOT_PROVED\","
+                                + "\"sourceReleased\":false,\"supplierClientCreated\":false,"
+                                + "\"supplierTokenRead\":false,\"factsSHA256\":\""
                                 + FACTS_SHA256
                                 + "\"}");
             }
@@ -124,7 +122,9 @@ final class RuntimeDevSourceEvidenceInspection implements RuntimeDevEngineBankBi
 
     private void verifyAcceptedCurrent() throws SQLException {
         currentEvidenceRefused = true;
-        if (closed || !unit.getFileName().toString().equals("hermesc54d6a25880d")) {
+        if (closed
+                || unit.getFileName() == null
+                || !CurrentSourceInfoEvidence.supportsUnit(unit.getFileName().toString())) {
             throw new RuntimeDevEngineBankBinding.Refusal(
                     RuntimeDevEngineBankBinding.MissingGate.SOURCE_QUOTA);
         }
@@ -138,7 +138,10 @@ final class RuntimeDevSourceEvidenceInspection implements RuntimeDevEngineBankBi
                     RuntimeDevEngineBankBinding.MissingGate.SOURCE_QUOTA);
         }
         if (observed.templateId() != template.templateId()
-                || !observed.requestId().equals("HERMES_c54d6a25880d")
+                || !observed.requestId()
+                        .equals(
+                                CurrentSourceInfoEvidence.requestForUnit(
+                                        unit.getFileName().toString()))
                 || (acceptedCurrent != null && !acceptedCurrent.equals(observed))) {
             throw new RuntimeDevEngineBankBinding.Refusal(
                     RuntimeDevEngineBankBinding.MissingGate.SOURCE_QUOTA);

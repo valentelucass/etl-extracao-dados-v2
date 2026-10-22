@@ -8,9 +8,7 @@ import br.com.esl.etl.v2.plataforma.fonte.dataexport.DataExportTemplate;
 import br.com.esl.etl.v2.plataforma.persistencia.staging.StagingPublicationResult;
 import br.com.esl.etl.v2.plataforma.qualidade.DataQualityPromotionPermit;
 import br.com.esl.etl.v2.plataforma.resiliencia.RuntimeExitCategory;
-
 import java.util.Optional;
-
 import javax.sql.DataSource;
 
 /** Existing real one-page workload with explicitly Bank-owned transactional staging. */

@@ -1,3 +1,43 @@
+## Continuidade 0538 — diagnóstico atual dos nove Data Export
+
+[Checkpoint 0538](docs/continuidade/checkpoints/0538-diagnostico-http-atual-nove-dataexport.md). Em 21/10/2026 o usuário pediu testar TODOS os Data Export para responder à ESL: diagnóstico HTTP próprio, sem Main/SQL.19 chamadas consumidas entre16:09–16:13 BRT: INFO200 nos9; DATA200 em8, incluindo Coletas6908; Fretes6389 DATA422 em duas queries distintas (horários e somente datas). Nenhum429 observado; causa422 não comprovada. Base/token V1/V2 iguais por comparação em memória, sem exposição. Amostras não provam extração integral/paridade/retenção nem liberam Main ou reconstroem HTTP histórico. V1 observada com ciclos reais até21/10, sem intervenção. Nenhuma autorização/quota futura renovada; investigar Fretes com auditoria ESL/request preservado. Evidências privadas em diagnostico-esl-20261021T190624Z.
+
+## Continuidade 0537 — Roteiro condicionado de retomada real e fechamento local
+
+[Checkpoint 0537](docs/continuidade/checkpoints/0537-roteiro-condicionado-de-retomada-real-e-fechamento-local.md). Quarta parcela local encerrada: roteiro condicionado de retomada publicado, sem comandos/reserva/Source/SQL. Sequência0534–0537 registrada:3607unitPASS/21skipped+7IT, complemento OSV5libs0matches e modelo puro44/44. Extração completa NÃO encerrada: ESL standby, bootstrap79,6644%/34linhas, G05 integral/material e oráculos/paridade/retenção operacional continuam pendentes. Históricos preservados; C78 rollback-only; nenhuma retomada automática.
+
+
+## Continuidade 0536 — Direção de desenho C78 e recorte de modelo puro qualificado
+
+[Checkpoint 0536](docs/continuidade/checkpoints/0536-design-c78-e-modelo-puro-qualificado.md). Frente3: ADR0067/direção D-C78-RETENTION-DESIGN-01 adotadas SEM PERFIL OPERACIONAL; recorte puro executado44/44 expected correspondentes (10INTENT/19BUDGET/15OBSERVATION), bytes publicados iguais aos testados. Intenção completa/owner/budget físico/verifier real continuam abertos. Nenhuma integração runtime, Source/SQL/commit; C78 rollback-only. Produção749/POM/43RAW intactos, Java1422; próxima frente: roteiro condicionado de retomada.
+
+
+## Continuidade 0535 — Auditoria complementar das dependências empacotadas
+
+[Checkpoint 0535](docs/continuidade/checkpoints/0535-auditoria-complementar-dependencias-empacotadas.md). Frente2: política33casos (mesmo conjunto em2checks) e24testes offline PASS; consulta OSV pública real das5libs empacotadas concluídaHTTP200 em00:23:53Z, zero avisos correspondentes retornados, hashes antes/depois iguais. Isso não conclui risco zero nem auditoria completa: Dependency-Check12.2.0/DB ausentes, G05 PENDENTE, sem substituição de relatório/política. ESL0/SQL0/credenciais0; próxima frente: direção de desenho+recorte puro C78.
+
+
+## Continuidade 0534 — Qualificação local e integridade de estado
+
+[Checkpoint 0534](docs/continuidade/checkpoints/0534-qualificacao-local-e-integridade-de-estado.md). Frente1 local qualificada por composição17/18:20 casos novos, quatro JVMs filhas limitadas;3607 unitários aprovados/21skipped e7IT aprovados, sem alegar rodada única limpa. Produção749 inalterada,1422Java, POM/43RAW/53exclusões preservados; drift0. Bootstrap8023/10071=79,6644%: gate80% ainda PENDENTE, déficit34 linhas. Exec17 falho excluído da cobertura. ESL standby/C78 rollback-only; próxima frente: dependências.
+
+
+## Continuidade 0533 — preparo e provas locais; ESL em espera
+
+Checkpoint 0533 qualifica 38 testes novos, preparo Own-JAR atual e medições sintéticas com limites explícitos. Cobertura bootstrap continua pendente em 79,4658%; não relaxar thresholds/excludes nem inventar procedência para fechá-la. Coorte de 1420 Java, 43 RAW e bytes históricos preservados; AST atualizado sem LLM, HTML/semântica históricos. Proposta C78 NÃO ADOTADA, C78 rollback-only sem herdar E3. Prosseguir autonomamente nas unidades locais elegíveis. ESL em standby pelo usuário enquanto gestor busca auditoria: nenhuma INFO/probe/reserva ou renovação pelo tempo. MainHTTP anterior UNKNOWN, MISSING_NOT_RECONSTRUCTED, V1 parado, SQL 16.0.1000.6 e proibições permanentes preservados. Root único docs/CI/autoridade; Banco único SQL/TDS. Preparação/testes não aprovam extração integral/paridade/retenção/cutover, nem reabrem autoridade histórica.
+
+## Continuidade 0532 — frentes locais qualificadas e ESL em espera
+
+Checkpoint 0532 registra resultados causais de testes/contratos e cobertura verdadeira, incluindo falhas preservadas; não transforma teste sintético em captura/paridade/autoridade física. Prosseguir em itens locais elegíveis sem pedir autorização genérica novamente. ESL permanece em standby por orientação do usuário até resposta do gestor/decisão específica; nenhuma INFO/probe ou renovação pelo tempo. MainHTTP anterior UNKNOWN, MISSING_NOT_RECONSTRUCTED, C78 rollback-only, Bundle04 de0530 histórico, V1 parado, SQL16.0.1000.6 e todas as proibições permanentes preservados. Root único docs/CI/autoridade, Banco único SQL/TDS. Captura futura exige coorte/JAR então atuais, gates e reserva nova; limiares/exclusões não se relaxam para fechar cobertura.
+
+## Continuidade direta de16/10/2026 — ESL em standby, frentes locais ativas
+
+O usuário informou que o gestor está buscando a resposta da ESL e poderá levar alguns dias; determinou deixar essa dependência em standby e avançar em documentação, testes e STATES. Não sondar a ESL nem renovar HTTP/quota/unidades consumidas pela passagem do tempo. Prosseguir nas unidades locais independentes elegíveis, corrigindo causas e registrando resultados verdadeiros. Checkpoint0531 registra a qualificação parcial e falhas, sem promover suíte/cobertura por casos isolados. Manter MainHTTP anterior UNKNOWN e MISSING_NOT_RECONSTRUCTED. Pacote04 permanece histórico, sem autoridade nova. Banco únicoSQL/TDS; Root único docs/CI/autoridade. C78rollback-only, V1parado pelo usuário, SQL16.0.1000.6 e todas as proibições permanentes preservadas. Não pedir novamente autorização genérica para esses passos locais nem tratar a espera da ESL como pausa de todo o projeto.
+
+## Continuidade direta de16/10/2026 — recursos liberados pelo usuário
+
+O usuário determinou continuar a extração completa seguindo a documentação e informou ter encerrado processos, inclusive V1, para liberar recursos. Prosseguir no mesmo objetivo com qualificação atual, unidade nova e reserva delimitada antes de efeito. Não iniciar V1 por suposição: esta pausa foi do usuário, não uma janela V2 stop/restore. Identidade atual USER_20261016_CONTINUAR_V2, diretório user20261016-continuar-v2; não fabricar Hermes nem reutilizar C54 39/43. C78 segue rollback-only, sem retenção E3. Banco único SQL/TDS, Root único docs/CI/autoridade. Executor de memória e todas as proibições SQL16.0.1000.6/instalação/contas/credenciais/permissões/identidades/ACL/elevação/serviços/listeners/TLSglobal/DDL/Flyway/V1/PM2/produção permanecem. Checkpoint0529 distingue testes executados de preparo e efeitos ainda não ocorridos; concluir passos internos elegíveis sem pedir autorização genérica novamente.
+
 ## Continuação operacional de memória — HERMES_3cdb8d7b3d12, 14/10/2026
 
 Lucas autorizou continuar o mesmo objetivo Main V2/extração real/paridade. Primeiro medir a memória atual e identificar causas por leitura. Resolver somente causas seguras V2: fechamento normal de auxiliares próprios comprovadamente dispensáveis, consumo dos próprios testes/builds, serialização e menor correção causal. Não encerrar processos desconhecidos, terminais/agentes, SQL Server, V1 ou outros projetos; não reiniciar máquina, alterar pagefile/configuração global/serviços nem contornar o teto85%. Batch pesado somente via executor vigente, com piso4096MiB, padrão2048MiB por árvore e um protegido por vez. Após admissão efetiva, qualificar bytes atuais, designar owners e definir nova unidade, observação viva, limites/recuperação e reserva antes de efeito. Preserve C54 39/43 consumidas e holders fechados; sem replay, JSON como liberação, renovação automática de quota/orçamento ou inferência de persistência por rollback-only. Banco único SQL/TDS; Root único editor docs/CI/autoridade. Preservar STOP429 e todas as proibições permanentes, especialmente SQL16.0.1000.6/instalação e V1/PM2/produção. Fonte: prompt original 3cdb8d7b3d12.prompt.txt da ponte local. Concluir passos elegíveis ou relatar intervenção externa concreta; depois do recibo, aguardar decisão antes de outro processo.

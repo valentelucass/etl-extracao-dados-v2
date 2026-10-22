@@ -7,10 +7,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInfo;
-
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -21,6 +17,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInfo;
 
 /**
  * Real file ledger and JVMs. External crash/baseline fixtures require
@@ -518,6 +517,8 @@ class DevLocalLedgerStartRecoveryTest {
         }
         final var args = new java.util.ArrayList<String>();
         args.add(Path.of(System.getProperty("java.home"), "bin", "java.exe").toString());
+        args.add("-Xms16m");
+        args.add("-Xmx128m");
         if (crashPoint != null) {
             args.add("-javaagent:" + fixtures.agent() + "=" + crashPoint);
         }

@@ -6,7 +6,6 @@ import br.com.esl.etl.v2.plataforma.configuracao.C78LocalSqlTarget;
 import br.com.esl.etl.v2.plataforma.configuracao.RuntimeConfiguration;
 import br.com.esl.etl.v2.plataforma.configuracao.RuntimeEnvironment;
 import br.com.esl.etl.v2.plataforma.configuracao.ShadowStorageProperties;
-
 import java.util.LinkedHashMap;
 import java.util.Map;
 

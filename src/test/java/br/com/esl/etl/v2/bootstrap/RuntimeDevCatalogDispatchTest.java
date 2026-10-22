@@ -5,15 +5,12 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import br.com.esl.etl.v2.plataforma.configuracao.C78LocalSqlTarget;
 import br.com.esl.etl.v2.plataforma.configuracao.C78LocalTlsScope;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-
-import org.junit.jupiter.api.Test;
-
 import java.io.IOException;
 import java.time.Instant;
 import java.util.UUID;
+import org.junit.jupiter.api.Test;
 
 /** Public parser controls only: this fixture is never a Root dispatch or physical admission. */
 class RuntimeDevCatalogDispatchTest {

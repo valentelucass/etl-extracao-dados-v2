@@ -18,11 +18,7 @@ import br.com.esl.etl.v2.plataforma.fonte.dataexport.DataExportTransport;
 import br.com.esl.etl.v2.plataforma.fonte.dataexport.RuntimeBootstrapTestFixture;
 import br.com.esl.etl.v2.plataforma.resiliencia.EslResiliencePolicy;
 import br.com.esl.etl.v2.plataforma.resiliencia.RuntimeExitCategory;
-
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
-
-import org.junit.jupiter.api.Test;
-
 import java.time.Clock;
 import java.time.Duration;
 import java.time.Instant;
@@ -32,6 +28,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicInteger;
+import org.junit.jupiter.api.Test;
 
 /**
  * Real application/mapper under offline protocol fixtures; never an integrated SQL/source proof.

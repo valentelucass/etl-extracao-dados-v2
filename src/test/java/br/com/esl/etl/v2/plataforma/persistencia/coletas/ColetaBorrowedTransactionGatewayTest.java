@@ -8,9 +8,7 @@ import br.com.esl.etl.v2.modulos.coletas.domain.ColetaStageBatch;
 import br.com.esl.etl.v2.modulos.coletas.domain.ColetaStageRecord;
 import br.com.esl.etl.v2.plataforma.persistencia.staging.StagingPersistenceException;
 import br.com.esl.etl.v2.plataforma.resiliencia.CancellationToken;
-
-import org.junit.jupiter.api.Test;
-
+import br.com.esl.etl.v2.plataforma.resiliencia.ResilienceCancelledException;
 import java.lang.reflect.Proxy;
 import java.sql.CallableStatement;
 import java.sql.Connection;
@@ -18,9 +16,8 @@ import java.sql.SQLException;
 import java.time.Instant;
 import java.util.List;
 import java.util.UUID;
-import java.util.concurrent.atomic.AtomicInteger;
-
 import javax.sql.DataSource;
+import org.junit.jupiter.api.Test;
 
 /** Real gateway component with isolated JDBC seam; never a delivered physical backend. */
 class ColetaBorrowedTransactionGatewayTest {
@@ -69,18 +66,17 @@ class ColetaBorrowedTransactionGatewayTest {
     void cancellationBeforeBorrowAndAfterExecuteNeverControlsOwnerTransaction() {
         final var before = new JdbcBoundary();
         assertThrows(
-                RuntimeException.class,
+                ResilienceCancelledException.class,
                 () ->
                         JdbcSqlServerColetaStagingGateway.borrowedTransaction(before.source(), 1)
                                 .stage(batch(), () -> true));
         assertEquals(0, before.borrows);
         final var after = new JdbcBoundary();
-        final var checks = new AtomicInteger();
         assertThrows(
-                RuntimeException.class,
+                ResilienceCancelledException.class,
                 () ->
                         JdbcSqlServerColetaStagingGateway.borrowedTransaction(after.source(), 1)
-                                .stage(batch(), () -> checks.incrementAndGet() >= 3));
+                                .stage(batch(), () -> after.executions > 0));
         assertEquals(1, after.executions);
         assertEquals(0, after.rollbacks);
         assertEquals(0, after.commits);
@@ -197,7 +193,7 @@ class ColetaBorrowedTransactionGatewayTest {
                                                     ((String) a[0])
                                                             .startsWith(
                                                                     "{call"
-                                                                        + " stg.usp_stage_coleta_record("));
+                                                                            + " stg.usp_stage_coleta_record("));
                                             assertEquals(
                                                     23,
                                                     ((String) a[0])

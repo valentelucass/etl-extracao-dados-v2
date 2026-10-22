@@ -7,7 +7,6 @@ import br.com.esl.etl.v2.plataforma.configuracao.RuntimeConfiguration;
 import br.com.esl.etl.v2.plataforma.fonte.dataexport.DataExportExtractionLimits;
 import br.com.esl.etl.v2.plataforma.fonte.dataexport.DataExportTemplate;
 import br.com.esl.etl.v2.plataforma.resiliencia.RuntimeExitCategory;
-
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
@@ -15,7 +14,6 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
-
 import javax.sql.DataSource;
 
 /**

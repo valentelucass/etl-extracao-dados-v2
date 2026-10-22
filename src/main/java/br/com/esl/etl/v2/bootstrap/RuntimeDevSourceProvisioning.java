@@ -9,9 +9,7 @@ import br.com.esl.etl.v2.plataforma.fonte.dataexport.DataExportHttpGatewayFactor
 import br.com.esl.etl.v2.plataforma.resiliencia.EslRequestGovernor;
 import br.com.esl.etl.v2.plataforma.resiliencia.MonotonicTicker;
 import br.com.esl.etl.v2.plataforma.resiliencia.ResilienceSleeper;
-
 import com.sun.nio.file.ExtendedOpenOption;
-
 import java.io.IOException;
 import java.net.URI;
 import java.nio.ByteBuffer;

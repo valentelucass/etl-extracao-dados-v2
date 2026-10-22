@@ -1,3 +1,39 @@
+## Continuidade 0537 — Roteiro condicionado de retomada real e fechamento local
+
+[Checkpoint 0537](../../continuidade/checkpoints/0537-roteiro-condicionado-de-retomada-real-e-fechamento-local.md). Quarta parcela local encerrada: roteiro condicionado de retomada publicado, sem comandos/reserva/Source/SQL. Sequência0534–0537 registrada:3607unitPASS/21skipped+7IT, complemento OSV5libs0matches e modelo puro44/44. Extração completa NÃO encerrada: ESL standby, bootstrap79,6644%/34linhas, G05 integral/material e oráculos/paridade/retenção operacional continuam pendentes. Históricos preservados; C78 rollback-only; nenhuma retomada automática.
+
+
+## Continuidade 0536 — Direção de desenho C78 e recorte de modelo puro qualificado
+
+[Checkpoint 0536](../../continuidade/checkpoints/0536-design-c78-e-modelo-puro-qualificado.md). Frente3: ADR0067/direção D-C78-RETENTION-DESIGN-01 adotadas SEM PERFIL OPERACIONAL; recorte puro executado44/44 expected correspondentes (10INTENT/19BUDGET/15OBSERVATION), bytes publicados iguais aos testados. Intenção completa/owner/budget físico/verifier real continuam abertos. Nenhuma integração runtime, Source/SQL/commit; C78 rollback-only. Produção749/POM/43RAW intactos, Java1422; próxima frente: roteiro condicionado de retomada.
+
+
+## Continuidade 0535 — Auditoria complementar das dependências empacotadas
+
+[Checkpoint 0535](../../continuidade/checkpoints/0535-auditoria-complementar-dependencias-empacotadas.md). Frente2: política33casos (mesmo conjunto em2checks) e24testes offline PASS; consulta OSV pública real das5libs empacotadas concluídaHTTP200 em00:23:53Z, zero avisos correspondentes retornados, hashes antes/depois iguais. Isso não conclui risco zero nem auditoria completa: Dependency-Check12.2.0/DB ausentes, G05 PENDENTE, sem substituição de relatório/política. ESL0/SQL0/credenciais0; próxima frente: direção de desenho+recorte puro C78.
+
+
+## Continuidade 0534 — Qualificação local e integridade de estado
+
+[Checkpoint 0534](../../continuidade/checkpoints/0534-qualificacao-local-e-integridade-de-estado.md). Frente1 local qualificada por composição17/18:20 casos novos, quatro JVMs filhas limitadas;3607 unitários aprovados/21skipped e7IT aprovados, sem alegar rodada única limpa. Produção749 inalterada,1422Java, POM/43RAW/53exclusões preservados; drift0. Bootstrap8023/10071=79,6644%: gate80% ainda PENDENTE, déficit34 linhas. Exec17 falho excluído da cobertura. ESL standby/C78 rollback-only; próxima frente: dependências.
+
+
+## Continuidade 0533 — preparo atual, medições e testes locais
+
+[Checkpoint 0533](../../continuidade/checkpoints/0533-preparo-atual-medicao-e-fronteiras-locais.md). Avanço durante o standby ESL: 38 casos novos em quatro arquivos; focais 09=80/80 PASS e 10=12/12 PASS, sem skip/abort/falha; não somar com rodadas históricas. Coorte de 1420 Java (749 main + 671 test), estilo dos quatro novos PASS, 43 RAW e POM intactos. Cobertura causal 03+05+09+10: bootstrap 8003/10071=79,4658%, ainda abaixo de 80% (54 linhas pendentes); controle e qualificação atingem os critérios. Pacote atual deployment05 comparado independentemente (1319 classes/45 recursos), quatro invocações Own-JAR PASS em três métodos, somente preparo. Seis medições sintéticas atuais nas escalas 16/256/4096, sem retenção de páginas; aborto condicional de symlink preservado, sem repinar/revalidar a fundação histórica. Proposta C78 revisada e NÃO ADOTADA; C78 continua rollback-only. Grafo AST atualizado sem LLM, sem atualizar HTML/semântica documental. Nenhum aceite de extração integral/paridade real/retenção/cutover; V2-012a aberto, V2-043 sem novo checkbox. ESL em espera pelo gestor sem sondas; MainHTTP anterior UNKNOWN e MISSING_NOT_RECONSTRUCTED; V1 parado e SQL 16.0.1000.6 preservados. Evidências indexadas em root/continuation0533. Prosseguir nas etapas locais elegíveis.
+
+## Continuidade 0532 — contratos e testes locais; ESL em espera
+
+[Checkpoint 0532](../../continuidade/checkpoints/0532-contratos-e-qualificacao-local-em-standby.md). Corrigidas seis fixtures/composições de teste (95/95 focais). Rodada 03 ampla: 3444 PASS / 21 SKIP, zero falhas/erros de teste; package, formatter, Checkstyle e compilação 749+663 aprovados; gate de cobertura 03 recusado. Corrigidos também o falso aceite INTEGER/texto de Coletas e o consumo de oráculo pelo runtime JAR correto. Nova qualificação causal 05 : 138/138 focais PASS, IT 7/7, mesmo probe GREEN2, drift 0; cobertura atual: PENDENTE. Controle e qualificação atingem seus critérios; bootstrap permanece abaixo de 80% de linhas. As contagens se sobrepõem e não devem ser somadas; não é verify integral. Falhas 01/02/04, limites e histórico preservados. V2-012a aberto; V2-043 sem novo checkbox. ESL continua em standby por orientação do usuário enquanto gestor busca auditoria; nenhuma sonda. MainHTTP anterior UNKNOWN e MISSING_NOT_RECONSTRUCTED, C78 rollback-only, Bundle04 de0530 histórico, V1 parado e SQL16.0.1000.6 preservados. Sem aceite de extração integral/paridade real/retenção/cutover. Evidências: qualificacao-offline-20261016 e root/offline-qualification04. Próximas frentes locais elegíveis continuam autorizadas.
+
+## Continuidade0531 — ESL em espera; validação local parcial
+
+[Checkpoint0531](../../continuidade/checkpoints/0531-esl-em-espera-e-validacao-local-parcial.md). O usuário determinou deixar ESL em standby enquanto o gestor busca resposta e avançar nas frentes locais. Dois falsos aceites do harness corrigidos: associação tipada ID/chave entre travessias e ponte janela completa/união diária.32focaisPASS na rodada02 (13comparador/6limites/13ponte), incluídos no total; RED2/GREEN2 usa os mesmos2probes, sem soma. Package02/formatter1412/Checkstyle0/compilação749+663PASS. Suíte ampla interrompida no prazo12min/124:321XMLs/2968casos/2942PASS/6falhas/12erros/8SKIP; NÃO é suíte limpa nem cobertura aprovada. Causas test-only identificadas e correções em qualificação.98deltas de formatação somente após1319classes -g:none iguais/revisão;43RAW ePOM intactos;4pinsprotocolos+22hashesCI revistos sem política nova. Evidências em qualificacao-offline-20261016 e root/offline-qualification03. V2-012a aberto/V2-043 já completo local, sem contador/checkbox. Sem aceite extração/retenção/paridade real/cutover. MainHTTP anteriorUNKNOWN, pacote04 histórico, C78rollback-only/V1parado/SQL16.0.1000.6 intactos. Sem nova Source ou SQL operacional.
+
+## Continuidade0530 — contratos reais, correção SQL e reconciliação
+
+[Checkpoint0530](../../continuidade/checkpoints/0530-catalogo-real-amostra-incerta-e-reconciliacao.md). CAT12 real confirmou29 tabelas/312colunas/29procedimentos/34módulos; revisãoRoot vinculada ao relatório real. SAMPLE12 consumida falhou com candidato perdido: INFO200 antecedente provada, MainHTTPUNKNOWN e captura/readback/rollback histórico não comprovados. JOIN exact_time corrigido semDDL; baseline anterior podia resolver coluna externa, portanto não inferirHTTP0. Recovery206/206Java PASS; reconciliação nova readonly1conn/12SELECT/HTTP0, decisãoRoot OWNED_OCCURRENCE_CURRENTLY_ABSENT,27 métricas atuais zero; não prova rollback passado nem liberaSource. Diagnóstico privado finito05:28/28PASS; pinUSER adotado, main749strict/40regressõesPASS (sobrepostas206), pacote04/1319classes Root/build/JAR iguais e preparo público puro qualificado. Aguardando auditoria existente caller/6908 para15h43–15h45; sem nova sonda/replay/reserva. Manifesto documental identifica USER_20261016_CONTINUAR_V2 sem autoridade. Extração completa/retenção/paridade/cutover pendentes; V1 continua parado pelo usuário; SQL16.0.1000.6 e restrições preservadas. Evidências Root offline-qualification02 e checkpoints0529/0530.
+
 # Comparação de paridade com o ETL V1 — HERMES_ce7fca106978
 
 A orientação adicional de Lucas autorizou um bloco interno coeso quando a quota não pudesse ser comprovada. A busca de quota terminou no checkpoint0495; não foi reiniciada. STOP429 permanece somente nas operações dependentes. Este relatório compara código e documentação reais; análise estática não comprova operação produtiva ou equivalência com respostas atuais do fornecedor.
@@ -42,3 +78,8 @@ Lacunas restantes, após o reparo concluído:
 
 Somente filesystem/locks/JVM/CLI do componente podem ser provados aqui. SQL, dados reais, DQ/promover/core/pub, cobertura de origem, scheduler produtivo e sistema terminado permanecem não comprovados. SQL Server16.0.1000.6, V1, contas, permissões, instalação, trust e produção ficam preservados.
 
+
+
+## Sucessão em16/10/2026 — guarda preparada, sem qualificação
+
+O checkpoint0528 prepara a guarda de payload repetido/cíclico e corrige seis produtores sintéticos que dividiam cópias da mesma raiz entre páginas.57casos novos foram escritos; não executados. A validação final foi recusada pelo executor em86% de comprometimento, antes do filho. A lacuna de progresso não está encerrada: formato/compilação/testes/regressões/escala continuam pendentes. Leitura estática e diff/UTF-8 não substituem qualificação. O filtro probabilístico pode recusar página inédita e não prova completude. Captura real, retenção permitida e paridade V1–V2 permanecem sem aceite. Ver docs/continuidade/checkpoints/0528-guarda-paginas-preparada-validacao-bloqueada.md e suas evidências. Nenhuma autorização física ou checkbox foi promovido.

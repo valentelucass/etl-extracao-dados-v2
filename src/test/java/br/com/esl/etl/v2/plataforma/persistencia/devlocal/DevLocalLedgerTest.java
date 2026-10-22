@@ -626,6 +626,8 @@ class DevLocalLedgerTest {
         final var builder =
                 new ProcessBuilder(
                         java,
+                        "-Xms16m",
+                        "-Xmx128m",
                         "-Dfile.encoding=UTF-8",
                         "-cp",
                         System.getProperty("java.class.path"),

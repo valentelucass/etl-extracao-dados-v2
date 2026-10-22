@@ -9,13 +9,11 @@ import br.com.esl.etl.v2.plataforma.autorizacao.RuntimeAuthorizationScope;
 import br.com.esl.etl.v2.plataforma.configuracao.C78LocalSqlTarget;
 import br.com.esl.etl.v2.plataforma.persistencia.controle.C78DevEngineBankAdapter;
 import br.com.esl.etl.v2.plataforma.persistencia.controle.C78Sample12AdmissionProducer;
-
-import org.junit.jupiter.api.Test;
-
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
+import org.junit.jupiter.api.Test;
 
 /** Concrete Bank factory, typed Source reader and adapter negatives; no Root unit or effects. */
 class RuntimeDevCurrentSourceFactoryTest {
@@ -45,8 +43,8 @@ class RuntimeDevCurrentSourceFactoryTest {
                             request,
                             Path.of(
                                     "C:/Users/suporte/Documents/Armazenamento-Projetos/"
-                                        + "etl-extracao-dados-v2/execucao-esl-shadow-20261008-164952/"
-                                        + "hermesc54d6a25880d"),
+                                            + "etl-extracao-dados-v2/execucao-esl-shadow-20261008-164952/"
+                                            + "hermesc54d6a25880d"),
                             null,
                             null,
                             diagnostic);

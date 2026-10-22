@@ -28,12 +28,8 @@ import br.com.esl.etl.v2.plataforma.orquestracao.RuntimeWindowStrategy;
 import br.com.esl.etl.v2.plataforma.orquestracao.RuntimeWorkloadDefinition;
 import br.com.esl.etl.v2.plataforma.orquestracao.RuntimeWorkloadId;
 import br.com.esl.etl.v2.plataforma.orquestracao.RuntimeWorkloadRegistry;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-
-import org.junit.jupiter.api.Test;
-
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -60,6 +56,7 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicInteger;
+import org.junit.jupiter.api.Test;
 
 /**
  * Synthetic controls test lifecycle only; no authority, source, SQL or real provider is exercised.

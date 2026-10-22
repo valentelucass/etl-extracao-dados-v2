@@ -1,0 +1,2163 @@
+{
+  "kind": "MODEL_ONLY_NO_EFFECT_AUTHORITY",
+  "authorizesPhysicalEffects": false,
+  "schema": "C78_RETENTION_PURE_DESIGN_VECTORS_V1",
+  "creditSemantics": "ABSTRACT_MODEL_CREDIT_NOT_SQL_OR_HTTP",
+  "expectedSource": "HAND_AUTHORED_CONTRACT_EXPECTATIONS_NOT_DERIVED_FROM_MODEL_OUTPUT",
+  "cases": [
+    {
+      "kind": "MODEL_ONLY_NO_EFFECT_AUTHORITY",
+      "authorizesPhysicalEffects": false,
+      "id": "MODEL_INTENT_MINIMUM",
+      "contract": "INTENT",
+      "input": {
+        "scope": {
+          "source": "MODEL_SOURCE_A",
+          "tenant": "MODEL_TENANT_A",
+          "occurrence": "MODEL_OCCURRENCE_A"
+        },
+        "expectedScope": {
+          "source": "MODEL_SOURCE_A",
+          "tenant": "MODEL_TENANT_A",
+          "occurrence": "MODEL_OCCURRENCE_A"
+        },
+        "geometry": {
+          "physicalRows": 1,
+          "roots": 1,
+          "page": 1,
+          "batches": 1
+        },
+        "terminal": {
+          "state": "CANCELLED",
+          "reason": "TEST_PAGE_LIMIT"
+        }
+      },
+      "expected": {
+        "kind": "MODEL_ONLY_NO_EFFECT_AUTHORITY",
+        "authorizesPhysicalEffects": false,
+        "acceptedInModel": true,
+        "code": "MODEL_INTENT_CONTRACT_VALID",
+        "details": {
+          "physicalRows": 1,
+          "roots": 1,
+          "page": 1,
+          "batches": 1
+        }
+      },
+      "expectedRationale": "Uma linha e uma raiz estão na fronteira mínima do contrato de design."
+    },
+    {
+      "kind": "MODEL_ONLY_NO_EFFECT_AUTHORITY",
+      "authorizesPhysicalEffects": false,
+      "id": "MODEL_INTENT_MAXIMUM",
+      "contract": "INTENT",
+      "input": {
+        "scope": {
+          "source": "MODEL_SOURCE_A",
+          "tenant": "MODEL_TENANT_A",
+          "occurrence": "MODEL_OCCURRENCE_A"
+        },
+        "expectedScope": {
+          "source": "MODEL_SOURCE_A",
+          "tenant": "MODEL_TENANT_A",
+          "occurrence": "MODEL_OCCURRENCE_A"
+        },
+        "geometry": {
+          "physicalRows": 12,
+          "roots": 1,
+          "page": 1,
+          "batches": 1
+        },
+        "terminal": {
+          "state": "CANCELLED",
+          "reason": "TEST_PAGE_LIMIT"
+        }
+      },
+      "expected": {
+        "kind": "MODEL_ONLY_NO_EFFECT_AUTHORITY",
+        "authorizesPhysicalEffects": false,
+        "acceptedInModel": true,
+        "code": "MODEL_INTENT_CONTRACT_VALID",
+        "details": {
+          "physicalRows": 12,
+          "roots": 1,
+          "page": 1,
+          "batches": 1
+        }
+      },
+      "expectedRationale": "Doze linhas com geometria unitária estão na fronteira máxima do contrato de design."
+    },
+    {
+      "kind": "MODEL_ONLY_NO_EFFECT_AUTHORITY",
+      "authorizesPhysicalEffects": false,
+      "id": "MODEL_INTENT_EMPTY",
+      "contract": "INTENT",
+      "input": {
+        "scope": {
+          "source": "MODEL_SOURCE_A",
+          "tenant": "MODEL_TENANT_A",
+          "occurrence": "MODEL_OCCURRENCE_A"
+        },
+        "expectedScope": {
+          "source": "MODEL_SOURCE_A",
+          "tenant": "MODEL_TENANT_A",
+          "occurrence": "MODEL_OCCURRENCE_A"
+        },
+        "geometry": {
+          "physicalRows": 0,
+          "roots": 1,
+          "page": 1,
+          "batches": 1
+        },
+        "terminal": {
+          "state": "CANCELLED",
+          "reason": "TEST_PAGE_LIMIT"
+        }
+      },
+      "expected": {
+        "kind": "MODEL_ONLY_NO_EFFECT_AUTHORITY",
+        "authorizesPhysicalEffects": false,
+        "acceptedInModel": false,
+        "code": "MODEL_PARTIAL_ROW_BOUND",
+        "details": {}
+      },
+      "expectedRationale": "Vazio não é uma captura parcial candidata neste recorte e não autoriza commit."
+    },
+    {
+      "kind": "MODEL_ONLY_NO_EFFECT_AUTHORITY",
+      "authorizesPhysicalEffects": false,
+      "id": "MODEL_INTENT_TOO_MANY_ROWS",
+      "contract": "INTENT",
+      "input": {
+        "scope": {
+          "source": "MODEL_SOURCE_A",
+          "tenant": "MODEL_TENANT_A",
+          "occurrence": "MODEL_OCCURRENCE_A"
+        },
+        "expectedScope": {
+          "source": "MODEL_SOURCE_A",
+          "tenant": "MODEL_TENANT_A",
+          "occurrence": "MODEL_OCCURRENCE_A"
+        },
+        "geometry": {
+          "physicalRows": 13,
+          "roots": 1,
+          "page": 1,
+          "batches": 1
+        },
+        "terminal": {
+          "state": "CANCELLED",
+          "reason": "TEST_PAGE_LIMIT"
+        }
+      },
+      "expected": {
+        "kind": "MODEL_ONLY_NO_EFFECT_AUTHORITY",
+        "authorizesPhysicalEffects": false,
+        "acceptedInModel": false,
+        "code": "MODEL_PARTIAL_ROW_BOUND",
+        "details": {}
+      },
+      "expectedRationale": "Treze linhas excedem a geometria adotável do modelo; nenhum aumento automático."
+    },
+    {
+      "kind": "MODEL_ONLY_NO_EFFECT_AUTHORITY",
+      "authorizesPhysicalEffects": false,
+      "id": "MODEL_INTENT_EXTRA_ROOTS",
+      "contract": "INTENT",
+      "input": {
+        "scope": {
+          "source": "MODEL_SOURCE_A",
+          "tenant": "MODEL_TENANT_A",
+          "occurrence": "MODEL_OCCURRENCE_A"
+        },
+        "expectedScope": {
+          "source": "MODEL_SOURCE_A",
+          "tenant": "MODEL_TENANT_A",
+          "occurrence": "MODEL_OCCURRENCE_A"
+        },
+        "geometry": {
+          "physicalRows": 1,
+          "roots": 2,
+          "page": 1,
+          "batches": 1
+        },
+        "terminal": {
+          "state": "CANCELLED",
+          "reason": "TEST_PAGE_LIMIT"
+        }
+      },
+      "expected": {
+        "kind": "MODEL_ONLY_NO_EFFECT_AUTHORITY",
+        "authorizesPhysicalEffects": false,
+        "acceptedInModel": false,
+        "code": "MODEL_PARTIAL_GEOMETRY_BOUND",
+        "details": {}
+      },
+      "expectedRationale": "A geometria exige exatamente uma raiz, página1 e um batch; esta dimensão vale2."
+    },
+    {
+      "kind": "MODEL_ONLY_NO_EFFECT_AUTHORITY",
+      "authorizesPhysicalEffects": false,
+      "id": "MODEL_INTENT_EXTRA_PAGE",
+      "contract": "INTENT",
+      "input": {
+        "scope": {
+          "source": "MODEL_SOURCE_A",
+          "tenant": "MODEL_TENANT_A",
+          "occurrence": "MODEL_OCCURRENCE_A"
+        },
+        "expectedScope": {
+          "source": "MODEL_SOURCE_A",
+          "tenant": "MODEL_TENANT_A",
+          "occurrence": "MODEL_OCCURRENCE_A"
+        },
+        "geometry": {
+          "physicalRows": 1,
+          "roots": 1,
+          "page": 2,
+          "batches": 1
+        },
+        "terminal": {
+          "state": "CANCELLED",
+          "reason": "TEST_PAGE_LIMIT"
+        }
+      },
+      "expected": {
+        "kind": "MODEL_ONLY_NO_EFFECT_AUTHORITY",
+        "authorizesPhysicalEffects": false,
+        "acceptedInModel": false,
+        "code": "MODEL_PARTIAL_GEOMETRY_BOUND",
+        "details": {}
+      },
+      "expectedRationale": "A geometria exige exatamente uma raiz, página1 e um batch; esta dimensão vale2."
+    },
+    {
+      "kind": "MODEL_ONLY_NO_EFFECT_AUTHORITY",
+      "authorizesPhysicalEffects": false,
+      "id": "MODEL_INTENT_EXTRA_BATCH",
+      "contract": "INTENT",
+      "input": {
+        "scope": {
+          "source": "MODEL_SOURCE_A",
+          "tenant": "MODEL_TENANT_A",
+          "occurrence": "MODEL_OCCURRENCE_A"
+        },
+        "expectedScope": {
+          "source": "MODEL_SOURCE_A",
+          "tenant": "MODEL_TENANT_A",
+          "occurrence": "MODEL_OCCURRENCE_A"
+        },
+        "geometry": {
+          "physicalRows": 1,
+          "roots": 1,
+          "page": 1,
+          "batches": 2
+        },
+        "terminal": {
+          "state": "CANCELLED",
+          "reason": "TEST_PAGE_LIMIT"
+        }
+      },
+      "expected": {
+        "kind": "MODEL_ONLY_NO_EFFECT_AUTHORITY",
+        "authorizesPhysicalEffects": false,
+        "acceptedInModel": false,
+        "code": "MODEL_PARTIAL_GEOMETRY_BOUND",
+        "details": {}
+      },
+      "expectedRationale": "A geometria exige exatamente uma raiz, página1 e um batch; esta dimensão vale2."
+    },
+    {
+      "kind": "MODEL_ONLY_NO_EFFECT_AUTHORITY",
+      "authorizesPhysicalEffects": false,
+      "id": "MODEL_INTENT_FOREIGN_NAMESPACE",
+      "contract": "INTENT",
+      "input": {
+        "scope": {
+          "source": "MODEL_SOURCE_B",
+          "tenant": "MODEL_TENANT_B",
+          "occurrence": "MODEL_OCCURRENCE_B"
+        },
+        "expectedScope": {
+          "source": "MODEL_SOURCE_A",
+          "tenant": "MODEL_TENANT_A",
+          "occurrence": "MODEL_OCCURRENCE_A"
+        },
+        "geometry": {
+          "physicalRows": 1,
+          "roots": 1,
+          "page": 1,
+          "batches": 1
+        },
+        "terminal": {
+          "state": "CANCELLED",
+          "reason": "TEST_PAGE_LIMIT"
+        }
+      },
+      "expected": {
+        "kind": "MODEL_ONLY_NO_EFFECT_AUTHORITY",
+        "authorizesPhysicalEffects": false,
+        "acceptedInModel": false,
+        "code": "MODEL_SCOPE_MISMATCH",
+        "details": {}
+      },
+      "expectedRationale": "Namespace sintético diferente não pode representar a intenção selecionada."
+    },
+    {
+      "kind": "MODEL_ONLY_NO_EFFECT_AUTHORITY",
+      "authorizesPhysicalEffects": false,
+      "id": "MODEL_INTENT_BOOLEAN_ROWS",
+      "contract": "INTENT",
+      "input": {
+        "scope": {
+          "source": "MODEL_SOURCE_A",
+          "tenant": "MODEL_TENANT_A",
+          "occurrence": "MODEL_OCCURRENCE_A"
+        },
+        "expectedScope": {
+          "source": "MODEL_SOURCE_A",
+          "tenant": "MODEL_TENANT_A",
+          "occurrence": "MODEL_OCCURRENCE_A"
+        },
+        "geometry": {
+          "physicalRows": true,
+          "roots": 1,
+          "page": 1,
+          "batches": 1
+        },
+        "terminal": {
+          "state": "CANCELLED",
+          "reason": "TEST_PAGE_LIMIT"
+        }
+      },
+      "expected": {
+        "kind": "MODEL_ONLY_NO_EFFECT_AUTHORITY",
+        "authorizesPhysicalEffects": false,
+        "acceptedInModel": false,
+        "code": "MODEL_INTEGER_BOUND",
+        "details": {}
+      },
+      "expectedRationale": "Boolean não é o inteiro1 no contrato JSON."
+    },
+    {
+      "kind": "MODEL_ONLY_NO_EFFECT_AUTHORITY",
+      "authorizesPhysicalEffects": false,
+      "id": "MODEL_INTENT_SAMPLE_TERMINAL",
+      "contract": "INTENT",
+      "input": {
+        "scope": {
+          "source": "MODEL_SOURCE_A",
+          "tenant": "MODEL_TENANT_A",
+          "occurrence": "MODEL_OCCURRENCE_A"
+        },
+        "expectedScope": {
+          "source": "MODEL_SOURCE_A",
+          "tenant": "MODEL_TENANT_A",
+          "occurrence": "MODEL_OCCURRENCE_A"
+        },
+        "geometry": {
+          "physicalRows": 1,
+          "roots": 1,
+          "page": 1,
+          "batches": 1
+        },
+        "terminal": {
+          "state": "FAILED",
+          "reason": "TEST_PAGE_LIMIT"
+        }
+      },
+      "expected": {
+        "kind": "MODEL_ONLY_NO_EFFECT_AUTHORITY",
+        "authorizesPhysicalEffects": false,
+        "acceptedInModel": false,
+        "code": "MODEL_PARTIAL_TERMINAL_MISMATCH",
+        "details": {}
+      },
+      "expectedRationale": "O terminal SAMPLE não é o terminal de retenção parcial proposto."
+    },
+    {
+      "kind": "MODEL_ONLY_NO_EFFECT_AUTHORITY",
+      "authorizesPhysicalEffects": false,
+      "id": "MODEL_BUDGET_EXACT_CAP",
+      "contract": "BUDGET",
+      "input": {
+        "creditSemantics": "ABSTRACT_MODEL_CREDIT_NOT_SQL_OR_HTTP",
+        "selectedUnit": "MODEL_CAPTURE",
+        "units": {
+          "MODEL_ANTECEDENT": {
+            "limitCredits": 1,
+            "reservedSuffixCredits": 1
+          },
+          "MODEL_CAPTURE": {
+            "limitCredits": 20,
+            "reservedSuffixCredits": 11
+          },
+          "MODEL_CONFIRM": {
+            "limitCredits": 7,
+            "reservedSuffixCredits": 2
+          },
+          "MODEL_RECOVERY": {
+            "limitCredits": 5,
+            "reservedSuffixCredits": 2
+          }
+        },
+        "events": [
+          {
+            "event": "CHARGE",
+            "unit": "MODEL_CAPTURE",
+            "costCredits": 4,
+            "proofCredits": 0
+          },
+          {
+            "event": "CHARGE",
+            "unit": "MODEL_CAPTURE",
+            "costCredits": 3,
+            "proofCredits": 2
+          }
+        ]
+      },
+      "expected": {
+        "kind": "MODEL_ONLY_NO_EFFECT_AUTHORITY",
+        "authorizesPhysicalEffects": false,
+        "acceptedInModel": true,
+        "code": "MODEL_BUDGET_SEQUENCE_VALID",
+        "details": {
+          "selectedUnit": "MODEL_CAPTURE",
+          "usedCredits": 9,
+          "remainingCredits": 11,
+          "reservedSuffixCredits": 11,
+          "commitAttemptsInModel": 0,
+          "finalizedInModel": false,
+          "otherUnitsConsumedCredits": 0
+        }
+      },
+      "expectedRationale": "Créditos abstratos:4+3+2 consumidos e11 reservados totalizam exatamente20; nenhuma unidade física é autorizada."
+    },
+    {
+      "kind": "MODEL_ONLY_NO_EFFECT_AUTHORITY",
+      "authorizesPhysicalEffects": false,
+      "id": "MODEL_BUDGET_CAP_MINUS_ONE",
+      "contract": "BUDGET",
+      "input": {
+        "creditSemantics": "ABSTRACT_MODEL_CREDIT_NOT_SQL_OR_HTTP",
+        "selectedUnit": "MODEL_CAPTURE",
+        "units": {
+          "MODEL_ANTECEDENT": {
+            "limitCredits": 1,
+            "reservedSuffixCredits": 1
+          },
+          "MODEL_CAPTURE": {
+            "limitCredits": 19,
+            "reservedSuffixCredits": 11
+          },
+          "MODEL_CONFIRM": {
+            "limitCredits": 7,
+            "reservedSuffixCredits": 2
+          },
+          "MODEL_RECOVERY": {
+            "limitCredits": 5,
+            "reservedSuffixCredits": 2
+          }
+        },
+        "events": [
+          {
+            "event": "CHARGE",
+            "unit": "MODEL_CAPTURE",
+            "costCredits": 4,
+            "proofCredits": 0
+          },
+          {
+            "event": "CHARGE",
+            "unit": "MODEL_CAPTURE",
+            "costCredits": 3,
+            "proofCredits": 2
+          }
+        ]
+      },
+      "expected": {
+        "kind": "MODEL_ONLY_NO_EFFECT_AUTHORITY",
+        "authorizesPhysicalEffects": false,
+        "acceptedInModel": false,
+        "code": "MODEL_BUDGET_INSUFFICIENT_FOR_PROOF_AND_SUFFIX",
+        "details": {
+          "selectedUnit": "MODEL_CAPTURE",
+          "usedCredits": 4,
+          "remainingCredits": 15,
+          "reservedSuffixCredits": 11,
+          "commitAttemptsInModel": 0,
+          "finalizedInModel": false,
+          "otherUnitsConsumedCredits": 0
+        }
+      },
+      "expectedRationale": "Com cap19 a segunda admissão exigiria20; só os4 créditos do primeiro passo foram consumidos."
+    },
+    {
+      "kind": "MODEL_ONLY_NO_EFFECT_AUTHORITY",
+      "authorizesPhysicalEffects": false,
+      "id": "MODEL_BUDGET_SIGNED_SUM_OVERFLOW",
+      "contract": "BUDGET",
+      "input": {
+        "creditSemantics": "ABSTRACT_MODEL_CREDIT_NOT_SQL_OR_HTTP",
+        "selectedUnit": "MODEL_CAPTURE",
+        "units": {
+          "MODEL_ANTECEDENT": {
+            "limitCredits": 1,
+            "reservedSuffixCredits": 1
+          },
+          "MODEL_CAPTURE": {
+            "limitCredits": 9223372036854775807,
+            "reservedSuffixCredits": 1
+          },
+          "MODEL_CONFIRM": {
+            "limitCredits": 7,
+            "reservedSuffixCredits": 2
+          },
+          "MODEL_RECOVERY": {
+            "limitCredits": 5,
+            "reservedSuffixCredits": 2
+          }
+        },
+        "events": [
+          {
+            "event": "CHARGE",
+            "unit": "MODEL_CAPTURE",
+            "costCredits": 9223372036854775807,
+            "proofCredits": 1
+          }
+        ]
+      },
+      "expected": {
+        "kind": "MODEL_ONLY_NO_EFFECT_AUTHORITY",
+        "authorizesPhysicalEffects": false,
+        "acceptedInModel": false,
+        "code": "MODEL_BUDGET_SUM_OVERFLOW",
+        "details": {
+          "selectedUnit": "MODEL_CAPTURE",
+          "usedCredits": 0,
+          "remainingCredits": 9223372036854775807,
+          "reservedSuffixCredits": 1,
+          "commitAttemptsInModel": 0,
+          "finalizedInModel": false,
+          "otherUnitsConsumedCredits": 0
+        }
+      },
+      "expectedRationale": "MAX_INT64+1 deve ser recusado antes da tentativa, sem wrap nem consumo."
+    },
+    {
+      "kind": "MODEL_ONLY_NO_EFFECT_AUTHORITY",
+      "authorizesPhysicalEffects": false,
+      "id": "MODEL_BUDGET_FOREIGN_UNIT",
+      "contract": "BUDGET",
+      "input": {
+        "creditSemantics": "ABSTRACT_MODEL_CREDIT_NOT_SQL_OR_HTTP",
+        "selectedUnit": "MODEL_CONFIRM",
+        "units": {
+          "MODEL_ANTECEDENT": {
+            "limitCredits": 1,
+            "reservedSuffixCredits": 1
+          },
+          "MODEL_CAPTURE": {
+            "limitCredits": 20,
+            "reservedSuffixCredits": 11
+          },
+          "MODEL_CONFIRM": {
+            "limitCredits": 7,
+            "reservedSuffixCredits": 2
+          },
+          "MODEL_RECOVERY": {
+            "limitCredits": 5,
+            "reservedSuffixCredits": 2
+          }
+        },
+        "events": [
+          {
+            "event": "CHARGE",
+            "unit": "MODEL_CAPTURE",
+            "costCredits": 1,
+            "proofCredits": 0
+          }
+        ]
+      },
+      "expected": {
+        "kind": "MODEL_ONLY_NO_EFFECT_AUTHORITY",
+        "authorizesPhysicalEffects": false,
+        "acceptedInModel": false,
+        "code": "MODEL_BUDGET_UNIT_MISMATCH",
+        "details": {
+          "selectedUnit": "MODEL_CONFIRM",
+          "usedCredits": 0,
+          "remainingCredits": 7,
+          "reservedSuffixCredits": 2,
+          "commitAttemptsInModel": 0,
+          "finalizedInModel": false,
+          "otherUnitsConsumedCredits": 0
+        }
+      },
+      "expectedRationale": "O cap da confirmação não paga um passo da captura; os quatro buckets são separados."
+    },
+    {
+      "kind": "MODEL_ONLY_NO_EFFECT_AUTHORITY",
+      "authorizesPhysicalEffects": false,
+      "id": "MODEL_BUDGET_FAILURE_NO_RECREDIT",
+      "contract": "BUDGET",
+      "input": {
+        "creditSemantics": "ABSTRACT_MODEL_CREDIT_NOT_SQL_OR_HTTP",
+        "selectedUnit": "MODEL_CAPTURE",
+        "units": {
+          "MODEL_ANTECEDENT": {
+            "limitCredits": 1,
+            "reservedSuffixCredits": 1
+          },
+          "MODEL_CAPTURE": {
+            "limitCredits": 20,
+            "reservedSuffixCredits": 11
+          },
+          "MODEL_CONFIRM": {
+            "limitCredits": 7,
+            "reservedSuffixCredits": 2
+          },
+          "MODEL_RECOVERY": {
+            "limitCredits": 5,
+            "reservedSuffixCredits": 2
+          }
+        },
+        "events": [
+          {
+            "event": "CHARGE",
+            "unit": "MODEL_CAPTURE",
+            "costCredits": 4,
+            "proofCredits": 0
+          },
+          {
+            "event": "COMMIT_ATTEMPT",
+            "unit": "MODEL_CAPTURE",
+            "costCredits": 2
+          },
+          {
+            "event": "FAILURE_OBSERVED",
+            "unit": "MODEL_CAPTURE"
+          }
+        ]
+      },
+      "expected": {
+        "kind": "MODEL_ONLY_NO_EFFECT_AUTHORITY",
+        "authorizesPhysicalEffects": false,
+        "acceptedInModel": true,
+        "code": "MODEL_BUDGET_SEQUENCE_VALID",
+        "details": {
+          "selectedUnit": "MODEL_CAPTURE",
+          "usedCredits": 6,
+          "remainingCredits": 14,
+          "reservedSuffixCredits": 11,
+          "commitAttemptsInModel": 1,
+          "finalizedInModel": false,
+          "otherUnitsConsumedCredits": 0
+        }
+      },
+      "expectedRationale": "Falha observada mantém 4 créditos de trabalho e 2 da tentativa, total 6 consumidos; não devolve saldo nem a tentativa."
+    },
+    {
+      "kind": "MODEL_ONLY_NO_EFFECT_AUTHORITY",
+      "authorizesPhysicalEffects": false,
+      "id": "MODEL_BUDGET_COMMIT_RETRY",
+      "contract": "BUDGET",
+      "input": {
+        "creditSemantics": "ABSTRACT_MODEL_CREDIT_NOT_SQL_OR_HTTP",
+        "selectedUnit": "MODEL_CAPTURE",
+        "units": {
+          "MODEL_ANTECEDENT": {
+            "limitCredits": 1,
+            "reservedSuffixCredits": 1
+          },
+          "MODEL_CAPTURE": {
+            "limitCredits": 20,
+            "reservedSuffixCredits": 11
+          },
+          "MODEL_CONFIRM": {
+            "limitCredits": 7,
+            "reservedSuffixCredits": 2
+          },
+          "MODEL_RECOVERY": {
+            "limitCredits": 5,
+            "reservedSuffixCredits": 2
+          }
+        },
+        "events": [
+          {
+            "event": "CHARGE",
+            "unit": "MODEL_CAPTURE",
+            "costCredits": 4,
+            "proofCredits": 0
+          },
+          {
+            "event": "COMMIT_ATTEMPT",
+            "unit": "MODEL_CAPTURE",
+            "costCredits": 2
+          },
+          {
+            "event": "FAILURE_OBSERVED",
+            "unit": "MODEL_CAPTURE"
+          },
+          {
+            "event": "COMMIT_ATTEMPT",
+            "unit": "MODEL_CAPTURE",
+            "costCredits": 2
+          }
+        ]
+      },
+      "expected": {
+        "kind": "MODEL_ONLY_NO_EFFECT_AUTHORITY",
+        "authorizesPhysicalEffects": false,
+        "acceptedInModel": false,
+        "code": "MODEL_COMMIT_RETRY_REFUSED",
+        "details": {
+          "selectedUnit": "MODEL_CAPTURE",
+          "usedCredits": 6,
+          "remainingCredits": 14,
+          "reservedSuffixCredits": 11,
+          "commitAttemptsInModel": 1,
+          "finalizedInModel": false,
+          "otherUnitsConsumedCredits": 0
+        }
+      },
+      "expectedRationale": "Após uma tentativa, mesmo sem ack, uma segunda tentativa é recusada sem zerar o contador."
+    },
+    {
+      "kind": "MODEL_ONLY_NO_EFFECT_AUTHORITY",
+      "authorizesPhysicalEffects": false,
+      "id": "MODEL_BUDGET_EXPLICIT_REFUND",
+      "contract": "BUDGET",
+      "input": {
+        "creditSemantics": "ABSTRACT_MODEL_CREDIT_NOT_SQL_OR_HTTP",
+        "selectedUnit": "MODEL_CAPTURE",
+        "units": {
+          "MODEL_ANTECEDENT": {
+            "limitCredits": 1,
+            "reservedSuffixCredits": 1
+          },
+          "MODEL_CAPTURE": {
+            "limitCredits": 20,
+            "reservedSuffixCredits": 11
+          },
+          "MODEL_CONFIRM": {
+            "limitCredits": 7,
+            "reservedSuffixCredits": 2
+          },
+          "MODEL_RECOVERY": {
+            "limitCredits": 5,
+            "reservedSuffixCredits": 2
+          }
+        },
+        "events": [
+          {
+            "event": "CHARGE",
+            "unit": "MODEL_CAPTURE",
+            "costCredits": 4,
+            "proofCredits": 0
+          },
+          {
+            "event": "REFUND",
+            "unit": "MODEL_CAPTURE",
+            "credits": 4
+          }
+        ]
+      },
+      "expected": {
+        "kind": "MODEL_ONLY_NO_EFFECT_AUTHORITY",
+        "authorizesPhysicalEffects": false,
+        "acceptedInModel": false,
+        "code": "MODEL_RECREDIT_REFUSED",
+        "details": {
+          "selectedUnit": "MODEL_CAPTURE",
+          "usedCredits": 4,
+          "remainingCredits": 16,
+          "reservedSuffixCredits": 11,
+          "commitAttemptsInModel": 0,
+          "finalizedInModel": false,
+          "otherUnitsConsumedCredits": 0
+        }
+      },
+      "expectedRationale": "O modelo recusa estorno explícito; conserva os4 créditos já consumidos."
+    },
+    {
+      "kind": "MODEL_ONLY_NO_EFFECT_AUTHORITY",
+      "authorizesPhysicalEffects": false,
+      "id": "MODEL_BUDGET_FINALIZATION_RESERVE_EXCESS",
+      "contract": "BUDGET",
+      "input": {
+        "creditSemantics": "ABSTRACT_MODEL_CREDIT_NOT_SQL_OR_HTTP",
+        "selectedUnit": "MODEL_CAPTURE",
+        "units": {
+          "MODEL_ANTECEDENT": {
+            "limitCredits": 1,
+            "reservedSuffixCredits": 1
+          },
+          "MODEL_CAPTURE": {
+            "limitCredits": 20,
+            "reservedSuffixCredits": 11
+          },
+          "MODEL_CONFIRM": {
+            "limitCredits": 7,
+            "reservedSuffixCredits": 2
+          },
+          "MODEL_RECOVERY": {
+            "limitCredits": 5,
+            "reservedSuffixCredits": 2
+          }
+        },
+        "events": [
+          {
+            "event": "CHARGE",
+            "unit": "MODEL_CAPTURE",
+            "costCredits": 4,
+            "proofCredits": 0
+          },
+          {
+            "event": "CHARGE",
+            "unit": "MODEL_CAPTURE",
+            "costCredits": 3,
+            "proofCredits": 2
+          },
+          {
+            "event": "FINALIZE",
+            "unit": "MODEL_CAPTURE",
+            "costCredits": 12
+          }
+        ]
+      },
+      "expected": {
+        "kind": "MODEL_ONLY_NO_EFFECT_AUTHORITY",
+        "authorizesPhysicalEffects": false,
+        "acceptedInModel": false,
+        "code": "MODEL_FINALIZATION_RESERVE_EXCEEDED",
+        "details": {
+          "selectedUnit": "MODEL_CAPTURE",
+          "usedCredits": 9,
+          "remainingCredits": 11,
+          "reservedSuffixCredits": 11,
+          "commitAttemptsInModel": 0,
+          "finalizedInModel": false,
+          "otherUnitsConsumedCredits": 0
+        }
+      },
+      "expectedRationale": "Uma finalização de12 não cabe na reserva abstrata11; o subtotal9 permanece."
+    },
+    {
+      "kind": "MODEL_ONLY_NO_EFFECT_AUTHORITY",
+      "authorizesPhysicalEffects": false,
+      "id": "MODEL_BUDGET_FINALIZATION_EXACT",
+      "contract": "BUDGET",
+      "input": {
+        "creditSemantics": "ABSTRACT_MODEL_CREDIT_NOT_SQL_OR_HTTP",
+        "selectedUnit": "MODEL_CAPTURE",
+        "units": {
+          "MODEL_ANTECEDENT": {
+            "limitCredits": 1,
+            "reservedSuffixCredits": 1
+          },
+          "MODEL_CAPTURE": {
+            "limitCredits": 20,
+            "reservedSuffixCredits": 11
+          },
+          "MODEL_CONFIRM": {
+            "limitCredits": 7,
+            "reservedSuffixCredits": 2
+          },
+          "MODEL_RECOVERY": {
+            "limitCredits": 5,
+            "reservedSuffixCredits": 2
+          }
+        },
+        "events": [
+          {
+            "event": "CHARGE",
+            "unit": "MODEL_CAPTURE",
+            "costCredits": 4,
+            "proofCredits": 0
+          },
+          {
+            "event": "CHARGE",
+            "unit": "MODEL_CAPTURE",
+            "costCredits": 3,
+            "proofCredits": 2
+          },
+          {
+            "event": "FINALIZE",
+            "unit": "MODEL_CAPTURE",
+            "costCredits": 11
+          }
+        ]
+      },
+      "expected": {
+        "kind": "MODEL_ONLY_NO_EFFECT_AUTHORITY",
+        "authorizesPhysicalEffects": false,
+        "acceptedInModel": true,
+        "code": "MODEL_BUDGET_SEQUENCE_VALID",
+        "details": {
+          "selectedUnit": "MODEL_CAPTURE",
+          "usedCredits": 20,
+          "remainingCredits": 0,
+          "reservedSuffixCredits": 11,
+          "commitAttemptsInModel": 0,
+          "finalizedInModel": true,
+          "otherUnitsConsumedCredits": 0
+        }
+      },
+      "expectedRationale": "Sufixo abstrato11 consome o cap exato restante e encerra o bucket do modelo."
+    },
+    {
+      "kind": "MODEL_ONLY_NO_EFFECT_AUTHORITY",
+      "authorizesPhysicalEffects": false,
+      "id": "MODEL_BUDGET_FINALIZED_REOPEN",
+      "contract": "BUDGET",
+      "input": {
+        "creditSemantics": "ABSTRACT_MODEL_CREDIT_NOT_SQL_OR_HTTP",
+        "selectedUnit": "MODEL_CAPTURE",
+        "units": {
+          "MODEL_ANTECEDENT": {
+            "limitCredits": 1,
+            "reservedSuffixCredits": 1
+          },
+          "MODEL_CAPTURE": {
+            "limitCredits": 20,
+            "reservedSuffixCredits": 11
+          },
+          "MODEL_CONFIRM": {
+            "limitCredits": 7,
+            "reservedSuffixCredits": 2
+          },
+          "MODEL_RECOVERY": {
+            "limitCredits": 5,
+            "reservedSuffixCredits": 2
+          }
+        },
+        "events": [
+          {
+            "event": "CHARGE",
+            "unit": "MODEL_CAPTURE",
+            "costCredits": 4,
+            "proofCredits": 0
+          },
+          {
+            "event": "CHARGE",
+            "unit": "MODEL_CAPTURE",
+            "costCredits": 3,
+            "proofCredits": 2
+          },
+          {
+            "event": "FINALIZE",
+            "unit": "MODEL_CAPTURE",
+            "costCredits": 11
+          },
+          {
+            "event": "CHARGE",
+            "unit": "MODEL_CAPTURE",
+            "costCredits": 1,
+            "proofCredits": 0
+          }
+        ]
+      },
+      "expected": {
+        "kind": "MODEL_ONLY_NO_EFFECT_AUTHORITY",
+        "authorizesPhysicalEffects": false,
+        "acceptedInModel": false,
+        "code": "MODEL_FINALIZED_UNIT_CANNOT_REOPEN",
+        "details": {
+          "selectedUnit": "MODEL_CAPTURE",
+          "usedCredits": 20,
+          "remainingCredits": 0,
+          "reservedSuffixCredits": 11,
+          "commitAttemptsInModel": 0,
+          "finalizedInModel": true,
+          "otherUnitsConsumedCredits": 0
+        }
+      },
+      "expectedRationale": "Uma unidade finalizada não reabre; o consumo20 permanece, sem nova tentativa."
+    },
+    {
+      "kind": "MODEL_ONLY_NO_EFFECT_AUTHORITY",
+      "authorizesPhysicalEffects": false,
+      "id": "MODEL_BUDGET_MISSING_CONFIRMATION",
+      "contract": "BUDGET",
+      "input": {
+        "creditSemantics": "ABSTRACT_MODEL_CREDIT_NOT_SQL_OR_HTTP",
+        "selectedUnit": "MODEL_CAPTURE",
+        "units": {
+          "MODEL_ANTECEDENT": {
+            "limitCredits": 1,
+            "reservedSuffixCredits": 1
+          },
+          "MODEL_CAPTURE": {
+            "limitCredits": 20,
+            "reservedSuffixCredits": 11
+          },
+          "MODEL_RECOVERY": {
+            "limitCredits": 5,
+            "reservedSuffixCredits": 2
+          }
+        },
+        "events": [
+          {
+            "event": "CHARGE",
+            "unit": "MODEL_CAPTURE",
+            "costCredits": 1,
+            "proofCredits": 0
+          }
+        ]
+      },
+      "expected": {
+        "kind": "MODEL_ONLY_NO_EFFECT_AUTHORITY",
+        "authorizesPhysicalEffects": false,
+        "acceptedInModel": false,
+        "code": "MODEL_SEPARATE_BUDGETS_REQUIRED",
+        "details": {}
+      },
+      "expectedRationale": "O contrato exige todos os buckets explícitos; não deduz confirmação do saldo da captura."
+    },
+    {
+      "kind": "MODEL_ONLY_NO_EFFECT_AUTHORITY",
+      "authorizesPhysicalEffects": false,
+      "id": "MODEL_BUDGET_BOOLEAN_COST",
+      "contract": "BUDGET",
+      "input": {
+        "creditSemantics": "ABSTRACT_MODEL_CREDIT_NOT_SQL_OR_HTTP",
+        "selectedUnit": "MODEL_CAPTURE",
+        "units": {
+          "MODEL_ANTECEDENT": {
+            "limitCredits": 1,
+            "reservedSuffixCredits": 1
+          },
+          "MODEL_CAPTURE": {
+            "limitCredits": 20,
+            "reservedSuffixCredits": 11
+          },
+          "MODEL_CONFIRM": {
+            "limitCredits": 7,
+            "reservedSuffixCredits": 2
+          },
+          "MODEL_RECOVERY": {
+            "limitCredits": 5,
+            "reservedSuffixCredits": 2
+          }
+        },
+        "events": [
+          {
+            "event": "CHARGE",
+            "unit": "MODEL_CAPTURE",
+            "costCredits": true,
+            "proofCredits": 0
+          }
+        ]
+      },
+      "expected": {
+        "kind": "MODEL_ONLY_NO_EFFECT_AUTHORITY",
+        "authorizesPhysicalEffects": false,
+        "acceptedInModel": false,
+        "code": "MODEL_INTEGER_BOUND",
+        "details": {
+          "selectedUnit": "MODEL_CAPTURE",
+          "usedCredits": 0,
+          "remainingCredits": 20,
+          "reservedSuffixCredits": 11,
+          "commitAttemptsInModel": 0,
+          "finalizedInModel": false,
+          "otherUnitsConsumedCredits": 0
+        }
+      },
+      "expectedRationale": "Boolean não vale um crédito; tipo errado é recusado antes de consumo."
+    },
+    {
+      "kind": "MODEL_ONLY_NO_EFFECT_AUTHORITY",
+      "authorizesPhysicalEffects": false,
+      "id": "MODEL_OBSERVATION_KNOWN_MATCHED_CLOSED",
+      "contract": "OBSERVATION",
+      "input": {
+        "scope": {
+          "source": "MODEL_SOURCE_A",
+          "tenant": "MODEL_TENANT_A",
+          "occurrence": "MODEL_OCCURRENCE_A"
+        },
+        "expectedScope": {
+          "source": "MODEL_SOURCE_A",
+          "tenant": "MODEL_TENANT_A",
+          "occurrence": "MODEL_OCCURRENCE_A"
+        },
+        "owner": "MODEL_OWNER_A",
+        "captureConnection": "MODEL_CONNECTION_A",
+        "commit": "ACK_KNOWN",
+        "readback": "MATCHED",
+        "close": "CLOSED",
+        "rollback": "NOT_APPLICABLE",
+        "confirmation": {
+          "scope": {
+            "source": "MODEL_SOURCE_A",
+            "tenant": "MODEL_TENANT_A",
+            "occurrence": "MODEL_OCCURRENCE_A"
+          },
+          "connection": "MODEL_CONNECTION_B",
+          "unit": "MODEL_CONFIRM",
+          "verifier": "MODEL_VERIFIER_B"
+        }
+      },
+      "expected": {
+        "kind": "MODEL_ONLY_NO_EFFECT_AUTHORITY",
+        "authorizesPhysicalEffects": false,
+        "acceptedInModel": true,
+        "code": "MODEL_DESIGN_RETENTION_CONFIRMED_STATE",
+        "details": {
+          "commitKnowledge": "ACK_KNOWN",
+          "readbackState": "MATCHED",
+          "closeState": "CLOSED",
+          "rollbackState": "NOT_APPLICABLE",
+          "candidateConfirmedInModel": true,
+          "historicalAckReconstructed": false,
+          "historicalRollbackInferredFromAbsence": false
+        }
+      },
+      "expectedRationale": "A combinação completa é válida somente no modelo; o envelope continua sem autoridade física."
+    },
+    {
+      "kind": "MODEL_ONLY_NO_EFFECT_AUTHORITY",
+      "authorizesPhysicalEffects": false,
+      "id": "MODEL_OBSERVATION_UNKNOWN_MATCHED",
+      "contract": "OBSERVATION",
+      "input": {
+        "scope": {
+          "source": "MODEL_SOURCE_A",
+          "tenant": "MODEL_TENANT_A",
+          "occurrence": "MODEL_OCCURRENCE_A"
+        },
+        "expectedScope": {
+          "source": "MODEL_SOURCE_A",
+          "tenant": "MODEL_TENANT_A",
+          "occurrence": "MODEL_OCCURRENCE_A"
+        },
+        "owner": "MODEL_OWNER_A",
+        "captureConnection": "MODEL_CONNECTION_A",
+        "commit": "UNKNOWN",
+        "readback": "MATCHED",
+        "close": "CLOSED",
+        "rollback": "NOT_APPLICABLE",
+        "confirmation": {
+          "scope": {
+            "source": "MODEL_SOURCE_A",
+            "tenant": "MODEL_TENANT_A",
+            "occurrence": "MODEL_OCCURRENCE_A"
+          },
+          "connection": "MODEL_CONNECTION_B",
+          "unit": "MODEL_CONFIRM",
+          "verifier": "MODEL_VERIFIER_B"
+        }
+      },
+      "expected": {
+        "kind": "MODEL_ONLY_NO_EFFECT_AUTHORITY",
+        "authorizesPhysicalEffects": false,
+        "acceptedInModel": true,
+        "code": "MODEL_CURRENT_RETENTION_OBSERVED_ACK_UNKNOWN",
+        "details": {
+          "commitKnowledge": "UNKNOWN",
+          "readbackState": "MATCHED",
+          "closeState": "CLOSED",
+          "rollbackState": "NOT_APPLICABLE",
+          "candidateConfirmedInModel": false,
+          "historicalAckReconstructed": false,
+          "historicalRollbackInferredFromAbsence": false
+        }
+      },
+      "expectedRationale": "Correspondência atual não reconstrói ack antigo nem altera UNKNOWN para ACK_KNOWN."
+    },
+    {
+      "kind": "MODEL_ONLY_NO_EFFECT_AUTHORITY",
+      "authorizesPhysicalEffects": false,
+      "id": "MODEL_OBSERVATION_UNKNOWN_ABSENT",
+      "contract": "OBSERVATION",
+      "input": {
+        "scope": {
+          "source": "MODEL_SOURCE_A",
+          "tenant": "MODEL_TENANT_A",
+          "occurrence": "MODEL_OCCURRENCE_A"
+        },
+        "expectedScope": {
+          "source": "MODEL_SOURCE_A",
+          "tenant": "MODEL_TENANT_A",
+          "occurrence": "MODEL_OCCURRENCE_A"
+        },
+        "owner": "MODEL_OWNER_A",
+        "captureConnection": "MODEL_CONNECTION_A",
+        "commit": "UNKNOWN",
+        "readback": "ABSENT",
+        "close": "CLOSED",
+        "rollback": "NOT_APPLICABLE",
+        "confirmation": {
+          "scope": {
+            "source": "MODEL_SOURCE_A",
+            "tenant": "MODEL_TENANT_A",
+            "occurrence": "MODEL_OCCURRENCE_A"
+          },
+          "connection": "MODEL_CONNECTION_B",
+          "unit": "MODEL_CONFIRM",
+          "verifier": "MODEL_VERIFIER_B"
+        }
+      },
+      "expected": {
+        "kind": "MODEL_ONLY_NO_EFFECT_AUTHORITY",
+        "authorizesPhysicalEffects": false,
+        "acceptedInModel": true,
+        "code": "MODEL_CURRENT_ABSENT_COMMIT_UNKNOWN",
+        "details": {
+          "commitKnowledge": "UNKNOWN",
+          "readbackState": "ABSENT",
+          "closeState": "CLOSED",
+          "rollbackState": "NOT_APPLICABLE",
+          "candidateConfirmedInModel": false,
+          "historicalAckReconstructed": false,
+          "historicalRollbackInferredFromAbsence": false
+        }
+      },
+      "expectedRationale": "Ausência atual não prova rollback histórico ou ausência de tentativa."
+    },
+    {
+      "kind": "MODEL_ONLY_NO_EFFECT_AUTHORITY",
+      "authorizesPhysicalEffects": false,
+      "id": "MODEL_OBSERVATION_UNKNOWN_UNAVAILABLE",
+      "contract": "OBSERVATION",
+      "input": {
+        "scope": {
+          "source": "MODEL_SOURCE_A",
+          "tenant": "MODEL_TENANT_A",
+          "occurrence": "MODEL_OCCURRENCE_A"
+        },
+        "expectedScope": {
+          "source": "MODEL_SOURCE_A",
+          "tenant": "MODEL_TENANT_A",
+          "occurrence": "MODEL_OCCURRENCE_A"
+        },
+        "owner": "MODEL_OWNER_A",
+        "captureConnection": "MODEL_CONNECTION_A",
+        "commit": "UNKNOWN",
+        "readback": "UNAVAILABLE",
+        "close": "CLOSED",
+        "rollback": "NOT_APPLICABLE",
+        "confirmation": {
+          "scope": {
+            "source": "MODEL_SOURCE_A",
+            "tenant": "MODEL_TENANT_A",
+            "occurrence": "MODEL_OCCURRENCE_A"
+          },
+          "connection": "MODEL_CONNECTION_B",
+          "unit": "MODEL_CONFIRM",
+          "verifier": "MODEL_VERIFIER_B"
+        }
+      },
+      "expected": {
+        "kind": "MODEL_ONLY_NO_EFFECT_AUTHORITY",
+        "authorizesPhysicalEffects": false,
+        "acceptedInModel": true,
+        "code": "MODEL_COMMIT_NOT_RESOLVED_OBSERVATION_UNAVAILABLE",
+        "details": {
+          "commitKnowledge": "UNKNOWN",
+          "readbackState": "UNAVAILABLE",
+          "closeState": "CLOSED",
+          "rollbackState": "NOT_APPLICABLE",
+          "candidateConfirmedInModel": false,
+          "historicalAckReconstructed": false,
+          "historicalRollbackInferredFromAbsence": false
+        }
+      },
+      "expectedRationale": "Indisponibilidade conserva incerteza; não se converte em ausência."
+    },
+    {
+      "kind": "MODEL_ONLY_NO_EFFECT_AUTHORITY",
+      "authorizesPhysicalEffects": false,
+      "id": "MODEL_OBSERVATION_KNOWN_UNAVAILABLE",
+      "contract": "OBSERVATION",
+      "input": {
+        "scope": {
+          "source": "MODEL_SOURCE_A",
+          "tenant": "MODEL_TENANT_A",
+          "occurrence": "MODEL_OCCURRENCE_A"
+        },
+        "expectedScope": {
+          "source": "MODEL_SOURCE_A",
+          "tenant": "MODEL_TENANT_A",
+          "occurrence": "MODEL_OCCURRENCE_A"
+        },
+        "owner": "MODEL_OWNER_A",
+        "captureConnection": "MODEL_CONNECTION_A",
+        "commit": "ACK_KNOWN",
+        "readback": "UNAVAILABLE",
+        "close": "CLOSED",
+        "rollback": "NOT_APPLICABLE",
+        "confirmation": {
+          "scope": {
+            "source": "MODEL_SOURCE_A",
+            "tenant": "MODEL_TENANT_A",
+            "occurrence": "MODEL_OCCURRENCE_A"
+          },
+          "connection": "MODEL_CONNECTION_B",
+          "unit": "MODEL_CONFIRM",
+          "verifier": "MODEL_VERIFIER_B"
+        }
+      },
+      "expected": {
+        "kind": "MODEL_ONLY_NO_EFFECT_AUTHORITY",
+        "authorizesPhysicalEffects": false,
+        "acceptedInModel": true,
+        "code": "MODEL_ACK_KNOWN_OBSERVATION_UNAVAILABLE",
+        "details": {
+          "commitKnowledge": "ACK_KNOWN",
+          "readbackState": "UNAVAILABLE",
+          "closeState": "CLOSED",
+          "rollbackState": "NOT_APPLICABLE",
+          "candidateConfirmedInModel": false,
+          "historicalAckReconstructed": false,
+          "historicalRollbackInferredFromAbsence": false
+        }
+      },
+      "expectedRationale": "Falha da leitura posterior não apaga o conhecimento do ack."
+    },
+    {
+      "kind": "MODEL_ONLY_NO_EFFECT_AUTHORITY",
+      "authorizesPhysicalEffects": false,
+      "id": "MODEL_OBSERVATION_CLOSE_UNKNOWN",
+      "contract": "OBSERVATION",
+      "input": {
+        "scope": {
+          "source": "MODEL_SOURCE_A",
+          "tenant": "MODEL_TENANT_A",
+          "occurrence": "MODEL_OCCURRENCE_A"
+        },
+        "expectedScope": {
+          "source": "MODEL_SOURCE_A",
+          "tenant": "MODEL_TENANT_A",
+          "occurrence": "MODEL_OCCURRENCE_A"
+        },
+        "owner": "MODEL_OWNER_A",
+        "captureConnection": "MODEL_CONNECTION_A",
+        "commit": "ACK_KNOWN",
+        "readback": "MATCHED",
+        "close": "UNKNOWN",
+        "rollback": "NOT_APPLICABLE",
+        "confirmation": {
+          "scope": {
+            "source": "MODEL_SOURCE_A",
+            "tenant": "MODEL_TENANT_A",
+            "occurrence": "MODEL_OCCURRENCE_A"
+          },
+          "connection": "MODEL_CONNECTION_B",
+          "unit": "MODEL_CONFIRM",
+          "verifier": "MODEL_VERIFIER_B"
+        }
+      },
+      "expected": {
+        "kind": "MODEL_ONLY_NO_EFFECT_AUTHORITY",
+        "authorizesPhysicalEffects": false,
+        "acceptedInModel": true,
+        "code": "MODEL_ACK_KNOWN_RETENTION_MATCHED_CLOSE_UNKNOWN",
+        "details": {
+          "commitKnowledge": "ACK_KNOWN",
+          "readbackState": "MATCHED",
+          "closeState": "UNKNOWN",
+          "rollbackState": "NOT_APPLICABLE",
+          "candidateConfirmedInModel": false,
+          "historicalAckReconstructed": false,
+          "historicalRollbackInferredFromAbsence": false
+        }
+      },
+      "expectedRationale": "Readback e ack conhecidos não provam fechamento; candidato final permanece falso."
+    },
+    {
+      "kind": "MODEL_ONLY_NO_EFFECT_AUTHORITY",
+      "authorizesPhysicalEffects": false,
+      "id": "MODEL_OBSERVATION_ORIGINAL_CONNECTION",
+      "contract": "OBSERVATION",
+      "input": {
+        "scope": {
+          "source": "MODEL_SOURCE_A",
+          "tenant": "MODEL_TENANT_A",
+          "occurrence": "MODEL_OCCURRENCE_A"
+        },
+        "expectedScope": {
+          "source": "MODEL_SOURCE_A",
+          "tenant": "MODEL_TENANT_A",
+          "occurrence": "MODEL_OCCURRENCE_A"
+        },
+        "owner": "MODEL_OWNER_A",
+        "captureConnection": "MODEL_CONNECTION_A",
+        "commit": "ACK_KNOWN",
+        "readback": "MATCHED",
+        "close": "CLOSED",
+        "rollback": "NOT_APPLICABLE",
+        "confirmation": {
+          "scope": {
+            "source": "MODEL_SOURCE_A",
+            "tenant": "MODEL_TENANT_A",
+            "occurrence": "MODEL_OCCURRENCE_A"
+          },
+          "connection": "MODEL_CONNECTION_A",
+          "unit": "MODEL_CONFIRM",
+          "verifier": "MODEL_VERIFIER_B"
+        }
+      },
+      "expected": {
+        "kind": "MODEL_ONLY_NO_EFFECT_AUTHORITY",
+        "authorizesPhysicalEffects": false,
+        "acceptedInModel": false,
+        "code": "MODEL_INDEPENDENT_CONFIRMATION_REQUIRED",
+        "details": {}
+      },
+      "expectedRationale": "A conexão original não é confirmação independente, ainda que o rótulo de verifier seja diferente."
+    },
+    {
+      "kind": "MODEL_ONLY_NO_EFFECT_AUTHORITY",
+      "authorizesPhysicalEffects": false,
+      "id": "MODEL_OBSERVATION_FOREIGN_NAMESPACE",
+      "contract": "OBSERVATION",
+      "input": {
+        "scope": {
+          "source": "MODEL_SOURCE_A",
+          "tenant": "MODEL_TENANT_A",
+          "occurrence": "MODEL_OCCURRENCE_A"
+        },
+        "expectedScope": {
+          "source": "MODEL_SOURCE_A",
+          "tenant": "MODEL_TENANT_A",
+          "occurrence": "MODEL_OCCURRENCE_A"
+        },
+        "owner": "MODEL_OWNER_A",
+        "captureConnection": "MODEL_CONNECTION_A",
+        "commit": "ACK_KNOWN",
+        "readback": "MATCHED",
+        "close": "CLOSED",
+        "rollback": "NOT_APPLICABLE",
+        "confirmation": {
+          "scope": {
+            "source": "MODEL_SOURCE_B",
+            "tenant": "MODEL_TENANT_B",
+            "occurrence": "MODEL_OCCURRENCE_B"
+          },
+          "connection": "MODEL_CONNECTION_B",
+          "unit": "MODEL_CONFIRM",
+          "verifier": "MODEL_VERIFIER_B"
+        }
+      },
+      "expected": {
+        "kind": "MODEL_ONLY_NO_EFFECT_AUTHORITY",
+        "authorizesPhysicalEffects": false,
+        "acceptedInModel": false,
+        "code": "MODEL_SCOPE_MISMATCH",
+        "details": {}
+      },
+      "expectedRationale": "Readback de namespace estrangeiro não confirma a ocorrência selecionada."
+    },
+    {
+      "kind": "MODEL_ONLY_NO_EFFECT_AUTHORITY",
+      "authorizesPhysicalEffects": false,
+      "id": "MODEL_OBSERVATION_CAPTURE_AS_CONFIRMATION",
+      "contract": "OBSERVATION",
+      "input": {
+        "scope": {
+          "source": "MODEL_SOURCE_A",
+          "tenant": "MODEL_TENANT_A",
+          "occurrence": "MODEL_OCCURRENCE_A"
+        },
+        "expectedScope": {
+          "source": "MODEL_SOURCE_A",
+          "tenant": "MODEL_TENANT_A",
+          "occurrence": "MODEL_OCCURRENCE_A"
+        },
+        "owner": "MODEL_OWNER_A",
+        "captureConnection": "MODEL_CONNECTION_A",
+        "commit": "ACK_KNOWN",
+        "readback": "MATCHED",
+        "close": "CLOSED",
+        "rollback": "NOT_APPLICABLE",
+        "confirmation": {
+          "scope": {
+            "source": "MODEL_SOURCE_A",
+            "tenant": "MODEL_TENANT_A",
+            "occurrence": "MODEL_OCCURRENCE_A"
+          },
+          "connection": "MODEL_CONNECTION_B",
+          "unit": "MODEL_CAPTURE",
+          "verifier": "MODEL_VERIFIER_B"
+        }
+      },
+      "expected": {
+        "kind": "MODEL_ONLY_NO_EFFECT_AUTHORITY",
+        "authorizesPhysicalEffects": false,
+        "acceptedInModel": false,
+        "code": "MODEL_INDEPENDENT_CONFIRMATION_REQUIRED",
+        "details": {}
+      },
+      "expectedRationale": "A própria unidade de captura não pode ser relabelada como confirmação."
+    },
+    {
+      "kind": "MODEL_ONLY_NO_EFFECT_AUTHORITY",
+      "authorizesPhysicalEffects": false,
+      "id": "MODEL_OBSERVATION_COMPENSATION_AFTER_UNKNOWN",
+      "contract": "OBSERVATION",
+      "input": {
+        "scope": {
+          "source": "MODEL_SOURCE_A",
+          "tenant": "MODEL_TENANT_A",
+          "occurrence": "MODEL_OCCURRENCE_A"
+        },
+        "expectedScope": {
+          "source": "MODEL_SOURCE_A",
+          "tenant": "MODEL_TENANT_A",
+          "occurrence": "MODEL_OCCURRENCE_A"
+        },
+        "owner": "MODEL_OWNER_A",
+        "captureConnection": "MODEL_CONNECTION_A",
+        "commit": "UNKNOWN",
+        "readback": "ABSENT",
+        "close": "CLOSED",
+        "rollback": "CONFIRMED",
+        "confirmation": {
+          "scope": {
+            "source": "MODEL_SOURCE_A",
+            "tenant": "MODEL_TENANT_A",
+            "occurrence": "MODEL_OCCURRENCE_A"
+          },
+          "connection": "MODEL_CONNECTION_B",
+          "unit": "MODEL_CONFIRM",
+          "verifier": "MODEL_VERIFIER_B"
+        }
+      },
+      "expected": {
+        "kind": "MODEL_ONLY_NO_EFFECT_AUTHORITY",
+        "authorizesPhysicalEffects": false,
+        "acceptedInModel": false,
+        "code": "MODEL_COMPENSATION_AFTER_POSSIBLE_COMMIT_REFUSED",
+        "details": {}
+      },
+      "expectedRationale": "Uma tentativa incerta não permite tratar rollback compensatório como recuperação válida."
+    },
+    {
+      "kind": "MODEL_ONLY_NO_EFFECT_AUTHORITY",
+      "authorizesPhysicalEffects": false,
+      "id": "MODEL_OBSERVATION_ABSENCE_WITHOUT_ACK_INFERENCE",
+      "contract": "OBSERVATION",
+      "input": {
+        "scope": {
+          "source": "MODEL_SOURCE_A",
+          "tenant": "MODEL_TENANT_A",
+          "occurrence": "MODEL_OCCURRENCE_A"
+        },
+        "expectedScope": {
+          "source": "MODEL_SOURCE_A",
+          "tenant": "MODEL_TENANT_A",
+          "occurrence": "MODEL_OCCURRENCE_A"
+        },
+        "owner": "MODEL_OWNER_A",
+        "captureConnection": "MODEL_CONNECTION_A",
+        "commit": "NOT_ATTEMPTED",
+        "readback": "ABSENT",
+        "close": "CLOSED",
+        "rollback": "NOT_ATTEMPTED",
+        "confirmation": {
+          "scope": {
+            "source": "MODEL_SOURCE_A",
+            "tenant": "MODEL_TENANT_A",
+            "occurrence": "MODEL_OCCURRENCE_A"
+          },
+          "connection": "MODEL_CONNECTION_B",
+          "unit": "MODEL_CONFIRM",
+          "verifier": "MODEL_VERIFIER_B"
+        }
+      },
+      "expected": {
+        "kind": "MODEL_ONLY_NO_EFFECT_AUTHORITY",
+        "authorizesPhysicalEffects": false,
+        "acceptedInModel": true,
+        "code": "MODEL_CURRENT_ABSENT_NO_COMMIT_INFERENCE",
+        "details": {
+          "commitKnowledge": "NOT_ATTEMPTED",
+          "readbackState": "ABSENT",
+          "closeState": "CLOSED",
+          "rollbackState": "NOT_ATTEMPTED",
+          "candidateConfirmedInModel": false,
+          "historicalAckReconstructed": false,
+          "historicalRollbackInferredFromAbsence": false
+        }
+      },
+      "expectedRationale": "NOT_ATTEMPTED é entrada explícita do modelo; a ausência não cria prova de rollback nem de ack."
+    },
+    {
+      "kind": "MODEL_ONLY_NO_EFFECT_AUTHORITY",
+      "authorizesPhysicalEffects": false,
+      "id": "MODEL_OBSERVATION_KNOWN_ACK_ABSENT",
+      "contract": "OBSERVATION",
+      "input": {
+        "scope": {
+          "source": "MODEL_SOURCE_A",
+          "tenant": "MODEL_TENANT_A",
+          "occurrence": "MODEL_OCCURRENCE_A"
+        },
+        "expectedScope": {
+          "source": "MODEL_SOURCE_A",
+          "tenant": "MODEL_TENANT_A",
+          "occurrence": "MODEL_OCCURRENCE_A"
+        },
+        "owner": "MODEL_OWNER_A",
+        "captureConnection": "MODEL_CONNECTION_A",
+        "commit": "ACK_KNOWN",
+        "readback": "ABSENT",
+        "close": "CLOSED",
+        "rollback": "NOT_APPLICABLE",
+        "confirmation": {
+          "scope": {
+            "source": "MODEL_SOURCE_A",
+            "tenant": "MODEL_TENANT_A",
+            "occurrence": "MODEL_OCCURRENCE_A"
+          },
+          "connection": "MODEL_CONNECTION_B",
+          "unit": "MODEL_CONFIRM",
+          "verifier": "MODEL_VERIFIER_B"
+        }
+      },
+      "expected": {
+        "kind": "MODEL_ONLY_NO_EFFECT_AUTHORITY",
+        "authorizesPhysicalEffects": false,
+        "acceptedInModel": true,
+        "code": "MODEL_CURRENT_ABSENT_AFTER_KNOWN_ACK",
+        "details": {
+          "commitKnowledge": "ACK_KNOWN",
+          "readbackState": "ABSENT",
+          "closeState": "CLOSED",
+          "rollbackState": "NOT_APPLICABLE",
+          "candidateConfirmedInModel": false,
+          "historicalAckReconstructed": false,
+          "historicalRollbackInferredFromAbsence": false
+        }
+      },
+      "expectedRationale": "Observação posterior de ausência não reescreve um ack conhecido nem promove confirmação."
+    },
+    {
+      "kind": "MODEL_ONLY_NO_EFFECT_AUTHORITY",
+      "authorizesPhysicalEffects": false,
+      "id": "MODEL_OBSERVATION_SAME_OWNER_AS_VERIFIER",
+      "contract": "OBSERVATION",
+      "input": {
+        "scope": {
+          "source": "MODEL_SOURCE_A",
+          "tenant": "MODEL_TENANT_A",
+          "occurrence": "MODEL_OCCURRENCE_A"
+        },
+        "expectedScope": {
+          "source": "MODEL_SOURCE_A",
+          "tenant": "MODEL_TENANT_A",
+          "occurrence": "MODEL_OCCURRENCE_A"
+        },
+        "owner": "MODEL_OWNER_A",
+        "captureConnection": "MODEL_CONNECTION_A",
+        "commit": "ACK_KNOWN",
+        "readback": "MATCHED",
+        "close": "CLOSED",
+        "rollback": "NOT_APPLICABLE",
+        "confirmation": {
+          "scope": {
+            "source": "MODEL_SOURCE_A",
+            "tenant": "MODEL_TENANT_A",
+            "occurrence": "MODEL_OCCURRENCE_A"
+          },
+          "connection": "MODEL_CONNECTION_B",
+          "unit": "MODEL_CONFIRM",
+          "verifier": "MODEL_OWNER_A"
+        }
+      },
+      "expected": {
+        "kind": "MODEL_ONLY_NO_EFFECT_AUTHORITY",
+        "authorizesPhysicalEffects": false,
+        "acceptedInModel": false,
+        "code": "MODEL_INDEPENDENT_CONFIRMATION_REQUIRED",
+        "details": {}
+      },
+      "expectedRationale": "Outro connection label sozinho não substitui a separação do verifier no contrato de design."
+    },
+    {
+      "kind": "MODEL_ONLY_NO_EFFECT_AUTHORITY",
+      "authorizesPhysicalEffects": false,
+      "id": "MODEL_OBSERVATION_UNKNOWN_PENDING",
+      "contract": "OBSERVATION",
+      "input": {
+        "scope": {
+          "source": "MODEL_SOURCE_A",
+          "tenant": "MODEL_TENANT_A",
+          "occurrence": "MODEL_OCCURRENCE_A"
+        },
+        "expectedScope": {
+          "source": "MODEL_SOURCE_A",
+          "tenant": "MODEL_TENANT_A",
+          "occurrence": "MODEL_OCCURRENCE_A"
+        },
+        "owner": "MODEL_OWNER_A",
+        "captureConnection": "MODEL_CONNECTION_A",
+        "commit": "UNKNOWN",
+        "readback": "NOT_OBSERVED",
+        "close": "UNKNOWN",
+        "rollback": "NOT_APPLICABLE",
+        "confirmation": null
+      },
+      "expected": {
+        "kind": "MODEL_ONLY_NO_EFFECT_AUTHORITY",
+        "authorizesPhysicalEffects": false,
+        "acceptedInModel": true,
+        "code": "MODEL_OBSERVATION_PENDING",
+        "details": {
+          "commitKnowledge": "UNKNOWN",
+          "readbackState": "NOT_OBSERVED",
+          "closeState": "UNKNOWN",
+          "rollbackState": "NOT_APPLICABLE",
+          "candidateConfirmedInModel": false,
+          "historicalAckReconstructed": false,
+          "historicalRollbackInferredFromAbsence": false
+        }
+      },
+      "expectedRationale": "Sem observação e com close incerto, conservar ambas as dimensões sem inventar objeto fechado."
+    },
+    {
+      "kind": "MODEL_ONLY_NO_EFFECT_AUTHORITY",
+      "authorizesPhysicalEffects": false,
+      "id": "MODEL_OBSERVATION_CURRENT_INCONSISTENT",
+      "contract": "OBSERVATION",
+      "input": {
+        "scope": {
+          "source": "MODEL_SOURCE_A",
+          "tenant": "MODEL_TENANT_A",
+          "occurrence": "MODEL_OCCURRENCE_A"
+        },
+        "expectedScope": {
+          "source": "MODEL_SOURCE_A",
+          "tenant": "MODEL_TENANT_A",
+          "occurrence": "MODEL_OCCURRENCE_A"
+        },
+        "owner": "MODEL_OWNER_A",
+        "captureConnection": "MODEL_CONNECTION_A",
+        "commit": "ACK_KNOWN",
+        "readback": "INCONSISTENT",
+        "close": "CLOSED",
+        "rollback": "NOT_APPLICABLE",
+        "confirmation": {
+          "scope": {
+            "source": "MODEL_SOURCE_A",
+            "tenant": "MODEL_TENANT_A",
+            "occurrence": "MODEL_OCCURRENCE_A"
+          },
+          "connection": "MODEL_CONNECTION_B",
+          "unit": "MODEL_CONFIRM",
+          "verifier": "MODEL_VERIFIER_B"
+        }
+      },
+      "expected": {
+        "kind": "MODEL_ONLY_NO_EFFECT_AUTHORITY",
+        "authorizesPhysicalEffects": false,
+        "acceptedInModel": true,
+        "code": "MODEL_CURRENT_STATE_INCONSISTENT",
+        "details": {
+          "commitKnowledge": "ACK_KNOWN",
+          "readbackState": "INCONSISTENT",
+          "closeState": "CLOSED",
+          "rollbackState": "NOT_APPLICABLE",
+          "candidateConfirmedInModel": false,
+          "historicalAckReconstructed": false,
+          "historicalRollbackInferredFromAbsence": false
+        }
+      },
+      "expectedRationale": "Divergência atual é uma classificação de falha distinta de ausência e indisponibilidade."
+    },
+    {
+      "kind": "MODEL_ONLY_NO_EFFECT_AUTHORITY",
+      "authorizesPhysicalEffects": false,
+      "id": "MODEL_BUDGET_WORK_AFTER_COMMIT_ATTEMPT",
+      "contract": "BUDGET",
+      "input": {
+        "creditSemantics": "ABSTRACT_MODEL_CREDIT_NOT_SQL_OR_HTTP",
+        "selectedUnit": "MODEL_CAPTURE",
+        "units": {
+          "MODEL_ANTECEDENT": {
+            "limitCredits": 1,
+            "reservedSuffixCredits": 1
+          },
+          "MODEL_CAPTURE": {
+            "limitCredits": 20,
+            "reservedSuffixCredits": 11
+          },
+          "MODEL_CONFIRM": {
+            "limitCredits": 7,
+            "reservedSuffixCredits": 2
+          },
+          "MODEL_RECOVERY": {
+            "limitCredits": 5,
+            "reservedSuffixCredits": 2
+          }
+        },
+        "events": [
+          {
+            "event": "CHARGE",
+            "unit": "MODEL_CAPTURE",
+            "costCredits": 4,
+            "proofCredits": 0
+          },
+          {
+            "event": "COMMIT_ATTEMPT",
+            "unit": "MODEL_CAPTURE",
+            "costCredits": 2
+          },
+          {
+            "event": "CHARGE",
+            "unit": "MODEL_CAPTURE",
+            "costCredits": 1,
+            "proofCredits": 0
+          }
+        ]
+      },
+      "expected": {
+        "kind": "MODEL_ONLY_NO_EFFECT_AUTHORITY",
+        "authorizesPhysicalEffects": false,
+        "acceptedInModel": false,
+        "code": "MODEL_CAPTURE_WORK_AFTER_COMMIT_ATTEMPT_REFUSED",
+        "details": {
+          "selectedUnit": "MODEL_CAPTURE",
+          "usedCredits": 6,
+          "remainingCredits": 14,
+          "reservedSuffixCredits": 11,
+          "commitAttemptsInModel": 1,
+          "finalizedInModel": false,
+          "otherUnitsConsumedCredits": 0
+        }
+      },
+      "expectedRationale": "Depois de consumir 4 de trabalho e 2 da tentativa, novo trabalho da captura é recusado; consumo 6 e tentativa 1 permanecem."
+    },
+    {
+      "kind": "MODEL_ONLY_NO_EFFECT_AUTHORITY",
+      "authorizesPhysicalEffects": false,
+      "id": "MODEL_BUDGET_COMMIT_IN_CONFIRMATION",
+      "contract": "BUDGET",
+      "input": {
+        "creditSemantics": "ABSTRACT_MODEL_CREDIT_NOT_SQL_OR_HTTP",
+        "selectedUnit": "MODEL_CONFIRM",
+        "units": {
+          "MODEL_ANTECEDENT": {
+            "limitCredits": 1,
+            "reservedSuffixCredits": 1
+          },
+          "MODEL_CAPTURE": {
+            "limitCredits": 20,
+            "reservedSuffixCredits": 11
+          },
+          "MODEL_CONFIRM": {
+            "limitCredits": 7,
+            "reservedSuffixCredits": 2
+          },
+          "MODEL_RECOVERY": {
+            "limitCredits": 5,
+            "reservedSuffixCredits": 2
+          }
+        },
+        "events": [
+          {
+            "event": "COMMIT_ATTEMPT",
+            "unit": "MODEL_CONFIRM",
+            "costCredits": 2
+          }
+        ]
+      },
+      "expected": {
+        "kind": "MODEL_ONLY_NO_EFFECT_AUTHORITY",
+        "authorizesPhysicalEffects": false,
+        "acceptedInModel": false,
+        "code": "MODEL_COMMIT_OUTSIDE_CAPTURE_REFUSED",
+        "details": {
+          "selectedUnit": "MODEL_CONFIRM",
+          "usedCredits": 0,
+          "remainingCredits": 7,
+          "reservedSuffixCredits": 2,
+          "commitAttemptsInModel": 0,
+          "finalizedInModel": false,
+          "otherUnitsConsumedCredits": 0
+        }
+      },
+      "expectedRationale": "Confirmação read-only do modelo não registra tentativa de commit nem toma a autoridade da captura."
+    },
+    {
+      "kind": "MODEL_ONLY_NO_EFFECT_AUTHORITY",
+      "authorizesPhysicalEffects": false,
+      "id": "MODEL_BUDGET_COMMIT_COST_EXACT_CAP",
+      "contract": "BUDGET",
+      "input": {
+        "creditSemantics": "ABSTRACT_MODEL_CREDIT_NOT_SQL_OR_HTTP",
+        "selectedUnit": "MODEL_CAPTURE",
+        "units": {
+          "MODEL_ANTECEDENT": {
+            "limitCredits": 1,
+            "reservedSuffixCredits": 1
+          },
+          "MODEL_CAPTURE": {
+            "limitCredits": 20,
+            "reservedSuffixCredits": 11
+          },
+          "MODEL_CONFIRM": {
+            "limitCredits": 7,
+            "reservedSuffixCredits": 2
+          },
+          "MODEL_RECOVERY": {
+            "limitCredits": 5,
+            "reservedSuffixCredits": 2
+          }
+        },
+        "events": [
+          {
+            "event": "CHARGE",
+            "unit": "MODEL_CAPTURE",
+            "costCredits": 4,
+            "proofCredits": 0
+          },
+          {
+            "event": "COMMIT_ATTEMPT",
+            "unit": "MODEL_CAPTURE",
+            "costCredits": 5
+          }
+        ]
+      },
+      "expected": {
+        "kind": "MODEL_ONLY_NO_EFFECT_AUTHORITY",
+        "authorizesPhysicalEffects": false,
+        "acceptedInModel": true,
+        "code": "MODEL_BUDGET_SEQUENCE_VALID",
+        "details": {
+          "selectedUnit": "MODEL_CAPTURE",
+          "usedCredits": 9,
+          "remainingCredits": 11,
+          "reservedSuffixCredits": 11,
+          "commitAttemptsInModel": 1,
+          "finalizedInModel": false,
+          "otherUnitsConsumedCredits": 0
+        }
+      },
+      "expectedRationale": "4 de trabalho + 5 do custo explícito da tentativa + 11 reservados = cap 20. Só os primeiros 9 são consumidos; a reserva permanece separada."
+    },
+    {
+      "kind": "MODEL_ONLY_NO_EFFECT_AUTHORITY",
+      "authorizesPhysicalEffects": false,
+      "id": "MODEL_BUDGET_COMMIT_COST_CAP_MINUS_ONE",
+      "contract": "BUDGET",
+      "input": {
+        "creditSemantics": "ABSTRACT_MODEL_CREDIT_NOT_SQL_OR_HTTP",
+        "selectedUnit": "MODEL_CAPTURE",
+        "units": {
+          "MODEL_ANTECEDENT": {
+            "limitCredits": 1,
+            "reservedSuffixCredits": 1
+          },
+          "MODEL_CAPTURE": {
+            "limitCredits": 19,
+            "reservedSuffixCredits": 11
+          },
+          "MODEL_CONFIRM": {
+            "limitCredits": 7,
+            "reservedSuffixCredits": 2
+          },
+          "MODEL_RECOVERY": {
+            "limitCredits": 5,
+            "reservedSuffixCredits": 2
+          }
+        },
+        "events": [
+          {
+            "event": "CHARGE",
+            "unit": "MODEL_CAPTURE",
+            "costCredits": 4,
+            "proofCredits": 0
+          },
+          {
+            "event": "COMMIT_ATTEMPT",
+            "unit": "MODEL_CAPTURE",
+            "costCredits": 5
+          }
+        ]
+      },
+      "expected": {
+        "kind": "MODEL_ONLY_NO_EFFECT_AUTHORITY",
+        "authorizesPhysicalEffects": false,
+        "acceptedInModel": false,
+        "code": "MODEL_COMMIT_BUDGET_INSUFFICIENT_FOR_SUFFIX",
+        "details": {
+          "selectedUnit": "MODEL_CAPTURE",
+          "usedCredits": 4,
+          "remainingCredits": 15,
+          "reservedSuffixCredits": 11,
+          "commitAttemptsInModel": 0,
+          "finalizedInModel": false,
+          "otherUnitsConsumedCredits": 0
+        }
+      },
+      "expectedRationale": "4 + 5 + 11 = 20 excede cap 19. Recusa antes do débito do custo e antes de registrar tentativa; só o trabalho 4 permanece consumido."
+    },
+    {
+      "kind": "MODEL_ONLY_NO_EFFECT_AUTHORITY",
+      "authorizesPhysicalEffects": false,
+      "id": "MODEL_BUDGET_COMMIT_COST_MISSING",
+      "contract": "BUDGET",
+      "input": {
+        "creditSemantics": "ABSTRACT_MODEL_CREDIT_NOT_SQL_OR_HTTP",
+        "selectedUnit": "MODEL_CAPTURE",
+        "units": {
+          "MODEL_ANTECEDENT": {
+            "limitCredits": 1,
+            "reservedSuffixCredits": 1
+          },
+          "MODEL_CAPTURE": {
+            "limitCredits": 20,
+            "reservedSuffixCredits": 11
+          },
+          "MODEL_CONFIRM": {
+            "limitCredits": 7,
+            "reservedSuffixCredits": 2
+          },
+          "MODEL_RECOVERY": {
+            "limitCredits": 5,
+            "reservedSuffixCredits": 2
+          }
+        },
+        "events": [
+          {
+            "event": "CHARGE",
+            "unit": "MODEL_CAPTURE",
+            "costCredits": 4,
+            "proofCredits": 0
+          },
+          {
+            "event": "COMMIT_ATTEMPT",
+            "unit": "MODEL_CAPTURE"
+          }
+        ]
+      },
+      "expected": {
+        "kind": "MODEL_ONLY_NO_EFFECT_AUTHORITY",
+        "authorizesPhysicalEffects": false,
+        "acceptedInModel": false,
+        "code": "MODEL_EVENT_SHAPE",
+        "details": {
+          "selectedUnit": "MODEL_CAPTURE",
+          "usedCredits": 4,
+          "remainingCredits": 16,
+          "reservedSuffixCredits": 11,
+          "commitAttemptsInModel": 0,
+          "finalizedInModel": false,
+          "otherUnitsConsumedCredits": 0
+        }
+      },
+      "expectedRationale": "Custo ausente não recebe default nem é absorvido pelo FINALIZE; a forma do evento recusa sem custo ou tentativa novos."
+    },
+    {
+      "kind": "MODEL_ONLY_NO_EFFECT_AUTHORITY",
+      "authorizesPhysicalEffects": false,
+      "id": "MODEL_BUDGET_COMMIT_COST_ZERO",
+      "contract": "BUDGET",
+      "input": {
+        "creditSemantics": "ABSTRACT_MODEL_CREDIT_NOT_SQL_OR_HTTP",
+        "selectedUnit": "MODEL_CAPTURE",
+        "units": {
+          "MODEL_ANTECEDENT": {
+            "limitCredits": 1,
+            "reservedSuffixCredits": 1
+          },
+          "MODEL_CAPTURE": {
+            "limitCredits": 20,
+            "reservedSuffixCredits": 11
+          },
+          "MODEL_CONFIRM": {
+            "limitCredits": 7,
+            "reservedSuffixCredits": 2
+          },
+          "MODEL_RECOVERY": {
+            "limitCredits": 5,
+            "reservedSuffixCredits": 2
+          }
+        },
+        "events": [
+          {
+            "event": "CHARGE",
+            "unit": "MODEL_CAPTURE",
+            "costCredits": 4,
+            "proofCredits": 0
+          },
+          {
+            "event": "COMMIT_ATTEMPT",
+            "unit": "MODEL_CAPTURE",
+            "costCredits": 0
+          }
+        ]
+      },
+      "expected": {
+        "kind": "MODEL_ONLY_NO_EFFECT_AUTHORITY",
+        "authorizesPhysicalEffects": false,
+        "acceptedInModel": false,
+        "code": "MODEL_INTEGER_BOUND",
+        "details": {
+          "selectedUnit": "MODEL_CAPTURE",
+          "usedCredits": 4,
+          "remainingCredits": 16,
+          "reservedSuffixCredits": 11,
+          "commitAttemptsInModel": 0,
+          "finalizedInModel": false,
+          "otherUnitsConsumedCredits": 0
+        }
+      },
+      "expectedRationale": "O custo da tentativa exige inteiro positivo explícito; zero recusa antes de débito ou registro e não amplia saldo."
+    },
+    {
+      "kind": "MODEL_ONLY_NO_EFFECT_AUTHORITY",
+      "authorizesPhysicalEffects": false,
+      "id": "MODEL_BUDGET_COMMIT_COST_SUM_OVERFLOW",
+      "contract": "BUDGET",
+      "input": {
+        "creditSemantics": "ABSTRACT_MODEL_CREDIT_NOT_SQL_OR_HTTP",
+        "selectedUnit": "MODEL_CAPTURE",
+        "units": {
+          "MODEL_ANTECEDENT": {
+            "limitCredits": 1,
+            "reservedSuffixCredits": 1
+          },
+          "MODEL_CAPTURE": {
+            "limitCredits": 9223372036854775807,
+            "reservedSuffixCredits": 1
+          },
+          "MODEL_CONFIRM": {
+            "limitCredits": 7,
+            "reservedSuffixCredits": 2
+          },
+          "MODEL_RECOVERY": {
+            "limitCredits": 5,
+            "reservedSuffixCredits": 2
+          }
+        },
+        "events": [
+          {
+            "event": "COMMIT_ATTEMPT",
+            "unit": "MODEL_CAPTURE",
+            "costCredits": 9223372036854775807
+          }
+        ]
+      },
+      "expected": {
+        "kind": "MODEL_ONLY_NO_EFFECT_AUTHORITY",
+        "authorizesPhysicalEffects": false,
+        "acceptedInModel": false,
+        "code": "MODEL_BUDGET_SUM_OVERFLOW",
+        "details": {
+          "selectedUnit": "MODEL_CAPTURE",
+          "usedCredits": 0,
+          "remainingCredits": 9223372036854775807,
+          "reservedSuffixCredits": 1,
+          "commitAttemptsInModel": 0,
+          "finalizedInModel": false,
+          "otherUnitsConsumedCredits": 0
+        }
+      },
+      "expectedRationale": "0 + máximo int64 + reserva 1 ultrapassa int64. Recusa antes de consumo ou tentativa; o valor máximo permanece literal, sem arredondamento."
+    }
+  ]
+}

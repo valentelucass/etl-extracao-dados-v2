@@ -19,6 +19,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.function.Function;
 
 /**
  * Coleta evidência remota exclusivamente em memória e grava somente o summary sanitizado em target.
@@ -281,14 +282,27 @@ public final class ContractRemoteEvidenceRunner {
             final ContractDateWindow window,
             final int pageSize,
             final List<ContractObservedPage> fullWindowTraversal) {
+        return dataExportRowsForIdentity(
+                template,
+                window,
+                fullWindowTraversal,
+                dailyWindow -> traverse(execution, template, dailyWindow, pageSize));
+    }
+
+    static List<JsonNode> dataExportRowsForIdentity(
+            final DataExportTemplate template,
+            final ContractDateWindow window,
+            final List<ContractObservedPage> fullWindowTraversal,
+            final Function<ContractDateWindow, List<ContractObservedPage>> dailyTraversal) {
         if (template != DataExportTemplate.COLETAS
                 || window.startInclusive().equals(window.endInclusive())) {
             return flatten(fullWindowTraversal);
         }
         final List<JsonNode> rows = new ArrayList<>();
         for (final ContractDateWindow dailyWindow : window.asDailyWindows()) {
-            rows.addAll(flatten(traverse(execution, template, dailyWindow, pageSize)));
+            rows.addAll(flatten(dailyTraversal.apply(dailyWindow)));
         }
+        ContractColetasWindowIdentityBridge.verify(flatten(fullWindowTraversal), rows);
         return List.copyOf(rows);
     }
 

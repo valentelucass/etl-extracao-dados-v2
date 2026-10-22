@@ -7,7 +7,6 @@ import br.com.esl.etl.v2.plataforma.autorizacao.RuntimeAuthorizationBoundary;
 import br.com.esl.etl.v2.plataforma.configuracao.RuntimeConfiguration;
 import br.com.esl.etl.v2.plataforma.configuracao.RuntimePreflightReport;
 import br.com.esl.etl.v2.plataforma.configuracao.RuntimeTargetPreflight;
-
 import java.util.Objects;
 import java.util.UUID;
 

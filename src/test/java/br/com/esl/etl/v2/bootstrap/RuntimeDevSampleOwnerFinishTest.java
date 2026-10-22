@@ -9,12 +9,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import br.com.esl.etl.v2.plataforma.fonte.dataexport.RuntimeBootstrapTestFixture;
 import br.com.esl.etl.v2.plataforma.resiliencia.RuntimeExitCategory;
-
-import org.junit.jupiter.api.Test;
-
 import java.sql.SQLException;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
+import org.junit.jupiter.api.Test;
 
 /** Only memory/lifecycle forwarding under offline fixtures; no physical readback is claimed. */
 class RuntimeDevSampleOwnerFinishTest {

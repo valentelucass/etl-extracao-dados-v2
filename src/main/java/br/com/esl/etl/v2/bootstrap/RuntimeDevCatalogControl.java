@@ -3,14 +3,12 @@ package br.com.esl.etl.v2.bootstrap;
 import br.com.esl.etl.v2.plataforma.configuracao.C78DevPeerProof;
 import br.com.esl.etl.v2.plataforma.persistencia.controle.C78DevCatalogAdmission;
 import br.com.esl.etl.v2.plataforma.persistencia.controle.C78DevCatalogPlan;
-
 import com.fasterxml.jackson.core.StreamReadFeature;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.sun.nio.file.ExtendedOpenOption;
-
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -72,6 +70,7 @@ final class RuntimeDevCatalogControl
                             .equals(dispatch.descriptor.path("target").textValue())) {
                 throw RuntimeDevCatalogDispatch.refused("START_BINDING_OR_REPLAY");
             }
+            validatePlanSelection(plan, dispatch.descriptor);
             dispatch.checkDeadline();
             final var event = event("START_REQUEST");
             publish(event);
@@ -133,6 +132,7 @@ final class RuntimeDevCatalogControl
                     || selectsAttempted > 0 && !peerProved) {
                 throw RuntimeDevCatalogDispatch.refused("OUTCOME_PHASE");
             }
+            validatePlanSelection(plan, dispatch.descriptor);
             final var receipt = event("JDBC_OUTCOME");
             receipt.put("connectionClosed", connectionClosed);
             receipt.put("selectsAttempted", selectsAttempted);
@@ -151,6 +151,19 @@ final class RuntimeDevCatalogControl
             outcomeWritten = true;
         } catch (final IOException | RuntimeException failure) {
             throw new SQLException("DEV_CATALOG_OUTCOME_UNCONFIRMED");
+        }
+    }
+
+    static void validatePlanSelection(final C78DevCatalogPlan plan, final JsonNode descriptor)
+            throws IOException {
+        try {
+            if (!plan.equals(
+                    RuntimeDevCatalogExecution.planForDispatch(
+                            descriptor, plan.invocationId(), plan.target()))) {
+                throw RuntimeDevCatalogDispatch.refused("PLAN_OPERATION_OR_SCOPE_BINDING");
+            }
+        } catch (final IllegalArgumentException | NullPointerException malformed) {
+            throw RuntimeDevCatalogDispatch.refused("PLAN_OPERATION_OR_SCOPE_BINDING");
         }
     }
 

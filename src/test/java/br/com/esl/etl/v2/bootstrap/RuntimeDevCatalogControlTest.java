@@ -4,16 +4,13 @@ import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import br.com.esl.etl.v2.plataforma.configuracao.C78DevPeerProof;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-
-import org.junit.jupiter.api.Test;
-
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.time.Instant;
+import org.junit.jupiter.api.Test;
 
 /** Pure public IPC controls; no controller authority, provider, socket or native probe. */
 class RuntimeDevCatalogControlTest {

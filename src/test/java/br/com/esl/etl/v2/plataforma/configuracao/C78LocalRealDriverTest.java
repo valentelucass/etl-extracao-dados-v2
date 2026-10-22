@@ -6,13 +6,11 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.microsoft.sqlserver.jdbc.SQLServerDriver;
-
-import org.junit.jupiter.api.Test;
-
 import java.io.ByteArrayOutputStream;
 import java.nio.ByteBuffer;
 import java.security.cert.X509Certificate;
 import java.util.Properties;
+import org.junit.jupiter.api.Test;
 
 /** Driver12.8.2 + real JSSE, fake byte streams. No socket/server/private key/SQL. */
 class C78LocalRealDriverTest {

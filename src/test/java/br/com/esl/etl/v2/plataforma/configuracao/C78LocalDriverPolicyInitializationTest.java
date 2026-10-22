@@ -3,9 +3,6 @@ package br.com.esl.etl.v2.plataforma.configuracao;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.io.TempDir;
-
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.nio.charset.StandardCharsets;
@@ -16,8 +13,9 @@ import java.util.jar.Attributes;
 import java.util.jar.JarEntry;
 import java.util.jar.JarOutputStream;
 import java.util.jar.Manifest;
-
 import javax.tools.ToolProvider;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 class C78LocalDriverPolicyInitializationTest {
     @TempDir Path privateDirectory;
@@ -94,12 +92,19 @@ public final class SQLServerDriver implements java.sql.Driver {
                                 .getCodeSource()
                                 .getLocation()
                                 .toURI());
+        // Maven keeps the private probe and product code in separate output roots.
+        final Path probeClasses =
+                Path.of(Probe.class.getProtectionDomain().getCodeSource().getLocation().toURI());
+        final String classpath =
+                classes + File.pathSeparator + probeClasses + File.pathSeparator + jar;
         final Path java = Path.of(System.getProperty("java.home"), "bin", "java.exe");
         final var process =
                 new ProcessBuilder(
                                 java.toString(),
+                                "-Xms16m",
+                                "-Xmx128m",
                                 "-cp",
-                                classes + File.pathSeparator + jar,
+                                classpath,
                                 Probe.class.getName(),
                                 mode)
                         .start();

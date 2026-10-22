@@ -12,11 +12,7 @@ import br.com.esl.etl.v2.plataforma.fonte.dataexport.DataExportRetryPolicy;
 import br.com.esl.etl.v2.plataforma.fonte.dataexport.DataExportTemplate;
 import br.com.esl.etl.v2.plataforma.fonte.dataexport.DataExportTransport;
 import br.com.esl.etl.v2.plataforma.resiliencia.EslResiliencePolicy;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
-
-import org.junit.jupiter.api.Test;
-
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
@@ -27,6 +23,7 @@ import java.sql.SQLException;
 import java.time.Duration;
 import java.time.ZoneId;
 import java.util.function.Function;
+import org.junit.jupiter.api.Test;
 
 /** Negative source-boundary controls only; no fixture proves source or Root admission. */
 class RuntimeDevSourceProvisioningTest {

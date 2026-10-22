@@ -1,6 +1,9 @@
 package br.com.esl.etl.v2.contratos;
 
-/** Resultado sanitizado de uma travessia e sua comparação com uma repetição. */
+/**
+ * Resultado sanitizado de uma travessia e sua comparação com uma repetição. As associações entre
+ * IDs e chaves naturais permanecem exclusivamente em memória no comparador.
+ */
 public record ContractPaginationResult(
         int firstRunRecordCount,
         int secondRunRecordCount,
@@ -28,7 +31,8 @@ public record ContractPaginationResult(
         boolean secondRunKeysUnique,
         boolean entityCountsEqual,
         boolean orderedKeysStable,
-        boolean keySetsStable) {
+        boolean keySetsStable,
+        boolean entityKeyAssociationsStable) {
 
     public ContractPaginationResult {
         if (firstRunRecordCount < 0
@@ -67,7 +71,8 @@ public record ContractPaginationResult(
                 && secondRunKeysUnique
                 && entityCountsEqual
                 && orderedKeysStable
-                && keySetsStable;
+                && keySetsStable
+                && entityKeyAssociationsStable;
     }
 
     public boolean hasAtLeastThreeNonEmptyPagesInBothRuns() {

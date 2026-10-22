@@ -16,9 +16,6 @@ import br.com.esl.etl.v2.plataforma.fonte.dataexport.DataExportHttpGatewayBundle
 import br.com.esl.etl.v2.plataforma.fonte.dataexport.DataExportTemplate;
 import br.com.esl.etl.v2.plataforma.fonte.dataexport.RuntimeBootstrapTestFixture;
 import br.com.esl.etl.v2.plataforma.orquestracao.RuntimeExecutionPlan;
-
-import org.junit.jupiter.api.Test;
-
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
@@ -30,6 +27,7 @@ import java.time.Instant;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
+import org.junit.jupiter.api.Test;
 
 /**
  * Actual current consumer/wrappers over JDBC/source fixtures; never physical admission/delivery.
@@ -419,7 +417,7 @@ class C78Sample12ConsumerCounterTest {
                                                             }
                                                             if (text.contains(
                                                                     "COUNT(DISTINCT"
-                                                                        + " resource_associated_entity_id)")) {
+                                                                            + " resource_associated_entity_id)")) {
                                                                 originalReadbacks++;
                                                                 return result(
                                                                         new Object[] {
