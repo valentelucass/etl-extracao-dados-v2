@@ -1,3 +1,7 @@
+## Continuidade0592 — Carregador real aprovado; contrato INFO em investigação
+
+[Checkpoint0592](docs/continuidade/checkpoints/0592-carregador-real-aprovado-e-manifestos-parado-no-contrato-info.md). V9próprios81+50 e2preflights reaisPASS; Manifestos48831fechou noINFO comContractDriftException/1reserva/0DATA/0SQL, reason/statusHTTPnão retidos; não inferir429/200.30modelos mecânicosPASS/semSQLreal. Counters anteriores eram parciais e não incluem a reserva nova;7chamadas descartadas,semretry/replay. Info table.field versusnome simples é hipótese a comprovar, não alterarparser/baseline porinferência. TodosJobsfechados; trêschatsarquivos,Rootúnicoexecutor. Fonte→banco/DDL/adoção/etapas3/4abertas. ESLsomenteconsulta e restrições mantidas.
+
 ## Acesso ESL de25/10/2026 — exclusivamente consultas
 
 Instrução direta atual do usuário: no site ESL apenas navegar, consultar, ler,

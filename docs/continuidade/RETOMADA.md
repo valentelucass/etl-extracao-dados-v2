@@ -1,3 +1,7 @@
+## Continuidade0592 — V9 aprovado; causa INFO em investigação
+
+[Checkpoint0592](checkpoints/0592-carregador-real-aprovado-e-manifestos-parado-no-contrato-info.md). V9/131casos+2preflights reaisPASS; Manifestos48831fechou noINFO/ContractDriftException,1reserva/0DATA/0SQL,semreason/statusHTTP.30modelosmecânicosPASS/semSQLreal. ContratosdiagnósticoINFO; FluxoUserswire/P3/Clock; Bancoprobecompleto ctl.execution_partition(1C78/12SELECT/0DMLDDL). TodosJobsfechados,Rootúnicoexecutor. Nãoinferirfontequebrada/429/200nemcorrigirbaselineportabela presumida.7chamadasdescartadas/semretry/Usersreplay. Users54540semEOF,etapas3/4abertas; ESLsomenteconsulta, restrições mantidas. Git0591publicado8e1eb6e.
+
 ## Continuidade0591 — ESL consulta; qualificações e causas locais do banco
 
 [Checkpoint0591](checkpoints/0591-esl-somente-consulta-qualificacoes-e-falhas-reais-do-banco.md). Site sóconsulta/filtros/download; nunca enviar/salvar/alterar. Conferência depois do banco, FretesDataExport distintoGraphQL/Raster nãoinferido.184modelosPASS eV8próprios81; tentativasManifestosfechadas antesHTTP/SQL porparser econtrato do recibo. P3strictcompilePASS/99de111PASS/12FALHAS. Contratos preparaV9compositiva real; FluxoUsersr05/diagnósticoP3; BancoprobeJDBC. TodosJobsfechados, Root único executor. Users54540/6quarsemEOF, etapas3/4abertas,0DDL/commitretido. e6a1895publicado; índiceASTpendente após falhamemória, preservado. Restrições mantidas.
