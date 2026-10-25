@@ -1,3 +1,7 @@
+## Continuidade0596 — Usuários95 e produto624; pendências do pacote preservadas
+
+[Checkpoint0596](checkpoints/0596-usuarios-95-e-produto-624-com-pendencias-do-pacote.md). Usuários r09b passou95 próprios, sem Source/SQL/replay. Produto R11b compilou704 fontes de teste e passou624+9, style aprovado; CI2/3 com hash antigo de LocalFiveVerticalRuntime, correção apenas após auditoria. JAR mínimo ManifestosP2 passou176, mas7IT=1PASS/6FAIL por launcher ausente no stage; diagnóstico tipado reproduziu NoSuchFileException. Sucessor causal em preparo, sem declarar183. Banco V13 ainda não executado; exige271+2preflights e novoJAR qualificado. ÚltimaSource permanece Cotações0595-01,0novas chamadas. Etapas3/4 abertas; ESL só consultas, Root únicoexecutor, restrições/commitpush mantidos.
+
 ## Continuidade0595 — Cotações200; correções de catálogo e memória comprovadas
 
 [Checkpoint0595](checkpoints/0595-cotacoes-info-real-e-correcoes-de-catalogo-e-memoria.md). Cotações own52PASS e INFO6906real200/37campos/6filtrosquotes.field/drift12,0DATA/SQL/ESLmutação,recibos fechados0. Último parSource agora cotacoes-info-0595-01/controller-receipt.json+original-memory.json. ManifestosP2own22PASS,novoJAR/banco integrado pendentes. Banco componente121PASS; LAB mesmos7ITdiretosPASS sob1GiB, falhaMaven preservada. ProdutoR11 preparado/semadoção; Users54/23 semreplay. IDs corrigidos:Localizador8656,Faturas4924,FretesDataExport6389 distintoGraphQL. Etapas3/4abertas,Root únicoexecutor,ESLsomenteconsulta,restrições/commitpush mantidos.
