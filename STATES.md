@@ -1,3 +1,7 @@
+## Continuidade0594 — INFO real200 explica filtros incompletos de Manifestos
+
+[Checkpoint0594](docs/continuidade/checkpoints/0594-info-real-manifestos-e-catalogo-de-filtros-incompleto.md). V12own209+2preflightsPASS; RootINFO6399único200/91campos18filtrostable.field/drift36, closures originais/Java/native/stdin0. CatálogoP1Btem18nomessimples; conjuntos91camposiguais. Corrigirbaseline/bindingscomprovaatual,mantendoGate/parser;0DATA/SQL/ESLmutação. PAR Source maisrecente0594-02, nãoV9. LAB447+9PASS; pacote7ITpendente eSourcePRODUCT3NeedBraces, R07preparado. Users77=54PASS/23FALHAS, perfilfechado r08emimplementação, semreplay. Banco prepara cleanupcausal; C3onlycontext/RasterR5nãoadmitido. Etapas3/4abertas,Rootúnicoexecutor,restrições/ESLsomenteconsulta/commitpush mantidos.
+
 ## Continuidade0593 — Clock111 PASS e contexto C78 real medido
 
 [Checkpoint0593](docs/continuidade/checkpoints/0593-clock-corrigido-e-contexto-transacional-real-medido.md). Clock corrigido: agregado próprio111/32 PASS e JARlaboratório111+4 PASS; produto/adoção/regressão ampliada pendentes. C78real102500c3:1conexão/12SELECT/2rollbacks/close comprovados,0Source/DML/DDL/commit; mediu leitura pósrollback iniciando nova transação própria. Não transferir proteção a outros footprints nem declarar gravação. V10parcial131PASS/compilação falhou, não158PASS; INFOrealManifestos ainda semreason/status. Users54540semEOF/semreplay; etapas3/4abertas. Rootúnicoexecutor, ESLsomenteconsulta, restrições e commit/push mantidos.
