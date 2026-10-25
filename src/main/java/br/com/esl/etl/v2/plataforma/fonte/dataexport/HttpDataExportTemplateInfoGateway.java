@@ -84,6 +84,13 @@ public final class HttpDataExportTemplateInfoGateway implements DataExportTempla
         this.parser = new DataExportTemplateInfoParser();
     }
 
+    /** INFO has no fallback; retry and transport settings are the actual materialized source. */
+    void requireRequestProfile(final DataExportRequestProfile profile) {
+        Objects.requireNonNull(profile)
+                .requireTransport(
+                        properties, DataExportTransportFallbackPolicy.PREFERRED_TRANSPORT_ONLY);
+    }
+
     @Override
     public DataExportTemplateInfo fetchInfo(final DataExportTemplate template) {
         Objects.requireNonNull(template, "O template Data Export é obrigatório.");

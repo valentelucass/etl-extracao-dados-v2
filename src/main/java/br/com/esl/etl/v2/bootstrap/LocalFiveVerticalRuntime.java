@@ -57,10 +57,13 @@ public final class LocalFiveVerticalRuntime {
         return new DataExportRuntimeWorkload(
                 input,
                 (streamer, guard, request, limits, cancellation) ->
-                        new ExtrairLocalizacaoCargasDataExport(
-                                        streamer,
-                                        new LocalizacaoCargaDataExportRecordMapper(),
-                                        staging)
+                        (request.profile().rawRecordsRequired()
+                                        ? ExtrairLocalizacaoCargasDataExport.observedWithRawInput(
+                                                streamer, staging)
+                                        : new ExtrairLocalizacaoCargasDataExport(
+                                                streamer,
+                                                new LocalizacaoCargaDataExportRecordMapper(),
+                                                staging))
                                 .execute(guard, request, limits, cancellation),
                 promotion,
                 quality,

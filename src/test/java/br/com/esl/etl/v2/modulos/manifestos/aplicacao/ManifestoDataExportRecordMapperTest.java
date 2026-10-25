@@ -20,9 +20,28 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 class ManifestoDataExportRecordMapperTest {
-
     private static final ObjectMapper JSON = new ObjectMapper();
     private final ManifestoDataExportRecordMapper mapper = new ManifestoDataExportRecordMapper();
+
+    @Test
+    void mapsObservedSequenceNumberWithoutTextCoercion() {
+        final ObjectNode input = baseline();
+        input.put("mft_s_n_sequence_code", 123);
+        final var mapped = new ManifestoDataExportRecordMapper().map(1, input);
+
+        assertNull(mapped.quarantineReasonCode());
+        assertEquals("123", mapped.rootFields().get("mft_s_n_sequence_code").canonicalJson());
+        assertTrue(mapped.payloadJson().contains("\"mft_s_n_sequence_code\":123"));
+        for (final var invalid :
+                java.util.List.of(
+                        JSON.getNodeFactory().numberNode(1.5),
+                        JSON.getNodeFactory().booleanNode(true))) {
+            input.set("mft_s_n_sequence_code", invalid);
+            assertEquals(
+                    "INVALID_TEXT_FIELD_TYPE",
+                    new ManifestoDataExportRecordMapper().map(1, input).quarantineReasonCode());
+        }
+    }
 
     @Test
     void mapsRootChildrenMetricsCompetenceAndOnlyAppendOnlyRelationEvidence() {

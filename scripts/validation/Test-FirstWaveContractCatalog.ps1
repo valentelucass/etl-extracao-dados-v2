@@ -77,7 +77,7 @@ $requiredAspects = @(
 Assert-ExactSet -Actual @($manifest.classificationVocabulary) -Expected $classifications -Label 'de classificações'
 Assert-ExactSet -Actual @($manifest.evidenceVocabulary) -Expected $evidenceLevels -Label 'de evidências'
 Assert-ExactSet -Actual @($manifest.contracts.contractId) -Expected $contractIds -Label 'de contratos'
-if ([string]$manifest.catalogVersion -cne '2026-09-01.v2-025a.3') {
+if ([string]$manifest.catalogVersion -cne '2026-10-24.fretes-id.1') {
     throw 'A versão documental do catálogo V2-025a diverge da baseline atualizada.'
 }
 
@@ -150,6 +150,20 @@ foreach ($contract in @($manifest.contracts)) {
             throw 'Uma fixture diverge do SHA-256 versionado.'
         }
     }
+}
+
+$fretesContract = @($manifest.contracts | Where-Object contractId -CEQ 'dataexport-6389')
+if ($fretesContract.Count -ne 1 -or
+    [string]$fretesContract[0].contractVersion -cne '2026-10-24.fretes-id.v1' -or
+    [string]$fretesContract[0].aspects.ordering.classification -cne 'TRANSITIONAL' -or
+    [string]$fretesContract[0].aspects.ordering.contract -cne
+    'id asc; NUMERIC_ID_ORDER_DOES_NOT_PROVE_SNAPSHOT_OR_COMPLETENESS') {
+    throw 'A revisão semântica de ordenação de Fretes diverge do contrato versionado.'
+}
+$previousManifest = Join-Path $repositoryRoot 'docs\catalogos\contratos-primeira-onda\historico\manifesto-2026-09-01.v2-025a.3.json'
+if ((Get-FileHash -LiteralPath $previousManifest -Algorithm SHA256).Hash -cne
+    'D7910FF0E3D0F78BEE57AAAD5178561DB8BCB0D0D253448531B606BCEF45950C') {
+    throw 'A baseline histórica da primeira onda não foi preservada.'
 }
 
 $usersContract = @($manifest.contracts | Where-Object contractId -CEQ 'graphql-individual')

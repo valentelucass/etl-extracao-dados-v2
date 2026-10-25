@@ -20,7 +20,7 @@ public final class DataExportStagingPipeline<T> {
 
     private final DataExportTemplate template;
     private final DataExportPageStreamer streamer;
-    private final BiFunction<Integer, JsonNode, T> mapper;
+    private final RecordMapper<T> mapper;
     private final DataExportBatchStaging<T> staging;
 
     public DataExportStagingPipeline(
@@ -28,10 +28,38 @@ public final class DataExportStagingPipeline<T> {
             final DataExportPageStreamer streamer,
             final BiFunction<Integer, JsonNode, T> mapper,
             final DataExportBatchStaging<T> staging) {
+        this(
+                template,
+                streamer,
+                (ordinal, input) -> mapper.apply(ordinal, input.value()),
+                staging,
+                true);
+        Objects.requireNonNull(mapper, "O mapper é obrigatório.");
+    }
+
+    private DataExportStagingPipeline(
+            final DataExportTemplate template,
+            final DataExportPageStreamer streamer,
+            final RecordMapper<T> mapper,
+            final DataExportBatchStaging<T> staging,
+            final boolean recordInput) {
         this.template = Objects.requireNonNull(template, "O template é obrigatório.");
         this.streamer = Objects.requireNonNull(streamer, "O streamer é obrigatório.");
         this.mapper = Objects.requireNonNull(mapper, "O mapper é obrigatório.");
         this.staging = Objects.requireNonNull(staging, "O staging é obrigatório.");
+    }
+
+    public static <T> DataExportStagingPipeline<T> withRecordInputs(
+            final DataExportTemplate template,
+            final DataExportPageStreamer streamer,
+            final RecordMapper<T> mapper,
+            final DataExportBatchStaging<T> staging) {
+        return new DataExportStagingPipeline<>(template, streamer, mapper, staging, true);
+    }
+
+    @FunctionalInterface
+    public interface RecordMapper<T> {
+        T map(int ordinal, DataExportRecordInput input);
     }
 
     /** Cada tentativa reinicia na página 1 com um guard próprio; staging parcial não é sucesso. */
@@ -49,8 +77,7 @@ public final class DataExportStagingPipeline<T> {
             if (initialRequest.template() != template) {
                 throw new IllegalArgumentException("O template não corresponde à vertical.");
             }
-            if (!template.approvesRequestSemantics(
-                    initialRequest.pageSize(), initialRequest.orderBy())) {
+            if (!initialRequest.profile().approves(initialRequest, guard.sourceSelection())) {
                 guard.failClosed(ContractDriftException.Reason.EXECUTION_BINDING_MISMATCH);
             }
             limits.validate(initialRequest);
@@ -97,12 +124,12 @@ public final class DataExportStagingPipeline<T> {
             try {
                 verifyObservedPage(guard, page.page());
                 page.response()
-                        .forEachRecord(
+                        .forEachRecordInput(
                                 record -> {
                                     cancellation.throwIfCancellationRequested();
                                     final T mapped =
                                             Objects.requireNonNull(
-                                                    mapper.apply(records.size() + 1, record),
+                                                    mapper.map(records.size() + 1, record),
                                                     "O mapper retornou registro nulo.");
                                     cancellation.throwIfCancellationRequested();
                                     records.add(mapped);

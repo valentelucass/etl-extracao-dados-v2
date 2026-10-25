@@ -5,6 +5,7 @@ import br.com.esl.etl.v2.plataforma.contrato.ContractResponse;
 import br.com.esl.etl.v2.plataforma.contrato.ContractRunGuard;
 import br.com.esl.etl.v2.plataforma.contrato.ContractSourceKind;
 import java.util.Objects;
+import java.util.Optional;
 
 /** Compõe os dois gateways oficiais com o mesmo gate de contrato da ocorrência. */
 public final class DataExportContractGate {
@@ -15,6 +16,22 @@ public final class DataExportContractGate {
             final DataExportHttpGatewayBundle gateways,
             final DataExportTemplate expectedTemplate,
             final ContractRunGuard guard) {
+        return enforce(gateways, expectedTemplate, guard, Optional.empty());
+    }
+
+    public static DataExportHttpGatewayBundle enforce(
+            final DataExportHttpGatewayBundle gateways,
+            final DataExportPageRequest initialRequest,
+            final ContractRunGuard guard) {
+        Objects.requireNonNull(initialRequest, "A requisição inicial é obrigatória.");
+        return enforce(gateways, initialRequest.template(), guard, Optional.of(initialRequest));
+    }
+
+    private static DataExportHttpGatewayBundle enforce(
+            final DataExportHttpGatewayBundle gateways,
+            final DataExportTemplate expectedTemplate,
+            final ContractRunGuard guard,
+            final Optional<DataExportPageRequest> initialRequest) {
         Objects.requireNonNull(gateways, "Os gateways Data Export são obrigatórios.");
         Objects.requireNonNull(expectedTemplate, "O template esperado é obrigatório.");
         Objects.requireNonNull(guard, "O gate de contrato é obrigatório.");
@@ -27,11 +44,29 @@ public final class DataExportContractGate {
         }
         final DataExportContractObservationConfiguration observationConfiguration =
                 gateways.observationConfiguration().orElseThrow();
+        final DataExportRequestProfile profile =
+                initialRequest
+                        .map(DataExportPageRequest::profile)
+                        .orElse(DataExportRequestProfile.LEGACY);
+        if (initialRequest.isPresent()) {
+            if (!profile.approves(initialRequest.orElseThrow(), guard.sourceSelection())) {
+                guard.failClosed(ContractDriftException.Reason.EXECUTION_BINDING_MISMATCH);
+            }
+        } else if (!DataExportRequestProfile.legacySelection(guard.sourceSelection())) {
+            guard.failClosed(ContractDriftException.Reason.EXECUTION_BINDING_MISMATCH);
+        }
         if (observationConfiguration.template() != expectedTemplate) {
             guard.failClosed(ContractDriftException.Reason.EXECUTION_BINDING_MISMATCH);
         }
+        var selectedRuntime = observationConfiguration.runtimeConfigurationFingerprint();
+        try {
+            gateways.requireRequestProfile(profile);
+            selectedRuntime = profile.runtimeFingerprint(selectedRuntime);
+        } catch (final IllegalArgumentException invalid) {
+            guard.failClosed(ContractDriftException.Reason.EXECUTION_BINDING_MISMATCH);
+        }
         guard.verifyObservationBinding(
-                observationConfiguration.runtimeConfigurationFingerprint(),
+                selectedRuntime,
                 observationConfiguration.observationLimits(),
                 observationConfiguration.responsePathBoundary().fingerprint(),
                 observationConfiguration.expectedResponseForm().recordRoot(),
@@ -42,8 +77,8 @@ public final class DataExportContractGate {
                     if (request.template() != expectedTemplate) {
                         guard.failClosed(ContractDriftException.Reason.EXECUTION_BINDING_MISMATCH);
                     }
-                    if (!expectedTemplate.approvesRequestSemantics(
-                            request.pageSize(), request.orderBy())) {
+                    if (!request.profile().equals(profile)
+                            || !request.profile().approves(request, guard.sourceSelection())) {
                         guard.failClosed(ContractDriftException.Reason.EXECUTION_BINDING_MISMATCH);
                     }
                     guard.verifySource(
@@ -101,6 +136,7 @@ public final class DataExportContractGate {
                     }
                     return info;
                 },
-                observationConfiguration);
+                observationConfiguration,
+                gateways);
     }
 }

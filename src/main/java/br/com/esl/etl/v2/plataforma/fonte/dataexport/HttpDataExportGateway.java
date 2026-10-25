@@ -9,7 +9,6 @@ import br.com.esl.etl.v2.plataforma.observabilidade.LogSeverity;
 import br.com.esl.etl.v2.plataforma.observabilidade.Slf4jStructuredLogSink;
 import br.com.esl.etl.v2.plataforma.observabilidade.StructuredCorrelationContext;
 import br.com.esl.etl.v2.plataforma.observabilidade.StructuredLogEvent;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.net.URI;
@@ -191,6 +190,20 @@ public final class HttpDataExportGateway implements DataExportGateway {
         this.responseNormalizer = new DataExportResponseNormalizer();
     }
 
+    /** Checks actual immutable properties before either INFO or DATA is authorized. */
+    void requireRequestProfile(final DataExportRequestProfile profile) {
+        Objects.requireNonNull(profile).requireTransport(properties, fallbackPolicy);
+        if (profile.observed()) {
+            profile.requireRuntimeBase(
+                    contractObservationConfiguration
+                            .orElseThrow(
+                                    () ->
+                                            new IllegalArgumentException(
+                                                    "OBSERVED_REQUEST_OBSERVATION_REQUIRED"))
+                            .runtimeConfigurationFingerprint());
+        }
+    }
+
     @Override
     public DataExportPageResponse fetch(final DataExportPageRequest request) {
         return fetchWithDiagnostics(request).response();
@@ -204,6 +217,7 @@ public final class HttpDataExportGateway implements DataExportGateway {
      */
     public DataExportPageFetch fetchWithDiagnostics(final DataExportPageRequest request) {
         Objects.requireNonNull(request, "A requisição Data Export é obrigatória.");
+        requireRequestProfile(request.profile());
         if (request.template().syntheticOccurrenceCapture()) {
             throw new IllegalArgumentException("EXP_SYNTHETIC_TRANSPORT_ONLY");
         }
@@ -228,8 +242,7 @@ public final class HttpDataExportGateway implements DataExportGateway {
                                 + ".");
             }
             if (DataExportHttpExecutor.isSuccess(response.statusCode())) {
-                final ParsedPageResponse parsed =
-                        parseResponse(response.body(), request.template());
+                final ParsedPageResponse parsed = parseResponse(response.body(), request);
                 DataExportPageEntityLimitValidator.validate(request, parsed.page());
                 return new DataExportPageFetch(
                         parsed.page(),
@@ -312,7 +325,8 @@ public final class HttpDataExportGateway implements DataExportGateway {
     }
 
     private ParsedPageResponse parseResponse(
-            final String responseBody, final DataExportTemplate template) {
+            final String responseBody, final DataExportPageRequest request) {
+        final DataExportTemplate template = request.template();
         try {
             final int maximumNodes =
                     contractObservationConfiguration
@@ -367,8 +381,12 @@ public final class HttpDataExportGateway implements DataExportGateway {
             } else {
                 page = new DataExportPageResponse(normalized.records());
             }
-            return new ParsedPageResponse(page, responseForm);
-        } catch (final JsonProcessingException exception) {
+            return new ParsedPageResponse(
+                    request.profile().rawRecordsRequired()
+                            ? page.withRawRecords(responseBody, maximumNodes)
+                            : page,
+                    responseForm);
+        } catch (final java.io.IOException exception) {
             throw new IllegalStateException(
                     "Resposta JSON inválida no template Data Export "
                             + template.templateId()

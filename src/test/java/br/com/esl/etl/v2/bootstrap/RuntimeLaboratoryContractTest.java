@@ -154,7 +154,7 @@ class RuntimeLaboratoryContractTest {
         values.put("V2_DATAEXPORT_TIMEOUT_SECONDS", "30");
         values.put("V2_DATAEXPORT_RETRY_INITIAL_DELAY_MS", "0");
         values.put("V2_DATAEXPORT_RETRY_MAX_DELAY_MS", "0");
-        values.put("V2_DATAEXPORT_RESILIENCE_MINIMUM_REQUEST_INTERVAL_MS", "0");
+        values.put("V2_DATAEXPORT_RESILIENCE_MINIMUM_REQUEST_INTERVAL_MS", "2000");
         values.put("V2_DATAEXPORT_RESILIENCE_MAX_IN_FLIGHT", "1");
         values.put("V2_DATAEXPORT_RESILIENCE_MAX_RETRY_AFTER_MS", "0");
         values.put("V2_DATAEXPORT_RESILIENCE_CIRCUIT_FAILURE_THRESHOLD", "3");

@@ -357,6 +357,17 @@ public final class ContractRunGuard {
         return new ContractExecutionContext(binding.executionId(), this);
     }
 
+    /** Sanitized selection from the verified binding, independent of any source adapter type. */
+    public synchronized ContractSourceSelection sourceSelection() {
+        requireOpen();
+        return new ContractSourceSelection(
+                binding.sourceKind(),
+                binding.documentReference(),
+                binding.contractVersion(),
+                binding.contractFingerprint(),
+                binding.runtimeConfigurationFingerprint());
+    }
+
     public synchronized ContractObservationLimits observationLimits() {
         requireOpen();
         return binding.observationLimits();

@@ -1,5 +1,5 @@
 {
-  "catalogVersion": "2026-09-01.v2-025a.3",
+  "catalogVersion": "2026-10-24.fretes-id.1",
   "classificationVocabulary": [
     "PROVEN",
     "TRANSITIONAL",
@@ -141,7 +141,7 @@
       "contractId": "dataexport-6389",
       "sourceKind": "DATA_EXPORT",
       "documentReference": "dataexport-fretes",
-      "contractVersion": "2026-08-31.v2-025a.1",
+      "contractVersion": "2026-10-24.fretes-id.v1",
       "overallClassification": "TRANSITIONAL",
       "evidence": [
         "LOCAL_CODE_AND_SYNTHETIC_FIXTURES",
@@ -177,8 +177,8 @@
         },
         "ordering": {
           "classification": "TRANSITIONAL",
-          "contract": "corporation_sequence_number asc; ORDER_IS_NOT_IDENTITY_OR_COMPLETENESS",
-          "scope": "LEGACY_EXECUTABLE_ROADMAP_AND_LOCAL_REQUEST"
+          "contract": "id asc; NUMERIC_ID_ORDER_DOES_NOT_PROVE_SNAPSHOT_OR_COMPLETENESS",
+          "scope": "LOCAL_REQUEST_AND_READONLY_WINDOWS_0551_0552; TIMEOUT_REMAINS_POSSIBLE"
         },
         "per": {
           "classification": "TRANSITIONAL",
@@ -256,10 +256,10 @@
         }
       ],
       "fingerprints": {
-        "semantics": "c8f620b392b6b0f237e964fc91f09ed953ee6a47464f3f2575a61eafa0643ad9",
-        "metadata": "73a52a965b466f6003021cf748f7a35a057875610c65753243909487847998a4",
-        "response": "93362c311c8c9559b27f6dde964a937abd6b80c510d297f175220c1e9ba5c272",
-        "release": "23aef4e4e03488d291d3990bdba813800e3ebb8c8be18e766a788daf9741ec15"
+        "semantics": "c86688bbf5aa0f4a6c44d1df8db95c485012f754c8b14579063da26b381b2bc8",
+        "metadata": "ab00d17ee5d749b0f1975c3d0f2b30ed19eaaf199762702e86b04a7e73fb13e5",
+        "response": "2b0e5e92fbfc71fc757324d4fccfe5145829f2e0de6d65d5aa01ce145b3a0e44",
+        "release": "f78f5b9d9eee2407d0274c39b6e6d6fbe7e459c67d90db20790eb340ceaa0c8c"
       }
     },
     {

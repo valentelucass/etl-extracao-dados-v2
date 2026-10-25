@@ -1,3 +1,258 @@
+## Continuidade0590 — Versionamento e conferência ESL somente consulta
+
+[Checkpoint0590](docs/continuidade/checkpoints/0590-commit-push-e-conferencia-final-esl-somente-consulta.md). Usuário determina commit e push ao fechar alterações revisadas/validadas. Acesso futuro à plataforma ESL será somente consulta para comparar resultados, ainda não disponibilizado. Sincronização Git em preparação, sem antecipar PASS; artefatos externos/WIP preservados. Etapas3/4 abertas, Users54540/6quar semEOF e restrições permanentes mantidas.
+
+## Orientações do usuário — versionamento e conferência final (25/10/2026)
+
+- Ao concluir cada alteração revisada e validada, fazer commit e push. A autorização já foi dada; não pedir novamente confirmação genérica. Preservar alterações preexistentes e o histórico; não usar push forçado nem incluir segredos/dados reais. Informar claramente se commit ou push falhar.
+- Ao final, o usuário fornecerá acesso à plataforma ESL exclusivamente de consulta para conferir os dados extraídos. Comparar os mesmos períodos, filtros, fuso, contagens e valores e registrar diferenças. Esse acesso futuro ainda não existe e não autoriza criar, editar ou excluir dados na ESL.
+
+## Continuidade 0589 — Execução interrompida; prefixo Users preservado
+
+[Checkpoint0589](docs/continuidade/checkpoints/0589-interrupcao-do-aplicativo-prefixo-usuarios-preservado-sem-eof.md). Aplicativo parado pelo usuário:15340não reconhecida;0processos do candidato e mutexes ausentes na observação atual.10909selos conferidos:54540Users/54534semrecusa/6quarentenas, aindahasNext=true. Closure/childexit/recibo original ausentes: semEOF/cleanup gracioso/counters finais, semreplay automático. Código e preparações preservados; etapas3/4abertas,0novosSource/SQL/DDL e restrições permanentes mantidas.
+
+## Continuidade 0588 — Interfaces reais e entradas de banco preparadas
+
+[Checkpoint0588](docs/continuidade/checkpoints/0588-interfaces-reais-e-entradas-banco-preparadas-com-executor-unico.md). UsersV3/sessão15340 continua única execução; sem outro Java/Maven/SQL/fonte/índice até close/recibo/liberação. r04corrige quatro achados, mas deadline de streaming exige r05 e conservação wire ainda está aberta. Root preparou entradas Bank11/9/4 e11/12/6 a partir doSTRICTreal e fila81/25/40, sem execução/grant. P3API confere pedido integral; ligaçãoMain/controller físico ainda em preparo. Etapas3/4 abertas, semDDL/commitretido e restrições permanentes preservadas.
+
+## Continuidade 0587 — Conservação Users e correções causais em preparo
+
+[Checkpoint 0587](docs/continuidade/checkpoints/0587-perda-de-campos-usuarios-identificada-e-correcoes-em-preparo.md). UsuáriosV3/sessão15340 continua único executor; nenhum outro Java/Maven/SQL/fonte/índice até close/recibo/liberação. O contrato legado QUARANTINE descarta campos: novo perfil wire e staging estão só em preparo. r02 tem quatro achados causais, r04 em correção; nenhum teste novo executado. Bank81/Raster25/rotaP3Main27 são preparados, sem herança de aprovação. Etapas3/4 abertas; DDL sem novo consentimento e restrições permanentes preservadas.
+
+## Continuidade 0586 — Integração conferida; rota P3 em preparo
+
+[Checkpoint 0586](docs/continuidade/checkpoints/0586-integracao-revisada-e-ligacao-p3-em-preparo.md). Usuários V3/sessão15340 continua como único executor; sem outro Java/Maven/SQL/fonte/índice até close, recibo e liberação. Root conferiu mapping51, 1.559 pins src e oito libs; nova seleção e ligação P3 ao Main ainda não qualificadas/adotadas. Users plano02 e catálogo Raster com quinta tabela em preparo. DDL quatro escopos é desenho sem efeitos, sem consentimento novo. SQL20+1 tentativas fechadas; etapas3/4 abertas, restrições permanentes preservadas.
+
+## Continuidade 0585 — STRICT35 real aprovado; UsuáriosV3 ativo
+
+[Checkpoint0585](docs/continuidade/checkpoints/0585-catalogo-strict-real-e-usuarios-v3-em-travessia.md). ÚnicoexecutorRootUsuáriosV3sessão15340/run10250003/original1GiB320min/5kcall100mil5h/3s; nenhum outroJavaMavenSQLfonteíndice atéclose/recibo/liberação. STRICTV2 passou140modelos e35/35realcomregrasfinalizadas,escopoBankrestrito/semcapture. Raster37offlinePASS;P3SourceCAP/FAT/INVterminal3calls cada;SINnãoemitida0HTTP/leasevenceu,semrenovação.20JDBC+1tentativafechadas;baselinepréUsers3204/3205,counterscorrentesparciaisporse lo. q06/447+7semadoção/E05produto150+7. Etapas3/4abertas;DDLsemrespostahumana e restriçõespermanentesmantidas.
+
+## Continuidade 0584 — Catálogo35 real e unidadeP3positiva aprovados
+
+[Checkpoint0584](docs/continuidade/checkpoints/0584-catalogo-real-35-concluido-e-unidade-p3-positiva-aprovada.md). CatálogoV8f passou128modelos e35/35SELECT reais, fechado conhecido; ainda diagnóstico/INDEXUNKNOWN, sem STRICT ou captura. P3Q02 positiva própria passouCIM/emissão/consumo/fechamento e checker real,0INFO/DATA/factory/SQL; grupo consumido. CausaQ01DateTimept-BR medida/corrigida emr02,originais preservados. TodosJobsfechados,19JDBC+1tentativa semretorno observado. Fonte3195/reservas3196;97predicados Fretes/Local mantidos. q06/447+7 semadoção;produtoE05/150+7. Etapas3/4 abertas,UsuáriosV3real pendente e DDL sem resposta humana. Restrições permanentes preservadas.
+
+## Continuidade 0583 — Local60 real e execução Windows P3 aprovadas
+
+[Checkpoint0583](docs/continuidade/checkpoints/0583-local60-real-e-execucao-windows-p3-aprovadas.md). Local60 passou63SELECT; com Fretes37 anterior são97predicados reais, sem escrita. Extraq06/22 e CIMnativo7 passaram; unidadeP3positiva própria ainda pendente. CatálogoV8e avançou para11/10 e mediu triggersNULL; V8f em preparo com contagens estritas. TodosJobsfechados, próxima unidade somenteRoot/original.18JDBCfechados+1tentativa sem retorno observado; fonte3195/reservas3196. q06/447+7 semadoção; produtoE05/150+7. Etapas3/4 abertas, DDL sem resposta humana e restrições permanentes preservadas.
+
+## Continuidade 0582 — Pacote447, auxiliares20/58/51 e causa do catálogo
+
+[Checkpoint0582](docs/continuidade/checkpoints/0582-pacote-447-testes-auxiliares-aprovados-e-causa-do-catalogo-medida.md). q06 passou447JUnit+7IT, sem adoção/implantação. Helpers20, banco58modelos e Local33+18 passaram; provas reais pendentes não são herdadas. CatálogoV8d mediu NULL em security_predicates na consulta10; V8e contará as linhas no mesmoSELECT antes de interpretar ausência. Raster real108/355 sem issues e Fretes37/40SELECT mantidos. TodosJobsfechados; próxima unidade somenteRoot, sequencial/original.16JDBCfechados+1tentativa sem retorno observado; fonte3195/reservas3196. Etapas3/4 abertas, DDL sem resposta humana e restrições permanentes preservadas.
+
+## Continuidade 0581 — Raster real sem issues; emissor Windows e Fretes37 aprovados
+
+[Checkpoint0581](docs/continuidade/checkpoints/0581-raster-real-sem-issues-emissor-windows-e-fretes37-aprovados.md). Raster41 passou e resposta real trouxe 108 viagens/355 paradas sem issues e com coordenadas exatas em RAM. Grid18 e emissor Windows/CIM real passaram; Fretes37 passou 40 SELECT. Local60 parou no primeiro caso e catálogo V8c na consulta10, ambos fechados; sucessores causais em preparo. Único executor: Root q06 CIM/sessão62210/original2GiB15min; nenhum outro Java/Maven/SQL/fonte/índice até fechamento e liberação. ProdutoE05/150+7; q05/441+7 sem adoção. 15 JDBC fechados + 1 tentativa sem retorno observado; fonte3195/reservas3196. Etapas3/4 abertas e DDL sem resposta humana. Restrições permanentes preservadas.
+
+## Continuidade0580 — Bootstrap10 passou; limitação Windows comprovada
+
+[Checkpoint0580](docs/continuidade/checkpoints/0580-bootstrap-10-aprovado-e-limite-real-do-processhandle-no-windows.md). ProcessHandle.Info.arguments realmente vazio no JDK17/Windows; imagem do pai presente. Sucessor CIM independente Java→script/executable pinados necessário antes de positivaRoot; não aceitar JSON/boolean do chamador. ProbeV2/recibo originalPASS,0SourceSQL. Bootstrap10PASS. Helpers19/bancoV4(56) somente preparados e recusados paraqualificação por lacunas causais; sucessores mínimos em preparo. q05/441+7semadoção; E05/150+7produto. TodosJobsatuaisfechados, sóRootlibera próximaunidadefinita.12JDBCfechados+1tentativanativafechadasemretorno. Etapas3/4abertas,DDLsemrespostahumana e restriçõespermanentespreservadas.
+
+## Continuidade0579 — P3 físico31, Raster26 e Extra22 aprovados
+
+[Checkpoint0579](docs/continuidade/checkpoints/0579-p3-fisico-31-raster-26-e-extra-windows-22-qualificados.md). Novas provasoffline: P3físico31com151campos/readback/rollbackDummy; Raster26preserva coordenadas9–16semarredondar e bloqueiaJDBC28,8; Extra22comJobWindows/stdin/caminho584chars passou.22jáincluídos441q05, nãosomar. Semadoção/deploy/DDL/novafonte. CatálogoV7abriuJDBC eparou emoutroUNKNOWNquery4;12sessõesJDBCfechadas+1tentativanativafechadasemretornocomprovado. V8diagnósticoempreparo,semcatálogo35positivo. TodosJobsatuaisfechados, próximaunidadefinita somenteRoot. Users40milsemEOF; etapas3/4abertas,DDLsemresposta. Restriçõespermanentespreservadas.
+
+## Continuidade0578 — P3 441 testes; auxiliares e causas conferidos
+
+[Checkpoint0578](docs/continuidade/checkpoints/0578-pacote-p3-441-testes-e-auxiliares-causais-qualificados.md). P3q05 passou441JUnit+7IT, semadoção/deploy. Grade33 ecomposiçãofísica17 passaram offline; JDKloopback comprovou2enviosdefault/1comflags. CatálogoV6 falhoupreconsulta:11JDBCconfirmadosfechados+1tentativanativafechadasemretornoJDBCobservado,0SELECT/DDL. V7diagnósticoem preparo. Extraq01recusouambienteantesJava; bootstrapcorretivoempreparo. Usuários37/Raster45mantidos. Jobsatuaisfechados; próximaunidadefinita somenteRoot. Etapas3/4abertas,perguntaDDLsemrespostahumana. Fontes3194/reservas3195 sãoadapter,nãocontagemwirehistórica. Restriçõespermanentespreservadas.
+
+## Continuidade 0577 — Usuários/Raster aprovados; causas reais medidas; P3 em teste
+
+[Checkpoint0577](docs/continuidade/checkpoints/0577-usuarios-e-raster-qualificados-causas-medidas-e-pacote-em-teste.md). UsuáriosV3 passou37casos reais offline, incluindo5milpáginas/100milnós;
+fonte real ainda pendente. Raster45JUnit passou e novoPOST confirmou causa das
+rejeições: coordenadas com fração nãozero além de8casas; não arredondar. Pares
+Ordem repetidos têm atributos diferentes: não deduplicar nem promover aPK.
+
+CatálogoV5 passou contexto e13corpos reais, mas parou em dependência nãoresolvida;
+V6 em preparo, sem catálogo35positivo. GradeV3 corrige4expected e aguarda33testes.
+Único executor:RootP3q05/sessão73472,original2GiB/15min; não iniciar outro
+Java/Maven/SQL/fonte/índice até fechamento,recibo e liberaçãoRoot. Resultadoq05
+pendente; produtoE05/150JUnit+7IT,sem adoção/deployP3. Etapas3/4 abertas.
+11conexõesSQL fechadas/0DDL/0commit;fonte3194/reservas3195. ExceçõesDDL sem
+resposta humana,restrições permanentes preservadas.
+
+## Continuidade 0576 — Contexto do banco isolado; novos testes em andamento
+
+[Checkpoint0576](docs/continuidade/checkpoints/0576-contexto-do-banco-isolado-e-usuarios-v3-em-qualificacao.md). Catálogo V4 passou 59 grupos offline. Na consulta real,
+a conexão estava em autocommit/profundidade0 e todas as guardas passaram,
+exceto a exigência de XACT_STATE=0 durante a própria SELECT. Valor exato não
+retido; sucessor causal V5 em preparo. São 10 conexões SQL fechadas, 0 DDL e
+0 commit retido. Nenhum catálogo ou staging real positivo novo foi declarado.
+
+Único executor atual: Usuários V3 offline37, sessão46905, original1GiB/45min,
+transporte fake/zeroHTTP/SQL. Não iniciar outro Java/Maven/SQL/fonte/índice até
+fechamento, recibo e liberação Root. P3q04 mantém419JUnit+7IT sem adoção;
+produto E05 mantém150JUnit+7IT. Composição56/Raster45 e provas físicas seguem
+em revisão/preparo. Usuários40mil sem página final; etapas3/4 abertas e
+exceções DDL sem aprovação. Restrições permanentes preservadas.
+
+## Continuidade 0575 — Pacote P3 e auxiliares qualificados; prova real do banco aberta
+
+[Checkpoint0575](docs/continuidade/checkpoints/0575-pacote-p3-qualificado-e-causa-do-contexto-em-investigacao.md). P3q04 passou419JUnit+7IT, ainda sem adoção ou implantação. Auxiliares
+passaram85cenários de banco,40JDBC e18da grade readonly, todos offline e com
+recibos originais. Nenhum job atual está ativo; próxima unidade só pelo Root.
+
+A primeira leitura do catálogo V3 parou na guarda de contexto, com conexão
+fechada e SQL intacto. A causa ainda não está comprovada; sucessor diagnóstico
+em preparo. Composição55 tem limite de leitura do result insuficiente e está
+em correção. Usuários40mil ainda não alcançou o fim; Raster tem issues reais
+em230paradas. Etapas3/4 abertas,9conexõesSQL fechadas,0DDL/0commit retido.
+ExceçõesDDL sem aprovação, restrições permanentes preservadas.
+
+## Continuidade 0574 — Problemas reais medidos; integração em testes
+
+[Checkpoint0574](docs/continuidade/checkpoints/0574-raster-medido-catalogo-qualificado-e-integracao-em-testes.md). Usuários encerrou no teto de40mil, ainda com páginas seguintes. Raster
+respondeu108 viagens/355 paradas e revelou issues de coordenadas em230 paradas;
+investigação causal separada. O catálogo do banco passou44 testes offline.
+
+P3q04 está no único executor Root, sessão87151,2GiB/15min: não iniciar outro
+Java/Maven/SQL/fonte/índice até fechamento e recibo. q03 executou419 testes com
+uma expectativa incorreta de classificação429, corrigida após revisão causal.
+O auxiliar de banco executou85 cenários aprovados mas foi recusado pela criação
+de um log fora da pasta prevista; sucessor em preparo. Nenhuma dessas rodadas
+qualifica o pacote novo ou a gravação real. Produto E05 mantém150JUnit+7IT.
+
+Etapas3/4 abertas;8conexõesSQL fechadas,0DDL/0commit retido. Exceção Fretes sem
+resposta humana; Local26/P3 separados. Restrições permanentes preservadas.
+
+## Continuidade 0573 — Usuários encerrou no limite; próximos testes preparados
+
+[Checkpoint0573](docs/continuidade/checkpoints/0573-usuarios-encerrado-no-limite-e-proximas-qualificacoes.md). Usuários encerrou com40mil registros observados,39997válidos e3quarentenas.
+Ainda há páginas seguintes: a leitura completa permanece aberta. O recibo original
+e o leitor integral confirmam o fechamento da sessão58630, sem timeout; nenhum
+cursor foi retido. Não repetir essa leitura automaticamente.
+
+Root liberou a vaga para novas unidades sequenciais de teste, cada uma delimitada.
+Pacote E05 segue150testes+7IT, sem implantação. A coorte P3 de44arquivos e as
+provas de banco/Raster ainda precisam executar seus testes. Etapas3/4 abertas;
+8conexõesSQL fechadas,0DDL/0commit de negócio, exceçãoFretes sem resposta humana.
+
+## Continuidade 0572 — Usuários avançou; próximas provas preparadas
+
+[Checkpoint0572](docs/continuidade/checkpoints/0572-usuarios-alem-da-falha-anterior-e-succesores-em-revisao.md). Usuários segue como único executor, na sessão 58630: a leitura já passou
+das 949 páginas em que a tentativa anterior parou, mas ainda não chegou à última.
+O limite continua em 1 GiB/125 min e 2.000 chamadas, com 20 itens por página, intervalo de 3 segundos e
+uma tentativa. Não iniciar outro Java/Maven/SQL/fonte/índice até fechamento,
+recibo e liberação explícita. Progresso atualizado somente por snapshots selados.
+
+O pacote E05 mantém 150 testes funcionais e 7 de integridade aprovados, sem implantação. As
+correções e novos auxiliares de expansão, banco e Raster estão preparados para
+testes; resultados anteriores não os qualificam. Bounds e proveniência do core e do
+guard estão em correção. Banco mantém 8 conexões encerradas, nenhuma alteração de
+estrutura e nenhum commit de negócio retido. A pergunta sobre os dois objetos de Fretes ainda
+aguarda resposta; Localização e as quatro expansões são escopos separados. As etapas 3 e 4
+continuam abertas, com as restrições permanentes preservadas.
+
+## Continuidade 0571 — Usuários em leitura; demais frentes em preparação
+
+[Checkpoint 0571](docs/continuidade/checkpoints/0571-usuarios-sucessor-v2-em-travessia-e-revisoes-causais.md). Uma nova leitura de Usuários está em andamento na sessão Root 58630. É o único executor: limite de 1 GiB e 125 minutos, páginas de 20 itens, intervalo de 3 segundos, uma tentativa por requisição e teto de 2.000 chamadas, 40.000 itens e 7.200 segundos. Não iniciar outro Java, Maven, SQL, fonte ou índice até o fechamento, recibo e liberação explícita. O novo leitor passou nos 21 testes offline; o anterior foi preservado e recusado para execução por poder retornar sucesso após falha de limpeza. Ainda não há prova da página final.
+
+O pacote atual E05 tem 150 testes funcionais e 7 de integridade aprovados, sem implantação. O core P3 tem 34 testes externos aprovados, mas a revisão dos limites dos construtores exige uma sucessora antes da integração. Os auxiliares preparam os quatro esquemas observados, transporte com corpo original, proposta de cinco objetos SQL e provas de Manifestos/Cotações. Dois defeitos causais dos auxiliares de banco estão em correção. O Raster ainda precisa conferir seus 49 atributos. São oito conexões SQL encerradas, nenhuma alteração de estrutura e nenhum commit de dados reais. A pergunta específica sobre dois objetos Fretes segue sem resposta; as etapas 3 e 4 continuam abertas e as restrições permanentes permanecem.
+
+## Continuidade 0566 — Usuários qualificado e proposta SQL v4 verificada
+
+[Checkpoint 0566](docs/continuidade/checkpoints/0566-observador-usuarios-qualificado-e-proposta-sql-v4-verificada.md). Observador Usuários externo:27 cenários adversos e leitor Windows/513 snapshots PASS,zeroHTTP/SQL;travessia real permanece incompleta e cursor perdido. C78 readonly:19 casos temporais PASS (100ns→1ms;truncamento diverge13,direto1ms diverge4). Pedido principal C78/readback esperado qualificados offline em stage3-v5-offline-v2. PropostaSQLv4 revisada:37 casos dos predicados PASS por40SELECT,7lacunas v3 reproduzidas,semALTER/proc completo/staging.8conexõesSQL encerradas,0DDL/0commit retido;autorizaçãoDDL específica ainda pendente. EntregaBanco está fora da campanha,no diretório irmão delegacao-revisao-banco-20261024-01. ContratoP1 externo6399/6906/8656 em andamento no chatContratos,com próxima vaga JDKoffline≤1GiB;Root somente leitura/docs enquanto ele qualifica. Não iniciar outro batch/SQL. Trial ainda precisa comparação textual exata dos9JSON. JARA49/334por composição/7IT intactos;etapas3/4 abertas,C78rollback-only e restrições permanentes preservadas.
+
+## Continuidade 0565 — Usuários fechado; revisão SQL e chats delegados
+
+[Checkpoint 0565](docs/continuidade/checkpoints/0565-usuarios-fechado-localmente-revisao-sql-e-chats-delegados.md). Usuários fechado após949páginas/18.980IDs,18.978semrecusa/2nomesrecusados,semterminal;reserva950falhoulocalmenteantesHTTP. Originais preservados eclosure.json reconciliado. Novo gravador técnico passou reprodução Windows+128snapshots selados,sem alterarJAR. 13SELECTC78/12casosdos predicadosSQLv3PASS,47módulosiguais;6conexõesencerradas/0DDL/0dadosretidos. ExceçãoDDL2objetos ainda sem resposta humana;52123/readbackFretes abertos. Usuário autorizou3chatsdelegados na seçãoETLV2:Usuáriosoffline(únicobatch),Contratosestático,RevisãoBancoestática. Root supervisor único docs/CI/SQL;sem outro batch/SQL enquantoUsuáriosqualifica. Etapas3/4nãoencerradas,C78rollback-only/restriçõespermanentes/JARA49/334testescompostos/7IT preservados.
+
+## Continuidade 0564 — mapeadores reais qualificados; Usuários em travessia
+
+[Checkpoint 0564](docs/continuidade/checkpoints/0564-mapeadores-reais-qualificados-e-usuarios-em-travessia.md). JARA49EA79E...A98999 qualificado:262 testes+27 Manifestos preservados+45 Fretes preservados,7IT/strictcompile/style/pacote PASS;AST44514/116337. Prova real12HTTP200:Manifestos315 eLocalização37 semrecusas;Sinistros60 comhorários corrigidos e7comentários preservados comissue1024. Nove Data Export terminais nosrecortes;Raster200/108viagens/355paradas semaceiteglobal. EXECUÇÃO ATIVA UsersFullStreaming:per20/3s/até2000calls/40000nodes/7200s,executor1GiB/125min,uma vaga;21:06BRT=4020observados/4019válidos/1nome recusado,semterminal. Não iniciar outro batch/SQL;observar receipt. PropostaSQL2objetos pendente de resposta humana à exceçãoDDL,zeroDDL. BancoFretes52123 e etapa4captura/identidade ainda abertos;nãoconsiderar leitura como gravação. C78rollback-only e restrições permanentes intactas.
+
+## Continuidade 0563 — presença Fretes corrigida; recusa SQL real identificada
+
+[Checkpoint 0563](docs/continuidade/checkpoints/0563-fretes-presenca-corrigida-e-recusa-sql-real.md). RG-FRETE-019/ADR0071:presença tipada volta aos18 paths exigidos pelo staging,sem perder service_at/payload/evidência. RED causal,45 testes+7IT/strictcompile/style/pacote PASS,JAR94E8BE49...9FFF895 sem implantação. Prova real avançou do52122 para52123:SQL ainda exige marca sintética,mapper preserva marca real.Não falsificar evidência;gravação/readback permanece aberta,DDL proibido. Cinco conexões SQL encerradas com rollback;59 HTTP antes do sucessor específico,zero429. Etapa4:seis relatórios tiveram duas leituras terminais iguais;Manifestos295 recusas de tipo,Localização37 por9paths novos;Cotações no teto e Sinistros pipe local em recuperação. Usuários/Raster ainda pendentes. Root único Banco,C78 rollback-only e restrições permanentes intactas.
+
+## Continuidade 0562 — nove fontes, Fretes principal e catálogo real
+
+[Checkpoint 0562](docs/continuidade/checkpoints/0562-nove-fontes-fretes-principal-e-catalogo-real.md). Etapa1:18 HTTP200 nos nove relatórios;Cotações/Sinistros vazios dia17,Inventário11 linhas/per1. Etapa2:pedido principal e caso de uso Fretes concluíram37 registros válidos/per50/página2 vazia,receiver em RAM. Etapa3:catálogo C78 real concluído em sucessor restrito,47 módulos iguais ao código,alvo/TLS/versão/nativo confirmados;falha anterior por limite4096 preservada. Total21 HTTP/zero429,duas conexões SQL somente leitura/15 SELECT tentadas,zero DML/DDL. Catálogo não admite captura;preparar prova transacional Fretes e seguir etapa4. Root único owner sequencial Banco;C78 rollback-only e restrições permanentes intactas.
+
+## Continuidade 0560 — contrato real integrado; pacote e índice qualificados
+
+[Checkpoint 0560](docs/continuidade/checkpoints/0560-contrato-real-fretes-integrado-pacote-e-indice-qualificados.md). RT-FRETE-OBS-001/ADR0070 qualificados: pedido principal seleciona explicitamente o release observado6389 e vincula release/configuração/ocorrência, preservando defaults e os perfis anteriores. RED causal confirmado; primeiro GREEN falho preservado e duas expectativas de teste corrigidas. Composição57 casos distintos aprovados (43 preservados+14 da recuperação),7 IT, compilação750/674, estilo/pacote aprovados. JAR D81052B6...EF96BCB sem implantação,1321 classes/46 recursos/8 libs,1547 inputs sem drift; AST44475/116295 concluído. Próxima fronteira interna é uma capacidade de banco própria para Fretes: SAMPLE é Coletas e o gateway normal Fretes faz commit. Escopo preparado em bank-preparation-request.md; pergunta de designação do auxiliar Banco pendente, nenhum despacho/agente/efeito físico. API/SQL/TDS/credenciais0 nesta unidade, jobs encerrados, C78 rollback-only e proibições permanentes mantidos.
+
+## Continuidade 0559 — contrato observado selecionável; qualificação em execução
+
+[Checkpoint 0559](docs/continuidade/checkpoints/0559-selecao-contrato-observado-implementada-em-qualificacao.md). Pedido “pois continue”: seleção explícita do release real6389 integrada ao pedido principal e ao vínculo de execução, com catálogo/recurso técnico próprio e fingerprints fixados. Defaults e admissão anteriores preservados. RED causal confirmado; GREEN/estilo/pacote em execução em integracao-contrato-fretes-20261024-01. ADR0070/RT-FRETE-OBS-001. Próxima fronteira identificada: reader DEV aceita só Coletas; produtor C78 geral é inspeção sem admissão física. Preparar rota própria de Fretes sem herdar SAMPLE12. API/SQL/TDS/credenciais/deploy0 nesta unidade; C78 rollback-only e proibições permanentes mantidos.
+
+## Continuidade 0558 — GET com corpo qualificado; per50 conclui sem timeout
+
+[Checkpoint 0558](docs/continuidade/checkpoints/0558-get-body-qualificado-e-regressao-per50-concluida.md). Escolha explícita de GET_WITH_BODY qualificada: 88 testes locais e 7 IT do pacote aprovados, compilação estrita, estilo e integridade aprovados. JAR977C1A0B...54F1CBA, 1319 classes/45 recursos/8 libs, sem implantação; 1543 inputs sem drift. AST44431/116151 concluído. Nova prova real com esse JAR e a RuntimeConfigurationFactory: dia17/10, per50, 37 IDs/37 linhas, página2 vazia, 37 mapperVALID/zero quarentena, três chamadas bem-sucedidas. Soma da retomada:20 chamadas, um422 QUERY/ID preservado, nenhum429. A mesma chave funcionou; o caminho de leitura não depende de nova resposta ESL. Release real separado do catálogo sintético; a rota principal ainda precisa selecionar esse release e comprovar captura/persistência/paridade. As comparações integrais de0557 permanecem com seu escopo. Sem efeitos SQL/Main/GraphQL/deploy/V1/WMS; C78 rollback-only, MainHTTP histórico UNKNOWN e proibições permanentes mantidos. Todos os jobs próprios encerrados.
+
+## Continuidade 0557 — Fretes37 concluído em cURL e Java; BODY explícito em qualificação
+
+[Checkpoint0557](docs/continuidade/checkpoints/0557-documentacao-curl-e-java-concluem-fretes37.md). Usuário determinou investigar com cURL/Postman e documentação já fornecida. Coleção oficial relida: GET+JSONno corpo/search/page/per,intervalo2s; prova usa3s. cURL BODY semordem:7x200,duas travessias per25/per20 do dia17 com37IDs/37linhas,terminal3,igualdade de valores/multiplicidades e37mapperVALID por passagem. Matriz independente:query semordem200,corpo/id200,query/id422timeout exato com request-id/corpo preservados. Outra unidade Java oficial BODY/id com release real congelado antes das chamadas completou também7calls,duas travessias37/terminal3/igualdade/37VALID. SemSQL/Main. Release114/16/115paths separado no catálogo observado;15paths sempreNULL semtipo não nulo inferido. Não requer retornoESL para esse caminho de leitura;intermitência/causa interna não universalizadas. RuntimeFactory sóaceitavaQUERY:BODY explícito implementado,RED2erros esperado/88GREEN/strictcompile PASS;pacote/style ainda emexecução. Observar recibo;semadmissão/deploy por configuração. Próximo:fecharqualificação ebindings/captura/persistência/paridade. C78rollback-only,MainHTTPUNKNOWN,gates/proibições mantidos;V1/WMS/SQL0.
+## Continuidade 0556 — correções de nomes qualificadas; índice e pacote conferidos
+
+[Checkpoint0556](docs/continuidade/checkpoints/0556-fechamento-metadados-service-at-pacote-e-indice.md). Parser table+field e mapper service_at→posição serviço quando servico_em ausente qualificados localmente:71casos distintos+7IT, strictcompile/style/pacote PASS por composição. JAR42251A42...4130D398 semimplantação;1319classes/45recursos/8libs e1543inputs semdrift. AST44392/116091,Job0/sem timeout;130elementos técnicos da fixture conferidos exatamente com metadata Java real,tipos114UNDECLARED preservados. ADR0068/RG-FRETE-018 locais;gates/catálogo sintético/20incompatibilidades de metadata não relaxados. Unidades reais0555 fechadas com8tentativas:última DATA15/p1=422 em24/10 09:44:59–09:45:01BRT,sem corpo capturado;timeout50/p2 anterior continua evidência separada. Release real de resposta114campos,duas travessias terminais,mapper com novos registros reais,bindings/captura/persistência/paridade continuam pendentes. DiagnósticoESL específico preparado,nenhuma mensagem/continuação automática. Todos os processos próprios encerrados. SQL/GraphQL/deploy/V1/WMS0;proibições permanentes,C78rollback-only,MainHTTPUNKNOWN e demais gates mantidos.
+## Continuidade atual 0555 — metadados e data de serviço corrigidos;422 na primeira página
+
+[Checkpoint0555](docs/continuidade/checkpoints/0555-metadados-reais-service-at-e-422-na-primeira-pagina.md). Pedido atual mantém extração completa como objetivo. Parser conserva table+field de filtros; mapper6389 aceita service_at quando servico_em ausente, com presença/proveniência/precedência e updated_at ignorado preservados. Fixture técnica114/16 demonstra20mudanças críticas contra catálogo sintético, sem liberar o gate. ADR0068/RG-FRETE-018 locais. REDs causais confirmados;71casos locais distintos por composição e7IT PASS, strictcompile749/673/style PASS. JAR42251A42...4130D398 semimplantação. Falhas instrumentais e recibos preservados; recuperação somente integridade, sem repetir PASS. AST emexecução, aguardar recibo. Oito tentativas reais em quatro unidades fechadas: INFO aceitos; uma primeira página25 processada, segunda falhou sem status retido; amostra15/p1 retornou422 em24/10 09:44:59–09:45:01BRT. Não chamar novo422 de timeout sem corpo; timeout anterior50/p2 permanece prova própria. Nenhuma comparação terminal/release real/captura concluída. SQL/GraphQL/deploy/V1/WMS0;C78rollback-only/gates/proibições preservados. Próximo: fechar AST e obter diagnósticoESL antes de nova unidade dependente.
+## Continuidade 0554 — revisão ID qualificada;timeout também comID permanece
+
+[Checkpoint0554](docs/continuidade/checkpoints/0554-fretes-id-qualificado-terminal37-timeout-remanescente.md). Novo pedido retomou trabalho apósWMS. Fretes defaultID asc/versão2026-10-24.fretes-id.v1 qualificada localmente:96testes+7IT por composição,strictcompile/formatter/Checkstyle/validadorcatálogo PASS,baseline antiga preservada,demais contratos/gates iguais. Novo JAR8044887E...10F62D95 semimplantação;AST44366/116027,1542inputs semdrift,Job0. Recibos falhos preservados,semverify/cobertura/aceiteintegral. Unidade real24/10 encerrou6HTTP:per25/id/dia17 chegou37IDs/37linhas/114campos e terminal;per50 página2 retornou422timeout. Não universalizar ordenação como causa/solução,nem completar passagem por contagem/shortpage. Semretry/reabertura da unidade,zero429/SQL/GraphQL. Próximo:diagnósticoESL do request preservado e release real114campos/bindings antes de captura;baseline estrutural permanece sintética. Nenhum deploy/V1/WMS/SQLServer/contas/serviços/produção alterado. Todas as restrições permanentes mantidas.
+
+## Continuidade 0553 —96GREEN; pacote em recuperação,sem nova fonte
+
+[Checkpoint0553](docs/continuidade/checkpoints/0553-fretes-revisao-id-96-testes-pacote-em-curso.md). Fretes ID asc/revisão2026-10-24.fretes-id.v1 implementada,contrato anterior preservado,sem relaxar gates/completude ou outros templates. RED8/3falhas esperadas,96GREEN,compilação estrita/formatter/Checkstyle PASS. Pacote candidato ainda NÃO qualificado:7IT tiveram6erros por arquivos database omitidos do snapshot;recibo falho preservado e recuperação somente7IT em execução. Observar resultado/Job antes de repetir. Validador catálogo atualizado maspendente;AST/finalização depois. Timeout também comID comprovado0552,sem universalizar a melhoria ou repetir sonda encerrada. SemESL/SQL/deploy/restart nesta qualificação;proibições permanentes intactas.
+
+## Continuidade 0552 — retomada e timeout também com ID; qualificação em curso
+
+[Checkpoint0552](docs/continuidade/checkpoints/0552-fretes-terminal37-e-timeout-tambem-com-id.md). Novo pedido “agora so ta vc pode continuar” libera retomar após espera WMS. Unidade real24/10:6HTTP,per25/id asc/data17 concluiu37IDs/37linhas/114campos e terminal; per50 teve37 na primeira e422timeout na segunda. STOP,zero429/retry/SQL/GraphQL. Não sustentar causa exclusivamente na ordem por minuta nem completar segunda travessia por contagem. Dois testes de ordem/versionamento ajustados, ainda não executados; RED e implementação/GREEN/pacote/AST pendentes. Não liberar runtime por fixture, mudar classificação/completude, relaxar gates ou renovar sondas. JAR0547 ainda referência anterior. Proibições permanentes intactas.
+
+## Continuidade 0551 — alternativa real ID asc; respeitar prioridade WMS
+
+[Checkpoint0551](docs/continuidade/checkpoints/0551-fretes-id-asc-sucesso-e-timeout-ordenacao-minuta.md). Pedido direto de testar ângulos:10 HTTP novos/9x200/1x422/zero429 em três unidades reservadas. Sem ordem/per1/data22=200; adicionar só ordem por minuta=422 timeout. Primeira unidade encerrou, três calls descartadas. Nova ordem id asc passou com corpo/query, páginas1/2, per1/10/100 e datas22/17;114campos, até113linhas/100IDs, limites/progressão/não sobreposição/prefixo entre per verificados. Não repetir automaticamente consulta falha nem transformar isso em causa definitiva, snapshot, terminalidade, paridade ou adoção operacional. Ordem em DataExportTemplate/gates ainda histórica; GET_WITH_QUERY preservado. Divisão não é necessidade demonstrada. Nenhum Java/POM/configuração/relatório/SQL/GraphQL/restart alterado; JAR0547 intacto, falhas procedurais preservadas. Usuário respondeu depois “Deixar o WMS terminar primeiro”:rodada em curso foi fechada; próximas execuções físicas só depois do WMS. Não interromper WMS, criar espera em loop/automação ou renovar unidades. Proibições permanentes e aceites abertos mantidos.
+
+## Continuidade 0550 — hipótese de peso; timeout6389 também nos logs V1
+
+[Checkpoint 0550](docs/continuidade/checkpoints/0550-peso-fretes-intermitencia-real-e-comparacao-reduzida.md). Usuário pediu investigar divisão do relatório sugerida pelo gestor. Leitura existente23/10 comprova consultas diárias6389, respostas200/422 para os mesmos dias e72 avisos explícitos de retry timeout;647 eventos finais200/quatro422 não contam todas as chamadas. Aplicação por lote não equivale a HTTP novo. Peso/complexidade é plausível, sem causa interna demonstrada ou campo culpado identificado;114vs110 é apenas delta de contagem. Próxima evidência necessária:cópia reduzida com ID/definição preservando identidade/filtro ou diagnóstico interno ESL. Não editar relatório original nem implementar junção por minuta/posição; divisão exige ID escopado, grão/cobertura/atualização e completude conjunta. Recursos2531MiB/86% não admitem batch4096/85; nenhuma chamada nova iniciada. HTTP/SQL/código/relatório/restart0; JAR0547 intacto, extração/aceites e todas as proibições permanentes mantidos.
+
+## Continuidade 0549 — timeout de Fretes confirmado; chave aceita nos controles
+
+[Checkpoint 0549](docs/continuidade/checkpoints/0549-fretes-timeout-comprovado-chave-controles-validos.md). Usuário reafirmou Data Export e pediu investigar chave/causa. Quatro HTTP novos em duas unidades consumidas: Fretes DATA15/10 GET-corpo/per100=500; INFO6389=200/114 campos/16 filtros; Coletas DATA-corpo=200/uma entidade; Fretes DATA22/10=422 com errors=[timeout]/Tempo limite excedido. Chave igual nos arquivos e configuração salva V1, aceita nos dois controles; filtro freights.service_at confirmado. V1 trata timeout422 e pode continuar com carga principal GraphQL quando complemento falha; não transportar esse desvio ao V2. Sem 401/403/429, retry/redirect/GraphQL/SQL/restart. 56 testes locais distintos qualificados por composição, três novos; falhas auxiliares preservadas. AST/reconciliação concluídos: 44316 nós/115957 arestas, batch 0/sem timeout, drift zero. Produção/POM/transporte operacional/JAR de 0547 intactos. Não há nova chamada automática; causa interna da demora e extração completa continuam pendentes.
+
+## Continuidade 0548 — V1 confirma Fretes 6389; comparação interna primeiro
+
+[Checkpoint 0548](docs/continuidade/checkpoints/0548-comparacao-v1-fretes-transporte-e-prova-real.md). Usuário pediu examinar o V1 em script-etl-automacao. Documentação/código: Fretes principal via GraphQL, 6389 como complemento; logs de 23/10 comprovam complemento com 15 e duas correspondências, também há falha posterior. Referência V1 inicia GET com JSON no corpo/per 1000; diagnóstico usou URL/per 1 e runtime V2 só aceita GET_WITH_QUERY. Diferença local concreta, causa do 422 ainda não provada. Histórico 0284 também obteve 6389/GET_WITH_QUERY/per 100/HTTP 200; não declarar corpo obrigatório nem API sempre quebrada. Não pedir exemplo genérico à ESL antes de comparar a referência interna. Limite comercial desconhecido não é causa confirmada; guardas de consulta futura preservadas. Somente leitura/documentação; HTTP/SQL/restart/código/testes zero, JAR de 0547 preservado.
+
+## Continuidade 0547 — NVD real e pacote pós-adoção qualificados
+
+[Checkpoint 0547](docs/continuidade/checkpoints/0547-auditoria-nvd-real-e-adocao-scanner1222.md). NVD real com scanner 12.2.2: zero erros de ingestão e vulnerabilidades/supressões reportadas nos oito arquivos cobertos; OSS Index indisponível e teste/plugins fora do escopo. JSON/HTML entregues sem alteração, implementação/33 casos e política real PASS. POM adota patch/cache por versão, bibliotecas/policy 0.0 preservadas. Pacote pós-adoção e 7/7 IT PASS; 1319 classes+45 recursos/POM/oito bibliotecas conferidos. JAR 92714FBF...97D5C42; AST 44306 nós/115932 arestas sem agrupamento/LLM, batch 0/sem timeout. Conferência final das 1540 entradas e artefatos sem drift; classes já qualificadas reutilizadas, sem recompilação/verify integral/cobertura nova. G05 nominal e extração integral pendentes. ESL HTTP/SQL Server/TDS zero, V1/WMS não reiniciados; demais gates e proibições preservados.
+
+## Continuidade 0546 — falha real do scanner12.2.0; correção oficial em qualificação
+
+[Checkpoint 0546](docs/continuidade/checkpoints/0546-falha-scanner1220-correcao-oficial-em-qualificacao.md). Bulk02 parcial/cancelado/exit1:cache H2 do scanner12.2.0 recusa URLs>1000 de CVEs2026, fix oficial8467 incluído12.2.2. Ferramenta12.2.2/cadeia/descriptor/checksums/ajuda PASS; candidato03 iniciou18:29BRT com POM derivado/cache próprio novo. EXECUÇÃO ATIVA:uma vaga2GiB/40min scanner/43min lote; não iniciar segundo batch, não inferir sucesso/adoção por início ou exit isolado se houver erro de ingestão. POM canônico/JAR10D275...A2A9BA3 ainda intactos, policy0.0/exceções/analisadores preservados. ESLHTTP/SQLServer/TDS0, V1/WMS não reiniciados; demais gates/proibições permanentes preservados.
+
+## Continuidade 0545 — sucessor NVD por arquivos oficiais em execução
+
+[Checkpoint 0545](docs/continuidade/checkpoints/0545-sucessor-nvd-arquivos-oficiais-em-execucao.md). API01 parcial/exit1, último90000/413810, nenhum relatório/aceite; cancelamento preservado e JVM Maven própria33460 encerrada após prova exata, sem tocar outros processos. Sucessor02-bulk18:08BRT usa NVD2.0 oficial via parâmetro suportado12.2.0, metadata200/UTC/SHA, mesmoPOM/policy0.0/analisadores/identidade. EXECUÇÃO ATIVA:uma vaga2GiB/20min scanner/22min lote; não iniciar segundo batch, não inferir DB completo/aceite pelo início ou metadata. Controlador novo fecha somente sua árvore em limite/cancelamento. ESLHTTP/SQLServer/TDS0, V1/WMS não reiniciados; franquia/Fretes422 e proibições permanentes preservadas.
+
+## Continuidade 0544 — ferramenta de auditoria preparada; scanner real em execução
+
+[Checkpoint 0544](docs/continuidade/checkpoints/0544-ferramenta-auditoria-preparada-scanner-real.md). Dependency-Check12.2.0/cadeia/checksums/descriptor/ajuda preparados, POM/policy0.0/failOnError/exceções intactos. Unidade técnica Root nova vinculada à coorte atual e registrada antes do efeito em scan-plan.json; scanner real iniciado17:54BRT, NVD413810registros anunciados. EXECUÇÃO ATIVA:uma vaga2GiB,35min scanner/37min lote; não iniciar segundo batch nem promover cache parcial/início a auditoria concluída. Aguardar resultado real e validator JSON, preservar falhas. Scope padrão ignora test/plugins, G05 nominal pendente. NVD só via ambiente existente, sem .env/novas identidades; ESLHTTP/SQLServer/TDS0, V1/WMS não reiniciados; franquia/Fretes422 e proibições permanentes preservadas.
+
+## Continuidade 0543 — índice recuperado e executável atual conferido
+
+[Checkpoint 0543](docs/continuidade/checkpoints/0543-indice-recuperado-executavel-conferido.md). Usuário parou WMS e autorizou continuar ausente:AST0 sem agrupamento/LLM,44259nós/115868arestas,drift0; pacote atual gerado,7/7IT PASS,1319classes+45recursos iguais após corrigir somente leitura auxiliar de caminho Windows267caracteres. JAR10D275EE4F0AB342A04FC5FD924E4735F076D35E3230118FE063CBEA1A2A9BA3, sem implantação ou autoridade física. Preservar resultados falhos/receipts originais; aceite composto com70testes de0542, sem lote único/verify/cobertura nova. Preparo de ferramenta Dependency-Check12.2.0 separado em andamento, sem feed/scanner/aceiteG05 por esta etapa; não alterar policy/threshold/POM. ESLHTTP/SQL/credenciais0, V1/WMS não reiniciados; franquia/escopo, Fretes422 e demais gates preservados.
+
+## Continuidade 0542 — piso ESL qualificado após liberação de memória
+
+[Checkpoint 0542](docs/continuidade/checkpoints/0542-qualificacao-piso-esl-apos-liberacao-memoria.md). Após liberação humana:compilação estrita749+673,70/70 testes selecionados e estilo PASS; RED anterior3 falhas esperadas. Sete casos novos incluídos, sem duplicar contagens históricas. Índice AST com agrupamento excedeu prazo global10min:batch124/pico1162,87MiB, NÃO lote integral PASS. Recuperação AST sem agrupamento e pacote offline preparados; primeira admissão recusada por lote WMS concorrente. Preservar recibos e resultados, esperar vaga real sem encerrar processos alheios; não repetir testes aprovados sem causa/drift. HTTP/SQL/credenciais0, V1 pausada, franquia/escopo e Fretes422 pendentes; sem extração/retenção/paridade integral nesta unidade.
+
+## Continuidade 0541 — piso ESL implementado; qualificação pendente de memória
+
+[Checkpoint 0541](docs/continuidade/checkpoints/0541-piso-esl-implementado-qualificacao-pendente-memoria.md). Usuário confirmou pausa V1: não reiniciar; PID conhecido/filhos ausentes, marca RUNNING do arquivo é antiga. Implementado piso2000ms na configuração efetiva Data Export/GraphQL; sete invocações JUnit novas e duas fixtures, ainda NÃO qualificadas. Executor recusou início23/10 16:11:34BRT com3348MiB/85%, abaixo4096; nenhum filho iniciado. Qualificação offline preparada em qualificacao-intervalo-esl-20261023-01; formatter/Checkstyle/compilação/JUnit/AST pendentes. Não contornar memória, encerrar outros projetos ou promover teste escrito a PASS. HTTP/SQL/credenciais0, POM/policy/governor/executorHTTP intactos. Após mudança real dos recursos, qualificar bytes atuais; preservar falhas e gates operacionais. Franquia/escopo e Fretes422 continuam pendentes; sem captura/retenção/paridade/extração integral nesta unidade.
+
+## Continuidade 0540 — verificação das regras ESL de intervalo e franquia
+
+[Checkpoint 0540](docs/continuidade/checkpoints/0540-verificacao-regras-esl-intervalo-e-franquia.md). Auditoria local23/10: perfil preparado2000ms/uma requisição/uma tentativa; diagnóstico0538 usou3s. Corrigidos somente os exemplos comentados250→2000ms em config/application.example.properties. Lacunas demonstradas: validação genérica ainda aceita intervalo<2s; governor/mutex não comprovam coordenaçãoV1+V2; budgets locais não são franquia contratada, cujo limite/período/saldo/escopo faltam. Runtime genérico pode repetir429 conforme configuração, diferentemente da amostra semretry. HTTP/SQL/provider0; Java/JAR/.env/perfis privados intactos. Regras verificadas não significam enforcement novo, teste integrado ou liberação de captura; pendências e hashes registrados em0540.
+
+## Continuidade 0539 — retorno ESL sobre Coletas e limites de chamadas
+
+[Checkpoint 0539](docs/continuidade/checkpoints/0539-retorno-esl-coletas-e-limites-de-chamadas.md). Retorno recebido em23/10/2026: ESL relata três páginas normais; imagem mostra GET6908/data (Coletas), página3/per100/HTTP200 e Body rawJSON. Compatível com Coletas200 do diagnóstico21/10; não esclarece Fretes6389, que retornou422 em duas queries distintas. ESL informa intervalo mínimo2s e limite do pacote como causas possíveis de429; não informou saldo/escopo da franquia nem correlacionou erro histórico. Teste0538 usou intervalo próprio3s e não observou429. Diferença GET/body versus query registrada sem troca automática de transporte. Esta unidade apenas avaliou/documentou o retorno: HTTP/SQL/credenciais0. Pedir à ESL o teste específico6389 com requests/horários preservados; processamento/persistência V2 e demais gates continuam pendentes, sem reserva ou liberação automática.
+
 ## Continuidade 0538 — diagnóstico atual dos nove Data Export
 
 [Checkpoint 0538](docs/continuidade/checkpoints/0538-diagnostico-http-atual-nove-dataexport.md). Em 21/10/2026 o usuário pediu testar TODOS os Data Export para responder à ESL: diagnóstico HTTP próprio, sem Main/SQL.19 chamadas consumidas entre16:09–16:13 BRT: INFO200 nos9; DATA200 em8, incluindo Coletas6908; Fretes6389 DATA422 em duas queries distintas (horários e somente datas). Nenhum429 observado; causa422 não comprovada. Base/token V1/V2 iguais por comparação em memória, sem exposição. Amostras não provam extração integral/paridade/retenção nem liberam Main ou reconstroem HTTP histórico. V1 observada com ciclos reais até21/10, sem intervenção. Nenhuma autorização/quota futura renovada; investigar Fretes com auditoria ESL/request preservado. Evidências privadas em diagnostico-esl-20261021T190624Z.

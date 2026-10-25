@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import br.com.esl.etl.v2.plataforma.fonte.dataexport.DataExportRetryPolicy;
+import br.com.esl.etl.v2.plataforma.fonte.dataexport.DataExportTransport;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -29,6 +30,31 @@ class RuntimeConfigurationFactoryTest {
             Clock.fixed(Instant.parse("2026-08-30T15:00:00Z"), ZoneOffset.UTC);
 
     @TempDir Path temporaryDirectory;
+
+    @ParameterizedTest
+    @ValueSource(strings = {"file", "environment"})
+    void loadsExplicitDocumentedGetBodyWithoutMaterializingASecret(final String channel)
+            throws Exception {
+        final String queryConfiguration = enabledDataExportConfiguration(30, 10_485_760L, 1, 0, 0);
+        final String file =
+                channel.equals("file")
+                        ? queryConfiguration.replace("GET_WITH_QUERY", "GET_WITH_BODY")
+                        : queryConfiguration;
+        final Map<String, String> environment =
+                channel.equals("environment")
+                        ? Map.of("V2_DATAEXPORT_TRANSPORT", "GET_WITH_BODY")
+                        : Map.of();
+        final var body = load(file, new Properties(), environment).dataExport().orElseThrow();
+        final var query =
+                load(queryConfiguration, new Properties(), Map.of()).dataExport().orElseThrow();
+
+        assertEquals(DataExportTransport.GET_WITH_BODY, body.settings().preferredTransport());
+        assertEquals(1, body.settings().retryPolicy().maxAttempts());
+        assertEquals(2_000, body.resiliencePolicy().minimumRequestInterval().toMillis());
+        assertFalse(
+                DataExportRuntimeConfigurationFingerprint.from(body)
+                        .equals(DataExportRuntimeConfigurationFingerprint.from(query)));
+    }
 
     @ParameterizedTest
     @ValueSource(strings = {"uri", "zone", "transport", "number", "environment", "target"})
@@ -119,6 +145,108 @@ class RuntimeConfigurationFactoryTest {
                         Map.of("V2_RUNTIME_BUSINESS_TIMEZONE", "UTC"));
 
         assertEquals("UTC", configuration.businessZone().getId());
+    }
+
+    @ParameterizedTest
+    @ValueSource(longs = {0, 1, 1999})
+    void rejectsEslIntervalsBelowTheSupplierMinimumFromFileAndEnvironment(final long milliseconds)
+            throws Exception {
+        for (final String source : new String[] {"dataexport", "graphql"}) {
+            final String configuration =
+                    source.equals("dataexport")
+                            ? enabledDataExportConfiguration(30, 10485760, 1, 0, 0)
+                            : enabledGraphQlConfiguration();
+            final String property = source + ".resilience.minimum-request-interval-ms=";
+            final String environmentKey =
+                    source.equals("dataexport")
+                            ? "V2_DATAEXPORT_RESILIENCE_MINIMUM_REQUEST_INTERVAL_MS"
+                            : "V2_GRAPHQL_RESILIENCE_MINIMUM_REQUEST_INTERVAL_MS";
+            final var fileFailure =
+                    assertThrows(
+                            IllegalArgumentException.class,
+                            () ->
+                                    load(
+                                            configuration.replace(
+                                                    property + "2000", property + milliseconds),
+                                            new Properties(),
+                                            Map.of()));
+            final var environmentFailure =
+                    assertThrows(
+                            IllegalArgumentException.class,
+                            () ->
+                                    load(
+                                            configuration,
+                                            new Properties(),
+                                            Map.of(environmentKey, String.valueOf(milliseconds))));
+            for (final var failure :
+                    new IllegalArgumentException[] {fileFailure, environmentFailure}) {
+                assertEquals(
+                        "O intervalo entre requisições ESL deve ser de pelo menos 2000 ms.",
+                        failure.getMessage());
+                assertNull(failure.getCause());
+            }
+        }
+    }
+
+    @ParameterizedTest
+    @ValueSource(longs = {2000, 2001, 60000})
+    void preservesValidEslIntervalsFromFileAndEnvironment(final long milliseconds)
+            throws Exception {
+        for (final String source : new String[] {"dataexport", "graphql"}) {
+            final String configuration =
+                    source.equals("dataexport")
+                            ? enabledDataExportConfiguration(30, 10485760, 1, 0, 0)
+                            : enabledGraphQlConfiguration();
+            final String property = source + ".resilience.minimum-request-interval-ms=";
+            final String environmentKey =
+                    source.equals("dataexport")
+                            ? "V2_DATAEXPORT_RESILIENCE_MINIMUM_REQUEST_INTERVAL_MS"
+                            : "V2_GRAPHQL_RESILIENCE_MINIMUM_REQUEST_INTERVAL_MS";
+            final var fileConfiguration =
+                    load(
+                            configuration.replace(property + "2000", property + milliseconds),
+                            new Properties(),
+                            Map.of());
+            final var environmentConfiguration =
+                    load(
+                            configuration,
+                            new Properties(),
+                            Map.of(environmentKey, String.valueOf(milliseconds)));
+            for (final var actual :
+                    new RuntimeConfiguration[] {fileConfiguration, environmentConfiguration}) {
+                final var policy =
+                        source.equals("dataexport")
+                                ? actual.dataExport().orElseThrow().resiliencePolicy()
+                                : actual.graphQl().orElseThrow().resiliencePolicy();
+                assertEquals(
+                        java.time.Duration.ofMillis(milliseconds), policy.minimumRequestInterval());
+            }
+        }
+    }
+
+    @Test
+    void validatesTheEffectiveIntervalAfterEnvironmentPrecedence() throws Exception {
+        for (final String source : new String[] {"dataexport", "graphql"}) {
+            final String configuration =
+                    source.equals("dataexport")
+                            ? enabledDataExportConfiguration(30, 10485760, 1, 0, 0)
+                            : enabledGraphQlConfiguration();
+            final String property = source + ".resilience.minimum-request-interval-ms=";
+            final String environmentKey =
+                    source.equals("dataexport")
+                            ? "V2_DATAEXPORT_RESILIENCE_MINIMUM_REQUEST_INTERVAL_MS"
+                            : "V2_GRAPHQL_RESILIENCE_MINIMUM_REQUEST_INTERVAL_MS";
+            final var actual =
+                    load(
+                            configuration.replace(property + "2000", property + "0"),
+                            new Properties(),
+                            Map.of(environmentKey, "2000"));
+            final var policy =
+                    source.equals("dataexport")
+                            ? actual.dataExport().orElseThrow().resiliencePolicy()
+                            : actual.graphQl().orElseThrow().resiliencePolicy();
+            assertEquals(java.time.Duration.ofSeconds(2), policy.minimumRequestInterval());
+        }
     }
 
     @Test
@@ -717,7 +845,7 @@ class RuntimeConfigurationFactoryTest {
     }
 
     private static String resilienceConfiguration() {
-        return "\ndataexport.resilience.minimum-request-interval-ms=250"
+        return "\ndataexport.resilience.minimum-request-interval-ms=2000"
                 + "\ndataexport.resilience.max-in-flight=1"
                 + "\ndataexport.resilience.max-requests-per-cycle=10000"
                 + "\ndataexport.resilience.max-requests-per-workload=5000"

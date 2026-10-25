@@ -171,6 +171,30 @@ try {
             Write-TestFile -Root $root -RelativePath $canaryPath -Content ('config.put(' + $quote + 'password' + $quote + ', ' + $quote + $canaryValue + $quote + ');')
         }
     }
+    $historicalPublicFixtures = @(
+        @{path='src/test/java/br/com/esl/etl/v2/bootstrap/DevLocalMainOfflineLifecycleTest.java';value='SYNTHETIC_CONFIG_VALUE_'+'CANARY';rule='HARDCODED_SECRET_ARGUMENT';kind='argument'},
+        @{path='src/test/java/br/com/esl/etl/v2/bootstrap/RuntimeDevSourceConfigurationTest.java';value='fixture-'+'only';rule='HARDCODED_SECRET_ARGUMENT';kind='argument'},
+        @{path='src/test/java/br/com/esl/etl/v2/plataforma/persistencia/controle/C78Sample12AdmissionProducerTest.java';value='offline-component-'+'value';rule='INLINE_SECRET_ASSIGNMENT';kind='assignment'}
+    )
+    $historicalIndex=0
+    foreach ($historicalFixture in $historicalPublicFixtures) {
+        foreach ($historicalVariant in @('exact','changed','other-path')) {
+            $historicalPath=if($historicalVariant -ceq 'other-path'){'src/UnapprovedHistoricalFixture.java'}else{$historicalFixture.path}
+            $historicalValue=if($historicalVariant -ceq 'changed'){'unapproved-'+'historical-value-123456'}else{$historicalFixture.value}
+            $historicalExit=if($historicalVariant -ceq 'exact'){0}else{1}
+            $historicalRule=if($historicalExit -eq 0){''}else{$historicalFixture.rule}
+            Invoke-ScannerCase -Name ('historical-public-fixture-'+$historicalIndex+'-'+$historicalVariant) -ExpectedExitCode $historicalExit -ExpectedRule $historicalRule -ForbiddenOutputLiteral $historicalValue -Arrange {
+                param($root)
+                $historicalContent=if($historicalFixture.kind -ceq 'assignment'){
+                    'byte[] secret = '+$quote+$historicalValue+$quote+'.getBytes(StandardCharsets.UTF_16LE);'
+                }else{
+                    'config.put('+$quote+'password'+$quote+', '+$quote+$historicalValue+$quote+');'
+                }
+                Write-TestFile -Root $root -RelativePath $historicalPath -Content $historicalContent
+            }
+        }
+        $historicalIndex++
+    }
     Invoke-ScannerCase `
         -Name 'exact-approved-fixture' `
         -ExpectedExitCode 0 `
@@ -461,7 +485,7 @@ try {
 }
 finally {
     if ($EvidenceAttempt) {
-        $expectedCases = if ($C78Only) { 3 } else { 61 }
+        $expectedCases = if ($C78Only) { 3 } else { 70 }
         [IO.File]::WriteAllText((Join-Path $testRoot 'result.json'),
             (@{passed=($caseCount -eq $expectedCases);cases=$caseCount;evidenceRetained=$true;scannerSha256=(Get-FileHash -LiteralPath $scannerPath).Hash.ToLowerInvariant()}|ConvertTo-Json),
             [Text.UTF8Encoding]::new($false))

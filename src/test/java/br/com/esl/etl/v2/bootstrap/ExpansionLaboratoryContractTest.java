@@ -31,6 +31,23 @@ import org.junit.jupiter.params.provider.EnumSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 class ExpansionLaboratoryContractTest {
+    @Test
+    void mapsSinistroOffsetDateTimesAsSourceClocksAndRetainsTheirRawValues() throws Exception {
+        final var row =
+                new com.fasterxml.jackson.databind.ObjectMapper()
+                        .readTree(
+                                """
+                {"data":{"occurrence_at_time":"2036-03-17T07:08:09.123-03:00",
+                         "finished_at_time":"2036-03-18T23:45:00+02:00"}}
+                """);
+        final var record = new SinistroDataExportMapper().map(1, row);
+        assertTrue(record.occurrenceAtTime().valid());
+        assertEquals(java.time.LocalTime.parse("07:08:09.123"), record.occurrenceAtTime().value());
+        assertEquals("2036-03-17T07:08:09.123-03:00", record.occurrenceAtTime().raw());
+        assertEquals(java.time.LocalTime.parse("23:45:00"), record.finishedAtTime().value());
+        assertEquals("2036-03-18T23:45:00+02:00", record.finishedAtTime().raw());
+    }
+
     @ParameterizedTest
     @EnumSource(
             value = DataExportTemplate.class,

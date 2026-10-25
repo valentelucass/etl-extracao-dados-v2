@@ -129,6 +129,22 @@ public final class ExpansionFieldParser {
                 });
     }
 
+    /** Source clock projection: retain the full date/offset in raw, without UTC conversion. */
+    public static ExpansionValue<LocalTime> timeFromSourceClock(
+            final JsonNode row, final String name) {
+        return parse(
+                row,
+                name,
+                node -> {
+                    require(node.isTextual());
+                    try {
+                        return LocalTime.parse(node.textValue());
+                    } catch (final java.time.format.DateTimeParseException timeOnly) {
+                        return OffsetDateTime.parse(node.textValue()).toLocalTime();
+                    }
+                });
+    }
+
     private static <T> ExpansionValue<T> parse(
             final JsonNode row, final String name, final Function<JsonNode, T> parser) {
         final JsonNode node = row.get(name);

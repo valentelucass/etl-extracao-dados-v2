@@ -93,6 +93,10 @@ foreach ($entry in @(
     'SECRET_BARE_ASSIGNMENT|.agents/skills/graphify/SKILL.md|output_tok,',
     # DEV-LOCAL-SEC-002: invalid-config refusal canary; exact test/path/value only.
     'HARDCODED_SECRET_ARGUMENT|src/test/java/br/com/esl/etl/v2/bootstrap/DevLocalMainProcessTest.java|SYNTHETIC_CONFIG_CANARY',
+    # GIT-0590: public literals already used by offline refusal/frame tests; exact tuples only.
+    'HARDCODED_SECRET_ARGUMENT|src/test/java/br/com/esl/etl/v2/bootstrap/DevLocalMainOfflineLifecycleTest.java|SYNTHETIC_CONFIG_VALUE_CANARY',
+    'HARDCODED_SECRET_ARGUMENT|src/test/java/br/com/esl/etl/v2/bootstrap/RuntimeDevSourceConfigurationTest.java|fixture-only',
+    'INLINE_SECRET_ASSIGNMENT|src/test/java/br/com/esl/etl/v2/plataforma/persistencia/controle/C78Sample12AdmissionProducerTest.java|offline-component-value',
     # QUAL-I: four public CycloneDX1.6 schema descriptions; exact path/value, never a directory exemption.
     'SECRET_QUOTED_ASSIGNMENT|docs/catalogos/macrobloco-qualificacao-pacote/third-party/bom-1.6.schema.json|A key used to encrypt and decrypt messages in symmetric cryptography.',
     'SECRET_QUOTED_ASSIGNMENT|docs/catalogos/macrobloco-qualificacao-pacote/third-party/bom-1.6.schema.json|A piece of data known only to the parties involved, in a secure communication.',

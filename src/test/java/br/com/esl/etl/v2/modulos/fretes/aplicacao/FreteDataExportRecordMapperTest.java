@@ -7,11 +7,75 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import br.com.esl.etl.v2.modulos.fretes.domain.FreteFreshnessOrigin;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.junit.jupiter.api.Test;
 
 class FreteDataExportRecordMapperTest {
     private final ObjectMapper json = new ObjectMapper();
     private final FreteDataExportRecordMapper mapper = new FreteDataExportRecordMapper();
+
+    @Test
+    void mapsObservedServiceAtWithTheOriginalSourcePathAndPayload() throws Exception {
+        final ObjectNode payload = json.createObjectNode();
+        try (var fixture =
+                getClass()
+                        .getResourceAsStream(
+                                "/contracts/6389-info.observed-structure-20261024.json")) {
+            assertTrue(fixture != null);
+            for (final var field : json.readTree(fixture).path("fields")) {
+                payload.putNull(field.path("name").textValue());
+            }
+        }
+        payload.put("id", 1);
+        payload.put("service_at", "2036-03-17");
+        payload.put("updated_at", "2099-01-01T00:00:00Z");
+        final var record = mapper.map(1, payload);
+
+        assertFalse(record.quarantined());
+        assertEquals(FreteFreshnessOrigin.SERVICO_EM, record.freshnessOrigin());
+        assertEquals("2036-03-17T03:00:00Z", record.freshnessAtUtc().toString());
+        assertEquals(record.freshnessAtUtc(), record.serviceAtUtc());
+        final var evidence = json.readTree(record.freshnessEvidenceJson()).path("servico_em");
+        assertEquals("/service_at", evidence.path("path").textValue());
+        assertEquals("2036-03-17", evidence.path("raw").textValue());
+        assertTrue(record.payloadJson().contains("\"service_at\""));
+        assertFalse(record.payloadJson().contains("\"servico_em\""));
+        final var presence = json.readTree(record.fieldPresenceJson());
+        assertEquals(18, presence.size(), "The existing SQL staging contract accepts 18 paths.");
+        assertEquals("ABSENT", presence.path("servico_em").textValue());
+        assertFalse(presence.has("service_at"));
+        assertEquals("VALUE", evidence.path("presence").textValue());
+    }
+
+    @Test
+    void quarantinesAnInvalidObservedServiceDateWithoutUsingUpdatedAt() throws Exception {
+        final var record =
+                mapper.map(
+                        1,
+                        json.readTree(
+                                """
+                                {"id":1,"service_at":"2036-02-30",
+                                 "updated_at":"2099-01-01T00:00:00Z"}
+                                """));
+
+        assertEquals("INVALID_SERVICO_EM", record.quarantineReasonCode());
+    }
+
+    @Test
+    void retainsTheExistingServiceFieldPresenceAndInvalidValuePrecedence() throws Exception {
+        for (final String existing : new String[] {"null", "\"invalid\""}) {
+            final var record =
+                    mapper.map(
+                            1,
+                            json.readTree(
+                                    "{\"id\":1,\"servico_em\":"
+                                            + existing
+                                            + ",\"service_at\":\"2036-03-17\"}"));
+            assertEquals(
+                    existing.equals("null") ? "MISSING_VALID_FRESHNESS" : "INVALID_SERVICO_EM",
+                    record.quarantineReasonCode());
+        }
+    }
 
     @Test
     void mapsTheOnlyContractedIdentityAndKeepsAliasOutOfIdentity() throws Exception {

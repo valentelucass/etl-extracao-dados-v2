@@ -57,6 +57,6 @@ class DataExportRequestJsonSerializerTest {
         assertEquals(
                 "2026-08-13 00:00:00 - 2026-08-13 23:59:59",
                 payload.at("/search/scopes/by_updated_at").asText());
-        assertEquals("corporation_sequence_number asc", payload.path("order_by").asText());
+        assertEquals("id asc", payload.path("order_by").asText());
     }
 }

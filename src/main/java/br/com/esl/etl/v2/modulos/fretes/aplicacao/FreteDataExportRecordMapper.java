@@ -84,7 +84,8 @@ public final class FreteDataExportRecordMapper {
         final FreteTemporalValue cteCreated = temporal(record, "cte_created_at");
         final FreteTemporalValue cteIssued = temporal(record, "cte_issued_at");
         final FreteTemporalValue criadoEm = temporal(record, "criado_em");
-        final FreteTemporalValue servicoEm = temporal(record, "servico_em");
+        final FreteTemporalValue servicoEm =
+                temporal(record, record.has("servico_em") ? "servico_em" : "service_at");
         final FreteFreshnessPolicy.Selection freshness =
                 FreteFreshnessPolicy.select(cteCreated, cteIssued, criadoEm, servicoEm);
         if (!freshness.selected()) {
@@ -310,7 +311,11 @@ public final class FreteDataExportRecordMapper {
             final FreteTemporalValue servicoEm) {
         final ObjectNode result = FreteJson.JSON.createObjectNode();
         result.put("precedence", "cte_created_at>cte_issued_at>criado_em>servico_em");
-        result.put("evidenceScope", "SYNTHETIC_V09_NOT_SOURCE_CONTRACT_EVIDENCE");
+        result.put(
+                "evidenceScope",
+                servicoEm.sourcePath().equals("/service_at")
+                        ? "DATAEXPORT_6389_SERVICE_DATE_MAPPING"
+                        : "SYNTHETIC_V09_NOT_SOURCE_CONTRACT_EVIDENCE");
         appendTemporal(result, "cte_created_at", cteCreated);
         appendTemporal(result, "cte_issued_at", cteIssued);
         appendTemporal(result, "criado_em", criadoEm);

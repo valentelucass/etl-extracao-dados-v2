@@ -1,0 +1,435 @@
+{
+  "provenance": {
+    "observed_at_utc": "2026-10-24T12:44:56.384931100Z",
+    "template": 6389,
+    "technical_structure_only": true,
+    "original_http_body_retained": false,
+    "metadata_elements_sha256": "C65EC5A0016A8DED618DC1DD1EF464227D68C792F285C760FB0F4C23D26D070A"
+  },
+  "fields": [
+    {
+      "name": "ad_valorem_subtotal"
+    },
+    {
+      "name": "additionals_subtotal"
+    },
+    {
+      "name": "adm_fee_subtotal"
+    },
+    {
+      "name": "calculation_type"
+    },
+    {
+      "name": "collect_subtotal"
+    },
+    {
+      "name": "comments"
+    },
+    {
+      "name": "corporation_sequence_number"
+    },
+    {
+      "name": "courtesy"
+    },
+    {
+      "name": "cubages_cubed_weight"
+    },
+    {
+      "name": "delivery_subtotal"
+    },
+    {
+      "name": "dispatch_subtotal"
+    },
+    {
+      "name": "emergency_subtotal"
+    },
+    {
+      "name": "emission_type"
+    },
+    {
+      "name": "fit_cre_name"
+    },
+    {
+      "name": "fit_crn_psn_nickname"
+    },
+    {
+      "name": "fit_d_t_created_at"
+    },
+    {
+      "name": "fit_diy_cin_tda_value"
+    },
+    {
+      "name": "fit_diy_sae_code"
+    },
+    {
+      "name": "fit_dos_cty_name"
+    },
+    {
+      "name": "fit_dos_postal_code"
+    },
+    {
+      "name": "fit_dpn_delivery_prediction_at"
+    },
+    {
+      "name": "fit_dpn_manual_schedule"
+    },
+    {
+      "name": "fit_dpn_performance_finished_at"
+    },
+    {
+      "name": "fit_dyn_drt_nickname"
+    },
+    {
+      "name": "fit_dyn_name"
+    },
+    {
+      "name": "fit_fhe_cte_cancellation_at"
+    },
+    {
+      "name": "fit_fhe_cte_cancellation_reason"
+    },
+    {
+      "name": "fit_fhe_cte_issued_at"
+    },
+    {
+      "name": "fit_fhe_cte_key"
+    },
+    {
+      "name": "fit_fhe_cte_number"
+    },
+    {
+      "name": "fit_fhe_cte_series"
+    },
+    {
+      "name": "fit_fhe_cte_status"
+    },
+    {
+      "name": "fit_fis_see_name"
+    },
+    {
+      "name": "fit_fis_subtotal"
+    },
+    {
+      "name": "fit_fsn_name"
+    },
+    {
+      "name": "fit_fte_f_r_mft_sequence_code"
+    },
+    {
+      "name": "fit_fte_f_r_occurrence_at"
+    },
+    {
+      "name": "fit_fte_l_y_mft_sequence_code"
+    },
+    {
+      "name": "fit_fte_l_y_mft_service_date"
+    },
+    {
+      "name": "fit_ftt_agent_costs"
+    },
+    {
+      "name": "fit_ftt_commission_costs"
+    },
+    {
+      "name": "fit_ftt_consolidation_costs"
+    },
+    {
+      "name": "fit_ftt_insurance_costs"
+    },
+    {
+      "name": "fit_ftt_manifest_costs"
+    },
+    {
+      "name": "fit_ftt_manifest_pick_costs"
+    },
+    {
+      "name": "fit_ftt_operational_expenses"
+    },
+    {
+      "name": "fit_ftt_redispatch_costs"
+    },
+    {
+      "name": "fit_ftt_tax_total"
+    },
+    {
+      "name": "fit_ftt_total_cost"
+    },
+    {
+      "name": "fit_mer_mft_sequence_code"
+    },
+    {
+      "name": "fit_mer_mft_service_date"
+    },
+    {
+      "name": "fit_nse_cancelation_reason"
+    },
+    {
+      "name": "fit_nse_issued_at"
+    },
+    {
+      "name": "fit_nse_nee_code"
+    },
+    {
+      "name": "fit_nse_number"
+    },
+    {
+      "name": "fit_nse_status"
+    },
+    {
+      "name": "fit_o_n_drt_nickname"
+    },
+    {
+      "name": "fit_o_n_name"
+    },
+    {
+      "name": "fit_o_t_corporation_sequence_number"
+    },
+    {
+      "name": "fit_oas_cty_name"
+    },
+    {
+      "name": "fit_oas_postal_code"
+    },
+    {
+      "name": "fit_ony_cin_tda_value"
+    },
+    {
+      "name": "fit_ony_sae_code"
+    },
+    {
+      "name": "fit_p_m_pck_finish_date"
+    },
+    {
+      "name": "fit_p_m_pck_mik_mft_sequence_code"
+    },
+    {
+      "name": "fit_p_m_pck_sequence_code"
+    },
+    {
+      "name": "fit_psn_name"
+    },
+    {
+      "name": "fit_pyr_document"
+    },
+    {
+      "name": "fit_pyr_mds_cty_name"
+    },
+    {
+      "name": "fit_pyr_mds_cty_sae_code"
+    },
+    {
+      "name": "fit_pyr_name"
+    },
+    {
+      "name": "fit_pyr_nickname"
+    },
+    {
+      "name": "fit_qrd_qoe_sequence_code"
+    },
+    {
+      "name": "fit_rir_document"
+    },
+    {
+      "name": "fit_rir_nickname"
+    },
+    {
+      "name": "fit_rpt_document"
+    },
+    {
+      "name": "fit_rpt_nickname"
+    },
+    {
+      "name": "fit_sdr_document"
+    },
+    {
+      "name": "fit_sdr_nickname"
+    },
+    {
+      "name": "fit_spr_document"
+    },
+    {
+      "name": "fit_spr_nickname"
+    },
+    {
+      "name": "fit_sps_slr_psn_name"
+    },
+    {
+      "name": "fit_sps_slr_psn_nickname"
+    },
+    {
+      "name": "fit_uer_name"
+    },
+    {
+      "name": "freight_weight_subtotal"
+    },
+    {
+      "name": "gris_subtotal"
+    },
+    {
+      "name": "id"
+    },
+    {
+      "name": "insurance_accountable_type"
+    },
+    {
+      "name": "invoices_mapping"
+    },
+    {
+      "name": "invoices_value"
+    },
+    {
+      "name": "invoices_volumes"
+    },
+    {
+      "name": "itr_subtotal"
+    },
+    {
+      "name": "km"
+    },
+    {
+      "name": "nfse_number"
+    },
+    {
+      "name": "nfse_series"
+    },
+    {
+      "name": "other_fees"
+    },
+    {
+      "name": "payment_accountable_type"
+    },
+    {
+      "name": "real_weight"
+    },
+    {
+      "name": "redispatch_subtotal"
+    },
+    {
+      "name": "reference_number"
+    },
+    {
+      "name": "sec_cat_subtotal"
+    },
+    {
+      "name": "sequence_code"
+    },
+    {
+      "name": "service_at"
+    },
+    {
+      "name": "service_type"
+    },
+    {
+      "name": "status"
+    },
+    {
+      "name": "suframa_subtotal"
+    },
+    {
+      "name": "taxed_weight"
+    },
+    {
+      "name": "tde_subtotal"
+    },
+    {
+      "name": "toll_subtotal"
+    },
+    {
+      "name": "total"
+    },
+    {
+      "name": "total_cubic_volume"
+    },
+    {
+      "name": "trt_subtotal"
+    },
+    {
+      "name": "type"
+    },
+    {
+      "name": "updated_at"
+    }
+  ],
+  "filters": [
+    {
+      "table": "freights",
+      "field": "service_at",
+      "type": "date"
+    },
+    {
+      "table": "scopes",
+      "field": "by_updated_at",
+      "type": "datetime"
+    },
+    {
+      "table": "scopes",
+      "field": "from_freight_delivered_at",
+      "type": "date"
+    },
+    {
+      "table": "freights",
+      "field": "freight_classification_id",
+      "type": "select"
+    },
+    {
+      "table": "freights",
+      "field": "status",
+      "type": "select"
+    },
+    {
+      "table": "scopes",
+      "field": "from_ctes_issue_at",
+      "type": "date"
+    },
+    {
+      "table": "scopes",
+      "field": "from_nfse_issued_at",
+      "type": "date"
+    },
+    {
+      "table": "freights",
+      "field": "payer_id",
+      "type": "select"
+    },
+    {
+      "table": "scopes",
+      "field": "from_delivery_prediction_at",
+      "type": "date"
+    },
+    {
+      "table": "fit_freight_location",
+      "field": "current_location_id",
+      "type": "select"
+    },
+    {
+      "table": "fit_destination_city",
+      "field": "state_id",
+      "type": "select"
+    },
+    {
+      "table": "freights",
+      "field": "courtesy",
+      "type": "select"
+    },
+    {
+      "table": "freights",
+      "field": "type",
+      "type": "select"
+    },
+    {
+      "table": "freights",
+      "field": "emission_type",
+      "type": "select"
+    },
+    {
+      "table": "freights",
+      "field": "corporation_sequence_number",
+      "type": "numeric"
+    },
+    {
+      "table": "freights",
+      "field": "corporation_id",
+      "type": "select"
+    }
+  ]
+}

@@ -44,6 +44,38 @@ public final class LocalizacaoCargaDataExportRecordMapper {
                     "fit_fln_cln_nickname",
                     "fit_o_n_name",
                     "fit_o_n_drt_nickname");
+    private final boolean observedProfile;
+    private final List<String> acceptedFields;
+
+    public LocalizacaoCargaDataExportRecordMapper() {
+        this(false);
+    }
+
+    private LocalizacaoCargaDataExportRecordMapper(final boolean observed) {
+        observedProfile = observed;
+        acceptedFields =
+                observed
+                        ? java.util.stream.Stream.concat(
+                                        ACCEPTED_FIELDS.stream(),
+                                        List.of(
+                                                "invoices_mapping",
+                                                "finished_at",
+                                                "fit_d_t_created_at",
+                                                "fit_dos_cty_name",
+                                                "fit_dos_cty_sae_code",
+                                                "fit_fte_lce_occurrence_at",
+                                                "fit_fte_lce_ore_description",
+                                                "fit_pyr_nickname",
+                                                "fit_rpt_name")
+                                                .stream())
+                                .toList()
+                        : ACCEPTED_FIELDS;
+    }
+
+    /** Explicit observed capture projection; does not grant runtime or publication admission. */
+    public static LocalizacaoCargaDataExportRecordMapper observed20261024() {
+        return new LocalizacaoCargaDataExportRecordMapper(true);
+    }
 
     public LocalizacaoCargaStageRecord map(final int ordinal, final JsonNode record) {
         return map(ordinal, record, WireLexemes.unavailable());
@@ -188,29 +220,39 @@ public final class LocalizacaoCargaDataExportRecordMapper {
                 null);
     }
 
-    private static boolean hasUnapprovedField(final JsonNode record) {
+    private boolean hasUnapprovedField(final JsonNode record) {
         final Iterator<String> names = record.fieldNames();
         while (names.hasNext()) {
-            if (!ACCEPTED_FIELDS.contains(names.next())) {
+            if (!acceptedFields.contains(names.next())) {
                 return true;
             }
         }
         return false;
     }
 
-    private static boolean hasUnsupportedShape(final JsonNode record) {
-        for (final String name : ACCEPTED_FIELDS) {
+    private boolean hasUnsupportedShape(final JsonNode record) {
+        for (final String name : acceptedFields) {
             final JsonNode value = record.get(name);
             if (value != null && value.isContainerNode()) {
-                return true;
+                if (!observedProfile
+                        || !name.equals("invoices_mapping")
+                        || !value.isArray()
+                        || value.size() > 1000) {
+                    return true;
+                }
+                for (final JsonNode item : value) {
+                    if (!item.isTextual() || item.textValue().length() > 1024) {
+                        return true;
+                    }
+                }
             }
         }
         return false;
     }
 
-    private static String canonicalRecord(final JsonNode record) {
+    private String canonicalRecord(final JsonNode record) {
         final ObjectNode accepted = LocalizacaoCargaJson.JSON.createObjectNode();
-        for (final String name : ACCEPTED_FIELDS) {
+        for (final String name : acceptedFields) {
             if (record.has(name)) {
                 accepted.set(name, LocalizacaoCargaJson.canonical(record.get(name)));
             }
@@ -318,10 +360,10 @@ public final class LocalizacaoCargaDataExportRecordMapper {
         return status.invalidType() ? "INVALID_STATUS_TYPE" : null;
     }
 
-    private static String presenceEvidence(final JsonNode record, final WireLexemes lexemes) {
+    private String presenceEvidence(final JsonNode record, final WireLexemes lexemes) {
         final ObjectNode result = LocalizacaoCargaJson.JSON.createObjectNode();
         final ObjectNode fields = result.putObject("fields");
-        for (final String name : ACCEPTED_FIELDS) {
+        for (final String name : acceptedFields) {
             final Field field = field(record, name);
             final ObjectNode evidence = fields.putObject(name);
             evidence.put("path", "/" + name);
@@ -353,7 +395,11 @@ public final class LocalizacaoCargaDataExportRecordMapper {
             }
         }
         final ObjectNode policy = result.putObject("policy");
-        policy.put("matrix", "LOCALIZACAO_8656_17_PATHS_V1");
+        policy.put(
+                "matrix",
+                observedProfile
+                        ? "LOCALIZACAO_8656_26_PATHS_OBSERVED_20261024"
+                        : "LOCALIZACAO_8656_17_PATHS_V1");
         policy.put(
                 "freightVolumeFallback",
                 "FREIGHT_VOLUME_FALLBACK_DEFERRED_RELATION_AND_PUBLICATION");

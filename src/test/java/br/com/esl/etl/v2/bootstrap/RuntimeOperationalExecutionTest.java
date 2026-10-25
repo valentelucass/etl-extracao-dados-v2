@@ -2,6 +2,7 @@ package br.com.esl.etl.v2.bootstrap;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -16,6 +17,7 @@ import java.nio.file.Path;
 import java.time.Clock;
 import java.time.Instant;
 import java.time.ZoneOffset;
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.UUID;
@@ -25,6 +27,89 @@ import org.junit.jupiter.api.io.TempDir;
 class RuntimeOperationalExecutionTest {
     private static final Instant NOW = Instant.parse("2036-03-19T18:42:10Z");
     @TempDir Path directory;
+
+    @Test
+    void selectsExplicitObservedFretesContractAndChangesOccurrenceBinding() throws Exception {
+        final var configuration = observedFretesConfiguration();
+        final var document = document("FRETES");
+        final var legacy = RuntimeOperationalRequest.read(configuration, write(document));
+        document.put("sourceContractVersion", "2026-10-24.fretes-observed-curl.v1");
+        final var observed = RuntimeOperationalRequest.read(configuration, write(document));
+
+        assertEquals("2026-10-24.fretes-observed-curl.v1", observed.release.contractVersion());
+        assertEquals("$", observed.release.response().recordRoot());
+        assertEquals(130, observed.release.metadata().elements().size());
+        assertEquals(115, observed.release.response().fields().size());
+        assertEquals(
+                "ad072100143c765705cd7b01e581f19ce3e5bb9a38d181f9cfeae4bcbd141b35",
+                observed.binding.contractFingerprint().sha256());
+        assertEquals(
+                br.com.esl.etl.v2.plataforma.configuracao.DataExportRuntimeConfigurationFingerprint
+                        .from(configuration.dataExport().orElseThrow()),
+                observed.binding.runtimeConfigurationFingerprint());
+        assertNotEquals(
+                legacy.binding.contractFingerprint(), observed.binding.contractFingerprint());
+        assertNotEquals(legacy.plan.fingerprint(), observed.plan.fingerprint());
+        assertFalse(observed.laboratory());
+        assertEquals(List.of("id asc"), observed.firstPage().orderBy());
+
+        document.put("invocationId", UUID.randomUUID().toString());
+        final var next = RuntimeOperationalRequest.read(configuration, write(document));
+        assertEquals(observed.plan.fingerprint(), next.plan.fingerprint());
+        assertEquals(
+                observed.binding.configurationFingerprint(),
+                next.binding.configurationFingerprint());
+    }
+
+    @Test
+    void refusesUnqualifiedObservedFretesSelectionsBeforeComposition() throws Exception {
+        final var body = observedFretesConfiguration();
+        for (final String version : new String[] {"", "unknown", "../release.json"}) {
+            final var document = document("FRETES").put("sourceContractVersion", version);
+            assertThrows(
+                    IllegalArgumentException.class,
+                    () -> RuntimeOperationalRequest.read(body, write(document)));
+        }
+        final var coletas =
+                document("COLETAS")
+                        .put("sourceContractVersion", "2026-10-24.fretes-observed-curl.v1");
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> RuntimeOperationalRequest.read(body, write(coletas)));
+        final var observed =
+                document("FRETES")
+                        .put("sourceContractVersion", "2026-10-24.fretes-observed-curl.v1");
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> RuntimeOperationalRequest.read(configuration(), write(observed)));
+        final var retrying =
+                new RuntimeConfigurationFactory()
+                        .load(
+                                configurationFile(),
+                                new Properties(),
+                                Map.of("V2_DATAEXPORT_TRANSPORT", "GET_WITH_BODY"),
+                                Clock.fixed(NOW, ZoneOffset.UTC));
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> RuntimeOperationalRequest.read(retrying, write(observed)));
+        observed.put("sourceContractVersion", true);
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> RuntimeOperationalRequest.read(body, write(observed)));
+    }
+
+    private RuntimeConfiguration observedFretesConfiguration() throws Exception {
+        return new RuntimeConfigurationFactory()
+                .load(
+                        configurationFile(),
+                        new Properties(),
+                        Map.of(
+                                "V2_DATAEXPORT_TRANSPORT", "GET_WITH_BODY",
+                                "V2_DATAEXPORT_RETRY_MAX_ATTEMPTS", "1",
+                                "V2_DATAEXPORT_RETRY_INITIAL_DELAY_MS", "0",
+                                "V2_DATAEXPORT_RETRY_MAX_DELAY_MS", "0"),
+                        Clock.fixed(NOW, ZoneOffset.UTC));
+    }
 
     @Test
     void selectsTheCurrentColetasReleaseWithoutALaboratoryResource() throws Exception {

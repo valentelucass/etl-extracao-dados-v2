@@ -1,5 +1,8 @@
 package br.com.esl.etl.v2.plataforma.fonte.dataexport;
 
+import br.com.esl.etl.v2.plataforma.contrato.SourceContractRelease;
+import br.com.esl.etl.v2.plataforma.controle.ImmutableFingerprint;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -14,11 +17,31 @@ public record DataExportPageRequest(
         Optional<SourceDateTimeRange> updatedAtWindow,
         int page,
         int pageSize,
-        List<String> orderBy) {
+        List<String> orderBy,
+        @JsonIgnore DataExportRequestProfile profile) {
+
+    /** Historical constructor and JSON shape remain a legacy ordered request. */
+    public DataExportPageRequest(
+            final DataExportTemplate template,
+            final BusinessDateRange businessDateWindow,
+            final Optional<SourceDateTimeRange> updatedAtWindow,
+            final int page,
+            final int pageSize,
+            final List<String> orderBy) {
+        this(
+                template,
+                businessDateWindow,
+                updatedAtWindow,
+                page,
+                pageSize,
+                orderBy,
+                DataExportRequestProfile.LEGACY);
+    }
 
     public DataExportPageRequest {
         Objects.requireNonNull(template, "O template é obrigatório.");
         Objects.requireNonNull(businessDateWindow, "A janela de data de negócio é obrigatória.");
+        profile = profile == null ? DataExportRequestProfile.LEGACY : profile;
         updatedAtWindow = updatedAtWindow == null ? Optional.empty() : updatedAtWindow;
         if (template.laboratoryBackfillOnly() && updatedAtWindow.isPresent()) {
             throw new IllegalArgumentException("UPDATED_AT_FILTER_NOT_CONTRACTED");
@@ -29,8 +52,10 @@ public record DataExportPageRequest(
         if (pageSize < 1) {
             throw new IllegalArgumentException("O tamanho da página deve ser maior que zero.");
         }
+        profile.requireShape(
+                template, businessDateWindow, updatedAtWindow, page, pageSize, orderBy);
         final List<String> requestedOrderBy = orderBy == null ? template.defaultOrderBy() : orderBy;
-        if (requestedOrderBy.isEmpty()) {
+        if (!profile.observed() && requestedOrderBy.isEmpty()) {
             throw new IllegalArgumentException(
                     "A ordenação Data Export é obrigatória para paginação rastreável.");
         }
@@ -38,6 +63,49 @@ public record DataExportPageRequest(
             throw new IllegalArgumentException("A ordenação não pode conter valores vazios.");
         }
         orderBy = List.copyOf(requestedOrderBy);
+    }
+
+    /** Only three pinned observed releases can create an explicitly unordered request. */
+    public static DataExportPageRequest observed(
+            final DataExportTemplate template,
+            final SourceContractRelease release,
+            final ImmutableFingerprint baseRuntimeFingerprint,
+            final BusinessDateRange dates,
+            final int page,
+            final int pageSize) {
+        return new DataExportPageRequest(
+                template,
+                dates,
+                Optional.empty(),
+                page,
+                pageSize,
+                List.of(),
+                DataExportRequestProfile.observed(
+                        template, release, baseRuntimeFingerprint, dates, pageSize));
+    }
+
+    @Override
+    public boolean equals(final Object other) {
+        return other instanceof DataExportPageRequest value
+                && template == value.template
+                && businessDateWindow.equals(value.businessDateWindow)
+                && updatedAtWindow.equals(value.updatedAtWindow)
+                && page == value.page
+                && pageSize == value.pageSize
+                && orderBy.equals(value.orderBy)
+                && profile.equals(value.profile);
+    }
+
+    /** Preserve the six-component record's legacy hash while distinguishing observed selections. */
+    @Override
+    public int hashCode() {
+        int result = template.hashCode();
+        result = 31 * result + businessDateWindow.hashCode();
+        result = 31 * result + updatedAtWindow.hashCode();
+        result = 31 * result + Integer.hashCode(page);
+        result = 31 * result + Integer.hashCode(pageSize);
+        result = 31 * result + orderBy.hashCode();
+        return profile.observed() ? 31 * result + profile.hashCode() : result;
     }
 
     public static DataExportPageRequest forTemplate(
@@ -57,7 +125,13 @@ public record DataExportPageRequest(
     /** Cria a próxima requisição preservando contrato, filtros, tamanho e ordenação. */
     public DataExportPageRequest withPage(final int nextPage) {
         return new DataExportPageRequest(
-                template, businessDateWindow, updatedAtWindow, nextPage, pageSize, orderBy);
+                template,
+                businessDateWindow,
+                updatedAtWindow,
+                nextPage,
+                pageSize,
+                orderBy,
+                profile);
     }
 
     public Map<SearchPath, DataExportFilterValue> filters() {

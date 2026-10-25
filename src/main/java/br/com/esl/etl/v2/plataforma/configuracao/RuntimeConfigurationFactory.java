@@ -33,6 +33,7 @@ import java.util.Set;
  */
 public final class RuntimeConfigurationFactory {
 
+    private static final Duration MINIMUM_ESL_REQUEST_INTERVAL = Duration.ofSeconds(2);
     private static final long MAX_CONFIGURATION_BYTES = 64L * 1024L;
     private static final int MAX_CONFIGURATION_READ_BYTES =
             Math.toIntExact(MAX_CONFIGURATION_BYTES + 1L);
@@ -192,9 +193,10 @@ public final class RuntimeConfigurationFactory {
                         "Configuração de timezone do Data Export inválida.");
         final DataExportTransport transport =
                 parseTransport(values.required("dataexport.transport", "V2_DATAEXPORT_TRANSPORT"));
-        if (transport != DataExportTransport.GET_WITH_QUERY) {
+        if (transport != DataExportTransport.GET_WITH_QUERY
+                && transport != DataExportTransport.GET_WITH_BODY) {
             throw new IllegalArgumentException(
-                    "O transporte operacional Data Export deve ser GET_WITH_QUERY.");
+                    "O transporte Data Export deve ser GET_WITH_QUERY ou GET_WITH_BODY.");
         }
         final DataExportClientSettings settings =
                 new DataExportClientSettings(
@@ -227,11 +229,10 @@ public final class RuntimeConfigurationFactory {
                                 DataExportClientSettings.MAX_RESPONSE_BYTES));
         final EslResiliencePolicy resiliencePolicy =
                 new EslResiliencePolicy(
-                        Duration.ofMillis(
-                                values.boundedNonNegativeLong(
-                                        "dataexport.resilience.minimum-request-interval-ms",
-                                        "V2_DATAEXPORT_RESILIENCE_MINIMUM_REQUEST_INTERVAL_MS",
-                                        EslResiliencePolicy.MAX_REQUEST_INTERVAL.toMillis())),
+                        minimumEslRequestInterval(
+                                values,
+                                "dataexport.resilience.minimum-request-interval-ms",
+                                "V2_DATAEXPORT_RESILIENCE_MINIMUM_REQUEST_INTERVAL_MS"),
                         values.boundedPositiveInt(
                                 "dataexport.resilience.max-in-flight",
                                 "V2_DATAEXPORT_RESILIENCE_MAX_IN_FLIGHT",
@@ -315,11 +316,10 @@ public final class RuntimeConfigurationFactory {
                                 GraphQlClientSettings.ABSOLUTE_MAXIMUM_RESPONSE_BYTES));
         final EslResiliencePolicy resiliencePolicy =
                 new EslResiliencePolicy(
-                        Duration.ofMillis(
-                                values.boundedNonNegativeLong(
-                                        "graphql.resilience.minimum-request-interval-ms",
-                                        "V2_GRAPHQL_RESILIENCE_MINIMUM_REQUEST_INTERVAL_MS",
-                                        EslResiliencePolicy.MAX_REQUEST_INTERVAL.toMillis())),
+                        minimumEslRequestInterval(
+                                values,
+                                "graphql.resilience.minimum-request-interval-ms",
+                                "V2_GRAPHQL_RESILIENCE_MINIMUM_REQUEST_INTERVAL_MS"),
                         values.boundedPositiveInt(
                                 "graphql.resilience.max-in-flight",
                                 "V2_GRAPHQL_RESILIENCE_MAX_IN_FLIGHT",
@@ -366,6 +366,21 @@ public final class RuntimeConfigurationFactory {
                 values.required("graphql.tenant-scope", "V2_GRAPHQL_TENANT_SCOPE"),
                 settings,
                 resiliencePolicy);
+    }
+
+    private static Duration minimumEslRequestInterval(
+            final ConfigurationValues values, final String fileKey, final String environmentKey) {
+        final Duration interval =
+                Duration.ofMillis(
+                        values.boundedNonNegativeLong(
+                                fileKey,
+                                environmentKey,
+                                EslResiliencePolicy.MAX_REQUEST_INTERVAL.toMillis()));
+        if (interval.compareTo(MINIMUM_ESL_REQUEST_INTERVAL) < 0) {
+            throw new IllegalArgumentException(
+                    "O intervalo entre requisições ESL deve ser de pelo menos 2000 ms.");
+        }
+        return interval;
     }
 
     private static void verifySharedEslConfiguration(

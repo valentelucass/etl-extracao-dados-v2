@@ -529,7 +529,7 @@ class MainDevWorkspaceProcessTest {
                 dataexport.retry.initial-delay-ms=0
                 dataexport.retry.max-delay-ms=0
                 dataexport.max-response-bytes=1048576
-                dataexport.resilience.minimum-request-interval-ms=0
+                dataexport.resilience.minimum-request-interval-ms=2000
                 dataexport.resilience.max-in-flight=1
                 dataexport.resilience.max-requests-per-cycle=1
                 dataexport.resilience.max-requests-per-workload=1

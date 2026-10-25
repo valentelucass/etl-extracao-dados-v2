@@ -1,5 +1,70 @@
 # Alinhamento das entidades V2: construção, origem e consumidores
 
+## Atualização de 25/10/2026
+
+[Checkpoint 0572](../../continuidade/checkpoints/0572-usuarios-alem-da-falha-anterior-e-succesores-em-revisao.md)
+registra a leitura ativa de Usuários e as próximas provas preparadas. O pacote
+E05 conserva 150 testes funcionais e 7 de integridade aprovados, sem implantação.
+Os seletores observados de Manifestos, Cotações e Localização, o texto original
+até o mapper de 26 campos e a política conferida antes de INFO estão incorporados
+conforme ADR0076. Informação de seletor ainda não ativado abaixo é histórica.
+
+Os quatro INFO de expansão têm 150 campos UNDECLARED; seis listas foram observadas
+com itens STRING. O core anterior conserva 34 PASS históricos, mas sua sucessora
+de limites e proveniência, o guard e o transporte ainda aguardam qualificação
+conjunta. O leitor novo de Usuários passou em 21 testes e está consultando a fonte,
+com páginas seguintes ainda presentes. Os 19 PASS pertencem ao auxiliar anterior,
+recusado para execução. As contagens antigas de Usuários abaixo são de outra
+ocorrência. Nenhuma destas provas aceita snapshot global, retenção ou implantação.
+Não houve alteração de estrutura no SQL; as etapas 3 e 4 continuam abertas.
+
+
+## Evidência real de24/10/2026
+
+[Checkpoint0565](../../continuidade/checkpoints/0565-usuarios-fechado-localmente-revisao-sql-e-chats-delegados.md)
+registra o encerramento local de Usuários e as frentes delegadas;0564 preserva as provas de fonte/mapeamento.
+As contagens abaixo são **linhas físicas dos recortes testados**,não totais de
+entidades históricas. Sequência candidata observada não é identidade global aceita.
+
+| Relatório | Campos INFO | Linhas físicas | Chaves candidatas no recorte | Mapeamento atual |
+|---|---:|---:|---:|---|
+| Coletas6908 |31|1|1|1 sem recusa |
+| Fretes6389 |114|37|37|37 sem recusa;pedido principal/release real usados |
+| Manifestos6399 |91|315|17|315 sem recusa após preservar sequência numérica |
+| Cotações6906 |37|287|285|287 sem recusa |
+| Localização8656 |26|37|37|37 sem recusa com opt-in observado26;default17 preservado |
+| Contas8636 |28|13|Não demonstrada para a raiz|13 sem issue nos campos;parcelas não viram contas por inferência |
+| Faturas4924 |52|37|37 candidatos|37 sem issue;identidade do título não inferida |
+| Inventário10633 |26|207|11|207 sem issue;componentes não viram raízes |
+| Sinistros6392 |44|60|39|Horários corrigidos;7 comentários preservados com issue de tamanho |
+
+Todos os nove chegaram à página final no escopo consultado. Cotações usa22/10,
+Sinistros01–23/10,demais17/10;Contas inclui issue_date **e** created_at. As passagens
+comparadas e suas ressalvas constam no checkpoint;Manifestos/Localização/Sinistros
+tiveram comparação adicional exata com BigDecimal/BigInteger e bruto em RAM.
+O banco Fretes recusou SQL52123 por exigir a marca sintética antiga. A exceção
+específica para alterar somente duas validações do shadow foi perguntada ao usuário
+e ainda não foi recebida;nenhum DDL foi aplicado,nenhum dado real foi retido.
+
+Raster respondeu HTTP200 com108 viagens/355 paradas,sem ratificar identidade ou
+terminalidade global. Usuários encerrou após949páginas/18.980IDs distintos,18.978
+semrecusa/2nomesrecusados,com hasNextPage=true. A reserva950falhou localmente ao
+salvar progresso antes daHTTP;originais preservados em closure.json. Não há EOF
+ou snapshot aceito. O filtro foi enabled=true,sem tempo;V1 usa updatedAt por dia,
+portanto os volumes têm escopos diferentes. Pedir1000retornou20 e a metadata
+IndividualConnection não oferece count/totalCount. Sucessoroffline está delegado;
+nenhuma repetição automática da origem ou recuperação de cursor foi autorizada.
+
+CatálogoP1B agora consta no produto:91/37/26campos raiz e95/37/27paths de
+resposta,com listas caracterizadas,sem selector operacional ativado. ADR0075
+e [Checkpoint0568](../../continuidade/checkpoints/0568-p1b-no-produto-pacote-219d-e-oraculo-exato-v6.md)
+registram o pacote219D408F...86E4AAB,58testes/7IT e378casos distintos atuais ou
+preservados por composição.469checks P1B externos não são suíteJUnit nova.
+Snapshot/A49/falhas anteriores preservados,sem implantação;AST anterior precisa
+atualização após integração final. Leitura/mapeamento não encerram
+captura,readback,persistência,identidade,aceite do snapshot,produção ou cutover.
+As seções seguintes mantêm o contexto histórico da revisão de14/09.
+
 Esta é a entrada para conferir se cada entidade implementada corresponde ao contrato de
 construção e às evidências da origem. A V1 é uma referência de comportamento e de defeitos
 conhecidos. Copiar seu resultado não basta para aceitar a V2: uma diferença deliberada da

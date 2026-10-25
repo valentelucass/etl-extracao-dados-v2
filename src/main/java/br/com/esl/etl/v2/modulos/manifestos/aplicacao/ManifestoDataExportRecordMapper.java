@@ -105,6 +105,12 @@ public final class ManifestoDataExportRecordMapper {
             }
             final JsonNode value = record.get(field.sourceField());
             if (value != null && !value.isNull()) {
+                if (field == ManifestoTextField.S_N_SEQUENCE_CODE && value.isIntegralNumber()) {
+                    if (value.bigIntegerValue().toString().length() > field.maximumUtf16Units()) {
+                        return "TEXT_LIMIT_EXCEEDED";
+                    }
+                    continue;
+                }
                 if (!value.isTextual()) {
                     return "INVALID_TEXT_FIELD_TYPE";
                 }

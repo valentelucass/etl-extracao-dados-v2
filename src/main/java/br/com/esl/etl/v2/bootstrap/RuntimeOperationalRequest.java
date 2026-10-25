@@ -9,8 +9,11 @@ import br.com.esl.etl.v2.plataforma.controle.ExecutionMode;
 import br.com.esl.etl.v2.plataforma.controle.ImmutableFingerprint;
 import br.com.esl.etl.v2.plataforma.fonte.dataexport.BusinessDateRange;
 import br.com.esl.etl.v2.plataforma.fonte.dataexport.DataExportExtractionLimits;
+import br.com.esl.etl.v2.plataforma.fonte.dataexport.DataExportObservedFretesContractCatalog;
 import br.com.esl.etl.v2.plataforma.fonte.dataexport.DataExportPageRequest;
+import br.com.esl.etl.v2.plataforma.fonte.dataexport.DataExportRequestProfile;
 import br.com.esl.etl.v2.plataforma.fonte.dataexport.DataExportTemplate;
+import br.com.esl.etl.v2.plataforma.fonte.dataexport.DataExportTransport;
 import br.com.esl.etl.v2.plataforma.fonte.dataexport.SourceDateTimeRange;
 import br.com.esl.etl.v2.plataforma.orquestracao.RuntimeExecutionPlan;
 import br.com.esl.etl.v2.plataforma.orquestracao.RuntimeExecutionRequest;
@@ -38,6 +41,7 @@ final class RuntimeOperationalRequest {
     final UUID invocation;
     final DataExportTemplate template;
     final SourceContractRelease release;
+    final DataExportRequestProfile requestProfile;
     final ContractCompatibilityPolicy compatibility;
     final ContractExecutionBinding binding;
     final RuntimeExecutionPlan plan;
@@ -61,6 +65,7 @@ final class RuntimeOperationalRequest {
             users = RuntimeUsersRequest.read(configuration, root);
             invocation = users.invocation();
             release = users.release();
+            requestProfile = DataExportRequestProfile.LEGACY;
             compatibility = users.compatibility();
             binding = users.binding();
             plan = users.plan();
@@ -100,6 +105,9 @@ final class RuntimeOperationalRequest {
                                 "compatibilityVersion"));
         if (root.has("dependencyRequest")) {
             keys.add("dependencyRequest");
+        }
+        if (root.has("sourceContractVersion")) {
+            keys.add("sourceContractVersion");
         }
         if ("COTACOES".equals(root.path("template").asText())) {
             keys.add("referenceReleaseId");
@@ -184,7 +192,23 @@ final class RuntimeOperationalRequest {
                                 () ->
                                         new IllegalArgumentException(
                                                 "DATAEXPORT_CONFIGURATION_REQUIRED"));
-        release = RuntimeLaboratoryContract.resolve(configuration, template);
+        release = resolveContract(configuration, template, root);
+        final var baseRuntime = DataExportRuntimeConfigurationFingerprint.from(source);
+        requestProfile =
+                DataExportRequestProfile.observedSelection(release)
+                        ? DataExportPageRequest.observed(
+                                        template,
+                                        release,
+                                        baseRuntime,
+                                        new BusinessDateRange(
+                                                LocalDate.parse(
+                                                        root.get("businessStart").textValue()),
+                                                LocalDate.parse(
+                                                        root.get("businessEnd").textValue())),
+                                        1,
+                                        Integer.parseInt(root.get("pageSize").textValue()))
+                                .profile()
+                        : DataExportRequestProfile.LEGACY;
         compatibility =
                 ContractCompatibilityPolicy.create(
                         root.get("compatibilityVersion").textValue(),
@@ -195,7 +219,7 @@ final class RuntimeOperationalRequest {
                         execution,
                         release,
                         compatibility,
-                        DataExportRuntimeConfigurationFingerprint.from(source));
+                        requestProfile.runtimeFingerprint(baseRuntime));
         final var sorted = new java.util.TreeMap<String, String>();
         keys.forEach(key -> sorted.put(key, root.get(key).textValue()));
         if (temporal != null) {
@@ -226,6 +250,13 @@ final class RuntimeOperationalRequest {
         sorted.put("workloadTarget", configuration.shadowStorage().jdbcUrl());
         if (template.laboratoryBackfillOnly()) {
             sorted.put("templateSemantics", template.contractSemanticsFingerprint().sha256());
+        }
+        if (requestProfile.observed()) {
+            sorted.put(
+                    "observedRequestSemanticsVersion",
+                    requestProfile.semanticsFingerprint().version());
+            sorted.put(
+                    "observedRequestSemanticsHash", requestProfile.semanticsFingerprint().sha256());
         }
         final String canonical =
                 new com.fasterxml.jackson.databind.ObjectMapper().writeValueAsString(sorted);
@@ -314,6 +345,36 @@ final class RuntimeOperationalRequest {
                         root.get("qualityFingerprint").textValue());
     }
 
+    private static SourceContractRelease resolveContract(
+            final RuntimeConfiguration configuration,
+            final DataExportTemplate template,
+            final com.fasterxml.jackson.databind.JsonNode document) {
+        if (!document.has("sourceContractVersion")) {
+            return RuntimeLaboratoryContract.resolve(configuration, template);
+        }
+        final var settings = configuration.dataExport().orElseThrow().settings();
+        if (template != DataExportTemplate.FRETES) {
+            if (settings.preferredTransport() != DataExportTransport.GET_WITH_BODY
+                    || settings.retryPolicy().maxAttempts() != 1
+                    || RuntimeOperationalRequest.class.getResource("/runtime-laboratory.properties")
+                            != null) {
+                throw new IllegalArgumentException("OBSERVED_SOURCE_SELECTION_REJECTED");
+            }
+            return DataExportRequestProfile.observedRelease(
+                    template, document.get("sourceContractVersion").textValue());
+        }
+        if (template != DataExportTemplate.FRETES
+                || !DataExportObservedFretesContractCatalog.VERSION.equals(
+                        document.get("sourceContractVersion").textValue())
+                || settings.preferredTransport() != DataExportTransport.GET_WITH_BODY
+                || settings.retryPolicy().maxAttempts() != 1
+                || RuntimeOperationalRequest.class.getResource("/runtime-laboratory.properties")
+                        != null) {
+            throw new IllegalArgumentException("OBSERVED_FRETES_SELECTION_REJECTED");
+        }
+        return DataExportObservedFretesContractCatalog.release();
+    }
+
     static RuntimeOperationalRequest read(
             final RuntimeConfiguration configuration, final Path file) {
         try (var input = Files.newInputStream(file)) {
@@ -339,7 +400,13 @@ final class RuntimeOperationalRequest {
             throw new IllegalStateException("USERS_HAS_NO_DATA_EXPORT_REQUEST");
         }
         return new DataExportPageRequest(
-                template, dates, updatedAt, 1, pageSize, template.defaultOrderBy());
+                template,
+                dates,
+                updatedAt,
+                1,
+                pageSize,
+                requestProfile.observed() ? List.of() : template.defaultOrderBy(),
+                requestProfile);
     }
 
     boolean laboratory() {

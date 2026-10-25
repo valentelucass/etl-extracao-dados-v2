@@ -136,16 +136,13 @@ public final class DataExportHttpGatewayFactory {
         final HttpDataExportTemplateInfoGateway rawInfo =
                 new HttpDataExportTemplateInfoGateway(
                         httpClient, properties, objectMapper, attemptObserver, governor);
-        final DataExportGateway dataGateway =
-                new CircuitBreakingDataExportGateway(rawData, circuitRegistry);
-        final DataExportTemplateInfoGateway infoGateway =
-                new CircuitBreakingDataExportTemplateInfoGateway(rawInfo, circuitRegistry);
-        return observationConfiguration
-                .map(
-                        configuration ->
-                                DataExportHttpGatewayBundle.contractBound(
-                                        dataGateway, infoGateway, configuration))
-                .orElseGet(() -> new DataExportHttpGatewayBundle(dataGateway, infoGateway));
+        if (observationConfiguration.isPresent()) {
+            return DataExportHttpGatewayBundle.materialized(
+                    rawData, rawInfo, circuitRegistry, observationConfiguration.orElseThrow());
+        }
+        return new DataExportHttpGatewayBundle(
+                new CircuitBreakingDataExportGateway(rawData, circuitRegistry),
+                new CircuitBreakingDataExportTemplateInfoGateway(rawInfo, circuitRegistry));
     }
 
     private void verifyObservationConfiguration(

@@ -1,0 +1,30 @@
+# Checkpoint0579 — P3 físico31, Raster26 e Extra Windows22 qualificados
+
+25/10/2026, 2026-10-25T08:04:51.690885+00:00. Anterior: [0578-pacote-p3-441-testes-e-auxiliares-causais-qualificados.md](0578-pacote-p3-441-testes-e-auxiliares-causais-qualificados.md), SHA256 0728EFA77B1A8ED45D7D524CDF856B2162E6A79551AF2EA4BF25A6543DE6CF45.
+
+Quatro etapas continuam como objetivo;3/4 abertas. Sem final por delegação ou teste offline.
+
+## Resultados efetivos desde0578
+
+- Composição física P3:31invocações/12métodos reais PASS, genuine driver/guard/core/emissor→capability privada→owner com JDBC Dummy. Mesmo start antes claim/provider/open,7leituras/84work+12cleanup/60+30s/query10;151campos por DTOs independentes, raw/UTF16, cardinalidade física extra de páginas, rollback/ausência/close exercidos. JAR/resultado/recibo q05 reais (FE20/441JUnit+7IT) usados, sem fallbackE05 ouJSONfabricado. Recibo original1GiB/15110ms/pico368336896B/exit0/sem timeout. RootP3Physical31QualificationReview.json. Não executouSQL/fonte; RootTable permanece vazia. Negativa genuína receivedAt101ns ainda ausente, declarada; adapter recusa não100ns antesJDBC.
+- Catálogo V7:94grupos reais offline PASS, original1GiB/14390ms/pico363835392B/exit0/sem timeout. Live10250006 abriu JDBC e fechou conhecido, peer/nativo invariáveis. Contexto/13corpos passaram,6referências inserted/deleted observadas reais e provisoriamente classificadas. Query4 parou em UNKNOWN de ctl.execution_lease, após4SELECT tentadas/3completas/66004B. ReferencingClass/minorID publicados apenasOTHER; target/classe exatos omitidos. Não atribuir índice, classe7 ou target por hipótese. V8 diagnóstico em preparo coletará todosUNKNOWN com categorias técnicas limitadas e metadata fresca sem aprovação de edges/finalização. RootCatalogV7ClosureReview.json SHA2A4278ED57DE7DC4FEF2E27F29AA30EB65C12CA64129C148F16F177B0A9ABA5A. V6 preconnect continua causa desconhecida. Total12JDBCconfirmadosfechados+1tentativanativafechada semretorno comprovado; pelo menos13tentativas.
+- Raster coordenadas:26JUnit reais PASS (21mapping+5guard), original1GiB/12165ms/pico364261376B/exit0/sem timeout. RootRasterCoordinate26QualificationReview.json SHA24C9160E71C5091FC7575F9E82CB3A280479C0641711A8F6E196B3B9EED68994. Preserva BigDecimal9–16 numeric, sem arredondar; STRING e<=8 conservam comportamento anterior. Sóduascallsmapper/doisbinds mudaram;6outrosdecimais/49atributos/multiplicidade/quarentena preservados. Escala>8 bloqueia JDBC atual antes setter desse campo. PropostaDECIMAL36,16 somente4colunas coordenadasstg/core, nãoDDLautorizado/contratoESLglobal. Gap: teste ligação completa batch.stop→guard→zeroaddBatch ainda ausente; cinco testesguarddiretos. Qualificador/candidato externos; sem adoção/fonteSQL. Futura composição1POST comclasses exatas em preparo.
+- Extra q02/Bootstrap:22casos causais passaram sob original1GiB/6856ms/pico234508288B/exit0/sem timeout; prova real Win32Job, stdin sintético pelo executor, defaultentryrecusa,2687classes exatas efilesystem584chars. Result44CC1ADEC5E339AEDA2938C1344104DD311C7A5CA569AE2F41320751E6B8C60F; receiptFDD8FC8768C804F8DAF3DED2259D6253CD50314D68F105233C62D6E7A32467CC. RootP3ExtraQ02QualificationReview.json SHA2698CB45790B0B435CD8DE19E66592DDE02C3E0FDC8ECEB96166D76FA56FAEC4. Esses22 já integram441JUnit deq05; não somar. PositivaRootUnit/WindowsChain continuamfalse, ainda precisam qualificação concreta. Bootstrap remove3nomes medidos antes dos demais imports; worker/plan são hashados/rechecados sob caps/UTF8 eargv original. Dezcontraprovasfocais em preparo, sem herdarPASS; originaisq01/falhas/worker permanecem.
+
+## Estado e decisões
+
+ProdutoE05 continua150JUnit+7IT/23fontesadotadas, sem deploy. Q05 FE20/441+7 qualificado em snapshot, sem adoção. AST44514/116337 ainda precisa atualizar após integração final. Banco V4 integra getter/deadline/trêsflagsJDK e ainda precisa congelar/qualificar modelos; não esperar catálogo para declarar preparo separado.
+
+UsuáriosV3 mantém37casos aprovados/5milpáginasfake e nova travessia real pendente. Anterior40mil/39997válidos/3quarentenas/hasNexttrue semEOF/cursor. O contrato Users fixa20 por página. O registro histórico de pedir100 e receber20 é de COLETAS, não transferir como observação deUsers. EOF exige pageInfo, não tamanho de página. Fonte3194/reservas3195 permanece: DataExport95/GraphQL3096/Raster3, contagemadapter; retransmissõeshistóricas não medidas. Sem novoHTTP nesta continuidade.
+
+Inventário207linhas do recorte stage4 pode exceder4páginas/per50 da composiçãoP3. Não mudar limites/per, pularpáginas ou declararEOF automaticamente. Há recorte anterior17Oct com11linhas documentado, a conferir nos originais antes de selecionar nova unidade. Per100 seria sucessor próprio, não herda qualificação atual. Mantém per50/4ªnonemptyPARTIAL no freeze.
+
+TodosJobsfechados ao registrar. Root único executor e canônicos; agentes sópreparo/revisão semJava/SQL/fonte. Resumo supervision-current foi recomposto de evidências íntegras após erroUTF8, lacuna original registrada em RootDescriptiveStateRecovery; não é recibo ou autoridade. Gravações novas sãoUTF8 validado emtemporário/replace.
+
+Pergunta humanaDDL2objetosFretes continua sem resposta; não cobreLocal/P3/Raster. NenhumDDL/commit retido. PreservarSQL16.0.1000.6/instalação/contas/credenciais/permissões/identidades/ACL/elevação/serviços/listeners/certificado/trust global, V1/WMS/produção,43RAW/53exclusões/MainHTTPUNKNOWN/MISSING_NOT_RECONSTRUCTED.
+
+## Retomada (três ações)
+
+1. Qualificar10contraprovasbootstrap e4helpers/contextos; emitir unidadeWindows/Root positiva real0HTTP/SQL, depois adoção exata deq05 quando admissível.
+2. Qualificar/executarV8DIAGNOSTIC_ONLY para todosUNKNOWN; provas97predicados emduasunidades físicas separadas e modelosV4banco. Catálogo positivo é separado do inventário diagnóstico.
+3. Qualificar/executar Raster1POST comprecisão preservada e unidadesRAM→SQLrollback permitidas; preparar migrações revisáveis semexecutar, depois nova travessiaUsers5000calls/100mil/5h própria. Etapas3/4 ainda abertas.

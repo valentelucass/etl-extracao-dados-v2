@@ -23,7 +23,8 @@
         <jacoco.version>0.8.15</jacoco.version>
         <spotless.version>3.10.0</spotless.version>
         <google.java.format.version>1.24.0</google.java.format.version>
-        <dependency.check.version>12.2.0</dependency.check.version>
+        <!-- Corrige referências NVD longas; o cache da ferramenta fica isolado por versão. -->
+        <dependency.check.version>12.2.2</dependency.check.version>
         <dependency.vulnerability.failBuildOnCVSS>0.0</dependency.vulnerability.failBuildOnCVSS>
         <failBuildOnCVSS>${dependency.vulnerability.failBuildOnCVSS}</failBuildOnCVSS>
         <dependency.vulnerability.policy.sha256>83c8698663f33b0e79ac987d72c7853fb59b12af42f31b07d1809377a454e056</dependency.vulnerability.policy.sha256>
@@ -724,7 +725,7 @@
                         <artifactId>dependency-check-maven</artifactId>
                         <version>${dependency.check.version}</version>
                         <configuration>
-                            <dataDirectory>${user.home}/.m2/dependency-check-data</dataDirectory>
+                            <dataDirectory>${user.home}/.m2/dependency-check-data-${dependency.check.version}</dataDirectory>
                             <outputDirectory>${project.build.directory}/dependency-check</outputDirectory>
                             <formats>
                                 <format>HTML</format>

@@ -43,8 +43,7 @@ public final class DataExportRuntimeWorkload implements RuntimeWorkloadHandler {
             final CancellationToken cancellation = session.cancellation();
             cancellation.throwIfCancellationRequested();
             final var gateways =
-                    DataExportContractGate.enforce(
-                            input.gateways(), input.request().template(), guard);
+                    DataExportContractGate.enforce(input.gateways(), input.request(), guard);
             gateways.templateInfoGateway().fetchInfo(input.request().template());
             cancellation.throwIfCancellationRequested();
             final var streamer =
@@ -80,8 +79,7 @@ public final class DataExportRuntimeWorkload implements RuntimeWorkloadHandler {
             Objects.requireNonNull(gateways);
             limits.validate(request);
             if (request.page() != 1
-                    || !request.template()
-                            .approvesRequestSemantics(request.pageSize(), request.orderBy())) {
+                    || !request.profile().approves(request, guard.sourceSelection())) {
                 throw new IllegalArgumentException("RUNTIME_SOURCE_REQUEST_INVALID");
             }
         }

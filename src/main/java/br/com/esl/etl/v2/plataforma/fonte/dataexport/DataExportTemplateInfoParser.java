@@ -100,13 +100,37 @@ public final class DataExportTemplateInfoParser {
             throw new IllegalStateException(
                     "Um item de " + collectionName + " deve ser objeto ou texto.");
         }
-        final String technicalName =
-                firstText(value, "name", "field", "key", "technical_name", "technicalName")
-                        .orElseGet(() -> requiredText(fallbackName, collectionName));
+        final String technicalName = technicalName(value, fallbackName, collectionName);
         return new DataExportMetadataField(
                 technicalName,
                 firstText(value, "type", "data_type", "dataType"),
                 firstText(value, "label", "title", "description"));
+    }
+
+    private String technicalName(
+            final JsonNode value, final String fallbackName, final String collectionName) {
+        // ESL also declares filters as separate table/field pairs (V2-025a).
+        if ("filters".equals(collectionName)
+                && firstText(value, "name", "key", "technical_name", "technicalName").isEmpty()
+                && value.has("table")) {
+            final JsonNode table = value.get("table");
+            final String field = firstText(value, "field").orElse("");
+            if (!table.isTextual()
+                    || !table.asText().matches("[A-Za-z_][A-Za-z0-9_]{0,127}")
+                    || field.isEmpty()) {
+                throw new IllegalStateException("O filtro não declara tabela e campo válidos.");
+            }
+            final String prefix = table.asText() + '.';
+            if (field.startsWith(prefix)) {
+                return field;
+            }
+            if (field.indexOf('.') >= 0) {
+                throw new IllegalStateException("O filtro declara tabela e campo ambíguos.");
+            }
+            return prefix + field;
+        }
+        return firstText(value, "name", "field", "key", "technical_name", "technicalName")
+                .orElseGet(() -> requiredText(fallbackName, collectionName));
     }
 
     private Optional<String> firstText(final JsonNode value, final String... names) {

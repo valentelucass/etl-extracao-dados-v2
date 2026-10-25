@@ -18,6 +18,7 @@ public final class DataExportPageResponse {
     private final Optional<ContractResponse> contractObservation;
     private final Optional<ContractObservationLimits> observationLimits;
     private final Optional<ImmutableFingerprint> observationBoundaryFingerprint;
+    private final Optional<DataExportRawRecordSlices> rawRecords;
 
     public DataExportPageResponse(final List<JsonNode> records) {
         this(records, Optional.empty(), Optional.empty(), Optional.empty());
@@ -44,7 +45,20 @@ public final class DataExportPageResponse {
                 Optional.of(observation),
                 Optional.of(limits),
                 Optional.of(pathBoundary.fingerprint()),
-                false);
+                false,
+                rawRecords);
+    }
+
+    DataExportPageResponse withRawRecords(final String document, final int maximumNodes)
+            throws java.io.IOException {
+        return new DataExportPageResponse(
+                records,
+                contractObservation,
+                observationLimits,
+                observationBoundaryFingerprint,
+                false,
+                Optional.of(
+                        DataExportRawRecordSlices.capture(document, recordCount(), maximumNodes)));
     }
 
     private DataExportPageResponse(
@@ -61,6 +75,22 @@ public final class DataExportPageResponse {
             final Optional<ContractObservationLimits> observationLimits,
             final Optional<ImmutableFingerprint> observationBoundaryFingerprint,
             final boolean defensiveCopy) {
+        this(
+                records,
+                contractObservation,
+                observationLimits,
+                observationBoundaryFingerprint,
+                defensiveCopy,
+                Optional.empty());
+    }
+
+    private DataExportPageResponse(
+            final List<JsonNode> records,
+            final Optional<ContractResponse> contractObservation,
+            final Optional<ContractObservationLimits> observationLimits,
+            final Optional<ImmutableFingerprint> observationBoundaryFingerprint,
+            final boolean defensiveCopy,
+            final Optional<DataExportRawRecordSlices> rawRecords) {
         Objects.requireNonNull(records, "Os registros são obrigatórios.");
         if (defensiveCopy) {
             final List<JsonNode> copied = new ArrayList<>(records.size());
@@ -81,6 +111,10 @@ public final class DataExportPageResponse {
                 Objects.requireNonNull(
                         observationBoundaryFingerprint,
                         "O fingerprint da fronteira é obrigatório.");
+        this.rawRecords = Objects.requireNonNull(rawRecords);
+        if (rawRecords.isPresent() && rawRecords.orElseThrow().size() != records.size()) {
+            throw new IllegalArgumentException("RAW_RECORD_COUNT_MISMATCH");
+        }
         if (contractObservation.isPresent() != observationLimits.isPresent()
                 || contractObservation.isPresent() != observationBoundaryFingerprint.isPresent()) {
             throw new IllegalArgumentException(
@@ -108,6 +142,18 @@ public final class DataExportPageResponse {
                 Objects.requireNonNull(consumer, "O consumidor de registros é obrigatório.");
         for (final JsonNode record : records) {
             required.accept(record.deepCopy());
+        }
+    }
+
+    /** Raw slices stay in one page and are materialized only for the current record. */
+    public void forEachRecordInput(final Consumer<DataExportRecordInput> consumer) {
+        Objects.requireNonNull(consumer);
+        for (int index = 0; index < records.size(); index++) {
+            final int ordinal = index;
+            consumer.accept(
+                    new DataExportRecordInput(
+                            records.get(index).deepCopy(),
+                            rawRecords.map(raw -> raw.record(ordinal))));
         }
     }
 

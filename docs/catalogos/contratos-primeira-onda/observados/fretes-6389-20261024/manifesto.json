@@ -1,0 +1,82 @@
+{
+  "status": "QUALIFIED_COMPONENTS_NOT_OPERATIONALLY_ADOPTED",
+  "contract_version": "2026-10-24.fretes-observed-curl.v1",
+  "source_template": 6389,
+  "source_endpoint": "/api/analytics/reports/6389/data",
+  "observed_business_day": "2026-10-17",
+  "metadata_fields": 114,
+  "metadata_filters": 16,
+  "response_record_root": "$",
+  "response_top_level_fields": 114,
+  "response_paths": 115,
+  "always_null_paths_in_this_window": 15,
+  "unobserved_non_null_types_not_inferred": true,
+  "source_declared_types": "UNDECLARED_FOR_ALL_114_FIELDS",
+  "documented_transport": "GET_WITH_BODY",
+  "documented_traversals": {
+    "per": [
+      25,
+      20
+    ],
+    "terminal_page": [
+      3,
+      3
+    ],
+    "distinct_ids": 37,
+    "physical_rows": 37,
+    "whole_row_multisets_equal": true,
+    "current_java_mapper_valid_records": 37
+  },
+  "independent_java_validation": {
+    "transport": "GET_WITH_BODY",
+    "order_by": "id asc",
+    "per": [
+      25,
+      20
+    ],
+    "contract_frozen_before_calls": true,
+    "terminal_page": [
+      3,
+      3
+    ],
+    "distinct_ids": 37,
+    "whole_row_multisets_equal": true,
+    "current_java_mapper_valid_records": 37,
+    "result_sha256": "C2BBDC8A7272BFBD2D9280277B569098D4C3ADA6C67F72A44D61D7369E7E997A"
+  },
+  "current_package_regression": {
+    "qualified_jar_sha256": "977C1A0B6C46AE88C38879E5ECF860F9D6A8F2F30147034EDB6A3B25C54F1CBA",
+    "runtime_configuration_factory_used": true,
+    "transport": "GET_WITH_BODY",
+    "order_by": "id asc",
+    "per": 50,
+    "calls": 3,
+    "terminal_page": 2,
+    "distinct_ids": 37,
+    "physical_rows": 37,
+    "mapper_valid_records": 37,
+    "mapper_quarantined_records": 0,
+    "whole_row_comparison_to_previous_closed_runs": false,
+    "result_sha256": "2535C074052CD8A8696DB53477B2AC25BCCF9D49ECFF46D2086571D41BE15191"
+  },
+  "release_file_sha256": "19B4D5D9E093A1BA1C88978EDD46EF5755F9D6F35772B3EFA8213D3F89AD6ADB",
+  "release_fingerprint": "ad072100143c765705cd7b01e581f19ce3e5bb9a38d181f9cfeae4bcbd141b35",
+  "runtime_selection_support": {
+    "implemented_and_locally_qualified": true,
+    "request_property": "sourceContractVersion",
+    "request_value": "2026-10-24.fretes-observed-curl.v1",
+    "requires_explicit_body_and_single_attempt": true,
+    "legacy_default_preserved": true,
+    "catalog_resource_sha256": "19B4D5D9E093A1BA1C88978EDD46EF5755F9D6F35772B3EFA8213D3F89AD6ADB",
+    "qualified_jar_sha256": "D81052B61702F98A12D7085FB85394180FED90C070622C35CA3D125F3EF96BCB",
+    "tests_by_composition": 57,
+    "package_tests": 7,
+    "operational_adoption": false
+  },
+  "global_completeness_proven": false,
+  "source_snapshot_guarantee": false,
+  "sql_persistence_proven": false,
+  "main_admission": false,
+  "active_catalog_replaced": false,
+  "api_secret_or_business_values_retained": false
+}

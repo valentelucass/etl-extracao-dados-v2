@@ -2,6 +2,7 @@ package br.com.esl.etl.v2.plataforma.fonte.dataexport;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -34,6 +35,8 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 class HttpDataExportGatewayTest {
 
@@ -769,6 +772,87 @@ class HttpDataExportGatewayTest {
                         capturedRequest
                                 .get(5, TimeUnit.SECONDS)
                                 .startsWith("GET /api/analytics/reports/6908/data HTTP/1.1"));
+            } finally {
+                executor.shutdownNow();
+            }
+        }
+    }
+
+    @ParameterizedTest
+    @CsvSource({"422,Unprocessable Entity", "429,Too Many Requests", "500,Internal Server Error"})
+    void preservesFretesHttpFailureWithoutSwitchingTransportOrReturningAnEmptyPage(
+            final int status, final String reason) throws Exception {
+        try (ServerSocket serverSocket = new ServerSocket(0)) {
+            serverSocket.setSoTimeout(5_000);
+            final ExecutorService executor = Executors.newSingleThreadExecutor();
+            try {
+                final String errorBody =
+                        status == 422
+                                ? "{\"errors\":[\"timeout\"],\"formatted_errors\":[\"Tempo limite excedido\"]}"
+                                : "{\"status\":" + status + ",\"error\":\"" + reason + "\"}";
+                final Future<String> capturedRequest =
+                        executor.submit(
+                                () ->
+                                        receiveAndRespond(
+                                                serverSocket, status + " " + reason, errorBody));
+                final DataExportProperties properties =
+                        new DataExportProperties(
+                                URI.create("http://127.0.0.1:" + serverSocket.getLocalPort()),
+                                "test-token",
+                                ZoneId.of("America/Sao_Paulo"),
+                                Duration.ofSeconds(5),
+                                DataExportTransport.GET_WITH_BODY,
+                                new DataExportRetryPolicy(1, Duration.ZERO, Duration.ZERO));
+                final List<DataExportHttpAttempt> observedAttempts = new ArrayList<>();
+                final HttpDataExportGateway gateway =
+                        new HttpDataExportGateway(
+                                properties,
+                                observedAttempts::add,
+                                DataExportTransportFallbackPolicy.ALLOW_COMPATIBLE_FALLBACK);
+                final DataExportPageRequest pageRequest =
+                        new DataExportPageRequest(
+                                DataExportTemplate.FRETES,
+                                new BusinessDateRange(
+                                        LocalDate.of(2026, 10, 15), LocalDate.of(2026, 10, 15)),
+                                Optional.empty(),
+                                1,
+                                100,
+                                List.of("corporation_sequence_number asc"));
+
+                final IllegalStateException failure =
+                        assertThrows(IllegalStateException.class, () -> gateway.fetch(pageRequest));
+                if (status == 422) {
+                    assertEquals(IllegalStateException.class, failure.getClass());
+                } else {
+                    final DataExportUnavailableException unavailable =
+                            assertInstanceOf(DataExportUnavailableException.class, failure);
+                    assertEquals(status, unavailable.httpStatus().orElseThrow());
+                    assertEquals(6389, unavailable.templateId());
+                }
+                assertTrue(failure.getMessage().contains("HTTP " + status));
+                assertTrue(failure.getMessage().contains("6389"));
+                assertFalse(failure.getMessage().contains(errorBody));
+                assertNull(failure.getCause());
+                assertEquals(
+                        List.of(new DataExportHttpAttempt(6389, "data-GET_WITH_BODY")),
+                        observedAttempts);
+
+                final String wireRequest = capturedRequest.get(5, TimeUnit.SECONDS);
+                assertTrue(wireRequest.startsWith("GET /api/analytics/reports/6389/data HTTP/1.1"));
+                assertTrue(
+                        wireRequest
+                                .toLowerCase(java.util.Locale.ROOT)
+                                .contains("content-type: application/json"));
+                final var sentBody =
+                        new ObjectMapper()
+                                .readTree(wireRequest.substring(wireRequest.indexOf('{')));
+                assertEquals(
+                        "2026-10-15 - 2026-10-15",
+                        sentBody.path("search").path("freights").path("service_at").asText());
+                assertEquals("1", sentBody.path("page").asText());
+                assertEquals("100", sentBody.path("per").asText());
+                assertEquals("corporation_sequence_number asc", sentBody.path("order_by").asText());
+                assertFalse(sentBody.has("scopes"));
             } finally {
                 executor.shutdownNow();
             }

@@ -1,0 +1,1968 @@
+{
+  "response": {
+    "recordRoot": "$",
+    "observationState": "POPULATED",
+    "fields": [
+      {
+        "presence": "REQUIRED",
+        "scope": "RECORD",
+        "cardinality": "SCALAR",
+        "path": "/ad_valorem_subtotal",
+        "nullable": false,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "presence": "REQUIRED",
+        "scope": "RECORD",
+        "cardinality": "SCALAR",
+        "path": "/additionals_subtotal",
+        "nullable": false,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "presence": "REQUIRED",
+        "scope": "RECORD",
+        "cardinality": "SCALAR",
+        "path": "/adm_fee_subtotal",
+        "nullable": false,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "presence": "REQUIRED",
+        "scope": "RECORD",
+        "cardinality": "SCALAR",
+        "path": "/calculation_type",
+        "nullable": false,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "presence": "REQUIRED",
+        "scope": "RECORD",
+        "cardinality": "SCALAR",
+        "path": "/collect_subtotal",
+        "nullable": false,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "presence": "REQUIRED",
+        "scope": "RECORD",
+        "cardinality": "SCALAR",
+        "path": "/comments",
+        "nullable": false,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "presence": "REQUIRED",
+        "scope": "RECORD",
+        "cardinality": "SCALAR",
+        "path": "/corporation_sequence_number",
+        "nullable": false,
+        "jsonTypes": [
+          "INTEGER"
+        ]
+      },
+      {
+        "presence": "REQUIRED",
+        "scope": "RECORD",
+        "cardinality": "SCALAR",
+        "path": "/courtesy",
+        "nullable": false,
+        "jsonTypes": [
+          "BOOLEAN"
+        ]
+      },
+      {
+        "presence": "REQUIRED",
+        "scope": "RECORD",
+        "cardinality": "SCALAR",
+        "path": "/cubages_cubed_weight",
+        "nullable": false,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "presence": "REQUIRED",
+        "scope": "RECORD",
+        "cardinality": "SCALAR",
+        "path": "/delivery_subtotal",
+        "nullable": false,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "presence": "REQUIRED",
+        "scope": "RECORD",
+        "cardinality": "SCALAR",
+        "path": "/dispatch_subtotal",
+        "nullable": false,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "presence": "REQUIRED",
+        "scope": "RECORD",
+        "cardinality": "SCALAR",
+        "path": "/emergency_subtotal",
+        "nullable": false,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "presence": "REQUIRED",
+        "scope": "RECORD",
+        "cardinality": "SCALAR",
+        "path": "/emission_type",
+        "nullable": false,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "presence": "REQUIRED",
+        "scope": "RECORD",
+        "cardinality": "SCALAR",
+        "path": "/fit_cre_name",
+        "nullable": false,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "presence": "REQUIRED",
+        "scope": "RECORD",
+        "cardinality": "SCALAR",
+        "path": "/fit_crn_psn_nickname",
+        "nullable": false,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "presence": "REQUIRED",
+        "scope": "RECORD",
+        "cardinality": "SCALAR",
+        "path": "/fit_d_t_created_at",
+        "nullable": true,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "presence": "REQUIRED",
+        "scope": "RECORD",
+        "cardinality": "SCALAR",
+        "path": "/fit_diy_cin_tda_value",
+        "nullable": true,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "presence": "REQUIRED",
+        "scope": "RECORD",
+        "cardinality": "SCALAR",
+        "path": "/fit_diy_sae_code",
+        "nullable": false,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "presence": "REQUIRED",
+        "scope": "RECORD",
+        "cardinality": "SCALAR",
+        "path": "/fit_dos_cty_name",
+        "nullable": false,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "presence": "REQUIRED",
+        "scope": "RECORD",
+        "cardinality": "SCALAR",
+        "path": "/fit_dos_postal_code",
+        "nullable": false,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "presence": "REQUIRED",
+        "scope": "RECORD",
+        "cardinality": "SCALAR",
+        "path": "/fit_dpn_delivery_prediction_at",
+        "nullable": false,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "presence": "REQUIRED",
+        "scope": "RECORD",
+        "cardinality": "SCALAR",
+        "path": "/fit_dpn_manual_schedule",
+        "nullable": false,
+        "jsonTypes": [
+          "BOOLEAN"
+        ]
+      },
+      {
+        "presence": "REQUIRED",
+        "scope": "RECORD",
+        "cardinality": "SCALAR",
+        "path": "/fit_dpn_performance_finished_at",
+        "nullable": true,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "presence": "REQUIRED",
+        "scope": "RECORD",
+        "cardinality": "SCALAR",
+        "path": "/fit_dyn_drt_nickname",
+        "nullable": false,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "presence": "REQUIRED",
+        "scope": "RECORD",
+        "cardinality": "SCALAR",
+        "path": "/fit_dyn_name",
+        "nullable": false,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "presence": "REQUIRED",
+        "scope": "RECORD",
+        "cardinality": "UNOBSERVED",
+        "path": "/fit_fhe_cte_cancellation_at",
+        "nullable": true,
+        "jsonTypes": []
+      },
+      {
+        "presence": "REQUIRED",
+        "scope": "RECORD",
+        "cardinality": "UNOBSERVED",
+        "path": "/fit_fhe_cte_cancellation_reason",
+        "nullable": true,
+        "jsonTypes": []
+      },
+      {
+        "presence": "REQUIRED",
+        "scope": "RECORD",
+        "cardinality": "SCALAR",
+        "path": "/fit_fhe_cte_issued_at",
+        "nullable": true,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "presence": "REQUIRED",
+        "scope": "RECORD",
+        "cardinality": "SCALAR",
+        "path": "/fit_fhe_cte_key",
+        "nullable": true,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "presence": "REQUIRED",
+        "scope": "RECORD",
+        "cardinality": "SCALAR",
+        "path": "/fit_fhe_cte_number",
+        "nullable": true,
+        "jsonTypes": [
+          "INTEGER"
+        ]
+      },
+      {
+        "presence": "REQUIRED",
+        "scope": "RECORD",
+        "cardinality": "SCALAR",
+        "path": "/fit_fhe_cte_series",
+        "nullable": true,
+        "jsonTypes": [
+          "INTEGER"
+        ]
+      },
+      {
+        "presence": "REQUIRED",
+        "scope": "RECORD",
+        "cardinality": "SCALAR",
+        "path": "/fit_fhe_cte_status",
+        "nullable": true,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "presence": "REQUIRED",
+        "scope": "RECORD",
+        "cardinality": "UNOBSERVED",
+        "path": "/fit_fis_see_name",
+        "nullable": true,
+        "jsonTypes": []
+      },
+      {
+        "presence": "REQUIRED",
+        "scope": "RECORD",
+        "cardinality": "UNOBSERVED",
+        "path": "/fit_fis_subtotal",
+        "nullable": true,
+        "jsonTypes": []
+      },
+      {
+        "presence": "REQUIRED",
+        "scope": "RECORD",
+        "cardinality": "SCALAR",
+        "path": "/fit_fsn_name",
+        "nullable": false,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "presence": "REQUIRED",
+        "scope": "RECORD",
+        "cardinality": "SCALAR",
+        "path": "/fit_fte_f_r_mft_sequence_code",
+        "nullable": true,
+        "jsonTypes": [
+          "INTEGER"
+        ]
+      },
+      {
+        "presence": "REQUIRED",
+        "scope": "RECORD",
+        "cardinality": "SCALAR",
+        "path": "/fit_fte_f_r_occurrence_at",
+        "nullable": true,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "presence": "REQUIRED",
+        "scope": "RECORD",
+        "cardinality": "SCALAR",
+        "path": "/fit_fte_l_y_mft_sequence_code",
+        "nullable": true,
+        "jsonTypes": [
+          "INTEGER"
+        ]
+      },
+      {
+        "presence": "REQUIRED",
+        "scope": "RECORD",
+        "cardinality": "SCALAR",
+        "path": "/fit_fte_l_y_mft_service_date",
+        "nullable": true,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "presence": "REQUIRED",
+        "scope": "RECORD",
+        "cardinality": "SCALAR",
+        "path": "/fit_ftt_agent_costs",
+        "nullable": false,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "presence": "REQUIRED",
+        "scope": "RECORD",
+        "cardinality": "SCALAR",
+        "path": "/fit_ftt_commission_costs",
+        "nullable": false,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "presence": "REQUIRED",
+        "scope": "RECORD",
+        "cardinality": "SCALAR",
+        "path": "/fit_ftt_consolidation_costs",
+        "nullable": false,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "presence": "REQUIRED",
+        "scope": "RECORD",
+        "cardinality": "SCALAR",
+        "path": "/fit_ftt_insurance_costs",
+        "nullable": false,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "presence": "REQUIRED",
+        "scope": "RECORD",
+        "cardinality": "SCALAR",
+        "path": "/fit_ftt_manifest_costs",
+        "nullable": false,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "presence": "REQUIRED",
+        "scope": "RECORD",
+        "cardinality": "SCALAR",
+        "path": "/fit_ftt_manifest_pick_costs",
+        "nullable": false,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "presence": "REQUIRED",
+        "scope": "RECORD",
+        "cardinality": "SCALAR",
+        "path": "/fit_ftt_operational_expenses",
+        "nullable": false,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "presence": "REQUIRED",
+        "scope": "RECORD",
+        "cardinality": "SCALAR",
+        "path": "/fit_ftt_redispatch_costs",
+        "nullable": false,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "presence": "REQUIRED",
+        "scope": "RECORD",
+        "cardinality": "SCALAR",
+        "path": "/fit_ftt_tax_total",
+        "nullable": false,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "presence": "REQUIRED",
+        "scope": "RECORD",
+        "cardinality": "SCALAR",
+        "path": "/fit_ftt_total_cost",
+        "nullable": false,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "presence": "REQUIRED",
+        "scope": "RECORD",
+        "cardinality": "UNOBSERVED",
+        "path": "/fit_mer_mft_sequence_code",
+        "nullable": true,
+        "jsonTypes": []
+      },
+      {
+        "presence": "REQUIRED",
+        "scope": "RECORD",
+        "cardinality": "UNOBSERVED",
+        "path": "/fit_mer_mft_service_date",
+        "nullable": true,
+        "jsonTypes": []
+      },
+      {
+        "presence": "REQUIRED",
+        "scope": "RECORD",
+        "cardinality": "UNOBSERVED",
+        "path": "/fit_nse_cancelation_reason",
+        "nullable": true,
+        "jsonTypes": []
+      },
+      {
+        "presence": "REQUIRED",
+        "scope": "RECORD",
+        "cardinality": "UNOBSERVED",
+        "path": "/fit_nse_issued_at",
+        "nullable": true,
+        "jsonTypes": []
+      },
+      {
+        "presence": "REQUIRED",
+        "scope": "RECORD",
+        "cardinality": "UNOBSERVED",
+        "path": "/fit_nse_nee_code",
+        "nullable": true,
+        "jsonTypes": []
+      },
+      {
+        "presence": "REQUIRED",
+        "scope": "RECORD",
+        "cardinality": "UNOBSERVED",
+        "path": "/fit_nse_number",
+        "nullable": true,
+        "jsonTypes": []
+      },
+      {
+        "presence": "REQUIRED",
+        "scope": "RECORD",
+        "cardinality": "UNOBSERVED",
+        "path": "/fit_nse_status",
+        "nullable": true,
+        "jsonTypes": []
+      },
+      {
+        "presence": "REQUIRED",
+        "scope": "RECORD",
+        "cardinality": "SCALAR",
+        "path": "/fit_o_n_drt_nickname",
+        "nullable": false,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "presence": "REQUIRED",
+        "scope": "RECORD",
+        "cardinality": "SCALAR",
+        "path": "/fit_o_n_name",
+        "nullable": false,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "presence": "REQUIRED",
+        "scope": "RECORD",
+        "cardinality": "UNOBSERVED",
+        "path": "/fit_o_t_corporation_sequence_number",
+        "nullable": true,
+        "jsonTypes": []
+      },
+      {
+        "presence": "REQUIRED",
+        "scope": "RECORD",
+        "cardinality": "SCALAR",
+        "path": "/fit_oas_cty_name",
+        "nullable": false,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "presence": "REQUIRED",
+        "scope": "RECORD",
+        "cardinality": "SCALAR",
+        "path": "/fit_oas_postal_code",
+        "nullable": false,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "presence": "REQUIRED",
+        "scope": "RECORD",
+        "cardinality": "UNOBSERVED",
+        "path": "/fit_ony_cin_tda_value",
+        "nullable": true,
+        "jsonTypes": []
+      },
+      {
+        "presence": "REQUIRED",
+        "scope": "RECORD",
+        "cardinality": "SCALAR",
+        "path": "/fit_ony_sae_code",
+        "nullable": false,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "presence": "REQUIRED",
+        "scope": "RECORD",
+        "cardinality": "SCALAR",
+        "path": "/fit_p_m_pck_finish_date",
+        "nullable": true,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "presence": "REQUIRED",
+        "scope": "RECORD",
+        "cardinality": "SCALAR",
+        "path": "/fit_p_m_pck_mik_mft_sequence_code",
+        "nullable": true,
+        "jsonTypes": [
+          "INTEGER"
+        ]
+      },
+      {
+        "presence": "REQUIRED",
+        "scope": "RECORD",
+        "cardinality": "SCALAR",
+        "path": "/fit_p_m_pck_sequence_code",
+        "nullable": true,
+        "jsonTypes": [
+          "INTEGER"
+        ]
+      },
+      {
+        "presence": "REQUIRED",
+        "scope": "RECORD",
+        "cardinality": "SCALAR",
+        "path": "/fit_psn_name",
+        "nullable": false,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "presence": "REQUIRED",
+        "scope": "RECORD",
+        "cardinality": "SCALAR",
+        "path": "/fit_pyr_document",
+        "nullable": false,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "presence": "REQUIRED",
+        "scope": "RECORD",
+        "cardinality": "SCALAR",
+        "path": "/fit_pyr_mds_cty_name",
+        "nullable": false,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "presence": "REQUIRED",
+        "scope": "RECORD",
+        "cardinality": "SCALAR",
+        "path": "/fit_pyr_mds_cty_sae_code",
+        "nullable": false,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "presence": "REQUIRED",
+        "scope": "RECORD",
+        "cardinality": "SCALAR",
+        "path": "/fit_pyr_name",
+        "nullable": false,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "presence": "REQUIRED",
+        "scope": "RECORD",
+        "cardinality": "SCALAR",
+        "path": "/fit_pyr_nickname",
+        "nullable": false,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "presence": "REQUIRED",
+        "scope": "RECORD",
+        "cardinality": "UNOBSERVED",
+        "path": "/fit_qrd_qoe_sequence_code",
+        "nullable": true,
+        "jsonTypes": []
+      },
+      {
+        "presence": "REQUIRED",
+        "scope": "RECORD",
+        "cardinality": "SCALAR",
+        "path": "/fit_rir_document",
+        "nullable": false,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "presence": "REQUIRED",
+        "scope": "RECORD",
+        "cardinality": "SCALAR",
+        "path": "/fit_rir_nickname",
+        "nullable": true,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "presence": "REQUIRED",
+        "scope": "RECORD",
+        "cardinality": "SCALAR",
+        "path": "/fit_rpt_document",
+        "nullable": false,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "presence": "REQUIRED",
+        "scope": "RECORD",
+        "cardinality": "SCALAR",
+        "path": "/fit_rpt_nickname",
+        "nullable": false,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "presence": "REQUIRED",
+        "scope": "RECORD",
+        "cardinality": "SCALAR",
+        "path": "/fit_sdr_document",
+        "nullable": false,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "presence": "REQUIRED",
+        "scope": "RECORD",
+        "cardinality": "SCALAR",
+        "path": "/fit_sdr_nickname",
+        "nullable": false,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "presence": "REQUIRED",
+        "scope": "RECORD",
+        "cardinality": "SCALAR",
+        "path": "/fit_spr_document",
+        "nullable": false,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "presence": "REQUIRED",
+        "scope": "RECORD",
+        "cardinality": "UNOBSERVED",
+        "path": "/fit_spr_nickname",
+        "nullable": true,
+        "jsonTypes": []
+      },
+      {
+        "presence": "REQUIRED",
+        "scope": "RECORD",
+        "cardinality": "SCALAR",
+        "path": "/fit_sps_slr_psn_name",
+        "nullable": false,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "presence": "REQUIRED",
+        "scope": "RECORD",
+        "cardinality": "SCALAR",
+        "path": "/fit_sps_slr_psn_nickname",
+        "nullable": false,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "presence": "REQUIRED",
+        "scope": "RECORD",
+        "cardinality": "SCALAR",
+        "path": "/fit_uer_name",
+        "nullable": false,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "presence": "REQUIRED",
+        "scope": "RECORD",
+        "cardinality": "SCALAR",
+        "path": "/freight_weight_subtotal",
+        "nullable": false,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "presence": "REQUIRED",
+        "scope": "RECORD",
+        "cardinality": "SCALAR",
+        "path": "/gris_subtotal",
+        "nullable": false,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "presence": "REQUIRED",
+        "scope": "RECORD",
+        "cardinality": "SCALAR",
+        "path": "/id",
+        "nullable": false,
+        "jsonTypes": [
+          "INTEGER"
+        ]
+      },
+      {
+        "presence": "REQUIRED",
+        "scope": "RECORD",
+        "cardinality": "SCALAR",
+        "path": "/insurance_accountable_type",
+        "nullable": false,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "presence": "REQUIRED",
+        "scope": "RECORD",
+        "cardinality": "ARRAY",
+        "path": "/invoices_mapping",
+        "nullable": false,
+        "jsonTypes": [
+          "ARRAY"
+        ]
+      },
+      {
+        "presence": "REQUIRED",
+        "scope": "RECORD",
+        "cardinality": "SCALAR",
+        "path": "/invoices_mapping/*",
+        "nullable": false,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "presence": "REQUIRED",
+        "scope": "RECORD",
+        "cardinality": "SCALAR",
+        "path": "/invoices_value",
+        "nullable": false,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "presence": "REQUIRED",
+        "scope": "RECORD",
+        "cardinality": "SCALAR",
+        "path": "/invoices_volumes",
+        "nullable": false,
+        "jsonTypes": [
+          "INTEGER"
+        ]
+      },
+      {
+        "presence": "REQUIRED",
+        "scope": "RECORD",
+        "cardinality": "SCALAR",
+        "path": "/itr_subtotal",
+        "nullable": false,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "presence": "REQUIRED",
+        "scope": "RECORD",
+        "cardinality": "SCALAR",
+        "path": "/km",
+        "nullable": false,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "presence": "REQUIRED",
+        "scope": "RECORD",
+        "cardinality": "SCALAR",
+        "path": "/nfse_number",
+        "nullable": true,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "presence": "REQUIRED",
+        "scope": "RECORD",
+        "cardinality": "SCALAR",
+        "path": "/nfse_series",
+        "nullable": true,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "presence": "REQUIRED",
+        "scope": "RECORD",
+        "cardinality": "SCALAR",
+        "path": "/other_fees",
+        "nullable": false,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "presence": "REQUIRED",
+        "scope": "RECORD",
+        "cardinality": "SCALAR",
+        "path": "/payment_accountable_type",
+        "nullable": false,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "presence": "REQUIRED",
+        "scope": "RECORD",
+        "cardinality": "SCALAR",
+        "path": "/real_weight",
+        "nullable": false,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "presence": "REQUIRED",
+        "scope": "RECORD",
+        "cardinality": "SCALAR",
+        "path": "/redispatch_subtotal",
+        "nullable": false,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "presence": "REQUIRED",
+        "scope": "RECORD",
+        "cardinality": "SCALAR",
+        "path": "/reference_number",
+        "nullable": false,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "presence": "REQUIRED",
+        "scope": "RECORD",
+        "cardinality": "SCALAR",
+        "path": "/sec_cat_subtotal",
+        "nullable": false,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "presence": "REQUIRED",
+        "scope": "RECORD",
+        "cardinality": "SCALAR",
+        "path": "/sequence_code",
+        "nullable": false,
+        "jsonTypes": [
+          "INTEGER"
+        ]
+      },
+      {
+        "presence": "REQUIRED",
+        "scope": "RECORD",
+        "cardinality": "SCALAR",
+        "path": "/service_at",
+        "nullable": false,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "presence": "REQUIRED",
+        "scope": "RECORD",
+        "cardinality": "SCALAR",
+        "path": "/service_type",
+        "nullable": false,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "presence": "REQUIRED",
+        "scope": "RECORD",
+        "cardinality": "SCALAR",
+        "path": "/status",
+        "nullable": false,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "presence": "REQUIRED",
+        "scope": "RECORD",
+        "cardinality": "SCALAR",
+        "path": "/suframa_subtotal",
+        "nullable": false,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "presence": "REQUIRED",
+        "scope": "RECORD",
+        "cardinality": "SCALAR",
+        "path": "/taxed_weight",
+        "nullable": false,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "presence": "REQUIRED",
+        "scope": "RECORD",
+        "cardinality": "SCALAR",
+        "path": "/tde_subtotal",
+        "nullable": false,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "presence": "REQUIRED",
+        "scope": "RECORD",
+        "cardinality": "SCALAR",
+        "path": "/toll_subtotal",
+        "nullable": false,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "presence": "REQUIRED",
+        "scope": "RECORD",
+        "cardinality": "SCALAR",
+        "path": "/total",
+        "nullable": false,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "presence": "REQUIRED",
+        "scope": "RECORD",
+        "cardinality": "SCALAR",
+        "path": "/total_cubic_volume",
+        "nullable": false,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "presence": "REQUIRED",
+        "scope": "RECORD",
+        "cardinality": "SCALAR",
+        "path": "/trt_subtotal",
+        "nullable": false,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "presence": "REQUIRED",
+        "scope": "RECORD",
+        "cardinality": "SCALAR",
+        "path": "/type",
+        "nullable": false,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "presence": "REQUIRED",
+        "scope": "RECORD",
+        "cardinality": "SCALAR",
+        "path": "/updated_at",
+        "nullable": false,
+        "jsonTypes": [
+          "STRING"
+        ]
+      }
+    ],
+    "keyPath": "/id",
+    "rootCardinality": "ARRAY"
+  },
+  "documentReference": "dataexport-fretes",
+  "sourceKind": "DATA_EXPORT",
+  "fingerprints": {
+    "response": "d62a2b12744266f30d033cc5fee8a3302b07d33477b3b5b24b4dca11779a40f7",
+    "metadata": "c145d08aedf2a90f879742a2913edcf995e614269b98bf2b49de221ffb431288",
+    "release": "ad072100143c765705cd7b01e581f19ce3e5bb9a38d181f9cfeae4bcbd141b35"
+  },
+  "contractVersion": "2026-10-24.fretes-observed-curl.v1",
+  "metadata": [
+    {
+      "kind": "DATA_FIELD",
+      "path": "ad_valorem_subtotal",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "additionals_subtotal",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "adm_fee_subtotal",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "calculation_type",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "collect_subtotal",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "comments",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "corporation_sequence_number",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "courtesy",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "cubages_cubed_weight",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "delivery_subtotal",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "dispatch_subtotal",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "emergency_subtotal",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "emission_type",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "fit_cre_name",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "fit_crn_psn_nickname",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "fit_d_t_created_at",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "fit_diy_cin_tda_value",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "fit_diy_sae_code",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "fit_dos_cty_name",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "fit_dos_postal_code",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "fit_dpn_delivery_prediction_at",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "fit_dpn_manual_schedule",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "fit_dpn_performance_finished_at",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "fit_dyn_drt_nickname",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "fit_dyn_name",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "fit_fhe_cte_cancellation_at",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "fit_fhe_cte_cancellation_reason",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "fit_fhe_cte_issued_at",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "fit_fhe_cte_key",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "fit_fhe_cte_number",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "fit_fhe_cte_series",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "fit_fhe_cte_status",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "fit_fis_see_name",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "fit_fis_subtotal",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "fit_fsn_name",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "fit_fte_f_r_mft_sequence_code",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "fit_fte_f_r_occurrence_at",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "fit_fte_l_y_mft_sequence_code",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "fit_fte_l_y_mft_service_date",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "fit_ftt_agent_costs",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "fit_ftt_commission_costs",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "fit_ftt_consolidation_costs",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "fit_ftt_insurance_costs",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "fit_ftt_manifest_costs",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "fit_ftt_manifest_pick_costs",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "fit_ftt_operational_expenses",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "fit_ftt_redispatch_costs",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "fit_ftt_tax_total",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "fit_ftt_total_cost",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "fit_mer_mft_sequence_code",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "fit_mer_mft_service_date",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "fit_nse_cancelation_reason",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "fit_nse_issued_at",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "fit_nse_nee_code",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "fit_nse_number",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "fit_nse_status",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "fit_o_n_drt_nickname",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "fit_o_n_name",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "fit_o_t_corporation_sequence_number",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "fit_oas_cty_name",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "fit_oas_postal_code",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "fit_ony_cin_tda_value",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "fit_ony_sae_code",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "fit_p_m_pck_finish_date",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "fit_p_m_pck_mik_mft_sequence_code",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "fit_p_m_pck_sequence_code",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "fit_psn_name",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "fit_pyr_document",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "fit_pyr_mds_cty_name",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "fit_pyr_mds_cty_sae_code",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "fit_pyr_name",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "fit_pyr_nickname",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "fit_qrd_qoe_sequence_code",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "fit_rir_document",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "fit_rir_nickname",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "fit_rpt_document",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "fit_rpt_nickname",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "fit_sdr_document",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "fit_sdr_nickname",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "fit_spr_document",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "fit_spr_nickname",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "fit_sps_slr_psn_name",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "fit_sps_slr_psn_nickname",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "fit_uer_name",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "freight_weight_subtotal",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "gris_subtotal",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "id",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "insurance_accountable_type",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "invoices_mapping",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "invoices_value",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "invoices_volumes",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "itr_subtotal",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "km",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "nfse_number",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "nfse_series",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "other_fees",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "payment_accountable_type",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "real_weight",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "redispatch_subtotal",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "reference_number",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "sec_cat_subtotal",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "sequence_code",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "service_at",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "service_type",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "status",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "suframa_subtotal",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "taxed_weight",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "tde_subtotal",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "toll_subtotal",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "total",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "total_cubic_volume",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "trt_subtotal",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "type",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "updated_at",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FILTER",
+      "path": "fit_destination_city.state_id",
+      "declaredType": "OTHER",
+      "declaredTypeFingerprint": {
+        "sha256": "ed823c4c534bfa17a30399fcbfb2e7defe7ebbfd47b746511c769d4467f510f7",
+        "version": "declared-type-v1"
+      }
+    },
+    {
+      "kind": "DATA_FILTER",
+      "path": "fit_freight_location.current_location_id",
+      "declaredType": "OTHER",
+      "declaredTypeFingerprint": {
+        "sha256": "ed823c4c534bfa17a30399fcbfb2e7defe7ebbfd47b746511c769d4467f510f7",
+        "version": "declared-type-v1"
+      }
+    },
+    {
+      "kind": "DATA_FILTER",
+      "path": "freights.corporation_id",
+      "declaredType": "OTHER",
+      "declaredTypeFingerprint": {
+        "sha256": "ed823c4c534bfa17a30399fcbfb2e7defe7ebbfd47b746511c769d4467f510f7",
+        "version": "declared-type-v1"
+      }
+    },
+    {
+      "kind": "DATA_FILTER",
+      "path": "freights.corporation_sequence_number",
+      "declaredType": "NUMBER",
+      "declaredTypeFingerprint": {
+        "sha256": "3f8e673c0bf8f3bdbe07d7fcbe979e7998b294e2b9b29723476e9cace7c0f3d4",
+        "version": "declared-type-v1"
+      }
+    },
+    {
+      "kind": "DATA_FILTER",
+      "path": "freights.courtesy",
+      "declaredType": "OTHER",
+      "declaredTypeFingerprint": {
+        "sha256": "ed823c4c534bfa17a30399fcbfb2e7defe7ebbfd47b746511c769d4467f510f7",
+        "version": "declared-type-v1"
+      }
+    },
+    {
+      "kind": "DATA_FILTER",
+      "path": "freights.emission_type",
+      "declaredType": "OTHER",
+      "declaredTypeFingerprint": {
+        "sha256": "ed823c4c534bfa17a30399fcbfb2e7defe7ebbfd47b746511c769d4467f510f7",
+        "version": "declared-type-v1"
+      }
+    },
+    {
+      "kind": "DATA_FILTER",
+      "path": "freights.freight_classification_id",
+      "declaredType": "OTHER",
+      "declaredTypeFingerprint": {
+        "sha256": "ed823c4c534bfa17a30399fcbfb2e7defe7ebbfd47b746511c769d4467f510f7",
+        "version": "declared-type-v1"
+      }
+    },
+    {
+      "kind": "DATA_FILTER",
+      "path": "freights.payer_id",
+      "declaredType": "OTHER",
+      "declaredTypeFingerprint": {
+        "sha256": "ed823c4c534bfa17a30399fcbfb2e7defe7ebbfd47b746511c769d4467f510f7",
+        "version": "declared-type-v1"
+      }
+    },
+    {
+      "kind": "DATA_FILTER",
+      "path": "freights.service_at",
+      "declaredType": "DATE",
+      "declaredTypeFingerprint": {
+        "sha256": "179b00376b5b12fe6a617c98e9c90d90fb5cfdf75f96ee4909fff9d8028b63a1",
+        "version": "declared-type-v1"
+      }
+    },
+    {
+      "kind": "DATA_FILTER",
+      "path": "freights.status",
+      "declaredType": "OTHER",
+      "declaredTypeFingerprint": {
+        "sha256": "ed823c4c534bfa17a30399fcbfb2e7defe7ebbfd47b746511c769d4467f510f7",
+        "version": "declared-type-v1"
+      }
+    },
+    {
+      "kind": "DATA_FILTER",
+      "path": "freights.type",
+      "declaredType": "OTHER",
+      "declaredTypeFingerprint": {
+        "sha256": "ed823c4c534bfa17a30399fcbfb2e7defe7ebbfd47b746511c769d4467f510f7",
+        "version": "declared-type-v1"
+      }
+    },
+    {
+      "kind": "DATA_FILTER",
+      "path": "scopes.by_updated_at",
+      "declaredType": "DATE_TIME",
+      "declaredTypeFingerprint": {
+        "sha256": "37beb44f6106b7fcafaa2955c67545056b9a06bf0ab6da6b367dc9eacad07050",
+        "version": "declared-type-v1"
+      }
+    },
+    {
+      "kind": "DATA_FILTER",
+      "path": "scopes.from_ctes_issue_at",
+      "declaredType": "DATE",
+      "declaredTypeFingerprint": {
+        "sha256": "179b00376b5b12fe6a617c98e9c90d90fb5cfdf75f96ee4909fff9d8028b63a1",
+        "version": "declared-type-v1"
+      }
+    },
+    {
+      "kind": "DATA_FILTER",
+      "path": "scopes.from_delivery_prediction_at",
+      "declaredType": "DATE",
+      "declaredTypeFingerprint": {
+        "sha256": "179b00376b5b12fe6a617c98e9c90d90fb5cfdf75f96ee4909fff9d8028b63a1",
+        "version": "declared-type-v1"
+      }
+    },
+    {
+      "kind": "DATA_FILTER",
+      "path": "scopes.from_freight_delivered_at",
+      "declaredType": "DATE",
+      "declaredTypeFingerprint": {
+        "sha256": "179b00376b5b12fe6a617c98e9c90d90fb5cfdf75f96ee4909fff9d8028b63a1",
+        "version": "declared-type-v1"
+      }
+    },
+    {
+      "kind": "DATA_FILTER",
+      "path": "scopes.from_nfse_issued_at",
+      "declaredType": "DATE",
+      "declaredTypeFingerprint": {
+        "sha256": "179b00376b5b12fe6a617c98e9c90d90fb5cfdf75f96ee4909fff9d8028b63a1",
+        "version": "declared-type-v1"
+      }
+    }
+  ]
+}

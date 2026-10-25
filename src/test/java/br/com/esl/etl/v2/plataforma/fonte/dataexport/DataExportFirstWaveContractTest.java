@@ -75,7 +75,8 @@ class DataExportFirstWaveContractTest {
         assertEquals("freights.service_at", fretes.metadataBusinessDateFilterName());
         assertEquals(
                 "search[freights][service_at]", fretes.businessDateFilter().asQueryParameterName());
-        assertEquals("corporation_sequence_number asc", fretes.defaultOrderBy().get(0));
+        assertEquals("id asc", fretes.defaultOrderBy().get(0));
+        assertEquals("2026-10-24.fretes-id.v1", fretes.contractVersion());
         assertEquals("id", fretes.paginationEntityField());
         assertNotEquals(fretes.defaultOrderBy().get(0), fretes.paginationEntityField());
 
@@ -191,6 +192,12 @@ class DataExportFirstWaveContractTest {
                     template, template.defaultPageSize() + 1, template.defaultOrderBy());
             assertRequestRejected(template, 2, List.of("unversioned_order asc"));
         }
+    }
+
+    @Test
+    void fretesRejectsThePreviousMinutaOrderBeforeCallingTheSource() throws Exception {
+        assertRequestRejected(
+                DataExportTemplate.FRETES, 25, List.of("corporation_sequence_number asc"));
     }
 
     private static ContractMetadata.Element filter(

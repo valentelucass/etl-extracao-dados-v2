@@ -19,13 +19,13 @@ public enum DataExportTemplate {
             List.of("sequence_code asc"),
             100),
     FRETES(
-            "2026-08-31.v2-025a.1",
+            "2026-10-24.fretes-id.v1",
             6389,
             new SearchPath("freights", "service_at"),
             "freights.service_at",
             new SearchPath("scopes", "by_updated_at"),
             "id",
-            List.of("corporation_sequence_number asc"),
+            List.of("id asc"),
             100),
     MANIFESTOS(
             "bloco55-synthetic-v1",

@@ -22,6 +22,37 @@ class LocalizacaoCargaDataExportRecordMapperTest {
             new LocalizacaoCargaDataExportRecordMapper();
 
     @Test
+    void observedProfilePreservesAdditionalPathsWithoutChangingTheDefault() throws Exception {
+        final String document =
+                """
+                {"corporation_sequence_number":8656,"service_at":"2036-03-20",
+                 "invoices_volumes":0,"invoices_mapping":["SYNTHETIC"],
+                 "finished_at":null,"fit_rpt_name":"SYNTHETIC"}
+                """;
+        assertEquals("UNAPPROVED_SOURCE_PATH", mapper.map(1, document).quarantineReasonCode());
+        final var observed =
+                (LocalizacaoCargaDataExportRecordMapper)
+                        LocalizacaoCargaDataExportRecordMapper.class
+                                .getMethod("observed20261024")
+                                .invoke(null);
+        final var record = observed.map(1, document);
+        assertFalse(record.quarantined());
+        assertEquals(26, JSON.readTree(record.fieldPresenceJson()).path("fields").size());
+        assertEquals(
+                "LOCALIZACAO_8656_26_PATHS_OBSERVED_20261024",
+                JSON.readTree(record.fieldPresenceJson()).path("policy").path("matrix").asText());
+        assertEquals(
+                "SYNTHETIC",
+                JSON.readTree(record.payloadJson()).path("invoices_mapping").get(0).asText());
+        assertEquals("0", record.invoicesVolumesRaw());
+        assertEquals(Instant.parse("2036-03-20T03:00:00Z"), record.serviceAtUtc());
+        assertEquals(
+                "UNAPPROVED_SOURCE_PATH",
+                observed.map(1, document.replace("\"finished_at\"", "\"unknown_path\""))
+                        .quarantineReasonCode());
+    }
+
+    @Test
     void mapsExactlyTheSeventeenApprovedPathsWithStrictTypedEvidence() throws Exception {
         final var record =
                 mapper.map(
