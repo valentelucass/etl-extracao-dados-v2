@@ -1,3 +1,7 @@
+## Continuidade0591 — ESL consulta; qualificações e causas locais do banco
+
+[Checkpoint0591](docs/continuidade/checkpoints/0591-esl-somente-consulta-qualificacoes-e-falhas-reais-do-banco.md). ESL aberta somente consulta/filtros/download, nunca enviar/salvar/alterar; FretesDataExport distintoGraphQL, Raster sem equivalência inferida.184casos locais próprios PASS; V8revalidou81. Manifestos57406/47500fechados antesSourceSQL: parserPS corrigidoV8; consumidor exige enum de closure diferente do reciboSTRICTreal, V9em preparo. P3r02strictcompilePASS/99de111PASS/12FALHAS, diagnóstico em preparo, sem adoção. TodosJobsfechados/recibos originais; Root único executor,0novosadaptadoresHTTP/JDBC/DDL/commitretido. Users54540/6quarsemEOF/countersparciais; etapas3/4abertas. Git anterior e6a1895publicado; índiceASTfalhoumemória sem substituirgrafo. Restriçõespermanentes mantidas.
+
 ## Continuidade0590 — Versionamento e conferência ESL somente consulta
 
 [Checkpoint0590](docs/continuidade/checkpoints/0590-commit-push-e-conferencia-final-esl-somente-consulta.md). Usuário determina commit e push ao fechar alterações revisadas/validadas. Acesso futuro à plataforma ESL será somente consulta para comparar resultados, ainda não disponibilizado. Sincronização Git em preparação, sem antecipar PASS; artefatos externos/WIP preservados. Etapas3/4 abertas, Users54540/6quar semEOF e restrições permanentes mantidas.

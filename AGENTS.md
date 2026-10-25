@@ -1,3 +1,15 @@
+## Acesso ESL de25/10/2026 — exclusivamente consultas
+
+Instrução direta atual do usuário: no site ESL apenas navegar, consultar, ler,
+filtrar e baixar Excel; jamais aplicar/salvar alterações ou enviar/importar dados
+ou mensagens. Supervisor é o único operador desta sessão. Primeiro comprovar
+gravação/extração do V2; depois bater dados com a plataforma no mesmo relatório,
+período, campo de data, filtros e fuso. Fretes Data Export6389 não é Fretes
+GraphQL. Não presumir que Raster está na ESL nem substituir por Localizador4924.
+Downloads e dados reais ficam fora do Git. [Runbook](docs/runbooks/conferencia-esl-somente-consulta.md).
+
+[Checkpoint0591](docs/continuidade/checkpoints/0591-esl-somente-consulta-qualificacoes-e-falhas-reais-do-banco.md):184cenários locais PASS, V8revalidado81; Manifestos real ainda0Source/SQL por falhas causais de parser e consumidor do recibo. P3compilou,99/111PASS e12falhas reais. Não admitir banco/DDL por esses resultados. Jobs fechados, Root único próximo executor; Users54540semEOF e etapas3/4 abertas.
+
 ## Continuidade0590 — Versionamento e conferência ESL somente consulta
 
 [Checkpoint0590](docs/continuidade/checkpoints/0590-commit-push-e-conferencia-final-esl-somente-consulta.md). Usuário determina commit e push ao fechar alterações revisadas/validadas. Acesso futuro à plataforma ESL será somente consulta para comparar resultados, ainda não disponibilizado. Sincronização Git em preparação, sem antecipar PASS; artefatos externos/WIP preservados. Etapas3/4 abertas, Users54540/6quar semEOF e restrições permanentes mantidas.
