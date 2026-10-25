@@ -1,3 +1,7 @@
+## Continuidade0595 — Cotações200; correções de catálogo e memória comprovadas
+
+[Checkpoint0595](docs/continuidade/checkpoints/0595-cotacoes-info-real-e-correcoes-de-catalogo-e-memoria.md). Cotações own52PASS e INFO6906real200/37campos/6filtrosquotes.field/drift12,0DATA/SQL/ESLmutação,recibos fechados0. Último parSource agora cotacoes-info-0595-01/controller-receipt.json+original-memory.json. ManifestosP2own22PASS,novoJAR/banco integrado pendentes. Banco componente121PASS; LAB mesmos7ITdiretosPASS sob1GiB, falhaMaven preservada. ProdutoR11 preparado/semadoção; Users54/23 semreplay. IDs corrigidos:Localizador8656,Faturas4924,FretesDataExport6389 distintoGraphQL. Etapas3/4abertas,Root únicoexecutor,ESLsomenteconsulta,restrições/commitpush mantidos.
+
 ## Continuidade0594 — INFO real200 explica filtros incompletos de Manifestos
 
 [Checkpoint0594](docs/continuidade/checkpoints/0594-info-real-manifestos-e-catalogo-de-filtros-incompleto.md). V12own209+2preflightsPASS; RootINFO6399único200/91campos18filtrostable.field/drift36, closures originais/Java/native/stdin0. CatálogoP1Btem18nomessimples; conjuntos91camposiguais. Corrigirbaseline/bindingscomprovaatual,mantendoGate/parser;0DATA/SQL/ESLmutação. PAR Source maisrecente0594-02, nãoV9. LAB447+9PASS; pacote7ITpendente eSourcePRODUCT3NeedBraces, R07preparado. Users77=54PASS/23FALHAS, perfilfechado r08emimplementação, semreplay. Banco prepara cleanupcausal; C3onlycontext/RasterR5nãoadmitido. Etapas3/4abertas,Rootúnicoexecutor,restrições/ESLsomenteconsulta/commitpush mantidos.
@@ -17,7 +21,7 @@ filtrar e baixar Excel; jamais aplicar/salvar alterações ou enviar/importar da
 ou mensagens. Supervisor é o único operador desta sessão. Primeiro comprovar
 gravação/extração do V2; depois bater dados com a plataforma no mesmo relatório,
 período, campo de data, filtros e fuso. Fretes Data Export6389 não é Fretes
-GraphQL. Não presumir que Raster está na ESL nem substituir por Localizador4924.
+GraphQL. Não presumir que Raster está na ESL nem substituir por Localizador8656.
 Downloads e dados reais ficam fora do Git. [Runbook](docs/runbooks/conferencia-esl-somente-consulta.md).
 
 [Checkpoint0591](docs/continuidade/checkpoints/0591-esl-somente-consulta-qualificacoes-e-falhas-reais-do-banco.md):184cenários locais PASS, V8revalidado81; Manifestos real ainda0Source/SQL por falhas causais de parser e consumidor do recibo. P3compilou,99/111PASS e12falhas reais. Não admitir banco/DDL por esses resultados. Jobs fechados, Root único próximo executor; Users54540semEOF e etapas3/4 abertas.

@@ -3,7 +3,7 @@
 25/10/2026. Continuidade0591, documentação enviada em
 8e1eb6e05a0ac6151be7979842beb9bc44d9b6f5. Consulta ESL continua exclusivamente
 leitura/filtros/download, sem aplicar/salvar/enviar/importar. Não confundir Fretes
-Data Export6389 com GraphQL, Localizador4924 com Raster, nem conjuntos diferentes
+Data Export6389 com GraphQL, Localizador8656 com Raster, nem conjuntos diferentes
 de usuários. Conferência com a plataforma depende de banco/extração comprovados.
 
 ## V9 qualificado antes de nova tentativa física

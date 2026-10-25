@@ -24,7 +24,7 @@ independente. A abertura do site, uma prévia ou um Excel não comprovam gravaç
   Coletas Detalhada, Relação de Cotações Detalhada e Relação de Manifestos Detalhada.
   Os arquivos recentes também exibiam Fatura por Cliente e Contas a Pagar.
 - Sinistros ainda não teve relatório equivalente localizado nesta navegação.
-- Localizador de Cargas Data Export4924 não equivale automaticamente ao Raster.
+- Localizador de Cargas Data Export8656 não equivale automaticamente ao Raster. O template4924 é Faturas por Cliente; não usar como identificação de Localizador.
   Para Raster, ainda falta localizar e demonstrar fonte/relatório equivalente;
   não inferir correspondência entre localização, viagem, parada e ocorrência.
 - Para Usuários, conferir a semântica da consulta GraphQL IndividualConnection,
@@ -55,3 +55,25 @@ timeouts nem autorização para dividir/editar o template. Os últimos arquivos
 listados eram de2025 e não foram usados como oráculo dos testes de2026. Nenhum
 download ou confronto com banco foi concluído nesta navegação. O acesso foi
 somente consulta; não houve alteração de negócio na ESL.
+
+## Identificação dos relatórios do V2
+
+IDs conferidos em DataExportTemplate e nas evidências Stage1; confirmar o ID do
+relatório da plataforma antes de comparar. Nome parecido não estabelece identidade.
+
+| Entidade Data Export | Template |
+| --- | ---: |
+| Coletas | 6908 |
+| Fretes | 6389 |
+| Manifestos | 6399 |
+| Cotações | 6906 |
+| Localização de Cargas / Localizador | 8656 |
+| Contas a Pagar | 8636 |
+| Faturas por Cliente | 4924 |
+| Inventário | 10633 |
+| Sinistros | 6392 |
+
+Correção de25/10/2026: a referência anterior a Localizador4924 estava errada.
+4924 é Faturas por Cliente; Localizador usa8656. Essa correção é documental;
+não houve consulta à entidade errada. Raster requer correspondência própria,
+e Fretes GraphQL não substitui Fretes Data Export6389.

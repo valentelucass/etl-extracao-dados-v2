@@ -114,7 +114,7 @@ RasterR5 ainda não tem prova contínua de proteção dos módulos, sem admissã
 
 Concluir pacote/integração e comparar ESL no relatório/período/fuso/filtros/
 granularidade corretos. Fretes Data Export6389 não é Fretes GraphQL;
-Localizador4924 não comprova Raster. Users54540/6quar/hasNext=true permanece sem
+Localizador8656 não comprova Raster. Users54540/6quar/hasNext=true permanece sem
 EOF/cursor/closure original; não fabricar encerramento nem retomar automaticamente.
 Etapas3/4 abertas. Root único executor/editor canônico, três chats somente arquivos.
 Preservar SQL16.0.1000.6/instalação, contas/credenciais/identidades/permissões/ACL,
