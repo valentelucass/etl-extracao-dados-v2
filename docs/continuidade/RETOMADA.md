@@ -1,3 +1,7 @@
+## Continuidade0593 — Clock111 PASS e contexto C78 real medido
+
+[Checkpoint0593](checkpoints/0593-clock-corrigido-e-contexto-transacional-real-medido.md). Clock corrigido: agregado próprio111/32 PASS e JARlaboratório111+4 PASS; produto/adoção/regressão ampliada pendentes. C78real102500c3:1conexão/12SELECT/2rollbacks/close comprovados,0Source/DML/DDL/commit; mediu leitura pósrollback iniciando nova transação própria. Não transferir proteção a outros footprints nem declarar gravação. V10parcial131PASS/compilação falhou, não158PASS; INFOrealManifestos ainda semreason/status. Users54540semEOF/semreplay; etapas3/4abertas. Rootúnicoexecutor, ESLsomenteconsulta, restrições e commit/push mantidos.
+
 ## Continuidade0592 — V9 aprovado; causa INFO em investigação
 
 [Checkpoint0592](checkpoints/0592-carregador-real-aprovado-e-manifestos-parado-no-contrato-info.md). V9/131casos+2preflights reaisPASS; Manifestos48831fechou noINFO/ContractDriftException,1reserva/0DATA/0SQL,semreason/statusHTTP.30modelosmecânicosPASS/semSQLreal. ContratosdiagnósticoINFO; FluxoUserswire/P3/Clock; Bancoprobecompleto ctl.execution_partition(1C78/12SELECT/0DMLDDL). TodosJobsfechados,Rootúnicoexecutor. Nãoinferirfontequebrada/429/200nemcorrigirbaselineportabela presumida.7chamadasdescartadas/semretry/Usersreplay. Users54540semEOF,etapas3/4abertas; ESLsomenteconsulta, restrições mantidas. Git0591publicado8e1eb6e.

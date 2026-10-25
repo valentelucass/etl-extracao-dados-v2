@@ -1,3 +1,7 @@
+## Continuidade0593 — Clock111 PASS e contexto C78 real medido
+
+[Checkpoint0593](docs/continuidade/checkpoints/0593-clock-corrigido-e-contexto-transacional-real-medido.md). Clock corrigido: agregado próprio111/32 PASS e JARlaboratório111+4 PASS; produto/adoção/regressão ampliada pendentes. C78real102500c3:1conexão/12SELECT/2rollbacks/close comprovados,0Source/DML/DDL/commit; mediu leitura pósrollback iniciando nova transação própria. Não transferir proteção a outros footprints nem declarar gravação. V10parcial131PASS/compilação falhou, não158PASS; INFOrealManifestos ainda semreason/status. Users54540semEOF/semreplay; etapas3/4abertas. Rootúnicoexecutor, ESLsomenteconsulta, restrições e commit/push mantidos.
+
 ## Continuidade0592 — V9 e mecânica aprovados; INFO recusado pelo contrato
 
 [Checkpoint0592](docs/continuidade/checkpoints/0592-carregador-real-aprovado-e-manifestos-parado-no-contrato-info.md). V9próprios81+50+2preflights reaisPASS. Nova tentativaManifestos48831fechou1 comContractDriftException noINFO:1reservado/0DATA/0SQL,semreason/statusHTTPretido; não inferir200/429/timeout.7não usadasdescartadas,semretry. Root30modelosmecânicosPASS,semengine. table.field versusnome simples é hipótese sobrebaselineP1B, não fato da resposta atual. P3mantém99/111PASS/12FALHAS. TodosJobsfechados; Fonte→banco/DDL/integraçãoabertos,Users54540semEOF/semreplay/countersparciais anterioresàreservaINFO1. ESLsomenteconsulta; Rootúnicoexecutor, trêschatsarquivos. ProibiçãoSQL16.0.1000.6/identidades/permissões/schema/V1/WMS/produção mantida.

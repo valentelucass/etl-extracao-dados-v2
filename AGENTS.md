@@ -1,3 +1,7 @@
+## Continuidade0593 — Clock111 PASS e contexto C78 real medido
+
+[Checkpoint0593](docs/continuidade/checkpoints/0593-clock-corrigido-e-contexto-transacional-real-medido.md). Clock corrigido: agregado próprio111/32 PASS e JARlaboratório111+4 PASS; produto/adoção/regressão ampliada pendentes. C78real102500c3:1conexão/12SELECT/2rollbacks/close comprovados,0Source/DML/DDL/commit; mediu leitura pósrollback iniciando nova transação própria. Não transferir proteção a outros footprints nem declarar gravação. V10parcial131PASS/compilação falhou, não158PASS; INFOrealManifestos ainda semreason/status. Users54540semEOF/semreplay; etapas3/4abertas. Rootúnicoexecutor, ESLsomenteconsulta, restrições e commit/push mantidos.
+
 ## Continuidade0592 — Carregador real aprovado; contrato INFO em investigação
 
 [Checkpoint0592](docs/continuidade/checkpoints/0592-carregador-real-aprovado-e-manifestos-parado-no-contrato-info.md). V9próprios81+50 e2preflights reaisPASS; Manifestos48831fechou noINFO comContractDriftException/1reserva/0DATA/0SQL, reason/statusHTTPnão retidos; não inferir429/200.30modelos mecânicosPASS/semSQLreal. Counters anteriores eram parciais e não incluem a reserva nova;7chamadas descartadas,semretry/replay. Info table.field versusnome simples é hipótese a comprovar, não alterarparser/baseline porinferência. TodosJobsfechados; trêschatsarquivos,Rootúnicoexecutor. Fonte→banco/DDL/adoção/etapas3/4abertas. ESLsomenteconsulta e restrições mantidas.
