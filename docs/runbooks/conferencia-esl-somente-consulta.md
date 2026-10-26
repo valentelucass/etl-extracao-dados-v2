@@ -81,6 +81,25 @@ autoritativa das viagens nos intervalos apresentados.
    abrangência realmente verificada. Usuários sem EOF e recortes diferentes
    permanecem pendências próprias.
 
+## Retenção dos valores efetivamente relidos
+
+Para uma comparação posterior com a ESL/Excel, reter em armazenamento privado os
+valores efetivamente retornados pelo banco enquanto o ResultSet está aberto.
+Não preencher esse dataset com valores esperados ou da Source. Os binds enviados
+são evidência separada e não substituem o readback; por exemplo, `observedAt`
+enviado não comprova o valor `staged_at` retornado.
+
+Preservar cada ocorrência, valores ausentes e nulos, tipos, datas e diferenças,
+inclusive um texto relido maior que o esperado. Aplicar tetos explícitos por
+valor, linha e arquivo, com recusa sem truncamento silencioso. Marcar captura
+completa ou parcial e manter rollback/fechamento inclusive se a gravação privada
+falhar. Não publicar linhas de negócio em stdout, eventos, documentação ou Git.
+
+A revisão0617 encontrou somente comparação em memória nos auxiliares históricos
+MFT0604/COT0606 e ColetasV16. Seus recibos técnicos não permitem recuperar as linhas
+para confronto externo. A nova retenção ainda precisa de implementação e testes;
+não promove essas execuções históricas a paridade com a ESL.
+
 ## Observações reais da primeira navegação
 
 A tela Data Export de Fretes advertiu **54 ligações**, **máximo recomendado30** e
