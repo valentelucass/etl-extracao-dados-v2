@@ -1,3 +1,7 @@
+## Continuidade0608 — Coletas INFO200 e JDBC23/24 aprovados
+
+[Checkpoint0608](docs/continuidade/checkpoints/0608-coletas-info-atual-e-ligacao-jdbc23-validada.md). UmaINFO6908real200/31campos6filtros/12drift,original0/19.164ms/289MB,0DATA/SQL;parserGate preservados,contrato/admissãofalse. Mesmos31campos,trocaseisfiltrosporprefixopicks/scopes;P2em preparo. ÚltimaSourceAGORAINFOColetas0607/delta1;COT0606/delta5histórico,globaisnãofinais. JDBC23D4E passou24distintos/original0/10.248ms/328MB,fixturesemSQLreal;V1préOriginalrecusouMFassinadogrande,V2leapenasmainattrscommesmobound32KiB,inversãobyteexata. FretesLocalV3own43PASS/original0/9.493ms/499MB/0DDL. BoundColetas,STRICT,fluxocompleto,Raster/composiçãofinal,UsersEOF/etapas3/4abertos. Chrome reconexãopendente,Rootúnicoexecutor,ESLconsulta/restrições/commitpushmantidos.
+
 ## Continuidade0607 — Integração sincronizada e Main7 aprovados
 
 [Checkpoint0607](docs/continuidade/checkpoints/0607-integracao-sincronizada-e-main-validado.md). R37 passou42modelos+4casosWindows+Capture real11amostras, originais0. R38Prepare/7integridade/Bind/111agregado/4Clock e R42Prepare/7Main fecharam0 sob1GiB6min; limites/corpos preservados,0SourceSQL. R42 corrige só proccode→proc.returncode; R39 intacto/nãoexecutado. Alvo15AB diferenteF2A,semtransferência/adoção. ColetasV7own6 passou; INFO6908atual/JDBC23/fluxocompletocontinuampendentes. ÚltimaSourceCOT0606/delta5,globaisnãofinais,UserssemEOF,Chrome reconexãopendente,etapas3/4abertas. Rootúnicoexecutor,restrições/ESLconsulta/commitpushmantidos.
