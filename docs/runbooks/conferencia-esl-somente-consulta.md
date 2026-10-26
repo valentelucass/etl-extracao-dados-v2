@@ -33,6 +33,13 @@ independente. A abertura do site, uma prévia ou um Excel não comprovam gravaç
 
 ## Igualar o recorte antes de comparar
 
+Reforço direto do usuário em26/10/2026: a conferência deve ser **registro por
+registro e campo por campo**, comparando o conteúdo efetivamente gravado no
+banco com a ESL ou com o Excel no mesmo recorte. Quantidades iguais ou a
+igualdade entre a resposta da API e o banco não substituem essa conferência
+independente. Os dois relatórios de exceções fornecidos são a referência
+autoritativa das viagens nos intervalos apresentados.
+
 1. Registrar template/entidade e os campos de data e status efetivamente usados,
    período, fuso America/Sao_Paulo, filial, filtros e abrangência de acesso.
 2. Comparar os mesmos filtros do pedido do ETL. Na tela de Fretes observada,
@@ -46,6 +53,33 @@ independente. A abertura do site, uma prévia ou um Excel não comprovam gravaç
 5. Registrar diferenças e limites honestamente. Não corrigir a origem pela tela.
    Nenhum aceite global, identidade, exclusão, histórico completo ou paridade é
    inferido de uma amostra, total igual ou lista de arquivos.
+
+## Confrontar os registros e seus campos
+
+1. Demonstrar a chave que relaciona o registro da referência com o registro do
+   ETL, incluindo o grão do relatório. Um código de viagem não é automaticamente
+   um identificador de frete, manifesto ou solicitação Raster. Preservar as
+   repetições legítimas e comparar suas ocorrências; não deduplicar para fechar
+   totais nem usar posição da linha como identidade.
+2. Para cada chave e ocorrência, confrontar os campos comuns entre o dado
+   extraído, o conteúdo lido de volta do banco e a referência independente.
+   Conferir identificadores, placa, status, nomes, datas, horários e valores
+   disponíveis, respeitando tipos, nulos e precisão. Aplicar somente as
+   transformações documentadas pelo contrato, distinguindo apresentação de
+   mudança de valor.
+3. Emitir diferenças por registro: ausente no ETL/banco, excedente no ETL/banco
+   ou campo divergente, com coluna, valor de referência e valor encontrado.
+   Esses detalhes de negócio ficam em artefato privado, fora do Git; a
+   documentação do projeto recebe somente evidência sanitizada e conclusão.
+4. Campo sem correspondência demonstrada ou ausente no Excel/tela fica
+   explicitamente **não conferido**. Não interpretar ausência de referência
+   como valor correto e não declarar todos os campos validados pelos dez campos
+   dos relatórios de viagens.
+5. O resultado por entidade deve indicar o recorte, as chaves e colunas
+   efetivamente conferidas, registros correspondentes, faltantes, excedentes,
+   divergentes e limitações. A entidade só recebe aceite de fidelidade para a
+   abrangência realmente verificada. Usuários sem EOF e recortes diferentes
+   permanecem pendências próprias.
 
 ## Observações reais da primeira navegação
 
