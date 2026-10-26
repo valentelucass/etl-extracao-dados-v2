@@ -1,3 +1,7 @@
+## Continuidade0606 — Cotações287: Source, gravação e leitura de volta aprovadas
+
+[Checkpoint0606](checkpoints/0606-cotacoes-287-gravadas-relidas-e-revertidas.md). COT6906/22out/per100 trouxe100/100/87/0,5HTTP,287linhas/285chaves;287gravadas=287relidas,STRICT70/11locks/ACK2/ausência8/close/native,original0/56.473ms/810MB. Stagingdiagnóstico semMain/tarifa/DQ/promoção/retained. Wrapper127 e CURRENT24descritores passaram; outer1 por expectativaantiga16 reconciliado semreexecução. Catálogo16/378 atual:Coletasproc23 instalada,3wireUsersausentes,semDDL. ÚltimaSourceagoraCOT0606/delta5,604histórico;globaisnãofinais. UserssemEOF,Chrome reconexãopendente,integração/adoção/etapas3/4abertas. Rootúnicoexecutor,restrições/ESLconsulta/commitpushmantidos.
+
 ## Continuidade0605 — Catálogo Raster real e publicação sincronizada
 
 [Checkpoint0605](checkpoints/0605-catalogo-raster-real-e-publicacao-sincronizada.md). Raster15SELECT concluiu original0, cinco tabelas, coordenadas28,8 e doisCHECKs ainda simulados; semDDL/admissão. R36controle sincronizado passou4.634leiturasválidas/445publicações, zeroerro, mutex/handles fechados; produto ainda pendente. CotaçõesP2/per100 Bound278+2preflights PASS/original0, wrapper dedicado em preparo; Users/Coletas catálogo em preparo. ÚltimaSource0604/delta3 e315gravadas=315relidas/rollback provados, originalgeral1 por consumidor. Chrome reconexão pendente, nenhuma paridade. UserssemEOF, etapas3/4abertas, Rootúnicoexecutor, restrições ecommitpushmantidos.
