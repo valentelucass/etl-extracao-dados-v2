@@ -9,7 +9,7 @@ $ErrorActionPreference = 'Stop'
 $root = [System.IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..\..'))
 $relativePaths = [ordered]@{
     decision = 'docs\catalogos\fretes-v2-011\decisao-v01.json'
-    sourceContract = 'docs\catalogos\contratos-primeira-onda\manifesto.json'
+    sourceContract = 'docs\catalogos\contratos-primeira-onda\historico\manifesto-2026-09-01.v2-025a.3.json'
     identity = 'docs\catalogos\identidade-primeira-onda\manifesto.json'
     matrix = 'docs\catalogos\portabilidade\matriz-campos.csv'
     manifest = 'database\manifest\fretes-shadow-vertical.json'
@@ -43,6 +43,10 @@ foreach ($entry in $relativePaths.GetEnumerator()) {
     $paths[$entry.Key] = $path
 }
 
+# V09 was qualified against this retained release. The observed successor has its own gates.
+Require-True ((Get-FileHash -LiteralPath $paths.sourceContract -Algorithm SHA256).Hash -ceq
+    'D7910FF0E3D0F78BEE57AAAD5178561DB8BCB0D0D253448531B606BCEF45950C') `
+    'os bytes do contrato histórico 6389 divergiram.'
 $decision = Get-Content -LiteralPath $paths.decision -Raw | ConvertFrom-Json
 $sourceCatalog = Get-Content -LiteralPath $paths.sourceContract -Raw | ConvertFrom-Json
 $identityCatalog = Get-Content -LiteralPath $paths.identity -Raw | ConvertFrom-Json
