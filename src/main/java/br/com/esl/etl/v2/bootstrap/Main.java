@@ -138,6 +138,8 @@ public final class Main {
                 standardOut.println("ETL Data Export V2 0.1.0-SNAPSHOT");
                 yield 0;
             }
+            case "entity-rollback" ->
+                    MainEntityRollbackCommand.run(args, standardOut, standardError);
             case "observed-staging" ->
                     ObservedStagingCommand.run(
                             args,
@@ -622,6 +624,10 @@ public final class Main {
                 "  dry-run --config <arquivo>           Executa somente o preflight seguro.");
         standardOut.println(
                 "  plan --config <arquivo>              Planeja offline, sem criar conexões.");
+        standardOut.println(
+                "  entity-rollback --profile <COLETAS6908|MFT6399|COT6906> --root-v6 <Root args>");
+        standardOut.println(
+                "                                      Ensaio V6; CODE e admissão externos obrigatórios.");
         standardOut.println("  observed-staging plan --config <arquivo> --request <json>");
         standardOut.println(
                 "                                      Plano observado P3 sem HTTP/SQL.");
