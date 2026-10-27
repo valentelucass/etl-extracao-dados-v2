@@ -5,3 +5,7 @@
 *.jar binary
 graphify-out/graph.json merge=graphify
 docs/catalogos/macrobloco-qualificacao-pacote/third-party/*.pom -text -diff -eol
+
+# Preserve the qualified bytes of SHA-pinned contract descriptors.
+src/main/resources/contracts/dataexport/manifestos-6399-observed-p2-info-qualified-20261025.json -text -eol whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+src/main/resources/contracts/dataexport/cotacoes-6906-observed-p2-info-qualified-20261025.json -text -eol whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
