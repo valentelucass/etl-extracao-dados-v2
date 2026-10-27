@@ -41,7 +41,7 @@ src/main/java/br/com/esl/etl/v2/plataforma/persistencia/analitico/JdbcAnalyticRe
 src/main/java/br/com/esl/etl/v2/plataforma/persistencia/analitico/JdbcAnalyticScenario.java	4c38ac5167ab0e4603215d81e76271a003512994e0e64650db3778eb0fe2bf20	DIRECT_SQL_JDBC
 src/main/java/br/com/esl/etl/v2/plataforma/persistencia/analitico/JdbcAnalyticSourceContracts.java	737dc1984671cb5a4f83777f4317d000b49462207f8b5c9a22679a4e7675494d	DIRECT_SQL_JDBC
 src/main/java/br/com/esl/etl/v2/plataforma/persistencia/analitico/JdbcFreightAnalyticAttributes.java	c092392f86593c34a34e1b90dea688087b946cb8c8e78258f7c02849c06d142a	DIRECT_SQL_JDBC
-src/main/java/br/com/esl/etl/v2/plataforma/persistencia/analitico/JdbcRasterBatch.java	5765fcff19157e6d12cc8b6338bf5e0c1a83b0484b3675a300dc3000da5c2d25	DIRECT_SQL_JDBC
+src/main/java/br/com/esl/etl/v2/plataforma/persistencia/analitico/JdbcRasterBatch.java	35fd6ae88bb333232b35aa9596ee5d3243bae363a2e6017c7b40a03bf38bef68	DIRECT_SQL_JDBC
 src/main/java/br/com/esl/etl/v2/plataforma/persistencia/analitico/JdbcRasterLaboratory.java	559f4889e0c9642501c42b169c1d2445951dd40d170f11b5673fce086c2000c5	DIRECT_SQL_JDBC
 src/main/java/br/com/esl/etl/v2/plataforma/persistencia/coletas/JdbcColetaTemporalLaboratory.java	f2564926e2ea22a73acb0c00ad9c7c7ad538eede77e0763c8392af408c2da2ae	DIRECT_SQL_JDBC
 src/main/java/br/com/esl/etl/v2/plataforma/persistencia/expansao/JdbcExpansionDependencies.java	785f7c55c18837ad67db5dea9834e49af46aa25fa107b6bcbdcaebf48fafbcd8	DIRECT_SQL_JDBC

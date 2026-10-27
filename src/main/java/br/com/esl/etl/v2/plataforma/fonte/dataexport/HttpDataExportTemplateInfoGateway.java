@@ -10,6 +10,7 @@ import java.net.http.HttpRequest;
 import java.time.Clock;
 import java.time.Duration;
 import java.util.Objects;
+import java.util.Optional;
 
 /** Adaptador HTTP exclusivo do recurso de metadados {@code /info}. */
 public final class HttpDataExportTemplateInfoGateway implements DataExportTemplateInfoGateway {
@@ -17,6 +18,7 @@ public final class HttpDataExportTemplateInfoGateway implements DataExportTempla
     private final DataExportProperties properties;
     private final DataExportHttpExecutor httpExecutor;
     private final DataExportTemplateInfoParser parser;
+    private final Optional<DataExportRawBodyCallback> observedStatus;
 
     public HttpDataExportTemplateInfoGateway(final DataExportProperties properties) {
         this(properties, DataExportHttpAttemptObserver.noop());
@@ -65,6 +67,39 @@ public final class HttpDataExportTemplateInfoGateway implements DataExportTempla
             final ObjectMapper objectMapper,
             final DataExportHttpAttemptObserver attemptObserver,
             final DataExportHttpAttemptGovernor attemptGovernor) {
+        this(
+                httpClient,
+                properties,
+                objectMapper,
+                attemptObserver,
+                attemptGovernor,
+                Optional.empty());
+    }
+
+    HttpDataExportTemplateInfoGateway(
+            final HttpClient httpClient,
+            final DataExportProperties properties,
+            final ObjectMapper objectMapper,
+            final DataExportHttpAttemptObserver attemptObserver,
+            final DataExportHttpAttemptGovernor attemptGovernor,
+            final DataExportRawBodyCallback observedStatus) {
+        this(
+                httpClient,
+                properties,
+                objectMapper,
+                attemptObserver,
+                attemptGovernor,
+                Optional.of(Objects.requireNonNull(observedStatus)));
+    }
+
+    private HttpDataExportTemplateInfoGateway(
+            final HttpClient httpClient,
+            final DataExportProperties properties,
+            final ObjectMapper objectMapper,
+            final DataExportHttpAttemptObserver attemptObserver,
+            final DataExportHttpAttemptGovernor attemptGovernor,
+            final Optional<DataExportRawBodyCallback> observedStatus) {
+        this.observedStatus = Objects.requireNonNull(observedStatus);
         this.properties =
                 Objects.requireNonNull(properties, "As propriedades Data Export são obrigatórias.");
         Objects.requireNonNull(objectMapper, "ObjectMapper é obrigatório.");
@@ -94,10 +129,28 @@ public final class HttpDataExportTemplateInfoGateway implements DataExportTempla
     @Override
     public DataExportTemplateInfo fetchInfo(final DataExportTemplate template) {
         Objects.requireNonNull(template, "O template Data Export é obrigatório.");
+        if (observedStatus.isPresent()) {
+            try {
+                return fetchInfoInternal(template);
+            } catch (final RuntimeException failure) {
+                throw ObservedExpansionHttpTransport.sanitized(failure, template.templateId());
+            }
+        }
+        return fetchInfoInternal(template);
+    }
+
+    private DataExportTemplateInfo fetchInfoInternal(final DataExportTemplate template) {
         final URI endpoint = properties.infoEndpointFor(template.templateId());
         final DataExportHttpResponse response =
-                httpExecutor.executeWithRetry(
-                        template.templateId(), "info", timeout -> buildRequest(endpoint, timeout));
+                observedStatus.isPresent()
+                        ? httpExecutor.executeObservedInfoOnce(
+                                template.templateId(),
+                                timeout -> buildRequest(endpoint, timeout),
+                                observedStatus.orElseThrow())
+                        : httpExecutor.executeWithRetry(
+                                template.templateId(),
+                                "info",
+                                timeout -> buildRequest(endpoint, timeout));
         if (response.statusCode() == 204) {
             throw new IllegalStateException(
                     "Data Export retornou HTTP 204 sem metadados para o template "

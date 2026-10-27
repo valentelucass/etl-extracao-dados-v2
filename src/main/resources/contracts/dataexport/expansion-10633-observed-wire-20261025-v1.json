@@ -1,0 +1,503 @@
+{
+  "formatVersion": "observed-expansion-wire-v1",
+  "schemaRelease": "observed-expansion-wire-10633-20261025-v1",
+  "templateId": 10633,
+  "sourceKind": "DATA_EXPORT",
+  "recordRoot": "$",
+  "rootCardinality": "ARRAY",
+  "metadata": [
+    {
+      "kind": "DATA_FIELD",
+      "path": "cnr_c_s_fit_corporation_sequence_number",
+      "declaredType": "UNDECLARED"
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "cnr_c_s_fit_dpn_delivery_prediction_at",
+      "declaredType": "UNDECLARED"
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "cnr_c_s_fit_dpn_performance_finished_at",
+      "declaredType": "UNDECLARED"
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "cnr_c_s_fit_dyn_drt_nickname",
+      "declaredType": "UNDECLARED"
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "cnr_c_s_fit_dyn_name",
+      "declaredType": "UNDECLARED"
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "cnr_c_s_fit_fte_lce_occurrence_at",
+      "declaredType": "UNDECLARED"
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "cnr_c_s_fit_fte_lce_ore_description",
+      "declaredType": "UNDECLARED"
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "cnr_c_s_fit_invoices_mapping",
+      "declaredType": "UNDECLARED"
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "cnr_c_s_fit_invoices_value",
+      "declaredType": "UNDECLARED"
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "cnr_c_s_fit_invoices_volumes",
+      "declaredType": "UNDECLARED"
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "cnr_c_s_fit_pyr_nickname",
+      "declaredType": "UNDECLARED"
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "cnr_c_s_fit_real_weight",
+      "declaredType": "UNDECLARED"
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "cnr_c_s_fit_rpt_ads_cty_name",
+      "declaredType": "UNDECLARED"
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "cnr_c_s_fit_rpt_nickname",
+      "declaredType": "UNDECLARED"
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "cnr_c_s_fit_sdr_ads_cty_name",
+      "declaredType": "UNDECLARED"
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "cnr_c_s_fit_sdr_nickname",
+      "declaredType": "UNDECLARED"
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "cnr_c_s_fit_taxed_weight",
+      "declaredType": "UNDECLARED"
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "cnr_c_s_fit_total_cubic_volume",
+      "declaredType": "UNDECLARED"
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "cnr_c_s_read_volumes",
+      "declaredType": "UNDECLARED"
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "cnr_cis_eoe_psn_name",
+      "declaredType": "UNDECLARED"
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "cnr_crn_psn_nickname",
+      "declaredType": "UNDECLARED"
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "finished_at",
+      "declaredType": "UNDECLARED"
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "sequence_code",
+      "declaredType": "UNDECLARED"
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "started_at",
+      "declaredType": "UNDECLARED"
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "status",
+      "declaredType": "UNDECLARED"
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "type",
+      "declaredType": "UNDECLARED"
+    },
+    {
+      "kind": "DATA_FILTER",
+      "path": "check_in_orders.check_in_type",
+      "declaredType": "OTHER",
+      "declaredTypeFingerprint": {
+        "version": "declared-type-v1",
+        "sha256": "ed823c4c534bfa17a30399fcbfb2e7defe7ebbfd47b746511c769d4467f510f7"
+      }
+    },
+    {
+      "kind": "DATA_FILTER",
+      "path": "check_in_orders.corporation_id",
+      "declaredType": "OTHER",
+      "declaredTypeFingerprint": {
+        "version": "declared-type-v1",
+        "sha256": "ed823c4c534bfa17a30399fcbfb2e7defe7ebbfd47b746511c769d4467f510f7"
+      }
+    },
+    {
+      "kind": "DATA_FILTER",
+      "path": "check_in_orders.sequence_code",
+      "declaredType": "NUMBER",
+      "declaredTypeFingerprint": {
+        "version": "declared-type-v1",
+        "sha256": "3f8e673c0bf8f3bdbe07d7fcbe979e7998b294e2b9b29723476e9cace7c0f3d4"
+      }
+    },
+    {
+      "kind": "DATA_FILTER",
+      "path": "check_in_orders.started_at",
+      "declaredType": "DATE",
+      "declaredTypeFingerprint": {
+        "version": "declared-type-v1",
+        "sha256": "179b00376b5b12fe6a617c98e9c90d90fb5cfdf75f96ee4909fff9d8028b63a1"
+      }
+    },
+    {
+      "kind": "DATA_FILTER",
+      "path": "check_in_orders.updated_at",
+      "declaredType": "DATE_TIME",
+      "declaredTypeFingerprint": {
+        "version": "declared-type-v1",
+        "sha256": "37beb44f6106b7fcafaa2955c67545056b9a06bf0ab6da6b367dc9eacad07050"
+      }
+    },
+    {
+      "kind": "DATA_FILTER",
+      "path": "scopes.from_invoice_number",
+      "declaredType": "NUMBER",
+      "declaredTypeFingerprint": {
+        "version": "declared-type-v1",
+        "sha256": "3f8e673c0bf8f3bdbe07d7fcbe979e7998b294e2b9b29723476e9cace7c0f3d4"
+      }
+    },
+    {
+      "kind": "DATA_FILTER",
+      "path": "scopes.from_volume_code",
+      "declaredType": "NUMBER",
+      "declaredTypeFingerprint": {
+        "version": "declared-type-v1",
+        "sha256": "3f8e673c0bf8f3bdbe07d7fcbe979e7998b294e2b9b29723476e9cace7c0f3d4"
+      }
+    }
+  ],
+  "fields": [
+    {
+      "path": "cnr_c_s_fit_corporation_sequence_number",
+      "required": true,
+      "wireTypes": [
+        "INTEGER",
+        "NULL",
+        "NUMBER"
+      ],
+      "unknownNonNull": false,
+      "arrayItemTypes": [],
+      "historicalGenericNumber": true
+    },
+    {
+      "path": "cnr_c_s_fit_dpn_delivery_prediction_at",
+      "required": true,
+      "wireTypes": [
+        "NULL",
+        "STRING"
+      ],
+      "unknownNonNull": false,
+      "arrayItemTypes": [],
+      "historicalGenericNumber": false
+    },
+    {
+      "path": "cnr_c_s_fit_dpn_performance_finished_at",
+      "required": true,
+      "wireTypes": [
+        "NULL",
+        "STRING"
+      ],
+      "unknownNonNull": false,
+      "arrayItemTypes": [],
+      "historicalGenericNumber": false
+    },
+    {
+      "path": "cnr_c_s_fit_dyn_drt_nickname",
+      "required": true,
+      "wireTypes": [
+        "NULL",
+        "STRING"
+      ],
+      "unknownNonNull": false,
+      "arrayItemTypes": [],
+      "historicalGenericNumber": false
+    },
+    {
+      "path": "cnr_c_s_fit_dyn_name",
+      "required": true,
+      "wireTypes": [
+        "NULL",
+        "STRING"
+      ],
+      "unknownNonNull": false,
+      "arrayItemTypes": [],
+      "historicalGenericNumber": false
+    },
+    {
+      "path": "cnr_c_s_fit_fte_lce_occurrence_at",
+      "required": true,
+      "wireTypes": [
+        "NULL",
+        "STRING"
+      ],
+      "unknownNonNull": false,
+      "arrayItemTypes": [],
+      "historicalGenericNumber": false
+    },
+    {
+      "path": "cnr_c_s_fit_fte_lce_ore_description",
+      "required": true,
+      "wireTypes": [
+        "NULL",
+        "STRING"
+      ],
+      "unknownNonNull": false,
+      "arrayItemTypes": [],
+      "historicalGenericNumber": false
+    },
+    {
+      "path": "cnr_c_s_fit_invoices_mapping",
+      "required": true,
+      "wireTypes": [
+        "ARRAY",
+        "NULL"
+      ],
+      "unknownNonNull": false,
+      "arrayItemTypes": [
+        "STRING"
+      ],
+      "historicalGenericNumber": false
+    },
+    {
+      "path": "cnr_c_s_fit_invoices_value",
+      "required": true,
+      "wireTypes": [
+        "NULL",
+        "STRING"
+      ],
+      "unknownNonNull": false,
+      "arrayItemTypes": [],
+      "historicalGenericNumber": false
+    },
+    {
+      "path": "cnr_c_s_fit_invoices_volumes",
+      "required": true,
+      "wireTypes": [
+        "INTEGER",
+        "NULL",
+        "NUMBER"
+      ],
+      "unknownNonNull": false,
+      "arrayItemTypes": [],
+      "historicalGenericNumber": true
+    },
+    {
+      "path": "cnr_c_s_fit_pyr_nickname",
+      "required": true,
+      "wireTypes": [
+        "NULL",
+        "STRING"
+      ],
+      "unknownNonNull": false,
+      "arrayItemTypes": [],
+      "historicalGenericNumber": false
+    },
+    {
+      "path": "cnr_c_s_fit_real_weight",
+      "required": true,
+      "wireTypes": [
+        "NULL",
+        "STRING"
+      ],
+      "unknownNonNull": false,
+      "arrayItemTypes": [],
+      "historicalGenericNumber": false
+    },
+    {
+      "path": "cnr_c_s_fit_rpt_ads_cty_name",
+      "required": true,
+      "wireTypes": [
+        "NULL",
+        "STRING"
+      ],
+      "unknownNonNull": false,
+      "arrayItemTypes": [],
+      "historicalGenericNumber": false
+    },
+    {
+      "path": "cnr_c_s_fit_rpt_nickname",
+      "required": true,
+      "wireTypes": [
+        "NULL",
+        "STRING"
+      ],
+      "unknownNonNull": false,
+      "arrayItemTypes": [],
+      "historicalGenericNumber": false
+    },
+    {
+      "path": "cnr_c_s_fit_sdr_ads_cty_name",
+      "required": true,
+      "wireTypes": [
+        "NULL",
+        "STRING"
+      ],
+      "unknownNonNull": false,
+      "arrayItemTypes": [],
+      "historicalGenericNumber": false
+    },
+    {
+      "path": "cnr_c_s_fit_sdr_nickname",
+      "required": true,
+      "wireTypes": [
+        "NULL",
+        "STRING"
+      ],
+      "unknownNonNull": false,
+      "arrayItemTypes": [],
+      "historicalGenericNumber": false
+    },
+    {
+      "path": "cnr_c_s_fit_taxed_weight",
+      "required": true,
+      "wireTypes": [
+        "NULL",
+        "STRING"
+      ],
+      "unknownNonNull": false,
+      "arrayItemTypes": [],
+      "historicalGenericNumber": false
+    },
+    {
+      "path": "cnr_c_s_fit_total_cubic_volume",
+      "required": true,
+      "wireTypes": [
+        "NULL",
+        "STRING"
+      ],
+      "unknownNonNull": false,
+      "arrayItemTypes": [],
+      "historicalGenericNumber": false
+    },
+    {
+      "path": "cnr_c_s_read_volumes",
+      "required": true,
+      "wireTypes": [
+        "INTEGER",
+        "NULL",
+        "NUMBER"
+      ],
+      "unknownNonNull": false,
+      "arrayItemTypes": [],
+      "historicalGenericNumber": true
+    },
+    {
+      "path": "cnr_cis_eoe_psn_name",
+      "required": true,
+      "wireTypes": [
+        "NULL",
+        "STRING"
+      ],
+      "unknownNonNull": false,
+      "arrayItemTypes": [],
+      "historicalGenericNumber": false
+    },
+    {
+      "path": "cnr_crn_psn_nickname",
+      "required": true,
+      "wireTypes": [
+        "STRING"
+      ],
+      "unknownNonNull": false,
+      "arrayItemTypes": [],
+      "historicalGenericNumber": false
+    },
+    {
+      "path": "finished_at",
+      "required": true,
+      "wireTypes": [
+        "NULL",
+        "STRING"
+      ],
+      "unknownNonNull": false,
+      "arrayItemTypes": [],
+      "historicalGenericNumber": false
+    },
+    {
+      "path": "sequence_code",
+      "required": true,
+      "wireTypes": [
+        "INTEGER",
+        "NUMBER"
+      ],
+      "unknownNonNull": false,
+      "arrayItemTypes": [],
+      "historicalGenericNumber": true
+    },
+    {
+      "path": "started_at",
+      "required": true,
+      "wireTypes": [
+        "STRING"
+      ],
+      "unknownNonNull": false,
+      "arrayItemTypes": [],
+      "historicalGenericNumber": false
+    },
+    {
+      "path": "status",
+      "required": true,
+      "wireTypes": [
+        "STRING"
+      ],
+      "unknownNonNull": false,
+      "arrayItemTypes": [],
+      "historicalGenericNumber": false
+    },
+    {
+      "path": "type",
+      "required": true,
+      "wireTypes": [
+        "STRING"
+      ],
+      "unknownNonNull": false,
+      "arrayItemTypes": [],
+      "historicalGenericNumber": false
+    }
+  ],
+  "evidence": {
+    "currentInfoAndArrayItemsSourceSha256": "BB486083CC043C5623C65609D0081DE694A3C3DFF5D2087E3EED52DB9E18EC86",
+    "rootEnvelopeSourceSha256": "94A1E84F979C00561BC6222645F662A514B4E513EEE2A1D74F6041DFE4BF13D6",
+    "historicalRootTypesSourceSha256": "6ED7EB54A7B4147CF3F0276086FE1D0CEA6B92BB60046AE8C50B216314407DD1",
+    "historicalRowsAcrossTwoPasses": 414,
+    "observedMaximumArrayItems": {
+      "/cnr_c_s_fit_invoices_mapping": 10
+    },
+    "maximumIsObservationNotContract": true,
+    "noSourceIdentityOrSnapshotClaim": true
+  }
+}

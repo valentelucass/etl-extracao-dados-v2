@@ -266,14 +266,14 @@ public final class DataExportRequestProfile {
 
     private enum Kind {
         LEGACY(null, "", ""),
-        MANIFESTOS_P1B(
+        MANIFESTOS_P2_INFO(
                 DataExportTemplate.MANIFESTOS,
-                "2026-10-24.p1b-manifestos-observed.v1",
-                "6fbc71f29c4062324ec5ccd248b7adf9638cc2c60c81d69379b429fbeba4f77f"),
-        COTACOES_P1B(
+                "2026-10-25.p2-manifestos-info-qualified.v1",
+                "6fd4d10fc52718ce6d1ab684d5188f413cbd1241bb4eedf140b4e349298eab04"),
+        COTACOES_P2_INFO(
                 DataExportTemplate.COTACOES,
-                "2026-10-24.p1b-cotacoes-observed.v1",
-                "6dd5197a7fa7ef035c4d0c5420b2403da7260c9ae38e0c3d5e8da72d6f5523f2"),
+                "2026-10-25.p2-cotacoes-info-qualified.v1",
+                "73fa26b4c8986188a6c2e8c386d29eff9a8f7f3fb01db86cc5d78f9aceec173d"),
         LOCALIZACAO_P1B(
                 DataExportTemplate.LOCALIZACAO_CARGAS,
                 "2026-10-24.p1b-localizacao-cargas-observed.v1",

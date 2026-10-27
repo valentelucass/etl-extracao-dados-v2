@@ -89,6 +89,38 @@ final class DataExportHttpExecutor {
             final int templateId,
             final String operation,
             final Function<Duration, HttpRequest> requestFactory) {
+        return executeWithRetryInternal(templateId, operation, requestFactory, Optional.empty());
+    }
+
+    /** P3 INFO uses the normal parser/executor but observes status before header/body errors. */
+    DataExportHttpResponse executeObservedInfoOnce(
+            final int templateId,
+            final Function<Duration, HttpRequest> requestFactory,
+            final DataExportRawBodyCallback callback) {
+        try {
+            ObservedExpansionHttpTransport.requireSafeBearer(properties);
+            if (properties.retryPolicy().maxAttempts() != 1
+                    || properties.preferredTransport() != DataExportTransport.GET_WITH_BODY
+                    || properties.requestTimeout().compareTo(Duration.ofSeconds(30)) > 0
+                    || httpClient.followRedirects() != HttpClient.Redirect.NEVER
+                    || !"https".equalsIgnoreCase(properties.baseUri().getScheme())) {
+                throw new IllegalArgumentException("OBS_CAPTURE_INFO_POLICY");
+            }
+            return executeWithRetryInternal(
+                    templateId,
+                    "info",
+                    requestFactory,
+                    Optional.of(Objects.requireNonNull(callback)));
+        } catch (final RuntimeException failure) {
+            throw ObservedExpansionHttpTransport.sanitized(failure, templateId);
+        }
+    }
+
+    private DataExportHttpResponse executeWithRetryInternal(
+            final int templateId,
+            final String operation,
+            final Function<Duration, HttpRequest> requestFactory,
+            final Optional<DataExportRawBodyCallback> statusObserver) {
         Objects.requireNonNull(operation, "A operação HTTP é obrigatória.");
         Objects.requireNonNull(requestFactory, "A fábrica de requisição HTTP é obrigatória.");
         final int maxAttempts = properties.retryPolicy().maxAttempts();
@@ -106,9 +138,21 @@ final class DataExportHttpExecutor {
                             Objects.requireNonNull(
                                     requestFactory.apply(timeout),
                                     "A fábrica de requisição HTTP retornou nulo.");
+                    statusObserver.ifPresent(DataExportRawBodyCallback::checkpoint);
                     attemptObserver.beforeAttempt(httpAttempt);
                     final HttpResponse<byte[]> httpResponse =
-                            sendBounded(request, templateId, permit);
+                            statusObserver.isPresent()
+                                    ? sendBounded(
+                                            request,
+                                            templateId,
+                                            permit,
+                                            new DataExportHttpBodyHandler(
+                                                    templateId,
+                                                    Math.min(
+                                                            properties.maxResponseBytes(),
+                                                            8L * 1024 * 1024),
+                                                    statusObserver.orElseThrow()))
+                                    : sendBounded(request, templateId, permit);
                     response = readResponse(httpResponse, templateId);
                     permit.checkpoint();
                     if (isRetryableStatus(response.statusCode())
@@ -150,6 +194,83 @@ final class DataExportHttpExecutor {
                 "A política de retry Data Export não produziu uma resposta.");
     }
 
+    /** Internal primitive only: no authority/schema admission, no retry and no decoded body. */
+    void executeObservedOnce(
+            final int templateId,
+            final Function<Duration, HttpRequest> requestFactory,
+            final long maximumBytes,
+            final DataExportRawBodyCallback callback) {
+        Objects.requireNonNull(requestFactory);
+        Objects.requireNonNull(callback);
+        ObservedExpansionHttpTransport.requireSafeBearer(properties);
+        if (properties.retryPolicy().maxAttempts() != 1
+                || properties.preferredTransport() != DataExportTransport.GET_WITH_BODY
+                || properties.requestTimeout().compareTo(Duration.ofSeconds(30)) > 0
+                || httpClient.followRedirects() != HttpClient.Redirect.NEVER
+                || !"https".equalsIgnoreCase(properties.baseUri().getScheme())
+                || maximumBytes < 1
+                || maximumBytes > 8L * 1024 * 1024
+                || maximumBytes > properties.maxResponseBytes()) {
+            throw new IllegalArgumentException("OBS_CAPTURE_HTTP_POLICY");
+        }
+        callback.checkpoint();
+        final DataExportHttpAttempt attempt =
+                new DataExportHttpAttempt(templateId, "observed-data-GET_WITH_BODY");
+        try (DataExportHttpAttemptGovernor.AttemptPermit permit =
+                attemptGovernor.acquire(attempt)) {
+            final Duration timeout = minimum(properties.requestTimeout(), permit.remainingTime());
+            final HttpRequest request = Objects.requireNonNull(requestFactory.apply(timeout));
+            if (!properties.endpointFor(templateId).equals(request.uri())
+                    || !"GET".equals(request.method())
+                    || request.bodyPublisher().isEmpty()
+                    || request.timeout().isEmpty()
+                    || request.timeout().orElseThrow().compareTo(timeout) > 0) {
+                throw new IllegalArgumentException("OBS_CAPTURE_HTTP_REQUEST");
+            }
+            callback.checkpoint();
+            attemptObserver.beforeAttempt(attempt);
+            final HttpResponse<byte[]> response =
+                    sendBounded(
+                            request,
+                            templateId,
+                            permit,
+                            new DataExportHttpBodyHandler(templateId, maximumBytes, callback));
+            // Defensive second observation; the BodyHandler already stops on ResponseInfo 429.
+            if (response.statusCode() == 429) {
+                callback.stopSource();
+            }
+            permit.checkpoint();
+            if (response.statusCode() != 200) {
+                if (isRetryableStatus(response.statusCode())) {
+                    if (attemptGovernor.appliesTerminalEmbargo()) {
+                        final DataExportRetryDelay delay =
+                                retrySchedule.resolve(
+                                        1, response.headers().firstValue("Retry-After"));
+                        if (response.statusCode() == 429 || delay.serverDirected()) {
+                            attemptGovernor.imposeRateLimitEmbargo(delay.duration());
+                        }
+                    }
+                    throw new DataExportUnavailableException(
+                            templateId, response.statusCode(), Optional.empty());
+                }
+                throw new IllegalStateException("OBS_CAPTURE_HTTP_STATUS_" + response.statusCode());
+            }
+            if (response.body().length < 1 || response.body().length > maximumBytes) {
+                throw new IllegalStateException("OBS_CAPTURE_HTTP_BODY_BOUND");
+            }
+            // Callback receives the complete bounded subscriber bytes, before ANY UTF-8 decode.
+            callback.checkpoint();
+            callback.received(response.body(), observedAt());
+            permit.checkpoint();
+        } catch (final IOException failure) {
+            // The exception may contain URI/provider text; do not attach it to the capture result.
+            throw new DataExportUnavailableException(
+                    templateId, "falha de comunicação", Optional.empty());
+        } catch (final RuntimeException failure) {
+            throw ObservedExpansionHttpTransport.sanitized(failure, templateId);
+        }
+    }
+
     static boolean isSuccess(final int statusCode) {
         return statusCode >= 200 && statusCode < 300;
     }
@@ -167,11 +288,22 @@ final class DataExportHttpExecutor {
             final int templateId,
             final DataExportHttpAttemptGovernor.AttemptPermit permit)
             throws IOException {
+        return sendBounded(
+                request,
+                templateId,
+                permit,
+                new DataExportHttpBodyHandler(templateId, properties.maxResponseBytes()));
+    }
+
+    private HttpResponse<byte[]> sendBounded(
+            final HttpRequest request,
+            final int templateId,
+            final DataExportHttpAttemptGovernor.AttemptPermit permit,
+            final DataExportHttpBodyHandler bodyHandler)
+            throws IOException {
         permit.checkpoint();
         final CompletableFuture<HttpResponse<byte[]>> future =
-                httpClient.sendAsync(
-                        request,
-                        new DataExportHttpBodyHandler(templateId, properties.maxResponseBytes()));
+                httpClient.sendAsync(request, bodyHandler);
         try {
             while (true) {
                 final long waitNanos =

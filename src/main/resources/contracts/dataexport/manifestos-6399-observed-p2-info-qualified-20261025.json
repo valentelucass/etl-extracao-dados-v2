@@ -1,0 +1,2117 @@
+{
+  "sourceKind": "DATA_EXPORT",
+  "templateId": 6399,
+  "documentReference": "dataexport-manifestos",
+  "contractVersion": "2026-10-25.p2-manifestos-info-qualified.v1",
+  "metadata": [
+    {
+      "kind": "DATA_FIELD",
+      "path": "additionals_subtotal",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "advance_subtotal",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "calculated_consolidation_count",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "calculated_delivery_count",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "calculated_dispatch_count",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "calculated_pick_count",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "calculated_reverse_pick_count",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "calculation_type",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "cargo_type",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "closed_at",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "closing_km",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "consolidation_manifest_items_count",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "consolidation_subtotal",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "contract_type",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "created_at",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "daily_subtotal",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "delivery_manifest_items_count",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "delivery_subtotal",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "departured_at",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "discount_value",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "discounts_subtotal",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "dispatch_draft_manifest_items_count",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "dispatch_subtotal",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "driver_services_total",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "finalized_manifest_items_count",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "finished_at",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "fleet_costs_subtotal",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "freight_subtotal",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "fuel_subtotal",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "generate_mdfe",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "invoices_count",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "invoices_value",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "invoices_volumes",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "invoices_weight",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "km",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "manifest_freights_total",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "manifest_items_count",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "manual_km",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "mdfe_status",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "mft_a_t_inss_value",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "mft_a_t_ir_value",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "mft_a_t_sest_senat_value",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "mft_aoe_comments",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "mft_aoe_rer_name",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "mft_ape_name",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "mft_cat_cot_number",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "mft_cat_cot_status",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "mft_crn_psn_nickname",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "mft_fis_fit_mey_mobile_receipt",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "mft_iks_id",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "mft_man_name",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "mft_mdr_contract_type",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "mft_mdr_iil_name",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "mft_mfs_key",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "mft_mfs_number",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "mft_mte_delivery_region_names",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "mft_mte_unloading_recipient_names",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "mft_pfs_pck_sequence_code",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "mft_s_n_ending_at",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "mft_s_n_sequence_code",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "mft_s_n_starting_at",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "mft_s_n_svs_sge_pyr_nickname",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "mft_s_n_svs_sge_sse_name",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "mft_tl1_license_plate",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "mft_tl1_weight_capacity",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "mft_tl2_license_plate",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "mft_tl2_weight_capacity",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "mft_uer_name",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "mft_vie_cubic_weight",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "mft_vie_license_plate",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "mft_vie_onr_name",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "mft_vie_vee_name",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "mft_vie_weight_capacity",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "mobile_read_at",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "monitoring_request",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "operational_expenses_total",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "paying_total",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "pick_manifest_items_count",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "pick_subtotal",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "reverse_pick_manifest_items_count",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "reverse_pick_subtotal",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "sequence_code",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "status",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "toll_subtotal",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "total_cost",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "total_cubic_volume",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "total_taxed_weight",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "transfer_manifest_items_count",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "traveled_km",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "uniq_destinations_count",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "vehicle_departure_km",
+      "declaredType": "UNDECLARED",
+      "declaredTypeFingerprint": null
+    },
+    {
+      "kind": "DATA_FILTER",
+      "path": "manifests.account_expenses",
+      "declaredType": "OTHER",
+      "declaredTypeFingerprint": {
+        "version": "declared-type-v1",
+        "sha256": "ed823c4c534bfa17a30399fcbfb2e7defe7ebbfd47b746511c769d4467f510f7"
+      }
+    },
+    {
+      "kind": "DATA_FILTER",
+      "path": "manifests.aggregate_price_table_id",
+      "declaredType": "OTHER",
+      "declaredTypeFingerprint": {
+        "version": "declared-type-v1",
+        "sha256": "ed823c4c534bfa17a30399fcbfb2e7defe7ebbfd47b746511c769d4467f510f7"
+      }
+    },
+    {
+      "kind": "DATA_FILTER",
+      "path": "manifests.contract_type",
+      "declaredType": "OTHER",
+      "declaredTypeFingerprint": {
+        "version": "declared-type-v1",
+        "sha256": "ed823c4c534bfa17a30399fcbfb2e7defe7ebbfd47b746511c769d4467f510f7"
+      }
+    },
+    {
+      "kind": "DATA_FILTER",
+      "path": "manifests.corporation_id",
+      "declaredType": "OTHER",
+      "declaredTypeFingerprint": {
+        "version": "declared-type-v1",
+        "sha256": "ed823c4c534bfa17a30399fcbfb2e7defe7ebbfd47b746511c769d4467f510f7"
+      }
+    },
+    {
+      "kind": "DATA_FILTER",
+      "path": "manifests.finished_at",
+      "declaredType": "DATE",
+      "declaredTypeFingerprint": {
+        "version": "declared-type-v1",
+        "sha256": "179b00376b5b12fe6a617c98e9c90d90fb5cfdf75f96ee4909fff9d8028b63a1"
+      }
+    },
+    {
+      "kind": "DATA_FILTER",
+      "path": "manifests.main_driver_id",
+      "declaredType": "OTHER",
+      "declaredTypeFingerprint": {
+        "version": "declared-type-v1",
+        "sha256": "ed823c4c534bfa17a30399fcbfb2e7defe7ebbfd47b746511c769d4467f510f7"
+      }
+    },
+    {
+      "kind": "DATA_FILTER",
+      "path": "manifests.manifest_classification_id",
+      "declaredType": "OTHER",
+      "declaredTypeFingerprint": {
+        "version": "declared-type-v1",
+        "sha256": "ed823c4c534bfa17a30399fcbfb2e7defe7ebbfd47b746511c769d4467f510f7"
+      }
+    },
+    {
+      "kind": "DATA_FILTER",
+      "path": "manifests.monitoring_request",
+      "declaredType": "OTHER",
+      "declaredTypeFingerprint": {
+        "version": "declared-type-v1",
+        "sha256": "ed823c4c534bfa17a30399fcbfb2e7defe7ebbfd47b746511c769d4467f510f7"
+      }
+    },
+    {
+      "kind": "DATA_FILTER",
+      "path": "manifests.sequence_code",
+      "declaredType": "NUMBER",
+      "declaredTypeFingerprint": {
+        "version": "declared-type-v1",
+        "sha256": "3f8e673c0bf8f3bdbe07d7fcbe979e7998b294e2b9b29723476e9cace7c0f3d4"
+      }
+    },
+    {
+      "kind": "DATA_FILTER",
+      "path": "manifests.service_date",
+      "declaredType": "DATE",
+      "declaredTypeFingerprint": {
+        "version": "declared-type-v1",
+        "sha256": "179b00376b5b12fe6a617c98e9c90d90fb5cfdf75f96ee4909fff9d8028b63a1"
+      }
+    },
+    {
+      "kind": "DATA_FILTER",
+      "path": "manifests.status",
+      "declaredType": "OTHER",
+      "declaredTypeFingerprint": {
+        "version": "declared-type-v1",
+        "sha256": "ed823c4c534bfa17a30399fcbfb2e7defe7ebbfd47b746511c769d4467f510f7"
+      }
+    },
+    {
+      "kind": "DATA_FILTER",
+      "path": "manifests.vehicle_id",
+      "declaredType": "OTHER",
+      "declaredTypeFingerprint": {
+        "version": "declared-type-v1",
+        "sha256": "ed823c4c534bfa17a30399fcbfb2e7defe7ebbfd47b746511c769d4467f510f7"
+      }
+    },
+    {
+      "kind": "DATA_FILTER",
+      "path": "mft_delivery_manifest_items.mobile_occurrence",
+      "declaredType": "OTHER",
+      "declaredTypeFingerprint": {
+        "version": "declared-type-v1",
+        "sha256": "ed823c4c534bfa17a30399fcbfb2e7defe7ebbfd47b746511c769d4467f510f7"
+      }
+    },
+    {
+      "kind": "DATA_FILTER",
+      "path": "mft_delivery_manifest_items.mobile_receipt",
+      "declaredType": "OTHER",
+      "declaredTypeFingerprint": {
+        "version": "declared-type-v1",
+        "sha256": "ed823c4c534bfa17a30399fcbfb2e7defe7ebbfd47b746511c769d4467f510f7"
+      }
+    },
+    {
+      "kind": "DATA_FILTER",
+      "path": "mft_delivery_manifest_items.mobile_validated",
+      "declaredType": "OTHER",
+      "declaredTypeFingerprint": {
+        "version": "declared-type-v1",
+        "sha256": "ed823c4c534bfa17a30399fcbfb2e7defe7ebbfd47b746511c769d4467f510f7"
+      }
+    },
+    {
+      "kind": "DATA_FILTER",
+      "path": "mft_dns_mft_aggregate_manifest.aggregate_id",
+      "declaredType": "OTHER",
+      "declaredTypeFingerprint": {
+        "version": "declared-type-v1",
+        "sha256": "ed823c4c534bfa17a30399fcbfb2e7defe7ebbfd47b746511c769d4467f510f7"
+      }
+    },
+    {
+      "kind": "DATA_FILTER",
+      "path": "scopes.by_updated_at",
+      "declaredType": "DATE_TIME",
+      "declaredTypeFingerprint": {
+        "version": "declared-type-v1",
+        "sha256": "37beb44f6106b7fcafaa2955c67545056b9a06bf0ab6da6b367dc9eacad07050"
+      }
+    },
+    {
+      "kind": "DATA_FILTER",
+      "path": "scopes.with_ciot",
+      "declaredType": "OTHER",
+      "declaredTypeFingerprint": {
+        "version": "declared-type-v1",
+        "sha256": "ed823c4c534bfa17a30399fcbfb2e7defe7ebbfd47b746511c769d4467f510f7"
+      }
+    }
+  ],
+  "response": {
+    "recordRoot": "$",
+    "rootCardinality": "ARRAY",
+    "observationState": "POPULATED",
+    "keyPath": "/sequence_code",
+    "fields": [
+      {
+        "scope": "RECORD",
+        "path": "/additionals_subtotal",
+        "cardinality": "SCALAR",
+        "presence": "REQUIRED",
+        "nullable": false,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "scope": "RECORD",
+        "path": "/advance_subtotal",
+        "cardinality": "SCALAR",
+        "presence": "REQUIRED",
+        "nullable": false,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "scope": "RECORD",
+        "path": "/calculated_consolidation_count",
+        "cardinality": "SCALAR",
+        "presence": "REQUIRED",
+        "nullable": false,
+        "jsonTypes": [
+          "INTEGER",
+          "NUMBER"
+        ]
+      },
+      {
+        "scope": "RECORD",
+        "path": "/calculated_delivery_count",
+        "cardinality": "SCALAR",
+        "presence": "REQUIRED",
+        "nullable": false,
+        "jsonTypes": [
+          "INTEGER",
+          "NUMBER"
+        ]
+      },
+      {
+        "scope": "RECORD",
+        "path": "/calculated_dispatch_count",
+        "cardinality": "SCALAR",
+        "presence": "REQUIRED",
+        "nullable": false,
+        "jsonTypes": [
+          "INTEGER",
+          "NUMBER"
+        ]
+      },
+      {
+        "scope": "RECORD",
+        "path": "/calculated_pick_count",
+        "cardinality": "SCALAR",
+        "presence": "REQUIRED",
+        "nullable": false,
+        "jsonTypes": [
+          "INTEGER",
+          "NUMBER"
+        ]
+      },
+      {
+        "scope": "RECORD",
+        "path": "/calculated_reverse_pick_count",
+        "cardinality": "SCALAR",
+        "presence": "REQUIRED",
+        "nullable": false,
+        "jsonTypes": [
+          "INTEGER",
+          "NUMBER"
+        ]
+      },
+      {
+        "scope": "RECORD",
+        "path": "/calculation_type",
+        "cardinality": "SCALAR",
+        "presence": "REQUIRED",
+        "nullable": false,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "scope": "RECORD",
+        "path": "/cargo_type",
+        "cardinality": "SCALAR",
+        "presence": "REQUIRED",
+        "nullable": false,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "scope": "RECORD",
+        "path": "/closed_at",
+        "cardinality": "SCALAR",
+        "presence": "REQUIRED",
+        "nullable": false,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "scope": "RECORD",
+        "path": "/closing_km",
+        "cardinality": "SCALAR",
+        "presence": "REQUIRED",
+        "nullable": false,
+        "jsonTypes": [
+          "INTEGER",
+          "NUMBER"
+        ]
+      },
+      {
+        "scope": "RECORD",
+        "path": "/consolidation_manifest_items_count",
+        "cardinality": "SCALAR",
+        "presence": "REQUIRED",
+        "nullable": false,
+        "jsonTypes": [
+          "INTEGER",
+          "NUMBER"
+        ]
+      },
+      {
+        "scope": "RECORD",
+        "path": "/consolidation_subtotal",
+        "cardinality": "SCALAR",
+        "presence": "REQUIRED",
+        "nullable": false,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "scope": "RECORD",
+        "path": "/contract_type",
+        "cardinality": "SCALAR",
+        "presence": "REQUIRED",
+        "nullable": false,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "scope": "RECORD",
+        "path": "/created_at",
+        "cardinality": "SCALAR",
+        "presence": "REQUIRED",
+        "nullable": false,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "scope": "RECORD",
+        "path": "/daily_subtotal",
+        "cardinality": "SCALAR",
+        "presence": "REQUIRED",
+        "nullable": false,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "scope": "RECORD",
+        "path": "/delivery_manifest_items_count",
+        "cardinality": "SCALAR",
+        "presence": "REQUIRED",
+        "nullable": false,
+        "jsonTypes": [
+          "INTEGER",
+          "NUMBER"
+        ]
+      },
+      {
+        "scope": "RECORD",
+        "path": "/delivery_subtotal",
+        "cardinality": "SCALAR",
+        "presence": "REQUIRED",
+        "nullable": false,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "scope": "RECORD",
+        "path": "/departured_at",
+        "cardinality": "SCALAR",
+        "presence": "REQUIRED",
+        "nullable": false,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "scope": "RECORD",
+        "path": "/discount_value",
+        "cardinality": "SCALAR",
+        "presence": "REQUIRED",
+        "nullable": false,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "scope": "RECORD",
+        "path": "/discounts_subtotal",
+        "cardinality": "SCALAR",
+        "presence": "REQUIRED",
+        "nullable": false,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "scope": "RECORD",
+        "path": "/dispatch_draft_manifest_items_count",
+        "cardinality": "SCALAR",
+        "presence": "REQUIRED",
+        "nullable": false,
+        "jsonTypes": [
+          "INTEGER",
+          "NUMBER"
+        ]
+      },
+      {
+        "scope": "RECORD",
+        "path": "/dispatch_subtotal",
+        "cardinality": "SCALAR",
+        "presence": "REQUIRED",
+        "nullable": false,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "scope": "RECORD",
+        "path": "/driver_services_total",
+        "cardinality": "SCALAR",
+        "presence": "REQUIRED",
+        "nullable": false,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "scope": "RECORD",
+        "path": "/finalized_manifest_items_count",
+        "cardinality": "SCALAR",
+        "presence": "REQUIRED",
+        "nullable": false,
+        "jsonTypes": [
+          "INTEGER",
+          "NUMBER"
+        ]
+      },
+      {
+        "scope": "RECORD",
+        "path": "/finished_at",
+        "cardinality": "SCALAR",
+        "presence": "REQUIRED",
+        "nullable": false,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "scope": "RECORD",
+        "path": "/fleet_costs_subtotal",
+        "cardinality": "SCALAR",
+        "presence": "REQUIRED",
+        "nullable": false,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "scope": "RECORD",
+        "path": "/freight_subtotal",
+        "cardinality": "SCALAR",
+        "presence": "REQUIRED",
+        "nullable": false,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "scope": "RECORD",
+        "path": "/fuel_subtotal",
+        "cardinality": "SCALAR",
+        "presence": "REQUIRED",
+        "nullable": false,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "scope": "RECORD",
+        "path": "/generate_mdfe",
+        "cardinality": "SCALAR",
+        "presence": "REQUIRED",
+        "nullable": false,
+        "jsonTypes": [
+          "BOOLEAN"
+        ]
+      },
+      {
+        "scope": "RECORD",
+        "path": "/invoices_count",
+        "cardinality": "SCALAR",
+        "presence": "REQUIRED",
+        "nullable": false,
+        "jsonTypes": [
+          "INTEGER",
+          "NUMBER"
+        ]
+      },
+      {
+        "scope": "RECORD",
+        "path": "/invoices_value",
+        "cardinality": "SCALAR",
+        "presence": "REQUIRED",
+        "nullable": false,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "scope": "RECORD",
+        "path": "/invoices_volumes",
+        "cardinality": "SCALAR",
+        "presence": "REQUIRED",
+        "nullable": false,
+        "jsonTypes": [
+          "INTEGER",
+          "NUMBER"
+        ]
+      },
+      {
+        "scope": "RECORD",
+        "path": "/invoices_weight",
+        "cardinality": "SCALAR",
+        "presence": "REQUIRED",
+        "nullable": false,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "scope": "RECORD",
+        "path": "/km",
+        "cardinality": "SCALAR",
+        "presence": "REQUIRED",
+        "nullable": false,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "scope": "RECORD",
+        "path": "/manifest_freights_total",
+        "cardinality": "SCALAR",
+        "presence": "REQUIRED",
+        "nullable": false,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "scope": "RECORD",
+        "path": "/manifest_items_count",
+        "cardinality": "SCALAR",
+        "presence": "REQUIRED",
+        "nullable": false,
+        "jsonTypes": [
+          "INTEGER",
+          "NUMBER"
+        ]
+      },
+      {
+        "scope": "RECORD",
+        "path": "/manual_km",
+        "cardinality": "SCALAR",
+        "presence": "REQUIRED",
+        "nullable": false,
+        "jsonTypes": [
+          "BOOLEAN"
+        ]
+      },
+      {
+        "scope": "RECORD",
+        "path": "/mdfe_status",
+        "cardinality": "SCALAR",
+        "presence": "REQUIRED",
+        "nullable": false,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "scope": "RECORD",
+        "path": "/mft_a_t_inss_value",
+        "cardinality": "SCALAR",
+        "presence": "REQUIRED",
+        "nullable": true,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "scope": "RECORD",
+        "path": "/mft_a_t_ir_value",
+        "cardinality": "SCALAR",
+        "presence": "REQUIRED",
+        "nullable": true,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "scope": "RECORD",
+        "path": "/mft_a_t_sest_senat_value",
+        "cardinality": "SCALAR",
+        "presence": "REQUIRED",
+        "nullable": true,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "scope": "RECORD",
+        "path": "/mft_aoe_comments",
+        "cardinality": "SCALAR",
+        "presence": "REQUIRED",
+        "nullable": true,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "scope": "RECORD",
+        "path": "/mft_aoe_rer_name",
+        "cardinality": "SCALAR",
+        "presence": "REQUIRED",
+        "nullable": true,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "scope": "RECORD",
+        "path": "/mft_ape_name",
+        "cardinality": "SCALAR",
+        "presence": "REQUIRED",
+        "nullable": true,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "scope": "RECORD",
+        "path": "/mft_cat_cot_number",
+        "cardinality": "SCALAR",
+        "presence": "REQUIRED",
+        "nullable": true,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "scope": "RECORD",
+        "path": "/mft_cat_cot_status",
+        "cardinality": "SCALAR",
+        "presence": "REQUIRED",
+        "nullable": true,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "scope": "RECORD",
+        "path": "/mft_crn_psn_nickname",
+        "cardinality": "SCALAR",
+        "presence": "REQUIRED",
+        "nullable": false,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "scope": "RECORD",
+        "path": "/mft_fis_fit_mey_mobile_receipt",
+        "cardinality": "SCALAR",
+        "presence": "REQUIRED",
+        "nullable": true,
+        "jsonTypes": [
+          "BOOLEAN"
+        ]
+      },
+      {
+        "scope": "RECORD",
+        "path": "/mft_iks_id",
+        "cardinality": "UNOBSERVED",
+        "presence": "REQUIRED",
+        "nullable": true,
+        "jsonTypes": []
+      },
+      {
+        "scope": "RECORD",
+        "path": "/mft_man_name",
+        "cardinality": "SCALAR",
+        "presence": "REQUIRED",
+        "nullable": false,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "scope": "RECORD",
+        "path": "/mft_mdr_contract_type",
+        "cardinality": "SCALAR",
+        "presence": "REQUIRED",
+        "nullable": false,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "scope": "RECORD",
+        "path": "/mft_mdr_iil_name",
+        "cardinality": "SCALAR",
+        "presence": "REQUIRED",
+        "nullable": false,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "scope": "RECORD",
+        "path": "/mft_mfs_key",
+        "cardinality": "SCALAR",
+        "presence": "REQUIRED",
+        "nullable": true,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "scope": "RECORD",
+        "path": "/mft_mfs_number",
+        "cardinality": "SCALAR",
+        "presence": "REQUIRED",
+        "nullable": true,
+        "jsonTypes": [
+          "INTEGER",
+          "NUMBER"
+        ]
+      },
+      {
+        "scope": "RECORD",
+        "path": "/mft_mte_delivery_region_names",
+        "cardinality": "ARRAY",
+        "presence": "REQUIRED",
+        "nullable": false,
+        "jsonTypes": [
+          "ARRAY"
+        ]
+      },
+      {
+        "scope": "RECORD",
+        "path": "/mft_mte_delivery_region_names/*",
+        "cardinality": "ARRAY",
+        "presence": "OPTIONAL",
+        "nullable": false,
+        "jsonTypes": [
+          "ARRAY"
+        ]
+      },
+      {
+        "scope": "RECORD",
+        "path": "/mft_mte_delivery_region_names/*/*",
+        "cardinality": "SCALAR",
+        "presence": "OPTIONAL",
+        "nullable": false,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "scope": "RECORD",
+        "path": "/mft_mte_unloading_recipient_names",
+        "cardinality": "ARRAY",
+        "presence": "REQUIRED",
+        "nullable": false,
+        "jsonTypes": [
+          "ARRAY"
+        ]
+      },
+      {
+        "scope": "RECORD",
+        "path": "/mft_mte_unloading_recipient_names/*",
+        "cardinality": "ARRAY",
+        "presence": "OPTIONAL",
+        "nullable": false,
+        "jsonTypes": [
+          "ARRAY"
+        ]
+      },
+      {
+        "scope": "RECORD",
+        "path": "/mft_mte_unloading_recipient_names/*/*",
+        "cardinality": "SCALAR",
+        "presence": "OPTIONAL",
+        "nullable": false,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "scope": "RECORD",
+        "path": "/mft_pfs_pck_sequence_code",
+        "cardinality": "SCALAR",
+        "presence": "REQUIRED",
+        "nullable": true,
+        "jsonTypes": [
+          "INTEGER",
+          "NUMBER"
+        ]
+      },
+      {
+        "scope": "RECORD",
+        "path": "/mft_s_n_ending_at",
+        "cardinality": "SCALAR",
+        "presence": "REQUIRED",
+        "nullable": true,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "scope": "RECORD",
+        "path": "/mft_s_n_sequence_code",
+        "cardinality": "SCALAR",
+        "presence": "REQUIRED",
+        "nullable": true,
+        "jsonTypes": [
+          "INTEGER",
+          "NUMBER"
+        ]
+      },
+      {
+        "scope": "RECORD",
+        "path": "/mft_s_n_starting_at",
+        "cardinality": "SCALAR",
+        "presence": "REQUIRED",
+        "nullable": true,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "scope": "RECORD",
+        "path": "/mft_s_n_svs_sge_pyr_nickname",
+        "cardinality": "SCALAR",
+        "presence": "REQUIRED",
+        "nullable": true,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "scope": "RECORD",
+        "path": "/mft_s_n_svs_sge_sse_name",
+        "cardinality": "SCALAR",
+        "presence": "REQUIRED",
+        "nullable": true,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "scope": "RECORD",
+        "path": "/mft_tl1_license_plate",
+        "cardinality": "SCALAR",
+        "presence": "REQUIRED",
+        "nullable": true,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "scope": "RECORD",
+        "path": "/mft_tl1_weight_capacity",
+        "cardinality": "SCALAR",
+        "presence": "REQUIRED",
+        "nullable": true,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "scope": "RECORD",
+        "path": "/mft_tl2_license_plate",
+        "cardinality": "SCALAR",
+        "presence": "REQUIRED",
+        "nullable": true,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "scope": "RECORD",
+        "path": "/mft_tl2_weight_capacity",
+        "cardinality": "SCALAR",
+        "presence": "REQUIRED",
+        "nullable": true,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "scope": "RECORD",
+        "path": "/mft_uer_name",
+        "cardinality": "SCALAR",
+        "presence": "REQUIRED",
+        "nullable": false,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "scope": "RECORD",
+        "path": "/mft_vie_cubic_weight",
+        "cardinality": "SCALAR",
+        "presence": "REQUIRED",
+        "nullable": false,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "scope": "RECORD",
+        "path": "/mft_vie_license_plate",
+        "cardinality": "SCALAR",
+        "presence": "REQUIRED",
+        "nullable": false,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "scope": "RECORD",
+        "path": "/mft_vie_onr_name",
+        "cardinality": "SCALAR",
+        "presence": "REQUIRED",
+        "nullable": false,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "scope": "RECORD",
+        "path": "/mft_vie_vee_name",
+        "cardinality": "SCALAR",
+        "presence": "REQUIRED",
+        "nullable": false,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "scope": "RECORD",
+        "path": "/mft_vie_weight_capacity",
+        "cardinality": "SCALAR",
+        "presence": "REQUIRED",
+        "nullable": false,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "scope": "RECORD",
+        "path": "/mobile_read_at",
+        "cardinality": "SCALAR",
+        "presence": "REQUIRED",
+        "nullable": true,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "scope": "RECORD",
+        "path": "/monitoring_request",
+        "cardinality": "SCALAR",
+        "presence": "REQUIRED",
+        "nullable": false,
+        "jsonTypes": [
+          "BOOLEAN"
+        ]
+      },
+      {
+        "scope": "RECORD",
+        "path": "/operational_expenses_total",
+        "cardinality": "SCALAR",
+        "presence": "REQUIRED",
+        "nullable": false,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "scope": "RECORD",
+        "path": "/paying_total",
+        "cardinality": "SCALAR",
+        "presence": "REQUIRED",
+        "nullable": false,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "scope": "RECORD",
+        "path": "/pick_manifest_items_count",
+        "cardinality": "SCALAR",
+        "presence": "REQUIRED",
+        "nullable": false,
+        "jsonTypes": [
+          "INTEGER",
+          "NUMBER"
+        ]
+      },
+      {
+        "scope": "RECORD",
+        "path": "/pick_subtotal",
+        "cardinality": "SCALAR",
+        "presence": "REQUIRED",
+        "nullable": false,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "scope": "RECORD",
+        "path": "/reverse_pick_manifest_items_count",
+        "cardinality": "SCALAR",
+        "presence": "REQUIRED",
+        "nullable": false,
+        "jsonTypes": [
+          "INTEGER",
+          "NUMBER"
+        ]
+      },
+      {
+        "scope": "RECORD",
+        "path": "/reverse_pick_subtotal",
+        "cardinality": "SCALAR",
+        "presence": "REQUIRED",
+        "nullable": false,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "scope": "RECORD",
+        "path": "/sequence_code",
+        "cardinality": "SCALAR",
+        "presence": "REQUIRED",
+        "nullable": false,
+        "jsonTypes": [
+          "INTEGER",
+          "NUMBER"
+        ]
+      },
+      {
+        "scope": "RECORD",
+        "path": "/status",
+        "cardinality": "SCALAR",
+        "presence": "REQUIRED",
+        "nullable": false,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "scope": "RECORD",
+        "path": "/toll_subtotal",
+        "cardinality": "SCALAR",
+        "presence": "REQUIRED",
+        "nullable": false,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "scope": "RECORD",
+        "path": "/total_cost",
+        "cardinality": "SCALAR",
+        "presence": "REQUIRED",
+        "nullable": false,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "scope": "RECORD",
+        "path": "/total_cubic_volume",
+        "cardinality": "SCALAR",
+        "presence": "REQUIRED",
+        "nullable": false,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "scope": "RECORD",
+        "path": "/total_taxed_weight",
+        "cardinality": "SCALAR",
+        "presence": "REQUIRED",
+        "nullable": false,
+        "jsonTypes": [
+          "STRING"
+        ]
+      },
+      {
+        "scope": "RECORD",
+        "path": "/transfer_manifest_items_count",
+        "cardinality": "SCALAR",
+        "presence": "REQUIRED",
+        "nullable": false,
+        "jsonTypes": [
+          "INTEGER",
+          "NUMBER"
+        ]
+      },
+      {
+        "scope": "RECORD",
+        "path": "/traveled_km",
+        "cardinality": "SCALAR",
+        "presence": "REQUIRED",
+        "nullable": false,
+        "jsonTypes": [
+          "INTEGER",
+          "NUMBER"
+        ]
+      },
+      {
+        "scope": "RECORD",
+        "path": "/uniq_destinations_count",
+        "cardinality": "SCALAR",
+        "presence": "REQUIRED",
+        "nullable": false,
+        "jsonTypes": [
+          "INTEGER",
+          "NUMBER"
+        ]
+      },
+      {
+        "scope": "RECORD",
+        "path": "/vehicle_departure_km",
+        "cardinality": "SCALAR",
+        "presence": "REQUIRED",
+        "nullable": false,
+        "jsonTypes": [
+          "INTEGER",
+          "NUMBER"
+        ]
+      }
+    ]
+  },
+  "evidence": {
+    "priorCandidateVersion": "2026-10-24.p1-manifestos-observed.v1",
+    "priorResourceSha256": "00f6e96b0f64c8507447edda22797a620be99abb6cfa814ed5d70e39af6db3bf",
+    "priorCandidateLocation": "candidatos-p1/src/main/resources/contracts/dataexport/manifestos-6399-observed-p1-20261024.json",
+    "historicalInfoAndFieldTypes": {
+      "metadataArtifact": "stage1/results.json",
+      "metadataSha256": "94a1e84f979c00561bc6222645f662a514b4e513eee2a1d74f6041dfe4bf13d6",
+      "typesArtifact": "stage4-data-v4/results.json",
+      "typesSha256": "119625c7a88af47a04bd01eb1480b0838a85d2d98eeaa88d960117c90e017d98",
+      "derivedSections": [
+        "units[].metadata.fields_profiles",
+        "units[].metadata.filters_profiles",
+        "units[].fieldTypes"
+      ],
+      "numericEvidence": "NUMBER_FAMILY_ONLY_INTEGER_VS_FRACTION_UNRESOLVED",
+      "numberFamilyPaths": [
+        "/calculated_consolidation_count",
+        "/calculated_delivery_count",
+        "/calculated_dispatch_count",
+        "/calculated_pick_count",
+        "/calculated_reverse_pick_count",
+        "/closing_km",
+        "/consolidation_manifest_items_count",
+        "/delivery_manifest_items_count",
+        "/dispatch_draft_manifest_items_count",
+        "/finalized_manifest_items_count",
+        "/invoices_count",
+        "/invoices_volumes",
+        "/manifest_items_count",
+        "/mft_mfs_number",
+        "/mft_pfs_pck_sequence_code",
+        "/mft_s_n_sequence_code",
+        "/pick_manifest_items_count",
+        "/reverse_pick_manifest_items_count",
+        "/sequence_code",
+        "/transfer_manifest_items_count",
+        "/traveled_km",
+        "/uniq_destinations_count",
+        "/vehicle_departure_km"
+      ],
+      "arrayElementShape": "UNOBSERVED_NO_OPAQUE_ALLOWANCE",
+      "arrayPaths": [
+        "/mft_mte_delivery_region_names",
+        "/mft_mte_unloading_recipient_names"
+      ],
+      "nullOnlyPaths": [
+        "/mft_iks_id"
+      ]
+    },
+    "preciseRootProfileArtifact": "source-shape-probe/live/results.json",
+    "preciseRootProfileSha256": "94f4c8131313acc3a01c47d603664a98bed43a67587d825edd307062da2c37fb",
+    "preciseRootWireTypesInNewCut": {
+      "/additionals_subtotal": {
+        "STRING": 315
+      },
+      "/advance_subtotal": {
+        "STRING": 315
+      },
+      "/calculated_consolidation_count": {
+        "INTEGER": 315
+      },
+      "/calculated_delivery_count": {
+        "INTEGER": 315
+      },
+      "/calculated_dispatch_count": {
+        "INTEGER": 315
+      },
+      "/calculated_pick_count": {
+        "INTEGER": 315
+      },
+      "/calculated_reverse_pick_count": {
+        "INTEGER": 315
+      },
+      "/calculation_type": {
+        "STRING": 315
+      },
+      "/cargo_type": {
+        "STRING": 315
+      },
+      "/closed_at": {
+        "STRING": 315
+      },
+      "/closing_km": {
+        "INTEGER": 315
+      },
+      "/consolidation_manifest_items_count": {
+        "INTEGER": 315
+      },
+      "/consolidation_subtotal": {
+        "STRING": 315
+      },
+      "/contract_type": {
+        "STRING": 315
+      },
+      "/created_at": {
+        "STRING": 315
+      },
+      "/daily_subtotal": {
+        "STRING": 315
+      },
+      "/delivery_manifest_items_count": {
+        "INTEGER": 315
+      },
+      "/delivery_subtotal": {
+        "STRING": 315
+      },
+      "/departured_at": {
+        "STRING": 315
+      },
+      "/discount_value": {
+        "STRING": 315
+      },
+      "/discounts_subtotal": {
+        "STRING": 315
+      },
+      "/dispatch_draft_manifest_items_count": {
+        "INTEGER": 315
+      },
+      "/dispatch_subtotal": {
+        "STRING": 315
+      },
+      "/driver_services_total": {
+        "STRING": 315
+      },
+      "/finalized_manifest_items_count": {
+        "INTEGER": 315
+      },
+      "/finished_at": {
+        "STRING": 315
+      },
+      "/fleet_costs_subtotal": {
+        "STRING": 315
+      },
+      "/freight_subtotal": {
+        "STRING": 315
+      },
+      "/fuel_subtotal": {
+        "STRING": 315
+      },
+      "/generate_mdfe": {
+        "BOOLEAN": 315
+      },
+      "/invoices_count": {
+        "INTEGER": 315
+      },
+      "/invoices_value": {
+        "STRING": 315
+      },
+      "/invoices_volumes": {
+        "INTEGER": 315
+      },
+      "/invoices_weight": {
+        "STRING": 315
+      },
+      "/km": {
+        "STRING": 315
+      },
+      "/manifest_freights_total": {
+        "STRING": 315
+      },
+      "/manifest_items_count": {
+        "INTEGER": 315
+      },
+      "/manual_km": {
+        "BOOLEAN": 315
+      },
+      "/mdfe_status": {
+        "STRING": 315
+      },
+      "/mft_a_t_inss_value": {
+        "NULL": 60,
+        "STRING": 255
+      },
+      "/mft_a_t_ir_value": {
+        "NULL": 60,
+        "STRING": 255
+      },
+      "/mft_a_t_sest_senat_value": {
+        "NULL": 60,
+        "STRING": 255
+      },
+      "/mft_aoe_comments": {
+        "NULL": 61,
+        "STRING": 254
+      },
+      "/mft_aoe_rer_name": {
+        "NULL": 61,
+        "STRING": 254
+      },
+      "/mft_ape_name": {
+        "NULL": 60,
+        "STRING": 255
+      },
+      "/mft_cat_cot_number": {
+        "NULL": 88,
+        "STRING": 227
+      },
+      "/mft_cat_cot_status": {
+        "NULL": 75,
+        "STRING": 240
+      },
+      "/mft_crn_psn_nickname": {
+        "STRING": 315
+      },
+      "/mft_fis_fit_mey_mobile_receipt": {
+        "BOOLEAN": 212,
+        "NULL": 103
+      },
+      "/mft_iks_id": {
+        "NULL": 315
+      },
+      "/mft_man_name": {
+        "STRING": 315
+      },
+      "/mft_mdr_contract_type": {
+        "STRING": 315
+      },
+      "/mft_mdr_iil_name": {
+        "STRING": 315
+      },
+      "/mft_mfs_key": {
+        "NULL": 44,
+        "STRING": 271
+      },
+      "/mft_mfs_number": {
+        "INTEGER": 271,
+        "NULL": 44
+      },
+      "/mft_mte_delivery_region_names": {
+        "ARRAY": 315
+      },
+      "/mft_mte_unloading_recipient_names": {
+        "ARRAY": 315
+      },
+      "/mft_pfs_pck_sequence_code": {
+        "INTEGER": 1,
+        "NULL": 314
+      },
+      "/mft_s_n_ending_at": {
+        "NULL": 20,
+        "STRING": 295
+      },
+      "/mft_s_n_sequence_code": {
+        "INTEGER": 295,
+        "NULL": 20
+      },
+      "/mft_s_n_starting_at": {
+        "NULL": 20,
+        "STRING": 295
+      },
+      "/mft_s_n_svs_sge_pyr_nickname": {
+        "NULL": 20,
+        "STRING": 295
+      },
+      "/mft_s_n_svs_sge_sse_name": {
+        "NULL": 20,
+        "STRING": 295
+      },
+      "/mft_tl1_license_plate": {
+        "NULL": 128,
+        "STRING": 187
+      },
+      "/mft_tl1_weight_capacity": {
+        "NULL": 128,
+        "STRING": 187
+      },
+      "/mft_tl2_license_plate": {
+        "NULL": 284,
+        "STRING": 31
+      },
+      "/mft_tl2_weight_capacity": {
+        "NULL": 284,
+        "STRING": 31
+      },
+      "/mft_uer_name": {
+        "STRING": 315
+      },
+      "/mft_vie_cubic_weight": {
+        "STRING": 315
+      },
+      "/mft_vie_license_plate": {
+        "STRING": 315
+      },
+      "/mft_vie_onr_name": {
+        "STRING": 315
+      },
+      "/mft_vie_vee_name": {
+        "STRING": 315
+      },
+      "/mft_vie_weight_capacity": {
+        "STRING": 315
+      },
+      "/mobile_read_at": {
+        "NULL": 295,
+        "STRING": 20
+      },
+      "/monitoring_request": {
+        "BOOLEAN": 315
+      },
+      "/operational_expenses_total": {
+        "STRING": 315
+      },
+      "/paying_total": {
+        "STRING": 315
+      },
+      "/pick_manifest_items_count": {
+        "INTEGER": 315
+      },
+      "/pick_subtotal": {
+        "STRING": 315
+      },
+      "/reverse_pick_manifest_items_count": {
+        "INTEGER": 315
+      },
+      "/reverse_pick_subtotal": {
+        "STRING": 315
+      },
+      "/sequence_code": {
+        "INTEGER": 315
+      },
+      "/status": {
+        "STRING": 315
+      },
+      "/toll_subtotal": {
+        "STRING": 315
+      },
+      "/total_cost": {
+        "STRING": 315
+      },
+      "/total_cubic_volume": {
+        "STRING": 315
+      },
+      "/total_taxed_weight": {
+        "STRING": 315
+      },
+      "/transfer_manifest_items_count": {
+        "INTEGER": 315
+      },
+      "/traveled_km": {
+        "INTEGER": 315
+      },
+      "/uniq_destinations_count": {
+        "INTEGER": 315
+      },
+      "/vehicle_departure_km": {
+        "INTEGER": 315
+      }
+    },
+    "newCutPhysicalRows": 315,
+    "newCutPage": 1,
+    "newCutRequestedPer": 50,
+    "newCutIsOnlyOnePage": true,
+    "partialQuoteCutDoesNotReplaceHistory": false,
+    "numericHistoryRule": "UNION_WITH_PRIOR_INTEGER_NUMBER_FAMILY_NO_NARROWING_BY_NEW_SAMPLE",
+    "arrayItemTypes": {
+      "/mft_mte_delivery_region_names/*": {
+        "ARRAY": 315
+      },
+      "/mft_mte_unloading_recipient_names/*": {
+        "ARRAY": 315
+      },
+      "/mft_mte_delivery_region_names/*/*": {
+        "STRING": 22
+      },
+      "/mft_mte_unloading_recipient_names/*/*": {
+        "STRING": 324
+      }
+    },
+    "arrayDescendantPresence": "CONDITIONAL_OPTIONAL_FOR_EMPTY_COLLECTIONS_NOT_A_PROVIDER_MANDATORY_PRESENCE_CLAIM",
+    "maximumObservedArrayItems": {
+      "/mft_mte_delivery_region_names": 1,
+      "/mft_mte_delivery_region_names/*": 1,
+      "/mft_mte_unloading_recipient_names": 1,
+      "/mft_mte_unloading_recipient_names/*": 2
+    },
+    "arrayMaximumIsDescriptiveNotProviderCap": true,
+    "deepArrayArtifact": "source-shape-nested-v2/live/results.json",
+    "deepArraySha256": "989fd6f8eed0597ef840ad9d8dbc3365ba9e2e9177a4e41b883add0bc65ee7b8",
+    "infoQualifiedNameCorrection": {
+      "rootProofSha256": "43c3f88346599722a5a528d20dd91ed7ee43a1dc72f7390e3823671ed8a78086",
+      "all18FilterTypeTextsUnchanged": true,
+      "noUniformTablePrefixInferred": true,
+      "infoResultSha256": "3670D10F0AC6EC9811E1BA23D918781D32E3B6AA0404126C8E2910FF805067E9",
+      "dataResponseAndTypesRetained": true,
+      "all91FieldsUnchanged": true,
+      "priorVersion": "2026-10-24.p1b-manifestos-observed.v1",
+      "origin": "ACTUAL_ROOT_INFO_6399_0594_02_SANITIZED_STRUCTURE",
+      "rawBodyAvailable": false,
+      "dataResponseReobserved": false,
+      "priorResourceSha256": "3b398b00a81349edff085c9b677bca7906d2b42b9aa516823ae2be3152e80cd0",
+      "rootProofPath": "C:\\Users\\suporte\\Documents\\Armazenamento-Projetos\\etl-extracao-dados-v2\\quatro-etapas-20261024-01\\RootManifestosInfoSchema0594-02.json",
+      "tableFieldReencoded": true
+    }
+  },
+  "requestEvidence": {
+    "responseRoot": "$",
+    "orderBy": "ABSENT_IN_OBSERVED_REQUEST",
+    "runtimePerCeiling": 100,
+    "observedRequestedPer": [
+      50,
+      100
+    ],
+    "observedPerQualifiesRuntimeCeiling": false,
+    "newRequestSemanticsApproved": false,
+    "latestObservedOrderBySent": false
+  },
+  "acceptance": {
+    "classification": "P2_CANDIDATE_ACTUAL_INFO_QUALIFIED_FILTER_NAMES_PENDING_ROOT_REVIEW",
+    "globalIdentityProven": false,
+    "sourceCompletenessProven": false,
+    "sourceQueryAuthorized": false,
+    "persistenceAuthorized": false,
+    "runtimeAdopted": false,
+    "promotable": false,
+    "arrayElementTypesInferred": false,
+    "opaqueAllowancesUsed": false
+  },
+  "fingerprints": {
+    "response": "b9d3af595e9db1dae53bd9249a26dae2cf89872c5a46a4882ed54da50fe78ccd",
+    "metadata": "eb7aade2963e4f03e9d80a40d9b296944981a3a133a728c539b224f8e05455df",
+    "release": "6fd4d10fc52718ce6d1ab684d5188f413cbd1241bb4eedf140b4e349298eab04"
+  }
+}

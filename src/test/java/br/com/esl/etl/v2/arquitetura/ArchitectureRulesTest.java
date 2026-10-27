@@ -232,6 +232,46 @@ class Example { String description = "java.sql.Connection"; }
                                     + " compartilhado100000 com events verificado antes da cópia; nunca"
                                     + " entrega todos os bytes."),
                     Map.entry(
+                            "br.com.esl.etl.v2.plataforma.fonte.dataexport.ObservedExpansionCapturePlan$OrderBy#expressions()",
+                            "P3-CORE-BOUNDED-01: zero ou uma expressao de ate 80 caracteres;"
+                                    + " size e validado antes de get/copia, seguido de copia"
+                                    + " indexada propria. OrderPrecopyTest cobre listas 2 e"
+                                    + " MAX_VALUE venenosas, aceite indexado sem iterator/toArray,"
+                                    + " ausencia, branco, 81 caracteres, null e imutabilidade."),
+                    Map.entry(
+                            "br.com.esl.etl.v2.plataforma.fonte.dataexport.ObservedExpansionProjectedRecord#fields()",
+                            "P3-CORE-BOUNDED-04: exatamente28/53/26/44 campos por observacao"
+                                    + " fechada, teto53; size e escalares sao verificados antes"
+                                    + " de get/copia. Copia indexada propria rejeita paths duplicados;"
+                                    + " ConstructorBoundsTest cobre lista54 venenosa, por tipo,"
+                                    + " imutabilidade e toArray/iterator controlados pelo caller."),
+                    Map.entry(
+                            "br.com.esl.etl.v2.plataforma.fonte.dataexport.ObservedExpansionPageProjection#records()",
+                            "P3-CORE-BOUNDED-05: zero ate maximumPhysicalRowsPerPage<=1000;"
+                                    + " size e estado sao verificados antes de acesso/copia."
+                                    + " Copia propria valida ordinal e ocorrencias ate2000 no"
+                                    + " contexto do plano. ConstructorBoundsTest cobre1001,"
+                                    + " limite menor, continuidade, copias e expansao legitima."),
+                    Map.entry(
+                            "br.com.esl.etl.v2.plataforma.fonte.dataexport.ObservedExpansionRawPage#body()",
+                            "P3-CORE-BOUNDED-02: copia defensiva de um corpo nao vazio ate"
+                                    + " maximumPageBytes (teto 8 MiB), verificado antes do clone."
+                                    + " StructureIssueTest cobre excesso/vazio e PageProjectorTest"
+                                    + " cobre copia defensiva e preservacao lexical dos bytes."),
+                    Map.entry(
+                            "br.com.esl.etl.v2.plataforma.fonte.dataexport.ObservedExpansionPageProjection#projectionUtf16Le()",
+                            "P3-CORE-BOUNDED-03: um sidecar limitado a maximumProjectionBytes"
+                                    + " (teto 16 MiB); construtor verifica 2*String.length e o"
+                                    + " writer limita caracteres UTF-16. Testes cobrem overflow,"
+                                    + " surrogate escapado e igualdade entre tamanho e bytes."),
+                    Map.entry(
+                            "br.com.esl.etl.v2.plataforma.fonte.dataexport.ObservedExpansionAdmissionEmitter$AdmissionCapability#utf16Le()",
+                            "P3-GUARD-BOUNDED-01: array UTF-16LE de um envelope ja limitado a"
+                                    + " maximumProjectionBytes (teto 16 MiB) antes da emissao da"
+                                    + " capacidade privada e da nova codificacao pelo getter."
+                                    + " AdmissionEmitterTest cobre overhead e fidelidade lexical;"
+                                    + " limite nao concede autoridade fisica nem prova de origem."),
+                    Map.entry(
                             "br.com.esl.etl.v2.plataforma.fonte.dataexport.DataExportObservedPage$PhysicalObservation#records()",
                             "TEST-OBS-PHYSICAL-001: zero ou um registro do corpo completo; envelope"
                                     + " fechado, coleções conhecidas somam no máximo um item e"
@@ -796,6 +836,14 @@ class Example { String description = "java.sql.Connection"; }
         final var impostorApis =
                 productiveCollectionApis(List.of(MisleadingCatalogMetadataApi.class));
         assertEquals(2, impostorApis.size());
+        assertTrue(impostorApis.stream().noneMatch(BOUNDED_COLLECTION_APIS::containsKey));
+    }
+
+    @Test
+    void observedExpansionBoundsDoNotAdmitSimilarApis() {
+        final Set<String> impostorApis =
+                productiveCollectionApis(List.of(MisleadingObservedExpansionApi.class));
+        assertEquals(6, impostorApis.size());
         assertTrue(impostorApis.stream().noneMatch(BOUNDED_COLLECTION_APIS::containsKey));
     }
 
@@ -1498,25 +1546,34 @@ class Example { String description = "java.sql.Connection"; }
         final Path sourceRoot =
                 Path.of(System.getProperty("user.dir"), "src", "main", "java").toAbsolutePath();
         final List<Class<?>> classes = new ArrayList<>();
-        try (Stream<Path> paths = Files.walk(classRoot)) {
-            for (final Path classFile : paths.filter(isProductionClassFile()).toList()) {
-                final String relativeName =
-                        classRoot.relativize(classFile).toString().replace('\\', '/');
-                final String binaryName =
-                        relativeName.substring(0, relativeName.length() - ".class".length());
-                final String topLevelName =
-                        binaryName.contains("$")
-                                ? binaryName.substring(0, binaryName.indexOf('$'))
-                                : binaryName;
-                final Path sourceFile = sourceRoot.resolve(topLevelName + ".java");
-                if (!isCurrentBinaryName(sourceFile, binaryName, topLevelName)) {
-                    continue;
+        try (java.nio.file.FileSystem archive =
+                Files.isDirectory(classRoot)
+                        ? null
+                        : java.nio.file.FileSystems.newFileSystem(classRoot, Map.of())) {
+            final Path binaryRoot = archive == null ? classRoot : archive.getPath("/");
+            try (Stream<Path> paths = Files.walk(binaryRoot)) {
+                for (final Path classFile :
+                        paths.filter(path -> path.getFileName() != null)
+                                .filter(isProductionClassFile())
+                                .toList()) {
+                    final String relativeName =
+                            binaryRoot.relativize(classFile).toString().replace('\\', '/');
+                    final String binaryName =
+                            relativeName.substring(0, relativeName.length() - ".class".length());
+                    final String topLevelName =
+                            binaryName.contains("$")
+                                    ? binaryName.substring(0, binaryName.indexOf('$'))
+                                    : binaryName;
+                    final Path sourceFile = sourceRoot.resolve(topLevelName + ".java");
+                    if (!isCurrentBinaryName(sourceFile, binaryName, topLevelName)) {
+                        continue;
+                    }
+                    classes.add(
+                            Class.forName(
+                                    binaryName.replace('/', '.'),
+                                    false,
+                                    Thread.currentThread().getContextClassLoader()));
                 }
-                classes.add(
-                        Class.forName(
-                                binaryName.replace('/', '.'),
-                                false,
-                                Thread.currentThread().getContextClassLoader()));
             }
         }
         return classes;
@@ -1573,6 +1630,20 @@ class Example { String description = "java.sql.Connection"; }
             }
         }
         return sources;
+    }
+
+    public interface MisleadingObservedExpansionApi {
+        List<String> expressions();
+
+        List<Object> records();
+
+        List<Object> fields();
+
+        byte[] body();
+
+        byte[] projectionUtf16Le();
+
+        byte[] utf16Le();
     }
 
     public interface UnboundedApiFixture {

@@ -317,9 +317,9 @@ public final class JdbcRasterBatch implements AutoCloseable {
         bytes.value(value.dataHoraRealChegada());
         index = RasterJdbcValue.time(stops, index, value.dataHoraRealSaida());
         bytes.value(value.dataHoraRealSaida());
-        index = RasterJdbcValue.decimal(stops, index, value.latitude());
+        index = RasterJdbcValue.coordinateLegacyStorage(stops, index, value.latitude());
         bytes.value(value.latitude());
-        index = RasterJdbcValue.decimal(stops, index, value.longitude());
+        index = RasterJdbcValue.coordinateLegacyStorage(stops, index, value.longitude());
         bytes.value(value.longitude());
         index = RasterJdbcValue.text(stops, index, value.dentroPrazo());
         bytes.value(value.dentroPrazo());

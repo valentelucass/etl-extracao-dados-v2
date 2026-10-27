@@ -15,23 +15,57 @@ final class DataExportHttpBodyHandler implements HttpResponse.BodyHandler<byte[]
 
     private final int templateId;
     private final long maxResponseBytes;
+    private final boolean observedRaw;
+    private final DataExportRawBodyCallback observedCallback;
 
     DataExportHttpBodyHandler(final int templateId, final long maxResponseBytes) {
+        this(templateId, maxResponseBytes, false);
+    }
+
+    DataExportHttpBodyHandler(
+            final int templateId, final long maxResponseBytes, final boolean observedRaw) {
+        this(templateId, maxResponseBytes, observedRaw, null);
+    }
+
+    /** Closed observed route: status is recorded before ANY header/body validation can fail. */
+    DataExportHttpBodyHandler(
+            final int templateId,
+            final long maxResponseBytes,
+            final DataExportRawBodyCallback observedCallback) {
+        this(templateId, maxResponseBytes, true, Objects.requireNonNull(observedCallback));
+    }
+
+    private DataExportHttpBodyHandler(
+            final int templateId,
+            final long maxResponseBytes,
+            final boolean observedRaw,
+            final DataExportRawBodyCallback observedCallback) {
         this.templateId = templateId;
         this.maxResponseBytes = maxResponseBytes;
+        this.observedRaw = observedRaw;
+        this.observedCallback = observedCallback;
     }
 
     @Override
     public HttpResponse.BodySubscriber<byte[]> apply(final HttpResponse.ResponseInfo responseInfo) {
         Objects.requireNonNull(responseInfo, "Os metadados da resposta são obrigatórios.");
-        validateContentLength(responseInfo.headers());
+        if (observedCallback != null && responseInfo.statusCode() == 429) {
+            observedCallback.stopSource();
+        }
+        final Long declaredLength = validateContentLength(responseInfo.headers());
+        if (observedRaw && responseInfo.statusCode() == 200) {
+            validateObservedHeaders(responseInfo.headers());
+        }
         final boolean retainBody =
-                DataExportHttpExecutor.isSuccess(responseInfo.statusCode())
-                        && responseInfo.statusCode() != 204;
-        return new BoundedBodySubscriber(templateId, maxResponseBytes, retainBody);
+                observedRaw
+                        ? responseInfo.statusCode() == 200
+                        : DataExportHttpExecutor.isSuccess(responseInfo.statusCode())
+                                && responseInfo.statusCode() != 204;
+        return new BoundedBodySubscriber(
+                templateId, maxResponseBytes, retainBody, observedRaw ? declaredLength : null);
     }
 
-    private void validateContentLength(final HttpHeaders headers) {
+    private Long validateContentLength(final HttpHeaders headers) {
         Long declaredLength = null;
         for (final String headerValue : headers.allValues("Content-Length")) {
             for (final String candidate : headerValue.split(",", -1)) {
@@ -57,6 +91,24 @@ final class DataExportHttpBodyHandler implements HttpResponse.BodyHandler<byte[]
                 }
             }
         }
+        return declaredLength;
+    }
+
+    private static void validateObservedHeaders(final HttpHeaders headers) {
+        final List<String> types = headers.allValues("Content-Type");
+        if (types.size() != 1
+                || !types.get(0)
+                        .strip()
+                        .matches(
+                                "(?i)application/json(?:\\s*;\\s*charset\\s*=\\s*(?:utf-8|\"utf-8\"))?")) {
+            throw new IllegalStateException("OBS_CAPTURE_CONTENT_TYPE");
+        }
+        final List<String> encodings = headers.allValues("Content-Encoding");
+        if (!encodings.isEmpty()
+                && (encodings.size() != 1
+                        || !encodings.get(0).strip().equalsIgnoreCase("identity"))) {
+            throw new IllegalStateException("OBS_CAPTURE_CONTENT_ENCODING");
+        }
     }
 
     private IllegalStateException invalidContentLength() {
@@ -71,16 +123,21 @@ final class DataExportHttpBodyHandler implements HttpResponse.BodyHandler<byte[]
         private final int templateId;
         private final long maxResponseBytes;
         private final boolean retainBody;
+        private final Long expectedLength;
         private final CompletableFuture<byte[]> body = new CompletableFuture<>();
         private final ByteArrayOutputStream output = new ByteArrayOutputStream();
         private Flow.Subscription subscription;
         private long receivedBytes;
 
         private BoundedBodySubscriber(
-                final int templateId, final long maxResponseBytes, final boolean retainBody) {
+                final int templateId,
+                final long maxResponseBytes,
+                final boolean retainBody,
+                final Long expectedLength) {
             this.templateId = templateId;
             this.maxResponseBytes = maxResponseBytes;
             this.retainBody = retainBody;
+            this.expectedLength = expectedLength;
         }
 
         @Override
@@ -122,6 +179,11 @@ final class DataExportHttpBodyHandler implements HttpResponse.BodyHandler<byte[]
 
         @Override
         public void onComplete() {
+            if (expectedLength != null && receivedBytes != expectedLength.longValue()) {
+                body.completeExceptionally(
+                        new IllegalStateException("OBS_CAPTURE_INCOMPLETE_BODY"));
+                return;
+            }
             body.complete(output.toByteArray());
         }
 

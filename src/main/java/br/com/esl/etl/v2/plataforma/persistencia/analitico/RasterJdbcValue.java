@@ -45,6 +45,18 @@ final class RasterJdbcValue {
         return next + 1;
     }
 
+    /** Fail closed until the coordinate-specific wider storage contract is separately adopted. */
+    static int coordinateLegacyStorage(
+            final PreparedStatement statement,
+            final int index,
+            final ExpansionValue<BigDecimal> value)
+            throws SQLException {
+        if (value.value() != null && value.value().scale() > 8) {
+            throw new IllegalArgumentException("RAS_COORDINATE_SCALE16_STORAGE_NOT_ADOPTED");
+        }
+        return decimal(statement, index, value);
+    }
+
     static int time(
             final PreparedStatement statement,
             final int index,

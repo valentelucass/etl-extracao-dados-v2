@@ -134,7 +134,9 @@ foreach ($entry in @(
     'INLINE_SECRET_ASSIGNMENT|src/test/java/br/com/esl/etl/v2/plataforma/configuracao/DataExportPropertiesTest.java|payload-value',
     'HARDCODED_SECRET_ARGUMENT|src/test/java/br/com/esl/etl/v2/plataforma/configuracao/ShadowStoragePropertiesTest.java|runtime-password-secret',
     'HARDCODED_SECRET_ARGUMENT|src/test/java/br/com/esl/etl/v2/plataforma/configuracao/ShadowStoragePropertiesTest.java|runtime-password',
-    'BEARER_LITERAL|src/test/java/br/com/esl/etl/v2/plataforma/fonte/dataexport/HttpDataExportTemplateInfoGatewayTest.java|test-token'
+    'BEARER_LITERAL|src/test/java/br/com/esl/etl/v2/plataforma/fonte/dataexport/HttpDataExportTemplateInfoGatewayTest.java|test-token',
+    # P3-RAW-NO-LEAK-001: fixed fake text for defensive-copy/toString refusal; exact rule/path/value only.
+    'INLINE_SECRET_ASSIGNMENT|src/test/java/br/com/esl/etl/v2/plataforma/fonte/dataexport/ObservedExpansionPageProjectorTest.java|OFFLINE_SENSITIVE_TEXT'
 )) {
     [void] $allowedSyntheticFindings.Add($entry)
 }

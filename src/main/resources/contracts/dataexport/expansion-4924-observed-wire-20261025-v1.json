@@ -1,0 +1,996 @@
+{
+  "formatVersion": "observed-expansion-wire-v1",
+  "schemaRelease": "observed-expansion-wire-4924-20261025-v1",
+  "templateId": 4924,
+  "sourceKind": "DATA_EXPORT",
+  "recordRoot": "$",
+  "rootCardinality": "ARRAY",
+  "metadata": [
+    {
+      "kind": "DATA_FIELD",
+      "path": "comments",
+      "declaredType": "UNDECLARED"
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "corporation_sequence_number",
+      "declaredType": "UNDECLARED"
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "courtesy",
+      "declaredType": "UNDECLARED"
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "emission_type",
+      "declaredType": "UNDECLARED"
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "finished_at",
+      "declaredType": "UNDECLARED"
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "fit_ant_ant_name",
+      "declaredType": "UNDECLARED"
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "fit_ant_discount_value",
+      "declaredType": "UNDECLARED"
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "fit_ant_document",
+      "declaredType": "UNDECLARED"
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "fit_ant_ils_atn_transaction_date",
+      "declaredType": "UNDECLARED"
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "fit_ant_ils_due_date",
+      "declaredType": "UNDECLARED"
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "fit_ant_ils_original_due_date",
+      "declaredType": "UNDECLARED"
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "fit_ant_interest_value",
+      "declaredType": "UNDECLARED"
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "fit_ant_issue_date",
+      "declaredType": "UNDECLARED"
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "fit_ant_tat_account_number",
+      "declaredType": "UNDECLARED"
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "fit_ant_tat_agency_number",
+      "declaredType": "UNDECLARED"
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "fit_ant_tat_bnk_name",
+      "declaredType": "UNDECLARED"
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "fit_ant_tat_bro_description",
+      "declaredType": "UNDECLARED"
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "fit_ant_tat_custom_instruction",
+      "declaredType": "UNDECLARED"
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "fit_ant_value",
+      "declaredType": "UNDECLARED"
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "fit_crn_psn_nickname",
+      "declaredType": "UNDECLARED"
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "fit_d_t_created_at",
+      "declaredType": "UNDECLARED"
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "fit_diy_sae_name",
+      "declaredType": "UNDECLARED"
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "fit_dyn_drt_nickname",
+      "declaredType": "UNDECLARED"
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "fit_fhe_cte_issued_at",
+      "declaredType": "UNDECLARED"
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "fit_fhe_cte_key",
+      "declaredType": "UNDECLARED"
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "fit_fhe_cte_number",
+      "declaredType": "UNDECLARED"
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "fit_fhe_cte_status",
+      "declaredType": "UNDECLARED"
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "fit_fhe_cte_status_result",
+      "declaredType": "UNDECLARED"
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "fit_fsn_name",
+      "declaredType": "UNDECLARED"
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "fit_fte_foe_ore_description",
+      "declaredType": "UNDECLARED"
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "fit_fte_has_delivery_receipt",
+      "declaredType": "UNDECLARED"
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "fit_fte_invoices_order_number",
+      "declaredType": "UNDECLARED"
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "fit_nse_number",
+      "declaredType": "UNDECLARED"
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "fit_pyr_cor_billing_cycle",
+      "declaredType": "UNDECLARED"
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "fit_pyr_cor_billing_due_in_days",
+      "declaredType": "UNDECLARED"
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "fit_pyr_document",
+      "declaredType": "UNDECLARED"
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "fit_pyr_name",
+      "declaredType": "UNDECLARED"
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "fit_rpt_document",
+      "declaredType": "UNDECLARED"
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "fit_rpt_name",
+      "declaredType": "UNDECLARED"
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "fit_sdr_document",
+      "declaredType": "UNDECLARED"
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "fit_sdr_name",
+      "declaredType": "UNDECLARED"
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "fit_sps_slr_psn_name",
+      "declaredType": "UNDECLARED"
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "id",
+      "declaredType": "UNDECLARED"
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "invoices_mapping",
+      "declaredType": "UNDECLARED"
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "nfse_number",
+      "declaredType": "UNDECLARED"
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "payment_type",
+      "declaredType": "UNDECLARED"
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "reference_number",
+      "declaredType": "UNDECLARED"
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "service_at",
+      "declaredType": "UNDECLARED"
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "service_type",
+      "declaredType": "UNDECLARED"
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "status",
+      "declaredType": "UNDECLARED"
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "total",
+      "declaredType": "UNDECLARED"
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "type",
+      "declaredType": "UNDECLARED"
+    },
+    {
+      "kind": "DATA_FILTER",
+      "path": "fit_accounting_credit.customer_id",
+      "declaredType": "OTHER",
+      "declaredTypeFingerprint": {
+        "version": "declared-type-v1",
+        "sha256": "ed823c4c534bfa17a30399fcbfb2e7defe7ebbfd47b746511c769d4467f510f7"
+      }
+    },
+    {
+      "kind": "DATA_FILTER",
+      "path": "fit_accounting_credit.due_date",
+      "declaredType": "DATE",
+      "declaredTypeFingerprint": {
+        "version": "declared-type-v1",
+        "sha256": "179b00376b5b12fe6a617c98e9c90d90fb5cfdf75f96ee4909fff9d8028b63a1"
+      }
+    },
+    {
+      "kind": "DATA_FILTER",
+      "path": "fit_accounting_credit.issue_date",
+      "declaredType": "DATE",
+      "declaredTypeFingerprint": {
+        "version": "declared-type-v1",
+        "sha256": "179b00376b5b12fe6a617c98e9c90d90fb5cfdf75f96ee4909fff9d8028b63a1"
+      }
+    },
+    {
+      "kind": "DATA_FILTER",
+      "path": "fit_accounting_credit.paid",
+      "declaredType": "OTHER",
+      "declaredTypeFingerprint": {
+        "version": "declared-type-v1",
+        "sha256": "ed823c4c534bfa17a30399fcbfb2e7defe7ebbfd47b746511c769d4467f510f7"
+      }
+    },
+    {
+      "kind": "DATA_FILTER",
+      "path": "fit_freight_cte.corporation_sequence_number",
+      "declaredType": "NUMBER",
+      "declaredTypeFingerprint": {
+        "version": "declared-type-v1",
+        "sha256": "3f8e673c0bf8f3bdbe07d7fcbe979e7998b294e2b9b29723476e9cace7c0f3d4"
+      }
+    },
+    {
+      "kind": "DATA_FILTER",
+      "path": "freights.corporation_sequence_number",
+      "declaredType": "NUMBER",
+      "declaredTypeFingerprint": {
+        "version": "declared-type-v1",
+        "sha256": "3f8e673c0bf8f3bdbe07d7fcbe979e7998b294e2b9b29723476e9cace7c0f3d4"
+      }
+    },
+    {
+      "kind": "DATA_FILTER",
+      "path": "freights.courtesy",
+      "declaredType": "OTHER",
+      "declaredTypeFingerprint": {
+        "version": "declared-type-v1",
+        "sha256": "ed823c4c534bfa17a30399fcbfb2e7defe7ebbfd47b746511c769d4467f510f7"
+      }
+    },
+    {
+      "kind": "DATA_FILTER",
+      "path": "freights.emission_type",
+      "declaredType": "OTHER",
+      "declaredTypeFingerprint": {
+        "version": "declared-type-v1",
+        "sha256": "ed823c4c534bfa17a30399fcbfb2e7defe7ebbfd47b746511c769d4467f510f7"
+      }
+    },
+    {
+      "kind": "DATA_FILTER",
+      "path": "freights.payer_id",
+      "declaredType": "OTHER",
+      "declaredTypeFingerprint": {
+        "version": "declared-type-v1",
+        "sha256": "ed823c4c534bfa17a30399fcbfb2e7defe7ebbfd47b746511c769d4467f510f7"
+      }
+    },
+    {
+      "kind": "DATA_FILTER",
+      "path": "freights.service_at",
+      "declaredType": "DATE",
+      "declaredTypeFingerprint": {
+        "version": "declared-type-v1",
+        "sha256": "179b00376b5b12fe6a617c98e9c90d90fb5cfdf75f96ee4909fff9d8028b63a1"
+      }
+    },
+    {
+      "kind": "DATA_FILTER",
+      "path": "freights.status",
+      "declaredType": "OTHER",
+      "declaredTypeFingerprint": {
+        "version": "declared-type-v1",
+        "sha256": "ed823c4c534bfa17a30399fcbfb2e7defe7ebbfd47b746511c769d4467f510f7"
+      }
+    },
+    {
+      "kind": "DATA_FILTER",
+      "path": "freights.type",
+      "declaredType": "OTHER",
+      "declaredTypeFingerprint": {
+        "version": "declared-type-v1",
+        "sha256": "ed823c4c534bfa17a30399fcbfb2e7defe7ebbfd47b746511c769d4467f510f7"
+      }
+    },
+    {
+      "kind": "DATA_FILTER",
+      "path": "scopes.by_updated_at",
+      "declaredType": "DATE_TIME",
+      "declaredTypeFingerprint": {
+        "version": "declared-type-v1",
+        "sha256": "37beb44f6106b7fcafaa2955c67545056b9a06bf0ab6da6b367dc9eacad07050"
+      }
+    },
+    {
+      "kind": "DATA_FILTER",
+      "path": "scopes.from_accounting_credit_status",
+      "declaredType": "OTHER",
+      "declaredTypeFingerprint": {
+        "version": "declared-type-v1",
+        "sha256": "ed823c4c534bfa17a30399fcbfb2e7defe7ebbfd47b746511c769d4467f510f7"
+      }
+    },
+    {
+      "kind": "DATA_FILTER",
+      "path": "scopes.from_controller",
+      "declaredType": "OTHER",
+      "declaredTypeFingerprint": {
+        "version": "declared-type-v1",
+        "sha256": "ed823c4c534bfa17a30399fcbfb2e7defe7ebbfd47b746511c769d4467f510f7"
+      }
+    },
+    {
+      "kind": "DATA_FILTER",
+      "path": "scopes.from_seller",
+      "declaredType": "OTHER",
+      "declaredTypeFingerprint": {
+        "version": "declared-type-v1",
+        "sha256": "ed823c4c534bfa17a30399fcbfb2e7defe7ebbfd47b746511c769d4467f510f7"
+      }
+    },
+    {
+      "kind": "DATA_FILTER",
+      "path": "scopes.substituted",
+      "declaredType": "OTHER",
+      "declaredTypeFingerprint": {
+        "version": "declared-type-v1",
+        "sha256": "ed823c4c534bfa17a30399fcbfb2e7defe7ebbfd47b746511c769d4467f510f7"
+      }
+    },
+    {
+      "kind": "DATA_FILTER",
+      "path": "scopes.with_delivery_receipt",
+      "declaredType": "OTHER",
+      "declaredTypeFingerprint": {
+        "version": "declared-type-v1",
+        "sha256": "ed823c4c534bfa17a30399fcbfb2e7defe7ebbfd47b746511c769d4467f510f7"
+      }
+    }
+  ],
+  "fields": [
+    {
+      "path": "comments",
+      "required": true,
+      "wireTypes": [
+        "STRING"
+      ],
+      "unknownNonNull": false,
+      "arrayItemTypes": [],
+      "historicalGenericNumber": false
+    },
+    {
+      "path": "corporation_sequence_number",
+      "required": true,
+      "wireTypes": [
+        "INTEGER",
+        "NUMBER"
+      ],
+      "unknownNonNull": false,
+      "arrayItemTypes": [],
+      "historicalGenericNumber": true
+    },
+    {
+      "path": "courtesy",
+      "required": true,
+      "wireTypes": [
+        "BOOLEAN"
+      ],
+      "unknownNonNull": false,
+      "arrayItemTypes": [],
+      "historicalGenericNumber": false
+    },
+    {
+      "path": "emission_type",
+      "required": true,
+      "wireTypes": [
+        "STRING"
+      ],
+      "unknownNonNull": false,
+      "arrayItemTypes": [],
+      "historicalGenericNumber": false
+    },
+    {
+      "path": "finished_at",
+      "required": true,
+      "wireTypes": [
+        "NULL",
+        "STRING"
+      ],
+      "unknownNonNull": false,
+      "arrayItemTypes": [],
+      "historicalGenericNumber": false
+    },
+    {
+      "path": "fit_ant_ant_name",
+      "required": true,
+      "wireTypes": [
+        "NULL",
+        "STRING"
+      ],
+      "unknownNonNull": false,
+      "arrayItemTypes": [],
+      "historicalGenericNumber": false
+    },
+    {
+      "path": "fit_ant_discount_value",
+      "required": true,
+      "wireTypes": [
+        "NULL",
+        "STRING"
+      ],
+      "unknownNonNull": false,
+      "arrayItemTypes": [],
+      "historicalGenericNumber": false
+    },
+    {
+      "path": "fit_ant_document",
+      "required": true,
+      "wireTypes": [
+        "NULL",
+        "STRING"
+      ],
+      "unknownNonNull": false,
+      "arrayItemTypes": [],
+      "historicalGenericNumber": false
+    },
+    {
+      "path": "fit_ant_ils_atn_transaction_date",
+      "required": true,
+      "wireTypes": [
+        "NULL"
+      ],
+      "unknownNonNull": true,
+      "arrayItemTypes": [],
+      "historicalGenericNumber": false
+    },
+    {
+      "path": "fit_ant_ils_due_date",
+      "required": true,
+      "wireTypes": [
+        "NULL",
+        "STRING"
+      ],
+      "unknownNonNull": false,
+      "arrayItemTypes": [],
+      "historicalGenericNumber": false
+    },
+    {
+      "path": "fit_ant_ils_original_due_date",
+      "required": true,
+      "wireTypes": [
+        "NULL",
+        "STRING"
+      ],
+      "unknownNonNull": false,
+      "arrayItemTypes": [],
+      "historicalGenericNumber": false
+    },
+    {
+      "path": "fit_ant_interest_value",
+      "required": true,
+      "wireTypes": [
+        "NULL",
+        "STRING"
+      ],
+      "unknownNonNull": false,
+      "arrayItemTypes": [],
+      "historicalGenericNumber": false
+    },
+    {
+      "path": "fit_ant_issue_date",
+      "required": true,
+      "wireTypes": [
+        "NULL",
+        "STRING"
+      ],
+      "unknownNonNull": false,
+      "arrayItemTypes": [],
+      "historicalGenericNumber": false
+    },
+    {
+      "path": "fit_ant_tat_account_number",
+      "required": true,
+      "wireTypes": [
+        "NULL",
+        "STRING"
+      ],
+      "unknownNonNull": false,
+      "arrayItemTypes": [],
+      "historicalGenericNumber": false
+    },
+    {
+      "path": "fit_ant_tat_agency_number",
+      "required": true,
+      "wireTypes": [
+        "NULL",
+        "STRING"
+      ],
+      "unknownNonNull": false,
+      "arrayItemTypes": [],
+      "historicalGenericNumber": false
+    },
+    {
+      "path": "fit_ant_tat_bnk_name",
+      "required": true,
+      "wireTypes": [
+        "NULL",
+        "STRING"
+      ],
+      "unknownNonNull": false,
+      "arrayItemTypes": [],
+      "historicalGenericNumber": false
+    },
+    {
+      "path": "fit_ant_tat_bro_description",
+      "required": true,
+      "wireTypes": [
+        "NULL",
+        "STRING"
+      ],
+      "unknownNonNull": false,
+      "arrayItemTypes": [],
+      "historicalGenericNumber": false
+    },
+    {
+      "path": "fit_ant_tat_custom_instruction",
+      "required": true,
+      "wireTypes": [
+        "NULL",
+        "STRING"
+      ],
+      "unknownNonNull": false,
+      "arrayItemTypes": [],
+      "historicalGenericNumber": false
+    },
+    {
+      "path": "fit_ant_value",
+      "required": true,
+      "wireTypes": [
+        "NULL",
+        "STRING"
+      ],
+      "unknownNonNull": false,
+      "arrayItemTypes": [],
+      "historicalGenericNumber": false
+    },
+    {
+      "path": "fit_crn_psn_nickname",
+      "required": true,
+      "wireTypes": [
+        "STRING"
+      ],
+      "unknownNonNull": false,
+      "arrayItemTypes": [],
+      "historicalGenericNumber": false
+    },
+    {
+      "path": "fit_d_t_created_at",
+      "required": true,
+      "wireTypes": [
+        "NULL",
+        "STRING"
+      ],
+      "unknownNonNull": false,
+      "arrayItemTypes": [],
+      "historicalGenericNumber": false
+    },
+    {
+      "path": "fit_diy_sae_name",
+      "required": true,
+      "wireTypes": [
+        "STRING"
+      ],
+      "unknownNonNull": false,
+      "arrayItemTypes": [],
+      "historicalGenericNumber": false
+    },
+    {
+      "path": "fit_dyn_drt_nickname",
+      "required": true,
+      "wireTypes": [
+        "STRING"
+      ],
+      "unknownNonNull": false,
+      "arrayItemTypes": [],
+      "historicalGenericNumber": false
+    },
+    {
+      "path": "fit_fhe_cte_issued_at",
+      "required": true,
+      "wireTypes": [
+        "NULL",
+        "STRING"
+      ],
+      "unknownNonNull": false,
+      "arrayItemTypes": [],
+      "historicalGenericNumber": false
+    },
+    {
+      "path": "fit_fhe_cte_key",
+      "required": true,
+      "wireTypes": [
+        "NULL",
+        "STRING"
+      ],
+      "unknownNonNull": false,
+      "arrayItemTypes": [],
+      "historicalGenericNumber": false
+    },
+    {
+      "path": "fit_fhe_cte_number",
+      "required": true,
+      "wireTypes": [
+        "INTEGER",
+        "NULL",
+        "NUMBER"
+      ],
+      "unknownNonNull": false,
+      "arrayItemTypes": [],
+      "historicalGenericNumber": true
+    },
+    {
+      "path": "fit_fhe_cte_status",
+      "required": true,
+      "wireTypes": [
+        "NULL",
+        "STRING"
+      ],
+      "unknownNonNull": false,
+      "arrayItemTypes": [],
+      "historicalGenericNumber": false
+    },
+    {
+      "path": "fit_fhe_cte_status_result",
+      "required": true,
+      "wireTypes": [
+        "NULL",
+        "STRING"
+      ],
+      "unknownNonNull": false,
+      "arrayItemTypes": [],
+      "historicalGenericNumber": false
+    },
+    {
+      "path": "fit_fsn_name",
+      "required": true,
+      "wireTypes": [
+        "STRING"
+      ],
+      "unknownNonNull": false,
+      "arrayItemTypes": [],
+      "historicalGenericNumber": false
+    },
+    {
+      "path": "fit_fte_foe_ore_description",
+      "required": true,
+      "wireTypes": [
+        "NULL",
+        "STRING"
+      ],
+      "unknownNonNull": false,
+      "arrayItemTypes": [],
+      "historicalGenericNumber": false
+    },
+    {
+      "path": "fit_fte_has_delivery_receipt",
+      "required": true,
+      "wireTypes": [
+        "BOOLEAN"
+      ],
+      "unknownNonNull": false,
+      "arrayItemTypes": [],
+      "historicalGenericNumber": false
+    },
+    {
+      "path": "fit_fte_invoices_order_number",
+      "required": true,
+      "wireTypes": [
+        "ARRAY"
+      ],
+      "unknownNonNull": false,
+      "arrayItemTypes": [
+        "STRING"
+      ],
+      "historicalGenericNumber": false
+    },
+    {
+      "path": "fit_nse_number",
+      "required": true,
+      "wireTypes": [
+        "NULL"
+      ],
+      "unknownNonNull": true,
+      "arrayItemTypes": [],
+      "historicalGenericNumber": false
+    },
+    {
+      "path": "fit_pyr_cor_billing_cycle",
+      "required": true,
+      "wireTypes": [
+        "STRING"
+      ],
+      "unknownNonNull": false,
+      "arrayItemTypes": [],
+      "historicalGenericNumber": false
+    },
+    {
+      "path": "fit_pyr_cor_billing_due_in_days",
+      "required": true,
+      "wireTypes": [
+        "INTEGER",
+        "NUMBER"
+      ],
+      "unknownNonNull": false,
+      "arrayItemTypes": [],
+      "historicalGenericNumber": true
+    },
+    {
+      "path": "fit_pyr_document",
+      "required": true,
+      "wireTypes": [
+        "STRING"
+      ],
+      "unknownNonNull": false,
+      "arrayItemTypes": [],
+      "historicalGenericNumber": false
+    },
+    {
+      "path": "fit_pyr_name",
+      "required": true,
+      "wireTypes": [
+        "STRING"
+      ],
+      "unknownNonNull": false,
+      "arrayItemTypes": [],
+      "historicalGenericNumber": false
+    },
+    {
+      "path": "fit_rpt_document",
+      "required": true,
+      "wireTypes": [
+        "STRING"
+      ],
+      "unknownNonNull": false,
+      "arrayItemTypes": [],
+      "historicalGenericNumber": false
+    },
+    {
+      "path": "fit_rpt_name",
+      "required": true,
+      "wireTypes": [
+        "STRING"
+      ],
+      "unknownNonNull": false,
+      "arrayItemTypes": [],
+      "historicalGenericNumber": false
+    },
+    {
+      "path": "fit_sdr_document",
+      "required": true,
+      "wireTypes": [
+        "STRING"
+      ],
+      "unknownNonNull": false,
+      "arrayItemTypes": [],
+      "historicalGenericNumber": false
+    },
+    {
+      "path": "fit_sdr_name",
+      "required": true,
+      "wireTypes": [
+        "STRING"
+      ],
+      "unknownNonNull": false,
+      "arrayItemTypes": [],
+      "historicalGenericNumber": false
+    },
+    {
+      "path": "fit_sps_slr_psn_name",
+      "required": true,
+      "wireTypes": [
+        "STRING"
+      ],
+      "unknownNonNull": false,
+      "arrayItemTypes": [],
+      "historicalGenericNumber": false
+    },
+    {
+      "path": "id",
+      "required": true,
+      "wireTypes": [
+        "INTEGER",
+        "NUMBER"
+      ],
+      "unknownNonNull": false,
+      "arrayItemTypes": [],
+      "historicalGenericNumber": true
+    },
+    {
+      "path": "invoices_mapping",
+      "required": true,
+      "wireTypes": [
+        "ARRAY"
+      ],
+      "unknownNonNull": false,
+      "arrayItemTypes": [
+        "STRING"
+      ],
+      "historicalGenericNumber": false
+    },
+    {
+      "path": "nfse_number",
+      "required": true,
+      "wireTypes": [
+        "NULL",
+        "STRING"
+      ],
+      "unknownNonNull": false,
+      "arrayItemTypes": [],
+      "historicalGenericNumber": false
+    },
+    {
+      "path": "payment_type",
+      "required": true,
+      "wireTypes": [
+        "STRING"
+      ],
+      "unknownNonNull": false,
+      "arrayItemTypes": [],
+      "historicalGenericNumber": false
+    },
+    {
+      "path": "reference_number",
+      "required": true,
+      "wireTypes": [
+        "STRING"
+      ],
+      "unknownNonNull": false,
+      "arrayItemTypes": [],
+      "historicalGenericNumber": false
+    },
+    {
+      "path": "service_at",
+      "required": true,
+      "wireTypes": [
+        "STRING"
+      ],
+      "unknownNonNull": false,
+      "arrayItemTypes": [],
+      "historicalGenericNumber": false
+    },
+    {
+      "path": "service_type",
+      "required": true,
+      "wireTypes": [
+        "STRING"
+      ],
+      "unknownNonNull": false,
+      "arrayItemTypes": [],
+      "historicalGenericNumber": false
+    },
+    {
+      "path": "status",
+      "required": true,
+      "wireTypes": [
+        "STRING"
+      ],
+      "unknownNonNull": false,
+      "arrayItemTypes": [],
+      "historicalGenericNumber": false
+    },
+    {
+      "path": "total",
+      "required": true,
+      "wireTypes": [
+        "STRING"
+      ],
+      "unknownNonNull": false,
+      "arrayItemTypes": [],
+      "historicalGenericNumber": false
+    },
+    {
+      "path": "type",
+      "required": true,
+      "wireTypes": [
+        "STRING"
+      ],
+      "unknownNonNull": false,
+      "arrayItemTypes": [],
+      "historicalGenericNumber": false
+    }
+  ],
+  "evidence": {
+    "currentInfoAndArrayItemsSourceSha256": "BB486083CC043C5623C65609D0081DE694A3C3DFF5D2087E3EED52DB9E18EC86",
+    "rootEnvelopeSourceSha256": "94A1E84F979C00561BC6222645F662A514B4E513EEE2A1D74F6041DFE4BF13D6",
+    "historicalRootTypesSourceSha256": "6ED7EB54A7B4147CF3F0276086FE1D0CEA6B92BB60046AE8C50B216314407DD1",
+    "historicalRowsAcrossTwoPasses": 74,
+    "observedMaximumArrayItems": {
+      "/fit_fte_invoices_order_number": 1,
+      "/invoices_mapping": 5
+    },
+    "maximumIsObservationNotContract": true,
+    "noSourceIdentityOrSnapshotClaim": true
+  }
+}

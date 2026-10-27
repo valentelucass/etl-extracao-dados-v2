@@ -138,6 +138,15 @@ public final class Main {
                 standardOut.println("ETL Data Export V2 0.1.0-SNAPSHOT");
                 yield 0;
             }
+            case "observed-staging" ->
+                    ObservedStagingCommand.run(
+                            args,
+                            standardOut,
+                            standardError,
+                            dependencies.configurationFactory(),
+                            dependencies.systemProperties(),
+                            dependencies.environment(),
+                            dependencies.clock());
             case "config" -> runConfigValidation(args, standardOut, standardError, dependencies);
             case "local-profile" ->
                     LocalProfileCharacterizationMain.run(
@@ -613,6 +622,13 @@ public final class Main {
                 "  dry-run --config <arquivo>           Executa somente o preflight seguro.");
         standardOut.println(
                 "  plan --config <arquivo>              Planeja offline, sem criar conexões.");
+        standardOut.println("  observed-staging plan --config <arquivo> --request <json>");
+        standardOut.println(
+                "                                      Plano observado P3 sem HTTP/SQL.");
+        standardOut.println(
+                "  observed-staging rollback-trial --config <arquivo> --request <json>");
+        standardOut.println(
+                "                                      Ensaio rollback via Root externo; fechado sem capacidade.");
         standardOut.println("  plan|run --config <arquivo> --temporal <json>");
         standardOut.println(
                 "                                      plan: preview; run: persiste janelas com"

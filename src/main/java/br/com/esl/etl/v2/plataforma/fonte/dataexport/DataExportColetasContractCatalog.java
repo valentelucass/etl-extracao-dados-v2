@@ -70,16 +70,16 @@ public final class DataExportColetasContractCatalog {
                             types(field)));
         }
         for (final String filter : List.of("finish_date", "service_date", "request_date")) {
-            metadata.add(filter(filter, "date"));
+            metadata.add(filter("picks." + filter, "date"));
         }
-        metadata.add(filter("corporation_id", "select"));
-        metadata.add(filter("status", "select"));
+        metadata.add(filter("picks.corporation_id", "select"));
+        metadata.add(filter("picks.status", "select"));
         // Metadata name and request search[scopes][by_updated_at] are different contracts.
-        metadata.add(filter("by_updated_at", "datetime"));
+        metadata.add(filter("scopes.by_updated_at", "datetime"));
         return SourceContractRelease.create(
                 ContractSourceKind.DATA_EXPORT,
                 DataExportContractAdapter.documentReference(DataExportTemplate.COLETAS),
-                "2026-09-10.b62-coletas-scalar-capture.1",
+                "2026-10-26.p2-coletas-info-qualified.v1",
                 new ContractMetadata(metadata, Optional.empty()),
                 new ContractResponse(
                         "$",

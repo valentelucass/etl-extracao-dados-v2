@@ -47,7 +47,7 @@ public final class RuntimeBootstrapTestFixture {
                         .parse(
                                 read(
                                         currentColetas
-                                                ? "/contracts/bloco62/6908-info.sanitized.json"
+                                                ? currentColetasInfoResource()
                                                 : "/contracts/"
                                                         + template.templateId()
                                                         + "-info.synthetic.json"));
@@ -91,6 +91,16 @@ public final class RuntimeBootstrapTestFixture {
                 },
                 ignored -> info,
                 observation);
+    }
+
+    private static String currentColetasInfoResource() {
+        return switch (DataExportColetasContractCatalog.release().contractVersion()) {
+            case "2026-09-10.b62-coletas-scalar-capture.1" ->
+                    "/contracts/bloco62/6908-info.sanitized.json";
+            case "2026-10-26.p2-coletas-info-qualified.v1" ->
+                    "/contracts/bloco62/6908-info.p2-qualified.synthetic.json";
+            default -> throw new IllegalStateException("COLETAS_FIXTURE_RELEASE_UNSUPPORTED");
+        };
     }
 
     private static com.fasterxml.jackson.databind.JsonNode read(final String name) {

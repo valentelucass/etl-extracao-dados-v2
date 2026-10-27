@@ -25,7 +25,11 @@ public final class DataExportHttpGatewayFactory {
     private final HttpClient httpClient;
     private final ObjectMapper objectMapper;
     private final DataExportCircuitBreakerRegistry circuitRegistry;
+    private final Clock observedClock;
     private final Optional<ImmutableFingerprint> runtimeConfigurationFingerprint;
+    private final Optional<DataExportSourceConfiguration> materializedConfiguration;
+    private final java.util.concurrent.atomic.AtomicBoolean observedSourceStopped =
+            new java.util.concurrent.atomic.AtomicBoolean();
 
     public DataExportHttpGatewayFactory(
             final DataExportProperties properties,
@@ -57,7 +61,9 @@ public final class DataExportHttpGatewayFactory {
                 new ObjectMapper(),
                 new DataExportCircuitBreakerRegistry(
                         DataExportCircuitBreakerPolicy.from(source.resiliencePolicy()), clock),
-                Optional.of(source.runtimeConfigurationFingerprint()));
+                Optional.of(source.runtimeConfigurationFingerprint()),
+                Optional.of(source.configuration()),
+                clock);
     }
 
     DataExportHttpGatewayFactory(
@@ -74,6 +80,40 @@ public final class DataExportHttpGatewayFactory {
             final ObjectMapper objectMapper,
             final DataExportCircuitBreakerRegistry circuitRegistry,
             final Optional<ImmutableFingerprint> runtimeConfigurationFingerprint) {
+        this(
+                properties,
+                httpClient,
+                objectMapper,
+                circuitRegistry,
+                runtimeConfigurationFingerprint,
+                Optional.empty());
+    }
+
+    private DataExportHttpGatewayFactory(
+            final DataExportProperties properties,
+            final HttpClient httpClient,
+            final ObjectMapper objectMapper,
+            final DataExportCircuitBreakerRegistry circuitRegistry,
+            final Optional<ImmutableFingerprint> runtimeConfigurationFingerprint,
+            final Optional<DataExportSourceConfiguration> materializedConfiguration) {
+        this(
+                properties,
+                httpClient,
+                objectMapper,
+                circuitRegistry,
+                runtimeConfigurationFingerprint,
+                materializedConfiguration,
+                Clock.systemUTC());
+    }
+
+    private DataExportHttpGatewayFactory(
+            final DataExportProperties properties,
+            final HttpClient httpClient,
+            final ObjectMapper objectMapper,
+            final DataExportCircuitBreakerRegistry circuitRegistry,
+            final Optional<ImmutableFingerprint> runtimeConfigurationFingerprint,
+            final Optional<DataExportSourceConfiguration> materializedConfiguration,
+            final Clock observedClock) {
         this.properties =
                 Objects.requireNonNull(properties, "As propriedades Data Export são obrigatórias.");
         this.httpClient = Objects.requireNonNull(httpClient, "HttpClient é obrigatório.");
@@ -84,6 +124,8 @@ public final class DataExportHttpGatewayFactory {
                 Objects.requireNonNull(
                         runtimeConfigurationFingerprint,
                         "O fingerprint opcional da configuração é obrigatório.");
+        this.materializedConfiguration = Objects.requireNonNull(materializedConfiguration);
+        this.observedClock = Objects.requireNonNull(observedClock);
     }
 
     public DataExportHttpGatewayBundle forWorkload(
@@ -145,6 +187,165 @@ public final class DataExportHttpGatewayFactory {
                 new CircuitBreakingDataExportTemplateInfoGateway(rawInfo, circuitRegistry));
     }
 
+    /** Offline-prepared package-only transport primitive. Does not admit a P3 runtime or schema. */
+    ObservedExpansionHttpTransport prepareObservedTransport(
+            final ObservedExpansionCapturePlan plan,
+            final EslRequestGovernor.Cycle cycle,
+            final EslRequestGovernor expectedGovernor,
+            final br.com.esl.etl.v2.plataforma.resiliencia.CancellationToken cancellation,
+            final DataExportHttpAttemptObserver observer) {
+        ObservedExpansionHttpTransport.requireSafeBearer(properties);
+        final DataExportSourceConfiguration source =
+                materializedConfiguration.orElseThrow(
+                        () ->
+                                new IllegalArgumentException(
+                                        "OBS_CAPTURE_MATERIALIZED_SOURCE_REQUIRED"));
+        Objects.requireNonNull(plan);
+        if (observedSourceStopped.get()) {
+            throw new IllegalStateException("OBS_CAPTURE_SOURCE_STOPPED");
+        }
+        if (!source.sourceInstance().equals(plan.sourceInstance())
+                || !source.tenantScope().equals(plan.tenantScope())
+                || !properties.sourceZone().equals(plan.sourceZone())
+                || !runtimeConfigurationFingerprint
+                        .orElseThrow()
+                        .equals(DataExportRuntimeConfigurationFingerprint.from(source))
+                || properties.preferredTransport() != DataExportTransport.GET_WITH_BODY
+                || properties.retryPolicy().maxAttempts() != 1
+                || properties.requestTimeout().compareTo(java.time.Duration.ofSeconds(30)) > 0
+                || !"https".equalsIgnoreCase(properties.baseUri().getScheme())
+                || httpClient.followRedirects() != HttpClient.Redirect.NEVER
+                || source.resiliencePolicy()
+                                .minimumRequestInterval()
+                                .compareTo(java.time.Duration.ofSeconds(3))
+                        < 0) {
+            throw new IllegalArgumentException("OBS_CAPTURE_MATERIALIZED_POLICY");
+        }
+        Objects.requireNonNull(cycle).verifyPolicy(source.resiliencePolicy());
+        cycle.verifyGovernor(expectedGovernor);
+        cycle.verifyCancellationToken(cancellation);
+        final DataExportTemplate template =
+                switch (plan.template()) {
+                    case CAP -> DataExportTemplate.CONTAS_A_PAGAR;
+                    case FAT -> DataExportTemplate.FATURAS_POR_CLIENTE;
+                    case INV -> DataExportTemplate.INVENTARIO;
+                    case SIN -> DataExportTemplate.SINISTROS;
+                };
+        final EslWorkload workload =
+                switch (plan.template()) {
+                    case CAP -> EslWorkload.CONTAS_A_PAGAR;
+                    case FAT -> EslWorkload.FATURAS_POR_CLIENTE;
+                    case INV -> EslWorkload.INVENTARIO;
+                    case SIN -> EslWorkload.SINISTROS;
+                };
+        final var governor = new EslDataExportHttpAttemptGovernor(cycle.beginWorkload(workload));
+        final var executor =
+                new DataExportHttpExecutor(
+                        httpClient,
+                        properties,
+                        Objects.requireNonNull(observer),
+                        governor,
+                        new DataExportRetrySchedule(
+                                properties.retryPolicy(),
+                                observedClock,
+                                DataExportJitterSource.threadLocal(),
+                                governor.maximumRetryAfter()));
+        return new ObservedExpansionHttpTransport(
+                plan, template, properties, executor, circuitRegistry, observedSourceStopped);
+    }
+
+    /** Same materialization as the public source constructor, with an injected offline client. */
+    DataExportHttpGatewayFactory(
+            final DataExportSourceConfiguration source,
+            final SecretProvider secrets,
+            final HttpClient client,
+            final Clock clock) {
+        this(materializeObserved(source, secrets), client, clock);
+    }
+
+    private DataExportHttpGatewayFactory(
+            final MaterializedSource source, final HttpClient client, final Clock clock) {
+        this(
+                source.properties(),
+                client,
+                new ObjectMapper(),
+                new DataExportCircuitBreakerRegistry(
+                        DataExportCircuitBreakerPolicy.from(source.resiliencePolicy()), clock),
+                Optional.of(source.runtimeConfigurationFingerprint()),
+                Optional.of(source.configuration()),
+                clock);
+    }
+
+    /**
+     * Same normal INFO parser/circuit, with an early P3-only irreversible source-status observer.
+     */
+    DataExportTemplateInfoGateway prepareObservedInfoGateway(
+            final ObservedExpansionCapturePlan plan,
+            final EslRequestGovernor.Cycle cycle,
+            final EslRequestGovernor governor,
+            final br.com.esl.etl.v2.plataforma.resiliencia.CancellationToken cancellation,
+            final DataExportHttpAttemptObserver observer) {
+        prepareObservedTransport(plan, cycle, governor, cancellation, observer);
+        final EslWorkload workload =
+                switch (plan.template()) {
+                    case CAP -> EslWorkload.CONTAS_A_PAGAR;
+                    case FAT -> EslWorkload.FATURAS_POR_CLIENTE;
+                    case INV -> EslWorkload.INVENTARIO;
+                    case SIN -> EslWorkload.SINISTROS;
+                };
+        final var attemptGovernor =
+                new EslDataExportHttpAttemptGovernor(cycle.beginWorkload(workload));
+        final var rawInfo =
+                new HttpDataExportTemplateInfoGateway(
+                        httpClient,
+                        properties,
+                        objectMapper,
+                        observer,
+                        attemptGovernor,
+                        new ObservedExpansionHttpTransport.RawCapture(
+                                plan.request(1), observedSourceStopped));
+        return new CircuitBreakingDataExportTemplateInfoGateway(rawInfo, circuitRegistry);
+    }
+
+    void verifyObservedRuntimeConfiguration(final DataExportSourceConfiguration expected) {
+        if (materializedConfiguration.isEmpty()
+                || runtimeConfigurationFingerprint.isEmpty()
+                || !runtimeConfigurationFingerprint
+                        .orElseThrow()
+                        .equals(
+                                DataExportRuntimeConfigurationFingerprint.from(
+                                        Objects.requireNonNull(expected)))) {
+            throw new IllegalArgumentException("OBS_DRIVER_MATERIALIZED_RUNTIME_MISMATCH");
+        }
+    }
+
+    boolean observedSourceStopped() {
+        return observedSourceStopped.get();
+    }
+
+    /** P3-only source creation. Existing public legacy materialization is unchanged. */
+    static DataExportHttpGatewayFactory prepareObservedSource(
+            final DataExportSourceConfiguration source,
+            final SecretProvider secrets,
+            final Clock clock) {
+        try {
+            return new DataExportHttpGatewayFactory(materializeObserved(source, secrets), clock);
+        } catch (final RuntimeException failure) {
+            throw new IllegalArgumentException("OBS_CAPTURE_SOURCE_PREPARATION_REJECTED");
+        }
+    }
+
+    private static MaterializedSource materializeObserved(
+            final DataExportSourceConfiguration source, final SecretProvider secrets) {
+        try {
+            final MaterializedSource actual = materialize(source, secrets);
+            ObservedExpansionHttpTransport.requireSafeBearer(actual.properties());
+            return actual;
+        } catch (final RuntimeException failure) {
+            throw new IllegalArgumentException("OBS_CAPTURE_SOURCE_PREPARATION_REJECTED");
+        }
+    }
+
     private void verifyObservationConfiguration(
             final DataExportContractObservationConfiguration observationConfiguration) {
         if (runtimeConfigurationFingerprint.isEmpty()
@@ -168,11 +369,13 @@ public final class DataExportHttpGatewayFactory {
                                 Objects.requireNonNull(
                                         secretProvider, "O provider de segredo é obrigatório.")),
                 required.resiliencePolicy(),
-                DataExportRuntimeConfigurationFingerprint.from(required));
+                DataExportRuntimeConfigurationFingerprint.from(required),
+                required);
     }
 
     private record MaterializedSource(
             DataExportProperties properties,
             EslResiliencePolicy resiliencePolicy,
-            ImmutableFingerprint runtimeConfigurationFingerprint) {}
+            ImmutableFingerprint runtimeConfigurationFingerprint,
+            DataExportSourceConfiguration configuration) {}
 }

@@ -92,6 +92,31 @@ public final class RasterFieldParser {
                 aliases);
     }
 
+    /** RAS-COORD-OBS-20261025-v1: only observed stop Latitude/Longitude numeric wire. */
+    public static ExpansionValue<BigDecimal> observedStopCoordinate(
+            final JsonNode node, final String... aliases) {
+        final JsonNode selected = select(node, aliases);
+        if (selected != null && selected.isTextual()) {
+            // STRING has no new observed contract. Preserve the existing lexical/scale policy.
+            return decimal(node, aliases);
+        }
+        return parse(
+                node,
+                value -> {
+                    require(value.isNumber());
+                    final BigDecimal exact = value.decimalValue();
+                    require(exact.scale() <= 16 && (long) exact.precision() - exact.scale() <= 20);
+                    // Keep old <=8 typed representations stable; preserve new9..16 digits exactly.
+                    final BigDecimal parsed =
+                            exact.scale() <= 8
+                                    ? exact.setScale(8, RoundingMode.UNNECESSARY)
+                                    : exact;
+                    require(parsed.precision() <= 36);
+                    return parsed;
+                },
+                aliases);
+    }
+
     public static ExpansionValue<RasterTime> time(
             final JsonNode node, final ZoneId zone, final String... aliases) {
         java.util.Objects.requireNonNull(zone);

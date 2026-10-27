@@ -1,0 +1,775 @@
+{
+  "formatVersion": "observed-expansion-wire-v1",
+  "schemaRelease": "observed-expansion-wire-6392-20261025-v1",
+  "templateId": 6392,
+  "sourceKind": "DATA_EXPORT",
+  "recordRoot": "$",
+  "rootCardinality": "ARRAY",
+  "metadata": [
+    {
+      "kind": "DATA_FIELD",
+      "path": "bo_number",
+      "declaredType": "UNDECLARED"
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "brokers_case_number",
+      "declaredType": "UNDECLARED"
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "customer_communication_contact_name",
+      "declaredType": "UNDECLARED"
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "customer_communication_date",
+      "declaredType": "UNDECLARED"
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "customer_communication_time",
+      "declaredType": "UNDECLARED"
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "customer_credit_entries_subtotal",
+      "declaredType": "UNDECLARED"
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "customer_debits_subtotal",
+      "declaredType": "UNDECLARED"
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "expected_solution_date",
+      "declaredType": "UNDECLARED"
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "finished_at_date",
+      "declaredType": "UNDECLARED"
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "finished_at_time",
+      "declaredType": "UNDECLARED"
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "finished_commentary",
+      "declaredType": "UNDECLARED"
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "icm_crn_psn_nickname",
+      "declaredType": "UNDECLARED"
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "icm_dvr_iil_name",
+      "declaredType": "UNDECLARED"
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "icm_fer_name",
+      "declaredType": "UNDECLARED"
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "icm_fis_fit_corporation_sequence_number",
+      "declaredType": "UNDECLARED"
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "icm_fis_fit_pyr_nickname",
+      "declaredType": "UNDECLARED"
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "icm_fis_ioe_number",
+      "declaredType": "UNDECLARED"
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "icm_ttt_dealing_type",
+      "declaredType": "UNDECLARED"
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "icm_ttt_ore_code",
+      "declaredType": "UNDECLARED"
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "icm_ttt_ore_description",
+      "declaredType": "UNDECLARED"
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "icm_ttt_solution_type",
+      "declaredType": "UNDECLARED"
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "icm_ttt_treatment_at",
+      "declaredType": "UNDECLARED"
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "icm_vie_license_plate",
+      "declaredType": "UNDECLARED"
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "informed_by",
+      "declaredType": "UNDECLARED"
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "insurance_claim_commentary",
+      "declaredType": "UNDECLARED"
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "insurance_claim_location",
+      "declaredType": "UNDECLARED"
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "insurance_claim_total",
+      "declaredType": "UNDECLARED"
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "insurer_credits_subtotal",
+      "declaredType": "UNDECLARED"
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "internal_description",
+      "declaredType": "UNDECLARED"
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "invoices_count",
+      "declaredType": "UNDECLARED"
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "invoices_value",
+      "declaredType": "UNDECLARED"
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "invoices_volumes",
+      "declaredType": "UNDECLARED"
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "invoices_weight",
+      "declaredType": "UNDECLARED"
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "list_of_claimed_products",
+      "declaredType": "UNDECLARED"
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "occurrence_at_date",
+      "declaredType": "UNDECLARED"
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "occurrence_at_time",
+      "declaredType": "UNDECLARED"
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "opening_at_date",
+      "declaredType": "UNDECLARED"
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "policy_number",
+      "declaredType": "UNDECLARED"
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "rcfdc",
+      "declaredType": "UNDECLARED"
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "rctac",
+      "declaredType": "UNDECLARED"
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "rctrc",
+      "declaredType": "UNDECLARED"
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "responsible_credits_subtotal",
+      "declaredType": "UNDECLARED"
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "responsible_debit_entries_subtotal",
+      "declaredType": "UNDECLARED"
+    },
+    {
+      "kind": "DATA_FIELD",
+      "path": "sequence_code",
+      "declaredType": "UNDECLARED"
+    },
+    {
+      "kind": "DATA_FILTER",
+      "path": "insurance_claims.corporation_id",
+      "declaredType": "OTHER",
+      "declaredTypeFingerprint": {
+        "version": "declared-type-v1",
+        "sha256": "ed823c4c534bfa17a30399fcbfb2e7defe7ebbfd47b746511c769d4467f510f7"
+      }
+    },
+    {
+      "kind": "DATA_FILTER",
+      "path": "insurance_claims.opening_at_date",
+      "declaredType": "DATE",
+      "declaredTypeFingerprint": {
+        "version": "declared-type-v1",
+        "sha256": "179b00376b5b12fe6a617c98e9c90d90fb5cfdf75f96ee4909fff9d8028b63a1"
+      }
+    },
+    {
+      "kind": "DATA_FILTER",
+      "path": "insurance_claims.status",
+      "declaredType": "OTHER",
+      "declaredTypeFingerprint": {
+        "version": "declared-type-v1",
+        "sha256": "ed823c4c534bfa17a30399fcbfb2e7defe7ebbfd47b746511c769d4467f510f7"
+      }
+    },
+    {
+      "kind": "DATA_FILTER",
+      "path": "scopes.by_freight_document_number",
+      "declaredType": "NUMBER",
+      "declaredTypeFingerprint": {
+        "version": "declared-type-v1",
+        "sha256": "3f8e673c0bf8f3bdbe07d7fcbe979e7998b294e2b9b29723476e9cace7c0f3d4"
+      }
+    },
+    {
+      "kind": "DATA_FILTER",
+      "path": "scopes.by_freight_payer_id",
+      "declaredType": "OTHER",
+      "declaredTypeFingerprint": {
+        "version": "declared-type-v1",
+        "sha256": "ed823c4c534bfa17a30399fcbfb2e7defe7ebbfd47b746511c769d4467f510f7"
+      }
+    },
+    {
+      "kind": "DATA_FILTER",
+      "path": "scopes.by_invoice_number",
+      "declaredType": "NUMBER",
+      "declaredTypeFingerprint": {
+        "version": "declared-type-v1",
+        "sha256": "3f8e673c0bf8f3bdbe07d7fcbe979e7998b294e2b9b29723476e9cace7c0f3d4"
+      }
+    }
+  ],
+  "fields": [
+    {
+      "path": "bo_number",
+      "required": true,
+      "wireTypes": [
+        "NULL",
+        "STRING"
+      ],
+      "unknownNonNull": false,
+      "arrayItemTypes": [],
+      "historicalGenericNumber": false
+    },
+    {
+      "path": "brokers_case_number",
+      "required": true,
+      "wireTypes": [
+        "NULL",
+        "STRING"
+      ],
+      "unknownNonNull": false,
+      "arrayItemTypes": [],
+      "historicalGenericNumber": false
+    },
+    {
+      "path": "customer_communication_contact_name",
+      "required": true,
+      "wireTypes": [
+        "NULL",
+        "STRING"
+      ],
+      "unknownNonNull": false,
+      "arrayItemTypes": [],
+      "historicalGenericNumber": false
+    },
+    {
+      "path": "customer_communication_date",
+      "required": true,
+      "wireTypes": [
+        "NULL"
+      ],
+      "unknownNonNull": true,
+      "arrayItemTypes": [],
+      "historicalGenericNumber": false
+    },
+    {
+      "path": "customer_communication_time",
+      "required": true,
+      "wireTypes": [
+        "NULL",
+        "STRING"
+      ],
+      "unknownNonNull": false,
+      "arrayItemTypes": [],
+      "historicalGenericNumber": false
+    },
+    {
+      "path": "customer_credit_entries_subtotal",
+      "required": true,
+      "wireTypes": [
+        "STRING"
+      ],
+      "unknownNonNull": false,
+      "arrayItemTypes": [],
+      "historicalGenericNumber": false
+    },
+    {
+      "path": "customer_debits_subtotal",
+      "required": true,
+      "wireTypes": [
+        "STRING"
+      ],
+      "unknownNonNull": false,
+      "arrayItemTypes": [],
+      "historicalGenericNumber": false
+    },
+    {
+      "path": "expected_solution_date",
+      "required": true,
+      "wireTypes": [
+        "NULL",
+        "STRING"
+      ],
+      "unknownNonNull": false,
+      "arrayItemTypes": [],
+      "historicalGenericNumber": false
+    },
+    {
+      "path": "finished_at_date",
+      "required": true,
+      "wireTypes": [
+        "NULL",
+        "STRING"
+      ],
+      "unknownNonNull": false,
+      "arrayItemTypes": [],
+      "historicalGenericNumber": false
+    },
+    {
+      "path": "finished_at_time",
+      "required": true,
+      "wireTypes": [
+        "NULL",
+        "STRING"
+      ],
+      "unknownNonNull": false,
+      "arrayItemTypes": [],
+      "historicalGenericNumber": false
+    },
+    {
+      "path": "finished_commentary",
+      "required": true,
+      "wireTypes": [
+        "NULL",
+        "STRING"
+      ],
+      "unknownNonNull": false,
+      "arrayItemTypes": [],
+      "historicalGenericNumber": false
+    },
+    {
+      "path": "icm_crn_psn_nickname",
+      "required": true,
+      "wireTypes": [
+        "STRING"
+      ],
+      "unknownNonNull": false,
+      "arrayItemTypes": [],
+      "historicalGenericNumber": false
+    },
+    {
+      "path": "icm_dvr_iil_name",
+      "required": true,
+      "wireTypes": [
+        "NULL",
+        "STRING"
+      ],
+      "unknownNonNull": false,
+      "arrayItemTypes": [],
+      "historicalGenericNumber": false
+    },
+    {
+      "path": "icm_fer_name",
+      "required": true,
+      "wireTypes": [
+        "NULL",
+        "STRING"
+      ],
+      "unknownNonNull": false,
+      "arrayItemTypes": [],
+      "historicalGenericNumber": false
+    },
+    {
+      "path": "icm_fis_fit_corporation_sequence_number",
+      "required": true,
+      "wireTypes": [
+        "INTEGER",
+        "NULL",
+        "NUMBER"
+      ],
+      "unknownNonNull": false,
+      "arrayItemTypes": [],
+      "historicalGenericNumber": true
+    },
+    {
+      "path": "icm_fis_fit_pyr_nickname",
+      "required": true,
+      "wireTypes": [
+        "NULL",
+        "STRING"
+      ],
+      "unknownNonNull": false,
+      "arrayItemTypes": [],
+      "historicalGenericNumber": false
+    },
+    {
+      "path": "icm_fis_ioe_number",
+      "required": true,
+      "wireTypes": [
+        "NULL",
+        "STRING"
+      ],
+      "unknownNonNull": false,
+      "arrayItemTypes": [],
+      "historicalGenericNumber": false
+    },
+    {
+      "path": "icm_ttt_dealing_type",
+      "required": true,
+      "wireTypes": [
+        "NULL",
+        "STRING"
+      ],
+      "unknownNonNull": false,
+      "arrayItemTypes": [],
+      "historicalGenericNumber": false
+    },
+    {
+      "path": "icm_ttt_ore_code",
+      "required": true,
+      "wireTypes": [
+        "INTEGER",
+        "NULL",
+        "NUMBER"
+      ],
+      "unknownNonNull": false,
+      "arrayItemTypes": [],
+      "historicalGenericNumber": true
+    },
+    {
+      "path": "icm_ttt_ore_description",
+      "required": true,
+      "wireTypes": [
+        "NULL",
+        "STRING"
+      ],
+      "unknownNonNull": false,
+      "arrayItemTypes": [],
+      "historicalGenericNumber": false
+    },
+    {
+      "path": "icm_ttt_solution_type",
+      "required": true,
+      "wireTypes": [
+        "NULL",
+        "STRING"
+      ],
+      "unknownNonNull": false,
+      "arrayItemTypes": [],
+      "historicalGenericNumber": false
+    },
+    {
+      "path": "icm_ttt_treatment_at",
+      "required": true,
+      "wireTypes": [
+        "NULL",
+        "STRING"
+      ],
+      "unknownNonNull": false,
+      "arrayItemTypes": [],
+      "historicalGenericNumber": false
+    },
+    {
+      "path": "icm_vie_license_plate",
+      "required": true,
+      "wireTypes": [
+        "NULL",
+        "STRING"
+      ],
+      "unknownNonNull": false,
+      "arrayItemTypes": [],
+      "historicalGenericNumber": false
+    },
+    {
+      "path": "informed_by",
+      "required": true,
+      "wireTypes": [
+        "NULL",
+        "STRING"
+      ],
+      "unknownNonNull": false,
+      "arrayItemTypes": [],
+      "historicalGenericNumber": false
+    },
+    {
+      "path": "insurance_claim_commentary",
+      "required": true,
+      "wireTypes": [
+        "NULL",
+        "STRING"
+      ],
+      "unknownNonNull": false,
+      "arrayItemTypes": [],
+      "historicalGenericNumber": false
+    },
+    {
+      "path": "insurance_claim_location",
+      "required": true,
+      "wireTypes": [
+        "NULL",
+        "STRING"
+      ],
+      "unknownNonNull": false,
+      "arrayItemTypes": [],
+      "historicalGenericNumber": false
+    },
+    {
+      "path": "insurance_claim_total",
+      "required": true,
+      "wireTypes": [
+        "STRING"
+      ],
+      "unknownNonNull": false,
+      "arrayItemTypes": [],
+      "historicalGenericNumber": false
+    },
+    {
+      "path": "insurer_credits_subtotal",
+      "required": true,
+      "wireTypes": [
+        "STRING"
+      ],
+      "unknownNonNull": false,
+      "arrayItemTypes": [],
+      "historicalGenericNumber": false
+    },
+    {
+      "path": "internal_description",
+      "required": true,
+      "wireTypes": [
+        "NULL",
+        "STRING"
+      ],
+      "unknownNonNull": false,
+      "arrayItemTypes": [],
+      "historicalGenericNumber": false
+    },
+    {
+      "path": "invoices_count",
+      "required": true,
+      "wireTypes": [
+        "INTEGER",
+        "NUMBER"
+      ],
+      "unknownNonNull": false,
+      "arrayItemTypes": [],
+      "historicalGenericNumber": true
+    },
+    {
+      "path": "invoices_value",
+      "required": true,
+      "wireTypes": [
+        "STRING"
+      ],
+      "unknownNonNull": false,
+      "arrayItemTypes": [],
+      "historicalGenericNumber": false
+    },
+    {
+      "path": "invoices_volumes",
+      "required": true,
+      "wireTypes": [
+        "INTEGER",
+        "NUMBER"
+      ],
+      "unknownNonNull": false,
+      "arrayItemTypes": [],
+      "historicalGenericNumber": true
+    },
+    {
+      "path": "invoices_weight",
+      "required": true,
+      "wireTypes": [
+        "STRING"
+      ],
+      "unknownNonNull": false,
+      "arrayItemTypes": [],
+      "historicalGenericNumber": false
+    },
+    {
+      "path": "list_of_claimed_products",
+      "required": true,
+      "wireTypes": [
+        "NULL",
+        "STRING"
+      ],
+      "unknownNonNull": false,
+      "arrayItemTypes": [],
+      "historicalGenericNumber": false
+    },
+    {
+      "path": "occurrence_at_date",
+      "required": true,
+      "wireTypes": [
+        "STRING"
+      ],
+      "unknownNonNull": false,
+      "arrayItemTypes": [],
+      "historicalGenericNumber": false
+    },
+    {
+      "path": "occurrence_at_time",
+      "required": true,
+      "wireTypes": [
+        "STRING"
+      ],
+      "unknownNonNull": false,
+      "arrayItemTypes": [],
+      "historicalGenericNumber": false
+    },
+    {
+      "path": "opening_at_date",
+      "required": true,
+      "wireTypes": [
+        "STRING"
+      ],
+      "unknownNonNull": false,
+      "arrayItemTypes": [],
+      "historicalGenericNumber": false
+    },
+    {
+      "path": "policy_number",
+      "required": true,
+      "wireTypes": [
+        "NULL",
+        "STRING"
+      ],
+      "unknownNonNull": false,
+      "arrayItemTypes": [],
+      "historicalGenericNumber": false
+    },
+    {
+      "path": "rcfdc",
+      "required": true,
+      "wireTypes": [
+        "ARRAY"
+      ],
+      "unknownNonNull": false,
+      "arrayItemTypes": [
+        "STRING"
+      ],
+      "historicalGenericNumber": false
+    },
+    {
+      "path": "rctac",
+      "required": true,
+      "wireTypes": [
+        "ARRAY"
+      ],
+      "unknownNonNull": false,
+      "arrayItemTypes": [
+        "STRING"
+      ],
+      "historicalGenericNumber": false
+    },
+    {
+      "path": "rctrc",
+      "required": true,
+      "wireTypes": [
+        "ARRAY"
+      ],
+      "unknownNonNull": false,
+      "arrayItemTypes": [
+        "STRING"
+      ],
+      "historicalGenericNumber": false
+    },
+    {
+      "path": "responsible_credits_subtotal",
+      "required": true,
+      "wireTypes": [
+        "STRING"
+      ],
+      "unknownNonNull": false,
+      "arrayItemTypes": [],
+      "historicalGenericNumber": false
+    },
+    {
+      "path": "responsible_debit_entries_subtotal",
+      "required": true,
+      "wireTypes": [
+        "STRING"
+      ],
+      "unknownNonNull": false,
+      "arrayItemTypes": [],
+      "historicalGenericNumber": false
+    },
+    {
+      "path": "sequence_code",
+      "required": true,
+      "wireTypes": [
+        "INTEGER",
+        "NUMBER"
+      ],
+      "unknownNonNull": false,
+      "arrayItemTypes": [],
+      "historicalGenericNumber": true
+    }
+  ],
+  "evidence": {
+    "currentInfoAndArrayItemsSourceSha256": "BB486083CC043C5623C65609D0081DE694A3C3DFF5D2087E3EED52DB9E18EC86",
+    "rootEnvelopeSourceSha256": "94A1E84F979C00561BC6222645F662A514B4E513EEE2A1D74F6041DFE4BF13D6",
+    "historicalRootTypesSourceSha256": "119625C7A88AF47A04BD01EB1480B0838A85D2D98EEAA88D960117C90E017D98",
+    "historicalRowsAcrossTwoPasses": 120,
+    "observedMaximumArrayItems": {
+      "/rcfdc": 1,
+      "/rctac": 1,
+      "/rctrc": 1
+    },
+    "maximumIsObservationNotContract": true,
+    "noSourceIdentityOrSnapshotClaim": true
+  }
+}
