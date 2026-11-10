@@ -1,3 +1,7 @@
+## Atualização0767 — Comparação de conteúdo concluída e limite de atualização identificado
+
+Ver [comparação atual](comparacao-excel-0767.md) e [apresentação dos booleanos no Excel](apresentacao-excel-0767.md). As59colunas e737959valores recebidos foram conferidos no SQL; todas as ocorrências extraídas têm confirmação nos Excel observados. O último arquivo de Ocorrências contém36mudanças relacionadas e5novaslinhas, todas explicadas. O filtro updated_at recuperou as5novas,mas não as36mudanças de campos ligados ao frete;garantia de atualização integral por ciclo permanece pendente antesdashboard.90dias adiados por pedido do usuário. Entradas abaixo históricas.
+
 ## Resultado final 0762 — onze entidades recebidas; Excel divergente; equivalência de 100% pendente
 
 [Checkpoint0762](../../continuidade/checkpoints/0762-onze-entidades-requalificacao-e-confronto-excel.md). Requalificação final v5 completa: 80.981 registros/3.319.248 valores/88 partições, zero rejeições, HTTP→SQL integralmente conferido; view latest e 88 runs exatos, zero RUNNING. Código final v6: 59 atributos qualificados, 22 filtros, 120 testes; replay de 36.283 linhas/729.631 valores idênticos ao banco, incluindo dois ctd_ant_document STRING iguais ao Excel. Não houve nova execução de rede v6. O segundo disparo real após 3607.645s falhou Fretes; ajuste25 passou na terceira carga manual. Task Disabled/LastResult1/STOP preservado; nenhum loop permanente.
