@@ -1,7 +1,7 @@
 package br.com.esl.etl.v2.plataforma.fonte.dataexport;
 
-import br.com.esl.etl.v2.plataforma.expansao.ExpansionStrings;
 import br.com.esl.etl.v2.plataforma.expansao.ExpansionValue;
+import br.com.esl.etl.v2.plataforma.expansao.OrderedExpansionStrings;
 import java.math.BigDecimal;
 import java.time.Instant;
 import java.time.LocalDate;
@@ -39,7 +39,7 @@ public record ObservedExpansionProjectedField(String path, Kind kind, ExpansionV
                         case DATE -> typed instanceof LocalDate;
                         case INSTANT -> typed instanceof Instant;
                         case TIME -> typed instanceof LocalTime;
-                        case STRINGS -> typed instanceof ExpansionStrings;
+                        case STRINGS -> typed instanceof OrderedExpansionStrings;
                     };
             if (!compatible) {
                 throw new IllegalArgumentException("OBS_CAPTURE_TYPED_KIND");

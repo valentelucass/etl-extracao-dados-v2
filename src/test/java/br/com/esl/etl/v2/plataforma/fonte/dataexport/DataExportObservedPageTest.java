@@ -37,7 +37,7 @@ class DataExportObservedPageTest {
     @ParameterizedTest
     @EnumSource(
             value = DataExportTemplate.class,
-            names = {"COLETAS", "CONTAS_A_PAGAR"},
+            names = {"COLETAS", "CONTAS_A_PAGAR", "CONSOLIDACAO_DETALHADA", "OCORRENCIAS"},
             mode = EnumSource.Mode.EXCLUDE)
     void sevenRootCandidatesAdmitExpandedRowsWithoutCanonicalClaims(
             final DataExportTemplate template) throws Exception {
@@ -171,7 +171,7 @@ class DataExportObservedPageTest {
     @ParameterizedTest
     @EnumSource(
             value = DataExportTemplate.class,
-            names = {"COLETAS", "FRETES"},
+            names = {"COLETAS", "FRETES", "CONSOLIDACAO_DETALHADA", "OCORRENCIAS"},
             mode = EnumSource.Mode.EXCLUDE)
     void physicalOneRowIsNotAnEntityRootOrPerProof(final DataExportTemplate template)
             throws Exception {
@@ -198,7 +198,7 @@ class DataExportObservedPageTest {
     @ParameterizedTest
     @EnumSource(
             value = DataExportTemplate.class,
-            names = {"COLETAS", "FRETES"},
+            names = {"COLETAS", "FRETES", "CONSOLIDACAO_DETALHADA", "OCORRENCIAS"},
             mode = EnumSource.Mode.EXCLUDE)
     void physicalEmptyIsNoDataObservedAndNeverCompleteness(final DataExportTemplate template)
             throws Exception {

@@ -1,7 +1,6 @@
 package br.com.esl.etl.v2.modulos.inventario.domain;
 
 import br.com.esl.etl.v2.plataforma.expansao.ExpansionObservation;
-import br.com.esl.etl.v2.plataforma.expansao.ExpansionStrings;
 import br.com.esl.etl.v2.plataforma.expansao.ExpansionValue;
 
 /** Typed physical observation; none of these candidates supplies a synthetic root identity. */
@@ -13,7 +12,7 @@ public record InventarioObservation(
         ExpansionValue<String> cnrCSFitDynName,
         ExpansionValue<java.time.Instant> cnrCSFitFteLceOccurrenceAt,
         ExpansionValue<String> cnrCSFitFteLceOreDescription,
-        ExpansionValue<ExpansionStrings> cnrCSFitInvoicesMapping,
+        ExpansionValue<InventarioInvoiceNumbers> cnrCSFitInvoicesMapping,
         ExpansionValue<java.math.BigDecimal> cnrCSFitInvoicesValue,
         ExpansionValue<String> cnrCSFitInvoicesVolumes,
         ExpansionValue<String> cnrCSFitPyrNickname,

@@ -1,7 +1,6 @@
 package br.com.esl.etl.v2.modulos.faturasporcliente.domain;
 
 import br.com.esl.etl.v2.plataforma.expansao.ExpansionObservation;
-import br.com.esl.etl.v2.plataforma.expansao.ExpansionStrings;
 import br.com.esl.etl.v2.plataforma.expansao.ExpansionValue;
 
 /** Typed physical observation; none of these candidates supplies a synthetic root identity. */
@@ -37,7 +36,7 @@ public record FaturaClienteObservation(
         ExpansionValue<String> fitFsnName,
         ExpansionValue<String> fitFteFoeOreDescription,
         ExpansionValue<Boolean> fitFteHasDeliveryReceipt,
-        ExpansionValue<ExpansionStrings> fitFteInvoicesOrderNumber,
+        ExpansionValue<FaturaInvoiceOrderNumbers> fitFteInvoicesOrderNumber,
         ExpansionValue<String> fitNseNumber,
         ExpansionValue<String> fitPyrCorBillingCycle,
         ExpansionValue<String> fitPyrCorBillingDueInDays,
@@ -49,7 +48,7 @@ public record FaturaClienteObservation(
         ExpansionValue<String> fitSdrName,
         ExpansionValue<String> fitSpsSlrPsnName,
         ExpansionValue<String> id,
-        ExpansionValue<ExpansionStrings> invoicesMapping,
+        ExpansionValue<FaturaInvoiceNumbers> invoicesMapping,
         ExpansionValue<String> nfseNumber,
         ExpansionValue<String> paymentType,
         ExpansionValue<String> referenceNumber,

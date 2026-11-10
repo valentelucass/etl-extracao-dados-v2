@@ -1,0 +1,281 @@
+{
+  "schema": "MAPPED_REPORT_SOURCE0761_V1",
+  "reportId": 12072,
+  "version": "2026-11-09.0761.v1",
+  "fields": [
+    {
+      "name": "ice_f_e_fit_corporation_sequence_number",
+      "title": "Minuta",
+      "parser": "integer",
+      "nonNullQualified": true
+    },
+    {
+      "name": "ice_f_e_ioe_number",
+      "title": "Nota Fiscal",
+      "parser": "text",
+      "nonNullQualified": true
+    },
+    {
+      "name": "ice_fit_fhe_cte_number",
+      "title": "CTe",
+      "parser": "integer",
+      "nonNullQualified": true
+    },
+    {
+      "name": "ice_ore_code",
+      "title": "Ocorrência/Código",
+      "parser": "integer",
+      "nonNullQualified": true
+    },
+    {
+      "name": "ice_ore_description",
+      "title": "Ocorrência/Ocorrência",
+      "parser": "text",
+      "nonNullQualified": true
+    },
+    {
+      "name": "occurrence_at",
+      "title": "Data ocorrência",
+      "parser": "instant",
+      "nonNullQualified": true
+    },
+    {
+      "name": "on_mobile",
+      "title": "Baixa por mobile",
+      "parser": "bool",
+      "nonNullQualified": true
+    },
+    {
+      "name": "ice_uer_name",
+      "title": "Usuário/Nome",
+      "parser": "text",
+      "nonNullQualified": true
+    },
+    {
+      "name": "ice_fit_service_at",
+      "title": "Frete/Data do frete",
+      "parser": "instant",
+      "nonNullQualified": true
+    },
+    {
+      "name": "ice_fit_dpn_delivery_prediction_at",
+      "title": "Previsão Entrega/Previsão de entrega",
+      "parser": "instant",
+      "nonNullQualified": true
+    },
+    {
+      "name": "occurrence_schedule_at",
+      "title": "Data agendamento",
+      "parser": "opaque",
+      "nonNullQualified": false
+    },
+    {
+      "name": "ice_fit_dpn_performance_finished_at",
+      "title": "Previsão Entrega/Finalização performance",
+      "parser": "instant",
+      "nonNullQualified": true
+    },
+    {
+      "name": "delivery_status",
+      "title": "Status Entrega",
+      "parser": "text",
+      "nonNullQualified": true
+    },
+    {
+      "name": "ice_fit_fln_cln_nickname",
+      "title": "Localização Atual",
+      "parser": "text",
+      "nonNullQualified": true
+    },
+    {
+      "name": "ice_fit_dpn_manual_schedule",
+      "title": "Agendado",
+      "parser": "bool",
+      "nonNullQualified": true
+    },
+    {
+      "name": "ice_ttt_solution_deadline",
+      "title": "Tratativa/Prazo solução",
+      "parser": "opaque",
+      "nonNullQualified": false
+    },
+    {
+      "name": "ice_ttt_solution_at",
+      "title": "Tratativa/Data Solução",
+      "parser": "opaque",
+      "nonNullQualified": false
+    },
+    {
+      "name": "ice_ttt_solution_type",
+      "title": "Tratativa/Solução",
+      "parser": "opaque",
+      "nonNullQualified": false
+    },
+    {
+      "name": "ice_ttt_soe_description",
+      "title": "Tratativa/Ocorrência",
+      "parser": "opaque",
+      "nonNullQualified": false
+    },
+    {
+      "name": "ice_ttt_solution_comments",
+      "title": "Tratativa/Observações",
+      "parser": "opaque",
+      "nonNullQualified": false
+    }
+  ],
+  "filters": [
+    {
+      "label": "Data ocorrência",
+      "position": 1,
+      "field": "occurrence_at",
+      "table": "invoice_occurrences",
+      "type": "date",
+      "maxlength": null,
+      "queryParameter": "search[invoice_occurrences][occurrence_at]",
+      "testedUse": "intervalo ISO inclusivo",
+      "businessDate": true
+    },
+    {
+      "label": "Doc/Minuta",
+      "position": 2,
+      "field": "by_cte_or_draft_number",
+      "table": "scopes",
+      "type": "numeric",
+      "maxlength": null,
+      "queryParameter": "search[scopes][by_cte_or_draft_number]",
+      "testedUse": "vazio/omitido; comportamento não vazio ainda não qualificado",
+      "businessDate": false
+    },
+    {
+      "label": "Nº Referência",
+      "position": 3,
+      "field": "by_freight_reference_number",
+      "table": "scopes",
+      "type": "string",
+      "maxlength": null,
+      "queryParameter": "search[scopes][by_freight_reference_number]",
+      "testedUse": "vazio/omitido; comportamento não vazio ainda não qualificado",
+      "businessDate": false
+    },
+    {
+      "label": "Nota Fiscal",
+      "position": 4,
+      "field": "by_invoice_number",
+      "table": "scopes",
+      "type": "numeric",
+      "maxlength": null,
+      "queryParameter": "search[scopes][by_invoice_number]",
+      "testedUse": "vazio/omitido; comportamento não vazio ainda não qualificado",
+      "businessDate": false
+    },
+    {
+      "label": "Chave NF-e",
+      "position": 5,
+      "field": "by_invoice_key",
+      "table": "scopes",
+      "type": "numeric",
+      "maxlength": 44,
+      "queryParameter": "search[scopes][by_invoice_key]",
+      "testedUse": "vazio/omitido; comportamento não vazio ainda não qualificado",
+      "businessDate": false
+    },
+    {
+      "label": "Chave CT-e",
+      "position": 6,
+      "field": "by_cte_key",
+      "table": "scopes",
+      "type": "numeric",
+      "maxlength": 44,
+      "queryParameter": "search[scopes][by_cte_key]",
+      "testedUse": "vazio/omitido; comportamento não vazio ainda não qualificado",
+      "businessDate": false
+    },
+    {
+      "label": "Manifesto",
+      "position": 7,
+      "field": "from_manifest_sequence_code",
+      "table": "scopes",
+      "type": "numeric",
+      "maxlength": null,
+      "queryParameter": "search[scopes][from_manifest_sequence_code]",
+      "testedUse": "vazio/omitido; comportamento não vazio ainda não qualificado",
+      "businessDate": false
+    },
+    {
+      "label": "Nº Consolidação",
+      "position": 8,
+      "field": "from_consolidation_document_number",
+      "table": "scopes",
+      "type": "numeric",
+      "maxlength": null,
+      "queryParameter": "search[scopes][from_consolidation_document_number]",
+      "testedUse": "vazio/omitido; comportamento não vazio ainda não qualificado",
+      "businessDate": false
+    },
+    {
+      "label": "Pagador",
+      "position": 9,
+      "field": "from_freight_payer",
+      "table": "scopes",
+      "type": "select",
+      "maxlength": null,
+      "queryParameter": "search[scopes][from_freight_payer]",
+      "testedUse": "vazio/omitido; comportamento não vazio ainda não qualificado",
+      "businessDate": false
+    },
+    {
+      "label": "Baixa por mobile",
+      "position": 10,
+      "field": "by_mobile",
+      "table": "scopes",
+      "type": "select",
+      "maxlength": null,
+      "queryParameter": "search[scopes][by_mobile]",
+      "testedUse": "vazio/omitido; comportamento não vazio ainda não qualificado",
+      "businessDate": false
+    },
+    {
+      "label": "Ocorrência/Ocorrência",
+      "position": 11,
+      "field": "description",
+      "table": "ice_occurrence",
+      "type": "string",
+      "maxlength": null,
+      "queryParameter": "search[ice_occurrence][description]",
+      "testedUse": "vazio/omitido; comportamento não vazio ainda não qualificado",
+      "businessDate": false
+    },
+    {
+      "label": "Ocorrência/Código",
+      "position": 12,
+      "field": "code",
+      "table": "ice_occurrence",
+      "type": "string",
+      "maxlength": null,
+      "queryParameter": "search[ice_occurrence][code]",
+      "testedUse": "vazio/omitido; comportamento não vazio ainda não qualificado",
+      "businessDate": false
+    },
+    {
+      "label": "Data atualização",
+      "position": 13,
+      "field": "updated_at",
+      "table": "invoice_occurrences",
+      "type": "datetime",
+      "maxlength": null,
+      "queryParameter": "search[invoice_occurrences][updated_at]",
+      "testedUse": "vazio/omitido; comportamento não vazio ainda não qualificado",
+      "businessDate": false
+    }
+  ],
+  "requiredDateFilters": [
+    "invoice_occurrences.occurrence_at",
+    "invoice_occurrences.updated_at"
+  ],
+  "defaultOrder": null,
+  "requestOrderBy": [],
+  "businessDateField": "invoice_occurrences.occurrence_at",
+  "identity": "capture_uuid+physical_ordinal",
+  "snapshotConsistencyProven": false
+}

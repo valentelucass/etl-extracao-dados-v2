@@ -1,3 +1,7 @@
+## Regra de entrega reafirmada em 10/11/2026
+
+O responsável exige sempre commit e push das mudanças de cada entrega para as duas contas HTTPS configuradas (pessoal e empresa). A autorização já existe; não pedir nova confirmação para esses envios. Preservar verificações, alterações alheias e histórico; nunca usar force push ou versionar segredos/dados privados. Instruções históricas de não fazer commit não revogam este pedido atual.
+
 ## Continuidade0656 — S2 LOCAL completo; semana real ainda pendente
 
 [Checkpoint0656](docs/continuidade/checkpoints/0656-ciclo-local-s2-concluido-e-captura-semanal-real-pendente.md). Caller privado v10/run09: Original0/35489ms/pico457MB/22processos;20pure+8transport,4casos físicos,4writers,5Native+2drift+6IO,19/20/F2/hostfinito PASS LOCAL. Rootaceite2133014F;107leasesNative/72parent, históriaACLslot restaurados1CE905. Fixture manual/0linhas; Mainproduto/SourceSQLDDLredeXLSX0; release0 e nenhumaautoridade/entidade emitida. ESL1526×31 preservada/31bindings pendentes; nenhuma célula semanal comparada. Runtime prepara SourceMainREAL read-only6908/19–25out comINFOcompleto e limites300/210s1GiB17HTTP; semexecução nova autorizada. Campos/ESLimplementamViews com cápsulasindependentes, semcorpus/suítes. Definiçãoredirectlogin;originalpreservada/perguntanãorepetida. ÚltimaSourceMain0645; noveDataExport/sóUsersGraphQL; Execuçãoúnicopesado/Rootsupervisão-docs-Git; SQL16PM2V1WMSprod/pendingDDL/cargapermanente/UsersEOF preservados; commitpush.

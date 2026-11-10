@@ -89,6 +89,24 @@ public enum DataExportTemplate {
             null,
             "capture_occurrence",
             List.of("sequence_code asc"),
+            100),
+    CONSOLIDACAO_DETALHADA(
+            "mapped-0761-v1",
+            11067,
+            new SearchPath("consolidations", "issue_date"),
+            "consolidations.issue_date",
+            null,
+            "capture_occurrence",
+            List.of(),
+            100),
+    OCORRENCIAS(
+            "mapped-0761-v1",
+            12072,
+            new SearchPath("invoice_occurrences", "occurrence_at"),
+            "invoice_occurrences.occurrence_at",
+            null,
+            "capture_occurrence",
+            List.of(),
             100);
 
     private final String contractVersion;

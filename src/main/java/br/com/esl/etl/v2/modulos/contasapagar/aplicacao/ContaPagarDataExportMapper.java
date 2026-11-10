@@ -1,8 +1,11 @@
 package br.com.esl.etl.v2.modulos.contasapagar.aplicacao;
 
 import br.com.esl.etl.v2.modulos.contasapagar.domain.ContaPagarObservation;
+import br.com.esl.etl.v2.plataforma.expansao.ExpansionValue;
 import br.com.esl.etl.v2.plataforma.fonte.dataexport.ExpansionFieldParser;
 import com.fasterxml.jackson.databind.JsonNode;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 public final class ContaPagarDataExportMapper {
     public ContaPagarObservation map(final int occurrence, final JsonNode envelope) {
@@ -13,7 +16,7 @@ public final class ContaPagarDataExportMapper {
         return new ContaPagarObservation(
                 ExpansionFieldParser.text(dto.data(), "ant_aln_name"),
                 ExpansionFieldParser.text(dto.data(), "ant_ces_acr_name"),
-                ExpansionFieldParser.decimal(dto.data(), "ant_ces_value"),
+                parseAntCesValue(dto.data()),
                 ExpansionFieldParser.text(dto.data(), "ant_crn_psn_nickname"),
                 ExpansionFieldParser.date(dto.data(), "ant_ils_atn_liquidation_date"),
                 ExpansionFieldParser.bool(dto.data(), "ant_ils_atn_reconciled"),
@@ -39,5 +42,38 @@ public final class ContaPagarDataExportMapper {
                 ExpansionFieldParser.text(dto.data(), "type"),
                 ExpansionFieldParser.decimal(dto.data(), "value"),
                 ExpansionFieldParser.decimal(dto.data(), "value_to_pay"));
+    }
+
+    /** Only ant_ces_value permits observed scale9..14; generic decimal28,8 stays unchanged. */
+    private static ExpansionValue<BigDecimal> parseAntCesValue(final JsonNode row) {
+        final var original = ExpansionFieldParser.decimal(row, "ant_ces_value");
+        if (original.valid()) {
+            return original;
+        }
+        final JsonNode node = row.get("ant_ces_value");
+        if (!node.isTextual() && !node.isNumber()) {
+            return original;
+        }
+        try {
+            if (node.isTextual()
+                    && !node.textValue().matches("-?(0|[1-9][0-9]{0,19})(\\.[0-9]{1,14})?")) {
+                return original;
+            }
+            final BigDecimal exact =
+                    node.isNumber() ? node.decimalValue() : new BigDecimal(node.textValue());
+            if (exact.scale() <= 8
+                    || exact.scale() > 14
+                    || (long) exact.precision() - exact.scale() > 20) {
+                return original;
+            }
+            final BigDecimal value = exact.setScale(14, RoundingMode.UNNECESSARY);
+            if (value.precision() > 34) {
+                return original;
+            }
+            return new ExpansionValue<>(
+                    original.presence(), original.wire(), original.raw(), value, null);
+        } catch (final IllegalArgumentException | ArithmeticException invalid) {
+            return original;
+        }
     }
 }

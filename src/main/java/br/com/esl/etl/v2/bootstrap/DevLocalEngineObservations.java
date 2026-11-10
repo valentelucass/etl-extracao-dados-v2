@@ -4,6 +4,9 @@ import br.com.esl.etl.v2.modulos.contasapagar.domain.ContaPagarObservation;
 import br.com.esl.etl.v2.modulos.contasapagar.domain.ContaPagarRules;
 import br.com.esl.etl.v2.modulos.faturasporcliente.domain.FaturaClienteObservation;
 import br.com.esl.etl.v2.modulos.faturasporcliente.domain.FaturaClienteRules;
+import br.com.esl.etl.v2.modulos.faturasporcliente.domain.FaturaInvoiceNumbers;
+import br.com.esl.etl.v2.modulos.faturasporcliente.domain.FaturaInvoiceOrderNumbers;
+import br.com.esl.etl.v2.modulos.inventario.domain.InventarioInvoiceNumbers;
 import br.com.esl.etl.v2.modulos.inventario.domain.InventarioObservation;
 import br.com.esl.etl.v2.modulos.inventario.domain.InventarioRules;
 import br.com.esl.etl.v2.modulos.sinistros.domain.SinistroObservation;
@@ -123,9 +126,22 @@ final class DevLocalEngineObservations {
         if (type == Boolean.class && (value.equals("true") || value.equals("false"))) {
             return Boolean.valueOf(value);
         }
-        if (type == ExpansionStrings.class) {
-            final JsonNode array = DevLocalEngine.JSON.readTree(raw);
-            if (!array.isArray() || array.size() > 32) {
+        if (type == FaturaInvoiceNumbers.class || type == FaturaInvoiceOrderNumbers.class) {
+            if (raw == null || raw.length() > 4000) {
+                throw new IllegalArgumentException("EXP_RAW_BOUND");
+            }
+            final JsonNode array;
+            try (var parser = DevLocalEngine.JSON.createParser(raw)) {
+                array = DevLocalEngine.JSON.readTree(parser);
+                if (array == null || parser.nextToken() != null) {
+                    throw new IllegalArgumentException("DEV_LOCAL_TYPED_ARRAY");
+                }
+            }
+            final int maximum =
+                    type == FaturaInvoiceNumbers.class
+                            ? FaturaInvoiceNumbers.MAXIMUM_ITEMS
+                            : FaturaInvoiceOrderNumbers.MAXIMUM_ITEMS;
+            if (!array.isArray() || array.size() > maximum) {
                 throw new IllegalArgumentException("DEV_LOCAL_TYPED_ARRAY");
             }
             final var strings = new ArrayList<String>();
@@ -135,7 +151,27 @@ final class DevLocalEngineObservations {
                 }
                 strings.add(item.textValue());
             }
-            return new ExpansionStrings(strings);
+            return type == FaturaInvoiceNumbers.class
+                    ? new FaturaInvoiceNumbers(strings)
+                    : new FaturaInvoiceOrderNumbers(strings);
+        }
+        if (type == ExpansionStrings.class || type == InventarioInvoiceNumbers.class) {
+            final JsonNode array = DevLocalEngine.JSON.readTree(raw);
+            final int maximum =
+                    type == ExpansionStrings.class ? 32 : InventarioInvoiceNumbers.MAXIMUM_ITEMS;
+            if (!array.isArray() || array.size() > maximum) {
+                throw new IllegalArgumentException("DEV_LOCAL_TYPED_ARRAY");
+            }
+            final var strings = new ArrayList<String>();
+            for (final JsonNode item : array) {
+                if (!item.isTextual()) {
+                    throw new IllegalArgumentException("DEV_LOCAL_TYPED_ARRAY");
+                }
+                strings.add(item.textValue());
+            }
+            return type == ExpansionStrings.class
+                    ? new ExpansionStrings(strings)
+                    : new InventarioInvoiceNumbers(strings);
         }
         throw new IllegalArgumentException("DEV_LOCAL_TYPED_TYPE");
     }

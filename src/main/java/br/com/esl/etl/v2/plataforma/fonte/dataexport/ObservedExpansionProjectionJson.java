@@ -1,6 +1,6 @@
 package br.com.esl.etl.v2.plataforma.fonte.dataexport;
 
-import br.com.esl.etl.v2.plataforma.expansao.ExpansionStrings;
+import br.com.esl.etl.v2.plataforma.expansao.OrderedExpansionStrings;
 import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.json.JsonWriteFeature;
@@ -86,7 +86,7 @@ final class ObservedExpansionProjectionJson {
                 case DATE, INSTANT, TIME -> json.writeString(typed.toString());
                 case STRINGS -> {
                     json.writeStartArray();
-                    for (final String item : ((ExpansionStrings) typed).items()) {
+                    for (final String item : ((OrderedExpansionStrings) typed).items()) {
                         json.writeString(item);
                     }
                     json.writeEndArray();

@@ -18,7 +18,7 @@ public final class InventarioDataExportMapper {
                 ExpansionFieldParser.text(dto.data(), "cnr_c_s_fit_dyn_name"),
                 ExpansionFieldParser.instant(dto.data(), "cnr_c_s_fit_fte_lce_occurrence_at"),
                 ExpansionFieldParser.text(dto.data(), "cnr_c_s_fit_fte_lce_ore_description"),
-                ExpansionFieldParser.strings(dto.data(), "cnr_c_s_fit_invoices_mapping"),
+                InventarioInvoicesFieldParser.parse(dto.data()),
                 ExpansionFieldParser.decimal(dto.data(), "cnr_c_s_fit_invoices_value"),
                 ExpansionFieldParser.integer(dto.data(), "cnr_c_s_fit_invoices_volumes"),
                 ExpansionFieldParser.text(dto.data(), "cnr_c_s_fit_pyr_nickname"),

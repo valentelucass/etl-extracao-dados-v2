@@ -1,0 +1,350 @@
+{
+  "schema": "MAPPED_REPORT_SOURCE0761_V1",
+  "reportId": 11067,
+  "version": "2026-11-09.0761.v1",
+  "fields": [
+    {
+      "name": "ctd_fgs_crn_psn_nickname",
+      "title": "Filial Expedidora",
+      "parser": "text",
+      "nonNullQualified": true
+    },
+    {
+      "name": "sequence_code",
+      "title": "N° Consolidação",
+      "parser": "integer",
+      "nonNullQualified": true
+    },
+    {
+      "name": "issue_date",
+      "title": "Emissão Consolidação",
+      "parser": "date",
+      "nonNullQualified": true
+    },
+    {
+      "name": "ctd_rhr_cpy_nickname",
+      "title": "Transportadora",
+      "parser": "text",
+      "nonNullQualified": true
+    },
+    {
+      "name": "ctd_rhr_cpy_document",
+      "title": "CNPJ Transportadora",
+      "parser": "text",
+      "nonNullQualified": true
+    },
+    {
+      "name": "document_number",
+      "title": "CTe 3º",
+      "parser": "text",
+      "nonNullQualified": true
+    },
+    {
+      "name": "ctd_fgs_fhe_cte_number",
+      "title": "CTe Rodogarcia",
+      "parser": "integer",
+      "nonNullQualified": true
+    },
+    {
+      "name": "charged_value",
+      "title": "Valor Frete a Pagar à Credenciada",
+      "parser": "decimal",
+      "nonNullQualified": true
+    },
+    {
+      "name": "subtotal",
+      "title": "Valor Calculado ESL",
+      "parser": "decimal",
+      "nonNullQualified": true
+    },
+    {
+      "name": "ctd_fgs_subtotal",
+      "title": "Frete Rodogarcia Sem Impostos",
+      "parser": "decimal",
+      "nonNullQualified": true
+    },
+    {
+      "name": "ctd_fgs_total",
+      "title": "Frete Rodogarcia Final",
+      "parser": "decimal",
+      "nonNullQualified": true
+    },
+    {
+      "name": "ctd_fgs_taxed_weight",
+      "title": "Peso Taxado Rodogarcia",
+      "parser": "decimal",
+      "nonNullQualified": true
+    },
+    {
+      "name": "ctd_fgs_fte_has_delivery_receipt",
+      "title": "Comprovante Anexado",
+      "parser": "bool",
+      "nonNullQualified": true
+    },
+    {
+      "name": "bill_status",
+      "title": "Status Fatura",
+      "parser": "text",
+      "nonNullQualified": true
+    },
+    {
+      "name": "ctd_fgs_service_at",
+      "title": "Data Frete Rodogarcia",
+      "parser": "instant",
+      "nonNullQualified": true
+    },
+    {
+      "name": "ctd_fgs_corporation_sequence_number",
+      "title": "Minuta Rodogarcia",
+      "parser": "integer",
+      "nonNullQualified": true
+    },
+    {
+      "name": "ctd_fgs_invoices_volumes",
+      "title": "Volumes Rodogarcia",
+      "parser": "integer",
+      "nonNullQualified": true
+    },
+    {
+      "name": "ctd_fgs_invoices_mapping",
+      "title": "Nº NF",
+      "parser": "strings",
+      "nonNullQualified": true
+    },
+    {
+      "name": "ctd_fgs_dos_cty_name",
+      "title": "Cidade Origem Rodogarcia",
+      "parser": "text",
+      "nonNullQualified": true
+    },
+    {
+      "name": "ctd_sdr_document",
+      "title": "CNPJ Remetente",
+      "parser": "text",
+      "nonNullQualified": true
+    },
+    {
+      "name": "ctd_sdr_nickname",
+      "title": "Remetente",
+      "parser": "text",
+      "nonNullQualified": true
+    },
+    {
+      "name": "ctd_fgs_oas_cty_name",
+      "title": "Cidade Destino Rodogarcia",
+      "parser": "text",
+      "nonNullQualified": true
+    },
+    {
+      "name": "ctd_rpt_document",
+      "title": "CNPJ Destinatário",
+      "parser": "text",
+      "nonNullQualified": true
+    },
+    {
+      "name": "ctd_rpt_nickname",
+      "title": "Destinatário",
+      "parser": "text",
+      "nonNullQualified": true
+    },
+    {
+      "name": "ctd_rpt_charge_tde",
+      "title": "Cobra TDE",
+      "parser": "bool",
+      "nonNullQualified": true
+    },
+    {
+      "name": "ctd_fgs_dpn_delivery_prediction_at",
+      "title": "Previsão de Entrega",
+      "parser": "instant",
+      "nonNullQualified": true
+    },
+    {
+      "name": "ctd_fgs_finished_at",
+      "title": "Data de Entrega",
+      "parser": "instant",
+      "nonNullQualified": true
+    },
+    {
+      "name": "ctd_fgs_dpn_finished_within_deadline",
+      "title": "Entregue no Prazo",
+      "parser": "bool",
+      "nonNullQualified": true
+    },
+    {
+      "name": "ctd_fgs_fte_lce_ore_description",
+      "title": "Última Ocorrência",
+      "parser": "text",
+      "nonNullQualified": true
+    },
+    {
+      "name": "ctd_fgs_fte_foe_ore_description",
+      "title": "Ocorrência Finalizadora",
+      "parser": "text",
+      "nonNullQualified": true
+    },
+    {
+      "name": "ctd_fgs_fte_foe_occurrence_at",
+      "title": "Data Ocorrência Finalizadora",
+      "parser": "instant",
+      "nonNullQualified": true
+    },
+    {
+      "name": "ctd_fgs_d_t_created_at",
+      "title": "Comprovantes de entrega/Data criação",
+      "parser": "instant",
+      "nonNullQualified": true
+    },
+    {
+      "name": "invoices_volumes",
+      "title": "Volumes Consolidação",
+      "parser": "integer",
+      "nonNullQualified": true
+    },
+    {
+      "name": "real_weight",
+      "title": "Peso Real Consolidação",
+      "parser": "decimal",
+      "nonNullQualified": true
+    },
+    {
+      "name": "taxed_weight",
+      "title": "Peso Taxado Consolidação",
+      "parser": "decimal",
+      "nonNullQualified": true
+    },
+    {
+      "name": "invoices_value",
+      "title": "Valor NF Consolidação",
+      "parser": "decimal",
+      "nonNullQualified": true
+    },
+    {
+      "name": "ctd_diy_cin_tda_value",
+      "title": "Valor TDA",
+      "parser": "decimal",
+      "nonNullQualified": true
+    },
+    {
+      "name": "ctd_ant_document",
+      "title": "Nº Fatura Financeiro",
+      "parser": "opaque",
+      "nonNullQualified": false
+    },
+    {
+      "name": "charged_value_details",
+      "title": "Composição XML",
+      "parser": "charges",
+      "nonNullQualified": true
+    }
+  ],
+  "filters": [
+    {
+      "label": "Emissão",
+      "position": 1,
+      "field": "issue_date",
+      "table": "consolidations",
+      "type": "date",
+      "maxlength": null,
+      "queryParameter": "search[consolidations][issue_date]",
+      "testedUse": "intervalo ISO inclusivo",
+      "businessDate": true
+    },
+    {
+      "label": "N° Consolidação",
+      "position": 2,
+      "field": "sequence_code",
+      "table": "consolidations",
+      "type": "numeric",
+      "maxlength": null,
+      "queryParameter": "search[consolidations][sequence_code]",
+      "testedUse": "vazio/omitido; comportamento não vazio ainda não qualificado",
+      "businessDate": false
+    },
+    {
+      "label": "Nº CT-e 3º",
+      "position": 3,
+      "field": "document_number",
+      "table": "consolidations",
+      "type": "string",
+      "maxlength": null,
+      "queryParameter": "search[consolidations][document_number]",
+      "testedUse": "vazio/omitido; comportamento não vazio ainda não qualificado",
+      "businessDate": false
+    },
+    {
+      "label": "N° Minuta",
+      "position": 4,
+      "field": "operational_number",
+      "table": "consolidations",
+      "type": "string",
+      "maxlength": null,
+      "queryParameter": "search[consolidations][operational_number]",
+      "testedUse": "vazio/omitido; comportamento não vazio ainda não qualificado",
+      "businessDate": false
+    },
+    {
+      "label": "Transportadora",
+      "position": 5,
+      "field": "redispatch_carrier_id",
+      "table": "consolidations",
+      "type": "select",
+      "maxlength": null,
+      "queryParameter": "search[consolidations][redispatch_carrier_id]",
+      "testedUse": "vazio/omitido; comportamento não vazio ainda não qualificado",
+      "businessDate": false
+    },
+    {
+      "label": "Tabela de Preço",
+      "position": 6,
+      "field": "price_table_id",
+      "table": "consolidations",
+      "type": "select",
+      "maxlength": null,
+      "queryParameter": "search[consolidations][price_table_id]",
+      "testedUse": "vazio/omitido; comportamento não vazio ainda não qualificado",
+      "businessDate": false
+    },
+    {
+      "label": "Cidade origem",
+      "position": 7,
+      "field": "origin_city_id",
+      "table": "consolidations",
+      "type": "select",
+      "maxlength": null,
+      "queryParameter": "search[consolidations][origin_city_id]",
+      "testedUse": "vazio/omitido; comportamento não vazio ainda não qualificado",
+      "businessDate": false
+    },
+    {
+      "label": "Cidade destino",
+      "position": 8,
+      "field": "destination_city_id",
+      "table": "consolidations",
+      "type": "select",
+      "maxlength": null,
+      "queryParameter": "search[consolidations][destination_city_id]",
+      "testedUse": "vazio/omitido; comportamento não vazio ainda não qualificado",
+      "businessDate": false
+    },
+    {
+      "label": "Tomador",
+      "position": 9,
+      "field": "payer_id",
+      "table": "consolidations",
+      "type": "select",
+      "maxlength": null,
+      "queryParameter": "search[consolidations][payer_id]",
+      "testedUse": "vazio/omitido; comportamento não vazio ainda não qualificado",
+      "businessDate": false
+    }
+  ],
+  "requiredDateFilters": [
+    "consolidations.issue_date"
+  ],
+  "defaultOrder": "issue_date",
+  "requestOrderBy": [],
+  "businessDateField": "consolidations.issue_date",
+  "identity": "capture_uuid+physical_ordinal",
+  "snapshotConsistencyProven": false
+}

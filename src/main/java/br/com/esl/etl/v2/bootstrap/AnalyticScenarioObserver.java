@@ -47,6 +47,9 @@ public interface AnalyticScenarioObserver
                     case FATURAS_POR_CLIENTE -> Input.FAT;
                     case INVENTARIO -> Input.INV;
                     case SINISTROS -> Input.SIN;
+                    case CONSOLIDACAO_DETALHADA, OCORRENCIAS ->
+                            throw new IllegalArgumentException(
+                                    "MAPPED_REPORT_SEPARATE_CAPTURE_REQUIRED");
                 });
     }
 

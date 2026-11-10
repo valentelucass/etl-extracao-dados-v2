@@ -1,6 +1,9 @@
 package br.com.esl.etl.v2.modulos.sinistros.aplicacao;
 
 import br.com.esl.etl.v2.modulos.sinistros.domain.SinistroObservation;
+import br.com.esl.etl.v2.plataforma.expansao.ExpansionValue;
+import br.com.esl.etl.v2.plataforma.expansao.ExpansionValue.Presence;
+import br.com.esl.etl.v2.plataforma.expansao.ExpansionValue.Wire;
 import br.com.esl.etl.v2.plataforma.fonte.dataexport.ExpansionFieldParser;
 import com.fasterxml.jackson.databind.JsonNode;
 
@@ -35,7 +38,7 @@ public final class SinistroDataExportMapper {
                 ExpansionFieldParser.instant(dto.data(), "icm_ttt_treatment_at"),
                 ExpansionFieldParser.text(dto.data(), "icm_vie_license_plate"),
                 ExpansionFieldParser.text(dto.data(), "informed_by"),
-                ExpansionFieldParser.text(dto.data(), "insurance_claim_commentary"),
+                insuranceClaimCommentary(dto.data()),
                 ExpansionFieldParser.text(dto.data(), "insurance_claim_location"),
                 ExpansionFieldParser.decimal(dto.data(), "insurance_claim_total"),
                 ExpansionFieldParser.decimal(dto.data(), "insurer_credits_subtotal"),
@@ -55,5 +58,16 @@ public final class SinistroDataExportMapper {
                 ExpansionFieldParser.decimal(dto.data(), "responsible_credits_subtotal"),
                 ExpansionFieldParser.decimal(dto.data(), "responsible_debit_entries_subtotal"),
                 ExpansionFieldParser.integer(dto.data(), "sequence_code"));
+    }
+
+    /** Only this observed long-text field extends text1024; ExpansionValue retains raw4000. */
+    private static ExpansionValue<String> insuranceClaimCommentary(final JsonNode row) {
+        final String name = "insurance_claim_commentary";
+        final JsonNode node = row.get(name);
+        if (node == null || !node.isTextual() || node.textValue().length() <= 1024) {
+            return ExpansionFieldParser.text(row, name);
+        }
+        final String raw = node.textValue();
+        return new ExpansionValue<>(Presence.VALUE, Wire.STRING, raw, raw, null);
     }
 }

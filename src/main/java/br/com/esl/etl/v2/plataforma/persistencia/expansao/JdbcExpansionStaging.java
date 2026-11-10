@@ -10,8 +10,8 @@ import br.com.esl.etl.v2.modulos.sinistros.domain.SinistroObservation;
 import br.com.esl.etl.v2.modulos.sinistros.domain.SinistroRules;
 import br.com.esl.etl.v2.plataforma.expansao.ExpansionCaptured;
 import br.com.esl.etl.v2.plataforma.expansao.ExpansionFreshness;
-import br.com.esl.etl.v2.plataforma.expansao.ExpansionStrings;
 import br.com.esl.etl.v2.plataforma.expansao.ExpansionValue;
+import br.com.esl.etl.v2.plataforma.expansao.OrderedExpansionStrings;
 import br.com.esl.etl.v2.plataforma.resiliencia.CancellationToken;
 import java.nio.charset.StandardCharsets;
 import java.sql.PreparedStatement;
@@ -674,7 +674,8 @@ public final class JdbcExpansionStaging {
                     index++, value == null ? null : ((java.time.LocalTime) value).toNanoOfDay());
         } else if (kind.equals("STRINGS")) {
             statement.setObject(
-                    index++, value == null ? null : ((ExpansionStrings) value).items().size());
+                    index++,
+                    value == null ? null : ((OrderedExpansionStrings) value).items().size());
         } else {
             statement.setObject(index++, value);
         }
@@ -686,7 +687,7 @@ public final class JdbcExpansionStaging {
             final UUID execution,
             final long occurrence,
             final String field,
-            final ExpansionValue<ExpansionStrings> value)
+            final ExpansionValue<? extends OrderedExpansionStrings> value)
             throws SQLException {
         if (value.value() == null) {
             return;

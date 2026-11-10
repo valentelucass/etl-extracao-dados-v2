@@ -17,19 +17,44 @@ public final class DataExportQueryEncoder {
         Objects.requireNonNull(endpoint, "O endpoint é obrigatório.");
         Objects.requireNonNull(request, "A requisição é obrigatória.");
         Objects.requireNonNull(sourceZone, "O timezone da fonte é obrigatório.");
+        return appendQuery(
+                endpoint,
+                request.filters(),
+                request.page(),
+                request.pageSize(),
+                request.orderBy(),
+                sourceZone);
+    }
+
+    /**
+     * Serialization only; the caller owns the separately qualified request/profile and admission.
+     */
+    public URI appendQuery(
+            final URI endpoint,
+            final Map<SearchPath, DataExportFilterValue> filters,
+            final int page,
+            final int per,
+            final List<String> orderBy,
+            final ZoneId sourceZone) {
+        Objects.requireNonNull(endpoint);
+        Objects.requireNonNull(filters);
+        Objects.requireNonNull(orderBy);
+        Objects.requireNonNull(sourceZone);
+        if (page < 1 || per < 1 || filters.isEmpty()) {
+            throw new IllegalArgumentException("EXPLICIT_QUERY_SERIALIZATION_INPUT");
+        }
 
         final List<String> parameters = new ArrayList<>();
-        for (final Map.Entry<SearchPath, DataExportFilterValue> entry :
-                request.filters().entrySet()) {
+        for (final Map.Entry<SearchPath, DataExportFilterValue> entry : filters.entrySet()) {
             addParameter(
                     parameters,
                     entry.getKey().asQueryParameterName(),
                     entry.getValue().formatForSource(sourceZone));
         }
-        addParameter(parameters, "page", String.valueOf(request.page()));
-        addParameter(parameters, "per", String.valueOf(request.pageSize()));
-        if (!request.orderBy().isEmpty()) {
-            addParameter(parameters, "order_by", String.join(", ", request.orderBy()));
+        addParameter(parameters, "page", String.valueOf(page));
+        addParameter(parameters, "per", String.valueOf(per));
+        if (!orderBy.isEmpty()) {
+            addParameter(parameters, "order_by", String.join(", ", orderBy));
         }
 
         final String separator = endpoint.getRawQuery() == null ? "?" : "&";
