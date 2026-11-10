@@ -13,11 +13,31 @@ import java.util.function.Function;
 
 /** One page in memory, literal empty terminal, no deduplication and no publication side effects. */
 public final class ReportSnapshotExtractor {
+    private final ReportMetadataCatalog currentCatalog;
+
+    public ReportSnapshotExtractor() {
+        currentCatalog = null;
+    }
+
+    public ReportSnapshotExtractor(final ReportMetadataCatalog catalog) {
+        currentCatalog = java.util.Objects.requireNonNull(catalog);
+    }
+
     public interface Wire {
         JsonNode info(ReportSnapshotTemplate template) throws Exception;
 
         JsonNode page(ReportSnapshotTemplate template, BusinessDateRange dates, int page, int per)
                 throws Exception;
+
+        default JsonNode updatedPage(
+                final ReportSnapshotTemplate template,
+                final BusinessDateRange history,
+                final SourceDateTimeRange updates,
+                final int page,
+                final int per)
+                throws Exception {
+            throw new UnsupportedOperationException("REFRESH_UPDATE_TRANSPORT_REQUIRED");
+        }
 
         default DataExportRecordInput recordInput(final JsonNode row, final int index) {
             return new DataExportRecordInput(row, java.util.Optional.empty());
@@ -143,8 +163,49 @@ public final class ReportSnapshotExtractor {
                 !dates.endInclusive().isBefore(LocalDate.now(ZoneId.of("America/Sao_Paulo"))));
     }
 
-    private static Set<String> validateInfo(
-            final ReportSnapshotTemplate template, final JsonNode info) throws Exception {
+    public Result extractUpdatedRecords(
+            final ReportSnapshotTemplate template,
+            final BusinessDateRange history,
+            final SourceDateTimeRange updates,
+            final Wire wire,
+            final Sink sink,
+            final Function<DataExportRecordInput, ? extends ExpansionObservation> mapper,
+            final Limits limits)
+            throws Exception {
+        if (ReportUpdateContract.forTemplate(template) == null) {
+            throw new IllegalArgumentException("REFRESH_NO_UPDATE_FILTER");
+        }
+        return extractRecords(
+                template,
+                history,
+                new Wire() {
+                    @Override
+                    public JsonNode info(final ReportSnapshotTemplate selected) throws Exception {
+                        return wire.info(selected);
+                    }
+
+                    @Override
+                    public JsonNode page(
+                            final ReportSnapshotTemplate selected,
+                            final BusinessDateRange dates,
+                            final int page,
+                            final int per)
+                            throws Exception {
+                        return wire.updatedPage(selected, dates, updates, page, per);
+                    }
+
+                    @Override
+                    public DataExportRecordInput recordInput(final JsonNode row, final int index) {
+                        return wire.recordInput(row, index);
+                    }
+                },
+                sink,
+                mapper,
+                limits);
+    }
+
+    private Set<String> validateInfo(final ReportSnapshotTemplate template, final JsonNode info)
+            throws Exception {
         require(
                 info != null
                         && info.isObject()
@@ -168,6 +229,9 @@ public final class ReportSnapshotExtractor {
         }
         final var path = template.template().businessDateFilter();
         require(filters.contains(path.root() + "." + path.field()), "SNAPSHOT_BUSINESS_FILTER");
+        if (currentCatalog != null) {
+            return currentCatalog.validate(template, info);
+        }
         if (template.contractResource() != null) {
             try (var resource =
                     ReportSnapshotExtractor.class
@@ -213,6 +277,15 @@ public final class ReportSnapshotExtractor {
             require(template == ReportSnapshotTemplate.MANIFESTOS, "SNAPSHOT_DATE_CONTRACT");
             return;
         }
+        final var date = businessDate(template, row);
+        require(
+                !date.isBefore(dates.startInclusive()) && !date.isAfter(dates.endInclusive()),
+                "SNAPSHOT_DATE_OUTSIDE_REQUEST");
+    }
+
+    public static LocalDate businessDate(
+            final ReportSnapshotTemplate template, final JsonNode row) {
+        require(template.rowDate() != null, "SNAPSHOT_BUSINESS_DATE_NOT_EXPOSED");
         final var value = row.path(template.rowDate());
         require(value.isTextual(), "SNAPSHOT_BUSINESS_DATE_REQUIRED");
         final String text = value.textValue();
@@ -232,9 +305,7 @@ public final class ReportSnapshotExtractor {
             }
             date = parsed;
         }
-        require(
-                !date.isBefore(dates.startInclusive()) && !date.isAfter(dates.endInclusive()),
-                "SNAPSHOT_DATE_OUTSIDE_REQUEST");
+        return date;
     }
 
     private static void validatePagination(

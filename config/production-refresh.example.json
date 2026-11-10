@@ -1,0 +1,9 @@
+{
+  "historyDays": 90,
+  "initialBatchDays": 8,
+  "reconciliationBatchDays": 8,
+  "changedDaysPerBatch": 8,
+  "manifestScanDays": 120,
+  "waitAfterCompletionMinutes": 60,
+  "stateDirectory": "C:/Users/suporte/Documents/Armazenamento-Projetos/etl-extracao-dados-v2/atualizacao0766/operational"
+}

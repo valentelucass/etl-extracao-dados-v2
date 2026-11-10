@@ -221,6 +221,30 @@ final class AllEntitiesIngestionStore implements AutoCloseable {
         }
     }
 
+    LocalDate earliestCovered(final String scope, final LocalDate today, final String entity)
+            throws Exception {
+        try (var command =
+                connection.prepareCall("EXEC ctl.usp_production_ingestion_plan ?,?,?,?")) {
+            command.setQueryTimeout(10);
+            command.setString(1, scope);
+            command.setDate(2, java.sql.Date.valueOf(today.minusDays(3660)));
+            command.setDate(3, java.sql.Date.valueOf(today));
+            command.setString(4, entity);
+            try (var rows = command.executeQuery()) {
+                LocalDate first = null;
+                while (rows.next()) {
+                    if (rows.getBoolean("stored")) {
+                        final var day = rows.getDate("business_date").toLocalDate();
+                        if (first == null || day.isBefore(first)) {
+                            first = day;
+                        }
+                    }
+                }
+                return first;
+            }
+        }
+    }
+
     @Override
     public void close() throws java.sql.SQLException {
         connection.close();

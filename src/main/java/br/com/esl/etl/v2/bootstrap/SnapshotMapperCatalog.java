@@ -1,6 +1,7 @@
 package br.com.esl.etl.v2.bootstrap;
 
 import br.com.esl.etl.v2.modulos.coletas.aplicacao.ColetaDataExportRecordMapper;
+import br.com.esl.etl.v2.modulos.consolidacoes.aplicacao.ConsolidacaoDataExportMapper;
 import br.com.esl.etl.v2.modulos.contasapagar.aplicacao.ContaPagarDataExportMapper;
 import br.com.esl.etl.v2.modulos.cotacoes.aplicacao.CotacaoDataExportRecordMapper;
 import br.com.esl.etl.v2.modulos.faturasporcliente.aplicacao.FaturaClienteDataExportMapper;
@@ -8,6 +9,7 @@ import br.com.esl.etl.v2.modulos.fretes.aplicacao.FreteDataExportRecordMapper;
 import br.com.esl.etl.v2.modulos.inventario.aplicacao.InventarioDataExportMapper;
 import br.com.esl.etl.v2.modulos.localizacaocargas.aplicacao.LocalizacaoCargaDataExportRecordMapper;
 import br.com.esl.etl.v2.modulos.manifestos.aplicacao.ManifestoDataExportRecordMapper;
+import br.com.esl.etl.v2.modulos.ocorrencias.aplicacao.OcorrenciaDataExportMapper;
 import br.com.esl.etl.v2.modulos.sinistros.aplicacao.SinistroDataExportMapper;
 import br.com.esl.etl.v2.plataforma.expansao.ExpansionObservation;
 import br.com.esl.etl.v2.plataforma.fonte.dataexport.CurlSnapshotWire;
@@ -16,14 +18,16 @@ import br.com.esl.etl.v2.plataforma.fonte.dataexport.ReportSnapshotTemplate;
 import com.fasterxml.jackson.databind.JsonNode;
 
 /** Reuses the existing nine application mappers without giving them a synthetic identity. */
-final class SnapshotMapperCatalog {
+public final class SnapshotMapperCatalog {
     private SnapshotMapperCatalog() {}
 
-    static ExpansionObservation map(
+    public static ExpansionObservation map(
             final ReportSnapshotTemplate template, final DataExportRecordInput input) {
         final JsonNode row = input.value();
         final var envelope = CurlSnapshotWire.JSON.createObjectNode().set("data", row);
         return switch (template) {
+            case CONSOLIDACAO_DETALHADA -> new ConsolidacaoDataExportMapper().map(row);
+            case OCORRENCIAS -> new OcorrenciaDataExportMapper().map(row);
             case COLETAS ->
                     new Disposition(
                             template.name(),

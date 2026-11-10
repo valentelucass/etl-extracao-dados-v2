@@ -161,6 +161,28 @@ public final class CurlSnapshotWire implements ReportSnapshotExtractor.Wire {
         return requests;
     }
 
+    @Override
+    public JsonNode updatedPage(
+            final ReportSnapshotTemplate template,
+            final BusinessDateRange history,
+            final SourceDateTimeRange updates,
+            final int page,
+            final int per)
+            throws Exception {
+        final var contract = ReportUpdateContract.forTemplate(template);
+        if (contract == null) {
+            throw new IllegalArgumentException("REFRESH_NO_UPDATE_FILTER");
+        }
+        return get(
+                template,
+                contract.query(template, origin, history, updates, page, per),
+                "update-"
+                        + updates.startInclusive().getEpochSecond()
+                        + "-"
+                        + history.startInclusive(),
+                page);
+    }
+
     private JsonNode get(
             final ReportSnapshotTemplate template,
             final URI target,
