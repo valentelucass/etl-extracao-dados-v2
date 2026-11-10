@@ -21,6 +21,30 @@ coverage/
 *.log
 *.tmp
 
+# POMs temporarios gerados pelas rodadas locais; pom.xml continua versionado.
+/pom-root-*.xml
+
+# Dumps e diagnosticos de falha da JVM.
+/hs_err_pid*
+/replay_pid*
+*.mdmp
+*.hprof
+*.dmp
+
+# Diretorios locais de trabalho, entregas e caches de ferramentas.
+/work/
+/outputs/
+/.runtime/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+
+# Manifestos locais de execucoes anteriores. O acionador usa o manifesto ativo.
+/database/production/receiving/runtime-manifest*.json
+!/database/production/receiving/runtime-manifest0762.json
+!/database/production/receiving/runtime-manifest*.example.json
+
 # IDE e sistema operacional
 .codex-local/
 .codex/
