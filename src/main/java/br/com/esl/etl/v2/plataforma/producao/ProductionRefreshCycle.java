@@ -156,6 +156,7 @@ public final class ProductionRefreshCycle {
             LocalDate today,
             Instant cutoff,
             ReportMetadataCatalog catalog,
+            FreightDependencyIndex dependencyIndexes,
             ArrayNode operations,
             Map<String, UUID> confirmedDates,
             Map<String, Integer> changedDays) {}
@@ -252,6 +253,7 @@ public final class ProductionRefreshCycle {
         final var report =
                 json.createObjectNode()
                         .put("schema", "PRODUCTION_REFRESH0766")
+                        .put("relatedFieldRefreshRevision", "0768")
                         .put("startedAt", began.toString())
                         .put("sourceScope", scope)
                         .put("runtimeSha256", config.required("runtimeSha256").asText())
@@ -278,6 +280,13 @@ public final class ProductionRefreshCycle {
                             today,
                             began.minusSeconds(120),
                             new ReportMetadataCatalog(),
+                            new FreightDependencyIndex(
+                                    checkpointPath
+                                            .getParent()
+                                            .resolve("dependency-index")
+                                            .resolve(scope),
+                                    allowedRoot,
+                                    scope),
                             operations,
                             new HashMap<>(),
                             new HashMap<>());
@@ -323,10 +332,21 @@ public final class ProductionRefreshCycle {
                                                             + 1))
                             .put("nextReconciliationDay", state.required("sweepNext").asText())
                             .put("sweepsCompleted", state.path("sweepsCompleted").asInt())
-                            .put("pendingUpdateWork", state.has("pending"))
+                            .put("pendingUpdateWork", pending(state))
+                            .put("relatedWatermark", state.path("relatedWatermark").asText())
+                            .put(
+                                    "relatedCaughtUp",
+                                    relatedCaughtUp(state, template, context.cutoff()))
                             .put(
                                     "status",
-                                    state.has("pending") ? "BATCH_DEFERRED" : "BATCH_COMPLETED");
+                                    pending(state)
+                                                    || (state.path("initialComplete").asBoolean()
+                                                            && !relatedCaughtUp(
+                                                                    state,
+                                                                    template,
+                                                                    context.cutoff()))
+                                            ? "BATCH_DEFERRED"
+                                            : "BATCH_COMPLETED");
                 } catch (final DeferredWork deferred) {
                     result.put("status", "BATCH_DEFERRED");
                 } catch (final Exception failure) {
@@ -392,6 +412,42 @@ public final class ProductionRefreshCycle {
         }
         if (lastDay.isBefore(context.today())) {
             return;
+        }
+        if (template == ReportSnapshotTemplate.CONSOLIDACAO_DETALHADA) {
+            reconcileConsolidations(context, state);
+            return;
+        }
+        if (FreightDependencyIndex.supports(template)) {
+            int rebuilt = 0;
+            state.put("relatedIndexPending", true);
+            for (var day = floor; !day.isAfter(context.today()); day = day.plusDays(1)) {
+                if (!context.dependencyIndexes().exists(template, day)) {
+                    if (rebuilt++ >= context.policy().changedDaysPerBatch()) {
+                        context.checkpoint().save();
+                        return;
+                    }
+                    fullDay(context, template, day, "RELATED_INDEX_BOOTSTRAP");
+                }
+            }
+            state.put("relatedIndexPending", false);
+            context.checkpoint().save();
+            final var related =
+                    new RelatedFreightRefresh(
+                            context.dependencyIndexes(),
+                            capture,
+                            context.session().wire(),
+                            context.root(),
+                            context.operations());
+            if (!related.refresh(
+                    template,
+                    state,
+                    context.today(),
+                    context.cutoff(),
+                    context.policy().changedDaysPerBatch(),
+                    context.checkpoint()::save,
+                    day -> fullDay(context, template, day, "RELATED_UPDATED"))) {
+                return;
+            }
         }
         final var update = ReportUpdateContract.forTemplate(template);
         // Rotating complete snapshots also repair deletions, moved dates and related-table edits.
@@ -491,6 +547,53 @@ public final class ProductionRefreshCycle {
         context.checkpoint().save();
     }
 
+    private void reconcileConsolidations(final Context context, final ObjectNode state)
+            throws Exception {
+        final var floor = LocalDate.parse(state.required("floor").asText());
+        if (!state.has("consolidationSweep")
+                || !state.path("consolidationSweep")
+                        .path("floor")
+                        .asText()
+                        .equals(floor.toString())) {
+            state.putObject("consolidationSweep")
+                    .put("floor", floor.toString())
+                    .put("through", context.today().toString())
+                    .put("next", floor.toString())
+                    .put("cutoff", context.cutoff().toString());
+            context.checkpoint().save();
+        }
+        final var round = (ObjectNode) state.required("consolidationSweep");
+        final var through = LocalDate.parse(round.required("through").asText());
+        var next = LocalDate.parse(round.required("next").asText());
+        while (!next.isAfter(through)) {
+            fullDay(
+                    context,
+                    ReportSnapshotTemplate.CONSOLIDACAO_DETALHADA,
+                    next,
+                    "CONSOLIDATION_RECONCILIATION");
+            next = next.plusDays(1);
+            round.put("next", next.toString());
+            state.put("sweepNext", next.toString());
+            context.checkpoint().save();
+        }
+        final var confirmedThrough = Instant.parse(round.required("cutoff").asText());
+        state.put("watermark", confirmedThrough.toString())
+                .put("relatedWatermark", confirmedThrough.toString())
+                .put("sweepNext", floor.toString())
+                .put("sweepsCompleted", state.path("sweepsCompleted").asInt() + 1)
+                .put("lastSweepCompletedAt", clock.instant().toString())
+                .put("relatedIndexPending", false);
+        for (final var oldQueue : List.of("pending", "relatedPending")) {
+            if (state.has(oldQueue)
+                    && !Instant.parse(state.path(oldQueue).required("commitThrough").asText())
+                            .isAfter(confirmedThrough)) {
+                state.remove(oldQueue);
+            }
+        }
+        state.remove("consolidationSweep");
+        context.checkpoint().save();
+    }
+
     private void sweep(
             final Context context,
             final ReportSnapshotTemplate template,
@@ -526,6 +629,24 @@ public final class ProductionRefreshCycle {
             final BusinessDateRange scope,
             final SourceDateTimeRange window)
             throws Exception {
+        final int scopeDays = template == ReportSnapshotTemplate.FRETES ? 1 : 8;
+        if (ChronoUnit.DAYS.between(scope.startInclusive(), scope.endInclusive()) >= scopeDays) {
+            final var days = new TreeSet<LocalDate>();
+            long rows = 0;
+            for (var first = scope.startInclusive();
+                    !first.isAfter(scope.endInclusive());
+                    first = first.plusDays(scopeDays)) {
+                final var last =
+                        first.plusDays(scopeDays - 1L).isAfter(scope.endInclusive())
+                                ? scope.endInclusive()
+                                : first.plusDays(scopeDays - 1L);
+                final var part =
+                        discover(context, template, new BusinessDateRange(first, last), window);
+                rows += part.rows();
+                days.addAll(part.dates());
+            }
+            return new Changes(rows, days);
+        }
         final var dates = new TreeSet<LocalDate>();
         final var characters = new long[] {0};
         final var path =
@@ -586,7 +707,7 @@ public final class ProductionRefreshCycle {
             throws Exception {
         require(!day.isAfter(context.today()), "REFRESH_FUTURE_SNAPSHOT");
         final var key = template.name() + ":" + day;
-        if (context.confirmedDates().containsKey(key)) {
+        if (!phase.equals("RELATED_UPDATED") && context.confirmedDates().containsKey(key)) {
             context.operations()
                     .addObject()
                     .put("entity", template.name())
@@ -595,7 +716,7 @@ public final class ProductionRefreshCycle {
                     .put("reusedConfirmedRun", context.confirmedDates().get(key).toString());
             return;
         }
-        if (phase.equals("UPDATED")
+        if (updated(phase)
                 && context.changedDays().getOrDefault(template.name(), 0)
                         >= context.policy().changedDaysPerBatch()) {
             throw new DeferredWork();
@@ -674,10 +795,12 @@ public final class ProductionRefreshCycle {
                     digest.update(buffer, 0, read);
                 }
             }
-            context.store()
-                    .storeAndVerify(run, rows, java.util.HexFormat.of().formatHex(digest.digest()));
+            final var captureSha = java.util.HexFormat.of().formatHex(digest.digest());
+            context.store().storeAndVerify(run, rows, captureSha);
+            context.dependencyIndexes()
+                    .remember(template, day, run, captureSha, rows, context.root());
             context.confirmedDates().put(key, run);
-            if (phase.equals("UPDATED")) {
+            if (updated(phase)) {
                 context.changedDays().merge(template.name(), 1, Integer::sum);
             }
             operation.put("stored", true).put("sqlReadbackExact", true).put("rows", result.rows());
@@ -695,6 +818,25 @@ public final class ProductionRefreshCycle {
     private static ReportSnapshotExtractor.Limits limits(final ReportSnapshotTemplate template) {
         return new ReportSnapshotExtractor.Limits(
                 200, template == ReportSnapshotTemplate.FRETES ? 25 : 100, 100000);
+    }
+
+    private static boolean updated(final String phase) {
+        return phase.equals("UPDATED") || phase.equals("RELATED_UPDATED");
+    }
+
+    private static boolean pending(final ObjectNode state) {
+        return state.has("pending")
+                || state.has("relatedPending")
+                || state.has("consolidationSweep")
+                || state.path("relatedIndexPending").asBoolean();
+    }
+
+    private static boolean relatedCaughtUp(
+            final ObjectNode state, final ReportSnapshotTemplate template, final Instant cutoff) {
+        return !FreightDependencyIndex.supports(template)
+                || (state.hasNonNull("relatedWatermark")
+                        && !Instant.parse(state.required("relatedWatermark").asText())
+                                .isBefore(cutoff));
     }
 
     private Path admitted(final JsonNode config, final String field) {

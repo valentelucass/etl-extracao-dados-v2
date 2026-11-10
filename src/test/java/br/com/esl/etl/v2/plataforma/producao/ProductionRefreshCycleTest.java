@@ -88,7 +88,18 @@ class ProductionRefreshCycleTest {
                 fixture.store.latest.get(key).get(0).path("record"),
                 fixture.store.latest.get(key).get(1).path("record"));
         assertFalse(fixture.entity(ReportSnapshotTemplate.OCORRENCIAS).has("pending"));
-        assertEquals(9, fixture.templatesWithUpdates.size());
+        assertEquals(8, fixture.templatesWithUpdates.size());
+        assertTrue(
+                fixture.updateScopes.stream()
+                        .allMatch(
+                                scope ->
+                                        java.time.temporal.ChronoUnit.DAYS.between(
+                                                        scope.startInclusive(),
+                                                        scope.endInclusive())
+                                                <= 7));
+        assertTrue(
+                fixture.freightScopes.stream()
+                        .allMatch(scope -> scope.startInclusive().equals(scope.endInclusive())));
         assertFalse(fixture.templatesWithUpdates.contains(ReportSnapshotTemplate.CONTAS_A_PAGAR));
         assertFalse(fixture.templatesWithUpdates.contains(ReportSnapshotTemplate.SINISTROS));
     }
@@ -106,7 +117,9 @@ class ProductionRefreshCycleTest {
         assertFalse(fixture.run());
         final var state = fixture.entity(ReportSnapshotTemplate.CONSOLIDACAO_DETALHADA);
         assertEquals(marker, state.path("watermark").asText());
-        assertEquals(1, state.path("pending").path("dates").size());
+        assertEquals(
+                fixture.floor.plusDays(3).toString(),
+                state.path("consolidationSweep").path("next").asText());
         assertTrue(fixture.store.failed > 0);
         fixture.store.rejectDay = null;
         fixture.now = fixture.now.plusSeconds(3900);
@@ -123,12 +136,19 @@ class ProductionRefreshCycleTest {
         fixture.changedDates.add(fixture.floor.plusDays(3));
         assertTrue(fixture.run());
         final var state = fixture.entity(ReportSnapshotTemplate.OCORRENCIAS);
-        assertTrue(state.has("pending"));
-        assertEquals(1, state.path("pending").path("dates").size());
+        assertTrue(state.has("pending") || state.has("relatedPending"));
+        assertEquals(1, queued(state).path("dates").size());
         assertTrue(fixture.lastReport.required("entities").toString().contains("BATCH_DEFERRED"));
-        fixture.now = fixture.now.plusSeconds(3900);
-        assertTrue(fixture.run());
+        for (int attempt = 0; attempt < 4; attempt++) {
+            fixture.now = fixture.now.plusSeconds(3900);
+            assertTrue(fixture.run());
+            if (!fixture.entity(ReportSnapshotTemplate.OCORRENCIAS).has("pending")
+                    && !fixture.entity(ReportSnapshotTemplate.OCORRENCIAS).has("relatedPending")) {
+                break;
+            }
+        }
         assertFalse(fixture.entity(ReportSnapshotTemplate.OCORRENCIAS).has("pending"));
+        assertFalse(fixture.entity(ReportSnapshotTemplate.OCORRENCIAS).has("relatedPending"));
     }
 
     @Test
@@ -184,6 +204,66 @@ class ProductionRefreshCycleTest {
         assertFalse(fixture.run());
         assertEquals(0, fixture.fullCalls);
         assertEquals(0, fixture.store.commits.size());
+    }
+
+    @Test
+    void aKnownLocationDifferenceCannotReuseAnEarlierSnapshotFromTheSameCycle() throws Exception {
+        final var fixture = new Fixture(directory);
+        fixture.seedReady();
+        try (var files = Files.walk(directory.resolve("dependency-index"))) {
+            final var pointer =
+                    files.filter(
+                                    path ->
+                                            path.getFileName()
+                                                            .toString()
+                                                            .equals(fixture.floor + ".json")
+                                                    && path.getParent()
+                                                            .getFileName()
+                                                            .toString()
+                                                            .equals("OCORRENCIAS"))
+                            .findFirst()
+                            .orElseThrow();
+            Files.delete(pointer);
+        }
+        fixture.locationChangeDuringLookup = true;
+        assertTrue(fixture.run());
+        assertEquals(2, fixture.occurrenceFloorCaptures);
+        assertEquals(
+                "new location",
+                fixture.store
+                        .latest
+                        .get("OCORRENCIAS:" + fixture.floor)
+                        .get(0)
+                        .required("record")
+                        .required("ice_fit_fln_cln_nickname")
+                        .asText());
+        assertEquals(2, fixture.store.latest.get("OCORRENCIAS:" + fixture.floor).size());
+    }
+
+    @Test
+    void consolidationJoinedValuesAreReconciledWithoutReadingUnrelatedFreightRows()
+            throws Exception {
+        final var fixture = new Fixture(directory);
+        fixture.seedReady();
+        assertTrue(fixture.run());
+        assertEquals(
+                90,
+                fixture.lastReport.required("operations").findValues("phase").stream()
+                        .filter(value -> value.asText().equals("CONSOLIDATION_RECONCILIATION"))
+                        .count());
+        assertFalse(
+                fixture.templatesWithUpdates.contains(
+                        ReportSnapshotTemplate.CONSOLIDACAO_DETALHADA));
+        final var state = fixture.entity(ReportSnapshotTemplate.CONSOLIDACAO_DETALHADA);
+        assertEquals(1, state.path("sweepsCompleted").asInt());
+        assertFalse(state.has("consolidationSweep"));
+        assertEquals(fixture.now.minusSeconds(120).toString(), state.path("watermark").asText());
+    }
+
+    private static JsonNode queued(final JsonNode state) {
+        return state.has("relatedPending")
+                ? state.required("relatedPending")
+                : state.required("pending");
     }
 
     private record Valid() implements ExpansionObservation {
@@ -255,6 +335,8 @@ class ProductionRefreshCycleTest {
         final java.util.Set<ReportSnapshotTemplate> templatesWithUpdates =
                 java.util.EnumSet.noneOf(ReportSnapshotTemplate.class);
         final List<BusinessDateRange> manifestScopes = new ArrayList<>();
+        final List<BusinessDateRange> updateScopes = new ArrayList<>();
+        final List<BusinessDateRange> freightScopes = new ArrayList<>();
         final Instant changedAt = Instant.parse("2026-11-10T04:30:00Z");
         final LocalDate floor = LocalDate.parse("2026-08-13");
         Instant now = Instant.parse("2026-11-10T06:00:00Z");
@@ -262,6 +344,8 @@ class ProductionRefreshCycleTest {
         LocalDate emptyDay;
         int fullCalls;
         int updateCalls;
+        boolean locationChangeDuringLookup;
+        int occurrenceFloorCaptures;
 
         Fixture(final Path root) throws Exception {
             this.root = root;
@@ -313,7 +397,49 @@ class ProductionRefreshCycleTest {
                         .put("initialComplete", true)
                         .put("watermark", now.minusSeconds(10800).toString());
             }
+            final var indexes =
+                    new FreightDependencyIndex(
+                            root.resolve("dependency-index").resolve(scope), root, scope);
+            final var seed = Files.createDirectories(root.resolve("seed"));
+            for (final var template :
+                    new ReportSnapshotTemplate[] {
+                        ReportSnapshotTemplate.CONSOLIDACAO_DETALHADA,
+                        ReportSnapshotTemplate.OCORRENCIAS
+                    }) {
+                for (var day = floor; !day.isAfter(today()); day = day.plusDays(1)) {
+                    final var envelope = CurlSnapshotWire.JSON.createObjectNode();
+                    envelope.set("record", row(template, day));
+                    indexes.remember(
+                            template,
+                            day,
+                            UUID.randomUUID(),
+                            "a".repeat(64),
+                            List.of(envelope.toString(), envelope.toString()),
+                            seed);
+                }
+            }
             saved.save();
+        }
+
+        private static ObjectNode row(final ReportSnapshotTemplate template, final LocalDate day) {
+            final var row = CurlSnapshotWire.JSON.createObjectNode().put("synthetic", true);
+            final var number = day.toEpochDay() + 1;
+            if (template.rowDate() != null) {
+                row.put(template.rowDate(), day.toString());
+            }
+            if (template == ReportSnapshotTemplate.OCORRENCIAS) {
+                row.put("ice_f_e_fit_corporation_sequence_number", number)
+                        .put("ice_fit_service_at", day.toString())
+                        .put("ice_fit_fln_cln_nickname", "fixture");
+            } else if (template == ReportSnapshotTemplate.CONSOLIDACAO_DETALHADA) {
+                row.put("ctd_fgs_corporation_sequence_number", number)
+                        .put("ctd_fgs_service_at", day.toString());
+            } else if (template == ReportSnapshotTemplate.FRETES
+                    || template == ReportSnapshotTemplate.LOCALIZACAO_CARGAS) {
+                row.put("corporation_sequence_number", number)
+                        .put("fit_fln_cln_nickname", "fixture");
+            }
+            return row;
         }
 
         ObjectNode entity(final ReportSnapshotTemplate template) throws Exception {
@@ -352,6 +478,10 @@ class ProductionRefreshCycleTest {
                         long rows = 0;
                         if (updates != null) {
                             updateCalls++;
+                            updateScopes.add(dates);
+                            if (template == ReportSnapshotTemplate.FRETES) {
+                                freightScopes.add(dates);
+                            }
                             templatesWithUpdates.add(template);
                             if (template == ReportSnapshotTemplate.MANIFESTOS) {
                                 manifestScopes.add(dates);
@@ -363,28 +493,33 @@ class ProductionRefreshCycleTest {
                                 }
                                 if (!changed.isBefore(dates.startInclusive())
                                         && !changed.isAfter(dates.endInclusive())) {
-                                    final var row =
-                                            CurlSnapshotWire.JSON
-                                                    .createObjectNode()
-                                                    .put("sequence_code", 1);
-                                    if (template.rowDate() != null) {
-                                        row.put(template.rowDate(), changed.toString());
-                                    }
+                                    final var row = row(template, changed).put("sequence_code", 1);
                                     sink.accept(id, ++rows, row, new Valid());
                                 }
                             }
                         } else {
                             fullCalls++;
                             if (!dates.startInclusive().equals(emptyDay)) {
-                                final var row =
-                                        CurlSnapshotWire.JSON
-                                                .createObjectNode()
-                                                .put("synthetic", true);
-                                if (template.rowDate() != null) {
-                                    row.put(template.rowDate(), dates.startInclusive().toString());
+                                for (var day = dates.startInclusive();
+                                        !day.isAfter(dates.endInclusive());
+                                        day = day.plusDays(1)) {
+                                    final var row = row(template, day);
+                                    if (template == ReportSnapshotTemplate.OCORRENCIAS
+                                            && day.equals(floor)) {
+                                        occurrenceFloorCaptures++;
+                                        if (locationChangeDuringLookup
+                                                && occurrenceFloorCaptures > 1) {
+                                            row.put("ice_fit_fln_cln_nickname", "new location");
+                                        }
+                                    }
+                                    if (locationChangeDuringLookup
+                                            && template == ReportSnapshotTemplate.LOCALIZACAO_CARGAS
+                                            && day.equals(floor)) {
+                                        row.put("fit_fln_cln_nickname", "new location");
+                                    }
+                                    sink.accept(id, ++rows, row, new Valid());
+                                    sink.accept(id, ++rows, row.deepCopy(), new Valid());
                                 }
-                                sink.accept(id, ++rows, row, new Valid());
-                                sink.accept(id, ++rows, row.deepCopy(), new Valid());
                             }
                         }
                         return new ReportSnapshotExtractor.Result(

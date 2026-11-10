@@ -1,3 +1,7 @@
+## Atualização 0768 — Campos relacionados corrigidos e comparação qualificada
+
+Ver [comparação e prova da correção](comparacao-e-propagacao-0768.md) e [operação](../../runbooks/atualizacao-campos-relacionados-0768.md). Consolidação reconfere o histórico; Ocorrências recaptura datas afetadas por Fretes/localização. Os 36 casos da limitação anterior foram recuperados e comparados nos 20 campos com os novos Excel. HTTP, modelos e SQL conferidos integralmente; visão atual e histórico preservados. As diferenças de tempo entre arquivos permanecem explícitas. Carga de 90 dias e dashboard não iniciados nesta prova. Notas abaixo históricas.
+
 ## Atualização0767 — Comparação de conteúdo concluída e limite de atualização identificado
 
 Ver [comparação atual](comparacao-excel-0767.md) e [apresentação dos booleanos no Excel](apresentacao-excel-0767.md). As59colunas e737959valores recebidos foram conferidos no SQL; todas as ocorrências extraídas têm confirmação nos Excel observados. O último arquivo de Ocorrências contém36mudanças relacionadas e5novaslinhas, todas explicadas. O filtro updated_at recuperou as5novas,mas não as36mudanças de campos ligados ao frete;garantia de atualização integral por ciclo permanece pendente antesdashboard.90dias adiados por pedido do usuário. Entradas abaixo históricas.
