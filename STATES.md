@@ -1,3 +1,7 @@
+## 0772 — Cotações na mesma rota: regra confirmada e ensaiada
+
+[Runbook atualizado](docs/runbooks/publicacao-cotacoes-dashboard-0771.md). Duas cargas em itens calculados do ESL contam separadamente ainda que rota, CEP e número coincidam. Cinco verificações passaram no SQL Server, incluindo recaptura da mesma rota com atualização de valor. No recorte de 1.523 linhas, sete dos dez grupos de mesma rota diferem nos campos disponíveis de carga. Três grupos diferem em informações fiscais, status ou desconto e precisam ser conferidos na origem. Projeção candidata ensaiada em consulta de leitura.
+
 ## 0771 — Publicação candidata de Cotações por trecho
 
 [Runbook](docs/runbooks/publicacao-cotacoes-dashboard-0771.md). Regra do gestor para trechos distintos ratificada; projeção de 54 colunas seleciona só o último lote completo do dia e conserva as 37 informações em Metadata. SQL real/fixture e API em processo passaram: 1.523 linhas no recorte e dois trechos para o caso de teste. Não somar capturas antigas, não usar preço ou número como chave do trecho. Mesma rota com linhas divergentes em 10 números segue pendente para corte. Sem aplicar view, alterar V1, chamar ESL, criar telas ou carregar 90 dias.

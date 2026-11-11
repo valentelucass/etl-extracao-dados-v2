@@ -145,7 +145,7 @@ INSERT @archive(run_id,occurrence_ordinal,source_envelope) SELECT 2,2,source_env
     $detail = $fixtureQuery + @'
 SELECT COUNT_BIG(*) n, COUNT(DISTINCT [Trecho]) routes, SUM([Valor frete]) freight,
        SUM(CASE WHEN [Status Conversão]='Convertida' AND DATEPART(TZOFFSET,[Nfse/Data de emissão])=-180 THEN 1 ELSE 0 END) converted,
-       SUM(CASE WHEN [Min. Frete/KG]=0.74 THEN 1 ELSE 0 END) tariff
+       SUM(CASE WHEN [Min. Frete/KG]=0.74 THEN 1 ELSE 0 END) tariff, SUM([Volume]) volumes
 FROM projection;
 '@
     $first = @(Read-Sql ($fixture + "`n" + $detail))[0]
@@ -158,6 +158,25 @@ FROM projection;
     if ($empty.n -ne 0 -or $multi.n -ne 0) { throw 'EMPTY_REFRESH_OR_MULTI_SOURCE_MUST_NOT_REUSE_ROWS' }
     $receipt.replay = [ordered]@{before=$first; after=$repeat; confirmedEmpty=$empty.n; multipleSources=$multi.n}
     $receipt.assertions += 'Exact current-view query keeps both routes after replacement; old values, missing rows and multiple scopes are not added'
+
+    $sameRoute = @'
+UPDATE @archive
+SET source_envelope=JSON_MODIFY(
+    JSON_MODIFY(JSON_MODIFY(JSON_MODIFY(JSON_MODIFY(source_envelope,
+        '$.record.qoe_qes_diy_name','Destino A'),
+        '$.record.qoe_qes_origin_postal_code','00000001'),
+        '$.record.qoe_qes_destination_postal_code','00000002'),
+        '$.record.qoe_qes_invoices_volumes',occurrence_ordinal),
+        '$.record.qoe_qes_invoices_value',CASE occurrence_ordinal WHEN 1 THEN 900 ELSE 2000 END);
+'@
+    $sameFirst = @(Read-Sql ($fixture + "`n" + $sameRoute + "`n" + $detail))[0]
+    $sameRepeat = @(Read-Sql ($fixture + "`n" + $sameRoute + "`nUPDATE @coverage SET latest_run_id=2;`n" + $detail))[0]
+    if ($sameFirst.n -ne 2 -or $sameFirst.routes -ne 1 -or $sameFirst.volumes -ne 3 -or $sameFirst.freight -ne [decimal]300.75 -or
+        $sameRepeat.n -ne 2 -or $sameRepeat.routes -ne 1 -or $sameRepeat.volumes -ne 3 -or $sameRepeat.freight -ne [decimal]320.75) {
+        throw 'SAME_ROUTE_DISTINCT_CARGO_OR_RECAPTURE_REGRESSION'
+    }
+    $receipt.sameRouteReplay = [ordered]@{before=$sameFirst; after=$sameRepeat}
+    $receipt.assertions += 'Different loads on the same route and postcodes remain two items after the latest batch replaces the prior one'
     $receipt.passed = $true
 } catch {
     $e=$_.Exception;while($e.InnerException){$e=$e.InnerException}
