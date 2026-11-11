@@ -1,3 +1,7 @@
+## 0777 — Raster, Coletores, Manifestos e Saúde do ETL publicados
+
+[Regras e validação](docs/runbooks/publicacao-operacional-dashboard.md). Oito consultas passaram no SQL e no JDBC do portal. São 21 publicações em 26 destinos. A coleta de Usuários observou 11.000 IDs sem chegar à última página. Coletas e as três consultas de Fretes dependem de campos ausentes nos templates atuais. O portal em produção lê o V1.
+
 ## 0776 — Faturas, Contas a Pagar e Clientes publicados
 
 [Regras e validação](docs/runbooks/publicacao-financeira-clientes-dashboard.md). Quatro consultas passaram em rollback, aplicação, rechecagem e leitura JDBC com a conta do portal. Faturas conservou 6.372 documentos de 6.984 ocorrências. Contas a Pagar conservou 793 lançamentos de 831 ocorrências. Clientes reúne 5.347 nomes. A V2 tem 13 dos 26 destinos analíticos publicados e as rotas do portal seguem no V1.
