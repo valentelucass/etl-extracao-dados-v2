@@ -1,3 +1,7 @@
+## 0773 — Cotações e cobertura publicadas no V2
+
+[Cotações](docs/runbooks/publicacao-cotacoes-dashboard-0771.md) e [cobertura](docs/runbooks/publicacao-cobertura-dashboard-0770.md). O ensaio de instalação de Cotações foi revertido, depois as duas views foram instaladas e verificadas em reexecução. A conta do portal leu as publicações no teste JDBC. O ESL confirmou os três números pendentes com 2, 2 e 3 itens. Um dos 26 destinos analíticos está publicado. Faltam os outros 25, referências, fontes de apoio, cobertura histórica e ensaio de troca e retorno. Os 26 synonyms analíticos do portal continuam no V1.
+
 ## 0772 — Cotações na mesma rota: regra confirmada e ensaiada
 
 [Runbook atualizado](docs/runbooks/publicacao-cotacoes-dashboard-0771.md). Duas cargas em itens calculados do ESL contam separadamente ainda que rota, CEP e número coincidam. Cinco verificações passaram no SQL Server, incluindo recaptura da mesma rota com atualização de valor. No recorte de 1.523 linhas, sete dos dez grupos de mesma rota diferem nos campos disponíveis de carga. Três grupos diferem em informações fiscais, status ou desconto e precisam ser conferidos na origem. Projeção candidata ensaiada em consulta de leitura.

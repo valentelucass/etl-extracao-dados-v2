@@ -59,7 +59,8 @@ IF NOT EXISTS (SELECT 1 FROM sys.schemas p JOIN sys.schemas c ON p.principal_id=
     $record = Scalar "SELECT source_sha256 FROM ctl.production_installation_step WHERE step_id='0770-dashboard-receiving-overview'"
     $installed = Scalar "SELECT OBJECT_DEFINITION(OBJECT_ID(N'pub.v2_dashboard_receiving_overview',N'V'))"
     if ($record -or ($installed -and $installed -isnot [DBNull])) {
-        $installedMatch = [regex]::Match(([string]$installed).Replace("`r`n","`n"), $viewPattern)
+        $catalogPattern = $viewPattern.Replace('CREATE OR ALTER VIEW', 'CREATE\s+(?:OR\s+ALTER\s+)?VIEW')
+        $installedMatch = [regex]::Match(([string]$installed).Replace("`r`n","`n"), $catalogPattern)
         if ($record -cne $hash -or -not $installedMatch.Success -or
             $projection.Groups[1].Value -cne $installedMatch.Groups[1].Value) {
             throw 'DASHBOARD_OVERVIEW_INSTALLATION_DRIFT'
