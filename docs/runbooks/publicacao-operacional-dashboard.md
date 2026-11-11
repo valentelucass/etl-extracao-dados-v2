@@ -34,4 +34,18 @@ O ensaio sem `-Apply` reverte a transação. A aplicação registra os hashes, c
 .\scripts\operations\Install-DashboardCompatibilityViews.ps1 -Group Saude -AuditReportPath C:\privado\reports\<ciclo>.json -AuditCaptureDirectory C:\privado\captures\<ciclo> -ReceiptPath C:\privado\saude.json
 ```
 
-A consulta de Usuários tem código de instalação preparado. A fonte retornou 11.000 usuários únicos em 550 páginas e indicou que ainda havia páginas. A coleta incompleta não foi promovida. A publicação de Usuários depende do término da paginação e da validação em SQL com a captura completa.
+## Usuários
+
+A implantação inicial migrou os 6.918 usuários ativos do cadastro operacional do V1 para a V2. O ensaio comparou todos os IDs, nomes e datas de atualização. A consulta publicada lê a cópia local da V2. A importação inicial é única e registra a procedência de cada linha.
+
+```powershell
+.\scripts\operations\Install-DashboardCompatibilityViews.ps1 -Group Usuarios -SeedLegacyUserDirectory -ReceiptPath C:\privado\usuarios-seed.json
+```
+
+A leitura direta da fonte ainda precisa chegar ao fim da paginação. A captura anterior retornou 11.000 usuários em 550 páginas e indicou continuação. A capacidade do recebimento agora cobre até 100.000 usuários, mantendo o contrato de 20 por página. O teste isolado gravou e leu 55.000 linhas sintéticas e reverteu a transação. A próxima captura completa da origem pode atualizar a dimensão pelo grupo `Usuarios`, usando o recibo da captura em vez da importação inicial.
+
+## Campos adicionais de Coletas e Fretes
+
+O catálogo do ESL oferece campos que estão fora dos templates 6908 e 6389. Em Coletas, foram localizados Hora solicitação, ID da filial, Logradouro, Número e Complemento na associação Endereço de coleta, Documento na associação Cliente e ID na associação Usuário do cancelamento. Em Fretes, foram localizados IDs dos envolvidos e da filial, ID CT-e e Data criação na associação CT-e, além de base de cálculo, alíquotas e valores de PIS e COFINS na associação Fiscal.
+
+O teste das consultas precisa de dois templates complementares com acesso restrito, ligados pelo ID original de Coleta ou Frete. Os relatórios atuais alimentam a extração em produção e o complemento precisa ter identidade, escopo, tipos e filtros verificados pelo Data Export. A data geral de atualização da Coleta tem significado próprio. No recorte comparado, ela não coincidiu com nenhum dos 916 horários de mudança de status do V1. A identificação da origem para histórico de status e exclusão segue aberta.

@@ -3,7 +3,7 @@ param(
     [ValidateSet('Users','Raster')][Parameter(Mandatory)][string]$Source,
     [Parameter(Mandatory)][string]$Receipt,
     [Parameter(Mandatory)][string]$CaptureDirectory,
-    [ValidateRange(1,5000)][int]$MaxPages=2000,
+    [ValidateRange(1,5000)][int]$MaxPages=5000,
     [string]$RasterDate
 )
 $ErrorActionPreference='Stop'

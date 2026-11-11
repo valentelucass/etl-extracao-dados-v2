@@ -4,6 +4,7 @@ param(
     [ValidateSet('References','Sinistros','Inventario','Localizacao','Faturas','ContasAPagar','Clientes','Usuarios','Raster','Coletores','Saude','Manifestos')][string]$Group = 'References',
     [string[]]$CaptureReceiptPath,
     [string]$CaptureDirectory,
+    [switch]$SeedLegacyUserDirectory,
     [string]$AuditReportPath,
     [string]$AuditCaptureDirectory,
     [switch]$Apply
@@ -64,6 +65,9 @@ $auxiliary = $Group -in @('Usuarios','Raster')
 if (($CaptureReceiptPath -or $CaptureDirectory) -and (-not $auxiliary -or -not $CaptureReceiptPath -or -not $CaptureDirectory)) {
     throw 'AUXILIARY_CAPTURE_ARGUMENTS_INVALID'
 }
+if ($SeedLegacyUserDirectory -and ($Group -ne 'Usuarios' -or $CaptureReceiptPath)) {
+    throw 'USER_DIRECTORY_SEED_ARGUMENTS_INVALID'
+}
 if (($AuditReportPath -or $AuditCaptureDirectory) -and ($Group -ne 'Saude' -or -not $AuditReportPath -or -not $AuditCaptureDirectory)) {
     throw 'AUDIT_CAPTURE_ARGUMENTS_INVALID'
 }
@@ -100,16 +104,19 @@ function Read-Metadata([string]$Text) {
     } finally { $command.Dispose() }
 }
 
-function Install-ReceivingPackage([string]$RelativePath,[string]$Step,[string]$CountQuery,[int]$ExpectedObjects) {
+function Install-ReceivingPackage([string]$RelativePath,[string]$Step,[string]$CountQuery,[int]$ExpectedObjects,[switch]$ReplaceExisting) {
     $sql = [IO.File]::ReadAllText((Join-Path $repository $RelativePath)).Replace("`r`n", "`n")
     $sha = [Security.Cryptography.SHA256]::Create()
     try { $hash = [BitConverter]::ToString($sha.ComputeHash([Text.Encoding]::UTF8.GetBytes($sql))).Replace('-', '') }
     finally { $sha.Dispose() }
     $record = Invoke-Scalar 'SELECT source_sha256 FROM ctl.production_installation_step WHERE step_id=@step' @{'@step'=$Step}
     $objectCount = Invoke-Scalar $CountQuery
-    if ($record -or $objectCount) {
+    if ($record) {
         if ($record -cne $hash -or $objectCount -ne $ExpectedObjects) { throw 'DASHBOARD_RECEIVING_DRIFT' }
         return 0
+    }
+    if (($objectCount -and -not $ReplaceExisting) -or ($ReplaceExisting -and $objectCount -ne $ExpectedObjects)) {
+        throw 'DASHBOARD_RECEIVING_DRIFT'
     }
     foreach ($batch in [regex]::Split($sql, '(?im)^GO[\t ]*$')) {
         if ($batch.Trim()) { $null = Invoke-Scalar $batch }
@@ -156,6 +163,34 @@ SELECT COUNT(*) FROM sys.objects WHERE object_id IN (
     OBJECT_ID('core.dashboard_raster_time','FN'))
 '@
         $added += Install-ReceivingPackage $relative '0777-dashboard-auxiliary-receiving' $countQuery 5
+        if ($Group -eq 'Usuarios') {
+            $capacityPath = 'database/production/receiving/006_dashboard_user_directory_capacity.sql'
+            $capacityCount = "SELECT COUNT(*) FROM sys.procedures WHERE object_id=OBJECT_ID('ctl.usp_store_dashboard_auxiliary','P')"
+            $added += Install-ReceivingPackage $capacityPath '0778-dashboard-user-directory-capacity' $capacityCount 1 -ReplaceExisting
+        }
+        if ($SeedLegacyUserDirectory) {
+            $seed = Invoke-Scalar @'
+IF EXISTS(SELECT 1 FROM ctl.dashboard_auxiliary_capture WHERE source_name='USERS')
+    THROW 52028,'USER_DIRECTORY_ALREADY_INITIALIZED',1;
+DECLARE @observed datetimeoffset(3)=TODATETIMEOFFSET(SYSUTCDATETIME(),'+00:00'),
+        @records nvarchar(max),@rows int,@day date;
+SET @day=CONVERT(date,@observed AT TIME ZONE 'E. South America Standard Time');
+SELECT @records=(
+    SELECT u.user_id AS id,u.nome AS name,u.data_atualizacao AS source_updated_at,
+           'LEGACY_DIM_USUARIOS' AS provenance
+    FROM ETL_SISTEMA.dbo.dim_usuarios u
+    WHERE u.user_id IS NOT NULL AND COALESCE(u.excluido_na_origem,0)=0
+    ORDER BY u.user_id
+    FOR JSON PATH,INCLUDE_NULL_VALUES
+);
+SELECT @rows=COUNT(*) FROM OPENJSON(@records);
+EXEC ctl.usp_store_dashboard_auxiliary
+     @source_name='USERS',@business_date=@day,@observed_at=@observed,@row_count=@rows,@records=@records;
+'@
+            if (-not $seed) { throw 'USER_DIRECTORY_SEED_UNCONFIRMED' }
+            $seedCount = Invoke-Scalar 'SELECT row_count FROM ctl.dashboard_auxiliary_capture WHERE capture_id=CONVERT(bigint,@id)' @{'@id'=[string]$seed}
+            $receipt.capture = [ordered]@{id=$seed; records=$seedCount; provenance='LEGACY_DIM_USUARIOS'; transactionCommitted=$false}
+        }
         if ($CaptureReceiptPath) { $receipt.captures = @() }
         foreach ($path in $CaptureReceiptPath) {
             $capture = [IO.File]::ReadAllText((Resolve-Path -LiteralPath $path).Path) | ConvertFrom-Json
@@ -169,7 +204,8 @@ SELECT COUNT(*) FROM sys.objects WHERE object_id IN (
             $directory = (Resolve-Path -LiteralPath $CaptureDirectory).Path
             if (-not (Test-Path -LiteralPath $directory -PathType Container)) { throw 'AUXILIARY_CAPTURE_DIRECTORY_REQUIRED' }
             $bytes = [IO.File]::ReadAllBytes((Join-Path $directory $capture.captureFile))
-            if ($bytes.Length -gt 10485760) { throw 'AUXILIARY_CAPTURE_BYTES_EXCEEDED' }
+            $fileLimit = if ($expected -eq 'Users') { 67108864 } else { 10485760 }
+            if ($bytes.Length -gt $fileLimit) { throw 'AUXILIARY_CAPTURE_BYTES_EXCEEDED' }
             $sha = [Security.Cryptography.SHA256]::Create()
             try { $observedHash = [BitConverter]::ToString($sha.ComputeHash($bytes)).Replace('-', '') }
             finally { $sha.Dispose() }
@@ -277,6 +313,14 @@ EXEC ctl.usp_store_dashboard_refresh_audit @source_cycle=@cycle,@started_at=@sta
     }
     if (-not $validation -or $validation -is [DBNull]) { throw 'REFERENCE_VIEW_VALIDATION_MISSING' }
     $receipt.validation = ConvertFrom-Json -InputObject $validation
+    if ($SeedLegacyUserDirectory) {
+        $n = $receipt.capture.records
+        if ($receipt.validation.users -ne $n -or $receipt.validation.legacy_active_users -ne $n -or
+            $receipt.validation.identical_legacy_names -ne $n -or $receipt.validation.identical_legacy_timestamps -ne $n -or
+            $receipt.validation.migrated_legacy_users -ne $n) {
+            throw 'DASHBOARD_USER_DIRECTORY_SEED_DIFFERS'
+        }
+    }
     if ($Apply -and ($added -gt 0 -or $receipt.capture -or $receipt.captures)) {
         $transaction.Commit()
         $receipt.catalogWritesCommitted = $added -gt 0

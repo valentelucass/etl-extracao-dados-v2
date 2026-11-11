@@ -1,3 +1,7 @@
+## 0778 — Cadastro de Usuários publicado na V2
+
+[Regras e validação](docs/runbooks/publicacao-operacional-dashboard.md). Cópia inicial de 6.918 usuários ativos, com todos os nomes e datas iguais ao V1 e leitura JDBC confirmada. A atualização direta no ESL ainda precisa de captura completa. A V2 tem 22 de 26 destinos publicados. Coletas e três consultas de Fretes aguardam as fontes complementares. O portal em produção lê o V1.
+
 ## 0777 — Raster, Coletores, Manifestos e Saúde do ETL publicados
 
 [Regras e validação](docs/runbooks/publicacao-operacional-dashboard.md). Oito consultas passaram no SQL e no JDBC do portal. São 21 publicações em 26 destinos. A coleta de Usuários observou 11.000 IDs sem chegar à última página. Coletas e as três consultas de Fretes dependem de campos ausentes nos templates atuais. O portal em produção lê o V1.
