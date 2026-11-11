@@ -1,7 +1,7 @@
 [CmdletBinding()]
 param(
     [Parameter(Mandatory=$true)][string]$ReceiptPath,
-    [ValidateSet('References','Sinistros','Inventario','Localizacao')][string]$Group = 'References',
+    [ValidateSet('References','Sinistros','Inventario','Localizacao','Faturas','ContasAPagar','Clientes')][string]$Group = 'References',
     [switch]$Apply
 )
 
@@ -29,6 +29,13 @@ $specs = switch ($Group) {
     'Sinistros' { @{file='008_dashboard_sinistros.sql'; view='vw_sinistros_powerbi'; step='0774-dashboard-sinistros'; columns=34} }
     'Inventario' { @{file='009_dashboard_inventario.sql'; view='vw_inventario_powerbi'; step='0775-dashboard-inventario'; columns=34} }
     'Localizacao' { @{file='010_dashboard_localizacao_cargas.sql'; view='vw_localizacao_cargas_powerbi'; step='0775-dashboard-localizacao'; columns=29} }
+    'Faturas' {
+        @{file='011_dashboard_faturas_vigentes.sql'; view='dashboard_faturas_vigentes'; schema='core'; step='0776-dashboard-faturas-vigentes'}
+        @{file='012_dashboard_faturas_por_cliente.sql'; view='vw_faturas_por_cliente_powerbi'; step='0776-dashboard-faturas-detalhe'; columns=42}
+        @{file='013_dashboard_fato_faturas.sql'; view='fato_gestao_vista_faturas'; step='0776-dashboard-faturas-fato'; columns=54}
+    }
+    'ContasAPagar' { @{file='014_dashboard_contas_a_pagar.sql'; view='vw_contas_a_pagar_powerbi'; step='0776-dashboard-contas-a-pagar'; columns=31} }
+    'Clientes' { @{file='015_dashboard_dim_clientes.sql'; view='vw_dim_clientes'; step='0776-dashboard-dim-clientes'; columns=1} }
 }
 
 function New-Command([string]$Text, [hashtable]$Parameters = @{}) {
@@ -83,7 +90,8 @@ IF @lock<0 THROW 51967,'REFERENCE_VIEWS_LOCK_REFUSED',1;
 IF NOT EXISTS (
     SELECT 1 FROM sys.schemas p JOIN sys.schemas c ON c.principal_id=p.principal_id
     JOIN sys.schemas s ON s.principal_id=p.principal_id JOIN sys.schemas r ON r.principal_id=p.principal_id
-    WHERE p.name='pub' AND c.name='ctl' AND s.name='stg' AND r.name='ref'
+    JOIN sys.schemas domain_schema ON domain_schema.principal_id=p.principal_id
+    WHERE p.name='pub' AND c.name='ctl' AND s.name='stg' AND r.name='ref' AND domain_schema.name='core'
 ) THROW 51968,'REFERENCE_VIEWS_OWNERSHIP_DRIFT',1;
 '@
 
@@ -91,17 +99,19 @@ IF NOT EXISTS (
     foreach ($spec in $specs) {
         $relative = 'database/production/publication/' + $spec.file
         $sql = [IO.File]::ReadAllText((Join-Path $repository $relative)).Replace("`r`n", "`n")
-        $pattern = '(?is)CREATE OR ALTER VIEW pub\.' + $spec.view + '\s+AS\s+(.+?);\s*$'
+        $schema = if ($spec.schema) { $spec.schema } else { 'pub' }
+        $objectName = $schema + '.' + $spec.view
+        $pattern = '(?is)CREATE OR ALTER VIEW ' + [regex]::Escape($objectName) + '\s+AS\s+(.+?);\s*$'
         $source = [regex]::Match($sql, $pattern)
         if (-not $source.Success) { throw 'REFERENCE_VIEW_SOURCE_FORMAT_CHANGED' }
         $sha = [Security.Cryptography.SHA256]::Create()
         try { $hash = [BitConverter]::ToString($sha.ComputeHash([Text.Encoding]::UTF8.GetBytes($sql))).Replace('-', '') }
         finally { $sha.Dispose() }
         $record = Invoke-Scalar 'SELECT source_sha256 FROM ctl.production_installation_step WHERE step_id=@step' @{'@step'=$spec.step}
-        $objectId = Invoke-Scalar 'SELECT OBJECT_ID(@object)' @{'@object'=('pub.'+$spec.view)}
+        $objectId = Invoke-Scalar 'SELECT OBJECT_ID(@object)' @{'@object'=$objectName}
         $exists = $null -ne $objectId -and $objectId -isnot [DBNull]
         if ($record -or $exists) {
-            $definition = Invoke-Scalar "SELECT OBJECT_DEFINITION(OBJECT_ID(@object,N'V'))" @{'@object'=('pub.'+$spec.view)}
+            $definition = Invoke-Scalar "SELECT OBJECT_DEFINITION(OBJECT_ID(@object,N'V'))" @{'@object'=$objectName}
             $catalogPattern = $pattern.Replace('CREATE OR ALTER VIEW', 'CREATE\s+(?:OR\s+ALTER\s+)?VIEW')
             $installed = [regex]::Match(([string]$definition).Replace("`r`n", "`n"), $catalogPattern)
             if ($record -cne $hash -or -not $installed.Success -or $installed.Groups[1].Value -cne $source.Groups[1].Value) {
@@ -115,12 +125,14 @@ IF NOT EXISTS (
             $added++
         }
         $view = $spec.view
-        $legacy = @(Read-Metadata "SELECT TOP(0) * FROM ETL_SISTEMA.dbo.[$view]")
-        $published = @(Read-Metadata "SELECT TOP(0) * FROM pub.[$view]")
-        if ($legacy.Count -ne $spec.columns -or $published.Count -ne $spec.columns -or
-            (Compare-Object $legacy $published -Property name,type,size,precision,scale -CaseSensitive -SyncWindow 0)) {
-            $receipt.shapeDifference = [ordered]@{view=$view; v1=$legacy; v2=$published}
-            throw 'REFERENCE_VIEW_COLUMN_CONTRACT_MISMATCH'
+        $published = @(Read-Metadata "SELECT TOP(0) * FROM [$schema].[$view]")
+        if ($spec.columns) {
+            $legacy = @(Read-Metadata "SELECT TOP(0) * FROM ETL_SISTEMA.dbo.[$view]")
+            if ($legacy.Count -ne $spec.columns -or $published.Count -ne $spec.columns -or
+                (Compare-Object $legacy $published -Property name,type,size,precision,scale -CaseSensitive -SyncWindow 0)) {
+                $receipt.shapeDifference = [ordered]@{view=$view; v1=$legacy; v2=$published}
+                throw 'REFERENCE_VIEW_COLUMN_CONTRACT_MISMATCH'
+            }
         }
         $receipt.views += [pscustomobject]@{name=$view; columns=$published.Count; sha256=$hash; alreadyInstalled=$exists}
     }
@@ -130,6 +142,9 @@ IF NOT EXISTS (
         'Sinistros' { 'dashboard-sinistros.sql' }
         'Inventario' { 'dashboard-inventario.sql' }
         'Localizacao' { 'dashboard-localizacao.sql' }
+        'Faturas' { 'dashboard-faturas.sql' }
+        'ContasAPagar' { 'dashboard-contas-a-pagar.sql' }
+        'Clientes' { 'dashboard-clientes.sql' }
     }
     $checksPath = Join-Path $PSScriptRoot ('../validation/' + $validationScript)
     $checks = [IO.File]::ReadAllText($checksPath) -split '(?m)^-- VALIDATION BATCH\s*$'
