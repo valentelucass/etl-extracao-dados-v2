@@ -1,3 +1,7 @@
+## 0774 — Calendário, filtros e Sinistros publicados
+
+[Publicações e validação](docs/runbooks/publicacao-referencias-sinistros-dashboard.md). Seis destinos instalados após ensaio revertido, com reexecução idempotente e JDBC da conta do portal. Calendário de 4.780 datas com paridade de negócio, filtros conferidos sobre 27.700 linhas e 9 Sinistros conferidos com a fonte. Sete de 26 destinos analíticos estão publicados. Restam 19, com os 26 synonyms atuais no V1.
+
 ## 0773 — Cotações e cobertura publicadas no V2
 
 [Cotações](docs/runbooks/publicacao-cotacoes-dashboard-0771.md) e [cobertura](docs/runbooks/publicacao-cobertura-dashboard-0770.md). O ensaio de instalação de Cotações foi revertido, depois as duas views foram instaladas e verificadas em reexecução. A conta do portal leu as publicações no teste JDBC. O ESL confirmou os três números pendentes com 2, 2 e 3 itens. Um dos 26 destinos analíticos está publicado. Faltam os outros 25, referências, fontes de apoio, cobertura histórica e ensaio de troca e retorno. Os 26 synonyms analíticos do portal continuam no V1.
