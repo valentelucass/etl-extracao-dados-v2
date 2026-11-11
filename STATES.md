@@ -1,3 +1,7 @@
+## 0781 — Validação dos campos adicionais de Coletas e Fretes
+
+[Regras e validação](docs/runbooks/publicacao-operacional-dashboard.md). O comparador recusou divergência entre metadados e linhas de Coletas observada via curl. Fretes manteve os campos originais na primeira sonda. As regras confirmadas preservam coletas excluídas na lista fora dos totais e usam o CT-e atual uma única vez. São 22 de 26 consultas publicadas. A migração dos catálogos e a publicação das quatro pendentes aguardam a confirmação das colunas na origem.
+
 ## 0778 — Cadastro de Usuários publicado na V2
 
 [Regras e validação](docs/runbooks/publicacao-operacional-dashboard.md). Cópia inicial de 6.918 usuários ativos, com todos os nomes e datas iguais ao V1 e leitura JDBC confirmada. A atualização direta no ESL ainda precisa de captura completa. A V2 tem 22 de 26 destinos publicados. Coletas e três consultas de Fretes aguardam as fontes complementares. O portal em produção lê o V1.

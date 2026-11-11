@@ -48,4 +48,14 @@ A leitura direta da fonte ainda precisa chegar ao fim da paginação. A captura 
 
 O catálogo do ESL oferece campos que estão fora dos templates 6908 e 6389. Em Coletas, foram localizados Hora solicitação, ID da filial, Logradouro, Número e Complemento na associação Endereço de coleta, Documento na associação Cliente e ID na associação Usuário do cancelamento. Em Fretes, foram localizados IDs dos envolvidos e da filial, ID CT-e e Data criação na associação CT-e, além de base de cálculo, alíquotas e valores de PIS e COFINS na associação Fiscal.
 
-O teste das consultas precisa de dois templates complementares com acesso restrito, ligados pelo ID original de Coleta ou Frete. Os relatórios atuais alimentam a extração em produção e o complemento precisa ter identidade, escopo, tipos e filtros verificados pelo Data Export. A data geral de atualização da Coleta tem significado próprio. No recorte comparado, ela não coincidiu com nenhum dos 916 horários de mudança de status do V1. A identificação da origem para histórico de status e exclusão segue aberta.
+O ESL bloqueou a criação de templates complementares no limite contratado de 30 relatórios. A alternativa é evoluir os templates existentes. O catálogo do Java e o catálogo do recebimento SQL exigem o conjunto exato de colunas. Durante a alteração dos templates, compare o que o Data Export anuncia com as colunas presentes em cada linha antes de versionar os novos catálogos. O editor do ESL grava cada coluna no momento em que ela é adicionada. Em Coletas, a conferência detectou as 31 colunas originais em todas as páginas e conjuntos adicionais diferentes entre o catálogo e os dados.
+
+```powershell
+.\scripts\validation\Test-DashboardSourceColumnAdditions.ps1 -ProbeReceipt @($sondaColetas, $sondaFretes)
+```
+
+O comando usa os recibos sanitizados de `scripts/probes/Invoke-DataExportContractProbe.ps1`. Ele verifica se as colunas originais estão presentes, se as páginas retornam os mesmos campos do catálogo e se cada campo está presente em todas as linhas amostradas. Para repetir a conferência de um mesmo relatório, passe os dois recibos no mesmo comando. Atualize os catálogos do Java e do SQL somente com a revisão confirmada. Compare os dados de uma janela fechada com o Excel do ESL antes de publicar as consultas.
+
+Uma coleta excluída aparece na lista com o status **Excluída** e fica fora dos totais e da série diária. A fonte indicada é **Operacional → Log de Exclusões → Coletas**. A sessão de consulta precisa exibir essa opção para verificar o registro. A data geral de atualização da Coleta tem significado próprio. No recorte comparado, ela não coincidiu com nenhum dos 916 horários de mudança de status do V1.
+
+Quando houver reemissão, as consultas operacionais e de faturamento devem usar o CT-e atual da minuta. Na amostra conferida, o relatório principal trouxe duas linhas do mesmo frete e ambas indicaram o CT-e atual. A publicação precisa contar o frete uma vez. O relatório de Faturamento CT-e confirmou separadamente o cancelamento do documento anterior e a emissão do atual.
