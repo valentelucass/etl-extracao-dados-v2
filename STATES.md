@@ -1,3 +1,7 @@
+## 0771 — Publicação candidata de Cotações por trecho
+
+[Runbook](docs/runbooks/publicacao-cotacoes-dashboard-0771.md). Regra do gestor para trechos distintos ratificada; projeção de 54 colunas seleciona só o último lote completo do dia e conserva as 37 informações em Metadata. SQL real/fixture e API em processo passaram: 1.523 linhas no recorte e dois trechos para o caso de teste. Não somar capturas antigas, não usar preço ou número como chave do trecho. Mesma rota com linhas divergentes em 10 números segue pendente para corte. Sem aplicar view, alterar V1, chamar ESL, criar telas ou carregar 90 dias.
+
 ## 0770 — Cobertura de recebimento preparada e testada para o dashboard
 
 [Runbook](docs/runbooks/publicacao-cobertura-dashboard-0770.md). View operacional nova `pub.v2_dashboard_receiving_overview`, sem acesso a dados de negócio; valida os ponteiros para lotes armazenados e recusa total em origem múltipla ou cobertura inconsistente. Referência V1 e contagem independente antes da implantação; candidato real 11 entidades / 89.703 linhas / 103 combinações entidade e data, cinco verificações SQL aprovadas. API de teste do dashboard devolveu as mesmas contagens. Instalador aprovado em leitura; sem aplicar, sem extrair, sem carga de 90 dias. V1 e contratos analíticos pendentes preservados. Consolidação e Ocorrências sem telas de negócio no dashboard. Notas abaixo históricas.

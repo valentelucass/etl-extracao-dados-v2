@@ -1,0 +1,15 @@
+# Cotações para o dashboard: trechos e recaptura — 0771
+
+**Regra confirmada em 11/11/2026:** trechos diferentes entram separadamente nos indicadores, mesmo quando o relatório do ESL traz o mesmo número de cotação. A regra se refere ao indicador. O número de cotação continua sendo o identificador informado pela origem e a projeção não inventa uma chave permanente para o trecho.
+
+`database/production/publication/002_dashboard_cotacoes.sql` é a projeção candidata do template 6906 para `pub.vw_cotacoes_powerbi`. Ela oferece os 54 nomes e tipos que o dashboard usa. As 37 informações originais são preservadas em `Metadata`. Tarifas, valores nas escalas do painel, status baseado em CT-e/NFS-e e motivo de reprovação seguem a definição instalada do V1. A data civil de NFS-e é interpretada no horário de São Paulo, como no mapeador V1.
+
+O relatório entra no painel a partir da cobertura do último lote confirmado de cada dia. Recapturar um dia substitui suas linhas: não é necessário usar número, endereço, preço ou ordem de página para identificar o mesmo trecho entre execuções. O histórico continua disponível no recebimento e não entra no cálculo. Se houver mais de uma origem para Cotações, a consulta não mistura os escopos. Antes de instalar ou redirecionar, a validação exige uma origem e cobertura não vazia.
+
+## Validação antes da instalação
+
+Em Windows PowerShell 5.1, rodar `scripts/validation/Test-DashboardCotacoesProjection.ps1 -ReceiptPath <recibo-novo.json>`. O teste lê a definição V1 e executa o corpo da view candidata como consulta. Verifica ordem, tipos, larguras e escalas das 54 colunas, ausência de truncamento de texto, totais e multiplicidade dos registros originais. Reproduz a definição real da visão atual sobre tabelas locais do teste: dois trechos continuam dois após recaptura com mudança de valor, lote vazio não volta ao anterior e duas origens não são somadas. Nenhuma view é criada, nenhum registro produtivo é escrito e não há requisição ESL.
+
+Na revisão de 11/11, o recorte de 02 a 10/11 tinha 1.523 linhas para 1.500 números. Havia 14 números repetidos; em 10 deles, as linhas diferentes coincidiam em cidade, UF e CEP de origem e destino. Nenhuma repetição era uma cópia integral. O ensaio preserva todas as linhas confirmadas; a contagem de opções na mesma rota ainda requer confirmação. Não afirmar que as 1.523 linhas equivalem a 1.523 trechos distintos ou apagar as 11 linhas que seriam perdidas agrupando só pela rota. Esse limite não invalida a regra já confirmada para trechos diferentes.
+
+O dashboard teve as consultas corrigidas e testadas com a projeção real em memória. A view candidata ainda não foi instalada e a rota de produção continua no V1. Não usar este pacote para substituir a base sem aprovar a regra da mesma rota e ensaiar o consumo por synonym em ambiente isolado. Não requer carga de 90 dias nem cria telas.
