@@ -1,3 +1,7 @@
+## 0775 — Inventário e Localização publicados
+
+[Regras e validação](docs/runbooks/publicacao-inventario-localizacao-dashboard.md). As duas views passaram em rollback, aplicação e leitura JDBC com a conta do portal. Inventário seleciona 14.600 chaves de 15.446 ocorrências e conserva 7.726 comprovantes observados. Localização conserva 4.314 minutas, os valores e os oito aliases do V1. Nove de 26 destinos analíticos publicados. Os 26 synonyms ativos seguem no V1.
+
 ## 0774 — Calendário, filtros e Sinistros publicados
 
 [Publicações e validação](docs/runbooks/publicacao-referencias-sinistros-dashboard.md). Seis destinos instalados após ensaio revertido, com reexecução idempotente e JDBC da conta do portal. Calendário de 4.780 datas com paridade de negócio, filtros conferidos sobre 27.700 linhas e 9 Sinistros conferidos com a fonte. Sete de 26 destinos analíticos estão publicados. Restam 19, com os 26 synonyms atuais no V1.

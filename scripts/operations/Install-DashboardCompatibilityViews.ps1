@@ -1,7 +1,7 @@
 [CmdletBinding()]
 param(
     [Parameter(Mandatory=$true)][string]$ReceiptPath,
-    [ValidateSet('References','Sinistros')][string]$Group = 'References',
+    [ValidateSet('References','Sinistros','Inventario','Localizacao')][string]$Group = 'References',
     [switch]$Apply
 )
 
@@ -24,8 +24,11 @@ $referenceViews = @(
     @{file='006_dashboard_dim_veiculos.sql'; view='vw_dim_veiculos'; step='0774-dashboard-dim-veiculos'; columns=4},
     @{file='007_dashboard_dim_planocontas.sql'; view='vw_dim_planocontas'; step='0774-dashboard-dim-planocontas'; columns=3}
 )
-$specs = if ($Group -eq 'References') { $referenceViews } else {
-    @{file='008_dashboard_sinistros.sql'; view='vw_sinistros_powerbi'; step='0774-dashboard-sinistros'; columns=34}
+$specs = switch ($Group) {
+    'References' { $referenceViews }
+    'Sinistros' { @{file='008_dashboard_sinistros.sql'; view='vw_sinistros_powerbi'; step='0774-dashboard-sinistros'; columns=34} }
+    'Inventario' { @{file='009_dashboard_inventario.sql'; view='vw_inventario_powerbi'; step='0775-dashboard-inventario'; columns=34} }
+    'Localizacao' { @{file='010_dashboard_localizacao_cargas.sql'; view='vw_localizacao_cargas_powerbi'; step='0775-dashboard-localizacao'; columns=29} }
 }
 
 function New-Command([string]$Text, [hashtable]$Parameters = @{}) {
@@ -122,9 +125,18 @@ IF NOT EXISTS (
         $receipt.views += [pscustomobject]@{name=$view; columns=$published.Count; sha256=$hash; alreadyInstalled=$exists}
     }
 
-    $validationScript = if ($Group -eq 'References') { 'dashboard-reference-views.sql' } else { 'dashboard-sinistros.sql' }
+    $validationScript = switch ($Group) {
+        'References' { 'dashboard-reference-views.sql' }
+        'Sinistros' { 'dashboard-sinistros.sql' }
+        'Inventario' { 'dashboard-inventario.sql' }
+        'Localizacao' { 'dashboard-localizacao.sql' }
+    }
     $checksPath = Join-Path $PSScriptRoot ('../validation/' + $validationScript)
-    $validation = Invoke-Scalar ([IO.File]::ReadAllText($checksPath))
+    $checks = [IO.File]::ReadAllText($checksPath) -split '(?m)^-- VALIDATION BATCH\s*$'
+    for ($batchIndex=0; $batchIndex -lt $checks.Count; $batchIndex++) {
+        $receipt.validationBatch = $batchIndex + 1
+        $validation = Invoke-Scalar $checks[$batchIndex]
+    }
     if (-not $validation -or $validation -is [DBNull]) { throw 'REFERENCE_VIEW_VALIDATION_MISSING' }
     $receipt.validation = ConvertFrom-Json -InputObject $validation
     if ($Apply -and $added -gt 0) {
