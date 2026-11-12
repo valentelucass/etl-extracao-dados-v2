@@ -82,11 +82,13 @@ O fato de entrega e cubagem usa os Fretes vigentes, a finalização disponível 
 
 A validação conferiu as 54 colunas do contrato do V1, a leitura com a conta do dashboard e a chave única por indicador e minuta. A consulta produziu 4.298 linhas de entrega e 4.298 de cubagem, com 4.215 e 3.115 linhas válidas, respectivamente. Uma segunda aplicação confirmou os mesmos objetos e regras.
 
+As consultas de entrega e cubagem com filtro de período foram verificadas separadamente. A leitura das chaves do JSON como valores escalares reduziu a estimativa de linhas dos joins. O teste comparou todas as colunas e linhas da versão anterior com a versão otimizada, sem diferenças. A consulta de cubagem também aplicou a tabela de exceções usada pelo dashboard.
+
 ## Dependências para completar a troca
 
 | Consulta | Evidência e dependência |
 | --- | --- |
-| `vw_coletas_powerbi` | O Log de Exclusões é visível no ESL. O catálogo atual de Data Export não encontrou template com a raiz **Coletas - Excluídas**. Para alimentar a lista de excluídas automaticamente, é necessário disponibilizar essa origem para o ETL. |
-| `vw_fretes_powerbi` e `fato_fretes_faturamento` | O **Valor Frete** do V1 vem do subtotal de origem. O editor do ESL oferece **Frete / Subtotal parcelas**, que ainda precisa ser disponibilizado e comparado com o subtotal do V1. Subtrair ICMS, PIS e COFINS do total reproduziu 73.493 de 76.351 subtotais no próprio V1. O template 6389 está com 150 colunas. |
+| `vw_coletas_powerbi` | O Log de Exclusões é visível no ESL. O catálogo atual de Data Export não encontrou template com a raiz **Coletas - Excluídas**. Para alimentar a lista automaticamente, é necessário disponibilizar essa origem para o ETL. O catálogo de Coletas oferece a data geral de atualização. O horário específico da mudança de status ainda precisa de uma fonte. |
+| `vw_fretes_powerbi` e `fato_fretes_faturamento` | A soma dos 17 componentes presentes no relatório reproduziu o **Valor Frete** em todos os 3.260 registros comparáveis dos dois bancos. Data de criação do frete, CNPJ da filial emissora e peso das notas tinham valor nos 76.351 fretes ativos do V1. Falta qualificar a origem desses campos no Data Export. O template 6389 está com 150 colunas. |
 
 Com os campos disponíveis, confira novamente a reemissão, a exclusão, as regras de elegibilidade e os totais em um período fechado. O ensaio de troca depende das 26 consultas e da cobertura do período que o dashboard vai exibir.

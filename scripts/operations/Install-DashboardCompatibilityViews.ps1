@@ -60,8 +60,10 @@ $specs = switch ($Group) {
         @{file='027_dashboard_manifestos_fato_dash.sql'; view='vw_fato_manifestos_dash'; step='0777-dashboard-manifestos-portal'; columns=106}
     }
     'GestaoFretes' {
-        @{file='028_dashboard_fretes_linhas.sql'; view='dashboard_fretes_linhas'; schema='core'; step='0784-dashboard-fretes-linhas'}
-        @{file='029_dashboard_gestao_vista_fretes.sql'; view='fato_gestao_vista_fretes'; step='0784-dashboard-gestao-fretes'; columns=54}
+        @{file='030_dashboard_fretes_linhas_tuned.sql'; view='dashboard_fretes_linhas'; schema='core'; step='0785-dashboard-fretes-linhas';
+          previousFile='028_dashboard_fretes_linhas.sql'; previousStep='0784-dashboard-fretes-linhas'}
+        @{file='031_dashboard_gestao_vista_fretes_tuned.sql'; view='fato_gestao_vista_fretes'; step='0785-dashboard-gestao-fretes'; columns=54;
+          previousFile='029_dashboard_gestao_vista_fretes.sql'; previousStep='0784-dashboard-gestao-fretes'}
     }
 }
 
@@ -304,10 +306,24 @@ EXEC ctl.usp_store_dashboard_refresh_audit @source_cycle=@cycle,@started_at=@sta
             $definition = Invoke-Scalar "SELECT OBJECT_DEFINITION(OBJECT_ID(@object,N'V'))" @{'@object'=$objectName}
             $catalogPattern = $pattern.Replace('CREATE OR ALTER VIEW', 'CREATE\s+(?:OR\s+ALTER\s+)?VIEW')
             $installed = [regex]::Match(([string]$definition).Replace("`r`n", "`n"), $catalogPattern)
-            if ($record -cne $hash -or -not $installed.Success -or $installed.Groups[1].Value -cne $source.Groups[1].Value) {
+            if (-not $record -and $spec.previousStep -and $installed.Success) {
+                $previousPath = Join-Path $repository ('database/production/publication/' + $spec.previousFile)
+                $previousSql = [IO.File]::ReadAllText($previousPath).Replace("`r`n", "`n")
+                $previousSource = [regex]::Match($previousSql, $pattern)
+                $sha = [Security.Cryptography.SHA256]::Create()
+                try { $previousHash = [BitConverter]::ToString($sha.ComputeHash([Text.Encoding]::UTF8.GetBytes($previousSql))).Replace('-', '') }
+                finally { $sha.Dispose() }
+                $previousRecord = Invoke-Scalar 'SELECT source_sha256 FROM ctl.production_installation_step WHERE step_id=@step' @{'@step'=$spec.previousStep}
+                if ($previousRecord -cne $previousHash -or -not $previousSource.Success -or
+                    $installed.Groups[1].Value -cne $previousSource.Groups[1].Value) {
+                    throw 'REFERENCE_VIEW_PREVIOUS_INSTALLATION_DRIFT'
+                }
+                $exists = $false
+            } elseif ($record -cne $hash -or -not $installed.Success -or $installed.Groups[1].Value -cne $source.Groups[1].Value) {
                 throw 'REFERENCE_VIEW_INSTALLATION_DRIFT'
             }
-        } else {
+        }
+        if (-not $exists) {
             $null = Invoke-Scalar $sql
             $null = Invoke-Scalar 'INSERT ctl.production_installation_step(step_id,source_name,source_sha256) VALUES(@step,@file,@hash)' @{
                 '@step'=$spec.step; '@file'=$relative; '@hash'=$hash

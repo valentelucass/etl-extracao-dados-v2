@@ -1,3 +1,7 @@
+## 0785 — Leitura de Gestão à Vista de Fretes com filtro validada
+
+[Evidências e dependências](docs/runbooks/publicacao-operacional-dashboard.md). O ensaio comparou 8.596 linhas antes e depois da otimização, sem diferenças. O JDBC com a conta do dashboard leu 23 consultas publicadas e executou os filtros de entrega e cubagem. Os 17 componentes de Fretes reproduziram o subtotal nos 3.260 registros comparáveis. Continuam pendentes a origem das exclusões de Coletas e campos do detalhe e faturamento de Fretes.
+
 ## 0784 — Gestão à Vista de Fretes publicada na V2
 
 [Regras, teste e dependências](docs/runbooks/publicacao-operacional-dashboard.md). A consulta de entrega e cubagem preservou 54 colunas do V1 e foi validada com 8.596 linhas. A repetição da instalação confirmou os objetos existentes. A publicação passa a 23 de 26 consultas. A troca depende do acesso automatizado às exclusões de Coletas e da confirmação do subtotal de Fretes.
