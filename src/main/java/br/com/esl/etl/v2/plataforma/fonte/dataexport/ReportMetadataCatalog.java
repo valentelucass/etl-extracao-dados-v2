@@ -8,17 +8,21 @@ import java.util.Set;
 /** Explicit current metadata revision; previous frozen descriptors remain unchanged. */
 public final class ReportMetadataCatalog {
     private final JsonNode entities;
+    private final JsonNode dashboardFields;
 
     public ReportMetadataCatalog() throws IOException {
+        entities = load("receiving-catalog-0766-v1.json").required("entities");
+        dashboardFields = load("dashboard-report-fields-0783.json").required("additionalFields");
+    }
+
+    private static JsonNode load(final String resource) throws IOException {
         try (var input =
-                getClass()
-                        .getClassLoader()
-                        .getResourceAsStream(
-                                "contracts/dataexport/receiving-catalog-0766-v1.json")) {
+                ReportMetadataCatalog.class.getResourceAsStream(
+                        "/contracts/dataexport/" + resource)) {
             if (input == null) {
                 throw new IllegalStateException("REFRESH_METADATA_RESOURCE");
             }
-            entities = CurlSnapshotWire.JSON.readTree(input).required("entities");
+            return CurlSnapshotWire.JSON.readTree(input);
         }
     }
 
@@ -28,7 +32,9 @@ public final class ReportMetadataCatalog {
         info.path("fields").fieldNames().forEachRemaining(actualFields::add);
         final var expectedFields = new HashSet<String>();
         expected.required("fields").forEach(value -> expectedFields.add(value.asText()));
-        if (!actualFields.equals(expectedFields)
+        final var expandedFields = new HashSet<>(expectedFields);
+        dashboardFields.path(template.name()).forEach(value -> expandedFields.add(value.asText()));
+        if ((!actualFields.equals(expectedFields) && !actualFields.equals(expandedFields))
                 || !info.path("filters").equals(expected.path("filters"))
                 || !info.path("required_date_filters").equals(expected.path("requiredDateFilters"))
                 || !info.path("default_order").equals(expected.path("defaultOrder"))) {
@@ -39,6 +45,12 @@ public final class ReportMetadataCatalog {
 
     public int fieldCount(final ReportSnapshotTemplate template) {
         return entity(template).required("fields").size();
+    }
+
+    public boolean acceptsFieldCount(final ReportSnapshotTemplate template, final int count) {
+        final int baseline = fieldCount(template);
+        return count == baseline
+                || count == baseline + dashboardFields.path(template.name()).size();
     }
 
     private JsonNode entity(final ReportSnapshotTemplate template) {

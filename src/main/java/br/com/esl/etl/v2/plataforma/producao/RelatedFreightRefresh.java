@@ -333,7 +333,8 @@ final class RelatedFreightRefresh {
                     template == ReportSnapshotTemplate.LOCALIZACAO_CARGAS;
             require(
                     result.terminal()
-                            && result.fields() == new ReportMetadataCatalog().fieldCount(template)
+                            && new ReportMetadataCatalog()
+                                    .acceptsFieldCount(template, result.fields())
                             && (locationProjection
                                     ? projected[0] == result.rows()
                                             && result.typedRows() + result.rejectedRows()

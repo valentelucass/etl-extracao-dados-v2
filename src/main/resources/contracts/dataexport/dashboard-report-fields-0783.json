@@ -1,0 +1,53 @@
+{
+  "additionalFields": {
+    "COLETAS": [
+      "pck_cor_document",
+      "pck_crn_id",
+      "pck_ctr_id",
+      "pck_pds_line_1",
+      "pck_pds_line_2",
+      "pck_pds_number",
+      "pck_uer_id",
+      "pck_vee_name",
+      "request_hour"
+    ],
+    "FRETES": [
+      "fit_crn_id",
+      "fit_f_l_calculation_basis",
+      "fit_f_l_cbs_rate",
+      "fit_f_l_cbs_value",
+      "fit_f_l_cfop_code",
+      "fit_f_l_cofins_rate",
+      "fit_f_l_cofins_value",
+      "fit_f_l_cst_type",
+      "fit_f_l_difal_tax_rate",
+      "fit_f_l_difal_tax_value_destination",
+      "fit_f_l_difal_tax_value_origin",
+      "fit_f_l_has_difal",
+      "fit_f_l_ibs_cbs_calculation_basis",
+      "fit_f_l_ibs_cbs_cst_code",
+      "fit_f_l_ibs_rate",
+      "fit_f_l_ibs_value",
+      "fit_f_l_inss_rate",
+      "fit_f_l_inss_value",
+      "fit_f_l_iss_witheld",
+      "fit_f_l_legal_basis",
+      "fit_f_l_pis_cofins_calculation_basis",
+      "fit_f_l_pis_rate",
+      "fit_f_l_pis_value",
+      "fit_f_l_tax_rate",
+      "fit_f_l_tax_value",
+      "fit_fhe_cte_created_at",
+      "fit_fhe_cte_cte_id",
+      "fit_fhe_cte_emission_type",
+      "fit_pyr_id",
+      "fit_rir_id",
+      "fit_rpt_id",
+      "fit_sdr_id",
+      "fit_spr_id",
+      "insurance_enabled",
+      "modal",
+      "service_at_day_hour"
+    ]
+  }
+}

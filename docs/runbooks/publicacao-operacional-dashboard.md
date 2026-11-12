@@ -54,8 +54,19 @@ O ESL bloqueou a criação de templates complementares no limite contratado de 3
 .\scripts\validation\Test-DashboardSourceColumnAdditions.ps1 -ProbeReceipt @($sondaColetas, $sondaFretes)
 ```
 
-O comando usa os recibos sanitizados de `scripts/probes/Invoke-DataExportContractProbe.ps1`. Ele verifica se as colunas originais estão presentes, se as páginas retornam os mesmos campos do catálogo e se cada campo está presente em todas as linhas amostradas. Para repetir a conferência de um mesmo relatório, passe os dois recibos no mesmo comando. Atualize os catálogos do Java e do SQL somente com a revisão confirmada. Compare os dados de uma janela fechada com o Excel do ESL antes de publicar as consultas.
+O comando usa os recibos sanitizados de `scripts/probes/Invoke-DataExportContractProbe.ps1`. Ele verifica se as colunas originais estão presentes, se as páginas retornam os mesmos campos do catálogo e se cada campo está presente em todas as linhas amostradas. Para repetir a conferência de um mesmo relatório, passe os dois recibos no mesmo comando. A sonda também registra duração e bytes por requisição. Compare os dados de uma janela fechada com o Excel do ESL antes de publicar as consultas.
 
-Uma coleta excluída aparece na lista com o status **Excluída** e fica fora dos totais e da série diária. A fonte indicada é **Operacional → Log de Exclusões → Coletas**. A sessão de consulta precisa exibir essa opção para verificar o registro. A data geral de atualização da Coleta tem significado próprio. No recorte comparado, ela não coincidiu com nenhum dos 916 horários de mudança de status do V1.
+O Data Export confirmou 40 colunas de Coletas e 150 de Fretes. O Java e o recebimento SQL aceitam os conjuntos originais e os conjuntos expandidos completos. A lista adicional tem nove campos de Coletas e 36 de Fretes. Um campo desconhecido, uma revisão incompleta ou a mistura de revisões na mesma captura causa rejeição. Os dados originais e as chaves das capturas são preservados.
+
+```powershell
+.\scripts\operations\Install-DashboardCompatibilityViews.ps1 -Group CamposColetasFretes -ReceiptPath C:\privado\campos-ensaio.json
+.\scripts\operations\Install-DashboardCompatibilityViews.ps1 -Group CamposColetasFretes -Apply -ReceiptPath C:\privado\campos-aplicacao.json
+```
+
+O segundo comando aplica o recebimento das novas colunas em `ETL_SISTEMA_V2`. O ciclo que lê os relatórios expandidos precisa do artefato Java com o catálogo correspondente. As quatro consultas de painel ainda precisam ser instaladas e comparadas com o V1. O limite de 150 colunas de Fretes impediu incluir o modal específico do CT-e. O modal do frete permanece disponível como campo próprio.
+
+Em 06/11/2026, o extrator Java percorreu um dia inteiro de Fretes com 25 IDs por página. A extração chegou à página vazia após 177 segundos e recebeu 1.147 linhas, 972 IDs distintos e zero recusas. As 41 requisições, incluindo metadados, somaram 5.615.774 bytes de resposta. Entre os 691 IDs também encontrados no V1, 688 tinham o mesmo ID de CT-e e 690 tinham o mesmo valor de ICMS. O vínculo de destinatário do V1 coincidiu em 690 casos com o ID de recebedor do relatório atual. A leitura do campo rotulado como destinatário coincidiu em 22 casos. As diferenças precisam ser explicadas antes de publicar os indicadores.
+
+Uma coleta excluída aparece na lista com o status **Excluída** e fica fora dos totais e da série diária. O menu **Operacional → Log de Exclusões → Coletas** foi consultado e mostrou número, data, usuário e motivo. A forma de receber esse registro pelo ciclo de extração segue pendente. A data geral de atualização da Coleta tem significado próprio. No recorte comparado, ela não coincidiu com nenhum dos 916 horários de mudança de status do V1.
 
 Quando houver reemissão, as consultas operacionais e de faturamento devem usar o CT-e atual da minuta. Na amostra conferida, o relatório principal trouxe duas linhas do mesmo frete e ambas indicaram o CT-e atual. A publicação precisa contar o frete uma vez. O relatório de Faturamento CT-e confirmou separadamente o cancelamento do documento anterior e a emissão do atual.

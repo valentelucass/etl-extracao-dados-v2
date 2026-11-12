@@ -1,3 +1,7 @@
+## 0783 — Recebimento das colunas de Coletas e Fretes qualificado
+
+[Regras e validação](docs/runbooks/publicacao-operacional-dashboard.md). O SQL da V2 recebeu o catálogo adicional e os testes Java passaram. O Data Export entregou 40 colunas de Coletas e 150 de Fretes. O recorte Java com as duas fontes chegou ao fim sem recusas. As regras de exclusão e reemissão foram verificadas no ESL. São 22 de 26 consultas publicadas. A fonte de exclusões no Data Export e as quatro consultas do painel continuam pendentes.
+
 ## 0781 — Validação dos campos adicionais de Coletas e Fretes
 
 [Regras e validação](docs/runbooks/publicacao-operacional-dashboard.md). O comparador recusou divergência entre metadados e linhas de Coletas observada via curl. Fretes manteve os campos originais na primeira sonda. As regras confirmadas preservam coletas excluídas na lista fora dos totais e usam o CT-e atual uma única vez. São 22 de 26 consultas publicadas. A migração dos catálogos e a publicação das quatro pendentes aguardam a confirmação das colunas na origem.

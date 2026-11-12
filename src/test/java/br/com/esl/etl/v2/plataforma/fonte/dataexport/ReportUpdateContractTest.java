@@ -123,6 +123,39 @@ class ReportUpdateContractTest {
     }
 
     @Test
+    void dashboardReportsRequireOneCompleteKnownRevision() throws Exception {
+        final var infos = infos();
+        final var catalog = new ReportMetadataCatalog();
+        try (var resource =
+                getClass()
+                        .getResourceAsStream(
+                                "/contracts/dataexport/dashboard-report-fields-0783.json")) {
+            assertNotNull(resource);
+            final var extensions =
+                    CurlSnapshotWire.JSON.readTree(resource).required("additionalFields");
+            for (final var template :
+                    java.util.List.of(
+                            ReportSnapshotTemplate.COLETAS, ReportSnapshotTemplate.FRETES)) {
+                final var revised = infos.get(template).deepCopy();
+                final var fields = (ObjectNode) revised.required("fields");
+                final var extra = extensions.required(template.name());
+                extra.forEach(field -> fields.putObject(field.asText()));
+                final int count = template == ReportSnapshotTemplate.COLETAS ? 40 : 150;
+                assertEquals(count, catalog.validate(template, revised).size());
+                assertTrue(catalog.acceptsFieldCount(template, count));
+                assertFalse(catalog.acceptsFieldCount(template, count - 1));
+
+                fields.remove(extra.get(0).asText());
+                assertThrows(
+                        IllegalArgumentException.class, () -> catalog.validate(template, revised));
+                fields.putObject("unknown_field_at_same_count");
+                assertThrows(
+                        IllegalArgumentException.class, () -> catalog.validate(template, revised));
+            }
+        }
+    }
+
+    @Test
     void updateCaptureUsesItsOwnTransportAndRequiresTheEmptyTerminalPage() throws Exception {
         final var infos = infos();
         final var template = ReportSnapshotTemplate.CONSOLIDACAO_DETALHADA;

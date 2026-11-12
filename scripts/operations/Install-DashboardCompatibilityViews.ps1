@@ -1,7 +1,7 @@
 [CmdletBinding()]
 param(
     [Parameter(Mandatory=$true)][string]$ReceiptPath,
-    [ValidateSet('References','Sinistros','Inventario','Localizacao','Faturas','ContasAPagar','Clientes','Usuarios','Raster','Coletores','Saude','Manifestos')][string]$Group = 'References',
+    [ValidateSet('References','Sinistros','Inventario','Localizacao','Faturas','ContasAPagar','Clientes','Usuarios','Raster','Coletores','Saude','Manifestos','CamposColetasFretes')][string]$Group = 'References',
     [string[]]$CaptureReceiptPath,
     [string]$CaptureDirectory,
     [switch]$SeedLegacyUserDirectory,
@@ -154,6 +154,11 @@ IF NOT EXISTS (
 '@
 
     $added = 0
+    if ($Group -eq 'CamposColetasFretes') {
+        $relative = 'database/production/receiving/007_dashboard_report_fields.sql'
+        $countQuery = "SELECT COUNT(*) FROM sys.tables WHERE object_id=OBJECT_ID('ctl.production_export_additional_field','U')"
+        $added += Install-ReceivingPackage $relative '0783-dashboard-report-fields' $countQuery 1
+    }
     if ($auxiliary) {
         $relative = 'database/production/receiving/004_dashboard_auxiliary_receiving.sql'
         $countQuery = @'
@@ -304,6 +309,7 @@ EXEC ctl.usp_store_dashboard_refresh_audit @source_cycle=@cycle,@started_at=@sta
         'Coletores' { 'dashboard-coletores.sql' }
         'Saude' { 'dashboard-saude.sql' }
         'Manifestos' { 'dashboard-manifestos.sql' }
+        'CamposColetasFretes' { 'dashboard-report-fields.sql' }
     }
     $checksPath = Join-Path $PSScriptRoot ('../validation/' + $validationScript)
     $checks = [IO.File]::ReadAllText($checksPath) -split '(?m)^-- VALIDATION BATCH\s*$'
@@ -313,6 +319,16 @@ EXEC ctl.usp_store_dashboard_refresh_audit @source_cycle=@cycle,@started_at=@sta
     }
     if (-not $validation -or $validation -is [DBNull]) { throw 'REFERENCE_VIEW_VALIDATION_MISSING' }
     $receipt.validation = ConvertFrom-Json -InputObject $validation
+    if ($Group -eq 'CamposColetasFretes') {
+        $profile = Join-Path $repository 'src/main/resources/contracts/dataexport/dashboard-report-fields-0783.json'
+        $expected = (Get-Content -LiteralPath $profile -Raw -Encoding utf8 | ConvertFrom-Json).additionalFields
+        foreach ($entity in @('COLETAS','FRETES')) {
+            $fields = @($receipt.validation.additionalFields | Where-Object entity_name -CEQ $entity | ForEach-Object field_name)
+            if (Compare-Object -CaseSensitive -ReferenceObject @($expected.$entity) -DifferenceObject $fields) {
+                throw 'DASHBOARD_REPORT_FIELDS_SQL_JAVA_DIFFERS'
+            }
+        }
+    }
     if ($SeedLegacyUserDirectory) {
         $n = $receipt.capture.records
         if ($receipt.validation.users -ne $n -or $receipt.validation.legacy_active_users -ne $n -or

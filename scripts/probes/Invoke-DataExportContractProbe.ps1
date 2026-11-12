@@ -7,7 +7,7 @@ Executa uma sonda Data Export estritamente read-only para os templates 6908 e 63
 Usa somente curl.exe, GET com query string e a ultima declaracao nao vazia de
 API_BASE_URL/API_DATAEXPORT_TOKEN no .env do V2, com fallback legado. A sonda nao grava
 payload, cabecalho, URL, token ou dados de negocio: ela imprime ao final apenas
-um resumo sanitizado de status, contagens, tipos, nulidade, formatos, nomes
+um resumo sanitizado de status, duracao, bytes, contagens, tipos, nulidade, formatos, nomes
 tecnicos de campos e flags de paginacao. Nenhum valor de campo e emitido.
 
 .EXAMPLE
@@ -607,6 +607,7 @@ function Invoke-CurlGetInMemory {
         Json = $json
         ResponseLimitExceeded = $false
         TransportFailure = $false
+        ResponseBytes = $bodyLength
     }
 }
 
@@ -657,8 +658,10 @@ function Invoke-ReadOnlyGet {
         Start-Sleep -Seconds $DelaySeconds
     }
     $State['calls_attempted'] = [int]$State['calls_attempted'] + 1
+    $timer = [Diagnostics.Stopwatch]::StartNew()
     $response = Invoke-CurlGetInMemory -Uri $Uri -Token $Token
     $response | Add-Member -NotePropertyName Executed -NotePropertyValue $true
+    $response | Add-Member -NotePropertyName ElapsedMilliseconds -NotePropertyValue $timer.ElapsedMilliseconds
 
     if ($response.ResponseLimitExceeded) {
         Stop-Probe -State $State -Reason 'RESPONSE_LIMIT_EXCEEDED'
@@ -683,6 +686,8 @@ function New-TransportSummary {
         json = [bool]$Response.JsonParsed
         response_limit_exceeded = [bool]$Response.ResponseLimitExceeded
         transport_failure = [bool]$Response.TransportFailure
+        duration_ms = $Response.PSObject.Properties['ElapsedMilliseconds']?.Value
+        response_bytes = $Response.PSObject.Properties['ResponseBytes']?.Value
     }
 }
 

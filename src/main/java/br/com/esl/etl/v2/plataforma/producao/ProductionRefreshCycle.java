@@ -689,7 +689,7 @@ public final class ProductionRefreshCycle {
             require(
                     result.success()
                             && result.typedRows() == result.rows()
-                            && result.fields() == context.catalog().fieldCount(template),
+                            && context.catalog().acceptsFieldCount(template, result.fields()),
                     "REFRESH_UPDATE_CAPTURE_INCOMPLETE");
             operation
                     .put("rows", result.rows())
@@ -785,7 +785,7 @@ public final class ProductionRefreshCycle {
                     result.success()
                             && result.typedRows() == result.rows()
                             && result.rows() == rows.size()
-                            && result.fields() == context.catalog().fieldCount(template),
+                            && context.catalog().acceptsFieldCount(template, result.fields()),
                     "REFRESH_SNAPSHOT_INCOMPLETE");
             final var digest = java.security.MessageDigest.getInstance("SHA-256");
             try (var input = Files.newInputStream(path)) {
