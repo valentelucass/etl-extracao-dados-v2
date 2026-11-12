@@ -1,7 +1,9 @@
 SET NOCOUNT ON;
 IF (SELECT COUNT(*) FROM ctl.production_export_additional_field WHERE entity_name='COLETAS')<>9
    OR (SELECT COUNT(*) FROM ctl.production_export_additional_field WHERE entity_name='FRETES')<>36
-   OR (SELECT COUNT(*) FROM ctl.production_export_additional_field)<>45
+   OR (SELECT COUNT(*) FROM ctl.production_export_additional_field WHERE entity_name='FATURAS_POR_CLIENTE') NOT IN (0,2)
+   OR EXISTS (SELECT 1 FROM ctl.production_export_additional_field
+              WHERE entity_name NOT IN ('COLETAS','FRETES','FATURAS_POR_CLIENTE'))
    OR EXISTS (
        SELECT 1 FROM ctl.production_export_additional_field a
        JOIN ctl.production_export_field f ON f.entity_name=a.entity_name AND f.field_name=a.field_name
@@ -9,6 +11,7 @@ IF (SELECT COUNT(*) FROM ctl.production_export_additional_field WHERE entity_nam
 
 IF (SELECT COUNT(*) FROM ctl.production_export_field WHERE entity_name='COLETAS')<>31
    OR (SELECT COUNT(*) FROM ctl.production_export_field WHERE entity_name='FRETES')<>114
+   OR (SELECT COUNT(*) FROM ctl.production_export_field WHERE entity_name='FATURAS_POR_CLIENTE')<>52
    OR NOT EXISTS (
        SELECT 1 FROM sys.sql_expression_dependencies
        WHERE referencing_id=OBJECT_ID('stg.usp_production_ingestion_store','P')

@@ -135,12 +135,20 @@ class ReportUpdateContractTest {
                     CurlSnapshotWire.JSON.readTree(resource).required("additionalFields");
             for (final var template :
                     java.util.List.of(
-                            ReportSnapshotTemplate.COLETAS, ReportSnapshotTemplate.FRETES)) {
+                            ReportSnapshotTemplate.COLETAS,
+                            ReportSnapshotTemplate.FRETES,
+                            ReportSnapshotTemplate.FATURAS_POR_CLIENTE)) {
                 final var revised = infos.get(template).deepCopy();
                 final var fields = (ObjectNode) revised.required("fields");
                 final var extra = extensions.required(template.name());
                 extra.forEach(field -> fields.putObject(field.asText()));
-                final int count = template == ReportSnapshotTemplate.COLETAS ? 40 : 150;
+                final int count =
+                        switch (template) {
+                            case COLETAS -> 40;
+                            case FRETES -> 150;
+                            case FATURAS_POR_CLIENTE -> 54;
+                            default -> throw new AssertionError(template);
+                        };
                 assertEquals(count, catalog.validate(template, revised).size());
                 assertTrue(catalog.acceptsFieldCount(template, count));
                 assertFalse(catalog.acceptsFieldCount(template, count - 1));

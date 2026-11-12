@@ -89,6 +89,17 @@ As consultas de entrega e cubagem com filtro de período foram verificadas separ
 | Consulta | Evidência e dependência |
 | --- | --- |
 | `vw_coletas_powerbi` | O Log de Exclusões é visível no ESL. O catálogo atual de Data Export não encontrou template com a raiz **Coletas - Excluídas**. Para alimentar a lista automaticamente, é necessário disponibilizar essa origem para o ETL. O catálogo de Coletas oferece a data geral de atualização. O horário específico da mudança de status ainda precisa de uma fonte. |
-| `vw_fretes_powerbi` e `fato_fretes_faturamento` | A soma dos 17 componentes presentes no relatório reproduziu o **Valor Frete** em todos os 3.260 registros comparáveis dos dois bancos. Data de criação do frete, CNPJ da filial emissora e peso das notas tinham valor nos 76.351 fretes ativos do V1. Falta qualificar a origem desses campos no Data Export. O template 6389 está com 150 colunas. |
+| `vw_fretes_powerbi` e `fato_fretes_faturamento` | A soma dos 17 componentes presentes no relatório reproduziu o **Valor Frete** em todos os 3.260 registros comparáveis dos dois bancos. O ID de filial permitiu associar o CNPJ das oito filiais da amostra ao cadastro legado. O template 6389 está com 150 colunas. O 4924 cobre os 4.298 IDs da amostra, e seu catálogo oferece data de criação do frete e peso real das notas. |
 
 Com os campos disponíveis, confira novamente a reemissão, a exclusão, as regras de elegibilidade e os totais em um período fechado. O ensaio de troca depende das 26 consultas e da cobertura do período que o dashboard vai exibir.
+
+## Data de criação e peso das notas no relatório 4924
+
+A revisão de Faturas por Cliente preserva o contrato de 52 colunas e aceita uma segunda revisão com as 54 colunas exatas. Os campos `created_at` e `invoices_weight` complementam o frete no mesmo escopo de origem e ID. Uma captura usa uma única revisão do relatório. Coluna desconhecida, revisão de 53 colunas ou mistura de formatos causa rejeição. O recebimento guarda as duas colunas no registro de origem sem alterar os campos já usados em Faturas por Cliente.
+
+```powershell
+.\scripts\operations\Install-DashboardCompatibilityViews.ps1 -Group CamposFaturasFretes -ReceiptPath C:\privado\campos-4924-ensaio.json
+.\scripts\operations\Install-DashboardCompatibilityViews.ps1 -Group CamposFaturasFretes -Apply -ReceiptPath C:\privado\campos-4924-aplicacao.json
+```
+
+Instale o catálogo SQL e disponibilize o Java correspondente antes de editar o relatório. O editor salva cada coluna separadamente. Conclua as duas inclusões entre execuções e confira o conjunto de campos anunciado pela API. Use um dia fechado para validar a leitura de todas as páginas, os valores do Excel do ESL e o vínculo por ID com Fretes. A captura de teste precisa chegar à página vazia. O relatório pode repetir o mesmo ID em várias linhas de fatura, por isso a associação ao frete deve preservar uma única linha por ID.

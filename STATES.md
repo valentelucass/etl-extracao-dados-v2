@@ -1,3 +1,7 @@
+## 0788 — Recebimento das colunas complementares do 4924 preparado
+
+[Instalação e conferência](docs/runbooks/publicacao-operacional-dashboard.md). O Java e o catálogo SQL passam a reconhecer as 52 colunas atuais ou as 54 colunas exatas com data de criação e peso das notas. Os testes isolados rejeitam capturas parciais, misturadas, duplicadas ou com colunas desconhecidas. A instalação no banco depende da credencial administrativa local. O template 4924 ainda não foi alterado.
+
 ## 0785 — Leitura de Gestão à Vista de Fretes com filtro validada
 
 [Evidências e dependências](docs/runbooks/publicacao-operacional-dashboard.md). O ensaio comparou 8.596 linhas antes e depois da otimização, sem diferenças. O JDBC com a conta do dashboard leu 23 consultas publicadas e executou os filtros de entrega e cubagem. Os 17 componentes de Fretes reproduziram o subtotal nos 3.260 registros comparáveis. Continuam pendentes a origem das exclusões de Coletas e campos do detalhe e faturamento de Fretes.

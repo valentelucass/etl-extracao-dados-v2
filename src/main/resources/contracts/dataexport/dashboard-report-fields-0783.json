@@ -11,6 +11,10 @@
       "pck_vee_name",
       "request_hour"
     ],
+    "FATURAS_POR_CLIENTE": [
+      "created_at",
+      "invoices_weight"
+    ],
     "FRETES": [
       "fit_crn_id",
       "fit_f_l_calculation_basis",

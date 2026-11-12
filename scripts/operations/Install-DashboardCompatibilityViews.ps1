@@ -1,7 +1,7 @@
 [CmdletBinding()]
 param(
     [Parameter(Mandatory=$true)][string]$ReceiptPath,
-    [ValidateSet('References','Sinistros','Inventario','Localizacao','Faturas','ContasAPagar','Clientes','Usuarios','Raster','Coletores','Saude','Manifestos','CamposColetasFretes','GestaoFretes')][string]$Group = 'References',
+    [ValidateSet('References','Sinistros','Inventario','Localizacao','Faturas','ContasAPagar','Clientes','Usuarios','Raster','Coletores','Saude','Manifestos','CamposColetasFretes','CamposFaturasFretes','GestaoFretes')][string]$Group = 'References',
     [string[]]$CaptureReceiptPath,
     [string]$CaptureDirectory,
     [switch]$SeedLegacyUserDirectory,
@@ -164,6 +164,11 @@ IF NOT EXISTS (
         $relative = 'database/production/receiving/007_dashboard_report_fields.sql'
         $countQuery = "SELECT COUNT(*) FROM sys.tables WHERE object_id=OBJECT_ID('ctl.production_export_additional_field','U')"
         $added += Install-ReceivingPackage $relative '0783-dashboard-report-fields' $countQuery 1
+    }
+    if ($Group -eq 'CamposFaturasFretes') {
+        $relative = 'database/production/receiving/009_dashboard_invoice_freight_fields.sql'
+        $countQuery = "SELECT COUNT(*) FROM ctl.production_export_additional_field WHERE entity_name='FATURAS_POR_CLIENTE'"
+        $added += Install-ReceivingPackage $relative '0788-dashboard-invoice-freight-fields' $countQuery 2
     }
     if ($Group -eq 'GestaoFretes') {
         $relative = 'database/production/receiving/008_dashboard_freight_rules.sql'
@@ -357,6 +362,7 @@ EXEC ctl.usp_store_dashboard_refresh_audit @source_cycle=@cycle,@started_at=@sta
         'Saude' { 'dashboard-saude.sql' }
         'Manifestos' { 'dashboard-manifestos.sql' }
         'CamposColetasFretes' { 'dashboard-report-fields.sql' }
+        'CamposFaturasFretes' { 'dashboard-report-fields.sql' }
         'GestaoFretes' { 'dashboard-gestao-fretes.sql' }
     }
     $checksPath = Join-Path $PSScriptRoot ('../validation/' + $validationScript)
@@ -367,10 +373,12 @@ EXEC ctl.usp_store_dashboard_refresh_audit @source_cycle=@cycle,@started_at=@sta
     }
     if (-not $validation -or $validation -is [DBNull]) { throw 'REFERENCE_VIEW_VALIDATION_MISSING' }
     $receipt.validation = ConvertFrom-Json -InputObject $validation
-    if ($Group -eq 'CamposColetasFretes') {
+    if ($Group -in @('CamposColetasFretes','CamposFaturasFretes')) {
         $profile = Join-Path $repository 'src/main/resources/contracts/dataexport/dashboard-report-fields-0783.json'
         $expected = (Get-Content -LiteralPath $profile -Raw -Encoding utf8 | ConvertFrom-Json).additionalFields
-        foreach ($entity in @('COLETAS','FRETES')) {
+        $entities = @('COLETAS','FRETES')
+        if ($Group -eq 'CamposFaturasFretes') { $entities += 'FATURAS_POR_CLIENTE' }
+        foreach ($entity in $entities) {
             $fields = @($receipt.validation.additionalFields | Where-Object entity_name -CEQ $entity | ForEach-Object field_name)
             if (Compare-Object -CaseSensitive -ReferenceObject @($expected.$entity) -DifferenceObject $fields) {
                 throw 'DASHBOARD_REPORT_FIELDS_SQL_JAVA_DIFFERS'
