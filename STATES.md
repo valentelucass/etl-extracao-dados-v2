@@ -1,3 +1,7 @@
+## 0784 — Gestão à Vista de Fretes publicada na V2
+
+[Regras, teste e dependências](docs/runbooks/publicacao-operacional-dashboard.md). A consulta de entrega e cubagem preservou 54 colunas do V1 e foi validada com 8.596 linhas. A repetição da instalação confirmou os objetos existentes. A publicação passa a 23 de 26 consultas. A troca depende do acesso automatizado às exclusões de Coletas e da confirmação do subtotal de Fretes.
+
 ## 0783 — Recebimento das colunas de Coletas e Fretes qualificado
 
 [Regras e validação](docs/runbooks/publicacao-operacional-dashboard.md). O SQL da V2 recebeu o catálogo adicional e os testes Java passaram. O Data Export entregou 40 colunas de Coletas e 150 de Fretes. O recorte Java com as duas fontes chegou ao fim sem recusas. As regras de exclusão e reemissão foram verificadas no ESL. São 22 de 26 consultas publicadas. A fonte de exclusões no Data Export e as quatro consultas do painel continuam pendentes.

@@ -63,10 +63,30 @@ O Data Export confirmou 40 colunas de Coletas e 150 de Fretes. O Java e o recebi
 .\scripts\operations\Install-DashboardCompatibilityViews.ps1 -Group CamposColetasFretes -Apply -ReceiptPath C:\privado\campos-aplicacao.json
 ```
 
-O segundo comando aplica o recebimento das novas colunas em `ETL_SISTEMA_V2`. O ciclo que lê os relatórios expandidos precisa do artefato Java com o catálogo correspondente. As quatro consultas de painel ainda precisam ser instaladas e comparadas com o V1. O limite de 150 colunas de Fretes impediu incluir o modal específico do CT-e. O modal do frete permanece disponível como campo próprio.
+O segundo comando aplica o recebimento das novas colunas em `ETL_SISTEMA_V2`. O ciclo que lê os relatórios expandidos precisa do artefato Java com o catálogo correspondente. O template de Fretes atingiu o limite de 150 colunas. O modal do frete permanece disponível como campo próprio.
 
-Em 06/11/2026, o extrator Java percorreu um dia inteiro de Fretes com 25 IDs por página. A extração chegou à página vazia após 177 segundos e recebeu 1.147 linhas, 972 IDs distintos e zero recusas. As 41 requisições, incluindo metadados, somaram 5.615.774 bytes de resposta. Entre os 691 IDs também encontrados no V1, 688 tinham o mesmo ID de CT-e e 690 tinham o mesmo valor de ICMS. O vínculo de destinatário do V1 coincidiu em 690 casos com o ID de recebedor do relatório atual. A leitura do campo rotulado como destinatário coincidiu em 22 casos. As diferenças precisam ser explicadas antes de publicar os indicadores.
+Em 06/11/2026, o extrator Java percorreu um dia inteiro de Fretes com 25 IDs por página. A extração chegou à página vazia após 177 segundos e recebeu 1.147 linhas, 972 IDs distintos e zero recusas. As 41 requisições, incluindo metadados, somaram 5.615.774 bytes de resposta. Entre os 691 IDs também encontrados no V1, 688 tinham o mesmo ID de CT-e e 690 tinham o mesmo valor de ICMS. Os três CT-es divergentes foram emitidos após a captura do V1. A divergência de ICMS estava em um desses fretes. O vínculo de destinatário do V1 usa o cadastro de recebedor, confirmado pelo mapeador Java legado e por 690 dos 691 IDs sobrepostos.
 
 Uma coleta excluída aparece na lista com o status **Excluída** e fica fora dos totais e da série diária. O menu **Operacional → Log de Exclusões → Coletas** foi consultado e mostrou número, data, usuário e motivo. A forma de receber esse registro pelo ciclo de extração segue pendente. A data geral de atualização da Coleta tem significado próprio. No recorte comparado, ela não coincidiu com nenhum dos 916 horários de mudança de status do V1.
 
 Quando houver reemissão, as consultas operacionais e de faturamento devem usar o CT-e atual da minuta. Na amostra conferida, o relatório principal trouxe duas linhas do mesmo frete e ambas indicaram o CT-e atual. A publicação precisa contar o frete uma vez. O relatório de Faturamento CT-e confirmou separadamente o cancelamento do documento anterior e a emissão do atual.
+
+## Gestão à Vista de Fretes
+
+O fato de entrega e cubagem usa os Fretes vigentes, a finalização disponível em Faturas por Cliente e os dados de destino de Localização de Cargas. A consulta escolhe um registro vigente por ID de frete e um frete por minuta. As regras de filiais operacionais e de exceção de pagadores são importadas do procedimento do V1 na primeira instalação. Depois da instalação, a leitura usa as regras copiadas para a V2. Os documentos dessas regras ficam fora do repositório.
+
+```powershell
+.\scripts\operations\Install-DashboardCompatibilityViews.ps1 -Group GestaoFretes -ReceiptPath C:\privado\gestao-fretes-ensaio.json
+.\scripts\operations\Install-DashboardCompatibilityViews.ps1 -Group GestaoFretes -Apply -ReceiptPath C:\privado\gestao-fretes-aplicacao.json
+```
+
+A validação conferiu as 54 colunas do contrato do V1, a leitura com a conta do dashboard e a chave única por indicador e minuta. A consulta produziu 4.298 linhas de entrega e 4.298 de cubagem, com 4.215 e 3.115 linhas válidas, respectivamente. Uma segunda aplicação confirmou os mesmos objetos e regras.
+
+## Dependências para completar a troca
+
+| Consulta | Evidência e dependência |
+| --- | --- |
+| `vw_coletas_powerbi` | O Log de Exclusões é visível no ESL. O catálogo atual de Data Export não encontrou template com a raiz **Coletas - Excluídas**. Para alimentar a lista de excluídas automaticamente, é necessário disponibilizar essa origem para o ETL. |
+| `vw_fretes_powerbi` e `fato_fretes_faturamento` | O **Valor Frete** do V1 vem do subtotal de origem. O editor do ESL oferece **Frete / Subtotal parcelas**, que ainda precisa ser disponibilizado e comparado com o subtotal do V1. Subtrair ICMS, PIS e COFINS do total reproduziu 73.493 de 76.351 subtotais no próprio V1. O template 6389 está com 150 colunas. |
+
+Com os campos disponíveis, confira novamente a reemissão, a exclusão, as regras de elegibilidade e os totais em um período fechado. O ensaio de troca depende das 26 consultas e da cobertura do período que o dashboard vai exibir.

@@ -1,7 +1,7 @@
 [CmdletBinding()]
 param(
     [Parameter(Mandatory=$true)][string]$ReceiptPath,
-    [ValidateSet('References','Sinistros','Inventario','Localizacao','Faturas','ContasAPagar','Clientes','Usuarios','Raster','Coletores','Saude','Manifestos','CamposColetasFretes')][string]$Group = 'References',
+    [ValidateSet('References','Sinistros','Inventario','Localizacao','Faturas','ContasAPagar','Clientes','Usuarios','Raster','Coletores','Saude','Manifestos','CamposColetasFretes','GestaoFretes')][string]$Group = 'References',
     [string[]]$CaptureReceiptPath,
     [string]$CaptureDirectory,
     [switch]$SeedLegacyUserDirectory,
@@ -58,6 +58,10 @@ $specs = switch ($Group) {
         @{file='025_dashboard_fato_manifestos.sql'; view='dashboard_fato_manifestos'; schema='core'; step='0777-dashboard-manifestos-fato'}
         @{file='026_dashboard_manifestos_powerbi.sql'; view='vw_manifestos_powerbi'; step='0777-dashboard-manifestos-detalhe'; columns=105}
         @{file='027_dashboard_manifestos_fato_dash.sql'; view='vw_fato_manifestos_dash'; step='0777-dashboard-manifestos-portal'; columns=106}
+    }
+    'GestaoFretes' {
+        @{file='028_dashboard_fretes_linhas.sql'; view='dashboard_fretes_linhas'; schema='core'; step='0784-dashboard-fretes-linhas'}
+        @{file='029_dashboard_gestao_vista_fretes.sql'; view='fato_gestao_vista_fretes'; step='0784-dashboard-gestao-fretes'; columns=54}
     }
 }
 
@@ -158,6 +162,33 @@ IF NOT EXISTS (
         $relative = 'database/production/receiving/007_dashboard_report_fields.sql'
         $countQuery = "SELECT COUNT(*) FROM sys.tables WHERE object_id=OBJECT_ID('ctl.production_export_additional_field','U')"
         $added += Install-ReceivingPackage $relative '0783-dashboard-report-fields' $countQuery 1
+    }
+    if ($Group -eq 'GestaoFretes') {
+        $relative = 'database/production/receiving/008_dashboard_freight_rules.sql'
+        $countQuery = "SELECT COUNT(*) FROM sys.tables WHERE object_id=OBJECT_ID('ref.dashboard_frete_regras_documento','U')"
+        $rulePackageAdded = Install-ReceivingPackage $relative '0784-dashboard-freight-rules' $countQuery 1
+        $added += $rulePackageAdded
+        if ($rulePackageAdded) {
+            $definition = Invoke-Scalar @'
+SELECT definition FROM ETL_SISTEMA.sys.sql_modules
+WHERE object_id=OBJECT_ID('ETL_SISTEMA.dbo.sp_carga_fato_gestao_vista_fretes','P');
+'@
+            $groups = @(
+                @{kind='BRANCH'; count=11; pattern='(?is)WITH documentos_filiais_operacionais\(documento\) AS \((.*?)\),\s*pagadores_excluidos_cubagem'},
+                @{kind='CUBAGE'; count=40; pattern='(?is)pagadores_excluidos_cubagem\(documento\) AS \((.*?)\),\s*fretes_fonte'}
+            )
+            $rules = @(foreach ($groupSpec in $groups) {
+                $block = [regex]::Match([string]$definition, $groupSpec.pattern)
+                $documents = [regex]::Matches($block.Groups[1].Value, "SELECT N'([0-9]{14})'")
+                if ($documents.Count -ne $groupSpec.count) { throw 'DASHBOARD_FREIGHT_RULES_REFERENCE_CHANGED' }
+                foreach ($document in $documents) { @{kind=$groupSpec.kind; document=$document.Groups[1].Value} }
+            })
+            $null = Invoke-Scalar @'
+INSERT ref.dashboard_frete_regras_documento(rule_type,document_hash)
+SELECT kind,HASHBYTES('SHA2_256',document)
+FROM OPENJSON(@records) WITH(kind varchar(8),document nvarchar(50));
+'@ @{'@records'=(ConvertTo-Json -InputObject $rules -Compress)}
+        }
     }
     if ($auxiliary) {
         $relative = 'database/production/receiving/004_dashboard_auxiliary_receiving.sql'
@@ -310,6 +341,7 @@ EXEC ctl.usp_store_dashboard_refresh_audit @source_cycle=@cycle,@started_at=@sta
         'Saude' { 'dashboard-saude.sql' }
         'Manifestos' { 'dashboard-manifestos.sql' }
         'CamposColetasFretes' { 'dashboard-report-fields.sql' }
+        'GestaoFretes' { 'dashboard-gestao-fretes.sql' }
     }
     $checksPath = Join-Path $PSScriptRoot ('../validation/' + $validationScript)
     $checks = [IO.File]::ReadAllText($checksPath) -split '(?m)^-- VALIDATION BATCH\s*$'
