@@ -30,6 +30,7 @@ do {
     $reportFile = Get-ChildItem -LiteralPath (Join-Path $state 'reports') -File -Filter '*.json' -ErrorAction SilentlyContinue |
         Where-Object BaseName -Match '^[0-9a-f]{32}$' | Sort-Object LastWriteTimeUtc -Descending | Select-Object -First 1
     $report = if ($reportFile) { Read-StatusJson $reportFile.FullName }
+    $currentSupervisor = if ($reportFile -and $supervisor.cycle -ceq $reportFile.BaseName) { $supervisor }
     $checkpoint = Read-StatusJson (Join-Path $state 'checkpoint.json')
     $done = 0
     foreach ($entry in $checkpoint.payload.entities.PSObject.Properties) {
@@ -40,11 +41,14 @@ do {
     $total = [int]$settings.historyDays * @($catalog.entities).Count
     $progress = "$done/$total combinacoes de fonte e data gravadas no banco"
     $failed = @($report.entities | Where-Object { $_.status -ceq 'FAILED' }) | Select-Object -Last 1
-    if ($supervisor.phase -ceq 'HISTORY_COMPLETED') {
+    $finished = $false
+    if ($currentSupervisor.phase -ceq 'HISTORY_COMPLETED') {
         $message = "Carga concluida. $progress."
-    } elseif ($failed -or (Test-Path -LiteralPath (Join-Path $state 'STOP.failure.json'))) {
+        $finished = $true
+    } elseif (Test-Path -LiteralPath (Join-Path $state 'STOP.failure.json')) {
         $detail = if ($failed) { "$($labels[[int]$failed.reportId]) - $($failed.reason)" } else { $report.reason }
         $message = "Carga interrompida. $detail. $progress."
+        $finished = $true
     } elseif (Test-Path -LiteralPath (Join-Path $state 'STOP.operator.json')) {
         $message = "Parada solicitada pelo operador. $progress."
     } elseif ($report -and -not $report.completedAt) {
@@ -62,9 +66,11 @@ do {
         } else {
             $message = "Lote iniciado, aguardando a primeira consulta. $progress."
         }
-    } elseif ($supervisor.nextEligibleAt) {
-        $next = ([DateTimeOffset]$supervisor.nextEligibleAt).ToLocalTime().ToString('dd/MM/yyyy HH:mm:ss')
+    } elseif ($currentSupervisor.nextEligibleAt) {
+        $next = ([DateTimeOffset]$currentSupervisor.nextEligibleAt).ToLocalTime().ToString('dd/MM/yyyy HH:mm:ss')
         $message = "Lote encerrado. Proximo lote a partir de $next. $progress."
+    } elseif ($currentSupervisor.phase -ceq 'FAILED') {
+        $message = "Retomada liberada. Aguardando o proximo lote. $progress."
     } else {
         $message = "Aguardando o inicio da carga. $progress."
     }
@@ -75,6 +81,6 @@ do {
         $lastMessage = $message
         $lastPrinted = $now
     }
-    if ($Once -or $supervisor.phase -ceq 'HISTORY_COMPLETED' -or $supervisor.phase -ceq 'FAILED') { break }
+    if ($Once -or $finished) { break }
     Start-Sleep -Seconds $IntervalSeconds
 } while ($true)
