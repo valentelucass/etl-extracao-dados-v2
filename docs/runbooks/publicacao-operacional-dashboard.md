@@ -134,4 +134,10 @@ A revisão do 4924 precisa cobrir o período de uso antes da troca. A primeira a
 
 O Excel 1790139 e a API retornaram 1.073 linhas e 976 IDs de frete. A comparação por ID, minuta, peso da nota e data de criação na precisão de minuto do Excel encontrou as mesmas linhas e repetições. O recebimento gravou as 1.073 linhas e conservou as 1.070 ocorrências da captura anterior. Após a gravação, a consulta de faturamento apresentou os dois campos em 972 dos 973 fretes de 6 de novembro. O frete restante constava na captura anterior e deixou de aparecer no 4924. Trate os valores desse frete como ausentes até nova confirmação na fonte.
 
+## Tempo de resposta de Fretes após o ciclo de 13 de novembro de 2026
+
+Após o ciclo de um dia das 12 fontes, a consulta de faturamento excedeu 35 segundos mesmo filtrada por uma data. O recebimento já exige um único objeto `record` por linha. A revisão do plano SQL explicita essa cardinalidade nas três leituras de Fretes, Faturas por Cliente e Localização, sem alterar os filtros, tipos ou critérios de escolha dos registros. O instalador `FretesFaturamento` confere a revisão anterior antes de aplicar a mudança e testa novamente as 123 colunas de detalhe e as 83 de faturamento.
+
+O ensaio da consulta de 6 de novembro retornou 1.000 fretes, sendo 982 elegíveis, em 4,4 segundos. O ensaio do instalador, a aplicação na V2 e a releitura com a conta do dashboard passaram. A leitura de todo o período então carregado confirmou 5.365 fretes distintos, 5.273 elegíveis e valor faturável zero para os inelegíveis. As 26 consultas passaram na V2. A verificação usou o histórico disponível na data do teste. O dashboard segue com as 26 consultas na V1 até validar a cobertura de 90 dias e os campos de detalhe ainda sem fonte confirmada.
+
 O catálogo de edição do 4924 oferece os campos Valor Produto e Valor segurado na raiz Frete e associações para Centro de custo e Seguro. A API do relatório atual ainda entrega 54 colunas. A associação Seguro tem um campo ID próprio, cuja equivalência ao Seguro ID do V1 precisa ser conferida em dados reais antes de publicar. O campo Valor Total do Seguro é distinto do Valor segurado.

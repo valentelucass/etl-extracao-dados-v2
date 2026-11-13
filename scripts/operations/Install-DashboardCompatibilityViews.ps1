@@ -69,7 +69,8 @@ $specs = switch ($Group) {
         @{file='032_dashboard_coletas.sql'; view='vw_coletas_powerbi'; step='0791-dashboard-coletas'; columns=41}
     }
     'FretesFaturamento' {
-        @{file='033_dashboard_fretes_publicacao.sql'; view='dashboard_fretes_publicacao'; schema='core'; step='0792-dashboard-fretes-publicacao'}
+        @{file='036_dashboard_fretes_publicacao_tuned.sql'; view='dashboard_fretes_publicacao'; schema='core'; step='0797-dashboard-fretes-publicacao';
+          previousFile='033_dashboard_fretes_publicacao.sql'; previousStep='0792-dashboard-fretes-publicacao'}
         @{file='034_dashboard_fretes_detalhe.sql'; view='vw_fretes_powerbi'; step='0792-dashboard-fretes-detalhe'; columns=123}
         @{file='035_dashboard_fretes_faturamento.sql'; view='fato_fretes_faturamento'; step='0792-dashboard-fretes-faturamento'; columns=83}
     }

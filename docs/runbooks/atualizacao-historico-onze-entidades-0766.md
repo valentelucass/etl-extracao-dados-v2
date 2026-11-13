@@ -62,6 +62,8 @@ A variável de usuário `RODOGARCIA_ETL_V2_SQL_CREDENTIAL_FILE` indica o caminho
 
 Em 13/11/2026, a credencial do extrator foi recadastrada com autorização do responsável. O teste JDBC na V2 confirmou o login dedicado e as permissões para iniciar e gravar uma captura. O manifesto privado `runtime-manifest-dashboard-fields-0796.json` registra os hashes do acionador atualizado e dos nove JARs. Essa revisão reconhece o filtro opcional por número da coleta observado no 6908. Também aceita o filtro de data de exclusão do 12899 como texto ou lista de um único item, conforme as duas respostas observadas no ESL.
 
+O ciclo `2991999f1032495ea6c5083da1b48927` usou esse manifesto em 13/11/2026. O acionador concluiu as 12 fontes em 321 segundos e 75 requisições. Gravou uma partição por fonte, com releitura exata das 7.170 linhas e das três partições vazias. O supervisor calculou a próxima execução para 60 minutos depois de concluir. A prova usou estado próprio e um lote finito de uma data.
+
 Abra o PowerShell na pasta do repositório para iniciar manualmente a carga noturna:
 
 ```powershell
