@@ -102,8 +102,15 @@ if(-not $Worker -and -not $Verify){
     break
    }
    if($HistoryOnly){
-    $remainingDays0766=($report0766.entities | Measure-Object -Property initialRemainingDays -Maximum).Maximum
-    Write-Output ('Lote concluido. Restam ate '+$remainingDays0766+' dias por entidade. Relatorio: '+$reportPath0766)
+    $remainingDays0766=($report0766.entities | Where-Object {$null -ne $_.initialRemainingDays} | Measure-Object -Property initialRemainingDays -Maximum).Maximum
+    foreach($pending0766 in @($report0766.entities | Where-Object {$_.status -ceq 'BATCH_DEFERRED' -and $_.reason})){
+     Write-Output ($pending0766.entity+' ficou pendente para o proximo lote ('+$pending0766.reason+').')
+    }
+    if($null -ne $remainingDays0766){
+     Write-Output ('Lote encerrado. Restam ate '+$remainingDays0766+' dias por entidade. Relatorio: '+$reportPath0766)
+    }else{
+     Write-Output ('Lote encerrado com datas pendentes. Relatorio: '+$reportPath0766)
+    }
     continue
    }
    if(-not $Continuous){break}

@@ -85,7 +85,7 @@ public final class ProductionRefreshCycle {
                 ProductionRefreshCycle::openStore,
                 (origin, token, root, stop, deadline) -> {
                     final var wire =
-                            new CurlSnapshotWire(origin, token, root, stop, deadline, 2000);
+                            new CurlSnapshotWire(origin, token, root, stop, deadline, 2000, true);
                     return new Session(wire, wire::requests);
                 },
                 Clock.systemUTC(),
@@ -167,6 +167,10 @@ public final class ProductionRefreshCycle {
 
         DeferredWork() {
             super("REFRESH_BATCH_DEFERRED");
+        }
+
+        DeferredWork(final CurlSnapshotWire.RequestFailure cause) {
+            super(cause.getMessage(), cause);
         }
     }
 
@@ -328,21 +332,7 @@ public final class ProductionRefreshCycle {
                     result.put("initialComplete", state.path("initialComplete").asBoolean())
                             .put("historyStart", state.required("floor").asText())
                             .put("watermark", state.required("watermark").asText())
-                            .put(
-                                    "initialRemainingDays",
-                                    state.path("initialComplete").asBoolean()
-                                            ? 0
-                                            : Math.max(
-                                                    0,
-                                                    ChronoUnit.DAYS.between(
-                                                                    LocalDate.parse(
-                                                                            state.required("floor")
-                                                                                    .asText()),
-                                                                    LocalDate.parse(
-                                                                            state.required(
-                                                                                            "initialNext")
-                                                                                    .asText()))
-                                                            + 1))
+                            .put("initialRemainingDays", checkpoint.initialDaysRemaining(template))
                             .put("nextReconciliationDay", state.required("sweepNext").asText())
                             .put("sweepsCompleted", state.path("sweepsCompleted").asInt())
                             .put("pendingUpdateWork", pending(state))
@@ -363,7 +353,14 @@ public final class ProductionRefreshCycle {
                                             ? "BATCH_DEFERRED"
                                             : "BATCH_COMPLETED");
                 } catch (final DeferredWork deferred) {
-                    result.put("status", "BATCH_DEFERRED");
+                    result.put("status", "BATCH_DEFERRED").putNull("initialRemainingDays");
+                    final var deferredState = checkpoint.initialDaysRemaining(template);
+                    if (deferredState >= 0) {
+                        result.put("initialRemainingDays", deferredState);
+                    }
+                    if (deferred.getCause() != null) {
+                        result.put("reason", deferred.getMessage());
+                    }
                 } catch (final Exception failure) {
                     passed = false;
                     result.put("status", "FAILED").put("reason", safe(failure));
@@ -407,7 +404,21 @@ public final class ProductionRefreshCycle {
             for (int count = 0;
                     count < context.policy().initialBatchDays() && !next.isBefore(floor);
                     count++) {
-                fullDay(context, template, next, "INITIAL");
+                try {
+                    fullDay(context, template, next, "INITIAL");
+                } catch (final DeferredWork deferred) {
+                    if (context.historyOnly() && deferred.getCause() != null) {
+                        final int failures = state.path("initialSourceFailures").asInt() + 1;
+                        state.put("initialSourceFailures", failures);
+                        context.checkpoint().save();
+                        if (failures >= 3) {
+                            throw new IllegalStateException(
+                                    "REFRESH_INITIAL_SOURCE_REPEATED_FAILURE", deferred);
+                        }
+                    }
+                    throw deferred;
+                }
+                state.remove("initialSourceFailures");
                 next = next.minusDays(1);
                 state.put("initialNext", next.toString());
                 context.checkpoint().save();
@@ -833,12 +844,18 @@ public final class ProductionRefreshCycle {
             }
             operation.put("stored", true).put("sqlReadbackExact", true).put("rows", result.rows());
         } catch (final Exception failure) {
+            operation.put("reason", safe(failure));
             try {
                 context.store().fail(run, safe(failure));
             } catch (final Exception unconfirmed) {
                 operation.put("failureStateUnconfirmed", true);
+                throw failure;
             }
-            operation.put("reason", safe(failure));
+            if (context.historyOnly()
+                    && failure instanceof CurlSnapshotWire.RequestFailure request
+                    && request.isTransient()) {
+                throw new DeferredWork(request);
+            }
             throw failure;
         }
     }

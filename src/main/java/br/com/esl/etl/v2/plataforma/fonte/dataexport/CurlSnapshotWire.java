@@ -29,6 +29,7 @@ public final class CurlSnapshotWire implements ReportSnapshotExtractor.Wire {
     private final Path stop;
     private final Instant deadline;
     private final int maximumRequests;
+    private final boolean retryTransient;
     private final Map<ReportSnapshotTemplate, JsonNode> metadata =
             new EnumMap<>(ReportSnapshotTemplate.class);
     private int requests;
@@ -43,7 +44,7 @@ public final class CurlSnapshotWire implements ReportSnapshotExtractor.Wire {
             final Instant deadline,
             final int maximumRequests)
             throws Exception {
-        this(credentials(env), privateRoot, stop, deadline, maximumRequests);
+        this(credentials(env), privateRoot, stop, deadline, maximumRequests, false);
     }
 
     public CurlSnapshotWire(
@@ -53,7 +54,24 @@ public final class CurlSnapshotWire implements ReportSnapshotExtractor.Wire {
             final Path stop,
             final Instant deadline,
             final int maximumRequests) {
-        this(new Credentials(apiOrigin, apiToken), privateRoot, stop, deadline, maximumRequests);
+        this(apiOrigin, apiToken, privateRoot, stop, deadline, maximumRequests, false);
+    }
+
+    public CurlSnapshotWire(
+            final URI apiOrigin,
+            final String apiToken,
+            final Path privateRoot,
+            final Path stop,
+            final Instant deadline,
+            final int maximumRequests,
+            final boolean retryTransient) {
+        this(
+                new Credentials(apiOrigin, apiToken),
+                privateRoot,
+                stop,
+                deadline,
+                maximumRequests,
+                retryTransient);
     }
 
     private CurlSnapshotWire(
@@ -61,7 +79,8 @@ public final class CurlSnapshotWire implements ReportSnapshotExtractor.Wire {
             final Path privateRoot,
             final Path stop,
             final Instant deadline,
-            final int maximumRequests) {
+            final int maximumRequests,
+            final boolean retryTransient) {
         if (!Files.isDirectory(privateRoot)
                 || stop == null
                 || deadline == null
@@ -82,6 +101,7 @@ public final class CurlSnapshotWire implements ReportSnapshotExtractor.Wire {
         this.stop = stop;
         this.deadline = deadline;
         this.maximumRequests = maximumRequests;
+        this.retryTransient = retryTransient;
     }
 
     private static Credentials credentials(final Path env) throws Exception {
@@ -189,6 +209,101 @@ public final class CurlSnapshotWire implements ReportSnapshotExtractor.Wire {
             final String day,
             final int page)
             throws Exception {
+        return requestWithRecovery(
+                () -> attempt(template, target, day, page),
+                (delay, failure) -> {
+                    if (!retryTransient
+                            || requests >= maximumRequests
+                            || Files.exists(stop)
+                            || !Instant.now().plusSeconds(delay + 37L).isBefore(deadline)) {
+                        return false;
+                    }
+                    journal(
+                            JSON.createObjectNode()
+                                    .put("state", "RETRY_WAIT")
+                                    .put("request", requests)
+                                    .put("reportId", template.template().templateId())
+                                    .put("day", day)
+                                    .put("page", page)
+                                    .put("http", failure.status)
+                                    .put("reason", failure.getMessage())
+                                    .put("delaySeconds", delay));
+                    TimeUnit.SECONDS.sleep(delay);
+                    return true;
+                });
+    }
+
+    @FunctionalInterface
+    interface Request {
+        JsonNode execute() throws Exception;
+    }
+
+    @FunctionalInterface
+    interface RetryWait {
+        boolean await(int delaySeconds, RequestFailure failure) throws Exception;
+    }
+
+    static JsonNode requestWithRecovery(final Request request, final RetryWait retryWait)
+            throws Exception {
+        for (final int delay : new int[] {15, 45}) {
+            try {
+                return request.execute();
+            } catch (final RequestFailure failure) {
+                if (!failure.transientFailure || !retryWait.await(delay, failure)) {
+                    throw failure;
+                }
+            }
+        }
+        return request.execute();
+    }
+
+    public static final class RequestFailure extends IllegalStateException {
+        private static final long serialVersionUID = 1L;
+        private final int status;
+        private final boolean transientFailure;
+
+        public RequestFailure(final int status, final int curlExit, final boolean sourceTimeout) {
+            super(
+                    status == 422 && curlExit == 0 && sourceTimeout
+                            ? "SNAPSHOT_HTTP_422_SOURCE_TIMEOUT"
+                            : "SNAPSHOT_HTTP_" + status + "_CURL_" + curlExit);
+            this.status = status;
+            transientFailure =
+                    (status == 422 && curlExit == 0 && sourceTimeout)
+                            || (curlExit == 0
+                                    && (status == 408
+                                            || status == 500
+                                            || status == 502
+                                            || status == 503
+                                            || status == 504))
+                            || ((status == 0 || status == 200)
+                                    && (curlExit == 7
+                                            || curlExit == 18
+                                            || curlExit == 28
+                                            || curlExit == 52
+                                            || curlExit == 55
+                                            || curlExit == 56));
+        }
+
+        public boolean isTransient() {
+            return transientFailure;
+        }
+    }
+
+    static boolean sourceTimeout(final JsonNode error) {
+        final var errors = error == null ? null : error.get("errors");
+        return errors != null
+                && errors.isArray()
+                && errors.size() == 1
+                && "timeout".equals(errors.get(0).textValue());
+    }
+
+    private JsonNode attempt(
+            final ReportSnapshotTemplate template,
+            final URI target,
+            final String day,
+            final int page)
+            throws Exception {
         if (Files.exists(stop)) {
             throw new IllegalStateException("SNAPSHOT_SHARED_STOP429");
         }
@@ -262,7 +377,7 @@ public final class CurlSnapshotWire implements ReportSnapshotExtractor.Wire {
             if (!process.waitFor(32, TimeUnit.SECONDS)) {
                 process.destroyForcibly();
                 process.waitFor(5, TimeUnit.SECONDS);
-                throw new IllegalStateException("SNAPSHOT_CURL_TIMEOUT");
+                throw new RequestFailure(0, 28, false);
             }
         } finally {
             lastCompleted = System.nanoTime();
@@ -294,8 +409,20 @@ public final class CurlSnapshotWire implements ReportSnapshotExtractor.Wire {
                     StandardOpenOption.CREATE_NEW);
         }
         if (status != 200 || process.exitValue() != 0) {
-            throw new IllegalStateException(
-                    "SNAPSHOT_HTTP_" + status + "_CURL_" + process.exitValue());
+            boolean timeout = false;
+            if (status == 422
+                    && process.exitValue() == 0
+                    && Files.isRegularFile(body)
+                    && Files.size(body) <= 8192) {
+                try {
+                    timeout =
+                            sourceTimeout(
+                                    JSON.readTree(Files.readString(body, StandardCharsets.UTF_8)));
+                } catch (final com.fasterxml.jackson.core.JsonProcessingException ignored) {
+                    // An unrecognized error body cannot authorize another request.
+                }
+            }
+            throw new RequestFailure(status, process.exitValue(), timeout);
         }
         if (!Files.isRegularFile(body) || Files.size(body) > 10485760) {
             throw new IllegalStateException("SNAPSHOT_RESPONSE_BOUND");

@@ -61,7 +61,11 @@ do {
         if ($event) {
             $label = $labels[[int]$event.reportId]
             $page = if ($event.page -eq 0) { 'metadados' } else { "$($event.day), pagina $($event.page)" }
-            $request = if ($event.state -ceq 'OBSERVED') { "ESL respondeu HTTP $($event.http)" } else { 'consultando ESL' }
+            $request = switch ($event.state) {
+                'OBSERVED' { "ESL respondeu HTTP $($event.http)" }
+                'RETRY_WAIT' { "ESL falhou ($($event.reason)), nova tentativa em $($event.delaySeconds)s" }
+                default { 'consultando ESL' }
+            }
             $message = "$label ($page) - requisicao $($event.request), $request. $progress."
         } else {
             $message = "Lote iniciado, aguardando a primeira consulta. $progress."

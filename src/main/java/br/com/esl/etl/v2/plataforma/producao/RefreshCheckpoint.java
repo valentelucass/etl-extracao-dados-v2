@@ -53,6 +53,22 @@ final class RefreshCheckpoint {
                 .toLocalDate();
     }
 
+    long initialDaysRemaining(final ReportSnapshotTemplate template) {
+        final var state = payload.required("entities").path(template.name());
+        if (state.isMissingNode()) {
+            return -1;
+        }
+        if (state.required("initialComplete").asBoolean()) {
+            return 0;
+        }
+        return Math.max(
+                0,
+                java.time.temporal.ChronoUnit.DAYS.between(
+                                LocalDate.parse(state.required("floor").asText()),
+                                LocalDate.parse(state.required("initialNext").asText()))
+                        + 1);
+    }
+
     ObjectNode entity(
             final ReportSnapshotTemplate template,
             final LocalDate desiredStart,

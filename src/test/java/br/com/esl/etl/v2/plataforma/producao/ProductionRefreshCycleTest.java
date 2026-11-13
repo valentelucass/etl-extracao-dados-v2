@@ -77,6 +77,31 @@ class ProductionRefreshCycleTest {
     }
 
     @Test
+    void historyContinuesOtherSourcesAndRetriesOnlyThePendingFreightDate() throws Exception {
+        final var fixture = new Fixture(directory);
+        fixture.config.put("historyOnly", true).put("historyDays", 90).put("initialBatchDays", 1);
+        final var day = fixture.today();
+        final var key = "FRETES:" + day;
+        fixture.freightSourceFailure = true;
+        for (int failure = 1; failure <= 3; failure++) {
+            assertEquals(failure < 3, fixture.run());
+            assertEquals(
+                    day.toString(),
+                    fixture.entity(ReportSnapshotTemplate.FRETES).path("initialNext").asText());
+            assertFalse(fixture.store.latest.containsKey(key));
+            if (failure < 3) {
+                assertEquals(12, fixture.lastReport.required("entities").size());
+                assertEquals(11 * failure, fixture.store.latest.size());
+            }
+            fixture.now = fixture.now.plusSeconds(3900);
+        }
+        fixture.freightSourceFailure = false;
+        assertTrue(fixture.run());
+        assertEquals(1, fixture.store.commits.stream().filter(key::equals).count());
+        assertFalse(fixture.entity(ReportSnapshotTemplate.FRETES).has("initialSourceFailures"));
+    }
+
+    @Test
     void failureDoesNotSkipTheFailedInitialDayOrRepeatConfirmedEarlierDays() throws Exception {
         final var fixture = new Fixture(directory);
         final var today = fixture.today();
@@ -373,6 +398,7 @@ class ProductionRefreshCycleTest {
         int fullCalls;
         int updateCalls;
         boolean locationChangeDuringLookup;
+        boolean freightSourceFailure;
         int occurrenceFloorCaptures;
 
         Fixture(final Path root) throws Exception {
@@ -527,6 +553,11 @@ class ProductionRefreshCycleTest {
                             }
                         } else {
                             fullCalls++;
+                            if (freightSourceFailure && template == ReportSnapshotTemplate.FRETES) {
+                                sink.accept(
+                                        id, 1, row(template, dates.startInclusive()), new Valid());
+                                throw new CurlSnapshotWire.RequestFailure(422, 0, true);
+                            }
                             if (!dates.startInclusive().equals(emptyDay)) {
                                 for (var day = dates.startInclusive();
                                         !day.isAfter(dates.endInclusive());
