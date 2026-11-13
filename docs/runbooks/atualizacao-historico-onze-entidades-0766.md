@@ -74,6 +74,8 @@ O arquivo usa a credencial criptografada da conta do extrator. A carga fixa os 9
 
 O arquivo usa `historico-90-dias-settings.json` e `runtime-manifest-dashboard-fields-0798.json` no armazenamento privado. Use o manifesto 0798 também ao iniciar futuramente a atualização contínua com `operational-settings.json`. As duas configurações usam o mesmo progresso.
 
+Em outro terminal, rode `./CARGA_90_DIAS.bat --acompanhar` para ver o relatório em extração, a data, a página, a última resposta do ESL e o total de dias já gravados no banco. O acompanhamento usa os registros da carga em andamento. Fechar essa segunda janela encerra apenas a leitura do progresso.
+
 `scripts/operations/Register-ProductionRefresh0766.ps1` prepara a tarefa própria `ETL-V2-History-Refresh-0766`, para o usuário atual, sem elevação e com início no logon. Recusa substituir uma tarefa existente. Registrar a tarefa não inicia a primeira execução imediatamente. Nenhum serviço, conta, grant, ACL ou versão do SQL é alterado.
 
 Na pasta de estado, `checkpoint.json` guarda progresso; `reports/` contém recibos sem dados de negócio; `captures/` conserva respostas e envelopes privados. `supervisor.json` registra o próximo horário elegível. `STOP.operator.json` interrompe novas admissões pelo supervisor; não aborta o trabalhador em curso. Falha cria `STOP.failure.json` e impede repetição automática. O STOP compartilhado de HTTP 429 também é respeitado. Antes de retomar uma falha, investigar e reconciliar a execução no banco; não remover um STOP apenas para tentar novamente.
