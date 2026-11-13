@@ -21,7 +21,8 @@ public enum ReportSnapshotTemplate {
     CONTAS_A_PAGAR(DataExportTemplate.CONTAS_A_PAGAR, "issue_date", null),
     FATURAS_POR_CLIENTE(DataExportTemplate.FATURAS_POR_CLIENTE, "service_at", null),
     INVENTARIO(DataExportTemplate.INVENTARIO, "started_at", null),
-    SINISTROS(DataExportTemplate.SINISTROS, "opening_at_date", null);
+    SINISTROS(DataExportTemplate.SINISTROS, "opening_at_date", null),
+    COLETAS_EXCLUIDAS(DataExportTemplate.COLETAS_EXCLUIDAS, "deleted_at", null);
 
     private final DataExportTemplate template;
     private final String rowDate;

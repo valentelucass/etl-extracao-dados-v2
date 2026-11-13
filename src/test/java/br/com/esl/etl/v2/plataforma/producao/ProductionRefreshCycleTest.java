@@ -42,8 +42,8 @@ class ProductionRefreshCycleTest {
             fixture.now = fixture.now.plus(Duration.ofMinutes(65));
         }
         assertTrue(fixture.lastReport.path("initialComplete").asBoolean());
-        assertEquals(990, fixture.store.latest.size());
-        assertEquals(990, fixture.fullCalls);
+        assertEquals(1080, fixture.store.latest.size());
+        assertEquals(1080, fixture.fullCalls);
         assertEquals(0, fixture.updateCalls);
         for (final var entity : fixture.lastReport.required("entities")) {
             assertEquals(0, entity.path("initialRemainingDays").asInt());
@@ -102,6 +102,8 @@ class ProductionRefreshCycleTest {
                         .allMatch(scope -> scope.startInclusive().equals(scope.endInclusive())));
         assertFalse(fixture.templatesWithUpdates.contains(ReportSnapshotTemplate.CONTAS_A_PAGAR));
         assertFalse(fixture.templatesWithUpdates.contains(ReportSnapshotTemplate.SINISTROS));
+        assertFalse(
+                fixture.templatesWithUpdates.contains(ReportSnapshotTemplate.COLETAS_EXCLUIDAS));
     }
 
     @Test

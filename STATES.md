@@ -1,3 +1,7 @@
+## 0791 — Coletas excluídas publicadas na V2 e campos de Faturas confirmados no ESL
+
+[Publicação e conferência](docs/runbooks/publicacao-operacional-dashboard.md). A consulta de Coletas foi publicada com 41 colunas. O relatório 12899 retornou três exclusões em 10/11/2026, incluindo 129495. O SQL confirmou a gravação e a leitura dos registros. A consulta retornou 1.216 coletas, das quais 1.213 entram nos totais. A amostra de 08/11/2026 do template 4924 confirmou 54 colunas e igualdade dos dois campos novos entre a API e o Excel. O pacote Java passou em 58 testes. A credencial do usuário dedicado à extração ainda requer recuperação. A carga completa e a troca do dashboard seguem pendentes.
+
 ## 0788 — Recebimento das colunas complementares do 4924 preparado
 
 [Instalação e conferência](docs/runbooks/publicacao-operacional-dashboard.md). O Java e o catálogo SQL passam a reconhecer as 52 colunas atuais ou as 54 colunas exatas com data de criação e peso das notas. Os testes isolados rejeitam capturas parciais, misturadas, duplicadas ou com colunas desconhecidas. A instalação no banco depende da credencial administrativa local. O template 4924 ainda não foi alterado.

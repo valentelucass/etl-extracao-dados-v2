@@ -33,6 +33,14 @@ public final class SnapshotMapperCatalog {
                             template.name(),
                             new ColetaDataExportRecordMapper().map(1, row).quarantineReasonCode()
                                     == null);
+            case COLETAS_EXCLUIDAS ->
+                    new Disposition(
+                            template.name(),
+                            row.path("id").canConvertToLong()
+                                    && row.path("id").isIntegralNumber()
+                                    && row.path("id").longValue() > 0
+                                    && positiveSequence(row.path("sequence_code"))
+                                    && validDeletionDates(row));
             case FRETES ->
                     new Disposition(
                             template.name(),
@@ -64,6 +72,23 @@ public final class SnapshotMapperCatalog {
             case SINISTROS -> new SinistroDataExportMapper().map(1, envelope);
             default -> throw new IllegalArgumentException("SNAPSHOT_USE_ENTITY_EXTRACTOR");
         };
+    }
+
+    private static boolean positiveSequence(final JsonNode sequence) {
+        return (sequence.isIntegralNumber() || sequence.isTextual())
+                && sequence.asText().matches("[1-9][0-9]{0,17}");
+    }
+
+    private static boolean validDeletionDates(final JsonNode row) {
+        try {
+            final var request = java.time.LocalDate.parse(row.path("request_date").asText());
+            final var deletion = java.time.OffsetDateTime.parse(row.path("deleted_at").asText());
+            return !request.isAfter(
+                    deletion.atZoneSameInstant(java.time.ZoneId.of("America/Sao_Paulo"))
+                            .toLocalDate());
+        } catch (final java.time.format.DateTimeParseException invalid) {
+            return false;
+        }
     }
 
     private record Disposition(String vertical, boolean valid) implements ExpansionObservation {}

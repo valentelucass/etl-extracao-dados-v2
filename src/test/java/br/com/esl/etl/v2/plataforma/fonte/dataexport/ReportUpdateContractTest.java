@@ -29,7 +29,8 @@ class ReportUpdateContractTest {
     void serializesOnlyObservedUpdateCapabilities(final ReportSnapshotTemplate template) {
         final var contract = ReportUpdateContract.forTemplate(template);
         if (template == ReportSnapshotTemplate.CONTAS_A_PAGAR
-                || template == ReportSnapshotTemplate.SINISTROS) {
+                || template == ReportSnapshotTemplate.SINISTROS
+                || template == ReportSnapshotTemplate.COLETAS_EXCLUIDAS) {
             assertNull(contract);
             return;
         }
@@ -106,7 +107,7 @@ class ReportUpdateContractTest {
         for (final var template : ReportSnapshotTemplate.values()) {
             fields += catalog.validate(template, infos.get(template)).size();
         }
-        assertEquals(508, fields);
+        assertEquals(518, fields);
         final var changed = infos.get(ReportSnapshotTemplate.CONSOLIDACAO_DETALHADA).deepCopy();
         ((ObjectNode) changed.required("filters").get(0)).put("type", "datetime");
         assertThrows(

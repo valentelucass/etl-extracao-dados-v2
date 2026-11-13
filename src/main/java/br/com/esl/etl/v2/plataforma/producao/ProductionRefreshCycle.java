@@ -361,7 +361,7 @@ public final class ProductionRefreshCycle {
             report.put("reason", safe(failure));
         } finally {
             final var completed = clock.instant();
-            if (passed && entities.size() == 11) {
+            if (passed && entities.size() == ReportSnapshotTemplate.values().length) {
                 try {
                     checkpoint.completed(completed);
                 } catch (final Exception failure) {
@@ -375,7 +375,9 @@ public final class ProductionRefreshCycle {
                             ProductionRefreshPolicy.nextInvocation(completed).toString())
                     .put("durationSeconds", Duration.between(began, completed).toSeconds())
                     .put("initialComplete", checkpoint.allInitialized())
-                    .put("passed", passed && entities.size() == 11);
+                    .put(
+                            "passed",
+                            passed && entities.size() == ReportSnapshotTemplate.values().length);
             saveReport(reportPath, report, session);
         }
         return report.path("passed").asBoolean();
@@ -411,6 +413,14 @@ public final class ProductionRefreshCycle {
             context.checkpoint().save();
         }
         if (lastDay.isBefore(context.today())) {
+            return;
+        }
+        if (template == ReportSnapshotTemplate.COLETAS_EXCLUIDAS) {
+            final var yesterday = context.today().minusDays(1);
+            if (!yesterday.isBefore(floor)) {
+                fullDay(context, template, yesterday, "DELETION_DATE_OVERLAP");
+            }
+            fullDay(context, template, context.today(), "DELETION_DATE_OVERLAP");
             return;
         }
         if (template == ReportSnapshotTemplate.CONSOLIDACAO_DETALHADA) {

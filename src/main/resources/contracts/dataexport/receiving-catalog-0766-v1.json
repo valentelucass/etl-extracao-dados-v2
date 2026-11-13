@@ -1978,6 +1978,77 @@
         "invoice_occurrences.updated_at"
       ],
       "sourceInfoSha256": "be356a497657db5efd1fd30dade4047d6bb7b256b59ecb856e30ec154f7d0cfc"
+    },
+    {
+      "entity": "COLETAS_EXCLUIDAS",
+      "reportId": 12899,
+      "rowDate": "deleted_at",
+      "fields": [
+        "id",
+        "sequence_code",
+        "request_date",
+        "invoices_value",
+        "taxed_weight",
+        "deleted_at",
+        "destroy_reason",
+        "dek_dyr_name",
+        "dek_crn_psn_id",
+        "dek_crn_psn_nickname"
+      ],
+      "filters": [
+        {
+          "label": "Data exclusão",
+          "position": 1,
+          "field": "deleted_at",
+          "table": "picks",
+          "type": "date",
+          "select": null,
+          "maxlength": null,
+          "collection": null
+        },
+        {
+          "label": "Filial",
+          "position": 2,
+          "field": "corporation_id",
+          "table": "picks",
+          "type": "select",
+          "select": "corporation",
+          "maxlength": null,
+          "collection": null
+        },
+        {
+          "label": "N° coleta",
+          "position": 3,
+          "field": "sequence_code",
+          "table": "picks",
+          "type": "numeric",
+          "select": null,
+          "maxlength": null,
+          "collection": null
+        },
+        {
+          "label": "Cliente",
+          "position": 4,
+          "field": "customer_id",
+          "table": "picks",
+          "type": "select",
+          "select": "person",
+          "maxlength": null,
+          "collection": null
+        },
+        {
+          "label": "Data Solicitação",
+          "position": 5,
+          "field": "request_date",
+          "table": "picks",
+          "type": "date",
+          "select": null,
+          "maxlength": null,
+          "collection": null
+        }
+      ],
+      "defaultOrder": "deleted_at",
+      "requiredDateFilters": "picks.deleted_at"
     }
   ]
 }

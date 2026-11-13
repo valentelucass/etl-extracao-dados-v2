@@ -51,7 +51,9 @@ if(-not $Worker){
    $passed0766=$false
    if($outcome0766.job.ExitCode -eq 0 -and -not $outcome0766.job.TimedOut -and (Test-Path -LiteralPath $reportPath0766)){
     $report0766=Get-Content -LiteralPath $reportPath0766 -Raw -Encoding utf8 | ConvertFrom-Json
-    $passed0766=$report0766.schema -ceq 'PRODUCTION_REFRESH0766' -and $report0766.passed -and @($report0766.entities).Count -eq 11
+    $passed0766=$report0766.schema -ceq 'PRODUCTION_REFRESH0766' -and $report0766.passed -and
+     (@($report0766.entities).Count -eq 11 -or (@($report0766.entities).Count -eq 12 -and $report0766.entities.entity -ccontains 'COLETAS_EXCLUIDAS')) -and
+     @($report0766.entities.entity | Sort-Object -Unique).Count -eq @($report0766.entities).Count
    }
    if(-not $passed0766){
     [IO.File]::WriteAllText($failureStop0766,([ordered]@{schema='REFRESH_FAILURE0766';cycle=$id0766;at=$finished0766.ToString('o');reason='BATCH_NOT_CONFIRMED_NO_AUTOMATIC_RETRY'} | ConvertTo-Json),(New-Object Text.UTF8Encoding($false)))

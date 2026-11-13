@@ -107,6 +107,15 @@ public enum DataExportTemplate {
             null,
             "capture_occurrence",
             List.of(),
+            100),
+    COLETAS_EXCLUIDAS(
+            "2026-11-13.coletas-excluidas-v1",
+            12899,
+            new SearchPath("picks", "deleted_at"),
+            "picks.deleted_at",
+            null,
+            "id",
+            List.of(),
             100);
 
     private final String contractVersion;

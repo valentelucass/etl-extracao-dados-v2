@@ -24,7 +24,7 @@ public record ReportUpdateContract(SearchPath path, boolean dateOnly) {
             case OCORRENCIAS ->
                     new ReportUpdateContract(
                             new SearchPath("invoice_occurrences", "updated_at"), false);
-            case CONTAS_A_PAGAR, SINISTROS -> null;
+            case CONTAS_A_PAGAR, SINISTROS, COLETAS_EXCLUIDAS -> null;
         };
     }
 

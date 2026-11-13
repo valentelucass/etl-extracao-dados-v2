@@ -1,7 +1,7 @@
 [CmdletBinding()]
 param(
     [Parameter(Mandatory=$true)][string]$ReceiptPath,
-    [ValidateSet('References','Sinistros','Inventario','Localizacao','Faturas','ContasAPagar','Clientes','Usuarios','Raster','Coletores','Saude','Manifestos','CamposColetasFretes','CamposFaturasFretes','GestaoFretes')][string]$Group = 'References',
+    [ValidateSet('References','Sinistros','Inventario','Localizacao','Faturas','ContasAPagar','Clientes','Usuarios','Raster','Coletores','Saude','Manifestos','CamposColetasFretes','CamposFaturasFretes','GestaoFretes','ColetasExcluidas')][string]$Group = 'References',
     [string[]]$CaptureReceiptPath,
     [string]$CaptureDirectory,
     [switch]$SeedLegacyUserDirectory,
@@ -64,6 +64,9 @@ $specs = switch ($Group) {
           previousFile='028_dashboard_fretes_linhas.sql'; previousStep='0784-dashboard-fretes-linhas'}
         @{file='031_dashboard_gestao_vista_fretes_tuned.sql'; view='fato_gestao_vista_fretes'; step='0785-dashboard-gestao-fretes'; columns=54;
           previousFile='029_dashboard_gestao_vista_fretes.sql'; previousStep='0784-dashboard-gestao-fretes'}
+    }
+    'ColetasExcluidas' {
+        @{file='032_dashboard_coletas.sql'; view='vw_coletas_powerbi'; step='0791-dashboard-coletas'; columns=41}
     }
 }
 
@@ -169,6 +172,11 @@ IF NOT EXISTS (
         $relative = 'database/production/receiving/009_dashboard_invoice_freight_fields.sql'
         $countQuery = "SELECT COUNT(*) FROM ctl.production_export_additional_field WHERE entity_name='FATURAS_POR_CLIENTE'"
         $added += Install-ReceivingPackage $relative '0788-dashboard-invoice-freight-fields' $countQuery 2
+    }
+    if ($Group -eq 'ColetasExcluidas') {
+        $relative = 'database/production/receiving/010_dashboard_deleted_pickups.sql'
+        $countQuery = "SELECT COUNT(*) FROM ctl.production_export_template WHERE entity_name='COLETAS_EXCLUIDAS' AND report_id=12899"
+        $added += Install-ReceivingPackage $relative '0791-dashboard-deleted-pickups' $countQuery 1
     }
     if ($Group -eq 'GestaoFretes') {
         $relative = 'database/production/receiving/008_dashboard_freight_rules.sql'
@@ -364,6 +372,7 @@ EXEC ctl.usp_store_dashboard_refresh_audit @source_cycle=@cycle,@started_at=@sta
         'CamposColetasFretes' { 'dashboard-report-fields.sql' }
         'CamposFaturasFretes' { 'dashboard-report-fields.sql' }
         'GestaoFretes' { 'dashboard-gestao-fretes.sql' }
+        'ColetasExcluidas' { 'dashboard-coletas.sql' }
     }
     $checksPath = Join-Path $PSScriptRoot ('../validation/' + $validationScript)
     $checks = [IO.File]::ReadAllText($checksPath) -split '(?m)^-- VALIDATION BATCH\s*$'

@@ -313,7 +313,7 @@ public final class ReportSnapshotExtractor {
         if (data.size() > per) {
             final String key =
                     switch (template) {
-                        case COLETAS, FRETES -> "id";
+                        case COLETAS, FRETES, COLETAS_EXCLUIDAS -> "id";
                         case MANIFESTOS, COTACOES, INVENTARIO, SINISTROS -> "sequence_code";
                         default -> null;
                     };

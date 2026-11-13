@@ -12,9 +12,11 @@ if ($file.PSIsContainer -or -not $directory.PSIsContainer -or
 }
 $bytes=[IO.File]::ReadAllBytes($file.FullName)
 $report=[Text.UTF8Encoding]::new($false,$true).GetString($bytes) | ConvertFrom-Json
+$entities=@($report.entities.entity | Sort-Object -Unique)
 if ($report.schema -cne 'PRODUCTION_REFRESH0766' -or $report.passed -isnot [bool] -or
     -not $report.startedAt -or -not $report.completedAt -or
-    ($report.passed -and @($report.entities.entity | Sort-Object -Unique).Count -ne 11)) {
+    ($report.passed -and ($entities.Count -ne @($report.entities).Count -or
+        ($entities.Count -ne 11 -and ($entities.Count -ne 12 -or $entities -cnotcontains 'COLETAS_EXCLUIDAS'))))) {
     throw 'REFRESH_AUDIT_REPORT_CONTRACT_INVALID'
 }
 $started=[DateTimeOffset]::Parse($report.startedAt,[Globalization.CultureInfo]::InvariantCulture)

@@ -19,6 +19,7 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.EnumSet;
 import java.util.HexFormat;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -26,6 +27,10 @@ import java.util.UUID;
 
 /** One bounded productive cycle. The external supervisor owns the delay after completion. */
 public final class ProductionAllReceivingCycle {
+    // This cycle is pinned to the original receiving catalog.
+    private static final EnumSet<ReportSnapshotTemplate> TEMPLATES =
+            EnumSet.complementOf(EnumSet.of(ReportSnapshotTemplate.COLETAS_EXCLUIDAS));
+
     @FunctionalInterface
     public interface CapturePort {
         ReportSnapshotExtractor.Result capture(
@@ -146,7 +151,7 @@ public final class ProductionAllReceivingCycle {
         boolean stopAll = false;
         save(receipt, report, wire.requests());
         try (var store = new AllEntitiesIngestionStore(config)) {
-            for (final var template : ReportSnapshotTemplate.values()) {
+            for (final var template : TEMPLATES) {
                 final var entity =
                         entities.addObject()
                                 .put("entity", template.name())
@@ -330,9 +335,7 @@ public final class ProductionAllReceivingCycle {
         } finally {
             report.put("completedAt", Instant.now().toString())
                     .put("durationSeconds", Duration.between(began, Instant.now()).toSeconds())
-                    .put(
-                            "passed",
-                            allPassed && entities.size() == ReportSnapshotTemplate.values().length);
+                    .put("passed", allPassed && entities.size() == TEMPLATES.size());
             save(receipt, report, wire.requests());
         }
         return report.path("passed").asBoolean();

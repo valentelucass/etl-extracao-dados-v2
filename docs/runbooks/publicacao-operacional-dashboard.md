@@ -67,7 +67,7 @@ O segundo comando aplica o recebimento das novas colunas em `ETL_SISTEMA_V2`. O 
 
 Em 06/11/2026, o extrator Java percorreu um dia inteiro de Fretes com 25 IDs por página. A extração chegou à página vazia após 177 segundos e recebeu 1.147 linhas, 972 IDs distintos e zero recusas. As 41 requisições, incluindo metadados, somaram 5.615.774 bytes de resposta. Entre os 691 IDs também encontrados no V1, 688 tinham o mesmo ID de CT-e e 690 tinham o mesmo valor de ICMS. Os três CT-es divergentes foram emitidos após a captura do V1. A divergência de ICMS estava em um desses fretes. O vínculo de destinatário do V1 usa o cadastro de recebedor, confirmado pelo mapeador Java legado e por 690 dos 691 IDs sobrepostos.
 
-Uma coleta excluída aparece na lista com o status **Excluída** e fica fora dos totais e da série diária. O menu **Operacional → Log de Exclusões → Coletas** foi consultado e mostrou número, data, usuário e motivo. A forma de receber esse registro pelo ciclo de extração segue pendente. A data geral de atualização da Coleta tem significado próprio. No recorte comparado, ela não coincidiu com nenhum dos 916 horários de mudança de status do V1.
+Uma coleta excluída aparece na lista com o status **Excluída** e fica fora dos totais e da série diária. O menu **Operacional → Log de Exclusões → Coletas** foi consultado e mostrou número, data, usuário e motivo. O relatório 12899 oferece a mesma informação para a extração. A data geral de atualização da Coleta tem significado próprio. No recorte comparado, ela não coincidiu com nenhum dos 916 horários de mudança de status do V1.
 
 Quando houver reemissão, as consultas operacionais e de faturamento devem usar o CT-e atual da minuta. Na amostra conferida, o relatório principal trouxe duas linhas do mesmo frete e ambas indicaram o CT-e atual. A publicação precisa contar o frete uma vez. O relatório de Faturamento CT-e confirmou separadamente o cancelamento do documento anterior e a emissão do atual.
 
@@ -88,7 +88,7 @@ As consultas de entrega e cubagem com filtro de período foram verificadas separ
 
 | Consulta | Evidência e dependência |
 | --- | --- |
-| `vw_coletas_powerbi` | O Log de Exclusões é visível no ESL. O catálogo atual de Data Export não encontrou template com a raiz **Coletas - Excluídas**. Para alimentar a lista automaticamente, é necessário disponibilizar essa origem para o ETL. O catálogo de Coletas oferece a data geral de atualização. O horário específico da mudança de status ainda precisa de uma fonte. |
+| `vw_coletas_powerbi` | O relatório 12899 fornece a data da exclusão, a data da solicitação, a filial, o motivo e o usuário. A leitura completa de 10/11 devolveu três coletas e incluiu a 129495. A publicação depende da instalação do contrato no banco. O horário de mudança de status de coletas ativas segue sem fonte específica. |
 | `vw_fretes_powerbi` e `fato_fretes_faturamento` | A soma dos 17 componentes presentes no relatório reproduziu o **Valor Frete** em todos os 3.260 registros comparáveis dos dois bancos. O ID de filial permitiu associar o CNPJ das oito filiais da amostra ao cadastro legado. O template 6389 está com 150 colunas. O 4924 cobre os 4.298 IDs da amostra, e seu catálogo oferece data de criação do frete e peso real das notas. |
 
 Com os campos disponíveis, confira novamente a reemissão, a exclusão, as regras de elegibilidade e os totais em um período fechado. O ensaio de troca depende das 26 consultas e da cobertura do período que o dashboard vai exibir.
@@ -103,3 +103,16 @@ A revisão de Faturas por Cliente preserva o contrato de 52 colunas e aceita uma
 ```
 
 Instale o catálogo SQL e disponibilize o Java correspondente antes de editar o relatório. O editor salva cada coluna separadamente. Conclua as duas inclusões entre execuções e confira o conjunto de campos anunciado pela API. Use um dia fechado para validar a leitura de todas as páginas, os valores do Excel do ESL e o vínculo por ID com Fretes. A captura de teste precisa chegar à página vazia. O relatório pode repetir o mesmo ID em várias linhas de fatura, por isso a associação ao frete deve preservar uma única linha por ID.
+
+## Coletas excluídas no relatório 12899
+
+O recebimento usa o dia civil de `deleted_at` em São Paulo. O filtro é `picks.deleted_at`. A publicação usa a data da solicitação para localizar a coleta no período do dashboard. O ciclo importa o histórico em lotes e, após concluir a carga inicial, reconfere o dia atual e o anterior a cada execução. Datas que avançaram entre execuções também são processadas pelo cursor existente.
+
+O relatório de exclusões e Coletas usam o mesmo escopo da fonte e o ID da coleta. Uma exclusão que ainda não tinha linha de Coletas aparece na lista com a filial informada pelo 12899. O campo `dek_crn_psn_id` é o ID da pessoa da filial. Ele permanece no registro de origem. A coluna Filial ID da publicação usa o ID corporativo quando disponível. As coletas excluídas ficam fora dos indicadores do dashboard.
+
+```powershell
+.\scripts\operations\Install-DashboardCompatibilityViews.ps1 -Group ColetasExcluidas -ReceiptPath C:\privado\coletas-excluidas-ensaio.json
+.\scripts\operations\Install-DashboardCompatibilityViews.ps1 -Group ColetasExcluidas -Apply -ReceiptPath C:\privado\coletas-excluidas-aplicacao.json
+```
+
+A primeira instalação registra a fonte e a projeção de 41 colunas. Antes da troca, confirme o recebimento com o pacote Java correspondente e verifique a coleta 129495 na lista e nos indicadores. A cobertura histórica depende da carga manual combinada.
