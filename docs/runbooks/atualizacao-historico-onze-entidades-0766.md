@@ -64,12 +64,15 @@ Em 13/11/2026, a credencial do extrator foi recadastrada com autorização do re
 
 O ciclo `2991999f1032495ea6c5083da1b48927` usou esse manifesto em 13/11/2026. O acionador concluiu as 12 fontes em 321 segundos e 75 requisições. Gravou uma partição por fonte, com releitura exata das 7.170 linhas e das três partições vazias. O supervisor calculou a próxima execução para 60 minutos depois de concluir. A prova usou estado próprio e um lote finito de uma data.
 
-Abra o PowerShell na pasta do repositório para iniciar manualmente a carga noturna:
+No terminal do servidor, na sessão `suporte`, execute o arquivo `CARGA_90_DIAS.bat` na raiz do repositório:
 
 ```powershell
-$privado = Join-Path ([Environment]::GetFolderPath('MyDocuments')) 'Armazenamento-Projetos\etl-extracao-dados-v2\atualizacao0766'
-.\scripts\operations\Invoke-ProductionRefresh0766.ps1 -SettingsPath (Join-Path $privado 'operational-settings.json') -RuntimeManifestPath (Join-Path $privado 'runtime-manifest-dashboard-fields-0796.json') -Continuous
+.\CARGA_90_DIAS.bat
 ```
+
+O arquivo usa a credencial criptografada da conta do extrator. A carga fixa os 90 dias civis, incluindo o dia do primeiro lote, e termina quando as 12 fontes concluírem o período. Ela processa até oito datas por fonte por lote, aguarda 60 minutos após cada lote e mostra o progresso no terminal. O progresso fica na pasta operacional e permite retomar a mesma carga. Com `--verificar`, o arquivo apenas confere os arquivos do extrator e da configuração.
+
+O arquivo usa `historico-90-dias-settings.json` e `runtime-manifest-dashboard-fields-0798.json` no armazenamento privado. Use o manifesto 0798 também ao iniciar futuramente a atualização contínua com `operational-settings.json`. As duas configurações usam o mesmo progresso.
 
 `scripts/operations/Register-ProductionRefresh0766.ps1` prepara a tarefa própria `ETL-V2-History-Refresh-0766`, para o usuário atual, sem elevação e com início no logon. Recusa substituir uma tarefa existente. Registrar a tarefa não inicia a primeira execução imediatamente. Nenhum serviço, conta, grant, ACL ou versão do SQL é alterado.
 

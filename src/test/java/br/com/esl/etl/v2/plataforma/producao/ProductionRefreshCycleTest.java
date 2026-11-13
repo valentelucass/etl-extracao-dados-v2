@@ -51,6 +51,32 @@ class ProductionRefreshCycleTest {
     }
 
     @Test
+    void manualHistoryKeepsExactlyTheOriginalNinetyDaysAfterMidnight() throws Exception {
+        final var fixture = new Fixture(directory);
+        fixture.now = Instant.parse("2026-11-11T02:00:00Z");
+        final var firstDay = fixture.today();
+        fixture.config.put("historyOnly", true).put("historyDays", 90);
+        for (int cycle = 0; cycle < 12; cycle++) {
+            assertTrue(fixture.run());
+            fixture.now = fixture.now.plus(Duration.ofMinutes(65));
+        }
+        assertTrue(fixture.lastReport.path("initialComplete").asBoolean());
+        assertEquals(
+                firstDay.toString(), fixture.lastReport.path("initialHistoryThrough").asText());
+        assertEquals(1080, fixture.fullCalls);
+        assertEquals(0, fixture.updateCalls);
+        assertEquals(1080, fixture.store.latest.size());
+        for (final var template : ReportSnapshotTemplate.values()) {
+            assertTrue(fixture.store.latest.containsKey(template + ":" + firstDay));
+            assertTrue(fixture.store.latest.containsKey(template + ":" + firstDay.minusDays(89)));
+            assertFalse(fixture.store.latest.containsKey(template + ":" + firstDay.plusDays(1)));
+        }
+        assertTrue(fixture.run());
+        assertEquals(1080, fixture.fullCalls);
+        assertEquals(0, fixture.updateCalls);
+    }
+
+    @Test
     void failureDoesNotSkipTheFailedInitialDayOrRepeatConfirmedEarlierDays() throws Exception {
         final var fixture = new Fixture(directory);
         final var today = fixture.today();

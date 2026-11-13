@@ -2,6 +2,7 @@ package br.com.esl.etl.v2.plataforma.producao;
 
 import br.com.esl.etl.v2.plataforma.fonte.dataexport.CurlSnapshotWire;
 import br.com.esl.etl.v2.plataforma.fonte.dataexport.ReportSnapshotTemplate;
+import br.com.esl.etl.v2.plataforma.fonte.dataexport.ReportUpdateContract;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
@@ -44,6 +45,12 @@ final class RefreshCheckpoint {
                             .put("createdAt", began.toString());
             payload.putObject("entities");
         }
+    }
+
+    LocalDate createdOn() {
+        return Instant.parse(payload.required("createdAt").asText())
+                .atZone(ReportUpdateContract.SOURCE_ZONE)
+                .toLocalDate();
     }
 
     ObjectNode entity(

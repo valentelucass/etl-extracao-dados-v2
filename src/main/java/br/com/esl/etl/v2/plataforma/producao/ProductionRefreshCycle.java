@@ -155,6 +155,7 @@ public final class ProductionRefreshCycle {
             Path root,
             LocalDate today,
             Instant cutoff,
+            boolean historyOnly,
             ReportMetadataCatalog catalog,
             FreightDependencyIndex dependencyIndexes,
             ArrayNode operations,
@@ -225,7 +226,12 @@ public final class ProductionRefreshCycle {
                 "REFRESH_RUNTIME_SHA_REQUIRED");
         final var began = clock.instant().truncatedTo(ChronoUnit.SECONDS);
         final var today = began.atZone(ReportUpdateContract.SOURCE_ZONE).toLocalDate();
-        final var policy = ProductionRefreshPolicy.from(config, today);
+        final boolean historyOnly = config.path("historyOnly").asBoolean();
+        require(
+                !historyOnly
+                        || (config.path("historyDays").asInt() == 90
+                                && !config.has("historyStart")),
+                "REFRESH_HISTORY_ONLY_REQUIRES_NINETY_DAYS");
         final var root = admitted(config, "privateRoot");
         final var reportPath = admitted(config, "reportPath");
         final var checkpointPath = admitted(config, "checkpointPath");
@@ -246,6 +252,8 @@ public final class ProductionRefreshCycle {
         json.registerModule(new JavaTimeModule());
         json.disable(com.fasterxml.jackson.databind.SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
         final var checkpoint = new RefreshCheckpoint(checkpointPath, scope, began);
+        final var historyEnd = historyOnly ? checkpoint.createdOn() : today;
+        final var policy = ProductionRefreshPolicy.from(config, historyEnd);
         checkpoint.requireEligible(clock.instant());
         Files.createDirectories(root);
         final var deadline = began.plus(Duration.ofMinutes(105));
@@ -258,6 +266,8 @@ public final class ProductionRefreshCycle {
                         .put("sourceScope", scope)
                         .put("runtimeSha256", config.required("runtimeSha256").asText())
                         .put("requestedHistoryStart", policy.requestedStart().toString())
+                        .put("historyOnly", historyOnly)
+                        .put("initialHistoryThrough", historyEnd.toString())
                         .put("minimumInitialDays", 90)
                         .put("waitAfterCompletionMinutes", 60)
                         .put("passed", false)
@@ -279,6 +289,7 @@ public final class ProductionRefreshCycle {
                             root,
                             today,
                             began.minusSeconds(120),
+                            historyOnly,
                             new ReportMetadataCatalog(),
                             new FreightDependencyIndex(
                                     checkpointPath
@@ -305,8 +316,10 @@ public final class ProductionRefreshCycle {
                             checkpoint.entity(
                                     template,
                                     policy.requestedStart(),
-                                    store.earliestCovered(scope, today, template.name()),
-                                    today,
+                                    historyOnly
+                                            ? null
+                                            : store.earliestCovered(scope, today, template.name()),
+                                    historyEnd,
                                     began);
                     require(
                             !LocalDate.parse(state.required("floor").asText()).isAfter(today),
@@ -340,7 +353,9 @@ public final class ProductionRefreshCycle {
                             .put(
                                     "status",
                                     pending(state)
-                                                    || (state.path("initialComplete").asBoolean()
+                                                    || (!historyOnly
+                                                            && state.path("initialComplete")
+                                                                    .asBoolean()
                                                             && !relatedCaughtUp(
                                                                     state,
                                                                     template,
@@ -402,6 +417,9 @@ public final class ProductionRefreshCycle {
                         .put("watermark", state.required("bootstrapCutoff").asText());
                 context.checkpoint().save();
             }
+            return;
+        }
+        if (context.historyOnly()) {
             return;
         }
         var lastDay = LocalDate.parse(state.required("lastCalendarDay").asText());
