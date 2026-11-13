@@ -165,6 +165,31 @@ class ReportUpdateContractTest {
     }
 
     @Test
+    void acceptsObservedPickupNumberFilterWhileKeepingDateFiltersExact() throws Exception {
+        final var template = ReportSnapshotTemplate.COLETAS;
+        final var info = infos().get(template).deepCopy();
+        final var oldFilters = info.required("filters").deepCopy();
+        final var filters = ((ObjectNode) info).putArray("filters");
+        filters.addObject()
+                .put("label", "N° coleta")
+                .put("position", 1)
+                .put("field", "sequence_code")
+                .put("table", "picks")
+                .put("type", "numeric")
+                .putNull("select")
+                .putNull("maxlength")
+                .putNull("collection");
+        for (final var filter : oldFilters) {
+            filters.add(
+                    ((ObjectNode) filter).put("position", filter.required("position").asInt() + 1));
+        }
+        final var catalog = new ReportMetadataCatalog();
+        assertEquals(31, catalog.validate(template, info).size());
+        ((ObjectNode) filters.get(4)).put("type", "datetime");
+        assertThrows(IllegalArgumentException.class, () -> catalog.validate(template, info));
+    }
+
+    @Test
     void updateCaptureUsesItsOwnTransportAndRequiresTheEmptyTerminalPage() throws Exception {
         final var infos = infos();
         final var template = ReportSnapshotTemplate.CONSOLIDACAO_DETALHADA;

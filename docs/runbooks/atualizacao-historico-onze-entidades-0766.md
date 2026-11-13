@@ -60,11 +60,11 @@ A configuração pública de exemplo fica em `config/production-refresh.example.
 
 A variável de usuário `RODOGARCIA_ETL_V2_SQL_CREDENTIAL_FILE` indica o caminho do arquivo criptografado da conta dedicada ao extrator. O acionador usa o caminho privado padrão quando a variável está ausente e valida que o arquivo pertence a esse local e contém a identidade esperada. A variável `RODOGARCIA_SQL_ADMIN_CREDENTIAL_FILE` aponta para a credencial administrativa já cadastrada. As variáveis contêm somente caminhos. As duas credenciais permanecem no perfil Windows que as cadastrou.
 
-Em 13/11/2026, a credencial do extrator foi recadastrada com autorização do responsável. O teste JDBC na V2 confirmou o login dedicado e as permissões para iniciar e gravar uma captura. O manifesto privado `runtime-manifest-dashboard-fields-0793.json` registra os hashes do acionador atualizado e dos nove JARs. Para iniciar manualmente a carga noturna no PowerShell do servidor:
+Em 13/11/2026, a credencial do extrator foi recadastrada com autorização do responsável. O teste JDBC na V2 confirmou o login dedicado e as permissões para iniciar e gravar uma captura. O manifesto privado `runtime-manifest-dashboard-fields-0794.json` registra os hashes do acionador atualizado e dos nove JARs. Essa revisão reconhece o filtro opcional por número da coleta observado no 6908 e mantém a validação dos filtros de data e das colunas. Para iniciar manualmente a carga noturna no PowerShell do servidor:
 
 ```powershell
 $privado = Join-Path ([Environment]::GetFolderPath('MyDocuments')) 'Armazenamento-Projetos\etl-extracao-dados-v2\atualizacao0766'
-.\scripts\operations\Invoke-ProductionRefresh0766.ps1 -SettingsPath (Join-Path $privado 'operational-settings.json') -RuntimeManifestPath (Join-Path $privado 'runtime-manifest-dashboard-fields-0793.json') -Continuous
+.\scripts\operations\Invoke-ProductionRefresh0766.ps1 -SettingsPath (Join-Path $privado 'operational-settings.json') -RuntimeManifestPath (Join-Path $privado 'runtime-manifest-dashboard-fields-0794.json') -Continuous
 ```
 
 `scripts/operations/Register-ProductionRefresh0766.ps1` prepara a tarefa própria `ETL-V2-History-Refresh-0766`, para o usuário atual, sem elevação e com início no logon. Recusa substituir uma tarefa existente. Registrar a tarefa não inicia a primeira execução imediatamente. Nenhum serviço, conta, grant, ACL ou versão do SQL é alterado.

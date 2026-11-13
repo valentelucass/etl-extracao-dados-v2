@@ -34,13 +34,45 @@ public final class ReportMetadataCatalog {
         expected.required("fields").forEach(value -> expectedFields.add(value.asText()));
         final var expandedFields = new HashSet<>(expectedFields);
         dashboardFields.path(template.name()).forEach(value -> expandedFields.add(value.asText()));
+        final var filters = info.path("filters");
         if ((!actualFields.equals(expectedFields) && !actualFields.equals(expandedFields))
-                || !info.path("filters").equals(expected.path("filters"))
+                || (!filters.equals(expected.path("filters"))
+                        && !pickupFiltersWithSequence(template, filters, expected.path("filters")))
                 || !info.path("required_date_filters").equals(expected.path("requiredDateFilters"))
                 || !info.path("default_order").equals(expected.path("defaultOrder"))) {
             throw new IllegalArgumentException("REFRESH_METADATA_DRIFT");
         }
         return Set.copyOf(actualFields);
+    }
+
+    private static boolean pickupFiltersWithSequence(
+            final ReportSnapshotTemplate template, final JsonNode actual, final JsonNode expected) {
+        if (template != ReportSnapshotTemplate.COLETAS
+                || !actual.isArray()
+                || actual.size() != expected.size() + 1) {
+            return false;
+        }
+        final var sequence = CurlSnapshotWire.JSON.createObjectNode();
+        sequence.put("label", "N° coleta")
+                .put("position", 1)
+                .put("field", "sequence_code")
+                .put("table", "picks")
+                .put("type", "numeric")
+                .putNull("select")
+                .putNull("maxlength")
+                .putNull("collection");
+        if (!sequence.equals(actual.get(0))) {
+            return false;
+        }
+        for (int i = 0; i < expected.size(); i++) {
+            final var shifted =
+                    ((com.fasterxml.jackson.databind.node.ObjectNode) expected.get(i)).deepCopy();
+            shifted.put("position", shifted.required("position").asInt() + 1);
+            if (!shifted.equals(actual.get(i + 1))) {
+                return false;
+            }
+        }
+        return true;
     }
 
     public int fieldCount(final ReportSnapshotTemplate template) {
