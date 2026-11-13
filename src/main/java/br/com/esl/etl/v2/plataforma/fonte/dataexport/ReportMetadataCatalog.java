@@ -35,10 +35,16 @@ public final class ReportMetadataCatalog {
         final var expandedFields = new HashSet<>(expectedFields);
         dashboardFields.path(template.name()).forEach(value -> expandedFields.add(value.asText()));
         final var filters = info.path("filters");
+        final var requiredDates = info.path("required_date_filters");
+        final var expectedDates = expected.path("requiredDateFilters");
         if ((!actualFields.equals(expectedFields) && !actualFields.equals(expandedFields))
                 || (!filters.equals(expected.path("filters"))
                         && !pickupFiltersWithSequence(template, filters, expected.path("filters")))
-                || !info.path("required_date_filters").equals(expected.path("requiredDateFilters"))
+                || (!requiredDates.equals(expectedDates)
+                        && !(template == ReportSnapshotTemplate.COLETAS_EXCLUIDAS
+                                && requiredDates.isArray()
+                                && requiredDates.size() == 1
+                                && requiredDates.get(0).equals(expectedDates)))
                 || !info.path("default_order").equals(expected.path("defaultOrder"))) {
             throw new IllegalArgumentException("REFRESH_METADATA_DRIFT");
         }

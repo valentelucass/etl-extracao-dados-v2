@@ -190,6 +190,18 @@ class ReportUpdateContractTest {
     }
 
     @Test
+    void acceptsTheSamePickupDeletionDateAsAnArray() throws Exception {
+        final var template = ReportSnapshotTemplate.COLETAS_EXCLUIDAS;
+        final var info = (ObjectNode) infos().get(template).deepCopy();
+        final var date = info.required("required_date_filters");
+        final var catalog = new ReportMetadataCatalog();
+        final var dates = info.putArray("required_date_filters").add(date);
+        assertEquals(10, catalog.validate(template, info).size());
+        dates.add("picks.request_date");
+        assertThrows(IllegalArgumentException.class, () -> catalog.validate(template, info));
+    }
+
+    @Test
     void updateCaptureUsesItsOwnTransportAndRequiresTheEmptyTerminalPage() throws Exception {
         final var infos = infos();
         final var template = ReportSnapshotTemplate.CONSOLIDACAO_DETALHADA;
