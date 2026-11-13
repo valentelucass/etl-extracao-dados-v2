@@ -1,6 +1,10 @@
 # Pure scheduling helpers. Dot-sourcing does not start a process or a timer.
-function Get-RefreshNext0766([DateTimeOffset]$CompletedAt){return $CompletedAt.AddMinutes(60)}
-function Get-RefreshEligible0766([string]$StateDirectory){
+function Get-RefreshNext0766([DateTimeOffset]$CompletedAt,[switch]$HistoryOnly){
+ if($HistoryOnly){return $CompletedAt}
+ return $CompletedAt.AddMinutes(60)
+}
+function Get-RefreshEligible0766([string]$StateDirectory,[switch]$HistoryOnly){
+ if($HistoryOnly){return [DateTimeOffset]::MinValue}
  $eligible0766=[DateTimeOffset]::MinValue
  $supervisorPath0766=Join-Path $StateDirectory 'supervisor.json'
  if(Test-Path -LiteralPath $supervisorPath0766){

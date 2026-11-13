@@ -276,7 +276,9 @@ public final class ProductionRefreshCycle {
         final var checkpoint = new RefreshCheckpoint(checkpointPath, scope, began);
         final var historyEnd = historyOnly ? checkpoint.createdOn() : today;
         final var policy = ProductionRefreshPolicy.from(config, historyEnd);
-        checkpoint.requireEligible(clock.instant());
+        if (!historyOnly) {
+            checkpoint.requireEligible(clock.instant());
+        }
         Files.createDirectories(root);
         final var deadline = began.plus(Duration.ofMinutes(105));
         final var session = bounded(wires.open(origin, token, root, stop, deadline), deadline);
@@ -291,7 +293,7 @@ public final class ProductionRefreshCycle {
                         .put("historyOnly", historyOnly)
                         .put("initialHistoryThrough", historyEnd.toString())
                         .put("minimumInitialDays", 90)
-                        .put("waitAfterCompletionMinutes", 60)
+                        .put("waitAfterCompletionMinutes", historyOnly ? 0 : 60)
                         .put("passed", false)
                         .put("initialComplete", false)
                         .put("publication", false);
@@ -436,7 +438,10 @@ public final class ProductionRefreshCycle {
             report.put("completedAt", completed.toString())
                     .put(
                             "nextEligibleAt",
-                            ProductionRefreshPolicy.nextInvocation(completed).toString())
+                            (historyOnly && !checkpoint.allInitialized()
+                                            ? completed
+                                            : ProductionRefreshPolicy.nextInvocation(completed))
+                                    .toString())
                     .put("durationSeconds", Duration.between(began, completed).toSeconds())
                     .put("initialComplete", checkpoint.allInitialized())
                     .put(

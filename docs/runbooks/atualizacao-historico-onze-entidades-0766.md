@@ -6,7 +6,7 @@ A primeira importação começa em uma data configurável e abrange pelo menos 9
 
 Cada lote recebe até oito datas iniciais por entidade, começando pelas mais recentes. O progresso é salvo depois de cada gravação confirmada. Concluir um lote não significa concluir os 90 dias: o recibo separa `passed`, `initialComplete` e `initialRemainingDays`. A virada do dia adiciona a nova data ao trabalho; reiniciar o processo não reinicia a carga.
 
-Depois da execução terminar, a próxima aguarda **60 minutos completos**, independentemente da duração da extração. Exemplo: início 10h, término 10h20, próximo início a partir de 11h20. O controle é persistido e respeitado após reinício. Há bloqueios contra execução simultânea no supervisor, na fonte e no banco.
+Na carga inicial manual, os lotes seguem em sequência. Na atualização contínua, a próxima execução aguarda **60 minutos completos** após o término da anterior. Uma execução que termina às 10h20 permite a próxima a partir das 11h20. O controle é persistido e respeitado após reinício. Há bloqueios contra execução simultânea no supervisor, na fonte e no banco.
 
 As gravações confirmadas ficam disponíveis na visão de recebimento conforme cada data termina. A atualização do dashboard depende do seu consumidor; este trabalho não publica nem altera o dashboard.
 
@@ -54,7 +54,7 @@ As outras nove entidades também reconferem uma data histórica completa por exe
 - `ReportUpdateContract` e `ReportMetadataCatalog`: filtros observados e validação da revisão atual dos metadados.
 - `AllEntitiesIngestionStore`: reutiliza as procedures de recebimento e planejamento já instaladas.
 
-A configuração pública de exemplo fica em `config/production-refresh.example.json`. Ela não contém segredos. `historyDays` aceita 90 a 3660; `historyStart` pode explicitar uma data inicial com pelo menos 90 dias inclusivos. `initialBatchDays`, `reconciliationBatchDays` e `changedDaysPerBatch` aceitam 1 a 8; `manifestScanDays`, 1 a 120. A espera é obrigatoriamente 60 minutos. O estado fica fora do Git, em Armazenamento-Projetos.
+A configuração pública de exemplo fica em `config/production-refresh.example.json`. Ela não contém segredos. `historyDays` aceita 90 a 3660 e `historyStart` pode explicitar uma data inicial com pelo menos 90 dias inclusivos. `initialBatchDays`, `reconciliationBatchDays` e `changedDaysPerBatch` aceitam 1 a 8. `manifestScanDays` aceita 1 a 120. `waitAfterCompletionMinutes` define os 60 minutos da atualização contínua. O estado fica fora do Git, em Armazenamento-Projetos.
 
 `scripts/operations/Invoke-ProductionRefresh0766.ps1` executa um lote por padrão. Recebe `-SettingsPath` e `-RuntimeManifestPath`. `-Continuous` mantém a sequência de execução e espera. Cada trabalhador é iniciado pelo executor compartilhado com quota de 2 GiB; o processo Java usa até 768 MiB. A configuração privada do runtime verifica nove JARs e três scripts por SHA antes de usar as credenciais DPAPI e o perfil TLS existentes.
 
@@ -70,9 +70,9 @@ No terminal do servidor, na sessão `suporte`, execute o arquivo `CARGA_90_DIAS.
 .\CARGA_90_DIAS.bat
 ```
 
-O arquivo usa a credencial criptografada da conta do extrator. A carga fixa os 90 dias civis, incluindo o dia do primeiro lote, e termina quando as 12 fontes concluírem o período. Ela processa até oito datas por fonte por lote, aguarda 60 minutos após cada lote e mostra o progresso no terminal. O progresso fica na pasta operacional e permite retomar a mesma carga. Com `--verificar`, o arquivo apenas confere os arquivos do extrator e da configuração.
+O arquivo usa a credencial criptografada da conta do extrator. A carga fixa os 90 dias civis, incluindo o dia do primeiro lote, e termina quando as 12 fontes concluírem o período. Ela processa até oito datas por fonte por lote e inicia o seguinte assim que o anterior terminar. O progresso fica na pasta operacional e permite retomar a mesma carga. Com `--verificar`, o arquivo apenas confere os arquivos do extrator e da configuração.
 
-O arquivo usa `historico-90-dias-settings.json` e `runtime-manifest-dashboard-fields-0802.json` no armazenamento privado. Use o mesmo manifesto ao iniciar futuramente a atualização contínua com `operational-settings.json`. As duas configurações usam o mesmo progresso.
+O arquivo usa `historico-90-dias-settings.json` e `runtime-manifest-dashboard-fields-0803.json` no armazenamento privado. Use o mesmo manifesto ao iniciar futuramente a atualização contínua com `operational-settings.json`. As duas configurações usam o mesmo progresso.
 
 Em outro terminal, rode `./CARGA_90_DIAS.bat --acompanhar` para ver o relatório em extração, a data, a página, a última resposta do ESL e o total de dias já gravados no banco. O acompanhamento usa os registros da carga em andamento. Fechar essa segunda janela encerra apenas a leitura do progresso.
 

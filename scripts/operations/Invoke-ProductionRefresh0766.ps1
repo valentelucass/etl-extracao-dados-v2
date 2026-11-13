@@ -58,10 +58,7 @@ if(-not $Worker -and -not $Verify){
     if($HistoryOnly){throw 'Carga de 90 dias interrompida. O progresso foi salvo.'}
     break
    }
-   $eligible0766=Get-RefreshEligible0766 $state0766
-   if($HistoryOnly -and [DateTimeOffset]::UtcNow -lt $eligible0766){
-    Write-Output ('Proximo lote a partir de '+$eligible0766.ToLocalTime().ToString('dd/MM/yyyy HH:mm:ss'))
-   }
+   $eligible0766=Get-RefreshEligible0766 $state0766 -HistoryOnly:$HistoryOnly
    while([DateTimeOffset]::UtcNow -lt $eligible0766){
     if((Test-Path -LiteralPath $operatorStop0766) -or (Test-Path -LiteralPath $failureStop0766)){
      if($HistoryOnly){throw 'Carga de 90 dias interrompida. O progresso foi salvo.'}
@@ -100,9 +97,9 @@ if(-not $Worker -and -not $Verify){
     }
     throw 'REFRESH_BATCH_FAILED_STOP_PRESERVED'
    }
-   $next0766=Get-RefreshNext0766 $finished0766
    $historyComplete0766=$HistoryOnly -and $report0766.initialComplete
-   $phase0766=if($historyComplete0766){'HISTORY_COMPLETED'}elseif($Continuous -or $HistoryOnly){'WAITING'}else{'BATCH_COMPLETED'}
+   $next0766=Get-RefreshNext0766 $finished0766 -HistoryOnly:($HistoryOnly -and -not $historyComplete0766)
+   $phase0766=if($historyComplete0766){'HISTORY_COMPLETED'}elseif($Continuous){'WAITING'}else{'BATCH_COMPLETED'}
    Write-RefreshSupervisor0766 ([ordered]@{phase=$phase0766;cycle=$id0766;completedAt=$finished0766.ToString('o');nextEligibleAt=$next0766.ToString('o');initialComplete=$report0766.initialComplete})
    Write-Output ('REFRESH_BATCH_PASSED '+$id0766)
    if($historyComplete0766){

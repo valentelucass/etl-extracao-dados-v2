@@ -2,6 +2,7 @@ package br.com.esl.etl.v2.plataforma.producao;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import br.com.esl.etl.v2.plataforma.expansao.ExpansionObservation;
@@ -53,12 +54,18 @@ class ProductionRefreshCycleTest {
     @Test
     void manualHistoryKeepsExactlyTheOriginalNinetyDaysAfterMidnight() throws Exception {
         final var fixture = new Fixture(directory);
-        fixture.now = Instant.parse("2026-11-11T02:00:00Z");
+        fixture.now = Instant.parse("2026-11-11T02:59:55Z");
         final var firstDay = fixture.today();
         fixture.config.put("historyOnly", true).put("historyDays", 90);
         for (int cycle = 0; cycle < 12; cycle++) {
             assertTrue(fixture.run());
-            fixture.now = fixture.now.plus(Duration.ofMinutes(65));
+            assertEquals(0, fixture.lastReport.path("waitAfterCompletionMinutes").asInt());
+            if (cycle < 11) {
+                assertEquals(
+                        fixture.lastReport.path("completedAt"),
+                        fixture.lastReport.path("nextEligibleAt"));
+            }
+            fixture.now = fixture.now.plusSeconds(1);
         }
         assertTrue(fixture.lastReport.path("initialComplete").asBoolean());
         assertEquals(
@@ -74,6 +81,8 @@ class ProductionRefreshCycleTest {
         assertTrue(fixture.run());
         assertEquals(1080, fixture.fullCalls);
         assertEquals(0, fixture.updateCalls);
+        fixture.config.remove("historyOnly");
+        assertThrows(IllegalStateException.class, fixture::run);
     }
 
     @Test
