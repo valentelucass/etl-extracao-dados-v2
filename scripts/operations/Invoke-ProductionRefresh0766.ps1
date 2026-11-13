@@ -4,6 +4,7 @@ param(
  [Parameter(Mandatory=$true)][string]$RuntimeManifestPath,
  [switch]$Continuous,
  [switch]$HistoryOnly,
+ [switch]$SingleBatch,
  [switch]$Verify,
  [switch]$Worker,
  [string]$CycleId
@@ -25,6 +26,7 @@ if($HistoryOnly -and ($Continuous -or $settings0766.historyDays -ne 90 -or $sett
  throw 'REFRESH_HISTORY_ONLY_REQUIRES_NINETY_DAYS'
 }
 if($Verify -and ($Worker -or $Continuous -or -not $HistoryOnly)){throw 'REFRESH_VERIFICATION_MODE_REQUIRED'}
+if($SingleBatch -and (-not $HistoryOnly -or $Worker -or $Verify)){throw 'REFRESH_HISTORY_SINGLE_BATCH_REQUIRED'}
 $operatorStop0766=Join-Path $state0766 'STOP.operator.json'
 $failureStop0766=Join-Path $state0766 'STOP.failure.json'
 if(-not $Verify){
@@ -79,9 +81,11 @@ if(-not $Worker -and -not $Verify){
    $reportPath0766=Join-Path $state0766 ('reports\'+$id0766+'.json')
    $report0766=$null
    $passed0766=$false
-   if($outcome0766.job.ExitCode -eq 0 -and -not $outcome0766.job.TimedOut -and (Test-Path -LiteralPath $reportPath0766)){
-    $report0766=Get-Content -LiteralPath $reportPath0766 -Raw -Encoding utf8 | ConvertFrom-Json
-    $passed0766=$report0766.schema -ceq 'PRODUCTION_REFRESH0766' -and $report0766.passed -and
+   if(Test-Path -LiteralPath $reportPath0766 -PathType Leaf){
+    try{$report0766=Get-Content -LiteralPath $reportPath0766 -Raw -Encoding utf8 | ConvertFrom-Json}
+    catch{$report0766=$null}
+    $passed0766=$outcome0766.job.ExitCode -eq 0 -and -not $outcome0766.job.TimedOut -and
+     $report0766.schema -ceq 'PRODUCTION_REFRESH0766' -and $report0766.passed -and
      (@($report0766.entities).Count -eq 11 -or (@($report0766.entities).Count -eq 12 -and $report0766.entities.entity -ccontains 'COLETAS_EXCLUIDAS')) -and
      @($report0766.entities.entity | Sort-Object -Unique).Count -eq @($report0766.entities).Count
     if($HistoryOnly){$passed0766=$passed0766 -and $report0766.historyOnly -eq $true -and @($report0766.entities).Count -eq 12}
@@ -89,7 +93,11 @@ if(-not $Worker -and -not $Verify){
    if(-not $passed0766){
     [IO.File]::WriteAllText($failureStop0766,([ordered]@{schema='REFRESH_FAILURE0766';cycle=$id0766;at=$finished0766.ToString('o');reason='BATCH_NOT_CONFIRMED_NO_AUTOMATIC_RETRY'} | ConvertTo-Json),(New-Object Text.UTF8Encoding($false)))
     Write-RefreshSupervisor0766 ([ordered]@{phase='FAILED';cycle=$id0766;completedAt=$finished0766.ToString('o');nextEligibleAt=$null})
-    if($HistoryOnly){Write-Output ('Lote interrompido. Consulte '+$reportPath0766)}
+    if($HistoryOnly){
+     $failure0766=@($report0766.entities | Where-Object status -CEQ 'FAILED') | Select-Object -Last 1
+     $cause0766=if($failure0766){$failure0766.entity+': '+$failure0766.reason}elseif($report0766.reason){$report0766.reason}elseif($outcome0766.job.TimedOut){'tempo limite do processo'}else{'processo encerrado sem confirmar o lote'}
+     Write-Output ('Lote interrompido ('+$cause0766+'). Consulte '+$reportPath0766)
+    }
     throw 'REFRESH_BATCH_FAILED_STOP_PRESERVED'
    }
    $next0766=Get-RefreshNext0766 $finished0766
@@ -111,6 +119,7 @@ if(-not $Worker -and -not $Verify){
     }else{
      Write-Output ('Lote encerrado com datas pendentes. Relatorio: '+$reportPath0766)
     }
+    if($SingleBatch){break}
     continue
    }
    if(-not $Continuous){break}

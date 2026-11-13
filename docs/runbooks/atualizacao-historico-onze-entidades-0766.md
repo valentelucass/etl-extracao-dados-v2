@@ -72,7 +72,7 @@ No terminal do servidor, na sessão `suporte`, execute o arquivo `CARGA_90_DIAS.
 
 O arquivo usa a credencial criptografada da conta do extrator. A carga fixa os 90 dias civis, incluindo o dia do primeiro lote, e termina quando as 12 fontes concluírem o período. Ela processa até oito datas por fonte por lote, aguarda 60 minutos após cada lote e mostra o progresso no terminal. O progresso fica na pasta operacional e permite retomar a mesma carga. Com `--verificar`, o arquivo apenas confere os arquivos do extrator e da configuração.
 
-O arquivo usa `historico-90-dias-settings.json` e `runtime-manifest-dashboard-fields-0801.json` no armazenamento privado. Use o mesmo manifesto ao iniciar futuramente a atualização contínua com `operational-settings.json`. As duas configurações usam o mesmo progresso.
+O arquivo usa `historico-90-dias-settings.json` e `runtime-manifest-dashboard-fields-0802.json` no armazenamento privado. Use o mesmo manifesto ao iniciar futuramente a atualização contínua com `operational-settings.json`. As duas configurações usam o mesmo progresso.
 
 Em outro terminal, rode `./CARGA_90_DIAS.bat --acompanhar` para ver o relatório em extração, a data, a página, a última resposta do ESL e o total de dias já gravados no banco. O acompanhamento usa os registros da carga em andamento. Fechar essa segunda janela encerra apenas a leitura do progresso.
 
@@ -86,7 +86,9 @@ Cada trabalhador tem limite de 105 minutos de fonte, 2.000 requisições e limit
 
 O acionador de atualização admite duas novas tentativas da mesma página após 15 e 45 segundos para falhas transitórias de transporte, HTTP 408, 500, 502, 503, 504 e HTTP 422 com o código exato `timeout`. Cada tentativa consome uma requisição do orçamento. HTTP 429 registra a parada compartilhada. Erros de autenticação, contrato, formato ou tamanho continuam interrompendo o trabalho. Se as tentativas de uma página se esgotarem na carga inicial, o dia fica pendente e as demais fontes seguem no lote. Após três lotes com falha transitória consecutiva na mesma data e fonte, o acionador interrompe para diagnóstico. O histórico só avança após a captura integral e a confirmação no SQL.
 
-Acompanhe o espaço em disco durante a carga. Os primeiros 52 dias por fonte confirmados e as duas tentativas interrompidas ocuparam 362 MiB apenas em capturas locais. O SQL e o arquivo de transações também crescem. O volume depende das datas e fontes processadas, e esse recorte é insuficiente para prever o consumo final com precisão.
+Acompanhe o espaço em disco durante a carga. Os primeiros 52 dias por fonte confirmados e as duas tentativas interrompidas ocuparam 362 MiB apenas em capturas locais. O SQL e o arquivo de transações também crescem. O volume depende das datas e fontes processadas, e esse recorte é insuficiente para prever o consumo final com precisão. O Java confere o espaço no volume de captura antes de abrir o banco e antes de cada nova captura completa. Abaixo de 2 GiB, interrompe com `REFRESH_DISK_SPACE_LOW` para conservar o progresso e os registros de diagnóstico. Essa margem não estima o espaço necessário para terminar o período.
+
+Na carga inicial, um erro transitório no próprio endpoint de metadados também deixa a fonte pendente depois das tentativas e preserva o dia do cursor. O supervisor mostra o código da falha no terminal. Se o processo terminar antes de produzir um recibo completo, o lote permanece interrompido para conferência do banco e do cursor.
 
 Uma captura interrompida por limite não vira snapshot parcial no banco. Seu trabalho fica pendente para a próxima execução. Se uma única data exceder os limites de captura, precisa de diagnóstico específico; não ampliar limites ou aceitar conteúdo parcial automaticamente.
 

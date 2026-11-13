@@ -78,6 +78,12 @@ public final class ProductionRefreshCycle {
     private final WireFactory wires;
     private final Clock clock;
     private final Path allowedRoot;
+    private final DiskSpace diskSpace;
+
+    @FunctionalInterface
+    interface DiskSpace {
+        long available(Path path) throws java.io.IOException;
+    }
 
     public ProductionRefreshCycle(final CapturePort capture) {
         this(
@@ -89,7 +95,8 @@ public final class ProductionRefreshCycle {
                     return new Session(wire, wire::requests);
                 },
                 Clock.systemUTC(),
-                STORAGE);
+                STORAGE,
+                path -> Files.getFileStore(path).getUsableSpace());
     }
 
     ProductionRefreshCycle(
@@ -98,11 +105,22 @@ public final class ProductionRefreshCycle {
             final WireFactory wires,
             final Clock clock,
             final Path allowedRoot) {
+        this(capture, stores, wires, clock, allowedRoot, path -> Long.MAX_VALUE);
+    }
+
+    ProductionRefreshCycle(
+            final CapturePort capture,
+            final StoreFactory stores,
+            final WireFactory wires,
+            final Clock clock,
+            final Path allowedRoot,
+            final DiskSpace diskSpace) {
         this.capture = java.util.Objects.requireNonNull(capture);
         this.stores = java.util.Objects.requireNonNull(stores);
         this.wires = java.util.Objects.requireNonNull(wires);
         this.clock = java.util.Objects.requireNonNull(clock);
         this.allowedRoot = allowedRoot.toAbsolutePath().normalize();
+        this.diskSpace = java.util.Objects.requireNonNull(diskSpace);
     }
 
     private static Receiving openStore(final JsonNode config) throws Exception {
@@ -281,7 +299,7 @@ public final class ProductionRefreshCycle {
         final var operations = report.putArray("operations");
         boolean passed = true;
         saveReport(reportPath, report, session);
-        try (var store = stores.open(config)) {
+        try (var store = openWithSpace(config, root)) {
             final var context =
                     new Context(
                             checkpoint,
@@ -310,21 +328,45 @@ public final class ProductionRefreshCycle {
                         entities.addObject()
                                 .put("entity", template.name())
                                 .put("reportId", template.template().templateId());
+                final ObjectNode historyState;
                 try {
-                    final var response = session.wire().info(template);
+                    historyState =
+                            historyOnly
+                                    ? checkpoint.entity(
+                                            template,
+                                            policy.requestedStart(),
+                                            null,
+                                            historyEnd,
+                                            began)
+                                    : null;
+                } catch (final Exception failure) {
+                    passed = false;
+                    result.put("status", "FAILED").put("reason", safe(failure));
+                    break;
+                }
+                try {
+                    final JsonNode response;
+                    try {
+                        response = session.wire().info(template);
+                    } catch (final CurlSnapshotWire.RequestFailure failure) {
+                        if (historyOnly && failure.isTransient()) {
+                            throw new DeferredWork(failure);
+                        }
+                        throw failure;
+                    }
                     context.catalog()
                             .validate(
                                     template,
                                     response.has("data") ? response.required("data") : response);
                     final var state =
-                            checkpoint.entity(
-                                    template,
-                                    policy.requestedStart(),
-                                    historyOnly
-                                            ? null
-                                            : store.earliestCovered(scope, today, template.name()),
-                                    historyEnd,
-                                    began);
+                            historyState != null
+                                    ? historyState
+                                    : checkpoint.entity(
+                                            template,
+                                            policy.requestedStart(),
+                                            store.earliestCovered(scope, today, template.name()),
+                                            historyEnd,
+                                            began);
                     require(
                             !LocalDate.parse(state.required("floor").asText()).isAfter(today),
                             "REFRESH_FLOOR_IN_FUTURE");
@@ -360,6 +402,16 @@ public final class ProductionRefreshCycle {
                     }
                     if (deferred.getCause() != null) {
                         result.put("reason", deferred.getMessage());
+                        final int failures = historyState.path("initialSourceFailures").asInt() + 1;
+                        historyState.put("initialSourceFailures", failures);
+                        checkpoint.save();
+                        if (failures >= 3) {
+                            passed = false;
+                            result.put("status", "FAILED")
+                                    .put("reason", "REFRESH_INITIAL_SOURCE_REPEATED_FAILURE")
+                                    .put("sourceReason", deferred.getMessage());
+                            break;
+                        }
                     }
                 } catch (final Exception failure) {
                     passed = false;
@@ -395,6 +447,17 @@ public final class ProductionRefreshCycle {
         return report.path("passed").asBoolean();
     }
 
+    private void requireDiskSpace(final Path root) throws java.io.IOException {
+        if (diskSpace.available(root) < 2L * 1024 * 1024 * 1024) {
+            throw new IllegalStateException("REFRESH_DISK_SPACE_LOW");
+        }
+    }
+
+    private Receiving openWithSpace(final JsonNode config, final Path root) throws Exception {
+        requireDiskSpace(root);
+        return stores.open(config);
+    }
+
     private void process(
             final Context context, final ReportSnapshotTemplate template, final ObjectNode state)
             throws Exception {
@@ -404,20 +467,7 @@ public final class ProductionRefreshCycle {
             for (int count = 0;
                     count < context.policy().initialBatchDays() && !next.isBefore(floor);
                     count++) {
-                try {
-                    fullDay(context, template, next, "INITIAL");
-                } catch (final DeferredWork deferred) {
-                    if (context.historyOnly() && deferred.getCause() != null) {
-                        final int failures = state.path("initialSourceFailures").asInt() + 1;
-                        state.put("initialSourceFailures", failures);
-                        context.checkpoint().save();
-                        if (failures >= 3) {
-                            throw new IllegalStateException(
-                                    "REFRESH_INITIAL_SOURCE_REPEATED_FAILURE", deferred);
-                        }
-                    }
-                    throw deferred;
-                }
+                fullDay(context, template, next, "INITIAL");
                 state.remove("initialSourceFailures");
                 next = next.minusDays(1);
                 state.put("initialNext", next.toString());
@@ -761,6 +811,7 @@ public final class ProductionRefreshCycle {
             throw new DeferredWork();
         }
         final var dates = new BusinessDateRange(day, day);
+        requireDiskSpace(context.root());
         final var run = UUID.randomUUID();
         final var operation =
                 context.operations()

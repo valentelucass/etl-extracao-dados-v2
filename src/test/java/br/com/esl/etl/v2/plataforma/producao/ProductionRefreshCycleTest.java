@@ -102,6 +102,71 @@ class ProductionRefreshCycleTest {
     }
 
     @Test
+    void transientFreightMetadataTimeoutLeavesTheDatePendingAndContinues() throws Exception {
+        final var fixture = new Fixture(directory);
+        fixture.config.put("historyOnly", true).put("historyDays", 90).put("initialBatchDays", 1);
+        fixture.freightMetadataFailure = true;
+        assertTrue(fixture.run());
+        assertEquals(11, fixture.store.latest.size());
+        assertEquals(
+                1,
+                fixture.entity(ReportSnapshotTemplate.FRETES)
+                        .path("initialSourceFailures")
+                        .asInt());
+        fixture.freightMetadataFailure = false;
+        fixture.now = fixture.now.plusSeconds(3900);
+        assertTrue(fixture.run());
+        assertEquals(23, fixture.store.latest.size());
+        assertFalse(fixture.entity(ReportSnapshotTemplate.FRETES).has("initialSourceFailures"));
+    }
+
+    @Test
+    void lowDiskStopsBeforeARequestAndResumesWhenSpaceIsAvailable() throws Exception {
+        final var fixture = new Fixture(directory);
+        fixture.availableBytes = 0;
+        assertFalse(fixture.run());
+        assertEquals("REFRESH_DISK_SPACE_LOW", fixture.lastReport.path("reason").asText());
+        assertEquals(0, fixture.fullCalls);
+        assertTrue(fixture.store.runs.isEmpty());
+        assertFalse(Files.exists(directory.resolve("checkpoint.json")));
+        fixture.availableBytes = Long.MAX_VALUE;
+        fixture.config.put("initialBatchDays", 1);
+        assertTrue(fixture.run());
+        assertEquals(12, fixture.store.latest.size());
+    }
+
+    @Test
+    void interruptedSqlReadbackKeepsTheCursorAndReplacingTheDayDoesNotDoubleRows()
+            throws Exception {
+        final var fixture = new Fixture(directory);
+        fixture.config.put("initialBatchDays", 1);
+        final var day = fixture.today();
+        final var key = "CONSOLIDACAO_DETALHADA:" + day;
+        fixture.store.disconnectAfterCommit = true;
+        assertFalse(fixture.run());
+        assertEquals(
+                day.toString(),
+                fixture.entity(ReportSnapshotTemplate.CONSOLIDACAO_DETALHADA)
+                        .path("initialNext")
+                        .asText());
+        assertEquals(2, fixture.store.latest.get(key).size());
+        assertTrue(
+                fixture.lastReport
+                        .required("operations")
+                        .get(0)
+                        .path("failureStateUnconfirmed")
+                        .asBoolean());
+        fixture.store.disconnectAfterCommit = false;
+        assertTrue(fixture.run());
+        assertEquals(2, fixture.store.latest.get(key).size());
+        assertEquals(
+                day.minusDays(1).toString(),
+                fixture.entity(ReportSnapshotTemplate.CONSOLIDACAO_DETALHADA)
+                        .path("initialNext")
+                        .asText());
+    }
+
+    @Test
     void failureDoesNotSkipTheFailedInitialDayOrRepeatConfirmedEarlierDays() throws Exception {
         final var fixture = new Fixture(directory);
         final var today = fixture.today();
@@ -336,6 +401,7 @@ class ProductionRefreshCycleTest {
         final Map<UUID, String> runs = new HashMap<>();
         final List<String> commits = new ArrayList<>();
         LocalDate rejectDay;
+        boolean disconnectAfterCommit;
         int failed;
 
         @Override
@@ -367,10 +433,18 @@ class ProductionRefreshCycleTest {
             }
             latest.put(key, values);
             commits.add(key);
+            if (disconnectAfterCommit) {
+                throw new java.sql.SQLTransientConnectionException(
+                        "Synthetic SQL readback disconnect", "08S01");
+            }
         }
 
         @Override
-        public void fail(final UUID run, final String reason) {
+        public void fail(final UUID run, final String reason) throws Exception {
+            if (disconnectAfterCommit) {
+                throw new java.sql.SQLTransientConnectionException(
+                        "Synthetic SQL disconnect", "08S01");
+            }
             failed++;
         }
 
@@ -399,6 +473,8 @@ class ProductionRefreshCycleTest {
         int updateCalls;
         boolean locationChangeDuringLookup;
         boolean freightSourceFailure;
+        boolean freightMetadataFailure;
+        long availableBytes = Long.MAX_VALUE;
         int occurrenceFloorCaptures;
 
         Fixture(final Path root) throws Exception {
@@ -514,6 +590,10 @@ class ProductionRefreshCycleTest {
                     new ReportSnapshotExtractor.Wire() {
                         @Override
                         public JsonNode info(final ReportSnapshotTemplate template) {
+                            if (freightMetadataFailure
+                                    && template == ReportSnapshotTemplate.FRETES) {
+                                throw new CurlSnapshotWire.RequestFailure(503, 0, false);
+                            }
                             return infos.get(template);
                         }
 
@@ -591,7 +671,8 @@ class ProductionRefreshCycleTest {
                             (origin, token, output, stop, deadline) ->
                                     new ProductionRefreshCycle.Session(wire, () -> 0),
                             Clock.fixed(now, ZoneOffset.UTC),
-                            root);
+                            root,
+                            path -> availableBytes);
             final var passed = cycle.run(config);
             lastReport = CurlSnapshotWire.JSON.readTree(Files.readAllBytes(report));
             return passed;
