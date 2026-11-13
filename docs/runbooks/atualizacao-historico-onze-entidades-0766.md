@@ -72,7 +72,7 @@ No terminal do servidor, na sessão `suporte`, execute o arquivo `CARGA_90_DIAS.
 
 O arquivo usa a credencial criptografada da conta do extrator. A carga fixa os 90 dias civis, incluindo o dia do primeiro lote, e termina quando as 12 fontes concluírem o período. Ela processa até oito datas por fonte por lote e inicia o seguinte assim que o anterior terminar. O progresso fica na pasta operacional e permite retomar a mesma carga. Com `--verificar`, o arquivo apenas confere os arquivos do extrator e da configuração.
 
-O arquivo usa `historico-90-dias-settings.json` e `runtime-manifest-dashboard-fields-0803.json` no armazenamento privado. Use o mesmo manifesto ao iniciar futuramente a atualização contínua com `operational-settings.json`. As duas configurações usam o mesmo progresso.
+O arquivo usa `historico-90-dias-settings.json` e `runtime-manifest-dashboard-fields-0804.json` no armazenamento privado. Use o mesmo manifesto ao iniciar futuramente a atualização contínua com `operational-settings.json`. As duas configurações usam o mesmo progresso.
 
 Em outro terminal, rode `./CARGA_90_DIAS.bat --acompanhar` para ver o relatório em extração, a data, a página, a última resposta do ESL e o total de dias já gravados no banco. O acompanhamento usa os registros da carga em andamento. Fechar essa segunda janela encerra apenas a leitura do progresso.
 
@@ -91,6 +91,31 @@ Acompanhe o espaço em disco durante a carga. Os primeiros 52 dias por fonte con
 Na carga inicial, um erro transitório no próprio endpoint de metadados também deixa a fonte pendente depois das tentativas e preserva o dia do cursor. O supervisor mostra o código da falha no terminal. Se o processo terminar antes de produzir um recibo completo, o lote permanece interrompido para conferência do banco e do cursor.
 
 Uma captura interrompida por limite não vira snapshot parcial no banco. Seu trabalho fica pendente para a próxima execução. Se uma única data exceder os limites de captura, precisa de diagnóstico específico; não ampliar limites ou aceitar conteúdo parcial automaticamente.
+
+### Revisão das 12 fontes após a interrupção em Manifestos
+
+O lote `308a4661de3a4d57924b0b0972e2d815` confirmou 59.648 linhas em 38 combinações de fonte e data. A consulta ao SQL confirmou a execução de Manifestos de 30/10/2026 como falha sem linhas gravadas. As respostas guardadas do ESL continham 2.728 linhas, 187 manifestos e 91 campos. A terceira página era vazia. Em 63 linhas expandidas do mesmo manifesto, o ESL devolveu número positivo de MDF-e com chave explicitamente nula. Essas linhas agora são preservadas integralmente. O vínculo por chave só é criado nas linhas que têm a chave válida.
+
+Foram reprocessadas 266 capturas completas, com 324.090 linhas e 187 combinações distintas de fonte e data. O total inclui dias capturados em mais de uma execução. As duas capturas parciais de Fretes interrompidas por HTTP 422 e 500 ficaram fora da contagem. Capturas completas posteriores das duas datas passaram.
+
+| Fonte | Datas distintas | Linhas reprocessadas | Maior número de páginas, incluindo a última vazia |
+| --- | ---: | ---: | ---: |
+| Consolidação Detalhada | 32 | 1.989 | 3 |
+| Ocorrências | 32 | 211.561 | 100 |
+| Coletas | 32 | 8.050 | 4 |
+| Fretes | 20 | 15.838 | 44 |
+| Manifestos | 15 | 41.595 | 3 |
+| Cotações | 8 | 2.949 | 4 |
+| Localização de Cargas | 8 | 7.588 | 11 |
+| Contas a Pagar | 8 | 1.143 | 3 |
+| Faturas por Cliente | 8 | 7.178 | 11 |
+| Inventário | 8 | 26.165 | 3 |
+| Sinistros | 8 | 14 | 2 |
+| Coletas Excluídas | 8 | 20 | 2 |
+
+O recibo de uma nova captura registra total de linhas, linhas mapeadas, linhas rejeitadas, páginas e indicação da página vazia. Os códigos distinguem ausência da página terminal, rejeição de linha, divergência na contagem de linhas e divergência na quantidade de campos. Os testes automatizados passaram em 91 cenários selecionados. A verificação cobre as capturas disponíveis e os casos de falha exercitados. As demais datas dependem da execução histórica.
+
+O lote de verificação `9209bc7b71be4864af54714dc252ec56` usou uma cópia do progresso para extrair a próxima data pendente de cada uma das 12 fontes. Foram 57 requisições ao ESL, 7.459 linhas confirmadas por releitura exata na V2 e zero rejeições. As três respostas de Manifestos de 30/10 foram idênticas às que haviam provocado a interrupção. A verificação gravou as datas de amostra na V2 e preservou o ponto de retomada da carga oficial.
 
 ## Verificação executada e limites do aceite
 

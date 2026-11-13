@@ -87,6 +87,33 @@ class ManifestoDataExportRecordMapperTest {
     }
 
     @Test
+    void preservesObservedNumberWithoutKeyAndKeepsOtherMdfesOnTheSameManifest() {
+        final ObjectNode input = baseline();
+        input.putNull("mft_mfs_key");
+        input.put("mft_mfs_number", 73);
+        final var partial = mapper.map(1, input);
+        assertEquals(ManifestoStageDisposition.VALID, partial.disposition());
+        assertTrue(partial.mdfe().isEmpty());
+        assertEquals(73, node(partial.payloadJson()).path("mft_mfs_number").intValue());
+        assertTrue(node(partial.payloadJson()).path("mft_mfs_key").isNull());
+
+        input.put("mft_mfs_key", "12345678901234567890123456789012345678901234");
+        final var complete = mapper.map(2, input);
+        assertEquals(partial.sourceKey(), complete.sourceKey());
+        assertEquals(73, complete.mdfe().orElseThrow().number().intValueExact());
+
+        input.putNull("mft_mfs_key");
+        input.put("mft_mfs_number", 0);
+        assertEquals(
+                "CHILD_NUMBER_SIGNAL_WITHOUT_VALID_KEY",
+                mapper.map(3, input).quarantineReasonCode());
+        input.put("mft_mfs_number", "73");
+        assertEquals(
+                "CHILD_NUMBER_SIGNAL_WITHOUT_VALID_KEY",
+                mapper.map(4, input).quarantineReasonCode());
+    }
+
+    @Test
     void quarantinesIdentityTemporalAndChildAsymmetryFailClosed() {
         final List<ManifestoStageRecord> records =
                 List.of(

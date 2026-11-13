@@ -876,12 +876,20 @@ public final class ProductionRefreshCycle {
                                 },
                                 limits(template));
             }
+            operation
+                    .put("snapshotRows", result.rows())
+                    .put("snapshotTypedRows", result.typedRows())
+                    .put("snapshotRejectedRows", result.rejectedRows())
+                    .put("snapshotPages", result.pages())
+                    .put("snapshotTerminal", result.terminal());
+            require(result.terminal(), "REFRESH_SNAPSHOT_TERMINAL_MISSING");
+            require(result.rejectedRows() == 0, "REFRESH_SNAPSHOT_ROWS_REJECTED");
             require(
-                    result.success()
-                            && result.typedRows() == result.rows()
-                            && result.rows() == rows.size()
-                            && context.catalog().acceptsFieldCount(template, result.fields()),
-                    "REFRESH_SNAPSHOT_INCOMPLETE");
+                    result.typedRows() == result.rows() && result.rows() == rows.size(),
+                    "REFRESH_SNAPSHOT_ROW_COUNT_MISMATCH");
+            require(
+                    context.catalog().acceptsFieldCount(template, result.fields()),
+                    "REFRESH_SNAPSHOT_FIELD_COUNT_MISMATCH");
             final var digest = java.security.MessageDigest.getInstance("SHA-256");
             try (var input = Files.newInputStream(path)) {
                 final var buffer = new byte[65536];

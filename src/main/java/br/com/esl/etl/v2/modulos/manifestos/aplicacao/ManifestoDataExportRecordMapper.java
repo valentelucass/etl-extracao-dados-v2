@@ -203,6 +203,13 @@ public final class ManifestoDataExportRecordMapper {
             return new ChildValues(pickKey, null, null);
         }
         if (key.presence() != ManifestoAttributePresence.VALUE) {
+            // The ESL can supply a number with an explicit null key on an expanded line.
+            // Preserve that number in the payload without creating a keyed MDF-e observation.
+            if (key.presence() == ManifestoAttributePresence.NULL
+                    && number.value().isIntegralNumber()
+                    && number.value().bigIntegerValue().signum() > 0) {
+                return new ChildValues(pickKey, null, null);
+            }
             return ChildValues.quarantine("CHILD_NUMBER_SIGNAL_WITHOUT_VALID_KEY");
         }
         if (number.presence() != ManifestoAttributePresence.VALUE) {
