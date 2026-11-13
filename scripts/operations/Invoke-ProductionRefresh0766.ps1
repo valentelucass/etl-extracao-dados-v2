@@ -102,7 +102,19 @@ try{
  if(-not $values0766.ContainsKey('API_BASE_URL') -or -not $values0766.ContainsKey('API_DATAEXPORT_TOKEN')){throw 'REFRESH_SOURCE_CREDENTIAL_REQUIRED'}
  Import-Module 'C:\Users\suporte\Documents\projetos\.runtime\sql-server\SqlServerProjetos.psm1'
  $profile0766=Get-ProjetosSqlProfile
- $credential0766=Import-Clixml -LiteralPath (Join-Path $env:LOCALAPPDATA 'Rodogarcia\SqlServer\etl-v2-runtime-prod.clixml')
+ $privateSql0766=Join-Path ([Environment]::GetFolderPath('LocalApplicationData')) 'Rodogarcia\SqlServer'
+ $defaultCredential0766=Join-Path $privateSql0766 'etl-v2-runtime-prod.clixml'
+ $credentialFile0766=$env:RODOGARCIA_ETL_V2_SQL_CREDENTIAL_FILE
+ if(-not $credentialFile0766){$credentialFile0766=[Environment]::GetEnvironmentVariable('RODOGARCIA_ETL_V2_SQL_CREDENTIAL_FILE','User')}
+ if(-not $credentialFile0766){$credentialFile0766=$defaultCredential0766}
+ $credentialFile0766=[IO.Path]::GetFullPath($credentialFile0766)
+ if(-not $credentialFile0766.Equals($defaultCredential0766,[StringComparison]::OrdinalIgnoreCase)){
+  throw 'REFRESH_PRIVATE_CREDENTIAL_REQUIRED'
+ }
+ $credential0766=Import-Clixml -LiteralPath $credentialFile0766
+ if($credential0766 -isnot [Management.Automation.PSCredential] -or $credential0766.UserName -cne 'etl_v2_runtime_prod'){
+  throw 'REFRESH_RUNTIME_IDENTITY_REQUIRED'
+ }
  foreach($property0766 in $settings0766.PSObject.Properties){if($property0766.Name -cne 'stateDirectory'){$config0766[$property0766.Name]=$property0766.Value}}
  $config0766.database='ETL_SISTEMA_V2';$config0766.runtimeSha256=$jar0766[0].sha256.ToLowerInvariant()
  $config0766.jdbcBaseUrl=$profile0766.jdbcBaseUrl;$config0766.sqlUser=$credential0766.UserName;$config0766.sqlPassword=$credential0766.GetNetworkCredential().Password
@@ -126,7 +138,9 @@ try{
  Write-Output $(if($workerExit0766 -eq 0){'REFRESH_WORKER_PASSED'}else{'REFRESH_WORKER_FAILED_SEE_SANITIZED_REPORT'})
  exit $workerExit0766
 }finally{
- $config0766.Clear();$values0766.Clear();$credential0766=$null
+ $config0766.Clear();$values0766.Clear()
+ if($credential0766 -is [Management.Automation.PSCredential]){$credential0766.Password.Dispose()}
+ $credential0766=$null
  if($process0766){$process0766.Dispose()}
  if($sourceHeld0766){$sourceGate0766.ReleaseMutex()};$sourceGate0766.Dispose()
 }

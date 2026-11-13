@@ -129,3 +129,9 @@ O instalador importa o cadastro de filiais, os códigos de cidades e as regras d
 ```
 
 A revisão do 4924 precisa cobrir o período de uso antes da troca. A primeira amostra trouxe data de criação e peso das notas para um dos 4.298 fretes já carregados. O detalhe ainda deixa em branco campos sem fonte confirmada, entre eles Valor Produtos, Valor Segurado, Seguro ID, Documento Anterior, Globalizado e Tipo Contábil Tabela. O V1 tinha valores em parte desses campos. A instalação valida a estrutura e as regras principais, e a conferência dos campos e do período antecede a troca do dashboard.
+
+## Validação do 4924 em 6 de novembro de 2026
+
+O Excel 1790139 e a API retornaram 1.073 linhas e 976 IDs de frete. A comparação por ID, minuta, peso da nota e data de criação na precisão de minuto do Excel encontrou as mesmas linhas e repetições. O recebimento gravou as 1.073 linhas e conservou as 1.070 ocorrências da captura anterior. Após a gravação, a consulta de faturamento apresentou os dois campos em 972 dos 973 fretes de 6 de novembro. O frete restante constava na captura anterior e deixou de aparecer no 4924. Trate os valores desse frete como ausentes até nova confirmação na fonte.
+
+O catálogo de edição do 4924 oferece os campos Valor Produto e Valor segurado na raiz Frete e associações para Centro de custo e Seguro. A API do relatório atual ainda entrega 54 colunas. A associação Seguro tem um campo ID próprio, cuja equivalência ao Seguro ID do V1 precisa ser conferida em dados reais antes de publicar. O campo Valor Total do Seguro é distinto do Valor segurado.
