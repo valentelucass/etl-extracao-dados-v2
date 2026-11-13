@@ -1,7 +1,7 @@
 [CmdletBinding()]
 param(
     [Parameter(Mandatory=$true)][string]$ReceiptPath,
-    [ValidateSet('References','Sinistros','Inventario','Localizacao','Faturas','ContasAPagar','Clientes','Usuarios','Raster','Coletores','Saude','Manifestos','CamposColetasFretes','CamposFaturasFretes','GestaoFretes','ColetasExcluidas')][string]$Group = 'References',
+    [ValidateSet('References','Sinistros','Inventario','Localizacao','Faturas','ContasAPagar','Clientes','Usuarios','Raster','Coletores','Saude','Manifestos','CamposColetasFretes','CamposFaturasFretes','GestaoFretes','ColetasExcluidas','FretesFaturamento')][string]$Group = 'References',
     [string[]]$CaptureReceiptPath,
     [string]$CaptureDirectory,
     [switch]$SeedLegacyUserDirectory,
@@ -67,6 +67,11 @@ $specs = switch ($Group) {
     }
     'ColetasExcluidas' {
         @{file='032_dashboard_coletas.sql'; view='vw_coletas_powerbi'; step='0791-dashboard-coletas'; columns=41}
+    }
+    'FretesFaturamento' {
+        @{file='033_dashboard_fretes_publicacao.sql'; view='dashboard_fretes_publicacao'; schema='core'; step='0792-dashboard-fretes-publicacao'}
+        @{file='034_dashboard_fretes_detalhe.sql'; view='vw_fretes_powerbi'; step='0792-dashboard-fretes-detalhe'; columns=123}
+        @{file='035_dashboard_fretes_faturamento.sql'; view='fato_fretes_faturamento'; step='0792-dashboard-fretes-faturamento'; columns=83}
     }
 }
 
@@ -177,6 +182,15 @@ IF NOT EXISTS (
         $relative = 'database/production/receiving/010_dashboard_deleted_pickups.sql'
         $countQuery = "SELECT COUNT(*) FROM ctl.production_export_template WHERE entity_name='COLETAS_EXCLUIDAS' AND report_id=12899"
         $added += Install-ReceivingPackage $relative '0791-dashboard-deleted-pickups' $countQuery 1
+    }
+    if ($Group -eq 'FretesFaturamento') {
+        $relative = 'database/production/receiving/011_dashboard_freight_references.sql'
+        $countQuery = @'
+SELECT COUNT(*) FROM sys.tables WHERE schema_id=SCHEMA_ID('ref') AND name IN (
+    'dashboard_frete_filial_documento','dashboard_frete_filial_nome',
+    'dashboard_faturamento_atribuicao_filial','dashboard_frete_cidade_destino');
+'@
+        $added += Install-ReceivingPackage $relative '0792-dashboard-frete-referencias' $countQuery 4
     }
     if ($Group -eq 'GestaoFretes') {
         $relative = 'database/production/receiving/008_dashboard_freight_rules.sql'
@@ -373,6 +387,7 @@ EXEC ctl.usp_store_dashboard_refresh_audit @source_cycle=@cycle,@started_at=@sta
         'CamposFaturasFretes' { 'dashboard-report-fields.sql' }
         'GestaoFretes' { 'dashboard-gestao-fretes.sql' }
         'ColetasExcluidas' { 'dashboard-coletas.sql' }
+        'FretesFaturamento' { 'dashboard-fretes-faturamento.sql' }
     }
     $checksPath = Join-Path $PSScriptRoot ('../validation/' + $validationScript)
     $checks = [IO.File]::ReadAllText($checksPath) -split '(?m)^-- VALIDATION BATCH\s*$'

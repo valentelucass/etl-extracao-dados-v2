@@ -1,3 +1,7 @@
+## 0792 — Consultas de detalhe e faturamento de Fretes publicadas na V2
+
+[Publicação e conferência](docs/runbooks/publicacao-operacional-dashboard.md). O detalhe tem 123 colunas e o faturamento tem 83. A validação da instalação leu 4.298 fretes distintos e 4.214 elegíveis. A comparação dos 3.260 fretes em comum com o V1 confirmou os valores e a data de referência de origem. No ensaio com o retorno do ESL da minuta 487514, o CT-e 65046 apareceu uma vez e o 65034 ficou de fora. Ainda falta ampliar a cobertura das colunas novas do 4924 e confirmar campos de detalhe sem fonte na V2. As 26 rotas em uso apontam para o V1.
+
 ## 0791 — Coletas excluídas publicadas na V2 e campos de Faturas confirmados no ESL
 
 [Publicação e conferência](docs/runbooks/publicacao-operacional-dashboard.md). A consulta de Coletas foi publicada com 41 colunas. O relatório 12899 retornou três exclusões em 10/11/2026, incluindo 129495. O SQL confirmou a gravação e a leitura dos registros. A consulta retornou 1.216 coletas, das quais 1.213 entram nos totais. A amostra de 08/11/2026 do template 4924 confirmou 54 colunas e igualdade dos dois campos novos entre a API e o Excel. O pacote Java passou em 58 testes. A credencial do usuário dedicado à extração ainda requer recuperação. A carga completa e a troca do dashboard seguem pendentes.

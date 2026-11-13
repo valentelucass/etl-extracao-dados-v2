@@ -116,3 +116,16 @@ O relatório de exclusões e Coletas usam o mesmo escopo da fonte e o ID da cole
 ```
 
 A primeira instalação registra a fonte e a projeção de 41 colunas. Antes da troca, confirme o recebimento com o pacote Java correspondente e verifique a coleta 129495 na lista e nos indicadores. A cobertura histórica depende da carga manual combinada.
+
+## Detalhe de Fretes e faturamento
+
+O detalhe tem 123 colunas e o faturamento tem 83, com os nomes, a ordem e os tipos do V1. O detalhe usa Fretes, Fatura por Cliente, Localização de Cargas e o comprovante do Inventário. A data e o peso real da nota vêm da revisão de 54 colunas do 4924. O faturamento usa a data de emissão do CT-e ou, na ausência dela, a data do frete, com o ajuste do calendário do dashboard. Fretes de cortesia, bloqueados ou com CT-e cancelado ficam fora dos valores faturáveis. Quando o CT-e cancelado tem substituto mais recente para a mesma minuta e filial, a publicação descarta o documento cancelado.
+
+O instalador importa o cadastro de filiais, os códigos de cidades e as regras de atribuição de filial do V1. As consultas publicadas leem essas referências na V2. Quando o relatório antigo de Fretes não contém o ID da filial, o vínculo usa o nome único verificado durante a instalação.
+
+```powershell
+.\scripts\operations\Install-DashboardCompatibilityViews.ps1 -Group FretesFaturamento -ReceiptPath C:\privado\fretes-faturamento-ensaio.json
+.\scripts\operations\Install-DashboardCompatibilityViews.ps1 -Group FretesFaturamento -Apply -ReceiptPath C:\privado\fretes-faturamento-aplicacao.json
+```
+
+A revisão do 4924 precisa cobrir o período de uso antes da troca. A primeira amostra trouxe data de criação e peso das notas para um dos 4.298 fretes já carregados. O detalhe ainda deixa em branco campos sem fonte confirmada, entre eles Valor Produtos, Valor Segurado, Seguro ID, Documento Anterior, Globalizado e Tipo Contábil Tabela. O V1 tinha valores em parte desses campos. A instalação valida a estrutura e as regras principais, e a conferência dos campos e do período antecede a troca do dashboard.
