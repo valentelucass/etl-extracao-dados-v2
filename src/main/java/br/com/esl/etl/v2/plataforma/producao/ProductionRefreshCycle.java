@@ -192,6 +192,14 @@ public final class ProductionRefreshCycle {
         }
     }
 
+    private static final class RejectedSnapshot extends IllegalStateException {
+        private static final long serialVersionUID = 1L;
+
+        RejectedSnapshot() {
+            super("REFRESH_SNAPSHOT_ROWS_REJECTED");
+        }
+    }
+
     private Session bounded(final Session original, final Instant deadline) {
         final var wire =
                 new ReportSnapshotExtractor.Wire() {
@@ -299,6 +307,7 @@ public final class ProductionRefreshCycle {
                         .put("publication", false);
         final var entities = report.putArray("entities");
         final var operations = report.putArray("operations");
+        final var runtimeSha = report.required("runtimeSha256").asText();
         boolean passed = true;
         saveReport(reportPath, report, session);
         try (var store = openWithSpace(config, root)) {
@@ -345,6 +354,14 @@ public final class ProductionRefreshCycle {
                     passed = false;
                     result.put("status", "FAILED").put("reason", safe(failure));
                     break;
+                }
+                if (historyState != null) {
+                    final var blocked = historyState.path("rejectedHistoryRuntime").asText();
+                    if (runtimeSha.equals(blocked)) {
+                        describeRejectedHistory(result, historyState, checkpoint, template);
+                        saveReport(reportPath, report, session);
+                        continue;
+                    }
                 }
                 try {
                     final JsonNode response;
@@ -396,6 +413,15 @@ public final class ProductionRefreshCycle {
                                                                     context.cutoff()))
                                             ? "BATCH_DEFERRED"
                                             : "BATCH_COMPLETED");
+                } catch (final RejectedSnapshot rejected) {
+                    if (historyState == null) {
+                        passed = false;
+                        result.put("status", "FAILED").put("reason", safe(rejected));
+                        break;
+                    }
+                    historyState.put("rejectedHistoryRuntime", runtimeSha);
+                    checkpoint.save();
+                    describeRejectedHistory(result, historyState, checkpoint, template);
                 } catch (final DeferredWork deferred) {
                     result.put("status", "BATCH_DEFERRED").putNull("initialRemainingDays");
                     final var deferredState = checkpoint.initialDaysRemaining(template);
@@ -421,6 +447,21 @@ public final class ProductionRefreshCycle {
                     break;
                 }
                 saveReport(reportPath, report, session);
+            }
+            if (passed
+                    && historyOnly
+                    && java.util.stream.StreamSupport.stream(entities.spliterator(), false)
+                            .anyMatch(
+                                    entity ->
+                                            "BATCH_BLOCKED".equals(entity.path("status").asText()))
+                    && java.util.stream.StreamSupport.stream(entities.spliterator(), false)
+                            .allMatch(
+                                    entity ->
+                                            "BATCH_BLOCKED".equals(entity.path("status").asText())
+                                                    || entity.path("initialComplete")
+                                                            .asBoolean())) {
+                passed = false;
+                report.put("reason", "REFRESH_HISTORY_REJECTED_DATES_PENDING");
             }
         } catch (final Exception failure) {
             passed = false;
@@ -458,6 +499,17 @@ public final class ProductionRefreshCycle {
         }
     }
 
+    private static void describeRejectedHistory(
+            final ObjectNode result,
+            final ObjectNode state,
+            final RefreshCheckpoint checkpoint,
+            final ReportSnapshotTemplate template) {
+        result.put("status", "BATCH_BLOCKED")
+                .put("reason", "REFRESH_SNAPSHOT_ROWS_REJECTED")
+                .put("pendingDay", state.required("initialNext").asText())
+                .put("initialRemainingDays", checkpoint.initialDaysRemaining(template));
+    }
+
     private Receiving openWithSpace(final JsonNode config, final Path root) throws Exception {
         requireDiskSpace(root);
         return stores.open(config);
@@ -474,6 +526,7 @@ public final class ProductionRefreshCycle {
                     count++) {
                 fullDay(context, template, next, "INITIAL");
                 state.remove("initialSourceFailures");
+                state.remove("rejectedHistoryRuntime");
                 next = next.minusDays(1);
                 state.put("initialNext", next.toString());
                 context.checkpoint().save();
@@ -883,7 +936,9 @@ public final class ProductionRefreshCycle {
                     .put("snapshotPages", result.pages())
                     .put("snapshotTerminal", result.terminal());
             require(result.terminal(), "REFRESH_SNAPSHOT_TERMINAL_MISSING");
-            require(result.rejectedRows() == 0, "REFRESH_SNAPSHOT_ROWS_REJECTED");
+            if (result.rejectedRows() != 0) {
+                throw new RejectedSnapshot();
+            }
             require(
                     result.typedRows() == result.rows() && result.rows() == rows.size(),
                     "REFRESH_SNAPSHOT_ROW_COUNT_MISMATCH");
@@ -913,6 +968,10 @@ public final class ProductionRefreshCycle {
                 context.store().fail(run, safe(failure));
             } catch (final Exception unconfirmed) {
                 operation.put("failureStateUnconfirmed", true);
+                if (failure instanceof RejectedSnapshot) {
+                    throw new IllegalStateException(
+                            "REFRESH_SQL_FAILURE_STATE_UNCONFIRMED", unconfirmed);
+                }
                 throw failure;
             }
             if (context.historyOnly()

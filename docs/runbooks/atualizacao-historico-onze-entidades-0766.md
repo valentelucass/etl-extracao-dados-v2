@@ -72,7 +72,7 @@ No terminal do servidor, na sessão `suporte`, execute o arquivo `CARGA_90_DIAS.
 
 O arquivo usa a credencial criptografada da conta do extrator. A carga fixa os 90 dias civis, incluindo o dia do primeiro lote, e termina quando as 12 fontes concluírem o período. Ela processa até oito datas por fonte por lote e inicia o seguinte assim que o anterior terminar. O progresso fica na pasta operacional e permite retomar a mesma carga. Com `--verificar`, o arquivo apenas confere os arquivos do extrator e da configuração.
 
-O arquivo usa `historico-90-dias-settings.json` e `runtime-manifest-dashboard-fields-0805.json` no armazenamento privado. Use o mesmo manifesto ao iniciar futuramente a atualização contínua com `operational-settings.json`. As duas configurações usam o mesmo progresso.
+O arquivo usa `historico-90-dias-settings.json` e `runtime-manifest-dashboard-fields-0806.json` no armazenamento privado. Use o mesmo manifesto ao iniciar futuramente a atualização contínua com `operational-settings.json`. As duas configurações usam o mesmo progresso.
 
 Em outro terminal, rode `./CARGA_90_DIAS.bat --acompanhar` para ver o relatório em extração, a data, a página, a última resposta do ESL e o total de dias já gravados no banco. O acompanhamento usa os registros da carga em andamento. Fechar essa segunda janela encerra apenas a leitura do progresso.
 
@@ -124,6 +124,14 @@ O lote `d5f9840bf2db4e4993465a44196c5d4c` concluiu oito datas de cada uma das 12
 A recuperação automática usa o mesmo identificador de execução e a captura completa já em memória. Se a gravação exceder 30 segundos, verifica o estado no SQL sob o mesmo bloqueio do escritor. Uma execução ainda em andamento e sem transação aberta pode repetir a gravação uma vez, com limite de 120 segundos. Uma execução já gravada segue para conferência sem repetir a gravação. Se apenas a releitura exceder o limite inicial, repete somente a releitura. O cursor continua condicionado à conferência integral. Falhas persistentes param o lote com código de gravação, releitura ou transação pendente.
 
 Para recuperar a data que já havia falhado, a captura original foi reutilizada em uma nova execução SQL, com limite inicial de um segundo no teste. As 7.855 linhas foram conferidas por ordem, conteúdo e hash. O teste atualizou o índice de dependências e só então avançou o cursor de Ocorrências para 27/09. Nenhuma requisição adicional ao ESL foi necessária. A suíte selecionada voltou a passar nos 91 testes.
+
+### Continuidade do histórico quando uma fonte rejeita linhas
+
+O lote `faed0d771a45437ba0205769c32f9d02` confirmou 35 combinações e 54.281 linhas no SQL. Em Manifestos de 19/10/2026, a captura completa trouxe 2.381 linhas e 91 campos. Em 12 linhas de três manifestos, `mft_iks_id` veio como inteiro, conforme o catálogo da planilha do ESL. O mapeador agora aceita essa representação e preserva o tipo recebido. O SQL confirmou que a tentativa original ficou sem linhas parciais.
+
+Na carga inicial, se uma captura completa rejeitar linhas e o SQL confirmar o encerramento da tentativa, o dia permanece pendente para correção e as demais fontes seguem. O acionador evita baixar o mesmo dia novamente com o mesmo pacote. Quando só restarem fontes com pendências desse tipo, a carga para e informa as datas. Uma versão corrigida volta a processar a data pendente. A cobertura continua condicionada à captura integral e à conferência no SQL. O tratamento aplica-se à carga inicial e a rejeições de linha após a página terminal.
+
+As três páginas originais de Manifestos de 19/10 foram reprocessadas e as 2.381 linhas passaram pela releitura exata no SQL. O cursor avançou para 18/10 sem consultar o ESL. Foram reprocessadas 425 capturas completas disponíveis das 12 fontes, somando 514.154 linhas em 333 combinações distintas. Passaram 94 testes selecionados, incluindo continuidade das outras fontes, retomada da data pendente com nova versão e parada quando só restarem datas rejeitadas.
 
 ## Verificação executada e limites do aceite
 

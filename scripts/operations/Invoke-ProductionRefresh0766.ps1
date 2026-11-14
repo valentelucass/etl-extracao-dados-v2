@@ -92,7 +92,8 @@ if(-not $Worker -and -not $Verify){
     Write-RefreshSupervisor0766 ([ordered]@{phase='FAILED';cycle=$id0766;completedAt=$finished0766.ToString('o');nextEligibleAt=$null})
     if($HistoryOnly){
      $failure0766=@($report0766.entities | Where-Object status -CEQ 'FAILED') | Select-Object -Last 1
-     $cause0766=if($failure0766){$failure0766.entity+': '+$failure0766.reason}elseif($report0766.reason){$report0766.reason}elseif($outcome0766.job.TimedOut){'tempo limite do processo'}else{'processo encerrado sem confirmar o lote'}
+     $blocked0766=@($report0766.entities | Where-Object status -CEQ 'BATCH_BLOCKED')
+     $cause0766=if($failure0766){$failure0766.entity+': '+$failure0766.reason}elseif($report0766.reason -ceq 'REFRESH_HISTORY_REJECTED_DATES_PENDING' -and $blocked0766.Count){($blocked0766 | ForEach-Object {$_.entity+' '+$_.pendingDay+' ('+$_.reason+')'}) -join ', '}elseif($report0766.reason){$report0766.reason}elseif($outcome0766.job.TimedOut){'tempo limite do processo'}else{'processo encerrado sem confirmar o lote'}
      Write-Output ('Lote interrompido ('+$cause0766+'). Consulte '+$reportPath0766)
     }
     throw 'REFRESH_BATCH_FAILED_STOP_PRESERVED'
@@ -110,6 +111,9 @@ if(-not $Worker -and -not $Verify){
     $remainingDays0766=($report0766.entities | Where-Object {$null -ne $_.initialRemainingDays} | Measure-Object -Property initialRemainingDays -Maximum).Maximum
     foreach($pending0766 in @($report0766.entities | Where-Object {$_.status -ceq 'BATCH_DEFERRED' -and $_.reason})){
      Write-Output ($pending0766.entity+' ficou pendente para o proximo lote ('+$pending0766.reason+').')
+    }
+    foreach($blocked0766 in @($report0766.entities | Where-Object status -CEQ 'BATCH_BLOCKED')){
+     Write-Output ($blocked0766.entity+' de '+$blocked0766.pendingDay+' aguarda correcao ('+$blocked0766.reason+'). As demais fontes seguem.')
     }
     if($null -ne $remainingDays0766){
      Write-Output ('Lote encerrado. Restam ate '+$remainingDays0766+' dias por entidade. Relatorio: '+$reportPath0766)

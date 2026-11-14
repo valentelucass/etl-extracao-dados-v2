@@ -111,6 +111,63 @@ class ProductionRefreshCycleTest {
     }
 
     @Test
+    void historyIsolatesRejectedRowsAndRetriesThatDateWithNewRuntime() throws Exception {
+        final var fixture = new Fixture(directory);
+        fixture.config.put("historyOnly", true).put("historyDays", 90).put("initialBatchDays", 1);
+        final var day = fixture.today();
+        final var key = "MANIFESTOS:" + day;
+        fixture.rejectedManifest = true;
+        assertTrue(fixture.run());
+        assertEquals(11, fixture.store.latest.size());
+        assertFalse(fixture.store.latest.containsKey(key));
+        assertEquals(1, fixture.rejectedManifestCaptures);
+        assertEquals(
+                day.toString(),
+                fixture.entity(ReportSnapshotTemplate.MANIFESTOS).path("initialNext").asText());
+        assertTrue(fixture.lastReport.required("entities").toString().contains("BATCH_BLOCKED"));
+
+        assertTrue(fixture.run());
+        assertEquals(22, fixture.store.latest.size());
+        assertEquals(1, fixture.rejectedManifestCaptures);
+        assertFalse(fixture.store.latest.containsKey(key));
+
+        fixture.rejectedManifest = false;
+        fixture.config.put("runtimeSha256", "b".repeat(64));
+        assertTrue(fixture.run());
+        assertEquals(1, fixture.store.commits.stream().filter(key::equals).count());
+        assertFalse(
+                fixture.entity(ReportSnapshotTemplate.MANIFESTOS).has("rejectedHistoryRuntime"));
+    }
+
+    @Test
+    void historyStopsWhenOnlyRejectedDatesRemain() throws Exception {
+        final var fixture = new Fixture(directory);
+        fixture.config.put("historyOnly", true).put("historyDays", 90).put("initialBatchDays", 1);
+        fixture.seedReady();
+        final var day = fixture.today();
+        final var scope =
+                CurlSnapshotWire.JSON
+                        .readTree(Files.readAllBytes(directory.resolve("checkpoint.json")))
+                        .required("payload")
+                        .required("sourceScope")
+                        .asText();
+        final var checkpoint =
+                new RefreshCheckpoint(directory.resolve("checkpoint.json"), scope, fixture.now);
+        final var manifest =
+                checkpoint.entity(ReportSnapshotTemplate.MANIFESTOS, day, null, day, fixture.now);
+        manifest.put("initialComplete", false).put("initialNext", day.toString());
+        checkpoint.save();
+        fixture.rejectedManifest = true;
+
+        assertFalse(fixture.run());
+        assertFalse(fixture.lastReport.path("initialComplete").asBoolean());
+        assertEquals(
+                "REFRESH_HISTORY_REJECTED_DATES_PENDING",
+                fixture.lastReport.path("reason").asText());
+        assertFalse(fixture.store.latest.containsKey("MANIFESTOS:" + day));
+    }
+
+    @Test
     void transientFreightMetadataTimeoutLeavesTheDatePendingAndContinues() throws Exception {
         final var fixture = new Fixture(directory);
         fixture.config.put("historyOnly", true).put("historyDays", 90).put("initialBatchDays", 1);
@@ -483,6 +540,8 @@ class ProductionRefreshCycleTest {
         boolean locationChangeDuringLookup;
         boolean freightSourceFailure;
         boolean freightMetadataFailure;
+        boolean rejectedManifest;
+        int rejectedManifestCaptures;
         long availableBytes = Long.MAX_VALUE;
         int occurrenceFloorCaptures;
 
@@ -642,6 +701,12 @@ class ProductionRefreshCycleTest {
                             }
                         } else {
                             fullCalls++;
+                            if (rejectedManifest && template == ReportSnapshotTemplate.MANIFESTOS) {
+                                rejectedManifestCaptures++;
+                                sink.accept(id, 1, row(template, dates.startInclusive()), null);
+                                return new ReportSnapshotExtractor.Result(
+                                        id, 1, 0, 1, metadata.fieldCount(template), 2, true, false);
+                            }
                             if (freightSourceFailure && template == ReportSnapshotTemplate.FRETES) {
                                 sink.accept(
                                         id, 1, row(template, dates.startInclusive()), new Valid());

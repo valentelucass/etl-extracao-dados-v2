@@ -87,6 +87,25 @@ class ManifestoDataExportRecordMapperTest {
     }
 
     @Test
+    void preservesMonitoringRequestIdWhetherIntegerOrText() {
+        final ObjectNode input = baseline();
+        input.put("mft_iks_id", 123);
+        final var integer = mapper.map(1, input);
+        assertEquals(ManifestoStageDisposition.VALID, integer.disposition());
+        assertEquals("123", integer.rootFields().get("mft_iks_id").canonicalJson());
+        assertTrue(node(integer.payloadJson()).path("mft_iks_id").isIntegralNumber());
+
+        input.put("mft_iks_id", "00123");
+        final var text = mapper.map(2, input);
+        assertEquals("\"00123\"", text.rootFields().get("mft_iks_id").canonicalJson());
+
+        input.put("mft_iks_id", 1.5);
+        assertEquals("INVALID_TEXT_FIELD_TYPE", mapper.map(3, input).quarantineReasonCode());
+        input.put("mft_iks_id", true);
+        assertEquals("INVALID_TEXT_FIELD_TYPE", mapper.map(4, input).quarantineReasonCode());
+    }
+
+    @Test
     void preservesObservedNumberWithoutKeyAndKeepsOtherMdfesOnTheSameManifest() {
         final ObjectNode input = baseline();
         input.putNull("mft_mfs_key");
