@@ -72,7 +72,7 @@ No terminal do servidor, na sessão `suporte`, execute o arquivo `CARGA_90_DIAS.
 
 O arquivo usa a credencial criptografada da conta do extrator. A carga fixa os 90 dias civis, incluindo o dia do primeiro lote, e termina quando as 12 fontes concluírem o período. Ela processa até oito datas por fonte por lote e inicia o seguinte assim que o anterior terminar. O progresso fica na pasta operacional e permite retomar a mesma carga. Com `--verificar`, o arquivo apenas confere os arquivos do extrator e da configuração.
 
-O arquivo usa `historico-90-dias-settings.json` e `runtime-manifest-dashboard-fields-0804.json` no armazenamento privado. Use o mesmo manifesto ao iniciar futuramente a atualização contínua com `operational-settings.json`. As duas configurações usam o mesmo progresso.
+O arquivo usa `historico-90-dias-settings.json` e `runtime-manifest-dashboard-fields-0805.json` no armazenamento privado. Use o mesmo manifesto ao iniciar futuramente a atualização contínua com `operational-settings.json`. As duas configurações usam o mesmo progresso.
 
 Em outro terminal, rode `./CARGA_90_DIAS.bat --acompanhar` para ver o relatório em extração, a data, a página, a última resposta do ESL e o total de dias já gravados no banco. O acompanhamento usa os registros da carga em andamento. Fechar essa segunda janela encerra apenas a leitura do progresso.
 
@@ -116,6 +116,14 @@ Foram reprocessadas 266 capturas completas, com 324.090 linhas e 187 combinaçõ
 O recibo de uma nova captura registra total de linhas, linhas mapeadas, linhas rejeitadas, páginas e indicação da página vazia. Os códigos distinguem ausência da página terminal, rejeição de linha, divergência na contagem de linhas e divergência na quantidade de campos. Os testes automatizados passaram em 91 cenários selecionados. A verificação cobre as capturas disponíveis e os casos de falha exercitados. As demais datas dependem da execução histórica.
 
 O lote de verificação `9209bc7b71be4864af54714dc252ec56` usou uma cópia do progresso para extrair a próxima data pendente de cada uma das 12 fontes. Foram 57 requisições ao ESL, 7.459 linhas confirmadas por releitura exata na V2 e zero rejeições. As três respostas de Manifestos de 30/10 foram idênticas às que haviam provocado a interrupção. A verificação gravou as datas de amostra na V2 e preservou o ponto de retomada da carga oficial.
+
+### Recuperação de tempo limite do SQL na gravação de uma data
+
+O lote `d5f9840bf2db4e4993465a44196c5d4c` concluiu oito datas de cada uma das 12 fontes. A reconciliação confirmou as 96 combinações e 87.275 linhas no SQL. O lote seguinte, `f9e4ec874e114da5b5aaa6781c6a2947`, confirmou outras 14 combinações e 30.813 linhas antes de parar em Ocorrências de 28/09/2026. O ESL havia entregado a página vazia final e as 7.855 linhas haviam sido mapeadas. O SQL registrou a execução como falha, sem linhas parciais.
+
+A recuperação automática usa o mesmo identificador de execução e a captura completa já em memória. Se a gravação exceder 30 segundos, verifica o estado no SQL sob o mesmo bloqueio do escritor. Uma execução ainda em andamento e sem transação aberta pode repetir a gravação uma vez, com limite de 120 segundos. Uma execução já gravada segue para conferência sem repetir a gravação. Se apenas a releitura exceder o limite inicial, repete somente a releitura. O cursor continua condicionado à conferência integral. Falhas persistentes param o lote com código de gravação, releitura ou transação pendente.
+
+Para recuperar a data que já havia falhado, a captura original foi reutilizada em uma nova execução SQL, com limite inicial de um segundo no teste. As 7.855 linhas foram conferidas por ordem, conteúdo e hash. O teste atualizou o índice de dependências e só então avançou o cursor de Ocorrências para 27/09. Nenhuma requisição adicional ao ESL foi necessária. A suíte selecionada voltou a passar nos 91 testes.
 
 ## Verificação executada e limites do aceite
 

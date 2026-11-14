@@ -8,6 +8,7 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLTimeoutException;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Properties;
@@ -15,6 +16,7 @@ import java.util.UUID;
 
 /** Parameterized, least-privilege receiving entrypoints and byte-exact independent SQL readback. */
 final class AllEntitiesIngestionStore implements AutoCloseable {
+    private static final int REFRESH_RECOVERY_TIMEOUT_SECONDS = 120;
     private final Connection connection;
 
     static String targetUrl(final String base) {
@@ -113,7 +115,76 @@ final class AllEntitiesIngestionStore implements AutoCloseable {
         storeAndVerify(run, rows, captureSha, 120);
     }
 
+    void storeRefreshAndVerify(final UUID run, final List<String> rows, final String captureSha)
+            throws Exception {
+        storeRefreshAndVerify(run, rows, captureSha, 30);
+    }
+
+    private void storeRefreshAndVerify(
+            final UUID run, final List<String> rows, final String captureSha, final int timeout)
+            throws Exception {
+        try {
+            writeRows(run, rows, captureSha, timeout);
+        } catch (final SQLTimeoutException timedOut) {
+            recoverWrite(run, rows, captureSha);
+            verifyRefreshRows(run, rows, captureSha, REFRESH_RECOVERY_TIMEOUT_SECONDS);
+            return;
+        }
+        try {
+            verifyRows(run, rows, captureSha, timeout);
+        } catch (final SQLTimeoutException timedOut) {
+            verifyRefreshRows(run, rows, captureSha, REFRESH_RECOVERY_TIMEOUT_SECONDS);
+        }
+    }
+
+    private void recoverWrite(final UUID run, final List<String> rows, final String captureSha)
+            throws Exception {
+        // A timeout can lose the response after COMMIT. Check the same run under the
+        // existing session lock before deciding whether a second write is necessary.
+        try (var command = connection.prepareCall("SELECT @@TRANCOUNT;")) {
+            command.setQueryTimeout(10);
+            try (var state = command.executeQuery()) {
+                require(state.next() && state.getInt(1) == 0, "REFRESH_SQL_TRANSACTION_UNRESOLVED");
+            }
+        }
+        final String status;
+        try (var command = connection.prepareCall("EXEC ctl.usp_production_ingestion_observe ?")) {
+            command.setQueryTimeout(10);
+            command.setString(1, run.toString());
+            try (var state = command.executeQuery()) {
+                require(state.next(), "REFRESH_SQL_WRITE_STATE_REQUIRED");
+                status = state.getString("run_state");
+            }
+        }
+        if ("RUNNING".equals(status)) {
+            try {
+                writeRows(run, rows, captureSha, REFRESH_RECOVERY_TIMEOUT_SECONDS);
+            } catch (final SQLTimeoutException timedOutAgain) {
+                throw new IllegalStateException("REFRESH_SQL_STORE_TIMEOUT", timedOutAgain);
+            }
+        } else {
+            require("STORED".equals(status), "REFRESH_SQL_WRITE_STATE_UNEXPECTED");
+        }
+    }
+
+    private void verifyRefreshRows(
+            final UUID run, final List<String> rows, final String captureSha, final int timeout)
+            throws Exception {
+        try {
+            verifyRows(run, rows, captureSha, timeout);
+        } catch (final SQLTimeoutException timedOutAgain) {
+            throw new IllegalStateException("REFRESH_SQL_READBACK_TIMEOUT", timedOutAgain);
+        }
+    }
+
     private void storeAndVerify(
+            final UUID run, final List<String> rows, final String captureSha, final int timeout)
+            throws Exception {
+        writeRows(run, rows, captureSha, timeout);
+        verifyRows(run, rows, captureSha, timeout);
+    }
+
+    private void writeRows(
             final UUID run, final List<String> rows, final String captureSha, final int timeout)
             throws Exception {
         try (var command =
@@ -125,6 +196,11 @@ final class AllEntitiesIngestionStore implements AutoCloseable {
             command.setString(4, captureSha);
             command.execute();
         }
+    }
+
+    private void verifyRows(
+            final UUID run, final List<String> rows, final String captureSha, final int timeout)
+            throws Exception {
         try (var command = connection.prepareCall("EXEC ctl.usp_production_ingestion_observe ?")) {
             command.setQueryTimeout(timeout);
             command.setString(1, run.toString());

@@ -148,7 +148,7 @@ public final class ProductionRefreshCycle {
             public void storeAndVerify(
                     final UUID run, final List<String> rows, final String captureSha)
                     throws Exception {
-                store.storeAndVerify(run, rows, captureSha);
+                store.storeRefreshAndVerify(run, rows, captureSha);
             }
 
             @Override
