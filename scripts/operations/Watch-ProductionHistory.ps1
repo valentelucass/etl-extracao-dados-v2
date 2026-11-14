@@ -23,6 +23,32 @@ function Read-StatusJson([string]$Path) {
     }
 }
 
+function Read-LatestLedgerEvent([string]$Path) {
+    try {
+        $lines = @(Get-Content -LiteralPath $Path -Tail 6 -Encoding utf8)
+    } catch [System.IO.IOException] {
+        return $null
+    } catch [System.Management.Automation.ItemNotFoundException] {
+        return $null
+    }
+    # The worker can append events while the monitor is reading. Parse each line
+    # independently and fall back to the last complete event if the tail is partial.
+    for ($index = $lines.Count - 1; $index -ge 0; $index--) {
+        try {
+            $candidate = ConvertFrom-Json -InputObject $lines[$index]
+        } catch {
+            continue
+        }
+        $reportId = 0
+        if ($candidate -is [pscustomobject] -and
+            [int]::TryParse([string]$candidate.reportId, [ref]$reportId) -and
+            $labels.ContainsKey($reportId) -and
+            $candidate.state -cin @('RESERVED', 'OBSERVED', 'RETRY_WAIT')) {
+            return $candidate
+        }
+    }
+}
+
 $lastMessage = $null
 $lastPrinted = [DateTime]::MinValue
 do {
@@ -53,11 +79,7 @@ do {
         $message = "Parada solicitada pelo operador. $progress."
     } elseif ($report -and -not $report.completedAt) {
         $ledger = Join-Path $state ('captures\' + $reportFile.BaseName + '\ledger.jsonl')
-        $event = $null
-        if (Test-Path -LiteralPath $ledger -PathType Leaf) {
-            try { $event = Get-Content -LiteralPath $ledger -Tail 1 -Encoding utf8 | ConvertFrom-Json }
-            catch { $event = $null }
-        }
+        $event = Read-LatestLedgerEvent $ledger
         if ($event) {
             $label = $labels[[int]$event.reportId]
             $page = if ($event.page -eq 0) { 'metadados' } else { "$($event.day), pagina $($event.page)" }
