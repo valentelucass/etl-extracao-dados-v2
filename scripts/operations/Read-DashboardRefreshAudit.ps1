@@ -31,6 +31,45 @@ if (-not $report.passed -and $failure -cnotmatch '^[A-Z0-9_]{1,96}$') { throw 'R
 
 $status=@(Get-ChildItem -LiteralPath $directory.FullName -Filter '*.status' -File)
 if ($status.Count -ne $report.http) { throw 'REFRESH_AUDIT_REQUEST_COUNT_DIFFERS' }
+
+# A retry keeps the same report, day and page and receives the next request number.
+# Keep the final attempt so a successful retry and a terminal failure are still checked below.
+$ledger = Join-Path $directory.FullName 'ledger.jsonl'
+if (Test-Path -LiteralPath $ledger -PathType Leaf) {
+    $filesByName = @{}
+    foreach ($entry in $status) { $filesByName[$entry.Name] = $entry }
+    $superseded = [Collections.Generic.HashSet[string]]::new([StringComparer]::Ordinal)
+    $observed = $null
+    foreach ($line in [IO.File]::ReadLines($ledger)) {
+        if ($line -clike '*"state":"OBSERVED"*') {
+            $observed = ConvertFrom-Json -InputObject $line
+            continue
+        }
+        if ($line -cnotlike '*"state":"RETRY_WAIT"*') { continue }
+        $retry = ConvertFrom-Json -InputObject $line
+        # Metadata and update discovery are not daily snapshots in the audit.
+        if ($retry.day -ceq 'info' -or $retry.day -cmatch '^update-\d+-\d{4}-\d{2}-\d{2}$') { continue }
+        if ($retry.state -cne 'RETRY_WAIT' -or $retry.request -notmatch '^\d{1,4}$' -or
+            $retry.reportId -notmatch '^\d{4,5}$' -or $retry.day -cnotmatch '^\d{4}-\d{2}-\d{2}$' -or
+            $retry.page -notmatch '^\d{1,3}$' -or $retry.http -notmatch '^\d{1,3}$') {
+            throw 'REFRESH_AUDIT_RETRY_RECORD_INVALID'
+        }
+        $attempt = '{0:0000}-{1}-{2}-{3:000}.status' -f [int]$retry.request, $retry.reportId, $retry.day, [int]$retry.page
+        $next = '{0:0000}-{1}-{2}-{3:000}.status' -f (1 + [int]$retry.request), $retry.reportId, $retry.day, [int]$retry.page
+        if ($filesByName.ContainsKey($attempt) -and $filesByName.ContainsKey($next)) {
+            $http = [IO.File]::ReadAllText($filesByName[$attempt].FullName).Trim()
+            $statusCode = if ($http -cmatch '^\d{3}$') { [int]$http } else { 0 }
+            if ($observed.request -ne $retry.request -or $observed.reportId -ne $retry.reportId -or
+                $observed.day -cne $retry.day -or $observed.page -ne $retry.page -or
+                $observed.http -ne $retry.http -or $statusCode -ne $retry.http -or
+                ($statusCode -eq 200 -and -not $observed.curlExit)) {
+                throw 'REFRESH_AUDIT_RETRY_HTTP_DIFFERS'
+            }
+            $null = $superseded.Add($attempt)
+        }
+    }
+    $status = @($status | Where-Object { -not $superseded.Contains($_.Name) })
+}
 $operations=@($report.operations | Where-Object {$_.runId -and -not $_.failureStateUnconfirmed})
 $seen=@{}
 $details=@(foreach ($operation in $operations) {

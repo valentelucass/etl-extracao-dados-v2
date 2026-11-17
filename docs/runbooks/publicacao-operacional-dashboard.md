@@ -141,3 +141,11 @@ Após o ciclo de um dia das 12 fontes, a consulta de faturamento excedeu 35 segu
 O ensaio da consulta de 6 de novembro retornou 1.000 fretes, sendo 982 elegíveis, em 4,4 segundos. O ensaio do instalador, a aplicação na V2 e a releitura com a conta do dashboard passaram. A leitura de todo o período então carregado confirmou 5.365 fretes distintos, 5.273 elegíveis e valor faturável zero para os inelegíveis. As 26 consultas passaram na V2. A verificação usou o histórico disponível na data do teste. O dashboard segue com as 26 consultas na V1 até validar a cobertura de 90 dias e os campos de detalhe ainda sem fonte confirmada.
 
 O catálogo de edição do 4924 oferece os campos Valor Produto e Valor segurado na raiz Frete e associações para Centro de custo e Seguro. A API do relatório atual ainda entrega 54 colunas. A associação Seguro tem um campo ID próprio, cuja equivalência ao Seguro ID do V1 precisa ser conferida em dados reais antes de publicar. O campo Valor Total do Seguro é distinto do Valor segurado.
+
+### Auditoria da carga de 90 dias
+
+A V2 registra os dados recebidos e usa os recibos dos lotes para publicar o painel de Saúde do ETL. Um lote publicado no painel mantém seus horários, páginas, estado e quantidades verificados. Quando o diário confirma uma nova tentativa para a mesma página, a auditoria analisa a tentativa final sem contar duas vezes a página.
+
+O SQL registra as credenciais em arquivos protegidos do usuário Windows. As variáveis `RODOGARCIA_SQL_ADMIN_CREDENTIAL_FILE` e `RODOGARCIA_ETL_V2_SQL_CREDENTIAL_FILE` apontam para esses arquivos. Os comandos reutilizam o acesso salvo. Quando a senha do SQL muda, recadastre a credencial no servidor pela entrada oculta.
+
+A coluna Registros extraídos mostra as linhas novas ou alteradas daquela execução. A coluna No-op mostra as linhas iguais à captura anterior. Uma execução completa com ambos os campos zerados confirma que aquela consulta retornou vazia. Para conferir a carga histórica, use a cobertura de fonte e data e as linhas vigentes do recebimento.
