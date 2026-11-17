@@ -38,7 +38,14 @@ class HttpDataExportObservationClientTest {
     @ParameterizedTest
     @EnumSource(
             value = DataExportTemplate.class,
-            names = {"COLETAS", "FRETES"},
+            names = {
+                "COLETAS",
+                "FRETES",
+                "CONSOLIDACAO_DETALHADA",
+                "OCORRENCIAS",
+                "COLETAS_EXCLUIDAS",
+                "COMPROVANTES_ENTREGA"
+            },
             mode = EnumSource.Mode.EXCLUDE)
     void infoOnlyRoutesCannotInventRemotePerFromCandidateRoot(final DataExportTemplate template) {
         final var http = new FakeClient(physicalInfo(template), "{\"data\":[]}");
@@ -630,7 +637,14 @@ class HttpDataExportObservationClientTest {
     @ParameterizedTest
     @EnumSource(
             value = DataExportTemplate.class,
-            names = {"COLETAS", "FRETES"},
+            names = {
+                "COLETAS",
+                "FRETES",
+                "CONSOLIDACAO_DETALHADA",
+                "OCORRENCIAS",
+                "COLETAS_EXCLUIDAS",
+                "COMPROVANTES_ENTREGA"
+            },
             mode = EnumSource.Mode.EXCLUDE)
     void physicalModeUsesInfoAndOneFinitePageWithoutCanonicalRoot(final DataExportTemplate template)
             throws Exception {

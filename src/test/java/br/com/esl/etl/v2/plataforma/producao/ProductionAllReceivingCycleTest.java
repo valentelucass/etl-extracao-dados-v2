@@ -68,7 +68,7 @@ class ProductionAllReceivingCycleTest {
     @ParameterizedTest
     @EnumSource(
             value = ReportSnapshotTemplate.class,
-            names = "COLETAS_EXCLUIDAS",
+            names = {"COLETAS_EXCLUIDAS", "COMPROVANTES_ENTREGA"},
             mode = EnumSource.Mode.EXCLUDE)
     void qualifiedMetadataMustMatchEveryFieldAndFilter(final ReportSnapshotTemplate template)
             throws Exception {

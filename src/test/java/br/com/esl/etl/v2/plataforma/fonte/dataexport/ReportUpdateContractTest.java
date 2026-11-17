@@ -30,7 +30,8 @@ class ReportUpdateContractTest {
         final var contract = ReportUpdateContract.forTemplate(template);
         if (template == ReportSnapshotTemplate.CONTAS_A_PAGAR
                 || template == ReportSnapshotTemplate.SINISTROS
-                || template == ReportSnapshotTemplate.COLETAS_EXCLUIDAS) {
+                || template == ReportSnapshotTemplate.COLETAS_EXCLUIDAS
+                || template == ReportSnapshotTemplate.COMPROVANTES_ENTREGA) {
             assertNull(contract);
             return;
         }
@@ -104,7 +105,7 @@ class ReportUpdateContractTest {
         final var infos = infos();
         final var catalog = new ReportMetadataCatalog();
         int fields = 0;
-        for (final var template : ReportSnapshotTemplate.values()) {
+        for (final var template : ReportSnapshotTemplate.receivingTemplates()) {
             fields += catalog.validate(template, infos.get(template)).size();
         }
         assertEquals(518, fields);

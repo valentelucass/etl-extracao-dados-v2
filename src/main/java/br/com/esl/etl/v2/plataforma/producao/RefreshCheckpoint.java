@@ -133,7 +133,7 @@ final class RefreshCheckpoint {
     }
 
     boolean allInitialized() {
-        for (final var template : ReportSnapshotTemplate.values()) {
+        for (final var template : ReportSnapshotTemplate.receivingTemplates()) {
             if (!payload.required("entities")
                     .path(template.name())
                     .path("initialComplete")

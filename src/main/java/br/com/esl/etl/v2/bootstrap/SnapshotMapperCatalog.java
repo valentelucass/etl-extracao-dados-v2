@@ -1,6 +1,7 @@
 package br.com.esl.etl.v2.bootstrap;
 
 import br.com.esl.etl.v2.modulos.coletas.aplicacao.ColetaDataExportRecordMapper;
+import br.com.esl.etl.v2.modulos.comprovantesentrega.aplicacao.ComprovanteEntregaDataExportMapper;
 import br.com.esl.etl.v2.modulos.consolidacoes.aplicacao.ConsolidacaoDataExportMapper;
 import br.com.esl.etl.v2.modulos.contasapagar.aplicacao.ContaPagarDataExportMapper;
 import br.com.esl.etl.v2.modulos.cotacoes.aplicacao.CotacaoDataExportRecordMapper;
@@ -26,6 +27,7 @@ public final class SnapshotMapperCatalog {
         final JsonNode row = input.value();
         final var envelope = CurlSnapshotWire.JSON.createObjectNode().set("data", row);
         return switch (template) {
+            case COMPROVANTES_ENTREGA -> new ComprovanteEntregaDataExportMapper().map(row);
             case CONSOLIDACAO_DETALHADA -> new ConsolidacaoDataExportMapper().map(row);
             case OCORRENCIAS -> new OcorrenciaDataExportMapper().map(row);
             case COLETAS ->

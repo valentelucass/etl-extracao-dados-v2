@@ -334,7 +334,7 @@ public final class ProductionRefreshCycle {
                             operations,
                             new HashMap<>(),
                             new HashMap<>());
-            for (final var template : ReportSnapshotTemplate.values()) {
+            for (final var template : ReportSnapshotTemplate.receivingTemplates()) {
                 final var result =
                         entities.addObject()
                                 .put("entity", template.name())
@@ -468,7 +468,7 @@ public final class ProductionRefreshCycle {
             report.put("reason", safe(failure));
         } finally {
             final var completed = clock.instant();
-            if (passed && entities.size() == ReportSnapshotTemplate.values().length) {
+            if (passed && entities.size() == ReportSnapshotTemplate.receivingTemplates().size()) {
                 try {
                     checkpoint.completed(completed);
                 } catch (final Exception failure) {
@@ -487,7 +487,9 @@ public final class ProductionRefreshCycle {
                     .put("initialComplete", checkpoint.allInitialized())
                     .put(
                             "passed",
-                            passed && entities.size() == ReportSnapshotTemplate.values().length);
+                            passed
+                                    && entities.size()
+                                            == ReportSnapshotTemplate.receivingTemplates().size());
             saveReport(reportPath, report, session);
         }
         return report.path("passed").asBoolean();

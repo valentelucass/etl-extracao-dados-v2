@@ -29,7 +29,10 @@ import java.util.UUID;
 public final class ProductionAllReceivingCycle {
     // This cycle is pinned to the original receiving catalog.
     private static final EnumSet<ReportSnapshotTemplate> TEMPLATES =
-            EnumSet.complementOf(EnumSet.of(ReportSnapshotTemplate.COLETAS_EXCLUIDAS));
+            EnumSet.complementOf(
+                    EnumSet.of(
+                            ReportSnapshotTemplate.COLETAS_EXCLUIDAS,
+                            ReportSnapshotTemplate.COMPROVANTES_ENTREGA));
 
     @FunctionalInterface
     public interface CapturePort {

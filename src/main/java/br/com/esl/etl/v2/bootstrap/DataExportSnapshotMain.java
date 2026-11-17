@@ -4,6 +4,7 @@ import br.com.esl.etl.v2.modulos.consolidacoes.aplicacao.ExtrairConsolidacaoData
 import br.com.esl.etl.v2.modulos.ocorrencias.aplicacao.ExtrairOcorrenciaDataExport;
 import br.com.esl.etl.v2.plataforma.fonte.dataexport.BusinessDateRange;
 import br.com.esl.etl.v2.plataforma.fonte.dataexport.CurlSnapshotWire;
+import br.com.esl.etl.v2.plataforma.fonte.dataexport.ReportMetadataCatalog;
 import br.com.esl.etl.v2.plataforma.fonte.dataexport.ReportSnapshotExtractor;
 import br.com.esl.etl.v2.plataforma.fonte.dataexport.ReportSnapshotTemplate;
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -48,9 +49,20 @@ public final class DataExportSnapshotMain {
     }
 
     public static void main(final String[] args) throws Exception {
-        if (args.length != 5) {
-            throw new IllegalArgumentException("SNAPSHOT_FIVE_ARGUMENTS");
+        if (args.length != 5 && args.length != 6) {
+            throw new IllegalArgumentException("SNAPSHOT_FIVE_OR_SIX_ARGUMENTS");
         }
+        final var templates =
+                args.length == 5
+                        ? ReportSnapshotTemplate.receivingTemplates()
+                        : java.util.List.of(
+                                switch (args[5]) {
+                                    case "11067" -> ReportSnapshotTemplate.CONSOLIDACAO_DETALHADA;
+                                    case "11361" -> ReportSnapshotTemplate.COMPROVANTES_ENTREGA;
+                                    default ->
+                                            throw new IllegalArgumentException(
+                                                    "SNAPSHOT_REPORT_ID");
+                                });
         final Path env = Path.of(args[0]).toAbsolutePath().normalize();
         final Path root = Path.of(args[1]).toAbsolutePath().normalize();
         final Path receipt = Path.of(args[2]).toAbsolutePath().normalize();
@@ -94,7 +106,11 @@ public final class DataExportSnapshotMain {
         final var entities = report.putArray("entities");
         final var wire =
                 new CurlSnapshotWire(env, root, stop, began.plus(Duration.ofMinutes(60)), 2000);
-        for (final var template : ReportSnapshotTemplate.values()) {
+        for (final var template : templates) {
+            final var currentConsolidation =
+                    args.length == 6 && template == ReportSnapshotTemplate.CONSOLIDACAO_DETALHADA
+                            ? new ReportSnapshotExtractor(new ReportMetadataCatalog())
+                            : null;
             final var result =
                     entities.addObject()
                             .put("entity", template.name())
@@ -140,7 +156,16 @@ public final class DataExportSnapshotMain {
                             };
                     final var dates = new BusinessDateRange(day, day);
                     final var limits = new ReportSnapshotExtractor.Limits(200, 100, 100000);
-                    final var captured = capture(template, dates, wire, sink, limits);
+                    final var captured =
+                            currentConsolidation == null
+                                    ? capture(template, dates, wire, sink, limits)
+                                    : currentConsolidation.extractRecords(
+                                            template,
+                                            dates,
+                                            wire,
+                                            sink,
+                                            input -> SnapshotMapperCatalog.map(template, input),
+                                            limits);
                     dayResult
                             .put("rows", captured.rows())
                             .put("typedRows", captured.typedRows())
@@ -196,6 +221,9 @@ public final class DataExportSnapshotMain {
         report.put("completedAt", Instant.now().toString())
                 .put("durationSeconds", Duration.between(began, Instant.now()).toSeconds());
         save(receipt, report, wire.requests());
+        if (args.length == 6 && !"COMPLETE".equals(entities.get(0).path("status").asText())) {
+            throw new IllegalStateException("SNAPSHOT_SELECTED_REPORT_INCOMPLETE");
+        }
     }
 
     private static void update(

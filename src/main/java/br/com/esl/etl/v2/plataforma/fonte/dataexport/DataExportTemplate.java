@@ -116,6 +116,15 @@ public enum DataExportTemplate {
             null,
             "id",
             List.of(),
+            100),
+    COMPROVANTES_ENTREGA(
+            "comprovantes-entrega-11361-v1",
+            11361,
+            new SearchPath("freight_archivings", "created_at"),
+            "freight_archivings.created_at",
+            null,
+            "sequence_code",
+            List.of(),
             100);
 
     private final String contractVersion;

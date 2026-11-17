@@ -273,8 +273,11 @@ public final class ReportSnapshotExtractor {
             final BusinessDateRange dates,
             final JsonNode row) {
         if (template.rowDate() == null) {
-            // Native91 exposes created_at, not the service_date used by this filter.
-            require(template == ReportSnapshotTemplate.MANIFESTOS, "SNAPSHOT_DATE_CONTRACT");
+            // These reports filter by a date that is not projected in the source row.
+            require(
+                    template == ReportSnapshotTemplate.MANIFESTOS
+                            || template == ReportSnapshotTemplate.COMPROVANTES_ENTREGA,
+                    "SNAPSHOT_DATE_CONTRACT");
             return;
         }
         final var date = businessDate(template, row);
@@ -314,7 +317,8 @@ public final class ReportSnapshotExtractor {
             final String key =
                     switch (template) {
                         case COLETAS, FRETES, COLETAS_EXCLUIDAS -> "id";
-                        case MANIFESTOS, COTACOES, INVENTARIO, SINISTROS -> "sequence_code";
+                        case MANIFESTOS, COTACOES, INVENTARIO, SINISTROS, COMPROVANTES_ENTREGA ->
+                                "sequence_code";
                         default -> null;
                     };
             if (key == null) {

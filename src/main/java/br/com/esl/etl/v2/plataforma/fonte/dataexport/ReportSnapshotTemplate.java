@@ -22,7 +22,16 @@ public enum ReportSnapshotTemplate {
     FATURAS_POR_CLIENTE(DataExportTemplate.FATURAS_POR_CLIENTE, "service_at", null),
     INVENTARIO(DataExportTemplate.INVENTARIO, "started_at", null),
     SINISTROS(DataExportTemplate.SINISTROS, "opening_at_date", null),
-    COLETAS_EXCLUIDAS(DataExportTemplate.COLETAS_EXCLUIDAS, "deleted_at", null);
+    COLETAS_EXCLUIDAS(DataExportTemplate.COLETAS_EXCLUIDAS, "deleted_at", null),
+    COMPROVANTES_ENTREGA(
+            DataExportTemplate.COMPROVANTES_ENTREGA, null, "comprovantes-11361-v1.json");
+
+    private static final List<ReportSnapshotTemplate> RECEIVING_TEMPLATES =
+            List.copyOf(java.util.EnumSet.range(CONSOLIDACAO_DETALHADA, COLETAS_EXCLUIDAS));
+
+    public static List<ReportSnapshotTemplate> receivingTemplates() {
+        return RECEIVING_TEMPLATES;
+    }
 
     private final DataExportTemplate template;
     private final String rowDate;

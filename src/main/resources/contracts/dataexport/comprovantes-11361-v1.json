@@ -1,0 +1,135 @@
+{
+  "schema": "MAPPED_REPORT_SOURCE_V1",
+  "reportId": 11361,
+  "version": "2026-11-17",
+  "requiredDateFilters": [
+    "freight_archivings.created_at"
+  ],
+  "defaultOrder": "created_at",
+  "fields": [
+    {
+      "name": "fag_crn_psn_nickname",
+      "title": "Responsável pelo Arquivamento"
+    },
+    {
+      "name": "sequence_code",
+      "title": "Nº Arquivamento"
+    },
+    {
+      "name": "name",
+      "title": "Nome do arquivo"
+    },
+    {
+      "name": "status",
+      "title": "Status"
+    },
+    {
+      "name": "fag_fhs_fit_crn_psn_nickname",
+      "title": "Filial Emissora"
+    },
+    {
+      "name": "fag_fhs_fit_pyr_nickname",
+      "title": "Cliente"
+    },
+    {
+      "name": "fag_fhs_fit_corporation_sequence_number",
+      "title": "Nº Minuta"
+    },
+    {
+      "name": "fag_fhs_fit_fhe_cte_number",
+      "title": "Nº CT-e"
+    },
+    {
+      "name": "fag_fhs_fit_invoices_mapping",
+      "title": "NF"
+    },
+    {
+      "name": "fag_fhs_fte_has_delivery_receipt",
+      "title": "Freight cache/Comprovante de entrega"
+    },
+    {
+      "name": "fag_fhs_fit_d_t_created_at",
+      "title": "Data de Anexo do Comprovante"
+    },
+    {
+      "name": "fag_fhs_fit_dyn_drt_nickname",
+      "title": "Responsável pela Região de Destino"
+    },
+    {
+      "name": "fag_fhs_fit_fln_cln_nickname",
+      "title": "Localização Atual"
+    },
+    {
+      "name": "fag_fhs_fit_fln_updated_at",
+      "title": "Data da Última Atualização"
+    },
+    {
+      "name": "fag_fhs_fit_status",
+      "title": "Frete/Status"
+    },
+    {
+      "name": "fag_fhs_fit_emission_type",
+      "title": "Frete/Tipo de emissão"
+    },
+    {
+      "name": "fag_fhs_fit_service_type",
+      "title": "Frete/Tipo do serviço"
+    },
+    {
+      "name": "fag_fhs_fit_operation_type",
+      "title": "Frete/Tipo Op. Frete"
+    },
+    {
+      "name": "fag_fhs_fit_type",
+      "title": "Frete/Tipo"
+    },
+    {
+      "name": "fag_fhs_fit_fte_flt_ron_sequence_code",
+      "title": "Consolidação Inicial/Nº Consolidação"
+    },
+    {
+      "name": "fag_fhs_fit_fte_flt_ron_document_number",
+      "title": "Consolidação Inicial/Nº CTe 3º"
+    },
+    {
+      "name": "fag_fhs_fit_fte_llt_ron_sequence_code",
+      "title": "Consolidação Final/Nº Consolidação"
+    },
+    {
+      "name": "fag_fhs_fit_fte_llt_ron_document_number",
+      "title": "Consolidação Final/Nº CTe 3º"
+    }
+  ],
+  "filters": [
+    {
+      "table": "freight_archivings",
+      "field": "created_at",
+      "type": "date",
+      "label": "Data criação"
+    },
+    {
+      "table": "freight_archivings",
+      "field": "corporation_id",
+      "type": "select",
+      "label": "Filial"
+    },
+    {
+      "table": "freight_archivings",
+      "field": "finisher_user_id",
+      "type": "select",
+      "label": "Usuário"
+    },
+    {
+      "table": "freight_archivings",
+      "field": "status",
+      "type": "select",
+      "label": "Status"
+    },
+    {
+      "table": "freight_archivings",
+      "field": "sequence_code",
+      "type": "numeric",
+      "label": "N° Arquivamento"
+    }
+  ]
+}

@@ -73,7 +73,7 @@ class ProductionRefreshCycleTest {
         assertEquals(1080, fixture.fullCalls);
         assertEquals(0, fixture.updateCalls);
         assertEquals(1080, fixture.store.latest.size());
-        for (final var template : ReportSnapshotTemplate.values()) {
+        for (final var template : ReportSnapshotTemplate.receivingTemplates()) {
             assertTrue(fixture.store.latest.containsKey(template + ":" + firstDay));
             assertTrue(fixture.store.latest.containsKey(template + ":" + firstDay.minusDays(89)));
             assertFalse(fixture.store.latest.containsKey(template + ":" + firstDay.plusDays(1)));
@@ -590,7 +590,7 @@ class ProductionRefreshCycleTest {
             final var saved =
                     new RefreshCheckpoint(
                             root.resolve("checkpoint.json"), scope, now.minusSeconds(10800));
-            for (final var template : ReportSnapshotTemplate.values()) {
+            for (final var template : ReportSnapshotTemplate.receivingTemplates()) {
                 saved.entity(template, floor, null, today(), now.minusSeconds(10800))
                         .put("initialComplete", true)
                         .put("watermark", now.minusSeconds(10800).toString());
