@@ -2049,6 +2049,95 @@
       ],
       "defaultOrder": "deleted_at",
       "requiredDateFilters": "picks.deleted_at"
+    },
+    {
+      "entity": "COMPROVANTES_ENTREGA",
+      "reportId": 11361,
+      "rowDate": null,
+      "fields": [
+        "fag_crn_psn_nickname",
+        "sequence_code",
+        "name",
+        "status",
+        "fag_fhs_fit_crn_psn_nickname",
+        "fag_fhs_fit_pyr_nickname",
+        "fag_fhs_fit_corporation_sequence_number",
+        "fag_fhs_fit_fhe_cte_number",
+        "fag_fhs_fit_invoices_mapping",
+        "fag_fhs_fte_has_delivery_receipt",
+        "fag_fhs_fit_d_t_created_at",
+        "fag_fhs_fit_dyn_drt_nickname",
+        "fag_fhs_fit_fln_cln_nickname",
+        "fag_fhs_fit_fln_updated_at",
+        "fag_fhs_fit_status",
+        "fag_fhs_fit_emission_type",
+        "fag_fhs_fit_service_type",
+        "fag_fhs_fit_operation_type",
+        "fag_fhs_fit_type",
+        "fag_fhs_fit_fte_flt_ron_sequence_code",
+        "fag_fhs_fit_fte_flt_ron_document_number",
+        "fag_fhs_fit_fte_llt_ron_sequence_code",
+        "fag_fhs_fit_fte_llt_ron_document_number"
+      ],
+      "filters": [
+        {
+          "label": "Data criação",
+          "position": 1,
+          "field": "created_at",
+          "table": "freight_archivings",
+          "type": "date",
+          "select": null,
+          "maxlength": null,
+          "collection": null
+        },
+        {
+          "label": "Filial",
+          "position": 2,
+          "field": "corporation_id",
+          "table": "freight_archivings",
+          "type": "select",
+          "select": "corporation",
+          "maxlength": null,
+          "collection": null
+        },
+        {
+          "label": "Usuário",
+          "position": 3,
+          "field": "finisher_user_id",
+          "table": "freight_archivings",
+          "type": "select",
+          "select": "user_main",
+          "maxlength": null,
+          "collection": null
+        },
+        {
+          "label": "Status",
+          "position": 4,
+          "field": "status",
+          "table": "freight_archivings",
+          "type": "select",
+          "select": "base",
+          "maxlength": null,
+          "collection": {
+            "pending": "Pendente",
+            "finished": "Finalizado"
+          }
+        },
+        {
+          "label": "N° Arquivamento",
+          "position": 5,
+          "field": "sequence_code",
+          "table": "freight_archivings",
+          "type": "numeric",
+          "select": null,
+          "maxlength": null,
+          "collection": null
+        }
+      ],
+      "defaultOrder": "created_at",
+      "requiredDateFilters": [
+        "freight_archivings.created_at"
+      ]
     }
   ]
 }

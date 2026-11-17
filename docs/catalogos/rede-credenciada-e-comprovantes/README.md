@@ -3,7 +3,17 @@
 ## Uso no ETL V2
 
 - **11067** alimentará uma tela de gestão da rede credenciada. A extração existente segue em `modulos/consolidacoes`. Filial expedidora, transportadora, CNPJ, rota, valores, peso, volumes e prazos já fazem parte dos 39 campos. O [catálogo detalhado do 11067](../novas-entidades-0760/CONSOLIDACAO-11067.md) contém a semântica dos campos. A consulta corrente expõe também `consolidations.updated_at` como décimo filtro. Em 17/11, a cobertura atual no SQL tinha 80 datas entre 26/08 e 13/11/2026, com 5.777 linhas.
-- **11361** fornece o número de arquivamento associado ao frete. O código fica em `modulos/comprovantesentrega`, com mapeamento em `aplicacao` e observação em `domain`. O [contrato de origem](../../../src/main/resources/contracts/dataexport/comprovantes-11361-v1.json) registra os 23 nomes e títulos do ESL. A extração finita salva o registro original e seus valores mapeados, com nulos e listas de NF preservados. A carga de 90 dias e o SQL produtivo mantêm o catálogo atual até a ativação do 11361.
+- **11361** fornece o número de arquivamento associado ao frete. O código fica em `modulos/comprovantesentrega`, com mapeamento em `aplicacao` e observação em `domain`. O [contrato de origem](../../../src/main/resources/contracts/dataexport/comprovantes-11361-v1.json) registra os 23 nomes e títulos do ESL. A extração salva o registro original e seus valores mapeados, com nulos e listas de NF preservados. O 11361 é a 13ª fonte da carga histórica e da rotina de atualização do ETL V2.
+
+## Retomada da carga
+
+O arquivo de progresso mantém o início e o fim originais da carga de 90 dias. As fontes que já têm dias confirmados continuam do ponto salvo. O 11361 começa no último dia da mesma janela, 13/11/2026, e retrocede até 16/08/2026. A carga histórica passa de 1.080 para 1.170 combinações de fonte e data.
+
+O cadastro do 11361 no SQL é feito por [012_delivery_archive_receiving.sql](../../../database/production/receiving/012_delivery_archive_receiving.sql). A data de referência é a do filtro usado na requisição. Uma nova leitura completa da mesma data passa a ser a versão corrente daquele dia. A rotina de 60 minutos busca os novos dias e revisita os dias anteriores em lotes para capturar mudanças como a finalização de um arquivamento já recebido.
+
+Para iniciar pelo PowerShell do servidor, execute `& .\CARGA_90_DIAS.bat` na pasta do ETL V2. Em outra janela, `& .\CARGA_90_DIAS.bat --acompanhar` mostra o progresso das 13 fontes.
+
+Na validação de 17/11/2026, o SQL devolveu integralmente os 822 registros do recorte de 06/11 e manteve 822 registros correntes após duas gravações. O arquivo de progresso preservou os 575 dias por fonte já confirmados, de um total de 1.170.
 
 ## Consultas verificadas
 

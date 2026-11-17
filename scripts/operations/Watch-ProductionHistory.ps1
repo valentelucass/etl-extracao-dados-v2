@@ -68,7 +68,7 @@ do {
     $progress = "$done/$total combinacoes de fonte e data gravadas no banco"
     $failed = @($report.entities | Where-Object { $_.status -ceq 'FAILED' }) | Select-Object -Last 1
     $finished = $false
-    if ($currentSupervisor.phase -ceq 'HISTORY_COMPLETED') {
+    if ($currentSupervisor.phase -ceq 'HISTORY_COMPLETED' -and $done -eq $total) {
         $message = "Carga concluida. $progress."
         $finished = $true
     } elseif (Test-Path -LiteralPath (Join-Path $state 'STOP.failure.json')) {
@@ -92,6 +92,8 @@ do {
         } else {
             $message = "Lote iniciado, aguardando a primeira consulta. $progress."
         }
+    } elseif ($currentSupervisor.phase -ceq 'HISTORY_COMPLETED') {
+        $message = "Aguardando a carga das fontes adicionadas. $progress."
     } elseif ($currentSupervisor.nextEligibleAt) {
         $next = ([DateTimeOffset]$currentSupervisor.nextEligibleAt).ToLocalTime().ToString('dd/MM/yyyy HH:mm:ss')
         $message = "Lote encerrado. Proximo lote a partir de $next. $progress."

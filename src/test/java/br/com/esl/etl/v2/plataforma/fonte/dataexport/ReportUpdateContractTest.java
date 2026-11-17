@@ -108,7 +108,7 @@ class ReportUpdateContractTest {
         for (final var template : ReportSnapshotTemplate.receivingTemplates()) {
             fields += catalog.validate(template, infos.get(template)).size();
         }
-        assertEquals(518, fields);
+        assertEquals(541, fields);
         final var changed = infos.get(ReportSnapshotTemplate.CONSOLIDACAO_DETALHADA).deepCopy();
         ((ObjectNode) changed.required("filters").get(0)).put("type", "datetime");
         assertThrows(

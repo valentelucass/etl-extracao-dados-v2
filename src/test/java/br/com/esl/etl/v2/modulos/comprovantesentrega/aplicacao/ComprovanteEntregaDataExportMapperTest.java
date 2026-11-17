@@ -75,7 +75,7 @@ class ComprovanteEntregaDataExportMapperTest {
         assertEquals(23, result.fields());
         assertEquals(87, retained.get(0).required(INVOICES).size());
         assertTrue(retained.get(0).required(CTE).isNull());
-        assertFalse(ReportSnapshotTemplate.receivingTemplates().contains(TEMPLATE));
+        assertTrue(ReportSnapshotTemplate.receivingTemplates().contains(TEMPLATE));
 
         final var mapper = new ComprovanteEntregaDataExportMapper();
         assertFalse(mapper.map(row.deepCopy().put("sequence_code", 0)).valid());

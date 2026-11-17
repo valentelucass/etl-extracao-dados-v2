@@ -27,7 +27,7 @@ public enum ReportSnapshotTemplate {
             DataExportTemplate.COMPROVANTES_ENTREGA, null, "comprovantes-11361-v1.json");
 
     private static final List<ReportSnapshotTemplate> RECEIVING_TEMPLATES =
-            List.copyOf(java.util.EnumSet.range(CONSOLIDACAO_DETALHADA, COLETAS_EXCLUIDAS));
+            List.copyOf(java.util.EnumSet.range(CONSOLIDACAO_DETALHADA, COMPROVANTES_ENTREGA));
 
     public static List<ReportSnapshotTemplate> receivingTemplates() {
         return RECEIVING_TEMPLATES;

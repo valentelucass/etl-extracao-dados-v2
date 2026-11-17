@@ -40,6 +40,12 @@ function Write-RefreshSupervisor0766($Value){
  Move-Item -LiteralPath $temporary0766 -Destination $target0766 -Force
 }
 if(-not $Worker -and -not $Verify){
+ $catalog0766=Get-Content -LiteralPath (Join-Path $repo0766 'src/main/resources/contracts/dataexport/receiving-catalog-0766-v1.json') -Raw -Encoding utf8 | ConvertFrom-Json
+ $expectedEntities0766=@($catalog0766.entities | ForEach-Object { $_.entity + ':' + $_.reportId } | Sort-Object)
+ function Test-RefreshEntities0766($Report){
+  $actual0766=@($Report.entities | ForEach-Object { $_.entity + ':' + $_.reportId } | Sort-Object)
+  return (($actual0766 -join ',') -ceq ($expectedEntities0766 -join ','))
+ }
  $supervisor0766=New-Object Threading.Mutex($false,'Global\ETL_V2_REFRESH0766_SUPERVISOR')
  $supervisorHeld0766=$false
  try{
@@ -48,9 +54,15 @@ if(-not $Worker -and -not $Verify){
   $supervisorPath0766=Join-Path $state0766 'supervisor.json'
   if($HistoryOnly -and (Test-Path -LiteralPath $supervisorPath0766)){
    $previous0766=Get-Content -LiteralPath $supervisorPath0766 -Raw -Encoding utf8 | ConvertFrom-Json
-   if($previous0766.phase -ceq 'HISTORY_COMPLETED'){
-    Write-Output 'Carga de 90 dias ja concluida.'
-    return
+   if($previous0766.phase -ceq 'HISTORY_COMPLETED' -and $previous0766.cycle -cmatch '^[0-9a-f]{32}$'){
+    $previousReportPath0766=Join-Path $state0766 ('reports\'+$previous0766.cycle+'.json')
+    if(Test-Path -LiteralPath $previousReportPath0766 -PathType Leaf){
+     $previousReport0766=Get-Content -LiteralPath $previousReportPath0766 -Raw -Encoding utf8 | ConvertFrom-Json
+     if($previousReport0766.passed -and $previousReport0766.initialComplete -and (Test-RefreshEntities0766 $previousReport0766)){
+      Write-Output 'Carga de 90 dias ja concluida.'
+      return
+     }
+    }
    }
   }
   do{
@@ -83,9 +95,8 @@ if(-not $Worker -and -not $Verify){
     catch{$report0766=$null}
     $passed0766=$outcome0766.job.ExitCode -eq 0 -and -not $outcome0766.job.TimedOut -and
      $report0766.schema -ceq 'PRODUCTION_REFRESH0766' -and $report0766.passed -and
-     (@($report0766.entities).Count -eq 11 -or (@($report0766.entities).Count -eq 12 -and $report0766.entities.entity -ccontains 'COLETAS_EXCLUIDAS')) -and
-     @($report0766.entities.entity | Sort-Object -Unique).Count -eq @($report0766.entities).Count
-    if($HistoryOnly){$passed0766=$passed0766 -and $report0766.historyOnly -eq $true -and @($report0766.entities).Count -eq 12}
+     (Test-RefreshEntities0766 $report0766)
+    if($HistoryOnly){$passed0766=$passed0766 -and $report0766.historyOnly -eq $true}
    }
    if(-not $passed0766){
     [IO.File]::WriteAllText($failureStop0766,([ordered]@{schema='REFRESH_FAILURE0766';cycle=$id0766;at=$finished0766.ToString('o');reason='BATCH_NOT_CONFIRMED_NO_AUTOMATIC_RETRY'} | ConvertTo-Json),(New-Object Text.UTF8Encoding($false)))

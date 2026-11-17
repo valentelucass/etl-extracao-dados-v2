@@ -43,8 +43,8 @@ class ProductionRefreshCycleTest {
             fixture.now = fixture.now.plus(Duration.ofMinutes(65));
         }
         assertTrue(fixture.lastReport.path("initialComplete").asBoolean());
-        assertEquals(1080, fixture.store.latest.size());
-        assertEquals(1080, fixture.fullCalls);
+        assertEquals(1170, fixture.store.latest.size());
+        assertEquals(1170, fixture.fullCalls);
         assertEquals(0, fixture.updateCalls);
         for (final var entity : fixture.lastReport.required("entities")) {
             assertEquals(0, entity.path("initialRemainingDays").asInt());
@@ -70,19 +70,64 @@ class ProductionRefreshCycleTest {
         assertTrue(fixture.lastReport.path("initialComplete").asBoolean());
         assertEquals(
                 firstDay.toString(), fixture.lastReport.path("initialHistoryThrough").asText());
-        assertEquals(1080, fixture.fullCalls);
+        assertEquals(1170, fixture.fullCalls);
         assertEquals(0, fixture.updateCalls);
-        assertEquals(1080, fixture.store.latest.size());
+        assertEquals(1170, fixture.store.latest.size());
         for (final var template : ReportSnapshotTemplate.receivingTemplates()) {
             assertTrue(fixture.store.latest.containsKey(template + ":" + firstDay));
             assertTrue(fixture.store.latest.containsKey(template + ":" + firstDay.minusDays(89)));
             assertFalse(fixture.store.latest.containsKey(template + ":" + firstDay.plusDays(1)));
         }
         assertTrue(fixture.run());
-        assertEquals(1080, fixture.fullCalls);
+        assertEquals(1170, fixture.fullCalls);
         assertEquals(0, fixture.updateCalls);
         fixture.config.remove("historyOnly");
         assertThrows(IllegalStateException.class, fixture::run);
+    }
+
+    @Test
+    void addingDeliveryArchivesKeepsAnExistingCompletedHistoryAndUsesItsOriginalDates()
+            throws Exception {
+        final var fixture = new Fixture(directory);
+        fixture.config.put("historyOnly", true).put("historyDays", 90).put("initialBatchDays", 1);
+        final var through = fixture.today();
+        final var floor = through.minusDays(89);
+        final var tokenHash =
+                RefreshCheckpoint.hash("synthetic-test".getBytes(StandardCharsets.UTF_8));
+        final var scope =
+                RefreshCheckpoint.hash(
+                        ("https://rodogarcia.eslcloud.com.br\n" + tokenHash)
+                                .getBytes(StandardCharsets.UTF_8));
+        final var checkpoint =
+                new RefreshCheckpoint(directory.resolve("checkpoint.json"), scope, fixture.now);
+        for (final var template : ReportSnapshotTemplate.receivingTemplates()) {
+            if (template != ReportSnapshotTemplate.COMPROVANTES_ENTREGA) {
+                checkpoint
+                        .entity(template, floor, null, through, fixture.now)
+                        .put("initialComplete", true)
+                        .put("initialNext", floor.minusDays(1).toString());
+            }
+        }
+        checkpoint.save();
+        fixture.now = fixture.now.plus(Duration.ofDays(4));
+
+        assertTrue(fixture.run());
+        assertEquals(1, fixture.fullCalls);
+        assertEquals(
+                java.util.Set.of("COMPROVANTES_ENTREGA:" + through), fixture.store.latest.keySet());
+        assertEquals(
+                89,
+                fixture.lastReport
+                        .required("entities")
+                        .get(12)
+                        .path("initialRemainingDays")
+                        .asInt());
+        assertFalse(fixture.lastReport.path("initialComplete").asBoolean());
+        assertEquals(
+                floor.minusDays(1).toString(),
+                fixture.entity(ReportSnapshotTemplate.CONSOLIDACAO_DETALHADA)
+                        .path("initialNext")
+                        .asText());
     }
 
     @Test
@@ -99,8 +144,8 @@ class ProductionRefreshCycleTest {
                     fixture.entity(ReportSnapshotTemplate.FRETES).path("initialNext").asText());
             assertFalse(fixture.store.latest.containsKey(key));
             if (failure < 3) {
-                assertEquals(12, fixture.lastReport.required("entities").size());
-                assertEquals(11 * failure, fixture.store.latest.size());
+                assertEquals(13, fixture.lastReport.required("entities").size());
+                assertEquals(12 * failure, fixture.store.latest.size());
             }
             fixture.now = fixture.now.plusSeconds(3900);
         }
@@ -118,7 +163,7 @@ class ProductionRefreshCycleTest {
         final var key = "MANIFESTOS:" + day;
         fixture.rejectedManifest = true;
         assertTrue(fixture.run());
-        assertEquals(11, fixture.store.latest.size());
+        assertEquals(12, fixture.store.latest.size());
         assertFalse(fixture.store.latest.containsKey(key));
         assertEquals(1, fixture.rejectedManifestCaptures);
         assertEquals(
@@ -127,7 +172,7 @@ class ProductionRefreshCycleTest {
         assertTrue(fixture.lastReport.required("entities").toString().contains("BATCH_BLOCKED"));
 
         assertTrue(fixture.run());
-        assertEquals(22, fixture.store.latest.size());
+        assertEquals(24, fixture.store.latest.size());
         assertEquals(1, fixture.rejectedManifestCaptures);
         assertFalse(fixture.store.latest.containsKey(key));
 
@@ -173,7 +218,7 @@ class ProductionRefreshCycleTest {
         fixture.config.put("historyOnly", true).put("historyDays", 90).put("initialBatchDays", 1);
         fixture.freightMetadataFailure = true;
         assertTrue(fixture.run());
-        assertEquals(11, fixture.store.latest.size());
+        assertEquals(12, fixture.store.latest.size());
         assertEquals(
                 1,
                 fixture.entity(ReportSnapshotTemplate.FRETES)
@@ -182,7 +227,7 @@ class ProductionRefreshCycleTest {
         fixture.freightMetadataFailure = false;
         fixture.now = fixture.now.plusSeconds(3900);
         assertTrue(fixture.run());
-        assertEquals(23, fixture.store.latest.size());
+        assertEquals(25, fixture.store.latest.size());
         assertFalse(fixture.entity(ReportSnapshotTemplate.FRETES).has("initialSourceFailures"));
     }
 
@@ -198,7 +243,7 @@ class ProductionRefreshCycleTest {
         fixture.availableBytes = Long.MAX_VALUE;
         fixture.config.put("initialBatchDays", 1);
         assertTrue(fixture.run());
-        assertEquals(12, fixture.store.latest.size());
+        assertEquals(13, fixture.store.latest.size());
     }
 
     @Test
@@ -369,6 +414,11 @@ class ProductionRefreshCycleTest {
         assertEquals(
                 oldDay.plusDays(8).toString(),
                 fixture.entity(ReportSnapshotTemplate.SINISTROS).path("sweepNext").asText());
+        assertEquals(
+                oldDay.plusDays(8).toString(),
+                fixture.entity(ReportSnapshotTemplate.COMPROVANTES_ENTREGA)
+                        .path("sweepNext")
+                        .asText());
         assertEquals(
                 8,
                 fixture.lastReport.required("operations").findValues("entity").stream()
