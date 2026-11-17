@@ -83,9 +83,28 @@ if(-not $Worker -and -not $Verify){
    $arguments0766=@('-NoLogo','-NoProfile','-NonInteractive','-File',$PSCommandPath,'-Worker','-SettingsPath',$SettingsPath,'-RuntimeManifestPath',$RuntimeManifestPath,'-CycleId',$id0766)
    if($HistoryOnly){
     $arguments0766+='-HistoryOnly'
-    Write-Output ('Iniciando lote da carga de 90 dias em '+(Get-Date -Format 'dd/MM/yyyy HH:mm:ss'))
+    Write-Output ('Preparando lote da carga de 90 dias em '+(Get-Date -Format 'dd/MM/yyyy HH:mm:ss'))
    }
-   $outcome0766=& 'C:\Users\suporte\Documents\projetos\.runtime\memory-control\Executar-Batch.ps1' -Executable 'C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe' -ArgumentList $arguments0766 -WorkingDirectory $repo0766 -MaxMinutes 115 -ReturnReceipt -ReceiptPath (Join-Path $state0766 ($id0766+'.memory.json'))
+   $waitingForSlot0766=$false
+   while($true){
+    if((Test-Path -LiteralPath $operatorStop0766) -or (Test-Path -LiteralPath $failureStop0766)){
+     if($HistoryOnly){throw 'Carga de 90 dias interrompida. O progresso foi salvo.'}
+     return
+    }
+    try{
+     $outcome0766=& 'C:\Users\suporte\Documents\projetos\.runtime\memory-control\Executar-Batch.ps1' -Executable 'C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe' -ArgumentList $arguments0766 -WorkingDirectory $repo0766 -MaxMinutes 115 -ReturnReceipt -ReceiptPath (Join-Path $state0766 ($id0766+'.memory.json'))
+     break
+    }catch{
+     # The shared runner raises this before it starts the worker. Retrying here cannot repeat a batch.
+     if($_.Exception.Message -cnotmatch '^BATCH_CONCURRENCY_LIMIT:'){throw}
+     if(-not $waitingForSlot0766){
+      Write-RefreshSupervisor0766 ([ordered]@{phase='WAITING_FOR_SLOT';cycle=$id0766;supervisorPid=$PID})
+      Write-Output 'Outra tarefa esta usando o servidor. A carga aguarda a vaga e continua automaticamente.'
+      $waitingForSlot0766=$true
+     }
+     Start-Sleep -Seconds 15
+    }
+   }
    $finished0766=[DateTimeOffset]::UtcNow
    $reportPath0766=Join-Path $state0766 ('reports\'+$id0766+'.json')
    $report0766=$null

@@ -151,3 +151,7 @@ O confronto Excel anterior permanece documentado em [comparação0762](../catalo
 | Coletas Excluídas (12899) | 27/08/2026 | Uma coleta foi excluída em 27/08 com data de solicitação de 28/08. A data da exclusão determina o dia da extração. As duas datas são validadas e preservadas como recebidas do ESL. | 2 registros, zero rejeições |
 
 A validação reaproveitou as 14 páginas completas capturadas nos lotes originais e conferiu no SQL os registros gravados. A versão 0808 retoma a carga oficial do arquivo de progresso preservado, com 1.117 de 1.170 combinações marcadas como concluídas. Os dois dias testados continuam no ponto de retomada para a confirmação pelo próprio processo da carga.
+
+### Espera por outra tarefa do servidor
+
+Quando a proteção de memória informa que outra tarefa está em execução, o iniciador avisa que aguarda a vaga e volta a tentar a cada 15 segundos. A espera acontece antes de iniciar o processo do lote. O comando de acompanhamento mostra a fila e a solicitação de parada continua disponível durante a espera.

@@ -77,6 +77,9 @@ do {
         $finished = $true
     } elseif (Test-Path -LiteralPath (Join-Path $state 'STOP.operator.json')) {
         $message = "Parada solicitada pelo operador. $progress."
+    } elseif ($supervisor.phase -ceq 'WAITING_FOR_SLOT' -and -not $currentSupervisor -and
+        (Get-Process -Id $supervisor.supervisorPid -ErrorAction SilentlyContinue)) {
+        $message = "Aguardando a outra tarefa liberar o servidor. $progress."
     } elseif ($report -and -not $report.completedAt) {
         $ledger = Join-Path $state ('captures\' + $reportFile.BaseName + '\ledger.jsonl')
         $event = Read-LatestLedgerEvent $ledger
