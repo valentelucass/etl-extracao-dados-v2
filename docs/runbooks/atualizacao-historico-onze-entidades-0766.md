@@ -142,3 +142,12 @@ Em 10/11/2026 foi executado o novo acionador real, em lote finito de uma data po
 A nova tarefa permanente **não foi registrada nem iniciada** nesta qualificação. O runtime privado qualificado é `atualizacao0766/runtime-v1`; seu manifesto permanece externo ao Git. O runtime e a falha históricos 0762 permanecem preservados. Nenhuma migração SQL adicional ou corte de dashboard foi realizado.
 
 O confronto Excel anterior permanece documentado em [comparação0762](../catalogos/novas-entidades-0761/comparacao-excel-0762.md). Os 39 e 20 atributos das duas novas entidades estão modelados, mas as diferenças temporais observadas não foram transformadas em equivalência de 100%. Esta entrega não realizou outro download Excel e não declara que essa pendência foi resolvida.
+
+## Correção dos dois dias que interromperam a carga em 17/11/2026
+
+| Fonte | Dia | Ocorrência observada | Resultado no SQL após a correção |
+| --- | --- | --- | ---: |
+| Faturas por Cliente (4924) | 25/09/2026 | As duas listas de notas tinham 111 e 282 itens em dois fretes. O limite de 110 itens causava rejeição. O limite de itens agora acompanha a capacidade de 4.000 caracteres do campo bruto. | 1.086 registros, zero rejeições |
+| Coletas Excluídas (12899) | 27/08/2026 | Uma coleta foi excluída em 27/08 com data de solicitação de 28/08. A data da exclusão determina o dia da extração. As duas datas são validadas e preservadas como recebidas do ESL. | 2 registros, zero rejeições |
+
+A validação reaproveitou as 14 páginas completas capturadas nos lotes originais e conferiu no SQL os registros gravados. A versão 0808 retoma a carga oficial do arquivo de progresso preservado, com 1.117 de 1.170 combinações marcadas como concluídas. Os dois dias testados continuam no ponto de retomada para a confirmação pelo próprio processo da carga.

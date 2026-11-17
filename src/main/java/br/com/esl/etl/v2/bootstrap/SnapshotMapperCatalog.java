@@ -83,11 +83,10 @@ public final class SnapshotMapperCatalog {
 
     private static boolean validDeletionDates(final JsonNode row) {
         try {
-            final var request = java.time.LocalDate.parse(row.path("request_date").asText());
-            final var deletion = java.time.OffsetDateTime.parse(row.path("deleted_at").asText());
-            return !request.isAfter(
-                    deletion.atZoneSameInstant(java.time.ZoneId.of("America/Sao_Paulo"))
-                            .toLocalDate());
+            // The report can contain a pickup deleted before its requested date.
+            java.time.LocalDate.parse(row.path("request_date").asText());
+            java.time.OffsetDateTime.parse(row.path("deleted_at").asText());
+            return true;
         } catch (final java.time.format.DateTimeParseException invalid) {
             return false;
         }
