@@ -1,0 +1,3318 @@
+{
+  "schema": "ETL_V2_NEW_ENTITIES_MAPPING0760_V1",
+  "createdDate": "2026-11-09",
+  "zone": "America/Sao_Paulo",
+  "scope": "Mapeamento completo de59campos/22filtros; implementação Java adiada pelo usuário",
+  "sourceQualification": "dois recortes fechados completos via cURL e comparação com Excel oficial independente",
+  "javaImplemented": false,
+  "sqlApplied": false,
+  "schedulerActivated": false,
+  "productionReady": false,
+  "dashboardStillV1": true,
+  "entities": [
+    {
+      "reportId": 11067,
+      "name": "Relação de Consolidação Detalhada",
+      "uiGroup": "Parceiro",
+      "entityCodeCandidate": "CONSOLIDACAO_DETALHADA",
+      "moduleCandidate": "consolidacoes",
+      "implementationStatus": "MAPEADO_JAVA_ADIADO_POR_PEDIDO_DO_USUARIO",
+      "method": "GET",
+      "origin": "https://rodogarcia.eslcloud.com.br",
+      "infoPath": "/api/analytics/reports/11067/info",
+      "dataPath": "/api/analytics/reports/11067/data",
+      "transport": "GET_WITH_QUERY",
+      "auth": "Bearer existente do V2 por stdin do cURL; segredo fora do catálogo",
+      "businessDateField": "consolidations.issue_date",
+      "requiredDateFiltersMetadata": [
+        "consolidations.issue_date"
+      ],
+      "defaultOrderMetadata": "issue_date",
+      "requestOrderBy": "omitido nos ensaios; não inventar ordenação de outro template",
+      "pagination": {
+        "pageStartsAt": 1,
+        "perTested": [
+          3,
+          100
+        ],
+        "terminal": "array vazio literal observado; página curta não encerra sozinha",
+        "snapshotConsistency": "não comprovada",
+        "uniquePaginationEntity": "não comprovada; não deduplicar linhas"
+      },
+      "qualification": {
+        "day": "2026-11-06",
+        "sourceRows": 41,
+        "columns": 39,
+        "cells": 1599,
+        "fullCaptureHTTP": 3,
+        "terminalObserved": true,
+        "nativeFileId": "1777587",
+        "nativeRows": 41,
+        "nativeSha256": "83675853310e5bbf295dca34b90db33dd7358fcfa5641f01564040ee2c00f54f",
+        "zipCrcVerified": true,
+        "headersExact": true,
+        "formulaCells": 0,
+        "allColumnsEqual": true,
+        "completeRowMultisetEqual": true,
+        "rawDatetimePrecisionEqualsExcel": false,
+        "scope": "um dia fechado; mapeamento e apresentação, sem aceite Java, SQL ou operação produtiva"
+      },
+      "keyDiagnostics": {
+        "sequence_code": {
+          "distinct": 41,
+          "rows": 41,
+          "maximumMultiplicity": 1,
+          "uniqueInThisCut": true
+        },
+        "sequence_code+ctd_fgs_corporation_sequence_number": {
+          "distinct": 41,
+          "rows": 41,
+          "maximumMultiplicity": 1,
+          "uniqueInThisCut": true
+        },
+        "sequence_code+ctd_fgs_corporation_sequence_number+document_number": {
+          "distinct": 41,
+          "rows": 41,
+          "maximumMultiplicity": 1,
+          "uniqueInThisCut": true
+        }
+      },
+      "filters": [
+        {
+          "label": "Emissão",
+          "position": 1,
+          "field": "issue_date",
+          "table": "consolidations",
+          "type": "date",
+          "maxlength": null,
+          "queryParameter": "search[consolidations][issue_date]",
+          "testedUse": "intervalo ISO inclusivo",
+          "businessDate": true
+        },
+        {
+          "label": "N° Consolidação",
+          "position": 2,
+          "field": "sequence_code",
+          "table": "consolidations",
+          "type": "numeric",
+          "maxlength": null,
+          "queryParameter": "search[consolidations][sequence_code]",
+          "testedUse": "vazio/omitido; comportamento não vazio ainda não qualificado",
+          "businessDate": false
+        },
+        {
+          "label": "Nº CT-e 3º",
+          "position": 3,
+          "field": "document_number",
+          "table": "consolidations",
+          "type": "string",
+          "maxlength": null,
+          "queryParameter": "search[consolidations][document_number]",
+          "testedUse": "vazio/omitido; comportamento não vazio ainda não qualificado",
+          "businessDate": false
+        },
+        {
+          "label": "N° Minuta",
+          "position": 4,
+          "field": "operational_number",
+          "table": "consolidations",
+          "type": "string",
+          "maxlength": null,
+          "queryParameter": "search[consolidations][operational_number]",
+          "testedUse": "vazio/omitido; comportamento não vazio ainda não qualificado",
+          "businessDate": false
+        },
+        {
+          "label": "Transportadora",
+          "position": 5,
+          "field": "redispatch_carrier_id",
+          "table": "consolidations",
+          "type": "select",
+          "maxlength": null,
+          "queryParameter": "search[consolidations][redispatch_carrier_id]",
+          "testedUse": "vazio/omitido; comportamento não vazio ainda não qualificado",
+          "businessDate": false
+        },
+        {
+          "label": "Tabela de Preço",
+          "position": 6,
+          "field": "price_table_id",
+          "table": "consolidations",
+          "type": "select",
+          "maxlength": null,
+          "queryParameter": "search[consolidations][price_table_id]",
+          "testedUse": "vazio/omitido; comportamento não vazio ainda não qualificado",
+          "businessDate": false
+        },
+        {
+          "label": "Cidade origem",
+          "position": 7,
+          "field": "origin_city_id",
+          "table": "consolidations",
+          "type": "select",
+          "maxlength": null,
+          "queryParameter": "search[consolidations][origin_city_id]",
+          "testedUse": "vazio/omitido; comportamento não vazio ainda não qualificado",
+          "businessDate": false
+        },
+        {
+          "label": "Cidade destino",
+          "position": 8,
+          "field": "destination_city_id",
+          "table": "consolidations",
+          "type": "select",
+          "maxlength": null,
+          "queryParameter": "search[consolidations][destination_city_id]",
+          "testedUse": "vazio/omitido; comportamento não vazio ainda não qualificado",
+          "businessDate": false
+        },
+        {
+          "label": "Tomador",
+          "position": 9,
+          "field": "payer_id",
+          "table": "consolidations",
+          "type": "select",
+          "maxlength": null,
+          "queryParameter": "search[consolidations][payer_id]",
+          "testedUse": "vazio/omitido; comportamento não vazio ainda não qualificado",
+          "businessDate": false
+        }
+      ],
+      "fields": [
+        {
+          "ordinal": 1,
+          "wireName": "ctd_fgs_crn_psn_nickname",
+          "excelHeader": "Filial Expedidora",
+          "javaPropertyCandidate": "ctdFgsCrnPsnNickname",
+          "meaningAndUse": "Filial expedidora do frete Rodogarcia. Referência contextual; o apelido não substitui ID de filial.",
+          "observed": {
+            "rows": 41,
+            "present": 41,
+            "nulls": 0,
+            "wireTypes": {
+              "STRING": 41
+            },
+            "maxUtf16": 45,
+            "maxArrayItems": 0,
+            "arrayItemTypes": {},
+            "objectKeys": [],
+            "emptyStrings": 0,
+            "maximumNumericTextPrecision": 0,
+            "maximumNumericTextScale": 0,
+            "maximumIntegerDigits": 0,
+            "arrayItemMaxUtf16": 0,
+            "objectValueTypes": {},
+            "sourceOffsets": {},
+            "timestampsWithFraction": 0
+          },
+          "native": {
+            "ordinal": 1,
+            "field": "ctd_fgs_crn_psn_nickname",
+            "header": "Filial Expedidora",
+            "nativeTypes": {
+              "STRING": 41
+            },
+            "numberFormats": [
+              "General"
+            ],
+            "maxUtf16": 45
+          },
+          "javaTypeCandidate": "ExpansionValue<String>",
+          "sqlTypeCandidate": "NVARCHAR com largura a dimensionar; original integral",
+          "parserRequirements": "Não aplicar trim, normalização, rótulo ou remoção de zeros por convenção. Parser text atual limita1024UTF16.",
+          "nonNullTypeObserved": true,
+          "nullabilityContract": "NULL preservado; ausência de NULL neste corte não autoriza NOT NULL",
+          "presentationPolicy": "DIRECT",
+          "presentationRule": "Valor literal; NULL continua NULL.",
+          "observedEnumMap": null,
+          "comparison": "COLUNA_E_TUPLA_COMPLETA_IGUAIS_NO_CORTE"
+        },
+        {
+          "ordinal": 2,
+          "wireName": "sequence_code",
+          "excelHeader": "N° Consolidação",
+          "javaPropertyCandidate": "sequenceCode",
+          "meaningAndUse": "Número da consolidação. Único somente nas 41 linhas observadas; não homologado como chave estável global.",
+          "observed": {
+            "rows": 41,
+            "present": 41,
+            "nulls": 0,
+            "wireTypes": {
+              "INTEGER": 41
+            },
+            "maxUtf16": 0,
+            "maxArrayItems": 0,
+            "arrayItemTypes": {},
+            "objectKeys": [],
+            "emptyStrings": 0,
+            "maximumNumericTextPrecision": 0,
+            "maximumNumericTextScale": 0,
+            "maximumIntegerDigits": 5,
+            "arrayItemMaxUtf16": 0,
+            "objectValueTypes": {},
+            "sourceOffsets": {},
+            "timestampsWithFraction": 0
+          },
+          "native": {
+            "ordinal": 2,
+            "field": "sequence_code",
+            "header": "N° Consolidação",
+            "nativeTypes": {
+              "NUMBER": 41
+            },
+            "numberFormats": [
+              "General"
+            ],
+            "maxUtf16": 0
+          },
+          "javaTypeCandidate": "ExpansionValue<String> pelo parser integer; BigInteger em regra aritmética explícita",
+          "sqlTypeCandidate": "Identificador textual ou DECIMAL(38,0), conforme papel; sem INT por amostra",
+          "parserRequirements": "Inteiro exato; não usar double. O parser atual limita a38dígitos e precisa do teste do domínio.",
+          "nonNullTypeObserved": true,
+          "nullabilityContract": "NULL preservado; ausência de NULL neste corte não autoriza NOT NULL",
+          "presentationPolicy": "DIRECT",
+          "presentationRule": "Valor literal; NULL continua NULL.",
+          "observedEnumMap": null,
+          "comparison": "COLUNA_E_TUPLA_COMPLETA_IGUAIS_NO_CORTE"
+        },
+        {
+          "ordinal": 3,
+          "wireName": "issue_date",
+          "excelHeader": "Emissão Consolidação",
+          "javaPropertyCandidate": "issueDate",
+          "meaningAndUse": "Data civil de emissão da consolidação e seleção principal do relatório. Não substituir pela data do frete relacionado.",
+          "observed": {
+            "rows": 41,
+            "present": 41,
+            "nulls": 0,
+            "wireTypes": {
+              "STRING": 41
+            },
+            "maxUtf16": 10,
+            "maxArrayItems": 0,
+            "arrayItemTypes": {},
+            "objectKeys": [],
+            "emptyStrings": 0,
+            "maximumNumericTextPrecision": 0,
+            "maximumNumericTextScale": 0,
+            "maximumIntegerDigits": 0,
+            "arrayItemMaxUtf16": 0,
+            "objectValueTypes": {},
+            "sourceOffsets": {},
+            "timestampsWithFraction": 0
+          },
+          "native": {
+            "ordinal": 3,
+            "field": "issue_date",
+            "header": "Emissão Consolidação",
+            "nativeTypes": {
+              "DATETIME": 41
+            },
+            "numberFormats": [
+              "DD/MM/YYYY"
+            ],
+            "maxUtf16": 0
+          },
+          "javaTypeCandidate": "ExpansionValue<LocalDate>",
+          "sqlTypeCandidate": "DATE NULL",
+          "parserRequirements": "Data civil, sem conversão UTC; reutilizar parser estrito de data.",
+          "nonNullTypeObserved": true,
+          "nullabilityContract": "NULL preservado; ausência de NULL neste corte não autoriza NOT NULL",
+          "presentationPolicy": "ISO_DATE_TO_EXCEL_MIDNIGHT",
+          "presentationRule": "Data ISO civil apresentada como data Excel à meia-noite, sem mudança de dia.",
+          "observedEnumMap": null,
+          "comparison": "COLUNA_E_TUPLA_COMPLETA_IGUAIS_NO_CORTE"
+        },
+        {
+          "ordinal": 4,
+          "wireName": "ctd_rhr_cpy_nickname",
+          "excelHeader": "Transportadora",
+          "javaPropertyCandidate": "ctdRhrCpyNickname",
+          "meaningAndUse": "Nome da transportadora credenciada. Preservar literalmente; dimensão depende de identidade própria.",
+          "observed": {
+            "rows": 41,
+            "present": 41,
+            "nulls": 0,
+            "wireTypes": {
+              "STRING": 41
+            },
+            "maxUtf16": 51,
+            "maxArrayItems": 0,
+            "arrayItemTypes": {},
+            "objectKeys": [],
+            "emptyStrings": 0,
+            "maximumNumericTextPrecision": 0,
+            "maximumNumericTextScale": 0,
+            "maximumIntegerDigits": 0,
+            "arrayItemMaxUtf16": 0,
+            "objectValueTypes": {},
+            "sourceOffsets": {},
+            "timestampsWithFraction": 0
+          },
+          "native": {
+            "ordinal": 4,
+            "field": "ctd_rhr_cpy_nickname",
+            "header": "Transportadora",
+            "nativeTypes": {
+              "STRING": 41
+            },
+            "numberFormats": [
+              "General"
+            ],
+            "maxUtf16": 51
+          },
+          "javaTypeCandidate": "ExpansionValue<String>",
+          "sqlTypeCandidate": "NVARCHAR com largura a dimensionar; original integral",
+          "parserRequirements": "Não aplicar trim, normalização, rótulo ou remoção de zeros por convenção. Parser text atual limita1024UTF16.",
+          "nonNullTypeObserved": true,
+          "nullabilityContract": "NULL preservado; ausência de NULL neste corte não autoriza NOT NULL",
+          "presentationPolicy": "DIRECT",
+          "presentationRule": "Valor literal; NULL continua NULL.",
+          "observedEnumMap": null,
+          "comparison": "COLUNA_E_TUPLA_COMPLETA_IGUAIS_NO_CORTE"
+        },
+        {
+          "ordinal": 5,
+          "wireName": "ctd_rhr_cpy_document",
+          "excelHeader": "CNPJ Transportadora",
+          "javaPropertyCandidate": "ctdRhrCpyDocument",
+          "meaningAndUse": "CNPJ da transportadora como texto. Preservar zeros e formato da origem.",
+          "observed": {
+            "rows": 41,
+            "present": 41,
+            "nulls": 0,
+            "wireTypes": {
+              "STRING": 41
+            },
+            "maxUtf16": 14,
+            "maxArrayItems": 0,
+            "arrayItemTypes": {},
+            "objectKeys": [],
+            "emptyStrings": 0,
+            "maximumNumericTextPrecision": 13,
+            "maximumNumericTextScale": 0,
+            "maximumIntegerDigits": 0,
+            "arrayItemMaxUtf16": 0,
+            "objectValueTypes": {},
+            "sourceOffsets": {},
+            "timestampsWithFraction": 0
+          },
+          "native": {
+            "ordinal": 5,
+            "field": "ctd_rhr_cpy_document",
+            "header": "CNPJ Transportadora",
+            "nativeTypes": {
+              "STRING": 41
+            },
+            "numberFormats": [
+              "General"
+            ],
+            "maxUtf16": 14
+          },
+          "javaTypeCandidate": "ExpansionValue<String>",
+          "sqlTypeCandidate": "NVARCHAR com largura a dimensionar; original integral",
+          "parserRequirements": "Não aplicar trim, normalização, rótulo ou remoção de zeros por convenção. Parser text atual limita1024UTF16.",
+          "nonNullTypeObserved": true,
+          "nullabilityContract": "NULL preservado; ausência de NULL neste corte não autoriza NOT NULL",
+          "presentationPolicy": "DIRECT",
+          "presentationRule": "Valor literal; NULL continua NULL.",
+          "observedEnumMap": null,
+          "comparison": "COLUNA_E_TUPLA_COMPLETA_IGUAIS_NO_CORTE"
+        },
+        {
+          "ordinal": 6,
+          "wireName": "document_number",
+          "excelHeader": "CTe 3º",
+          "javaPropertyCandidate": "documentNumber",
+          "meaningAndUse": "Número do CT-e de terceiro como texto; não confundir com CT-e Rodogarcia nem transformar em chave única.",
+          "observed": {
+            "rows": 41,
+            "present": 41,
+            "nulls": 0,
+            "wireTypes": {
+              "STRING": 41
+            },
+            "maxUtf16": 6,
+            "maxArrayItems": 0,
+            "arrayItemTypes": {},
+            "objectKeys": [],
+            "emptyStrings": 0,
+            "maximumNumericTextPrecision": 6,
+            "maximumNumericTextScale": 0,
+            "maximumIntegerDigits": 0,
+            "arrayItemMaxUtf16": 0,
+            "objectValueTypes": {},
+            "sourceOffsets": {},
+            "timestampsWithFraction": 0
+          },
+          "native": {
+            "ordinal": 6,
+            "field": "document_number",
+            "header": "CTe 3º",
+            "nativeTypes": {
+              "STRING": 41
+            },
+            "numberFormats": [
+              "General"
+            ],
+            "maxUtf16": 6
+          },
+          "javaTypeCandidate": "ExpansionValue<String>",
+          "sqlTypeCandidate": "NVARCHAR com largura a dimensionar; original integral",
+          "parserRequirements": "Não aplicar trim, normalização, rótulo ou remoção de zeros por convenção. Parser text atual limita1024UTF16.",
+          "nonNullTypeObserved": true,
+          "nullabilityContract": "NULL preservado; ausência de NULL neste corte não autoriza NOT NULL",
+          "presentationPolicy": "DIRECT",
+          "presentationRule": "Valor literal; NULL continua NULL.",
+          "observedEnumMap": null,
+          "comparison": "COLUNA_E_TUPLA_COMPLETA_IGUAIS_NO_CORTE"
+        },
+        {
+          "ordinal": 7,
+          "wireName": "ctd_fgs_fhe_cte_number",
+          "excelHeader": "CTe Rodogarcia",
+          "javaPropertyCandidate": "ctdFgsFheCteNumber",
+          "meaningAndUse": "Número do CT-e Rodogarcia. Relação candidata com Fretes exige filial/emissor e prova de cardinalidade.",
+          "observed": {
+            "rows": 41,
+            "present": 41,
+            "nulls": 0,
+            "wireTypes": {
+              "INTEGER": 41
+            },
+            "maxUtf16": 0,
+            "maxArrayItems": 0,
+            "arrayItemTypes": {},
+            "objectKeys": [],
+            "emptyStrings": 0,
+            "maximumNumericTextPrecision": 0,
+            "maximumNumericTextScale": 0,
+            "maximumIntegerDigits": 6,
+            "arrayItemMaxUtf16": 0,
+            "objectValueTypes": {},
+            "sourceOffsets": {},
+            "timestampsWithFraction": 0
+          },
+          "native": {
+            "ordinal": 7,
+            "field": "ctd_fgs_fhe_cte_number",
+            "header": "CTe Rodogarcia",
+            "nativeTypes": {
+              "NUMBER": 41
+            },
+            "numberFormats": [
+              "General"
+            ],
+            "maxUtf16": 0
+          },
+          "javaTypeCandidate": "ExpansionValue<String> pelo parser integer; BigInteger em regra aritmética explícita",
+          "sqlTypeCandidate": "Identificador textual ou DECIMAL(38,0), conforme papel; sem INT por amostra",
+          "parserRequirements": "Inteiro exato; não usar double. O parser atual limita a38dígitos e precisa do teste do domínio.",
+          "nonNullTypeObserved": true,
+          "nullabilityContract": "NULL preservado; ausência de NULL neste corte não autoriza NOT NULL",
+          "presentationPolicy": "DIRECT",
+          "presentationRule": "Valor literal; NULL continua NULL.",
+          "observedEnumMap": null,
+          "comparison": "COLUNA_E_TUPLA_COMPLETA_IGUAIS_NO_CORTE"
+        },
+        {
+          "ordinal": 8,
+          "wireName": "charged_value",
+          "excelHeader": "Valor Frete a Pagar à Credenciada",
+          "javaPropertyCandidate": "chargedValue",
+          "meaningAndUse": "Frete a pagar à credenciada. Valor da consolidação; não somar uma vez por filho se houver expansão futura.",
+          "observed": {
+            "rows": 41,
+            "present": 41,
+            "nulls": 0,
+            "wireTypes": {
+              "STRING": 41
+            },
+            "maxUtf16": 6,
+            "maxArrayItems": 0,
+            "arrayItemTypes": {},
+            "objectKeys": [],
+            "emptyStrings": 0,
+            "maximumNumericTextPrecision": 5,
+            "maximumNumericTextScale": 2,
+            "maximumIntegerDigits": 0,
+            "arrayItemMaxUtf16": 0,
+            "objectValueTypes": {},
+            "sourceOffsets": {},
+            "timestampsWithFraction": 0
+          },
+          "native": {
+            "ordinal": 8,
+            "field": "charged_value",
+            "header": "Valor Frete a Pagar à Credenciada",
+            "nativeTypes": {
+              "NUMBER": 41
+            },
+            "numberFormats": [
+              "General"
+            ],
+            "maxUtf16": 0
+          },
+          "javaTypeCandidate": "ExpansionValue<BigDecimal>",
+          "sqlTypeCandidate": "DECIMAL(p,s) a dimensionar; manter literal original",
+          "parserRequirements": "Sem float/double ou arredondamento. Parser atual admite20inteiros/8casas; qualificar em recortes maiores antes de reutilizar.",
+          "nonNullTypeObserved": true,
+          "nullabilityContract": "NULL preservado; ausência de NULL neste corte não autoriza NOT NULL",
+          "presentationPolicy": "DECIMAL_TEXT",
+          "presentationRule": "Texto numérico interpretado por decimal exato para confrontar a célula numérica. RAW permanece textual.",
+          "observedEnumMap": null,
+          "comparison": "COLUNA_E_TUPLA_COMPLETA_IGUAIS_NO_CORTE"
+        },
+        {
+          "ordinal": 9,
+          "wireName": "subtotal",
+          "excelHeader": "Valor Calculado ESL",
+          "javaPropertyCandidate": "subtotal",
+          "meaningAndUse": "Valor calculado pelo ESL para a consolidação. Campo distinto do valor cobrado e do subtotal do frete Rodogarcia.",
+          "observed": {
+            "rows": 41,
+            "present": 41,
+            "nulls": 0,
+            "wireTypes": {
+              "STRING": 41
+            },
+            "maxUtf16": 6,
+            "maxArrayItems": 0,
+            "arrayItemTypes": {},
+            "objectKeys": [],
+            "emptyStrings": 0,
+            "maximumNumericTextPrecision": 5,
+            "maximumNumericTextScale": 2,
+            "maximumIntegerDigits": 0,
+            "arrayItemMaxUtf16": 0,
+            "objectValueTypes": {},
+            "sourceOffsets": {},
+            "timestampsWithFraction": 0
+          },
+          "native": {
+            "ordinal": 9,
+            "field": "subtotal",
+            "header": "Valor Calculado ESL",
+            "nativeTypes": {
+              "NUMBER": 41
+            },
+            "numberFormats": [
+              "General"
+            ],
+            "maxUtf16": 0
+          },
+          "javaTypeCandidate": "ExpansionValue<BigDecimal>",
+          "sqlTypeCandidate": "DECIMAL(p,s) a dimensionar; manter literal original",
+          "parserRequirements": "Sem float/double ou arredondamento. Parser atual admite20inteiros/8casas; qualificar em recortes maiores antes de reutilizar.",
+          "nonNullTypeObserved": true,
+          "nullabilityContract": "NULL preservado; ausência de NULL neste corte não autoriza NOT NULL",
+          "presentationPolicy": "DECIMAL_TEXT",
+          "presentationRule": "Texto numérico interpretado por decimal exato para confrontar a célula numérica. RAW permanece textual.",
+          "observedEnumMap": null,
+          "comparison": "COLUNA_E_TUPLA_COMPLETA_IGUAIS_NO_CORTE"
+        },
+        {
+          "ordinal": 10,
+          "wireName": "ctd_fgs_subtotal",
+          "excelHeader": "Frete Rodogarcia Sem Impostos",
+          "javaPropertyCandidate": "ctdFgsSubtotal",
+          "meaningAndUse": "Frete Rodogarcia sem impostos. Não substituir pelo subtotal da consolidação.",
+          "observed": {
+            "rows": 41,
+            "present": 41,
+            "nulls": 0,
+            "wireTypes": {
+              "STRING": 41
+            },
+            "maxUtf16": 7,
+            "maxArrayItems": 0,
+            "arrayItemTypes": {},
+            "objectKeys": [],
+            "emptyStrings": 0,
+            "maximumNumericTextPrecision": 6,
+            "maximumNumericTextScale": 2,
+            "maximumIntegerDigits": 0,
+            "arrayItemMaxUtf16": 0,
+            "objectValueTypes": {},
+            "sourceOffsets": {},
+            "timestampsWithFraction": 0
+          },
+          "native": {
+            "ordinal": 10,
+            "field": "ctd_fgs_subtotal",
+            "header": "Frete Rodogarcia Sem Impostos",
+            "nativeTypes": {
+              "NUMBER": 41
+            },
+            "numberFormats": [
+              "General"
+            ],
+            "maxUtf16": 0
+          },
+          "javaTypeCandidate": "ExpansionValue<BigDecimal>",
+          "sqlTypeCandidate": "DECIMAL(p,s) a dimensionar; manter literal original",
+          "parserRequirements": "Sem float/double ou arredondamento. Parser atual admite20inteiros/8casas; qualificar em recortes maiores antes de reutilizar.",
+          "nonNullTypeObserved": true,
+          "nullabilityContract": "NULL preservado; ausência de NULL neste corte não autoriza NOT NULL",
+          "presentationPolicy": "DECIMAL_TEXT",
+          "presentationRule": "Texto numérico interpretado por decimal exato para confrontar a célula numérica. RAW permanece textual.",
+          "observedEnumMap": null,
+          "comparison": "COLUNA_E_TUPLA_COMPLETA_IGUAIS_NO_CORTE"
+        },
+        {
+          "ordinal": 11,
+          "wireName": "ctd_fgs_total",
+          "excelHeader": "Frete Rodogarcia Final",
+          "javaPropertyCandidate": "ctdFgsTotal",
+          "meaningAndUse": "Frete Rodogarcia final. Repetição por relação futura pode duplicar totais; medir a granularidade antes de somar.",
+          "observed": {
+            "rows": 41,
+            "present": 41,
+            "nulls": 0,
+            "wireTypes": {
+              "STRING": 41
+            },
+            "maxUtf16": 7,
+            "maxArrayItems": 0,
+            "arrayItemTypes": {},
+            "objectKeys": [],
+            "emptyStrings": 0,
+            "maximumNumericTextPrecision": 6,
+            "maximumNumericTextScale": 2,
+            "maximumIntegerDigits": 0,
+            "arrayItemMaxUtf16": 0,
+            "objectValueTypes": {},
+            "sourceOffsets": {},
+            "timestampsWithFraction": 0
+          },
+          "native": {
+            "ordinal": 11,
+            "field": "ctd_fgs_total",
+            "header": "Frete Rodogarcia Final",
+            "nativeTypes": {
+              "NUMBER": 41
+            },
+            "numberFormats": [
+              "General"
+            ],
+            "maxUtf16": 0
+          },
+          "javaTypeCandidate": "ExpansionValue<BigDecimal>",
+          "sqlTypeCandidate": "DECIMAL(p,s) a dimensionar; manter literal original",
+          "parserRequirements": "Sem float/double ou arredondamento. Parser atual admite20inteiros/8casas; qualificar em recortes maiores antes de reutilizar.",
+          "nonNullTypeObserved": true,
+          "nullabilityContract": "NULL preservado; ausência de NULL neste corte não autoriza NOT NULL",
+          "presentationPolicy": "DECIMAL_TEXT",
+          "presentationRule": "Texto numérico interpretado por decimal exato para confrontar a célula numérica. RAW permanece textual.",
+          "observedEnumMap": null,
+          "comparison": "COLUNA_E_TUPLA_COMPLETA_IGUAIS_NO_CORTE"
+        },
+        {
+          "ordinal": 12,
+          "wireName": "ctd_fgs_taxed_weight",
+          "excelHeader": "Peso Taxado Rodogarcia",
+          "javaPropertyCandidate": "ctdFgsTaxedWeight",
+          "meaningAndUse": "Peso taxado do frete Rodogarcia. Três casas decimais observadas; a unidade não está declarada no INFO.",
+          "observed": {
+            "rows": 41,
+            "present": 41,
+            "nulls": 0,
+            "wireTypes": {
+              "STRING": 41
+            },
+            "maxUtf16": 7,
+            "maxArrayItems": 0,
+            "arrayItemTypes": {},
+            "objectKeys": [],
+            "emptyStrings": 0,
+            "maximumNumericTextPrecision": 6,
+            "maximumNumericTextScale": 3,
+            "maximumIntegerDigits": 0,
+            "arrayItemMaxUtf16": 0,
+            "objectValueTypes": {},
+            "sourceOffsets": {},
+            "timestampsWithFraction": 0
+          },
+          "native": {
+            "ordinal": 12,
+            "field": "ctd_fgs_taxed_weight",
+            "header": "Peso Taxado Rodogarcia",
+            "nativeTypes": {
+              "NUMBER": 41
+            },
+            "numberFormats": [
+              "General"
+            ],
+            "maxUtf16": 0
+          },
+          "javaTypeCandidate": "ExpansionValue<BigDecimal>",
+          "sqlTypeCandidate": "DECIMAL(p,s) a dimensionar; manter literal original",
+          "parserRequirements": "Sem float/double ou arredondamento. Parser atual admite20inteiros/8casas; qualificar em recortes maiores antes de reutilizar.",
+          "nonNullTypeObserved": true,
+          "nullabilityContract": "NULL preservado; ausência de NULL neste corte não autoriza NOT NULL",
+          "presentationPolicy": "DECIMAL_TEXT",
+          "presentationRule": "Texto numérico interpretado por decimal exato para confrontar a célula numérica. RAW permanece textual.",
+          "observedEnumMap": null,
+          "comparison": "COLUNA_E_TUPLA_COMPLETA_IGUAIS_NO_CORTE"
+        },
+        {
+          "ordinal": 13,
+          "wireName": "ctd_fgs_fte_has_delivery_receipt",
+          "excelHeader": "Comprovante Anexado",
+          "javaPropertyCandidate": "ctdFgsFteHasDeliveryReceipt",
+          "meaningAndUse": "Indicador booleano de comprovante anexado. Separar de data da entrega e do evento finalizador.",
+          "observed": {
+            "rows": 41,
+            "present": 41,
+            "nulls": 0,
+            "wireTypes": {
+              "BOOLEAN": 41
+            },
+            "maxUtf16": 0,
+            "maxArrayItems": 0,
+            "arrayItemTypes": {},
+            "objectKeys": [],
+            "emptyStrings": 0,
+            "maximumNumericTextPrecision": 0,
+            "maximumNumericTextScale": 0,
+            "maximumIntegerDigits": 0,
+            "arrayItemMaxUtf16": 0,
+            "objectValueTypes": {},
+            "sourceOffsets": {},
+            "timestampsWithFraction": 0
+          },
+          "native": {
+            "ordinal": 13,
+            "field": "ctd_fgs_fte_has_delivery_receipt",
+            "header": "Comprovante Anexado",
+            "nativeTypes": {
+              "STRING": 41
+            },
+            "numberFormats": [
+              "General"
+            ],
+            "maxUtf16": 3
+          },
+          "javaTypeCandidate": "ExpansionValue<Boolean>",
+          "sqlTypeCandidate": "BIT NULL",
+          "parserRequirements": "Reutilizar parser booleano estrito; sem converter NULL em false.",
+          "nonNullTypeObserved": true,
+          "nullabilityContract": "NULL preservado; ausência de NULL neste corte não autoriza NOT NULL",
+          "presentationPolicy": "BOOLEAN_PT",
+          "presentationRule": "Apresentação Excel: true→Sim e false→Não. Booleano original preservado.",
+          "observedEnumMap": null,
+          "comparison": "COLUNA_E_TUPLA_COMPLETA_IGUAIS_NO_CORTE"
+        },
+        {
+          "ordinal": 14,
+          "wireName": "bill_status",
+          "excelHeader": "Status Fatura",
+          "javaPropertyCandidate": "billStatus",
+          "meaningAndUse": "Status da fatura apresentado como texto pela própria origem. No corte, o Excel conserva esse texto sem tradução adicional.",
+          "observed": {
+            "rows": 41,
+            "present": 41,
+            "nulls": 0,
+            "wireTypes": {
+              "STRING": 41
+            },
+            "maxUtf16": 9,
+            "maxArrayItems": 0,
+            "arrayItemTypes": {},
+            "objectKeys": [],
+            "emptyStrings": 0,
+            "maximumNumericTextPrecision": 0,
+            "maximumNumericTextScale": 0,
+            "maximumIntegerDigits": 0,
+            "arrayItemMaxUtf16": 0,
+            "objectValueTypes": {},
+            "sourceOffsets": {},
+            "timestampsWithFraction": 0
+          },
+          "native": {
+            "ordinal": 14,
+            "field": "bill_status",
+            "header": "Status Fatura",
+            "nativeTypes": {
+              "STRING": 41
+            },
+            "numberFormats": [
+              "General"
+            ],
+            "maxUtf16": 9
+          },
+          "javaTypeCandidate": "ExpansionValue<String>",
+          "sqlTypeCandidate": "NVARCHAR com largura a dimensionar; original integral",
+          "parserRequirements": "Não aplicar trim, normalização, rótulo ou remoção de zeros por convenção. Parser text atual limita1024UTF16.",
+          "nonNullTypeObserved": true,
+          "nullabilityContract": "NULL preservado; ausência de NULL neste corte não autoriza NOT NULL",
+          "presentationPolicy": "DIRECT",
+          "presentationRule": "Valor literal; NULL continua NULL.",
+          "observedEnumMap": null,
+          "comparison": "COLUNA_E_TUPLA_COMPLETA_IGUAIS_NO_CORTE"
+        },
+        {
+          "ordinal": 15,
+          "wireName": "ctd_fgs_service_at",
+          "excelHeader": "Data Frete Rodogarcia",
+          "javaPropertyCandidate": "ctdFgsServiceAt",
+          "meaningAndUse": "Data e hora do frete Rodogarcia relacionado. Não é a data de seleção da consolidação.",
+          "observed": {
+            "rows": 41,
+            "present": 41,
+            "nulls": 0,
+            "wireTypes": {
+              "STRING": 41
+            },
+            "maxUtf16": 29,
+            "maxArrayItems": 0,
+            "arrayItemTypes": {},
+            "objectKeys": [],
+            "emptyStrings": 0,
+            "maximumNumericTextPrecision": 0,
+            "maximumNumericTextScale": 0,
+            "maximumIntegerDigits": 0,
+            "arrayItemMaxUtf16": 0,
+            "objectValueTypes": {},
+            "sourceOffsets": {
+              "-1 day, 21:00:00": 41
+            },
+            "timestampsWithFraction": 0
+          },
+          "native": {
+            "ordinal": 15,
+            "field": "ctd_fgs_service_at",
+            "header": "Data Frete Rodogarcia",
+            "nativeTypes": {
+              "DATETIME": 41
+            },
+            "numberFormats": [
+              "DD/MM/YYYY HH:MM:SS"
+            ],
+            "maxUtf16": 0
+          },
+          "javaTypeCandidate": "ExpansionValue<Instant>, com ISO/offset original em raw",
+          "sqlTypeCandidate": "DATETIMEOFFSET(7) candidato e raw ISO; qualificar precisão física",
+          "parserRequirements": "O offset-03:00foi observado; a janela usa America/Sao_Paulo. Não truncar para reproduzir o Excel.",
+          "nonNullTypeObserved": true,
+          "nullabilityContract": "NULL preservado; ausência de NULL neste corte não autoriza NOT NULL",
+          "presentationPolicy": "SOURCE_OFFSET_WALL_CLOCK",
+          "presentationRule": "Excel conserva data/hora civil do offset de origem. Não converter para UTC para comparar a célula.",
+          "observedEnumMap": null,
+          "comparison": "COLUNA_E_TUPLA_COMPLETA_IGUAIS_NO_CORTE"
+        },
+        {
+          "ordinal": 16,
+          "wireName": "ctd_fgs_corporation_sequence_number",
+          "excelHeader": "Minuta Rodogarcia",
+          "javaPropertyCandidate": "ctdFgsCorporationSequenceNumber",
+          "meaningAndUse": "Minuta Rodogarcia relacionada. Candidata a associação com Fretes, contextualizada por filial/escopo.",
+          "observed": {
+            "rows": 41,
+            "present": 41,
+            "nulls": 0,
+            "wireTypes": {
+              "INTEGER": 41
+            },
+            "maxUtf16": 0,
+            "maxArrayItems": 0,
+            "arrayItemTypes": {},
+            "objectKeys": [],
+            "emptyStrings": 0,
+            "maximumNumericTextPrecision": 0,
+            "maximumNumericTextScale": 0,
+            "maximumIntegerDigits": 6,
+            "arrayItemMaxUtf16": 0,
+            "objectValueTypes": {},
+            "sourceOffsets": {},
+            "timestampsWithFraction": 0
+          },
+          "native": {
+            "ordinal": 16,
+            "field": "ctd_fgs_corporation_sequence_number",
+            "header": "Minuta Rodogarcia",
+            "nativeTypes": {
+              "NUMBER": 41
+            },
+            "numberFormats": [
+              "General"
+            ],
+            "maxUtf16": 0
+          },
+          "javaTypeCandidate": "ExpansionValue<String> pelo parser integer; BigInteger em regra aritmética explícita",
+          "sqlTypeCandidate": "Identificador textual ou DECIMAL(38,0), conforme papel; sem INT por amostra",
+          "parserRequirements": "Inteiro exato; não usar double. O parser atual limita a38dígitos e precisa do teste do domínio.",
+          "nonNullTypeObserved": true,
+          "nullabilityContract": "NULL preservado; ausência de NULL neste corte não autoriza NOT NULL",
+          "presentationPolicy": "DIRECT",
+          "presentationRule": "Valor literal; NULL continua NULL.",
+          "observedEnumMap": null,
+          "comparison": "COLUNA_E_TUPLA_COMPLETA_IGUAIS_NO_CORTE"
+        },
+        {
+          "ordinal": 17,
+          "wireName": "ctd_fgs_invoices_volumes",
+          "excelHeader": "Volumes Rodogarcia",
+          "javaPropertyCandidate": "ctdFgsInvoicesVolumes",
+          "meaningAndUse": "Volumes do frete Rodogarcia. Campo distinto dos volumes da consolidação.",
+          "observed": {
+            "rows": 41,
+            "present": 41,
+            "nulls": 0,
+            "wireTypes": {
+              "INTEGER": 41
+            },
+            "maxUtf16": 0,
+            "maxArrayItems": 0,
+            "arrayItemTypes": {},
+            "objectKeys": [],
+            "emptyStrings": 0,
+            "maximumNumericTextPrecision": 0,
+            "maximumNumericTextScale": 0,
+            "maximumIntegerDigits": 3,
+            "arrayItemMaxUtf16": 0,
+            "objectValueTypes": {},
+            "sourceOffsets": {},
+            "timestampsWithFraction": 0
+          },
+          "native": {
+            "ordinal": 17,
+            "field": "ctd_fgs_invoices_volumes",
+            "header": "Volumes Rodogarcia",
+            "nativeTypes": {
+              "NUMBER": 41
+            },
+            "numberFormats": [
+              "General"
+            ],
+            "maxUtf16": 0
+          },
+          "javaTypeCandidate": "ExpansionValue<String> pelo parser integer; BigInteger em regra aritmética explícita",
+          "sqlTypeCandidate": "Identificador textual ou DECIMAL(38,0), conforme papel; sem INT por amostra",
+          "parserRequirements": "Inteiro exato; não usar double. O parser atual limita a38dígitos e precisa do teste do domínio.",
+          "nonNullTypeObserved": true,
+          "nullabilityContract": "NULL preservado; ausência de NULL neste corte não autoriza NOT NULL",
+          "presentationPolicy": "DIRECT",
+          "presentationRule": "Valor literal; NULL continua NULL.",
+          "observedEnumMap": null,
+          "comparison": "COLUNA_E_TUPLA_COMPLETA_IGUAIS_NO_CORTE"
+        },
+        {
+          "ordinal": 18,
+          "wireName": "ctd_fgs_invoices_mapping",
+          "excelHeader": "Nº NF",
+          "javaPropertyCandidate": "ctdFgsInvoicesMapping",
+          "meaningAndUse": "Lista ordenada de números de NF. Preservar cada item, posição e repetição; a célula Excel usa vírgula seguida de espaço.",
+          "observed": {
+            "rows": 41,
+            "present": 41,
+            "nulls": 0,
+            "wireTypes": {
+              "ARRAY": 41
+            },
+            "maxUtf16": 0,
+            "maxArrayItems": 2,
+            "arrayItemTypes": {
+              "STRING": 42
+            },
+            "objectKeys": [],
+            "emptyStrings": 0,
+            "maximumNumericTextPrecision": 0,
+            "maximumNumericTextScale": 0,
+            "maximumIntegerDigits": 0,
+            "arrayItemMaxUtf16": 7,
+            "objectValueTypes": {},
+            "sourceOffsets": {},
+            "timestampsWithFraction": 0
+          },
+          "native": {
+            "ordinal": 18,
+            "field": "ctd_fgs_invoices_mapping",
+            "header": "Nº NF",
+            "nativeTypes": {
+              "STRING": 41
+            },
+            "numberFormats": [
+              "General"
+            ],
+            "maxUtf16": 12
+          },
+          "javaTypeCandidate": "ExpansionValue<ExpansionStrings> candidato ou coleção própria qualificada",
+          "sqlTypeCandidate": "Tabela filha por ocorrência e posição; envelope JSON original",
+          "parserRequirements": "Preservar ordem/repetição. O parser compartilhado limita32itens/256UTF16 por item; máximo observado não vira limite do fornecedor.",
+          "nonNullTypeObserved": true,
+          "nullabilityContract": "NULL preservado; ausência de NULL neste corte não autoriza NOT NULL",
+          "presentationPolicy": "ARRAY_JOIN_COMMA_SPACE",
+          "presentationRule": "Somente apresentação Excel: juntar itens em ordem com vírgula e espaço. Lista original preservada.",
+          "observedEnumMap": null,
+          "comparison": "COLUNA_E_TUPLA_COMPLETA_IGUAIS_NO_CORTE"
+        },
+        {
+          "ordinal": 19,
+          "wireName": "ctd_fgs_dos_cty_name",
+          "excelHeader": "Cidade Origem Rodogarcia",
+          "javaPropertyCandidate": "ctdFgsDosCtyName",
+          "meaningAndUse": "Cidade de origem Rodogarcia conforme o rótulo oficial. Não inverter por interpretação da sigla do alias.",
+          "observed": {
+            "rows": 41,
+            "present": 41,
+            "nulls": 0,
+            "wireTypes": {
+              "STRING": 41
+            },
+            "maxUtf16": 20,
+            "maxArrayItems": 0,
+            "arrayItemTypes": {},
+            "objectKeys": [],
+            "emptyStrings": 0,
+            "maximumNumericTextPrecision": 0,
+            "maximumNumericTextScale": 0,
+            "maximumIntegerDigits": 0,
+            "arrayItemMaxUtf16": 0,
+            "objectValueTypes": {},
+            "sourceOffsets": {},
+            "timestampsWithFraction": 0
+          },
+          "native": {
+            "ordinal": 19,
+            "field": "ctd_fgs_dos_cty_name",
+            "header": "Cidade Origem Rodogarcia",
+            "nativeTypes": {
+              "STRING": 41
+            },
+            "numberFormats": [
+              "General"
+            ],
+            "maxUtf16": 20
+          },
+          "javaTypeCandidate": "ExpansionValue<String>",
+          "sqlTypeCandidate": "NVARCHAR com largura a dimensionar; original integral",
+          "parserRequirements": "Não aplicar trim, normalização, rótulo ou remoção de zeros por convenção. Parser text atual limita1024UTF16.",
+          "nonNullTypeObserved": true,
+          "nullabilityContract": "NULL preservado; ausência de NULL neste corte não autoriza NOT NULL",
+          "presentationPolicy": "DIRECT",
+          "presentationRule": "Valor literal; NULL continua NULL.",
+          "observedEnumMap": null,
+          "comparison": "COLUNA_E_TUPLA_COMPLETA_IGUAIS_NO_CORTE"
+        },
+        {
+          "ordinal": 20,
+          "wireName": "ctd_sdr_document",
+          "excelHeader": "CNPJ Remetente",
+          "javaPropertyCandidate": "ctdSdrDocument",
+          "meaningAndUse": "CNPJ do remetente da consolidação como texto. Nome e documento não são chaves físicas de recebimento.",
+          "observed": {
+            "rows": 41,
+            "present": 41,
+            "nulls": 0,
+            "wireTypes": {
+              "STRING": 41
+            },
+            "maxUtf16": 14,
+            "maxArrayItems": 0,
+            "arrayItemTypes": {},
+            "objectKeys": [],
+            "emptyStrings": 0,
+            "maximumNumericTextPrecision": 14,
+            "maximumNumericTextScale": 0,
+            "maximumIntegerDigits": 0,
+            "arrayItemMaxUtf16": 0,
+            "objectValueTypes": {},
+            "sourceOffsets": {},
+            "timestampsWithFraction": 0
+          },
+          "native": {
+            "ordinal": 20,
+            "field": "ctd_sdr_document",
+            "header": "CNPJ Remetente",
+            "nativeTypes": {
+              "STRING": 41
+            },
+            "numberFormats": [
+              "General"
+            ],
+            "maxUtf16": 14
+          },
+          "javaTypeCandidate": "ExpansionValue<String>",
+          "sqlTypeCandidate": "NVARCHAR com largura a dimensionar; original integral",
+          "parserRequirements": "Não aplicar trim, normalização, rótulo ou remoção de zeros por convenção. Parser text atual limita1024UTF16.",
+          "nonNullTypeObserved": true,
+          "nullabilityContract": "NULL preservado; ausência de NULL neste corte não autoriza NOT NULL",
+          "presentationPolicy": "DIRECT",
+          "presentationRule": "Valor literal; NULL continua NULL.",
+          "observedEnumMap": null,
+          "comparison": "COLUNA_E_TUPLA_COMPLETA_IGUAIS_NO_CORTE"
+        },
+        {
+          "ordinal": 21,
+          "wireName": "ctd_sdr_nickname",
+          "excelHeader": "Remetente",
+          "javaPropertyCandidate": "ctdSdrNickname",
+          "meaningAndUse": "Nome do remetente da consolidação, preservado literalmente.",
+          "observed": {
+            "rows": 41,
+            "present": 41,
+            "nulls": 0,
+            "wireTypes": {
+              "STRING": 41
+            },
+            "maxUtf16": 62,
+            "maxArrayItems": 0,
+            "arrayItemTypes": {},
+            "objectKeys": [],
+            "emptyStrings": 0,
+            "maximumNumericTextPrecision": 0,
+            "maximumNumericTextScale": 0,
+            "maximumIntegerDigits": 0,
+            "arrayItemMaxUtf16": 0,
+            "objectValueTypes": {},
+            "sourceOffsets": {},
+            "timestampsWithFraction": 0
+          },
+          "native": {
+            "ordinal": 21,
+            "field": "ctd_sdr_nickname",
+            "header": "Remetente",
+            "nativeTypes": {
+              "STRING": 41
+            },
+            "numberFormats": [
+              "General"
+            ],
+            "maxUtf16": 62
+          },
+          "javaTypeCandidate": "ExpansionValue<String>",
+          "sqlTypeCandidate": "NVARCHAR com largura a dimensionar; original integral",
+          "parserRequirements": "Não aplicar trim, normalização, rótulo ou remoção de zeros por convenção. Parser text atual limita1024UTF16.",
+          "nonNullTypeObserved": true,
+          "nullabilityContract": "NULL preservado; ausência de NULL neste corte não autoriza NOT NULL",
+          "presentationPolicy": "DIRECT",
+          "presentationRule": "Valor literal; NULL continua NULL.",
+          "observedEnumMap": null,
+          "comparison": "COLUNA_E_TUPLA_COMPLETA_IGUAIS_NO_CORTE"
+        },
+        {
+          "ordinal": 22,
+          "wireName": "ctd_fgs_oas_cty_name",
+          "excelHeader": "Cidade Destino Rodogarcia",
+          "javaPropertyCandidate": "ctdFgsOasCtyName",
+          "meaningAndUse": "Cidade de destino Rodogarcia conforme o rótulo oficial. Preservar o alias observado.",
+          "observed": {
+            "rows": 41,
+            "present": 41,
+            "nulls": 0,
+            "wireTypes": {
+              "STRING": 41
+            },
+            "maxUtf16": 19,
+            "maxArrayItems": 0,
+            "arrayItemTypes": {},
+            "objectKeys": [],
+            "emptyStrings": 0,
+            "maximumNumericTextPrecision": 0,
+            "maximumNumericTextScale": 0,
+            "maximumIntegerDigits": 0,
+            "arrayItemMaxUtf16": 0,
+            "objectValueTypes": {},
+            "sourceOffsets": {},
+            "timestampsWithFraction": 0
+          },
+          "native": {
+            "ordinal": 22,
+            "field": "ctd_fgs_oas_cty_name",
+            "header": "Cidade Destino Rodogarcia",
+            "nativeTypes": {
+              "STRING": 41
+            },
+            "numberFormats": [
+              "General"
+            ],
+            "maxUtf16": 19
+          },
+          "javaTypeCandidate": "ExpansionValue<String>",
+          "sqlTypeCandidate": "NVARCHAR com largura a dimensionar; original integral",
+          "parserRequirements": "Não aplicar trim, normalização, rótulo ou remoção de zeros por convenção. Parser text atual limita1024UTF16.",
+          "nonNullTypeObserved": true,
+          "nullabilityContract": "NULL preservado; ausência de NULL neste corte não autoriza NOT NULL",
+          "presentationPolicy": "DIRECT",
+          "presentationRule": "Valor literal; NULL continua NULL.",
+          "observedEnumMap": null,
+          "comparison": "COLUNA_E_TUPLA_COMPLETA_IGUAIS_NO_CORTE"
+        },
+        {
+          "ordinal": 23,
+          "wireName": "ctd_rpt_document",
+          "excelHeader": "CNPJ Destinatário",
+          "javaPropertyCandidate": "ctdRptDocument",
+          "meaningAndUse": "CNPJ do destinatário da consolidação como texto, com zeros e caracteres preservados.",
+          "observed": {
+            "rows": 41,
+            "present": 41,
+            "nulls": 0,
+            "wireTypes": {
+              "STRING": 41
+            },
+            "maxUtf16": 14,
+            "maxArrayItems": 0,
+            "arrayItemTypes": {},
+            "objectKeys": [],
+            "emptyStrings": 0,
+            "maximumNumericTextPrecision": 14,
+            "maximumNumericTextScale": 0,
+            "maximumIntegerDigits": 0,
+            "arrayItemMaxUtf16": 0,
+            "objectValueTypes": {},
+            "sourceOffsets": {},
+            "timestampsWithFraction": 0
+          },
+          "native": {
+            "ordinal": 23,
+            "field": "ctd_rpt_document",
+            "header": "CNPJ Destinatário",
+            "nativeTypes": {
+              "STRING": 41
+            },
+            "numberFormats": [
+              "General"
+            ],
+            "maxUtf16": 14
+          },
+          "javaTypeCandidate": "ExpansionValue<String>",
+          "sqlTypeCandidate": "NVARCHAR com largura a dimensionar; original integral",
+          "parserRequirements": "Não aplicar trim, normalização, rótulo ou remoção de zeros por convenção. Parser text atual limita1024UTF16.",
+          "nonNullTypeObserved": true,
+          "nullabilityContract": "NULL preservado; ausência de NULL neste corte não autoriza NOT NULL",
+          "presentationPolicy": "DIRECT",
+          "presentationRule": "Valor literal; NULL continua NULL.",
+          "observedEnumMap": null,
+          "comparison": "COLUNA_E_TUPLA_COMPLETA_IGUAIS_NO_CORTE"
+        },
+        {
+          "ordinal": 24,
+          "wireName": "ctd_rpt_nickname",
+          "excelHeader": "Destinatário",
+          "javaPropertyCandidate": "ctdRptNickname",
+          "meaningAndUse": "Nome do destinatário da consolidação, preservado literalmente.",
+          "observed": {
+            "rows": 41,
+            "present": 41,
+            "nulls": 0,
+            "wireTypes": {
+              "STRING": 41
+            },
+            "maxUtf16": 60,
+            "maxArrayItems": 0,
+            "arrayItemTypes": {},
+            "objectKeys": [],
+            "emptyStrings": 0,
+            "maximumNumericTextPrecision": 0,
+            "maximumNumericTextScale": 0,
+            "maximumIntegerDigits": 0,
+            "arrayItemMaxUtf16": 0,
+            "objectValueTypes": {},
+            "sourceOffsets": {},
+            "timestampsWithFraction": 0
+          },
+          "native": {
+            "ordinal": 24,
+            "field": "ctd_rpt_nickname",
+            "header": "Destinatário",
+            "nativeTypes": {
+              "STRING": 41
+            },
+            "numberFormats": [
+              "General"
+            ],
+            "maxUtf16": 60
+          },
+          "javaTypeCandidate": "ExpansionValue<String>",
+          "sqlTypeCandidate": "NVARCHAR com largura a dimensionar; original integral",
+          "parserRequirements": "Não aplicar trim, normalização, rótulo ou remoção de zeros por convenção. Parser text atual limita1024UTF16.",
+          "nonNullTypeObserved": true,
+          "nullabilityContract": "NULL preservado; ausência de NULL neste corte não autoriza NOT NULL",
+          "presentationPolicy": "DIRECT",
+          "presentationRule": "Valor literal; NULL continua NULL.",
+          "observedEnumMap": null,
+          "comparison": "COLUNA_E_TUPLA_COMPLETA_IGUAIS_NO_CORTE"
+        },
+        {
+          "ordinal": 25,
+          "wireName": "ctd_rpt_charge_tde",
+          "excelHeader": "Cobra TDE",
+          "javaPropertyCandidate": "ctdRptChargeTde",
+          "meaningAndUse": "Indicador booleano Cobra TDE. Não inferir que seja o valor monetário TDA de outro campo.",
+          "observed": {
+            "rows": 41,
+            "present": 41,
+            "nulls": 0,
+            "wireTypes": {
+              "BOOLEAN": 41
+            },
+            "maxUtf16": 0,
+            "maxArrayItems": 0,
+            "arrayItemTypes": {},
+            "objectKeys": [],
+            "emptyStrings": 0,
+            "maximumNumericTextPrecision": 0,
+            "maximumNumericTextScale": 0,
+            "maximumIntegerDigits": 0,
+            "arrayItemMaxUtf16": 0,
+            "objectValueTypes": {},
+            "sourceOffsets": {},
+            "timestampsWithFraction": 0
+          },
+          "native": {
+            "ordinal": 25,
+            "field": "ctd_rpt_charge_tde",
+            "header": "Cobra TDE",
+            "nativeTypes": {
+              "STRING": 41
+            },
+            "numberFormats": [
+              "General"
+            ],
+            "maxUtf16": 3
+          },
+          "javaTypeCandidate": "ExpansionValue<Boolean>",
+          "sqlTypeCandidate": "BIT NULL",
+          "parserRequirements": "Reutilizar parser booleano estrito; sem converter NULL em false.",
+          "nonNullTypeObserved": true,
+          "nullabilityContract": "NULL preservado; ausência de NULL neste corte não autoriza NOT NULL",
+          "presentationPolicy": "BOOLEAN_PT",
+          "presentationRule": "Apresentação Excel: true→Sim e false→Não. Booleano original preservado.",
+          "observedEnumMap": null,
+          "comparison": "COLUNA_E_TUPLA_COMPLETA_IGUAIS_NO_CORTE"
+        },
+        {
+          "ordinal": 26,
+          "wireName": "ctd_fgs_dpn_delivery_prediction_at",
+          "excelHeader": "Previsão de Entrega",
+          "javaPropertyCandidate": "ctdFgsDpnDeliveryPredictionAt",
+          "meaningAndUse": "Previsão de entrega do frete. Frações de segundo existem na origem e são omitidas no Excel do corte.",
+          "observed": {
+            "rows": 41,
+            "present": 41,
+            "nulls": 0,
+            "wireTypes": {
+              "STRING": 41
+            },
+            "maxUtf16": 29,
+            "maxArrayItems": 0,
+            "arrayItemTypes": {},
+            "objectKeys": [],
+            "emptyStrings": 0,
+            "maximumNumericTextPrecision": 0,
+            "maximumNumericTextScale": 0,
+            "maximumIntegerDigits": 0,
+            "arrayItemMaxUtf16": 0,
+            "objectValueTypes": {},
+            "sourceOffsets": {
+              "-1 day, 21:00:00": 41
+            },
+            "timestampsWithFraction": 26
+          },
+          "native": {
+            "ordinal": 26,
+            "field": "ctd_fgs_dpn_delivery_prediction_at",
+            "header": "Previsão de Entrega",
+            "nativeTypes": {
+              "DATETIME": 41
+            },
+            "numberFormats": [
+              "DD/MM/YYYY HH:MM:SS"
+            ],
+            "maxUtf16": 0
+          },
+          "javaTypeCandidate": "ExpansionValue<Instant>, com ISO/offset original em raw",
+          "sqlTypeCandidate": "DATETIMEOFFSET(7) candidato e raw ISO; qualificar precisão física",
+          "parserRequirements": "O offset-03:00foi observado; a janela usa America/Sao_Paulo. Não truncar para reproduzir o Excel.",
+          "nonNullTypeObserved": true,
+          "nullabilityContract": "NULL preservado; ausência de NULL neste corte não autoriza NOT NULL",
+          "presentationPolicy": "OBSERVED_EXCEL_SECONDS_11067",
+          "presentationRule": "Somente apresentação deste campo no Excel: descartar fração de segundo, mantendo data/hora civil. RAW e futuro tipo Java conservam a fração.",
+          "observedEnumMap": null,
+          "comparison": "COLUNA_E_TUPLA_COMPLETA_IGUAIS_NO_CORTE"
+        },
+        {
+          "ordinal": 27,
+          "wireName": "ctd_fgs_finished_at",
+          "excelHeader": "Data de Entrega",
+          "javaPropertyCandidate": "ctdFgsFinishedAt",
+          "meaningAndUse": "Data e hora de entrega do frete. NULL em 16/41 linhas; não preencher com previsão ou data de captura.",
+          "observed": {
+            "rows": 41,
+            "present": 41,
+            "nulls": 16,
+            "wireTypes": {
+              "STRING": 25,
+              "NULL": 16
+            },
+            "maxUtf16": 29,
+            "maxArrayItems": 0,
+            "arrayItemTypes": {},
+            "objectKeys": [],
+            "emptyStrings": 0,
+            "maximumNumericTextPrecision": 0,
+            "maximumNumericTextScale": 0,
+            "maximumIntegerDigits": 0,
+            "arrayItemMaxUtf16": 0,
+            "objectValueTypes": {},
+            "sourceOffsets": {
+              "-1 day, 21:00:00": 25
+            },
+            "timestampsWithFraction": 0
+          },
+          "native": {
+            "ordinal": 27,
+            "field": "ctd_fgs_finished_at",
+            "header": "Data de Entrega",
+            "nativeTypes": {
+              "DATETIME": 25,
+              "NULL": 16
+            },
+            "numberFormats": [
+              "DD/MM/YYYY HH:MM:SS"
+            ],
+            "maxUtf16": 0
+          },
+          "javaTypeCandidate": "ExpansionValue<Instant>, com ISO/offset original em raw",
+          "sqlTypeCandidate": "DATETIMEOFFSET(7) candidato e raw ISO; qualificar precisão física",
+          "parserRequirements": "O offset-03:00foi observado; a janela usa America/Sao_Paulo. Não truncar para reproduzir o Excel.",
+          "nonNullTypeObserved": true,
+          "nullabilityContract": "NULL preservado; ausência de NULL neste corte não autoriza NOT NULL",
+          "presentationPolicy": "SOURCE_OFFSET_WALL_CLOCK",
+          "presentationRule": "Excel conserva data/hora civil do offset de origem. Não converter para UTC para comparar a célula.",
+          "observedEnumMap": null,
+          "comparison": "COLUNA_E_TUPLA_COMPLETA_IGUAIS_NO_CORTE"
+        },
+        {
+          "ordinal": 28,
+          "wireName": "ctd_fgs_dpn_finished_within_deadline",
+          "excelHeader": "Entregue no Prazo",
+          "javaPropertyCandidate": "ctdFgsDpnFinishedWithinDeadline",
+          "meaningAndUse": "Indicador booleano de entrega no prazo fornecido pelo ESL; não recalcular silenciosamente.",
+          "observed": {
+            "rows": 41,
+            "present": 41,
+            "nulls": 0,
+            "wireTypes": {
+              "BOOLEAN": 41
+            },
+            "maxUtf16": 0,
+            "maxArrayItems": 0,
+            "arrayItemTypes": {},
+            "objectKeys": [],
+            "emptyStrings": 0,
+            "maximumNumericTextPrecision": 0,
+            "maximumNumericTextScale": 0,
+            "maximumIntegerDigits": 0,
+            "arrayItemMaxUtf16": 0,
+            "objectValueTypes": {},
+            "sourceOffsets": {},
+            "timestampsWithFraction": 0
+          },
+          "native": {
+            "ordinal": 28,
+            "field": "ctd_fgs_dpn_finished_within_deadline",
+            "header": "Entregue no Prazo",
+            "nativeTypes": {
+              "STRING": 41
+            },
+            "numberFormats": [
+              "General"
+            ],
+            "maxUtf16": 3
+          },
+          "javaTypeCandidate": "ExpansionValue<Boolean>",
+          "sqlTypeCandidate": "BIT NULL",
+          "parserRequirements": "Reutilizar parser booleano estrito; sem converter NULL em false.",
+          "nonNullTypeObserved": true,
+          "nullabilityContract": "NULL preservado; ausência de NULL neste corte não autoriza NOT NULL",
+          "presentationPolicy": "BOOLEAN_PT",
+          "presentationRule": "Apresentação Excel: true→Sim e false→Não. Booleano original preservado.",
+          "observedEnumMap": null,
+          "comparison": "COLUNA_E_TUPLA_COMPLETA_IGUAIS_NO_CORTE"
+        },
+        {
+          "ordinal": 29,
+          "wireName": "ctd_fgs_fte_lce_ore_description",
+          "excelHeader": "Última Ocorrência",
+          "javaPropertyCandidate": "ctdFgsFteLceOreDescription",
+          "meaningAndUse": "Descrição da última ocorrência do frete. É um estado relacionado, não a coleção inteira de Ocorrências12072.",
+          "observed": {
+            "rows": 41,
+            "present": 41,
+            "nulls": 0,
+            "wireTypes": {
+              "STRING": 41
+            },
+            "maxUtf16": 30,
+            "maxArrayItems": 0,
+            "arrayItemTypes": {},
+            "objectKeys": [],
+            "emptyStrings": 0,
+            "maximumNumericTextPrecision": 0,
+            "maximumNumericTextScale": 0,
+            "maximumIntegerDigits": 0,
+            "arrayItemMaxUtf16": 0,
+            "objectValueTypes": {},
+            "sourceOffsets": {},
+            "timestampsWithFraction": 0
+          },
+          "native": {
+            "ordinal": 29,
+            "field": "ctd_fgs_fte_lce_ore_description",
+            "header": "Última Ocorrência",
+            "nativeTypes": {
+              "STRING": 41
+            },
+            "numberFormats": [
+              "General"
+            ],
+            "maxUtf16": 30
+          },
+          "javaTypeCandidate": "ExpansionValue<String>",
+          "sqlTypeCandidate": "NVARCHAR com largura a dimensionar; original integral",
+          "parserRequirements": "Não aplicar trim, normalização, rótulo ou remoção de zeros por convenção. Parser text atual limita1024UTF16.",
+          "nonNullTypeObserved": true,
+          "nullabilityContract": "NULL preservado; ausência de NULL neste corte não autoriza NOT NULL",
+          "presentationPolicy": "DIRECT",
+          "presentationRule": "Valor literal; NULL continua NULL.",
+          "observedEnumMap": null,
+          "comparison": "COLUNA_E_TUPLA_COMPLETA_IGUAIS_NO_CORTE"
+        },
+        {
+          "ordinal": 30,
+          "wireName": "ctd_fgs_fte_foe_ore_description",
+          "excelHeader": "Ocorrência Finalizadora",
+          "javaPropertyCandidate": "ctdFgsFteFoeOreDescription",
+          "meaningAndUse": "Descrição da ocorrência finalizadora do frete; pode ser NULL.",
+          "observed": {
+            "rows": 41,
+            "present": 41,
+            "nulls": 16,
+            "wireTypes": {
+              "STRING": 25,
+              "NULL": 16
+            },
+            "maxUtf16": 29,
+            "maxArrayItems": 0,
+            "arrayItemTypes": {},
+            "objectKeys": [],
+            "emptyStrings": 0,
+            "maximumNumericTextPrecision": 0,
+            "maximumNumericTextScale": 0,
+            "maximumIntegerDigits": 0,
+            "arrayItemMaxUtf16": 0,
+            "objectValueTypes": {},
+            "sourceOffsets": {},
+            "timestampsWithFraction": 0
+          },
+          "native": {
+            "ordinal": 30,
+            "field": "ctd_fgs_fte_foe_ore_description",
+            "header": "Ocorrência Finalizadora",
+            "nativeTypes": {
+              "STRING": 25,
+              "NULL": 16
+            },
+            "numberFormats": [
+              null,
+              "General"
+            ],
+            "maxUtf16": 29
+          },
+          "javaTypeCandidate": "ExpansionValue<String>",
+          "sqlTypeCandidate": "NVARCHAR com largura a dimensionar; original integral",
+          "parserRequirements": "Não aplicar trim, normalização, rótulo ou remoção de zeros por convenção. Parser text atual limita1024UTF16.",
+          "nonNullTypeObserved": true,
+          "nullabilityContract": "NULL preservado; ausência de NULL neste corte não autoriza NOT NULL",
+          "presentationPolicy": "DIRECT",
+          "presentationRule": "Valor literal; NULL continua NULL.",
+          "observedEnumMap": null,
+          "comparison": "COLUNA_E_TUPLA_COMPLETA_IGUAIS_NO_CORTE"
+        },
+        {
+          "ordinal": 31,
+          "wireName": "ctd_fgs_fte_foe_occurrence_at",
+          "excelHeader": "Data Ocorrência Finalizadora",
+          "javaPropertyCandidate": "ctdFgsFteFoeOccurrenceAt",
+          "meaningAndUse": "Data e hora da ocorrência finalizadora; pode ser NULL e não substitui a data de entrega.",
+          "observed": {
+            "rows": 41,
+            "present": 41,
+            "nulls": 16,
+            "wireTypes": {
+              "STRING": 25,
+              "NULL": 16
+            },
+            "maxUtf16": 29,
+            "maxArrayItems": 0,
+            "arrayItemTypes": {},
+            "objectKeys": [],
+            "emptyStrings": 0,
+            "maximumNumericTextPrecision": 0,
+            "maximumNumericTextScale": 0,
+            "maximumIntegerDigits": 0,
+            "arrayItemMaxUtf16": 0,
+            "objectValueTypes": {},
+            "sourceOffsets": {
+              "-1 day, 21:00:00": 25
+            },
+            "timestampsWithFraction": 0
+          },
+          "native": {
+            "ordinal": 31,
+            "field": "ctd_fgs_fte_foe_occurrence_at",
+            "header": "Data Ocorrência Finalizadora",
+            "nativeTypes": {
+              "DATETIME": 25,
+              "NULL": 16
+            },
+            "numberFormats": [
+              "DD/MM/YYYY HH:MM:SS"
+            ],
+            "maxUtf16": 0
+          },
+          "javaTypeCandidate": "ExpansionValue<Instant>, com ISO/offset original em raw",
+          "sqlTypeCandidate": "DATETIMEOFFSET(7) candidato e raw ISO; qualificar precisão física",
+          "parserRequirements": "O offset-03:00foi observado; a janela usa America/Sao_Paulo. Não truncar para reproduzir o Excel.",
+          "nonNullTypeObserved": true,
+          "nullabilityContract": "NULL preservado; ausência de NULL neste corte não autoriza NOT NULL",
+          "presentationPolicy": "SOURCE_OFFSET_WALL_CLOCK",
+          "presentationRule": "Excel conserva data/hora civil do offset de origem. Não converter para UTC para comparar a célula.",
+          "observedEnumMap": null,
+          "comparison": "COLUNA_E_TUPLA_COMPLETA_IGUAIS_NO_CORTE"
+        },
+        {
+          "ordinal": 32,
+          "wireName": "ctd_fgs_d_t_created_at",
+          "excelHeader": "Comprovantes de entrega/Data criação",
+          "javaPropertyCandidate": "ctdFgsDTCreatedAt",
+          "meaningAndUse": "Data de criação do comprovante. Preservar offset/frações; o Excel omite a parte fracionária no corte.",
+          "observed": {
+            "rows": 41,
+            "present": 41,
+            "nulls": 16,
+            "wireTypes": {
+              "STRING": 25,
+              "NULL": 16
+            },
+            "maxUtf16": 29,
+            "maxArrayItems": 0,
+            "arrayItemTypes": {},
+            "objectKeys": [],
+            "emptyStrings": 0,
+            "maximumNumericTextPrecision": 0,
+            "maximumNumericTextScale": 0,
+            "maximumIntegerDigits": 0,
+            "arrayItemMaxUtf16": 0,
+            "objectValueTypes": {},
+            "sourceOffsets": {
+              "-1 day, 21:00:00": 25
+            },
+            "timestampsWithFraction": 24
+          },
+          "native": {
+            "ordinal": 32,
+            "field": "ctd_fgs_d_t_created_at",
+            "header": "Comprovantes de entrega/Data criação",
+            "nativeTypes": {
+              "DATETIME": 25,
+              "NULL": 16
+            },
+            "numberFormats": [
+              "DD/MM/YYYY HH:MM:SS"
+            ],
+            "maxUtf16": 0
+          },
+          "javaTypeCandidate": "ExpansionValue<Instant>, com ISO/offset original em raw",
+          "sqlTypeCandidate": "DATETIMEOFFSET(7) candidato e raw ISO; qualificar precisão física",
+          "parserRequirements": "O offset-03:00foi observado; a janela usa America/Sao_Paulo. Não truncar para reproduzir o Excel.",
+          "nonNullTypeObserved": true,
+          "nullabilityContract": "NULL preservado; ausência de NULL neste corte não autoriza NOT NULL",
+          "presentationPolicy": "OBSERVED_EXCEL_SECONDS_11067",
+          "presentationRule": "Somente apresentação deste campo no Excel: descartar fração de segundo, mantendo data/hora civil. RAW e futuro tipo Java conservam a fração.",
+          "observedEnumMap": null,
+          "comparison": "COLUNA_E_TUPLA_COMPLETA_IGUAIS_NO_CORTE"
+        },
+        {
+          "ordinal": 33,
+          "wireName": "invoices_volumes",
+          "excelHeader": "Volumes Consolidação",
+          "javaPropertyCandidate": "invoicesVolumes",
+          "meaningAndUse": "Volumes da consolidação. Não confundir nem somar junto com os volumes Rodogarcia para contar o mesmo transporte.",
+          "observed": {
+            "rows": 41,
+            "present": 41,
+            "nulls": 0,
+            "wireTypes": {
+              "INTEGER": 41
+            },
+            "maxUtf16": 0,
+            "maxArrayItems": 0,
+            "arrayItemTypes": {},
+            "objectKeys": [],
+            "emptyStrings": 0,
+            "maximumNumericTextPrecision": 0,
+            "maximumNumericTextScale": 0,
+            "maximumIntegerDigits": 3,
+            "arrayItemMaxUtf16": 0,
+            "objectValueTypes": {},
+            "sourceOffsets": {},
+            "timestampsWithFraction": 0
+          },
+          "native": {
+            "ordinal": 33,
+            "field": "invoices_volumes",
+            "header": "Volumes Consolidação",
+            "nativeTypes": {
+              "NUMBER": 41
+            },
+            "numberFormats": [
+              "General"
+            ],
+            "maxUtf16": 0
+          },
+          "javaTypeCandidate": "ExpansionValue<String> pelo parser integer; BigInteger em regra aritmética explícita",
+          "sqlTypeCandidate": "Identificador textual ou DECIMAL(38,0), conforme papel; sem INT por amostra",
+          "parserRequirements": "Inteiro exato; não usar double. O parser atual limita a38dígitos e precisa do teste do domínio.",
+          "nonNullTypeObserved": true,
+          "nullabilityContract": "NULL preservado; ausência de NULL neste corte não autoriza NOT NULL",
+          "presentationPolicy": "DIRECT",
+          "presentationRule": "Valor literal; NULL continua NULL.",
+          "observedEnumMap": null,
+          "comparison": "COLUNA_E_TUPLA_COMPLETA_IGUAIS_NO_CORTE"
+        },
+        {
+          "ordinal": 34,
+          "wireName": "real_weight",
+          "excelHeader": "Peso Real Consolidação",
+          "javaPropertyCandidate": "realWeight",
+          "meaningAndUse": "Peso real da consolidação. Decimal textual; unidade depende de confirmação do contrato de negócio.",
+          "observed": {
+            "rows": 41,
+            "present": 41,
+            "nulls": 0,
+            "wireTypes": {
+              "STRING": 41
+            },
+            "maxUtf16": 6,
+            "maxArrayItems": 0,
+            "arrayItemTypes": {},
+            "objectKeys": [],
+            "emptyStrings": 0,
+            "maximumNumericTextPrecision": 5,
+            "maximumNumericTextScale": 2,
+            "maximumIntegerDigits": 0,
+            "arrayItemMaxUtf16": 0,
+            "objectValueTypes": {},
+            "sourceOffsets": {},
+            "timestampsWithFraction": 0
+          },
+          "native": {
+            "ordinal": 34,
+            "field": "real_weight",
+            "header": "Peso Real Consolidação",
+            "nativeTypes": {
+              "NUMBER": 41
+            },
+            "numberFormats": [
+              "General"
+            ],
+            "maxUtf16": 0
+          },
+          "javaTypeCandidate": "ExpansionValue<BigDecimal>",
+          "sqlTypeCandidate": "DECIMAL(p,s) a dimensionar; manter literal original",
+          "parserRequirements": "Sem float/double ou arredondamento. Parser atual admite20inteiros/8casas; qualificar em recortes maiores antes de reutilizar.",
+          "nonNullTypeObserved": true,
+          "nullabilityContract": "NULL preservado; ausência de NULL neste corte não autoriza NOT NULL",
+          "presentationPolicy": "DECIMAL_TEXT",
+          "presentationRule": "Texto numérico interpretado por decimal exato para confrontar a célula numérica. RAW permanece textual.",
+          "observedEnumMap": null,
+          "comparison": "COLUNA_E_TUPLA_COMPLETA_IGUAIS_NO_CORTE"
+        },
+        {
+          "ordinal": 35,
+          "wireName": "taxed_weight",
+          "excelHeader": "Peso Taxado Consolidação",
+          "javaPropertyCandidate": "taxedWeight",
+          "meaningAndUse": "Peso taxado da consolidação, distinto do peso taxado Rodogarcia. Não usar ponto flutuante.",
+          "observed": {
+            "rows": 41,
+            "present": 41,
+            "nulls": 0,
+            "wireTypes": {
+              "STRING": 41
+            },
+            "maxUtf16": 6,
+            "maxArrayItems": 0,
+            "arrayItemTypes": {},
+            "objectKeys": [],
+            "emptyStrings": 0,
+            "maximumNumericTextPrecision": 5,
+            "maximumNumericTextScale": 2,
+            "maximumIntegerDigits": 0,
+            "arrayItemMaxUtf16": 0,
+            "objectValueTypes": {},
+            "sourceOffsets": {},
+            "timestampsWithFraction": 0
+          },
+          "native": {
+            "ordinal": 35,
+            "field": "taxed_weight",
+            "header": "Peso Taxado Consolidação",
+            "nativeTypes": {
+              "NUMBER": 41
+            },
+            "numberFormats": [
+              "General"
+            ],
+            "maxUtf16": 0
+          },
+          "javaTypeCandidate": "ExpansionValue<BigDecimal>",
+          "sqlTypeCandidate": "DECIMAL(p,s) a dimensionar; manter literal original",
+          "parserRequirements": "Sem float/double ou arredondamento. Parser atual admite20inteiros/8casas; qualificar em recortes maiores antes de reutilizar.",
+          "nonNullTypeObserved": true,
+          "nullabilityContract": "NULL preservado; ausência de NULL neste corte não autoriza NOT NULL",
+          "presentationPolicy": "DECIMAL_TEXT",
+          "presentationRule": "Texto numérico interpretado por decimal exato para confrontar a célula numérica. RAW permanece textual.",
+          "observedEnumMap": null,
+          "comparison": "COLUNA_E_TUPLA_COMPLETA_IGUAIS_NO_CORTE"
+        },
+        {
+          "ordinal": 36,
+          "wireName": "invoices_value",
+          "excelHeader": "Valor NF Consolidação",
+          "javaPropertyCandidate": "invoicesValue",
+          "meaningAndUse": "Valor das notas fiscais da consolidação. Decimal exato, sem derivar de valores de frete.",
+          "observed": {
+            "rows": 41,
+            "present": 41,
+            "nulls": 0,
+            "wireTypes": {
+              "STRING": 41
+            },
+            "maxUtf16": 9,
+            "maxArrayItems": 0,
+            "arrayItemTypes": {},
+            "objectKeys": [],
+            "emptyStrings": 0,
+            "maximumNumericTextPrecision": 8,
+            "maximumNumericTextScale": 2,
+            "maximumIntegerDigits": 0,
+            "arrayItemMaxUtf16": 0,
+            "objectValueTypes": {},
+            "sourceOffsets": {},
+            "timestampsWithFraction": 0
+          },
+          "native": {
+            "ordinal": 36,
+            "field": "invoices_value",
+            "header": "Valor NF Consolidação",
+            "nativeTypes": {
+              "NUMBER": 41
+            },
+            "numberFormats": [
+              "General"
+            ],
+            "maxUtf16": 0
+          },
+          "javaTypeCandidate": "ExpansionValue<BigDecimal>",
+          "sqlTypeCandidate": "DECIMAL(p,s) a dimensionar; manter literal original",
+          "parserRequirements": "Sem float/double ou arredondamento. Parser atual admite20inteiros/8casas; qualificar em recortes maiores antes de reutilizar.",
+          "nonNullTypeObserved": true,
+          "nullabilityContract": "NULL preservado; ausência de NULL neste corte não autoriza NOT NULL",
+          "presentationPolicy": "DECIMAL_TEXT",
+          "presentationRule": "Texto numérico interpretado por decimal exato para confrontar a célula numérica. RAW permanece textual.",
+          "observedEnumMap": null,
+          "comparison": "COLUNA_E_TUPLA_COMPLETA_IGUAIS_NO_CORTE"
+        },
+        {
+          "ordinal": 37,
+          "wireName": "ctd_diy_cin_tda_value",
+          "excelHeader": "Valor TDA",
+          "javaPropertyCandidate": "ctdDiyCinTdaValue",
+          "meaningAndUse": "Valor TDA. Texto numérico ou NULL; não transformar NULL em zero nem confundir com Cobra TDE.",
+          "observed": {
+            "rows": 41,
+            "present": 41,
+            "nulls": 13,
+            "wireTypes": {
+              "STRING": 28,
+              "NULL": 13
+            },
+            "maxUtf16": 3,
+            "maxArrayItems": 0,
+            "arrayItemTypes": {},
+            "objectKeys": [],
+            "emptyStrings": 0,
+            "maximumNumericTextPrecision": 1,
+            "maximumNumericTextScale": 1,
+            "maximumIntegerDigits": 0,
+            "arrayItemMaxUtf16": 0,
+            "objectValueTypes": {},
+            "sourceOffsets": {},
+            "timestampsWithFraction": 0
+          },
+          "native": {
+            "ordinal": 37,
+            "field": "ctd_diy_cin_tda_value",
+            "header": "Valor TDA",
+            "nativeTypes": {
+              "NUMBER": 28,
+              "NULL": 13
+            },
+            "numberFormats": [
+              null,
+              "General"
+            ],
+            "maxUtf16": 0
+          },
+          "javaTypeCandidate": "ExpansionValue<BigDecimal>",
+          "sqlTypeCandidate": "DECIMAL(p,s) a dimensionar; manter literal original",
+          "parserRequirements": "Sem float/double ou arredondamento. Parser atual admite20inteiros/8casas; qualificar em recortes maiores antes de reutilizar.",
+          "nonNullTypeObserved": true,
+          "nullabilityContract": "NULL preservado; ausência de NULL neste corte não autoriza NOT NULL",
+          "presentationPolicy": "DECIMAL_TEXT",
+          "presentationRule": "Texto numérico interpretado por decimal exato para confrontar a célula numérica. RAW permanece textual.",
+          "observedEnumMap": null,
+          "comparison": "COLUNA_E_TUPLA_COMPLETA_IGUAIS_NO_CORTE"
+        },
+        {
+          "ordinal": 38,
+          "wireName": "ctd_ant_document",
+          "excelHeader": "Nº Fatura Financeiro",
+          "javaPropertyCandidate": "ctdAntDocument",
+          "meaningAndUse": "Número da fatura do financeiro. Somente NULL neste corte; tipo não nulo e relação com Contas a Pagar ainda precisam de prova.",
+          "observed": {
+            "rows": 41,
+            "present": 41,
+            "nulls": 41,
+            "wireTypes": {
+              "NULL": 41
+            },
+            "maxUtf16": 0,
+            "maxArrayItems": 0,
+            "arrayItemTypes": {},
+            "objectKeys": [],
+            "emptyStrings": 0,
+            "maximumNumericTextPrecision": 0,
+            "maximumNumericTextScale": 0,
+            "maximumIntegerDigits": 0,
+            "arrayItemMaxUtf16": 0,
+            "objectValueTypes": {},
+            "sourceOffsets": {},
+            "timestampsWithFraction": 0
+          },
+          "native": {
+            "ordinal": 38,
+            "field": "ctd_ant_document",
+            "header": "Nº Fatura Financeiro",
+            "nativeTypes": {
+              "NULL": 41
+            },
+            "numberFormats": [
+              null
+            ],
+            "maxUtf16": 0
+          },
+          "javaTypeCandidate": "ExpansionValue<String> candidato; JsonNode até qualificar não nulo",
+          "sqlTypeCandidate": "NVARCHAR com largura a qualificar; envelope original preservado",
+          "parserRequirements": "Somente NULL observado. Não fixar parser de texto/número ou limite por suposição.",
+          "nonNullTypeObserved": false,
+          "nullabilityContract": "NULL preservado; ausência de NULL neste corte não autoriza NOT NULL",
+          "presentationPolicy": "DIRECT",
+          "presentationRule": "Valor literal; NULL continua NULL.",
+          "observedEnumMap": null,
+          "comparison": "COLUNA_E_TUPLA_COMPLETA_IGUAIS_NO_CORTE"
+        },
+        {
+          "ordinal": 39,
+          "wireName": "charged_value_details",
+          "excelHeader": "Composição XML",
+          "javaPropertyCandidate": "chargedValueDetails",
+          "meaningAndUse": "Objeto JSON com composição de cobrança XML. Preservar chaves dinâmicas, valores decimais exatos, ordem e objeto vazio. Não expandir em colunas fixas sem contrato.",
+          "observed": {
+            "rows": 41,
+            "present": 41,
+            "nulls": 0,
+            "wireTypes": {
+              "OBJECT": 41
+            },
+            "maxUtf16": 0,
+            "maxArrayItems": 0,
+            "arrayItemTypes": {},
+            "objectKeys": [
+              "DESPACHO",
+              "FRETE PESO",
+              "FRETE VALOR",
+              "GRIS",
+              "PEDAGIO",
+              "TAXA ADICIONAL",
+              "TAXA DIF.ACESSO"
+            ],
+            "emptyStrings": 0,
+            "maximumNumericTextPrecision": 0,
+            "maximumNumericTextScale": 0,
+            "maximumIntegerDigits": 0,
+            "arrayItemMaxUtf16": 0,
+            "objectValueTypes": {
+              "FRETE VALOR": {
+                "Decimal": 16
+              },
+              "FRETE PESO": {
+                "Decimal": 1
+              },
+              "DESPACHO": {
+                "Decimal": 1
+              },
+              "PEDAGIO": {
+                "Decimal": 1
+              },
+              "GRIS": {
+                "Decimal": 1
+              },
+              "TAXA DIF.ACESSO": {
+                "Decimal": 1
+              },
+              "TAXA ADICIONAL": {
+                "Decimal": 1
+              }
+            },
+            "sourceOffsets": {},
+            "timestampsWithFraction": 0
+          },
+          "native": {
+            "ordinal": 39,
+            "field": "charged_value_details",
+            "header": "Composição XML",
+            "nativeTypes": {
+              "STRING": 41
+            },
+            "numberFormats": [
+              "General"
+            ],
+            "maxUtf16": 81
+          },
+          "javaTypeCandidate": "JsonNode/objeto próprio com números BigDecimal e raw original",
+          "sqlTypeCandidate": "NVARCHAR(MAX) com ISJSON; filhos opcionais por chave e posição",
+          "parserRequirements": "Parser de objeto precisa de contrato próprio. Preservar{}e chave dinâmica; não reduzir à string da planilha.",
+          "nonNullTypeObserved": true,
+          "nullabilityContract": "NULL preservado; ausência de NULL neste corte não autoriza NOT NULL",
+          "presentationPolicy": "OBJECT_JSON",
+          "presentationRule": "Excel contém JSON compacto; chaves e números decimais conferidos sem ponto flutuante.",
+          "observedEnumMap": null,
+          "comparison": "COLUNA_E_TUPLA_COMPLETA_IGUAIS_NO_CORTE"
+        }
+      ],
+      "receiving": "não integrado; recebimento0759atual aceita somente Faturas4924",
+      "publication": "core/mart/pub de negócio e consumidor a desenhar e qualificar",
+      "evidenceFiles": {
+        "capture": "consolidacao-capture0760.json",
+        "native": "consolidacao-native0760.json",
+        "comparison": "consolidacao-comparison0760-final.json"
+      }
+    },
+    {
+      "reportId": 12072,
+      "name": "Relação de Ocorrências",
+      "uiGroup": "Relatórios",
+      "entityCodeCandidate": "OCORRENCIAS",
+      "moduleCandidate": "ocorrencias",
+      "implementationStatus": "MAPEADO_JAVA_ADIADO_POR_PEDIDO_DO_USUARIO",
+      "method": "GET",
+      "origin": "https://rodogarcia.eslcloud.com.br",
+      "infoPath": "/api/analytics/reports/12072/info",
+      "dataPath": "/api/analytics/reports/12072/data",
+      "transport": "GET_WITH_QUERY",
+      "auth": "Bearer existente do V2 por stdin do cURL; segredo fora do catálogo",
+      "businessDateField": "invoice_occurrences.occurrence_at",
+      "requiredDateFiltersMetadata": [
+        "invoice_occurrences.occurrence_at",
+        "invoice_occurrences.updated_at"
+      ],
+      "defaultOrderMetadata": null,
+      "requestOrderBy": "omitido nos ensaios; não inventar ordenação de outro template",
+      "pagination": {
+        "pageStartsAt": 1,
+        "perTested": [
+          3,
+          100
+        ],
+        "terminal": "array vazio literal observado; página curta não encerra sozinha",
+        "snapshotConsistency": "não comprovada",
+        "uniquePaginationEntity": "não comprovada; não deduplicar linhas"
+      },
+      "qualification": {
+        "day": "2026-11-08",
+        "sourceRows": 279,
+        "columns": 20,
+        "cells": 5580,
+        "fullCaptureHTTP": 5,
+        "terminalObserved": true,
+        "nativeFileId": "1777562",
+        "nativeRows": 279,
+        "nativeSha256": "939b1f9c69434478bf2231ba52010a7627e2318b02b38787c7a137ef66603464",
+        "zipCrcVerified": true,
+        "headersExact": true,
+        "formulaCells": 0,
+        "allColumnsEqual": true,
+        "completeRowMultisetEqual": true,
+        "rawDatetimePrecisionEqualsExcel": false,
+        "scope": "um dia fechado; mapeamento e apresentação, sem aceite Java, SQL ou operação produtiva"
+      },
+      "keyDiagnostics": {
+        "ice_f_e_fit_corporation_sequence_number": {
+          "distinct": 246,
+          "rows": 279,
+          "maximumMultiplicity": 5,
+          "uniqueInThisCut": false
+        },
+        "ice_f_e_fit_corporation_sequence_number+ice_ore_code+occurrence_at": {
+          "distinct": 263,
+          "rows": 279,
+          "maximumMultiplicity": 5,
+          "uniqueInThisCut": false
+        },
+        "ice_f_e_fit_corporation_sequence_number+ice_ore_code+occurrence_at+ice_f_e_ioe_number": {
+          "distinct": 279,
+          "rows": 279,
+          "maximumMultiplicity": 1,
+          "uniqueInThisCut": true
+        }
+      },
+      "filters": [
+        {
+          "label": "Data ocorrência",
+          "position": 1,
+          "field": "occurrence_at",
+          "table": "invoice_occurrences",
+          "type": "date",
+          "maxlength": null,
+          "queryParameter": "search[invoice_occurrences][occurrence_at]",
+          "testedUse": "intervalo ISO inclusivo",
+          "businessDate": true
+        },
+        {
+          "label": "Doc/Minuta",
+          "position": 2,
+          "field": "by_cte_or_draft_number",
+          "table": "scopes",
+          "type": "numeric",
+          "maxlength": null,
+          "queryParameter": "search[scopes][by_cte_or_draft_number]",
+          "testedUse": "vazio/omitido; comportamento não vazio ainda não qualificado",
+          "businessDate": false
+        },
+        {
+          "label": "Nº Referência",
+          "position": 3,
+          "field": "by_freight_reference_number",
+          "table": "scopes",
+          "type": "string",
+          "maxlength": null,
+          "queryParameter": "search[scopes][by_freight_reference_number]",
+          "testedUse": "vazio/omitido; comportamento não vazio ainda não qualificado",
+          "businessDate": false
+        },
+        {
+          "label": "Nota Fiscal",
+          "position": 4,
+          "field": "by_invoice_number",
+          "table": "scopes",
+          "type": "numeric",
+          "maxlength": null,
+          "queryParameter": "search[scopes][by_invoice_number]",
+          "testedUse": "vazio/omitido; comportamento não vazio ainda não qualificado",
+          "businessDate": false
+        },
+        {
+          "label": "Chave NF-e",
+          "position": 5,
+          "field": "by_invoice_key",
+          "table": "scopes",
+          "type": "numeric",
+          "maxlength": 44,
+          "queryParameter": "search[scopes][by_invoice_key]",
+          "testedUse": "vazio/omitido; comportamento não vazio ainda não qualificado",
+          "businessDate": false
+        },
+        {
+          "label": "Chave CT-e",
+          "position": 6,
+          "field": "by_cte_key",
+          "table": "scopes",
+          "type": "numeric",
+          "maxlength": 44,
+          "queryParameter": "search[scopes][by_cte_key]",
+          "testedUse": "vazio/omitido; comportamento não vazio ainda não qualificado",
+          "businessDate": false
+        },
+        {
+          "label": "Manifesto",
+          "position": 7,
+          "field": "from_manifest_sequence_code",
+          "table": "scopes",
+          "type": "numeric",
+          "maxlength": null,
+          "queryParameter": "search[scopes][from_manifest_sequence_code]",
+          "testedUse": "vazio/omitido; comportamento não vazio ainda não qualificado",
+          "businessDate": false
+        },
+        {
+          "label": "Nº Consolidação",
+          "position": 8,
+          "field": "from_consolidation_document_number",
+          "table": "scopes",
+          "type": "numeric",
+          "maxlength": null,
+          "queryParameter": "search[scopes][from_consolidation_document_number]",
+          "testedUse": "vazio/omitido; comportamento não vazio ainda não qualificado",
+          "businessDate": false
+        },
+        {
+          "label": "Pagador",
+          "position": 9,
+          "field": "from_freight_payer",
+          "table": "scopes",
+          "type": "select",
+          "maxlength": null,
+          "queryParameter": "search[scopes][from_freight_payer]",
+          "testedUse": "vazio/omitido; comportamento não vazio ainda não qualificado",
+          "businessDate": false
+        },
+        {
+          "label": "Baixa por mobile",
+          "position": 10,
+          "field": "by_mobile",
+          "table": "scopes",
+          "type": "select",
+          "maxlength": null,
+          "queryParameter": "search[scopes][by_mobile]",
+          "testedUse": "vazio/omitido; comportamento não vazio ainda não qualificado",
+          "businessDate": false
+        },
+        {
+          "label": "Ocorrência/Ocorrência",
+          "position": 11,
+          "field": "description",
+          "table": "ice_occurrence",
+          "type": "string",
+          "maxlength": null,
+          "queryParameter": "search[ice_occurrence][description]",
+          "testedUse": "vazio/omitido; comportamento não vazio ainda não qualificado",
+          "businessDate": false
+        },
+        {
+          "label": "Ocorrência/Código",
+          "position": 12,
+          "field": "code",
+          "table": "ice_occurrence",
+          "type": "string",
+          "maxlength": null,
+          "queryParameter": "search[ice_occurrence][code]",
+          "testedUse": "vazio/omitido; comportamento não vazio ainda não qualificado",
+          "businessDate": false
+        },
+        {
+          "label": "Data atualização",
+          "position": 13,
+          "field": "updated_at",
+          "table": "invoice_occurrences",
+          "type": "datetime",
+          "maxlength": null,
+          "queryParameter": "search[invoice_occurrences][updated_at]",
+          "testedUse": "vazio/omitido; comportamento não vazio ainda não qualificado",
+          "businessDate": false
+        }
+      ],
+      "fields": [
+        {
+          "ordinal": 1,
+          "wireName": "ice_f_e_fit_corporation_sequence_number",
+          "excelHeader": "Minuta",
+          "javaPropertyCandidate": "iceFEFitCorporationSequenceNumber",
+          "meaningAndUse": "Minuta relacionada. Há 246 minutas em 279 linhas; uma minuta não identifica uma ocorrência física.",
+          "observed": {
+            "rows": 279,
+            "present": 279,
+            "nulls": 0,
+            "wireTypes": {
+              "INTEGER": 279
+            },
+            "maxUtf16": 0,
+            "maxArrayItems": 0,
+            "arrayItemTypes": {},
+            "objectKeys": [],
+            "emptyStrings": 0,
+            "maximumNumericTextPrecision": 0,
+            "maximumNumericTextScale": 0,
+            "maximumIntegerDigits": 6,
+            "arrayItemMaxUtf16": 0,
+            "objectValueTypes": {},
+            "sourceOffsets": {},
+            "timestampsWithFraction": 0
+          },
+          "native": {
+            "ordinal": 1,
+            "field": "ice_f_e_fit_corporation_sequence_number",
+            "header": "Minuta",
+            "nativeTypes": {
+              "NUMBER": 279
+            },
+            "numberFormats": [
+              "General"
+            ],
+            "maxUtf16": 0
+          },
+          "javaTypeCandidate": "ExpansionValue<String> pelo parser integer; BigInteger em regra aritmética explícita",
+          "sqlTypeCandidate": "Identificador textual ou DECIMAL(38,0), conforme papel; sem INT por amostra",
+          "parserRequirements": "Inteiro exato; não usar double. O parser atual limita a38dígitos e precisa do teste do domínio.",
+          "nonNullTypeObserved": true,
+          "nullabilityContract": "NULL preservado; ausência de NULL neste corte não autoriza NOT NULL",
+          "presentationPolicy": "DIRECT",
+          "presentationRule": "Valor literal; NULL continua NULL.",
+          "observedEnumMap": null,
+          "comparison": "COLUNA_E_TUPLA_COMPLETA_IGUAIS_NO_CORTE"
+        },
+        {
+          "ordinal": 2,
+          "wireName": "ice_f_e_ioe_number",
+          "excelHeader": "Nota Fiscal",
+          "javaPropertyCandidate": "iceFEIoeNumber",
+          "meaningAndUse": "Número de NF como texto escalar. A expansão de notas produz linhas separadas; não converter esta coluna em lista por analogia com11067.",
+          "observed": {
+            "rows": 279,
+            "present": 279,
+            "nulls": 0,
+            "wireTypes": {
+              "STRING": 279
+            },
+            "maxUtf16": 7,
+            "maxArrayItems": 0,
+            "arrayItemTypes": {},
+            "objectKeys": [],
+            "emptyStrings": 0,
+            "maximumNumericTextPrecision": 7,
+            "maximumNumericTextScale": 0,
+            "maximumIntegerDigits": 0,
+            "arrayItemMaxUtf16": 0,
+            "objectValueTypes": {},
+            "sourceOffsets": {},
+            "timestampsWithFraction": 0
+          },
+          "native": {
+            "ordinal": 2,
+            "field": "ice_f_e_ioe_number",
+            "header": "Nota Fiscal",
+            "nativeTypes": {
+              "STRING": 279
+            },
+            "numberFormats": [
+              "General"
+            ],
+            "maxUtf16": 7
+          },
+          "javaTypeCandidate": "ExpansionValue<String>",
+          "sqlTypeCandidate": "NVARCHAR com largura a dimensionar; original integral",
+          "parserRequirements": "Não aplicar trim, normalização, rótulo ou remoção de zeros por convenção. Parser text atual limita1024UTF16.",
+          "nonNullTypeObserved": true,
+          "nullabilityContract": "NULL preservado; ausência de NULL neste corte não autoriza NOT NULL",
+          "presentationPolicy": "DIRECT",
+          "presentationRule": "Valor literal; NULL continua NULL.",
+          "observedEnumMap": null,
+          "comparison": "COLUNA_E_TUPLA_COMPLETA_IGUAIS_NO_CORTE"
+        },
+        {
+          "ordinal": 3,
+          "wireName": "ice_fit_fhe_cte_number",
+          "excelHeader": "CTe",
+          "javaPropertyCandidate": "iceFitFheCteNumber",
+          "meaningAndUse": "CT-e relacionado, inteiro ou NULL. Não usar isoladamente como chave de evento ou vínculo sem filial/emissor.",
+          "observed": {
+            "rows": 279,
+            "present": 279,
+            "nulls": 4,
+            "wireTypes": {
+              "INTEGER": 275,
+              "NULL": 4
+            },
+            "maxUtf16": 0,
+            "maxArrayItems": 0,
+            "arrayItemTypes": {},
+            "objectKeys": [],
+            "emptyStrings": 0,
+            "maximumNumericTextPrecision": 0,
+            "maximumNumericTextScale": 0,
+            "maximumIntegerDigits": 6,
+            "arrayItemMaxUtf16": 0,
+            "objectValueTypes": {},
+            "sourceOffsets": {},
+            "timestampsWithFraction": 0
+          },
+          "native": {
+            "ordinal": 3,
+            "field": "ice_fit_fhe_cte_number",
+            "header": "CTe",
+            "nativeTypes": {
+              "NUMBER": 275,
+              "NULL": 4
+            },
+            "numberFormats": [
+              null,
+              "General"
+            ],
+            "maxUtf16": 0
+          },
+          "javaTypeCandidate": "ExpansionValue<String> pelo parser integer; BigInteger em regra aritmética explícita",
+          "sqlTypeCandidate": "Identificador textual ou DECIMAL(38,0), conforme papel; sem INT por amostra",
+          "parserRequirements": "Inteiro exato; não usar double. O parser atual limita a38dígitos e precisa do teste do domínio.",
+          "nonNullTypeObserved": true,
+          "nullabilityContract": "NULL preservado; ausência de NULL neste corte não autoriza NOT NULL",
+          "presentationPolicy": "DIRECT",
+          "presentationRule": "Valor literal; NULL continua NULL.",
+          "observedEnumMap": null,
+          "comparison": "COLUNA_E_TUPLA_COMPLETA_IGUAIS_NO_CORTE"
+        },
+        {
+          "ordinal": 4,
+          "wireName": "ice_ore_code",
+          "excelHeader": "Ocorrência/Código",
+          "javaPropertyCandidate": "iceOreCode",
+          "meaningAndUse": "Código da ocorrência como inteiro exato. Código classifica o evento; repetições do mesmo código são legítimas.",
+          "observed": {
+            "rows": 279,
+            "present": 279,
+            "nulls": 0,
+            "wireTypes": {
+              "INTEGER": 279
+            },
+            "maxUtf16": 0,
+            "maxArrayItems": 0,
+            "arrayItemTypes": {},
+            "objectKeys": [],
+            "emptyStrings": 0,
+            "maximumNumericTextPrecision": 0,
+            "maximumNumericTextScale": 0,
+            "maximumIntegerDigits": 3,
+            "arrayItemMaxUtf16": 0,
+            "objectValueTypes": {},
+            "sourceOffsets": {},
+            "timestampsWithFraction": 0
+          },
+          "native": {
+            "ordinal": 4,
+            "field": "ice_ore_code",
+            "header": "Ocorrência/Código",
+            "nativeTypes": {
+              "NUMBER": 279
+            },
+            "numberFormats": [
+              "General"
+            ],
+            "maxUtf16": 0
+          },
+          "javaTypeCandidate": "ExpansionValue<String> pelo parser integer; BigInteger em regra aritmética explícita",
+          "sqlTypeCandidate": "Identificador textual ou DECIMAL(38,0), conforme papel; sem INT por amostra",
+          "parserRequirements": "Inteiro exato; não usar double. O parser atual limita a38dígitos e precisa do teste do domínio.",
+          "nonNullTypeObserved": true,
+          "nullabilityContract": "NULL preservado; ausência de NULL neste corte não autoriza NOT NULL",
+          "presentationPolicy": "DIRECT",
+          "presentationRule": "Valor literal; NULL continua NULL.",
+          "observedEnumMap": null,
+          "comparison": "COLUNA_E_TUPLA_COMPLETA_IGUAIS_NO_CORTE"
+        },
+        {
+          "ordinal": 5,
+          "wireName": "ice_ore_description",
+          "excelHeader": "Ocorrência/Ocorrência",
+          "javaPropertyCandidate": "iceOreDescription",
+          "meaningAndUse": "Descrição da ocorrência original. Campo distinto da ocorrência de solução da tratativa.",
+          "observed": {
+            "rows": 279,
+            "present": 279,
+            "nulls": 0,
+            "wireTypes": {
+              "STRING": 279
+            },
+            "maxUtf16": 30,
+            "maxArrayItems": 0,
+            "arrayItemTypes": {},
+            "objectKeys": [],
+            "emptyStrings": 0,
+            "maximumNumericTextPrecision": 0,
+            "maximumNumericTextScale": 0,
+            "maximumIntegerDigits": 0,
+            "arrayItemMaxUtf16": 0,
+            "objectValueTypes": {},
+            "sourceOffsets": {},
+            "timestampsWithFraction": 0
+          },
+          "native": {
+            "ordinal": 5,
+            "field": "ice_ore_description",
+            "header": "Ocorrência/Ocorrência",
+            "nativeTypes": {
+              "STRING": 279
+            },
+            "numberFormats": [
+              "General"
+            ],
+            "maxUtf16": 30
+          },
+          "javaTypeCandidate": "ExpansionValue<String>",
+          "sqlTypeCandidate": "NVARCHAR com largura a dimensionar; original integral",
+          "parserRequirements": "Não aplicar trim, normalização, rótulo ou remoção de zeros por convenção. Parser text atual limita1024UTF16.",
+          "nonNullTypeObserved": true,
+          "nullabilityContract": "NULL preservado; ausência de NULL neste corte não autoriza NOT NULL",
+          "presentationPolicy": "DIRECT",
+          "presentationRule": "Valor literal; NULL continua NULL.",
+          "observedEnumMap": null,
+          "comparison": "COLUNA_E_TUPLA_COMPLETA_IGUAIS_NO_CORTE"
+        },
+        {
+          "ordinal": 6,
+          "wireName": "occurrence_at",
+          "excelHeader": "Data ocorrência",
+          "javaPropertyCandidate": "occurrenceAt",
+          "meaningAndUse": "Instante do evento e data de seleção principal. Preservar frações na origem; o Excel do corte mostra segundos inteiros.",
+          "observed": {
+            "rows": 279,
+            "present": 279,
+            "nulls": 0,
+            "wireTypes": {
+              "STRING": 279
+            },
+            "maxUtf16": 29,
+            "maxArrayItems": 0,
+            "arrayItemTypes": {},
+            "objectKeys": [],
+            "emptyStrings": 0,
+            "maximumNumericTextPrecision": 0,
+            "maximumNumericTextScale": 0,
+            "maximumIntegerDigits": 0,
+            "arrayItemMaxUtf16": 0,
+            "objectValueTypes": {},
+            "sourceOffsets": {
+              "-1 day, 21:00:00": 279
+            },
+            "timestampsWithFraction": 21
+          },
+          "native": {
+            "ordinal": 6,
+            "field": "occurrence_at",
+            "header": "Data ocorrência",
+            "nativeTypes": {
+              "DATETIME": 279
+            },
+            "numberFormats": [
+              "DD/MM/YYYY HH:MM:SS"
+            ],
+            "maxUtf16": 0
+          },
+          "javaTypeCandidate": "ExpansionValue<Instant>, com ISO/offset original em raw",
+          "sqlTypeCandidate": "DATETIMEOFFSET(7) candidato e raw ISO; qualificar precisão física",
+          "parserRequirements": "O offset-03:00foi observado; a janela usa America/Sao_Paulo. Não truncar para reproduzir o Excel.",
+          "nonNullTypeObserved": true,
+          "nullabilityContract": "NULL preservado; ausência de NULL neste corte não autoriza NOT NULL",
+          "presentationPolicy": "OBSERVED_EXCEL_SECONDS_12072",
+          "presentationRule": "Somente apresentação deste campo no Excel: descartar fração de segundo, mantendo data/hora civil. RAW e futuro tipo Java conservam a fração.",
+          "observedEnumMap": null,
+          "comparison": "COLUNA_E_TUPLA_COMPLETA_IGUAIS_NO_CORTE"
+        },
+        {
+          "ordinal": 7,
+          "wireName": "on_mobile",
+          "excelHeader": "Baixa por mobile",
+          "javaPropertyCandidate": "onMobile",
+          "meaningAndUse": "Booleano de baixa por mobile. Excel mostra Sim/Não; armazenar o booleano original.",
+          "observed": {
+            "rows": 279,
+            "present": 279,
+            "nulls": 0,
+            "wireTypes": {
+              "BOOLEAN": 279
+            },
+            "maxUtf16": 0,
+            "maxArrayItems": 0,
+            "arrayItemTypes": {},
+            "objectKeys": [],
+            "emptyStrings": 0,
+            "maximumNumericTextPrecision": 0,
+            "maximumNumericTextScale": 0,
+            "maximumIntegerDigits": 0,
+            "arrayItemMaxUtf16": 0,
+            "objectValueTypes": {},
+            "sourceOffsets": {},
+            "timestampsWithFraction": 0
+          },
+          "native": {
+            "ordinal": 7,
+            "field": "on_mobile",
+            "header": "Baixa por mobile",
+            "nativeTypes": {
+              "STRING": 279
+            },
+            "numberFormats": [
+              "General"
+            ],
+            "maxUtf16": 3
+          },
+          "javaTypeCandidate": "ExpansionValue<Boolean>",
+          "sqlTypeCandidate": "BIT NULL",
+          "parserRequirements": "Reutilizar parser booleano estrito; sem converter NULL em false.",
+          "nonNullTypeObserved": true,
+          "nullabilityContract": "NULL preservado; ausência de NULL neste corte não autoriza NOT NULL",
+          "presentationPolicy": "BOOLEAN_PT",
+          "presentationRule": "Apresentação Excel: true→Sim e false→Não. Booleano original preservado.",
+          "observedEnumMap": null,
+          "comparison": "COLUNA_E_TUPLA_COMPLETA_IGUAIS_NO_CORTE"
+        },
+        {
+          "ordinal": 8,
+          "wireName": "ice_uer_name",
+          "excelHeader": "Usuário/Nome",
+          "javaPropertyCandidate": "iceUerName",
+          "meaningAndUse": "Nome do usuário relacionado ao evento. Dado pessoal de negócio; não publicar amostras ou usar como identificador.",
+          "observed": {
+            "rows": 279,
+            "present": 279,
+            "nulls": 0,
+            "wireTypes": {
+              "STRING": 279
+            },
+            "maxUtf16": 31,
+            "maxArrayItems": 0,
+            "arrayItemTypes": {},
+            "objectKeys": [],
+            "emptyStrings": 0,
+            "maximumNumericTextPrecision": 0,
+            "maximumNumericTextScale": 0,
+            "maximumIntegerDigits": 0,
+            "arrayItemMaxUtf16": 0,
+            "objectValueTypes": {},
+            "sourceOffsets": {},
+            "timestampsWithFraction": 0
+          },
+          "native": {
+            "ordinal": 8,
+            "field": "ice_uer_name",
+            "header": "Usuário/Nome",
+            "nativeTypes": {
+              "STRING": 279
+            },
+            "numberFormats": [
+              "General"
+            ],
+            "maxUtf16": 31
+          },
+          "javaTypeCandidate": "ExpansionValue<String>",
+          "sqlTypeCandidate": "NVARCHAR com largura a dimensionar; original integral",
+          "parserRequirements": "Não aplicar trim, normalização, rótulo ou remoção de zeros por convenção. Parser text atual limita1024UTF16.",
+          "nonNullTypeObserved": true,
+          "nullabilityContract": "NULL preservado; ausência de NULL neste corte não autoriza NOT NULL",
+          "presentationPolicy": "DIRECT",
+          "presentationRule": "Valor literal; NULL continua NULL.",
+          "observedEnumMap": null,
+          "comparison": "COLUNA_E_TUPLA_COMPLETA_IGUAIS_NO_CORTE"
+        },
+        {
+          "ordinal": 9,
+          "wireName": "ice_fit_service_at",
+          "excelHeader": "Frete/Data do frete",
+          "javaPropertyCandidate": "iceFitServiceAt",
+          "meaningAndUse": "Data e hora do frete relacionado. Não substituir o filtro da data da ocorrência.",
+          "observed": {
+            "rows": 279,
+            "present": 279,
+            "nulls": 0,
+            "wireTypes": {
+              "STRING": 279
+            },
+            "maxUtf16": 29,
+            "maxArrayItems": 0,
+            "arrayItemTypes": {},
+            "objectKeys": [],
+            "emptyStrings": 0,
+            "maximumNumericTextPrecision": 0,
+            "maximumNumericTextScale": 0,
+            "maximumIntegerDigits": 0,
+            "arrayItemMaxUtf16": 0,
+            "objectValueTypes": {},
+            "sourceOffsets": {
+              "-1 day, 21:00:00": 279
+            },
+            "timestampsWithFraction": 0
+          },
+          "native": {
+            "ordinal": 9,
+            "field": "ice_fit_service_at",
+            "header": "Frete/Data do frete",
+            "nativeTypes": {
+              "DATETIME": 279
+            },
+            "numberFormats": [
+              "DD/MM/YYYY HH:MM:SS"
+            ],
+            "maxUtf16": 0
+          },
+          "javaTypeCandidate": "ExpansionValue<Instant>, com ISO/offset original em raw",
+          "sqlTypeCandidate": "DATETIMEOFFSET(7) candidato e raw ISO; qualificar precisão física",
+          "parserRequirements": "O offset-03:00foi observado; a janela usa America/Sao_Paulo. Não truncar para reproduzir o Excel.",
+          "nonNullTypeObserved": true,
+          "nullabilityContract": "NULL preservado; ausência de NULL neste corte não autoriza NOT NULL",
+          "presentationPolicy": "SOURCE_OFFSET_WALL_CLOCK",
+          "presentationRule": "Excel conserva data/hora civil do offset de origem. Não converter para UTC para comparar a célula.",
+          "observedEnumMap": null,
+          "comparison": "COLUNA_E_TUPLA_COMPLETA_IGUAIS_NO_CORTE"
+        },
+        {
+          "ordinal": 10,
+          "wireName": "ice_fit_dpn_delivery_prediction_at",
+          "excelHeader": "Previsão Entrega/Previsão de entrega",
+          "javaPropertyCandidate": "iceFitDpnDeliveryPredictionAt",
+          "meaningAndUse": "Previsão de entrega relacionada ao frete. Excel omite frações; manter precisão original no recebimento.",
+          "observed": {
+            "rows": 279,
+            "present": 279,
+            "nulls": 0,
+            "wireTypes": {
+              "STRING": 279
+            },
+            "maxUtf16": 29,
+            "maxArrayItems": 0,
+            "arrayItemTypes": {},
+            "objectKeys": [],
+            "emptyStrings": 0,
+            "maximumNumericTextPrecision": 0,
+            "maximumNumericTextScale": 0,
+            "maximumIntegerDigits": 0,
+            "arrayItemMaxUtf16": 0,
+            "objectValueTypes": {},
+            "sourceOffsets": {
+              "-1 day, 21:00:00": 279
+            },
+            "timestampsWithFraction": 217
+          },
+          "native": {
+            "ordinal": 10,
+            "field": "ice_fit_dpn_delivery_prediction_at",
+            "header": "Previsão Entrega/Previsão de entrega",
+            "nativeTypes": {
+              "DATETIME": 279
+            },
+            "numberFormats": [
+              "DD/MM/YYYY HH:MM:SS"
+            ],
+            "maxUtf16": 0
+          },
+          "javaTypeCandidate": "ExpansionValue<Instant>, com ISO/offset original em raw",
+          "sqlTypeCandidate": "DATETIMEOFFSET(7) candidato e raw ISO; qualificar precisão física",
+          "parserRequirements": "O offset-03:00foi observado; a janela usa America/Sao_Paulo. Não truncar para reproduzir o Excel.",
+          "nonNullTypeObserved": true,
+          "nullabilityContract": "NULL preservado; ausência de NULL neste corte não autoriza NOT NULL",
+          "presentationPolicy": "OBSERVED_EXCEL_SECONDS_12072",
+          "presentationRule": "Somente apresentação deste campo no Excel: descartar fração de segundo, mantendo data/hora civil. RAW e futuro tipo Java conservam a fração.",
+          "observedEnumMap": null,
+          "comparison": "COLUNA_E_TUPLA_COMPLETA_IGUAIS_NO_CORTE"
+        },
+        {
+          "ordinal": 11,
+          "wireName": "occurrence_schedule_at",
+          "excelHeader": "Data agendamento",
+          "javaPropertyCandidate": "occurrenceScheduleAt",
+          "meaningAndUse": "Data de agendamento. Somente NULL no corte; máscara Excel sugere data/hora, sem provar o tipo não nulo da API.",
+          "observed": {
+            "rows": 279,
+            "present": 279,
+            "nulls": 279,
+            "wireTypes": {
+              "NULL": 279
+            },
+            "maxUtf16": 0,
+            "maxArrayItems": 0,
+            "arrayItemTypes": {},
+            "objectKeys": [],
+            "emptyStrings": 0,
+            "maximumNumericTextPrecision": 0,
+            "maximumNumericTextScale": 0,
+            "maximumIntegerDigits": 0,
+            "arrayItemMaxUtf16": 0,
+            "objectValueTypes": {},
+            "sourceOffsets": {},
+            "timestampsWithFraction": 0
+          },
+          "native": {
+            "ordinal": 11,
+            "field": "occurrence_schedule_at",
+            "header": "Data agendamento",
+            "nativeTypes": {
+              "NULL": 279
+            },
+            "numberFormats": [
+              "DD/MM/YYYY HH:MM:SS"
+            ],
+            "maxUtf16": 0
+          },
+          "javaTypeCandidate": "ExpansionValue<Instant> candidato; JsonNode até qualificar não nulo",
+          "sqlTypeCandidate": "DATETIMEOFFSET(7) candidato; envelope original preservado",
+          "parserRequirements": "Somente NULL observado. O formato Excel não homologa o wire não nulo.",
+          "nonNullTypeObserved": false,
+          "nullabilityContract": "NULL preservado; ausência de NULL neste corte não autoriza NOT NULL",
+          "presentationPolicy": "DIRECT",
+          "presentationRule": "Valor literal; NULL continua NULL.",
+          "observedEnumMap": null,
+          "comparison": "COLUNA_E_TUPLA_COMPLETA_IGUAIS_NO_CORTE"
+        },
+        {
+          "ordinal": 12,
+          "wireName": "ice_fit_dpn_performance_finished_at",
+          "excelHeader": "Previsão Entrega/Finalização performance",
+          "javaPropertyCandidate": "iceFitDpnPerformanceFinishedAt",
+          "meaningAndUse": "Data de finalização da performance. 51 valores e228NULL observados; não equivale automaticamente à entrega física.",
+          "observed": {
+            "rows": 279,
+            "present": 279,
+            "nulls": 228,
+            "wireTypes": {
+              "NULL": 228,
+              "STRING": 51
+            },
+            "maxUtf16": 29,
+            "maxArrayItems": 0,
+            "arrayItemTypes": {},
+            "objectKeys": [],
+            "emptyStrings": 0,
+            "maximumNumericTextPrecision": 0,
+            "maximumNumericTextScale": 0,
+            "maximumIntegerDigits": 0,
+            "arrayItemMaxUtf16": 0,
+            "objectValueTypes": {},
+            "sourceOffsets": {
+              "-1 day, 21:00:00": 51
+            },
+            "timestampsWithFraction": 0
+          },
+          "native": {
+            "ordinal": 12,
+            "field": "ice_fit_dpn_performance_finished_at",
+            "header": "Previsão Entrega/Finalização performance",
+            "nativeTypes": {
+              "NULL": 228,
+              "DATETIME": 51
+            },
+            "numberFormats": [
+              "DD/MM/YYYY HH:MM:SS"
+            ],
+            "maxUtf16": 0
+          },
+          "javaTypeCandidate": "ExpansionValue<Instant>, com ISO/offset original em raw",
+          "sqlTypeCandidate": "DATETIMEOFFSET(7) candidato e raw ISO; qualificar precisão física",
+          "parserRequirements": "O offset-03:00foi observado; a janela usa America/Sao_Paulo. Não truncar para reproduzir o Excel.",
+          "nonNullTypeObserved": true,
+          "nullabilityContract": "NULL preservado; ausência de NULL neste corte não autoriza NOT NULL",
+          "presentationPolicy": "SOURCE_OFFSET_WALL_CLOCK",
+          "presentationRule": "Excel conserva data/hora civil do offset de origem. Não converter para UTC para comparar a célula.",
+          "observedEnumMap": null,
+          "comparison": "COLUNA_E_TUPLA_COMPLETA_IGUAIS_NO_CORTE"
+        },
+        {
+          "ordinal": 13,
+          "wireName": "delivery_status",
+          "excelHeader": "Status Entrega",
+          "javaPropertyCandidate": "deliveryStatus",
+          "meaningAndUse": "Estado técnico de entrega. Mapa observado: failure→Insucesso, pending→Pendente, delivered→Entregue. Outros estados exigem qualificação.",
+          "observed": {
+            "rows": 279,
+            "present": 279,
+            "nulls": 0,
+            "wireTypes": {
+              "STRING": 279
+            },
+            "maxUtf16": 9,
+            "maxArrayItems": 0,
+            "arrayItemTypes": {},
+            "objectKeys": [],
+            "emptyStrings": 0,
+            "maximumNumericTextPrecision": 0,
+            "maximumNumericTextScale": 0,
+            "maximumIntegerDigits": 0,
+            "arrayItemMaxUtf16": 0,
+            "objectValueTypes": {},
+            "sourceOffsets": {},
+            "timestampsWithFraction": 0
+          },
+          "native": {
+            "ordinal": 13,
+            "field": "delivery_status",
+            "header": "Status Entrega",
+            "nativeTypes": {
+              "STRING": 279
+            },
+            "numberFormats": [
+              "General"
+            ],
+            "maxUtf16": 9
+          },
+          "javaTypeCandidate": "ExpansionValue<String>",
+          "sqlTypeCandidate": "NVARCHAR com largura a dimensionar; original integral",
+          "parserRequirements": "Não aplicar trim, normalização, rótulo ou remoção de zeros por convenção. Parser text atual limita1024UTF16.",
+          "nonNullTypeObserved": true,
+          "nullabilityContract": "NULL preservado; ausência de NULL neste corte não autoriza NOT NULL",
+          "presentationPolicy": "OBSERVED_ENUM_MAP",
+          "presentationRule": "Tradução de status observada por associação das demais colunas, sem conflito, seguida de comparação das tuplas completas.",
+          "observedEnumMap": {
+            "failure": "Insucesso",
+            "pending": "Pendente",
+            "delivered": "Entregue"
+          },
+          "comparison": "COLUNA_E_TUPLA_COMPLETA_IGUAIS_NO_CORTE"
+        },
+        {
+          "ordinal": 14,
+          "wireName": "ice_fit_fln_cln_nickname",
+          "excelHeader": "Localização Atual",
+          "javaPropertyCandidate": "iceFitFlnClnNickname",
+          "meaningAndUse": "Localização atual relacionada ao frete. Texto de snapshot; não representa por si um histórico de movimentações.",
+          "observed": {
+            "rows": 279,
+            "present": 279,
+            "nulls": 0,
+            "wireTypes": {
+              "STRING": 279
+            },
+            "maxUtf16": 45,
+            "maxArrayItems": 0,
+            "arrayItemTypes": {},
+            "objectKeys": [],
+            "emptyStrings": 0,
+            "maximumNumericTextPrecision": 0,
+            "maximumNumericTextScale": 0,
+            "maximumIntegerDigits": 0,
+            "arrayItemMaxUtf16": 0,
+            "objectValueTypes": {},
+            "sourceOffsets": {},
+            "timestampsWithFraction": 0
+          },
+          "native": {
+            "ordinal": 14,
+            "field": "ice_fit_fln_cln_nickname",
+            "header": "Localização Atual",
+            "nativeTypes": {
+              "STRING": 279
+            },
+            "numberFormats": [
+              "General"
+            ],
+            "maxUtf16": 45
+          },
+          "javaTypeCandidate": "ExpansionValue<String>",
+          "sqlTypeCandidate": "NVARCHAR com largura a dimensionar; original integral",
+          "parserRequirements": "Não aplicar trim, normalização, rótulo ou remoção de zeros por convenção. Parser text atual limita1024UTF16.",
+          "nonNullTypeObserved": true,
+          "nullabilityContract": "NULL preservado; ausência de NULL neste corte não autoriza NOT NULL",
+          "presentationPolicy": "DIRECT",
+          "presentationRule": "Valor literal; NULL continua NULL.",
+          "observedEnumMap": null,
+          "comparison": "COLUNA_E_TUPLA_COMPLETA_IGUAIS_NO_CORTE"
+        },
+        {
+          "ordinal": 15,
+          "wireName": "ice_fit_dpn_manual_schedule",
+          "excelHeader": "Agendado",
+          "javaPropertyCandidate": "iceFitDpnManualSchedule",
+          "meaningAndUse": "Booleano de agendamento manual fornecido pelo ESL. Separar da data de agendamento.",
+          "observed": {
+            "rows": 279,
+            "present": 279,
+            "nulls": 0,
+            "wireTypes": {
+              "BOOLEAN": 279
+            },
+            "maxUtf16": 0,
+            "maxArrayItems": 0,
+            "arrayItemTypes": {},
+            "objectKeys": [],
+            "emptyStrings": 0,
+            "maximumNumericTextPrecision": 0,
+            "maximumNumericTextScale": 0,
+            "maximumIntegerDigits": 0,
+            "arrayItemMaxUtf16": 0,
+            "objectValueTypes": {},
+            "sourceOffsets": {},
+            "timestampsWithFraction": 0
+          },
+          "native": {
+            "ordinal": 15,
+            "field": "ice_fit_dpn_manual_schedule",
+            "header": "Agendado",
+            "nativeTypes": {
+              "STRING": 279
+            },
+            "numberFormats": [
+              "General"
+            ],
+            "maxUtf16": 3
+          },
+          "javaTypeCandidate": "ExpansionValue<Boolean>",
+          "sqlTypeCandidate": "BIT NULL",
+          "parserRequirements": "Reutilizar parser booleano estrito; sem converter NULL em false.",
+          "nonNullTypeObserved": true,
+          "nullabilityContract": "NULL preservado; ausência de NULL neste corte não autoriza NOT NULL",
+          "presentationPolicy": "BOOLEAN_PT",
+          "presentationRule": "Apresentação Excel: true→Sim e false→Não. Booleano original preservado.",
+          "observedEnumMap": null,
+          "comparison": "COLUNA_E_TUPLA_COMPLETA_IGUAIS_NO_CORTE"
+        },
+        {
+          "ordinal": 16,
+          "wireName": "ice_ttt_solution_deadline",
+          "excelHeader": "Tratativa/Prazo solução",
+          "javaPropertyCandidate": "iceTttSolutionDeadline",
+          "meaningAndUse": "Prazo da solução da tratativa. Somente NULL; candidato a instante pelo formato Excel, ainda sem valor não nulo da API.",
+          "observed": {
+            "rows": 279,
+            "present": 279,
+            "nulls": 279,
+            "wireTypes": {
+              "NULL": 279
+            },
+            "maxUtf16": 0,
+            "maxArrayItems": 0,
+            "arrayItemTypes": {},
+            "objectKeys": [],
+            "emptyStrings": 0,
+            "maximumNumericTextPrecision": 0,
+            "maximumNumericTextScale": 0,
+            "maximumIntegerDigits": 0,
+            "arrayItemMaxUtf16": 0,
+            "objectValueTypes": {},
+            "sourceOffsets": {},
+            "timestampsWithFraction": 0
+          },
+          "native": {
+            "ordinal": 16,
+            "field": "ice_ttt_solution_deadline",
+            "header": "Tratativa/Prazo solução",
+            "nativeTypes": {
+              "NULL": 279
+            },
+            "numberFormats": [
+              "DD/MM/YYYY HH:MM:SS"
+            ],
+            "maxUtf16": 0
+          },
+          "javaTypeCandidate": "ExpansionValue<Instant> candidato; JsonNode até qualificar não nulo",
+          "sqlTypeCandidate": "DATETIMEOFFSET(7) candidato; envelope original preservado",
+          "parserRequirements": "Somente NULL observado. O formato Excel não homologa o wire não nulo.",
+          "nonNullTypeObserved": false,
+          "nullabilityContract": "NULL preservado; ausência de NULL neste corte não autoriza NOT NULL",
+          "presentationPolicy": "DIRECT",
+          "presentationRule": "Valor literal; NULL continua NULL.",
+          "observedEnumMap": null,
+          "comparison": "COLUNA_E_TUPLA_COMPLETA_IGUAIS_NO_CORTE"
+        },
+        {
+          "ordinal": 17,
+          "wireName": "ice_ttt_solution_at",
+          "excelHeader": "Tratativa/Data Solução",
+          "javaPropertyCandidate": "iceTttSolutionAt",
+          "meaningAndUse": "Data da solução da tratativa. Somente NULL no corte; não preencher com prazo ou data do evento.",
+          "observed": {
+            "rows": 279,
+            "present": 279,
+            "nulls": 279,
+            "wireTypes": {
+              "NULL": 279
+            },
+            "maxUtf16": 0,
+            "maxArrayItems": 0,
+            "arrayItemTypes": {},
+            "objectKeys": [],
+            "emptyStrings": 0,
+            "maximumNumericTextPrecision": 0,
+            "maximumNumericTextScale": 0,
+            "maximumIntegerDigits": 0,
+            "arrayItemMaxUtf16": 0,
+            "objectValueTypes": {},
+            "sourceOffsets": {},
+            "timestampsWithFraction": 0
+          },
+          "native": {
+            "ordinal": 17,
+            "field": "ice_ttt_solution_at",
+            "header": "Tratativa/Data Solução",
+            "nativeTypes": {
+              "NULL": 279
+            },
+            "numberFormats": [
+              "DD/MM/YYYY HH:MM:SS"
+            ],
+            "maxUtf16": 0
+          },
+          "javaTypeCandidate": "ExpansionValue<Instant> candidato; JsonNode até qualificar não nulo",
+          "sqlTypeCandidate": "DATETIMEOFFSET(7) candidato; envelope original preservado",
+          "parserRequirements": "Somente NULL observado. O formato Excel não homologa o wire não nulo.",
+          "nonNullTypeObserved": false,
+          "nullabilityContract": "NULL preservado; ausência de NULL neste corte não autoriza NOT NULL",
+          "presentationPolicy": "DIRECT",
+          "presentationRule": "Valor literal; NULL continua NULL.",
+          "observedEnumMap": null,
+          "comparison": "COLUNA_E_TUPLA_COMPLETA_IGUAIS_NO_CORTE"
+        },
+        {
+          "ordinal": 18,
+          "wireName": "ice_ttt_solution_type",
+          "excelHeader": "Tratativa/Solução",
+          "javaPropertyCandidate": "iceTttSolutionType",
+          "meaningAndUse": "Tipo da solução. Somente NULL; domínio e tradução não devem ser inventados ou copiados de Sinistros.",
+          "observed": {
+            "rows": 279,
+            "present": 279,
+            "nulls": 279,
+            "wireTypes": {
+              "NULL": 279
+            },
+            "maxUtf16": 0,
+            "maxArrayItems": 0,
+            "arrayItemTypes": {},
+            "objectKeys": [],
+            "emptyStrings": 0,
+            "maximumNumericTextPrecision": 0,
+            "maximumNumericTextScale": 0,
+            "maximumIntegerDigits": 0,
+            "arrayItemMaxUtf16": 0,
+            "objectValueTypes": {},
+            "sourceOffsets": {},
+            "timestampsWithFraction": 0
+          },
+          "native": {
+            "ordinal": 18,
+            "field": "ice_ttt_solution_type",
+            "header": "Tratativa/Solução",
+            "nativeTypes": {
+              "NULL": 279
+            },
+            "numberFormats": [
+              null
+            ],
+            "maxUtf16": 0
+          },
+          "javaTypeCandidate": "ExpansionValue<String> candidato; JsonNode até qualificar não nulo",
+          "sqlTypeCandidate": "NVARCHAR com largura a qualificar; envelope original preservado",
+          "parserRequirements": "Somente NULL observado. Não fixar parser de texto/número ou limite por suposição.",
+          "nonNullTypeObserved": false,
+          "nullabilityContract": "NULL preservado; ausência de NULL neste corte não autoriza NOT NULL",
+          "presentationPolicy": "DIRECT",
+          "presentationRule": "Valor literal; NULL continua NULL.",
+          "observedEnumMap": null,
+          "comparison": "COLUNA_E_TUPLA_COMPLETA_IGUAIS_NO_CORTE"
+        },
+        {
+          "ordinal": 19,
+          "wireName": "ice_ttt_soe_description",
+          "excelHeader": "Tratativa/Ocorrência",
+          "javaPropertyCandidate": "iceTttSoeDescription",
+          "meaningAndUse": "Descrição da ocorrência da tratativa. Somente NULL; campo separado da descrição do evento original.",
+          "observed": {
+            "rows": 279,
+            "present": 279,
+            "nulls": 279,
+            "wireTypes": {
+              "NULL": 279
+            },
+            "maxUtf16": 0,
+            "maxArrayItems": 0,
+            "arrayItemTypes": {},
+            "objectKeys": [],
+            "emptyStrings": 0,
+            "maximumNumericTextPrecision": 0,
+            "maximumNumericTextScale": 0,
+            "maximumIntegerDigits": 0,
+            "arrayItemMaxUtf16": 0,
+            "objectValueTypes": {},
+            "sourceOffsets": {},
+            "timestampsWithFraction": 0
+          },
+          "native": {
+            "ordinal": 19,
+            "field": "ice_ttt_soe_description",
+            "header": "Tratativa/Ocorrência",
+            "nativeTypes": {
+              "NULL": 279
+            },
+            "numberFormats": [
+              null
+            ],
+            "maxUtf16": 0
+          },
+          "javaTypeCandidate": "ExpansionValue<String> candidato; JsonNode até qualificar não nulo",
+          "sqlTypeCandidate": "NVARCHAR com largura a qualificar; envelope original preservado",
+          "parserRequirements": "Somente NULL observado. Não fixar parser de texto/número ou limite por suposição.",
+          "nonNullTypeObserved": false,
+          "nullabilityContract": "NULL preservado; ausência de NULL neste corte não autoriza NOT NULL",
+          "presentationPolicy": "DIRECT",
+          "presentationRule": "Valor literal; NULL continua NULL.",
+          "observedEnumMap": null,
+          "comparison": "COLUNA_E_TUPLA_COMPLETA_IGUAIS_NO_CORTE"
+        },
+        {
+          "ordinal": 20,
+          "wireName": "ice_ttt_solution_comments",
+          "excelHeader": "Tratativa/Observações",
+          "javaPropertyCandidate": "iceTttSolutionComments",
+          "meaningAndUse": "Observações da tratativa. Somente NULL; largura, quebras de linha e limite não nulo precisam de qualificação específica.",
+          "observed": {
+            "rows": 279,
+            "present": 279,
+            "nulls": 279,
+            "wireTypes": {
+              "NULL": 279
+            },
+            "maxUtf16": 0,
+            "maxArrayItems": 0,
+            "arrayItemTypes": {},
+            "objectKeys": [],
+            "emptyStrings": 0,
+            "maximumNumericTextPrecision": 0,
+            "maximumNumericTextScale": 0,
+            "maximumIntegerDigits": 0,
+            "arrayItemMaxUtf16": 0,
+            "objectValueTypes": {},
+            "sourceOffsets": {},
+            "timestampsWithFraction": 0
+          },
+          "native": {
+            "ordinal": 20,
+            "field": "ice_ttt_solution_comments",
+            "header": "Tratativa/Observações",
+            "nativeTypes": {
+              "NULL": 279
+            },
+            "numberFormats": [
+              null
+            ],
+            "maxUtf16": 0
+          },
+          "javaTypeCandidate": "ExpansionValue<String> candidato; JsonNode até qualificar não nulo",
+          "sqlTypeCandidate": "NVARCHAR com largura a qualificar; envelope original preservado",
+          "parserRequirements": "Somente NULL observado. Não fixar parser de texto/número ou limite por suposição.",
+          "nonNullTypeObserved": false,
+          "nullabilityContract": "NULL preservado; ausência de NULL neste corte não autoriza NOT NULL",
+          "presentationPolicy": "DIRECT",
+          "presentationRule": "Valor literal; NULL continua NULL.",
+          "observedEnumMap": null,
+          "comparison": "COLUNA_E_TUPLA_COMPLETA_IGUAIS_NO_CORTE"
+        }
+      ],
+      "receiving": "não integrado; recebimento0759atual aceita somente Faturas4924",
+      "publication": "core/mart/pub de negócio e consumidor a desenhar e qualificar",
+      "evidenceFiles": {
+        "capture": "ocorrencias-capture0760.json",
+        "native": "ocorrencias-native0760.json",
+        "comparison": "ocorrencias-comparison0760-final.json"
+      }
+    }
+  ]
+}

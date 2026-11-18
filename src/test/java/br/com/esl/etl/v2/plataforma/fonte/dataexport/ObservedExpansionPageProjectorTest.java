@@ -13,8 +13,8 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import br.com.esl.etl.v2.plataforma.expansao.ExpansionStrings;
 import br.com.esl.etl.v2.plataforma.expansao.ExpansionValue;
+import br.com.esl.etl.v2.plataforma.expansao.OrderedExpansionStrings;
 import java.math.BigDecimal;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalTime;
@@ -70,7 +70,7 @@ final class ObservedExpansionPageProjectorTest {
     }
 
     @Test
-    void sixtySyntheticSinistrosKeepSevenLongCommentsWithRawAndIssue() throws Exception {
+    void sixtySyntheticSinistrosKeepSevenLongCommentsWithoutTypedIssues() throws Exception {
         final var plan = plan(ObservedExpansionCaptureTemplate.SIN);
         final var body = new StringBuilder("[");
         final var expected = new java.util.ArrayList<String>();
@@ -86,28 +86,24 @@ final class ObservedExpansionPageProjectorTest {
         final var page =
                 new ObservedExpansionPageProjector(plan).projectNext(raw(plan, 1, body.toString()));
         assertEquals(60, page.physicalRows().orElseThrow());
-        assertEquals(7, page.fieldIssueRows());
+        assertEquals(0, page.fieldIssueRows());
+        assertArrayEquals(body.toString().getBytes(StandardCharsets.UTF_8), page.rawPage().body());
         assertEquals(ObservedExpansionPageProjection.Status.MAPPED, page.status());
         for (int i = 0; i < 60; i++) {
             final var record = page.records().get(i);
             final var field = field(record, "insurance_claim_commentary");
             assertEquals(expected.get(i), field.value().raw());
             assertEquals("UNBOUND", record.bindingStatus());
-            if (i < 7) {
-                assertNull(field.value().value());
-                assertEquals("INVALID_INSURANCE_CLAIM_COMMENTARY", field.value().issue());
-            } else {
-                assertEquals(expected.get(i), field.value().value());
-                assertNull(field.value().issue());
-            }
+            assertEquals(expected.get(i), field.value().value());
+            assertNull(field.value().issue());
         }
         assertEquals(60, json(page).path("records").size());
         assertEquals("NOT_PERFORMED_BY_CORE", page.sourceSchemaValidation());
     }
 
     @Test
-    void typedCommentBoundaryDoesNotExpandAndRawBoundaryDoesNotTruncate() {
-        for (final int length : new int[] {1024, 1025, 4000}) {
+    void typedCommentBoundaryAcceptsThroughExistingRawBoundWithoutTruncation() {
+        for (final int length : new int[] {1024, 1025, 1557, 4000}) {
             final var plan = plan(ObservedExpansionCaptureTemplate.SIN);
             final var page =
                     new ObservedExpansionPageProjector(plan)
@@ -120,8 +116,10 @@ final class ObservedExpansionPageProjectorTest {
                                                     + "\"}]"));
             final var value = field(page.records().get(0), "insurance_claim_commentary").value();
             assertEquals(length, value.raw().length());
-            assertEquals(length == 1024, value.valid());
-            assertEquals(length == 1024, value.value() != null);
+            assertTrue(value.valid());
+            assertEquals(length, ((String) value.value()).length());
+            assertNull(value.issue());
+            assertEquals(0, page.fieldIssueRows());
         }
     }
 
@@ -161,7 +159,7 @@ final class ObservedExpansionPageProjectorTest {
         final var field = field(page.records().get(0), "cnr_c_s_fit_invoices_mapping");
         assertEquals(
                 java.util.List.of("B", "A", "A"),
-                ((ExpansionStrings) field.value().value()).items());
+                ((OrderedExpansionStrings) field.value().value()).items());
         final var typed = jsonField(page, "cnr_c_s_fit_invoices_mapping").path("typed");
         assertEquals(3, typed.size());
         assertEquals("B", typed.get(0).asText());

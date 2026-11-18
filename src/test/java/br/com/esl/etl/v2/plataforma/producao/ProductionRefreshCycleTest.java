@@ -36,6 +36,30 @@ class ProductionRefreshCycleTest {
     @TempDir Path directory;
 
     @Test
+    void boundedContinuousCyclesGiveEverySourceItsTurnAcrossRestarts() throws Exception {
+        final var fixture = new Fixture(directory);
+        fixture.seedReady();
+        fixture.now = fixture.now.plusSeconds(86400);
+        fixture.limitAfterFirstMetadata = true;
+        final var templates = ReportSnapshotTemplate.receivingTemplates();
+        for (final var expected : templates) {
+            assertTrue(fixture.run());
+            assertEquals(
+                    expected.name(),
+                    fixture.lastReport.required("entities").get(0).required("entity").asText());
+            assertEquals(
+                    fixture.today().toString(),
+                    fixture.entity(expected).required("lastCalendarDay").asText());
+            assertEquals(templates.size(), fixture.lastReport.required("entities").size());
+            fixture.now = fixture.now.plusSeconds(3600);
+        }
+        assertTrue(fixture.run());
+        assertEquals(
+                templates.get(0).name(),
+                fixture.lastReport.required("entities").get(0).required("entity").asText());
+    }
+
+    @Test
     void initialHistoryReallyProcessesNinetyDaysAcrossBoundedResumableBatches() throws Exception {
         final var fixture = new Fixture(directory);
         for (int cycle = 0; cycle < 12; cycle++) {
@@ -587,6 +611,7 @@ class ProductionRefreshCycleTest {
         LocalDate emptyDay;
         int fullCalls;
         int updateCalls;
+        boolean limitAfterFirstMetadata;
         boolean locationChangeDuringLookup;
         boolean freightSourceFailure;
         boolean freightMetadataFailure;
@@ -704,10 +729,14 @@ class ProductionRefreshCycleTest {
             final var report = root.resolve("report-" + UUID.randomUUID() + ".json");
             config.put("privateRoot", privateRoot.toString()).put("reportPath", report.toString());
             final var metadata = new ReportMetadataCatalog();
+            final var calls = new java.util.concurrent.atomic.AtomicInteger();
             final var wire =
                     new ReportSnapshotExtractor.Wire() {
                         @Override
                         public JsonNode info(final ReportSnapshotTemplate template) {
+                            if (limitAfterFirstMetadata) {
+                                calls.set(1750);
+                            }
                             if (freightMetadataFailure
                                     && template == ReportSnapshotTemplate.FRETES) {
                                 throw new CurlSnapshotWire.RequestFailure(503, 0, false);
@@ -793,7 +822,7 @@ class ProductionRefreshCycleTest {
                             capture,
                             ignored -> store,
                             (origin, token, output, stop, deadline) ->
-                                    new ProductionRefreshCycle.Session(wire, () -> 0),
+                                    new ProductionRefreshCycle.Session(wire, calls::get),
                             Clock.fixed(now, ZoneOffset.UTC),
                             root,
                             path -> availableBytes);

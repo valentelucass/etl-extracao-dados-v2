@@ -1,0 +1,1035 @@
+{
+  "schema": "INDEPENDENT_EXPORT_COLUMNS_V1",
+  "reportId": 6389,
+  "idColumnIndex": 0,
+  "bindingsSha256": "afb4abf159312404836b49ad80bb467247fa526af03eef137774eaca4ac21e30",
+  "historicalModelSha256": "11c02197f2a0a0b277f28ab6309d0ee8f398b9a46c7a1292976990e3bbacb5e0",
+  "columns": [
+    {
+      "name": "ID",
+      "itemId": "item_221146",
+      "apiColumn": 1,
+      "uiColumn": 1,
+      "sourceJsonPointer": "/id",
+      "total": true,
+      "totalKind": "INTEGER_EXACT"
+    },
+    {
+      "name": "N°",
+      "itemId": "item_221147",
+      "apiColumn": 2,
+      "uiColumn": 2,
+      "sourceJsonPointer": "/sequence_code",
+      "total": true,
+      "totalKind": "INTEGER_EXACT"
+    },
+    {
+      "name": "Filial Emitente",
+      "itemId": "item_113370",
+      "apiColumn": 3,
+      "uiColumn": 3,
+      "sourceJsonPointer": "/fit_crn_psn_nickname",
+      "total": false,
+      "totalKind": "NONE"
+    },
+    {
+      "name": "Remetente/Nome fantasia",
+      "itemId": "item_113376",
+      "apiColumn": 4,
+      "uiColumn": 4,
+      "sourceJsonPointer": "/fit_sdr_nickname",
+      "total": false,
+      "totalKind": "NONE"
+    },
+    {
+      "name": "Remetente/Documento",
+      "itemId": "item_113372",
+      "apiColumn": 5,
+      "uiColumn": 5,
+      "sourceJsonPointer": "/fit_sdr_document",
+      "total": false,
+      "totalKind": "NONE"
+    },
+    {
+      "name": "Destinatário/Nome fantasia",
+      "itemId": "item_113374",
+      "apiColumn": 6,
+      "uiColumn": 6,
+      "sourceJsonPointer": "/fit_rpt_nickname",
+      "total": false,
+      "totalKind": "NONE"
+    },
+    {
+      "name": "Destinatário/Documento",
+      "itemId": "item_113375",
+      "apiColumn": 7,
+      "uiColumn": 7,
+      "sourceJsonPointer": "/fit_rpt_document",
+      "total": false,
+      "totalKind": "NONE"
+    },
+    {
+      "name": "Expedidor/Nome fantasia",
+      "itemId": "item_113377",
+      "apiColumn": 8,
+      "uiColumn": 8,
+      "sourceJsonPointer": "/fit_spr_nickname",
+      "total": false,
+      "totalKind": "NONE"
+    },
+    {
+      "name": "Expedidor/Documento",
+      "itemId": "item_113378",
+      "apiColumn": 9,
+      "uiColumn": 9,
+      "sourceJsonPointer": "/fit_spr_document",
+      "total": false,
+      "totalKind": "NONE"
+    },
+    {
+      "name": "Recebedor/Nome fantasia",
+      "itemId": "item_113379",
+      "apiColumn": 10,
+      "uiColumn": 10,
+      "sourceJsonPointer": "/fit_rir_nickname",
+      "total": false,
+      "totalKind": "NONE"
+    },
+    {
+      "name": "Recebedor/Documento",
+      "itemId": "item_113380",
+      "apiColumn": 11,
+      "uiColumn": 11,
+      "sourceJsonPointer": "/fit_rir_document",
+      "total": false,
+      "totalKind": "NONE"
+    },
+    {
+      "name": "Pagador do frete/Documento",
+      "itemId": "item_113382",
+      "apiColumn": 12,
+      "uiColumn": 12,
+      "sourceJsonPointer": "/fit_pyr_document",
+      "total": false,
+      "totalKind": "NONE"
+    },
+    {
+      "name": "Pagador do frete/Nome",
+      "itemId": "item_134787",
+      "apiColumn": 13,
+      "uiColumn": 13,
+      "sourceJsonPointer": "/fit_pyr_name",
+      "total": false,
+      "totalKind": "NONE"
+    },
+    {
+      "name": "Pagador do frete/Nome fantasia",
+      "itemId": "item_113381",
+      "apiColumn": 14,
+      "uiColumn": 14,
+      "sourceJsonPointer": "/fit_pyr_nickname",
+      "total": false,
+      "totalKind": "NONE"
+    },
+    {
+      "name": "Pagador do frete/Cidade",
+      "itemId": "item_134788",
+      "apiColumn": 15,
+      "uiColumn": 15,
+      "sourceJsonPointer": "/fit_pyr_mds_cty_name",
+      "total": false,
+      "totalKind": "NONE"
+    },
+    {
+      "name": "Pagador do frete/UF",
+      "itemId": "item_134789",
+      "apiColumn": 16,
+      "uiColumn": 16,
+      "sourceJsonPointer": "/fit_pyr_mds_cty_sae_code",
+      "total": false,
+      "totalKind": "NONE"
+    },
+    {
+      "name": "Origem/CEP",
+      "itemId": "item_113386",
+      "apiColumn": 17,
+      "uiColumn": 17,
+      "sourceJsonPointer": "/fit_oas_postal_code",
+      "total": false,
+      "totalKind": "NONE"
+    },
+    {
+      "name": "Origem/Cidade",
+      "itemId": "item_113388",
+      "apiColumn": 18,
+      "uiColumn": 18,
+      "sourceJsonPointer": "/fit_oas_cty_name",
+      "total": false,
+      "totalKind": "NONE"
+    },
+    {
+      "name": "Origem/UF",
+      "itemId": "item_134793",
+      "apiColumn": 19,
+      "uiColumn": 19,
+      "sourceJsonPointer": "/fit_ony_sae_code",
+      "total": false,
+      "totalKind": "NONE"
+    },
+    {
+      "name": "Origem/Região",
+      "itemId": "item_113390",
+      "apiColumn": 20,
+      "uiColumn": 20,
+      "sourceJsonPointer": "/fit_o_n_name",
+      "total": false,
+      "totalKind": "NONE"
+    },
+    {
+      "name": "Origem/Filial Responsável",
+      "itemId": "item_113391",
+      "apiColumn": 21,
+      "uiColumn": 21,
+      "sourceJsonPointer": "/fit_o_n_drt_nickname",
+      "total": false,
+      "totalKind": "NONE"
+    },
+    {
+      "name": "Destino/CEP",
+      "itemId": "item_113394",
+      "apiColumn": 22,
+      "uiColumn": 22,
+      "sourceJsonPointer": "/fit_dos_postal_code",
+      "total": false,
+      "totalKind": "NONE"
+    },
+    {
+      "name": "Destino/Cidade",
+      "itemId": "item_113396",
+      "apiColumn": 23,
+      "uiColumn": 23,
+      "sourceJsonPointer": "/fit_dos_cty_name",
+      "total": false,
+      "totalKind": "NONE"
+    },
+    {
+      "name": "Destino/UF",
+      "itemId": "item_134792",
+      "apiColumn": 24,
+      "uiColumn": 24,
+      "sourceJsonPointer": "/fit_diy_sae_code",
+      "total": false,
+      "totalKind": "NONE"
+    },
+    {
+      "name": "Destino/Região",
+      "itemId": "item_113397",
+      "apiColumn": 25,
+      "uiColumn": 25,
+      "sourceJsonPointer": "/fit_dyn_name",
+      "total": false,
+      "totalKind": "NONE"
+    },
+    {
+      "name": "Destino/Filial Responsável",
+      "itemId": "item_113398",
+      "apiColumn": 26,
+      "uiColumn": 26,
+      "sourceJsonPointer": "/fit_dyn_drt_nickname",
+      "total": false,
+      "totalKind": "NONE"
+    },
+    {
+      "name": "N° Minuta",
+      "itemId": "item_113410",
+      "apiColumn": 27,
+      "uiColumn": 27,
+      "sourceJsonPointer": "/corporation_sequence_number",
+      "total": true,
+      "totalKind": "INTEGER_EXACT"
+    },
+    {
+      "name": "N° Referência",
+      "itemId": "item_221150",
+      "apiColumn": 28,
+      "uiColumn": 28,
+      "sourceJsonPointer": "/reference_number",
+      "total": false,
+      "totalKind": "NONE"
+    },
+    {
+      "name": "Tipo de emissão",
+      "itemId": "item_113411",
+      "apiColumn": 29,
+      "uiColumn": 29,
+      "sourceJsonPointer": "/emission_type",
+      "total": false,
+      "totalKind": "NONE"
+    },
+    {
+      "name": "Tipo do serviço",
+      "itemId": "item_113412",
+      "apiColumn": 30,
+      "uiColumn": 30,
+      "sourceJsonPointer": "/service_type",
+      "total": false,
+      "totalKind": "NONE"
+    },
+    {
+      "name": "Tipo de frete",
+      "itemId": "item_123806",
+      "apiColumn": 31,
+      "uiColumn": 31,
+      "sourceJsonPointer": "/type",
+      "total": false,
+      "totalKind": "NONE"
+    },
+    {
+      "name": "Nº Minuta/Frete Original",
+      "itemId": "item_134367",
+      "apiColumn": 32,
+      "uiColumn": 32,
+      "sourceJsonPointer": "/fit_o_t_corporation_sequence_number",
+      "total": true,
+      "totalKind": "INTEGER_EXACT"
+    },
+    {
+      "name": "Cortesia",
+      "itemId": "item_123810",
+      "apiColumn": 33,
+      "uiColumn": 33,
+      "sourceJsonPointer": "/courtesy",
+      "total": false,
+      "totalKind": "NONE"
+    },
+    {
+      "name": "Tipo do pagador",
+      "itemId": "item_113416",
+      "apiColumn": 34,
+      "uiColumn": 34,
+      "sourceJsonPointer": "/payment_accountable_type",
+      "total": false,
+      "totalKind": "NONE"
+    },
+    {
+      "name": "Status",
+      "itemId": "item_113493",
+      "apiColumn": 35,
+      "uiColumn": 35,
+      "sourceJsonPointer": "/status",
+      "total": false,
+      "totalKind": "NONE"
+    },
+    {
+      "name": "Data do frete",
+      "itemId": "item_113426",
+      "apiColumn": 36,
+      "uiColumn": 36,
+      "sourceJsonPointer": "/service_at",
+      "total": false,
+      "totalKind": "NONE"
+    },
+    {
+      "name": "CT-e/Status",
+      "itemId": "item_123809",
+      "apiColumn": 37,
+      "uiColumn": 37,
+      "sourceJsonPointer": "/fit_fhe_cte_status",
+      "total": false,
+      "totalKind": "NONE"
+    },
+    {
+      "name": "CT-e/Número",
+      "itemId": "item_113423",
+      "apiColumn": 38,
+      "uiColumn": 38,
+      "sourceJsonPointer": "/fit_fhe_cte_number",
+      "total": true,
+      "totalKind": "INTEGER_EXACT"
+    },
+    {
+      "name": "CT-e/Série",
+      "itemId": "item_123609",
+      "apiColumn": 39,
+      "uiColumn": 39,
+      "sourceJsonPointer": "/fit_fhe_cte_series",
+      "total": true,
+      "totalKind": "INTEGER_EXACT"
+    },
+    {
+      "name": "CT-e/Data de emissão",
+      "itemId": "item_113424",
+      "apiColumn": 40,
+      "uiColumn": 40,
+      "sourceJsonPointer": "/fit_fhe_cte_issued_at",
+      "total": false,
+      "totalKind": "NONE"
+    },
+    {
+      "name": "CT-e/Data cancelamento",
+      "itemId": "item_133232",
+      "apiColumn": 41,
+      "uiColumn": 41,
+      "sourceJsonPointer": "/fit_fhe_cte_cancellation_at",
+      "total": false,
+      "totalKind": "NONE"
+    },
+    {
+      "name": "CT-e/Motivo do cancelamento",
+      "itemId": "item_133400",
+      "apiColumn": 42,
+      "uiColumn": 42,
+      "sourceJsonPointer": "/fit_fhe_cte_cancellation_reason",
+      "total": false,
+      "totalKind": "NONE"
+    },
+    {
+      "name": "CT-e/Chave",
+      "itemId": "item_134373",
+      "apiColumn": 43,
+      "uiColumn": 43,
+      "sourceJsonPointer": "/fit_fhe_cte_key",
+      "total": false,
+      "totalKind": "NONE"
+    },
+    {
+      "name": "Nfse/Status",
+      "itemId": "item_133329",
+      "apiColumn": 44,
+      "uiColumn": 44,
+      "sourceJsonPointer": "/fit_nse_status",
+      "total": false,
+      "totalKind": "NONE"
+    },
+    {
+      "name": "Nfse/Número NFS-e",
+      "itemId": "item_113429",
+      "apiColumn": 45,
+      "uiColumn": 45,
+      "sourceJsonPointer": "/fit_nse_number",
+      "total": true,
+      "totalKind": "INTEGER_EXACT"
+    },
+    {
+      "name": "Nfse/Série",
+      "itemId": "item_123608",
+      "apiColumn": 46,
+      "uiColumn": 46,
+      "sourceJsonPointer": "/nfse_series",
+      "total": false,
+      "totalKind": "NONE"
+    },
+    {
+      "name": "Nfse/Nº NFS-e",
+      "itemId": "item_133328",
+      "apiColumn": 47,
+      "uiColumn": 47,
+      "sourceJsonPointer": "/nfse_number",
+      "total": false,
+      "totalKind": "NONE"
+    },
+    {
+      "name": "Nfse/Data de emissão",
+      "itemId": "item_113430",
+      "apiColumn": 48,
+      "uiColumn": 48,
+      "sourceJsonPointer": "/fit_nse_issued_at",
+      "total": false,
+      "totalKind": "NONE"
+    },
+    {
+      "name": "Nfse/Código Serviço",
+      "itemId": "item_133381",
+      "apiColumn": 49,
+      "uiColumn": 49,
+      "sourceJsonPointer": "/fit_nse_nee_code",
+      "total": false,
+      "totalKind": "NONE"
+    },
+    {
+      "name": "Nfse/Motivo do cancelamento",
+      "itemId": "item_133401",
+      "apiColumn": 50,
+      "uiColumn": 50,
+      "sourceJsonPointer": "/fit_nse_cancelation_reason",
+      "total": false,
+      "totalKind": "NONE"
+    },
+    {
+      "name": "Previsão Entrega/Previsão de entrega",
+      "itemId": "item_113443",
+      "apiColumn": 51,
+      "uiColumn": 51,
+      "sourceJsonPointer": "/fit_dpn_delivery_prediction_at",
+      "total": false,
+      "totalKind": "NONE"
+    },
+    {
+      "name": "Previsão Entrega/Finalização performance",
+      "itemId": "item_113444",
+      "apiColumn": 52,
+      "uiColumn": 52,
+      "sourceJsonPointer": "/fit_dpn_performance_finished_at",
+      "total": false,
+      "totalKind": "NONE"
+    },
+    {
+      "name": "Previsão Entrega/Agendado",
+      "itemId": "item_113453",
+      "apiColumn": 53,
+      "uiColumn": 53,
+      "sourceJsonPointer": "/fit_dpn_manual_schedule",
+      "total": false,
+      "totalKind": "NONE"
+    },
+    {
+      "name": "NF",
+      "itemId": "item_113455",
+      "apiColumn": 54,
+      "uiColumn": 54,
+      "sourceJsonPointer": "/invoices_mapping",
+      "total": false,
+      "totalKind": "NONE"
+    },
+    {
+      "name": "Valor NF",
+      "itemId": "item_113491",
+      "apiColumn": 55,
+      "uiColumn": 55,
+      "sourceJsonPointer": "/invoices_value",
+      "total": true,
+      "totalKind": "BINARY64_ENCODING129"
+    },
+    {
+      "name": "Volumes",
+      "itemId": "item_113456",
+      "apiColumn": 56,
+      "uiColumn": 56,
+      "sourceJsonPointer": "/invoices_volumes",
+      "total": true,
+      "totalKind": "INTEGER_EXACT"
+    },
+    {
+      "name": "Peso real",
+      "itemId": "item_113458",
+      "apiColumn": 57,
+      "uiColumn": 57,
+      "sourceJsonPointer": "/real_weight",
+      "total": true,
+      "totalKind": "BINARY64_ENCODING129"
+    },
+    {
+      "name": "Peso cubado",
+      "itemId": "item_113459",
+      "apiColumn": 58,
+      "uiColumn": 58,
+      "sourceJsonPointer": "/cubages_cubed_weight",
+      "total": true,
+      "totalKind": "BINARY64_ENCODING129"
+    },
+    {
+      "name": "Total M3",
+      "itemId": "item_113460",
+      "apiColumn": 59,
+      "uiColumn": 59,
+      "sourceJsonPointer": "/total_cubic_volume",
+      "total": true,
+      "totalKind": "BINARY64_ENCODING129"
+    },
+    {
+      "name": "Peso taxado",
+      "itemId": "item_113461",
+      "apiColumn": 60,
+      "uiColumn": 60,
+      "sourceJsonPointer": "/taxed_weight",
+      "total": true,
+      "totalKind": "BINARY64_ENCODING129"
+    },
+    {
+      "name": "Km",
+      "itemId": "item_113469",
+      "apiColumn": 61,
+      "uiColumn": 61,
+      "sourceJsonPointer": "/km",
+      "total": true,
+      "totalKind": "BINARY64_ENCODING129"
+    },
+    {
+      "name": "Frete peso",
+      "itemId": "item_113472",
+      "apiColumn": 62,
+      "uiColumn": 62,
+      "sourceJsonPointer": "/freight_weight_subtotal",
+      "total": true,
+      "totalKind": "BINARY64_ENCODING129"
+    },
+    {
+      "name": "Valor da coleta",
+      "itemId": "item_113473",
+      "apiColumn": 63,
+      "uiColumn": 63,
+      "sourceJsonPointer": "/collect_subtotal",
+      "total": true,
+      "totalKind": "BINARY64_ENCODING129"
+    },
+    {
+      "name": "Valor da entrega",
+      "itemId": "item_113474",
+      "apiColumn": 64,
+      "uiColumn": 64,
+      "sourceJsonPointer": "/delivery_subtotal",
+      "total": true,
+      "totalKind": "BINARY64_ENCODING129"
+    },
+    {
+      "name": "SEC/CAT",
+      "itemId": "item_113475",
+      "apiColumn": 65,
+      "uiColumn": 65,
+      "sourceJsonPointer": "/sec_cat_subtotal",
+      "total": true,
+      "totalKind": "BINARY64_ENCODING129"
+    },
+    {
+      "name": "Valor do redespacho",
+      "itemId": "item_113476",
+      "apiColumn": 66,
+      "uiColumn": 66,
+      "sourceJsonPointer": "/redispatch_subtotal",
+      "total": true,
+      "totalKind": "BINARY64_ENCODING129"
+    },
+    {
+      "name": "ITR",
+      "itemId": "item_113477",
+      "apiColumn": 67,
+      "uiColumn": 67,
+      "sourceJsonPointer": "/itr_subtotal",
+      "total": true,
+      "totalKind": "BINARY64_ENCODING129"
+    },
+    {
+      "name": "Valor despacho",
+      "itemId": "item_113478",
+      "apiColumn": 68,
+      "uiColumn": 68,
+      "sourceJsonPointer": "/dispatch_subtotal",
+      "total": true,
+      "totalKind": "BINARY64_ENCODING129"
+    },
+    {
+      "name": "GRIS",
+      "itemId": "item_113479",
+      "apiColumn": 69,
+      "uiColumn": 69,
+      "sourceJsonPointer": "/gris_subtotal",
+      "total": true,
+      "totalKind": "BINARY64_ENCODING129"
+    },
+    {
+      "name": "Ad Valorem",
+      "itemId": "item_113480",
+      "apiColumn": 70,
+      "uiColumn": 70,
+      "sourceJsonPointer": "/ad_valorem_subtotal",
+      "total": true,
+      "totalKind": "BINARY64_ENCODING129"
+    },
+    {
+      "name": "Valor pedágio",
+      "itemId": "item_113481",
+      "apiColumn": 71,
+      "uiColumn": 71,
+      "sourceJsonPointer": "/toll_subtotal",
+      "total": true,
+      "totalKind": "BINARY64_ENCODING129"
+    },
+    {
+      "name": "Outros valores",
+      "itemId": "item_113482",
+      "apiColumn": 72,
+      "uiColumn": 72,
+      "sourceJsonPointer": "/other_fees",
+      "total": true,
+      "totalKind": "BINARY64_ENCODING129"
+    },
+    {
+      "name": "SUFRAMA",
+      "itemId": "item_113483",
+      "apiColumn": 73,
+      "uiColumn": 73,
+      "sourceJsonPointer": "/suframa_subtotal",
+      "total": true,
+      "totalKind": "BINARY64_ENCODING129"
+    },
+    {
+      "name": "Valor emergência",
+      "itemId": "item_113484",
+      "apiColumn": 74,
+      "uiColumn": 74,
+      "sourceJsonPointer": "/emergency_subtotal",
+      "total": true,
+      "totalKind": "BINARY64_ENCODING129"
+    },
+    {
+      "name": "TDE",
+      "itemId": "item_113486",
+      "apiColumn": 75,
+      "uiColumn": 75,
+      "sourceJsonPointer": "/tde_subtotal",
+      "total": true,
+      "totalKind": "BINARY64_ENCODING129"
+    },
+    {
+      "name": "TDA Origem",
+      "itemId": "item_228289",
+      "apiColumn": 76,
+      "uiColumn": 76,
+      "sourceJsonPointer": "/fit_ony_cin_tda_value",
+      "total": true,
+      "totalKind": "BINARY64_ENCODING129"
+    },
+    {
+      "name": "TDA Destino",
+      "itemId": "item_228290",
+      "apiColumn": 77,
+      "uiColumn": 77,
+      "sourceJsonPointer": "/fit_diy_cin_tda_value",
+      "total": true,
+      "totalKind": "BINARY64_ENCODING129"
+    },
+    {
+      "name": "Adicionais",
+      "itemId": "item_113485",
+      "apiColumn": 78,
+      "uiColumn": 78,
+      "sourceJsonPointer": "/additionals_subtotal",
+      "total": true,
+      "totalKind": "BINARY64_ENCODING129"
+    },
+    {
+      "name": "Serviço Adicional",
+      "itemId": "item_229086",
+      "apiColumn": 79,
+      "uiColumn": 79,
+      "sourceJsonPointer": "/fit_fis_see_name",
+      "total": false,
+      "totalKind": "NONE"
+    },
+    {
+      "name": "Valor Serviço Adicional",
+      "itemId": "item_229090",
+      "apiColumn": 80,
+      "uiColumn": 80,
+      "sourceJsonPointer": "/fit_fis_subtotal",
+      "total": true,
+      "totalKind": "BINARY64_ENCODING129"
+    },
+    {
+      "name": "Taxa adm.",
+      "itemId": "item_113488",
+      "apiColumn": 81,
+      "uiColumn": 81,
+      "sourceJsonPointer": "/adm_fee_subtotal",
+      "total": true,
+      "totalKind": "BINARY64_ENCODING129"
+    },
+    {
+      "name": "TRT",
+      "itemId": "item_113487",
+      "apiColumn": 82,
+      "uiColumn": 82,
+      "sourceJsonPointer": "/trt_subtotal",
+      "total": true,
+      "totalKind": "BINARY64_ENCODING129"
+    },
+    {
+      "name": "Total a receber",
+      "itemId": "item_113490",
+      "apiColumn": 83,
+      "uiColumn": 83,
+      "sourceJsonPointer": "/total",
+      "total": true,
+      "totalKind": "BINARY64_ENCODING129"
+    },
+    {
+      "name": "Modo cálculo",
+      "itemId": "item_134369",
+      "apiColumn": 84,
+      "uiColumn": 84,
+      "sourceJsonPointer": "/calculation_type",
+      "total": false,
+      "totalKind": "NONE"
+    },
+    {
+      "name": "Tabela de Preço",
+      "itemId": "item_134790",
+      "apiColumn": 85,
+      "uiColumn": 85,
+      "sourceJsonPointer": "/fit_cre_name",
+      "total": false,
+      "totalKind": "NONE"
+    },
+    {
+      "name": "Vendedor/Nome",
+      "itemId": "item_134386",
+      "apiColumn": 86,
+      "uiColumn": 86,
+      "sourceJsonPointer": "/fit_sps_slr_psn_name",
+      "total": false,
+      "totalKind": "NONE"
+    },
+    {
+      "name": "Vendedor/Nome fantasia",
+      "itemId": "item_134836",
+      "apiColumn": 87,
+      "uiColumn": 87,
+      "sourceJsonPointer": "/fit_sps_slr_psn_nickname",
+      "total": false,
+      "totalKind": "NONE"
+    },
+    {
+      "name": "Responsável pelo seguro",
+      "itemId": "item_113492",
+      "apiColumn": 88,
+      "uiColumn": 88,
+      "sourceJsonPointer": "/insurance_accountable_type",
+      "total": false,
+      "totalKind": "NONE"
+    },
+    {
+      "name": "Natureza da mercadoria/Descrição",
+      "itemId": "item_113494",
+      "apiColumn": 89,
+      "uiColumn": 89,
+      "sourceJsonPointer": "/fit_psn_name",
+      "total": false,
+      "totalKind": "NONE"
+    },
+    {
+      "name": "Classificação",
+      "itemId": "item_113495",
+      "apiColumn": 90,
+      "uiColumn": 90,
+      "sourceJsonPointer": "/fit_fsn_name",
+      "total": false,
+      "totalKind": "NONE"
+    },
+    {
+      "name": "Usuário/Nome",
+      "itemId": "item_113496",
+      "apiColumn": 91,
+      "uiColumn": 91,
+      "sourceJsonPointer": "/fit_uer_name",
+      "total": false,
+      "totalKind": "NONE"
+    },
+    {
+      "name": "Cotação/N° Cotação",
+      "itemId": "item_113501",
+      "apiColumn": 92,
+      "uiColumn": 92,
+      "sourceJsonPointer": "/fit_qrd_qoe_sequence_code",
+      "total": true,
+      "totalKind": "INTEGER_EXACT"
+    },
+    {
+      "name": "Coleta/N° coleta",
+      "itemId": "item_113497",
+      "apiColumn": 93,
+      "uiColumn": 93,
+      "sourceJsonPointer": "/fit_p_m_pck_sequence_code",
+      "total": true,
+      "totalKind": "INTEGER_EXACT"
+    },
+    {
+      "name": "Coleta/Data Coleta",
+      "itemId": "item_113498",
+      "apiColumn": 94,
+      "uiColumn": 94,
+      "sourceJsonPointer": "/fit_p_m_pck_finish_date",
+      "total": false,
+      "totalKind": "NONE"
+    },
+    {
+      "name": "Manifesto Coleta/Número",
+      "itemId": "item_113499",
+      "apiColumn": 95,
+      "uiColumn": 95,
+      "sourceJsonPointer": "/fit_p_m_pck_mik_mft_sequence_code",
+      "total": true,
+      "totalKind": "INTEGER_EXACT"
+    },
+    {
+      "name": "Manifesto Transferência 1/Número",
+      "itemId": "item_113565",
+      "apiColumn": 96,
+      "uiColumn": 96,
+      "sourceJsonPointer": "/fit_fte_f_r_mft_sequence_code",
+      "total": true,
+      "totalKind": "INTEGER_EXACT"
+    },
+    {
+      "name": "Manifesto Transferência 1/Data",
+      "itemId": "item_156559",
+      "apiColumn": 97,
+      "uiColumn": 97,
+      "sourceJsonPointer": "/fit_fte_f_r_occurrence_at",
+      "total": false,
+      "totalKind": "NONE"
+    },
+    {
+      "name": "Manifesto Transferência 2/Número",
+      "itemId": "item_156545",
+      "apiColumn": 98,
+      "uiColumn": 98,
+      "sourceJsonPointer": "/fit_mer_mft_sequence_code",
+      "total": false,
+      "totalKind": "NONE"
+    },
+    {
+      "name": "Manifesto Transferência 2/Data",
+      "itemId": "item_156562",
+      "apiColumn": 99,
+      "uiColumn": 99,
+      "sourceJsonPointer": "/fit_mer_mft_service_date",
+      "total": false,
+      "totalKind": "NONE"
+    },
+    {
+      "name": "Manifesto Entrega/Número",
+      "itemId": "item_113566",
+      "apiColumn": 100,
+      "uiColumn": 100,
+      "sourceJsonPointer": "/fit_fte_l_y_mft_sequence_code",
+      "total": true,
+      "totalKind": "INTEGER_EXACT"
+    },
+    {
+      "name": "Manifesto Entrega/Data",
+      "itemId": "item_156561",
+      "apiColumn": 101,
+      "uiColumn": 101,
+      "sourceJsonPointer": "/fit_fte_l_y_mft_service_date",
+      "total": false,
+      "totalKind": "NONE"
+    },
+    {
+      "name": "Custos/Total Impostos",
+      "itemId": "item_133395",
+      "apiColumn": 102,
+      "uiColumn": 102,
+      "sourceJsonPointer": "/fit_ftt_tax_total",
+      "total": true,
+      "totalKind": "BINARY64_ENCODING129"
+    },
+    {
+      "name": "Custos/Agentes",
+      "itemId": "item_133402",
+      "apiColumn": 103,
+      "uiColumn": 103,
+      "sourceJsonPointer": "/fit_ftt_agent_costs",
+      "total": true,
+      "totalKind": "BINARY64_ENCODING129"
+    },
+    {
+      "name": "Custos/Comissões",
+      "itemId": "item_133403",
+      "apiColumn": 104,
+      "uiColumn": 104,
+      "sourceJsonPointer": "/fit_ftt_commission_costs",
+      "total": true,
+      "totalKind": "BINARY64_ENCODING129"
+    },
+    {
+      "name": "Custos/Redespacho",
+      "itemId": "item_133404",
+      "apiColumn": 105,
+      "uiColumn": 105,
+      "sourceJsonPointer": "/fit_ftt_redispatch_costs",
+      "total": true,
+      "totalKind": "BINARY64_ENCODING129"
+    },
+    {
+      "name": "Custos/Manifesto",
+      "itemId": "item_133405",
+      "apiColumn": 106,
+      "uiColumn": 106,
+      "sourceJsonPointer": "/fit_ftt_manifest_costs",
+      "total": true,
+      "totalKind": "BINARY64_ENCODING129"
+    },
+    {
+      "name": "Custos/Consolidação",
+      "itemId": "item_133406",
+      "apiColumn": 107,
+      "uiColumn": 107,
+      "sourceJsonPointer": "/fit_ftt_consolidation_costs",
+      "total": true,
+      "totalKind": "BINARY64_ENCODING129"
+    },
+    {
+      "name": "Custos/Seguro",
+      "itemId": "item_133407",
+      "apiColumn": 108,
+      "uiColumn": 108,
+      "sourceJsonPointer": "/fit_ftt_insurance_costs",
+      "total": true,
+      "totalKind": "BINARY64_ENCODING129"
+    },
+    {
+      "name": "Custos/Despesas operacionais",
+      "itemId": "item_133408",
+      "apiColumn": 109,
+      "uiColumn": 109,
+      "sourceJsonPointer": "/fit_ftt_operational_expenses",
+      "total": true,
+      "totalKind": "BINARY64_ENCODING129"
+    },
+    {
+      "name": "Custos/Custo Total",
+      "itemId": "item_133409",
+      "apiColumn": 110,
+      "uiColumn": 110,
+      "sourceJsonPointer": "/fit_ftt_total_cost",
+      "total": true,
+      "totalKind": "BINARY64_ENCODING129"
+    },
+    {
+      "name": "Comprovante de Entrega",
+      "itemId": "item_134368",
+      "apiColumn": 111,
+      "uiColumn": 111,
+      "sourceJsonPointer": "/fit_d_t_created_at",
+      "total": false,
+      "totalKind": "NONE"
+    },
+    {
+      "name": "Observações",
+      "itemId": "item_206058",
+      "apiColumn": 112,
+      "uiColumn": 112,
+      "sourceJsonPointer": "/comments",
+      "total": false,
+      "totalKind": "NONE"
+    },
+    {
+      "name": "Data atualização",
+      "itemId": "item_221148",
+      "apiColumn": 113,
+      "uiColumn": 113,
+      "sourceJsonPointer": "/updated_at",
+      "total": false,
+      "totalKind": "NONE"
+    },
+    {
+      "name": "Custos/Manifesto de coleta",
+      "itemId": "item_225444",
+      "apiColumn": 114,
+      "uiColumn": 114,
+      "sourceJsonPointer": "/fit_ftt_manifest_pick_costs",
+      "total": true,
+      "totalKind": "BINARY64_ENCODING129"
+    }
+  ]
+}

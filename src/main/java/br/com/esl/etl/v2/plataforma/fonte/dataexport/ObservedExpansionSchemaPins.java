@@ -1,6 +1,6 @@
 package br.com.esl.etl.v2.plataforma.fonte.dataexport;
 
-/** Code-owned hashes for four observed wire resources. Hashes are integrity, not authority. */
+/** Code-owned current/historical wire pins. Integrity is not runtime or storage authority. */
 final class ObservedExpansionSchemaPins {
     private ObservedExpansionSchemaPins() {}
 
@@ -12,6 +12,30 @@ final class ObservedExpansionSchemaPins {
             int fields,
             int filters) {}
 
+    private static final Pin FAT_P1 =
+            new Pin(
+                    4924,
+                    "observed-expansion-wire-4924-20261025-v1",
+                    "/contracts/dataexport/expansion-4924-observed-wire-20261025-v1.json",
+                    "4bdc78464659c30367ba8d97ed7e9a5f88824503beaa05aaff621c5e97354405",
+                    52,
+                    18);
+
+    // NOT INSTALLABLE until Root closes all21profiles, adopts the final resource,
+    // replaces this placeholder and qualifies the full current unit.
+    private static final Pin FAT_P2 =
+            new Pin(
+                    4924,
+                    "observed-expansion-wire-4924-20261108-p2",
+                    "/contracts/dataexport/expansion-4924-observed-wire-20261108-p2.json",
+                    "aa2630cde155d02ce0635a173b801c8a126546a33d2e847c7befb837df67885e",
+                    52,
+                    18);
+
+    static Pin historicalPin(final ObservedExpansionCaptureTemplate template) {
+        return template == ObservedExpansionCaptureTemplate.FAT ? FAT_P1 : pin(template);
+    }
+
     static Pin pin(final ObservedExpansionCaptureTemplate template) {
         return switch (template) {
             case CAP ->
@@ -22,14 +46,8 @@ final class ObservedExpansionSchemaPins {
                             "863f46f21d232c8bc8f27e9803061492ed613c020c42c211ffadf93c3aa17277",
                             28,
                             9);
-            case FAT ->
-                    new Pin(
-                            4924,
-                            "observed-expansion-wire-4924-20261025-v1",
-                            "/contracts/dataexport/expansion-4924-observed-wire-20261025-v1.json",
-                            "4bdc78464659c30367ba8d97ed7e9a5f88824503beaa05aaff621c5e97354405",
-                            52,
-                            18);
+            case FAT -> FAT_P2;
+
             case INV ->
                     new Pin(
                             10633,

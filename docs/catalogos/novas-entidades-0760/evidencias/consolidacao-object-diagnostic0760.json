@@ -1,0 +1,910 @@
+{
+  "schema": "NEW_ENTITIES_COMPARISON0760",
+  "reportId": 11067,
+  "day": "2026-11-06",
+  "rows": 41,
+  "fields": 39,
+  "cells": 1599,
+  "nativeFileId": "1777587",
+  "allFieldsMapped": false,
+  "completeRowMultisetEqual": false,
+  "allColumnsEqual": false,
+  "anchorGroupsEqual": true,
+  "fieldsDetail": [
+    {
+      "field": "ctd_fgs_crn_psn_nickname",
+      "column": 1,
+      "matchingPolicies": [
+        "DIRECT",
+        "EMPTY_STRING_BLANK"
+      ],
+      "selectedPolicy": "DIRECT",
+      "columnMultisetEqual": true,
+      "nonNullObserved": true,
+      "profile": {
+        "emptyStrings": 0,
+        "maximumNumericTextPrecision": 0,
+        "maximumNumericTextScale": 0,
+        "maximumIntegerDigits": 0,
+        "arrayItemMaxUtf16": 0,
+        "objectValueTypes": {},
+        "sourceOffsets": {},
+        "timestampsWithFraction": 0
+      }
+    },
+    {
+      "field": "sequence_code",
+      "column": 2,
+      "matchingPolicies": [
+        "DIRECT"
+      ],
+      "selectedPolicy": "DIRECT",
+      "columnMultisetEqual": true,
+      "nonNullObserved": true,
+      "profile": {
+        "emptyStrings": 0,
+        "maximumNumericTextPrecision": 0,
+        "maximumNumericTextScale": 0,
+        "maximumIntegerDigits": 5,
+        "arrayItemMaxUtf16": 0,
+        "objectValueTypes": {},
+        "sourceOffsets": {},
+        "timestampsWithFraction": 0
+      }
+    },
+    {
+      "field": "issue_date",
+      "column": 3,
+      "matchingPolicies": [
+        "ISO_DATE_TO_EXCEL_MIDNIGHT"
+      ],
+      "selectedPolicy": "ISO_DATE_TO_EXCEL_MIDNIGHT",
+      "columnMultisetEqual": true,
+      "nonNullObserved": true,
+      "profile": {
+        "emptyStrings": 0,
+        "maximumNumericTextPrecision": 0,
+        "maximumNumericTextScale": 0,
+        "maximumIntegerDigits": 0,
+        "arrayItemMaxUtf16": 0,
+        "objectValueTypes": {},
+        "sourceOffsets": {},
+        "timestampsWithFraction": 0
+      }
+    },
+    {
+      "field": "ctd_rhr_cpy_nickname",
+      "column": 4,
+      "matchingPolicies": [
+        "DIRECT",
+        "EMPTY_STRING_BLANK"
+      ],
+      "selectedPolicy": "DIRECT",
+      "columnMultisetEqual": true,
+      "nonNullObserved": true,
+      "profile": {
+        "emptyStrings": 0,
+        "maximumNumericTextPrecision": 0,
+        "maximumNumericTextScale": 0,
+        "maximumIntegerDigits": 0,
+        "arrayItemMaxUtf16": 0,
+        "objectValueTypes": {},
+        "sourceOffsets": {},
+        "timestampsWithFraction": 0
+      }
+    },
+    {
+      "field": "ctd_rhr_cpy_document",
+      "column": 5,
+      "matchingPolicies": [
+        "DIRECT",
+        "EMPTY_STRING_BLANK"
+      ],
+      "selectedPolicy": "DIRECT",
+      "columnMultisetEqual": true,
+      "nonNullObserved": true,
+      "profile": {
+        "emptyStrings": 0,
+        "maximumNumericTextPrecision": 13,
+        "maximumNumericTextScale": 0,
+        "maximumIntegerDigits": 0,
+        "arrayItemMaxUtf16": 0,
+        "objectValueTypes": {},
+        "sourceOffsets": {},
+        "timestampsWithFraction": 0
+      }
+    },
+    {
+      "field": "document_number",
+      "column": 6,
+      "matchingPolicies": [
+        "DIRECT",
+        "EMPTY_STRING_BLANK"
+      ],
+      "selectedPolicy": "DIRECT",
+      "columnMultisetEqual": true,
+      "nonNullObserved": true,
+      "profile": {
+        "emptyStrings": 0,
+        "maximumNumericTextPrecision": 6,
+        "maximumNumericTextScale": 0,
+        "maximumIntegerDigits": 0,
+        "arrayItemMaxUtf16": 0,
+        "objectValueTypes": {},
+        "sourceOffsets": {},
+        "timestampsWithFraction": 0
+      }
+    },
+    {
+      "field": "ctd_fgs_fhe_cte_number",
+      "column": 7,
+      "matchingPolicies": [
+        "DIRECT"
+      ],
+      "selectedPolicy": "DIRECT",
+      "columnMultisetEqual": true,
+      "nonNullObserved": true,
+      "profile": {
+        "emptyStrings": 0,
+        "maximumNumericTextPrecision": 0,
+        "maximumNumericTextScale": 0,
+        "maximumIntegerDigits": 6,
+        "arrayItemMaxUtf16": 0,
+        "objectValueTypes": {},
+        "sourceOffsets": {},
+        "timestampsWithFraction": 0
+      }
+    },
+    {
+      "field": "charged_value",
+      "column": 8,
+      "matchingPolicies": [
+        "DECIMAL_TEXT"
+      ],
+      "selectedPolicy": "DECIMAL_TEXT",
+      "columnMultisetEqual": true,
+      "nonNullObserved": true,
+      "profile": {
+        "emptyStrings": 0,
+        "maximumNumericTextPrecision": 5,
+        "maximumNumericTextScale": 2,
+        "maximumIntegerDigits": 0,
+        "arrayItemMaxUtf16": 0,
+        "objectValueTypes": {},
+        "sourceOffsets": {},
+        "timestampsWithFraction": 0
+      }
+    },
+    {
+      "field": "subtotal",
+      "column": 9,
+      "matchingPolicies": [
+        "DECIMAL_TEXT"
+      ],
+      "selectedPolicy": "DECIMAL_TEXT",
+      "columnMultisetEqual": true,
+      "nonNullObserved": true,
+      "profile": {
+        "emptyStrings": 0,
+        "maximumNumericTextPrecision": 5,
+        "maximumNumericTextScale": 2,
+        "maximumIntegerDigits": 0,
+        "arrayItemMaxUtf16": 0,
+        "objectValueTypes": {},
+        "sourceOffsets": {},
+        "timestampsWithFraction": 0
+      }
+    },
+    {
+      "field": "ctd_fgs_subtotal",
+      "column": 10,
+      "matchingPolicies": [
+        "DECIMAL_TEXT"
+      ],
+      "selectedPolicy": "DECIMAL_TEXT",
+      "columnMultisetEqual": true,
+      "nonNullObserved": true,
+      "profile": {
+        "emptyStrings": 0,
+        "maximumNumericTextPrecision": 6,
+        "maximumNumericTextScale": 2,
+        "maximumIntegerDigits": 0,
+        "arrayItemMaxUtf16": 0,
+        "objectValueTypes": {},
+        "sourceOffsets": {},
+        "timestampsWithFraction": 0
+      }
+    },
+    {
+      "field": "ctd_fgs_total",
+      "column": 11,
+      "matchingPolicies": [
+        "DECIMAL_TEXT"
+      ],
+      "selectedPolicy": "DECIMAL_TEXT",
+      "columnMultisetEqual": true,
+      "nonNullObserved": true,
+      "profile": {
+        "emptyStrings": 0,
+        "maximumNumericTextPrecision": 6,
+        "maximumNumericTextScale": 2,
+        "maximumIntegerDigits": 0,
+        "arrayItemMaxUtf16": 0,
+        "objectValueTypes": {},
+        "sourceOffsets": {},
+        "timestampsWithFraction": 0
+      }
+    },
+    {
+      "field": "ctd_fgs_taxed_weight",
+      "column": 12,
+      "matchingPolicies": [
+        "DECIMAL_TEXT"
+      ],
+      "selectedPolicy": "DECIMAL_TEXT",
+      "columnMultisetEqual": true,
+      "nonNullObserved": true,
+      "profile": {
+        "emptyStrings": 0,
+        "maximumNumericTextPrecision": 6,
+        "maximumNumericTextScale": 3,
+        "maximumIntegerDigits": 0,
+        "arrayItemMaxUtf16": 0,
+        "objectValueTypes": {},
+        "sourceOffsets": {},
+        "timestampsWithFraction": 0
+      }
+    },
+    {
+      "field": "ctd_fgs_fte_has_delivery_receipt",
+      "column": 13,
+      "matchingPolicies": [
+        "BOOLEAN_PT"
+      ],
+      "selectedPolicy": "BOOLEAN_PT",
+      "columnMultisetEqual": true,
+      "nonNullObserved": true,
+      "profile": {
+        "emptyStrings": 0,
+        "maximumNumericTextPrecision": 0,
+        "maximumNumericTextScale": 0,
+        "maximumIntegerDigits": 0,
+        "arrayItemMaxUtf16": 0,
+        "objectValueTypes": {},
+        "sourceOffsets": {},
+        "timestampsWithFraction": 0
+      }
+    },
+    {
+      "field": "bill_status",
+      "column": 14,
+      "matchingPolicies": [
+        "DIRECT",
+        "EMPTY_STRING_BLANK"
+      ],
+      "selectedPolicy": "DIRECT",
+      "columnMultisetEqual": true,
+      "nonNullObserved": true,
+      "profile": {
+        "emptyStrings": 0,
+        "maximumNumericTextPrecision": 0,
+        "maximumNumericTextScale": 0,
+        "maximumIntegerDigits": 0,
+        "arrayItemMaxUtf16": 0,
+        "objectValueTypes": {},
+        "sourceOffsets": {},
+        "timestampsWithFraction": 0
+      }
+    },
+    {
+      "field": "ctd_fgs_service_at",
+      "column": 15,
+      "matchingPolicies": [
+        "SOURCE_OFFSET_WALL_CLOCK"
+      ],
+      "selectedPolicy": "SOURCE_OFFSET_WALL_CLOCK",
+      "columnMultisetEqual": true,
+      "nonNullObserved": true,
+      "profile": {
+        "emptyStrings": 0,
+        "maximumNumericTextPrecision": 0,
+        "maximumNumericTextScale": 0,
+        "maximumIntegerDigits": 0,
+        "arrayItemMaxUtf16": 0,
+        "objectValueTypes": {},
+        "sourceOffsets": {
+          "-1 day, 21:00:00": 41
+        },
+        "timestampsWithFraction": 0
+      }
+    },
+    {
+      "field": "ctd_fgs_corporation_sequence_number",
+      "column": 16,
+      "matchingPolicies": [
+        "DIRECT"
+      ],
+      "selectedPolicy": "DIRECT",
+      "columnMultisetEqual": true,
+      "nonNullObserved": true,
+      "profile": {
+        "emptyStrings": 0,
+        "maximumNumericTextPrecision": 0,
+        "maximumNumericTextScale": 0,
+        "maximumIntegerDigits": 6,
+        "arrayItemMaxUtf16": 0,
+        "objectValueTypes": {},
+        "sourceOffsets": {},
+        "timestampsWithFraction": 0
+      }
+    },
+    {
+      "field": "ctd_fgs_invoices_volumes",
+      "column": 17,
+      "matchingPolicies": [
+        "DIRECT"
+      ],
+      "selectedPolicy": "DIRECT",
+      "columnMultisetEqual": true,
+      "nonNullObserved": true,
+      "profile": {
+        "emptyStrings": 0,
+        "maximumNumericTextPrecision": 0,
+        "maximumNumericTextScale": 0,
+        "maximumIntegerDigits": 3,
+        "arrayItemMaxUtf16": 0,
+        "objectValueTypes": {},
+        "sourceOffsets": {},
+        "timestampsWithFraction": 0
+      }
+    },
+    {
+      "field": "ctd_fgs_invoices_mapping",
+      "column": 18,
+      "matchingPolicies": [
+        "ARRAY_JOIN_COMMA_SPACE"
+      ],
+      "selectedPolicy": "ARRAY_JOIN_COMMA_SPACE",
+      "columnMultisetEqual": true,
+      "nonNullObserved": true,
+      "profile": {
+        "emptyStrings": 0,
+        "maximumNumericTextPrecision": 0,
+        "maximumNumericTextScale": 0,
+        "maximumIntegerDigits": 0,
+        "arrayItemMaxUtf16": 7,
+        "objectValueTypes": {},
+        "sourceOffsets": {},
+        "timestampsWithFraction": 0
+      }
+    },
+    {
+      "field": "ctd_fgs_dos_cty_name",
+      "column": 19,
+      "matchingPolicies": [
+        "DIRECT",
+        "EMPTY_STRING_BLANK"
+      ],
+      "selectedPolicy": "DIRECT",
+      "columnMultisetEqual": true,
+      "nonNullObserved": true,
+      "profile": {
+        "emptyStrings": 0,
+        "maximumNumericTextPrecision": 0,
+        "maximumNumericTextScale": 0,
+        "maximumIntegerDigits": 0,
+        "arrayItemMaxUtf16": 0,
+        "objectValueTypes": {},
+        "sourceOffsets": {},
+        "timestampsWithFraction": 0
+      }
+    },
+    {
+      "field": "ctd_sdr_document",
+      "column": 20,
+      "matchingPolicies": [
+        "DIRECT",
+        "EMPTY_STRING_BLANK"
+      ],
+      "selectedPolicy": "DIRECT",
+      "columnMultisetEqual": true,
+      "nonNullObserved": true,
+      "profile": {
+        "emptyStrings": 0,
+        "maximumNumericTextPrecision": 14,
+        "maximumNumericTextScale": 0,
+        "maximumIntegerDigits": 0,
+        "arrayItemMaxUtf16": 0,
+        "objectValueTypes": {},
+        "sourceOffsets": {},
+        "timestampsWithFraction": 0
+      }
+    },
+    {
+      "field": "ctd_sdr_nickname",
+      "column": 21,
+      "matchingPolicies": [
+        "DIRECT",
+        "EMPTY_STRING_BLANK"
+      ],
+      "selectedPolicy": "DIRECT",
+      "columnMultisetEqual": true,
+      "nonNullObserved": true,
+      "profile": {
+        "emptyStrings": 0,
+        "maximumNumericTextPrecision": 0,
+        "maximumNumericTextScale": 0,
+        "maximumIntegerDigits": 0,
+        "arrayItemMaxUtf16": 0,
+        "objectValueTypes": {},
+        "sourceOffsets": {},
+        "timestampsWithFraction": 0
+      }
+    },
+    {
+      "field": "ctd_fgs_oas_cty_name",
+      "column": 22,
+      "matchingPolicies": [
+        "DIRECT",
+        "EMPTY_STRING_BLANK"
+      ],
+      "selectedPolicy": "DIRECT",
+      "columnMultisetEqual": true,
+      "nonNullObserved": true,
+      "profile": {
+        "emptyStrings": 0,
+        "maximumNumericTextPrecision": 0,
+        "maximumNumericTextScale": 0,
+        "maximumIntegerDigits": 0,
+        "arrayItemMaxUtf16": 0,
+        "objectValueTypes": {},
+        "sourceOffsets": {},
+        "timestampsWithFraction": 0
+      }
+    },
+    {
+      "field": "ctd_rpt_document",
+      "column": 23,
+      "matchingPolicies": [
+        "DIRECT",
+        "EMPTY_STRING_BLANK"
+      ],
+      "selectedPolicy": "DIRECT",
+      "columnMultisetEqual": true,
+      "nonNullObserved": true,
+      "profile": {
+        "emptyStrings": 0,
+        "maximumNumericTextPrecision": 14,
+        "maximumNumericTextScale": 0,
+        "maximumIntegerDigits": 0,
+        "arrayItemMaxUtf16": 0,
+        "objectValueTypes": {},
+        "sourceOffsets": {},
+        "timestampsWithFraction": 0
+      }
+    },
+    {
+      "field": "ctd_rpt_nickname",
+      "column": 24,
+      "matchingPolicies": [
+        "DIRECT",
+        "EMPTY_STRING_BLANK"
+      ],
+      "selectedPolicy": "DIRECT",
+      "columnMultisetEqual": true,
+      "nonNullObserved": true,
+      "profile": {
+        "emptyStrings": 0,
+        "maximumNumericTextPrecision": 0,
+        "maximumNumericTextScale": 0,
+        "maximumIntegerDigits": 0,
+        "arrayItemMaxUtf16": 0,
+        "objectValueTypes": {},
+        "sourceOffsets": {},
+        "timestampsWithFraction": 0
+      }
+    },
+    {
+      "field": "ctd_rpt_charge_tde",
+      "column": 25,
+      "matchingPolicies": [
+        "BOOLEAN_PT"
+      ],
+      "selectedPolicy": "BOOLEAN_PT",
+      "columnMultisetEqual": true,
+      "nonNullObserved": true,
+      "profile": {
+        "emptyStrings": 0,
+        "maximumNumericTextPrecision": 0,
+        "maximumNumericTextScale": 0,
+        "maximumIntegerDigits": 0,
+        "arrayItemMaxUtf16": 0,
+        "objectValueTypes": {},
+        "sourceOffsets": {},
+        "timestampsWithFraction": 0
+      }
+    },
+    {
+      "field": "ctd_fgs_dpn_delivery_prediction_at",
+      "column": 26,
+      "matchingPolicies": [],
+      "selectedPolicy": null,
+      "columnMultisetEqual": false,
+      "nonNullObserved": true,
+      "profile": {
+        "emptyStrings": 0,
+        "maximumNumericTextPrecision": 0,
+        "maximumNumericTextScale": 0,
+        "maximumIntegerDigits": 0,
+        "arrayItemMaxUtf16": 0,
+        "objectValueTypes": {},
+        "sourceOffsets": {
+          "-1 day, 21:00:00": 41
+        },
+        "timestampsWithFraction": 26
+      }
+    },
+    {
+      "field": "ctd_fgs_finished_at",
+      "column": 27,
+      "matchingPolicies": [
+        "SOURCE_OFFSET_WALL_CLOCK"
+      ],
+      "selectedPolicy": "SOURCE_OFFSET_WALL_CLOCK",
+      "columnMultisetEqual": true,
+      "nonNullObserved": true,
+      "profile": {
+        "emptyStrings": 0,
+        "maximumNumericTextPrecision": 0,
+        "maximumNumericTextScale": 0,
+        "maximumIntegerDigits": 0,
+        "arrayItemMaxUtf16": 0,
+        "objectValueTypes": {},
+        "sourceOffsets": {
+          "-1 day, 21:00:00": 25
+        },
+        "timestampsWithFraction": 0
+      }
+    },
+    {
+      "field": "ctd_fgs_dpn_finished_within_deadline",
+      "column": 28,
+      "matchingPolicies": [
+        "BOOLEAN_PT"
+      ],
+      "selectedPolicy": "BOOLEAN_PT",
+      "columnMultisetEqual": true,
+      "nonNullObserved": true,
+      "profile": {
+        "emptyStrings": 0,
+        "maximumNumericTextPrecision": 0,
+        "maximumNumericTextScale": 0,
+        "maximumIntegerDigits": 0,
+        "arrayItemMaxUtf16": 0,
+        "objectValueTypes": {},
+        "sourceOffsets": {},
+        "timestampsWithFraction": 0
+      }
+    },
+    {
+      "field": "ctd_fgs_fte_lce_ore_description",
+      "column": 29,
+      "matchingPolicies": [
+        "DIRECT",
+        "EMPTY_STRING_BLANK"
+      ],
+      "selectedPolicy": "DIRECT",
+      "columnMultisetEqual": true,
+      "nonNullObserved": true,
+      "profile": {
+        "emptyStrings": 0,
+        "maximumNumericTextPrecision": 0,
+        "maximumNumericTextScale": 0,
+        "maximumIntegerDigits": 0,
+        "arrayItemMaxUtf16": 0,
+        "objectValueTypes": {},
+        "sourceOffsets": {},
+        "timestampsWithFraction": 0
+      }
+    },
+    {
+      "field": "ctd_fgs_fte_foe_ore_description",
+      "column": 30,
+      "matchingPolicies": [
+        "DIRECT",
+        "EMPTY_STRING_BLANK"
+      ],
+      "selectedPolicy": "DIRECT",
+      "columnMultisetEqual": true,
+      "nonNullObserved": true,
+      "profile": {
+        "emptyStrings": 0,
+        "maximumNumericTextPrecision": 0,
+        "maximumNumericTextScale": 0,
+        "maximumIntegerDigits": 0,
+        "arrayItemMaxUtf16": 0,
+        "objectValueTypes": {},
+        "sourceOffsets": {},
+        "timestampsWithFraction": 0
+      }
+    },
+    {
+      "field": "ctd_fgs_fte_foe_occurrence_at",
+      "column": 31,
+      "matchingPolicies": [
+        "SOURCE_OFFSET_WALL_CLOCK"
+      ],
+      "selectedPolicy": "SOURCE_OFFSET_WALL_CLOCK",
+      "columnMultisetEqual": true,
+      "nonNullObserved": true,
+      "profile": {
+        "emptyStrings": 0,
+        "maximumNumericTextPrecision": 0,
+        "maximumNumericTextScale": 0,
+        "maximumIntegerDigits": 0,
+        "arrayItemMaxUtf16": 0,
+        "objectValueTypes": {},
+        "sourceOffsets": {
+          "-1 day, 21:00:00": 25
+        },
+        "timestampsWithFraction": 0
+      }
+    },
+    {
+      "field": "ctd_fgs_d_t_created_at",
+      "column": 32,
+      "matchingPolicies": [],
+      "selectedPolicy": null,
+      "columnMultisetEqual": false,
+      "nonNullObserved": true,
+      "profile": {
+        "emptyStrings": 0,
+        "maximumNumericTextPrecision": 0,
+        "maximumNumericTextScale": 0,
+        "maximumIntegerDigits": 0,
+        "arrayItemMaxUtf16": 0,
+        "objectValueTypes": {},
+        "sourceOffsets": {
+          "-1 day, 21:00:00": 25
+        },
+        "timestampsWithFraction": 24
+      }
+    },
+    {
+      "field": "invoices_volumes",
+      "column": 33,
+      "matchingPolicies": [
+        "DIRECT"
+      ],
+      "selectedPolicy": "DIRECT",
+      "columnMultisetEqual": true,
+      "nonNullObserved": true,
+      "profile": {
+        "emptyStrings": 0,
+        "maximumNumericTextPrecision": 0,
+        "maximumNumericTextScale": 0,
+        "maximumIntegerDigits": 3,
+        "arrayItemMaxUtf16": 0,
+        "objectValueTypes": {},
+        "sourceOffsets": {},
+        "timestampsWithFraction": 0
+      }
+    },
+    {
+      "field": "real_weight",
+      "column": 34,
+      "matchingPolicies": [
+        "DECIMAL_TEXT"
+      ],
+      "selectedPolicy": "DECIMAL_TEXT",
+      "columnMultisetEqual": true,
+      "nonNullObserved": true,
+      "profile": {
+        "emptyStrings": 0,
+        "maximumNumericTextPrecision": 5,
+        "maximumNumericTextScale": 2,
+        "maximumIntegerDigits": 0,
+        "arrayItemMaxUtf16": 0,
+        "objectValueTypes": {},
+        "sourceOffsets": {},
+        "timestampsWithFraction": 0
+      }
+    },
+    {
+      "field": "taxed_weight",
+      "column": 35,
+      "matchingPolicies": [
+        "DECIMAL_TEXT"
+      ],
+      "selectedPolicy": "DECIMAL_TEXT",
+      "columnMultisetEqual": true,
+      "nonNullObserved": true,
+      "profile": {
+        "emptyStrings": 0,
+        "maximumNumericTextPrecision": 5,
+        "maximumNumericTextScale": 2,
+        "maximumIntegerDigits": 0,
+        "arrayItemMaxUtf16": 0,
+        "objectValueTypes": {},
+        "sourceOffsets": {},
+        "timestampsWithFraction": 0
+      }
+    },
+    {
+      "field": "invoices_value",
+      "column": 36,
+      "matchingPolicies": [
+        "DECIMAL_TEXT"
+      ],
+      "selectedPolicy": "DECIMAL_TEXT",
+      "columnMultisetEqual": true,
+      "nonNullObserved": true,
+      "profile": {
+        "emptyStrings": 0,
+        "maximumNumericTextPrecision": 8,
+        "maximumNumericTextScale": 2,
+        "maximumIntegerDigits": 0,
+        "arrayItemMaxUtf16": 0,
+        "objectValueTypes": {},
+        "sourceOffsets": {},
+        "timestampsWithFraction": 0
+      }
+    },
+    {
+      "field": "ctd_diy_cin_tda_value",
+      "column": 37,
+      "matchingPolicies": [
+        "DECIMAL_TEXT"
+      ],
+      "selectedPolicy": "DECIMAL_TEXT",
+      "columnMultisetEqual": true,
+      "nonNullObserved": true,
+      "profile": {
+        "emptyStrings": 0,
+        "maximumNumericTextPrecision": 1,
+        "maximumNumericTextScale": 1,
+        "maximumIntegerDigits": 0,
+        "arrayItemMaxUtf16": 0,
+        "objectValueTypes": {},
+        "sourceOffsets": {},
+        "timestampsWithFraction": 0
+      }
+    },
+    {
+      "field": "ctd_ant_document",
+      "column": 38,
+      "matchingPolicies": [
+        "DIRECT"
+      ],
+      "selectedPolicy": "DIRECT",
+      "columnMultisetEqual": true,
+      "nonNullObserved": false,
+      "profile": {
+        "emptyStrings": 0,
+        "maximumNumericTextPrecision": 0,
+        "maximumNumericTextScale": 0,
+        "maximumIntegerDigits": 0,
+        "arrayItemMaxUtf16": 0,
+        "objectValueTypes": {},
+        "sourceOffsets": {},
+        "timestampsWithFraction": 0
+      }
+    },
+    {
+      "field": "charged_value_details",
+      "column": 39,
+      "matchingPolicies": [],
+      "selectedPolicy": null,
+      "columnMultisetEqual": false,
+      "nonNullObserved": true,
+      "profile": {
+        "emptyStrings": 0,
+        "maximumNumericTextPrecision": 0,
+        "maximumNumericTextScale": 0,
+        "maximumIntegerDigits": 0,
+        "arrayItemMaxUtf16": 0,
+        "objectValueTypes": {
+          "FRETE VALOR": {
+            "Decimal": 16
+          },
+          "FRETE PESO": {
+            "Decimal": 1
+          },
+          "DESPACHO": {
+            "Decimal": 1
+          },
+          "PEDAGIO": {
+            "Decimal": 1
+          },
+          "GRIS": {
+            "Decimal": 1
+          },
+          "TAXA DIF.ACESSO": {
+            "Decimal": 1
+          },
+          "TAXA ADICIONAL": {
+            "Decimal": 1
+          }
+        },
+        "sourceOffsets": {},
+        "timestampsWithFraction": 0
+      }
+    }
+  ],
+  "keyDiagnostics": {
+    "sequence_code": {
+      "distinct": 41,
+      "rows": 41,
+      "maximumMultiplicity": 1,
+      "uniqueInThisCut": true
+    },
+    "sequence_code+ctd_fgs_corporation_sequence_number": {
+      "distinct": 41,
+      "rows": 41,
+      "maximumMultiplicity": 1,
+      "uniqueInThisCut": true
+    },
+    "sequence_code+ctd_fgs_corporation_sequence_number+document_number": {
+      "distinct": 41,
+      "rows": 41,
+      "maximumMultiplicity": 1,
+      "uniqueInThisCut": true
+    }
+  },
+  "temporalDiagnostics": {
+    "ctd_fgs_dpn_delivery_prediction_at": {
+      "unambiguousPairs": 41,
+      "exact": 15,
+      "truncatedSecondsEqual": 41,
+      "nativeFractionalTimestamps": 0,
+      "nativeMinusSourceSecondsHistogram": {
+        "-0.999": 26,
+        "0.0": 15
+      }
+    },
+    "ctd_fgs_d_t_created_at": {
+      "unambiguousPairs": 25,
+      "exact": 1,
+      "truncatedSecondsEqual": 25,
+      "nativeFractionalTimestamps": 0,
+      "nativeMinusSourceSecondsHistogram": {
+        "-0.727": 1,
+        "-0.387": 1,
+        "-0.919": 1,
+        "-0.422": 1,
+        "-0.89": 1,
+        "-0.649": 1,
+        "-0.192": 1,
+        "-0.317": 1,
+        "-0.895": 1,
+        "-0.679": 1,
+        "-0.527": 1,
+        "-0.804": 1,
+        "-0.079": 1,
+        "-0.309": 1,
+        "-0.619": 1,
+        "-0.013": 1,
+        "-0.961": 1,
+        "-0.877": 1,
+        "-0.101": 1,
+        "-0.613": 1,
+        "0.0": 1,
+        "-0.987": 1,
+        "-0.047": 1,
+        "-0.05": 2
+      }
+    }
+  },
+  "sourceOnlyOccurrences": null,
+  "nativeOnlyOccurrences": null,
+  "sourceHTTP": 0,
+  "SQL": 0,
+  "scope": "ONE_CLOSED_DAY_MAPPING_ONLY_NOT_JAVA_OR_PRODUCTION_ACCEPTANCE",
+  "objectPresentationShapes": {
+    "{}": 25,
+    "{\"X X\":#.#}": 13,
+    "{\"X X\":#.#,\"X X.X\":#.#}": 1,
+    "{\"X X\":#.#,\"X X\":#.#}": 1,
+    "{\"X X\":#.#,\"X X\":#.#,\"X\":#.#,\"X\":#.#,\"X\":#.#}": 1
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "schema": "NEW_ENTITIES_UI0760",
+  "ocorrencias": {
+    "templateId": 12072,
+    "name": "Relação de Ocorrências",
+    "group": "Relatórios",
+    "dateControl": "invoice_occurrences[occurrence_at]",
+    "periodStart": "2026-11-08",
+    "periodEnd": "2026-11-08",
+    "auxiliaryFiltersEmpty": true,
+    "fileId": 1777562,
+    "processed": 279,
+    "statusObserved": "Baixado",
+    "download": "C:\\Users\\suporte\\Downloads\\relacao-de-ocorrencias_2026_11_09_16_00.xlsx"
+  },
+  "consolidacao": {
+    "templateId": 11067,
+    "name": "Relação de Consolidação Detalhada",
+    "group": "Parceiro",
+    "dateControl": "consolidations[issue_date]",
+    "periodStart": "2026-11-06",
+    "periodEnd": "2026-11-06",
+    "auxiliaryFiltersEmpty": true,
+    "exportState": "GENERATED_AND_DOWNLOADED",
+    "maximumExportRequests": 1,
+    "firstClickObserved": "NO_EXPORT_CARD_OR_ALERT_AFTER_REFRESH_WHILE_GRID_WAS_LOADING",
+    "fileId": 1777587,
+    "processed": 41,
+    "statusObserved": "Baixado",
+    "download": "C:\\Users\\suporte\\Downloads\\relacao-de-consolidacao-detalhada_2026_11_09_16_11.xlsx"
+  },
+  "SQL": 0
+}

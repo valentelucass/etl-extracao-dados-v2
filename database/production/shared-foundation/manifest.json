@@ -1,0 +1,43 @@
+{
+  "package": "0758-shared-foundation-v1",
+  "target": "ETL_SISTEMA_V2",
+  "product_version": "16.0.1000.6",
+  "scope": "Shared control/staging/lifecycle/observability/users/reference foundation only; not complete production entities or business publication",
+  "sources": [
+    {
+      "version": 3,
+      "name": "V003__create_control_plane.sql",
+      "sha256": "64CF2B6969707FA9E50AA888F8201EAA1DE75379BBB1575FD8F7184BA5CEE137"
+    },
+    {
+      "version": 4,
+      "name": "V004__create_staging_promotion_kernel.sql",
+      "sha256": "36E575005EE00ECD4E61523924EF2AB8AF6A31B30D5FE3F00790EA5E7D83F22E"
+    },
+    {
+      "version": 5,
+      "name": "V005__create_staging_lifecycle.sql",
+      "sha256": "0E0D71D9AC7EE77341A356675BF0169DE7E3CD8D57E1D492B32F70017D546923"
+    },
+    {
+      "version": 6,
+      "name": "V006__create_observability_data_quality.sql",
+      "sha256": "6FE537D98F258C390B86E21734C39278E0F7AA1E414E870A59F5E717E3670611"
+    },
+    {
+      "version": 7,
+      "name": "V007__create_usuarios_current_history.sql",
+      "sha256": "988A4A18A5C930A70A01E6FD9CAFF9369CACB1BB5FAAB16FE2BF0F62C78EF499"
+    },
+    {
+      "version": 8,
+      "name": "V008__create_governed_references.sql",
+      "sha256": "F829632988CF5EE177C0BD93A6B38D2476D359C3953E9C334369721943F6F764"
+    },
+    {
+      "version": 9,
+      "name": "V009__create_usuario_dimension_current_view.sql",
+      "sha256": "D71B89AC9560783A00EA1B05D08C951CA56A001AA1399868ACFE692656C8A342"
+    }
+  ]
+}

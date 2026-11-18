@@ -1,0 +1,13 @@
+# 0730 Lote encerrado fisicamente e base restaurada
+
+A recuperação específica do timeout local de TEST0728 concluiu. O novo Original76164 encerrou com saída0 em3773ms e pico62820352bytes. Dois censos completos dentro do Original confirmaram a ausência dos quatro PIDs conhecidos e seus descendentes. O Root restaurou somente o próprio slot: estado canônico FB923CC5,781028bytes e ACL B4 preservada. AUX28 e todos os fatos anteriores continuam intactos. Não há job próprio ou HTTP conhecido em andamento.
+
+O modo RECOVER também foi executado com sucesso sobre a base já restaurada. Não fez nova chamada Original ou CIM nem reescreveu o estado. A intenção durável e as provas permitem retomada após interrupção entre o CAS e a publicação do recibo. O timeout antigo, o parent false e o diagnóstico parcial foram preservados; a recuperação não qualifica o build interrompido.
+
+Coletas e Fretes continuam com três períodos aprovados por conteúdo, e as seis referências foram reproduzidas. Os143testes da unit06 passaram duas vezes. Falta completar o fechamento formal de um build final, os seis replays Java e o diferencial129+2, além da integração do acionador e da entrega ao contrato do dashboard.
+
+O benchmark do guard de arquivos ainda não foi executado. A V1 foi apenas preparada e recebeu dois achados de revisão: validar o recibo real de recuperação e declarar corretamente as consultas de atributos dos fontes. A V2 está em correção. O candidato de guard mais rápido preserva o encadeamento de ancestrais, rejeição de reparse e demais verificações; desempenho e causa do timeout ainda dependem de medição. Não aumentar o prazo300s ou o teto1GiB.
+
+Main e produtor da ponte estão sendo consolidados fora de P. Há correções de pins JSON, identidade de execução Coletas e minuta Fretes, além do fluxo Main com captura, comparação e entrega tipada. As referências governadas de faturamento, localização, calendário, região, exclusão e snapshot precisam manter origem comprovada. As mudanças ainda não foram liberadas em P, cujo conjunto da unit06 permanece congelado.
+
+Próximo: medir e corrigir o custo local, revisar/aplicar a unidade final consolidada e executar as provas com os bytes finais, fechar documentação e passagem de contexto para o reset solicitado pelo usuário. Não iniciar outra entidade. V1 pausado; entidades Data Export e GraphQL somente usuários. Sem SQL de produção, deploy, serviços, ACL, contas ou credenciais alterados. Recibos completos em supervisor outputs/root-resume-fretes0730-01.json.

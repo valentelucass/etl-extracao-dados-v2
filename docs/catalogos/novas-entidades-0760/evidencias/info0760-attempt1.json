@@ -1,0 +1,389 @@
+{
+  "schema": "NEW_ENTITIES_INFO0760",
+  "startedUtc": "2026-11-09T18:57:42.7329760Z",
+  "success": true,
+  "calls": 2,
+  "maximumCalls": 2,
+  "retry": 0,
+  "redirect": 0,
+  "businessDataRequested": false,
+  "SQL": 0,
+  "reports": [
+    {
+      "reportId": 11067,
+      "httpStatus": 200,
+      "topLevelKeys": [
+        "default_order",
+        "fields",
+        "filters",
+        "required_date_filters"
+      ],
+      "fields": [
+        {
+          "key": "ctd_fgs_crn_psn_nickname",
+          "title": "Filial Expedidora"
+        },
+        {
+          "key": "sequence_code",
+          "title": "N° Consolidação"
+        },
+        {
+          "key": "issue_date",
+          "title": "Emissão Consolidação"
+        },
+        {
+          "key": "ctd_rhr_cpy_nickname",
+          "title": "Transportadora"
+        },
+        {
+          "key": "ctd_rhr_cpy_document",
+          "title": "CNPJ Transportadora"
+        },
+        {
+          "key": "document_number",
+          "title": "CTe 3º"
+        },
+        {
+          "key": "ctd_fgs_fhe_cte_number",
+          "title": "CTe Rodogarcia"
+        },
+        {
+          "key": "charged_value",
+          "title": "Valor Frete a Pagar à Credenciada"
+        },
+        {
+          "key": "subtotal",
+          "title": "Valor Calculado ESL"
+        },
+        {
+          "key": "ctd_fgs_subtotal",
+          "title": "Frete Rodogarcia Sem Impostos"
+        },
+        {
+          "key": "ctd_fgs_total",
+          "title": "Frete Rodogarcia Final"
+        },
+        {
+          "key": "ctd_fgs_taxed_weight",
+          "title": "Peso Taxado Rodogarcia"
+        },
+        {
+          "key": "ctd_fgs_fte_has_delivery_receipt",
+          "title": "Comprovante Anexado"
+        },
+        {
+          "key": "bill_status",
+          "title": "Status Fatura"
+        },
+        {
+          "key": "ctd_fgs_service_at",
+          "title": "Data Frete Rodogarcia"
+        },
+        {
+          "key": "ctd_fgs_corporation_sequence_number",
+          "title": "Minuta Rodogarcia"
+        },
+        {
+          "key": "ctd_fgs_invoices_volumes",
+          "title": "Volumes Rodogarcia"
+        },
+        {
+          "key": "ctd_fgs_invoices_mapping",
+          "title": "Nº NF"
+        },
+        {
+          "key": "ctd_fgs_dos_cty_name",
+          "title": "Cidade Origem Rodogarcia"
+        },
+        {
+          "key": "ctd_sdr_document",
+          "title": "CNPJ Remetente"
+        },
+        {
+          "key": "ctd_sdr_nickname",
+          "title": "Remetente"
+        },
+        {
+          "key": "ctd_fgs_oas_cty_name",
+          "title": "Cidade Destino Rodogarcia"
+        },
+        {
+          "key": "ctd_rpt_document",
+          "title": "CNPJ Destinatário"
+        },
+        {
+          "key": "ctd_rpt_nickname",
+          "title": "Destinatário"
+        },
+        {
+          "key": "ctd_rpt_charge_tde",
+          "title": "Cobra TDE"
+        },
+        {
+          "key": "ctd_fgs_dpn_delivery_prediction_at",
+          "title": "Previsão de Entrega"
+        },
+        {
+          "key": "ctd_fgs_finished_at",
+          "title": "Data de Entrega"
+        },
+        {
+          "key": "ctd_fgs_dpn_finished_within_deadline",
+          "title": "Entregue no Prazo"
+        },
+        {
+          "key": "ctd_fgs_fte_lce_ore_description",
+          "title": "Última Ocorrência"
+        },
+        {
+          "key": "ctd_fgs_fte_foe_ore_description",
+          "title": "Ocorrência Finalizadora"
+        },
+        {
+          "key": "ctd_fgs_fte_foe_occurrence_at",
+          "title": "Data Ocorrência Finalizadora"
+        },
+        {
+          "key": "ctd_fgs_d_t_created_at",
+          "title": "Comprovantes de entrega/Data criação"
+        },
+        {
+          "key": "invoices_volumes",
+          "title": "Volumes Consolidação"
+        },
+        {
+          "key": "real_weight",
+          "title": "Peso Real Consolidação"
+        },
+        {
+          "key": "taxed_weight",
+          "title": "Peso Taxado Consolidação"
+        },
+        {
+          "key": "invoices_value",
+          "title": "Valor NF Consolidação"
+        },
+        {
+          "key": "ctd_diy_cin_tda_value",
+          "title": "Valor TDA"
+        },
+        {
+          "key": "ctd_ant_document",
+          "title": "Nº Fatura Financeiro"
+        },
+        {
+          "key": "charged_value_details",
+          "title": "Composição XML"
+        }
+      ],
+      "filters": [
+        {
+          "field": "issue_date",
+          "label": "Emissão",
+          "type": "date"
+        },
+        {
+          "field": "sequence_code",
+          "label": "N° Consolidação",
+          "type": "numeric"
+        },
+        {
+          "field": "document_number",
+          "label": "Nº CT-e 3º",
+          "type": "string"
+        },
+        {
+          "field": "operational_number",
+          "label": "N° Minuta",
+          "type": "string"
+        },
+        {
+          "field": "redispatch_carrier_id",
+          "label": "Transportadora",
+          "type": "select"
+        },
+        {
+          "field": "price_table_id",
+          "label": "Tabela de Preço",
+          "type": "select"
+        },
+        {
+          "field": "origin_city_id",
+          "label": "Cidade origem",
+          "type": "select"
+        },
+        {
+          "field": "destination_city_id",
+          "label": "Cidade destino",
+          "type": "select"
+        },
+        {
+          "field": "payer_id",
+          "label": "Tomador",
+          "type": "select"
+        }
+      ]
+    },
+    {
+      "reportId": 12072,
+      "httpStatus": 200,
+      "topLevelKeys": [
+        "default_order",
+        "fields",
+        "filters",
+        "required_date_filters"
+      ],
+      "fields": [
+        {
+          "key": "ice_f_e_fit_corporation_sequence_number",
+          "title": "Minuta"
+        },
+        {
+          "key": "ice_f_e_ioe_number",
+          "title": "Nota Fiscal"
+        },
+        {
+          "key": "ice_fit_fhe_cte_number",
+          "title": "CTe"
+        },
+        {
+          "key": "ice_ore_code",
+          "title": "Ocorrência/Código"
+        },
+        {
+          "key": "ice_ore_description",
+          "title": "Ocorrência/Ocorrência"
+        },
+        {
+          "key": "occurrence_at",
+          "title": "Data ocorrência"
+        },
+        {
+          "key": "on_mobile",
+          "title": "Baixa por mobile"
+        },
+        {
+          "key": "ice_uer_name",
+          "title": "Usuário/Nome"
+        },
+        {
+          "key": "ice_fit_service_at",
+          "title": "Frete/Data do frete"
+        },
+        {
+          "key": "ice_fit_dpn_delivery_prediction_at",
+          "title": "Previsão Entrega/Previsão de entrega"
+        },
+        {
+          "key": "occurrence_schedule_at",
+          "title": "Data agendamento"
+        },
+        {
+          "key": "ice_fit_dpn_performance_finished_at",
+          "title": "Previsão Entrega/Finalização performance"
+        },
+        {
+          "key": "delivery_status",
+          "title": "Status Entrega"
+        },
+        {
+          "key": "ice_fit_fln_cln_nickname",
+          "title": "Localização Atual"
+        },
+        {
+          "key": "ice_fit_dpn_manual_schedule",
+          "title": "Agendado"
+        },
+        {
+          "key": "ice_ttt_solution_deadline",
+          "title": "Tratativa/Prazo solução"
+        },
+        {
+          "key": "ice_ttt_solution_at",
+          "title": "Tratativa/Data Solução"
+        },
+        {
+          "key": "ice_ttt_solution_type",
+          "title": "Tratativa/Solução"
+        },
+        {
+          "key": "ice_ttt_soe_description",
+          "title": "Tratativa/Ocorrência"
+        },
+        {
+          "key": "ice_ttt_solution_comments",
+          "title": "Tratativa/Observações"
+        }
+      ],
+      "filters": [
+        {
+          "field": "occurrence_at",
+          "label": "Data ocorrência",
+          "type": "date"
+        },
+        {
+          "field": "by_cte_or_draft_number",
+          "label": "Doc/Minuta",
+          "type": "numeric"
+        },
+        {
+          "field": "by_freight_reference_number",
+          "label": "Nº Referência",
+          "type": "string"
+        },
+        {
+          "field": "by_invoice_number",
+          "label": "Nota Fiscal",
+          "type": "numeric"
+        },
+        {
+          "field": "by_invoice_key",
+          "label": "Chave NF-e",
+          "type": "numeric"
+        },
+        {
+          "field": "by_cte_key",
+          "label": "Chave CT-e",
+          "type": "numeric"
+        },
+        {
+          "field": "from_manifest_sequence_code",
+          "label": "Manifesto",
+          "type": "numeric"
+        },
+        {
+          "field": "from_consolidation_document_number",
+          "label": "Nº Consolidação",
+          "type": "numeric"
+        },
+        {
+          "field": "from_freight_payer",
+          "label": "Pagador",
+          "type": "select"
+        },
+        {
+          "field": "by_mobile",
+          "label": "Baixa por mobile",
+          "type": "select"
+        },
+        {
+          "field": "description",
+          "label": "Ocorrência/Ocorrência",
+          "type": "string"
+        },
+        {
+          "field": "code",
+          "label": "Ocorrência/Código",
+          "type": "string"
+        },
+        {
+          "field": "updated_at",
+          "label": "Data atualização",
+          "type": "datetime"
+        }
+      ]
+    }
+  ],
+  "reason": null,
+  "finishedUtc": "2026-11-09T18:57:47.5918197Z"
+}

@@ -1,0 +1,8 @@
+{
+  "reason": "Qualified source envelope stores the original row under record, not data",
+  "base_sha256": "2244D75A60DF09F4A11D8B359BCBB033F6CA4AFAA30880F324E1F803E3289BAE",
+  "target": "ETL_SISTEMA_V2",
+  "original_preserved": true,
+  "package": "0759-receiving-envelope-v1",
+  "sql_sha256": "4E914D8873A799661DE705BA96332E687B659B02030E138BF4C7BC1915FB4598"
+}

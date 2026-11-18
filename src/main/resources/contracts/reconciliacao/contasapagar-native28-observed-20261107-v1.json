@@ -1,0 +1,324 @@
+{
+  "booleanLabels": {
+    "paid": {
+      "true": "Sim",
+      "false": "Não"
+    }
+  },
+  "contentAccepted": false,
+  "profile": "CONTAS_A_PAGAR_8636_ISSUE_DATE_NATIVE28_V1",
+  "presentationQualified": false,
+  "columns": [
+    {
+      "emptyStringPresentation": "STRICT",
+      "sourceField": "ant_ils_sequence_code",
+      "nullPresentation": "STRICT",
+      "nativeColumn": 1,
+      "total": false,
+      "kind": "integralNumber",
+      "title": "Lançamento a Pagar/N°",
+      "nativeCarrier": "XLSX:1900:builtin:0:apply=null:base=0:fmtId=0"
+    },
+    {
+      "emptyStringPresentation": "STRICT",
+      "sourceField": "document",
+      "nullPresentation": "STRICT",
+      "nativeColumn": 2,
+      "total": false,
+      "kind": "text",
+      "title": "N° Documento"
+    },
+    {
+      "emptyStringPresentation": "STRICT",
+      "sourceField": "ant_ils_pas_ant_classification",
+      "nullPresentation": "NULL_NATIVE_ABSENT",
+      "nativeColumn": 3,
+      "total": false,
+      "kind": "text",
+      "title": "Conta Contábil/Classificação",
+      "textEncoding": "OBSERVED_CLASSIFICATION_LABELS_V1"
+    },
+    {
+      "emptyStringPresentation": "STRICT",
+      "sourceField": "ant_ils_pas_ant_name",
+      "nullPresentation": "STRICT",
+      "nativeColumn": 4,
+      "total": false,
+      "kind": "text",
+      "title": "Conta Contábil/Descrição"
+    },
+    {
+      "emptyStringPresentation": "STRICT",
+      "sourceField": "ant_ils_pas_value",
+      "nullPresentation": "STRICT",
+      "nativeColumn": 5,
+      "total": true,
+      "kind": "decimalString",
+      "title": "Conta Contábil/Valor",
+      "nativeCarrier": "XLSX:1900:builtin:0:apply=null:base=0:fmtId=0",
+      "nativeNumberEncoding": "DIRECT_BINARY64_NEAREST_EVEN_V1"
+    },
+    {
+      "emptyStringPresentation": "STRICT",
+      "sourceField": "ant_ces_acr_name",
+      "nullPresentation": "NULL_NATIVE_ABSENT",
+      "nativeColumn": 6,
+      "total": false,
+      "kind": "text",
+      "title": "Centro de custo/Nome"
+    },
+    {
+      "emptyStringPresentation": "STRICT",
+      "sourceField": "ant_ces_value",
+      "nullPresentation": "STRICT",
+      "nativeColumn": 7,
+      "total": true,
+      "kind": "decimalString",
+      "title": "Centro de custo/Valor",
+      "sourceNumberEncoding": "SOURCE_BINARY64_DECIMAL16_HALF_EVEN_BINARY64_V1",
+      "nativeCarrier": "XLSX:1900:builtin:0:apply=null:base=0:fmtId=0",
+      "nativeNumberEncoding": "DIRECT_BINARY64_NEAREST_EVEN_V1"
+    },
+    {
+      "emptyStringPresentation": "STRICT",
+      "sourceField": "ant_rir_name",
+      "nullPresentation": "STRICT",
+      "nativeColumn": 8,
+      "total": false,
+      "kind": "text",
+      "title": "Fornecedor/Nome"
+    },
+    {
+      "emptyStringPresentation": "STRICT",
+      "sourceField": "issue_date",
+      "nullPresentation": "STRICT",
+      "nativeColumn": 9,
+      "total": false,
+      "kind": "date",
+      "title": "Emissão",
+      "nativeCarrier": "XLSX:1900:DD/MM/YYYY:apply=1:base=0:fmtId=164"
+    },
+    {
+      "emptyStringPresentation": "STRICT",
+      "sourceField": "competence_month",
+      "nullPresentation": "STRICT",
+      "nativeColumn": 10,
+      "total": false,
+      "kind": "integralNumber",
+      "title": "Mês de Competência",
+      "nativeCarrier": "XLSX:1900:builtin:0:apply=null:base=0:fmtId=0"
+    },
+    {
+      "emptyStringPresentation": "STRICT",
+      "sourceField": "competence_year",
+      "nullPresentation": "STRICT",
+      "nativeColumn": 11,
+      "total": false,
+      "kind": "integralNumber",
+      "title": "Ano de Competência",
+      "nativeCarrier": "XLSX:1900:builtin:0:apply=null:base=0:fmtId=0"
+    },
+    {
+      "emptyStringPresentation": "STRICT",
+      "sourceField": "ant_crn_psn_nickname",
+      "nullPresentation": "STRICT",
+      "nativeColumn": 12,
+      "total": false,
+      "kind": "text",
+      "title": "Filial"
+    },
+    {
+      "emptyStringPresentation": "STRICT",
+      "sourceField": "ant_uer_name",
+      "nullPresentation": "NULL_NATIVE_ABSENT",
+      "nativeColumn": 13,
+      "total": false,
+      "kind": "text",
+      "title": "Usuário/Nome"
+    },
+    {
+      "emptyStringPresentation": "STRICT",
+      "sourceField": "created_at",
+      "nullPresentation": "STRICT",
+      "nativeColumn": 14,
+      "total": false,
+      "kind": "timestamp",
+      "title": "Data criação",
+      "nativeCarrier": "XLSX:1900:DD/MM/YYYY HH:MM:SS:apply=1:base=0:fmtId=165",
+      "sourceTimestampEncoding": "SOURCE_OFFSET_CIVIL_TRUNCATE_FRACTION_V1",
+      "nativeTimestampEncoding": "NATIVE_DATE_TIME_NEAREST_SECOND_V1"
+    },
+    {
+      "emptyStringPresentation": "STRICT",
+      "sourceField": "ant_ils_atn_liquidation_date",
+      "nullPresentation": "NULL_NATIVE_BLANK",
+      "nativeColumn": 15,
+      "total": false,
+      "kind": "date",
+      "title": "Baixa/Data da liquidação",
+      "nativeCarrier": "XLSX:1900:DD/MM/YYYY:apply=1:base=0:fmtId=164"
+    },
+    {
+      "emptyStringPresentation": "STRICT",
+      "sourceField": "ant_ils_atn_transaction_date",
+      "nullPresentation": "NULL_NATIVE_BLANK",
+      "nativeColumn": 16,
+      "total": false,
+      "kind": "date",
+      "title": "Baixa/Data da baixa",
+      "nativeCarrier": "XLSX:1900:DD/MM/YYYY:apply=1:base=0:fmtId=164"
+    },
+    {
+      "emptyStringPresentation": "STRICT",
+      "sourceField": "ant_ils_atn_reconciled",
+      "nullPresentation": "NULL_NATIVE_ABSENT",
+      "nativeColumn": 17,
+      "total": false,
+      "kind": "boolean",
+      "title": "Baixa/Conciliado",
+      "booleanEncoding": "NATIVE_BOOLEAN_V1"
+    },
+    {
+      "emptyStringPresentation": "EMPTY_NATIVE_ABSENT",
+      "sourceField": "comments",
+      "nullPresentation": "NULL_NATIVE_ABSENT",
+      "nativeColumn": 18,
+      "total": false,
+      "kind": "text",
+      "title": "Observações"
+    },
+    {
+      "emptyStringPresentation": "EMPTY_NATIVE_ABSENT",
+      "sourceField": "ant_ils_expense_description",
+      "nullPresentation": "NULL_NATIVE_ABSENT",
+      "nativeColumn": 19,
+      "total": false,
+      "kind": "text",
+      "title": "Descrição da Despesa"
+    },
+    {
+      "emptyStringPresentation": "EMPTY_NATIVE_ABSENT",
+      "sourceField": "ant_ils_comments",
+      "nullPresentation": "NULL_NATIVE_ABSENT",
+      "nativeColumn": 20,
+      "total": false,
+      "kind": "text",
+      "title": "Observações Parcela"
+    },
+    {
+      "emptyStringPresentation": "STRICT",
+      "sourceField": "ant_aln_name",
+      "nullPresentation": "NULL_NATIVE_ABSENT",
+      "nativeColumn": 21,
+      "total": false,
+      "kind": "text",
+      "title": "Classificação Financeira"
+    },
+    {
+      "emptyStringPresentation": "STRICT",
+      "sourceField": "type",
+      "nullPresentation": "STRICT",
+      "nativeColumn": 22,
+      "total": false,
+      "kind": "enum",
+      "title": "Tipo"
+    },
+    {
+      "emptyStringPresentation": "STRICT",
+      "sourceField": "value",
+      "nullPresentation": "STRICT",
+      "nativeColumn": 23,
+      "total": true,
+      "kind": "decimalString",
+      "title": "Valor",
+      "nativeCarrier": "XLSX:1900:builtin:0:apply=null:base=0:fmtId=0",
+      "nativeNumberEncoding": "DIRECT_BINARY64_NEAREST_EVEN_V1"
+    },
+    {
+      "emptyStringPresentation": "STRICT",
+      "sourceField": "interest_value",
+      "nullPresentation": "STRICT",
+      "nativeColumn": 24,
+      "total": true,
+      "kind": "decimalString",
+      "title": "Acréscimo",
+      "nativeCarrier": "XLSX:1900:builtin:0:apply=null:base=0:fmtId=0",
+      "nativeNumberEncoding": "DIRECT_BINARY64_NEAREST_EVEN_V1"
+    },
+    {
+      "emptyStringPresentation": "STRICT",
+      "sourceField": "discount_value",
+      "nullPresentation": "STRICT",
+      "nativeColumn": 25,
+      "total": true,
+      "kind": "decimalString",
+      "title": "Desconto",
+      "nativeCarrier": "XLSX:1900:builtin:0:apply=null:base=0:fmtId=0",
+      "nativeNumberEncoding": "DIRECT_BINARY64_NEAREST_EVEN_V1"
+    },
+    {
+      "emptyStringPresentation": "STRICT",
+      "sourceField": "value_to_pay",
+      "nullPresentation": "STRICT",
+      "nativeColumn": 26,
+      "total": true,
+      "kind": "decimalString",
+      "title": "Valor a pagar",
+      "nativeCarrier": "XLSX:1900:builtin:0:apply=null:base=0:fmtId=0",
+      "nativeNumberEncoding": "DIRECT_BINARY64_NEAREST_EVEN_V1"
+    },
+    {
+      "emptyStringPresentation": "STRICT",
+      "sourceField": "paid",
+      "nullPresentation": "STRICT",
+      "nativeColumn": 27,
+      "total": false,
+      "kind": "boolean",
+      "title": "Pago",
+      "booleanEncoding": "NATIVE_TEXT_LABELS_V1"
+    },
+    {
+      "emptyStringPresentation": "STRICT",
+      "sourceField": "paid_value",
+      "nullPresentation": "STRICT",
+      "nativeColumn": 28,
+      "total": true,
+      "kind": "decimalString",
+      "title": "Valor pago",
+      "nativeCarrier": "XLSX:1900:builtin:0:apply=null:base=0:fmtId=0",
+      "nativeNumberEncoding": "DIRECT_BINARY64_NEAREST_EVEN_V1"
+    }
+  ],
+  "keylessPhysicalOccurrences": true,
+  "uiConfigurationPin": {
+    "path": "C:\\Users\\suporte\\Documents\\Codex\\2026-11-06\\etl-v2-proxima-entidade\\work\\contasapagar0751\\ui-configuration01.json",
+    "bytes": 10459,
+    "sha256": "C853B3A6FC78B93D0097A76237578422C5EF511078F64D632ACBA59F660EEB06"
+  },
+  "catalogNature": "OBSERVED_NATIVE_CANDIDATE",
+  "totalColumnCount": 7,
+  "enumLabels": {
+    "type": {
+      "Accounting::Debit::Advance": "Adiantamento",
+      "Accounting::Debit::AggregateBilling": "Agregado",
+      "Accounting::Debit::CarrierBilling": "Transportadora Redespacho",
+      "Accounting::Debit::CiotBilling": "CIOT",
+      "Accounting::Debit::DriverBilling": "Motorista",
+      "Accounting::Debit::InsuranceClaim::Customer": "Sinistro",
+      "Accounting::Debit::Manual": "Manual",
+      "Accounting::Debit::OperationalExpenseBilling": "Despesas operacionais",
+      "Accounting::Debit::SellerBilling": "Vendedor",
+      "Accounting::Debit::StorageInvoice": "Compras",
+      "Accounting::Debit::TransitInfraction": "Infração de Trânsito"
+    }
+  },
+  "schema": "CONTAS_A_PAGAR_NATIVE28_CANDIDATE_CATALOG_V1",
+  "rootIdentityQualified": false,
+  "entity": "CONTAS_A_PAGAR",
+  "reportId": 8636,
+  "classificationLabels": {
+    "investments": "6. Investimentos",
+    "static_expenses": "5. Despesas Fixas",
+    "variable_costs": "4. Custos Variáveis"
+  }
+}

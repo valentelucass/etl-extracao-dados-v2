@@ -57,7 +57,12 @@ do {
         Where-Object BaseName -Match '^[0-9a-f]{32}$' | Sort-Object LastWriteTimeUtc -Descending | Select-Object -First 1
     $report = if ($reportFile) { Read-StatusJson $reportFile.FullName }
     $currentSupervisor = if ($reportFile -and $supervisor.cycle -ceq $reportFile.BaseName) { $supervisor }
-    $checkpoint = Read-StatusJson (Join-Path $state 'checkpoint.json')
+    $checkpointFile = 'checkpoint.json'
+    $request = Read-StatusJson (Join-Path $state 'historico-solicitado.json')
+    if ($request.id -cmatch '^[0-9a-f]{32}$' -and (!$request.finished -or $report.historyOnly)) {
+        $checkpointFile = 'checkpoint-history-' + $request.id + '.json'
+    }
+    $checkpoint = Read-StatusJson (Join-Path $state $checkpointFile)
     $done = 0
     foreach ($entry in $checkpoint.payload.entities.PSObject.Properties) {
         $entity = $entry.Value

@@ -1,0 +1,1593 @@
+{
+  "schema": "COTACOES_NATIVE37_CATALOG_V1",
+  "profile": "COTACOES_6906_NATIVE37_V1",
+  "entity": "COTACOES",
+  "reportId": 6906,
+  "idColumnIndex": 2,
+  "totalColumnCount": 11,
+  "presentationQualified": false,
+  "contentAccepted": false,
+  "columns": [
+    {
+      "nativeColumn": 1,
+      "sourceField": "qoe_crn_psn_name",
+      "title": "Empresa",
+      "kind": "text",
+      "total": false,
+      "nullPresentation": "STRICT",
+      "emptyStringPresentation": "STRICT"
+    },
+    {
+      "nativeColumn": 2,
+      "sourceField": "requested_at",
+      "title": "Data Cotação",
+      "kind": "timestamp",
+      "total": false,
+      "nullPresentation": "STRICT",
+      "emptyStringPresentation": "STRICT"
+    },
+    {
+      "nativeColumn": 3,
+      "sourceField": "sequence_code",
+      "title": "N° Cotação",
+      "kind": "integer",
+      "total": false,
+      "nullPresentation": "STRICT",
+      "emptyStringPresentation": "STRICT"
+    },
+    {
+      "nativeColumn": 4,
+      "sourceField": "qoe_qes_fon_name",
+      "title": "Tipo de operação",
+      "kind": "text",
+      "total": false,
+      "nullPresentation": "NULL_NATIVE_ABSENT",
+      "emptyStringPresentation": "STRICT"
+    },
+    {
+      "nativeColumn": 5,
+      "sourceField": "qoe_cor_document",
+      "title": "CNPJ/CPF Cliente",
+      "kind": "text",
+      "total": false,
+      "nullPresentation": "STRICT",
+      "emptyStringPresentation": "STRICT"
+    },
+    {
+      "nativeColumn": 6,
+      "sourceField": "qoe_cor_name",
+      "title": "Cliente Pagador",
+      "kind": "text",
+      "total": false,
+      "nullPresentation": "STRICT",
+      "emptyStringPresentation": "STRICT"
+    },
+    {
+      "nativeColumn": 7,
+      "sourceField": "qoe_qes_ony_name",
+      "title": "Cidade Origem",
+      "kind": "text",
+      "total": false,
+      "nullPresentation": "NULL_NATIVE_ABSENT",
+      "emptyStringPresentation": "STRICT"
+    },
+    {
+      "nativeColumn": 8,
+      "sourceField": "qoe_qes_ony_sae_code",
+      "title": "UF Origem",
+      "kind": "text",
+      "total": false,
+      "nullPresentation": "NULL_NATIVE_ABSENT",
+      "emptyStringPresentation": "STRICT"
+    },
+    {
+      "nativeColumn": 9,
+      "sourceField": "qoe_qes_diy_name",
+      "title": "Cidade Destino",
+      "kind": "text",
+      "total": false,
+      "nullPresentation": "NULL_NATIVE_ABSENT",
+      "emptyStringPresentation": "STRICT"
+    },
+    {
+      "nativeColumn": 10,
+      "sourceField": "qoe_qes_diy_sae_code",
+      "title": "UF Destino",
+      "kind": "text",
+      "total": false,
+      "nullPresentation": "NULL_NATIVE_ABSENT",
+      "emptyStringPresentation": "STRICT"
+    },
+    {
+      "nativeColumn": 11,
+      "sourceField": "qoe_qes_cre_name",
+      "title": "Tabela",
+      "kind": "text",
+      "total": false,
+      "nullPresentation": "NULL_NATIVE_ABSENT",
+      "emptyStringPresentation": "STRICT"
+    },
+    {
+      "nativeColumn": 12,
+      "sourceField": "qoe_qes_invoices_volumes",
+      "title": "Volume",
+      "kind": "numericDecimal",
+      "total": true,
+      "nullPresentation": "NULL_NATIVE_ABSENT",
+      "emptyStringPresentation": "STRICT"
+    },
+    {
+      "nativeColumn": 13,
+      "sourceField": "qoe_qes_taxed_weight",
+      "title": "Peso taxado",
+      "kind": "decimalString",
+      "total": true,
+      "nullPresentation": "NULL_NATIVE_ABSENT",
+      "emptyStringPresentation": "STRICT"
+    },
+    {
+      "nativeColumn": 14,
+      "sourceField": "qoe_qes_invoices_value",
+      "title": "Valor NF",
+      "kind": "decimalString",
+      "total": true,
+      "nullPresentation": "NULL_NATIVE_ABSENT",
+      "emptyStringPresentation": "STRICT",
+      "nativeNumberEncoding": "COTACOES_BINARY64_G16_NATIVE_SERIALIZATION_V1"
+    },
+    {
+      "nativeColumn": 15,
+      "sourceField": "qoe_qes_total",
+      "title": "Valor frete",
+      "kind": "decimalString",
+      "total": true,
+      "nullPresentation": "NULL_NATIVE_ABSENT",
+      "emptyStringPresentation": "STRICT"
+    },
+    {
+      "nativeColumn": 16,
+      "sourceField": "qoe_qes_status",
+      "title": "Status",
+      "kind": "enum",
+      "total": false,
+      "nullPresentation": "NULL_NATIVE_ABSENT",
+      "emptyStringPresentation": "STRICT"
+    },
+    {
+      "nativeColumn": 17,
+      "sourceField": "qoe_qes_fit_fhe_cte_issued_at",
+      "title": "CT-e/Data de emissão",
+      "kind": "timestamp",
+      "total": false,
+      "nullPresentation": "TIMESTAMP_NULL_NATIVE_BLANK",
+      "emptyStringPresentation": "STRICT",
+      "nativeNullCarrier": "XLSX:1900:DD/MM/YYYY HH:MM:SS:apply=1:base=0:fmtId=164"
+    },
+    {
+      "nativeColumn": 18,
+      "sourceField": "qoe_qes_fit_nse_issued_at",
+      "title": "Nfse/Data de emissão",
+      "kind": "date",
+      "total": false,
+      "nullPresentation": "DATE_NULL_NATIVE_BLANK",
+      "emptyStringPresentation": "STRICT",
+      "nativeNullCarrier": "XLSX:1900:DD/MM/YYYY:apply=1:base=0:fmtId=165"
+    },
+    {
+      "nativeColumn": 19,
+      "sourceField": "qoe_uer_name",
+      "title": "Usuário",
+      "kind": "text",
+      "total": false,
+      "nullPresentation": "STRICT",
+      "emptyStringPresentation": "STRICT"
+    },
+    {
+      "nativeColumn": 20,
+      "sourceField": "qoe_crn_psn_nickname",
+      "title": "Filial",
+      "kind": "text",
+      "total": false,
+      "nullPresentation": "STRICT",
+      "emptyStringPresentation": "STRICT"
+    },
+    {
+      "nativeColumn": 21,
+      "sourceField": "qoe_qes_sdr_document",
+      "title": "Remetente/CNPJ",
+      "kind": "text",
+      "total": false,
+      "nullPresentation": "STRICT",
+      "emptyStringPresentation": "EMPTY_NATIVE_ABSENT"
+    },
+    {
+      "nativeColumn": 22,
+      "sourceField": "qoe_qes_sdr_nickname",
+      "title": "Remetente/Nome fantasia",
+      "kind": "text",
+      "total": false,
+      "nullPresentation": "NULL_NATIVE_ABSENT",
+      "emptyStringPresentation": "STRICT"
+    },
+    {
+      "nativeColumn": 23,
+      "sourceField": "qoe_qes_rpt_document",
+      "title": "Destinatário/CNPJ",
+      "kind": "text",
+      "total": false,
+      "nullPresentation": "STRICT",
+      "emptyStringPresentation": "EMPTY_NATIVE_ABSENT"
+    },
+    {
+      "nativeColumn": 24,
+      "sourceField": "qoe_qes_rpt_nickname",
+      "title": "Destinatário/Nome fantasia",
+      "kind": "text",
+      "total": false,
+      "nullPresentation": "NULL_NATIVE_ABSENT",
+      "emptyStringPresentation": "STRICT"
+    },
+    {
+      "nativeColumn": 25,
+      "sourceField": "qoe_cor_nickname",
+      "title": "Pagador/Nome fantasia",
+      "kind": "text",
+      "total": false,
+      "nullPresentation": "STRICT",
+      "emptyStringPresentation": "STRICT"
+    },
+    {
+      "nativeColumn": 26,
+      "sourceField": "qoe_qes_origin_postal_code",
+      "title": "CEP Origem",
+      "kind": "text",
+      "total": false,
+      "nullPresentation": "NULL_NATIVE_ABSENT",
+      "emptyStringPresentation": "EMPTY_NATIVE_ABSENT"
+    },
+    {
+      "nativeColumn": 27,
+      "sourceField": "qoe_qes_destination_postal_code",
+      "title": "CEP Destino",
+      "kind": "text",
+      "total": false,
+      "nullPresentation": "NULL_NATIVE_ABSENT",
+      "emptyStringPresentation": "EMPTY_NATIVE_ABSENT"
+    },
+    {
+      "nativeColumn": 28,
+      "sourceField": "qoe_qes_real_weight",
+      "title": "Peso real",
+      "kind": "decimalString",
+      "total": true,
+      "nullPresentation": "NULL_NATIVE_ABSENT",
+      "emptyStringPresentation": "STRICT",
+      "nativeNumberEncoding": "COTACOES_BINARY64_G16_NATIVE_SERIALIZATION_V1"
+    },
+    {
+      "nativeColumn": 29,
+      "sourceField": "qoe_qes_disapprove_comments",
+      "title": "Observações",
+      "kind": "text",
+      "total": false,
+      "nullPresentation": "NULL_NATIVE_ABSENT",
+      "emptyStringPresentation": "STRICT"
+    },
+    {
+      "nativeColumn": 30,
+      "sourceField": "qoe_qes_freight_comments",
+      "title": "Observações para o frete",
+      "kind": "text",
+      "total": false,
+      "nullPresentation": "NULL_NATIVE_ABSENT",
+      "emptyStringPresentation": "EMPTY_NATIVE_ABSENT"
+    },
+    {
+      "nativeColumn": 31,
+      "sourceField": "qoe_qes_fit_fdt_subtotal",
+      "title": "Descontos/Subtotal parcelas",
+      "kind": "decimalString",
+      "total": true,
+      "nullPresentation": "NULL_NATIVE_ABSENT",
+      "emptyStringPresentation": "STRICT",
+      "nativeNumberEncoding": "COTACOES_BINARY64_G16_NATIVE_SERIALIZATION_V1"
+    },
+    {
+      "nativeColumn": 32,
+      "sourceField": "requester_name",
+      "title": "Solicitante",
+      "kind": "text",
+      "total": false,
+      "nullPresentation": "STRICT",
+      "emptyStringPresentation": "STRICT"
+    },
+    {
+      "nativeColumn": 33,
+      "sourceField": "qoe_qes_itr_subtotal",
+      "title": "Trechos/ITR",
+      "kind": "decimalString",
+      "total": true,
+      "nullPresentation": "NULL_NATIVE_ABSENT",
+      "emptyStringPresentation": "STRICT"
+    },
+    {
+      "nativeColumn": 34,
+      "sourceField": "qoe_qes_tde_subtotal",
+      "title": "Trechos/TDE",
+      "kind": "decimalString",
+      "total": true,
+      "nullPresentation": "NULL_NATIVE_ABSENT",
+      "emptyStringPresentation": "STRICT"
+    },
+    {
+      "nativeColumn": 35,
+      "sourceField": "qoe_qes_collect_subtotal",
+      "title": "Trechos/Coleta",
+      "kind": "decimalString",
+      "total": true,
+      "nullPresentation": "NULL_NATIVE_ABSENT",
+      "emptyStringPresentation": "STRICT"
+    },
+    {
+      "nativeColumn": 36,
+      "sourceField": "qoe_qes_delivery_subtotal",
+      "title": "Trechos/Entrega",
+      "kind": "decimalString",
+      "total": true,
+      "nullPresentation": "NULL_NATIVE_ABSENT",
+      "emptyStringPresentation": "STRICT"
+    },
+    {
+      "nativeColumn": 37,
+      "sourceField": "qoe_qes_other_fees",
+      "title": "Trechos/Outros valores",
+      "kind": "decimalString",
+      "total": true,
+      "nullPresentation": "NULL_NATIVE_ABSENT",
+      "emptyStringPresentation": "STRICT"
+    }
+  ],
+  "sourceShapeSha256": "8e6fc68811ef08e707dfbedd21818efa9bb8c2943d9d253183640cb5ae17799c",
+  "nativeObservationSha256": "6034f1221b9aa24ce58219cfd0487421b4bd65bf2fbbfbfca354aa769f27c05a",
+  "enumLabels": {
+    "qoe_qes_status": {
+      "disapproved": "Reprovado",
+      "pending": "Pendente",
+      "approved": "Aprovado"
+    }
+  },
+  "presentationEvidence": {
+    "profileClosure": {
+      "sha256": "70D2EFB3CAF4BAC82E9931A6EBA6C18F40F51B34C4231557D9C5CE6EF7DB17C9",
+      "path": "C:\\Users\\suporte\\Documents\\Codex\\2026-11-06\\etl-v2-proxima-entidade\\work\\c748-profile-all21-01\\parent-result.json",
+      "bytes": 724
+    },
+    "perField": [
+      {
+        "nullPolicy": "STRICT",
+        "nativeColumn": 1,
+        "emptyPolicy": "STRICT",
+        "sourceField": "qoe_crn_psn_name",
+        "periods": [
+          {
+            "nativeAbsent": 0,
+            "periodStart": "2026-10-12",
+            "sourceNulls": 0,
+            "nativeBlank": 0,
+            "rows": 1108,
+            "sourceEmptyStrings": 0
+          },
+          {
+            "nativeAbsent": 0,
+            "periodStart": "2026-10-19",
+            "sourceNulls": 0,
+            "nativeBlank": 0,
+            "rows": 1412,
+            "sourceEmptyStrings": 0
+          },
+          {
+            "nativeAbsent": 0,
+            "periodStart": "2026-10-26",
+            "sourceNulls": 0,
+            "nativeBlank": 0,
+            "rows": 1415,
+            "sourceEmptyStrings": 0
+          }
+        ]
+      },
+      {
+        "nullPolicy": "STRICT",
+        "nativeColumn": 2,
+        "emptyPolicy": "STRICT",
+        "sourceField": "requested_at",
+        "periods": [
+          {
+            "nativeAbsent": 0,
+            "periodStart": "2026-10-12",
+            "sourceNulls": 0,
+            "nativeBlank": 0,
+            "rows": 1108,
+            "sourceEmptyStrings": 0
+          },
+          {
+            "nativeAbsent": 0,
+            "periodStart": "2026-10-19",
+            "sourceNulls": 0,
+            "nativeBlank": 0,
+            "rows": 1412,
+            "sourceEmptyStrings": 0
+          },
+          {
+            "nativeAbsent": 0,
+            "periodStart": "2026-10-26",
+            "sourceNulls": 0,
+            "nativeBlank": 0,
+            "rows": 1415,
+            "sourceEmptyStrings": 0
+          }
+        ]
+      },
+      {
+        "nullPolicy": "STRICT",
+        "nativeColumn": 3,
+        "emptyPolicy": "STRICT",
+        "sourceField": "sequence_code",
+        "periods": [
+          {
+            "nativeAbsent": 0,
+            "periodStart": "2026-10-12",
+            "sourceNulls": 0,
+            "nativeBlank": 0,
+            "rows": 1108,
+            "sourceEmptyStrings": 0
+          },
+          {
+            "nativeAbsent": 0,
+            "periodStart": "2026-10-19",
+            "sourceNulls": 0,
+            "nativeBlank": 0,
+            "rows": 1412,
+            "sourceEmptyStrings": 0
+          },
+          {
+            "nativeAbsent": 0,
+            "periodStart": "2026-10-26",
+            "sourceNulls": 0,
+            "nativeBlank": 0,
+            "rows": 1415,
+            "sourceEmptyStrings": 0
+          }
+        ]
+      },
+      {
+        "nullPolicy": "NULL_NATIVE_ABSENT",
+        "nativeColumn": 4,
+        "emptyPolicy": "STRICT",
+        "sourceField": "qoe_qes_fon_name",
+        "periods": [
+          {
+            "nativeAbsent": 3,
+            "periodStart": "2026-10-12",
+            "sourceNulls": 3,
+            "nativeBlank": 0,
+            "rows": 1108,
+            "sourceEmptyStrings": 0
+          },
+          {
+            "nativeAbsent": 2,
+            "periodStart": "2026-10-19",
+            "sourceNulls": 2,
+            "nativeBlank": 0,
+            "rows": 1412,
+            "sourceEmptyStrings": 0
+          },
+          {
+            "nativeAbsent": 4,
+            "periodStart": "2026-10-26",
+            "sourceNulls": 4,
+            "nativeBlank": 0,
+            "rows": 1415,
+            "sourceEmptyStrings": 0
+          }
+        ]
+      },
+      {
+        "nullPolicy": "STRICT",
+        "nativeColumn": 5,
+        "emptyPolicy": "STRICT",
+        "sourceField": "qoe_cor_document",
+        "periods": [
+          {
+            "nativeAbsent": 0,
+            "periodStart": "2026-10-12",
+            "sourceNulls": 0,
+            "nativeBlank": 0,
+            "rows": 1108,
+            "sourceEmptyStrings": 0
+          },
+          {
+            "nativeAbsent": 0,
+            "periodStart": "2026-10-19",
+            "sourceNulls": 0,
+            "nativeBlank": 0,
+            "rows": 1412,
+            "sourceEmptyStrings": 0
+          },
+          {
+            "nativeAbsent": 0,
+            "periodStart": "2026-10-26",
+            "sourceNulls": 0,
+            "nativeBlank": 0,
+            "rows": 1415,
+            "sourceEmptyStrings": 0
+          }
+        ]
+      },
+      {
+        "nullPolicy": "STRICT",
+        "nativeColumn": 6,
+        "emptyPolicy": "STRICT",
+        "sourceField": "qoe_cor_name",
+        "periods": [
+          {
+            "nativeAbsent": 0,
+            "periodStart": "2026-10-12",
+            "sourceNulls": 0,
+            "nativeBlank": 0,
+            "rows": 1108,
+            "sourceEmptyStrings": 0
+          },
+          {
+            "nativeAbsent": 0,
+            "periodStart": "2026-10-19",
+            "sourceNulls": 0,
+            "nativeBlank": 0,
+            "rows": 1412,
+            "sourceEmptyStrings": 0
+          },
+          {
+            "nativeAbsent": 0,
+            "periodStart": "2026-10-26",
+            "sourceNulls": 0,
+            "nativeBlank": 0,
+            "rows": 1415,
+            "sourceEmptyStrings": 0
+          }
+        ]
+      },
+      {
+        "nullPolicy": "NULL_NATIVE_ABSENT",
+        "nativeColumn": 7,
+        "emptyPolicy": "STRICT",
+        "sourceField": "qoe_qes_ony_name",
+        "periods": [
+          {
+            "nativeAbsent": 3,
+            "periodStart": "2026-10-12",
+            "sourceNulls": 3,
+            "nativeBlank": 0,
+            "rows": 1108,
+            "sourceEmptyStrings": 0
+          },
+          {
+            "nativeAbsent": 2,
+            "periodStart": "2026-10-19",
+            "sourceNulls": 2,
+            "nativeBlank": 0,
+            "rows": 1412,
+            "sourceEmptyStrings": 0
+          },
+          {
+            "nativeAbsent": 4,
+            "periodStart": "2026-10-26",
+            "sourceNulls": 4,
+            "nativeBlank": 0,
+            "rows": 1415,
+            "sourceEmptyStrings": 0
+          }
+        ]
+      },
+      {
+        "nullPolicy": "NULL_NATIVE_ABSENT",
+        "nativeColumn": 8,
+        "emptyPolicy": "STRICT",
+        "sourceField": "qoe_qes_ony_sae_code",
+        "periods": [
+          {
+            "nativeAbsent": 3,
+            "periodStart": "2026-10-12",
+            "sourceNulls": 3,
+            "nativeBlank": 0,
+            "rows": 1108,
+            "sourceEmptyStrings": 0
+          },
+          {
+            "nativeAbsent": 2,
+            "periodStart": "2026-10-19",
+            "sourceNulls": 2,
+            "nativeBlank": 0,
+            "rows": 1412,
+            "sourceEmptyStrings": 0
+          },
+          {
+            "nativeAbsent": 4,
+            "periodStart": "2026-10-26",
+            "sourceNulls": 4,
+            "nativeBlank": 0,
+            "rows": 1415,
+            "sourceEmptyStrings": 0
+          }
+        ]
+      },
+      {
+        "nullPolicy": "NULL_NATIVE_ABSENT",
+        "nativeColumn": 9,
+        "emptyPolicy": "STRICT",
+        "sourceField": "qoe_qes_diy_name",
+        "periods": [
+          {
+            "nativeAbsent": 3,
+            "periodStart": "2026-10-12",
+            "sourceNulls": 3,
+            "nativeBlank": 0,
+            "rows": 1108,
+            "sourceEmptyStrings": 0
+          },
+          {
+            "nativeAbsent": 2,
+            "periodStart": "2026-10-19",
+            "sourceNulls": 2,
+            "nativeBlank": 0,
+            "rows": 1412,
+            "sourceEmptyStrings": 0
+          },
+          {
+            "nativeAbsent": 4,
+            "periodStart": "2026-10-26",
+            "sourceNulls": 4,
+            "nativeBlank": 0,
+            "rows": 1415,
+            "sourceEmptyStrings": 0
+          }
+        ]
+      },
+      {
+        "nullPolicy": "NULL_NATIVE_ABSENT",
+        "nativeColumn": 10,
+        "emptyPolicy": "STRICT",
+        "sourceField": "qoe_qes_diy_sae_code",
+        "periods": [
+          {
+            "nativeAbsent": 3,
+            "periodStart": "2026-10-12",
+            "sourceNulls": 3,
+            "nativeBlank": 0,
+            "rows": 1108,
+            "sourceEmptyStrings": 0
+          },
+          {
+            "nativeAbsent": 2,
+            "periodStart": "2026-10-19",
+            "sourceNulls": 2,
+            "nativeBlank": 0,
+            "rows": 1412,
+            "sourceEmptyStrings": 0
+          },
+          {
+            "nativeAbsent": 4,
+            "periodStart": "2026-10-26",
+            "sourceNulls": 4,
+            "nativeBlank": 0,
+            "rows": 1415,
+            "sourceEmptyStrings": 0
+          }
+        ]
+      },
+      {
+        "nullPolicy": "NULL_NATIVE_ABSENT",
+        "nativeColumn": 11,
+        "emptyPolicy": "STRICT",
+        "sourceField": "qoe_qes_cre_name",
+        "periods": [
+          {
+            "nativeAbsent": 18,
+            "periodStart": "2026-10-12",
+            "sourceNulls": 18,
+            "nativeBlank": 0,
+            "rows": 1108,
+            "sourceEmptyStrings": 0
+          },
+          {
+            "nativeAbsent": 13,
+            "periodStart": "2026-10-19",
+            "sourceNulls": 13,
+            "nativeBlank": 0,
+            "rows": 1412,
+            "sourceEmptyStrings": 0
+          },
+          {
+            "nativeAbsent": 13,
+            "periodStart": "2026-10-26",
+            "sourceNulls": 13,
+            "nativeBlank": 0,
+            "rows": 1415,
+            "sourceEmptyStrings": 0
+          }
+        ]
+      },
+      {
+        "nullPolicy": "NULL_NATIVE_ABSENT",
+        "nativeColumn": 12,
+        "emptyPolicy": "STRICT",
+        "sourceField": "qoe_qes_invoices_volumes",
+        "periods": [
+          {
+            "nativeAbsent": 3,
+            "periodStart": "2026-10-12",
+            "sourceNulls": 3,
+            "nativeBlank": 0,
+            "rows": 1108,
+            "sourceEmptyStrings": 0
+          },
+          {
+            "nativeAbsent": 2,
+            "periodStart": "2026-10-19",
+            "sourceNulls": 2,
+            "nativeBlank": 0,
+            "rows": 1412,
+            "sourceEmptyStrings": 0
+          },
+          {
+            "nativeAbsent": 4,
+            "periodStart": "2026-10-26",
+            "sourceNulls": 4,
+            "nativeBlank": 0,
+            "rows": 1415,
+            "sourceEmptyStrings": 0
+          }
+        ]
+      },
+      {
+        "nullPolicy": "NULL_NATIVE_ABSENT",
+        "nativeColumn": 13,
+        "emptyPolicy": "STRICT",
+        "sourceField": "qoe_qes_taxed_weight",
+        "periods": [
+          {
+            "nativeAbsent": 3,
+            "periodStart": "2026-10-12",
+            "sourceNulls": 3,
+            "nativeBlank": 0,
+            "rows": 1108,
+            "sourceEmptyStrings": 0
+          },
+          {
+            "nativeAbsent": 2,
+            "periodStart": "2026-10-19",
+            "sourceNulls": 2,
+            "nativeBlank": 0,
+            "rows": 1412,
+            "sourceEmptyStrings": 0
+          },
+          {
+            "nativeAbsent": 4,
+            "periodStart": "2026-10-26",
+            "sourceNulls": 4,
+            "nativeBlank": 0,
+            "rows": 1415,
+            "sourceEmptyStrings": 0
+          }
+        ]
+      },
+      {
+        "nullPolicy": "NULL_NATIVE_ABSENT",
+        "nativeColumn": 14,
+        "emptyPolicy": "STRICT",
+        "sourceField": "qoe_qes_invoices_value",
+        "periods": [
+          {
+            "nativeAbsent": 3,
+            "periodStart": "2026-10-12",
+            "sourceNulls": 3,
+            "nativeBlank": 0,
+            "rows": 1108,
+            "sourceEmptyStrings": 0
+          },
+          {
+            "nativeAbsent": 2,
+            "periodStart": "2026-10-19",
+            "sourceNulls": 2,
+            "nativeBlank": 0,
+            "rows": 1412,
+            "sourceEmptyStrings": 0
+          },
+          {
+            "nativeAbsent": 4,
+            "periodStart": "2026-10-26",
+            "sourceNulls": 4,
+            "nativeBlank": 0,
+            "rows": 1415,
+            "sourceEmptyStrings": 0
+          }
+        ]
+      },
+      {
+        "nullPolicy": "NULL_NATIVE_ABSENT",
+        "nativeColumn": 15,
+        "emptyPolicy": "STRICT",
+        "sourceField": "qoe_qes_total",
+        "periods": [
+          {
+            "nativeAbsent": 3,
+            "periodStart": "2026-10-12",
+            "sourceNulls": 3,
+            "nativeBlank": 0,
+            "rows": 1108,
+            "sourceEmptyStrings": 0
+          },
+          {
+            "nativeAbsent": 2,
+            "periodStart": "2026-10-19",
+            "sourceNulls": 2,
+            "nativeBlank": 0,
+            "rows": 1412,
+            "sourceEmptyStrings": 0
+          },
+          {
+            "nativeAbsent": 4,
+            "periodStart": "2026-10-26",
+            "sourceNulls": 4,
+            "nativeBlank": 0,
+            "rows": 1415,
+            "sourceEmptyStrings": 0
+          }
+        ]
+      },
+      {
+        "nullPolicy": "NULL_NATIVE_ABSENT",
+        "nativeColumn": 16,
+        "emptyPolicy": "STRICT",
+        "sourceField": "qoe_qes_status",
+        "periods": [
+          {
+            "nativeAbsent": 3,
+            "periodStart": "2026-10-12",
+            "sourceNulls": 3,
+            "nativeBlank": 0,
+            "rows": 1108,
+            "sourceEmptyStrings": 0
+          },
+          {
+            "nativeAbsent": 2,
+            "periodStart": "2026-10-19",
+            "sourceNulls": 2,
+            "nativeBlank": 0,
+            "rows": 1412,
+            "sourceEmptyStrings": 0
+          },
+          {
+            "nativeAbsent": 4,
+            "periodStart": "2026-10-26",
+            "sourceNulls": 4,
+            "nativeBlank": 0,
+            "rows": 1415,
+            "sourceEmptyStrings": 0
+          }
+        ]
+      },
+      {
+        "nullPolicy": "TIMESTAMP_NULL_NATIVE_BLANK",
+        "nativeColumn": 17,
+        "emptyPolicy": "STRICT",
+        "sourceField": "qoe_qes_fit_fhe_cte_issued_at",
+        "periods": [
+          {
+            "nativeAbsent": 0,
+            "periodStart": "2026-10-12",
+            "sourceNulls": 722,
+            "nativeBlank": 722,
+            "rows": 1108,
+            "sourceEmptyStrings": 0
+          },
+          {
+            "nativeAbsent": 0,
+            "periodStart": "2026-10-19",
+            "sourceNulls": 905,
+            "nativeBlank": 905,
+            "rows": 1412,
+            "sourceEmptyStrings": 0
+          },
+          {
+            "nativeAbsent": 0,
+            "periodStart": "2026-10-26",
+            "sourceNulls": 938,
+            "nativeBlank": 938,
+            "rows": 1415,
+            "sourceEmptyStrings": 0
+          }
+        ]
+      },
+      {
+        "nullPolicy": "DATE_NULL_NATIVE_BLANK",
+        "nativeColumn": 18,
+        "emptyPolicy": "STRICT",
+        "sourceField": "qoe_qes_fit_nse_issued_at",
+        "periods": [
+          {
+            "nativeAbsent": 0,
+            "periodStart": "2026-10-12",
+            "sourceNulls": 1102,
+            "nativeBlank": 1102,
+            "rows": 1108,
+            "sourceEmptyStrings": 0
+          },
+          {
+            "nativeAbsent": 0,
+            "periodStart": "2026-10-19",
+            "sourceNulls": 1410,
+            "nativeBlank": 1410,
+            "rows": 1412,
+            "sourceEmptyStrings": 0
+          },
+          {
+            "nativeAbsent": 0,
+            "periodStart": "2026-10-26",
+            "sourceNulls": 1412,
+            "nativeBlank": 1412,
+            "rows": 1415,
+            "sourceEmptyStrings": 0
+          }
+        ]
+      },
+      {
+        "nullPolicy": "STRICT",
+        "nativeColumn": 19,
+        "emptyPolicy": "STRICT",
+        "sourceField": "qoe_uer_name",
+        "periods": [
+          {
+            "nativeAbsent": 0,
+            "periodStart": "2026-10-12",
+            "sourceNulls": 0,
+            "nativeBlank": 0,
+            "rows": 1108,
+            "sourceEmptyStrings": 0
+          },
+          {
+            "nativeAbsent": 0,
+            "periodStart": "2026-10-19",
+            "sourceNulls": 0,
+            "nativeBlank": 0,
+            "rows": 1412,
+            "sourceEmptyStrings": 0
+          },
+          {
+            "nativeAbsent": 0,
+            "periodStart": "2026-10-26",
+            "sourceNulls": 0,
+            "nativeBlank": 0,
+            "rows": 1415,
+            "sourceEmptyStrings": 0
+          }
+        ]
+      },
+      {
+        "nullPolicy": "STRICT",
+        "nativeColumn": 20,
+        "emptyPolicy": "STRICT",
+        "sourceField": "qoe_crn_psn_nickname",
+        "periods": [
+          {
+            "nativeAbsent": 0,
+            "periodStart": "2026-10-12",
+            "sourceNulls": 0,
+            "nativeBlank": 0,
+            "rows": 1108,
+            "sourceEmptyStrings": 0
+          },
+          {
+            "nativeAbsent": 0,
+            "periodStart": "2026-10-19",
+            "sourceNulls": 0,
+            "nativeBlank": 0,
+            "rows": 1412,
+            "sourceEmptyStrings": 0
+          },
+          {
+            "nativeAbsent": 0,
+            "periodStart": "2026-10-26",
+            "sourceNulls": 0,
+            "nativeBlank": 0,
+            "rows": 1415,
+            "sourceEmptyStrings": 0
+          }
+        ]
+      },
+      {
+        "nullPolicy": "STRICT",
+        "nativeColumn": 21,
+        "emptyPolicy": "EMPTY_NATIVE_ABSENT",
+        "sourceField": "qoe_qes_sdr_document",
+        "periods": [
+          {
+            "nativeAbsent": 25,
+            "periodStart": "2026-10-12",
+            "sourceNulls": 0,
+            "nativeBlank": 0,
+            "rows": 1108,
+            "sourceEmptyStrings": 25
+          },
+          {
+            "nativeAbsent": 43,
+            "periodStart": "2026-10-19",
+            "sourceNulls": 0,
+            "nativeBlank": 0,
+            "rows": 1412,
+            "sourceEmptyStrings": 43
+          },
+          {
+            "nativeAbsent": 34,
+            "periodStart": "2026-10-26",
+            "sourceNulls": 0,
+            "nativeBlank": 0,
+            "rows": 1415,
+            "sourceEmptyStrings": 34
+          }
+        ]
+      },
+      {
+        "nullPolicy": "NULL_NATIVE_ABSENT",
+        "nativeColumn": 22,
+        "emptyPolicy": "STRICT",
+        "sourceField": "qoe_qes_sdr_nickname",
+        "periods": [
+          {
+            "nativeAbsent": 25,
+            "periodStart": "2026-10-12",
+            "sourceNulls": 25,
+            "nativeBlank": 0,
+            "rows": 1108,
+            "sourceEmptyStrings": 0
+          },
+          {
+            "nativeAbsent": 43,
+            "periodStart": "2026-10-19",
+            "sourceNulls": 43,
+            "nativeBlank": 0,
+            "rows": 1412,
+            "sourceEmptyStrings": 0
+          },
+          {
+            "nativeAbsent": 33,
+            "periodStart": "2026-10-26",
+            "sourceNulls": 33,
+            "nativeBlank": 0,
+            "rows": 1415,
+            "sourceEmptyStrings": 0
+          }
+        ]
+      },
+      {
+        "nullPolicy": "STRICT",
+        "nativeColumn": 23,
+        "emptyPolicy": "EMPTY_NATIVE_ABSENT",
+        "sourceField": "qoe_qes_rpt_document",
+        "periods": [
+          {
+            "nativeAbsent": 122,
+            "periodStart": "2026-10-12",
+            "sourceNulls": 0,
+            "nativeBlank": 0,
+            "rows": 1108,
+            "sourceEmptyStrings": 122
+          },
+          {
+            "nativeAbsent": 130,
+            "periodStart": "2026-10-19",
+            "sourceNulls": 0,
+            "nativeBlank": 0,
+            "rows": 1412,
+            "sourceEmptyStrings": 130
+          },
+          {
+            "nativeAbsent": 156,
+            "periodStart": "2026-10-26",
+            "sourceNulls": 0,
+            "nativeBlank": 0,
+            "rows": 1415,
+            "sourceEmptyStrings": 156
+          }
+        ]
+      },
+      {
+        "nullPolicy": "NULL_NATIVE_ABSENT",
+        "nativeColumn": 24,
+        "emptyPolicy": "STRICT",
+        "sourceField": "qoe_qes_rpt_nickname",
+        "periods": [
+          {
+            "nativeAbsent": 120,
+            "periodStart": "2026-10-12",
+            "sourceNulls": 120,
+            "nativeBlank": 0,
+            "rows": 1108,
+            "sourceEmptyStrings": 0
+          },
+          {
+            "nativeAbsent": 129,
+            "periodStart": "2026-10-19",
+            "sourceNulls": 129,
+            "nativeBlank": 0,
+            "rows": 1412,
+            "sourceEmptyStrings": 0
+          },
+          {
+            "nativeAbsent": 155,
+            "periodStart": "2026-10-26",
+            "sourceNulls": 155,
+            "nativeBlank": 0,
+            "rows": 1415,
+            "sourceEmptyStrings": 0
+          }
+        ]
+      },
+      {
+        "nullPolicy": "STRICT",
+        "nativeColumn": 25,
+        "emptyPolicy": "STRICT",
+        "sourceField": "qoe_cor_nickname",
+        "periods": [
+          {
+            "nativeAbsent": 0,
+            "periodStart": "2026-10-12",
+            "sourceNulls": 0,
+            "nativeBlank": 0,
+            "rows": 1108,
+            "sourceEmptyStrings": 0
+          },
+          {
+            "nativeAbsent": 0,
+            "periodStart": "2026-10-19",
+            "sourceNulls": 0,
+            "nativeBlank": 0,
+            "rows": 1412,
+            "sourceEmptyStrings": 0
+          },
+          {
+            "nativeAbsent": 0,
+            "periodStart": "2026-10-26",
+            "sourceNulls": 0,
+            "nativeBlank": 0,
+            "rows": 1415,
+            "sourceEmptyStrings": 0
+          }
+        ]
+      },
+      {
+        "nullPolicy": "NULL_NATIVE_ABSENT",
+        "nativeColumn": 26,
+        "emptyPolicy": "EMPTY_NATIVE_ABSENT",
+        "sourceField": "qoe_qes_origin_postal_code",
+        "periods": [
+          {
+            "nativeAbsent": 13,
+            "periodStart": "2026-10-12",
+            "sourceNulls": 3,
+            "nativeBlank": 0,
+            "rows": 1108,
+            "sourceEmptyStrings": 10
+          },
+          {
+            "nativeAbsent": 7,
+            "periodStart": "2026-10-19",
+            "sourceNulls": 2,
+            "nativeBlank": 0,
+            "rows": 1412,
+            "sourceEmptyStrings": 5
+          },
+          {
+            "nativeAbsent": 5,
+            "periodStart": "2026-10-26",
+            "sourceNulls": 4,
+            "nativeBlank": 0,
+            "rows": 1415,
+            "sourceEmptyStrings": 1
+          }
+        ]
+      },
+      {
+        "nullPolicy": "NULL_NATIVE_ABSENT",
+        "nativeColumn": 27,
+        "emptyPolicy": "EMPTY_NATIVE_ABSENT",
+        "sourceField": "qoe_qes_destination_postal_code",
+        "periods": [
+          {
+            "nativeAbsent": 11,
+            "periodStart": "2026-10-12",
+            "sourceNulls": 3,
+            "nativeBlank": 0,
+            "rows": 1108,
+            "sourceEmptyStrings": 8
+          },
+          {
+            "nativeAbsent": 8,
+            "periodStart": "2026-10-19",
+            "sourceNulls": 2,
+            "nativeBlank": 0,
+            "rows": 1412,
+            "sourceEmptyStrings": 6
+          },
+          {
+            "nativeAbsent": 16,
+            "periodStart": "2026-10-26",
+            "sourceNulls": 4,
+            "nativeBlank": 0,
+            "rows": 1415,
+            "sourceEmptyStrings": 12
+          }
+        ]
+      },
+      {
+        "nullPolicy": "NULL_NATIVE_ABSENT",
+        "nativeColumn": 28,
+        "emptyPolicy": "STRICT",
+        "sourceField": "qoe_qes_real_weight",
+        "periods": [
+          {
+            "nativeAbsent": 3,
+            "periodStart": "2026-10-12",
+            "sourceNulls": 3,
+            "nativeBlank": 0,
+            "rows": 1108,
+            "sourceEmptyStrings": 0
+          },
+          {
+            "nativeAbsent": 2,
+            "periodStart": "2026-10-19",
+            "sourceNulls": 2,
+            "nativeBlank": 0,
+            "rows": 1412,
+            "sourceEmptyStrings": 0
+          },
+          {
+            "nativeAbsent": 4,
+            "periodStart": "2026-10-26",
+            "sourceNulls": 4,
+            "nativeBlank": 0,
+            "rows": 1415,
+            "sourceEmptyStrings": 0
+          }
+        ]
+      },
+      {
+        "nullPolicy": "NULL_NATIVE_ABSENT",
+        "nativeColumn": 29,
+        "emptyPolicy": "STRICT",
+        "sourceField": "qoe_qes_disapprove_comments",
+        "periods": [
+          {
+            "nativeAbsent": 1106,
+            "periodStart": "2026-10-12",
+            "sourceNulls": 1106,
+            "nativeBlank": 0,
+            "rows": 1108,
+            "sourceEmptyStrings": 0
+          },
+          {
+            "nativeAbsent": 1411,
+            "periodStart": "2026-10-19",
+            "sourceNulls": 1411,
+            "nativeBlank": 0,
+            "rows": 1412,
+            "sourceEmptyStrings": 0
+          },
+          {
+            "nativeAbsent": 1415,
+            "periodStart": "2026-10-26",
+            "sourceNulls": 1415,
+            "nativeBlank": 0,
+            "rows": 1415,
+            "sourceEmptyStrings": 0
+          }
+        ]
+      },
+      {
+        "nullPolicy": "NULL_NATIVE_ABSENT",
+        "nativeColumn": 30,
+        "emptyPolicy": "EMPTY_NATIVE_ABSENT",
+        "sourceField": "qoe_qes_freight_comments",
+        "periods": [
+          {
+            "nativeAbsent": 1064,
+            "periodStart": "2026-10-12",
+            "sourceNulls": 3,
+            "nativeBlank": 0,
+            "rows": 1108,
+            "sourceEmptyStrings": 1061
+          },
+          {
+            "nativeAbsent": 1333,
+            "periodStart": "2026-10-19",
+            "sourceNulls": 2,
+            "nativeBlank": 0,
+            "rows": 1412,
+            "sourceEmptyStrings": 1331
+          },
+          {
+            "nativeAbsent": 1356,
+            "periodStart": "2026-10-26",
+            "sourceNulls": 4,
+            "nativeBlank": 0,
+            "rows": 1415,
+            "sourceEmptyStrings": 1352
+          }
+        ]
+      },
+      {
+        "nullPolicy": "NULL_NATIVE_ABSENT",
+        "nativeColumn": 31,
+        "emptyPolicy": "STRICT",
+        "sourceField": "qoe_qes_fit_fdt_subtotal",
+        "periods": [
+          {
+            "nativeAbsent": 1004,
+            "periodStart": "2026-10-12",
+            "sourceNulls": 1004,
+            "nativeBlank": 0,
+            "rows": 1108,
+            "sourceEmptyStrings": 0
+          },
+          {
+            "nativeAbsent": 1268,
+            "periodStart": "2026-10-19",
+            "sourceNulls": 1268,
+            "nativeBlank": 0,
+            "rows": 1412,
+            "sourceEmptyStrings": 0
+          },
+          {
+            "nativeAbsent": 1273,
+            "periodStart": "2026-10-26",
+            "sourceNulls": 1273,
+            "nativeBlank": 0,
+            "rows": 1415,
+            "sourceEmptyStrings": 0
+          }
+        ]
+      },
+      {
+        "nullPolicy": "STRICT",
+        "nativeColumn": 32,
+        "emptyPolicy": "STRICT",
+        "sourceField": "requester_name",
+        "periods": [
+          {
+            "nativeAbsent": 0,
+            "periodStart": "2026-10-12",
+            "sourceNulls": 0,
+            "nativeBlank": 0,
+            "rows": 1108,
+            "sourceEmptyStrings": 0
+          },
+          {
+            "nativeAbsent": 0,
+            "periodStart": "2026-10-19",
+            "sourceNulls": 0,
+            "nativeBlank": 0,
+            "rows": 1412,
+            "sourceEmptyStrings": 0
+          },
+          {
+            "nativeAbsent": 0,
+            "periodStart": "2026-10-26",
+            "sourceNulls": 0,
+            "nativeBlank": 0,
+            "rows": 1415,
+            "sourceEmptyStrings": 0
+          }
+        ]
+      },
+      {
+        "nullPolicy": "NULL_NATIVE_ABSENT",
+        "nativeColumn": 33,
+        "emptyPolicy": "STRICT",
+        "sourceField": "qoe_qes_itr_subtotal",
+        "periods": [
+          {
+            "nativeAbsent": 3,
+            "periodStart": "2026-10-12",
+            "sourceNulls": 3,
+            "nativeBlank": 0,
+            "rows": 1108,
+            "sourceEmptyStrings": 0
+          },
+          {
+            "nativeAbsent": 2,
+            "periodStart": "2026-10-19",
+            "sourceNulls": 2,
+            "nativeBlank": 0,
+            "rows": 1412,
+            "sourceEmptyStrings": 0
+          },
+          {
+            "nativeAbsent": 4,
+            "periodStart": "2026-10-26",
+            "sourceNulls": 4,
+            "nativeBlank": 0,
+            "rows": 1415,
+            "sourceEmptyStrings": 0
+          }
+        ]
+      },
+      {
+        "nullPolicy": "NULL_NATIVE_ABSENT",
+        "nativeColumn": 34,
+        "emptyPolicy": "STRICT",
+        "sourceField": "qoe_qes_tde_subtotal",
+        "periods": [
+          {
+            "nativeAbsent": 3,
+            "periodStart": "2026-10-12",
+            "sourceNulls": 3,
+            "nativeBlank": 0,
+            "rows": 1108,
+            "sourceEmptyStrings": 0
+          },
+          {
+            "nativeAbsent": 2,
+            "periodStart": "2026-10-19",
+            "sourceNulls": 2,
+            "nativeBlank": 0,
+            "rows": 1412,
+            "sourceEmptyStrings": 0
+          },
+          {
+            "nativeAbsent": 4,
+            "periodStart": "2026-10-26",
+            "sourceNulls": 4,
+            "nativeBlank": 0,
+            "rows": 1415,
+            "sourceEmptyStrings": 0
+          }
+        ]
+      },
+      {
+        "nullPolicy": "NULL_NATIVE_ABSENT",
+        "nativeColumn": 35,
+        "emptyPolicy": "STRICT",
+        "sourceField": "qoe_qes_collect_subtotal",
+        "periods": [
+          {
+            "nativeAbsent": 3,
+            "periodStart": "2026-10-12",
+            "sourceNulls": 3,
+            "nativeBlank": 0,
+            "rows": 1108,
+            "sourceEmptyStrings": 0
+          },
+          {
+            "nativeAbsent": 2,
+            "periodStart": "2026-10-19",
+            "sourceNulls": 2,
+            "nativeBlank": 0,
+            "rows": 1412,
+            "sourceEmptyStrings": 0
+          },
+          {
+            "nativeAbsent": 4,
+            "periodStart": "2026-10-26",
+            "sourceNulls": 4,
+            "nativeBlank": 0,
+            "rows": 1415,
+            "sourceEmptyStrings": 0
+          }
+        ]
+      },
+      {
+        "nullPolicy": "NULL_NATIVE_ABSENT",
+        "nativeColumn": 36,
+        "emptyPolicy": "STRICT",
+        "sourceField": "qoe_qes_delivery_subtotal",
+        "periods": [
+          {
+            "nativeAbsent": 3,
+            "periodStart": "2026-10-12",
+            "sourceNulls": 3,
+            "nativeBlank": 0,
+            "rows": 1108,
+            "sourceEmptyStrings": 0
+          },
+          {
+            "nativeAbsent": 2,
+            "periodStart": "2026-10-19",
+            "sourceNulls": 2,
+            "nativeBlank": 0,
+            "rows": 1412,
+            "sourceEmptyStrings": 0
+          },
+          {
+            "nativeAbsent": 4,
+            "periodStart": "2026-10-26",
+            "sourceNulls": 4,
+            "nativeBlank": 0,
+            "rows": 1415,
+            "sourceEmptyStrings": 0
+          }
+        ]
+      },
+      {
+        "nullPolicy": "NULL_NATIVE_ABSENT",
+        "nativeColumn": 37,
+        "emptyPolicy": "STRICT",
+        "sourceField": "qoe_qes_other_fees",
+        "periods": [
+          {
+            "nativeAbsent": 3,
+            "periodStart": "2026-10-12",
+            "sourceNulls": 3,
+            "nativeBlank": 0,
+            "rows": 1108,
+            "sourceEmptyStrings": 0
+          },
+          {
+            "nativeAbsent": 2,
+            "periodStart": "2026-10-19",
+            "sourceNulls": 2,
+            "nativeBlank": 0,
+            "rows": 1412,
+            "sourceEmptyStrings": 0
+          },
+          {
+            "nativeAbsent": 4,
+            "periodStart": "2026-10-26",
+            "sourceNulls": 4,
+            "nativeBlank": 0,
+            "rows": 1415,
+            "sourceEmptyStrings": 0
+          }
+        ]
+      }
+    ],
+    "schema": "COTACOES_OBSERVED_FIELD_PRESENTATIONS_THREE_PERIODS_V1",
+    "scope": "Only literal NULL/empty/date blank presentation and three observed enum labels; no zero/coercion/deduplication; full comparison still required",
+    "profile": {
+      "sha256": "58A9384D6B7504FE02228386E1F0A8375A8D1B282ADF14123BA331BA75E8EB3F",
+      "path": "C:\\Users\\suporte\\Documents\\Codex\\2026-11-06\\etl-v2-proxima-entidade\\work\\c748-profile-all21-01\\raw37-profile.json",
+      "bytes": 93660
+    },
+    "nativeObservation": {
+      "sha256": "6034F1221B9AA24CE58219CFD0487421B4BD65BF2FBBFBFCA354AA769F27C05A",
+      "path": "C:\\Users\\suporte\\Documents\\Codex\\2026-11-06\\etl-v2-proxima-entidade\\work\\c748-native37-01\\native37-observation.json",
+      "bytes": 15991
+    }
+  },
+  "nativeNumericEncodingEvidence": {
+    "nativeOriginalValuesChanged": false,
+    "observation": {
+      "bytes": 6722,
+      "path": "C:\\Users\\suporte\\Documents\\Codex\\2026-11-06\\etl-v2-proxima-entidade\\work\\c748-numeric-g16-01\\result.json",
+      "sha256": "35875FE664A521D49EE4162145DE40CBBA9AE076E0999F90AC06C882D15C3480"
+    },
+    "schema": "COTACOES_EXACT_BINARY64_G16_OBSERVATION_THREE_PERIODS_V1",
+    "allNumericCells": 8242,
+    "fixedDecimalPlacesUsed": false,
+    "documentationClaim": "The library documents sprintf %.16G numeric serialization. ESL backend library identity is not inferred as a fact.",
+    "primaryDocumentation": "https://libxlsxwriter.github.io/getting_started.html",
+    "backendLibraryIdentityProven": false,
+    "sourceOriginalValuesChanged": false,
+    "nativeColumns": [
+      14,
+      28,
+      31
+    ],
+    "originalBinary64DifferentCells": 111,
+    "allNativeEncodingsExplained": true,
+    "epsilonUsed": false,
+    "observationClosure": {
+      "bytes": 724,
+      "path": "C:\\Users\\suporte\\Documents\\Codex\\2026-11-06\\etl-v2-proxima-entidade\\work\\c748-numeric-g16-01\\parent-result.json",
+      "sha256": "231769F95A66D2346941F0F5B4BE9C51CA718820BDB901592E58A7607EFA5F02"
+    },
+    "model": "Source decimal lexeme -> nearest-even binary64 -> its exact dyadic value ->16 significant decimal digits HALF_EVEN -> nearest-even binary64; Native lexeme directly encoded once"
+  }
+}

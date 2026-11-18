@@ -1,0 +1,777 @@
+{
+  "schema": "NEW_ENTITY_SOURCE0760",
+  "reportId": 11067,
+  "day": "2026-11-06",
+  "mode": "capture",
+  "success": true,
+  "terminal": true,
+  "SQL": 0,
+  "reason": null,
+  "metadata": {
+    "fields": [
+      {
+        "field": "ctd_fgs_crn_psn_nickname",
+        "title": "Filial Expedidora"
+      },
+      {
+        "field": "sequence_code",
+        "title": "N° Consolidação"
+      },
+      {
+        "field": "issue_date",
+        "title": "Emissão Consolidação"
+      },
+      {
+        "field": "ctd_rhr_cpy_nickname",
+        "title": "Transportadora"
+      },
+      {
+        "field": "ctd_rhr_cpy_document",
+        "title": "CNPJ Transportadora"
+      },
+      {
+        "field": "document_number",
+        "title": "CTe 3º"
+      },
+      {
+        "field": "ctd_fgs_fhe_cte_number",
+        "title": "CTe Rodogarcia"
+      },
+      {
+        "field": "charged_value",
+        "title": "Valor Frete a Pagar à Credenciada"
+      },
+      {
+        "field": "subtotal",
+        "title": "Valor Calculado ESL"
+      },
+      {
+        "field": "ctd_fgs_subtotal",
+        "title": "Frete Rodogarcia Sem Impostos"
+      },
+      {
+        "field": "ctd_fgs_total",
+        "title": "Frete Rodogarcia Final"
+      },
+      {
+        "field": "ctd_fgs_taxed_weight",
+        "title": "Peso Taxado Rodogarcia"
+      },
+      {
+        "field": "ctd_fgs_fte_has_delivery_receipt",
+        "title": "Comprovante Anexado"
+      },
+      {
+        "field": "bill_status",
+        "title": "Status Fatura"
+      },
+      {
+        "field": "ctd_fgs_service_at",
+        "title": "Data Frete Rodogarcia"
+      },
+      {
+        "field": "ctd_fgs_corporation_sequence_number",
+        "title": "Minuta Rodogarcia"
+      },
+      {
+        "field": "ctd_fgs_invoices_volumes",
+        "title": "Volumes Rodogarcia"
+      },
+      {
+        "field": "ctd_fgs_invoices_mapping",
+        "title": "Nº NF"
+      },
+      {
+        "field": "ctd_fgs_dos_cty_name",
+        "title": "Cidade Origem Rodogarcia"
+      },
+      {
+        "field": "ctd_sdr_document",
+        "title": "CNPJ Remetente"
+      },
+      {
+        "field": "ctd_sdr_nickname",
+        "title": "Remetente"
+      },
+      {
+        "field": "ctd_fgs_oas_cty_name",
+        "title": "Cidade Destino Rodogarcia"
+      },
+      {
+        "field": "ctd_rpt_document",
+        "title": "CNPJ Destinatário"
+      },
+      {
+        "field": "ctd_rpt_nickname",
+        "title": "Destinatário"
+      },
+      {
+        "field": "ctd_rpt_charge_tde",
+        "title": "Cobra TDE"
+      },
+      {
+        "field": "ctd_fgs_dpn_delivery_prediction_at",
+        "title": "Previsão de Entrega"
+      },
+      {
+        "field": "ctd_fgs_finished_at",
+        "title": "Data de Entrega"
+      },
+      {
+        "field": "ctd_fgs_dpn_finished_within_deadline",
+        "title": "Entregue no Prazo"
+      },
+      {
+        "field": "ctd_fgs_fte_lce_ore_description",
+        "title": "Última Ocorrência"
+      },
+      {
+        "field": "ctd_fgs_fte_foe_ore_description",
+        "title": "Ocorrência Finalizadora"
+      },
+      {
+        "field": "ctd_fgs_fte_foe_occurrence_at",
+        "title": "Data Ocorrência Finalizadora"
+      },
+      {
+        "field": "ctd_fgs_d_t_created_at",
+        "title": "Comprovantes de entrega/Data criação"
+      },
+      {
+        "field": "invoices_volumes",
+        "title": "Volumes Consolidação"
+      },
+      {
+        "field": "real_weight",
+        "title": "Peso Real Consolidação"
+      },
+      {
+        "field": "taxed_weight",
+        "title": "Peso Taxado Consolidação"
+      },
+      {
+        "field": "invoices_value",
+        "title": "Valor NF Consolidação"
+      },
+      {
+        "field": "ctd_diy_cin_tda_value",
+        "title": "Valor TDA"
+      },
+      {
+        "field": "ctd_ant_document",
+        "title": "Nº Fatura Financeiro"
+      },
+      {
+        "field": "charged_value_details",
+        "title": "Composição XML"
+      }
+    ],
+    "filters": [
+      {
+        "label": "Emissão",
+        "position": 1,
+        "field": "issue_date",
+        "table": "consolidations",
+        "type": "date",
+        "maxlength": null
+      },
+      {
+        "label": "N° Consolidação",
+        "position": 2,
+        "field": "sequence_code",
+        "table": "consolidations",
+        "type": "numeric",
+        "maxlength": null
+      },
+      {
+        "label": "Nº CT-e 3º",
+        "position": 3,
+        "field": "document_number",
+        "table": "consolidations",
+        "type": "string",
+        "maxlength": null
+      },
+      {
+        "label": "N° Minuta",
+        "position": 4,
+        "field": "operational_number",
+        "table": "consolidations",
+        "type": "string",
+        "maxlength": null
+      },
+      {
+        "label": "Transportadora",
+        "position": 5,
+        "field": "redispatch_carrier_id",
+        "table": "consolidations",
+        "type": "select",
+        "maxlength": null
+      },
+      {
+        "label": "Tabela de Preço",
+        "position": 6,
+        "field": "price_table_id",
+        "table": "consolidations",
+        "type": "select",
+        "maxlength": null
+      },
+      {
+        "label": "Cidade origem",
+        "position": 7,
+        "field": "origin_city_id",
+        "table": "consolidations",
+        "type": "select",
+        "maxlength": null
+      },
+      {
+        "label": "Cidade destino",
+        "position": 8,
+        "field": "destination_city_id",
+        "table": "consolidations",
+        "type": "select",
+        "maxlength": null
+      },
+      {
+        "label": "Tomador",
+        "position": 9,
+        "field": "payer_id",
+        "table": "consolidations",
+        "type": "select",
+        "maxlength": null
+      }
+    ],
+    "requiredDateFilters": [
+      "consolidations.issue_date"
+    ],
+    "defaultOrder": "issue_date"
+  },
+  "infoPin": {
+    "path": "C:\\Users\\suporte\\Documents\\Armazenamento-Projetos\\etl-extracao-dados-v2\\novas-entidades0760\\consolidacao-capture-20261106-a1\\info-1.json",
+    "bytes": 5285,
+    "sha256": "e4d999615b262ad00461df21d4dcd29282c46ebd9dd02a9799dfafdea9108407",
+    "status": 200
+  },
+  "rows": 41,
+  "fields": 39,
+  "profiles": {
+    "sequence_code": {
+      "present": 41,
+      "types": {
+        "INTEGER": 41
+      },
+      "maxUtf16": 0,
+      "maxArray": 0,
+      "items": {},
+      "stringShapes": {},
+      "objectKeys": []
+    },
+    "issue_date": {
+      "present": 41,
+      "types": {
+        "STRING": 41
+      },
+      "maxUtf16": 10,
+      "maxArray": 0,
+      "items": {},
+      "stringShapes": {
+        "ISO_DATE": 41
+      },
+      "objectKeys": []
+    },
+    "document_number": {
+      "present": 41,
+      "types": {
+        "STRING": 41
+      },
+      "maxUtf16": 6,
+      "maxArray": 0,
+      "items": {},
+      "stringShapes": {
+        "NUMERIC_TEXT": 41
+      },
+      "objectKeys": []
+    },
+    "charged_value": {
+      "present": 41,
+      "types": {
+        "STRING": 41
+      },
+      "maxUtf16": 6,
+      "maxArray": 0,
+      "items": {},
+      "stringShapes": {
+        "NUMERIC_TEXT": 41
+      },
+      "objectKeys": []
+    },
+    "subtotal": {
+      "present": 41,
+      "types": {
+        "STRING": 41
+      },
+      "maxUtf16": 6,
+      "maxArray": 0,
+      "items": {},
+      "stringShapes": {
+        "NUMERIC_TEXT": 41
+      },
+      "objectKeys": []
+    },
+    "bill_status": {
+      "present": 41,
+      "types": {
+        "STRING": 41
+      },
+      "maxUtf16": 9,
+      "maxArray": 0,
+      "items": {},
+      "stringShapes": {
+        "TEXT": 41
+      },
+      "objectKeys": []
+    },
+    "invoices_volumes": {
+      "present": 41,
+      "types": {
+        "INTEGER": 41
+      },
+      "maxUtf16": 0,
+      "maxArray": 0,
+      "items": {},
+      "stringShapes": {},
+      "objectKeys": []
+    },
+    "real_weight": {
+      "present": 41,
+      "types": {
+        "STRING": 41
+      },
+      "maxUtf16": 6,
+      "maxArray": 0,
+      "items": {},
+      "stringShapes": {
+        "NUMERIC_TEXT": 41
+      },
+      "objectKeys": []
+    },
+    "taxed_weight": {
+      "present": 41,
+      "types": {
+        "STRING": 41
+      },
+      "maxUtf16": 6,
+      "maxArray": 0,
+      "items": {},
+      "stringShapes": {
+        "NUMERIC_TEXT": 41
+      },
+      "objectKeys": []
+    },
+    "invoices_value": {
+      "present": 41,
+      "types": {
+        "STRING": 41
+      },
+      "maxUtf16": 9,
+      "maxArray": 0,
+      "items": {},
+      "stringShapes": {
+        "NUMERIC_TEXT": 41
+      },
+      "objectKeys": []
+    },
+    "charged_value_details": {
+      "present": 41,
+      "types": {
+        "OBJECT": 41
+      },
+      "maxUtf16": 0,
+      "maxArray": 0,
+      "items": {},
+      "stringShapes": {},
+      "objectKeys": [
+        "DESPACHO",
+        "FRETE PESO",
+        "FRETE VALOR",
+        "GRIS",
+        "PEDAGIO",
+        "TAXA ADICIONAL",
+        "TAXA DIF.ACESSO"
+      ]
+    },
+    "ctd_ant_document": {
+      "present": 41,
+      "types": {
+        "NULL": 41
+      },
+      "maxUtf16": 0,
+      "maxArray": 0,
+      "items": {},
+      "stringShapes": {},
+      "objectKeys": []
+    },
+    "ctd_diy_cin_tda_value": {
+      "present": 41,
+      "types": {
+        "STRING": 28,
+        "NULL": 13
+      },
+      "maxUtf16": 3,
+      "maxArray": 0,
+      "items": {},
+      "stringShapes": {
+        "NUMERIC_TEXT": 28
+      },
+      "objectKeys": []
+    },
+    "ctd_fgs_subtotal": {
+      "present": 41,
+      "types": {
+        "STRING": 41
+      },
+      "maxUtf16": 7,
+      "maxArray": 0,
+      "items": {},
+      "stringShapes": {
+        "NUMERIC_TEXT": 41
+      },
+      "objectKeys": []
+    },
+    "ctd_fgs_total": {
+      "present": 41,
+      "types": {
+        "STRING": 41
+      },
+      "maxUtf16": 7,
+      "maxArray": 0,
+      "items": {},
+      "stringShapes": {
+        "NUMERIC_TEXT": 41
+      },
+      "objectKeys": []
+    },
+    "ctd_fgs_taxed_weight": {
+      "present": 41,
+      "types": {
+        "STRING": 41
+      },
+      "maxUtf16": 7,
+      "maxArray": 0,
+      "items": {},
+      "stringShapes": {
+        "NUMERIC_TEXT": 41
+      },
+      "objectKeys": []
+    },
+    "ctd_fgs_service_at": {
+      "present": 41,
+      "types": {
+        "STRING": 41
+      },
+      "maxUtf16": 29,
+      "maxArray": 0,
+      "items": {},
+      "stringShapes": {
+        "ISO_TIMESTAMP": 41
+      },
+      "objectKeys": []
+    },
+    "ctd_fgs_corporation_sequence_number": {
+      "present": 41,
+      "types": {
+        "INTEGER": 41
+      },
+      "maxUtf16": 0,
+      "maxArray": 0,
+      "items": {},
+      "stringShapes": {},
+      "objectKeys": []
+    },
+    "ctd_fgs_invoices_volumes": {
+      "present": 41,
+      "types": {
+        "INTEGER": 41
+      },
+      "maxUtf16": 0,
+      "maxArray": 0,
+      "items": {},
+      "stringShapes": {},
+      "objectKeys": []
+    },
+    "ctd_fgs_invoices_mapping": {
+      "present": 41,
+      "types": {
+        "ARRAY": 41
+      },
+      "maxUtf16": 0,
+      "maxArray": 2,
+      "items": {
+        "STRING": 42
+      },
+      "stringShapes": {},
+      "objectKeys": []
+    },
+    "ctd_fgs_finished_at": {
+      "present": 41,
+      "types": {
+        "STRING": 25,
+        "NULL": 16
+      },
+      "maxUtf16": 29,
+      "maxArray": 0,
+      "items": {},
+      "stringShapes": {
+        "ISO_TIMESTAMP": 25
+      },
+      "objectKeys": []
+    },
+    "ctd_fgs_crn_psn_nickname": {
+      "present": 41,
+      "types": {
+        "STRING": 41
+      },
+      "maxUtf16": 45,
+      "maxArray": 0,
+      "items": {},
+      "stringShapes": {
+        "TEXT": 41
+      },
+      "objectKeys": []
+    },
+    "ctd_fgs_dpn_delivery_prediction_at": {
+      "present": 41,
+      "types": {
+        "STRING": 41
+      },
+      "maxUtf16": 29,
+      "maxArray": 0,
+      "items": {},
+      "stringShapes": {
+        "ISO_TIMESTAMP": 41
+      },
+      "objectKeys": []
+    },
+    "ctd_fgs_dpn_finished_within_deadline": {
+      "present": 41,
+      "types": {
+        "BOOLEAN": 41
+      },
+      "maxUtf16": 0,
+      "maxArray": 0,
+      "items": {},
+      "stringShapes": {},
+      "objectKeys": []
+    },
+    "ctd_fgs_d_t_created_at": {
+      "present": 41,
+      "types": {
+        "STRING": 25,
+        "NULL": 16
+      },
+      "maxUtf16": 29,
+      "maxArray": 0,
+      "items": {},
+      "stringShapes": {
+        "ISO_TIMESTAMP": 25
+      },
+      "objectKeys": []
+    },
+    "ctd_fgs_dos_cty_name": {
+      "present": 41,
+      "types": {
+        "STRING": 41
+      },
+      "maxUtf16": 20,
+      "maxArray": 0,
+      "items": {},
+      "stringShapes": {
+        "TEXT": 41
+      },
+      "objectKeys": []
+    },
+    "ctd_fgs_fte_has_delivery_receipt": {
+      "present": 41,
+      "types": {
+        "BOOLEAN": 41
+      },
+      "maxUtf16": 0,
+      "maxArray": 0,
+      "items": {},
+      "stringShapes": {},
+      "objectKeys": []
+    },
+    "ctd_fgs_fte_foe_occurrence_at": {
+      "present": 41,
+      "types": {
+        "STRING": 25,
+        "NULL": 16
+      },
+      "maxUtf16": 29,
+      "maxArray": 0,
+      "items": {},
+      "stringShapes": {
+        "ISO_TIMESTAMP": 25
+      },
+      "objectKeys": []
+    },
+    "ctd_fgs_fte_foe_ore_description": {
+      "present": 41,
+      "types": {
+        "STRING": 25,
+        "NULL": 16
+      },
+      "maxUtf16": 29,
+      "maxArray": 0,
+      "items": {},
+      "stringShapes": {
+        "TEXT": 25
+      },
+      "objectKeys": []
+    },
+    "ctd_fgs_fte_lce_ore_description": {
+      "present": 41,
+      "types": {
+        "STRING": 41
+      },
+      "maxUtf16": 30,
+      "maxArray": 0,
+      "items": {},
+      "stringShapes": {
+        "TEXT": 41
+      },
+      "objectKeys": []
+    },
+    "ctd_fgs_fhe_cte_number": {
+      "present": 41,
+      "types": {
+        "INTEGER": 41
+      },
+      "maxUtf16": 0,
+      "maxArray": 0,
+      "items": {},
+      "stringShapes": {},
+      "objectKeys": []
+    },
+    "ctd_fgs_oas_cty_name": {
+      "present": 41,
+      "types": {
+        "STRING": 41
+      },
+      "maxUtf16": 19,
+      "maxArray": 0,
+      "items": {},
+      "stringShapes": {
+        "TEXT": 41
+      },
+      "objectKeys": []
+    },
+    "ctd_rpt_document": {
+      "present": 41,
+      "types": {
+        "STRING": 41
+      },
+      "maxUtf16": 14,
+      "maxArray": 0,
+      "items": {},
+      "stringShapes": {
+        "NUMERIC_TEXT": 41
+      },
+      "objectKeys": []
+    },
+    "ctd_rpt_nickname": {
+      "present": 41,
+      "types": {
+        "STRING": 41
+      },
+      "maxUtf16": 60,
+      "maxArray": 0,
+      "items": {},
+      "stringShapes": {
+        "TEXT": 41
+      },
+      "objectKeys": []
+    },
+    "ctd_rpt_charge_tde": {
+      "present": 41,
+      "types": {
+        "BOOLEAN": 41
+      },
+      "maxUtf16": 0,
+      "maxArray": 0,
+      "items": {},
+      "stringShapes": {},
+      "objectKeys": []
+    },
+    "ctd_rhr_cpy_nickname": {
+      "present": 41,
+      "types": {
+        "STRING": 41
+      },
+      "maxUtf16": 51,
+      "maxArray": 0,
+      "items": {},
+      "stringShapes": {
+        "TEXT": 41
+      },
+      "objectKeys": []
+    },
+    "ctd_rhr_cpy_document": {
+      "present": 41,
+      "types": {
+        "STRING": 41
+      },
+      "maxUtf16": 14,
+      "maxArray": 0,
+      "items": {},
+      "stringShapes": {
+        "NUMERIC_TEXT": 41
+      },
+      "objectKeys": []
+    },
+    "ctd_sdr_document": {
+      "present": 41,
+      "types": {
+        "STRING": 41
+      },
+      "maxUtf16": 14,
+      "maxArray": 0,
+      "items": {},
+      "stringShapes": {
+        "NUMERIC_TEXT": 41
+      },
+      "objectKeys": []
+    },
+    "ctd_sdr_nickname": {
+      "present": 41,
+      "types": {
+        "STRING": 41
+      },
+      "maxUtf16": 62,
+      "maxArray": 0,
+      "items": {},
+      "stringShapes": {
+        "TEXT": 41
+      },
+      "objectKeys": []
+    }
+  },
+  "dataPins": [
+    {
+      "path": "C:\\Users\\suporte\\Documents\\Armazenamento-Projetos\\etl-extracao-dados-v2\\novas-entidades0760\\consolidacao-capture-20261106-a1\\data-2.json",
+      "bytes": 60273,
+      "sha256": "36ff619a7af6b326d5cd09d29c958f7439ab716f0fe088e71e3c955b31d2b339",
+      "status": 200
+    },
+    {
+      "path": "C:\\Users\\suporte\\Documents\\Armazenamento-Projetos\\etl-extracao-dados-v2\\novas-entidades0760\\consolidacao-capture-20261106-a1\\data-3.json",
+      "bytes": 2,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "status": 200
+    }
+  ],
+  "calls": 3,
+  "per": 100,
+  "maximumDataPages": 16,
+  "captureComplete": true,
+  "entity": "CONSOLIDACAO_DETALHADA"
+}

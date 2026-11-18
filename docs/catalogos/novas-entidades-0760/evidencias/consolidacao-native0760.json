@@ -1,0 +1,499 @@
+{
+  "schema": "NEW_ENTITIES_NATIVE_INSPECT0760",
+  "reportId": 11067,
+  "day": "2026-11-06",
+  "fileId": "1777587",
+  "nativePath": "C:\\Users\\suporte\\Documents\\Armazenamento-Projetos\\etl-extracao-dados-v2\\novas-entidades0760\\native-11067-2026-11-06-1777587.xlsx",
+  "nativeSha256": "83675853310e5bbf295dca34b90db33dd7358fcfa5641f01564040ee2c00f54f",
+  "zipCrcPass": true,
+  "sheet": "Sheet1",
+  "sheetCount": 1,
+  "headersExact": true,
+  "headerRow": 1,
+  "sheetRows": 42,
+  "sheetColumns": 39,
+  "sourceRows": 41,
+  "sourceFields": 39,
+  "fields": [
+    {
+      "ordinal": 1,
+      "field": "ctd_fgs_crn_psn_nickname",
+      "header": "Filial Expedidora",
+      "nativeTypes": {
+        "STRING": 41
+      },
+      "numberFormats": [
+        "General"
+      ],
+      "maxUtf16": 45
+    },
+    {
+      "ordinal": 2,
+      "field": "sequence_code",
+      "header": "N° Consolidação",
+      "nativeTypes": {
+        "NUMBER": 41
+      },
+      "numberFormats": [
+        "General"
+      ],
+      "maxUtf16": 0
+    },
+    {
+      "ordinal": 3,
+      "field": "issue_date",
+      "header": "Emissão Consolidação",
+      "nativeTypes": {
+        "DATETIME": 41
+      },
+      "numberFormats": [
+        "DD/MM/YYYY"
+      ],
+      "maxUtf16": 0
+    },
+    {
+      "ordinal": 4,
+      "field": "ctd_rhr_cpy_nickname",
+      "header": "Transportadora",
+      "nativeTypes": {
+        "STRING": 41
+      },
+      "numberFormats": [
+        "General"
+      ],
+      "maxUtf16": 51
+    },
+    {
+      "ordinal": 5,
+      "field": "ctd_rhr_cpy_document",
+      "header": "CNPJ Transportadora",
+      "nativeTypes": {
+        "STRING": 41
+      },
+      "numberFormats": [
+        "General"
+      ],
+      "maxUtf16": 14
+    },
+    {
+      "ordinal": 6,
+      "field": "document_number",
+      "header": "CTe 3º",
+      "nativeTypes": {
+        "STRING": 41
+      },
+      "numberFormats": [
+        "General"
+      ],
+      "maxUtf16": 6
+    },
+    {
+      "ordinal": 7,
+      "field": "ctd_fgs_fhe_cte_number",
+      "header": "CTe Rodogarcia",
+      "nativeTypes": {
+        "NUMBER": 41
+      },
+      "numberFormats": [
+        "General"
+      ],
+      "maxUtf16": 0
+    },
+    {
+      "ordinal": 8,
+      "field": "charged_value",
+      "header": "Valor Frete a Pagar à Credenciada",
+      "nativeTypes": {
+        "NUMBER": 41
+      },
+      "numberFormats": [
+        "General"
+      ],
+      "maxUtf16": 0
+    },
+    {
+      "ordinal": 9,
+      "field": "subtotal",
+      "header": "Valor Calculado ESL",
+      "nativeTypes": {
+        "NUMBER": 41
+      },
+      "numberFormats": [
+        "General"
+      ],
+      "maxUtf16": 0
+    },
+    {
+      "ordinal": 10,
+      "field": "ctd_fgs_subtotal",
+      "header": "Frete Rodogarcia Sem Impostos",
+      "nativeTypes": {
+        "NUMBER": 41
+      },
+      "numberFormats": [
+        "General"
+      ],
+      "maxUtf16": 0
+    },
+    {
+      "ordinal": 11,
+      "field": "ctd_fgs_total",
+      "header": "Frete Rodogarcia Final",
+      "nativeTypes": {
+        "NUMBER": 41
+      },
+      "numberFormats": [
+        "General"
+      ],
+      "maxUtf16": 0
+    },
+    {
+      "ordinal": 12,
+      "field": "ctd_fgs_taxed_weight",
+      "header": "Peso Taxado Rodogarcia",
+      "nativeTypes": {
+        "NUMBER": 41
+      },
+      "numberFormats": [
+        "General"
+      ],
+      "maxUtf16": 0
+    },
+    {
+      "ordinal": 13,
+      "field": "ctd_fgs_fte_has_delivery_receipt",
+      "header": "Comprovante Anexado",
+      "nativeTypes": {
+        "STRING": 41
+      },
+      "numberFormats": [
+        "General"
+      ],
+      "maxUtf16": 3
+    },
+    {
+      "ordinal": 14,
+      "field": "bill_status",
+      "header": "Status Fatura",
+      "nativeTypes": {
+        "STRING": 41
+      },
+      "numberFormats": [
+        "General"
+      ],
+      "maxUtf16": 9
+    },
+    {
+      "ordinal": 15,
+      "field": "ctd_fgs_service_at",
+      "header": "Data Frete Rodogarcia",
+      "nativeTypes": {
+        "DATETIME": 41
+      },
+      "numberFormats": [
+        "DD/MM/YYYY HH:MM:SS"
+      ],
+      "maxUtf16": 0
+    },
+    {
+      "ordinal": 16,
+      "field": "ctd_fgs_corporation_sequence_number",
+      "header": "Minuta Rodogarcia",
+      "nativeTypes": {
+        "NUMBER": 41
+      },
+      "numberFormats": [
+        "General"
+      ],
+      "maxUtf16": 0
+    },
+    {
+      "ordinal": 17,
+      "field": "ctd_fgs_invoices_volumes",
+      "header": "Volumes Rodogarcia",
+      "nativeTypes": {
+        "NUMBER": 41
+      },
+      "numberFormats": [
+        "General"
+      ],
+      "maxUtf16": 0
+    },
+    {
+      "ordinal": 18,
+      "field": "ctd_fgs_invoices_mapping",
+      "header": "Nº NF",
+      "nativeTypes": {
+        "STRING": 41
+      },
+      "numberFormats": [
+        "General"
+      ],
+      "maxUtf16": 12
+    },
+    {
+      "ordinal": 19,
+      "field": "ctd_fgs_dos_cty_name",
+      "header": "Cidade Origem Rodogarcia",
+      "nativeTypes": {
+        "STRING": 41
+      },
+      "numberFormats": [
+        "General"
+      ],
+      "maxUtf16": 20
+    },
+    {
+      "ordinal": 20,
+      "field": "ctd_sdr_document",
+      "header": "CNPJ Remetente",
+      "nativeTypes": {
+        "STRING": 41
+      },
+      "numberFormats": [
+        "General"
+      ],
+      "maxUtf16": 14
+    },
+    {
+      "ordinal": 21,
+      "field": "ctd_sdr_nickname",
+      "header": "Remetente",
+      "nativeTypes": {
+        "STRING": 41
+      },
+      "numberFormats": [
+        "General"
+      ],
+      "maxUtf16": 62
+    },
+    {
+      "ordinal": 22,
+      "field": "ctd_fgs_oas_cty_name",
+      "header": "Cidade Destino Rodogarcia",
+      "nativeTypes": {
+        "STRING": 41
+      },
+      "numberFormats": [
+        "General"
+      ],
+      "maxUtf16": 19
+    },
+    {
+      "ordinal": 23,
+      "field": "ctd_rpt_document",
+      "header": "CNPJ Destinatário",
+      "nativeTypes": {
+        "STRING": 41
+      },
+      "numberFormats": [
+        "General"
+      ],
+      "maxUtf16": 14
+    },
+    {
+      "ordinal": 24,
+      "field": "ctd_rpt_nickname",
+      "header": "Destinatário",
+      "nativeTypes": {
+        "STRING": 41
+      },
+      "numberFormats": [
+        "General"
+      ],
+      "maxUtf16": 60
+    },
+    {
+      "ordinal": 25,
+      "field": "ctd_rpt_charge_tde",
+      "header": "Cobra TDE",
+      "nativeTypes": {
+        "STRING": 41
+      },
+      "numberFormats": [
+        "General"
+      ],
+      "maxUtf16": 3
+    },
+    {
+      "ordinal": 26,
+      "field": "ctd_fgs_dpn_delivery_prediction_at",
+      "header": "Previsão de Entrega",
+      "nativeTypes": {
+        "DATETIME": 41
+      },
+      "numberFormats": [
+        "DD/MM/YYYY HH:MM:SS"
+      ],
+      "maxUtf16": 0
+    },
+    {
+      "ordinal": 27,
+      "field": "ctd_fgs_finished_at",
+      "header": "Data de Entrega",
+      "nativeTypes": {
+        "DATETIME": 25,
+        "NULL": 16
+      },
+      "numberFormats": [
+        "DD/MM/YYYY HH:MM:SS"
+      ],
+      "maxUtf16": 0
+    },
+    {
+      "ordinal": 28,
+      "field": "ctd_fgs_dpn_finished_within_deadline",
+      "header": "Entregue no Prazo",
+      "nativeTypes": {
+        "STRING": 41
+      },
+      "numberFormats": [
+        "General"
+      ],
+      "maxUtf16": 3
+    },
+    {
+      "ordinal": 29,
+      "field": "ctd_fgs_fte_lce_ore_description",
+      "header": "Última Ocorrência",
+      "nativeTypes": {
+        "STRING": 41
+      },
+      "numberFormats": [
+        "General"
+      ],
+      "maxUtf16": 30
+    },
+    {
+      "ordinal": 30,
+      "field": "ctd_fgs_fte_foe_ore_description",
+      "header": "Ocorrência Finalizadora",
+      "nativeTypes": {
+        "STRING": 25,
+        "NULL": 16
+      },
+      "numberFormats": [
+        null,
+        "General"
+      ],
+      "maxUtf16": 29
+    },
+    {
+      "ordinal": 31,
+      "field": "ctd_fgs_fte_foe_occurrence_at",
+      "header": "Data Ocorrência Finalizadora",
+      "nativeTypes": {
+        "DATETIME": 25,
+        "NULL": 16
+      },
+      "numberFormats": [
+        "DD/MM/YYYY HH:MM:SS"
+      ],
+      "maxUtf16": 0
+    },
+    {
+      "ordinal": 32,
+      "field": "ctd_fgs_d_t_created_at",
+      "header": "Comprovantes de entrega/Data criação",
+      "nativeTypes": {
+        "DATETIME": 25,
+        "NULL": 16
+      },
+      "numberFormats": [
+        "DD/MM/YYYY HH:MM:SS"
+      ],
+      "maxUtf16": 0
+    },
+    {
+      "ordinal": 33,
+      "field": "invoices_volumes",
+      "header": "Volumes Consolidação",
+      "nativeTypes": {
+        "NUMBER": 41
+      },
+      "numberFormats": [
+        "General"
+      ],
+      "maxUtf16": 0
+    },
+    {
+      "ordinal": 34,
+      "field": "real_weight",
+      "header": "Peso Real Consolidação",
+      "nativeTypes": {
+        "NUMBER": 41
+      },
+      "numberFormats": [
+        "General"
+      ],
+      "maxUtf16": 0
+    },
+    {
+      "ordinal": 35,
+      "field": "taxed_weight",
+      "header": "Peso Taxado Consolidação",
+      "nativeTypes": {
+        "NUMBER": 41
+      },
+      "numberFormats": [
+        "General"
+      ],
+      "maxUtf16": 0
+    },
+    {
+      "ordinal": 36,
+      "field": "invoices_value",
+      "header": "Valor NF Consolidação",
+      "nativeTypes": {
+        "NUMBER": 41
+      },
+      "numberFormats": [
+        "General"
+      ],
+      "maxUtf16": 0
+    },
+    {
+      "ordinal": 37,
+      "field": "ctd_diy_cin_tda_value",
+      "header": "Valor TDA",
+      "nativeTypes": {
+        "NUMBER": 28,
+        "NULL": 13
+      },
+      "numberFormats": [
+        null,
+        "General"
+      ],
+      "maxUtf16": 0
+    },
+    {
+      "ordinal": 38,
+      "field": "ctd_ant_document",
+      "header": "Nº Fatura Financeiro",
+      "nativeTypes": {
+        "NULL": 41
+      },
+      "numberFormats": [
+        null
+      ],
+      "maxUtf16": 0
+    },
+    {
+      "ordinal": 39,
+      "field": "charged_value_details",
+      "header": "Composição XML",
+      "nativeTypes": {
+        "STRING": 41
+      },
+      "numberFormats": [
+        "General"
+      ],
+      "maxUtf16": 81
+    }
+  ],
+  "sourceHTTP": 0,
+  "SQL": 0,
+  "rowsAfterHeader": 41,
+  "rowCountExact": true,
+  "formulaCells": 0
+}

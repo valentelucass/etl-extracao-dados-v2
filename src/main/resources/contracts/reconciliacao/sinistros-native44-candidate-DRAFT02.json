@@ -1,0 +1,417 @@
+{
+  "schema": "SINISTROS_NATIVE44_CANDIDATE_CATALOG_V1",
+  "profile": "SINISTROS_6392_NATIVE44_V1",
+  "entity": "SINISTROS",
+  "reportId": 6392,
+  "idColumnIndex": 0,
+  "totalColumnCount": null,
+  "catalogNature": "DRAFT_REQUIRES_OBSERVED_NATIVE",
+  "presentationQualified": false,
+  "contentAccepted": false,
+  "columns": [
+    {
+      "nativeColumn": 1,
+      "sourceField": "sequence_code",
+      "title": "Nº do Sinistro",
+      "kind": "positiveIntegralNumber",
+      "total": null,
+      "nullPresentation": null,
+      "emptyStringPresentation": null
+    },
+    {
+      "nativeColumn": 2,
+      "sourceField": "opening_at_date",
+      "title": "Data abertura",
+      "kind": "date",
+      "total": null,
+      "nullPresentation": null,
+      "emptyStringPresentation": null
+    },
+    {
+      "nativeColumn": 3,
+      "sourceField": "occurrence_at_date",
+      "title": "Data ocorrência",
+      "kind": "date",
+      "total": null,
+      "nullPresentation": null,
+      "emptyStringPresentation": null
+    },
+    {
+      "nativeColumn": 4,
+      "sourceField": "occurrence_at_time",
+      "title": "Hora ocorrência",
+      "kind": "time",
+      "total": null,
+      "nullPresentation": null,
+      "emptyStringPresentation": null
+    },
+    {
+      "nativeColumn": 5,
+      "sourceField": "expected_solution_date",
+      "title": "Previsão de solução",
+      "kind": "date",
+      "total": null,
+      "nullPresentation": null,
+      "emptyStringPresentation": null
+    },
+    {
+      "nativeColumn": 6,
+      "sourceField": "insurance_claim_location",
+      "title": "Local do sinistro",
+      "kind": "text",
+      "total": null,
+      "nullPresentation": null,
+      "emptyStringPresentation": null
+    },
+    {
+      "nativeColumn": 7,
+      "sourceField": "informed_by",
+      "title": "Informado por",
+      "kind": "text",
+      "total": null,
+      "nullPresentation": null,
+      "emptyStringPresentation": null
+    },
+    {
+      "nativeColumn": 8,
+      "sourceField": "rctrc",
+      "title": "RCTRC",
+      "kind": "stringArray",
+      "total": null,
+      "nullPresentation": null,
+      "emptyStringPresentation": null
+    },
+    {
+      "nativeColumn": 9,
+      "sourceField": "rctac",
+      "title": "RCTAC",
+      "kind": "stringArray",
+      "total": null,
+      "nullPresentation": null,
+      "emptyStringPresentation": null
+    },
+    {
+      "nativeColumn": 10,
+      "sourceField": "rcfdc",
+      "title": "RCFDC",
+      "kind": "stringArray",
+      "total": null,
+      "nullPresentation": null,
+      "emptyStringPresentation": null
+    },
+    {
+      "nativeColumn": 11,
+      "sourceField": "insurance_claim_commentary",
+      "title": "Comentário do sinistro",
+      "kind": "text",
+      "total": null,
+      "nullPresentation": null,
+      "emptyStringPresentation": null
+    },
+    {
+      "nativeColumn": 12,
+      "sourceField": "list_of_claimed_products",
+      "title": "Relação dos produtos sinistrados",
+      "kind": "text",
+      "total": null,
+      "nullPresentation": null,
+      "emptyStringPresentation": null
+    },
+    {
+      "nativeColumn": 13,
+      "sourceField": "customer_communication_contact_name",
+      "title": "Contato/Nome",
+      "kind": "text",
+      "total": null,
+      "nullPresentation": null,
+      "emptyStringPresentation": null
+    },
+    {
+      "nativeColumn": 14,
+      "sourceField": "customer_communication_date",
+      "title": "Contato/Data",
+      "kind": "date",
+      "total": null,
+      "nullPresentation": null,
+      "emptyStringPresentation": null
+    },
+    {
+      "nativeColumn": 15,
+      "sourceField": "customer_communication_time",
+      "title": "Contato/Hora",
+      "kind": "time",
+      "total": null,
+      "nullPresentation": null,
+      "emptyStringPresentation": null
+    },
+    {
+      "nativeColumn": 16,
+      "sourceField": "brokers_case_number",
+      "title": "Nº do processo da corretora",
+      "kind": "text",
+      "total": null,
+      "nullPresentation": null,
+      "emptyStringPresentation": null
+    },
+    {
+      "nativeColumn": 17,
+      "sourceField": "bo_number",
+      "title": "Nº do BO",
+      "kind": "text",
+      "total": null,
+      "nullPresentation": null,
+      "emptyStringPresentation": null
+    },
+    {
+      "nativeColumn": 18,
+      "sourceField": "policy_number",
+      "title": "Nº da apólice",
+      "kind": "text",
+      "total": null,
+      "nullPresentation": null,
+      "emptyStringPresentation": null
+    },
+    {
+      "nativeColumn": 19,
+      "sourceField": "finished_at_date",
+      "title": "Data finalização",
+      "kind": "date",
+      "total": null,
+      "nullPresentation": null,
+      "emptyStringPresentation": null
+    },
+    {
+      "nativeColumn": 20,
+      "sourceField": "finished_at_time",
+      "title": "Hora finalização",
+      "kind": "time",
+      "total": null,
+      "nullPresentation": null,
+      "emptyStringPresentation": null
+    },
+    {
+      "nativeColumn": 21,
+      "sourceField": "finished_commentary",
+      "title": "Comentário da finalização",
+      "kind": "text",
+      "total": null,
+      "nullPresentation": null,
+      "emptyStringPresentation": null
+    },
+    {
+      "nativeColumn": 22,
+      "sourceField": "internal_description",
+      "title": "Descrição interna",
+      "kind": "text",
+      "total": null,
+      "nullPresentation": null,
+      "emptyStringPresentation": null
+    },
+    {
+      "nativeColumn": 23,
+      "sourceField": "invoices_count",
+      "title": "Quantidade de documentos",
+      "kind": "numericDecimal",
+      "total": null,
+      "nullPresentation": null,
+      "emptyStringPresentation": null
+    },
+    {
+      "nativeColumn": 24,
+      "sourceField": "icm_fis_fit_corporation_sequence_number",
+      "title": "Minuta",
+      "kind": "numericDecimal",
+      "total": null,
+      "nullPresentation": null,
+      "emptyStringPresentation": null
+    },
+    {
+      "nativeColumn": 25,
+      "sourceField": "icm_fis_ioe_number",
+      "title": "Nota Fiscal/Número",
+      "kind": "text",
+      "total": null,
+      "nullPresentation": null,
+      "emptyStringPresentation": null
+    },
+    {
+      "nativeColumn": 26,
+      "sourceField": "invoices_volumes",
+      "title": "Volumes",
+      "kind": "numericDecimal",
+      "total": null,
+      "nullPresentation": null,
+      "emptyStringPresentation": null
+    },
+    {
+      "nativeColumn": 27,
+      "sourceField": "invoices_weight",
+      "title": "Peso",
+      "kind": "decimalString",
+      "total": null,
+      "nullPresentation": null,
+      "emptyStringPresentation": null
+    },
+    {
+      "nativeColumn": 28,
+      "sourceField": "invoices_value",
+      "title": "Valor NF",
+      "kind": "decimalString",
+      "total": null,
+      "nullPresentation": null,
+      "emptyStringPresentation": null
+    },
+    {
+      "nativeColumn": 29,
+      "sourceField": "icm_fis_fit_pyr_nickname",
+      "title": "Pagador do frete/Nome fantasia",
+      "kind": "text",
+      "total": null,
+      "nullPresentation": null,
+      "emptyStringPresentation": null
+    },
+    {
+      "nativeColumn": 30,
+      "sourceField": "customer_debits_subtotal",
+      "title": "valor a pagar ao cliente",
+      "kind": "decimalString",
+      "total": null,
+      "nullPresentation": null,
+      "emptyStringPresentation": null
+    },
+    {
+      "nativeColumn": 31,
+      "sourceField": "customer_credit_entries_subtotal",
+      "title": "Valor nota de crédito ao cliente",
+      "kind": "decimalString",
+      "total": null,
+      "nullPresentation": null,
+      "emptyStringPresentation": null
+    },
+    {
+      "nativeColumn": 32,
+      "sourceField": "responsible_credits_subtotal",
+      "title": "Valor a receber do responsável",
+      "kind": "decimalString",
+      "total": null,
+      "nullPresentation": null,
+      "emptyStringPresentation": null
+    },
+    {
+      "nativeColumn": 33,
+      "sourceField": "responsible_debit_entries_subtotal",
+      "title": "Valor nota de débito do responsável",
+      "kind": "decimalString",
+      "total": null,
+      "nullPresentation": null,
+      "emptyStringPresentation": null
+    },
+    {
+      "nativeColumn": 34,
+      "sourceField": "insurer_credits_subtotal",
+      "title": "Valor a receber da seguradora",
+      "kind": "decimalString",
+      "total": null,
+      "nullPresentation": null,
+      "emptyStringPresentation": null
+    },
+    {
+      "nativeColumn": 35,
+      "sourceField": "insurance_claim_total",
+      "title": "Resultado final",
+      "kind": "decimalString",
+      "total": null,
+      "nullPresentation": null,
+      "emptyStringPresentation": null
+    },
+    {
+      "nativeColumn": 36,
+      "sourceField": "icm_crn_psn_nickname",
+      "title": "Pessoa/Nome fantasia",
+      "kind": "text",
+      "total": null,
+      "nullPresentation": null,
+      "emptyStringPresentation": null
+    },
+    {
+      "nativeColumn": 37,
+      "sourceField": "icm_dvr_iil_name",
+      "title": "Pessoa/Nome",
+      "kind": "text",
+      "total": null,
+      "nullPresentation": null,
+      "emptyStringPresentation": null
+    },
+    {
+      "nativeColumn": 38,
+      "sourceField": "icm_fer_name",
+      "title": "Usuário/Nome",
+      "kind": "text",
+      "total": null,
+      "nullPresentation": null,
+      "emptyStringPresentation": null
+    },
+    {
+      "nativeColumn": 39,
+      "sourceField": "icm_vie_license_plate",
+      "title": "Veículo/Placa",
+      "kind": "text",
+      "total": null,
+      "nullPresentation": null,
+      "emptyStringPresentation": null
+    },
+    {
+      "nativeColumn": 40,
+      "sourceField": "icm_ttt_ore_description",
+      "title": "Ocorrência/Ocorrência",
+      "kind": "text",
+      "total": null,
+      "nullPresentation": null,
+      "emptyStringPresentation": null
+    },
+    {
+      "nativeColumn": 41,
+      "sourceField": "icm_ttt_ore_code",
+      "title": "Ocorrência/Código",
+      "kind": "numericDecimal",
+      "total": null,
+      "nullPresentation": null,
+      "emptyStringPresentation": null
+    },
+    {
+      "nativeColumn": 42,
+      "sourceField": "icm_ttt_treatment_at",
+      "title": "Tratativa/Data tratativa",
+      "kind": "timestamp",
+      "total": null,
+      "nullPresentation": null,
+      "emptyStringPresentation": null
+    },
+    {
+      "nativeColumn": 43,
+      "sourceField": "icm_ttt_dealing_type",
+      "title": "Tratativa/Tipo tratativa",
+      "kind": "enum",
+      "total": null,
+      "nullPresentation": null,
+      "emptyStringPresentation": null
+    },
+    {
+      "nativeColumn": 44,
+      "sourceField": "icm_ttt_solution_type",
+      "title": "Tratativa/Solução",
+      "kind": "enum",
+      "total": null,
+      "nullPresentation": null,
+      "emptyStringPresentation": null
+    }
+  ],
+  "enumLabels": {},
+  "executable": false,
+  "pending": [
+    "Observe exact Native titles/carriers/epoch",
+    "Observe null/empty/array policies by occurrence pairing",
+    "Observe actual enum labels and clock encodings",
+    "Observe total columns and direct binary64 encoding"
+  ]
+}

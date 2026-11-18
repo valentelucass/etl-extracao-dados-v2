@@ -1,0 +1,20 @@
+{
+  "status": "PROPOSED_NOT_AUTHORIZED_NOT_EXECUTABLE",
+  "database": "ETL_SISTEMA_V2",
+  "reason": "The existing dashboard login authenticates to DASHBOARDS but target access is 0 and connection to ETL_SISTEMA_V2 returns SQL 4060.",
+  "new_server_login": {
+    "name": "etl_v2_runtime_prod",
+    "purpose": "Dedicated ETL runtime; no sysadmin or server role membership; no administrative application fallback",
+    "secret": "Generate only after approval; keep outside Git/chat/arguments/environment, protected by the approved private runtime"
+  },
+  "new_database_users": [
+    {"name": "v2_schema_owner", "authentication": "WITHOUT LOGIN", "purpose": "Contain EXECUTE AS OWNER to V2 schemas as in the existing security design"},
+    {"name": "etl_v2_runtime_prod", "login": "etl_v2_runtime_prod", "roles": ["v2_runtime"], "purpose": "Only qualified runtime entrypoints; no DDL, db_owner or retention roles"},
+    {"name": "usuario_etl", "login": "usuario_etl", "permissions": ["CONNECT", "SELECT ON SCHEMA::pub"], "purpose": "Existing dashboard login reads published contracts; no staging/core writes"}
+  ],
+  "new_database_roles": ["v2_migrator", "v2_runtime", "v2_retention_governor", "v2_lifecycle_reviewer", "v2_lifecycle_operator", "v2_archive_restorer"],
+  "ownership": {"schemas": ["ctl", "stg", "core", "ref", "mart", "pub", "recon"], "owner": "v2_schema_owner", "database_owner_unchanged": true},
+  "security_source": "database/migrations/V002__create_v2_database_roles.sql, immutable; plus qualified procedure grants from each reviewed schema unit",
+  "execution_gate": "Human exception to the permanent prohibition is required. This JSON is a review specification, not executable authority. SQL compilation and access tests must precede enabling a job.",
+  "excluded": ["Change or remove existing SQL logins or passwords", "Change server version, services or TLS", "Change existing database users/permissions", "Windows identity or ACL changes", "Grant sysadmin or db_owner to applications", "Grant production access to synthetic contracts", "Install recursive database folder", "Activate scheduling before runtime qualification"]
+}

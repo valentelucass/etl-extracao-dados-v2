@@ -1,0 +1,136 @@
+{
+  "schema": "INDEPENDENT_EXPORT_PERMANENT_V3_HANDOFF",
+  "status": "APPLIED_AWAITING_ROOT_FORMAT_TEST",
+  "codeApplied": true,
+  "compiled": false,
+  "formatted": false,
+  "testsExecuted": 0,
+  "Source": 0,
+  "HTTP": 0,
+  "SQL": 0,
+  "CIM": 0,
+  "credentials": 0,
+  "canonicalControlChanges": 0,
+  "authorityCreated": false,
+  "mainSourceAdoption": false,
+  "dashboardConsumptionVerified": false,
+  "implementation": {
+    "cli": [
+      "independent-export plan --input <pin-path> --sha256 <sha>",
+      "independent-export compare --input <pair-path> --sha256 <sha> --output <fresh-result-path>",
+      "independent-export run --config <properties> --operational-request <json> --selection <json> --sha256 <sha>"
+    ],
+    "operational": "RuntimeIndependentExportCommand -> RuntimeCompositionRoot -> existing WindowsSqlRuntimeAuthorization AUTHORIZE/CONSUME -> IndependentExportRuntime. Selection, profile and source configuration are bound to a separate plan/contract fingerprint.",
+    "fretes": "One durably reserved POST; bounded automatic journaled polling; same-file continuation only with a new explicitly consumed selection/grant; pinned generated response; one durably reserved download; complete XLSX EOF/header/period validation; independent UI callback; complete114/keyed/50 comparison.",
+    "coletas": "INFO gate + existing GET_WITH_QUERY encoder + bounded pages + existing mapper. per counts distinct typed scalar IDs; all physical occurrences are retained. Physical rows/bytes/pages/deadline are separate bounds; terminal empty page is required. Direct mapped JSONL and historical closed zlib-row projection are explicit input formats.",
+    "runtimeBudget": "Total invocation <= selected30..240seconds including configuration/authority time;15seconds reserved from Source deadline; no implicit renewals. Original remains Root1GiB/300seconds; request <=30seconds; shared channel waits at least3seconds after a response.",
+    "physical": "Pinned packaged Root worker, original OwnJob1GiB, nested curl128MiB, exact external JVM selection validated before augmentation, actual Main->worker parent/kernel birth/same Original proof, full fresh Native census before provider and send, read-only privacy guard, existing provider, one curl send/no redirect/no retry. Shared STOP429 checked before/after lock and before send; uncertain wire effect latches reconciliation and retains observed partial bytes.",
+    "comparison": "Typed occurrences and whole tuples; distinct IDs on both sides; complete column/full-tuple/keyed/ID multiplicity digests and all exact totals; original precision projections kept separately for Coletas. Signed binary64 zero is distinct in keys; rational zero remains zero in sums. Qualified lexeme128/exponent128 parser; no epsilon or business rounding.",
+    "differential": "Original129JavaPort receives inputs only and delegates to permanent QualifiedColetasModel/ExactBinary64 used by production adapter. Runner checks all63+42+8+16 original guards and complete tagged trace results. No129 execution/qualification is claimed.",
+    "dashboard": "Typed21-column Coletas mapping and Fretes billing fact mapping; independent exclusion/region/snapshot/billing facts mandatory; integer overflow rejected; expanded grain cannot be silently collapsed. Optional exact-pair-bound bridge plan writes a fresh typed stage plus result pin, with Root publication/consumer roundtrip still pending. service_at never substitutes for billing reference date."
+  },
+  "operationalSelection": {
+    "schema": "INDEPENDENT_EXPORT_OPERATIONAL_SELECTION_V1",
+    "required": [
+      "profile",
+      "requestPin",
+      "configPin",
+      "mappingPin",
+      "codeUnitPin",
+      "physicalContextPin",
+      "sourceConfigurationSha256",
+      "outputDirectory",
+      "journalDirectory",
+      "resultPath",
+      "referenceCallbackPath",
+      "downloadHosts",
+      "maximumDurationSeconds",
+      "maximumHttpRequests"
+    ],
+    "fretesAdditional": [
+      "maximumPolls"
+    ],
+    "coletasAdditional": [
+      "maximumPages",
+      "pageSize",
+      "maximumRows",
+      "policyTemplatePin"
+    ],
+    "optional": [
+      "continuationGrant:{grantId,previousReceiptSha256,additionalPolls}",
+      "dashboardBridgePin"
+    ],
+    "callback": {
+      "schema": "INDEPENDENT_UI_REFERENCE_CALLBACK_V1",
+      "fields": [
+        "attemptId",
+        "requestPin",
+        "ui:{dataPin,evidencePin}"
+      ],
+      "coletasAdditional": [
+        "policyPin"
+      ]
+    },
+    "coletasTemplate": {
+      "schema": "COLETAS_COMMON31_POLICY_TEMPLATE_V1",
+      "fields": [
+        "rules:{sourceFormat,nullOmissionItems,dateBlankItems,timestampIntegerSecondDisplayItems}"
+      ],
+      "rule": "Actual callback policy must equal these preauthorized rules after removal of schema/attempt/data/evidence binding fields. Actual source/workbook/evidence pins are checked by the adapter."
+    },
+    "physicalContext": {
+      "schema": "ROOT_INDEPENDENT_EXPORT_PHYSICAL_CONTEXT_V1",
+      "required": [
+        "sourceConfigurationSha256",
+        "codeUnitSha256",
+        "ownedMainImage:java.exe|javaw.exe",
+        "powershell",
+        "worker",
+        "physicalDll",
+        "childJobDll",
+        "childJobSource",
+        "nativeBuildReceiptPin",
+        "nativeGuard",
+        "privacyGuard",
+        "privacyPolicy",
+        "selection",
+        "provider",
+        "curl",
+        "apiOrigin",
+        "credentialEnvironmentPath",
+        "privateRoot",
+        "sharedSourceDirectory",
+        "downloadHosts"
+      ],
+      "nativeReceipt": "ROOT_INDEPENDENT_EXPORT_NATIVE_BUILD_V1 with sourcePin/dllPin, success and originalClosedKnown. Root must compile, pin and qualify the actual native boundary separately; the ordinary unit does not do so."
+    }
+  },
+  "auditProjection": {
+    "format": "EXACT_TYPED_LENGTH_PREFIX_UTF8_V1",
+    "order": "Lexicographic Java UTF16 type, value, carrier; then tuple length.",
+    "frame": "Each string: UTF8 byte length in decimal, colon, UTF8 bytes. Atom: type,value,carrier. Tuple: width then atoms. Bag entry: key then count. Full keyed bag: ID atom followed by its full tuple bag digest string. ID multiplicity: ID atom then occurrence count. Empty stream SHA256 is the empty bag digest.",
+    "equality": "Full original keys are compared directly. Digests provide complete audit projections and are never substituted for collision-free equality.",
+    "totals": "Each side lists every total field, exact reduced decimal numerator/denominator, exact sum of encoded cells in2^-1074 units where applicable, model/readiness and complete nonvalue bag. Coletas normalized decimal values are encoded units, originalValueProjection retains the original exact decimal totals and native atoms."
+  },
+  "rootRequiredSequence": [
+    "Review the exact new unit/candidate signature and full compiler input snapshot. They grant no authority.",
+    "Run FORMAT once using the existing V5 Root harness under Original. Re-run the metadata preparer to a fresh output directory after formatting and review/repin the changed bytes.",
+    "Run one isolated fresh compile/TEST using the concrete ordinary class/method/case ledger. Require zero failures/errors/skips and own process/stdin/EOF closure. Do not use v2 pins or stale class files.",
+    "Run the pure external-selection rejection script separately inside a Root-admitted Source0 unit if selected. Its5 cases do not execute Native/CIM.",
+    "Root builds/qualifies native child-job source and the real transport boundary separately before Source adoption.",
+    "Run the frozen original129 oracle + final Java port differential in separately admitted Source0 Originals, preserving the original129 trace/guard counts and mutational sensitivity controls.",
+    "Run real-pair replay one approved pair per Original, using Root's current accepted catalogue and expected complete projections. Coletas requires JSONL+XLSX; no business inputs were opened in this chat.",
+    "Dashboard staging does not grant SQL publication; Root must qualify facts/grain/consumer roundtrip before adoption."
+  ],
+  "currentRootEvidence": {
+    "coletas": "Root historical3/3 content acceptances remain historical evidence, not qualification of these Java bytes.",
+    "fretes": "Only first2 weeks historically accepted. Root's latest fourth ACTUAL for third week remains different in costs106/110/114:5224rows/4592IDs per side,12changed IDs and divergent50totals. Third-week acceptance is NOT issued.",
+    "causality": "Root observed convergence across successive pairs; exact temporal causality remains false. No recapture or data correction is triggered by this code.",
+    "currentAux": "No AUX pin or business acquisition ID is compiled into the product. Root uses its current reconciled control; this handoff does not renew Source."
+  },
+  "declaredLimitations": [
+    "No compiler, formatter, Maven, Java, Python, Node, Source, HTTP, credentials, CIM, SQL, Original, UI or services were executed here.",
+    "All new bytes require Root FORMAT/TEST, original129 differential, actual native/transport proof and approved real-pair replays before qualification.",
+    "Missing UI callback, missing field-specific evidence, budget exhaustion, partial capture, unknown effect, incompatible grain or governance gaps stay PENDING/refused; no automatic publication or qualification."
+  ]
+}

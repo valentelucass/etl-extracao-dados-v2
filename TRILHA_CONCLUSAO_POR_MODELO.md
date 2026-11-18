@@ -4,6 +4,10 @@
 
 Excel: divergente; equivalência de 100% pendente. Template 11067: 39 cabeçalhos exatos; origem 209 / Excel 212; ocorrências completas iguais 208; somente origem 1 / somente Excel 4; equivalência integral=False; arquivo ESL 1778129. Template 12072: 20 cabeçalhos exatos; origem 36.074 / Excel 36.166; ocorrências completas iguais 35.953; somente origem 121 / somente Excel 213; equivalência integral=False; arquivo ESL 1778123. Diferenças conservadas; snapshot comum não comprovado. Dados anteriores/acessos/SQL16.0.1000.6/001/002/16pins0759 preservados. Sem publicação/corte dashboard/V1. Notas abaixo são históricas; não repetir fontes encerradas.
 
+## Complemento 0760 — mapeamento das duas novas fontes
+
+[Catálogo](docs/catalogos/novas-entidades-0760/README.md) e [checkpoint](docs/continuidade/checkpoints/0760-mapeamento-ocorrencias-e-consolidacao.md). Mapeamento de todos os 59 campos e 22 filtros dos templates 11067 e 12072. Dois recortes completos via cURL e Excel oficiais: 41 e 279 linhas, 7.179 células, tuplas e multiplicidades iguais na apresentação documentada. Sete tipos não nulos continuam pendentes. Nenhum checkbox de implementação ou aceite Java/SQL/produção foi acrescentado. O responsável pediu deixar Java para a etapa posterior. Demais pendências da 0759 preservadas.
+
 ## Continuidade 0537 — Roteiro condicionado de retomada real e fechamento local
 
 [Checkpoint 0537](docs/continuidade/checkpoints/0537-roteiro-condicionado-de-retomada-real-e-fechamento-local.md). Quarta parcela local encerrada: roteiro condicionado de retomada publicado, sem comandos/reserva/Source/SQL. Sequência0534–0537 registrada:3607unitPASS/21skipped+7IT, complemento OSV5libs0matches e modelo puro44/44. Extração completa NÃO encerrada: ESL standby, bootstrap79,6644%/34linhas, G05 integral/material e oráculos/paridade/retenção operacional continuam pendentes. Históricos preservados; C78 rollback-only; nenhuma retomada automática.

@@ -13,7 +13,10 @@ import java.nio.file.StandardOpenOption;
 import java.security.MessageDigest;
 import java.time.Instant;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HexFormat;
+import java.util.List;
 import java.util.UUID;
 
 /** Durable scheduling state. Only SQL-confirmed snapshots may remove pending replacement work. */
@@ -51,6 +54,23 @@ final class RefreshCheckpoint {
         return Instant.parse(payload.required("createdAt").asText())
                 .atZone(ReportUpdateContract.SOURCE_ZONE)
                 .toLocalDate();
+    }
+
+    List<ReportSnapshotTemplate> continuousOrder() {
+        final var catalog = ReportSnapshotTemplate.receivingTemplates();
+        final var first = payload.path("nextContinuousEntity").asText();
+        final var order = new ArrayList<>(catalog);
+        for (int index = 0; index < catalog.size(); index++) {
+            if (catalog.get(index).name().equals(first)) {
+                Collections.rotate(order, -index);
+                break;
+            }
+        }
+        return order;
+    }
+
+    void nextContinuousEntity(final ReportSnapshotTemplate next) {
+        payload.put("nextContinuousEntity", next.name());
     }
 
     long initialDaysRemaining(final ReportSnapshotTemplate template) {

@@ -30,13 +30,13 @@ final class ObservedExpansionSchemaFixtures {
     static ObservedExpansionSchemaCatalog.Schema schema(
             final ObservedExpansionCaptureTemplate template) {
         return ObservedExpansionSchemaCatalog.schema(
-                ObservedExpansionSchemaCatalog.select(template));
+                ObservedExpansionSchemaCatalog.selectHistorical(template));
     }
 
     static ObservedExpansionSchemaGuard.BoundSchema bound(final ObservedExpansionCapturePlan plan) {
         return ObservedExpansionSchemaGuard.bind(
                 plan,
-                ObservedExpansionSchemaCatalog.select(plan.template()),
+                ObservedExpansionSchemaCatalog.selectHistorical(plan.template()),
                 plan.template().templateId(),
                 schema(plan.template()).metadata());
     }

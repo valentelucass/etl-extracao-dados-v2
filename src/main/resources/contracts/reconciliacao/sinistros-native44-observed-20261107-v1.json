@@ -1,0 +1,484 @@
+{
+  "schema": "SINISTROS_NATIVE44_CANDIDATE_CATALOG_V1",
+  "profile": "SINISTROS_6392_NATIVE44_V1",
+  "entity": "SINISTROS",
+  "reportId": 6392,
+  "idColumnIndex": 0,
+  "totalColumnCount": 10,
+  "catalogNature": "OBSERVED_NATIVE_CANDIDATE",
+  "presentationQualified": false,
+  "contentAccepted": false,
+  "columns": [
+    {
+      "nativeColumn": 1,
+      "sourceField": "sequence_code",
+      "title": "Nº do Sinistro",
+      "kind": "positiveIntegralNumber",
+      "total": false,
+      "nullPresentation": "STRICT",
+      "emptyStringPresentation": "STRICT",
+      "nativeCarrier": "XLSX:1900:builtin:0:apply=null:base=0:fmtId=0"
+    },
+    {
+      "nativeColumn": 2,
+      "sourceField": "opening_at_date",
+      "title": "Data abertura",
+      "kind": "date",
+      "total": false,
+      "nullPresentation": "STRICT",
+      "emptyStringPresentation": "STRICT",
+      "nativeCarrier": "XLSX:1900:DD/MM/YYYY:apply=1:base=0:fmtId=164"
+    },
+    {
+      "nativeColumn": 3,
+      "sourceField": "occurrence_at_date",
+      "title": "Data ocorrência",
+      "kind": "date",
+      "total": false,
+      "nullPresentation": "STRICT",
+      "emptyStringPresentation": "STRICT",
+      "nativeCarrier": "XLSX:1900:DD/MM/YYYY:apply=1:base=0:fmtId=164"
+    },
+    {
+      "nativeColumn": 4,
+      "sourceField": "occurrence_at_time",
+      "title": "Hora ocorrência",
+      "kind": "time",
+      "total": false,
+      "nullPresentation": "STRICT",
+      "emptyStringPresentation": "STRICT",
+      "nativeCarrier": "XLSX:1900:HH:MM:SS:apply=1:base=0:fmtId=165",
+      "sourceTimeEncoding": "SOURCE_OFFSET_DATE_CLOCK_SECOND_V1",
+      "nativeTimeEncoding": "NATIVE_DATE_TIME_NEAREST_SECOND_V1"
+    },
+    {
+      "nativeColumn": 5,
+      "sourceField": "expected_solution_date",
+      "title": "Previsão de solução",
+      "kind": "date",
+      "total": false,
+      "nullPresentation": "NULL_NATIVE_BLANK",
+      "emptyStringPresentation": "STRICT",
+      "nativeCarrier": "XLSX:1900:DD/MM/YYYY:apply=1:base=0:fmtId=164"
+    },
+    {
+      "nativeColumn": 6,
+      "sourceField": "insurance_claim_location",
+      "title": "Local do sinistro",
+      "kind": "text",
+      "total": false,
+      "nullPresentation": "STRICT",
+      "emptyStringPresentation": "EMPTY_NATIVE_ABSENT"
+    },
+    {
+      "nativeColumn": 7,
+      "sourceField": "informed_by",
+      "title": "Informado por",
+      "kind": "text",
+      "total": false,
+      "nullPresentation": "STRICT",
+      "emptyStringPresentation": "EMPTY_NATIVE_ABSENT"
+    },
+    {
+      "nativeColumn": 8,
+      "sourceField": "rctrc",
+      "title": "RCTRC",
+      "kind": "stringArray",
+      "total": false,
+      "nullPresentation": "STRICT",
+      "emptyStringPresentation": "STRICT",
+      "emptyArrayPresentation": "EMPTY_ARRAY_NATIVE_ABSENT",
+      "arraySeparator": ", "
+    },
+    {
+      "nativeColumn": 9,
+      "sourceField": "rctac",
+      "title": "RCTAC",
+      "kind": "stringArray",
+      "total": false,
+      "nullPresentation": "STRICT",
+      "emptyStringPresentation": "STRICT",
+      "emptyArrayPresentation": "EMPTY_ARRAY_NATIVE_ABSENT",
+      "arraySeparator": ", "
+    },
+    {
+      "nativeColumn": 10,
+      "sourceField": "rcfdc",
+      "title": "RCFDC",
+      "kind": "stringArray",
+      "total": false,
+      "nullPresentation": "STRICT",
+      "emptyStringPresentation": "STRICT",
+      "emptyArrayPresentation": "EMPTY_ARRAY_NATIVE_ABSENT",
+      "arraySeparator": ", "
+    },
+    {
+      "nativeColumn": 11,
+      "sourceField": "insurance_claim_commentary",
+      "title": "Comentário do sinistro",
+      "kind": "text",
+      "total": false,
+      "nullPresentation": "STRICT",
+      "emptyStringPresentation": "EMPTY_NATIVE_ABSENT"
+    },
+    {
+      "nativeColumn": 12,
+      "sourceField": "list_of_claimed_products",
+      "title": "Relação dos produtos sinistrados",
+      "kind": "text",
+      "total": false,
+      "nullPresentation": "STRICT",
+      "emptyStringPresentation": "EMPTY_NATIVE_ABSENT"
+    },
+    {
+      "nativeColumn": 13,
+      "sourceField": "customer_communication_contact_name",
+      "title": "Contato/Nome",
+      "kind": "text",
+      "total": false,
+      "nullPresentation": "STRICT",
+      "emptyStringPresentation": "EMPTY_NATIVE_ABSENT"
+    },
+    {
+      "nativeColumn": 14,
+      "sourceField": "customer_communication_date",
+      "title": "Contato/Data",
+      "kind": "date",
+      "total": false,
+      "nullPresentation": "NULL_NATIVE_BLANK",
+      "emptyStringPresentation": "STRICT",
+      "nativeCarrier": "XLSX:1900:DD/MM/YYYY:apply=1:base=0:fmtId=164"
+    },
+    {
+      "nativeColumn": 15,
+      "sourceField": "customer_communication_time",
+      "title": "Contato/Hora",
+      "kind": "time",
+      "total": false,
+      "nullPresentation": "NULL_NATIVE_BLANK",
+      "emptyStringPresentation": "STRICT",
+      "nativeCarrier": "XLSX:1900:HH:MM:SS:apply=1:base=0:fmtId=165",
+      "sourceTimeEncoding": "ISO_LOCAL_TIME_SECOND_V1",
+      "nativeTimeEncoding": "FRACTION_DAY_NEAREST_SECOND_V1"
+    },
+    {
+      "nativeColumn": 16,
+      "sourceField": "brokers_case_number",
+      "title": "Nº do processo da corretora",
+      "kind": "text",
+      "total": false,
+      "nullPresentation": "STRICT",
+      "emptyStringPresentation": "EMPTY_NATIVE_ABSENT"
+    },
+    {
+      "nativeColumn": 17,
+      "sourceField": "bo_number",
+      "title": "Nº do BO",
+      "kind": "text",
+      "total": false,
+      "nullPresentation": "STRICT",
+      "emptyStringPresentation": "EMPTY_NATIVE_ABSENT"
+    },
+    {
+      "nativeColumn": 18,
+      "sourceField": "policy_number",
+      "title": "Nº da apólice",
+      "kind": "text",
+      "total": false,
+      "nullPresentation": "STRICT",
+      "emptyStringPresentation": "EMPTY_NATIVE_ABSENT"
+    },
+    {
+      "nativeColumn": 19,
+      "sourceField": "finished_at_date",
+      "title": "Data finalização",
+      "kind": "date",
+      "total": false,
+      "nullPresentation": "NULL_NATIVE_BLANK",
+      "emptyStringPresentation": "STRICT",
+      "nativeCarrier": "XLSX:1900:DD/MM/YYYY:apply=1:base=0:fmtId=164"
+    },
+    {
+      "nativeColumn": 20,
+      "sourceField": "finished_at_time",
+      "title": "Hora finalização",
+      "kind": "time",
+      "total": false,
+      "nullPresentation": "NULL_NATIVE_BLANK",
+      "emptyStringPresentation": "STRICT",
+      "nativeCarrier": "XLSX:1900:HH:MM:SS:apply=1:base=0:fmtId=165",
+      "sourceTimeEncoding": "SOURCE_OFFSET_DATE_CLOCK_SECOND_V1",
+      "nativeTimeEncoding": "NATIVE_DATE_TIME_NEAREST_SECOND_V1"
+    },
+    {
+      "nativeColumn": 21,
+      "sourceField": "finished_commentary",
+      "title": "Comentário da finalização",
+      "kind": "text",
+      "total": false,
+      "nullPresentation": "NULL_NATIVE_ABSENT",
+      "emptyStringPresentation": "STRICT"
+    },
+    {
+      "nativeColumn": 22,
+      "sourceField": "internal_description",
+      "title": "Descrição interna",
+      "kind": "text",
+      "total": false,
+      "nullPresentation": "NULL_NATIVE_ABSENT",
+      "emptyStringPresentation": "STRICT"
+    },
+    {
+      "nativeColumn": 23,
+      "sourceField": "invoices_count",
+      "title": "Quantidade de documentos",
+      "kind": "numericDecimal",
+      "total": true,
+      "nullPresentation": "STRICT",
+      "emptyStringPresentation": "STRICT",
+      "nativeCarrier": "XLSX:1900:builtin:0:apply=null:base=0:fmtId=0",
+      "nativeNumberEncoding": "DIRECT_BINARY64_NEAREST_EVEN_V1"
+    },
+    {
+      "nativeColumn": 24,
+      "sourceField": "icm_fis_fit_corporation_sequence_number",
+      "title": "Minuta",
+      "kind": "numericDecimal",
+      "total": false,
+      "nullPresentation": "NULL_NATIVE_ABSENT",
+      "emptyStringPresentation": "STRICT",
+      "nativeCarrier": "XLSX:1900:builtin:0:apply=null:base=0:fmtId=0",
+      "nativeNumberEncoding": "DIRECT_BINARY64_NEAREST_EVEN_V1"
+    },
+    {
+      "nativeColumn": 25,
+      "sourceField": "icm_fis_ioe_number",
+      "title": "Nota Fiscal/Número",
+      "kind": "text",
+      "total": false,
+      "nullPresentation": "NULL_NATIVE_ABSENT",
+      "emptyStringPresentation": "STRICT"
+    },
+    {
+      "nativeColumn": 26,
+      "sourceField": "invoices_volumes",
+      "title": "Volumes",
+      "kind": "numericDecimal",
+      "total": true,
+      "nullPresentation": "STRICT",
+      "emptyStringPresentation": "STRICT",
+      "nativeCarrier": "XLSX:1900:builtin:0:apply=null:base=0:fmtId=0",
+      "nativeNumberEncoding": "DIRECT_BINARY64_NEAREST_EVEN_V1"
+    },
+    {
+      "nativeColumn": 27,
+      "sourceField": "invoices_weight",
+      "title": "Peso",
+      "kind": "decimalString",
+      "total": true,
+      "nullPresentation": "STRICT",
+      "emptyStringPresentation": "STRICT",
+      "nativeCarrier": "XLSX:1900:builtin:0:apply=null:base=0:fmtId=0",
+      "nativeNumberEncoding": "DIRECT_BINARY64_NEAREST_EVEN_V1"
+    },
+    {
+      "nativeColumn": 28,
+      "sourceField": "invoices_value",
+      "title": "Valor NF",
+      "kind": "decimalString",
+      "total": true,
+      "nullPresentation": "STRICT",
+      "emptyStringPresentation": "STRICT",
+      "nativeCarrier": "XLSX:1900:builtin:0:apply=null:base=0:fmtId=0",
+      "nativeNumberEncoding": "DIRECT_BINARY64_NEAREST_EVEN_V1"
+    },
+    {
+      "nativeColumn": 29,
+      "sourceField": "icm_fis_fit_pyr_nickname",
+      "title": "Pagador do frete/Nome fantasia",
+      "kind": "text",
+      "total": false,
+      "nullPresentation": "NULL_NATIVE_ABSENT",
+      "emptyStringPresentation": "STRICT"
+    },
+    {
+      "nativeColumn": 30,
+      "sourceField": "customer_debits_subtotal",
+      "title": "valor a pagar ao cliente",
+      "kind": "decimalString",
+      "total": true,
+      "nullPresentation": "STRICT",
+      "emptyStringPresentation": "STRICT",
+      "nativeCarrier": "XLSX:1900:builtin:0:apply=null:base=0:fmtId=0",
+      "nativeNumberEncoding": "DIRECT_BINARY64_NEAREST_EVEN_V1"
+    },
+    {
+      "nativeColumn": 31,
+      "sourceField": "customer_credit_entries_subtotal",
+      "title": "Valor nota de crédito ao cliente",
+      "kind": "decimalString",
+      "total": true,
+      "nullPresentation": "STRICT",
+      "emptyStringPresentation": "STRICT",
+      "nativeCarrier": "XLSX:1900:builtin:0:apply=null:base=0:fmtId=0",
+      "nativeNumberEncoding": "DIRECT_BINARY64_NEAREST_EVEN_V1"
+    },
+    {
+      "nativeColumn": 32,
+      "sourceField": "responsible_credits_subtotal",
+      "title": "Valor a receber do responsável",
+      "kind": "decimalString",
+      "total": true,
+      "nullPresentation": "STRICT",
+      "emptyStringPresentation": "STRICT",
+      "nativeCarrier": "XLSX:1900:builtin:0:apply=null:base=0:fmtId=0",
+      "nativeNumberEncoding": "DIRECT_BINARY64_NEAREST_EVEN_V1"
+    },
+    {
+      "nativeColumn": 33,
+      "sourceField": "responsible_debit_entries_subtotal",
+      "title": "Valor nota de débito do responsável",
+      "kind": "decimalString",
+      "total": true,
+      "nullPresentation": "STRICT",
+      "emptyStringPresentation": "STRICT",
+      "nativeCarrier": "XLSX:1900:builtin:0:apply=null:base=0:fmtId=0",
+      "nativeNumberEncoding": "DIRECT_BINARY64_NEAREST_EVEN_V1"
+    },
+    {
+      "nativeColumn": 34,
+      "sourceField": "insurer_credits_subtotal",
+      "title": "Valor a receber da seguradora",
+      "kind": "decimalString",
+      "total": true,
+      "nullPresentation": "STRICT",
+      "emptyStringPresentation": "STRICT",
+      "nativeCarrier": "XLSX:1900:builtin:0:apply=null:base=0:fmtId=0",
+      "nativeNumberEncoding": "DIRECT_BINARY64_NEAREST_EVEN_V1"
+    },
+    {
+      "nativeColumn": 35,
+      "sourceField": "insurance_claim_total",
+      "title": "Resultado final",
+      "kind": "decimalString",
+      "total": true,
+      "nullPresentation": "STRICT",
+      "emptyStringPresentation": "STRICT",
+      "nativeCarrier": "XLSX:1900:builtin:0:apply=null:base=0:fmtId=0",
+      "nativeNumberEncoding": "DIRECT_BINARY64_NEAREST_EVEN_V1"
+    },
+    {
+      "nativeColumn": 36,
+      "sourceField": "icm_crn_psn_nickname",
+      "title": "Pessoa/Nome fantasia",
+      "kind": "text",
+      "total": false,
+      "nullPresentation": "STRICT",
+      "emptyStringPresentation": "STRICT"
+    },
+    {
+      "nativeColumn": 37,
+      "sourceField": "icm_dvr_iil_name",
+      "title": "Pessoa/Nome",
+      "kind": "text",
+      "total": false,
+      "nullPresentation": "NULL_NATIVE_ABSENT",
+      "emptyStringPresentation": "STRICT"
+    },
+    {
+      "nativeColumn": 38,
+      "sourceField": "icm_fer_name",
+      "title": "Usuário/Nome",
+      "kind": "text",
+      "total": false,
+      "nullPresentation": "NULL_NATIVE_ABSENT",
+      "emptyStringPresentation": "STRICT"
+    },
+    {
+      "nativeColumn": 39,
+      "sourceField": "icm_vie_license_plate",
+      "title": "Veículo/Placa",
+      "kind": "text",
+      "total": false,
+      "nullPresentation": "NULL_NATIVE_ABSENT",
+      "emptyStringPresentation": "STRICT"
+    },
+    {
+      "nativeColumn": 40,
+      "sourceField": "icm_ttt_ore_description",
+      "title": "Ocorrência/Ocorrência",
+      "kind": "text",
+      "total": false,
+      "nullPresentation": "NULL_NATIVE_ABSENT",
+      "emptyStringPresentation": "STRICT"
+    },
+    {
+      "nativeColumn": 41,
+      "sourceField": "icm_ttt_ore_code",
+      "title": "Ocorrência/Código",
+      "kind": "numericDecimal",
+      "total": false,
+      "nullPresentation": "NULL_NATIVE_ABSENT",
+      "emptyStringPresentation": "STRICT",
+      "nativeCarrier": "XLSX:1900:builtin:0:apply=null:base=0:fmtId=0",
+      "nativeNumberEncoding": "DIRECT_BINARY64_NEAREST_EVEN_V1"
+    },
+    {
+      "nativeColumn": 42,
+      "sourceField": "icm_ttt_treatment_at",
+      "title": "Tratativa/Data tratativa",
+      "kind": "timestamp",
+      "total": false,
+      "nullPresentation": "NULL_NATIVE_BLANK",
+      "emptyStringPresentation": "STRICT",
+      "nativeCarrier": "XLSX:1900:DD/MM/YYYY HH:MM:SS:apply=1:base=0:fmtId=166"
+    },
+    {
+      "nativeColumn": 43,
+      "sourceField": "icm_ttt_dealing_type",
+      "title": "Tratativa/Tipo tratativa",
+      "kind": "enum",
+      "total": false,
+      "nullPresentation": "NULL_NATIVE_ABSENT",
+      "emptyStringPresentation": "STRICT"
+    },
+    {
+      "nativeColumn": 44,
+      "sourceField": "icm_ttt_solution_type",
+      "title": "Tratativa/Solução",
+      "kind": "enum",
+      "total": false,
+      "nullPresentation": "NULL_NATIVE_ABSENT",
+      "emptyStringPresentation": "STRICT"
+    }
+  ],
+  "enumLabels": {
+    "icm_ttt_dealing_type": {
+      "send_to_damages_dealing": "Enviar para tratativas de avarias"
+    },
+    "icm_ttt_solution_type": {
+      "continue_transport": "Continuar o transporte",
+      "finish_transport": "Finalizar o transporte",
+      "redelivery_without_freight_charge": "Liberar reentrega sem cobrança de frete"
+    }
+  },
+  "executable": true,
+  "pending": [],
+  "observedEvidencePins": [
+    {
+      "path": "C:\\Users\\suporte\\Documents\\Codex\\2026-11-06\\etl-v2-proxima-entidade\\work\\s750-presentation01\\result.json",
+      "sha256": "61E25B6BDD09F3617791A796E1A3520ECC14BCC085952248030C7DE7DC4C5DF7",
+      "bytes": 106917
+    },
+    {
+      "path": "C:\\Users\\suporte\\Documents\\Codex\\2026-11-06\\etl-v2-proxima-entidade\\work\\s750-presentation01\\parent-result.json",
+      "sha256": "9ED934C6B65B7BEDD60B84AC07BFC0FE0737F0836E942F58C1CB5E7B13B4B731",
+      "bytes": 724
+    }
+  ],
+  "scopeLimitations": [
+    "Three complete historical weeks only; no future zero-error guarantee.",
+    "All three insurance arrays contain at most one item; a separator for multiple items was not observed.",
+    "customer_communication_time is NULL in all38 occurrences; non-NULL clock presentation was not observed."
+  ]
+}

@@ -1,0 +1,27 @@
+# 0697 — Custos da captura nova coincidem; bateria de falhas em execução
+
+A captura parcial 0694 contém 198 ocorrências e 180 IDs. O diagnóstico executado sob Original 53976/0 (3.376 ms, pico de 118.362.112 bytes, Python próprio encerrado com STDIO fechado) comparou os mesmos registros com a captura completa anterior e o Excel oficial das 21:58. Preservou as repetições dos registros e aplicou a regra numérica previamente aprovada para os campos de custos, que a API entrega como texto.
+
+Custos/Manifesto, coluna 106, e Custo Total, coluna 110: os 180 grupos de IDs coincidem com o Excel, incluindo a multiplicidade das 198 ocorrências; não houve grupo diferente ou indeterminado nesses dois campos. Seis grupos tinham valores diferentes na captura anterior e mudaram na captura nova. Os demais 112 campos permaneceram iguais entre as duas capturas da API. Isso comprova alteração dos valores observados entre capturas. Não aprova as 114 colunas do dia por transitividade e não aprova uma semana inteira.
+
+Evidência protegida: `C:\Users\suporte\Documents\Codex\2026-10-27\etl-v2-supervisor-finalizacao\work\fretes-partial-content0696-run02\diagnosis.json`.
+
+O usuário pediu cobertura dos tipos relevantes de sobrecarga e falha. O candidato V2 permite até duas repetições por página e seis por unidade, com esperas de 10/20 segundos; mantém 47 requisições totais incluindo INFO e repetições, intervalo mínimo de três segundos após resposta completa, request de 30 segundos, Source de 210 segundos e Original de 300 segundos/1 GiB. Não repete 429, respostas desconhecidas ou erros fora do contrato exato de timeout 422. Quando o prazo ou orçamento não permite outra tentativa, deve encerrar preservando a captura parcial.
+
+Foi corrigida uma falha estática importante: a política declarada no manifesto precisa coincidir com a admissão assinada e a revisão efetivas. A V2 com repetição exige também prova Root da assinatura existente vinculada ao mesmo fechamento. Não se permite converter uma autorização V1 em V2 por mera alteração do manifesto. A revisão separada confirmou estaticamente o vínculo PowerShell; a paridade Java/Node está em preparo.
+
+A primeira execução da bateria PowerShell falhou antes de qualquer suíte por defeito da fixture: uma contagem de pipeline não tratava corretamente zero/uma ocorrência sob StrictMode. Original 12136/1, 3.841 ms, pico de 63.238.144 bytes; nenhuma requisição à ESL. A fixture foi corrigida sem mudar os quatro helpers de produção e a falha original foi preservada.
+
+A segunda execução passou: Original 21668/0, 24.119 ms, pico de 163.565.568 bytes. Foram 13 invocações de suítes sintéticas e quatro verificações das funções reais FctxControl/FctxFrontier contra a captura V1 completa e os dois fechamentos parciais posteriores. Nenhum filho externo, Source, HTTP ou SQL. Estado canônico restaurado, slot vazio. Os marcadores textuais das fixtures não são usados como contagem de assertivas executadas.
+
+Índice Root congelado: `outputs\fretes-retry-v2-ps-root-snapshot0697-02\root-source-index.json`, 9.127 bytes, AF8DAF4CEB2802C32BA5BAF9870E3D614C164672B7D5BF4B3E077458A9C7FF85. Resultados: `work\fretes-retry-v2-ps-qa0697-run02\worker-result.json`, `original-memory.json` e `parent-result.json`.
+
+Esses testes conferem regras e metadados; não comprovam espera real de 10/20 segundos nem comportamento do transporte sob lentidão. Ainda faltam Java/Node, revisão e testes locais de falhas repetidas, conexão/EOF, limites temporais e de recursos, antes da adoção do novo produto e de uma nova extração real. Não declarar solução universal do servidor nem qualificação completa do candidato.
+
+Estado canônico permanece 6607DCC9D46B57ECDE9A522A87F9631EEBD6FFF85B761E6A05F30F7BE371A803, 719.024 bytes, ACL B4, Root0658, 18 pares completos e nove fatos parciais. Fretes 0/3 semanas; Coletas 3/3. V1 pausado. Nenhum limite relaxado e nenhum processo, serviço ou SQL externo alterado.
+
+Atualização da mesma unidade: o ramo sem repetições também foi implementado e passou na bateria PS03, com Original 45104/0, 24.364 ms e pico de 191.033.344 bytes. A V2 sem erros exige signedPolicyProof={closure,signatureProof}; com erros, conserva retryComplete e não aceita prova adicional concorrente. V1 legado permanece compatível. Índice Root C61E782A/9.657 bytes. A bateria continua contando 13 invocações sintéticas e quatro funções contra o histórico real, sem alegar uma contagem de assertivas baseada nos marcadores.
+
+Quatro casos reais de processos próprios passaram sob Original 18272/0, em 9.372 ms, pico do job de 372.031.488 bytes: saída 42, bloqueio com encerramento em dois segundos, alocação limitada de 256 MiB e CPU com encerramento em quatro segundos, e excesso de stdout/stderr com limite de 64 KiB. Os quatro filhos tiveram PID/nascimento, encerramento, stdin fechado e EOF das duas saídas registrados. Evidências em work/fretes-owned-failure0697-run01. Isso qualifica o controle dessa bateria, não o controlador de produção.
+
+A revisão separada encontrou dois novos bloqueios reais antes de qualquer adoção: o Java parcial ainda não comparava integralmente a política da captura com a admissão assinada; o controlador Source de referência ainda fixava limites e perfil V1. Writer corrige o primeiro com fixtures cruzadas; helper corrige o controlador V2 e prepara testes com filho próprio. O build congelado 62BB/6C0203A6 está em execução apenas para qualificação local, sem Source e sem adoção; preservar seus resultados e corrigir os achados antes de nova emissão real.

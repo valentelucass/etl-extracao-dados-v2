@@ -1,0 +1,15 @@
+# Checkpoint0759 — provas reais de recebimento e cadência de Faturas concluídas
+
+**Atualização final09/11/2026 02h13:** segundo ciclo02h06m13–02h10m45 aprovado,3854registros/8datas/56HTTP atuais. Espera real após o primeiro60min08s; duas execuções em processos distintos, recuperação antiga1→0. Task própria encerradaexit0e desabilitada. Banco10010ocorrências históricas/20recebimentosSTORED/3FAILED/0RUNNING,52campos cada/520520células,0divergências por leitura independente. Dashboard/V1/rotas26/PIDs preservados. Relatório final no chatoutputs/Prova_Extracoes_e_Recebimento_0759.txt. Produção integral/demais entidades/core/mart/pub e corte continuam pendentes. LerENSAIOS-0759e runbook. Os parágrafos abaixo descrevem as etapas anteriores do ensaio, não tarefas físicas a repetir.
+
+Usuário pediu testar extrações atuais, intervalo escolhido e60min, provando como o banco novo armazena. Não perguntar novamente acesso; preservar dashboard/V1.
+
+Ler [ensaios0759](../../catalogos/integracao-etl-v2-dashboard/ENSAIOS-0759.md) e [ADR0079](../../adr/0079-qualificacao-produtiva-do-recebimento.md). Recebimento inicialmente Faturas4924, não Main/produção integral. Core/mart/pub de negócio, demais entidades,134contratos e corte continuam pendentes.
+
+29testes de escopo/compilação/estilo aprovados. Arquitetura geral possui2falhas anteriores; delta real confirmou28APIs/1campo idênticos com/sem as3classes novas. Fonte permanece em projetos. JAR produtivo rev2 isolado e dados privados em Armazenamento-Projetos/etl-extracao-dados-v2/production-receiving0759. Credenciais próprias por stdin; SQL16.0.1000.6/TLS preservados;12passos no diário manual,80tabelas, sem história Flyway falsa.
+
+Intervalo30/10–01/11 efetivamente extraído:1294registros em1179/115/0; readback de cada envelope/ordinal/hash exato.8casos SQL de falha aprovados, inclusive timeout depois de inserir e rollback sem avançar cobertura.29/10permaneceu pendente para recuperação automática. Tentativas1/2 falhas e correções causais preservadas; SQL001não editado,002 corrige caminho do envelope.
+
+Campanha real externa limitada a2ciclos, task ETL-V2-Receiving-Qualification-0759, primeiro Running às01h01de09/11. Próximo60min após terminar o primeiro. Plano da campanha está em work/receiving-campaign0759.json do chat 2026-11-08/etl-v2-sql-server-dashboard; resultados públicos em outputs/hourly0759, sem RAW. Nenhum agente deve abrir outra extração/Job pesado enquanto a tarefa atual ocupa a proteção compartilhada. Não editar os3Java/3scripts/JAR/libs presos no runtime-manifest-rev2 durante a campanha; o launcher recusa drift.
+
+Ainda pendente: fechar primeiro ciclo, observar nova data do segundo, aproveitar intervalo para conferências independentes e AST sob executor compartilhado, esperar horário real do segundo, confirmar recuperação e cobertura contínua/rotas V1, desabilitar somente a task própria ao concluir a campanha, fechar relatórios e STATES. Não declarar recorrência antes dos dois recibos. Não criar monitor para substituir o horário real ou encerrar a tarefa por ausência do usuário.

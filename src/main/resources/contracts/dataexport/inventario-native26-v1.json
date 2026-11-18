@@ -1,0 +1,303 @@
+{
+  "catalogNature": "OBSERVED_NATIVE_CANDIDATE",
+  "entity": "INVENTARIO",
+  "schema": "INVENTARIO_NATIVE26_CANDIDATE_CATALOG_V1",
+  "idColumnIndex": 8,
+  "profile": "INVENTARIO_10633_NATIVE26_V1",
+  "columns": [
+    {
+      "sourceField": "cnr_c_s_fit_corporation_sequence_number",
+      "total": false,
+      "nativeNumberEncoding": "DIRECT_BINARY64_NEAREST_EVEN_V1",
+      "nativeColumn": 1,
+      "kind": "numericDecimal",
+      "nativeCarrier": "XLSX:1900:builtin:0:apply=null:base=0:fmtId=0",
+      "emptyStringPresentation": "STRICT",
+      "nullPresentation": "NULL_NATIVE_ABSENT",
+      "title": "Nº Minuta"
+    },
+    {
+      "emptyStringPresentation": "STRICT",
+      "total": false,
+      "sourceField": "cnr_c_s_fit_pyr_nickname",
+      "nativeColumn": 2,
+      "title": "Pagador",
+      "nullPresentation": "NULL_NATIVE_ABSENT",
+      "kind": "text"
+    },
+    {
+      "emptyStringPresentation": "STRICT",
+      "total": false,
+      "sourceField": "cnr_c_s_fit_sdr_nickname",
+      "nativeColumn": 3,
+      "title": "Remetente",
+      "nullPresentation": "NULL_NATIVE_ABSENT",
+      "kind": "text"
+    },
+    {
+      "emptyStringPresentation": "STRICT",
+      "total": false,
+      "sourceField": "cnr_c_s_fit_sdr_ads_cty_name",
+      "nativeColumn": 4,
+      "title": "Origem",
+      "nullPresentation": "NULL_NATIVE_ABSENT",
+      "kind": "text"
+    },
+    {
+      "emptyStringPresentation": "STRICT",
+      "total": false,
+      "sourceField": "cnr_c_s_fit_rpt_nickname",
+      "nativeColumn": 5,
+      "title": "Destinatário",
+      "nullPresentation": "NULL_NATIVE_ABSENT",
+      "kind": "text"
+    },
+    {
+      "emptyStringPresentation": "STRICT",
+      "total": false,
+      "sourceField": "cnr_c_s_fit_rpt_ads_cty_name",
+      "nativeColumn": 6,
+      "title": "Destino",
+      "nullPresentation": "NULL_NATIVE_ABSENT",
+      "kind": "text"
+    },
+    {
+      "emptyStringPresentation": "STRICT",
+      "total": false,
+      "sourceField": "cnr_c_s_fit_dyn_name",
+      "nativeColumn": 7,
+      "title": "Região Entrega",
+      "nullPresentation": "NULL_NATIVE_ABSENT",
+      "kind": "text"
+    },
+    {
+      "emptyStringPresentation": "STRICT",
+      "total": false,
+      "sourceField": "cnr_c_s_fit_dyn_drt_nickname",
+      "nativeColumn": 8,
+      "title": "Filial Entregadora",
+      "nullPresentation": "NULL_NATIVE_ABSENT",
+      "kind": "text"
+    },
+    {
+      "sourceField": "sequence_code",
+      "total": false,
+      "nativeColumn": 9,
+      "kind": "integer",
+      "nativeCarrier": "XLSX:1900:builtin:0:apply=null:base=0:fmtId=0",
+      "emptyStringPresentation": "STRICT",
+      "nullPresentation": "STRICT",
+      "title": "N° Ordem"
+    },
+    {
+      "emptyStringPresentation": "STRICT",
+      "total": false,
+      "sourceField": "cnr_crn_psn_nickname",
+      "nativeColumn": 10,
+      "title": "Filial",
+      "nullPresentation": "STRICT",
+      "kind": "text"
+    },
+    {
+      "emptyStringPresentation": "STRICT",
+      "total": false,
+      "sourceField": "type",
+      "nativeColumn": 11,
+      "title": "Tipo",
+      "nullPresentation": "STRICT",
+      "kind": "enum"
+    },
+    {
+      "sourceField": "started_at",
+      "total": false,
+      "nativeColumn": 12,
+      "kind": "timestamp",
+      "nativeCarrier": "XLSX:1900:DD/MM/YYYY HH:MM:SS:apply=1:base=0:fmtId=164",
+      "emptyStringPresentation": "STRICT",
+      "nullPresentation": "STRICT",
+      "title": "Data/Hora início"
+    },
+    {
+      "sourceField": "finished_at",
+      "total": false,
+      "nativeColumn": 13,
+      "kind": "timestamp",
+      "nativeCarrier": "XLSX:1900:DD/MM/YYYY HH:MM:SS:apply=1:base=0:fmtId=164",
+      "emptyStringPresentation": "STRICT",
+      "nullPresentation": "NULL_NATIVE_BLANK",
+      "title": "Data/Hora fim"
+    },
+    {
+      "emptyStringPresentation": "STRICT",
+      "total": false,
+      "sourceField": "status",
+      "nativeColumn": 14,
+      "title": "Status",
+      "nullPresentation": "STRICT",
+      "kind": "enum"
+    },
+    {
+      "emptyStringPresentation": "STRICT",
+      "total": false,
+      "sourceField": "cnr_cis_eoe_psn_name",
+      "nativeColumn": 15,
+      "title": "Conferente",
+      "nullPresentation": "NULL_NATIVE_ABSENT",
+      "kind": "text"
+    },
+    {
+      "sourceField": "cnr_c_s_fit_invoices_mapping",
+      "total": false,
+      "arraySeparator": ", ",
+      "nativeColumn": 16,
+      "kind": "stringArray",
+      "emptyStringPresentation": "STRICT",
+      "nullPresentation": "NULL_NATIVE_ABSENT",
+      "title": "Notas Fiscais"
+    },
+    {
+      "sourceField": "cnr_c_s_fit_invoices_value",
+      "total": true,
+      "nativeNumberEncoding": "DIRECT_BINARY64_NEAREST_EVEN_V1",
+      "nativeColumn": 17,
+      "kind": "decimalString",
+      "nativeCarrier": "XLSX:1900:builtin:0:apply=null:base=0:fmtId=0",
+      "emptyStringPresentation": "STRICT",
+      "nullPresentation": "NULL_NATIVE_ABSENT",
+      "title": "Valor de NF"
+    },
+    {
+      "sourceField": "cnr_c_s_fit_real_weight",
+      "total": true,
+      "nativeNumberEncoding": "DIRECT_BINARY64_NEAREST_EVEN_V1",
+      "nativeColumn": 18,
+      "kind": "decimalString",
+      "nativeCarrier": "XLSX:1900:builtin:0:apply=null:base=0:fmtId=0",
+      "emptyStringPresentation": "STRICT",
+      "nullPresentation": "NULL_NATIVE_ABSENT",
+      "title": "Peso Real"
+    },
+    {
+      "sourceField": "cnr_c_s_fit_total_cubic_volume",
+      "total": true,
+      "nativeNumberEncoding": "DIRECT_BINARY64_NEAREST_EVEN_V1",
+      "nativeColumn": 19,
+      "kind": "decimalString",
+      "nativeCarrier": "XLSX:1900:builtin:0:apply=null:base=0:fmtId=0",
+      "emptyStringPresentation": "STRICT",
+      "nullPresentation": "NULL_NATIVE_ABSENT",
+      "title": "M³"
+    },
+    {
+      "sourceField": "cnr_c_s_fit_taxed_weight",
+      "total": true,
+      "nativeNumberEncoding": "DIRECT_BINARY64_NEAREST_EVEN_V1",
+      "nativeColumn": 20,
+      "kind": "decimalString",
+      "nativeCarrier": "XLSX:1900:builtin:0:apply=null:base=0:fmtId=0",
+      "emptyStringPresentation": "STRICT",
+      "nullPresentation": "NULL_NATIVE_ABSENT",
+      "title": "Peso Taxado"
+    },
+    {
+      "sourceField": "cnr_c_s_fit_invoices_volumes",
+      "total": true,
+      "nativeNumberEncoding": "DIRECT_BINARY64_NEAREST_EVEN_V1",
+      "nativeColumn": 21,
+      "kind": "numericDecimal",
+      "nativeCarrier": "XLSX:1900:builtin:0:apply=null:base=0:fmtId=0",
+      "emptyStringPresentation": "STRICT",
+      "nullPresentation": "NULL_NATIVE_ABSENT",
+      "title": "Volumes"
+    },
+    {
+      "sourceField": "cnr_c_s_read_volumes",
+      "total": true,
+      "nativeNumberEncoding": "DIRECT_BINARY64_NEAREST_EVEN_V1",
+      "nativeColumn": 22,
+      "kind": "numericDecimal",
+      "nativeCarrier": "XLSX:1900:builtin:0:apply=null:base=0:fmtId=0",
+      "emptyStringPresentation": "STRICT",
+      "nullPresentation": "NULL_NATIVE_ABSENT",
+      "title": "Volumes Lidos"
+    },
+    {
+      "sourceField": "cnr_c_s_fit_dpn_delivery_prediction_at",
+      "total": false,
+      "nativeColumn": 23,
+      "kind": "timestamp",
+      "nativeCarrier": "XLSX:1900:DD/MM/YYYY HH:MM:SS:apply=1:base=0:fmtId=164",
+      "emptyStringPresentation": "STRICT",
+      "nullPresentation": "NULL_NATIVE_BLANK",
+      "title": "Previsão de Entrega"
+    },
+    {
+      "sourceField": "cnr_c_s_fit_dpn_performance_finished_at",
+      "total": false,
+      "nativeColumn": 24,
+      "kind": "timestamp",
+      "nativeCarrier": "XLSX:1900:DD/MM/YYYY HH:MM:SS:apply=1:base=0:fmtId=164",
+      "emptyStringPresentation": "STRICT",
+      "nullPresentation": "NULL_NATIVE_BLANK",
+      "title": "Finalização da Performance"
+    },
+    {
+      "sourceField": "cnr_c_s_fit_fte_lce_occurrence_at",
+      "total": false,
+      "nativeColumn": 25,
+      "kind": "timestamp",
+      "nativeCarrier": "XLSX:1900:DD/MM/YYYY HH:MM:SS:apply=1:base=0:fmtId=164",
+      "emptyStringPresentation": "STRICT",
+      "nullPresentation": "NULL_NATIVE_BLANK",
+      "title": "Data Última Ocorrência"
+    },
+    {
+      "emptyStringPresentation": "STRICT",
+      "total": false,
+      "sourceField": "cnr_c_s_fit_fte_lce_ore_description",
+      "nativeColumn": 26,
+      "title": "Ocorrência",
+      "nullPresentation": "NULL_NATIVE_ABSENT",
+      "kind": "text"
+    }
+  ],
+  "enumLabels": {
+    "type": {
+      "CheckIn::Order::Unloading": "Descarregamento",
+      "CheckIn::Order::Loading": "Carregamento",
+      "CheckIn::Order::Return": "Retorno",
+      "CheckIn::Order::Receipt": "Recebimento",
+      "CheckIn::Order::Picking": "Picking"
+    },
+    "status": {
+      "finished": "Finalizada",
+      "pending": "Pendente"
+    }
+  },
+  "evidence": {
+    "purpose": "Diagnostic candidate only. No equality or historical acceptance inferred from catalog construction.",
+    "mappingColumns7And8IsExplicitHypothesisUntilFullComparison": true,
+    "sourceNativeProfiles": [
+      {
+        "path": "C:\\Users\\suporte\\Documents\\Codex\\2026-11-06\\etl-v2-proxima-entidade\\work\\i749-pair-profile12-01\\result.json",
+        "sha256": "8588380C3128F57EEB035EA628A05CE1E670CCC0DDD365109A029F46FF7495AF",
+        "bytes": 83690
+      },
+      {
+        "path": "C:\\Users\\suporte\\Documents\\Codex\\2026-11-06\\etl-v2-proxima-entidade\\work\\i749-pair-profile19-01\\result.json",
+        "sha256": "085B57ADD983EF3544D7FB733A27F97DAD27033156CA0668CB984F28ECF75673",
+        "bytes": 26730
+      }
+    ],
+    "timestampProjectionIsCandidateUntilFullComparison": true,
+    "nativeObservation": {
+      "path": "C:\\Users\\suporte\\Documents\\Codex\\2026-11-06\\etl-v2-proxima-entidade\\work\\i749-native26-03\\result.json",
+      "sha256": "8973F5D8E13D73C8EC6F27A60342808BE7AD3FFEBC7FFDFCA56387AEC15C1A7A",
+      "bytes": 37715
+    }
+  },
+  "contentAccepted": false,
+  "presentationQualified": false,
+  "totalColumnCount": 6,
+  "reportId": 10633
+}

@@ -1,0 +1,265 @@
+{
+  "schema": "ETL_V2_PERMANENT_EXPORT_IMPLEMENTATION_HANDOFF_V1",
+  "clientDate": "2026-11-05",
+  "businessTimezone": "America/Sao_Paulo",
+  "status": "CODE_PREPARED_FOR_ROOT_REVIEW_AND_BOUNDED_OFFLINE_EXECUTION",
+  "repository": "C:\\Users\\suporte\\Documents\\projetos\\etl-extracao-dados-v2",
+  "branch": "main",
+  "startingHead": "2956aa1b1a90a9c1f3dbc65493d252bb0aa8e6d4",
+  "completeUserObjectiveAchieved": false,
+  "rootSourceAuthorityCreated": false,
+  "changedCodeTestAndResourceFiles": [
+    {
+      "file": "src/main/java/br/com/esl/etl/v2/bootstrap/Main.java",
+      "path": "C:\\Users\\suporte\\Documents\\projetos\\etl-extracao-dados-v2\\src\\main\\java\\br\\com\\esl\\etl\\v2\\bootstrap\\Main.java",
+      "sha256": "a18427f3ea05f9bcf518eebddac6ccc76f17f5aecfa68607b8597bd93cbbb320",
+      "bytes": 35098
+    },
+    {
+      "file": "src/main/java/br/com/esl/etl/v2/bootstrap/IndependentExportCommand.java",
+      "path": "C:\\Users\\suporte\\Documents\\projetos\\etl-extracao-dados-v2\\src\\main\\java\\br\\com\\esl\\etl\\v2\\bootstrap\\IndependentExportCommand.java",
+      "sha256": "d013b1d465c9a45e70b91162e27f981bc41ebf9e6b5b944be9fa7cfc15a8b9d6",
+      "bytes": 2760
+    },
+    {
+      "file": "src/test/java/br/com/esl/etl/v2/bootstrap/IndependentExportCommandTest.java",
+      "path": "C:\\Users\\suporte\\Documents\\projetos\\etl-extracao-dados-v2\\src\\test\\java\\br\\com\\esl\\etl\\v2\\bootstrap\\IndependentExportCommandTest.java",
+      "sha256": "da90b1712dfce6e88060423620db6c727039bf5593c7fc7a5b6a368571468049",
+      "bytes": 2852
+    },
+    {
+      "file": "src/main/java/br/com/esl/etl/v2/plataforma/reconciliacao/exportacao/BoundedExportWorkbook.java",
+      "path": "C:\\Users\\suporte\\Documents\\projetos\\etl-extracao-dados-v2\\src\\main\\java\\br\\com\\esl\\etl\\v2\\plataforma\\reconciliacao\\exportacao\\BoundedExportWorkbook.java",
+      "sha256": "dfef6073ea2a7a6f30f7f4d548713db062250334bdf917ed5df403061d523995",
+      "bytes": 17965
+    },
+    {
+      "file": "src/main/java/br/com/esl/etl/v2/plataforma/reconciliacao/exportacao/ExactBinary64.java",
+      "path": "C:\\Users\\suporte\\Documents\\projetos\\etl-extracao-dados-v2\\src\\main\\java\\br\\com\\esl\\etl\\v2\\plataforma\\reconciliacao\\exportacao\\ExactBinary64.java",
+      "sha256": "1efe70e9e9d648af4c4a14d0de486318f80e395301b81233765339301888c6d7",
+      "bytes": 2294
+    },
+    {
+      "file": "src/main/java/br/com/esl/etl/v2/plataforma/reconciliacao/exportacao/ExactExportTable.java",
+      "path": "C:\\Users\\suporte\\Documents\\projetos\\etl-extracao-dados-v2\\src\\main\\java\\br\\com\\esl\\etl\\v2\\plataforma\\reconciliacao\\exportacao\\ExactExportTable.java",
+      "sha256": "921739f930c986bd360171cd01faf7f349c8ce9278f7eb057a07fa8058048c2b",
+      "bytes": 10988
+    },
+    {
+      "file": "src/main/java/br/com/esl/etl/v2/plataforma/reconciliacao/exportacao/ExportColumnCatalog.java",
+      "path": "C:\\Users\\suporte\\Documents\\projetos\\etl-extracao-dados-v2\\src\\main\\java\\br\\com\\esl\\etl\\v2\\plataforma\\reconciliacao\\exportacao\\ExportColumnCatalog.java",
+      "sha256": "955a64156a5f46098e9274bad475029bc14232cf01c350b7507e792e45ff9652",
+      "bytes": 1947
+    },
+    {
+      "file": "src/main/java/br/com/esl/etl/v2/plataforma/reconciliacao/exportacao/ExportFileLifecycle.java",
+      "path": "C:\\Users\\suporte\\Documents\\projetos\\etl-extracao-dados-v2\\src\\main\\java\\br\\com\\esl\\etl\\v2\\plataforma\\reconciliacao\\exportacao\\ExportFileLifecycle.java",
+      "sha256": "68b48f2e598cf49da33ada7a5e8adfd91da9281f5bb641bfa6497aa06295d8e0",
+      "bytes": 9518
+    },
+    {
+      "file": "src/main/java/br/com/esl/etl/v2/plataforma/reconciliacao/exportacao/ExportFilePoller.java",
+      "path": "C:\\Users\\suporte\\Documents\\projetos\\etl-extracao-dados-v2\\src\\main\\java\\br\\com\\esl\\etl\\v2\\plataforma\\reconciliacao\\exportacao\\ExportFilePoller.java",
+      "sha256": "95c79def97867d58b1bc32d158505494dcd2508af346b9f200887bc93ce39b33",
+      "bytes": 5024
+    },
+    {
+      "file": "src/main/java/br/com/esl/etl/v2/plataforma/reconciliacao/exportacao/ExportValidationSupport.java",
+      "path": "C:\\Users\\suporte\\Documents\\projetos\\etl-extracao-dados-v2\\src\\main\\java\\br\\com\\esl\\etl\\v2\\plataforma\\reconciliacao\\exportacao\\ExportValidationSupport.java",
+      "sha256": "360d02112d58a5657ffc3d0ce09806ac15e46f01d265574d4df512b165bd402b",
+      "bytes": 5741
+    },
+    {
+      "file": "src/main/java/br/com/esl/etl/v2/plataforma/reconciliacao/exportacao/IndependentExportCycle.java",
+      "path": "C:\\Users\\suporte\\Documents\\projetos\\etl-extracao-dados-v2\\src\\main\\java\\br\\com\\esl\\etl\\v2\\plataforma\\reconciliacao\\exportacao\\IndependentExportCycle.java",
+      "sha256": "16e91bf974e4376c49a432e96fb6b851d2dd32b8d57165d7af6875d46856c6a8",
+      "bytes": 8433
+    },
+    {
+      "file": "src/main/java/br/com/esl/etl/v2/plataforma/reconciliacao/exportacao/IndependentExportRequest.java",
+      "path": "C:\\Users\\suporte\\Documents\\projetos\\etl-extracao-dados-v2\\src\\main\\java\\br\\com\\esl\\etl\\v2\\plataforma\\reconciliacao\\exportacao\\IndependentExportRequest.java",
+      "sha256": "d237a28ee1d8d8872f2fea6ae8f52625f6ec0f3369e244d5304bfe47a4214404",
+      "bytes": 6499
+    },
+    {
+      "file": "src/main/java/br/com/esl/etl/v2/plataforma/reconciliacao/exportacao/IndependentExportResult.java",
+      "path": "C:\\Users\\suporte\\Documents\\projetos\\etl-extracao-dados-v2\\src\\main\\java\\br\\com\\esl\\etl\\v2\\plataforma\\reconciliacao\\exportacao\\IndependentExportResult.java",
+      "sha256": "a5c900d2f59b24e10e01cfba09c8edb72d9b834622b2c3355f0a19b9cbc14cdd",
+      "bytes": 4075
+    },
+    {
+      "file": "src/main/java/br/com/esl/etl/v2/plataforma/reconciliacao/exportacao/IndependentExportValidation.java",
+      "path": "C:\\Users\\suporte\\Documents\\projetos\\etl-extracao-dados-v2\\src\\main\\java\\br\\com\\esl\\etl\\v2\\plataforma\\reconciliacao\\exportacao\\IndependentExportValidation.java",
+      "sha256": "c94eb7c7b7844fa853711ef4cda2f8a6a7b6e489cf68089ba9cbbda009c873c8",
+      "bytes": 13892
+    },
+    {
+      "file": "src/test/java/br/com/esl/etl/v2/plataforma/reconciliacao/exportacao/ExactBinary64Test.java",
+      "path": "C:\\Users\\suporte\\Documents\\projetos\\etl-extracao-dados-v2\\src\\test\\java\\br\\com\\esl\\etl\\v2\\plataforma\\reconciliacao\\exportacao\\ExactBinary64Test.java",
+      "sha256": "cbd40abe3cff8a0759ed5f753ae6c8482be05237dda9417cb67a2ca9e00d35cb",
+      "bytes": 1711
+    },
+    {
+      "file": "src/test/java/br/com/esl/etl/v2/plataforma/reconciliacao/exportacao/ExactExportTableTest.java",
+      "path": "C:\\Users\\suporte\\Documents\\projetos\\etl-extracao-dados-v2\\src\\test\\java\\br\\com\\esl\\etl\\v2\\plataforma\\reconciliacao\\exportacao\\ExactExportTableTest.java",
+      "sha256": "f767dd38ff8ec437a02ab42cc1d65cfff1834f5ab378d890bdcf7aebc4c1f67d",
+      "bytes": 5961
+    },
+    {
+      "file": "src/test/java/br/com/esl/etl/v2/plataforma/reconciliacao/exportacao/ExportFileLifecycleTest.java",
+      "path": "C:\\Users\\suporte\\Documents\\projetos\\etl-extracao-dados-v2\\src\\test\\java\\br\\com\\esl\\etl\\v2\\plataforma\\reconciliacao\\exportacao\\ExportFileLifecycleTest.java",
+      "sha256": "5486c5631184a9cd59efb693bd570d5ca2219e6407a173826a875aef0da242b5",
+      "bytes": 9695
+    },
+    {
+      "file": "src/test/java/br/com/esl/etl/v2/plataforma/reconciliacao/exportacao/ExportPairFixture.java",
+      "path": "C:\\Users\\suporte\\Documents\\projetos\\etl-extracao-dados-v2\\src\\test\\java\\br\\com\\esl\\etl\\v2\\plataforma\\reconciliacao\\exportacao\\ExportPairFixture.java",
+      "sha256": "825f85935b841428dc766f7c7cad4fc7cc779291f48844c73cd7837ebadb9bc9",
+      "bytes": 9642
+    },
+    {
+      "file": "src/test/java/br/com/esl/etl/v2/plataforma/reconciliacao/exportacao/IndependentExportCycleTest.java",
+      "path": "C:\\Users\\suporte\\Documents\\projetos\\etl-extracao-dados-v2\\src\\test\\java\\br\\com\\esl\\etl\\v2\\plataforma\\reconciliacao\\exportacao\\IndependentExportCycleTest.java",
+      "sha256": "e04ace2a890ba197e93d1b3c23426ee6bd8f0db585df71e5145d593d6ca121d1",
+      "bytes": 7542
+    },
+    {
+      "file": "src/test/java/br/com/esl/etl/v2/plataforma/reconciliacao/exportacao/IndependentExportResultTest.java",
+      "path": "C:\\Users\\suporte\\Documents\\projetos\\etl-extracao-dados-v2\\src\\test\\java\\br\\com\\esl\\etl\\v2\\plataforma\\reconciliacao\\exportacao\\IndependentExportResultTest.java",
+      "sha256": "00ffb030b1b13c53ab067de2972013bfb758ea4b8b5051c67dd5c2035a39687b",
+      "bytes": 1963
+    },
+    {
+      "file": "src/test/java/br/com/esl/etl/v2/plataforma/reconciliacao/exportacao/IndependentExportValidationTest.java",
+      "path": "C:\\Users\\suporte\\Documents\\projetos\\etl-extracao-dados-v2\\src\\test\\java\\br\\com\\esl\\etl\\v2\\plataforma\\reconciliacao\\exportacao\\IndependentExportValidationTest.java",
+      "sha256": "3909f8fef871d7fa29b5228b4119d591a67130332173e6f2c582e86f4541f6d4",
+      "bytes": 9053
+    },
+    {
+      "file": "src/main/resources/contracts/dataexport/fretes-independent-export-columns-v1.json",
+      "path": "C:\\Users\\suporte\\Documents\\projetos\\etl-extracao-dados-v2\\src\\main\\resources\\contracts\\dataexport\\fretes-independent-export-columns-v1.json",
+      "sha256": "1b796ac6ebd4fba197c5f3ff6995242e32a8903a13484ca8f42afb5ed6f17724",
+      "bytes": 26225
+    },
+    {
+      "file": "scripts/validation/Prepare-IndependentExportOfflineUnit.ps1",
+      "path": "C:\\Users\\suporte\\Documents\\projetos\\etl-extracao-dados-v2\\scripts\\validation\\Prepare-IndependentExportOfflineUnit.ps1",
+      "sha256": "7cabb01e6626ff6dd1c11ae94b80b17d85c4c405c530403fe1ef2169c25f35a9",
+      "bytes": 5720
+    }
+  ],
+  "codeIntegration": {
+    "offlineMainRoute": "Main.run -> IndependentExportCommand -> IndependentExportRequest.plan | ExportFileLifecycle.statusPlan | IndependentExportValidation.compare -> BoundedExportWorkbook -> ExactExportTable -> IndependentExportResult.persist",
+    "mainEntryWiredByStaticCode": true,
+    "mainEntryExecutionVerified": false,
+    "existingDataRouteChanged": false,
+    "explicitFileProfile": "FRETES_6389_EXPORT_XLSX_V1",
+    "apiRequestContract": "POST /api/analytics/reports/6389/export, export_to_ftp=false; dynamic service_at interval; all sixteen observed filter controls mandatory; nonempty unqualified auxiliary filters refuse",
+    "boundedSourceLibrary": "IndependentExportCycle.submit requires owner PostJournal reservation/readback and yields pending control; ExportFilePoller.drive automatically obtains fresh admissions inside the caller budget, reserves/records each GET and handles enqueued/generating/generated/error",
+    "polling": "Maximum ten queries and a fixed deadline no greater than fifteen minutes from last known response; each request at most thirty seconds; three seconds after response completion; no repeated POST, automatic transport retry, redirect or fallback",
+    "ownerResponsibilities": "Root must bind the genuine already admitted single-wire-attempt adapters, persistent journals, shared ESL channel, finite unit budget, download and independent operator/session observation. These interfaces do not issue Source authority.",
+    "currentOperationalRootAdapterBound": false,
+    "automaticDownloadAndReferenceComparisonOrchestratedFromOperationalMain": false,
+    "mainControlAdoptionProven": false,
+    "mainResumeAllowed": false,
+    "dashboardConsumptionVerified": false
+  },
+  "permanentValidation": {
+    "profileScope": "Fretes API XLSX versus independently requested UI XLSX; generic typed occurrence kernel is reusable, but the Coletas source projection is not yet ported to this entry",
+    "fullCommonContent": "Every one of 114 reference columns; typed native lexemes/carriers, complete tuples, occurrence multiplicity, per-ID bags, per-column changed-ID counts; API extras allowed",
+    "totals": "Historical 114 field identities and exactly 50 INTEGER_EXACT/BINARY64_ENCODING129 selections ported as pinned control metadata; independent exact decimal and integer dyadic-unit sums. New Java encoder requires differential qualification against the existing encoder129 before historical equivalence may be claimed.",
+    "nullPolicy": "ABSENT, NULL, present BLANK, empty TEXT, numeric zero and numeric strings remain distinct; no deduplication or generic null coercion",
+    "provenance": "Attempt/cycle ID, separate file/request IDs, request/config/mapping/admission pins, acquisition evidence and filter-to-POST/click observations; pre/post input pin checks",
+    "time": "Offset and IANA zone checked; SECOND/MINUTE precision preserved as uncertainty intervals; request proximity never proves identical snapshots or temporal causality",
+    "period": "Dynamic inclusive period, all rows inspected using service_at and Excel date system; no hardcoded capture week or source file ID; only exact observed ISO and dd/MM/yyyy date-filter presentations",
+    "diagnosticExecutionReceipt": "Main compare requires a fresh --output; execution ID, exact manifest/config/pair and diagnostic hash are fixed and read back during execution, with a separate receipt. Existing outputs are never overwritten.",
+    "pending": "Different content stays pending investigation/new controlled pair; temporal explanation never grants success; unresolved totals and distant requests stay pending",
+    "parsingBounds": "8 MiB per pinned workbook; 32 ZIP parts; 64 MiB per part / 96 MiB aggregate inflation; 650000 physical cells per workbook, 1200000 selected cells per invocation, 12000 rows per side, 256 column ceiling, 150-second monotonic validation deadline; formulas/opaque cells and malformed EOF refuse",
+    "selfIssuedAcceptance": false
+  },
+  "verifiedStaticPreparation": {
+    "codeAndControlPinsChecked": 25,
+    "syntheticJUnitMethodsDeclared": 57,
+    "syntheticJUnitClasses": 7,
+    "syntheticJUnitMethodsExecuted": 0,
+    "gitDiffWhitespaceForOwnedTrackedMain": "PASS",
+    "utf8ForPinnedCodeAndControls": "STRICT_DECODE_PASS",
+    "JavaCompilation": "NOT_EXECUTED",
+    "formatter": "NOT_EXECUTED",
+    "checkstyle": "NOT_EXECUTED",
+    "tests": "NOT_EXECUTED",
+    "graphUpdate": "NOT_EXECUTED; Python/heavy execution reserved to Root",
+    "Source": 0,
+    "HTTP": 0,
+    "SQL": 0,
+    "UI": 0,
+    "CIM": 0,
+    "credentialReads": 0,
+    "OriginalBusinessReads": 0
+  },
+  "regressionCoverageDeclared": [
+    "Typed values, missing/null/blank/empty/zero differences and exact large decimal sums",
+    "Same counts and sums with changed values; cross-row swaps invisible to column histograms",
+    "Duplicate conservation, missing duplicates and per-ID multiplicity changes",
+    "All 114 columns / 50 field models and extra API column acceptance",
+    "Wrong period/filter/timezone, distant requests, equal displayed minutes without snapshot proof, rows outside scope",
+    "Swapped admission/pair/input pin, missing empty filter, wrong click/file/request observation",
+    "No formula cached-value acceptance; malformed ZIP EOF; date-system differences",
+    "One POST, durable owner admission contract, duplicate post reservation refusal, 429/302/unknown outcome and deadline stops",
+    "200 generating then generated automatically inside a finite budget, record-before-next-query, stale nonce/admission refusal, budget exhaustion pending, failed journal reconciliation barrier",
+    "Runtime diagnostic/receipt hash linking exact invocation, manifest, configuration and inputs"
+  ],
+  "rootOfflineUnit": {
+    "path": "C:\\Users\\suporte\\Documents\\Codex\\2026-11-05\\etl-v2-implementar-extracao-validacao-permanentes\\outputs\\independent-export-offline-unit-v2\\offline-unit.PREPARED.json",
+    "sha256": "6ba40d38c6d06c0dc5195f888a7f78a40a77972fbaed6e0477274a09a1f45597",
+    "bytes": 16732,
+    "status": "PREPARED_NOT_EXECUTED_NOT_APPROVED",
+    "constraints": "Root Original only; 1 GiB job/process; format unit <=60s then final-byte repin; separate offline test unit <=300s, -Xmx512m, forkCount=0, Maven offline, only seven named synthetic classes; zero Source/SQL/business files/credentials/CIM",
+    "preFormattingPinsAreNotFinalQualification": true,
+    "unitV1": "Superseded preparation only; do not execute because code changed afterward"
+  },
+  "consumerContractFindings": {
+    "pins": [
+      {
+        "file": "backend/src/main/java/com/dashboard/api/repository/FretesDashboardSqlRepository.java",
+        "path": "C:\\Users\\suporte\\Documents\\projetos\\dashboards-etl\\backend\\src\\main\\java\\com\\dashboard\\api\\repository\\FretesDashboardSqlRepository.java",
+        "bytes": 10769,
+        "sha256": "b0f6fd399bbfc8ffb53595bdccfb7342721607c562df163bedf7611b682e40ce"
+      },
+      {
+        "file": "backend/src/main/java/com/dashboard/api/contract/ColetasViewContractValidator.java",
+        "path": "C:\\Users\\suporte\\Documents\\projetos\\dashboards-etl\\backend\\src\\main\\java\\com\\dashboard\\api\\contract\\ColetasViewContractValidator.java",
+        "bytes": 7925,
+        "sha256": "ba4c2e4f6dc9c188e871fd097a91c462aaa8e7f9caeb9b9391d2b98428daa913"
+      },
+      {
+        "file": "backend/src/main/java/com/dashboard/api/model/VisaoFretesEntity.java",
+        "path": "C:\\Users\\suporte\\Documents\\projetos\\dashboards-etl\\backend\\src\\main\\java\\com\\dashboard\\api\\model\\VisaoFretesEntity.java",
+        "bytes": 11941,
+        "sha256": "3ca69bc37a0e78ed659a499df6ee99001777b97cb1b92c8b8c951ac300bb8ca7"
+      }
+    ],
+    "fretesPeriodGap": "FretesDashboardSqlRepository.java:43-44 filters data_referencia_periodo; lines129-130 derive it from data_referencia_faturamento_date. The validated API/ESL profile filters freights.service_at. Their period semantics are not interchangeable without an explicit approved consumer mapping.",
+    "fretesPublicationGap": "The dashboard consumes dbo.fato_fretes_faturamento with excluido_na_origem=0; a pair of matching export files does not populate this consumer table or prove the publication grain, deletion/snapshot or endpoint roundtrip.",
+    "fretesDerivedFieldsPending": "The consumer currently supplies previsao_entrega as NULL and three tax fields as zero in its SQL composition; whether they should map to export content needs an explicit business/consumer contract, not automatic replacement.",
+    "coletasGap": "The existing 21-column consumer contract still requires native date families, Volumes compatible with Integer, exclusion as bit and accepted status/region/publication semantics. Three approved 31-column capture comparisons do not prove SQL publication or endpoint consumption.",
+    "implementedCoverageReport": "The new comparator reports missing columns relative only to the pinned configuration declaration and labels actual consumer verification false. No real consumer coverage claim is made by this unit.",
+    "dashboardFilesChanged": []
+  },
+  "remainingRequiredWork": [
+    "Root formats and repins final bytes, reviews the diff and executes the exact bounded synthetic unit. Fix any observed compile/style/test defect before claiming qualification.",
+    "Qualify this Java XLSX/encoder port against existing independent ProjectionBag, keyed comparison, native style profiles and fifty-total/encoder129 qualifiers, using bounded Source0 Originals; no historical acceptance is inherited.",
+    "Bind the genuine Root transport, durable shared admission journals and ESL coordinator to the permanent source library, including bounded download and complete interval orchestration; prove its call path from the eligible operational caller. Offline Main wiring is not Main Source adoption.",
+    "Port and qualify the existing Coletas JSON-to-common-occurrence/presentation adapter into the same permanent validation entry; do not infer new extractor value fixes from representation-only differences.",
+    "Keep UI/session acquisition honest: absent independent observation/reference remains pending; preserve original literals and provenance instead of claiming UI automation.",
+    "Finish the third Fretes week through the Root-owned lifecycle and controlled independent comparison; the last received fact was HTTP200 generating, not an approved week.",
+    "Prepare the approved domain/publication bridge to the actual Coletas/Fretes dashboard contracts, then prove the real roundtrip under separate Root authority. No SQL was performed here."
+  ],
+  "preservation": {
+    "messagesToOtherChats": 0,
+    "V1": "Preserved paused state; no process or service operation",
+    "sources": "Data Export for entities; GraphQL remains users-only; no source switch or business value adjustment",
+    "AGENTS_STATES_RETOMADA": "Existing concurrent edits preserved; not changed by this implementation chat",
+    "supervisorCanonicalSlotsACLServices": "Not accessed or changed"
+  }
+}

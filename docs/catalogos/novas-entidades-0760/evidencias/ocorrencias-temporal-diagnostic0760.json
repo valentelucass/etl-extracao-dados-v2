@@ -1,0 +1,489 @@
+{
+  "schema": "NEW_ENTITIES_COMPARISON0760",
+  "reportId": 12072,
+  "day": "2026-11-08",
+  "rows": 279,
+  "fields": 20,
+  "cells": 5580,
+  "nativeFileId": "1777562",
+  "allFieldsMapped": false,
+  "completeRowMultisetEqual": false,
+  "allColumnsEqual": false,
+  "anchorGroupsEqual": true,
+  "fieldsDetail": [
+    {
+      "field": "ice_f_e_fit_corporation_sequence_number",
+      "column": 1,
+      "matchingPolicies": [
+        "DIRECT"
+      ],
+      "selectedPolicy": "DIRECT",
+      "columnMultisetEqual": true,
+      "nonNullObserved": true,
+      "profile": {
+        "emptyStrings": 0,
+        "maximumNumericTextPrecision": 0,
+        "maximumNumericTextScale": 0,
+        "maximumIntegerDigits": 6,
+        "arrayItemMaxUtf16": 0,
+        "objectValueTypes": {},
+        "sourceOffsets": {},
+        "timestampsWithFraction": 0
+      }
+    },
+    {
+      "field": "ice_f_e_ioe_number",
+      "column": 2,
+      "matchingPolicies": [
+        "DIRECT",
+        "EMPTY_STRING_BLANK"
+      ],
+      "selectedPolicy": "DIRECT",
+      "columnMultisetEqual": true,
+      "nonNullObserved": true,
+      "profile": {
+        "emptyStrings": 0,
+        "maximumNumericTextPrecision": 7,
+        "maximumNumericTextScale": 0,
+        "maximumIntegerDigits": 0,
+        "arrayItemMaxUtf16": 0,
+        "objectValueTypes": {},
+        "sourceOffsets": {},
+        "timestampsWithFraction": 0
+      }
+    },
+    {
+      "field": "ice_fit_fhe_cte_number",
+      "column": 3,
+      "matchingPolicies": [
+        "DIRECT"
+      ],
+      "selectedPolicy": "DIRECT",
+      "columnMultisetEqual": true,
+      "nonNullObserved": true,
+      "profile": {
+        "emptyStrings": 0,
+        "maximumNumericTextPrecision": 0,
+        "maximumNumericTextScale": 0,
+        "maximumIntegerDigits": 6,
+        "arrayItemMaxUtf16": 0,
+        "objectValueTypes": {},
+        "sourceOffsets": {},
+        "timestampsWithFraction": 0
+      }
+    },
+    {
+      "field": "ice_ore_code",
+      "column": 4,
+      "matchingPolicies": [
+        "DIRECT"
+      ],
+      "selectedPolicy": "DIRECT",
+      "columnMultisetEqual": true,
+      "nonNullObserved": true,
+      "profile": {
+        "emptyStrings": 0,
+        "maximumNumericTextPrecision": 0,
+        "maximumNumericTextScale": 0,
+        "maximumIntegerDigits": 3,
+        "arrayItemMaxUtf16": 0,
+        "objectValueTypes": {},
+        "sourceOffsets": {},
+        "timestampsWithFraction": 0
+      }
+    },
+    {
+      "field": "ice_ore_description",
+      "column": 5,
+      "matchingPolicies": [
+        "DIRECT",
+        "EMPTY_STRING_BLANK"
+      ],
+      "selectedPolicy": "DIRECT",
+      "columnMultisetEqual": true,
+      "nonNullObserved": true,
+      "profile": {
+        "emptyStrings": 0,
+        "maximumNumericTextPrecision": 0,
+        "maximumNumericTextScale": 0,
+        "maximumIntegerDigits": 0,
+        "arrayItemMaxUtf16": 0,
+        "objectValueTypes": {},
+        "sourceOffsets": {},
+        "timestampsWithFraction": 0
+      }
+    },
+    {
+      "field": "occurrence_at",
+      "column": 6,
+      "matchingPolicies": [],
+      "selectedPolicy": null,
+      "columnMultisetEqual": false,
+      "nonNullObserved": true,
+      "profile": {
+        "emptyStrings": 0,
+        "maximumNumericTextPrecision": 0,
+        "maximumNumericTextScale": 0,
+        "maximumIntegerDigits": 0,
+        "arrayItemMaxUtf16": 0,
+        "objectValueTypes": {},
+        "sourceOffsets": {
+          "-1 day, 21:00:00": 279
+        },
+        "timestampsWithFraction": 21
+      }
+    },
+    {
+      "field": "on_mobile",
+      "column": 7,
+      "matchingPolicies": [
+        "BOOLEAN_PT"
+      ],
+      "selectedPolicy": "BOOLEAN_PT",
+      "columnMultisetEqual": true,
+      "nonNullObserved": true,
+      "profile": {
+        "emptyStrings": 0,
+        "maximumNumericTextPrecision": 0,
+        "maximumNumericTextScale": 0,
+        "maximumIntegerDigits": 0,
+        "arrayItemMaxUtf16": 0,
+        "objectValueTypes": {},
+        "sourceOffsets": {},
+        "timestampsWithFraction": 0
+      }
+    },
+    {
+      "field": "ice_uer_name",
+      "column": 8,
+      "matchingPolicies": [
+        "DIRECT",
+        "EMPTY_STRING_BLANK"
+      ],
+      "selectedPolicy": "DIRECT",
+      "columnMultisetEqual": true,
+      "nonNullObserved": true,
+      "profile": {
+        "emptyStrings": 0,
+        "maximumNumericTextPrecision": 0,
+        "maximumNumericTextScale": 0,
+        "maximumIntegerDigits": 0,
+        "arrayItemMaxUtf16": 0,
+        "objectValueTypes": {},
+        "sourceOffsets": {},
+        "timestampsWithFraction": 0
+      }
+    },
+    {
+      "field": "ice_fit_service_at",
+      "column": 9,
+      "matchingPolicies": [
+        "SOURCE_OFFSET_WALL_CLOCK"
+      ],
+      "selectedPolicy": "SOURCE_OFFSET_WALL_CLOCK",
+      "columnMultisetEqual": true,
+      "nonNullObserved": true,
+      "profile": {
+        "emptyStrings": 0,
+        "maximumNumericTextPrecision": 0,
+        "maximumNumericTextScale": 0,
+        "maximumIntegerDigits": 0,
+        "arrayItemMaxUtf16": 0,
+        "objectValueTypes": {},
+        "sourceOffsets": {
+          "-1 day, 21:00:00": 279
+        },
+        "timestampsWithFraction": 0
+      }
+    },
+    {
+      "field": "ice_fit_dpn_delivery_prediction_at",
+      "column": 10,
+      "matchingPolicies": [],
+      "selectedPolicy": null,
+      "columnMultisetEqual": false,
+      "nonNullObserved": true,
+      "profile": {
+        "emptyStrings": 0,
+        "maximumNumericTextPrecision": 0,
+        "maximumNumericTextScale": 0,
+        "maximumIntegerDigits": 0,
+        "arrayItemMaxUtf16": 0,
+        "objectValueTypes": {},
+        "sourceOffsets": {
+          "-1 day, 21:00:00": 279
+        },
+        "timestampsWithFraction": 217
+      }
+    },
+    {
+      "field": "occurrence_schedule_at",
+      "column": 11,
+      "matchingPolicies": [
+        "DIRECT"
+      ],
+      "selectedPolicy": "DIRECT",
+      "columnMultisetEqual": true,
+      "nonNullObserved": false,
+      "profile": {
+        "emptyStrings": 0,
+        "maximumNumericTextPrecision": 0,
+        "maximumNumericTextScale": 0,
+        "maximumIntegerDigits": 0,
+        "arrayItemMaxUtf16": 0,
+        "objectValueTypes": {},
+        "sourceOffsets": {},
+        "timestampsWithFraction": 0
+      }
+    },
+    {
+      "field": "ice_fit_dpn_performance_finished_at",
+      "column": 12,
+      "matchingPolicies": [
+        "SOURCE_OFFSET_WALL_CLOCK"
+      ],
+      "selectedPolicy": "SOURCE_OFFSET_WALL_CLOCK",
+      "columnMultisetEqual": true,
+      "nonNullObserved": true,
+      "profile": {
+        "emptyStrings": 0,
+        "maximumNumericTextPrecision": 0,
+        "maximumNumericTextScale": 0,
+        "maximumIntegerDigits": 0,
+        "arrayItemMaxUtf16": 0,
+        "objectValueTypes": {},
+        "sourceOffsets": {
+          "-1 day, 21:00:00": 51
+        },
+        "timestampsWithFraction": 0
+      }
+    },
+    {
+      "field": "delivery_status",
+      "column": 13,
+      "matchingPolicies": [],
+      "selectedPolicy": "OBSERVED_ENUM_MAP",
+      "columnMultisetEqual": true,
+      "nonNullObserved": true,
+      "profile": {
+        "emptyStrings": 0,
+        "maximumNumericTextPrecision": 0,
+        "maximumNumericTextScale": 0,
+        "maximumIntegerDigits": 0,
+        "arrayItemMaxUtf16": 0,
+        "objectValueTypes": {},
+        "sourceOffsets": {},
+        "timestampsWithFraction": 0
+      },
+      "observedEnumMap": {
+        "failure": "Insucesso",
+        "pending": "Pendente",
+        "delivered": "Entregue"
+      },
+      "anchorFields": 17,
+      "anchorGroups": 275
+    },
+    {
+      "field": "ice_fit_fln_cln_nickname",
+      "column": 14,
+      "matchingPolicies": [
+        "DIRECT",
+        "EMPTY_STRING_BLANK"
+      ],
+      "selectedPolicy": "DIRECT",
+      "columnMultisetEqual": true,
+      "nonNullObserved": true,
+      "profile": {
+        "emptyStrings": 0,
+        "maximumNumericTextPrecision": 0,
+        "maximumNumericTextScale": 0,
+        "maximumIntegerDigits": 0,
+        "arrayItemMaxUtf16": 0,
+        "objectValueTypes": {},
+        "sourceOffsets": {},
+        "timestampsWithFraction": 0
+      }
+    },
+    {
+      "field": "ice_fit_dpn_manual_schedule",
+      "column": 15,
+      "matchingPolicies": [
+        "BOOLEAN_PT"
+      ],
+      "selectedPolicy": "BOOLEAN_PT",
+      "columnMultisetEqual": true,
+      "nonNullObserved": true,
+      "profile": {
+        "emptyStrings": 0,
+        "maximumNumericTextPrecision": 0,
+        "maximumNumericTextScale": 0,
+        "maximumIntegerDigits": 0,
+        "arrayItemMaxUtf16": 0,
+        "objectValueTypes": {},
+        "sourceOffsets": {},
+        "timestampsWithFraction": 0
+      }
+    },
+    {
+      "field": "ice_ttt_solution_deadline",
+      "column": 16,
+      "matchingPolicies": [
+        "DIRECT"
+      ],
+      "selectedPolicy": "DIRECT",
+      "columnMultisetEqual": true,
+      "nonNullObserved": false,
+      "profile": {
+        "emptyStrings": 0,
+        "maximumNumericTextPrecision": 0,
+        "maximumNumericTextScale": 0,
+        "maximumIntegerDigits": 0,
+        "arrayItemMaxUtf16": 0,
+        "objectValueTypes": {},
+        "sourceOffsets": {},
+        "timestampsWithFraction": 0
+      }
+    },
+    {
+      "field": "ice_ttt_solution_at",
+      "column": 17,
+      "matchingPolicies": [
+        "DIRECT"
+      ],
+      "selectedPolicy": "DIRECT",
+      "columnMultisetEqual": true,
+      "nonNullObserved": false,
+      "profile": {
+        "emptyStrings": 0,
+        "maximumNumericTextPrecision": 0,
+        "maximumNumericTextScale": 0,
+        "maximumIntegerDigits": 0,
+        "arrayItemMaxUtf16": 0,
+        "objectValueTypes": {},
+        "sourceOffsets": {},
+        "timestampsWithFraction": 0
+      }
+    },
+    {
+      "field": "ice_ttt_solution_type",
+      "column": 18,
+      "matchingPolicies": [
+        "DIRECT"
+      ],
+      "selectedPolicy": "DIRECT",
+      "columnMultisetEqual": true,
+      "nonNullObserved": false,
+      "profile": {
+        "emptyStrings": 0,
+        "maximumNumericTextPrecision": 0,
+        "maximumNumericTextScale": 0,
+        "maximumIntegerDigits": 0,
+        "arrayItemMaxUtf16": 0,
+        "objectValueTypes": {},
+        "sourceOffsets": {},
+        "timestampsWithFraction": 0
+      }
+    },
+    {
+      "field": "ice_ttt_soe_description",
+      "column": 19,
+      "matchingPolicies": [
+        "DIRECT"
+      ],
+      "selectedPolicy": "DIRECT",
+      "columnMultisetEqual": true,
+      "nonNullObserved": false,
+      "profile": {
+        "emptyStrings": 0,
+        "maximumNumericTextPrecision": 0,
+        "maximumNumericTextScale": 0,
+        "maximumIntegerDigits": 0,
+        "arrayItemMaxUtf16": 0,
+        "objectValueTypes": {},
+        "sourceOffsets": {},
+        "timestampsWithFraction": 0
+      }
+    },
+    {
+      "field": "ice_ttt_solution_comments",
+      "column": 20,
+      "matchingPolicies": [
+        "DIRECT"
+      ],
+      "selectedPolicy": "DIRECT",
+      "columnMultisetEqual": true,
+      "nonNullObserved": false,
+      "profile": {
+        "emptyStrings": 0,
+        "maximumNumericTextPrecision": 0,
+        "maximumNumericTextScale": 0,
+        "maximumIntegerDigits": 0,
+        "arrayItemMaxUtf16": 0,
+        "objectValueTypes": {},
+        "sourceOffsets": {},
+        "timestampsWithFraction": 0
+      }
+    }
+  ],
+  "keyDiagnostics": {
+    "ice_f_e_fit_corporation_sequence_number": {
+      "distinct": 246,
+      "rows": 279,
+      "maximumMultiplicity": 5,
+      "uniqueInThisCut": false
+    },
+    "ice_f_e_fit_corporation_sequence_number+ice_ore_code+occurrence_at": {
+      "distinct": 263,
+      "rows": 279,
+      "maximumMultiplicity": 5,
+      "uniqueInThisCut": false
+    },
+    "ice_f_e_fit_corporation_sequence_number+ice_ore_code+occurrence_at+ice_f_e_ioe_number": {
+      "distinct": 279,
+      "rows": 279,
+      "maximumMultiplicity": 1,
+      "uniqueInThisCut": true
+    }
+  },
+  "temporalDiagnostics": {
+    "occurrence_at": {
+      "unambiguousPairs": 274,
+      "exact": 258,
+      "truncatedSecondsEqual": 274,
+      "nativeFractionalTimestamps": 0,
+      "nativeMinusSourceSecondsHistogram": {
+        "0.0": 258,
+        "-0.158": 1,
+        "-0.885": 1,
+        "-0.951": 1,
+        "-0.627": 1,
+        "-0.699": 1,
+        "-0.327": 1,
+        "-0.106": 1,
+        "-0.993": 1,
+        "-0.621": 1,
+        "-0.51": 1,
+        "-0.01": 1,
+        "-0.45": 2,
+        "-0.539": 1,
+        "-0.643": 1,
+        "-0.395": 1
+      }
+    },
+    "ice_fit_dpn_delivery_prediction_at": {
+      "unambiguousPairs": 274,
+      "exact": 62,
+      "truncatedSecondsEqual": 274,
+      "nativeFractionalTimestamps": 0,
+      "nativeMinusSourceSecondsHistogram": {
+        "-0.999": 212,
+        "0.0": 62
+      }
+    }
+  },
+  "sourceOnlyOccurrences": null,
+  "nativeOnlyOccurrences": null,
+  "sourceHTTP": 0,
+  "SQL": 0,
+  "scope": "ONE_CLOSED_DAY_MAPPING_ONLY_NOT_JAVA_OR_PRODUCTION_ACCEPTANCE"
+}

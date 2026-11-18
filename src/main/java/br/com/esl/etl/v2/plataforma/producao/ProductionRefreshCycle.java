@@ -200,12 +200,16 @@ public final class ProductionRefreshCycle {
         }
     }
 
+    private boolean budgetExhausted(final Session session, final Instant deadline) {
+        return session.requests().getAsInt() >= 1750
+                || !clock.instant().isBefore(deadline.minusSeconds(90));
+    }
+
     private Session bounded(final Session original, final Instant deadline) {
         final var wire =
                 new ReportSnapshotExtractor.Wire() {
                     private void admit() {
-                        if (original.requests().getAsInt() >= 1750
-                                || !clock.instant().isBefore(deadline.minusSeconds(90))) {
+                        if (budgetExhausted(original, deadline)) {
                             throw new DeferredWork();
                         }
                     }
@@ -334,7 +338,17 @@ public final class ProductionRefreshCycle {
                             operations,
                             new HashMap<>(),
                             new HashMap<>());
-            for (final var template : ReportSnapshotTemplate.receivingTemplates()) {
+            final var order =
+                    historyOnly
+                            ? ReportSnapshotTemplate.receivingTemplates()
+                            : checkpoint.continuousOrder();
+            boolean nextCyclePositionSaved = false;
+            for (final var template : order) {
+                if (!historyOnly && !nextCyclePositionSaved && budgetExhausted(session, deadline)) {
+                    checkpoint.nextContinuousEntity(template);
+                    checkpoint.save();
+                    nextCyclePositionSaved = true;
+                }
                 final var result =
                         entities.addObject()
                                 .put("entity", template.name())

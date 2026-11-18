@@ -1,0 +1,486 @@
+{
+  "schema": "NEW_ENTITY_SOURCE0760",
+  "reportId": 12072,
+  "day": "2026-11-08",
+  "mode": "capture",
+  "success": true,
+  "terminal": true,
+  "SQL": 0,
+  "reason": null,
+  "metadata": {
+    "fields": [
+      {
+        "field": "ice_f_e_fit_corporation_sequence_number",
+        "title": "Minuta"
+      },
+      {
+        "field": "ice_f_e_ioe_number",
+        "title": "Nota Fiscal"
+      },
+      {
+        "field": "ice_fit_fhe_cte_number",
+        "title": "CTe"
+      },
+      {
+        "field": "ice_ore_code",
+        "title": "Ocorrência/Código"
+      },
+      {
+        "field": "ice_ore_description",
+        "title": "Ocorrência/Ocorrência"
+      },
+      {
+        "field": "occurrence_at",
+        "title": "Data ocorrência"
+      },
+      {
+        "field": "on_mobile",
+        "title": "Baixa por mobile"
+      },
+      {
+        "field": "ice_uer_name",
+        "title": "Usuário/Nome"
+      },
+      {
+        "field": "ice_fit_service_at",
+        "title": "Frete/Data do frete"
+      },
+      {
+        "field": "ice_fit_dpn_delivery_prediction_at",
+        "title": "Previsão Entrega/Previsão de entrega"
+      },
+      {
+        "field": "occurrence_schedule_at",
+        "title": "Data agendamento"
+      },
+      {
+        "field": "ice_fit_dpn_performance_finished_at",
+        "title": "Previsão Entrega/Finalização performance"
+      },
+      {
+        "field": "delivery_status",
+        "title": "Status Entrega"
+      },
+      {
+        "field": "ice_fit_fln_cln_nickname",
+        "title": "Localização Atual"
+      },
+      {
+        "field": "ice_fit_dpn_manual_schedule",
+        "title": "Agendado"
+      },
+      {
+        "field": "ice_ttt_solution_deadline",
+        "title": "Tratativa/Prazo solução"
+      },
+      {
+        "field": "ice_ttt_solution_at",
+        "title": "Tratativa/Data Solução"
+      },
+      {
+        "field": "ice_ttt_solution_type",
+        "title": "Tratativa/Solução"
+      },
+      {
+        "field": "ice_ttt_soe_description",
+        "title": "Tratativa/Ocorrência"
+      },
+      {
+        "field": "ice_ttt_solution_comments",
+        "title": "Tratativa/Observações"
+      }
+    ],
+    "filters": [
+      {
+        "label": "Data ocorrência",
+        "position": 1,
+        "field": "occurrence_at",
+        "table": "invoice_occurrences",
+        "type": "date",
+        "maxlength": null
+      },
+      {
+        "label": "Doc/Minuta",
+        "position": 2,
+        "field": "by_cte_or_draft_number",
+        "table": "scopes",
+        "type": "numeric",
+        "maxlength": null
+      },
+      {
+        "label": "Nº Referência",
+        "position": 3,
+        "field": "by_freight_reference_number",
+        "table": "scopes",
+        "type": "string",
+        "maxlength": null
+      },
+      {
+        "label": "Nota Fiscal",
+        "position": 4,
+        "field": "by_invoice_number",
+        "table": "scopes",
+        "type": "numeric",
+        "maxlength": null
+      },
+      {
+        "label": "Chave NF-e",
+        "position": 5,
+        "field": "by_invoice_key",
+        "table": "scopes",
+        "type": "numeric",
+        "maxlength": 44
+      },
+      {
+        "label": "Chave CT-e",
+        "position": 6,
+        "field": "by_cte_key",
+        "table": "scopes",
+        "type": "numeric",
+        "maxlength": 44
+      },
+      {
+        "label": "Manifesto",
+        "position": 7,
+        "field": "from_manifest_sequence_code",
+        "table": "scopes",
+        "type": "numeric",
+        "maxlength": null
+      },
+      {
+        "label": "Nº Consolidação",
+        "position": 8,
+        "field": "from_consolidation_document_number",
+        "table": "scopes",
+        "type": "numeric",
+        "maxlength": null
+      },
+      {
+        "label": "Pagador",
+        "position": 9,
+        "field": "from_freight_payer",
+        "table": "scopes",
+        "type": "select",
+        "maxlength": null
+      },
+      {
+        "label": "Baixa por mobile",
+        "position": 10,
+        "field": "by_mobile",
+        "table": "scopes",
+        "type": "select",
+        "maxlength": null
+      },
+      {
+        "label": "Ocorrência/Ocorrência",
+        "position": 11,
+        "field": "description",
+        "table": "ice_occurrence",
+        "type": "string",
+        "maxlength": null
+      },
+      {
+        "label": "Ocorrência/Código",
+        "position": 12,
+        "field": "code",
+        "table": "ice_occurrence",
+        "type": "string",
+        "maxlength": null
+      },
+      {
+        "label": "Data atualização",
+        "position": 13,
+        "field": "updated_at",
+        "table": "invoice_occurrences",
+        "type": "datetime",
+        "maxlength": null
+      }
+    ],
+    "requiredDateFilters": [
+      "invoice_occurrences.occurrence_at",
+      "invoice_occurrences.updated_at"
+    ],
+    "defaultOrder": null
+  },
+  "infoPin": {
+    "path": "C:\\Users\\suporte\\Documents\\Armazenamento-Projetos\\etl-extracao-dados-v2\\novas-entidades0760\\ocorrencias-capture-20261108-a1\\info-1.json",
+    "bytes": 5097,
+    "sha256": "3743a74214fcdf9715ad412fa0837f7a1a3d4659c33aa005614866282a9b9471",
+    "status": 200
+  },
+  "rows": 279,
+  "fields": 20,
+  "profiles": {
+    "occurrence_at": {
+      "present": 279,
+      "types": {
+        "STRING": 279
+      },
+      "maxUtf16": 29,
+      "maxArray": 0,
+      "items": {},
+      "stringShapes": {
+        "ISO_TIMESTAMP": 279
+      },
+      "objectKeys": []
+    },
+    "on_mobile": {
+      "present": 279,
+      "types": {
+        "BOOLEAN": 279
+      },
+      "maxUtf16": 0,
+      "maxArray": 0,
+      "items": {},
+      "stringShapes": {},
+      "objectKeys": []
+    },
+    "occurrence_schedule_at": {
+      "present": 279,
+      "types": {
+        "NULL": 279
+      },
+      "maxUtf16": 0,
+      "maxArray": 0,
+      "items": {},
+      "stringShapes": {},
+      "objectKeys": []
+    },
+    "delivery_status": {
+      "present": 279,
+      "types": {
+        "STRING": 279
+      },
+      "maxUtf16": 9,
+      "maxArray": 0,
+      "items": {},
+      "stringShapes": {
+        "TEXT": 279
+      },
+      "objectKeys": []
+    },
+    "ice_fit_service_at": {
+      "present": 279,
+      "types": {
+        "STRING": 279
+      },
+      "maxUtf16": 29,
+      "maxArray": 0,
+      "items": {},
+      "stringShapes": {
+        "ISO_TIMESTAMP": 279
+      },
+      "objectKeys": []
+    },
+    "ice_fit_dpn_delivery_prediction_at": {
+      "present": 279,
+      "types": {
+        "STRING": 279
+      },
+      "maxUtf16": 29,
+      "maxArray": 0,
+      "items": {},
+      "stringShapes": {
+        "ISO_TIMESTAMP": 279
+      },
+      "objectKeys": []
+    },
+    "ice_fit_dpn_performance_finished_at": {
+      "present": 279,
+      "types": {
+        "NULL": 228,
+        "STRING": 51
+      },
+      "maxUtf16": 29,
+      "maxArray": 0,
+      "items": {},
+      "stringShapes": {
+        "ISO_TIMESTAMP": 51
+      },
+      "objectKeys": []
+    },
+    "ice_fit_dpn_manual_schedule": {
+      "present": 279,
+      "types": {
+        "BOOLEAN": 279
+      },
+      "maxUtf16": 0,
+      "maxArray": 0,
+      "items": {},
+      "stringShapes": {},
+      "objectKeys": []
+    },
+    "ice_fit_fhe_cte_number": {
+      "present": 279,
+      "types": {
+        "INTEGER": 275,
+        "NULL": 4
+      },
+      "maxUtf16": 0,
+      "maxArray": 0,
+      "items": {},
+      "stringShapes": {},
+      "objectKeys": []
+    },
+    "ice_fit_fln_cln_nickname": {
+      "present": 279,
+      "types": {
+        "STRING": 279
+      },
+      "maxUtf16": 45,
+      "maxArray": 0,
+      "items": {},
+      "stringShapes": {
+        "TEXT": 279
+      },
+      "objectKeys": []
+    },
+    "ice_f_e_fit_corporation_sequence_number": {
+      "present": 279,
+      "types": {
+        "INTEGER": 279
+      },
+      "maxUtf16": 0,
+      "maxArray": 0,
+      "items": {},
+      "stringShapes": {},
+      "objectKeys": []
+    },
+    "ice_f_e_ioe_number": {
+      "present": 279,
+      "types": {
+        "STRING": 279
+      },
+      "maxUtf16": 7,
+      "maxArray": 0,
+      "items": {},
+      "stringShapes": {
+        "NUMERIC_TEXT": 279
+      },
+      "objectKeys": []
+    },
+    "ice_ore_code": {
+      "present": 279,
+      "types": {
+        "INTEGER": 279
+      },
+      "maxUtf16": 0,
+      "maxArray": 0,
+      "items": {},
+      "stringShapes": {},
+      "objectKeys": []
+    },
+    "ice_ore_description": {
+      "present": 279,
+      "types": {
+        "STRING": 279
+      },
+      "maxUtf16": 30,
+      "maxArray": 0,
+      "items": {},
+      "stringShapes": {
+        "TEXT": 279
+      },
+      "objectKeys": []
+    },
+    "ice_ttt_solution_deadline": {
+      "present": 279,
+      "types": {
+        "NULL": 279
+      },
+      "maxUtf16": 0,
+      "maxArray": 0,
+      "items": {},
+      "stringShapes": {},
+      "objectKeys": []
+    },
+    "ice_ttt_solution_at": {
+      "present": 279,
+      "types": {
+        "NULL": 279
+      },
+      "maxUtf16": 0,
+      "maxArray": 0,
+      "items": {},
+      "stringShapes": {},
+      "objectKeys": []
+    },
+    "ice_ttt_solution_type": {
+      "present": 279,
+      "types": {
+        "NULL": 279
+      },
+      "maxUtf16": 0,
+      "maxArray": 0,
+      "items": {},
+      "stringShapes": {},
+      "objectKeys": []
+    },
+    "ice_ttt_solution_comments": {
+      "present": 279,
+      "types": {
+        "NULL": 279
+      },
+      "maxUtf16": 0,
+      "maxArray": 0,
+      "items": {},
+      "stringShapes": {},
+      "objectKeys": []
+    },
+    "ice_ttt_soe_description": {
+      "present": 279,
+      "types": {
+        "NULL": 279
+      },
+      "maxUtf16": 0,
+      "maxArray": 0,
+      "items": {},
+      "stringShapes": {},
+      "objectKeys": []
+    },
+    "ice_uer_name": {
+      "present": 279,
+      "types": {
+        "STRING": 279
+      },
+      "maxUtf16": 31,
+      "maxArray": 0,
+      "items": {},
+      "stringShapes": {
+        "TEXT": 279
+      },
+      "objectKeys": []
+    }
+  },
+  "dataPins": [
+    {
+      "path": "C:\\Users\\suporte\\Documents\\Armazenamento-Projetos\\etl-extracao-dados-v2\\novas-entidades0760\\ocorrencias-capture-20261108-a1\\data-2.json",
+      "bytes": 78781,
+      "sha256": "3e9b2a22784eda5a4dc4d6d6c8024f8780bf3f04f6f92bf3321ad945d2427fa8",
+      "status": 200
+    },
+    {
+      "path": "C:\\Users\\suporte\\Documents\\Armazenamento-Projetos\\etl-extracao-dados-v2\\novas-entidades0760\\ocorrencias-capture-20261108-a1\\data-3.json",
+      "bytes": 79350,
+      "sha256": "1f6dc115916198efc9b8cc7052308687c9674729cf7dece0eb07b5285c251f6d",
+      "status": 200
+    },
+    {
+      "path": "C:\\Users\\suporte\\Documents\\Armazenamento-Projetos\\etl-extracao-dados-v2\\novas-entidades0760\\ocorrencias-capture-20261108-a1\\data-4.json",
+      "bytes": 62294,
+      "sha256": "fcd9d06911961b3b1c70f601a50dfa3e33d63522b89d4c60e97edb4472900b74",
+      "status": 200
+    },
+    {
+      "path": "C:\\Users\\suporte\\Documents\\Armazenamento-Projetos\\etl-extracao-dados-v2\\novas-entidades0760\\ocorrencias-capture-20261108-a1\\data-5.json",
+      "bytes": 2,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "status": 200
+    }
+  ],
+  "calls": 5,
+  "per": 100,
+  "maximumDataPages": 16,
+  "captureComplete": true,
+  "entity": "OCORRENCIAS"
+}

@@ -35,3 +35,7 @@ grão raiz–parcela–rateio.
 ```powershell
 pwsh -NoProfile -File .\scripts\validation\Test-DataExport8636IdentityCatalog.ps1
 ```
+
+## Conferência histórica0751 (07/11/2026)
+
+Três semanas/3435ocorrências físicas foram conferidas integralmente com os Excel oficiais ESL8636,28colunas/setetotais, preservando multiplicidades. Isso não identifica raiz ou parcela como chave: o resultado de identidade acima permanece. Ver ../../validacao/contasapagar-native28-offline.md. Não houve deduplicação, SQL ou adoção canônica.

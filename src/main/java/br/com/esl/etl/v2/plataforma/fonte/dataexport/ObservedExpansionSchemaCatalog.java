@@ -30,8 +30,14 @@ public final class ObservedExpansionSchemaCatalog {
         private final ObservedExpansionSchemaPins.Pin pin;
 
         private Selection(final ObservedExpansionCaptureTemplate template) {
+            this(template, ObservedExpansionSchemaPins.pin(template));
+        }
+
+        private Selection(
+                final ObservedExpansionCaptureTemplate template,
+                final ObservedExpansionSchemaPins.Pin selectedPin) {
             this.template = Objects.requireNonNull(template);
-            this.pin = ObservedExpansionSchemaPins.pin(template);
+            this.pin = Objects.requireNonNull(selectedPin);
         }
 
         public ObservedExpansionCaptureTemplate template() {
@@ -66,6 +72,11 @@ public final class ObservedExpansionSchemaCatalog {
 
     public static Selection select(final ObservedExpansionCaptureTemplate template) {
         return new Selection(template);
+    }
+
+    /** Explicit immutable historical wire rules; no implicit fallback from current. */
+    public static Selection selectHistorical(final ObservedExpansionCaptureTemplate template) {
+        return new Selection(template, ObservedExpansionSchemaPins.historicalPin(template));
     }
 
     enum Wire {
@@ -145,7 +156,7 @@ public final class ObservedExpansionSchemaCatalog {
         if (input == null) {
             throw new IllegalStateException("OBS_EXP_SCHEMA_RESOURCE_MISSING");
         }
-        final var pin = ObservedExpansionSchemaPins.pin(selection.template());
+        final var pin = selection.pin;
         final byte[] bytes = input.readNBytes(MAXIMUM_RESOURCE_BYTES + 1);
         if (bytes.length > MAXIMUM_RESOURCE_BYTES
                 || !pin.sha256()

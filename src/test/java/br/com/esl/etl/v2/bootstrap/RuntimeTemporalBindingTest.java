@@ -85,6 +85,271 @@ class RuntimeTemporalBindingTest {
     }
 
     @Test
+    void recoveryRequestsExtractHistoricalBusinessDatesWithoutUpdatedAtRestriction()
+            throws Exception {
+        final var config = configuration();
+        final var document =
+                policy().put("lookbackSeconds", "0")
+                        .put("firstUnpublished", "2024-02-20")
+                        .put("observedAt", "2024-03-12T15:00:00Z");
+        final var operation = new RuntimeTemporalOperation(document);
+        final var file = directory.resolve("recovery-blueprint.json");
+        Files.writeString(file, blueprint().toString());
+        final var requests = RuntimePeriodRecoveryOperation.requests(config, operation, file);
+        assertEquals(4, requests.size());
+        for (final var window : operation.result.windows()) {
+            final var request = requests.get(window.partitionStart());
+            assertNotNull(request);
+            assertEquals(
+                    window.partitionStart().atZone(operation.policy.zone()).toLocalDate(),
+                    request.dates.startInclusive());
+            assertEquals(request.dates.startInclusive(), request.dates.endInclusive());
+            assertEquals(java.util.Optional.empty(), request.updatedAt);
+            request.plan.forEach(
+                    item ->
+                            assertEquals(
+                                    operation.freeze(config, window).scope().executionId(),
+                                    item.request().executionId()));
+        }
+        document.put("firstUnpublished", "2024-02-24");
+        final var next =
+                RuntimePeriodRecoveryOperation.requests(
+                        config, new RuntimeTemporalOperation(document), file);
+        assertEquals(
+                java.util.Set.of(),
+                requests.keySet().stream()
+                        .filter(next::containsKey)
+                        .collect(java.util.stream.Collectors.toSet()));
+    }
+
+    @Test
+    void recoveryRejectsIncrementalAndLookbackBeforeOpeningAnyConnection() throws Exception {
+        final var config = configuration();
+        final var file = directory.resolve("recovery-rejected-blueprint.json");
+        Files.writeString(file, blueprint().toString());
+        assertThrows(
+                IllegalArgumentException.class,
+                () ->
+                        RuntimePeriodRecoveryOperation.requests(
+                                config, new RuntimeTemporalOperation(policy()), file));
+        assertThrows(
+                IllegalArgumentException.class,
+                () ->
+                        RuntimePeriodRecoveryOperation.requests(
+                                config,
+                                new RuntimeTemporalOperation(
+                                        policy().put("lookbackSeconds", "0")
+                                                .put("mode", "INCREMENTAL")),
+                                file));
+    }
+
+    @Test
+    void recoveryAuthorizesEverySqlEffectAndRefusesScopeSubstitution() throws Exception {
+        final var config = configuration();
+        final var operation = new RuntimeTemporalOperation(policy().put("lookbackSeconds", "0"));
+        final var file = directory.resolve("recovery-authority-blueprint.json");
+        Files.writeString(file, blueprint().toString());
+        final var requests = RuntimePeriodRecoveryOperation.requests(config, operation, file);
+        final var window = operation.result.windows().get(0);
+        final var frozen = operation.freeze(config, window);
+        final var scopes =
+                new java.util.ArrayList<
+                        br.com.esl.etl.v2.plataforma.autorizacao.RuntimeAuthorizationScope>();
+        final int[] effects = {0};
+        final var store =
+                new RuntimePeriodRecoveryOperation.AuthorizedStore(
+                        operation,
+                        frozen.namespace(),
+                        requests,
+                        recoveryStore(effects),
+                        new RuntimePeriodRecoveryOperation.Authority() {
+                            @Override
+                            public <T> T execute(
+                                    br.com.esl.etl.v2.plataforma.autorizacao
+                                                    .RuntimeAuthorizationScope
+                                            scope,
+                                    java.util.function.Supplier<T> effect) {
+                                scopes.add(scope);
+                                return effect.get();
+                            }
+                        });
+        store.readGapPage(frozen.namespace(), 8, window.partitionStart());
+        final var single =
+                new br.com.esl.etl.v2.plataforma.orquestracao.RuntimeTemporalPlanner.Result(
+                        java.util.List.of(window), false, false);
+        assertEquals(
+                1, store.persist(frozen.cycle(), frozen.namespace(), operation.policy, single));
+        store.readGapPage(frozen.namespace(), 8, window.partitionStart());
+        final var next = operation.result.windows().get(1);
+        store.readGapPage(frozen.namespace(), 8, next.partitionStart());
+        assertEquals(
+                java.util.List.of(
+                        RuntimeAction.STATUS,
+                        RuntimeAction.RUN,
+                        RuntimeAction.STATUS,
+                        RuntimeAction.STATUS),
+                scopes.stream()
+                        .map(
+                                br.com.esl.etl.v2.plataforma.autorizacao.RuntimeAuthorizationScope
+                                        ::action)
+                        .toList());
+        assertEquals(
+                4,
+                scopes.stream()
+                        .map(
+                                br.com.esl.etl.v2.plataforma.autorizacao.RuntimeAuthorizationScope
+                                        ::invocationId)
+                        .distinct()
+                        .count());
+        assertEquals(frozen.scope().executionId(), scopes.get(0).executionId());
+        assertNotEquals(scopes.get(0).executionId(), scopes.get(3).executionId());
+        assertEquals(4, effects[0]);
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> store.readGapPage("b".repeat(64), 8, window.partitionStart()));
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> store.readGapPage(frozen.namespace(), 9, window.partitionStart()));
+        assertThrows(
+                IllegalArgumentException.class,
+                () ->
+                        store.readGapPage(
+                                frozen.namespace(), 8, window.partitionStart().minusSeconds(1)));
+        assertThrows(
+                IllegalArgumentException.class,
+                () ->
+                        store.persist(
+                                UUID.randomUUID(), frozen.namespace(), operation.policy, single));
+        assertEquals(4, effects[0]);
+        assertEquals(4, scopes.size());
+    }
+
+    @Test
+    void recoveryAuthorizationRefusalPreventsSqlEffects() throws Exception {
+        final var config = configuration();
+        final var operation = new RuntimeTemporalOperation(policy().put("lookbackSeconds", "0"));
+        final var file = directory.resolve("recovery-denied-blueprint.json");
+        Files.writeString(file, blueprint().toString());
+        final var requests = RuntimePeriodRecoveryOperation.requests(config, operation, file);
+        final var window = operation.result.windows().get(0);
+        final var frozen = operation.freeze(config, window);
+        final int[] effects = {0};
+        final var store =
+                new RuntimePeriodRecoveryOperation.AuthorizedStore(
+                        operation,
+                        frozen.namespace(),
+                        requests,
+                        recoveryStore(effects),
+                        new RuntimePeriodRecoveryOperation.Authority() {
+                            @Override
+                            public <T> T execute(
+                                    br.com.esl.etl.v2.plataforma.autorizacao
+                                                    .RuntimeAuthorizationScope
+                                            scope,
+                                    java.util.function.Supplier<T> effect) {
+                                throw new IllegalStateException("synthetic-authority-denial");
+                            }
+                        });
+        assertThrows(
+                IllegalStateException.class,
+                () -> store.readGapPage(frozen.namespace(), 8, window.partitionStart()));
+        assertThrows(
+                IllegalStateException.class,
+                () ->
+                        store.persist(
+                                frozen.cycle(),
+                                frozen.namespace(),
+                                operation.policy,
+                                new br.com.esl.etl.v2.plataforma.orquestracao.RuntimeTemporalPlanner
+                                        .Result(java.util.List.of(window), false, false)));
+        assertEquals(0, effects[0]);
+    }
+
+    private static br.com.esl.etl.v2.plataforma.orquestracao.RuntimeTemporalStore recoveryStore(
+            final int[] effects) {
+        return new br.com.esl.etl.v2.plataforma.orquestracao.RuntimeTemporalStore() {
+            @Override
+            public int persist(
+                    UUID plan,
+                    String namespace,
+                    br.com.esl.etl.v2.plataforma.orquestracao.RuntimeTemporalPolicy policy,
+                    br.com.esl.etl.v2.plataforma.orquestracao.RuntimeTemporalPlanner.Result
+                            result) {
+                effects[0]++;
+                return 1;
+            }
+
+            @Override
+            public java.util.List<Gap> readGapPage(String namespace, int maximum, Instant after) {
+                effects[0]++;
+                return java.util.List.of();
+            }
+        };
+    }
+
+    @Test
+    void recoveryBlackoutAtFirstDayCannotReturnSuccessfulNoWork() throws Exception {
+        final var config = configuration();
+        final var operation =
+                new RuntimeTemporalOperation(
+                        policy().put("lookbackSeconds", "0")
+                                .put("blackouts", "2024-02-28/2024-02-29"));
+        final var output = new java.util.ArrayList<String>();
+        assertEquals(
+                40,
+                RuntimePeriodRecoveryOperation.run(
+                        config,
+                        operation,
+                        directory.resolve("unused-blueprint.json"),
+                        output::add));
+        assertEquals(
+                java.util.List.of(
+                        "PERIOD_RECOVERY no_due_window=1 backlog=true blackout=true scheduler=0"),
+                output);
+    }
+
+    @Test
+    void recoveryOccurrenceRemainsIdenticalWhenBatchAndObservationChange() throws Exception {
+        final var config = configuration();
+        final var document = policy().put("lookbackSeconds", "0");
+        final var file = directory.resolve("recovery-stable-blueprint.json");
+        Files.writeString(file, blueprint().toString());
+        final var before =
+                RuntimePeriodRecoveryOperation.requests(
+                        config, new RuntimeTemporalOperation(document), file);
+        document.put("firstUnpublished", "2024-02-29")
+                .put("observedAt", "2024-03-03T15:00:00Z")
+                .put("invocation", UUID.randomUUID().toString());
+        final var after =
+                RuntimePeriodRecoveryOperation.requests(
+                        config, new RuntimeTemporalOperation(document), file);
+        final var date = Instant.parse("2024-02-29T03:00:00Z");
+        assertEquals(before.get(date).plan.fingerprint(), after.get(date).plan.fingerprint());
+        assertNotEquals(before.get(date).invocation, after.get(date).invocation);
+        assertNotEquals(
+                before.get(date).invocation,
+                before.get(Instant.parse("2024-02-28T03:00:00Z")).invocation);
+    }
+
+    @Test
+    void recoveryMonthlyRequestKeepsEveryBusinessDayIncludingLeapDay() throws Exception {
+        final var config = configuration();
+        final var operation =
+                new RuntimeTemporalOperation(
+                        policy().put("lookbackSeconds", "0")
+                                .put("cadence", "CIVIL_MONTH")
+                                .put("firstUnpublished", "2024-02-01"));
+        final var file = directory.resolve("recovery-monthly-blueprint.json");
+        Files.writeString(file, blueprint().toString());
+        final var requests = RuntimePeriodRecoveryOperation.requests(config, operation, file);
+        assertEquals(1, requests.size());
+        final var request = requests.values().iterator().next();
+        assertEquals(java.time.LocalDate.of(2024, 2, 1), request.dates.startInclusive());
+        assertEquals(java.time.LocalDate.of(2024, 2, 29), request.dates.endInclusive());
+        assertEquals(java.util.Optional.empty(), request.updatedAt);
+    }
+
+    @Test
     void incrementalSourceUsesLookbackAndInclusiveSecondsWithoutMovingPartition() throws Exception {
         final var config = configuration();
         final var incremental = policy().put("mode", "INCREMENTAL");

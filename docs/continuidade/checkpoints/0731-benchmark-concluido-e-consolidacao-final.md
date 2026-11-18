@@ -1,0 +1,11 @@
+# 0731 Comparações aprovadas e fechamento do código em preparação
+
+Coletas e Fretes têm conteúdo aprovado nos três períodos:12–18/10,19–25/10 e26/10–01/11/2026. Coletas:31colunas comuns,tuplas completas porID,repetições e8totais. Fretes:114colunas,tuplas completas porID,repetições e50totais. Campos extras da API são permitidos. As seis referências Python também reproduziram os resultados,com projeções tipadas completas para conferir a implementação final Java.
+
+O benchmark V2 foi executado e fechado:Original38044/0,16923ms,pico130019328bytes,quatro filhos seriais fechados e restauraçãoAUX28/FB923CC5. Os32mesmos caminhos e ancestrais foram conferidos em cada rodada:OLD715ms,NEW145ms,NEW116ms,OLD864ms. Médias789,5ms e130,5ms:ganho6,05vezes nessa parte. A medição isolada não qualifica o lote final inteiro nem estabelece sozinha a causa completa do timeout antigo. V5c preserva as69guardas e três postchecks e acrescenta tempos seguros por fase.
+
+Os143JUnit da unit06 passaram duas vezes,mas aqueles lotes não produziram um TEST completamente qualificado por falha do leitorXML e timeoutlocal posterior ao Maven,respectivamente. A recuperação específica e idempotente está concluída. Nenhum lote pesado está ativo;canônicoFB923CC5/AUX28 com slotvazio e fatos preservados.
+
+O candidato final foraP integra Main,produtor desde a captura,ponte tipada e releitura dos campos do dashboard. Inclui minutaFretes a partir da coluna27,controles de região/calendário e testes de falta de referência. A rota histórica compare-content reutiliza os mesmos comparadores e terá recibo distinto:HISTORICAL_CONTENT_EQUAL_FOR_THIS_PAIR. Não inventará eventos ou horários ausentes nas capturas antigas nem substituirá o protocolo live de proximidade temporal.
+
+Falta revisar e aplicar o candidato consolidado,FORMAT/TEST completo com fechamento,coletar classpath no Original,executar os seis pares pelo código final e diferencial129+2 e concluir documentação. O transporte Windows dos argumentos será conferido antes do disparo,sem omitir arquivos ou casos para caber no limite. Publicação SQL de produção e consumo real do dashboard não foram executados;referências governadas ausentes não podem virar valores inventados. Não iniciar outra entidade. V1pausado;DataExport nas entidades e GraphQL somente usuários.

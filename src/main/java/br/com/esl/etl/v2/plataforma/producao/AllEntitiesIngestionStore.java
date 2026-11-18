@@ -301,23 +301,34 @@ final class AllEntitiesIngestionStore implements AutoCloseable {
             throws Exception {
         try (var command =
                 connection.prepareCall("EXEC ctl.usp_production_ingestion_plan ?,?,?,?")) {
-            command.setQueryTimeout(10);
+            command.setQueryTimeout(30);
             command.setString(1, scope);
-            command.setDate(2, java.sql.Date.valueOf(today.minusDays(3660)));
-            command.setDate(3, java.sql.Date.valueOf(today));
             command.setString(4, entity);
-            try (var rows = command.executeQuery()) {
-                LocalDate first = null;
-                while (rows.next()) {
-                    if (rows.getBoolean("stored")) {
-                        final var day = rows.getDate("business_date").toLocalDate();
-                        if (first == null || day.isBefore(first)) {
-                            first = day;
+            // The plan enumerates every calendar day, including days without a snapshot.
+            // Search oldest first so later windows cannot contain an earlier stored date.
+            var start = today.minusDays(3660);
+            while (!start.isAfter(today)) {
+                final var windowEnd = start.plusDays(89);
+                final var end = windowEnd.isAfter(today) ? today : windowEnd;
+                command.setDate(2, java.sql.Date.valueOf(start));
+                command.setDate(3, java.sql.Date.valueOf(end));
+                try (var rows = command.executeQuery()) {
+                    LocalDate first = null;
+                    while (rows.next()) {
+                        if (rows.getBoolean("stored")) {
+                            final var day = rows.getDate("business_date").toLocalDate();
+                            if (first == null || day.isBefore(first)) {
+                                first = day;
+                            }
                         }
                     }
+                    if (first != null) {
+                        return first;
+                    }
                 }
-                return first;
+                start = end.plusDays(1);
             }
+            return null;
         }
     }
 

@@ -1,0 +1,224 @@
+{
+  "schema": "COLETAS_COMMON31_V1",
+  "reportId": 6908,
+  "historicalKernelSha256": "a2c155edc4da983138c43ee0a9e406d27cd1bfe37e9e517a9749bb302b4e0af4",
+  "columns": [
+    {
+      "itemId": "item_221149",
+      "name": "ID",
+      "sourceField": "id",
+      "kind": "integer",
+      "nativeColumn": 1
+    },
+    {
+      "itemId": "item_123127",
+      "name": "Filial",
+      "sourceField": "pck_crn_psn_nickname",
+      "kind": "text",
+      "nativeColumn": 2
+    },
+    {
+      "itemId": "item_123120",
+      "name": "N° coleta",
+      "sourceField": "sequence_code",
+      "kind": "integer",
+      "nativeColumn": 3
+    },
+    {
+      "itemId": "item_135309",
+      "name": "Data criação",
+      "sourceField": "created_at",
+      "kind": "timestamp",
+      "nativeColumn": 4
+    },
+    {
+      "itemId": "item_124818",
+      "name": "Data Solicitação",
+      "sourceField": "request_date",
+      "kind": "date",
+      "nativeColumn": 5
+    },
+    {
+      "itemId": "item_123121",
+      "name": "Data Agendamento",
+      "sourceField": "service_date",
+      "kind": "date",
+      "nativeColumn": 6
+    },
+    {
+      "itemId": "item_123134",
+      "name": "Data Coleta",
+      "sourceField": "finish_date",
+      "kind": "date",
+      "nativeColumn": 7
+    },
+    {
+      "itemId": "item_123130",
+      "name": "Cliente",
+      "sourceField": "pck_cor_nickname",
+      "kind": "text",
+      "nativeColumn": 8
+    },
+    {
+      "itemId": "item_123122",
+      "name": "Volumes",
+      "sourceField": "invoices_volumes",
+      "kind": "integer",
+      "nativeColumn": 9
+    },
+    {
+      "itemId": "item_135308",
+      "name": "Peso real",
+      "sourceField": "invoices_weight",
+      "kind": "decimal",
+      "nativeColumn": 10
+    },
+    {
+      "itemId": "item_123123",
+      "name": "Peso taxado",
+      "sourceField": "taxed_weight",
+      "kind": "decimal",
+      "nativeColumn": 11
+    },
+    {
+      "itemId": "item_123124",
+      "name": "Valor total",
+      "sourceField": "invoices_value",
+      "kind": "decimal",
+      "nativeColumn": 12
+    },
+    {
+      "itemId": "item_123125",
+      "name": "Status",
+      "sourceField": "status",
+      "kind": "status",
+      "nativeColumn": 13
+    },
+    {
+      "itemId": "item_123133",
+      "name": "Endereço de Coleta/Cidade",
+      "sourceField": "pck_pds_cty_name",
+      "kind": "text",
+      "nativeColumn": 14
+    },
+    {
+      "itemId": "item_135313",
+      "name": "Endereço de Coleta/UF",
+      "sourceField": "pck_pds_cty_sae_code",
+      "kind": "text",
+      "nativeColumn": 15
+    },
+    {
+      "itemId": "item_135311",
+      "name": "Endereço de coleta/CEP",
+      "sourceField": "pck_pds_postal_code",
+      "kind": "text",
+      "nativeColumn": 16
+    },
+    {
+      "itemId": "item_135312",
+      "name": "Endereço de coleta/Bairro",
+      "sourceField": "pck_pds_neighborhood",
+      "kind": "text",
+      "nativeColumn": 17
+    },
+    {
+      "itemId": "item_167859",
+      "name": "Região da Coleta",
+      "sourceField": "pck_prn_name",
+      "kind": "text",
+      "nativeColumn": 18
+    },
+    {
+      "itemId": "item_167860",
+      "name": "Filial Responsável",
+      "sourceField": "pck_prn_drt_nickname",
+      "kind": "text",
+      "nativeColumn": 19
+    },
+    {
+      "itemId": "item_131395",
+      "name": "Data atualização",
+      "sourceField": "updated_at",
+      "kind": "timestamp",
+      "nativeColumn": 20
+    },
+    {
+      "itemId": "item_167861",
+      "name": "Última Ocorrência",
+      "sourceField": "pck_loe_ore_description",
+      "kind": "text",
+      "nativeColumn": 21
+    },
+    {
+      "itemId": "item_123131",
+      "name": "Ocorrência",
+      "sourceField": "pck_pus_ore_description",
+      "kind": "text",
+      "nativeColumn": 22
+    },
+    {
+      "itemId": "item_123132",
+      "name": "Ação da Ocorrência",
+      "sourceField": "pck_pus_ore_trigger",
+      "kind": "text",
+      "nativeColumn": 23
+    },
+    {
+      "itemId": "item_135306",
+      "name": "Usuário/Nome",
+      "sourceField": "pck_uer_name",
+      "kind": "text",
+      "nativeColumn": 24
+    },
+    {
+      "itemId": "item_131392",
+      "name": "Usuário do cancelamento/Nome",
+      "sourceField": "pck_ctr_name",
+      "kind": "text",
+      "nativeColumn": 25
+    },
+    {
+      "itemId": "item_123126",
+      "name": "Motivo de cancelamento",
+      "sourceField": "cancellation_reason",
+      "kind": "text",
+      "nativeColumn": 26
+    },
+    {
+      "itemId": "item_135300",
+      "name": "Nº Tentativas",
+      "sourceField": "pck_mik_attempt_number",
+      "kind": "integer",
+      "nativeColumn": 27
+    },
+    {
+      "itemId": "item_135301",
+      "name": "Manifesto/Filial Origem",
+      "sourceField": "pck_mik_mft_crn_psn_nickname",
+      "kind": "text",
+      "nativeColumn": 28
+    },
+    {
+      "itemId": "item_135302",
+      "name": "Manifesto/Número",
+      "sourceField": "pck_mik_mft_sequence_code",
+      "kind": "integer",
+      "nativeColumn": 29
+    },
+    {
+      "itemId": "item_135303",
+      "name": "Manifesto/Veículo",
+      "sourceField": "pck_mik_mft_vie_license_plate",
+      "kind": "text",
+      "nativeColumn": 30
+    },
+    {
+      "itemId": "item_135305",
+      "name": "Manifesto/Tipo do Veículo",
+      "sourceField": "pck_mik_mft_vie_vee_name",
+      "kind": "text",
+      "nativeColumn": 31
+    }
+  ]
+}

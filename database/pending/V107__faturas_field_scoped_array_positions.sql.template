@@ -1,0 +1,118 @@
+-- NON-EXECUTABLE DRAFT: replace bounds only after all21 Source profiles and Root review.
+-- Replace the baseline CHECK definition hash only from an authorized metadata observation.
+-- V038/V051 remain immutable. This script changes one CHECK only; no business DML or grants.
+-- SQL execution, full schema epoch validation, Main and deployment remain unauthorized/pending.
+SET ANSI_NULLS ON;
+SET QUOTED_IDENTIFIER ON;
+SET XACT_ABORT ON;
+SET LOCK_TIMEOUT 10000;
+
+IF DB_NAME() <> N'ETL_SISTEMA_V2_SHADOW'
+    THROW 54180, N'V107_EXACT_SHADOW_REQUIRED', 1;
+
+DECLARE @invoice_items INT = 110;
+DECLARE @order_items INT = 110;
+DECLARE @baseline_definition_sha VARBINARY(32) = 0x__ROOT_BASELINE_CHECK_DEFINITION_SHA256__;
+IF @invoice_items NOT BETWEEN 50 AND 32767 OR @order_items NOT BETWEEN 50 AND 32767
+    THROW 54181, N'V107_REVIEWED_FAT_ITEM_COUNTS_REQUIRED', 1;
+
+BEGIN TRY
+    BEGIN TRANSACTION;
+    DECLARE @table_id INT = OBJECT_ID(N'stg.expansion_lab_array_item', N'U');
+    DECLARE @check_id INT = OBJECT_ID(N'stg.CK_expansion_array_bound', N'C');
+    IF @table_id IS NULL OR @check_id IS NULL OR NOT EXISTS (
+        SELECT 1 FROM sys.check_constraints
+        WHERE object_id = @check_id AND parent_object_id = @table_id
+          AND name = N'CK_expansion_array_bound'
+          AND is_disabled = 0 AND is_not_trusted = 0 AND is_not_for_replication = 0
+          AND HASHBYTES('SHA2_256', CONVERT(VARBINARY(MAX), definition)) = @baseline_definition_sha
+    )
+        THROW 54182, N'V107_EXACT_REVIEWED_TRUSTED_BASELINE_CHECK_REQUIRED', 1;
+
+    IF NOT EXISTS (
+        SELECT 1 FROM sys.columns WHERE object_id = @table_id AND name = N'physical_position'
+          AND system_type_id = TYPE_ID(N'int') AND user_type_id = TYPE_ID(N'int')
+          AND is_nullable = 0 AND is_computed = 0
+    ) OR NOT EXISTS (
+        SELECT 1 FROM sys.columns WHERE object_id = @table_id AND name = N'field_name'
+          AND system_type_id = TYPE_ID(N'varchar') AND user_type_id = TYPE_ID(N'varchar')
+          AND max_length = 80 AND is_nullable = 0 AND is_computed = 0
+    ) OR NOT EXISTS (
+        SELECT 1 FROM sys.columns WHERE object_id = @table_id AND name = N'text_value'
+          AND system_type_id = TYPE_ID(N'nvarchar') AND user_type_id = TYPE_ID(N'nvarchar')
+          AND max_length = 512 AND is_nullable = 0 AND is_computed = 0
+          AND collation_name = N'Latin1_General_100_BIN2'
+    )
+        THROW 54183, N'V107_POSITION_FIELD_ITEM_SHAPE_DRIFT', 1;
+
+    -- No column, key, FK, index, trigger or other CHECK is altered.
+    DECLARE @columns_before NVARCHAR(MAX) = (
+        SELECT c.* FROM sys.columns AS c WHERE object_id = @table_id
+        ORDER BY column_id FOR JSON PATH, INCLUDE_NULL_VALUES
+    );
+    DECLARE @other_checks_before NVARCHAR(MAX) = (
+        SELECT c.* FROM sys.check_constraints AS c
+        WHERE parent_object_id = @table_id AND name <> N'CK_expansion_array_bound'
+        ORDER BY object_id FOR JSON PATH, INCLUDE_NULL_VALUES
+    );
+    DECLARE @keys_before NVARCHAR(MAX) = (
+        SELECT i.* FROM sys.indexes AS i WHERE object_id = @table_id
+        ORDER BY index_id FOR JSON PATH, INCLUDE_NULL_VALUES
+    );
+    DECLARE @foreign_keys_before NVARCHAR(MAX) = (
+        SELECT f.* FROM sys.foreign_keys AS f
+        WHERE parent_object_id = @table_id OR referenced_object_id = @table_id
+        ORDER BY object_id FOR JSON PATH, INCLUDE_NULL_VALUES
+    );
+
+    ALTER TABLE stg.expansion_lab_array_item DROP CONSTRAINT CK_expansion_array_bound;
+    DECLARE @ddl NVARCHAR(MAX) = N'ALTER TABLE [stg].[expansion_lab_array_item] WITH CHECK '
+        + N'ADD CONSTRAINT [CK_expansion_array_bound] CHECK('
+        + N'([field_name]=''invoices_mapping'' AND [physical_position] BETWEEN 0 AND '
+        + CONVERT(NVARCHAR(10), @invoice_items - 1) + N') OR '
+        + N'([field_name]=''fit_fte_invoices_order_number'' AND [physical_position] BETWEEN 0 AND '
+        + CONVERT(NVARCHAR(10), @order_items - 1) + N') OR '
+        + N'([field_name] IN(''cnr_c_s_fit_invoices_mapping'',''rcfdc'',''rctac'',''rctrc'') '
+        + N'AND [physical_position] BETWEEN 0 AND 31));';
+    EXEC sys.sp_executesql @ddl;
+    ALTER TABLE stg.expansion_lab_array_item CHECK CONSTRAINT CK_expansion_array_bound;
+
+    DECLARE @columns_after NVARCHAR(MAX) = (
+        SELECT c.* FROM sys.columns AS c WHERE object_id = @table_id
+        ORDER BY column_id FOR JSON PATH, INCLUDE_NULL_VALUES
+    );
+    DECLARE @other_checks_after NVARCHAR(MAX) = (
+        SELECT c.* FROM sys.check_constraints AS c
+        WHERE parent_object_id = @table_id AND name <> N'CK_expansion_array_bound'
+        ORDER BY object_id FOR JSON PATH, INCLUDE_NULL_VALUES
+    );
+    DECLARE @keys_after NVARCHAR(MAX) = (
+        SELECT i.* FROM sys.indexes AS i WHERE object_id = @table_id
+        ORDER BY index_id FOR JSON PATH, INCLUDE_NULL_VALUES
+    );
+    DECLARE @foreign_keys_after NVARCHAR(MAX) = (
+        SELECT f.* FROM sys.foreign_keys AS f
+        WHERE parent_object_id = @table_id OR referenced_object_id = @table_id
+        ORDER BY object_id FOR JSON PATH, INCLUDE_NULL_VALUES
+    );
+    IF OBJECT_ID(N'stg.expansion_lab_array_item', N'U') <> @table_id
+       OR HASHBYTES('SHA2_256', CONVERT(VARBINARY(MAX), @columns_before))
+          <> HASHBYTES('SHA2_256', CONVERT(VARBINARY(MAX), @columns_after))
+       OR HASHBYTES('SHA2_256', CONVERT(VARBINARY(MAX), @other_checks_before))
+          <> HASHBYTES('SHA2_256', CONVERT(VARBINARY(MAX), @other_checks_after))
+       OR HASHBYTES('SHA2_256', CONVERT(VARBINARY(MAX), @keys_before))
+          <> HASHBYTES('SHA2_256', CONVERT(VARBINARY(MAX), @keys_after))
+       OR HASHBYTES('SHA2_256', CONVERT(VARBINARY(MAX), @foreign_keys_before))
+          <> HASHBYTES('SHA2_256', CONVERT(VARBINARY(MAX), @foreign_keys_after))
+       OR NOT EXISTS (
+           SELECT 1 FROM sys.check_constraints
+           WHERE parent_object_id = @table_id AND name = N'CK_expansion_array_bound'
+             AND is_disabled = 0 AND is_not_trusted = 0 AND is_not_for_replication = 0
+       )
+        THROW 54184, N'V107_NON_TARGET_METADATA_OR_TRUST_POSTCONDITION_FAILED', 1;
+    COMMIT TRANSACTION;
+END TRY
+BEGIN CATCH
+    IF XACT_STATE() <> 0 ROLLBACK TRANSACTION;
+    THROW;
+END CATCH;

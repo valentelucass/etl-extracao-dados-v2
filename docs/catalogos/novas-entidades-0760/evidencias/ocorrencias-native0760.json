@@ -1,0 +1,267 @@
+{
+  "schema": "NEW_ENTITIES_NATIVE_INSPECT0760",
+  "reportId": 12072,
+  "day": "2026-11-08",
+  "fileId": "1777562",
+  "nativePath": "C:\\Users\\suporte\\Documents\\Armazenamento-Projetos\\etl-extracao-dados-v2\\novas-entidades0760\\native-12072-2026-11-08-1777562.xlsx",
+  "nativeSha256": "939b1f9c69434478bf2231ba52010a7627e2318b02b38787c7a137ef66603464",
+  "zipCrcPass": true,
+  "sheet": "Sheet1",
+  "sheetCount": 1,
+  "headersExact": true,
+  "headerRow": 1,
+  "sheetRows": 280,
+  "sheetColumns": 20,
+  "sourceRows": 279,
+  "sourceFields": 20,
+  "fields": [
+    {
+      "ordinal": 1,
+      "field": "ice_f_e_fit_corporation_sequence_number",
+      "header": "Minuta",
+      "nativeTypes": {
+        "NUMBER": 279
+      },
+      "numberFormats": [
+        "General"
+      ],
+      "maxUtf16": 0
+    },
+    {
+      "ordinal": 2,
+      "field": "ice_f_e_ioe_number",
+      "header": "Nota Fiscal",
+      "nativeTypes": {
+        "STRING": 279
+      },
+      "numberFormats": [
+        "General"
+      ],
+      "maxUtf16": 7
+    },
+    {
+      "ordinal": 3,
+      "field": "ice_fit_fhe_cte_number",
+      "header": "CTe",
+      "nativeTypes": {
+        "NUMBER": 275,
+        "NULL": 4
+      },
+      "numberFormats": [
+        null,
+        "General"
+      ],
+      "maxUtf16": 0
+    },
+    {
+      "ordinal": 4,
+      "field": "ice_ore_code",
+      "header": "Ocorrência/Código",
+      "nativeTypes": {
+        "NUMBER": 279
+      },
+      "numberFormats": [
+        "General"
+      ],
+      "maxUtf16": 0
+    },
+    {
+      "ordinal": 5,
+      "field": "ice_ore_description",
+      "header": "Ocorrência/Ocorrência",
+      "nativeTypes": {
+        "STRING": 279
+      },
+      "numberFormats": [
+        "General"
+      ],
+      "maxUtf16": 30
+    },
+    {
+      "ordinal": 6,
+      "field": "occurrence_at",
+      "header": "Data ocorrência",
+      "nativeTypes": {
+        "DATETIME": 279
+      },
+      "numberFormats": [
+        "DD/MM/YYYY HH:MM:SS"
+      ],
+      "maxUtf16": 0
+    },
+    {
+      "ordinal": 7,
+      "field": "on_mobile",
+      "header": "Baixa por mobile",
+      "nativeTypes": {
+        "STRING": 279
+      },
+      "numberFormats": [
+        "General"
+      ],
+      "maxUtf16": 3
+    },
+    {
+      "ordinal": 8,
+      "field": "ice_uer_name",
+      "header": "Usuário/Nome",
+      "nativeTypes": {
+        "STRING": 279
+      },
+      "numberFormats": [
+        "General"
+      ],
+      "maxUtf16": 31
+    },
+    {
+      "ordinal": 9,
+      "field": "ice_fit_service_at",
+      "header": "Frete/Data do frete",
+      "nativeTypes": {
+        "DATETIME": 279
+      },
+      "numberFormats": [
+        "DD/MM/YYYY HH:MM:SS"
+      ],
+      "maxUtf16": 0
+    },
+    {
+      "ordinal": 10,
+      "field": "ice_fit_dpn_delivery_prediction_at",
+      "header": "Previsão Entrega/Previsão de entrega",
+      "nativeTypes": {
+        "DATETIME": 279
+      },
+      "numberFormats": [
+        "DD/MM/YYYY HH:MM:SS"
+      ],
+      "maxUtf16": 0
+    },
+    {
+      "ordinal": 11,
+      "field": "occurrence_schedule_at",
+      "header": "Data agendamento",
+      "nativeTypes": {
+        "NULL": 279
+      },
+      "numberFormats": [
+        "DD/MM/YYYY HH:MM:SS"
+      ],
+      "maxUtf16": 0
+    },
+    {
+      "ordinal": 12,
+      "field": "ice_fit_dpn_performance_finished_at",
+      "header": "Previsão Entrega/Finalização performance",
+      "nativeTypes": {
+        "NULL": 228,
+        "DATETIME": 51
+      },
+      "numberFormats": [
+        "DD/MM/YYYY HH:MM:SS"
+      ],
+      "maxUtf16": 0
+    },
+    {
+      "ordinal": 13,
+      "field": "delivery_status",
+      "header": "Status Entrega",
+      "nativeTypes": {
+        "STRING": 279
+      },
+      "numberFormats": [
+        "General"
+      ],
+      "maxUtf16": 9
+    },
+    {
+      "ordinal": 14,
+      "field": "ice_fit_fln_cln_nickname",
+      "header": "Localização Atual",
+      "nativeTypes": {
+        "STRING": 279
+      },
+      "numberFormats": [
+        "General"
+      ],
+      "maxUtf16": 45
+    },
+    {
+      "ordinal": 15,
+      "field": "ice_fit_dpn_manual_schedule",
+      "header": "Agendado",
+      "nativeTypes": {
+        "STRING": 279
+      },
+      "numberFormats": [
+        "General"
+      ],
+      "maxUtf16": 3
+    },
+    {
+      "ordinal": 16,
+      "field": "ice_ttt_solution_deadline",
+      "header": "Tratativa/Prazo solução",
+      "nativeTypes": {
+        "NULL": 279
+      },
+      "numberFormats": [
+        "DD/MM/YYYY HH:MM:SS"
+      ],
+      "maxUtf16": 0
+    },
+    {
+      "ordinal": 17,
+      "field": "ice_ttt_solution_at",
+      "header": "Tratativa/Data Solução",
+      "nativeTypes": {
+        "NULL": 279
+      },
+      "numberFormats": [
+        "DD/MM/YYYY HH:MM:SS"
+      ],
+      "maxUtf16": 0
+    },
+    {
+      "ordinal": 18,
+      "field": "ice_ttt_solution_type",
+      "header": "Tratativa/Solução",
+      "nativeTypes": {
+        "NULL": 279
+      },
+      "numberFormats": [
+        null
+      ],
+      "maxUtf16": 0
+    },
+    {
+      "ordinal": 19,
+      "field": "ice_ttt_soe_description",
+      "header": "Tratativa/Ocorrência",
+      "nativeTypes": {
+        "NULL": 279
+      },
+      "numberFormats": [
+        null
+      ],
+      "maxUtf16": 0
+    },
+    {
+      "ordinal": 20,
+      "field": "ice_ttt_solution_comments",
+      "header": "Tratativa/Observações",
+      "nativeTypes": {
+        "NULL": 279
+      },
+      "numberFormats": [
+        null
+      ],
+      "maxUtf16": 0
+    }
+  ],
+  "sourceHTTP": 0,
+  "SQL": 0,
+  "rowsAfterHeader": 279,
+  "rowCountExact": true,
+  "formulaCells": 0
+}

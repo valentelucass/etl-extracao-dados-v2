@@ -1,0 +1,11 @@
+# Checkpoint0753 — Faturas por Cliente
+2026-11-08T13:45:41.2085347+00:00
+## Complemento 0753 — Faturas por Cliente em preparação; meta 3/3 e cinco Excel de provas
+
+Pedido atual do usuário: concluir a entidade restante e trazer Excel de provas das últimas entidades, excluindo Fretes, Manifestos, Coletas e Cotações. Escopo adotado: relatório4924/Faturas por Cliente até três períodos reais integralmente iguais, correções V2, testes e documentação; reunir provas de Inventário, Sinistros, Contas a Pagar, Localizador e Faturas. Localizador0752 continua aceito3/3; quatro Excel anteriores já existem e serão reaproveitados por recibos reais.
+
+Estado atual: Faturas0/3, nenhuma capturaSource/Native desta rodada, nenhum código4924 novo aplicado. UI real4924 autenticada:52colunas e18filtros; datafrete freights[service_at] será o único intervalo; os17auxiliares estão vazios. Sem inferir identidade de id/unique_id, deduplicar ou mudar ESL para caber no V2. Duas frentes estáticas existentes (inventario_codigo/inventario_harness), conformeAGENTS§9; Root único editor do repositório e executor pesado. Inventário inicial em work/faturas0753/initial-git-status.txt; preservar todas alterações preexistentes.
+
+Limites: três semanas12–18out,19–25out,26out–1nov2026; comparação integral de colunas/tuplas/multiplicidades e totais declarados, não só amostra. Fonte em operações delimitadas Source210s/INFO1+DATA16/HTTP17/per100/8MiB12000linhas/intervalo3s/retry0/redirect0; dividir períodos se necessário com prova de cobertura. Original1GiB300s/global270,Java512MiB; um Original pesado por vez. Dados privados/RAW/XLSX/binaries somente dentro do Original; fora apenas código/metadados/recibos sanitizados. Não SQL/Main/deploy/V1/ACL. Preservar falhas e fechar/restaurar cada operação antes da seguinte; resultado incerto exige conciliação, nunca repetição cega. Uma aba útil da ESL.
+
+Próximas ações: concluir candidatos e qualificação do código; gerar e capturar três Native oficiais com escopos exatos e três extrações completas; comparar3/3, gerar Excel Faturas e reunir os cinco arquivos com quantidades/amostras. Checkpoint inicial: docs/continuidade/checkpoints/0753-faturas-por-cliente-inicio.md. Sem bloqueio externo conhecido; não declarar aceite antes de executar as provas.

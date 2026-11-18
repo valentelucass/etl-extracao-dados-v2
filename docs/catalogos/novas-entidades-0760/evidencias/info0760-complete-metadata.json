@@ -1,0 +1,947 @@
+{
+  "schema": "NEW_ENTITIES_INFO0760",
+  "startedUtc": "2026-11-09T19:01:18.7476564Z",
+  "success": true,
+  "calls": 2,
+  "maximumCalls": 2,
+  "retry": 0,
+  "redirect": 0,
+  "businessDataRequested": false,
+  "SQL": 0,
+  "reports": [
+    {
+      "reportId": 11067,
+      "httpStatus": 200,
+      "topLevelKeys": [
+        "default_order",
+        "fields",
+        "filters",
+        "required_date_filters"
+      ],
+      "defaultOrder": "issue_date",
+      "requiredDateFilters": [
+        "consolidations.issue_date"
+      ],
+      "fields": [
+        {
+          "key": "ctd_fgs_crn_psn_nickname",
+          "metadataKeys": [
+            "max_width",
+            "order",
+            "title"
+          ],
+          "title": "Filial Expedidora"
+        },
+        {
+          "key": "sequence_code",
+          "metadataKeys": [
+            "max_width",
+            "order",
+            "title"
+          ],
+          "title": "N° Consolidação"
+        },
+        {
+          "key": "issue_date",
+          "metadataKeys": [
+            "filter",
+            "max_width",
+            "order",
+            "title"
+          ],
+          "title": "Emissão Consolidação"
+        },
+        {
+          "key": "ctd_rhr_cpy_nickname",
+          "metadataKeys": [
+            "max_width",
+            "order",
+            "title"
+          ],
+          "title": "Transportadora"
+        },
+        {
+          "key": "ctd_rhr_cpy_document",
+          "metadataKeys": [
+            "max_width",
+            "order",
+            "title"
+          ],
+          "title": "CNPJ Transportadora"
+        },
+        {
+          "key": "document_number",
+          "metadataKeys": [
+            "max_width",
+            "order",
+            "title"
+          ],
+          "title": "CTe 3º"
+        },
+        {
+          "key": "ctd_fgs_fhe_cte_number",
+          "metadataKeys": [
+            "max_width",
+            "order",
+            "title"
+          ],
+          "title": "CTe Rodogarcia"
+        },
+        {
+          "key": "charged_value",
+          "metadataKeys": [
+            "filter",
+            "max_width",
+            "order",
+            "title"
+          ],
+          "title": "Valor Frete a Pagar à Credenciada"
+        },
+        {
+          "key": "subtotal",
+          "metadataKeys": [
+            "filter",
+            "max_width",
+            "order",
+            "title"
+          ],
+          "title": "Valor Calculado ESL"
+        },
+        {
+          "key": "ctd_fgs_subtotal",
+          "metadataKeys": [
+            "filter",
+            "max_width",
+            "order",
+            "title"
+          ],
+          "title": "Frete Rodogarcia Sem Impostos"
+        },
+        {
+          "key": "ctd_fgs_total",
+          "metadataKeys": [
+            "filter",
+            "max_width",
+            "order",
+            "title"
+          ],
+          "title": "Frete Rodogarcia Final"
+        },
+        {
+          "key": "ctd_fgs_taxed_weight",
+          "metadataKeys": [
+            "filter",
+            "max_width",
+            "order",
+            "title"
+          ],
+          "title": "Peso Taxado Rodogarcia"
+        },
+        {
+          "key": "ctd_fgs_fte_has_delivery_receipt",
+          "metadataKeys": [
+            "filter",
+            "max_width",
+            "order",
+            "title"
+          ],
+          "title": "Comprovante Anexado"
+        },
+        {
+          "key": "bill_status",
+          "metadataKeys": [
+            "max_width",
+            "order",
+            "title"
+          ],
+          "title": "Status Fatura"
+        },
+        {
+          "key": "ctd_fgs_service_at",
+          "metadataKeys": [
+            "filter",
+            "max_width",
+            "order",
+            "title"
+          ],
+          "title": "Data Frete Rodogarcia"
+        },
+        {
+          "key": "ctd_fgs_corporation_sequence_number",
+          "metadataKeys": [
+            "max_width",
+            "order",
+            "title"
+          ],
+          "title": "Minuta Rodogarcia"
+        },
+        {
+          "key": "ctd_fgs_invoices_volumes",
+          "metadataKeys": [
+            "filter",
+            "max_width",
+            "order",
+            "title"
+          ],
+          "title": "Volumes Rodogarcia"
+        },
+        {
+          "key": "ctd_fgs_invoices_mapping",
+          "metadataKeys": [
+            "filter",
+            "max_width",
+            "order",
+            "title"
+          ],
+          "title": "Nº NF"
+        },
+        {
+          "key": "ctd_fgs_dos_cty_name",
+          "metadataKeys": [
+            "max_width",
+            "order",
+            "title"
+          ],
+          "title": "Cidade Origem Rodogarcia"
+        },
+        {
+          "key": "ctd_sdr_document",
+          "metadataKeys": [
+            "max_width",
+            "order",
+            "title"
+          ],
+          "title": "CNPJ Remetente"
+        },
+        {
+          "key": "ctd_sdr_nickname",
+          "metadataKeys": [
+            "max_width",
+            "order",
+            "title"
+          ],
+          "title": "Remetente"
+        },
+        {
+          "key": "ctd_fgs_oas_cty_name",
+          "metadataKeys": [
+            "max_width",
+            "order",
+            "title"
+          ],
+          "title": "Cidade Destino Rodogarcia"
+        },
+        {
+          "key": "ctd_rpt_document",
+          "metadataKeys": [
+            "max_width",
+            "order",
+            "title"
+          ],
+          "title": "CNPJ Destinatário"
+        },
+        {
+          "key": "ctd_rpt_nickname",
+          "metadataKeys": [
+            "max_width",
+            "order",
+            "title"
+          ],
+          "title": "Destinatário"
+        },
+        {
+          "key": "ctd_rpt_charge_tde",
+          "metadataKeys": [
+            "filter",
+            "max_width",
+            "order",
+            "title"
+          ],
+          "title": "Cobra TDE"
+        },
+        {
+          "key": "ctd_fgs_dpn_delivery_prediction_at",
+          "metadataKeys": [
+            "filter",
+            "max_width",
+            "order",
+            "title"
+          ],
+          "title": "Previsão de Entrega"
+        },
+        {
+          "key": "ctd_fgs_finished_at",
+          "metadataKeys": [
+            "filter",
+            "max_width",
+            "order",
+            "title"
+          ],
+          "title": "Data de Entrega"
+        },
+        {
+          "key": "ctd_fgs_dpn_finished_within_deadline",
+          "metadataKeys": [
+            "filter",
+            "max_width",
+            "order",
+            "title"
+          ],
+          "title": "Entregue no Prazo"
+        },
+        {
+          "key": "ctd_fgs_fte_lce_ore_description",
+          "metadataKeys": [
+            "max_width",
+            "order",
+            "title"
+          ],
+          "title": "Última Ocorrência"
+        },
+        {
+          "key": "ctd_fgs_fte_foe_ore_description",
+          "metadataKeys": [
+            "max_width",
+            "order",
+            "title"
+          ],
+          "title": "Ocorrência Finalizadora"
+        },
+        {
+          "key": "ctd_fgs_fte_foe_occurrence_at",
+          "metadataKeys": [
+            "filter",
+            "max_width",
+            "order",
+            "title"
+          ],
+          "title": "Data Ocorrência Finalizadora"
+        },
+        {
+          "key": "ctd_fgs_d_t_created_at",
+          "metadataKeys": [
+            "filter",
+            "max_width",
+            "order",
+            "title"
+          ],
+          "title": "Comprovantes de entrega/Data criação"
+        },
+        {
+          "key": "invoices_volumes",
+          "metadataKeys": [
+            "filter",
+            "max_width",
+            "order",
+            "title"
+          ],
+          "title": "Volumes Consolidação"
+        },
+        {
+          "key": "real_weight",
+          "metadataKeys": [
+            "filter",
+            "max_width",
+            "order",
+            "title"
+          ],
+          "title": "Peso Real Consolidação"
+        },
+        {
+          "key": "taxed_weight",
+          "metadataKeys": [
+            "filter",
+            "max_width",
+            "order",
+            "title"
+          ],
+          "title": "Peso Taxado Consolidação"
+        },
+        {
+          "key": "invoices_value",
+          "metadataKeys": [
+            "filter",
+            "max_width",
+            "order",
+            "title"
+          ],
+          "title": "Valor NF Consolidação"
+        },
+        {
+          "key": "ctd_diy_cin_tda_value",
+          "metadataKeys": [
+            "filter",
+            "max_width",
+            "order",
+            "title"
+          ],
+          "title": "Valor TDA"
+        },
+        {
+          "key": "ctd_ant_document",
+          "metadataKeys": [
+            "max_width",
+            "order",
+            "title"
+          ],
+          "title": "Nº Fatura Financeiro"
+        },
+        {
+          "key": "charged_value_details",
+          "metadataKeys": [
+            "filter",
+            "max_width",
+            "order",
+            "title"
+          ],
+          "title": "Composição XML"
+        }
+      ],
+      "filters": [
+        {
+          "metadataKeys": [
+            "collection",
+            "field",
+            "label",
+            "maxlength",
+            "position",
+            "select",
+            "table",
+            "type"
+          ],
+          "field": "issue_date",
+          "label": "Emissão",
+          "type": "date"
+        },
+        {
+          "metadataKeys": [
+            "collection",
+            "field",
+            "label",
+            "maxlength",
+            "position",
+            "select",
+            "table",
+            "type"
+          ],
+          "field": "sequence_code",
+          "label": "N° Consolidação",
+          "type": "numeric"
+        },
+        {
+          "metadataKeys": [
+            "collection",
+            "field",
+            "label",
+            "maxlength",
+            "position",
+            "select",
+            "table",
+            "type"
+          ],
+          "field": "document_number",
+          "label": "Nº CT-e 3º",
+          "type": "string"
+        },
+        {
+          "metadataKeys": [
+            "collection",
+            "field",
+            "label",
+            "maxlength",
+            "position",
+            "select",
+            "table",
+            "type"
+          ],
+          "field": "operational_number",
+          "label": "N° Minuta",
+          "type": "string"
+        },
+        {
+          "metadataKeys": [
+            "collection",
+            "field",
+            "label",
+            "maxlength",
+            "position",
+            "select",
+            "table",
+            "type"
+          ],
+          "field": "redispatch_carrier_id",
+          "label": "Transportadora",
+          "type": "select"
+        },
+        {
+          "metadataKeys": [
+            "collection",
+            "field",
+            "label",
+            "maxlength",
+            "position",
+            "select",
+            "table",
+            "type"
+          ],
+          "field": "price_table_id",
+          "label": "Tabela de Preço",
+          "type": "select"
+        },
+        {
+          "metadataKeys": [
+            "collection",
+            "field",
+            "label",
+            "maxlength",
+            "position",
+            "select",
+            "table",
+            "type"
+          ],
+          "field": "origin_city_id",
+          "label": "Cidade origem",
+          "type": "select"
+        },
+        {
+          "metadataKeys": [
+            "collection",
+            "field",
+            "label",
+            "maxlength",
+            "position",
+            "select",
+            "table",
+            "type"
+          ],
+          "field": "destination_city_id",
+          "label": "Cidade destino",
+          "type": "select"
+        },
+        {
+          "metadataKeys": [
+            "collection",
+            "field",
+            "label",
+            "maxlength",
+            "position",
+            "select",
+            "table",
+            "type"
+          ],
+          "field": "payer_id",
+          "label": "Tomador",
+          "type": "select"
+        }
+      ]
+    },
+    {
+      "reportId": 12072,
+      "httpStatus": 200,
+      "topLevelKeys": [
+        "default_order",
+        "fields",
+        "filters",
+        "required_date_filters"
+      ],
+      "defaultOrder": null,
+      "requiredDateFilters": [
+        "invoice_occurrences.occurrence_at",
+        "invoice_occurrences.updated_at"
+      ],
+      "fields": [
+        {
+          "key": "ice_f_e_fit_corporation_sequence_number",
+          "metadataKeys": [
+            "max_width",
+            "order",
+            "title"
+          ],
+          "title": "Minuta"
+        },
+        {
+          "key": "ice_f_e_ioe_number",
+          "metadataKeys": [
+            "filter",
+            "max_width",
+            "order",
+            "title"
+          ],
+          "title": "Nota Fiscal"
+        },
+        {
+          "key": "ice_fit_fhe_cte_number",
+          "metadataKeys": [
+            "max_width",
+            "order",
+            "title"
+          ],
+          "title": "CTe"
+        },
+        {
+          "key": "ice_ore_code",
+          "metadataKeys": [
+            "max_width",
+            "order",
+            "title"
+          ],
+          "title": "Ocorrência/Código"
+        },
+        {
+          "key": "ice_ore_description",
+          "metadataKeys": [
+            "max_width",
+            "order",
+            "title"
+          ],
+          "title": "Ocorrência/Ocorrência"
+        },
+        {
+          "key": "occurrence_at",
+          "metadataKeys": [
+            "filter",
+            "max_width",
+            "order",
+            "title"
+          ],
+          "title": "Data ocorrência"
+        },
+        {
+          "key": "on_mobile",
+          "metadataKeys": [
+            "filter",
+            "max_width",
+            "order",
+            "title"
+          ],
+          "title": "Baixa por mobile"
+        },
+        {
+          "key": "ice_uer_name",
+          "metadataKeys": [
+            "max_width",
+            "order",
+            "title"
+          ],
+          "title": "Usuário/Nome"
+        },
+        {
+          "key": "ice_fit_service_at",
+          "metadataKeys": [
+            "filter",
+            "max_width",
+            "order",
+            "title"
+          ],
+          "title": "Frete/Data do frete"
+        },
+        {
+          "key": "ice_fit_dpn_delivery_prediction_at",
+          "metadataKeys": [
+            "filter",
+            "max_width",
+            "order",
+            "title"
+          ],
+          "title": "Previsão Entrega/Previsão de entrega"
+        },
+        {
+          "key": "occurrence_schedule_at",
+          "metadataKeys": [
+            "filter",
+            "max_width",
+            "order",
+            "title"
+          ],
+          "title": "Data agendamento"
+        },
+        {
+          "key": "ice_fit_dpn_performance_finished_at",
+          "metadataKeys": [
+            "filter",
+            "max_width",
+            "order",
+            "title"
+          ],
+          "title": "Previsão Entrega/Finalização performance"
+        },
+        {
+          "key": "delivery_status",
+          "metadataKeys": [
+            "filter",
+            "max_width",
+            "order",
+            "title"
+          ],
+          "title": "Status Entrega"
+        },
+        {
+          "key": "ice_fit_fln_cln_nickname",
+          "metadataKeys": [
+            "max_width",
+            "order",
+            "title"
+          ],
+          "title": "Localização Atual"
+        },
+        {
+          "key": "ice_fit_dpn_manual_schedule",
+          "metadataKeys": [
+            "filter",
+            "max_width",
+            "order",
+            "title"
+          ],
+          "title": "Agendado"
+        },
+        {
+          "key": "ice_ttt_solution_deadline",
+          "metadataKeys": [
+            "filter",
+            "max_width",
+            "order",
+            "title"
+          ],
+          "title": "Tratativa/Prazo solução"
+        },
+        {
+          "key": "ice_ttt_solution_at",
+          "metadataKeys": [
+            "filter",
+            "max_width",
+            "order",
+            "title"
+          ],
+          "title": "Tratativa/Data Solução"
+        },
+        {
+          "key": "ice_ttt_solution_type",
+          "metadataKeys": [
+            "filter",
+            "max_width",
+            "order",
+            "title"
+          ],
+          "title": "Tratativa/Solução"
+        },
+        {
+          "key": "ice_ttt_soe_description",
+          "metadataKeys": [
+            "max_width",
+            "order",
+            "title"
+          ],
+          "title": "Tratativa/Ocorrência"
+        },
+        {
+          "key": "ice_ttt_solution_comments",
+          "metadataKeys": [
+            "max_width",
+            "order",
+            "title"
+          ],
+          "title": "Tratativa/Observações"
+        }
+      ],
+      "filters": [
+        {
+          "metadataKeys": [
+            "collection",
+            "field",
+            "label",
+            "maxlength",
+            "position",
+            "select",
+            "table",
+            "type"
+          ],
+          "field": "occurrence_at",
+          "label": "Data ocorrência",
+          "type": "date"
+        },
+        {
+          "metadataKeys": [
+            "collection",
+            "field",
+            "label",
+            "maxlength",
+            "position",
+            "select",
+            "table",
+            "type"
+          ],
+          "field": "by_cte_or_draft_number",
+          "label": "Doc/Minuta",
+          "type": "numeric"
+        },
+        {
+          "metadataKeys": [
+            "collection",
+            "field",
+            "label",
+            "maxlength",
+            "position",
+            "select",
+            "table",
+            "type"
+          ],
+          "field": "by_freight_reference_number",
+          "label": "Nº Referência",
+          "type": "string"
+        },
+        {
+          "metadataKeys": [
+            "collection",
+            "field",
+            "label",
+            "maxlength",
+            "position",
+            "select",
+            "table",
+            "type"
+          ],
+          "field": "by_invoice_number",
+          "label": "Nota Fiscal",
+          "type": "numeric"
+        },
+        {
+          "metadataKeys": [
+            "collection",
+            "field",
+            "label",
+            "maxlength",
+            "position",
+            "select",
+            "table",
+            "type"
+          ],
+          "field": "by_invoice_key",
+          "label": "Chave NF-e",
+          "type": "numeric"
+        },
+        {
+          "metadataKeys": [
+            "collection",
+            "field",
+            "label",
+            "maxlength",
+            "position",
+            "select",
+            "table",
+            "type"
+          ],
+          "field": "by_cte_key",
+          "label": "Chave CT-e",
+          "type": "numeric"
+        },
+        {
+          "metadataKeys": [
+            "collection",
+            "field",
+            "label",
+            "maxlength",
+            "position",
+            "select",
+            "table",
+            "type"
+          ],
+          "field": "from_manifest_sequence_code",
+          "label": "Manifesto",
+          "type": "numeric"
+        },
+        {
+          "metadataKeys": [
+            "collection",
+            "field",
+            "label",
+            "maxlength",
+            "position",
+            "select",
+            "table",
+            "type"
+          ],
+          "field": "from_consolidation_document_number",
+          "label": "Nº Consolidação",
+          "type": "numeric"
+        },
+        {
+          "metadataKeys": [
+            "collection",
+            "field",
+            "label",
+            "maxlength",
+            "position",
+            "select",
+            "table",
+            "type"
+          ],
+          "field": "from_freight_payer",
+          "label": "Pagador",
+          "type": "select"
+        },
+        {
+          "metadataKeys": [
+            "collection",
+            "field",
+            "label",
+            "maxlength",
+            "position",
+            "select",
+            "table",
+            "type"
+          ],
+          "field": "by_mobile",
+          "label": "Baixa por mobile",
+          "type": "select"
+        },
+        {
+          "metadataKeys": [
+            "collection",
+            "field",
+            "label",
+            "maxlength",
+            "position",
+            "select",
+            "table",
+            "type"
+          ],
+          "field": "description",
+          "label": "Ocorrência/Ocorrência",
+          "type": "string"
+        },
+        {
+          "metadataKeys": [
+            "collection",
+            "field",
+            "label",
+            "maxlength",
+            "position",
+            "select",
+            "table",
+            "type"
+          ],
+          "field": "code",
+          "label": "Ocorrência/Código",
+          "type": "string"
+        },
+        {
+          "metadataKeys": [
+            "collection",
+            "field",
+            "label",
+            "maxlength",
+            "position",
+            "select",
+            "table",
+            "type"
+          ],
+          "field": "updated_at",
+          "label": "Data atualização",
+          "type": "datetime"
+        }
+      ]
+    }
+  ],
+  "reason": null,
+  "finishedUtc": "2026-11-09T19:01:23.6367862Z"
+}

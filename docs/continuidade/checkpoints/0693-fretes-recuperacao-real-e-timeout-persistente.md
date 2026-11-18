@@ -1,0 +1,9 @@
+## Estado vigente0693 — Recuperação real comprovada, nova falha persistente preservada
+
+Source0691 concluiu946 ocorrências/850 IDs após recuperar dois422 nas páginas3 e7. Comparação REAL de todas114 colunas com Excel1764306/21:15:112 integralmente iguais;106 Custos/Manifesto e110 Custos/Custo Total diferem nos mesmos10 IDs, até8.87, sem justificativa por arredondamento. Fretes0/3 semanas;Coletas3/3;V1pausado. Não declarar solução universal nem aceite100%.
+
+Produto Java recuperadoB75E qualificado:Original83456/0,3javac+19 suítes reais PASS, jar1BA8FC7021F7B334A5399BD9563A0F40445AF5C1D83D19C36029A5BA2EC405E9/3524500B;FP real conferido;hostE96AB467/adopçãoF2C71A7E. Os quatroPS3750 mantêm13×4 testes PASS. Não repetir qualificação sem novo achado. Gracecontroller opcional não adotado.
+
+Nova Source0692/a5b69d6d com mesmo perfil recebeuINFO200 eDATA1 exact422 duas vezes:4749ms/3285ms, repetição após10s, STOP no limite1/página. Nenhum429, nenhuma linha projetada. Original71412/1/42216ms422043648B/Java8400/1/stdin+EOF fechados; três efeitos conhecidos reconciliados. Auditoria REAL Root Original59416/0/3428ms78028800B/Node83544/0 verificou3RAW,8 arquivos declarados,recibos,physicalFacts e assinaturaEd25519 existente sem nova assinatura. Prova5E836C12/aceite78A43813.
+
+ATUAL90A7A22B995F3846BE9E23AA73F6E2B71DC315EFA034A6D420A6888C043BF21F/718221B/ACL B4/Root0658/vaga0;18complete+8partial. Controle304BAB7D/30325B;typedD9DEEA4B/1953B;chainB83B287E/6133B,um passo3reservas depois da fronteira completa0691; funções FctxControl+Frontier reais PASS e todos valores históricos lexicalmente preservados. Não restaurarC620/E0E7/035F; grants anteriores consumidos. Próximo: novo censo e seleção explícita de JVMs atuais,Native sob estado novo,uma Source controlada e Excel recente. Nenhum processo externo,serviço,SQLprodução será alterado. Usuário saiu e autorizou continuidade; manter documentação e não aguardar confirmação desnecessária.

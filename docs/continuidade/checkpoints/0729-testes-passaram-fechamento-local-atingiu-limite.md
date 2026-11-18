@@ -1,0 +1,13 @@
+# 0729 Testes passaram; lote local atingiu limite no fechamento
+
+Coletas e Fretes continuam com três períodos aprovados por conteúdo. As seis referências reais foram reproduzidas, e os 143 testes JUnit da unit06 passaram novamente, sem falhas, erros ou casos ignorados. Nenhuma nova requisição à ESL foi feita nesta etapa.
+
+O Original 31136 da execução TEST0728 chegou ao limite local de 300 segundos durante a conferência posterior ao Maven. O diagnóstico provisório, já escrito, contém 143 testes, 14 relatórios e 49 classes de propriedade da unidade; a última revalidação de leases e o recibo do worker não chegaram a terminar. Esse diagnóstico não será usado como build qualificado. O recibo Original registra saída124, TimedOut=true, 300122ms e pico1001328640 bytes, abaixo de1GiB.
+
+O parent manteve o próprio slot, com originalClosedKnown=false e stateRestored=false. A fase atual é uma recuperação Source0 específica deste lote: verificar fisicamente o encerramento do próprio processo e descendentes, preservar todos os recibos de timeout e restaurar somente seu snapshot se as provas permitirem. Não iniciar outro lote de negócio, classpath, replay, Maven, Java ou Python enquanto esse fechamento não for comprovado. Não há HTTP conhecido em andamento.
+
+A região do código foi localizada: depois de gravar o diagnóstico, o worker faz a última revalidação dos arquivos retidos. A causa da duração ainda não foi medida. Será investigada uma implementação mais eficiente das mesmas verificações, preservando hashes de caminho e handle, tamanhos, recusa de reparse, número de testes, limite de memória e prazo. Não resolver aumentando o teto ou pulando verificações.
+
+O V5b corrigiu o bug anterior do nome de elemento XML; os 143 casos e o diagnóstico chegaram a passar. As recusas antigas, este timeout e os arquivos parciais ficam preservados. A base esperada após recuperação continua AUX28/49A25567 e canônico FB923CC5, com todos os fatos anteriores. O estado presente tem slot retido, portanto não equivale a essa base ociosa.
+
+Replay Java, diferencial129+2, acionador oficial e produção dos fatos governados do dashboard continuam pendentes. Os candidatos estão fora de P; o código da unit06 está congelado. V1 pausado; entidades Data Export e GraphQL somente usuários. Sem SQL de produção, deploy, serviços, ACL, contas, credenciais ou processos externos alterados. Detalhes em supervisor outputs/root-resume-fretes0729-01.json.

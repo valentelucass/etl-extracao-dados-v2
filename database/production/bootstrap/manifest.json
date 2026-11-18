@@ -1,0 +1,25 @@
+{
+  "package_version": "0758-container-v1",
+  "target": "ETL_SISTEMA_V2",
+  "product_version": "16.0.1000.6",
+  "scope": "DATABASE_CONTAINER_ONLY",
+  "schema_install_allowed": false,
+  "collation": "Latin1_General_100_CI_AS_SC",
+  "compatibility_level": 160,
+  "security_effects": "No custom login/user/role/grant/ownership operations",
+  "migration_history": "No Flyway history or baseline fabricated",
+  "files": [
+    {
+      "name": "001_create_database.sql",
+      "sha256": "13E03816C3464EDF870F0FE2AF9F6158BCF6B47B03A6591AB6C224DD1F4B5C51"
+    },
+    {
+      "name": "002_configure_database.sql",
+      "sha256": "14F084D690C374328BA8A92241C213874B3B314B5FF54728CCE1503114C9C68B"
+    },
+    {
+      "name": "003_verify_database.sql",
+      "sha256": "114B4D52CC7958CD3C89349C9E4418D0D3CD639AAD099BB46F7E6AC61CB15F91"
+    }
+  ]
+}

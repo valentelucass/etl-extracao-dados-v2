@@ -1,0 +1,73 @@
+# 0668 — Dois Excel novos preservados; data fixa no produto encontrada
+
+Registro de 03/11/2026. Coletas6908 continua a única entidade em execução. O primeiro período, 19–25/10/2026, permanece aprovado integralmente: 31 colunas associadas, 1.561 ocorrências, 1.155 coletas, zero diferenças ou pendências, 131 verificações. Aceite Root B323905B, progresso **1 de 3 períodos**. Não há aprovação dos outros dois períodos nem do consumo real pelo dashboard.
+
+## Referências reais obtidas
+
+O usuário concluiu o login no navegador interno autorizado. O relatório 6908 abriu autenticado. A prévia travou ao aplicar o filtro em uma aba; ela foi fechada e substituída, conforme instrução humana. As exportações foram geradas com filtro **Data Solicitação**, demais datas, Filial e Status vazios, sem salvar ou alterar o template de 31 campos.
+
+| Arquivo ESL | Período | Geração BRT | Linhas informadas pela ESL | Campos | Cache | SHA-256 da cópia exata |
+|---|---|---|---:|---:|---|---|
+| 1760627 | 12–18/10/2026 | 03/11, 18:36 | 1.277 | 31 | Não | `8C7DD4EC94E08053E9FE2BC73EFA7D8FA2AE98D2AC40DDF0FC10EC30F5DA0D88` |
+| 1760628 | 26/10–01/11/2026 | 03/11, 18:37 | 1.431 | 31 | Não | `3179F10E91ADC802E9E13827C4BF789EA066AE5E3B8631988FC041EDB516AF8A` |
+
+Ambos foram efetivamente baixados e marcados Baixado na ESL. O evento automático de download do navegador expirou no primeiro arquivo, mas o download ocorreu e foi confirmado no sistema de arquivos e na ESL; não foi necessário repetir nem pedir download manual. Prova visual no workspace Root: `outputs/esl-coletas-duas-semanas-baixadas-20261103.jpg`.
+
+Cópias exatas em `C:/Users/suporte/Documents/Armazenamento-Projetos/dashboards-etl/coletas-next-weeks-excel0667-01/excel/`. Staging sob Original: retorno 0, 1.170 ms, pico 38.514.688 bytes; encerramento confirmado e estado restaurado. Aceite Root `root-acceptance-next-weeks-excel0667-01.json`, SHA `76FD02D4FCE10C3A9510089AFFEA2B191A0E55F61B19E49BF85B5F7F6C6906AC`. Essas contagens são referências do Excel, sem presumir contagens da API ou paridade.
+
+## Leitura nativa concluída
+
+Os dois workbooks foram inventariados integralmente em execuções protegidas independentes, um por invocação. O algoritmo streaming do leitor DD4DDB foi preservado; o sucessor privado restringiu template a6908 e permitiu exatamente as duas semanas novas. Não houve conversão de células, reinterpretação de número/data, filtro reaplicado, deduplicação, Source ou SQL. Bytes nativos, estilos, máscaras, épocas, fórmulas e caches continuam preservados.
+
+- 12–18: inventário `5ACA46E407D64C8DAC52270044B933B8606FB5BF6B3E7C8B6CE4A9B8E47C9181`; COMPLETE `2BBF17933F05ED37E224030D5155167AD2B00CC43CCBF0D35E60C2502C97DE59`. Original0/14.368ms/pico66.142.208B. Aceite Root `root-acceptance-next-week-native-12-18-0667-01.json`, SHA `CD21F8CC26A7B04302088A5108EB4536334F1C5BAF371AB7D19F89B689766AB9`.
+- 26–01: inventário/COMPLETE e métricas no recibo Root `root-acceptance-next-week-native-26-01-0667-01.json`, SHA `E0B1A9A8451C00551DE28BB41BE49A87ABFA01B5CDC0013DC0A0BCCF3416DDCC`.
+
+Os dois aceites são de preservação e cobertura da leitura. Não aprovam a comparação de conteúdo. As políticas específicas de representação temporal/numérica da semana anterior não são automaticamente transferidas.
+
+## Falha real da tentativa Source12–18 e causa
+
+Foi preparado um caller novo, vinculado ao baseline856F/703000B, autorização de continuação específica e histórico completo das12 fontes anteriores. A Source12 histórica tem effectIndex24; Source03 tem effectIndex38, comprovado pelo próprio `current-14.json` e publicação. A seleção atual de sete JVMs foi explicitamente revisada a partir de censo fechado, sem parar processos nem inferir sua finalidade. As seis identidades anteriores continuavam iguais; a sétima foi79424/parent7856/java.exe/nascimento2026-11-03T21:21:48.5440390Z. Isso é somente permissão de coexistência, sem autoridade de Source para esses processos.
+
+Unidade `coletas-weekly-real0667-01`, execução `4787ab85-8490-41ed-a775-6cf44636514f`, nonce `0c28e4571c9e4910ac2bac6afa73684e`. Emissor novo compilado e fechado sob Original; janela fixa21:53:47Z–21:59:47Z, sem renovação. Grant Root8FA764A7, caller9E08AC8B, produto548102BB.
+
+**A captura não ocorreu.** O Main genuíno parou em `CURRENT_READY`, antes de publicar READY, adotar contexto, reservar requisição ou chamar a ESL. A pilha registra `ColetasWeeklyCurrentGate.<init>` linha90. A fonte exercitada contém `businessStart == "2026-10-19" && businessEnd == "2026-10-25"` no guard `DESCRIPTOR_SCOPE_QUOTA`. O caller e o descriptor estavam corretamente em12–18/10; o produto5481 ainda recusava outra semana. Não é diferença de dados nem bloqueio429.
+
+Fonte privada localizada em `C:/Users/suporte/Documents/Codex/2026-10-27/etl-v2-execucao-qualificacao/work/coletas-weekly0652-v2-integration02/external-campos/ColetasWeeklyCurrentGate.java`. Não existe esse arquivo nesse caminho Java do checkout canônico; o artefato semanal contém composição privada que precisa de sucessor qualificado e posterior incorporação apropriada.
+
+A proveniência efetiva do5481, `coletas-weekly06-inspectseal01-output/input-provenance.json`, lista32 famílias e fixa o manifesto `supervisor-team0649-01/coletas-weekly-source-review0652-v2-weekly-zero06/file-manifest.json`, SHA `8EB3660D190033ECE8D0A19A00A2F781FBE9CFCEE57D31B7A9E5F73E5DB206A7`. A fonte efetivamente compilada do CurrentGate está em `coletas-weekly-source-review0652-v2-integration02/dependencies/campos-consumer02/ColetasWeeklyCurrentGate.java`. Uma primeira busca por datas ISO encontrou só esse literal; a revisão mais profunda também identificou `ColetasWeeklyLimits.START/END = LocalDate.of(2026,10,19/25)` e o uso dessas constantes por `ColetasWeeklySourceContext` para validar datas/partição e construir a primeira página. A correção deve cobrir os três caminhos, sem apenas substituir um literal de semana. O chat de correções foi instruído a entregar primeiro as fontes/diffs mínimos para revisão Root, enquanto prepara o build e os testes causais.
+
+O Original retornou0 como encerramento do host protegido, mas o Java retornou1 e o resultado da captura é falha. Original11.311ms/pico388.333.568B, Java/collector/native encerrados, inputs preservados. Nenhum journal, reserva, captura ou HTTP foi criado. O marcadorPRECLAIMzero foi reconciliado por igualdade da projeção estrangeira inteira e CAS para os bytes856F/703000B/B4/slot0. Aceite de encerramento apenas: `root-reconciliation-source17-preclaim0667-01.json`, SHA `FD94B1D619500D00676A7A1BE3131AC5FFD7F24A3141836F27E5C737104BF313`. Falha e evidências permanecem preservadas. Não reutilizar grant/janela/unidade; a tentativaAPI não foi consumida por esse processo.
+
+## Correção em andamento e próximo passo
+
+O chat autorizado de correções recebeu a causa exata e deve priorizar um sucessor mínimo do produto: vínculo coerente entre período aprovado, request e descriptor, validação da duração/partição, preservação de limites/freshness/pins e recusa de escopo incompatível. Deve procurar outros hardcodes de semana nas famílias do5481. Somente preparação estática nesse chat; Root continua único executor pesado, navegador e Source. Não trocar apenas uma semana fixa por outra nem modificar dados da fixture para esconder o problema.
+
+Após revisão/build/testes causais protegidos e nova vinculação do produto, usar namespace e autoridade novos para extrair12–18. INFO1+DATAaté16/total17HTTP/per100, intervalo mínimo3s após resposta, uma em voo/uma tentativa, request30s/Source210s/Original300s/1GiB, SQL0; STOPprimeiro429/não2xx, sem retry/fallback/rotação/repartição. EOF deve caber em16DATA. Comparar cada linha/campo/tupla/multiplicidade/total com o Excel correspondente, corrigir por causa e fechar100%; depois26–01. Colunas extras da API são válidas e preservadas. V1 permanece pausado.
+
+### Fontes corrigidas e compilação antecipada
+
+O pacote privado `Fix/outputs/coletas-product-periods0667-01/sources-first-index.json` foi congelado (2.702B/SHA `7D2A9D9A318A21C328C6A5E70441C6B939D6514723C18968D4066BACB170A863`). A revisão Root `root-review-period-product-sources0668-01.json`, SHA `A2782CC68475B0DCB86F6593750D381336917F7B17F487B6DA3F0226922A4F74`, leu o diff integral de quatro fontes: Limits aceita período canônico de1–7dias mantendo caps; SourceContext valida as14chaves textuais e a partição local e constrói a primeira página com esse período; CurrentGate lê o request com hash/limite16KiB, confronta execução e datas com o descriptor imutável; SourcePhase confere cada DATA com a janela original antes do gateway. START/END antigos permanecem apenas para compatibilidade das fixtures históricas, sem governar o caminho real. A verificação estática do preparador foi corrigida para diferenciar os identificadores maiúsculos da variável local `start`.
+
+Root antecipou uma única compilação das quatro fontes congeladas enquanto o chat preparava os testes e o builder. Javac0/3.724ms, quatro famílias completas, sem compilação implícita; Original0/5.843ms/pico303.161.344B, processos encerrados e856F/B4/slot0 restaurados. Não houve JAR produzido, teste, Source, HTTP ou SQL. Aceite **somente da compilação** `root-acceptance-period-sources-compile0668-01.json`, SHA `8C5B0D080ADC85A24F88704A03B396F45CA16445AB03B0A0AE316C20B948D711`; inventário11.582B/SHA `180FABBF7AF2C59A67E88A1A56C8DCA4800A65A93DB803F0C64F5A7AD80CC06E`, em `Root/work/period-sources-compile0668-01/compiled-inventory.json`. O chat foi instruído a reutilizar as classes aceitas, mantendo os pins, na montagem do produto e nos testes causais, sem repetir essa compilação sem mudança ou falha. Ainda faltam o pacote utilizável, a prova de famílias/Core/dependências, testes de comportamento e nova Source; o contador continua1/3.
+
+### Produto sucessor montado; testes causais aprovados
+
+A etapa seguinte também passou. Produto privado `Root/work/period-product-build0668-01/output/coletas-product-periods0668-unqualified.jar`, 3.407.723B/SHA `DFD451DE962BB2AF3BBF202D4C373D5BFF31F3CC3006C6EBA180FA6C92EA8967`. O nome histórico não é o veredito: o aceite Root `root-acceptance-period-product0668-01.json`, 4.881B/SHA `0E934460A490E01FE7F3A557E89EB01B2EA96DDE98BA927044696C156A3B4733`, aprova a correção de escopo para uma próxima captura controlada, com autorização/identidade/janela independentes. Não declara integração Main real já provada nem concede Source por si só.
+
+Foram reaproveitadas as quatro famílias compiladas, sem novo javac delas; uma compilação do probe de qualificação e duas JVMs locais. As duas semanas novas reproduziram a recusa `CW_DESCRIPTOR_SCOPE_QUOTA` no predecessor5481. O candidato passou21casos: duas novas semanas, semana antiga, dia único, datas cruzadas, intervalo invertido/maior que7dias, partições erradas, limites inválidos, hash/execução incompatíveis, construção efetiva da primeira página e recusa de página com outra janela. Canal/READY/dispatch não acionados, Source/HTTP/SQL0. São testes de escopo, não comparação de dados externos.
+
+A montagem conferiu todas as entradas:14classes das4famílias substituídas,1.475entradas restantes idênticas por bytehash, nomes de entradas preservados e32pins de fontes originais efetivamente presentes nas leases. Os três literais de data restantes foram classificados: versões de contrato de Coletas26/10 e de Manifestos/Cotações25/10, sem relação com o filtro semanal. Não foi usada busca de strings para alegar ausência de datas numéricas. Root revisou os três caminhos de período e o quarto guard antes do gateway separadamente.
+
+Original0/10.298ms/pico354.095.104B, todos os filhos encerrados,856F/B4/slot0 restaurados. O parent rascunho do chat de correções foi substituído na execução pelo parent Root já exercitado, mantendo mutex/slot/CAS; o worker de build/probe foi chamado apenas dentro do Original. Nenhum runtime ou dado de produção foi publicado. Próximo passo em preparo: caller/emissor mínimo paraDFD451DE, nova unidade `coletas-weekly-real0667-02` de12–18/10, censo físico atual e nova autoridade. Não repetir build/testes aprovados sem mudança ou falha. O primeiro período continua no produto5481 originalmente capturado; as mudanças do sucessor se limitam ao escopo e não às31extrações/mapeamentos. O contador permanece1/3 até os confrontos externos novos.
+
+## Dashboard
+
+As21 famílias de tipos SQL consumidas foram verificadas pelo validador, com campos adicionais permitidos. **52 testes passaram** (48 contrato+4 serviço), Original60.586ms/pico875.065.344B. Aceite17ED59D9. MapaAST atualizado serialmente: SHA64B68B93,109.384ms/pico1.005.481.984B, aceiteB27B1481. Sem Source/SQL/produção. Permanecem catálogo canônico, semântica de Cliente/Filial/regiões/manifesto, exclusão/horário, publicação/ponteV2, Volumes compatívelInteger, roundtrip e endpoints reais. Detalhes em `dashboards-etl/docs/coletas-aceite-consumo-v2-2026-11-03.md`.
+
+### Atualização 03/11/2026, 19:51 BRT — produto corrigido; segunda tentativa recusada antes da API
+
+O sucessor DFD451DE (3407723 bytes) passou 21 casos locais, incluindo as duas semanas novas, e a comparação do arquivo preservou 1475 entradas sem mudanças, com 14 classes alteradas nos quatro grupos de proteção de período. Aceite Root 0E934460. Isto qualifica a correção do período; ainda não comprova captura real completa nem paridade da segunda semana.
+
+A unidade coletas-weekly-real0667-02 chegou ao READY do produto, mas foi recusada pelo Native em READY_ADOPT_CONTEXT: CW_EXTERNAL_JVM_SELECTION_CHANGED, esperado 7/existentes 8. Surgiu o Java externo 16888 depois do censo. Nenhuma consulta HTTP, reserva ou captura foi realizada. Original encerrou com código 0, 10329 ms, pico 396623872 bytes; todos os processos próprios foram confirmados fechados. O código 0 comprova encerramento, não captura concluída. O marcador PRECLAIM de progresso zero foi reconciliado com comparação integral da projeção estrangeira e CAS para o baseline 856F/703000 bytes/B4/slot vazio; recibo 8C9B567E.
+
+Censo atual independente 0668-03, uma única observação protegida: o processo transitório já não consta entre os JVMs e as sete identidades anteriores permanecem exatas. Root aceitou a observação (83E45121) e reselecionou pessoalmente apenas as sete presentes (56A822C6). Nenhum processo externo foi parado/alterado e nenhuma função de aplicação foi inferida. Unidade 0667-03 em preparação com namespace/autoridade/janela novos, sem repetir a concessão 02. Continua 1/3 períodos completos; ambos os novos Excel e seus inventários já estão fechados. Consumo real do dashboard permanece pendente.

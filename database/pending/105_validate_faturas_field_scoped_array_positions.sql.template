@@ -1,0 +1,58 @@
+-- NON-EXECUTABLE DRAFT: read-only catalog verification after an authorized V107 application.
+-- Root/database owner supplies the exact reviewed final CHECK definition SHA and chosen bounds.
+-- No DDL, DML, transaction or business-row query; this is not full-schema/Main qualification.
+SET NOCOUNT ON;
+IF DB_NAME() <> N'ETL_SISTEMA_V2_SHADOW'
+    THROW 54190, N'FAT_ARRAY_EXACT_SHADOW_REQUIRED', 1;
+
+DECLARE @invoice_items INT = 110;
+DECLARE @order_items INT = 110;
+DECLARE @reviewed_definition_sha VARBINARY(32) = 0x__ROOT_FINAL_CHECK_DEFINITION_SHA256__;
+DECLARE @table_id INT = OBJECT_ID(N'stg.expansion_lab_array_item', N'U');
+IF @table_id IS NULL OR @invoice_items NOT BETWEEN 50 AND 32767 OR @order_items NOT BETWEEN 50 AND 32767
+    THROW 54191, N'FAT_ARRAY_REVIEWED_BOUNDS_AND_TABLE_REQUIRED', 1;
+IF NOT EXISTS (
+    SELECT 1 FROM sys.check_constraints
+    WHERE parent_object_id = @table_id AND name = N'CK_expansion_array_bound'
+      AND is_disabled = 0 AND is_not_trusted = 0 AND is_not_for_replication = 0
+      AND HASHBYTES('SHA2_256', CONVERT(VARBINARY(MAX), definition)) = @reviewed_definition_sha
+) OR NOT EXISTS (
+    SELECT 1 FROM sys.columns WHERE object_id = @table_id AND name = N'text_value'
+      AND system_type_id = TYPE_ID(N'nvarchar') AND user_type_id = TYPE_ID(N'nvarchar')
+      AND max_length = 512 AND is_nullable = 0 AND collation_name = N'Latin1_General_100_BIN2'
+)
+    THROW 54192, N'FAT_ARRAY_EXACT_TRUSTED_CHECK_AND_ITEM_WIDTH_REQUIRED', 1;
+
+IF EXISTS (
+    SELECT required.name FROM (VALUES
+        (N'invoices_mapping_raw', 8000), (N'fit_fte_invoices_order_number_raw', 8000)
+    ) AS required(name, maximum_bytes)
+    WHERE NOT EXISTS (
+        SELECT 1 FROM sys.columns AS c
+        WHERE c.object_id = OBJECT_ID(N'stg.expansion_lab_fat', N'U') AND c.name = required.name
+          AND c.system_type_id = TYPE_ID(N'nvarchar') AND c.user_type_id = TYPE_ID(N'nvarchar')
+          AND c.max_length = required.maximum_bytes AND c.is_nullable = 1 AND c.is_computed = 0
+    )
+) OR EXISTS (
+    SELECT required.name FROM (VALUES
+        (N'invoices_mapping'), (N'fit_fte_invoices_order_number')
+    ) AS required(name)
+    WHERE NOT EXISTS (
+        SELECT 1 FROM sys.columns AS c
+        WHERE c.object_id = OBJECT_ID(N'stg.expansion_lab_fat', N'U') AND c.name = required.name
+          AND c.system_type_id = TYPE_ID(N'smallint') AND c.user_type_id = TYPE_ID(N'smallint')
+          AND c.is_nullable = 1 AND c.is_computed = 0
+    )
+)
+    THROW 54193, N'FAT_ARRAY_RAW_AND_COUNT_STORAGE_MUST_REMAIN_UNCHANGED', 1;
+
+SELECT N'FAT_FIELD_SCOPED_ARRAY_CHECK_ONLY_VALIDATED' AS result,
+    @invoice_items AS invoice_mapping_maximum_items,
+    @order_items AS invoice_order_maximum_items,
+    256 AS array_item_maximum_utf16_units,
+    4000 AS unchanged_raw_maximum_utf16_units,
+    32 AS unchanged_other_entity_array_position_capacity,
+    CAST(0 AS BIT) AS migration_history_verified,
+    CAST(0 AS BIT) AS full_schema_epoch_verified,
+    CAST(0 AS BIT) AS main_deployment_verified,
+    CAST(0 AS BIT) AS operational_adoption_authorized;

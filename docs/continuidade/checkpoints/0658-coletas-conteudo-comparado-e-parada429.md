@@ -1,0 +1,31 @@
+# 0658 — Conteúdo de Coletas comparado; origem em STOP429
+
+Direção humana vigente em30/10/2026: extrair19–25/10 nas nove entidades Data Export, comparar cada entidade completa imediatamente contra o Excel desse período e corrigir diferenças. GraphQL somente Usuários. Um acionamento deve conduzir toda a paginação/partição, sem depender de novos acionamentos manuais. Nenhuma entidade ou resultado global pode concluir em um prefixo.
+
+O chat Root01a17ee4-5f83-7051-9cec-ffc8e16642fe tornou-se o único executor pesado por decisão e substituição explícitas, após reconciliação SIN06. O novo chat01a18d09-ebf2-7ba0-b1ab-a056b1823888, “ETL V2 — Correções da extração”, prepara correções privadas e revisões estáticas. Os auxiliares antigos continuam arquivados. O resultado da transferência tem SHA25660471738F0F8004EA70EEEDBC7D03A489A5EF01449583551DE0E90BD2D57F5E9. Estado atual1D1B44214DD381C3B53C732F738317BF8491C3A0BBED16C8F2672108C0135EE4/701862 B; ACL B4 preservada; a delegação histórica0649 não foi reescrita.
+
+## Coletas: comparação real de todo o conteúdo
+
+Source12 completa e Excel oficial novo29/10 têm1561 ocorrências e31 colunas. A comparação executou uma passagem em1155 chaves qualificadas, preservando duplicatas, multiconjuntos das linhas completas e diferenças por campo. Não há chave exclusiva da fonte ou do Excel. Isso não prova que as ocorrências de cada chave são iguais.
+
+Seis colunas são literalmente iguais em todo o conjunto: Filial, Cliente, Cidade, UF, CEP e Bairro. ID e número da coleta são numericamente iguais, embora os tipos/lexemas nativos diferenciem. Foram calculados oito totais numéricos exatos; somente os dois de identificadores coincidem. Volumes, pesos, valor, tentativas e número de manifesto têm diferenças preservadas. Datas/ações têm seis regras de apresentação ainda sem qualificação; três medidas decimais mantêm a distinção entre diagnóstico quantitativo e semântica pendente. Não arredondar, igualar ausência a nulo ou parear arbitrariamente duplicatas para obter igualdade.
+
+Recibo privado Root `supervisor-team0649-01\root-acceptance-coletas-refresh29-native31-0658-01.json`:24828 B/SHA256EB13802334F7AA650DE16B06B37EA141EC1D813C09391236F8D6E3BAFF8F6060. CSV privado `C:\Users\suporte\Documents\Codex\2026-10-27\etl-v2-supervisor-finalizacao\outputs\coletas-1561-31-colunas-excel29out-resultado.csv`:4339 B/SHA25620AB8F566F0344A41EE64B4338BCB6003142F741D59835A7C51DEAB172564425. Relatório completo fechado40199 registros/7678849 B compactados/92854448 B lógicos, SHA25630E5A4A94A3292854A1ED4D003E1F85E1D6BF8EE5E29AD50C88F4E093684B1F9.
+
+Original exit0/61831ms/pico345165824 B; Python58282ms. PID/nascimento próprios, fechamento de processo/stdin/pipes e EOF observados, pins pós-conferidos e estado1D1B/ACL B4/slot vazio restaurados. Source0/HTTP0/SQL0/Java0. Grant consumido. Aceite de comparação completa não emite paridade nem qualificação de entidade; MAPPED não foi executado nesta unidade. A preservação interna Source→mapped pertence à prova anterior. Snapshots de momentos diferentes podem conter atualizações; não atribuir todas as diferenças ao extrator sem evidência.
+
+## Manifestos:429 real e limite de requisições
+
+Source02 usou o produto8MiB já aceito e a identidade Root atual. INFO retornou200/EOF; primeira DATA retornou429/EOF, sem registros ou captura completa. Original/Java/canais próprios fecharam, estado restaurado. Contadores incompletos do produtor foram preservados sem inventar conclusão semântica da chamada. Recibo privado `supervisor-team0649-01\root-acceptance-mft02-closed429-0658-01.json`:2938 B/SHA256A8D51470D55EC46D7025BB50BBA69767F2CFEBACF9D361138A95F25C9C8D1C38.
+
+STOP429 consta em `C:\Users\suporte\Documents\Codex\2026-10-27\etl-v2-supervisor-finalizacao\outputs\source-stop429-current.json`:1083 B/SHA256D56A871F270BF379CD367FCD2C476043148FFA1E6B5B497B1912B5486A0EF167. Sem retry, fallback, troca de entidade para sondar disponibilidade ou novas chamadas até evidência independente. O usuário informou não ter prazo/motivo da ESL e reforçou os limites. Chamadas devem continuar seriais, com intervalo mínimo3s após completion, request30s, uma tentativa por requisição, limites finitos de unidade e STOP429. Nenhum prazo de liberação ou causa externa foi comprovado.
+
+## Trabalho restante
+
+Comparações locais e correções continuam sem novas chamadas. Investigar os desvios concretos de Coletas, a publicação de captura de Cotações e os preparos de extração das outras entidades. Não existe ainda extração global9/9 nem entidade100% validada.
+
+COT24 foi executado com arquivo vazio novo e produto P4 real dentro de Original1GiB/120s, compilador30s/Java30s. Reproduziu COT_READ_IO/IOException apenas durante FileLock exclusivo; os controles antes do lock, após release e após fechamento do canal passaram. Original0/6366ms/pico456024064 B, compilador2381ms e helper946ms, todos os EOF/processos/canais conhecidos;1D1B/B4/slot vazio restaurados. Recibo3130 B/SHA2566DE2A7121B0A203D828D5316138DD635A57F6ACF86441BEA3DBC067B3664F994 em `supervisor-team0649-01\root-acceptance-cot24-real-lockpin0658-01.json`. O mecanismo está reproduzido, mas a mensagem/causa histórica Source16 não foi recuperada e a captura antiga não foi modificada. Correção COT25 de duas famílias está em preparo.
+
+A revisão de pacing encontrou um P1 concreto no ManifestosWeeklyHttpExchange: lastDispatchNanos é marcado antes de sendAsync e awaitGap usa esse instante. Uma resposta lenta pode consumir os3s e permitir uma chamada logo após completion. A regra exige3s após conclusão. Patch privado de uma família usa lastCompletionNanos, marcado após drain e publicação bodyClosed. Não foi compilado nem qualificado. Os dois bodyClosed reais estão784.1368ms separados, mas dispatch-start não foi retido, portanto não emitir medida exata do intervalo de transporte. A causa do429 continua desconhecida. Revisão em `C:\Users\suporte\Documents\Codex\2026-10-30\etl-v2-correcoes-extracao\outputs\mft-source02-pacing-review01\review.json`; priorizar correção, teste offline causal e inventário das outras entidades, preservando STOP429.
+
+Memória livre>=4096MiB/commit<=85%, exclusão entre execuções e restauração estrita permanecem. SQL16, PM2, V1, WMS e produção não foram modificados.

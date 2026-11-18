@@ -112,10 +112,25 @@ public final class Main {
             return 2;
         }
         final String command = args.length == 0 ? "--help" : args[0];
+        if ("run".equals(command) && args.length > 1 && "--profile".equals(args[1])) {
+            return OperationalExportProfileCommand.run(
+                    args,
+                    standardOut,
+                    standardError,
+                    dependencies.configurationFactory(),
+                    dependencies.systemProperties(),
+                    dependencies.environment(),
+                    dependencies.clock(),
+                    dependencies.independentExportInvocation());
+        }
         if ("run".equals(command) && args.length > 1 && "--dev-bundle".equals(args[1])) {
             return runDevWorkspace(args, standardOut, standardError, dependencies);
         }
         if ((args.length == 5
+                        || args.length == 8
+                                && "run".equals(command)
+                                && "--recover-period".equals(args[5])
+                                && "--request".equals(args[6])
                         || (args.length == 7 || args.length == 9 && "--window".equals(args[7]))
                                 && "plan".equals(command)
                                 && "--request".equals(args[5]))
@@ -140,6 +155,18 @@ public final class Main {
             }
             case "entity-rollback" ->
                     MainEntityRollbackCommand.run(args, standardOut, standardError);
+            case "independent-export" ->
+                    args.length > 1 && "run".equals(args[1])
+                            ? RuntimeIndependentExportCommand.run(
+                                    args,
+                                    standardOut,
+                                    standardError,
+                                    dependencies.configurationFactory(),
+                                    dependencies.systemProperties(),
+                                    dependencies.environment(),
+                                    dependencies.clock())
+                            : IndependentExportCommand.run(
+                                    args, standardOut, standardError, dependencies.clock());
             case "observed-staging" ->
                     ObservedStagingCommand.run(
                             args,
@@ -373,6 +400,10 @@ public final class Main {
                                     dependencies.environment(), dependencies.clock());
             new RuntimeCompositionRoot(configuration).validateConfiguration();
             final var operation = RuntimeTemporalOperation.read(Path.of(args[4]));
+            if (args.length == 8) {
+                return RuntimePeriodRecoveryOperation.run(
+                        configuration, operation, Path.of(args[7]), out::println);
+            }
             if ("plan".equals(args[0])) {
                 out.println(
                         args.length >= 7
@@ -399,6 +430,9 @@ public final class Main {
         } catch (final RuntimeException failure) {
             err.println("Persistência temporal não confirmada; consultar janelas duráveis.");
             return 30;
+        } catch (final Exception failure) {
+            err.println("Pedido de recuperação inválido.");
+            return 2;
         }
     }
 
@@ -628,6 +662,22 @@ public final class Main {
                 "  entity-rollback --profile <COLETAS6908|MFT6399|COT6906> --root-v6 <Root args>");
         standardOut.println(
                 "                                      Ensaio V6; CODE e admissão externos obrigatórios.");
+        standardOut.println(
+                "  run --profile <COLETAS_6908_NATIVE31_V1|FRETES_6389_EXPORT_XLSX_V1> --config <properties>"
+                        + " --operational-request <json> --selection <json> --sha256 <digest>");
+        standardOut.println(
+                "                                      Opt-in; exige autoridade existente; entrega pendente nunca é sucesso.");
+        standardOut.println(
+                "  independent-export plan|status-plan|compare|compare-content --input <json> --sha256 <digest>");
+        standardOut.println(
+                "  independent-export prepare-content-controls --input <json> --sha256 <digest> --output <json>");
+        standardOut.println(
+                "  independent-export run --config <properties>"
+                        + " --operational-request <json> --selection <json> --sha256 <digest>");
+        standardOut.println(
+                "                                      compare exige --output <diagnostico-novo.json>.");
+        standardOut.println(
+                "                                      Perfil independente offline; não concede Source/SQL.");
         standardOut.println("  observed-staging plan --config <arquivo> --request <json>");
         standardOut.println(
                 "                                      Plano observado P3 sem HTTP/SQL.");
@@ -636,6 +686,8 @@ public final class Main {
         standardOut.println(
                 "                                      Ensaio rollback via Root externo; fechado sem capacidade.");
         standardOut.println("  plan|run --config <arquivo> --temporal <json>");
+        standardOut.println(
+                "  run --config <arquivo> --temporal <json> --recover-period --request <modelo-json>");
         standardOut.println(
                 "                                      plan: preview; run: persiste janelas com"
                         + " recibo por janela, sem extrair.");
@@ -696,9 +748,24 @@ public final class Main {
             Properties systemProperties,
             Map<String, String> environment,
             Clock clock,
-            RuntimeConfigurationFactory configurationFactory) {
+            RuntimeConfigurationFactory configurationFactory,
+            RuntimeIndependentExportCommand.Invocation independentExportInvocation) {
+
+        RuntimeDependencies(
+                final Properties properties,
+                final Map<String, String> environment,
+                final Clock clock,
+                final RuntimeConfigurationFactory factory) {
+            this(
+                    properties,
+                    environment,
+                    clock,
+                    factory,
+                    RuntimeIndependentExportCommand.productionInvocation());
+        }
 
         RuntimeDependencies {
+            independentExportInvocation = Objects.requireNonNull(independentExportInvocation);
             systemProperties =
                     Objects.requireNonNull(systemProperties, "As propriedades são obrigatórias.");
             environment =

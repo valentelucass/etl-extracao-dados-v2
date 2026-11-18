@@ -22,6 +22,26 @@ import java.util.Set;
 
 /** Bounded, strict UTF-8 and JSON shared by the local package and campaign boundaries. */
 public final class QualificationJson {
+    private static final JsonMapper MAPPER = createMapper();
+
+    private static JsonMapper createMapper() {
+        final var mapper =
+                JsonMapper.builder()
+                        .enable(StreamReadFeature.STRICT_DUPLICATE_DETECTION)
+                        .enable(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)
+                        .disable(JsonNodeFeature.STRIP_TRAILING_BIGDECIMAL_ZEROES)
+                        .enable(DeserializationFeature.FAIL_ON_TRAILING_TOKENS)
+                        .build();
+        mapper.getFactory()
+                .setStreamReadConstraints(
+                        StreamReadConstraints.builder()
+                                .maxNestingDepth(24)
+                                .maxStringLength(131072)
+                                .maxNumberLength(40)
+                                .build());
+        return mapper;
+    }
+
     private QualificationJson() {}
 
     public static JsonNode read(final Path path, final int maximumBytes) throws IOException {
@@ -32,6 +52,26 @@ public final class QualificationJson {
         try (var input = Files.newInputStream(path)) {
             return parse(input.readNBytes(maximumBytes + 1), maximumBytes);
         }
+    }
+
+    /** Caller-owned parsed node and SHA of the same bounded bytes physically read in this call. */
+    public record ReadSnapshot(JsonNode node, String sha256) {}
+
+    public static ReadSnapshot readSnapshot(final Path path, final int maximumBytes)
+            throws IOException {
+        regular(path);
+        if (maximumBytes < 1
+                || maximumBytes == Integer.MAX_VALUE
+                || Files.size(path) > maximumBytes) {
+            throw new IllegalArgumentException("QUAL_JSON_SIZE");
+        }
+        final byte[] bytes;
+        try (var input = Files.newInputStream(path)) {
+            bytes = input.readNBytes(maximumBytes + 1);
+        }
+        regular(path);
+        final JsonNode node = parse(bytes, maximumBytes);
+        return new ReadSnapshot(node, sha256(bytes));
     }
 
     public static JsonNode parse(final byte[] bytes, final int maximumBytes) throws IOException {
@@ -53,21 +93,7 @@ public final class QualificationJson {
         if (text.indexOf('\ufffd') >= 0 || text.charAt(0) == '\ufeff') {
             throw new IllegalArgumentException("QUAL_JSON_UTF8");
         }
-        final var mapper =
-                JsonMapper.builder()
-                        .enable(StreamReadFeature.STRICT_DUPLICATE_DETECTION)
-                        .enable(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)
-                        .disable(JsonNodeFeature.STRIP_TRAILING_BIGDECIMAL_ZEROES)
-                        .enable(DeserializationFeature.FAIL_ON_TRAILING_TOKENS)
-                        .build();
-        mapper.getFactory()
-                .setStreamReadConstraints(
-                        StreamReadConstraints.builder()
-                                .maxNestingDepth(24)
-                                .maxStringLength(131072)
-                                .maxNumberLength(40)
-                                .build());
-        return mapper.readTree(text);
+        return MAPPER.readTree(text);
     }
 
     public static void fields(final JsonNode node, final String... names) {

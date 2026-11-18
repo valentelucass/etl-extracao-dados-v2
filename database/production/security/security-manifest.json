@@ -1,0 +1,16 @@
+{
+  "package": "0758-security-v1",
+  "target": "ETL_SISTEMA_V2",
+  "new_login": "etl_v2_runtime_prod",
+  "existing_dashboard_login": "usuario_etl",
+  "foundation_sources": [
+    {
+      "name": "V001__create_v2_schema_foundation.sql",
+      "sha256": "CADBBBA91382FAF1AFD6C282AE4213A0F313D424335250D824C83BCDD93ABC9F"
+    },
+    {
+      "name": "V002__create_v2_database_roles.sql",
+      "sha256": "6E962AF63A639380CD84E479C94F003DD80497FB1632C9CF29BD9983A94772B2"
+    }
+  ]
+}

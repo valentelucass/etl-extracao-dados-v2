@@ -168,6 +168,27 @@ final class RuntimeTemporalOperation {
         }
     }
 
+    RuntimeTemporalOperation forRecoveryWindow(final RuntimeTemporalPlanner.Window window) {
+        if (!result.windows().contains(window)) {
+            throw new IllegalArgumentException("TEMPORAL_WINDOW_NOT_IN_PLAN");
+        }
+        // A recovery occurrence must retain the same material when a later batch has a different
+        // first date or observation time. Each occurrence still consumes fresh authority.
+        return new RuntimeTemporalOperation(
+                document.deepCopy()
+                        .put(
+                                "firstUnpublished",
+                                window.partitionStart()
+                                        .atZone(policy.zone())
+                                        .toLocalDate()
+                                        .toString())
+                        .put("observedAt", window.dueAt().toString())
+                        .put(
+                                "invocation",
+                                uuid(invocation + "|recovery-window|" + window.partitionStart())
+                                        .toString()));
+    }
+
     String preview() {
         return "TEMPORAL_PREVIEW effects=0 windows="
                 + result.windows().size()
