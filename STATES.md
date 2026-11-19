@@ -1,3 +1,9 @@
+## 19/11/2026 — Rotina de produção no PM2
+
+O extrator anterior foi retirado do PM2 e da configuração de reinício. A V2 passou a executar a rotina contínua como `ETL-V2-ATUALIZACAO`. O processo iniciou a extração às 06h13. O intervalo permanece em 60 minutos após o fim de cada publicação.
+
+No Windows, o PowerShell 5.1 iniciado diretamente pelo PM2 encerrava com código zero antes de executar o script. O iniciador em Node abriu o mesmo supervisor em segundo plano. O teste verificou a saída da execução e a propagação de uma falha. A primeira tentativa de conexão com o SQL parou antes da extração porque faltava o nome da máquina no ambiente. O banco confirmou zero recebimentos nessa tentativa. O iniciador passou a fornecer o nome real da máquina e a V2 iniciou o recebimento.
+
 ## 0816 — Retomada da publicação e dois lotes automáticos
 
 Duas atualizações automáticas chegaram ao SQL e ao painel DEV em 19/11. O intervalo do fim da primeira publicação ao início da segunda busca foi de 60 minutos e 8 segundos. As 13 fontes tinham recebimentos confirmados para as 90 datas entre 22/08 e 19/11. A fila de publicação terminou vazia em ambos os lotes.

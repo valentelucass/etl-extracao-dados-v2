@@ -18,6 +18,8 @@ powershell.exe -NoProfile -File ".\scripts\operations\Resume-ProductionHistory.p
 
 Para iniciar o acompanhamento na janela do PowerShell, acrescente `-Continuo`. A opção `-SomenteLiberar` encerra apenas a pausa do operador. Use essa opção quando a decisão for iniciar a rotina pelo PM2. O aplicativo configurado em `scripts/operations/pm2/ecosystem.config.cjs` chama o mesmo supervisor e se chama `ETL-V2-ATUALIZACAO`. A retomada confere o identificador e a publicação do lote anterior. Uma falha registrada exige conferência antes da retomada.
 
+No PM2 do Windows, o iniciador em Node abre o PowerShell em segundo plano e encaminha sua saída e seu código de término. O processo recebe o nome da máquina usado pelo SQL para conferir o servidor. Para verificar os arquivos pelo mesmo iniciador, execute `node scripts/operations/pm2/iniciar-supervisor.cjs -Verify` na pasta do projeto. Quando a rotina já aparece como `online` no PM2, ela cuida da próxima busca.
+
 Quando o comando informar que os dados já foram recebidos e a publicação ficou pendente, execute `Resume-ProductionHistory.ps1 -PublicarRecebido`. Ele usa o recibo da extração concluída para terminar a publicação uma vez. Uma pausa pedida pelo operador segue em vigor. Uma falha durante o recebimento precisa ser corrigida na operação indicada pelo recibo.
 
 Na tela Saúde do ETL, **Adiado** identifica uma revisão que atingiu o limite do lote e voltou para a próxima execução. **Falha** indica uma operação que deixou de concluir por erro. Para conferir um dia, consulte a cobertura da fonte e a última gravação daquele dia.
