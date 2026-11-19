@@ -1,6 +1,33 @@
 # Publicação operacional para o dashboard
 
-As publicações de Raster, Coletores, Manifestos e Saúde do ETL foram ensaiadas em transação reversível, publicadas em `ETL_SISTEMA_V2.pub` e conferidas com a conta atual do portal. Os dados de origem, os registros de execução e os vínculos publicados ficam na V2. O portal em produção continua lendo o V1.
+As publicações de Raster, Coletores, Manifestos e Saúde do ETL foram ensaiadas em transação reversível, publicadas em `ETL_SISTEMA_V2.pub` e conferidas com a conta atual do portal. Os dados de origem, os registros de execução e os vínculos publicados ficam na V2. O DEV e o portal de produção consultam essa base.
+
+## Atualização dos relatórios a cada lote
+
+Os scripts 037 a 053 de `database/production/publication` instalam as leituras preparadas, seus índices e as permissões de publicação. O grupo `Saude` do instalador aplica o recebimento 014 e a publicação 054 para distinguir revisões adiadas de falhas. As migrações V072 a V076 do painel conferem as colunas e o recebimento antes de trocar as consultas.
+
+O calendário vem de `pub.dim_calendario`. A instalação 051 prepara a tabela inicial e cada publicação verifica a versão da consulta, da função de feriados e do registro de instalação. Uma alteração recompõe os dias dentro da transação do lote.
+
+Na rotina diária, o recebimento, a publicação e a conferência da fila precisam terminar para que o lote conste como concluído. A tela de Saúde do ETL usa a auditoria das operações para exibir o que mudou. O próximo lote pode iniciar 60 minutos após o fim da publicação. Na carga manual de 90 dias, a publicação acontece quando o período solicitado termina.
+
+Para buscar os 90 dias uma vez, na pasta do projeto, execute o comando abaixo. Ele também atende à retomada de uma pausa solicitada pelo operador depois de um lote publicado.
+
+```powershell
+powershell.exe -NoProfile -File ".\scripts\operations\Resume-ProductionHistory.ps1"
+```
+
+Para iniciar o acompanhamento na janela do PowerShell, acrescente `-Continuo`. A opção `-SomenteLiberar` encerra apenas a pausa do operador. Use essa opção quando a decisão for iniciar a rotina pelo PM2. O aplicativo configurado em `scripts/operations/pm2/ecosystem.config.cjs` chama o mesmo supervisor e se chama `ETL-V2-ATUALIZACAO`. A retomada confere o identificador e a publicação do lote anterior. Uma falha registrada exige conferência antes da retomada.
+
+Quando o comando informar que os dados já foram recebidos e a publicação ficou pendente, execute `Resume-ProductionHistory.ps1 -PublicarRecebido`. Ele usa o recibo da extração concluída para terminar a publicação uma vez. Uma pausa pedida pelo operador segue em vigor. Uma falha durante o recebimento precisa ser corrigida na operação indicada pelo recibo.
+
+Na tela Saúde do ETL, **Adiado** identifica uma revisão que atingiu o limite do lote e voltou para a próxima execução. **Falha** indica uma operação que deixou de concluir por erro. Para conferir um dia, consulte a cobertura da fonte e a última gravação daquele dia.
+
+O grupo `RecebimentoLote` instala o script 013 do recebimento. O SQL abre a lista do lote uma vez, confere os campos de cada linha e conserva a ordem e o conteúdo originais. Para repetir a conferência, execute o instalador com um novo caminho de recibo. A aplicação precisa do parâmetro `-Apply`.
+
+```powershell
+.\scripts\operations\Install-DashboardCompatibilityViews.ps1 -Group RecebimentoLote -ReceiptPath C:\privado\recebimento-ensaio.json
+.\scripts\operations\Install-DashboardCompatibilityViews.ps1 -Group RecebimentoLote -Apply -ReceiptPath C:\privado\recebimento-aplicacao.json
+```
 
 ## Raster
 

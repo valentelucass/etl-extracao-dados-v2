@@ -1,5 +1,7 @@
 # Atualização e histórico das onze entidades — 0766
 
+A rotina atual recebe 13 fontes na V2. A carga manual e o processo do PM2 usam o mesmo publicador. O procedimento de operação e retomada está em [Publicação operacional para o dashboard](publicacao-operacional-dashboard.md). As primeiras qualificações de 11 e 12 fontes estão registradas abaixo.
+
 ## Regras aplicadas
 
 A primeira importação começa em uma data configurável e abrange pelo menos 90 dias civis, incluindo o dia atual. Esse período é um limite mínimo de entrada; não é retenção móvel e não apaga dados antigos. A âncora persistida só pode recuar. Se o banco já tiver datas anteriores, elas entram na reconferência. A descoberta dessa cobertura usa a procedure de planejamento existente, sem novas permissões.
@@ -8,7 +10,7 @@ Cada lote recebe até oito datas iniciais por entidade, começando pelas mais re
 
 Na carga inicial manual, os lotes seguem em sequência. Na atualização contínua, a próxima execução aguarda **60 minutos completos** após o término da anterior. Uma execução que termina às 10h20 permite a próxima a partir das 11h20. O controle é persistido e respeitado após reinício. Há bloqueios contra execução simultânea no supervisor, na fonte e no banco.
 
-As gravações confirmadas ficam disponíveis na visão de recebimento conforme cada data termina. A atualização do dashboard depende do seu consumidor; este trabalho não publica nem altera o dashboard.
+As gravações confirmadas aparecem na visão de recebimento conforme cada data termina. O supervisor publica os relatórios quando conclui o lote diário ou a carga manual de 90 dias.
 
 ## Filtros observados e exercitados na fonte
 
@@ -70,11 +72,11 @@ No terminal do servidor, na sessão `suporte`, execute o arquivo `CARGA_90_DIAS.
 .\CARGA_90_DIAS.bat
 ```
 
-O arquivo usa a credencial criptografada da conta do extrator. A carga fixa os 90 dias civis, incluindo o dia do primeiro lote, e termina quando as 12 fontes concluírem o período. Ela processa até oito datas por fonte por lote e inicia o seguinte assim que o anterior terminar. O progresso fica na pasta operacional e permite retomar a mesma carga. Com `--verificar`, o arquivo apenas confere os arquivos do extrator e da configuração.
+O arquivo usa a credencial criptografada da conta do extrator. A carga fixa os 90 dias civis, incluindo o dia do primeiro lote, e termina após a cobertura das 13 fontes e a publicação. Cada lote pode processar até oito datas por fonte. O progresso fica na pasta operacional e permite retomar a mesma carga. Com `--verificar`, o arquivo confere os arquivos do extrator e da configuração.
 
-O arquivo usa `historico-90-dias-settings.json` e `runtime-manifest-dashboard-fields-0806.json` no armazenamento privado. Use o mesmo manifesto ao iniciar futuramente a atualização contínua com `operational-settings.json`. As duas configurações usam o mesmo progresso.
+O iniciador escolhe o manifesto qualificado no armazenamento privado. A carga manual usa `historico-90-dias-settings.json` e a rotina contínua usa `operational-settings.json`. Os dois modos gravam seus recibos na pasta operacional.
 
-Em outro terminal, rode `./CARGA_90_DIAS.bat --acompanhar` para ver o relatório em extração, a data, a página, a última resposta do ESL e o total de dias já gravados no banco. O acompanhamento usa os registros da carga em andamento. Fechar essa segunda janela encerra apenas a leitura do progresso.
+Em outro terminal, rode `./CARGA_90_DIAS.bat --acompanhar` para ver o relatório em extração, a data, a página, a última resposta do ESL e o total de dias já gravados no banco. Ao terminar o recebimento, o acompanhamento indica que o painel aguarda a publicação. O recibo do mesmo lote confirma a publicação e o supervisor informa o horário da próxima busca. Fechar essa segunda janela encerra apenas a leitura do progresso.
 
 `scripts/operations/Register-ProductionRefresh0766.ps1` prepara a tarefa própria `ETL-V2-History-Refresh-0766`, para o usuário atual, sem elevação e com início no logon. Recusa substituir uma tarefa existente. Registrar a tarefa não inicia a primeira execução imediatamente. Nenhum serviço, conta, grant, ACL ou versão do SQL é alterado.
 

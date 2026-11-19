@@ -69,6 +69,24 @@ final class RefreshCheckpoint {
         return order;
     }
 
+    boolean calendarBehind(final LocalDate today) {
+        for (var state : payload.required("entities")) {
+            if (state.path("initialComplete").asBoolean()
+                    && LocalDate.parse(state.required("lastCalendarDay").asText())
+                            .isBefore(today)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    void describeCalendar(final ReportSnapshotTemplate template, final ObjectNode result) {
+        var state = payload.required("entities").path(template.name());
+        if (state.path("initialComplete").asBoolean()) {
+            result.put("calendarThrough", state.required("lastCalendarDay").asText());
+        }
+    }
+
     void nextContinuousEntity(final ReportSnapshotTemplate next) {
         payload.put("nextContinuousEntity", next.name());
     }

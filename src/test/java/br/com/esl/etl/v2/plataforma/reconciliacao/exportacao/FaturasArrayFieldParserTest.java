@@ -68,12 +68,16 @@ class FaturasArrayFieldParserTest {
         orders.add("");
         assertEquals(
                 "EXP_RAW_BOUND",
-                assertThrows(IllegalArgumentException.class,
-                                () -> FaturasArrayFieldParser.invoiceNumbers(row)).getMessage());
+                assertThrows(
+                                IllegalArgumentException.class,
+                                () -> FaturasArrayFieldParser.invoiceNumbers(row))
+                        .getMessage());
         assertEquals(
                 "EXP_RAW_BOUND",
-                assertThrows(IllegalArgumentException.class,
-                                () -> FaturasArrayFieldParser.orderNumbers(row)).getMessage());
+                assertThrows(
+                                IllegalArgumentException.class,
+                                () -> FaturasArrayFieldParser.orderNumbers(row))
+                        .getMessage());
     }
 
     @Test

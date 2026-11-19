@@ -3,6 +3,7 @@ param(
  [Parameter(Mandatory=$true)][string]$SettingsPath,
  [Parameter(Mandatory=$true)][string]$RuntimeManifestPath,
  [switch]$Continuous,
+ [ValidateRange(0,1000)][int]$BatchLimit=0,
  [switch]$HistoryOnly,
  [switch]$IfDue,
  [switch]$SingleBatch,
@@ -31,6 +32,7 @@ if($Verify -and ($Worker -or $Continuous -or -not $HistoryOnly)){throw 'REFRESH_
 if($SingleBatch -and (-not $HistoryOnly -or $Worker -or $Verify)){throw 'REFRESH_HISTORY_SINGLE_BATCH_REQUIRED'}
 if(($Worker -and $HistoryOnly -and -not $HistoryRequestId) -or ($HistoryRequestId -and (-not $Worker -or -not $HistoryOnly))){throw 'REFRESH_HISTORY_WORKER_REQUIRED'}
 if($IfDue -and ($Continuous -or $HistoryOnly -or $Worker -or $Verify)){throw 'REFRESH_INCREMENTAL_BATCH_REQUIRED'}
+if($BatchLimit -and -not $Continuous){throw 'O limite de lotes requer o modo continuo.'}
 $operatorStop0766=Join-Path $state0766 'STOP.operator.json'
 $failureStop0766=Join-Path $state0766 'STOP.failure.json'
 if(-not $Verify){
@@ -51,9 +53,19 @@ if($Continuous -and -not $Worker){
   try{$loopHeld=$loopMutex.WaitOne(0)}catch [Threading.AbandonedMutexException]{$loopHeld=$true}
   if(-not $loopHeld){Write-Output 'A atualizacao de hora em hora ja esta em andamento.';return}
   Write-Output 'Atualizacao ligada. Deixe esta janela aberta. O intervalo e de 60 minutos depois de cada lote.'
+  $completedCycles=0
   while(-not ((Test-Path -LiteralPath $operatorStop0766) -or (Test-Path -LiteralPath $failureStop0766))){
    if([DateTimeOffset]::UtcNow -ge (Get-RefreshEligible0766 $state0766)){
+    $supervisorFile=Join-Path $state0766 'supervisor.json'
+    $prior=if(Test-Path $supervisorFile){(Get-Content $supervisorFile -Raw | ConvertFrom-Json).cycle}
     & $PSCommandPath -SettingsPath $SettingsPath -RuntimeManifestPath $RuntimeManifestPath -IfDue
+    if($BatchLimit -and (Test-Path $supervisorFile)){
+     $record=Get-Content $supervisorFile -Raw | ConvertFrom-Json
+     if($record.phase -ceq 'WAITING' -and $record.cycle -cne $prior -and (Test-Path (Join-Path $state0766 ('reports\'+$record.cycle+'.publication.json')))){
+      $completedCycles++
+      if($completedCycles -ge $BatchLimit){Write-Output ('Lotes recebidos e publicados: '+$completedCycles);break}
+     }
+    }
    }
    Start-Sleep -Seconds 15
   }
@@ -134,10 +146,10 @@ if(-not $Worker -and -not $Verify){
      Start-Sleep -Seconds 15
     }
    }
-   $finished0766=[DateTimeOffset]::UtcNow
    $reportPath0766=Join-Path $state0766 ('reports\'+$id0766+'.json')
    $report0766=$null
    $passed0766=$false
+   $publicationPending0766=$false
    if(Test-Path -LiteralPath $reportPath0766 -PathType Leaf){
     try{$report0766=Get-Content -LiteralPath $reportPath0766 -Raw -Encoding utf8 | ConvertFrom-Json}
     catch{$report0766=$null}
@@ -146,8 +158,22 @@ if(-not $Worker -and -not $Verify){
      (Test-RefreshEntities0766 $report0766)
     if($HistoryOnly){$passed0766=$passed0766 -and $report0766.historyOnly -eq $true}
    }
+   if($passed0766 -and (-not $HistoryOnly -or $report0766.initialComplete)){
+    try{
+     $publication=& (Join-Path $PSScriptRoot 'Publish-ReceivedDashboard.ps1') -ReportPath $reportPath0766 -CaptureDirectory (Join-Path $state0766 ('captures\'+$id0766))
+     Write-RefreshSupervisor0766 $publication ('reports\'+$id0766+'.publication.json')
+    }catch{
+     $passed0766=$false
+     $publicationPending0766=$true
+     Write-Warning ('Dados recebidos. Falha ao publicar no painel: '+$_.Exception.GetBaseException().Message)
+    }
+   }
+   $finished0766=[DateTimeOffset]::UtcNow
    if(-not $passed0766){
-    [IO.File]::WriteAllText($failureStop0766,([ordered]@{schema='REFRESH_FAILURE0766';cycle=$id0766;at=$finished0766.ToString('o');reason='BATCH_NOT_CONFIRMED_NO_AUTOMATIC_RETRY'} | ConvertTo-Json),(New-Object Text.UTF8Encoding($false)))
+    $failureReason0766=if($publicationPending0766){'RECEIVED_BATCH_PUBLICATION_PENDING'}else{'BATCH_NOT_CONFIRMED_NO_AUTOMATIC_RETRY'}
+    $marker0766=[ordered]@{schema='REFRESH_FAILURE0766';cycle=$id0766;at=$finished0766.ToString('o');reason=$failureReason0766}
+    if($HistoryOnly){$marker0766.historyRequestId=$request.id}
+    Write-RefreshSupervisor0766 $marker0766 'STOP.failure.json'
     Write-RefreshSupervisor0766 ([ordered]@{phase='FAILED';cycle=$id0766;completedAt=$finished0766.ToString('o');nextEligibleAt=$null})
     if($HistoryOnly){
      $failure0766=@($report0766.entities | Where-Object status -CEQ 'FAILED') | Select-Object -Last 1
@@ -162,6 +188,16 @@ if(-not $Worker -and -not $Verify){
    $phase0766=if($historyComplete0766){'HISTORY_COMPLETED'}elseif($IfDue){'WAITING'}else{'BATCH_COMPLETED'}
    Write-RefreshSupervisor0766 ([ordered]@{phase=$phase0766;cycle=$id0766;completedAt=$finished0766.ToString('o');nextEligibleAt=$next0766.ToString('o');initialComplete=$report0766.initialComplete})
    Write-Output ('REFRESH_BATCH_PASSED '+$id0766)
+   if(-not $HistoryOnly){
+    foreach($source in $report0766.entities){
+     if(!$source.calendarThrough){Write-Output ($source.entity+' ainda tem historico inicial pendente.');continue}
+     if($source.calendarThrough -clt $report0766.initialHistoryThrough){
+      Write-Output ($source.entity+' recebeu ate '+$source.calendarThrough+'. Os dias seguintes ficam para o proximo lote.')
+     }elseif($source.status -ceq 'BATCH_DEFERRED'){
+      Write-Output ($source.entity+' recebeu ate '+$source.calendarThrough+'. A revisao de alteracoes anteriores continua pendente.')
+     }
+    }
+   }
    if($historyComplete0766){
      $primaryCheckpoint=Join-Path $state0766 'checkpoint.json'
      if(-not (Test-Path -LiteralPath $primaryCheckpoint)){
@@ -171,7 +207,7 @@ if(-not $Worker -and -not $Verify){
      }
      $request.finished=$true
      Write-RefreshSupervisor0766 $request 'historico-solicitado.json'
-    Write-Output ('Carga de 90 dias concluida. Relatorio: '+$reportPath0766)
+    Write-Output ('Carga de 90 dias concluida de '+$report0766.requestedHistoryStart+' ate '+$report0766.initialHistoryThrough+'. Relatorio: '+$reportPath0766)
     break
    }
    if($HistoryOnly){
@@ -199,8 +235,8 @@ if(-not $Worker -and -not $Verify){
 if($PSVersionTable.PSEdition -ne 'Desktop' -or (-not $Verify -and $CycleId -notmatch '^[0-9a-f]{32}$')){throw 'REFRESH_PROTECTED_WINDOWS_WORKER_REQUIRED'}
 $env:PSModulePath=(Join-Path $PSHOME 'Modules')+';'+(($env:PSModulePath -split ';' | Where-Object {$_ -notmatch '[\\/]PowerShell[\\/]7[\\/]Modules$'}) -join ';')
 $manifest0766=Get-Content -LiteralPath $RuntimeManifestPath -Raw -Encoding utf8 | ConvertFrom-Json
-if($manifest0766.schema -cne 'PRODUCTION_REFRESH_RUNTIME0766' -or @($manifest0766.files).Count -ne 9 -or @($manifest0766.scripts).Count -ne 3){throw 'REFRESH_RUNTIME_MANIFEST_SCOPE'}
-$requiredScripts=@('scripts/operations/Invoke-ProductionRefresh0810.ps1','scripts/operations/RefreshSupervisor0766.ps1','scripts/operations/Start-ProductionHistory.ps1')
+if($manifest0766.schema -cne 'PRODUCTION_REFRESH_RUNTIME0766' -or @($manifest0766.files).Count -ne 9 -or @($manifest0766.scripts).Count -ne 7){throw 'REFRESH_RUNTIME_MANIFEST_SCOPE'}
+$requiredScripts=@('scripts/operations/Invoke-ProductionRefresh0810.ps1','scripts/operations/RefreshSupervisor0766.ps1','scripts/operations/Start-ProductionHistory.ps1','scripts/operations/Publish-ReceivedDashboard.ps1','scripts/operations/Invoke-DashboardProjectionRefresh.ps1','scripts/operations/DashboardProjectionBatch.ps1','scripts/operations/Read-DashboardRefreshAudit.ps1')
 if((@($manifest0766.scripts.path | Sort-Object) -join '|') -cne (($requiredScripts | Sort-Object) -join '|')){throw 'REFRESH_SCRIPT_MANIFEST_SCOPE'}
 $runtime0766=[IO.Path]::GetFullPath($manifest0766.directory)
 if(-not $runtime0766.StartsWith($storage0766,[StringComparison]::OrdinalIgnoreCase) -or @(Get-ChildItem -LiteralPath $runtime0766 -File -Filter '*.jar').Count -ne 9){throw 'REFRESH_RUNTIME_DIRECTORY_SCOPE'}

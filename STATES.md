@@ -1,3 +1,19 @@
+## 0816 — Retomada da publicação e dois lotes automáticos
+
+Duas atualizações automáticas chegaram ao SQL e ao painel DEV em 19/11. O intervalo do fim da primeira publicação ao início da segunda busca foi de 60 minutos e 8 segundos. As 13 fontes tinham recebimentos confirmados para as 90 datas entre 22/08 e 19/11. A fila de publicação terminou vazia em ambos os lotes.
+
+O primeiro lote recebeu 5.236 registros e o segundo recebeu 68.671. O SQL e a Saúde do ETL distinguiram as gravações, as revisões adiadas pelo limite do lote e as falhas reais. A revisão adiada de Fretes de 16/10 já tinha 1.033 registros conferidos com a fonte.
+
+O atalho de 90 dias retoma a carga após a pausa do operador. O acompanhamento distingue o fim do recebimento da confirmação de publicação pelo painel. Passaram os cinco testes de retomada, os cinco de acompanhamento e os 72 testes selecionados de recebimento e atualização.
+
+## 0815 — Gravação de lotes de Ocorrências
+
+O SQL da V2 passou a abrir a lista de entrada uma vez por lote. O teste usou 8.660 ocorrências reais de 20/08 e confirmou a ordem, os dados e os resumos criptográficos em 7,7 segundos. Três entradas inválidas foram recusadas. O instalador do grupo `RecebimentoLote` concluiu o ensaio, a aplicação e a nova conferência em 18/11. A tentativa anterior tinha parado ao gravar essas 8.660 ocorrências. A medição de dois lotes completos recomeçou às 20h41.
+
+## 0814 — Publicação do lote e auditoria do painel
+
+A carga contínua e a última etapa do histórico de 90 dias passaram a publicar os dados recebidos. A publicação confere a fila, prepara os relatórios e grava a auditoria com o identificador, o resumo criptográfico e as operações verificadas do lote. O próximo horário é contado a partir do fim da publicação. A opção de acompanhar um número limitado de lotes usa o mesmo supervisor da rotina contínua. A conta do ETL tem leitura da fila e execução das cinco operações de publicação autorizadas. A comprovação de dois ciclos consecutivos no DEV está pendente.
+
 ## 0792 — Consultas de detalhe e faturamento de Fretes publicadas na V2
 
 [Publicação e conferência](docs/runbooks/publicacao-operacional-dashboard.md). O detalhe tem 123 colunas e o faturamento tem 83. A validação da instalação leu 4.298 fretes distintos e 4.214 elegíveis. A comparação dos 3.260 fretes em comum com o V1 confirmou os valores e a data de referência de origem. No ensaio com o retorno do ESL da minuta 487514, o CT-e 65046 apareceu uma vez e o 65034 ficou de fora. Ainda falta ampliar a cobertura das colunas novas do 4924 e confirmar campos de detalhe sem fonte na V2. As 26 rotas em uso apontam para o V1.

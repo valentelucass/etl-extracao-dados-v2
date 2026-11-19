@@ -4,6 +4,9 @@
 *.cmd text eol=crlf
 *.jar binary
 graphify-out/graph.json merge=graphify
+# The installed refresh manifest checks these two PowerShell files byte for byte.
+scripts/operations/Start-ProductionHistory.ps1 -text -eol whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+scripts/operations/Publish-ReceivedDashboard.ps1 -text -eol whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 docs/catalogos/macrobloco-qualificacao-pacote/third-party/*.pom -text -diff -eol
 
 # Preserve the qualified bytes of SHA-pinned contract descriptors.

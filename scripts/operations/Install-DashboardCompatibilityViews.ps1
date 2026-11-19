@@ -1,7 +1,7 @@
 [CmdletBinding()]
 param(
     [Parameter(Mandatory=$true)][string]$ReceiptPath,
-    [ValidateSet('References','Sinistros','Inventario','Localizacao','Faturas','ContasAPagar','Clientes','Usuarios','Raster','Coletores','Saude','Manifestos','CamposColetasFretes','CamposFaturasFretes','GestaoFretes','ColetasExcluidas','FretesFaturamento')][string]$Group = 'References',
+    [ValidateSet('References','Sinistros','Inventario','Localizacao','Faturas','ContasAPagar','Clientes','Usuarios','Raster','Coletores','Saude','Manifestos','CamposColetasFretes','CamposFaturasFretes','GestaoFretes','ColetasExcluidas','FretesFaturamento','RecebimentoLote')][string]$Group = 'References',
     [string[]]$CaptureReceiptPath,
     [string]$CaptureDirectory,
     [switch]$SeedLegacyUserDirectory,
@@ -50,8 +50,10 @@ $specs = switch ($Group) {
     }
     'Coletores' { @{file='021_dashboard_fato_coletores.sql'; view='fato_gestao_vista_coletores'; step='0777-dashboard-coletores'; columns=21} }
     'Saude' {
-        @{file='022_dashboard_log_extracoes.sql'; view='log_extracoes'; step='0777-dashboard-log-extracoes'; columns=9}
-        @{file='023_dashboard_bi_monitoramento.sql'; view='vw_bi_monitoramento'; step='0777-dashboard-monitoramento'; columns=9}
+        @{file='054_dashboard_log_adiamentos.sql'; view='log_extracoes'; step='0817-dashboard-log-adiamentos'; columns=9;
+          previousFile='022_dashboard_log_extracoes.sql'; previousStep='0777-dashboard-log-extracoes'; contractFile='022_dashboard_log_extracoes.sql'}
+        @{file='023_dashboard_bi_monitoramento.sql'; view='vw_bi_monitoramento'; step='0777-dashboard-monitoramento'; columns=9;
+          contractFile='023_dashboard_bi_monitoramento.sql'}
     }
     'Manifestos' {
         @{file='024_dashboard_manifestos_linhas.sql'; view='dashboard_manifestos_linhas'; schema='core'; step='0777-dashboard-manifestos-linhas'}
@@ -99,8 +101,9 @@ function New-Command([string]$Text, [hashtable]$Parameters = @{}) {
     $command
 }
 
-function Invoke-Scalar([string]$Text, [hashtable]$Parameters = @{}) {
+function Invoke-Scalar([string]$Text, [hashtable]$Parameters = @{}, [int]$TimeoutSeconds = 45) {
     $command = New-Command $Text $Parameters
+    $command.CommandTimeout = $TimeoutSeconds
     try { $command.ExecuteScalar() } finally { $command.Dispose() }
 }
 
@@ -147,6 +150,9 @@ $credential = Get-ProjetosSqlAdminCredential
 $connection = $null
 $transaction = $null
 try {
+    if ($AuditReportPath) {
+        $evidence = & (Join-Path $PSScriptRoot 'Read-DashboardRefreshAudit.ps1') -ReportPath $AuditReportPath -CaptureDirectory $AuditCaptureDirectory
+    }
     $connection = New-ProjetosSqlConnection -Database ETL_SISTEMA_V2 -Credential $credential -ApplicationName 'V2DashboardCompatibilityViews'
     $connection.Open()
     $transaction = $connection.BeginTransaction([Data.IsolationLevel]::Serializable)
@@ -169,6 +175,11 @@ IF NOT EXISTS (
 '@
 
     $added = 0
+    if ($Group -eq 'RecebimentoLote') {
+        $path = 'database/production/receiving/013_recebimento_lote_json_uma_vez.sql'
+        $check = "SELECT IIF(CHARINDEX(N'CREATE TABLE #recebimento_linhas',OBJECT_DEFINITION(OBJECT_ID('stg.usp_production_ingestion_store')))>0,1,0)"
+        $added += Install-ReceivingPackage $path '0815-recebimento-lote-json' $check 1
+    }
     if ($Group -eq 'CamposColetasFretes') {
         $relative = 'database/production/receiving/007_dashboard_report_fields.sql'
         $countQuery = "SELECT COUNT(*) FROM sys.tables WHERE object_id=OBJECT_ID('ctl.production_export_additional_field','U')"
@@ -299,9 +310,11 @@ SELECT COUNT(*) FROM sys.objects WHERE object_id IN (
     OBJECT_ID('ctl.usp_store_dashboard_refresh_audit','P'))
 '@
         $added += Install-ReceivingPackage $relative '0777-dashboard-refresh-audit' $countQuery 3
+        $pendingAudit = 'database/production/receiving/014_dashboard_auditoria_adiamentos.sql'
+        $installedAudit = "SELECT IIF(CHARINDEX(N'REFRESH_BATCH_DEFERRED',OBJECT_DEFINITION(OBJECT_ID('ctl.usp_store_dashboard_refresh_audit')))>0,1,0)"
+        $added += Install-ReceivingPackage $pendingAudit '0817-dashboard-auditoria-adiamentos' $installedAudit 1
         if ($AuditReportPath) {
-            $evidence = & (Join-Path $PSScriptRoot 'Read-DashboardRefreshAudit.ps1') -ReportPath $AuditReportPath -CaptureDirectory $AuditCaptureDirectory
-            $cycleId = Invoke-Scalar @'
+            $cycleId = Invoke-Scalar -TimeoutSeconds 300 @'
 DECLARE @start datetimeoffset(3)=CONVERT(datetimeoffset(3),@started,127),
         @end datetimeoffset(3)=CONVERT(datetimeoffset(3),@completed,127),
         @sha binary(32)=CONVERT(binary(32),@digest,2);
@@ -361,7 +374,14 @@ EXEC ctl.usp_store_dashboard_refresh_audit @source_cycle=@cycle,@started_at=@sta
         $view = $spec.view
         $published = @(Read-Metadata "SELECT TOP(0) * FROM [$schema].[$view]")
         if ($spec.columns) {
-            $legacy = @(Read-Metadata "SELECT TOP(0) * FROM ETL_SISTEMA.dbo.[$view]")
+            if ($spec.contractFile) {
+                $contractPath = Join-Path $repository ('database/production/publication/' + $spec.contractFile)
+                $baseline = [regex]::Match([IO.File]::ReadAllText($contractPath),$pattern)
+                if (!$baseline.Success) { throw 'REFERENCE_VIEW_CONTRACT_INVALID' }
+                $legacy = @(Read-Metadata ('SELECT TOP (0) shape.* FROM (' + $baseline.Groups[1].Value + ') AS shape'))
+            } else {
+                $legacy = @(Read-Metadata "SELECT TOP(0) * FROM ETL_SISTEMA.dbo.[$view]")
+            }
             if ($legacy.Count -ne $spec.columns -or $published.Count -ne $spec.columns -or
                 (Compare-Object $legacy $published -Property name,type,size,precision,scale -CaseSensitive -SyncWindow 0)) {
                 $receipt.shapeDifference = [ordered]@{view=$view; v1=$legacy; v2=$published}
@@ -386,6 +406,7 @@ EXEC ctl.usp_store_dashboard_refresh_audit @source_cycle=@cycle,@started_at=@sta
         'Manifestos' { 'dashboard-manifestos.sql' }
         'CamposColetasFretes' { 'dashboard-report-fields.sql' }
         'CamposFaturasFretes' { 'dashboard-report-fields.sql' }
+        'RecebimentoLote' { 'recebimento-lote-json.sql' }
         'GestaoFretes' { 'dashboard-gestao-fretes.sql' }
         'ColetasExcluidas' { 'dashboard-coletas.sql' }
         'FretesFaturamento' { 'dashboard-fretes-faturamento.sql' }

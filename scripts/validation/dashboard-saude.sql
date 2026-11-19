@@ -24,7 +24,9 @@ IF NOT EXISTS(SELECT 1 FROM #cycles)
         WHERE p.registros_extraidos<0 OR p.noop_count<0 OR p.timestamp_inicio>p.timestamp_fim
            OR p.registros_extraidos+p.noop_count<>COALESCE(r.row_count,0)
            OR p.paginas_processadas<>l.pages OR p.entidade<>LOWER(r.entity_name)
-           OR p.status_final<>CASE r.run_state WHEN 'STORED' THEN N'COMPLETO' ELSE N'FALHA' END
+           OR p.status_final<>CASE WHEN r.run_state='STORED' THEN N'COMPLETO'
+                                   WHEN r.run_state='FAILED' AND r.failure_code='REFRESH_BATCH_DEFERRED' THEN N'ADIADO'
+                                   ELSE N'FALHA' END
    )
    OR EXISTS(
        SELECT 1 FROM #cycles p JOIN ctl.dashboard_refresh_cycle c ON c.cycle_id=p.[Id]

@@ -460,6 +460,9 @@ public final class ProductionRefreshCycle {
                     result.put("status", "FAILED").put("reason", safe(failure));
                     break;
                 }
+                if (!historyOnly) {
+                    checkpoint.describeCalendar(template, result);
+                }
                 saveReport(reportPath, report, session);
             }
             if (passed
@@ -565,8 +568,9 @@ public final class ProductionRefreshCycle {
             state.put("lastCalendarDay", lastDay.toString());
             context.checkpoint().save();
         }
-        if (lastDay.isBefore(context.today())) {
-            return;
+        if (context.checkpoint().calendarBehind(context.today())) {
+            // Give all initialized sources their new dates before reviewing older records.
+            throw new DeferredWork();
         }
         if (template == ReportSnapshotTemplate.COLETAS_EXCLUIDAS) {
             final var yesterday = context.today().minusDays(1);

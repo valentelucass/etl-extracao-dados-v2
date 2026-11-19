@@ -36,6 +36,23 @@ class ProductionRefreshCycleTest {
     @TempDir Path directory;
 
     @Test
+    void bringsNewDatesToEverySourceBeforeReviewingOldDates() throws Exception {
+        final var fixture = new Fixture(directory);
+        fixture.seedReady();
+        fixture.now = fixture.now.plus(Duration.ofDays(12));
+        final var through = fixture.today().minusDays(4);
+        assertTrue(fixture.run());
+        for (var entity : fixture.lastReport.required("entities")) {
+            assertEquals(through.toString(), entity.required("calendarThrough").asText());
+            assertEquals("BATCH_DEFERRED", entity.required("status").asText());
+        }
+        for (var operation : fixture.lastReport.required("operations")) {
+            assertEquals("NEW_CALENDAR_DAY", operation.required("phase").asText());
+        }
+        assertEquals(0, fixture.updateCalls);
+    }
+
+    @Test
     void boundedContinuousCyclesGiveEverySourceItsTurnAcrossRestarts() throws Exception {
         final var fixture = new Fixture(directory);
         fixture.seedReady();

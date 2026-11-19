@@ -107,6 +107,15 @@ do {
         $message = "Lote encerrado. Proximo lote a partir de $next. $progress."
     } elseif ($currentSupervisor.phase -ceq 'FAILED') {
         $message = "Retomada liberada. Aguardando o proximo lote. $progress."
+    } elseif ($report.schema -ceq 'PRODUCTION_REFRESH0766' -and $report.passed -and $report.completedAt -and
+        (!$report.historyOnly -or $report.initialComplete)) {
+        $receipt = Read-StatusJson (Join-Path $reportFile.DirectoryName ($reportFile.BaseName + '.publication.json'))
+        $cycle = [guid]::ParseExact($reportFile.BaseName, 'N').ToString()
+        if ($receipt.ciclo -ieq $cycle -and $receipt.auditoria -gt 0 -and $null -ne $receipt.pendentes -and $receipt.pendentes -eq 0) {
+            $message = "Dados recebidos e relatorios publicados. $progress."
+        } else {
+            $message = "Dados recebidos. Aguardando a confirmacao da publicacao no painel. $progress."
+        }
     } else {
         $message = "Aguardando o inicio da carga. $progress."
     }
