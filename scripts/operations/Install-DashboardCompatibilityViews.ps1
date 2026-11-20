@@ -1,7 +1,7 @@
 [CmdletBinding()]
 param(
     [Parameter(Mandatory=$true)][string]$ReceiptPath,
-    [ValidateSet('References','Sinistros','Inventario','Localizacao','Faturas','ContasAPagar','Clientes','Usuarios','Raster','Coletores','Saude','Manifestos','CamposColetasFretes','CamposFaturasFretes','GestaoFretes','ColetasExcluidas','FretesFaturamento','RecebimentoLote','FilialOcorrencia')][string]$Group = 'References',
+    [ValidateSet('References','Sinistros','Inventario','Localizacao','Faturas','ContasAPagar','Clientes','Usuarios','Raster','Coletores','Saude','Manifestos','ContratoManifestos','CamposColetasFretes','CamposFaturasFretes','GestaoFretes','ColetasExcluidas','FretesFaturamento','RecebimentoLote','FilialOcorrencia')][string]$Group = 'References',
     [string[]]$CaptureReceiptPath,
     [string]$CaptureDirectory,
     [switch]$SeedLegacyUserDirectory,
@@ -29,6 +29,8 @@ $referenceViews = @(
     @{file='006_dashboard_dim_veiculos.sql'; view='vw_dim_veiculos'; step='0774-dashboard-dim-veiculos'; columns=4},
     @{file='007_dashboard_dim_planocontas.sql'; view='vw_dim_planocontas'; step='0774-dashboard-dim-planocontas'; columns=3}
 )
+$manifestosFato = @{file='056_dashboard_manifestos_contrato_dalga.sql'; view='dashboard_fato_manifestos'; schema='core'; step='056-dashboard-manifestos-contrato-dalga';
+    previousFile='025_dashboard_fato_manifestos.sql'; previousStep='0777-dashboard-manifestos-fato'}
 $specs = switch ($Group) {
     'References' { $referenceViews }
     'Sinistros' { @{file='008_dashboard_sinistros.sql'; view='vw_sinistros_powerbi'; step='0774-dashboard-sinistros'; columns=34} }
@@ -57,10 +59,11 @@ $specs = switch ($Group) {
     }
     'Manifestos' {
         @{file='024_dashboard_manifestos_linhas.sql'; view='dashboard_manifestos_linhas'; schema='core'; step='0777-dashboard-manifestos-linhas'}
-        @{file='025_dashboard_fato_manifestos.sql'; view='dashboard_fato_manifestos'; schema='core'; step='0777-dashboard-manifestos-fato'}
+        $manifestosFato
         @{file='026_dashboard_manifestos_powerbi.sql'; view='vw_manifestos_powerbi'; step='0777-dashboard-manifestos-detalhe'; columns=105}
         @{file='027_dashboard_manifestos_fato_dash.sql'; view='vw_fato_manifestos_dash'; step='0777-dashboard-manifestos-portal'; columns=106}
     }
+    'ContratoManifestos' { $manifestosFato }
     'GestaoFretes' {
         @{file='030_dashboard_fretes_linhas_tuned.sql'; view='dashboard_fretes_linhas'; schema='core'; step='0785-dashboard-fretes-linhas';
           previousFile='028_dashboard_fretes_linhas.sql'; previousStep='0784-dashboard-fretes-linhas'}
@@ -175,6 +178,16 @@ IF NOT EXISTS (
 '@
 
     $added = 0
+    $reclassificados = 0
+    if ($Group -in 'Manifestos','ContratoManifestos') {
+        # Serializa a alteração com a substituição das leituras feitas pelo publicador.
+        $null = Invoke-Scalar @'
+DECLARE @lock int;
+EXEC @lock=sys.sp_getapplock @Resource=N'dashboard:fatos-fretes', @LockMode='Exclusive',
+     @LockOwner='Transaction', @LockTimeout=5000;
+IF @lock < 0 THROW 52081,'Publicacao de fretes em andamento.',1;
+'@
+    }
     if ($Group -eq 'FilialOcorrencia') {
         $path = 'database/production/receiving/014_filial_registro_ocorrencia.sql'
         $check = "SELECT COUNT(*) FROM ctl.production_export_field WHERE entity_name='OCORRENCIAS' AND field_name='ice_uer_crn_psn_nickname'"
@@ -396,6 +409,11 @@ EXEC ctl.usp_store_dashboard_refresh_audit @source_cycle=@cycle,@started_at=@sta
         $receipt.views += [pscustomobject]@{name=$view; columns=$published.Count; sha256=$hash; alreadyInstalled=$exists}
     }
 
+    if ($Group -in 'Manifestos','ContratoManifestos' -and (Invoke-Scalar "SELECT OBJECT_ID('core.dashboard_manifestos_leitura','U')") -isnot [DBNull]) {
+        $refresh = Join-Path $repository 'database/production/publication/057_dashboard_manifestos_reclassificar_leitura.sql'
+        $reclassificados = Invoke-Scalar ([IO.File]::ReadAllText($refresh)) -TimeoutSeconds 600
+        $receipt.manifestosReclassificados = $reclassificados
+    }
     $validationScript = switch ($Group) {
         'References' { 'dashboard-reference-views.sql' }
         'Sinistros' { 'dashboard-sinistros.sql' }
@@ -409,6 +427,7 @@ EXEC ctl.usp_store_dashboard_refresh_audit @source_cycle=@cycle,@started_at=@sta
         'Coletores' { 'dashboard-coletores.sql' }
         'Saude' { 'dashboard-saude.sql' }
         'Manifestos' { 'dashboard-manifestos.sql' }
+        'ContratoManifestos' { 'dashboard-contrato-manifestos.sql' }
         'CamposColetasFretes' { 'dashboard-report-fields.sql' }
         'CamposFaturasFretes' { 'dashboard-report-fields.sql' }
         'RecebimentoLote' { 'recebimento-lote-json.sql' }
@@ -445,7 +464,7 @@ EXEC ctl.usp_store_dashboard_refresh_audit @source_cycle=@cycle,@started_at=@sta
             throw 'DASHBOARD_USER_DIRECTORY_SEED_DIFFERS'
         }
     }
-    if ($Apply -and ($added -gt 0 -or $receipt.capture -or $receipt.captures)) {
+    if ($Apply -and ($added -gt 0 -or $reclassificados -gt 0 -or $receipt.capture -or $receipt.captures)) {
         $transaction.Commit()
         $receipt.catalogWritesCommitted = $added -gt 0
         if ($receipt.capture) { $receipt.capture.transactionCommitted = $true }
