@@ -1,3 +1,11 @@
+## 20/11/2026 — Atualização do detalhe de fretes
+
+A revisão 58 identifica quais fretes precisam de novo cálculo em cada publicação. Ela acompanha o registro original, as faturas, a localização, o comprovante e as referências de filial. Uma troca de minuta considera os fretes ligados à antiga e à nova. O relatório continua a usar as regras das mesmas views. O publicador original fica guardado para reversão.
+
+Na cópia com quatro datas reais, 13 cenários conferiram cinco relatórios, inclusive após interrupção e retomada. Em um ensaio com todos os 57.868 fretes ativos e 121.270 registros de apoio, uma correção passou de 150.409 para 25.115 ms. Os 123 campos e as repetições coincidiram. A primeira preparação do controle passou de 137.019 para 176.253 ms. Na gravação integral de teste, a mediana da reserva de trabalho caiu de 2.380.808 para 964.112 KiB, com 469.896 KiB utilizados nas duas versões.
+
+O instalador `scripts/operations/Install-DashboardFreightDetail.ps1` aceita `-Acao Verificar`, `-Acao Aplicar` e `-Acao Reverter`. A reversão restaura o publicador anterior dentro da transação. O ensaio executou instalação, repetição e reversão. A consulta `scripts/validation/dashboard-detalhe-fretes-publicado.sql` permite comparar o conteúdo publicado com o cálculo integral após um lote.
+
 ## 0818 — Filial de registro no relatório de Ocorrências
 
 Em 19/11/2026, Caio confirmou que o relatório 12072 deve fornecer a filial onde a ocorrência foi registrada. O Java e o SQL recebem as 20 colunas do ESL com a nova filial. A revisão das datas pendentes conserva a fila e aceita os pontos de retomada criados pelo formato anterior. A filial de um registro histórico vem de uma nova leitura do ESL.
