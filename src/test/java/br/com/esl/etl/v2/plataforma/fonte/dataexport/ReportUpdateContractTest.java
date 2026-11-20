@@ -292,8 +292,7 @@ class ReportUpdateContractTest {
         try (var input =
                 ReportUpdateContractTest.class
                         .getClassLoader()
-                        .getResourceAsStream(
-                                "contracts/dataexport/receiving-catalog-0766-v1.json")) {
+                        .getResourceAsStream("contracts/dataexport/receiving-catalog-0818.json")) {
             assertNotNull(input);
             for (final var entity : CurlSnapshotWire.JSON.readTree(input).required("entities")) {
                 final var info = CurlSnapshotWire.JSON.createObjectNode();

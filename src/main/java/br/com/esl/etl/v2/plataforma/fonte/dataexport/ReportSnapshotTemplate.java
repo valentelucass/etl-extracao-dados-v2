@@ -12,7 +12,7 @@ public enum ReportSnapshotTemplate {
             DataExportTemplate.CONSOLIDACAO_DETALHADA,
             "issue_date",
             "consolidacoes-11067-0762-v2.json"),
-    OCORRENCIAS(DataExportTemplate.OCORRENCIAS, "occurrence_at", "ocorrencias-12072-0762-v2.json"),
+    OCORRENCIAS(DataExportTemplate.OCORRENCIAS, "occurrence_at", "ocorrencias-12072-0818.json"),
     COLETAS(DataExportTemplate.COLETAS, "request_date", null),
     FRETES(DataExportTemplate.FRETES, "service_at", null),
     MANIFESTOS(DataExportTemplate.MANIFESTOS, null, null),

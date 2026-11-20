@@ -1,7 +1,7 @@
 [CmdletBinding()]
 param(
     [Parameter(Mandatory=$true)][string]$ReceiptPath,
-    [ValidateSet('References','Sinistros','Inventario','Localizacao','Faturas','ContasAPagar','Clientes','Usuarios','Raster','Coletores','Saude','Manifestos','CamposColetasFretes','CamposFaturasFretes','GestaoFretes','ColetasExcluidas','FretesFaturamento','RecebimentoLote')][string]$Group = 'References',
+    [ValidateSet('References','Sinistros','Inventario','Localizacao','Faturas','ContasAPagar','Clientes','Usuarios','Raster','Coletores','Saude','Manifestos','CamposColetasFretes','CamposFaturasFretes','GestaoFretes','ColetasExcluidas','FretesFaturamento','RecebimentoLote','FilialOcorrencia')][string]$Group = 'References',
     [string[]]$CaptureReceiptPath,
     [string]$CaptureDirectory,
     [switch]$SeedLegacyUserDirectory,
@@ -175,6 +175,11 @@ IF NOT EXISTS (
 '@
 
     $added = 0
+    if ($Group -eq 'FilialOcorrencia') {
+        $path = 'database/production/receiving/014_filial_registro_ocorrencia.sql'
+        $check = "SELECT COUNT(*) FROM ctl.production_export_field WHERE entity_name='OCORRENCIAS' AND field_name='ice_uer_crn_psn_nickname'"
+        $added += Install-ReceivingPackage $path '0818-filial-registro-ocorrencia' $check 1
+    }
     if ($Group -eq 'RecebimentoLote') {
         $path = 'database/production/receiving/013_recebimento_lote_json_uma_vez.sql'
         $check = "SELECT IIF(CHARINDEX(N'CREATE TABLE #recebimento_linhas',OBJECT_DEFINITION(OBJECT_ID('stg.usp_production_ingestion_store')))>0,1,0)"
@@ -407,6 +412,7 @@ EXEC ctl.usp_store_dashboard_refresh_audit @source_cycle=@cycle,@started_at=@sta
         'CamposColetasFretes' { 'dashboard-report-fields.sql' }
         'CamposFaturasFretes' { 'dashboard-report-fields.sql' }
         'RecebimentoLote' { 'recebimento-lote-json.sql' }
+        'FilialOcorrencia' { 'filial-registro-ocorrencia.sql' }
         'GestaoFretes' { 'dashboard-gestao-fretes.sql' }
         'ColetasExcluidas' { 'dashboard-coletas.sql' }
         'FretesFaturamento' { 'dashboard-fretes-faturamento.sql' }

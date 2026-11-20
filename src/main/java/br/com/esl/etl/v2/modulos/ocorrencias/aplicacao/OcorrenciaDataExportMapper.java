@@ -23,7 +23,7 @@ public final class OcorrenciaDataExportMapper {
                 ExpansionFieldParser.instant(data, "occurrence_schedule_at"),
                 ExpansionFieldParser.instant(data, "ice_fit_dpn_performance_finished_at"),
                 ExpansionFieldParser.text(data, "delivery_status"),
-                ExpansionFieldParser.text(data, "ice_fit_fln_cln_nickname"),
+                ExpansionFieldParser.text(data, "ice_uer_crn_psn_nickname"),
                 ExpansionFieldParser.bool(data, "ice_fit_dpn_manual_schedule"),
                 ExpansionFieldParser.instant(data, "ice_ttt_solution_deadline"),
                 ExpansionFieldParser.instant(data, "ice_ttt_solution_at"),

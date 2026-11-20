@@ -2,6 +2,7 @@ package br.com.esl.etl.v2.plataforma.producao;
 
 import br.com.esl.etl.v2.plataforma.fonte.dataexport.BusinessDateRange;
 import br.com.esl.etl.v2.plataforma.fonte.dataexport.CurlSnapshotWire;
+import br.com.esl.etl.v2.plataforma.fonte.dataexport.ReportMetadataCatalog;
 import br.com.esl.etl.v2.plataforma.fonte.dataexport.ReportSnapshotExtractor;
 import br.com.esl.etl.v2.plataforma.fonte.dataexport.ReportSnapshotTemplate;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -359,6 +360,10 @@ public final class ProductionAllReceivingCycle {
             throws Exception {
         final var info =
                 response.isObject() && response.has("data") ? response.get("data") : response;
+        if (template == ReportSnapshotTemplate.OCORRENCIAS) {
+            new ReportMetadataCatalog().validate(template, info);
+            return;
+        }
         try (var input =
                 ProductionAllReceivingCycle.class
                         .getClassLoader()

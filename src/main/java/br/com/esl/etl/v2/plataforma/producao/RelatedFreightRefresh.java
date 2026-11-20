@@ -110,7 +110,7 @@ final class RelatedFreightRefresh {
                                     .put("start", day.toString())
                                     .put("end", day.toString()));
             final var ranges = pending.putArray("locationRanges");
-            while (!dates.isEmpty()) {
+            while (template != ReportSnapshotTemplate.OCORRENCIAS && !dates.isEmpty()) {
                 final var start = dates.first();
                 var end = start;
                 while (!dates.isEmpty() && !dates.first().isAfter(start.plusDays(7))) {
@@ -183,7 +183,10 @@ final class RelatedFreightRefresh {
             save.run();
         }
         final var ranges = pending.required("locationRanges");
-        for (int next = pending.required("locationNext").asInt(); next < ranges.size(); next++) {
+        // Existing checkpoints may still have location ranges from the previous ESL layout.
+        for (int next = pending.required("locationNext").asInt();
+                template != ReportSnapshotTemplate.OCORRENCIAS && next < ranges.size();
+                next++) {
             boolean entirePeriodQueued = true;
             final var queued = queued(pending);
             for (var day = workFloor; !day.isAfter(end); day = day.plusDays(1)) {
@@ -402,13 +405,7 @@ final class RelatedFreightRefresh {
                 }
                 final var current =
                         locations.get(reference.required("draft").asText() + ":" + service);
-                if (unassigned
-                        || current == null
-                        || (template == ReportSnapshotTemplate.OCORRENCIAS
-                                && (current.size() != 1
-                                        || !current.contains(
-                                                FreightDependencyIndex.location(
-                                                        reference.required("location")))))) {
+                if (unassigned || current == null) {
                     dates.add(day);
                     break;
                 }

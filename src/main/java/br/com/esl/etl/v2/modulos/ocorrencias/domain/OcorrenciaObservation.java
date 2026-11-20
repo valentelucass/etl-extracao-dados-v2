@@ -18,7 +18,7 @@ public record OcorrenciaObservation(
         ExpansionValue<java.time.Instant> occurrenceScheduleAt,
         ExpansionValue<java.time.Instant> iceFitDpnPerformanceFinishedAt,
         ExpansionValue<String> deliveryStatus,
-        ExpansionValue<String> iceFitFlnClnNickname,
+        ExpansionValue<String> filialRegistro,
         ExpansionValue<Boolean> iceFitDpnManualSchedule,
         ExpansionValue<java.time.Instant> iceTttSolutionDeadline,
         ExpansionValue<java.time.Instant> iceTttSolutionAt,
@@ -40,7 +40,7 @@ public record OcorrenciaObservation(
         java.util.Objects.requireNonNull(occurrenceScheduleAt);
         java.util.Objects.requireNonNull(iceFitDpnPerformanceFinishedAt);
         java.util.Objects.requireNonNull(deliveryStatus);
-        java.util.Objects.requireNonNull(iceFitFlnClnNickname);
+        java.util.Objects.requireNonNull(filialRegistro);
         java.util.Objects.requireNonNull(iceFitDpnManualSchedule);
         java.util.Objects.requireNonNull(iceTttSolutionDeadline);
         java.util.Objects.requireNonNull(iceTttSolutionAt);
@@ -69,7 +69,7 @@ public record OcorrenciaObservation(
                 && occurrenceScheduleAt.valid()
                 && iceFitDpnPerformanceFinishedAt.valid()
                 && deliveryStatus.valid()
-                && iceFitFlnClnNickname.valid()
+                && filialRegistro.valid()
                 && iceFitDpnManualSchedule.valid()
                 && iceTttSolutionDeadline.valid()
                 && iceTttSolutionAt.valid()

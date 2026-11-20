@@ -2,7 +2,13 @@
 
 Template **12072**, grupo **Relatórios**, 20 campos e 13 filtros. Em 2026-11-08, cURL e Excel oficial 1777562 contêm 279 linhas, 5580 células e as mesmas tuplas completas, preservadas as multiplicidades. As regras de apresentação abaixo se limitam a esse corte.
 
-## Requisição e seleção
+## Filial de registro em produção desde 19/11/2026
+
+O ESL passou a fornecer **Filial da Ocorrência** (`ice_uer_crn_psn_nickname`). O campo identifica a filial onde a equipe registrou a ocorrência. O ETL conserva o texto recebido e aceita um valor nulo quando o ESL o envia. A localização da carga pertencia ao formato anterior. As capturas históricas conservam a localização original. O dia passa a ter a filial de registro quando o ETL volta a consultá-lo no ESL.
+
+O relatório continua com 20 campos. Os filtros por data da ocorrência e por data de atualização seguem iguais. No teste de 01/11/2026, a leitura do ESL chegou à página final vazia após nove ocorrências e as nove filiais coincidiram com os dados lidos pelo Java.
+
+## Requisição e seleção do levantamento original
 
 Origem: `https://rodogarcia.eslcloud.com.br`. Metadata: `GET /api/analytics/reports/12072/info`. Dados: `GET /api/analytics/reports/12072/data`. Bearer do próprio V2 enviado por stdin, sem segredo em URL/argumento/log.
 

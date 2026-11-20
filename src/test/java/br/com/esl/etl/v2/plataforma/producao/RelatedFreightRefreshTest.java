@@ -30,13 +30,13 @@ class RelatedFreightRefreshTest {
     @TempDir Path directory;
 
     @Test
-    void locationChangesAreFoundEvenWhenBothUpdateQueriesAreEmpty() throws Exception {
+    void aChangeInCargoLocationDoesNotChangeTheRecordingBranch() throws Exception {
         final var f = new Fixture(directory);
         f.locations.put("100", "New branch");
         assertTrue(f.run(8));
-        assertEquals(List.of(f.first), f.replaced);
+        assertTrue(f.replaced.isEmpty());
         assertEquals(0, f.updatedRows);
-        assertTrue(f.locationScans > 0);
+        assertEquals(0, f.locationScans);
         assertFalse(f.state.has("relatedPending"));
         assertEquals(f.cutoff.toString(), f.state.path("relatedWatermark").asText());
     }
@@ -78,12 +78,12 @@ class RelatedFreightRefreshTest {
     }
 
     @Test
-    void missingOrAmbiguousLocationReferencesTriggerCompleteRecapture() throws Exception {
+    void missingOrAmbiguousCargoLocationsDoNotChangeTheRecordingBranch() throws Exception {
         final var f = new Fixture(directory);
         f.locations.remove("100");
         f.ambiguous = true;
         assertTrue(f.run(8));
-        assertEquals(List.of(f.first, f.second), f.replaced);
+        assertTrue(f.replaced.isEmpty());
     }
 
     @Test
@@ -114,6 +114,25 @@ class RelatedFreightRefreshTest {
         assertEquals(1, f.state.path("relatedPending").path("dates").size());
         assertTrue(f.run(1));
         assertEquals(List.of(f.first, f.second), f.replaced);
+    }
+
+    @Test
+    void pendingDatesSurviveAResumeFromThePreviousOccurrenceLayout() throws Exception {
+        final var f = new Fixture(directory);
+        f.changedFreights.add(f.freight("100"));
+        f.changedFreights.add(f.freight("200"));
+        assertFalse(f.run(1));
+        final var pending = (ObjectNode) f.state.required("relatedPending");
+        pending.putArray("locationRanges")
+                .addObject()
+                .put("start", f.oldServiceDate.toString())
+                .put("end", f.oldServiceDate.toString());
+        pending.put("locationNext", 0);
+        f.invalidLocation = true;
+        assertTrue(f.run(1));
+        assertEquals(List.of(f.first, f.second), f.replaced);
+        assertEquals(0, f.locationScans);
+        assertFalse(f.state.has("relatedPending"));
     }
 
     @Test
@@ -149,7 +168,7 @@ class RelatedFreightRefreshTest {
 
     @Test
     void nullSourceNumberIsPreservedAndCannotMatchAStoredReference() throws Exception {
-        final var f = new Fixture(directory);
+        final var f = new Fixture(directory, ReportSnapshotTemplate.CONSOLIDACAO_DETALHADA);
         f.locations.remove("100");
         f.locations.put(null, "Unknown reference");
         assertTrue(f.run(8));
@@ -170,7 +189,7 @@ class RelatedFreightRefreshTest {
     @Test
     void legacyQuarantineIsRetainedAndMissingLookupIdentityRefreshesAllMatchingDates()
             throws Exception {
-        final var f = new Fixture(directory);
+        final var f = new Fixture(directory, ReportSnapshotTemplate.CONSOLIDACAO_DETALHADA);
         f.locations.put(null, "Unknown reference");
         f.rejectedLocationRows = 1;
         assertTrue(f.run(8));
@@ -184,7 +203,7 @@ class RelatedFreightRefreshTest {
 
     @Test
     void invalidLocationProjectionCannotCommitEvenWithAnAcceptedLegacyResult() throws Exception {
-        final var f = new Fixture(directory);
+        final var f = new Fixture(directory, ReportSnapshotTemplate.CONSOLIDACAO_DETALHADA);
         f.invalidLocation = true;
         assertThrows(IllegalStateException.class, () -> f.run(8));
         assertTrue(f.replaced.isEmpty());
@@ -195,7 +214,7 @@ class RelatedFreightRefreshTest {
     @Test
     void alreadyQueuedCompletePeriodRequiresEveryReplacementWithoutRedundantLookups()
             throws Exception {
-        final var f = new Fixture(directory);
+        final var f = new Fixture(directory, ReportSnapshotTemplate.CONSOLIDACAO_DETALHADA);
         f.changedFreights.add(f.freight("100"));
         f.changedFreights.add(f.freight("200"));
         f.incompleteLocation = true;
@@ -210,7 +229,7 @@ class RelatedFreightRefreshTest {
 
     @Test
     void incompleteLocationProjectionKeepsTheCursorDespiteValidReferenceFields() throws Exception {
-        final var f = new Fixture(directory);
+        final var f = new Fixture(directory, ReportSnapshotTemplate.CONSOLIDACAO_DETALHADA);
         f.incompleteLocation = true;
         assertThrows(IllegalStateException.class, () -> f.run(8));
         assertTrue(f.replaced.isEmpty());
@@ -232,7 +251,9 @@ class RelatedFreightRefreshTest {
         assertEquals(1, f.state.path("relatedPending").path("freightNext").asInt());
         assertEquals(1, f.state.path("relatedPending").path("dates").size());
         assertEquals(f.before.toString(), f.state.path("relatedWatermark").asText());
-        ((ObjectNode) f.state.required("relatedPending")).remove("freightRanges");
+        // A checkpoint from the original layout kept the ranges under locationRanges.
+        final var legacy = (ObjectNode) f.state.required("relatedPending");
+        legacy.set("locationRanges", legacy.remove("freightRanges"));
         f.rejectFreightRange = null;
         assertTrue(f.run(8));
         assertEquals(List.of(f.first, f.second), f.replaced);
@@ -252,7 +273,7 @@ class RelatedFreightRefreshTest {
     }
 
     @Test
-    void nearbyServiceDatesShareLocationScanButUseSeparateFreightQueries() throws Exception {
+    void nearbyServiceDatesUseSeparateFreightQueriesAndIgnoreCargoLocation() throws Exception {
         final var f = new Fixture(directory);
         f.services.put("200", f.oldServiceDate.plusDays(1));
         f.remember(f.second, "200", "Old branch", 2);
@@ -260,12 +281,12 @@ class RelatedFreightRefreshTest {
         f.locations.put("200", "New branch");
         f.rejectWideFreightRange = true;
         assertTrue(f.run(8));
-        assertEquals(List.of(f.first, f.second), f.replaced);
+        assertEquals(List.of(f.first), f.replaced);
         assertEquals(2, f.freightScopes.size());
         assertTrue(
                 f.freightScopes.stream()
                         .allMatch(scope -> scope.startInclusive().equals(scope.endInclusive())));
-        assertEquals(1, f.locationScans);
+        assertEquals(0, f.locationScans);
     }
 
     private static final class Fixture {
@@ -335,7 +356,9 @@ class RelatedFreightRefreshTest {
             row.put(
                     occurrences ? "ice_fit_service_at" : "ctd_fgs_service_at",
                     services.getOrDefault(draft, oldServiceDate).toString());
-            row.put("ice_fit_fln_cln_nickname", location);
+            if (occurrences) {
+                row.put("ice_uer_crn_psn_nickname", location);
+            }
             final var envelope = CurlSnapshotWire.JSON.createObjectNode();
             envelope.set("record", row);
             final var rows = new ArrayList<String>();

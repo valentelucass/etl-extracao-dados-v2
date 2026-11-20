@@ -11,7 +11,7 @@ public final class ReportMetadataCatalog {
     private final JsonNode dashboardFields;
 
     public ReportMetadataCatalog() throws IOException {
-        entities = load("receiving-catalog-0766-v1.json").required("entities");
+        entities = load("receiving-catalog-0818.json").required("entities");
         dashboardFields = load("dashboard-report-fields-0783.json").required("additionalFields");
     }
 

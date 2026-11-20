@@ -482,7 +482,8 @@ class ProductionRefreshCycleTest {
     }
 
     @Test
-    void aKnownLocationDifferenceCannotReuseAnEarlierSnapshotFromTheSameCycle() throws Exception {
+    void occurrenceIndexBootstrapPreservesTheRecordingBranchWhenCargoLocationChanges()
+            throws Exception {
         final var fixture = new Fixture(directory);
         fixture.seedReady();
         try (var files = Files.walk(directory.resolve("dependency-index"))) {
@@ -502,15 +503,16 @@ class ProductionRefreshCycleTest {
         }
         fixture.locationChangeDuringLookup = true;
         assertTrue(fixture.run());
-        assertEquals(2, fixture.occurrenceFloorCaptures);
+        assertEquals("0818", fixture.lastReport.required("relatedFieldRefreshRevision").asText());
+        assertEquals(1, fixture.occurrenceFloorCaptures);
         assertEquals(
-                "new location",
+                "filial de registro",
                 fixture.store
                         .latest
                         .get("OCORRENCIAS:" + fixture.floor)
                         .get(0)
                         .required("record")
-                        .required("ice_fit_fln_cln_nickname")
+                        .required("ice_uer_crn_psn_nickname")
                         .asText());
         assertEquals(2, fixture.store.latest.get("OCORRENCIAS:" + fixture.floor).size());
     }
@@ -649,7 +651,7 @@ class ProductionRefreshCycleTest {
                     getClass()
                             .getClassLoader()
                             .getResourceAsStream(
-                                    "contracts/dataexport/receiving-catalog-0766-v1.json")) {
+                                    "contracts/dataexport/receiving-catalog-0818.json")) {
                 assertTrue(input != null);
                 for (final var entity :
                         CurlSnapshotWire.JSON.readTree(input).required("entities")) {
@@ -720,7 +722,7 @@ class ProductionRefreshCycleTest {
             if (template == ReportSnapshotTemplate.OCORRENCIAS) {
                 row.put("ice_f_e_fit_corporation_sequence_number", number)
                         .put("ice_fit_service_at", day.toString())
-                        .put("ice_fit_fln_cln_nickname", "fixture");
+                        .put("ice_uer_crn_psn_nickname", "filial de registro");
             } else if (template == ReportSnapshotTemplate.CONSOLIDACAO_DETALHADA) {
                 row.put("ctd_fgs_corporation_sequence_number", number)
                         .put("ctd_fgs_service_at", day.toString());
@@ -816,10 +818,6 @@ class ProductionRefreshCycleTest {
                                     if (template == ReportSnapshotTemplate.OCORRENCIAS
                                             && day.equals(floor)) {
                                         occurrenceFloorCaptures++;
-                                        if (locationChangeDuringLookup
-                                                && occurrenceFloorCaptures > 1) {
-                                            row.put("ice_fit_fln_cln_nickname", "new location");
-                                        }
                                     }
                                     if (locationChangeDuringLookup
                                             && template == ReportSnapshotTemplate.LOCALIZACAO_CARGAS

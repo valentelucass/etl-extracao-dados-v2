@@ -99,7 +99,9 @@ class ProductionAllReceivingCycleTest {
                 ProductionAllReceivingCycleTest.class
                         .getClassLoader()
                         .getResourceAsStream(
-                                "contracts/dataexport/receiving-catalog-0762-v2.json")) {
+                                template == ReportSnapshotTemplate.OCORRENCIAS
+                                        ? "contracts/dataexport/receiving-catalog-0818.json"
+                                        : "contracts/dataexport/receiving-catalog-0762-v2.json")) {
             for (final var entity : CurlSnapshotWire.JSON.readTree(input).get("entities")) {
                 if (!entity.get("entity").asText().equals(template.name())) {
                     continue;

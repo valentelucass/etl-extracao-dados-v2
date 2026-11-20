@@ -88,9 +88,6 @@ final class FreightDependencyIndex {
                     "serviceDay",
                     serviceDay(
                             row.path(occurrences ? "ice_fit_service_at" : "ctd_fgs_service_at")));
-            if (occurrences) {
-                reference.set("location", row.required("ice_fit_fln_cln_nickname"));
-            }
             if (seen.add(reference.toString())) {
                 references.add(reference);
             }

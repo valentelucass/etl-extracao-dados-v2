@@ -297,7 +297,7 @@ public final class ProductionRefreshCycle {
         final var report =
                 json.createObjectNode()
                         .put("schema", "PRODUCTION_REFRESH0766")
-                        .put("relatedFieldRefreshRevision", "0768")
+                        .put("relatedFieldRefreshRevision", "0818")
                         .put("startedAt", began.toString())
                         .put("sourceScope", scope)
                         .put("runtimeSha256", config.required("runtimeSha256").asText())

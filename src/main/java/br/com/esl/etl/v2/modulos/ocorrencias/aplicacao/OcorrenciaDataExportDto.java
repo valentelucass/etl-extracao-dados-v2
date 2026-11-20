@@ -21,7 +21,7 @@ public record OcorrenciaDataExportDto(JsonNode data) {
                     "occurrence_schedule_at",
                     "ice_fit_dpn_performance_finished_at",
                     "delivery_status",
-                    "ice_fit_fln_cln_nickname",
+                    "ice_uer_crn_psn_nickname",
                     "ice_fit_dpn_manual_schedule",
                     "ice_ttt_solution_deadline",
                     "ice_ttt_solution_at",

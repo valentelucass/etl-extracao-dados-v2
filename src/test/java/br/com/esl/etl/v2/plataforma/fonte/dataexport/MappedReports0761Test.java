@@ -101,6 +101,20 @@ class MappedReports0761Test {
     }
 
     @Test
+    void occurrenceBranchUsesOnlyTheEslRegistrationField() throws Exception {
+        final var input = row(ReportSnapshotTemplate.OCORRENCIAS);
+        final var mapper = new OcorrenciaDataExportMapper();
+        input.put("ice_uer_crn_psn_nickname", "AGU");
+        assertEquals("AGU", mapper.map(input).filialRegistro().value());
+        input.putNull("ice_uer_crn_psn_nickname");
+        assertEquals(ExpansionValue.Presence.NULL, mapper.map(input).filialRegistro().presence());
+        input.put("ice_fit_fln_cln_nickname", "Outra filial");
+        assertThrows(IllegalArgumentException.class, () -> mapper.map(input));
+        input.remove("ice_uer_crn_psn_nickname");
+        assertThrows(IllegalArgumentException.class, () -> mapper.map(input));
+    }
+
+    @Test
     void antDocumentPreservesTextZerosWhitespaceAndNulls() throws Exception {
         final var input = row(ReportSnapshotTemplate.CONSOLIDACAO_DETALHADA);
         input.put("ctd_ant_document", " 00012 ");

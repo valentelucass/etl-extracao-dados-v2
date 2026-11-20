@@ -2,7 +2,13 @@
 
 Este complemento do [acionador0766](atualizacao-historico-onze-entidades-0766.md) trata os campos que um relatório busca em outros registros do ESL. A [comparação0767](../catalogos/novas-entidades-0761/comparacao-excel-0767.md) demonstrou que a atualização da própria ocorrência não informa todas as mudanças de previsão e localização do frete.
 
-## Estratégia por relatório
+## Regra em vigor para Ocorrências desde 19/11/2026
+
+O 12072 informa a filial que registrou a ocorrência. A atualização busca alterações da própria ocorrência e dos fretes relacionados para os demais campos do relatório. As consultas de localização de cargas deixaram de fazer parte da revisão de Ocorrências. Datas já enfileiradas continuam pendentes até a confirmação da gravação. A revisão periódica busca a filial no ESL para os dias anteriores.
+
+Na instalação da V2, aplique o grupo `FilialOcorrencia` após o catálogo de recebimento. O instalador permite ensaio com reversão e verifica as 20 colunas. O pacote 0818 inclui o mapeamento correspondente e o acionador contínuo do PM2. A descrição abaixo documenta a revisão 0768.
+
+## Estratégia por relatório na revisão 0768
 
 | Relatório | Conferência complementar |
 | --- | --- |

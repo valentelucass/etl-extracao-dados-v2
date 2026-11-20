@@ -1,3 +1,9 @@
+## 0818 — Filial de registro no relatório de Ocorrências
+
+Em 19/11/2026, Caio confirmou que o relatório 12072 deve fornecer a filial onde a ocorrência foi registrada. O Java e o SQL recebem as 20 colunas do ESL com a nova filial. A revisão das datas pendentes conserva a fila e aceita os pontos de retomada criados pelo formato anterior. A filial de um registro histórico vem de uma nova leitura do ESL.
+
+O pacote instalado passou em 85 testes. A conferência dos metadados incluiu as 13 fontes. Na leitura integral de 01/11, o ESL devolveu nove ocorrências e as nove filiais coincidiram com os valores lidos pelo Java. O ensaio, a aplicação e a verificação posterior do contrato SQL passaram. A atualização contínua voltou ao PM2 às 21h33 e retomou por Ocorrências. A carga inicial de 90 dias foi preservada.
+
 ## 19/11/2026 — Rotina de produção no PM2
 
 O extrator anterior foi retirado do PM2 e da configuração de reinício. A V2 passou a executar a rotina contínua como `ETL-V2-ATUALIZACAO`. O processo iniciou a extração às 06h13. O intervalo permanece em 60 minutos após o fim de cada publicação.
