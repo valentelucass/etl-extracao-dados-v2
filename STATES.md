@@ -1,3 +1,11 @@
+## Performance por etapa — ocorrências do ESL 12072
+
+Em 20/11/2026, a instalação 059 publicou `pub.dashboard_performance_ocorrencias` no ETL_SISTEMA_V2. Contém o número da minuta e da NF, CT-e, código, descrição, horário local e filial de registro da ocorrência. A contagem preserva as linhas por NF. A filial vem de `ice_uer_crn_psn_nickname`; captura anterior ou filial ausente no ESL retorna NULL. O coordenador regular substitui as partições que receberam uma nova captura na mesma transação dos relatórios de frete.
+
+O instalador `scripts/operations/Install-DashboardPerformanceOcorrencias.ps1` verifica com transação revertida por padrão. Com `-Aplicar`, instala, carrega as partições e valida a leitura como usuario_etl. A implantação inicial conferiu 483.466 linhas em 97 datas, com amostras do início, meio e fim de cada partição (291/291 idênticas à origem).
+
+O reprocessamento do histórico usa `scripts/operations/Reprocess-DashboardOccurrenceBranches.ps1`. Cada data ainda no formato antigo é relida integralmente pelo extrator e conferida no SQL antes da publicação. O comando reaproveita o runtime instalado e as travas de origem e destino, cede as janelas ao serviço regular e pode ser retomado sem recapturar partições já convertidas. Os recibos ficam na área privada `atualizacao0766/ocorrencias-performance-059`. Na partição de 19/11, a confirmação agregada inicial divergiu da confirmação por data do leitor. A releitura SQL comprovou as 7.733 linhas; a confirmação corrigida passou na data seguinte sem repetir o dia 19.
+
 ## 20/11/2026 — Atualização do detalhe de fretes
 
 A revisão 58 identifica quais fretes precisam de novo cálculo em cada publicação. Ela acompanha o registro original, as faturas, a localização, o comprovante e as referências de filial. Uma troca de minuta considera os fretes ligados à antiga e à nova. O relatório continua a usar as regras das mesmas views. O publicador original fica guardado para reversão.

@@ -36,6 +36,21 @@ class ProductionRefreshCycleTest {
     @TempDir Path directory;
 
     @Test
+    void replaysOnlyTheRequestedOccurrenceDayWithoutAdvancingTheRoutine() throws Exception {
+        final var fixture = new Fixture(directory);
+        final var day = fixture.today().minusDays(2);
+        fixture.store.earliest = day.minusDays(7);
+        fixture.config.put("reprocessOccurrenceDate", day.toString());
+        assertTrue(fixture.run());
+        assertEquals(List.of("OCORRENCIAS:" + day), fixture.store.commits);
+        assertTrue(fixture.lastReport.required("passed").asBoolean());
+        assertEquals("OCORRENCIA_RECAPTURA_FILIAL", fixture.lastReport.path("schema").asText());
+        assertTrue(
+                fixture.lastReport.path("operations").get(0).path("sqlReadbackExact").asBoolean());
+        assertFalse(Files.exists(Path.of(fixture.config.required("checkpointPath").asText())));
+    }
+
+    @Test
     void bringsNewDatesToEverySourceBeforeReviewingOldDates() throws Exception {
         final var fixture = new Fixture(directory);
         fixture.seedReady();
@@ -560,13 +575,14 @@ class ProductionRefreshCycleTest {
         final Map<UUID, String> runs = new HashMap<>();
         final List<String> commits = new ArrayList<>();
         LocalDate rejectDay;
+        LocalDate earliest;
         boolean disconnectAfterCommit;
         int failed;
 
         @Override
         public LocalDate earliestCovered(
                 final String scope, final LocalDate today, final String entity) {
-            return null;
+            return earliest;
         }
 
         @Override

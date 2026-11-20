@@ -338,6 +338,19 @@ public final class ProductionRefreshCycle {
                             operations,
                             new HashMap<>(),
                             new HashMap<>());
+            if (config.has("reprocessOccurrenceDate")) {
+                require(!Files.exists(checkpointPath), "OCCURRENCE_REPLAY_ISOLATED_CHECKPOINT");
+                final var day =
+                        LocalDate.parse(config.required("reprocessOccurrenceDate").asText());
+                final var template = ReportSnapshotTemplate.OCORRENCIAS;
+                final var earliest = store.earliestCovered(scope, today, template.name());
+                require(
+                        earliest != null && !day.isBefore(earliest) && !day.isAfter(today),
+                        "OCCURRENCE_REPLAY_OUTSIDE_COVERAGE");
+                report.put("schema", "OCORRENCIA_RECAPTURA_FILIAL");
+                fullDay(context, template, day, "FILIAL_OCORRENCIA");
+                return true;
+            }
             final var order =
                     historyOnly
                             ? ReportSnapshotTemplate.receivingTemplates()
@@ -505,8 +518,15 @@ public final class ProductionRefreshCycle {
                     .put(
                             "passed",
                             passed
-                                    && entities.size()
-                                            == ReportSnapshotTemplate.receivingTemplates().size());
+                                    && (config.has("reprocessOccurrenceDate")
+                                            ? operations.size() == 1
+                                                    && operations
+                                                            .path(0)
+                                                            .path("sqlReadbackExact")
+                                                            .asBoolean()
+                                            : entities.size()
+                                                    == ReportSnapshotTemplate.receivingTemplates()
+                                                            .size()));
             saveReport(reportPath, report, session);
         }
         return report.path("passed").asBoolean();
