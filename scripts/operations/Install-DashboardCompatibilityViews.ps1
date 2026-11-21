@@ -1,7 +1,7 @@
 [CmdletBinding()]
 param(
     [Parameter(Mandatory=$true)][string]$ReceiptPath,
-    [ValidateSet('References','Sinistros','Inventario','Localizacao','Faturas','ContasAPagar','Clientes','Usuarios','Raster','Coletores','Saude','Manifestos','ContratoManifestos','CamposColetasFretes','CamposFaturasFretes','GestaoFretes','ColetasExcluidas','FretesFaturamento','RecebimentoLote','FilialOcorrencia')][string]$Group = 'References',
+    [ValidateSet('References','Sinistros','Inventario','Localizacao','Faturas','ContasAPagar','Clientes','Usuarios','Raster','Coletores','Saude','Manifestos','ContratoManifestos','CamposColetasFretes','CamposFaturasFretes','GestaoFretes','ColetasExcluidas','FretesFaturamento','RecebimentoLote','FilialOcorrencia','RedeCredenciadaCustos')][string]$Group = 'References',
     [string[]]$CaptureReceiptPath,
     [string]$CaptureDirectory,
     [switch]$SeedLegacyUserDirectory,
@@ -64,6 +64,9 @@ $specs = switch ($Group) {
         @{file='027_dashboard_manifestos_fato_dash.sql'; view='vw_fato_manifestos_dash'; step='0777-dashboard-manifestos-portal'; columns=106}
     }
     'ContratoManifestos' { $manifestosFato }
+    'RedeCredenciadaCustos' {
+        @{file='060_dashboard_rede_credenciada_custos.sql'; view='dashboard_rede_credenciada_consolidacoes'; step='060-dashboard-rede-credenciada-custos'}
+    }
     'GestaoFretes' {
         @{file='030_dashboard_fretes_linhas_tuned.sql'; view='dashboard_fretes_linhas'; schema='core'; step='0785-dashboard-fretes-linhas';
           previousFile='028_dashboard_fretes_linhas.sql'; previousStep='0784-dashboard-fretes-linhas'}
@@ -432,6 +435,7 @@ EXEC ctl.usp_store_dashboard_refresh_audit @source_cycle=@cycle,@started_at=@sta
         'CamposFaturasFretes' { 'dashboard-report-fields.sql' }
         'RecebimentoLote' { 'recebimento-lote-json.sql' }
         'FilialOcorrencia' { 'filial-registro-ocorrencia.sql' }
+        'RedeCredenciadaCustos' { 'dashboard-rede-credenciada-custos.sql' }
         'GestaoFretes' { 'dashboard-gestao-fretes.sql' }
         'ColetasExcluidas' { 'dashboard-coletas.sql' }
         'FretesFaturamento' { 'dashboard-fretes-faturamento.sql' }
