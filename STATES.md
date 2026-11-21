@@ -14,6 +14,10 @@ Na cópia com quatro datas reais, 13 cenários conferiram cinco relatórios, inc
 
 O instalador `scripts/operations/Install-DashboardFreightDetail.ps1` aceita `-Acao Verificar`, `-Acao Aplicar` e `-Acao Reverter`. A reversão restaura o publicador anterior dentro da transação. O ensaio executou instalação, repetição e reversão. A consulta `scripts/validation/dashboard-detalhe-fretes-publicado.sql` permite comparar o conteúdo publicado com o cálculo integral após um lote.
 
+Em produção, a revisão 58 entrou às 16h15, após o lote 46. O cálculo integral independente conferiu as 123 colunas dos 57.870 fretes nos lotes 47 e 48, incluindo repetições. As duas comparações deram zero diferenças, e o painel consumidor reproduziu o total do ETL. No lote 46, a gravação do detalhe reservou 2.202.024 KiB para 57.870 linhas. No 47, reservou 7.336 KiB para 3.352 linhas. No 48, o controle identificou 15.134 fretes para recalcular. Apenas 28 mudaram no relatório. A gravação dessas 28 linhas reservou 1.480 KiB, utilizou 640 KiB e terminou em 33.147 microssegundos sem descarregar a ordenação no disco.
+
+As publicações completas dos lotes 46, 47 e 48 levaram 985,781237 s, 1.144,491754 s e 1.105,354906 s. As duas últimas já incluíam o preparo de ocorrências da revisão 59 e receberam volumes diferentes. Os picos físicos do processo SQL nos ciclos inteiros foram 16.916.376, 16.947.204 e 16.954.772 KiB. Nos três ciclos houve zero novas esperas por reserva de memória. O limite da instância ficou em 16.384 MiB.
+
 ## 0818 — Filial de registro no relatório de Ocorrências
 
 Em 19/11/2026, Caio confirmou que o relatório 12072 deve fornecer a filial onde a ocorrência foi registrada. O Java e o SQL recebem as 20 colunas do ESL com a nova filial. A revisão das datas pendentes conserva a fila e aceita os pontos de retomada criados pelo formato anterior. A filial de um registro histórico vem de uma nova leitura do ESL.
