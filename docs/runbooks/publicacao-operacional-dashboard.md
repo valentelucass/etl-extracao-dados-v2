@@ -2,6 +2,17 @@
 
 As publicações de Raster, Coletores, Manifestos e Saúde do ETL foram ensaiadas em transação reversível, publicadas em `ETL_SISTEMA_V2.pub` e conferidas com a conta atual do portal. Os dados de origem, os registros de execução e os vínculos publicados ficam na V2. O DEV e o portal de produção consultam essa base.
 
+## Conferência do detalhe de fretes
+
+A revisão 58 compara a origem e os dados de apoio de cada frete para localizar os que precisam de novo cálculo. Alterações de fatura, localização, comprovante ou filial podem mudar o resultado. Quando a minuta muda, entram na conferência tanto o vínculo antigo quanto o novo. A gravação final compara o que foi calculado com o que o painel já exibe. [Procedimento de publicação](../../database/production/publication/058_dashboard_detalhe_incremental.sql)
+
+1. **Preparar o ensaio.** Na cópia com dados reais, executar o cálculo anterior e guardar resultado, duração, leituras, reserva de RAM e uso dessa reserva. Incluir duplicatas, nulos, correção antiga, troca de vínculo, cancelamento e exclusão. Para um volume maior, repetir o teste com as mesmas entradas e a mesma distribuição de apoios.
+2. **Testar a integridade.** Conferir os cinco relatórios e cada ocorrência das linhas do detalhe. Interromper uma publicação na cópia, verificar que outro leitor continua vendo o último lote completo e testar a retomada e a reversão. O instalador oferece as ações `Verificar`, `Aplicar` e `Reverter`. [Instalador e reversão](../../scripts/operations/Install-DashboardFreightDetail.ps1)
+3. **Conferir depois de um lote natural.** No banco do ETL, executar o [comparador das 123 colunas](../../scripts/validation/dashboard-detalhe-fretes-publicado.sql). Ele confere quantidade, conteúdo e multiplicidade, usa tabelas temporárias da sessão e verifica o recibo no começo e no fim. Registrar `original`, `publicado`, `grupos_diferentes` e `duracao_ms`. Se o recibo mudar, repetir após a conclusão da publicação.
+4. **Conferir o destino.** Comparar a contagem e a soma do valor dos fretes da view publicada com o sinônimo usado pelo Dashboard. Registrar a duração do cálculo e o tempo até terminar a publicação completa, incluindo relatórios que entraram no mesmo lote.
+
+Nos lotes 47 e 48, as 57.870 linhas corresponderam ao cálculo integral, com zero diferenças. No lote 48, 15.134 fretes precisaram de recálculo e apenas 28 mudaram no relatório. A gravação dessas 28 linhas reservou 1.480 KiB e usou 640 KiB. Para comparar o efeito da versão sobre a memória, o ensaio de **mesmo volume** é a referência. Na gravação de 57.868 linhas, a reserva mediana caiu de 2.380.808 para 964.112 KiB, com 469.896 KiB usados nas duas versões. As publicações completas dos dois lotes novos demoraram mais e incluíam também o preparo de ocorrências. [Medição dos três lotes](../../STATES.md#20112026--atualização-do-detalhe-de-fretes)
+
 ## Atualização dos relatórios a cada lote
 
 Os scripts 037 a 053 de `database/production/publication` instalam as leituras preparadas, seus índices e as permissões de publicação. O grupo `Saude` do instalador aplica o recebimento 014 e a publicação 054 para distinguir revisões adiadas de falhas. As migrações V072 a V076 do painel conferem as colunas e o recebimento antes de trocar as consultas.

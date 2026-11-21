@@ -8,6 +8,8 @@ O reprocessamento do histórico usa `scripts/operations/Reprocess-DashboardOccur
 
 ## 20/11/2026 — Atualização do detalhe de fretes
 
+O [roteiro de conferência do detalhe](docs/runbooks/publicacao-operacional-dashboard.md#conferência-do-detalhe-de-fretes) reúne o ensaio, o comparador integral, o teste no consumidor e a reversão.
+
 A revisão 58 identifica quais fretes precisam de novo cálculo em cada publicação. Ela acompanha o registro original, as faturas, a localização, o comprovante e as referências de filial. Uma troca de minuta considera os fretes ligados à antiga e à nova. O relatório continua a usar as regras das mesmas views. O publicador original fica guardado para reversão.
 
 Na cópia com quatro datas reais, 13 cenários conferiram cinco relatórios, inclusive após interrupção e retomada. Em um ensaio com todos os 57.868 fretes ativos e 121.270 registros de apoio, uma correção passou de 150.409 para 25.115 ms. Os 123 campos e as repetições coincidiram. A primeira preparação do controle passou de 137.019 para 176.253 ms. Na gravação integral de teste, a mediana da reserva de trabalho caiu de 2.380.808 para 964.112 KiB, com 469.896 KiB utilizados nas duas versões.
