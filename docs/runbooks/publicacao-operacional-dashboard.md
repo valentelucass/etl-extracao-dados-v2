@@ -44,6 +44,12 @@ O grupo `RecebimentoLote` instala o script 013 do recebimento. O SQL abre a list
 
 ## Raster
 
+A tarefa do Windows `Rodogarcia-ETL-Raster` consulta a API Raster a cada hora. Confere hoje, ontem e os dias pendentes desde o início do primeiro mês recebido. A consulta usa a data de fim de viagem. O cálculo dos Horários de Corte continua usando a data e a rota da saída.
+
+`Install-DashboardRaster.ps1` ensaia a instalação SQL em transação. Use `-Apply` para instalar e `Register-DashboardRaster.ps1` para registrar a tarefa no usuário operacional. Para conferir um intervalo específico, execute `Sync-DashboardRaster.ps1 -Inicio AAAA-MM-DD -Fim AAAA-MM-DD` pelo executor de batches da VM. A conta de execução precisa do PowerShell 7.5 e do Node no caminho de execução. O cadastro da tarefa guarda o caminho do PowerShell. A consulta usa HTTPS e envia a credencial da origem pela entrada padrão.
+
+Cada dia é publicado em uma transação. Uma resposta idêntica atualiza a conferência sem duplicar as viagens e paradas. Uma resposta incompleta, um erro do fornecedor ou um dia vazio que antes tinha viagens preservam os dados já publicados. O controle de conferência fica em `ctl.dashboard_raster_dias`. Um limite HTTP 429 interrompe as próximas consultas e registra o evento na pasta privada de recebimento.
+
 O Raster é uma fonte própria. O recebimento privado consulta o fornecedor por dia e guarda apenas a lista de viagens, com as paradas de cada viagem. O SQL conserva a última captura por dia e a versão mais recente de cada viagem. Viagens e paradas usam a mesma versão. Quando o fornecedor repete uma ordem de parada, prevalece a última ocorrência daquela viagem, como no `MERGE` do V1. As ocorrências originais continuam no recebimento.
 
 De 03 a 10/11/2026, foram recebidas 284 viagens e 829 ocorrências de paradas. O painel recebe 803 paradas e 803 linhas de tempo de trânsito. Entre as capturas recentes, 22 viagens e 66 paradas também aparecem no V1. Um ensaio adicional de 22/10/2026 conferiu 53 viagens e 179 paradas presentes no V1. Em 02/11/2026, o fornecedor respondeu com código 0 e sem a lista `Viagens`. Esse dia ficou sem cobertura confirmada. A prova de 22/10 foi revertida.
@@ -64,7 +70,7 @@ O recebimento vincula o recibo de execução às páginas arquivadas e aos respe
 
 ## Execução
 
-O ensaio sem `-Apply` reverte a transação. A aplicação registra os hashes, conserva a última captura válida e valida a leitura do consumidor. Para os dados de Raster, a captura via PowerShell 7.5 usa as configurações locais da origem e grava o recibo e os dados em diretório privado. Para Saúde, informe o recibo do ciclo e a pasta de capturas correspondente. A rotina de 60 minutos atual ainda não chama esses recebimentos auxiliares. Os comandos de instalação e publicação são manuais neste estágio.
+O ensaio sem `-Apply` reverte a transação. A aplicação registra os hashes, conserva a última captura válida e valida a leitura do consumidor. Para Saúde, informe o recibo do ciclo e a pasta de capturas correspondente. O Raster usa a tarefa horária própria descrita acima.
 
 ```powershell
 .\scripts\operations\Capture-DashboardAuxiliarySource.ps1 -Source Raster -RasterDate 2026-11-10 -Receipt C:\privado\raster.json -CaptureDirectory C:\privado\dados

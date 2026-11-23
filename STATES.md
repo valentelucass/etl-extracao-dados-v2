@@ -1,3 +1,7 @@
+## Horários de Corte e recebimento do Raster
+
+A atualização horária consulta a origem por dia e grava as viagens e as paradas no mesmo recebimento. A conferência por data registra o total devolvido pelo Raster. A regra de pontualidade do dashboard continua baseada na rota e no início real da viagem. [Operação do Raster](docs/runbooks/publicacao-operacional-dashboard.md#raster)
+
 ## Performance por etapa — ocorrências do ESL 12072
 
 Em 20/11/2026, a instalação 059 publicou `pub.dashboard_performance_ocorrencias` no ETL_SISTEMA_V2. Contém o número da minuta e da NF, CT-e, código, descrição, horário local e filial de registro da ocorrência. A contagem preserva as linhas por NF. A filial vem de `ice_uer_crn_psn_nickname`; captura anterior ou filial ausente no ESL retorna NULL. O coordenador regular substitui as partições que receberam uma nova captura na mesma transação dos relatórios de frete.

@@ -45,10 +45,18 @@ function Invoke-Source([uri]$Uri,$Body,[string]$Authorization,[int]$Limit) {
     )
     if($Authorization){$args+=('header = '+(Quote-Curl ('Authorization: Bearer '+$Authorization)))}
     $result.requests++
-    $status=($args -join "`n") | & curl.exe --disable --config - --silent --proto '=https' --tlsv1.2 --connect-timeout 10 --max-time 30 --max-filesize $Limit --write-out '%{http_code}'
+    if ($Source -eq 'Raster') {
+        $status=($Body | ConvertTo-Json -Depth 8 -Compress) | & node (Join-Path $PSScriptRoot 'Request-RasterDay.mjs') $Uri.AbsoluteUri $temporary
+    } else {
+        $status=($args -join "`n") | & curl.exe --disable --config - --silent --proto '=https' --tlsv1.2 --connect-timeout 10 --max-time 30 --max-filesize $Limit --write-out '%{http_code}'
+    }
     if($LASTEXITCODE -ne 0 -or $status -notmatch '^\d{3}$'){
-        $result.curlExit=[int]$LASTEXITCODE
-        throw 'CURL_TRANSPORT_FAILED'
+        if ($Source -eq 'Users') {
+            $result.curlExit=[int]$LASTEXITCODE
+            throw 'CURL_TRANSPORT_FAILED'
+        }
+        $result.transportExit=[int]$LASTEXITCODE
+        throw 'SOURCE_TRANSPORT_FAILED'
     }
     $result.status=[int]$status
     if($result.status -eq 429){
@@ -134,6 +142,14 @@ try {
         $body=@{Ambiente=$config.RASTER_AMBIENTE;Login=$config.RASTER_LOGIN;Senha=$config.RASTER_SENHA;TipoRetorno='JSON';
                DataInicial=$RasterDate;DataFinal=$RasterDate;StatusViagem=$config.RASTER_STATUS_VIAGEM}
         $data=Invoke-Source $uri $body '' 10485760
+        $result.day=$RasterDate
+        $envelope=if($data -is [System.Collections.IDictionary] -and $data.result -is [System.Collections.IList] -and $data.result.Count -eq 1){$data.result[0]}
+        $envelopeValido=$envelope -is [System.Collections.IDictionary] -and $envelope.Contains('CodErro') -and
+            [string]$envelope.CodErro -ceq '0' -and [string]::IsNullOrWhiteSpace([string]$envelope.MsgErro)
+        $listaVazia=$envelopeValido -and $envelope.Contains('Viagens') -and $envelope.Viagens -is [System.Collections.IList] -and $envelope.Viagens.Count -eq 0
+        # O DataSnap pode omitir Viagens em dias sem movimentos. Aceitar apenas a resposta nominal de sucesso.
+        $semMovimento=$envelopeValido -and -not $envelope.Contains('Viagens') -and
+            $envelope.Metodo -eq 'getEventoFimViagem' -and $envelope.Ambiente -eq $config.RASTER_AMBIENTE -and $envelope.Login -eq $config.RASTER_LOGIN
         function Read-Trips($Node){
             if($Node -is [System.Collections.IDictionary]){
                 if($Node.Contains('CodSolicitacao')){$Node;return}
@@ -148,10 +164,9 @@ try {
             if($Node -is [System.Collections.IList]){foreach($item in $Node){Read-Trips $item};return}
             throw 'RASTER_RESPONSE_SHAPE_INVALID'
         }
-        $trips=@(Read-Trips $data)
+        $trips=if($semMovimento -or $listaVazia){,([object[]]@())}else{,@(Read-Trips $data)}
         $result.items=$trips.Count
-        $result.day=$RasterDate
-        if($trips.Count -eq 0 -or $trips.Count -ge 500){throw 'RASTER_DAY_COVERAGE_UNPROVEN'}
+        if(($trips.Count -eq 0 -and -not ($semMovimento -or $listaVazia)) -or $trips.Count -ge 500){throw 'RASTER_DAY_COVERAGE_UNPROVEN'}
         $target=Join-Path $private ('raster-'+$RasterDate+'-'+[Guid]::NewGuid().ToString('N')+'.json')
         [IO.File]::WriteAllText($target,(ConvertTo-Json -InputObject $trips -Compress -Depth 50))
         $result.captureFile=[IO.Path]::GetFileName($target)
