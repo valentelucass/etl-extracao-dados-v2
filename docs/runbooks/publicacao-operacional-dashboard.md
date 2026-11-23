@@ -44,7 +44,7 @@ O grupo `RecebimentoLote` instala o script 013 do recebimento. O SQL abre a list
 
 ## Raster
 
-A tarefa do Windows `Rodogarcia-ETL-Raster` consulta a API Raster a cada hora. Confere hoje, ontem e os dias pendentes desde o início do primeiro mês recebido. A consulta usa a data de fim de viagem. O cálculo dos Horários de Corte continua usando a data e a rota da saída.
+A tarefa do Windows `Rodogarcia-ETL-Raster` consulta a API Raster a cada hora. Confere hoje, ontem e os dias pendentes desde o início do primeiro mês recebido. O painel calcula Horários de Corte apenas para as viagens que têm saída real e corte de rota definido.
 
 `Install-DashboardRaster.ps1` ensaia a instalação SQL em transação. Use `-Apply` para instalar e `Register-DashboardRaster.ps1` para registrar a tarefa no usuário operacional. Para conferir um intervalo específico, execute `Sync-DashboardRaster.ps1 -Inicio AAAA-MM-DD -Fim AAAA-MM-DD` pelo executor de batches da VM. A conta de execução precisa do PowerShell 7.5 e do Node no caminho de execução. O cadastro da tarefa guarda o caminho do PowerShell. A consulta usa HTTPS e envia a credencial da origem pela entrada padrão.
 
