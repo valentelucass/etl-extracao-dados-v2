@@ -78388,3 +78388,7 @@ Para instalar em uma nova instância, executar Install-DashboardRecebiveis.ps1, 
 ## 23/11/2026 — Agentes das coletas da Rede Credenciada
 
 O relatório analítico de coletas agrupado por status fornece o identificador da coleta e o nome do agente. Quando há agente, a consulta individual identifica o documento da pessoa vinculada. A sincronização reconcilia cada intervalo com o total do ESL e publica o resultado por ID, inclusive coletas com agente vazio. A carteira oficial de parceiros e a aplicação da regra do manifesto pertencem ao painel.
+
+## 23/11/2026 — Retomada da atualização após falta de espaço
+
+Depois de liberar espaço no volume das capturas, `Resume-ProductionHistory.ps1 -RetomarAposFaltaDeEspaco` permite retomar uma atualização interrompida por `REFRESH_DISK_SPACE_LOW` a partir do checkpoint. A rotina verifica a causa, o espaço livre, as operações já confirmadas no SQL e a ausência de pausa do operador. Preserva o registro da falha. A publicação do novo lote continua sujeita à conferência com o ESL.

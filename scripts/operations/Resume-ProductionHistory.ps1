@@ -3,6 +3,7 @@ param(
     [Parameter(Mandatory,ParameterSetName='Continuo')][switch]$Continuo,
     [Parameter(ParameterSetName='Continuo')][ValidateRange(0,1000)][int]$Lotes=0,
     [Parameter(Mandatory,ParameterSetName='Liberar')][switch]$SomenteLiberar,
+    [Parameter(Mandatory,ParameterSetName='Disco')][switch]$RetomarAposFaltaDeEspaco,
     [Parameter(Mandatory,ParameterSetName='Publicar')][switch]$PublicarRecebido
 )
 $ErrorActionPreference = 'Stop'
@@ -99,6 +100,30 @@ function Complete-PendingPublication {
     Write-Output "Dados recebidos e publicados. Lote $id."
 }
 
+function Liberar-AposFaltaDeEspaco {
+    if (Test-Path -LiteralPath $pausePath) { throw 'Existe uma pausa do operador.' }
+    $failure = Get-Content -LiteralPath $failurePath -Raw -Encoding UTF8 | ConvertFrom-Json
+    $last = Get-Content -LiteralPath (Join-Path $stateDir 'supervisor.json') -Raw -Encoding UTF8 | ConvertFrom-Json
+    $id = $failure.cycle
+    if ($failure.schema -cne 'REFRESH_FAILURE0766' -or $id -cnotmatch '^[0-9a-f]{32}$' -or
+        $last.phase -cne 'FAILED' -or $last.cycle -cne $id -or $failure.reason -cne 'BATCH_NOT_CONFIRMED_NO_AUTOMATIC_RETRY') {
+        throw 'Nao ha um lote interrompido que corresponda a esta retomada.'
+    }
+    $raw = Get-Content -LiteralPath (Join-Path $stateDir "reports/$id.json") -Raw -Encoding UTF8 | ConvertFrom-Json
+    $erros = @($raw.entities | Where-Object status -CEQ 'FAILED')
+    if ($raw.schema -cne 'PRODUCTION_REFRESH0766' -or $raw.passed -ne $false -or $raw.historyOnly -ne $false -or
+        $erros.Count -ne 1 -or $erros[0].reason -cne 'REFRESH_DISK_SPACE_LOW' -or
+        @($raw.operations | Where-Object { !$_.stored -or !$_.sqlReadbackExact }).Count) {
+        throw 'O lote nao foi interrompido exclusivamente por falta de espaco com as operacoes anteriores conferidas.'
+    }
+    $drive = [IO.DriveInfo]::new([IO.Path]::GetPathRoot($stateDir))
+    if ($drive.AvailableFreeSpace -lt 2GB) { throw 'O volume ainda esta abaixo do limite de espaco do extrator.' }
+    # Preserva o recibo de falha. O proximo lote valida o checkpoint e somente ele pode confirmar nova publicacao.
+    $archive = Join-Path $stateDir ('falha-disco-retomada-' + $id + '-' + [guid]::NewGuid().ToString('N') + '.json')
+    [IO.File]::Move($failurePath,$archive)
+    Write-Output 'Espaco recuperado; rotina liberada para continuar do checkpoint.'
+}
+
 & $launcher -Verify
 if ((Test-Path -LiteralPath $failurePath) -or (Test-Path -LiteralPath $pausePath) -or $PublicarRecebido) {
     $mutexes = @()
@@ -109,6 +134,7 @@ if ((Test-Path -LiteralPath $failurePath) -or (Test-Path -LiteralPath $pausePath
             if (!$held) { $mutex.Dispose(); throw 'Uma carga ainda esta em andamento. Aguarde o encerramento para retomar.' }
             $mutexes += $mutex
         }
+        if ($RetomarAposFaltaDeEspaco) { Liberar-AposFaltaDeEspaco; return }
         if (Test-Path -LiteralPath $failurePath) {
             if ($SomenteLiberar) { throw 'O ultimo lote falhou. Confira o recebimento antes de liberar a rotina.' }
             Complete-PendingPublication
@@ -134,5 +160,6 @@ if ((Test-Path -LiteralPath $failurePath) -or (Test-Path -LiteralPath $pausePath
         foreach ($mutex in $mutexes) { $mutex.ReleaseMutex(); $mutex.Dispose() }
     }
 }
+if ($RetomarAposFaltaDeEspaco) { throw 'Nao ha interrupcao por falta de espaco para retomar.' }
 if ($SomenteLiberar) { Write-Output 'Rotina liberada para o operador iniciar no PM2.'; return }
 if ($Continuo) { & $launcher -Continuo -Lotes $Lotes } else { & $launcher }
