@@ -78384,3 +78384,7 @@ O ensaio integral de Coletas terminou na cópia. As 180 partições fixadas rend
 O relatório analítico de contas a receber do ESL fornece o valor, o vencimento e a liquidação bancária de cada parcela. A primeira carga conciliou 28.365 parcelas entre 18/08 e 19/11. Cada atualização confere a quantidade e o valor de cada período com o ESL antes de publicar as parcelas e o rateio por frete em uma transação. A tarefa Rodogarcia-ETL-Parcelas-Recebiveis repete a leitura a cada hora.
 
 Para instalar em uma nova instância, executar Install-DashboardRecebiveis.ps1, Sync-DashboardRecebiveis.ps1 e Register-DashboardRecebiveis.ps1 em scripts/operations. O primeiro usa a credencial de migração. A coleta utiliza a identidade de execução do ETL.
+
+## 23/11/2026 — Agentes das coletas da Rede Credenciada
+
+O relatório analítico de coletas agrupado por status fornece o identificador da coleta e o nome do agente. Quando há agente, a consulta individual identifica o documento da pessoa vinculada. A sincronização reconcilia cada intervalo com o total do ESL e publica o resultado por ID, inclusive coletas com agente vazio. A carteira oficial de parceiros e a aplicação da regra do manifesto pertencem ao painel.
