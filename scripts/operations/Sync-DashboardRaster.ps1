@@ -10,7 +10,7 @@ $env:PSModulePath=(Join-Path $PSHOME 'Modules')+';'+$env:PSModulePath
 $repo=(Resolve-Path (Join-Path $PSScriptRoot '../..')).Path
 $pwsh=(Get-Command $PowerShell7 -CommandType Application -ErrorAction Stop).Source
 if($Agendado){
-    $limite=(Get-Date).AddMinutes(18)
+    $limite=(Get-Date).AddMinutes(75)
     while($true){
         try {
             $argsJob=@('-NoLogo','-NoProfile','-NonInteractive','-File',$PSCommandPath,'-PowerShell7',$pwsh)
