@@ -1,3 +1,7 @@
+## 24/11/2026 — Leitura de comprovantes na Performance
+
+O pacote 072, aplicado por `Install-DashboardRedeIndices.ps1 -Performance -Aplicar`, publica a coluna `Comprovante de Entrega` com a data e o fuso de `fit_d_t_created_at` do relatório ESL 6389. A coluna acompanha cada gravação na leitura de fretes. A regressão `scripts/validation/dashboard-comprovante-performance.sql` confere a base vigente e exercita anexação posterior e remoção.
+
 ## 24/11/2026 — Filial de faturamento da Vedacit
 
 A publicação de Faturamento atribui o pagador 60.642.774/0012-09 a SPO, com nome, identificador e CNPJ da filial. O instalador Install-DashboardVedacitFaturamento confere a quantidade e a receita de cada estabelecimento da mesma raiz, permite ensaio por reversão e registra a migração no controle do ETL. A aplicação em 24/11 conciliou 5.160 fretes.

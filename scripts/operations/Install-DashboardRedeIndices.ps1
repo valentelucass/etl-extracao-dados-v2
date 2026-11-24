@@ -1,5 +1,7 @@
-[CmdletBinding()]
-param([switch]$Aplicar,[switch]$Fretes)
+[CmdletBinding(DefaultParameterSetName='Rede')]
+param([switch]$Aplicar,
+      [Parameter(ParameterSetName='Fretes')][switch]$Fretes,
+      [Parameter(ParameterSetName='Performance')][switch]$Performance)
 
 $ErrorActionPreference = 'Stop'
 $repo = (Resolve-Path (Join-Path $PSScriptRoot '../..')).Path
@@ -9,6 +11,9 @@ $passo = '065-dashboard-indices-rede'
 if ($Fretes) {
     $fonte = 'database/production/publication/067_dashboard_indices_frete_operacao.sql'
     $passo = '067-dashboard-indices-frete-operacao'
+} elseif ($Performance) {
+    $fonte = 'database/production/publication/072_dashboard_comprovante_performance.sql'
+    $passo = '072-dashboard-comprovante-performance'
 }
 $sql = [IO.File]::ReadAllText((Join-Path $repo $fonte)).Replace([string][char]13,'')
 $sha = [Security.Cryptography.SHA256]::Create()
@@ -57,7 +62,18 @@ WHERE is_disabled=0 AND ((object_id=OBJECT_ID('core.dashboard_manifestos_leitura
     if ($Fretes) {
         $cmd.CommandText = "SELECT COUNT(*) FROM sys.indexes WHERE is_disabled=0 AND object_id=OBJECT_ID('core.dashboard_detalhe_fretes_leitura') AND name IN ('IX_detalhe_minuta_operacao','IX_detalhe_pagador_operacao')"
     }
-    if ($cmd.ExecuteScalar() -ne 2) { throw 'Indices de leitura ausentes.' }
+    if ($Performance) {
+        $cmd.CommandText = @'
+SELECT COUNT(*) FROM sys.index_columns ic
+JOIN sys.indexes i ON i.object_id=ic.object_id AND i.index_id=ic.index_id
+JOIN sys.computed_columns c ON c.object_id=ic.object_id AND c.column_id=ic.column_id
+WHERE i.object_id=OBJECT_ID('core.dashboard_detalhe_fretes_leitura') AND i.name='IX_dashboard_entregas_previsao'
+  AND i.is_disabled=0 AND ic.is_included_column=1 AND c.name='data_comprovante_entrega' AND c.is_persisted=1
+  AND EXISTS (SELECT 1 FROM sys.columns WHERE object_id=OBJECT_ID('pub.vw_fretes_powerbi_pronta')
+    AND name=N'Comprovante de Entrega' AND system_type_id=TYPE_ID('datetimeoffset'));
+'@
+        if ($cmd.ExecuteScalar() -ne 1) { throw 'Leitura de comprovantes da Performance incompleta.' }
+    } elseif ($cmd.ExecuteScalar() -ne 2) { throw 'Indices de leitura ausentes.' }
     if ($Fretes) {
         $cmd.Parameters.Clear()
         $cmd.CommandText = [IO.File]::ReadAllText((Join-Path $repo 'scripts/validation/dashboard-indices-frete-operacao.sql'))
