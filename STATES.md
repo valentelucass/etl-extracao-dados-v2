@@ -6,7 +6,7 @@ A instalação 065 acelera a identificação do executor pelo manifesto e da ret
 
 ## Horários de Corte e recebimento do Raster
 
-A atualização horária consulta a origem por dia e grava as viagens e as paradas no mesmo recebimento. A conferência por data registra o total devolvido pelo Raster. A regra de pontualidade do dashboard continua baseada na rota e no início real da viagem. [Operação do Raster](docs/runbooks/publicacao-operacional-dashboard.md#raster)
+A atualização horária consulta o Raster por dia e também por filial em intervalos que abrangem a saída e a chegada. As viagens que atravessam a meia-noite entram pelo número da SM, com as paradas da mesma revisão. O dashboard calcula a pontualidade pela rota e pelo início real da viagem. [Operação do Raster](docs/runbooks/publicacao-operacional-dashboard.md#raster)
 
 ## Performance por etapa — ocorrências do ESL 12072
 

@@ -40,5 +40,5 @@ async function consultar() {
 consultar().catch(erro => {
   const codigo = erro.code ?? erro.name;
   console.error('Falha na leitura HTTPS do Raster (' + String(codigo).replace(/[^A-Za-z_0-9]/g,'') + ').');
-  process.exitCode = 1;
+  process.exitCode = erro.message === 'RASTER_RESPONSE_TOO_LARGE' ? 2 : 1;
 });

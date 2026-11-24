@@ -4,7 +4,9 @@ param(
     [Parameter(Mandatory)][string]$Receipt,
     [Parameter(Mandatory)][string]$CaptureDirectory,
     [ValidateRange(1,5000)][int]$MaxPages=5000,
-    [string]$RasterDate
+    [string]$RasterDate,
+    [string]$RasterFrom,
+    [ValidatePattern('^[0-9]{14}$')][string]$RasterCnpj
 )
 $ErrorActionPreference='Stop'
 $project=(Resolve-Path (Join-Path $PSScriptRoot '../..')).Path
@@ -50,6 +52,7 @@ function Invoke-Source([uri]$Uri,$Body,[string]$Authorization,[int]$Limit) {
     } else {
         $status=($args -join "`n") | & curl.exe --disable --config - --silent --proto '=https' --tlsv1.2 --connect-timeout 10 --max-time 30 --max-filesize $Limit --write-out '%{http_code}'
     }
+    if($Source -eq 'Raster' -and $LASTEXITCODE -eq 2){throw 'RASTER_RESPONSE_TOO_LARGE'}
     if($LASTEXITCODE -ne 0 -or $status -notmatch '^\d{3}$'){
         if ($Source -eq 'Users') {
             $result.curlExit=[int]$LASTEXITCODE
@@ -139,8 +142,14 @@ try {
         }
         [void][DateOnly]::ParseExact($RasterDate,'yyyy-MM-dd')
         $uri=[uri]($base.AbsoluteUri.TrimEnd('/')+'/%22getEventoFimViagem%22')
+        if($RasterFrom){
+            if([DateOnly]::ParseExact($RasterFrom,'yyyy-MM-dd') -gt [DateOnly]::ParseExact($RasterDate,'yyyy-MM-dd')){throw 'RASTER_WINDOW_INVALID'}
+            $result.from=$RasterFrom
+            $result.branch=$RasterCnpj
+        } elseif($RasterCnpj){throw 'RASTER_WINDOW_INVALID'}
         $body=@{Ambiente=$config.RASTER_AMBIENTE;Login=$config.RASTER_LOGIN;Senha=$config.RASTER_SENHA;TipoRetorno='JSON';
-               DataInicial=$RasterDate;DataFinal=$RasterDate;StatusViagem=$config.RASTER_STATUS_VIAGEM}
+               DataInicial=($RasterFrom ? $RasterFrom : $RasterDate);DataFinal=$RasterDate;StatusViagem=$config.RASTER_STATUS_VIAGEM}
+        if($RasterCnpj){$body.CNPJRemDest=$RasterCnpj}
         $data=Invoke-Source $uri $body '' 10485760
         $result.day=$RasterDate
         $envelope=if($data -is [System.Collections.IDictionary] -and $data.result -is [System.Collections.IList] -and $data.result.Count -eq 1){$data.result[0]}
@@ -167,7 +176,8 @@ try {
         $trips=if($semMovimento -or $listaVazia){,([object[]]@())}else{,@(Read-Trips $data)}
         $result.items=$trips.Count
         if(($trips.Count -eq 0 -and -not ($semMovimento -or $listaVazia)) -or $trips.Count -ge 500){throw 'RASTER_DAY_COVERAGE_UNPROVEN'}
-        $target=Join-Path $private ('raster-'+$RasterDate+'-'+[Guid]::NewGuid().ToString('N')+'.json')
+        $prefix=if($RasterFrom){'raster-intervalo-'}else{'raster-'}
+        $target=Join-Path $private ($prefix+$RasterDate+'-'+[Guid]::NewGuid().ToString('N')+'.json')
         [IO.File]::WriteAllText($target,(ConvertTo-Json -InputObject $trips -Compress -Depth 50))
         $result.captureFile=[IO.Path]::GetFileName($target)
         $result.sha256=(Get-FileHash -LiteralPath $target).Hash
@@ -176,6 +186,9 @@ try {
 } catch {
     $message=$_.Exception.Message
     $result.failure=if($message -cmatch '^[A-Z0-9_]+$'){$message}else{'OBSERVATION_FAILED'}
+    # O consumidor de uma janela reduz a consulta quando a origem atinge seu teto.
+    if($RasterFrom -and ($result.failure -eq 'RASTER_RESPONSE_TOO_LARGE' -or
+            ($result.failure -eq 'RASTER_DAY_COVERAGE_UNPROVEN' -and $result.items -ge 500))){return}
     throw $result.failure
 } finally {
     if($held){$mutex.ReleaseMutex()}

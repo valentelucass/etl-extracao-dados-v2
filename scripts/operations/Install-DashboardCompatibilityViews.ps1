@@ -294,7 +294,7 @@ EXEC ctl.usp_store_dashboard_auxiliary
             $capture = [IO.File]::ReadAllText((Resolve-Path -LiteralPath $path).Path) | ConvertFrom-Json
             $expected = if ($Group -eq 'Usuarios') { 'Users' } else { 'Raster' }
             if (-not $capture.passed -or $capture.status -ne 200 -or $capture.source -cne $expected -or
-                ($expected -eq 'Users' -and -not $capture.terminal) -or
+                ($expected -eq 'Users' -and -not $capture.terminal) -or $capture.from -or
                 $capture.captureFile -cnotmatch ('^'+$expected.ToLowerInvariant()+'-[a-z0-9-]+\.json$') -or
                 $capture.sha256 -cnotmatch '^[A-F0-9]{64}$' -or $capture.items -lt 1) {
                 throw 'AUXILIARY_COMPLETE_SOURCE_RECEIPT_REQUIRED'
@@ -351,6 +351,10 @@ EXEC ctl.usp_store_dashboard_refresh_audit @source_cycle=@cycle,@started_at=@sta
         }
     }
     foreach ($spec in $specs) {
+        if($spec.view -eq 'dashboard_raster_vigente' -and
+            (Invoke-Scalar "SELECT COUNT(*) FROM sys.tables WHERE object_id=OBJECT_ID(N'core.dashboard_raster_entre_dias')") -eq 1){
+            $spec=@{file='070_dashboard_raster_vigente_entre_dias.sql'; view='dashboard_raster_vigente'; schema='core'; step='070-dashboard-raster-vigente-entre-dias'}
+        }
         $relative = 'database/production/publication/' + $spec.file
         $sql = [IO.File]::ReadAllText((Join-Path $repository $relative)).Replace("`r`n", "`n")
         $schema = if ($spec.schema) { $spec.schema } else { 'pub' }
