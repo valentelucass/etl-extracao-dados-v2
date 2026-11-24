@@ -51,6 +51,56 @@ class ProductionRefreshCycleTest {
     }
 
     @Test
+    void recapturesTheWholeFreightDayForLateReceiptsWithoutAdvancingTheRoutine() throws Exception {
+        final var fixture = new Fixture(directory);
+        final var day = fixture.today().minusDays(12);
+        fixture.store.earliest = day.minusDays(1);
+        fixture.config.put("reprocessFreightDate", day.toString());
+        assertTrue(fixture.run());
+        assertEquals(List.of("FRETES:" + day), fixture.store.commits);
+        assertEquals("FRETE_RECAPTURA_COMPROVANTE", fixture.lastReport.required("schema").asText());
+        final var operation = fixture.lastReport.path("operations").get(0);
+        assertTrue(operation.path("snapshotTerminal").asBoolean());
+        assertTrue(operation.path("sqlReadbackExact").asBoolean());
+        assertFalse(Files.exists(Path.of(fixture.config.required("checkpointPath").asText())));
+    }
+
+    @Test
+    void rejectsFutureFreightDaysAndPreservesPreviouslyConfirmedSnapshots() throws Exception {
+        final var fixture = new Fixture(directory);
+        final var day = fixture.today();
+        fixture.store.earliest = day.minusDays(1);
+        fixture.config.put("reprocessFreightDate", day.plusDays(1).toString());
+        assertFalse(fixture.run());
+        assertEquals("FREIGHT_REPLAY_OUTSIDE_COVERAGE", fixture.lastReport.path("reason").asText());
+        assertTrue(fixture.store.commits.isEmpty());
+
+        fixture.config.put("reprocessFreightDate", day.toString());
+        fixture.store.rejectDay = day;
+        assertFalse(fixture.run());
+        assertFalse(fixture.lastReport.path("passed").asBoolean());
+        assertFalse(
+                fixture.lastReport.path("operations").path(0).path("sqlReadbackExact").asBoolean());
+        assertTrue(fixture.store.commits.isEmpty());
+        assertFalse(Files.exists(Path.of(fixture.config.required("checkpointPath").asText())));
+    }
+
+    @Test
+    void aFreightReplayCannotChangeTheActiveRefreshCheckpoint() throws Exception {
+        final var fixture = new Fixture(directory);
+        fixture.seedReady();
+        final var checkpoint = Path.of(fixture.config.required("checkpointPath").asText());
+        final var original = Files.readString(checkpoint);
+        final var committed = List.copyOf(fixture.store.commits);
+        fixture.config.put("reprocessFreightDate", fixture.today().toString());
+        assertFalse(fixture.run());
+        assertEquals(
+                "FREIGHT_REPLAY_ISOLATED_CHECKPOINT", fixture.lastReport.path("reason").asText());
+        assertEquals(original, Files.readString(checkpoint));
+        assertEquals(committed, fixture.store.commits);
+    }
+
+    @Test
     void bringsNewDatesToEverySourceBeforeReviewingOldDates() throws Exception {
         final var fixture = new Fixture(directory);
         fixture.seedReady();

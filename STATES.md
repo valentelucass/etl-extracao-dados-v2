@@ -1,3 +1,9 @@
+## 24/11/2026 — Releitura de Fretes por data de serviço
+
+Uma data de Fretes pode ser relida pelo relatório 6389 para incorporar anexos posteriores à captura. O modo `reprocessFreightDate` usa a paginação completa e a releitura do SQL da rotina principal e tem ponto de retomada isolado. A data de anexo é a do próprio relatório de Fretes.
+
+Para reler dias já recebidos, execute `scripts/operations/Reprocess-DashboardReportDays.ps1 -DatasFrete '2026-11-10','2026-11-16'` com as datas de serviço dos fretes. A rotina aguarda a janela da integração, confere cada partição no SQL e publica o lote pelo mesmo procedimento do painel. Os recibos de cada data ficam em `atualizacao0766/fretes-performance-comprovantes`.
+
 ## Rede Credenciada e comprovantes de entrega
 
 A instalação 065 acelera a identificação do executor pelo manifesto e da retirada pela ocorrência 136. A instalação 066 guarda as minutas com número de arquivamento por captura aceita do relatório 11361. Uma correção do ESL passa a valer assim que a integração a recebe, inclusive enquanto o próximo preparo está pendente. O painel conserva a primeira data de arquivamento de cada minuta nas capturas vigentes.

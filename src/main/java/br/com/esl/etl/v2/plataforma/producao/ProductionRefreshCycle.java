@@ -312,6 +312,10 @@ public final class ProductionRefreshCycle {
         final var entities = report.putArray("entities");
         final var operations = report.putArray("operations");
         final var runtimeSha = report.required("runtimeSha256").asText();
+        final boolean replayFreight = config.has("reprocessFreightDate");
+        final boolean replayOccurrence = config.has("reprocessOccurrenceDate");
+        require(!(replayFreight && replayOccurrence), "REFRESH_REPLAY_REQUIRES_ONE_ENTITY");
+        final boolean replay = replayFreight || replayOccurrence;
         boolean passed = true;
         saveReport(reportPath, report, session);
         try (var store = openWithSpace(config, root)) {
@@ -338,17 +342,35 @@ public final class ProductionRefreshCycle {
                             operations,
                             new HashMap<>(),
                             new HashMap<>());
-            if (config.has("reprocessOccurrenceDate")) {
-                require(!Files.exists(checkpointPath), "OCCURRENCE_REPLAY_ISOLATED_CHECKPOINT");
+            if (replay) {
+                final var validationPrefix =
+                        replayFreight ? "FREIGHT_REPLAY_" : "OCCURRENCE_REPLAY_";
+                require(!Files.exists(checkpointPath), validationPrefix + "ISOLATED_CHECKPOINT");
                 final var day =
-                        LocalDate.parse(config.required("reprocessOccurrenceDate").asText());
-                final var template = ReportSnapshotTemplate.OCORRENCIAS;
+                        LocalDate.parse(
+                                config.required(
+                                                replayFreight
+                                                        ? "reprocessFreightDate"
+                                                        : "reprocessOccurrenceDate")
+                                        .asText());
+                final var template =
+                        replayFreight
+                                ? ReportSnapshotTemplate.FRETES
+                                : ReportSnapshotTemplate.OCORRENCIAS;
                 final var earliest = store.earliestCovered(scope, today, template.name());
                 require(
                         earliest != null && !day.isBefore(earliest) && !day.isAfter(today),
-                        "OCCURRENCE_REPLAY_OUTSIDE_COVERAGE");
-                report.put("schema", "OCORRENCIA_RECAPTURA_FILIAL");
-                fullDay(context, template, day, "FILIAL_OCORRENCIA");
+                        validationPrefix + "OUTSIDE_COVERAGE");
+                report.put(
+                        "schema",
+                        replayFreight
+                                ? "FRETE_RECAPTURA_COMPROVANTE"
+                                : "OCORRENCIA_RECAPTURA_FILIAL");
+                fullDay(
+                        context,
+                        template,
+                        day,
+                        replayFreight ? "COMPROVANTE_FRETE" : "FILIAL_OCORRENCIA");
                 return true;
             }
             final var order =
@@ -518,7 +540,7 @@ public final class ProductionRefreshCycle {
                     .put(
                             "passed",
                             passed
-                                    && (config.has("reprocessOccurrenceDate")
+                                    && (replay
                                             ? operations.size() == 1
                                                     && operations
                                                             .path(0)
