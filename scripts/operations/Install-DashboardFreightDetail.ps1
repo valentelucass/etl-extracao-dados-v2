@@ -75,9 +75,13 @@ try {
         $antigo=[regex]::Match($original,'(?m)^SELECT (?<colunas>[^\r\n]+) INTO #detalhe FROM core\.dashboard_detalhe_fretes_entrada OPTION\(MAXDOP 1,MAX_GRANT_PERCENT=2\);\nDELETE FROM core\.dashboard_detalhe_fretes_leitura;\nINSERT core\.dashboard_detalhe_fretes_leitura SELECT \* FROM #detalhe OPTION\(MAXDOP 1\);')
         if(!$antigo.Success){throw 'Gravação original do detalhe ausente.'}
         $colunas=$antigo.Groups['colunas'].Value
-        if((Executar "SELECT COUNT(*) FROM sys.columns WHERE object_id=OBJECT_ID('core.dashboard_detalhe_fretes_leitura')" -Escalar) -ne 123){throw 'Quantidade de colunas diferente da validada.'}
+        if((Executar "SELECT COUNT(*) FROM sys.columns WHERE object_id=OBJECT_ID('core.dashboard_detalhe_fretes_leitura') AND is_computed=0" -Escalar) -ne 123){throw 'Quantidade de colunas diferente da validada.'}
         if((Executar "SELECT COUNT(*) FROM sys.objects WHERE object_id IN(OBJECT_ID('ctl.dashboard_detalhe_frete_estado'),OBJECT_ID('core.usp_dashboard_detalhe_incremental'),OBJECT_ID('core.fn_dashboard_detalhe_compativel'),OBJECT_ID('core.usp_dashboard_detalhe_calcular_integral'),OBJECT_ID('core.usp_dashboard_detalhe_calcular_selecao'))" -Escalar) -ne 0){throw 'Objeto do instalador já existe fora da revisão 58.'}
         foreach($lote in ($pacote -split '(?im)^GO\s*$')){if($lote.Trim()){Executar $lote}}
+        if((Executar "SELECT COUNT(*) FROM sys.computed_columns WHERE object_id=OBJECT_ID('core.dashboard_detalhe_fretes_leitura') AND name='manifesto_entrega_consulta'" -Escalar) -eq 1){
+            $indices=[IO.File]::ReadAllText((Join-Path $repo 'database/production/publication/067_dashboard_indices_frete_operacao.sql'))
+            Executar (($indices -split '(?im)^GO\s*$',2)[0])
+        }
         if((Executar 'SELECT core.fn_dashboard_detalhe_compativel()' -Escalar) -ne 1){throw 'Dependências ou recursos de rastreamento diferentes do ensaio.'}
         $inicio=$fretes.IndexOf('WITH fretes AS (',[StringComparison]::Ordinal)
         $sql=$fretes.Substring($inicio).Trim().TrimEnd(';')
