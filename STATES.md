@@ -1,3 +1,9 @@
+## Rede Credenciada e comprovantes de entrega
+
+A instalação 065 acelera a identificação do executor pelo manifesto e da retirada pela ocorrência 136. A instalação 066 guarda as minutas com número de arquivamento por captura aceita do relatório 11361. Uma correção do ESL passa a valer assim que a integração a recebe, inclusive enquanto o próximo preparo está pendente. O painel conserva a primeira data de arquivamento de cada minuta nas capturas vigentes.
+
+`scripts/operations/Install-DashboardRedeIndices.ps1` instala os índices e `scripts/operations/Install-DashboardCustomerService.ps1 -PrepararArquivos` integra o preparo ao publicador de fretes. Ambos ensaiam com reversão por padrão e publicam com `-Aplicar`.
+
 ## Horários de Corte e recebimento do Raster
 
 A atualização horária consulta a origem por dia e grava as viagens e as paradas no mesmo recebimento. A conferência por data registra o total devolvido pelo Raster. A regra de pontualidade do dashboard continua baseada na rota e no início real da viagem. [Operação do Raster](docs/runbooks/publicacao-operacional-dashboard.md#raster)

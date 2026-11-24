@@ -1,5 +1,5 @@
 [CmdletBinding()]
-param([switch]$Aplicar)
+param([switch]$Aplicar,[switch]$PrepararArquivos)
 
 $ErrorActionPreference = 'Stop'
 $repo = (Resolve-Path (Join-Path $PSScriptRoot '../..')).Path
@@ -16,6 +16,12 @@ function Get-DefinicaoView([string]$texto) {
     $resultado = [regex]::Match($texto.Replace([string][char]13,''),$padrao)
     if (-not $resultado.Success) { throw 'Esperava uma unica definicao de view por lote.' }
     return @{ nome=$resultado.Groups[1].Value; corpo=$resultado.Groups[2].Value.Trim() }
+}
+
+function Get-HashFonte([string]$texto) {
+    $sha = [Security.Cryptography.SHA256]::Create()
+    try { return [BitConverter]::ToString($sha.ComputeHash([Text.Encoding]::UTF8.GetBytes($texto))).Replace('-','') }
+    finally { $sha.Dispose() }
 }
 
 $credencial = Get-ProjetosSqlAdminCredential
@@ -37,12 +43,19 @@ EXEC @lock=sys.sp_getapplock @Resource=N'ETL_V2_DASHBOARD_COMPATIBILITY_VIEWS',
 IF @lock<0 THROW 52181,'Outra instalacao de consultas esta em andamento.',1;
 '@
     $null = $cmd.ExecuteNonQuery()
+    $caminhoPreparo = 'database/production/publication/066_dashboard_rede_arquivos_preparados.sql'
+    $preparo = [IO.File]::ReadAllText((Join-Path $repo $caminhoPreparo)).Replace([string][char]13,'')
+    $hashPreparo = Get-HashFonte $preparo
+    $lotesPreparo = @($preparo -split '(?im)^GO[ \t]*$' | Where-Object { $_.Trim() })
+    $viewPreparo = Get-DefinicaoView ($lotesPreparo | Where-Object { $_ -match 'CREATE OR ALTER VIEW pub\.rede_credenciada_arquivos AS' })
+    $cmd.CommandText = "SELECT CASE WHEN source_name=@fonte THEN source_sha256 ELSE 'DIVERGENTE' END FROM ctl.production_installation_step WHERE step_id='066-dashboard-arquivos-preparados'"
+    $null = $cmd.Parameters.AddWithValue('@fonte',$caminhoPreparo)
+    $registroPreparo = $cmd.ExecuteScalar()
+    if ($registroPreparo -and $registroPreparo -cne $hashPreparo) { throw 'Pacote de arquivamentos divergente.' }
     foreach ($pacote in $pacotes) {
         $caminho = 'database/production/publication/' + $pacote.arquivo
         $conteudo = [IO.File]::ReadAllText((Join-Path $repo $caminho)).Replace([string][char]13,'')
-        $sha = [Security.Cryptography.SHA256]::Create()
-        try { $hash = [BitConverter]::ToString($sha.ComputeHash([Text.Encoding]::UTF8.GetBytes($conteudo))).Replace('-','') }
-        finally { $sha.Dispose() }
+        $hash = Get-HashFonte $conteudo
         $lotes = @($conteudo -split '(?im)^GO[ \t]*$' | Where-Object { $_.Trim() })
         if ($lotes.Count -ne $pacote.views.Count) { throw "Numero de views divergente em $caminho." }
         $cmd.Parameters.Clear()
@@ -54,6 +67,7 @@ IF @lock<0 THROW 52181,'Outra instalacao de consultas esta em andamento.',1;
         $nome = $cmd.Parameters.Add('@view',[Data.SqlDbType]::NVarChar,256)
         for ($i=0; $i -lt $lotes.Count; $i++) {
             $fonte = Get-DefinicaoView $lotes[$i]
+            if ($registroPreparo -and $fonte.nome -ceq $viewPreparo.nome) { $fonte = $viewPreparo }
             $nome.Value = $pacote.views[$i]
             if ($fonte.nome -cne $nome.Value) { throw "View inesperada em $caminho." }
             $cmd.CommandText = 'SELECT OBJECT_ID(@view);'
@@ -83,6 +97,27 @@ IF @lock<0 THROW 52181,'Outra instalacao de consultas esta em andamento.',1;
         $resumo += [pscustomobject]@{passo=$pacote.passo; sha256=$hash; jaInstalado=[bool]$registrado}
     }
     $cmd.Parameters.Clear()
+    if ($PrepararArquivos) {
+        $cmd.CommandText = @'
+DECLARE @lock int;
+EXEC @lock=sys.sp_getapplock @Resource=N'dashboard:fatos-fretes', @LockMode='Exclusive', @LockOwner='Transaction', @LockTimeout=5000;
+IF @lock<0 THROW 52203,'Publicacao em andamento.',1;
+'@
+        $null = $cmd.ExecuteNonQuery()
+        if (-not $registroPreparo) {
+            foreach ($lote in $lotesPreparo) {
+                $cmd.CommandText = $lote
+                $null = $cmd.ExecuteNonQuery()
+            }
+            $cmd.CommandText = "INSERT ctl.production_installation_step(step_id,source_name,source_sha256) VALUES('066-dashboard-arquivos-preparados',@fonte,@hash)"
+            $null = $cmd.Parameters.AddWithValue('@fonte',$caminhoPreparo)
+            $null = $cmd.Parameters.AddWithValue('@hash',$hashPreparo)
+            $null = $cmd.ExecuteNonQuery()
+        }
+        $cmd.CommandText = [IO.File]::ReadAllText((Join-Path $repo 'scripts/validation/dashboard-rede-arquivamentos.sql'))
+        $null = $cmd.ExecuteNonQuery()
+        $resumo += [pscustomobject]@{passo='066-dashboard-arquivos-preparados'; sha256=$hashPreparo; jaInstalado=[bool]$registroPreparo}
+    }
     $cmd.CommandText = @'
 EXECUTE AS USER=N'usuario_etl';
 BEGIN TRY
