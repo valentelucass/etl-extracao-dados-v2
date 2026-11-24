@@ -170,6 +170,21 @@ final class RefreshCheckpoint {
         }
     }
 
+    LocalDate freightReceiptFloor() {
+        final var freight = payload.path("entities").path(ReportSnapshotTemplate.FRETES.name());
+        return freight.path("initialComplete").asBoolean()
+                ? LocalDate.parse(freight.required("floor").asText())
+                : null;
+    }
+
+    FreightReceiptRefresh receipts() {
+        final var state =
+                payload.has("freightReceipts")
+                        ? (ObjectNode) payload.required("freightReceipts")
+                        : payload.putObject("freightReceipts");
+        return new FreightReceiptRefresh(state);
+    }
+
     boolean allInitialized() {
         for (final var template : ReportSnapshotTemplate.receivingTemplates()) {
             if (!payload.required("entities")

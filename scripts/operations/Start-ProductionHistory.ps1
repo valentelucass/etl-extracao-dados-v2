@@ -7,7 +7,8 @@ param(
 
 $ErrorActionPreference = 'Stop'
 $storage = Join-Path ([Environment]::GetFolderPath('MyDocuments')) 'Armazenamento-Projetos\etl-extracao-dados-v2\atualizacao0766'
-$manifest = Join-Path $storage 'runtime-manifest-dashboard-fields-0818.json'
+. (Join-Path $PSScriptRoot 'RefreshSupervisor0766.ps1')
+$manifest = Get-RefreshScheduledManifest0766 (Join-Path $storage 'operational-settings.json') (Join-Path $storage 'runtime-manifest-dashboard-fields-0818.json')
 $runner = Join-Path $PSScriptRoot 'Invoke-ProductionRefresh0810.ps1'
 $historySettings = Join-Path $storage 'historico-90-dias-settings.json'
 & $runner -SettingsPath $historySettings -RuntimeManifestPath $manifest -HistoryOnly -Verify

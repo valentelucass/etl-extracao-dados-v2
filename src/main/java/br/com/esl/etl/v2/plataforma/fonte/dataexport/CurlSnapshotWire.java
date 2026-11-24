@@ -203,6 +203,23 @@ public final class CurlSnapshotWire implements ReportSnapshotExtractor.Wire {
                 page);
     }
 
+    @Override
+    public JsonNode receiptPage(
+            final BusinessDateRange history,
+            final SourceDateTimeRange updates,
+            final int page,
+            final int per)
+            throws Exception {
+        final var template = ReportSnapshotTemplate.OCORRENCIAS;
+        final var query =
+                ReportUpdateContract.forTemplate(template)
+                        .query(template, origin, history, updates, page, per);
+        final var filtered =
+                URI.create(query.toASCIIString() + "&search%5Bice_occurrence%5D%5Bcode%5D=114");
+        return get(
+                template, filtered, "receipt-" + updates.startInclusive().getEpochSecond(), page);
+    }
+
     private JsonNode get(
             final ReportSnapshotTemplate template,
             final URI target,

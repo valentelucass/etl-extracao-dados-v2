@@ -174,6 +174,7 @@ public final class ProductionRefreshCycle {
             LocalDate today,
             Instant cutoff,
             boolean historyOnly,
+            boolean trackReceipts,
             ReportMetadataCatalog catalog,
             FreightDependencyIndex dependencyIndexes,
             ArrayNode operations,
@@ -244,6 +245,17 @@ public final class ProductionRefreshCycle {
                     }
 
                     @Override
+                    public JsonNode receiptPage(
+                            final BusinessDateRange dates,
+                            final SourceDateTimeRange updates,
+                            final int page,
+                            final int per)
+                            throws Exception {
+                        admit();
+                        return original.wire().receiptPage(dates, updates, page, per);
+                    }
+
+                    @Override
                     public DataExportRecordInput recordInput(final JsonNode row, final int index) {
                         return original.wire().recordInput(row, index);
                     }
@@ -298,6 +310,7 @@ public final class ProductionRefreshCycle {
                 json.createObjectNode()
                         .put("schema", "PRODUCTION_REFRESH0766")
                         .put("relatedFieldRefreshRevision", "0818")
+                        .put("freightReceiptRefreshRevision", "0820")
                         .put("startedAt", began.toString())
                         .put("sourceScope", scope)
                         .put("runtimeSha256", config.required("runtimeSha256").asText())
@@ -331,6 +344,7 @@ public final class ProductionRefreshCycle {
                             today,
                             began.minusSeconds(120),
                             historyOnly,
+                            !historyOnly && !replay,
                             new ReportMetadataCatalog(),
                             new FreightDependencyIndex(
                                     checkpointPath
@@ -372,6 +386,29 @@ public final class ProductionRefreshCycle {
                         day,
                         replayFreight ? "COMPROVANTE_FRETE" : "FILIAL_OCORRENCIA");
                 return true;
+            }
+            if (context.trackReceipts()
+                    && checkpoint.freightReceiptFloor() != null
+                    && !budgetExhausted(session, deadline)) {
+                final var receipts = checkpoint.receipts();
+                try {
+                    receipts.discover(
+                            session.wire(),
+                            checkpoint.freightReceiptFloor(),
+                            today,
+                            context.cutoff(),
+                            checkpoint::save);
+                    if (!checkpoint.calendarBehind(today)) {
+                        refreshFreightReceipts(context, 1);
+                    }
+                } catch (final CurlSnapshotWire.RequestFailure failure) {
+                    if (!failure.isTransient()) {
+                        throw failure;
+                    }
+                    report.put("freightReceiptDeferred", safe(failure));
+                } catch (final DeferredWork deferred) {
+                    report.put("freightReceiptDeferred", safe(deferred));
+                }
             }
             final var order =
                     historyOnly
@@ -439,6 +476,12 @@ public final class ProductionRefreshCycle {
                             !LocalDate.parse(state.required("floor").asText()).isAfter(today),
                             "REFRESH_FLOOR_IN_FUTURE");
                     process(context, template, state);
+                    if (!historyOnly
+                            && template == ReportSnapshotTemplate.OCORRENCIAS
+                            && !budgetExhausted(session, deadline)
+                            && !checkpoint.calendarBehind(today)) {
+                        refreshFreightReceipts(context, Math.min(6, policy.changedDaysPerBatch()));
+                    }
                     result.put("initialComplete", state.path("initialComplete").asBoolean())
                             .put("historyStart", state.required("floor").asText())
                             .put("watermark", state.required("watermark").asText())
@@ -499,6 +542,9 @@ public final class ProductionRefreshCycle {
                     checkpoint.describeCalendar(template, result);
                 }
                 saveReport(reportPath, report, session);
+            }
+            if (context.trackReceipts() && checkpoint.freightReceiptFloor() != null) {
+                report.put("freightReceiptDaysPending", checkpoint.receipts().pendingCount());
             }
             if (passed
                     && historyOnly
@@ -748,6 +794,32 @@ public final class ProductionRefreshCycle {
         }
     }
 
+    private void refreshFreightReceipts(final Context context, final int maximumThisCycle)
+            throws Exception {
+        final var floor = context.checkpoint().freightReceiptFloor();
+        final var phase = "FREIGHT_RECEIPT_UPDATED";
+        final var limit =
+                Math.min(maximumThisCycle, context.policy().changedDaysPerBatch())
+                        - context.changedDays().getOrDefault(phase, 0);
+        if (floor == null || limit <= 0) {
+            return;
+        }
+        final var days = context.checkpoint().receipts().nextDays(limit);
+        if (days.isEmpty()) {
+            return;
+        }
+        final var template = ReportSnapshotTemplate.FRETES;
+        final var info = context.session().wire().info(template);
+        context.catalog().validate(template, info.has("data") ? info.required("data") : info);
+        for (final var day : days) {
+            require(
+                    !day.isBefore(floor) && !day.isAfter(context.today()),
+                    "FREIGHT_RECEIPT_PLAN_OUTSIDE_COVERAGE");
+            fullDay(context, template, day, phase);
+            context.changedDays().merge(phase, 1, Integer::sum);
+        }
+    }
+
     private static void commitWindow(
             final Context context, final ObjectNode state, final ObjectNode pending)
             throws Exception {
@@ -915,8 +987,11 @@ public final class ProductionRefreshCycle {
             final String phase)
             throws Exception {
         require(!day.isAfter(context.today()), "REFRESH_FUTURE_SNAPSHOT");
+        final var started = clock.instant();
         final var key = template.name() + ":" + day;
-        if (!phase.equals("RELATED_UPDATED") && context.confirmedDates().containsKey(key)) {
+        if (!phase.equals("RELATED_UPDATED")
+                && !phase.equals("FREIGHT_RECEIPT_UPDATED")
+                && context.confirmedDates().containsKey(key)) {
             context.operations()
                     .addObject()
                     .put("entity", template.name())
@@ -1019,6 +1094,25 @@ public final class ProductionRefreshCycle {
             context.store().storeAndVerify(run, rows, captureSha);
             context.dependencyIndexes()
                     .remember(template, day, run, captureSha, rows, context.root());
+            final var receiptFloor = context.checkpoint().freightReceiptFloor();
+            if (context.trackReceipts() && receiptFloor != null) {
+                if (template == ReportSnapshotTemplate.FRETES) {
+                    context.checkpoint().receipts().confirmedFreightRead(day, started);
+                    context.checkpoint().save();
+                } else if (template == ReportSnapshotTemplate.OCORRENCIAS) {
+                    final var receipts = context.checkpoint().receipts();
+                    boolean changed = false;
+                    for (final var envelope : rows) {
+                        final var occurrence =
+                                CurlSnapshotWire.JSON.readTree(envelope).required("record");
+                        changed |=
+                                receipts.observe(occurrence, receiptFloor, context.today(), null);
+                    }
+                    if (changed) {
+                        context.checkpoint().save();
+                    }
+                }
+            }
             context.confirmedDates().put(key, run);
             if (updated(phase)) {
                 context.changedDays().merge(template.name(), 1, Integer::sum);

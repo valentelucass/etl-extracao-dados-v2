@@ -101,6 +101,90 @@ class ProductionRefreshCycleTest {
     }
 
     @Test
+    void automaticCycleReadsAttachmentFromFreightWhenAReceiptArrivesAfterTheFirstCycle()
+            throws Exception {
+        final var fixture = new Fixture(directory);
+        fixture.seedReady();
+        final var day = fixture.floor;
+        assertTrue(fixture.run());
+        final var key = "FRETES:" + day;
+        assertFalse(
+                fixture.store
+                        .latest
+                        .get(key)
+                        .get(0)
+                        .path("record")
+                        .hasNonNull("fit_d_t_created_at"));
+
+        fixture.now = fixture.now.plus(Duration.ofHours(2));
+        fixture.signal(day, "114");
+        fixture.signal(day, "114");
+        fixture.signal(day.minusDays(1), "114");
+        fixture.signal(day.plusDays(2), "103");
+        fixture.freightReceipt = fixture.now.minusSeconds(180).toString();
+        assertTrue(fixture.run());
+        assertEquals(
+                fixture.freightReceipt,
+                fixture.store
+                        .latest
+                        .get(key)
+                        .get(0)
+                        .path("record")
+                        .required("fit_d_t_created_at")
+                        .asText());
+        assertTrue(
+                fixture.lastReport
+                        .path("operations")
+                        .findValuesAsText("phase")
+                        .contains("FREIGHT_RECEIPT_UPDATED"));
+        assertEquals(
+                1,
+                fixture.lastReport.path("operations").findValuesAsText("phase").stream()
+                        .filter("FREIGHT_RECEIPT_UPDATED"::equals)
+                        .count());
+        assertEquals(0, fixture.lastReport.required("freightReceiptDaysPending").asInt());
+        fixture.now = fixture.now.plus(Duration.ofHours(2));
+        assertTrue(fixture.run());
+        assertFalse(
+                fixture.lastReport
+                        .path("operations")
+                        .findValuesAsText("phase")
+                        .contains("FREIGHT_RECEIPT_UPDATED"));
+    }
+
+    @Test
+    void unconfirmedLateReceiptIsRetriedAfterRestartWithoutPublishingAnEstimatedDate()
+            throws Exception {
+        final var fixture = new Fixture(directory);
+        fixture.seedReady();
+        final var day = fixture.floor.plusDays(1);
+        fixture.signal(day, "114");
+        fixture.store.rejectDay = day;
+        assertFalse(fixture.run());
+        final var persisted =
+                CurlSnapshotWire.JSON.readTree(
+                        Files.readAllBytes(directory.resolve("checkpoint.json")));
+        assertTrue(
+                persisted
+                        .required("payload")
+                        .required("freightReceipts")
+                        .required("pendingDays")
+                        .has(day.toString()));
+        fixture.receiptEvents.removeAll();
+        assertFalse(fixture.store.latest.containsKey("FRETES:" + day));
+        fixture.store.rejectDay = null;
+        fixture.now = fixture.now.plus(Duration.ofHours(2));
+        assertTrue(fixture.run());
+        assertFalse(
+                fixture.store
+                        .latest
+                        .get("FRETES:" + day)
+                        .get(0)
+                        .path("record")
+                        .hasNonNull("fit_d_t_created_at"));
+    }
+
+    @Test
     void bringsNewDatesToEverySourceBeforeReviewingOldDates() throws Exception {
         final var fixture = new Fixture(directory);
         fixture.seedReady();
@@ -681,6 +765,18 @@ class ProductionRefreshCycleTest {
         final Path root;
         final ObjectNode config = CurlSnapshotWire.JSON.createObjectNode();
         final MemoryStore store = new MemoryStore();
+        final com.fasterxml.jackson.databind.node.ArrayNode receiptEvents =
+                CurlSnapshotWire.JSON.createArrayNode();
+        String freightReceipt;
+
+        void signal(final LocalDate day, final String code) {
+            receiptEvents
+                    .addObject()
+                    .put("ice_ore_code", code)
+                    .put("ice_fit_service_at", day.toString())
+                    .put("occurrence_at", now.minusSeconds(310).toString());
+        }
+
         final EnumMap<ReportSnapshotTemplate, JsonNode> infos =
                 new EnumMap<>(ReportSnapshotTemplate.class);
         final TreeSet<LocalDate> changedDates = new TreeSet<>();
@@ -837,6 +933,32 @@ class ProductionRefreshCycleTest {
                                 final int per) {
                             throw new AssertionError("Injected capture owns synthetic pages");
                         }
+
+                        @Override
+                        public JsonNode receiptPage(
+                                final BusinessDateRange dates,
+                                final br.com.esl.etl.v2.plataforma.fonte.dataexport
+                                                .SourceDateTimeRange
+                                        updates,
+                                final int page,
+                                final int per) {
+                            final var matching = CurlSnapshotWire.JSON.createArrayNode();
+                            for (var event : receiptEvents) {
+                                final var stamp =
+                                        Instant.parse(event.required("occurrence_at").asText());
+                                if (!stamp.isBefore(updates.startInclusive())
+                                        && !stamp.isAfter(updates.endInclusive())) {
+                                    matching.add(event);
+                                }
+                            }
+                            final var result = CurlSnapshotWire.JSON.createArrayNode();
+                            for (int index = (page - 1) * per;
+                                    index < Math.min(page * per, matching.size());
+                                    index++) {
+                                result.add(matching.get(index));
+                            }
+                            return result;
+                        }
                     };
             final ProductionRefreshCycle.CapturePort capture =
                     (template, dates, updates, selected, sink, limits) -> {
@@ -881,6 +1003,10 @@ class ProductionRefreshCycleTest {
                                         !day.isAfter(dates.endInclusive());
                                         day = day.plusDays(1)) {
                                     final var row = row(template, day);
+                                    if (template == ReportSnapshotTemplate.FRETES
+                                            && freightReceipt != null) {
+                                        row.put("fit_d_t_created_at", freightReceipt);
+                                    }
                                     if (template == ReportSnapshotTemplate.OCORRENCIAS
                                             && day.equals(floor)) {
                                         occurrenceFloorCaptures++;

@@ -17,6 +17,7 @@ $repo0766=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..\..'))
 . (Join-Path $PSScriptRoot 'RefreshSupervisor0766.ps1')
 $storage0766='C:\Users\suporte\Documents\Armazenamento-Projetos\etl-extracao-dados-v2\'
 $SettingsPath=[IO.Path]::GetFullPath($SettingsPath)
+if($IfDue){$RuntimeManifestPath=Get-RefreshScheduledManifest0766 $SettingsPath $RuntimeManifestPath}
 $RuntimeManifestPath=[IO.Path]::GetFullPath($RuntimeManifestPath)
 if(-not $RuntimeManifestPath.StartsWith($storage0766,[StringComparison]::OrdinalIgnoreCase)){throw 'REFRESH_PRIVATE_MANIFEST_REQUIRED'}
 $settings0766=Get-Content -LiteralPath $SettingsPath -Raw -Encoding utf8 | ConvertFrom-Json

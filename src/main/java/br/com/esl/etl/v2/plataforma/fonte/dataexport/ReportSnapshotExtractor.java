@@ -39,6 +39,15 @@ public final class ReportSnapshotExtractor {
             throw new UnsupportedOperationException("REFRESH_UPDATE_TRANSPORT_REQUIRED");
         }
 
+        default JsonNode receiptPage(
+                final BusinessDateRange history,
+                final SourceDateTimeRange updates,
+                final int page,
+                final int per)
+                throws Exception {
+            return updatedPage(ReportSnapshotTemplate.OCORRENCIAS, history, updates, page, per);
+        }
+
         default DataExportRecordInput recordInput(final JsonNode row, final int index) {
             return new DataExportRecordInput(row, java.util.Optional.empty());
         }

@@ -25,7 +25,9 @@ $armazenamento=Join-Path ([Environment]::GetFolderPath('MyDocuments')) 'Armazena
 $rotina=Join-Path $armazenamento 'atualizacao0766'
 $estado=Join-Path $rotina 'operational'
 $area=Join-Path $rotina $areaRelatorio
-$manifesto=Get-Content -LiteralPath (Join-Path $rotina 'runtime-manifest-dashboard-fields-0818.json') -Raw -Encoding UTF8 | ConvertFrom-Json
+. (Join-Path $PSScriptRoot 'RefreshSupervisor0766.ps1')
+$manifestPath=Get-RefreshScheduledManifest0766 (Join-Path $rotina 'operational-settings.json') (Join-Path $rotina 'runtime-manifest-dashboard-fields-0818.json')
+$manifesto=Get-Content -LiteralPath $manifestPath -Raw -Encoding UTF8 | ConvertFrom-Json
 $jdk=Join-Path $env:LOCALAPPDATA 'Programs/Eclipse Adoptium/jdk-17/bin'
 $stop=Join-Path $armazenamento 'quatro-etapas-20261024-01/independent-export-shared-dataexport/STOP429.json'
 
@@ -62,14 +64,11 @@ SELECT @lock;
 try {
     try{$tomouVez=$vez.WaitOne(0)}catch [Threading.AbandonedMutexException]{$tomouVez=$true}
     if(-not $tomouVez){throw "Uma recaptura de $areaRelatorio ja esta ativa."}
-    $classes=Join-Path $area 'classes'
-    $null=New-Item -ItemType Directory -Force $classes
+    $null=New-Item -ItemType Directory -Force $area
     foreach($pin in $manifesto.files){
         if((Get-FileHash -Algorithm SHA256 (Join-Path $manifesto.directory $pin.name)).Hash -ine $pin.sha256){throw 'Runtime diferente da versao instalada.'}
     }
     $jars=Join-Path $manifesto.directory '*'
-    & (Join-Path $jdk 'javac.exe') -encoding UTF-8 -cp $jars -d $classes (Join-Path $repo 'src/main/java/br/com/esl/etl/v2/plataforma/producao/ProductionRefreshCycle.java')
-    if($LASTEXITCODE){throw 'Falha ao compilar a rotina de recaptura.'}
     $valores=@{}
     foreach($linha in [IO.File]::ReadAllLines((Join-Path $repo '.env'))){
         if($linha -match '^\s*(API_BASE_URL|API_DATAEXPORT_TOKEN)\s*=\s*(.*)$'){$valores[$matches[1]]=$matches[2].Trim().Trim('"').Trim("'")}
@@ -136,7 +135,7 @@ ORDER BY c.business_date DESC FOR JSON PATH, WITHOUT_ARRAY_WRAPPER;
             $p=[Diagnostics.Process]::new()
             try{
                 $p.StartInfo.FileName=Join-Path $jdk 'java.exe'
-                $p.StartInfo.Arguments='-Xmx768m -Dfile.encoding=UTF-8 -cp "'+$classes+';'+$jars+'" br.com.esl.etl.v2.bootstrap.ProductionRefreshMain'
+                $p.StartInfo.Arguments='-Xmx768m -Dfile.encoding=UTF-8 -cp "'+$jars+'" br.com.esl.etl.v2.bootstrap.ProductionRefreshMain'
                 $p.StartInfo.UseShellExecute=$false
                 $p.StartInfo.CreateNoWindow=$true
                 $p.StartInfo.RedirectStandardInput=$true
@@ -166,12 +165,35 @@ ORDER BY c.business_date DESC FOR JSON PATH, WITHOUT_ARRAY_WRAPPER;
         if(!$fretes){Atualizar-Leitura $cmd}
     }
     if($fretes){
-        $particoes=@(& (Join-Path $PSScriptRoot 'Invoke-DashboardProjectionRefresh.ps1') -Database 'ETL_SISTEMA_V2' -Credential $runtimeCred -CommandTimeout 120)
-        if($particoes.Count -ne 4 -or @($particoes | Where-Object {$_.Failed -gt 0}).Count){throw 'Projecao de fretes pendente.'}
-        $cmd.Parameters.Clear()
-        $cmd.CommandText='EXEC core.usp_dashboard_publicar_fatos_fretes'
-        $cmd.CommandTimeout=7200
-        $null=$cmd.ExecuteNonQuery()
+        $gate=[Threading.Mutex]::new($false,'Global\ETL_V2_REFRESH0766_SUPERVISOR')
+        $held=$false
+        try{
+            while(!$held){
+                if((Test-Path $stop) -or (Test-Path (Join-Path $estado 'STOP.failure.json')) -or (Test-Path (Join-Path $estado 'STOP.operator.json'))){throw 'A integracao tem uma parada registrada.'}
+                try{$held=$gate.WaitOne(5000)}catch [Threading.AbandonedMutexException]{$held=$true}
+            }
+            $status=Get-Content -LiteralPath (Join-Path $estado 'supervisor.json') -Raw | ConvertFrom-Json
+            $jaPublicado=$false
+            if($status.phase -ceq 'WAITING' -and $status.cycle -cmatch '^[0-9a-f]{32}$'){
+                $lote=Join-Path $estado ('reports/'+$status.cycle+'.json')
+                $publicado=Join-Path $estado ('reports/'+$status.cycle+'.publication.json')
+                if((Test-Path -LiteralPath $lote) -and (Test-Path -LiteralPath $publicado)){
+                    $regular=Get-Content -LiteralPath $lote -Raw -Encoding UTF8 | ConvertFrom-Json
+                    $prova=Get-Content -LiteralPath $publicado -Raw -Encoding UTF8 | ConvertFrom-Json
+                    $jaPublicado=$regular.passed -and $regular.sourceScope -ceq $scope -and
+                        $prova.ciclo -ceq $status.cycle -and [long]$prova.auditoria -gt 0 -and
+                        ([DateTimeOffset]$regular.startedAt) -ge ([DateTimeOffset]$recibo.completedAt)
+                }
+            }
+            if(!$jaPublicado){
+                $particoes=@(& (Join-Path $PSScriptRoot 'Invoke-DashboardProjectionRefresh.ps1') -Database 'ETL_SISTEMA_V2' -Credential $runtimeCred -CommandTimeout 120)
+                if($particoes.Count -ne 4 -or @($particoes | Where-Object {$_.Failed -gt 0}).Count){throw 'Projecao de fretes pendente.'}
+                $cmd.Parameters.Clear()
+                $cmd.CommandText='EXEC core.usp_dashboard_publicar_fatos_fretes'
+                $cmd.CommandTimeout=7200
+                $null=$cmd.ExecuteNonQuery()
+            }
+        }finally{if($held){$gate.ReleaseMutex()};$gate.Dispose()}
         Write-Output "Fretes publicados para $quantidade data(s) de servico."
     }else{Atualizar-Leitura $cmd -Aguardar}
 }finally{
