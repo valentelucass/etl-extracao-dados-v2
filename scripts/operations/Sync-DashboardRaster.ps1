@@ -4,33 +4,46 @@ param(
     [datetime]$Inicio,
     [datetime]$Fim,
     [switch]$Agendado,
-    [switch]$SomenteEntreDias
+    [switch]$SomenteEntreDias,
+    [switch]$FechamentoMensal
 )
 $ErrorActionPreference='Stop'
 $env:PSModulePath=(Join-Path $PSHOME 'Modules')+';'+$env:PSModulePath
 $repo=(Resolve-Path (Join-Path $PSScriptRoot '../..')).Path
 $pwsh=(Get-Command $PowerShell7 -CommandType Application -ErrorAction Stop).Source
-if($Agendado){
-    $limite=(Get-Date).AddMinutes(75)
-    while($true){
-        try {
-            $argsJob=@('-NoLogo','-NoProfile','-NonInteractive','-File',$PSCommandPath,'-PowerShell7',$pwsh)
-            $jobs=Join-Path $repo '../.runtime/memory-control/Executar-Batch.ps1'
-            $execucao=& $jobs -Executable powershell.exe -ArgumentList $argsJob -WorkingDirectory $repo -LimitMiB 680 -MaxMinutes 26 -ReturnReceipt
-            if($execucao.job.ExitCode -ne 0){throw ('Falha na atualizacao Raster, codigo '+$execucao.job.ExitCode)}
-            return
-        } catch {
-            if($_.Exception.Message -notmatch '^BATCH_(CONCURRENCY_LIMIT|MEMORY_ADMISSION)' -or (Get-Date) -ge $limite){throw}
-            Start-Sleep -Seconds 30
-        }
-    }
-}
+. (Join-Path $PSScriptRoot 'DashboardRasterFechamento.ps1')
 $private=Join-Path ([Environment]::GetFolderPath('MyDocuments')) 'Armazenamento-Projetos/etl-extracao-dados-v2/raster-atualizacao'
 $null=[IO.Directory]::CreateDirectory($private)
 $personalizado=$PSBoundParameters.ContainsKey('Inicio') -or $PSBoundParameters.ContainsKey('Fim')
+if($FechamentoMensal -and ($personalizado -or $SomenteEntreDias)){throw 'O fechamento mensal determina o seu proprio periodo.'}
 if($SomenteEntreDias -and !$personalizado){throw 'Informe o periodo para reconferir as viagens entre dias.'}
 if($personalizado -and (!$PSBoundParameters.ContainsKey('Inicio') -or !$PSBoundParameters.ContainsKey('Fim') -or
     $Fim.Date -lt $Inicio.Date -or ($Fim.Date-$Inicio.Date).TotalDays -gt 31)){throw 'Informe um periodo de ate 32 dias.'}
+$hoje=[TimeZoneInfo]::ConvertTimeBySystemTimeZoneId([DateTimeOffset]::UtcNow,'E. South America Standard Time').Date
+if($Agendado){
+    $scriptAtual=$PSCommandPath
+    $limite=(Get-Date).AddMinutes(75)
+    $executarLote={
+        param([string[]]$Opcoes,[int]$Minutos)
+        $jobs=Join-Path $repo '../.runtime/memory-control/Executar-Batch.ps1'
+        $argsJob=@('-NoLogo','-NoProfile','-NonInteractive','-File',$scriptAtual,'-PowerShell7',$pwsh)+$Opcoes
+        while($true){
+            try {
+                $execucao=& $jobs -Executable powershell.exe -ArgumentList $argsJob -WorkingDirectory $repo -LimitMiB 680 -MaxMinutes $Minutos -ReturnReceipt
+                if($null -eq $execucao.job.ExitCode -or $execucao.job.ExitCode -ne 0){throw ('Falha na atualizacao Raster, codigo '+$execucao.job.ExitCode)}
+                return
+            } catch {
+                if($_.Exception.Message -notmatch '^BATCH_(CONCURRENCY_LIMIT|MEMORY_ADMISSION)' -or (Get-Date) -ge $limite){throw}
+                Start-Sleep -Seconds 30
+            }
+        }
+    }
+    $opcoes=@()
+    if($personalizado){$opcoes=@('-Inicio',$Inicio.ToString('yyyy-MM-dd'),'-Fim',$Fim.ToString('yyyy-MM-dd'))}
+    if($SomenteEntreDias){$opcoes+='-SomenteEntreDias'}
+    Invoke-RasterCicloAgendado -Pasta $private -Hoje $hoje -ExecutarLote $executarLote -Opcoes $opcoes -FechamentoMensal:$FechamentoMensal
+    return
+}
 Import-Module (Join-Path $repo '../.runtime/sql-server/SqlServerProjetos.psm1')
 $cred=Import-Clixml (Join-Path $env:LOCALAPPDATA 'Rodogarcia/SqlServer/etl-v2-runtime-prod.clixml')
 $con=New-ProjetosSqlConnection -Database ETL_SISTEMA_V2 -Credential $cred -ApplicationName 'ETL-Atualizar-Raster'
@@ -39,7 +52,24 @@ try {
     $cmd=$con.CreateCommand()
     $cmd.CommandTimeout=120
     $cmd.CommandText="DECLARE @r int; EXEC @r=sys.sp_getapplock @Resource='dashboard_raster_atualizacao',@LockMode='Exclusive',@LockOwner='Session',@LockTimeout=0; SELECT @r"
-    if([int]$cmd.ExecuteScalar() -lt 0){Write-Output 'Atualizacao do Raster em andamento.'; return}
+    if([int]$cmd.ExecuteScalar() -lt 0){
+        Write-Output 'Atualizacao do Raster em andamento. A tarefa agendada volta a consultar no proximo ciclo.'
+        return
+    }
+    $fechamento=$null
+    if($FechamentoMensal -or ($personalizado -and !$SomenteEntreDias -and $Inicio.Day -eq 1 -and $Fim.Date -eq $Inicio.Date.AddMonths(1).AddDays(-1))){
+        $plano=Get-RasterFechamentoPendente -Pasta $private -Hoje $hoje
+        if($FechamentoMensal){
+            if(!$plano){return}
+            $Inicio=$plano.Inicio
+            $Fim=$plano.Fim
+            $personalizado=$true
+        }
+        if($plano -and $Inicio.Date -eq $plano.Inicio -and $Fim.Date -eq $plano.Fim){
+            $fechamento=$plano
+            Set-RasterFechamento -Pasta $private -Inicio $Inicio
+        }
+    }
     $dias=[Collections.Generic.List[datetime]]::new()
     if($personalizado){
         if(!$SomenteEntreDias){
@@ -83,7 +113,6 @@ try {
     }
     # A API restringe tanto o inicio como o fim real. A leitura por filial permite
     # abranger o mes com seus limites sem estourar o teto de viagens da origem.
-    $hoje=[TimeZoneInfo]::ConvertTimeBySystemTimeZoneId([DateTimeOffset]::UtcNow,'E. South America Standard Time').Date
     $primeiro=if($personalizado){$Inicio.Date}else{[datetime]::new($hoje.Year,$hoje.Month,1)}
     $de=$primeiro.AddDays(-7)
     $ate=if($personalizado -and $Fim.Date.AddDays(7) -lt $hoje){$Fim.Date.AddDays(7)}else{$hoje}
@@ -148,6 +177,12 @@ try {
     $cmd.CommandText='EXEC core.usp_dashboard_atualizar_leitura_raster'
     $null=$cmd.ExecuteNonQuery()
     if($falhas.Count){throw ('Datas ou filiais Raster pendentes: '+($falhas -join ', '))}
+    if($fechamento){
+        $diasEsperados=($fechamento.Fim-$fechamento.Inicio).Days+1
+        if($dias.Count -ne $diasEsperados -or $ate -ne $fechamento.ConferirAte){throw 'Cobertura mensal Raster incompleta.'}
+        Set-RasterFechamento -Pasta $private -Inicio $Inicio -ConferidoAte $ate.ToString('yyyy-MM-dd')
+        Write-Output ('Fechamento Raster de {0:yyyy-MM} publicado, com {1} dias e viagens entre dias conferidas ate {2:yyyy-MM-dd}.' -f $Inicio,$dias.Count,$ate)
+    }
     if(!$janelaCurta -and $ate -eq $hoje -and $de -le [datetime]::new($hoje.Year,$hoje.Month,1).AddDays(-7)){
         [IO.File]::WriteAllText($marcador,$dataHoje)
     }
