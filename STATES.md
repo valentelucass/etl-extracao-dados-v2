@@ -1,3 +1,7 @@
+## 24/11/2026 — Filial de faturamento da Vedacit
+
+A publicação de Faturamento atribui o pagador 60.642.774/0012-09 a SPO, com nome, identificador e CNPJ da filial. O instalador Install-DashboardVedacitFaturamento confere a quantidade e a receita de cada estabelecimento da mesma raiz, permite ensaio por reversão e registra a migração no controle do ETL. A aplicação em 24/11 conciliou 5.160 fretes.
+
 ## 24/11/2026 — Releitura de Fretes por data de serviço
 
 Uma data de Fretes pode ser relida pelo relatório 6389 para incorporar anexos posteriores à captura. O modo `reprocessFreightDate` usa a paginação completa e a releitura do SQL da rotina principal e tem ponto de retomada isolado. A data de anexo é a do próprio relatório de Fretes.
