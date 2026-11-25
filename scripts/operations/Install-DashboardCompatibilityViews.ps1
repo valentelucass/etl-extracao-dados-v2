@@ -1,7 +1,7 @@
 [CmdletBinding()]
 param(
     [Parameter(Mandatory=$true)][string]$ReceiptPath,
-    [ValidateSet('References','Sinistros','Inventario','Localizacao','Faturas','ContasAPagar','Clientes','Usuarios','Raster','Coletores','Saude','Manifestos','ContratoManifestos','CamposColetasFretes','CamposFaturasFretes','GestaoFretes','ColetasExcluidas','FretesFaturamento','RecebimentoLote','FilialOcorrencia','CamposSinistros','RedeCredenciadaCustos')][string]$Group = 'References',
+    [ValidateSet('References','Sinistros','Inventario','Localizacao','Faturas','ContasAPagar','Clientes','Usuarios','Raster','Coletores','Saude','Manifestos','ContratoManifestos','CamposColetasFretes','CamposFaturasFretes','GestaoFretes','ColetasExcluidas','FretesFaturamento','RecebimentoLote','FilialOcorrencia','CamposSinistros','RedeCredenciadaCustos','DrePagar')][string]$Group = 'References',
     [string[]]$CaptureReceiptPath,
     [string]$CaptureDirectory,
     [switch]$SeedLegacyUserDirectory,
@@ -182,7 +182,7 @@ IF NOT EXISTS (
 
     $added = 0
     $reclassificados = 0
-    if ($Group -in 'Manifestos','ContratoManifestos') {
+    if ($Group -in 'Manifestos','ContratoManifestos','DrePagar') {
         # Serializa a alteração com a substituição das leituras feitas pelo publicador.
         $null = Invoke-Scalar @'
 DECLARE @lock int;
@@ -190,6 +190,10 @@ EXEC @lock=sys.sp_getapplock @Resource=N'dashboard:fatos-fretes', @LockMode='Exc
      @LockOwner='Transaction', @LockTimeout=5000;
 IF @lock < 0 THROW 52081,'Publicacao de fretes em andamento.',1;
 '@
+    }
+    if ($Group -eq 'DrePagar') {
+        $objetos = "SELECT COUNT(*) FROM sys.objects WHERE object_id IN (OBJECT_ID('core.dashboard_dre_pagar','U'),OBJECT_ID('pub.dashboard_dre_pagar','V'),OBJECT_ID('core.usp_dashboard_preparar_dre_pagar','P'))"
+        $added += Install-ReceivingPackage 'database/production/publication/076_dashboard_dre_pagar.sql' '076-dashboard-dre-pagar' $objetos 3
     }
     if ($Group -eq 'FilialOcorrencia') {
         $path = 'database/production/receiving/014_filial_registro_ocorrencia.sql'
@@ -433,6 +437,7 @@ EXEC ctl.usp_store_dashboard_refresh_audit @source_cycle=@cycle,@started_at=@sta
         'Localizacao' { 'dashboard-localizacao.sql' }
         'Faturas' { 'dashboard-faturas.sql' }
         'ContasAPagar' { 'dashboard-contas-a-pagar.sql' }
+        'DrePagar' { 'dashboard-dre-pagar.sql' }
         'Clientes' { 'dashboard-clientes.sql' }
         'Usuarios' { 'dashboard-usuarios.sql' }
         'Raster' { 'dashboard-raster.sql' }

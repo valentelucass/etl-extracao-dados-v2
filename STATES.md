@@ -1,3 +1,7 @@
+## 25/11/2026 — Apropriações contábeis do DRE
+
+A publicação 076 prepara os lançamentos do DRE na mesma transação que atualiza os títulos. Usa as parcelas de contas e centros da exportação 8636, preserva o valor contábil de cada título e mantém rastreáveis as parcelas de pessoal que aguardam classificação. O grupo `DrePagar` de `Install-DashboardCompatibilityViews.ps1` confere as contas da folha, impostos, abastecimentos, software e assistência médica com a exportação física antes da aplicação.
+
 ## 25/11/2026 — Prazos e soluções de tratativas
 
 A publicação 075 acrescentou a cobertura de fretes e sinistros e os horários de prazo e solução do relatório de ocorrências. A associação usa a captura publicada, a partição e a posição original do evento. O instalador aceita `-Grupo Tratativas`. O ensaio e a aplicação conferiram as 55 ocorrências da partição amostrada de 25/11 contra a captura da origem.
