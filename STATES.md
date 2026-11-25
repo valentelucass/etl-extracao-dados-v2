@@ -1,3 +1,11 @@
+## 25/11/2026 — Retenção de Ocorrências por data
+
+O JUJUBA consulta o catálogo e a prévia no ETL_SISTEMA_V2. A regra vigente é de 90 dias corridos para Ocorrências, incluindo o dia atual no fuso de São Paulo. A data é a partição de negócio usada pelo relatório ESL. O padrão do banco continua sem prazo. As demais entidades oferecem prévia.
+
+O primeiro corte retirou 16–27/08/2026 e preservou 28/08–25/11/2026. Os 90 dias da origem vigente e da publicação Performance coincidiram após o corte. O ensaio transacional em `scripts/operations/Test-RetencaoOcorrencias.ps1` verifica duplicatas por posição, conteúdo restaurado, bloqueio, fronteiras, integridade, isolamento, repetição e reversão. A instalação usa `Install-RetencaoOcorrencias.ps1 -Aplicar` e registra os pacotes 073 e 073b.
+
+A tarefa `Rodogarcia-ETL-Retencao-Ocorrencias` executa com o JUJUBA fechado durante a sessão Windows de suporte. Confere a fila a cada hora e na entrada da sessão, com repetição se uma vaga operacional estiver ocupada. Para registrar a tarefa, use `Register-RetencaoOcorrencias.ps1`. Para uma rodada, use `Start-RetencaoOcorrencias.ps1`. O executor trabalha por dia e reutiliza a credencial operacional protegida do ETL. O arquivo diário JSONL/GZip é privado e guarda as versões e posições originais por sete dias a partir da retirada. A auditoria no banco registra o arquivo, a assinatura e as contagens. Uma proteção de dia em `ctl.jujuba_retencao_hold` impede a retirada. O planejador omite dias retirados e pedidos de reingestão direta desses dias ficam registrados para revisão.
+
 ## 24/11/2026 — Leitura de comprovantes na Performance
 
 O pacote 072, aplicado por `Install-DashboardRedeIndices.ps1 -Performance -Aplicar`, publica a coluna `Comprovante de Entrega` com a data e o fuso de `fit_d_t_created_at` do relatório ESL 6389. A coluna acompanha cada gravação na leitura de fretes. A regressão `scripts/validation/dashboard-comprovante-performance.sql` confere a base vigente e exercita anexação posterior e remoção.
