@@ -1,3 +1,7 @@
+## 25/11/2026 — Prazos e soluções de tratativas
+
+A publicação 075 acrescentou a cobertura de fretes e sinistros e os horários de prazo e solução do relatório de ocorrências. A associação usa a captura publicada, a partição e a posição original do evento. O instalador aceita `-Grupo Tratativas`. O ensaio e a aplicação conferiram as 55 ocorrências da partição amostrada de 25/11 contra a captura da origem.
+
 ## 25/11/2026 — Base de ocorrências e sinistros para o painel
 
 `pub.dashboard_sinistros` publica os 46 campos do relatório ESL 6392 na ordem atual. Lê tanto as capturas antigas de 44 campos quanto as atuais. Cliente, seguradora, motorista e ocorrência têm campos próprios. A nota fiscal e a apólice preservam zeros à esquerda. O horário do contato antigo continua no registro original.

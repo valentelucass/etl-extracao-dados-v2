@@ -1,11 +1,17 @@
 [CmdletBinding()]
-param([switch]$Aplicar)
+param([switch]$Aplicar, [ValidateSet('Sinistros','Tratativas')][string]$Grupo='Sinistros')
 
 $ErrorActionPreference = 'Stop'
 $repo = (Resolve-Path (Join-Path $PSScriptRoot '../..')).Path
 Import-Module (Join-Path $repo '../.runtime/sql-server/SqlServerProjetos.psm1') -DisableNameChecking
 $fonte = 'database/production/publication/074_dashboard_sinistros.sql'
 $passo = '074-dashboard-sinistros'
+$validacao = 'scripts/validation/dashboard-sinistros-ocorrencias.sql'
+if ($Grupo -eq 'Tratativas') {
+    $fonte = 'database/production/publication/075_dashboard_tratativas.sql'
+    $passo = '075-dashboard-tratativas'
+    $validacao = 'scripts/validation/dashboard-tratativas.sql'
+}
 $sql = [IO.File]::ReadAllText((Join-Path $repo $fonte)).Replace([string][char]13, '')
 $sha = [Security.Cryptography.SHA256]::Create()
 try { $hash = [BitConverter]::ToString($sha.ComputeHash([Text.Encoding]::UTF8.GetBytes($sql))).Replace('-', '') }
@@ -49,7 +55,7 @@ FROM ctl.production_installation_step WHERE step_id=@passo;
         $cmd.CommandText = 'INSERT ctl.production_installation_step(step_id,source_name,source_sha256) VALUES(@passo,@fonte,@hash)'
         $null = $cmd.ExecuteNonQuery()
     }
-    $cmd.CommandText = [IO.File]::ReadAllText((Join-Path $repo 'scripts/validation/dashboard-sinistros-ocorrencias.sql'))
+    $cmd.CommandText = [IO.File]::ReadAllText((Join-Path $repo $validacao))
     $regressao = $cmd.ExecuteScalar() | ConvertFrom-Json
     if ($Aplicar) { $tx.Commit() } else { $tx.Rollback() }
     [pscustomobject]@{ aplicado=[bool]$Aplicar; jaInstalado=[bool]$registrado; regressao=$regressao }
