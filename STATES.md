@@ -1,3 +1,13 @@
+## 25/11/2026 — Paradas da atualização contínua e retomada pelo PM2
+
+Às 03h44, Contas a Pagar rejeitou dois rateios com 15 casas decimais. A revisão 0821 preserva a precisão enviada pelo ESL. A rotina voltou a gravar as 262 linhas de 09/11, com 7.336 valores conferidos. Às 11h03, a alteração de 44 para 46 campos de Sinistros e o novo filtro bloquearam a validação do catálogo. A revisão 0822 aceita os dois formatos. O SQL e a fonte coincidiram nas oito datas verificadas.
+
+Às 13h02, a reconciliação de Ocorrências tentou 18/08, data arquivada. O SQL registrou o pedido de revisão e respondeu com o erro 52304. A revisão 0823 consulta o calendário de recebimento do SQL. Uma alteração real em data protegida continua gerando um pedido de revisão. O agendamento retomou pelo checkpoint. Em produção, releu 28/08 com 7.352 linhas conferidas no banco. O arquivo de 18/08 conservou a assinatura e o mesmo conteúdo comprimido.
+
+O lote `45f36ea5087649f2a26752c3b3e4319b` publicou às 15h45. A consulta a `pub.vw_bi_monitoramento` confirmou 82.862 registros e sucesso na auditoria 70. A fila de publicação estava vazia. Em 6 dos 13 relatórios, parte da revisão histórica ficou para os próximos ciclos. O JAR do agendamento tem SHA-256 `1E8D7847032B6BB4A00441FB09D20D18F2C428F396B7FD507AACAE17BEAC3109`.
+
+Após a publicação, passaram os 289 testes específicos e as verificações do PM2, agendamento, retomada, publicação e retenção. A suíte completa executou 5.263 casos. As 103 falhas já ocorriam pelos mesmos motivos na revisão anterior às correções.
+
 ## 25/11/2026 — Volume apagado na linha do tempo
 
 O pacote 073c grava, por dia e na mesma transação da retirada, o tamanho em bytes dos valores removidos da origem, publicação Performance, cobertura e marcadores. A prévia do JUJUBA devolve a medição em `removedBytes`. O número em GB usa 1.000.000.000 bytes por unidade. O espaço alocado nos arquivos do SQL é medido separadamente.
