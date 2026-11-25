@@ -1,3 +1,11 @@
+## 25/11/2026 — Base de ocorrências e sinistros para o painel
+
+`pub.dashboard_sinistros` publica os 46 campos do relatório ESL 6392 na ordem atual. Lê tanto as capturas antigas de 44 campos quanto as atuais. Cliente, seguradora, motorista e ocorrência têm campos próprios. A nota fiscal e a apólice preservam zeros à esquerda. O horário do contato antigo continua no registro original.
+
+`pub.dashboard_sinistros_ocorrencias_documento` lista o histórico do mesmo escopo, minuta, nota e código. O relatório não traz uma chave comum do evento. A leitura mantém todas as ocorrências correspondentes e não agrega valores de documentos ou de sinistros.
+
+O instalador `scripts/operations/Install-DashboardSinistros.ps1` ensaia em transação por padrão e registra a publicação 074 com `-Aplicar`. Ensaio, aplicação e repetição conferiram 156 linhas, 119 sinistros e 49 ocorrências associadas. Das 156 linhas, 138 vieram do relatório antigo e 18 do atual. O confronto da publicação com a origem conferiu os 7.176 valores e suas multiplicidades. A assinatura das 156 linhas da consulta de compatibilidade permaneceu a mesma. Passaram os 91 testes Java de Sinistros e os 12 cenários SQL de aceite ou rejeição de formatos no recebimento.
+
 ## 25/11/2026 — Paradas da atualização contínua e retomada pelo PM2
 
 Às 03h44, Contas a Pagar rejeitou dois rateios com 15 casas decimais. A revisão 0821 preserva a precisão enviada pelo ESL. A rotina voltou a gravar as 262 linhas de 09/11, com 7.336 valores conferidos. Às 11h03, a alteração de 44 para 46 campos de Sinistros e o novo filtro bloquearam a validação do catálogo. A revisão 0822 aceita os dois formatos. O SQL e a fonte coincidiram nas oito datas verificadas.
