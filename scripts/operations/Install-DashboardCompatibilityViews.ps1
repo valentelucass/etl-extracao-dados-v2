@@ -1,7 +1,7 @@
 [CmdletBinding()]
 param(
     [Parameter(Mandatory=$true)][string]$ReceiptPath,
-    [ValidateSet('References','Sinistros','Inventario','Localizacao','Faturas','ContasAPagar','Clientes','Usuarios','Raster','Coletores','Saude','Manifestos','ContratoManifestos','CamposColetasFretes','CamposFaturasFretes','GestaoFretes','ColetasExcluidas','FretesFaturamento','RecebimentoLote','FilialOcorrencia','RedeCredenciadaCustos')][string]$Group = 'References',
+    [ValidateSet('References','Sinistros','Inventario','Localizacao','Faturas','ContasAPagar','Clientes','Usuarios','Raster','Coletores','Saude','Manifestos','ContratoManifestos','CamposColetasFretes','CamposFaturasFretes','GestaoFretes','ColetasExcluidas','FretesFaturamento','RecebimentoLote','FilialOcorrencia','CamposSinistros','RedeCredenciadaCustos')][string]$Group = 'References',
     [string[]]$CaptureReceiptPath,
     [string]$CaptureDirectory,
     [switch]$SeedLegacyUserDirectory,
@@ -195,6 +195,11 @@ IF @lock < 0 THROW 52081,'Publicacao de fretes em andamento.',1;
         $path = 'database/production/receiving/014_filial_registro_ocorrencia.sql'
         $check = "SELECT COUNT(*) FROM ctl.production_export_field WHERE entity_name='OCORRENCIAS' AND field_name='ice_uer_crn_psn_nickname'"
         $added += Install-ReceivingPackage $path '0818-filial-registro-ocorrencia' $check 1
+    }
+    if ($Group -eq 'CamposSinistros') {
+        $path = 'database/production/receiving/016_sinistros_comunicacao_seguradora.sql'
+        $check = "SELECT IIF(CHARINDEX(N'insurer_communication_contact_name',OBJECT_DEFINITION(OBJECT_ID('stg.usp_production_ingestion_store')))>0,1,0)"
+        $added += Install-ReceivingPackage $path '0822-sinistros-comunicacao-seguradora' $check 1
     }
     if ($Group -eq 'RecebimentoLote') {
         $path = 'database/production/receiving/013_recebimento_lote_json_uma_vez.sql'
@@ -439,6 +444,7 @@ EXEC ctl.usp_store_dashboard_refresh_audit @source_cycle=@cycle,@started_at=@sta
         'CamposFaturasFretes' { 'dashboard-report-fields.sql' }
         'RecebimentoLote' { 'recebimento-lote-json.sql' }
         'FilialOcorrencia' { 'filial-registro-ocorrencia.sql' }
+        'CamposSinistros' { 'sinistros-comunicacao-seguradora.sql' }
         'RedeCredenciadaCustos' { 'dashboard-rede-credenciada-custos.sql' }
         'GestaoFretes' { 'dashboard-gestao-fretes.sql' }
         'ColetasExcluidas' { 'dashboard-coletas.sql' }

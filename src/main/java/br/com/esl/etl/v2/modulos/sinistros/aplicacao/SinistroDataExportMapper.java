@@ -1,13 +1,51 @@
 package br.com.esl.etl.v2.modulos.sinistros.aplicacao;
 
 import br.com.esl.etl.v2.modulos.sinistros.domain.SinistroObservation;
+import br.com.esl.etl.v2.plataforma.expansao.ExpansionObservation;
 import br.com.esl.etl.v2.plataforma.expansao.ExpansionValue;
 import br.com.esl.etl.v2.plataforma.expansao.ExpansionValue.Presence;
 import br.com.esl.etl.v2.plataforma.expansao.ExpansionValue.Wire;
 import br.com.esl.etl.v2.plataforma.fonte.dataexport.ExpansionFieldParser;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonUnwrapped;
 import com.fasterxml.jackson.databind.JsonNode;
+import java.time.LocalDate;
 
 public final class SinistroDataExportMapper {
+    public ExpansionObservation mapSnapshot(final JsonNode envelope) {
+        final var common = map(1, envelope);
+        final var row = envelope.required("data");
+        if (!row.has("insurer_communication_date")) {
+            return common;
+        }
+        return new InsurerCommunication(
+                common,
+                ExpansionFieldParser.text(row, "insurer_communication_contact_name"),
+                ExpansionFieldParser.date(row, "insurer_communication_date"),
+                ExpansionFieldParser.text(row, "icm_ire_cpy_nickname"));
+    }
+
+    public record InsurerCommunication(
+            @JsonUnwrapped @JsonIgnoreProperties("customerCommunicationTime")
+                    SinistroObservation common,
+            ExpansionValue<String> insurerCommunicationContactName,
+            ExpansionValue<LocalDate> insurerCommunicationDate,
+            ExpansionValue<String> icmIreCpyNickname)
+            implements ExpansionObservation {
+        @Override
+        public String vertical() {
+            return common.vertical();
+        }
+
+        @Override
+        public boolean valid() {
+            return common.valid()
+                    && insurerCommunicationContactName.valid()
+                    && insurerCommunicationDate.valid()
+                    && icmIreCpyNickname.valid();
+        }
+    }
+
     public SinistroObservation map(final int occurrence, final JsonNode envelope) {
         if (occurrence < 1 || occurrence > 100) {
             throw new IllegalArgumentException("EXP_OCCURRENCE_BOUND");

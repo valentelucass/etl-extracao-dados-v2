@@ -307,4 +307,40 @@ class ReportUpdateContractTest {
         }
         return map;
     }
+
+    @Test
+    void insuranceClaimsRequiresTheCompleteMatchingFieldAndFilterRevision() throws Exception {
+        final var template = ReportSnapshotTemplate.SINISTROS;
+        final var catalog = new ReportMetadataCatalog();
+        final var original = (ObjectNode) infos().get(template);
+        assertEquals(44, catalog.validate(template, original).size());
+        final var revised = original.deepCopy();
+        final var fields = (ObjectNode) revised.required("fields");
+        fields.remove("customer_communication_time");
+        fields.putObject("insurer_communication_contact_name");
+        fields.putObject("insurer_communication_date");
+        fields.putObject("icm_ire_cpy_nickname");
+        assertThrows(IllegalArgumentException.class, () -> catalog.validate(template, revised));
+        final var sequence = revised.withArray("filters").addObject();
+        sequence.put("label", "Nº do Sinistro")
+                .put("position", 7)
+                .put("field", "sequence_code")
+                .put("table", "insurance_claims")
+                .put("type", "numeric")
+                .putNull("select")
+                .putNull("maxlength")
+                .putNull("collection");
+        assertEquals(46, catalog.validate(template, revised).size());
+        assertTrue(catalog.acceptsFieldCount(template, 46));
+        assertFalse(catalog.acceptsFieldCount(template, 45));
+        original.set("filters", revised.required("filters"));
+        assertThrows(IllegalArgumentException.class, () -> catalog.validate(template, original));
+        fields.remove("insurer_communication_date");
+        fields.putObject("customer_communication_time");
+        assertThrows(IllegalArgumentException.class, () -> catalog.validate(template, revised));
+        fields.remove("customer_communication_time");
+        fields.putObject("insurer_communication_date");
+        sequence.put("type", "text");
+        assertThrows(IllegalArgumentException.class, () -> catalog.validate(template, revised));
+    }
 }

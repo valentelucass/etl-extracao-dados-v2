@@ -3,7 +3,7 @@
 function Get-RefreshScheduledManifest0766([string]$SettingsPath,[string]$Fallback){
  $directory=Join-Path ([Environment]::GetFolderPath('MyDocuments')) 'Armazenamento-Projetos\etl-extracao-dados-v2\atualizacao0766'
  if([IO.Path]::GetFullPath($SettingsPath) -ine (Join-Path $directory 'operational-settings.json')){return $Fallback}
- return (Join-Path $directory 'runtime-manifest-dashboard-fields-0821.json')
+ return (Join-Path $directory 'runtime-manifest-dashboard-fields-0822.json')
 }
 function Get-RefreshNext0766([DateTimeOffset]$CompletedAt,[switch]$HistoryOnly){
  if($HistoryOnly){return $CompletedAt}

@@ -7,12 +7,52 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import br.com.esl.etl.v2.bootstrap.SnapshotMapperCatalog;
 import br.com.esl.etl.v2.modulos.contasapagar.domain.ContaPagarObservation;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 import org.junit.jupiter.api.Test;
 
 class ProductionSnapshotMapperRegressionTest {
+    @Test
+    void insuranceClaimsRetainsOldCommunicationTimesAndReadsTheThreeNewFields() {
+        final var json = CurlSnapshotWire.JSON.copy().registerModule(new JavaTimeModule());
+        final var row =
+                CurlSnapshotWire.JSON
+                        .createObjectNode()
+                        .put("customer_communication_time", "12:14:16");
+        final var template = ReportSnapshotTemplate.SINISTROS;
+        final var input = new DataExportRecordInput(row, Optional.empty());
+        final var old = SnapshotMapperCatalog.map(template, input);
+        final var oldJson = json.valueToTree(old);
+        assertTrue(old.valid());
+        assertEquals(44, oldJson.size());
+        assertEquals(
+                "12:14:16", oldJson.required("customerCommunicationTime").required("raw").asText());
+        row.remove("customer_communication_time");
+        row.put("insurer_communication_contact_name", "Contato de teste")
+                .put("insurer_communication_date", "2026-11-04")
+                .put("icm_ire_cpy_nickname", "Seguradora de teste");
+        final var revised = SnapshotMapperCatalog.map(template, input);
+        final var revisedJson = json.valueToTree(revised);
+        assertTrue(revised.valid());
+        assertEquals(46, revisedJson.size());
+        assertFalse(revisedJson.has("customerCommunicationTime"));
+        assertEquals(
+                "Contato de teste",
+                revisedJson.required("insurerCommunicationContactName").required("raw").asText());
+        assertEquals(
+                "2026-11-04",
+                revisedJson.required("insurerCommunicationDate").required("raw").asText());
+        assertEquals(
+                "Seguradora de teste",
+                revisedJson.required("icmIreCpyNickname").required("raw").asText());
+        row.putNull("insurer_communication_date");
+        assertTrue(SnapshotMapperCatalog.map(template, input).valid());
+        row.put("insurer_communication_date", "04/11/2026");
+        assertFalse(SnapshotMapperCatalog.map(template, input).valid());
+    }
+
     @Test
     void costCenterAllocationsRetainAllDigitsFromTextAndNumericWire() throws Exception {
         for (final String literal :

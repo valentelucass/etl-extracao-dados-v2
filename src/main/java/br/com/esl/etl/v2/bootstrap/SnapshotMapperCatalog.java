@@ -71,7 +71,7 @@ public final class SnapshotMapperCatalog {
             case CONTAS_A_PAGAR -> new ContaPagarDataExportMapper().mapSnapshot(envelope);
             case FATURAS_POR_CLIENTE -> new FaturaClienteDataExportMapper().map(1, envelope);
             case INVENTARIO -> new InventarioDataExportMapper().map(1, envelope);
-            case SINISTROS -> new SinistroDataExportMapper().map(1, envelope);
+            case SINISTROS -> new SinistroDataExportMapper().mapSnapshot(envelope);
             default -> throw new IllegalArgumentException("SNAPSHOT_USE_ENTITY_EXTRACTOR");
         };
     }

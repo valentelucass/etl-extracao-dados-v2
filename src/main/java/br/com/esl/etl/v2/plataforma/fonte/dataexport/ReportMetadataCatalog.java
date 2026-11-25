@@ -9,10 +9,12 @@ import java.util.Set;
 public final class ReportMetadataCatalog {
     private final JsonNode entities;
     private final JsonNode dashboardFields;
+    private final JsonNode insuranceClaims;
 
     public ReportMetadataCatalog() throws IOException {
         entities = load("receiving-catalog-0818.json").required("entities");
         dashboardFields = load("dashboard-report-fields-0783.json").required("additionalFields");
+        insuranceClaims = load("sinistros-6392-metadata-20261125.json");
     }
 
     private static JsonNode load(final String resource) throws IOException {
@@ -27,9 +29,12 @@ public final class ReportMetadataCatalog {
     }
 
     public Set<String> validate(final ReportSnapshotTemplate template, final JsonNode info) {
-        final var expected = entity(template);
         final var actualFields = new HashSet<String>();
         info.path("fields").fieldNames().forEachRemaining(actualFields::add);
+        final var expected =
+                isInsuranceRevision(template, actualFields.size())
+                        ? insuranceClaims
+                        : entity(template);
         final var expectedFields = new HashSet<String>();
         expected.required("fields").forEach(value -> expectedFields.add(value.asText()));
         final var expandedFields = new HashSet<>(expectedFields);
@@ -87,8 +92,14 @@ public final class ReportMetadataCatalog {
 
     public boolean acceptsFieldCount(final ReportSnapshotTemplate template, final int count) {
         final int baseline = fieldCount(template);
-        return count == baseline
+        return isInsuranceRevision(template, count)
+                || count == baseline
                 || count == baseline + dashboardFields.path(template.name()).size();
+    }
+
+    private boolean isInsuranceRevision(final ReportSnapshotTemplate template, final int count) {
+        return template == ReportSnapshotTemplate.SINISTROS
+                && count == insuranceClaims.required("fields").size();
     }
 
     private JsonNode entity(final ReportSnapshotTemplate template) {

@@ -1,0 +1,131 @@
+{
+  "entity": "SINISTROS",
+  "reportId": 6392,
+  "fields": [
+    "bo_number",
+    "brokers_case_number",
+    "customer_communication_contact_name",
+    "customer_communication_date",
+    "customer_credit_entries_subtotal",
+    "customer_debits_subtotal",
+    "expected_solution_date",
+    "finished_at_date",
+    "finished_at_time",
+    "finished_commentary",
+    "icm_crn_psn_nickname",
+    "icm_dvr_iil_name",
+    "icm_fer_name",
+    "icm_fis_fit_corporation_sequence_number",
+    "icm_fis_fit_pyr_nickname",
+    "icm_fis_ioe_number",
+    "icm_ire_cpy_nickname",
+    "icm_ttt_dealing_type",
+    "icm_ttt_ore_code",
+    "icm_ttt_ore_description",
+    "icm_ttt_solution_type",
+    "icm_ttt_treatment_at",
+    "icm_vie_license_plate",
+    "informed_by",
+    "insurance_claim_commentary",
+    "insurance_claim_location",
+    "insurance_claim_total",
+    "insurer_communication_contact_name",
+    "insurer_communication_date",
+    "insurer_credits_subtotal",
+    "internal_description",
+    "invoices_count",
+    "invoices_value",
+    "invoices_volumes",
+    "invoices_weight",
+    "list_of_claimed_products",
+    "occurrence_at_date",
+    "occurrence_at_time",
+    "opening_at_date",
+    "policy_number",
+    "rcfdc",
+    "rctac",
+    "rctrc",
+    "responsible_credits_subtotal",
+    "responsible_debit_entries_subtotal",
+    "sequence_code"
+  ],
+  "filters": [
+    {
+      "label": "Data abertura",
+      "position": 1,
+      "field": "opening_at_date",
+      "table": "insurance_claims",
+      "type": "date",
+      "select": null,
+      "maxlength": null,
+      "collection": null
+    },
+    {
+      "label": "Filial",
+      "position": 2,
+      "field": "corporation_id",
+      "table": "insurance_claims",
+      "type": "select",
+      "select": "corporation",
+      "maxlength": null,
+      "collection": null
+    },
+    {
+      "label": "Cliente",
+      "position": 3,
+      "field": "by_freight_payer_id",
+      "table": "scopes",
+      "type": "select",
+      "select": "person",
+      "maxlength": null,
+      "collection": null
+    },
+    {
+      "label": "Nota Fiscal",
+      "position": 4,
+      "field": "by_invoice_number",
+      "table": "scopes",
+      "type": "numeric",
+      "select": null,
+      "maxlength": null,
+      "collection": null
+    },
+    {
+      "label": "Doc/Minuta",
+      "position": 5,
+      "field": "by_freight_document_number",
+      "table": "scopes",
+      "type": "numeric",
+      "select": null,
+      "maxlength": null,
+      "collection": null
+    },
+    {
+      "label": "Status",
+      "position": 6,
+      "field": "status",
+      "table": "insurance_claims",
+      "type": "select",
+      "select": "base",
+      "maxlength": null,
+      "collection": {
+        "pending": "Pendente",
+        "finished": "Finalizado"
+      }
+    },
+    {
+      "label": "Nº do Sinistro",
+      "position": 7,
+      "field": "sequence_code",
+      "table": "insurance_claims",
+      "type": "numeric",
+      "select": null,
+      "maxlength": null,
+      "collection": null
+    }
+  ],
+  "requiredDateFilters": [
+    "insurance_claims.opening_at_date"
+  ],
+  "defaultOrder": "opening_at_date"
+}
