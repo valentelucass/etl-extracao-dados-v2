@@ -130,10 +130,10 @@ final class FreightDependencyIndex {
     }
 
     TreeSet<LocalDate> serviceDays(
-            final ReportSnapshotTemplate template, final LocalDate floor, final LocalDate through)
+            final ReportSnapshotTemplate template, final Iterable<LocalDate> businessDates)
             throws Exception {
         final var dates = new TreeSet<LocalDate>();
-        for (var day = floor; !day.isAfter(through); day = day.plusDays(1)) {
+        for (final var day : businessDates) {
             for (final var reference : read(template, day).required("references")) {
                 if (reference.hasNonNull("serviceDay")) {
                     dates.add(LocalDate.parse(reference.required("serviceDay").asText()));

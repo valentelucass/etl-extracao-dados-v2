@@ -17,6 +17,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
+import java.sql.SQLException;
 import java.time.Clock;
 import java.time.Duration;
 import java.time.Instant;
@@ -26,8 +27,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.NavigableSet;
 import java.util.TreeSet;
 import java.util.UUID;
+import java.util.function.Consumer;
 import java.util.function.IntSupplier;
 
 /** Bounded initial import, update discovery and atomic replacement of complete business dates. */
@@ -46,6 +49,14 @@ public final class ProductionRefreshCycle {
 
     public interface Receiving extends AutoCloseable {
         LocalDate earliestCovered(String scope, LocalDate today, String entity) throws Exception;
+
+        void plannedDates(
+                String scope,
+                LocalDate start,
+                LocalDate end,
+                String entity,
+                Consumer<LocalDate> accept)
+                throws Exception;
 
         void start(UUID run, String scope, LocalDate date, String requestSha, String entity)
                 throws Exception;
@@ -131,6 +142,17 @@ public final class ProductionRefreshCycle {
                     final String scope, final LocalDate today, final String entity)
                     throws Exception {
                 return store.earliestCovered(scope, today, entity);
+            }
+
+            @Override
+            public void plannedDates(
+                    final String scope,
+                    final LocalDate start,
+                    final LocalDate end,
+                    final String entity,
+                    final Consumer<LocalDate> accept)
+                    throws Exception {
+                store.plannedDates(scope, start, end, entity, accept);
             }
 
             @Override
@@ -475,7 +497,7 @@ public final class ProductionRefreshCycle {
                     require(
                             !LocalDate.parse(state.required("floor").asText()).isAfter(today),
                             "REFRESH_FLOOR_IN_FUTURE");
-                    process(context, template, state);
+                    process(context, template, state, result);
                     if (!historyOnly
                             && template == ReportSnapshotTemplate.OCORRENCIAS
                             && !budgetExhausted(session, deadline)
@@ -623,22 +645,40 @@ public final class ProductionRefreshCycle {
     }
 
     private void process(
-            final Context context, final ReportSnapshotTemplate template, final ObjectNode state)
+            final Context context,
+            final ReportSnapshotTemplate template,
+            final ObjectNode state,
+            final ObjectNode result)
             throws Exception {
         final var floor = LocalDate.parse(state.required("floor").asText());
+        final var days = new TreeSet<LocalDate>();
+        if (template == ReportSnapshotTemplate.OCORRENCIAS) {
+            // The SQL plan includes both covered and missing dates, and omits retired dates.
+            context.store()
+                    .plannedDates(
+                            context.scope(), floor, context.today(), template.name(), days::add);
+            result.put(
+                    "retentionExcludedDays",
+                    ChronoUnit.DAYS.between(floor, context.today()) + 1 - days.size());
+            if (!days.isEmpty()) {
+                result.put("firstPlannedDay", days.first().toString());
+            }
+        } else {
+            floor.datesUntil(context.today().plusDays(1)).forEach(days::add);
+        }
         if (!state.path("initialComplete").asBoolean()) {
-            var next = LocalDate.parse(state.required("initialNext").asText());
+            var next = days.floor(LocalDate.parse(state.required("initialNext").asText()));
             for (int count = 0;
-                    count < context.policy().initialBatchDays() && !next.isBefore(floor);
+                    count < context.policy().initialBatchDays() && next != null;
                     count++) {
                 fullDay(context, template, next, "INITIAL");
                 state.remove("initialSourceFailures");
                 state.remove("rejectedHistoryRuntime");
-                next = next.minusDays(1);
-                state.put("initialNext", next.toString());
+                next = days.lower(next);
+                state.put("initialNext", (next == null ? floor.minusDays(1) : next).toString());
                 context.checkpoint().save();
             }
-            if (next.isBefore(floor)) {
+            if (next == null) {
                 state.put("initialComplete", true)
                         .put("watermark", state.required("bootstrapCutoff").asText());
                 context.checkpoint().save();
@@ -651,8 +691,11 @@ public final class ProductionRefreshCycle {
         var lastDay = LocalDate.parse(state.required("lastCalendarDay").asText());
         int newDates = 0;
         while (lastDay.isBefore(context.today()) && newDates++ < 8) {
-            lastDay = lastDay.plusDays(1);
-            fullDay(context, template, lastDay, "NEW_CALENDAR_DAY");
+            final var planned = days.higher(lastDay);
+            if (planned != null) {
+                fullDay(context, template, planned, "NEW_CALENDAR_DAY");
+            }
+            lastDay = planned == null ? context.today() : planned;
             state.put("lastCalendarDay", lastDay.toString());
             context.checkpoint().save();
         }
@@ -675,7 +718,7 @@ public final class ProductionRefreshCycle {
         if (FreightDependencyIndex.supports(template)) {
             int rebuilt = 0;
             state.put("relatedIndexPending", true);
-            for (var day = floor; !day.isAfter(context.today()); day = day.plusDays(1)) {
+            for (final var day : days) {
                 if (!context.dependencyIndexes().exists(template, day)) {
                     if (rebuilt++ >= context.policy().changedDaysPerBatch()) {
                         context.checkpoint().save();
@@ -696,6 +739,7 @@ public final class ProductionRefreshCycle {
             if (!related.refresh(
                     template,
                     state,
+                    days,
                     context.today(),
                     context.cutoff(),
                     context.policy().changedDaysPerBatch(),
@@ -710,6 +754,7 @@ public final class ProductionRefreshCycle {
                 context,
                 template,
                 state,
+                days,
                 update == null ? context.policy().reconciliationBatchDays() : 1);
         if (update == null) {
             return;
@@ -879,21 +924,23 @@ public final class ProductionRefreshCycle {
             final Context context,
             final ReportSnapshotTemplate template,
             final ObjectNode state,
+            final NavigableSet<LocalDate> days,
             final int limit)
             throws Exception {
-        final var floor = LocalDate.parse(state.required("floor").asText());
-        var next = LocalDate.parse(state.required("sweepNext").asText());
+        if (days.isEmpty()) {
+            return;
+        }
+        var next = days.ceiling(LocalDate.parse(state.required("sweepNext").asText()));
+        if (next == null) {
+            next = days.first();
+        }
         for (int count = 0; count < limit; count++) {
-            if (next.isAfter(context.today())) {
-                next = floor;
-            }
             fullDay(context, template, next, "RECONCILIATION");
-            next = next.plusDays(1);
-            if (next.isAfter(context.today())) {
+            next = days.higher(next);
+            if (next == null) {
                 state.put("sweepsCompleted", state.path("sweepsCompleted").asInt() + 1)
                         .put("lastSweepCompletedAt", clock.instant().toString());
-                next = floor;
-                state.put("sweepNext", next.toString());
+                state.put("sweepNext", days.first().toString());
                 context.checkpoint().save();
                 break;
             }
@@ -1019,15 +1066,37 @@ public final class ProductionRefreshCycle {
         final var path = context.root().resolve(template.name() + "-" + day + "-" + run + ".jsonl");
         final var rows = new ArrayList<String>();
         final var characters = new long[] {0};
-        context.store()
-                .start(
-                        run,
-                        context.scope(),
-                        day,
-                        hash(
-                                template.query(context.origin(), dates, 1, limits(template).per())
-                                        .toString()),
-                        template.name());
+        try {
+            context.store()
+                    .start(
+                            run,
+                            context.scope(),
+                            day,
+                            hash(
+                                    template.query(
+                                                    context.origin(),
+                                                    dates,
+                                                    1,
+                                                    limits(template).per())
+                                            .toString()),
+                            template.name());
+        } catch (final SQLException failure) {
+            if (template != ReportSnapshotTemplate.OCORRENCIAS
+                    || failure.getErrorCode() != 52304
+                    || phase.equals("FILIAL_OCORRENCIA")) {
+                throw failure;
+            }
+            // SQL commits a review request with this UUID before returning 52304.
+            operation.remove("runId");
+            operation
+                    .put("retentionReviewId", run.toString())
+                    .put("reason", "RETENTION_DATE_REQUIRES_REVIEW");
+            if (!updated(phase)) {
+                // The policy changed after planning. Replan before using any more indexes.
+                throw new DeferredWork();
+            }
+            return;
+        }
         try {
             ReportSnapshotExtractor.Result result;
             try (var output =

@@ -448,6 +448,7 @@ class RelatedFreightRefreshTest {
             return refresh.refresh(
                     template,
                     state,
+                    new java.util.TreeSet<>(List.of(first, second)),
                     second,
                     cutoff,
                     limit,

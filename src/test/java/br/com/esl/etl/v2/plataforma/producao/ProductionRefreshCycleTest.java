@@ -51,6 +51,129 @@ class ProductionRefreshCycleTest {
     }
 
     @Test
+    void routineUsesTheSqlCalendarEvenForRetiredDaysWithNoIndex() throws Exception {
+        final var fixture = new Fixture(directory);
+        fixture.seedReady();
+        fixture.store.excluded.addAll(
+                List.of(fixture.floor, fixture.floor.plusDays(1), fixture.floor.plusDays(3)));
+        try (var paths = Files.walk(directory.resolve("dependency-index"))) {
+            for (final var p :
+                    paths.filter(
+                                    path ->
+                                            path.getParent()
+                                                            .getFileName()
+                                                            .toString()
+                                                            .equals("OCORRENCIAS")
+                                                    && fixture.store.excluded.stream()
+                                                            .anyMatch(
+                                                                    day ->
+                                                                            path.getFileName()
+                                                                                    .toString()
+                                                                                    .equals(
+                                                                                            day
+                                                                                                    + ".json")))
+                            .toList()) {
+                Files.delete(p);
+            }
+        }
+        assertTrue(fixture.run());
+        final var entity = fixture.entity(ReportSnapshotTemplate.OCORRENCIAS);
+        assertEquals(fixture.floor.toString(), entity.required("floor").asText());
+        assertEquals(fixture.floor.plusDays(4).toString(), entity.required("sweepNext").asText());
+        assertFalse(entity.required("relatedIndexPending").asBoolean());
+        assertTrue(fixture.store.commits.contains("OCORRENCIAS:" + fixture.floor.plusDays(2)));
+        assertTrue(fixture.store.reviews.isEmpty());
+        assertEquals(0, fixture.occurrenceFloorCaptures);
+        assertEquals(13, fixture.lastReport.required("entities").size());
+        assertEquals(3, fixture.lastReport.findValue("retentionExcludedDays").asInt());
+        assertEquals(
+                fixture.floor.plusDays(2).toString(),
+                fixture.lastReport.findValue("firstPlannedDay").asText());
+    }
+
+    @Test
+    void lateChangeToARetiredDateReceivesSqlReviewBeforeItsWindowCanAdvance() throws Exception {
+        final var fixture = new Fixture(directory);
+        fixture.seedReady();
+        final var day = fixture.floor.plusDays(2);
+        fixture.store.excluded.add(day);
+        fixture.changedDates.add(day);
+        assertTrue(fixture.run());
+        final var reviews =
+                fixture.lastReport.required("operations").findParents("retentionReviewId");
+        assertFalse(reviews.isEmpty());
+        for (final var op : reviews) {
+            assertTrue(
+                    fixture.store.reviews.contains(
+                            UUID.fromString(op.required("retentionReviewId").asText())));
+            assertEquals(day.toString(), op.required("day").asText());
+            assertEquals("RETENTION_DATE_REQUIRES_REVIEW", op.required("reason").asText());
+            assertFalse(op.has("runId"));
+            assertFalse(op.required("stored").asBoolean());
+        }
+        assertFalse(fixture.store.latest.containsKey("OCORRENCIAS:" + day));
+        assertFalse(fixture.entity(ReportSnapshotTemplate.OCORRENCIAS).has("pending"));
+    }
+
+    @Test
+    void retirementBetweenPlanningAndStartDefersTheEntityAndReplansNextTime() throws Exception {
+        final var fixture = new Fixture(directory);
+        fixture.seedReady();
+        fixture.store.refuseAtStart = fixture.floor;
+        fixture.store.refusalCode = 52304;
+        assertTrue(fixture.run());
+        assertEquals(13, fixture.lastReport.required("entities").size());
+        assertEquals(1, fixture.store.reviews.size());
+        assertEquals(
+                fixture.floor.toString(),
+                fixture.entity(ReportSnapshotTemplate.OCORRENCIAS).required("sweepNext").asText());
+        fixture.now = fixture.now.plus(Duration.ofHours(2));
+        assertTrue(fixture.run());
+        assertEquals(1, fixture.store.reviews.size());
+        assertTrue(fixture.store.latest.containsKey("OCORRENCIAS:" + fixture.floor.plusDays(1)));
+        assertFalse(fixture.store.latest.containsKey("OCORRENCIAS:" + fixture.floor));
+    }
+
+    @Test
+    void anUnrelatedSqlStartFailureStillStopsTheRoutine() throws Exception {
+        final var fixture = new Fixture(directory);
+        fixture.seedReady();
+        fixture.store.refuseAtStart = fixture.floor;
+        fixture.store.refusalCode = 52302;
+        assertFalse(fixture.run());
+        assertTrue(fixture.store.reviews.isEmpty());
+        assertFalse(fixture.lastReport.has("retentionReviewId"));
+        assertEquals(
+                fixture.floor.toString(),
+                fixture.entity(ReportSnapshotTemplate.OCORRENCIAS).required("sweepNext").asText());
+    }
+
+    @Test
+    void anExplicitReplayOfARetiredDateStillReportsTheSqlRefusal() throws Exception {
+        final var fixture = new Fixture(directory);
+        fixture.store.earliest = fixture.floor;
+        final var day = fixture.floor.plusDays(4);
+        fixture.store.excluded.add(day);
+        fixture.config.put("reprocessOccurrenceDate", day.toString());
+        assertFalse(fixture.run());
+        assertEquals(1, fixture.store.reviews.size());
+        assertEquals(
+                "RETENTION_DATE_REQUIRES_REVIEW", fixture.lastReport.required("reason").asText());
+        assertFalse(Files.exists(directory.resolve("checkpoint.json")));
+    }
+
+    @Test
+    void initialImportUsesItsBatchForEligibleDatesAndKeepsOtherReportsIntact() throws Exception {
+        final var fixture = new Fixture(directory);
+        fixture.config.put("historyOnly", true).put("historyDays", 90).put("initialBatchDays", 1);
+        fixture.store.excluded.add(fixture.today());
+        assertTrue(fixture.run());
+        assertTrue(fixture.store.latest.containsKey("OCORRENCIAS:" + fixture.today().minusDays(1)));
+        assertTrue(fixture.store.latest.containsKey("FRETES:" + fixture.today()));
+        assertTrue(fixture.store.reviews.isEmpty());
+    }
+
+    @Test
     void recapturesTheWholeFreightDayForLateReceiptsWithoutAdvancingTheRoutine() throws Exception {
         final var fixture = new Fixture(directory);
         final var day = fixture.today().minusDays(12);
@@ -708,6 +831,10 @@ class ProductionRefreshCycleTest {
         final Map<String, List<JsonNode>> latest = new HashMap<>();
         final Map<UUID, String> runs = new HashMap<>();
         final List<String> commits = new ArrayList<>();
+        final TreeSet<LocalDate> excluded = new TreeSet<>();
+        final List<UUID> reviews = new ArrayList<>();
+        LocalDate refuseAtStart;
+        int refusalCode;
         LocalDate rejectDay;
         LocalDate earliest;
         boolean disconnectAfterCommit;
@@ -720,12 +847,37 @@ class ProductionRefreshCycleTest {
         }
 
         @Override
+        public void plannedDates(
+                final String scope,
+                final LocalDate start,
+                final LocalDate end,
+                final String entity,
+                final java.util.function.Consumer<LocalDate> accept) {
+            assertEquals("OCORRENCIAS", entity);
+            start.datesUntil(end.plusDays(1))
+                    .filter(day -> !excluded.contains(day))
+                    .forEach(accept);
+        }
+
+        @Override
         public void start(
                 final UUID run,
                 final String scope,
                 final LocalDate date,
                 final String requestSha,
-                final String entity) {
+                final String entity)
+                throws java.sql.SQLException {
+            if (entity.equals("OCORRENCIAS")
+                    && (date.equals(refuseAtStart) || excluded.contains(date))) {
+                final var code = excluded.contains(date) ? 52304 : refusalCode;
+                if (code == 52304) {
+                    excluded.add(date);
+                    reviews.add(run);
+                    throw new java.sql.SQLException(
+                            "RETENTION_DATE_REQUIRES_REVIEW", "S0001", code);
+                }
+                throw new java.sql.SQLException("UNRELATED_SQL_FAILURE", "S0001", code);
+            }
             runs.put(run, entity + ":" + date);
         }
 

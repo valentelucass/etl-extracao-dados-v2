@@ -13,6 +13,8 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Properties;
 import java.util.UUID;
+import java.util.function.BiConsumer;
+import java.util.function.Consumer;
 
 /** Parameterized, least-privilege receiving entrypoints and byte-exact independent SQL readback. */
 final class AllEntitiesIngestionStore implements AutoCloseable {
@@ -276,6 +278,42 @@ final class AllEntitiesIngestionStore implements AutoCloseable {
             final String entity,
             final java.util.function.Consumer<LocalDate> consumer)
             throws Exception {
+        plan(
+                scope,
+                start,
+                end,
+                entity,
+                (day, stored) -> {
+                    if (!stored) {
+                        consumer.accept(day);
+                    }
+                });
+    }
+
+    void plannedDates(
+            final String scope,
+            final LocalDate start,
+            final LocalDate end,
+            final String entity,
+            final Consumer<LocalDate> accept)
+            throws Exception {
+        var first = start;
+        while (!first.isAfter(end)) {
+            // SQL accepts at most 3660 days between the bounds of a single call.
+            final var bound = first.plusDays(3660);
+            final var last = bound.isAfter(end) ? end : bound;
+            plan(scope, first, last, entity, (day, stored) -> accept.accept(day));
+            first = last.plusDays(1);
+        }
+    }
+
+    private void plan(
+            final String scope,
+            final LocalDate start,
+            final LocalDate end,
+            final String entity,
+            final BiConsumer<LocalDate, Boolean> consumer)
+            throws Exception {
         br.com.esl.etl.v2.plataforma.fonte.dataexport.ReportSnapshotTemplate.valueOf(entity);
         if (end.isBefore(start)) {
             return;
@@ -289,9 +327,8 @@ final class AllEntitiesIngestionStore implements AutoCloseable {
             command.setString(4, entity);
             try (var rows = command.executeQuery()) {
                 while (rows.next()) {
-                    if (!rows.getBoolean("stored")) {
-                        consumer.accept(rows.getDate("business_date").toLocalDate());
-                    }
+                    consumer.accept(
+                            rows.getDate("business_date").toLocalDate(), rows.getBoolean("stored"));
                 }
             }
         }

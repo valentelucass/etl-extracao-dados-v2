@@ -19,6 +19,7 @@ import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
+import java.util.NavigableSet;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.UUID;
@@ -60,6 +61,7 @@ final class RelatedFreightRefresh {
     boolean refresh(
             final ReportSnapshotTemplate template,
             final ObjectNode state,
+            final NavigableSet<LocalDate> plannedDates,
             final LocalDate through,
             final Instant cutoff,
             final int replacementLimit,
@@ -81,7 +83,8 @@ final class RelatedFreightRefresh {
             if (window == null) {
                 return true;
             }
-            final var dates = indexes.serviceDays(template, floor, through);
+            final var dates =
+                    indexes.serviceDays(template, plannedDates.subSet(floor, true, through, true));
             final var cutoffDay = cutoff.atZone(ReportUpdateContract.SOURCE_ZONE).toLocalDate();
             final var sourceEnd = cutoffDay.isAfter(through) ? cutoffDay : through;
             dates.removeIf(
@@ -123,6 +126,7 @@ final class RelatedFreightRefresh {
         final var pending = (ObjectNode) state.required("relatedPending");
         final var end = LocalDate.parse(pending.required("scopeEnd").asText());
         final var workFloor = LocalDate.parse(pending.required("floor").asText());
+        final var workDays = plannedDates.subSet(workFloor, true, end, true);
         final var scope =
                 new BusinessDateRange(
                         LocalDate.parse(pending.required("serviceFloor").asText()),
@@ -132,7 +136,7 @@ final class RelatedFreightRefresh {
                         Instant.parse(pending.required("from").asText()),
                         Instant.parse(pending.required("through").asText()));
         if (!pending.path("freightsDone").asBoolean()) {
-            addKeyDates(template, workFloor, end, Set.of(), pending);
+            addKeyDates(template, workDays, Set.of(), pending);
             if (!pending.has("freightRanges")) {
                 final var previous = pending.required("locationRanges");
                 final int confirmed = pending.path("freightNext").asInt();
@@ -146,7 +150,7 @@ final class RelatedFreightRefresh {
                                         previous.get(confirmed - 1).required("end").asText());
                 final var rebuilt = pending.putArray("freightRanges");
                 final var sourceEnd = LocalDate.parse(pending.required("sourceEnd").asText());
-                for (final var day : indexes.serviceDays(template, workFloor, end)) {
+                for (final var day : indexes.serviceDays(template, workDays)) {
                     if ((lastConfirmed == null || day.isAfter(lastConfirmed))
                             && !day.isAfter(sourceEnd)
                             && !day.isBefore(sourceEnd.minusDays(3660))) {
@@ -166,7 +170,7 @@ final class RelatedFreightRefresh {
                                 LocalDate.parse(range.required("start").asText()),
                                 LocalDate.parse(range.required("end").asText()));
                 final var keys = source(ReportSnapshotTemplate.FRETES, dates, updates).keys();
-                addKeyDates(template, workFloor, end, keys, pending);
+                addKeyDates(template, workDays, keys, pending);
                 pending.put("freightNext", next + 1);
                 save.run();
             }
@@ -178,7 +182,7 @@ final class RelatedFreightRefresh {
                     pending.path("emptyReferences").asBoolean()
                             ? Set.<String>of()
                             : source(ReportSnapshotTemplate.OCORRENCIAS, scope, updates).keys();
-            addKeyDates(template, workFloor, end, keys, pending);
+            addKeyDates(template, workDays, keys, pending);
             pending.put("occurrencesDone", true);
             save.run();
         }
@@ -189,7 +193,7 @@ final class RelatedFreightRefresh {
                 next++) {
             boolean entirePeriodQueued = true;
             final var queued = queued(pending);
-            for (var day = workFloor; !day.isAfter(end); day = day.plusDays(1)) {
+            for (final var day : workDays) {
                 if (!queued.contains(day)) {
                     entirePeriodQueued = false;
                     break;
@@ -216,8 +220,7 @@ final class RelatedFreightRefresh {
             final var locations = source(ReportSnapshotTemplate.LOCALIZACAO_CARGAS, dates, null);
             addLocationDates(
                     template,
-                    workFloor,
-                    end,
+                    workDays,
                     dates,
                     locations.locations(),
                     locations.unassignedLocation(),
@@ -361,13 +364,12 @@ final class RelatedFreightRefresh {
 
     private void addKeyDates(
             final ReportSnapshotTemplate template,
-            final LocalDate floor,
-            final LocalDate through,
+            final Iterable<LocalDate> workDays,
             final Set<String> keys,
             final ObjectNode pending)
             throws Exception {
         final var dates = queued(pending);
-        for (var day = floor; !day.isAfter(through); day = day.plusDays(1)) {
+        for (final var day : workDays) {
             for (final var reference : indexes.read(template, day).required("references")) {
                 if (unsafe(reference, LocalDate.parse(pending.required("sourceEnd").asText()))
                         || (reference.hasNonNull("draft")
@@ -384,15 +386,14 @@ final class RelatedFreightRefresh {
 
     private void addLocationDates(
             final ReportSnapshotTemplate template,
-            final LocalDate floor,
-            final LocalDate through,
+            final Iterable<LocalDate> workDays,
             final BusinessDateRange range,
             final Map<String, Set<String>> locations,
             final boolean unassigned,
             final ObjectNode pending)
             throws Exception {
         final var dates = queued(pending);
-        for (var day = floor; !day.isAfter(through); day = day.plusDays(1)) {
+        for (final var day : workDays) {
             for (final var reference : indexes.read(template, day).required("references")) {
                 if (unsafe(reference, LocalDate.parse(pending.required("sourceEnd").asText()))) {
                     dates.add(day);

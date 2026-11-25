@@ -4,9 +4,9 @@ $ErrorActionPreference='Stop'
 if(!$OperationsDirectory){$OperationsDirectory=Join-Path $PSScriptRoot '../operations'}
 . (Join-Path $OperationsDirectory 'RefreshSupervisor0766.ps1')
 $directory=Join-Path ([Environment]::GetFolderPath('MyDocuments')) 'Armazenamento-Projetos/etl-extracao-dados-v2/atualizacao0766'
-$old=Join-Path $directory 'runtime-manifest-dashboard-fields-0821.json'
+$old=Join-Path $directory 'runtime-manifest-dashboard-fields-0822.json'
 $actual=Get-RefreshScheduledManifest0766 (Join-Path $directory 'operational-settings.json') $old
-if([IO.Path]::GetFullPath($actual) -ine [IO.Path]::GetFullPath((Join-Path $directory 'runtime-manifest-dashboard-fields-0822.json'))){throw 'Agendamento nao selecionou o runtime com os novos campos de Sinistros.'}
+if([IO.Path]::GetFullPath($actual) -ine [IO.Path]::GetFullPath((Join-Path $directory 'runtime-manifest-dashboard-fields-0823.json'))){throw 'Agendamento nao selecionou o runtime com o calendario de retencao de Ocorrencias.'}
 foreach($name in @('historico-90-dias-settings.json','qualification-settings.json')){
     if((Get-RefreshScheduledManifest0766 (Join-Path $directory $name) $old) -cne $old){throw 'A execucao isolada perdeu a versao solicitada.'}
 }
