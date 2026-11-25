@@ -6,6 +6,7 @@ Import-Module (Join-Path $repo '../.runtime/sql-server/SqlServerProjetos.psm1')
 $pacotes = [ordered]@{
     '073-retencao-ocorrencias'='database/production/publication/073_retencao_ocorrencias.sql'
     '073b-retencao-revisao'='database/production/publication/073b_retencao_revisao.sql'
+    '073c-retencao-volume'='database/production/publication/073c_retencao_volume.sql'
 }
 $sha = [Security.Cryptography.SHA256]::Create()
 $cred = Get-ProjetosSqlAdminCredential
@@ -37,10 +38,12 @@ IF @lk<0 THROW 52302,'Publicacao ocupada.',1;
         if ($anterior -and $anterior -ne $hash) { throw 'Pacote difere do instalado.' }
         if ($anterior) { continue }
         $novos++
+        $cmd.Parameters.Clear()
         foreach ($lote in ($sql -split '(?im)^GO\s*$')) {
             if ($lote.Trim()) { $cmd.CommandText = $lote; [void]$cmd.ExecuteNonQuery() }
         }
         $cmd.CommandText = "INSERT ctl.production_installation_step(step_id,source_name,source_sha256) VALUES(@id,@p,@h)"
+        [void]$cmd.Parameters.AddWithValue('@id',$id)
         [void]$cmd.Parameters.AddWithValue('@p',$caminho)
         [void]$cmd.Parameters.AddWithValue('@h',$hash)
         [void]$cmd.ExecuteNonQuery()

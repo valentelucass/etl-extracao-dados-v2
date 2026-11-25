@@ -1,3 +1,9 @@
+## 25/11/2026 — Volume apagado na linha do tempo
+
+O pacote 073c grava, por dia e na mesma transação da retirada, o tamanho em bytes dos valores removidos da origem, publicação Performance, cobertura e marcadores. A prévia do JUJUBA devolve a medição em `removedBytes`. O número em GB usa 1.000.000.000 bytes por unidade. O espaço alocado nos arquivos do SQL é medido separadamente.
+
+Para dias de versões anteriores, `scripts/operations/Update-VolumeRetencaoOcorrencias.ps1 -Aplicar` mede o conteúdo dos arquivos privados em pequenos lotes e valida a assinatura e a contagem de cada camada. Registra somente os totais. Arquivos que já expiraram deixam o volume anterior sem medição. Na primeira conferência, os 12 dias de 16 a 27/08 somaram 1.798.926.709 bytes. O ensaio transacional compara a prévia e a medição do arquivo com o tamanho diretamente nas tabelas de teste.
+
 ## 25/11/2026 — Retenção de Ocorrências por data
 
 O JUJUBA consulta o catálogo e a prévia no ETL_SISTEMA_V2. A regra vigente é de 90 dias corridos para Ocorrências, incluindo o dia atual no fuso de São Paulo. A data é a partição de negócio usada pelo relatório ESL. O padrão do banco continua sem prazo. As demais entidades oferecem prévia.

@@ -133,4 +133,37 @@ function Invoke-RetentionQueue {
         try { [void]$lock.ExecuteNonQuery() } finally { $lock.Dispose() }
     }
 }
-Export-ModuleMember -Function Initialize-RetentionArchive,Get-RetentionArchiveDirectory,Invoke-RetentionDay,Invoke-RetentionQueue
+function Measure-RetentionArchive {
+    param($Connection,[string]$Path,$Transaction)
+    $cmd = $Connection.CreateCommand()
+    if ($Transaction) { $cmd.Transaction = $Transaction }
+    $cmd.CommandTimeout = 30
+    $cmd.CommandText = @'
+SELECT m.tipo, COUNT_BIG(*) AS linhas, COUNT_BIG(m.bytes) AS medidas, SUM(m.bytes) AS tamanho
+FROM OPENJSON(@lote) AS j CROSS APPLY ctl.ufn_jujuba_retencao_bytes_linha(j.value) AS m
+GROUP BY m.tipo OPTION(MAXDOP 1);
+'@
+    $parametro = $cmd.Parameters.Add('@lote',[Data.SqlDbType]::NVarChar,-1)
+    $totais = @{captura=0L; origem=0L; publicacao=0L; cobertura=0L; marcador=0L; bytes=0L}
+    $medir = [Action[string]]{
+        param([string]$lote)
+        $parametro.Value = $lote
+        $reader = $cmd.ExecuteReader()
+        try {
+            while ($reader.Read()) {
+                $tipo = $reader.GetString(0)
+                $linhas = $reader.GetInt64(1)
+                if ($tipo -notin @('captura','origem','publicacao','cobertura','marcador') -or $linhas -ne $reader.GetInt64(2)) {
+                    throw 'O arquivo contem uma camada ou um valor sem medicao.'
+                }
+                $totais[$tipo] += $linhas
+                $totais.bytes += $reader.GetInt64(3)
+            }
+        } finally { $reader.Dispose() }
+    }
+    try { $totais.assinatura = [Jujuba.Retention.Archive]::ReadBatches($Path,$medir) }
+    finally { $cmd.Dispose() }
+    return [pscustomobject]$totais
+}
+
+Export-ModuleMember -Function Initialize-RetentionArchive,Get-RetentionArchiveDirectory,Invoke-RetentionDay,Invoke-RetentionQueue,Measure-RetentionArchive

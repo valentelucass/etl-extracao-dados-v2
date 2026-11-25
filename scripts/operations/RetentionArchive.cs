@@ -49,12 +49,26 @@ namespace Jujuba.Retention {
             }
         }
         public static string Verify(string path) {
+            return ReadBatches(path, null);
+        }
+        public static string ReadBatches(string path, Action<string> consume) {
             using (var file = File.OpenRead(path))
             using (var gzip = new GZipStream(file,CompressionMode.Decompress))
             using (var reader = new StreamReader(gzip,Utf8,false,65536))
             using (var digest = new ArchiveDigest()) {
+                var batch = consume == null ? null : new StringBuilder("[");
                 string line;
-                while ((line=reader.ReadLine()) != null) digest.Append(line);
+                while ((line=reader.ReadLine()) != null) {
+                    digest.Append(line);
+                    if (batch == null) continue;
+                    if (batch.Length > 1) batch.Append(',');
+                    batch.Append(line);
+                    if (batch.Length >= 262144) {
+                        consume(batch.Append(']').ToString());
+                        batch.Clear().Append('[');
+                    }
+                }
+                if (batch != null && batch.Length > 1) consume(batch.Append(']').ToString());
                 return digest.Finish();
             }
         }
