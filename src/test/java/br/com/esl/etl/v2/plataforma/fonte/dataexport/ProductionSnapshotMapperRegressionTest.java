@@ -5,10 +5,67 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import br.com.esl.etl.v2.bootstrap.SnapshotMapperCatalog;
+import br.com.esl.etl.v2.modulos.contasapagar.domain.ContaPagarObservation;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+import java.math.BigDecimal;
+import java.util.List;
 import java.util.Optional;
 import org.junit.jupiter.api.Test;
 
 class ProductionSnapshotMapperRegressionTest {
+    @Test
+    void costCenterAllocationsRetainAllDigitsFromTextAndNumericWire() throws Exception {
+        for (final String literal :
+                List.of("12.345678901234567", "-98.765432109876543", "0." + "1".repeat(38))) {
+            for (final String wire : List.of("\"" + literal + "\"", literal)) {
+                final var row = CurlSnapshotWire.JSON.createObjectNode();
+                row.set("ant_ces_value", CurlSnapshotWire.JSON.readTree(wire));
+                final var observation = payable(row);
+                assertTrue(observation.valid());
+                assertEquals(
+                        0, new BigDecimal(literal).compareTo(observation.antCesValue().value()));
+                assertEquals(
+                        row.required("ant_ces_value").asText(), observation.antCesValue().raw());
+            }
+        }
+        final var row =
+                CurlSnapshotWire.JSON
+                        .createObjectNode()
+                        .put("ant_ces_value", "12.3456789012345670");
+        assertEquals("12.3456789012345670", payable(row).antCesValue().raw());
+        assertEquals(new BigDecimal("12.3456789012345670"), payable(row).antCesValue().value());
+    }
+
+    @Test
+    void invalidAllocationsAndOtherMonetaryFieldsStillRejectTheRow() {
+        final var row = CurlSnapshotWire.JSON.createObjectNode();
+        for (final String invalid :
+                List.of(
+                        "1.2x",
+                        "1e-15",
+                        "1,25",
+                        "1".repeat(21) + ".123456789012345",
+                        "12." + "1".repeat(37),
+                        "0." + "0".repeat(38) + "1")) {
+            final var field = payable(row.put("ant_ces_value", invalid)).antCesValue();
+            assertFalse(field.valid());
+            assertEquals("INVALID_ANT_CES_VALUE", field.issue());
+            assertEquals(invalid, field.raw());
+        }
+        row.put("ant_ces_value", "12.345678901234567").put("paid_value", "12.345678901234567");
+        final var observation = payable(row);
+        assertTrue(observation.antCesValue().valid());
+        assertFalse(observation.valid());
+        assertEquals("INVALID_PAID_VALUE", observation.paidValue().issue());
+    }
+
+    private static ContaPagarObservation payable(final ObjectNode row) {
+        return (ContaPagarObservation)
+                SnapshotMapperCatalog.map(
+                        ReportSnapshotTemplate.CONTAS_A_PAGAR,
+                        new DataExportRecordInput(row, Optional.empty()));
+    }
+
     @Test
     void aCustomerInvoiceKeepsAll282NotesAndOrderNumbers() {
         final var row = CurlSnapshotWire.JSON.createObjectNode();

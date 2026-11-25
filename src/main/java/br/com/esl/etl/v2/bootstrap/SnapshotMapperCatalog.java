@@ -68,7 +68,7 @@ public final class SnapshotMapperCatalog {
                                                                     new IllegalArgumentException(
                                                                             "SNAPSHOT_LITERAL_RECORD_REQUIRED")))
                                     .quarantined());
-            case CONTAS_A_PAGAR -> new ContaPagarDataExportMapper().map(1, envelope);
+            case CONTAS_A_PAGAR -> new ContaPagarDataExportMapper().mapSnapshot(envelope);
             case FATURAS_POR_CLIENTE -> new FaturaClienteDataExportMapper().map(1, envelope);
             case INVENTARIO -> new InventarioDataExportMapper().map(1, envelope);
             case SINISTROS -> new SinistroDataExportMapper().map(1, envelope);
